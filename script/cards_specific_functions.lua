@@ -14,13 +14,13 @@ function Auxiliary.qlifilter(e,te)
 		return false
 	end
 end
---filter for resting_valley test
+--filter for rest_valley test
 function Auxiliary.nvfilter(c)
-	return not c:IsHasEffect(EFFECT_RESTING_VALLEY)
+	return not c:IsHasEffect(EFFECT_REST_VALLEY)
 end
 function Auxiliary.RestValleyFilter(f)
 	return	function(target,...)
-				return f(target,...) and not (target:IsHasEffect(EFFECT_RESTING_VALLEY) and Duel.IsChainDisablable(0))
+				return f(target,...) and not (target:IsHasEffect(EFFECT_REST_VALLEY) and Duel.IsChainDisablable(0))
 			end
 end
 
@@ -39,17 +39,17 @@ end
 --check for Guardian Elimination
 function Auxiliary.SpElimFilter(c,mustbefaceup,includemzone)
 	--includemzone - contains MZONE in original requirement
-	--NOTE: Should only check LOCATION_MZONE+LOCATION_RESTING
+	--NOTE: Should only check LOCATION_MZONE+LOCATION_REST
 	if c:IsMonster() then
 		if mustbefaceup and c:IsLocation(LOCATION_MZONE) and c:IsFacedown() then return false end
 		if includemzone then return c:IsLocation(LOCATION_MZONE) or not Duel.IsPlayerAffectedByEffect(c:GetControler(),69832741) end
 		if Duel.IsPlayerAffectedByEffect(c:GetControler(),69832741) then
 			return c:IsLocation(LOCATION_MZONE)
 		else
-			return c:IsLocation(LOCATION_RESTING)
+			return c:IsLocation(LOCATION_REST)
 		end
 	else
-		return includemzone or c:IsLocation(LOCATION_RESTING)
+		return includemzone or c:IsLocation(LOCATION_REST)
 	end
 end
 
@@ -136,7 +136,7 @@ function Auxiliary.NeosReturnOperation(c,extraop)
 	return function(e,tp,eg,ep,ev,re,r,rp)
 		local c=e:GetHandler()
 		if not c:IsRelateToEffect(e) or c:IsFacedown() then return end
-		local sc=Duel.GetFirstMatchingCard(Auxiliary.RestValleyFilter(Auxiliary.NeosReturnSubstituteFilter),tp,LOCATION_RESTING,0,nil)
+		local sc=Duel.GetFirstMatchingCard(Auxiliary.RestValleyFilter(Auxiliary.NeosReturnSubstituteFilter),tp,LOCATION_REST,0,nil)
 		if sc and Duel.SelectYesNo(tp,aux.Stringid(14088859,0)) then
 			Duel.Remove(sc,POS_FACEUP,REASON_COST)
 		else
@@ -244,13 +244,13 @@ function Auxiliary.MaleficSummonCondition(cd,loc,excon)
 				if c==nil then return true end
 				return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
 					and (Duel.IsExistingMatchingCard(Auxiliary.MaleficSummonFilter,c:GetControler(),loc,0,1,nil,cd)
-					or Duel.IsExistingMatchingCard(Auxiliary.MaleficSummonSubstitute,c:GetControler(),LOCATION_ONFIELD+LOCATION_RESTING,0,1,nil,cd,c:GetControler()))
+					or Duel.IsExistingMatchingCard(Auxiliary.MaleficSummonSubstitute,c:GetControler(),LOCATION_ONFIELD+LOCATION_REST,0,1,nil,cd,c:GetControler()))
 			end
 end
 function Auxiliary.MaleficSummonTarget(cd,loc)
 	return	function(e,tp,eg,ep,ev,re,r,rp,chk,c)
 				local g=Duel.GetMatchingGroup(Auxiliary.MaleficSummonFilter,tp,loc,0,nil,cd)
-				g:Merge(Duel.GetMatchingGroup(Auxiliary.MaleficSummonSubstitute,tp,LOCATION_ONFIELD+LOCATION_RESTING,0,nil,c:GetControler()))
+				g:Merge(Duel.GetMatchingGroup(Auxiliary.MaleficSummonSubstitute,tp,LOCATION_ONFIELD+LOCATION_REST,0,nil,c:GetControler()))
 				local sg=aux.SelectUnselectGroup(g,e,tp,1,1,aux.ChkfMMZ(1),1,tp,HINTMSG_REMOVE,nil,nil,true)
 				if #sg>0 then
 					sg:KeepAlive()
@@ -289,7 +289,7 @@ end
 Auxiliary.MintcrafterDiscardAndReleaseCost=Auxiliary.CostWithReplace(Mintcrafter.DiscardCost,EFFECT_MINTCRAFTER_REPLACE,nil,Mintcrafter.ReleaseCost)
 
 function Mintcrafter.repcon(e)
-	return e:GetHandler():IsAbleToRestingAsCost()
+	return e:GetHandler():IsAbleToRestAsCost()
 end
 function Mintcrafter.repval(base,e,tp,eg,ep,ev,re,r,rp,chk,extracon)
 	local c=e:GetHandler()
@@ -298,7 +298,7 @@ end
 function Mintcrafter.repop(id)
 	return function(base,e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_CARD,0,id)
-		Duel.SendtoResting(base:GetHandler(),REASON_COST)
+		Duel.SendtoRest(base:GetHandler(),REASON_COST)
 	end
 end
 function Auxiliary.CreateMintcrafterReplace(c,id)
@@ -479,15 +479,15 @@ function Auxiliary.IceBarrierDiscardGroup(minc)
 	end
 end
 function Auxiliary.IceBarrierDiscardCost(f,discard,minc,maxc)
-	local fliter=discard and Card.IsDiscardable or Card.IsAbleToRestingAsCost
+	local fliter=discard and Card.IsDiscardable or Card.IsAbleToRestAsCost
 	if f then fliter=aux.AND(f,fliter) end
 	if not minc then minc=1 end
 	if not maxc then maxc=1 end
 	local rescon=Auxiliary.IceBarrierDiscardGroup(minc)
 	return function(e,tp,eg,ep,ev,re,r,rp,chk)
-		if chk==0 then return Duel.IsExistingMatchingCard(fliter,tp,LOCATION_HAND,0,minc,nil) or Duel.IsExistingMatchingCard(Auxiliary.IceBarrierDiscardFilter,tp,LOCATION_RESTING,0,1,nil,tp) end
+		if chk==0 then return Duel.IsExistingMatchingCard(fliter,tp,LOCATION_HAND,0,minc,nil) or Duel.IsExistingMatchingCard(Auxiliary.IceBarrierDiscardFilter,tp,LOCATION_REST,0,1,nil,tp) end
 		local g=Duel.GetMatchingGroup(fliter,tp,LOCATION_HAND,0,nil)
-		g:Merge(Duel.GetMatchingGroup(Auxiliary.IceBarrierDiscardFilter,tp,LOCATION_RESTING,0,nil,tp))
+		g:Merge(Duel.GetMatchingGroup(Auxiliary.IceBarrierDiscardFilter,tp,LOCATION_REST,0,nil,tp))
 		local sg=Auxiliary.SelectUnselectGroup(g,e,tp,minc,maxc,rescon,1,tp,Auxiliary.Stringid(CARD_MIRRORMASTER_ICEBARRIER,1))
 		local rm=0
 		if sg:IsExists(Card.IsHasEffect,1,nil,EFFECT_ICEBARRIER_REPLACE,tp) then
@@ -498,9 +498,9 @@ function Auxiliary.IceBarrierDiscardCost(f,discard,minc,maxc)
 		end
 		if #sg>0 then
 			if discard then
-				return Duel.SendtoResting(sg,REASON_COST+REASON_DISCARD) + rm
+				return Duel.SendtoRest(sg,REASON_COST+REASON_DISCARD) + rm
 			else
-				return Duel.SendtoResting(sg,REASON_COST) + rm
+				return Duel.SendtoRest(sg,REASON_COST) + rm
 			end
 		else
 			return rm
@@ -620,7 +620,7 @@ function AA.eqop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT|RESETS_STANDARD)
 		c:RegisterEffect(e1)
 	else
-		c:CancelToResting(false)
+		c:CancelToRest(false)
 	end
 end
 -- Description: Add equip effect that "Ɐttraction" traps share to a card, effect text being:
@@ -788,13 +788,13 @@ end
 function Cyberdark.EquipTarget_TG(f,mandatory)
 	return	function(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		local wc=Duel.IsPlayerAffectedByEffect(tp,EFFECT_CYBERDARK_WORLD)
-		if chkc then return chkc:IsLocation(LOCATION_RESTING) and (wc or chkc:IsControler(tp)) and f(chkc,tp) end
+		if chkc then return chkc:IsLocation(LOCATION_REST) and (wc or chkc:IsControler(tp)) and f(chkc,tp) end
 		local loc=0
-		if wc then loc=LOCATION_RESTING end
-		if chk==0 then return mandatory or (Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and Duel.IsExistingTarget(f,tp,LOCATION_RESTING,loc,1,nil,tp)) end
+		if wc then loc=LOCATION_REST end
+		if chk==0 then return mandatory or (Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and Duel.IsExistingTarget(f,tp,LOCATION_REST,loc,1,nil,tp)) end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-		local g=Duel.SelectTarget(tp,f,tp,LOCATION_RESTING,loc,1,1,nil,tp)
-		Duel.SetOperationInfo(0,CATEGORY_LEAVE_RESTING,g,1,0,0)
+		local g=Duel.SelectTarget(tp,f,tp,LOCATION_REST,loc,1,1,nil,tp)
+		Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,0,0)
 		Duel.SetOperationInfo(0,CATEGORY_EQUIP,g,1,0,0)
 	end
 end
@@ -803,12 +803,12 @@ function Cyberdark.EquipTarget_NTG(f,mandatory)
 		local wc=Duel.IsPlayerAffectedByEffect(tp,EFFECT_CYBERDARK_WORLD)
 		local loc,player=0,tp
 		if wc then
-			loc=LOCATION_RESTING
+			loc=LOCATION_REST
 			player=PLAYER_ALL
 		end
-		if chk==0 then return mandatory or (Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and Duel.IsExistingMatchingCard(f,tp,LOCATION_RESTING,loc,1,nil,tp)) end
-		Duel.SetOperationInfo(0,CATEGORY_LEAVE_RESTING,nil,1,player,0)
-		Duel.SetOperationInfo(0,CATEGORY_EQUIP,nil,1,player,LOCATION_RESTING)
+		if chk==0 then return mandatory or (Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and Duel.IsExistingMatchingCard(f,tp,LOCATION_REST,loc,1,nil,tp)) end
+		Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,nil,1,player,0)
+		Duel.SetOperationInfo(0,CATEGORY_EQUIP,nil,1,player,LOCATION_REST)
 	end
 end
 function Cyberdark.EquipOperation_TG(f,op)
@@ -829,9 +829,9 @@ function Cyberdark.EquipOperation_NTG(f,op)
 		if c:IsFacedown() or not c:IsRelateToEffect(e) then return end
 		local wc=Duel.IsPlayerAffectedByEffect(tp,EFFECT_CYBERDARK_WORLD)
 		local loc=0
-		if wc then loc=LOCATION_RESTING end
+		if wc then loc=LOCATION_REST end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-		local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(f),tp,LOCATION_RESTING,loc,1,1,nil,tp)
+		local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(f),tp,LOCATION_REST,loc,1,1,nil,tp)
 		local tc=g:GetFirst()
 		if tc then
 			op(c,e,tp,tc)
@@ -1046,7 +1046,7 @@ Effect.CreateVernalizerSPEffect=(function()
 		if chk==0 then return c:IsDiscardable() and Duel.IsExistingMatchingCard(verncostfilter,tp,LOCATION_HAND,0,1,c) end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 		local g=Duel.SelectMatchingCard(tp,verncostfilter,tp,LOCATION_HAND,0,1,1,c)
-		Duel.SendtoResting(g+c,REASON_COST+REASON_DISCARD)
+		Duel.SendtoRest(g+c,REASON_COST+REASON_DISCARD)
 	end
 
 	function vernspfilter(c,e,tp,code)
@@ -1056,10 +1056,10 @@ Effect.CreateVernalizerSPEffect=(function()
 	local function vernop(uniqueop,e,tp,eg,ep,ev,re,r,rp)
 		local proceed,exemptID=uniqueop(e,tp,eg,ep,ev,re,r,rp)
 		if proceed and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-			and Duel.IsExistingMatchingCard(aux.RestValleyFilter(vernspfilter),tp,LOCATION_RESTING,0,1,nil,e,tp,exemptID)
+			and Duel.IsExistingMatchingCard(aux.RestValleyFilter(vernspfilter),tp,LOCATION_REST,0,1,nil,e,tp,exemptID)
 			and Duel.SelectYesNo(tp,aux.Stringid(stringbase,1)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-			local sg=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(vernspfilter),tp,LOCATION_RESTING,0,1,1,nil,e,tp,exemptID)
+			local sg=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(vernspfilter),tp,LOCATION_REST,0,1,1,nil,e,tp,exemptID)
 			if #sg>0 then
 				Duel.BreakEffect()
 				Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)
@@ -1088,7 +1088,7 @@ Effect.CreateVernalizerSPEffect=(function()
 		e1:SetTarget(function(e,tp,eg,ep,ev,re,r,rp,chk)
 			if chk==0 then return uniquetg(e,tp,eg,ep,ev,re,r,rp,chk) end
 			uniquetg(e,tp,eg,ep,ev,re,r,rp,chk)
-			Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_RESTING)
+			Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 		end)
 		e1:SetOperation(function(...) vernop(uniqueop,...) end)
 		return e1

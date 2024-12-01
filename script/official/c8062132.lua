@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetValue(s.atkval)
 	c:RegisterEffect(e2)
-	--special summon from resting place
+	--special summon from rest place
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)

@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_EQUIP)
 	e3:SetCode(EFFECT_CANNOT_TRIGGER)
 	c:RegisterEffect(e3)
-	--Send to the resting place
+	--Send to the rest place
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,0))
 	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)

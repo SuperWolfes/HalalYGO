@@ -31,7 +31,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.negtg)
 	e2:SetOperation(s.negop)
 	c:RegisterEffect(e2)
-	--Add from resting place to hand
+	--Add from rest place to hand
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,3))
 	e3:SetCategory(CATEGORY_TOHAND)

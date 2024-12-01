@@ -3,7 +3,7 @@
 --fusfilter		filter for the monster to be Fusion Summoned
 --matfilter		restriction on the default materials returned by GetFusionMaterial
 --extrafil		function that returns a group of extra cards that can be used as fusion materials, and as second optional parameter the additional filter function
---extraop		function called right before sending the monsters to the resting place as material
+--extraop		function called right before sending the monsters to the rest place as material
 --gc			mandatory card or function returning a group to be used (for effects like Soprano)
 --stage2		function called after the monster has been summoned
 --exactcount	
@@ -86,7 +86,7 @@ local function ExtraMatOPTCheck(mg1,e,tp,extrafil,efmg)
 			--the RP (so that effects like "Dragon's Mirror" are excluded),
 			--remove all the EFFECT_EXTRA_FUSION_MATERIAL cards
 			--that are in the RP from the material group.
-			--Hardcoded to RESTING_PLACE since it's currently
+			--Hardcoded to REST_PLACE since it's currently
 			--impossible to get the TargetRange of the
 			--EFFECT_EXTRA_FUSION_MATERIAL effect (but the only OPT effect atm uses the RP).
 			local extra_feff_loc=extra_feff:GetTargetRange()
@@ -181,7 +181,7 @@ function(fusfilter,matfilter,extrafil,extraop,gc2,stage2,exactcount,value,locati
 				local gc=gc2
 				gc=type(gc)=="function" and gc(e,tp,eg,ep,ev,re,r,rp,chk) or gc
 				gc=type(gc)=="Card" and Group.FromCards(gc) or gc
-				matfilter=matfilter or Card.IsAbleToResting
+				matfilter=matfilter or Card.IsAbleToRest
 				stage2 = stage2 or aux.TRUE
 				if chk==0 then
 					--Separate the Fusion Materials filtered by matfilter
@@ -319,7 +319,7 @@ function (fusfilter,matfilter,extrafil,extraop,gc2,stage2,exactcount,value,locat
 				local gc=gc2
 				gc=type(gc)=="function" and gc(e,tp,eg,ep,ev,re,r,rp,chk) or gc
 				gc=type(gc)=="Card" and Group.FromCards(gc) or gc
-				matfilter=matfilter or Card.IsAbleToResting
+				matfilter=matfilter or Card.IsAbleToRest
 				stage2 = stage2 or aux.TRUE
 				local checkAddition
 				--Same as line 167 above
@@ -506,14 +506,14 @@ function (fusfilter,matfilter,extrafil,extraop,gc2,stage2,exactcount,value,locat
 							local extra_feff
 							if #extra_feff_mg>0 then extra_feff=GetExtraMatEff(extra_feff_mg:GetFirst(),tc) end
 							if #normal_mg>0 then
-								Duel.SendtoResting(normal_mg,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
+								Duel.SendtoRest(normal_mg,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
 							end
 							if extra_feff then
 								local extra_feff_op=extra_feff:GetOperation()
 								if extra_feff_op then
 									extra_feff_op(e,tc,tp,extra_feff_mg)
 								else
-									Duel.SendtoResting(extra_feff_mg,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
+									Duel.SendtoRest(extra_feff_mg,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
 								end
 								--If the EFFECT_EXTRA_FUSION_MATERIAL effect is OPT
 								--then "use" its count limit.
@@ -558,7 +558,7 @@ end
 function Fusion.OnFieldMat(filter,...)
 	if type(filter) == "Card" then
 		--filter is actually the card parameter
-		return filter:IsOnField() and filter:IsAbleToResting()
+		return filter:IsOnField() and filter:IsAbleToRest()
 	end
 	local funs={filter,...}
 	return function (c,...)
@@ -576,7 +576,7 @@ end
 function Fusion.InHandMat(filter,...)
 	if type(filter) == "Card" then
 		--filter is actually the card parameter
-		return filter:IsLocation(LOCATION_HAND) and filter:IsAbleToResting()
+		return filter:IsLocation(LOCATION_HAND) and filter:IsAbleToRest()
 	end
 	local funs={filter,...}
 	return function (c,...)

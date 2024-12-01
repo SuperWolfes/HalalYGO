@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetCost(s.stcost)
 	e1:SetOperation(s.stop)
 	c:RegisterEffect(e1)
-	--send to resting place
+	--send to rest place
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOREST)

@@ -1,5 +1,5 @@
 --傀儡葬儀-パペット・パレード
---Doll Resting Place - Puppet Parade
+--Doll Rest Place - Puppet Parade
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

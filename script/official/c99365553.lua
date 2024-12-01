@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg1)
 	e1:SetOperation(s.spop1)
 	c:RegisterEffect(e1)
-	--Special summon procedure from resting place
+	--Special summon procedure from rest place
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_SPSUMMON_PROC)

@@ -9,7 +9,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_SPSUMMON_CONDITION)
 	e1:SetValue(s.splimit)
 	c:RegisterEffect(e1)
-	--Send 1 "Unliked One" monster from your Hand or Deck to the Resting Place
+	--Send 1 "Unliked One" monster from your Hand or Deck to the Rest Place
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TOREST)
@@ -36,7 +36,7 @@ function s.initial_effect(c)
 	e5:SetCode(EFFECT_IMMUNE_EFFECT)
 	e5:SetValue(s.unval)
 	c:RegisterEffect(e5)
-	--Win the Duel when there are 5 parts of the Unliked in your Resting Place
+	--Win the Duel when there are 5 parts of the Unliked in your Rest Place
 	local e6=Effect.CreateEffect(c)
 	e6:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e6:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_DELAY)

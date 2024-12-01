@@ -51,7 +51,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local e4=e3:Clone()
 		e4:SetCode(EFFECT_CANNOT_DISEFFECT)
 		tc:RegisterEffect(e4)
-		--To Resting Place
+		--To Rest Place
 		local e5=Effect.CreateEffect(c)
 		e5:SetCategory(CATEGORY_TOREST)
 		e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)

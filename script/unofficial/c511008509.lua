@@ -1,7 +1,7 @@
 --Vampire's Curse (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon of Resting Place
+	--Special Summon of Rest Place
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)

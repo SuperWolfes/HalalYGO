@@ -948,24 +948,24 @@ function Auxiliary.bdocon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return c:IsRelateToBattle() and c:IsStatus(STATUS_OPPO_BATTLE)
 end
---condition of EVENT_BATTLE_DESTROYING + to_resting
+--condition of EVENT_BATTLE_DESTROYING + to_rest
 function Auxiliary.bdgcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local bc=c:GetBattleTarget()
-	return c:IsRelateToBattle() and bc:IsLocation(LOCATION_RESTING) and bc:IsMonster()
+	return c:IsRelateToBattle() and bc:IsLocation(LOCATION_REST) and bc:IsMonster()
 end
---condition of EVENT_BATTLE_DESTROYING + opponent monster + to_resting
+--condition of EVENT_BATTLE_DESTROYING + opponent monster + to_rest
 function Auxiliary.bdogcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local bc=c:GetBattleTarget()
-	return c:IsRelateToBattle() and c:IsStatus(STATUS_OPPO_BATTLE) and bc:IsLocation(LOCATION_RESTING) and bc:IsMonster()
+	return c:IsRelateToBattle() and c:IsStatus(STATUS_OPPO_BATTLE) and bc:IsLocation(LOCATION_REST) and bc:IsMonster()
 end
---condition of EVENT_TO_RESTING + destroyed_by_opponent_from_field
+--condition of EVENT_TO_REST + destroyed_by_opponent_from_field
 function Auxiliary.dogcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return c:IsPreviousControler(tp) and c:IsReason(REASON_DESTROY) and rp==1-tp
 end
---condition of "except the turn this card was sent to the Resting Place"
+--condition of "except the turn this card was sent to the Rest Place"
 function Auxiliary.exccon(e)
 	return Duel.GetTurnCount()~=e:GetHandler():GetTurnID() or e:GetHandler():IsReason(REASON_RETURN)
 end
@@ -1103,11 +1103,11 @@ function Auxiliary.selfreleasecost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 
 
---Cost for effect "You can banish this card from your Resting Place"
+--Cost for effect "You can banish this card from your Rest Place"
 function Auxiliary.bfgcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return (not Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(),69832741) or not c:IsMonster()
-		or not c:IsLocation(LOCATION_RESTING)) and c:IsAbleToRemoveAsCost() end
+		or not c:IsLocation(LOCATION_REST)) and c:IsAbleToRemoveAsCost() end
 	Duel.Remove(c,POS_FACEUP,REASON_COST)
 end
 
@@ -1350,7 +1350,7 @@ function Auxiliary.RemainFieldDisabled(e,tp,eg,ep,ev,re,r,rp)
 	local cid=Duel.GetChainInfo(ev,CHAININFO_CHAIN_ID)
 	if cid~=e:GetLabel() then return end
 	if e:GetOwner():IsLocation(LOCATION_ONFIELD) then
-		e:GetOwner():CancelToResting(false)
+		e:GetOwner():CancelToRest(false)
 	end
 end
 --autocheck for Summoning a Group containing Extra Deck/non-Extra Deck monsters to avoid zone issues
@@ -1860,7 +1860,7 @@ str: string to be used in the secondary option
 ]]
 function Auxiliary.ToHandOrElse(card,player,check,oper,str,...)
 	if card then
-		if not check then check=Card.IsAbleToResting end
+		if not check then check=Card.IsAbleToRest end
 		if not oper then oper=aux.thoeSend end
 		if not str then str=574 end
 		local b1,b2=true,true
@@ -1895,7 +1895,7 @@ function Auxiliary.ToHandOrElse(card,player,check,oper,str,...)
 	end
 end
 function Auxiliary.thoeSend(card)
-	return Duel.SendtoResting(card,REASON_EFFECT)
+	return Duel.SendtoRest(card,REASON_EFFECT)
 end
 
 --Helper function to use with cards that normal summon or set a monster
@@ -1977,14 +1977,14 @@ function Duel.ActivateFieldActional(c,e,tp,eg,ep,ev,re,r,rp,target_p)
 			if fc then Duel.Destroy(fc,REASON_RULE) end
 			of=Duel.GetFieldCard(1-target_p,LOCATION_SZONE,5)
 			if of and Duel.Destroy(of,REASON_RULE)==0 then
-				Duel.SendtoResting(c,REASON_RULE)
+				Duel.SendtoRest(c,REASON_RULE)
 				return false
 			else
 				Duel.BreakEffect()
 			end
 		else
-			if fc and Duel.SendtoResting(fc,REASON_RULE)==0 then
-				Duel.SendtoResting(c,REASON_RULE)
+			if fc and Duel.SendtoRest(fc,REASON_RULE)==0 then
+				Duel.SendtoRest(c,REASON_RULE)
 				return false
 			else
 				Duel.BreakEffect()

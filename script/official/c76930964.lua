@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	--summon with 1 tribute
 	local e1=aux.AddNormalSummonProcedure(c,true,true,1,1,SUMMON_TYPE_TRIBUTE,aux.Stringid(id,0),s.otfilter)
 	local e2=aux.AddNormalSetProcedure(c,true,true,1,1,SUMMON_TYPE_TRIBUTE,aux.Stringid(id,0),s.otfilter)
-	--special summon from the Resting Place
+	--special summon from the Rest Place
 	local e3=Effect.CreateEffect(c)
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)

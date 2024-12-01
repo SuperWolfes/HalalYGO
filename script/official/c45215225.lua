@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Pendulum summon
 	Pendulum.AddProcedure(c)
-	--Special summon from the resting place
+	--Special summon from the rest place
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)

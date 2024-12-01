@@ -1,4 +1,4 @@
---Blade Resting Place
+--Blade Rest Place
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddEquipProcedure(c)

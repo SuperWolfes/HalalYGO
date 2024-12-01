@@ -1,5 +1,5 @@
 --セメタリー・リバウンド
---Resting Place Rebound
+--Rest Place Rebound
 --Rescripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)

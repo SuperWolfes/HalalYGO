@@ -1,5 +1,5 @@
 -- 地葬星カイザ
--- Kaiza the Resting Place Star
+-- Kaiza the Rest Place Star
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)

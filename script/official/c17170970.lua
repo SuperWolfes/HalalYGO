@@ -3,7 +3,7 @@
 --Scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Add 1 Field Actional from resting place to the hand
+	--Add 1 Field Actional from rest place to the hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND)

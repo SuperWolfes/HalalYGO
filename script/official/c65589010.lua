@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	e3:SetTarget(s.destg)
 	e3:SetOperation(s.desop)
 	c:RegisterEffect(e3)
-	--Send to the resting place
+	--Send to the rest place
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_TOREST)

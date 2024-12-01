@@ -103,7 +103,7 @@ function Synchro.Condition(f1,min1,max1,f2,min2,max2,sub1,sub2,req1,req2,reqm)
 					local g2=g:Clone()
 					if not mgchk then
 						local thg=g2:Filter(Card.IsHasEffect,nil,EFFECT_HAND_SYNCHRO)
-						local hg=Duel.GetMatchingGroup(Card.IsCanBeSynchroMaterial,tp,LOCATION_HAND+LOCATION_RESTING,0,c,c)
+						local hg=Duel.GetMatchingGroup(Card.IsCanBeSynchroMaterial,tp,LOCATION_HAND+LOCATION_REST,0,c,c)
 						for thc in aux.Next(thg) do
 							local te=thc:GetCardEffect(EFFECT_HAND_SYNCHRO)
 							local val=te:GetValue()
@@ -112,7 +112,7 @@ function Synchro.Condition(f1,min1,max1,f2,min2,max2,sub1,sub2,req1,req2,reqm)
 						end
 					end
 					local res=g2:IsExists(Synchro.CheckP31,1,nil,g2,Group.CreateGroup(),Group.CreateGroup(),Group.CreateGroup(),f1,sub1,f2,sub2,min1,max1,min2,max2,req1,req2,reqm,lv,c,tp,pg,mgchk,min,max)
-					local hg=Duel.GetMatchingGroup(Card.IsHasEffect,tp,LOCATION_HAND+LOCATION_RESTING,0,nil,EFFECT_HAND_SYNCHRO+EFFECT_SYNCHRO_CHECK)
+					local hg=Duel.GetMatchingGroup(Card.IsHasEffect,tp,LOCATION_HAND+LOCATION_REST,0,nil,EFFECT_HAND_SYNCHRO+EFFECT_SYNCHRO_CHECK)
 					aux.ResetEffects(hg,EFFECT_HAND_SYNCHRO+EFFECT_SYNCHRO_CHECK)
 					Duel.AssumeReset()
 					return res
@@ -128,7 +128,7 @@ function Synchro.Condition(f1,min1,max1,f2,min2,max2,sub1,sub2,req1,req2,reqm)
 						ntg=g:Filter(Synchro.NonTunerFilter,nil,f2,sub2,c,tp)
 						local thg=tg:Filter(Card.IsHasEffect,nil,EFFECT_HAND_SYNCHRO)
 						thg:Merge(ntg:Filter(Card.IsHasEffect,nil,EFFECT_HAND_SYNCHRO))
-						local hg=Duel.GetMatchingGroup(Card.IsCanBeSynchroMaterial,tp,LOCATION_HAND+LOCATION_RESTING,0,c,c)
+						local hg=Duel.GetMatchingGroup(Card.IsCanBeSynchroMaterial,tp,LOCATION_HAND+LOCATION_REST,0,c,c)
 						for thc in aux.Next(thg) do
 							local te=thc:GetCardEffect(EFFECT_HAND_SYNCHRO)
 							local val=te:GetValue()
@@ -140,7 +140,7 @@ function Synchro.Condition(f1,min1,max1,f2,min2,max2,sub1,sub2,req1,req2,reqm)
 					end
 					local lv=c:GetLevel()
 					local res=tg:IsExists(Synchro.CheckP41,1,nil,tg,ntg,Group.CreateGroup(),Group.CreateGroup(),Group.CreateGroup(),min1,max1,min2,max2,req1,req2,reqm,lv,c,tp,pg,mgchk,min,max)
-					local hg=Duel.GetMatchingGroup(Card.IsHasEffect,tp,LOCATION_HAND+LOCATION_RESTING,0,nil,EFFECT_HAND_SYNCHRO+EFFECT_SYNCHRO_CHECK)
+					local hg=Duel.GetMatchingGroup(Card.IsHasEffect,tp,LOCATION_HAND+LOCATION_REST,0,nil,EFFECT_HAND_SYNCHRO+EFFECT_SYNCHRO_CHECK)
 					aux.ResetEffects(hg,EFFECT_HAND_SYNCHRO+EFFECT_SYNCHRO_CHECK)
 					return res
 				end
@@ -544,7 +544,7 @@ function Synchro.Target(f1,min1,max1,f2,min2,max2,sub1,sub2,req1,req2,reqm)
 					ntg=g:Filter(Synchro.NonTunerFilter,nil,f2,sub2,c,tp)
 					local thg=tg:Filter(Card.IsHasEffect,nil,EFFECT_HAND_SYNCHRO)
 					thg:Merge(ntg:Filter(Card.IsHasEffect,nil,EFFECT_HAND_SYNCHRO))
-					local hg=Duel.GetMatchingGroup(Card.IsCanBeSynchroMaterial,tp,LOCATION_HAND+LOCATION_RESTING,0,c,c)
+					local hg=Duel.GetMatchingGroup(Card.IsCanBeSynchroMaterial,tp,LOCATION_HAND+LOCATION_REST,0,c,c)
 					for thc in aux.Next(thg) do
 						local te=thc:GetCardEffect(EFFECT_HAND_SYNCHRO)
 						local val=te:GetValue()
@@ -733,7 +733,7 @@ function Synchro.Target(f1,min1,max1,f2,min2,max2,sub1,sub2,req1,req2,reqm)
 						end
 					end
 				end
-				local hg=Duel.GetMatchingGroup(Card.IsHasEffect,tp,LOCATION_HAND+LOCATION_RESTING,0,nil,EFFECT_HAND_SYNCHRO+EFFECT_SYNCHRO_CHECK)
+				local hg=Duel.GetMatchingGroup(Card.IsHasEffect,tp,LOCATION_HAND+LOCATION_REST,0,nil,EFFECT_HAND_SYNCHRO+EFFECT_SYNCHRO_CHECK)
 				aux.ResetEffects(hg,EFFECT_HAND_SYNCHRO+EFFECT_SYNCHRO_CHECK)
 				if sg then
 					local subtsg=tsg:Filter(function(_c) return sub1 and sub1(_c,c,SUMMON_TYPE_SYNCHRO|MATERIAL_SYNCHRO,tp) and ((f1 and not f1(_c,c,SUMMON_TYPE_SYNCHRO|MATERIAL_SYNCHRO,tp)) or not _c:IsType(TYPE_TUNER)) end,nil)
@@ -766,7 +766,7 @@ function Synchro.Operation(e,tp,eg,ep,ev,re,r,rp,c,smat,mg)
 		for tc in aux.Next(tg) do tc:ResetFlagEffect(3096468) end
 	end
 	if Synchro.Send==1 then
-		Duel.SendtoResting(g,REASON_MATERIAL+REASON_SYNCHRO+REASON_RETURN)
+		Duel.SendtoRest(g,REASON_MATERIAL+REASON_SYNCHRO+REASON_RETURN)
 	elseif Synchro.Send==2 then
 		Duel.Remove(g,POS_FACEUP,REASON_MATERIAL+REASON_SYNCHRO)
 	elseif Synchro.Send==3 then
@@ -778,7 +778,7 @@ function Synchro.Operation(e,tp,eg,ep,ev,re,r,rp,c,smat,mg)
 	elseif Synchro.Send==6 then
 		Duel.Destroy(g,REASON_MATERIAL+REASON_SYNCHRO)
 	else
-		Duel.SendtoResting(g,REASON_MATERIAL+REASON_SYNCHRO)
+		Duel.SendtoRest(g,REASON_MATERIAL+REASON_SYNCHRO)
 	end
 	Synchro.Send=0
 	Synchro.CheckAdditional=nil
@@ -969,7 +969,7 @@ function Synchro.MajesticCondition(f1,cbt1,f2,cbt2,f3,cbt3,...)
 				end
 				if not mgchk then
 					local thg=g:Filter(Card.IsHasEffect,nil,EFFECT_HAND_SYNCHRO)
-					local hg=Duel.GetMatchingGroup(Card.IsCanBeSynchroMaterial,tp,LOCATION_HAND+LOCATION_RESTING,0,c,c)
+					local hg=Duel.GetMatchingGroup(Card.IsCanBeSynchroMaterial,tp,LOCATION_HAND+LOCATION_REST,0,c,c)
 					for thc in aux.Next(thg) do
 						local te=thc:GetCardEffect(EFFECT_HAND_SYNCHRO)
 						local val=te:GetValue()
@@ -978,7 +978,7 @@ function Synchro.MajesticCondition(f1,cbt1,f2,cbt2,f3,cbt3,...)
 					end
 				end
 				local res=g:IsExists(Synchro.MajesticCheck1,1,nil,g,Group.CreateGroup(),card1,card2,card3,lv,c,tp,pg,f1,cbt1,f2,cbt2,f3,cbt3,table.unpack(t))
-				local hg=Duel.GetMatchingGroup(Card.IsHasEffect,tp,LOCATION_HAND+LOCATION_RESTING,0,nil,EFFECT_HAND_SYNCHRO+EFFECT_SYNCHRO_CHECK)
+				local hg=Duel.GetMatchingGroup(Card.IsHasEffect,tp,LOCATION_HAND+LOCATION_REST,0,nil,EFFECT_HAND_SYNCHRO+EFFECT_SYNCHRO_CHECK)
 				aux.ResetEffects(hg,EFFECT_HAND_SYNCHRO+EFFECT_SYNCHRO_CHECK)
 				Duel.AssumeReset()
 				return res
@@ -1009,7 +1009,7 @@ function Synchro.MajesticTarget(f1,cbt1,f2,cbt2,f3,cbt3,...)
 				end
 				if not mgchk then
 					local thg=g:Filter(Card.IsHasEffect,nil,EFFECT_HAND_SYNCHRO)
-					local hg=Duel.GetMatchingGroup(Card.IsCanBeSynchroMaterial,tp,LOCATION_HAND+LOCATION_RESTING,0,c,c)
+					local hg=Duel.GetMatchingGroup(Card.IsCanBeSynchroMaterial,tp,LOCATION_HAND+LOCATION_REST,0,c,c)
 					for thc in aux.Next(thg) do
 						local te=thc:GetCardEffect(EFFECT_HAND_SYNCHRO)
 						local val=te:GetValue()
@@ -1064,7 +1064,7 @@ function Synchro.MajesticTarget(f1,cbt1,f2,cbt2,f3,cbt3,...)
 					end
 				end
 				Duel.AssumeReset()
-				local hg=Duel.GetMatchingGroup(Card.IsHasEffect,tp,LOCATION_HAND+LOCATION_RESTING,0,nil,EFFECT_HAND_SYNCHRO+EFFECT_SYNCHRO_CHECK)
+				local hg=Duel.GetMatchingGroup(Card.IsHasEffect,tp,LOCATION_HAND+LOCATION_REST,0,nil,EFFECT_HAND_SYNCHRO+EFFECT_SYNCHRO_CHECK)
 				aux.ResetEffects(hg,EFFECT_HAND_SYNCHRO+EFFECT_SYNCHRO_CHECK)
 				if sg then
 					sg:KeepAlive()
@@ -1283,7 +1283,7 @@ function Synchro.DarkCondition(f1,f2,plv,nlv,...)
 				end
 				if not mgchk then
 					local thg=g:Filter(Card.IsHasEffect,nil,EFFECT_HAND_SYNCHRO)
-					local hg=Duel.GetMatchingGroup(Card.IsCanBeSynchroMaterial,tp,LOCATION_HAND+LOCATION_RESTING,0,c,c)
+					local hg=Duel.GetMatchingGroup(Card.IsCanBeSynchroMaterial,tp,LOCATION_HAND+LOCATION_REST,0,c,c)
 					for thc in aux.Next(thg) do
 						local te=thc:GetCardEffect(EFFECT_HAND_SYNCHRO)
 						local val=te:GetValue()
@@ -1292,7 +1292,7 @@ function Synchro.DarkCondition(f1,f2,plv,nlv,...)
 					end
 				end
 				local res=g:IsExists(Synchro.DarkCheck1,1,nil,g,Group.CreateGroup(),card1,card2,plv,nlv,c,tp,pg,f1,f2,table.unpack(t))
-				local hg=Duel.GetMatchingGroup(Card.IsHasEffect,tp,LOCATION_HAND+LOCATION_RESTING,0,nil,EFFECT_HAND_SYNCHRO+EFFECT_SYNCHRO_CHECK)
+				local hg=Duel.GetMatchingGroup(Card.IsHasEffect,tp,LOCATION_HAND+LOCATION_REST,0,nil,EFFECT_HAND_SYNCHRO+EFFECT_SYNCHRO_CHECK)
 				aux.ResetEffects(hg,EFFECT_HAND_SYNCHRO+EFFECT_SYNCHRO_CHECK)
 				Duel.AssumeReset()
 				return res
@@ -1330,7 +1330,7 @@ function Synchro.DarkTarget(f1,f2,plv,nlv,...)
 				end
 				if not mgchk then
 					local thg=g:Filter(Card.IsHasEffect,nil,EFFECT_HAND_SYNCHRO)
-					local hg=Duel.GetMatchingGroup(Card.IsCanBeSynchroMaterial,tp,LOCATION_HAND+LOCATION_RESTING,0,c,c)
+					local hg=Duel.GetMatchingGroup(Card.IsCanBeSynchroMaterial,tp,LOCATION_HAND+LOCATION_REST,0,c,c)
 					for thc in aux.Next(thg) do
 						local te=thc:GetCardEffect(EFFECT_HAND_SYNCHRO)
 						local val=te:GetValue()
@@ -1379,7 +1379,7 @@ function Synchro.DarkTarget(f1,f2,plv,nlv,...)
 					end
 				end
 				Duel.AssumeReset()
-				local hg=Duel.GetMatchingGroup(Card.IsHasEffect,tp,LOCATION_HAND+LOCATION_RESTING,0,nil,EFFECT_HAND_SYNCHRO+EFFECT_SYNCHRO_CHECK)
+				local hg=Duel.GetMatchingGroup(Card.IsHasEffect,tp,LOCATION_HAND+LOCATION_REST,0,nil,EFFECT_HAND_SYNCHRO+EFFECT_SYNCHRO_CHECK)
 				aux.ResetEffects(hg,EFFECT_HAND_SYNCHRO+EFFECT_SYNCHRO_CHECK)
 				if sg then
 					sg:KeepAlive()

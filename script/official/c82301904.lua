@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.sptg1)
 	e2:SetOperation(s.spop1)
 	c:RegisterEffect(e2)
-	--Send cards to the resting place
+	--Send cards to the rest place
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_TOREST+CATEGORY_DAMAGE)

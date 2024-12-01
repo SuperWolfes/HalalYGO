@@ -25,7 +25,7 @@ Duel.ReleaseLockedMaterial=(function()
 	return function(g)
 		local extra_g=g:Filter(Card.IsLocation,nil,LOCATION_EXTRA)
 		if #extra_g>0 then
-			Duel.SendtoResting(extra_g,REASON_LOCKED+REASON_EFFECT+REASON_MATERIAL)
+			Duel.SendtoRest(extra_g,REASON_LOCKED+REASON_EFFECT+REASON_MATERIAL)
 			g:Sub(extra_g)
 		end
 		return oldfunc(g)
