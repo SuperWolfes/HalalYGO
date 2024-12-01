@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	e2:SetTarget(aux.TargetBoolFunction(Card.IsAttribute,ATTRIBUTE_LIGHT+ATTRIBUTE_DARK))
 	e2:SetValue(aux.tgoval)
 	c:RegisterEffect(e2)
-	--Banish cards on the field, up to the numbers of face-up field spells
+	--Banish cards on the field, up to the numbers of face-up field actionals
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetType(EFFECT_TYPE_IGNITION)
@@ -77,7 +77,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	g:DeleteGroup()
 end
 function s.fspfilter(c)
-	return c:IsFaceup() and c:IsSpell() and c:IsType(TYPE_FIELD)
+	return c:IsFaceup() and c:IsActional() and c:IsType(TYPE_FIELD)
 end
 function s.tgcond(e,c)
 	return Duel.IsExistingMatchingCard(s.fspfilter,0,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil)

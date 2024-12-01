@@ -22,7 +22,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ConfirmDecktop(tp,1)
 	local g=Duel.GetDecktopGroup(tp,1)
 	local tc=g:GetFirst()
-	if tc:GetType()==TYPE_SPELL then
+	if tc:GetType()==TYPE_ACTIONAL then
 		Duel.DisableShuffleCheck()
 		Duel.SendtoRest(g,REASON_EFFECT)
 		local ae=tc:GetActivateEffect()
@@ -33,19 +33,19 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			e1:SetCountLimit(1)
 			e1:SetRange(LOCATION_REST)
 			e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_CONTROL-RESET_TOFIELD+RESET_PHASE+PHASE_END+RESET_SELF_TURN,2)
-			e1:SetCondition(s.spellcon)
-			e1:SetTarget(s.spelltg)
-			e1:SetOperation(s.spellop)
+			e1:SetCondition(s.actionalcon)
+			e1:SetTarget(s.actionaltg)
+			e1:SetOperation(s.actionalop)
 			tc:RegisterEffect(e1)
 		end
 	else
 		Duel.MoveToDeckBottom(tc)
 	end
 end
-function s.spellcon(e,tp,eg,ep,ev,re,r,rp,chk)
+function s.actionalcon(e,tp,eg,ep,ev,re,r,rp,chk)
 	return e:GetHandler():GetTurnID()~=Duel.GetTurnCount()
 end
-function s.spelltg(e,tp,eg,ep,ev,re,r,rp,chk)
+function s.actionaltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ae=e:GetHandler():GetActivateEffect()
 	local ftg=ae:GetTarget()
 	if chk==0 then
@@ -58,7 +58,7 @@ function s.spelltg(e,tp,eg,ep,ev,re,r,rp,chk)
 		ftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 end
-function s.spellop(e,tp,eg,ep,ev,re,r,rp)
+function s.actionalop(e,tp,eg,ep,ev,re,r,rp)
 	local ae=e:GetHandler():GetActivateEffect()
 	local fop=ae:GetOperation()
 	fop(e,tp,eg,ep,ev,re,r,rp)

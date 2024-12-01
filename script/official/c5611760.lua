@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.tdtg)
 	e1:SetOperation(s.tdop)
 	c:RegisterEffect(e1)
-	-- Search 1 "Crystal Beast" and 1 Field Spell
+	-- Search 1 "Crystal Beast" and 1 Field Actional
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND)
@@ -62,7 +62,7 @@ function s.cbfilter(c,tp)
 		and Duel.IsExistingMatchingCard(s.fsfilter,tp,LOCATION_DECK,0,1,c)
 end
 function s.fsfilter(c)
-	return c:IsType(TYPE_FIELD) and c:IsSpell() and c:IsAbleToHand()
+	return c:IsType(TYPE_FIELD) and c:IsActional() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cbfilter,tp,LOCATION_DECK,0,1,nil,tp) end

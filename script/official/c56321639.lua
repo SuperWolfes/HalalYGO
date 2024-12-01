@@ -1,8 +1,8 @@
 --魔導書廊エトワール
---Spellbook Star Hall
+--Actionalbook Star Hall
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableCounterPermit(COUNTER_SPELL)
+	c:EnableCounterPermit(COUNTER_ACTIONAL)
 	--Activate
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_ACTIVATE)
@@ -53,21 +53,21 @@ function s.initial_effect(c)
 	c:RegisterEffect(e5)
 end
 s.listed_series={0x106e}
-s.counter_list={COUNTER_SPELL}
+s.counter_list={COUNTER_ACTIONAL}
 function s.ctcon(e,tp,eg,ep,ev,re,r,rp)
 	if not re then return false end
 	local c=re:GetHandler()
-	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_SPELL) and c:IsSetCard(0x106e) and e:GetHandler():GetFlagEffect(1)>0
+	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_ACTIONAL) and c:IsSetCard(0x106e) and e:GetHandler():GetFlagEffect(1)>0
 end
 function s.ctop(e,tp,eg,ep,ev,re,r,rp)
-	e:GetHandler():AddCounter(COUNTER_SPELL,1)
+	e:GetHandler():AddCounter(COUNTER_ACTIONAL,1)
 end
 function s.atkval(e,c)
-	return e:GetHandler():GetCounter(COUNTER_SPELL)*100
+	return e:GetHandler():GetCounter(COUNTER_ACTIONAL)*100
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local ct=c:GetCounter(COUNTER_SPELL)
+	local ct=c:GetCounter(COUNTER_ACTIONAL)
 	e:SetLabel(ct)
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)

@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e1:SetTarget(Fusion.SummonEffTG(params))
 	e1:SetOperation(Fusion.SummonEffOP(params))
 	c:RegisterEffect(e1)
-	--Search or Set 1 "Branded" Spell/Trap from Deck
+	--Search or Set 1 "Branded" Actional/Trap from Deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)

@@ -26,7 +26,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.atktg2)
 	e2:SetOperation(s.atkop2)
 	c:RegisterEffect(e2)
-	--Cannot be destroyed by spells/traps effects that do not target
+	--Cannot be destroyed by actionals/traps effects that do not target
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
@@ -95,7 +95,7 @@ function s.atkop2(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.efilter(e,re,rp)
-	if not re:IsActiveType(TYPE_SPELL+TYPE_TRAP) then return false end
+	if not re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) then return false end
 	if not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then return true end
 	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
 	return not g:IsContains(e:GetHandler())

@@ -38,11 +38,11 @@ function s.matfilter(c,lc,sumtype,tp)
 	return c:IsAttribute(ATTRIBUTE_WATER,lc,sumtype,tp) or c:IsHasEffect(4904633)
 end
 function s.sumlimit(e,c,sump,sumtype,sumpos,targetp,se)
-	return se:IsActiveType(TYPE_SPELL+TYPE_TRAP) and se:IsHasType(EFFECT_TYPE_ACTIONS) 
+	return se:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) and se:IsHasType(EFFECT_TYPE_ACTIONS) 
 		and c:IsLocation(LOCATION_REST+LOCATION_HAND) and c:IsMonster()
 end
 function s.thfilter(c)
-	return c:IsSetCard(0x9d) and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsSetCard(0x9d) and c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.thfilter(chkc) end

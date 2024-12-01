@@ -27,7 +27,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetFlagEffect(id)~=0 and Duel.GetCurrentPhase()==PHASE_MAIN2
 end
 function s.cfilter(c)
-	return c:IsSpell() and c:IsAbleToRestAsCost()
+	return c:IsActional() and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetActivityCount(tp,ACTIVITY_SPSUMMON)==0
@@ -48,7 +48,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.RegisterEffect(e2,tp)
 end
 function s.filter(c)
-	return c:GetType()==TYPE_SPELL+TYPE_CONTINUOUS and c:IsSSetable()
+	return c:GetType()==TYPE_ACTIONAL+TYPE_CONTINUOUS and c:IsSSetable()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0

@@ -18,7 +18,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x106e}
 function s.cfilter(c)
-	return c:IsSetCard(0x106e) and c:IsSpell()
+	return c:IsSetCard(0x106e) and c:IsActional()
 end
 function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST,0,nil)
@@ -27,7 +27,7 @@ function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK)
 end
 function s.thfilter(c)
-	return c:IsSetCard(0x106e) and c:IsSpell() and c:IsAbleToHand()
+	return c:IsSetCard(0x106e) and c:IsActional() and c:IsAbleToHand()
 end
 function s.spfilter(c,e,tp)
 	return c:IsRace(RACE_MENTOR) and c:IsAttribute(ATTRIBUTE_DARK) and c:IsLevelAbove(5)
@@ -50,7 +50,7 @@ function s.effop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE)
 		c:RegisterEffect(e1)
 	end
-	--4+: Search 1 "Spellbook" Spell
+	--4+: Search 1 "Actionalbook" Actional
 	if ct>=4 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 		local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_DECK,0,1,1,nil)

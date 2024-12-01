@@ -25,9 +25,9 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return tp==Duel.GetTurnPlayer() and Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>0
 		and Duel.GetDrawCount(tp)>0 and Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)==0
 end
-	--Check for a "Void" spell/trap
+	--Check for a "Void" actional/trap
 function s.filter(c)
-	return c:IsSetCard(0xc5) and c:IsSpellTrap() and c:IsSSetable()
+	return c:IsSetCard(0xc5) and c:IsActionalTrap() and c:IsSSetable()
 end
 	--Activation legality
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -67,7 +67,7 @@ function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
 		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end
 end
-	--Set 1 "Void" spell/trap from deck
+	--Set 1 "Void" actional/trap from deck
 function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	_replace_count=_replace_count+1
 	if _replace_count<=_replace_max then

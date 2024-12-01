@@ -24,13 +24,13 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.actlimit(e,re,tp)
-	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP) and re:GetHandler():IsLocation(LOCATION_REST)
+	return re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) and re:GetHandler():IsLocation(LOCATION_REST)
 end
 function s.remcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD)
 end
 function s.remfilter(c)
-	return c:IsSpellTrap() and c:IsAbleToRemove() 
+	return c:IsActionalTrap() and c:IsAbleToRemove() 
 end
 function s.remtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(1-tp) and s.remfilter(chkc) end

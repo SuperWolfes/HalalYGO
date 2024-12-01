@@ -38,7 +38,7 @@ function s.cfilter(c)
 		and c:IsAbleToRestAsCost()
 end
 function s.filter(c,e)
-	return c:IsSpellTrap() and (not e or c:IsCanBeEffectTarget(e))
+	return c:IsActionalTrap() and (not e or c:IsCanBeEffectTarget(e))
 end
 function s.costfilter(c,rg,dg)
 	if not (c:IsMonster() and c:IsSetCard(0x2b)) then return false end

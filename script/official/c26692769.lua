@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	--Link Summon procedure
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_DARK),2)
 	c:EnableReviveLimit()
-	--Send to rest and set 1 "Illusion Knights" Spell/Trap
+	--Send to rest and set 1 "Illusion Knights" Actional/Trap
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOREST)
@@ -42,7 +42,7 @@ function s.tgfilter(c,tp)
 		and Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_DECK,0,1,c)
 end
 function s.setfilter(c)
-	return c:IsSetCard(0xdb) and c:IsSpellTrap() and c:IsSSetable()
+	return c:IsSetCard(0xdb) and c:IsActionalTrap() and c:IsSSetable()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil,tp)

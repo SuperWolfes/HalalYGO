@@ -50,7 +50,7 @@ end
 function s.cfilter(c)
 	if c:IsFacedown() or not c:IsAbleToRestAsCost() then return false end
 	return (c:IsSetCard(0x10db) and c:IsMonster())
-		or (c:IsSetCard(0xdb) and c:IsSpellTrap() and c:IsType(TYPE_CONTINUOUS))
+		or (c:IsSetCard(0xdb) and c:IsActionalTrap() and c:IsType(TYPE_CONTINUOUS))
 end
 function s.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

@@ -71,7 +71,7 @@ function s.tdcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SendtoRest(g,REASON_COST)
 end
 function s.filter(c)
-	return c:IsSpell() and c:IsAbleToDeck()
+	return c:IsActional() and c:IsAbleToDeck()
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter(chkc) end

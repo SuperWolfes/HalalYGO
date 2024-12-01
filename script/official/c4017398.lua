@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-	--Add 1 "ZEXAL" spell/trap from GY to hand
+	--Add 1 "ZEXAL" actional/trap from GY to hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND)
@@ -70,9 +70,9 @@ end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetLP(tp)<=Duel.GetLP(1-tp)-2000 and aux.exccon(e)
 end
-	--Check for "ZEXAL" spell/trap, except "ZEXAL Entrust"
+	--Check for "ZEXAL" actional/trap, except "ZEXAL Entrust"
 function s.thfilter(c)
-	return c:IsSpellTrap() and c:IsSetCard(0x7e) and not c:IsCode(id) and c:IsAbleToHand()
+	return c:IsActionalTrap() and c:IsSetCard(0x7e) and not c:IsCode(id) and c:IsAbleToHand()
 end
 	--Activation legality
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -82,7 +82,7 @@ function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,0,0)
 end
-	--Add 1 "ZEXAL" spell/trap from GY to hand
+	--Add 1 "ZEXAL" actional/trap from GY to hand
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) then

@@ -2,7 +2,7 @@
 --Chaosrider Gustaph
 local s,id=GetID()
 function s.initial_effect(c)
-	--Banish up to 2 Spells and increase ATK
+	--Banish up to 2 Actionals and increase ATK
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_REMOVE+CATEGORY_ATKCHANGE)
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.rmfilter(c)
-	return c:IsSpell() and c:IsAbleToRemove()
+	return c:IsActional() and c:IsAbleToRemove()
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.rmfilter,tp,LOCATION_REST,0,1,nil) end

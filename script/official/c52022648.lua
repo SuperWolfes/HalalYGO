@@ -27,10 +27,10 @@ function s.tglimit(e,c)
 	return c~=e:GetHandler()
 end
 function s.tgval(e,re,rp)
-	return re:IsActiveType(TYPE_SPELL)
+	return re:IsActiveType(TYPE_ACTIONAL)
 end
 function s.costfilter(c)
-	return c:IsSpell() and c:IsDiscardable()
+	return c:IsActional() and c:IsDiscardable()
 end
 function s.eqcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,e:GetHandler()) end

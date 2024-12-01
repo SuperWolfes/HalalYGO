@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e3:SetCode(EVENT_CHAIN_SOLVED)
 	e3:SetCondition(s.ctcon2)
 	c:RegisterEffect(e3)
-	--Place "Crystal Beast" monsters to your Spell/Trap Zone
+	--Place "Crystal Beast" monsters to your Actional/Trap Zone
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetType(EFFECT_TYPE_IGNITION)
@@ -79,13 +79,13 @@ function s.plop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	for tc in g:Iter() do
 		Duel.MoveToField(tc,tp,tp,LOCATION_SZONE,POS_FACEUP,true)
-		--Treat it as a Continuous Spell
+		--Treat it as a Continuous Actional
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_CHANGE_TYPE)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
-		e1:SetValue(TYPE_SPELL+TYPE_CONTINUOUS)
+		e1:SetValue(TYPE_ACTIONAL+TYPE_CONTINUOUS)
 		tc:RegisterEffect(e1)
 	end
 end

@@ -30,7 +30,7 @@ function s.initial_effect(c)
 end
 function s.setcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_TRIBUTE)
-		and not Duel.IsExistingMatchingCard(Card.IsSpellTrap,tp,LOCATION_ONFIELD,0,1,nil)
+		and not Duel.IsExistingMatchingCard(Card.IsActionalTrap,tp,LOCATION_ONFIELD,0,1,nil)
 end
 function s.setfilter1(c)
 	return c:IsType(TYPE_CONTINUOUS) and c:IsSSetable()
@@ -48,14 +48,14 @@ function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	local op=Duel.SelectOption(1-tp,71,72)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 	local g=nil
-	if op==0 then g=Duel.SelectMatchingCard(tp,s.setfilter2,tp,LOCATION_DECK,0,1,1,nil,TYPE_SPELL+TYPE_CONTINUOUS)
+	if op==0 then g=Duel.SelectMatchingCard(tp,s.setfilter2,tp,LOCATION_DECK,0,1,1,nil,TYPE_ACTIONAL+TYPE_CONTINUOUS)
 	else g=Duel.SelectMatchingCard(tp,s.setfilter2,tp,LOCATION_DECK,0,1,1,nil,TYPE_TRAP+TYPE_CONTINUOUS) end
 	if #g>0 then
 		Duel.SSet(tp,g:GetFirst())
 	end
 end
 function s.atkfilter(c)
-	return c:IsSpellTrap() and c:IsFaceup()
+	return c:IsActionalTrap() and c:IsFaceup()
 end
 function s.atkval(e,c)
 	return Duel.GetMatchingGroupCount(s.atkfilter,e:GetHandlerPlayer(),LOCATION_ONFIELD,0,nil)*300

@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Negate Spell/Trap
+	--Negate Actional/Trap
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_NEGATE+CATEGORY_DESTROY+CATEGORY_COUNTER+CATEGORY_TOHAND)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
@@ -60,16 +60,16 @@ function s.initial_effect(c)
 	c:RegisterEffect(e6)
 	aux.DoubleSnareValidity(c,LOCATION_MZONE)
 end
-s.counter_place_list={COUNTER_SPELL}
+s.counter_place_list={COUNTER_ACTIONAL}
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsCanRemoveCounter(tp,1,0,COUNTER_SPELL,6,REASON_COST) end
-	Duel.RemoveCounter(tp,1,0,COUNTER_SPELL,6,REASON_COST)
+	if chk==0 then return Duel.IsCanRemoveCounter(tp,1,0,COUNTER_ACTIONAL,6,REASON_COST) end
+	Duel.RemoveCounter(tp,1,0,COUNTER_ACTIONAL,6,REASON_COST)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
-		and c:IsCanAddCounter(COUNTER_SPELL,1,false,LOCATION_MZONE) end
+		and c:IsCanAddCounter(COUNTER_ACTIONAL,1,false,LOCATION_MZONE) end
 	local g=Duel.GetMatchingGroup(nil,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,0,0)
@@ -77,21 +77,21 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)~=0 then
-		local dc=Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsCanAddCounter,COUNTER_SPELL,1,false,LOCATION_ONFIELD),tp,LOCATION_ONFIELD,0,nil)
+		local dc=Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsCanAddCounter,COUNTER_ACTIONAL,1,false,LOCATION_ONFIELD),tp,LOCATION_ONFIELD,0,nil)
 		if dc==0 then return end
 		Duel.BreakEffect()
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 		local g=Duel.SelectMatchingCard(tp,aux.TRUE,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,dc,nil)
 		Duel.HintSelection(g)
 		local oc=Duel.Destroy(g,REASON_EFFECT)
-		if oc>0 then c:AddCounter(COUNTER_SPELL,oc) end
+		if oc>0 then c:AddCounter(COUNTER_ACTIONAL,oc) end
 	end
 end
 function s.negcon(e,tp,eg,ep,ev,re,r,rp)
-	return not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED) and re:IsActiveType(TYPE_SPELL+TYPE_TRAP) and Duel.IsChainNegatable(ev)
+	return not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED) and re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) and Duel.IsChainNegatable(ev)
 end
 function s.negfilter(c)
-	return c:GetCounter(COUNTER_SPELL)>0 and c:IsAbleToHand()
+	return c:GetCounter(COUNTER_ACTIONAL)>0 and c:IsAbleToHand()
 end
 function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.negfilter,tp,LOCATION_ONFIELD,0,1,nil) end
@@ -106,27 +106,27 @@ function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RTOHAND)
 	local hc=Duel.SelectMatchingCard(tp,s.negfilter,tp,LOCATION_ONFIELD,0,1,1,nil):GetFirst()
 	if not hc then return end
-	local ct=hc:GetCounter(COUNTER_SPELL)
+	local ct=hc:GetCounter(COUNTER_ACTIONAL)
 	if Duel.SendtoHand(hc,nil,REASON_EFFECT)>0 and hc:IsLocation(LOCATION_HAND) and Duel.NegateActivation(ev) and re:GetHandler():IsRelateToEffect(re) then
 		if Duel.Destroy(eg,REASON_EFFECT)>0 and c:IsRelateToEffect(e) and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 			Duel.BreakEffect()
-			c:AddCounter(COUNTER_SPELL,ct)
+			c:AddCounter(COUNTER_ACTIONAL,ct)
 		end
 	end
 end
 function s.indcon(e)
-	return e:GetHandler():GetCounter(COUNTER_SPELL)>0
+	return e:GetHandler():GetCounter(COUNTER_ACTIONAL)>0
 end
 function s.indval(e,re,tp)
 	return tp==1-e:GetHandlerPlayer()
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local ct=c:GetCounter(COUNTER_SPELL)
+	local ct=c:GetCounter(COUNTER_ACTIONAL)
 	e:SetLabel(ct)
 end
 function s.thfilter(c)
-	return c:GetType()==TYPE_SPELL and c:IsAbleToHand()
+	return c:GetType()==TYPE_ACTIONAL and c:IsAbleToHand()
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

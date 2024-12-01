@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.etarget)
 	e2:SetValue(1)
 	c:RegisterEffect(e2)
-	--Other level 3 or lower contaminated monsters are unaffected by spells/traps
+	--Other level 3 or lower contaminated monsters are unaffected by actionals/traps
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
 	e3:SetCode(EFFECT_IMMUNE_EFFECT)
@@ -36,5 +36,5 @@ function s.etarget(e,c)
 	return c:GetCode()~=id and c:IsRace(RACE_CONTAMINED) and c:IsLevelBelow(3)
 end
 function s.efilter(e,te)
-	return te:IsActiveType(TYPE_SPELL+TYPE_TRAP) and not te:GetHandler():IsCode(4064256)
+	return te:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) and not te:GetHandler():IsCode(4064256)
 end

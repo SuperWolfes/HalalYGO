@@ -31,7 +31,7 @@ function s.cfilter1(c)
 	return c:IsCode(36623431) and c:IsAbleToRestAsCost()
 end
 function s.cfilter2(c)
-	return c:GetType()==TYPE_SPELL+TYPE_CONTINUOUS and not c:IsPublic()
+	return c:GetType()==TYPE_ACTIONAL+TYPE_CONTINUOUS and not c:IsPublic()
 end
 function s.mtop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Search 1 "Vendread" Spell/Trap if sent to the GY
+	--Search 1 "Vendread" Actional/Trap if sent to the GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -31,7 +31,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x106}
 function s.thfilter(c)
-	return c:IsSetCard(0x106) and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsSetCard(0x106) and c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

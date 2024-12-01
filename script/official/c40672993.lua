@@ -13,5 +13,5 @@ function s.initial_effect(c)
 end
 function s.actlimit(e,te,tp)
 	return Duel.GetCurrentPhase()==PHASE_MAIN1
-		and te:IsHasType(EFFECT_TYPE_ACTIVATE) and te:IsActiveType(TYPE_SPELL)
+		and te:IsHasType(EFFECT_TYPE_ACTIVATE) and te:IsActiveType(TYPE_ACTIONAL)
 end

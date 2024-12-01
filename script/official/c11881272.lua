@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetCondition(s.tgocon)
 	e2:SetValue(aux.tgoval)
 	c:RegisterEffect(e2)
-	--Activate 1 Field Spell
+	--Activate 1 Field Actional
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
@@ -61,7 +61,7 @@ end
 function s.actop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
 	local sc=Duel.SelectMatchingCard(tp,s.actfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,1,nil,tp):GetFirst()
-	Duel.ActivateFieldSpell(sc,e,tp,eg,ep,ev,re,r,rp)
+	Duel.ActivateFieldActional(sc,e,tp,eg,ep,ev,re,r,rp)
 end
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	local ec=e:GetHandler():GetEquipTarget()

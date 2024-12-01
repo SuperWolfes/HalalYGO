@@ -42,7 +42,7 @@ function s.tg(e,c)
 end
 function s.ovcfilter(c,tp)
 	local re=c:GetReasonEffect()
-	return c:IsType(TYPE_XYZ) and c:IsLocation(LOCATION_MZONE) and c:IsSummonPlayer(tp) and re and re:IsActiveType(TYPE_SPELL)
+	return c:IsType(TYPE_XYZ) and c:IsLocation(LOCATION_MZONE) and c:IsSummonPlayer(tp) and re and re:IsActiveType(TYPE_ACTIONAL)
 		and re:GetHandler():IsSetCard(0x95)
 end
 function s.ovcon(e,tp,eg,ep,ev,re,r,rp)

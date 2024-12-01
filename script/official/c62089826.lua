@@ -40,7 +40,7 @@ function s.initial_effect(c)
 	e4:SetTarget(s.sptg)
 	e4:SetOperation(s.spop)
 	c:RegisterEffect(e4)
-	-- Set Spell/Trap
+	-- Set Actional/Trap
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(id,2))
 	e5:SetType(EFFECT_TYPE_QUICK_O)
@@ -86,7 +86,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.setfilter(c,tp)
-	return c:IsSpellTrap() and c:IsSSetable() and c:ListsCode(CARD_BLUEEYES_W_DRAGON)
+	return c:IsActionalTrap() and c:IsSSetable() and c:ListsCode(CARD_BLUEEYES_W_DRAGON)
 		and not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,c:GetCode()),tp,LOCATION_ONFIELD+LOCATION_REST,0,1,nil)
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)

@@ -1,5 +1,5 @@
 --魔石術師 クルード
---Spellstone Sorcerer Karood
+--Actionalstone Sorcerer Karood
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(0x16)

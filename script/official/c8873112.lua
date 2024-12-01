@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_MONSTER_SSET)
-	e1:SetValue(TYPE_SPELL)
+	e1:SetValue(TYPE_ACTIONAL)
 	c:RegisterEffect(e1)
 	--spsummon
 	local e2=Effect.CreateEffect(c)
@@ -45,14 +45,14 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)
 end
 function s.cfilter(c,tp)
-	return c:IsOnField() and c:IsControler(tp) and c:IsSpellTrap()
+	return c:IsOnField() and c:IsControler(tp) and c:IsActionalTrap()
 end
 function s.spcon2(e,tp,eg,ep,ev,re,r,rp)
 	local ex,tg,tc=Duel.GetOperationInfo(ev,CATEGORY_DESTROY)
 	return ex and tg~=nil and tc+tg:FilterCount(s.cfilter,nil,tp)-#tg>0
 end
 function s.filter(c)
-	return c:IsFacedown() and c:IsSpellTrap() and c:IsAbleToHandAsCost()
+	return c:IsFacedown() and c:IsActionalTrap() and c:IsAbleToHandAsCost()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_SZONE,0,1,nil) end

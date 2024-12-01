@@ -15,7 +15,7 @@ function s.filter(c)
 	return c:IsLockedMonster() and c:IsLevelBelow(7) and c:IsAbleToHand()
 end
 function s.filter2(c)
-	return c:IsLockedSpell() and c:IsAbleToHand()
+	return c:IsLockedActional() and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end

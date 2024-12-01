@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.pttg)
 	e2:SetOperation(s.ptop)
 	c:RegisterEffect(e2)
-	-- Search 1 Field Spell
+	-- Search 1 Field Actional
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_HANDES)
@@ -101,7 +101,7 @@ function s.fthcon(e,tp,eg,ep,ev,re,r,rp)
 	return re and re:GetHandler():IsSetCard(0xc7) or e:GetHandler():IsSummonType(SUMMON_TYPE_PENDULUM)
 end
 function s.fthfilter(c)
-	return c:IsType(TYPE_FIELD) and c:IsSpell() and c:IsAbleToHand()
+	return c:IsType(TYPE_FIELD) and c:IsActional() and c:IsAbleToHand()
 end
 function s.fthtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.fthfilter,tp,LOCATION_DECK,0,1,nil) end

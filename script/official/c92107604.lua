@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--Activate "Runick" Quick-Play Spells from your hand
+	--Activate "Runick" Quick-Play Actionals from your hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_QP_ACT_IN_NTPHAND)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e2:SetTargetRange(LOCATION_HAND,0)
 	e2:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,0x180))
 	c:RegisterEffect(e2)
-	--Return up to 3 "Runick" Quick-Play Spells to the Deck and draw the same number
+	--Return up to 3 "Runick" Quick-Play Actionals to the Deck and draw the same number
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_TODECK+CATEGORY_DRAW)
@@ -32,11 +32,11 @@ function s.initial_effect(c)
 end
 s.listed_series={0x180}
 function s.drcon(e,tp,eg,ep,ev,re,r,rp)
-	return rp==tp and re:GetHandler():IsSetCard(0x180) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_SPELL)
+	return rp==tp and re:GetHandler():IsSetCard(0x180) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_ACTIONAL)
 		and re:IsActiveType(TYPE_QUICKPLAY)
 end
 function s.tdfilter(c)
-	return c:IsSetCard(0x180) and c:GetType()==TYPE_SPELL+TYPE_QUICKPLAY and c:IsAbleToDeck()
+	return c:IsSetCard(0x180) and c:GetType()==TYPE_ACTIONAL+TYPE_QUICKPLAY and c:IsAbleToDeck()
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.tdfilter(chkc) end

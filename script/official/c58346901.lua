@@ -4,7 +4,7 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send 1 FIRE warrior monster/equip spell from hand or field, special summon this card
+	--Send 1 FIRE warrior monster/equip actional from hand or field, special summon this card
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -33,13 +33,13 @@ function s.initial_effect(c)
 	e3:SetValue(aux.tgoval)
 	c:RegisterEffect(e3)
 end
-	--Check for FIRE warrior monster or equip spell from hand and field
+	--Check for FIRE warrior monster or equip actional from hand and field
 function s.costfilter(c,tp)
 	return (c:IsLocation(LOCATION_HAND) or c:IsFaceup())
 	and (c:IsRace(RACE_WARRIOR) and c:IsAttribute(ATTRIBUTE_FIRE) or c:IsType(TYPE_EQUIP))
 	and c:IsAbleToRestAsCost() and Duel.GetMZoneCount(tp,c)>0
 end
-	--Send FIRE warrior monster or equip spell to GY as cost
+	--Send FIRE warrior monster or equip actional to GY as cost
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND+LOCATION_ONFIELD,0,1,e:GetHandler(),tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)

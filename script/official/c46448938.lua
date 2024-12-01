@@ -1,5 +1,5 @@
 --魔導書の神判
---Spellbook of Judgment
+--Actionalbook of Judgment
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -46,7 +46,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetLabelObject(e3)
 end
 function s.regcon(e,tp,eg,ep,ev,re,r,rp)
-	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_SPELL)
+	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_ACTIONAL)
 end
 function s.regop1(e,tp,eg,ep,ev,re,r,rp)
 	local ct=e:GetLabelObject():GetLabel()
@@ -61,7 +61,7 @@ function s.effcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetLabel()>0
 end
 function s.sfilter(c)
-	return c:IsSetCard(0x106e) and c:GetCode()~=id and c:IsSpell() and c:IsAbleToHand()
+	return c:IsSetCard(0x106e) and c:GetCode()~=id and c:IsActional() and c:IsAbleToHand()
 end
 function s.spfilter(c,lv,e,tp)
 	return c:IsLevelBelow(lv) and c:IsRace(RACE_MENTOR) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

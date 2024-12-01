@@ -1,5 +1,5 @@
 --封魔の伝承者
---Disciple of the Unliked Spell
+--Disciple of the Unliked Actional
 local s,id=GetID()
 function s.initial_effect(c)
 	--to defense

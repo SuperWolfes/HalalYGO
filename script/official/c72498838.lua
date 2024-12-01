@@ -3,7 +3,7 @@
 --Scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Add "Magistus" Spell/Trap to the hand or return 1 Mentor to the GY
+	--Add "Magistus" Actional/Trap to the hand or return 1 Mentor to the GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
@@ -31,7 +31,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x152}
 function s.schfilter(c)
-	return c:IsSetCard(0x152) and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsSetCard(0x152) and c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.tgfilter(c)
 	return c:IsRace(RACE_MENTOR) and c:IsLevelBelow(4) and c:IsFaceup()

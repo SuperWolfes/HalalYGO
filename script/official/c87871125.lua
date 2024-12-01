@@ -74,7 +74,7 @@ function s.thcon2(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsReincarnationSummoned()
 end
 function s.thfilter2(c)
-	return c:IsSetCard(0x119) and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsSetCard(0x119) and c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.thtg2(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter2,tp,LOCATION_REST,0,1,nil) end

@@ -72,7 +72,7 @@ function s.descost2(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SendtoRest(g,REASON_COST)
 end
 function s.filter2(c)
-	return c:IsType(TYPE_SPELL+TYPE_TRAP)
+	return c:IsType(TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.destg2(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter2,tp,0,LOCATION_ONFIELD,1,nil) end

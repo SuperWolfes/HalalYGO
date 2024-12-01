@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Must be properly summoned before reviving
 	c:EnableReviveLimit()
-	--Must be special summoned with effect of "Bonding" spell/trap
+	--Must be special summoned with effect of "Bonding" actional/trap
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -38,7 +38,7 @@ s.listed_names={85066822}
 
 function s.splimit(e,se,sp,st)
 	local sc=se:GetHandler()
-	return sc and sc:IsType(TYPE_SPELL+TYPE_TRAP) and sc:IsSetCard(0x100)
+	return sc and sc:IsType(TYPE_ACTIONAL+TYPE_TRAP) and sc:IsSetCard(0x100)
 end
 function s.atkfilter(c)
 	return c:IsFaceup() and c:IsType(TYPE_EFFECT)

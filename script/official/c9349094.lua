@@ -39,7 +39,7 @@ function s.attcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp and rp==tp and not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED)
 end
 function s.atttg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	local rt=re:GetActiveType()&(TYPE_SPELL|TYPE_MONSTER|TYPE_TRAP)
+	local rt=re:GetActiveType()&(TYPE_ACTIONAL|TYPE_MONSTER|TYPE_TRAP)
 	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and chkc:IsType(rt) end
 	if chk==0 then return Duel.IsExistingTarget(Card.IsType,tp,LOCATION_REST,0,1,nil,rt) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
@@ -60,7 +60,7 @@ function s.negcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then 
-		local rt=re:GetActiveType()&(TYPE_SPELL|TYPE_MONSTER|TYPE_TRAP)
+		local rt=re:GetActiveType()&(TYPE_ACTIONAL|TYPE_MONSTER|TYPE_TRAP)
 		return e:GetHandler():GetOverlayGroup():IsExists(Card.IsType,1,nil,rt)
 	end
 	Duel.SetOperationInfo(0,CATEGORY_NEGATE,eg,1,0,0)
@@ -70,7 +70,7 @@ function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local rt=re:GetActiveType()&(TYPE_SPELL|TYPE_MONSTER|TYPE_TRAP)
+	local rt=re:GetActiveType()&(TYPE_ACTIONAL|TYPE_MONSTER|TYPE_TRAP)
 	local ov=c:GetOverlayGroup():Filter(Card.IsType,nil,rt)
 	if #ov<1 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)

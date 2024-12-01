@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	e3:SetCondition(s.rdcon)
 	e3:SetOperation(s.rdop)
 	c:RegisterEffect(e3)
-	--Negate Spell/Trap activation
+	--Negate Actional/Trap activation
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_NEGATE+CATEGORY_DESTROY)
@@ -48,7 +48,7 @@ function s.initial_effect(c)
 	e5:SetTarget(s.drtg)
 	e5:SetOperation(s.drop)
 	c:RegisterEffect(e5)
-	--Special Summon 1 "Crystal Beast" monster from the Spell/Trap Zone
+	--Special Summon 1 "Crystal Beast" monster from the Actional/Trap Zone
 	local e6=Effect.CreateEffect(c)
 	e6:SetDescription(aux.Stringid(id,3))
 	e6:SetCategory(CATEGORY_SPECIAL_SUMMON)

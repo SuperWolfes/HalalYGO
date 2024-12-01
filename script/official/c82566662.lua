@@ -92,7 +92,7 @@ function s.syncond(e)
 	return Duel.GetTurnPlayer()==e:GetHandlerPlayer() and Duel.IsMainPhase()
 end
 function s.synlimit(e,re,tp)
-	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP)
+	return re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.xyzcond(e)
 	local ph=Duel.GetCurrentPhase()

@@ -57,7 +57,7 @@ function s.regcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_XYZ) and e:GetLabel()>0
 end
 function s.sfilter(c)
-	return c:IsSetCard(0x168) and c:IsType(TYPE_SPELL|TYPE_TRAP) and c:IsAbleToHand()
+	return c:IsSetCard(0x168) and c:IsType(TYPE_ACTIONAL|TYPE_TRAP) and c:IsAbleToHand()
 end
 function s.regtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local effs=e:GetLabel()
@@ -83,7 +83,7 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	if (effs&1)~=0 then
 		Duel.Draw(tp,1,REASON_EFFECT)
 	end
-	--"Gukan Suship Sharauo": Add 1 "Gunkan" Spell/Trap from your Deck to your hand.
+	--"Gukan Suship Sharauo": Add 1 "Gunkan" Actional/Trap from your Deck to your hand.
 	if (effs&(1<<1))~=0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 		local g=Duel.SelectMatchingCard(tp,s.sfilter,tp,LOCATION_DECK,0,1,1,nil)

@@ -2,7 +2,7 @@
 --Tempest Magician
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableCounterPermit(COUNTER_SPELL)
+	c:EnableCounterPermit(COUNTER_ACTIONAL)
 	--synchro summon
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTunerEx(Card.IsRace,RACE_MENTOR),1,99)
 	c:EnableReviveLimit()
@@ -39,17 +39,17 @@ function s.initial_effect(c)
 	e3:SetOperation(s.damop)
 	c:RegisterEffect(e3)
 end
-s.counter_place_list={COUNTER_SPELL}
+s.counter_place_list={COUNTER_ACTIONAL}
 function s.addcc1(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_SYNCHRO)
 end
 function s.addct1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,2,0,COUNTER_SPELL)
+	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,2,0,COUNTER_ACTIONAL)
 end
 function s.addc1(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():IsRelateToEffect(e) then
-		e:GetHandler():AddCounter(COUNTER_SPELL,1)
+		e:GetHandler():AddCounter(COUNTER_ACTIONAL,1)
 	end
 end
 function s.ctcost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -61,28 +61,28 @@ function s.ctcost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.cttg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,e:GetLabel(),0,COUNTER_SPELL)
+	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,e:GetLabel(),0,COUNTER_ACTIONAL)
 end
 function s.ctop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=e:GetLabel()
 	for i=1,ct do
 		Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,3))
-		local g=Duel.SelectMatchingCard(tp,Card.IsCanAddCounter,tp,LOCATION_MZONE,0,1,1,nil,COUNTER_SPELL,1)
+		local g=Duel.SelectMatchingCard(tp,Card.IsCanAddCounter,tp,LOCATION_MZONE,0,1,1,nil,COUNTER_ACTIONAL,1)
 		if #g==0 then return end
-		g:GetFirst():AddCounter(COUNTER_SPELL,1)
+		g:GetFirst():AddCounter(COUNTER_ACTIONAL,1)
 	end
 end
 function s.damfilter(c)
-	return c:GetCounter(COUNTER_SPELL)>0
+	return c:GetCounter(COUNTER_ACTIONAL)>0
 end
 function s.damcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetCounter(tp,1,1,COUNTER_SPELL)>0 end
+	if chk==0 then return Duel.GetCounter(tp,1,1,COUNTER_ACTIONAL)>0 end
 	local g=Duel.GetMatchingGroup(s.damfilter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil)
 	local tc=g:GetFirst()
 	local sum=0
 	for tc in aux.Next(g) do
-		local sct=tc:GetCounter(COUNTER_SPELL)
-		tc:RemoveCounter(tp,COUNTER_SPELL,sct,0)
+		local sct=tc:GetCounter(COUNTER_ACTIONAL)
+		tc:RemoveCounter(tp,COUNTER_ACTIONAL,sct,0)
 		sum=sum+sct
 	end
 	e:SetLabel(sum)

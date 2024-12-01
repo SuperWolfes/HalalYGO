@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Set 1 "Ninjitsu Art" Spell/Trap and/or 1 "Ninja" monster 
+	--Set 1 "Ninjitsu Art" Actional/Trap and/or 1 "Ninja" monster 
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -33,7 +33,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetFieldGroupCount(tp,0,LOCATION_ONFIELD)>0
 end
 function s.ninjitsu(c,zone_chk)
-	return c:IsSetCard(0x61) and c:IsSpellTrap() and c:IsSSetable() and not c:IsCode(id) and (zone_chk or c:IsType(TYPE_FIELD))
+	return c:IsSetCard(0x61) and c:IsActionalTrap() and c:IsSSetable() and not c:IsCode(id) and (zone_chk or c:IsType(TYPE_FIELD))
 end
 function s.ninja(c,e,tp)
 	return c:IsSetCard(0x2b) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEDOWN_DEFENSE) and not c:IsCode(id)
@@ -62,7 +62,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local sg=aux.SelectUnselectGroup(g1,e,tp,1,2,s.rescon,1,tp,HINTMSG_TOFIELD)
 	if #sg==0 then return end
 	for tc in sg:Iter() do
-		if tc:IsType(TYPE_SPELL+TYPE_TRAP) then
+		if tc:IsType(TYPE_ACTIONAL+TYPE_TRAP) then
 			Duel.SSet(tp,tc,tp,false)
 		else
 			Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEDOWN_DEFENSE)

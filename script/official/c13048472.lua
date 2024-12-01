@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c,tp)
-	return c:IsLockedSpell() and c:IsAbleToHand()
+	return c:IsLockedActional() and c:IsAbleToHand()
 		and Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_DECK+LOCATION_REST,0,1,nil,c)
 end
 function s.filter2(c,mc)

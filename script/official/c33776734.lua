@@ -52,12 +52,12 @@ s.listed_names={id} --not standard, but required for Level Up!
 s.LVnum=9
 s.LVset=0x10a4
 function s.checkop1(e,tp,eg,ep,ev,re,r,rp)
-	if re and re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_SPELL) then
+	if re and re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_ACTIONAL) then
 		re:GetHandler():RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1)
 	end
 end
 function s.checkop2(e,tp,eg,ep,ev,re,r,rp)
-	if re and re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_SPELL) then
+	if re and re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_ACTIONAL) then
 		re:GetHandler():ResetFlagEffect(id)
 	end
 end
@@ -79,5 +79,5 @@ function s.rmtarget(e,c)
 	return c:IsFaceup() and c:GetFlagEffect(id)>0 and Duel.IsPlayerCanRemove(e:GetHandlerPlayer(),c)
 end
 function s.val(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsSpell,c:GetControler(),0,LOCATION_REST,nil)*500
+	return Duel.GetMatchingGroupCount(Card.IsActional,c:GetControler(),0,LOCATION_REST,nil)*500
 end

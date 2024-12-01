@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	c:EnableReviveLimit() 
-	--Add Speedroid Spell/Trap to hand
+	--Add Speedroid Actional/Trap to hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -66,7 +66,7 @@ function s.splimit(e,c)
 	return not c:IsAttribute(ATTRIBUTE_WIND)
 end
 function s.thfilter(c)
-	return c:IsSetCard(0x2016) and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsSetCard(0x2016) and c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

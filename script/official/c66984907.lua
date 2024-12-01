@@ -6,7 +6,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--From cards_specific_functions.lua
 	aux.AddAttractionEquipProc(c)
-	--You: Target 1 Spell/Trap your opponent controls; send both it and this card to the GY.
+	--You: Target 1 Actional/Trap your opponent controls; send both it and this card to the GY.
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
 	e1:SetCode(EVENT_FREE_CHAIN)
@@ -30,7 +30,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x15e}
 function s.gyfilter(c)
-	return c:IsSpellTrap() and c:IsAbleToRest()
+	return c:IsActionalTrap() and c:IsAbleToRest()
 end
 function s.gytg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and chkc:IsControler(1-tp) and s.gyfilter(chkc) end

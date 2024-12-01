@@ -50,7 +50,7 @@ function s.accon(e)
 	return ph>=PHASE_BATTLE_START and ph<=PHASE_BATTLE
 end
 function s.aclimit(e,re,tp)
-	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP)
+	return re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

@@ -2,7 +2,7 @@
 --The Agent of Force - Mars
 local s,id=GetID()
 function s.initial_effect(c)
-	--immune spell
+	--immune actional
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_IMMUNE_EFFECT)
@@ -24,7 +24,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_SANCTUARY_SKY}
 function s.efilter(e,te)
-	return te:IsActiveType(TYPE_SPELL)
+	return te:IsActiveType(TYPE_ACTIONAL)
 end
 function s.envfilter(c)
 	return c:IsFaceup() and c:IsCode(CARD_SANCTUARY_SKY)

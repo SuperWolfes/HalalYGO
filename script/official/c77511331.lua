@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.thtg)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
-	--Send Spell/Trap cards to the GY
+	--Send Actional/Trap cards to the GY
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TOREST)
@@ -39,7 +39,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SendtoHand(c,nil,REASON_EFFECT)
 end
 function s.tgfilter(c,tp)
-	return c:IsSpellTrap() and c:GetColumnGroup():IsExists(s.gyfilter,1,nil,tp)
+	return c:IsActionalTrap() and c:GetColumnGroup():IsExists(s.gyfilter,1,nil,tp)
 end
 function s.gyfilter(c,tp)
 	return c:IsControler(tp) and c:IsLocation(LOCATION_PZONE)

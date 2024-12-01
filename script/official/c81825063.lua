@@ -41,7 +41,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x2f}
 function s.rmtg(e,c)
-	return c:GetOwner()~=e:GetHandlerPlayer() and c:IsOriginalType(TYPE_SPELL+TYPE_TRAP) and Duel.IsPlayerCanRemove(e:GetHandlerPlayer(),c)
+	return c:GetOwner()~=e:GetHandlerPlayer() and c:IsOriginalType(TYPE_ACTIONAL+TYPE_TRAP) and Duel.IsPlayerCanRemove(e:GetHandlerPlayer(),c)
 end
 function s.spfilter(c)
 	return c:IsSetCard(0x2f) and c:IsFaceup()
@@ -60,7 +60,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)
 end
 function s.thfilter(c)
-	return c:IsSetCard(0x2f) and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsSetCard(0x2f) and c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

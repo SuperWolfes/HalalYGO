@@ -33,7 +33,7 @@ function s.setfilter(c,e,tp)
 	if not c:IsSetCard(0x130) then return end
 	if c:IsMonster() and not c:IsCode(id) then 
 		return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEDOWN_DEFENSE)
-	elseif c:IsType(TYPE_SPELL+TYPE_TRAP) then 
+	elseif c:IsType(TYPE_ACTIONAL+TYPE_TRAP) then 
 		return (c:IsType(TYPE_FIELD) or Duel.GetLocationCount(tp,LOCATION_SZONE)>0) and c:IsSSetable()
 	end
 	return false
@@ -46,7 +46,7 @@ function s.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local tc=g:GetFirst()
 	if tc:IsMonster() then
 		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,LOCATION_REST)
-	elseif tc:IsType(TYPE_SPELL+TYPE_TRAP) then
+	elseif tc:IsType(TYPE_ACTIONAL+TYPE_TRAP) then
 		Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,tp,LOCATION_REST)
 	end
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,nil,1,0,0)
@@ -59,7 +59,7 @@ function s.setop(e,tp,eg,ep,ev,re,r,rp)
 		if Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEDOWN_DEFENSE)>0 then
 			andifyoudo=true
 		end
-	elseif tc:IsType(TYPE_SPELL+TYPE_TRAP) then
+	elseif tc:IsType(TYPE_ACTIONAL+TYPE_TRAP) then
 		if tc:IsType(TYPE_FIELD) then
 			local fc=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
 			if fc then

@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.regop)
 	c:RegisterEffect(e2)
 	e2:SetLabelObject(e1)
-	--Prevent Spell/Trap activations when it battles
+	--Prevent Actional/Trap activations when it battles
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
 	e3:SetProperty(EFFECT_FLAG_PLAYER_TARGET)

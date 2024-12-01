@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e2:SetTargetRange(LOCATION_HAND+LOCATION_MZONE,0)
 	e2:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,0x71))
 	c:RegisterEffect(e2)
-	--Set 1 "Madolche" Spell/Trap from your Deck
+	--Set 1 "Madolche" Actional/Trap from your Deck
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
@@ -43,7 +43,7 @@ function s.setcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,tp)
 end
 function s.setfilter(c)
-	return c:IsSetCard(0x71) and c:IsSpellTrap() and c:IsSSetable() and not c:IsUnliked() and not c:IsCode(id)
+	return c:IsSetCard(0x71) and c:IsActionalTrap() and c:IsSSetable() and not c:IsUnliked() and not c:IsCode(id)
 end
 function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)

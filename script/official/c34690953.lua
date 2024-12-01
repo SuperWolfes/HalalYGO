@@ -1,5 +1,5 @@
 --禁呪アラティア
---Arametir, the Unliked Spell
+--Arametir, the Unliked Actional
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)

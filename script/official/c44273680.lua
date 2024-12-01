@@ -15,7 +15,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x86}
 function s.cfilter(c)
-	return c:IsSpell() and c:IsAbleToRestAsCost()
+	return c:IsActional() and c:IsAbleToRestAsCost()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,e:GetHandler()) end

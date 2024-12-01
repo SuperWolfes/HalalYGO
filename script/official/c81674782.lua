@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.rmtarget(e,c)
-	return not c:IsLocation(0x80) and not c:IsSpellTrap()
+	return not c:IsLocation(0x80) and not c:IsActionalTrap()
 end
 function s.checktg(e,c)
 	return not c:IsPublic()

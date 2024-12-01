@@ -43,7 +43,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():GetFlagEffect(id)~=0 end
 end
 function s.copfilter(c)
-	return c:IsAbleToRestAsCost() and c:IsSetCard(0x177) and c:GetType()==TYPE_SPELL
+	return c:IsAbleToRestAsCost() and c:IsSetCard(0x177) and c:GetType()==TYPE_ACTIONAL
 		and c:CheckActivateEffect(true,true,false)~=nil 
 end
 function s.xyzfilter(c,tp,sg,g)

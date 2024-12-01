@@ -4,7 +4,7 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--When normal summoned, set 1 "Fire Formation" spell/trap from deck
+	--When normal summoned, set 1 "Fire Formation" actional/trap from deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.settg)
 	e1:SetOperation(s.setop)
 	c:RegisterEffect(e1)
-	--If special summoned by effect of a "Fire Fist" monster, set 1 "Fire Formation" spell/trap from deck
+	--If special summoned by effect of a "Fire Fist" monster, set 1 "Fire Formation" actional/trap from deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
@@ -34,11 +34,11 @@ function s.setcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
 end
 function s.setfilter(c,tp)
-	return c:IsFaceup() and c:IsSetCard(0x7c) and c:IsSpellTrap()
+	return c:IsFaceup() and c:IsSetCard(0x7c) and c:IsActionalTrap()
 		and Duel.IsExistingMatchingCard(s.setfilter2,tp,LOCATION_DECK,0,1,nil,c)
 end
 function s.setfilter2(c,tc)
-	return c:IsSetCard(0x7c) and c:IsSpellTrap() and not c:IsCode(tc:GetCode()) and c:IsSSetable()
+	return c:IsSetCard(0x7c) and c:IsActionalTrap() and not c:IsCode(tc:GetCode()) and c:IsSSetable()
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsOnField() and s.setfilter(chkc,tp) end
@@ -59,7 +59,7 @@ function s.setcon2(e,tp,eg,ep,ev,re,r,rp)
 	return re and re:IsActiveType(TYPE_MONSTER) and re:GetHandler():IsSetCard(0x79)
 end
 function s.setfilter3(c,tp)
-	return c:IsSetCard(0x7c) and c:IsSpellTrap() and c:IsSSetable()
+	return c:IsSetCard(0x7c) and c:IsActionalTrap() and c:IsSSetable()
 		and not Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,c:GetCode())
 end
 function s.settg2(e,tp,eg,ep,ev,re,r,rp,chk)

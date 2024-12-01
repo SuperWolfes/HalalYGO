@@ -39,7 +39,7 @@ function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	local mm=s.mmtg(e,tp,eg,ep,ev,re,r,rp,0) --"Mathmech" target
 	local l4=s.l4tg(e,tp,eg,ep,ev,re,r,rp,0) --"Level 4" target
-	local st=s.sttg(e,tp,eg,ep,ev,re,r,rp,0) --"Spell/Trap" target
+	local st=s.sttg(e,tp,eg,ep,ev,re,r,rp,0) --"Actional/Trap" target
 	local ct
 	if st then ct = 4 end
 	if l4 then ct = 3 end
@@ -115,7 +115,7 @@ end
 s.l4tg=s.tg(s.l4filter)
 s.l4op=s.op(s.l4filter)
 function s.stfilter(c)
-	return c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsActionalTrap() and c:IsAbleToHand()
 end
 s.sttg=s.tg(s.stfilter)
 s.stop=s.op(s.stfilter)

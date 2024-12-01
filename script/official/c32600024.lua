@@ -5,7 +5,7 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Upon normal summon, add 1 "Dragonmaid" spell/trap
+	--Upon normal summon, add 1 "Dragonmaid" actional/trap
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,1))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -33,16 +33,16 @@ function s.initial_effect(c)
 end
 	--Part of "Dragonmaid" archetype
 s.listed_series={0x133}
-	--Check for "Dragonmaid" spell/trap
+	--Check for "Dragonmaid" actional/trap
 function s.filter(c)
-	return c:IsSetCard(0x133) and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsSetCard(0x133) and c:IsActionalTrap() and c:IsAbleToHand()
 end
 	--Activation legality
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
-	--Add 1 "Dragonmaid" spell/trap
+	--Add 1 "Dragonmaid" actional/trap
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil)

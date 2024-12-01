@@ -1,5 +1,5 @@
 --氷結界の封魔団
---Spellbreaker of the Ice Barrier
+--Actionalbreaker of the Ice Barrier
 local s,id=GetID()
 function s.initial_effect(c)
 	--act limit
@@ -30,5 +30,5 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	c:RegisterEffect(e1)
 end
 function s.tgval(e,re,rp)
-	return re:IsActiveType(TYPE_SPELL) and re:IsHasType(EFFECT_TYPE_ACTIVATE)
+	return re:IsActiveType(TYPE_ACTIONAL) and re:IsHasType(EFFECT_TYPE_ACTIVATE)
 end

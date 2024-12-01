@@ -3,7 +3,7 @@
 --scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableCounterPermit(COUNTER_SPELL,LOCATION_PZONE+LOCATION_MZONE)
+	c:EnableCounterPermit(COUNTER_ACTIONAL,LOCATION_PZONE+LOCATION_MZONE)
 	c:SetSPSummonOnce(id)
 	Pendulum.AddProcedure(c)
 	--Special Summon itself and from the hand
@@ -58,14 +58,14 @@ function s.initial_effect(c)
 	e6:SetLabelObject(e5)
 	c:RegisterEffect(e6)
 end
-s.counter_place_list={COUNTER_SPELL}
+s.counter_place_list={COUNTER_ACTIONAL}
 s.listed_series={0x12a}
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,COUNTER_SPELL,3,REASON_COST) end 
-		e:GetHandler():RemoveCounter(tp,COUNTER_SPELL,3,REASON_COST)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,COUNTER_ACTIONAL,3,REASON_COST) end 
+		e:GetHandler():RemoveCounter(tp,COUNTER_ACTIONAL,3,REASON_COST)
 end
 function s.cfilter(c,e,tp)
-	return c:IsCanAddCounter(COUNTER_SPELL,1,false,LOCATION_MZONE) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsCanAddCounter(COUNTER_ACTIONAL,1,false,LOCATION_MZONE) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -89,17 +89,17 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.BreakEffect()
 		local ct=g:GetFirst()
 		for ct in aux.Next(g) do
-			ct:AddCounter(COUNTER_SPELL,1)
+			ct:AddCounter(COUNTER_ACTIONAL,1)
 		end
 	end
 end
 function s.acop(e,tp,eg,ep,ev,re,r,rp)
-	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_SPELL) and e:GetHandler():GetFlagEffect(1)>0 then
-		e:GetHandler():AddCounter(COUNTER_SPELL,1)
+	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_ACTIONAL) and e:GetHandler():GetFlagEffect(1)>0 then
+		e:GetHandler():AddCounter(COUNTER_ACTIONAL,1)
 	end
 end
 function s.thfilter(c,e)
-	return c:GetCounter(COUNTER_SPELL)>0 and e:GetHandler():IsCanAddCounter(COUNTER_SPELL,c:GetCounter(COUNTER_SPELL),false,LOCATION_MZONE)
+	return c:GetCounter(COUNTER_ACTIONAL)>0 and e:GetHandler():IsCanAddCounter(COUNTER_ACTIONAL,c:GetCounter(COUNTER_ACTIONAL),false,LOCATION_MZONE)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -121,17 +121,17 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	if oc and oc:IsControler(tp) then tg:RemoveCard(oc) end
 	if #tg==0 then return end
 	local ct=0
-	if tg:IsContains(sc) then ct=sc:GetCounter(COUNTER_SPELL) end
+	if tg:IsContains(sc) then ct=sc:GetCounter(COUNTER_ACTIONAL) end
 	local c=e:GetHandler()
 	if #tg>0 and Duel.SendtoHand(tg,nil,REASON_EFFECT)>0 and ct>0 and tg:IsExists(Card.IsLocation,1,nil,LOCATION_HAND)
 		and c:IsRelateToEffect(e) then
 		Duel.BreakEffect()
-		c:AddCounter(COUNTER_SPELL,ct)
+		c:AddCounter(COUNTER_ACTIONAL,ct)
 	end
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local ct=c:GetCounter(COUNTER_SPELL)
+	local ct=c:GetCounter(COUNTER_ACTIONAL)
 	e:SetLabel(ct)
 end
 function s.srcon(e,tp,eg,ep,ev,re,r,rp)

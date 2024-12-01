@@ -26,7 +26,7 @@ function s.initial_effect(c)
 	e2:SetCondition(s.defcon)
 	e2:SetOperation(s.defop)
 	c:RegisterEffect(e2)
-	--Add 1 spell/trap that specifically lists "The Winged Dragon of Ra" from deck to hand
+	--Add 1 actional/trap that specifically lists "The Winged Dragon of Ra" from deck to hand
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -78,16 +78,16 @@ end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsPreviousLocation(LOCATION_HAND+LOCATION_ONFIELD)
 end
-	--Check for 1 spell/trap that specifically lists "The Winged Dragon of Ra"
+	--Check for 1 actional/trap that specifically lists "The Winged Dragon of Ra"
 function s.thfilter(c)
-	return c:ListsCode(CARD_RA) and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:ListsCode(CARD_RA) and c:IsActionalTrap() and c:IsAbleToHand()
 end
 	--Activation legality
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
-	--Add 1 spell/trap that specifically lists "The Winged Dragon of Ra" from deck to hand
+	--Add 1 actional/trap that specifically lists "The Winged Dragon of Ra" from deck to hand
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_DECK,0,1,1,nil)

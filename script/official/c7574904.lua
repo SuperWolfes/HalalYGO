@@ -34,7 +34,7 @@ function s.initial_effect(c)
 	e3:SetTarget(s.rmtg)
 	e3:SetOperation(s.rmop)
 	c:RegisterEffect(e3)
-	--Add 1 of your banished "Myutant" spells
+	--Add 1 of your banished "Myutant" actionals
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_TOHAND)
@@ -90,9 +90,9 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return c:IsReason(REASON_BATTLE)
 		or (rp==1-tp and c:IsReason(REASON_EFFECT) and c:GetPreviousControler()==tp)
 end
-	--Check for 1 of your face-up banished "Myutant" spells
+	--Check for 1 of your face-up banished "Myutant" actionals
 function s.thfilter(c)
-	return c:IsSetCard(0x159) and c:IsSpell() and c:IsFaceup() and c:IsAbleToHand()
+	return c:IsSetCard(0x159) and c:IsActional() and c:IsFaceup() and c:IsAbleToHand()
 end
 	--Activation legality
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -102,7 +102,7 @@ function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_REMOVED,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,0,LOCATION_REMOVED)
 end
-	--Add 1 of your banished "Myutant" spells to hand
+	--Add 1 of your banished "Myutant" actionals to hand
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) then

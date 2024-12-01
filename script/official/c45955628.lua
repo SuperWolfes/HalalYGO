@@ -4,7 +4,7 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Targeted "Evil Eye" spell/trap cannot be destroyed by opponent's card effects
+	--Targeted "Evil Eye" actional/trap cannot be destroyed by opponent's card effects
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_IGNITION)

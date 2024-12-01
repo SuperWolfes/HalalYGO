@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.target)
 	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
-	--Place 1 "Branded" Continuous Spell/Trap on the field
+	--Place 1 "Branded" Continuous Actional/Trap on the field
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetType(EFFECT_TYPE_QUICK_O)
@@ -64,7 +64,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.tffilter(c,tp)
-	return c:IsSpellTrap() and c:IsType(TYPE_CONTINUOUS) and c:IsSetCard(0x160) and not c:IsUnliked() and c:CheckUniqueOnField(tp)
+	return c:IsActionalTrap() and c:IsType(TYPE_CONTINUOUS) and c:IsSetCard(0x160) and not c:IsUnliked() and c:CheckUniqueOnField(tp)
 end
 function s.tftg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.tffilter(chkc,tp) end

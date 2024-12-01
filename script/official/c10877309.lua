@@ -45,7 +45,7 @@ function s.xfilter(c)
 end
 function s.xcheck(sg,e,tp)
 	return sg:FilterCount(Card.IsMonster,nil)==1
-		and sg:FilterCount(Card.IsSpell,nil)==1
+		and sg:FilterCount(Card.IsActional,nil)==1
 		and sg:FilterCount(Card.IsTrap,nil)==1
 end
 function s.xtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

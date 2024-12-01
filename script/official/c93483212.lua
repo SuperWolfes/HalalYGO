@@ -55,7 +55,7 @@ end
 function s.imop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsFaceup() and c:IsRelateToEffect(e) then
-		--Unaffected by spells/traps
+		--Unaffected by actionals/traps
 		local e1=Effect.CreateEffect(c)
 		e1:SetDescription(3104)
 		e1:SetType(EFFECT_TYPE_SINGLE)
@@ -68,7 +68,7 @@ function s.imop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.imfilter(e,re)
-	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP)
+	return re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

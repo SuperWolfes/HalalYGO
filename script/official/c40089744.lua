@@ -2,8 +2,8 @@
 --Gateway to Chaos
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableCounterPermit(COUNTER_SPELL)
-	c:SetCounterLimit(COUNTER_SPELL,6)
+	c:EnableCounterPermit(COUNTER_ACTIONAL)
+	c:SetCounterLimit(COUNTER_ACTIONAL,6)
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -32,7 +32,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 s.listed_series={0x10cf,0xbd}
-s.counter_place_list={COUNTER_SPELL}
+s.counter_place_list={COUNTER_ACTIONAL}
 function s.filter(c)
 	return ((c:IsSetCard(0x10cf) and c:IsType(TYPE_LOCKED)) or c:IsSetCard(0xbd)) and c:IsMonster() and c:IsAbleToHand()
 end
@@ -55,15 +55,15 @@ end
 function s.acop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=eg:FilterCount(s.cfilter,nil)
 	if ct>0 then
-		e:GetHandler():AddCounter(COUNTER_SPELL,ct,true)
+		e:GetHandler():AddCounter(COUNTER_ACTIONAL,ct,true)
 	end
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,COUNTER_SPELL,3,REASON_COST) end
-	e:GetHandler():RemoveCounter(tp,COUNTER_SPELL,3,REASON_COST)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,COUNTER_ACTIONAL,3,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,COUNTER_ACTIONAL,3,REASON_COST)
 end
 function s.thfilter(c)
-	return c:GetType()==TYPE_SPELL+TYPE_LOCKED and c:IsAbleToHand()
+	return c:GetType()==TYPE_ACTIONAL+TYPE_LOCKED and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

@@ -29,8 +29,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local rg=eg:Filter(s.filter,nil,e)
 	if #rg==0 then return end
 	Duel.ConfirmCards(tp,rg)
-	if not rg:IsExists(Card.IsSpellTrap,1,nil) then return Duel.ShuffleHand(1-tp) end
-	local g=Duel.GetMatchingGroup(Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,nil)
+	if not rg:IsExists(Card.IsActionalTrap,1,nil) then return Duel.ShuffleHand(1-tp) end
+	local g=Duel.GetMatchingGroup(Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,nil)
 	local b1=rg:FilterCount(Card.IsDiscardable,nil,REASON_EFFECT)==#rg
 	local b2=#g>0
 	if not (b1 or b2) then return Duel.ShuffleHand(1-tp) end

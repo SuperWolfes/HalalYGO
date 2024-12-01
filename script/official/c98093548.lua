@@ -19,7 +19,7 @@ local e1=Effect.CreateEffect(c)
 	local e2=e1:Clone()
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e2)
-	--Shuffle 1 "Fire Formation" spell/trap from GY to deck
+	--Shuffle 1 "Fire Formation" actional/trap from GY to deck
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_TODECK+CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -35,7 +35,7 @@ s.listed_names={id}
 s.listed_series={0x7c,0x79}
 
 function s.cfilter(c)
-	return c:IsFaceup() and (c:IsSpell() or c:IsTrap()) and c:IsSetCard(0x7c) and c:IsAbleToRestAsCost()
+	return c:IsFaceup() and (c:IsActional() or c:IsTrap()) and c:IsSetCard(0x7c) and c:IsAbleToRestAsCost()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local nc=Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_SZONE,0,1,nil)
@@ -65,7 +65,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.shfilter(c)
-	return c:IsAbleToDeck() and c:IsSetCard(0x7c) and (c:IsSpell() or c:IsTrap())
+	return c:IsAbleToDeck() and c:IsSetCard(0x7c) and (c:IsActional() or c:IsTrap())
 end
 function s.addfilter(c)
 	return c:IsMonster() and c:IsSetCard(0x79) and c:IsAbleToHand() and c:IsLevelAbove(5)

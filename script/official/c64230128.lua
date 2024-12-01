@@ -30,7 +30,7 @@ function s.initial_effect(c)
 	e3:SetTarget(s.btg)
 	e3:SetOperation(s.bop)
 	c:RegisterEffect(e3)
-	--Search a Field Spell
+	--Search a Field Actional
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -66,12 +66,12 @@ function s.bop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	Duel.Damage(1-tp,eg:GetFirst():GetBattleTarget():GetTextAttack(),REASON_EFFECT)
 end
---Search a Field Spell
+--Search a Field Actional
 function s.thcon(e,tp,eg,ep,ev,re,r,rp) 
 	return Duel.GetFlagEffect(tp,id)>0
 end
 function s.thfilter(c)
-	return c:ListsCode(TOKEN_BRAVE) and c:IsSpell()
+	return c:ListsCode(TOKEN_BRAVE) and c:IsActional()
 		and c:IsType(TYPE_FIELD) and c:IsAbleToHand() and not c:IsCode(id)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)

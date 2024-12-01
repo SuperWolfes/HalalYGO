@@ -44,7 +44,7 @@ end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return not Duel.IsExistingMatchingCard(nil,tp,LOCATION_ONFIELD,0,1,e:GetHandler())
 		and Duel.GetFieldGroupCount(tp,0,LOCATION_MZONE)<=3
-		and Duel.GetMatchingGroupCount(Card.IsType,tp,0,LOCATION_ONFIELD,nil,TYPE_SPELL+TYPE_TRAP)<=3
+		and Duel.GetMatchingGroupCount(Card.IsType,tp,0,LOCATION_ONFIELD,nil,TYPE_ACTIONAL+TYPE_TRAP)<=3
 end
 function s.mvalue(e,fp,rp,r)
 	if r~=LOCATION_REASON_TOFIELD then return 99 end

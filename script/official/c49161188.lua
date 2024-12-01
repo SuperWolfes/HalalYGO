@@ -78,7 +78,7 @@ function s.valcheck(e,c)
 	end
 end
 function s.costfil(c)
-	return c:IsSpell() and c:IsAbleToRemoveAsCost()
+	return c:IsActional() and c:IsAbleToRemoveAsCost()
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfil,tp,LOCATION_REST,0,1,nil) end

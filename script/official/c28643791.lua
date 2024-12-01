@@ -3,7 +3,7 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Targeted "Aesir" monster has its effects negated, also unaffected by spells/traps
+	--Targeted "Aesir" monster has its effects negated, also unaffected by actionals/traps
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
@@ -39,7 +39,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetCode(EFFECT_DISABLE_EFFECT)
 		e2:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 		tc:RegisterEffect(e2)
-		--Unaffected by spells/traps
+		--Unaffected by actionals/traps
 		local e3=Effect.CreateEffect(c)
 		e3:SetDescription(3104)
 		e3:SetProperty(EFFECT_FLAG_CLIENT_HINT)
@@ -51,5 +51,5 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.imfilter(e,re)
-	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP) and re:GetOwner()~=e:GetOwner()
+	return re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) and re:GetOwner()~=e:GetOwner()
 end

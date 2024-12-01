@@ -40,9 +40,9 @@ end
 function s.filter(c,tp)
 	return c:IsAbleToHand() and (c:IsControler(1-tp) or (c:IsSetCard(0x64)))
 end
-	--If a spell/trap card or effect activated
+	--If a actional/trap card or effect activated
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP)
+	return re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP)
 end
 	--Activation legality
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

@@ -3,7 +3,7 @@
 --Scripted by Yuno
 local s,id=GetID()
 function s.initial_effect(c)
-	--Set 1 "Labrynth" Spell/Trap from the hand or deck
+	--Set 1 "Labrynth" Actional/Trap from the hand or deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_QUICK_O)
@@ -29,9 +29,9 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 s.listed_series={0x17f}
---Set 1 "Labrynth" Spell/Trap from the hand or deck
+--Set 1 "Labrynth" Actional/Trap from the hand or deck
 function s.setfilter(c)
-	return c:IsSetCard(0x17f) and c:IsSpellTrap() and c:IsSSetable()
+	return c:IsSetCard(0x17f) and c:IsActionalTrap() and c:IsSSetable()
 end
 function s.setcostfilter(c,tp)
 	return c:IsDiscardable() and Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,c)

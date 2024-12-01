@@ -1,5 +1,5 @@
 --救魔の標
---Guidance of Spell Salvation
+--Guidance of Actional Salvation
 --Scripted by ahtelel
 local s,id=GetID()
 function s.initial_effect(c)

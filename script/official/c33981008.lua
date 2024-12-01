@@ -38,7 +38,7 @@ function s.drcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,nil)
 end
 function s.filter(c)
-	return c:IsSetCard(0x106e) and c:GetCode()~=id and c:IsSpell() and c:IsAbleToDeck()
+	return c:IsSetCard(0x106e) and c:GetCode()~=id and c:IsActional() and c:IsAbleToDeck()
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,1) and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,1,nil) end
@@ -58,7 +58,7 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsReason(REASON_DESTROY) and not e:GetHandler():IsReason(REASON_RULE) and rp==1-tp
 end
 function s.ctfilter(c)
-	return c:IsSetCard(0x106e) and c:IsSpell()
+	return c:IsSetCard(0x106e) and c:IsActional()
 end
 function s.spfilter(c,e,tp,lv)
 	return c:IsRace(RACE_MENTOR) and c:IsLevelBelow(lv) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

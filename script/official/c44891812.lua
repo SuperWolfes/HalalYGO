@@ -30,7 +30,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x9a}
 function s.defcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetMatchingGroupCount(Card.IsType,tp,LOCATION_REST,0,nil,TYPE_SPELL+TYPE_TRAP)==0
+	return Duel.GetMatchingGroupCount(Card.IsType,tp,LOCATION_REST,0,nil,TYPE_ACTIONAL+TYPE_TRAP)==0
 end
 function s.defcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

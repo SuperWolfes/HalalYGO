@@ -24,7 +24,7 @@ function s.filter(c,e,tp,spchk)
 	return c:IsSetCard(0x1115) and c:IsMonster() and c:IsLevel(4) and (c:IsAbleToHand() or (spchk and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)))
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	local spchk=Duel.GetMatchingGroupCount(Card.IsSpell,tp,LOCATION_REST,0,nil)>=3
+	local spchk=Duel.GetMatchingGroupCount(Card.IsActional,tp,LOCATION_REST,0,nil)>=3
 	if chkc then return chkc:IsControler(1-tp) and chkc:IsLocation(LOCATION_REST) and s.filter(c,e,tp,spchk) end
 	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil,spchk) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
@@ -38,7 +38,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsRelateToEffect(e) then
 		aux.ToHandOrElse(tc,tp,
 			function(c)
-				return Duel.GetMatchingGroupCount(Card.IsSpell,tp,LOCATION_REST,0,nil)>=3
+				return Duel.GetMatchingGroupCount(Card.IsActional,tp,LOCATION_REST,0,nil)>=3
 					and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 					and tc:IsCanBeSpecialSummoned(e,0,tp,false,false)
 			end,

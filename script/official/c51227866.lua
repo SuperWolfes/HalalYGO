@@ -3,7 +3,7 @@
 --Scripted by ahtelel
 local s,id=GetID()
 function s.initial_effect(c)
-	--Banish 1 monster from opponent's GY, or if 3+ spells in your GY, special summon it
+	--Banish 1 monster from opponent's GY, or if 3+ actionals in your GY, special summon it
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_REMOVE+CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -27,7 +27,7 @@ function s.filter(c,e,tp,spchk)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local spchk=false
-	if Duel.GetMatchingGroupCount(Card.IsSpell,tp,LOCATION_REST,0,nil)>=3 then
+	if Duel.GetMatchingGroupCount(Card.IsActional,tp,LOCATION_REST,0,nil)>=3 then
 		spchk=true
 	end
 	if chkc then return chkc:IsControler(1-tp) and chkc:IsLocation(LOCATION_REST) and s.filter(c,e,tp,spchk) end
@@ -41,7 +41,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) then
-		if Duel.GetMatchingGroupCount(Card.IsSpell,tp,LOCATION_REST,0,nil)>=3
+		if Duel.GetMatchingGroupCount(Card.IsActional,tp,LOCATION_REST,0,nil)>=3
 			and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and tc:IsCanBeSpecialSummoned(e,0,tp,false,false)
 			and (not tc:IsAbleToRemove() or Duel.SelectYesNo(tp,aux.Stringid(id,0))) then
 			Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)

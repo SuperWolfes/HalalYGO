@@ -2,7 +2,7 @@
 --Dreiath III, the True Dracocavalry General
 local s,id=GetID()
 function s.initial_effect(c)
-	--Tribute using Continuous Spell/Traps
+	--Tribute using Continuous Actional/Traps
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)

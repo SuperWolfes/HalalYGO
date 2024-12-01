@@ -60,7 +60,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if op==0 then
 		e:SetLabel(TYPE_MONSTER)
 	elseif op==1 then
-		e:SetLabel(TYPE_SPELL)
+		e:SetLabel(TYPE_ACTIONAL)
 	else
 		e:SetLabel(TYPE_TRAP)
 	end

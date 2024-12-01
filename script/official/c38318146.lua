@@ -30,10 +30,10 @@ function s.accon(e)
 	return true
 end
 function s.acfilter(c)
-	return c:IsSpell() and c:IsAbleToRestAsCost()
+	return c:IsActional() and c:IsAbleToRestAsCost()
 end
 function s.actarget(e,te,tp)
-	return te:IsActiveType(TYPE_SPELL) and te:IsHasType(EFFECT_TYPE_ACTIVATE)
+	return te:IsActiveType(TYPE_ACTIONAL) and te:IsHasType(EFFECT_TYPE_ACTIVATE)
 end
 function s.accost(e,te,tp)
 	return Duel.IsExistingMatchingCard(s.acfilter,tp,LOCATION_DECK,0,1,nil)

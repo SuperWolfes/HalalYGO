@@ -17,7 +17,7 @@ end
 s.listed_series={0x153,0x154,0x155,0x156}
 
 function s.thfilter(c,add)
-	local c1=(c:IsSetCard(0x155) or c:IsSetCard(0x156)) and c:IsSpellTrap()
+	local c1=(c:IsSetCard(0x155) or c:IsSetCard(0x156)) and c:IsActionalTrap()
 	local c2=c:IsSetCard(0x155) and c:IsMonster()
 	return (c1 or (add and c2)) and c:IsAbleToHand()
 end

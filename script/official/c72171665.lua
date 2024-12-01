@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	local e2=e1:Clone()
 	e2:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
 	c:RegisterEffect(e2)
-	--Send 1 face-up Continuous Spell/Trap to the GY to draw 1 card
+	--Send 1 face-up Continuous Actional/Trap to the GY to draw 1 card
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_DRAW)
@@ -31,7 +31,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.indesfil(c)
-	return c:IsFaceup() and c:IsType(TYPE_CONTINUOUS) and c:IsSpellTrap()
+	return c:IsFaceup() and c:IsType(TYPE_CONTINUOUS) and c:IsActionalTrap()
 end
 function s.incon(e)
 	return Duel.IsExistingMatchingCard(s.indesfil,e:GetHandlerPlayer(),LOCATION_ONFIELD,0,1,nil)
@@ -40,7 +40,7 @@ function s.drcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsTurnPlayer(1-tp)
 end
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_CONTINUOUS) and c:IsSpellTrap() and c:IsAbleToRestAsCost()
+	return c:IsFaceup() and c:IsType(TYPE_CONTINUOUS) and c:IsActionalTrap() and c:IsAbleToRestAsCost()
 end
 function s.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,0,1,nil) end

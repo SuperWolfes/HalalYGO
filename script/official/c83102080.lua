@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c,ec)
-	return c:IsSpellTrap() and c:IsAbleToRestAsCost()
+	return c:IsActionalTrap() and c:IsAbleToRestAsCost()
 		and Duel.IsExistingTarget(s.tgfilter,0,LOCATION_ONFIELD,LOCATION_ONFIELD,1,ec,c)
 end
 function s.tgfilter(c,tc)

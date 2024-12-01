@@ -2,7 +2,7 @@
 --Ancient Warriors - Graceful Zhou Gong
 local s,id=GetID()
 function s.initial_effect(c)
-	--Add 1 "Ancient Warriors" Spell/Trap from Deck to your hand
+	--Add 1 "Ancient Warriors" Actional/Trap from Deck to your hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOREST+CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -34,7 +34,7 @@ function s.gvfilter(c)
 	return c:IsFaceup() and c:IsType(TYPE_CONTINUOUS) and c:IsAbleToRest()
 end
 function s.thfilter(c)
-	return c:IsSetCard(0x137) and c:IsAbleToHand() and c:IsSpellTrap()
+	return c:IsSetCard(0x137) and c:IsAbleToHand() and c:IsActionalTrap()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chkc then return chkc:IsOnField() and chkc:IsControler(tp) and s.gvfilter(chkc) end

@@ -41,7 +41,7 @@ function s.spcost(e,c,tp,st)
 	return Duel.IsExistingMatchingCard(Card.IsSetCard,tp,LOCATION_REST,0,1,nil,0xfe)
 end
 function s.setfilter(c)
-	return c:IsSetCard(0xfe) and c:IsType(TYPE_TRAP+TYPE_SPELL) and c:IsSSetable()
+	return c:IsSetCard(0xfe) and c:IsType(TYPE_TRAP+TYPE_ACTIONAL) and c:IsSSetable()
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_DECK,0,1,1,nil) 

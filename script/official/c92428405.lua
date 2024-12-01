@@ -87,7 +87,7 @@ function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SendtoDeck(tc,nil,2,REASON_EFFECT)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
-	return rp==1-tp and re:IsActiveType(TYPE_SPELL)
+	return rp==1-tp and re:IsActiveType(TYPE_ACTIONAL)
 end
 function s.spcfilter(c,e,tp)
 	return c:IsFaceup() and c:IsCode(13331639) and c:IsAbleToRemoveAsCost()

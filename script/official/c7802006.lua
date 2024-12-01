@@ -10,14 +10,14 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 end
-s.counter_list={COUNTER_SPELL}
+s.counter_list={COUNTER_ACTIONAL}
 function s.filter(c)
-	return c:IsFaceup() and c:IsCanAddCounter(COUNTER_SPELL,1)
+	return c:IsFaceup() and c:IsCanAddCounter(COUNTER_ACTIONAL,1)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil)
 	local tc=g:GetFirst()
 	for tc in aux.Next(g) do 
-		tc:AddCounter(COUNTER_SPELL,1)
+		tc:AddCounter(COUNTER_ACTIONAL,1)
 	end
 end

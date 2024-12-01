@@ -3,7 +3,7 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send 1 "Illusion Knights" spell/trap from deck to GY
+	--Send 1 "Illusion Knights" actional/trap from deck to GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TOREST)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
-	--Gains 300 DEF for each "Illusion Knights" spell/trap in your GY
+	--Gains 300 DEF for each "Illusion Knights" actional/trap in your GY
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -36,7 +36,7 @@ end
 s.listed_series={0xdb}
 
 function s.tgfilter(c)
-	return c:IsSetCard(0xdb) and c:IsSpellTrap() and c:IsAbleToRest()
+	return c:IsSetCard(0xdb) and c:IsActionalTrap() and c:IsAbleToRest()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -82,7 +82,7 @@ function s.defcon(e)
 	return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+1
 end
 function s.filter(c)
-	return c:IsSetCard(0xdb) and c:IsSpellTrap()
+	return c:IsSetCard(0xdb) and c:IsActionalTrap()
 end
 function s.defval(e,c)
 	return Duel.GetMatchingGroupCount(s.filter,c:GetControler(),LOCATION_REST,0,nil)*300

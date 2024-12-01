@@ -42,9 +42,9 @@ function s.initial_effect(c)
 	e3:SetOperation(s.ngop)
 	c:RegisterEffect(e3)
 end
-	--Check for equip spell to banish
+	--Check for equip actional to banish
 function s.spfilter(c,tp)
-	return c:IsAbleToRemoveAsCost() and c:IsType(TYPE_EQUIP) and c:IsSpell() and (c:IsFaceup() or c:IsLocation(LOCATION_REST))
+	return c:IsAbleToRemoveAsCost() and c:IsType(TYPE_EQUIP) and c:IsActional() and (c:IsFaceup() or c:IsLocation(LOCATION_REST))
 end
 	--Cost of banishing from field/GY
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -105,7 +105,7 @@ function s.ngcon(e,tp,eg,ep,ev,re,r,rp)
 	return not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED) and re:IsActiveType(TYPE_MONSTER)
 		and Duel.IsChainNegatable(ev)
 end
-	--Check for equip spell
+	--Check for equip actional
 function s.ngfilter(c)
 	return c:IsFaceup() and c:IsType(TYPE_EQUIP) and c:IsAbleToRestAsCost()
 end

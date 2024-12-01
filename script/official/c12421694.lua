@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.natg)
 	e1:SetOperation(s.naop)
 	c:RegisterEffect(e1)
-	--Gain 100 LP each time you activate a "Sky Striker" spell card or effect
+	--Gain 100 LP each time you activate a "Sky Striker" actional card or effect
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EVENT_CHAINING)
@@ -65,7 +65,7 @@ function s.lpcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.lpop(e,tp,eg,ep,ev,re,r,rp)
 	local c=re:GetHandler()
-	if re:IsActiveType(TYPE_SPELL) and rp==tp and c:IsSetCard(0x115) then
+	if re:IsActiveType(TYPE_ACTIONAL) and rp==tp and c:IsSetCard(0x115) then
 		Duel.Hint(HINT_CARD,0,id)
 		Duel.Recover(tp,100,REASON_EFFECT)
 	end

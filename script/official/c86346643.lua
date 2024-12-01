@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.tdtg1)
 	e2:SetOperation(s.tdop1)
 	c:RegisterEffect(e2)
-	--send spell/trap to deck
+	--send actional/trap to deck
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetType(EFFECT_TYPE_IGNITION)
@@ -66,7 +66,7 @@ function s.tdop1(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
 end
 function s.cfilter2(c)
-	return c:IsSpellTrap() and c:IsAbleToRestAsCost()
+	return c:IsActionalTrap() and c:IsAbleToRestAsCost()
 end
 function s.tdcost2(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter2,tp,LOCATION_ONFIELD,0,1,nil) end
@@ -76,7 +76,7 @@ function s.tdcost2(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SendtoRest(g,REASON_COST)
 end
 function s.filter2(c)
-	return c:IsSpellTrap() and c:IsAbleToDeck()
+	return c:IsActionalTrap() and c:IsAbleToDeck()
 end
 function s.tdtg2(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter2,tp,0,LOCATION_ONFIELD,1,nil) end

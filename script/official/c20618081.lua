@@ -26,7 +26,7 @@ end
 s.listed_series={0x119}
 s.listed_names={}
 function s.setfilter(c)
-	return c:IsType(TYPE_TRAP+TYPE_SPELL) and c:IsSetCard(0x119) and c:IsSSetable()
+	return c:IsType(TYPE_TRAP+TYPE_ACTIONAL) and c:IsSetCard(0x119) and c:IsSSetable()
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.setfilter(chkc) end

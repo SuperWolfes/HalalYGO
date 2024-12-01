@@ -39,7 +39,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			Duel.SpecialSummonStep(tc2,0,1-tp,1-tp,false,false,POS_FACEUP)
 		end
 		Duel.SpecialSummonComplete()
-	elseif tc1:IsSpell() and tc2:IsSpell()
+	elseif tc1:IsActional() and tc2:IsActional()
 		and Duel.IsPlayerCanDraw(tp,2) and Duel.IsPlayerCanDraw(1-tp,2) then
 		Duel.Draw(tp,2,REASON_EFFECT)
 		Duel.Draw(1-tp,2,REASON_EFFECT)

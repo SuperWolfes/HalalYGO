@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-	--Can treat "The Weather" cards in your Spell/Trap Zones as Link Material
+	--Can treat "The Weather" cards in your Actional/Trap Zones as Link Material
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_EXTRA_MATERIAL)
@@ -43,7 +43,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x109}
 function s.plfilter(c,tp)
-	return c:IsType(TYPE_SPELL|TYPE_TRAP) and c:IsSetCard(0x109) and not c:IsUnliked() and c:CheckUniqueOnField(tp)
+	return c:IsType(TYPE_ACTIONAL|TYPE_TRAP) and c:IsSetCard(0x109) and not c:IsUnliked() and c:CheckUniqueOnField(tp)
 		and not c:IsType(TYPE_FIELD)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)

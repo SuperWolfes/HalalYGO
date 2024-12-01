@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.hsptg)
 	e1:SetOperation(s.hspop)
 	c:RegisterEffect(e1)
-	--Destroy 1 Spell/Trap
+	--Destroy 1 Actional/Trap
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_DESTROY)
@@ -64,7 +64,7 @@ function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Release(g,REASON_COST)
 end
 function s.desfilter(c,e)
-	return c:IsSpellTrap() and (not e or c:IsCanBeEffectTarget(e))
+	return c:IsActionalTrap() and (not e or c:IsCanBeEffectTarget(e))
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and chkc:IsControler(1-tp) and s.desfilter(chkc) end

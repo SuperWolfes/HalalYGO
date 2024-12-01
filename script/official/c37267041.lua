@@ -30,11 +30,11 @@ s.listed_names={74388798}
 s.LVnum=7
 s.LVset=0xe7
 function s.distg(e,c)
-	return c:IsSpell()
+	return c:IsActional()
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	local tl=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_LOCATION)
-	if (tl&LOCATION_SZONE)~=0 and re:IsActiveType(TYPE_SPELL) then
+	if (tl&LOCATION_SZONE)~=0 and re:IsActiveType(TYPE_ACTIONAL) then
 		Duel.NegateEffect(ev)
 	end
 end

@@ -35,9 +35,9 @@ function s.cpcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckLPCost(tp,1000) end
 	Duel.PayLPCost(tp,1000)
 end
-	--Check for "Darklord" spell/trap
+	--Check for "Darklord" actional/trap
 function s.cpfilter(c)
-	return c:IsSetCard(0xef) and c:IsSpellTrap() and c:IsAbleToDeck() and c:CheckActivateEffect(false,true,false)~=nil
+	return c:IsSetCard(0xef) and c:IsActionalTrap() and c:IsAbleToDeck() and c:CheckActivateEffect(false,true,false)~=nil
 end
 	--Activation legality
 function s.cptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

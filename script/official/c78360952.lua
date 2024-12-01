@@ -5,11 +5,11 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Set this card into S/T zones as a Spell
+	--Set this card into S/T zones as a Actional
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_MONSTER_SSET)
-	e1:SetValue(TYPE_SPELL)
+	e1:SetValue(TYPE_ACTIONAL)
 	c:RegisterEffect(e1)
 	--Special Summon itself from GY
 	local e2=Effect.CreateEffect(c)

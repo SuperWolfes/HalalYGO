@@ -27,7 +27,7 @@ function s.otfilter(c,tp)
 	return c:IsSetCard(0x35) and (c:IsControler(tp) or c:IsFaceup())
 end
 function s.chcon1(e,tp,eg,ep,ev,re,r,rp)
-	return ep~=tp and re:GetHandler():GetType()==TYPE_SPELL and re:IsHasType(EFFECT_TYPE_ACTIVATE)
+	return ep~=tp and re:GetHandler():GetType()==TYPE_ACTIONAL and re:IsHasType(EFFECT_TYPE_ACTIVATE)
 end
 function s.chop1(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1)

@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return re:GetActiveType()==TYPE_SPELL and re:IsHasType(EFFECT_TYPE_ACTIVATE) and rp==tp
+	return re:GetActiveType()==TYPE_ACTIONAL and re:IsHasType(EFFECT_TYPE_ACTIVATE) and rp==tp
 end
 function s.cfilter(c)
 	return c:IsDiscardable() and c:IsAbleToRestAsCost()

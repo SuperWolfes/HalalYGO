@@ -44,7 +44,7 @@ function s.arcanareg(c,coin)
 end
 function s.speop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if not re:IsActiveType(TYPE_SPELL) or not re:IsHasType(EFFECT_TYPE_ACTIVATE) then return end
+	if not re:IsActiveType(TYPE_ACTIONAL) or not re:IsHasType(EFFECT_TYPE_ACTIVATE) then return end
 	local val=c:GetFlagEffectLabel(36690018)
 	if val==1 then
 		local e1=Effect.CreateEffect(c)

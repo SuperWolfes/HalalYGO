@@ -24,7 +24,7 @@ function s.tdcost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.filter(c)
 	local tpe=c:GetType()
-	return (tpe&TYPE_SPELL)~=0 and (tpe&TYPE_CONTINUOUS+TYPE_FIELD)~=0 and c:IsAbleToDeck()
+	return (tpe&TYPE_ACTIONAL)~=0 and (tpe&TYPE_CONTINUOUS+TYPE_FIELD)~=0 and c:IsAbleToDeck()
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and s.filter(chkc) end

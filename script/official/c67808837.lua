@@ -72,7 +72,7 @@ function s.indescon(e)
 	return e:GetHandler():IsAttackPos()
 end
 function s.indesval(e,re,rp)
-	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP)
+	return re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.atkcon(e)
 	local ph=Duel.GetCurrentPhase()

@@ -41,10 +41,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function s.spfilter(c)
-	return c:IsFaceup() and c:GetType()==TYPE_SPELL+TYPE_CONTINUOUS and c:IsAbleToRestAsCost()
+	return c:IsFaceup() and c:GetType()==TYPE_ACTIONAL+TYPE_CONTINUOUS and c:IsAbleToRestAsCost()
 end
 function s.exfilter(c)
-	return s.spfilter(c) or (c:IsFacedown() and c:IsSpell() and c:IsAbleToRestAsCost())
+	return s.spfilter(c) or (c:IsFacedown() and c:IsActional() and c:IsAbleToRestAsCost())
 end
 function s.spcon(e,c)
 	if c==nil then return true end

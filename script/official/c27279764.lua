@@ -55,7 +55,7 @@ function s.immcon(e)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_NORMAL)
 end
 function s.efilter(e,te)
-	if te:IsActiveType(TYPE_SPELL+TYPE_TRAP) then return true
+	if te:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) then return true
 	else return aux.qlifilter(e,te) end
 end
 function s.adtg(e,c)

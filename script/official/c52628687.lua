@@ -1,5 +1,5 @@
 --ネクロの魔導書
---Spellbook of Life
+--Actionalbook of Life
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -24,7 +24,7 @@ function s.cfilter(c,e,tp)
 		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,0,1,c,e,tp)
 end
 function s.cffilter(c)
-	return c:IsSetCard(0x106e) and c:IsSpell() and not c:IsPublic()
+	return c:IsSetCard(0x106e) and c:IsActional() and not c:IsPublic()
 end
 function s.spfilter(c,e,tp)
 	return c:IsRace(RACE_MENTOR) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

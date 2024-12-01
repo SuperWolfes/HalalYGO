@@ -87,7 +87,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.chainop(e,tp,eg,ep,ev,re,r,rp)
-	if re:IsActiveType(TYPE_SPELL+TYPE_TRAP) and ep==tp then
+	if re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) and ep==tp then
 		Duel.SetChainLimit(s.chainlm)
 	end
 end
@@ -95,7 +95,7 @@ function s.chainlm(e,rp,tp)
 	return tp==rp
 end
 function s.indtg(e,c)
-	return c:IsSpellTrap()
+	return c:IsActionalTrap()
 end
 function s.efilter(e,re)
 	return e:GetOwnerPlayer()~=re:GetOwnerPlayer()

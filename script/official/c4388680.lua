@@ -59,7 +59,7 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return c:IsPreviousLocation(LOCATION_MZONE) and c:IsSummonType(SUMMON_TYPE_LOCKED)
 end
 function s.thfilter(c)
-	return c:GetType()==TYPE_LOCKED+TYPE_SPELL and c:IsAbleToHand()
+	return c:GetType()==TYPE_LOCKED+TYPE_ACTIONAL and c:IsAbleToHand()
 end
 function s.tgfilter(c)
 	return c:IsMonster() and c:IsSetCard(0x106) and c:IsAbleToRest()

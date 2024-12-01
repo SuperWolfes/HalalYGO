@@ -26,7 +26,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_REMOVE,nil,1,tp,LOCATION_REST)
 end
 function s.rmfilter(c)
-	return c:IsSpell() and c:IsAbleToRemove(POS_FACEDOWN)
+	return c:IsActional() and c:IsAbleToRemove(POS_FACEDOWN)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local rg=Group.CreateGroup()

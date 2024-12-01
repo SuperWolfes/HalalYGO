@@ -23,7 +23,7 @@ function s.filter1(c)
 	return c:IsSetCard(0x7c) and c:IsTrap() and c:IsSSetable()
 end
 function s.filter2(c)
-	return c:IsSetCard(0x7c) and c:IsSpell() and c:IsSSetable()
+	return c:IsSetCard(0x7c) and c:IsActional() and c:IsSSetable()
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter1,tp,LOCATION_DECK,0,1,nil) end

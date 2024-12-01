@@ -78,7 +78,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	return true
 end
 function s.cfilter(c)
-	return c:IsSpell() and c:IsType(TYPE_EQUIP) and c:IsAbleToRestAsCost()
+	return c:IsActional() and c:IsType(TYPE_EQUIP) and c:IsAbleToRestAsCost()
 end
 function s.spfilter(c,e,tp,lv)
 	return c:IsRace(RACE_WARRIOR) and c:IsLevelBelow(lv) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

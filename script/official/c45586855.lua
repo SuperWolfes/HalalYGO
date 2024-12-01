@@ -21,7 +21,7 @@ function s.cfilter(c)
 	return c:IsFaceup() and c:IsType(TYPE_TUNER)
 end
 function s.rfilter(c)
-	return c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ct=Duel.GetMatchingGroupCount(s.cfilter,tp,LOCATION_MZONE,LOCATION_MZONE,nil)

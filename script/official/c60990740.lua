@@ -31,11 +31,11 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeck(tp,1)
 		and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and Duel.CanPlayerSetSpellTrap(tp)
+		and Duel.CanPlayerSetActionalTrap(tp)
 	end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	if not Duel.IsPlayerCanDiscardDeck(tp,1) or not Duel.CanPlayerSetSpellTrap(tp) then return end
+	if not Duel.IsPlayerCanDiscardDeck(tp,1) or not Duel.CanPlayerSetActionalTrap(tp) then return end
 	Duel.ConfirmDecktop(tp,1)
 	local tc=Duel.GetDecktopGroup(tp,1):GetFirst()
 	Duel.DisableShuffleCheck()

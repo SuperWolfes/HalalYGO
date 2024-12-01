@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e3:SetTarget(s.mthtg)
 	e3:SetOperation(s.mthop)
 	c:RegisterEffect(e3)
-	-- Search Equip Spell that lists "Brave Token"
+	-- Search Equip Actional that lists "Brave Token"
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_EQUIP)

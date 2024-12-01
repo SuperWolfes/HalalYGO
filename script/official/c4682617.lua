@@ -18,7 +18,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x20ec,0x10ec}
 function s.chainfilter(re,tp,cid)
-	return not (re:IsActiveType(TYPE_SPELL) and re:GetHandler():IsSetCard(0x20ec))
+	return not (re:IsActiveType(TYPE_ACTIONAL) and re:GetHandler():IsSetCard(0x20ec))
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCustomActivityCount(id,tp,ACTIVITY_CHAIN)>0
@@ -30,7 +30,7 @@ function s.spfilter(c,e,tp)
 	return c:IsSetCard(0x10ec) and c:IsType(TYPE_PENDULUM) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.ctfilter(c)
-	return c:IsSpell() and c:IsSetCard(0x20ec)
+	return c:IsActional() and c:IsSetCard(0x20ec)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.ctfilter,tp,LOCATION_REST,0,1,nil) and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_EXTRA,0,1,nil) end

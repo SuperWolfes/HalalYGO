@@ -19,7 +19,7 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 		and e:GetHandler():IsPreviousPosition(POS_FACEDOWN)
 end
 function s.filter(c)
-	return c:IsSpell() and c:IsType(TYPE_FIELD+TYPE_CONTINUOUS) and c:IsAbleToHand()
+	return c:IsActional() and c:IsType(TYPE_FIELD+TYPE_CONTINUOUS) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter(chkc) end

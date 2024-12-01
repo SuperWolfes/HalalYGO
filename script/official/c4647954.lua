@@ -67,16 +67,16 @@ end
 function s.xyzcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_XYZ)
 end
-	--Check for "Rank-Up-Magic" normal spell
+	--Check for "Rank-Up-Magic" normal actional
 function s.filter(c)
-	return c:IsSetCard(0x95) and c:GetType()==TYPE_SPELL and c:IsAbleToHand()
+	return c:IsSetCard(0x95) and c:GetType()==TYPE_ACTIONAL and c:IsAbleToHand()
 end
 	--Activation legality
 function s.xyztg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
-	--Add 1 "Rank-Up-Magic" normal spell from deck
+	--Add 1 "Rank-Up-Magic" normal actional from deck
 function s.xyzop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil)

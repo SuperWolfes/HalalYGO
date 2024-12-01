@@ -98,6 +98,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.testtype(op,c)
 	return (op==0 and c:IsOriginalType(TYPE_MONSTER))
-		or (op==1 and c:IsOriginalType(TYPE_SPELL))
+		or (op==1 and c:IsOriginalType(TYPE_ACTIONAL))
 		or (op==2 and c:IsOriginalType(TYPE_TRAP))
 end

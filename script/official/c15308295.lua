@@ -34,7 +34,7 @@ function s.initial_effect(c)
 	e4:SetTarget(s.cttg2)
 	e4:SetOperation(s.ctop2)
 	c:RegisterEffect(e4)
-	--Destroy Spell/Trap
+	--Destroy Actional/Trap
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(id,2))
 	e5:SetCategory(CATEGORY_DESTROY)
@@ -85,7 +85,7 @@ function s.ctop2(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.desfilter(c)
-	return c:IsFacedown() and c:IsSpell() and c:IsSetCard(0x20ec)
+	return c:IsFacedown() and c:IsActional() and c:IsSetCard(0x20ec)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

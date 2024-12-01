@@ -32,14 +32,14 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.cfilter(c)
-	return c:IsSpell() and c:IsDiscardable()
+	return c:IsActional() and c:IsDiscardable()
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end
 	Duel.DiscardHand(tp,s.cfilter,1,1,REASON_COST+REASON_DISCARD)
 end
 function s.thfilter(c)
-	return ((c:IsMonster() and c:IsAttribute(ATTRIBUTE_LIGHT)) or c:IsSpell())
+	return ((c:IsMonster() and c:IsAttribute(ATTRIBUTE_LIGHT)) or c:IsActional())
 		and c:IsType(TYPE_LOCKED) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -61,7 +61,7 @@ function s.spfilter(c,e,tp)
 		and Duel.IsExistingMatchingCard(s.cfilter2,tp,LOCATION_REST,0,lv,nil)
 end
 function s.cfilter2(c)
-	return c:IsSpell() and c:IsAbleToDeckAsCost()
+	return c:IsActional() and c:IsAbleToDeckAsCost()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(100)

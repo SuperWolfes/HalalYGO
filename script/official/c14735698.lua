@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	--Activate
 	local e1=Locked.AddProcEqual{handler=c,filter=s.lockedfil,extrafil=s.extrafil,extratg=s.extratg}
 	e1:SetCountLimit(1,id)
-	--Search 1 "Nekroz" Spell
+	--Search 1 "Nekroz" Actional
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND)
@@ -48,7 +48,7 @@ function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.thfilter(c)
-	return c:IsSetCard(0xb4) and c:IsSpell() and c:IsAbleToHand()
+	return c:IsSetCard(0xb4) and c:IsActional() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

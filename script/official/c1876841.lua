@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Search 1 "Morphtronic" Spell/Trap, then return 1 card to the Deck
+	--Search 1 "Morphtronic" Actional/Trap, then return 1 card to the Deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND+CATEGORY_TODECK)
@@ -64,7 +64,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	g:DeleteGroup()
 end
 function s.thdfilter(c)
-	return c:IsSetCard(0x26) and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsSetCard(0x26) and c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.target_a(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thdfilter,tp,LOCATION_DECK,0,1,nil) end

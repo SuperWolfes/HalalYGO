@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Add 1 "Souten" Spell from Deck to the hand
+	--Add 1 "Souten" Actional from Deck to the hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DESTROY+CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -34,7 +34,7 @@ function s.desfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0x14e)
 end
 function s.thfilter(c)
-	return c:IsSetCard(0x14e) and c:IsSpell() and c:IsAbleToHand()
+	return c:IsSetCard(0x14e) and c:IsActional() and c:IsAbleToHand()
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and chkc:IsControler(tp) and s.desfilter(chkc) end

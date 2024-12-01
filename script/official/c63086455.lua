@@ -20,7 +20,7 @@ function s.tgfilter(c,e)
 	return c:IsAbleToRest() and c:IsCanBeEffectTarget(e)
 end
 function s.setfilter(c,e,tp)
-	return c:IsCanBeEffectTarget(e) and ((c:IsSpellTrap() and c:IsSSetable(true))
+	return c:IsCanBeEffectTarget(e) and ((c:IsActionalTrap() and c:IsSSetable(true))
 		or c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEDOWN_DEFENSE,1-tp))
 end
 function s.rescon(sg,e,tp)
@@ -28,7 +28,7 @@ function s.rescon(sg,e,tp)
 	if #g1~=1 or #g2~=1 then return end
 	local c1,c2=g1:GetFirst(),g2:GetFirst()
 	if c2:IsMonster() then return Duel.GetMZoneCount(1-tp,c1)>0 end
-	return (c2:IsSpell() and c2:IsType(TYPE_FIELD))
+	return (c2:IsActional() and c2:IsType(TYPE_FIELD))
 		or Duel.GetLocationCount(1-tp,LOCATION_SZONE)>0
 		or (c1:IsLocation(LOCATION_SZONE) and c1:GetSequence()<5 --[[and check if exc's zone is not disabled]])
 end
@@ -60,7 +60,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 		if sc:IsMonster() and Duel.GetLocationCount(1-tp,LOCATION_MZONE)>0
 			and Duel.SpecialSummon(sc,0,tp,1-tp,false,false,POS_FACEDOWN_DEFENSE)>0 then
 			Duel.ConfirmCards(1-tp,sc)
-		elseif sc:IsType(TYPE_SPELL+TYPE_TRAP) and sc:IsSSetable() then
+		elseif sc:IsType(TYPE_ACTIONAL+TYPE_TRAP) and sc:IsSSetable() then
 			Duel.SSet(tp,sc,1-tp)
 		end
 	end

@@ -11,7 +11,7 @@ end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsPreviousLocation(LOCATION_ONFIELD) and c:IsReason(REASON_EFFECT)
-		and re:GetActiveType()==TYPE_CONTINUOUS+TYPE_SPELL then
+		and re:GetActiveType()==TYPE_CONTINUOUS+TYPE_ACTIONAL then
 		local e1=Effect.CreateEffect(c)
 		e1:SetDescription(aux.Stringid(id,0))
 		e1:SetCategory(CATEGORY_SPECIAL_SUMMON)

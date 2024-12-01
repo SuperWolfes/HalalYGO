@@ -30,7 +30,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x7c}
 function s.tgfilter(c,tp)
-	return c:IsControler(tp) and c:IsSetCard(0x7c) and c:IsSpellTrap()
+	return c:IsControler(tp) and c:IsSetCard(0x7c) and c:IsActionalTrap()
 end
 function s.setcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.tgfilter,1,nil,tp)
@@ -54,7 +54,7 @@ function s.drcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)==1
 end
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x7c) and c:IsSpellTrap() and c:IsAbleToRestAsCost()
+	return c:IsFaceup() and c:IsSetCard(0x7c) and c:IsActionalTrap() and c:IsAbleToRestAsCost()
 end
 function s.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local nc=Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,0,2,nil)

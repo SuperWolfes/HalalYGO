@@ -48,9 +48,9 @@ end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil) and not e:GetHandler():IsStatus(STATUS_CHAINING)
 end
-	--Check for "Mayakashi" spell/trap, except itself
+	--Check for "Mayakashi" actional/trap, except itself
 function s.setfilter(c)
-	return c:IsSetCard(0x121) and c:IsType(TYPE_TRAP+TYPE_SPELL) and c:IsSSetable() and not c:IsCode(id)
+	return c:IsSetCard(0x121) and c:IsType(TYPE_TRAP+TYPE_ACTIONAL) and c:IsSSetable() and not c:IsCode(id)
 end
 	--Activation legality
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -92,7 +92,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if opval[op]==1 then --Draw 1 card
 		Duel.Draw(tp,1,REASON_EFFECT)
 		Duel.RegisterFlagEffect(tp,id,RESET_PHASE+PHASE_END,0,1)
-	elseif opval[op]==2 then --Set 1 "Mayakashi" spell/trap from deck
+	elseif opval[op]==2 then --Set 1 "Mayakashi" actional/trap from deck
 		local g=Duel.GetMatchingGroup(s.setfilter,tp,LOCATION_DECK,0,nil)
 		if #g>0 then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)

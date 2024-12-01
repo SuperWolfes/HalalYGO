@@ -37,7 +37,7 @@ end
 s.listed_series={0x4}
 s.listed_names={id}
 function s.filter(c)
-	return c:IsSetCard(0x4) and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsSetCard(0x4) and c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end

@@ -5,7 +5,7 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Tribute 1 of your LIGHT monsters, set 1 "Starry Knight" spell/trap from Deck
+	--Tribute 1 of your LIGHT monsters, set 1 "Starry Knight" actional/trap from Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_RELEASE)
@@ -38,9 +38,9 @@ s.listed_series={0x15b}
 function s.releasefilter(c)
 	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsReleasableByEffect()
 end
-	--Check for "Starry Knight" spell/trap
+	--Check for "Starry Knight" actional/trap
 function s.setfilter(c)
-	return c:IsSetCard(0x15b) and c:IsSpellTrap() and c:IsSSetable()
+	return c:IsSetCard(0x15b) and c:IsActionalTrap() and c:IsSSetable()
 end
 	--Activation legality
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -51,7 +51,7 @@ function s.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local g=Duel.SelectTarget(tp,s.releasefilter,tp,LOCATION_MZONE,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_RELEASE,g,1,0,0)
 end
-	--Set 1 "Starry Knight" spell/trap from Deck
+	--Set 1 "Starry Knight" actional/trap from Deck
 function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) and Duel.Release(tc,REASON_EFFECT)>0 then

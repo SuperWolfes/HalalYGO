@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.destg)
 	e1:SetOperation(s.desop)
 	c:RegisterEffect(e1)
-	--Equip 1 "Bamboo Sword" Equip Spell from your Deck to a face-up monster on the field
+	--Equip 1 "Bamboo Sword" Equip Actional from your Deck to a face-up monster on the field
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_EQUIP)

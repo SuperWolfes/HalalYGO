@@ -20,7 +20,7 @@ function s.repop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local rc=re:GetHandler()
-	return ep~=tp and rc:GetType()==TYPE_SPELL and re:IsHasType(EFFECT_TYPE_ACTIVATE)
+	return ep~=tp and rc:GetType()==TYPE_ACTIONAL and re:IsHasType(EFFECT_TYPE_ACTIVATE)
 		and Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)~=0
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)

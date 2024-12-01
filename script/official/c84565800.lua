@@ -31,7 +31,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.rmfilter(c)
-	return c:IsSpellTrap() and c:IsAbleToRemove() and c:IsFaceup()
+	return c:IsActionalTrap() and c:IsAbleToRemove() and c:IsFaceup()
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and s.rmfilter(chkc) end
@@ -42,7 +42,7 @@ function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	if tc:IsRelateToEffect(e) and tc:IsFaceup() and tc:IsType(TYPE_SPELL+TYPE_TRAP) then
+	if tc:IsRelateToEffect(e) and tc:IsFaceup() and tc:IsType(TYPE_ACTIONAL+TYPE_TRAP) then
 		Duel.Remove(tc,POS_FACEUP,REASON_EFFECT)
 	end
 end

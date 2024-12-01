@@ -30,7 +30,7 @@ function s.initial_effect(c)
 	e4:SetValue(s.aclimit)
 	e4:SetCondition(s.actcon)
 	c:RegisterEffect(e4)
-	--Destroy Spell/Trap
+	--Destroy Actional/Trap
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(id,0))
 	e5:SetCategory(CATEGORY_DESTROY)
@@ -68,7 +68,7 @@ function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler()==Duel.GetAttacker()
 end
 function s.filter(c)
-	return c:IsType(TYPE_SPELL+TYPE_TRAP)
+	return c:IsType(TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(1-tp) and chkc:IsOnField() and s.filter(chkc) end

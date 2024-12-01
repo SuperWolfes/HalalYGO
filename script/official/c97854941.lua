@@ -33,9 +33,9 @@ function s.initial_effect(c)
 end
 	--Part of "Valkyrie" archetype
 s.listed_series={0x122}
-	--Check for face-up spell/trap that can be sent to GY
+	--Check for face-up actional/trap that can be sent to GY
 function s.tgfilter(c,tp)
-	return c:IsFaceup() and c:IsSpellTrap() and c:IsAbleToRest()
+	return c:IsFaceup() and c:IsActionalTrap() and c:IsAbleToRest()
 end
 	--Activation legality
 function s.sptg1(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -47,7 +47,7 @@ function s.sptg1(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_TOREST,g,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,e:GetHandler(),1,0,0)
 end
-	--Send 1 face-up spell/trap to GY, and if do, special summon this card
+	--Send 1 face-up actional/trap to GY, and if do, special summon this card
 function s.spop1(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()

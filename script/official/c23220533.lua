@@ -4,7 +4,7 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Search 1 "Holy Night" Spell/Trap when NS
+	--Search 1 "Holy Night" Actional/Trap when NS
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -30,7 +30,7 @@ end
 s.listed_names={id}
 s.listed_series={0x15b}
 function s.thfilter(c)
-	return c:IsSetCard(0x15b) and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsSetCard(0x15b) and c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

@@ -110,7 +110,7 @@ function s.monop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.stfilter(c)
-	return c:IsSpellTrap() and c:IsAbleToRest()
+	return c:IsActionalTrap() and c:IsAbleToRest()
 end
 function s.sttg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.stfilter,tp,0,LOCATION_SZONE,1,nil) end

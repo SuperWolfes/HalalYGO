@@ -30,7 +30,7 @@ function s.moneqfilter(c,tp,ft,sc)
 		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,0x56),tp,LOCATION_MZONE,0,1,sc)
 end
 function s.eqspfilter(c,tp,ft,sc)
-	return c:IsSetCard(0x56) and c:IsType(TYPE_EQUIP) and c:IsSpell()
+	return c:IsSetCard(0x56) and c:IsType(TYPE_EQUIP) and c:IsActional()
 		and (ft>0 or (sc and sc:IsLocation(LOCATION_SZONE) and sc:GetSequence()<5))
 		and Duel.IsExistingMatchingCard(s.eqfilter,tp,LOCATION_MZONE,0,1,sc,c)
 end
@@ -94,7 +94,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			e1:SetLabelObject(ec)
 			sc:RegisterEffect(e1)
 		end
-	--Equip 1 "Inzektor" Equip Spell from your Deck
+	--Equip 1 "Inzektor" Equip Actional from your Deck
 	elseif op==2 and ft>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
 		local sc=Duel.SelectMatchingCard(tp,s.eqspfilter,tp,LOCATION_DECK,0,1,1,nil,tp,ft):GetFirst()

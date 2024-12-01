@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.destg)
 	e1:SetOperation(s.desop)
 	c:RegisterEffect(e1)
-	--Inflict 1000 damage to your opponent if you activate a Spell
+	--Inflict 1000 damage to your opponent if you activate a Actional
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_DAMAGE)
@@ -71,7 +71,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return s.typecheck(RACE_DINOSAUR|RACE_SEASERPENT|RACE_THUNDER) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_SPELL) and rp==tp
+	return s.typecheck(RACE_DINOSAUR|RACE_SEASERPENT|RACE_THUNDER) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_ACTIONAL) and rp==tp
 		and re:GetHandler()~=c and not c:IsDisabled()
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)

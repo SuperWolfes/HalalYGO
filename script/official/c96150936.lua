@@ -49,5 +49,5 @@ function s.indescon(e,c)
 	return e:GetHandler():GetLinkedGroup():IsExists(s.linkfilter,1,nil)
 end
 function s.indestg(e,c)
-	return c:IsFaceup() and c:IsSetCard(0x71) and c:IsSpellTrap()
+	return c:IsFaceup() and c:IsSetCard(0x71) and c:IsActionalTrap()
 end

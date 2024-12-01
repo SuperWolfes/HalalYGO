@@ -41,7 +41,7 @@ function s.initial_effect(c)
 end
 s.listed_names={17888577}
 function s.thfilter1(c,tp)
-	return c:IsLockedSpell() and not c:IsPublic() and c:IsAbleToDeck()
+	return c:IsLockedActional() and not c:IsPublic() and c:IsAbleToDeck()
 		and Duel.IsExistingMatchingCard(s.thfilter2,tp,LOCATION_DECK,0,1,nil,c)
 end
 function s.thfilter2(c,mc)
@@ -72,7 +72,7 @@ function s.ritcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	return true
 end
 function s.ritfilter(c)
-	return c:IsLockedSpell() and c:IsAbleToRestAsCost() and c:CheckActivateEffect(true,true,false)~=nil
+	return c:IsLockedActional() and c:IsAbleToRestAsCost() and c:CheckActivateEffect(true,true,false)~=nil
 end
 function s.rittg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then 

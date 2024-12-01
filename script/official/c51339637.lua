@@ -36,7 +36,7 @@ s.listed_series={0xf0}
 function s.cfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0x119) and c:IsLinkMonster()
 end
-	--If monster effect or spell/trap card is activated
+	--If monster effect or actional/trap card is activated
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil) then return false end
 	return Duel.IsChainNegatable(ev) and (re:IsActiveType(TYPE_MONSTER) or re:IsHasType(EFFECT_TYPE_ACTIVATE))
@@ -49,7 +49,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 		Duel.SetOperationInfo(0,CATEGORY_DESTROY,eg,1,0,0)
 	end
 end
-	--Negate the activation of a monster effect or spell/trap card
+	--Negate the activation of a monster effect or actional/trap card
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.NegateActivation(ev) and re:GetHandler():IsRelateToEffect(re) then
 		Duel.Destroy(eg,REASON_EFFECT)

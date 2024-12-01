@@ -45,7 +45,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	local rc=re:GetHandler()
-	if not ((re:IsActiveType(TYPE_MONSTER) and rc:IsSetCard(0x135)) or (re:IsActiveType(TYPE_SPELL+TYPE_TRAP) and rc:IsSetCard(0x136))) then return false end
+	if not ((re:IsActiveType(TYPE_MONSTER) and rc:IsSetCard(0x135)) or (re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) and rc:IsSetCard(0x136))) then return false end
 	local p=1-tp
 	local e1=Duel.IsPlayerAffectedByEffect(p,EFFECT_REVERSE_DAMAGE)
 	local e2=Duel.IsPlayerAffectedByEffect(p,EFFECT_REVERSE_RECOVER)

@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	c:EnableReviveLimit()
 	--Xyz Summon procedure
 	Xyz.AddProcedure(c,nil,8,2)
-	--Negate the effect of a Spell Card/effect
+	--Negate the effect of a Actional Card/effect
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DISABLE)
@@ -45,7 +45,7 @@ s.xyz_number=38
 function s.discon(e,tp,eg,ep,ev,re,r,rp)
 	local loc=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_LOCATION)
 	return (loc&LOCATION_SZONE)~=0
-		and re:IsActiveType(TYPE_SPELL) and Duel.IsChainDisablable(ev) and not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED)
+		and re:IsActiveType(TYPE_ACTIONAL) and Duel.IsChainDisablable(ev) and not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED)
 end
 function s.distg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsType(TYPE_XYZ) end
@@ -54,7 +54,7 @@ end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local rc=re:GetHandler()
-	if rc:IsNegatableSpellTrap() and Duel.NegateEffect(ev) and c:IsRelateToEffect(e) and rc:IsRelateToEffect(re)
+	if rc:IsNegatableActionalTrap() and Duel.NegateEffect(ev) and c:IsRelateToEffect(e) and rc:IsRelateToEffect(re)
 		and c:IsType(TYPE_XYZ) then
 		rc:CancelToRest()
 		Duel.Overlay(c,rc)

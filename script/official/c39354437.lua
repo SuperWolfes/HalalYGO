@@ -3,7 +3,7 @@
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	-- Search "Icejade" Spell/Trap
+	-- Search "Icejade" Actional/Trap
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND)
@@ -37,7 +37,7 @@ end
 s.listed_series={0x16e}
 s.listed_names={id}
 function s.thfilter(c)
-	return c:IsSpellTrap() and c:IsSetCard(0x16e) and c:IsAbleToHand()
+	return c:IsActionalTrap() and c:IsSetCard(0x16e) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

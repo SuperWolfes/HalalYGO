@@ -66,7 +66,7 @@ function s.aclimit1(e,re,tp)
 	return re:IsActiveType(TYPE_MONSTER)
 end
 function s.aclimit2(e,re,tp)
-	return re:IsActiveType(TYPE_SPELL)
+	return re:IsActiveType(TYPE_ACTIONAL)
 end
 function s.aclimit3(e,re,tp)
 	return re:IsActiveType(TYPE_TRAP)

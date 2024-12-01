@@ -2,7 +2,7 @@
 --Lyla, Twilightsworn Enchantress
 local s,id=GetID()
 function s.initial_effect(c)
-	--Destroy 1 Spell/Trap
+	--Destroy 1 Actional/Trap
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DESTROY)
@@ -31,7 +31,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x38}
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
-	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP)
+	return re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.cfilter(c)
 	return c:IsMonster() and c:IsSetCard(0x38) and c:IsAbleToRemoveAsCost()
@@ -44,7 +44,7 @@ function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.desfilter(c)
-	return c:IsFaceup() and c:IsSpellTrap()
+	return c:IsFaceup() and c:IsActionalTrap()
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and s.desfilter(chkc) end

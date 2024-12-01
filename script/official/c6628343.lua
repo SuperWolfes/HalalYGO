@@ -83,7 +83,7 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsPreviousLocation(LOCATION_REST)
 end
 function s.thfilter(c)
-	return c:GetType()==TYPE_SPELL+TYPE_LOCKED and c:IsAbleToHand()
+	return c:GetType()==TYPE_ACTIONAL+TYPE_LOCKED and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

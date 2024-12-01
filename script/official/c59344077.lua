@@ -11,12 +11,12 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return rp~=tp and re:IsActiveType(TYPE_SPELL) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and Duel.IsChainNegatable(ev)
+	return rp~=tp and re:IsActiveType(TYPE_ACTIONAL) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and Duel.IsChainNegatable(ev)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.IsChainDisablable(0) then
 		local sel=1
-		local g=Duel.GetMatchingGroup(Card.IsSpell,tp,0,LOCATION_HAND,nil)
+		local g=Duel.GetMatchingGroup(Card.IsActional,tp,0,LOCATION_HAND,nil)
 		Duel.Hint(HINT_SELECTMSG,1-tp,aux.Stringid(id,0))
 		if #g>0 then
 			sel=Duel.SelectOption(1-tp,1213,1214)

@@ -18,7 +18,7 @@ function s.initial_effect(c)
 end
 function s.negcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_MENTOR),tp,LOCATION_MZONE,0,1,nil)
-		and rp~=tp and re:IsActiveType(TYPE_SPELL) and Duel.IsChainDisablable(ev) 
+		and rp~=tp and re:IsActiveType(TYPE_ACTIONAL) and Duel.IsChainDisablable(ev) 
 end
 function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	local rc=re:GetHandler()

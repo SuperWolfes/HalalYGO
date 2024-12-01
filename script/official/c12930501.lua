@@ -1,5 +1,5 @@
 --暗黒の魔再生
---Dark Spell Regeneration
+--Dark Actional Regeneration
 --Scripted by ahtelel
 local s,id=GetID()
 function s.initial_effect(c)
@@ -31,7 +31,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetAttacker():IsControler(1-tp)
 end
 function s.setfilter(c)
-	return c:IsSpell() and c:IsSSetable()
+	return c:IsActional() and c:IsSSetable()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(1-tp) and chkc:IsLocation(LOCATION_REST) and s.setfilter(chkc) end

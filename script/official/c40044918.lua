@@ -22,7 +22,7 @@ function s.schfilter(c)
 	return c:IsSetCard(0x8) and c:IsMonster() and c:IsAbleToHand()
 end
 function s.desfilter(c)
-	return c:IsType(TYPE_SPELL+TYPE_TRAP)
+	return c:IsType(TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

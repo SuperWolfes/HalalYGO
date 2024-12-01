@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetTarget(function(e,c) return c:IsSetCard(0x4) and c:HasLevel() end)
 	e1:SetValue(function(e,c) return c:GetLevel()*100 end)
 	c:RegisterEffect(e1)
-	-- Add 1 "Amazoness" Spell/Trap to the hand
+	-- Add 1 "Amazoness" Actional/Trap to the hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TOHAND)
@@ -53,7 +53,7 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return bc and bc:IsFaceup() and bc:IsSetCard(0x4)
 end
 function s.thfilter(c)
-	return c:IsSetCard(0x4) and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsSetCard(0x4) and c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.thfilter(c) end

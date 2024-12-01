@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e1:SetCost(s.cost)
 	e1:SetOperation(s.monop)
 	c:RegisterEffect(e1)
-	--"Unity" (Spell/Trap lock)
+	--"Unity" (Actional/Trap lock)
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_ACTIVATE)
@@ -68,7 +68,7 @@ end
 function s.stop(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,14731897) then return end
 	local c=e:GetHandler()
-	--Cannot activate/Set Spells/Traps
+	--Cannot activate/Set Actionals/Traps
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_CANNOT_SSET)
@@ -80,7 +80,7 @@ function s.stop(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetCode(EFFECT_CANNOT_ACTIVATE)
 	e2:SetValue(s.aclimit2)
 	Duel.RegisterEffect(e2,tp)
-	--Effects of Spells/Traps the opponent controls are negated
+	--Effects of Actionals/Traps the opponent controls are negated
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
 	e3:SetCode(EFFECT_DISABLE)

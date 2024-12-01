@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e4:SetCode(EFFECT_FORCE_SPSUMMON_POSITION)
 	e4:SetValue(POS_FACEDOWN)
 	c:RegisterEffect(e4)
-	--Search 1 "Umi", or 1 "Kairyu-Shin"/"Sea Stealth" Spell/Trap
+	--Search 1 "Umi", or 1 "Kairyu-Shin"/"Sea Stealth" Actional/Trap
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(id,0))
 	e5:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -116,7 +116,7 @@ function s.sumlimit(e,c,sump,sumtype,sumpos,targetp)
 end
 function s.thfilter(c)
 	return c:IsAbleToHand() and (c:IsCode(CARD_UMI)
-		or ((c:IsSetCard(0x179) or c:IsSetCard(0x17a)) and c:IsSpellTrap()))
+		or ((c:IsSetCard(0x179) or c:IsSetCard(0x17a)) and c:IsActionalTrap()))
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

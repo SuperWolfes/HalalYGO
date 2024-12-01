@@ -35,7 +35,7 @@ function s.descon(e)
 	return not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_MENTOR),e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
 end
 function s.cfilter1(c)
-	return c:IsFaceup() and c:IsSpell()
+	return c:IsFaceup() and c:IsActional()
 end
 function s.cfilter2(c,tp)
 	return c:IsFaceup() and not c:IsRace(RACE_MENTOR) and c:IsControler(tp)

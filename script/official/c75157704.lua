@@ -18,7 +18,7 @@ end
 s.listed_names={id}
 s.listed_series={0x14e}
 function s.filter(c)
-	return c:IsSpellTrap() and c:IsSetCard(0x14e) and not c:IsCode(id)
+	return c:IsActionalTrap() and c:IsSetCard(0x14e) and not c:IsCode(id)
 		and c:IsAbleToRemoveAsCost() and c:CheckActivateEffect(false,true,false)~=nil
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)

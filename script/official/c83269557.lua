@@ -3,8 +3,8 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	Dual.AddProcedure(c)
-	c:EnableCounterPermit(COUNTER_SPELL,LOCATION_MZONE,Dual.EffectStatusCondition)
-	--Gain 300 ATK for each Spell Counter
+	c:EnableCounterPermit(COUNTER_ACTIONAL,LOCATION_MZONE,Dual.EffectStatusCondition)
+	--Gain 300 ATK for each Actional Counter
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetCondition(Dual.EffectStatusCondition)
 	e1:SetValue(function(_,c) return c:GetCounter()*300 end)
 	c:RegisterEffect(e1)
-	--Place 1 Spell Counter
+	--Place 1 Actional Counter
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_COUNTER)
@@ -38,18 +38,18 @@ function s.initial_effect(c)
 	e3:SetOperation(s.operation2)
 	c:RegisterEffect(e3)
 end
-s.counter_place_list={COUNTER_SPELL}
+s.counter_place_list={COUNTER_ACTIONAL}
 function s.target1(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsCanAddCounter(COUNTER_SPELL,1) end
+	if chk==0 then return e:GetHandler():IsCanAddCounter(COUNTER_ACTIONAL,1) end
 	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,1,0,0)
 end
 function s.operation1(e,tp,eg,ep,ev,re,r,rp)
-	e:GetHandler():AddCounter(COUNTER_SPELL,1)
+	e:GetHandler():AddCounter(COUNTER_ACTIONAL,1)
 end
 function s.cost2(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsCanRemoveCounter(tp,COUNTER_SPELL,1,REASON_COST) end
-	c:RemoveCounter(tp,COUNTER_SPELL,1,REASON_COST)
+	if chk==0 then return c:IsCanRemoveCounter(tp,COUNTER_ACTIONAL,1,REASON_COST) end
+	c:RemoveCounter(tp,COUNTER_ACTIONAL,1,REASON_COST)
 end
 function s.target2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) end

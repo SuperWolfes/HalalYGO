@@ -84,7 +84,7 @@ function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	if g and #g>0 then
 		Duel.ConfirmCards(tp,g)
 		local opt=e:GetLabel()
-		if (opt==0 and tc:IsMonster()) or (opt==1 and tc:IsSpell()) or (opt==2 and tc:IsTrap()) then
+		if (opt==0 and tc:IsMonster()) or (opt==1 and tc:IsActional()) or (opt==2 and tc:IsTrap()) then
 			if c:IsRelateToEffect(e) and Duel.SendtoRest(c,REASON_EFFECT)~=0 and c:IsLocation(LOCATION_REST) then
 				Duel.Draw(tp,1,REASON_EFFECT)
 			end

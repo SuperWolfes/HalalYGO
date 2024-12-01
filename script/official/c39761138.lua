@@ -28,7 +28,7 @@ function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	local g=Duel.SelectTarget(tp,s.rmfilter,tp,0,LOCATION_MZONE+LOCATION_REST,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,#g,0,0)
-	if Duel.IsExistingMatchingCard(Card.IsSpell,tp,0,LOCATION_REST,1,nil) then e:SetLabel(0)
+	if Duel.IsExistingMatchingCard(Card.IsActional,tp,0,LOCATION_REST,1,nil) then e:SetLabel(0)
 	else
 		e:SetLabel(1)
 		Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,500)

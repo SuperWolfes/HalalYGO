@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	--Fusion Summon procedure
 	c:EnableReviveLimit()
 	Fusion.AddProcFunRep(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x10f3),2,true)
-	--Search 1 "Predaplant" monster or 1 "Predap" Spell/Trap
+	--Search 1 "Predaplant" monster or 1 "Predap" Actional/Trap
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -37,7 +37,7 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.thfilter(c)
 	return c:IsAbleToHand() and (c:IsFaceup() or not c:IsLocation(LOCATION_EXTRA))
-		and ((c:IsSetCard(0xf3) and c:IsType(TYPE_SPELL|TYPE_TRAP))
+		and ((c:IsSetCard(0xf3) and c:IsType(TYPE_ACTIONAL|TYPE_TRAP))
 		or (c:IsSetCard(0x10f3) and c:IsMonster()))
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)

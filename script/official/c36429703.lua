@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Set 1 "Rank-Up-Magic" spell from deck
+	--Set 1 "Rank-Up-Magic" actional from deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_TRIGGER_F+EFFECT_TYPE_FIELD)
 	e2:SetCode(EVENT_CHAINING)
@@ -86,7 +86,7 @@ function s.setcon(e,tp,eg,ep,ev,re,r,rp)
 	]]
 end
 function s.setfilter(c)
-	return c:IsSpell() and c:IsSetCard(0x95) and c:IsSSetable()
+	return c:IsActional() and c:IsSetCard(0x95) and c:IsSSetable()
 end
 function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<1 then return end

@@ -43,14 +43,14 @@ function s.initial_effect(c)
 	c:RegisterEffect(e5)
 end
 function s.distg(e,c)
-	if c:GetCardTargetCount()==0 or not c:IsSpell() then return false end
+	if c:GetCardTargetCount()==0 or not c:IsActional() then return false end
 	return c:GetCardTarget():IsExists(s.disfilter,1,nil,e:GetHandlerPlayer())
 end
 function s.disfilter(c,tp)
 	return c:IsControler(tp) and c:IsFaceup() and c:IsLocation(LOCATION_MZONE) and c:IsAttribute(ATTRIBUTE_DARK)
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
-	if not re:IsActiveType(TYPE_SPELL) then return end
+	if not re:IsActiveType(TYPE_ACTIONAL) then return end
 	if not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then return end
 	local g=Duel.GetChainInfo(ev,CHAININFO_TARGET_CARDS)
 	if not g or #g==0 then return end

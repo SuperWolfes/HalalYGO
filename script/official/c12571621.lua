@@ -17,7 +17,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x150}
 s.listed_names={id}
-local key=TYPE_MONSTER+TYPE_SPELL+TYPE_TRAP
+local key=TYPE_MONSTER+TYPE_ACTIONAL+TYPE_TRAP
 function s.tgtfilter(c,tp)
 	return c:IsFaceup() and c:IsSetCard(0x150) and Duel.IsExistingMatchingCard(s.tgvfilter,tp,LOCATION_DECK,0,1,nil,c:GetType()&key)
 end

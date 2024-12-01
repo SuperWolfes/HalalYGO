@@ -9,7 +9,7 @@ function s.initial_effect(c)
 	c:EnableReviveLimit()
 	--2 "Mysterune" monsters
 	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x180),2)
-	--If Special Summoned from the Extra Deck, add 1 "Mysterune" non-Quick-Play Spell from GY
+	--If Special Summoned from the Extra Deck, add 1 "Mysterune" non-Quick-Play Actional from GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND)
@@ -42,9 +42,9 @@ end
 	--Lists "Mysterune" archetype
 s.listed_series={0x180}
 
-	--Check for a non-Quick-Play "Mysterune" Spell
+	--Check for a non-Quick-Play "Mysterune" Actional
 function s.thfilter(c)
-	return c:IsSetCard(0x180) and not c:IsType(TYPE_QUICKPLAY) and c:IsSpell() and c:IsAbleToHand()
+	return c:IsSetCard(0x180) and not c:IsType(TYPE_QUICKPLAY) and c:IsActional() and c:IsAbleToHand()
 end
 	--Activation legality
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -54,7 +54,7 @@ function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,0,LOCATION_REST)
 end
-	--Add 1 "Mysterune" non-Quick-Play Spell from GY
+	--Add 1 "Mysterune" non-Quick-Play Actional from GY
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) then

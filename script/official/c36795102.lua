@@ -4,7 +4,7 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Place itself into S/T zone as continuous spell
+	--Place itself into S/T zone as continuous actional
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_TO_REST_REDIRECT_CB)
@@ -43,7 +43,7 @@ function s.repcon(e)
 	local c=e:GetHandler()
 	return c:IsFaceup() and c:IsLocation(LOCATION_MZONE) and c:IsReason(REASON_DESTROY)
 end
-	--Place itself into S/T zone as continuous spell
+	--Place itself into S/T zone as continuous actional
 function s.repop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local e1=Effect.CreateEffect(c)
@@ -51,7 +51,7 @@ function s.repop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
-	e1:SetValue(TYPE_SPELL+TYPE_CONTINUOUS)
+	e1:SetValue(TYPE_ACTIONAL+TYPE_CONTINUOUS)
 	c:RegisterEffect(e1)
 	Duel.RaiseEvent(c,EVENT_CUSTOM+47408488,e,0,tp,0,0)
 end
@@ -74,9 +74,9 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if not c:IsRelateToEffect(e) then return end
 	Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)
 end
-	--While treated as continuous spell
+	--While treated as continuous actional
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():GetType()&(TYPE_SPELL+TYPE_CONTINUOUS)==(TYPE_SPELL+TYPE_CONTINUOUS)
+	return e:GetHandler():GetType()&(TYPE_ACTIONAL+TYPE_CONTINUOUS)==(TYPE_ACTIONAL+TYPE_CONTINUOUS)
 end
 	--Check for "Crystal Beast" monster to special summon
 function s.ssfilter(c,e,tp)

@@ -47,7 +47,7 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.tgfilter(c)
-	return c:IsType(TYPE_EQUIP) and c:IsSpell() and c:IsAbleToRest()
+	return c:IsType(TYPE_EQUIP) and c:IsActional() and c:IsAbleToRest()
 end
 function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil)

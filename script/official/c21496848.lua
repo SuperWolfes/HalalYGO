@@ -30,7 +30,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		return
 	end
 	local ty=TYPE_MONSTER
-	if e:GetLabel()==1 then ty=TYPE_SPELL
+	if e:GetLabel()==1 then ty=TYPE_ACTIONAL
 	elseif e:GetLabel()==2 then ty=TYPE_TRAP end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g1=Duel.SelectMatchingCard(tp,Card.IsType,tp,LOCATION_DECK,0,1,1,nil,ty)

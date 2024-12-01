@@ -55,7 +55,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 end
 function s.cfilter(c,tp)
-	return c:IsSetCard(0x14a) and c:IsAbleToRemoveAsCost() and c:IsSpellTrap()
+	return c:IsSetCard(0x14a) and c:IsAbleToRemoveAsCost() and c:IsActionalTrap()
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,e:GetHandler(),tp) end

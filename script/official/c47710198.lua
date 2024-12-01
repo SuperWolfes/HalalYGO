@@ -42,7 +42,7 @@ function s.initial_effect(c)
 	e2a:SetLabelObject(e2)
 	e2a:SetOperation(s.regop)
 	c:RegisterEffect(e2a)
-	--Banish Spell/Trap
+	--Banish Actional/Trap
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetCategory(CATEGORY_REMOVE+CATEGORY_DAMAGE)
@@ -110,9 +110,9 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.RaiseSingleEvent(e:GetHandler(),EVENT_CUSTOM+id,e,0,tp,tp,0)
 	end
 end
---banish spell/trap
+--banish actional/trap
 function s.rmcon2(e,tp,eg,ep,ev,re,r,rp)
-	return ep==1-tp and re:IsActiveType(TYPE_SPELL+TYPE_TRAP) 
+	return ep==1-tp and re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) 
 end
 function s.rmtg2(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return re:GetHandler():IsAbleToRemove() end

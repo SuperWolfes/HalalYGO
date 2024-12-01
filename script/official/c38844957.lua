@@ -17,7 +17,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsLockedMonster),tp,LOCATION_MZONE,0,1,nil)
 end
 function s.filter(c)
-	return c:GetType()==TYPE_SPELL+TYPE_LOCKED and c:IsAbleToRemoveAsCost() and c:CheckActivateEffect(true,true,false)~=nil
+	return c:GetType()==TYPE_ACTIONAL+TYPE_LOCKED and c:IsAbleToRemoveAsCost() and c:CheckActivateEffect(true,true,false)~=nil
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(1)

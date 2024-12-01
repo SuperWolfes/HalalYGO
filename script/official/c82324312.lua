@@ -2,7 +2,7 @@
 --Goblin Recon Squad
 local s,id=GetID()
 function s.initial_effect(c)
-	--Look at 1 random card in opponent's hand. Send it to GY if spell
+	--Look at 1 random card in opponent's hand. Send it to GY if actional
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOREST)
@@ -33,7 +33,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if #g==0 then return end
 	local sg=g:RandomSelect(ep,1)
 	Duel.ConfirmCards(tp,sg)
-	if sg:GetFirst():IsSpell() then
+	if sg:GetFirst():IsActional() then
 		Duel.SendtoRest(sg,REASON_EFFECT)
 	end
 	Duel.ShuffleHand(1-tp)

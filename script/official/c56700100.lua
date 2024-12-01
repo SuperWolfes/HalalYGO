@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.thtg)
 	e2:SetOperation(s.thop)
 	c:RegisterEffect(e2)
-	--Add up to 3 "Purery" Quick-Play Spells to the hand
+	--Add up to 3 "Purery" Quick-Play Actionals to the hand
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_TOHAND)
@@ -65,7 +65,7 @@ function s.rthcond(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.xyzfilter,1,nil,tp)
 end
 function s.qpfilter(c)
-	return c:IsSetCard(0x18d) and c:IsSpell() and c:IsType(TYPE_QUICKPLAY) and c:IsAbleToHand()
+	return c:IsSetCard(0x18d) and c:IsActional() and c:IsType(TYPE_QUICKPLAY) and c:IsAbleToHand()
 end
 function s.rthtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.qpfilter,tp,LOCATION_REST,0,1,nil) end

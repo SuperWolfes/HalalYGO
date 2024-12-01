@@ -31,7 +31,7 @@ function s.initial_effect(c)
 	e3:SetTarget(s.sptg)
 	e3:SetOperation(s.spop)
 	c:RegisterEffect(e3)
-	--Shuffle 3 Field Spells into the Deck
+	--Shuffle 3 Field Actionals into the Deck
 	local e4=e2:Clone()
 	e4:SetDescription(aux.Stringid(id,3))
 	e4:SetCategory(CATEGORY_TODECK+CATEGORY_DRAW)

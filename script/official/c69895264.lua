@@ -18,7 +18,7 @@ end
 s.listed_names={id}
 s.listed_series={0x17f}
 function s.tdfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x17f) and c:IsSpellTrap() and not c:IsCode(id) and c:IsAbleToDeck()
+	return c:IsFaceup() and c:IsSetCard(0x17f) and c:IsActionalTrap() and not c:IsCode(id) and c:IsAbleToDeck()
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REST+LOCATION_REMOVED) and s.tdfilter(chkc) end

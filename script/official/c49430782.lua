@@ -61,12 +61,12 @@ function s.checkop(e,tp,eg,ep,ev,re,r,rp)
 		if tc:IsPreviousLocation(LOCATION_ONFIELD) and tc:IsSetCard(0xf9) then
 			local typ=(tc:GetOriginalType()&0x7)
 			if (typ==TYPE_MONSTER and Duel.GetFlagEffect(0,id)==0)
-				or (typ==TYPE_SPELL and Duel.GetFlagEffect(0,id+1)==0)
+				or (typ==TYPE_ACTIONAL and Duel.GetFlagEffect(0,id+1)==0)
 				or (typ==TYPE_TRAP and Duel.GetFlagEffect(0,49430784)==0) then
 				s.counter=s.counter+1
 				if typ==TYPE_MONSTER then
 					Duel.RegisterFlagEffect(0,id,RESET_PHASE+PHASE_END,0,1)
-				elseif typ==TYPE_SPELL then
+				elseif typ==TYPE_ACTIONAL then
 					Duel.RegisterFlagEffect(0,id+1,RESET_PHASE+PHASE_END,0,1)
 				else
 					Duel.RegisterFlagEffect(0,49430784,RESET_PHASE+PHASE_END,0,1)
@@ -111,10 +111,10 @@ function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsPreviousLocation(LOCATION_SZONE)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsOnField() and chkc:IsSpellTrap() end
-	if chk==0 then return Duel.IsExistingTarget(Card.IsType,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil,TYPE_SPELL+TYPE_TRAP) end
+	if chkc then return chkc:IsOnField() and chkc:IsActionalTrap() end
+	if chk==0 then return Duel.IsExistingTarget(Card.IsType,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil,TYPE_ACTIONAL+TYPE_TRAP) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-	local g=Duel.SelectTarget(tp,Card.IsType,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil,TYPE_SPELL+TYPE_TRAP)
+	local g=Duel.SelectTarget(tp,Card.IsType,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil,TYPE_ACTIONAL+TYPE_TRAP)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)

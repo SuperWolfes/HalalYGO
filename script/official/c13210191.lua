@@ -12,19 +12,19 @@ function s.initial_effect(c)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsSpellTrap,tp,LOCATION_ONFIELD,0,1,c) end
-	local g1=Duel.GetMatchingGroup(Card.IsSpellTrap,tp,LOCATION_ONFIELD,0,c)
-	local g2=Duel.GetMatchingGroup(Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,nil)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsActionalTrap,tp,LOCATION_ONFIELD,0,1,c) end
+	local g1=Duel.GetMatchingGroup(Card.IsActionalTrap,tp,LOCATION_ONFIELD,0,c)
+	local g2=Duel.GetMatchingGroup(Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,nil)
 	local ct1=#g1
 	local ct2=#g2
 	g1:Merge(g2)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g1,ct1+((ct1>ct2) and ct2 or ct1),0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local g1=Duel.GetMatchingGroup(Card.IsSpellTrap,tp,LOCATION_ONFIELD,0,e:GetHandler())
+	local g1=Duel.GetMatchingGroup(Card.IsActionalTrap,tp,LOCATION_ONFIELD,0,e:GetHandler())
 	local ct1=Duel.Destroy(g1,REASON_EFFECT)
 	if ct1==0 then return end
-	local g2=Duel.GetMatchingGroup(Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,nil)
+	local g2=Duel.GetMatchingGroup(Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,nil)
 	local ct2=#g2
 	if ct2==0 then return end
 	Duel.BreakEffect()

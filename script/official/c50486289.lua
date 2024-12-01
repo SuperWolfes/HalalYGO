@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Set 1 "Amazoness" Spell/Trap or "Polymerization"
+	--Set 1 "Amazoness" Actional/Trap or "Polymerization"
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
@@ -49,7 +49,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.setfilter(c)
-	return (c:IsCode(CARD_POLYMERIZATION) or (c:IsSetCard(0x4) and c:IsSpellTrap())) and c:IsSSetable()
+	return (c:IsCode(CARD_POLYMERIZATION) or (c:IsSetCard(0x4) and c:IsActionalTrap())) and c:IsSSetable()
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_DECK,0,1,nil) end

@@ -53,7 +53,7 @@ function s.xyzcheck(g,tp,xyz)
 	return mg:GetClassCount(Card.GetRank)==1
 end
 function s.cfilter(c)
-	return c:IsSetCard(0x95) and c:GetType()==TYPE_SPELL and c:IsDiscardable()
+	return c:IsSetCard(0x95) and c:GetType()==TYPE_ACTIONAL and c:IsDiscardable()
 end
 function s.ovfilter(c,tp,lc)
 	return c:IsFaceup() and c:IsSetCard(0x107f,lc,SUMMON_TYPE_XYZ,tp)

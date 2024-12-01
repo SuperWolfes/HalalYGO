@@ -3,7 +3,7 @@
 --Scripted by Yuno
 local s,id=GetID()
 function s.initial_effect(c)
-	--Set 1 "Labrynth" Spell/Trap from the hand or deck
+	--Set 1 "Labrynth" Actional/Trap from the hand or deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_QUICK_O)
@@ -30,7 +30,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 s.listed_series={0x17f}
---Set 1 "Labrynth" Spell/Trap from the hand or deck
+--Set 1 "Labrynth" Actional/Trap from the hand or deck
 function s.setcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsAbleToRestAsCost() and Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,c) end
@@ -38,7 +38,7 @@ function s.setcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
 end
 function s.setfilter(c)
-	return c:IsSetCard(0x17f) and c:IsSpellTrap() and c:IsSSetable()
+	return c:IsSetCard(0x17f) and c:IsActionalTrap() and c:IsSSetable()
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil) end

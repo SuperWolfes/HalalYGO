@@ -1,5 +1,5 @@
 --マジック・ストライカー
---Spell Striker
+--Actional Striker
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon
@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.spfilter(c)
-	return c:IsSpell() and c:IsAbleToRemoveAsCost()
+	return c:IsActional() and c:IsAbleToRemoveAsCost()
 end
 function s.spcon(e,c)
 	if c==nil then return true end

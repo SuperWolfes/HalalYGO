@@ -1,5 +1,5 @@
 --魔導書庫クレッセン
---Spellbook Library of the Crescent
+--Actionalbook Library of the Crescent
 local s,id=GetID()
 function s.initial_effect(c)
 	--search
@@ -18,10 +18,10 @@ function s.initial_effect(c)
 end
 s.listed_series={0x106e}
 function s.chainfilter(re,tp,cid)
-	return not (re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_SPELL) and not re:GetHandler():IsSetCard(0x106e))
+	return not (re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_ACTIONAL) and not re:GetHandler():IsSetCard(0x106e))
 end
 function s.cfilter(c)
-	return c:IsSetCard(0x106e) and c:IsSpell()
+	return c:IsSetCard(0x106e) and c:IsActional()
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return not Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil)
@@ -39,10 +39,10 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	aux.RegisterClientHint(e:GetHandler(),nil,tp,1,0,aux.Stringid(id,1),nil)
 end
 function s.aclimit(e,re,tp)
-	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_SPELL) and not re:GetHandler():IsSetCard(0x106e)
+	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_ACTIONAL) and not re:GetHandler():IsSetCard(0x106e)
 end
 function s.filter(c)
-	return c:IsSetCard(0x106e) and c:IsSpell() and c:IsAbleToHand()
+	return c:IsSetCard(0x106e) and c:IsActional() and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then

@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	local e2=e1:Clone()
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e2)
-	--Return both 1 of your "Machina" monsters and 1 of opponent's spells/traps to hand
+	--Return both 1 of your "Machina" monsters and 1 of opponent's actionals/traps to hand
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_TOHAND)
@@ -62,7 +62,7 @@ function s.thfilter1(c)
 	return c:IsFaceup() and c:IsSetCard(0x36) and c:IsAbleToHand()
 end
 function s.thfilter2(c)
-	return c:IsAbleToHand() and (c:IsSpell() or c:IsTrap())
+	return c:IsAbleToHand() and (c:IsActional() or c:IsTrap())
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end

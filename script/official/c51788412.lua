@@ -45,7 +45,7 @@ end
 s.listed_series={0x7}
 s.material_setcode=0x7
 function s.efilter(e,te)
-	return te:IsActiveType(TYPE_SPELL+TYPE_TRAP)
+	return te:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.actcon(e)
 	local ph=Duel.GetCurrentPhase()

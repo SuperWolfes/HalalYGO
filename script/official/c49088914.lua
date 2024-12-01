@@ -16,7 +16,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x150}
 s.listed_names={id}
-local key=TYPE_MONSTER+TYPE_SPELL+TYPE_TRAP
+local key=TYPE_MONSTER+TYPE_ACTIONAL+TYPE_TRAP
 function s.torestfilter(c,ctype)
 	return c:IsSetCard(0x150) and not c:IsType(ctype&key) and c:IsAbleToRest()
 end

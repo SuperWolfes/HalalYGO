@@ -75,9 +75,9 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		end
 	end
 end
-	--Check for spell/trap card
+	--Check for actional/trap card
 function s.addfilter(c)
-	return c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsActionalTrap() and c:IsAbleToHand()
 end
 	--If sent to GY by "Flower Cardian" monster effect
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
@@ -85,7 +85,7 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	local rc=re:GetHandler()
 	return e:GetHandler():IsReason(REASON_EFFECT) and rc:IsSetCard(0xe6) and rc:IsMonster()
 end
-	--Add 1 spell/trap card from GY to hand
+	--Add 1 actional/trap card from GY to hand
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local e1=Effect.CreateEffect(c)
@@ -105,7 +105,7 @@ function s.addtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.addfilter,tp,LOCATION_REST,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
 end
-	--Add 1 spell/trap card from GY to hand
+	--Add 1 actional/trap card from GY to hand
 function s.addop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 	local g=Duel.SelectMatchingCard(tp,s.addfilter,tp,LOCATION_REST,0,1,1,nil)

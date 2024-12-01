@@ -1,5 +1,5 @@
 --トリッキーズ・マジック4
---Tricky Spell 4
+--Tricky Actional 4
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

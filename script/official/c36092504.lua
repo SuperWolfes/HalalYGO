@@ -22,7 +22,7 @@ function s.exfilter(c)
 	return c:IsLocation(LOCATION_EXTRA) and c:IsFacedown()
 end
 function s.stfilter(c)
-	return c:IsSpellTrap() and c:IsOnField()
+	return c:IsActionalTrap() and c:IsOnField()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_MZONE+LOCATION_REST,0,nil)
@@ -62,7 +62,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		break_chk=Duel.Remove(og,POS_FACEUP,REASON_EFFECT)
 	end
 	if g:IsExists(Card.IsType,1,nil,TYPE_XYZ) and rg:IsExists(s.stfilter,1,nil) then
-		--Xyz: Banish 1 Spell/Trap the opponent controls
+		--Xyz: Banish 1 Actional/Trap the opponent controls
 		if break_chk>0 then Duel.BreakEffect() end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 		og=rg:FilterSelect(tp,s.stfilter,1,1,nil)

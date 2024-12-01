@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.tg2)
 	e2:SetOperation(s.op2)
 	c:RegisterEffect(e2)
-	--Add 1 "Witchcrafter" Spell/Trap from GY to hand
+	--Add 1 "Witchcrafter" Actional/Trap from GY to hand
 	local e3=e1:Clone()
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetCategory(CATEGORY_TOHAND)
@@ -42,10 +42,10 @@ end
 s.listed_series={0x128}
 s.listed_names={id}
 
-	--Check for activated Spell Card/effect or non-fusion Mentor's effect
+	--Check for activated Actional Card/effect or non-fusion Mentor's effect
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local race=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_RACE)
-	return re:IsActiveType(TYPE_SPELL) or (not re:IsActiveType(TYPE_FUSION) and re:IsActiveType(TYPE_MONSTER)
+	return re:IsActiveType(TYPE_ACTIONAL) or (not re:IsActiveType(TYPE_FUSION) and re:IsActiveType(TYPE_MONSTER)
 		and race&RACE_MENTOR>0)
 end
 	--Activation legality
@@ -68,7 +68,7 @@ function s.tg2(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 --Effect 3
 function s.thfilter(c)
-	return c:IsSetCard(0x128) and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsSetCard(0x128) and c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.tg3(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil) end
@@ -94,7 +94,7 @@ function s.op2(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end
 end
-	--Add 1 "Witchcrafter" Spell/Trap from GY to hand
+	--Add 1 "Witchcrafter" Actional/Trap from GY to hand
 function s.op3(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)

@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.spop)
 	e1:SetValue(1)
 	c:RegisterEffect(e1)
-	--Add 1 Spell to hand
+	--Add 1 Actional to hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TOHAND)
@@ -38,10 +38,10 @@ function s.initial_effect(c)
 	e3:SetOperation(s.desop)
 	c:RegisterEffect(e3)
 end
-s.counter_list={COUNTER_SPELL}
+s.counter_list={COUNTER_ACTIONAL}
 s.listed_names={39910367}
 function s.spfilter(c,tp)
-	return c:IsCode(39910367) and c:IsCanRemoveCounter(tp,COUNTER_SPELL,1,REASON_COST)
+	return c:IsCode(39910367) and c:IsCanRemoveCounter(tp,COUNTER_ACTIONAL,1,REASON_COST)
 end
 function s.spcon(e,c)
 	if c==nil then return true end
@@ -49,20 +49,20 @@ function s.spcon(e,c)
 	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_ONFIELD,0,nil,tp)
 	local ct=0
 	for i in aux.Next(g) do
-		ct=ct+i:GetCounter(COUNTER_SPELL)
+		ct=ct+i:GetCounter(COUNTER_ACTIONAL)
 	end
 	return ct>=6 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_ONFIELD,0,nil,tp)
 	if #g==1 then
-		g:GetFirst():RemoveCounter(tp,COUNTER_SPELL,6,REASON_COST)
+		g:GetFirst():RemoveCounter(tp,COUNTER_ACTIONAL,6,REASON_COST)
 	else
 		local ct=0
 		while ct<6 do
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SELECT)
 			local tc=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_ONFIELD,0,1,1,nil,tp):GetFirst()
-			tc:RemoveCounter(tp,COUNTER_SPELL,1,REASON_COST)
+			tc:RemoveCounter(tp,COUNTER_ACTIONAL,1,REASON_COST)
 			ct=ct+1
 		end
 	end
@@ -71,7 +71,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+1
 end
 function s.filter(c)
-	return c:IsSpell() and c:IsAbleToHand()
+	return c:IsActional() and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter(chkc) end
@@ -88,7 +88,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.cfilter(c)
-	return c:IsSpell() and c:IsDiscardable()
+	return c:IsActional() and c:IsDiscardable()
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,e:GetHandler()) end

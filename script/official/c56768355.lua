@@ -55,5 +55,5 @@ end
 function s.indval(e,re)
 	if not re then return false end
 	local ty=re:GetActiveType()
-	return (ty&TYPE_SPELL+TYPE_TRAP)~=0 and (ty&TYPE_EQUIP)==0
+	return (ty&TYPE_ACTIONAL+TYPE_TRAP)~=0 and (ty&TYPE_EQUIP)==0
 end

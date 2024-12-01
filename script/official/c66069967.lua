@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Add to hand 1 "Prediction Princess" Monster and 1 Locked Spell 
+	--Add to hand 1 "Prediction Princess" Monster and 1 Locked Actional 
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -61,7 +61,7 @@ function s.thfilter1(c)
 	return c:IsSetCard(0xcc) and c:IsMonster() and not c:IsCode(id) and c:IsAbleToHand()
 end
 function s.thfilter2(c)
-	return c:IsLockedSpell() and c:IsAbleToHand()
+	return c:IsLockedActional() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter1,tp,LOCATION_DECK,0,1,nil)

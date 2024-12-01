@@ -36,7 +36,7 @@ function s.decop(e,tp,eg,ep,ev,re,r,rp)
 	if opt==0 then
 		ct=TYPE_MONSTER
 	elseif opt==1 then
-		ct=TYPE_SPELL
+		ct=TYPE_ACTIONAL
 	else
 		ct=TYPE_TRAP
 	end

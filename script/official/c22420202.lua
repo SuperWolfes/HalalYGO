@@ -39,7 +39,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_DRAW,nil,1,tp,1)
 end
 function s.drfilter(c,e,tp)
-	return (c:IsLockedMonster() or c:IsLockedSpell()) and not c:IsPublic()
+	return (c:IsLockedMonster() or c:IsLockedActional()) and not c:IsPublic()
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

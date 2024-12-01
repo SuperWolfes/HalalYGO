@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	-- Search 1 "Valiants" Spell
+	-- Search 1 "Valiants" Actional
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	e2:SetCondition(function(e) return e:GetHandler():IsSummonType(SUMMON_TYPE_SPECIAL) end)
 	e2:SetTarget(s.thtg)
 	e2:SetOperation(s.thop)
-	e2:SetLabel(TYPE_SPELL)
+	e2:SetLabel(TYPE_ACTIONAL)
 	c:RegisterEffect(e2)
 	-- Search 1 "Valiants" monster
 	local e3=e2:Clone()
@@ -70,7 +70,7 @@ function s.splimit(e,c)
 end
 function s.thfilter(c,card_type)
 	return c:IsSetCard(0x17e) and c:IsType(card_type) and c:IsAbleToHand()
-		and (card_type==TYPE_SPELL or not c:IsCode(id))
+		and (card_type==TYPE_ACTIONAL or not c:IsCode(id))
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil,e:GetLabel()) end

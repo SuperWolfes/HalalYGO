@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	local e2=e1:Clone()
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e2)
-	--Add "A.I." spell/trap from GY to hand
+	--Add "A.I." actional/trap from GY to hand
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_TOHAND)
@@ -58,9 +58,9 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return c:IsLocation(LOCATION_REST) and r==REASON_LINK and c:GetReasonCard():IsRace(RACE_CYBERSE)
 end
-	--Check for "A.I." spell/trap
+	--Check for "A.I." actional/trap
 function s.thfilter2(c)
-	return c:IsSetCard(0x136) and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsSetCard(0x136) and c:IsActionalTrap() and c:IsAbleToHand()
 end
 	--Activation legality
 function s.thtg2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -70,7 +70,7 @@ function s.thtg2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local g=Duel.SelectTarget(tp,s.thfilter2,tp,LOCATION_REST,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,0,0)
 end
-	--Add "A.I." spell/trap from GY to hand
+	--Add "A.I." actional/trap from GY to hand
 function s.thop2(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) then 

@@ -53,7 +53,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_REMOVE,nil,1,1-tp,LOCATION_SZONE+LOCATION_REST)
 end
 function s.rmfilter(c)
-	return c:IsSpellTrap() and c:IsAbleToRemove()
+	return c:IsActionalTrap() and c:IsAbleToRemove()
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

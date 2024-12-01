@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	e3:SetTarget(s.sptg)
 	e3:SetOperation(s.spop)
 	c:RegisterEffect(e3)
-	--Attach 1 "Purery" Quick-Play Spell to 1 "Purery" Xyz Monster on the field
+	--Attach 1 "Purery" Quick-Play Actional to 1 "Purery" Xyz Monster on the field
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
@@ -71,7 +71,7 @@ function s.cfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0x18d) and c:IsType(TYPE_XYZ)
 end
 function s.atchfilter(c)
-	return c:IsSetCard(0x18d) and c:IsSpell() and c:IsType(TYPE_QUICKPLAY)
+	return c:IsSetCard(0x18d) and c:IsActional() and c:IsType(TYPE_QUICKPLAY)
 end
 function s.attachtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and s.cfilter(chkc) end

@@ -1,8 +1,8 @@
 --セフェルの魔導書
---Spellbook of the Master
+--Actionalbook of the Master
 local s,id=GetID()
 function s.initial_effect(c)
-	--copy a "Spellbook" Spell
+	--copy a "Actionalbook" Actional
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
@@ -29,7 +29,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.ShuffleHand(tp)
 end
 function s.filter(c)
-	return c:IsSetCard(0x106e) and not c:IsCode(id) and c:GetType()==TYPE_SPELL and c:CheckActivateEffect(true,true,false)~=nil
+	return c:IsSetCard(0x106e) and not c:IsCode(id) and c:GetType()==TYPE_ACTIONAL and c:CheckActivateEffect(true,true,false)~=nil
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then

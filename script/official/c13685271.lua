@@ -37,8 +37,8 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return ct==2 or ct==3
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,1,nil) end
-	local g=Duel.GetMatchingGroup(Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,nil)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,1,nil) end
+	local g=Duel.GetMatchingGroup(Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,nil)
 	if e:GetLabel()==2 then
 		Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
 	else Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,#g,0,0) end

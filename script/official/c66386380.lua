@@ -2,7 +2,7 @@
 --Flybie Oracle
 local s,id=GetID()
 function s.initial_effect(c)
-	--Add to hand 1 "Flybie" Spell/Trap
+	--Add to hand 1 "Flybie" Actional/Trap
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND)
@@ -53,7 +53,7 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.thfilter(c)
-	return c:ListsCode(CARD_FLYBIE_LADY_SISTERS) and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:ListsCode(CARD_FLYBIE_LADY_SISTERS) and c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil)

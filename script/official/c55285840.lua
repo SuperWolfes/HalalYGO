@@ -41,7 +41,7 @@ function s.xyzop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.rescon(sg,e,tp,mg)
 	return sg:FilterCount(Card.IsMonster,nil)<=1
-		and sg:FilterCount(Card.IsSpell,nil)<=1
+		and sg:FilterCount(Card.IsActional,nil)<=1
 		and sg:FilterCount(Card.IsTrap,nil)<=1
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -49,7 +49,7 @@ function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=c:GetOverlayGroup()
 	local ty=0
 	if c:IsAbleToRemove() then ty=ty | TYPE_MONSTER end
-	if Duel.IsPlayerCanDraw(tp,1) then ty=ty | TYPE_SPELL end
+	if Duel.IsPlayerCanDraw(tp,1) then ty=ty | TYPE_ACTIONAL end
 	if Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsAbleToDeck),tp,0,LOCATION_ONFIELD,1,nil) then ty=ty | TYPE_TRAP end
 	if chk==0 then return ty>0 and g:IsExists(Card.IsType,1,nil,ty) end
 end
@@ -59,7 +59,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local g=c:GetOverlayGroup()
 	local ty=0
 	if c:IsAbleToRemove() then ty=ty | TYPE_MONSTER end
-	if Duel.IsPlayerCanDraw(tp,1) then ty=ty | TYPE_SPELL end
+	if Duel.IsPlayerCanDraw(tp,1) then ty=ty | TYPE_ACTIONAL end
 	if Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsAbleToDeck),tp,0,LOCATION_ONFIELD,1,nil) then ty=ty | TYPE_TRAP end
 	if ty==0 then return end
 	local sg=aux.SelectUnselectGroup(g:Filter(Card.IsType,nil,ty),e,tp,1,3,s.rescon,1,tp,HINTMSG_REMOVEXYZ)
@@ -84,7 +84,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 			Duel.RegisterEffect(e1,tp)
 		end
 	end
-	if lb & TYPE_SPELL ~=0 then
+	if lb & TYPE_ACTIONAL ~=0 then
 		Duel.Draw(tp,1,REASON_EFFECT)
 	end
 	if lb & TYPE_TRAP ~=0 then

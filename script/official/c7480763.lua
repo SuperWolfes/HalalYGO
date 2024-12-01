@@ -39,7 +39,7 @@ s.listed_series={0x97}
 function s.matfilter(g,lc,sumtype,tp)
 	return g:CheckDifferentProperty(Card.GetCode,lc,sumtype,tp)
 end
-	--"Artifact" monster that can be set as a spell
+	--"Artifact" monster that can be set as a actional
 function s.setfilter(c)
 	return c:IsSetCard(0x97) and c:IsMonster() and c:IsSSetable(true)
 end

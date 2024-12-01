@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-	--Place in the Spell/Trap Zone
+	--Place in the Actional/Trap Zone
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_DESTROY)
 	e2:SetType(EFFECT_TYPE_IGNITION)
@@ -25,7 +25,7 @@ end
 s.listed_series={0x17e}
 s.listed_names={id}
 function s.filter(c)
-	return c:IsType(TYPE_FIELD) and c:IsSpell() and c:IsSetCard(0x17e) and not c:IsCode(id)
+	return c:IsType(TYPE_FIELD) and c:IsActional() and c:IsSetCard(0x17e) and not c:IsCode(id)
 		and not c:IsUnliked()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -73,13 +73,13 @@ function s.plop(e,tp,eg,ep,ev,re,r,rp)
 	end
 	if Duel.CheckLocation(1-tp,LOCATION_SZONE,seq)
 		and Duel.MoveToField(tc,tp,1-tp,LOCATION_SZONE,POS_FACEUP,true,1<<seq) then
-		-- Treat as Continuous Spell
+		-- Treat as Continuous Actional
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetCode(EFFECT_CHANGE_TYPE)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
-		e1:SetValue(TYPE_SPELL+TYPE_CONTINUOUS)
+		e1:SetValue(TYPE_ACTIONAL+TYPE_CONTINUOUS)
 		tc:RegisterEffect(e1)
 	end
 end

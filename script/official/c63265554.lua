@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	--Synchro Summon procedure
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	c:EnableReviveLimit()
-	--Equip up to 3 Equip Spells
+	--Equip up to 3 Equip Actionals
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_EQUIP)
@@ -56,7 +56,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.tgfilter(c,tc)
-	return c:IsType(TYPE_EQUIP) and c:IsSpell() and c:IsAbleToRestAsCost() and c:GetEquipTarget()==tc
+	return c:IsType(TYPE_EQUIP) and c:IsActional() and c:IsAbleToRestAsCost() and c:GetEquipTarget()==tc
 end
 function s.discost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

@@ -2,7 +2,7 @@
 --Curse of Dragonfire
 local s,id=GetID()
 function s.initial_effect(c)
-	--Destroy a field Spelll
+	--Destroy a field Actionall
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DESTROY)

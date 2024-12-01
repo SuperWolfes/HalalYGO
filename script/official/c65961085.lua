@@ -19,7 +19,7 @@ function s.retcon(e,tp,eg,ep,ev,re,r,rp)
 	return re and re:GetHandler():IsRace(RACE_MENTOR)
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsSetCard(0x106e) and c:IsSpell() and c:IsAbleToDeck()
+	return c:IsFaceup() and c:IsSetCard(0x106e) and c:IsActional() and c:IsAbleToDeck()
 end
 function s.rettg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REMOVED) and chkc:IsControler(tp) and s.filter(chkc) end
@@ -29,7 +29,7 @@ function s.rettg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,#g,0,0)
 end
 function s.filter2(c)
-	return c:IsFaceup() and c:IsSetCard(0x106e) and c:IsSpell()
+	return c:IsFaceup() and c:IsSetCard(0x106e) and c:IsActional()
 end
 function s.retop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetTargetCards(e)

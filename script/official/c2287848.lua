@@ -36,7 +36,7 @@ function s.spfilter(c,e,tp)
 	return c:IsSetCard(0x106) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
 end
 function s.thfilter(c)
-	return c:GetType()&TYPE_SPELL+TYPE_LOCKED ==TYPE_SPELL+TYPE_LOCKED and c:IsAbleToHand()
+	return c:GetType()&TYPE_ACTIONAL+TYPE_LOCKED ==TYPE_ACTIONAL+TYPE_LOCKED and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end

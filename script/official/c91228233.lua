@@ -30,7 +30,7 @@ function s.initial_effect(c)
 	e3:SetTarget(s.drtg)
 	e3:SetOperation(s.drop)
 	c:RegisterEffect(e3)
-	--Search a Field Spell
+	--Search a Field Actional
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -68,12 +68,12 @@ function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
 	Duel.Draw(p,d,REASON_EFFECT)
 end
---Search a Field Spell
+--Search a Field Actional
 function s.thcon(e,tp,eg,ep,ev,re,r,rp) 
 	return Duel.GetFlagEffect(tp,id)>0
 end
 function s.thfilter(c)
-	return c:ListsCode(TOKEN_BRAVE) and c:IsSpell()
+	return c:ListsCode(TOKEN_BRAVE) and c:IsActional()
 		and c:IsType(TYPE_FIELD) and c:IsAbleToHand() and not c:IsCode(id)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)

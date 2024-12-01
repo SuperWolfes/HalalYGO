@@ -38,7 +38,7 @@ function s.initial_effect(c)
 end
 --Special Summon
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
-	return (rp==tp and re:IsActiveType(TYPE_TRAP)) or (rp==1-tp and re:IsActiveType(TYPE_SPELL))
+	return (rp==tp and re:IsActiveType(TYPE_TRAP)) or (rp==1-tp and re:IsActiveType(TYPE_ACTIONAL))
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -54,7 +54,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 --Return to Deck
 function s.tdfilter(c)
-	return c:IsFaceup() and c:IsSpellTrap() and c:IsAbleToDeck()
+	return c:IsFaceup() and c:IsActionalTrap() and c:IsAbleToDeck()
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end

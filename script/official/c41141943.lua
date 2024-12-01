@@ -34,7 +34,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x9a}
 function s.filter(c)
-	return c:IsType(TYPE_SPELL+TYPE_TRAP)
+	return c:IsType(TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.hspcon(e,c)
 	if c==nil then return true end

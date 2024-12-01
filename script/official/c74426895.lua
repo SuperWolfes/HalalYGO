@@ -26,7 +26,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.tgtg)
 	e2:SetOperation(s.tgop)
 	c:RegisterEffect(e2)
-	--Search 1 "Guardianual Water Art" card or 1 "Interwoven" Spell/Trap
+	--Search 1 "Guardianual Water Art" card or 1 "Interwoven" Actional/Trap
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND)
@@ -109,7 +109,7 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD)
 end
 function s.thfilter(c)
-	return c:IsAbleToHand() and (c:IsSetCard(0x614d) or (c:IsSetCard(0xc0) and c:IsSpellTrap()))
+	return c:IsAbleToHand() and (c:IsSetCard(0x614d) or (c:IsSetCard(0xc0) and c:IsActionalTrap()))
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

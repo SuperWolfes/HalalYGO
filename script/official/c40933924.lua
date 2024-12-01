@@ -15,6 +15,6 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOREST)
-	local g=Duel.SelectMatchingCard(1-tp,Card.IsSpell,1-tp,LOCATION_DECK,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(1-tp,Card.IsActional,1-tp,LOCATION_DECK,0,1,1,nil)
 	Duel.SendtoRest(g,REASON_EFFECT)
 end

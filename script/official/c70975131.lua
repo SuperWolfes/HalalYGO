@@ -59,7 +59,7 @@ function s.setcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetFlagEffect(id)~=0 and Duel.GetTurnPlayer()==tp
 end
 function s.setfilter(c)
-	return c:GetType()==TYPE_SPELL+TYPE_CONTINUOUS and c:IsSSetable()
+	return c:GetType()==TYPE_ACTIONAL+TYPE_CONTINUOUS and c:IsSSetable()
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0

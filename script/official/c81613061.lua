@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e2:SetCondition(s.limcon)
 	e2:SetValue(s.limval)
 	c:RegisterEffect(e2)
-	-- Set 1 "War Rock" Spell/Trap from your Deck
+	-- Set 1 "War Rock" Actional/Trap from your Deck
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetType(EFFECT_TYPE_IGNITION)
@@ -42,7 +42,7 @@ function s.limval(e,re,tp)
 	return re:GetActivateLocation()==LOCATION_MZONE and re:IsActiveType(TYPE_MONSTER)
 end
 function s.setfilter(c)
-	return c:IsSetCard(0x161) and not c:IsCode(id) and c:IsSpellTrap() and c:IsSSetable()
+	return c:IsSetCard(0x161) and not c:IsCode(id) and c:IsActionalTrap() and c:IsSSetable()
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_DECK,0,1,nil) end

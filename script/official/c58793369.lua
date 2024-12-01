@@ -43,7 +43,7 @@ end
 s.listed_names={id}
 s.listed_series={0x151}
 function s.thfilter(c)
-	return c:IsSpellTrap() and c:IsSetCard(0x151) and c:IsAbleToHand() and not c:IsCode(id)
+	return c:IsActionalTrap() and c:IsSetCard(0x151) and c:IsAbleToHand() and not c:IsCode(id)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
@@ -57,7 +57,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.effectfilter(e,ct)
 	local te=Duel.GetChainInfo(ct,CHAININFO_TRIGGERING_EFFECT)
-	return te:GetHandler():IsLockedSpell()
+	return te:GetHandler():IsLockedActional()
 end
 function s.lvcond(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,0x151),tp,LOCATION_MZONE,0,1,nil) 
