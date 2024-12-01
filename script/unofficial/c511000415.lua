@@ -20,7 +20,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SendtoRest(g1,REASON_COST)
 end
 function s.filter(c)
-	return c:IsSpell() and c:IsAbleToHand()
+	return c:IsActional() and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end

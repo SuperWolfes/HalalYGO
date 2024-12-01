@@ -15,7 +15,7 @@ function s.initial_effect(c)
 end
 s.listed_names={160006024}
 function s.costfilter(c)
-	return c:IsSpellTrap() and c:IsAbleToRestAsCost()
+	return c:IsActionalTrap() and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil) end

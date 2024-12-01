@@ -1,5 +1,5 @@
 --Ｓｐ－シンクロパニック
---Speed Spell - Synchro Panic
+--Speed Actional - Synchro Panic
 local s,id=GetID()
 function s.initial_effect(c)
 	--activate

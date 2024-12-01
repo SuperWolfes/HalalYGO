@@ -1,6 +1,6 @@
 --It's a Toon World!
 --Skill activation
---At the start of the Duel, place this card in your center Spell & Trap Zone and flip it over.
+--At the start of the Duel, place this card in your center Actional & Trap Zone and flip it over.
 --Effect
 --This card is treated as "Toon World".
 local s,id=GetID()

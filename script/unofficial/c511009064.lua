@@ -19,7 +19,7 @@ function s.hspcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
 	return Duel.GetLocationCount(tp,LOCATION_MZONE)>-1 
-		and not Duel.IsExistingMatchingCard(Card.IsType,tp,LOCATION_REST,0,1,nil,TYPE_SPELL+TYPE_TRAP) 
+		and not Duel.IsExistingMatchingCard(Card.IsType,tp,LOCATION_REST,0,1,nil,TYPE_ACTIONAL+TYPE_TRAP) 
 		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND,0,1,c)
 end
 function s.hspop(e,tp,eg,ep,ev,re,r,rp,c)

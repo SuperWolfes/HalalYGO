@@ -50,10 +50,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e5)
 end
 function s.spfilter(c)
-	return c:IsSpell() and c:IsAbleToRestAsCost()
+	return c:IsActional() and c:IsAbleToRestAsCost()
 end
 function s.exfilter(c)
-	return s.spfilter(c) or (c:IsFacedown() and c:IsSpell() and c:IsAbleToRestAsCost())
+	return s.spfilter(c) or (c:IsFacedown() and c:IsActional() and c:IsAbleToRestAsCost())
 end
 function s.spcon(e,c)
 	if c==nil then return true end

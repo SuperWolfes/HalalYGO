@@ -40,7 +40,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x1157}
 function s.regcon(e,tp,eg,ep,ev,re,r,rp)
-	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_SPELL+TYPE_TRAP)
+	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.regop1(e,tp,eg,ep,ev,re,r,rp)
 	re:GetHandler():RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD+RESET_OVERLAY-RESET_TOREST-RESET_LEAVE+RESET_PHASE+PHASE_END,0,1)

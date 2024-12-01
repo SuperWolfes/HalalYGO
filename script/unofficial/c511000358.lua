@@ -21,7 +21,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil)
 end
 function s.setfilter(c)
-	return c:IsSpellTrap() and c:IsSSetable()
+	return c:IsActionalTrap() and c:IsSSetable()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)

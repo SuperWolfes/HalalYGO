@@ -3,7 +3,7 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Destroy 1 Spell/Trap and deal 1000 damage
+	--Destroy 1 Actional/Trap and deal 1000 damage
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DESTROY+CATEGORY_DAMAGE+CATEGORY_TOHAND)
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -18,7 +18,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeckAsCost(tp,1) end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsSpellTraptp,0,LOCATION_ONFIELD,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsActionalTraptp,0,LOCATION_ONFIELD,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,nil,1,1-tp,LOCATION_SZONE)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,1,1-tp,1000)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,e:GetHandler(),1,tp,0)
@@ -28,7 +28,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.DiscardDeck(tp,1,REASON_COST)>0 then
 		--Effect
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-		local tc=Duel.SelectMatchingCard(tp,Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,1,1,nil):GetFirst()
+		local tc=Duel.SelectMatchingCard(tp,Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,1,1,nil):GetFirst()
 		Duel.HintSelection(Group.FromCards(tc))
 		if Duel.Destroy(tc,REASON_EFFECT)>0 then
 			local c=e:GetHandler()

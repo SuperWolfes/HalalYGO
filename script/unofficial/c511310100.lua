@@ -77,13 +77,13 @@ function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.cfilter(c,tp)
-	return c:GetPreviousControler()==tp and c:IsSpellTrap()
+	return c:GetPreviousControler()==tp and c:IsActionalTrap()
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,tp) and re and re:GetHandler()~=e:GetHandler()
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(Card.IsType,tp,LOCATION_ONFIELD,0,nil,TYPE_SPELL+TYPE_TRAP)
+	local g=Duel.GetMatchingGroup(Card.IsType,tp,LOCATION_ONFIELD,0,nil,TYPE_ACTIONAL+TYPE_TRAP)
 	if #g>0 then
 		Duel.Destroy(g,REASON_EFFECT)
 	end

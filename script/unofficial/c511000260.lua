@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),2,99)
 	c:EnableReviveLimit()
 	c:SetUniqueOnField(1,0,id)
-	--Negate Spell/Trap
+	--Negate Actional/Trap
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_NEGATE+CATEGORY_DESTROY)

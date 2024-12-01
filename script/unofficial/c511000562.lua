@@ -3,7 +3,7 @@
 Duel.LoadScript("c300.lua")
 local s,id=GetID()
 function s.initial_effect(c)
-	--immune spell
+	--immune actional
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_IMMUNE_EFFECT)
@@ -34,7 +34,7 @@ function s.econ(e)
 		or Duel.IsEnvironment(CARD_UMI)
 end
 function s.efilter(e,te)
-	return te:IsActiveType(TYPE_SPELL)
+	return te:IsActiveType(TYPE_ACTIONAL)
 end
 function s.cbcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckReleaseGroup(tp,nil,2,nil) end

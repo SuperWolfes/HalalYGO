@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.thfilter(c)
-	return c:GetType()&TYPE_EQUIP+TYPE_SPELL==TYPE_EQUIP+TYPE_SPELL and c:IsAbleToHand()
+	return c:GetType()&TYPE_EQUIP+TYPE_ACTIONAL==TYPE_EQUIP+TYPE_ACTIONAL and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -41,7 +41,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.repfilter(c)
-	return c:IsSpell() and c:IsLocation(LOCATION_SZONE) and not c:IsStatus(STATUS_DESTROY_CONFIRMED)
+	return c:IsActional() and c:IsLocation(LOCATION_SZONE) and not c:IsStatus(STATUS_DESTROY_CONFIRMED)
 end
 function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

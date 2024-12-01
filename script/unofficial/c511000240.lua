@@ -12,14 +12,14 @@ function s.initial_effect(c)
 	e2:SetCondition(s.battlecon)
 	e2:SetValue(1)
 	c:RegisterEffect(e2)
-	--"Left Leg of the Unliked One": This card cannot be destroyed by Spell Cards.
+	--"Left Leg of the Unliked One": This card cannot be destroyed by Actional Cards.
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e3:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
 	e3:SetRange(LOCATION_MZONE)
-	e3:SetCondition(s.spellcon)
-	e3:SetValue(s.spellval)
+	e3:SetCondition(s.actionalcon)
+	e3:SetValue(s.actionalval)
 	c:RegisterEffect(e3)
 	--"Right Leg of the Unliked One": This card cannot be destroyed by Trap Cards.
 	local e4=Effect.CreateEffect(c)
@@ -71,11 +71,11 @@ end
 function s.battlecon(e)
 	return Duel.IsExistingMatchingCard(Card.IsCode,e:GetHandlerPlayer(),LOCATION_REST,0,1,nil,33396948)
 end
-function s.spellcon(e)
+function s.actionalcon(e)
 	return Duel.IsExistingMatchingCard(Card.IsCode,e:GetHandlerPlayer(),LOCATION_REST,0,1,nil,44519536)
 end
-function s.spellval(e,re,rp)
-	return re:IsActiveType(TYPE_SPELL)
+function s.actionalval(e,re,rp)
+	return re:IsActiveType(TYPE_ACTIONAL)
 end
 function s.trapcon(e)
 	return Duel.IsExistingMatchingCard(Card.IsCode,e:GetHandlerPlayer(),LOCATION_REST,0,1,nil,8124921)

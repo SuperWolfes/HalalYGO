@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.postg)
 	e1:SetOperation(s.posop)
 	c:RegisterEffect(e1)
-	--Detach to end BP and activate Spell Card
+	--Detach to end BP and activate Actional Card
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_BATTLE_CONFIRM)
@@ -77,7 +77,7 @@ function s.filter(c,tp,eg,ep,ev,re,r,rp)
 	local condition=te:GetCondition()
 	local cost=te:GetCost()
 	local target=te:GetTarget()
-	return c:IsSpell() and (not condition or condition(te,tp,eg,ep,ev,re,r,rp)) and (not cost or cost(te,tp,eg,ep,ev,re,r,rp,0))
+	return c:IsActional() and (not condition or condition(te,tp,eg,ep,ev,re,r,rp)) and (not cost or cost(te,tp,eg,ep,ev,re,r,rp,0))
 		and (not target or target(te,tp,eg,ep,ev,re,r,rp,0)) and (c:IsType(TYPE_FIELD) or Duel.GetLocationCount(tp,LOCATION_SZONE)>0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)

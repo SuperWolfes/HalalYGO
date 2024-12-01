@@ -1,6 +1,6 @@
 --ドン・サウザンド／罠Ｂ
 --Don Thousand/Trap B
---Numeron Spell Revision
+--Numeron Actional Revision
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 end
 s.mark=3
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return rp==1-tp and re:IsActiveType(TYPE_SPELL) and re:IsHasType(EFFECT_TYPE_ACTIVATE)
+	return rp==1-tp and re:IsActiveType(TYPE_ACTIONAL) and re:IsHasType(EFFECT_TYPE_ACTIVATE)
 		and Duel.GetFieldGroupCount(tp,LOCATION_ONFIELD,0)<=1 and Duel.IsChainNegatable(ev)
 end
 function s.filter(c,tp,eg,ep,ev,re,r,rp)
@@ -24,7 +24,7 @@ function s.filter(c,tp,eg,ep,ev,re,r,rp)
 	local condition=te:GetCondition()
 	local cost=te:GetCost()
 	local target=te:GetTarget()
-	return (Duel.GetLocationCount(1-tp,LOCATION_SZONE)>0 or c:IsType(TYPE_FIELD)) and c:IsSpell() 
+	return (Duel.GetLocationCount(1-tp,LOCATION_SZONE)>0 or c:IsType(TYPE_FIELD)) and c:IsActional() 
 		and (not condition or condition(te,1-tp,eg,ep,ev,re,r,rp)) and (not cost or cost(te,1-tp,eg,ep,ev,re,r,rp,0))
 		and (not target or target(te,1-tp,eg,ep,ev,re,r,rp,0))
 end

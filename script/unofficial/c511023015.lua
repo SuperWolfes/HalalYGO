@@ -72,7 +72,7 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Damage(p,d,REASON_EFFECT)
 end
 function s.indesval(e,re)
-	return re:IsActiveType(TYPE_SPELL)
+	return re:IsActiveType(TYPE_ACTIONAL)
 end
 function s.damcon2(e,tp,eg,ep,ev,re,r,rp)
 	return s.damcon(e,tp,eg,ep,ev,re,r,rp) and Duel.GetTurnPlayer()==tp

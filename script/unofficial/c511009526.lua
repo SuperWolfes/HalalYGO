@@ -80,15 +80,15 @@ function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e3,tp)
 end
 function s.distg(e,c)
-	return c~=e:GetHandler() and c:IsSpell()
+	return c~=e:GetHandler() and c:IsActional()
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	if ep==tp then return end
 	local tl=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_LOCATION)
-	if tl==LOCATION_SZONE and re:IsActiveType(TYPE_SPELL) then
+	if tl==LOCATION_SZONE and re:IsActiveType(TYPE_ACTIONAL) then
 		Duel.NegateEffect(ev)
 	end
 end
 function s.aclimit(e,re,tp)
-	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_SPELL)
+	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_ACTIONAL)
 end

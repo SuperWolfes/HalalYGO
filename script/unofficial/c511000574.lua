@@ -21,7 +21,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.PayLPCost(tp,1000)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return tp==ep and re:IsActiveType(TYPE_SPELL) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and e:GetHandler():IsDeckMaster()
+	return tp==ep and re:IsActiveType(TYPE_ACTIONAL) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and e:GetHandler():IsDeckMaster()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

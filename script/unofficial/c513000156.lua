@@ -1,4 +1,4 @@
---Speed Spell - Summon Close (Anime)
+--Speed Actional - Summon Close (Anime)
 --Ｓｐ－サモンクローズ
 --scripted by Larry126
 local s,id=GetID()

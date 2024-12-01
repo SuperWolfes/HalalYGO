@@ -1,6 +1,6 @@
 --Power of Dark
 --Skill activation
---At the start of the Duel, place this card in your Field Spell Zone and flip it over.
+--At the start of the Duel, place this card in your Field Actional Zone and flip it over.
 --Effect
 --All Tainted and Mentor monsters on the field gain 200 ATK/DEF, also all Wanderer monsters on the field lose 200 ATK/DEF.
 local s,id=GetID()

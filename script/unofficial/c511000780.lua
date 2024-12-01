@@ -1,4 +1,4 @@
---Speed Spell - Overspeed
+--Speed Actional - Overspeed
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -26,7 +26,7 @@ function s.monfilter(c)
 	return lv>0 and lv<4 and c:IsAbleToHand()
 end
 function s.stfilter(c)
-	return c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.monfilter,tp,LOCATION_REST,0,1,nil) 

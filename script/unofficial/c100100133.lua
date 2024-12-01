@@ -1,5 +1,5 @@
 --Ｓｐ－デッド・シンクロン
---Speed Spell - Deceased Synchron
+--Speed Actional - Deceased Synchron
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	e3:SetRange(LOCATION_SZONE)
 	e3:SetOperation(s.winop)
 	c:RegisterEffect(e3)
-	--Trap Spell
+	--Trap Actional
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_SINGLE)
 	e4:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)

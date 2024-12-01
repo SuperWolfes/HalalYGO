@@ -1,5 +1,5 @@
 --Ｓｐ－禁じられた聖杯
---Speed Spell - Unliked Chalice
+--Speed Actional - Unliked Chalice
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

@@ -69,7 +69,7 @@ function s.initial_effect(c)
 	e3:SetTarget(s.normalsettarget)
 	e3:SetOperation(s.normalsetoperation)
 	c:RegisterEffect(e3)
-	--declare a spell activation
+	--declare a actional activation
 	local e4=Effect.CreateEffect(c)
 	e4:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_DISABLE_CHAIN)
 	e4:SetDescription(1051)
@@ -77,8 +77,8 @@ function s.initial_effect(c)
 	e4:SetCode(EVENT_FREE_CHAIN)
 	e4:SetRange(LOCATION_REMOVED)
 	e4:SetCountLimit(1)
-	e4:SetTarget(s.spelltarget)
-	e4:SetOperation(s.spelloperation)
+	e4:SetTarget(s.actionaltarget)
+	e4:SetOperation(s.actionaloperation)
 	c:RegisterEffect(e4)
 	--declare a trap activation
 	local e5=Effect.CreateEffect(c)
@@ -205,11 +205,11 @@ function s.normalsetoperation(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_MESSAGE,tp,aux.Stringid(4002,9))
 	end
 end
---spell
-function s.spelltarget(e,tp,eg,ep,ev,re,r,rp,chk)
+--actional
+function s.actionaltarget(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 end
 end
-function s.spelloperation(e,tp,eg,ep,ev,re,r,rp)
+function s.actionaloperation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local n=Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)
 	local r={}
@@ -220,7 +220,7 @@ function s.spelloperation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFieldCard(tp,LOCATION_DECK,an)
 	Duel.ConfirmCards(tp,tc)
 	Duel.ConfirmCards(1-tp,tc)
-	if tc:IsSpell() then
+	if tc:IsActional() then
 		local tpe=tc:GetType()
 		local te=tc:GetActivateEffect()
 		local tg=te:GetTarget()

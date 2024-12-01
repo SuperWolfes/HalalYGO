@@ -120,5 +120,5 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.indval(e,re)
-	return re:GetOwner():IsType(TYPE_MONSTER+TYPE_SPELL+TYPE_TRAP)
+	return re:GetOwner():IsType(TYPE_MONSTER+TYPE_ACTIONAL+TYPE_TRAP)
 end

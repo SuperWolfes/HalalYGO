@@ -18,7 +18,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	tc:RemoveCounter(tp,0x91,6,REASON_COST)
 end
 function s.filter(c)
-	return c:IsSpellTrap() and c:IsDestructable()
+	return c:IsActionalTrap() and c:IsDestructable()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

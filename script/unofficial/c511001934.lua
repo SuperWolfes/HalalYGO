@@ -32,7 +32,7 @@ function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 	return ep==tp
 end
 function s.tgfilter(c)
-	return c:IsSetCard(0x55f) and c:IsSpell() and c:IsAbleToRest()
+	return c:IsSetCard(0x55f) and c:IsActional() and c:IsAbleToRest()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil) end
@@ -47,7 +47,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.cfilter(c)
-	return c:IsSetCard(0x55f) and c:IsSpell() and c:IsAbleToRemoveAsCost()
+	return c:IsSetCard(0x55f) and c:IsActional() and c:IsAbleToRemoveAsCost()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST,0,nil)

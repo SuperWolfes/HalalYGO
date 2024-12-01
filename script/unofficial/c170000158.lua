@@ -4,7 +4,7 @@ function s.initial_effect(c)
 	--fusion material
 	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,1784686,CARD_DARK_MAGICIAN)
-	--Spell Power
+	--Actional Power
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_REMOVE)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
@@ -17,7 +17,7 @@ end
 s.listed_names={1784686,CARD_DARK_MAGICIAN}
 s.material_setcode=0x10a2
 function s.cfilter(c)
-	return c:IsSpell() and c:IsAbleToRemove()
+	return c:IsActional() and c:IsAbleToRemove()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST,0,e:GetHandler())

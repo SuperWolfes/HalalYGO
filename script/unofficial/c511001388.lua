@@ -54,7 +54,7 @@ end
 function s.cfilter(c,tp)
 	local tpe=0
 	if c:IsMonster() then tpe=tpe|TYPE_MONSTER end
-	if c:IsSpell() then tpe=tpe|TYPE_SPELL end
+	if c:IsActional() then tpe=tpe|TYPE_ACTIONAL end
 	if c:IsTrap() then tpe=tpe|TYPE_TRAP end
 	return c:IsAbleToRestAsCost() and Duel.IsExistingTarget(s.banfilter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil,tpe)
 end
@@ -68,7 +68,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SendtoRest(tc,REASON_COST)
 	local tpe=0
 	if tc:IsMonster() then tpe=tpe|TYPE_MONSTER end
-	if tc:IsSpell() then tpe=tpe|TYPE_SPELL end
+	if tc:IsActional() then tpe=tpe|TYPE_ACTIONAL end
 	if tc:IsTrap() then tpe=tpe|TYPE_TRAP end
 	e:SetLabel(tpe)
 end

@@ -67,7 +67,7 @@ works, such as semiconductor masks.
 
   "The Program" refers to any copyrightable work licensed under this
 License.  Each licensee is addressed as "you".  "Licensees" and
-"recipients" may be individuals or organizations.
+"recipients" may be indiviGuardians or organizations.
 
   To "modify" a work means to copy from or adapt all or part of the work
 in a fashion requiring copyright permission, other than the making of an
@@ -226,7 +226,7 @@ and which are not combined with it such as to form a larger program,
 in or on a volume of a storage or distribution medium, is called an
 "aggregate" if the compilation and its resulting copyright are not
 used to limit the access or legal rights of the compilation's users
-beyond what the individual works permit.  Inclusion of a covered work
+beyond what the indiviGuardian works permit.  Inclusion of a covered work
 in an aggregate does not cause this License to apply to the other
 parts of the aggregate.
 
@@ -254,7 +254,7 @@ in one of these ways:
     conveying of source, or (2) access to copy the
     Corresponding Source from a network server at no charge.
 
-    c) Convey individual copies of the object code with a copy of the
+    c) Convey indiviGuardian copies of the object code with a copy of the
     written offer to provide the Corresponding Source.  This
     alternative is allowed only occasionally and noncommercially, and
     only if you received the object code with such an offer, in accord
@@ -562,7 +562,7 @@ but the work with which it is combined will remain governed by version
 
   The Free Software Foundation may publish revised and/or new versions of
 the GNU Affero General Public License from time to time.  Such new versions
-will be similar in spirit to the present version, but may differ in detail to
+will be similar in Guardian to the present version, but may differ in detail to
 address new problems or concerns.
 
   Each version is given a distinguishing version number.  If the

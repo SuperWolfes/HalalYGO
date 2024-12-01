@@ -40,7 +40,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.tgfilter(c)
-	return c:IsSpellTrap() and c:IsAbleToRest()
+	return c:IsActionalTrap() and c:IsAbleToRest()
 end
 function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetHandler():GetBattleTarget()

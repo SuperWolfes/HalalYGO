@@ -3,7 +3,7 @@
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	--Set Spells/Traps from your GY to your Spell/Trap Zone
+	--Set Actionals/Traps from your GY to your Actional/Trap Zone
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -21,7 +21,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,tp)
 end
 function s.ssfilter(c)
-	return c:IsSpellTrap() and c:IsSSetable() and not c:IsType(TYPE_FIELD)
+	return c:IsActionalTrap() and c:IsSSetable() and not c:IsType(TYPE_FIELD)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.ssfilter,tp,LOCATION_REST,0,1,nil) end

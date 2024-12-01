@@ -34,7 +34,7 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsPreviousLocation(LOCATION_SZONE) and e:GetHandler():IsPreviousPosition(POS_FACEUP)
 end
 function s.thfilter(c)
-	return c:IsSpell() and c:IsAbleToHand() and c:GetFlagEffect(id)~=0
+	return c:IsActional() and c:IsAbleToHand() and c:GetFlagEffect(id)~=0
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -69,7 +69,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
-		e1:SetValue(TYPE_SPELL+TYPE_CONTINUOUS)
+		e1:SetValue(TYPE_ACTIONAL+TYPE_CONTINUOUS)
 		tc:RegisterEffect(e1)
 		Duel.RaiseEvent(tc,id,e,0,tp,0,0)
 		tc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1)

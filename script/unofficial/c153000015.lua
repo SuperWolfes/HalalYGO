@@ -14,31 +14,31 @@ function s.initial_effect(c)
 	dme1:SetOperation(s.op)
 	DeckMaster.RegisterAbilities(c,dme1)
 	aux.GlobalCheck(s,function()
-		s.usedSpell=Group.CreateGroup()
-		s.usedSpell:KeepAlive()
+		s.usedActional=Group.CreateGroup()
+		s.usedActional:KeepAlive()
 		local ge1=Effect.CreateEffect(c)
 		ge1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		ge1:SetCode(EVENT_CHAINING)
 		ge1:SetOperation(s.checkop)
 		Duel.RegisterEffect(ge1,0)
 		aux.AddValuesReset(function()
-			s.usedSpell:Clear()
+			s.usedActional:Clear()
 		end)
 	end)
 end
 function s.checkop(e,tp,eg,ep,ev,re,r,rp)
-	if re:IsActiveType(TYPE_SPELL) and re:IsHasType(EFFECT_TYPE_ACTIVATE) then
-		s.usedSpell:AddCard(re:GetHandler())
+	if re:IsActiveType(TYPE_ACTIONAL) and re:IsHasType(EFFECT_TYPE_ACTIVATE) then
+		s.usedActional:AddCard(re:GetHandler())
 	end
 end
 function s.filter(c,p)
-	if not c:IsSpell() then return false end
+	if not c:IsActional() then return false end
 	local te=c:CheckActivateEffect(false,false,false)
 	return te and te:IsActivatable(p,true)
 end
 function s.con(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsTurnPlayer(tp) and Duel.IsMainPhase() and Duel.IsDeckMaster(tp,id)
-		and Duel.CheckLPCost(tp,1000) and s.usedSpell:IsExists(s.filter,1,nil,tp)
+		and Duel.CheckLPCost(tp,1000) and s.usedActional:IsExists(s.filter,1,nil,tp)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.SelectYesNo(tp,aux.Stringid(id,0)) then return end
@@ -47,6 +47,6 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,1-tp,id)
 	Duel.BreakEffect()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EFFECT)
-	local te=s.usedSpell:FilterSelect(tp,s.filter,1,1,nil,tp):GetFirst():GetActivateEffect()
+	local te=s.usedActional:FilterSelect(tp,s.filter,1,1,nil,tp):GetFirst():GetActivateEffect()
 	Duel.Activate(te)
 end

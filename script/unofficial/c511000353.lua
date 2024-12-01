@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.desfilter(c)
-	return c:IsSpellTrap() and c:IsDestructable()
+	return c:IsActionalTrap() and c:IsDestructable()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()

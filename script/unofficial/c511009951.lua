@@ -46,7 +46,7 @@ function s.filter(c)
 	return c:IsFaceup() and c:IsSetCard(0x135)
 end
 function s.desfilter(c)
-	return c:IsType(TYPE_SPELL+TYPE_TRAP)
+	return c:IsType(TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_ONFIELD) and chkc:IsControler(1-tp) and s.desfilter(chkc) end
@@ -77,7 +77,7 @@ function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.cfilter(c,p)
-	return c:GetPreviousTypeOnField()&(TYPE_SPELL|TYPE_TRAP)>0 and c:GetReasonPlayer()~=p
+	return c:GetPreviousTypeOnField()&(TYPE_ACTIONAL|TYPE_TRAP)>0 and c:GetReasonPlayer()~=p
 end
 function s.checkop(e,tp,eg,ep,ev,re,r,rp)
 	if eg:IsExists(s.cfilter,1,nil,tp) then

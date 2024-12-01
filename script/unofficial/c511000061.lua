@@ -44,7 +44,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	c:RegisterEffect(e2)
 end
 function s.efilter(e,te)
-	return te:IsActiveType(TYPE_SPELL+TYPE_TRAP)
+	return te:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

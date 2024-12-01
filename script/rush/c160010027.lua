@@ -23,7 +23,7 @@ function s.tdfilter(c)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,0,LOCATION_REST,1,nil)
-		and Duel.IsExistingMatchingCard(Card.IsSpell,tp,0,LOCATION_REST,1,nil) end
+		and Duel.IsExistingMatchingCard(Card.IsActional,tp,0,LOCATION_REST,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,0,1-tp,LOCATION_REST)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end
@@ -31,7 +31,7 @@ function s.spfilter(c,e,tp)
 	return c:IsCode(160010102) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local ct=Duel.GetMatchingGroupCount(Card.IsSpell,tp,0,LOCATION_REST,nil)
+	local ct=Duel.GetMatchingGroupCount(Card.IsActional,tp,0,LOCATION_REST,nil)
 	--Shuffle level 7 monsters
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
 	local g=Duel.SelectMatchingCard(tp,s.tdfilter,tp,0,LOCATION_REST,1,ct,nil)

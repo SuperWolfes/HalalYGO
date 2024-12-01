@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Pendulum summon
 	Pendulum.AddProcedure(c)
-	--Negate effect that targets Spell/Trap cards
+	--Negate effect that targets Actional/Trap cards
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(63251695,0))
 	e1:SetCategory(CATEGORY_DISABLE)

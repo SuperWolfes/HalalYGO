@@ -21,7 +21,7 @@ end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local dr=1
-	if rp~=tp and re:IsActiveType(TYPE_SPELL) then dr=2 end
+	if rp~=tp and re:IsActiveType(TYPE_ACTIONAL) then dr=2 end
 	Duel.SetTargetPlayer(tp)
 	Duel.SetTargetParam(dr)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,dr)

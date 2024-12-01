@@ -1,4 +1,4 @@
---Number Spell Caster
+--Number Actional Caster
 local s,id=GetID()
 function s.initial_effect(c)
 	--activate
@@ -22,7 +22,7 @@ function s.filter(c,tp,eg,ep,ev,re,r,rp)
 	local condition=te:GetCondition()
 	local cost=te:GetCost()
 	local target=te:GetTarget()
-	return c:IsSpell() and c:IsType(TYPE_CONTINUOUS) and (not condition or condition(te,tp,eg,ep,ev,re,r,rp)) 
+	return c:IsActional() and c:IsType(TYPE_CONTINUOUS) and (not condition or condition(te,tp,eg,ep,ev,re,r,rp)) 
 		and (not cost or cost(te,tp,eg,ep,ev,re,r,rp,0))
 		and (not target or target(te,tp,eg,ep,ev,re,r,rp,0))
 end

@@ -1,4 +1,4 @@
---Eternal Spell
+--Eternal Actional
 local s,id=GetID()
 function s.initial_effect(c)
 --Activate
@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c)
-	return c:IsSpell() and c:IsType(TYPE_CONTINUOUS)
+	return c:IsActional() and c:IsType(TYPE_CONTINUOUS)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(1-tp) and s.filter(chkc) end

@@ -4,7 +4,7 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Destroy opponent's face-up field spell
+	--Destroy opponent's face-up field actional
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DESTROY)
 	e1:SetType(EFFECT_TYPE_IGNITION)

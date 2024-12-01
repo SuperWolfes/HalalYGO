@@ -30,7 +30,7 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetValue(a:GetAttack()*2)
 	e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 	a:RegisterEffect(e1)
-	--destroy spell
+	--destroy actional
 	local e2=Effect.CreateEffect(e:GetHandler())
 	e2:SetCategory(CATEGORY_DESTROY)
 	e2:SetCode(EVENT_BATTLE_DESTROYING)
@@ -42,9 +42,9 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetOperation(s.desop)
 	Duel.RegisterEffect(e2,tp)
 end
---destroy spell
+--destroy actional
 function s.sfilter(c)
-	return c:IsFacedown() or c:IsSpell()
+	return c:IsFacedown() or c:IsActional()
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	local a=Duel.GetAttacker()
@@ -62,7 +62,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	if tc:IsFacedown() then
 		Duel.ConfirmCards(tp,tc)
 	end
-	if tc:IsSpell() then
+	if tc:IsActional() then
 		Duel.Destroy(tc,REASON_EFFECT)
 	end
 end

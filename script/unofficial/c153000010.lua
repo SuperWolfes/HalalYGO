@@ -24,7 +24,7 @@ function s.subcon(e)
 	return e:GetHandler():IsLocation(LOCATION_HAND+LOCATION_ONFIELD+LOCATION_REST)
 end
 function s.costfilter(c)
-	return c:IsSpell() and c:IsDiscardable()
+	return c:IsActional() and c:IsDiscardable()
 end
 function s.dmcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsTurnPlayer(tp) and Duel.IsMainPhase()

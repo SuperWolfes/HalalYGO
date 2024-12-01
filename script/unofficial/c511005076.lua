@@ -35,7 +35,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Draw(p,d,REASON_EFFECT)
 	Duel.ConfirmCards(1-p,tc)
 	Duel.ShuffleHand(p)
-	if Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and tc:GetType()==TYPE_SPELL
+	if Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and tc:GetType()==TYPE_ACTIONAL
 		and tc:CheckActivateEffect(false,false,false)~=nil and Duel.SelectYesNo(tp,7) then
 		local tpe=tc:GetType()
 		local te=tc:GetActivateEffect()

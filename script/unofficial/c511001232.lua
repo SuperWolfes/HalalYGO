@@ -19,7 +19,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return tp~=ep and Duel.GetCurrentChain()==0
 end
 function s.costfilter(c)
-	return c:IsSpell() and c:IsAbleToRestAsCost()
+	return c:IsActional() and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

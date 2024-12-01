@@ -2,7 +2,7 @@
 --Ultimate Insect LV1
 local s,id=GetID()
 function s.initial_effect(c)
-	--immune spell
+	--immune actional
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_IMMUNE_EFFECT)
@@ -39,7 +39,7 @@ s.listed_names={34088136}
 s.LVnum=1
 s.LVset=0x5d
 function s.efilter(e,te)
-	return te:IsActiveType(TYPE_SPELL)
+	return te:IsActiveType(TYPE_ACTIONAL)
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	e:GetHandler():RegisterFlagEffect(id,RESET_EVENT|RESETS_STANDARD&~(RESET_TEMP_REMOVE|RESET_TURN_SET)|RESET_PHASE|PHASE_END,0,1)

@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	end)
 end
 function s.checkop(e,tp,eg,ep,ev,re,r,rp)
-	if re and re:GetHandler() and re:GetHandler():IsSpell() then
+	if re and re:GetHandler() and re:GetHandler():IsActional() then
 		s[rp]:AddCard(re:GetHandler())
 	end
 end

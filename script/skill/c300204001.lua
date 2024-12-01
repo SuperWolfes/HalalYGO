@@ -63,7 +63,7 @@ function s.efilter1(e,te)
 	return te:GetHandlerPlayer()~=e:GetHandlerPlayer() and te:IsActiveType(TYPE_SKILL)
 end
 function s.efilter2(e,te)
-	return te:GetHandlerPlayer()~=e:GetHandlerPlayer() and te:IsActiveType(TYPE_SPELL)
+	return te:GetHandlerPlayer()~=e:GetHandlerPlayer() and te:IsActiveType(TYPE_ACTIONAL)
 end
 function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	local c=re:GetHandler()
@@ -80,7 +80,7 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp,chk)
 	and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil)
 end
 function s.filter(c)
-	return c:IsSpell() and c:IsAbleToHand()
+	return c:IsActional() and c:IsAbleToHand()
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,tp,id)

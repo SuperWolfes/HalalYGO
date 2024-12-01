@@ -50,7 +50,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.filter(c)
-	return c:IsSpellTrap() and c:GetFlagEffect(id)==0
+	return c:IsActionalTrap() and c:GetFlagEffect(id)==0
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_REST,0,nil)

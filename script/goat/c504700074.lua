@@ -2,8 +2,8 @@
 --Skilled White Magician
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableCounterPermit(COUNTER_SPELL)
-	c:SetCounterLimit(COUNTER_SPELL,3)
+	c:EnableCounterPermit(COUNTER_ACTIONAL)
+	c:SetCounterLimit(COUNTER_ACTIONAL,3)
 	--add counter
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
@@ -29,15 +29,15 @@ function s.initial_effect(c)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
 end
-s.counter_place_list={COUNTER_SPELL}
+s.counter_place_list={COUNTER_ACTIONAL}
 s.listed_names={78193831}
 function s.acop(e,tp,eg,ep,ev,re,r,rp)
-	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_SPELL) and e:GetHandler():GetFlagEffect(1)>0 then
-		e:GetHandler():AddCounter(COUNTER_SPELL,1)
+	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_ACTIONAL) and e:GetHandler():GetFlagEffect(1)>0 then
+		e:GetHandler():AddCounter(COUNTER_ACTIONAL,1)
 	end
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():GetCounter(COUNTER_SPELL)==3 and e:GetHandler():IsReleasable() end
+	if chk==0 then return e:GetHandler():GetCounter(COUNTER_ACTIONAL)==3 and e:GetHandler():IsReleasable() end
 	Duel.Release(e:GetHandler(),REASON_COST)
 end
 function s.filter(c,e,tp)

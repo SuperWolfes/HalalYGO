@@ -43,5 +43,5 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.distarget(e,c)
-	return c~=e:GetHandler() and c:IsType(TYPE_TRAP+TYPE_SPELL+TYPE_MONSTER)
+	return c~=e:GetHandler() and c:IsType(TYPE_TRAP+TYPE_ACTIONAL+TYPE_MONSTER)
 end

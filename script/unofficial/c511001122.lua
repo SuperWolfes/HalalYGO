@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e2:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE+EFFECT_FLAG_SET_AVAILABLE+EFFECT_FLAG_CANNOT_DISABLE)
 	e2:SetCode(511001408)
 	c:RegisterEffect(e2)
-	--Trap Spell
+	--Trap Actional
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)

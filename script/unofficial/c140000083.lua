@@ -40,7 +40,7 @@ function s.initial_effect(c)
 end
 s.listed_names={140000085}
 function s.efilter(e,te)
-	return te:IsActiveType(TYPE_SPELL+TYPE_TRAP) and te:GetOwnerPlayer()~=e:GetHandlerPlayer()
+	return te:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) and te:GetOwnerPlayer()~=e:GetHandlerPlayer()
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp

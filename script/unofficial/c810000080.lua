@@ -33,7 +33,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not c:IsRelateToEffect(e) or not tc or not tc:IsRelateToEffect(e) then return end
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
-	c:AddMonsterAttribute(TYPE_NORMAL+TYPE_SPELL+TYPE_TRAP)
+	c:AddMonsterAttribute(TYPE_NORMAL+TYPE_ACTIONAL+TYPE_TRAP)
 	Duel.SpecialSummon(c,0,tp,tp,true,false,POS_FACEUP)
 	c:AddMonsterAttributeComplete()
 	local e1=Effect.CreateEffect(c)

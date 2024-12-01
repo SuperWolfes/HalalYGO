@@ -15,7 +15,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,5,tp,LOCATION_DECK)
 end
 function s.filter(c)
-	return c:IsLocation(LOCATION_REST) and c:IsSpell()
+	return c:IsLocation(LOCATION_REST) and c:IsActional()
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(Card.IsAbleToRest,tp,LOCATION_DECK,0,nil)

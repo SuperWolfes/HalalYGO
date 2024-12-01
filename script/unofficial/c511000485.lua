@@ -21,7 +21,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SendtoRest(g,REASON_COST)
 end
 function s.filter(c)
-	return c:IsSpell() and c:IsAbleToHand()
+	return c:IsActional() and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chkc then return chkc:GetLocation()==LOCATION_REST and chkc:GetControler()~=tp and s.filter(chkc) end

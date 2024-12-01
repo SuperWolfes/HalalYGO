@@ -17,7 +17,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x119}
 function s.filter(c)
-	return c:IsFaceup() and c:IsSpellTrap()
+	return c:IsFaceup() and c:IsActionalTrap()
 end
 function s.costfilter(c)
 	return c:IsSetCard(0x119) and c:IsMonster() and c:IsAbleToRestAsCost()

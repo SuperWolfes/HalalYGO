@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	e2:SetCondition(function(e) return e:GetHandler():GetSequence()>4 end)
 	e2:SetValue(s.atkval)
 	c:RegisterEffect(e2)
-	--search "Judgment Arrows" and place as Link Spell
+	--search "Judgment Arrows" and place as Link Actional
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -78,13 +78,13 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 		if c:IsRelateToEffect(e) and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 then
 			Duel.BreakEffect()
 			Duel.MoveToField(c,tp,tp,LOCATION_SZONE,POS_FACEUP,true)
-			--treated as Link Spell
+			--treated as Link Actional
 			local e1=Effect.CreateEffect(c)
 			e1:SetCode(EFFECT_CHANGE_TYPE)
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 			e1:SetReset(RESET_EVENT+RESETS_STANDARD)
-			e1:SetValue(TYPE_SPELL+TYPE_LINK)
+			e1:SetValue(TYPE_ACTIONAL+TYPE_LINK)
 			c:RegisterEffect(e1)
 			--banish redirect
 			local e2=Effect.CreateEffect(c)

@@ -34,7 +34,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil)
 end
 function s.filter(c)
-	return c:IsDestructable() and c:IsSpellTrap()
+	return c:IsDestructable() and c:IsActionalTrap()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and s.filter(chkc) and chkc:IsControler(1-tp) end

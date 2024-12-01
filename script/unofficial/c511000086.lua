@@ -1,5 +1,5 @@
 --魔法移し
---Bounce Spell
+--Bounce Actional
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -17,7 +17,7 @@ function s.filter(c,tp)
 	local bool_a=c:IsType(TYPE_PENDULUM) and Duel.GetLocationCount(tp,LOCATION_PZONE)>0
 	local bool_b=c:IsType(TYPE_FIELD)
 	local bool_c=not c:IsType(TYPE_PENDULUM) and not c:IsType(TYPE_FIELD) and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-	return c:IsSpell() and (bool_a or bool_b or bool_c) and c:IsFaceup()
+	return c:IsActional() and (bool_a or bool_b or bool_c) and c:IsFaceup()
 		and c:IsAbleToChangeControler() and c:CheckActivateEffect(true,true,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

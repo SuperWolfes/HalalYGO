@@ -37,7 +37,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	c:RegisterEffect(e1)
 end
 function s.filter(c)
-	return c:IsLockedSpell() and c:IsAbleToHand()
+	return c:IsLockedActional() and c:IsAbleToHand()
 end
 function s.tohand(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetTurnPlayer()~=tp then return end

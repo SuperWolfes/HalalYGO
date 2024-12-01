@@ -5,7 +5,7 @@ local s,id=GetID()
 local s,id,alias=GetID()
 function s.initial_effect(c)
 	alias=c:GetOriginalCodeRule()
-	--Place in the Spell/Trap Zone
+	--Place in the Actional/Trap Zone
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(alias,0))
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)

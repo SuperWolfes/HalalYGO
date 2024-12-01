@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetTargetRange(LOCATION_ONFIELD,0)
 	e3:SetProperty(EFFECT_FLAG_SET_AVAILABLE)
-	e3:SetTarget(aux.TargetBoolFunction(Card.IsSpellTrap))
+	e3:SetTarget(aux.TargetBoolFunction(Card.IsActionalTrap))
 	c:RegisterEffect(e3)
 	--inactivatable
 	local e4=Effect.CreateEffect(c)
@@ -36,5 +36,5 @@ end
 function s.effectfilter(e,ct)
 	local p=e:GetHandler():GetControler()
 	local te,tp=Duel.GetChainInfo(ct,CHAININFO_TRIGGERING_EFFECT,CHAININFO_TRIGGERING_PLAYER)
-	return p==tp and te:IsActiveType(TYPE_SPELL+TYPE_TRAP)
+	return p==tp and te:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP)
 end

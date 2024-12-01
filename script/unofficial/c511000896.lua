@@ -1,4 +1,4 @@
---Spell of the Ruler
+--Actional of the Ruler
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

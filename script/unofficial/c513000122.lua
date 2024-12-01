@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c)
-	return c:IsSpell() and c:IsAbleToRest()
+	return c:IsActional() and c:IsAbleToRest()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRest,1-tp,LOCATION_DECK+LOCATION_HAND,0,1,nil) end

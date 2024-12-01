@@ -4,7 +4,7 @@
 local s,id,alias=GetID()
 function s.initial_effect(c)
 	alias=c:GetOriginalCodeRule()
-	--Spell change
+	--Actional change
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TOHAND)
 	e1:SetCountLimit(1)
@@ -47,7 +47,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e5)
 end
 function s.con(e,tp,eg,ep,ev,re,r,rp)
-	return re:IsActiveType(TYPE_SPELL) and re:IsActiveType(TYPE_CONTINUOUS) and re:IsHasType(EFFECT_TYPE_ACTIVATE)
+	return re:IsActiveType(TYPE_ACTIONAL) and re:IsActiveType(TYPE_CONTINUOUS) and re:IsHasType(EFFECT_TYPE_ACTIVATE)
 		and rp==tp and e:GetHandler():GetFlagEffect(1)>0
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
@@ -65,7 +65,7 @@ function s.discon(e,tp,eg,ep,ev,re,r,rp)
 	return not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED) and re:IsHasType(EFFECT_TYPE_ACTIVATE)
 end
 function s.thfilter(c)
-	return (c:GetType()&TYPE_SPELL+TYPE_CONTINUOUS)==TYPE_SPELL+TYPE_CONTINUOUS and c:IsAbleToHand()
+	return (c:GetType()&TYPE_ACTIONAL+TYPE_CONTINUOUS)==TYPE_ACTIONAL+TYPE_CONTINUOUS and c:IsAbleToHand()
 end
 function s.actfilter(c,tp,eg,ep,ev,re,r,rp)
 	local te=c:GetActivateEffect()
@@ -73,7 +73,7 @@ function s.actfilter(c,tp,eg,ep,ev,re,r,rp)
 	local condition=te:GetCondition()
 	local cost=te:GetCost()
 	local target=te:GetTarget()
-	return c:IsSpell() and c:IsType(TYPE_CONTINUOUS) and (not condition or condition(te,tp,eg,ep,ev,re,r,rp)) 
+	return c:IsActional() and c:IsType(TYPE_CONTINUOUS) and (not condition or condition(te,tp,eg,ep,ev,re,r,rp)) 
 		and (not cost or cost(te,tp,eg,ep,ev,re,r,rp,0))
 		and (not target or target(te,tp,eg,ep,ev,re,r,rp,0))
 end
@@ -154,7 +154,7 @@ function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	return c:IsPreviousPosition(POS_FACEUP)
 end
 function s.desfilter(c)
-	return c:IsSpell() and c:IsFaceup()
+	return c:IsActional() and c:IsFaceup()
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and s.desfilter(chkc) end

@@ -54,7 +54,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return ph>=PHASE_BATTLE_START and ph<=PHASE_BATTLE
 end
 function s.filter(c)
-	return c:IsSpellTrap() and c:IsSetCard(0x119) and c:IsAbleToRestAsCost()
+	return c:IsActionalTrap() and c:IsSetCard(0x119) and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND,0,1,nil) end

@@ -78,7 +78,7 @@ function s.discon(e,tp,eg,ep,ev,re,r,rp)
 	if not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then return end
 	local loc,tg=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_LOCATION,CHAININFO_TARGET_CARDS)
 	if not tg or not tg:IsContains(c) then return false end
-	return re:IsActiveType(TYPE_SPELL) and Duel.IsChainDisablable(ev) and loc~=LOCATION_DECK
+	return re:IsActiveType(TYPE_ACTIONAL) and Duel.IsChainDisablable(ev) and loc~=LOCATION_DECK
 end
 function s.distg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -88,7 +88,7 @@ function s.disop(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.NegateEffect(ev)
 end
 function s.negcon(e,tp,eg,ep,ev,re,r,rp)
-	return not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED) and re:IsActiveType(TYPE_SPELL) and Duel.IsChainNegatable(ev) and rp~=tp
+	return not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED) and re:IsActiveType(TYPE_ACTIONAL) and Duel.IsChainNegatable(ev) and rp~=tp
 end
 function s.negcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) end

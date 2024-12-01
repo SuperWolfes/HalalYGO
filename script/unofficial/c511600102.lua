@@ -49,7 +49,7 @@ function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.Draw(tp,1,REASON_EFFECT)~=0 then
 		local dc=Duel.GetOperatedGroup():GetFirst()
 		Duel.ConfirmCards(1-tp,dc)
-		local tpe=dc:GetType()&(TYPE_MONSTER|TYPE_SPELL|TYPE_TRAP)
+		local tpe=dc:GetType()&(TYPE_MONSTER|TYPE_ACTIONAL|TYPE_TRAP)
 		if Duel.IsExistingMatchingCard(s.filter,tp,0,LOCATION_ONFIELD,1,e:GetHandler(),tpe) then
 			Duel.BreakEffect()
 			local tc=Duel.SelectMatchingCard(1-tp,s.filter,tp,0,LOCATION_ONFIELD,1,1,e:GetHandler(),tpe)

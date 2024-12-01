@@ -31,7 +31,7 @@ function s.spcon(e,c)
 	return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and s[tp]
 end
 function s.checkop(e,tp,eg,ep,ev,re,r,rp)
-	if re:GetActiveType()==TYPE_SPELL and re:IsHasType(EFFECT_TYPE_ACTIVATE) then
+	if re:GetActiveType()==TYPE_ACTIONAL and re:IsHasType(EFFECT_TYPE_ACTIVATE) then
 		s[rp]=true
 	end
 end

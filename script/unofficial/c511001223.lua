@@ -1,4 +1,4 @@
---Spell Spice Cinnamon
+--Actional Spice Cinnamon
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

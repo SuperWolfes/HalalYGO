@@ -50,7 +50,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) or not re:IsActiveType(TYPE_SPELL+TYPE_TRAP) then return end
+	if not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) or not re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) then return end
 	local tg=Duel.GetChainInfo(ev,CHAININFO_TARGET_CARDS)
 	local tc=c:GetFirstCardTarget()
 	if tc and tg:IsContains(tc) and tc:IsLocation(LOCATION_MZONE) and Duel.SelectEffectYesNo(tp,c) then

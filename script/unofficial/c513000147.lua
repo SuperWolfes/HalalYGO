@@ -1,5 +1,5 @@
 --Ｓｐ－ジ・エンド・オブ・ストーム (Anime)
---Speed Spell - The End of the Storm (Anime)
+--Speed Actional - The End of the Storm (Anime)
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)

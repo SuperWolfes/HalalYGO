@@ -74,14 +74,14 @@ function card.szop(e, tp, eg, ep, ev, re, r, rp)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 		e1:SetReset(RESET_EVENT + RESETS_STANDARD - RESET_TURN_SET)
-		e1:SetValue(TYPE_SPELL + TYPE_CONTINUOUS)
+		e1:SetValue(TYPE_ACTIONAL + TYPE_CONTINUOUS)
 		tc:RegisterEffect(e1)
 	end
 end
 
 --copy stats
 function card.cpfilter(c)
-	return c:IsFaceup() and (c:GetOriginalType() & (TYPE_MONSTER)) == TYPE_MONSTER and c:IsSpell() and
+	return c:IsFaceup() and (c:GetOriginalType() & (TYPE_MONSTER)) == TYPE_MONSTER and c:IsActional() and
 		c:IsType(TYPE_CONTINUOUS) and c:GetOriginalType() & (TYPE_XYZ | TYPE_LINK) == 0
 end
 

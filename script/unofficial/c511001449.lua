@@ -21,5 +21,5 @@ function s.indtg(e,c)
     return c:IsMonster() and c:IsAttribute(ATTRIBUTE_WATER) and (c:IsSummonType(SUMMON_TYPE_NORMAL) or c:IsSummonType(SUMMON_TYPE_SPECIAL))
 end
 function s.indesval(e,re)
-	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP)
+	return re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP)
 end

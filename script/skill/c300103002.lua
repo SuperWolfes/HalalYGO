@@ -1,4 +1,4 @@
---Spell Proof Armor
+--Actional Proof Armor
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddSkillProcedure(c,1,false,s.flipcon,s.flipop)
@@ -45,7 +45,7 @@ function s.con1(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetFlagEffect(ep,id)~=0
 end
 function s.efilter(e,re)
-	return e:GetHandlerPlayer()~=re:GetOwnerPlayer() and re:IsActiveType(TYPE_SPELL)
+	return e:GetHandlerPlayer()~=re:GetOwnerPlayer() and re:IsActiveType(TYPE_ACTIONAL)
 end
 function s.atktg(e,c)
 	return c:IsType(TYPE_NORMAL) and c:IsRace(RACE_MACHINE)

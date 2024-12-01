@@ -36,7 +36,7 @@ function s.filter(c,tp)
 			if type(prev)~='function' or prev(eff,te,tp) then return false end
 		end
 	end
-	return c:GetType()==TYPE_SPELL and c:CheckActivateEffect(false,false,false)~=nil
+	return c:GetType()==TYPE_ACTIONAL and c:CheckActivateEffect(false,false,false)~=nil
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND,0,1,nil,tp) end

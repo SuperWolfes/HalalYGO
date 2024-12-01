@@ -26,12 +26,12 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return true end
-	local g=Duel.GetMatchingGroup(Card.IsType,tp,0,LOCATION_ONFIELD,nil,TYPE_SPELL+TYPE_TRAP)
+	local g=Duel.GetMatchingGroup(Card.IsType,tp,0,LOCATION_ONFIELD,nil,TYPE_ACTIONAL+TYPE_TRAP)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,e:GetLabel(),0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ct=e:GetLabel()
-	local g=Duel.GetMatchingGroup(Card.IsType,tp,0,LOCATION_ONFIELD,nil,TYPE_SPELL+TYPE_TRAP)
+	local g=Duel.GetMatchingGroup(Card.IsType,tp,0,LOCATION_ONFIELD,nil,TYPE_ACTIONAL+TYPE_TRAP)
 	if #g<ct then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local sg=g:Select(tp,ct,ct,nil)

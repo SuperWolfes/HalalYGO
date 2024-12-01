@@ -2,7 +2,7 @@
 --Jester Queen
 local s,id=GetID()
 function s.initial_effect(c)
-	--Destroy Spell and Trap
+	--Destroy Actional and Trap
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DESTROY)
@@ -36,5 +36,5 @@ function s.condition(e)
 	return not Duel.IsExistingMatchingCard(aux.TRUE,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,e:GetHandler())
 end
 function s.value(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsType,e:GetHandlerPlayer(),LOCATION_ONFIELD,0,nil,TYPE_SPELL+TYPE_TRAP)
+	return Duel.GetMatchingGroupCount(Card.IsType,e:GetHandlerPlayer(),LOCATION_ONFIELD,0,nil,TYPE_ACTIONAL+TYPE_TRAP)
 end

@@ -30,7 +30,7 @@ function s.checkop(e,tp,eg,ep,ev,re,r,rp)
 	local re=tc:GetReasonEffect()
 	if re==nil then return end
 	while tc do
-		if tc:IsLocation(LOCATION_REST) and tc:IsReason(REASON_DISCARD) and re:IsActiveType(TYPE_SPELL) then
+		if tc:IsLocation(LOCATION_REST) and tc:IsReason(REASON_DISCARD) and re:IsActiveType(TYPE_ACTIONAL) then
 			s[tc:GetControler()]=true
 		end
 		tc=eg:GetNext()
@@ -38,7 +38,7 @@ function s.checkop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.filter(c,id,e,tp)
 	local re=c:GetReasonEffect()
-	return c:IsReason(REASON_DISCARD) and c:GetTurnID()==id and c:IsAbleToHand() and re:IsActiveType(TYPE_SPELL)
+	return c:IsReason(REASON_DISCARD) and c:GetTurnID()==id and c:IsAbleToHand() and re:IsActiveType(TYPE_ACTIONAL)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return s[tp] and Duel.GetFlagEffect(tp,id)==0

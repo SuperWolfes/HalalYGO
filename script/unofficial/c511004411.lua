@@ -19,7 +19,7 @@ function s.cfilter(c)
 	return not c:IsHasEffect(511001283) and s.filter(c)
 end
 function s.filter(c)
-	return c:IsType(TYPE_TRAP+TYPE_SPELL) and c:IsFaceup() and c:CheckActivateEffect(true,true,false)~=nil
+	return c:IsType(TYPE_TRAP+TYPE_ACTIONAL) and c:IsFaceup() and c:CheckActivateEffect(true,true,false)~=nil
 end
 function s.target(e,tp,eg,ev,ep,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -51,10 +51,10 @@ function s.operation(e,tp,eg,ev,ep,re,r,rp)
 	e1:SetValue(code)
 	e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
 	c:RegisterEffect(e1)
-	if te:GetHandler():IsSpell() then
+	if te:GetHandler():IsActional() then
 		local e2=e1:Clone()
 		e2:SetCode(EFFECT_CHANGE_TYPE)
-		e2:SetValue(TYPE_SPELL+TYPE_CONTINUOUS)
+		e2:SetValue(TYPE_ACTIONAL+TYPE_CONTINUOUS)
 		c:RegisterEffect(e2)
 	end
 end

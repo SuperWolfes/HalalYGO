@@ -3,7 +3,7 @@
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	--Destroy 1 card in your opponent's Spell/Trap Zone
+	--Destroy 1 card in your opponent's Actional/Trap Zone
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DESTROY)

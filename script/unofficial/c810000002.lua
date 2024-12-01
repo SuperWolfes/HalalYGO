@@ -1,5 +1,5 @@
 --暗黒の魔再生 (Anime)
---Dark Spell Regeneration (Anime)
+--Dark Actional Regeneration (Anime)
 --Scripted by: UnknownGuest
 local s,id,alias=GetID()
 function s.initial_effect(c)
@@ -30,7 +30,7 @@ function s.filter(c,e,tp)
 	if e:GetHandler():IsLocation(LOCATION_HAND) then
 		ft=ft-1
 	end
-	return c:IsSpell() and c:CheckActivateEffect(false,false,false)~=nil 
+	return c:IsActional() and c:CheckActivateEffect(false,false,false)~=nil 
 		and (ft>0 or c:IsType(TYPE_FIELD))
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

@@ -1,4 +1,4 @@
---Speed Spell - Curse of Destrudic
+--Speed Actional - Curse of Destrudic
 --scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)

@@ -66,7 +66,7 @@ end
 s.xyz_number=38
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED) and rp~=tp
-		and re:IsActiveType(TYPE_SPELL) and Duel.IsChainDisablable(ev)
+		and re:IsActiveType(TYPE_ACTIONAL) and Duel.IsChainDisablable(ev)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

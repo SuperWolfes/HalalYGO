@@ -31,7 +31,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE+RESET_PHASE+PHASE_END)
 	e1:SetValue(500)
 	c:RegisterEffect(e1)
-	if not Duel.IsExistingMatchingCard(Card.IsSpellTrap,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) then
+	if not Duel.IsExistingMatchingCard(Card.IsActionalTrap,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) then
 		--Can make up to 2 attacks on monsters
 		local e2=Effect.CreateEffect(c)
 		e2:SetType(EFFECT_TYPE_SINGLE)

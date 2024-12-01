@@ -1,5 +1,5 @@
 --Ｓｐ－強欲で謙虚な壺
---Speed Spell - Pot of Guardianity
+--Speed Actional - Pot of Guardianity
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

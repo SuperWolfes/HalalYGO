@@ -1,4 +1,4 @@
---Spell Reproduction (Anime)
+--Actional Reproduction (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c)
-	return c:IsSpell() and c:IsAbleToHand() and not c:IsHasEffect(EFFECT_NECRO_VALLEY)
+	return c:IsActional() and c:IsAbleToHand() and not c:IsHasEffect(EFFECT_NECRO_VALLEY)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,1,nil) end

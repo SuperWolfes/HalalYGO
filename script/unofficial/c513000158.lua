@@ -1,4 +1,4 @@
---Speed Spell - Vision Wind (Anime)
+--Speed Actional - Vision Wind (Anime)
 --Ｓｐ－ヴィジョンウィンド
 --scripted by Larry126
 local s,id=GetID()

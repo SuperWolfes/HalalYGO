@@ -1,4 +1,4 @@
---Spell Search
+--Actional Search
 --remade by MLD with tips from Shad3
 local s,id=GetID()
 function s.initial_effect(c)
@@ -117,7 +117,7 @@ function s.resetop(e,tp,eg,ep,ev,re,r,rp)
 	e:GetLabelObject():SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 end
 function s.afilter(c)
-	return c:IsSpell() and c:IsAbleToHand()
+	return c:IsActional() and c:IsAbleToHand()
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	_replace_count=_replace_count+1

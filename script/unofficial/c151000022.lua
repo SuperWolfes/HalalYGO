@@ -55,7 +55,7 @@ function s.check(e,tp,eg,ep,ev,re,r,rp)
 	if tp2 then Duel.RaiseSingleEvent(c,EVENT_CUSTOM+id,e,r,rp,1-tp,0) end
 end
 function s.filter(c)
-	return c:IsType(TYPE_SPELL+TYPE_TRAP)
+	return c:IsType(TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and s.filter(chkc) end

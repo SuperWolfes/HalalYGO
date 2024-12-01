@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_DEFENSE_ATTACK)
 	e1:SetValue(1)
 	c:RegisterEffect(e1)
-	--Activate 1 Spell from opponent's GY
+	--Activate 1 Actional from opponent's GY
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetType(EFFECT_TYPE_QUICK_O)
@@ -31,7 +31,7 @@ function s.accost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.PayLPCost(tp,500)
 end
 function s.accon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsDefensePos() and not Duel.IsExistingMatchingCard(Card.IsSpell,tp,LOCATION_REST,0,1,nil)
+	return e:GetHandler():IsDefensePos() and not Duel.IsExistingMatchingCard(Card.IsActional,tp,LOCATION_REST,0,1,nil)
 end
 function s.acfilter(c,e,tp)
 	local te=c:GetActivateEffect()
@@ -44,7 +44,7 @@ function s.acfilter(c,e,tp)
 		end
 	end
 	local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
-	return c:IsSpell() and c:CheckActivateEffect(false,false,false)~=nil and (ft>0 or c:IsType(TYPE_FIELD))
+	return c:IsActional() and c:CheckActivateEffect(false,false,false)~=nil and (ft>0 or c:IsType(TYPE_FIELD))
 end
 function s.actg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(1-tp) and chkc:IsLocation(LOCATION_REST) and s.acfilter(chkc,e,tp) end

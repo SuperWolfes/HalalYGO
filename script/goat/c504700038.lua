@@ -1,6 +1,6 @@
 --魂を削る死霊
 --Guardian Reaper(GOAT)
---If it's targeted by an equip spell, but that card is destroyed before resolving
+--If it's targeted by an equip actional, but that card is destroyed before resolving
 --it doesn't self destruct
 local s,id=GetID()
 function s.initial_effect(c)

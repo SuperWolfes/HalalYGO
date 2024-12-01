@@ -72,7 +72,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e2,tp)
 end
 function s.actlimit(e,te,tp)
-	return te:IsHasType(EFFECT_TYPE_ACTIVATE) and te:IsActiveType(TYPE_SPELL+TYPE_TRAP)
+	return te:IsHasType(EFFECT_TYPE_ACTIVATE) and te:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.filter(c,tp)
 	return c:IsFaceup() and c:IsType(TYPE_LINK) and c:GetLink()>2

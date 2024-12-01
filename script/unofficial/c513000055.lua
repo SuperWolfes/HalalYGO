@@ -1,8 +1,8 @@
 --二重魔法 (Anime)
---Double Spell (Anime)
+--Double Actional (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
-	--Copy spell
+	--Copy actional
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
@@ -14,7 +14,7 @@ end
 function s.filter(c,e,tp,eg,ep,ev,re,r,rp,tid)
 	local te=c:CheckActivateEffect(false,false,false)
 	if c:GetTurnID()~=tid-1 or not c:IsPreviousPosition(POS_FACEUP) then return false end
-	if c:IsSpell() and te then
+	if c:IsActional() and te then
 		if c:IsSetCard(0x95) then
 			local tg=te:GetTarget()
 			return not tg or tg(e,tp,eg,ep,ev,re,r,rp,0)

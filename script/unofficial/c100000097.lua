@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	Duel.AddCustomActivityCounter(id,ACTIVITY_CHAIN,s.chainfilter)
 end
 function s.chainfilter(re,tp,cid)
-	return not (re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_SPELL))
+	return not (re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_ACTIONAL))
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetCustomActivityCount(id,tp,ACTIVITY_CHAIN)==0 end
@@ -34,13 +34,13 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.aclimit(e,re,tp)
-	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_SPELL)
+	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_ACTIONAL)
 end
 function s.tdcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCurrentPhase()==PHASE_DRAW
 end
 function s.tdfilter(c)
-	return c:IsSpell() and c:IsControler(Duel.GetTurnPlayer())
+	return c:IsActional() and c:IsControler(Duel.GetTurnPlayer())
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return eg:IsExists(s.tdfilter,1,nil) end
@@ -54,7 +54,7 @@ end
 function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	local g=eg:Filter(s.cfilter,nil,e)
-	local sg=g:Filter(Card.IsSpell,nil)
+	local sg=g:Filter(Card.IsActional,nil)
 	if #g>0 then
 		Duel.ConfirmCards(1-Duel.GetTurnPlayer(),g)
 		Duel.SendtoDeck(sg,nil,2,REASON_EFFECT)

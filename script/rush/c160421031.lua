@@ -2,7 +2,7 @@
 --Counter Back
 local s,id=GetID()
 function s.initial_effect(c)
-	--Destroy 1 spell/trap on the field
+	--Destroy 1 actional/trap on the field
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DESTROY)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c,tp)
-	return c:IsSpellTrap() and c:IsPreviousLocation(LOCATION_SZONE) and c:IsPreviousControler(tp)
+	return c:IsActionalTrap() and c:IsPreviousLocation(LOCATION_SZONE) and c:IsPreviousControler(tp)
 		and (c:GetReason()&(REASON_EFFECT+REASON_DESTROY))==(REASON_EFFECT+REASON_DESTROY)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)

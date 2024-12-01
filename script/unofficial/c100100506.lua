@@ -1,5 +1,5 @@
 --Ｓｐ－月の書
---Speed Spell - Book of Moon
+--Speed Actional - Book of Moon
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

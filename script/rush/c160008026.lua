@@ -31,7 +31,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		if #g>0 then
 			Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
 			local g2=Duel.GetOperatedGroup()
-			local ct=g2:FilterCount(Card.IsSpellTrap,nil)
+			local ct=g2:FilterCount(Card.IsActionalTrap,nil)
 			if #g2>0 and ct>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 				local g3=Duel.SelectMatchingCard(tp,Card.IsAbleToDeck,tp,0,LOCATION_REST,1,1,nil)
 				Duel.SendtoDeck(g3,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)

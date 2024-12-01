@@ -104,7 +104,7 @@ end
 function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(Card.IsAbleToRemove,tp,0,LOCATION_REST,nil,typ)
 	local a=g:IsExists(Card.IsMonster,1,nil)
-	local b=g:IsExists(Card.IsSpell,1,nil)
+	local b=g:IsExists(Card.IsActional,1,nil)
 	local c=g:IsExists(Card.IsTrap,1,nil)
 	local op=3
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(53839837,5))
@@ -130,7 +130,7 @@ function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 	end
 	local type=0
 	if op==0 then type=TYPE_MONSTER
-	elseif op==1 then type=TYPE_SPELL
+	elseif op==1 then type=TYPE_ACTIONAL
 	elseif op==2 then type=TYPE_TRAP end
 	local sg=g:Filter(s.rmfilter,nil,type)
 	Duel.Remove(sg,POS_FACEUP,REASON_EFFECT)

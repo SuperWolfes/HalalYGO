@@ -29,7 +29,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=eg:Filter(s.filter,nil,e,1-tp)
 	if #g==0 then return end
 	Duel.ConfirmCards(1-ep,g)
-	local dg=g:Filter(Card.IsSpell,nil)
+	local dg=g:Filter(Card.IsActional,nil)
 	Duel.Destroy(dg,REASON_EFFECT)
 	Duel.ShuffleHand(ep)
 end

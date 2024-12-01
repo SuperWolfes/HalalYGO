@@ -31,13 +31,13 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e2,tp)
 end
 function s.aclimit(e,re,tp)
-	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP)
+	return re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	return ep~=tp and eg:GetFirst():GetControler()==tp
 end
 function s.desfilter(c)
-	return c:IsSpellTrap() and c:IsDestructable()
+	return c:IsActionalTrap() and c:IsDestructable()
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_SZONE) and chkc:IsControler(1-tp) and s.desfilter(chkc) end

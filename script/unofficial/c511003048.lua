@@ -23,7 +23,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local p,val=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
 	if Duel.DiscardDeck(p,val,REASON_EFFECT)>0 then
 		local tc=Duel.GetOperatedGroup():GetFirst()
-		local tpe=(TYPE_MONSTER+TYPE_SPELL+TYPE_TRAP&tc:GetType())
+		local tpe=(TYPE_MONSTER+TYPE_ACTIONAL+TYPE_TRAP&tc:GetType())
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 		e1:SetCode(EVENT_DRAW)

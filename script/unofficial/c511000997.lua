@@ -33,7 +33,7 @@ function s.negcon(e,tp,eg,ep,ev,re,r,rp)
 	local d=Duel.GetAttackTarget()
 	return ((d~=nil and a:GetControler()==tp and a:IsType(TYPE_PENDULUM) and a:IsRelateToBattle())
 		or (d~=nil and d:GetControler()==tp and d:IsFaceup() and d:IsType(TYPE_PENDULUM) and d:IsRelateToBattle()))
-		and re:IsActiveType(TYPE_SPELL) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and Duel.IsChainNegatable(ev)
+		and re:IsActiveType(TYPE_ACTIONAL) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and Duel.IsChainNegatable(ev)
 end
 function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

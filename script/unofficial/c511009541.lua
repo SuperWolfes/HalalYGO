@@ -21,7 +21,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SendtoRest(g,REASON_COST)
 end
 function s.filter(c)
-	return c:IsSpell() and c:IsSSetable()
+	return c:IsActional() and c:IsSSetable()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REST) and s.filter(chkc) end

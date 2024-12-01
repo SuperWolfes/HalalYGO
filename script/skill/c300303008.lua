@@ -1,4 +1,4 @@
--- Spell of Mask
+-- Actional of Mask
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddSkillProcedure(c,1,false,nil,nil)
@@ -20,7 +20,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetCondition(s.flipcon)
 	e1:SetOperation(s.flipop)
 	Duel.RegisterEffect(e1,tp)
-	--Add Locked Spell/Monster to hand
+	--Add Locked Actional/Monster to hand
 	local e2=Effect.CreateEffect(e:GetHandler())
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EVENT_FREE_CHAIN)
@@ -95,13 +95,13 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 		end
 	end
 end
---Tribute 1 Masked Beast Des Gardius to add Locked Spell and Masked Beast
+--Tribute 1 Masked Beast Des Gardius to add Locked Actional and Masked Beast
 function s.flipcon2(e,tp,eg,ep,ev,re,r,rp)
 	--opd check
 	if Duel.GetFlagEffect(ep,id+1)>0 then return end
 	return aux.CanActivateSkill(tp) and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil) and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK+LOCATION_REST,0,1,nil,tp)
 end
---Flip to add Locked Spell/Monster to hand
+--Flip to add Locked Actional/Monster to hand
 function s.flipop2(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if Duel.SelectYesNo(tp,aux.Stringid(id,2)) then

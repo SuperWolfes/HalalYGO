@@ -76,7 +76,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local g=nil
 	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOREST)
 	if e:GetLabel()==0 then g=Duel.SelectMatchingCard(1-tp,s.tgfilter,1-tp,LOCATION_DECK,0,1,1,nil,TYPE_MONSTER)
-	elseif e:GetLabel()==1 then g=Duel.SelectMatchingCard(1-tp,s.tgfilter,1-tp,LOCATION_DECK,0,1,1,nil,TYPE_SPELL)
+	elseif e:GetLabel()==1 then g=Duel.SelectMatchingCard(1-tp,s.tgfilter,1-tp,LOCATION_DECK,0,1,1,nil,TYPE_ACTIONAL)
 	else g=Duel.SelectMatchingCard(1-tp,s.tgfilter,1-tp,LOCATION_DECK,0,1,1,nil,TYPE_TRAP) end
 	Duel.SendtoRest(g,REASON_EFFECT)
 end

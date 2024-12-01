@@ -1,6 +1,6 @@
 --スピリット・ドラゴン
 --Guardian Ryu (GOAT)
---the effect is spell speed 1; implemented as quick effect that can only be CL1
+--the effect is actional speed 1; implemented as quick effect that can only be CL1
 local s,id=GetID()
 function s.initial_effect(c)
 	--atk up

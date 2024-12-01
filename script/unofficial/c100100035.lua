@@ -1,5 +1,5 @@
 --Ｓｐ－オーバーロード·フュージョン
---Speed Spell - Overload Fusion
+--Speed Actional - Overload Fusion
 local s,id=GetID()
 function s.initial_effect(c)
 	local e1=Fusion.CreateSummonEff(c,s.ffilter,Fusion.OnFieldMat(Card.IsAbleToRemove),s.fextra,Fusion.BanishMaterial,nil,nil,nil,nil,nil,nil,nil,nil,nil,s.extratg)

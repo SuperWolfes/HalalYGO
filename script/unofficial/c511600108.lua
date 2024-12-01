@@ -1,5 +1,5 @@
 --暗黒の魔再生 (Manga)
---Dark Spell Regeneration (Manga)
+--Dark Actional Regeneration (Manga)
 --Scripted by Larry126
 local s,id,alias=GetID()
 function s.initial_effect(c)
@@ -16,7 +16,7 @@ function s.filter(c,e,tp,eg,ep,ev,re,r,rp,b)
 	if c:IsCode(alias) then return false end
 	local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
 	local te=c:CheckActivateEffect(false,false,false)
-	if ((b and ft>1) or (not b and ft>0)) and c:IsSpell()
+	if ((b and ft>1) or (not b and ft>0)) and c:IsActional()
 		and not c:IsType(TYPE_FIELD) and te then
 		if c:IsSetCard(0x95) then
 			local tg=te:GetTarget()

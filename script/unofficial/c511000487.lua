@@ -23,7 +23,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,1)
 end
 function s.dfilter(c)
-	return c:IsSpellTrap() and c:IsDestructable()
+	return c:IsActionalTrap() and c:IsDestructable()
 end
 function s.desfilter(c)
 	return c:IsMonster() and c:IsDestructable()

@@ -493,7 +493,7 @@ if not AnimeArchetype then
 	-- Coach King Giantrainer/Coach Captain Bearman
 	-- Morph King Stygi-Gel/Number 3: Cicada King
 
-	-- archtype:Fire King/Supreme King/Monarch (spell/trap)/Dracoverlord
+	-- archtype:Fire King/Supreme King/Monarch (actional/trap)/Dracoverlord
 	AnimeArchetype.OCGKing={
 		60990740,13662809,44223284,17573739,89832901,41925941,78651105,19028307,99426834,16768387,6214884,67136033,
 		2926176,21686473,47198668,56619314,74069667,92536468,73360025,53375573,53982768,72426662,29424328,11250655,
@@ -757,7 +757,7 @@ if not AnimeArchetype then
 	-- 封じ
 	-- ふうじ
 	-- Mask of Restrict/Block Attack/Stop Defense
-	-- Anti-Spell Fragrance
+	-- Anti-Actional Fragrance
 	AnimeArchetype.OCGSeal={
 		63102017,29549364,25880422,58921041,
 	}

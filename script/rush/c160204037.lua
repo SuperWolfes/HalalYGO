@@ -54,5 +54,5 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.thfilter(c)
-	return c:IsSpell() and c:IsAbleToHand()
+	return c:IsActional() and c:IsAbleToHand()
 end

@@ -12,7 +12,7 @@ function s.cffilter(c)
 	return c:IsLockedMonster()
 end
 function s.ritfilter(c,tc)
-	return c:IsLockedSpell() and Locked.GetMatchingFilterFunction(c)(tc)
+	return c:IsLockedActional() and Locked.GetMatchingFilterFunction(c)(tc)
 end
 function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SKILL_FLIP,tp,id|(1<<32))

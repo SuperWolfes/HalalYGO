@@ -50,7 +50,7 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.NegateAttack()
 end
 function s.tdfilter(c)
-	return c:IsSpell() and c:IsAbleToDeck()
+	return c:IsActional() and c:IsAbleToDeck()
 end
 function s.thfilter(c)
 	return c:IsMonster() and c:IsSetCard(0x578) and c:IsAbleToHand()

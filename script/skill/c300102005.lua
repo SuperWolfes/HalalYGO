@@ -16,7 +16,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	if op==0 then
 		g=Duel.SelectMatchingCard(1-tp,s.tgfilter,1-tp,LOCATION_DECK,0,ct,ct,nil,TYPE_MONSTER)
 	elseif op==1 then
-		g=Duel.SelectMatchingCard(1-tp,s.tgfilter,1-tp,LOCATION_DECK,0,ct,ct,nil,TYPE_SPELL)
+		g=Duel.SelectMatchingCard(1-tp,s.tgfilter,1-tp,LOCATION_DECK,0,ct,ct,nil,TYPE_ACTIONAL)
 	else
 		g=Duel.SelectMatchingCard(1-tp,s.tgfilter,1-tp,LOCATION_DECK,0,ct,ct,nil,TYPE_TRAP)
 	end

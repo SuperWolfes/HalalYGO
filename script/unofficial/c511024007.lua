@@ -1,5 +1,5 @@
 --コーリング・マジック (Anime)
---Spell Calling (Anime)
+--Actional Calling (Anime)
 --Scripted by IanxWaifu
 local s,id=GetID()
 function s.initial_effect(c)
@@ -15,10 +15,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.setcon(e,tp,eg,ep,ev,re,r,rp)
-	return re and re:IsActiveType(TYPE_SPELL+TYPE_TRAP) and e:GetHandler():IsPreviousControler(tp)
+	return re and re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) and e:GetHandler():IsPreviousControler(tp)
 end
 function s.filter(c)
-	return c:IsSpell() and c:IsSSetable()
+	return c:IsActional() and c:IsSSetable()
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>=2

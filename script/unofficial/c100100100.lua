@@ -1,5 +1,5 @@
 --Ｓｐ－スピード・フュージョン
---Speed Spell - Speed Fusion
+--Speed Actional - Speed Fusion
 --rescripted by Naim (to match the Fusion Summon Procedure)
 local s,id=GetID()
 function s.initial_effect(c)

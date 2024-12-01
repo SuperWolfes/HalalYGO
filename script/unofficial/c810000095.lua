@@ -98,7 +98,7 @@ function s.distg(e,c)
 	return c:IsHasCardTarget(e:GetLabelObject())
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
-	if not re:IsActiveType(TYPE_SPELL+TYPE_TRAP) and re:GetHandler():GetControler(1-tp) then return end
+	if not re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) and re:GetHandler():GetControler(1-tp) then return end
 	if not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then return end
 	local g=Duel.GetChainInfo(ev,CHAININFO_TARGET_CARDS)
 	if not g or not g:IsContains(e:GetLabelObject()) or not Duel.IsChainDisablable(ev) then return false end

@@ -4,7 +4,7 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Destroy 1 spell/trap your opponent controls
+	--Destroy 1 actional/trap your opponent controls
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_DESTROY)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp,chk)
-	return Duel.IsExistingMatchingCard(Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,1,nil)
+	return Duel.IsExistingMatchingCard(Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,1,nil)
 end
 	--cost
 function s.tdfilter(c)
@@ -32,7 +32,7 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_MZONE,0,1,nil) end
 end
-	--Send 1 card from hand to GY to destroy 1 spell/trap your opponent controls
+	--Send 1 card from hand to GY to destroy 1 actional/trap your opponent controls
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
 	local c=e:GetHandler()
@@ -52,8 +52,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			e1:SetValue(2500)
 			e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 			tc:RegisterEffectRush(e1)
-			--destroy 1 spell/Trap
-			local dg=Duel.GetMatchingGroup(Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,nil)
+			--destroy 1 actional/Trap
+			local dg=Duel.GetMatchingGroup(Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,nil)
 			if #dg>0 then
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 				local sg=dg:Select(tp,1,1,nil)

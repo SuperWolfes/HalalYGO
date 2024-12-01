@@ -16,7 +16,7 @@ function s.cfilter(c,e,tp)
 	local te,eg,ep,ev,re,r,rp=c:CheckActivateEffect(true,true,true)
 	if not te then return false end
 	local target=te:GetTarget()
-	return c:GetType()==TYPE_SPELL and c:IsAbleToRestAsCost() and (not target or target(e,tp,eg,ep,ev,re,r,rp,0))
+	return c:GetType()==TYPE_ACTIONAL and c:IsAbleToRestAsCost() and (not target or target(e,tp,eg,ep,ev,re,r,rp,0))
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(1)
@@ -60,5 +60,5 @@ function s.accon(e)
 	return e:GetLabel()~=Duel.GetTurnCount() and Duel.GetTurnPlayer()==e:GetHandlerPlayer()
 end
 function s.aclimit(e,re,tp)
-	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_SPELL)
+	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_ACTIONAL)
 end

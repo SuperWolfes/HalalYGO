@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e2:SetTargetRange(0xff,0xff)
 	e2:SetTarget(s.disable)
 	c:RegisterEffect(e2)
-	--Trap Spell
+	--Trap Actional
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -31,7 +31,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function s.condition(e,tp,eg,ev,ep,re,r,rp)
-	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and rp~=tp and Duel.IsChainNegatable(ev)
+	return re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and rp~=tp and Duel.IsChainNegatable(ev)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -43,5 +43,5 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.disable(e,c)
-	return c:IsSpellTrap() and c~=e:GetHandler()
+	return c:IsActionalTrap() and c~=e:GetHandler()
 end

@@ -1,4 +1,4 @@
---Speed Spell - Zero Reverse (Anime)
+--Speed Actional - Zero Reverse (Anime)
 --Ｓｐ−ゼロ・リバース
 --scripted by Larry126
 local s,id=GetID()

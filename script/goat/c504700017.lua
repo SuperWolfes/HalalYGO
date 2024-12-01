@@ -34,7 +34,7 @@ function s.filter(c)
 	return c:IsFaceup() and c:IsRace(RACE_MACHINE)
 end
 function s.tfilter1(c,tc)
-	return c:IsSpell() and c:IsHasCardTarget(tc)
+	return c:IsActional() and c:IsHasCardTarget(tc)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -70,11 +70,11 @@ function s.discon(e)
 end
 function s.distg(e,c)
 	local ec=e:GetHandler():GetFirstCardTarget()
-	return c:GetFieldID()<=e:GetLabel() and ec and c:IsHasCardTarget(ec) and c:IsSpell()
+	return c:GetFieldID()<=e:GetLabel() and ec and c:IsHasCardTarget(ec) and c:IsActional()
 end
 function s.discon2(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetHandler():GetFirstCardTarget()
-	if not tc or not re:IsActiveType(TYPE_SPELL) or not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then return false end
+	if not tc or not re:IsActiveType(TYPE_ACTIONAL) or not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then return false end
 	local g=Duel.GetChainInfo(ev,CHAININFO_TARGET_CARDS)
 	return g:IsContains(tc)
 end

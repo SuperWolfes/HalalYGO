@@ -32,7 +32,7 @@ POS_DEFENSE          = 0xc
 NO_FLIP_EFFECT       = 0x10000
 --Types of cards
 TYPE_MONSTER     = 0x1
-TYPE_ACTIONAL    = 0x2 -- changed from SPELL
+TYPE_ACTIONAL    = 0x2 -- changed from ACTIONAL
 TYPE_TRAP        = 0x4
 TYPE_NORMAL      = 0x10
 TYPE_EFFECT      = 0x20

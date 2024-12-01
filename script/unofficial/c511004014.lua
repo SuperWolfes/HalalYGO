@@ -92,11 +92,11 @@ function s.op(oc)
 	e7a:SetType(EFFECT_TYPE_FIELD)
 	e7a:SetCode(EFFECT_BECOME_QUICK)
 	e7a:SetTargetRange(LOCATION_ONFIELD,LOCATION_ONFIELD)
-	e7a:SetTarget(function(e,c) return c:IsSpell() and not c:IsType(TYPE_QUICKPLAY) and c:IsFacedown() and Duel.GetTurnPlayer()~=c:GetControler() end)
+	e7a:SetTarget(function(e,c) return c:IsActional() and not c:IsType(TYPE_QUICKPLAY) and c:IsFacedown() and Duel.GetTurnPlayer()~=c:GetControler() end)
 	Duel.RegisterEffect(e7a,0)
 	local e7b=e7a:Clone()
 	e7b:SetCode(EFFECT_QP_ACT_IN_SET_TURN)
-	e7b:SetTarget(function(e,c) return c:IsSpell() and not c:IsType(TYPE_QUICKPLAY) and c:IsHasEffect(EFFECT_BECOME_QUICK) and (Duel.IsBattlePhase() or Duel.GetTurnPlayer()~=c:GetControler()) end)
+	e7b:SetTarget(function(e,c) return c:IsActional() and not c:IsType(TYPE_QUICKPLAY) and c:IsHasEffect(EFFECT_BECOME_QUICK) and (Duel.IsBattlePhase() or Duel.GetTurnPlayer()~=c:GetControler()) end)
 	Duel.RegisterEffect(e7b,0)
 	--Negate
 	local e8=Effect.GlobalEffect()
@@ -218,7 +218,7 @@ function s.tttg2(e,c)
 	return c==0 or c==1 or c:GetLevel()>=10 and c:GetFlagEffect(511004017)==1
 end
 function s.negop(e,tp,eg,ep,ev,re,r,rp)
-	if re:GetHandler():GetFlagEffect(511000173)>0 and re:IsActiveType(TYPE_TRAP+TYPE_SPELL)
+	if re:GetHandler():GetFlagEffect(511000173)>0 and re:IsActiveType(TYPE_TRAP+TYPE_ACTIONAL)
 		and not re:GetHandler():IsRelateToEffect(re) and re:GetHandler():GetReasonEffect()~=re then
 		Duel.NegateEffect(ev)
 	end
@@ -319,7 +319,7 @@ function s.acfilter(c)
 end
 function s.aclimit(e,re,tp)
 	if not re:IsHasType(EFFECT_TYPE_ACTIVATE) then return false end
-	if re:IsActiveType(TYPE_SPELL) and re:GetHandler():IsLocation(LOCATION_HAND) then
+	if re:IsActiveType(TYPE_ACTIONAL) and re:GetHandler():IsLocation(LOCATION_HAND) then
 		return Duel.IsExistingMatchingCard(s.acfilter,tp,0xff,0,1,nil)
 	end
 	if re:IsActiveType(TYPE_FIELD) then
@@ -330,25 +330,25 @@ function s.aclimit(e,re,tp)
 	return false
 end
 function s.setlimit(e,c,tp)
-	return (c:IsLocation(LOCATION_HAND) and ((c:IsSpell() and Duel.GetFlagEffect(tp,TYPE_SPELL)>0)
+	return (c:IsLocation(LOCATION_HAND) and ((c:IsActional() and Duel.GetFlagEffect(tp,TYPE_ACTIONAL)>0)
 		or (c:IsTrap() and Duel.GetFlagEffect(tp,TYPE_TRAP)>(Duel.IsPlayerAffectedByEffect(tp,511004017) and 1 or 0))))
 		or (c:IsType(TYPE_FIELD) and not Duel.GetFieldCard(tp,LOCATION_SZONE,5) and Duel.GetFieldGroupCount(tp,LOCATION_ONFIELD,0)>4)
 end
 function s.aclimit1(e,tp,eg,ep,ev,re,r,rp)
-	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_SPELL) and re:GetHandler():IsPreviousLocation(LOCATION_HAND) then
+	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_ACTIONAL) and re:GetHandler():IsPreviousLocation(LOCATION_HAND) then
 		re:GetHandler():RegisterFlagEffect(EFFECT_TYPE_ACTIVATE,RESET_PHASE+PHASE_END,0,1)
 	end
 end
 function s.aclimit2(e,tp,eg,ep,ev,re,r,rp)
-	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_SPELL) and re:GetHandler():IsPreviousLocation(LOCATION_HAND) then
+	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_ACTIONAL) and re:GetHandler():IsPreviousLocation(LOCATION_HAND) then
 		re:GetHandler():ResetFlagEffect(EFFECT_TYPE_ACTIVATE)
 	end
 end
 function s.checkop(e,tp,eg,ep,ev,re,r,rp)
 	local hg=eg:Filter(Card.IsPreviousLocation,nil,LOCATION_HAND)
 	if #hg>0 then
-		if hg:IsExists(Card.IsSpell,1,nil) then
-			Duel.RegisterFlagEffect(rp,TYPE_SPELL,RESET_PHASE+PHASE_END,0,1)
+		if hg:IsExists(Card.IsActional,1,nil) then
+			Duel.RegisterFlagEffect(rp,TYPE_ACTIONAL,RESET_PHASE+PHASE_END,0,1)
 		end
 		if hg:IsExists(Card.IsTrap,1,nil) then
 			Duel.RegisterFlagEffect(rp,TYPE_TRAP,RESET_PHASE+PHASE_END,0,1)

@@ -33,11 +33,11 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function s.distg(e,c)
-	return c~=e:GetHandler() and c:IsSpell()
+	return c~=e:GetHandler() and c:IsActional()
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	local tl=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_LOCATION)
-	if tl==LOCATION_SZONE and re:IsActiveType(TYPE_SPELL) then
+	if tl==LOCATION_SZONE and re:IsActiveType(TYPE_ACTIONAL) then
 		Duel.NegateEffect(ev)
 	end
 end

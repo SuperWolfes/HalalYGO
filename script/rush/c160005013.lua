@@ -25,7 +25,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 
 function s.rthfilter(c)
-	return c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.rthfilter,tp,0,LOCATION_ONFIELD,1,nil) end

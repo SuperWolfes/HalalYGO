@@ -25,13 +25,13 @@ function s.initial_effect(c)
 end
 s.listed_series={0x9a}
 function s.cfilter(c)
-	return c:IsType(TYPE_SPELL+TYPE_TRAP)
+	return c:IsType(TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
 		return not Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil)
 end
 function s.desfilter(c)
-	return c:IsSpellTrap() and c:IsDestructable()
+	return c:IsActionalTrap() and c:IsDestructable()
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		if chkc then return chkc:IsOnField() and s.desfilter(chkc) end

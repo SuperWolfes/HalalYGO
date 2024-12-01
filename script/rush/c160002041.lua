@@ -18,12 +18,12 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,1,c) end
-	local sg=Duel.GetMatchingGroup(Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,c)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,1,c) end
+	local sg=Duel.GetMatchingGroup(Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,c)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,sg,#sg,tp,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local sg=Duel.GetMatchingGroup(Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,e:GetHandler())
+	local sg=Duel.GetMatchingGroup(Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,e:GetHandler())
 	if sg and #sg>0 then
 		Duel.Destroy(sg,REASON_EFFECT)
 	end

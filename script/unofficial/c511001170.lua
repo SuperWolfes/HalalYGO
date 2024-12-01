@@ -23,7 +23,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:IsHasType(EFFECT_TYPE_ACTIVATE) end
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	--Negate Field Spell effects
+	--Negate Field Actional effects
 	local c=e:GetHandler()
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)

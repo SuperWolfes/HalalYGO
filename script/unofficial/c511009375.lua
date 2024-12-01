@@ -21,7 +21,7 @@ function s.filter1(c,e,tp)
 		and Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_HAND,0,1,c,e,tp)
 end
 function s.filter2(c,e,tp)
-	return c:IsSpellTrap() and c:IsCanBeSpecialSummoned(e,0,tp,true,false) 
+	return c:IsActionalTrap() and c:IsCanBeSpecialSummoned(e,0,tp,true,false) 
 		and Duel.IsPlayerCanSpecialSummonMonster(tp,c:GetCode(),nil,0x11,0,0,1,RACE_MENTOR,ATTRIBUTE_LIGHT,POS_FACEDOWN_ATTACK)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -161,7 +161,7 @@ end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local g=e:GetLabelObject()
 	local tc=g:Filter(s.damfilter,nil,e:GetLabel()):GetFirst()
-	if tc:IsOriginalType(TYPE_SPELL+TYPE_TRAP) then
+	if tc:IsOriginalType(TYPE_ACTIONAL+TYPE_TRAP) then
 		Duel.ChangeBattleDamage(tp,0)
 		Duel.ChangeBattleDamage(1-tp,0)
 	else

@@ -32,5 +32,5 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.efilter(e,te)
-	return te:IsActiveType(TYPE_SPELL) and te:GetOwnerPlayer()~=e:GetHandlerPlayer()
+	return te:IsActiveType(TYPE_ACTIONAL) and te:GetOwnerPlayer()~=e:GetHandlerPlayer()
 end

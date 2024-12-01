@@ -44,7 +44,7 @@ function s.actcon(e)
 	return Duel.GetAttacker()==e:GetHandler()
 end
 function s.aclimit(e,re,tp)
-	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP) and re:IsHasType(EFFECT_TYPE_ACTIVATE)
+	return re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) and re:IsHasType(EFFECT_TYPE_ACTIVATE)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsLocation(LOCATION_REST) and Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)==0

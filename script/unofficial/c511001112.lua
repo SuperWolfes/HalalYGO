@@ -2,7 +2,7 @@
 --Magical Trick Mirror
 local s,id=GetID()
 function s.initial_effect(c)
-	--copy Spell
+	--copy Actional
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_ATTACK_ANNOUNCE)
@@ -23,7 +23,7 @@ function s.cfilter(c,e,tp,eg,ep,ev,re,r,rp)
 	return not c:IsHasEffect(511001408) and not c:IsHasEffect(511001283) and s.filter(c,e,tp,eg,ep,ev,re,r,rp)
 end
 function s.filter(c,e,tp,eg,ep,ev,re,r,rp)
-	return c:IsSpell() and c:CheckActivateEffect(false,false,false)~=nil and not c:IsType(TYPE_FIELD)
+	return c:IsActional() and c:CheckActivateEffect(false,false,false)~=nil and not c:IsType(TYPE_FIELD)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REST) or chkc:IsLocation(LOCATION_MZONE) and chkc:GetControler()~=tp and s.filter(chkc) end

@@ -25,7 +25,7 @@ end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
 	if Duel.Damage(p,d,REASON_EFFECT)~=300 then return end
-	local dg=Duel.GetMatchingGroup(Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,nil)
+	local dg=Duel.GetMatchingGroup(Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,nil)
 	if #dg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		local sg=dg:Select(tp,1,1,nil)
 		Duel.HintSelection(sg)

@@ -1,5 +1,5 @@
 --Ｓｐ－簡易融合
---Speed Spell - Instant Fusion
+--Speed Actional - Instant Fusion
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

@@ -13,7 +13,7 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroupCount(tp,0,LOCATION_HAND)>0 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_CODE)
-	s.announce_filter={TYPE_SPELL,OPCODE_ISTYPE}
+	s.announce_filter={TYPE_ACTIONAL,OPCODE_ISTYPE}
 	local ac=Duel.AnnounceCard(tp,table.unpack(s.announce_filter))
 	Duel.SetTargetParam(ac)
 	e:GetHandler():SetHint(CHINT_CARD,ac)

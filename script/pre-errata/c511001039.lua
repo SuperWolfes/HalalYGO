@@ -35,7 +35,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function s.tgfilter(c)
-	return c:IsSpell() and c:IsAbleToHand()
+	return c:IsActional() and c:IsAbleToHand()
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:GetLocation()==LOCATION_REST and chkc:GetControler()==tp and s.tgfilter(chkc) end

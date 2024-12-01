@@ -1,4 +1,4 @@
---Speed Spell - Tyrant Force (Anime)
+--Speed Actional - Tyrant Force (Anime)
 --scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)

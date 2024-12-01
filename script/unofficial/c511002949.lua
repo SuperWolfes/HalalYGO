@@ -1,7 +1,7 @@
 --Trion Barrier
 local s,id=GetID()
 function s.initial_effect(c)
-	--copy spell
+	--copy actional
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)

@@ -36,7 +36,7 @@ function s.filter2(c,e,tp,m,f,chkf)
 		and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,false,false) and c:CheckFusionMaterial(m,nil,chkf)
 end
 function s.costfilter(c)
-	return c:IsSpell() and c:IsDiscardable()
+	return c:IsActional() and c:IsDiscardable()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,e:GetHandler()) end

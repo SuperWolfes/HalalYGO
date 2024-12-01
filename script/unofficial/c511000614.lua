@@ -149,7 +149,7 @@ function s.discon(e,tp,eg,ep,ev,re,r,rp)
 	local dc=Duel.GetDecktopGroup(tp,1):GetFirst()
 	local g=Duel.GetChainInfo(ev,CHAININFO_TARGET_CARDS)
 	return dc and dc:IsCode(6186304) and dc:IsFaceup()
-		and re:IsActiveType(TYPE_SPELL+TYPE_TRAP) and rp~=tp
+		and re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) and rp~=tp
 		and re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) and g and g:IsExists(s.dfilter,1,nil,tp)
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)

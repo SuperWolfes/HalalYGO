@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.atktg)
 	e1:SetOperation(s.atkop)
 	c:RegisterEffect(e1)
-	--reveal & destroy 1 face-down spell/trap
+	--reveal & destroy 1 face-down actional/trap
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_DESTROY)

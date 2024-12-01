@@ -22,7 +22,7 @@ function s.filter1(c)
 	return c:IsEarthbound() and c:IsMonster() and c:IsAbleToHand()
 end
 function s.filter2(c)
-	return c:IsSpell() and c:IsAbleToHand()
+	return c:IsActional() and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter1,tp,LOCATION_REST,0,1,nil) 

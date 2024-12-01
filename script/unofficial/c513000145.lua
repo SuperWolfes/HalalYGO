@@ -1,4 +1,4 @@
---Speed Spell - Angel Baton (Anime)
+--Speed Actional - Angel Baton (Anime)
 --Ｓｐ－エンジェル・バトン
 --scripted by Larry126
 local s,id=GetID()

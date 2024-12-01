@@ -21,19 +21,19 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsOnField() and chkc:IsControler(1-tp) and chkc:IsSpellTrap() end
+	if chkc then return chkc:IsOnField() and chkc:IsControler(1-tp) and chkc:IsActionalTrap() end
 	if chk==0 then
 		if e:GetLabel()~=1 then return false end
 		e:SetLabel(0)
 		return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,e:GetHandler()) 
-			and Duel.IsExistingTarget(Card.IsType,tp,0,LOCATION_ONFIELD,1,nil,TYPE_SPELL+TYPE_TRAP) end
-	local rt=Duel.GetTargetCount(Card.IsType,tp,0,LOCATION_ONFIELD,nil,TYPE_SPELL+TYPE_TRAP)
+			and Duel.IsExistingTarget(Card.IsType,tp,0,LOCATION_ONFIELD,1,nil,TYPE_ACTIONAL+TYPE_TRAP) end
+	local rt=Duel.GetTargetCount(Card.IsType,tp,0,LOCATION_ONFIELD,nil,TYPE_ACTIONAL+TYPE_TRAP)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,rt,e:GetHandler())
 	Duel.SendtoRest(g,REASON_COST)
 	local ct=#g
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-	local g=Duel.SelectTarget(tp,Card.IsType,tp,0,LOCATION_ONFIELD,ct,ct,nil,TYPE_SPELL+TYPE_TRAP)
+	local g=Duel.SelectTarget(tp,Card.IsType,tp,0,LOCATION_ONFIELD,ct,ct,nil,TYPE_ACTIONAL+TYPE_TRAP)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,#g,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp,chk)

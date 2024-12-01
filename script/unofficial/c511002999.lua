@@ -15,7 +15,7 @@ end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	local ec=e:GetHandler():GetPreviousEquipTarget()
 	return e:GetHandler():IsReason(REASON_LOST_TARGET) and ec and ec:IsReason(REASON_DESTROY) and ec:IsReason(REASON_EFFECT) 
-		and ec:GetReasonPlayer()==1-tp and ec:GetReasonEffect() and ec:GetReasonEffect():GetCode()==EVENT_FREE_CHAIN and ec:GetReasonEffect():IsActiveType(TYPE_SPELL)
+		and ec:GetReasonPlayer()==1-tp and ec:GetReasonEffect() and ec:GetReasonEffect():GetCode()==EVENT_FREE_CHAIN and ec:GetReasonEffect():IsActiveType(TYPE_ACTIONAL)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

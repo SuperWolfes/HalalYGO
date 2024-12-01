@@ -121,7 +121,7 @@ if not DivineHierarchy then
 		return (te:IsActiveType(TYPE_MONSTER) and c~=tc
 			and (not tc:GetFlagEffectLabel(513000065) or c:GetFlagEffectLabel(513000065)>tc:GetFlagEffectLabel(513000065)))
 			or (te:IsHasCategory(CATEGORY_TOHAND+CATEGORY_DESTROY+CATEGORY_REMOVE+CATEGORY_TODECK+CATEGORY_RELEASE+CATEGORY_TOREST+CATEGORY_FUSION_SUMMON)
-			and te:IsActiveType(TYPE_SPELL+TYPE_TRAP))
+			and te:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP))
 	end
 	function DivineHierarchy.control(e,c)
 		return c:GetFlagEffect(513000065)>0 and c:IsFaceup() and not c:IsHasEffect(513000134)
@@ -135,7 +135,7 @@ if not DivineHierarchy then
 	end
 	function DivineHierarchy.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 		local c=e:GetHandler()
-		if chk==0 then return c:IsReason(REASON_EFFECT) and r&REASON_EFFECT~=0 and re and re:IsActiveType(TYPE_SPELL+TYPE_TRAP)
+		if chk==0 then return c:IsReason(REASON_EFFECT) and r&REASON_EFFECT~=0 and re and re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP)
 			and c:GetFlagEffect(513000065)>0 end
 		return true
 	end

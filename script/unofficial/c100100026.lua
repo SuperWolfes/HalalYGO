@@ -1,5 +1,5 @@
 --Ｓｐ－悪魔への貢物
---Speed Spell - Faustian Bargain
+--Speed Actional - Faustian Bargain
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

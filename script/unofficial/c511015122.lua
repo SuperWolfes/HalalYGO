@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	if not re:IsActiveType(TYPE_SPELL+TYPE_TRAP) then return false end
+	if not re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) then return false end
 	local e1=Duel.IsPlayerAffectedByEffect(tp,EFFECT_REVERSE_DAMAGE)
 	local e2=Duel.IsPlayerAffectedByEffect(tp,EFFECT_REVERSE_RECOVER)
 	local rd=e1 and not e2

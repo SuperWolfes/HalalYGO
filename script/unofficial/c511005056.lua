@@ -33,7 +33,7 @@ function s.initial_effect(c)
 	end)
 end
 function s.checkop(e,tp,eg,ep,ev,re,r,rp)
-	if not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) or (re:GetActiveType()&TYPE_SPELL+TYPE_QUICKPLAY)~=TYPE_SPELL+TYPE_QUICKPLAY then return end
+	if not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) or (re:GetActiveType()&TYPE_ACTIONAL+TYPE_QUICKPLAY)~=TYPE_ACTIONAL+TYPE_QUICKPLAY then return end
 	local g=Duel.GetChainInfo(ev,CHAININFO_TARGET_CARDS)
 	if g then
 		for tc in aux.Next(g) do
@@ -45,7 +45,7 @@ function s.atktg(e,c)
 	return c:GetFlagEffect(id)>0
 end
 function s.filter(c)
-	return (c:GetType()&TYPE_SPELL+TYPE_QUICKPLAY)==TYPE_SPELL+TYPE_QUICKPLAY and not c:IsPublic() and c:IsSSetable()
+	return (c:GetType()&TYPE_ACTIONAL+TYPE_QUICKPLAY)==TYPE_ACTIONAL+TYPE_QUICKPLAY and not c:IsPublic() and c:IsSSetable()
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND,0,1,nil) end

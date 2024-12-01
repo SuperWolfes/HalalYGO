@@ -32,7 +32,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.costfilter(c)
-	return c:IsSpell() and c:IsType(TYPE_CONTINUOUS) and c:IsFaceup() and c:IsAbleToRestAsCost()
+	return c:IsActional() and c:IsType(TYPE_CONTINUOUS) and c:IsFaceup() and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ev,ep,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,e:GetHandler()) end
@@ -76,7 +76,7 @@ function s.mtcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp
 end
 function s.tgfilter(c)
-	return c:IsSpell() and c:IsType(TYPE_CONTINUOUS) and c:IsFaceup() and c:IsAbleToRest()
+	return c:IsActional() and c:IsType(TYPE_CONTINUOUS) and c:IsFaceup() and c:IsAbleToRest()
 end
 function s.mttg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsOnField() and s.tgfilter(chkc) and chkc~=e:GetHandler() end

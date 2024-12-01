@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.thtg)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
-	--Activate Spell/Trap
+	--Activate Actional/Trap
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_QUICK_O)
@@ -37,7 +37,7 @@ function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
 function s.thfilter(c)
-	return c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
@@ -59,7 +59,7 @@ function s.filter(c,e,tp,eg,ep,ev,re,r,rp,chain)
 	if not c:IsType(TYPE_FIELD) and Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then return false end
 	local te=c:GetActivateEffect()
 	local pre={Duel.GetPlayerEffect(tp,EFFECT_CANNOT_ACTIVATE)}
-	if not c:IsSpellTrap() or not te or c:IsHasEffect(EFFECT_CANNOT_TRIGGER) then return false end
+	if not c:IsActionalTrap() or not te or c:IsHasEffect(EFFECT_CANNOT_TRIGGER) then return false end
 	if pre[1] then
 		for i,eff in ipairs(pre) do
 			local prev=eff:GetValue()
