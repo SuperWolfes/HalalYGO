@@ -1,5 +1,5 @@
 --D－HERO ドレッドサーヴァント
---Destiny HERO - Dread Servant
+--Destrudic HERO - Dread Servant
 local s,id=GetID()
 function s.initial_effect(c)
 	--summon success
@@ -35,7 +35,7 @@ function s.addc(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_GRAVE) and e:GetHandler():IsReason(REASON_BATTLE)
+	return e:GetHandler():IsLocation(LOCATION_REST) and e:GetHandler():IsReason(REASON_BATTLE)
 end
 function s.filter(c)
 	return c:IsType(TYPE_SPELL+TYPE_TRAP)

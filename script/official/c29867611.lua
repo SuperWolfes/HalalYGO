@@ -39,7 +39,7 @@ function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tc=c:GetEquipTarget()
 	if chk==0 then return tc:GetControler()==tp and not tc:IsReason(REASON_REPLACE) end
 	if Duel.SelectEffectYesNo(tp,c,96) then
-		Duel.SendtoGrave(c,REASON_EFFECT)
+		Duel.SendtoRest(c,REASON_EFFECT)
 		return true
 	else return false end
 end

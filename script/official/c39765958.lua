@@ -1,5 +1,5 @@
 --琰魔竜 レッド・デーモン
---Hot Red Dragon Archfiend
+--Hot Red Dragon Archtainted
 local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon

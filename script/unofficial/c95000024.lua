@@ -1,4 +1,4 @@
---Numeron Chaos Ritual
+--Numeron Chaos Locked
 local s,id=GetID()
 function s.initial_effect(c)
 	Duel.EnableGlobalFlag(GLOBALFLAG_DELAYED_QUICKEFFECT)

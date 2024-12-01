@@ -1,5 +1,5 @@
 --ホルスの黒炎竜 LV6
---Horus the Black Flame Dragon LV6
+--Humus the Black Flame Dragon LV6
 local s,id=GetID()
 function s.initial_effect(c)
 	--battle destroy
@@ -44,8 +44,8 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetFlagEffect(id)>0
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
+	Duel.SendtoRest(e:GetHandler(),REASON_COST)
 end
 function s.spfilter(c,e,tp)
 	return c:IsCode(48229808) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)

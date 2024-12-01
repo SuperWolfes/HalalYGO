@@ -20,7 +20,7 @@ function s.initial_effect(c)
 end
 s.illegal=true
 function s.spfilter(c)
-	return c:IsRace(RACE_SPELLCASTER)
+	return c:IsRace(RACE_MENTOR)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local g=e:GetHandler():GetMaterial()

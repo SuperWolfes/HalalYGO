@@ -31,11 +31,11 @@ end
 function s.spcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
-	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_GRAVE+LOCATION_MZONE,0,nil,tp)
+	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_REST+LOCATION_MZONE,0,nil,tp)
 	return aux.SelectUnselectGroup(g,e,tp,1,1,aux.ChkfMMZ(1),0)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,c)
-	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_GRAVE+LOCATION_MZONE,0,nil,tp)
+	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_REST+LOCATION_MZONE,0,nil,tp)
 	local rg=aux.SelectUnselectGroup(g,e,tp,1,1,aux.ChkfMMZ(1),1,tp,HINTMSG_REMOVE,nil,nil,true)
 	if #rg>0 then
 		rg:KeepAlive()
@@ -51,14 +51,14 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	rg:DeleteGroup()
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,26293219) end
-	local dam=Duel.GetMatchingGroupCount(Card.IsCode,tp,LOCATION_GRAVE,0,nil,26293219)*400
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,26293219) end
+	local dam=Duel.GetMatchingGroupCount(Card.IsCode,tp,LOCATION_REST,0,nil,26293219)*400
 	Duel.SetTargetPlayer(1-tp)
 	Duel.SetTargetParam(dam)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,dam)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
-	local d=Duel.GetMatchingGroupCount(Card.IsCode,tp,LOCATION_GRAVE,0,nil,26293219)*400
+	local d=Duel.GetMatchingGroupCount(Card.IsCode,tp,LOCATION_REST,0,nil,26293219)*400
 	Duel.Damage(p,d,REASON_EFFECT)
 end

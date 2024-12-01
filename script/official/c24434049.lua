@@ -9,7 +9,7 @@ function s.initial_effect(c)
 	-- Attach 2 Spell/Trap cards
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_LEAVE_GRAVE)
+	e1:SetCategory(CATEGORY_LEAVE_REST)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetRange(LOCATION_MZONE)
@@ -46,11 +46,11 @@ function s.gyovfilter(c,xc,tp)
 end
 function s.gyovtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and s.gyovfilter(chkc,c,tp) end
-	if chk==0 then return Duel.IsExistingTarget(s.gyovfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,nil,c,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and s.gyovfilter(chkc,c,tp) end
+	if chk==0 then return Duel.IsExistingTarget(s.gyovfilter,tp,LOCATION_REST,LOCATION_REST,1,nil,c,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)
-	local g=Duel.SelectTarget(tp,s.gyovfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,2,nil,c,tp)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,#g,0,0)
+	local g=Duel.SelectTarget(tp,s.gyovfilter,tp,LOCATION_REST,LOCATION_REST,1,2,nil,c,tp)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,#g,0,0)
 end
 function s.gyovop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -78,7 +78,7 @@ function s.qpovop(e,tp,eg,ep,ev,re,r,rp)
 		and rc:IsCanBeXyzMaterial(c,tp,REASON_EFFECT) then
 		Duel.Overlay(c,rc)
 		if not c:GetOverlayGroup():IsContains(rc) then return end
-		rc:CancelToGrave()
+		rc:CancelToRest()
 		if Duel.IsExistingMatchingCard(Card.IsAbleToRemove,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil)
 			and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)

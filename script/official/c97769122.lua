@@ -43,7 +43,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():GetFlagEffect(id)~=0 end
 end
 function s.copfilter(c)
-	return c:IsAbleToGraveAsCost() and c:IsSetCard(0x177) and c:GetType()==TYPE_SPELL
+	return c:IsAbleToRestAsCost() and c:IsSetCard(0x177) and c:GetType()==TYPE_SPELL
 		and c:CheckActivateEffect(true,true,false)~=nil 
 end
 function s.xyzfilter(c,tp,sg,g)
@@ -63,7 +63,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local mg=Duel.GetMatchingGroup(Card.IsCanBeSpecialSummoned,tp,LOCATION_DECK,0,nil,e,0,tp,false,false)
 	local b1=e:GetLabel()==100 and Duel.IsExistingMatchingCard(s.copfilter,tp,LOCATION_DECK,0,1,nil)
 	local ft=math.min(2,Duel.GetLocationCount(tp,LOCATION_MZONE))
-	if ft>0 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if ft>0 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	local b2=Duel.IsPlayerCanSpecialSummonCount(tp,2)
 		and ft>0 and #mg>0 and aux.SelectUnselectGroup(mg,e,tp,1,ft,s.rescon,0)
 	if chk==0 then
@@ -76,9 +76,9 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		{b1,aux.Stringid(id,1)},
 		{b2,aux.Stringid(id,2)})
 	if op==1 then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=Duel.SelectMatchingCard(tp,s.copfilter,tp,LOCATION_DECK,0,1,1,nil)
-		if not Duel.SendtoGrave(g,REASON_COST) then return end
+		if not Duel.SendtoRest(g,REASON_COST) then return end
 		local te=g:GetFirst():CheckActivateEffect(true,true,false)
 		e:SetLabel(te:GetLabel())
 		e:SetLabelObject(te:GetLabelObject())
@@ -113,7 +113,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local mg=Duel.GetMatchingGroup(Card.IsCanBeSpecialSummoned,tp,LOCATION_DECK,0,nil,e,0,tp,false,false)
 		if #mg==0 then return end
 		local ft=math.min(2,Duel.GetLocationCount(tp,LOCATION_MZONE))
-		if ft>0 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+		if ft>0 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 		local sg=aux.SelectUnselectGroup(mg,e,tp,1,ft,s.rescon,1,tp,HINTMSG_SPSUMMON,s.rescon)
 		if #sg==0 then return end
 		for tc in aux.Next(sg) do

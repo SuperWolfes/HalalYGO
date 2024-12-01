@@ -39,13 +39,13 @@ function s.rmfilter(c)
 		and c:IsAbleToRemove() and (c:IsFaceup() or not c:IsLocation(LOCATION_ONFIELD))
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	local loc=LOCATION_HAND+LOCATION_DECK+LOCATION_GRAVE+LOCATION_ONFIELD
+	local loc=LOCATION_HAND+LOCATION_DECK+LOCATION_REST+LOCATION_ONFIELD
 	if chk==0 then return Duel.IsExistingMatchingCard(s.rmfilter,tp,loc,LOCATION_ONFIELD,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,0,loc)
 end
 function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
-	local loc=LOCATION_HAND+LOCATION_DECK+LOCATION_GRAVE+LOCATION_ONFIELD
+	local loc=LOCATION_HAND+LOCATION_DECK+LOCATION_REST+LOCATION_ONFIELD
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	local g=Duel.SelectMatchingCard(tp,s.rmfilter,tp,loc,LOCATION_ONFIELD,1,1,nil)
 	if #g>0 then

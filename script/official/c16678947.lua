@@ -15,7 +15,7 @@ end
 function s.condition(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tc=eg:GetFirst()
 	local bc=tc:GetBattleTarget()
-	return tc:IsPreviousControler(tp) and tc:IsLocation(LOCATION_GRAVE) and tc:IsRace(RACE_PSYCHIC)
+	return tc:IsPreviousControler(tp) and tc:IsLocation(LOCATION_REST) and tc:IsRace(RACE_MENTAL)
 		and (tc:GetBattlePosition()&POS_FACEUP)~=0
 		and bc:IsRelateToBattle() and bc:IsControler(1-tp) and bc==Duel.GetAttacker()
 end

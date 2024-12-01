@@ -19,13 +19,13 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 end
-s.listed_card_types={TYPE_GEMINI}
+s.listed_card_types={TYPE_DUAL}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)==0
 		and Duel.GetFieldGroupCount(tp,0,LOCATION_MZONE)~=0
 end
 function s.filter(c,e,sp)
-	return c:IsType(TYPE_GEMINI) and c:GetLevel()<=4 and c:IsCanBeSpecialSummoned(e,0,sp,false,false)
+	return c:IsType(TYPE_DUAL) and c:GetLevel()<=4 and c:IsCanBeSpecialSummoned(e,0,sp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

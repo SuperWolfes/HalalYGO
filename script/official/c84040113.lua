@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.subcon(e)
-	return e:GetHandler():IsLocation(LOCATION_ONFIELD+LOCATION_GRAVE)
+	return e:GetHandler():IsLocation(LOCATION_ONFIELD+LOCATION_REST)
 end
 function s.spcon(e)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_SYNCHRO)

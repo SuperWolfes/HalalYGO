@@ -15,7 +15,7 @@ function s.initial_effect(c)
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	local ec=e:GetHandler():GetPreviousEquipTarget()
-	return e:GetHandler():IsReason(REASON_LOST_TARGET) and ec:IsLocation(LOCATION_GRAVE)
+	return e:GetHandler():IsReason(REASON_LOST_TARGET) and ec:IsLocation(LOCATION_REST)
 end
 function s.dfilter(c)
 	return c:IsSpellTrap() and c:IsDestructable()

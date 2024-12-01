@@ -20,7 +20,7 @@ function s.cfilter(c)
 	return c:IsSpell() and c:IsAbleToRemove()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_GRAVE,0,e:GetHandler())
+	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST,0,e:GetHandler())
 	if chk==0 then return #g>0 and g:FilterCount(Card.IsAbleToRemoveAsCost,nil)==#g end
 	e:SetLabel(#g)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)

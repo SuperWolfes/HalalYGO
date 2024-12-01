@@ -19,12 +19,12 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.cfilter(c)
-	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsRace(RACE_SPELLCASTER)
+	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsRace(RACE_MENTOR)
 end
 function s.atkval(e,c)
-	local g=Duel.GetMatchingGroup(s.cfilter,e:GetHandler():GetControler(),LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.cfilter,e:GetHandler():GetControler(),LOCATION_REST,0,nil)
 	return g:GetClassCount(Card.GetCode)*300
 end
 function s.pcon(e)
-	return Duel.GetMatchingGroupCount(s.cfilter,e:GetHandler():GetControler(),LOCATION_GRAVE,0,nil)>=7
+	return Duel.GetMatchingGroupCount(s.cfilter,e:GetHandler():GetControler(),LOCATION_REST,0,nil)>=7
 end

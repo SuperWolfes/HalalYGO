@@ -26,7 +26,7 @@ function s.initial_effect(c)
 end
 function s.rescon(sg,e,tp,mg)
 	return sg:IsExists(Card.IsLocation,1,nil,LOCATION_HAND)
-		and (sg:IsExists(Card.IsLocation,1,nil,LOCATION_GRAVE) or (sg:IsExists(aux.SpElimFilter,1,nil,true)))
+		and (sg:IsExists(Card.IsLocation,1,nil,LOCATION_REST) or (sg:IsExists(aux.SpElimFilter,1,nil,true)))
 end
 function s.spfilter(c,ft)
 	return c:IsLevelAbove(7) and c:IsRace(RACE_PLANT) and c:IsAbleToRemoveAsCost() 
@@ -37,13 +37,13 @@ function s.spcon(e,c)
 	local tp=e:GetHandlerPlayer()
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_HAND,0,e:GetHandler(),ft)
-	local rg2=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil,ft)
+	local rg2=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE+LOCATION_REST,0,nil,ft)
 	rg:Merge(rg2)
 	return Duel.GetLocationCount(tp,LOCATION_MZONE)>-2 and #rg>0 and #rg2>0
 		and aux.SelectUnselectGroup(rg,e,tp,2,2,s.rescon,0)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,c)
-	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_HAND+LOCATION_MZONE+LOCATION_GRAVE,0,e:GetHandler(),Duel.GetLocationCount(tp,LOCATION_MZONE))
+	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_HAND+LOCATION_MZONE+LOCATION_REST,0,e:GetHandler(),Duel.GetLocationCount(tp,LOCATION_MZONE))
 	local g=aux.SelectUnselectGroup(rg,e,tp,2,2,s.rescon,1,tp,HINTMSG_REMOVE,nil,nil,true)
 	if #g>0 then
 		g:KeepAlive()

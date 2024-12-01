@@ -25,7 +25,7 @@ function s.aop(e,tp,eg,ev,ep,re,r,rp)
 		return
 	end
 	Duel.RegisterFlagEffect(0,id,0,0,0)
-	local lol=LOCATION_ONFIELD+LOCATION_GRAVE+LOCATION_REMOVED+LOCATION_DECK
+	local lol=LOCATION_ONFIELD+LOCATION_REST+LOCATION_REMOVED+LOCATION_DECK
 	Duel.DisableShuffleCheck()
 	Duel.SendtoDeck(c,tp,-2,REASON_RULE)
 	if c:GetPreviousLocation()==LOCATION_HAND then
@@ -61,7 +61,7 @@ function s.disable(e,c)
 end
 --[[
 	"vanilla mode" reference
-	1:majesty's fiend
+	1:majesty's tainted
 	2:skill drain
 	3:vector pendulum
 	4:concentration duel

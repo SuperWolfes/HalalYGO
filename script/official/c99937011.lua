@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetCode(EVENT_FREE_CHAIN)
-	e2:SetRange(LOCATION_MZONE+LOCATION_GRAVE)
+	e2:SetRange(LOCATION_MZONE+LOCATION_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetHintTiming(0,TIMINGS_CHECK_MONSTER_E+TIMING_MAIN_END)
 	e2:SetCost(aux.bfgcost)
@@ -29,9 +29,9 @@ function s.initial_effect(c)
 	e2:SetOperation(s.rmop)
 	c:RegisterEffect(e2)
 end
-s.listed_names={98715423,CARD_EXCHANGE_SPIRIT}
+s.listed_names={98715423,CARD_EXCHANGE_GUARDIAN}
 function s.spcostfilter(c)
-	return c:IsAttribute(ATTRIBUTE_EARTH) and c:IsRace(RACE_FAIRY) and c:IsDiscardable()
+	return c:IsAttribute(ATTRIBUTE_EARTH) and c:IsRace(RACE_WANDERER) and c:IsDiscardable()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -45,7 +45,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,0,0)
 end
 function s.plfilter(c)
-	return c:IsCode(98715423) and not c:IsForbidden()
+	return c:IsCode(98715423) and not c:IsUnliked()
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -66,11 +66,11 @@ function s.rmfilter(c)
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
-	if chkc then return c~=chkc and chkc:IsLocation(LOCATION_MZONE+LOCATION_GRAVE) and s.rmfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.rmfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,LOCATION_MZONE+LOCATION_GRAVE,1,c) end
-	local max=(Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_EXCHANGE_SPIRIT),tp,LOCATION_ONFIELD+LOCATION_GRAVE,0,1,nil) and 5 or 3)
+	if chkc then return c~=chkc and chkc:IsLocation(LOCATION_MZONE+LOCATION_REST) and s.rmfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.rmfilter,tp,LOCATION_MZONE+LOCATION_REST,LOCATION_MZONE+LOCATION_REST,1,c) end
+	local max=(Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_EXCHANGE_GUARDIAN),tp,LOCATION_ONFIELD+LOCATION_REST,0,1,nil) and 5 or 3)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectTarget(tp,s.rmfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,LOCATION_MZONE+LOCATION_GRAVE,1,max,c)
+	local g=Duel.SelectTarget(tp,s.rmfilter,tp,LOCATION_MZONE+LOCATION_REST,LOCATION_MZONE+LOCATION_REST,1,max,c)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,1,0,0)
 end
 function s.rmop(e,tp,eg,ep,ev,re,r,rp,chk)

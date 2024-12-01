@@ -44,7 +44,7 @@ s.listed_series={0x142}
 s.material_setcode={0x142}
 
 function s.matfilter(c,fc,sumtype,tp)
-	return c:IsRace(RACE_ZOMBIE,fc,sumtype,tp) and c:IsLevelAbove(5)
+	return c:IsRace(RACE_CONTAMINED,fc,sumtype,tp) and c:IsLevelAbove(5)
 end
 function s.filter(c,e)
 	return c:IsFaceup() and c:IsAbleToChangeControler() and (not e or c:IsCanBeEffectTarget(e))
@@ -52,7 +52,7 @@ end
 function s.cfilter(c,ft,tp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE,tp,LOCATION_REASON_CONTROL)
 	if c:IsControler(tp) and c:GetSequence()<5 then ft=ft+1 end
-	return c:IsRace(RACE_ZOMBIE) and ft>0 and Duel.IsExistingTarget(s.filter,tp,0,LOCATION_MZONE,1,c)
+	return c:IsRace(RACE_CONTAMINED) and ft>0 and Duel.IsExistingTarget(s.filter,tp,0,LOCATION_MZONE,1,c)
 end
 function s.ctcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local dg=Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_MZONE,nil,e)

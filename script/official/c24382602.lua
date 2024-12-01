@@ -31,7 +31,7 @@ function s.initial_effect(c)
 	e4:SetDescription(aux.Stringid(id,2))
 	e4:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e4:SetType(EFFECT_TYPE_IGNITION)
-	e4:SetRange(LOCATION_GRAVE)
+	e4:SetRange(LOCATION_REST)
 	e4:SetCost(aux.bfgcost)
 	e4:SetTarget(s.thtg)
 	e4:SetOperation(s.thop)
@@ -45,7 +45,7 @@ function s.tgfilter(c)
 	return c:IsFaceup()
 end
 function s.filter(c)
-	return c:IsType(TYPE_NORMAL) and c:IsMonster() and c:IsAbleToGrave()
+	return c:IsType(TYPE_NORMAL) and c:IsMonster() and c:IsAbleToRest()
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.tgfilter(chkc) end
@@ -57,12 +57,12 @@ end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	local tc=Duel.GetFirstTarget()
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK+LOCATION_HAND,0,1,1,nil)
 	if #g>0 then
 		local gc=g:GetFirst()
 		local lv=gc:GetLevel()
-		if Duel.SendtoGrave(gc,REASON_EFFECT)~=0 and gc:IsLocation(LOCATION_GRAVE) and tc:IsRelateToEffect(e) and tc:IsFaceup() then
+		if Duel.SendtoRest(gc,REASON_EFFECT)~=0 and gc:IsLocation(LOCATION_REST) and tc:IsRelateToEffect(e) and tc:IsFaceup() then
 			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetCode(EFFECT_UPDATE_ATTACK)

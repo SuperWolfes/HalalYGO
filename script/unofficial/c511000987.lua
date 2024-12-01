@@ -33,7 +33,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,at,1,0,0)
 end
 function s.mgfilter(c,e,tp,fusc,mg)
-	return c:IsControler(c:GetOwner()) and c:IsLocation(LOCATION_GRAVE)
+	return c:IsControler(c:GetOwner()) and c:IsLocation(LOCATION_REST)
 		and (c:GetReason()&0x40008)==0x40008 and c:GetReasonCard()==fusc
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 		and fusc:CheckFusionMaterial(mg,c)
@@ -49,7 +49,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SkipPhase(Duel.GetTurnPlayer(),PHASE_BATTLE,RESET_PHASE+PHASE_BATTLE,1)
 		if tc:IsSummonType(SUMMON_TYPE_FUSION) and ct>0 and ct<=Duel.GetLocationCount(p,LOCATION_MZONE)
 			and mg:FilterCount(aux.NecroValleyFilter(s.mgfilter),nil,e,p,tc,mg)==ct
-			and (ct<=1 or not Duel.IsPlayerAffectedByEffect(p,CARD_BLUEEYES_SPIRIT)) then
+			and (ct<=1 or not Duel.IsPlayerAffectedByEffect(p,CARD_BLUEEYES_GUARDIAN)) then
 			Duel.SpecialSummon(mg,0,tp,p,false,false,POS_FACEUP)
 		end
 	end

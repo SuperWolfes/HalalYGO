@@ -1,5 +1,5 @@
 --D－HERO ドグマガイ
---Destiny HERO - Dogma
+--Destrudic HERO - Dogma
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()

@@ -1,5 +1,5 @@
 --屋敷わらし
---Ghost Belle & Haunted Mansion
+--Miss Belle & Haunted Mansion
 local s,id=GetID()
 function s.initial_effect(c)
 	--Negate
@@ -24,7 +24,7 @@ function s.check(ev,category)
 	local g=Group.CreateGroup()
 	if g1 then g:Merge(g1) end
 	if g2 then g:Merge(g2) end
-	return (((loc1 or 0)|(loc2 or 0))&LOCATION_GRAVE)~=0 or (#g>0 and g:IsExists(Card.IsLocation,1,nil,LOCATION_GRAVE))
+	return (((loc1 or 0)|(loc2 or 0))&LOCATION_REST)~=0 or (#g>0 and g:IsExists(Card.IsLocation,1,nil,LOCATION_REST))
 end
 function s.discon(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.IsChainNegatable(ev) then return false end
@@ -37,7 +37,7 @@ function s.discon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.discost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsDiscardable() end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST+REASON_DISCARD)
+	Duel.SendtoRest(e:GetHandler(),REASON_COST+REASON_DISCARD)
 end
 function s.distg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -45,6 +45,6 @@ function s.distg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.NegateActivation(ev) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:GetHandler():IsRelateToEffect(re) then
-		Duel.SendtoGrave(eg,REASON_EFFECT)
+		Duel.SendtoRest(eg,REASON_EFFECT)
 	end
 end

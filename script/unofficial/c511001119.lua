@@ -23,17 +23,17 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.spfilter(c,tp)
-	return c:GetControler()==tp and c:IsRace(RACE_FIEND) and c:IsAttribute(ATTRIBUTE_DARK) and c:IsAttackBelow(500)
+	return c:GetControler()==tp and c:IsRace(RACE_TAINTED) and c:IsAttribute(ATTRIBUTE_DARK) and c:IsAttackBelow(500)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.spfilter,1,nil,tp)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return (e:GetLabel()==0 or e:GetLabel()==1) or Duel.IsExistingMatchingCard(Card.IsAbleToGrave,tp,LOCATION_DECK,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+	if chk==0 then return (e:GetLabel()==0 or e:GetLabel()==1) or Duel.IsExistingMatchingCard(Card.IsAbleToRest,tp,LOCATION_DECK,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
-	local g=Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,0,LOCATION_DECK,nil):RandomSelect(tp,10)
-	Duel.SendtoGrave(g,REASON_EFFECT)
+	local g=Duel.GetMatchingGroup(Card.IsAbleToRest,tp,0,LOCATION_DECK,nil):RandomSelect(tp,10)
+	Duel.SendtoRest(g,REASON_EFFECT)
 end

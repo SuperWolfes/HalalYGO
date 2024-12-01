@@ -28,7 +28,7 @@ function s.cfilter(c)
 	return c:IsType(TYPE_SPELL+TYPE_TRAP)
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
-		return not Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,nil)
+		return not Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil)
 end
 function s.desfilter(c)
 	return c:IsSpellTrap() and c:IsDestructable()

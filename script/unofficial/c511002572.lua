@@ -38,30 +38,30 @@ function s.filter(c)
 	return c:IsSpell() and c:GetFlagEffect(id)>0
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	local ct=Duel.GetFieldGroupCount(tp,LOCATION_GRAVE,0)-1
-	local tc=Duel.GetFieldCard(tp,LOCATION_GRAVE,ct)
+	local ct=Duel.GetFieldGroupCount(tp,LOCATION_REST,0)-1
+	local tc=Duel.GetFieldCard(tp,LOCATION_REST,ct)
 	local check=false
 	while tc and not check do
 		ct=ct-1
 		if s.filter(tc) then
 			check=true
 		else
-			tc=Duel.GetFieldCard(tp,LOCATION_GRAVE,ct)
+			tc=Duel.GetFieldCard(tp,LOCATION_REST,ct)
 		end
 	end
 	if chk==0 then return tc and tc:IsAbleToHand() end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,tc,1,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local ct=Duel.GetFieldGroupCount(tp,LOCATION_GRAVE,0)-1
-	local tc=Duel.GetFieldCard(tp,LOCATION_GRAVE,ct)
+	local ct=Duel.GetFieldGroupCount(tp,LOCATION_REST,0)-1
+	local tc=Duel.GetFieldCard(tp,LOCATION_REST,ct)
 	local check=false
 	while tc and not check do
 		ct=ct-1
 		if s.filter(tc) then
 			check=true
 		else
-			tc=Duel.GetFieldCard(tp,LOCATION_GRAVE,ct)
+			tc=Duel.GetFieldCard(tp,LOCATION_REST,ct)
 		end
 	end
 	if tc and tc:IsAbleToHand() then

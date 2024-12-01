@@ -69,7 +69,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 			e4:SetOperation(s.atkop)
 			c:RegisterEffect(e4)
 		else
-			Duel.SendtoGrave(c,REASON_EFFECT)
+			Duel.SendtoRest(c,REASON_EFFECT)
 		end
 	end
 end

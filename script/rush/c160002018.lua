@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.confilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_SPELLCASTER) and c:IsLevelAbove(7)
+	return c:IsFaceup() and c:IsRace(RACE_MENTOR) and c:IsLevelAbove(7)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -24,7 +24,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 		and Duel.IsExistingMatchingCard(s.confilter,tp,LOCATION_MZONE,0,1,nil)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsLevelAbove,6),tp,0,LOCATION_MZONE,1,nil) end
@@ -33,7 +33,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	if Duel.SendtoGrave(e:GetHandler(),REASON_COST)>0 then
+	if Duel.SendtoRest(e:GetHandler(),REASON_COST)>0 then
 		--Effect
 		local sg=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsLevelAbove,6),tp,0,LOCATION_MZONE,nil)
 		if #sg>0 then

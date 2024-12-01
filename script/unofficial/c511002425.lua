@@ -32,32 +32,32 @@ function s.splimit(e,se,sp,st)
 	return not e:GetHandler():IsLocation(LOCATION_EXTRA)
 end
 function s.contactfilter(tp)
-	return Duel.GetMatchingGroup(Card.IsAbleToGraveAsCost,tp,LOCATION_ONFIELD,0,nil)
+	return Duel.GetMatchingGroup(Card.IsAbleToRestAsCost,tp,LOCATION_ONFIELD,0,nil)
 end
 function s.contactop(g,tp,c)
-	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL)
+	Duel.SendtoRest(g,REASON_COST+REASON_MATERIAL)
 end
 function s.filter(c,e,tp)
 	return c:IsCode(511002422) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP,e:GetHandler():GetPreviousControler()) 
-		and Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,c,e,tp)
+		and Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_REST,LOCATION_REST,1,c,e,tp)
 end
 function s.filter2(c,e,tp)
 	return c:IsCode(511002423) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP,e:GetHandler():GetPreviousControler())
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,LOCATION_REST)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
 	local p=e:GetHandler():GetPreviousControler()
 	if Duel.GetLocationCount(p,LOCATION_MZONE)<2 then return end
-	local g1=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,LOCATION_GRAVE,nil,e,tp)
+	local g1=Duel.GetMatchingGroup(s.filter,tp,LOCATION_REST,LOCATION_REST,nil,e,tp)
 	if #g1==0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local sg1=g1:Select(tp,1,1,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local sg2=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,1,sg1:GetFirst(),e,tp)
+	local sg2=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_REST,LOCATION_REST,1,1,sg1:GetFirst(),e,tp)
 	sg1:Merge(sg2)
 	Duel.SpecialSummon(sg1,0,tp,p,false,false,POS_FACEUP)
 end
@@ -70,23 +70,23 @@ function s.spfilterx(c,e,tp,code)
 end
 function s.sptg2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	if chk==0 then return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
+	if chk==0 then return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)
 		and Duel.GetLocationCount(tp,LOCATION_MZONE)>=2
-		and Duel.IsExistingTarget(s.spfilterx,tp,LOCATION_GRAVE,0,1,nil,e,tp,511002423)
-		and Duel.IsExistingTarget(s.spfilterx,tp,LOCATION_GRAVE,0,1,nil,e,tp,511002424)
-		and Duel.IsExistingTarget(s.spfilterx,tp,LOCATION_GRAVE,0,1,nil,e,tp,511002422) end
+		and Duel.IsExistingTarget(s.spfilterx,tp,LOCATION_REST,0,1,nil,e,tp,511002423)
+		and Duel.IsExistingTarget(s.spfilterx,tp,LOCATION_REST,0,1,nil,e,tp,511002424)
+		and Duel.IsExistingTarget(s.spfilterx,tp,LOCATION_REST,0,1,nil,e,tp,511002422) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g1=Duel.SelectTarget(tp,s.spfilterx,tp,LOCATION_GRAVE,0,1,1,nil,e,tp,511002423)
+	local g1=Duel.SelectTarget(tp,s.spfilterx,tp,LOCATION_REST,0,1,1,nil,e,tp,511002423)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g2=Duel.SelectTarget(tp,s.spfilterx,tp,LOCATION_GRAVE,0,1,1,nil,e,tp,511002424)
+	local g2=Duel.SelectTarget(tp,s.spfilterx,tp,LOCATION_REST,0,1,1,nil,e,tp,511002424)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g3=Duel.SelectTarget(tp,s.spfilterx,tp,LOCATION_GRAVE,0,1,1,nil,e,tp,511002422)
+	local g3=Duel.SelectTarget(tp,s.spfilterx,tp,LOCATION_REST,0,1,1,nil,e,tp,511002422)
 	g1:Merge(g2)
 	g1:Merge(g3)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g1,3,0,0)
 end
 function s.spop2(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
 	local g=Duel.GetTargetCards(e)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if #g~=3 or ft<3 then return end

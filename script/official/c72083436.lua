@@ -16,7 +16,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x122}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(Card.IsType,tp,LOCATION_GRAVE,0,1,nil,TYPE_UNION) and Duel.IsAbleToEnterBP()
+	return Duel.IsExistingMatchingCard(Card.IsType,tp,LOCATION_REST,0,1,nil,TYPE_UNION) and Duel.IsAbleToEnterBP()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local f=aux.FaceupFilter(Card.IsSetCard,0x122)

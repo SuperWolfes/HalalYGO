@@ -38,19 +38,19 @@ function s.rmcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_XYZ)
 end
 function s.cfilter(c)
-	return c:IsRace(RACE_DRAGON) and c:IsAbleToGraveAsCost()
+	return c:IsRace(RACE_DRAGON) and c:IsAbleToRestAsCost()
 end
 function s.rmcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_DECK,0,nil)
 	if chk==0 then return g:GetClassCount(Card.GetCode)>2 end
 	local tg=Group.CreateGroup()
 	for i=1,3 do
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local sg=g:Select(tp,1,1,nil)
 		g:Remove(Card.IsCode,nil,sg:GetFirst():GetCode())
 		tg:Merge(sg)
 	end
-	Duel.SendtoGrave(tg,REASON_COST)
+	Duel.SendtoRest(tg,REASON_COST)
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroupCount(tp,0,LOCATION_DECK)>2

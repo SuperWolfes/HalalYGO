@@ -34,7 +34,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			Duel.ConfirmCards(tp,sg)
 			Duel.ShuffleHand(1-tp)
 		else
-			Duel.SendtoGrave(sg,REASON_RULE)
+			Duel.SendtoRest(sg,REASON_RULE)
 		end
 		g:RemoveCard(sg)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
@@ -44,7 +44,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			Duel.ConfirmCards(1-tp,tg)
 			Duel.ShuffleHand(tp)
 		else
-			Duel.SendtoGrave(tg,REASON_RULE)
+			Duel.SendtoRest(tg,REASON_RULE)
 		end
 		Duel.ShuffleDeck(tp)
 	end

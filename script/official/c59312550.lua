@@ -15,7 +15,7 @@ end
 s.listed_series={0x22}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsLocation(LOCATION_GRAVE) and c:IsReason(REASON_BATTLE)
+	return c:IsLocation(LOCATION_REST) and c:IsReason(REASON_BATTLE)
 		and c:IsPreviousPosition(POS_FACEUP_ATTACK) and c:IsPreviousControler(tp)
 end
 function s.filter(c,e,tp)

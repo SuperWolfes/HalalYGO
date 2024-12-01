@@ -1,5 +1,5 @@
 --精霊術の使い手
---Spirit Charmers
+--Guardian Charmers
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)

@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 s.listed_series={0x101b}
-s.listed_names={TOKEN_MECHA_PHANTOM_BEAST}
+s.listed_names={TOKEN_MECHA_ILLUSION_BEAST}
 function s.cfilter(c)
 	return not c:IsType(TYPE_TOKEN)
 end
@@ -26,10 +26,10 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ct=Duel.GetMatchingGroupCount(s.spfilter,tp,LOCATION_DECK,0,nil,e,tp)
 	if chk==0 then
 		if Duel.GetFlagEffect(tp,id)~=0 or Duel.GetLocationCount(tp,LOCATION_MZONE)<0 then return false end
-		return ct>0 and Duel.CheckReleaseGroupCost(tp,Card.IsCode,1,false,nil,nil,TOKEN_MECHA_PHANTOM_BEAST)
+		return ct>0 and Duel.CheckReleaseGroupCost(tp,Card.IsCode,1,false,nil,nil,TOKEN_MECHA_ILLUSION_BEAST)
 	end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ct=1 end
-	local g=Duel.SelectReleaseGroupCost(tp,Card.IsCode,1,ct,false,nil,nil,TOKEN_MECHA_PHANTOM_BEAST)
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ct=1 end
+	local g=Duel.SelectReleaseGroupCost(tp,Card.IsCode,1,ct,false,nil,nil,TOKEN_MECHA_ILLUSION_BEAST)
 	Duel.Release(g,REASON_COST)
 	e:SetLabel(#g)
 	Duel.RegisterFlagEffect(tp,id,RESET_PHASE+PHASE_END,EFFECT_FLAG_OATH,1)
@@ -38,7 +38,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ft<=0 then return end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	local ct=e:GetLabel()
 	if ft<ct then return end
 	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_DECK,0,nil,e,tp)

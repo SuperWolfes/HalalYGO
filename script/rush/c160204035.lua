@@ -21,7 +21,7 @@ function s.cfilter(c,e,sp)
 	return c:IsType(TYPE_EFFECT) and c:IsRace(RACE_CYBERSE)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,3,nil)
+	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,3,nil)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 if chk==0 then return Duel.IsPlayerCanDraw(tp,2) end

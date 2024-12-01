@@ -1,5 +1,5 @@
 -- 運命の囚人
--- Prisoner of Destiny
+-- Prisoner of Destrudic
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	-- Place counter and apply effect
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_COUNTER+CATEGORY_SPECIAL_SUMMON+CATEGORY_TOGRAVE)
+	e1:SetCategory(CATEGORY_COUNTER+CATEGORY_SPECIAL_SUMMON+CATEGORY_TOREST)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DELAY)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
@@ -38,8 +38,8 @@ function s.cttg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return c:IsCanAddCounter(0x20b,1) and c:GetFlagEffect(id)==0 end
 	c:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD+RESET_CHAIN,0,1)
 	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,1,0,0x20b)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,e:GetHandler(),1,tp,0)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE+LOCATION_EXTRA)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,e:GetHandler(),1,tp,0)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST+LOCATION_EXTRA)
 end
 function s.ctop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -73,19 +73,19 @@ function s.ctop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.RegisterEffect(e3,tp)
 	-- Special Summon from the GY
 	elseif ct==2 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.spgyfilter),tp,LOCATION_GRAVE,0,1,nil,e,tp)
+		and Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.spgyfilter),tp,LOCATION_REST,0,1,nil,e,tp)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spgyfilter),tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spgyfilter),tp,LOCATION_REST,0,1,1,nil,e,tp)
 		if #g==0 then return end
 		Duel.BreakEffect()
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	-- Send self to the GY and Special Summon a Link monster
-	elseif ct==3 and c:IsAbleToGrave() and Duel.GetLocationCountFromEx(tp)>0
+	elseif ct==3 and c:IsAbleToRest() and Duel.GetLocationCountFromEx(tp)>0
 		and Duel.IsExistingMatchingCard(s.spexfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,3)) then
 		Duel.BreakEffect()
-		if Duel.SendtoGrave(c,REASON_EFFECT)<1 then return end
+		if Duel.SendtoRest(c,REASON_EFFECT)<1 then return end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local g=Duel.SelectMatchingCard(tp,s.spexfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
 		if #g==0 then return end

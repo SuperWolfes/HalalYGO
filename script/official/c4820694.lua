@@ -53,7 +53,7 @@ function s.lpop(e,tp,eg,ep,ev,re,r,rp)
 		local og1=tc1:GetOverlayGroup()
 		local og2=tc2:GetOverlayGroup()
 		og1:Merge(og2)
-		if Duel.SendtoGrave(og1,REASON_EFFECT)<#og1 then return end
+		if Duel.SendtoRest(og1,REASON_EFFECT)<#og1 then return end
 		Duel.SetLP(1-tp,Duel.GetLP(1-tp)/2)
 	end
 end
@@ -66,13 +66,13 @@ end
 function s.mattg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
 	if chk==0 then return Duel.IsExistingTarget(s.tgfilter,tp,LOCATION_MZONE,0,1,nil)
-		and Duel.IsExistingTarget(s.mfilter,tp,LOCATION_GRAVE,0,1,nil) end
+		and Duel.IsExistingTarget(s.mfilter,tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 	local g1=Duel.SelectTarget(tp,s.tgfilter,tp,LOCATION_MZONE,0,1,1,nil)
 	e:SetLabelObject(g1:GetFirst())
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)
-	local g2=Duel.SelectTarget(tp,s.mfilter,tp,LOCATION_GRAVE,0,1,1,nil)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g2,1,0,0)
+	local g2=Duel.SelectTarget(tp,s.mfilter,tp,LOCATION_REST,0,1,1,nil)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g2,1,0,0)
 end
 function s.matop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end

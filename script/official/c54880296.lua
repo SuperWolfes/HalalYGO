@@ -1,5 +1,5 @@
 --妖仙獣の風祀り
---Yosenju Wind Ritual
+--Yosenju Wind Locked
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)

@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_GRAVE) and e:GetHandler():GetBattlePosition()==POS_FACEUP_ATTACK
+	return e:GetHandler():IsLocation(LOCATION_REST) and e:GetHandler():GetBattlePosition()==POS_FACEUP_ATTACK
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

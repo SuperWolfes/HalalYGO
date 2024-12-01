@@ -62,7 +62,7 @@ function s.rmfilter(c,ag)
 	return ag:IsExists(Card.IsAttribute,1,nil,c:GetAttribute())
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	local ag=Duel.GetMatchingGroup(s.attrfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil)
+	local ag=Duel.GetMatchingGroup(s.attrfilter,tp,LOCATION_MZONE+LOCATION_REST,0,nil)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) and s.rmfilter(chkc,ag) end
 	if chk==0 then return Duel.IsExistingTarget(s.rmfilter,tp,0,LOCATION_MZONE,1,nil,ag)
 		and e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_EFFECT) end

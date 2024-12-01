@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.tgfilter(c)
-	return c:IsSpellTrap() and c:IsAbleToGraveAsCost()
+	return c:IsSpellTrap() and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_HAND,0,1,nil) end
@@ -30,11 +30,11 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local ctdeck=Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)
 	if ctdeck>3 then ctdeck=3 end 
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_HAND,0,1,ctdeck,nil)
-	local count=Duel.SendtoGrave(g,REASON_COST)
+	local count=Duel.SendtoRest(g,REASON_COST)
 	--Effect
 	Duel.Draw(tp,count,REASON_EFFECT)
 	if count>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then

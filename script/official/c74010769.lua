@@ -25,5 +25,5 @@ function s.spcon(e,c)
 	if c==nil then return true end
 	return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
 		and	Duel.GetFieldGroupCount(c:GetControler(),0,LOCATION_MZONE)>0
-		and not Duel.IsExistingMatchingCard(s.cfilter,c:GetControler(),LOCATION_MZONE+LOCATION_GRAVE,0,1,nil)
+		and not Duel.IsExistingMatchingCard(s.cfilter,c:GetControler(),LOCATION_MZONE+LOCATION_REST,0,1,nil)
 end

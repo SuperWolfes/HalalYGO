@@ -36,7 +36,7 @@ function s.filterchk(c,g,sg)
 	return res
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(s.costfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.costfilter,tp,LOCATION_MZONE+LOCATION_REST,0,nil)
 	if chk==0 then return g:IsExists(s.filterchk,1,nil,g,Group.CreateGroup()) end
 	local rg=Group.CreateGroup()
 	while #rg<2 do

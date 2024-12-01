@@ -6,7 +6,7 @@ end
 function s.cfilter(c,tp)
 	local lvl=c:GetOriginalLevel()
 	return c:GetLevel()>0 and c:IsAttribute(ATTRIBUTE_WATER) and c:IsDiscardable()
-		and Duel.IsExistingTarget(s.thfilter,tp,LOCATION_GRAVE,0,1,nil,lvl,c:GetCode())
+		and Duel.IsExistingTarget(s.thfilter,tp,LOCATION_REST,0,1,nil,lvl,c:GetCode())
 end
 function s.thfilter(c,lvl,code)
 	return c:IsFaceup() and c:IsLevelBelow(lvl*2) and c:IsAbleToHand() and c:IsAttribute(ATTRIBUTE_WATER)
@@ -28,8 +28,8 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND,0,1,1,nil,tp)
 	local lvl=g:GetFirst():GetLevel()
 	local code=g:GetFirst():GetCode()
-	Duel.SendtoGrave(g,REASON_COST+REASON_DISCARD)
-	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil,lvl,code)
+	Duel.SendtoRest(g,REASON_COST+REASON_DISCARD)
+	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil,lvl,code)
 	if Duel.SendtoHand(g,nil,REASON_EFFECT)~=0 then
 		Duel.Hint(HINT_SKILL_FLIP,tp,id|(2<<32))
 	end

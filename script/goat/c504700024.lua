@@ -1,5 +1,5 @@
 --墓守の使い魔
---Gravekeeper's Servant (GOAT)
+--Restkeeper's Servant (GOAT)
 --If the attacker is immune, cost is not paid
 local s,id=GetID()
 function s.initial_effect(c)

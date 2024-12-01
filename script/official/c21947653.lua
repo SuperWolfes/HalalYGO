@@ -1,5 +1,5 @@
 --E－HERO ライトニング・ゴーレム
---Evil HERO Lightning Golem
+--Evil HERO Lightning Gopal
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()

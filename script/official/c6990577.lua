@@ -57,7 +57,7 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return eg:GetFirst()==c and c:IsPreviousLocation(LOCATION_GRAVE+LOCATION_REMOVED)
+	return eg:GetFirst()==c and c:IsPreviousLocation(LOCATION_REST+LOCATION_REMOVED)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) end

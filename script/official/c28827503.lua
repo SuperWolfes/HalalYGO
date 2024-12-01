@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
 	e2:SetCode(EVENT_DESTROYED)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCondition(s.thcon)
 	e2:SetCost(aux.bfgcost)
 	e2:SetTarget(s.thtg)
@@ -95,7 +95,7 @@ end
 function s.thcfilter(c,tp)
 	return c:IsReason(REASON_BATTLE+REASON_EFFECT) and c:IsPreviousControler(tp) and c:IsPreviousLocation(LOCATION_MZONE) 
 		and c:IsPreviousPosition(POS_FACEUP) and c:GetPreviousTypeOnField() & TYPE_LINK ~=0
-		and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil,c:GetOriginalRace())
+		and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil,c:GetOriginalRace())
 end
 function s.thfilter(c,rc)
 	return c:IsMonster() and c:IsOriginalRace(rc) and c:IsAbleToHand()
@@ -105,7 +105,7 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
 end
 function s.thfilter2(c,eg)
 	return c:IsMonster() and c:IsAbleToHand() and eg:IsExists(Card.IsOriginalRace,1,nil,c:GetOriginalRace())
@@ -113,7 +113,7 @@ end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local dg=eg:Filter(s.thcfilter,nil,tp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thfilter2),tp,LOCATION_GRAVE,0,1,1,nil,dg)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thfilter2),tp,LOCATION_REST,0,1,1,nil,dg)
 	if #g>0 then
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)

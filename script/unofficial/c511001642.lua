@@ -34,7 +34,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetCode(EFFECT_UPDATE_ATTACK)
 			e1:SetReset(RESET_EVENT+RESETS_STANDARD)
-			e1:SetValue(Duel.GetMatchingGroupCount(Card.IsType,tc:GetControler(),LOCATION_GRAVE,0,nil,TYPE_SYNCHRO)*600)
+			e1:SetValue(Duel.GetMatchingGroupCount(Card.IsType,tc:GetControler(),LOCATION_REST,0,nil,TYPE_SYNCHRO)*600)
 			tc:RegisterEffect(e1)
 		end
 	end

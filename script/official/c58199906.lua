@@ -37,7 +37,7 @@ function s.chain_target(e,te,tp,value)
 	if Duel.IsPlayerAffectedByEffect(tp,69832741) then
 		return Duel.GetMatchingGroup(s.filter,tp,LOCATION_MZONE+LOCATION_HAND,0,nil,te)
 	else
-		return Duel.GetMatchingGroup(s.filter,tp,LOCATION_MZONE+LOCATION_GRAVE+LOCATION_HAND,0,nil,te)
+		return Duel.GetMatchingGroup(s.filter,tp,LOCATION_MZONE+LOCATION_REST+LOCATION_HAND,0,nil,te)
 	end
 end
 function s.chain_operation(e,te,tp,tc,mat,sumtype,sg,sumpos)

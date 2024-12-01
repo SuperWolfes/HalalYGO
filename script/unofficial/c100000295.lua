@@ -9,9 +9,9 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.listed_names={CARD_HARPIE_LADY}
+s.listed_names={CARD_FLYBIE_LADY}
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsCode(CARD_HARPIE_LADY)
+	return c:IsFaceup() and c:IsCode(CARD_FLYBIE_LADY)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,2,nil) and Duel.GetTurnPlayer()==1-tp

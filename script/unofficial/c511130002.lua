@@ -1,4 +1,4 @@
---Phantom Magician
+--Illusion Magician
 --fixed by MLD
 local s,id=GetID()
 function s.initial_effect(c)

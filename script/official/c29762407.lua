@@ -29,17 +29,17 @@ function s.initial_effect(c)
 end
 s.listed_names={89194033}
 function s.cfilter(c,e,tp,rp)
-	if c:IsFacedown() or not c:IsCode(89194033) or not c:IsAbleToGraveAsCost() then return false end
+	if c:IsFacedown() or not c:IsCode(89194033) or not c:IsAbleToRestAsCost() then return false end
 	return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK+LOCATION_HAND+LOCATION_EXTRA,0,1,nil,e,tp,rp,Group.FromCards(c,e:GetHandler()))
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost()
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost()
 		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,0,1,nil,e,tp,rp) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_ONFIELD,0,1,1,nil,e,tp,rp)
 	g:AddCard(e:GetHandler())
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.filter(c,e,tp,rp,sg)
 	if not c:IsCanBeSpecialSummoned(e,0,tp,false,false) then return false end

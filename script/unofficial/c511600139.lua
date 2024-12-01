@@ -27,10 +27,10 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		if Duel.Draw(tp,1,REASON_EFFECT)>0 then
 			local tc=Duel.GetOperatedGroup():GetFirst()
 			Duel.ConfirmCards(1-tp,tc)
-			if tc:IsCode(71344451) and Duel.SendtoGrave(tc,REASON_EFFECT)>0 and tc:IsLocation(LOCATION_GRAVE) then
+			if tc:IsCode(71344451) and Duel.SendtoRest(tc,REASON_EFFECT)>0 and tc:IsLocation(LOCATION_REST) then
 				local sg=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,e:GetHandler())
 				Duel.Destroy(sg,REASON_EFFECT)
-				local tg=Duel.GetOperatedGroup():Filter(Card.IsLocation,nil,LOCATION_GRAVE)
+				local tg=Duel.GetOperatedGroup():Filter(Card.IsLocation,nil,LOCATION_REST)
 				if #tg>0 then
 					local dam=#tg*1000
 					Duel.Damage(1-tp,dam,REASON_EFFECT)

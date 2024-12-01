@@ -1,5 +1,5 @@
 --ゴーストリック・オア・トリート
---Ghostrick or Treat
+--Missrick or Treat
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -35,7 +35,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.CheckLPCost(1-tp,2000) and c:IsSSetable(true) and e:IsHasType(EFFECT_TYPE_ACTIVATE)
 		and Duel.SelectYesNo(1-tp,aux.Stringid(id,1)) then
 		Duel.PayLPCost(1-tp,2000)
-		c:CancelToGrave()
+		c:CancelToRest()
 		Duel.ChangePosition(c,POS_FACEDOWN)
 		Duel.RaiseEvent(c,EVENT_SSET,e,REASON_EFFECT,tp,tp,0)
 	else

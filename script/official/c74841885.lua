@@ -31,10 +31,10 @@ function s.valcheck(e,c)
 	e:SetLabel(0)
 	local g=c:GetMaterial()
 	local lbl=0
-	if g:IsExists(s.chkfilter,1,nil,RACE_FAIRY,ATTRIBUTE_LIGHT) then
+	if g:IsExists(s.chkfilter,1,nil,RACE_WANDERER,ATTRIBUTE_LIGHT) then
 		lbl=lbl+TYPE_SPELL
 	end
-	if g:IsExists(s.chkfilter,1,nil,RACE_FIEND,ATTRIBUTE_DARK) then
+	if g:IsExists(s.chkfilter,1,nil,RACE_TAINTED,ATTRIBUTE_DARK) then
 		lbl=lbl+TYPE_TRAP
 		local e0=Effect.CreateEffect(c)
 		e0:SetType(EFFECT_TYPE_SINGLE)

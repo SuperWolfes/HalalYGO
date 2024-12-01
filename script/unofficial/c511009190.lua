@@ -1,4 +1,4 @@
---Fairy Powder
+--Wanderer Powder
 local s,id=GetID()
 function s.initial_effect(c)
 	--lv change
@@ -31,7 +31,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		local e2=Effect.CreateEffect(e:GetHandler())
 		e2:SetType(EFFECT_TYPE_SINGLE)
 		e2:SetCode(EFFECT_CHANGE_RACE)
-		e2:SetValue(RACE_FAIRY)
+		e2:SetValue(RACE_WANDERER)
 		e2:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 		tc:RegisterEffect(e2)
 		local e3=Effect.CreateEffect(e:GetHandler())
@@ -45,7 +45,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function s.effcon(e,tp,eg,ep,ev,re,r,rp)
-	return r==REASON_XYZ and e:GetHandler():GetReasonCard():IsRace(RACE_FAIRY)
+	return r==REASON_XYZ and e:GetHandler():GetReasonCard():IsRace(RACE_WANDERER)
 end
 function s.effop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,0,95100911)

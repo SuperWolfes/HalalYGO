@@ -32,7 +32,7 @@ function s.initial_effect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetCategory(CATEGORY_ATKCHANGE)
 	e3:SetType(EFFECT_TYPE_IGNITION)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetCountLimit(1,{id,2})
 	e3:SetCondition(s.condition)
 	e3:SetCost(aux.bfgcost)
@@ -42,13 +42,13 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_BLUEEYES_W_DRAGON,CARD_POLYMERIZATION}
 function s.cfilter(c)
-	return c:IsCode(CARD_BLUEEYES_W_DRAGON) and (c:IsLocation(LOCATION_GRAVE) or c:IsOnField() and c:IsFaceup())
+	return c:IsCode(CARD_BLUEEYES_W_DRAGON) and (c:IsLocation(LOCATION_REST) or c:IsOnField() and c:IsFaceup())
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD+LOCATION_GRAVE,0,1,nil)
+	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD+LOCATION_REST,0,1,nil)
 end
 function s.thfilter1(c)
-	return (c:IsCode(CARD_POLYMERIZATION) or c:IsRitualSpell()) and c:IsAbleToHand()
+	return (c:IsCode(CARD_POLYMERIZATION) or c:IsLockedSpell()) and c:IsAbleToHand()
 end
 function s.thtg1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter1,tp,LOCATION_DECK,0,1,nil) end

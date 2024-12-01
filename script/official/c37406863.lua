@@ -20,11 +20,11 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(p,0,LOCATION_HAND)
 	if #g>0 then
 		Duel.ConfirmCards(p,g)
-		local tg=g:Filter(Card.IsType,nil,TYPE_SPIRIT)
+		local tg=g:Filter(Card.IsType,nil,TYPE_GUARDIAN)
 		if #tg>0 then
-			Duel.Hint(HINT_SELECTMSG,p,HINTMSG_TOGRAVE)
+			Duel.Hint(HINT_SELECTMSG,p,HINTMSG_TOREST)
 			local sg=tg:Select(p,1,1,nil)
-			Duel.SendtoGrave(sg,REASON_DISCARD+REASON_EFFECT)
+			Duel.SendtoRest(sg,REASON_DISCARD+REASON_EFFECT)
 		end
 		Duel.ShuffleHand(1-p)
 	end

@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_SPSUMMON_PROC)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
-	e1:SetRange(LOCATION_HAND+LOCATION_GRAVE)
+	e1:SetRange(LOCATION_HAND+LOCATION_REST)
 	e1:SetCondition(s.spcon)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
@@ -43,7 +43,7 @@ function s.spcon(e,c)
 	local tp=c:GetControler()
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return false end
 	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_HAND,0,nil)
-	if not c:IsAbleToGraveAsCost() then
+	if not c:IsAbleToRestAsCost() then
 		g:RemoveCard(c)
 	end
 	if g:IsContains(c) then
@@ -57,7 +57,7 @@ function s.spcon(e,c)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=Duel.GetMatchingGroup(s.spfilter,c:GetControler(),LOCATION_HAND,0,nil)
-	if not c:IsAbleToGraveAsCost() then
+	if not c:IsAbleToRestAsCost() then
 		g:RemoveCard(c)
 	end
 	if g:IsContains(c) then
@@ -69,10 +69,10 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 	local sg=g:SelectWithSumGreater(tp,Card.GetLevel,8)
-	Duel.SendtoGrave(sg,REASON_COST+REASON_DISCARD)
+	Duel.SendtoRest(sg,REASON_COST+REASON_DISCARD)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_GRAVE) and e:GetHandler():IsReason(REASON_BATTLE)
+	return e:GetHandler():IsLocation(LOCATION_REST) and e:GetHandler():IsReason(REASON_BATTLE)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and chkc:IsControler(1-tp) end
@@ -97,7 +97,7 @@ function s.hdop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ConfirmCards(tp,hg)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 		local sg=hg:Select(tp,1,1,nil)
-		Duel.SendtoGrave(sg,REASON_EFFECT+REASON_DISCARD)
+		Duel.SendtoRest(sg,REASON_EFFECT+REASON_DISCARD)
 		Duel.ShuffleHand(1-tp)
 	end
 end

@@ -44,7 +44,7 @@ function s.spcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
 	return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and not Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_GRAVE,0,1,nil)
+		and not Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_REST,0,1,nil)
 		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,0,1,nil)
 end
 function s.eqfilter(c)
@@ -60,19 +60,19 @@ function s.rmfilter(c)
 	return c:IsMonster() and c:IsAbleToRemove()
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	local tc=Duel.GetFieldCard(1-tp,LOCATION_GRAVE,Duel.GetFieldGroupCount(1-tp,LOCATION_GRAVE,0)-1)
+	local tc=Duel.GetFieldCard(1-tp,LOCATION_REST,Duel.GetFieldGroupCount(1-tp,LOCATION_REST,0)-1)
 	if chk==0 then return tc and tc:IsMonster() and tc:IsAbleToRemove() and tc:GetAttack()>0 end
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,0,0)
 end
 function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) then return end
-	local tc=Duel.GetFieldCard(1-tp,LOCATION_GRAVE,Duel.GetFieldGroupCount(1-tp,LOCATION_GRAVE,0)-1)
+	local tc=Duel.GetFieldCard(1-tp,LOCATION_REST,Duel.GetFieldGroupCount(1-tp,LOCATION_REST,0)-1)
 	local sum=0
 	while tc and tc:IsMonster() and tc:IsAbleToRemove() and tc:GetAttack()>0 do
 		Duel.Remove(tc,POS_FACEUP,REASON_EFFECT)
 		sum=sum+tc:GetAttack()
-		tc=Duel.GetFieldCard(1-tp,LOCATION_GRAVE,Duel.GetFieldGroupCount(1-tp,LOCATION_GRAVE,0)-1)
+		tc=Duel.GetFieldCard(1-tp,LOCATION_REST,Duel.GetFieldGroupCount(1-tp,LOCATION_REST,0)-1)
 	end
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)

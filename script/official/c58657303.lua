@@ -1,9 +1,9 @@
 --墓守の霊術師
---Gravekeeper's Spiritualist
+--Restkeeper's Guardianualist
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion summon
-	local params = {aux.FilterBoolFunction(Card.IsRace,RACE_SPELLCASTER),nil,nil,nil,Fusion.ForcedHandler}
+	local params = {aux.FilterBoolFunction(Card.IsRace,RACE_MENTOR),nil,nil,nil,Fusion.ForcedHandler}
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)
 	e1:SetType(EFFECT_TYPE_IGNITION)

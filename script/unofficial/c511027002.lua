@@ -59,12 +59,12 @@ function s.sfilter(c,e,tp,zone)
 	return c:IsRace(RACE_PLANT) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE,tp,zone&0x1f)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.sfilter(chkc,e,tp,e:GetHandler():GetLinkedZone(tp)) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.sfilter(chkc,e,tp,e:GetHandler():GetLinkedZone(tp)) end
 	local zone=e:GetHandler():GetLinkedZone(tp)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(s.sfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp,zone&0x1f) end
+		and Duel.IsExistingTarget(s.sfilter,tp,LOCATION_REST,0,1,nil,e,tp,zone&0x1f) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.sfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp,zone&0x1f)
+	local g=Duel.SelectTarget(tp,s.sfilter,tp,LOCATION_REST,0,1,1,nil,e,tp,zone&0x1f)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)

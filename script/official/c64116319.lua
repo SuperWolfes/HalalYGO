@@ -1,5 +1,5 @@
 --トゥーン・ハーピィ・レディ
---Toon Harpie Lady
+--Toon Flybie Lady
 --Scripted by Hel
 
 local s,id=GetID()

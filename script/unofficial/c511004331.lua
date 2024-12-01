@@ -1,4 +1,4 @@
---Golem's Clap
+--Gopal's Clap
 --scripted by andré
 local s,id=GetID()
 function s.initial_effect(c)

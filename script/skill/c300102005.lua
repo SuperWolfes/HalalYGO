@@ -20,10 +20,10 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	else
 		g=Duel.SelectMatchingCard(1-tp,s.tgfilter,1-tp,LOCATION_DECK,0,ct,ct,nil,TYPE_TRAP)
 	end
-	if Duel.SendtoGrave(g,REASON_EFFECT)~=0 then
+	if Duel.SendtoRest(g,REASON_EFFECT)~=0 then
 		Duel.Hint(HINT_SKILL_FLIP,tp,id|(2<<32))
 	end
 end
 function s.tgfilter(c,ty)
-	return c:IsType(ty) and c:IsAbleToGrave()
+	return c:IsType(ty) and c:IsAbleToRest()
 end

@@ -1,5 +1,5 @@
 --幻魔皇ラビエル－天界蹂躙拳
---Raviel, Lord of Phantasms - Shimmering Scraper
+--Raviel, Lord of Illusorasms - Shimmering Scraper
 --Scripted by ahtelel
 local s,id=GetID()
 function s.initial_effect(c)
@@ -40,7 +40,7 @@ function s.initial_effect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_TOHAND)
 	e4:SetType(EFFECT_TYPE_IGNITION)
-	e4:SetRange(LOCATION_GRAVE)
+	e4:SetRange(LOCATION_REST)
 	e4:SetCountLimit(1,{id,1})
 	e4:SetCost(s.thcost)
 	e4:SetTarget(s.thtg)
@@ -84,7 +84,7 @@ function s.adcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.adcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsDiscardable() end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST+REASON_DISCARD)
+	Duel.SendtoRest(e:GetHandler(),REASON_COST+REASON_DISCARD)
 end
 function s.filter(c)
 	return c:IsFaceup() and c:IsCode(69890967)

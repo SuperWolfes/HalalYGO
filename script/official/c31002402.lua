@@ -3,14 +3,14 @@
 --scripted by edo9300
 local s,id=GetID()
 function s.initial_effect(c)
-	local e1=Ritual.CreateProc({handler=c,lvtype=RITPROC_EQUAL,filter=aux.FilterBoolFunction(Card.IsSetCard,0x146),extrafil=s.extragroup,
+	local e1=Locked.CreateProc({handler=c,lvtype=RITPROC_EQUAL,filter=aux.FilterBoolFunction(Card.IsSetCard,0x146),extrafil=s.extragroup,
 								extraop=s.extraop,stage2=s.stage2,forcedselection=s.ritcheck})
 	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
 	c:RegisterEffect(e1)
 end
 s.listed_series={0x146}
 function s.matfilter1(c)
-	return c:IsAbleToGrave() and c:IsLevelAbove(1)
+	return c:IsAbleToRest() and c:IsLevelAbove(1)
 end
 function s.extragroup(e,tp,eg,ep,ev,re,r,rp,chk)
 	return Duel.GetMatchingGroup(s.matfilter1,tp,LOCATION_EXTRA,0,nil)
@@ -18,8 +18,8 @@ end
 function s.extraop(mat,e,tp,eg,ep,ev,re,r,rp,tc)
 	local mat2=mat:Filter(Card.IsLocation,nil,LOCATION_EXTRA)
 	mat:Sub(mat2)
-	Duel.ReleaseRitualMaterial(mat)
-	Duel.SendtoGrave(mat2,REASON_EFFECT+REASON_MATERIAL+REASON_RITUAL)
+	Duel.ReleaseLockedMaterial(mat)
+	Duel.SendtoRest(mat2,REASON_EFFECT+REASON_MATERIAL+REASON_LOCKED)
 end
 function s.stage2(mat,e,tp,eg,ep,ev,re,r,rp,tc)
 	local e0=Effect.CreateEffect(e:GetHandler())

@@ -48,22 +48,22 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		if tc:IsType(TYPE_XYZ) then
 			lv=tc:GetOriginalRank()
 		end
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g1=Duel.SelectMatchingCard(tp,nil,tp,LOCATION_EXTRA,0,lv,lv,nil)
 		local tg=Duel.GetFieldGroup(tp,0,LOCATION_EXTRA)
 		if e:GetHandler():GetFlagEffect(id)>0 then
 			Duel.ConfirmCards(tp,tg)
-			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 			local g2=tg:Select(tp,lv,lv,nil)
 			g1:Merge(g2)
 		else
-			Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOGRAVE)
+			Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOREST)
 			local g2=tg:Select(1-tp,lv,lv,nil)
 			g1:Merge(g2)
 		end
 		if #g1>0 then
 			Duel.BreakEffect()
-			Duel.SendtoGrave(g1,REASON_EFFECT)
+			Duel.SendtoRest(g1,REASON_EFFECT)
 		end
 	end
 end

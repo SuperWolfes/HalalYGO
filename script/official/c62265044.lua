@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.operation1)
 	c:RegisterEffect(e2)
 	local e3=e2:Clone()
-	e3:SetCategory(CATEGORY_TOGRAVE)
+	e3:SetCategory(CATEGORY_TOREST)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetTarget(s.target2)
 	e3:SetOperation(s.operation2)
@@ -34,7 +34,7 @@ function s.filter1(c)
 	return c:IsLevelBelow(4) and c:IsSetCard(0x29) and c:IsAbleToHand()
 end
 function s.filter2(c)
-	return c:IsRace(RACE_DRAGON) and c:IsAbleToGrave()
+	return c:IsRace(RACE_DRAGON) and c:IsAbleToRest()
 end
 function s.target1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter1,tp,LOCATION_DECK,0,1,nil) end
@@ -42,7 +42,7 @@ function s.target1(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.target2(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_DECK,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
 function s.operation1(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
@@ -55,9 +55,9 @@ function s.operation1(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.operation2(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end

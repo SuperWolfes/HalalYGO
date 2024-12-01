@@ -1,4 +1,4 @@
---Earthbound God Chacu Challhua
+--Earthbound Monster Chacu Challhua
 local s,id=GetID()
 function s.initial_effect(c)
 	local e0=Effect.CreateEffect(c)

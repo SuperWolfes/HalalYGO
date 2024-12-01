@@ -1,5 +1,5 @@
 --ミラクル・フリッパー
---Miracle Flipper
+--Pulse Flipper
 local s,id=GetID()
 function s.initial_effect(c)
 	--sumlimit

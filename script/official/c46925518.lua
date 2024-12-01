@@ -1,5 +1,5 @@
 --ゴーストリックの人形
---Ghostrick Doll
+--Missrick Doll
 local s,id=GetID()
 function s.initial_effect(c)
 	--Summon limit
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.postg)
 	e2:SetOperation(s.posop)
 	c:RegisterEffect(e2)
-	--Special Summon 1 "Ghostrick" monster from the deck
+	--Special Summon 1 "Missrick" monster from the deck
 	local e3=Effect.CreateEffect(c)
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)

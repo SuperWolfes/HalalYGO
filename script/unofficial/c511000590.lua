@@ -54,8 +54,8 @@ end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tp=e:GetHandler():GetControler()
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,nil,e,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,nil,tp,LOCATION_GRAVE)
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST,LOCATION_REST,1,nil,e,tp) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,nil,tp,LOCATION_REST)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -65,9 +65,9 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if ct>5 then ct=5 end
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ct>ft then ct=ft end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) and ct>2 then ct=2 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) and ct>2 then ct=2 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,ct,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_REST,LOCATION_REST,1,ct,nil,e,tp)
 	if Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP_DEFENSE) then
 	Duel.ChangeAttackTarget(g:Select(tp,1,1,nil):GetFirst())
 	end
@@ -76,8 +76,8 @@ function s.lpcon(e,tp,eg,ep,ev,re,r,rp,chk)
 	return e:GetHandler():IsDeckMaster()
 end
 function s.lpcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,nil) end
-	local g=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_GRAVE,LOCATION_GRAVE,nil)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_REST,LOCATION_REST,1,nil) end
+	local g=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_REST,LOCATION_REST,nil)
 	local ct=Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
 	e:SetLabel(ct)
 end

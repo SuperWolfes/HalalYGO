@@ -23,12 +23,12 @@ function s.spfilter(c,e,tp)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local hydrant_chk=Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_R_ACE_HYDRANT),tp,LOCATION_ONFIELD,0,1,nil)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and (chkc:IsControler(tp) or hydrant_chk) and s.spfilter(chkc,e,tp) end
-	local loc=hydrant_chk and LOCATION_GRAVE or 0
+	if chkc then return chkc:IsLocation(LOCATION_REST) and (chkc:IsControler(tp) or hydrant_chk) and s.spfilter(chkc,e,tp) end
+	local loc=hydrant_chk and LOCATION_REST or 0
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_GRAVE,loc,1,nil,e,tp) end
+		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,loc,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_GRAVE,loc,1,1,nil,e,tp)
+	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_REST,loc,1,1,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)

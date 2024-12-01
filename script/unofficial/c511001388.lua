@@ -56,16 +56,16 @@ function s.cfilter(c,tp)
 	if c:IsMonster() then tpe=tpe|TYPE_MONSTER end
 	if c:IsSpell() then tpe=tpe|TYPE_SPELL end
 	if c:IsTrap() then tpe=tpe|TYPE_TRAP end
-	return c:IsAbleToGraveAsCost() and Duel.IsExistingTarget(s.banfilter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil,tpe)
+	return c:IsAbleToRestAsCost() and Duel.IsExistingTarget(s.banfilter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil,tpe)
 end
 function s.banfilter(c,tpe)
 	return c:IsType(tpe) and c:IsAbleToRemove() and (c:IsFaceup() or tpe&TYPE_MONSTER>0)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil,tp) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tc=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND,0,1,1,nil,tp):GetFirst()
-	Duel.SendtoGrave(tc,REASON_COST)
+	Duel.SendtoRest(tc,REASON_COST)
 	local tpe=0
 	if tc:IsMonster() then tpe=tpe|TYPE_MONSTER end
 	if tc:IsSpell() then tpe=tpe|TYPE_SPELL end

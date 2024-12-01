@@ -19,7 +19,7 @@ function s.filter(c)
 	return c:IsSetCard(0x52) and c:IsMonster()
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return not Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,1,nil) 
+	return not Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,1,nil) 
 		and re:IsActiveType(TYPE_SPELL) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and Duel.IsChainNegatable(ev) and rp~=tp
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)

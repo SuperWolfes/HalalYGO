@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL)
-	e1:SetCode(EVENT_TO_GRAVE)
+	e1:SetCode(EVENT_TO_REST)
 	e1:SetCondition(s.condition)
 	e1:SetTarget(s.target)
 	c:RegisterEffect(e1)
@@ -74,7 +74,7 @@ function s.initial_effect(c)
 	e10:SetOperation(s.mtop)
 	c:RegisterEffect(e10)
 end
-s.listed_names={CARD_DESTINY_BOARD,31829185}
+s.listed_names={CARD_DESTRUDIC_BOARD,31829185}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(Card.IsCode,1,nil,31829185)
 end
@@ -82,7 +82,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return true end
 	if c:IsLocation(LOCATION_FZONE) and Duel.IsExistingMatchingCard(Card.IsFaceup,tp,0,LOCATION_MZONE,1,nil)
-		and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,31829185) and Duel.SelectEffectYesNo(tp,c) then
+		and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,31829185) and Duel.SelectEffectYesNo(tp,c) then
 		e:SetCategory(CATEGORY_EQUIP)
 		Duel.SetOperationInfo(0,CATEGORY_EQUIP,e:GetHandler(),1,0,0)
 		e:SetOperation(s.operation)
@@ -130,7 +130,7 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RaiseSingleEvent(e:GetHandler(),id,e,0,tp,tp,0)
 end
 function s.eqcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetTurnPlayer()~=tp and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,31829185)
+	return Duel.GetTurnPlayer()~=tp and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,31829185)
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsFaceup,tp,0,LOCATION_MZONE,1,nil) end
@@ -138,7 +138,7 @@ function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetHandler():GetEquipTarget()
-	return tc and Duel.GetAttacker()==tc and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,31829185)
+	return tc and Duel.GetAttacker()==tc and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,31829185)
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local a=Duel.GetAttacker()
@@ -158,7 +158,7 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.mtcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetTurnPlayer()==tp and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,31829185)
+	return Duel.GetTurnPlayer()==tp and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,31829185)
 		and e:GetHandler():GetFlagEffect(511000118)==0
 end
 function s.mtop(e,tp,eg,ep,ev,re,r,rp)
@@ -229,7 +229,7 @@ function s.moveop(e,tp,eg,ep,ev,re,r,rp,c,og)
 end
 function s.efilter(e,te)
 	local tc=te:GetOwner()
-	return tc~=e:GetOwner() and not tc:IsCode(CARD_DESTINY_BOARD)
+	return tc~=e:GetOwner() and not tc:IsCode(CARD_DESTRUDIC_BOARD)
 end
 function s.dirtg(e,c)
 	return not Duel.IsExistingMatchingCard(aux.FilterEqualFunction(Card.GetFlagEffect,0,id),c:GetControler(),0,LOCATION_MZONE,1,nil)
@@ -283,7 +283,7 @@ function s.tar(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tg=te:GetTarget()
 	local op=te:GetOperation()
 	if chk==0 then return (not tg or tg(e,tp,eg,ep,ev,re,r,rp,0)) and Duel.GetTurnPlayer()==tp
-		and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,31829185)
+		and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,31829185)
 	end
 	c:CreateEffectRelation(e)
 	if tg then tg(e,tp,eg,ep,ev,re,r,rp,1,nil) end

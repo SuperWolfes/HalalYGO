@@ -1,4 +1,4 @@
---Miracle Rocket Show
+--Pulse Rocket Show
 local s,id=GetID()
 function s.initial_effect(c)
 	--activate

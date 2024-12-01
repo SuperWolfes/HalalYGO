@@ -17,10 +17,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 s.listed_series={0x18b}
-local LOCATION_REMOVED_HAND_DECK_GRAVE=LOCATION_REMOVED+LOCATION_HAND+LOCATION_DECK+LOCATION_GRAVE
+local LOCATION_REMOVED_HAND_DECK_REST=LOCATION_REMOVED+LOCATION_HAND+LOCATION_DECK+LOCATION_REST
 function s.spcostfilter(c,e,tp)
 	return c:IsFaceup() and c:IsRace(RACE_FISH) and c:IsAbleToRemoveAsCost() and Duel.GetMZoneCount(tp,c)>0
-		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REMOVED_HAND_DECK_GRAVE,0,1,nil,e,tp,c:GetOriginalCode())
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REMOVED_HAND_DECK_REST,0,1,nil,e,tp,c:GetOriginalCode())
 end
 function s.spfilter(c,e,tp,code)
 	return c:IsSetCard(0x18b) and (c:IsFaceup() or not c:IsLocation(LOCATION_REMOVED))
@@ -40,12 +40,12 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 		e:SetLabel(0)
 		return res
 	end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REMOVED_HAND_DECK_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REMOVED_HAND_DECK_REST)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)==0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REMOVED_HAND_DECK_GRAVE,0,1,1,nil,e,tp,e:GetLabel()):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REMOVED_HAND_DECK_REST,0,1,1,nil,e,tp,e:GetLabel()):GetFirst()
 	if tc and Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)>0 then
 		-- Banish it if it leaves the field
 		local e1=Effect.CreateEffect(e:GetHandler())

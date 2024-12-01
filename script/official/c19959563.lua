@@ -59,15 +59,15 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.PayLPCost(tp,1000)
 end
 function s.filter(c)
-	return (c:IsFaceup() or c:IsLocation(LOCATION_GRAVE)) and not (c:IsSetCard(0x38) and c:IsMonster()) and c:IsAbleToDeck()
+	return (c:IsFaceup() or c:IsLocation(LOCATION_REST)) and not (c:IsSetCard(0x38) and c:IsMonster()) and c:IsAbleToDeck()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE+LOCATION_REMOVED,LOCATION_GRAVE+LOCATION_REMOVED,1,e:GetHandler()) end
-	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE+LOCATION_REMOVED,LOCATION_GRAVE+LOCATION_REMOVED,e:GetHandler())
+	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST+LOCATION_REMOVED,LOCATION_REST+LOCATION_REMOVED,1,e:GetHandler()) end
+	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_REST+LOCATION_REMOVED,LOCATION_REST+LOCATION_REMOVED,e:GetHandler())
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,#g,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE+LOCATION_REMOVED,LOCATION_GRAVE+LOCATION_REMOVED,nil)
+	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_REST+LOCATION_REMOVED,LOCATION_REST+LOCATION_REMOVED,nil)
 	Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
 end
 function s.ddcon(e,tp,eg,ep,ev,re,r,rp)

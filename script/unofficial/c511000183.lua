@@ -1,4 +1,4 @@
---Number 23: Lancelot, Ghost Knight of the Underworld
+--Number 23: Lancelot, Miss Knight of the Underworld
 Duel.LoadCardScript("c66547759.lua")
 local s,id=GetID()
 function s.initial_effect(c)

@@ -58,11 +58,11 @@ function s.olcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetOverlayCount()==0 and e:GetHandler():IsType(TYPE_XYZ)
 end
 function s.oltg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and chkc:IsMonster() end
-	if chk==0 then return Duel.IsExistingTarget(Card.IsMonster,tp,LOCATION_GRAVE,0,2,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and chkc:IsMonster() end
+	if chk==0 then return Duel.IsExistingTarget(Card.IsMonster,tp,LOCATION_REST,0,2,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local g=Duel.SelectTarget(tp,Card.IsMonster,tp,LOCATION_GRAVE,0,2,2,nil)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,2,0,0)
+	local g=Duel.SelectTarget(tp,Card.IsMonster,tp,LOCATION_REST,0,2,2,nil)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,2,0,0)
 end
 function s.olop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

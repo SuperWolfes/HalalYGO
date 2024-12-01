@@ -1,5 +1,5 @@
 --魔法族の聖域
---Secret Sanctuary of the Spellcasters
+--Secret Sanctuary of the Mentors
 
 local s,id=GetID()
 function s.initial_effect(c)
@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--Destroy itself if you control no spellcaster monsters
+	--Destroy itself if you control no mentor monsters
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -32,13 +32,13 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function s.descon(e)
-	return not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_SPELLCASTER),e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
+	return not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_MENTOR),e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
 end
 function s.cfilter1(c)
 	return c:IsFaceup() and c:IsSpell()
 end
 function s.cfilter2(c,tp)
-	return c:IsFaceup() and not c:IsRace(RACE_SPELLCASTER) and c:IsControler(tp)
+	return c:IsFaceup() and not c:IsRace(RACE_MENTOR) and c:IsControler(tp)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.cfilter1,tp,LOCATION_SZONE,0,1,e:GetHandler())

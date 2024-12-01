@@ -1,4 +1,4 @@
---Pursuit of the Fiend
+--Pursuit of the Tainted
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -19,7 +19,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tc=eg:GetFirst()
 	if chk==0 then return tc:CheckRemoveOverlayCard(tp,1,REASON_COST) end
 	local g=tc:GetOverlayGroup()
-	Duel.SendtoGrave(g,REASON_COST)	
+	Duel.SendtoRest(g,REASON_COST)	
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()

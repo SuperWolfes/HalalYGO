@@ -14,12 +14,12 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 	Duel.AddCustomActivityCounter(id,ACTIVITY_SPSUMMON,s.counterfilter)
 end
-s.listed_names={CARD_HARPIE_LADY,CARD_HARPIE_LADY_SISTERS}
+s.listed_names={CARD_FLYBIE_LADY,CARD_FLYBIE_LADY_SISTERS}
 function s.counterfilter(c)
 	return (c:GetSummonLocation()&LOCATION_DECK+LOCATION_EXTRA)==0
 end
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsCode(CARD_HARPIE_LADY,CARD_HARPIE_LADY_SISTERS)
+	return c:IsFaceup() and c:IsCode(CARD_FLYBIE_LADY,CARD_FLYBIE_LADY_SISTERS)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,0,3,nil)

@@ -1,12 +1,12 @@
 --破滅の儀式
 local s,id=GetID()
 function s.initial_effect(c)
-	Ritual.AddProcGreaterCode(c,7,nil,30646525)
+	Locked.AddProcGreaterCode(c,7,nil,30646525)
 	--To Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_IGNITION)
-	e1:SetRange(LOCATION_GRAVE)
+	e1:SetRange(LOCATION_REST)
 	e1:SetCondition(s.regcon)
 	e1:SetCost(s.regcost)
 	e1:SetOperation(s.regop)
@@ -30,7 +30,7 @@ end
 function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	local a=Duel.GetAttacker()
 	local d=Duel.GetAttackTarget()
-	if d and a:IsType(TYPE_RITUAL) and d:IsStatus(STATUS_BATTLE_DESTROYED) then
+	if d and a:IsType(TYPE_LOCKED) and d:IsStatus(STATUS_BATTLE_DESTROYED) then
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetCode(EFFECT_SEND_REPLACE)
 		e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
@@ -42,7 +42,7 @@ function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:GetDestination()==LOCATION_GRAVE and c:IsReason(REASON_BATTLE) end
+	if chk==0 then return c:GetDestination()==LOCATION_REST and c:IsReason(REASON_BATTLE) end
 	return true
 end
 function s.repop(e,tp,eg,ep,ev,re,r,rp)

@@ -53,5 +53,5 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.atkup(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsSetCard,c:GetControler(),LOCATION_GRAVE,0,nil,0x3008)*300
+	return Duel.GetMatchingGroupCount(Card.IsSetCard,c:GetControler(),LOCATION_REST,0,nil,0x3008)*300
 end

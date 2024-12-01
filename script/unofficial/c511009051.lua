@@ -1,4 +1,4 @@
---Scarlight Red Dragon Archfiend (anime)
+--Scarlight Red Dragon Archtainted (anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon

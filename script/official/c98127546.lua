@@ -1,5 +1,5 @@
 --閉ザサレシ世界ノ冥神
---Underworld Goddess of the Closed World
+--Underworld Monsterdess of the Closed World
 --Scripted by DyXel and Edo9300
 
 local s,id=GetID()
@@ -99,8 +99,8 @@ function s.spdiscon(e,tp,eg,ep,ev,re,r,rp)
 		not Duel.IsChainNegatable(ev) then return false end
 	local ex1,tg1,ct1,p1,loc1=Duel.GetOperationInfo(ev,CATEGORY_SPECIAL_SUMMON)
 	local ex2,tg2,ct2,p2,loc2=Duel.GetPossibleOperationInfo(ev,CATEGORY_SPECIAL_SUMMON)
-	local res1 = ((loc1 or 0)&LOCATION_GRAVE~=0) or (tg1 and tg1:IsExists(Card.IsLocation,1,nil,LOCATION_GRAVE))
-	local res2 = ((loc2 or 0)&LOCATION_GRAVE~=0) or (tg2 and tg2:IsExists(Card.IsLocation,1,nil,LOCATION_GRAVE))
+	local res1 = ((loc1 or 0)&LOCATION_REST~=0) or (tg1 and tg1:IsExists(Card.IsLocation,1,nil,LOCATION_REST))
+	local res2 = ((loc2 or 0)&LOCATION_REST~=0) or (tg2 and tg2:IsExists(Card.IsLocation,1,nil,LOCATION_REST))
 	return res1 or res2
 end
 function s.spdistg(e,tp,eg,ep,ev,re,r,rp,chk)

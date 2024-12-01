@@ -1,4 +1,4 @@
---Umbral Horror Golem
+--Umbral Horror Gopal
 local s,id=GetID()
 function s.initial_effect(c)
 	--destroy

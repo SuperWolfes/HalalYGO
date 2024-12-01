@@ -1,5 +1,5 @@
 --光来する奇跡
---Arriving Miracle
+--Arriving Pulse
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

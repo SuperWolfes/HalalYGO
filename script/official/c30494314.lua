@@ -13,10 +13,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsPreviousLocation(LOCATION_GRAVE) and re:GetHandler():IsRace(RACE_ZOMBIE)
+	return e:GetHandler():IsPreviousLocation(LOCATION_REST) and re:GetHandler():IsRace(RACE_CONTAMINED)
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsRace(RACE_ZOMBIE) and not c:IsType(TYPE_XYZ)
+	return c:IsFaceup() and c:IsRace(RACE_CONTAMINED) and not c:IsType(TYPE_XYZ)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.filter(chkc) end

@@ -37,7 +37,7 @@ function s.initial_effect(c)
 	--gy and damage
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
-	e4:SetCategory(CATEGORY_TOGRAVE+CATEGORY_DAMAGE)
+	e4:SetCategory(CATEGORY_TOREST+CATEGORY_DAMAGE)
 	e4:SetType(EFFECT_TYPE_IGNITION)
 	e4:SetRange(LOCATION_MZONE)
 	e4:SetCountLimit(1)
@@ -96,15 +96,15 @@ end
 function s.spcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
-	local rg1=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil,ATTRIBUTE_LIGHT)
-	local rg2=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil,ATTRIBUTE_DARK)
+	local rg1=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE+LOCATION_REST,0,nil,ATTRIBUTE_LIGHT)
+	local rg2=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE+LOCATION_REST,0,nil,ATTRIBUTE_DARK)
 	local rg=rg1:Clone()
 	rg:Merge(rg2)
 	return Duel.GetLocationCount(tp,LOCATION_MZONE)>-2 and #rg1>0 and #rg2>0 
 		and aux.SelectUnselectGroup(rg,e,tp,2,2,s.rescon,0)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,c)
-	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil,ATTRIBUTE_LIGHT+ATTRIBUTE_DARK)
+	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE+LOCATION_REST,0,nil,ATTRIBUTE_LIGHT+ATTRIBUTE_DARK)
 	local g=aux.SelectUnselectGroup(rg,e,tp,2,2,s.rescon,1,tp,HINTMSG_REMOVE,nil,nil,true)
 	if #g>0 then
 		g:KeepAlive()
@@ -127,7 +127,7 @@ function s.gyfilter(c)
 	return not c:IsLocation(LOCATION_MZONE) or c:GetSequence()<5
 end
 function s.sgfilter(c,p)
-	return c:IsLocation(LOCATION_GRAVE) and c:IsControler(p)
+	return c:IsLocation(LOCATION_REST) and c:IsControler(p)
 end
 function s.gytg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(s.gyfilter,tp,LOCATION_ONFIELD,0,nil)
@@ -135,16 +135,16 @@ function s.gytg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return #g>0 and #og>0 end
 	local oc=#og
 	g:Merge(og)
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,g,#g,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,g,#g,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,0,0,1-tp,oc*300)
 end
 function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.gyfilter,tp,LOCATION_ONFIELD,0,nil)
-	if #g==0 or Duel.SendtoGrave(g,REASON_EFFECT)==0 then return end
+	if #g==0 or Duel.SendtoRest(g,REASON_EFFECT)==0 then return end
 	local oc=Duel.GetOperatedGroup():FilterCount(s.sgfilter,nil,tp)
 	if oc==0 then return end
 	local og=Duel.SelectMatchingCard(tp,nil,tp,0,LOCATION_ONFIELD,1,oc,nil)
-	if Duel.SendtoGrave(og,REASON_EFFECT)>0 then
+	if Duel.SendtoRest(og,REASON_EFFECT)>0 then
 		Duel.BreakEffect()
 		local dc=Duel.GetOperatedGroup():FilterCount(s.sgfilter,nil,1-tp)
 		Duel.Damage(1-tp,dc*300,REASON_EFFECT)

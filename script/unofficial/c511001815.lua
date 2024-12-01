@@ -1,4 +1,4 @@
---Gate Guardian Ritual
+--Gate Guardian Locked
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -13,7 +13,7 @@ end
 s.fit_monster={25833572}
 function s.filter(c,e,tp,m)
 	local cd=c:GetCode()
-	if cd~=25833572 or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,false) then return false end
+	if cd~=25833572 or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_LOCKED,tp,true,false) then return false end
 	if m:IsContains(c) then
 		m:RemoveCard(c)
 		result=m:IsExists(Card.IsCode,1,nil,25955164) and m:IsExists(Card.IsCode,1,nil,62340868) 
@@ -27,13 +27,13 @@ function s.filter(c,e,tp,m)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
-		local mg=Duel.GetRitualMaterial(tp)
+		local mg=Duel.GetLockedMaterial(tp)
 		return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil,e,tp,mg)
 	end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND+LOCATION_DECK)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local mg=Duel.GetRitualMaterial(tp)
+	local mg=Duel.GetLockedMaterial(tp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local tg=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_HAND+LOCATION_DECK,0,1,1,nil,e,tp,mg)
 	if #tg>0 then
@@ -46,9 +46,9 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		mat1:Merge(mat2)
 		mat1:Merge(mat3)
 		tc:SetMaterial(mat1)
-		Duel.ReleaseRitualMaterial(mat1)
+		Duel.ReleaseLockedMaterial(mat1)
 		Duel.BreakEffect()
-		Duel.SpecialSummon(tc,SUMMON_TYPE_RITUAL,tp,tp,true,false,POS_FACEUP)
+		Duel.SpecialSummon(tc,SUMMON_TYPE_LOCKED,tp,tp,true,false,POS_FACEUP)
 		tc:CompleteProcedure()
 	end
 end

@@ -15,7 +15,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_CYBER_DRAGON}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,CARD_CYBER_DRAGON)
+	return Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,CARD_CYBER_DRAGON)
 end
 function s.filter1(c)
 	return c:IsRace(RACE_MACHINE) and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsAbleToHand()
@@ -26,15 +26,15 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then
 		if e:GetLabel()~=0 then
-			return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter2(chkc)
+			return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter2(chkc)
 		else return false end
 	end
 	local b1=Duel.IsExistingMatchingCard(s.filter1,tp,LOCATION_DECK,0,1,nil)
-	local b2=Duel.IsExistingTarget(s.filter2,tp,LOCATION_GRAVE,0,1,nil)
+	local b2=Duel.IsExistingTarget(s.filter2,tp,LOCATION_REST,0,1,nil)
 	if chk==0 then return b1 or b2 end
 	local op=0
 	if b1 and b2 then
-		if Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,3,nil,CARD_CYBER_DRAGON) then
+		if Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,3,nil,CARD_CYBER_DRAGON) then
 			op=Duel.SelectOption(tp,aux.Stringid(id,0),aux.Stringid(id,1),aux.Stringid(id,2))
 		else
 			op=Duel.SelectOption(tp,aux.Stringid(id,0),aux.Stringid(id,1))
@@ -47,7 +47,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	e:SetLabel(op)
 	if op~=0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-		local g=Duel.SelectTarget(tp,s.filter2,tp,LOCATION_GRAVE,0,1,1,nil)
+		local g=Duel.SelectTarget(tp,s.filter2,tp,LOCATION_REST,0,1,1,nil)
 		Duel.SetOperationInfo(0,CATEGORY_TODECK,g,1,0,0)
 		e:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	else

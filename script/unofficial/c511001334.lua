@@ -60,7 +60,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			if sg1:IsContains(tc) and (sg2==nil or not sg2:IsContains(tc) or not Duel.SelectYesNo(tp,ce:GetDescription())) then
 				local mat1=Duel.SelectFusionMaterial(tp,tc,mg1,nil,tp)
 				tc:SetMaterial(mat1)
-				Duel.SendtoGrave(mat1,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
+				Duel.SendtoRest(mat1,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
 				Duel.BreakEffect()
 				Duel.SpecialSummonStep(tc,SUMMON_TYPE_FUSION,tp,tp,false,false,POS_FACEUP)
 				tc:SetStatus(STATUS_SPSUMMON_STEP,false)
@@ -72,7 +72,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			tc:CompleteProcedure()
 			sum=sum+1
 		end
-	until sum>=2 or sum==0 or not s.target(e,tp,eg,ep,ev,re,r,rp,0) or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) 
+	until sum>=2 or sum==0 or not s.target(e,tp,eg,ep,ev,re,r,rp,0) or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) 
 		or (ect and ect<2) or not Duel.SelectYesNo(tp,aux.Stringid(33550694,0))
 	Duel.SpecialSummonComplete()
 end

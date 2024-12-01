@@ -24,7 +24,7 @@ end
 s.listed_names={81332143,14731897}
 function s.condition(code)
 	return function (e,tp,eg,ep,ev,re,r,rp)
-		return Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,code)
+		return Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,code)
 	end
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -33,7 +33,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.PayLPCost(tp,math.floor(Duel.GetLP(tp)/2))
 end
 function s.monop(e,tp,eg,ep,ev,re,r,rp)
-	if not Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,81332143) then return end
+	if not Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,81332143) then return end
 	local c=e:GetHandler()
 	--Cannot Normal Summon/Set, Flip Summon, Special Summon
 	local e1=Effect.CreateEffect(c)
@@ -66,7 +66,7 @@ function s.aclimit1(e,re,tp)
 	return re:IsActiveType(TYPE_MONSTER)
 end
 function s.stop(e,tp,eg,ep,ev,re,r,rp)
-	if not Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,14731897) then return end
+	if not Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,14731897) then return end
 	local c=e:GetHandler()
 	--Cannot activate/Set Spells/Traps
 	local e1=Effect.CreateEffect(c)

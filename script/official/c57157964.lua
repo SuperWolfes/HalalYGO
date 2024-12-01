@@ -53,7 +53,7 @@ s.listed_names={CARD_FOSSIL_FUSION}
 
 	--Check for a rock monster in your GY
 function s.ffilter(c,fc,sumtype,tp)
-	return c:IsRace(RACE_ROCK) and c:IsLocation(LOCATION_GRAVE) and c:IsControler(tp)
+	return c:IsRace(RACE_ROCK) and c:IsLocation(LOCATION_REST) and c:IsControler(tp)
 end
 	--If fusion summoned
 function s.condition(e)

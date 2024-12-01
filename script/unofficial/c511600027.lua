@@ -34,7 +34,7 @@ function s.initial_effect(c)
 	--evacuate
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(10753491,0))
-	e5:SetCategory(CATEGORY_TOGRAVE)
+	e5:SetCategory(CATEGORY_TOREST)
 	e5:SetType(EFFECT_TYPE_IGNITION)
 	e5:SetRange(LOCATION_FZONE)
 	e5:SetCountLimit(1,51160027)
@@ -54,7 +54,7 @@ function s.mtop(e,tp,eg,ep,ev,re,r,rp)
 		local tg=g:Filter(Card.IsSetCard,nil,0x102)
 		if #tg>0 then
 			Duel.DisableShuffleCheck()
-			Duel.SendtoGrave(tg,REASON_EFFECT+REASON_REVEAL)
+			Duel.SendtoRest(tg,REASON_EFFECT+REASON_REVEAL)
 		end
 		local ac=6-#tg
 		Duel.MoveToDeckBottom(ac,tp)
@@ -76,7 +76,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_HAND,0,nil,e,tp)
 	if ft<=0 or #g==0 or not e:GetHandler():IsRelateToEffect(e) then return end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	ft=math.min(ft,2)
 	local sg=aux.SelectUnselectGroup(g,e,tp,nil,ft,s.rescon,1,tp,HINTMSG_SPSUMMON,s.rescon)
 	Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP_DEFENSE)

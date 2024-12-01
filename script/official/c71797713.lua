@@ -26,7 +26,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x400d,0x113}
 function s.costfilter(c)
-	return c:IsMonster() and c:IsAbleToGraveAsCost()
+	return c:IsMonster() and c:IsAbleToRestAsCost()
 		and (c:IsSetCard(0x400d) or c:IsLocation(LOCATION_HAND))
 end
 function s.regfilter(c,attr)
@@ -40,7 +40,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local loc=LOCATION_HAND
 	if #fg>0 then loc=LOCATION_HAND+LOCATION_DECK end
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,loc,0,2,e:GetHandler()) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,loc,0,2,2,e:GetHandler())
 	if g:IsExists(Card.IsLocation,1,nil,LOCATION_DECK) then
 		local fc=nil
@@ -56,7 +56,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if g:IsExists(s.regfilter,1,nil,ATTRIBUTE_EARTH+ATTRIBUTE_WIND) then flag=flag|0x1 end
 	if g:IsExists(s.regfilter,1,nil,ATTRIBUTE_WATER+ATTRIBUTE_FIRE) then flag=flag|0x2 end
 	if g:IsExists(s.regfilter,1,nil,ATTRIBUTE_LIGHT+ATTRIBUTE_DARK) then flag=flag|0x4 end
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	e:SetLabel(flag)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)

@@ -35,7 +35,7 @@ function s.cfilter(c)
 	return c:IsSetCard(0x9c) and c:IsMonster()
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
-	local ct=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_GRAVE,0,nil)
+	local ct=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST,0,nil)
 	return ct:GetClassCount(Card.GetCode)<7
 end
 function s.spdiscost(e,tp,eg,ep,ev,re,r,rp,chk)

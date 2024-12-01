@@ -32,7 +32,7 @@ end
 s.listed_names={99426088}
 s.listed_series={0x167}
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_RITUAL)
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_LOCKED)
 end
 function s.thfilter(c)
 	return c:IsSetCard(0x167) and c:IsAbleToHand()
@@ -57,7 +57,7 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	local bc=c:GetBattleTarget()
 	if bc and bc:IsFaceup() then
 		local att=0
-		for gc in aux.Next(Duel.GetMatchingGroup(s.atkfilter,tp,LOCATION_GRAVE,0,nil)) do
+		for gc in aux.Next(Duel.GetMatchingGroup(s.atkfilter,tp,LOCATION_REST,0,nil)) do
 			att=att|gc:GetAttribute()
 		end
 		return not bc:IsStatus(STATUS_DISABLED) and bc:GetAttribute()&att~=0

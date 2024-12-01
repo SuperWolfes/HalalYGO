@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_UPDATE_ATTACK)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetTargetRange(LOCATION_MZONE,0)
-	e1:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_FAIRY))
+	e1:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_WANDERER))
 	e1:SetValue(s.atkval)
 	c:RegisterEffect(e1)
 	local e2=e1:Clone()
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.atkfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_FAIRY)
+	return c:IsFaceup() and c:IsRace(RACE_WANDERER)
 end
 function s.atkval(e,c)
 	return Duel.GetMatchingGroupCount(s.atkfilter,c:GetControler(),LOCATION_MZONE,0,nil)*400

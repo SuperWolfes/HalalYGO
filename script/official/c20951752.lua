@@ -62,7 +62,7 @@ function s.sumcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if #(exg-g)>0 and Duel.SelectYesNo(tp,aux.Stringid(59160188,2)) then
 		g=g+(exg-g)
 	end
-	local ct=g:FilterCount(Card.IsRace,nil,RACE_FAIRY)
+	local ct=g:FilterCount(Card.IsRace,nil,RACE_WANDERER)
 	Duel.Release(g,REASON_COST)
 	e:GetLabelObject():SetLabel(ct)
 end

@@ -15,17 +15,17 @@ end
 s.listed_series={0xfe}
 s.listed_names={id}
 function s.filter(c)
-	return c:IsSetCard(0xfe) and not c:IsCode(id) and (c:IsLocation(LOCATION_HAND+LOCATION_GRAVE) or c:IsFaceup()) and c:IsAbleToDeck()
+	return c:IsSetCard(0xfe) and not c:IsCode(id) and (c:IsLocation(LOCATION_HAND+LOCATION_REST) or c:IsFaceup()) and c:IsAbleToDeck()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_HAND+LOCATION_GRAVE+LOCATION_ONFIELD+LOCATION_REMOVED,0,nil)
+	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_HAND+LOCATION_REST+LOCATION_ONFIELD+LOCATION_REMOVED,0,nil)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,2)
 		and g:GetClassCount(Card.GetCode)>=5 end
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,5,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,2)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.filter),tp,LOCATION_HAND+LOCATION_GRAVE+LOCATION_ONFIELD+LOCATION_REMOVED,0,nil)
+	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.filter),tp,LOCATION_HAND+LOCATION_REST+LOCATION_ONFIELD+LOCATION_REMOVED,0,nil)
 	if g:GetClassCount(Card.GetCode)<5 then return end
 	local sg=Group.CreateGroup()
 	for i=1,5 do

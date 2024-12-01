@@ -14,7 +14,7 @@ function s.initial_effect(c)
 end
 function s.filter(c,tp)
 	return c:IsPreviousControler(tp) and c:IsPreviousPosition(POS_FACEUP)
-		and c==Duel.GetAttackTarget() and c:IsRace(RACE_PSYCHIC)
+		and c==Duel.GetAttackTarget() and c:IsRace(RACE_MENTAL)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.filter,1,nil,tp)

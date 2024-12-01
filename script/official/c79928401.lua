@@ -58,17 +58,17 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return c:IsPreviousLocation(LOCATION_MZONE) and c:IsFaceup()
 end
 function s.remfilter(c,tp)
-	return c:IsRace(RACE_FAIRY) and c:IsAbleToRemoveAsCost() and c:IsMonster() and aux.SpElimFilter(c,true,false)
+	return c:IsRace(RACE_WANDERER) and c:IsAbleToRemoveAsCost() and c:IsMonster() and aux.SpElimFilter(c,true,false)
 		and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil,c:GetLevel())
 end
 function s.thfilter(c,lv)
-	return c:IsRace(RACE_FAIRY) and c:IsAbleToHand() and c:IsMonster() and c:IsLevel(lv)
+	return c:IsRace(RACE_WANDERER) and c:IsAbleToHand() and c:IsMonster() and c:IsLevel(lv)
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return Duel.IsExistingMatchingCard(s.remfilter,tp,LOCATION_GRAVE,0,1,c,tp) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.remfilter,tp,LOCATION_REST,0,1,c,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local tc=Duel.SelectMatchingCard(tp,s.remfilter,tp,LOCATION_GRAVE,0,1,1,c,tp):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,s.remfilter,tp,LOCATION_REST,0,1,1,c,tp):GetFirst()
 	Duel.Remove(tc,POS_FACEUP,REASON_COST)
 	e:SetLabel(tc:GetLevel())
 end

@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
 	c:EnableReviveLimit()
-	Fusion.AddProcMix(c,true,true,16178681,aux.FilterBoolFunctionEx(Card.IsRace,RACE_SPELLCASTER))
+	Fusion.AddProcMix(c,true,true,16178681,aux.FilterBoolFunctionEx(Card.IsRace,RACE_MENTOR))
 	--multi attack
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
@@ -67,7 +67,7 @@ function s.valcheck(e,c)
 	if #g==2 then
 		local lv=0
 		local lg1=g:Filter(s.lvfilter,nil,c)
-		local lg2=g:Filter(Card.IsRace,nil,RACE_SPELLCASTER,c,SUMMON_TYPE_FUSION)
+		local lg2=g:Filter(Card.IsRace,nil,RACE_MENTOR,c,SUMMON_TYPE_FUSION)
 		if #lg1==2 then
 			lv=lg2:GetFirst():GetOriginalLevel()
 			local lc=lg2:GetNext()

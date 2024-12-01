@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	--Exavate and send 1 "Morphtronic" card to the GY
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_TOGRAVE)
+	e2:SetCategory(CATEGORY_TOREST)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCountLimit(1)
@@ -26,21 +26,21 @@ function s.initial_effect(c)
 	e2:SetOperation(s.operation_d)
 	c:RegisterEffect(e2)
 end
-s.roll_dice=true
+s.roll_suffice=true
 s.listed_series={0x26}
 function s.target_a(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,0,tp,1)
+	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,1)
 	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,0)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end
 function s.spfilter(c,lv,e,tp)
 	return c:IsSetCard(0x26) and c:IsLevelBelow(lv) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.operation_a(e,tp,eg,ep,ev,re,r,rp)
-	local res=Duel.TossDice(tp,1)
+	local res=Duel.TossSuffice(tp,1)
 	if Duel.Recover(tp,res*100,REASON_EFFECT)~=res*100 or Duel.GetLocationCount(tp,LOCATION_MZONE)==0 then return end
-	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_GRAVE,0,nil,res,e,tp)
+	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,res,e,tp)
 	if #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local sc=g:Select(tp,1,1,nil):GetFirst()
@@ -52,24 +52,24 @@ function s.operation_a(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.target_d(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>0 end
-	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,0,tp,1)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,1)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
 function s.tgfilter(c)
-	return c:IsSetCard(0x26) and c:IsAbleToGrave()
+	return c:IsSetCard(0x26) and c:IsAbleToRest()
 end
 function s.operation_d(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)==0 then return end
-	local res=Duel.TossDice(tp,1)
+	local res=Duel.TossSuffice(tp,1)
 	Duel.ConfirmDecktop(tp,res)
 	local dg=Duel.GetDecktopGroup(tp,res)
 	local ct=0
 	if dg:IsExists(s.tgfilter,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,3)) then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local tg=dg:FilterSelect(tp,s.tgfilter,1,1,nil)
 		dg:RemoveCard(tg)
 		Duel.DisableShuffleCheck()
-		Duel.SendtoGrave(tg,REASON_EFFECT+REASON_REVEAL)
+		Duel.SendtoRest(tg,REASON_EFFECT+REASON_REVEAL)
 		ct=1
 	end
 	local ac=res-ct

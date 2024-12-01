@@ -1,5 +1,5 @@
 --墓守の異能者
---Gravekeeper's Supernaturalist
+--Restkeeper's Supernaturalist
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.indtg)
 	e2:SetValue(1)
 	c:RegisterEffect(e2)
-	--Search 1 "Gravekeeper's" monster or "Necrovalley" card during the End Phase
+	--Search 1 "Restkeeper's" monster or "Necrovalley" card during the End Phase
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)

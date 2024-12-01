@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 	--Turn 1
 	local e2=Effect.CreateEffect(c)
-	e2:SetCategory(CATEGORY_TOGRAVE)
+	e2:SetCategory(CATEGORY_TOREST)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetCode(EVENT_PHASE+PHASE_STANDBY)
@@ -74,10 +74,10 @@ function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
 function s.filter1(c,e)
-	return c:IsMonster() and c:IsAbleToGrave() and not c:IsImmuneToEffect(e)
+	return c:IsMonster() and c:IsAbleToRest() and not c:IsImmuneToEffect(e)
 end
 function s.filter2(c,m)
 	return c:IsFusionSummonableCard() and c:CheckFusionMaterial(m)
@@ -95,7 +95,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 		local code=tc:GetCode()
 		local mat=Duel.SelectFusionMaterial(tp,tc,mg)
 		mat:KeepAlive()
-		Duel.SendtoGrave(mat,REASON_EFFECT)
+		Duel.SendtoRest(mat,REASON_EFFECT)
 		for mc in aux.Next(mat) do
 			mc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1)
 		end

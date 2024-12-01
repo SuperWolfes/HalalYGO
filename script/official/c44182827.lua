@@ -10,12 +10,12 @@ function s.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetProperty(EFFECT_FLAG_SET_AVAILABLE+EFFECT_FLAG_IGNORE_RANGE+EFFECT_FLAG_IGNORE_IMMUNE)
-	e2:SetCode(EFFECT_TO_GRAVE_REDIRECT)
+	e2:SetCode(EFFECT_TO_REST_REDIRECT)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetTarget(s.rmtarget)
 	e2:SetValue(LOCATION_DECKSHF)
 	c:RegisterEffect(e2)
 end
 function s.rmtarget(e,c)
-	return c:GetReason()==REASON_RELEASE+REASON_RITUAL+REASON_EFFECT+REASON_MATERIAL
+	return c:GetReason()==REASON_RELEASE+REASON_LOCKED+REASON_EFFECT+REASON_MATERIAL
 end

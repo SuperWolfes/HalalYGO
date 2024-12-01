@@ -1,5 +1,5 @@
 -- 宝玉の奇跡
--- Crystal Miracle
+-- Crystal Pulse
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
 	e2:SetCode(EVENT_MOVE)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,id)
 	e2:SetCondition(s.plcon)
 	e2:SetCost(aux.bfgcost)
@@ -59,16 +59,16 @@ function s.plcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg and eg:IsExists(s.plconfilter,1,nil,tp)
 end
 function s.plfilter(c)
-	return c:IsSetCard(0x1034) and c:IsMonster() and not c:IsForbidden()
+	return c:IsSetCard(0x1034) and c:IsMonster() and not c:IsUnliked()
 end
 function s.pltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and Duel.IsExistingMatchingCard(s.plfilter,tp,LOCATION_DECK+LOCATION_GRAVE+LOCATION_HAND,0,1,nil) end
+		and Duel.IsExistingMatchingCard(s.plfilter,tp,LOCATION_DECK+LOCATION_REST+LOCATION_HAND,0,1,nil) end
 end
 function s.plop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<1 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
-	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.plfilter),tp,LOCATION_DECK+LOCATION_GRAVE+LOCATION_HAND,0,1,1,nil):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.plfilter),tp,LOCATION_DECK+LOCATION_REST+LOCATION_HAND,0,1,1,nil):GetFirst()
 	if tc and Duel.MoveToField(tc,tp,tp,LOCATION_SZONE,POS_FACEUP,true) then
 		-- Treat as Continuous Spell
 		local e1=Effect.CreateEffect(e:GetHandler())

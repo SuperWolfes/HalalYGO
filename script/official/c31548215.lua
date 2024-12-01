@@ -1,5 +1,5 @@
 --墓穴ホール
---Grave Hole
+--Rest Hole
 --Scripted by Hel
 local s,id=GetID()
 function s.initial_effect(c)
@@ -17,7 +17,7 @@ function s.negcon(e,tp,eg,ep,ev,re,r,rp)
 	local activateLocation = Duel.GetChainInfo(ev, CHAININFO_TRIGGERING_LOCATION)
 	return not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED)
 		and ep~=tp and re:IsActiveType(TYPE_MONSTER) and Duel.IsChainDisablable(ev)
-		and (activateLocation==LOCATION_GRAVE or activateLocation==LOCATION_HAND or activateLocation==LOCATION_REMOVED)
+		and (activateLocation==LOCATION_REST or activateLocation==LOCATION_HAND or activateLocation==LOCATION_REMOVED)
 end
 function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return not re:GetHandler():IsStatus(STATUS_DISABLED) end

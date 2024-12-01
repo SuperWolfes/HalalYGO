@@ -26,7 +26,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
 end
-s.miracle_synchro_fusion=true
+s.pulse_synchro_fusion=true
 function s.atkval(e,c)
 	local cont=c:GetControler()
 	local atk=2500-Duel.GetLP(cont)

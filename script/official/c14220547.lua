@@ -11,13 +11,13 @@ function s.initial_effect(c)
 	--Look at either Extra Deck and send 1 monster from it to the GY
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
-	e2:SetCategory(CATEGORY_TOGRAVE)
+	e2:SetCategory(CATEGORY_TOREST)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetCountLimit(1,{id,0})
-	e2:SetCondition(s.condition(TYPE_RITUAL))
+	e2:SetCondition(s.condition(TYPE_LOCKED))
 	e2:SetTarget(s.gytg)
 	e2:SetOperation(s.gyop)
 	c:RegisterEffect(e2)
@@ -44,7 +44,7 @@ function s.condition(typ)
 end
 function s.gytg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroupCount(tp,LOCATION_EXTRA,LOCATION_EXTRA)>0 end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,PLAYER_ALL,LOCATION_EXTRA)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,PLAYER_ALL,LOCATION_EXTRA)
 end
 function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 	local g1=Duel.GetFieldGroup(tp,LOCATION_EXTRA,0)
@@ -55,11 +55,11 @@ function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 		{#g2>0,aux.Stringid(id,3)})
 	local g=(op==1) and g1 or g2
 	if op==2 then Duel.ConfirmCards(tp,g) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local tg=g:FilterSelect(tp,aux.AND(Card.IsMonster,Card.IsAbleToGrave),1,1,nil)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	local tg=g:FilterSelect(tp,aux.AND(Card.IsMonster,Card.IsAbleToRest),1,1,nil)
 	if #tg>0 then
 		Duel.BreakEffect()
-		Duel.SendtoGrave(tg,REASON_EFFECT)
+		Duel.SendtoRest(tg,REASON_EFFECT)
 		if op==2 then Duel.ShuffleExtra(1-tp) end
 	end
 end

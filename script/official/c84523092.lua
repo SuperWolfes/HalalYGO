@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.tgtg(e,c)
-	return c:IsRace(RACE_SPELLCASTER) and c~=e:GetHandler()
+	return c:IsRace(RACE_MENTOR) and c~=e:GetHandler()
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and chkc:IsFaceup() end

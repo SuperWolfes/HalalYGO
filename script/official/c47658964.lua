@@ -18,13 +18,13 @@ function s.cfilter(c)
 	return c:IsSetCard(0x39) and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	local g
 	if Duel.IsPlayerAffectedByEffect(tp,69832741) then
 		g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_MZONE,0,1,5,nil)
 	else
-		g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_GRAVE,0,1,Duel.GetLocationCount(tp,LOCATION_MZONE),nil)
+		g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_REST,0,1,Duel.GetLocationCount(tp,LOCATION_MZONE),nil)
 	end
 	e:SetLabel(#g)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)

@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c)
-	return c:IsPosition(POS_FACEUP_ATTACK) and c:IsRace(RACE_SPELLCASTER)
+	return c:IsPosition(POS_FACEUP_ATTACK) and c:IsRace(RACE_MENTOR)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,0,2,nil)
@@ -45,5 +45,5 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.ftarget(e,c)
-	return e:GetLabel()~=c:GetFieldID() and c:IsRace(RACE_SPELLCASTER)
+	return e:GetLabel()~=c:GetFieldID() and c:IsRace(RACE_MENTOR)
 end

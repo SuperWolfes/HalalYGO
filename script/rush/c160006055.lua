@@ -31,9 +31,9 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if #dg==0 then return end
 	local sg=dg:Select(tp,1,1,nil)
 	Duel.HintSelection(sg)
-	if Duel.Destroy(sg,REASON_EFFECT)>0 and Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_GRAVE,0,1,nil)
+	if Duel.Destroy(sg,REASON_EFFECT)>0 and Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST,0,1,nil)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
-		local tg=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+		local tg=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_REST,0,1,1,nil)
 		Duel.SendtoDeck(tg,nil,0,REASON_EFFECT)
 		Duel.ShuffleDeck(tp)
 	end

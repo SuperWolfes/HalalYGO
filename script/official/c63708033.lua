@@ -1,5 +1,5 @@
 -- 春化精と花蕾
--- Vernalizer Fairy and Flower Buds
+-- Vernalizer Wanderer and Flower Buds
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -19,7 +19,7 @@ end
 s.listed_series={0x27e}
 function s.ctfilter(c)
 	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_EARTH)
-		and c:IsSummonLocation(LOCATION_GRAVE) and c:IsSummonType(SUMMON_TYPE_SPECIAL)
+		and c:IsSummonLocation(LOCATION_REST) and c:IsSummonType(SUMMON_TYPE_SPECIAL)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and chkc:IsControler(1-tp) and chkc:IsFaceup() and chkc:IsAbleToHand() end

@@ -1,5 +1,5 @@
 --召命の神弓－アポロウーサ
---Apollousa, Bow of the Goddess
+--Apollousa, Bow of the Monsterdess
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)

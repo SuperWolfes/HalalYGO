@@ -9,7 +9,7 @@ function s.initial_effect(c)
 	-- Roll die and move to corresponding zone
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_DICE+CATEGORY_CONTROL+CATEGORY_TOGRAVE)
+	e1:SetCategory(CATEGORY_SUFFICE+CATEGORY_CONTROL+CATEGORY_TOREST)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e1:SetCode(EVENT_PHASE+PHASE_BATTLE_START)
 	e1:SetRange(LOCATION_MZONE)
@@ -19,24 +19,24 @@ function s.initial_effect(c)
 	e1:SetOperation(s.mvop)
 	c:RegisterEffect(e1)
 end
-s.roll_dice=true
+s.roll_suffice=true
 function s.mvtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,0,tp,1)
+	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,1)
 end
 function s.cannot_move(c)
-	Duel.SendtoGrave(c,REASON_EFFECT)
+	Duel.SendtoRest(c,REASON_EFFECT)
 end
 function s.mvop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not (c:IsRelateToEffect(e) and c:IsInMainMZone()) then return end
-	local dice=Duel.TossDice(tp,1)
-	if dice<1 or dice>6 then return end
+	local suffice=Duel.TossSuffice(tp,1)
+	if suffice<1 or suffice>6 then return end
 
 	local seq=c:GetSequence()
 	local col3=Duel.IsDuelType(DUEL_3_COLUMNS_FIELD)
 	local max=col3 and 4 or 5
-	for i=1,dice do
+	for i=1,suffice do
 		seq=seq-1
 		if seq==0 and col3 then seq=-2
 		elseif seq<-max then seq=max-1 end

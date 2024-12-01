@@ -86,5 +86,5 @@ function s.valcheck(e,c)
 	end
 end
 function s.immcon(e)
-	return Duel.IsExistingMatchingCard(Card.IsCode,e:GetHandlerPlayer(),LOCATION_GRAVE,0,1,nil,CARD_POLYMERIZATION)
+	return Duel.IsExistingMatchingCard(Card.IsCode,e:GetHandlerPlayer(),LOCATION_REST,0,1,nil,CARD_POLYMERIZATION)
 end

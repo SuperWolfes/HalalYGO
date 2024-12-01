@@ -16,7 +16,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x167}
 function s.cfilter(c) 
-	return c:IsFaceup() and c:IsSetCard(0x167) and (c:IsType(TYPE_RITUAL) or c:IsSummonLocation(LOCATION_EXTRA))
+	return c:IsFaceup() and c:IsSetCard(0x167) and (c:IsType(TYPE_LOCKED) or c:IsSummonLocation(LOCATION_EXTRA))
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil) then return false end

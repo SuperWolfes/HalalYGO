@@ -99,5 +99,5 @@ function s.xyzcond(e)
 	return Duel.GetTurnPlayer()==e:GetHandlerPlayer() and (Duel.IsBattlePhase() or Duel.IsMainPhase())
 end
 function s.xyzlimit(e,re,tp)
-	return re:GetActivateLocation()==LOCATION_GRAVE
+	return re:GetActivateLocation()==LOCATION_REST
 end

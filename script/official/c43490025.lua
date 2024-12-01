@@ -58,7 +58,7 @@ function s.atkfilter(c)
 	return c:IsType(TYPE_XYZ) and c:IsSetCard(0x48)
 end
 function s.atkval(e,c)
-	return Duel.GetMatchingGroupCount(s.atkfilter,c:GetControler(),LOCATION_GRAVE,LOCATION_GRAVE,nil)*500
+	return Duel.GetMatchingGroupCount(s.atkfilter,c:GetControler(),LOCATION_REST,LOCATION_REST,nil)*500
 end
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsAbleToEnterBP()

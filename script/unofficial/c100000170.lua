@@ -54,7 +54,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_GRAVE)
+	return e:GetHandler():IsLocation(LOCATION_REST)
 end
 function s.filter2(c,e,tp)
 	return c:IsCode(100000177) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

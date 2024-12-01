@@ -31,7 +31,7 @@ function s.cfilter(c)
 	return c:IsMonster() and c:IsType(TYPE_NORMAL) and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsDefense(500)
 end
 function s.actcond(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,nil)
+	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil)
 end
 function s.indtg(e,c)
 	return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsLevel(9) and c:IsFaceup()

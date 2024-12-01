@@ -53,7 +53,7 @@ function s.descon(e)
 end
 function s.crystaltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:GetDestination()==LOCATION_GRAVE and c:IsReason(REASON_DESTROY) end
+	if chk==0 then return c:GetDestination()==LOCATION_REST and c:IsReason(REASON_DESTROY) end
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then return false end
 	return Duel.SelectEffectYesNo(tp,c)
 end
@@ -89,7 +89,7 @@ function s.crystalstobeastsop(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(s.crystalstobeastfilter,tp,LOCATION_SZONE,0,nil,e,tp)
 	local gc=#g
 	if gc==0 then return end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ct=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ct=1 end
 	if gc<=ct then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	else

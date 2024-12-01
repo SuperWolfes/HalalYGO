@@ -1,5 +1,5 @@
 --ライトロード・スピリット シャイア
---Shire, Lightsworn Spirit
+--Shire, Lightsworn Guardian
 local s,id=GetID()
 function s.initial_effect(c)
 	--atk def
@@ -28,7 +28,7 @@ function s.filter(c)
 	return c:IsSetCard(0x38) and c:IsMonster()
 end
 function s.value(e,c)
-	local g=Duel.GetMatchingGroup(s.filter,c:GetControler(),LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.filter,c:GetControler(),LOCATION_REST,0,nil)
 	local ct=g:GetClassCount(Card.GetCode)
 	return ct*300
 end

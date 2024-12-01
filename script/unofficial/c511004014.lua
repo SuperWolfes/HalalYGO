@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	aux.EnableExtraRules(c,s,s.op)
 end
 function s.op(oc)
-	--To controler's grave
+	--To controler's rest
 	local e1=Effect.GlobalEffect()
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_IGNORE_IMMUNE) 
@@ -77,7 +77,7 @@ function s.op(oc)
 	e6:SetCode(EFFECT_CANNOT_ATTACK)
 	e6:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE) 
 	e6:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
-	e6:SetTarget(function(e,c) return c:IsStatus(STATUS_SPSUMMON_TURN) and (c:IsSummonLocation(LOCATION_EXTRA) or (c:IsAttribute(ATTRIBUTE_DIVINE) and c:IsSummonLocation(LOCATION_GRAVE))) and not c:IsHasEffect(511004016) end)
+	e6:SetTarget(function(e,c) return c:IsStatus(STATUS_SPSUMMON_TURN) and (c:IsSummonLocation(LOCATION_EXTRA) or (c:IsAttribute(ATTRIBUTE_DIVINE) and c:IsSummonLocation(LOCATION_REST))) and not c:IsHasEffect(511004016) end)
 	Duel.RegisterEffect(e6,0)
 	--Quick
 	local e7=Effect.GlobalEffect()
@@ -198,8 +198,8 @@ function s.op(oc)
 	for tc2 in aux.Next(g2) do
 		tc2:RegisterFlagEffect(511004017,0,0,0)
 	end
-	local proc=Duel.SendtoGrave
-	Duel.SendtoGrave=function(tg,r,tp)
+	local proc=Duel.SendtoRest
+	Duel.SendtoRest=function(tg,r,tp)
 		if tp then
 			if type(tg)=='Card' then
 				tg:RegisterFlagEffect(511004018,RESET_EVENT+RESETS_STANDARD,0,1)
@@ -265,7 +265,7 @@ function s.block(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.repfilter(c)
-	return c:GetDestination()==LOCATION_GRAVE and c:GetFlagEffect(511004018)==0 and c:GetControler()~=c:GetOwner()
+	return c:GetDestination()==LOCATION_REST and c:GetFlagEffect(511004018)==0 and c:GetControler()~=c:GetOwner()
 end
 function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return eg:IsExists(s.repfilter,1,nil) end
@@ -274,12 +274,12 @@ function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 		if c:GetReason()&REASON_DESTROY==REASON_DESTROY then
 			c:RegisterFlagEffect(511000173,RESET_CHAIN,0,1)
 		end
-		Duel.SendtoGrave(c,c:GetReason(),c:GetControler())
+		Duel.SendtoRest(c,c:GetReason(),c:GetControler())
 	end
 	return true
 end
 function s.repval(e,c)
-	return c:GetControler()~=c:GetOwner() and c:GetDestination()==LOCATION_GRAVE and c:GetFlagEffect(511004018)==0
+	return c:GetControler()~=c:GetOwner() and c:GetDestination()==LOCATION_REST and c:GetFlagEffect(511004018)==0
 end
 function s.grepcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(Card.IsStatus,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil,STATUS_LEAVE_CONFIRMED)
@@ -287,7 +287,7 @@ end
 function s.grepop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(Card.IsStatus,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil,STATUS_LEAVE_CONFIRMED)
 	for c in aux.Next(g) do
-		c:CancelToGrave()
+		c:CancelToRest()
 		c:RegisterFlagEffect(STATUS_LEAVE_CONFIRMED,RESET_EVENT+RESETS_STANDARD,0,1)
 	end
 end
@@ -300,8 +300,8 @@ end
 function s.grepop2(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.grepfilter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil)
 	for c in aux.Next(g) do
-		c:CancelToGrave(false)
-		Duel.SendtoGrave(c,REASON_RULE,c:GetControler())
+		c:CancelToRest(false)
+		Duel.SendtoRest(c,REASON_RULE,c:GetControler())
 	end
 end
 function s.mvalue(e,fp,rp,r)

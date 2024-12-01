@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	--Copy your trap
 	local e2=e1:Clone()
 	e2:SetType(EFFECT_TYPE_QUICK_O)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetLabel(1)
 	c:RegisterEffect(e2)
 end
@@ -36,8 +36,8 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		return tg and tg(e,tp,eg,ep,ev,re,r,rp,0,chkc)
 	end
 	local loc1,loc2=0,0
-	if e:GetLabel()==0 then loc2=LOCATION_GRAVE
-	elseif e:GetLabel()==1 then loc1=LOCATION_GRAVE end
+	if e:GetLabel()==0 then loc2=LOCATION_REST
+	elseif e:GetLabel()==1 then loc1=LOCATION_REST end
 	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,loc1,loc2,1,e:GetHandler()) end
 	e:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)

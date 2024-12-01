@@ -67,7 +67,7 @@ function s.splimit(e,c)
 	return not c:IsSetCard(0x17e) and not c:IsLocation(LOCATION_EXTRA)
 end
 function s.penfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x17e) and not c:IsForbidden()
+	return c:IsFaceup() and c:IsSetCard(0x17e) and not c:IsUnliked()
 end
 function s.sztg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

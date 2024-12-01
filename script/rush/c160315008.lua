@@ -1,5 +1,5 @@
 --デュアルコアトルス
---Dual Coretls
+--Guardian Coretls
 local s,id=GetID()
 function s.initial_effect(c)
 	--ATK increase+double attack

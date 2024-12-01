@@ -67,5 +67,5 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	if not g then return end
 	Duel.Hint(HINT_CARD,0,id)
 	g:DeleteGroup()
-	Duel.SendtoGrave(g,REASON_EFFECT)
+	Duel.SendtoRest(g,REASON_EFFECT)
 end

@@ -55,7 +55,7 @@ function s.initial_effect(c)
 	e7:SetType(EFFECT_TYPE_FIELD)
 	e7:SetRange(LOCATION_MZONE)
 	e7:SetTargetRange(0,LOCATION_HAND)
-	e7:SetCode(EFFECT_CANNOT_TO_GRAVE_AS_COST)
+	e7:SetCode(EFFECT_CANNOT_TO_REST_AS_COST)
 	e7:SetCondition(s.excon)
 	c:RegisterEffect(e7)
 end

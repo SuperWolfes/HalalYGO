@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 s.material_setcode={0x151a,0x351a}
-s.miracle_synchro_fusion=true
+s.pulse_synchro_fusion=true
 function s.fusfilter1(c,fc,sumtype,tp)
 	return c:IsSetCard(0x351a) and c:IsType(TYPE_FUSION,fc,sumtype,tp)
 end

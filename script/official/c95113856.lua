@@ -1,5 +1,5 @@
 --幻子力空母エンタープラズニル
---Phantom Fortress Enterblathnir
+--Illusion Fortress Enterblathnir
 local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz Summon
@@ -18,16 +18,16 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1,false,REGISTER_FLAG_DETACH_XMAT)
 end
 function s.rmfilter(c)
-	return c:IsAbleToRemove() and (not c:IsLocation(LOCATION_GRAVE) or aux.SpElimFilter(c))
+	return c:IsAbleToRemove() and (not c:IsLocation(LOCATION_REST) or aux.SpElimFilter(c))
 end
 function s.bansc(tp,loc) --Banish check shortcut
 	return Duel.IsExistingMatchingCard(Card.IsAbleToRemove,tp,0,loc,1,nil)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.rmfilter,tp,0,LOCATION_ONFIELD+LOCATION_HAND+LOCATION_GRAVE+LOCATION_DECK,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.rmfilter,tp,0,LOCATION_ONFIELD+LOCATION_HAND+LOCATION_REST+LOCATION_DECK,1,nil) end
 	local b1=s.bansc(tp,LOCATION_ONFIELD)
 	local b2=s.bansc(tp,LOCATION_HAND)
-	local b3=(Duel.IsPlayerAffectedByEffect(1-tp,69832741) and s.bansc(tp,LOCATION_MZONE)) or s.bansc(tp,LOCATION_GRAVE)
+	local b3=(Duel.IsPlayerAffectedByEffect(1-tp,69832741) and s.bansc(tp,LOCATION_MZONE)) or s.bansc(tp,LOCATION_REST)
 	local b4=s.bansc(tp,LOCATION_DECK)
 	local op=Duel.SelectEffect(tp,
 		{b1,aux.Stringid(id,1)},
@@ -57,7 +57,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		if Duel.IsPlayerAffectedByEffect(1-tp,69832741) then
 			g=Duel.SelectMatchingCard(tp,Card.IsAbleToRemove,tp,0,LOCATION_MZONE,1,1,nil)
 		else
-			g=Duel.SelectMatchingCard(tp,Card.IsAbleToRemove,tp,0,LOCATION_GRAVE,1,1,nil)
+			g=Duel.SelectMatchingCard(tp,Card.IsAbleToRemove,tp,0,LOCATION_REST,1,1,nil)
 		end
 		if #g>0 then
 			Duel.Remove(g,POS_FACEUP,REASON_EFFECT)

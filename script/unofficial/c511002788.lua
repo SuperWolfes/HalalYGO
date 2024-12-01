@@ -16,10 +16,10 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local endtime=0
 	local check=true
 	local g=Duel.SelectMatchingCard(tp,nil,tp,LOCATION_DECK,0,1,3,nil)
-	local ct=Duel.GetMatchingGroupCount(s.filter,tp,LOCATION_DECK|LOCATION_HAND|LOCATION_GRAVE,0,nil,g)
+	local ct=Duel.GetMatchingGroupCount(s.filter,tp,LOCATION_DECK|LOCATION_HAND|LOCATION_REST,0,nil,g)
 	local start=os.time()
 	Duel.Hint(HINT_SELECTMSG,1-tp,aux.Stringid(4006,8))
-	local tc=Duel.AnnounceNumberRange(1-tp,1,Duel.GetFieldGroupCount(tp,LOCATION_DECK|LOCATION_HAND|LOCATION_GRAVE,0))
+	local tc=Duel.AnnounceNumberRange(1-tp,1,Duel.GetFieldGroupCount(tp,LOCATION_DECK|LOCATION_HAND|LOCATION_REST,0))
 	endtime=os.time()-start
 	check=endtime<=10 and tc==ct
 	if e:GetHandler():IsRelateToEffect(e) then

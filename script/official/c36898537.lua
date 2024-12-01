@@ -1,5 +1,5 @@
 --メタファイズ・ホルス・ドラゴン
---Metaphys Horus
+--Metaphys Humus
 
 local s,id=GetID()
 function s.initial_effect(c)

@@ -19,11 +19,11 @@ function s.filter(c,e,tp,lv)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
-		local ct=math.min(3,Duel.GetMatchingGroupCount(s.cfilter,tp,LOCATION_GRAVE,0,nil))
+		local ct=math.min(3,Duel.GetMatchingGroupCount(s.cfilter,tp,LOCATION_REST,0,nil))
 		return ct>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 			and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil,e,tp,ct)
 	end
-	local cg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_GRAVE,0,nil)
+	local cg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST,0,nil)
 	local ct=math.min(3,#cg)
 	local tg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_DECK,0,nil,e,tp,ct)
 	local lvt={}

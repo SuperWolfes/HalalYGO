@@ -15,7 +15,7 @@ s.listed_series={0xa3}
 function s.filter1(c,e,tp)
 	local lv=c:GetLevel()
 	return c:IsSetCard(0xa3) and c:IsType(TYPE_SYNCHRO) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_SYNCHRO,tp,false,false)
-		and Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil,tp,c)
+		and Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_MZONE+LOCATION_REST,0,1,nil,tp,c)
 end
 function s.rescon(tuner,scard)
 	return	function(sg,e,tp,mg)
@@ -27,7 +27,7 @@ function s.rescon(tuner,scard)
 			end
 end
 function s.filter2(c,tp,sc)
-	local rg=Duel.GetMatchingGroup(s.filter3,tp,LOCATION_MZONE+LOCATION_GRAVE,0,c)
+	local rg=Duel.GetMatchingGroup(s.filter3,tp,LOCATION_MZONE+LOCATION_REST,0,c)
 	return c:IsType(TYPE_TUNER) and c:IsAbleToRemove() and aux.SpElimFilter(c,true) 
 		and aux.SelectUnselectGroup(rg,e,tp,nil,2,s.rescon(c,sc),0)
 end
@@ -48,9 +48,9 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local sc=g1:GetFirst()
 	if sc then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-		local g2=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,nil,tp,sc)
+		local g2=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_MZONE+LOCATION_REST,0,1,1,nil,tp,sc)
 		local tuner=g2:GetFirst()
-		local rg=Duel.GetMatchingGroup(s.filter3,tp,LOCATION_MZONE+LOCATION_GRAVE,0,tuner)
+		local rg=Duel.GetMatchingGroup(s.filter3,tp,LOCATION_MZONE+LOCATION_REST,0,tuner)
 		local sg=aux.SelectUnselectGroup(rg,e,tp,1,2,s.rescon(tuner,sc),1,tp,HINTMSG_REMOVE,s.rescon(tuner,sc))
 		sg:AddCard(tuner)
 		Duel.Remove(sg,POS_FACEUP,REASON_EFFECT)

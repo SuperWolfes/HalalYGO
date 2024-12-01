@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,id)
 	e2:SetCost(aux.bfgcost)
 	e2:SetTarget(s.settg)
@@ -27,7 +27,7 @@ end
 s.listed_series={0x142,0x144}
 function s.spfilter(c,e,tp)
 	return (Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,0x142),tp,LOCATION_MZONE,0,1,nil)
-		or c:IsSetCard(0x142)) and c:IsRace(RACE_ZOMBIE) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
+		or c:IsSetCard(0x142)) and c:IsRace(RACE_CONTAMINED) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
@@ -52,10 +52,10 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.splimit(e,c,sump,sumtype,sumpos,targetp,se)
-	return not c:IsRace(RACE_ZOMBIE)
+	return not c:IsRace(RACE_CONTAMINED)
 end
 function s.setfilter(c)
-	return c:IsSetCard(0x144) and c:IsSSetable() and not c:IsForbidden()
+	return c:IsSetCard(0x144) and c:IsSSetable() and not c:IsUnliked()
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0

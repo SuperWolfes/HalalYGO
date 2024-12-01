@@ -22,15 +22,15 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		if e:GetLabel()==0 and Duel.GetLocationCount(tp,LOCATION_MZONE)<=2 then return false end
 		e:SetLabel(0)
-		return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) 
-			and Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0x56f,TYPES_TOKEN,0,0,1,RACE_ZOMBIE,ATTRIBUTE_DARK)
+		return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) 
+			and Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0x56f,TYPES_TOKEN,0,0,1,RACE_CONTAMINED,ATTRIBUTE_DARK)
 	end
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,3,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,3,tp,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) or Duel.GetLocationCount(tp,LOCATION_MZONE)<=2 
-		or not Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0x56f,TYPES_TOKEN,0,0,1,RACE_ZOMBIE,ATTRIBUTE_DARK) then return end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) or Duel.GetLocationCount(tp,LOCATION_MZONE)<=2 
+		or not Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0x56f,TYPES_TOKEN,0,0,1,RACE_CONTAMINED,ATTRIBUTE_DARK) then return end
 	for i=1,3 do
 		local token=Duel.CreateToken(tp,id+1)
 		Duel.SpecialSummonStep(token,0,tp,tp,false,false,POS_FACEUP)

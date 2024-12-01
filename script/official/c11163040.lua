@@ -43,7 +43,7 @@ s.counter_place_list={0x37}
 s.listed_series={0xd3}
 s.listed_names={id}
 function s.cfilter(c)
-	return c:IsSetCard(0xd3) and c:IsPreviousLocation(LOCATION_HAND+LOCATION_GRAVE)
+	return c:IsSetCard(0xd3) and c:IsPreviousLocation(LOCATION_HAND+LOCATION_REST)
 end
 function s.counter(e,tp,eg,ep,ev,re,r,rp)
 	if eg:IsExists(s.cfilter,1,nil) then
@@ -93,8 +93,8 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetCounter(0x37)>=3
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
+	Duel.SendtoRest(e:GetHandler(),REASON_COST)
 end
 function s.thfilter(c)
 	return c:IsSetCard(0xd3) and c:IsSpellTrap() and not c:IsCode(id) and c:IsAbleToHand()

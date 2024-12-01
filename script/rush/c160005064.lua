@@ -38,9 +38,9 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			local ft=Duel.GetMZoneCount(tp)
 			if ft<=0 then return end
 			if ft>=2 then ft=2 end
-			if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+			if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-			local g2=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_GRAVE,0,1,ft,nil,e,tp)
+			local g2=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_REST,0,1,ft,nil,e,tp)
 			Duel.SpecialSummon(g2,0,tp,tp,false,false,POS_FACEUP)
 		end
 	end

@@ -42,10 +42,10 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsDestructable()
 		and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and tc
 		and tc:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_ATTACK)
-		and tc:IsCanBeEffectTarget(e) and tc:IsLocation(LOCATION_GRAVE) and tc:IsControler(tp) end
+		and tc:IsCanBeEffectTarget(e) and tc:IsLocation(LOCATION_REST) and tc:IsControler(tp) end
 	Duel.SetTargetCard(tc)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,e:GetHandler(),1,0,0)
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,tc,1,0,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,tc,1,0,LOCATION_REST)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -53,7 +53,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if c:IsRelateToEffect(e)
 		and Duel.Destroy(c,REASON_EFFECT)~=0
 		and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and tc and tc:IsRelateToEffect(e) and tc:IsLocation(LOCATION_GRAVE) and tc:IsControler(tp)
+		and tc and tc:IsRelateToEffect(e) and tc:IsLocation(LOCATION_REST) and tc:IsControler(tp)
 		and Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP_ATTACK)~=0 then
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)

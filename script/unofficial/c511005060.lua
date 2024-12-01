@@ -96,7 +96,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ChangePosition(tc,POS_FACEUP)
 	end
 	Duel.Hint(HINT_CARD,0,tc:GetOriginalCode())
-	if not (tc:IsSpell() and tc:IsType(TYPE_CONTINUOUS+TYPE_EQUIP)) then tc:CancelToGrave(false) end
+	if not (tc:IsSpell() and tc:IsType(TYPE_CONTINUOUS+TYPE_EQUIP)) then tc:CancelToRest(false) end
 	if not tc:IsSpell() then return end
 	tc:CreateEffectRelation(te)
 	if cs then cs(te,tp,neg,nep,nev,nre,nr,nrp,1) end

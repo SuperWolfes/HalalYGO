@@ -32,16 +32,16 @@ function s.initial_effect(c)
 	e4:SetValue(s.valcon)
 	c:RegisterEffect(e4)
 end
-s.listed_names={TOKEN_MECHA_PHANTOM_BEAST}
+s.listed_names={TOKEN_MECHA_ILLUSION_BEAST}
 function s.lvval(e,c)
 	local tp=c:GetControler()
-	return Duel.GetMatchingGroup(Card.IsCode,tp,LOCATION_MZONE,0,nil,TOKEN_MECHA_PHANTOM_BEAST):GetSum(Card.GetLevel)
+	return Duel.GetMatchingGroup(Card.IsCode,tp,LOCATION_MZONE,0,nil,TOKEN_MECHA_ILLUSION_BEAST):GetSum(Card.GetLevel)
 end
 function s.indcon(e)
 	return Duel.IsExistingMatchingCard(Card.IsType,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil,TYPE_TOKEN)
 end
 function s.indtg(e,c)
-	return c:IsCode(TOKEN_MECHA_PHANTOM_BEAST)
+	return c:IsCode(TOKEN_MECHA_ILLUSION_BEAST)
 end
 function s.valcon(e,re,r,rp)
 	return (r&REASON_BATTLE)~=0

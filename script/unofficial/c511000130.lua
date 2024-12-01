@@ -40,5 +40,5 @@ function s.atkfilter(c)
 	return c:IsRace(RACE_PYRO)
 end
 function s.val(e,c)
-	return Duel.GetMatchingGroupCount(s.atkfilter,c:GetControler(),LOCATION_GRAVE,LOCATION_GRAVE,nil)*500
+	return Duel.GetMatchingGroupCount(s.atkfilter,c:GetControler(),LOCATION_REST,LOCATION_REST,nil)*500
 end

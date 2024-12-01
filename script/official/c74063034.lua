@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_TODECK+CATEGORY_TOHAND)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,id)
 	e2:SetTarget(s.tdtg)
 	e2:SetOperation(s.tdop)
@@ -20,19 +20,19 @@ end
 s.listed_series={0xf4}
 s.listed_names={86120751}
 function s.matfilter(c)
-	return (c:IsLocation(LOCATION_HAND) and c:IsAbleToGrave()) or (c:IsOnField() and c:IsAbleToRemove())
+	return (c:IsLocation(LOCATION_HAND) and c:IsAbleToRest()) or (c:IsOnField() and c:IsAbleToRemove())
 end
 function s.checkmat(tp,sg,fc)
-	return fc:IsSetCard(0xf4) or not sg:IsExists(Card.IsLocation,1,nil,LOCATION_GRAVE+LOCATION_ONFIELD)
+	return fc:IsSetCard(0xf4) or not sg:IsExists(Card.IsLocation,1,nil,LOCATION_REST+LOCATION_ONFIELD)
 end
 function s.fextra(e,tp,mg)
 	if not Duel.IsPlayerAffectedByEffect(tp,69832741) then
-		return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRemove),tp,LOCATION_GRAVE,LOCATION_GRAVE,nil),s.checkmat
+		return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRemove),tp,LOCATION_REST,LOCATION_REST,nil),s.checkmat
 	end
 	return nil,s.checkmat
 end
 function s.extraop(e,tc,tp,sg)
-	local rg=sg:Filter(Card.IsLocation,nil,LOCATION_GRAVE+LOCATION_ONFIELD)
+	local rg=sg:Filter(Card.IsLocation,nil,LOCATION_REST+LOCATION_ONFIELD)
 	if #rg>0 then
 		Duel.Remove(rg,POS_FACEUP,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
 		sg:Sub(rg)
@@ -40,7 +40,7 @@ function s.extraop(e,tc,tp,sg)
 end
 function s.extratg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_REMOVE,nil,0,PLAYER_EITHER,LOCATION_MZONE+LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_REMOVE,nil,0,PLAYER_EITHER,LOCATION_MZONE+LOCATION_REST)
 end
 function s.thfilter(c)
 	return c:IsFaceup() and c:IsCode(86120751) and c:IsAbleToDeck()

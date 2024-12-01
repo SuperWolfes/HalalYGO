@@ -40,7 +40,7 @@ function s.ctop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.cfilter(c)
-	return c:IsDiscardable() and c:IsRace(RACE_SPELLCASTER)
+	return c:IsDiscardable() and c:IsRace(RACE_MENTOR)
 end
 function s.setcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

@@ -41,7 +41,7 @@ function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0 end
 	local bc=e:GetHandler():GetBattleTarget()
 	Duel.SetTargetCard(bc)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,bc,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,bc,1,0,0)
 end
 function s.equipop(c,e,tp,tc)
 	c:EquipByEffectAndLimitRegister(e,tp,tc,id)

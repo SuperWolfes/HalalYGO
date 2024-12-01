@@ -42,7 +42,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		local count=e:GetLabel()
 		e:SetLabel(count+1)
 		if count>49 then
-			Duel.SendtoGrave(c,REASON_RULE)
+			Duel.SendtoRest(c,REASON_RULE)
 		end
 	end
 end

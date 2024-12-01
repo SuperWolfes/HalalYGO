@@ -1,9 +1,9 @@
 --Ｇゴーレム・ペブルドッグ
---G Golem Pebble Dog
+--G Gopal Pebble Dog
 --scripted by edo9300
 local s,id=GetID()
 function s.initial_effect(c)
-	--Search or Special Summon 1 "G Golem Pebble Dog"
+	--Search or Special Summon 1 "G Gopal Pebble Dog"
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND+CATEGORY_SPECIAL_SUMMON)
@@ -17,13 +17,13 @@ function s.initial_effect(c)
 	local e2=e1:Clone()
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e2)
-	--Search 1 "G Golem" card
+	--Search 1 "G Gopal" card
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetProperty(EFFECT_FLAG_DELAY)
-	e3:SetCode(EVENT_TO_GRAVE)
+	e3:SetCode(EVENT_TO_REST)
 	e3:SetCountLimit(1,{id,1})
 	e3:SetCondition(s.thcon2)
 	e3:SetTarget(s.thtg2)

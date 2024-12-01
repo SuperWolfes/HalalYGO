@@ -1,5 +1,5 @@
 --ＤＴ 黒の女神ウィタカ
---Dark Tuner - Dark Goddess Witaka
+--Dark Tuner - Dark Monsterdess Witaka
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()

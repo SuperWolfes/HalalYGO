@@ -1,4 +1,4 @@
---Antihope, the God of Despair
+--Antihope, the Monster of Despair
 local s,id=GetID()
 function s.initial_effect(c)
 	--

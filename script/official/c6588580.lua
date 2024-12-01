@@ -28,7 +28,7 @@ end
 s.material={68505803}
 s.listed_names={68505803}
 function s.val(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsAttribute,c:GetControler(),LOCATION_GRAVE,0,nil,ATTRIBUTE_FIRE)*200
+	return Duel.GetMatchingGroupCount(Card.IsAttribute,c:GetControler(),LOCATION_REST,0,nil,ATTRIBUTE_FIRE)*200
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -41,6 +41,6 @@ function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
-	local d=Duel.GetMatchingGroupCount(Card.IsSetCard,tp,LOCATION_GRAVE,0,nil,0x2)*200
+	local d=Duel.GetMatchingGroupCount(Card.IsSetCard,tp,LOCATION_REST,0,nil,0x2)*200
 	Duel.Damage(p,d,REASON_EFFECT)
 end

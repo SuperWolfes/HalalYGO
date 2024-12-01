@@ -18,7 +18,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
-	Duel.SendtoGrave(g,REASON_EFFECT+REASON_DISCARD)
+	Duel.SendtoRest(g,REASON_EFFECT+REASON_DISCARD)
 	if #g>0 then
 		local c=e:GetHandler()
 		local e1=Effect.CreateEffect(c)

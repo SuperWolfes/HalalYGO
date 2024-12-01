@@ -43,7 +43,7 @@ function s.spcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
 	local mg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_MZONE,0,nil)
-	local gg=not Duel.IsPlayerAffectedByEffect(tp,69832741) and Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_GRAVE,0,nil) 
+	local gg=not Duel.IsPlayerAffectedByEffect(tp,69832741) and Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST,0,nil) 
 		or Group.CreateGroup()
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	return (#mg>0 and (ft>0 or (mg:IsExists(s.mzfilter,1,nil) and ft>-1))) 
@@ -54,7 +54,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	if Duel.IsPlayerAffectedByEffect(tp,69832741) then
 		g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_MZONE,0,nil)
 	else
-		g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil)
+		g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_MZONE+LOCATION_REST,0,nil)
 	end
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 	local e1=Effect.CreateEffect(c)

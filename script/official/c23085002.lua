@@ -30,7 +30,7 @@ function s.initial_effect(c)
 end
 s.xyz_number=68
 function s.value(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsMonster,0,LOCATION_GRAVE,LOCATION_GRAVE,nil)*100
+	return Duel.GetMatchingGroupCount(Card.IsMonster,0,LOCATION_REST,LOCATION_REST,nil)*100
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
@@ -62,5 +62,5 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e2,tp)
 end
 function s.splimit(e,c)
-	return c:IsLocation(LOCATION_GRAVE)
+	return c:IsLocation(LOCATION_REST)
 end

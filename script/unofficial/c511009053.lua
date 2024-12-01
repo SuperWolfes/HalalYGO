@@ -1,4 +1,4 @@
---Destiny HERO - Dystopiaguy
+--Destrudic HERO - Dystopiaguy
 --fixed by MLD
 Duel.LoadScript("c419.lua")
 local s,id=GetID()

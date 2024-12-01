@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	--Activate
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_DRAW+CATEGORY_TOGRAVE)
+	e1:SetCategory(CATEGORY_DRAW+CATEGORY_TOREST)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.tgop)
 	c:RegisterEffect(e1)
 end
-s.types={TYPE_RITUAL,TYPE_FUSION,TYPE_SYNCHRO,TYPE_XYZ,TYPE_LINK}
+s.types={TYPE_LOCKED,TYPE_FUSION,TYPE_SYNCHRO,TYPE_XYZ,TYPE_LINK}
 
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
@@ -28,7 +28,7 @@ function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 		end
 		return false
 	end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,0,0)
 end
 function s.cancelcon(sg,e,tp,mg)
 	for _,t in ipairs(s.types) do
@@ -59,8 +59,8 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 			end
 		end
 		if #g>0 then
-			local tg=aux.SelectUnselectGroup(g,e,tp,1,99,s.cancelcon,1,tp,HINTMSG_TOGRAVE,s.cancelcon)
-			if Duel.SendtoGrave(tg,REASON_EFFECT)>0 then
+			local tg=aux.SelectUnselectGroup(g,e,tp,1,99,s.cancelcon,1,tp,HINTMSG_TOREST,s.cancelcon)
+			if Duel.SendtoRest(tg,REASON_EFFECT)>0 then
 				draw[p]=true
 			end
 		end

@@ -23,5 +23,5 @@ end
 s.listed_series={0x3008}
 s.material_setcode={0x8,0x3008}
 function s.atkup(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsSetCard,c:GetControler(),LOCATION_GRAVE,0,nil,0x3008)*100
+	return Duel.GetMatchingGroupCount(Card.IsSetCard,c:GetControler(),LOCATION_REST,0,nil,0x3008)*100
 end

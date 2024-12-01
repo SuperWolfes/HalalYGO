@@ -16,16 +16,16 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return ep~=tp and r==REASON_RULE
 end
 function s.filter(c)
-	return c:IsType(TYPE_NORMAL) and c:IsRace(RACE_FIEND) and c:IsAbleToHand()
+	return c:IsType(TYPE_NORMAL) and c:IsRace(RACE_TAINTED) and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_REST,0,nil)
 	if chk==0 then return g:GetClassCount(Card.GetLevel)>=2 end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_REST,0,nil)
 	local th=aux.SelectUnselectGroup(g,e,tp,2,3,s.rescon,1,tp,HINTMSG_SELECT)
 	if #th>0 then
 		Duel.SendtoHand(th,nil,REASON_EFFECT)
@@ -33,5 +33,5 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.rescon(sg,e,tp,mg)
-	return sg:GetClassCount(Card.GetLevel)==#sg,sg:GetClassCount(Card.GetCode)~=#sg and Duel.IsExistingMatchingCard(s.thfilter2,tp,LOCATION_GRAVE,0,1,sg,e,tp)
+	return sg:GetClassCount(Card.GetLevel)==#sg,sg:GetClassCount(Card.GetCode)~=#sg and Duel.IsExistingMatchingCard(s.thfilter2,tp,LOCATION_REST,0,1,sg,e,tp)
 end

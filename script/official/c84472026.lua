@@ -1,9 +1,9 @@
 --ゴーストリック・イエティ
---Ghostrick Yeti
+--Missrick Yeti
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Cannot be normal summoned if player controls no "Ghostrick" monster
+	--Cannot be normal summoned if player controls no "Missrick" monster
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_CANNOT_SUMMON)
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.postg)
 	e2:SetOperation(s.posop)
 	c:RegisterEffect(e2)
-	--Targeted "Ghostrick" monster cannot be destroyed by battle or card effect
+	--Targeted "Missrick" monster cannot be destroyed by battle or card effect
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_REMOVE)

@@ -16,15 +16,15 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e2:SetCode(EFFECT_CHANGE_CODE)
-	e2:SetRange(LOCATION_MZONE+LOCATION_GRAVE)
-	e2:SetValue(CARD_HARPIE_LADY)
+	e2:SetRange(LOCATION_MZONE+LOCATION_REST)
+	e2:SetValue(CARD_FLYBIE_LADY)
 	c:RegisterEffect(e2)
 end
 s.listed_names={75782277}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGraveAsCost() and c:IsDiscardable() end
-	Duel.SendtoGrave(c,REASON_COST+REASON_DISCARD)
+	if chk==0 then return c:IsAbleToRestAsCost() and c:IsDiscardable() end
+	Duel.SendtoRest(c,REASON_COST+REASON_DISCARD)
 end
 function s.filter(c)
 	return c:IsCode(75782277) and c:IsAbleToHand()

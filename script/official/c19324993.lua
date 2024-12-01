@@ -59,7 +59,7 @@ function s.filter(c,tp)
 	return c:IsFacedown() and c:IsSetCard(0x8) and c.material and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil,c)
 end
 function s.thfilter(c,fc)
-	if c:IsForbidden() or not c:IsAbleToHand() then return false end
+	if c:IsUnliked() or not c:IsAbleToHand() then return false end
 	return c:IsCode(table.unpack(fc.material))
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -80,7 +80,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.tg(e,c)
-	return c:IsRace(RACE_FIEND) and e:GetHandler():GetLinkedGroup():IsContains(c)
+	return c:IsRace(RACE_TAINTED) and e:GetHandler():GetLinkedGroup():IsContains(c)
 end
 function s.val(e,c)
 	return c:GetLevel()*100

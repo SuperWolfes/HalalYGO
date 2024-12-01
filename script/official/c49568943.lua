@@ -26,7 +26,7 @@ s.listed_series={0x17e}
 s.listed_names={id}
 function s.filter(c)
 	return c:IsType(TYPE_FIELD) and c:IsSpell() and c:IsSetCard(0x17e) and not c:IsCode(id)
-		and not c:IsForbidden()
+		and not c:IsUnliked()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end
@@ -39,7 +39,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local tc=g:GetFirst()
 		local fc=Duel.GetFieldCard(1-tp,LOCATION_SZONE,5)
 		if fc then
-			Duel.SendtoGrave(fc,REASON_RULE)
+			Duel.SendtoRest(fc,REASON_RULE)
 			Duel.BreakEffect()
 		end
 		Duel.MoveToField(tc,tp,1-tp,LOCATION_FZONE,POS_FACEUP,true)

@@ -35,14 +35,14 @@ end
 s.listed_series={0x70,0x48}
 	--Check for "Chronomaly" monster
 function s.atkcfilter(c)
-	return c:IsMonster() and c:IsSetCard(0x70) and (c:IsLevelAbove(1) or c:IsRankAbove(1)) and c:IsAbleToGraveAsCost()
+	return c:IsMonster() and c:IsSetCard(0x70) and (c:IsLevelAbove(1) or c:IsRankAbove(1)) and c:IsAbleToRestAsCost()
 end
 	--Cost of sending "Chronomaly" with Level/Rank to GY
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.atkcfilter,tp,LOCATION_DECK+LOCATION_EXTRA,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tc=Duel.SelectMatchingCard(tp,s.atkcfilter,tp,LOCATION_DECK+LOCATION_EXTRA,0,1,1,nil):GetFirst()
-	Duel.SendtoGrave(tc,REASON_COST)
+	Duel.SendtoRest(tc,REASON_COST)
 	if tc:IsType(TYPE_XYZ) then
 		e:SetLabel(tc:GetRank())
 	else

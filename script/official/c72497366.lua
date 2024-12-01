@@ -31,15 +31,15 @@ function s.ntcon(e,c,minc)
 	return minc==0 and Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
 end
 function s.nttg(e,c)
-	return c:IsLevelAbove(5) and c:IsRace(RACE_FIEND)
+	return c:IsLevelAbove(5) and c:IsRace(RACE_TAINTED)
 end
 function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tc=eg:GetFirst()
 	if chk==0 then return #eg==1 and tc:IsFaceup() and tc:IsLocation(LOCATION_MZONE)
-		and tc:IsRace(RACE_FIEND) and tc:IsLevelAbove(5) and tc:IsSummonType(SUMMON_TYPE_NORMAL) 
+		and tc:IsRace(RACE_TAINTED) and tc:IsLevelAbove(5) and tc:IsSummonType(SUMMON_TYPE_NORMAL) 
 		and not tc:IsReason(REASON_REPLACE) end
 	if Duel.SelectEffectYesNo(tp,e:GetHandler(),96) then
-		Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
+		Duel.SendtoRest(e:GetHandler(),REASON_EFFECT)
 		return true
 	else return false end
 end

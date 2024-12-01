@@ -21,7 +21,7 @@ function s.filter(c,e,tp,ft)
 	if op==cp and locct<=-1 then return false end
 	if op~=cp and locct<=0 then return false end
 	local class=c:GetMetatable(true)
-	return class and class.LVnum~=nil and class.LVset~=nil and Duel.IsExistingMatchingCard(s.spfilter,op,LOCATION_GRAVE,0,1,nil,class,e,tp,op)
+	return class and class.LVnum~=nil and class.LVset~=nil and Duel.IsExistingMatchingCard(s.spfilter,op,LOCATION_REST,0,1,nil,class,e,tp,op)
 end
 function s.spfilter(c,oclass,e,tp,op)
 	local class=c:GetMetatable(true)
@@ -34,7 +34,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
 	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil,e,tp,ft)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,1,0,0)
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
@@ -45,7 +45,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local class=tc:GetMetatable(true)
 	if class==nil or class.LVnum==nil or class.LVset==nil then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,s.spfilter,op,LOCATION_GRAVE,0,1,1,nil,class,e,tp,op)
+	local g=Duel.SelectMatchingCard(tp,s.spfilter,op,LOCATION_REST,0,1,1,nil,class,e,tp,op)
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,op,true,false,POS_FACEUP)
 	end

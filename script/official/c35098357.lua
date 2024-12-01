@@ -13,10 +13,10 @@ function s.initial_effect(c)
 	--Add this card from GY to hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_LEAVE_GRAVE)
+	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_LEAVE_REST)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_PHASE+PHASE_END)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,id)
 	e2:SetCondition(s.thcon)
 	e2:SetTarget(s.thtg)
@@ -27,7 +27,7 @@ end
 s.listed_series={0x128}
 
 function s.mfilter(c)
-	return (c:IsLocation(LOCATION_HAND+LOCATION_MZONE) and c:IsAbleToGrave())
+	return (c:IsLocation(LOCATION_HAND+LOCATION_MZONE) and c:IsAbleToRest())
 end
 function s.checkmat(tp,sg,fc)
 	return sg:IsExists(Card.IsSetCard,1,nil,0x128)
@@ -44,7 +44,7 @@ end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsAbleToHand() end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,c,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,c,1,tp,LOCATION_REST)
 end
 	--Add this card from GY to hand
 function s.thop(e,tp,eg,ep,ev,re,r,rp,chk)

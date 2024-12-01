@@ -24,20 +24,20 @@ function s.setfitler(c)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
-		local sg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_GRAVE,0,nil,e,tp)
-		local g=Duel.GetMatchingGroup(s.setfitler,tp,LOCATION_GRAVE,0,nil,0x163)
+		local sg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_REST,0,nil,e,tp)
+		local g=Duel.GetMatchingGroup(s.setfitler,tp,LOCATION_REST,0,nil,0x163)
 		local gysummon=g:GetClassCount(Card.GetCode)>=8 and sg:GetClassCount(Card.GetCode)>=2
 		local tksummon=Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0x163,TYPES_TOKEN,0,0,2,RACE_REPTILE,ATTRIBUTE_DARK)
-		return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) and Duel.GetLocationCount(tp,LOCATION_MZONE)>1 and (tksummon or gysummon)
+		return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) and Duel.GetLocationCount(tp,LOCATION_MZONE)>1 and (tksummon or gysummon)
 	end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,0)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOKEN,nil,2,0,0)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,LOCATION_REST)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) or Duel.GetLocationCount(tp,LOCATION_MZONE)<2 then return end
-	local sg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_GRAVE,0,nil,e,tp)
-	local g=Duel.GetMatchingGroup(s.setfitler,tp,LOCATION_GRAVE,0,nil,0x163)
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) or Duel.GetLocationCount(tp,LOCATION_MZONE)<2 then return end
+	local sg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,e,tp)
+	local g=Duel.GetMatchingGroup(s.setfitler,tp,LOCATION_REST,0,nil,0x163)
 	local gysummon=g:GetClassCount(Card.GetCode)>=8 and sg:GetClassCount(Card.GetCode)>=2
 	local tksummon=Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0x163,TYPES_TOKEN,0,0,2,RACE_REPTILE,ATTRIBUTE_DARK)
 	-- Choose option

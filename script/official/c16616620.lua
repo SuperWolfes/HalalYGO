@@ -19,15 +19,15 @@ function s.cfilter(c)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(Card.IsSetCard,tp,LOCATION_MZONE,0,nil,0x1e)
-	if chk==0 then return #g>0 and g:FilterCount(Card.IsAbleToGrave,nil)==#g 
+	if chk==0 then return #g>0 and g:FilterCount(Card.IsAbleToRest,nil)==#g 
 		and g:FilterCount(s.cfilter,nil)+Duel.GetLocationCount(tp,LOCATION_MZONE)>0 
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil,g,e,tp) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND+LOCATION_DECK)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(Card.IsSetCard,tp,LOCATION_MZONE,0,nil,0x1e)
-	if Duel.SendtoGrave(g,REASON_EFFECT)>0 then
-		local sg=g:Filter(Card.IsLocation,nil,LOCATION_GRAVE)
+	if Duel.SendtoRest(g,REASON_EFFECT)>0 then
+		local sg=g:Filter(Card.IsLocation,nil,LOCATION_REST)
 		if #sg==0 then return end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local spg=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,1,nil,sg,e,tp)

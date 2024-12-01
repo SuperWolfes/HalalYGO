@@ -1,5 +1,5 @@
 --憑依解放
---Unpossessed
+--Uninterwoven
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -60,7 +60,7 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,tp)
 end
 function s.spfilter(c,e,tp,att)
-	return c:IsRace(RACE_SPELLCASTER) and c:IsDefense(1500) and c:IsAttribute(att)
+	return c:IsRace(RACE_MENTOR) and c:IsDefense(1500) and c:IsAttribute(att)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_ATTACK+POS_FACEDOWN_DEFENSE)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)

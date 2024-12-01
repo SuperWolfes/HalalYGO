@@ -19,7 +19,7 @@ function s.check(tp,sg,fc)
 	return sg:IsExists(s.filter,1,nil,tp)
 end
 function s.fextra(e,tp,mg)
-	return Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil),s.check
+	return Duel.GetMatchingGroup(Card.IsAbleToRest,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil),s.check
 end
 function s.extratg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if e:IsHasType(EFFECT_TYPE_ACTIVATE) then

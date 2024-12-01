@@ -16,10 +16,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 	--If you control a "Witchcrafter" monster, recycle this card
 	local e2=Effect.CreateEffect(c)
-	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_LEAVE_GRAVE)
+	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_LEAVE_REST)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_PHASE+PHASE_END)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,id)
 	e2:SetCondition(s.thcon)
 	e2:SetTarget(s.thtg)
@@ -58,10 +58,10 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.RegisterEffect(e2,tp)
 	end
 end
-	--Player's spellcaster monster effect activated
+	--Player's mentor monster effect activated
 function s.actop(e,tp,eg,ep,ev,re,r,rp)
 	local rc=re:GetHandler()
-	if rc:IsRace(RACE_SPELLCASTER) and re:IsActiveType(TYPE_MONSTER) and ep==tp then
+	if rc:IsRace(RACE_MENTOR) and re:IsActiveType(TYPE_MONSTER) and ep==tp then
 		Duel.SetChainLimit(s.chainlm)
 	end
 end
@@ -76,7 +76,7 @@ end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsAbleToHand() end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,c,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,c,1,tp,LOCATION_REST)
 end
 	--Add this card from GY to hand
 function s.thop(e,tp,eg,ep,ev,re,r,rp,chk)

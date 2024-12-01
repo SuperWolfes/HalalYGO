@@ -15,7 +15,7 @@ end
 s.listed_series={0x100a}
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsLocation(LOCATION_GRAVE) and r==REASON_SUMMON and c:GetReasonCard():IsSetCard(0x100a)
+	return c:IsLocation(LOCATION_REST) and r==REASON_SUMMON and c:GetReasonCard():IsSetCard(0x100a)
 end
 function s.filter(c,e,tp)
 	return c:IsSetCard(0x100a) and c:IsLevelBelow(4) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

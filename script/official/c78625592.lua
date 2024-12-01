@@ -1,5 +1,5 @@
 --光の護封霊剣
---Spiritual Swords of Revealing Light
+--Guardianual Swords of Revealing Light
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_QUICK_O)
 	e3:SetCode(EVENT_FREE_CHAIN)
 	e3:SetHintTiming(0,TIMING_ATTACK)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetCondition(s.grcondition)
 	e3:SetCost(aux.bfgcost)
 	e3:SetOperation(s.groperation)

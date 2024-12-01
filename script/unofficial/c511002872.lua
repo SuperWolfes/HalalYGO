@@ -50,7 +50,7 @@ s.xyz_number=105
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local bc=c:GetBattleTarget()
-	return c:IsRelateToBattle() and bc:IsLocation(LOCATION_GRAVE)
+	return c:IsRelateToBattle() and bc:IsLocation(LOCATION_REST)
 		and bc:IsMonster() and bc:IsPreviousControler(1-tp)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)

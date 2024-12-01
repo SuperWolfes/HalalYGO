@@ -72,21 +72,21 @@ function s.eqcfilter(c,tp)
 	return c:IsSetCard(0x12b) and c:IsLinkMonster() and c:IsSummonType(SUMMON_TYPE_LINK) and c:GetSequence()>=5 and c:IsSummonPlayer(tp)
 end
 function s.eqfilter(c)
-	return c:IsSetCard(0x12b) and c:IsLinkMonster() and not c:IsForbidden()
+	return c:IsSetCard(0x12b) and c:IsLinkMonster() and not c:IsUnliked()
 end
 function s.eqcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.eqcfilter,1,nil,tp)
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and Duel.IsExistingMatchingCard(s.eqfilter,tp,LOCATION_GRAVE,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,nil,1,0,0)
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and Duel.IsExistingMatchingCard(s.eqfilter,tp,LOCATION_REST,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,nil,1,0,0)
 end
 function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
 	local tc=eg:Filter(s.eqcfilter,nil,tp):GetFirst()
 	if ft<1 or not tc or not tc:IsFaceup() then return end
-	local g=aux.SelectUnselectGroup(Duel.GetMatchingGroup(aux.NecroValleyFilter(s.eqfilter),tp,LOCATION_GRAVE,0,nil),e,tp,1,math.min(ft,3),aux.dncheck,1,tp,HINTMSG_EQUIP)
+	local g=aux.SelectUnselectGroup(Duel.GetMatchingGroup(aux.NecroValleyFilter(s.eqfilter),tp,LOCATION_REST,0,nil),e,tp,1,math.min(ft,3),aux.dncheck,1,tp,HINTMSG_EQUIP)
 	for eqc in aux.Next(g) do
 		Duel.Equip(tp,eqc,tc,true,true)
 		--Equip limit

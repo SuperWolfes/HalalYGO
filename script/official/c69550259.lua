@@ -16,7 +16,7 @@ function s.initial_effect(c)
 end
 s.listed_names={69550260}
 function s.tkcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_GRAVE) and r==REASON_SYNCHRO
+	return e:GetHandler():IsLocation(LOCATION_REST) and r==REASON_SYNCHRO
 end
 function s.tktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local sync=e:GetHandler():GetReasonCard()

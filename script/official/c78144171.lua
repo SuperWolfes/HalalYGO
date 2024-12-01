@@ -22,7 +22,7 @@ function s.initial_effect(c)
 end
 function s.ovfilter(c,tp,lc)
 	return c:IsFaceup() and c:IsRace(RACE_DRAGON,lc,SUMMON_TYPE_XYZ,tp) and c:IsAttribute(ATTRIBUTE_DARK,lc,SUMMON_TYPE_XYZ,tp) and c:IsLevelAbove(5) 
-		and Duel.GetMatchingGroupCount(Card.IsAttribute,c:GetControler(),LOCATION_GRAVE,0,nil,ATTRIBUTE_DARK)==5
+		and Duel.GetMatchingGroupCount(Card.IsAttribute,c:GetControler(),LOCATION_REST,0,nil,ATTRIBUTE_DARK)==5
 end
 function s.xyzop(e,tp,chk)
 	if chk==0 then return Duel.GetFlagEffect(tp,id)==0 end
@@ -49,7 +49,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			if Duel.IsPlayerAffectedByEffect(tp,69832741) then
 				g=Duel.SelectMatchingCard(tp,Card.IsAbleToRemove,tp,LOCATION_MZONE,0,1,1,nil)
 			else
-				g=Duel.SelectMatchingCard(tp,Card.IsAbleToRemove,tp,LOCATION_GRAVE,0,1,1,nil)
+				g=Duel.SelectMatchingCard(tp,Card.IsAbleToRemove,tp,LOCATION_REST,0,1,1,nil)
 			end
 			if #g>0 then
 			Duel.Remove(g,POS_FACEUP,REASON_EFFECT)

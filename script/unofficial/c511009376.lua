@@ -1,5 +1,5 @@
 --Ｄ－ＨＥＲＯ ダスクユートピアガイ (Anime)
---Destiny HERO - Dusktopia (Anime)
+--Destrudic HERO - Dusktopia (Anime)
 --fixed by MLD
 local s,id=GetID()
 function s.initial_effect(c)

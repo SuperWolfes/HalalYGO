@@ -24,7 +24,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp,chk)
 		e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 		e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 		e2:SetType(EFFECT_TYPE_IGNITION)
-		e2:SetRange(LOCATION_GRAVE)
+		e2:SetRange(LOCATION_REST)
 		e2:SetLabelObject(t)
 		e2:SetCondition(s.spcon)
 		e2:SetCost(aux.bfgcost)
@@ -37,7 +37,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp,chk)
 		e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 		e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 		e2:SetType(EFFECT_TYPE_IGNITION)
-		e2:SetRange(LOCATION_GRAVE)
+		e2:SetRange(LOCATION_REST)
 		e2:SetLabelObject(a)
 		e2:SetCondition(s.spcon)
 		e2:SetCost(aux.bfgcost)
@@ -53,12 +53,12 @@ function s.spcon(e,c)
 	local c=e:GetHandler()
 	local tc=e:GetLabelObject()
 	if c==nil then return true end
-	return Duel.GetLocationCount(1-c:GetControler(),LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(s.filter,c:GetControler(),0,LOCATION_GRAVE,1,nil,tc) 
+	return Duel.GetLocationCount(1-c:GetControler(),LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(s.filter,c:GetControler(),0,LOCATION_REST,1,nil,tc) 
 end
 function s.opera(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetLabelObject()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	if tc and tc:IsLocation(LOCATION_GRAVE) then
+	if tc and tc:IsLocation(LOCATION_REST) then
 		Duel.SpecialSummon(tc,0,tp,1-tp,false,false,POS_FACEUP)
 	end
 end

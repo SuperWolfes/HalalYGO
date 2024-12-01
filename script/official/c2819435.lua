@@ -1,5 +1,5 @@
 --幻煌の都 パシフィス
---Pacifis, the Phantasm City
+--Pacifis, the Illusorasm City
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

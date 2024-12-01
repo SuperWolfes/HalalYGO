@@ -32,11 +32,11 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetValue(300)
 	e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 	c:RegisterEffect(e1)
-	local g=Duel.GetMatchingGroup(Card.IsLevel,tp,LOCATION_GRAVE,0,nil,7)
+	local g=Duel.GetMatchingGroup(Card.IsLevel,tp,LOCATION_REST,0,nil,7)
 	if g:GetClassCount(Card.GetCode)>=4 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+		local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp)
 		if #g>0 then
 			Duel.BreakEffect()
 			Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)

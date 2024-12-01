@@ -70,10 +70,10 @@ end
 function s.target3(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsAbleToRemove()
 		and Duel.IsExistingMatchingCard(Card.IsAbleToRemove,tp,LOCATION_HAND,0,1,nil)
-		and Duel.IsExistingMatchingCard(Card.IsAbleToDeck,tp,LOCATION_GRAVE,0,1,nil) end
+		and Duel.IsExistingMatchingCard(Card.IsAbleToDeck,tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,2,0,0)
-	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_REST)
 end
 function s.operation3(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -85,7 +85,7 @@ function s.operation3(e,tp,eg,ep,ev,re,r,rp)
 		if Duel.Remove(hg,POS_FACEUP,REASON_EFFECT)~=2 then return end
 		Duel.BreakEffect()
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-		local gg=Duel.SelectMatchingCard(tp,Card.IsAbleToDeck,tp,LOCATION_GRAVE,0,1,1,nil)
+		local gg=Duel.SelectMatchingCard(tp,Card.IsAbleToDeck,tp,LOCATION_REST,0,1,1,nil)
 		if #gg>0 then
 			Duel.SendtoDeck(gg,nil,0,REASON_EFFECT)
 			Duel.ConfirmCards(1-tp,gg)

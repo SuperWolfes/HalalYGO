@@ -1,5 +1,5 @@
 --死霊の束縛
---Phantom Bind
+--Illusion Bind
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -21,12 +21,12 @@ function s.ctfilter(c,race)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tc=Duel.GetAttacker()
-	if chk==0 then return tc and Duel.IsExistingMatchingCard(s.ctfilter,tp,0,LOCATION_GRAVE,1,nil,tc:GetRace()) end
+	if chk==0 then return tc and Duel.IsExistingMatchingCard(s.ctfilter,tp,0,LOCATION_REST,1,nil,tc:GetRace()) end
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetAttacker()
 	if not (tc and tc:IsRelateToBattle()) then return end
-	local ct=Duel.GetMatchingGroupCount(s.ctfilter,tp,0,LOCATION_GRAVE,nil,tc:GetRace())
+	local ct=Duel.GetMatchingGroupCount(s.ctfilter,tp,0,LOCATION_REST,nil,tc:GetRace())
 	if ct>0 and tc:IsFaceup() then
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)

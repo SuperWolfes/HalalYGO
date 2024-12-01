@@ -78,7 +78,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	return true
 end
 function s.cfilter(c)
-	return c:IsSpell() and c:IsType(TYPE_EQUIP) and c:IsAbleToGraveAsCost()
+	return c:IsSpell() and c:IsType(TYPE_EQUIP) and c:IsAbleToRestAsCost()
 end
 function s.spfilter(c,e,tp,lv)
 	return c:IsRace(RACE_WARRIOR) and c:IsLevelBelow(lv) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -110,12 +110,12 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local lv=Duel.AnnounceNumber(tp,table.unpack(lvt))
 	local rg1=Group.CreateGroup()
 	for i=1,lv do
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local rg2=cg:Select(tp,1,1,nil)
 		cg:Remove(Card.IsCode,nil,rg2:GetFirst():GetCode())
 		rg1:Merge(rg2)
 	end
-	Duel.SendtoGrave(rg1,REASON_COST)
+	Duel.SendtoRest(rg1,REASON_COST)
 	e:SetLabel(lv)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK)
 end

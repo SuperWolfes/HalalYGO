@@ -25,13 +25,13 @@ function card.initial_effect(c)
 	e2:SetTarget(card.sptg)
 	e2:SetOperation(card.spop)
 	c:RegisterEffect(e2)
-	--special summon from grave
+	--special summon from rest
 	local e3 = Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(code, 2))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_SINGLE + EFFECT_TYPE_TRIGGER_F)
 	e3:SetProperty(EFFECT_FLAG_DELAY)
-	e3:SetCode(EVENT_TO_GRAVE)
+	e3:SetCode(EVENT_TO_REST)
 	e3:SetCountLimit(1, code)
 	e3:SetCondition(card.spcon2)
 	e3:SetTarget(card.sptg2)
@@ -70,7 +70,7 @@ function card.eqop(e, tp, eg, ep, ev, re, r, rp)
 		not tc or Duel.GetLocationCount(tp, LOCATION_SZONE) <= 0 or tc:IsControler(tp) or tc:IsFacedown() or
 			not tc:IsRelateToEffect(e)
 	 then
-		Duel.SendtoGrave(c, REASON_EFFECT)
+		Duel.SendtoRest(c, REASON_EFFECT)
 		return
 	end
 	Duel.Equip(tp, c, tc, true)

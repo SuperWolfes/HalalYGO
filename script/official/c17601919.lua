@@ -1,12 +1,12 @@
 --ゴースト姫－パンプリンセス－
---Pumprincess the Princess of Ghosts
+--Pumprincess the Princess of Misss
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(0x2f,LOCATION_SZONE)
 	--send replace
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
-	e1:SetCode(EFFECT_TO_GRAVE_REDIRECT_CB)
+	e1:SetCode(EFFECT_TO_REST_REDIRECT_CB)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
 	e1:SetCondition(s.repcon)
 	e1:SetOperation(s.repop)

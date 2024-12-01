@@ -1,4 +1,4 @@
---Mischief of the Goddess
+--Mischief of the Monsterdess
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

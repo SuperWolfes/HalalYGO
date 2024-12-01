@@ -12,13 +12,13 @@ function s.initial_effect(c)
 end
 s.listed_series={0x1034}
 function s.filter(c,tp)
-	return c:IsSetCard(0x1034) and c:IsLocation(LOCATION_GRAVE) and c:IsPreviousControler(tp) and c:IsReason(REASON_BATTLE)
+	return c:IsSetCard(0x1034) and c:IsLocation(LOCATION_REST) and c:IsPreviousControler(tp) and c:IsReason(REASON_BATTLE)
 end
 function s.tfcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.filter,1,nil,tp)
 end
 function s.tffilter(c)
-	return c:IsSetCard(0x1034) and not c:IsForbidden()
+	return c:IsSetCard(0x1034) and not c:IsUnliked()
 end
 function s.tftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0

@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TODECK)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCost(aux.bfgcost)
 	e2:SetTarget(s.tedtg)
@@ -72,14 +72,14 @@ end
 --To Extra Deck
 function s.tedfilter(c,tp)
 	return (c:IsCode(CARD_BLACK_ROSE_DRAGON) or c:IsCode(40139997)) and c:IsAbleToExtra()
-		and (c:IsFaceup() or c:IsLocation(LOCATION_GRAVE))
+		and (c:IsFaceup() or c:IsLocation(LOCATION_REST))
 end
 function s.tedtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.tedfilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,nil,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_GRAVE+LOCATION_REMOVED)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.tedfilter,tp,LOCATION_REST+LOCATION_REMOVED,0,1,nil,tp) end
+	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_REST+LOCATION_REMOVED)
 end
 function s.tedop(e,tp,eg,ep,ev,re,r,rp)
-	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.tedfilter),tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,1,nil,tp):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.tedfilter),tp,LOCATION_REST+LOCATION_REMOVED,0,1,1,nil,tp):GetFirst()
 	if tc then
 		Duel.SendtoDeck(tc,tp,2,REASON_EFFECT)
 	end

@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_TOHAND)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCost(s.thcost)
 	e2:SetTarget(s.thtg)
@@ -40,18 +40,18 @@ function s.filter3(c)
 	return c:IsFaceup() and (c:IsSetCard(0xd6) or c:IsSetCard(0xd7))
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_MZONE+LOCATION_GRAVE) and chkc:IsControler(1-tp) and s.filter1(chkc,tp) end
-	if chk==0 then return Duel.IsExistingTarget(s.filter1,tp,0,LOCATION_MZONE+LOCATION_GRAVE,1,nil,tp)
+	if chkc then return chkc:IsLocation(LOCATION_MZONE+LOCATION_REST) and chkc:IsControler(1-tp) and s.filter1(chkc,tp) end
+	if chk==0 then return Duel.IsExistingTarget(s.filter1,tp,0,LOCATION_MZONE+LOCATION_REST,1,nil,tp)
 		and Duel.IsExistingMatchingCard(s.filter3,tp,LOCATION_MZONE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g1=Duel.SelectTarget(tp,s.filter1,tp,0,LOCATION_MZONE+LOCATION_GRAVE,1,1,nil,tp)
+	local g1=Duel.SelectTarget(tp,s.filter1,tp,0,LOCATION_MZONE+LOCATION_REST,1,1,nil,tp)
 	local rc=g1:GetFirst():GetRace()
-	if Duel.IsExistingTarget(s.filter2,tp,0,LOCATION_MZONE+LOCATION_GRAVE,1,g1:GetFirst(),rc)
+	if Duel.IsExistingTarget(s.filter2,tp,0,LOCATION_MZONE+LOCATION_REST,1,g1:GetFirst(),rc)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-		Duel.SelectTarget(tp,s.filter2,tp,0,LOCATION_MZONE+LOCATION_GRAVE,1,2,g1:GetFirst(),rc)
+		Duel.SelectTarget(tp,s.filter2,tp,0,LOCATION_MZONE+LOCATION_REST,1,2,g1:GetFirst(),rc)
 	end
-	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g1,1,0,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g1,1,0,LOCATION_REST)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetTargetCards(e)

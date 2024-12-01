@@ -1,12 +1,12 @@
 --大精霊機巧軍－ペンデュラム・ルーラー
---Master Spirit Tech Force - Pendulum Ruler
+--Master Guardian Tech Force - Pendulum Ruler
 --Fixed by Larry126
 Duel.LoadScript("c420.lua")
 local s,id=GetID()
 function s.initial_effect(c)
 	Pendulum.AddProcedure(c,false)
 	--fusion material
-	Fusion.AddProcMix(c,true,true,511009366,aux.FilterBoolFunctionEx2(Card.IsSpirit))
+	Fusion.AddProcMix(c,true,true,511009366,aux.FilterBoolFunctionEx2(Card.IsGuardian))
 	c:EnableReviveLimit()
 	--disable
 	local e1=Effect.CreateEffect(c)
@@ -96,7 +96,7 @@ function s.efop(e,tp,eg,ep,ev,re,r,rp)
 		local fid=c:GetFieldID()
 		Duel.MajesticCopy(c,tc)
 		Duel.MajesticCopy(c,tc)
-		c:RegisterFlagEffect(tc:GetOriginalCode(),RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1) --Treated as Pendulum Summoned from hand for Spirit Gem effects
+		c:RegisterFlagEffect(tc:GetOriginalCode(),RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1) --Treated as Pendulum Summoned from hand for Guardian Gem effects
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_FIELD)
 		e1:SetCode(EFFECT_CHANGE_DAMAGE)
@@ -124,7 +124,7 @@ function s.pzop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.tetg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chk==0 then return not e:GetHandler():IsForbidden() end
+	if chk==0 then return not e:GetHandler():IsUnliked() end
 end
 function s.teop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

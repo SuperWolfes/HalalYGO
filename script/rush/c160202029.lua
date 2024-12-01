@@ -27,7 +27,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.DiscardDeck(1-tp,1,REASON_EFFECT)>0 then
 		--Effect
 		local tc=Duel.GetOperatedGroup():GetFirst()
-		if tc and tc:IsLocation(LOCATION_GRAVE) then
+		if tc and tc:IsLocation(LOCATION_REST) then
 			if ((op==0 and tc:IsMonster()) or (op==1 and tc:IsSpell()) or (op==2 and tc:IsTrap())) then return end
 			Duel.NegateAttack()
 			Duel.Damage(1-tp,300,REASON_EFFECT)

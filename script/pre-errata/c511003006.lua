@@ -37,7 +37,7 @@ function s.trigop(e,tp,eg,ep,ev,re,r,rp)
 	if c:GetSummonType()==SUMMON_TYPE_SPECIAL+1
 		and e:GetLabelObject():IsActivatable(tp)
 		and Duel.GetLocationCount(1-tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(s.filter,1-tp,LOCATION_GRAVE,0,1,nil,e,1-tp)
+		and Duel.IsExistingTarget(s.filter,1-tp,LOCATION_REST,0,1,nil,e,1-tp)
 		and Duel.SelectEffectYesNo(1-tp,c) then
 		Duel.RaiseSingleEvent(c,EVENT_CUSTOM+45894482,e,r,rp,tp,0)
 	end
@@ -46,10 +46,10 @@ function s.filter(c,e,tp)
 	return c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(1-tp) and chkc:IsLocation(LOCATION_GRAVE) and s.filter(chkc,e,1-tp) end
+	if chkc then return chkc:IsControler(1-tp) and chkc:IsLocation(LOCATION_REST) and s.filter(chkc,e,1-tp) end
 	if chk==0 then return true end
 	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(1-tp,s.filter,1-tp,LOCATION_GRAVE,0,1,1,nil,e,1-tp)
+	local g=Duel.SelectTarget(1-tp,s.filter,1-tp,LOCATION_REST,0,1,1,nil,e,1-tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)

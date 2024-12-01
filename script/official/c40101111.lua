@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
 	c:EnableReviveLimit()
-	Fusion.AddProcMix(c,true,true,s.ffilter,aux.FilterBoolFunctionEx(Card.IsRace,RACE_PSYCHIC))
+	Fusion.AddProcMix(c,true,true,s.ffilter,aux.FilterBoolFunctionEx(Card.IsRace,RACE_MENTAL))
 	--pierce
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
@@ -35,7 +35,7 @@ function s.initial_effect(c)
 	e5:SetValue(s.splimit)
 	c:RegisterEffect(e5)
 end
-s.miracle_synchro_fusion=true
+s.pulse_synchro_fusion=true
 function s.splimit(e,se,sp,st)
 	if e:GetHandler():IsLocation(LOCATION_EXTRA) then 
 		return (st&SUMMON_TYPE_FUSION)==SUMMON_TYPE_FUSION
@@ -43,12 +43,12 @@ function s.splimit(e,se,sp,st)
 	return true
 end
 function s.ffilter(c,fc,sumtype,tp)
-	return c:IsType(TYPE_SYNCHRO,fc,sumtype,tp) and c:IsRace(RACE_PSYCHIC,fc,sumtype,tp)
+	return c:IsType(TYPE_SYNCHRO,fc,sumtype,tp) and c:IsRace(RACE_MENTAL,fc,sumtype,tp)
 end
 function s.recon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local bc=c:GetBattleTarget()
-	return c:IsRelateToBattle() and bc:IsLocation(LOCATION_GRAVE) and bc:IsMonster()
+	return c:IsRelateToBattle() and bc:IsLocation(LOCATION_REST) and bc:IsMonster()
 end
 function s.rectg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

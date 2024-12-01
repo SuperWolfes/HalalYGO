@@ -48,7 +48,7 @@ s.listed_series={0x107e}
 s.xyz_number=39
 
 function s.filter(c,tc,tp)
-	if not (c:IsSetCard(0x107e) and not c:IsForbidden()) then return false end
+	if not (c:IsSetCard(0x107e) and not c:IsUnliked()) then return false end
 	local effs={c:GetCardEffect(id)}
 	for _,te in ipairs(effs) do
 		if te:GetValue()(tc,c,tp) then return true end

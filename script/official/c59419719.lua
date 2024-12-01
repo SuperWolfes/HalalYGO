@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_TOHAND)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCode(EVENT_DESTROYED)
 	e2:SetCountLimit(1,id)
 	e2:SetCondition(s.thcon)
@@ -25,7 +25,7 @@ end
 s.listed_series={0x14c}
 function s.fextra(e,tp,mg)
 	if not Duel.IsPlayerAffectedByEffect(tp,69832741) then
-		return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRemove),tp,LOCATION_GRAVE,LOCATION_GRAVE,nil)
+		return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRemove),tp,LOCATION_REST,LOCATION_REST,nil)
 	else
 		return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRemove),tp,LOCATION_ONFIELD,0,nil)
 	end
@@ -33,7 +33,7 @@ function s.fextra(e,tp,mg)
 end
 function s.stage2(e,tc,tp,sg,chk)
 	if chk==3 then
-		local mats=sg:Filter(Card.IsPreviousLocation,nil,LOCATION_GRAVE)
+		local mats=sg:Filter(Card.IsPreviousLocation,nil,LOCATION_REST)
 		if mats:IsExists(Card.IsPreviousControler,1,nil,tp) and mats:IsExists(Card.IsPreviousControler,1,nil,1-tp) then
 			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetDescription(3003)
@@ -49,7 +49,7 @@ function s.stage2(e,tc,tp,sg,chk)
 end
 function s.extratarget(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,PLAYER_EITHER,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,PLAYER_EITHER,LOCATION_REST)
 end
 function s.tgval(e,re,rp)
 	local rc=re:GetHandler()

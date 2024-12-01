@@ -45,7 +45,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if tg1:IsControler(tp) and Duel.SendtoHand(tg1,nil,REASON_EFFECT)>0 and tg1:IsLocation(LOCATION_HAND)
 		and tg2 and tg2:IsControler(1-tp) then
 		Duel.GetControl(tg2,tp)
-		if not tg1:IsRitualMonster() then
+		if not tg1:IsLockedMonster() then
 			local c=e:GetHandler()
 			local fid=c:GetFieldID()
 			tg2:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1,fid)

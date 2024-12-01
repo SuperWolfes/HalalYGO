@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_FREE_CHAIN)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCost(aux.bfgcost)
 	e2:SetOperation(s.immop)
 	c:RegisterEffect(e2)
@@ -25,10 +25,10 @@ end
 s.listed_series={0xd6,0xd7}
 s.listed_names={11790356}
 function s.cfilter1(c)
-	return c:IsSetCard(0xd6) and not c:IsCode(id) and c:IsAbleToGraveAsCost()
+	return c:IsSetCard(0xd6) and not c:IsCode(id) and c:IsAbleToRestAsCost()
 end
 function s.cfilter2(c)
-	return c:IsSetCard(0xd7) and c:IsMonster() and c:IsAbleToGraveAsCost()
+	return c:IsSetCard(0xd7) and c:IsMonster() and c:IsAbleToRestAsCost()
 end
 function s.rescon(sg,e,tp,mg)
 	return sg:IsExists(s.cfilter1,1,nil) and sg:IsExists(s.cfilter2,1,nil)
@@ -36,21 +36,21 @@ end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(s.cfilter1,tp,LOCATION_DECK,0,nil)+Duel.GetMatchingGroup(s.cfilter2,tp,LOCATION_DECK,0,nil)
 	if chk==0 then return aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,0) end
-	local sg=aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,1,tp,HINTMSG_TOGRAVE,s.rescon)
-	Duel.SendtoGrave(sg,REASON_COST)
+	local sg=aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,1,tp,HINTMSG_TOREST,s.rescon)
+	Duel.SendtoRest(sg,REASON_COST)
 end
 function s.filter(c,e,tp)
 	return c:IsCode(11790356) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local loc=LOCATION_EXTRA
-	if Duel.GetLocationCount(tp,LOCATION_MZONE)>0 then loc=loc+LOCATION_GRAVE end
+	if Duel.GetLocationCount(tp,LOCATION_MZONE)>0 then loc=loc+LOCATION_REST end
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,loc,0,1,nil,e,tp) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,loc)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local loc=LOCATION_EXTRA
-	if Duel.GetLocationCount(tp,LOCATION_MZONE)>0 then loc=loc+LOCATION_GRAVE end
+	if Duel.GetLocationCount(tp,LOCATION_MZONE)>0 then loc=loc+LOCATION_REST end
 	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,loc,0,1,1,nil,e,tp)
 	local tc=g:GetFirst()
 	if tc and Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP) then

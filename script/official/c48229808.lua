@@ -1,5 +1,5 @@
 --ホルスの黒炎竜 LV8
---Horus the Black Flame Dragon LV8
+--Humus the Black Flame Dragon LV8
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()

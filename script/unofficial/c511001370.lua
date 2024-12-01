@@ -15,7 +15,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return #eg==1 and tc:IsControler(1-tp) and tc:IsSummonType(SUMMON_TYPE_FUSION)
 end
 function s.mgfilter(c,e,tp,fusc)
-	return c:IsControler(1-tp) and c:IsLocation(LOCATION_GRAVE) and c:GetReason()&0x40008==0x40008 
+	return c:IsControler(1-tp) and c:IsLocation(LOCATION_REST) and c:GetReason()&0x40008==0x40008 
 		and c:GetReasonCard()==fusc and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)

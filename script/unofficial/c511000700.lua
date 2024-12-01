@@ -44,7 +44,7 @@ function s.checkop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.filter(c,e,tp,ft,g,pg)
 	local ct=c.minxyzct
-	return ft>=ct and c:IsRankBelow(4) and c:IsAttribute(ATTRIBUTE_DARK) and c:IsRace(RACE_FIEND) and c:IsType(TYPE_XYZ) 
+	return ft>=ct and c:IsRankBelow(4) and c:IsAttribute(ATTRIBUTE_DARK) and c:IsRace(RACE_TAINTED) and c:IsType(TYPE_XYZ) 
 		and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_XYZ,tp,false,false)
 		and aux.SelectUnselectGroup(g,e,tp,ct,ct,aux.FilterBoolFunction(Group.Includes,pg),0)
 end
@@ -52,7 +52,7 @@ function s.spfilter(c,e,tp)
 	return c:IsAttribute(ATTRIBUTE_DARK) and c:GetLevel()>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_GRAVE,0,nil,e,tp)
+	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_REST,0,nil,e,tp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	local pg=aux.GetMustBeMaterialGroup(tp,g,tp,nil,nil,REASON_XYZ)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_EXTRA) and s.filter(chkc,e,tp,ft,g,pg) end
@@ -69,10 +69,10 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 		local ct=tc.minxyzct
 		local ct2=tc.maxxyzct
-		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then if ct>1 then return end ct2=math.min(ct2,1) end
+		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then if ct>1 then return end ct2=math.min(ct2,1) end
 		if ft<ct then return end
 		if ft<ct2 then ct2=ft end
-		local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_GRAVE,0,nil,e,tp)
+		local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_REST,0,nil,e,tp)
 		local pg=aux.GetMustBeMaterialGroup(tp,g,tp,nil,nil,REASON_XYZ)
 		local sg=aux.SelectUnselectGroup(g,e,tp,ct,ct2,aux.FilterBoolFunction(Group.Includes,pg),1,tp,HINTMSG_SPSUMMON)
 		if #sg<=0 then return end

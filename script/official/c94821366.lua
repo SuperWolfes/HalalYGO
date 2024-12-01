@@ -98,10 +98,10 @@ function s.descfilter(c)
 	return c:IsSetCard(0x15f) and c:IsTrap() and c:IsAbleToRemoveAsCost()
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.descfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.descfilter,tp,LOCATION_REST,0,1,nil) end
 	local maxtc=Duel.GetTargetCount(nil,tp,0,LOCATION_ONFIELD,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.descfilter,tp,LOCATION_GRAVE,0,1,maxtc,nil)
+	local g=Duel.SelectMatchingCard(tp,s.descfilter,tp,LOCATION_REST,0,1,maxtc,nil)
 	local cg=Duel.Remove(g,POS_FACEUP,REASON_COST)
 	e:SetLabel(cg)
 end

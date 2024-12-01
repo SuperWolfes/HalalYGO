@@ -1,5 +1,5 @@
 --レッド・デーモンズ・ドラゴン・タイラント (Anime)
---Tyrant Red Dragon Archfiend (Anime)
+--Tyrant Red Dragon Archtainted (Anime)
 --fixed by MLD
 local s,id=GetID()
 function s.initial_effect(c)

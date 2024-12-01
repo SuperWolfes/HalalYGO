@@ -89,7 +89,7 @@ function s.valfilter(c)
 	return c:IsSetCard(0x20ec) and c:IsSpell()
 end
 function s.val(e,c)
-	return Duel.GetMatchingGroupCount(s.valfilter,c:GetControler(),LOCATION_GRAVE,0,nil)*100
+	return Duel.GetMatchingGroupCount(s.valfilter,c:GetControler(),LOCATION_REST,0,nil)*100
 end
 function s.cfilter(c,tp)
 	return c:IsType(TYPE_PENDULUM) and c:IsPreviousLocation(LOCATION_MZONE) and c:IsPreviousControler(tp)

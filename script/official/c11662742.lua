@@ -52,7 +52,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e6)
 end
 function s.dtcon(e,c)
-	return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_FAIRY)
+	return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_WANDERER)
 end
 function s.dmop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

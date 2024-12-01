@@ -1,5 +1,5 @@
 --幻煌龍の浸渦
---Phantasm Spiral Power
+--Illusorasm Spiral Power
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -26,7 +26,7 @@ function s.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_QUICK_O)
 	e3:SetCode(EVENT_FREE_CHAIN)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetCost(aux.bfgcost)
 	e3:SetTarget(s.eqtg)
 	e3:SetOperation(s.eqop)
@@ -84,7 +84,7 @@ function s.handcon(e)
 end
 function s.efilter(c,tp)
 	return c:IsFaceup() and c:IsType(TYPE_NORMAL)
-		and Duel.IsExistingMatchingCard(s.eqfilter,tp,LOCATION_GRAVE+LOCATION_HAND,0,1,nil,c)
+		and Duel.IsExistingMatchingCard(s.eqfilter,tp,LOCATION_REST+LOCATION_HAND,0,1,nil,c)
 end
 function s.eqfilter(c,tc)
 	return c:IsType(TYPE_EQUIP) and c:IsSetCard(0xfa) and c:CheckEquipTarget(tc)
@@ -100,7 +100,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not tc or tc:IsFacedown() or not tc:IsRelateToEffect(e) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.eqfilter),tp,LOCATION_GRAVE+LOCATION_HAND,0,1,1,nil,tc)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.eqfilter),tp,LOCATION_REST+LOCATION_HAND,0,1,1,nil,tc)
 	local eq=g:GetFirst()
 	if eq then
 		Duel.Equip(tp,eq,tc,true)

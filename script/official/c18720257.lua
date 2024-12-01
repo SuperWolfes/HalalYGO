@@ -43,7 +43,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x109}
 function s.plfilter(c,tp)
-	return c:IsType(TYPE_SPELL|TYPE_TRAP) and c:IsSetCard(0x109) and not c:IsForbidden() and c:CheckUniqueOnField(tp)
+	return c:IsType(TYPE_SPELL|TYPE_TRAP) and c:IsSetCard(0x109) and not c:IsUnliked() and c:CheckUniqueOnField(tp)
 		and not c:IsType(TYPE_FIELD)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)

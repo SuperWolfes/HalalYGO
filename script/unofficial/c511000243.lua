@@ -1,5 +1,5 @@
 --究極封印神エクゾディオス (Anime)
---Exodius the Ultimate Forbidden Lord (Anime)
+--Exdudius the Ultimate Unliked Lord (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--cannot special summon
@@ -9,10 +9,10 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_SPSUMMON_CONDITION)
 	e1:SetValue(s.splimit)
 	c:RegisterEffect(e1)
-	--Send 1 "Forbidden One" monster from your Hand or Deck to the Graveyard
+	--Send 1 "Unliked One" monster from your Hand or Deck to the Resting Place
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
-	e2:SetCategory(CATEGORY_TOGRAVE)
+	e2:SetCategory(CATEGORY_TOREST)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e2:SetCode(EVENT_ATTACK_ANNOUNCE)
 	e2:SetTarget(s.forbtg)
@@ -36,11 +36,11 @@ function s.initial_effect(c)
 	e5:SetCode(EFFECT_IMMUNE_EFFECT)
 	e5:SetValue(s.unval)
 	c:RegisterEffect(e5)
-	--Win the Duel when there are 5 parts of the Forbidden in your Graveyard
+	--Win the Duel when there are 5 parts of the Unliked in your Resting Place
 	local e6=Effect.CreateEffect(c)
 	e6:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e6:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_DELAY)
-	e6:SetCode(EVENT_TO_GRAVE)
+	e6:SetCode(EVENT_TO_REST)
 	e6:SetRange(LOCATION_MZONE)
 	e6:SetOperation(s.winop)
 	c:RegisterEffect(e6)
@@ -52,21 +52,21 @@ function s.splimit(e,se,sp,st)
 end
 function s.forbtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
 function s.forbfilter(c)
-	return c:IsSetCard(0x40) and c:IsMonster() and c:IsAbleToGrave()
+	return c:IsSetCard(0x40) and c:IsMonster() and c:IsAbleToRest()
 end
 function s.forbop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local c=e:GetHandler()
 	local g=Duel.SelectMatchingCard(tp,s.forbfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end
 function s.atkval(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsSetCard,c:GetControler(),LOCATION_GRAVE,0,nil,0x40)*1000
+	return Duel.GetMatchingGroupCount(Card.IsSetCard,c:GetControler(),LOCATION_REST,0,nil,0x40)*1000
 end
 function s.unval(e,te)
 	return te:GetOwnerPlayer()~=e:GetHandlerPlayer()
@@ -76,15 +76,15 @@ function s.check(g)
 	return g:GetClassCount(Card.GetCode)>=5
 end
 function s.winop(e,tp,eg,ep,ev,re,r,rp)
-	local g1=Duel.GetFieldGroup(tp,LOCATION_GRAVE,0)
-	local g2=Duel.GetFieldGroup(tp,0,LOCATION_GRAVE)
+	local g1=Duel.GetFieldGroup(tp,LOCATION_REST,0)
+	local g2=Duel.GetFieldGroup(tp,0,LOCATION_REST)
 	local wtp=s.check(g1)
 	local wntp=s.check(g2)
 	if wtp and not wntp then
-		Duel.Win(tp,WIN_REASON_EXODIUS)
+		Duel.Win(tp,WIN_REASON_EXDUDIUS)
 	elseif not wtp and wntp then
-		Duel.Win(1-tp,WIN_REASON_EXODIUS)
+		Duel.Win(1-tp,WIN_REASON_EXDUDIUS)
 	elseif wtp and wntp then
-		Duel.Win(PLAYER_NONE,WIN_REASON_EXODIUS)
+		Duel.Win(PLAYER_NONE,WIN_REASON_EXDUDIUS)
 	end
 end

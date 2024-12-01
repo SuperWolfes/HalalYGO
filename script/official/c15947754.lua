@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	--Opponent must guess the card at the End Phase
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
-	e3:SetCategory(CATEGORY_TOGRAVE+CATEGORY_HANDES+CATEGORY_TOHAND)
+	e3:SetCategory(CATEGORY_TOREST+CATEGORY_HANDES+CATEGORY_TOHAND)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e3:SetCode(EVENT_PHASE+PHASE_END)
 	e3:SetRange(LOCATION_MZONE)
@@ -74,7 +74,7 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local c=e:GetHandler()
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,c,1,tp,0)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,c,1,tp,0)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_HANDES,nil,0,1-tp,1)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,c,1,tp,0)
 end
@@ -86,12 +86,12 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ConfirmCards(1-tp,eg:GetFirst())
 	local res=s.testtype(op,eg:GetFirst())
 	if res then --correctly guessed
-		Duel.SendtoGrave(c,REASON_EFFECT)
+		Duel.SendtoRest(c,REASON_EFFECT)
 	else --incorrectly guessed
 		local g=Duel.GetFieldGroup(tp,0,LOCATION_HAND,nil)
 		if #g==0 then return end
 		local sg=g:RandomSelect(1-tp,1)
-		if Duel.SendtoGrave(sg,REASON_DISCARD+REASON_EFFECT)>0 then
+		if Duel.SendtoRest(sg,REASON_DISCARD+REASON_EFFECT)>0 then
 			Duel.SendtoHand(c,nil,REASON_EFFECT)
 		end
 	end

@@ -1,5 +1,5 @@
 --白銀の城の魔神像
---Labrynth Archfiend
+--Labrynth Archtainted
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
@@ -34,13 +34,13 @@ function s.initial_effect(c)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetValue(s.atkval)
 	c:RegisterEffect(e3)
-	--Other Fiends cannot be targeted for attacks
+	--Other Tainteds cannot be targeted for attacks
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_FIELD)
 	e4:SetCode(EFFECT_CANNOT_SELECT_BATTLE_TARGET)
 	e4:SetRange(LOCATION_MZONE)
 	e4:SetTargetRange(0,LOCATION_MZONE)
-	e4:SetValue(function(e,c) return not c:IsCode(id) and c:IsRace(RACE_FIEND) end)
+	e4:SetValue(function(e,c) return not c:IsCode(id) and c:IsRace(RACE_TAINTED) end)
 	c:RegisterEffect(e4)
 end
 s.listed_names={id}
@@ -60,7 +60,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.setfilter(c)
-	return c:GetType()==TYPE_TRAP and c:IsSSetable() and not c:IsForbidden() and c:GetActivateEffect()
+	return c:GetType()==TYPE_TRAP and c:IsSSetable() and not c:IsUnliked() and c:GetActivateEffect()
 		and c:GetActivateEffect():GetCode()==EVENT_ATTACK_ANNOUNCE
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -79,6 +79,6 @@ function s.trapval(c)
 end
 function s.atkval(e,c)
 	local tp=e:GetHandlerPlayer()
-	local g=Duel.GetMatchingGroup(s.trapval,tp,LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.trapval,tp,LOCATION_REST,0,nil)
 	return g:GetClassCount(Card.GetCode)*400
 end

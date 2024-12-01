@@ -49,7 +49,7 @@ function s.spcfilter1(c)
 	return c:IsFaceup() and s.fright_unit(c) and c:IsLevelBelow(4)
 end
 function s.spfilter1(c,e,tp)
-	return c:IsRace(RACE_FIEND) 
+	return c:IsRace(RACE_TAINTED) 
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.spkfilter1(c,rc)
@@ -116,7 +116,7 @@ function s.lizfilter(e,c)
 	return not c:IsOriginalType(TYPE_FUSION)
 end
 function s.excfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_FIEND) and c:HasLevel()
+	return c:IsFaceup() and c:IsRace(RACE_TAINTED) and c:HasLevel()
 end
 function s.exfilter(c,e,tp,chk)
 	return c:IsSetCard(0xad) and c:IsType(TYPE_FUSION) and (not chk or Duel.GetLocationCountFromEx(tp,tp,nil,c)>0) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,false,false)

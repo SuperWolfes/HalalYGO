@@ -1,5 +1,5 @@
 --超量妖精アルファン
---Super Quantal Fairy Alphan
+--Super Quantal Wanderer Alphan
 local s,id=GetID()
 function s.initial_effect(c)
 	--lv
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	--search
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOGRAVE)
+	e2:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOREST)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCountLimit(1,id)
@@ -94,6 +94,6 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 			cg:RemoveCard(tc)
 		end
-		Duel.SendtoGrave(cg,REASON_EFFECT)
+		Duel.SendtoRest(cg,REASON_EFFECT)
 	end
 end

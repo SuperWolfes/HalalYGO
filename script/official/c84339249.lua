@@ -1,5 +1,5 @@
 --守護天霊ロガエス
---Protector Spirit Loagaeth
+--Protector Guardian Loagaeth
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
@@ -63,7 +63,7 @@ end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local rc=re:GetHandler()
 	return rp==tp and re:IsActiveType(TYPE_MONSTER)
-		and rc:IsRace(RACE_FAIRY) and re:GetActivateLocation()==LOCATION_MZONE
+		and rc:IsRace(RACE_WANDERER) and re:GetActivateLocation()==LOCATION_MZONE
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

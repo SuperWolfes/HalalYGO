@@ -33,15 +33,15 @@ end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tc=e:GetHandler():GetEquipTarget()
 	if chk==0 then return tc and tc:IsCanChangePosition()
-		and Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_GRAVE,0,1,nil) end
+		and Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_REST,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_POSITION,tc,1,0,0)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,nil,1,tp,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,nil,1,tp,0)
 end
 function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetHandler():GetEquipTarget()
 	if tc and tc:IsLocation(LOCATION_MZONE) and Duel.ChangePosition(tc,POS_FACEUP_DEFENSE,POS_FACEDOWN_DEFENSE,POS_FACEUP_ATTACK,POS_FACEUP_ATTACK)>0 then
 		Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_SET)
-		local g=Duel.SelectMatchingCard(1-tp,s.setfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+		local g=Duel.SelectMatchingCard(1-tp,s.setfilter,tp,LOCATION_REST,0,1,1,nil)
 		if #g>0 then
 			Duel.SSet(tp,g)
 		end

@@ -27,17 +27,17 @@ function s.initial_effect(c)
 end
 s.listed_names={89194033}
 function s.cfilter(c,e,tp)
-	return c:IsFaceup() and c:IsCode(89194033) and c:IsAbleToGraveAsCost() 
+	return c:IsFaceup() and c:IsCode(89194033) and c:IsAbleToRestAsCost() 
 		and Duel.IsExistingMatchingCard(s.filter,tp,0x43,0,1,nil,e,tp,c)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGraveAsCost()
+	if chk==0 then return c:IsAbleToRestAsCost()
 		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,0,1,c,e,tp) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_ONFIELD,0,1,1,c,e,tp)
 	g:AddCard(c)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.filter(c,e,tp,mc)
 	if not c:IsCanBeSpecialSummoned(e,0,tp,false,false) then return false end

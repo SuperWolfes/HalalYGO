@@ -19,7 +19,7 @@ s.listed_names={CARD_BLACK_ROSE_DRAGON}
 s.listed_series={0x1123}
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsLocation(LOCATION_GRAVE) and r==REASON_SYNCHRO
+	return c:IsLocation(LOCATION_REST) and r==REASON_SYNCHRO
 end
 function s.spfilter(c,e,tp)
 	return c:IsSetCard(0x1123) and not c:IsCode(id) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

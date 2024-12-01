@@ -46,7 +46,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	Duel.NegateActivation(ev)
 	if tc and tc:IsRelateToEffect(e) and tc:IsRelateToEffect(re) then
-		tc:CancelToGrave()
+		tc:CancelToRest()
 		Duel.SendtoHand(tc,tp,REASON_EFFECT)
 		c:SetCardTarget(tc)
 		e:SetLabelObject(tc)

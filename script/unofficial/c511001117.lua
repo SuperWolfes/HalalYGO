@@ -36,11 +36,11 @@ function s.splimit(e,se,sp,st)
 end
 s.material_setcode={0x93,0x4093}
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsRace(RACE_DRAGON) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsRace(RACE_DRAGON) end
 	if chk==0 then return true end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-	local g=Duel.SelectTarget(tp,Card.IsRace,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,1,nil,RACE_DRAGON)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,0,0)
+	local g=Duel.SelectTarget(tp,Card.IsRace,tp,LOCATION_REST,LOCATION_REST,1,1,nil,RACE_DRAGON)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_EQUIP,g,1,0,0)
 end
 function s.equipop(c,e,tp,tc)
@@ -74,5 +74,5 @@ function s.repval(e,re,r,rp)
 end
 function s.atkval(e,c)
 	local tp=e:GetHandlerPlayer()
-	return Duel.GetFieldGroupCount(c:GetControler(),LOCATION_GRAVE,0)*100
+	return Duel.GetFieldGroupCount(c:GetControler(),LOCATION_REST,0)*100
 end

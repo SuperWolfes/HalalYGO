@@ -2,10 +2,10 @@
 --Orgoth the Relentless
 local s,id=GetID()
 function s.initial_effect(c)
-	--Apply appropriate effect, depending on dice results
+	--Apply appropriate effect, depending on suffice results
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_DICE+CATEGORY_ATKCHANGE+CATEGORY_DRAW)
+	e1:SetCategory(CATEGORY_SUFFICE+CATEGORY_ATKCHANGE+CATEGORY_DRAW)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1)
@@ -13,16 +13,16 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 end
-s.roll_dice=true
+s.roll_suffice=true
 
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,0,tp,3)
+	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,3)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local res,atk={0,0,0,0,0,0,0,false,false,false,false},0
-	for _,i in ipairs({Duel.TossDice(tp,3)}) do
+	for _,i in ipairs({Duel.TossSuffice(tp,3)}) do
 		atk=atk+(i*100)
 		res[i]=res[i]+1
 		if res[i]>=2 then

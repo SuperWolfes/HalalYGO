@@ -1,5 +1,5 @@
 --デーモンの杖
---Archfiend Staff of Despair
+--Archtainted Staff of Despair
 --Scripted by DyXel
 
 local s,id=GetID()
@@ -46,7 +46,7 @@ function s.actop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.retcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsLocation(LOCATION_GRAVE) and c:GetEquipTarget()~=nil
+	return c:IsLocation(LOCATION_REST) and c:GetEquipTarget()~=nil
 end
 function s.retcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckLPCost(tp,1000) end

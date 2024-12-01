@@ -24,6 +24,6 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if tc:IsRelateToEffect(e) and tc:IsFaceup() then
 		local og=tc:GetOverlayGroup()
 		if #og==0 then return end
-		Duel.SendtoGrave(og,REASON_EFFECT)
+		Duel.SendtoRest(og,REASON_EFFECT)
 	end
 end

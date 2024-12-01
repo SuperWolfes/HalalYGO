@@ -1,11 +1,11 @@
 --双天の転身
---Dual Avatar Turning
+--Guardian Avatar Turning
 --Logical Nonsense
 
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special summon 1 "Dual Avatar" monster from deck or extra deck
+	--Special summon 1 "Guardian Avatar" monster from deck or extra deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DESTROY+CATEGORY_SPECIAL_SUMMON)
@@ -17,14 +17,14 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	e1:SetHintTiming(0,TIMING_END_PHASE)
 	c:RegisterEffect(e1)
-	--Add 1 "Dual Avatar" monster from GY to hand
+	--Add 1 "Guardian Avatar" monster from GY to hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_FREE_CHAIN)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCost(aux.bfgcost)
 	e2:SetCondition(s.thcon)
@@ -32,15 +32,15 @@ function s.initial_effect(c)
 	e2:SetOperation(s.thop)
 	c:RegisterEffect(e2)
 end
-	--Lists "Dual Avatar" archetype
+	--Lists "Guardian Avatar" archetype
 s.listed_series={0x14e}
 	--Can special summon ED monsters outside EMZ? Cache the result
 s.fsx_anywhere=Duel.IsDuelType(DUEL_FSX_MMZONE)
-	--Check "Dual Avatar" monster to destroy
+	--Check "Guardian Avatar" monster to destroy
 function s.desfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0x14e) and c:IsLevelAbove(1)
 end
-	--Check "Dual Avatar" monster to special summon
+	--Check "Guardian Avatar" monster to special summon
 function s.spfilter(c,e,tp,tc,is_emz,has_mmz)
 	if (not c:IsSetCard(0x14e)) or (not c:IsLevelAbove(1)) or
 	   (not (math.abs(c:GetOriginalLevel()-tc:GetLevel())==1)) or
@@ -69,7 +69,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK|LOCATION_EXTRA)
 end
-	--Destroy targeted monster, and if you do, special summon 1 "Dual Avatar" monster from deck or extra deck
+	--Destroy targeted monster, and if you do, special summon 1 "Guardian Avatar" monster from deck or extra deck
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) then
@@ -86,19 +86,19 @@ end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsMainPhase() and Duel.IsTurnPlayer(tp) and aux.exccon(e)
 end
-	--Check for "Dual Avatar" monster
+	--Check for "Guardian Avatar" monster
 function s.thfilter(c)
 	return c:IsMonster() and c:IsSetCard(0x14e) and c:IsAbleToHand()
 end
 	--Activation legality
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.thfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.thfilter,tp,LOCATION_GRAVE,0,1,nil,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.thfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.thfilter,tp,LOCATION_REST,0,1,nil,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,0,0)
 end
-	--Add 1 "Dual Avatar" monster from GY to hand
+	--Add 1 "Guardian Avatar" monster from GY to hand
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) then

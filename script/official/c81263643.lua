@@ -22,7 +22,7 @@ function s.cfilter(c,tp)
 	if not c:IsDiscardable() then return false end
 	local ty=c:GetType() & (TYPE_MONSTER+TYPE_SPELL+TYPE_TRAP)
 	local log=math.log(ty)/math.log(2)
-	return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,1,nil,2 ^ ((log+2) % 3))
+	return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,1,nil,2 ^ ((log+2) % 3))
 end
 function s.filter(c,ty)
 	return c:IsType(ty) and c:IsAbleToHand()
@@ -34,15 +34,15 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ty=g:GetFirst():GetType() & (TYPE_MONSTER+TYPE_SPELL+TYPE_TRAP)
 	local log=math.log(ty)/math.log(2)
 	e:SetLabel(2 ^ ((log+2) % 3))
-	Duel.SendtoGrave(g,REASON_COST+REASON_DISCARD)
+	Duel.SendtoRest(g,REASON_COST+REASON_DISCARD)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,LOCATION_GRAVE,0,1,1,nil,e:GetLabel())
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,LOCATION_REST,0,1,1,nil,e:GetLabel())
 	if #g>0 then
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)

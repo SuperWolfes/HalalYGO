@@ -1,7 +1,7 @@
 --八尺勾玉
 local s,id=GetID()
 function s.initial_effect(c)
-	aux.AddEquipProcedure(c,nil,aux.FilterBoolFunction(Card.IsType,TYPE_SPIRIT))
+	aux.AddEquipProcedure(c,nil,aux.FilterBoolFunction(Card.IsType,TYPE_GUARDIAN))
 	--recover
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e4:SetCategory(CATEGORY_TOHAND)
-	e4:SetCode(EVENT_TO_GRAVE)
+	e4:SetCode(EVENT_TO_REST)
 	e4:SetCondition(s.retcon)
 	e4:SetTarget(s.rettg)
 	e4:SetOperation(s.retop)
@@ -30,7 +30,7 @@ function s.recon(e,tp,eg,ep,ev,re,r,rp)
 	local bc=ec:GetBattleTarget()
 	e:SetLabelObject(bc)
 	return e:GetHandler():GetEquipTarget()==eg:GetFirst() and ec:IsControler(tp)
-		and bc:IsLocation(LOCATION_GRAVE) and bc:IsMonster() and bc:IsReason(REASON_BATTLE) 
+		and bc:IsLocation(LOCATION_REST) and bc:IsMonster() and bc:IsReason(REASON_BATTLE) 
 end
 function s.retg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

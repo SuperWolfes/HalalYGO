@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_SPELLCASTER),tp,LOCATION_MZONE,0,1,nil)
+	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_MENTOR),tp,LOCATION_MZONE,0,1,nil)
 end
 function s.filter(c,e,tp)
 	return c:IsRace(RACE_DRAGON) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -26,14 +26,14 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
 	local ct=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if chk==0 then return ct>0 and Duel.IsExistingTarget(s.nfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
+	if chk==0 then return ct>0 and Duel.IsExistingTarget(s.nfilter,tp,LOCATION_REST,0,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g1=Duel.SelectTarget(tp,s.nfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
-	if ct>1 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
-		and Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,g1,e,tp)
+	local g1=Duel.SelectTarget(tp,s.nfilter,tp,LOCATION_REST,0,1,1,nil,e,tp)
+	if ct>1 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)
+		and Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,g1,e,tp)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local g2=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,g1,e,tp)
+		local g2=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,g1,e,tp)
 		g1:Merge(g2)
 	end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g1,#g1,0,0)
@@ -55,7 +55,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if ct<1 then return end
 	local g=Duel.GetTargetCards(e)
 	if #g==0 then return end
-	if #g>ct or (#g>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)) then
+	if #g>ct or (#g>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		g=g:Select(tp,1,1,nil)
 	end

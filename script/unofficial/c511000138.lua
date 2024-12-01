@@ -35,7 +35,7 @@ function s.cfilter(c)
 	return c:IsCode(25833572)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,nil)
+	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil)
 end
 function s.filter(c,e,tp)
 	return c:IsCode(511000137) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)

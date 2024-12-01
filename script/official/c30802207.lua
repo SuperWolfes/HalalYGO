@@ -46,7 +46,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x174}
 function s.tgval(e,re,rp)
-	return re:IsActiveType(TYPE_MONSTER) and re:GetHandler():IsSummonLocation(LOCATION_GRAVE)
+	return re:IsActiveType(TYPE_MONSTER) and re:GetHandler():IsSummonLocation(LOCATION_REST)
 end
 function s.negcfilter(c,tp)
 	return c:IsSummonType(SUMMON_TYPE_XYZ) and c:IsSetCard(0x174) and c:IsSummonPlayer(tp)

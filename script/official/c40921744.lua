@@ -28,11 +28,11 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function s.otfilter(c,tp)
-	local ag=Duel.GetMatchingGroup(Card.IsAttribute,tp,LOCATION_GRAVE,0,nil,ATTRIBUTE_DARK)
+	local ag=Duel.GetMatchingGroup(Card.IsAttribute,tp,LOCATION_REST,0,nil,ATTRIBUTE_DARK)
 	return c:IsAttribute(ATTRIBUTE_DARK) and ag:GetClassCount(Card.GetCode)>=4
 end
 function s.cfilter(c)
-	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsAbleToGraveAsCost()
+	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsAbleToRestAsCost()
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end

@@ -149,7 +149,7 @@ if not ActionDuel then
 			ec:SetCode(EFFECT_CANNOT_TO_HAND)
 			tc:RegisterEffect(ec)
 			local ed=ea:Clone()
-			ed:SetCode(EFFECT_CANNOT_TO_GRAVE)
+			ed:SetCode(EFFECT_CANNOT_TO_REST)
 			tc:RegisterEffect(ed)
 			local ee=ea:Clone()
 			ee:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
@@ -272,8 +272,8 @@ if not ActionDuel then
 				end
 			end
 			tc:SetStatus(STATUS_LEAVE_CONFIRMED,true)
-			tc:CancelToGrave(false)
-			Duel.SendtoGrave(tc,REASON_RULE)
+			tc:CancelToRest(false)
+			Duel.SendtoRest(tc,REASON_RULE)
 		end
 	end
 

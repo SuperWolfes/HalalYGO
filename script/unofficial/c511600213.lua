@@ -26,7 +26,7 @@ function s.initial_effect(c)
 	e3:SetCategory(CATEGORY_ATKCHANGE)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e3:SetCode(EVENT_PHASE+PHASE_BATTLE_START)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetCondition(s.condition)
 	e3:SetTarget(s.target)
 	e3:SetOperation(s.operation)
@@ -42,9 +42,9 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGraveAsCost() end
+	if chk==0 then return c:IsAbleToRestAsCost() end
 	Duel.SetTargetCard(c:GetEquipTarget())
-	Duel.SendtoGrave(c,REASON_COST)
+	Duel.SendtoRest(c,REASON_COST)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local ec=Duel.GetFirstTarget()
@@ -68,16 +68,16 @@ function s.cfilter2(c)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter1,tp,LOCATION_GRAVE,0,1,c)
-		and Duel.IsExistingMatchingCard(s.cfilter2,tp,LOCATION_GRAVE,0,1,c) and c:IsAbleToRemove()
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter1,tp,LOCATION_REST,0,1,c)
+		and Duel.IsExistingMatchingCard(s.cfilter2,tp,LOCATION_REST,0,1,c) and c:IsAbleToRemove()
 		and Duel.IsExistingMatchingCard(Card.IsFaceup,tp,0,LOCATION_MZONE,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_REMOVE,c,3,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_REMOVE,c,3,tp,LOCATION_REST)
 	Duel.SetOperationInfo(0,CATEGORY_ATKCHANGE,nil,1,1-tp,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local sg=Duel.GetMatchingGroup(s.cfilter1,tp,LOCATION_GRAVE,0,c)
-	local mg=Duel.GetMatchingGroup(s.cfilter2,tp,LOCATION_GRAVE,0,c)
+	local sg=Duel.GetMatchingGroup(s.cfilter1,tp,LOCATION_REST,0,c)
+	local mg=Duel.GetMatchingGroup(s.cfilter2,tp,LOCATION_REST,0,c)
 	if c:IsRelateToEffect(e) and c:IsAbleToRemove() and #sg>0 and #mg>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 		local rg=sg:Select(tp,1,1,nil)+mg:Select(tp,1,1,nil)+c

@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	--Look at 1 random card in opponent's hand. Send it to GY if spell
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_TOGRAVE)
+	e1:SetCategory(CATEGORY_TOREST)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_BATTLE_DAMAGE)
 	e1:SetCondition(s.condition)
@@ -34,7 +34,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local sg=g:RandomSelect(ep,1)
 	Duel.ConfirmCards(tp,sg)
 	if sg:GetFirst():IsSpell() then
-		Duel.SendtoGrave(sg,REASON_EFFECT)
+		Duel.SendtoRest(sg,REASON_EFFECT)
 	end
 	Duel.ShuffleHand(1-tp)
 end

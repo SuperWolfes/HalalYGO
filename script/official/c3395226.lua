@@ -39,7 +39,7 @@ function s.splimit(e,c,sump,sumtype,sumpos,targetp,se)
 	return c:GetAttribute()~=ATTRIBUTE_LIGHT
 end
 function s.filter(c,e,tp)
-	return c:IsRace(RACE_FAIRY) and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsRace(RACE_WANDERER) and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

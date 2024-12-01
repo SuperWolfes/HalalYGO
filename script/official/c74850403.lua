@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
 	e2:SetTargetRange(LOCATION_MZONE,0)
-	e2:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_SPELLCASTER))
+	e2:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_MENTOR))
 	e2:SetValue(s.evalue)
 	c:RegisterEffect(e2)
 	--Search

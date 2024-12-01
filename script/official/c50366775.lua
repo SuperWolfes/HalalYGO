@@ -67,7 +67,7 @@ function s.chngcon(scard,sumtype,tp)
 	return (sumtype&SUMMON_TYPE_LINK|MATERIAL_LINK)==SUMMON_TYPE_LINK|MATERIAL_LINK
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_GRAVE) and r==REASON_LINK
+	return e:GetHandler():IsLocation(LOCATION_REST) and r==REASON_LINK
 end
 function s.thfilter(c)
 	return c:IsRace(RACE_CYBERSE) and c:IsLevelAbove(5) and c:IsAbleToHand()

@@ -1,5 +1,5 @@
 --アースゴーレム＠イグニスター (Anime)
---Earth Golem @Ignister (Anime)
+--Earth Gopal @Ignister (Anime)
 --Scripted by Larry126
 local s,id,alias=GetID()
 function s.initial_effect(c)

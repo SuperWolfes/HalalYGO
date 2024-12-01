@@ -11,7 +11,7 @@ function s.filter(c)
 end
 function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 	--condition
-	return Duel.IsExistingMatchingCard(Card.IsSetCard,tp,LOCATION_GRAVE,0,1,nil,0x581)
+	return Duel.IsExistingMatchingCard(Card.IsSetCard,tp,LOCATION_REST,0,1,nil,0x581)
 		and Duel.IsExistingMatchingCard(Card.IsFaceup,1-tp,LOCATION_MZONE,0,1,nil)
 		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,0,1,nil)
 		and (Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated())
@@ -29,7 +29,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 	local tc=Duel.SelectMatchingCard(tp,Card.IsFaceup,tp,0,LOCATION_MZONE,1,1,nil):GetFirst()
 	if tc and not tc:IsImmuneToEffect(e) then
-		local ct=Duel.GetMatchingGroupCount(Card.IsSetCard,tp,LOCATION_GRAVE,0,nil,0x581)
+		local ct=Duel.GetMatchingGroupCount(Card.IsSetCard,tp,LOCATION_REST,0,nil,0x581)
 		local atk=tc:GetAttack()
 		local nv=math.min(atk,ct*200)
 		local e1=Effect.CreateEffect(e:GetHandler())

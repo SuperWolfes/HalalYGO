@@ -1,5 +1,5 @@
 --神事の獣葬
---Beast Burial Ritual
+--Beast Burial Locked
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

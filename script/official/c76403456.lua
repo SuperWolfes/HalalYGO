@@ -25,7 +25,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local val=math.ceil(Duel.GetBattleDamage(tp)/500)
 	Duel.DiscardDeck(tp,val,REASON_EFFECT)
 	local og=Duel.GetOperatedGroup()
-	if og:FilterCount(Card.IsLocation,nil,LOCATION_GRAVE)<val then return end
+	if og:FilterCount(Card.IsLocation,nil,LOCATION_REST)<val then return end
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_AVOID_BATTLE_DAMAGE)

@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	--coin
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
-	e2:SetCategory(CATEGORY_COIN+CATEGORY_TOGRAVE+CATEGORY_NEGATE+CATEGORY_CONTROL)
+	e2:SetCategory(CATEGORY_COIN+CATEGORY_TOREST+CATEGORY_NEGATE+CATEGORY_CONTROL)
 	e2:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetRange(LOCATION_SZONE)
@@ -28,10 +28,10 @@ function s.con(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGrave()
+	if chk==0 then return c:IsAbleToRest()
 		and (not re:GetHandler():IsRelateToEffect(re) or re:GetHandler():IsAbleToChangeControler()) end
 	Duel.SetOperationInfo(0,CATEGORY_COIN,nil,0,rp,1)
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,c,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,c,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_NEGATE,re:GetHandler(),1,0,0)
 	if re:GetHandler():IsRelateToEffect(re) then
 		Duel.SetOperationInfo(0,CATEGORY_CONTROL,re:GetHandler(),1,0,0)
@@ -44,7 +44,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local coin=Duel.AnnounceCoin(p)
 	local res=Duel.TossCoin(rp,1)
 	if coin~=res then
-		Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
+		Duel.SendtoRest(e:GetHandler(),REASON_EFFECT)
 	else
 		if Duel.NegateActivation(ev) and re:GetHandler():IsRelateToEffect(re) then
 			Duel.GetControl(re:GetHandler(),1-p)

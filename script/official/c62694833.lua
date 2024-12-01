@@ -60,7 +60,7 @@ function s.setcon2(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.setfilter3(c,tp)
 	return c:IsSetCard(0x7c) and c:IsSpellTrap() and c:IsSSetable()
-		and not Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,c:GetCode())
+		and not Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,c:GetCode())
 end
 function s.settg2(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.setfilter3,tp,LOCATION_DECK,0,1,nil,tp) end

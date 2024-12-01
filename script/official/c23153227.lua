@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(s.copycon)
 	e2:SetCost(s.copycost)
@@ -58,7 +58,7 @@ function s.copycost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Remove(e:GetHandler(),POS_FACEUP,REASON_COST)
 end
 function s.copyfilter(c)
-	return c:IsAbleToGraveAsCost() and c:IsSetCard(0x95) and c:IsSpell()
+	return c:IsAbleToRestAsCost() and c:IsSetCard(0x95) and c:IsSpell()
 		and c:CheckActivateEffect(true,true,false)~=nil 
 end
 function s.copytg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -72,9 +72,9 @@ function s.copytg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		return Duel.IsExistingMatchingCard(s.copyfilter,tp,LOCATION_HAND,0,1,nil)
 	end
 	e:SetLabel(0)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.copyfilter,tp,LOCATION_HAND,0,1,1,nil)
-	if not Duel.SendtoGrave(g,REASON_COST) then return end
+	if not Duel.SendtoRest(g,REASON_COST) then return end
 	local te=g:GetFirst():CheckActivateEffect(true,true,false)
 	e:SetLabel(te:GetLabel())
 	e:SetLabelObject(te:GetLabelObject())

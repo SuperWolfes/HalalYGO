@@ -2,7 +2,7 @@
 --Drumming with Excitement
 --Scripted by Eerie Code
 local s,id=GetID()
-local LOCATION_HDG = LOCATION_HAND+LOCATION_DECK+LOCATION_GRAVE
+local LOCATION_HDG = LOCATION_HAND+LOCATION_DECK+LOCATION_REST
 function s.initial_effect(c)
 	--activate
 	local e1=Effect.CreateEffect(c)
@@ -30,13 +30,13 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then 
 		local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_HDG,0,nil,e,tp)
 		return Duel.GetLocationCount(tp,LOCATION_MZONE)>2 
-			and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
+			and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)
 			and aux.SelectUnselectGroup(g,e,tp,3,3,s.spcheck,0)
 	end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,3,tp,LOCATION_HDG)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.GetLocationCount(tp,LOCATION_MZONE)<3 or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
+	if Duel.GetLocationCount(tp,LOCATION_MZONE)<3 or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
 	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_HDG,0,nil,e,tp)
 	local sg=aux.SelectUnselectGroup(g,e,tp,3,3,s.spcheck,1,tp,HINTMSG_SPSUMMON)
 	if #sg==3 then

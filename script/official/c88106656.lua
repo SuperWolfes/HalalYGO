@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()
-	--Check materials on Ritual Summon
+	--Check materials on Locked Summon
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
 	e0:SetCode(EFFECT_MATERIAL_CHECK)
@@ -34,7 +34,7 @@ function s.initial_effect(c)
 	e3:SetCode(EFFECT_EXTRA_ATTACK_MONSTER)
 	e3:SetValue(1)
 	c:RegisterEffect(e3)
-	--Banish 1 "Libromancer" Ritual monster to gain 200 ATK
+	--Banish 1 "Libromancer" Locked monster to gain 200 ATK
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_ATKCHANGE)
@@ -54,16 +54,16 @@ function s.matcheck(e,c)
 end
 function s.matcon(e)
 	local c=e:GetHandler()
-	return c:IsSummonType(SUMMON_TYPE_RITUAL) and c:GetFlagEffect(id)>0
+	return c:IsSummonType(SUMMON_TYPE_LOCKED) and c:GetFlagEffect(id)>0
 end
 function s.atkcfilter(c)
-	return c:IsRitualMonster() and c:IsSetCard(0x17d) and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
+	return c:IsLockedMonster() and c:IsSetCard(0x17d) and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return Duel.IsExistingMatchingCard(s.atkcfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,c) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.atkcfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,c) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.atkcfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,c)
+	local g=Duel.SelectMatchingCard(tp,s.atkcfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,1,c)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)

@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e3:SetCode(EVENT_PHASE+PHASE_END)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetCountLimit(1,id)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e3:SetCondition(s.tecon)
@@ -72,21 +72,21 @@ function s.extraval(chk,summon_type,e,...)
 	end
 end
 function s.tefilter1(c)
-	return c:IsRace(RACE_CYBERSE) and c:IsType(TYPE_LINK) and Duel.IsExistingTarget(s.tefilter2,0,LOCATION_GRAVE,0,1,c)
+	return c:IsRace(RACE_CYBERSE) and c:IsType(TYPE_LINK) and Duel.IsExistingTarget(s.tefilter2,0,LOCATION_REST,0,1,c)
 end
 function s.tefilter2(c)
 	return c:IsType(TYPE_LINK)
 end
 function s.tecon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(s.tefilter1,tp,LOCATION_GRAVE,0,1,nil) and Duel.GetTurnPlayer()==tp
+	return Duel.IsExistingMatchingCard(s.tefilter1,tp,LOCATION_REST,0,1,nil) and Duel.GetTurnPlayer()==tp
 end
 function s.tetg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	if chk==0 then return Duel.IsExistingTarget(s.tefilter1,tp,LOCATION_GRAVE,0,1,nil) and Duel.IsExistingTarget(s.tefilter2,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingTarget(s.tefilter1,tp,LOCATION_REST,0,1,nil) and Duel.IsExistingTarget(s.tefilter2,tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local g1=Duel.SelectTarget(tp,s.tefilter1,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g1=Duel.SelectTarget(tp,s.tefilter1,tp,LOCATION_REST,0,1,1,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local g2=Duel.SelectTarget(tp,s.tefilter2,tp,LOCATION_GRAVE,0,1,1,g1:GetFirst())
+	local g2=Duel.SelectTarget(tp,s.tefilter2,tp,LOCATION_REST,0,1,1,g1:GetFirst())
 	g1:Merge(g2)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g1,2,0,0)
 end

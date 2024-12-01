@@ -120,7 +120,7 @@ if not DivineHierarchy then
 		local tc=te:GetOwner()
 		return (te:IsActiveType(TYPE_MONSTER) and c~=tc
 			and (not tc:GetFlagEffectLabel(513000065) or c:GetFlagEffectLabel(513000065)>tc:GetFlagEffectLabel(513000065)))
-			or (te:IsHasCategory(CATEGORY_TOHAND+CATEGORY_DESTROY+CATEGORY_REMOVE+CATEGORY_TODECK+CATEGORY_RELEASE+CATEGORY_TOGRAVE+CATEGORY_FUSION_SUMMON)
+			or (te:IsHasCategory(CATEGORY_TOHAND+CATEGORY_DESTROY+CATEGORY_REMOVE+CATEGORY_TODECK+CATEGORY_RELEASE+CATEGORY_TOREST+CATEGORY_FUSION_SUMMON)
 			and te:IsActiveType(TYPE_SPELL+TYPE_TRAP))
 	end
 	function DivineHierarchy.control(e,c)
@@ -168,8 +168,8 @@ if not DivineHierarchy then
 			end
 		end
 		if c:IsSummonType(SUMMON_TYPE_SPECIAL) then
-			if c:IsPreviousLocation(LOCATION_GRAVE) then
-				Duel.SendtoGrave(c,REASON_RULE,c:GetPreviousControler())
+			if c:IsPreviousLocation(LOCATION_REST) then
+				Duel.SendtoRest(c,REASON_RULE,c:GetPreviousControler())
 			elseif c:IsPreviousLocation(LOCATION_DECK) then
 				Duel.SendtoDeck(c,c:GetPreviousControler(),2,REASON_RULE)
 			elseif c:IsPreviousLocation(LOCATION_HAND) then

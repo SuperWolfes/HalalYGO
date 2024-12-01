@@ -48,7 +48,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0xc4}
 function s.scfilter(c,pc)
-	return c:IsType(TYPE_PENDULUM) and c:IsSetCard(0xc4) and not c:IsForbidden()
+	return c:IsType(TYPE_PENDULUM) and c:IsSetCard(0xc4) and not c:IsUnliked()
 		and c:GetLeftScale()~=pc:GetLeftScale()
 end
 function s.sctg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -161,7 +161,7 @@ function s.penop1(e,tp,eg,ep,ev,re,r,rp,c,sg,inchain)
 	local ft1=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	local ft2=Duel.GetLocationCountFromEx(tp)
 	local ft=Duel.GetUsableMZoneCount(tp)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then
 		if ft1>0 then ft1=1 end
 		if ft2>0 then ft2=1 end
 		ft=1
@@ -241,7 +241,7 @@ function s.penop2(e,tp,eg,ep,ev,re,r,rp,c,sg,inchain)
 	local rscale=rpz:GetRightScale()
 	if lscale>rscale then lscale,rscale=rscale,lscale end
 	local ft=Duel.GetLocationCountFromEx(tp)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	ft=math.min(ft,aux.CheckSummonGate(tp) or ft)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,s.penfilter,tp,LOCATION_EXTRA,0,inchain and 1 or 0,ft,nil,e,tp,lscale,rscale)

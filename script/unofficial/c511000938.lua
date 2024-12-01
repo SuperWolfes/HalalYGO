@@ -1,5 +1,5 @@
 --銀神の方違え
---Silver Spirit Redirection
+--Silver Guardian Redirection
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

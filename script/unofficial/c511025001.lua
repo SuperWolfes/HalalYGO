@@ -34,9 +34,9 @@ function s.actfilter(c,tp)
 end
 function s.acttg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(1-tp,LOCATION_SZONE)>0
-		and Duel.IsExistingTarget(s.actfilter,tp,0,LOCATION_GRAVE,1,nil,tp) end
+		and Duel.IsExistingTarget(s.actfilter,tp,0,LOCATION_REST,1,nil,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(22628574,1))
-	Duel.SelectTarget(tp,s.actfilter,tp,0,LOCATION_GRAVE,1,1,nil,tp)
+	Duel.SelectTarget(tp,s.actfilter,tp,0,LOCATION_REST,1,1,nil,tp)
 end
 function s.actop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
@@ -56,13 +56,13 @@ function s.actop(e,tp,eg,ep,ev,re,r,rp)
 			if (tpe&TYPE_FIELD)~=0 then
 				loc=LOCATION_FZONE
 				local of=Duel.GetFieldCard(1-tp,LOCATION_SZONE,5)
-				if of and Duel.Destroy(of,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
+				if of and Duel.Destroy(of,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
 			end
 			Duel.MoveToField(tc,tp,1-tp,loc,POS_FACEUP,true)
 			Duel.Hint(HINT_CARD,0,tc:GetCode())
 			tc:CreateEffectRelation(te)
 			if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 then
-				tc:CancelToGrave(false)
+				tc:CancelToRest(false)
 			end
 			if co then co(te,1-tp,eg,ep,ev,re,r,rp,1) end
 			if tg then tg(te,1-tp,eg,ep,ev,re,r,rp,1) end

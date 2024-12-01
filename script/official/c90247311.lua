@@ -35,7 +35,7 @@ end
 function s.cfilter(c)
 	return ((c:IsMonster() and c:IsSetCard(0x2b)) or c:IsSetCard(0x61))
 		and (c:IsFaceup() or not c:IsOnField())
-		and c:IsAbleToGraveAsCost()
+		and c:IsAbleToRestAsCost()
 end
 function s.filter(c,e)
 	return c:IsSpellTrap() and (not e or c:IsCanBeEffectTarget(e))
@@ -72,7 +72,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		e:SetLabel(0)
 		local rg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_ONFIELD+LOCATION_HAND,0,nil)
 		local dg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil,e)
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local sg1=rg:FilterSelect(tp,s.costfilter,1,1,nil,rg,dg)
 		local sc=sg1:GetFirst()
 		local a=0
@@ -84,10 +84,10 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 				if dg:IsContains(tc) then a=a+1 end
 			end
 		end
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local sg2=rg:FilterSelect(tp,s.costfilter2,1,1,sc,a,dg)
 		sg1:Merge(sg2)
-		Duel.SendtoGrave(sg1,REASON_COST)
+		Duel.SendtoRest(sg1,REASON_COST)
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,2,nil)

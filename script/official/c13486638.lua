@@ -1,5 +1,5 @@
 --RR－ファントム・クロー
---Raidraptor's Phantom Knights Claw
+--Raidraptor's Illusion Knights Claw
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -37,7 +37,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	else
 		e:SetLabel(0)
 	end
-	Duel.SendtoGrave(sc,REASON_COST)
+	Duel.SendtoRest(sc,REASON_COST)
 	Duel.RaiseSingleEvent(e:GetHandler(),EVENT_DETACH_MATERIAL,e,0,0,0,0)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)

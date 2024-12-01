@@ -35,7 +35,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetMatchingGroupCount(s.cfilter,tp,LOCATION_MZONE,0,nil)==quest then
 		Duel.Recover(1-tp,1000,REASON_EFFECT)
 	else
-		if c:IsLocation(LOCATION_GRAVE) then
+		if c:IsLocation(LOCATION_REST) then
 			if Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)>0 then
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 				local g=Duel.SelectMatchingCard(tp,Card.IsDestructable,tp,0,LOCATION_MZONE,1,1,nil)

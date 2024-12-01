@@ -52,10 +52,10 @@ function s.cgfilter(c,mc)
 end
 function s.cgtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.cgfilter(chkc,c) end
-	if chk==0 then return Duel.IsExistingTarget(s.cgfilter,tp,LOCATION_GRAVE,0,1,nil,c) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and s.cgfilter(chkc,c) end
+	if chk==0 then return Duel.IsExistingTarget(s.cgfilter,tp,LOCATION_REST,0,1,nil,c) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	Duel.SelectTarget(tp,s.cgfilter,tp,LOCATION_GRAVE,0,1,1,nil,c)
+	Duel.SelectTarget(tp,s.cgfilter,tp,LOCATION_REST,0,1,1,nil,c)
 end
 function s.cgop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()

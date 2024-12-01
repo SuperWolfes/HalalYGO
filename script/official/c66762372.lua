@@ -33,7 +33,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x79,0x7c}
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_GRAVE) and e:GetHandler():IsReason(REASON_BATTLE)
+	return e:GetHandler():IsLocation(LOCATION_REST) and e:GetHandler():IsReason(REASON_BATTLE)
 end
 function s.spfilter(c,e,tp)
 	return c:IsSetCard(0x79) and c:GetLevel()==4 and c:GetCode()~=id and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

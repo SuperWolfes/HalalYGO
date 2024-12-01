@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.costfilter(c)
-	return c:GetOriginalLevel()>0 and c:IsAbleToGraveAsCost() and not c:IsMaximumModeSide()
+	return c:GetOriginalLevel()>0 and c:IsAbleToRestAsCost() and not c:IsMaximumModeSide()
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_MZONE,0,1,nil)
@@ -26,16 +26,16 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	-- requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_MZONE,0,1,99,nil)
 	local lvl=g:GetSum(Card.GetOriginalLevel)
 	g=g:AddMaximumCheck()
-	local ct=Duel.SendtoGrave(g,REASON_COST)
+	local ct=Duel.SendtoRest(g,REASON_COST)
 	if ct>0 and lvl>=10 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		--Effect
 		if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local g2=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+		local g2=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_REST,0,1,1,nil,e,tp)
 		if #g2>0 then
 			Duel.SpecialSummon(g2,0,tp,tp,false,false,POS_FACEUP)
 			local tc=g2:GetFirst()

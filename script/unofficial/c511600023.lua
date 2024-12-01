@@ -39,7 +39,7 @@ function s.initial_effect(c)
 	e4:SetValue(s.aclimit)
 	c:RegisterEffect(e4)
 	local e5=e4:Clone()
-	e5:SetRange(LOCATION_GRAVE)
+	e5:SetRange(LOCATION_REST)
 	c:RegisterEffect(e5)
 end
 s.listed_series={0x101}
@@ -57,15 +57,15 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsCanAddCounter(tp,0x47,1,e:GetHandler())
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp)
-		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,nil) end
-	local ct=Duel.GetMatchingGroupCount(s.cfilter,tp,LOCATION_GRAVE,0,nil)
+		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil) end
+	local ct=Duel.GetMatchingGroupCount(s.cfilter,tp,LOCATION_REST,0,nil)
 	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,ct,0,0x47)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 	Duel.SetOperationInfo(0,CATEGORY_EQUIP,e:GetHandler(),1,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local ct=Duel.GetMatchingGroupCount(s.cfilter,tp,LOCATION_GRAVE,0,nil)
+	local ct=Duel.GetMatchingGroupCount(s.cfilter,tp,LOCATION_REST,0,nil)
 	if c:IsRelateToEffect(e) and ct>0 and c:IsCanAddCounter(0x47,ct) then
 		c:AddCounter(0x47,ct)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
@@ -89,7 +89,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			end
 		end
 		if equip and not c:IsStatus(STATUS_LEAVE_CONFIRMED) then
-			c:CancelToGrave(false)
+			c:CancelToRest(false)
 		end
 	end
 end

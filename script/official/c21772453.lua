@@ -71,7 +71,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			end
 		else
 			Duel.BreakEffect()
-			Duel.SendtoGrave(tc,REASON_EFFECT)
+			Duel.SendtoRest(tc,REASON_EFFECT)
 		end
 		Duel.ShuffleHand(tp)
 	end

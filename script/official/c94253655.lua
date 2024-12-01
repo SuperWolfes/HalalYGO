@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	c:EnableReviveLimit()
 	--Synchro summon procedure
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
-	--Your other fiend monsters gain 500 ATK
+	--Your other tainted monsters gain 500 ATK
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_UPDATE_ATTACK)
@@ -41,7 +41,7 @@ end
 s.listed_series={0x13f}
 
 function s.atktg(e,c)
-	return c:IsRace(RACE_FIEND) and c~=e:GetHandler()
+	return c:IsRace(RACE_TAINTED) and c~=e:GetHandler()
 end
 function s.condition1(e,tp,eg,ep,ev,re,r,rp)
 	return not e:GetHandler():GetEquipGroup():IsExists(Card.IsSetCard,1,nil,0x13f)

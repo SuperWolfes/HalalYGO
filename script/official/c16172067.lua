@@ -1,5 +1,5 @@
 --レッド・デーモンズ・ドラゴン・タイラント
---Tyrant Red Dragon Archfiend
+--Tyrant Red Dragon Archtainted
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()

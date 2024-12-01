@@ -27,7 +27,7 @@ function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk)
 		Duel.SetOperationInfo(0,CATEGORY_DESTROY,eg,1,0,0)
 	end
 	Duel.SetPossibleOperationInfo(0,CATEGORY_REMOVE,nil,1,tp,LOCATION_HAND)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,rc,1,tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,rc,1,tp,LOCATION_REST)
 end
 function s.cfilter(c)
 	return c:IsMonster() and c:IsAbleToRemove()
@@ -36,7 +36,7 @@ function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.NegateActivation(ev) and re:GetHandler():IsRelateToEffect(re) and Duel.Destroy(eg,REASON_EFFECT)>0 then
 		local oc=Duel.GetOperatedGroup():GetFirst()
 		local cg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_HAND,0,nil)
-		if oc:IsLocation(LOCATION_GRAVE) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
+		if oc:IsLocation(LOCATION_REST) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 			and #cg>0 and oc:IsCanBeSpecialSummoned(e,0,tp,false,false) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 			local rg=cg:Select(tp,1,1,nil)

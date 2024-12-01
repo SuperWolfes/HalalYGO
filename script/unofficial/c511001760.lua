@@ -34,8 +34,8 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) then
-		if Duel.SendtoGrave(tc:GetOverlayGroup(),REASON_EFFECT)~=0 then
-			local ct=Duel.GetOperatedGroup():FilterCount(Card.IsLocation,nil,LOCATION_GRAVE)
+		if Duel.SendtoRest(tc:GetOverlayGroup(),REASON_EFFECT)~=0 then
+			local ct=Duel.GetOperatedGroup():FilterCount(Card.IsLocation,nil,LOCATION_REST)
 			Duel.Damage(1-tp,ct*500,REASON_EFFECT)
 		end
 	end

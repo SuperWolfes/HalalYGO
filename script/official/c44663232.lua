@@ -1,5 +1,5 @@
 --異怪の妖精 エルフォビア
---Ghost Fairy Elfobia
+--Miss Wanderer Elfobia
 
 local s,id=GetID()
 function s.initial_effect(c)

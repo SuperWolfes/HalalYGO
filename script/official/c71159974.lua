@@ -93,10 +93,10 @@ function s.desfilter(c,att)
 	return c:IsAttribute(att) and c:IsMonster() and c:IsFaceup()
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.attfilter(chkc,tp) end
-	if chk==0 then return Duel.IsExistingTarget(s.attfilter,tp,LOCATION_GRAVE,0,1,nil,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.attfilter(chkc,tp) end
+	if chk==0 then return Duel.IsExistingTarget(s.attfilter,tp,LOCATION_REST,0,1,nil,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local tc=Duel.SelectTarget(tp,s.attfilter,tp,LOCATION_GRAVE,0,1,1,nil,tp):GetFirst()
+	local tc=Duel.SelectTarget(tp,s.attfilter,tp,LOCATION_REST,0,1,1,nil,tp):GetFirst()
 	local g=Duel.GetMatchingGroup(s.desfilter,tp,0,LOCATION_MZONE,nil,tc:GetAttribute())
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,#g,1-tp,LOCATION_MZONE)
 end
@@ -116,7 +116,7 @@ end
 function s.drcon(e,tp,eg,ep,ev,re,r,rp)
 	local att,mat=0,e:GetHandler():GetMaterial()
 	if e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION) and mat:GetClassCount(Card.GetAttribute)>1 then
-		for tc in Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_GRAVE,0,nil):Iter() do
+		for tc in Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_REST,0,nil):Iter() do
 			att=att|tc:GetAttribute()
 		end
 		return att>0 and eg:IsExists(s.drfilter,1,nil,tp,att)

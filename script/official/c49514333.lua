@@ -39,7 +39,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SpecialSummonComplete()
 end
 function s.repfilter(c,tp)
-	return c:IsLocation(LOCATION_MZONE) and c:IsFaceup() and c:GetDestination()==LOCATION_GRAVE and c:IsReason(REASON_DESTROY)
+	return c:IsLocation(LOCATION_MZONE) and c:IsFaceup() and c:GetDestination()==LOCATION_REST and c:IsReason(REASON_DESTROY)
 		and c:GetReasonPlayer()~=tp and c:GetOwner()==tp and (c:GetOriginalType()&TYPE_TRAP)~=0 and c:IsCanTurnSet()
 end
 function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)

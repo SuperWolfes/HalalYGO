@@ -32,7 +32,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetLabelObject()
 	if not (Duel.NegateAttack() and tc:IsRelateToBattle()) then return end
-	if tc:IsControler(tp) and Duel.SendtoGrave(tc,REASON_EFFECT)>0 and tc:IsLocation(LOCATION_GRAVE) then
+	if tc:IsControler(tp) and Duel.SendtoRest(tc,REASON_EFFECT)>0 and tc:IsLocation(LOCATION_REST) then
 		local bc=tc:GetBattleTarget()
 		if not (bc:IsRelateToBattle() and bc:IsFaceup() and bc:IsControler(1-tp)) then return end
 		local pos=POS_FACEUP

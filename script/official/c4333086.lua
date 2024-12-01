@@ -34,7 +34,7 @@ function s.spcheck(sg,tp,exg,dg)
 	return #dg-a>=2
 end
 function s.cfilter(c)
-	return c:IsRace(RACE_ZOMBIE)
+	return c:IsRace(RACE_CONTAMINED)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() end

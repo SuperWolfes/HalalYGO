@@ -22,13 +22,13 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.filter(c)
-	return c:IsFaceup() and (c:IsAttribute(ATTRIBUTE_DIVINE) or c:IsRace(RACE_DIVINE) or c:IsRace(RACE_CREATORGOD) 
-		or (c:GetOriginalRace()&RACE_DIVINE)==RACE_DIVINE or (c:GetOriginalRace()&RACE_CREATORGOD)==RACE_CREATORGOD 
+	return c:IsFaceup() and (c:IsAttribute(ATTRIBUTE_DIVINE) or c:IsRace(RACE_DIVINE) or c:IsRace(RACE_MEGAMONSTER) 
+		or (c:GetOriginalRace()&RACE_DIVINE)==RACE_DIVINE or (c:GetOriginalRace()&RACE_MEGAMONSTER)==RACE_MEGAMONSTER 
 		or (c:GetOriginalAttribute()&ATTRIBUTE_DIVINE)==ATTRIBUTE_DIVINE) and c:IsAbleToRemove()
 end
 function s.filter2(c)
-	return c:IsFacedown() and (c:IsAttribute(ATTRIBUTE_DIVINE) or c:IsRace(RACE_DIVINE) or c:IsRace(RACE_CREATORGOD) 
-		or (c:GetOriginalRace()&RACE_DIVINE)==RACE_DIVINE or (c:GetOriginalRace()&RACE_CREATORGOD)==RACE_CREATORGOD 
+	return c:IsFacedown() and (c:IsAttribute(ATTRIBUTE_DIVINE) or c:IsRace(RACE_DIVINE) or c:IsRace(RACE_MEGAMONSTER) 
+		or (c:GetOriginalRace()&RACE_DIVINE)==RACE_DIVINE or (c:GetOriginalRace()&RACE_MEGAMONSTER)==RACE_MEGAMONSTER 
 		or (c:GetOriginalAttribute()&ATTRIBUTE_DIVINE)==ATTRIBUTE_DIVINE) and c:IsAbleToRemove()
 end
 function s.banop(e,tp,eg,ep,ev,re,r,rp)

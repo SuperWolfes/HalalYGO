@@ -45,7 +45,7 @@ end
 s.listed_series={0x165}
 s.listed_names={CARD_URSARCTIC_BIG_DIPPER}
 function s.sprfilter(c)
-	return c:IsFaceup() and c:IsAbleToGraveAsCost() and c:HasLevel()
+	return c:IsFaceup() and c:IsAbleToRestAsCost() and c:HasLevel()
 end
 function s.sprfilter1(c,tp,g,sc)
 	local lv=c:GetLevel()
@@ -66,11 +66,11 @@ function s.sprtg(e,tp,eg,ep,ev,re,r,rp,c)
 	local c=e:GetHandler()
 	local g=Duel.GetMatchingGroup(s.sprfilter,tp,LOCATION_MZONE,0,nil)
 	local g1=g:Filter(s.sprfilter1,nil,tp,g,c)
-	local mg1=aux.SelectUnselectGroup(g1,e,tp,1,1,nil,1,tp,HINTMSG_TOGRAVE,nil,nil,true)
+	local mg1=aux.SelectUnselectGroup(g1,e,tp,1,1,nil,1,tp,HINTMSG_TOREST,nil,nil,true)
 	if #mg1>0 then
 		local mc=mg1:GetFirst()
 		local g2=g:Filter(s.sprfilter2,mc,tp,mc,c,mc:GetLevel())
-		local mg2=aux.SelectUnselectGroup(g2,e,tp,1,1,nil,1,tp,HINTMSG_TOGRAVE,nil,nil,true)
+		local mg2=aux.SelectUnselectGroup(g2,e,tp,1,1,nil,1,tp,HINTMSG_TOREST,nil,nil,true)
 		mg1:Merge(mg2)
 	end
 	if #mg1==2 then
@@ -83,7 +83,7 @@ end
 function s.sprop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.fieldfilter(c,tp)
 	return c:IsCode(CARD_URSARCTIC_BIG_DIPPER) and c:GetActivateEffect() and c:GetActivateEffect():IsActivatable(tp,true,true)
@@ -103,7 +103,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.extracon(base,c,e,tp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,1,c,ft,base,tp)
+	return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,1,c,ft,base,tp)
 end
 function s.filter(c,ft,e,tp)
 	return (c:IsSetCard(0x165) and c:IsMonster()) and (c:IsAbleToHand() or (ft>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)))
@@ -111,16 +111,16 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-		return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,1,nil,ft,e,tp)
+		return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,1,nil,ft,e,tp)
 	end
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,nil,1,tp,0)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,nil,1,tp,0)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	Duel.Hint(HINT_SELECTMSG,tp,0)
-	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil,ft,e,tp)
+	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_REST,0,1,1,nil,ft,e,tp)
 	if #g>0 then
 		local th=g:GetFirst():IsAbleToHand()
 		local sp=ft>0 and g:GetFirst():IsCanBeSpecialSummoned(e,0,tp,false,false)

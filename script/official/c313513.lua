@@ -25,7 +25,7 @@ end
 s.listed_series={0x7}
 s.listed_names={83104731}
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x7) and c:IsAbleToGraveAsCost()
+	return c:IsFaceup() and c:IsSetCard(0x7) and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_ONFIELD,0,nil)
@@ -34,8 +34,8 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 		return Duel.GetLocationCount(tp,LOCATION_MZONE)>-3 and #tg>=3 and aux.SelectUnselectGroup(tg,e,tp,3,3,aux.ChkfMMZ(1),0)
 	end
 	local c=e:GetHandler()
-	local g=aux.SelectUnselectGroup(tg,e,tp,3,3,aux.ChkfMMZ(1),1,tp,HINTMSG_TOGRAVE)
-	Duel.SendtoGrave(g,REASON_COST)
+	local g=aux.SelectUnselectGroup(tg,e,tp,3,3,aux.ChkfMMZ(1),1,tp,HINTMSG_TOREST)
+	Duel.SendtoRest(g,REASON_COST)
 	if not e:IsHasType(EFFECT_TYPE_ACTIVATE) then return end
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -112,7 +112,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if ft<=0 then return end
 	if ft>2 then ft=2 end
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_HAND+LOCATION_DECK,0,nil,e,tp)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) or g:FilterCount(Card.IsLocation,nil,LOCATION_HAND)<=0 
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) or g:FilterCount(Card.IsLocation,nil,LOCATION_HAND)<=0 
 		or g:FilterCount(Card.IsLocation,nil,LOCATION_DECK)<=0 then ft=1 end
 	local sg=aux.SelectUnselectGroup(g,e,tp,ft,ft,s.spcheck,1,tp,HINTMSG_SPSUMMON)
 	if Duel.SpecialSummon(sg,0,tp,tp,true,false,POS_FACEUP)>0 then

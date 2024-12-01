@@ -32,7 +32,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 s.listed_series={0x107}
-s.roll_dice=true
+s.roll_suffice=true
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetAttacker():IsControler(1-tp) and Duel.GetAttackTarget()==nil
 end
@@ -71,7 +71,7 @@ function s.lvlop(e,tp,eg,ep,ev,re,r,rp)
 	local d1=0
 	local d2=0
 	while d1==d2 do
-		d1,d2=Duel.TossDice(tp,1,1)
+		d1,d2=Duel.TossSuffice(tp,1,1)
 	end
 	if d1>d2 then
 		local e1=Effect.CreateEffect(e:GetHandler())

@@ -49,9 +49,9 @@ function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ShuffleHand(p)
 	Duel.BreakEffect()
 	local cg=Duel.GetFieldGroup(p,LOCATION_HAND,0)
-	local og=aux.SelectUnselectGroup(cg,e,tp,2,2,s.rescon,1,tp,HINTMSG_TOGRAVE,s.rescon)
+	local og=aux.SelectUnselectGroup(cg,e,tp,2,2,s.rescon,1,tp,HINTMSG_TOREST,s.rescon)
 	if og and #og>=2 then
-		local ct=Duel.SendtoGrave(og,REASON_EFFECT)
+		local ct=Duel.SendtoRest(og,REASON_EFFECT)
 	else
 		Duel.ConfirmCards(1-p,cg)
 		Duel.SendtoDeck(cg,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
@@ -62,9 +62,9 @@ function s.costfilter(c)
 	return c:IsAttribute(ATTRIBUTE_FIRE) and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
 end
 function s.poscost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,1,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.postg(e,tp,eg,ep,ev,re,r,rp,chk)

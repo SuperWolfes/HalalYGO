@@ -30,7 +30,7 @@ function s.initial_effect(c)
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetProperty(EFFECT_FLAG_DELAY)
-	e3:SetCode(EVENT_TO_GRAVE)
+	e3:SetCode(EVENT_TO_REST)
 	e3:SetCondition(s.spcon2)
 	e3:SetTarget(s.sptg2)
 	e3:SetOperation(s.spop2)
@@ -41,7 +41,7 @@ function s.atkfilter(c)
 	return c:IsMonster() and c:IsSetCard(0xfe)
 end
 function s.atkval(e,c)
-	return Duel.GetMatchingGroup(s.atkfilter,c:GetControler(),LOCATION_GRAVE,0,nil):GetClassCount(Card.GetCode)*300
+	return Duel.GetMatchingGroup(s.atkfilter,c:GetControler(),LOCATION_REST,0,nil):GetClassCount(Card.GetCode)*300
 end
 function s.cfilter(c,g,tp,zone)
 	return c:IsSetCard(0xfd) and g:IsContains(c)
@@ -60,11 +60,11 @@ function s.spfilter1(c,e,tp)
 end
 function s.sptg1(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local cc=e:GetLabelObject()
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp)
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp)
 		and chkc~=cc and s.spfilter1(chkc,e,tp) end
-	if chk==0 then return Duel.IsExistingTarget(s.spfilter1,tp,LOCATION_GRAVE,0,1,cc,e,tp) end
+	if chk==0 then return Duel.IsExistingTarget(s.spfilter1,tp,LOCATION_REST,0,1,cc,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.spfilter1,tp,LOCATION_GRAVE,0,1,1,cc,e,tp)
+	local g=Duel.SelectTarget(tp,s.spfilter1,tp,LOCATION_REST,0,1,1,cc,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 end
 function s.spop1(e,tp,eg,ep,ev,re,r,rp)

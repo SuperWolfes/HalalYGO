@@ -2203,7 +2203,7 @@ Duel.LoadScript("proc_workaround.lua")
 Duel.LoadScript("proc_normal.lua")
 Duel.LoadScript("proc_skill.lua")
 Duel.LoadScript("proc_maximum.lua")
-Duel.LoadScript("proc_dual.lua") ---
+Duel.LoadScript("proc_Guardian.lua") ---
 Duel.LoadScript("proc_guardian.lua") ---
 Duel.LoadScript("deprecated_functions.lua")
 pcall(dofile,"init.lua")

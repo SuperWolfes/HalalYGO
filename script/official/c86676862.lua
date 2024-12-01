@@ -1,5 +1,5 @@
 --E－HERO マリシャス・デビル
---Evil HERO Malicious Fiend
+--Evil HERO Malicious Tainted
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()
@@ -51,7 +51,7 @@ function s.lizcon(e,tp,eg,ep,ev,re,r,rp)
 	return not Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(),EFFECT_SUPREME_CASTLE)
 end
 function s.ffilter(c,fc,sumtype,tp)
-	return c:IsRace(RACE_FIEND,fc,sumtype,tp) and c:GetLevel()>=6
+	return c:IsRace(RACE_TAINTED,fc,sumtype,tp) and c:GetLevel()>=6
 end
 function s.poscon(e)
 	return Duel.GetTurnPlayer()==1-e:GetHandlerPlayer() and Duel.IsBattlePhase()

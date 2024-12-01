@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--activate
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_TOGRAVE+CATEGORY_SPECIAL_SUMMON)
+	e1:SetCategory(CATEGORY_TOREST+CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetCondition(s.condition)
@@ -29,13 +29,13 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ct=#mg
 	local ft=Duel.GetMZoneCount(tp,mg)
 	local sg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_DECK,0,nil,e,tp)
-	if chk==0 then return ct>0 and ft>=ct and mg:FilterCount(Card.IsAbleToGrave,nil)==ct and #sg>=ct end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,mg,ct,0,0)
+	if chk==0 then return ct>0 and ft>=ct and mg:FilterCount(Card.IsAbleToRest,nil)==ct and #sg>=ct end
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,mg,ct,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,sg,ct,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local mg=Duel.GetFieldGroup(tp,LOCATION_MZONE,0)
-	if Duel.SendtoGrave(mg,REASON_EFFECT)>0 then
+	if Duel.SendtoRest(mg,REASON_EFFECT)>0 then
 		local ct=#Duel.GetOperatedGroup()
 		local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 		local sg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_DECK,0,nil,e,tp)

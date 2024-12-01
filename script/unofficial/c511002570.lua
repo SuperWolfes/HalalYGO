@@ -28,7 +28,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if tc then
 		Duel.ConfirmCards(1-tp,tc)
 		if tc:IsMonster() then
-			if Duel.NegateAttack() and Duel.SendtoGrave(tc,REASON_EFFECT)>0 then
+			if Duel.NegateAttack() and Duel.SendtoRest(tc,REASON_EFFECT)>0 then
 				Duel.BreakEffect()
 				Duel.Draw(tp,1,REASON_EFFECT)
 			end

@@ -1,4 +1,4 @@
---The Phantom Knights of Cursed Javelin
+--The Illusion Knights of Cursed Javelin
 local s,id=GetID()
 function s.initial_effect(c)
 	Xyz.AddProcedure(c,nil,2,2)

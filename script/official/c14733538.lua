@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c,e,tp,b1,setcode)
-	return c:IsSetCard(setcode) and c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
+	return c:IsSetCard(setcode) and c:IsType(TYPE_PENDULUM) and not c:IsUnliked()
 		and (b1 or c:IsCanBeSpecialSummoned(e,0,tp,false,false))
 end
 function s.zones(e,tp,eg,ep,ev,re,r,rp)

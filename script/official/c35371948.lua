@@ -87,7 +87,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetCondition(s.rstcon)
 		e2:SetOperation(s.rstop)
 		Duel.RegisterEffect(e2,tp)
-		--send to grave
+		--send to rest
 		local e3=Effect.CreateEffect(c)
 		e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		e3:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
@@ -143,7 +143,7 @@ function s.agcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.agop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetLabelObject()
-	Duel.SendtoGrave(tc,REASON_RULE)
+	Duel.SendtoRest(tc,REASON_RULE)
 end
 function s.rstop2(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()

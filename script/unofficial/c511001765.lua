@@ -16,17 +16,17 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
 	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil) 
-		and Duel.IsExistingTarget(Card.IsMonster,tp,LOCATION_GRAVE,0,2,nil) end
+		and Duel.IsExistingTarget(Card.IsMonster,tp,LOCATION_REST,0,2,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 	Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)
-	Duel.SelectTarget(tp,Card.IsMonster,tp,LOCATION_GRAVE,0,2,2,nil)
+	Duel.SelectTarget(tp,Card.IsMonster,tp,LOCATION_REST,0,2,2,nil)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.GetTargetCards(e)
 	if #tg<3 then return end
 	local tc=tg:Filter(Card.IsLocation,nil,LOCATION_MZONE):GetFirst()
-	local mat=tg:Filter(Card.IsLocation,nil,LOCATION_GRAVE)
+	local mat=tg:Filter(Card.IsLocation,nil,LOCATION_REST)
 	if tc and tc:IsRelateToEffect(e) and tc:IsType(TYPE_XYZ) and tc:IsFaceup() and not tc:IsImmuneToEffect(e) 
 		and #mat==2 then
 		Duel.Overlay(tc,mat)

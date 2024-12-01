@@ -1,5 +1,5 @@
 --テセア聖霊器
---Sacred Spirit Vessel Thesea
+--Sacred Guardian Vessel Thesea
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)

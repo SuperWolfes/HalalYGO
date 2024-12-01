@@ -1,5 +1,5 @@
 --ディメンジョン・ダイス
---Dimension Dice
+--Dimension Suffice
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

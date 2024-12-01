@@ -26,19 +26,19 @@ function s.filter(c,e,tp,eg,ep,ev,re,r,rp,tid)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local tid=Duel.GetTurnCount()
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(1-tp) and s.filter(chkc,e,tp,eg,ep,ev,re,r,rp,tid) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(1-tp) and s.filter(chkc,e,tp,eg,ep,ev,re,r,rp,tid) end
 	if chk==0 then
 		local b=e:GetHandler():IsLocation(LOCATION_HAND)
 		local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
 		if (b and ft>1) or (not b and ft>0) then
-			return Duel.IsExistingTarget(s.filter,tp,0,LOCATION_GRAVE,1,e:GetHandler(),e,tp,eg,ep,ev,re,r,rp,tid)
+			return Duel.IsExistingTarget(s.filter,tp,0,LOCATION_REST,1,e:GetHandler(),e,tp,eg,ep,ev,re,r,rp,tid)
 		else
 			return false
 		end
 	end
 	local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	Duel.SelectTarget(tp,s.filter,tp,0,LOCATION_GRAVE,1,ft,nil,e,tp,eg,ep,ev,re,r,rp,tid)
+	Duel.SelectTarget(tp,s.filter,tp,0,LOCATION_REST,1,ft,nil,e,tp,eg,ep,ev,re,r,rp,tid)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tgg=Duel.GetTargetCards(e)
@@ -58,13 +58,13 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			local of=Duel.GetFieldCard(1-tp,LOCATION_SZONE,5)
 			if of then Duel.Destroy(of,REASON_RULE) end
 			of=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
-			if of and Duel.Destroy(of,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
+			if of and Duel.Destroy(of,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
 		end
 		Duel.MoveToField(tc,tp,tp,loc,POS_FACEUP,true)
 		Duel.Hint(HINT_CARD,0,tc:GetCode())
 		tc:CreateEffectRelation(te)
 		if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 then
-			tc:CancelToGrave(false)
+			tc:CancelToRest(false)
 		end
 		if co then co(te,tp,eg,ep,ev,re,r,rp,1) end
 		if tg then tg(te,tp,eg,ep,ev,re,r,rp,1) end

@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	c:SetUniqueOnField(1,0,id)
 	--Kink summon procedure
 	c:EnableReviveLimit()
-	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_ZOMBIE),2)
+	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_CONTAMINED),2)
 	--disable
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
@@ -43,7 +43,7 @@ function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.NegateEffect(ev)
 end
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
-	return eg:IsExists(Card.IsPreviousLocation,1,nil,LOCATION_GRAVE) and not eg:IsContains(e:GetHandler())
+	return eg:IsExists(Card.IsPreviousLocation,1,nil,LOCATION_REST) and not eg:IsContains(e:GetHandler())
 end
 function s.filter(c)
 	return c:IsFaceup() and c:GetAttack()>0
@@ -82,5 +82,5 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.atkcon2(e,tp,eg,ep,ev,re,r,rp,chk)
 	local loc=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_LOCATION)
-	return loc==LOCATION_GRAVE and re:IsActiveType(TYPE_MONSTER)
+	return loc==LOCATION_REST and re:IsActiveType(TYPE_MONSTER)
 end

@@ -1,4 +1,4 @@
---The Legendary Gambler
+--The Legendary Chancer
 --scripted by: UnknownGuest
 local s,id=GetID()
 function s.initial_effect(c)
@@ -8,21 +8,21 @@ function s.initial_effect(c)
 	--e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetCode(EVENT_CHAINING)
 	c:RegisterEffect(e1)
-	--dice
+	--suffice
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_NEGATE)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e2:SetCode(EVENT_TOSS_DICE_NEGATE)
+	e2:SetCode(EVENT_TOSS_SUFFICE_NEGATE)
 	e2:SetRange(LOCATION_SZONE)
 	--e2:SetCondition(s.condition)
 	--e2:SetTarget(s.target)
 	e2:SetOperation(s.activate)
 	c:RegisterEffect(e2)
 end
-s.roll_dice=true
+s.roll_suffice=true
 --[[function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.IsChainNegatable(ev) then return false end
-	local ex=Duel.GetOperationInfo(ev,CATEGORY_DICE)
+	local ex=Duel.GetOperationInfo(ev,CATEGORY_SUFFICE)
 	return ex and re:GetHandler():GetControler(1-tp)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -32,20 +32,20 @@ end]]--
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		Duel.Hint(HINT_CARD,0,id)
-		local cd=Duel.GetDiceResult()
+		local cd=Duel.GetSufficeResult()
 		if cd~=0 then
-			local dc=Duel.TossDice(tp,1)
-			--local cd=Duel.TossDice(1-tp,1)
+			local dc=Duel.TossSuffice(tp,1)
+			--local cd=Duel.TossSuffice(1-tp,1)
 			if dc>=cd then
 				Duel.NegateEffect(ev)
 			end
 		end
 	end
 end
---[[function c39454112.diceop(e,tp,eg,ep,ev,re,r,rp)
+--[[function c39454112.sufficeop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.SelectYesNo(tp,aux.Stringid(39454112,0)) then
 		Duel.Hint(HINT_CARD,0,39454112)
-		local dc={Duel.GetDiceResult()}
+		local dc={Duel.GetSufficeResult()}
 		local ac=1
 		if ev>1 then
 			local t={}
@@ -55,6 +55,6 @@ end
 		end
 		if dc[ac]==1 or dc[ac]==3 or dc[ac]==5 then dc[ac]=6
 		else dc[ac]=1 end
-		Duel.SetDiceResult(table.unpack(dc))
+		Duel.SetSufficeResult(table.unpack(dc))
 	end
 end]]--

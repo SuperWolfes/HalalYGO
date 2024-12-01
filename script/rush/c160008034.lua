@@ -30,13 +30,13 @@ function s.initial_effect(c)
 end
 --cost
 function s.tdfilter(c,tp)
-	return c:IsCode(160201028) and c:IsAbleToDeckOrExtraAsCost() and Duel.IsExistingMatchingCard(s.tdfilter2,tp,LOCATION_GRAVE,0,1,c) 
+	return c:IsCode(160201028) and c:IsAbleToDeckOrExtraAsCost() and Duel.IsExistingMatchingCard(s.tdfilter2,tp,LOCATION_REST,0,1,c) 
 end
 function s.tdfilter2(c)
 	return c:IsCode(160002023) and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_GRAVE,0,1,nil,tp) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST,0,1,nil,tp) end
 end
 function s.ctfilter(c)
 	return c:IsCode(160201028,160002023) and c:IsAbleToDeckOrExtraAsCost()
@@ -53,7 +53,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	local g=Duel.GetMatchingGroup(s.ctfilter,tp,LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.ctfilter,tp,LOCATION_REST,0,nil)
 	local sg=aux.SelectUnselectGroup(g,e,tp,2,2,s.ctcheck,1,tp,HINTMSG_TODECK)
 	Duel.HintSelection(sg)
 	Duel.SendtoDeck(sg,nil,SEQ_DECKSHUFFLE,REASON_COST)
@@ -70,7 +70,7 @@ if chk==0 then return Duel.IsPlayerCanDraw(tp,3) end
 end
 function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	local g=Duel.GetMatchingGroup(s.ctfilter,tp,LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.ctfilter,tp,LOCATION_REST,0,nil)
 	local sg=aux.SelectUnselectGroup(g,e,tp,2,2,s.ctcheck,1,tp,HINTMSG_TODECK)
 	Duel.HintSelection(sg)
 	Duel.SendtoDeck(sg,nil,SEQ_DECKSHUFFLE,REASON_COST)
@@ -78,8 +78,8 @@ function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ShuffleDeck(tp)
 	--Effect
 	if Duel.Draw(tp,3,REASON_EFFECT)>0 then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-		local dg=Duel.SelectMatchingCard(tp,Card.IsAbleToGrave,tp,LOCATION_HAND,0,2,2,nil)
-		Duel.SendtoGrave(dg,REASON_EFFECT)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+		local dg=Duel.SelectMatchingCard(tp,Card.IsAbleToRest,tp,LOCATION_HAND,0,2,2,nil)
+		Duel.SendtoRest(dg,REASON_EFFECT)
 	end
 end

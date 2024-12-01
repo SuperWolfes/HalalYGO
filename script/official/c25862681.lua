@@ -1,5 +1,5 @@
 --エンシェント・フェアリー・ドラゴン
---Ancient Fairy Dragon
+--Ancient Wanderer Dragon
 local s,id=GetID()
 function s.initial_effect(c)
 	--Synchro summon

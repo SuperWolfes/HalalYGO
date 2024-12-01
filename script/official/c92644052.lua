@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Pendulum Summon
 	Pendulum.AddProcedure(c)
-	--Action Spell! "Miracle"!
+	--Action Spell! "Pulse"!
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_REMOVE)
@@ -147,7 +147,7 @@ function s.atkop2(e,tp,eg,ep,ev,re,r,rp)
 			and tc:IsDiscardable(REASON_EFFECT) then
 			Duel.ConfirmCards(1-p,tc)
 			Duel.BreakEffect()
-			if Duel.SendtoGrave(tc,REASON_EFFECT+REASON_DISCARD)==0 then return end
+			if Duel.SendtoRest(tc,REASON_EFFECT+REASON_DISCARD)==0 then return end
 			Duel.NegateAttack()
 		end
 	end

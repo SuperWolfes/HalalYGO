@@ -1,5 +1,5 @@
 --背護衛
---Guard Ghost
+--Guard Miss
 --Scripted by Naim
 
 local s,id=GetID()
@@ -35,7 +35,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.indcond(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonLocation(LOCATION_GRAVE)
+	return e:GetHandler():IsSummonLocation(LOCATION_REST)
 end
 function s.indtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) end

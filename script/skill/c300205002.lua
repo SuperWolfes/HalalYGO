@@ -13,7 +13,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,tp,id)
 	Duel.DiscardHand(tp,s.filter,1,1,REASON_COST+REASON_DISCARD)
 	local g1=Duel.IsPlayerCanDraw(tp,2)
-	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST,0,nil)
 	local ct=g:GetClassCount(Card.GetCode)
 	local g2=(Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) and ct>3)
 	local opt=0
@@ -36,10 +36,10 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SKILL_FLIP,tp,id|(2<<32))
 end
 function s.filter(c)
-	return c:IsType(TYPE_NORMAL) and c:IsRace(RACE_FIEND) and c:IsDiscardable()
+	return c:IsType(TYPE_NORMAL) and c:IsRace(RACE_TAINTED) and c:IsDiscardable()
 end
 function s.cfilter(c)
-	return c:IsType(TYPE_NORMAL) and c:IsMonster() and c:IsRace(RACE_FIEND)
+	return c:IsType(TYPE_NORMAL) and c:IsMonster() and c:IsRace(RACE_TAINTED)
 end
 function s.thfilter(c)
 	return c:IsMonster() and c:IsAbleToHand()

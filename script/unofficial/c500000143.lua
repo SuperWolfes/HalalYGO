@@ -32,7 +32,7 @@ function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.NegateActivation(ev)
 	local rc=re:GetHandler()
 	if rc:IsRelateToEffect(re) and rc:IsCanTurnSet() then
-		rc:CancelToGrave()
+		rc:CancelToRest()
 		Duel.ChangePosition(rc,POS_FACEDOWN)
 		rc:SetStatus(STATUS_ACTIVATE_DISABLED,false)
 		Duel.RaiseEvent(rc,EVENT_SSET,e,REASON_EFFECT,tp,tp,0)

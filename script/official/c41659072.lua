@@ -35,7 +35,7 @@ function s.syncheck(g,sc,tp)
 	return g:CheckSameProperty(Card.GetAttribute,sc,SUMMON_TYPE_SYNCHRO,tp)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(Card.IsType,tp,LOCATION_GRAVE,0,nil,TYPE_TUNER)
+	local g=Duel.GetMatchingGroup(Card.IsType,tp,LOCATION_REST,0,nil,TYPE_TUNER)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_SYNCHRO) and g:GetClassCount(Card.GetCode)>3
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)

@@ -1,5 +1,5 @@
 --双天拳 鎧阿
---Dual Avatar Fists - Armored Ah-Gyo
+--Guardian Avatar Fists - Armored Ah-Gyo
 --Scripted by edo9300
 
 local s,id=GetID()

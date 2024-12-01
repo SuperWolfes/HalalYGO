@@ -18,7 +18,7 @@ function s.thfilter(c,tp)
 		and Duel.IsExistingMatchingCard(s.plfilter,tp,LOCATION_DECK,0,1,nil,c:GetCode())
 end
 function s.plfilter(c,code)
-	return c:IsSetCard(0x1034) and c:IsMonster() and not c:IsCode(code) and not c:IsForbidden()
+	return c:IsSetCard(0x1034) and c:IsMonster() and not c:IsCode(code) and not c:IsUnliked()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ct=Duel.GetLocationCount(tp,LOCATION_SZONE)

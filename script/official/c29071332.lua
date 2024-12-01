@@ -29,7 +29,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not c:IsRelateToEffect(e) or c:IsFacedown() then return end
 	if not tc:IsRelateToEffect(e) or tc:IsFacedown() then
-		Duel.SendtoGrave(c,REASON_EFFECT)
+		Duel.SendtoRest(c,REASON_EFFECT)
 		return
 	end
 	if not Duel.Equip(tp,c,tc,false) then return end
@@ -90,7 +90,7 @@ end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	local eqc=e:GetHandler():GetEquipTarget()
 	local des=eg:GetFirst()
-	return des:IsLocation(LOCATION_GRAVE) and des:GetReasonCard()==eqc and des:IsMonster()
+	return des:IsLocation(LOCATION_REST) and des:GetReasonCard()==eqc and des:IsMonster()
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

@@ -42,14 +42,14 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.eqcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:GetEquipTarget() and c:IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(c,REASON_COST)
+	if chk==0 then return c:GetEquipTarget() and c:IsAbleToRestAsCost() end
+	Duel.SendtoRest(c,REASON_COST)
 end
 function s.tgfilter(c,tp)
 	return c:IsFaceup() and Duel.IsExistingMatchingCard(s.eqfilter,tp,LOCATION_DECK,0,1,nil,c,tp)
 end
 function s.eqfilter(c,tc,tp)
-	return c:IsType(TYPE_EQUIP) and c:IsSetCard(0x60) and not c:IsCode(id) and c:CheckEquipTarget(tc) and c:CheckUniqueOnField(tp) and not c:IsForbidden()
+	return c:IsType(TYPE_EQUIP) and c:IsSetCard(0x60) and not c:IsCode(id) and c:CheckEquipTarget(tc) and c:CheckUniqueOnField(tp) and not c:IsUnliked()
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil,tp) end

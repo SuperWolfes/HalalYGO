@@ -1,5 +1,5 @@
 --混沌幻魔アーミタイル－虚無幻影羅生悶
---Armityle the Chaos Phantasm - Phantom of Fury
+--Armityle the Chaos Illusorasm - Illusion of Fury
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

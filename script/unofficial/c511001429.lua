@@ -1,5 +1,5 @@
 --CNo.102 光堕天使ノーブル・デーモン (Anime)
---Number C102: Archfiend Seraph (Anime)
+--Number C102: Archtainted Seraph (Anime)
 --Fixed by Larry126
 Duel.LoadScript("rankup_functions.lua")
 Duel.LoadCardScript("c67173574.lua")

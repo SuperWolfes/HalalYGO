@@ -44,7 +44,7 @@ function s.matcheck(g,lc,sumtype,tp)
 	return g:IsExists(Card.IsSetCard,1,nil,0x129,lc,sumtype,tp)
 end
 function s.atkval(e,c)
-	local g=Duel.GetMatchingGroup(Card.IsSetCard,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil,0x129)
+	local g=Duel.GetMatchingGroup(Card.IsSetCard,e:GetHandlerPlayer(),LOCATION_REST,0,nil,0x129)
 	return g:GetClassCount(Card.GetCode)*100
 end
 function s.discon(e,tp,eg,ep,ev,re,r,rp)

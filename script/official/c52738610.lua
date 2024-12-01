@@ -34,7 +34,7 @@ s.listed_series={0xb4}
 s.listed_names={id}
 function s.chainop(e,tp,eg,ep,ev,re,r,rp)
 	local rc=re:GetHandler()
-	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and rc:IsSetCard(0xb4) and re:IsActiveType(TYPE_RITUAL) then
+	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and rc:IsSetCard(0xb4) and re:IsActiveType(TYPE_LOCKED) then
 		Duel.SetChainLimit(s.chainlm)
 	end
 end
@@ -42,7 +42,7 @@ function s.chainlm(e,rp,tp)
 	return tp==rp
 end
 function s.tgtg(e,c)
-	return c:IsSetCard(0xb4) and c:IsType(TYPE_RITUAL)
+	return c:IsSetCard(0xb4) and c:IsType(TYPE_LOCKED)
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return (r&REASON_EFFECT)~=0

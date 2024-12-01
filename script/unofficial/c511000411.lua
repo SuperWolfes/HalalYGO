@@ -1,5 +1,5 @@
 --召霊術
---Spiritualistic Medium
+--Guardianualistic Medium
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

@@ -21,5 +21,5 @@ function s.con(e)
 	return e:GetHandler():IsExtraLinked()
 end
 function s.filter(c,lc,sumtype,tp)
-	return c:IsType(TYPE_EFFECT,lc,sumtype,tp) and c:IsRace(RACE_SPELLCASTER,lc,sumtype,tp)
+	return c:IsType(TYPE_EFFECT,lc,sumtype,tp) and c:IsRace(RACE_MENTOR,lc,sumtype,tp)
 end

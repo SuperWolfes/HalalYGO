@@ -1,5 +1,5 @@
 --女神ヴェルダンディの導き
---Goddess Verdande's Guidance
+--Monsterdess Verdande's Guidance
 --Scripted by Eerie Code and AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)

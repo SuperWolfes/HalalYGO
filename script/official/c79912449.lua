@@ -41,6 +41,6 @@ end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local ec=e:GetHandler():GetEquipTarget()
 	if ec and ec:IsLocation(LOCATION_MZONE) then
-		Duel.SendtoGrave(ec,REASON_EFFECT)
+		Duel.SendtoRest(ec,REASON_EFFECT)
 	end
 end

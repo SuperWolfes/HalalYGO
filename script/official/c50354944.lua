@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_STEP)
 	e3:SetType(EFFECT_TYPE_QUICK_O)
 	e3:SetCode(EVENT_FREE_CHAIN)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetHintTiming(TIMING_DAMAGE_STEP)
 	e3:SetCountLimit(1,{id,1})
 	e3:SetCondition(s.atkcon)
@@ -42,7 +42,7 @@ end
 s.listed_names={id}
 	--Check for level 5+ monster
 function s.spfilter(c)
-	return c:IsLevelAbove(5) and c:IsAbleToGraveAsCost()
+	return c:IsLevelAbove(5) and c:IsAbleToRestAsCost()
 end
 	--Send 1 level 5+ monster from hand to the GY as cost
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)

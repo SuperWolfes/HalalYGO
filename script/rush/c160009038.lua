@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()
-	--"Constructor Warrior Shovelon" + "Picklon the Constructor Fairy"
+	--"Constructor Warrior Shovelon" + "Picklon the Constructor Wanderer"
 	Fusion.AddProcMix(c,true,true,160004002,160004025)
 	--Increase ATK
 	local e1=Effect.CreateEffect(c)
@@ -41,10 +41,10 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetValue(200)
 	c:RegisterEffect(e1)
 	if not Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,0,1,nil)
-		and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil)
+		and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-		local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+		local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
 		if #g>0 then
 			Duel.BreakEffect()
 			Duel.SendtoHand(g,nil,REASON_EFFECT)

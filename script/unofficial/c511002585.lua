@@ -54,7 +54,7 @@ function s.ftchk(ft,tp,ct,e)
 	end
 end
 function s.chkfilter(c,e,tp)
-	return c:IsCanBeSpecialSummoned(e,0,tp,false,false) and c:IsLocation(LOCATION_GRAVE+LOCATION_REMOVED)
+	return c:IsCanBeSpecialSummoned(e,0,tp,false,false) and c:IsLocation(LOCATION_REST+LOCATION_REMOVED)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(s.cfilter,tp,0x7f,0x7f,nil,tp,Duel.GetTurnCount())

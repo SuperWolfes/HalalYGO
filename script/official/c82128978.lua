@@ -14,8 +14,8 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	-- Ritual Summon 1 "Libromancer" monster
-	local e2=Ritual.CreateProc(c,RITPROC_GREATER,aux.FilterBoolFunction(Card.IsSetCard,0x17d),nil,aux.Stringid(id,1))
+	-- Locked Summon 1 "Libromancer" monster
+	local e2=Locked.CreateProc(c,RITPROC_GREATER,aux.FilterBoolFunction(Card.IsSetCard,0x17d),nil,aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetHintTiming(0,TIMINGS_CHECK_MONSTER_E)
@@ -25,7 +25,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x17d}
 function s.spcostfilter(c)
-	return c:IsRitualMonster() and not c:IsPublic()
+	return c:IsLockedMonster() and not c:IsPublic()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

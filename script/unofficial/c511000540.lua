@@ -1,4 +1,4 @@
---Skull Dice (Anime)
+--Skull Suffice (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -11,13 +11,13 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.roll_dice=true
+s.roll_suffice=true
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetAttacker():IsControler(1-tp)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetAttacker():IsOnField() end
-	local d=Duel.TossDice(tp,1)
+	local d=Duel.TossSuffice(tp,1)
 	Duel.SetTargetParam(d)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)

@@ -1,5 +1,5 @@
 --ゴーストリックの駄天使
---Ghostrick Angel of Mischief
+--Missrick Angel of Mischief
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
@@ -44,7 +44,7 @@ function s.ovfilter(c,tp,xyzc)
 end
 function s.winop(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():GetOverlayCount()==10 then
-		Duel.Win(tp,WIN_REASON_GHOSTRICK_MISCHIEF)
+		Duel.Win(tp,WIN_REASON_MISSRICK_MISCHIEF)
 	end
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)

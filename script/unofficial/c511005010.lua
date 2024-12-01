@@ -61,7 +61,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		end
 	end
 	if #tg>0 then
-		Duel.SendtoGrave(tg,REASON_DISCARD)
+		Duel.SendtoRest(tg,REASON_DISCARD)
 	end
 	Duel.Damage(tp,dam,REASON_EFFECT)
 end

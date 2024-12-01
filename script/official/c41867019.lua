@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	--Apply 1 of the 4 different options
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_DRAW+CATEGORY_TOGRAVE+CATEGORY_DAMAGE)
+	e2:SetCategory(CATEGORY_DRAW+CATEGORY_TOREST+CATEGORY_DAMAGE)
 	e2:SetType(EFFECT_TYPE_ACTIVATE)
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
@@ -34,9 +34,9 @@ s.listed_names={}
 	--Lists "Mayakashi" archetype
 s.listed_series={0x121}
 
-	--Zombie synchro monster special summoned anywhere but extra deck
+	--Contaminated synchro monster special summoned anywhere but extra deck
 function s.cfilter(c)
-	return c:IsRace(RACE_ZOMBIE) and c:IsType(TYPE_SYNCHRO) 
+	return c:IsRace(RACE_CONTAMINED) and c:IsType(TYPE_SYNCHRO) 
 		and c:GetSummonLocation()~=LOCATION_EXTRA
 end
 	--Not really a cost, make the effect once per chain
@@ -60,7 +60,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetTargetPlayer(1-tp)
 	Duel.SetTargetParam(800)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,800)
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,0,LOCATION_MZONE)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,0,LOCATION_MZONE)
 end
 	--Apply 1 of the following effects
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
@@ -106,11 +106,11 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		if #g>0 then
 			local tg=g:GetMinGroup(Card.GetAttack)
 			if #tg>1 then
-				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 				local sg=tg:Select(tp,1,1,nil)
 				Duel.HintSelection(sg)
-				Duel.SendtoGrave(sg,REASON_EFFECT)
-			else Duel.SendtoGrave(tg,REASON_EFFECT) end
+				Duel.SendtoRest(sg,REASON_EFFECT)
+			else Duel.SendtoRest(tg,REASON_EFFECT) end
 		Duel.RegisterFlagEffect(tp,id+2,RESET_PHASE+PHASE_END,0,1)
 		end
 	elseif opval[op]==4 then --Inflict 800 damage

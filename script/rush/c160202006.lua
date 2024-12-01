@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(Card.IsLevelAbove,tp,LOCATION_GRAVE,0,nil,5)
+	local g=Duel.GetMatchingGroup(Card.IsLevelAbove,tp,LOCATION_REST,0,nil,5)
 	return g:GetClassCount(Card.GetRace)>=3
 end
 function s.filter(c)
@@ -35,7 +35,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ConfirmCards(tp,g)
 	if g:GetFirst():IsTrap() then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-		local g2=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+		local g2=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_REST,0,1,1,nil)
 		if Duel.SendtoDeck(g2,nil,1,REASON_COST)>0 then
 			local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
 			Duel.Draw(p,d,REASON_EFFECT)

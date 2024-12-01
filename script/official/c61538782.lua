@@ -17,14 +17,14 @@ end
 function s.eqcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=c:GetBattleTarget()
-	return c:IsRelateToBattle() and c:IsFaceup() and tc:IsLocation(LOCATION_GRAVE) and tc:IsMonster() and tc:IsReason(REASON_BATTLE) 
-		and not tc:IsForbidden()
+	return c:IsRelateToBattle() and c:IsFaceup() and tc:IsLocation(LOCATION_REST) and tc:IsMonster() and tc:IsReason(REASON_BATTLE) 
+		and not tc:IsUnliked()
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local tc=e:GetHandler():GetBattleTarget()
 	Duel.SetTargetCard(tc)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,tc,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,tc,1,0,0)
 end
 function s.equipop(c,e,tp,tc)
 	local atk=tc:GetTextAttack()

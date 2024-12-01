@@ -1,5 +1,5 @@
 --ベクター・スケア・デーモン
---Vector Scare Archfiend
+--Vector Scare Archtainted
 
 local s,id=GetID()
 function s.initial_effect(c)

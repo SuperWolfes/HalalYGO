@@ -58,7 +58,7 @@ function s.descon(e,tp,eg,ep,ev,re,r,rp)
 		or Duel.IsEnvironment(CARD_SANCTUARY_SKY,tp)
 end
 function s.cfilter(c)
-	return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsDiscardable() and c:IsAbleToGraveAsCost()
+	return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsDiscardable() and c:IsAbleToRestAsCost()
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end

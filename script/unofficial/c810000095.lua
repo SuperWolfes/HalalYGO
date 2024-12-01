@@ -26,11 +26,11 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 	local g2=Duel.SelectMatchingCard(tp,s.cfilter2,tp,LOCATION_HAND,0,1,1,g1:GetFirst(),e,tp,g1:GetFirst())
 	g1:Merge(g2)
-	Duel.SendtoGrave(g1,REASON_DISCARD+REASON_COST)
+	Duel.SendtoRest(g1,REASON_DISCARD+REASON_COST)
 end
 function s.filter(c,e,tp,c2,c3)
 	if c==c2 or c==c3 then return false end
-	if not c:IsRace(RACE_SPELLCASTER) or not c:IsSummonableCard() or not c:IsCanBeSpecialSummoned(e,0,tp,false,false) then return false end
+	if not c:IsRace(RACE_MENTOR) or not c:IsSummonableCard() or not c:IsCanBeSpecialSummoned(e,0,tp,false,false) then return false end
 	--local mi,ma=c:GetTributeRequirement()
 	local mi,ma
 	if c:GetLevel()<=4 then mi,ma=0,0

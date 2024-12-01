@@ -1,5 +1,5 @@
 --ダイス・ダンジョン
---Dice Dungeon
+--Suffice Dungeon
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -13,16 +13,16 @@ function s.initial_effect(c)
 	--At the start of the Battle Phase, roll die and apply effects
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_DICE+CATEGORY_ATKCHANGE)
+	e2:SetCategory(CATEGORY_SUFFICE+CATEGORY_ATKCHANGE)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_PHASE+PHASE_BATTLE_START)
 	e2:SetRange(LOCATION_FZONE)
 	e2:SetCountLimit(1)
-	e2:SetTarget(s.dicetg)
-	e2:SetOperation(s.diceop)
+	e2:SetTarget(s.sufficetg)
+	e2:SetOperation(s.sufficeop)
 	c:RegisterEffect(e2)
 end
-s.roll_dice=true
+s.roll_suffice=true
 s.listed_names={47292920}
 function s.thfilter(c)
 	return c:IsCode(47292920) and c:IsAbleToHand()
@@ -38,16 +38,16 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 --Note: scripted as if the effect applies only to monsters the players current control
-function s.dicetg(e,tp,eg,ep,ev,re,r,rp,chk)
+function s.sufficetg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local b1=Duel.IsExistingMatchingCard(Card.IsFaceup,tp,LOCATION_MZONE,0,1,nil)
 	local b2=Duel.IsExistingMatchingCard(Card.IsFaceup,tp,0,LOCATION_MZONE,1,nil)
 	if chk==0 then return b1 or b2 end
-	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,1,PLAYER_ALL,0)
+	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,1,PLAYER_ALL,0)
 end
-function s.diceop(e,tp,eg,ep,ev,re,r,rp)
+function s.sufficeop(e,tp,eg,ep,ev,re,r,rp)
 	local turn_p=Duel.GetTurnPlayer()
-	local res1=Duel.TossDice(turn_p,1)
-	local res2=Duel.TossDice(1-turn_p,1)
+	local res1=Duel.TossSuffice(turn_p,1)
+	local res2=Duel.TossSuffice(1-turn_p,1)
 	local g1=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,0,nil)
 	local g2=Duel.GetMatchingGroup(Card.IsFaceup,tp,0,LOCATION_MZONE,nil)
 	if #g1==0 and #g2==0 then return end

@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
-	return re:GetOwner():IsRace(RACE_ZOMBIE) and e:GetHandler():IsSummonLocation(LOCATION_GRAVE)
+	return re:GetOwner():IsRace(RACE_CONTAMINED) and e:GetHandler():IsSummonLocation(LOCATION_REST)
 		and e:GetHandler():IsPreviousControler(tp)
 end
 function s.desfilter(c)

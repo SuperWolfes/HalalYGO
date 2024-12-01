@@ -16,7 +16,7 @@ s.listed_series={0x3008}
 function s.condition(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tc=eg:GetFirst()
 	return tc:IsPreviousControler(tp) and tc:IsType(TYPE_FUSION) and tc:IsSetCard(0x3008)
-		and tc:IsLocation(LOCATION_GRAVE) and tc:IsReason(REASON_BATTLE) 
+		and tc:IsLocation(LOCATION_REST) and tc:IsReason(REASON_BATTLE) 
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

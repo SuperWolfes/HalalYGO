@@ -17,7 +17,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local endtime=0
 	local check=true
-	local g=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_GRAVE,LOCATION_GRAVE,nil)
+	local g=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_REST,LOCATION_REST,nil)
 	local lv=g:GetSum(Card.GetLevel)
 	local start=os.time()
 	local ct=0

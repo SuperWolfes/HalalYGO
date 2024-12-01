@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e2:SetCode(EFFECT_CHANGE_CODE)
-	e2:SetRange(LOCATION_SZONE+LOCATION_GRAVE)
+	e2:SetRange(LOCATION_SZONE+LOCATION_REST)
 	e2:SetValue(CARD_SANCTUARY_SKY)
 	c:RegisterEffect(e2)
 	--atk/def increase
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e3:SetCode(EFFECT_UPDATE_ATTACK)
 	e3:SetRange(LOCATION_SZONE)
 	e3:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
-	e3:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_FAIRY))
+	e3:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_WANDERER))
 	e3:SetValue(300)
 	c:RegisterEffect(e3)
 	local e4=e3:Clone()
@@ -54,11 +54,11 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_SANCTUARY_SKY}
 function s.tdfilter(c,e)
-	return (c:IsRace(RACE_FAIRY) or c:IsType(TYPE_COUNTER)) and c:IsAbleToDeck() and (not e or c:IsCanBeEffectTarget(e))
+	return (c:IsRace(RACE_WANDERER) or c:IsType(TYPE_COUNTER)) and c:IsAbleToDeck() and (not e or c:IsCanBeEffectTarget(e))
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	local g=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_GRAVE,0,nil,e)
+	local g=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_REST,0,nil,e)
 	if chk==0 then return g:GetClassCount(Card.GetCode)>=3 end
 	local tg=aux.SelectUnselectGroup(g,e,tp,3,3,aux.dncheck,1,tp,HINTMSG_TODECK)
 	Duel.SetTargetCard(tg)

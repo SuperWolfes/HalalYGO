@@ -15,7 +15,7 @@ function s.initial_effect(c)
 end
 s.listed_names={52913738}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_RITUAL)
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_LOCKED)
 end
 function s.filter(c,atk)
 	return c:IsFaceup() and c:IsDefenseBelow(atk)

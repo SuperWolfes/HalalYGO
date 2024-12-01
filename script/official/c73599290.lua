@@ -24,5 +24,5 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.aclimit(e,re,tp)
 	local loc=re:GetActivateLocation()
-	return (loc==LOCATION_GRAVE or loc==LOCATION_REMOVED) and re:IsActiveType(TYPE_MONSTER)
+	return (loc==LOCATION_REST or loc==LOCATION_REMOVED) and re:IsActiveType(TYPE_MONSTER)
 end

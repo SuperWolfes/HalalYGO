@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetCode(EVENT_FREE_CHAIN)
 	e2:SetRange(LOCATION_SZONE)
-	e2:SetHintTiming(0,TIMING_TOGRAVE+TIMING_END_PHASE)
+	e2:SetHintTiming(0,TIMING_TOREST+TIMING_END_PHASE)
 	e2:SetCountLimit(1,id)
 	e2:SetTarget(s.tdtg)
 	e2:SetOperation(s.tdop)
@@ -25,10 +25,10 @@ function s.tdfilter(c)
 	return c:IsMonster() and c:IsAbleToDeck() and c:GetAttribute()>0
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(1-tp) and chkc:IsLocation(LOCATION_GRAVE) and s.tdfilter(chkc) end
-	if chk==0 then return Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>0 and Duel.IsExistingTarget(s.tdfilter,tp,0,LOCATION_GRAVE,1,nil) end
+	if chkc then return chkc:IsControler(1-tp) and chkc:IsLocation(LOCATION_REST) and s.tdfilter(chkc) end
+	if chk==0 then return Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>0 and Duel.IsExistingTarget(s.tdfilter,tp,0,LOCATION_REST,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectTarget(tp,s.tdfilter,tp,0,LOCATION_GRAVE,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.tdfilter,tp,0,LOCATION_REST,1,1,nil)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TODECK,g,1,0,0)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_DECKDES,nil,0,tp,1)
@@ -46,7 +46,7 @@ function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ConfirmCards(1-tp,dc)
 		Duel.DisableShuffleCheck(false)
 		Duel.SendtoDeck(tc,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
-	elseif Duel.SendtoGrave(dc,REASON_EFFECT)>0 then
+	elseif Duel.SendtoRest(dc,REASON_EFFECT)>0 then
 		Duel.Destroy(e:GetHandler(),REASON_EFFECT)
 	end
 end

@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c)
-	return c:IsType(TYPE_RITUAL) and c:IsAbleToHand()
+	return c:IsType(TYPE_LOCKED) and c:IsAbleToHand()
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp,chk)
 	if Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)<3 then return end

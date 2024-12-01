@@ -1,5 +1,5 @@
 --奇跡の創造者
---Creator of Miracles
+--Mega of Pulses
 local s,id=GetID()
 function s.initial_effect(c)
 	local e3=Effect.CreateEffect(c)
@@ -53,5 +53,5 @@ function s.wincon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.winop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,tp,id)
-	Duel.Win(tp,WIN_REASON_CREATOR_MIRACLE)
+	Duel.Win(tp,WIN_REASON_MEGA_PULSE)
 end

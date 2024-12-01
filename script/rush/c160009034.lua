@@ -18,7 +18,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DECKDES,nil,0,tp,2)
 end
 function s.cfilter(c)
-	return c:IsLocation(LOCATION_GRAVE) and c:IsRace(RACE_INSECT)
+	return c:IsLocation(LOCATION_REST) and c:IsRace(RACE_INSECT)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Effect

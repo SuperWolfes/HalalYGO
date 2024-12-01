@@ -44,7 +44,7 @@ function s.checkop(e,tp,eg,ep,ev,re,r,rp)
 	if aux.evospcon(e) then e:SetLabel(1) else e:SetLabel(0) end
 end
 function s.schcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_GRAVE) and e:GetHandler():IsReason(REASON_BATTLE)
+	return e:GetHandler():IsLocation(LOCATION_REST) and e:GetHandler():IsReason(REASON_BATTLE)
 		and e:GetLabelObject():GetLabel()==1
 end
 function s.sfilter(c)

@@ -1,4 +1,4 @@
---Earthbound God Uru
+--Earthbound Monster Uru
 local s,id=GetID()
 function s.initial_effect(c)
 	local e0=Effect.CreateEffect(c)

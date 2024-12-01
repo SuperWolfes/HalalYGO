@@ -24,11 +24,11 @@ function s.initial_effect(c)
 	e4:SetType(EFFECT_TYPE_FIELD)
 	e4:SetCode(EFFECT_CANNOT_REMOVE)
 	e4:SetRange(LOCATION_FZONE)
-	e4:SetTargetRange(LOCATION_GRAVE,0)
+	e4:SetTargetRange(LOCATION_REST,0)
 	e4:SetCondition(s.contp)
 	c:RegisterEffect(e4)
 	local e5=e4:Clone()
-	e5:SetTargetRange(0,LOCATION_GRAVE)
+	e5:SetTargetRange(0,LOCATION_REST)
 	e5:SetCondition(s.conntp)
 	c:RegisterEffect(e5)
 	--"Necrovalley" effect
@@ -36,11 +36,11 @@ function s.initial_effect(c)
 	e6:SetType(EFFECT_TYPE_FIELD)
 	e6:SetCode(EFFECT_NECRO_VALLEY)
 	e6:SetRange(LOCATION_FZONE)
-	e6:SetTargetRange(LOCATION_GRAVE,0)
+	e6:SetTargetRange(LOCATION_REST,0)
 	e6:SetCondition(s.contp)
 	c:RegisterEffect(e6)
 	local e7=e6:Clone()
-	e7:SetTargetRange(0,LOCATION_GRAVE)
+	e7:SetTargetRange(0,LOCATION_REST)
 	e7:SetCondition(s.conntp)
 	c:RegisterEffect(e7)
 	local e8=Effect.CreateEffect(c)
@@ -77,7 +77,7 @@ end
 function s.discheck(ev,category,re,not_im0,not_im1)
 	local ex,tg,ct,p,v=Duel.GetOperationInfo(ev,category)
 	if not ex then return false end
-	if (category==CATEGORY_LEAVE_GRAVE or v==LOCATION_GRAVE) and ct>0 and not tg then
+	if (category==CATEGORY_LEAVE_REST or v==LOCATION_REST) and ct>0 and not tg then
 		if p==0 then return not_im0
 		elseif p==1 then return not_im1
 		elseif p==PLAYER_ALL then return not_im0 or not_im1
@@ -100,6 +100,6 @@ function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	if not res and s.discheck(ev,CATEGORY_TOHAND,re,not_im0,not_im1) then res=true end
 	if not res and s.discheck(ev,CATEGORY_TODECK,re,not_im0,not_im1) then res=true end
 	if not res and s.discheck(ev,CATEGORY_TOEXTRA,re,not_im0,not_im1) then res=true end
-	if not res and s.discheck(ev,CATEGORY_LEAVE_GRAVE,re,not_im0,not_im1) then res=true end
+	if not res and s.discheck(ev,CATEGORY_LEAVE_REST,re,not_im0,not_im1) then res=true end
 	if res then Duel.NegateEffect(ev) end
 end

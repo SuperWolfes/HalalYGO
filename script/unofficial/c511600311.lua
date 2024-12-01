@@ -55,7 +55,7 @@ function s.thfilter(c)
 	return c:IsCode(85327820) and c:IsAbleToHand()
 end
 function s.thfilter2(c)
-	return c:IsSetCard(0x135) and c:IsRitualMonster() and c:IsAbleToHand()
+	return c:IsSetCard(0x135) and c:IsLockedMonster() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

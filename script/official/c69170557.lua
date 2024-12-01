@@ -41,7 +41,7 @@ end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.desfilter,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
 	if Duel.Destroy(g,REASON_EFFECT)==0 then return end
-	local og=Duel.GetOperatedGroup():Filter(Card.IsLocation,nil,LOCATION_GRAVE)
+	local og=Duel.GetOperatedGroup():Filter(Card.IsLocation,nil,LOCATION_REST)
 	if Duel.Draw(tp,1,REASON_EFFECT)~=0 and #og>0 then
 		Duel.BreakEffect()
 		local mg,matk=og:GetMaxGroup(Card.GetBaseAttack)

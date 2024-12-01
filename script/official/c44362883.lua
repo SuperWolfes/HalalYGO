@@ -12,7 +12,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_ALBAZ}
 function s.fextra(e,tp,mg)
-	return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToGrave),tp,LOCATION_DECK,0,nil)
+	return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRest),tp,LOCATION_DECK,0,nil)
 end
 function s.counterfilter(c)
 	return not c:IsSummonLocation(LOCATION_EXTRA) or c:IsType(TYPE_FUSION)
@@ -41,5 +41,5 @@ function s.lizfilter(e,c)
 end
 function s.extratg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,0,tp,LOCATION_HAND+LOCATION_MZONE+LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,0,tp,LOCATION_HAND+LOCATION_MZONE+LOCATION_DECK)
 end

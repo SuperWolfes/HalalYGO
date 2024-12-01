@@ -96,7 +96,7 @@ TOKEN_SLIME                         = 21770261
 TOKEN_SWORDMISS                     = 20001444
 TOKEN_TRICKSTAR                     = 51208047
 TOKEN_WORLD_LEGACY                  = 46647145
-TOKEN_DUAL_AVATAR_GUARDIAN            = 87669905
+TOKEN_GUARDIAN_AVATAR_GUARDIAN            = 87669905
 TOKEN_OJAMA                         = 29843092
 TOKEN_OJAMA_DUO                     = 14470846
 

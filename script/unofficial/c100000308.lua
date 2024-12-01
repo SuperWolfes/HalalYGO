@@ -14,7 +14,7 @@ function s.initial_effect(c)
 end
 s.listed_names={50400231,100000022}
 function s.cfilter(c,tp)
-	return c:IsReason(REASON_BATTLE) and c:IsLocation(LOCATION_GRAVE) and c:IsPreviousControler(tp)
+	return c:IsReason(REASON_BATTLE) and c:IsLocation(LOCATION_REST) and c:IsPreviousControler(tp)
 		and c:IsCode(50400231)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
@@ -24,7 +24,7 @@ function s.spfilter(c,e,tp)
 	return c:IsCode(100000022) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,true,false)
 end
 function s.gfilter(c)
-	return c:IsCode(50400231) and c:IsAbleToGrave()
+	return c:IsCode(50400231) and c:IsAbleToRest()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
@@ -35,9 +35,9 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g1=Duel.GetMatchingGroup(s.gfilter,tp,LOCATION_ONFIELD+LOCATION_HAND,0,nil)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 or #g1~=2 then return end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g2=g1:Select(tp,2,2,nil)
-	Duel.SendtoGrave(g2,REASON_EFFECT)
+	Duel.SendtoRest(g2,REASON_EFFECT)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
 	local tc=g:GetFirst()

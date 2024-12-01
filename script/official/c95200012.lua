@@ -12,7 +12,7 @@ function s.initial_effect(c)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,PLAYER_ALL,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,PLAYER_ALL,LOCATION_REST)
 end
 function s.spfilter(c,e,tp)
 	return c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -21,7 +21,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.RockPaperScissors()
 	if Duel.GetLocationCount(p,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,p,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(p,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,p)
+	local g=Duel.SelectMatchingCard(p,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,p)
 	if #g~=0 then
 		Duel.SpecialSummon(g,0,p,p,false,false,POS_FACEUP)
 	end

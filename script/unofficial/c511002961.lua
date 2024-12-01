@@ -44,7 +44,7 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.stage2(e,tc,tp,sg,chk)
 	local c=e:GetHandler()
-	if chk==1 and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and c:IsLocation(LOCATION_GRAVE)then
+	if chk==1 and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and c:IsLocation(LOCATION_REST)then
 		if not Duel.Equip(tp,e:GetHandler(),tc,false) then return end
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)

@@ -1,4 +1,4 @@
---Glife the Phantom Bird
+--Glife the Illusion Bird
 local s,id=GetID()
 function s.initial_effect(c)
 	--destroy

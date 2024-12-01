@@ -25,7 +25,7 @@ function s.tunerfilter(c)
 	return c:IsType(TYPE_TUNER) and c:IsCanBeSynchroMaterial() and c:IsFaceup()
 end
 function s.matfilter(c)
-	return c:IsType(TYPE_SYNCHRO) and c:IsCanBeSynchroMaterial() and c:IsLevelAbove(6) and (c:IsFaceup() or c:IsLocation(LOCATION_GRAVE))
+	return c:IsType(TYPE_SYNCHRO) and c:IsCanBeSynchroMaterial() and c:IsLevelAbove(6) and (c:IsFaceup() or c:IsLocation(LOCATION_REST))
 end
 function s.spfilter(c,tp,tuners,nontuners)
 	return c:IsType(TYPE_SYNCHRO) and c:HasLevel() and c:GetLevel()%2==0 and c:IsSynchroSummonable(nil,tuners+nontuners) and Duel.GetLocationCountFromEx(tp,tp,tuners,c)
@@ -34,7 +34,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		local c=e:GetHandler()
 		local tuners=Duel.GetMatchingGroup(s.tunerfilter,tp,LOCATION_MZONE,0,nil)
-		local nontuners=Duel.GetMatchingGroup(s.matfilter,tp,0,LOCATION_MZONE+LOCATION_GRAVE,nil)
+		local nontuners=Duel.GetMatchingGroup(s.matfilter,tp,0,LOCATION_MZONE+LOCATION_REST,nil)
 		local reset={}
 		for tc in aux.Next(tuners) do
 			local e1=Effect.CreateEffect(c)
@@ -71,7 +71,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tuners=Duel.GetMatchingGroup(s.tunerfilter,tp,LOCATION_MZONE,0,nil)
-	local nontuners=Duel.GetMatchingGroup(s.matfilter,tp,0,LOCATION_MZONE+LOCATION_GRAVE,nil)
+	local nontuners=Duel.GetMatchingGroup(s.matfilter,tp,0,LOCATION_MZONE+LOCATION_REST,nil)
 	local reset={}
 	for tc in aux.Next(tuners) do
 		local e1=Effect.CreateEffect(c)

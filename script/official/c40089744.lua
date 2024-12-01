@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	--add counter
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
-	e2:SetCode(EVENT_TO_GRAVE)
+	e2:SetCode(EVENT_TO_REST)
 	e2:SetRange(LOCATION_FZONE)
 	e2:SetOperation(s.acop)
 	c:RegisterEffect(e2)
@@ -34,7 +34,7 @@ end
 s.listed_series={0x10cf,0xbd}
 s.counter_place_list={COUNTER_SPELL}
 function s.filter(c)
-	return ((c:IsSetCard(0x10cf) and c:IsType(TYPE_RITUAL)) or c:IsSetCard(0xbd)) and c:IsMonster() and c:IsAbleToHand()
+	return ((c:IsSetCard(0x10cf) and c:IsType(TYPE_LOCKED)) or c:IsSetCard(0xbd)) and c:IsMonster() and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end
@@ -63,7 +63,7 @@ function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:GetHandler():RemoveCounter(tp,COUNTER_SPELL,3,REASON_COST)
 end
 function s.thfilter(c)
-	return c:GetType()==TYPE_SPELL+TYPE_RITUAL and c:IsAbleToHand()
+	return c:GetType()==TYPE_SPELL+TYPE_LOCKED and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

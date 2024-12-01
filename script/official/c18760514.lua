@@ -5,12 +5,12 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Name becomes "Plaguespreader Zombie" while on the field or in the GY
+	--Name becomes "Plaguespreader Contaminated" while on the field or in the GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e1:SetCode(EFFECT_CHANGE_CODE)
-	e1:SetRange(LOCATION_MZONE+LOCATION_GRAVE)
+	e1:SetRange(LOCATION_MZONE+LOCATION_REST)
 	e1:SetValue(33420078)
 	c:RegisterEffect(e1)
 	--Reduce targeted monster's level by 2, Special Summon this card from GY
@@ -19,13 +19,13 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,id)
 	e2:SetTarget(s.target)
 	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
 end
-	--Specifically lists "Plaguespreader Zombie"
+	--Specifically lists "Plaguespreader Contaminated"
 s.listed_names={33420078}
 
 	--Check for a level 6+ monster
@@ -40,7 +40,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		and Duel.IsExistingTarget(s.filter,tp,LOCATION_MZONE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 	Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE,0,1,1,nil)
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,tp,LOCATION_REST)
 end
 	--Special Summon itself from GY
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
@@ -58,7 +58,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if not tc:IsImmuneToEffect(e1) and c:IsRelateToEffect(e) then
 		Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)
 	end
-	--Cannot Special Summon non-Zombie monsters
+	--Cannot Special Summon non-Contaminated monsters
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CANNOT_DISABLE)
@@ -66,6 +66,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetAbsoluteRange(tp,1,0)
 	e2:SetReset(RESET_EVENT+RESETS_STANDARD)
-	e2:SetTarget(function(_,c)return not c:IsRace(RACE_ZOMBIE)end)
+	e2:SetTarget(function(_,c)return not c:IsRace(RACE_CONTAMINED)end)
 	c:RegisterEffect(e2)
 end

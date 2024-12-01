@@ -47,7 +47,7 @@ end
 
 --place in szone
 function card.szfilter(c)
-	return c:IsFaceup() and not c:IsRace(RACE_MACHINE) and not c:IsForbidden()
+	return c:IsFaceup() and not c:IsRace(RACE_MACHINE) and not c:IsUnliked()
 end
 
 function card.sztg(e, tp, eg, ep, ev, re, r, rp, chk, chkc)

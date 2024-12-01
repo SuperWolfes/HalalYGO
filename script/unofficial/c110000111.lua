@@ -28,7 +28,7 @@ function s.atkup(e,c)
 end
 function s.latkcon(e,tp,eg,ep,ev,re,r,rp)
 	local d=Duel.GetAttackTarget()
-	return e:GetHandler()==Duel.GetAttacker() and e:GetHandler():IsLocation(LOCATION_GRAVE) and d and d:IsControler(1-tp)
+	return e:GetHandler()==Duel.GetAttacker() and e:GetHandler():IsLocation(LOCATION_REST) and d and d:IsControler(1-tp)
 end
 function s.latktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() end

@@ -69,7 +69,7 @@ function s.repcon(e,tp,eg,ep,ev,re,r,rp)
 	return tc:IsOnField() and tc:IsLocation(LOCATION_MZONE)
 end
 function s.cfilter(c,tp,re,rp,tf,ceg,cep,cev,cre,cr,crp,tc)
-	return c:IsAbleToGraveAsCost() 
+	return c:IsAbleToRestAsCost() 
 		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,0,1,c,re,rp,tf,ceg,cep,cev,cre,cr,crp,tc)
 end
 function s.filter(c,re,rp,tf,ceg,cep,cev,cre,cr,crp,tc)
@@ -81,10 +81,10 @@ function s.repcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tc=e:GetLabelObject()
 	local res,ceg,cep,cev,cre,cr,crp=Duel.CheckEvent(re:GetCode(),true)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil,tp,re,rp,tf,ceg,cep,cev,cre,cr,crp,tc)
-		and c:IsAbleToGraveAsCost() end
+		and c:IsAbleToRestAsCost() end
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_MZONE,0,1,1,nil,tp,re,rp,tf,ceg,cep,cev,cre,cr,crp,tc)
 	g:AddCard(c)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local tf=re:GetTarget()

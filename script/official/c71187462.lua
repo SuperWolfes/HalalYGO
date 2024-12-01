@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	-- Send this card and "Blackwing" non-tuners to the GY
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
-	e2:SetCategory(CATEGORY_TOGRAVE+CATEGORY_SPECIAL_SUMMON)
+	e2:SetCategory(CATEGORY_TOREST+CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCountLimit(1,{id,1})
@@ -38,7 +38,7 @@ function s.spfilter(c,e,tp,ec)
 		and Duel.GetLocationCountFromEx(tp,tp,ec,c)>0
 end
 function s.tgfilter(c)
-	return c:IsSetCard(0x33) and not c:IsType(TYPE_TUNER) and c:HasLevel() and c:IsAbleToGrave()
+	return c:IsSetCard(0x33) and not c:IsType(TYPE_TUNER) and c:HasLevel() and c:IsAbleToRest()
 end
 function s.tgrescon(clv)
 	return function(sg)
@@ -49,22 +49,22 @@ end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		local c=e:GetHandler()
-		if not c:IsAbleToGrave() or c:IsLevelAbove(8)
+		if not c:IsAbleToRest() or c:IsLevelAbove(8)
 			or not Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,c) then return false end
 		local g=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_DECK,0,nil)
 		return aux.SelectUnselectGroup(g,e,tp,1,#g,s.tgrescon(c:GetLevel()),0)
 	end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:IsRelateToEffect(e) and c:IsAbleToGrave() and c:IsLevelBelow(7) then
+	if c:IsRelateToEffect(e) and c:IsAbleToRest() and c:IsLevelBelow(7) then
 		local g=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_DECK,0,nil)
 		local rescon=s.tgrescon(c:GetLevel())
-		local mg=aux.SelectUnselectGroup(g,e,tp,1,#g,rescon,1,tp,HINTMSG_TOGRAVE,rescon)
-		if #mg>0 and Duel.SendtoGrave(c+mg,REASON_EFFECT)>0
-			and (c:IsLocation(LOCATION_GRAVE) or mg:IsExists(Card.IsLocation,1,nil,LOCATION_GRAVE)) then
+		local mg=aux.SelectUnselectGroup(g,e,tp,1,#g,rescon,1,tp,HINTMSG_TOREST,rescon)
+		if #mg>0 and Duel.SendtoRest(c+mg,REASON_EFFECT)>0
+			and (c:IsLocation(LOCATION_REST) or mg:IsExists(Card.IsLocation,1,nil,LOCATION_REST)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 			local sg=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
 			if #sg>0 then

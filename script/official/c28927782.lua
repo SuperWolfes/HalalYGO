@@ -40,17 +40,17 @@ function s.select(e,tp,b1,b2)
 		e:SetCategory(CATEGORY_EQUIP)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 		local g=Duel.SelectTarget(tp,s.eqfilter1,tp,LOCATION_MZONE,0,1,1,nil,tp)
-		Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,tp,0)
+		Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,tp,0)
 	end
 end
 function s.spfilter(c,e,tp)
 	return c:IsFaceup() and c:IsSetCard(0x29) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
 end
 function s.eqfilter1(c,tp)
-	return c:IsFaceup() and c:IsSetCard(0x29) and Duel.IsExistingMatchingCard(s.eqfilter2,tp,LOCATION_GRAVE,0,1,nil,c,tp)
+	return c:IsFaceup() and c:IsSetCard(0x29) and Duel.IsExistingMatchingCard(s.eqfilter2,tp,LOCATION_REST,0,1,nil,c,tp)
 end
 function s.eqfilter2(c,tc,tp)
-	return c:IsSetCard(0x29) and c:IsMonster() and not c:IsForbidden()
+	return c:IsSetCard(0x29) and c:IsMonster() and not c:IsUnliked()
 end
 
 function s.eftg2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -84,7 +84,7 @@ function s.efop(e,tp,eg,ep,ev,re,r,rp)
 		local ec=Duel.GetFirstTarget()
 		if ec and ec:IsRelateToEffect(e) and ec:IsFaceup() then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-			local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.eqfilter2),tp,LOCATION_GRAVE,0,1,1,nil,ec,tp)
+			local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.eqfilter2),tp,LOCATION_REST,0,1,1,nil,ec,tp)
 			local tc=g:GetFirst()
 			if not tc or not Duel.Equip(tp,tc,ec,true) then return end
 			local e1=Effect.CreateEffect(c)

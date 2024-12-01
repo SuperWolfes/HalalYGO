@@ -1,4 +1,4 @@
---Earthbound God Ccapac Apu
+--Earthbound Monster Ccapac Apu
 local s,id=GetID()
 function s.initial_effect(c)
 	local e0=Effect.CreateEffect(c)

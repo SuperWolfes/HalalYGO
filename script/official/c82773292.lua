@@ -57,5 +57,5 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.actlimit(e,re,tp)
 	local rc=re:GetHandler()
-	return re:IsActiveType(TYPE_MONSTER) and not rc:IsRace(RACE_FAIRY)
+	return re:IsActiveType(TYPE_MONSTER) and not rc:IsRace(RACE_WANDERER)
 end

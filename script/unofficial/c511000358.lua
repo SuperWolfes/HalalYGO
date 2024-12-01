@@ -1,5 +1,5 @@
 --奇跡の逆鱗
---Miracle of Draconian Wrath
+--Pulse of Draconian Wrath
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

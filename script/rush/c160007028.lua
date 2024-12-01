@@ -14,22 +14,22 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 end
-s.listed_names={CARD_SPIRIT_STADIUM}
+s.listed_names={CARD_GUARDIAN_STADIUM}
 function s.costfilter(c)
-	return c:IsAttribute(ATTRIBUTE_FIRE) and c:IsLevel(4) and c:IsFaceup() and c:IsAbleToGraveAsCost()
+	return c:IsAttribute(ATTRIBUTE_FIRE) and c:IsLevel(4) and c:IsFaceup() and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_MZONE,0,2,nil) end
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_SPIRIT_STADIUM),tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil)
+	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_GUARDIAN_STADIUM),tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	--Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_MZONE,0,2,2,nil)
-	local ct=Duel.SendtoGrave(g,REASON_COST)
+	local ct=Duel.SendtoRest(g,REASON_COST)
 	if ct>1 then
 		--Effect
 		if c:IsRelateToEffect(e) and c:IsFaceup() then

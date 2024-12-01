@@ -44,7 +44,7 @@ function s.operation(e,tp,eg,ev,ep,re,r,rp)
 		local mg=tg:Clone()
 		local tc=tg:GetFirst()
 		while tc do
-			if tc:GetOverlayCount()~=0 then Duel.SendtoGrave(tc:GetOverlayGroup(),REASON_RULE) end
+			if tc:GetOverlayCount()~=0 then Duel.SendtoRest(tc:GetOverlayGroup(),REASON_RULE) end
 			tc=tg:GetNext()
 		end
 		c:SetMaterial(mg)
@@ -73,7 +73,7 @@ function s.operation0(e,tp,eg,ev,ep,re,r,rp)
 		local count=#mg
 		mg:Match(s.spfilter,nil,e,tp)
 		if #mg<count then return end
-		if Duel.GetLocationCount(tp,LOCATION_MZONE)<#mg or (Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) and #mg>1) then return end
+		if Duel.GetLocationCount(tp,LOCATION_MZONE)<#mg or (Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) and #mg>1) then return end
 		Duel.SpecialSummon(mg,SUMMON_TYPE_SPECIAL,tp,tp,true,false,POS_FACEUP)
 	end
 end

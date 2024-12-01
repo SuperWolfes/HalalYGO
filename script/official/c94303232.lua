@@ -105,7 +105,7 @@ function s.rcon(e)
 end
 function s.rmcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsLocation(LOCATION_GRAVE) and c:IsReason(REASON_LOST_TARGET) and c:GetPreviousEquipTarget():IsReason(REASON_DESTROY)
+	return c:IsLocation(LOCATION_REST) and c:IsReason(REASON_LOST_TARGET) and c:GetPreviousEquipTarget():IsReason(REASON_DESTROY)
 		and c:IsHasCardTarget(e:GetLabelObject():GetLabelObject())
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk)

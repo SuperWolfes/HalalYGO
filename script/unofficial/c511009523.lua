@@ -34,7 +34,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ConfirmCards(p,g)
 		Duel.Hint(HINT_SELECTMSG,p,HINTMSG_DISCARD)
 		local sg=g:Select(p,1,ct,nil)
-		local dt=Duel.SendtoGrave(sg,REASON_EFFECT+REASON_DISCARD)
+		local dt=Duel.SendtoRest(sg,REASON_EFFECT+REASON_DISCARD)
 		if dt~=0 then
 			Duel.Damage(1-p,dt*300,REASON_EFFECT)
 		end

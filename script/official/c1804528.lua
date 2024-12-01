@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DESTROY+CATEGORY_HANDES)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	e1:SetCode(EVENT_TO_GRAVE)
+	e1:SetCode(EVENT_TO_REST)
 	e1:SetCondition(s.descon)
 	e1:SetOperation(s.desop)
 	c:RegisterEffect(e1)
@@ -30,7 +30,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	else return end
 	if opt==0 then
 		local dg=g1:RandomSelect(1-tp,1)
-		Duel.SendtoGrave(dg,REASON_EFFECT+REASON_DISCARD)
+		Duel.SendtoRest(dg,REASON_EFFECT+REASON_DISCARD)
 	else
 		Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_DESTROY)
 		local dg=g2:Select(1-tp,1,1,nil)

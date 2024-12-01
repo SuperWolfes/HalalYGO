@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 	--mill
 	local e2=Effect.CreateEffect(c)
-	e2:SetCategory(CATEGORY_TOGRAVE)
+	e2:SetCategory(CATEGORY_TOREST)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_BATTLE_DESTROYING)
 	e2:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
@@ -41,13 +41,13 @@ function s.atkcon(e)
 	return Duel.GetTurnPlayer()==e:GetHandlerPlayer()
 end
 function s.atkval(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsRace,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil,RACE_FAIRY+RACE_FIEND)*300
+	return Duel.GetMatchingGroupCount(Card.IsRace,e:GetHandlerPlayer(),LOCATION_REST,0,nil,RACE_WANDERER+RACE_TAINTED)*300
 end
 function s.gycon(e,tp,eg,ep,ev,re,r,rp)
 	return aux.bdcon(e,tp,eg,ep,ev,re,r,rp) and e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
 end
 function s.gyfilter(c)
-	return c:IsAbleToGrave() and c:IsMonster()
+	return c:IsAbleToRest() and c:IsMonster()
 		and (c:IsSetCard(0xc3) or c:IsSetCard(0xa9) or c:IsSetCard(0xad))
 end
 function s.gytg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -55,14 +55,14 @@ function s.gytg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then 
 		return lv>0 and Duel.IsExistingMatchingCard(s.gyfilter,tp,LOCATION_DECK,0,lv,nil) 
 	end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,lv,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,lv,tp,LOCATION_DECK)
 end
 function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 	local lv=e:GetHandler():GetBattleTarget():GetLevel()
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.gyfilter,tp,LOCATION_DECK,0,lv,lv,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end
 function s.discon(e,tp,eg,ep,ev,re,r,rp)

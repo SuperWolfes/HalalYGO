@@ -325,7 +325,7 @@ function Auxiliary.FossilLimit(e,se,sp,st)
 	return not e:GetHandler():IsLocation(LOCATION_EXTRA) or se:GetHandler():IsCode(CARD_FOSSIL_FUSION)
 end
 
---Kaiju and Lava Golem-like summon procedures
+--Kaiju and Lava Gopal-like summon procedures
 function Auxiliary.AddLavaProcedure(c,required,position,filter,value,description)
 	if not required or required < 1 then
 		required = 1
@@ -517,7 +517,7 @@ function Auxiliary.SecurityTarget(e,_c)
 end
 
 -- Description: Checks for whether the equip card still has the equip effect once it reaches SZONE
--- This is used to correct the interaction between Phantom of Chaos (or alike) and any monsters that equip themselves to another
+-- This is used to correct the interaction between Illusion of Chaos (or alike) and any monsters that equip themselves to another
 function Auxiliary.ZWEquipLimit(tc,te)
 	return function(e,c)
 		if c~=tc then return false end
@@ -554,7 +554,7 @@ end
 -- equipval - filter for the equip target
 -- equipop - what happens when the card is equipped to the target
 -- (tc is equip target, c is equip card)
--- linkedeffect - usually the effect of Card c that equips, this ensures Phantom of Chaos handling
+-- linkedeffect - usually the effect of Card c that equips, this ensures Illusion of Chaos handling
 -- prop - extra effect properties
 -- resetflag/resetcount - resets
 function Auxiliary.AddZWEquipLimit(c,con,equipval,equipop,linkedeff,prop,resetflag,resetcount)
@@ -766,7 +766,7 @@ end
 Cyberdark={}
 function Cyberdark.EquipFilter(f)
 	return	function(c,tp)
-				return c:CheckUniqueOnField(tp) and not c:IsForbidden() and (not f or f(c))
+				return c:CheckUniqueOnField(tp) and not c:IsUnliked() and (not f or f(c))
 			end
 end
 function Cyberdark.EquipTarget(f,targets,mandatory)
@@ -1021,9 +1021,9 @@ end)()
 --[[
 	Effect.CreateVernalizerSPEffect(c,id,desc,uniquecat,uniquetg,uniqueop)
 
-	Creates an ignition Effect object for the "Vernalizer Fairy" effects that
+	Creates an ignition Effect object for the "Vernalizer Wanderer" effects that
 	discard themselves and another card from the hand.
-	Includes handling for "Flower Crown of the Vernalizer Fairy" cost replacement.
+	Includes handling for "Flower Crown of the Vernalizer Wanderer" cost replacement.
 
 	Card c: the owner of the Effect
 	int id: the card ID used for the HOPT restriction and strings

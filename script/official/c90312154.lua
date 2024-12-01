@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e2:SetCode(EFFECT_CHANGE_CODE)
-	e2:SetRange(LOCATION_SZONE+LOCATION_GRAVE)
+	e2:SetRange(LOCATION_SZONE+LOCATION_REST)
 	e2:SetValue(CARD_SANCTUARY_SKY)
 	c:RegisterEffect(e2)
 	--Negate
@@ -55,12 +55,12 @@ function s.setop(e,tp,eg,ep,ev,re,r,rp)
 end
 --Negate
 function s.remfilter(c)
-	return c:IsRace(RACE_FAIRY) and c:IsAbleToRemoveAsCost() and c:IsMonster() and aux.SpElimFilter(c,true,false)
+	return c:IsRace(RACE_WANDERER) and c:IsAbleToRemoveAsCost() and c:IsMonster() and aux.SpElimFilter(c,true,false)
 end
 function s.negcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.remfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.remfilter,tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local tc=Duel.SelectMatchingCard(tp,s.remfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local tc=Duel.SelectMatchingCard(tp,s.remfilter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.Remove(tc,POS_FACEUP,REASON_COST)
 end
 function s.negfilter(c)

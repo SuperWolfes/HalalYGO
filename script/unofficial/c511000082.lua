@@ -1,5 +1,5 @@
 --雪の妖精
---Snow Fairy
+--Snow Wanderer
 local s,id=GetID()
 function s.initial_effect(c)
 	--cannot activate

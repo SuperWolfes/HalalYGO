@@ -58,7 +58,7 @@ end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:CheckRemoveOverlayCard(tp,1,REASON_COST) end
-	Duel.SendtoGrave(c:GetOverlayGroup(),REASON_COST)
+	Duel.SendtoRest(c:GetOverlayGroup(),REASON_COST)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroupCount(tp,0,LOCATION_HAND)>0 end
@@ -89,7 +89,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 			local tc=Duel.SelectMatchingCard(tp,s.filter,tp,0,LOCATION_HAND,1,1,nil,tp,eg,ep,ev,re,r,rp):GetFirst()
 			Duel.SetTargetCard(tc)
-			if not tc or (tc:IsHasEffect(EFFECT_CANNOT_TRIGGER) or tc:IsForbidden()) then return end
+			if not tc or (tc:IsHasEffect(EFFECT_CANNOT_TRIGGER) or tc:IsUnliked()) then return end
 			Duel.SkipPhase(Duel.GetTurnPlayer(),PHASE_BATTLE,RESET_PHASE+PHASE_BATTLE_STEP,1)
 			Duel.BreakEffect()
 			local tpe=tc:GetType()
@@ -120,12 +120,12 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 						end
 						fc=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
 						if fc and Duel.Destroy(fc,REASON_RULE)==0 then 
-							Duel.SendtoGrave(tc,REASON_RULE) 
+							Duel.SendtoRest(tc,REASON_RULE) 
 						end
 					else
 						fc=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
-						if fc and Duel.SendtoGrave(fc,REASON_RULE)==0 then 
-							Duel.SendtoGrave(tc,REASON_RULE) 
+						if fc and Duel.SendtoRest(fc,REASON_RULE)==0 then 
+							Duel.SendtoRest(tc,REASON_RULE) 
 						end
 					end
 				end
@@ -133,7 +133,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 				Duel.Hint(HINT_CARD,0,tc:GetCode())
 				tc:CreateEffectRelation(te)
 				if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 and not tc:IsHasEffect(EFFECT_REMAIN_FIELD) then
-					tc:CancelToGrave(false)
+					tc:CancelToRest(false)
 				end
 				if co then co(te,tp,eg,ep,ev,re,r,rp,1) end
 				if tg then tg(te,tp,eg,ep,ev,re,r,rp,1) end

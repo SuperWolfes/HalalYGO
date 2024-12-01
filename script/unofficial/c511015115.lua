@@ -90,7 +90,7 @@ function s.disop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.resetop(e,tp,eg,ep,ev,re,r,rp)
 	local g=e:GetLabelObject()
-	Duel.SendtoGrave(g,REASON_RULE)
+	Duel.SendtoRest(g,REASON_RULE)
 end
 function s.filter(c,e,tp,mg)
 	return c:IsCode(58054262) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -99,7 +99,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local og=Duel.GetTargetCards(e)
 	local c=e:GetHandler()
-	if not c:IsRelateToEffect(e) then Duel.SendtoGrave(g,REASON_RULE) return end
+	if not c:IsRelateToEffect(e) then Duel.SendtoRest(g,REASON_RULE) return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local tc=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,og):GetFirst()
 	if tc then
@@ -109,7 +109,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		c:SetCardTarget(tc)
 		c:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,0)
 	else
-		Duel.SendtoGrave(g,REASON_RULE)
+		Duel.SendtoRest(g,REASON_RULE)
 	end
 end
 function s.regop2(e,tp,eg,ep,ev,re,r,rp)

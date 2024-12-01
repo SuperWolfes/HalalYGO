@@ -45,7 +45,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not tc or not tc:IsRelateToEffect(e) or tc:IsFacedown() then return end
 	local g=Duel.GetMatchingGroup(s.desfilter,tp,0,LOCATION_MZONE,nil,tc:GetAttack())
 	if #g>0 and Duel.Destroy(g,REASON_EFFECT)>0 then
-		local og=Duel.GetOperatedGroup():Filter(Card.IsLocation,nil,LOCATION_GRAVE)
+		local og=Duel.GetOperatedGroup():Filter(Card.IsLocation,nil,LOCATION_REST)
 		if #og==0 then return end
 		local fc=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
 		local dam=0

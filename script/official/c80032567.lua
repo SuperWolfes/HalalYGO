@@ -19,5 +19,5 @@ function s.filter(c)
 	return c:IsSetCard(0x22) and c:IsMonster()
 end
 function s.val(e,c)
-	return Duel.GetMatchingGroupCount(s.filter,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil)*200
+	return Duel.GetMatchingGroupCount(s.filter,e:GetHandlerPlayer(),LOCATION_REST,0,nil)*200
 end

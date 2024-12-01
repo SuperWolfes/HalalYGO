@@ -1,5 +1,5 @@
 --魔のデッキ破壊ウイルス
---Grinning Grave Virus
+--Grinning Rest Virus
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

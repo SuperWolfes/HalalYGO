@@ -1,5 +1,5 @@
 --女神ヴェルダンディの導き (Anime)
---Goddess Verdande's Guidance (Anime)
+--Monsterdess Verdande's Guidance (Anime)
 --Scripted by Eerie Code and AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)

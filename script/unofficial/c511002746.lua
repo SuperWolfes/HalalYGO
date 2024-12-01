@@ -14,13 +14,13 @@ function s.xyzfilter(c,mg)
 	return c:IsXyzSummonable(nil,mg)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	local mg=Duel.GetMatchingGroup(Card.IsSetCard,tp,LOCATION_GRAVE,0,nil,0x76)
+	local mg=Duel.GetMatchingGroup(Card.IsSetCard,tp,LOCATION_REST,0,nil,0x76)
 	if chk==0 then return Duel.GetLocationCountFromEx(tp)>0 and #mg>1
 		and Duel.IsExistingMatchingCard(s.xyzfilter,tp,LOCATION_EXTRA,0,1,nil,mg) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local mg=Duel.GetMatchingGroup(Card.IsSetCard,tp,LOCATION_GRAVE,0,nil,0x76)
+	local mg=Duel.GetMatchingGroup(Card.IsSetCard,tp,LOCATION_REST,0,nil,0x76)
 	local xyzg=Duel.GetMatchingGroup(s.xyzfilter,tp,LOCATION_EXTRA,0,nil,mg)
 	if #xyzg>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)

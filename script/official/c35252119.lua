@@ -17,9 +17,9 @@ function s.initial_effect(c)
 	local e2=e1:Clone()
 	e2:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
 	c:RegisterEffect(e2)
-	--Send to grave
+	--Send to rest
 	local e3=Effect.CreateEffect(c)
-	e3:SetCategory(CATEGORY_TOGRAVE)
+	e3:SetCategory(CATEGORY_TOREST)
 	e3:SetType(EFFECT_TYPE_IGNITION)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e3:SetRange(LOCATION_MZONE)
@@ -30,7 +30,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.indfilter1(c,tp)
-	return c:IsMonster() and Duel.IsExistingMatchingCard(s.indfilter2,tp,LOCATION_GRAVE,0,1,c,c)
+	return c:IsMonster() and Duel.IsExistingMatchingCard(s.indfilter2,tp,LOCATION_REST,0,1,c,c)
 end
 function s.indfilter2(c,tc)
 	return c:IsMonster() and c:GetOriginalAttribute()==tc:GetOriginalAttribute()
@@ -38,7 +38,7 @@ function s.indfilter2(c,tc)
 		and not c:IsCode(tc:GetCode())
 end
 function s.indcon(e)
-	return Duel.IsExistingMatchingCard(s.indfilter1,e:GetHandlerPlayer(),LOCATION_GRAVE,0,1,nil,e:GetHandlerPlayer())
+	return Duel.IsExistingMatchingCard(s.indfilter1,e:GetHandlerPlayer(),LOCATION_REST,0,1,nil,e:GetHandlerPlayer())
 end
 function s.gycfilter(c,tp)
 	return c:IsMonster() and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
@@ -47,24 +47,24 @@ function s.gycheck(sg,e,tp)
 	return sg:GetClassCount(Card.GetOriginalAttribute)==1 
 		and sg:GetClassCount(Card.GetOriginalRace)==1 
 		and sg:GetClassCount(Card.GetCode)==#sg
-		and Duel.IsExistingTarget(Card.IsAbleToGrave,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,sg)
+		and Duel.IsExistingTarget(Card.IsAbleToRest,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,sg)
 end
 function s.gycost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(s.gycfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil,tp)
+	local g=Duel.GetMatchingGroup(s.gycfilter,tp,LOCATION_MZONE+LOCATION_REST,0,nil,tp)
 	if chk==0 then return aux.SelectUnselectGroup(g,e,tp,2,2,s.gycheck,0) end
 	local sg=aux.SelectUnselectGroup(g,e,tp,2,2,s.gycheck,1,tp,HINTMSG_REMOVE)
 	Duel.Remove(sg,POS_FACEUP,REASON_COST)
 end
 function s.gytg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsOnField() and chkc:IsAbleToGrave() end
+	if chkc then return chkc:IsOnField() and chkc:IsAbleToRest() end
 	if chk==0 then return true end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local g=Duel.SelectTarget(tp,Card.IsAbleToGrave,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,g,1,0,0)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	local g=Duel.SelectTarget(tp,Card.IsAbleToRest,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,g,1,0,0)
 end
 function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) then
-		Duel.SendtoGrave(tc,REASON_EFFECT)
+		Duel.SendtoRest(tc,REASON_EFFECT)
 	end
 end

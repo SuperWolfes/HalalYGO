@@ -1,4 +1,4 @@
---The God of Obelisk
+--The Monster of Obelisk
 --マイケル・ローレンス・ディーによってスクリプト
 --scripted by MLD, credits to TPD & Cybercatman, updated by Larry126
 Duel.LoadScript("c421.lua")
@@ -99,7 +99,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return Duel.CheckReleaseGroupCost(tp,nil,2,false,nil,c)
 		and ((not c:IsHasEffect(EFFECT_CANNOT_ATTACK_ANNOUNCE)
-		and not c:IsHasEffect(EFFECT_FORBIDDEN) and not c:IsHasEffect(EFFECT_CANNOT_ATTACK)
+		and not c:IsHasEffect(EFFECT_UNLIKED) and not c:IsHasEffect(EFFECT_CANNOT_ATTACK)
 		and not Duel.IsPlayerAffectedByEffect(tp,EFFECT_CANNOT_ATTACK_ANNOUNCE)
 		and not Duel.IsPlayerAffectedByEffect(tp,EFFECT_CANNOT_ATTACK))
 		or c:IsHasEffect(EFFECT_UNSTOPPABLE_ATTACK)) end

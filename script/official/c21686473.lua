@@ -1,5 +1,5 @@
 --DDD運命王ゼロ・ラプラス
---D/D/D Destiny King Zero Laplace
+--D/D/D Destrudic King Zero Laplace
 local s,id=GetID()
 function s.initial_effect(c)
 	--pendulum summon

@@ -35,7 +35,7 @@ function s.stage2(e,tc,tp,sg,chk)
 	end
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsLocation(LOCATION_GRAVE) and e:GetHandler():IsAbleToRemove() end
+	if chk==0 then return e:GetHandler():IsLocation(LOCATION_REST) and e:GetHandler():IsAbleToRemove() end
 	Duel.Remove(e:GetHandler(),POS_FACEUP,REASON_COST)
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	e3:SetCode(EFFECT_UPDATE_ATTACK)
 	e3:SetRange(LOCATION_SZONE)
 	e3:SetTargetRange(LOCATION_MZONE,0)
-	e3:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_SPELLCASTER))
+	e3:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_MENTOR))
 	e3:SetValue(s.atkval)
 	c:RegisterEffect(e3)
 	--registration before leaving
@@ -39,13 +39,13 @@ function s.initial_effect(c)
 	e4:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e4:SetOperation(s.regop)
 	c:RegisterEffect(e4)
-	--add a Spellcaster to hand
+	--add a Mentor to hand
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(id,0))
 	e5:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e5:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
-	e5:SetCode(EVENT_TO_GRAVE)
+	e5:SetCode(EVENT_TO_REST)
 	e5:SetLabelObject(e4)
 	e5:SetCondition(s.thcon)
 	e5:SetTarget(s.thtg)
@@ -77,7 +77,7 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return ct>0 and c:IsReason(REASON_DESTROY)
 end
 function s.filter(c,level)
-	return c:IsMonster() and c:IsRace(RACE_SPELLCASTER) and c:IsLevelBelow(level) and c:IsAbleToHand()
+	return c:IsMonster() and c:IsRace(RACE_MENTOR) and c:IsLevelBelow(level) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil,e:GetLabel()) end

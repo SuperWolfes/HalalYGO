@@ -16,7 +16,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tg=Duel.GetAttacker()
-	if chk==0 then return tg:IsOnField() and tg:IsDestructable() and (tg:IsType(TYPE_RITUAL) or tg:IsType(TYPE_FUSION)) end
+	if chk==0 then return tg:IsOnField() and tg:IsDestructable() and (tg:IsType(TYPE_LOCKED) or tg:IsType(TYPE_FUSION)) end
 	Duel.SetTargetCard(tg)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,tg,1,0,0)
 end
@@ -38,6 +38,6 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.mgfilter(c,e,tp,tc)
-	return c:IsControler(tp) and c:IsLocation(LOCATION_GRAVE) 
+	return c:IsControler(tp) and c:IsLocation(LOCATION_REST) 
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end

@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
-	e1:SetCode(EVENT_TO_GRAVE)
+	e1:SetCode(EVENT_TO_REST)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DELAY)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1,id)
@@ -42,16 +42,16 @@ function s.tfcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.tfcfilter,1,e:GetHandler(),tp)
 end
 function s.tffilter(c,tp)
-	return c:IsSpellTrap() and c:IsSetCard(0x109) and not c:IsForbidden() and c:CheckUniqueOnField(tp)
+	return c:IsSpellTrap() and c:IsSetCard(0x109) and not c:IsUnliked() and c:CheckUniqueOnField(tp)
 		and not c:IsType(TYPE_FIELD)
 end
 function s.tftg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.tffilter(chkc,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.tffilter(chkc,tp) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and Duel.IsExistingTarget(s.tffilter,tp,LOCATION_GRAVE,0,1,nil,tp) end
+		and Duel.IsExistingTarget(s.tffilter,tp,LOCATION_REST,0,1,nil,tp) end
 	local ct=math.min(Duel.GetLocationCount(tp,LOCATION_SZONE),2)
-	local g=Duel.SelectTarget(tp,s.tffilter,tp,LOCATION_GRAVE,0,1,ct,nil,tp)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,#g,0,0)
+	local g=Duel.SelectTarget(tp,s.tffilter,tp,LOCATION_REST,0,1,ct,nil,tp)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,#g,0,0)
 end
 function s.tfop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetTargetCards(e)

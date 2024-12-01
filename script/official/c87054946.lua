@@ -23,10 +23,10 @@ function s.initial_effect(c)
 end
 s.listed_series={0x11f}
 function s.lcheck(g,lc,sumtype,tp)
-	return g:IsExists(Card.IsType,1,nil,TYPE_RITUAL,lc,sumtype,tp)
+	return g:IsExists(Card.IsType,1,nil,TYPE_LOCKED,lc,sumtype,tp)
 end
 function s.matcheck(e,c)
-	local ct=c:GetMaterial():FilterCount(Card.IsType,nil,TYPE_RITUAL)
+	local ct=c:GetMaterial():FilterCount(Card.IsType,nil,TYPE_LOCKED)
 	if ct>=1 then
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)

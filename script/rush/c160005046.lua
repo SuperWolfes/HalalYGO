@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.costfilter(c)
-	return c:IsMonster() and c:IsRace(RACE_AQUA) and c:IsAbleToGraveAsCost()
+	return c:IsMonster() and c:IsRace(RACE_AQUA) and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil) end
@@ -36,14 +36,14 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
 	local tg=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,1,nil)
-	if Duel.SendtoGrave(tg,REASON_COST)==1 then
+	if Duel.SendtoRest(tg,REASON_COST)==1 then
 		--Effect
 		local dg=Duel.GetMatchingGroup(aux.FilterMaximumSideFunctionEx(s.desfilter),tp,0,LOCATION_MZONE,e:GetHandler())
 		if #dg>0 then
 			local sg=dg:Select(tp,1,1,nil)
 			sg=sg:AddMaximumCheck()
 			Duel.HintSelection(sg)
-			if Duel.Destroy(sg,REASON_EFFECT)>0 and sg:GetFirst():GetPreviousRaceOnField()&RACE_SPELLCASTER>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
+			if Duel.Destroy(sg,REASON_EFFECT)>0 and sg:GetFirst():GetPreviousRaceOnField()&RACE_MENTOR>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 				local sg=Duel.GetMatchingGroup(aux.TRUE,tp,0,LOCATION_MZONE,nil)
 				Duel.Destroy(sg,REASON_EFFECT)
 			end

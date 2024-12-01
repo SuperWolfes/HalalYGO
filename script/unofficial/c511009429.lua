@@ -1,5 +1,5 @@
 --Ｇゴーレム・インヴァリッド・ドルメン
---G Golem Invalid Dolmen
+--G Gopal Invalid Dolmen
 --fixed by Larry126
 local s,id=GetID()
 function s.initial_effect(c)

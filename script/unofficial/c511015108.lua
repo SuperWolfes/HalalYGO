@@ -22,11 +22,11 @@ function s.defcon(e,tp,eg,ep,ev,re,r,rp)
 	local d=Duel.GetAttackTarget()
 	return (a:IsDefensePos() or (d and d:IsDefensePos()))
 		and (Duel.GetBattleDamage(tp)>0 or Duel.GetBattleDamage(1-tp)>0)
-		and not Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,1,nil)
+		and not Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,1,nil)
 end
 function s.defcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsDiscardable() end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST+REASON_DISCARD)
+	Duel.SendtoRest(e:GetHandler(),REASON_COST+REASON_DISCARD)
 end
 function s.deffilter(c)
 	return c:IsFaceup() and c:IsSetCard(0x9a)

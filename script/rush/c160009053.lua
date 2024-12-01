@@ -1,5 +1,5 @@
 --ゴースト・サイクロン
---Ghost Cyclone
+--Miss Cyclone
 
 --Substitute ID
 local s,id=GetID()
@@ -28,7 +28,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local dg=Duel.SelectTarget(tp,Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,1,1,nil)
 	if #dg>0 then
 		Duel.HintSelection(dg,true)
-		if Duel.Destroy(dg,REASON_EFFECT)>0 and not Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_GRAVE,0,4,nil)
+		if Duel.Destroy(dg,REASON_EFFECT)>0 and not Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_REST,0,4,nil)
 			and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 			Duel.Draw(tp,1,REASON_EFFECT)
 		end

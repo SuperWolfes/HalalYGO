@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1,false,REGISTER_FLAG_DETACH_XMAT)
 end
 function s.tfilter(c,tp)
-	return (c:IsOnField() or c:IsLocation(LOCATION_GRAVE) or c:IsLocation(LOCATION_REMOVED)) and c:IsControler(tp)
+	return (c:IsOnField() or c:IsLocation(LOCATION_REST) or c:IsLocation(LOCATION_REMOVED)) and c:IsControler(tp)
 end
 function s.discon(e,tp,eg,ep,ev,re,r,rp)
 	if rp==tp or e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED) then return false end

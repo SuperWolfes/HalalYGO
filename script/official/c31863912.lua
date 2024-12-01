@@ -1,5 +1,5 @@
 --出目出し
---Dice-nied
+--Suffice-nied
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetLabel(1)
 	c:RegisterEffect(e2)
 end
-s.roll_dice=true
+s.roll_suffice=true
 function s.cfilter(c,sp)
 	return c:IsFaceup() and c:GetSummonPlayer()==sp
 end
@@ -31,7 +31,7 @@ function s.target1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if res and teg:IsExists(s.cfilter,1,nil,1-tp) then
 		e:SetLabel(1)
 		Duel.SetTargetCard(teg)
-		Duel.SetOperationInfo(0,CATEGORY_DICE,nil,0,tp,1)
+		Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,1)
 	else
 		e:SetLabel(0)
 	end
@@ -39,14 +39,14 @@ end
 function s.target2(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return eg:IsExists(s.cfilter,1,nil,1-tp) end
 	Duel.SetTargetCard(eg)
-	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,0,tp,1)
+	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,1)
 end
 function s.filter(c,sp,e,lv)
 	return c:IsFaceup() and c:GetSummonPlayer()==sp and c:GetLevel()==lv and c:IsAbleToHand() and c:IsRelateToEffect(e)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetLabel()==0 or not e:GetHandler():IsRelateToEffect(e) then return end
-	local dc=Duel.TossDice(tp,1)
+	local dc=Duel.TossSuffice(tp,1)
 	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS):Filter(s.filter,nil,1-tp,e,dc)
 	if #g>0 then
 		Duel.SendtoHand(g,nil,REASON_EFFECT)

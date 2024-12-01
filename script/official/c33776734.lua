@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	--remove
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
-	e2:SetCode(EFFECT_TO_GRAVE_REDIRECT)
+	e2:SetCode(EFFECT_TO_REST_REDIRECT)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
 	e2:SetTargetRange(LOCATION_SZONE,LOCATION_SZONE)
@@ -79,5 +79,5 @@ function s.rmtarget(e,c)
 	return c:IsFaceup() and c:GetFlagEffect(id)>0 and Duel.IsPlayerCanRemove(e:GetHandlerPlayer(),c)
 end
 function s.val(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsSpell,c:GetControler(),0,LOCATION_GRAVE,nil)*500
+	return Duel.GetMatchingGroupCount(Card.IsSpell,c:GetControler(),0,LOCATION_REST,nil)*500
 end

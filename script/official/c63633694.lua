@@ -59,7 +59,7 @@ end
 	--Check for face-up monster in EMZ
 function s.eqfilter(c,tp)
 	return c:IsFaceup() and c:IsInExtraMZone() and (c:IsControler(tp) or c:IsAbleToChangeControler())
-		and not c:IsForbidden()
+		and not c:IsUnliked()
 end
 function s.eqcon(e,tp,eg,ep,ev,re,r,rp)
 	local g=e:GetHandler():GetEquipGroup():Filter(s.eqconfilter,nil)

@@ -38,7 +38,7 @@ end
 s.listed_names={CARD_NEOS}
 s.listed_series={0x3008,0x1f}
 function s.dspconfilter(c,tp)
-	return c:IsSetCard(0x3008) and c:IsPreviousControler(tp) and c:IsLocation(LOCATION_GRAVE+LOCATION_REMOVED)
+	return c:IsSetCard(0x3008) and c:IsPreviousControler(tp) and c:IsLocation(LOCATION_REST+LOCATION_REMOVED)
 		and c:IsFaceup() and (c:IsMonster() or c:IsPreviousLocation(LOCATION_MZONE))
 end
 function s.dspcon(e,tp,eg,ep,ev,re,r,rp)
@@ -62,7 +62,7 @@ function s.dspop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.gspconfilter(c,tp)
 	return ((c:IsMonster() and c:IsSetCard(0x1f)) or c:IsCode(CARD_NEOS))
-		and c:IsPreviousControler(tp) and c:IsControler(tp) and c:IsPreviousLocation(LOCATION_MZONE+LOCATION_GRAVE)
+		and c:IsPreviousControler(tp) and c:IsControler(tp) and c:IsPreviousLocation(LOCATION_MZONE+LOCATION_REST)
 end
 function s.gspcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.gspconfilter,1,nil,tp)
@@ -72,13 +72,13 @@ function s.gspfilter(c,e,tp)
 end
 function s.gsptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(s.gspfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+		and Duel.IsExistingMatchingCard(s.gspfilter,tp,LOCATION_REST,0,1,nil,e,tp) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end
 function s.gspop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<1 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,s.gspfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,s.gspfilter,tp,LOCATION_REST,0,1,1,nil,e,tp)
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end

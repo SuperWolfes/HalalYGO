@@ -29,12 +29,12 @@ end
 
 --gain atk
 function card.atkfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_ZOMBIE)
+	return c:IsFaceup() and c:IsRace(RACE_CONTAMINED)
 end
 
 function card.atkop(e, tp, eg, ep, ev, re, r, rp)
 	local ac = Duel.GetAttacker()
-	if ac and ac:IsRace(RACE_ZOMBIE) then
+	if ac and ac:IsRace(RACE_CONTAMINED) then
 		ac:UpdateAttack(
 			Duel.GetMatchingGroupCount(card.atkfilter, tp, LOCATION_MZONE, 0, nil) * 100,
 			RESET_PHASE + PHASE_END + RESET_EVENT + RESETS_STANDARD,
@@ -45,21 +45,21 @@ end
 
 --to hand
 function card.thcfilter(c)
-	return c:IsMonster() and c:IsRace(RACE_ZOMBIE) and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c, true)
+	return c:IsMonster() and c:IsRace(RACE_CONTAMINED) and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c, true)
 end
 
 --unselect checking function - group must all be of same name and there must be a card left to add
 function card.rescon(sg, e, tp, mg)
 	return sg:GetClassCount(Card.GetCode) == 1 and
-		Duel.IsExistingMatchingCard(card.thfilter, tp, LOCATION_GRAVE + LOCATION_DECK, 0, 1, sg)
+		Duel.IsExistingMatchingCard(card.thfilter, tp, LOCATION_REST + LOCATION_DECK, 0, 1, sg)
 end
 
 function card.thfilter(c)
-	return c:IsRace(RACE_ZOMBIE) and c:IsAbleToHand()
+	return c:IsRace(RACE_CONTAMINED) and c:IsAbleToHand()
 end
 
 function card.thcost(e, tp, eg, ep, ev, re, r, rp, chk)
-	local g = Duel.GetMatchingGroup(card.thcfilter, tp, LOCATION_GRAVE + LOCATION_MZONE, 0, nil)
+	local g = Duel.GetMatchingGroup(card.thcfilter, tp, LOCATION_REST + LOCATION_MZONE, 0, nil)
 	if chk == 0 then
 		return aux.SelectUnselectGroup(g, e, tp, 2, 2, card.rescon, chk)
 	end
@@ -69,14 +69,14 @@ end
 
 function card.thtg(e, tp, eg, ep, ev, re, r, rp, chk)
 	if chk == 0 then
-		return Duel.IsExistingMatchingCard(card.thfilter, tp, LOCATION_GRAVE + LOCATION_DECK, 0, 1, nil)
+		return Duel.IsExistingMatchingCard(card.thfilter, tp, LOCATION_REST + LOCATION_DECK, 0, 1, nil)
 	end
-	Duel.SetOperationInfo(0, CATEGORY_TOHAND, nil, 1, tp, LOCATION_GRAVE + LOCATION_DECK)
+	Duel.SetOperationInfo(0, CATEGORY_TOHAND, nil, 1, tp, LOCATION_REST + LOCATION_DECK)
 end
 
 function card.thop(e, tp, eg, ep, ev, re, r, rp)
 	Duel.Hint(HINT_SELECTMSG, tp, HINTMSG_ATOHAND)
-	local g = Duel.SelectMatchingCard(tp, card.thfilter, tp, LOCATION_GRAVE + LOCATION_DECK, 0, 1, 1, nil)
+	local g = Duel.SelectMatchingCard(tp, card.thfilter, tp, LOCATION_REST + LOCATION_DECK, 0, 1, 1, nil)
 	if #g > 0 then
 		Duel.SendtoHand(g, nil, REASON_EFFECT)
 		Duel.ConfirmCards(1 - tp, g)

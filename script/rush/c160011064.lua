@@ -24,16 +24,16 @@ function s.ssfilter(c)
 	return c:IsSpellTrap() and c:IsSSetable() and not c:IsType(TYPE_FIELD)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.ssfilter,tp,LOCATION_GRAVE,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,nil,1,tp,0)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.ssfilter,tp,LOCATION_REST,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,nil,1,tp,0)
 end
 function s.immfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_PSYCHIC) and c:IsLevelAbove(7)
+	return c:IsFaceup() and c:IsRace(RACE_MENTAL) and c:IsLevelAbove(7)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
 	if ft>2 then ft=2 end
-	local g=Duel.SelectMatchingCard(tp,s.ssfilter,tp,LOCATION_GRAVE,0,1,ft,nil)
+	local g=Duel.SelectMatchingCard(tp,s.ssfilter,tp,LOCATION_REST,0,1,ft,nil)
 	if #g==0 then return end
 	Duel.HintSelection(g,true)
 	if Duel.SSet(tp,g)>0 and Duel.IsExistingMatchingCard(aux.FilterMaximumSideFunctionEx(s.immfilter),tp,LOCATION_MZONE,0,1,nil)

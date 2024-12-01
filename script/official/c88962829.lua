@@ -36,7 +36,7 @@ function s.thfilter(c,e)
 		and c:IsCanBeEffectTarget(e)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,nil,e)
+	local g=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_REST+LOCATION_REMOVED,0,nil,e)
 	if chk==0 then return g:GetClassCount(Card.GetCode)>=2 end
 	local tg=aux.SelectUnselectGroup(g,e,tp,2,2,aux.dncheck,1,tp,HINTMSG_ATOHAND)
 	Duel.SetTargetCard(tg)

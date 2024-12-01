@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--activate
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_TOGRAVE)
+	e1:SetCategory(CATEGORY_TOREST)
 	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(id)
@@ -64,20 +64,20 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return ec:IsControler(1-tp)
 end
 function s.filter(c,atk)
-	return c:GetAttack()>atk and c:IsAbleToGrave()
+	return c:GetAttack()>atk and c:IsAbleToRest()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ec=eg:GetFirst()
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGrave,tp,0,LOCATION_DECK,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRest,tp,0,LOCATION_DECK,1,nil) end
 	local sg=Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_DECK,nil,ec:GetAttack())
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,sg,#sg,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,sg,#sg,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ec=eg:GetFirst()
 	local sg=Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_DECK,nil,ec:GetAttack())
 	if #sg>0 then
-		Duel.SendtoGrave(sg,REASON_EFFECT)
-	elseif Duel.IsExistingMatchingCard(Card.IsAbleToGrave,tp,0,LOCATION_DECK,1,nil) then
+		Duel.SendtoRest(sg,REASON_EFFECT)
+	elseif Duel.IsExistingMatchingCard(Card.IsAbleToRest,tp,0,LOCATION_DECK,1,nil) then
 		local cg=Duel.GetFieldGroup(tp,0,LOCATION_DECK)
 		Duel.ConfirmCards(1-tp,cg)
 		Duel.ConfirmCards(tp,cg)

@@ -49,7 +49,7 @@ function s.tdcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetFieldGroupCount(tp,LOCATION_PZONE,0) == 1
 end
 function s.tdfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_SPELLCASTER) and not c:IsCode(id) and c:IsType(TYPE_PENDULUM) and c:IsAbleToDeck()
+	return c:IsFaceup() and c:IsRace(RACE_MENTOR) and not c:IsCode(id) and c:IsType(TYPE_PENDULUM) and c:IsAbleToDeck()
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

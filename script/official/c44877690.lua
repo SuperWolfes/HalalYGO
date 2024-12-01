@@ -1,15 +1,15 @@
 --氷結界の神精霊
---Sacred Spirit of the Ice Barrier
+--Sacred Guardian of the Ice Barrier
 local s,id=GetID()
 function s.initial_effect(c)
-	local sme,soe=Spirit.AddProcedure(c,EVENT_SUMMON_SUCCESS,EVENT_FLIP)
+	local sme,soe=Guardian.AddProcedure(c,EVENT_SUMMON_SUCCESS,EVENT_FLIP)
 	--Mandatory return
 	sme:SetDescription(aux.Stringid(id,0))
-	sme:SetCondition(aux.OR(s.icecon,Spirit.MandatoryReturnCondition))
+	sme:SetCondition(aux.OR(s.icecon,Guardian.MandatoryReturnCondition))
 	sme:SetTarget(s.mrettg)
 	sme:SetOperation(s.mretop)
 	--Optional return
-	soe:SetCondition(aux.AND(aux.NOT(s.icecon),Spirit.OptionalReturnCondition))
+	soe:SetCondition(aux.AND(aux.NOT(s.icecon),Guardian.OptionalReturnCondition))
 	--Cannot be Special Summoned
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -30,11 +30,11 @@ function s.mrettg(e,tp,eg,ep,ev,re,r,rp,chk)
 		Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,#g,0,0)
 	else
 		e:SetProperty(0)
-		Spirit.MandatoryReturnTarget(e,tp,eg,ep,ev,re,r,rp,1)
+		Guardian.MandatoryReturnTarget(e,tp,eg,ep,ev,re,r,rp,1)
 	end
 end
 function s.mretop(e,tp,eg,ep,ev,re,r,rp)
-	if not e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then return Spirit.ReturnOperation(e,tp,eg,ep,ev,re,r,rp) end
+	if not e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then return Guardian.ReturnOperation(e,tp,eg,ep,ev,re,r,rp) end
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) then
 		Duel.SendtoHand(tc,nil,REASON_EFFECT)

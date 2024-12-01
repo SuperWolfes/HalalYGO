@@ -50,16 +50,16 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		local b=e:GetHandler():IsLocation(LOCATION_HAND)
 		local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
 		if (b and ft>1) or (not b and ft>0) then
-			return Duel.IsExistingTarget(s.filter1,tp,0,LOCATION_GRAVE,1,e:GetHandler(),e,tp,eg,ep,ev,re,r,rp)
+			return Duel.IsExistingTarget(s.filter1,tp,0,LOCATION_REST,1,e:GetHandler(),e,tp,eg,ep,ev,re,r,rp)
 		else
-			return Duel.IsExistingTarget(s.filter2,tp,0,LOCATION_GRAVE,1,e:GetHandler(),e,tp,eg,ep,ev,re,r,rp)
+			return Duel.IsExistingTarget(s.filter2,tp,0,LOCATION_REST,1,e:GetHandler(),e,tp,eg,ep,ev,re,r,rp)
 		end
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)>0 then
-		Duel.SelectTarget(tp,s.filter1,tp,0,LOCATION_GRAVE,1,1,nil,e,tp,eg,ep,ev,re,r,rp)
+		Duel.SelectTarget(tp,s.filter1,tp,0,LOCATION_REST,1,1,nil,e,tp,eg,ep,ev,re,r,rp)
 	else
-		Duel.SelectTarget(tp,s.filter2,tp,0,LOCATION_GRAVE,1,1,nil,e,tp,eg,ep,ev,re,r,rp)
+		Duel.SelectTarget(tp,s.filter2,tp,0,LOCATION_REST,1,1,nil,e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)

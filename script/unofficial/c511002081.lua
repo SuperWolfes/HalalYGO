@@ -36,7 +36,7 @@ function s.initial_effect(c)
 	e3:SetCondition(s.atkcon)
 	e3:SetOperation(s.atkop)
 	c:RegisterEffect(e3)
-	--graveyard synchro
+	--resting place synchro
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_SINGLE)
 	e4:SetCode(id)
@@ -55,14 +55,14 @@ function s.spcon(e,c)
 		and Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
 end
 function s.tktg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>1 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) 
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>1 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) 
 		and Duel.IsPlayerCanSpecialSummonMonster(tp,9929399,0,TYPES_TOKEN,0,0,1,RACE_WINGEDBEAST,ATTRIBUTE_DARK) end
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,2,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,0)
 end
 function s.tkop(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if ft>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if ft>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	if ft<2 then return end
 	if not Duel.IsPlayerCanSpecialSummonMonster(tp,9929399,0,TYPES_TOKEN,0,0,1,RACE_WINGEDBEAST,ATTRIBUTE_DARK) then return end
 	for i=1,2 do
@@ -73,7 +73,7 @@ function s.tkop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.synlimit(e,c)
 	if not c then return false end
-	return not c:IsLocation(LOCATION_GRAVE)
+	return not c:IsLocation(LOCATION_REST)
 end
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	return r==REASON_SYNCHRO
@@ -110,7 +110,7 @@ function s.synchk(e,tp,eg,ep,ev,re,r,rp)
 			e1:SetType(EFFECT_TYPE_FIELD)
 			e1:SetCode(EFFECT_SPSUMMON_PROC)
 			e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
-			e1:SetRange(LOCATION_GRAVE)
+			e1:SetRange(LOCATION_REST)
 			e1:SetCondition(Synchro.Condition(f1,min1,max1,f2,min2,max2,sub1,sub2,req1,req2,s.reqm(reqm)))
 			e1:SetTarget(Synchro.Target(f1,min1,max1,f2,min2,max2,sub1,sub2,req1,req2,s.reqm(reqm)))
 			e1:SetOperation(Synchro.Operation)
@@ -121,7 +121,7 @@ function s.synchk(e,tp,eg,ep,ev,re,r,rp)
 			e1:SetType(EFFECT_TYPE_FIELD)
 			e1:SetCode(EFFECT_SPSUMMON_PROC)
 			e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
-			e1:SetRange(LOCATION_GRAVE)
+			e1:SetRange(LOCATION_REST)
 			e1:SetCondition(Synchro.Condition(table.unpack(t),s.reqm()))
 			e1:SetTarget(Synchro.Target(table.unpack(t),s.reqm()))
 			e1:SetOperation(Synchro.Operation)
@@ -132,7 +132,7 @@ function s.synchk(e,tp,eg,ep,ev,re,r,rp)
 			e1:SetType(EFFECT_TYPE_FIELD)
 			e1:SetCode(EFFECT_SPSUMMON_PROC)
 			e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
-			e1:SetRange(LOCATION_GRAVE)
+			e1:SetRange(LOCATION_REST)
 			e1:SetCondition(Synchro.Condition(table.unpack(t),s.reqm()))
 			e1:SetTarget(Synchro.Target(table.unpack(t),s.reqm()))
 			e1:SetOperation(Synchro.Operation)

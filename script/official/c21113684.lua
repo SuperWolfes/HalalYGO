@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	c:EnableCounterPermit(COUNTER_SPELL)
 	--fusion material
 	c:EnableReviveLimit()
-	Fusion.AddProcMix(c,true,true,s.ffilter,aux.FilterBoolFunctionEx(Card.IsRace,RACE_SPELLCASTER))
+	Fusion.AddProcMix(c,true,true,s.ffilter,aux.FilterBoolFunctionEx(Card.IsRace,RACE_MENTOR))
 	--attackup
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
@@ -55,7 +55,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e6)
 end
 s.counter_place_list={COUNTER_SPELL}
-s.miracle_synchro_fusion=true
+s.pulse_synchro_fusion=true
 function s.splimit(e,se,sp,st)
 	if e:GetHandler():IsLocation(LOCATION_EXTRA) then 
 		return (st&SUMMON_TYPE_FUSION)==SUMMON_TYPE_FUSION
@@ -63,7 +63,7 @@ function s.splimit(e,se,sp,st)
 	return true
 end
 function s.ffilter(c,fc,sumtype,tp)
-	return c:IsType(TYPE_SYNCHRO,fc,sumtype,tp) and c:IsRace(RACE_SPELLCASTER,fc,sumtype,tp)
+	return c:IsType(TYPE_SYNCHRO,fc,sumtype,tp) and c:IsRace(RACE_MENTOR,fc,sumtype,tp)
 end
 function s.attackup(e,c)
 	return c:GetCounter(COUNTER_SPELL)*1000

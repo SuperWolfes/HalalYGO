@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	--Must be properly summoned before reviving
 	c:EnableReviveLimit()
 	--Fusion Summon procedure
-	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x128),aux.FilterBoolFunctionEx(Card.IsRace,RACE_SPELLCASTER))
+	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x128),aux.FilterBoolFunctionEx(Card.IsRace,RACE_MENTOR))
 	--Destroy 1 card on the field
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -42,11 +42,11 @@ end
 s.listed_series={0x128}
 s.listed_names={id}
 
-	--Check for activated Spell Card/effect or non-fusion Spellcaster's effect
+	--Check for activated Spell Card/effect or non-fusion Mentor's effect
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local race=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_RACE)
 	return re:IsActiveType(TYPE_SPELL) or (not re:IsActiveType(TYPE_FUSION) and re:IsActiveType(TYPE_MONSTER)
-		and race&RACE_SPELLCASTER>0)
+		and race&RACE_MENTOR>0)
 end
 	--Activation legality
 --Effect 1
@@ -71,9 +71,9 @@ function s.thfilter(c)
 	return c:IsSetCard(0x128) and c:IsSpellTrap() and c:IsAbleToHand()
 end
 function s.tg3(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
 end
 	--Destroy 1 card on the field
 function s.op1(e,tp,eg,ep,ev,re,r,rp)
@@ -97,7 +97,7 @@ end
 	--Add 1 "Witchcrafter" Spell/Trap from GY to hand
 function s.op3(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
 	if #g>0 and Duel.SendtoHand(g,nil,REASON_EFFECT)>0
 		and g:GetFirst():IsLocation(LOCATION_HAND) then
 		Duel.ConfirmCards(1-tp,g)

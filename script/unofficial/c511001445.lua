@@ -24,7 +24,7 @@ function s.xyzfilter(c,mg)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tid=Duel.GetTurnCount()
-	local mg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,nil,tid)
+	local mg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_REST,0,nil,tid)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and #mg>1
 		and Duel.IsExistingMatchingCard(s.xyzfilter,tp,LOCATION_EXTRA,0,1,nil,mg) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,0,0)
@@ -32,7 +32,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tid=Duel.GetTurnCount()
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
-	local mg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,nil,tid)
+	local mg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_REST,0,nil,tid)
 	if #mg<=1 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)
 	local mg1=mg:FilterSelect(tp,s.mfilter1,1,1,nil,mg,tp)

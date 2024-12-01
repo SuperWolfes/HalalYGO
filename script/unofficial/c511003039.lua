@@ -25,7 +25,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_MZONE,0,1,1,nil,tp)
 	local mg=g:GetFirst():GetOverlayGroup()
 	local ct=#mg
-	Duel.SendtoGrave(mg,REASON_COST)
+	Duel.SendtoRest(mg,REASON_COST)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)

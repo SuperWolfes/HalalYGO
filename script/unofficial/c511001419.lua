@@ -40,7 +40,7 @@ function s.recon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.retop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetLabelObject()
-	if not tc or not tc:IsLocation(LOCATION_GRAVE) then return end
+	if not tc or not tc:IsLocation(LOCATION_REST) then return end
 	Duel.Hint(HINT_CARD,0,id)
 	if Duel.SpecialSummon(tc,0,tc:GetOwner(),tc:GetOwner(),false,false,POS_FACEUP)>0 then
 		Duel.Destroy(e:GetHandler(),REASON_EFFECT)

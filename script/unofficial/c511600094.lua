@@ -27,7 +27,7 @@ function s.counterfilter(c)
 	return not c:IsSummonType(SUMMON_TYPE_PENDULUM)
 end
 function s.scfilter(c,pc)
-	return c:IsType(TYPE_PENDULUM) and not c:IsForbidden() and c:IsLevelAbove(1)
+	return c:IsType(TYPE_PENDULUM) and not c:IsUnliked() and c:IsLevelAbove(1)
 end
 function s.sctg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.scfilter,tp,LOCATION_DECK,0,1,nil,e:GetHandler()) end
@@ -74,6 +74,6 @@ function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_CANNOT_TRIGGER)
-	e1:SetReset(RESET_EVENT+RESETS_STANDARD_EXC_GRAVE)
+	e1:SetReset(RESET_EVENT+RESETS_STANDARD_EXC_REST)
 	bc:RegisterEffect(e1)
 end

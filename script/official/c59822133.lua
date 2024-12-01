@@ -42,7 +42,7 @@ end
 s.listed_series={0xdd}
 s.listed_names={id}
 function s.negcon(e,tp,eg,ep,ev,re,r,rp)
-	return re:GetActivateLocation()==LOCATION_GRAVE and Duel.IsChainNegatable(ev)
+	return re:GetActivateLocation()==LOCATION_REST and Duel.IsChainNegatable(ev)
 end
 function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

@@ -1,5 +1,5 @@
 --合体竜ティマイオス
---Timaeus the Dragon of Destiny
+--Timaeus the Dragon of Destrudic
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -28,16 +28,16 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_DARK_MAGICIAN}
 function s.spcfilter(c,ft)
-	return c:IsAbleToGraveAsCost() and (c:IsFaceup() or c:IsLocation(LOCATION_HAND))
-		and ((c:IsRace(RACE_SPELLCASTER) and c:IsMonster()) or (c:IsSpellTrap() and c:ListsCode(CARD_DARK_MAGICIAN)))
+	return c:IsAbleToRestAsCost() and (c:IsFaceup() or c:IsLocation(LOCATION_HAND))
+		and ((c:IsRace(RACE_MENTOR) and c:IsMonster()) or (c:IsSpellTrap() and c:ListsCode(CARD_DARK_MAGICIAN)))
 		and (ft>0 or c:IsInMainMZone())
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.spcfilter,tp,LOCATION_ONFIELD+LOCATION_HAND,0,1,nil,ft) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.spcfilter,tp,LOCATION_ONFIELD+LOCATION_HAND,0,1,1,nil,ft)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,false,false) end
@@ -50,5 +50,5 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.fcheck(tp,sg,fc)
-	return sg:IsExists(Card.IsRace,1,nil,RACE_SPELLCASTER)
+	return sg:IsExists(Card.IsRace,1,nil,RACE_MENTOR)
 end

@@ -48,7 +48,7 @@ function s.initial_effect(c)
 end
 s.listed_names={96561011,511000669}
 function s.val(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsRace,c:GetControler(),LOCATION_GRAVE,0,nil,RACE_DRAGON)*400
+	return Duel.GetMatchingGroupCount(Card.IsRace,c:GetControler(),LOCATION_REST,0,nil,RACE_DRAGON)*400
 end
 function s.hspfilter(c,tp)
 	return c:IsCode(96561011) and c:GetEquipGroup():IsExists(Card.IsCode,1,nil,511000669) 

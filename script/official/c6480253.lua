@@ -15,7 +15,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_POLYMERIZATION}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_GRAVE) and e:GetHandler():IsReason(REASON_BATTLE)
+	return e:GetHandler():IsLocation(LOCATION_REST) and e:GetHandler():IsReason(REASON_BATTLE)
 end
 function s.filter1(c)
 	return c:IsSetCard(0x3008) and c:IsAbleToHand()
@@ -26,12 +26,12 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
 	if chk==0 then return true end
-	if Duel.IsExistingTarget(s.filter1,tp,LOCATION_GRAVE,0,1,nil)
-		and Duel.IsExistingTarget(s.filter2,tp,LOCATION_GRAVE,0,1,nil) then
+	if Duel.IsExistingTarget(s.filter1,tp,LOCATION_REST,0,1,nil)
+		and Duel.IsExistingTarget(s.filter2,tp,LOCATION_REST,0,1,nil) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-		local g1=Duel.SelectTarget(tp,s.filter1,tp,LOCATION_GRAVE,0,1,1,nil)
+		local g1=Duel.SelectTarget(tp,s.filter1,tp,LOCATION_REST,0,1,1,nil)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-		local g2=Duel.SelectTarget(tp,s.filter2,tp,LOCATION_GRAVE,0,1,1,nil)
+		local g2=Duel.SelectTarget(tp,s.filter2,tp,LOCATION_REST,0,1,1,nil)
 		g1:Merge(g2)
 		Duel.SetOperationInfo(0,CATEGORY_TOHAND,g1,2,0,0)
 	end

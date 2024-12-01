@@ -53,7 +53,7 @@ function s.valcheck(e,c)
 end
 function s.indval(e,re,rp)
 	local rc=re:GetHandler()
-	return rc:IsSummonType(SUMMON_TYPE_SPECIAL) and rc:IsSummonLocation(LOCATION_GRAVE)
+	return rc:IsSummonType(SUMMON_TYPE_SPECIAL) and rc:IsSummonLocation(LOCATION_REST)
 		and re:IsActiveType(TYPE_MONSTER) and re:IsActivated()
 end
 function s.limcon(e,tp,eg,ep,ev,re,r,rp)
@@ -68,7 +68,7 @@ function s.limop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CLIENT_HINT)
 	e1:SetCode(EFFECT_CANNOT_ACTIVATE)
 	e1:SetTargetRange(1,1)
-	e1:SetValue(function(_,re) return re:GetActivateLocation()==LOCATION_GRAVE end)
+	e1:SetValue(function(_,re) return re:GetActivateLocation()==LOCATION_REST end)
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e1,tp)
 end

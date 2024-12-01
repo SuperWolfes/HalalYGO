@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	--Place itself in the S/T zone
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
-	e1:SetCode(EFFECT_TO_GRAVE_REDIRECT_CB)
+	e1:SetCode(EFFECT_TO_REST_REDIRECT_CB)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
 	e1:SetCondition(s.repcon)
 	e1:SetOperation(s.repop)

@@ -1,5 +1,5 @@
 --混沌幻魔アーミタイル (Anime)
---Armityle the Chaos Phantom (Anime)
+--Armityle the Chaos Illusion (Anime)
 --fixed by Larry126
 local s,id=GetID()
 function s.initial_effect(c)

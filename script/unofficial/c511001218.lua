@@ -1,4 +1,4 @@
---Curry Fiend Roo
+--Curry Tainted Roo
 local s,id=GetID()
 function s.initial_effect(c)
 	--atkup
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.val(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsSetCard,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil,0x54d)*200
+	return Duel.GetMatchingGroupCount(Card.IsSetCard,e:GetHandlerPlayer(),LOCATION_REST,0,nil,0x54d)*200
 end
 function s.filter2(c)
 	return c:IsFaceup() and c:IsMonster()

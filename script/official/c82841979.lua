@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()
-	Spirit.AddProcedure(c,EVENT_SPSUMMON_SUCCESS)
+	Guardian.AddProcedure(c,EVENT_SPSUMMON_SUCCESS)
 	--Cannot be Special Summoned
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -33,17 +33,17 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.spfilter(c,tp)
-	return c:IsType(TYPE_SPIRIT) and c:IsAbleToRemoveAsCost()
+	return c:IsType(TYPE_GUARDIAN) and c:IsAbleToRemoveAsCost()
 		and aux.SpElimFilter(c,true) and Duel.GetMZoneCount(tp,c)>0
 end
 function s.spcon(e,c)
 	if c==nil then return true end
 	local tp=e:GetHandlerPlayer()
-	return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,1,nil,tp)
+	return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_MZONE|LOCATION_REST,0,1,nil,tp)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,c)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,1,1,nil,tp)
+	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_MZONE|LOCATION_REST,0,1,1,nil,tp)
 	if #g==0 then return false end
 	e:SetLabelObject(g:GetFirst())
 	return true

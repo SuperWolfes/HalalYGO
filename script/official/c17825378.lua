@@ -28,7 +28,7 @@ s.counter_place_list={COUNTER_PREDATOR}
 function s.ctcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return (r&REASON_FUSION)==REASON_FUSION and c:IsFaceup()
-		and c:IsLocation(LOCATION_GRAVE+LOCATION_EXTRA) 
+		and c:IsLocation(LOCATION_REST+LOCATION_EXTRA) 
 end
 function s.cttg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)>0

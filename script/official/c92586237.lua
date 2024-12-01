@@ -30,7 +30,7 @@ function s.initial_effect(c)
 	--Send 1 "Bujin" monster from deck to GY
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
-	e3:SetCategory(CATEGORY_TOGRAVE)
+	e3:SetCategory(CATEGORY_TOREST)
 	e3:SetType(EFFECT_TYPE_IGNITION)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetCountLimit(1,{id,1})
@@ -44,7 +44,7 @@ s.listed_series={0x88}
 
 	--Check for a "Bujin" card
 function s.cfilter(c)
-	return c:IsSetCard(0x88) and c:IsAbleToGraveAsCost()
+	return c:IsSetCard(0x88) and c:IsAbleToRestAsCost()
 end
 	--Send 1 "Bujin" card from hand to GY as cost
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -69,26 +69,26 @@ function s.thfilter(c,cd)
 end
 	--Check for 1 "Bujin" monster to send to GY as cost
 function s.cfilter1(c,tp)
-	return c:IsMonster() and c:IsAbleToGraveAsCost() and c:IsSetCard(0x88)
-		and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil,c:GetCode())
+	return c:IsMonster() and c:IsAbleToRestAsCost() and c:IsSetCard(0x88)
+		and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil,c:GetCode())
 end
 	--Send 1 "Bujin" monster from hand to GY as cost
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter1,tp,LOCATION_HAND,0,1,nil,tp) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local sg=Duel.SelectMatchingCard(tp,s.cfilter1,tp,LOCATION_HAND,0,1,1,nil,tp)
-	Duel.SendtoGrave(sg,REASON_COST)
+	Duel.SendtoRest(sg,REASON_COST)
 	e:SetLabel(sg:GetFirst():GetCode())
 end
 	--Activation legality
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
 end
 	--Add 1 "Bujin" monster from your GY
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thfilter),tp,LOCATION_GRAVE,0,1,1,nil,e:GetLabel())
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thfilter),tp,LOCATION_REST,0,1,1,nil,e:GetLabel())
 	if #g>0 then
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)
@@ -96,7 +96,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 	--Check for 1 "Bujin" monster to send from deck
 function s.tgfilter(c,cd)
-	return c:IsSetCard(0x88) and c:IsMonster() and not c:IsCode(cd) and c:IsAbleToGrave()
+	return c:IsSetCard(0x88) and c:IsMonster() and not c:IsCode(cd) and c:IsAbleToRest()
 end
 	--Check for 1 "Bujin" monster to banish as cost
 function s.cfilter2(c,tp)
@@ -105,22 +105,22 @@ function s.cfilter2(c,tp)
 end
 	--Banish 1 "Bujin" monster from GY as cost
 function s.tgcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter2,tp,LOCATION_GRAVE,0,1,nil,tp) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local sg=Duel.SelectMatchingCard(tp,s.cfilter2,tp,LOCATION_GRAVE,0,1,1,nil,tp)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter2,tp,LOCATION_REST,0,1,nil,tp) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	local sg=Duel.SelectMatchingCard(tp,s.cfilter2,tp,LOCATION_REST,0,1,1,nil,tp)
 	Duel.Remove(sg,POS_FACEUP,REASON_COST)
 	e:SetLabel(sg:GetFirst():GetCode())
 end
 	--Activation legality
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
 	--Send 1 "Bujin" monster from deck to GY
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil,e:GetLabel())
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end

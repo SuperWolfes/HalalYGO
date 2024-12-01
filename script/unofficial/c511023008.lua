@@ -23,7 +23,7 @@ end
 s.listed_names={86188410}
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	local ec=e:GetHandler():GetPreviousEquipTarget()
-	return e:GetHandler():IsReason(REASON_LOST_TARGET) and ec:IsLocation(LOCATION_GRAVE)
+	return e:GetHandler():IsReason(REASON_LOST_TARGET) and ec:IsLocation(LOCATION_REST)
 		and ec:IsReason(REASON_DESTROY)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)

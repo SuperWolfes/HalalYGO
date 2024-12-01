@@ -9,10 +9,10 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e1:SetCode(EFFECT_CHANGE_CODE)
-	e1:SetRange(LOCATION_GRAVE)
+	e1:SetRange(LOCATION_REST)
 	e1:SetValue(CARD_SKULL_SERVANT)
 	c:RegisterEffect(e1)
-	--Substitute destruction for a level 3 or lower zombie monster(s)
+	--Substitute destruction for a level 3 or lower contaminated monster(s)
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EFFECT_DESTROY_REPLACE)
@@ -26,7 +26,7 @@ function s.initial_effect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-	e3:SetCode(EVENT_TO_GRAVE)
+	e3:SetCode(EVENT_TO_REST)
 	e3:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
 	e3:SetCountLimit(1,{id,1})
 	e3:SetTarget(s.thtg)
@@ -36,9 +36,9 @@ end
 	--Specifically lists "Skull Servant" and itself
 s.listed_names={CARD_SKULL_SERVANT,id}
 
-	--Check for level 3 or lower zombie monsters
+	--Check for level 3 or lower contaminated monsters
 function s.repfilter(c,tp)
-	return c:IsFaceup() and c:IsRace(RACE_ZOMBIE) and c:IsLevelBelow(3) and c:IsControler(tp) 
+	return c:IsFaceup() and c:IsRace(RACE_CONTAMINED) and c:IsLevelBelow(3) and c:IsControler(tp) 
 		and not c:IsReason(REASON_REPLACE) and c:IsReason(REASON_EFFECT+REASON_BATTLE)
 end
 	--Activation legality
@@ -49,9 +49,9 @@ end
 function s.repval(e,c)
 	return s.repfilter(c,e:GetHandlerPlayer())
 end
-	--Discard itself as substitute for a level 3 or lower zombie monster's destruction
+	--Discard itself as substitute for a level 3 or lower contaminated monster's destruction
 function s.repop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT+REASON_DISCARD+REASON_REPLACE)
+	Duel.SendtoRest(e:GetHandler(),REASON_EFFECT+REASON_DISCARD+REASON_REPLACE)
 end
 	--Check for "Skull Servant" or a monster that lists "Skull Servant"
 function s.thfilter(c)

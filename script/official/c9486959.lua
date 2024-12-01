@@ -1,5 +1,5 @@
 --神隠し鬼火丸
---Spiriting-Away Onibimaru
+--Guardianing-Away Onibimaru
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)

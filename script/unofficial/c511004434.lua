@@ -71,7 +71,7 @@ function s.operation(e,tp,eg,ev,ep,re,r,rp)
 	if #tg>0 then
 		local tc=tg:GetFirst()
 		while tc do
-			if tc:GetOverlayCount()~=0 then Duel.SendtoGrave(tc:GetOverlayGroup(),REASON_RULE) end
+			if tc:GetOverlayCount()~=0 then Duel.SendtoRest(tc:GetOverlayGroup(),REASON_RULE) end
 			tc=tg:GetNext()
 		end
 		Duel.Overlay(c,tg)
@@ -107,7 +107,7 @@ function s.desop(e,tp,eg,ev,ep,re,r,rp)
 	if c:IsRelateToEffect(e) and Duel.SendtoHand(c,nil,REASON_EFFECT)~=0 then
 		local mg=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
 		if mg:FilterCount(s.spfilter,nil,e,tp)~=#mg or Duel.GetLocationCount(tp,LOCATION_MZONE)<#mg 
-			or (Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) and #mg>1) then return end
+			or (Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) and #mg>1) then return end
 		Duel.SpecialSummon(mg,0,tp,tp,false,false,POS_FACEUP)
 	end
 end

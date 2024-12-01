@@ -15,7 +15,7 @@ function s.initial_effect(c)
 end
 s.listed_names={160201038,160201039}
 function s.costfilter(c)
-	return c:IsMonster() and c:IsAbleToGraveAsCost()
+	return c:IsMonster() and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil) end
@@ -24,17 +24,17 @@ function s.ssfilter(c)
 	return (c:IsCode(160201038) or c:IsCode(160201039)) and c:IsSSetable()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.ssfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.ssfilter,tp,LOCATION_REST,0,1,nil) end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then return end
 	local c=e:GetHandler()
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,1,nil)
-	if Duel.SendtoGrave(g,REASON_COST)~=0 then
-		Duel.SendtoGrave(c,REASON_COST)
+	if Duel.SendtoRest(g,REASON_COST)~=0 then
+		Duel.SendtoRest(c,REASON_COST)
 		local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
 		if ft>2 then ft=2 end
-		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.ssfilter),tp,LOCATION_GRAVE,0,1,ft,nil,e,tp)
+		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.ssfilter),tp,LOCATION_REST,0,1,ft,nil,e,tp)
 		Duel.HintSelection(g)
 		if #g>0 then
 			Duel.SSet(tp,g)

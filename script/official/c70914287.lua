@@ -43,7 +43,7 @@ end
 s.listed_names={44632120,71036835,7021574,34419588,CARD_KURIBOH}
 s.listed_series={0xa4}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetMatchingGroupCount(Card.IsMonster,tp,LOCATION_GRAVE,0,nil)>Duel.GetMatchingGroupCount(Card.IsMonster,1-tp,LOCATION_GRAVE,0,nil)
+	return Duel.GetMatchingGroupCount(Card.IsMonster,tp,LOCATION_REST,0,nil)>Duel.GetMatchingGroupCount(Card.IsMonster,1-tp,LOCATION_REST,0,nil)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
@@ -56,10 +56,10 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)
 end
 function s.atkfilter(c)
-	return c:IsSetCard(0xa4) and c:IsMonster() and (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup())
+	return c:IsSetCard(0xa4) and c:IsMonster() and (c:IsLocation(LOCATION_REST) or c:IsFaceup())
 end
 function s.val(e,c)
-	return Duel.GetMatchingGroupCount(s.atkfilter,c:GetControler(),LOCATION_MZONE+LOCATION_GRAVE,0,nil)*300
+	return Duel.GetMatchingGroupCount(s.atkfilter,c:GetControler(),LOCATION_MZONE+LOCATION_REST,0,nil)*300
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsTurnPlayer(tp) and Duel.IsBattlePhase() and Duel.GetCurrentChain()==0
@@ -69,10 +69,10 @@ function s.spfilter(c,e,tp,code)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	local locs=LOCATION_GRAVE+LOCATION_HAND
+	local locs=LOCATION_REST+LOCATION_HAND
 	if chk==0 then
 		return c:IsAbleToHand() and Duel.GetMZoneCount(tp,c)>=5
-			and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
+			and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)
 			and Duel.IsExistingMatchingCard(s.spfilter,tp,locs,0,1,nil,e,tp,44632120)
 			and Duel.IsExistingMatchingCard(s.spfilter,tp,locs,0,1,nil,e,tp,71036835)
 			and Duel.IsExistingMatchingCard(s.spfilter,tp,locs,0,1,nil,e,tp,7021574)
@@ -85,8 +85,8 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and Duel.SendtoHand(c,nil,REASON_EFFECT)>0 then
-		if Duel.GetLocationCount(tp,LOCATION_MZONE)<5 or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
-		local locs=LOCATION_GRAVE+LOCATION_HAND
+		if Duel.GetLocationCount(tp,LOCATION_MZONE)<5 or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
+		local locs=LOCATION_REST+LOCATION_HAND
 		local g1=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,locs,0,nil,e,tp,44632120)
 		local g2=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,locs,0,nil,e,tp,71036835)
 		local g3=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,locs,0,nil,e,tp,7021574)

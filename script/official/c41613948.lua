@@ -1,5 +1,5 @@
 --D－HERO デビルガイ
---Destiny HERO - Doom Lord
+--Destrudic HERO - Doom Lord
 local s,id=GetID()
 function s.initial_effect(c)
 	--Banish itself and a monster

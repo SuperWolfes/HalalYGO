@@ -19,8 +19,8 @@ function s.initial_effect(c)
 	e2:SetOperation(s.eqop)
 	c:RegisterEffect(e2)
 end
-s.roll_dice=true
-s.material_race=RACE_SPELLCASTER
+s.roll_suffice=true
+s.material_race=RACE_MENTOR
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() and chkc~=e:GetHandler() end
 	if chk==0 then return true end
@@ -33,7 +33,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) or c:IsLocation(LOCATION_SZONE) or c:IsFacedown() then return end
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 or tc:IsFacedown() or not tc:IsRelateToEffect(e) then
-		Duel.SendtoGrave(c,REASON_EFFECT)
+		Duel.SendtoRest(c,REASON_EFFECT)
 		return
 	end
 	Duel.Equip(tp,c,tc)
@@ -47,7 +47,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	c:RegisterEffect(e1)
 	--remove
 	local e2=Effect.CreateEffect(c)
-	e2:SetCategory(CATEGORY_REMOVE+CATEGORY_DICE)
+	e2:SetCategory(CATEGORY_REMOVE+CATEGORY_SUFFICE)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_BATTLE_START)
 	e2:SetRange(LOCATION_SZONE)
@@ -68,7 +68,7 @@ function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tc=ec:GetBattleTarget()
 	if chk==0 then return tc and tc:IsAbleToRemove() end
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,tc,1,0,0)
-	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,0,tp,1)
+	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,1)
 end
 function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -76,7 +76,7 @@ function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 	local ec=c:GetEquipTarget()
 	local tc=ec:GetBattleTarget()
 	if tc and tc:IsRelateToBattle() then
-		local ct=Duel.TossDice(tp,1)
+		local ct=Duel.TossSuffice(tp,1)
 		if Duel.Remove(tc,0,REASON_EFFECT+REASON_TEMPORARY)~=0 then
 			tc:SetTurnCounter(0)
 			tc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,0)

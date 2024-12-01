@@ -1,5 +1,5 @@
 --神縛りの塚
---Mound of the Bound Creator
+--Mound of the Bound Mega
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -38,7 +38,7 @@ function s.initial_effect(c)
 	e5:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e5:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
-	e5:SetCode(EVENT_TO_GRAVE)
+	e5:SetCode(EVENT_TO_REST)
 	e5:SetCondition(s.thcon)
 	e5:SetTarget(s.thtg)
 	e5:SetOperation(s.thop)
@@ -50,7 +50,7 @@ end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	local des=eg:GetFirst()
 	local rc=des:GetReasonCard()
-	return des:IsLocation(LOCATION_GRAVE) and des:IsMonster() and rc:IsRelateToBattle() and rc:IsLevelAbove(10)
+	return des:IsLocation(LOCATION_REST) and des:IsMonster() and rc:IsRelateToBattle() and rc:IsLevelAbove(10)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

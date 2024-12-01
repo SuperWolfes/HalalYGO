@@ -28,7 +28,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 	c:RegisterEffect(e1)
 	--gy recover
-	local sg=Duel.GetMatchingGroup(s.sfilter,tp,LOCATION_GRAVE,0,nil)
+	local sg=Duel.GetMatchingGroup(s.sfilter,tp,LOCATION_REST,0,nil)
 	if #sg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		Duel.BreakEffect()
 		local tg=aux.SelectUnselectGroup(sg,1,tp,1,ft,s.rescon,1,tp)

@@ -1,5 +1,5 @@
 --サイキック・オメガブラスト
---Psychic Omega Blast
+--Mental Omega Blast
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -17,10 +17,10 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	 return Duel.GetMatchingGroupCountRush(Card.IsFaceup,tp,0,LOCATION_MZONE,nil)>=2
 end
 function s.costfilter(c)
-	return c:IsRace(RACE_PSYCHIC) and c:IsAbleToDeckOrExtraAsCost()
+	return c:IsRace(RACE_MENTAL) and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_GRAVE,0,4,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_REST,0,4,nil) end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(aux.FilterMaximumSideFunctionEx(Card.IsFaceup),tp,0,LOCATION_MZONE,1,nil) end
@@ -28,7 +28,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	-- Requirement
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_GRAVE,0,4,4,nil)
+	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_REST,0,4,4,nil)
 	if #g==0 then return end
 	Duel.HintSelection(g,true)
 	if Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_COST)>0 then
@@ -45,7 +45,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			else   --otherwise, directly destroy it
 				if Duel.Destroy(tc,REASON_EFFECT)>0 then res=tc:GetFirst():GetTextAttack() end
 			end
-			if res and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_OMEGAPSYCHIC),tp,LOCATION_MZONE,0,1,nil) then
+			if res and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_OMEGAMENTAL),tp,LOCATION_MZONE,0,1,nil) then
 				Duel.Damage(1-tp,res,REASON_EFFECT)
 			end
 		end

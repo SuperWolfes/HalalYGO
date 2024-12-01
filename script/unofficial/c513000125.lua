@@ -79,9 +79,9 @@ function s.chkop(e,tp,eg,ep,ev,re,r,rp)
 	if (tg or dz) and e:GetLabel()==0 then Duel.Hint(HINT_CARD,tp,id) end
 	if tg then
 		local ct=Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)+c:GetCounter(0x1110)-5
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=Duel.SelectMatchingCard(tp,aux.TRUE,tp,LOCATION_MZONE,0,ct,ct,nil)
-		Duel.SendtoGrave(g,REASON_RULE)
+		Duel.SendtoRest(g,REASON_RULE)
 	end
 	if dz then
 		local eff=e:GetLabelObject()
@@ -117,17 +117,17 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local hg=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
-	if chk==0 then return #hg>0 and hg:FilterCount(Card.IsAbleToGraveAsCost,nil)==#hg
-		and e:GetHandler():IsAbleToGraveAsCost() end
+	if chk==0 then return #hg>0 and hg:FilterCount(Card.IsAbleToRestAsCost,nil)==#hg
+		and e:GetHandler():IsAbleToRestAsCost() end
 	local g=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
 	g:AddCard(e:GetHandler())
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and chkc:IsAbleToHand() end
-	if chk==0 then return Duel.IsExistingTarget(Card.IsAbleToHand,tp,LOCATION_GRAVE,0,4,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and chkc:IsAbleToHand() end
+	if chk==0 then return Duel.IsExistingTarget(Card.IsAbleToHand,tp,LOCATION_REST,0,4,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectTarget(tp,Card.IsAbleToHand,tp,LOCATION_GRAVE,0,4,4,nil)
+	local g=Duel.SelectTarget(tp,Card.IsAbleToHand,tp,LOCATION_REST,0,4,4,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,4,0,0)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)

@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_IGNITION)
-	e1:SetRange(LOCATION_GRAVE)
+	e1:SetRange(LOCATION_REST)
 	e1:SetCountLimit(1,id)
 	e1:SetCost(s.spcost)
 	e1:SetTarget(s.sptg)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x79,0x7c}
 function s.cfilter(c)
-	return (c:IsLocation(LOCATION_HAND) or c:IsFaceup()) and (c:IsSetCard(0x79) or c:IsSetCard(0x7c)) and c:IsAbleToGraveAsCost()
+	return (c:IsLocation(LOCATION_HAND) or c:IsFaceup()) and (c:IsSetCard(0x79) or c:IsSetCard(0x7c)) and c:IsAbleToRestAsCost()
 end
 function s.mzfilter(c)
 	return c:IsLocation(LOCATION_MZONE) and c:GetSequence()<5
@@ -33,18 +33,18 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if nc and not (Duel.IsPlayerAffectedByEffect(tp,CARD_FIRE_FIST_EAGLE) and Duel.SelectYesNo(tp,aux.Stringid(CARD_FIRE_FIST_EAGLE,0))) then
 		local g=nil
 		if ft<=0 then
-			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 			g=sg:FilterSelect(tp,s.mzfilter,ct,ct,nil)
 			if ct<2 then
-				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 				local g1=sg:Select(tp,2-ct,2-ct,g)
 				g:Merge(g1)
 			end
 		else
-			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 			g=sg:Select(tp,2,2,nil)
 		end
-		Duel.SendtoGrave(g,REASON_COST)
+		Duel.SendtoRest(g,REASON_COST)
 	end
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)

@@ -21,14 +21,14 @@ function s.tdfilter(c)
 	return c:IsRace(RACE_DRAGON) and c:IsAbleToDeck() and c:HasLevel()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST,0,1,nil) end
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Effect
 	local bc=eg:GetFirst()
 	if not (bc and bc:IsRelateToBattle()) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_REST,0,1,1,nil)
 	if #g>0 then
 		Duel.HintSelection(g)
 		local lvl=g:GetFirst():GetLevel()

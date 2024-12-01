@@ -70,9 +70,9 @@ end
 function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():GetCardTarget():IsExists(s.repfilter,1,nil,tp) end
 	if Duel.SelectYesNo(tp,aux.Stringid(76067258,1)) then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=e:GetHandler():GetCardTarget():FilterSelect(tp,s.repfilter,1,1,nil,tp)
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 		return true
 	else return false end
 end

@@ -66,7 +66,7 @@ function s.uncon(e,tp,eg,ep,ev,re,r,rp)
 	if ex and tg~=nil and tg:IsContains(c) then
 		return true
 	end
-	ex,tg,tc=Duel.GetOperationInfo(ev,CATEGORY_TOGRAVE)
+	ex,tg,tc=Duel.GetOperationInfo(ev,CATEGORY_TOREST)
 	if ex and tg~=nil and tg:IsContains(c) then
 		return true
 	end
@@ -132,6 +132,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 	Duel.Damage(1-tp,atk,REASON_EFFECT)
 	Duel.BreakEffect()
-	Duel.SendtoGrave(sg,REASON_EFFECT)
+	Duel.SendtoRest(sg,REASON_EFFECT)
 	Duel.ShuffleHand(1-tp)
 end

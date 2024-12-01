@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()
-	-- Check materials on Ritual Summon
+	-- Check materials on Locked Summon
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
 	e0:SetCode(EFFECT_MATERIAL_CHECK)
@@ -47,7 +47,7 @@ function s.matcheck(e,c)
 end
 function s.matcon(e)
 	local c=e:GetHandler()
-	return c:IsSummonType(SUMMON_TYPE_RITUAL) and c:GetFlagEffect(id)>0
+	return c:IsSummonType(SUMMON_TYPE_LOCKED) and c:GetFlagEffect(id)>0
 end
 function s.setfilter(c)
 	return c:IsSetCard(0x17d) and c:IsTrap() and c:IsSSetable()

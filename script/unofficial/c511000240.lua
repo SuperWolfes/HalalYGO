@@ -1,9 +1,9 @@
 --エクゾディア・ネクロス(Anime)
---Exodia Necross (Anime)
+--Exdude Necross (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()
-	--"Exodia the Forbidden One": This card cannot be destroyed by battle
+	--"Exdude the Unliked One": This card cannot be destroyed by battle
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e2:SetCondition(s.battlecon)
 	e2:SetValue(1)
 	c:RegisterEffect(e2)
-	--"Left Leg of the Forbidden One": This card cannot be destroyed by Spell Cards.
+	--"Left Leg of the Unliked One": This card cannot be destroyed by Spell Cards.
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e3:SetCondition(s.spellcon)
 	e3:SetValue(s.spellval)
 	c:RegisterEffect(e3)
-	--"Right Leg of the Forbidden One": This card cannot be destroyed by Trap Cards.
+	--"Right Leg of the Unliked One": This card cannot be destroyed by Trap Cards.
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_SINGLE)
 	e4:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -30,7 +30,7 @@ function s.initial_effect(c)
 	e4:SetCondition(s.trapcon)
 	e4:SetValue(s.trapval)
 	c:RegisterEffect(e4)
-	--"Left Arm of the Forbidden One": This card cannot be destroyed by the effects of other Effect Monsters.
+	--"Left Arm of the Unliked One": This card cannot be destroyed by the effects of other Effect Monsters.
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_SINGLE)
 	e5:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -39,7 +39,7 @@ function s.initial_effect(c)
 	e5:SetCondition(s.monstercon)
 	e5:SetValue(s.monsterval)
 	c:RegisterEffect(e5)
-	--"Right Arm of the Forbidden One": Whenever this card battles an opponent's monster, it gains 1000 ATK at the end of the Damage Step.
+	--"Right Arm of the Unliked One": Whenever this card battles an opponent's monster, it gains 1000 ATK at the end of the Damage Step.
 	local e6=Effect.CreateEffect(c)
 	e6:SetDescription(aux.Stringid(id,0))
 	e6:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
@@ -69,28 +69,28 @@ function s.initial_effect(c)
     	c:RegisterEffect(e8)
 end
 function s.battlecon(e)
-	return Duel.IsExistingMatchingCard(Card.IsCode,e:GetHandlerPlayer(),LOCATION_GRAVE,0,1,nil,33396948)
+	return Duel.IsExistingMatchingCard(Card.IsCode,e:GetHandlerPlayer(),LOCATION_REST,0,1,nil,33396948)
 end
 function s.spellcon(e)
-	return Duel.IsExistingMatchingCard(Card.IsCode,e:GetHandlerPlayer(),LOCATION_GRAVE,0,1,nil,44519536)
+	return Duel.IsExistingMatchingCard(Card.IsCode,e:GetHandlerPlayer(),LOCATION_REST,0,1,nil,44519536)
 end
 function s.spellval(e,re,rp)
 	return re:IsActiveType(TYPE_SPELL)
 end
 function s.trapcon(e)
-	return Duel.IsExistingMatchingCard(Card.IsCode,e:GetHandlerPlayer(),LOCATION_GRAVE,0,1,nil,8124921)
+	return Duel.IsExistingMatchingCard(Card.IsCode,e:GetHandlerPlayer(),LOCATION_REST,0,1,nil,8124921)
 end
 function s.trapval(e,re,rp)
 	return re:IsActiveType(TYPE_TRAP)
 end
 function s.monstercon(e)
-	return Duel.IsExistingMatchingCard(Card.IsCode,e:GetHandlerPlayer(),LOCATION_GRAVE,0,1,nil,7902349)
+	return Duel.IsExistingMatchingCard(Card.IsCode,e:GetHandlerPlayer(),LOCATION_REST,0,1,nil,7902349)
 end
 function s.monsterval(e,re,rp)
 	return re:IsActiveType(TYPE_MONSTER)
 end
 function s.atkcon(e)
-	return Duel.IsExistingMatchingCard(Card.IsCode,e:GetHandlerPlayer(),LOCATION_GRAVE,0,1,nil,70903634) and e:GetHandler():IsStatus(STATUS_OPPO_BATTLE)
+	return Duel.IsExistingMatchingCard(Card.IsCode,e:GetHandlerPlayer(),LOCATION_REST,0,1,nil,70903634) and e:GetHandler():IsStatus(STATUS_OPPO_BATTLE)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -104,13 +104,13 @@ function s.atkval(e,c)
 	return ct*1000
 end
 function s.adjustcon(e)
-	return (not Duel.IsExistingMatchingCard(Card.IsCode,e:GetHandlerPlayer(),LOCATION_GRAVE,0,1,nil,70903634) 
+	return (not Duel.IsExistingMatchingCard(Card.IsCode,e:GetHandlerPlayer(),LOCATION_REST,0,1,nil,70903634) 
         or (e:GetHandler():IsLocation(LOCATION_MZONE) and e:GetHandler():GetFlagEffect(id)==0))
 	and e:GetLabelObject():GetLabel()>0
 end
 function s.adjustop(e,tp,eg,ep,ev,re,r,rp)    
 	if e:GetHandler():GetFlagEffect(id)==0 then e:GetLabelObject():SetLabel(0) end
-	if not Duel.IsExistingMatchingCard(Card.IsCode,e:GetHandlerPlayer(),LOCATION_GRAVE,0,1,nil,70903634) then 
+	if not Duel.IsExistingMatchingCard(Card.IsCode,e:GetHandlerPlayer(),LOCATION_REST,0,1,nil,70903634) then 
 		e:GetLabelObject():SetLabel(0)
 	end
 end

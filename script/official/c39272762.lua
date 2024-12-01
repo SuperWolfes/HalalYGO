@@ -76,7 +76,7 @@ end
 function s.atop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetOverlayGroup(tp,0,1)
 	if #g==0 then return end
-	Duel.SendtoGrave(g,REASON_EFFECT)
+	Duel.SendtoRest(g,REASON_EFFECT)
 	Duel.BreakEffect()
 	local c=e:GetHandler()
 	if c:IsFacedown() or not c:IsRelateToEffect(e) then return end

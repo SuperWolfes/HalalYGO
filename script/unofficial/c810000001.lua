@@ -2,7 +2,7 @@
 -- scripted by: UnknownGuest
 local s,id=GetID()
 function s.initial_effect(c)
-	--to grave
+	--to rest
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EVENT_BATTLE_DESTROYED)
@@ -30,11 +30,11 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	-- reborn
+	-- rerest
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_PHASE+PHASE_END)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetReset(RESET_PHASE+PHASE_END)
 	e2:SetCountLimit(1)
 	e2:SetOperation(s.spop2)

@@ -38,9 +38,9 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if op==0 then
 		local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_HAND,0,1,1,nil,oc:GetType())
 		g:AddCard(oc)
-		if Duel.SendtoGrave(g,REASON_EFFECT+REASON_DISCARD)==2 then
+		if Duel.SendtoRest(g,REASON_EFFECT+REASON_DISCARD)==2 then
 			Duel.BreakEffect()
-			c:CancelToGrave()
+			c:CancelToRest()
 			Duel.SendtoHand(c,1-tp,REASON_EFFECT)
 			Duel.Draw(tp,1,REASON_EFFECT)
 		end

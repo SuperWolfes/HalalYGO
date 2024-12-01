@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
 	e2:SetCode(EVENT_LEAVE_FIELD)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCondition(s.plcon)
 	e2:SetCost(aux.bfgcost)
 	e2:SetTarget(s.pltg)
@@ -32,7 +32,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.confilter,1,nil,tp)
 end
 function s.cfilter(c)
-	return c:IsSetCard(0x1034) and (c:IsFaceup() or not c:IsOnField()) and c:IsAbleToGraveAsCost()
+	return c:IsSetCard(0x1034) and (c:IsFaceup() or not c:IsOnField()) and c:IsAbleToRestAsCost()
 end
 function s.exfilter(c,tp)
 	return Duel.GetLocationCountFromEx(tp,tp,Group.FromCards(c))>0
@@ -46,8 +46,8 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_ONFIELD+LOCATION_HAND+LOCATION_DECK,0,nil)
 	if chk==0 then return g:GetClassCount(Card.GetCode)>=7
 		and aux.SelectUnselectGroup(g,e,tp,7,7,s.rescon,0) end
-	local rg=aux.SelectUnselectGroup(g,e,tp,7,7,s.rescon,1,tp,HINTMSG_TOGRAVE)
-	Duel.SendtoGrave(rg,REASON_COST)
+	local rg=aux.SelectUnselectGroup(g,e,tp,7,7,s.rescon,1,tp,HINTMSG_TOREST)
+	Duel.SendtoRest(rg,REASON_COST)
 end
 function s.filter(c,e,tp,sg)
 	return c:IsType(TYPE_FUSION) and c:IsSetCard(0x2034) and Duel.GetLocationCountFromEx(tp,tp,sg,c)>0 and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,false,false) and c:CheckFusionMaterial()
@@ -72,18 +72,18 @@ function s.plcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.plcfilter,1,nil,tp)
 end
 function s.plfilter(c)
-	return c:IsSetCard(0x1034) and c:IsMonster() and not c:IsForbidden()
+	return c:IsSetCard(0x1034) and c:IsMonster() and not c:IsUnliked()
 end
 function s.pltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and Duel.IsExistingMatchingCard(s.plfilter,tp,LOCATION_GRAVE,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,nil,1,tp,LOCATION_GRAVE)
+		and Duel.IsExistingMatchingCard(s.plfilter,tp,LOCATION_REST,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,nil,1,tp,LOCATION_REST)
 end
 function s.plop(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
 	if ft<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
-	local g=Duel.SelectMatchingCard(tp,s.plfilter,tp,LOCATION_GRAVE,0,1,ft,nil)
+	local g=Duel.SelectMatchingCard(tp,s.plfilter,tp,LOCATION_REST,0,1,ft,nil)
 	if #g>0 then
 		local tc=g:GetFirst()
 		for tc in aux.Next(g) do

@@ -102,7 +102,7 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local sg1=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,sg1,#sg1,0,0)
 	local sg2=Duel.GetMatchingGroup(s.retfilter,tp,0x32,0x32,nil)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,sg2,#sg2,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,sg2,#sg2,0,0)
 end
 function s.fil(c,seq,p)
 	local lab=c:GetFlagEffectLabel(id)
@@ -142,7 +142,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.MoveToField(tc,tp,p,loc,pos,true,(1<<seq))
 		end
 	end
-	Duel.SendtoGrave(sg2:Filter(s.fil2,nil),REASON_RULE)
+	Duel.SendtoRest(sg2:Filter(s.fil2,nil),REASON_RULE)
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

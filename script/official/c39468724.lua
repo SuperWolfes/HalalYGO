@@ -7,7 +7,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Must be properly summoned before reviving
 	c:EnableReviveLimit()
-	--Must be ritual summoned
+	--Must be locked summoned
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	--Tribute up to 2 "Nekroz" monsters, send that many "Nekroz" cards from deck to GY
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_TOGRAVE)
+	e2:SetCategory(CATEGORY_TOREST)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetRange(LOCATION_HAND)
 	e2:SetCountLimit(1,id)
@@ -43,14 +43,14 @@ end
 	--Lists "Nekroz" archetype
 s.listed_series={0xb4}
 
-	--Cannot include level 10 monsters for its ritual summon
+	--Cannot include level 10 monsters for its locked summon
 function s.mat_filter(c)
 	return c:GetLevel()~=10
 end
 	--Discard itself as cost
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsDiscardable() end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST+REASON_DISCARD)
+	Duel.SendtoRest(e:GetHandler(),REASON_COST+REASON_DISCARD)
 end
 	--Check for "Nekroz" monsters to tribute
 function s.filter(c)
@@ -58,13 +58,13 @@ function s.filter(c)
 end
 	--Check for "Nekroz" cards to send to GY
 function s.sendfilter(c)
-	return c:IsSetCard(0xb4) and c:IsAbleToGrave()
+	return c:IsSetCard(0xb4) and c:IsAbleToRest()
 end
 	--Activation legality
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.sendfilter,tp,LOCATION_DECK,0,1,nil)
 		and Duel.CheckReleaseGroupEx(tp,s.filter,1,e:GetHandler()) end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
 	--Tribute up to 2 "Nekroz" monsters, send that many "Nekroz" cards from deck to GY
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
@@ -75,9 +75,9 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	if g and #g>0 then
 		Duel.HintSelection(g)
 		local rct=Duel.Release(g,REASON_EFFECT)
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local sg=Duel.SelectMatchingCard(tp,s.sendfilter,tp,LOCATION_DECK,0,rct,rct,nil)
-		Duel.SendtoGrave(sg,REASON_EFFECT)
+		Duel.SendtoRest(sg,REASON_EFFECT)
 	end
 end
 	--Monster effect activated

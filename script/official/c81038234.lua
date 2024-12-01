@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetProperty(EFFECT_FLAG_SET_AVAILABLE+EFFECT_FLAG_IGNORE_IMMUNE)
 	e2:SetRange(LOCATION_SZONE)
-	e2:SetCode(EFFECT_TO_GRAVE_REDIRECT)
+	e2:SetCode(EFFECT_TO_REST_REDIRECT)
 	e2:SetTargetRange(LOCATION_MZONE,0)
 	e2:SetTarget(s.reptg)
 	e2:SetValue(LOCATION_DECKSHF)
@@ -47,12 +47,12 @@ end
 	--Send this face-up card to GY as cost
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGraveAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED) end
-	Duel.SendtoGrave(c,REASON_COST)
+	if chk==0 then return c:IsAbleToRestAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED) end
+	Duel.SendtoRest(c,REASON_COST)
 end
 	--Check for "Dream Mirror of Joy"/"Dream Mirror of Terror"
 function s.filter(c,tp)
-	return c:IsType(TYPE_FIELD) and c:IsCode(CARD_DREAM_MIRROR_JOY,CARD_DREAM_MIRROR_TERROR) and c:IsFaceup() and not c:IsForbidden()
+	return c:IsType(TYPE_FIELD) and c:IsCode(CARD_DREAM_MIRROR_JOY,CARD_DREAM_MIRROR_TERROR) and c:IsFaceup() and not c:IsUnliked()
 end
 	--Check for 1 monster that specifically lists "Dream Mirror of Joy"/"Dream Mirror of Terror"
 function s.spfilter(c,e,tp,code)
@@ -60,17 +60,17 @@ function s.spfilter(c,e,tp,code)
 end
 	--Activation legality
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REMOVED+LOCATION_GRAVE,0,1,nil,tp) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REMOVED+LOCATION_REST,0,1,nil,tp) end
 end
 	--Place 1 "Dream Mirror of Joy" or "Dream Mirror of Terror" from banished/GY into field zone
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local ag=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_REMOVED+LOCATION_GRAVE,0,1,1,nil,tp)
+	local ag=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_REMOVED+LOCATION_REST,0,1,1,nil,tp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
 	if #ag>0 then
 		local ac=ag:GetFirst()
 		local fc=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
 		if fc then
-			Duel.SendtoGrave(fc,REASON_RULE)
+			Duel.SendtoRest(fc,REASON_RULE)
 			Duel.BreakEffect()
 		end
 		Duel.MoveToField(ac,tp,tp,LOCATION_FZONE,POS_FACEUP,true)

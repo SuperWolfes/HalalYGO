@@ -17,7 +17,7 @@ function s.initial_effect(c)
 end
 function s.tokencon(e,tp,eg,ep,ev,re,r,rp)
 	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_COUNTER) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0,TYPES_TOKEN,300,300,1,RACE_FAIRY,ATTRIBUTE_LIGHT)
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0,TYPES_TOKEN,300,300,1,RACE_WANDERER,ATTRIBUTE_LIGHT)
 end
 function s.tokenop(e,tp,eg,ep,ev,re,r,rp)
 	local token=Duel.CreateToken(tp,id+1)

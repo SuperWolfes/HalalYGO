@@ -20,11 +20,11 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsRace(RACE_SPELLCASTER) and c:GetAttackedCount()==0 and c:CanAttack()
+	return c:IsFaceup() and c:IsRace(RACE_MENTOR) and c:GetAttackedCount()==0 and c:CanAttack()
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local at=Duel.GetAttacker()
-	return at:IsControler(tp) and at:IsRace(RACE_SPELLCASTER) 
+	return at:IsControler(tp) and at:IsRace(RACE_MENTOR) 
 		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,0,1,at)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)

@@ -1,4 +1,4 @@
---Lure Phantom
+--Lure Illusion
 local s,id=GetID()
 function s.initial_effect(c)
 	--return to hand

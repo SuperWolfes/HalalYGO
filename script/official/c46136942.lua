@@ -64,5 +64,5 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.fextra(e,tp,mg)
-	return Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,LOCATION_PZONE,0,nil)
+	return Duel.GetMatchingGroup(Card.IsAbleToRest,tp,LOCATION_PZONE,0,nil)
 end

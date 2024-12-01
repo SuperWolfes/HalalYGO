@@ -55,8 +55,8 @@ end
 	--Banish 1 "Myutant" card from hand/face-up field/GY with same card type as activated card/effect as cost
 function s.negcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local rtype=(re:GetActiveType()&0x7)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND+LOCATION_ONFIELD+LOCATION_GRAVE,0,1,nil,rtype) end
-	local rg=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND+LOCATION_ONFIELD+LOCATION_GRAVE,0,1,1,nil,rtype)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND+LOCATION_ONFIELD+LOCATION_REST,0,1,nil,rtype) end
+	local rg=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND+LOCATION_ONFIELD+LOCATION_REST,0,1,1,nil,rtype)
 	Duel.Remove(rg,POS_FACEUP,REASON_COST)
 end
 	--Activation legality

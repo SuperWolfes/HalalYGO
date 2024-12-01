@@ -1,5 +1,5 @@
 --悪魔の手鏡
---Fiend's Hand Mirror
+--Tainted's Hand Mirror
 local s,id=GetID()
 function s.initial_effect(c)
 	--activate

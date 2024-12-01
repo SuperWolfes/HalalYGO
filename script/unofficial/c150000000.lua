@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 	--Send other Action Cards in hand to GY
 	local e5=Effect.CreateEffect(c)
-	e5:SetCategory(CATEGORY_TOGRAVE)
+	e5:SetCategory(CATEGORY_TOREST)
 	e5:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e5:SetRange(LOCATION_FZONE)
 	e5:SetCode(EVENT_TO_HAND)
@@ -56,7 +56,7 @@ function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,0,1-ep,LOCATION_HAND)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,0,1-ep,LOCATION_HAND)
 	Duel.SetChainLimit(s.limit(ep))
 end
 function s.limit(ep)
@@ -67,5 +67,5 @@ end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	local g=Duel.GetMatchingGroup(s.tgfilter,1-ep,LOCATION_HAND,0,nil)
-	Duel.SendtoGrave(g,REASON_EFFECT)
+	Duel.SendtoRest(g,REASON_EFFECT)
 end

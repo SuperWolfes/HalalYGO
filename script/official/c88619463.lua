@@ -35,7 +35,7 @@ function s.initial_effect(c)
 	aux.DoubleSnareValidity(c,LOCATION_MZONE)
 end
 function s.rfilter(c,tp)
-	return c:IsRace(RACE_SPELLCASTER) and c:IsLevelAbove(6) and c:IsControler(tp)
+	return c:IsRace(RACE_MENTOR) and c:IsLevelAbove(6) and c:IsControler(tp)
 end
 function s.spcon(e,c)
 	if c==nil then return true end

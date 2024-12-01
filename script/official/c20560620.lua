@@ -14,10 +14,10 @@ function s.initial_effect(c)
 	local e2=e1:Clone()
 	e2:SetCode(EFFECT_UNRELEASABLE_NONSUM)
 	c:RegisterEffect(e2)
-	--Can send 1 monster from your Extra Deck to the GY to Ritual Summon
+	--Can send 1 monster from your Extra Deck to the GY to Locked Summon
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
-	e3:SetCode(EFFECT_EXTRA_RITUAL_MATERIAL)
+	e3:SetCode(EFFECT_EXTRA_LOCKED_MATERIAL)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetCountLimit(1,id)
 	e3:SetTargetRange(LOCATION_EXTRA,0)

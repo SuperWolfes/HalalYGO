@@ -1,5 +1,5 @@
 --魔帝アングマール (Manga)
---Angmarl the Fiendish Monarch (Manga)
+--Angmarl the Taintedish Monarch (Manga)
 local s,id=GetID()
 function s.initial_effect(c)
 	--copy Spell
@@ -20,9 +20,9 @@ function s.filter(c)
 	return c:IsSpell() and c:IsAbleToRemoveAsCost() and c:CheckActivateEffect(false,true,false)~=nil
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,1))
-	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_REST,0,1,1,nil)
 	local te=g:GetFirst():CheckActivateEffect(false,true,true)
 	s[Duel.GetCurrentChain()]=te
 	Duel.Remove(g,POS_FACEUP,REASON_COST)

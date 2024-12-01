@@ -3,13 +3,13 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	Duel.EnableGlobalFlag(GLOBALFLAG_SELF_TOGRAVE)
+	Duel.EnableGlobalFlag(GLOBALFLAG_SELF_TOREST)
 	--Send itself to the GY if "Adanced Dark" is not face-up in the Field Spell Zone
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e1:SetRange(LOCATION_MZONE)
-	e1:SetCode(EFFECT_SELF_TOGRAVE)
+	e1:SetCode(EFFECT_SELF_TOREST)
 	e1:SetCondition(s.tgcon)
 	c:RegisterEffect(e1)
 	--Change the target's battle position
@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	--Place itself in the S/T instead of sending it to the GY
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
-	e3:SetCode(EFFECT_TO_GRAVE_REDIRECT_CB)
+	e3:SetCode(EFFECT_TO_REST_REDIRECT_CB)
 	e3:SetProperty(EFFECT_FLAG_UNCOPYABLE)
 	e3:SetCondition(s.replacecon)
 	e3:SetOperation(s.replaceop)

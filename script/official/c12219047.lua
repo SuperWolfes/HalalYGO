@@ -1,5 +1,5 @@
 --幻影騎士団カースド・ジャベリン
---The Phantom Knights of Cursed Javelin
+--The Illusion Knights of Cursed Javelin
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()

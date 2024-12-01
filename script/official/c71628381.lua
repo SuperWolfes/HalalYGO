@@ -1,5 +1,5 @@
 --マルチ・ピース・ゴーレム
---Multiple Piece Golem
+--Multiple Piece Gopal
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
@@ -24,10 +24,10 @@ end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsAbleToDeck() end
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,e:GetHandler(),1,0,0)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end
 function s.mgfilter(c,e,tp,fusc)
-	return not c:IsControler(tp) or not c:IsLocation(LOCATION_GRAVE)
+	return not c:IsControler(tp) or not c:IsLocation(LOCATION_REST)
 		or (c:GetReason()&0x40008)~=0x40008 or c:GetReasonCard()~=fusc
 		or not c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end

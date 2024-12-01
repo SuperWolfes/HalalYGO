@@ -66,7 +66,7 @@ function s.actlimit(e,re,rp)
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsSummonType(SUMMON_TYPE_XYZ) and c:IsLocation(LOCATION_GRAVE) 
+	return c:IsSummonType(SUMMON_TYPE_XYZ) and c:IsLocation(LOCATION_REST) 
 		and r & REASON_LINK ~=0 and c:GetReasonCard():IsSetCard(0x119)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

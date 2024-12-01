@@ -82,7 +82,7 @@ function s.qpovop(e,tp,eg,ep,ev,re,r,rp)
 		and rc:IsCanBeXyzMaterial(c,tp,REASON_EFFECT) then
 		Duel.Overlay(c,rc)
 		if not c:GetOverlayGroup():IsContains(rc) then return end
-		rc:CancelToGrave()
+		rc:CancelToRest()
 		if Duel.IsExistingMatchingCard(s.rthfilter,tp,0,LOCATION_ONFIELD,1,nil)
 			and Duel.SelectYesNo(tp,aux.Stringid(id,3)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RTOHAND)

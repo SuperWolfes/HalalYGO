@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()
 	c:SetUniqueOnField(1,0,id,LOCATION_MZONE)
-	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_FIEND),10,2,s.ovfilter,aux.Stringid(id,0))
+	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_TAINTED),10,2,s.ovfilter,aux.Stringid(id,0))
 	Pendulum.AddProcedure(c,false)
 	--Special Summon a card from the Pendulum Zone
 	local e1=Effect.CreateEffect(c)
@@ -46,21 +46,21 @@ function s.ovfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0x10af)
 end
 function s.penfilter(c)
-	return c:IsType(TYPE_PENDULUM) and (c:IsFaceup() or c:IsLocation(LOCATION_GRAVE)) and not c:IsForbidden()
+	return c:IsType(TYPE_PENDULUM) and (c:IsFaceup() or c:IsLocation(LOCATION_REST)) and not c:IsUnliked()
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE+LOCATION_GRAVE) and s.penfilter(chkc) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE+LOCATION_REST) and s.penfilter(chkc) end
 	local pg=Duel.GetFieldGroup(tp,LOCATION_PZONE,0)
 	local pc=(pg-c):GetFirst()
 	if chk==0 then return pc and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and pc:IsCanBeSpecialSummoned(e,0,tp,false,false)
-		and Duel.IsExistingTarget(s.penfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil) end
+		and Duel.IsExistingTarget(s.penfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOZONE)
-	local g=Duel.SelectTarget(tp,s.penfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.penfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,pc,1,tp,0)
-	if g:GetFirst():IsLocation(LOCATION_GRAVE) then
-		Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,#g,0,0)
+	if g:GetFirst():IsLocation(LOCATION_REST) then
+		Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,#g,0,0)
 	end
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)

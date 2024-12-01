@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-	e2:SetCode(EVENT_TO_GRAVE)
+	e2:SetCode(EVENT_TO_REST)
 	e2:SetCondition(s.accon)
 	e2:SetTarget(s.actg)
 	e2:SetOperation(s.acop)
@@ -63,7 +63,7 @@ function s.acop(e,tp,eg,ep,ev,re,r,rp)
 			local of=Duel.GetFieldCard(1-tp,LOCATION_SZONE,5)
 			if of then Duel.Destroy(of,REASON_RULE) end
 			of=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
-			if of and Duel.Destroy(of,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
+			if of and Duel.Destroy(of,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
 			Duel.MoveSequence(c,0,LOCATION_FZONE)
 		end
 		Duel.ClearTargetCard()
@@ -73,9 +73,9 @@ function s.acop(e,tp,eg,ep,ev,re,r,rp)
 		e:SetProperty(te:GetProperty())
 		if tg then tg(e,tp,teg,tep,tev,tre,tr,trp,1) end
 		if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 then
-			c:CancelToGrave(false)
+			c:CancelToRest(false)
 		else
-			c:CancelToGrave(true)
+			c:CancelToRest(true)
 			c:CopyEffect(code,RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET,1)
 		end
 		Duel.BreakEffect()

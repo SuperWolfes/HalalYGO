@@ -41,7 +41,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND+LOCATION_DECK)
 end
 function s.eqfilter1(c,ec)
-	return c:IsCode(9677699) and c:CheckEquipTarget(ec) and not c:IsForbidden()
+	return c:IsCode(9677699) and c:CheckEquipTarget(ec) and not c:IsUnliked()
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -70,7 +70,7 @@ end
 function s.eqfilter2(c,tc,tp)
 	return c:IsCode(9677699) and tc:GetEquipGroup():IsContains(c)
 		and Duel.IsExistingTarget(s.eqfilter3,tp,LOCATION_MZONE,LOCATION_MZONE,1,tc,c)
-		and c:CheckUniqueOnField(tp) and not c:IsForbidden()
+		and c:CheckUniqueOnField(tp) and not c:IsUnliked()
 end
 function s.eqfilter3(c,ec)
 	return c:IsFaceup() and ec:CheckEquipTarget(c)

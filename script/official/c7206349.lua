@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e2:SetCondition(s.atkcon)
 	e2:SetValue(1000)
 	c:RegisterEffect(e2)
-	-- Special Summon 1 "Vera, the Vernalizer Fairy Goddess"
+	-- Special Summon 1 "Vera, the Vernalizer Wanderer Monsterdess"
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -51,9 +51,9 @@ function s.spcostfilter(c)
 	return c:IsCode(63708033) and c:IsAbleToRemoveAsCost()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.spcostfilter,tp,LOCATION_HAND+LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.spcostfilter,tp,LOCATION_HAND+LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.spcostfilter,tp,LOCATION_HAND+LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.spcostfilter,tp,LOCATION_HAND+LOCATION_REST,0,1,1,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.spfilter(c,e,tp)
@@ -72,13 +72,13 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.thconfilter(c,tp)
-	return c:IsFaceup() and c:IsSetCard(0x183) and c:IsSummonLocation(LOCATION_GRAVE) and c:IsPreviousControler(tp)
+	return c:IsFaceup() and c:IsSetCard(0x183) and c:IsSummonLocation(LOCATION_REST) and c:IsPreviousControler(tp)
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.thconfilter,1,nil,tp)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	local loc=LOCATION_MZONE+LOCATION_GRAVE
+	local loc=LOCATION_MZONE+LOCATION_REST
 	if chkc then return chkc:IsLocation(loc) and chkc:IsMonster() and chkc:IsAbleToHand() end
 	if chk==0 then return Duel.IsExistingTarget(aux.AND(Card.IsMonster,Card.IsAbleToHand),tp,loc,loc,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RTOHAND)

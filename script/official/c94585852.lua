@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--Alter LP cost for "Archfiend" monsters during the Standby Phase
+	--Alter LP cost for "Archtainted" monsters during the Standby Phase
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e2:SetCode(EFFECT_LPCOST_REPLACE)
 	e2:SetCondition(s.lrcon)
 	c:RegisterEffect(e2)
-	--Search an "Archfiend" monster
+	--Search an "Archtainted" monster
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -30,7 +30,7 @@ function s.initial_effect(c)
 		--Global effect since either player can use this effect
 		local ge1=Effect.CreateEffect(c)
 		ge1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-		ge1:SetCode(EVENT_TO_GRAVE)
+		ge1:SetCode(EVENT_TO_REST)
 		ge1:SetOperation(s.regop)
 		Duel.RegisterEffect(ge1,0)
 	end)

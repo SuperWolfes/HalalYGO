@@ -14,8 +14,8 @@ function s.initial_effect(c)
 end
 s.listed_names={32231618}
 function s.filter(c,tp)
-	if not c:IsLevelBelow(4) or not c:IsType(TYPE_FLIP) or (c:IsCode(32231618) and c:IsLocation(LOCATION_GRAVE)) 
-		or not c:IsSummonableCard() or c:IsStatus(STATUS_FORBIDDEN) then return false end
+	if not c:IsLevelBelow(4) or not c:IsType(TYPE_FLIP) or (c:IsCode(32231618) and c:IsLocation(LOCATION_REST)) 
+		or not c:IsSummonableCard() or c:IsStatus(STATUS_UNLIKED) then return false end
 	local eff={Duel.GetPlayerEffect(tp,EFFECT_CANNOT_MSET)}
 	for _,te in ipairs(eff) do
 		local tg=te:GetTarget()
@@ -27,12 +27,12 @@ function s.filter(c,tp)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND+LOCATION_DECK+LOCATION_GRAVE,0,1,nil,tp) end
+		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND+LOCATION_DECK+LOCATION_REST,0,1,nil,tp) end
 	Duel.SetOperationInfo(0,CATEGORY_SUMMON,nil,1,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SUMMON)
-	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,LOCATION_HAND+LOCATION_DECK+LOCATION_GRAVE,0,1,1,nil,tp):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,LOCATION_HAND+LOCATION_DECK+LOCATION_REST,0,1,1,nil,tp):GetFirst()
 	if tc then
 		Duel.MoveToField(tc,tp,tp,LOCATION_MZONE,POS_FACEDOWN_DEFENSE,true)
 		tc:SetStatus(STATUS_SUMMON_TURN,true)

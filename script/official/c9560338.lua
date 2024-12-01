@@ -21,7 +21,7 @@ function s.cfilter(c)
 	return c:IsSetCard(0x106e) and c:IsSpell()
 end
 function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST,0,nil)
 	if chk==0 then return g:GetClassCount(Card.GetCode)>=3 end
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK)
@@ -30,11 +30,11 @@ function s.thfilter(c)
 	return c:IsSetCard(0x106e) and c:IsSpell() and c:IsAbleToHand()
 end
 function s.spfilter(c,e,tp)
-	return c:IsRace(RACE_SPELLCASTER) and c:IsAttribute(ATTRIBUTE_DARK) and c:IsLevelAbove(5)
+	return c:IsRace(RACE_MENTOR) and c:IsAttribute(ATTRIBUTE_DARK) and c:IsLevelAbove(5)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.effop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST,0,nil)
 	local ct=g:GetClassCount(Card.GetCode)
 	if ct<=2 then return end
 	local c=e:GetHandler()
@@ -61,7 +61,7 @@ function s.effop(e,tp,eg,ep,ev,re,r,rp)
 			break_chk=true
 		end
 	end
-	--5+: Special Summon 1 Level 5 or higher DARK Spellcaster from your Deck
+	--5+: Special Summon 1 Level 5 or higher DARK Mentor from your Deck
 	if ct>=5 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_DECK,0,1,1,nil,e,tp)

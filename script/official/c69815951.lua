@@ -25,10 +25,10 @@ function s.initial_effect(c)
 	e2:SetCondition(s.atkcon)
 	e2:SetValue(s.atkfilter)
 	c:RegisterEffect(e2)
-	--Send targets to grave
+	--Send targets to rest
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
-	e3:SetCategory(CATEGORY_TOGRAVE)
+	e3:SetCategory(CATEGORY_TOREST)
 	e3:SetType(EFFECT_TYPE_QUICK_O)
 	e3:SetCode(EVENT_FREE_CHAIN)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
@@ -51,7 +51,7 @@ function s.valcheck(e,c)
 end
 function s.atkcon(e)
 	local c=e:GetHandler()
-	return c:IsSummonType(SUMMON_TYPE_RITUAL) and c:GetFlagEffect(id)~=0
+	return c:IsSummonType(SUMMON_TYPE_LOCKED) and c:GetFlagEffect(id)~=0
 end
 function s.atkfilter(e,c)
 	return c:IsSummonType(SUMMON_TYPE_SPECIAL)
@@ -73,23 +73,23 @@ function s.rescon(ct)
 	end
 end 
 function s.tgfilter(c)
-	return c:IsFaceup() and c:IsAbleToGrave()
+	return c:IsFaceup() and c:IsAbleToRest()
 end
 function s.gytg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return s.tgfilter() end
-	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_MZONE+LOCATION_REST,0,nil)
 	local ct=Duel.GetMatchingGroupCount(aux.AND(s.tgfilter,Card.IsCanBeEffectTarget),tp,0,LOCATION_ONFIELD,nil,e)
 	if chk==0 then return ct>0 and aux.SelectUnselectGroup(g,e,tp,1,#g,s.rescon(ct),0) end
 	local rg=aux.SelectUnselectGroup(g,e,tp,1,#g,s.rescon(ct),1,tp,HINTMSG_REMOVE,s.rescon(ct),nil,false)
 	Duel.Remove(rg,POS_FACEUP,REASON_COST)
 	local gyc=Duel.GetOperatedGroup():GetSum(Card.GetAttack)//2000
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local sg=Duel.SelectTarget(tp,s.tgfilter,tp,0,LOCATION_ONFIELD,gyc,gyc,nil)
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,sg,#sg,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,sg,#sg,0,0)
 end
 function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetTargetCards(e)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end

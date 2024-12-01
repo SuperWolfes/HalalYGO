@@ -1,5 +1,5 @@
 --魔鏡導士サイコ・バウンダー
---Psychic Bounder
+--Mental Bounder
 local s,id=GetID()
 function s.initial_effect(c)
 	--search

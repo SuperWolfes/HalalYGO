@@ -107,8 +107,8 @@ function s.drop1(e,tp,eg,ep,ev,re,r,rp,c,og)
 				local of=Duel.GetFieldCard(1-tp,LOCATION_SZONE,5)
 				if of then Duel.Destroy(of,REASON_RULE) end
 				of=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
-				if of and Duel.Destroy(of,REASON_RULE)==0 and Duel.SendtoGrave(of,REASON_RULE)==0 then
-					Duel.SendtoGrave(rc,REASON_RULE)
+				if of and Duel.Destroy(of,REASON_RULE)==0 and Duel.SendtoRest(of,REASON_RULE)==0 then
+					Duel.SendtoRest(rc,REASON_RULE)
 				end
 			end
 			if rc:GetPreviousLocation()==LOCATION_MZONE then
@@ -154,8 +154,8 @@ function s.drop2(e,tp,eg,ep,ev,re,r,rp)
 				local of=Duel.GetFieldCard(1-tp,LOCATION_SZONE,5)
 				if of then Duel.Destroy(of,REASON_RULE) end
 				of=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
-				if of and Duel.Destroy(of,REASON_RULE)==0 and Duel.SendtoGrave(of,REASON_RULE)==0 then
-					Duel.SendtoGrave(rc,REASON_RULE)
+				if of and Duel.Destroy(of,REASON_RULE)==0 and Duel.SendtoRest(of,REASON_RULE)==0 then
+					Duel.SendtoRest(rc,REASON_RULE)
 				end
 			end
 			if rc:GetPreviousLocation()==LOCATION_MZONE then

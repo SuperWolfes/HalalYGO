@@ -13,7 +13,7 @@ function s.initial_effect(c)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local d=Duel.GetAttackTarget()
-	return Duel.GetAttacker():IsControler(1-tp) and d and d:IsControler(tp) and d:IsRace(RACE_SPELLCASTER) and d:IsFaceup()
+	return Duel.GetAttacker():IsControler(1-tp) and d and d:IsControler(tp) and d:IsRace(RACE_MENTOR) and d:IsFaceup()
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local e1=Effect.CreateEffect(e:GetHandler())

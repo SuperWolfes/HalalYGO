@@ -1,11 +1,11 @@
 --メガリス・ベトール
 --Megalith Bethor
---Scripted by AlphaKretin, Ritual Summon effect by ahtelel
+--Scripted by AlphaKretin, Locked Summon effect by ahtelel
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()
-	--Ritual Summon
-	local e1=Ritual.CreateProc(c,RITPROC_GREATER,aux.FilterBoolFunction(Card.IsSetCard,0x138),nil,aux.Stringid(id,0),nil,nil,nil,nil,nil,function(e,tp,g,sc) return not g:IsContains(e:GetHandler()), g:IsContains(e:GetHandler()) end)
+	--Locked Summon
+	local e1=Locked.CreateProc(c,RITPROC_GREATER,aux.FilterBoolFunction(Card.IsSetCard,0x138),nil,aux.Stringid(id,0),nil,nil,nil,nil,nil,function(e,tp,g,sc) return not g:IsContains(e:GetHandler()), g:IsContains(e:GetHandler()) end)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_HAND)
 	e1:SetCountLimit(1,id)
@@ -27,15 +27,15 @@ end
 s.listed_series={0x138}
 function s.ritcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsDiscardable() end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST+REASON_DISCARD)
+	Duel.SendtoRest(e:GetHandler(),REASON_COST+REASON_DISCARD)
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_RITUAL)
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_LOCKED)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(1-tp) and chkc:IsLocation(LOCATION_ONFIELD) end
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsRitualMonster,tp,LOCATION_GRAVE,0,1,nil) and Duel.IsExistingTarget(aux.TRUE,tp,0,LOCATION_ONFIELD,1,nil) end
-	local ct=Duel.GetMatchingGroup(Card.IsRitualMonster,tp,LOCATION_GRAVE,0,nil):GetClassCount(Card.GetCode)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsLockedMonster,tp,LOCATION_REST,0,1,nil) and Duel.IsExistingTarget(aux.TRUE,tp,0,LOCATION_ONFIELD,1,nil) end
+	local ct=Duel.GetMatchingGroup(Card.IsLockedMonster,tp,LOCATION_REST,0,nil):GetClassCount(Card.GetCode)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local tg=Duel.SelectTarget(tp,aux.TRUE,tp,0,LOCATION_ONFIELD,1,ct,nil)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,#tg,1,0,0)

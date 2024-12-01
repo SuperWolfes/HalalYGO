@@ -28,5 +28,5 @@ function s.atkfilter(c)
 	return c:IsSetCard(0x8) and c:IsMonster()
 end
 function s.atkval(e,c)
-	return Duel.GetMatchingGroup(s.atkfilter,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil):GetClassCount(Card.GetCode)*100
+	return Duel.GetMatchingGroup(s.atkfilter,e:GetHandlerPlayer(),LOCATION_REST,0,nil):GetClassCount(Card.GetCode)*100
 end

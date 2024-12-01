@@ -37,14 +37,14 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	c:RegisterEffect(e1)
 end
 function s.filter(c)
-	return c:IsRitualSpell() and c:IsAbleToHand()
+	return c:IsLockedSpell() and c:IsAbleToHand()
 end
 function s.tohand(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetTurnPlayer()~=tp then return end
 	local ct=e:GetLabel()
 	e:GetHandler():SetTurnCounter(ct+1)
 	if ct==2 then
-		if Duel.SendtoGrave(e:GetHandler(),REASON_RULE)>0 then
+		if Duel.SendtoRest(e:GetHandler(),REASON_RULE)>0 then
 			local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil)
 			if #g>0 then
 				Duel.SendtoHand(g,nil,REASON_EFFECT)

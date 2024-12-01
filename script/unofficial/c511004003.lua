@@ -73,8 +73,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 				Duel.ChangePosition(tc,pos)
 				Duel.MoveSequence(tc,seq2)
 			end
-		elseif (loc&LOCATION_GRAVE)~=0 then
-			Duel.SendtoGrave(tc,REASON_EFFECT)
+		elseif (loc&LOCATION_REST)~=0 then
+			Duel.SendtoRest(tc,REASON_EFFECT)
 		elseif (loc&LOCATION_REMOVED)~=0 then
 			Duel.Remove(tc,p,REASON_EFFECT)
 		elseif (loc&LOCATION_EXTRA)~=0 then

@@ -83,7 +83,7 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Damage(1-tp,1000,REASON_EFFECT)
 end
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
-	return s.typecheck(RACE_MACHINE|RACE_FAIRY|RACE_FIEND) and re:IsActiveType(TYPE_MONSTER) and rp==tp
+	return s.typecheck(RACE_MACHINE|RACE_WANDERER|RACE_TAINTED) and re:IsActiveType(TYPE_MONSTER) and rp==tp
 		and not e:GetHandler():IsDisabled()
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

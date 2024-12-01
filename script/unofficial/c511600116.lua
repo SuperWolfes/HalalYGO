@@ -51,7 +51,7 @@ function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 	if Duel.SelectEffectYesNo(tp,c,96) then
 		local g=c:GetEquipGroup()
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local sg=g:FilterSelect(tp,s.repfilter,1,1,nil)
 		Duel.SetTargetCard(sg)
 		return true
@@ -59,5 +59,5 @@ function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.desrepop(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
-	Duel.SendtoGrave(tg,REASON_EFFECT+REASON_REPLACE)
+	Duel.SendtoRest(tg,REASON_EFFECT+REASON_REPLACE)
 end

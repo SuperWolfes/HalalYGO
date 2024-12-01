@@ -70,7 +70,7 @@ function s.thop1(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.thfilter2(c)
-	return c:IsRace(RACE_SPELLCASTER) and c:GetLevel()==1 and c:IsAbleToHand()
+	return c:IsRace(RACE_MENTOR) and c:GetLevel()==1 and c:IsAbleToHand()
 end
 function s.thtg2(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter2,tp,LOCATION_DECK,0,1,nil) end

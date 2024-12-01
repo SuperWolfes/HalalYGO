@@ -1,5 +1,5 @@
 --伝説の賭博師
---Gambler of Legend
+--Chancer of Legend
 local s,id=GetID()
 function s.initial_effect(c)
 	--destroy
@@ -25,13 +25,13 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Destroy(g,REASON_EFFECT)
 	elseif c1+c2+c3==2 then
 		local g=Duel.GetFieldGroup(tp,0,LOCATION_HAND):RandomSelect(tp,1)
-		Duel.SendtoGrave(g,REASON_EFFECT+REASON_DISCARD)
+		Duel.SendtoRest(g,REASON_EFFECT+REASON_DISCARD)
 	elseif c1+c2+c3==1 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 		local g=Duel.SelectMatchingCard(tp,aux.TRUE,tp,LOCATION_ONFIELD,0,1,1,nil)
 		Duel.Destroy(g,REASON_EFFECT)
 	else
 		local g=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
-		Duel.SendtoGrave(g,REASON_EFFECT+REASON_DISCARD)
+		Duel.SendtoRest(g,REASON_EFFECT+REASON_DISCARD)
 	end
 end

@@ -1,10 +1,10 @@
 --ゴーストリックの妖精
---Ghostrick Fairy
+--Missrick Wanderer
 --Scripted by AlphaKretin
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Cannot be normal summoned if player controls no "Ghostrick" monster
+	--Cannot be normal summoned if player controls no "Missrick" monster
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_CANNOT_SUMMON)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.postg)
 	e2:SetOperation(s.posop)
 	c:RegisterEffect(e2)
-	--Set 1 "Ghostrick" card from GY
+	--Set 1 "Missrick" card from GY
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -60,14 +60,14 @@ function s.setfilter(c,e,tp)
 	return false
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.setfilter(chkc,e,tp) end
-	if chk==0 then return Duel.IsExistingTarget(s.setfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.setfilter(chkc,e,tp) end
+	if chk==0 then return Duel.IsExistingTarget(s.setfilter,tp,LOCATION_REST,0,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
-	local tc=Duel.SelectTarget(tp,s.setfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp):GetFirst()
+	local tc=Duel.SelectTarget(tp,s.setfilter,tp,LOCATION_REST,0,1,1,nil,e,tp):GetFirst()
 	if tc:IsMonster() then
-		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,LOCATION_GRAVE)
+		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,LOCATION_REST)
 	elseif tc:IsSpellTrap() then
-		Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,tp,LOCATION_GRAVE)
+		Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,tp,LOCATION_REST)
 	end
 end
 function s.setop(e,tp,eg,ep,ev,re,r,rp)
@@ -82,7 +82,7 @@ function s.setop(e,tp,eg,ep,ev,re,r,rp)
 		if tc:IsType(TYPE_FIELD) then
 			local fc=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
 			if fc then
-				Duel.SendtoGrave(fc,REASON_RULE)
+				Duel.SendtoRest(fc,REASON_RULE)
 				Duel.BreakEffect()
 			end
 		end

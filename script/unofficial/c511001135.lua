@@ -44,7 +44,7 @@ function s.descon(e)
 end
 function s.crystaltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:GetDestination()==LOCATION_GRAVE and c:IsReason(REASON_DESTROY) end
+	if chk==0 then return c:GetDestination()==LOCATION_REST and c:IsReason(REASON_DESTROY) end
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then return false end
 	return Duel.SelectEffectYesNo(tp,c)
 end

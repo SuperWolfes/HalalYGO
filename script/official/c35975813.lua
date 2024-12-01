@@ -1,5 +1,5 @@
 --ジェノサイドキングデーモン
---Terrorking Archfiend
+--Terrorking Archtainted
 local s,id=GetID()
 function s.initial_effect(c)
 	--sumlimit
@@ -37,7 +37,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e5)
 end
 s.listed_series={0x45}
-s.roll_dice=true
+s.roll_suffice=true
 function s.excon(e)
 	return not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,0x45),e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
 end
@@ -57,7 +57,7 @@ function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.GetChainInfo(ev,CHAININFO_TARGET_CARDS)
 	if not tg or not tg:IsContains(e:GetHandler()) or not Duel.IsChainDisablable(ev) then return false end
 	local rc=re:GetHandler()
-	local dc=Duel.TossDice(tp,1)
+	local dc=Duel.TossSuffice(tp,1)
 	if dc~=2 and dc~=5 then return end
 	if Duel.NegateEffect(ev) and rc:IsRelateToEffect(re) then
 		Duel.Destroy(rc,REASON_EFFECT)
@@ -70,12 +70,12 @@ function s.disop2(e,tp,eg,ep,ev,re,r,rp)
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_DISABLE)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD_EXC_GRAVE)
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD_EXC_REST)
 		tc:RegisterEffect(e1)
 		local e2=Effect.CreateEffect(c)
 		e2:SetType(EFFECT_TYPE_SINGLE)
 		e2:SetCode(EFFECT_DISABLE_EFFECT)
-		e2:SetReset(RESET_EVENT+RESETS_STANDARD_EXC_GRAVE)
+		e2:SetReset(RESET_EVENT+RESETS_STANDARD_EXC_REST)
 		tc:RegisterEffect(e2)
 	end
 end

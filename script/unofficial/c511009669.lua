@@ -88,7 +88,7 @@ end
 function s.sumop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetLabelObject()
 	local zone=aux.GetMMZonesPointedTo(tp,Card.IsSetCard,LOCATION_MZONE,0,nil,0x1157)
-	if zone>0 and tc:IsLocation(LOCATION_GRAVE) and tc:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP,tp,zone) then
+	if zone>0 and tc:IsLocation(LOCATION_REST) and tc:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP,tp,zone) then
 		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP,zone)
 	end
 	e:Reset()

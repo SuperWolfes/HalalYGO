@@ -45,12 +45,12 @@ function s.initial_effect(c)
 	--Rise
 	local e6=Effect.CreateEffect(c)
 	e6:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
-	e6:SetCode(EVENT_TO_GRAVE)
+	e6:SetCode(EVENT_TO_REST)
 	e6:SetOperation(s.spr)
 	c:RegisterEffect(e6)
 end
 function s.spfilter(c,tp)
-	return c:IsTrap() and c:IsAbleToGraveAsCost()
+	return c:IsTrap() and c:IsAbleToRestAsCost()
 end
 function s.spcon(e,c)
 	if c==nil then return true end
@@ -60,7 +60,7 @@ function s.spcon(e,c)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_ONFIELD,0,nil)
-	local sg=aux.SelectUnselectGroup(g,e,tp,3,3,aux.ChkfMMZ(1),1,tp,HINTMSG_TOGRAVE,nil,nil,true)
+	local sg=aux.SelectUnselectGroup(g,e,tp,3,3,aux.ChkfMMZ(1),1,tp,HINTMSG_TOREST,nil,nil,true)
 	local dg=sg:Filter(Card.IsFacedown,nil)
 	if #dg>0 then
 		Duel.ConfirmCards(1-tp,dg)
@@ -75,11 +75,11 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	g:DeleteGroup()
 end
 function s.atkdefval(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsTrap,c:GetControler(),LOCATION_GRAVE,0,nil)*1000
+	return Duel.GetMatchingGroupCount(Card.IsTrap,c:GetControler(),LOCATION_REST,0,nil)*1000
 end
 function s.trapdesfilter(c)
 	return c:IsFacedown() and c:IsDestructable()
@@ -109,7 +109,7 @@ function s.spr(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetDescription(aux.Stringid(id,1))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_IGNITION)
-	e1:SetRange(LOCATION_GRAVE)
+	e1:SetRange(LOCATION_REST)
 	if Duel.GetTurnPlayer()==tp and ph==PHASE_MAIN1 then
 		e1:SetLabel(Duel.GetTurnCount())
 		e1:SetCondition(s.risecon2)

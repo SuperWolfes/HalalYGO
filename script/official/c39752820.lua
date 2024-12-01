@@ -38,7 +38,7 @@ end
 s.listed_series={0xfe}
 function s.spcost(e,c,tp,st)
 	if (st&SUMMON_TYPE_LINK)~=SUMMON_TYPE_LINK then return true end
-	return Duel.IsExistingMatchingCard(Card.IsSetCard,tp,LOCATION_GRAVE,0,1,nil,0xfe)
+	return Duel.IsExistingMatchingCard(Card.IsSetCard,tp,LOCATION_REST,0,1,nil,0xfe)
 end
 function s.setfilter(c)
 	return c:IsSetCard(0xfe) and c:IsType(TYPE_TRAP+TYPE_SPELL) and c:IsSSetable()
@@ -56,7 +56,7 @@ function s.setop(e,tp,eg,ep,ev,re,r,rp)
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_CANNOT_TRIGGER)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD_EXC_GRAVE+RESET_PHASE+PHASE_END)
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD_EXC_REST+RESET_PHASE+PHASE_END)
 		e1:SetCondition(s.ctcon)
 		tc:RegisterEffect(e1)
 	end
@@ -65,11 +65,11 @@ function s.cfilter(c)
 	return c:IsSetCard(0xfe) and c:IsMonster()
 end
 function s.ctcon(e,tp,eg,ep,ev,re,r,rp)
-	return not Duel.IsExistingMatchingCard(s.cfilter,e:GetHandlerPlayer(),LOCATION_GRAVE,0,1,nil)
+	return not Duel.IsExistingMatchingCard(s.cfilter,e:GetHandlerPlayer(),LOCATION_REST,0,1,nil)
 end
 function s.tdcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsLocation(LOCATION_GRAVE) and r==REASON_LINK and c:IsSummonType(SUMMON_TYPE_LINK)
+	return c:IsLocation(LOCATION_REST) and r==REASON_LINK and c:IsSummonType(SUMMON_TYPE_LINK)
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToDeck,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) end

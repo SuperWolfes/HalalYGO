@@ -51,7 +51,7 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local bc=c:GetBattleTarget()
 	return Duel.GetAttacker()==c and c:IsRelateToBattle()
-		and bc:IsLocation(LOCATION_GRAVE) and bc:IsType(TYPE_EFFECT)
+		and bc:IsLocation(LOCATION_REST) and bc:IsType(TYPE_EFFECT)
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

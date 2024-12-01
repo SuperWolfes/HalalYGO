@@ -27,7 +27,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	
 	local ct=Duel.SendtoDeck(sg,nil,0,REASON_EFFECT)
 	if ct>0 then
-		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) and ct>1 then return end
+		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) and ct>1 then return end
 		if not aux.CheckSummonGate(tp,ct) then return end
 		local spg=Group.CreateGroup()
 		local tc=sg:GetFirst()

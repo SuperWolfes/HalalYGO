@@ -56,7 +56,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local ft=math.min(Duel.GetLocationCount(tp,LOCATION_MZONE),2)
 	Duel.DisableShuffleCheck()
 	if ft>0 and #pg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
-		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local sg=pg:Select(tp,1,ft,nil)
 		if #sg==0 then return end
@@ -77,17 +77,17 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		end
 		Duel.SpecialSummonComplete()
 	end
-	Duel.SendtoGrave(g,REASON_EFFECT+REASON_REVEAL)
+	Duel.SendtoRest(g,REASON_EFFECT+REASON_REVEAL)
 end
 function s.lvfilter(c,lg)
 	return c:IsRace(RACE_PLANT) and c:HasLevel() and lg:IsExists(aux.NOT(Card.IsLevel),1,nil,c:GetLevel())
 end
 function s.lvtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local lg=e:GetHandler():GetLinkedGroup():Match(aux.AND(Card.IsFaceup,Card.HasLevel),nil)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and c:IsControler(tp) and s.lvfilter(chkc,lg) end
-	if chk==0 then return #lg>0 and Duel.IsExistingTarget(s.lvfilter,tp,LOCATION_GRAVE,0,1,nil,lg) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and c:IsControler(tp) and s.lvfilter(chkc,lg) end
+	if chk==0 then return #lg>0 and Duel.IsExistingTarget(s.lvfilter,tp,LOCATION_REST,0,1,nil,lg) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	Duel.SelectTarget(tp,s.lvfilter,tp,LOCATION_GRAVE,0,1,1,nil,lg)
+	Duel.SelectTarget(tp,s.lvfilter,tp,LOCATION_REST,0,1,1,nil,lg)
 end
 function s.lvop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

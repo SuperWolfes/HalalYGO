@@ -2,7 +2,7 @@
 --Gem-Knight Amber
 local s,id=GetID()
 function s.initial_effect(c)
-	Gemini.AddProcedure(c)
+	Dual.AddProcedure(c)
 	--Add 1 banished monster to the hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1)
-	e1:SetCondition(Gemini.EffectStatusCondition)
+	e1:SetCondition(Dual.EffectStatusCondition)
 	e1:SetCost(s.cost)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
@@ -19,13 +19,13 @@ function s.initial_effect(c)
 end
 s.listed_series={0x1047}
 function s.costfilter(c)
-	return c:IsSetCard(0x1047) and c:IsAbleToGraveAsCost()
+	return c:IsSetCard(0x1047) and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.tgfilter(c)
 	return c:IsFaceup() and c:IsMonster() and c:IsAbleToHand()

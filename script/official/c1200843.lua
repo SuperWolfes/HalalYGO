@@ -2,11 +2,11 @@
 --Mirror of Yata
 local s,id=GetID()
 function s.initial_effect(c)
-	aux.AddEquipProcedure(c,nil,aux.FilterBoolFunction(Card.IsType,TYPE_SPIRIT))
-	--spirit may not return
+	aux.AddEquipProcedure(c,nil,aux.FilterBoolFunction(Card.IsType,TYPE_GUARDIAN))
+	--Guardian may not return
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_EQUIP)
-	e2:SetCode(EFFECT_SPIRIT_MAYNOT_RETURN)
+	e2:SetCode(EFFECT_GUARDIAN_MAYNOT_RETURN)
 	e2:SetRange(LOCATION_SZONE)
 	c:RegisterEffect(e2)
 	--destroy sub

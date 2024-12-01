@@ -1,5 +1,5 @@
 --D－HERO Bloo－D
---Destiny HERO - Plasma
+--Destrudic HERO - Plasma
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()

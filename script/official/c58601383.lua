@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e3:SetValue(s.efilter2)
 	c:RegisterEffect(e3)
 end
-s.miracle_synchro_fusion=true
+s.pulse_synchro_fusion=true
 function s.ffilter(c,fc,sumtype,tp)
 	return c:IsType(TYPE_SYNCHRO,fc,sumtype,tp) and not c:IsType(TYPE_EFFECT,fc,sumtype,tp)
 end

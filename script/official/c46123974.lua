@@ -28,7 +28,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x17d}
 function s.spcostfilter(c)
-	return c:IsRitualMonster() and not c:IsPublic()
+	return c:IsLockedMonster() and not c:IsPublic()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

@@ -1,9 +1,9 @@
 --デステニー・ストリングス
---String of Destiny
+--String of Destrudic
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddEquipProcedure(c,nil,aux.FilterBoolFunction(Card.IsSetCard,0x1083))
-	--to grave
+	--to rest
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e1:SetRange(LOCATION_SZONE)

@@ -44,7 +44,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummon(sc,SUMMON_TYPE_XYZ,tp,tp,false,false,POS_FACEUP)
 		sc:CompleteProcedure()
 		if c:IsRelateToEffect(e) then
-			c:CancelToGrave()
+			c:CancelToRest()
 			Duel.Overlay(sc,c)
 		end
 	end

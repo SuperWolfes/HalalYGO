@@ -132,7 +132,7 @@ function s.setop(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetReset(RESET_EVENT+RESETS_STANDARD)
 		tc:RegisterEffect(e2)
 	else
-		Duel.SendtoGrave(tc,REASON_RULE)
+		Duel.SendtoRest(tc,REASON_RULE)
 	end
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)

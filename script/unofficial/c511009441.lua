@@ -150,16 +150,16 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.indfilter(c,tpe)
-	return (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup()) and c:IsType(tpe)
+	return (c:IsLocation(LOCATION_REST) or c:IsFaceup()) and c:IsType(tpe)
 end
 function s.indcon(e)
-	return Duel.IsExistingMatchingCard(s.indfilter,0,LOCATION_GRAVE+LOCATION_REMOVED,LOCATION_GRAVE+LOCATION_REMOVED,1,nil,TYPE_FUSION)
-		and Duel.IsExistingMatchingCard(s.indfilter,0,LOCATION_GRAVE+LOCATION_REMOVED,LOCATION_GRAVE+LOCATION_REMOVED,1,nil,TYPE_SYNCHRO)
-		and Duel.IsExistingMatchingCard(s.indfilter,0,LOCATION_GRAVE+LOCATION_REMOVED,LOCATION_GRAVE+LOCATION_REMOVED,1,nil,TYPE_XYZ)
+	return Duel.IsExistingMatchingCard(s.indfilter,0,LOCATION_REST+LOCATION_REMOVED,LOCATION_REST+LOCATION_REMOVED,1,nil,TYPE_FUSION)
+		and Duel.IsExistingMatchingCard(s.indfilter,0,LOCATION_REST+LOCATION_REMOVED,LOCATION_REST+LOCATION_REMOVED,1,nil,TYPE_SYNCHRO)
+		and Duel.IsExistingMatchingCard(s.indfilter,0,LOCATION_REST+LOCATION_REMOVED,LOCATION_REST+LOCATION_REMOVED,1,nil,TYPE_XYZ)
 end
 function s.imfilter(e,te)
 	if not te then return false end
-	return te:IsHasCategory(CATEGORY_TOHAND+CATEGORY_DESTROY+CATEGORY_REMOVE+CATEGORY_TODECK+CATEGORY_RELEASE+CATEGORY_TOGRAVE)
+	return te:IsHasCategory(CATEGORY_TOHAND+CATEGORY_DESTROY+CATEGORY_REMOVE+CATEGORY_TODECK+CATEGORY_RELEASE+CATEGORY_TOREST)
 end
 function s.efilter(e,te)
 	return te:IsActiveType(TYPE_FUSION+TYPE_SYNCHRO+TYPE_XYZ) and te:GetOwnerPlayer()~=e:GetHandlerPlayer()
@@ -170,7 +170,7 @@ function s.spfilter(c,e,tp,rp)
 end
 function s.sptg2(e,tp,eg,ep,ev,re,r,rp,chk)
     if chk==0 then
-        return loc~=0 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,2,nil,e,tp,rp)
+        return loc~=0 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,2,nil,e,tp,rp)
     end
     Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,LOCATION_EXTRA)
 end

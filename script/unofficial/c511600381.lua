@@ -54,7 +54,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		tc:RegisterEffect(e2,true)
 	else
 		Duel.BreakEffect()
-		Duel.SendtoGrave(tc,REASON_EFFECT+REASON_DISCARD)
+		Duel.SendtoRest(tc,REASON_EFFECT+REASON_DISCARD)
 	end
 	Duel.ShuffleHand(tp)
 end

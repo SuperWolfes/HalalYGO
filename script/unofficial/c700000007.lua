@@ -33,16 +33,16 @@ function s.actcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil)
 end
 function s.damfil(c,tp)
-	return c:IsControler(tp) and c:IsAbleToGrave()
+	return c:IsControler(tp) and c:IsAbleToRest()
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return eg:IsExists(s.damfil,1,nil,tp) end
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,300)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local sg=eg:FilterSelect(tp,s.damfil,1,1,nil,tp)
-	if #sg>0 and Duel.SendtoGrave(sg,REASON_EFFECT)>0 then
+	if #sg>0 and Duel.SendtoRest(sg,REASON_EFFECT)>0 then
 		Duel.Damage(1-tp,300,REASON_EFFECT)
 	end
 end

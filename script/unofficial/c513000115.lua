@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(511000011,1))
 	e2:SetType(EFFECT_TYPE_QUICK_O+EFFECT_TYPE_FIELD)
 	e2:SetCode(EVENT_PRE_DAMAGE_CALCULATE)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCondition(s.con2)
 	e2:SetCost(s.cost2)
 	e2:SetOperation(s.op2)
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():IsDiscardable() and ep==tp and Duel.GetAttackTarget()==nil and Duel.SelectYesNo(tp,aux.Stringid(81275309,0)) 
-		and Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT+REASON_REPLACE+REASON_DISCARD) then
+		and Duel.SendtoRest(e:GetHandler(),REASON_EFFECT+REASON_REPLACE+REASON_DISCARD) then
 		Duel.ChangeBattleDamage(tp,0)
 	end
 end

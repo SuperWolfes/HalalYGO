@@ -1,5 +1,5 @@
 --刻印の調停者
---Engraver of the Mark
+--Enrestr of the Mark
 local s,id=GetID()
 function s.initial_effect(c)
 	--Announce
@@ -29,8 +29,8 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return rp~=tp and ex and (cv&ANNOUNCE_CARD+ANNOUNCE_CARD_FILTER)~=0
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
+	Duel.SendtoRest(e:GetHandler(),REASON_COST)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local ex,cg,ct,cp,cv=Duel.GetOperationInfo(ev,CATEGORY_ANNOUNCE)

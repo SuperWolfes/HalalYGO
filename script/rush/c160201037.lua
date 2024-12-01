@@ -1,5 +1,5 @@
 --サイキック・ダイバージェンス
---Psychic Divergence
+--Mental Divergence
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_PSYCHIC)
+	return c:IsFaceup() and c:IsRace(RACE_MENTAL)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckLPCost(tp,500) end

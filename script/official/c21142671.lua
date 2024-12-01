@@ -34,10 +34,10 @@ function s.spcon(e,c)
 end
 function s.spdcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsLocation(LOCATION_GRAVE) and r==REASON_SYNCHRO and c:GetReasonCard():IsHasEffect(id)
+	return c:IsLocation(LOCATION_REST) and r==REASON_SYNCHRO and c:GetReasonCard():IsHasEffect(id)
 end
 function s.filter(c,e,tp)
-	return c:IsAttribute(ATTRIBUTE_FIRE) and c:IsRace(RACE_FIEND)
+	return c:IsAttribute(ATTRIBUTE_FIRE) and c:IsRace(RACE_TAINTED)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
 end
 function s.spdtg(e,tp,eg,ep,ev,re,r,rp,chk)

@@ -35,7 +35,7 @@ s.listed_names={id}
 s.listed_series={0x7c,0x79}
 
 function s.cfilter(c)
-	return c:IsFaceup() and (c:IsSpell() or c:IsTrap()) and c:IsSetCard(0x7c) and c:IsAbleToGraveAsCost()
+	return c:IsFaceup() and (c:IsSpell() or c:IsTrap()) and c:IsSetCard(0x7c) and c:IsAbleToRestAsCost()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local nc=Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_SZONE,0,1,nil)
@@ -43,9 +43,9 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 		if Duel.IsPlayerAffectedByEffect(tp,CARD_FIRE_FIST_EAGLE) then return true else return nc end
 	end
 	if nc and not (Duel.IsPlayerAffectedByEffect(tp,CARD_FIRE_FIST_EAGLE) and Duel.SelectYesNo(tp,aux.Stringid(CARD_FIRE_FIST_EAGLE,0))) then 
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_SZONE,0,1,1,nil)
-			Duel.SendtoGrave(g,REASON_COST)
+			Duel.SendtoRest(g,REASON_COST)
 	end
 end
 function s.spfilter(c,e,tp)
@@ -71,10 +71,10 @@ function s.addfilter(c)
 	return c:IsMonster() and c:IsSetCard(0x79) and c:IsAbleToHand() and c:IsLevelAbove(5)
 end
 function s.addtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.shfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.shfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and s.shfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.shfilter,tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectTarget(tp,s.shfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.shfilter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,#g,0,0)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end

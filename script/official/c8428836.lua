@@ -1,17 +1,17 @@
 --冥占術の儀式
---Nether Prediction Ritual
+--Nether Prediction Locked
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Ritual Summon
-	Ritual.AddProcGreater({handler=c,filter=s.ritualfil,lvtype=RITPROC_GREATER,sumpos=POS_FACEUP_ATTACK|POS_FACEDOWN_DEFENSE,location=LOCATION_HAND+LOCATION_GRAVE})
-	--Special Summon 1 non-Ritual "Prediction Princess" from your Deck
+	--Locked Summon
+	Locked.AddProcGreater({handler=c,filter=s.lockedfil,lvtype=RITPROC_GREATER,sumpos=POS_FACEUP_ATTACK|POS_FACEDOWN_DEFENSE,location=LOCATION_HAND+LOCATION_REST})
+	--Special Summon 1 non-Locked "Prediction Princess" from your Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,1))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_PHASE+PHASE_STANDBY)
-	e1:SetRange(LOCATION_GRAVE)
+	e1:SetRange(LOCATION_REST)
 	e1:SetCountLimit(1)
 	e1:SetCondition(s.spcond)
 	e1:SetCost(aux.bfgcost)
@@ -20,17 +20,17 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 s.listed_series={0xcc}
-function s.ritualfil(c)
-	return c:IsSetCard(0xcc) and c:IsRitualMonster()
+function s.lockedfil(c)
+	return c:IsSetCard(0xcc) and c:IsLockedMonster()
 end
 function s.cfilter(c)
-	return c:IsRitualMonster() and c:IsSetCard(0xcc) and c:IsFaceup()
+	return c:IsLockedMonster() and c:IsSetCard(0xcc) and c:IsFaceup()
 end
 function s.spcond(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil)
 end
 function s.spfilter(c,e,tp)
-	return c:IsSetCard(0xcc) and not c:IsRitualMonster() and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEDOWN_DEFENSE)
+	return c:IsSetCard(0xcc) and not c:IsLockedMonster() and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEDOWN_DEFENSE)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

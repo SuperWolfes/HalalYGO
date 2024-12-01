@@ -1,4 +1,4 @@
---Ritual of Black Mastery
+--Locked of Black Mastery
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddSkillProcedure(c,1,false,s.flipcon,s.flipop)
@@ -13,7 +13,7 @@ function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.cfilter(c)
 	return c:IsFaceup() and c:IsCode(5405694,30208479)
-	and c:IsSummonType(SUMMON_TYPE_RITUAL) and c:IsStatus(STATUS_SPSUMMON_TURN)
+	and c:IsSummonType(SUMMON_TYPE_LOCKED) and c:IsStatus(STATUS_SPSUMMON_TURN)
 end
 function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SKILL_FLIP,tp,id|(1<<32))
@@ -77,7 +77,7 @@ function s.afilter(c,tp)
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp,chk)
 	return eg:IsExists(s.afilter,1,nil,tp)
-	and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil)
+	and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil)
 end
 function s.filter(c)
 	return c:IsSpell() and c:IsAbleToHand()
@@ -85,7 +85,7 @@ end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,tp,id)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_REST,0,1,1,nil)
 	if #g>0 then
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)

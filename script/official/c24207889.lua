@@ -58,7 +58,7 @@ function s.adjustop(e,tp,eg,ep,ev,re,r,rp)
 				if s[p][race] then
 					dg=rg:Filter(s.fidfilter,nil,s[p][race])
 				else
-					Duel.Hint(HINT_SELECTMSG,p,HINTMSG_TOGRAVE)
+					Duel.Hint(HINT_SELECTMSG,p,HINTMSG_TOREST)
 					dg=rg:Select(p,rc-1,rc-1,nil)
 				end
 				sg:Merge(dg)
@@ -73,7 +73,7 @@ function s.adjustop(e,tp,eg,ep,ev,re,r,rp)
 		end
 	end
 	if #sg>0 then
-		Duel.SendtoGrave(sg,REASON_RULE)
+		Duel.SendtoRest(sg,REASON_RULE)
 		Duel.Readjust()
 	end
 end

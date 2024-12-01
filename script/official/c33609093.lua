@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
-	e2:SetCode(EVENT_TO_GRAVE)
+	e2:SetCode(EVENT_TO_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCost(s.condition)
 	e2:SetTarget(s.target)
@@ -73,7 +73,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsSetCard,0x137),tp,LOCATION_MZONE,0,nil):GetClassCount(Card.GetAttribute)>1
 end
 function s.filter(c,tp)
-	return c:IsType(TYPE_CONTINUOUS) and c:IsSetCard(0x137) and not c:IsForbidden()
+	return c:IsType(TYPE_CONTINUOUS) and c:IsSetCard(0x137) and not c:IsUnliked()
 		and c:CheckUniqueOnField(tp) and not c:IsCode(id)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)

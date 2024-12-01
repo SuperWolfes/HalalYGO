@@ -70,8 +70,8 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.BreakEffect()
 		ft=ft-1
 		if ft>0 then
-			if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
-			local sg=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,ft,ft,nil,e,tp)
+			if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
+			local sg=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_REST,LOCATION_REST,ft,ft,nil,e,tp)
 			Duel.HintSelection(sg)
 			Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)
 			local tc=sg:GetFirst()

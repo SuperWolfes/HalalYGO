@@ -3,7 +3,7 @@
 --Updated by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
-	--tograve replace
+	--torest replace
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE+EFFECT_FLAG_DAMAGE_STEP)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_HANDES)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e2:SetCode(EVENT_PHASE+PHASE_BATTLE)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1)
 	e2:SetCondition(s.hdcon)
 	e2:SetTarget(s.hdtg)
@@ -28,14 +28,14 @@ function s.initial_effect(c)
 end
 function s.repcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:GetDestination()==LOCATION_GRAVE and c:GetOwner()==tp and c:IsPosition(POS_ATTACK)
+	return c:GetDestination()==LOCATION_REST and c:GetOwner()==tp and c:IsPosition(POS_ATTACK)
 end
 function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return not e:GetHandler():IsReason(REASON_REPLACE) end
 	return true
 end
 function s.repop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT+REASON_REPLACE,1-tp)
+	Duel.SendtoRest(e:GetHandler(),REASON_EFFECT+REASON_REPLACE,1-tp)
 end
 function s.hdcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp and not e:GetHandler():IsPreviousControler(tp)
@@ -49,6 +49,6 @@ function s.hdop(e,tp,eg,ep,ev,re,r,rp)
 		local g=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
 		if #g==0 then return end
 		local sg=g:RandomSelect(tp,1)
-		Duel.SendtoGrave(sg,REASON_DISCARD+REASON_EFFECT)
+		Duel.SendtoRest(sg,REASON_DISCARD+REASON_EFFECT)
 	end
 end

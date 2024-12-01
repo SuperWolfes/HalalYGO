@@ -30,7 +30,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x164}
 function s.xthfilter1(c,tp)
-	return c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
+	return c:IsType(TYPE_PENDULUM) and not c:IsUnliked()
 		and Duel.IsExistingMatchingCard(s.xthfilter2,tp,LOCATION_EXTRA,0,1,c,c)
 end
 function s.xthfilter2(c,ac)

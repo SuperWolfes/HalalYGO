@@ -39,15 +39,15 @@ function s.setfilter(c,e,tp)
 	return false
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.setfilter(chkc,e,tp) end
-	if chk==0 then return Duel.IsExistingTarget(s.setfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.setfilter(chkc,e,tp) end
+	if chk==0 then return Duel.IsExistingTarget(s.setfilter,tp,LOCATION_REST,0,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
-	local g=Duel.SelectTarget(tp,s.setfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+	local g=Duel.SelectTarget(tp,s.setfilter,tp,LOCATION_REST,0,1,1,nil,e,tp)
 	local tc=g:GetFirst()
 	if tc:IsMonster() then
-		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,LOCATION_GRAVE)
+		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,LOCATION_REST)
 	elseif tc:IsType(TYPE_SPELL+TYPE_TRAP) then
-		Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,tp,LOCATION_GRAVE)
+		Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,tp,LOCATION_REST)
 	end
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,nil,1,0,0)
 end
@@ -63,7 +63,7 @@ function s.setop(e,tp,eg,ep,ev,re,r,rp)
 		if tc:IsType(TYPE_FIELD) then
 			local fc=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
 			if fc then
-				Duel.SendtoGrave(fc,REASON_RULE)
+				Duel.SendtoRest(fc,REASON_RULE)
 				Duel.BreakEffect()
 			end
 		end

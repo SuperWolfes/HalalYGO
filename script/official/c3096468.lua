@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.sslimit(e,c)
-	return not c:IsRace(RACE_ZOMBIE)
+	return not c:IsRace(RACE_CONTAMINED)
 end
 function s.syncon(e)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_NORMAL)

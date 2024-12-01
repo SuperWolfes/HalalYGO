@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	--Make 1 of opponent's monsters lose 400 ATK
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_LEAVE_GRAVE)
+	e1:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_LEAVE_REST)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1)
@@ -44,10 +44,10 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			end
 			--Set cards
 			local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
-			local sg=Duel.GetMatchingGroup(s.sfilter,tp,LOCATION_GRAVE,0,nil)
+			local sg=Duel.GetMatchingGroup(s.sfilter,tp,LOCATION_REST,0,nil)
 			if ft>0 and #sg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 				Duel.BreakEffect()
-				local tg=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.sfilter),tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+				local tg=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.sfilter),tp,LOCATION_REST,0,1,1,nil,e,tp)
 				Duel.HintSelection(tg)
 				Duel.SSet(tp,tg)
 			end

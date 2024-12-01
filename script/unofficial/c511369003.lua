@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	-- e2:SetCode(EVENT_PHASE_START+PHASE_MAIN2)
 	e2:SetCode(EVENT_CUSTOM+id)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1)
 	e2:SetCondition(s.spcon)
 	e2:SetCost(aux.bfgcost)
@@ -70,8 +70,8 @@ function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetBattleDamage(tp)>0
 end
 function s.damcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
+	Duel.SendtoRest(e:GetHandler(),REASON_COST)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -90,7 +90,7 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local m2=Effect.CreateEffect(c)
 	m2:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
 	m2:SetCode(EVENT_ADJUST)
-	m2:SetRange(LOCATION_GRAVE)
+	m2:SetRange(LOCATION_REST)
 	m2:SetCondition(s.adjcon)
 	m2:SetOperation(s.adjop)
 	m2:SetCountLimit(1)
@@ -112,13 +112,13 @@ end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local rate=s[tp]
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 
-		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp,rate) end
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp,rate) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local rate=s[tp]
-	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp,rate)
+	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp,rate)
 	local tc=g:GetFirst()
 	if tc then
 		if Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP) then

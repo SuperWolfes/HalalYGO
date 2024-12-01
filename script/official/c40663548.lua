@@ -67,11 +67,11 @@ function s.bancon(e,tp,eg,ep,ev,re,r,rp)
 	return ep==tp
 end
 function s.bantg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsAbleToRemove() and chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(1-tp) end
+	if chkc then return chkc:IsAbleToRemove() and chkc:IsLocation(LOCATION_REST) and chkc:IsControler(1-tp) end
 	if chk==0 then return true end
 	local ct=Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsSetCard,0xc9),tp,LOCATION_MZONE,0,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectTarget(tp,Card.IsAbleToRemove,tp,0,LOCATION_GRAVE,1,ct,nil)
+	local g=Duel.SelectTarget(tp,Card.IsAbleToRemove,tp,0,LOCATION_REST,1,ct,nil)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,#g,0,0)
 end
 function s.banop(e,tp,eg,ep,ev,re,r,rp)

@@ -1,5 +1,5 @@
 --強欲で謙虚な壺
---Pot of Duality
+--Pot of Guardianity
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -76,7 +76,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			Duel.ConfirmCards(1-p,sg)
 			Duel.ShuffleHand(p)
 		else
-			Duel.SendtoGrave(sg,REASON_RULE)
+			Duel.SendtoRest(sg,REASON_RULE)
 		end
 		Duel.BreakEffect()
 		Duel.ShuffleDeck(p)

@@ -1,5 +1,5 @@
 --ＣＮｏ.６５ 裁断魔王ジャッジ・デビル (Anime)
---Number C65: King Overfiend (Anime)
+--Number C65: King Overtainted (Anime)
 Duel.LoadScript("rankup_functions.lua")
 Duel.LoadCardScript("c49195710.lua")
 local s,id=GetID()

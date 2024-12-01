@@ -1,4 +1,4 @@
---Mirror of Duality
+--Mirror of Guardianity
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

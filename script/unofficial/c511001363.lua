@@ -107,7 +107,7 @@ function s.copycost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetTargetCard(tc)
 	local op=Duel.SelectEffect(tp,{a,aux.Stringid(81330115,0)},{b,aux.Stringid(21454943,1)})
 	if op==0 then
-		Duel.SendtoGrave(tc,REASON_COST) 
+		Duel.SendtoRest(tc,REASON_COST) 
 	else
 		Duel.PayLPCost(tp,400)
 	end

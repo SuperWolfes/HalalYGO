@@ -27,7 +27,7 @@ function s.rescon(sg,e,tp,mg)
 	return g:GetClassCount(Card.GetCode)>1
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_GRAVE+LOCATION_MZONE,0,nil,tp)
+	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST+LOCATION_MZONE,0,nil,tp)
 	if chk==0 then return aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,0) end
 	local rg=aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,1,tp,HINTMSG_REMOVE)
 	Duel.Remove(rg,POS_FACEUP,REASON_COST)

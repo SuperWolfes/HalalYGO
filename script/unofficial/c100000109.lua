@@ -24,21 +24,21 @@ function s.cfilter(c)
 	return c:IsSetCard(0x5) and c:GetLevel()>=7
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,nil)
+	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil)
 end
 function s.costfilter(c,code)
-	return c:IsFaceup() and c:IsCode(code) and c:IsAbleToGraveAsCost()
+	return c:IsFaceup() and c:IsCode(code) and c:IsAbleToRestAsCost()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_SZONE,0,1,nil,100000107)
 		and Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_SZONE,0,1,nil,100000108)
-		and e:GetHandler():IsAbleToGraveAsCost() end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		and e:GetHandler():IsAbleToRestAsCost() end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g1=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_SZONE,0,1,1,nil,100000107)
 	local g2=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_SZONE,0,1,1,nil,100000108)
 	g1:Merge(g2)
 	g1:AddCard(e:GetHandler())
-	Duel.SendtoGrave(g1,REASON_COST)
+	Duel.SendtoRest(g1,REASON_COST)
 end
 function s.spfilter(c,e,tp)
 	return c:IsCode(5861892) and c:IsCanBeSpecialSummoned(e,0,tp,true,c:IsOriginalCode(511003201))

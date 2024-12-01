@@ -1,5 +1,5 @@
 --奇跡の瞬間
---Miracle Moment
+--Pulse Moment
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

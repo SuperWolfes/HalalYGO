@@ -41,7 +41,7 @@ function s.atkfilter(c)
 	return c:IsFaceup() and (c:IsSetCard(0x1f) or c:IsSetCard(0x8)) and c:IsMonster()
 end
 function s.atkval(e,c)
-	return Duel.GetMatchingGroupCount(s.atkfilter,c:GetControler(),LOCATION_GRAVE,0,nil)*100
+	return Duel.GetMatchingGroupCount(s.atkfilter,c:GetControler(),LOCATION_REST,0,nil)*100
 end
 function s.thfilter(c)
 	return c:IsSpellTrap() and c:ListsCode(CARD_NEOS) and c:IsAbleToHand()

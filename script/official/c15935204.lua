@@ -23,8 +23,8 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local a=Duel.GetAttacker()
 	local d=Duel.GetAttackTarget()
-	local b1=not a:IsType(TYPE_TOKEN) and a:IsStatus(STATUS_BATTLE_DESTROYED) and a:IsControler(1-tp) and d and d~=c and d:IsRace(RACE_PSYCHIC)
-	local b2=d and not d:IsType(TYPE_TOKEN) and d:IsStatus(STATUS_BATTLE_DESTROYED) and d:IsControler(1-tp) and a~=c and a:IsRace(RACE_PSYCHIC)
+	local b1=not a:IsType(TYPE_TOKEN) and a:IsStatus(STATUS_BATTLE_DESTROYED) and a:IsControler(1-tp) and d and d~=c and d:IsRace(RACE_MENTAL)
+	local b2=d and not d:IsType(TYPE_TOKEN) and d:IsStatus(STATUS_BATTLE_DESTROYED) and d:IsControler(1-tp) and a~=c and a:IsRace(RACE_MENTAL)
 	if (not b1 and not b2) or not Duel.SelectYesNo(tp,aux.Stringid(id,1)) then return end
 	if b1 then
 		local e1=Effect.CreateEffect(c)
@@ -47,7 +47,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:GetDestination()==LOCATION_GRAVE and c:IsReason(REASON_BATTLE) end
+	if chk==0 then return c:GetDestination()==LOCATION_REST and c:IsReason(REASON_BATTLE) end
 	return true
 end
 function s.repop(e,tp,eg,ep,ev,re,r,rp)

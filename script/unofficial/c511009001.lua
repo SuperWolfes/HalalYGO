@@ -1,5 +1,5 @@
 --幻魔帝トリロジーグ (Manga)
---Phantasm Emperor Trilojig (Manga)
+--Illusorasm Emperor Trilojig (Manga)
 --Updated by Larry126 and MLD
 local s,id,alias=GetID()
 function s.initial_effect(c)
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c,tp)
-	return c:IsPreviousLocation(LOCATION_GRAVE) and c:IsControler(tp)
+	return c:IsPreviousLocation(LOCATION_REST) and c:IsControler(tp)
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.filter,1,nil,tp)

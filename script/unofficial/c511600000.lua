@@ -34,7 +34,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x9f}
 function s.emfilter(c)
-	return c:IsAbleToGraveAsCost() and c:IsSetCard(0x9f) and c:IsMonster()
+	return c:IsAbleToRestAsCost() and c:IsSetCard(0x9f) and c:IsMonster()
 end
 function s.pencon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCurrentPhase()==PHASE_BATTLE_STEP
@@ -51,9 +51,9 @@ function s.pencost(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return #g==g:FilterCount(Card.IsAbleToRemoveAsCost,nil) and sct>0 
 		and Duel.GetMatchingGroupCount(s.emfilter,tp,LOCATION_DECK,0,nil)>=sct end
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local gc=Duel.SelectMatchingCard(tp,s.emfilter,tp,LOCATION_DECK,0,sct,sct,nil)
-	Duel.SendtoGrave(gc,REASON_COST)
+	Duel.SendtoRest(gc,REASON_COST)
 end
 function s.pentg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() and chkc:IsControler(tp) end

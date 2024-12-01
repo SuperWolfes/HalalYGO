@@ -39,19 +39,19 @@ function s.valcheck(e,c)
 end
 	--Various filters
 function s.filter1(c)
-	return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_FAIRY)
+	return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_WANDERER)
 end
 function s.filter2(c)
-	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsRace(RACE_FIEND)
+	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsRace(RACE_TAINTED)
 end
 function s.thfilter(c)
 	return (s.filter1(c) or s.filter2(c)) and c:IsAbleToHand()
 end
 function s.tgfilter1(c)
-	return s.filter1(c) and c:IsAbleToGrave()
+	return s.filter1(c) and c:IsAbleToRest()
 end
 function s.tgfilter2(c)
-	return s.filter2(c) and c:IsAbleToGrave()
+	return s.filter2(c) and c:IsAbleToRest()
 end
 	--Activation legality
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -69,10 +69,10 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 		Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 	elseif var==2 then
 		e:SetOperation(s.tgop)
-		Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+		Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 	end
 end
-	--Add 1 LIGHT fairy or 1 DARK fiend from deck
+	--Add 1 LIGHT wanderer or 1 DARK tainted from deck
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_DECK,0,1,1,nil)
@@ -85,10 +85,10 @@ end
 function s.ctcheck(sg,e,tp)
 	return sg:GetClassCount(Card.GetAttribute)==#sg and sg:GetClassCount(Card.GetRace)==#sg
 end
-	--Send 1 LIGHT fairy and/or 1 DARK fiend from deck to GY
+	--Send 1 LIGHT wanderer and/or 1 DARK tainted from deck to GY
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local g1,g2=Duel.GetMatchingGroup(s.tgfilter1,tp,LOCATION_DECK,0,nil),Duel.GetMatchingGroup(s.tgfilter2,tp,LOCATION_DECK,0,nil)
 	g1:Merge(g2)
-	local sg=aux.SelectUnselectGroup(g1,e,tp,1,2,s.ctcheck,1,tp,HINTMSG_TOGRAVE)
-	if #sg>0 then Duel.SendtoGrave(sg,REASON_EFFECT) end
+	local sg=aux.SelectUnselectGroup(g1,e,tp,1,2,s.ctcheck,1,tp,HINTMSG_TOREST)
+	if #sg>0 then Duel.SendtoRest(sg,REASON_EFFECT) end
 end

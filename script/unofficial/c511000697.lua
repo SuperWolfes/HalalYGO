@@ -35,7 +35,7 @@ end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tg=c:GetEquipTarget()
-	Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
+	Duel.SendtoRest(e:GetHandler(),REASON_EFFECT)
 	local bt=tg:GetBattleTarget()
 	local ph=Duel.GetCurrentPhase()
 	if Duel.GetTurnPlayer()==tp and ph>=0x08 and ph<=0x20 and Duel.GetTurnPlayer()==tp then

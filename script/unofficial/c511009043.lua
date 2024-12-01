@@ -30,7 +30,7 @@ function s.spcon(e,c)
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_ONFIELD,0,1,nil)
 end
 function s.filter(c)
-	return c:IsFaceup() and c:GetLevel()>0 and c:IsRace(RACE_ZOMBIE)
+	return c:IsFaceup() and c:GetLevel()>0 and c:IsRace(RACE_CONTAMINED)
 end
 function s.lvtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.filter(chkc) end

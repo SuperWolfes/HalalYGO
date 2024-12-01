@@ -18,10 +18,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.descostfilter(c)
-	return c:IsType(TYPE_NORMAL) and c:IsRace(RACE_FIEND) and c:IsAbleToDeckOrExtraAsCost()
+	return c:IsType(TYPE_NORMAL) and c:IsRace(RACE_TAINTED) and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.descostfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.descostfilter,tp,LOCATION_REST,0,1,nil) end
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local dg=Duel.GetMatchingGroup(Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,nil)
@@ -31,7 +31,7 @@ end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	-- Requirement
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,s.descostfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.descostfilter,tp,LOCATION_REST,0,1,1,nil)
 	if #g>0 and Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_COST)>0
 		and Duel.IsExistingMatchingCard(Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,1,nil) then
 		-- Effect

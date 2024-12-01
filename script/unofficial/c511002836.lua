@@ -18,7 +18,7 @@ function s.spcon(e,c)
 	local tp=c:GetControler()
 	return Duel.GetLocationCount(tp,LOCATION_MZONE)>=2 and Duel.GetLocationCount(1-tp,LOCATION_MZONE)>0
 		and Duel.IsPlayerCanSpecialSummonCount(tp,2)
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,75732623,0,TYPES_TOKEN,0,0,1,RACE_FIEND,ATTRIBUTE_DARK)
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,75732623,0,TYPES_TOKEN,0,0,1,RACE_TAINTED,ATTRIBUTE_DARK)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	for i=1,2 do

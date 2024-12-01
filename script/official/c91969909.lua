@@ -1,5 +1,5 @@
 --女神ウルドの裁断
---Goddess Urd's Verdict
+--Monsterdess Urd's Verdict
 --Scripted by Eerie Code and AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)

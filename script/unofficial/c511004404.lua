@@ -1,5 +1,5 @@
 --エクストラ・シェイブ・リボーン
---Extra Shave Reborn
+--Extra Shave Rerest
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -29,11 +29,11 @@ function s.spfilter(c,e,tp,lv)
 end
 function s.target(e,tp,eg,ev,ep,re,r,rp,chk,chkc)
 	local lv=e:GetLabel()
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp,lv) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp,lv) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 
-		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp,lv) end
+		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp,lv) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local tg=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp,lv)
+	local tg=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp,lv)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,tg,#tg,0,0)
 end
 function s.activate(e,tp,eg,ev,ep,re,r,rp)

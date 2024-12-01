@@ -1,5 +1,5 @@
 --強欲な壺の精霊
---Spirit of the Pot of Greed
+--Guardian of the Pot of Greed
 local s,id=GetID()
 function s.initial_effect(c)
 	--draw

@@ -1,5 +1,5 @@
 --六花精プリム
---Primula the Rikka Fairy
+--Primula the Rikka Wanderer
 --Scripted by ahtelel
 local s,id=GetID()
 function s.initial_effect(c)

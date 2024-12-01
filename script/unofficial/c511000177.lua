@@ -19,20 +19,20 @@ end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp
 end
-s.spfilter=aux.FaceupFilter(Card.IsRace,RACE_ZOMBIE)
+s.spfilter=aux.FaceupFilter(Card.IsRace,RACE_CONTAMINED)
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ct=Duel.GetMatchingGroupCount(s.spfilter,tp,LOCATION_MZONE,LOCATION_MZONE,e:GetHandler())
 	if chk==0 then return ct>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>=ct
-		and (ct==1 or not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT))
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_NECRO_WALL,0,TYPES_TOKEN,0,0,1,RACE_ZOMBIE,ATTRIBUTE_DARK) end
+		and (ct==1 or not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN))
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_NECRO_WALL,0,TYPES_TOKEN,0,0,1,RACE_CONTAMINED,ATTRIBUTE_DARK) end
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,ct,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,ct,tp,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=Duel.GetMatchingGroupCount(s.spfilter,tp,LOCATION_MZONE,LOCATION_MZONE,e:GetHandler())
 	if ct<=0 or Duel.GetLocationCount(tp,LOCATION_MZONE)<ct
-		or (ct>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT))
-		or not Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_NECRO_WALL,0,TYPES_TOKEN,0,0,1,RACE_ZOMBIE,ATTRIBUTE_DARK) then return end
+		or (ct>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN))
+		or not Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_NECRO_WALL,0,TYPES_TOKEN,0,0,1,RACE_CONTAMINED,ATTRIBUTE_DARK) then return end
 	for i=1,ct do
 		local token=Duel.CreateToken(tp,TOKEN_NECRO_WALL)
 		Duel.SpecialSummonStep(token,0,tp,tp,false,false,POS_FACEUP)

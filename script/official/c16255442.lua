@@ -17,18 +17,18 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		local hd=Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)
 		if e:GetHandler():IsLocation(LOCATION_HAND) then hd=hd-1 end
-		return hd>0 and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,hd,nil)
+		return hd>0 and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,hd,nil)
 	end
 	local sg=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
-	local tg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,nil)
+	local tg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_REST,0,nil)
 	Duel.SetOperationInfo(0,CATEGORY_HANDES,sg,#sg,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,tg,#sg,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local sg=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
-	Duel.SendtoGrave(sg,REASON_EFFECT+REASON_DISCARD)
-	local ct=sg:Filter(Card.IsLocation,nil,LOCATION_GRAVE):GetCount()
-	local tg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,nil)
+	Duel.SendtoRest(sg,REASON_EFFECT+REASON_DISCARD)
+	local ct=sg:Filter(Card.IsLocation,nil,LOCATION_REST):GetCount()
+	local tg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_REST,0,nil)
 	if ct>0 and #tg>=ct then
 		Duel.BreakEffect()
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)

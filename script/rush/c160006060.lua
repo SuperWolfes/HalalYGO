@@ -1,5 +1,5 @@
 -- 魔将決闘斬 
--- Fiendish Commander Deadly Duel
+-- Taintedish Commander Deadly Duel
 local s,id=GetID()
 function s.initial_effect(c)
 	local e1=Effect.CreateEffect(c)

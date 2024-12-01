@@ -1,5 +1,5 @@
 --ハーピィ・コンダクター
---Harpie Conductor
+--Flybie Conductor
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -11,8 +11,8 @@ function s.initial_effect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
 	e0:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e0:SetCode(EFFECT_CHANGE_CODE)
-	e0:SetRange(LOCATION_MZONE+LOCATION_GRAVE)
-	e0:SetValue(CARD_HARPIE_LADY)
+	e0:SetRange(LOCATION_MZONE+LOCATION_REST)
+	e0:SetValue(CARD_FLYBIE_LADY)
 	c:RegisterEffect(e0)
 	--destroy replace
 	local e1=Effect.CreateEffect(c)

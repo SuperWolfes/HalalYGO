@@ -37,9 +37,9 @@ function s.cfilter(c)
 	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_DARK) and c:IsAbleToRemoveAsCost()
 end
 function s.rmcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,2,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,2,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_GRAVE,0,2,2,nil)
+	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_REST,0,2,2,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 	Duel.RegisterFlagEffect(e:GetHandler():GetControler(),id,RESET_PHASE+PHASE_END,0,1)
 end
@@ -97,12 +97,12 @@ function s.actg(e,tp,eg,ep,ev,re,r,rp,chk)
 		local of=Duel.GetFieldCard(1-tp,LOCATION_SZONE,5)
 		if of then Duel.Destroy(of,REASON_RULE) end
 		of=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
-		if of and Duel.Destroy(of,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
+		if of and Duel.Destroy(of,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
 	end
 	Duel.Hint(HINT_CARD,0,tc:GetCode())
 	tc:CreateEffectRelation(te)
 	if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 then
-		tc:CancelToGrave(false)
+		tc:CancelToRest(false)
 	end
 	if co then co(te,tp,eg,ep,ev,re,r,rp,1) end
 	if tg then tg(te,tp,eg,ep,ev,re,r,rp,1) end

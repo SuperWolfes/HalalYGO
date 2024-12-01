@@ -1,7 +1,7 @@
 --幻影の器
 --Vessel of Illusion
 local s,id=GetID()
-local TOKEN_SPIRIT=id+1
+local TOKEN_GUARDIAN=id+1
 function s.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
@@ -17,7 +17,7 @@ end
 s.listed_names={id+1}
 function s.cfilter(c,tp,e)
 	return c:GetPreviousControler()==tp and c:IsPreviousLocation(LOCATION_MZONE)
-		and c:IsPreviousPosition(POS_FACEUP) and c:IsType(TYPE_SPIRIT) and c:IsLocation(LOCATION_GRAVE) 
+		and c:IsPreviousPosition(POS_FACEUP) and c:IsType(TYPE_GUARDIAN) and c:IsLocation(LOCATION_REST) 
 		and (not e or c:IsRelateToEffect(e))
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
@@ -26,7 +26,7 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ec=eg:Filter(s.cfilter,nil,tp):GetFirst()
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_SPIRIT,0,TYPES_TOKEN,ec:GetBaseAttack(),ec:GetBaseDefense(),ec:GetOriginalLevel(),ec:GetOriginalRace(),ec:GetOriginalAttribute()) end
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_GUARDIAN,0,TYPES_TOKEN,ec:GetBaseAttack(),ec:GetBaseDefense(),ec:GetOriginalLevel(),ec:GetOriginalRace(),ec:GetOriginalAttribute()) end
 	Duel.SetTargetCard(ec)
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,0)
@@ -34,8 +34,8 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local ec=eg:Filter(s.cfilter,nil,tp):GetFirst()
 	if not ec or not ec:IsRelateToEffect(e) or Duel.GetLocationCount(tp,LOCATION_MZONE)<=0
-		or not Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_SPIRIT,0,TYPES_TOKEN,ec:GetBaseAttack(),ec:GetBaseDefense(),ec:GetOriginalLevel(),ec:GetOriginalRace(),ec:GetOriginalAttribute()) then return end
-	local token=Duel.CreateToken(tp,TOKEN_SPIRIT)
+		or not Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_GUARDIAN,0,TYPES_TOKEN,ec:GetBaseAttack(),ec:GetBaseDefense(),ec:GetOriginalLevel(),ec:GetOriginalRace(),ec:GetOriginalAttribute()) then return end
+	local token=Duel.CreateToken(tp,TOKEN_GUARDIAN)
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_SET_BASE_ATTACK)

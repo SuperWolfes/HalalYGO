@@ -1,5 +1,5 @@
 --華麗なるハーピィ・レディ
---Harpie Lady Elegance
+--Flybie Lady Elegance
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -25,9 +25,9 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 s.listed_series={0x64}
-s.listed_names={CARD_HARPIE_LADY_SISTERS}
+s.listed_names={CARD_FLYBIE_LADY_SISTERS}
 function s.tdfilter(c,e,tp,g)
-	return c:IsCode(CARD_HARPIE_LADY_SISTERS) and c:IsFaceup() and c:IsAbleToDeck() 
+	return c:IsCode(CARD_FLYBIE_LADY_SISTERS) and c:IsFaceup() and c:IsAbleToDeck() 
 		and Duel.GetMZoneCount(tp,c,tp,LOCATION_REASON_TOFIELD)>=3 and aux.SelectUnselectGroup(g,e,tp,3,3,s.spcheck,0)
 end
 function s.spfilter(c,e,tp)
@@ -38,14 +38,14 @@ function s.spcheck(sg,e,tp,mg)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
-		local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_HAND+LOCATION_DECK+LOCATION_GRAVE,0,nil,e,tp)
+		local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_HAND+LOCATION_DECK+LOCATION_REST,0,nil,e,tp)
 		return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_MZONE,0,1,nil,e,tp,g)
 	end
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_MZONE)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,3,tp,LOCATION_HAND+LOCATION_DECK+LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,3,tp,LOCATION_HAND+LOCATION_DECK+LOCATION_REST)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_HAND+LOCATION_DECK+LOCATION_GRAVE,0,nil,e,tp)
+	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_HAND+LOCATION_DECK+LOCATION_REST,0,nil,e,tp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
 	local dg=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_MZONE,0,1,1,nil,e,tp,g)
 	if #dg>0 and Duel.SendtoDeck(dg,nil,2,REASON_EFFECT)>0 then

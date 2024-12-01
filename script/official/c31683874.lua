@@ -1,5 +1,5 @@
 --占い魔女 アンちゃん
---Fortune Fairy Ann
+--Fortune Wanderer Ann
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
@@ -50,7 +50,7 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsPreviousLocation(LOCATION_HAND)
 end
 function s.rmfilter(c)
-	return c:IsRace(RACE_SPELLCASTER) and c:IsAbleToRemove()
+	return c:IsRace(RACE_MENTOR) and c:IsAbleToRemove()
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.rmfilter,tp,LOCATION_DECK,0,1,nil) end

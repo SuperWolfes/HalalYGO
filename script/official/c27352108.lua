@@ -59,19 +59,19 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsLocation(LOCATION_GRAVE) and r&REASON_LINK==REASON_LINK
+	return c:IsLocation(LOCATION_REST) and r&REASON_LINK==REASON_LINK
 end
 function s.thfilter1(c)
 	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.thfilter1(chkc) and chkc~=c end
-	if chk==0 then return Duel.IsExistingTarget(s.thfilter1,tp,LOCATION_GRAVE,0,1,c) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.thfilter1(chkc) and chkc~=c end
+	if chk==0 then return Duel.IsExistingTarget(s.thfilter1,tp,LOCATION_REST,0,1,c) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectTarget(tp,s.thfilter1,tp,LOCATION_GRAVE,0,1,1,c)
+	local g=Duel.SelectTarget(tp,s.thfilter1,tp,LOCATION_REST,0,1,1,c)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,tp,0)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,1-tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,1-tp,LOCATION_REST)
 end
 function s.thfilter2(c)
 	return c:IsMonster() and c:IsAbleToHand()
@@ -81,7 +81,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	if tc:IsRelateToEffect(e) then
 		Duel.SendtoHand(tc,nil,REASON_EFFECT)
 	end
-	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.thfilter2),tp,0,LOCATION_GRAVE,nil)
+	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.thfilter2),tp,0,LOCATION_REST,nil)
 	if #g>0 and Duel.SelectYesNo(1-tp,aux.Stringid(id,2)) then
 		Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_ATOHAND)
 		local sg=g:Select(1-tp,1,1,nil)

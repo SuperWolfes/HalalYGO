@@ -1,5 +1,5 @@
 --ミラクル・コンタクト
---Miracle Contact
+--Pulse Contact
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -11,5 +11,5 @@ function s.spfilter(c)
 	return c:IsSetCard(0x3008) and c:ListsCodeAsMaterial(CARD_NEOS)
 end
 function s.fextra(e,tp,mg)
-	return Duel.GetMatchingGroup(aux.NecroValleyFilter(Fusion.IsMonsterFilter(Card.IsAbleToDeck)),tp,LOCATION_GRAVE,0,nil)
+	return Duel.GetMatchingGroup(aux.NecroValleyFilter(Fusion.IsMonsterFilter(Card.IsAbleToDeck)),tp,LOCATION_REST,0,nil)
 end

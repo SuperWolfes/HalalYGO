@@ -29,30 +29,30 @@ function s.filter1(c)
 			c:RegisterFlagEffect(id,RESET_EVENT+RESET_TOHAND+RESET_TODECK+RESET_REMOVE+RESET_TOFIELD,0,0,fcid)
 			c:RegisterFlagEffect(id+1,RESET_EVENT+RESET_TOHAND+RESET_TODECK+RESET_REMOVE+RESET_TOFIELD,0,0,fcmc)
 		end
-		local i=Duel.GetMatchingGroupCount(s.filter2,0,LOCATION_GRAVE,LOCATION_GRAVE,c,c:GetFlagEffectLabel(id))
+		local i=Duel.GetMatchingGroupCount(s.filter2,0,LOCATION_REST,LOCATION_REST,c,c:GetFlagEffectLabel(id))
 		if i~=(c:GetFlagEffectLabel(id+1)-1) then
 			return false
 		end
 	else
 		return false
 	end
-	return c:IsLocation(LOCATION_GRAVE) and c:IsAbleToRemove()
+	return c:IsLocation(LOCATION_REST) and c:IsAbleToRemove()
 		and c:GetReason()&0x40008==0x40008
 end
 function s.filter2(c,fcid)
-	return c:IsLocation(LOCATION_GRAVE) and c:IsAbleToRemove()
+	return c:IsLocation(LOCATION_REST) and c:IsAbleToRemove()
 		and c:GetReason()&0x40008==0x40008
 		and c:GetFlagEffectLabel(id)==fcid
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:GetReason()&0x40008==0x40008 and s.filter1(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.filter1,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:GetReason()&0x40008==0x40008 and s.filter1(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.filter1,tp,LOCATION_REST,LOCATION_REST,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local tg=Duel.SelectMatchingCard(tp,s.filter1,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,1,nil)
+	local tg=Duel.SelectMatchingCard(tp,s.filter1,tp,LOCATION_REST,LOCATION_REST,1,1,nil)
 	local fc=tg:GetFirst():GetFlagEffectLabel(id)
-	local i=Duel.GetMatchingGroupCount(s.filter2,tp,LOCATION_GRAVE,LOCATION_GRAVE,tg,fc)
+	local i=Duel.GetMatchingGroupCount(s.filter2,tp,LOCATION_REST,LOCATION_REST,tg,fc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local tg1=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_GRAVE,LOCATION_GRAVE,i,i,tg,fc)
+	local tg1=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_REST,LOCATION_REST,i,i,tg,fc)
 	tg:Merge(tg1)
 	Duel.SetTargetCard(tg)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,tg,#tg,0,0)

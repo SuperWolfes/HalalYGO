@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.zfilter(c)
-	return c:IsRace(RACE_ZOMBIE) and c:IsLevelAbove(7) and c:IsFaceup()
+	return c:IsRace(RACE_CONTAMINED) and c:IsLevelAbove(7) and c:IsFaceup()
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetAttacker()

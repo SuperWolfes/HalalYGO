@@ -29,7 +29,7 @@ function s.fusfilter(c,code,fc,tp,sumtype)
 	return c:IsSummonCode(fc,sumtype,tp,code) and not c:IsHasEffect(511002961)
 end
 function s.contactfil(tp)
-	return Duel.GetMatchingGroup(Card.IsAbleToDeckOrExtraAsCost,tp,LOCATION_ONFIELD+LOCATION_GRAVE,0,nil)
+	return Duel.GetMatchingGroup(Card.IsAbleToDeckOrExtraAsCost,tp,LOCATION_ONFIELD+LOCATION_REST,0,nil)
 end
 function s.contactop(g,tp)
 	Duel.ConfirmCards(1-tp,g)
@@ -40,7 +40,7 @@ function s.splimit(e,se,sp,st)
 end
 function s.copyfilter(c)
 	return c:IsSetCard(0x1f) and c:IsMonster()
-		and not c:IsForbidden() and c:IsAbleToRemove()
+		and not c:IsUnliked() and c:IsAbleToRemove()
 end
 function s.copytg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.copyfilter,tp,LOCATION_DECK,0,1,nil) end

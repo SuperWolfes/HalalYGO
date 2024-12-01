@@ -1,5 +1,5 @@
 --古代の機械超巨人
---Megaton Ancient Gear Golem
+--Megaton Ancient Gear Gopal
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

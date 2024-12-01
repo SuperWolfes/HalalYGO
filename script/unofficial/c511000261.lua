@@ -1,4 +1,4 @@
---Raviel, Emperor of Phantasmal Demons
+--Raviel, Emperor of Illusorasmal Demons
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()
@@ -79,7 +79,7 @@ end
 function s.tokenop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=eg:FilterCount(Card.IsControler,nil,1-tp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if ft<=0 or not Duel.IsPlayerCanSpecialSummonMonster(tp,69890968,0,TYPES_TOKEN,1000,1000,1,RACE_FIEND,ATTRIBUTE_DARK) then return end
+	if ft<=0 or not Duel.IsPlayerCanSpecialSummonMonster(tp,69890968,0,TYPES_TOKEN,1000,1000,1,RACE_TAINTED,ATTRIBUTE_DARK) then return end
 	for i=1,ct do
 		local token=Duel.CreateToken(tp,69890968)
 		Duel.SpecialSummonStep(token,0,tp,tp,false,false,POS_FACEUP)

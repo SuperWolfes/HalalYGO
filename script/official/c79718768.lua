@@ -26,14 +26,14 @@ function s.initial_effect(c)
 	e4:SetDescription(aux.Stringid(id,0))
 	e4:SetCategory(CATEGORY_TOHAND)
 	e4:SetType(EFFECT_TYPE_TRIGGER_F+EFFECT_TYPE_SINGLE)
-	e4:SetCode(EVENT_TO_GRAVE)
+	e4:SetCode(EVENT_TO_REST)
 	e4:SetCondition(s.retcon)
 	e4:SetOperation(s.retop)
 	c:RegisterEffect(e4)
 end
 function s.desop1(e,tp,eg,ep,ev,re,r,rp)
 	if rp==tp or not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET)
-		or not eg:IsExists(Card.IsLocation,1,nil,LOCATION_GRAVE) then
+		or not eg:IsExists(Card.IsLocation,1,nil,LOCATION_REST) then
 		e:SetLabelObject(nil)
 	else e:SetLabelObject(re) end
 end
@@ -47,6 +47,6 @@ function s.retcon(e,tp,eg,ep,ev,re,r,rp)
 	return re and re:GetHandler()==e:GetHandler()
 end
 function s.retop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetFieldGroup(tp,0,LOCATION_GRAVE)
+	local g=Duel.GetFieldGroup(tp,0,LOCATION_REST)
 	Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
 end

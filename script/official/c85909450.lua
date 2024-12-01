@@ -1,5 +1,5 @@
 --ハーピィズペット幻竜
---Harpie's Pet Phantasmal Dragon
+--Flybie's Pet Illusorasmal Dragon
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon

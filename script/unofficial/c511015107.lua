@@ -69,7 +69,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			e2:SetValue(2)
 			c:RegisterEffect(e2)
 			if e:IsHasType(EFFECT_TYPE_ACTIVATE) and c:IsRelateToEffect(e) and (not tc:IsSynchroSummonable(nil,mg) or mg:IsExists(s.ddfilter,1,nil,tc,mg+c,c) and Duel.SelectYesNo(tp,aux.Stringid(id,0))) then
-				c:CancelToGrave()
+				c:CancelToRest()
 				mg:AddCard(c)
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SMATERIAL)
 				local smat=mg:FilterSelect(tp,s.ddfilter,1,1,nil,tc,mg,c)

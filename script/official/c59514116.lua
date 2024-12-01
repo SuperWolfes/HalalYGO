@@ -8,8 +8,8 @@ function s.initial_effect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCost(s.costhint)
 	c:RegisterEffect(e1)
-	--Ritual
-	local e2=Ritual.CreateProc({handler=c,lvtype=RITPROC_GREATER,desc=aux.Stringid(id,1),forcedselection=s.forcedselection})
+	--Locked
+	local e2=Locked.CreateProc({handler=c,lvtype=RITPROC_GREATER,desc=aux.Stringid(id,1),forcedselection=s.forcedselection})
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCost(s.costhint)
 	c:RegisterEffect(e2)

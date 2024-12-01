@@ -37,7 +37,7 @@ function s.val(e,c)
 	return Duel.GetMatchingGroupCount(s.filter,0,0x14,0x14,nil)*500
 end
 function s.filter(c)
-	return c:IsRace(RACE_DRAGON) and (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup())
+	return c:IsRace(RACE_DRAGON) and (c:IsLocation(LOCATION_REST) or c:IsFaceup())
 end
 function s.discon(e,tp,eg,ep,ev,re,r,rp)
 	return not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED)

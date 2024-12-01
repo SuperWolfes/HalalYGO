@@ -64,10 +64,10 @@ function s.bgfilter(c)
 	return c:IsTrap() and c:IsAbleToRemove()
 end
 function s.bgtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and s.bgfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.bgfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and s.bgfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.bgfilter,tp,LOCATION_REST,LOCATION_REST,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectTarget(tp,s.bgfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.bgfilter,tp,LOCATION_REST,LOCATION_REST,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,1,0,0)
 end
 function s.bgop(e,tp,eg,ep,ev,re,r,rp)

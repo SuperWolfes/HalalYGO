@@ -1,5 +1,5 @@
 --神・スライム
---Egyptian God Slime
+--Egyptian Monster Slime
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)

@@ -9,7 +9,7 @@ function s.initial_effect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
 	e1:SetCode(EVENT_FREE_CHAIN)
-	e1:SetRange(LOCATION_HAND+LOCATION_GRAVE)
+	e1:SetRange(LOCATION_HAND+LOCATION_REST)
 	e1:SetHintTiming(0,TIMINGS_CHECK_MONSTER+TIMING_MAIN_END)
 	e1:SetCountLimit(1,id)
 	e1:SetCondition(function() return Duel.IsMainPhase() end)
@@ -22,8 +22,8 @@ function s.spcheck(sg,tp)
 	return Duel.GetMZoneCount(tp,sg)>0
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.CheckReleaseGroupCost(tp,Card.IsRace,1,false,s.spcheck,nil,RACE_FAIRY) end
-	local g=Duel.SelectReleaseGroupCost(tp,Card.IsRace,1,3,false,s.spcheck,nil,RACE_FAIRY)
+	if chk==0 then return Duel.CheckReleaseGroupCost(tp,Card.IsRace,1,false,s.spcheck,nil,RACE_WANDERER) end
+	local g=Duel.SelectReleaseGroupCost(tp,Card.IsRace,1,3,false,s.spcheck,nil,RACE_WANDERER)
 	local ct=Duel.Release(g,REASON_COST)
 	e:SetLabel(ct)
 end

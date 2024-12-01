@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
-	local e1=Ritual.CreateProc({handler=c,lvtype=RITPROC_EQUAL,filter=aux.FilterBoolFunction(Card.IsSetCard,0x146),location=LOCATION_HAND+LOCATION_DECK,matfilter=s.mfilter})
+	local e1=Locked.CreateProc({handler=c,lvtype=RITPROC_EQUAL,filter=aux.FilterBoolFunction(Card.IsSetCard,0x146),location=LOCATION_HAND+LOCATION_DECK,matfilter=s.mfilter})
 	e1:SetCountLimit(1,id)
 	e1:SetHintTiming(0,TIMINGS_CHECK_MONSTER_E)
 	c:RegisterEffect(e1)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_FREE_CHAIN)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetHintTiming(0,TIMING_END_PHASE)
 	e2:SetCountLimit(1,id)
 	e2:SetCost(aux.bfgcost)
@@ -25,7 +25,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x146}
 function s.mfilter(c)
-	return c:IsLocation(LOCATION_MZONE) and (c:IsSetCard(0x146) or c:IsType(TYPE_RITUAL+TYPE_FUSION+TYPE_SYNCHRO))
+	return c:IsLocation(LOCATION_MZONE) and (c:IsSetCard(0x146) or c:IsType(TYPE_LOCKED+TYPE_FUSION+TYPE_SYNCHRO))
 end
 function s.thdfilter(c,e)
 	return c:IsSetCard(0x146) and c:HasLevel() and (c:IsAbleToHand() or c:IsAbleToDeck())
@@ -37,7 +37,7 @@ function s.rescon(sg,e,tp,mg)
 end
 function s.thdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	local rg=Duel.GetMatchingGroup(s.thdfilter,tp,LOCATION_GRAVE,0,nil,e)
+	local rg=Duel.GetMatchingGroup(s.thdfilter,tp,LOCATION_REST,0,nil,e)
 	if chk==0 then return aux.SelectUnselectGroup(rg,e,tp,2,2,s.rescon,0) end
 	local g=aux.SelectUnselectGroup(rg,e,tp,2,2,s.rescon,1,tp,aux.Stringid(id,2))
 	Duel.SetTargetCard(g)

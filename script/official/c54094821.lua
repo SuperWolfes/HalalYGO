@@ -1,5 +1,5 @@
 --リチュアルバスター
---Ritual Buster
+--Locked Buster
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c)
-	return c:IsSummonType(SUMMON_TYPE_RITUAL)
+	return c:IsSummonType(SUMMON_TYPE_LOCKED)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil)

@@ -1,4 +1,4 @@
---Dark Tuner - Dark Goddess Witaka (Anime)
+--Dark Tuner - Dark Monsterdess Witaka (Anime)
 --ＤＴ 黒の女神ウィタカ
 local s,id=GetID()
 function s.initial_effect(c)

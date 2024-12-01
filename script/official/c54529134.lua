@@ -37,7 +37,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local sc=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,tc):GetFirst()
 	if sc then
 		sc:SetMaterial(Group.FromCards(tc))
-		Duel.SendtoGrave(tc,REASON_EFFECT+REASON_MATERIAL+REASON_LINK)
+		Duel.SendtoRest(tc,REASON_EFFECT+REASON_MATERIAL+REASON_LINK)
 		Duel.BreakEffect()
 		Duel.SpecialSummon(sc,SUMMON_TYPE_LINK,tp,tp,false,false,POS_FACEUP)
 		sc:CompleteProcedure()

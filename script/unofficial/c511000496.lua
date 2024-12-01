@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_DAMAGE+CATEGORY_TOGRAVE+CATEGORY_DESTROY)
+	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_DAMAGE+CATEGORY_TOREST+CATEGORY_DESTROY)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetTarget(s.target)
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c)
-	return c:IsMonster() and c:GetTextAttack()>=0 and c:IsAbleToHand() and c:IsAbleToGrave()
+	return c:IsMonster() and c:GetTextAttack()>=0 and c:IsAbleToHand() and c:IsAbleToRest()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,3,nil) end
@@ -40,11 +40,11 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ConfirmCards(1-tp,sc1)
 		Duel.ConfirmCards(tp,sc2)
 		if sc1:GetAttack()==sc2:GetAttack() then
-			Duel.SendtoGrave(Group.FromCards(sc1,sc2),REASON_EFFECT)
+			Duel.SendtoRest(Group.FromCards(sc1,sc2),REASON_EFFECT)
 		else
 			if sc1:GetAttack()>sc2:GetAttack() then sc1,sc2=sc2,sc1 end
 			Duel.Damage(sc1:GetControler(),500,REASON_EFFECT)
-			Duel.SendtoGrave(sc1,REASON_EFFECT)
+			Duel.SendtoRest(sc1,REASON_EFFECT)
 			Duel.SendtoHand(sc2,nil,REASON_EFFECT)
 		end
 	end

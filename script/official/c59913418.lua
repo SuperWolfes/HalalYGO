@@ -45,13 +45,13 @@ end
 s.listed_names={32828635,72426662}
 function s.indcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsSummonType(SUMMON_TYPE_RITUAL)
+	return c:IsSummonType(SUMMON_TYPE_LOCKED)
 end
 function s.indtg(e,c)
-	return c:IsType(TYPE_RITUAL)
+	return c:IsType(TYPE_LOCKED)
 end
 function s.mfilter1(c)
-	return not c:IsType(TYPE_RITUAL)
+	return not c:IsType(TYPE_LOCKED)
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckLPCost(tp,2000) end
@@ -75,7 +75,7 @@ end
 function s.costcon(e)
 	local c=e:GetHandler()
 	local mg=c:GetMaterial()
-	return c:GetSummonType()==SUMMON_TYPE_RITUAL and #mg>0 and not mg:IsExists(s.mfilter1,1,nil)
+	return c:GetSummonType()==SUMMON_TYPE_LOCKED and #mg>0 and not mg:IsExists(s.mfilter1,1,nil)
 end
 function s.costchange(e,re,rp,val)
 	if re and re:IsActivated() and re:GetHandler()==e:GetHandler() then

@@ -1,5 +1,5 @@
 --双星神a-vida
---A-vida, the Dual World Crafter
+--A-vida, the Guardian World Crafter
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
@@ -37,12 +37,12 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function s.spcfilter(c)
-	return c:IsLinkMonster() and (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup())
+	return c:IsLinkMonster() and (c:IsLocation(LOCATION_REST) or c:IsFaceup())
 end
 function s.spcon(e,c)
 	if c==nil then return true end
 	if Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)<=0 then return false end
-	local g=Duel.GetMatchingGroup(s.spcfilter,0,LOCATION_MZONE+LOCATION_GRAVE,LOCATION_MZONE+LOCATION_GRAVE,nil)
+	local g=Duel.GetMatchingGroup(s.spcfilter,0,LOCATION_MZONE+LOCATION_REST,LOCATION_MZONE+LOCATION_REST,nil)
 	return g:GetClassCount(Card.GetCode)>=8
 end
 function s.spcost(e,c,tp)
@@ -64,13 +64,13 @@ function s.tdfilter(c)
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	local loc=LOCATION_MZONE+LOCATION_GRAVE+LOCATION_REMOVED
+	local loc=LOCATION_MZONE+LOCATION_REST+LOCATION_REMOVED
 	local g=Duel.GetMatchingGroup(s.tdfilter,tp,loc,loc,e:GetHandler())
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,#g,tp,0)
 	Duel.SetChainLimit(aux.FALSE)
 end
 function s.tdop(e,tp,eg,ep,ev,re,r,rp,chk)
-	local loc=LOCATION_MZONE+LOCATION_GRAVE+LOCATION_REMOVED
+	local loc=LOCATION_MZONE+LOCATION_REST+LOCATION_REMOVED
 	local g=Duel.GetMatchingGroup(s.tdfilter,tp,loc,loc,e:GetHandler())
 	Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
 end

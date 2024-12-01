@@ -11,7 +11,7 @@ end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e1:SetCode(EVENT_TOSS_DICE_NEGATE)
+	e1:SetCode(EVENT_TOSS_SUFFICE_NEGATE)
 	e1:SetCondition(s.coincon)
 	e1:SetOperation(s.coinop)
 	e1:SetReset(RESET_PHASE+PHASE_END)
@@ -27,6 +27,6 @@ function s.coinop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.RegisterFlagEffect(tp,id,RESET_PHASE+PHASE_END,0,1)
 		local ct1=(ev&0xff)
 		local ct2=(ev>>16)
-		Duel.TossDice(ep,ct1,ct2)
+		Duel.TossSuffice(ep,ct1,ct2)
 	end
 end

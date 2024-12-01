@@ -2,15 +2,15 @@
 --Poly-Chemicritter Dioxogre
 local s,id=GetID()
 function s.initial_effect(c)
-	Gemini.AddProcedure(c)
-	--Normal Summon of Gemini monsters cannot be negated
+	Dual.AddProcedure(c)
+	--Normal Summon of DUAL monsters cannot be negated
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_IGNORE_RANGE+EFFECT_FLAG_SET_AVAILABLE)
 	e1:SetCode(EFFECT_CANNOT_DISABLE_SUMMON)
 	e1:SetRange(LOCATION_MZONE)
-	e1:SetCondition(Gemini.EffectStatusCondition)
-	e1:SetTarget(aux.TargetBoolFunction(Card.IsType,TYPE_GEMINI))
+	e1:SetCondition(Dual.EffectStatusCondition)
+	e1:SetTarget(aux.TargetBoolFunction(Card.IsType,TYPE_DUAL))
 	c:RegisterEffect(e1)
 	--Destroy 1 opponent card
 	local e2=Effect.CreateEffect(c)
@@ -20,19 +20,19 @@ function s.initial_effect(c)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCountLimit(1)
-	e2:SetCondition(Gemini.EffectStatusCondition)
+	e2:SetCondition(Dual.EffectStatusCondition)
 	e2:SetCost(s.cost)
 	e2:SetTarget(s.target)
 	e2:SetOperation(s.activate)
 	c:RegisterEffect(e2)
 end
 function s.costfilter(c)
-	return c:IsType(TYPE_GEMINI) and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
+	return c:IsType(TYPE_DUAL) and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_MZONE|LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_MZONE|LOCATION_REST,0,1,1,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

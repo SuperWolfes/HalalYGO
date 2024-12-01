@@ -1,14 +1,14 @@
 --幻影騎士団ラスティ・バルディッシュ
---The Phantom Knights of Rusty Bardiche
+--The Illusion Knights of Rusty Bardiche
 local s,id=GetID()
 function s.initial_effect(c)
 	--Link Summon procedure
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_DARK),2)
 	c:EnableReviveLimit()
-	--Send to grave and set 1 "Phantom Knights" Spell/Trap
+	--Send to rest and set 1 "Illusion Knights" Spell/Trap
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_TOGRAVE)
+	e1:SetCategory(CATEGORY_TOREST)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1,id)
@@ -38,7 +38,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x10db,0xdb}
 function s.tgfilter(c,tp)
-	return c:IsSetCard(0x10db) and c:IsAbleToGrave() and c:IsMonster()
+	return c:IsSetCard(0x10db) and c:IsAbleToRest() and c:IsMonster()
 		and Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_DECK,0,1,c)
 end
 function s.setfilter(c)
@@ -47,14 +47,14 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil,tp)
 		and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil,tp)
 	if #g==0 then return end
-	Duel.SendtoGrave(g,REASON_EFFECT)
-	local og=Duel.GetOperatedGroup():Filter(Card.IsLocation,nil,LOCATION_GRAVE)
+	Duel.SendtoRest(g,REASON_EFFECT)
+	local og=Duel.GetOperatedGroup():Filter(Card.IsLocation,nil,LOCATION_REST)
 	if #og>0 and Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_DECK,0,1,nil) then
 		local tc=Duel.SelectMatchingCard(tp,s.setfilter,tp,LOCATION_DECK,0,1,1,nil):GetFirst()
 		if tc then

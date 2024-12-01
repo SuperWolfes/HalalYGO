@@ -61,16 +61,16 @@ function s.adjustop(e,tp,eg,ep,ev,re,r,rp)
 	if c1>5 or c2>5 then
 		local g=Group.CreateGroup()
 		if c1>5 then
-			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 			local g1=Duel.SelectMatchingCard(tp,nil,tp,LOCATION_ONFIELD,0,c1-5,c1-5,nil)
 			g:Merge(g1)
 		end
 		if c2>5 then
-			Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOGRAVE)
+			Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOREST)
 			local g2=Duel.SelectMatchingCard(1-tp,nil,1-tp,LOCATION_ONFIELD,0,c2-5,c2-5,nil)
 			g:Merge(g2)
 		end
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 		Duel.Readjust()
 	end
 end

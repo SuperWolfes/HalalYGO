@@ -1,5 +1,5 @@
 --RUM－幻影騎士団ラウンチ
---The Phantom Knights' Rank-Up-Magic Launch
+--The Illusion Knights' Rank-Up-Magic Launch
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -13,12 +13,12 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-	--Attach 1 "The Phantom Knights" monster from your hand as material
+	--Attach 1 "The Illusion Knights" monster from your hand as material
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCost(aux.bfgcost)
 	e2:SetTarget(s.mattg)
 	e2:SetOperation(s.matop)
@@ -61,7 +61,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummon(sc,SUMMON_TYPE_XYZ,tp,tp,false,false,POS_FACEUP)
 		sc:CompleteProcedure()
 		if c:IsRelateToEffect(e) then
-			c:CancelToGrave()
+			c:CancelToRest()
 			Duel.Overlay(sc,c)
 		end
 	end

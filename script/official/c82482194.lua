@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c,rc)
-	return c:IsReason(REASON_BATTLE) and c:IsLocation(LOCATION_GRAVE) and c:GetReasonCard()==rc
+	return c:IsReason(REASON_BATTLE) and c:IsLocation(LOCATION_REST) and c:GetReasonCard()==rc
 end
 function s.atcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.filter,1,nil,e:GetHandler())

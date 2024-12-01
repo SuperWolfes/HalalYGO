@@ -1,5 +1,5 @@
 --双天将 密迹
---Dual Avatar - Empowered Mi-Gyo
+--Guardian Avatar - Empowered Mi-Gyo
 --Logical Nonsense
 
 --Substitute ID
@@ -9,7 +9,7 @@ function s.initial_effect(c)
 	c:EnableReviveLimit()
 	--Fusion summon procedure
 	Fusion.AddProcMixN(c,true,true,11759079,1,aux.FilterBoolFunctionEx(Card.IsSetCard,0x14e),2)
-	--Each "Dual Avatar" fusion monster get protected once by battle, each turn
+	--Each "Guardian Avatar" fusion monster get protected once by battle, each turn
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_INDESTRUCTABLE_COUNT)
@@ -41,12 +41,12 @@ function s.initial_effect(c)
 	e3:SetOperation(s.desop)
 	c:RegisterEffect(e3)
 end
-	--Lists "Dual Avatar" archetype in fusion recipe
+	--Lists "Guardian Avatar" archetype in fusion recipe
 s.material_setcode={0x14e}
-	--Lists "Dual Avatar" archetype
+	--Lists "Guardian Avatar" archetype
 s.listed_series={0x14e}
 
-	--Check for "Dual Avatar" fusion monsters
+	--Check for "Guardian Avatar" fusion monsters
 function s.indtg(e,c)
 	return c:IsType(TYPE_FUSION) and c:IsSetCard(0x14e)
 end

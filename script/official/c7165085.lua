@@ -26,7 +26,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not tc:IsRelateToEffect(e) or tc:IsFaceup() then
 		if c:IsRelateToEffect(e) and e:IsHasType(EFFECT_TYPE_ACTIVATE) then
-			c:CancelToGrave()
+			c:CancelToRest()
 			Duel.SendtoDeck(c,nil,2,REASON_EFFECT)
 		end
 		return
@@ -55,7 +55,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			e:SetProperty(te:GetProperty())
 			Duel.Hint(HINT_CARD,0,tc:GetOriginalCode())
 			if tc:GetType()==TYPE_TRAP then
-				tc:CancelToGrave(false)
+				tc:CancelToRest(false)
 			end
 			tc:CreateEffectRelation(te)
 			if cost then cost(te,tep,eg,ep,ev,re,r,rp,1) end
@@ -81,14 +81,14 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			end
 		else
 			if Duel.Destroy(tc,REASON_EFFECT)==0 then
-				Duel.SendtoGrave(tc,REASON_RULE)
+				Duel.SendtoRest(tc,REASON_RULE)
 			end
 		end
 	else
 		Duel.ConfirmCards(tp,tc)
 	end
 	if c:IsRelateToEffect(e) and e:IsHasType(EFFECT_TYPE_ACTIVATE) then
-		c:CancelToGrave()
+		c:CancelToRest()
 		Duel.SendtoDeck(c,nil,2,REASON_EFFECT)
 	end
 end

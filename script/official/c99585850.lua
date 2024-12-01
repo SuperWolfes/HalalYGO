@@ -70,7 +70,7 @@ function s.initial_effect(c)
 end
 s.synchro_nt_required=1
 function s.atkval(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsType,c:GetControler(),LOCATION_GRAVE,0,nil,TYPE_TUNER)*500
+	return Duel.GetMatchingGroupCount(Card.IsType,c:GetControler(),LOCATION_REST,0,nil,TYPE_TUNER)*500
 end
 function s.indval(e,re,tp)
 	return e:GetHandler():GetControler()==1-tp

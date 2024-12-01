@@ -17,11 +17,11 @@ function s.initial_effect(c)
 	-- Set itself if a monster leaves the field due to a Normal Trap's effect
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_LEAVE_GRAVE)
+	e2:SetCategory(CATEGORY_LEAVE_REST)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
 	e2:SetCode(EVENT_LEAVE_FIELD)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(s.setcon)
 	e2:SetTarget(s.settg)
@@ -47,7 +47,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	aux.WelcomeLabrynthTrapDestroyOperation(e,tp)
 	if not e:IsHasType(EFFECT_TYPE_ACTIVATE) then return end
 	local c=e:GetHandler()
-	-- Cannot Special Summon from the Deck or Extra Deck, except Fiend monsters
+	-- Cannot Special Summon from the Deck or Extra Deck, except Tainted monsters
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,2))
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -55,10 +55,10 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
 	e1:SetTargetRange(1,0)
 	e1:SetReset(RESET_PHASE+PHASE_END,2)
-	e1:SetTarget(function(e,c) return c:IsLocation(LOCATION_DECK+LOCATION_EXTRA) and not c:IsRace(RACE_FIEND) end)
+	e1:SetTarget(function(e,c) return c:IsLocation(LOCATION_DECK+LOCATION_EXTRA) and not c:IsRace(RACE_TAINTED) end)
 	Duel.RegisterEffect(e1,tp)
 	-- Clock Lizard check
-	aux.addTempLizardCheck(c,tp,function(e,c) return not c:IsOriginalRace(RACE_FIEND) end)
+	aux.addTempLizardCheck(c,tp,function(e,c) return not c:IsOriginalRace(RACE_TAINTED) end)
 end
 function s.setcon(e,tp,eg,ep,ev,re,r,rp)
 	return aux.exccon(e,tp,eg,ep,ev,re,r,rp) and rp==tp and r&REASON_EFFECT==REASON_EFFECT
@@ -68,7 +68,7 @@ end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsSSetable() end
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,c,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,c,1,0,0)
 end
 function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

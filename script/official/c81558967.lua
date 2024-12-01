@@ -52,10 +52,10 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 					Duel.ConfirmCards(1-tp,sg)
 					Duel.ShuffleHand(tp)
 				else
-					Duel.SendtoGrave(sg,REASON_RULE)
+					Duel.SendtoRest(sg,REASON_RULE)
 				end
 			g:Sub(sg)
-			Duel.SendtoGrave(g,REASON_EFFECT+REASON_REVEAL)
+			Duel.SendtoRest(g,REASON_EFFECT+REASON_REVEAL)
 		end
 		Duel.ShuffleDeck(tp)
 	end
@@ -64,7 +64,7 @@ function s.spfilter1(c,e,tp)
 	return c:IsSetCard(0x122) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.spcond(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_GRAVE) and e:GetHandler():IsReason(REASON_BATTLE)
+	return e:GetHandler():IsLocation(LOCATION_REST) and e:GetHandler():IsReason(REASON_BATTLE)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

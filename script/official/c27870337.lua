@@ -51,7 +51,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 end
 function s.filter(c)
-	return c:IsSetCard(0x164) and c:IsType(TYPE_PENDULUM) and not c:IsForbidden() 
+	return c:IsSetCard(0x164) and c:IsType(TYPE_PENDULUM) and not c:IsUnliked() 
 end
 function s.dtoptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckPendulumZones(tp)
@@ -93,7 +93,7 @@ function s.htoeop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.drawtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(aux.NOT(Card.IsForbidden),tp,LOCATION_PZONE,0,nil)
+	local g=Duel.GetMatchingGroup(aux.NOT(Card.IsUnliked),tp,LOCATION_PZONE,0,nil)
 	if chk==0 then return aux.SelectUnselectGroup(g,e,tp,2,2,s.check,0,tp,nil) and Duel.IsPlayerCanDraw(tp,2) end
 	Duel.SetTargetPlayer(tp)
 	Duel.SetTargetParam(2)
@@ -101,7 +101,7 @@ function s.drawtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.drawop(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
-	local g=Duel.GetMatchingGroup(aux.NOT(Card.IsForbidden),tp,LOCATION_PZONE,0,nil)
+	local g=Duel.GetMatchingGroup(aux.NOT(Card.IsUnliked),tp,LOCATION_PZONE,0,nil)
 	if aux.SelectUnselectGroup(g,e,tp,2,2,s.check,0,tp,nil) and Duel.SendtoExtraP(g,tp,REASON_EFFECT)>0
 		and Duel.GetOperatedGroup():FilterCount(Card.IsLocation,nil,LOCATION_EXTRA)==2 then
 		Duel.Draw(p,d,REASON_EFFECT)

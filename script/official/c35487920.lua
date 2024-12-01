@@ -52,10 +52,10 @@ function s.cfilter(c,check)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local check=Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)==0
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.cfilter(chkc,check) end
-	if chk==0 then return Duel.IsExistingTarget(s.cfilter,tp,LOCATION_GRAVE,0,1,nil,check) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.cfilter(chkc,check) end
+	if chk==0 then return Duel.IsExistingTarget(s.cfilter,tp,LOCATION_REST,0,1,nil,check) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectTarget(tp,s.cfilter,tp,LOCATION_GRAVE,0,1,1,nil,check)
+	local g=Duel.SelectTarget(tp,s.cfilter,tp,LOCATION_REST,0,1,1,nil,check)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,1,0,0)
 	if g:GetFirst():IsAbleToHand() and check then
 		Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,0,0)

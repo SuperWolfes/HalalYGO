@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 	--Same as above, but if sent to GY by card effect
 	local e2=e1:Clone()
-	e2:SetCode(EVENT_TO_GRAVE)
+	e2:SetCode(EVENT_TO_REST)
 	e2:SetCondition(s.thcon)
 	c:RegisterEffect(e2)
 	--Lose 600 ATK during each of your end phases

@@ -72,7 +72,7 @@ function s.copycon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_TRIBUTE)
 end
 function s.filter(c,e)
-	return c:IsType(TYPE_EFFECT) and c:IsLocation(LOCATION_GRAVE) and c:IsCanBeEffectTarget(e)
+	return c:IsType(TYPE_EFFECT) and c:IsLocation(LOCATION_REST) and c:IsCanBeEffectTarget(e)
 end
 function s.copytg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return e:GetHandler():GetMaterial():IsContains(chkc) and s.filter(chkc,e) end

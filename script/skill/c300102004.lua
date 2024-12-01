@@ -11,9 +11,9 @@ local register=function(what)
 		return what(...)
 	end
 end
-s.roll_dice=true
-local tossd=Duel.TossDice
-Duel.TossDice=register(tossd)
+s.roll_suffice=true
+local tossd=Duel.TossSuffice
+Duel.TossSuffice=register(tossd)
 local tossc=Duel.TossCoin
 Duel.TossCoin=register(tossc)
 function s.initial_effect(c)
@@ -28,9 +28,9 @@ function s.initial_effect(c)
 	aux.GlobalCheck(s,function()
 		local ge1=Effect.CreateEffect(c)
 		ge1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-		ge1:SetCode(EFFECT_TOSS_DICE_CHOOSE)
+		ge1:SetCode(EFFECT_TOSS_SUFFICE_CHOOSE)
 		ge1:SetCondition(function(e,tp,eg,ep,ev,re,r,rp)return Duel.GetFlagEffect(ep,id)>0 and Duel.GetFlagEffectLabel(ep,id)>0 end)
-		ge1:SetOperation(s.repop("dice",Duel.GetDiceResult,Duel.SetDiceResult,function(tp) Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,3)) return Duel.AnnounceNumber(tp,1,2,3,4,5,6) end))
+		ge1:SetOperation(s.repop("suffice",Duel.GetSufficeResult,Duel.SetSufficeResult,function(tp) Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,3)) return Duel.AnnounceNumber(tp,1,2,3,4,5,6) end))
 		Duel.RegisterEffect(ge1,0)
 		local ge2=ge1:Clone()
 		ge2:SetCode(EFFECT_TOSS_COIN_CHOOSE)
@@ -48,7 +48,7 @@ function s.repop(typ,func1,func2,func3)
 		local ct=(ev&0xff)+(ev>>16)
 		local ac=1
 		if ct>1 then
-			if typ=="dice" then
+			if typ=="suffice" then
 				Duel.Hint(HINT_SELECTMSG,ep,aux.Stringid(id,1))
 				local val,idx=Duel.AnnounceNumber(ep,table.unpack(dc,1,ct))
 				ac=idx+1

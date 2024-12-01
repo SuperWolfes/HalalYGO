@@ -9,7 +9,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.gete(e,tp,eg,ep,ev,re,r,rp)
-	if e:GetHandler():GetPreviousLocation()~=LOCATION_GRAVE then return end
+	if e:GetHandler():GetPreviousLocation()~=LOCATION_REST then return end
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_PIERCE)

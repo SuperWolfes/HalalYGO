@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_FREE_CHAIN)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetHintTiming(0,TIMING_END_PHASE)
 	e2:SetCondition(function(_,tp) return Duel.GetFlagEffect(tp,id+1)==0 end)
 	e2:SetCost(aux.bfgcost)
@@ -34,7 +34,7 @@ function s.tdcon(e,tp,eg,ep,ev,re,r,rp)
 	return #g>1 and g:GetClassCount(Card.GetRace)>1 and Duel.GetFlagEffect(tp,id)==0
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	local loc=LOCATION_HAND+LOCATION_ONFIELD+LOCATION_GRAVE
+	local loc=LOCATION_HAND+LOCATION_ONFIELD+LOCATION_REST
 	local g=Duel.GetMatchingGroup(Card.IsAbleToDeck,tp,loc,loc,nil,e:GetHandler())
 	if chk==0 then return #g>0 and Duel.IsPlayerCanDraw(tp,5) and Duel.IsPlayerCanDraw(1-tp,5) end
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,1,0,0)
@@ -43,7 +43,7 @@ end
 function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetFlagEffect(tp,id)~=0 then return end
 	Duel.RegisterFlagEffect(tp,id,0,0,0)
-	local loc=LOCATION_HAND+LOCATION_ONFIELD+LOCATION_GRAVE
+	local loc=LOCATION_HAND+LOCATION_ONFIELD+LOCATION_REST
 	local g=Duel.GetMatchingGroup(Card.IsAbleToDeck,tp,loc,loc,nil,e:GetHandler())
 	if #g>0 and Duel.SendtoDeck(g,nil,0,REASON_EFFECT)>0 then
 		local og=Duel.GetOperatedGroup()

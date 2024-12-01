@@ -21,11 +21,11 @@ function s.filter(c,e,tp)
 	return c:GetAttack()>0 and c:IsSetCard(0x119) and c:IsMonster() and c:IsAbleToDeck()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.filter(chkc) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and s.filter(chkc) end
 	if chk==0 then return true end
-	if Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil) then
+	if Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-		local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil)
+		local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil)
 		Duel.SetOperationInfo(0,CATEGORY_TODECK,g,1,0,0)
 		Duel.SetTargetPlayer(tp)
 		Duel.SetTargetParam(g:GetFirst():GetAttack())

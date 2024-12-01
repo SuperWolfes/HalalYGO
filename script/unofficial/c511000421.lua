@@ -1,5 +1,5 @@
 --女神ウルドの裁断 (Anime)
---Goddess Urd's Verdict (Anime)
+--Monsterdess Urd's Verdict (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

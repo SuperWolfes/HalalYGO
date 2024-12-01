@@ -29,7 +29,7 @@ function s.gyfilter(c)
 	return c:IsMonster() and c:IsRace(RACE_REPTILE) and c:IsAbleToDeck()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(s.gyfilter,tp,LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.gyfilter,tp,LOCATION_REST,0,nil)
 	if chk==0 then return true end
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,#g,0,0)
 end
@@ -45,7 +45,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		ge1:SetTarget(s.atktg)
 		ge1:SetReset(RESET_PHASE+PHASE_END)
 		Duel.RegisterEffect(ge1,tp)
-		local og=Duel.GetMatchingGroup(s.gyfilter,tp,LOCATION_GRAVE,0,nil)
+		local og=Duel.GetMatchingGroup(s.gyfilter,tp,LOCATION_REST,0,nil)
 		if #og>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 			Duel.BreakEffect()
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)

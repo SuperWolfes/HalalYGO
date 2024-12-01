@@ -15,7 +15,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x56}
 function s.cfilter(c,e,tp,ft)
-	return c:IsSetCard(0x56) and c:IsAbleToGraveAsCost() and (c:IsFaceup() or c:IsLocation(LOCATION_HAND))
+	return c:IsSetCard(0x56) and c:IsAbleToRestAsCost() and (c:IsFaceup() or c:IsLocation(LOCATION_HAND))
 		and (Duel.IsExistingMatchingCard(s.monfilter,tp,LOCATION_DECK,0,1,nil,e,tp,ft,c)
 		or Duel.IsExistingMatchingCard(s.eqspfilter,tp,LOCATION_DECK,0,1,nil,tp,ft,c))
 end
@@ -26,7 +26,7 @@ function s.monspfilter(c,e,tp,sc)
 	return Duel.GetMZoneCount(tp,sc)>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.moneqfilter(c,tp,ft,sc)
-	return (ft>0 or (sc and sc:IsLocation(LOCATION_SZONE) and sc:GetSequence()<5)) and not c:IsForbidden()
+	return (ft>0 or (sc and sc:IsLocation(LOCATION_SZONE) and sc:GetSequence()<5)) and not c:IsUnliked()
 		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,0x56),tp,LOCATION_MZONE,0,1,sc)
 end
 function s.eqspfilter(c,tp,ft,sc)
@@ -42,9 +42,9 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
 	if c:IsLocation(LOCATION_HAND) then ft=ft-1 end
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND+LOCATION_ONFIELD,0,1,c,e,tp,ft) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND+LOCATION_ONFIELD,0,1,1,c,e,tp,ft)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

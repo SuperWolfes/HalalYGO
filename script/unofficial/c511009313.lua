@@ -1,4 +1,4 @@
---Chaos King Archfiend (Anime)
+--Chaos King Archtainted (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon

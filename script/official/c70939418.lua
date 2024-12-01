@@ -82,7 +82,7 @@ function s.scop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.ddcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_GRAVE) and r==REASON_SYNCHRO
+	return e:GetHandler():IsLocation(LOCATION_REST) and r==REASON_SYNCHRO
 end
 function s.ddtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeck(tp,1) end
@@ -93,7 +93,7 @@ function s.ddop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetOperatedGroup():GetFirst()
 	local c=e:GetHandler()
 	local sync=c:GetReasonCard()
-	if tc and tc:IsSetCard(0x2016) and tc:IsMonster() and tc:IsLocation(LOCATION_GRAVE) then
+	if tc and tc:IsSetCard(0x2016) and tc:IsMonster() and tc:IsLocation(LOCATION_REST) then
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)

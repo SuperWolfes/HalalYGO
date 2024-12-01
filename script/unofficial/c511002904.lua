@@ -50,9 +50,9 @@ function s.ctop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RaiseSingleEvent(c,id+1,e,0,0,tp,0)
 end
 function s.plcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
 	e:SetLabel(e:GetHandler():GetCounter(0x107))
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
+	Duel.SendtoRest(e:GetHandler(),REASON_COST)
 end
 function s.pltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then

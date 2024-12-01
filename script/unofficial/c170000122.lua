@@ -69,7 +69,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e6:SetValue(s.atkval)
 		c:RegisterEffect(e6)
 	else
-		c:CancelToGrave(false)
+		c:CancelToRest(false)
 	end
 end
 function s.nacon(e,tp,eg,ep,ev,re,r,rp)

@@ -68,7 +68,7 @@ function s.setcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.setfilter(c)
 	return c:IsTrap() and c:ListsCode(TOKEN_BRAVE) and c:IsSSetable()
-		and not c:IsForbidden()
+		and not c:IsUnliked()
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_DECK,0,1,nil) end

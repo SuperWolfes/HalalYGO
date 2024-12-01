@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 	--Send to GY
 	local e2=Effect.CreateEffect(c)
-	e2:SetCategory(CATEGORY_TOGRAVE)
+	e2:SetCategory(CATEGORY_TOREST)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetRange(LOCATION_MZONE)
@@ -88,10 +88,10 @@ function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 	if tc:IsRelateToEffect(e) then
 		local g=s.group(tc:GetSequence(),1-tp)
 		if #g>0 then
-			Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOGRAVE)
+			Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOREST)
 			local sg=g:Select(1-tp,1,1,nil)
 			Duel.HintSelection(sg,true)
-			Duel.SendtoGrave(sg,REASON_RULE)
+			Duel.SendtoRest(sg,REASON_RULE)
 		end
 	end
 end

@@ -34,7 +34,7 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	if not bc then return false end
 	if bc:IsControler(1-tp) then bc=tc end
 	e:SetLabelObject(bc)
-	return bc:IsFaceup() and bc:IsRace(RACE_SPELLCASTER) and Duel.GetCurrentPhase()==PHASE_DAMAGE_CAL
+	return bc:IsFaceup() and bc:IsRace(RACE_MENTOR) and Duel.GetCurrentPhase()==PHASE_DAMAGE_CAL
 end
 function s.rvfilt(c)
 	return c:IsSpell() and not c:IsPublic()

@@ -33,7 +33,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ConfirmCards(1-tp,tc)
 		if not tc:IsMonster() then
 			Duel.BreakEffect()
-			Duel.SendtoGrave(tc,REASON_EFFECT)
+			Duel.SendtoRest(tc,REASON_EFFECT)
 			if e:GetHandler():IsRelateToEffect(e) then
 				Duel.Destroy(e:GetHandler(),REASON_EFFECT)
 			end

@@ -39,7 +39,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.NegateActivation(ev) and re:GetHandler():IsRelateToEffect(re) then
-		Duel.SendtoGrave(re:GetHandler(),REASON_EFFECT)
+		Duel.SendtoRest(re:GetHandler(),REASON_EFFECT)
 	end
 end
 function s.disable(e,c)

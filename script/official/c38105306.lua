@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	--Discard
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_TOGRAVE+CATEGORY_HANDES)
+	e2:SetCategory(CATEGORY_TOREST+CATEGORY_HANDES)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_FREE_CHAIN)
 	e2:SetRange(LOCATION_SZONE)
@@ -49,17 +49,17 @@ function s.disccon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.disctg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:GetFlagEffect(id)==0 and c:IsAbleToGrave()
+	if chk==0 then return c:GetFlagEffect(id)==0 and c:IsAbleToRest()
 		and Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,0,LOCATION_HAND,1,nil,REASON_EFFECT) end
 	c:RegisterFlagEffect(id,RESET_CHAIN,0,1)
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,c,1,tp,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,c,1,tp,0)
 	Duel.SetOperationInfo(0,CATEGORY_HANDES,nil,0,1-tp,c:GetCounter(0x208))
 end
 function s.discop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local ct=c:GetCounter(0x208)
 	if not c:IsRelateToEffect(e) or ct==0 then return end
-	if Duel.SendtoGrave(c,REASON_EFFECT)>0 and c:IsLocation(LOCATION_GRAVE)
+	if Duel.SendtoRest(c,REASON_EFFECT)>0 and c:IsLocation(LOCATION_REST)
 		and Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,0,LOCATION_HAND,1,nil,REASON_EFFECT) then
 		Duel.BreakEffect()
 		Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_DISCARD)

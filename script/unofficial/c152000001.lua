@@ -18,7 +18,7 @@ function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 	--condition
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ft<=0 then return false end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	local g=Duel.GetMatchingGroup(s.gkfilter,tp,LOCATION_ALL-LOCATION_MZONE,0,nil,Duel.GetTurnCount())
 	return #g>0 and ft>=#g and g:FilterCount(Card.IsCanBeSpecialSummoned,nil,e,0,tp,false,false,POS_FACEUP,tp)==#g
 end
@@ -34,7 +34,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	--Special Summon
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ft<=0 then return end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	local g=Duel.GetMatchingGroup(s.gkfilter,tp,LOCATION_ALL-LOCATION_MZONE,0,nil,Duel.GetTurnCount())
 	if not (#g>0 and ft>=#g and g:FilterCount(Card.IsCanBeSpecialSummoned,nil,e,0,tp,false,false,POS_FACEUP,tp)==#g) then return end
 	Duel.HintSelection(g)

@@ -16,12 +16,12 @@ function s.cfilter(c,code)
 	return c:IsCode(code) and c:IsAbleToRemoveAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,nil,511000676)
-		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,nil,511000677)
-		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,nil,511000678) end
-	local tc1=Duel.GetFirstMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,nil,511000676)
-	local tc2=Duel.GetFirstMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,nil,511000677)
-	local tc3=Duel.GetFirstMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,nil,511000678)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil,511000676)
+		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil,511000677)
+		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil,511000678) end
+	local tc1=Duel.GetFirstMatchingCard(s.cfilter,tp,LOCATION_REST,0,nil,511000676)
+	local tc2=Duel.GetFirstMatchingCard(s.cfilter,tp,LOCATION_REST,0,nil,511000677)
+	local tc3=Duel.GetFirstMatchingCard(s.cfilter,tp,LOCATION_REST,0,nil,511000678)
 	local g=Group.FromCards(tc1,tc2,tc3)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end

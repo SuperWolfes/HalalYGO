@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.equipop)
 	c:RegisterEffect(e2)
 	local e3=e2:Clone()
-	e3:SetCode(EVENT_TO_GRAVE)
+	e3:SetCode(EVENT_TO_REST)
 	e3:SetCondition(s.equipcon)
 	c:RegisterEffect(e3)
 end

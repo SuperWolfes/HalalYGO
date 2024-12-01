@@ -1,7 +1,7 @@
 --Ｓｐ－奈落との契約
 local s,id=GetID()
 function s.initial_effect(c)
-	local e1=Ritual.CreateProc(c,RITPROC_EQUAL,aux.FilterBoolFunction(Card.IsAttribute,ATTRIBUTE_DARK),nil,1057)
+	local e1=Locked.CreateProc(c,RITPROC_EQUAL,aux.FilterBoolFunction(Card.IsAttribute,ATTRIBUTE_DARK),nil,1057)
 	e1:SetCondition(s.condition)
 	c:RegisterEffect(e1)
 end

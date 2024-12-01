@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.indfilter)
 	e2:SetValue(1)
 	c:RegisterEffect(e2)
-	--Ritual Summon
+	--Locked Summon
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e3:SetRange(LOCATION_SZONE)
@@ -33,7 +33,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x2093}
 function s.indfilter(e,c)
-	return c:IsRitualMonster() and c:IsSetCard(0x2093)
+	return c:IsLockedMonster() and c:IsSetCard(0x2093)
 end
 function s.spcondition(e,tp,eg,ep,ev,re,r,rp)
 	return tp==ep and (r==REASON_BATTLE or tp~=rp)
@@ -43,7 +43,7 @@ function s.infilter(c,e,tp,ft)
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND,0,1,c,e,tp)
 end
 function s.spfilter(c,e,tp)
-	return s.indfilter(e,c) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,false)
+	return s.indfilter(e,c) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_LOCKED,tp,true,false)
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
@@ -60,7 +60,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_HAND,0,1,1,nil,e,tp)
 	local tc=g:GetFirst()
-	if tc and Duel.SpecialSummon(tc,SUMMON_TYPE_RITUAL,tp,tp,true,false,POS_FACEUP) then
+	if tc and Duel.SpecialSummon(tc,SUMMON_TYPE_LOCKED,tp,tp,true,false,POS_FACEUP) then
 		tc:CompleteProcedure()
 	end
 end

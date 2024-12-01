@@ -31,7 +31,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.CheckTiming(TIMING_DESTROY) then return false end
 	local operatedGroup = Duel.GetOperatedGroup()
 	if operatedGroup and #operatedGroup > 0 then
-		return Duel.IsExistingMatchingCard(s.filter, tp, LOCATION_GRAVE+LOCATION_EXTRA, 0, 1, nil, operatedGroup)
+		return Duel.IsExistingMatchingCard(s.filter, tp, LOCATION_REST+LOCATION_EXTRA, 0, 1, nil, operatedGroup)
 	end
 	return false
 end

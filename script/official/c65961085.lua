@@ -16,7 +16,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x106e}
 function s.retcon(e,tp,eg,ep,ev,re,r,rp)
-	return re and re:GetHandler():IsRace(RACE_SPELLCASTER)
+	return re and re:GetHandler():IsRace(RACE_MENTOR)
 end
 function s.filter(c)
 	return c:IsFaceup() and c:IsSetCard(0x106e) and c:IsSpell() and c:IsAbleToDeck()
@@ -38,6 +38,6 @@ function s.retop(e,tp,eg,ep,ev,re,r,rp)
 	end
 	local g2=Duel.GetMatchingGroup(s.filter2,tp,LOCATION_REMOVED,0,nil)
 	if #g2>0 then
-		Duel.SendtoGrave(g2,REASON_EFFECT+REASON_RETURN)
+		Duel.SendtoRest(g2,REASON_EFFECT+REASON_RETURN)
 	end
 end

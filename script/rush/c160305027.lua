@@ -40,7 +40,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.HintSelection(g)
 		Duel.ChangePosition(g,POS_FACEUP_DEFENSE)
 		if Duel.GetMatchingGroupCount(Card.IsPosition,tp,LOCATION_MZONE,0,nil,POS_DEFENSE)>=3 then
-			local og=Duel.GetMatchingGroup(s.tdfilter,tp,0,LOCATION_GRAVE,nil)
+			local og=Duel.GetMatchingGroup(s.tdfilter,tp,0,LOCATION_REST,nil)
 			if #og>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 				Duel.BreakEffect()
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)

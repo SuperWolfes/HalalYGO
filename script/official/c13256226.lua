@@ -1,5 +1,5 @@
 --Ｅ・ＨＥＲＯ スピリット・オブ・ネオス
---Elemental HERO Spirit of Neos
+--Elemental HERO Guardian of Neos
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

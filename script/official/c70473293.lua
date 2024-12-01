@@ -32,14 +32,14 @@ function s.zonecheck(sg,tp,exg)
 	return sg:FilterCount(Auxiliary.MZFilter,nil,tp)+Duel.GetLocationCount(tp,LOCATION_MZONE)>=1
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) 
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) 
 		and s.spfilter(chkc,e,tp) and chkc~=e:GetLabelObject() end
 	if chk==0 then 
 		if e:GetLabel()==1 then
 			e:SetLabel(0)
 			return Duel.CheckReleaseGroupCost(tp,Card.IsType,1,false,s.zonecheck,nil,TYPE_LINK)
 		else
-			return Duel.IsExistingTarget(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp)
+			return Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp)
 		end
 	end
 	local rg=nil
@@ -50,7 +50,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		e:SetLabelObject(rg)
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,rg,e,tp)
+	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_REST,0,1,1,rg,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)

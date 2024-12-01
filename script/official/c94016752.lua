@@ -26,10 +26,10 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTRIBUTE)
 	local at=Duel.AnnounceAttribute(tp,1,ATTRIBUTE_ALL)
 	Duel.SetTargetParam(at)
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,1-tp,LOCATION_MZONE)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,1-tp,LOCATION_MZONE)
 end
 function s.filter(c,rc,at)
-	return c:IsFaceup() and c:IsRace(rc) and c:IsAttribute(at) and c:IsAbleToGrave()
+	return c:IsFaceup() and c:IsRace(rc) and c:IsAttribute(at) and c:IsAbleToRest()
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -37,8 +37,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local at=Duel.GetChainInfo(0,CHAININFO_TARGET_PARAM)
 	local g=Duel.SelectMatchingCard(1-tp,s.filter,1-tp,LOCATION_MZONE,0,1,1,nil,rc,at)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_RULE)
-		if g:GetFirst():IsLocation(LOCATION_GRAVE) then
+		Duel.SendtoRest(g,REASON_RULE)
+		if g:GetFirst():IsLocation(LOCATION_REST) then
 			local e1=Effect.CreateEffect(c)
 			e1:SetType(EFFECT_TYPE_FIELD)
 			e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)

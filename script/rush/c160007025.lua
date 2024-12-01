@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.fupfilter(c)
-	return c:IsFaceup() and c:IsCode(CARD_SPIRIT_STADIUM)
+	return c:IsFaceup() and c:IsCode(CARD_GUARDIAN_STADIUM)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.fupfilter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil)

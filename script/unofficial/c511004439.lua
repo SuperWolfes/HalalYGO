@@ -38,7 +38,7 @@ function s.initial_effect(c)
 	e5:SetCategory(CATEGORY_REMOVE+CATEGORY_TOHAND)
 	e5:SetType(EFFECT_TYPE_IGNITION)
 	e5:SetCode(EVENT_FREE_CHAIN)
-	e5:SetRange(LOCATION_GRAVE)
+	e5:SetRange(LOCATION_REST)
 	e5:SetTarget(s.target1)
 	e5:SetOperation(s.operation1)
 	c:RegisterEffect(e5)
@@ -63,7 +63,7 @@ function s.operation(e,tp,eg,ev,ep,re,r,rp)
 		local mg=tg:Clone()
 		local tc=tg:GetFirst()
 		while tc do
-			if tc:GetOverlayCount()~=0 then Duel.SendtoGrave(tc:GetOverlayGroup(),REASON_RULE) end
+			if tc:GetOverlayCount()~=0 then Duel.SendtoRest(tc:GetOverlayGroup(),REASON_RULE) end
 			tc=tg:GetNext()
 		end
 		c:SetMaterial(mg)
@@ -78,7 +78,7 @@ function s.target0(e,tp,eg,ev,ep,re,r,rp,chk)
 	local c=e:GetHandler()
 	local mg=c:GetOverlayGroup():Filter(s.spfilter,nil,e,tp)
 	if chk==0 then return c:IsAbleToHand() and mg and #mg>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>#mg 
-		and not (Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) and #mg>1) end
+		and not (Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) and #mg>1) end
 	Duel.SetTargetCard(mg)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,c,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,mg,#mg,0,0)
@@ -89,7 +89,7 @@ function s.operation0(e,tp,eg,ev,ep,re,r,rp)
 	local count=#mg
 	mg:Match(s.spfilter,nil,e,tp)
 	if #mg<count then return end
-	if Duel.GetLocationCount(tp,LOCATION_MZONE)<#mg or (Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) and #mg>1) then return end
+	if Duel.GetLocationCount(tp,LOCATION_MZONE)<#mg or (Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) and #mg>1) then return end
 	if Duel.SendtoHand(c,nil,REASON_EFFECT)~=0 then
 		Duel.SpecialSummon(mg,SUMMON_TYPE_SPECIAL,tp,tp,true,false,POS_FACEUP)
 	end
@@ -99,8 +99,8 @@ function s.filter1(c)
 end
 function s.target1(e,tp,eg,ev,ep,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToRemove() and Duel.IsExistingMatchingCard(s.filter1,tp,LOCATION_GRAVE,0,1,nil) end
-	local tg=Duel.SelectMatchingCard(tp,s.filter1,tp,LOCATION_GRAVE,0,1,1,nil)
+	if chk==0 then return c:IsAbleToRemove() and Duel.IsExistingMatchingCard(s.filter1,tp,LOCATION_REST,0,1,nil) end
+	local tg=Duel.SelectMatchingCard(tp,s.filter1,tp,LOCATION_REST,0,1,1,nil)
 	Duel.SetTargetCard(tg)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,c,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,tg,1,0,0)

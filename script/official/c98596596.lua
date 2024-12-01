@@ -1,5 +1,5 @@
 --魂のさまよう墓場
---Graveyard of Wandering Souls
+--Resting Place of Wandering Souls
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	local e3=Effect.CreateEffect(c)
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOKEN)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
-	e3:SetCode(EVENT_TO_GRAVE)
+	e3:SetCode(EVENT_TO_REST)
 	e3:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
 	e3:SetCountLimit(1,id)
 	e3:SetRange(LOCATION_SZONE)
@@ -33,7 +33,7 @@ function s.initial_effect(c)
 end
 s.listed_names={TOKEN_FIREBALL}
 function s.cfilter(c,tp)
-	return c:IsReason(REASON_BATTLE) and c:IsLocation(LOCATION_GRAVE) and c:IsPreviousControler(tp)
+	return c:IsReason(REASON_BATTLE) and c:IsLocation(LOCATION_REST) and c:IsPreviousControler(tp)
 end
 function s.tkcon1(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,tp)
@@ -63,7 +63,7 @@ function s.tkop2(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	ft=math.min(ct,ft)
 	if ft<1 or not Duel.IsPlayerCanSpecialSummonMonster(tp,23116809,0,TYPES_TOKEN,100,100,1,RACE_PYRO,ATTRIBUTE_FIRE) then return end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	for i=1,ft do
 		local token=Duel.CreateToken(tp,23116809)
 		Duel.SpecialSummon(token,0,tp,tp,false,false,POS_FACEUP)

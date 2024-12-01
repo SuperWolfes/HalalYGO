@@ -1,5 +1,5 @@
 -- 運命の旅路
--- Journey of Destiny
+-- Journey of Destrudic
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -68,7 +68,7 @@ function s.bravefilter(c,ec)
 	return c:IsFaceup() and c:IsCode(TOKEN_BRAVE) and ec:CheckEquipTarget(c)
 end
 function s.eqfilter(c,tp)
-	return c:CheckUniqueOnField(tp) and not c:IsForbidden() and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
+	return c:CheckUniqueOnField(tp) and not c:IsUnliked() and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
 		and Duel.IsExistingTarget(s.bravefilter,tp,LOCATION_MZONE,0,1,nil,c)
 end
 function s.sthfilter(c,tp)

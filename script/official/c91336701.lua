@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(COUNTER_SPELL)
 	c:EnableReviveLimit()
-	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_SPELLCASTER),2,2)
+	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_MENTOR),2,2)
 	--add counter (self summon)
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -65,7 +65,7 @@ function s.atkval(e,c)
 	return c:GetCounter(COUNTER_SPELL)*300
 end
 function s.cfilter(c,g)
-	return c:IsFaceup() and c:IsRace(RACE_SPELLCASTER) and g:IsContains(c)
+	return c:IsFaceup() and c:IsRace(RACE_MENTOR) and g:IsContains(c)
 end
 function s.ctcon2(e,tp,eg,ep,ev,re,r,rp)
 	local lg=e:GetHandler():GetLinkedGroup()

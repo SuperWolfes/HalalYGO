@@ -1,10 +1,10 @@
 --儀式魔人プレサイダー
 local s,id=GetID()
 function s.initial_effect(c)
-	--ritual material
+	--locked material
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
-	e1:SetCode(EFFECT_EXTRA_RITUAL_MATERIAL)
+	e1:SetCode(EFFECT_EXTRA_LOCKED_MATERIAL)
 	e1:SetCondition(s.con)
 	e1:SetValue(1)
 	c:RegisterEffect(e1)
@@ -21,7 +21,7 @@ function s.con(e)
 	return not Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(),69832741)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return r==REASON_RITUAL
+	return r==REASON_LOCKED
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local rc=eg:GetFirst()

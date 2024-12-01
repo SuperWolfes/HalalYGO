@@ -25,7 +25,7 @@ function s.indcon(e)
 	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsType,TYPE_TUNER),e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
 end
 function s.filter(c,tp)
-	return c:IsLocation(LOCATION_GRAVE) and c:IsReason(REASON_BATTLE) and c:IsType(TYPE_TUNER)
+	return c:IsLocation(LOCATION_REST) and c:IsReason(REASON_BATTLE) and c:IsType(TYPE_TUNER)
 		and c:IsPreviousControler(tp) and c:IsPreviousPosition(POS_FACEUP)
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)

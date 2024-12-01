@@ -1,5 +1,5 @@
 --アンデット・ウォーリアー
---Zombie Warrior
+--Contaminated Warrior
 
 local s,id=GetID()
 function s.initial_effect(c)

@@ -62,14 +62,14 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e3:SetReset(RESET_EVENT+RESETS_STANDARD)
 		c:RegisterEffect(e3)
 	else
-		c:CancelToGrave(false)
+		c:CancelToRest(false)
 	end
 end
 function s.eqlimit(e,c)
 	return c:IsRace(RACE_BEAST+RACE_BEASTWARRIOR)
 end
 function s.drfilter(c,rc)
-	return c:IsLocation(LOCATION_GRAVE) and c:IsReason(REASON_BATTLE) and c:GetReasonCard()==rc
+	return c:IsLocation(LOCATION_REST) and c:IsReason(REASON_BATTLE) and c:GetReasonCard()==rc
 end
 function s.drcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.drfilter,1,nil,e:GetHandler():GetEquipTarget())

@@ -31,7 +31,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.val(e)
-	return Duel.GetFieldGroupCount(e:GetHandlerPlayer(),0,LOCATION_GRAVE)*100
+	return Duel.GetFieldGroupCount(e:GetHandlerPlayer(),0,LOCATION_REST)*100
 end
 function s.tgfilter(c,e,tp,detach_1,detach_2)
 	return (detach_1 and c:IsAbleToDeck()) or (detach_2 and (s.spfilter(c,e,tp) or s.setfilter(c)))
@@ -46,9 +46,9 @@ function s.eftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	local detach_1=c:CheckRemoveOverlayCard(tp,1,REASON_COST)
 	local detach_2=c:CheckRemoveOverlayCard(tp,2,REASON_COST)
-	if chk==0 then return (detach_1 or detach_2) and Duel.IsExistingTarget(s.tgfilter,tp,0,LOCATION_GRAVE,1,nil,e,tp,detach_1,detach_2) end
+	if chk==0 then return (detach_1 or detach_2) and Duel.IsExistingTarget(s.tgfilter,tp,0,LOCATION_REST,1,nil,e,tp,detach_1,detach_2) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local tc=Duel.SelectTarget(tp,s.tgfilter,tp,0,LOCATION_GRAVE,1,1,nil,e,tp,detach_1,detach_2):GetFirst()
+	local tc=Duel.SelectTarget(tp,s.tgfilter,tp,0,LOCATION_REST,1,1,nil,e,tp,detach_1,detach_2):GetFirst()
 	local b1=detach_1 and tc:IsAbleToDeck()
 	local b2=detach_2 and (s.spfilter(tc,e,tp) or s.setfilter(tc))
 	local op=Duel.SelectEffect(tp,
@@ -66,7 +66,7 @@ function s.eftg(e,tp,eg,ep,ev,re,r,rp,chk)
 			Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,tc,1,tp,0)
 		else
 			e:SetCategory(0)
-			Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,tc,1,tp,0)
+			Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,tc,1,tp,0)
 		end
 	end
 end

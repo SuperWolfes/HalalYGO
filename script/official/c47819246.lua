@@ -64,7 +64,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		c:RegisterEffect(e1)
 	else
-		c:CancelToGrave(false)
+		c:CancelToRest(false)
 	end
 end
 function s.eqlimit(e,c)
@@ -78,9 +78,9 @@ function s.mtcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.mtcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGraveAsCost() end
+	if chk==0 then return c:IsAbleToRestAsCost() end
 	Duel.SetTargetCard(c:GetEquipTarget())
-	Duel.SendtoGrave(c,REASON_COST)
+	Duel.SendtoRest(c,REASON_COST)
 end
 function s.mttg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ec=e:GetHandler():GetEquipTarget()

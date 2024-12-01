@@ -19,14 +19,14 @@ function s.filter(c)
 	return c:IsSetCard(0x1a) and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter(chkc) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter(chkc) end
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil)
-		or Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil) end
+		or Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil) end
 	local op=0
 	if Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil)
-		and Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil) then
+		and Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil) then
 		op=Duel.SelectOption(tp,aux.Stringid(id,1),aux.Stringid(id,2))
-	elseif Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil) then
+	elseif Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil) then
 		Duel.SelectOption(tp,aux.Stringid(id,2))
 		op=1
 	else
@@ -36,7 +36,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	e:SetLabel(op)
 	if op==1 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-		local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil)
+		local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil)
 		Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,0,0)
 		e:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	else

@@ -3,19 +3,19 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	Duel.EnableGlobalFlag(GLOBALFLAG_SELF_TOGRAVE)
+	Duel.EnableGlobalFlag(GLOBALFLAG_SELF_TOREST)
 	--Send itself to the GY if "Adanced Dark" is not face-up in the Field Spell Zone
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e1:SetRange(LOCATION_MZONE)
-	e1:SetCode(EFFECT_SELF_TOGRAVE)
+	e1:SetCode(EFFECT_SELF_TOREST)
 	e1:SetCondition(s.tgcon)
 	c:RegisterEffect(e1)
 	--Place itself in the S/T instead of sending it to the GY
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
-	e2:SetCode(EFFECT_TO_GRAVE_REDIRECT_CB)
+	e2:SetCode(EFFECT_TO_REST_REDIRECT_CB)
 	e2:SetProperty(EFFECT_FLAG_UNCOPYABLE)
 	e2:SetCondition(s.replacecon)
 	e2:SetOperation(s.replaceop)
@@ -57,16 +57,16 @@ function s.replaceop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RaiseEvent(c,EVENT_CUSTOM+47408488,e,0,tp,0,0)
 end
 function s.filter(c)
-	return c:IsSetCard(0x5034) and not c:IsForbidden() and (not c:IsLocation(LOCATION_REMOVED) or c:IsFaceup())
+	return c:IsSetCard(0x5034) and not c:IsUnliked() and (not c:IsLocation(LOCATION_REMOVED) or c:IsFaceup())
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsLocation(LOCATION_MZONE) and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK+LOCATION_GRAVE+LOCATION_HAND+LOCATION_REMOVED,0,1,nil) end
+		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK+LOCATION_REST+LOCATION_HAND+LOCATION_REMOVED,0,1,nil) end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,LOCATION_DECK+LOCATION_GRAVE+LOCATION_HAND+LOCATION_REMOVED,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,LOCATION_DECK+LOCATION_REST+LOCATION_HAND+LOCATION_REMOVED,0,1,1,nil)
 	local tc=g:GetFirst()
 	if tc then
 		Duel.MoveToField(tc,tp,tp,LOCATION_SZONE,POS_FACEUP,true)

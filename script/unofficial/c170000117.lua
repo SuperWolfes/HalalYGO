@@ -21,7 +21,7 @@ function s.initial_effect(c)
 end
 function s.checkop(e,tp,eg,ep,ev,re,r,rp)
 	for tc in aux.Next(eg) do
-		if tc:IsLocation(LOCATION_GRAVE+LOCATION_REMOVED) then
+		if tc:IsLocation(LOCATION_REST+LOCATION_REMOVED) then
 			tc:RegisterFlagEffect(id,RESET_EVENT+0x1f20000+RESET_PHASE+PHASE_END,0,1)
 		elseif tc:IsLocation(LOCATION_EXTRA) then
 			tc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1)
@@ -36,11 +36,11 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.spfilter(c,tp)
 	return c:IsType(TYPE_FUSION) and c:GetFlagEffect(id)~=0
-		and (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup()) and c:IsPreviousControler(tp)
+		and (c:IsLocation(LOCATION_REST) or c:IsFaceup()) and c:IsPreviousControler(tp)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.spfilter,tp,0x70,0x70,1,nil,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)

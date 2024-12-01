@@ -15,8 +15,8 @@ function s.initial_effect(c)
 	e1:SetTarget(s.thtg)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
-	--Ritual Summon
-	local e2=Ritual.CreateProc({handler=c,lvtype=RITPROC_GREATER,desc=aux.Stringid(id,1),forcedselection=function(e,tp,g,sc)return g:IsContains(e:GetHandler()) end})
+	--Locked Summon
+	local e2=Locked.CreateProc({handler=c,lvtype=RITPROC_GREATER,desc=aux.Stringid(id,1),forcedselection=function(e,tp,g,sc)return g:IsContains(e:GetHandler()) end})
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCountLimit(1,id)
@@ -25,7 +25,7 @@ end
 s.listed_names={21105106}
 s.listed_series={0x138}
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_RITUAL)
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_LOCKED)
 end
 function s.thfilter(c)
 	return c:IsSpellTrap() and c:IsSetCard(0x138) and c:IsAbleToHand()

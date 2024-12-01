@@ -31,7 +31,7 @@ function s.accost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.PayLPCost(tp,500)
 end
 function s.accon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsDefensePos() and not Duel.IsExistingMatchingCard(Card.IsSpell,tp,LOCATION_GRAVE,0,1,nil)
+	return e:GetHandler():IsDefensePos() and not Duel.IsExistingMatchingCard(Card.IsSpell,tp,LOCATION_REST,0,1,nil)
 end
 function s.acfilter(c,e,tp)
 	local te=c:GetActivateEffect()
@@ -47,10 +47,10 @@ function s.acfilter(c,e,tp)
 	return c:IsSpell() and c:CheckActivateEffect(false,false,false)~=nil and (ft>0 or c:IsType(TYPE_FIELD))
 end
 function s.actg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(1-tp) and chkc:IsLocation(LOCATION_GRAVE) and s.acfilter(chkc,e,tp) end
-	if chk==0 then return Duel.IsExistingTarget(s.acfilter,tp,0,LOCATION_GRAVE,1,nil,e,tp) end
+	if chkc then return chkc:IsControler(1-tp) and chkc:IsLocation(LOCATION_REST) and s.acfilter(chkc,e,tp) end
+	if chk==0 then return Duel.IsExistingTarget(s.acfilter,tp,0,LOCATION_REST,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,1))
-	Duel.SelectTarget(tp,s.acfilter,tp,0,LOCATION_GRAVE,1,1,nil,e,tp)
+	Duel.SelectTarget(tp,s.acfilter,tp,0,LOCATION_REST,1,1,nil,e,tp)
 end
 function s.acop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
@@ -70,17 +70,17 @@ function s.acop(e,tp,eg,ep,ev,re,r,rp)
 			if Duel.IsDuelType(DUEL_1_FIELD) then
 				if fc then Duel.Destroy(fc,REASON_RULE) end
 				fc=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
-				if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
+				if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
 			else
 				fc=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
-				if fc and Duel.SendtoGrave(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
+				if fc and Duel.SendtoRest(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
 			end
 		end
 		Duel.MoveToField(tc,tp,tp,loc,POS_FACEUP,true)
 		Duel.Hint(HINT_CARD,0,tc:GetCode())
 		tc:CreateEffectRelation(te)
 		if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 and not tc:IsHasEffect(EFFECT_REMAIN_FIELD) then
-			tc:CancelToGrave(false)
+			tc:CancelToRest(false)
 		end
 		if co then co(te,tp,eg,ep,ev,re,r,rp,1) end
 		if tg then tg(te,tp,eg,ep,ev,re,r,rp,1) end

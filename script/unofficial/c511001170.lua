@@ -35,7 +35,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local e2=e1:Clone()
 	e2:SetCode(EFFECT_DISABLE_EFFECT)
 	Duel.RegisterEffect(e2,tp)
-	--Pyro Clock of Destiny handling
+	--Pyro Clock of Destrudic handling
 	local descnum=tp==c:GetOwner() and 0 or 1
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)

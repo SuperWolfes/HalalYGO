@@ -31,7 +31,7 @@ end
 	--If monster was sent to GY for synchro summon of "T.G." monster
 function s.tcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsLocation(LOCATION_GRAVE) and r==REASON_SYNCHRO and c:GetReasonCard():IsSetCard(0x27)
+	return c:IsLocation(LOCATION_REST) and r==REASON_SYNCHRO and c:GetReasonCard():IsSetCard(0x27)
 end
 	--Activation legality
 function s.ttg(e,tp,eg,ep,ev,re,r,rp,chk)

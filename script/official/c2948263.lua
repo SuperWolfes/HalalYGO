@@ -1,5 +1,5 @@
 --ゴゴゴゴーレム－GF
---Gogogo Golem - Golden Form
+--Gogogo Gopal - Golden Form
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()

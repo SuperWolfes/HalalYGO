@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--Change the level of Ritual monster
+	--Change the level of Locked monster
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetType(EFFECT_TYPE_IGNITION)
@@ -31,11 +31,11 @@ function s.initial_effect(c)
 end
 s.listed_names={46427957,72426662}
 function s.lvfilter(c,tp)
-	return c:IsFaceup() and c:IsType(TYPE_RITUAL)
+	return c:IsFaceup() and c:IsType(TYPE_LOCKED)
 		and Duel.IsExistingMatchingCard(s.lvcfilter,tp,LOCATION_HAND,0,1,nil,c)
 end
 function s.lvcfilter(c,mc)
-	return c:IsRitualMonster() and not c:IsPublic() and not c:IsLevel(mc:GetLevel())
+	return c:IsLockedMonster() and not c:IsPublic() and not c:IsLevel(mc:GetLevel())
 end
 function s.lvtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and s.lvfilter(chkc,tp) end
@@ -67,7 +67,7 @@ function s.lvop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.cfilter(c,tp)
-	return c:IsCode(46427957,72426662) and c:IsControler(tp) and c:IsSummonType(SUMMON_TYPE_RITUAL)
+	return c:IsCode(46427957,72426662) and c:IsControler(tp) and c:IsSummonType(SUMMON_TYPE_LOCKED)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,tp)

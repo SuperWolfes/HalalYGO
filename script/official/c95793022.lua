@@ -46,9 +46,9 @@ function s.descfilter(c,lk)
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tc=e:GetHandler():GetBattleTarget()
-	if chk==0 then return tc and tc:IsLinkMonster() and Duel.IsExistingMatchingCard(s.descfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil,tc:GetLink()) end
+	if chk==0 then return tc and tc:IsLinkMonster() and Duel.IsExistingMatchingCard(s.descfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,nil,tc:GetLink()) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.descfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,nil,tc:GetLink())
+	local g=Duel.SelectMatchingCard(tp,s.descfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,1,nil,tc:GetLink())
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)

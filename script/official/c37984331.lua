@@ -1,5 +1,5 @@
 --真エクゾディア
---True Exodia
+--True Exdude
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -20,6 +20,6 @@ function s.loseop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local g=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_MZONE,LOCATION_MZONE,c)
 	if g:FilterCount(s.filter,nil)==#g and #g==4 and g:GetClassCount(Card.GetCode)==4 then
-		Duel.Win(1-c:GetControler(),WIN_REASON_TRUE_EXODIA)
+		Duel.Win(1-c:GetControler(),WIN_REASON_TRUE_EXDUDE)
 	end
 end

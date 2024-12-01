@@ -44,28 +44,28 @@ function s.eqfilter(c,ec)
 	return c:GetEquipGroup():IsContains(ec)
 end
 function s.setfilter(c,ec)
-	return c:IsTrap() and c:IsSetCard(0x15f) and (c:IsFaceup() or c:IsLocation(LOCATION_GRAVE))
+	return c:IsTrap() and c:IsSetCard(0x15f) and (c:IsFaceup() or c:IsLocation(LOCATION_REST))
 		and not c:IsCode(ec:GetCode()) and c:IsSSetable(true)
 end
 function s.cfilter(c,tp)
 	return c:IsFaceup() and c:IsTrap() and c:IsSetCard(0x15f)
 		and Duel.IsExistingMatchingCard(s.eqfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil,c)
-		and Duel.IsExistingTarget(s.setfilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,nil,c)
+		and Duel.IsExistingTarget(s.setfilter,tp,LOCATION_REST+LOCATION_REMOVED,0,1,nil,c)
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE+LOCATION_REMOVED) and chkc:IsControler(tp) and s.setfilter(chkc,e:GetLabelObject()) end
+	if chkc then return chkc:IsLocation(LOCATION_REST+LOCATION_REMOVED) and chkc:IsControler(tp) and s.setfilter(chkc,e:GetLabelObject()) end
 	if chk==0 then
 		if e:GetLabel()~=1 then return false end
 		e:SetLabel(0)
 		return Duel.GetLocationCount(tp,LOCATION_SZONE)>-1 and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_SZONE,0,1,nil,tp)
 	end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local gc=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_SZONE,0,1,1,nil,tp):GetFirst()
 	e:SetLabelObject(gc)
-	Duel.SendtoGrave(gc,REASON_COST)
+	Duel.SendtoRest(gc,REASON_COST)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
-	local g=Duel.SelectTarget(tp,s.setfilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,1,nil,gc)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,0,0)
+	local g=Duel.SelectTarget(tp,s.setfilter,tp,LOCATION_REST+LOCATION_REMOVED,0,1,1,nil,gc)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,0,0)
 end
 function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()

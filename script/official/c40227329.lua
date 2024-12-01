@@ -164,5 +164,5 @@ function s.aclimit1(e,re,tp)
 end
 function s.aclimit2(e,re,tp)
 	local rc=re:GetHandler()
-	return rc and rc:IsLocation(LOCATION_HAND+LOCATION_GRAVE)
+	return rc and rc:IsLocation(LOCATION_HAND+LOCATION_REST)
 end

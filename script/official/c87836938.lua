@@ -16,7 +16,7 @@ end
 function s.drcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local et=c:GetEquipCount()
-	if et>0 and c:IsReason(REASON_EFFECT) and c:IsReason(REASON_DESTROY) and c:IsLocation(LOCATION_GRAVE) then
+	if et>0 and c:IsReason(REASON_EFFECT) and c:IsReason(REASON_DESTROY) and c:IsLocation(LOCATION_REST) then
 		e:SetLabel(et)
 		return true
 	else return false end

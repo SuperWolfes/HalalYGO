@@ -14,18 +14,18 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.eqfilter(c)
-	return c:IsType(TYPE_XYZ) and not c:IsForbidden()
+	return c:IsType(TYPE_XYZ) and not c:IsUnliked()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chkc then return false end
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and Duel.IsExistingTarget(s.eqfilter,tp,LOCATION_GRAVE,0,1,nil)
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and Duel.IsExistingTarget(s.eqfilter,tp,LOCATION_REST,0,1,nil)
         and Duel.IsExistingTarget(aux.FaceupFilter(Card.IsType,TYPE_XYZ),tp,LOCATION_MZONE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
     	Duel.SelectTarget(tp,aux.FaceupFilter(Card.IsType,TYPE_XYZ),tp,LOCATION_MZONE,0,1,1,nil)
     	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-    	local g=Duel.SelectTarget(tp,s.eqfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+    	local g=Duel.SelectTarget(tp,s.eqfilter,tp,LOCATION_REST,0,1,1,nil)
    	Duel.SetOperationInfo(0,CATEGORY_EQUIP,g,1,0,0)
-    	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,0,0)	
+    	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,0,0)	
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -33,7 +33,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
     	if #g~=2 then return end
     	local tc=g:GetFirst()
     	local ec=g:GetNext()
-    	if tc:IsLocation(LOCATION_GRAVE) then tc,ec=ec,tc end
+    	if tc:IsLocation(LOCATION_REST) then tc,ec=ec,tc end
     	if tc:IsFaceup() then
 		if not Duel.Equip(tp,ec,tc,true) then return end
 		--Equip limit
@@ -77,8 +77,8 @@ function s.eqlimit(e,c)
 	return c==e:GetLabelObject()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
+	Duel.SendtoRest(e:GetHandler(),REASON_COST)
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

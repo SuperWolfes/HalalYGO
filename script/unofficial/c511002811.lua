@@ -1,4 +1,4 @@
---Performance Resurrection - Reborn Force
+--Performance Resurrection - Rerest Force
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

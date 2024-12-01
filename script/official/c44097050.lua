@@ -1,5 +1,5 @@
 --幻獣機アウローラドン
---Mecha Phantom Beast Auroradon
+--Mecha Illusion Beast Auroradon
 --Scripted by ahtelel
 local s,id=GetID()
 function s.initial_effect(c)
@@ -32,14 +32,14 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_LINK)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
+	if chk==0 then return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)
 		and Duel.GetLocationCount(tp,LOCATION_MZONE)>2
 		and Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0x101b,TYPES_TOKEN,0,0,3,RACE_MACHINE,ATTRIBUTE_WIND) end
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,3,tp,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,3,tp,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
-	if not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) and Duel.GetLocationCount(tp,LOCATION_MZONE)>2 
+	if not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) and Duel.GetLocationCount(tp,LOCATION_MZONE)>2 
 		and Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0x101b,TYPES_TOKEN,0,0,3,RACE_MACHINE,ATTRIBUTE_WIND) then
 		local token1=Duel.CreateToken(tp,id+1)
 		Duel.SpecialSummonStep(token1,0,tp,tp,false,false,POS_FACEUP)
@@ -76,7 +76,7 @@ end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local b1=Duel.IsExistingMatchingCard(aux.TRUE,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) and Duel.CheckReleaseGroupCost(tp,aux.TRUE,1,false,nil,nil)
 	local b2=Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,0,1,nil,e,tp) and Duel.GetLocationCount(tp,LOCATION_MZONE)>=0 and Duel.CheckReleaseGroupCost(tp,aux.TRUE,2,false,nil,nil)
-	local b3=Duel.IsExistingMatchingCard(s.svfilter,tp,LOCATION_GRAVE,0,1,nil) and Duel.CheckReleaseGroupCost(tp,aux.TRUE,3,false,nil,nil)
+	local b3=Duel.IsExistingMatchingCard(s.svfilter,tp,LOCATION_REST,0,1,nil) and Duel.CheckReleaseGroupCost(tp,aux.TRUE,3,false,nil,nil)
 	if chk==0 then return b1 or b2 or b3 end
 	local stab={}
 	local dtab={}
@@ -103,7 +103,7 @@ function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	elseif sel==2 then
 		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,0,tp,1)
 	elseif sel==3 then
-		Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
+		Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
 	end
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
@@ -125,7 +125,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		end
 	elseif sel==3 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.svfilter),tp,LOCATION_GRAVE,0,1,1,nil)
+		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.svfilter),tp,LOCATION_REST,0,1,1,nil)
 		if #g>0 then
 			Duel.SendtoHand(g,nil,REASON_EFFECT)
 			Duel.ConfirmCards(1-tp,g)

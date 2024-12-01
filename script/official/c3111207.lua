@@ -57,7 +57,7 @@ end
 	--If it was previously in GY
 function s.spcon2(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return (r&REASON_EFFECT)~=0 and c:IsPreviousLocation(LOCATION_GRAVE) and c:IsPreviousControler(tp)
+	return (r&REASON_EFFECT)~=0 and c:IsPreviousLocation(LOCATION_REST) and c:IsPreviousControler(tp)
 end
 	--Activation legality
 function s.sptg2(e,tp,eg,ep,ev,re,r,rp,chk)

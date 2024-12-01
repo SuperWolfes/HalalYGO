@@ -1,4 +1,4 @@
---The Sun of God Dragon
+--The Sun of Monster Dragon
 --マイケル・ローレンス・ディーによってスクリプト
 --scripted by MLD, credit to TPD & Cybercatman
 --updated and currently maintained by Larry126
@@ -109,7 +109,7 @@ end
 -------------------------------------------
 --Resurrection
 function s.egpcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsPreviousLocation(LOCATION_GRAVE)
+	return e:GetHandler():IsPreviousLocation(LOCATION_REST)
 end
 function s.immortal(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -322,7 +322,7 @@ function s.dfcon(e)
 	return e:GetHandler():GetFlagEffect(236)<=0
 end
 -------------------------------------------
---Egyption God Phoenix
+--Egyption Monster Bird
 function s.egpop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsFaceup() then
@@ -335,7 +335,7 @@ function s.egpop(e,tp,eg,ep,ev,re,r,rp)
 		c:RegisterEffect(e1)
 		local e2=Effect.CreateEffect(c)
 		e2:SetDescription(aux.Stringid(4012,7))
-		e2:SetCategory(CATEGORY_TOGRAVE)
+		e2:SetCategory(CATEGORY_TOREST)
 		e2:SetType(EFFECT_TYPE_QUICK_O)
 		e2:SetCode(EVENT_FREE_CHAIN)
 		e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
@@ -369,12 +369,12 @@ function s.egpop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.imfilter(e,te)
 	if not te then return false end
-	return te:IsHasCategory(CATEGORY_TOHAND+CATEGORY_DESTROY+CATEGORY_REMOVE+CATEGORY_TODECK+CATEGORY_RELEASE+CATEGORY_TOGRAVE)
+	return te:IsHasCategory(CATEGORY_TOHAND+CATEGORY_DESTROY+CATEGORY_REMOVE+CATEGORY_TODECK+CATEGORY_RELEASE+CATEGORY_TOREST)
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return Duel.CheckLPCost(tp,1000) and ((not c:IsHasEffect(EFFECT_CANNOT_ATTACK_ANNOUNCE)
-		and not c:IsHasEffect(EFFECT_FORBIDDEN) and not c:IsHasEffect(EFFECT_CANNOT_ATTACK)
+		and not c:IsHasEffect(EFFECT_UNLIKED) and not c:IsHasEffect(EFFECT_CANNOT_ATTACK)
 		and not Duel.IsPlayerAffectedByEffect(tp,EFFECT_CANNOT_ATTACK_ANNOUNCE)
 		and not Duel.IsPlayerAffectedByEffect(tp,EFFECT_CANNOT_ATTACK))
 		or c:IsHasEffect(EFFECT_UNSTOPPABLE_ATTACK)) end
@@ -383,9 +383,9 @@ end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) and chkc~=e:GetHandler() end
 	if chk==0 then return Duel.IsExistingTarget(nil,tp,LOCATION_MZONE,LOCATION_MZONE,1,e:GetHandler()) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectTarget(tp,nil,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,e:GetHandler())
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,g,1,0,LOCATION_MZONE)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,g,1,0,LOCATION_MZONE)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -416,7 +416,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 		tc:RegisterEffect(e3,true)
 		Duel.AdjustInstantly(c)
 	end
-	Duel.SendtoGrave(tc,REASON_EFFECT)
+	Duel.SendtoRest(tc,REASON_EFFECT)
 	e:SetProperty(e:GetProperty()&~EFFECT_FLAG_IGNORE_IMMUNE)
 end
 -------------------------------------------

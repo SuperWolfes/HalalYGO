@@ -73,15 +73,15 @@ function s.ctffilter(c,lv)
 	return c:IsControlerCanBeChanged() and c:IsFaceup() and c:GetLevel()==lv
 end
 function s.ctfilter(c,tp)
-	return c:IsMonster() and c:IsAbleToGraveAsCost()
+	return c:IsMonster() and c:IsAbleToRestAsCost()
 		and Duel.IsExistingTarget(s.ctffilter,tp,0,LOCATION_MZONE,1,nil,c:GetLevel())
 end
 function s.ctcos(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.ctfilter,tp,LOCATION_HAND,0,1,nil,tp) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local sg=Duel.SelectMatchingCard(tp,s.ctfilter,tp,LOCATION_HAND,0,1,1,nil,tp)
 	e:SetLabel(sg:GetFirst():GetLevel())
-	Duel.SendtoGrave(sg,REASON_COST)
+	Duel.SendtoRest(sg,REASON_COST)
 end
 function s.cttar(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) and s.ctffilter(chkc,e:GetLabel()) end
@@ -97,10 +97,10 @@ function s.ctop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.lvtar(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and chkc:IsMonster() end
-	if chk==0 then return Duel.IsExistingTarget(Card.HasLevel,tp,LOCATION_GRAVE,0,1,nil) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and chkc:IsMonster() end
+	if chk==0 then return Duel.IsExistingTarget(Card.HasLevel,tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	Duel.SelectTarget(tp,Card.HasLevel,tp,LOCATION_GRAVE,0,1,1,nil)
+	Duel.SelectTarget(tp,Card.HasLevel,tp,LOCATION_REST,0,1,1,nil)
 end
 function s.lvop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()

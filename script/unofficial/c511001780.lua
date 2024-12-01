@@ -32,7 +32,7 @@ function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	return true
 end
 function s.mgfilter(c,e,tp,sync)
-	return c:IsControler(tp) and c:IsLocation(LOCATION_HAND+LOCATION_GRAVE+LOCATION_REMOVED)
+	return c:IsControler(tp) and c:IsLocation(LOCATION_HAND+LOCATION_REST+LOCATION_REMOVED)
 		and c:GetReason()&0x80008==0x80008 and c:GetReasonCard()==sync
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
@@ -41,7 +41,7 @@ function s.desrepop(e,tp,eg,ep,ev,re,r,rp)
 	local sumtype=c:GetSummonType()
 	local mg=c:GetMaterial():Filter(aux.NecroValleyFilter(s.mgfilter),nil,e,tp,c)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if ft>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if ft>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	if Duel.SendtoDeck(c,nil,0,REASON_EFFECT+REASON_REPLACE)>0 
 		and sumtype==SUMMON_TYPE_SYNCHRO and #mg>0 
 		and #mg<=ft then

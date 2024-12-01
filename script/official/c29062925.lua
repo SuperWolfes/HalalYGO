@@ -13,7 +13,7 @@ function s.ffilter(c)
 end
 function s.fextra(e,tp,mg)
 	if Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_JACK_KNIGHT,CARD_QUEEN_KNIGHT,CARD_KING_KNIGHT),tp,LOCATION_ONFIELD,0,1,nil) then
-		local sg=Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,LOCATION_DECK,0,nil)
+		local sg=Duel.GetMatchingGroup(Card.IsAbleToRest,tp,LOCATION_DECK,0,nil)
 		if #sg>0 then
 			return sg,s.fcheck
 		end
@@ -25,5 +25,5 @@ function s.fcheck(tp,sg,fc)
 end
 function s.extratg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end 

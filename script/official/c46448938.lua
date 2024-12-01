@@ -64,7 +64,7 @@ function s.sfilter(c)
 	return c:IsSetCard(0x106e) and c:GetCode()~=id and c:IsSpell() and c:IsAbleToHand()
 end
 function s.spfilter(c,lv,e,tp)
-	return c:IsLevelBelow(lv) and c:IsRace(RACE_SPELLCASTER) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsLevelBelow(lv) and c:IsRace(RACE_MENTOR) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.effop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,0,id)

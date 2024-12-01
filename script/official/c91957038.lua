@@ -1,5 +1,5 @@
 --妖精の伝姫
---Fairy Tail Tales
+--Wanderer Tail Tales
 --Logical Nonsense and DyXel
 
 --Substitute ID
@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--Normal summon/set 1 spellcaster monster with 1850 ATK.
+	--Normal summon/set 1 mentor monster with 1850 ATK.
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SUMMON)
@@ -35,9 +35,9 @@ function s.initial_effect(c)
 	e4:SetCondition(function(e)return e:GetHandler():GetFlagEffect(id)==0 end)
 	c:RegisterEffect(e4)
 end
-	--Check for a spellcaster with 1850 ATK with different name to Normal Summon
+	--Check for a mentor with 1850 ATK with different name to Normal Summon
 function s.nsfilter(c,tp)
-	return c:IsAttack(1850) and c:IsRace(RACE_SPELLCASTER) and c:CanSummonOrSet(true,nil) and not c:IsPublic() and
+	return c:IsAttack(1850) and c:IsRace(RACE_MENTOR) and c:CanSummonOrSet(true,nil) and not c:IsPublic() and
 	       not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,c:GetCode()),tp,LOCATION_MZONE,0,1,nil)
 end
 	--Reveal a monster that fits filter's requirements as cost
@@ -63,9 +63,9 @@ function s.nsop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SummonOrSet(tp,tc,true,nil)
 	end
 end
-	--Check for a spellcaster with 1850 ATK
+	--Check for a mentor with 1850 ATK
 function s.damfilter(c)
-	return c:GetBaseAttack()==1850 and c:IsRace(RACE_SPELLCASTER) and c:IsFaceup()
+	return c:GetBaseAttack()==1850 and c:IsRace(RACE_MENTOR) and c:IsFaceup()
 end
 function s.damcon(tp)
 	return Duel.IsExistingMatchingCard(s.damfilter,tp,LOCATION_MZONE,0,1,nil)

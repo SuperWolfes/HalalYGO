@@ -43,7 +43,7 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,#g,0,0)
 end
 function s.ctfilter(c)
-	return c:IsLocation(LOCATION_GRAVE) and c:IsMonster()
+	return c:IsLocation(LOCATION_REST) and c:IsMonster()
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

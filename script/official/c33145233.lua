@@ -1,16 +1,16 @@
 --儀式魔人デモリッシャー
---Djinn Demolisher of Rituals
+--Djinn Demolisher of Lockeds
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Extra ritual material
+	--Extra locked material
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
-	e1:SetCode(EFFECT_EXTRA_RITUAL_MATERIAL)
+	e1:SetCode(EFFECT_EXTRA_LOCKED_MATERIAL)
 	e1:SetCondition(s.con)
 	e1:SetValue(1)
 	c:RegisterEffect(e1)
-	--A ritual monster using this card cannot be targeted by opponent's card effects
+	--A locked monster using this card cannot be targeted by opponent's card effects
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
@@ -23,7 +23,7 @@ function s.con(e)
 	return not Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(),69832741)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return r==REASON_RITUAL
+	return r==REASON_LOCKED
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local rc=eg:GetFirst()

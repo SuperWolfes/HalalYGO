@@ -20,7 +20,7 @@ function s.spcon(e, tp, eg, ep, ev, re, r, rp)
 end
 
 function s.spfilter(c, e, tp, tid)
-	return c:IsRace(RACE_ZOMBIE) and c:IsAttackBelow(1000) and c:IsCanBeSpecialSummoned(e, 0, tp, false, false) and
+	return c:IsRace(RACE_CONTAMINED) and c:IsAttackBelow(1000) and c:IsCanBeSpecialSummoned(e, 0, tp, false, false) and
 		c:IsCanBeEffectTarget(e) and
 		(c:GetReason() & 0x41) == 0x41 and
 		c:GetTurnID() == tid
@@ -32,13 +32,13 @@ end
 
 function s.sptg(e, tp, eg, ep, ev, re, r, rp, chk, chkc)
 	local tid = Duel.GetTurnCount()
-	local g = Duel.GetMatchingGroup(s.spfilter, tp, LOCATION_GRAVE, 0, nil, e, tp, tid)
+	local g = Duel.GetMatchingGroup(s.spfilter, tp, LOCATION_REST, 0, nil, e, tp, tid)
 	if chkc then
-		return c:IsControler(tp) and c:IsLocation(LOCATION_GRAVE) and s.spfilter(c, e, tp, tid)
+		return c:IsControler(tp) and c:IsLocation(LOCATION_REST) and s.spfilter(c, e, tp, tid)
 	end
 	if chk == 0 then
 		return aux.SelectUnselectGroup(g, e, tp, 2, 3, s.rescon, chk) and
-			not Duel.IsPlayerAffectedByEffect(tp, CARD_BLUEEYES_SPIRIT)
+			not Duel.IsPlayerAffectedByEffect(tp, CARD_BLUEEYES_GUARDIAN)
 	end
 	local tg = aux.SelectUnselectGroup(g, e, tp, 2, 3, s.rescon, 1, tp, HINTMSG_SPSUMMON)
 	Duel.SetTargetCard(tg)
@@ -53,7 +53,7 @@ function s.spop(e, tp, eg, ep, ev, re, r, rp)
 	end
 	local g = Duel.GetChainInfo(0, CHAININFO_TARGET_CARDS)
 	local sg = g:Filter(Card.IsRelateToEffect, nil, e)
-	if #sg > 1 and Duel.IsPlayerAffectedByEffect(tp, CARD_BLUEEYES_SPIRIT) then
+	if #sg > 1 and Duel.IsPlayerAffectedByEffect(tp, CARD_BLUEEYES_GUARDIAN) then
 		return
 	end
 	if #sg > ft then

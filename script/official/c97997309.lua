@@ -48,7 +48,7 @@ function s.rfilter(c)
 	return c:IsSetCard(0x106e) and c:IsSpell() and c:IsAbleToRemoveAsCost()
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_SPELLCASTER),tp,LOCATION_MZONE,0,1,nil)
+	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_MENTOR),tp,LOCATION_MZONE,0,1,nil)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	s.check=true
@@ -62,11 +62,11 @@ function s.target1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		if not s.check then return false end
 		s.check=false
-		return Duel.IsExistingMatchingCard(s.rfilter,tp,LOCATION_GRAVE,0,ct,nil) 
+		return Duel.IsExistingMatchingCard(s.rfilter,tp,LOCATION_REST,0,ct,nil) 
 			and Duel.IsExistingMatchingCard(s.filter1,tp,LOCATION_SZONE,LOCATION_SZONE,1,e:GetHandler()) end
 	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.rfilter,tp,LOCATION_GRAVE,0,ct,ct,nil)
+	local g=Duel.SelectMatchingCard(tp,s.rfilter,tp,LOCATION_REST,0,ct,ct,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
 	local g=Duel.GetMatchingGroup(s.filter1,tp,LOCATION_SZONE,LOCATION_SZONE,e:GetHandler())
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,0,0)
@@ -87,11 +87,11 @@ function s.target2(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		if not s.check then return false end
 		s.check=false
-		return Duel.IsExistingMatchingCard(s.rfilter,tp,LOCATION_GRAVE,0,ct,nil) 
+		return Duel.IsExistingMatchingCard(s.rfilter,tp,LOCATION_REST,0,ct,nil) 
 			and Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil) end
 	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.rfilter,tp,LOCATION_GRAVE,0,ct,ct,nil)
+	local g=Duel.SelectMatchingCard(tp,s.rfilter,tp,LOCATION_REST,0,ct,ct,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
 	local g=Duel.GetMatchingGroup(s.filter2,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
 	Duel.SetOperationInfo(0,CATEGORY_POSITION,g,1,0,0)
@@ -115,11 +115,11 @@ function s.target3(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		if not s.check then return false end
 		s.check=false
-		return Duel.IsExistingMatchingCard(s.rfilter,tp,LOCATION_GRAVE,0,ct,nil) 
+		return Duel.IsExistingMatchingCard(s.rfilter,tp,LOCATION_REST,0,ct,nil) 
 			and Duel.IsExistingMatchingCard(Card.IsAbleToRemove,tp,0,LOCATION_ONFIELD,1,nil) end
 	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.rfilter,tp,LOCATION_GRAVE,0,ct,ct,nil)
+	local g=Duel.SelectMatchingCard(tp,s.rfilter,tp,LOCATION_REST,0,ct,ct,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
 	local g=Duel.GetMatchingGroup(Card.IsAbleToRemove,tp,0,LOCATION_ONFIELD,nil)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,1,0,0)

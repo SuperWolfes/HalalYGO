@@ -57,7 +57,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		tc:RegisterEffect(e2)
 		--After damage calculation, send all opponent's monsters to GY
 		local e3=Effect.CreateEffect(tc)
-		e3:SetCategory(CATEGORY_TOGRAVE)
+		e3:SetCategory(CATEGORY_TOREST)
 		e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 		e3:SetCode(EVENT_BATTLED)
 		e3:SetCondition(s.sendcon)
@@ -119,10 +119,10 @@ end
 function s.sendtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(aux.TRUE,tp,0,LOCATION_MZONE,nil)
 	if chk==0 then return #g>0 end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,g,#g,0,0,LOCATION_MZONE)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,g,#g,0,0,LOCATION_MZONE)
 end
 	--After damage calculation, send all opponent's monsters to GY
 function s.sendop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(aux.TRUE,tp,0,LOCATION_MZONE,nil)
-	Duel.SendtoGrave(g,REASON_EFFECT)
+	Duel.SendtoRest(g,REASON_EFFECT)
 end

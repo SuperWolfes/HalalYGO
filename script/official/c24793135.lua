@@ -66,7 +66,7 @@ function s.excop(e,tp,eg,ep,ev,re,r,rp)
 				Duel.ShuffleHand(tp)
 				g:RemoveCard(sg:GetFirst())
 			else
-				Duel.SendtoGrave(sg,REASON_RULE)
+				Duel.SendtoRest(sg,REASON_RULE)
 			end
 		end
 		Duel.Remove(g,POS_FACEDOWN,REASON_EFFECT)

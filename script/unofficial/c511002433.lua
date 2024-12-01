@@ -1,4 +1,4 @@
---Flames of the Archfiend
+--Flames of the Archtainted
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -12,13 +12,13 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_FIEND)
+	return c:IsFaceup() and c:IsRace(RACE_TAINTED)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil)
 end
 function s.filter(c)
-	return c:IsFaceup() and not c:IsRace(RACE_FIEND)
+	return c:IsFaceup() and not c:IsRace(RACE_TAINTED)
 end
 function s.chkfilter(c)
 	return s.filter(c) and c:IsAttackBelow(1000) and c:GetAttack()>0

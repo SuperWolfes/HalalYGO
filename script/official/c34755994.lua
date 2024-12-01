@@ -37,7 +37,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x152}
 function s.matfilter(c,lc,sumtype,tp)
-	return c:IsLevelBelow(4) and c:IsRace(RACE_SPELLCASTER,lc,sumtype,tp)
+	return c:IsLevelBelow(4) and c:IsRace(RACE_MENTOR,lc,sumtype,tp)
 end
 function s.eqfilter(c,e)
 	return c:IsFaceup() and c:IsSetCard(0x152) and c:IsCanBeEffectTarget(e)
@@ -60,7 +60,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if not (c:IsRelateToEffect(e) and c:IsFaceup() and c:IsLocation(LOCATION_MZONE)) then return end
 	local tc=Duel.GetFirstTarget()
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 or tc:IsFacedown() or not tc:IsRelateToEffect(e) then
-		Duel.SendtoGrave(c,REASON_EFFECT)
+		Duel.SendtoRest(c,REASON_EFFECT)
 		return
 	end
 	Duel.Equip(tp,c,tc,true)

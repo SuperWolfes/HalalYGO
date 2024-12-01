@@ -1,5 +1,5 @@
 --魔将分隊 埋組
---Umekumi of the Fiendish Commander Squad
+--Umekumi of the Taintedish Commander Squad
 local s,id=GetID()
 function s.initial_effect(c)
 	local e1=Effect.CreateEffect(c)

@@ -40,5 +40,5 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.extg(e,c)
-	return c:IsRace(RACE_FIEND) and c:GetAttack()==0 and c:GetDefense()==0
+	return c:IsRace(RACE_TAINTED) and c:GetAttack()==0 and c:GetDefense()==0
 end

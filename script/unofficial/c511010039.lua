@@ -38,7 +38,7 @@ function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=c:GetOverlayGroup()
 	if #g>0 then
 		local mg=g:Select(tp,1,1,nil)
-		Duel.SendtoGrave(mg,REASON_COST)
+		Duel.SendtoRest(mg,REASON_COST)
 		Duel.RaiseSingleEvent(c,EVENT_DETACH_MATERIAL,e,0,0,0,0)
 		Duel.Overlay(bc,mg)
 	end

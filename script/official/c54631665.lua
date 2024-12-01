@@ -66,7 +66,7 @@ end
 function s.mtop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	Duel.HintSelection(Group.FromCards(c))
-	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST,0,nil)
 	local sel=1
 	if #g~=0 then
 		sel=Duel.SelectOption(tp,aux.Stringid(id,1),aux.Stringid(id,2))

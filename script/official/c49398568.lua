@@ -15,13 +15,13 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return re:GetActiveType()==TYPE_SPELL and re:IsHasType(EFFECT_TYPE_ACTIVATE) and rp==tp
 end
 function s.cfilter(c)
-	return c:IsDiscardable() and c:IsAbleToGraveAsCost()
+	return c:IsDiscardable() and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local hg=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
 	hg:RemoveCard(e:GetHandler())
 	if chk==0 then return #hg>0 and hg:FilterCount(s.cfilter,nil)==#hg end
-	Duel.SendtoGrave(hg,REASON_COST+REASON_DISCARD)
+	Duel.SendtoRest(hg,REASON_COST+REASON_DISCARD)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local ftg=re:GetTarget()

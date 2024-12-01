@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 s.listed_series={0x48}
-s.roll_dice=true
+s.roll_suffice=true
 s.xyz_number=7
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -31,7 +31,7 @@ function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	c:RemoveOverlayCard(tp,1,1,REASON_COST)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
-	local d1=Duel.TossDice(tp,1)
+	local d1=Duel.TossSuffice(tp,1)
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_SET_ATTACK_FINAL)

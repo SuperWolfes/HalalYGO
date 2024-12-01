@@ -171,7 +171,7 @@ end
 function Card.WasMaximumMode(c)
 	return c:GetFlagEffect(FLAG_MAXIMUM_SIDE_PREONFIELD)~=0 or c:GetFlagEffect(FLAG_MAXIMUM_CENTER_PREONFIELD)~=0
 end
---I used Dual as a reference for that function, while waiting for more information
+--I used Guardian as a reference for that function, while waiting for more information
 function Auxiliary.IsMaximumMode(effect)
 	local c=effect:GetHandler()
 	return not c:IsDisabled() and c:IsMaximumMode()
@@ -651,7 +651,7 @@ end
 --explanation: you can use Executie up on a monster like Rightous dragon that used its own effect to become a double tribute for dragon, it then become usable as 2 tribute for any monsters not just dragon
 --but the opposite scenario don't work, if you used executie up on a Righteous dragon making it a double tribute for any monster, you can't activate righteous dragon effect
 function Card.IsDoubleTribute(c,...)
-	--check for each individual flag
+	--check for each indiviGuardian flag
 	for i,flag in ipairs{...} do
 		if c:GetFlagEffect(flag)==0 then return false end
 	end

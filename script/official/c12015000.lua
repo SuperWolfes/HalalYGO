@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,id)
 	e2:SetCost(aux.bfgcost)
 	e2:SetTarget(s.thtg)
@@ -37,7 +37,7 @@ end
 s.listed_names={CARD_FOSSIL_FUSION}
 
 function s.ffilter(c,fc,sumtype,tp)
-	return c:IsLevelBelow(4) and c:IsLocation(LOCATION_GRAVE) and c:IsControler(1-tp)
+	return c:IsLevelBelow(4) and c:IsLocation(LOCATION_REST) and c:IsControler(1-tp)
 end
 function s.thfilter(c)
 	return c:IsCode(CARD_FOSSIL_FUSION) and c:IsAbleToHand()

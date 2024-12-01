@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--activate
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_DECKDES+CATEGORY_TODECK+CATEGORY_TOGRAVE)
+	e1:SetCategory(CATEGORY_DECKDES+CATEGORY_TODECK+CATEGORY_TOREST)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetHintTiming(0,TIMING_BATTLE_START+TIMING_BATTLE_END)
@@ -23,7 +23,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,0))
 	local ac=Duel.AnnounceNumber(tp,1,2,3,4,5,6)
 	e:SetLabel(ac)
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,1-tp,LOCATION_ONFIELD)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
@@ -32,7 +32,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.SelectMatchingCard(tp,s.filter,tp,0,LOCATION_MZONE,1,1,nil):GetFirst()
 	if tc then
 		local ct=(tc:GetLevel()*dc)+Duel.GetFieldGroupCount(tp,0,LOCATION_ONFIELD)
-		if ct==Duel.GetFieldGroupCount(tp,LOCATION_GRAVE,0) and Duel.IsExistingMatchingCard(Card.IsAbleToDeck,tp,0,LOCATION_ONFIELD,1,nil) then
+		if ct==Duel.GetFieldGroupCount(tp,LOCATION_REST,0) and Duel.IsExistingMatchingCard(Card.IsAbleToDeck,tp,0,LOCATION_ONFIELD,1,nil) then
 			local ac=dc
 			if ac>1 then
 				local tbl={}
@@ -42,7 +42,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 				ac=Duel.AnnounceNumber(tp,table.unpack(tbl))
 			end
 			Duel.DiscardDeck(tp,ac,REASON_EFFECT)
-			gc=Duel.GetOperatedGroup():FilterCount(Card.IsLocation,nil,LOCATION_GRAVE)
+			gc=Duel.GetOperatedGroup():FilterCount(Card.IsLocation,nil,LOCATION_REST)
 			if gc>0 then
 				local g=Duel.SelectMatchingCard(tp,Card.IsAbleToDeck,tp,0,LOCATION_ONFIELD,1,gc,nil)
 				if #g>0 then

@@ -1,5 +1,5 @@
 --インフェルニティ・ヘル・デーモン
---Infernity Hell Archfiend
+--Infernity Hell Archtainted
 local s,id=GetID()
 function s.initial_effect(c)
 	--Synchro Summon procedure

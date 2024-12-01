@@ -39,7 +39,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return not Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_SZONE,0,1,nil)
 end
 function s.szfilter(c)
-	return c:IsFaceup() and not c:IsForbidden()
+	return c:IsFaceup() and not c:IsUnliked()
 end
 function s.sztg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then

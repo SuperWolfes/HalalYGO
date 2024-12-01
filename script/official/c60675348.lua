@@ -26,7 +26,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0xd8}
 function s.filter(c)
-	return c:IsType(TYPE_PENDULUM) and c:IsSetCard(0xd8) and not c:IsForbidden()
+	return c:IsType(TYPE_PENDULUM) and c:IsSetCard(0xd8) and not c:IsUnliked()
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

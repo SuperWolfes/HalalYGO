@@ -25,7 +25,7 @@ function s.filter2(c)
 	return c:IsCode(160203003)
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
 end
 function s.spcon(e)
 	return e:GetHandler():IsMaximumMode()
@@ -45,7 +45,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Group.CreateGroup()
 	tg:AddCard(c)
 	tg=tg:AddMaximumCheck()
-	if Duel.SendtoGrave(tg,REASON_COST)~=0 then
+	if Duel.SendtoRest(tg,REASON_COST)~=0 then
 		if Duel.GetLocationCount(tp,LOCATION_MZONE)<1 then return end
 		local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_HAND,0,nil,e,tp)
 		if #g>=1 then

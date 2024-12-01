@@ -36,11 +36,11 @@ function s.mfilter2(c,g,mg,exg,ct)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	local mg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,nil,e,tp)
+	local mg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_REST,0,nil,e,tp)
 	local ct=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	local exg=Duel.GetMatchingGroup(s.xyzfilter,tp,LOCATION_EXTRA,0,nil,mg,ct)
 	if chk==0 then return Duel.IsPlayerCanSpecialSummonCount(tp,2)
-		and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
+		and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)
 		and ct>1 and mg:IsExists(s.mfilter1,1,nil,mg,exg,ct) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local sg1=mg:FilterSelect(tp,s.mfilter1,1,1,nil,mg,exg,ct)
@@ -63,7 +63,7 @@ function s.spfilter(c,mg,ct)
 	return c:IsXyzSummonable(nil,mg,ct,ct)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
 	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS):Filter(s.filter2,nil,e,tp)
 	local ct=Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	local xyzg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_EXTRA,0,nil,g,ct)

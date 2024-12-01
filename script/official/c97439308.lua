@@ -14,7 +14,7 @@ function s.initial_effect(c)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetFieldGroupCount(tp,LOCATION_REMOVED,0)>=4
-		and Duel.GetFieldGroupCount(tp,LOCATION_GRAVE,0)==0
+		and Duel.GetFieldGroupCount(tp,LOCATION_REST,0)==0
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,2) end

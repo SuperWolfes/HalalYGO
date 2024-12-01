@@ -40,10 +40,10 @@ function s.rmfilter(c)
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local ct=e:GetHandler():GetMaterialCount()
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE+LOCATION_MZONE) and chkc:IsControler(1-tp) and s.rmfilter(chkc) end
-	if chk==0 then return ct>0 and Duel.IsExistingTarget(s.rmfilter,tp,0,LOCATION_GRAVE+LOCATION_MZONE,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_REST+LOCATION_MZONE) and chkc:IsControler(1-tp) and s.rmfilter(chkc) end
+	if chk==0 then return ct>0 and Duel.IsExistingTarget(s.rmfilter,tp,0,LOCATION_REST+LOCATION_MZONE,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectTarget(tp,s.rmfilter,tp,0,LOCATION_GRAVE+LOCATION_MZONE,1,ct,nil)
+	local g=Duel.SelectTarget(tp,s.rmfilter,tp,0,LOCATION_REST+LOCATION_MZONE,1,ct,nil)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,#g,0,0)
 end
 function s.rmop(e,tp,eg,ep,ev,re,r,rp)

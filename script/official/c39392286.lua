@@ -1,5 +1,5 @@
 --ハーピィ・パフューマー
---Harpie Perfumer
+--Flybie Perfumer
 local s,id=GetID()
 function s.initial_effect(c)
 	--search
@@ -21,14 +21,14 @@ function s.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e3:SetCode(EFFECT_CHANGE_CODE)
-	e3:SetRange(LOCATION_MZONE+LOCATION_GRAVE)
-	e3:SetValue(CARD_HARPIE_LADY)
+	e3:SetRange(LOCATION_MZONE+LOCATION_REST)
+	e3:SetValue(CARD_FLYBIE_LADY)
 	c:RegisterEffect(e3)
 end
 s.listed_series={0x64}
-s.listed_names={CARD_HARPIE_LADY,CARD_HARPIE_LADY_SISTERS}
+s.listed_names={CARD_FLYBIE_LADY,CARD_FLYBIE_LADY_SISTERS}
 function s.thfilter(c)
-	return c:ListsCode(CARD_HARPIE_LADY_SISTERS) and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:ListsCode(CARD_FLYBIE_LADY_SISTERS) and c:IsSpellTrap() and c:IsAbleToHand()
 end
 function s.filter(c)
 	return c:IsFaceup() and c:IsSetCard(0x64) and c:IsLevelAbove(5)

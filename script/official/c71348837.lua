@@ -36,14 +36,14 @@ s.listed_names={id}
 s.listed_series={0x71}
 function s.cfilter(c,tp)
 	return c:IsControler(tp) and c:IsPreviousControler(tp) and c:IsReason(REASON_EFFECT) and c:IsPreviousPosition(POS_FACEUP) and c:IsSetCard(0x71)
-		and (c:IsPreviousLocation(LOCATION_GRAVE) or (c:IsPreviousLocation(LOCATION_ONFIELD) and c:IsPreviousSetCard(0x71)))
+		and (c:IsPreviousLocation(LOCATION_REST) or (c:IsPreviousLocation(LOCATION_ONFIELD) and c:IsPreviousSetCard(0x71)))
 		and not c:IsLocation(LOCATION_EXTRA)
 end
 function s.setcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,tp)
 end
 function s.setfilter(c)
-	return c:IsSetCard(0x71) and c:IsSpellTrap() and c:IsSSetable() and not c:IsForbidden() and not c:IsCode(id)
+	return c:IsSetCard(0x71) and c:IsSpellTrap() and c:IsSSetable() and not c:IsUnliked() and not c:IsCode(id)
 end
 function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)

@@ -1,4 +1,4 @@
---Earthbound God Ccarayhua
+--Earthbound Monster Ccarayhua
 local s,id=GetID()
 function s.initial_effect(c)
 	local e0=Effect.CreateEffect(c)
@@ -44,7 +44,7 @@ function s.initial_effect(c)
 	e6:SetDescription(aux.Stringid(id,0))
 	e6:SetCategory(CATEGORY_DESTROY)
 	e6:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	e6:SetCode(EVENT_TO_GRAVE)
+	e6:SetCode(EVENT_TO_REST)
 	e6:SetCondition(s.havefieldcon)
 	e6:SetTarget(s.destg)
 	e6:SetOperation(s.desop)

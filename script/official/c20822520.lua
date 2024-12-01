@@ -32,7 +32,7 @@ function s.cfilter(c)
 	return c:IsSpell() and c:IsSetCard(0x106e)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,5,nil)
+	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,5,nil)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFlagEffect(tp,id+1)==0 end
@@ -74,7 +74,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 				Duel.ConfirmCards(1-p,sg)
 				Duel.ShuffleHand(p)
 			else
-				Duel.SendtoGrave(sg,REASON_EFFECT)
+				Duel.SendtoRest(sg,REASON_EFFECT)
 			end
 		end
 		Duel.ShuffleDeck(p)

@@ -37,8 +37,8 @@ end
 s.listed_names={CARD_DARK_FUSION}
 s.listed_series={0x8,0x46}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_FIEND),tp,LOCATION_MZONE,0,1,nil)
-		and Duel.GetMatchingGroupCount(Card.IsMonster,tp,0,LOCATION_GRAVE,nil)>=e:GetLabel()
+	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_TAINTED),tp,LOCATION_MZONE,0,1,nil)
+		and Duel.GetMatchingGroupCount(Card.IsMonster,tp,0,LOCATION_REST,nil)>=e:GetLabel()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

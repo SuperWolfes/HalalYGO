@@ -53,7 +53,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-		local g=Duel.SelectMatchingCard(tp,Card.IsRace,tp,LOCATION_GRAVE,0,1,1,nil,RACE_DRAGON)
+		local g=Duel.SelectMatchingCard(tp,Card.IsRace,tp,LOCATION_REST,0,1,1,nil,RACE_DRAGON)
 		local tc=g:GetFirst()
 		if tc then
 			Duel.HintSelection(g)
@@ -71,14 +71,14 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	local dam=Duel.GetMatchingGroupCount(Card.IsRace,tp,LOCATION_GRAVE,LOCATION_GRAVE,nil,RACE_DRAGON)*600
+	local dam=Duel.GetMatchingGroupCount(Card.IsRace,tp,LOCATION_REST,LOCATION_REST,nil,RACE_DRAGON)*600
 	Duel.SetTargetParam(dam)
 	Duel.SetTargetPlayer(1-tp)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,dam)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
-	local dam=Duel.GetMatchingGroupCount(Card.IsRace,tp,LOCATION_GRAVE,LOCATION_GRAVE,nil,RACE_DRAGON)*600
+	local dam=Duel.GetMatchingGroupCount(Card.IsRace,tp,LOCATION_REST,LOCATION_REST,nil,RACE_DRAGON)*600
 	Duel.Damage(p,dam,REASON_EFFECT)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)

@@ -30,7 +30,7 @@ end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:CheckRemoveOverlayCard(tp,1,REASON_COST) and Duel.GetLP(tp)>1 end
-	Duel.SendtoGrave(c:GetOverlayGroup(),REASON_COST)
+	Duel.SendtoRest(c:GetOverlayGroup(),REASON_COST)
 	Duel.SetLP(tp,1)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)

@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--1 Level 5 or higher Gemini monster can be Normal Summoned without tribute
+	--1 Level 5 or higher DUAL monster can be Normal Summoned without tribute
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetType(EFFECT_TYPE_FIELD)
@@ -18,14 +18,14 @@ function s.initial_effect(c)
 	e2:SetCondition(s.ntcon)
 	e2:SetTarget(aux.FieldSummonProcTg(s.nttg))
 	c:RegisterEffect(e2)
-	--Can Normal Summon 1 additional Gemini monster
+	--Can Normal Summon 1 additional DUAL monster
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetType(EFFECT_TYPE_FIELD)
 	e3:SetCode(EFFECT_EXTRA_SUMMON_COUNT)
 	e3:SetRange(LOCATION_FZONE)
 	e3:SetTargetRange(LOCATION_HAND|LOCATION_MZONE,0)
-	e3:SetTarget(aux.TargetBoolFunction(Card.IsType,TYPE_GEMINI))
+	e3:SetTarget(aux.TargetBoolFunction(Card.IsType,TYPE_DUAL))
 	c:RegisterEffect(e3)
 	--Destroy 1 opponent card
 	local e4=Effect.CreateEffect(c)
@@ -39,16 +39,16 @@ function s.initial_effect(c)
 	e4:SetOperation(s.desop)
 	c:RegisterEffect(e4)
 end
-s.listed_card_types={TYPE_GEMINI}
+s.listed_card_types={TYPE_DUAL}
 function s.ntcon(e,c,minc)
 	if c==nil then return true end
 	return minc==0 and Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
 end
 function s.nttg(e,c)
-	return c:IsLevelAbove(5) and c:IsType(TYPE_GEMINI)
+	return c:IsLevelAbove(5) and c:IsType(TYPE_DUAL)
 end
 function s.rmfilter(c)
-	return c:IsGeminiStatus() and c:IsAbleToRemove()
+	return c:IsDualStatus() and c:IsAbleToRemove()
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and chkc:IsControler(1-tp) end

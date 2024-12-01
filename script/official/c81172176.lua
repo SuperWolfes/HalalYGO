@@ -1,5 +1,5 @@
 --デビル・コメディアン
---Fiend Comedian
+--Tainted Comedian
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -16,15 +16,15 @@ function s.rmfilter(c)
 	return c:IsAbleToRemove() and aux.SpElimFilter(c)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.rmfilter,tp,0,LOCATION_MZONE+LOCATION_GRAVE,1,nil)
-		and Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>=Duel.GetFieldGroupCount(tp,0,LOCATION_GRAVE) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.rmfilter,tp,0,LOCATION_MZONE+LOCATION_REST,1,nil)
+		and Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>=Duel.GetFieldGroupCount(tp,0,LOCATION_REST) end
 	Duel.SetOperationInfo(0,CATEGORY_COIN,nil,0,tp,1)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_REMOVE,nil,1,1-tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_REMOVE,nil,1,1-tp,LOCATION_REST)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_DECKDES,nil,1,tp,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local coin=Duel.SelectOption(tp,60,61)
 	local res=Duel.TossCoin(tp,1)
-	if coin~=res then Duel.Remove(Duel.GetMatchingGroup(s.rmfilter,tp,0,LOCATION_MZONE+LOCATION_GRAVE,nil),POS_FACEUP,REASON_EFFECT)
-	else Duel.DiscardDeck(tp,Duel.GetFieldGroupCount(tp,0,LOCATION_GRAVE),REASON_EFFECT) end
+	if coin~=res then Duel.Remove(Duel.GetMatchingGroup(s.rmfilter,tp,0,LOCATION_MZONE+LOCATION_REST,nil),POS_FACEUP,REASON_EFFECT)
+	else Duel.DiscardDeck(tp,Duel.GetFieldGroupCount(tp,0,LOCATION_REST),REASON_EFFECT) end
 end

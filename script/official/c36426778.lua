@@ -1,5 +1,5 @@
 --幻影騎士団サイレントブーツ
---The Phantom Knights of Silent Boots
+--The Illusion Knights of Silent Boots
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCost(aux.bfgcost)
 	e2:SetTarget(s.thtg)

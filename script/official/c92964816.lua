@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-	e1:SetCode(EVENT_TO_GRAVE)
+	e1:SetCode(EVENT_TO_REST)
 	e1:SetProperty(EFFECT_FLAG_DELAY)
 	e1:SetCountLimit(1,id)
 	e1:SetCost(aux.bfgcost)
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 end
 s.listed_names={4064256}
 function s.filter(c,e,tp,chk)
-	return c:IsLevelAbove(5) and c:IsRace(RACE_ZOMBIE) and (c:IsAbleToHand() or (chk and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)))
+	return c:IsLevelAbove(5) and c:IsRace(RACE_CONTAMINED) and (c:IsAbleToHand() or (chk and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)))
 end
 function s.fieldcond(c)
 	return c:IsFaceup() and c:IsCode(4064256)
@@ -60,6 +60,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.splimit(e,c,sump,sumtype,sumpos,targetp,se)
-	return not c:IsRace(RACE_ZOMBIE)
+	return not c:IsRace(RACE_CONTAMINED)
 end
 

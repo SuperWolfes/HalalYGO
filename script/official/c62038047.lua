@@ -29,7 +29,7 @@ function s.filter(c)
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsLocation(LOCATION_GRAVE) and c:IsPreviousLocation(LOCATION_ONFIELD) and r==REASON_SYNCHRO
+	return c:IsLocation(LOCATION_REST) and c:IsPreviousLocation(LOCATION_ONFIELD) and r==REASON_SYNCHRO
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end
@@ -55,5 +55,5 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.target(e,c)
-	return c:IsRace(RACE_ZOMBIE)
+	return c:IsRace(RACE_CONTAMINED)
 end

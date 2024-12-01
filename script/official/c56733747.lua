@@ -78,7 +78,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 end
 --Gains 300 ATK for each monster in your GY
 function s.atkval(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsMonster,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil)*300
+	return Duel.GetMatchingGroupCount(Card.IsMonster,e:GetHandlerPlayer(),LOCATION_REST,0,nil)*300
 end
 --Inflict damage
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)

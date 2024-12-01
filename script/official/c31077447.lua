@@ -23,10 +23,10 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not Duel.NegateAttack() then return end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,nil,tp,0,LOCATION_MZONE,1,1,tc)
 	local sc=g:GetFirst()
-	if sc and Duel.SendtoGrave(sc,REASON_EFFECT)~=0 and sc:IsLocation(LOCATION_GRAVE) then
+	if sc and Duel.SendtoRest(sc,REASON_EFFECT)~=0 and sc:IsLocation(LOCATION_REST) then
 		Duel.BreakEffect()
 		local val=math.max(0,sc:GetAttack(),sc:GetDefense())
 		local e1=Effect.CreateEffect(e:GetHandler())

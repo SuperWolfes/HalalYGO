@@ -28,28 +28,28 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.eqrfilter(c,code,e)
-	return c:IsCode(code) and c:IsCanBeEffectTarget(e) and not c:IsForbidden()
+	return c:IsCode(code) and c:IsCanBeEffectTarget(e) and not c:IsUnliked()
 end
 function s.eqfilter(c,e,tp)
-	return c:IsRace(RACE_INSECT) and c:IsCanBeEffectTarget(e) and not c:IsForbidden() and
-		Duel.IsExistingMatchingCard(s.eqrfilter,tp,LOCATION_GRAVE,0,2,c,c:GetCode(),e)
+	return c:IsRace(RACE_INSECT) and c:IsCanBeEffectTarget(e) and not c:IsUnliked() and
+		Duel.IsExistingMatchingCard(s.eqrfilter,tp,LOCATION_REST,0,2,c,c:GetCode(),e)
 end
 function s.rescon(sg,e,tp,mg)
 	return sg:GetClassCount(Card.GetCode)==1
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.eqfilter(chkc,e,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.eqfilter(chkc,e,tp) end
 	if chk==0 then
 		return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and
 		       Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and
 		       e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,false,false) and
-		       Duel.IsExistingMatchingCard(s.eqfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp)
+		       Duel.IsExistingMatchingCard(s.eqfilter,tp,LOCATION_REST,0,1,nil,e,tp)
 	end
 	local ct=math.min(Duel.GetLocationCount(tp,LOCATION_SZONE),3)
-	local g=Duel.GetMatchingGroup(s.eqfilter,tp,LOCATION_GRAVE,0,nil,e,tp)
+	local g=Duel.GetMatchingGroup(s.eqfilter,tp,LOCATION_REST,0,nil,e,tp)
 	local tg=aux.SelectUnselectGroup(g,e,tp,1,ct,s.rescon,1,tp,HINTMSG_EQUIP)
 	Duel.SetTargetCard(tg)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,tg,#tg,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,tg,#tg,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,e:GetHandler(),1,0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
@@ -77,7 +77,7 @@ function s.eqlimit(e,c)
 	return e:GetOwner()==c
 end
 function s.tgfilter(c,tp)
-	return c:GetFlagEffect(id)~=0 and c:IsAbleToGraveAsCost()
+	return c:GetFlagEffect(id)~=0 and c:IsAbleToRestAsCost()
 		and Duel.IsExistingMatchingCard(s.desfilter,tp,0,LOCATION_MZONE,1,nil,c:GetTextAttack())
 end
 function s.desfilter(c,atk)
@@ -87,10 +87,10 @@ function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	local eqg=c:GetEquipGroup()
 	if chk==0 then return eqg:IsExists(s.tgfilter,1,nil,tp) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tc=eqg:FilterSelect(tp,s.tgfilter,1,1,nil,tp):GetFirst()
 	e:SetLabel(tc:GetTextAttack())
-	Duel.SendtoGrave(tc,REASON_COST)
+	Duel.SendtoRest(tc,REASON_COST)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

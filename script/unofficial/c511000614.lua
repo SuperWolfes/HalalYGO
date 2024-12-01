@@ -1,5 +1,5 @@
 --D－HERO Bloo－D (Anime)
---Destiny HERO - Plasma (Anime)
+--Destrudic HERO - Plasma (Anime)
 --fixed by Larry126
 local s,id,alias=GetID()
 function s.initial_effect(c)
@@ -117,7 +117,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsRelateToEffect(e) then
 		if c:IsFaceup() and c:IsRelateToEffect(e) then
 			s.equipop(c,e,tp,tc)
-		else Duel.SendtoGrave(tc,REASON_RULE) end
+		else Duel.SendtoRest(tc,REASON_RULE) end
 	end
 end
 function s.econ(e)

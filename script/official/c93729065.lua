@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	--Venemy Counter
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
-	e1:SetCode(EVENT_TO_GRAVE)
+	e1:SetCode(EVENT_TO_REST)
 	e1:SetRange(LOCATION_PZONE)
 	e1:SetOperation(s.acop)
 	c:RegisterEffect(e1)

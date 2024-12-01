@@ -16,7 +16,7 @@ end
 s.listed_series={0x304e}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsPreviousLocation(LOCATION_ONFIELD) and c:IsLocation(LOCATION_GRAVE)
+	return c:IsPreviousLocation(LOCATION_ONFIELD) and c:IsLocation(LOCATION_REST)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

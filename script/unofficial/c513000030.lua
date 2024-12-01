@@ -53,7 +53,7 @@ end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsFaceup() and c:IsRelateToEffect(e) then
-		local g=Duel.GetMatchingGroup(s.afilter,tp,LOCATION_GRAVE,0,nil)
+		local g=Duel.GetMatchingGroup(s.afilter,tp,LOCATION_REST,0,nil)
 		local atk=0
 		local tg=g:GetFirst()
 		while tg do

@@ -1,5 +1,5 @@
 --幻影騎士団ステンドグリーブ
---The Phantom Knights of Stained Greaves
+--The Illusion Knights of Stained Greaves
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -16,12 +16,12 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg1)
 	e1:SetOperation(s.spop1)
 	c:RegisterEffect(e1)
-	--Special Summon 1 "The Phantom Knights" monster from the hand
+	--Special Summon 1 "The Illusion Knights" monster from the hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCost(aux.bfgcost)
 	e2:SetTarget(s.sptg2)

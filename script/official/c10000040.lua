@@ -1,5 +1,5 @@
 --光の創造神 ホルアクティ
---Holactie the Creator of Light
+--Holactie the Mega of Light
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()
@@ -92,5 +92,5 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 end
 function s.winop(e,tp,eg,ep,ev,re,r,rp)
 	local p=e:GetHandler():GetSummonPlayer()
-	Duel.Win(p,WIN_REASON_CREATORGOD)
+	Duel.Win(p,WIN_REASON_MEGAMONSTER)
 end

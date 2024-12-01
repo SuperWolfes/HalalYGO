@@ -17,15 +17,15 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
 	if chk==0 then
-		return Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil,e,tp)
+		return Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil,e,tp)
 			and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local sg=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+	local sg=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil,e,tp)
 	local oc=nil
-	if Duel.IsExistingTarget(s.filter,1-tp,LOCATION_GRAVE,0,1,nil,e,1-tp)
+	if Duel.IsExistingTarget(s.filter,1-tp,LOCATION_REST,0,1,nil,e,1-tp)
 		and Duel.GetLocationCount(1-tp,LOCATION_MZONE,1-tp)>0 and Duel.SelectYesNo(1-tp,aux.Stringid(102380,0)) then
 		Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_SPSUMMON)
-		local og=Duel.SelectTarget(1-tp,s.filter,1-tp,LOCATION_GRAVE,0,1,1,nil,e,1-tp)
+		local og=Duel.SelectTarget(1-tp,s.filter,1-tp,LOCATION_REST,0,1,1,nil,e,1-tp)
 		oc=og:GetFirst()
 	end
 	local sc=sg:GetFirst()

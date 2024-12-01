@@ -78,7 +78,7 @@ function s.mtcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.mtop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)~=0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
-		Duel.SendtoGrave(Duel.GetFieldGroup(tp,LOCATION_HAND,0),REASON_COST)
+		Duel.SendtoRest(Duel.GetFieldGroup(tp,LOCATION_HAND,0),REASON_COST)
 	else
 		Duel.Destroy(e:GetHandler(),REASON_COST)
 	end

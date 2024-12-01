@@ -1,5 +1,5 @@
 --占い魔女 占い魔女 チーちゃん
---Fortune Fairy Chee
+--Fortune Wanderer Chee
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)

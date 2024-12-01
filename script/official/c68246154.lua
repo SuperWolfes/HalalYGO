@@ -61,7 +61,7 @@ function s.thfilter(c,...)
 	return c:IsSetCard(0x108) and not c:IsCode(...) and c:IsAbleToHand()
 end
 function s.chk(c,tp,e)
-	return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,c,c:GetCode())
+	return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,c,c:GetCode())
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=e:GetLabelObject()
@@ -72,13 +72,13 @@ function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	else
 		e:SetLabel(g:GetFirst():GetCardID())
 	end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetCardFromCardID(e:GetLabel())
 	if not tc then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,e:GetLabelObject(),tc:GetCode())
+	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,1,e:GetLabelObject(),tc:GetCode())
 	if #g>0 then
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)

@@ -1,5 +1,5 @@
 --六花精ボタン
---Mudan the Rikka Fairy
+--Mudan the Rikka Wanderer
 --Scripted by ahtelel
 
 local s,id=GetID()

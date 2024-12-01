@@ -32,7 +32,7 @@ function s.discon(e,tp,eg,ep,ev,re,r,rp)
 	if ex and tg and tg:IsContains(rc) then return true end
 	local ex,tg,tc=Duel.GetOperationInfo(ev,CATEGORY_TODECK)
 	if ex and tg and tg:IsContains(rc) then return true end
-	local ex,tg,tc=Duel.GetOperationInfo(ev,CATEGORY_TOGRAVE)
+	local ex,tg,tc=Duel.GetOperationInfo(ev,CATEGORY_TOREST)
 	return ex and tg and tg:IsContains(rc)
 end
 function s.discost(e,tp,eg,ep,ev,re,r,rp,chk)

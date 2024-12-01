@@ -29,7 +29,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=tg:GetFirst()
 	local hg=Duel.GetFieldGroup(tp,0xe,0xe)
 	if tc then hg:RemoveCard(tc) end
-	Duel.SendtoGrave(hg,REASON_EFFECT)
+	Duel.SendtoRest(hg,REASON_EFFECT)
 	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(1-tp,s.spfilter,1-tp,LOCATION_DECK,0,1,1,nil,e,tp)
 	local sc=g:GetFirst()

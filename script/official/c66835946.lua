@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e2:SetCode(EFFECT_UPDATE_ATTACK)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetTargetRange(LOCATION_MZONE,0)
-	e2:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_ZOMBIE))
+	e2:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_CONTAMINED))
 	e2:SetValue(s.val)
 	c:RegisterEffect(e2)
 	--destroy replace
@@ -32,11 +32,11 @@ end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		local tc=eg:GetFirst()
-		return #eg==1 and tc:IsLocation(LOCATION_MZONE) and tc:IsControler(tp) and tc:IsFaceup() and tc:IsRace(RACE_ZOMBIE) 
+		return #eg==1 and tc:IsLocation(LOCATION_MZONE) and tc:IsControler(tp) and tc:IsFaceup() and tc:IsRace(RACE_CONTAMINED) 
 			and not tc:IsReason(REASON_REPLACE)
 	end
 	return Duel.SelectEffectYesNo(tp,e:GetHandler(),96)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
+	Duel.SendtoRest(e:GetHandler(),REASON_EFFECT)
 end

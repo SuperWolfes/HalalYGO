@@ -1,5 +1,5 @@
 --ディザスター・デーモン
---Annihilator Archfiend
+--Annihilator Archtainted
 --Scripted by Eerie Code
 
 local s,id=GetID()
@@ -28,7 +28,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g1,2,0,0)
 end
 function s.filter(c)
-	return c:IsPreviousPosition(POS_FACEUP) and c:GetPreviousRaceOnField()&RACE_FIEND==RACE_FIEND
+	return c:IsPreviousPosition(POS_FACEUP) and c:GetPreviousRaceOnField()&RACE_TAINTED==RACE_TAINTED
 		and c:IsPreviousLocation(LOCATION_MZONE)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)

@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.target)
 	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
-	--Send to grave/SS
+	--Send to rest/SS
 	local e3=Effect.CreateEffect(c)
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_QUICK_O)
@@ -38,7 +38,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.opfilter,1,nil,1-tp)
 end
 function s.filter(c,e,tp,code,double)
-	return c:IsFaceup() and c:IsType(TYPE_PENDULUM) and c:IsRace(RACE_FIEND) and c:IsCode(code)
+	return c:IsFaceup() and c:IsType(TYPE_PENDULUM) and c:IsRace(RACE_TAINTED) and c:IsCode(code)
 		and (not double or Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,0,1,c,e,tp,code))
 end
 function s.spfilter(c,e,tp,double)
@@ -58,8 +58,8 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGraveAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED) end
-	Duel.SendtoGrave(c,REASON_COST)
+	if chk==0 then return c:IsAbleToRestAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED) end
+	Duel.SendtoRest(c,REASON_COST)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,0,1,nil,e,tp,true) end

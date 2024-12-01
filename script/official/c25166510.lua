@@ -34,7 +34,7 @@ function s.cfilter(c)
 end
 	--Check for 3+ "Salamangreat" monsters in your GY
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,3,nil)
+	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,3,nil)
 end
 	--Activation legality
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -51,15 +51,15 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 	--Check for FIRE link monsters
 function s.filter1(c,tp)
-	return c:IsLocation(LOCATION_GRAVE) and c:IsLinkMonster() and c:IsAttribute(ATTRIBUTE_FIRE) and c:IsAbleToExtra()
+	return c:IsLocation(LOCATION_REST) and c:IsLinkMonster() and c:IsAttribute(ATTRIBUTE_FIRE) and c:IsAbleToExtra()
 end
 	--Activation legality
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local ct=Duel.GetMatchingGroupCount(Card.IsFaceup,tp,0,LOCATION_ONFIELD,nil)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter1(chkc) end
-	if chk==0 then return ct>0 and Duel.IsExistingTarget(s.filter1,tp,LOCATION_GRAVE,0,1,nil,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter1(chkc) end
+	if chk==0 then return ct>0 and Duel.IsExistingTarget(s.filter1,tp,LOCATION_REST,0,1,nil,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectTarget(tp,s.filter1,tp,LOCATION_GRAVE,0,1,ct,nil)
+	local g=Duel.SelectTarget(tp,s.filter1,tp,LOCATION_REST,0,1,ct,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,#g,0,0)
 end
 	--Performing the effect of returning FIRE links, then negating opponent's cards

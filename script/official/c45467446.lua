@@ -1,5 +1,5 @@
 --白き霊龍
---Dragon Spirit of White
+--Dragon Guardian of White
 local s,id=GetID()
 function s.initial_effect(c)
 	--Normal monster
@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e1:SetCode(EFFECT_ADD_TYPE)
-	e1:SetRange(LOCATION_HAND+LOCATION_GRAVE)
+	e1:SetRange(LOCATION_HAND+LOCATION_REST)
 	e1:SetValue(TYPE_NORMAL)
 	c:RegisterEffect(e1)
 	local e2=e1:Clone()

@@ -29,7 +29,7 @@ end
 s.listed_names={27288416}
 function s.cfilter(c,tp)
 	return c:IsPreviousLocation(LOCATION_MZONE) and c:IsPreviousPosition(POS_FACEUP)
-		and c:IsPreviousControler(tp) and c:IsRace(RACE_FAIRY)
+		and c:IsPreviousControler(tp) and c:IsRace(RACE_WANDERER)
 end
 function s.regcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetFlagEffect(id)==0 and eg:IsExists(s.cfilter,1,nil,tp)

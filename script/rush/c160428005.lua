@@ -23,10 +23,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.cfilter(c)
-	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsRace(RACE_SPELLCASTER)
+	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsRace(RACE_MENTOR)
 end
 function s.atkval(e,c)
-	local ct=Duel.GetMatchingGroupCount(s.cfilter,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil)
+	local ct=Duel.GetMatchingGroupCount(s.cfilter,e:GetHandlerPlayer(),LOCATION_REST,0,nil)
 	return ct*300
 end
 function s.efilter(e,c)

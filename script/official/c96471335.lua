@@ -30,14 +30,14 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.ovfilter(c,tp,xyzc)
-	return c:IsFaceup() and c:GetRank()==6 and c:IsRace(RACE_SPELLCASTER,xyzc,SUMMON_TYPE_XYZ,tp)
+	return c:IsFaceup() and c:GetRank()==6 and c:IsRace(RACE_MENTOR,xyzc,SUMMON_TYPE_XYZ,tp)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
 	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
 end
 function s.filter(c,e,tp)
-	return c:IsType(TYPE_NORMAL) and c:IsRace(RACE_SPELLCASTER) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsType(TYPE_NORMAL) and c:IsRace(RACE_MENTOR) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
@@ -54,7 +54,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.rmcon(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetAttacker()
-	return tc:IsType(TYPE_NORMAL) and tc:IsRace(RACE_SPELLCASTER)
+	return tc:IsType(TYPE_NORMAL) and tc:IsRace(RACE_MENTOR)
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and chkc:IsControler(1-tp) and chkc:IsAbleToRemove() end

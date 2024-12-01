@@ -28,14 +28,14 @@ end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local n=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if chk==0 then return n>0 end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then n=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then n=1 end
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,n,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,n,0,0)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local n=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if n<1 then return end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then n=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then n=1 end
 	if not Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0xf,TYPES_TOKEN,0,1000,3,RACE_MACHINE,ATTRIBUTE_LIGHT) then return end
 	local g=Group.CreateGroup()
 	for i=1,n do

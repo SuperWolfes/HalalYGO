@@ -39,19 +39,19 @@ end
 s.listed_names={CARD_ARGYRO_SYSTEM}
 s.listed_series={0x17b}
 function s.eqfilter(c)
-	return c:IsSetCard(0x17b) and c:IsMonster() and not c:IsForbidden()
+	return c:IsSetCard(0x17b) and c:IsMonster() and not c:IsUnliked()
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.eqfilter(chkc) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.eqfilter(chkc) end
 	local c=e:GetHandler()
 	local ft=math.min(Duel.GetLocationCount(tp,LOCATION_SZONE),3)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and ft>0
-		and Duel.IsExistingTarget(s.eqfilter,tp,LOCATION_GRAVE,0,1,nil)
+		and Duel.IsExistingTarget(s.eqfilter,tp,LOCATION_REST,0,1,nil)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-	local g=Duel.SelectTarget(tp,s.eqfilter,tp,LOCATION_GRAVE,0,1,ft,nil)
+	local g=Duel.SelectTarget(tp,s.eqfilter,tp,LOCATION_REST,0,1,ft,nil)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,0,0)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,#g,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,#g,0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

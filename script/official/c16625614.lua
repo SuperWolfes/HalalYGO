@@ -26,7 +26,7 @@ function s.initial_effect(c)
 	e3:SetOperation(s.operation)
 	c:RegisterEffect(e3)
 end
-s.listed_names={CARD_DESTINY_BOARD}
+s.listed_names={CARD_DESTRUDIC_BOARD}
 s.toss_coin=true
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return tp~=Duel.GetTurnPlayer()

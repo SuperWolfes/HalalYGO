@@ -29,7 +29,7 @@ function s.spcon(e,c)
 		and Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_GRAVE)
+	return e:GetHandler():IsLocation(LOCATION_REST)
 end
 function s.filter(c,e,tp)
 	return c:IsSetCard(0x9b) and not c:IsCode(id) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

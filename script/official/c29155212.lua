@@ -1,5 +1,5 @@
 --ゴースト王－パンプキング－
---Pumpking the King of Ghosts
+--Pumpking the King of Misss
 local s,id=GetID()
 function s.initial_effect(c)
 	local e1=Effect.CreateEffect(c)

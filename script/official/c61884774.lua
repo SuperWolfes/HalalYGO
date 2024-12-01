@@ -24,7 +24,7 @@ function s.thfilter(c)
 	return c:IsSetCard(0xb3) and c:IsLevelAbove(5) and c:IsAbleToHand()
 end
 function s.pzfilter(c,cd)
-	return c:IsCode(cd) and not c:IsForbidden()
+	return c:IsCode(cd) and not c:IsUnliked()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local b1=Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil)

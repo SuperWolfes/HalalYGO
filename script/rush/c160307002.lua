@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.atkcostfilter(c)
-	return c:IsFaceup() and c:IsLevelAbove(5) and c:IsRace(RACE_FIEND)
+	return c:IsFaceup() and c:IsLevelAbove(5) and c:IsRace(RACE_TAINTED)
 		and c:IsAttackPos() and c:IsCanChangePositionRush()
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)

@@ -13,5 +13,5 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.tg(e,c)
-	return c~=e:GetHandler() and c:IsFaceup() and c:IsRace(RACE_SPELLCASTER)
+	return c~=e:GetHandler() and c:IsFaceup() and c:IsRace(RACE_MENTOR)
 end
