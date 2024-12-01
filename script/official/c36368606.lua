@@ -58,10 +58,10 @@ function s.spfilter(c,e,tp)
 		and Duel.GetLocationCount(owner,LOCATION_MZONE,tp)>0
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,LOCATION_REST,1,nil,e,tp)
+	return Duel.IsExistingMatchingCard(aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,LOCATION_REST,1,nil,e,tp)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,LOCATION_REST,nil,e,tp)
+	local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,LOCATION_REST,nil,e,tp)
 	if #g==0 then return end
 	local turn_p=Duel.GetTurnPlayer()
 	local step=turn_p==0 and 1 or -1

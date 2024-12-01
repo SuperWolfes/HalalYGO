@@ -16,7 +16,7 @@ end
 s.listed_series={0x159}
 
 function s.fextra(e,tp,mg)
-	return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(aux.NecroValleyFilter(Card.IsFaceup,Card.IsAbleToDeck)),tp,LOCATION_REST+LOCATION_REMOVED,0,nil)
+	return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(aux.RestValleyFilter(Card.IsFaceup,Card.IsAbleToDeck)),tp,LOCATION_REST+LOCATION_REMOVED,0,nil)
 end
 function s.extratg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

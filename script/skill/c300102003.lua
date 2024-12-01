@@ -30,7 +30,7 @@ end
 function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 	--opd check
 	if Duel.GetFlagEffect(ep,id)>0 then return end
-	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.ffilter),tp,LOCATION_DECK+LOCATION_REST,0,nil,tp)
+	local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.ffilter),tp,LOCATION_DECK+LOCATION_REST,0,nil,tp)
 	--condition
 	return aux.CanActivateSkill(tp) 
 	and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,0,1,nil)
@@ -47,7 +47,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,tp,id)
 	--opd register
 	Duel.RegisterFlagEffect(ep,id,0,0,0)
-	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.ffilter),tp,LOCATION_DECK+LOCATION_REST,0,nil,tp)
+	local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.ffilter),tp,LOCATION_DECK+LOCATION_REST,0,nil,tp)
 	if Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_ONFIELD,0,1,nil,3643300)and #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
 		local tc=g:Select(tp,1,1,nil):GetFirst()

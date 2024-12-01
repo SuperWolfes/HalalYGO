@@ -44,7 +44,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if d1+d2~=7 then return end
 	--If the total roll is exactly 7, apply 1 effect
 	local b1=Duel.IsExistingMatchingCard(Card.IsAbleToRest,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,c)
-	local b2=Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_HAND+LOCATION_REST,LOCATION_REST,1,nil,e,tp)
+	local b2=Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(aux.RestValleyFilter(s.spfilter),tp,LOCATION_HAND+LOCATION_REST,LOCATION_REST,1,nil,e,tp)
 	local b3=Duel.IsPlayerCanDraw(tp,3)
 	if not (b1 or b2 or b3) then return end
 	local op=Duel.SelectEffect(tp,
@@ -60,7 +60,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	elseif op==2 then
 		--Special Summon 1 monster from your hand or either GY
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local sg=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_HAND+LOCATION_REST,LOCATION_REST,1,1,nil,e,tp)
+		local sg=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,LOCATION_HAND+LOCATION_REST,LOCATION_REST,1,1,nil,e,tp)
 		if #sg==0 then return end
 		Duel.BreakEffect()
 		Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)

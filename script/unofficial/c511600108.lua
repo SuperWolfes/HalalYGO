@@ -34,7 +34,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local b=e:GetHandler():IsLocation(LOCATION_HAND)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_OPPO)
-	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,0,LOCATION_REST,1,1,nil,e,tp,eg,ep,ev,re,r,rp,b):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.filter),tp,0,LOCATION_REST,1,1,nil,e,tp,eg,ep,ev,re,r,rp,b):GetFirst()
 	if not tc then return end
 	local tpe=tc:GetType()
 	local te=tc:GetActivateEffect()
@@ -94,7 +94,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.rtcon(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetLabelObject()
-	return not (tc:IsControler(1-tp) and tc:IsLocation(LOCATION_REST)) and not tc:IsHasEffect(EFFECT_NECRO_VALLEY)
+	return not (tc:IsControler(1-tp) and tc:IsLocation(LOCATION_REST)) and not tc:IsHasEffect(EFFECT_REST_VALLEY)
 end
 function s.rtop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetLabelObject()

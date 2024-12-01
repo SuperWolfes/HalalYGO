@@ -48,7 +48,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.BreakEffect()
 		Duel.SkipPhase(Duel.GetTurnPlayer(),PHASE_BATTLE,RESET_PHASE+PHASE_BATTLE,1)
 		if tc:IsSummonType(SUMMON_TYPE_FUSION) and ct>0 and ct<=Duel.GetLocationCount(p,LOCATION_MZONE)
-			and mg:FilterCount(aux.NecroValleyFilter(s.mgfilter),nil,e,p,tc,mg)==ct
+			and mg:FilterCount(aux.RestValleyFilter(s.mgfilter),nil,e,p,tc,mg)==ct
 			and (ct<=1 or not Duel.IsPlayerAffectedByEffect(p,CARD_BLUEEYES_GUARDIAN)) then
 			Duel.SpecialSummon(mg,0,tp,p,false,false,POS_FACEUP)
 		end

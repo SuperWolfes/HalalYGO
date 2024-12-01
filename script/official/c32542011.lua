@@ -46,12 +46,12 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--WATER: Special Summon from the GY
 	if Duel.IsExistingMatchingCard(s.cfilter2,tp,LOCATION_MZONE,0,1,nil,ATTRIBUTE_WATER) then
 		local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-		local ct=Duel.GetMatchingGroupCount(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,Duel.GetTurnCount(),e,tp)
+		local ct=Duel.GetMatchingGroupCount(aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,Duel.GetTurnCount(),e,tp)
 		ft=math.min(ft,ct)
 		if ft>0 then
 			if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-			local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,0,ft,ft,nil,Duel.GetTurnCount(),e,tp)
+			local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,0,ft,ft,nil,Duel.GetTurnCount(),e,tp)
 			if #g>0 and Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)>0 then
 				break_chk=true
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)

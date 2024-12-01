@@ -128,7 +128,7 @@ function s.zarctg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,4,tp,ZARC_LOC)
 end
 function s.zarcop(e,tp,eg,ep,ev,re,r,rp)
-	local rg=Duel.GetMatchingGroup(aux.NecroValleyFilter(Card.IsAbleToRemove),tp,ZARC_LOC,0,nil):Filter(Card.IsCode,nil,41209827,82044279,16195942,16178681)
+	local rg=Duel.GetMatchingGroup(aux.RestValleyFilter(Card.IsAbleToRemove),tp,ZARC_LOC,0,nil):Filter(Card.IsCode,nil,41209827,82044279,16195942,16178681)
 	local g=aux.SelectUnselectGroup(rg,e,tp,4,4,s.rescon,1,tp,HINTMSG_REMOVE,nil,nil,true)
 	if Duel.Remove(g,POS_FACEUP,REASON_EFFECT)>3 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)

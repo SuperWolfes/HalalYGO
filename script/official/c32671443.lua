@@ -47,7 +47,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,LOCATION_REST,0,1,1,nil,e,tp,ft):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.filter),tp,LOCATION_REST,0,1,1,nil,e,tp,ft):GetFirst()
 	if tc then
 		aux.ToHandOrElse(tc,tp,function(c)
 			return tc:IsCanBeSpecialSummoned(e,0,tp,false,false) and ft>0 end,

@@ -71,7 +71,7 @@ function s.cosop(e,tp,eg,ep,ev,re,r,rp)
 		tc:RegisterEffect(e1)
 		if tc:GetAttribute()==prevattr then return end
 		local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-		local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.filter),tp,LOCATION_REST,0,nil,e,tp,ft)
+		local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.filter),tp,LOCATION_REST,0,nil,e,tp,ft)
 		if #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 			Duel.BreakEffect()
 			local sg=g:Select(tp,1,1,nil)

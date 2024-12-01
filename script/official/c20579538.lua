@@ -44,7 +44,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetDecktopGroup(tp,1)
 	Duel.DisableShuffleCheck()
 	if Duel.SendtoRest(g,REASON_EFFECT+REASON_REVEAL)==0 then return end
-	local dg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.tdfilter),tp,LOCATION_REST,0,nil)
+	local dg=Duel.GetMatchingGroup(aux.RestValleyFilter(s.tdfilter),tp,LOCATION_REST,0,nil)
 	if #dg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 		Duel.BreakEffect()
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)

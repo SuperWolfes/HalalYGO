@@ -44,7 +44,7 @@ end
 function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsFacedown() or not c:IsRelateToEffect(e) then return end
-	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.eqsfilter),tp,LOCATION_DECK+LOCATION_REST,0,nil,tp,c)
+	local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.eqsfilter),tp,LOCATION_DECK+LOCATION_REST,0,nil,tp,c)
 	if #g==0 then return end
 	local ft=math.min(Duel.GetLocationCount(tp,LOCATION_SZONE),3)
 	local sg=aux.SelectUnselectGroup(g,e,tp,1,ft,aux.dncheck,1,tp,HINTMSG_EQUIP)

@@ -166,7 +166,7 @@ function s.acop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)
 	if Duel.Destroy(g,REASON_EFFECT)>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EFFECT)
-		local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.acfilter),tp,0x13,0,1,1,nil,tp):GetFirst()
+		local tc=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.acfilter),tp,0x13,0,1,1,nil,tp):GetFirst()
 		if tc then
 			local tpe=tc:GetType()
 			local te=tc:GetActivateEffect()

@@ -35,7 +35,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local mg=tc:GetMaterial()
 	local ct=#mg
 	if Duel.SendtoRest(tc,REASON_EFFECT)>0 and ct>0 and (ct==1 or not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)) and ct<=Duel.GetLocationCount(tp,LOCATION_MZONE)
-		and mg:FilterCount(aux.NecroValleyFilter(s.mgfilter),nil,e,tp,tc)==ct then
+		and mg:FilterCount(aux.RestValleyFilter(s.mgfilter),nil,e,tp,tc)==ct then
 		Duel.BreakEffect()
 		Duel.SpecialSummon(mg,0,tp,tp,false,false,POS_FACEUP)
 	end

@@ -73,10 +73,10 @@ function s.ctop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.RegisterEffect(e3,tp)
 	-- Special Summon from the GY
 	elseif ct==2 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.spgyfilter),tp,LOCATION_REST,0,1,nil,e,tp)
+		and Duel.IsExistingMatchingCard(aux.RestValleyFilter(s.spgyfilter),tp,LOCATION_REST,0,1,nil,e,tp)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spgyfilter),tp,LOCATION_REST,0,1,1,nil,e,tp)
+		local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spgyfilter),tp,LOCATION_REST,0,1,1,nil,e,tp)
 		if #g==0 then return end
 		Duel.BreakEffect()
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)

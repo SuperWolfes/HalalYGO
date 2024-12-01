@@ -47,7 +47,7 @@ function s.spop1(e,tp,eg,ep,ev,re,r,rp)
 	local zone=c:GetLinkedZone(tp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE,tp,LOCATION_REASON_TOFIELD,zone)
 	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
-	local sg=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,0,ft,ft,nil,e,tp,zone)
+	local sg=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,0,ft,ft,nil,e,tp,zone)
 	for sc in aux.Next(sg) do
 		if Duel.SpecialSummonStep(sc,0,tp,tp,false,false,POS_FACEUP,zone)~=0 then
 			local e1=Effect.CreateEffect(c)
@@ -74,7 +74,7 @@ function s.sptg2(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.spop2(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,LOCATION_REST,0,1,1,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.filter),tp,LOCATION_REST,0,1,1,nil,e,tp)
 	if #g>0 then 
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end

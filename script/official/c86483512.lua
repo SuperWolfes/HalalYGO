@@ -56,7 +56,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			local ogc=Duel.GetOperatedGroup():GetFirst()
 			if ogc:IsLocation(LOCATION_REST) and c:IsRelateToEffect(e) and Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)>0 then
 				--Special Summon from GY
-				local gss=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.ssummonfilter),tp,LOCATION_REST,0,nil,g:GetFirst():GetCode(),e,tp)
+				local gss=Duel.GetMatchingGroup(aux.RestValleyFilter(s.ssummonfilter),tp,LOCATION_REST,0,nil,g:GetFirst():GetCode(),e,tp)
 				if #gss>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 					Duel.BreakEffect()
 					Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)

@@ -55,7 +55,7 @@ function s.ghtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.ghop(e,tp,eg,ep,ev,re,r,rp)
 	local gg=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_DECK,0,nil)
-	local hg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.thfilter),tp,LOCATION_DECK+LOCATION_REST,0,nil)
+	local hg=Duel.GetMatchingGroup(aux.RestValleyFilter(s.thfilter),tp,LOCATION_DECK+LOCATION_REST,0,nil)
 	if (#hg>0 and s.sanct()) and (#gg<1 or Duel.SelectYesNo(tp,aux.Stringid(id,2))) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 		local g=hg:Select(tp,1,1,nil)

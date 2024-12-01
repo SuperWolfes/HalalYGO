@@ -32,7 +32,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not tc:IsRelateToEffect(e) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.rmfilter),tp,LOCATION_REST,0,1,1,nil,tc:GetLink())
+	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.rmfilter),tp,LOCATION_REST,0,1,1,nil,tc:GetLink())
 	if Duel.Remove(g,0,REASON_EFFECT)~=0 then
 		Duel.Destroy(tc,REASON_EFFECT)
 		if (g:GetFirst():GetOriginalRace()&RACE_CYBERSE)>0 then

@@ -43,22 +43,22 @@ function s.initial_effect(c)
 	c:RegisterEffect(e5)
 end
 s.listed_series={0x2e,0x91}
-s.listed_names={CARD_NECROVALLEY}
+s.listed_names={CARD_RESTVALLEY}
 
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,0x2e),e:GetHandlerPlayer(),LOCATION_MZONE,LOCATION_MZONE,1,nil) and Duel.IsEnvironment(CARD_NECROVALLEY)
+	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,0x2e),e:GetHandlerPlayer(),LOCATION_MZONE,LOCATION_MZONE,1,nil) and Duel.IsEnvironment(CARD_RESTVALLEY)
 end
 function s.accon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsMainPhase() and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND+LOCATION_REST,0,1,nil,tp)
 		and not Duel.IsExistingMatchingCard(aux.TRUE,tp,LOCATION_FZONE,0,1,nil)
 end
 function s.filter(c,tp)
-	return c:IsCode(CARD_NECROVALLEY) and c:GetActivateEffect() and c:GetActivateEffect():IsActivatable(tp,true,true)
+	return c:IsCode(CARD_RESTVALLEY) and c:GetActivateEffect() and c:GetActivateEffect():IsActivatable(tp,true,true)
 end
 function s.acop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
-	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,LOCATION_HAND+LOCATION_REST,0,1,1,nil,tp):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.filter),tp,LOCATION_HAND+LOCATION_REST,0,1,1,nil,tp):GetFirst()
 	Duel.ActivateFieldActional(tc,e,tp,eg,ep,ev,re,r,rp)
 end
 function s.setcon(e,tp,eg,ep,ev,re,r,rp)

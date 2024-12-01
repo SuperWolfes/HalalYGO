@@ -39,7 +39,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			e1:SetValue(atk)
 			sc:RegisterEffect(e1)
 		end
-		if tc:IsAbleToDeck() and not tc:IsHasEffect(EFFECT_NECRO_VALLEY)
+		if tc:IsAbleToDeck() and not tc:IsHasEffect(EFFECT_REST_VALLEY)
 			and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 			Duel.BreakEffect()
 			Duel.SendtoDeck(tc,nil,2,REASON_EFFECT)

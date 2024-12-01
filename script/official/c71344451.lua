@@ -50,7 +50,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	else
 		Duel.ShuffleHand(tp)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-		local dg=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(Card.IsAbleToDeck),tp,LOCATION_REST,0,rest_ct,rest_ct,nil)
+		local dg=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(Card.IsAbleToDeck),tp,LOCATION_REST,0,rest_ct,rest_ct,nil)
 		if #dg>0 then
 			Duel.HintSelection(dg,true)
 			Duel.SendtoDeck(dg,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)

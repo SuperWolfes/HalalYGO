@@ -43,7 +43,7 @@ function s.spfilter(c,e,tp)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.NegateAttack() or Duel.GetLocationCount(tp,LOCATION_MZONE)==0 then return end
-	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,e,tp)
+	local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,e,tp)
 	if #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local sg=g:Select(tp,1,1,nil)

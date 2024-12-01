@@ -38,7 +38,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if #g>0 then
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)
-		local tg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.filter3),tp,LOCATION_REST,0,nil)
+		local tg=Duel.GetMatchingGroup(aux.RestValleyFilter(s.filter3),tp,LOCATION_REST,0,nil)
 		if #tg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 			Duel.BreakEffect()
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)

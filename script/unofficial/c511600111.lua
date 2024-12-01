@@ -31,10 +31,10 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	if tc and Duel.Destroy(tc,REASON_EFFECT)>0 and Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,0,1,nil,e,tp,tc:GetPreviousAttackOnField()) then
+	if tc and Duel.Destroy(tc,REASON_EFFECT)>0 and Duel.IsExistingMatchingCard(aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,0,1,nil,e,tp,tc:GetPreviousAttackOnField()) then
 		Duel.BreakEffect()
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local sc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,0,1,1,nil,e,tp,tc:GetPreviousAttackOnField()):GetFirst()
+		local sc=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,0,1,1,nil,e,tp,tc:GetPreviousAttackOnField()):GetFirst()
 		if sc and Duel.SpecialSummonStep(sc,0,tp,tp,false,false,POS_FACEUP_ATTACK) then
 			local c=e:GetHandler()
 			local e1=Effect.CreateEffect(c)

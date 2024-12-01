@@ -61,7 +61,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local tid=Duel.GetTurnCount()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local c=e:GetHandler()
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,LOCATION_REST,1,1,nil,e,tp,tid)
+	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,LOCATION_REST,1,1,nil,e,tp,tid)
 	local tc=g:GetFirst()
 	if tc then
 		Duel.HintSelection(g)

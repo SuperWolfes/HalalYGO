@@ -80,7 +80,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local tc1=Duel.GetFirstTarget()
 	if tc1:IsFaceup() and tc1:IsRelateToEffect(e) and Duel.ChangePosition(tc1,POS_FACEDOWN_DEFENSE)>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_HAND+LOCATION_REST,0,1,1,nil,e,tp)
+		local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,LOCATION_HAND+LOCATION_REST,0,1,1,nil,e,tp)
 		local tc=g:GetFirst()
 		if not tc then return end
 		if Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_DEFENSE)~=0 then

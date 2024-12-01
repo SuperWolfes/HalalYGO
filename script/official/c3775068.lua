@@ -121,7 +121,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		g=g:Select(tp,ft,ft,nil)
 	end
 	if Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)~=0 then
-		local sg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.thfilter),tp,LOCATION_DECK+LOCATION_REST,0,nil)
+		local sg=Duel.GetMatchingGroup(aux.RestValleyFilter(s.thfilter),tp,LOCATION_DECK+LOCATION_REST,0,nil)
 		if #sg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 			sg=sg:Select(tp,1,1,nil)

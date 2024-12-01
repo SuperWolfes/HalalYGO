@@ -28,7 +28,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()
-	local mg=tc:GetMaterial():Filter(aux.NecroValleyFilter(s.mgfilter),nil,e,tp,tc)
+	local mg=tc:GetMaterial():Filter(aux.RestValleyFilter(s.mgfilter),nil,e,tp,tc)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=#mg-1 then return end
 	Duel.SpecialSummon(mg,0,tp,tp,false,false,POS_FACEUP)
 end

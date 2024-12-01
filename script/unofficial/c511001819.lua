@@ -39,7 +39,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local mg=Duel.GetLockedMaterial(tp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local tg=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,0x32,0,1,1,nil,e,tp,mg)
+	local tg=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.filter),tp,0x32,0,1,1,nil,e,tp,mg)
 	if #tg>0 then
 		local tc=tg:GetFirst()
 		local mg2=Duel.GetMatchingGroup(s.filter2,tp,LOCATION_DECK,0,nil,tc)

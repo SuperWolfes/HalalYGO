@@ -13,10 +13,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 s.listed_series={0x2e}
-s.listed_names={CARD_NECROVALLEY}
+s.listed_names={CARD_RESTVALLEY}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,0x2e),tp,LOCATION_MZONE,LOCATION_MZONE,1,nil)
-		or not Duel.IsEnvironment(CARD_NECROVALLEY) then return false end
+		or not Duel.IsEnvironment(CARD_RESTVALLEY) then return false end
 	if not Duel.IsChainNegatable(ev) then return false end
 	return re:IsActiveType(TYPE_MONSTER) or re:IsHasType(EFFECT_TYPE_ACTIVATE)
 end

@@ -44,7 +44,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local rg=Duel.GetMatchingGroup(Card.IsSetCard,tp,LOCATION_REST,0,nil,0x40)
 	if chk==0 then
 		local c=e:GetHandler()
-		local eff={c:GetCardEffect(EFFECT_NECRO_VALLEY)}
+		local eff={c:GetCardEffect(EFFECT_REST_VALLEY)}
 		for _,te in ipairs(eff) do
 			local op=te:GetOperation()
 			if not op or op(e,c) then return false end
@@ -76,9 +76,9 @@ function s.retfilter(c)
 end
 function s.retcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,13893596),tp,LOCATION_MZONE,0,1,nil)
-		and eg:IsExists(aux.NecroValleyFilter(s.retfilter),1,nil)
+		and eg:IsExists(aux.RestValleyFilter(s.retfilter),1,nil)
 end
 function s.retop(e,tp,eg,ep,ev,re,r,rp)
-	local g=eg:Filter(aux.NecroValleyFilter(s.retfilter),nil)
+	local g=eg:Filter(aux.RestValleyFilter(s.retfilter),nil)
 	Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
 end

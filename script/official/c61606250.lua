@@ -60,7 +60,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not tc:IsRelateToEffect(e) or tc:IsFacedown() then return end
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SELECT)
-	local sc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.opfilter),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil,tc:GetCode(),ft,e,tp):GetFirst()
+	local sc=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.opfilter),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil,tc:GetCode(),ft,e,tp):GetFirst()
 	if not sc then return end
 	aux.ToHandOrElse(sc,tp,
 		function(c)

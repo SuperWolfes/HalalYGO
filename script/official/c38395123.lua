@@ -54,8 +54,8 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local sc=e:GetLabelObject()
-	local g1=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.filter1),tp,LOCATION_DECK+LOCATION_REST,0,sc,sc:GetCode())
-	local g2=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.filter2),tp,LOCATION_DECK+LOCATION_REST,0,sc)
+	local g1=Duel.GetMatchingGroup(aux.RestValleyFilter(s.filter1),tp,LOCATION_DECK+LOCATION_REST,0,sc,sc:GetCode())
+	local g2=Duel.GetMatchingGroup(aux.RestValleyFilter(s.filter2),tp,LOCATION_DECK+LOCATION_REST,0,sc)
 	if #g1==0 or #g2==0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 	local g=g1:Select(tp,1,1,nil)

@@ -90,7 +90,7 @@ end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local sc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thfilter),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil,ft,e,tp):GetFirst()
+	local sc=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.thfilter),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil,ft,e,tp):GetFirst()
 	if not sc then return end
 	aux.ToHandOrElse(sc,tp,
 		function(sc)

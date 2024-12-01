@@ -57,10 +57,10 @@ function s.filter2(c,e,tp)
 	return c:IsSetCard(0x107) and c:IsType(TYPE_FIELD) and c:CheckActivateEffect(false,false,false)~=nil
 end
 function s.target2(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.filter2),tp,LOCATION_HAND+LOCATION_REST,0,1,nil,tp) end
+	if chk==0 then return Duel.IsExistingMatchingCard(aux.RestValleyFilter(s.filter2),tp,LOCATION_HAND+LOCATION_REST,0,1,nil,tp) end
 end
 function s.activate2(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
-	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter2),tp,LOCATION_HAND+LOCATION_REST,0,1,1,nil,tp):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.filter2),tp,LOCATION_HAND+LOCATION_REST,0,1,1,nil,tp):GetFirst()
 	Duel.ActivateFieldActional(tc,e,tp,eg,ep,ev,re,r,rp)
 end

@@ -34,7 +34,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 s.listed_series={0x2e,0x91}
-s.listed_names={CARD_NECROVALLEY}
+s.listed_names={CARD_RESTVALLEY}
 s.material_setcode=0x2e
 function s.matcheck(e,c)
 	local lv=c:GetMaterial():GetSum(Card.GetOriginalLevel)
@@ -53,7 +53,7 @@ function s.matcheck(e,c)
 	c:RegisterEffect(e2)
 end
 function s.indcon(e)
-	return Duel.IsEnvironment(CARD_NECROVALLEY)
+	return Duel.IsEnvironment(CARD_RESTVALLEY)
 end
 function s.indtg(e,c)
 	return c==e:GetHandler() or c:IsLocation(LOCATION_FZONE)

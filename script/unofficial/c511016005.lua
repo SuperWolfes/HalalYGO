@@ -72,7 +72,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.SpecialSummon(tc,SUMMON_TYPE_FUSION,tp,tp,false,false,POS_FACEUP) then
 		tc:CompleteProcedure()
 		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
-		local spg=g:Filter(aux.NecroValleyFilter(s.mspfilter),nil,e,tp)
+		local spg=g:Filter(aux.RestValleyFilter(s.mspfilter),nil,e,tp)
 		if #spg>1 then
 			Duel.BreakEffect()
 			local fid=e:GetHandler():GetFieldID()

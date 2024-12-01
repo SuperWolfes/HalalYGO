@@ -53,7 +53,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		if preatk~=tc:GetAttack() or predef~=tc:GetDefense() then ct=ct+1 end
 	end
 	if ct==0 then return end
-	local dg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.tdfilter2),tp,LOCATION_REST,0,nil)
+	local dg=Duel.GetMatchingGroup(aux.RestValleyFilter(s.tdfilter2),tp,LOCATION_REST,0,nil)
 	if #dg~=0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		Duel.BreakEffect()
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)

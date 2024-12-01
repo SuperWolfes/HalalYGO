@@ -31,7 +31,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local lp=Duel.GetLP(1-tp)-Duel.GetLP(tp)
 	if lp<=0 then return end
-	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil,e,tp,Duel.GetLocationCount(tp,LOCATION_MZONE),lp):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.filter),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil,e,tp,Duel.GetLocationCount(tp,LOCATION_MZONE),lp):GetFirst()
 	if tc then
 		aux.ToHandOrElse(tc,tp,
 			function() return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and tc:IsCanBeSpecialSummoned(e,0,tp,false,false) end,

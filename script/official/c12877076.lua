@@ -78,7 +78,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if b2 and (opt==2 or opt==3) then
 		--Special Summon 1 "Crystal Beast" Monster Card
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_HAND_DECK_REST_SZONE,0,1,1,nil,e,tp)
+		local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,LOCATION_HAND_DECK_REST_SZONE,0,1,1,nil,e,tp)
 		if #g>0 then
 			Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 		end

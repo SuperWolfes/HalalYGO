@@ -39,7 +39,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
 		local sg=Duel.GetMatchingGroup(s.sfilter,tp,LOCATION_REST,0,nil)
 		if ft>0 and #sg>0 then
-			local tg=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.sfilter),tp,LOCATION_REST,0,1,1,nil)
+			local tg=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.sfilter),tp,LOCATION_REST,0,1,1,nil)
 			Duel.HintSelection(tg)
 			Duel.SSet(tp,tg)
 		end

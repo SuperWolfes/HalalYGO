@@ -97,7 +97,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if #g>0 then
 		local count=Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 		if count~=0 then
-			local sg=Duel.GetMatchingGroup(aux.NecroValleyFilter(Card.IsAttribute),tp,LOCATION_REST,0,nil,ATTRIBUTE_WATER)
+			local sg=Duel.GetMatchingGroup(aux.RestValleyFilter(Card.IsAttribute),tp,LOCATION_REST,0,nil,ATTRIBUTE_WATER)
 			if #sg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 				Duel.BreakEffect()
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)

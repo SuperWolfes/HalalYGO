@@ -51,10 +51,10 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	if Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)>0 then
 		sg:AddCard(c)
 		if Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-			and Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,LOCATION_REST,1,nil,e,tp)
+			and Duel.IsExistingMatchingCard(aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,LOCATION_REST,1,nil,e,tp)
 			and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-			local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,LOCATION_REST,1,1,nil,e,tp)
+			local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,LOCATION_REST,1,1,nil,e,tp)
 			if #g>0 then
 				Duel.BreakEffect()
 				if Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)>0 then

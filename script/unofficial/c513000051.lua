@@ -159,7 +159,7 @@ function s.sephcost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.filter(c,e,tp)
 	return c:IsCode(8967776) and c:IsCanBeSpecialSummoned(e,0,tp,true,false) 
-		and not c:IsHasEffect(EFFECT_NECRO_VALLEY)
+		and not c:IsHasEffect(EFFECT_REST_VALLEY)
 end
 function s.sephtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 

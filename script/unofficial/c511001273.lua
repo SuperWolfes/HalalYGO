@@ -134,7 +134,7 @@ function s.numsptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chkc then return false end
 	if chk==0 then return true end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,aux.NecroValleyFilter(s.numspfilter),tp,LOCATION_REST,0,1,1,nil,e,tp)
+	local g=Duel.SelectTarget(tp,aux.RestValleyFilter(s.numspfilter),tp,LOCATION_REST,0,1,1,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 end
 function s.numspop(e,tp,eg,ep,ev,re,r,rp)

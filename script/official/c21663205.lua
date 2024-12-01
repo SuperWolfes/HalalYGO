@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	--immune to necro valley
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_SINGLE)
-	e4:SetCode(EFFECT_NECRO_VALLEY_IM)
+	e4:SetCode(EFFECT_REST_VALLEY_IM)
 	c:RegisterEffect(e4)
 end
 s.listed_series={0x2e}

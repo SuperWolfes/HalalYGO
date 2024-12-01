@@ -70,10 +70,10 @@ end
 function s.spselect(p,e,ct)
 	if ct<1 then return end
 	local ft=math.min(ct,Duel.GetLocationCount(p,LOCATION_MZONE))
-	if ft>0 and Duel.IsExistingMatchingCard(aux.NecroValleyFilter(Card.IsCanBeSpecialSummoned),p,0,LOCATION_REST,1,nil,e,0,p,false,false)
+	if ft>0 and Duel.IsExistingMatchingCard(aux.RestValleyFilter(Card.IsCanBeSpecialSummoned),p,0,LOCATION_REST,1,nil,e,0,p,false,false)
 		and Duel.SelectYesNo(p,aux.Stringid(id,1)) then
 		if Duel.IsPlayerAffectedByEffect(p,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 		Duel.Hint(HINT_SELECTMSG,p,HINTMSG_SPSUMMON)
-		return Duel.SelectMatchingCard(p,aux.NecroValleyFilter(Card.IsCanBeSpecialSummoned),p,0,LOCATION_REST,1,ct,nil,e,0,p,false,false)
+		return Duel.SelectMatchingCard(p,aux.RestValleyFilter(Card.IsCanBeSpecialSummoned),p,0,LOCATION_REST,1,ct,nil,e,0,p,false,false)
 	end
 end

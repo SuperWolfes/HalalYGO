@@ -35,7 +35,7 @@ function s.spfilter(c)
 end
 function s.spcon(e,c)
 	if c==nil then return true end
-	local eff={c:GetCardEffect(EFFECT_NECRO_VALLEY)}
+	local eff={c:GetCardEffect(EFFECT_REST_VALLEY)}
 	for _,te in ipairs(eff) do
 		local op=te:GetOperation()
 		if not op or op(e,c) then return false end
@@ -47,7 +47,7 @@ function s.spcon(e,c)
 		g:RemoveCard(c)
 	end
 	if g:IsContains(c) then
-		eff={Duel.GetPlayerEffect(tp,EFFECT_NECRO_VALLEY)}
+		eff={Duel.GetPlayerEffect(tp,EFFECT_REST_VALLEY)}
 		for _,te in ipairs(eff) do
 			local op=te:GetOperation()
 			if not op or op(e,c) then g:RemoveCard(c) break end
@@ -61,7 +61,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 		g:RemoveCard(c)
 	end
 	if g:IsContains(c) then
-		eff={Duel.GetPlayerEffect(tp,EFFECT_NECRO_VALLEY)}
+		eff={Duel.GetPlayerEffect(tp,EFFECT_REST_VALLEY)}
 		for _,te in ipairs(eff) do
 			local op=te:GetOperation()
 			if not op or op(e,c) then g:RemoveCard(c) break end

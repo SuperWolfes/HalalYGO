@@ -39,7 +39,7 @@ function s.filter(c,e,tp)
 	return c:IsLevel(4) and c:IsCanBeSpecialSummoned(e,0,1-tp,false,false)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.filter),0,LOCATION_REST,LOCATION_REST,nil,e,tp)
+	local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.filter),0,LOCATION_REST,LOCATION_REST,nil,e,tp)
 	if #g>0 and Duel.GetLocationCount(1-tp,LOCATION_MZONE)>0
 		and Duel.SelectYesNo(1-tp,aux.Stringid(id,1)) then
 		Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_SPSUMMON)

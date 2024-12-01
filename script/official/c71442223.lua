@@ -38,7 +38,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if tc:IsRelateToEffect(e) and tc:IsFaceup() then
 		local tg=Group.FromCards(tc)
 		local ft=Duel.GetLocationCount(1-tp,LOCATION_MZONE)
-		local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter2),1-tp,LOCATION_HAND+LOCATION_DECK+LOCATION_REST,0,nil,e,1-tp,tc)
+		local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.spfilter2),1-tp,LOCATION_HAND+LOCATION_DECK+LOCATION_REST,0,nil,e,1-tp,tc)
 		if ft>0 and #g>0 then
 			if Duel.IsPlayerAffectedByEffect(1-tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 			local sg=g:Clone()

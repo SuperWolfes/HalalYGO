@@ -28,7 +28,7 @@ function s.thfilter2(c)
 end
 function s.desfilter(c,e,tp,g,nc)
 	local f=s.spfilter
-	if nc then f=aux.NecroValleyFilter(f) end
+	if nc then f=aux.RestValleyFilter(f) end
 	return c:IsFaceup() and c:IsSetCard(0x11f) and g:IsContains(c)
 		and Duel.IsExistingMatchingCard(f,tp,LOCATION_REST,0,1,nil,e,tp,c)
 end
@@ -67,7 +67,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,s.thfilter1,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 and Duel.SendtoHand(g,nil,REASON_EFFECT)>0 then
 		Duel.ConfirmCards(1-tp,g) 
-		local g2=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.thfilter2),tp,LOCATION_REST,0,nil)
+		local g2=Duel.GetMatchingGroup(aux.RestValleyFilter(s.thfilter2),tp,LOCATION_REST,0,nil)
 		if #g2>0 and Duel.SelectYesNo(tp,aux.Stringid(id,3)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 			local sg2=g2:Select(tp,1,1,nil)
@@ -84,7 +84,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local dc=Duel.SelectMatchingCard(tp,s.desfilter,tp,LOCATION_MZONE,0,1,1,nil,e,tp,lg,true):GetFirst()
 	if dc and Duel.Destroy(dc,REASON_EFFECT)>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,0,1,1,nil,e,tp,dc):GetFirst()
+		local tc=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,0,1,1,nil,e,tp,dc):GetFirst()
 		if tc and Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP) then
 			local e1=Effect.CreateEffect(c)
 			e1:SetType(EFFECT_TYPE_SINGLE)

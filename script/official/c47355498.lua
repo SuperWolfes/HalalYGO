@@ -34,7 +34,7 @@ function s.initial_effect(c)
 	--"Necrovalley" effect
 	local e6=Effect.CreateEffect(c)
 	e6:SetType(EFFECT_TYPE_FIELD)
-	e6:SetCode(EFFECT_NECRO_VALLEY)
+	e6:SetCode(EFFECT_REST_VALLEY)
 	e6:SetRange(LOCATION_FZONE)
 	e6:SetTargetRange(LOCATION_REST,0)
 	e6:SetCondition(s.contp)
@@ -45,7 +45,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e7)
 	local e8=Effect.CreateEffect(c)
 	e8:SetType(EFFECT_TYPE_FIELD)
-	e8:SetCode(EFFECT_NECRO_VALLEY)
+	e8:SetCode(EFFECT_REST_VALLEY)
 	e8:SetRange(LOCATION_FZONE)
 	e8:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e8:SetTargetRange(1,0)
@@ -65,14 +65,14 @@ function s.initial_effect(c)
 end
 s.listed_series={0x2e}
 function s.contp(e)
-	return not Duel.IsPlayerAffectedByEffect(e:GetHandler():GetControler(),EFFECT_NECRO_VALLEY_IM)
+	return not Duel.IsPlayerAffectedByEffect(e:GetHandler():GetControler(),EFFECT_REST_VALLEY_IM)
 end
 function s.conntp(e)
-	return not Duel.IsPlayerAffectedByEffect(1-e:GetHandler():GetControler(),EFFECT_NECRO_VALLEY_IM)
+	return not Duel.IsPlayerAffectedByEffect(1-e:GetHandler():GetControler(),EFFECT_REST_VALLEY_IM)
 end
 function s.disfilter(c,not_im0,not_im1,re)
-	if c:IsControler(0) then return not_im0 and c:IsHasEffect(EFFECT_NECRO_VALLEY) and c:IsRelateToEffect(re)
-	else return not_im1 and c:IsHasEffect(EFFECT_NECRO_VALLEY) and c:IsRelateToEffect(re) end
+	if c:IsControler(0) then return not_im0 and c:IsHasEffect(EFFECT_REST_VALLEY) and c:IsRelateToEffect(re)
+	else return not_im1 and c:IsHasEffect(EFFECT_REST_VALLEY) and c:IsRelateToEffect(re) end
 end
 function s.discheck(ev,category,re,not_im0,not_im1)
 	local ex,tg,ct,p,v=Duel.GetOperationInfo(ev,category)
@@ -91,10 +91,10 @@ function s.discheck(ev,category,re,not_im0,not_im1)
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=re:GetHandler()
-	if not Duel.IsChainDisablable(ev) or tc:IsHasEffect(EFFECT_NECRO_VALLEY_IM) then return end
+	if not Duel.IsChainDisablable(ev) or tc:IsHasEffect(EFFECT_REST_VALLEY_IM) then return end
 	local res=false
-	local not_im0=not Duel.IsPlayerAffectedByEffect(0,EFFECT_NECRO_VALLEY_IM)
-	local not_im1=not Duel.IsPlayerAffectedByEffect(1,EFFECT_NECRO_VALLEY_IM)
+	local not_im0=not Duel.IsPlayerAffectedByEffect(0,EFFECT_REST_VALLEY_IM)
+	local not_im1=not Duel.IsPlayerAffectedByEffect(1,EFFECT_REST_VALLEY_IM)
 	if not res and s.discheck(ev,CATEGORY_SPECIAL_SUMMON,re,not_im0,not_im1) then res=true end
 	if not res and s.discheck(ev,CATEGORY_REMOVE,re,not_im0,not_im1) then res=true end
 	if not res and s.discheck(ev,CATEGORY_TOHAND,re,not_im0,not_im1) then res=true end

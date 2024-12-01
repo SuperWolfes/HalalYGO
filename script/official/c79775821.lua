@@ -50,7 +50,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)>0
 		and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 then
-		local eg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.eqfilter),tp,LOCATION_HAND+LOCATION_REST,0,nil)
+		local eg=Duel.GetMatchingGroup(aux.RestValleyFilter(s.eqfilter),tp,LOCATION_HAND+LOCATION_REST,0,nil)
 		if #eg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 			Duel.BreakEffect()
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)

@@ -42,7 +42,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK+LOCATION_HAND+LOCATION_REST)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,LOCATION_DECK+LOCATION_HAND+LOCATION_REST,0,1,1,nil):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.filter),tp,LOCATION_DECK+LOCATION_HAND+LOCATION_REST,0,1,1,nil):GetFirst()
 	if not tc then return end
 	local tpe=tc:GetType()
 	local te=tc:GetActivateEffect()
@@ -93,7 +93,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local sg=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil,e,tp)
+	local sg=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil,e,tp)
 	if #sg>0 then
 		Duel.BreakEffect()
 		Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)

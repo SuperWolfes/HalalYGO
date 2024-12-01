@@ -39,7 +39,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		Duel.BreakEffect()
 		if Duel.GetLocationCount(1-tp,LOCATION_MZONE)>0 then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-			local sg=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,0,LOCATION_REST,1,1,nil,e,tp)
+			local sg=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,0,LOCATION_REST,1,1,nil,e,tp)
 			if #sg>0 then
 				Duel.SpecialSummon(sg,0,tp,1-tp,false,false,POS_FACEUP)
 			end

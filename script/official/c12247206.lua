@@ -46,7 +46,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ft1=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ft1>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft1=1 end
 	local gg=Group.CreateGroup()
-	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.filter),tp,LOCATION_HAND+LOCATION_DECK+LOCATION_REST,0,nil,tc,e,tp)
+	local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.filter),tp,LOCATION_HAND+LOCATION_DECK+LOCATION_REST,0,nil,tc,e,tp)
 	if ft1>0 and tc:IsFaceup() and tc:IsRelateToEffect(e) then
 		if #g<=ft1 then
 			s.sp(g,tp,POS_FACEUP_ATTACK)
@@ -63,7 +63,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_FACEUP)
 	local sg=Duel.SelectMatchingCard(1-tp,s.selfilter,1-tp,LOCATION_MZONE,0,1,1,nil,e,1-tp)
 	if ft2>0 and #sg>0 then
-		local g2=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.filter),1-tp,LOCATION_HAND+LOCATION_DECK+LOCATION_REST,0,nil,sg:GetFirst(),e,1-tp)
+		local g2=Duel.GetMatchingGroup(aux.RestValleyFilter(s.filter),1-tp,LOCATION_HAND+LOCATION_DECK+LOCATION_REST,0,nil,sg:GetFirst(),e,1-tp)
 		if #g2>0 then
 			if #g2<=ft2 then
 				s.sp(g2,1-tp,POS_FACEUP)

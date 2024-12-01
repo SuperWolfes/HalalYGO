@@ -89,7 +89,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local ftt=Duel.GetUsableMZoneCount(tp)
 		local ftex=Duel.GetLocationCountFromEx(tp)
 		if ftt<=3 then return end
-		local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_EXTRA+LOCATION_REST,0,nil,e,tp)
+		local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.spfilter),tp,LOCATION_EXTRA+LOCATION_REST,0,nil,e,tp)
 		if #g<=3 then return end
 		local spg=aux.SelectUnselectGroup(g,e,tp,4,4,s.rescon(ft,ftex,ftt,aux.CheckSummonGate(tp)),1,tp,HINTMSG_SPSUMMON)
 		if #spg<=3 then return end
@@ -102,7 +102,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		else
 			return
 		end
-		local og=Duel.GetMatchingGroup(aux.NecroValleyFilter(Card.IsCode),tp,LOCATION_EXTRA+LOCATION_REST,0,nil,69610326)
+		local og=Duel.GetMatchingGroup(aux.RestValleyFilter(Card.IsCode),tp,LOCATION_EXTRA+LOCATION_REST,0,nil,69610326)
 		local drg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_MZONE,0,nil,42160203)
 		if #og>1 and #drg>0 and Duel.SelectYesNo(tp,aux.Stringid(12744567,0)) then
 			Duel.BreakEffect()

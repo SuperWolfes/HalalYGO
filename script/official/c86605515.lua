@@ -29,7 +29,7 @@ function s.sttg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.stop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
-	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.stfilter),tp,LOCATION_HAND+LOCATION_REST,0,1,1,nil):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.stfilter),tp,LOCATION_HAND+LOCATION_REST,0,1,1,nil):GetFirst()
 	if tc and tc:IsSSetable() and Duel.SSet(tp,tc)>0 then
 		--Can be activated this turn
 		local e1=Effect.CreateEffect(e:GetHandler())

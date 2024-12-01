@@ -43,10 +43,10 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ft<=0 then return end
-	local rmg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.rmfilter),tp,LOCATION_HAND+LOCATION_REST,0,nil)
+	local rmg=Duel.GetMatchingGroup(aux.RestValleyFilter(s.rmfilter),tp,LOCATION_HAND+LOCATION_REST,0,nil)
 	if #rmg==0 then return end
 	local rmct=rmg:GetClassCount(Card.GetCode)
-	local spg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_HAND+LOCATION_REST+LOCATION_DECK,0,nil,e,tp)
+	local spg=Duel.GetMatchingGroup(aux.RestValleyFilter(s.spfilter),tp,LOCATION_HAND+LOCATION_REST+LOCATION_DECK,0,nil,e,tp)
 	if #spg==0 then return end
 	local spct=spg:GetClassCount(Card.GetCode)
 	local ct=math.min(3,ft,spct,rmct)

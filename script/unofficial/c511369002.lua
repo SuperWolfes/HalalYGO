@@ -43,11 +43,11 @@ function s.actfilter(c,tp)
 	return c:IsCode(511600232) and c:GetActivateEffect():IsActivatable(tp,true,true)
 end
 function s.acttg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.actfilter),tp,LOCATION_DECK+LOCATION_REST,0,1,nil,tp) end
+	if chk==0 then return Duel.IsExistingMatchingCard(aux.RestValleyFilter(s.actfilter),tp,LOCATION_DECK+LOCATION_REST,0,1,nil,tp) end
 end
 function s.actop(e,tp,eg,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(48934760,0))
-	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.actfilter),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil,tp):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.actfilter),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil,tp):GetFirst()
 	Duel.ActivateFieldActional(tc,e,tp,eg,ep,ev,re,r,rp)
 end
 function s.cfilter(c)

@@ -82,7 +82,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	local zone=tc:GetFreeLinkedZone()&0x1f
 	if zone==0 then return end
-	local sg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,e,tp,code,zone)
+	local sg=Duel.GetMatchingGroup(aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,e,tp,code,zone)
 	if #sg<=0 then return end
 	local sg_unq=sg:GetClassCount(Card.GetCode)
 	local count=s.zone_count(zone)

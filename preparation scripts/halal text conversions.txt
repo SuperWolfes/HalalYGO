@@ -144,6 +144,8 @@ Manticore -> Antibore
 Marie -> Mar
 Marry -> Mar
 Mars -> Quest
+Mercury -> Mister
+Pluto -> Polar
 Mayakashi -> Makage
 Mayowashidori -> Foxy
 Meditate -> Mindful

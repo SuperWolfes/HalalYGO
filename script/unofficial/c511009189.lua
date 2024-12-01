@@ -19,7 +19,7 @@ function s.cfilter(c)
 end
 function s.spfilter(c,code,e,tp)
 	return c:IsCode(code) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
-		and not c:IsHasEffect(EFFECT_NECRO_VALLEY)
+		and not c:IsHasEffect(EFFECT_REST_VALLEY)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckReleaseGroup(tp,s.cfilter,1,nil) end

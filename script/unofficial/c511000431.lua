@@ -42,9 +42,9 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,LOCATION_DECK+LOCATION_HAND+LOCATION_REST,0,1,1,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.filter),tp,LOCATION_DECK+LOCATION_HAND+LOCATION_REST,0,1,1,nil,e,tp)
 	if #g>0 and Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)>0 then
-		local ag=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.acfilter),tp,LOCATION_DECK+LOCATION_HAND+LOCATION_REST,0,nil)
+		local ag=Duel.GetMatchingGroup(aux.RestValleyFilter(s.acfilter),tp,LOCATION_DECK+LOCATION_HAND+LOCATION_REST,0,nil)
 		if #ag>0 and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and Duel.SelectYesNo(tp,aux.Stringid(48680970,0)) then
 			local ac=ag:Select(tp,1,1,nil)
 			local tc=ac:GetFirst()

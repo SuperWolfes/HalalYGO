@@ -50,7 +50,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 s.listed_series={0x3b}
-s.listed_names={CARD_NECROVALLEY}
+s.listed_names={CARD_RESTVALLEY}
 s.material_setcode=0x3b
 function s.eqcon(e)
 	return Duel.GetAttacker():IsSetCard(0x3b)
@@ -134,7 +134,7 @@ end
 function s.sptg2(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=e:GetLabelObject():GetLabelObject()
 	if chk==0 then return g and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and g:IsExists(s.spfilter2,1,nil,e,tp) and not Duel.IsEnvironment(CARD_NECROVALLEY) end
+		and g:IsExists(s.spfilter2,1,nil,e,tp) and not Duel.IsEnvironment(CARD_RESTVALLEY) end
 	local sg=g:Filter(s.spfilter2,nil,e,tp)
 	Duel.SetTargetCard(sg)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,sg,#sg,0,0)

@@ -34,7 +34,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SendtoRest(c,REASON_COST)
 		local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
 		if ft>2 then ft=2 end
-		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.ssfilter),tp,LOCATION_REST,0,1,ft,nil,e,tp)
+		local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.ssfilter),tp,LOCATION_REST,0,1,ft,nil,e,tp)
 		Duel.HintSelection(g)
 		if #g>0 then
 			Duel.SSet(tp,g)

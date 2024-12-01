@@ -95,7 +95,7 @@ function s.sumop(e,tp,eg,ep,ev,re,r,rp)
 	local mg=Duel.GetTargetCards(e)
 	local ct=#mg
 	if ct<=0 or (Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) and ct>1) then return end
-	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_EXTRA+LOCATION_REST,0,e:GetHandler(),e,tp)
+	local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.spfilter),tp,LOCATION_EXTRA+LOCATION_REST,0,e:GetHandler(),e,tp)
 	local sg=aux.SelectUnselectGroup(g,e,tp,ct,ct,s.rescon(aux.CheckSummonGate(tp)),1,tp,HINTMSG_SPSUMMON)
 	if #sg<=0 then return end
 	if Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP) > 0 then

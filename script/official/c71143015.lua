@@ -16,7 +16,7 @@ function s.ffilter(c)
 	return c:ListsCodeAsMaterial(CARD_BLUEEYES_W_DRAGON,23995346)
 end
 function s.fextra(e,tp,mg)
-	return Duel.GetMatchingGroup(aux.NecroValleyFilter(Fusion.IsMonsterFilter(Card.IsAbleToDeck)),tp,LOCATION_REST,0,nil)
+	return Duel.GetMatchingGroup(aux.RestValleyFilter(Fusion.IsMonsterFilter(Card.IsAbleToDeck)),tp,LOCATION_REST,0,nil)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsMainPhase()

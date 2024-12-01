@@ -35,7 +35,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if ft<=0 then return end
 	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	if ft>5 then ft=5 end
-	local sg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.filter),tp,LOCATION_HAND+LOCATION_REST,0,nil,e,tp)
+	local sg=Duel.GetMatchingGroup(aux.RestValleyFilter(s.filter),tp,LOCATION_HAND+LOCATION_REST,0,nil,e,tp)
 	local g=aux.SelectUnselectGroup(sg,e,tp,1,ft,aux.dncheck,1,tp,HINTMSG_SPSUMMON)
 	if #g>0 then
 		for tc in aux.Next(g) do

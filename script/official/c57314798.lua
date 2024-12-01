@@ -86,7 +86,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local tc1=Duel.SelectMatchingCard(tp,s.setfilter,tp,LOCATION_REST,0,1,1,nil):GetFirst()
 	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_SET)
 	local tc2=Duel.SelectMatchingCard(1-tp,s.setfilter,1-tp,LOCATION_REST,0,1,1,nil):GetFirst()
-	if (tc1 and tc1:IsHasEffect(EFFECT_NECRO_VALLEY)) or (tc2 and tc2:IsHasEffect(EFFECT_NECRO_VALLEY)) then return end
+	if (tc1 and tc1:IsHasEffect(EFFECT_REST_VALLEY)) or (tc2 and tc2:IsHasEffect(EFFECT_REST_VALLEY)) then return end
 	if tc1 then
 		Duel.SSet(tp,tc1)
 	end

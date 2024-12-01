@@ -39,7 +39,7 @@ end
 function s.desrepop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local sumtype=c:GetSummonType()
-	local mg=c:GetMaterial():Filter(aux.NecroValleyFilter(s.mgfilter),nil,e,tp,c)
+	local mg=c:GetMaterial():Filter(aux.RestValleyFilter(s.mgfilter),nil,e,tp,c)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ft>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	if Duel.SendtoDeck(c,nil,0,REASON_EFFECT+REASON_REPLACE)>0 

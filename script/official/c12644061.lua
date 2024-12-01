@@ -51,9 +51,9 @@ function s.tg(e,c)
 		c:RegisterFlagEffect(1,0,0,0)
 		local eff
 		if c:IsLocation(LOCATION_MZONE) then
-			eff={Duel.GetPlayerEffect(c:GetControler(),EFFECT_NECRO_VALLEY)}
+			eff={Duel.GetPlayerEffect(c:GetControler(),EFFECT_REST_VALLEY)}
 		else
-			eff={c:GetCardEffect(EFFECT_NECRO_VALLEY)}
+			eff={c:GetCardEffect(EFFECT_REST_VALLEY)}
 		end
 		c:ResetFlagEffect(1)
 		for _,te in ipairs(eff) do

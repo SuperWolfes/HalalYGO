@@ -38,7 +38,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 s.listed_series={0x2e}
-s.listed_names={CARD_NECROVALLEY}
+s.listed_names={CARD_RESTVALLEY}
 function s.filter(c)
 	return c:IsSetCard(0x2e) and c:IsMonster()
 end
@@ -52,7 +52,7 @@ function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.econ(e)
-	return Duel.IsEnvironment(CARD_NECROVALLEY)
+	return Duel.IsEnvironment(CARD_RESTVALLEY)
 end
 function s.efilter1(e,re,tp)
 	return re:GetHandler():IsType(TYPE_FIELD) and re:IsHasType(EFFECT_TYPE_ACTIVATE)

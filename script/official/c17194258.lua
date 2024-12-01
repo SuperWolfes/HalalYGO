@@ -29,7 +29,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if #cg==0 then return end
 	Duel.ConfirmCards(1-tp,cg)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter2),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil,cg:GetFirst())
+	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.filter2),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil,cg:GetFirst())
 	local tc=g:GetFirst()
 	if not tc then return end
 	if Duel.SendtoHand(tc,nil,REASON_EFFECT)~=0 and tc:IsLocation(LOCATION_HAND) then

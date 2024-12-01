@@ -40,7 +40,7 @@ end
 function s.operation_a(e,tp,eg,ep,ev,re,r,rp)
 	local res=Duel.TossSuffice(tp,1)
 	if Duel.Recover(tp,res*100,REASON_EFFECT)~=res*100 or Duel.GetLocationCount(tp,LOCATION_MZONE)==0 then return end
-	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,res,e,tp)
+	local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,res,e,tp)
 	if #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local sc=g:Select(tp,1,1,nil):GetFirst()

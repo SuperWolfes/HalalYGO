@@ -32,11 +32,11 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local rg=Duel.GetMatchingGroup(Card.IsRace,tp,LOCATION_REST,0,nil,RACE_REPTILE)
 		local ct=rg:GetClassCount(Card.GetCode)
 		if ct>=5 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-			and Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,0,1,nil,e,tp)
+			and Duel.IsExistingMatchingCard(aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,0,1,nil,e,tp)
 			and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			Duel.BreakEffect()
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-			local sg=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,0,1,1,nil,e,tp)
+			local sg=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,0,1,1,nil,e,tp)
 			if #sg>0 then
 				Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)
 			end

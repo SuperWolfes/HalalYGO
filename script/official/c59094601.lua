@@ -81,7 +81,7 @@ end
 function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	local deck_count=Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,2))
-	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.tdfilter),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil,deck_count):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.tdfilter),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil,deck_count):GetFirst()
 	if not tc then return end
 	if tc:IsLocation(LOCATION_DECK) then
 		Duel.ShuffleDeck(tp)

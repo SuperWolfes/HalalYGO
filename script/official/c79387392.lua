@@ -80,7 +80,7 @@ end
 function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.setfilter),tp,LOCATION_HAND+LOCATION_DECK+LOCATION_REST,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.setfilter),tp,LOCATION_HAND+LOCATION_DECK+LOCATION_REST,0,1,1,nil)
 	local tc=g:GetFirst()
 	if tc and tc:IsSSetable() then
 		Duel.SSet(tp,tc)

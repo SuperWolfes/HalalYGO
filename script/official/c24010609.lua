@@ -115,7 +115,7 @@ end
 function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) then return end
-	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.setfilter),tp,LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.setfilter),tp,LOCATION_REST,0,nil)
 	local ct=e:GetHandler():GetFlagEffectLabel(id) or 0
 	local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
 	local tg=aux.SelectUnselectGroup(g,e,tp,1,math.min(ct,ft+1),s.rescon(ft),1,tp,HINTMSG_SET)

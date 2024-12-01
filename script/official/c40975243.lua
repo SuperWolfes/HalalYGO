@@ -38,7 +38,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	local fg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.filtercheck),tp,LOCATION_REST+LOCATION_REMOVED,0,nil,e,tp)
+	local fg=Duel.GetMatchingGroup(aux.RestValleyFilter(s.filtercheck),tp,LOCATION_REST+LOCATION_REMOVED,0,nil,e,tp)
 	if ft<1 or not Duel.IsPlayerCanSpecialSummonCount(tp,2) then return end
 	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	local g=aux.SelectUnselectGroup(fg,e,tp,1,ft,s.rescon,1,tp,HINTMSG_SPSUMMON,s.rescon,nil,false)

@@ -83,11 +83,11 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<2 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g1=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter1),tp,LOCATION_REST+LOCATION_HAND,0,1,1,nil,e,tp)
+	local g1=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter1),tp,LOCATION_REST+LOCATION_HAND,0,1,1,nil,e,tp)
 	if #g1>0 then
 		local tc=g1:GetFirst()
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local g2=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter2),tp,LOCATION_REST+LOCATION_HAND,0,1,1,tc,e,tp,tc:GetLevel())
+		local g2=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter2),tp,LOCATION_REST+LOCATION_HAND,0,1,1,tc,e,tp,tc:GetLevel())
 		g1:Merge(g2)
 		Duel.SpecialSummon(g1,0,tp,tp,false,false,POS_FACEUP_DEFENSE)
 	end

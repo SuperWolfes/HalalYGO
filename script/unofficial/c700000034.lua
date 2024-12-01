@@ -97,12 +97,12 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local fc=Duel.GetFirstTarget()
-	local rg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.rmfilter),tp,LOCATION_MZONE+LOCATION_REST,0,nil)
+	local rg=Duel.GetMatchingGroup(aux.RestValleyFilter(s.rmfilter),tp,LOCATION_MZONE+LOCATION_REST,0,nil)
 	if not fc or not fc:IsRelateToEffect(e) or not s.spfilter(fc,e,tp,rg,e) then return end
 	local minc=fc.min_material_count
 	local maxc=fc.max_material_count
 	local rsg
-	local mg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.matfilter),tp,LOCATION_DECK+LOCATION_EXTRA+LOCATION_REST,0,nil,e,tp,fc,e)
+	local mg=Duel.GetMatchingGroup(aux.RestValleyFilter(s.matfilter),tp,LOCATION_DECK+LOCATION_EXTRA+LOCATION_REST,0,nil,e,tp,fc,e)
 	if Duel.IsPlayerAffectedByEffect(tp,69832741) then
 		local maxc2=math.min(#rg,maxc)
 		local mft=Duel.GetLocationCount(tp,LOCATION_MZONE)

@@ -80,7 +80,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			sc:RegisterEffect(e1)
 		end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-		local tg=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thfilter),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil)
+		local tg=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.thfilter),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil)
 		if #tg>0 then
 			Duel.SendtoHand(tg,nil,REASON_EFFECT)
 			Duel.ConfirmCards(1-tp,tg)

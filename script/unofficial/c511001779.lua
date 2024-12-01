@@ -40,7 +40,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=g:GetFirst()
 	if tc then
 		Duel.HintSelection(g)
-		local mat=tc:GetMaterial():Filter(aux.NecroValleyFilter(Card.IsLocation),nil,LOCATION_REST)
+		local mat=tc:GetMaterial():Filter(aux.RestValleyFilter(Card.IsLocation),nil,LOCATION_REST)
 		if not tc:IsImmuneToEffect(e) then
 			Duel.Overlay(tc,mat)
 		end

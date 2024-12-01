@@ -29,7 +29,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
-	if not e:GetHandler():IsHasEffect(EFFECT_NECRO_VALLEY) then
+	if not e:GetHandler():IsHasEffect(EFFECT_REST_VALLEY) then
 		Duel.SendtoHand(e:GetHandler(),tp,REASON_EFFECT)
 	end
 end

@@ -57,7 +57,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.Destroy(tc,REASON_EFFECT)~=0
 		and (sumtype&SUMMON_TYPE_FUSION)==SUMMON_TYPE_FUSION and #mg>0
 		and Duel.GetLocationCount(tp,LOCATION_MZONE)>=#mg
-		and mg:IsExists(aux.NecroValleyFilter(s.mgfilter),#mg,nil,e,tp,tc,mg)
+		and mg:IsExists(aux.RestValleyFilter(s.mgfilter),#mg,nil,e,tp,tc,mg)
 		and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.SpecialSummon(mg,0,tp,tp,false,false,POS_FACEUP)

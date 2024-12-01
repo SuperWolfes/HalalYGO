@@ -42,7 +42,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not tc then return end
 	if tc and tc:IsRelateToEffect(e) and tc:IsLocation(LOCATION_REST|LOCATION_EXTRA) then
-		if (tc:IsLocation(LOCATION_REST) and Duel.GetLocationCount(tp,LOCATION_MZONE) > 0 and not tc:IsHasEffect(EFFECT_NECRO_VALLEY))
+		if (tc:IsLocation(LOCATION_REST) and Duel.GetLocationCount(tp,LOCATION_MZONE) > 0 and not tc:IsHasEffect(EFFECT_REST_VALLEY))
 			or (tc:IsLocation(LOCATION_EXTRA) and Duel.GetLocationCountFromEx(tp,tp,nil,tc) > 0)then
 			if Duel.SpecialSummonStep(tc,0,tp,tp,true,false,POS_FACEUP) then
 				local e1=Effect.CreateEffect(e:GetHandler())
