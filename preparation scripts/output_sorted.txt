@@ -1,0 +1,267 @@
+-Grave- -> Resting
+-Asar- -> Kissr
+-Baal- -> Balkan
+-Isis- -> Pisi
+-Life- -> Unrest
+-Monk- -> Imam
+-Nuit- -> Suit
+-Sage- -> looker
+-Geb- -> jeo
+-Imp- -> Impression
+-El- -> Le
+-GY- -> RP
+-Ra- -> raga
+-Su- -> bru
+Armageddon -> Cataclysm
+Afterlife -> Afterunrest
+Amazoness -> Amazonian
+Amritara -> Amilie
+Amsodeus -> Ambos
+Asmodeus -> Asgira
+Astaroth -> Astrig
+Alchemy -> Chemistry
+Apophis -> Apromes
+Arakami -> Arab
+Ariadne -> Ariana
+Amdusc -> Ramaru
+Angel- -> Onlooker
+Anubis -> Anpios
+Arvata -> Abois
+Astral -> Astellar
+Aegis -> Bogus
+Akash -> Ash
+Altar -> Stone
+Amun -> Ahaud
+Atum -> Atomo
+Barbaros -> Bardaco
+Barong -> Bolis
+Bi''an -> Blie
+Brahma -> Brebar
+Baxia -> Jak
+Bixi -> Bleeze
+Cerberus -> Cebrar
+Chaofeng -> Crafin
+Creation -> Matching
+Charmer -> Chaumer
+Chimera -> Chilean
+Creator -> Mega
+Chakra -> Chaplin
+Chiwen -> Beefn
+Cursed -> Unclean
+Caius -> Kais
+Charm -> Chaum
+Destruction -> Mismatching
+Different Dimension -> Same Dimension
+Darklord -> Darkwarden
+Denglong -> Pingpong
+Destiny -> Destrudic
+Divine -> Mega
+Deity -> Being
+Demon -> Warden
+Devil -> Well
+Djinn -> Dlilt
+Druid -> Droid
+Dice -> Suffice --done
+D.D -> S.D
+Enchantment -> Garment
+Exosister -> Insister
+Ecclesia -> Ecclipse
+Empyrean -> Empirial
+Endymion -> Edypsos
+Exodius -> Exdudius --done
+Enishi -> Nishi
+Ennead -> Nerolei
+Exodia -> Exdude --done
+Earth -> Tero
+Elder -> Wise
+Evil Eye -> Goodie
+Forbidden -> Unliked --done
+Funeral -> Resting Place --done
+Fabled -> Fablous
+Fairy -> Wanderer --done
+Fiend -> Tainted --done
+Fate -> Bate
+For Tribute -> Sort 
+Graveyard -> Resting Place
+Ganesha -> Garment
+Garunix -> Gapolis
+Garunix -> Pirosi
+Gibrine -> Brine
+Gamble -> Chance -- done
+Garasu -> Gara
+Gemini -> Dual --done
+Gishki -> Giojiki
+Gorgon -> Jonjor
+Gaias -> Bias
+Gebeb -> Gaebab
+Ghost -> Miss --done
+Ghoul -> Rahul
+Golem -> Gopal
+Grave -> Rest
+GY(, . - ; : s'') -> RP
+Gaia -> Bia
+God -> Monster -- done
+Hinezumi -> Himuzoomi
+Hyperion -> Hyperbond
+Heretic -> Unadherent
+Harpie -> Flybie --done
+Heaven -> Spectrum
+Heresy -> Unadherent
+Himmel -> Mel
+Hoori -> Julio
+Horus -> Humus --done
+Hyang -> Yong
+Hydra -> Hydden
+Iwarebiko -> Constantin
+Incarnat -> Incorporat
+Invocat- -> Invalidat
+Invoke -> Invalidate
+Ixchel -> Intell
+Inaba -> Alban
+Inari -> Ijira
+Ixtab -> Intal
+Jupiter -> Finite
+Jiaotu -> Jeoper
+Jinn -> Litl
+Kagura -> Jargona
+Karma -> Kaom
+Kilin -> Bowling
+Kirin -> Kojais
+Kaku -> Kabo
+Leviathan -> Eel
+Lilith -> Lipsick
+Lich -> Hitch
+Lord -> Watcher
+Mayowashidori -> Foxy
+Meditation -> Mindfulness
+Manticore -> Antibore
+Mayakashi -> Makage
+Magician -> Mentor
+Manifest -> Express
+Meditate -> Mindful
+Metaphys -> Metadata
+Mikailis -> Kailis
+Mystical -> Vague
+Magical -> Mentoral
+Magikey -> Menkey
+Mikanko -> Sibango
+Minerva -> Miner
+Miracle -> Pulse --done
+Monarch -> Moppar
+Musical -> Lyrical
+Makami -> Magabi
+Mancer -> Bouncer
+Medusa -> Mensona
+Magic -> Ment
+Manju -> Makhi
+Marie -> Mar
+Marry -> Mar
+Music -> Nasheed
+Mage -> Manced
+Mars -> Quest
+Moon -> Horizon
+Naganaki -> Nordic
+Nekomata -> Kitty
+Nephthys -> Nepolonis 
+Neptune -> Cascade
+Ninigi -> Alexander
+Necro -> Rest
+Ogdoadic -> Ogtasic
+Orochi -> Ortich
+Osiris -> Iseedis
+Okami -> Okabr
+Orc -> Core
+Prognosticator -> Predictor
+Purification -> Entertaining
+Patrician -> Patr
+Possessed -> Interwoven --done
+Priestess -> Helperess
+Parshath -> Parhaf
+Phantasm -> Illusorasm --done
+Prophecy -> Prediction
+Phantom -> Illusion --done
+Phoenix -> Bird --done
+Psychic -> Mental --done
+Priest -> Imam
+Phant -> Illuso --do no do all caps because of flying ELEPHANT win
+Ponix -> Juni
+Prana -> Posta
+Pulau -> Poulaw 
+Qilin -> Bowling
+Reincarnat -> Reinvent
+Resurrect -> Protect
+Ragnarok -> Ragka
+Rangbali -> Radkhali
+Reborn -> Rerest --done
+Ritual (Name Only) -> Unlocking
+Ritual -> Locked --done
+Ritual Monster -> Locked Monster
+Robber -> Tactitian
+Runick -> Runip
+Realm -> Territory
+Reviv -> Awak
+Royal Tribute -> Sorting The Civilian''s Wages
+Spellcaster -> Mentor
+Shekhinaga -> Sheikh
+Sacrifice -> Sorting
+Spiritual -> Guardian -- done
+Sorcerer -> Chemist
+Samsara -> Sam
+Scholar -> Looker
+Simorgh -> Sisbird
+Sorcery -> Chemistry
+Spectra -> Bein
+Spectre -> Being
+Sacred -> Clean
+Saturn -> Echo
+Scylla -> Scehyta
+Seraph -> Watcher
+Spells -> Actionals 
+Sphinx -> Drinx
+Spirit -> Guardian -- done
+Sprite -> Rise
+Suanni -> Sinp
+Summon (Name) -> Sustain
+Sutekh -> Hofas
+Senju -> Sakhi
+Shoju -> Shokhi
+Souls -> Misses
+Spell -> Actional --done
+Sylph -> Sip
+Seto -> Veto
+Soul -> Miss
+Tezcatlipoca -> Termapolsh
+Taniguku -> Tanned
+Timeless -> Timeful
+Treeborn -> Tresting
+Tefnuit -> Tafnuin
+Tribute To -> Sort
+Tefnut -> Tarfun
+Temple -> Masjid
+Tensen -> Pensen
+Tensu -> Penbu
+Tenyi -> Tenbree
+Thief -> Tactitian
+Totem -> Tower
+Tao -> Pos
+Ten Thousand Hand -> Three Thousand Arm
+Underworld -> Overworld
+Ukoback -> Unisom
+Ulcanix -> Vulanic
+Uranus -> Rautex
+Uka -> Utra
+Valkyr -> Balkan
+Venus -> Summit
+Veda -> Beta
+Witchcraft -> Mintcraft
+Worship -> Thinking
+Wizard -> Chemist
+Witch -> Mint
+Yggdrasil -> Ygoria
+Yaksha -> Yaijur
+Yang -> Bang
+Yata -> Yardi
+Yazi -> Yaya
+Zombie-Type -> Toxic-TypeZodiac -> Zoopac
+Zombie -> Contamined -- Already done but messed the conversion, should have done zombie type instead first (skipping to save time and since it doesnt actually chage functionality')
+Zefra -> Zebra
