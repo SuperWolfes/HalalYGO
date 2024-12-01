@@ -7012,10 +7012,10 @@ str10 LIKE '%Suanni%' OR str11 LIKE '%Suanni%' OR str12 LIKE '%Suanni%' OR
 str13 LIKE '%Suanni%' OR str14 LIKE '%Suanni%' OR str15 LIKE '%Suanni%' OR
 str16 LIKE '%Suanni%';
 
-UPDATE texts SET
-desc = REPLACE(desc, 'Summon', 'Sustain'),
-name = REPLACE(name, 'Summon', 'Sustain')
-WHERE desc REGEXP 'Summon[Name]' OR name REGEXP 'Summon[Name]';
+UPDATE texts SET 
+name = REPLACE(REPLACE(REPLACE(name, 'Summon (Name only)', 'Sustain'), LOWER('Summon (Name only)'), LOWER('Sustain')), UPPER('Summon (Name only)'), UPPER('Sustain'))
+WHERE 
+name LIKE '%Summon (Name only)%' OR name LIKE LOWER('%Summon (Name only)%') OR name LIKE UPPER('%Summon (Name only)%');
 
 UPDATE texts 
 SET desc = REPLACE(REPLACE(REPLACE(desc, 'Sutekh', 'Hofas'), LOWER('Sutekh'), LOWER('Hofas')), UPPER('Sutekh'), UPPER('Hofas')),

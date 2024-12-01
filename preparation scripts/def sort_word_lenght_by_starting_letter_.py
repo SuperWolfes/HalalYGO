@@ -283,6 +283,7 @@ str14 = RTRIM(str14),
 str15 = RTRIM(str15),
 str16 = RTRIM(str16);
 ''')
+        output_lines.append("COMMIT;")
         outf.writelines(output_lines)
     
     print("Program has run sucessfully.")
@@ -339,5 +340,5 @@ modes to achieve the result you want. This script is not perfect and I am aware.
 -- for comments and everything after them is ignored in the line
 PRESS ENTER TO START
 """)
-sort_word_lenght_by_starting_letter_before_arrow(r"C:\Users\stefa\Desktop\halal_yugioh\extra-non\\halal text converstions.txt")
+sort_word_lenght_by_starting_letter_before_arrow("halal text conversions.txt")
 create_sql_queries("output_sorted.txt")

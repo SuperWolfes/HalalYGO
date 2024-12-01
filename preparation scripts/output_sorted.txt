@@ -221,7 +221,7 @@ Sphinx -> Drinx
 Spirit -> Guardian -- done
 Sprite -> Rise
 Suanni -> Sinp
-Summon (Name) -> Sustain
+Summon (Name only) -> Sustain
 Sutekh -> Hofas
 Senju -> Sakhi
 Shoju -> Shokhi
