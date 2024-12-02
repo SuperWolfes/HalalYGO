@@ -221,6 +221,7 @@ Soul -> Miss
 Souls -> Misses
 Spectra -> Bein
 Spectre -> Being
+Haunt -> Drown
 Spell -> Actional --done
 Spellcaster -> Mentor
 Spells -> Actionals 
@@ -229,6 +230,7 @@ Spirit -> Guardian -- done
 Spiritual -> Guardian -- done
 Sprite -> Rise
 Suanni -> Sinp
+Oracle -> Overseer
 Summon (Name only) -> Sustain
 Sutekh -> Hofas
 Sylph -> Sip

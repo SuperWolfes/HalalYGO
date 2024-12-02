@@ -112,6 +112,7 @@ Hoori -> Julio
 Horus -> Humus --done
 Hyang -> Yong
 Hydra -> Hydden
+Haunt -> Drown
 Iwarebiko -> Constantin
 Incarnat -> Incorporat
 Invocat- -> Invalidat
@@ -144,6 +145,7 @@ Mikailis -> Kailis
 Mystical -> Vague
 Magical -> Mentoral
 Magikey -> Menkey
+Mercury -> Mister
 Mikanko -> Sibango
 Minerva -> Miner
 Miracle -> Pulse --done
@@ -169,6 +171,7 @@ Necro -> Rest
 Ogdoadic -> Ogtasic
 Orochi -> Ortich
 Osiris -> Iseedis
+Oracle -> Overseer
 Okami -> Okabr
 Orc -> Core
 Prognosticator -> Predictor
@@ -183,6 +186,7 @@ Phantom -> Illusion --done
 Phoenix -> Bird --done
 Psychic -> Mental --done
 Priest -> Imam
+Pluto -> Polar
 Phant -> Illuso --do no do all caps because of flying ELEPHANT win
 Ponix -> Juni
 Prana -> Posta

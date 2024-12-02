@@ -4092,6 +4092,33 @@ str13 LIKE '%Hydra%' OR str14 LIKE '%Hydra%' OR str15 LIKE '%Hydra%' OR
 str16 LIKE '%Hydra%';
 
 UPDATE texts 
+SET desc = REPLACE(REPLACE(REPLACE(desc, 'Haunt', 'Drown'), LOWER('Haunt'), LOWER('Drown')), UPPER('Haunt'), UPPER('Drown')),
+name = REPLACE(REPLACE(REPLACE(name, 'Haunt', 'Drown'), LOWER('Haunt'), LOWER('Drown')), UPPER('Haunt'), UPPER('Drown')),
+str1 = REPLACE(REPLACE(REPLACE(str1, 'Haunt', 'Drown'), LOWER('Haunt'), LOWER('Drown')), UPPER('Haunt'), UPPER('Drown')),
+str2 = REPLACE(REPLACE(REPLACE(str2, 'Haunt', 'Drown'), LOWER('Haunt'), LOWER('Drown')), UPPER('Haunt'), UPPER('Drown')),
+str3 = REPLACE(REPLACE(REPLACE(str3, 'Haunt', 'Drown'), LOWER('Haunt'), LOWER('Drown')), UPPER('Haunt'), UPPER('Drown')),
+str4 = REPLACE(REPLACE(REPLACE(str4, 'Haunt', 'Drown'), LOWER('Haunt'), LOWER('Drown')), UPPER('Haunt'), UPPER('Drown')),
+str5 = REPLACE(REPLACE(REPLACE(str5, 'Haunt', 'Drown'), LOWER('Haunt'), LOWER('Drown')), UPPER('Haunt'), UPPER('Drown')),
+str6 = REPLACE(REPLACE(REPLACE(str6, 'Haunt', 'Drown'), LOWER('Haunt'), LOWER('Drown')), UPPER('Haunt'), UPPER('Drown')),
+str7 = REPLACE(REPLACE(REPLACE(str7, 'Haunt', 'Drown'), LOWER('Haunt'), LOWER('Drown')), UPPER('Haunt'), UPPER('Drown')),
+str8 = REPLACE(REPLACE(REPLACE(str8, 'Haunt', 'Drown'), LOWER('Haunt'), LOWER('Drown')), UPPER('Haunt'), UPPER('Drown')),
+str9 = REPLACE(REPLACE(REPLACE(str9, 'Haunt', 'Drown'), LOWER('Haunt'), LOWER('Drown')), UPPER('Haunt'), UPPER('Drown')),
+str10 = REPLACE(REPLACE(REPLACE(str10, 'Haunt', 'Drown'), LOWER('Haunt'), LOWER('Drown')), UPPER('Haunt'), UPPER('Drown')),
+str11 = REPLACE(REPLACE(REPLACE(str11, 'Haunt', 'Drown'), LOWER('Haunt'), LOWER('Drown')), UPPER('Haunt'), UPPER('Drown')),
+str12 = REPLACE(REPLACE(REPLACE(str12, 'Haunt', 'Drown'), LOWER('Haunt'), LOWER('Drown')), UPPER('Haunt'), UPPER('Drown')),
+str13 = REPLACE(REPLACE(REPLACE(str13, 'Haunt', 'Drown'), LOWER('Haunt'), LOWER('Drown')), UPPER('Haunt'), UPPER('Drown')),
+str14 = REPLACE(REPLACE(REPLACE(str14, 'Haunt', 'Drown'), LOWER('Haunt'), LOWER('Drown')), UPPER('Haunt'), UPPER('Drown')),
+str15 = REPLACE(REPLACE(REPLACE(str15, 'Haunt', 'Drown'), LOWER('Haunt'), LOWER('Drown')), UPPER('Haunt'), UPPER('Drown')),
+str16 = REPLACE(REPLACE(REPLACE(str16, 'Haunt', 'Drown'), LOWER('Haunt'), LOWER('Drown')), UPPER('Haunt'), UPPER('Drown'))
+WHERE desc LIKE '%Haunt%' OR name LIKE '%Haunt%' OR
+str1 LIKE '%Haunt%' OR str2 LIKE '%Haunt%' OR str3 LIKE '%Haunt%' OR
+str4 LIKE '%Haunt%' OR str5 LIKE '%Haunt%' OR str6 LIKE '%Haunt%' OR
+str7 LIKE '%Haunt%' OR str8 LIKE '%Haunt%' OR str9 LIKE '%Haunt%' OR
+str10 LIKE '%Haunt%' OR str11 LIKE '%Haunt%' OR str12 LIKE '%Haunt%' OR
+str13 LIKE '%Haunt%' OR str14 LIKE '%Haunt%' OR str15 LIKE '%Haunt%' OR
+str16 LIKE '%Haunt%';
+
+UPDATE texts 
 SET desc = REPLACE(REPLACE(REPLACE(desc, 'Iwarebiko', 'Constantin'), LOWER('Iwarebiko'), LOWER('Constantin')), UPPER('Iwarebiko'), UPPER('Constantin')),
 name = REPLACE(REPLACE(REPLACE(name, 'Iwarebiko', 'Constantin'), LOWER('Iwarebiko'), LOWER('Constantin')), UPPER('Iwarebiko'), UPPER('Constantin')),
 str1 = REPLACE(REPLACE(REPLACE(str1, 'Iwarebiko', 'Constantin'), LOWER('Iwarebiko'), LOWER('Constantin')), UPPER('Iwarebiko'), UPPER('Constantin')),
@@ -4956,6 +4983,33 @@ str13 LIKE '%Magikey%' OR str14 LIKE '%Magikey%' OR str15 LIKE '%Magikey%' OR
 str16 LIKE '%Magikey%';
 
 UPDATE texts 
+SET desc = REPLACE(REPLACE(REPLACE(desc, 'Mercury', 'Mister'), LOWER('Mercury'), LOWER('Mister')), UPPER('Mercury'), UPPER('Mister')),
+name = REPLACE(REPLACE(REPLACE(name, 'Mercury', 'Mister'), LOWER('Mercury'), LOWER('Mister')), UPPER('Mercury'), UPPER('Mister')),
+str1 = REPLACE(REPLACE(REPLACE(str1, 'Mercury', 'Mister'), LOWER('Mercury'), LOWER('Mister')), UPPER('Mercury'), UPPER('Mister')),
+str2 = REPLACE(REPLACE(REPLACE(str2, 'Mercury', 'Mister'), LOWER('Mercury'), LOWER('Mister')), UPPER('Mercury'), UPPER('Mister')),
+str3 = REPLACE(REPLACE(REPLACE(str3, 'Mercury', 'Mister'), LOWER('Mercury'), LOWER('Mister')), UPPER('Mercury'), UPPER('Mister')),
+str4 = REPLACE(REPLACE(REPLACE(str4, 'Mercury', 'Mister'), LOWER('Mercury'), LOWER('Mister')), UPPER('Mercury'), UPPER('Mister')),
+str5 = REPLACE(REPLACE(REPLACE(str5, 'Mercury', 'Mister'), LOWER('Mercury'), LOWER('Mister')), UPPER('Mercury'), UPPER('Mister')),
+str6 = REPLACE(REPLACE(REPLACE(str6, 'Mercury', 'Mister'), LOWER('Mercury'), LOWER('Mister')), UPPER('Mercury'), UPPER('Mister')),
+str7 = REPLACE(REPLACE(REPLACE(str7, 'Mercury', 'Mister'), LOWER('Mercury'), LOWER('Mister')), UPPER('Mercury'), UPPER('Mister')),
+str8 = REPLACE(REPLACE(REPLACE(str8, 'Mercury', 'Mister'), LOWER('Mercury'), LOWER('Mister')), UPPER('Mercury'), UPPER('Mister')),
+str9 = REPLACE(REPLACE(REPLACE(str9, 'Mercury', 'Mister'), LOWER('Mercury'), LOWER('Mister')), UPPER('Mercury'), UPPER('Mister')),
+str10 = REPLACE(REPLACE(REPLACE(str10, 'Mercury', 'Mister'), LOWER('Mercury'), LOWER('Mister')), UPPER('Mercury'), UPPER('Mister')),
+str11 = REPLACE(REPLACE(REPLACE(str11, 'Mercury', 'Mister'), LOWER('Mercury'), LOWER('Mister')), UPPER('Mercury'), UPPER('Mister')),
+str12 = REPLACE(REPLACE(REPLACE(str12, 'Mercury', 'Mister'), LOWER('Mercury'), LOWER('Mister')), UPPER('Mercury'), UPPER('Mister')),
+str13 = REPLACE(REPLACE(REPLACE(str13, 'Mercury', 'Mister'), LOWER('Mercury'), LOWER('Mister')), UPPER('Mercury'), UPPER('Mister')),
+str14 = REPLACE(REPLACE(REPLACE(str14, 'Mercury', 'Mister'), LOWER('Mercury'), LOWER('Mister')), UPPER('Mercury'), UPPER('Mister')),
+str15 = REPLACE(REPLACE(REPLACE(str15, 'Mercury', 'Mister'), LOWER('Mercury'), LOWER('Mister')), UPPER('Mercury'), UPPER('Mister')),
+str16 = REPLACE(REPLACE(REPLACE(str16, 'Mercury', 'Mister'), LOWER('Mercury'), LOWER('Mister')), UPPER('Mercury'), UPPER('Mister'))
+WHERE desc LIKE '%Mercury%' OR name LIKE '%Mercury%' OR
+str1 LIKE '%Mercury%' OR str2 LIKE '%Mercury%' OR str3 LIKE '%Mercury%' OR
+str4 LIKE '%Mercury%' OR str5 LIKE '%Mercury%' OR str6 LIKE '%Mercury%' OR
+str7 LIKE '%Mercury%' OR str8 LIKE '%Mercury%' OR str9 LIKE '%Mercury%' OR
+str10 LIKE '%Mercury%' OR str11 LIKE '%Mercury%' OR str12 LIKE '%Mercury%' OR
+str13 LIKE '%Mercury%' OR str14 LIKE '%Mercury%' OR str15 LIKE '%Mercury%' OR
+str16 LIKE '%Mercury%';
+
+UPDATE texts 
 SET desc = REPLACE(REPLACE(REPLACE(desc, 'Mikanko', 'Sibango'), LOWER('Mikanko'), LOWER('Sibango')), UPPER('Mikanko'), UPPER('Sibango')),
 name = REPLACE(REPLACE(REPLACE(name, 'Mikanko', 'Sibango'), LOWER('Mikanko'), LOWER('Sibango')), UPPER('Mikanko'), UPPER('Sibango')),
 str1 = REPLACE(REPLACE(REPLACE(str1, 'Mikanko', 'Sibango'), LOWER('Mikanko'), LOWER('Sibango')), UPPER('Mikanko'), UPPER('Sibango')),
@@ -5631,6 +5685,33 @@ str13 LIKE '%Osiris%' OR str14 LIKE '%Osiris%' OR str15 LIKE '%Osiris%' OR
 str16 LIKE '%Osiris%';
 
 UPDATE texts 
+SET desc = REPLACE(REPLACE(REPLACE(desc, 'Oracle', 'Overseer'), LOWER('Oracle'), LOWER('Overseer')), UPPER('Oracle'), UPPER('Overseer')),
+name = REPLACE(REPLACE(REPLACE(name, 'Oracle', 'Overseer'), LOWER('Oracle'), LOWER('Overseer')), UPPER('Oracle'), UPPER('Overseer')),
+str1 = REPLACE(REPLACE(REPLACE(str1, 'Oracle', 'Overseer'), LOWER('Oracle'), LOWER('Overseer')), UPPER('Oracle'), UPPER('Overseer')),
+str2 = REPLACE(REPLACE(REPLACE(str2, 'Oracle', 'Overseer'), LOWER('Oracle'), LOWER('Overseer')), UPPER('Oracle'), UPPER('Overseer')),
+str3 = REPLACE(REPLACE(REPLACE(str3, 'Oracle', 'Overseer'), LOWER('Oracle'), LOWER('Overseer')), UPPER('Oracle'), UPPER('Overseer')),
+str4 = REPLACE(REPLACE(REPLACE(str4, 'Oracle', 'Overseer'), LOWER('Oracle'), LOWER('Overseer')), UPPER('Oracle'), UPPER('Overseer')),
+str5 = REPLACE(REPLACE(REPLACE(str5, 'Oracle', 'Overseer'), LOWER('Oracle'), LOWER('Overseer')), UPPER('Oracle'), UPPER('Overseer')),
+str6 = REPLACE(REPLACE(REPLACE(str6, 'Oracle', 'Overseer'), LOWER('Oracle'), LOWER('Overseer')), UPPER('Oracle'), UPPER('Overseer')),
+str7 = REPLACE(REPLACE(REPLACE(str7, 'Oracle', 'Overseer'), LOWER('Oracle'), LOWER('Overseer')), UPPER('Oracle'), UPPER('Overseer')),
+str8 = REPLACE(REPLACE(REPLACE(str8, 'Oracle', 'Overseer'), LOWER('Oracle'), LOWER('Overseer')), UPPER('Oracle'), UPPER('Overseer')),
+str9 = REPLACE(REPLACE(REPLACE(str9, 'Oracle', 'Overseer'), LOWER('Oracle'), LOWER('Overseer')), UPPER('Oracle'), UPPER('Overseer')),
+str10 = REPLACE(REPLACE(REPLACE(str10, 'Oracle', 'Overseer'), LOWER('Oracle'), LOWER('Overseer')), UPPER('Oracle'), UPPER('Overseer')),
+str11 = REPLACE(REPLACE(REPLACE(str11, 'Oracle', 'Overseer'), LOWER('Oracle'), LOWER('Overseer')), UPPER('Oracle'), UPPER('Overseer')),
+str12 = REPLACE(REPLACE(REPLACE(str12, 'Oracle', 'Overseer'), LOWER('Oracle'), LOWER('Overseer')), UPPER('Oracle'), UPPER('Overseer')),
+str13 = REPLACE(REPLACE(REPLACE(str13, 'Oracle', 'Overseer'), LOWER('Oracle'), LOWER('Overseer')), UPPER('Oracle'), UPPER('Overseer')),
+str14 = REPLACE(REPLACE(REPLACE(str14, 'Oracle', 'Overseer'), LOWER('Oracle'), LOWER('Overseer')), UPPER('Oracle'), UPPER('Overseer')),
+str15 = REPLACE(REPLACE(REPLACE(str15, 'Oracle', 'Overseer'), LOWER('Oracle'), LOWER('Overseer')), UPPER('Oracle'), UPPER('Overseer')),
+str16 = REPLACE(REPLACE(REPLACE(str16, 'Oracle', 'Overseer'), LOWER('Oracle'), LOWER('Overseer')), UPPER('Oracle'), UPPER('Overseer'))
+WHERE desc LIKE '%Oracle%' OR name LIKE '%Oracle%' OR
+str1 LIKE '%Oracle%' OR str2 LIKE '%Oracle%' OR str3 LIKE '%Oracle%' OR
+str4 LIKE '%Oracle%' OR str5 LIKE '%Oracle%' OR str6 LIKE '%Oracle%' OR
+str7 LIKE '%Oracle%' OR str8 LIKE '%Oracle%' OR str9 LIKE '%Oracle%' OR
+str10 LIKE '%Oracle%' OR str11 LIKE '%Oracle%' OR str12 LIKE '%Oracle%' OR
+str13 LIKE '%Oracle%' OR str14 LIKE '%Oracle%' OR str15 LIKE '%Oracle%' OR
+str16 LIKE '%Oracle%';
+
+UPDATE texts 
 SET desc = REPLACE(REPLACE(REPLACE(desc, 'Okami', 'Okabr'), LOWER('Okami'), LOWER('Okabr')), UPPER('Okami'), UPPER('Okabr')),
 name = REPLACE(REPLACE(REPLACE(name, 'Okami', 'Okabr'), LOWER('Okami'), LOWER('Okabr')), UPPER('Okami'), UPPER('Okabr')),
 str1 = REPLACE(REPLACE(REPLACE(str1, 'Okami', 'Okabr'), LOWER('Okami'), LOWER('Okabr')), UPPER('Okami'), UPPER('Okabr')),
@@ -6007,6 +6088,33 @@ str7 LIKE '%Priest%' OR str8 LIKE '%Priest%' OR str9 LIKE '%Priest%' OR
 str10 LIKE '%Priest%' OR str11 LIKE '%Priest%' OR str12 LIKE '%Priest%' OR
 str13 LIKE '%Priest%' OR str14 LIKE '%Priest%' OR str15 LIKE '%Priest%' OR
 str16 LIKE '%Priest%';
+
+UPDATE texts 
+SET desc = REPLACE(REPLACE(REPLACE(desc, 'Pluto', 'Polar'), LOWER('Pluto'), LOWER('Polar')), UPPER('Pluto'), UPPER('Polar')),
+name = REPLACE(REPLACE(REPLACE(name, 'Pluto', 'Polar'), LOWER('Pluto'), LOWER('Polar')), UPPER('Pluto'), UPPER('Polar')),
+str1 = REPLACE(REPLACE(REPLACE(str1, 'Pluto', 'Polar'), LOWER('Pluto'), LOWER('Polar')), UPPER('Pluto'), UPPER('Polar')),
+str2 = REPLACE(REPLACE(REPLACE(str2, 'Pluto', 'Polar'), LOWER('Pluto'), LOWER('Polar')), UPPER('Pluto'), UPPER('Polar')),
+str3 = REPLACE(REPLACE(REPLACE(str3, 'Pluto', 'Polar'), LOWER('Pluto'), LOWER('Polar')), UPPER('Pluto'), UPPER('Polar')),
+str4 = REPLACE(REPLACE(REPLACE(str4, 'Pluto', 'Polar'), LOWER('Pluto'), LOWER('Polar')), UPPER('Pluto'), UPPER('Polar')),
+str5 = REPLACE(REPLACE(REPLACE(str5, 'Pluto', 'Polar'), LOWER('Pluto'), LOWER('Polar')), UPPER('Pluto'), UPPER('Polar')),
+str6 = REPLACE(REPLACE(REPLACE(str6, 'Pluto', 'Polar'), LOWER('Pluto'), LOWER('Polar')), UPPER('Pluto'), UPPER('Polar')),
+str7 = REPLACE(REPLACE(REPLACE(str7, 'Pluto', 'Polar'), LOWER('Pluto'), LOWER('Polar')), UPPER('Pluto'), UPPER('Polar')),
+str8 = REPLACE(REPLACE(REPLACE(str8, 'Pluto', 'Polar'), LOWER('Pluto'), LOWER('Polar')), UPPER('Pluto'), UPPER('Polar')),
+str9 = REPLACE(REPLACE(REPLACE(str9, 'Pluto', 'Polar'), LOWER('Pluto'), LOWER('Polar')), UPPER('Pluto'), UPPER('Polar')),
+str10 = REPLACE(REPLACE(REPLACE(str10, 'Pluto', 'Polar'), LOWER('Pluto'), LOWER('Polar')), UPPER('Pluto'), UPPER('Polar')),
+str11 = REPLACE(REPLACE(REPLACE(str11, 'Pluto', 'Polar'), LOWER('Pluto'), LOWER('Polar')), UPPER('Pluto'), UPPER('Polar')),
+str12 = REPLACE(REPLACE(REPLACE(str12, 'Pluto', 'Polar'), LOWER('Pluto'), LOWER('Polar')), UPPER('Pluto'), UPPER('Polar')),
+str13 = REPLACE(REPLACE(REPLACE(str13, 'Pluto', 'Polar'), LOWER('Pluto'), LOWER('Polar')), UPPER('Pluto'), UPPER('Polar')),
+str14 = REPLACE(REPLACE(REPLACE(str14, 'Pluto', 'Polar'), LOWER('Pluto'), LOWER('Polar')), UPPER('Pluto'), UPPER('Polar')),
+str15 = REPLACE(REPLACE(REPLACE(str15, 'Pluto', 'Polar'), LOWER('Pluto'), LOWER('Polar')), UPPER('Pluto'), UPPER('Polar')),
+str16 = REPLACE(REPLACE(REPLACE(str16, 'Pluto', 'Polar'), LOWER('Pluto'), LOWER('Polar')), UPPER('Pluto'), UPPER('Polar'))
+WHERE desc LIKE '%Pluto%' OR name LIKE '%Pluto%' OR
+str1 LIKE '%Pluto%' OR str2 LIKE '%Pluto%' OR str3 LIKE '%Pluto%' OR
+str4 LIKE '%Pluto%' OR str5 LIKE '%Pluto%' OR str6 LIKE '%Pluto%' OR
+str7 LIKE '%Pluto%' OR str8 LIKE '%Pluto%' OR str9 LIKE '%Pluto%' OR
+str10 LIKE '%Pluto%' OR str11 LIKE '%Pluto%' OR str12 LIKE '%Pluto%' OR
+str13 LIKE '%Pluto%' OR str14 LIKE '%Pluto%' OR str15 LIKE '%Pluto%' OR
+str16 LIKE '%Pluto%';
 
 UPDATE texts 
 SET desc = REPLACE(REPLACE(REPLACE(desc, 'Phant', 'Illuso'), LOWER('Phant'), LOWER('Illuso')), UPPER('Phant'), UPPER('Illuso')),
@@ -8216,3 +8324,4 @@ str13 = RTRIM(str13),
 str14 = RTRIM(str14),
 str15 = RTRIM(str15),
 str16 = RTRIM(str16);
+COMMIT;
