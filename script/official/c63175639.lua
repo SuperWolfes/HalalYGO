@@ -26,7 +26,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x106e}
 function s.filter(c)
-	return c:IsSetCard(0x106e) and c:IsActional() and c:IsAbleToRest()
+	return c:IsSetCard(0x106e) and c:IsActional() and c:IsAbleToGrave()
 end
 function s.sgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end
@@ -37,7 +37,7 @@ function s.sgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then 
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	end
 end
 function s.cfilter(c)

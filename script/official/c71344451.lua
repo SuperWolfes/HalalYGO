@@ -38,7 +38,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.Draw(tp,1,REASON_EFFECT)==0 then return end
 	local tc=Duel.GetOperatedGroup():GetFirst()
 	Duel.ConfirmCards(1-tp,tc)
-	if tc:IsCode(id) and Duel.SendtoRest(tc,REASON_EFFECT)>0 and tc:IsLocation(LOCATION_REST) then
+	if tc:IsCode(id) and Duel.SendtoGrave(tc,REASON_EFFECT)>0 and tc:IsLocation(LOCATION_REST) then
 		local sg=Duel.GetMatchingGroup(nil,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,e:GetHandler())
 		if #sg==0 or Duel.Destroy(sg,REASON_EFFECT)==0 then return end
 		local tg=Duel.GetOperatedGroup():Filter(Card.IsLocation,nil,LOCATION_REST)
@@ -50,7 +50,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	else
 		Duel.ShuffleHand(tp)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-		local dg=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(Card.IsAbleToDeck),tp,LOCATION_REST,0,rest_ct,rest_ct,nil)
+		local dg=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(Card.IsAbleToDeck),tp,LOCATION_REST,0,rest_ct,rest_ct,nil)
 		if #dg>0 then
 			Duel.HintSelection(dg,true)
 			Duel.SendtoDeck(dg,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)

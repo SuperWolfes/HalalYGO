@@ -55,13 +55,13 @@ function s.ngcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCurrentChain()==0 and tp~=ep
 end
 function s.ngfilter(c)
-	return c:IsSummonLocation(LOCATION_SZONE) and c:IsType(TYPE_TRAP+TYPE_CONTINUOUS) and c:IsAbleToRestAsCost()
+	return c:IsSummonLocation(LOCATION_SZONE) and c:IsType(TYPE_TRAP+TYPE_CONTINUOUS) and c:IsAbleToGraveAsCost()
 end
 function s.ngcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.ngfilter,tp,LOCATION_MZONE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.ngfilter,tp,LOCATION_MZONE,0,1,1,nil)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.ngtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

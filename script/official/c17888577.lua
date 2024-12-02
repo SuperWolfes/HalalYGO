@@ -33,7 +33,7 @@ function s.gyfilter1(c,tp)
 		and Duel.IsExistingMatchingCard(s.gyfilter2,tp,LOCATION_DECK,0,1,nil,c)
 end
 function s.gyfilter2(c,tc)
-	return c:IsLockedMonster() and c:IsAbleToRest()
+	return c:IsLockedMonster() and c:IsAbleToGrave()
 		and (c:IsAttribute(tc:GetAttribute()) or c:IsRace(tc:GetRace()))
 end
 function s.gytg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -49,7 +49,7 @@ function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=Duel.SelectMatchingCard(tp,s.gyfilter2,tp,LOCATION_DECK,0,1,1,nil,tc)
 		if #g>0 then
-			Duel.SendtoRest(g,REASON_EFFECT)
+			Duel.SendtoGrave(g,REASON_EFFECT)
 		end
 	end
 end

@@ -18,7 +18,7 @@ end
 s.listed_series={0x43}
 
 function s.spfilter(c)
-	return c:IsSetCard(0x43) and c:IsAbleToRestAsCost()
+	return c:IsSetCard(0x43) and c:IsAbleToGraveAsCost()
 end
 function s.spcon(e,c)
 	if c==nil then return true end
@@ -38,6 +38,6 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 	g:DeleteGroup()
 end

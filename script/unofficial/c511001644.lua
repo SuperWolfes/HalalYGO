@@ -96,7 +96,7 @@ function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if Duel.SelectYesNo(tp,aux.Stringid(67511500,0)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=Duel.SelectMatchingCard(tp,Card.IsRace,tp,LOCATION_MZONE,0,1,1,e:GetHandler(),RACE_MACHINE)
-		Duel.SendtoRest(g,REASON_EFFECT+REASON_REPLACE)
+		Duel.SendtoGrave(g,REASON_EFFECT+REASON_REPLACE)
 		return true
 	else return false end
 end

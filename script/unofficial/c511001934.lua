@@ -32,7 +32,7 @@ function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 	return ep==tp
 end
 function s.tgfilter(c)
-	return c:IsSetCard(0x55f) and c:IsActional() and c:IsAbleToRest()
+	return c:IsSetCard(0x55f) and c:IsActional() and c:IsAbleToGrave()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil) end
@@ -43,7 +43,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	end
 end
 function s.cfilter(c)

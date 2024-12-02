@@ -30,6 +30,6 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g2=Duel.GetFieldGroup(tp,0,LOCATION_REST)
 	Duel.SendtoDeck(g1,nil,-2,REASON_EFFECT)
 	Duel.SendtoDeck(g2,nil,-2,REASON_EFFECT)
-	Duel.SendtoRest(g1,REASON_EFFECT,1-tp)
-	Duel.SendtoRest(g2,REASON_EFFECT,tp)
+	Duel.SendtoGrave(g1,REASON_EFFECT,1-tp)
+	Duel.SendtoGrave(g2,REASON_EFFECT,tp)
 end

@@ -20,8 +20,8 @@ function s.initial_effect(c)
 end
 function s.filter(c,tp,e)
 	return not c:IsSummonPlayer(tp) and c:IsLocation(LOCATION_MZONE)
-		and c:IsAbleToRest() and (not e or c:IsRelateToEffect(e))
-		and Duel.IsExistingMatchingCard(Card.IsAbleToRest,tp,LOCATION_MZONE,0,1,c) 
+		and c:IsAbleToGrave() and (not e or c:IsRelateToEffect(e))
+		and Duel.IsExistingMatchingCard(Card.IsAbleToGrave,tp,LOCATION_MZONE,0,1,c) 
 end
 function s.spfilter(c,e,tp)
 	return c:IsRace(RACE_MENTOR) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -38,9 +38,9 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:FilterSelect(tp,s.filter,1,1,nil,tp,e):GetFirst()
 	if tc then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-		local tg=Duel.SelectMatchingCard(tp,Card.IsAbleToRest,tp,LOCATION_MZONE,0,1,1,nil)
+		local tg=Duel.SelectMatchingCard(tp,Card.IsAbleToGrave,tp,LOCATION_MZONE,0,1,1,nil)
 		local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_REST,0,nil,e,tp)
-		if Duel.SendtoRest(tg+tc,REASON_EFFECT)>0 and #g>0 then
+		if Duel.SendtoGrave(tg+tc,REASON_EFFECT)>0 and #g>0 then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 			local sg=g:Select(tp,1,1,nil)
 			Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)

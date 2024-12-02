@@ -50,7 +50,7 @@ end
 	--Discard itself as cost
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsDiscardable() end
-	Duel.SendtoRest(e:GetHandler(),REASON_COST+REASON_DISCARD)
+	Duel.SendtoGrave(e:GetHandler(),REASON_COST+REASON_DISCARD)
 end
 	--Check for "Nekroz" monsters to tribute
 function s.filter(c)
@@ -58,7 +58,7 @@ function s.filter(c)
 end
 	--Check for "Nekroz" cards to send to GY
 function s.sendfilter(c)
-	return c:IsSetCard(0xb4) and c:IsAbleToRest()
+	return c:IsSetCard(0xb4) and c:IsAbleToGrave()
 end
 	--Activation legality
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -77,7 +77,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 		local rct=Duel.Release(g,REASON_EFFECT)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local sg=Duel.SelectMatchingCard(tp,s.sendfilter,tp,LOCATION_DECK,0,rct,rct,nil)
-		Duel.SendtoRest(sg,REASON_EFFECT)
+		Duel.SendtoGrave(sg,REASON_EFFECT)
 	end
 end
 	--Monster effect activated

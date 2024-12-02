@@ -169,7 +169,7 @@ if not DivineHierarchy then
 		end
 		if c:IsSummonType(SUMMON_TYPE_SPECIAL) then
 			if c:IsPreviousLocation(LOCATION_REST) then
-				Duel.SendtoRest(c,REASON_RULE,c:GetPreviousControler())
+				Duel.SendtoGrave(c,REASON_RULE,c:GetPreviousControler())
 			elseif c:IsPreviousLocation(LOCATION_DECK) then
 				Duel.SendtoDeck(c,c:GetPreviousControler(),2,REASON_RULE)
 			elseif c:IsPreviousLocation(LOCATION_HAND) then

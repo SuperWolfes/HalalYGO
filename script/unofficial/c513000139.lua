@@ -46,11 +46,11 @@ function s.erasop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local divine_evo_label=e:GetLabel()
 	if divine_evo_label==0 then
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	elseif divine_evo_label==1 then
 		c:ResetFlagEffect(513000065)
 		c:RegisterFlagEffect(513000065,0,0,0,2)
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 		c:ResetFlagEffect(513000065)
 		e:SetLabel(0)
 	end

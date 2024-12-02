@@ -18,15 +18,15 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.cfilter(c)
-	return c:IsSetCard(0xad) and c:IsAbleToRestAsCost()
+	return c:IsSetCard(0xad) and c:IsAbleToGraveAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,e:GetHandler()) 
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,e:GetHandler()) 
 		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_EXTRA,0,2,nil) end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-	local g1=Duel.SelectMatchingCard(tp,Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,1,nil)
+	local g1=Duel.SelectMatchingCard(tp,Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,1,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g2=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_EXTRA,0,2,2,nil)
 	g1:Merge(g2)
-	Duel.SendtoRest(g1,REASON_COST)
+	Duel.SendtoGrave(g1,REASON_COST)
 end

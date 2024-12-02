@@ -31,7 +31,7 @@ end
 
 	--Check for a Contaminated monster
 function s.tgfilter(c)
-	return c:IsRace(RACE_CONTAMINED) and c:IsAbleToRest()
+	return c:IsRace(RACE_CONTAMINED) and c:IsAbleToGrave()
 end
 	--Activation legality
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -43,7 +43,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	end
 end
 	--Banish 1 Contaminated monster from GY as cost

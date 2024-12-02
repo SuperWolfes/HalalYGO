@@ -52,7 +52,7 @@ end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local cid=Duel.GetChainInfo(ev,CHAININFO_CHAIN_ID)
 	if cid~=e:GetLabel() then return end
-	e:GetOwner():CancelToRest(false)
+	e:GetOwner():CancelToGrave(false)
 end
 function s.spfilter(c,e,tp)
 	return c:IsSetCard(0x101) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0
@@ -93,7 +93,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			c:RegisterEffect(e1)
 			Duel.SpecialSummonComplete()
 		elseif not c:IsStatus(STATUS_LEAVE_CONFIRMED) and c:IsLocation(LOCATION_ONFIELD) then
-			c:CancelToRest(false)
+			c:CancelToGrave(false)
 		end
 	end
 end

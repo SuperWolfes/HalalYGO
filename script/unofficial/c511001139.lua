@@ -84,12 +84,12 @@ function s.overdrivecon(e,tp,eg,ep,ev,re,r,rp)
 	return phase~=PHASE_DAMAGE or not Duel.IsDamageCalculated()
 end
 function s.overdrivefilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x5034) and c:IsAbleToRestAsCost()
+	return c:IsFaceup() and c:IsSetCard(0x5034) and c:IsAbleToGraveAsCost()
 end
 function s.overdrivecost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.overdrivefilter,tp,LOCATION_ONFIELD,0,1,nil) end
 	local g=Duel.GetMatchingGroup(s.overdrivefilter,tp,LOCATION_ONFIELD,0,nil)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 	e:SetLabel(#g)
 end
 function s.overdriveop(e,tp,eg,ep,ev,re,r,rp)
@@ -107,7 +107,7 @@ function s.protectioncon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetFlagEffect(id)==0
 end
 function s.protectionfilter(c)
-	return c:IsSetCard(0x1034) and c:IsAbleToRestAsCost()
+	return c:IsSetCard(0x1034) and c:IsAbleToGraveAsCost()
 end
 function s.protectiontg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.protectionfilter,tp,LOCATION_SZONE,0,1,nil) end
@@ -115,7 +115,7 @@ function s.protectiontg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.protectionop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,s.protectionfilter,tp,LOCATION_SZONE,0,1,1,nil)
-	Duel.SendtoRest(g,REASON_EFFECT)
+	Duel.SendtoGrave(g,REASON_EFFECT)
 end
 function s.banop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.rainbowfilter,tp,LOCATION_ONFIELD+LOCATION_REST,0,nil)

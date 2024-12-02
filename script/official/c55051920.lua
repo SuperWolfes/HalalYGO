@@ -71,7 +71,7 @@ function s.repfilter(c,tp)
 		and c:IsControler(tp) and c:IsReason(REASON_EFFECT+REASON_BATTLE) and not c:IsReason(REASON_REPLACE)
 end
 function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToRest() and not eg:IsContains(e:GetHandler())
+	if chk==0 then return e:GetHandler():IsAbleToGrave() and not eg:IsContains(e:GetHandler())
 		and eg:IsExists(s.repfilter,1,e:GetHandler(),tp) end
 	if Duel.SelectEffectYesNo(tp,e:GetHandler(),96) then
 		return true
@@ -83,5 +83,5 @@ function s.repval(e,c)
 	return s.repfilter(c,e:GetHandlerPlayer())
 end
 function s.repop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SendtoRest(e:GetHandler(),REASON_EFFECT)
+	Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
 end

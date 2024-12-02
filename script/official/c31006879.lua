@@ -54,10 +54,10 @@ function s.ctop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToRestAsCost()
+	if chk==0 then return c:IsAbleToGraveAsCost()
 		and Duel.IsCanRemoveCounter(tp,1,0,0x1148,2,REASON_COST) end
 	Duel.RemoveCounter(tp,1,0,0x1148,2,REASON_COST)
-	Duel.SendtoRest(c,REASON_COST)
+	Duel.SendtoGrave(c,REASON_COST)
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,2) end

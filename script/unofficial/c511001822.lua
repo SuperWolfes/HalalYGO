@@ -93,7 +93,7 @@ function s.detop(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsRelateToEffect(e) and tc:IsFaceup() and sc then
 		local og=tc:GetOverlayGroup()
 		if #og==0 then return end
-		if Duel.SendtoRest(og,REASON_EFFECT)>0 then
+		if Duel.SendtoGrave(og,REASON_EFFECT)>0 then
 			Duel.Overlay(sc,og)
 			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetType(EFFECT_TYPE_SINGLE)

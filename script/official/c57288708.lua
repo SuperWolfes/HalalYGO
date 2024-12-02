@@ -60,7 +60,7 @@ end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local g=eg:Filter(s.tgfilter,nil)
 	if #g>0 then
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	end
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)

@@ -28,7 +28,7 @@ function s.spfilter(c,e,tp,dam,rg)
 	return result
 end
 function s.tgfilter(c)
-	return c:HasLevel() and c:IsAbleToRest()
+	return c:HasLevel() and c:IsAbleToGrave()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local dam=Duel.GetBattleDamage(tp)
@@ -54,7 +54,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if rg:CheckWithSumEqual(Card.GetLevel,tc:GetLevel(),1,99) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local tg=rg:SelectWithSumEqual(tp,Card.GetLevel,tc:GetLevel(),1,99)
-		Duel.SendtoRest(tg,REASON_COST)
+		Duel.SendtoGrave(tg,REASON_COST)
 		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 	end
 end

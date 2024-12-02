@@ -113,7 +113,7 @@ end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local dg=eg:Filter(s.thcfilter,nil,tp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.thfilter2),tp,LOCATION_REST,0,1,1,nil,dg)
+	local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.thfilter2),tp,LOCATION_REST,0,1,1,nil,dg)
 	if #g>0 then
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)

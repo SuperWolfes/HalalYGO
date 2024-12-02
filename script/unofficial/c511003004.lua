@@ -56,7 +56,7 @@ function s.filter(c,e,tp)
 	return c:IsCanBeEffectTarget(e) and Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,c)
 end
 function s.tgfilter(c,e,tp,tc)
-	return c:IsSetCard(0xad) and c:GetLevel()==tc:GetLevel() and c:IsAbleToRest() and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,c,e,tp,tc)
+	return c:IsSetCard(0xad) and c:GetLevel()==tc:GetLevel() and c:IsAbleToGrave() and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,c,e,tp,tc)
 end
 function s.spfilter(c,e,tp,tc)
 	return c:IsSetCard(0xad) and c:IsType(TYPE_FUSION) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,false,false) 
@@ -82,7 +82,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local tg=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,tc)
 		if #tg>0 then
 			Duel.BreakEffect()
-			if Duel.SendtoRest(tg,REASON_EFFECT)>0 then
+			if Duel.SendtoGrave(tg,REASON_EFFECT)>0 then
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 				local sg=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,tc)
 				if #sg>0 then

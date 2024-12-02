@@ -31,7 +31,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x578}
 function s.sendfilter(c,ft)
-	return c:IsLevelBelow(4) and c:IsSetCard(0x578) and c:IsAbleToRest() 
+	return c:IsLevelBelow(4) and c:IsSetCard(0x578) and c:IsAbleToGrave() 
 		and (ft>0 or c:GetSequence()<5)
 end
 function s.spfilter(c,e,tp)
@@ -55,7 +55,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local ex,g2=Duel.GetOperationInfo(0,CATEGORY_SPECIAL_SUMMON)
 	local tc1=g1:GetFirst()
 	local tc2=g2:GetFirst()
-	if tc1:IsRelateToEffect(e) and Duel.SendtoRest(tc1,REASON_EFFECT)~=0 and tc1:IsLocation(LOCATION_REST) and tc2:IsRelateToEffect(e) then
+	if tc1:IsRelateToEffect(e) and Duel.SendtoGrave(tc1,REASON_EFFECT)~=0 and tc1:IsLocation(LOCATION_REST) and tc2:IsRelateToEffect(e) then
 		Duel.SpecialSummon(tc2,0,tp,tp,false,false,POS_FACEUP)
 	end
 end

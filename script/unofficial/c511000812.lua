@@ -22,7 +22,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
 	local g=Duel.GetFieldGroup(p,LOCATION_HAND,0)
-	Duel.SendtoRest(g,REASON_EFFECT+REASON_DISCARD)
+	Duel.SendtoGrave(g,REASON_EFFECT+REASON_DISCARD)
 	if #g>0 then
 		Duel.Damage(1-p,#g*500,REASON_EFFECT)
 	end

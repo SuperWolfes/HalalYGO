@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter1(c,tp)
-	return c:IsDiscardable() and ((s.filter2(c) and c:IsAbleToRestAsCost())
+	return c:IsDiscardable() and ((s.filter2(c) and c:IsAbleToGraveAsCost())
 		or Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_HAND+LOCATION_REST,0,1,c))
 end
 function s.filter2(c)
@@ -22,7 +22,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
-	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.filter2),tp,LOCATION_HAND+LOCATION_REST,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.filter2),tp,LOCATION_HAND+LOCATION_REST,0,1,1,nil)
 	local tc=g:GetFirst()
 	if tc then
 		Duel.SSet(tp,tc)

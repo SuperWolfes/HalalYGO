@@ -77,12 +77,12 @@ function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 	local sg=Group.CreateGroup()
 	for p=0,1 do
 		Duel.Hint(HINT_SELECTMSG,p,HINTMSG_TOREST)
-		local g=Duel.SelectMatchingCard(p,Card.IsAbleToRest,p,LOCATION_EXTRA,0,1,1,nil)
+		local g=Duel.SelectMatchingCard(p,Card.IsAbleToGrave,p,LOCATION_EXTRA,0,1,1,nil)
 		if #g>0 then
 			sg:AddCard(g:GetFirst())
 		end
 	end
 	if #sg>0 then
-		Duel.SendtoRest(sg,REASON_EFFECT)
+		Duel.SendtoGrave(sg,REASON_EFFECT)
 	end
 end

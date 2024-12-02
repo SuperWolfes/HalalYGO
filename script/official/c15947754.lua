@@ -86,12 +86,12 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ConfirmCards(1-tp,eg:GetFirst())
 	local res=s.testtype(op,eg:GetFirst())
 	if res then --correctly guessed
-		Duel.SendtoRest(c,REASON_EFFECT)
+		Duel.SendtoGrave(c,REASON_EFFECT)
 	else --incorrectly guessed
 		local g=Duel.GetFieldGroup(tp,0,LOCATION_HAND,nil)
 		if #g==0 then return end
 		local sg=g:RandomSelect(1-tp,1)
-		if Duel.SendtoRest(sg,REASON_DISCARD+REASON_EFFECT)>0 then
+		if Duel.SendtoGrave(sg,REASON_DISCARD+REASON_EFFECT)>0 then
 			Duel.SendtoHand(c,nil,REASON_EFFECT)
 		end
 	end

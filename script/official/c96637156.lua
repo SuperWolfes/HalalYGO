@@ -25,7 +25,7 @@ function s.mvtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,1)
 end
 function s.cannot_move(c)
-	Duel.SendtoRest(c,REASON_EFFECT)
+	Duel.SendtoGrave(c,REASON_EFFECT)
 end
 function s.mvop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

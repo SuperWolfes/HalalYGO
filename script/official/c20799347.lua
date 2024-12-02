@@ -66,7 +66,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetReset(RESET_EVENT+RESETS_REDIRECT)
 		e2:SetValue(LOCATION_REMOVED)
 		c:RegisterEffect(e2,true)
-		--Restricted to level/rank 3+ monsters
+		--Gravericted to level/rank 3+ monsters
 		local e3=Effect.CreateEffect(e:GetHandler())
 		e3:SetDescription(aux.Stringid(id,2))
 		e3:SetType(EFFECT_TYPE_FIELD)

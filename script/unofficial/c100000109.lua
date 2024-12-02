@@ -27,18 +27,18 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil)
 end
 function s.costfilter(c,code)
-	return c:IsFaceup() and c:IsCode(code) and c:IsAbleToRestAsCost()
+	return c:IsFaceup() and c:IsCode(code) and c:IsAbleToGraveAsCost()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_SZONE,0,1,nil,100000107)
 		and Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_SZONE,0,1,nil,100000108)
-		and e:GetHandler():IsAbleToRestAsCost() end
+		and e:GetHandler():IsAbleToGraveAsCost() end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g1=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_SZONE,0,1,1,nil,100000107)
 	local g2=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_SZONE,0,1,1,nil,100000108)
 	g1:Merge(g2)
 	g1:AddCard(e:GetHandler())
-	Duel.SendtoRest(g1,REASON_COST)
+	Duel.SendtoGrave(g1,REASON_COST)
 end
 function s.spfilter(c,e,tp)
 	return c:IsCode(5861892) and c:IsCanBeSpecialSummoned(e,0,tp,true,c:IsOriginalCode(511003201))
@@ -51,7 +51,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local tc=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,0x13,0,1,1,nil,e,tp):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.spfilter),tp,0x13,0,1,1,nil,e,tp):GetFirst()
 	if tc and Duel.SpecialSummon(tc,0,tp,tp,true,false,POS_FACEUP)>0 then
 		tc:CompleteProcedure()
 	end

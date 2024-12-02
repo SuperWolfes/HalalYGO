@@ -48,7 +48,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsRelateToEffect(e) and tc:IsFaceup() and c:IsRelateToEffect(e) then
 		local g=Duel.SelectMatchingCard(tp,s.filter2,tp,0,LOCATION_SZONE,1,1,e:GetHandler())
 		if #g>0 then
-			c:CancelToRest()
+			c:CancelToGrave()
 			g:AddCard(c)
 			Duel.Overlay(tc,g)
 		end

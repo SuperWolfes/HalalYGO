@@ -16,7 +16,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_FOSSIL_FUSION}
 function s.tgfilter(c)
-	return c:IsMonster() and c:IsRace(RACE_ROCK) and c:IsLevelBelow(4) and c:IsAbleToRest()
+	return c:IsMonster() and c:IsRace(RACE_ROCK) and c:IsLevelBelow(4) and c:IsAbleToGrave()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil)
@@ -26,7 +26,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
-	if #g>0 and Duel.SendtoRest(g,REASON_EFFECT) and g:GetFirst():IsLocation(LOCATION_REST) and Duel.IsPlayerCanDraw(tp)
+	if #g>0 and Duel.SendtoGrave(g,REASON_EFFECT) and g:GetFirst():IsLocation(LOCATION_REST) and Duel.IsPlayerCanDraw(tp)
 		and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,CARD_FOSSIL_FUSION) then
 		Duel.BreakEffect()
 		Duel.Draw(tp,1,REASON_EFFECT)

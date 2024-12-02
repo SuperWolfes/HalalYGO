@@ -36,7 +36,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local hg=Duel.GetFieldGroup(tp,0,LOCATION_HAND)
 		Duel.ConfirmCards(tp,hg)
 		if #g>0 then
-			Duel.SendtoRest(g,REASON_EFFECT)
+			Duel.SendtoGrave(g,REASON_EFFECT)
 		end
 		Duel.ShuffleHand(1-tp)
 	end

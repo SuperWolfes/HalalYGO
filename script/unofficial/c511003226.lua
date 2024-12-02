@@ -82,7 +82,7 @@ function s.retop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()	
 	if tc and tc:IsRelateToEffect(e) and c and c:IsRelateToEffect(e) then 
 		if Duel.SendtoHand(c,nil,REASON_EFFECT)>0 and c:IsLocation(LOCATION_HAND) then
-			Duel.SendtoRest(tc,REASON_EFFECT+REASON_RETURN)
+			Duel.SendtoGrave(tc,REASON_EFFECT+REASON_RETURN)
 		end
 	end
 end

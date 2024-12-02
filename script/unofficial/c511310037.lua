@@ -71,11 +71,11 @@ function s.eqgroup(tp)
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=s.eqgroup(tp)
-	g:Filter(Card.IsAbleToRestAsCost,nil)
+	g:Filter(Card.IsAbleToGraveAsCost,nil)
 	if chk==0 then return #g>0 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tg=g:Select(tp,1,1,nil)
-	Duel.SendtoRest(tg,REASON_COST)
+	Duel.SendtoGrave(tg,REASON_COST)
 end
 function s.spfilter(c,e,tp)
 	return c:IsSetCard(SET_ALLURE_QUEEN) and c:HasLevel() and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

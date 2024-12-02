@@ -77,7 +77,7 @@ function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(Card.IsAbleToDeck),tp,LOCATION_REST,LOCATION_REST,1,2,nil)
+	local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(Card.IsAbleToDeck),tp,LOCATION_REST,LOCATION_REST,1,2,nil)
 	if #g>0 then
 		Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
 	end

@@ -35,7 +35,7 @@ function s.otcon(e,c,minc)
 	hg:RemoveCard(c)
 	local mg=Duel.GetMatchingGroup(s.otfilter,tp,LOCATION_MZONE,LOCATION_MZONE,nil,tp)
 	return #hg>0 and minc<=1 and Duel.CheckTribute(c,1,1,mg)
-		and hg:FilterCount(Card.IsAbleToRestAsCost,nil)==#hg
+		and hg:FilterCount(Card.IsAbleToGraveAsCost,nil)==#hg
 end
 function s.ottg(e,tp,eg,ep,ev,re,r,rp,chk,c)
 	local mg=Duel.GetMatchingGroup(s.otfilter,tp,LOCATION_MZONE,LOCATION_MZONE,nil,tp)
@@ -51,7 +51,7 @@ function s.otop(e,tp,eg,ep,ev,re,r,rp,c)
 	local sg=e:GetLabelObject()
 	if not sg then return end
 	local hg=Duel.GetFieldGroup(tp,LOCATION_HAND,0)-c
-	Duel.SendtoRest(hg,REASON_COST+REASON_DISCARD)
+	Duel.SendtoGrave(hg,REASON_COST+REASON_DISCARD)
 	c:SetMaterial(sg)
 	Duel.Release(sg,REASON_SUMMON+REASON_MATERIAL)
 	sg:DeleteGroup()

@@ -28,7 +28,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x400d}
 function s.costfilter(c)
-	return c:IsSetCard(0x400d) and c:IsMonster() and c:IsAbleToRestAsCost()
+	return c:IsSetCard(0x400d) and c:IsMonster() and c:IsAbleToGraveAsCost()
 end
 function s.setcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local fg=Group.CreateGroup()
@@ -50,7 +50,7 @@ function s.setcost(e,tp,eg,ep,ev,re,r,rp,chk)
 		Duel.Hint(HINT_CARD,0,fc:GetCode())
 		fc:RegisterFlagEffect(61557074,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,0)
 	end
-	Duel.SendtoRest(tc,REASON_COST)
+	Duel.SendtoGrave(tc,REASON_COST)
 end
 function s.setfilter(c)
 	return c:IsFaceup() and c:IsCanTurnSet()

@@ -52,7 +52,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			Duel.HintSelection(xg)
 			xc=xg:GetFirst()
 			og=xc:GetOverlayGroup()
-			c:CancelToRest()
+			c:CancelToGrave()
 			og:AddCard(c)
 		end
 	end

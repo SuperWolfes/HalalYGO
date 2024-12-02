@@ -27,7 +27,7 @@ end
 s.listed_series={0x128}
 
 function s.mfilter(c)
-	return (c:IsLocation(LOCATION_HAND+LOCATION_MZONE) and c:IsAbleToRest())
+	return (c:IsLocation(LOCATION_HAND+LOCATION_MZONE) and c:IsAbleToGrave())
 end
 function s.checkmat(tp,sg,fc)
 	return sg:IsExists(Card.IsSetCard,1,nil,0x128)

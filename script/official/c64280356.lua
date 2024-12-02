@@ -83,6 +83,6 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 		local tc=cg:GetFirst()
 		Duel.SendtoHand(tc,nil,REASON_EFFECT)
 		sg1:RemoveCard(tc)
-		Duel.SendtoRest(sg1,REASON_EFFECT)
+		Duel.SendtoGrave(sg1,REASON_EFFECT)
 	end
 end

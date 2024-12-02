@@ -56,7 +56,7 @@ function s.lvop1(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.tgfilter(c)
-	return c:IsRace(RACE_CONTAMINED) and c:IsAbleToRest()
+	return c:IsRace(RACE_CONTAMINED) and c:IsAbleToGrave()
 end
 function s.lvtg2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and s.filter(chkc) end
@@ -69,7 +69,7 @@ end
 function s.lvop2(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
-	if #g==0 or Duel.SendtoRest(g,REASON_EFFECT)==0 then return end
+	if #g==0 or Duel.SendtoGrave(g,REASON_EFFECT)==0 then return end
 	local tc=Duel.GetFirstTarget()
 	if tc:IsFaceup() and tc:IsRelateToEffect(e) and g:GetFirst():IsLocation(LOCATION_REST) then
 		local e1=Effect.CreateEffect(e:GetHandler())

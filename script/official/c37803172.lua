@@ -33,7 +33,7 @@ function s.splimit(e,se,sp,st)
 	return se:GetHandler():IsSetCard(0x107d)
 end
 function s.cfilter(c)
-	return c:IsAttribute(ATTRIBUTE_FIRE) and c:IsAbleToRestAsCost()
+	return c:IsAttribute(ATTRIBUTE_FIRE) and c:IsAbleToGraveAsCost()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsReleasable()

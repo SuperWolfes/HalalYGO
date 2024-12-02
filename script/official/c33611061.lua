@@ -34,7 +34,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if #tg>0 then
 		Duel.SendtoDeck(tg,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
 		local hg=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
-		Duel.SendtoRest(hg,REASON_EFFECT)
+		Duel.SendtoGrave(hg,REASON_EFFECT)
 		Duel.BreakEffect()
 		local g=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_DECK,0,nil)
 		if #g==0 then return end

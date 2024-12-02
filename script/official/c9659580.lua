@@ -29,7 +29,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_VIJAM}
 function s.tgfilter(c)
-	return c:IsCode(CARD_VIJAM) and c:IsAbleToRest()
+	return c:IsCode(CARD_VIJAM) and c:IsAbleToGrave()
 end
 function s.filter(c)
 	return c:IsFaceup() and c:IsSetCard(0xe3) and not c:IsCode(CARD_VIJAM)
@@ -55,7 +55,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,99,nil)
-	if Duel.SendtoRest(g,REASON_EFFECT)~=0 then
+	if Duel.SendtoGrave(g,REASON_EFFECT)~=0 then
 		local og=Duel.GetOperatedGroup()
 		local n=og:FilterCount(Card.IsLocation,nil,LOCATION_REST)
 		local tc=Duel.GetFirstTarget()
@@ -77,7 +77,7 @@ function s.lpcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.lpop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:IsRelateToEffect(e) and Duel.SendtoRest(c,REASON_EFFECT)~=0 and c:IsLocation(LOCATION_REST) then
+	if c:IsRelateToEffect(e) and Duel.SendtoGrave(c,REASON_EFFECT)~=0 and c:IsLocation(LOCATION_REST) then
 		Duel.SetLP(1-tp,math.ceil(Duel.GetLP(1-tp)/2))
 	end
 end

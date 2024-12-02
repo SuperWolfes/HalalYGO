@@ -28,7 +28,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
 function s.tgfilter(c)
-	return c:IsRace(RACE_TAINTED) and c:IsAbleToRest()
+	return c:IsRace(RACE_TAINTED) and c:IsAbleToGrave()
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
@@ -39,7 +39,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			local tg=g:Select(tp,1,1,nil)
 			if #tg==0 then return end
 			Duel.BreakEffect()
-			Duel.SendtoRest(tg,REASON_EFFECT)
+			Duel.SendtoGrave(tg,REASON_EFFECT)
 		end
 	end
 end

@@ -63,15 +63,15 @@ end
 function s.gytg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(Card.IsSummonType,tp,0,LOCATION_MZONE,nil,SUMMON_TYPE_SPECIAL)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToRest() and #g>0 end
+	if chk==0 then return c:IsAbleToGrave() and #g>0 end
 	g:AddCard(c)
 	Duel.SetOperationInfo(0,CATEGORY_TOREST,g,#g,0,0)
 end
 function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local g=Duel.GetMatchingGroup(Card.IsSummonType,tp,0,LOCATION_MZONE,nil,SUMMON_TYPE_SPECIAL)
-	if c:IsRelateToEffect(e) and #g>0 and Duel.SendtoRest(c,REASON_EFFECT)>0 and c:IsLocation(LOCATION_REST) then
-		Duel.SendtoRest(g,REASON_EFFECT)
+	if c:IsRelateToEffect(e) and #g>0 and Duel.SendtoGrave(c,REASON_EFFECT)>0 and c:IsLocation(LOCATION_REST) then
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	end
 end
 

@@ -48,7 +48,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		tc:RegisterEffect(e1)
 	else
-		Duel.SendtoRest(tc,REASON_EFFECT+REASON_REVEAL)
+		Duel.SendtoGrave(tc,REASON_EFFECT+REASON_REVEAL)
 	end
 end
 function s.sdtg(e,tp,eg,ep,ev,re,r,rp,chk)

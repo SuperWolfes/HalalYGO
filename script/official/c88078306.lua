@@ -54,7 +54,7 @@ end
 	--Set 2 "Hole" normal traps with different names from deck and GY, banish them when they leave
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<2 then return end
-	local sg=Duel.GetMatchingGroup(aux.RestValleyFilter(s.setfilter),tp,LOCATION_DECK+LOCATION_REST,0,nil)
+	local sg=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.setfilter),tp,LOCATION_DECK+LOCATION_REST,0,nil)
 	if #sg==0 then return end
 	local rg=aux.SelectUnselectGroup(sg,e,tp,2,2,s.setcheck,1,tp,HINTMSG_SET,s.setcheck)
 	if #rg>0 then

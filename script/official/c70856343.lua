@@ -40,7 +40,7 @@ function s.tgcost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 	--Check for "Fluorescent Vluorescences"
 function s.tgfilter(c)
-	return c:IsCode(id) and c:IsAbleToRest()
+	return c:IsCode(id) and c:IsAbleToGrave()
 end
 	--Activation legality
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -54,7 +54,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	if #g>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local sg=g:Select(tp,1,99,nil)
-		Duel.SendtoRest(sg,REASON_EFFECT)
+		Duel.SendtoGrave(sg,REASON_EFFECT)
 	end
 end
 	--Activation legality

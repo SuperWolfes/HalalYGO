@@ -36,7 +36,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) then
 		Duel.BreakEffect()
-		c:CancelToRest()
+		c:CancelToGrave()
 		Duel.SendtoDeck(c,nil,0,REASON_EFFECT)
 		c:ReverseInDeck()
 	end

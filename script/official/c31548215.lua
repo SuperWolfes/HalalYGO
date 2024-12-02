@@ -1,5 +1,5 @@
 --墓穴ホール
---Rest Hole
+--Grave Hole
 --Scripted by Hel
 local s,id=GetID()
 function s.initial_effect(c)

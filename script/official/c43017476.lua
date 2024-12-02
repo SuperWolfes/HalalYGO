@@ -31,7 +31,7 @@ s.listed_series={0x100}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsDiscardable() end
-	Duel.SendtoRest(c,REASON_COST+REASON_DISCARD)
+	Duel.SendtoGrave(c,REASON_COST+REASON_DISCARD)
 end
 function s.filter(c)
 	return c:IsSetCard(0x100) and c:IsActionalTrap() and c:IsAbleToHand()

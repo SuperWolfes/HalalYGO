@@ -56,7 +56,7 @@ function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	local rc=re:GetHandler()
 	if rc:IsNegatableActionalTrap() and Duel.NegateEffect(ev) and c:IsRelateToEffect(e) and rc:IsRelateToEffect(re)
 		and c:IsType(TYPE_XYZ) then
-		rc:CancelToRest()
+		rc:CancelToGrave()
 		Duel.Overlay(c,rc)
 	end
 end

@@ -19,6 +19,6 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	else Duel.PayLPCost(tp,1000) end
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SwapDeckAndRest(tp)
-	Duel.SwapDeckAndRest(1-tp)
+	Duel.SwapDeckAndGrave(tp)
+	Duel.SwapDeckAndGrave(1-tp)
 end

@@ -24,10 +24,10 @@ function s.recop(e,tp,eg,ep,ev,re,r,rp)
 	if not c:IsRelateToEffect(e) or not e:IsHasType(EFFECT_TYPE_ACTIVATE) then return end
 	local ct=Duel.GetCurrentChain()
 	if ct>3 then
-		c:CancelToRest()
+		c:CancelToGrave()
 		Duel.SendtoHand(c,nil,REASON_EFFECT)
 	elseif ct>1 then
-		c:CancelToRest()
+		c:CancelToGrave()
 		Duel.SendtoDeck(c,nil,2,REASON_EFFECT)
 	end
 end

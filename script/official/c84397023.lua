@@ -20,7 +20,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	if #g>0 then
 		Duel.ConfirmCards(1-tp,g)
 		local ct=Duel.TossSuffice(tp,1)
-		if ct==1 then Duel.SendtoRest(g,REASON_EFFECT)
+		if ct==1 then Duel.SendtoGrave(g,REASON_EFFECT)
 		else
 			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetType(EFFECT_TYPE_SINGLE)

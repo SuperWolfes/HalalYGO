@@ -47,7 +47,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) and tc:IsFaceup() then
 		Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(12152769,2))
-		local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.eqfilter),tp,0,LOCATION_REST,1,1,nil,e:GetLabel())
+		local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.eqfilter),tp,0,LOCATION_REST,1,1,nil,e:GetLabel())
 		local ec=g:GetFirst()
 		if ec then
 			Duel.HintSelection(g)

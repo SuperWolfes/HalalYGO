@@ -1,4 +1,4 @@
---Restkeeper's Lot
+--Gravekeeper's Lot
 local s,id=GetID()
 function s.initial_effect(c)
 	--skill

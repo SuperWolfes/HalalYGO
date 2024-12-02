@@ -18,7 +18,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()~=tp and ((ph>=PHASE_BATTLE_START and ph<=PHASE_BATTLE) or (ph==PHASE_DAMAGE and not Duel.IsDamageCalculated()))
 end
 function s.cfilter(c,tp)
-	return c:IsMonster() and c:IsAbleToRestAsCost() and c:IsLocation(LOCATION_HAND) and s.cfilter2(c,tp)
+	return c:IsMonster() and c:IsAbleToGraveAsCost() and c:IsLocation(LOCATION_HAND) and s.cfilter2(c,tp)
 end
 function s.cfilter2(c,tp)
 	return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,0,1,c)
@@ -33,7 +33,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	else
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local sg=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND+LOCATION_MZONE,0,1,1,nil,tp)
-		Duel.SendtoRest(sg,REASON_COST)
+		Duel.SendtoGrave(sg,REASON_COST)
 	end
 end
 function s.filter(c)

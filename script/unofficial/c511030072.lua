@@ -117,10 +117,10 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local rc=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.retfilter),tp,LOCATION_REST,0,1,1,nil,e,tp)
+	local rc=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.retfilter),tp,LOCATION_REST,0,1,1,nil,e,tp)
 	if rc and Duel.SendtoDeck(rc,nil,2,REASON_EFFECT)>0 and Duel.GetOperatedGroup():GetFirst():IsLocation(LOCATION_EXTRA) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local sc=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,0,1,1,rc,e,tp)
+		local sc=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.spfilter),tp,LOCATION_REST,0,1,1,rc,e,tp)
 		if sc then
 			Duel.BreakEffect()
 			Duel.SpecialSummon(sc,0,tp,tp,false,false,POS_FACEUP,e:GetHandler():GetLinkedZone())

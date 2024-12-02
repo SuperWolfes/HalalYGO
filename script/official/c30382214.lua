@@ -100,7 +100,7 @@ function s.drop(e,tp,eg,ep,ev,re,r,rp)
 				)
 			end
 		else
-			Duel.SendtoRest(tc,REASON_EFFECT)
+			Duel.SendtoGrave(tc,REASON_EFFECT)
 		end
 		Duel.ShuffleHand(tp)
 	end

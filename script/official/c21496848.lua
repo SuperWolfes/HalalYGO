@@ -37,5 +37,5 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOREST)
 	local g2=Duel.SelectMatchingCard(1-tp,Card.IsType,1-tp,LOCATION_DECK,0,1,1,nil,ty)
 	g1:Merge(g2)
-	Duel.SendtoRest(g1,REASON_EFFECT)
+	Duel.SendtoGrave(g1,REASON_EFFECT)
 end

@@ -61,7 +61,7 @@ function s.cond(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.filterd(c,tp)
 	local lv=c:GetLevel()
-	return c:IsSetCard(0x26) and lv>0 and c:IsAbleToRest()
+	return c:IsSetCard(0x26) and lv>0 and c:IsAbleToGrave()
 		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,1,nil,lv)
 end
 function s.tgd(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -74,7 +74,7 @@ function s.opd(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,s.filterd,tp,LOCATION_HAND,0,1,1,nil,tp)
 	local tc=g:GetFirst()
 	if not tc then return end
-	Duel.SendtoRest(tc,REASON_EFFECT)
+	Duel.SendtoGrave(tc,REASON_EFFECT)
 	if not tc:IsLocation(LOCATION_REST) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 	local sg=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_REST,0,1,1,tc,tc:GetLevel())

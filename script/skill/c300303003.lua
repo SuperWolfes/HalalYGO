@@ -32,7 +32,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SKILL_FLIP,tp,id|(1<<32))
 	Duel.Hint(HINT_CARD,tp,id)
 	local g=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
-	if Duel.SendtoRest(g,REASON_COST+REASON_DISCARD)>0 then
+	if Duel.SendtoGrave(g,REASON_COST+REASON_DISCARD)>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 		local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil)
 		if #g>0 then

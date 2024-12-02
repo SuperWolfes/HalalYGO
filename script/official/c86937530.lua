@@ -53,7 +53,7 @@ function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,nil,1,1-tp,LOCATION_DECK+LOCATION_EXTRA)
 end
 function s.cfilter(c,code)
-	return c:IsCode(code) and c:IsAbleToRestAsCost()
+	return c:IsCode(code) and c:IsAbleToGraveAsCost()
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -64,7 +64,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 		if #g>0 and Duel.SelectYesNo(1-tp,aux.Stringid(id,2)) then
 			Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOREST)
 			local sg=g:Select(1-tp,1,1,nil)
-			Duel.SendtoRest(sg,REASON_EFFECT)
+			Duel.SendtoGrave(sg,REASON_EFFECT)
 			Duel.NegateEffect(0)
 			return
 		end

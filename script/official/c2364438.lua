@@ -15,7 +15,7 @@ end
 s.listed_names={id}
 s.listed_series={0x121}
 function s.filter(c)
-	return c:IsSetCard(0x121) and not c:IsCode(id) and (c:IsAbleToHand() or c:IsAbleToRest())
+	return c:IsSetCard(0x121) and not c:IsCode(id) and (c:IsAbleToHand() or c:IsAbleToGrave())
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end

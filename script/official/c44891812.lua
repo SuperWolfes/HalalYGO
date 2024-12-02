@@ -35,7 +35,7 @@ end
 function s.defcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsDiscardable() end
-	Duel.SendtoRest(c,REASON_COST+REASON_DISCARD)
+	Duel.SendtoGrave(c,REASON_COST+REASON_DISCARD)
 end
 function s.deffilter(c)
 	return c:IsFaceup() and c:IsSetCard(0x9a) and c:HasNonZeroDefense()

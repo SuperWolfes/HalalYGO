@@ -82,7 +82,7 @@ function s.setop(e,tp,eg,ep,ev,re,r,rp)
 		if tc:IsType(TYPE_FIELD) then
 			local fc=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
 			if fc then
-				Duel.SendtoRest(fc,REASON_RULE)
+				Duel.SendtoGrave(fc,REASON_RULE)
 				Duel.BreakEffect()
 			end
 		end

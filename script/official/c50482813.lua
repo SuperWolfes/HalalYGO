@@ -49,7 +49,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ConfirmCards(1-tp,sg)
 		Duel.ShuffleHand(tp)
 	else
-		Duel.SendtoRest(sg,REASON_RULE)
+		Duel.SendtoGrave(sg,REASON_RULE)
 	end
 	ct=ct-1
 	if ct>0 then

@@ -416,7 +416,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 		tc:RegisterEffect(e3,true)
 		Duel.AdjustInstantly(c)
 	end
-	Duel.SendtoRest(tc,REASON_EFFECT)
+	Duel.SendtoGrave(tc,REASON_EFFECT)
 	e:SetProperty(e:GetProperty()&~EFFECT_FLAG_IGNORE_IMMUNE)
 end
 -------------------------------------------

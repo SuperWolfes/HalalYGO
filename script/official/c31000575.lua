@@ -27,6 +27,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ShuffleHand(1-tp)
 	else
 		Duel.DisableShuffleCheck()
-		Duel.SendtoRest(tc,REASON_RULE)
+		Duel.SendtoGrave(tc,REASON_RULE)
 	end
 end

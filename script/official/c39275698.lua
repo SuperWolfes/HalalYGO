@@ -1,5 +1,5 @@
 --ハーピィの羽根休め
---Flybie's Feather Rest
+--Flybie's Feather Grave
 --scripted by Logical Nonsense
 --Substitute ID
 local s,id=GetID()
@@ -63,7 +63,7 @@ function s.drop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.RegisterEffect(e1,tp)
 	end
 end
-	--Restrict special summmons to WIND monsters
+	--Graverict special summmons to WIND monsters
 function s.splimit(e,c)
 	return not c:IsAttribute(ATTRIBUTE_WIND)
 end

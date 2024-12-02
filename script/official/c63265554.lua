@@ -44,7 +44,7 @@ end
 function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsFacedown() or not c:IsRelateToEffect(e) then return end
-	local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.eqsfilter),tp,LOCATION_DECK+LOCATION_REST,0,nil,tp,c)
+	local g=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.eqsfilter),tp,LOCATION_DECK+LOCATION_REST,0,nil,tp,c)
 	if #g==0 then return end
 	local ft=math.min(Duel.GetLocationCount(tp,LOCATION_SZONE),3)
 	local sg=aux.SelectUnselectGroup(g,e,tp,1,ft,aux.dncheck,1,tp,HINTMSG_EQUIP)
@@ -56,14 +56,14 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.tgfilter(c,tc)
-	return c:IsType(TYPE_EQUIP) and c:IsActional() and c:IsAbleToRestAsCost() and c:GetEquipTarget()==tc
+	return c:IsType(TYPE_EQUIP) and c:IsActional() and c:IsAbleToGraveAsCost() and c:GetEquipTarget()==tc
 end
 function s.discost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_SZONE,0,1,nil,c) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_SZONE,0,1,1,nil,c)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.disfilter(c)
 	return c:IsFaceup() and c:IsType(TYPE_EFFECT) and (c:IsNegatableMonster() or c:IsCanChangePosition())

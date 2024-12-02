@@ -61,7 +61,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 				Duel.SpecialSummon(tc,0,tp,1-tp,false,false,POS_FACEUP)
 			elseif tc:IsLocation(LOCATION_REMOVED) and not tc:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP,1-tp) then
 				Duel.BreakEffect()
-				Duel.SendtoRest(tc,REASON_RULE)
+				Duel.SendtoGrave(tc,REASON_RULE)
 			end
 		end
 	end

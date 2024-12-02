@@ -73,19 +73,19 @@ function s.ctop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.RegisterEffect(e3,tp)
 	-- Special Summon from the GY
 	elseif ct==2 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(aux.RestValleyFilter(s.spgyfilter),tp,LOCATION_REST,0,1,nil,e,tp)
+		and Duel.IsExistingMatchingCard(aux.GraveValleyFilter(s.spgyfilter),tp,LOCATION_REST,0,1,nil,e,tp)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spgyfilter),tp,LOCATION_REST,0,1,1,nil,e,tp)
+		local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.spgyfilter),tp,LOCATION_REST,0,1,1,nil,e,tp)
 		if #g==0 then return end
 		Duel.BreakEffect()
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	-- Send self to the GY and Special Summon a Link monster
-	elseif ct==3 and c:IsAbleToRest() and Duel.GetLocationCountFromEx(tp)>0
+	elseif ct==3 and c:IsAbleToGrave() and Duel.GetLocationCountFromEx(tp)>0
 		and Duel.IsExistingMatchingCard(s.spexfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,3)) then
 		Duel.BreakEffect()
-		if Duel.SendtoRest(c,REASON_EFFECT)<1 then return end
+		if Duel.SendtoGrave(c,REASON_EFFECT)<1 then return end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local g=Duel.SelectMatchingCard(tp,s.spexfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
 		if #g==0 then return end

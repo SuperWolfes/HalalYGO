@@ -73,7 +73,7 @@ end
 function s.lizfilter(e,c)
 	return not c:IsOriginalRace(RACE_PLANT)
 end
-	--Restricted to plant monsters for extra deck
+	--Gravericted to plant monsters for extra deck
 function s.splimit(e,c,sump,sumtype,sumpos,targetp,se)
 	return not c:IsRace(RACE_PLANT) and c:IsLocation(LOCATION_EXTRA)
 end

@@ -18,8 +18,8 @@ end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(1)
 	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_ONFIELD,0,nil)
-	if chk==0 then return #g>0 and g:FilterCount(Card.IsAbleToRestAsCost,nil)==#g end
-	Duel.SendtoRest(g,REASON_COST)
+	if chk==0 then return #g>0 and g:FilterCount(Card.IsAbleToGraveAsCost,nil)==#g end
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.filter(c,tp)
 	return (c:IsFacedown() or c:IsControler(1-tp) or c:GetCode()~=CARD_UMI) and c:IsActionalTrap()
@@ -38,5 +38,5 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(Card.IsType,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,e:GetHandler(),TYPE_ACTIONAL+TYPE_TRAP)
-	Duel.SendtoRest(g,REASON_EFFECT)
+	Duel.SendtoGrave(g,REASON_EFFECT)
 end

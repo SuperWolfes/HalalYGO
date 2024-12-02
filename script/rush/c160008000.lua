@@ -36,8 +36,8 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.HintSelection(g)
 		if #g>0 then
 			if Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)>0 then
-				local g2=Duel.SelectMatchingCard(tp,Card.IsAbleToRest,tp,LOCATION_HAND,0,1,1,nil)
-				if #g2>0 then Duel.SendtoRest(g2,REASON_EFFECT) end
+				local g2=Duel.SelectMatchingCard(tp,Card.IsAbleToGrave,tp,LOCATION_HAND,0,1,1,nil)
+				if #g2>0 then Duel.SendtoGrave(g2,REASON_EFFECT) end
 			end
 		end
 	end

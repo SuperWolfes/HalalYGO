@@ -71,7 +71,7 @@ function s.operation(e,tp,eg,ev,ep,re,r,rp)
 	if #tg>0 then
 		local tc=tg:GetFirst()
 		while tc do
-			if tc:GetOverlayCount()~=0 then Duel.SendtoRest(tc:GetOverlayGroup(),REASON_RULE) end
+			if tc:GetOverlayCount()~=0 then Duel.SendtoGrave(tc:GetOverlayGroup(),REASON_RULE) end
 			tc=tg:GetNext()
 		end
 		Duel.Overlay(c,tg)

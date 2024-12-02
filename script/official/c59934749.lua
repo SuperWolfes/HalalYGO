@@ -78,7 +78,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	return true
 end
 function s.cfilter(c)
-	return c:IsActional() and c:IsType(TYPE_EQUIP) and c:IsAbleToRestAsCost()
+	return c:IsActional() and c:IsType(TYPE_EQUIP) and c:IsAbleToGraveAsCost()
 end
 function s.spfilter(c,e,tp,lv)
 	return c:IsRace(RACE_WARRIOR) and c:IsLevelBelow(lv) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -115,7 +115,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 		cg:Remove(Card.IsCode,nil,rg2:GetFirst():GetCode())
 		rg1:Merge(rg2)
 	end
-	Duel.SendtoRest(rg1,REASON_COST)
+	Duel.SendtoGrave(rg1,REASON_COST)
 	e:SetLabel(lv)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK)
 end

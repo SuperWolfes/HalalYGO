@@ -44,7 +44,7 @@ s.listed_series={0x88}
 
 	--Check for a "Bujin" card
 function s.cfilter(c)
-	return c:IsSetCard(0x88) and c:IsAbleToRestAsCost()
+	return c:IsSetCard(0x88) and c:IsAbleToGraveAsCost()
 end
 	--Send 1 "Bujin" card from hand to GY as cost
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -69,7 +69,7 @@ function s.thfilter(c,cd)
 end
 	--Check for 1 "Bujin" monster to send to GY as cost
 function s.cfilter1(c,tp)
-	return c:IsMonster() and c:IsAbleToRestAsCost() and c:IsSetCard(0x88)
+	return c:IsMonster() and c:IsAbleToGraveAsCost() and c:IsSetCard(0x88)
 		and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil,c:GetCode())
 end
 	--Send 1 "Bujin" monster from hand to GY as cost
@@ -77,7 +77,7 @@ function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter1,tp,LOCATION_HAND,0,1,nil,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local sg=Duel.SelectMatchingCard(tp,s.cfilter1,tp,LOCATION_HAND,0,1,1,nil,tp)
-	Duel.SendtoRest(sg,REASON_COST)
+	Duel.SendtoGrave(sg,REASON_COST)
 	e:SetLabel(sg:GetFirst():GetCode())
 end
 	--Activation legality
@@ -88,7 +88,7 @@ end
 	--Add 1 "Bujin" monster from your GY
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.thfilter),tp,LOCATION_REST,0,1,1,nil,e:GetLabel())
+	local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.thfilter),tp,LOCATION_REST,0,1,1,nil,e:GetLabel())
 	if #g>0 then
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)
@@ -96,7 +96,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 	--Check for 1 "Bujin" monster to send from deck
 function s.tgfilter(c,cd)
-	return c:IsSetCard(0x88) and c:IsMonster() and not c:IsCode(cd) and c:IsAbleToRest()
+	return c:IsSetCard(0x88) and c:IsMonster() and not c:IsCode(cd) and c:IsAbleToGrave()
 end
 	--Check for 1 "Bujin" monster to banish as cost
 function s.cfilter2(c,tp)
@@ -121,6 +121,6 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil,e:GetLabel())
 	if #g>0 then
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	end
 end

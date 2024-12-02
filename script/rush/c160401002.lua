@@ -18,7 +18,7 @@ function s.initial_effect(c)
 end
 s.listed_names={160202046}
 function s.costfilter(c)
-	return c:IsMonster() and c:IsRace(RACE_PYRO) and c:IsAbleToRestAsCost()
+	return c:IsMonster() and c:IsRace(RACE_PYRO) and c:IsAbleToGraveAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,2,nil) end
@@ -34,7 +34,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tg=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,2,2,nil)
-	if Duel.SendtoRest(tg,REASON_COST)==2 then
+	if Duel.SendtoGrave(tg,REASON_COST)==2 then
 		local g=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsLevelBelow,7),tp,LOCATION_MZONE,LOCATION_MZONE,nil)
 		if #g>0 then
 			Duel.Destroy(g,REASON_EFFECT)

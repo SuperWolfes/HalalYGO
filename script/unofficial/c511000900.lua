@@ -50,7 +50,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			end
 			eff=effs[Duel.SelectOption(tp,false,table.unpack(desctable)) + 1]
 		end
-		if eff:GetTarget()(eff,tp,nil,nil,nil,e,nil,nil,nil,tc,nil,mg) and Duel.SendtoRest(eff:GetLabelObject(),REASON_EFFECT+REASON_MATERIAL+REASON_SYNCHRO)>0 and Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP)~=0 then
+		if eff:GetTarget()(eff,tp,nil,nil,nil,e,nil,nil,nil,tc,nil,mg) and Duel.SendtoGrave(eff:GetLabelObject(),REASON_EFFECT+REASON_MATERIAL+REASON_SYNCHRO)>0 and Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP)~=0 then
 			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetCode(EFFECT_UPDATE_ATTACK)

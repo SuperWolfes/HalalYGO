@@ -36,7 +36,7 @@ function s.initial_effect(c)
 end
 --Special Summon a Reptile from GY
 function s.spcfilter(c,e,tp)
-	return c:IsMonster() and c:IsAbleToRestAsCost() and Duel.GetMZoneCount(tp,c)>0 
+	return c:IsMonster() and c:IsAbleToGraveAsCost() and Duel.GetMZoneCount(tp,c)>0 
 		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp,c:GetOriginalAttribute())
 end
 function s.spfilter(c,e,tp,att)
@@ -48,7 +48,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.SelectMatchingCard(tp,s.spcfilter,tp,LOCATION_MZONE+LOCATION_HAND,0,1,1,nil,e,tp)
 	local att=g:GetFirst():GetOriginalAttribute()
 	e:SetLabel(att)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local attr=e:GetLabel()
@@ -73,7 +73,7 @@ function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsMainPhase() and eg:IsExists(s.tgcfilter,1,nil,tp)
 end
 function s.tgfilter(c)
-	return c:IsMonster() and c:IsRace(RACE_REPTILE) and c:IsAbleToRest()
+	return c:IsMonster() and c:IsRace(RACE_REPTILE) and c:IsAbleToGrave()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -83,6 +83,6 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	end
 end

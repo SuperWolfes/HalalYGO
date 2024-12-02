@@ -51,7 +51,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local e4=e3:Clone()
 		e4:SetCode(EFFECT_CANNOT_DISEFFECT)
 		tc:RegisterEffect(e4)
-		--To Rest Place
+		--To Grave Place
 		local e5=Effect.CreateEffect(c)
 		e5:SetCategory(CATEGORY_TOREST)
 		e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
@@ -68,7 +68,7 @@ function s.efilter(e,ct)
 	return te:GetHandler()==e:GetHandler()
 end
 function s.tgfilter(c,p)
-	return Duel.IsPlayerCanSendtoRest(p,c) and not c:IsType(TYPE_TOKEN)
+	return Duel.IsPlayerCanSendtoGrave(p,c) and not c:IsType(TYPE_TOKEN)
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(tgfilter,1-tp,LOCATION_MZONE,0,1,nil,1-tp) end
@@ -77,6 +77,6 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(1-tp,tgfilter,1-tp,LOCATION_MZONE,0,1,1,nil,1-tp)
 	if #g>0 then
-		Duel.SendtoRest(g,REASON_RULE)
+		Duel.SendtoGrave(g,REASON_RULE)
 	end
 end

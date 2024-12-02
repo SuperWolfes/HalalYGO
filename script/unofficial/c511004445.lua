@@ -17,7 +17,7 @@ function s.op(e,tp,eg,ev,ep,re,r,rp)
 	if Duel.Draw(tp,1,REASON_EFFECT)~=0 then
 		local c=Duel.GetOperatedGroup():GetFirst()
 		Duel.ConfirmCards(1-tp,c)
-		Duel.SendtoRest(c,REASON_EFFECT)
+		Duel.SendtoGrave(c,REASON_EFFECT)
 		if c:IsMonster() and c:IsSetCard(0x9f) then
 			Duel.NegateAttack()
 		end

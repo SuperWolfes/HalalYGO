@@ -47,7 +47,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,2)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.filter),tp,LOCATION_EXTRA+LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.filter),tp,LOCATION_EXTRA+LOCATION_REST,0,nil)
 	if #g<3 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
 	local sg=g:Select(tp,3,3,nil)

@@ -31,7 +31,7 @@ end
 s.listed_names={id}
 s.listed_series={0x137}
 function s.tgfilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_CONTINUOUS) and c:IsActionalTrap() and c:IsAbleToRest()
+	return c:IsFaceup() and c:IsType(TYPE_CONTINUOUS) and c:IsActionalTrap() and c:IsAbleToGrave()
 end
 function s.atkfilter(c)
 	return c:IsFaceup() and c:GetAttack()>0
@@ -47,7 +47,7 @@ function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	if tc:IsRelateToEffect(e) and Duel.SendtoRest(tc,REASON_EFFECT)~=0 and tc:IsLocation(LOCATION_REST) then
+	if tc:IsRelateToEffect(e) and Duel.SendtoGrave(tc,REASON_EFFECT)~=0 and tc:IsLocation(LOCATION_REST) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTACK)
 		local sg=Duel.SelectMatchingCard(tp,s.atkfilter,tp,LOCATION_MZONE,LOCATION_MZONE,2,2,nil)
 		if #sg>0 then

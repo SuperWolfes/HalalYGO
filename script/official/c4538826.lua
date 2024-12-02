@@ -140,11 +140,11 @@ function s.gytg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.gyfilter,tp,LOCATION_ONFIELD,0,nil)
-	if #g==0 or Duel.SendtoRest(g,REASON_EFFECT)==0 then return end
+	if #g==0 or Duel.SendtoGrave(g,REASON_EFFECT)==0 then return end
 	local oc=Duel.GetOperatedGroup():FilterCount(s.sgfilter,nil,tp)
 	if oc==0 then return end
 	local og=Duel.SelectMatchingCard(tp,nil,tp,0,LOCATION_ONFIELD,1,oc,nil)
-	if Duel.SendtoRest(og,REASON_EFFECT)>0 then
+	if Duel.SendtoGrave(og,REASON_EFFECT)>0 then
 		Duel.BreakEffect()
 		local dc=Duel.GetOperatedGroup():FilterCount(s.sgfilter,nil,1-tp)
 		Duel.Damage(1-tp,dc*300,REASON_EFFECT)

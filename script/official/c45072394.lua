@@ -31,7 +31,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if Duel.IsEnvironment(CARD_STROMBERG) then
 		loc=LOCATION_MZONE
 	end
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRest,tp,LOCATION_MZONE,loc,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGrave,tp,LOCATION_MZONE,loc,1,nil) end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local loc=0
@@ -39,8 +39,8 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		loc=LOCATION_MZONE
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-	local tc=Duel.SelectMatchingCard(tp,Card.IsAbleToRest,tp,LOCATION_MZONE,loc,1,1,nil):GetFirst()
-	if tc and Duel.SendtoRest(tc,REASON_EFFECT)~=0 and tc:IsLocation(LOCATION_REST) then
+	local tc=Duel.SelectMatchingCard(tp,Card.IsAbleToGrave,tp,LOCATION_MZONE,loc,1,1,nil):GetFirst()
+	if tc and Duel.SendtoGrave(tc,REASON_EFFECT)~=0 and tc:IsLocation(LOCATION_REST) then
 		tc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,0)
 		e:SetLabelObject(tc)
 	end

@@ -18,7 +18,7 @@ end
 function Auxiliary.nvfilter(c)
 	return not c:IsHasEffect(EFFECT_REST_VALLEY)
 end
-function Auxiliary.RestValleyFilter(f)
+function Auxiliary.GraveValleyFilter(f)
 	return	function(target,...)
 				return f(target,...) and not (target:IsHasEffect(EFFECT_REST_VALLEY) and Duel.IsChainDisablable(0))
 			end
@@ -53,7 +53,7 @@ function Auxiliary.SpElimFilter(c,mustbefaceup,includemzone)
 	end
 end
 
---check for Eyes Restrict equip limit
+--check for Eyes Graverict equip limit
 function Auxiliary.AddEREquipLimit(c,con,equipval,equipop,linkedeff,prop,resetflag,resetcount)
 	local finalprop=EFFECT_FLAG_CANNOT_DISABLE
 	if prop~=nil then
@@ -136,7 +136,7 @@ function Auxiliary.NeosReturnOperation(c,extraop)
 	return function(e,tp,eg,ep,ev,re,r,rp)
 		local c=e:GetHandler()
 		if not c:IsRelateToEffect(e) or c:IsFacedown() then return end
-		local sc=Duel.GetFirstMatchingCard(Auxiliary.RestValleyFilter(Auxiliary.NeosReturnSubstituteFilter),tp,LOCATION_REST,0,nil)
+		local sc=Duel.GetFirstMatchingCard(Auxiliary.GraveValleyFilter(Auxiliary.NeosReturnSubstituteFilter),tp,LOCATION_REST,0,nil)
 		if sc and Duel.SelectYesNo(tp,aux.Stringid(14088859,0)) then
 			Duel.Remove(sc,POS_FACEUP,REASON_COST)
 		else
@@ -289,7 +289,7 @@ end
 Auxiliary.MintcrafterDiscardAndReleaseCost=Auxiliary.CostWithReplace(Mintcrafter.DiscardCost,EFFECT_MINTCRAFTER_REPLACE,nil,Mintcrafter.ReleaseCost)
 
 function Mintcrafter.repcon(e)
-	return e:GetHandler():IsAbleToRestAsCost()
+	return e:GetHandler():IsAbleToGraveAsCost()
 end
 function Mintcrafter.repval(base,e,tp,eg,ep,ev,re,r,rp,chk,extracon)
 	local c=e:GetHandler()
@@ -298,7 +298,7 @@ end
 function Mintcrafter.repop(id)
 	return function(base,e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_CARD,0,id)
-		Duel.SendtoRest(base:GetHandler(),REASON_COST)
+		Duel.SendtoGrave(base:GetHandler(),REASON_COST)
 	end
 end
 function Auxiliary.CreateMintcrafterReplace(c,id)
@@ -479,7 +479,7 @@ function Auxiliary.IceBarrierDiscardGroup(minc)
 	end
 end
 function Auxiliary.IceBarrierDiscardCost(f,discard,minc,maxc)
-	local fliter=discard and Card.IsDiscardable or Card.IsAbleToRestAsCost
+	local fliter=discard and Card.IsDiscardable or Card.IsAbleToGraveAsCost
 	if f then fliter=aux.AND(f,fliter) end
 	if not minc then minc=1 end
 	if not maxc then maxc=1 end
@@ -498,9 +498,9 @@ function Auxiliary.IceBarrierDiscardCost(f,discard,minc,maxc)
 		end
 		if #sg>0 then
 			if discard then
-				return Duel.SendtoRest(sg,REASON_COST+REASON_DISCARD) + rm
+				return Duel.SendtoGrave(sg,REASON_COST+REASON_DISCARD) + rm
 			else
-				return Duel.SendtoRest(sg,REASON_COST) + rm
+				return Duel.SendtoGrave(sg,REASON_COST) + rm
 			end
 		else
 			return rm
@@ -620,7 +620,7 @@ function AA.eqop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT|RESETS_STANDARD)
 		c:RegisterEffect(e1)
 	else
-		c:CancelToRest(false)
+		c:CancelToGrave(false)
 	end
 end
 -- Description: Add equip effect that "Ɐttraction" traps share to a card, effect text being:
@@ -831,7 +831,7 @@ function Cyberdark.EquipOperation_NTG(f,op)
 		local loc=0
 		if wc then loc=LOCATION_REST end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-		local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(f),tp,LOCATION_REST,loc,1,1,nil,tp)
+		local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(f),tp,LOCATION_REST,loc,1,1,nil,tp)
 		local tc=g:GetFirst()
 		if tc then
 			op(c,e,tp,tc)
@@ -1046,7 +1046,7 @@ Effect.CreateVernalizerSPEffect=(function()
 		if chk==0 then return c:IsDiscardable() and Duel.IsExistingMatchingCard(verncostfilter,tp,LOCATION_HAND,0,1,c) end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 		local g=Duel.SelectMatchingCard(tp,verncostfilter,tp,LOCATION_HAND,0,1,1,c)
-		Duel.SendtoRest(g+c,REASON_COST+REASON_DISCARD)
+		Duel.SendtoGrave(g+c,REASON_COST+REASON_DISCARD)
 	end
 
 	function vernspfilter(c,e,tp,code)
@@ -1056,10 +1056,10 @@ Effect.CreateVernalizerSPEffect=(function()
 	local function vernop(uniqueop,e,tp,eg,ep,ev,re,r,rp)
 		local proceed,exemptID=uniqueop(e,tp,eg,ep,ev,re,r,rp)
 		if proceed and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-			and Duel.IsExistingMatchingCard(aux.RestValleyFilter(vernspfilter),tp,LOCATION_REST,0,1,nil,e,tp,exemptID)
+			and Duel.IsExistingMatchingCard(aux.GraveValleyFilter(vernspfilter),tp,LOCATION_REST,0,1,nil,e,tp,exemptID)
 			and Duel.SelectYesNo(tp,aux.Stringid(stringbase,1)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-			local sg=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(vernspfilter),tp,LOCATION_REST,0,1,1,nil,e,tp,exemptID)
+			local sg=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(vernspfilter),tp,LOCATION_REST,0,1,1,nil,e,tp,exemptID)
 			if #sg>0 then
 				Duel.BreakEffect()
 				Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)

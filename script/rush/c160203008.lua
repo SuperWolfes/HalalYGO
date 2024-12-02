@@ -20,7 +20,7 @@ function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetLP(tp)<Duel.GetLP(1-tp)
 end
 function s.costfilter(c)
-	return c:IsMonster() and c:IsRace(RACE_DINOSAUR) and c:IsAbleToRestAsCost()
+	return c:IsMonster() and c:IsRace(RACE_DINOSAUR) and c:IsAbleToGraveAsCost()
 end
 function s.damcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToDeckOrExtraAsCost,tp,LOCATION_HAND,0,1,nil) end

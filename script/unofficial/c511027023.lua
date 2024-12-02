@@ -63,7 +63,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	local ft=math.min(tc:GetLink(),Duel.GetLocationCount(tp,LOCATION_MZONE))
-	local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,e,tp,e:GetLabel())
+	local g=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,e,tp,e:GetLabel())
 	if tc and tc:IsRelateToEffect(e) and #g>0 and ft>0 then
 		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 		local sg=g:Select(tp,1,ft,nil)

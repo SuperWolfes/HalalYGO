@@ -60,7 +60,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		end
 	else
 		Duel.BreakEffect()
-		Duel.SendtoRest(tc,REASON_EFFECT+REASON_DISCARD)
+		Duel.SendtoGrave(tc,REASON_EFFECT+REASON_DISCARD)
 	end
 	Duel.ShuffleHand(tp)
 end

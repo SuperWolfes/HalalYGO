@@ -43,7 +43,7 @@ function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 	--Check for a "Fossil" fusion monster
 function s.tgfilter(c)
-	return c:IsType(TYPE_FUSION) and c:IsSetCard(0x14c) and c:IsAbleToRest()
+	return c:IsType(TYPE_FUSION) and c:IsSetCard(0x14c) and c:IsAbleToGrave()
 end
 	--Send 1 "Fossil" fusion monster from extra deck to GY
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
@@ -51,15 +51,15 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_EXTRA,0,1,1,nil)
 		if #g>0 then
-			Duel.SendtoRest(g,REASON_EFFECT)
+			Duel.SendtoGrave(g,REASON_EFFECT)
 		end
 	end
 end
 	--If this card was sent from field
 function s.damcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToRestAsCost() end
-	Duel.SendtoRest(c,REASON_COST)
+	if chk==0 then return c:IsAbleToGraveAsCost() end
+	Duel.SendtoGrave(c,REASON_COST)
 end
 	--Activation legality
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -83,7 +83,7 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 			local sg=g:Select(tp,1,1,nil)
 			Duel.HintSelection(sg)
-			Duel.SendtoRest(sg,REASON_EFFECT+REASON_RETURN)
+			Duel.SendtoGrave(sg,REASON_EFFECT+REASON_RETURN)
 		end
 	end
 end

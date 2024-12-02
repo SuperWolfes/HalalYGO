@@ -128,8 +128,8 @@ function s.atcon2(e,tp,eg,ev,ep,re,r,rp)
 	return Duel.GetTurnPlayer()~=tp and Duel.IsBattlePhase()
 end
 function s.atcost2(e,tp,eg,ev,ep,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
-	Duel.SendtoRest(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
+	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
 end
 function s.attg2(e,tp,eg,ev,ep,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,0,LOCATION_MZONE,1,nil) end

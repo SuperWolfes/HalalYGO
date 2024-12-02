@@ -37,7 +37,7 @@ function s.atchk1(c,sg)
 	return c:IsRace(RACE_WANDERER) and sg:FilterCount(Card.IsRace,c,RACE_DRAGON)==1
 end
 function s.spfilter(c,rac)
-	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(rac) and c:IsAbleToRestAsCost()
+	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(rac) and c:IsAbleToGraveAsCost()
 end
 function s.spcon(e,c)
 	if c==nil then return true end
@@ -62,7 +62,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 	g:DeleteGroup()
 end
 function s.anctg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -100,7 +100,7 @@ function s.retop(code1,code2,code3)
 			end
 			if #g~=0 then
 				Duel.DisableShuffleCheck()
-				Duel.SendtoRest(g,REASON_EFFECT+REASON_REVEAL)
+				Duel.SendtoGrave(g,REASON_EFFECT+REASON_REVEAL)
 			end
 			if c:IsRelateToEffect(e) then
 				local e1=Effect.CreateEffect(c)

@@ -39,7 +39,7 @@ function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():IsRelateToEffect(e) then
-		if Duel.SendtoRest(e:GetHandler(),REASON_EFFECT)>0 then
+		if Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)>0 then
 			Duel.Damage(1-tp,e:GetLabel(),REASON_EFFECT)
 		end
 	end

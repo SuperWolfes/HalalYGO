@@ -49,10 +49,10 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	if not (tc and tc:IsRelateToEffect(e) and tc:IsFaceup()) then return end
 	local g=Duel.GetMatchingGroup(s.desfilter,tp,0,LOCATION_MZONE,nil,tc:GetAttack())
 	if #g>0 and Duel.Destroy(g,REASON_EFFECT)>0 and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and Duel.IsExistingMatchingCard(aux.RestValleyFilter(s.eqfilter),tp,LOCATION_HAND+LOCATION_REST,0,1,nil,tp)
+		and Duel.IsExistingMatchingCard(aux.GraveValleyFilter(s.eqfilter),tp,LOCATION_HAND+LOCATION_REST,0,1,nil,tp)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-		local ec=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.eqfilter),tp,LOCATION_HAND+LOCATION_REST,0,1,1,nil,tp):GetFirst()
+		local ec=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.eqfilter),tp,LOCATION_HAND+LOCATION_REST,0,1,1,nil,tp):GetFirst()
 		if not ec then return end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
 		local tg=Duel.SelectMatchingCard(tp,s.eqfilter2,tp,LOCATION_MZONE,0,1,1,nil,ec)

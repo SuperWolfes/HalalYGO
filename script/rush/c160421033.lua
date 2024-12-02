@@ -1,5 +1,5 @@
 --天の冥福
---Heavenly Rest
+--Heavenly Grave
 
 local s,id=GetID()
 function s.initial_effect(c)

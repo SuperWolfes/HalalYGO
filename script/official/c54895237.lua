@@ -34,7 +34,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x109}
 function s.gspcfilter(c,ft,tp,sft)
-	return c:IsFaceup() and c:IsType(TYPE_CONTINUOUS) and c:IsAbleToRestAsCost()
+	return c:IsFaceup() and c:IsType(TYPE_CONTINUOUS) and c:IsAbleToGraveAsCost()
 		and (ft>0 or (c:IsLocation(LOCATION_MZONE) and c:GetSequence()<5))
 		and (sft>0 or (c:IsLocation(LOCATION_SZONE) and c:GetSequence()<5))
 		and Duel.IsExistingMatchingCard(s.gspfilter,tp,LOCATION_HAND,0,1,nil,c,tp)
@@ -49,7 +49,7 @@ function s.gspcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return ft>-1 and sft>-1 and Duel.IsExistingMatchingCard(s.gspcfilter,tp,LOCATION_ONFIELD,0,1,nil,ft,tp,sft) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.gspcfilter,tp,LOCATION_ONFIELD,0,1,1,nil,ft,tp,sft)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.gsptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

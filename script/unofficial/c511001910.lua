@@ -11,18 +11,18 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRest,tp,LOCATION_DECK,0,5,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGrave,tp,LOCATION_DECK,0,5,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,5,tp,LOCATION_DECK)
 end
 function s.filter(c)
 	return c:IsLocation(LOCATION_REST) and c:IsActional()
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(Card.IsAbleToRest,tp,LOCATION_DECK,0,nil)
+	local g=Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,LOCATION_DECK,0,nil)
 	if #g>=5 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local sg=g:Select(tp,5,5,nil)
-		Duel.SendtoRest(sg,REASON_EFFECT)
+		Duel.SendtoGrave(sg,REASON_EFFECT)
 		local dg=Duel.GetOperatedGroup()
 		local ct=dg:FilterCount(s.filter,nil)
 		if ct>0 then

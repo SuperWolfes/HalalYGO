@@ -50,7 +50,7 @@ function s.excop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.ConfirmCards(1-tp,sc)
 			Duel.ShuffleHand(tp)
 		else
-			Duel.SendtoRest(sc,REASON_RULE)
+			Duel.SendtoGrave(sc,REASON_RULE)
 		end
 		Duel.ShuffleDeck(tp)
 	end
@@ -62,10 +62,10 @@ function s.sgycon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.sgytg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToRest() end
+	if chk==0 then return c:IsAbleToGrave() end
 	Duel.SetOperationInfo(0,CATEGORY_TOREST,c,1,tp,0)
 end
 function s.sgyop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:IsRelateToEffect(e) then Duel.SendtoRest(c,REASON_EFFECT) end
+	if c:IsRelateToEffect(e) then Duel.SendtoGrave(c,REASON_EFFECT) end
 end

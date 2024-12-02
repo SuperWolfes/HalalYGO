@@ -51,7 +51,7 @@ function s.repval(e,c)
 end
 	--Discard itself as substitute for a level 3 or lower contaminated monster's destruction
 function s.repop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SendtoRest(e:GetHandler(),REASON_EFFECT+REASON_DISCARD+REASON_REPLACE)
+	Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT+REASON_DISCARD+REASON_REPLACE)
 end
 	--Check for "Skull Servant" or a monster that lists "Skull Servant"
 function s.thfilter(c)

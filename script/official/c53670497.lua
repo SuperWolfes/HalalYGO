@@ -34,7 +34,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x69}
 function s.filter1(c)
-	return c:IsSetCard(0x69) and c:IsMonster() and c:IsAbleToRest()
+	return c:IsSetCard(0x69) and c:IsMonster() and c:IsAbleToGrave()
 end
 function s.filter2(c)
 	return c:IsFaceup() and c:IsSetCard(0x69) and c:IsMonster()
@@ -74,10 +74,10 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	if turnp~=tp then
 		local g=Duel.SelectMatchingCard(tp,s.filter1,tp,LOCATION_DECK,0,1,1,nil)
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	else
 		local g=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_REMOVED,0,1,1,nil)
-		Duel.SendtoRest(g,REASON_EFFECT+REASON_RETURN)
+		Duel.SendtoGrave(g,REASON_EFFECT+REASON_RETURN)
 	end
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)

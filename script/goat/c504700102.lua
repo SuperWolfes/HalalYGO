@@ -1,5 +1,5 @@
 --サウザンド・アイズ・サクリファイス
---Thousand-Eyes Restrict (GOAT)
+--Thousand-Eyes Graverict (GOAT)
 --Gains stats of trap monsters as well
 local s,id=GetID()
 function s.initial_effect(c)

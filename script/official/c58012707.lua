@@ -38,7 +38,7 @@ function s.con(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetBattleDamage(tp)>0 or Duel.GetBattleDamage(1-tp)>0
 end
 function s.cfilter(c)
-	return c:IsLevelBelow(4) and c:IsRace(RACE_INSECT) and c:IsAbleToRest()
+	return c:IsLevelBelow(4) and c:IsRace(RACE_INSECT) and c:IsAbleToGrave()
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -59,9 +59,9 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,tp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tc=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_DECK,0,1,1,nil):GetFirst()
-	if tc and Duel.SendtoRest(tc,REASON_EFFECT)>0
+	if tc and Duel.SendtoGrave(tc,REASON_EFFECT)>0
 		and tc:IsLocation(LOCATION_REST) and tc:IsType(TYPE_NORMAL) then
-		local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.filter),tp,LOCATION_DECK+LOCATION_REST+LOCATION_HAND,0,nil,e,tp,tc:GetCode())
+		local g=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.filter),tp,LOCATION_DECK+LOCATION_REST+LOCATION_HAND,0,nil,e,tp,tc:GetCode())
 		local ct=Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) and math.min(1,Duel.GetLocationCount(tp,LOCATION_MZONE),#g) or math.min(#g,Duel.GetLocationCount(tp,LOCATION_MZONE))
 		if ct>0 and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
@@ -87,7 +87,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) or Duel.GetLocationCount(tp,LOCATION_MZONE)<1 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,0,1,1,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.spfilter),tp,LOCATION_REST,0,1,1,nil,e,tp)
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end

@@ -30,7 +30,7 @@ end
 s.listed_series={0x9d}
 
 function s.filter(c,att)
-	return c:IsSetCard(0x9d) and c:IsAbleToRest() and c:IsAttribute(att)
+	return c:IsSetCard(0x9d) and c:IsAbleToGrave() and c:IsAttribute(att)
 end
 function s.rmfilter(c,tp)
 	return c:IsFaceup() and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_EXTRA,0,1,nil,c:GetAttribute())
@@ -48,7 +48,7 @@ function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_EXTRA,0,nil,tc:GetAttribute())
 	if tc and tc:IsRelateToEffect(e) and #g>0 then
 		local rg=g:Select(tp,1,1,nil)
-		Duel.SendtoRest(rg,REASON_EFFECT)
+		Duel.SendtoGrave(rg,REASON_EFFECT)
 		if rg:GetFirst():IsLocation(LOCATION_REST) then
 			Duel.Remove(tc,POS_FACEUP,REASON_EFFECT)
 		end

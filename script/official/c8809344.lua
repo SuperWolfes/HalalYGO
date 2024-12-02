@@ -60,7 +60,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if c:IsRelateToEffect(e) and tc:IsRelateToEffect(e) then
 		local og=c:GetOverlayGroup()
 		if #og==0 then return end
-		Duel.SendtoRest(og,REASON_EFFECT)
+		Duel.SendtoGrave(og,REASON_EFFECT)
 		Duel.Overlay(c,tc)
 		if c:IsFacedown() then return end
 		local e1=Effect.CreateEffect(c)

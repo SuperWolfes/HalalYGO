@@ -44,7 +44,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.cfilter(c,tp)
-	return c:IsFaceup() and c:IsSetCard(0x7c) and c:IsActionalTrap() and c:IsAbleToRestAsCost()
+	return c:IsFaceup() and c:IsSetCard(0x7c) and c:IsActionalTrap() and c:IsAbleToGraveAsCost()
 		and ((c:GetSequence()<5 and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil,true))
 		or (c:GetSequence()>4 and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil)))
 end
@@ -58,7 +58,7 @@ function s.setcost(e,tp,eg,ep,ev,re,r,rp,chk)
 		and Duel.SelectYesNo(tp,aux.Stringid(CARD_FIRE_FIST_EAGLE,0))) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_ONFIELD,0,1,1,nil,tp)
-		Duel.SendtoRest(g,REASON_COST)
+		Duel.SendtoGrave(g,REASON_COST)
 	end
 end
 function s.setop(e,tp,eg,ep,ev,re,r,rp)

@@ -41,7 +41,7 @@ function s.filter(c)
 end
 function s.disrmtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local b1=Duel.IsChainDisablable(ev) and Duel.GetFlagEffect(tp,id)==0
-	local b2=Duel.IsExistingMatchingCard(aux.RestValleyFilter(s.filter),tp,LOCATION_MZONE+LOCATION_REST,LOCATION_MZONE+LOCATION_REST,1,nil)
+	local b2=Duel.IsExistingMatchingCard(aux.GraveValleyFilter(s.filter),tp,LOCATION_MZONE+LOCATION_REST,LOCATION_MZONE+LOCATION_REST,1,nil)
 		and Duel.GetFlagEffect(tp,id+1)==0
 	if chk==0 then return b1 or b2 end
 	Duel.SetPossibleOperationInfo(0,CATEGORY_DISABLE,eg,1,0,0)
@@ -49,7 +49,7 @@ function s.disrmtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.disrmop(e,tp,eg,ep,ev,re,r,rp)
 	local b1=Duel.IsChainDisablable(ev) and Duel.GetFlagEffect(tp,id)==0
-	local b2=Duel.IsExistingMatchingCard(aux.RestValleyFilter(s.filter),tp,LOCATION_MZONE+LOCATION_REST,LOCATION_MZONE+LOCATION_REST,1,nil)
+	local b2=Duel.IsExistingMatchingCard(aux.GraveValleyFilter(s.filter),tp,LOCATION_MZONE+LOCATION_REST,LOCATION_MZONE+LOCATION_REST,1,nil)
 		and Duel.GetFlagEffect(tp,id+1)==0
 	local op=0
 	if b1 and b2 then op=Duel.SelectOption(tp,aux.Stringid(id,1),aux.Stringid(id,2))
@@ -61,7 +61,7 @@ function s.disrmop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.RegisterFlagEffect(tp,id,RESET_PHASE+PHASE_END,0,1)
 	else
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-		local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.filter),tp,LOCATION_MZONE+LOCATION_REST,LOCATION_MZONE+LOCATION_REST,1,1,nil)
+		local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.filter),tp,LOCATION_MZONE+LOCATION_REST,LOCATION_MZONE+LOCATION_REST,1,1,nil)
 		Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
 		Duel.RegisterFlagEffect(tp,id+1,RESET_PHASE+PHASE_END,0,1)
 	end

@@ -49,7 +49,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 			local sg=g:Select(tp,1,1,nil)
 			Duel.HintSelection(sg)
-			Duel.SendtoRest(sg,REASON_EFFECT+REASON_RETURN)
+			Duel.SendtoGrave(sg,REASON_EFFECT+REASON_RETURN)
 		end
 	end
 end

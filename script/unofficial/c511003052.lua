@@ -164,7 +164,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.BreakEffect()
 		local syng=Duel.GetMatchingGroup(Card.IsSynchroSummonable,tp,LOCATION_EXTRA,0,nil,nil,sg)
 		if #syng>0 then
-			c:CancelToRest()
+			c:CancelToGrave()
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 			local sc=syng:Select(tp,1,1,nil):GetFirst()
 			Duel.SynchroSummon(tp,sc,nil,sg)

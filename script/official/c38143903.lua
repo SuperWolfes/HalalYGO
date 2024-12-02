@@ -28,7 +28,7 @@ function s.con(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToRest()
+	if chk==0 then return c:IsAbleToGrave()
 		and (not re:GetHandler():IsRelateToEffect(re) or re:GetHandler():IsAbleToChangeControler()) end
 	Duel.SetOperationInfo(0,CATEGORY_COIN,nil,0,rp,1)
 	Duel.SetOperationInfo(0,CATEGORY_TOREST,c,1,0,0)
@@ -44,7 +44,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local coin=Duel.AnnounceCoin(p)
 	local res=Duel.TossCoin(rp,1)
 	if coin~=res then
-		Duel.SendtoRest(e:GetHandler(),REASON_EFFECT)
+		Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
 	else
 		if Duel.NegateActivation(ev) and re:GetHandler():IsRelateToEffect(re) then
 			Duel.GetControl(re:GetHandler(),1-p)

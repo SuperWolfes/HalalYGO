@@ -53,7 +53,7 @@ end
 function s.repop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:GetType()==TYPE_ACTIONAL or c:GetType()==TYPE_TRAP then
-		c:CancelToRest(false)
+		c:CancelToGrave(false)
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,0,LOCATION_ONFIELD,1,1,nil)

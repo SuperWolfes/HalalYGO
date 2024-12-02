@@ -50,7 +50,7 @@ function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:IsRelateToEffect(e) and Duel.SendtoRest(c,REASON_COST)~=0 then
+	if c:IsRelateToEffect(e) and Duel.SendtoGrave(c,REASON_COST)~=0 then
 		for i=0,1 do
 			if eg:IsExists(Card.IsControler,1,nil,i) then Duel.Damage(i,1000,REASON_EFFECT) end
 		end

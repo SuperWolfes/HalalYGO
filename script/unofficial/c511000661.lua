@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.costfilter(c)
-	return c:IsDiscardable() and c:IsAbleToRestAsCost()
+	return c:IsDiscardable() and c:IsAbleToGraveAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(1)
@@ -29,7 +29,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 		return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,e:GetHandler()) and rt>0 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 	local cg=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,rt,nil)
-	Duel.SendtoRest(cg,REASON_COST+REASON_DISCARD)
+	Duel.SendtoGrave(cg,REASON_COST+REASON_DISCARD)
 	Duel.SetTargetParam(#cg)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,e:GetLabel(),0,0)
 end

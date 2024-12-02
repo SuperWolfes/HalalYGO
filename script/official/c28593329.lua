@@ -16,11 +16,11 @@ function s.initial_effect(c)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local at=Duel.GetAttackTarget()
-	if chk==0 then return e:GetHandler():IsAbleToRestAsCost()
+	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost()
 		and at and at:IsControler(tp) and at:IsRace(RACE_WANDERER) and at:IsReleasable() end
 	e:SetLabel(at:GetBaseAttack())
 	Duel.Release(at,REASON_COST)
-	Duel.SendtoRest(e:GetHandler(),REASON_COST)
+	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local at=Duel.GetAttackTarget()

@@ -37,7 +37,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local dg=Duel.GetFieldGroup(tp,0,LOCATION_HAND)
 	if #dg>0 then
 		local g=dg:RandomSelect(tp,1)
-		if Duel.SendtoRest(g,REASON_EFFECT)>0 and Duel.GetOperatedGroup():FilterCount(Card.IsLocation,nil,LOCATION_REST)>0 then
+		if Duel.SendtoGrave(g,REASON_EFFECT)>0 and Duel.GetOperatedGroup():FilterCount(Card.IsLocation,nil,LOCATION_REST)>0 then
 			if Duel.GetFieldGroupCount(tp,0,LOCATION_HAND)>=2 and Duel.IsPlayerCanDraw(1-tp,1) and Duel.SelectYesNo(1-tp,aux.Stringid(id,1)) then
 				Duel.BreakEffect()
 				Duel.Draw(1-tp,1,REASON_EFFECT)

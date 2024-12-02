@@ -34,7 +34,7 @@ function s.spfilter(c,e,tp)
 	return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_MZONE,0,1,nil,f)
 end
 function s.tgfilter(c,f)
-	return c:IsMonster() and c:IsAbleToRest() and f(c)
+	return c:IsMonster() and c:IsAbleToGrave() and f(c)
 		and Duel.IsExistingTarget(Card.IsFaceup,c:GetControler(),LOCATION_MZONE,LOCATION_MZONE,1,c)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
@@ -47,7 +47,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local tg=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_MZONE,0,1,1,nil,f)
 		tg:AddCard(e:GetHandler())
-		Duel.SendtoRest(tg,REASON_EFFECT)
+		Duel.SendtoGrave(tg,REASON_EFFECT)
 		Duel.BreakEffect()
 		if sc:CheckActivateEffect(false,false,false)~=nil then
 			local tpe=sc:GetType()
@@ -60,7 +60,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			Duel.Hint(HINT_CARD,0,sc:GetOriginalCode())
 			sc:CreateEffectRelation(te)
 			if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 then
-				sc:CancelToRest(false)
+				sc:CancelToGrave(false)
 			end
 			if co then co(te,tp,eg,ep,ev,re,r,rp,1) end
 			if tg then tg(te,tp,eg,ep,ev,re,r,rp,1) end

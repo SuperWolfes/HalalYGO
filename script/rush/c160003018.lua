@@ -21,7 +21,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetFieldGroupCountRush(tp,LOCATION_SZONE,0)==Duel.GetMatchingGroupCountRush(Card.IsFaceup,tp,0,LOCATION_MZONE,nil)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_SZONE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_SZONE,0,1,nil) end
 end
 function s.tgfilter(c)
 	return c:GetAttack()>0 or c:GetDefense()>0
@@ -32,8 +32,8 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	--requirement
-	local tg=Duel.SelectMatchingCard(tp,Card.IsAbleToRestAsCost,tp,LOCATION_SZONE,0,1,3,nil)
-	local sent=Duel.SendtoRest(tg,REASON_COST)
+	local tg=Duel.SelectMatchingCard(tp,Card.IsAbleToGraveAsCost,tp,LOCATION_SZONE,0,1,3,nil)
+	local sent=Duel.SendtoGrave(tg,REASON_COST)
 	if sent>0 then
 		--effect
 		if c:IsRelateToEffect(e) and c:IsFaceup() then

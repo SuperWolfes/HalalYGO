@@ -81,7 +81,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	end
 	Duel.EquipComplete()
 	if #g>0 then
-		Duel.SendtoRest(g,REASON_RULE)
+		Duel.SendtoGrave(g,REASON_RULE)
 	end
 end
 function s.eqfilter(c,ec)

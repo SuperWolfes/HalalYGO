@@ -39,7 +39,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		if tc:IsType(TYPE_FIELD) then loc=LOCATION_FZONE end
 		Duel.MoveToField(tc,tp,tp,loc,POS_FACEUP,true)
 		if tg then
-			tc:CancelToRest(false)
+			tc:CancelToGrave(false)
 		end
 		Duel.Hint(HINT_CARD,0,tc:GetCode())
 		local te=tc:GetActivateEffect()

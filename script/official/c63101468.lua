@@ -32,13 +32,13 @@ end
 s.listed_names={CARD_SANCTUARY_SKY}
 s.listed_series={0x44}
 function s.cpfilter(c)
-	return c:IsMonster() and (c:IsSetCard(0x44) or c:ListsCode(CARD_SANCTUARY_SKY)) and c:IsAbleToRestAsCost()
+	return c:IsMonster() and (c:IsSetCard(0x44) or c:ListsCode(CARD_SANCTUARY_SKY)) and c:IsAbleToGraveAsCost()
 end
 function s.cpcost(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cpfilter,tp,LOCATION_HAND+LOCATION_DECK+LOCATION_EXTRA,0,1,e:GetHandler()) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cpfilter,tp,LOCATION_HAND+LOCATION_DECK+LOCATION_EXTRA,0,1,1,e:GetHandler())
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 	e:SetLabel(g:GetFirst():GetOriginalCode())
 end
 function s.cpop(e,tp,eg,ep,ev,re,r,rp)

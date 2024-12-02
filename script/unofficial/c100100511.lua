@@ -20,7 +20,7 @@ function s.desfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0x24) and c:IsDestructable()
 end
 function s.sfilter(c)
-	return c:IsSetCard(0x24) and c:IsMonster() and c:IsAbleToRest()
+	return c:IsSetCard(0x24) and c:IsMonster() and c:IsAbleToGrave()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.desfilter(chkc) end
@@ -37,7 +37,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.sfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 		if not g:GetFirst():IsLocation(LOCATION_REST) then return end
 		Duel.BreakEffect()
 		Duel.Draw(tp,1,REASON_EFFECT)

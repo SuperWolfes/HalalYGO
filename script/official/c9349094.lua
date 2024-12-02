@@ -75,7 +75,7 @@ function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	if #ov<1 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)
 	local sg=ov:Select(tp,1,1,nil)
-	if #sg>0 and Duel.SendtoRest(sg,REASON_EFFECT)>0 then
+	if #sg>0 and Duel.SendtoGrave(sg,REASON_EFFECT)>0 then
 		Duel.RaiseSingleEvent(c,EVENT_DETACH_MATERIAL,e,0,0,0,0)
 		if Duel.NegateActivation(ev) and re:GetHandler():IsRelateToEffect(re) then
 			Duel.Destroy(eg,REASON_EFFECT)

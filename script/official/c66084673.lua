@@ -19,10 +19,10 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 		or (Duel.GetAttackTarget() and Duel.GetAttackTarget():IsControler(tp) and Duel.GetAttackTarget():IsSetCard(0x79))
 end
 function s.filter1(c)
-	return c:IsFaceup() and c:IsSetCard(0x7c) and c:IsAbleToRestAsCost()
+	return c:IsFaceup() and c:IsSetCard(0x7c) and c:IsAbleToGraveAsCost()
 end
 function s.filter2(c)
-	return c:IsSetCard(0x79) and c:GetBaseAttack()>0 and c:IsAbleToRestAsCost()
+	return c:IsSetCard(0x79) and c:GetBaseAttack()>0 and c:IsAbleToGraveAsCost()
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():GetFlagEffect(id)==0
@@ -34,7 +34,7 @@ function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g2=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_HAND,0,1,1,nil)
 	e:SetLabel(g2:GetFirst():GetBaseAttack())
 	g1:Merge(g2)
-	Duel.SendtoRest(g1,REASON_COST)
+	Duel.SendtoGrave(g1,REASON_COST)
 	e:GetHandler():RegisterFlagEffect(id,RESET_PHASE+PHASE_DAMAGE_CAL,0,1)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)

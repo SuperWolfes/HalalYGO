@@ -32,7 +32,7 @@ end
 s.listed_names={TOKEN_WORLD_LEGACY}
 s.listed_series={0x11b,0xfe}
 function s.tgfilter(c)
-	return (c:IsSetCard(0x11b) or c:IsSetCard(0xfe)) and c:IsAbleToRest()
+	return (c:IsSetCard(0x11b) or c:IsSetCard(0xfe)) and c:IsAbleToGrave()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -43,7 +43,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 	local tc=g:GetFirst()
-	if tc and Duel.SendtoRest(tc,REASON_EFFECT)~=0 and tc:IsLocation(LOCATION_REST) then
+	if tc and Duel.SendtoGrave(tc,REASON_EFFECT)~=0 and tc:IsLocation(LOCATION_REST) then
 		if c:GetColumnGroupCount()>=2 and c:IsFaceup() and c:IsRelateToEffect(e) then
 			Duel.BreakEffect()
 			local e1=Effect.CreateEffect(c)

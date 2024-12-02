@@ -181,7 +181,7 @@ function(fusfilter,matfilter,extrafil,extraop,gc2,stage2,exactcount,value,locati
 				local gc=gc2
 				gc=type(gc)=="function" and gc(e,tp,eg,ep,ev,re,r,rp,chk) or gc
 				gc=type(gc)=="Card" and Group.FromCards(gc) or gc
-				matfilter=matfilter or Card.IsAbleToRest
+				matfilter=matfilter or Card.IsAbleToGrave
 				stage2 = stage2 or aux.TRUE
 				if chk==0 then
 					--Separate the Fusion Materials filtered by matfilter
@@ -319,7 +319,7 @@ function (fusfilter,matfilter,extrafil,extraop,gc2,stage2,exactcount,value,locat
 				local gc=gc2
 				gc=type(gc)=="function" and gc(e,tp,eg,ep,ev,re,r,rp,chk) or gc
 				gc=type(gc)=="Card" and Group.FromCards(gc) or gc
-				matfilter=matfilter or Card.IsAbleToRest
+				matfilter=matfilter or Card.IsAbleToGrave
 				stage2 = stage2 or aux.TRUE
 				local checkAddition
 				--Same as line 167 above
@@ -506,14 +506,14 @@ function (fusfilter,matfilter,extrafil,extraop,gc2,stage2,exactcount,value,locat
 							local extra_feff
 							if #extra_feff_mg>0 then extra_feff=GetExtraMatEff(extra_feff_mg:GetFirst(),tc) end
 							if #normal_mg>0 then
-								Duel.SendtoRest(normal_mg,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
+								Duel.SendtoGrave(normal_mg,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
 							end
 							if extra_feff then
 								local extra_feff_op=extra_feff:GetOperation()
 								if extra_feff_op then
 									extra_feff_op(e,tc,tp,extra_feff_mg)
 								else
-									Duel.SendtoRest(extra_feff_mg,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
+									Duel.SendtoGrave(extra_feff_mg,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
 								end
 								--If the EFFECT_EXTRA_FUSION_MATERIAL effect is OPT
 								--then "use" its count limit.
@@ -558,7 +558,7 @@ end
 function Fusion.OnFieldMat(filter,...)
 	if type(filter) == "Card" then
 		--filter is actually the card parameter
-		return filter:IsOnField() and filter:IsAbleToRest()
+		return filter:IsOnField() and filter:IsAbleToGrave()
 	end
 	local funs={filter,...}
 	return function (c,...)
@@ -576,7 +576,7 @@ end
 function Fusion.InHandMat(filter,...)
 	if type(filter) == "Card" then
 		--filter is actually the card parameter
-		return filter:IsLocation(LOCATION_HAND) and filter:IsAbleToRest()
+		return filter:IsLocation(LOCATION_HAND) and filter:IsAbleToGrave()
 	end
 	local funs={filter,...}
 	return function (c,...)

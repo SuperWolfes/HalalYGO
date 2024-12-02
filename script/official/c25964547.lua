@@ -39,7 +39,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		local tc=cs[p+1]
 		local fc=Duel.GetFieldCard(p,LOCATION_SZONE,5)
 		if fc then
-			Duel.SendtoRest(fc,REASON_RULE)
+			Duel.SendtoGrave(fc,REASON_RULE)
 			Duel.BreakEffect()
 		end
 		Duel.MoveToField(tc,tp,p,LOCATION_FZONE,POS_FACEUP,true)

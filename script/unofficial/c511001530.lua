@@ -28,10 +28,10 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetTargetPlayer(tp)
 	Duel.SetTargetParam(2)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,2)
-	e:GetHandler():CancelToRest()
+	e:GetHandler():CancelToGrave()
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	e:GetHandler():CancelToRest()
+	e:GetHandler():CancelToGrave()
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
 	Duel.Draw(p,d,REASON_EFFECT)
 end

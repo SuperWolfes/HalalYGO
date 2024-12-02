@@ -35,7 +35,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x74}
 function s.cfilter(c)
-	return c:IsSetCard(0x74) and c:IsDiscardable() and c:IsAbleToRestAsCost()
+	return c:IsSetCard(0x74) and c:IsDiscardable() and c:IsAbleToGraveAsCost()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,4,e:GetHandler()) end

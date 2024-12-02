@@ -91,8 +91,8 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		--Detach all materials from the target
 		local og=tc:GetOverlayGroup()
 		if #og==0 then return end
-		if Duel.SendtoRest(og,REASON_EFFECT)~=#og or Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
-		local sg=Duel.GetMatchingGroup(aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,e,tp)
+		if Duel.SendtoGrave(og,REASON_EFFECT)~=#og or Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
+		local sg=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,e,tp)
 		if #sg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 			local sc=sg:Select(tp,1,1,nil)

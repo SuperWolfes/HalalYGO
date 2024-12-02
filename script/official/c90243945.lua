@@ -39,7 +39,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_SKULL_SERVANT,57473560}
 function s.tgfilter(c)
-	return c:IsCode(57473560) and c:IsAbleToRest()
+	return c:IsCode(57473560) and c:IsAbleToGrave()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -48,15 +48,15 @@ end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.GetFirstMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,nil)
 	if tg then
-		Duel.SendtoRest(tg,REASON_EFFECT)
+		Duel.SendtoGrave(tg,REASON_EFFECT)
 	end
 end
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
-	Duel.SendtoRest(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
+	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
 end
 function s.atkfilter(c)
 	return c:IsFaceup() and (c:GetLevel()>0 or c:GetRank()>0)

@@ -35,7 +35,7 @@ function s.extratg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,nil,0,tp,LOCATION_DECK)
 end
 function s.fextra(e,tp,mg,sumtype)
-	return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRest),tp,LOCATION_DECK,0,nil),s.fcheck
+	return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToGrave),tp,LOCATION_DECK,0,nil),s.fcheck
 end
 function s.stage2(e,tc,tp,mg,chk)
 	if chk==1 then

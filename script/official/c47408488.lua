@@ -58,9 +58,9 @@ function s.ctop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.plcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToRestAsCost() end
+	if chk==0 then return c:IsAbleToGraveAsCost() end
 	e:SetLabel(c:GetCounter(0x6))
-	Duel.SendtoRest(c,REASON_COST)
+	Duel.SendtoGrave(c,REASON_COST)
 end
 function s.plfilter(c)
 	return c:IsSetCard(0x1034) and c:IsMonster() and not c:IsUnliked()

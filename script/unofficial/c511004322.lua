@@ -237,10 +237,10 @@ function s.actionaloperation(e,tp,eg,ep,ev,re,r,rp)
 				if Duel.GetFlagEffect(tp,62765383)>0 then
 					if fc then Duel.Destroy(fc,REASON_RULE) end
 					of=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
-					if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
+					if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
 				else
 					Duel.GetFieldCard(tp,LOCATION_SZONE,5)
-					if fc and Duel.SendtoRest(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
+					if fc and Duel.SendtoGrave(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
 				end
 			end
 			Duel.DisableShuffleCheck()
@@ -260,7 +260,7 @@ function s.actionaloperation(e,tp,eg,ep,ev,re,r,rp)
 			end
 			if op then
 				if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 and not tc:IsHasEffect(EFFECT_REMAIN_FIELD) then
-					tc:CancelToRest(false)
+					tc:CancelToGrave(false)
 				end
 				if op then op(e,tp,eg,ep,ev,re,r,rp) end
 			end
@@ -330,7 +330,7 @@ function s.trapoperation(e,tp,eg,ep,ev,re,r,rp)
 			end
 			if op then
 				if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 and not tc:IsHasEffect(EFFECT_REMAIN_FIELD) then
-					tc:CancelToRest(false)
+					tc:CancelToGrave(false)
 				end
 				if op then op(e,tp,eg,ep,ev,re,r,rp) end
 			end

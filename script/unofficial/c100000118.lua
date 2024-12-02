@@ -26,7 +26,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	g1:Merge(g2)
 	local g3=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,1,nil,79335209)
 	g1:Merge(g3)
-	Duel.SendtoRest(g1,REASON_COST+REASON_DISCARD)
+	Duel.SendtoGrave(g1,REASON_COST+REASON_DISCARD)
 end
 function s.filter(c,e,tp)
 	return c:GetLevel()<=4 and c:IsRace(RACE_MACHINE) and c:IsType(TYPE_UNION) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

@@ -47,7 +47,7 @@ function s.gycon(e,tp,eg,ep,ev,re,r,rp)
 	return aux.bdcon(e,tp,eg,ep,ev,re,r,rp) and e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
 end
 function s.gyfilter(c)
-	return c:IsAbleToRest() and c:IsMonster()
+	return c:IsAbleToGrave() and c:IsMonster()
 		and (c:IsSetCard(0xc3) or c:IsSetCard(0xa9) or c:IsSetCard(0xad))
 end
 function s.gytg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -62,7 +62,7 @@ function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.gyfilter,tp,LOCATION_DECK,0,lv,lv,nil)
 	if #g>0 then
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	end
 end
 function s.discon(e,tp,eg,ep,ev,re,r,rp)

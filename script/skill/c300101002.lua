@@ -1,4 +1,4 @@
---Straight to the Rest (Skill Card)
+--Straight to the Grave (Skill Card)
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddFieldSkillProcedure(c,2,false)

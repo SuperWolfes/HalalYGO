@@ -27,7 +27,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local sg=tg:Select(tp,1,1,nil)
 		local ec=eg:GetFirst()
 		Duel.Equip(tp,ec,sg:GetFirst())
-		ec:CancelToRest()
+		ec:CancelToGrave()
 		--Equip limit
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)

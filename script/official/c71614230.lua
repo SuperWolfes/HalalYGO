@@ -54,6 +54,6 @@ function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.HintSelection(pc,true)
 	local g=pc:GetColumnGroup():Filter(Card.IsControler,nil,1-tp)
 	if #g>0 then
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	end
 end

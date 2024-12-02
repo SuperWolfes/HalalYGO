@@ -64,7 +64,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetLabelObject(tc)
 		c:RegisterEffect(e1)
 	elseif c:IsLocation(LOCATION_HAND) then
-		Duel.SendtoRest(c,REASON_RULE)
+		Duel.SendtoGrave(c,REASON_RULE)
 	end
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)

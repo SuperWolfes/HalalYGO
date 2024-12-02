@@ -198,7 +198,7 @@ end
 function s.banop(e,tp,eg,ep,ev,re,r,rp)
 	local g=eg:Filter(s.banfilter,nil,tp)
 	if #g>0 then
-		Duel.SendtoRest(g,r+REASON_DESTROY+REASON_RETURN)
+		Duel.SendtoGrave(g,r+REASON_DESTROY+REASON_RETURN)
 	end
 end
 function s.repfilter(c,tp)

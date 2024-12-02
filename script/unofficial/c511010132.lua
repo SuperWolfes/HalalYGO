@@ -51,7 +51,7 @@ function s.xyzop(e,tp,eg,ep,ev,re,r,rp,c,og,min,max)
 	c:SetMaterial(tc)
 	Duel.Overlay(c,tc)
 	if not tc:IsCode(65676461) then
-		Duel.SendtoRest(mg2,REASON_RULE)
+		Duel.SendtoGrave(mg2,REASON_RULE)
 	end
 end
 function s.ovfilter(c)

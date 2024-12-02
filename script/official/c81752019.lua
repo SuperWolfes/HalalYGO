@@ -34,7 +34,7 @@ function s.drop1(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetOperatedGroup():GetFirst()
 	Duel.ConfirmCards(1-tp,tc)
 	if not (tc:IsSetCard(0xe6) and tc:IsMonster()) then
-		Duel.SendtoRest(tc,REASON_EFFECT)
+		Duel.SendtoGrave(tc,REASON_EFFECT)
 	end
 	Duel.ShuffleHand(tp)
 end

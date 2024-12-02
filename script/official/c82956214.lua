@@ -24,7 +24,7 @@ function s.desfilter(c,tp)
 end
 	--Check for a monster in player's extra deck, whose ATK is higher than opponent's monster
 function s.tgfilter(c,rc)
-	return c:GetAttack()>=rc:GetAttack() and c:IsAbleToRest()
+	return c:GetAttack()>=rc:GetAttack() and c:IsAbleToGrave()
 end
 	--Activation legality
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -40,7 +40,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsRelateToEffect(e) and tc:IsFaceup() then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_EXTRA,0,1,1,nil,tc)
-		if #g>0 and Duel.SendtoRest(g,REASON_EFFECT)>0 and g:GetFirst():IsLocation(LOCATION_REST) then
+		if #g>0 and Duel.SendtoGrave(g,REASON_EFFECT)>0 and g:GetFirst():IsLocation(LOCATION_REST) then
 			Duel.Destroy(tc,REASON_EFFECT)
 		end
 	end

@@ -44,7 +44,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if tc==eqc then tc=g:GetNext() end
 	if not eqc:IsRelateToEffect(e) then return end
 	if tc:IsFacedown() or not tc:IsRelateToEffect(e) then
-		Duel.SendtoRest(eqc,REASON_EFFECT)
+		Duel.SendtoGrave(eqc,REASON_EFFECT)
 		return
 	end
 	Duel.Equip(tp,eqc,tc)

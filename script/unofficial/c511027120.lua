@@ -62,11 +62,11 @@ function s.mtcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp
 end
 function s.mtop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,nil)
+	local g=Duel.GetMatchingGroup(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,nil)
 	if #g>=5 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local hg=g:Select(tp,5,5,nil)
-		Duel.SendtoRest(hg,REASON_COST)
+		Duel.SendtoGrave(hg,REASON_COST)
 	else
 		Duel.Destroy(e:GetHandler(),REASON_COST)
 	end

@@ -27,5 +27,5 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local sg=Duel.SelectMatchingCard(1-tp,nil,1-tp,0xe,0,ct-5,ct-5,nil)
 		g:Merge(sg)
 	end
-	Duel.SendtoRest(g,REASON_EFFECT)
+	Duel.SendtoGrave(g,REASON_EFFECT)
 end

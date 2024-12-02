@@ -46,7 +46,7 @@ function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local d=Duel.TossSuffice(tp,1)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.tdfilter),tp,LOCATION_REST,0,1,d,nil)
+	local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.tdfilter),tp,LOCATION_REST,0,1,d,nil)
 	if #g>0 then
 		local dc=Duel.SendtoDeck(g,nil,2,REASON_EFFECT)
 		if not (dc>0 and Duel.GetFieldGroupCount(tp,0,LOCATION_ONFIELD)>0 and Duel.SelectYesNo(tp,aux.Stringid(id,2))) then return end

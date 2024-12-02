@@ -44,7 +44,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	local g=Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_DECK,nil)
-	Duel.SendtoRest(g,REASON_EFFECT)
+	Duel.SendtoGrave(g,REASON_EFFECT)
 	local og=Duel.GetOperatedGroup()
 	local ct=og:FilterCount(Card.IsLocation,nil,LOCATION_REST)
 	if Duel.GetMatchingGroupCount(s.filter,tp,0,LOCATION_DECK,nil)==0 and ct==#og and Duel.Recover(tp,#og*500,REASON_EFFECT)>0 then 

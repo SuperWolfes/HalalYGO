@@ -13,13 +13,13 @@ function s.extragroup(e,tp,eg,ep,ev,re,r,rp,chk)
 	return Duel.GetMatchingGroup(s.matfilter1,tp,LOCATION_DECK,0,nil)
 end
 function s.matfilter1(c)
-	return c:IsSetCard(0x106) and c:IsAbleToRest() and c:IsLevelAbove(1)
+	return c:IsSetCard(0x106) and c:IsAbleToGrave() and c:IsLevelAbove(1)
 end
 function s.extraop(mat,e,tp,eg,ep,ev,re,r,rp,tc)
 	local mat2=mat:Filter(Card.IsLocation,nil,LOCATION_DECK)
 	mat:Sub(mat2)
 	Duel.ReleaseLockedMaterial(mat)
-	Duel.SendtoRest(mat2,REASON_EFFECT+REASON_MATERIAL+REASON_LOCKED)
+	Duel.SendtoGrave(mat2,REASON_EFFECT+REASON_MATERIAL+REASON_LOCKED)
 end
 function s.extratg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

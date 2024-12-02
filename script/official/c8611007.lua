@@ -36,5 +36,5 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.BreakEffect()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local dg=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_HAND,0,1,1,nil)
-	Duel.SendtoRest(dg,REASON_EFFECT)
+	Duel.SendtoGrave(dg,REASON_EFFECT)
 end

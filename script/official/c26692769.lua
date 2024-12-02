@@ -38,7 +38,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x10db,0xdb}
 function s.tgfilter(c,tp)
-	return c:IsSetCard(0x10db) and c:IsAbleToRest() and c:IsMonster()
+	return c:IsSetCard(0x10db) and c:IsAbleToGrave() and c:IsMonster()
 		and Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_DECK,0,1,c)
 end
 function s.setfilter(c)
@@ -53,7 +53,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil,tp)
 	if #g==0 then return end
-	Duel.SendtoRest(g,REASON_EFFECT)
+	Duel.SendtoGrave(g,REASON_EFFECT)
 	local og=Duel.GetOperatedGroup():Filter(Card.IsLocation,nil,LOCATION_REST)
 	if #og>0 and Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_DECK,0,1,nil) then
 		local tc=Duel.SelectMatchingCard(tp,s.setfilter,tp,LOCATION_DECK,0,1,1,nil):GetFirst()

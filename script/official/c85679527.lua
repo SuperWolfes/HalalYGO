@@ -27,7 +27,7 @@ function s.initial_effect(c)
 end
 function s.spfilter1(c,tp)
 	return (c:IsLocation(LOCATION_HAND) or c:IsFaceup()) and not c:IsType(TYPE_EFFECT) and c:IsMonster()
-		and c:IsAbleToRestAsCost() and Duel.GetMZoneCount(tp,c)>0
+		and c:IsAbleToGraveAsCost() and Duel.GetMZoneCount(tp,c)>0
 end
 function s.spcon1(e,c)
 	if c==nil then return true end
@@ -51,7 +51,7 @@ end
 function s.spop1(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 	local lv=g:GetFirst():GetLevel()
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_SINGLE)

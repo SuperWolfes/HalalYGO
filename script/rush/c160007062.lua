@@ -17,7 +17,7 @@ function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsTurnPlayer(1-tp) and not Duel.GetAttackTarget()
 end
 function s.damcostfilter(c)
-	return c:IsRace(RACE_MACHINE) and c:IsAttribute(ATTRIBUTE_EARTH) and c:IsAbleToRestAsCost()
+	return c:IsRace(RACE_MACHINE) and c:IsAttribute(ATTRIBUTE_EARTH) and c:IsAbleToGraveAsCost()
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.damcostfilter,tp,LOCATION_HAND,0,1,nil) end
@@ -27,7 +27,7 @@ end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local cg=Duel.SelectMatchingCard(tp,s.damcostfilter,tp,LOCATION_HAND,0,1,1,nil)
-	if #cg<1 or Duel.SendtoRest(cg,REASON_COST)<1 or Duel.Damage(1-tp,300,REASON_EFFECT)<=0 then return end
+	if #cg<1 or Duel.SendtoGrave(cg,REASON_COST)<1 or Duel.Damage(1-tp,300,REASON_EFFECT)<=0 then return end
 	-- Take no battle damage this turn
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD)

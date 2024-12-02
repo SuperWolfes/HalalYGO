@@ -1,5 +1,5 @@
 --レストレーション・ポイントガード
---Restoration Point Guard
+--Graveoration Point Guard
 --Scripted by Eerie Code
 
 local s,id=GetID()

@@ -1,5 +1,5 @@
 --ミレニアム・アイズ・サクリファイス
---Millennium-Eyes Restrict
+--Millennium-Eyes Graverict
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material

@@ -125,7 +125,7 @@ function s.negop(e,tp,eg,ep,ev,re,r,rp)
 		if rc:GetFlagEffectLabel(id+1)==LOCATION_HAND then
 			Duel.SendtoHand(rc,rc:GetFlagEffectLabel(511010209),REASON_EFFECT)
 		elseif rc:GetFlagEffectLabel(id+1)==LOCATION_REST then
-			Duel.SendtoRest(rc,REASON_EFFECT,rc:GetFlagEffectLabel(511010209))
+			Duel.SendtoGrave(rc,REASON_EFFECT,rc:GetFlagEffectLabel(511010209))
 		elseif rc:GetFlagEffectLabel(id+1)==LOCATION_REMOVED then
 			Duel.Remove(rc,rc:GetPreviousPosition(),REASON_EFFECT,rc:GetFlagEffectLabel(511010209))
 		elseif rc:GetFlagEffectLabel(id+1)==LOCATION_DECK then
@@ -134,7 +134,7 @@ function s.negop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.SendtoDeck(rc,rc:GetFlagEffectLabel(511010209),0,REASON_EFFECT)
 		else
 			if rc:IsStatus(STATUS_LEAVE_CONFIRMED) then
-				rc:CancelToRest()
+				rc:CancelToGrave()
 			end
 			local loc=rc:GetFlagEffectLabel(id+1)
 			if rc:IsType(TYPE_FIELD) then

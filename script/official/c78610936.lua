@@ -35,10 +35,10 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not tc:IsRelateToEffect(e) then return end
 	local mg=tc:GetOverlayGroup()
-	Duel.SendtoRest(mg,REASON_EFFECT)
+	Duel.SendtoGrave(mg,REASON_EFFECT)
 	Duel.AdjustInstantly(tc)
 	if Duel.SendtoDeck(tc,nil,0,REASON_EFFECT)>0 then
-		local g=mg:Filter(aux.RestValleyFilter(s.spfilter),nil,e,tp)
+		local g=mg:Filter(aux.GraveValleyFilter(s.spfilter),nil,e,tp)
 		local ft=Duel.GetLocationCount(1-tp,LOCATION_MZONE)
 		if ft>0 and #g>0 then
 			if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end

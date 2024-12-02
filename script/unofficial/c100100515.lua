@@ -81,5 +81,5 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		end
 	end
 	Duel.SpecialSummonComplete()
-	Duel.SendtoRest(gg,REASON_EFFECT)
+	Duel.SendtoGrave(gg,REASON_EFFECT)
 end

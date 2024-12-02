@@ -40,13 +40,13 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(tp,0,LOCATION_HAND)
 	if #g>0 then
 		local sg=g:RandomSelect(tp,1)
-		if Duel.SendtoRest(sg,REASON_EFFECT)>0 and sg:GetFirst():IsLocation(LOCATION_REST) then
+		if Duel.SendtoGrave(sg,REASON_EFFECT)>0 and sg:GetFirst():IsLocation(LOCATION_REST) then
 			local tc=Duel.GetOperatedGroup():GetFirst()
 			if tc:IsMonster() then
 				local g=Duel.GetFieldGroup(tp,0,LOCATION_HAND)
 				if #g>0 then
 					local sg2=g:RandomSelect(tp,1)
-					Duel.SendtoRest(sg2,REASON_EFFECT)
+					Duel.SendtoGrave(sg2,REASON_EFFECT)
 				end
 			end
 		end
@@ -79,7 +79,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(tp,0,LOCATION_HAND)
 	if #g>0 then
 		local sg=g:RandomSelect(1-tp,1)
-		if Duel.SendtoRest(sg,REASON_EFFECT)>0 and sg:GetFirst():IsLocation(LOCATION_REST)
+		if Duel.SendtoGrave(sg,REASON_EFFECT)>0 and sg:GetFirst():IsLocation(LOCATION_REST)
 			and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and e:GetHandler():IsRelateToEffect(e)
 			and e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE) then
 			Duel.SpecialSummon(e:GetHandler(),0,tp,tp,false,false,POS_FACEUP_DEFENSE)

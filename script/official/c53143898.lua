@@ -44,10 +44,10 @@ function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.thfilter1(c)
-	return c:IsFaceup() and c:IsSetCard(0x103) and c:IsAbleToRest()
+	return c:IsFaceup() and c:IsSetCard(0x103) and c:IsAbleToGrave()
 end
 function s.thfilter2(c)
-	return c:IsFaceup() and c:IsSetCard(0x103) and c:IsAbleToRest() and c:GetSequence()<5
+	return c:IsFaceup() and c:IsSetCard(0x103) and c:IsAbleToGrave() and c:GetSequence()<5
 end
 function s.spfilter(c,e,tp)
 	return c:IsSetCard(0x103) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -80,7 +80,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local tc1,tc2=Duel.GetFirstTarget()
 	if tc1~=e:GetLabelObject() then tc1,tc2=tc2,tc1 end
-	if tc1:IsRelateToEffect(e) and Duel.SendtoRest(tc1,REASON_EFFECT)>0 and tc1:IsLocation(LOCATION_REST) 
+	if tc1:IsRelateToEffect(e) and Duel.SendtoGrave(tc1,REASON_EFFECT)>0 and tc1:IsLocation(LOCATION_REST) 
 		and tc2:IsRelateToEffect(e) and (aux.nvfilter(tc2) or not Duel.IsChainDisablable(0)) then
 		Duel.SpecialSummon(tc2,0,tp,tp,false,false,POS_FACEUP)
 	end

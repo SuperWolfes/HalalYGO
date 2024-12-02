@@ -60,7 +60,7 @@ end
 function s.sccost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsDiscardable() end
-	Duel.SendtoRest(c,REASON_DISCARD+REASON_COST)
+	Duel.SendtoGrave(c,REASON_DISCARD+REASON_COST)
 end
 function s.sctg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_PZONE) and chkc:IsControler(tp) and chkc:GetScale()~=1 end

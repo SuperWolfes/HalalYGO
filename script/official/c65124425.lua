@@ -14,7 +14,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x12c}
 function s.gyfilter(c)
-	return c:IsRace(RACE_WYRM) and c:IsAbleToRest()
+	return c:IsRace(RACE_WYRM) and c:IsAbleToGrave()
 end
 function s.thfilter(c,cd)
 	return c:IsSetCard(0x12c) and c:IsMonster() and not c:IsCode(cd) and c:IsAbleToHand()
@@ -27,7 +27,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local gc=Duel.SelectMatchingCard(tp,s.gyfilter,tp,LOCATION_DECK,0,1,1,nil):GetFirst()
-	if not gc or Duel.SendtoRest(gc,REASON_EFFECT)==0 or not gc:IsLocation(LOCATION_REST) then return end
+	if not gc or Duel.SendtoGrave(gc,REASON_EFFECT)==0 or not gc:IsLocation(LOCATION_REST) then return end
 	local g=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_DECK,0,nil,gc:GetCode())
 	if Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsNonEffectMonster),tp,LOCATION_MZONE,0,1,nil) and #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.BreakEffect()

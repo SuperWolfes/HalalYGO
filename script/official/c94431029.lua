@@ -30,7 +30,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ConfirmCards(1-tp,tc0)
 	Duel.ConfirmCards(tp,tc1)
 	if s.compare(tc0,tc1) then
-		if Duel.SendtoRest(tc1,REASON_EFFECT)~=0 and Duel.GetLocationCountFromEx(tp,tp,tc0)>0
+		if Duel.SendtoGrave(tc1,REASON_EFFECT)~=0 and Duel.GetLocationCountFromEx(tp,tp,tc0)>0
 			and Duel.SpecialSummon(tc0,0,tp,tp,false,false,POS_FACEUP)~=0
 			and tc0:GetOriginalRace()==tc1:GetOriginalRace()
 			and tc0:GetOriginalAttribute()==tc1:GetOriginalAttribute() then
@@ -40,7 +40,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			end
 		end
 	else
-		if Duel.SendtoRest(tc0,REASON_EFFECT)~=0 and Duel.GetLocationCountFromEx(1-tp,1-tp,tc1)>0 then
+		if Duel.SendtoGrave(tc0,REASON_EFFECT)~=0 and Duel.GetLocationCountFromEx(1-tp,1-tp,tc1)>0 then
 			Duel.SpecialSummon(tc1,0,1-tp,1-tp,false,false,POS_FACEUP)
 		end
 	end

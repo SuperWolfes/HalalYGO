@@ -58,5 +58,5 @@ end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetLabelObject()
 	Duel.Destroy(tc,REASON_EFFECT)
-	Duel.SendtoRest(tc,REASON_EFFECT)
+	Duel.SendtoGrave(tc,REASON_EFFECT)
 end

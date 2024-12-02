@@ -24,7 +24,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		if #tg>0 then
 			Duel.Hint(HINT_SELECTMSG,p,HINTMSG_TOREST)
 			local sg=tg:Select(p,1,1,nil)
-			Duel.SendtoRest(sg,REASON_DISCARD+REASON_EFFECT)
+			Duel.SendtoGrave(sg,REASON_DISCARD+REASON_EFFECT)
 		end
 		Duel.ShuffleHand(1-p)
 	end

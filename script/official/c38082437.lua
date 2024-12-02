@@ -40,7 +40,7 @@ end
 function s.operation_a(e,tp,eg,ep,ev,re,r,rp)
 	local res=Duel.TossSuffice(tp,1)
 	if Duel.Recover(tp,res*100,REASON_EFFECT)~=res*100 or Duel.GetLocationCount(tp,LOCATION_MZONE)==0 then return end
-	local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,res,e,tp)
+	local g=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,res,e,tp)
 	if #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local sc=g:Select(tp,1,1,nil):GetFirst()
@@ -56,7 +56,7 @@ function s.target_d(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
 function s.tgfilter(c)
-	return c:IsSetCard(0x26) and c:IsAbleToRest()
+	return c:IsSetCard(0x26) and c:IsAbleToGrave()
 end
 function s.operation_d(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)==0 then return end
@@ -69,7 +69,7 @@ function s.operation_d(e,tp,eg,ep,ev,re,r,rp)
 		local tg=dg:FilterSelect(tp,s.tgfilter,1,1,nil)
 		dg:RemoveCard(tg)
 		Duel.DisableShuffleCheck()
-		Duel.SendtoRest(tg,REASON_EFFECT+REASON_REVEAL)
+		Duel.SendtoGrave(tg,REASON_EFFECT+REASON_REVEAL)
 		ct=1
 	end
 	local ac=res-ct

@@ -75,10 +75,10 @@ end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local hg=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
 	local hct=#hg
-	if chk==0 then return hct>0 and hg:FilterCount(Card.IsAbleToRestAsCost,nil)==hct and e:GetHandler():IsAbleToRestAsCost() 
+	if chk==0 then return hct>0 and hg:FilterCount(Card.IsAbleToGraveAsCost,nil)==hct and e:GetHandler():IsAbleToGraveAsCost() 
 		and Duel.GetActivityCount(tp,ACTIVITY_BATTLE_PHASE)==0 end
 	hg:AddCard(e:GetHandler())
-	Duel.SendtoRest(hg,REASON_COST)
+	Duel.SendtoGrave(hg,REASON_COST)
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_CANNOT_BP)

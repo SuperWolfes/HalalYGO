@@ -46,7 +46,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local mg=rc:GetMaterial()
 	local ct=#mg
 	if ct>0 and (ct==1 or not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)) and ct<=Duel.GetLocationCount(tp,LOCATION_MZONE)
-		and mg:FilterCount(aux.RestValleyFilter(s.mgfilter),nil,e,tp,rc)==ct then
+		and mg:FilterCount(aux.GraveValleyFilter(s.mgfilter),nil,e,tp,rc)==ct then
 		Duel.SpecialSummon(mg,0,tp,tp,false,false,POS_FACEUP)
 	end
 end

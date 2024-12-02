@@ -44,13 +44,13 @@ function s.sstage2(e,tc,tp,sg,chk)
 			local tg=Duel.SelectMatchingCard(tp,s.sameatt,tp,0,LOCATION_MZONE,1,1,nil,att)
 			if #tg>0 then
 				Duel.HintSelection(tg)
-				Duel.SendtoRest(tg,REASON_EFFECT)
+				Duel.SendtoGrave(tg,REASON_EFFECT)
 			end
 		end
 	end
 end
 function s.sameatt(c,att)
-	return c:IsFaceup() and c:IsAttribute(att) and c:IsAbleToRest()
+	return c:IsFaceup() and c:IsAttribute(att) and c:IsAbleToGrave()
 end
 function s.extratarget(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

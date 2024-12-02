@@ -29,10 +29,10 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return #g>0 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVEXYZ)
 	local sg=g:Select(tp,1,1,nil)
-	Duel.SendtoRest(sg,REASON_COST)
+	Duel.SendtoGrave(sg,REASON_COST)
 end
 function s.filter(c)
-	return c:GetType()==TYPE_ACTIONAL and c:IsAbleToRest() and c:CheckActivateEffect(false,true,false)~=nil
+	return c:GetType()==TYPE_ACTIONAL and c:IsAbleToGrave() and c:CheckActivateEffect(false,true,false)~=nil
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end
@@ -42,7 +42,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 		local te,eg,ep,ev,re,r,rp=g:GetFirst():CheckActivateEffect(false,true,false)
 		e:SetLabelObject(te)
 		Duel.ClearTargetCard()

@@ -33,7 +33,7 @@ function s.setfilter(c)
 	return c:IsCode(70245411) and c:IsSSetable()
 end
 function s.gyfilter(c)
-	return c:IsMonster() and (c:IsCode(30068120) or c:IsSetCard(0xa9)) and c:IsAbleToRest()
+	return c:IsMonster() and (c:IsCode(30068120) or c:IsSetCard(0xa9)) and c:IsAbleToGrave()
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and s.setfilter(chkc) end
@@ -49,7 +49,7 @@ function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsRelateToEffect(e) and tc:IsSSetable() and Duel.SSet(tp,tc)~=0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=Duel.SelectMatchingCard(tp,s.gyfilter,tp,LOCATION_DECK,0,1,1,nil)
-		if #g>0 then Duel.SendtoRest(g,REASON_EFFECT) end
+		if #g>0 then Duel.SendtoGrave(g,REASON_EFFECT) end
 	end
 end
 function s.tdcon(e,tp,eg,ep,ev,re,r,rp)

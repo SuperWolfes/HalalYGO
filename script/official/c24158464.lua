@@ -33,7 +33,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD,c)
 end
 function s.tgfilter(c)
-	return c:IsSetCard(0x10b) and c:IsAbleToRest() and not c:IsCode(id)
+	return c:IsSetCard(0x10b) and c:IsAbleToGrave() and not c:IsCode(id)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -46,13 +46,13 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
-	if #g>0 and Duel.SendtoRest(g,REASON_EFFECT)~=0 and
+	if #g>0 and Duel.SendtoGrave(g,REASON_EFFECT)~=0 and
 		c:IsRelateToEffect(e) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 then
 		Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEDOWN_DEFENSE)
 	end
 end
 function s.thfilter(c)
-	return c:IsType(TYPE_FLIP) and (c:IsAbleToHand() or c:IsAbleToRest()) and not c:IsCode(id)
+	return c:IsType(TYPE_FLIP) and (c:IsAbleToHand() or c:IsAbleToGrave()) and not c:IsCode(id)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

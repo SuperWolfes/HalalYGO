@@ -32,7 +32,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.tgfilter(c,e)
-	return c:IsAbleToRest() and not c:IsImmuneToEffect(e)
+	return c:IsAbleToGrave() and not c:IsImmuneToEffect(e)
 end
 function s.otcon(e,c,minc)
 	if c==nil then return true end
@@ -65,7 +65,7 @@ end
 function s.otop(e,tp,eg,ep,ev,re,r,rp,c)
 	local sg=e:GetLabelObject()
 	if not sg then return end
-	Duel.SendtoRest(sg,REASON_EFFECT)
+	Duel.SendtoGrave(sg,REASON_EFFECT)
 	sg:DeleteGroup()
 end
 function s.drfilter(c)

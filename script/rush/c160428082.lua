@@ -14,7 +14,7 @@ function s.initial_effect(c)
 end
 function s.zfilter(c,cost)
 	return c:IsRace(RACE_CONTAMINED) and c:IsLevelAbove(5)
-		and ((cost and not c:IsPublic()) or c:IsAbleToRest())
+		and ((cost and not c:IsPublic()) or c:IsAbleToGrave())
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.zfilter,tp,LOCATION_HAND,0,1,nil,true) end
@@ -57,7 +57,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local tg=Duel.SelectMatchingCard(tp,s.zfilter,tp,LOCATION_HAND,0,1,1,nil,false)
 		if #tg>0 then
 			Duel.BreakEffect()
-			Duel.SendtoRest(tg,REASON_EFFECT)
+			Duel.SendtoGrave(tg,REASON_EFFECT)
 		end
 	end
 end

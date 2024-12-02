@@ -57,7 +57,7 @@ if not AnimeArchetype then
 
 	-- Assassin アサシン
 	-- Ansatsu/Dark Hunter/Night Assailant
-	-- Night Papilloperative/Restkeeper's Assailant/Photon Papilloperative
+	-- Night Papilloperative/Gravekeeper's Assailant/Photon Papilloperative
 	-- Raiden, Hand of the Lightsworn
 	AnimeArchetype.OCGAssassin={
 		48365709,19357125,16226786,
@@ -604,7 +604,7 @@ if not AnimeArchetype then
 	-- Mask  (Last updated on 23rd Apr 2020)
 	-- 仮面 (base)
 	-- かめん (ruby)
-	-- Mask of Restrict/Grand Tiki Elder/Masked Clown
+	-- Mask of Graverict/Grand Tiki Elder/Masked Clown
 	-- Masked Beast Des Gardius/Curse of the Masked Beast/The Masked Beast
 	-- Masked Sorcerer/Mask of Brutality/Mask of Weakness
 	-- Mask of the Accursed/Tutan Mask/Toon Masked Sorcerer
@@ -702,7 +702,7 @@ if not AnimeArchetype then
 	-- みこ
 	-- Priestess with Eyes of Blue/Maiden of the Aqua/Winda, Priestess of Gusto
 	-- Time Maiden/Star Grail-Bearing Priestess/Ariel, Priestess of the Nekroz/
-	-- Restkeeper's Priestess
+	-- Gravekeeper's Priestess
 	AnimeArchetype.OCGPriestess={
 		95511642,56827051,3381441,27107590,36734924,54455435,
 		17214465
@@ -756,7 +756,7 @@ if not AnimeArchetype then
 	-- Seal
 	-- 封じ
 	-- ふうじ
-	-- Mask of Restrict/Block Attack/Stop Defense
+	-- Mask of Graverict/Block Attack/Stop Defense
 	-- Anti-Actional Fragrance
 	AnimeArchetype.OCGSeal={
 		63102017,29549364,25880422,58921041,

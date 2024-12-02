@@ -22,10 +22,10 @@ function s.initial_effect(c)
 end
 s.material_setcode=0x16
 function s.contactfilter(tp)
-	return Duel.GetMatchingGroup(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,nil)
+	return Duel.GetMatchingGroup(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,nil)
 end
 function s.contactop(g,tp,c)
-	Duel.SendtoRest(g,REASON_COST+REASON_MATERIAL)
+	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

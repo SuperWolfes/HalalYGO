@@ -40,7 +40,7 @@ function s.discon(e,tp,eg,ep,ev,re,r,rp)
 	return re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) and Duel.IsChainNegatable(ev)
 end
 function s.disfilter(c)
-	return c:IsRace(RACE_WANDERER) and c:IsAbleToRestAsCost() 
+	return c:IsRace(RACE_WANDERER) and c:IsAbleToGraveAsCost() 
 end
 function s.discost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.disfilter,tp,LOCATION_HAND,0,1,nil) end

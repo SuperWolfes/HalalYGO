@@ -28,7 +28,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local mg=c:GetMaterial()
 	mg:Merge(g)
 	c:SetMaterial(mg)
-	Duel.SendtoRest(g,REASON_COST+REASON_MATERIAL+REASON_FUSION)
+	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL+REASON_FUSION)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local ct=e:GetLabel()

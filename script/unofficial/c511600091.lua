@@ -1,5 +1,5 @@
 --レストレーション・ポイントガード (Anime)
---Restoration Point Guard (Anime)
+--Graveoration Point Guard (Anime)
 --scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)

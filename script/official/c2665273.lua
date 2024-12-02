@@ -57,7 +57,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	for _,p in pairs(ps) do
 		local tc=Duel.SelectMatchingCard(p,s.filter,p,LOCATION_HAND+LOCATION_ONFIELD,0,1,1,c):GetFirst()
 		if tc then
-			tc:CancelToRest()
+			tc:CancelToGrave()
 			Duel.Overlay(c,tc,true)
 		end
 	end

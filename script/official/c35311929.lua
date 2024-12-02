@@ -63,7 +63,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.desrepfilter(c)
-	return c:IsRace(RACE_PLANT) and c:IsAbleToRest()
+	return c:IsRace(RACE_PLANT) and c:IsAbleToGrave()
 end
 function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -74,7 +74,7 @@ function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if Duel.SelectEffectYesNo(tp,c,96) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=Duel.SelectMatchingCard(tp,s.desrepfilter,tp,LOCATION_DECK,0,1,1,nil)
-		Duel.SendtoRest(g,REASON_EFFECT+REASON_REPLACE)
+		Duel.SendtoGrave(g,REASON_EFFECT+REASON_REPLACE)
 		return true
 	end
 end

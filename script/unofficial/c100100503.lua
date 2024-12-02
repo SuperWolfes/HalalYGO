@@ -36,7 +36,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ct=#mg
 	if Duel.SendtoDeck(tc,nil,0,REASON_EFFECT)>0 and sumtype&SUMMON_TYPE_FUSION==SUMMON_TYPE_FUSION and ct>0 
 		and (not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) or ct==1) and ct<=Duel.GetLocationCount(tp,LOCATION_MZONE)
-		and mg:FilterCount(aux.RestValleyFilter(s.mgfilter),nil,e,tp,tc,mg)==ct and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
+		and mg:FilterCount(aux.GraveValleyFilter(s.mgfilter),nil,e,tp,tc,mg)==ct and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		Duel.BreakEffect()
 		Duel.SpecialSummon(mg,0,tp,tp,false,false,POS_FACEUP)
 	end

@@ -81,7 +81,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 				e2:SetValue(atk)
 				tc:RegisterEffect(e2)
 			end
-		else Duel.SendtoRest(tc,REASON_EFFECT) end
+		else Duel.SendtoGrave(tc,REASON_EFFECT) end
 	end
 end
 function s.atkfilter(c)

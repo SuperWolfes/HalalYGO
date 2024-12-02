@@ -24,10 +24,10 @@ end
 function s.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	local ec=c:GetEquipTarget()
-	if chk==0 then return c:IsAbleToRestAsCost() and ec and c:GetControler()==ec:GetControler()
-		and ec:IsAbleToRestAsCost() end
+	if chk==0 then return c:IsAbleToGraveAsCost() and ec and c:GetControler()==ec:GetControler()
+		and ec:IsAbleToGraveAsCost() end
 	local g=Group.FromCards(c,ec)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,2) end

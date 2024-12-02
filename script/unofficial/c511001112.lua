@@ -72,6 +72,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		if tg then tg(e,tp,eg,ep,ev,re,r,rp,1) end
 		Duel.BreakEffect()
 		if op then op(e,tp,eg,ep,ev,re,r,rp) end
-		c:CancelToRest()
+		c:CancelToGrave()
 	end
 end

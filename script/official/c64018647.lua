@@ -38,7 +38,7 @@ end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ft<=0 then return end
-	local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.spfilter),tp,LOCATION_HAND+LOCATION_REST,0,nil,e,tp)
+	local g=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.spfilter),tp,LOCATION_HAND+LOCATION_REST,0,nil,e,tp)
 	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	ft=math.min(2,Duel.GetLocationCount(tp,LOCATION_MZONE))
 	local sg=aux.SelectUnselectGroup(g,e,tp,1,ft,aux.dncheck,1,tp,HINTMSG_SPSUMMON)
@@ -55,10 +55,10 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 			tc:RegisterEffect(e1,true)
 		end
 		if Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-			and Duel.IsExistingMatchingCard(aux.RestValleyFilter(s.eqfilter),tp,LOCATION_HAND+LOCATION_REST,0,1,nil,tp)
+			and Duel.IsExistingMatchingCard(aux.GraveValleyFilter(s.eqfilter),tp,LOCATION_HAND+LOCATION_REST,0,1,nil,tp)
 			and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-			local ec=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.eqfilter),tp,LOCATION_HAND+LOCATION_REST,0,1,1,nil,tp):GetFirst()
+			local ec=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.eqfilter),tp,LOCATION_HAND+LOCATION_REST,0,1,1,nil,tp):GetFirst()
 			if not ec then return end
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
 			local tg=Duel.SelectMatchingCard(tp,s.eqfilter2,tp,LOCATION_MZONE,0,1,1,nil,ec)

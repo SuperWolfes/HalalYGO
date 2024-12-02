@@ -29,12 +29,12 @@ function s.ntcon(e,c,minc)
 		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil)
 end
 function s.cfilter(c)
-	return c:IsSetCard(0x573) and c:IsMonster() and c:IsAbleToRestAsCost()
+	return c:IsSetCard(0x573) and c:IsMonster() and c:IsAbleToGraveAsCost()
 end
 function s.ntop(e,tp,eg,ep,ev,re,r,rp,c)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND,0,1,1,nil)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetBattleDamage(tp)>0

@@ -47,8 +47,8 @@ end
 	--Send this face-up card to GY as cost
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToRestAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED) end
-	Duel.SendtoRest(c,REASON_COST)
+	if chk==0 then return c:IsAbleToGraveAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED) end
+	Duel.SendtoGrave(c,REASON_COST)
 end
 	--Check for "Dream Mirror of Joy"/"Dream Mirror of Terror"
 function s.filter(c,tp)
@@ -70,7 +70,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		local ac=ag:GetFirst()
 		local fc=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
 		if fc then
-			Duel.SendtoRest(fc,REASON_RULE)
+			Duel.SendtoGrave(fc,REASON_RULE)
 			Duel.BreakEffect()
 		end
 		Duel.MoveToField(ac,tp,tp,LOCATION_FZONE,POS_FACEUP,true)

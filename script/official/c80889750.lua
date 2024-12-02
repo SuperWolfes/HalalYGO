@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	--Fusion material
 	c:EnableReviveLimit()
 	Fusion.AddProcMixRep(c,true,true,s.mfilter2,1,99,s.mfilter1)
-	--Special summon from the Rest Place
+	--Special summon from the Grave Place
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)

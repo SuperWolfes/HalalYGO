@@ -35,10 +35,10 @@ function s.value(e,c)
 end
 function s.dacost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToRestAsCost() and c:GetControler()==c:GetEquipTarget():GetControler()
-		and c:GetEquipTarget():IsAbleToRestAsCost() and e:GetHandler():GetCounter(0x95)>3 end
+	if chk==0 then return c:IsAbleToGraveAsCost() and c:GetControler()==c:GetEquipTarget():GetControler()
+		and c:GetEquipTarget():IsAbleToGraveAsCost() and e:GetHandler():GetCounter(0x95)>3 end
 	local g=Group.FromCards(c,c:GetEquipTarget())
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.daop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Damage(1-tp,4000,REASON_EFFECT)

@@ -1,5 +1,5 @@
 --サウザンド・アイズ・サクリファイス
---Thousand-Eyes Restrict
+--Thousand-Eyes Graverict
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material

@@ -60,10 +60,10 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 		if Duel.IsDuelType(DUEL_1_FIELD) then
 			if fc then Duel.Destroy(fc,REASON_RULE) end
 			fc=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
-			if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoRest(c,REASON_RULE) end
+			if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoGrave(c,REASON_RULE) end
 		else
 			fc=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
-			if fc and Duel.SendtoRest(fc,REASON_RULE)==0 then Duel.SendtoRest(c,REASON_RULE) end
+			if fc and Duel.SendtoGrave(fc,REASON_RULE)==0 then Duel.SendtoGrave(c,REASON_RULE) end
 		end
 	end
 	local te,teg,tep,tev,tre,tr,trp=tc:CheckActivateEffect(true,true,true)
@@ -99,9 +99,9 @@ function s.activateop(teg,tep,tev,tre,tr,trp)
 				if not te then return end
 				local tpe=te:GetHandler():GetType()
 				if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 then
-					c:CancelToRest(false)
+					c:CancelToGrave(false)
 				else
-					c:CancelToRest(true)
+					c:CancelToGrave(true)
 					local code=te:GetHandler():GetOriginalCode()
 					c:CopyEffect(code,RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET,1)
 				end
@@ -125,9 +125,9 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not te then return end
 	local tpe=te:GetHandler():GetType()
 	if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 then
-		c:CancelToRest(false)
+		c:CancelToGrave(false)
 	else
-		c:CancelToRest(true)
+		c:CancelToGrave(true)
 		local code=te:GetHandler():GetOriginalCode()
 		c:CopyEffect(code,RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET,1)
 	end

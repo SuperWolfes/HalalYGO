@@ -13,11 +13,11 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.costfilter(c,tp)
-	return c:IsMonster() and c:IsRace(RACE_REPTILE) and c:IsAbleToRestAsCost()
+	return c:IsMonster() and c:IsRace(RACE_REPTILE) and c:IsAbleToGraveAsCost()
 	and Duel.IsExistingMatchingCard(s.costfilter2,tp,LOCATION_HAND,0,1,c,tp,c:GetLevel())
 end
 function s.costfilter2(c,tp,lv)
-	return c:IsMonster() and c:IsRace(RACE_REPTILE) and c:IsAbleToRestAsCost()
+	return c:IsMonster() and c:IsRace(RACE_REPTILE) and c:IsAbleToGraveAsCost()
 	and Duel.IsExistingMatchingCard(s.desfilter,tp,0,LOCATION_MZONE,1,nil,(lv+c:GetLevel()))
 end
 function s.desfilter(c,lvl)
@@ -30,13 +30,13 @@ function s.desfilter(c,lv)
 	return c:IsFaceup() and c:IsLevelBelow(lv) 
 end
 function s.tgfilter(c,tp)
-	return c:IsMonster() and c:IsRace(RACE_REPTILE) and c:IsAbleToRestAsCost()
+	return c:IsMonster() and c:IsRace(RACE_REPTILE) and c:IsAbleToGraveAsCost()
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
 	local g=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_HAND,0,nil)
 	local tg=aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,1,tp,HINTMSG_SELECT)
-	if Duel.SendtoRest(tg,REASON_EFFECT) then
+	if Duel.SendtoGrave(tg,REASON_EFFECT) then
 		local lvl=tg:GetSum(Card.GetOriginalLevel)
 		local dg=Duel.GetMatchingGroup(aux.FilterMaximumSideFunctionEx(s.desfilter,lvl),tp,0,LOCATION_MZONE,e:GetHandler())
 		if dg and #dg>0 then

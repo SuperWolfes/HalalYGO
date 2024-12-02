@@ -108,7 +108,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.Damage(1-tp,1000,REASON_EFFECT)~=0 then
 		local d=Duel.GetAttackTarget()
 		if d:IsRelateToBattle() and d:IsDefensePos() then
-			Duel.SendtoRest(d,REASON_EFFECT)
+			Duel.SendtoGrave(d,REASON_EFFECT)
 		end
 	end
 end

@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.costfilter(c,e,tp)
-	return c:IsMonster() and c:IsAbleToRestAsCost() and c:IsRace(RACE_AQUA)
+	return c:IsMonster() and c:IsAbleToGraveAsCost() and c:IsRace(RACE_AQUA)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,e:GetHandler()) end
@@ -29,7 +29,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,1,nil)
-	if Duel.SendtoRest(g,REASON_COST)>0 then
+	if Duel.SendtoGrave(g,REASON_COST)>0 then
 		--Effect
 		--ATK change
 		local c=e:GetHandler()

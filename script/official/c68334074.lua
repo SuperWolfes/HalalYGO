@@ -1,5 +1,5 @@
 --奇跡の復活
---Pulse Restoring
+--Pulse Graveoring
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

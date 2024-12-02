@@ -42,7 +42,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_REMOVED,LOCATION_REMOVED,nil)
 	if #g>0 then
-		Duel.SendtoRest(g,REASON_EFFECT+REASON_RETURN)
+		Duel.SendtoGrave(g,REASON_EFFECT+REASON_RETURN)
 	end
 end
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
@@ -52,7 +52,7 @@ end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
 	local g=e:GetHandler():GetOverlayGroup()
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.cfilter(c)
 	return c:IsSetCard(0xba) and c:IsType(TYPE_XYZ) and c:IsAbleToRemoveAsCost()

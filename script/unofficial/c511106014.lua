@@ -122,7 +122,7 @@ end
 function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(1-tp,s.gyfilter,1-tp,LOCATION_MZONE,0,1,1,nil,e:GetHandler())
-	if #g>0 and Duel.SendtoRest(g,REASON_RULE)~=0 then
+	if #g>0 and Duel.SendtoGrave(g,REASON_RULE)~=0 then
 		s.resetCannotAttackEffect()
 	end
 end

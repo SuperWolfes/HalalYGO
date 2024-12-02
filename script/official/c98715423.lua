@@ -1,5 +1,5 @@
 -- 墓守の罠
--- Restkeeper's Trap
+-- Gravekeeper's Trap
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e3:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
 	e3:SetTarget(function(_,c) return c:IsLocation(LOCATION_REST) end)
 	c:RegisterEffect(e3)
-	-- Search 1 "Restkeeper's" or EARTH Wanderer monster
+	-- Search 1 "Gravekeeper's" or EARTH Wanderer monster
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,0))
 	e4:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND)
@@ -111,7 +111,7 @@ function s.drawcheck(e,tp,eg,ep,ev,re,r,rp)
 		if not dc then return end
 		Duel.ConfirmCards(tp,dc)
 		if dc:IsCode(e:GetLabel()) then
-			Duel.SendtoRest(dc,REASON_EFFECT)
+			Duel.SendtoGrave(dc,REASON_EFFECT)
 		end
 		Duel.ShuffleHand(1-tp)
 	end

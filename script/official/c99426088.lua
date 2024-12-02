@@ -30,7 +30,7 @@ function s.extratg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
 function s.fexfilter(c)
-	return c:IsType(TYPE_NORMAL) and c:IsAbleToRest()
+	return c:IsType(TYPE_NORMAL) and c:IsAbleToGrave()
 end
 function s.fcheck(tp,sg,fc)
 	return sg:FilterCount(Card.IsLocation,nil,LOCATION_DECK)<=1
@@ -51,7 +51,7 @@ function s.extraop(mg,e,tp,eg,ep,ev,re,r,rp)
 	local mat2=mg:Filter(Card.IsLocation,nil,LOCATION_DECK)
 	mg:Sub(mat2)
 	Duel.ReleaseLockedMaterial(mg)
-	Duel.SendtoRest(mat2,REASON_EFFECT+REASON_MATERIAL+REASON_LOCKED)
+	Duel.SendtoGrave(mat2,REASON_EFFECT+REASON_MATERIAL+REASON_LOCKED)
 end
 function s.target(fustg,rittg)
 	return function(e,tp,eg,ep,ev,re,r,rp,chk)

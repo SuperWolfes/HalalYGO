@@ -24,7 +24,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=g:GetFirst()
 	if tc:GetType()==TYPE_ACTIONAL then
 		Duel.DisableShuffleCheck()
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 		local ae=tc:GetActivateEffect()
 		if tc:GetLocation()==LOCATION_REST and ae then
 			local e1=Effect.CreateEffect(tc)

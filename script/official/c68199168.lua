@@ -46,7 +46,7 @@ end
 function s.sop0(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(1-tp,Card.IsMonster,1-tp,LOCATION_HAND+LOCATION_ONFIELD,0,1,1,nil)
-	if #g>0 then Duel.SendtoRest(g,REASON_RULE) end
+	if #g>0 then Duel.SendtoGrave(g,REASON_RULE) end
 end
 function s.discon(e,tp,eg,ep,ev,re,r,rp)
 	return not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED) and Duel.IsChainNegatable(ev)

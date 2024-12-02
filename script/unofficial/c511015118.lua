@@ -48,7 +48,7 @@ function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 		and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 end
 		
 	local g=c:GetOverlayGroup()
-	Duel.SendtoRest(g,REASON_RULE)
+	Duel.SendtoGrave(g,REASON_RULE)
 	
 	local pos = POS_FACEUP_DEFENSE
 	if c:IsPosition(POS_ATTACK) then pos=POS_FACEUP_ATTACK end

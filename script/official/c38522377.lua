@@ -54,7 +54,7 @@ end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS):Filter(s.atkfilter,nil,e)
-	Duel.SendtoRest(g,REASON_EFFECT)
+	Duel.SendtoGrave(g,REASON_EFFECT)
 	local ct=Duel.GetOperatedGroup():Filter(Card.IsLocation,nil,LOCATION_REST)
 	if #ct>0 then
 		if not c:IsRelateToEffect(e) or c:IsFacedown() then return end

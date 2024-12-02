@@ -47,13 +47,13 @@ function s.atkval(e,c)
 	return Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsActionalTrap),0,LOCATION_ONFIELD,LOCATION_ONFIELD,nil)*600
 end
 function s.tgcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(aux.AND(s.stfilter,Card.IsAbleToRestAsCost),tp,LOCATION_SZONE,0,2,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(aux.AND(s.stfilter,Card.IsAbleToGraveAsCost),tp,LOCATION_SZONE,0,2,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-	local g=Duel.SelectMatchingCard(tp,aux.AND(s.stfilter,Card.IsAbleToRestAsCost),tp,LOCATION_SZONE,0,2,2,nil)
-	Duel.SendtoRest(g,REASON_COST)
+	local g=Duel.SelectMatchingCard(tp,aux.AND(s.stfilter,Card.IsAbleToGraveAsCost),tp,LOCATION_SZONE,0,2,2,nil)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.tgfilter(c)
-	return c:IsLevelBelow(4) and c:IsAbleToRest()
+	return c:IsLevelBelow(4) and c:IsAbleToGrave()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -63,6 +63,6 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	end
 end

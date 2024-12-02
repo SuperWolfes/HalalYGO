@@ -54,24 +54,24 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 end
 	--Activation legality
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(Card.IsAbleToRest,tp,LOCATION_EXTRA,0,nil)
-	local g2=Duel.GetMatchingGroup(Card.IsAbleToRest,tp,0,LOCATION_EXTRA,nil)
+	local g=Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,LOCATION_EXTRA,0,nil)
+	local g2=Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,0,LOCATION_EXTRA,nil)
 	if chk==0 then return g:GetClassCount(Card.GetCode)>=2 and #g2>=2 end
 	--Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,2,tp,LOCATION_EXTRA)
 end
 	--Send 2 monsters with different names from extra deck to GY, opponent also sends 2
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(Card.IsAbleToRest,tp,LOCATION_EXTRA,0,nil)
+	local g=Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,LOCATION_EXTRA,0,nil)
 	if g:GetClassCount(Card.GetCode)>=2 then
 		--Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local sg=aux.SelectUnselectGroup(g,e,tp,2,2,aux.dncheck,1,tp,HINTMSG_TOREST)
-		Duel.SendtoRest(sg,REASON_EFFECT)
+		Duel.SendtoGrave(sg,REASON_EFFECT)
 	end
-	local dg=Duel.GetMatchingGroup(Card.IsAbleToRest,tp,0,LOCATION_EXTRA,nil)
+	local dg=Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,0,LOCATION_EXTRA,nil)
 	if #dg>=2 then
 		Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOREST)
 		local tg=dg:Select(1-tp,2,2,nil)
-		Duel.SendtoRest(tg,REASON_EFFECT)
+		Duel.SendtoGrave(tg,REASON_EFFECT)
 	end
 	local ge1=Effect.CreateEffect(e:GetHandler())
 	ge1:SetType(EFFECT_TYPE_FIELD)

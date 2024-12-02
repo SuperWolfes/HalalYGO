@@ -79,7 +79,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if (c:IsLocation(LOCATION_MZONE) and c:IsFacedown()) or (eq:IsLocation(LOCATION_MZONE) and eq:IsFacedown()) then return end
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=1 or tc:GetControler()~=tp or tc:IsFacedown() or not tc:IsRelateToEffect(e) then
 		g:AddCard(c)
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 		return
 	end
 	Duel.Equip(tp,c,tc,true)

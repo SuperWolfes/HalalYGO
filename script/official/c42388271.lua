@@ -50,8 +50,8 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 end
 	--Cost of sending from hand to GY
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
-	Duel.SendtoRest(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
+	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
 end
 	--Check for link monsters that can be special summoned
 function s.spfilter(c,e,tp)
@@ -83,7 +83,7 @@ function s.dkcon(e,tp,eg,ep,ev,re,r,rp)
 end
 	--Check for a monster
 function s.dkfilter(c)
-	return c:IsMonster() and c:IsAbleToRest()
+	return c:IsMonster() and c:IsAbleToGrave()
 end
 	--Activation legality
 function s.dktg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -95,7 +95,7 @@ function s.dkop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.dkfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	end
 end
 

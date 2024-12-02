@@ -34,7 +34,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local b=e:GetHandler():IsLocation(LOCATION_HAND)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_OPPO)
-	local tc=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.filter),tp,0,LOCATION_REST,1,1,nil,e,tp,eg,ep,ev,re,r,rp,b):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.filter),tp,0,LOCATION_REST,1,1,nil,e,tp,eg,ep,ev,re,r,rp,b):GetFirst()
 	if not tc then return end
 	local tpe=tc:GetType()
 	local te=tc:GetActivateEffect()
@@ -50,7 +50,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 	Duel.MoveToField(tc,tp,tp,loc,POS_FACEUP,true)
 	if tpe&(TYPE_FIELD|TYPE_CONTINUOUS|TYPE_EQUIP)==0 and not tc:IsHasEffect(EFFECT_REMAIN_FIELD) then
-		tc:CancelToRest(false)
+		tc:CancelToGrave(false)
 	end
 	tc:CreateEffectRelation(te)
 	if co then co(te,tp,eg,ep,ev,re,r,rp,1) end
@@ -101,5 +101,5 @@ function s.rtop(e,tp,eg,ep,ev,re,r,rp)
 	if tc:IsLocation(LOCATION_REST) then
 		Duel.SendtoDeck(tc,nil,-2,REASON_EFFECT)
 	end
-	Duel.SendtoRest(tc,REASON_EFFECT,1-tp)
+	Duel.SendtoGrave(tc,REASON_EFFECT,1-tp)
 end

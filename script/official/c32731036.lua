@@ -70,8 +70,8 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToRestAsCost() end
-	Duel.SendtoRest(c,REASON_COST)
+	if chk==0 then return c:IsAbleToGraveAsCost() end
+	Duel.SendtoGrave(c,REASON_COST)
 end
 function s.thfilter(c)
 	return c:IsSetCard(0x189) and c:IsMonster() and not c:IsCode(id) and c:IsAbleToHand()

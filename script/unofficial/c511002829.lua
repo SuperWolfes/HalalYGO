@@ -45,6 +45,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp,chk)
 		local g=Group.CreateGroup()
 		g:AddCard(tc1)
 		g:AddCard(tc2)
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	end
 end

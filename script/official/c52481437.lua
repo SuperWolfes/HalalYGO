@@ -62,14 +62,14 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)
 end
 function s.atcost(e,c,tp)
-	return Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_ONFIELD,0,2,e:GetHandler())
+	return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_ONFIELD,0,2,e:GetHandler())
 end
 function s.atop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.IsAttackCostPaid()~=2 and e:GetHandler():IsLocation(LOCATION_MZONE) then
-		local g=Duel.GetMatchingGroup(Card.IsAbleToRestAsCost,tp,LOCATION_ONFIELD,0,e:GetHandler())
+		local g=Duel.GetMatchingGroup(Card.IsAbleToGraveAsCost,tp,LOCATION_ONFIELD,0,e:GetHandler())
 		local sg=aux.SelectUnselectGroup(g,e,tp,0,2,nil,1,tp,HINTMSG_TOREST,function() return Duel.IsAttackCostPaid()==0 end,nil)
 		if #sg==2 then
-			Duel.SendtoRest(sg,REASON_COST)
+			Duel.SendtoGrave(sg,REASON_COST)
 			Duel.AttackCostPaid()
 		else
 			Duel.AttackCostPaid(2)

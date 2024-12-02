@@ -74,7 +74,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.filter),tp,LOCATION_REST+LOCATION_HAND,0,1,1,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.filter),tp,LOCATION_REST+LOCATION_HAND,0,1,1,nil,e,tp)
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end
@@ -85,7 +85,7 @@ function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 end
 --Check for level 4 plant monster
 function s.tgfilter(c)
-	return c:IsRace(RACE_PLANT) and c:IsAbleToRest() and c:IsLevelAbove(4)
+	return c:IsRace(RACE_PLANT) and c:IsAbleToGrave() and c:IsLevelAbove(4)
 end
 --Activation legality
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -97,6 +97,6 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	end
 end

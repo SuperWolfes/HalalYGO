@@ -30,7 +30,7 @@ function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(Card.IsSummonPlayer,1,nil,1-tp)
 end
 function s.tgfilter(c)
-	return (c:IsSetCard(0xfe) or c:IsSetCard(0x11b)) and c:IsMonster() and (c:IsAbleToRest() or c:IsAbleToRemove())
+	return (c:IsSetCard(0xfe) or c:IsSetCard(0x11b)) and c:IsMonster() and (c:IsAbleToGrave() or c:IsAbleToRemove())
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil) end
@@ -42,8 +42,8 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK+LOCATION_HAND,0,1,1,nil)
 	if #g>0 then
 		local tc=g:GetFirst()
-		if tc and tc:IsAbleToRest() and (not tc:IsAbleToRemove() or Duel.SelectYesNo(tp,aux.Stringid(id,2))) then
-			Duel.SendtoRest(tc,REASON_EFFECT)
+		if tc and tc:IsAbleToGrave() and (not tc:IsAbleToRemove() or Duel.SelectYesNo(tp,aux.Stringid(id,2))) then
+			Duel.SendtoGrave(tc,REASON_EFFECT)
 		else
 			Duel.Remove(tc,POS_FACEUP,REASON_EFFECT)
 		end

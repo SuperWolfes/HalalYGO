@@ -43,7 +43,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():GetFlagEffect(id)~=0 end
 end
 function s.copfilter(c)
-	return c:IsAbleToRestAsCost() and c:IsSetCard(0x177) and c:GetType()==TYPE_ACTIONAL
+	return c:IsAbleToGraveAsCost() and c:IsSetCard(0x177) and c:GetType()==TYPE_ACTIONAL
 		and c:CheckActivateEffect(true,true,false)~=nil 
 end
 function s.xyzfilter(c,tp,sg,g)
@@ -78,7 +78,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if op==1 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=Duel.SelectMatchingCard(tp,s.copfilter,tp,LOCATION_DECK,0,1,1,nil)
-		if not Duel.SendtoRest(g,REASON_COST) then return end
+		if not Duel.SendtoGrave(g,REASON_COST) then return end
 		local te=g:GetFirst():CheckActivateEffect(true,true,false)
 		e:SetLabel(te:GetLabel())
 		e:SetLabelObject(te:GetLabelObject())

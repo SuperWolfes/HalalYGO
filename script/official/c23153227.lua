@@ -58,7 +58,7 @@ function s.copycost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Remove(e:GetHandler(),POS_FACEUP,REASON_COST)
 end
 function s.copyfilter(c)
-	return c:IsAbleToRestAsCost() and c:IsSetCard(0x95) and c:IsActional()
+	return c:IsAbleToGraveAsCost() and c:IsSetCard(0x95) and c:IsActional()
 		and c:CheckActivateEffect(true,true,false)~=nil 
 end
 function s.copytg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -74,7 +74,7 @@ function s.copytg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	e:SetLabel(0)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.copyfilter,tp,LOCATION_HAND,0,1,1,nil)
-	if not Duel.SendtoRest(g,REASON_COST) then return end
+	if not Duel.SendtoGrave(g,REASON_COST) then return end
 	local te=g:GetFirst():CheckActivateEffect(true,true,false)
 	e:SetLabel(te:GetLabel())
 	e:SetLabelObject(te:GetLabelObject())

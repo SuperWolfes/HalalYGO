@@ -46,7 +46,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0xc2}
 function s.sprfilter(c)
-	return c:IsFaceup() and c:GetLevel()>4 and c:IsAbleToRestAsCost()
+	return c:IsFaceup() and c:GetLevel()>4 and c:IsAbleToGraveAsCost()
 end
 function s.sprfilter1(c,tp,g,sc)
 	local lv=c:GetLevel()
@@ -84,7 +84,7 @@ end
 function s.sprop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(Card.IsControler,1,nil,tp)

@@ -35,8 +35,8 @@ function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ct=e:GetLabel()
 	local con3,con5,con8,con10=nil
 	if ct>=3 then
-		con3=Duel.IsExistingMatchingCard(Card.IsAbleToRest,tp,LOCATION_EXTRA,0,3,nil)
-			and Duel.IsExistingMatchingCard(Card.IsAbleToRest,tp,0,LOCATION_EXTRA,3,nil)
+		con3=Duel.IsExistingMatchingCard(Card.IsAbleToGrave,tp,LOCATION_EXTRA,0,3,nil)
+			and Duel.IsExistingMatchingCard(Card.IsAbleToGrave,tp,0,LOCATION_EXTRA,3,nil)
 	end
 	if ct>=5 then
 		con5=Duel.IsPlayerCanDiscardDeck(tp,3) and Duel.IsPlayerCanDiscardDeck(1-tp,3)
@@ -54,13 +54,13 @@ end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local ct=e:GetLabel()
 	if ct>=3 then
-		local g1=Duel.GetMatchingGroup(Card.IsAbleToRest,tp,LOCATION_EXTRA,0,nil)
+		local g1=Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,LOCATION_EXTRA,0,nil)
 		local sg1=nil
 		if #g1>=3 then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 			sg1=g1:Select(tp,3,3,nil)
 		else sg1=g1 end
-		local g2=Duel.GetMatchingGroup(Card.IsAbleToRest,tp,0,LOCATION_EXTRA,nil)
+		local g2=Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,0,LOCATION_EXTRA,nil)
 		local sg2=nil
 		if #g2>=3 then
 			Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOREST)
@@ -68,7 +68,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		else sg2=g2 end
 		sg1:Merge(sg2)
 		if #sg1>0 then
-			Duel.SendtoRest(sg1,REASON_EFFECT)
+			Duel.SendtoGrave(sg1,REASON_EFFECT)
 		end
 	end
 	if ct>=5 then
@@ -84,12 +84,12 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		local g2=Duel.SelectMatchingCard(1-tp,nil,1-tp,LOCATION_REMOVED,0,1,3,nil)
 		g1:Merge(g2)
 		if #g1>0 then
-			Duel.SendtoRest(g1,REASON_EFFECT+REASON_RETURN)
+			Duel.SendtoGrave(g1,REASON_EFFECT+REASON_RETURN)
 		end
 	end
 	if ct>=10 then
 		Duel.BreakEffect()
 		local g1=Duel.GetFieldGroup(tp,LOCATION_HAND,LOCATION_HAND)
-		Duel.SendtoRest(g1,REASON_EFFECT)
+		Duel.SendtoGrave(g1,REASON_EFFECT)
 	end
 end

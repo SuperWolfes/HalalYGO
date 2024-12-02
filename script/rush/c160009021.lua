@@ -35,7 +35,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,0,LOCATION_REST,3,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,3,1-tp,LOCATION_REST)
 end
-	-- shuffle 3 monsters from your Rest Place into the Deck. to shuffle 3 monsters from opponent's GY to deck
+	-- shuffle 3 monsters from your Grave Place into the Deck. to shuffle 3 monsters from opponent's GY to deck
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)

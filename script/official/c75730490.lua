@@ -35,14 +35,14 @@ s.listed_names={id}
 
 	--Send 1 Normal Trap from hand or field to GY as cost
 function s.spcfilter(c,tp)
-	return c:GetType()==TYPE_TRAP and c:IsAbleToRestAsCost() and (c:IsLocation(LOCATION_HAND) or c:IsFacedown())
+	return c:GetType()==TYPE_TRAP and c:IsAbleToGraveAsCost() and (c:IsLocation(LOCATION_HAND) or c:IsFacedown())
 		and Duel.GetMZoneCount(tp,c)>0
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.spcfilter,tp,LOCATION_HAND+LOCATION_ONFIELD,0,1,nil,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.spcfilter,tp,LOCATION_HAND+LOCATION_ONFIELD,0,1,1,nil,tp)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 	--Activation legality
 function s.spfilter(c,e,tp)

@@ -14,7 +14,7 @@ function s.initial_effect(c)
 end
 s.listed_names={14778250,75622825}
 function s.cfilter(c,ft,ct)
-	return c:IsFaceup() and c:IsCode(14778250) and c:IsAbleToRestAsCost() and (ft>=ct or c:GetSequence()<5)
+	return c:IsFaceup() and c:IsCode(14778250) and c:IsAbleToGraveAsCost() and (ft>=ct or c:GetSequence()<5)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(1)
@@ -23,7 +23,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return ft>=ct-1 and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil,ft,ct) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_MZONE,0,1,1,nil,ft,ct)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ct=Duel.GetFieldGroupCount(1-tp,LOCATION_MZONE,0)

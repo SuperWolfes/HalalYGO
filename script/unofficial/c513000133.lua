@@ -64,7 +64,7 @@ function s.dcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return ov:IsExists(s.dcfilter,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVEXYZ)
 	local tov=ov:FilterSelect(tp,s.dcfilter,1,1,nil)
-	Duel.SendtoRest(tov,REASON_COST)
+	Duel.SendtoGrave(tov,REASON_COST)
 end
 function s.dfilter(c)
 	return (c:GetAttack()~=c:GetBaseAttack() and c:GetDefense()~=c:GetBaseDefense()) or c:IsNegatableMonster()

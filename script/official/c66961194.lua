@@ -38,13 +38,13 @@ end
 s.listed_series={0xdd}
 s.listed_names={CARD_BLUEEYES_W_DRAGON}
 function s.tgfilter(c)
-	return c:IsCode(CARD_BLUEEYES_W_DRAGON) and c:IsAbleToRestAsCost()
+	return c:IsCode(CARD_BLUEEYES_W_DRAGON) and c:IsAbleToGraveAsCost()
 end
 function s.spcost1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,e:GetHandler()) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,1,e:GetHandler())
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.sptg1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

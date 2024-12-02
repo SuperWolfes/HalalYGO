@@ -12,7 +12,7 @@ Duel.Overlay=(function()
 			else
 				sg=g:GetOverlayGroup()
 			end
-			Duel.SendtoRest(sg,REASON_RULE)
+			Duel.SendtoGrave(sg,REASON_RULE)
 		end
 		return oldf(c,g)
 	end

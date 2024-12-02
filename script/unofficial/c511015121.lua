@@ -68,11 +68,11 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	while c do
 		local fc=Duel.GetFieldCard(c:GetControler(),LOCATION_SZONE,5)
 		if fc then
-			Duel.SendtoRest(fc,REASON_RULE)
+			Duel.SendtoGrave(fc,REASON_RULE)
 		end
 		fc=Duel.GetFieldCard(1-c:GetControler(),LOCATION_SZONE,5)
 		if fc and Duel.GetFlagEffect(c:GetControler(),62765383)>0 then
-			if not Duel.Destroy(fc,REASON_RULE) then Duel.SendtoRest(fc,REASON_RULE) end
+			if not Duel.Destroy(fc,REASON_RULE) then Duel.SendtoGrave(fc,REASON_RULE) end
 		end
 	
 		Duel.MoveSequence(c,5)

@@ -142,7 +142,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.MoveToField(tc,tp,p,loc,pos,true,(1<<seq))
 		end
 	end
-	Duel.SendtoRest(sg2:Filter(s.fil2,nil),REASON_RULE)
+	Duel.SendtoGrave(sg2:Filter(s.fil2,nil),REASON_RULE)
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

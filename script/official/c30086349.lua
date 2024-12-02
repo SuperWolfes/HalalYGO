@@ -38,7 +38,7 @@ function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
 end
 function s.damfilter(c,fc,tp)
-	return c:IsSetCard(0x3b,fc,SUMMON_TYPE_FUSION,tp) and c:GetBaseAttack()>0 and c:IsAbleToRest()
+	return c:IsSetCard(0x3b,fc,SUMMON_TYPE_FUSION,tp) and c:GetBaseAttack()>0 and c:IsAbleToGrave()
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.damfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil,e:GetHandler(),tp) end
@@ -48,7 +48,7 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.damfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,1,nil,e:GetHandler(),tp)
 	local tc=g:GetFirst()
-	if #g>0 and Duel.SendtoRest(g,REASON_EFFECT)~=0 and tc:IsLocation(LOCATION_REST) then
+	if #g>0 and Duel.SendtoGrave(g,REASON_EFFECT)~=0 and tc:IsLocation(LOCATION_REST) then
 		Duel.Damage(1-tp,math.ceil(g:GetFirst():GetBaseAttack()/2),REASON_EFFECT)
 	end
 end

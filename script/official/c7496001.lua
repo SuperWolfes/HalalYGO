@@ -64,8 +64,8 @@ function s.caop(e,tp,eg,ep,ev,re,r,rp)
 end
 	--Send this face-up card to GY as cost
 function s.accost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
-	Duel.SendtoRest(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
+	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
 end
 	--Check for "Vast Desert – Gold Golgonda"
 function s.filter(c,tp)
@@ -75,7 +75,7 @@ end
 	--Activate 1 "Vast Desert – Gold Golgonda" from deck or GY
 function s.acop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
-	local tc=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.filter),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil,tp):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.filter),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil,tp):GetFirst()
 	if tc:IsType(TYPE_FIELD) then
 		Duel.ActivateFieldActional(tc,e,tp,eg,ep,ev,re,r,rp)
 	else

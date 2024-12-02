@@ -26,7 +26,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ec=re:GetHandler()
 	Duel.NegateActivation(ev)
 	if re:GetHandler():IsRelateToEffect(re) then
-		ec:CancelToRest()
+		ec:CancelToGrave()
 		Duel.ChangePosition(ec,POS_FACEDOWN)
 		ec:SetStatus(STATUS_ACTIVATE_DISABLED,false)
 		Duel.RaiseEvent(ec,EVENT_SSET,e,REASON_EFFECT,tp,tp,0)

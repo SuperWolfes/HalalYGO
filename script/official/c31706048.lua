@@ -39,8 +39,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 				Duel.ConfirmCards(1-tp,sg)
 				Duel.ShuffleHand(tp)
 				g:Sub(sg)
-				Duel.SendtoRest(g,REASON_EFFECT+REASON_REVEAL)
-			else Duel.SendtoRest(g,REASON_EFFECT+REASON_REVEAL)
+				Duel.SendtoGrave(g,REASON_EFFECT+REASON_REVEAL)
+			else Duel.SendtoGrave(g,REASON_EFFECT+REASON_REVEAL)
 			end
 		else
 			Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT+REASON_REVEAL)

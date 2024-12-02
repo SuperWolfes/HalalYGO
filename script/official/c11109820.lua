@@ -58,7 +58,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc1=g:GetFirst()
 	local tc2=g:GetNext()
 	if not tc1:IsRelateToEffect(e) or not tc2:IsRelateToEffect(e) then return end
-	Duel.SendtoRest(g,REASON_EFFECT)
+	Duel.SendtoGrave(g,REASON_EFFECT)
 	local og=Duel.GetOperatedGroup()
 	if og:FilterCount(Card.IsLocation,nil,LOCATION_REST)<2 then return end
 	local sg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_EXTRA,0,nil,e,tp,tc1:GetRank()+tc2:GetRank())
@@ -69,7 +69,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if sc then
 		Duel.SpecialSummon(sc,0,tp,tp,false,false,POS_FACEUP)
 		if c:IsRelateToEffect(e) then
-			c:CancelToRest()
+			c:CancelToGrave()
 			Duel.Overlay(sc,c)
 		end
 	end

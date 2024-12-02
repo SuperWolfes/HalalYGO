@@ -53,7 +53,7 @@ function s.tfop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
 	local tc=Duel.GetFirstMatchingCard(s.tffilter,tp,LOCATION_DECK,0,nil,tp)
 	if tc and Duel.MoveToField(tc,tp,tp,LOCATION_SZONE,POS_FACEUP,true) and c:IsLocation(LOCATION_HAND)
-		and (c:IsSummonableCard() or c:IsAbleToRest()) then
+		and (c:IsSummonableCard() or c:IsAbleToGrave()) then
 		Duel.BreakEffect()
 		local e1=Effect.CreateEffect(c)
 		e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
@@ -62,9 +62,9 @@ function s.tfop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetCondition(s.ntcon)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 		c:RegisterEffect(e1)
-		if c:IsSummonable(true,nil) and c:IsAbleToRest() then
+		if c:IsSummonable(true,nil) and c:IsAbleToGrave() then
 			op=Duel.SelectOption(tp,aux.Stringid(id,1),aux.Stringid(id,2))
-		elseif c:IsAbleToRest() then
+		elseif c:IsAbleToGrave() then
 			op=Duel.SelectOption(tp,aux.Stringid(id,2))+1
 		else
 			op=Duel.SelectOption(tp,aux.Stringid(id,2))+1
@@ -73,7 +73,7 @@ function s.tfop(e,tp,eg,ep,ev,re,r,rp)
 		if op==0 then
 			Duel.Summon(tp,c,true,nil)
 		else		
-			Duel.SendtoRest(e:GetHandler(),REASON_EFFECT)
+			Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
 		end
 	end
 	local e2=Effect.CreateEffect(c)
@@ -92,7 +92,7 @@ function s.ntcon(e,c,minc)
 end
 function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 	local cr=e:GetHandler()
-	if Duel.SendtoRest(cr,REASON_EFFECT)~=0 and cr:IsLocation(LOCATION_REST) then
+	if Duel.SendtoGrave(cr,REASON_EFFECT)~=0 and cr:IsLocation(LOCATION_REST) then
 		Duel.Damage(tp,1000,REASON_EFFECT)
 	end
 end

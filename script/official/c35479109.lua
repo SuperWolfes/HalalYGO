@@ -35,9 +35,9 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if #tg==0 then return end
 	local rg=tg:Filter(aux.AND(Card.IsAbleToHand,Card.IsFacedown),nil)
 	if #rg==0 then return end
-	c:CancelToRest()
+	c:CancelToGrave()
 	if not c:IsAbleToHand() then
-		c:CancelToRest(false)
+		c:CancelToGrave(false)
 		return
 	end
 	if Duel.SendtoHand(rg:AddCard(c),nil,REASON_EFFECT)>0 then

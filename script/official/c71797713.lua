@@ -26,7 +26,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x400d,0x113}
 function s.costfilter(c)
-	return c:IsMonster() and c:IsAbleToRestAsCost()
+	return c:IsMonster() and c:IsAbleToGraveAsCost()
 		and (c:IsSetCard(0x400d) or c:IsLocation(LOCATION_HAND))
 end
 function s.regfilter(c,attr)
@@ -56,7 +56,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if g:IsExists(s.regfilter,1,nil,ATTRIBUTE_EARTH+ATTRIBUTE_WIND) then flag=flag|0x1 end
 	if g:IsExists(s.regfilter,1,nil,ATTRIBUTE_WATER+ATTRIBUTE_FIRE) then flag=flag|0x2 end
 	if g:IsExists(s.regfilter,1,nil,ATTRIBUTE_LIGHT+ATTRIBUTE_DARK) then flag=flag|0x4 end
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 	e:SetLabel(flag)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)

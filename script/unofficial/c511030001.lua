@@ -60,7 +60,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if not c:IsRelateToEffect(e) then return end
 	local tc=Duel.GetFirstTarget()
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then
-		Duel.SendtoRest(tc,REASON_RULE+REASON_RETURN)
+		Duel.SendtoGrave(tc,REASON_RULE+REASON_RETURN)
 		return
 	end
 	if tc:IsRelateToEffect(e) then

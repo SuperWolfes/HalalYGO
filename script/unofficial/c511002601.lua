@@ -68,7 +68,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 	Duel.ConfirmCards(turnp,g2)
 	g1:Merge(g2)
-	Duel.SendtoRest(g1,REASON_EFFECT)
+	Duel.SendtoGrave(g1,REASON_EFFECT)
 	Duel.BreakEffect()
 	Duel.Draw(turnp,h1,REASON_EFFECT)
 	Duel.Draw(1-turnp,h2,REASON_EFFECT)

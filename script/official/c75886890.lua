@@ -61,9 +61,9 @@ function s.eqlimit(e,c)
 	return c:IsControler(tp)
 end
 function s.eqcost2(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
+	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
 	e:SetLabelObject(e:GetHandler():GetEquipTarget())
-	Duel.SendtoRest(e:GetHandler(),REASON_COST)
+	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
 end
 function s.filter2(c,ec)
 	return c:IsType(TYPE_EQUIP) and c:CheckEquipTarget(ec)

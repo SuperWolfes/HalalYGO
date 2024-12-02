@@ -41,7 +41,7 @@ s.listed_series={0xd6,0xd7}
 
 	--Check for "Destruction Sword" card to send to GY
 function s.tgfilter(c)
-	return c:IsSetCard(0xd6) and c:IsAbleToRest()
+	return c:IsSetCard(0xd6) and c:IsAbleToGrave()
 end
 	--Check for "Buster Blader" monster
 function s.filter(c,e,tp)
@@ -62,7 +62,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g1=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 	local g2=Duel.GetMatchingGroup(s.filter,tp,LOCATION_HAND,0,nil,e,tp)
-	if #g1>0 and Duel.SendtoRest(g1,REASON_EFFECT)>0 and g1:GetFirst():IsLocation(LOCATION_REST)
+	if #g1>0 and Duel.SendtoGrave(g1,REASON_EFFECT)>0 and g1:GetFirst():IsLocation(LOCATION_REST)
 		and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and #g2>0 and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local g3=g2:Select(tp,1,1,nil)

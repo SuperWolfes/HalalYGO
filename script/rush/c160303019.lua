@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.CheckLPCost(tp,300) and Duel.IsExistingMatchingCard(Card.IsAbleToRest,tp,LOCATION_HAND,0,3,nil)
+	return Duel.CheckLPCost(tp,300) and Duel.IsExistingMatchingCard(Card.IsAbleToGrave,tp,LOCATION_HAND,0,3,nil)
 		and not Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_REST,0,4,nil)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -30,8 +30,8 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.PayLPCost(tp,300)
 	--Effect
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-	local dg=Duel.SelectMatchingCard(tp,Card.IsAbleToRest,tp,LOCATION_HAND,0,3,3,nil)
-	if Duel.SendtoRest(dg,REASON_EFFECT)>0 then
+	local dg=Duel.SelectMatchingCard(tp,Card.IsAbleToGrave,tp,LOCATION_HAND,0,3,3,nil)
+	if Duel.SendtoGrave(dg,REASON_EFFECT)>0 then
 		Duel.Draw(tp,3,REASON_EFFECT)
 	end
 end

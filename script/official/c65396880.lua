@@ -33,5 +33,5 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g1=Duel.GetMatchingGroup(aux.TRUE,tp,0,LOCATION_ONFIELD,nil)
 	Duel.Destroy(g1,REASON_EFFECT)
 	local g2=Duel.GetFieldGroup(tp,0,LOCATION_HAND)
-	Duel.SendtoRest(g2,REASON_EFFECT)
+	Duel.SendtoGrave(g2,REASON_EFFECT)
 end

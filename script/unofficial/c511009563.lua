@@ -26,14 +26,14 @@ function s.atcon(e,tp,eg,ep,ev,re,r,rp)
 	return a:IsControler(tp) and a:IsRelateToBattle() and d:IsRelateToBattle() and d:IsLocation(LOCATION_ONFIELD)
 end
 function s.atcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_ONFIELD,0,1,Duel.GetAttacker()) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_ONFIELD,0,1,Duel.GetAttacker()) end
 	e:SetLabel(0)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToRestAsCost,tp,LOCATION_ONFIELD,0,1,1,Duel.GetAttacker())
+	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToGraveAsCost,tp,LOCATION_ONFIELD,0,1,1,Duel.GetAttacker())
 	if g:GetFirst()==e:GetHandler() then
 		e:SetLabel(1)
 	end
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.attg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

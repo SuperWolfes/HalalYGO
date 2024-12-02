@@ -45,7 +45,7 @@ function s.indcon(e)
 	return c:GetSequence()>4 and c:GetLinkedGroupCount()==0
 end
 function s.spcfilter(c,hc)
-	return c:GetColumnGroup():IsContains(hc) and c:IsAbleToRestAsCost()
+	return c:GetColumnGroup():IsContains(hc) and c:IsAbleToGraveAsCost()
 end
 function s.spfilter(c,e,tp)
 	return c:IsSetCard(0x10c) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
@@ -58,7 +58,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return ft>-1 and Duel.IsExistingMatchingCard(s.spcfilter,tp,loc,0,1,c,c) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.spcfilter,tp,loc,0,1,1,c,c)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,0,1,nil,e,tp) end

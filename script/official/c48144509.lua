@@ -21,5 +21,5 @@ function s.fextra(e,tp,mg)
 	return nil
 end
 function s.exfilter(c)
-	return c:IsSetCard(0x99) and c:IsAbleToRest()
+	return c:IsSetCard(0x99) and c:IsAbleToGrave()
 end

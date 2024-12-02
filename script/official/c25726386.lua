@@ -30,7 +30,7 @@ end
 s.listed_series={0x138}
 function s.rcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsDiscardable() end
-	Duel.SendtoRest(e:GetHandler(),REASON_COST+REASON_DISCARD)
+	Duel.SendtoGrave(e:GetHandler(),REASON_COST+REASON_DISCARD)
 end
 function s.tfilter(c,tp)
 	return c:IsOnField() and c:IsControler(tp)
@@ -55,7 +55,7 @@ function s.distg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.gfilter),tp,LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.gfilter),tp,LOCATION_REST,0,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
 	local sg=g:Select(tp,1,1,nil)
 	if #sg>0 and Duel.SendtoDeck(sg,nil,1,REASON_EFFECT)>0 and sg:GetFirst():IsLocation(LOCATION_DECK) then

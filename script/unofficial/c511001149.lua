@@ -44,7 +44,7 @@ function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	e:SetLabel(ct)
 	if ct>=5 then
 		local g=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
-		Duel.SendtoRest(g,REASON_EFFECT+REASON_DISCARD)
+		Duel.SendtoGrave(g,REASON_EFFECT+REASON_DISCARD)
 		if re then re:Reset() end
 	end
 end

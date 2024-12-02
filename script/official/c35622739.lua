@@ -32,7 +32,7 @@ s.listed_series={0x46,0x1047}
 function s.setcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsDiscardable() end
-	Duel.SendtoRest(c,REASON_COST+REASON_DISCARD)
+	Duel.SendtoGrave(c,REASON_COST+REASON_DISCARD)
 end
 function s.setfilter(c)
 	return c:GetType()==TYPE_ACTIONAL+TYPE_CONTINUOUS and c:IsSetCard(0x46) and c:IsSSetable()

@@ -49,7 +49,7 @@ function s.revfilter(c,tp)
 end
 function s.tgfilter(c,race)
 	return c:IsLevel(8) and c:IsType(TYPE_FUSION) and (c:IsAttack(2500)
-		or c:IsDefense(2500)) and c:IsRace(race) and c:IsAbleToRest()
+		or c:IsDefense(2500)) and c:IsRace(race) and c:IsAbleToGrave()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.revfilter,tp,LOCATION_HAND,0,1,nil,tp) end
@@ -68,11 +68,11 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local cc=rg:GetFirst()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_EXTRA,0,1,1,nil,cc:GetRace())
-	if #g>0 and Duel.SendtoRest(g,REASON_EFFECT)>0 and g:GetFirst():IsLocation(LOCATION_REST)
+	if #g>0 and Duel.SendtoGrave(g,REASON_EFFECT)>0 and g:GetFirst():IsLocation(LOCATION_REST)
 		and cc:IsDiscardable(REASON_EFFECT) and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 		Duel.BreakEffect()
-		if Duel.SendtoRest(cc,REASON_EFFECT+REASON_DISCARD)>0 then
+		if Duel.SendtoGrave(cc,REASON_EFFECT+REASON_DISCARD)>0 then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 			local hg=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_DECK,0,1,1,nil)
 			if #hg>0 then

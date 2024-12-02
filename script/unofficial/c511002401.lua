@@ -29,13 +29,13 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ct=#mg
 	local ft=Duel.GetMZoneCount(tp,mg)
 	local sg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_DECK,0,nil,e,tp)
-	if chk==0 then return ct>0 and ft>=ct and mg:FilterCount(Card.IsAbleToRest,nil)==ct and #sg>=ct end
+	if chk==0 then return ct>0 and ft>=ct and mg:FilterCount(Card.IsAbleToGrave,nil)==ct and #sg>=ct end
 	Duel.SetOperationInfo(0,CATEGORY_TOREST,mg,ct,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,sg,ct,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local mg=Duel.GetFieldGroup(tp,LOCATION_MZONE,0)
-	if Duel.SendtoRest(mg,REASON_EFFECT)>0 then
+	if Duel.SendtoGrave(mg,REASON_EFFECT)>0 then
 		local ct=#Duel.GetOperatedGroup()
 		local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 		local sg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_DECK,0,nil,e,tp)

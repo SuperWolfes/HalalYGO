@@ -251,7 +251,7 @@ function s.leaveop(e,tp,eg,ep,ev,re,r,rp)
 		og:Merge(tc:GetOverlayGroup())
 	end
 	if #og>0 then
-		Duel.SendtoRest(og,REASON_RULE)
+		Duel.SendtoGrave(og,REASON_RULE)
 	end
 	Duel.Destroy(tg,REASON_EFFECT)
 end

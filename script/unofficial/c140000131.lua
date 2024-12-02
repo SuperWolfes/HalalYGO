@@ -121,7 +121,7 @@ function s.act(e,tp,eg,ep,ev,re,r,rp)
 					Duel.ReturnToField(tc)
 					g:RemoveCard(tc)
 				end
-				Duel.SendtoRest(g,REASON_RULE+REASON_RETURN)
+				Duel.SendtoGrave(g,REASON_RULE+REASON_RETURN)
 			else
 				for tc in aux.Next(g) do
 					Duel.ReturnToField(tc)

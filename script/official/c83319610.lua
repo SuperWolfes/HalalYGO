@@ -76,7 +76,7 @@ function s.mtop(e,tp,eg,ep,ev,re,r,rp)
 	if #g>0 then
 		local og=g:GetFirst():GetOverlayGroup()
 		if #og>0 then
-			Duel.SendtoRest(og,REASON_RULE)
+			Duel.SendtoGrave(og,REASON_RULE)
 		end
 		Duel.Overlay(tc,g)
 	end
@@ -92,8 +92,8 @@ function s.spfilter2(c,e,tp,mc,rk,pg)
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToRestAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED) end
-	Duel.SendtoRest(c,REASON_COST)
+	if chk==0 then return c:IsAbleToGraveAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED) end
+	Duel.SendtoGrave(c,REASON_COST)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and s.spfilter1(chkc,e,tp) end

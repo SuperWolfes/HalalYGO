@@ -35,7 +35,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 end
 function s.thfilter(c)
-	return (c:IsSetCard(0x188) or c:IsCode(40854824)) and (c:IsAbleToHand() or c:IsAbleToRest())
+	return (c:IsSetCard(0x188) or c:IsCode(40854824)) and (c:IsAbleToHand() or c:IsAbleToGrave())
 end
 function s.spfilter(c,e,tp)
 	return c:IsSetCard(0x1034) and c:IsOriginalType(TYPE_MONSTER) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -78,7 +78,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if b2 and (opt==2 or opt==3) then
 		--Special Summon 1 "Crystal Beast" Monster Card
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,LOCATION_HAND_DECK_REST_SZONE,0,1,1,nil,e,tp)
+		local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.spfilter),tp,LOCATION_HAND_DECK_REST_SZONE,0,1,1,nil,e,tp)
 		if #g>0 then
 			Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 		end

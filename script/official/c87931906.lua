@@ -20,7 +20,7 @@ function s.fextra(e,tp,mg)
 	return nil
 end
 function s.exfilter(c)
-	return c:IsMonster() and c:IsSetCard(0xdf) and c:IsAbleToRest()
+	return c:IsMonster() and c:IsSetCard(0xdf) and c:IsAbleToGrave()
 end
 function s.extratg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

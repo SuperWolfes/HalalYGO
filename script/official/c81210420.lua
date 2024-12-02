@@ -102,5 +102,5 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	g:DeleteGroup()
 	Duel.Destroy(tg,REASON_EFFECT)
 	local tg2=tg:Filter(s.desfilter,nil,fid)
-	Duel.SendtoRest(tg2,REASON_EFFECT)
+	Duel.SendtoGrave(tg2,REASON_EFFECT)
 end

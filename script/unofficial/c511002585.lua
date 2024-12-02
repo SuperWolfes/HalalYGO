@@ -74,7 +74,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ct=#g
 	s.ftchk(ft,tp,ct,e)
 	local sg=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,e:GetHandler())
-	if ft<ct or g:FilterCount(aux.RestValleyFilter(s.chkfilter),nil,e,tp)~=#g then return end
+	if ft<ct or g:FilterCount(aux.GraveValleyFilter(s.chkfilter),nil,e,tp)~=#g then return end
 	ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	local dg=Group.CreateGroup()
 	for i=1,ct do

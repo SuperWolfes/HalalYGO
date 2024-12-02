@@ -30,7 +30,7 @@ function s.accon(e)
 	return true
 end
 function s.acfilter(c)
-	return c:IsActional() and c:IsAbleToRestAsCost()
+	return c:IsActional() and c:IsAbleToGraveAsCost()
 end
 function s.actarget(e,te,tp)
 	return te:IsActiveType(TYPE_ACTIONAL) and te:IsHasType(EFFECT_TYPE_ACTIVATE)
@@ -42,6 +42,6 @@ function s.acop(e,tp,eg,ep,ev,re,r,rp)
 	if s[0] then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.acfilter,tp,LOCATION_DECK,0,1,1,nil)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 	s[0]=true
 end

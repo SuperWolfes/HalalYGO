@@ -61,13 +61,13 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	return c:IsRelateToBattle() and bc and bc:IsFaceup() and bc:IsRelateToBattle()
 end
 function s.atkcfilter(c)
-	return c:IsRace(RACE_CONTAMINED) and c:IsAbleToRestAsCost()
+	return c:IsRace(RACE_CONTAMINED) and c:IsAbleToGraveAsCost()
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.atkcfilter,tp,LOCATION_DECK,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tc=Duel.SelectMatchingCard(tp,s.atkcfilter,tp,LOCATION_DECK,0,1,1,nil):GetFirst()
-	Duel.SendtoRest(tc,REASON_COST)
+	Duel.SendtoGrave(tc,REASON_COST)
 	e:SetLabel(tc:GetLevel())
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)

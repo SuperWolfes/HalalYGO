@@ -81,7 +81,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	if ct>0 then
 		Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOREST)
 		local sg=g:Select(1-tp,ct,ct,nil)
-		Duel.SendtoRest(sg,REASON_RULE)
+		Duel.SendtoGrave(sg,REASON_RULE)
 	end
 end
 function s.atkcon(e)

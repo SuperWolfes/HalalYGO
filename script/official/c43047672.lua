@@ -60,7 +60,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_REMOVED,0,nil)
 	if #g>0 then
-		Duel.SendtoRest(g,REASON_EFFECT+REASON_RETURN)
+		Duel.SendtoGrave(g,REASON_EFFECT+REASON_RETURN)
 	end
 end
 function s.atcon(e,tp,eg,ep,ev,re,r,rp)

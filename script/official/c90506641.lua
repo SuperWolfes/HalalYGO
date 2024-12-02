@@ -48,7 +48,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 	sg=sg-sc
 	if #sg>0 and Duel.SendtoHand(sc,nil,REASON_EFFECT)==0 then
-		Duel.SendtoRest(sc,REASON_RULE)
+		Duel.SendtoGrave(sc,REASON_RULE)
 	end
 	Duel.Remove(sg,POS_FACEUP,REASON_EFFECT)
 end

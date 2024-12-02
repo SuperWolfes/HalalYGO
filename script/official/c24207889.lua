@@ -73,7 +73,7 @@ function s.adjustop(e,tp,eg,ep,ev,re,r,rp)
 		end
 	end
 	if #sg>0 then
-		Duel.SendtoRest(sg,REASON_RULE)
+		Duel.SendtoGrave(sg,REASON_RULE)
 		Duel.Readjust()
 	end
 end

@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.lookop)
 	e1:SetHintTiming(0,TIMING_END_PHASE)
 	c:RegisterEffect(e1)
-	--Equip 1 of opponent's monsters to 1 of your "Relinquished"/"Eyes Restrict" monsters
+	--Equip 1 of opponent's monsters to 1 of your "Relinquished"/"Eyes Graverict" monsters
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_EQUIP)
@@ -32,7 +32,7 @@ function s.initial_effect(c)
 	e3:SetCondition(s.equipcon)
 	c:RegisterEffect(e3)
 end
-	--Lists "Relinquished"/"Eyes Restrict" archetype
+	--Lists "Relinquished"/"Eyes Graverict" archetype
 s.listed_series={}
 
 	--Activation legality
@@ -74,11 +74,11 @@ function s.equiptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local g=Duel.SelectTarget(tp,s.swapfilter,tp,0,LOCATION_MZONE,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_EQUIP,g,1,0,0)
 end
-	--Check for a "Relinquished"/"Eyes Restrict" monster
+	--Check for a "Relinquished"/"Eyes Graverict" monster
 function s.filter(c)
 	return c:IsFaceup() and c:IsSetCard(0x110) and not c:IsSummonableCard()
 end
-	--Equip 1 of opponent's monsters to 1 of your "Relinquished"/"Eyes Restrict" monsters
+	--Equip 1 of opponent's monsters to 1 of your "Relinquished"/"Eyes Graverict" monsters
 function s.equipop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 or not Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,0,1,nil) then return end

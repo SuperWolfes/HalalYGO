@@ -55,7 +55,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_STARDUST_DRAGON,27564031}
 function s.spfilter(c)
-	return c:IsCode(CARD_STARDUST_DRAGON) and c:IsAbleToRestAsCost()
+	return c:IsCode(CARD_STARDUST_DRAGON) and c:IsAbleToGraveAsCost()
 end
 function s.spcon(e,c)
 	if c==nil then return true end
@@ -76,7 +76,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 	g:DeleteGroup()
 end
 function s.descon(e)

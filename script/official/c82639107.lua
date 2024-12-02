@@ -16,7 +16,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)==0
 end
 function s.filter(c)
-	return c:IsSetCard(0x1f) and c:IsAbleToRest()
+	return c:IsSetCard(0x1f) and c:IsAbleToGrave()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,2)
@@ -34,7 +34,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local sg2=g2:Select(tp,1,1,nil)
 		sg1:Merge(sg2)
-		if Duel.SendtoRest(sg1,REASON_EFFECT)==2 then
+		if Duel.SendtoGrave(sg1,REASON_EFFECT)==2 then
 			local g=Duel.GetOperatedGroup()
 			if g:FilterCount(Card.IsLocation,nil,LOCATION_REST)<2 then return end
 			Duel.ShuffleDeck(tp)

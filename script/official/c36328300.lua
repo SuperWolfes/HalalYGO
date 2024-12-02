@@ -32,7 +32,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.confilter,1,nil,tp)
 end
 function s.cfilter(c)
-	return c:IsSetCard(0x1034) and (c:IsFaceup() or not c:IsOnField()) and c:IsAbleToRestAsCost()
+	return c:IsSetCard(0x1034) and (c:IsFaceup() or not c:IsOnField()) and c:IsAbleToGraveAsCost()
 end
 function s.exfilter(c,tp)
 	return Duel.GetLocationCountFromEx(tp,tp,Group.FromCards(c))>0
@@ -47,7 +47,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return g:GetClassCount(Card.GetCode)>=7
 		and aux.SelectUnselectGroup(g,e,tp,7,7,s.rescon,0) end
 	local rg=aux.SelectUnselectGroup(g,e,tp,7,7,s.rescon,1,tp,HINTMSG_TOREST)
-	Duel.SendtoRest(rg,REASON_COST)
+	Duel.SendtoGrave(rg,REASON_COST)
 end
 function s.filter(c,e,tp,sg)
 	return c:IsType(TYPE_FUSION) and c:IsSetCard(0x2034) and Duel.GetLocationCountFromEx(tp,tp,sg,c)>0 and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,false,false) and c:CheckFusionMaterial()

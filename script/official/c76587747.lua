@@ -33,7 +33,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_MZONE,0,nil):Filter(aux.NOT(Card.IsStatus),nil,STATUS_BATTLE_DESTROYED)
 		local tc=g:Select(tp,1,1,nil):GetFirst()
 		if tc then
-			rc:CancelToRest()
+			rc:CancelToGrave()
 			Duel.Overlay(tc,rc)
 		end
 	end

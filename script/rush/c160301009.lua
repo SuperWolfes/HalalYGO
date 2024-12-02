@@ -14,7 +14,7 @@ function s.initial_effect(c)
 end
 	--Check if this card can be sent to GY
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
+	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
 end
 	--Check for level 4 or lower mentor
 function s.filter(c)
@@ -27,7 +27,7 @@ end
 	--Send this card to the GY to let a level 4 or lower mentor attack directly
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	Duel.SendtoRest(e:GetHandler(),REASON_COST)
+	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
 	--Effect
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 	local tc=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_MZONE,0,1,1,e:GetHandler()):GetFirst()

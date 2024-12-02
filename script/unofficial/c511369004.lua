@@ -49,7 +49,7 @@ function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 	return r==REASON_LINK and Duel.GetMatchingGroupCount(s.tgfilter,tp,0,LOCATION_SZONE,nil)==1
 end
 function s.tgfilter(c)
-	return c:GetSequence()<5 and c:IsAbleToRest()
+	return c:GetSequence()<5 and c:IsAbleToGrave()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(1-tp,1) 
@@ -65,7 +65,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
 	local g=e:GetLabelObject()
 	if g then
-		if Duel.SendtoRest(g,REASON_EFFECT)>0 then
+		if Duel.SendtoGrave(g,REASON_EFFECT)>0 then
 			Duel.Draw(p,d,REASON_EFFECT)
 		end
 	end

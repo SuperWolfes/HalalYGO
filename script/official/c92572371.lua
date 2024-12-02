@@ -15,7 +15,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x79,0x7c}
 function s.cfilter(c)
-	return (c:IsLocation(LOCATION_HAND) or c:IsFaceup()) and (c:IsSetCard(0x79) or c:IsSetCard(0x7c)) and c:IsAbleToRestAsCost()
+	return (c:IsLocation(LOCATION_HAND) or c:IsFaceup()) and (c:IsSetCard(0x79) or c:IsSetCard(0x7c)) and c:IsAbleToGraveAsCost()
 end
 function s.mzfilter(c)
 	return c:IsLocation(LOCATION_MZONE) and c:GetSequence()<5
@@ -44,7 +44,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 			g=sg:Select(tp,2,2,nil)
 		end
-		Duel.SendtoRest(g,REASON_COST)
+		Duel.SendtoGrave(g,REASON_COST)
 	end
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)

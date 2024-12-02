@@ -23,7 +23,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK)
 end
 function s.filter1(c)
-	return c:IsRace(RACE_FISH) and c:IsAbleToRest()
+	return c:IsRace(RACE_FISH) and c:IsAbleToGrave()
 end
 function s.filter2(c,e,tp)
 	return c:IsCode(id) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -32,7 +32,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.filter1,tp,LOCATION_DECK,0,1,1,nil)
-	if Duel.SendtoRest(g,REASON_EFFECT)~=0 then
+	if Duel.SendtoGrave(g,REASON_EFFECT)~=0 then
 		if ft<=0 then return end
 		local tc=Duel.GetFirstMatchingCard(s.filter2,tp,LOCATION_DECK,0,nil,e,tp)
 		if tc and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then

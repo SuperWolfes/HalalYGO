@@ -9,8 +9,8 @@ function s.extrafil(e,tp,eg,ep,ev,re,r,rp,chk)
 	return Duel.GetFieldGroup(tp,LOCATION_DECK,0)
 end
 function s.extraop(mat,e,tp,eg,ep,ev,re,r,rp,tc)
-	return Duel.SendtoRest(mat,REASON_EFFECT+REASON_MATERIAL+REASON_LOCKED)
+	return Duel.SendtoGrave(mat,REASON_EFFECT+REASON_MATERIAL+REASON_LOCKED)
 end
 function s.forcedgroup(c,e,tp)
-	return c:IsLocation(LOCATION_DECK) and c:IsType(TYPE_NORMAL) and c:IsAbleToRest()
+	return c:IsLocation(LOCATION_DECK) and c:IsType(TYPE_NORMAL) and c:IsAbleToGrave()
 end

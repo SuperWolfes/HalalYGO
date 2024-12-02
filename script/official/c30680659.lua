@@ -60,7 +60,7 @@ function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.thfilter),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.thfilter),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil)
 	if #g>0 then
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)
@@ -78,7 +78,7 @@ function s.plop(e,tp,eg,ep,ev,re,r,rp)
 	if not tc then return end
 	local fc=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
 	if fc then
-		Duel.SendtoRest(fc,REASON_RULE)
+		Duel.SendtoGrave(fc,REASON_RULE)
 		Duel.BreakEffect()
 	end
 	Duel.MoveToField(tc,tp,tp,LOCATION_FZONE,POS_FACEUP,true)

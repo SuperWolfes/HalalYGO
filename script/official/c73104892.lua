@@ -91,7 +91,7 @@ function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOREST)
 			local sg=g:Select(1-tp,1,1,nil)
 			Duel.HintSelection(sg,true)
-			Duel.SendtoRest(sg,REASON_RULE)
+			Duel.SendtoGrave(sg,REASON_RULE)
 		end
 	end
 end

@@ -26,7 +26,7 @@ end
 s.listed_names={id}
 s.listed_series={0x400d,0x113}
 function s.costfilter(c,tp)
-	return c:IsSetCard(0x400d) and c:IsMonster() and c:IsAbleToRestAsCost()
+	return c:IsSetCard(0x400d) and c:IsMonster() and c:IsAbleToGraveAsCost()
 		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,c)
 end
 function s.sgcost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -49,10 +49,10 @@ function s.sgcost(e,tp,eg,ep,ev,re,r,rp,chk)
 		Duel.Hint(HINT_CARD,0,fc:GetCode())
 		fc:RegisterFlagEffect(61557074,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,0)
 	end
-	Duel.SendtoRest(tc,REASON_COST)
+	Duel.SendtoGrave(tc,REASON_COST)
 end
 function s.filter(c)
-	return (c:IsSetCard(0x400d) or c:IsSetCard(0x113)) and not c:IsCode(id) and c:IsMonster() and c:IsAbleToRest()
+	return (c:IsSetCard(0x400d) or c:IsSetCard(0x113)) and not c:IsCode(id) and c:IsMonster() and c:IsAbleToGrave()
 end
 function s.sgtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end
@@ -62,7 +62,7 @@ function s.sgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	end
 end
 function s.atttg(e,tp,eg,ep,ev,re,r,rp,chk)

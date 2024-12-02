@@ -68,7 +68,7 @@ end
 function s.plop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<1 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
-	local tc=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.plfilter),tp,LOCATION_DECK+LOCATION_REST+LOCATION_HAND,0,1,1,nil):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.plfilter),tp,LOCATION_DECK+LOCATION_REST+LOCATION_HAND,0,1,1,nil):GetFirst()
 	if tc and Duel.MoveToField(tc,tp,tp,LOCATION_SZONE,POS_FACEUP,true) then
 		-- Treat as Continuous Actional
 		local e1=Effect.CreateEffect(e:GetHandler())

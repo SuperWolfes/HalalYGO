@@ -37,14 +37,14 @@ end
 function s.costfilter(c,tp)
 	return (c:IsLocation(LOCATION_HAND) or c:IsFaceup())
 	and (c:IsRace(RACE_WARRIOR) and c:IsAttribute(ATTRIBUTE_FIRE) or c:IsType(TYPE_EQUIP))
-	and c:IsAbleToRestAsCost() and Duel.GetMZoneCount(tp,c)>0
+	and c:IsAbleToGraveAsCost() and Duel.GetMZoneCount(tp,c)>0
 end
 	--Send FIRE warrior monster or equip actional to GY as cost
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND+LOCATION_ONFIELD,0,1,e:GetHandler(),tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND+LOCATION_ONFIELD,0,1,1,e:GetHandler(),tp)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 	--Activation legality
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)

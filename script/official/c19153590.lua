@@ -29,13 +29,13 @@ function s.initial_effect(c)
 end
 s.listed_series={0x111}
 function s.tgfilter1(c)
-	return (c:IsAttribute(ATTRIBUTE_WIND) or c:IsLevelAbove(7)) and c:IsRace(RACE_DRAGON) and c:IsAbleToRestAsCost()
+	return (c:IsAttribute(ATTRIBUTE_WIND) or c:IsLevelAbove(7)) and c:IsRace(RACE_DRAGON) and c:IsAbleToGraveAsCost()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter1,tp,LOCATION_HAND,0,1,e:GetHandler()) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter1,tp,LOCATION_HAND,0,1,1,e:GetHandler())
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
@@ -49,13 +49,13 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.tgfilter2(c)
-	return c:IsSetCard(0x111) and c:IsMonster() and c:IsAbleToRestAsCost() and not c:IsCode(id)
+	return c:IsSetCard(0x111) and c:IsMonster() and c:IsAbleToGraveAsCost() and not c:IsCode(id)
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter2,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter2,tp,LOCATION_HAND+LOCATION_DECK,0,1,1,nil)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 	local atk=g:GetFirst():GetLevel()*300
 	e:SetLabel(atk)
 end

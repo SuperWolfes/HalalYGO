@@ -55,7 +55,7 @@ function s.retop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=#mg
 	if Duel.SendtoDeck(tc,nil,0,REASON_EFFECT)~=0 and sumtype&SUMMON_TYPE_FUSION==SUMMON_TYPE_FUSION
 		and ct>0 and ct<=Duel.GetLocationCount(tp,LOCATION_MZONE)
-		and mg:FilterCount(aux.RestValleyFilter(s.mgfilter),nil,e,tp,tc,mg)==ct
+		and mg:FilterCount(aux.GraveValleyFilter(s.mgfilter),nil,e,tp,tc,mg)==ct
 		and (not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) or ct==1) then
 		Duel.BreakEffect()
 		Duel.SpecialSummon(mg,0,1-tp,1-tp,false,false,POS_FACEUP)
@@ -65,8 +65,8 @@ function s.polycon(e,tp,eg,ep,ev,re,r,rp)
 	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:GetHandler():IsCode(CARD_POLYMERIZATION) and Duel.IsChainDisablable(ev)
 end
 function s.polycost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
-	Duel.SendtoRest(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
+	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
 end
 function s.polytg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

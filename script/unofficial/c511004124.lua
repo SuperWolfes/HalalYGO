@@ -44,7 +44,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	e:SetLabel(0)
 	local tc=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_MZONE,0,1,1,nil,tp):GetFirst()
 	local og=tc:GetOverlayGroup()
-	Duel.SendtoRest(og,REASON_COST)
+	Duel.SendtoGrave(og,REASON_COST)
 	local sum=0
 	for gc in og:Iter() do
 		sum=sum+math.max(0,gc:GetAttack())

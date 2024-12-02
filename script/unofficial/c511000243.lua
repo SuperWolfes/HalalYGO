@@ -9,7 +9,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_SPSUMMON_CONDITION)
 	e1:SetValue(s.splimit)
 	c:RegisterEffect(e1)
-	--Send 1 "Unliked One" monster from your Hand or Deck to the Rest Place
+	--Send 1 "Unliked One" monster from your Hand or Deck to the Grave Place
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TOREST)
@@ -36,7 +36,7 @@ function s.initial_effect(c)
 	e5:SetCode(EFFECT_IMMUNE_EFFECT)
 	e5:SetValue(s.unval)
 	c:RegisterEffect(e5)
-	--Win the Duel when there are 5 parts of the Unliked in your Rest Place
+	--Win the Duel when there are 5 parts of the Unliked in your Grave Place
 	local e6=Effect.CreateEffect(c)
 	e6:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e6:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_DELAY)
@@ -55,14 +55,14 @@ function s.forbtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
 function s.forbfilter(c)
-	return c:IsSetCard(0x40) and c:IsMonster() and c:IsAbleToRest()
+	return c:IsSetCard(0x40) and c:IsMonster() and c:IsAbleToGrave()
 end
 function s.forbop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local c=e:GetHandler()
 	local g=Duel.SelectMatchingCard(tp,s.forbfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	end
 end
 function s.atkval(e,c)

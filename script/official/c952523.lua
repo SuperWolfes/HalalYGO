@@ -72,7 +72,7 @@ function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	if not rc:IsOnField() then return end
 	if Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 		e:GetHandler():RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1)
-		rc:CancelToRest()
+		rc:CancelToGrave()
 		Duel.ChangePosition(rc,POS_FACEDOWN)
 	end
 end

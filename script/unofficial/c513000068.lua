@@ -28,7 +28,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_BLUEEYES_W_DRAGON,27564031}
 function s.spfilter(c)
-	return c:IsCode(CARD_BLUEEYES_W_DRAGON) and c:IsAbleToRestAsCost()
+	return c:IsCode(CARD_BLUEEYES_W_DRAGON) and c:IsAbleToGraveAsCost()
 end
 function s.spcon(e,c)
 	if c==nil then return true end
@@ -38,7 +38,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_DECK,0,1,1,nil)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.descon(e)
 	return not Duel.IsEnvironment(27564031)

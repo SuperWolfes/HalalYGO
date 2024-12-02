@@ -57,7 +57,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local cid=Duel.GetChainInfo(ev,CHAININFO_CHAIN_ID)
 	if cid~=e:GetLabel() then return end
 	if e:GetOwner():IsRelateToChain(ev) then
-		e:GetOwner():CancelToRest(false)
+		e:GetOwner():CancelToGrave(false)
 	end
 end
 	--Activation legality
@@ -98,7 +98,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e3:SetReset(RESET_EVENT+RESETS_STANDARD)
 		c:RegisterEffect(e3)
 	else
-		c:CancelToRest(false)
+		c:CancelToGrave(false)
 	end
 end
 	--If was sent to GY because equipped monster left the field

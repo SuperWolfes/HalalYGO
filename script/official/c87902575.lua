@@ -81,7 +81,7 @@ function s.retop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_SELECTMSG,p,aux.Stringid(id,2))
 		g=g:Select(p,ft,ft,nil)
 		sg:Sub(g)
-		Duel.SendtoRest(sg,REASON_EFFECT)
+		Duel.SendtoGrave(sg,REASON_EFFECT)
 	end
 	local tc=g:GetFirst()
 	for tc in aux.Next(g) do

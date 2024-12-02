@@ -73,9 +73,9 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToRestAsCost() and c:GetCounter(0xda)>0 end
+	if chk==0 then return c:IsAbleToGraveAsCost() and c:GetCounter(0xda)>0 end
 	e:SetLabel(c:GetCounter(0xda))
-	Duel.SendtoRest(c,REASON_COST)
+	Duel.SendtoGrave(c,REASON_COST)
 end
 function s.spfilter(c,e,tp,ct)
 	return c:IsSetCard(0x577) and c:IsLinkMonster() and c:IsLink(ct)

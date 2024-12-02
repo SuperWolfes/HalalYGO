@@ -56,7 +56,7 @@ function s.once_per_chain_chk(e,tp,eg,ep,ev,re,r,rp,chk)
 	c:RegisterFlagEffect(id+label,RESET_CHAIN,0,1)
 end
 function s.tgfilter(c,val)
-	return c:IsRace(RACE_TAINTED) and c:IsMonster() and (c:IsAttack(val) or c:IsDefense(val)) and c:IsAbleToRest()
+	return c:IsRace(RACE_TAINTED) and c:IsMonster() and (c:IsAttack(val) or c:IsDefense(val)) and c:IsAbleToGrave()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil,ev) end
@@ -66,7 +66,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil,ev)
 	if #g>0 then
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	end
 end
 function s.cfilter(c,e,tp,ft)

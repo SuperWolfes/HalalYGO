@@ -34,7 +34,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local sg=g:RandomSelect(ep,1)
 	Duel.ConfirmCards(tp,sg)
 	if sg:GetFirst():IsActional() then
-		Duel.SendtoRest(sg,REASON_EFFECT)
+		Duel.SendtoGrave(sg,REASON_EFFECT)
 	end
 	Duel.ShuffleHand(1-tp)
 end

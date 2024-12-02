@@ -21,13 +21,13 @@ s.listed_series={0x156e}
 s.listed_names={95000037}
 s.mark=2
 function s.cfilter(c)
-	return c:IsCode(95000037) and c:IsAbleToRestAsCost()
+	return c:IsCode(95000037) and c:IsAbleToGraveAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_ONFIELD,0,1,1,nil)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.spfilter(c,e,tp)
 	return c:IsSetCard(0x156e) and c:IsMonster() and c:IsCanBeSpecialSummoned(e,0,tp,true,false)

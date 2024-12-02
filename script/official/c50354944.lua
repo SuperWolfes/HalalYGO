@@ -42,7 +42,7 @@ end
 s.listed_names={id}
 	--Check for level 5+ monster
 function s.spfilter(c)
-	return c:IsLevelAbove(5) and c:IsAbleToRestAsCost()
+	return c:IsLevelAbove(5) and c:IsAbleToGraveAsCost()
 end
 	--Send 1 level 5+ monster from hand to the GY as cost
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)

@@ -35,7 +35,7 @@ function s.ctcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsContains(e:GetHandler())
 end
 function s.ctfilter(c)
-	return c:IsCode(69890967,6007213,32491822) and c:IsAbleToRest()
+	return c:IsCode(69890967,6007213,32491822) and c:IsAbleToGrave()
 end
 function s.ctcheck(sg,e,tp)
 	return sg:GetClassCount(Card.GetCode)==#sg and e:GetHandler():IsCanAddCounter(0x202,#sg)
@@ -51,7 +51,7 @@ function s.ctop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.ctfilter,tp,LOCATION_HAND+LOCATION_DECK,0,nil)
 	if #g==0 then return end
 	local sg=aux.SelectUnselectGroup(g,e,tp,1,3,s.ctcheck,1,tp,HINTMSG_TOREST)
-	if #sg>0 and Duel.SendtoRest(sg,REASON_EFFECT)~=0 then
+	if #sg>0 and Duel.SendtoGrave(sg,REASON_EFFECT)~=0 then
 	local ct=sg:FilterCount(Card.IsLocation,nil,LOCATION_REST)
 		if ct>0 and c:IsRelateToEffect(e) and c:IsFaceup() then
 			local oc=#(Duel.GetOperatedGroup())

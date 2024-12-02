@@ -3,7 +3,7 @@
 --scripted by Rundas
 local s,id=GetID()
 function s.initial_effect(c)
-	--To Rest
+	--To Grave
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOREST+CATEGORY_SPECIAL_SUMMON)
@@ -27,12 +27,12 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_STARDUST_DRAGON}
 s.listed_series={0xa3}
---To Rest
+--To Grave
 function s.ssfilter(c)
 	return c:IsFaceup() and (c:IsCode(CARD_STARDUST_DRAGON) or (c:ListsCode(CARD_STARDUST_DRAGON) and c:IsType(TYPE_SYNCHRO)))
 end
 function s.tgfilter(c,e,tp,ss,mz)
-	return c:IsMonster() and c:IsSetCard(0xa3) and (c:IsAbleToRest() or (ss and mz and c:IsCanBeSpecialSummoned(e,0,tp,false,false)))
+	return c:IsMonster() and c:IsSetCard(0xa3) and (c:IsAbleToGrave() or (ss and mz and c:IsCanBeSpecialSummoned(e,0,tp,false,false)))
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ss,mz=Duel.IsExistingMatchingCard(s.ssfilter,tp,LOCATION_MZONE,0,1,nil),Duel.GetLocationCount(tp,LOCATION_MZONE)>0
@@ -48,7 +48,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 		if ss and mz and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 			Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 		else
-			Duel.SendtoRest(g,REASON_EFFECT)
+			Duel.SendtoGrave(g,REASON_EFFECT)
 		end
 	end
 end

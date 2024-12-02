@@ -16,7 +16,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_SEVENS_ROAD_MAGICIAN}
 function s.cfilter(c,e,tp)
-	return c:IsAbleToRestAsCost() and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND,0,1,c,e,tp)
+	return c:IsAbleToGraveAsCost() and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND,0,1,c,e,tp)
 end
 function s.filter(c,e,tp)
 	return c:IsRace(RACE_MENTOR) and c:IsAttribute(ATTRIBUTE_DARK) and c:IsLevelAbove(7) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -32,7 +32,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	--requirement
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND,0,1,1,nil,e,tp)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 	--effect
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	local c=e:GetHandler()

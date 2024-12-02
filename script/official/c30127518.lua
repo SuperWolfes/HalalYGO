@@ -21,7 +21,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS):Filter(s.cfilter,nil,1-tp,e)
-	Duel.SendtoRest(g,REASON_EFFECT)
+	Duel.SendtoGrave(g,REASON_EFFECT)
 	local exg=Group.CreateGroup()
 	local g1=Duel.GetOperatedGroup()
 	local tc=g1:GetFirst()
@@ -32,5 +32,5 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		end
 	end
 	Duel.BreakEffect()
-	Duel.SendtoRest(exg,REASON_EFFECT)
+	Duel.SendtoGrave(exg,REASON_EFFECT)
 end

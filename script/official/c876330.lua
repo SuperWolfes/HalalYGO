@@ -30,7 +30,7 @@ function s.initial_effect(c)
 	aux.AddEREquipLimit(c,nil,s.eqval,Card.EquipByEffectAndLimitRegister,e3)
 end
 function s.spfilter(c,ft)
-	return c:IsFaceup() and c:IsSetCard(0x29) and c:IsAbleToRestAsCost() and (ft>0 or c:GetSequence()<5)
+	return c:IsFaceup() and c:IsSetCard(0x29) and c:IsAbleToGraveAsCost() and (ft>0 or c:GetSequence()<5)
 end
 function s.spcon1(e,c)
 	if c==nil then return true end
@@ -54,7 +54,7 @@ end
 function s.spop1(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 	g:DeleteGroup()
 end
 function s.eqval(ec,c,tp)

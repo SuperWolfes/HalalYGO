@@ -12,12 +12,12 @@ function s.initial_effect(c)
 end
 s.listed_series={0x1034}
 function s.cfilter(c)
-	return c:GetSequence()<5 and c:IsAbleToRestAsCost()
+	return c:GetSequence()<5 and c:IsAbleToGraveAsCost()
 end
 function s.plcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_SZONE,0,1,e:GetHandler()) end
 	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_SZONE,0,e:GetHandler())
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.plfilter(c)
 	return c:IsSetCard(0x1034) and not c:IsUnliked()

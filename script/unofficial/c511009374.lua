@@ -1,5 +1,5 @@
 --衝撃の拘束剣
---Restraining Sword of Impact
+--Graveraining Sword of Impact
 --fixed by MLD
 local s,id=GetID()
 function s.initial_effect(c)
@@ -47,7 +47,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)>1 end
 	local g=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
 	e:SetLabel(#g)
-	Duel.SendtoRest(g,REASON_EFFECT+REASON_DISCARD)
+	Duel.SendtoGrave(g,REASON_EFFECT+REASON_DISCARD)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

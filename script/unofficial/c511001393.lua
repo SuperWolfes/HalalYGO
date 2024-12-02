@@ -24,7 +24,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local a=Duel.GetAttacker()
 	local at=Duel.GetAttackTarget()
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if chk==0 then return a:IsOnField() and at:IsAbleToRest() and ft>-1 and (ft>0 or at:GetSequence()<5)
+	if chk==0 then return a:IsOnField() and at:IsAbleToGrave() and ft>-1 and (ft>0 or at:GetSequence()<5)
 		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil,e,tp) end
 	Duel.SetTargetCard(a)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,a,1,0,0)
@@ -35,7 +35,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local at=Duel.GetAttackTarget()
 	if a and a:IsRelateToEffect(e) and Duel.Destroy(a,REASON_EFFECT)>0 and at and at:IsCode(100000224) then
 		Duel.BreakEffect()
-		if Duel.SendtoRest(at,REASON_EFFECT)>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 then
+		if Duel.SendtoGrave(at,REASON_EFFECT)>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 			local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_HAND+LOCATION_DECK,0,1,1,nil,e,tp)
 			if #g>0 then

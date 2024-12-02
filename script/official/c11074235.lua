@@ -49,7 +49,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT+RESETS_REDIRECT)
 		e1:SetValue(LOCATION_REMOVED)
 		c:RegisterEffect(e1,true)
-		local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.setfilter),tp,LOCATION_REST+LOCATION_REMOVED,0,nil)
+		local g=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.setfilter),tp,LOCATION_REST+LOCATION_REMOVED,0,nil)
 		if #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			--Set 1 of your actionals/traps, that is banished or in GY
 			Duel.BreakEffect()

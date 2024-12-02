@@ -56,7 +56,7 @@ function s.discon(e,tp,eg,ep,ev,re,r,rp)
 end
 	--Check for "Shaddoll" monster
 function s.disfilter(c)
-	return c:IsSetCard(0x9d) and c:IsMonster() and c:IsAbleToRest()
+	return c:IsSetCard(0x9d) and c:IsMonster() and c:IsAbleToGrave()
 end
 	--Activation legality
 function s.distg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -68,7 +68,7 @@ function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.disfilter,tp,LOCATION_HAND,0,1,1,c)
 	local tc=g:GetFirst()
-	if tc and Duel.SendtoRest(tc,REASON_EFFECT)~=0 and g:GetFirst():IsLocation(LOCATION_REST) then
+	if tc and Duel.SendtoGrave(tc,REASON_EFFECT)~=0 and g:GetFirst():IsLocation(LOCATION_REST) then
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_FIELD)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)

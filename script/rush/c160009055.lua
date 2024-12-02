@@ -1,5 +1,5 @@
 --羊界－墓地に怨念
---Ewekai - Grudges from the Rest
+--Ewekai - Grudges from the Grave
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)

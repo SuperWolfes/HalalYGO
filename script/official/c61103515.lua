@@ -60,7 +60,7 @@ function s.thgcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetFlagEffect(id)>0
 end
 function s.thgfilter(c)
-	return c:IsLevelBelow(2) and c:IsRace(RACE_CONTAMINED) and c:IsType(TYPE_TUNER) and (c:IsAbleToHand() or c:IsAbleToRest())
+	return c:IsLevelBelow(2) and c:IsRace(RACE_CONTAMINED) and c:IsType(TYPE_TUNER) and (c:IsAbleToHand() or c:IsAbleToGrave())
 end
 function s.thgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thgfilter,tp,LOCATION_DECK,0,1,nil) end

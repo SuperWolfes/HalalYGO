@@ -18,7 +18,7 @@ function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(tp,LOCATION_HAND,LOCATION_HAND)
-	if Duel.SendtoRest(g,REASON_EFFECT+REASON_DISCARD)<1
+	if Duel.SendtoGrave(g,REASON_EFFECT+REASON_DISCARD)<1
 		or #g:Match(Card.IsLocation,nil,LOCATION_REST)<1 
 		or not Duel.IsExistingMatchingCard(aux.FilterMaximumSideFunctionEx(Card.IsFaceup),tp,LOCATION_MZONE,0,1,nil) 
 		or not Duel.SelectYesNo(tp,aux.Stringid(id,0)) then return end

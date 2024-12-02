@@ -45,7 +45,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if ct==0 then return end
 	local total=Duel.AnnounceNumberRange(tp,1,ct)
 	local tg=hg:RandomSelect(tp,total)
-	if Duel.SendtoRest(tg,REASON_EFFECT)>0 then
+	if Duel.SendtoGrave(tg,REASON_EFFECT)>0 then
 		local og=Duel.GetOperatedGroup():FilterCount(Card.IsLocation,nil,LOCATION_REST)
 		--Inflict 300 Damage per card sent
 		if og>0 then

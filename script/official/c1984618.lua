@@ -17,7 +17,7 @@ end
 s.listed_series={0x146}
 s.listed_names={CARD_ALBAZ}
 function s.tgfilter(c,tp,necro)
-	return c:IsAbleToRest() and Duel.IsExistingMatchingCard(necro and aux.RestValleyFilter(s.thfilter) or s.thfilter,tp,LOCATION_DECK+LOCATION_REST,0,1,nil,c:GetAttack())
+	return c:IsAbleToGrave() and Duel.IsExistingMatchingCard(necro and aux.GraveValleyFilter(s.thfilter) or s.thfilter,tp,LOCATION_DECK+LOCATION_REST,0,1,nil,c:GetAttack())
 end
 function s.thfilter(c,atk)
 	return (c:IsCode(CARD_ALBAZ) or (c:IsMonster() and c:IsSetCard(0x146))) and c:GetAttack()<=atk and c:IsAbleToHand()
@@ -30,11 +30,11 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g1=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_EXTRA,0,1,1,nil,tp,true)
-	if #g1>0 and Duel.SendtoRest(g1,REASON_EFFECT)>0 then
+	if #g1>0 and Duel.SendtoGrave(g1,REASON_EFFECT)>0 then
 		local og=Duel.GetOperatedGroup()
 		if og:GetFirst():IsLocation(LOCATION_REST) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-			local g2=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.thfilter),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil,g1:GetFirst():GetAttack())
+			local g2=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.thfilter),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil,g1:GetFirst():GetAttack())
 			if #g2>0 then
 				Duel.BreakEffect()
 				Duel.SendtoHand(g2,nil,REASON_EFFECT)

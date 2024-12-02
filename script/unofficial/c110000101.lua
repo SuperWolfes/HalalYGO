@@ -51,7 +51,7 @@ function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	if Duel.NegateActivation(ev) then
 		if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:GetHandler():IsRelateToEffect(re) then
-			Duel.SendtoRest(eg,REASON_EFFECT)
+			Duel.SendtoGrave(eg,REASON_EFFECT)
 		end
 	end
 end

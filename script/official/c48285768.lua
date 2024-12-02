@@ -40,7 +40,7 @@ s.listed_series={0x158}
 
 	--Check for a "Sprigguns" monster
 function s.tgfilter(c)
-	return c:IsMonster() and c:IsSetCard(0x158) and c:IsAbleToRest()
+	return c:IsMonster() and c:IsSetCard(0x158) and c:IsAbleToGrave()
 end
 	--Activation legality
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -52,7 +52,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	end
 end
 	--Check if current phase is opponent's main phase or battle phase
@@ -87,7 +87,7 @@ function s.banop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 			local g=Duel.SelectMatchingCard(tp,s.edfilter,tp,LOCATION_EXTRA,0,1,1,nil)
 			if #g>0 then
-				Duel.SendtoRest(g,REASON_EFFECT)
+				Duel.SendtoGrave(g,REASON_EFFECT)
 			end
 		end
 	end

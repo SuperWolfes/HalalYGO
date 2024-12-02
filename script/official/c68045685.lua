@@ -56,7 +56,7 @@ function s.target(e,c)
 end
 	--Define cost
 function s.tgfilter(c)
-	return c:IsMonster() and c:IsSetCard(0x88) and c:IsAbleToRestAsCost()
+	return c:IsMonster() and c:IsSetCard(0x88) and c:IsAbleToGraveAsCost()
 		and (c:IsFaceup() or c:IsLocation(LOCATION_HAND))
 end
 	--Send 1 "Bujin" monster from hand/face-up to GY as cost
@@ -64,7 +64,7 @@ function s.negcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_MZONE+LOCATION_HAND,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_MZONE+LOCATION_HAND,0,1,1,nil)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 	--Activation legality
 function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -102,8 +102,8 @@ function s.negop(e,tp,eg,ep,ev,re,r,rp)
 end
 	--Send this face-up card to GY as cost
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
-	Duel.SendtoRest(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
+	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
 end
 	--Check for a "Bujin" monster
 function s.spfilter(c,e,tp)

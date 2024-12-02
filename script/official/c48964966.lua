@@ -46,7 +46,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function s.filter1(c,ft)
-	return c:IsFaceup() and c:IsRace(RACE_WANDERER) and c:GetCode()~=id and c:IsAbleToRestAsCost()
+	return c:IsFaceup() and c:IsRace(RACE_WANDERER) and c:GetCode()~=id and c:IsAbleToGraveAsCost()
 		and (ft>0 or c:GetSequence()<5)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -54,7 +54,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return ft>-1 and Duel.IsExistingMatchingCard(s.filter1,tp,LOCATION_MZONE,0,1,nil,ft) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.filter1,tp,LOCATION_MZONE,0,1,1,nil,ft)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.filter2(c,e,sp)
 	return c:IsRace(RACE_WANDERER) and c:GetCode()~=id and c:IsCanBeSpecialSummoned(e,0,sp,false,false)

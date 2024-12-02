@@ -105,5 +105,5 @@ function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	return Duel.SelectEffectYesNo(tp,c,96)
 end
 function s.desrepop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SendtoRest(e:GetHandler(),REASON_EFFECT+REASON_REPLACE)
+	Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT+REASON_REPLACE)
 end

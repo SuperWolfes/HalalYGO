@@ -24,7 +24,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_HAND)
 end
 function s.tgfilter(c)
-	return c:IsSetCard(0x2016) and c:IsMonster() and c:IsAbleToRest()
+	return c:IsSetCard(0x2016) and c:IsMonster() and c:IsAbleToGrave()
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
@@ -33,6 +33,6 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local dg=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_HAND,0,1,1,nil)
 	if #dg>0 then
-		Duel.SendtoRest(dg,REASON_EFFECT)
+		Duel.SendtoGrave(dg,REASON_EFFECT)
 	end
 end

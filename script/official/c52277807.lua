@@ -42,7 +42,7 @@ end
 	--Discard itself as cost
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsDiscardable() end
-	Duel.SendtoRest(e:GetHandler(),REASON_COST+REASON_DISCARD)
+	Duel.SendtoGrave(e:GetHandler(),REASON_COST+REASON_DISCARD)
 end
 	--Acitvation legality
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

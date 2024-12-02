@@ -71,7 +71,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ShuffleHand(1-tp)
 	end
 	if #torest>0 then
-		Duel.SendtoRest(torest,REASON_EFFECT)
+		Duel.SendtoGrave(torest,REASON_EFFECT)
 	end
 	local fg=Duel.GetMatchingGroup(Card.IsFacedown,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
 	Duel.ShuffleSetCard(fg)

@@ -38,8 +38,8 @@ function s.setcostfilter(c,tp)
 end
 function s.setcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToRestAsCost() and Duel.IsExistingMatchingCard(s.setcostfilter,tp,LOCATION_HAND,0,1,c,tp) end
-	Duel.SendtoRest(c,REASON_COST)
+	if chk==0 then return c:IsAbleToGraveAsCost() and Duel.IsExistingMatchingCard(s.setcostfilter,tp,LOCATION_HAND,0,1,c,tp) end
+	Duel.SendtoGrave(c,REASON_COST)
 	Duel.DiscardHand(tp,s.setcostfilter,1,1,REASON_COST+REASON_DISCARD,nil,tp)
 end
 function s.setop(e,tp,eg,ep,ev,re,r,rp)

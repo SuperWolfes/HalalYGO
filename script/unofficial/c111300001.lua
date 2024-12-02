@@ -53,7 +53,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local bc=c:GetBattleTarget()
 	if bc:GetEffectCount(EFFECT_INDESTRUCTABLE_BATTLE)==1 then return end
 	if Duel.Destroy(bc,REASON_BATTLE)==0 then
-		Duel.SendtoRest(bc,REASON_BATTLE)
+		Duel.SendtoGrave(bc,REASON_BATTLE)
 	end
 	bc:SetStatus(STATUS_BATTLE_DESTROYED,true)
 	Duel.RaiseEvent(c,EVENT_BATTLE_DESTROYING,e,REASON_BATTLE,c:GetControler(),c:GetControler(),0)

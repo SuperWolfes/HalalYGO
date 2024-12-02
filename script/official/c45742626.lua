@@ -43,5 +43,5 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g2=Duel.GetDecktopGroup(1-tp,5)
 	g1:Merge(g2)
 	Duel.DisableShuffleCheck()
-	Duel.SendtoRest(g1,REASON_EFFECT)
+	Duel.SendtoGrave(g1,REASON_EFFECT)
 end

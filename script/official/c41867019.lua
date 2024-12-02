@@ -109,8 +109,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 				local sg=tg:Select(tp,1,1,nil)
 				Duel.HintSelection(sg)
-				Duel.SendtoRest(sg,REASON_EFFECT)
-			else Duel.SendtoRest(tg,REASON_EFFECT) end
+				Duel.SendtoGrave(sg,REASON_EFFECT)
+			else Duel.SendtoGrave(tg,REASON_EFFECT) end
 		Duel.RegisterFlagEffect(tp,id+2,RESET_PHASE+PHASE_END,0,1)
 		end
 	elseif opval[op]==4 then --Inflict 800 damage

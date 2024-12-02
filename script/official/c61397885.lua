@@ -100,7 +100,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not tc or tc:IsFacedown() or not tc:IsRelateToEffect(e) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.eqfilter),tp,LOCATION_REST+LOCATION_HAND,0,1,1,nil,tc)
+	local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.eqfilter),tp,LOCATION_REST+LOCATION_HAND,0,1,1,nil,tc)
 	local eq=g:GetFirst()
 	if eq then
 		Duel.Equip(tp,eq,tc,true)

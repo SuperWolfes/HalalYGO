@@ -73,7 +73,7 @@ function s.numcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.tgfilter(c,e,tp,eg,ep,ev,re,r,rp,chain,chk)
 	local te=c:GetActivateEffect()
-	if not c:IsSetCard(0x14b) or not c:IsAbleToRest() or not te then return end
+	if not c:IsSetCard(0x14b) or not c:IsAbleToGrave() or not te then return end
 	local condition=te:GetCondition()
 	local cost=te:GetCost()
 	local target=te:GetTarget()
@@ -105,7 +105,7 @@ function s.numop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil,e,tp,eg,ep,ev,re,r,rp,chain,true)
 	local tc=g:GetFirst()
 	copychain=0
-	if tc and Duel.SendtoRest(g,REASON_EFFECT)>0 then
+	if tc and Duel.SendtoGrave(g,REASON_EFFECT)>0 then
 		local te=tc:GetActivateEffect()
 		local cost=te:GetCost()
 		local tg=te:GetTarget()

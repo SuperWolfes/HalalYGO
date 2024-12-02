@@ -21,7 +21,7 @@ end
 s.listed_names={160202014}
 	--Check if able to send itself to GY
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToRest() end
+	if chk==0 then return e:GetHandler():IsAbleToGrave() end
 end
 	--Check if this is the only monster you control and "Femtron" is in GY
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
@@ -38,7 +38,7 @@ end
 	--Send itself to GY, draw 2, then mill 2
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if Duel.SendtoRest(c,REASON_EFFECT)>0 then
+	if Duel.SendtoGrave(c,REASON_EFFECT)>0 then
 		if Duel.Draw(tp,2,REASON_EFFECT)>0 then
 			Duel.BreakEffect()
 			Duel.DiscardDeck(tp,2,REASON_EFFECT)

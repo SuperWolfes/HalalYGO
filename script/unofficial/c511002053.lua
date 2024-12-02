@@ -33,7 +33,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local sumtype=tc:GetSummonType()
 	if Duel.SendtoDeck(tc,nil,0,REASON_EFFECT)>0 and sumtype==SUMMON_TYPE_SYNCHRO and #mg>0 
 		and #mg<=Duel.GetLocationCount(tp,LOCATION_MZONE)
-		and mg:FilterCount(aux.RestValleyFilter(s.mgfilter),nil,e,tp,tc)==#mg
+		and mg:FilterCount(aux.GraveValleyFilter(s.mgfilter),nil,e,tp,tc)==#mg
 		and (not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) or ct==1) then
 		Duel.BreakEffect()
 		local fid=e:GetHandler():GetFieldID()

@@ -70,7 +70,7 @@ function card.eqop(e, tp, eg, ep, ev, re, r, rp)
 		not tc or Duel.GetLocationCount(tp, LOCATION_SZONE) <= 0 or tc:IsControler(tp) or tc:IsFacedown() or
 			not tc:IsRelateToEffect(e)
 	 then
-		Duel.SendtoRest(c, REASON_EFFECT)
+		Duel.SendtoGrave(c, REASON_EFFECT)
 		return
 	end
 	Duel.Equip(tp, c, tc, true)

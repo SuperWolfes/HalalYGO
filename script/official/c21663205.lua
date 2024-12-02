@@ -1,5 +1,5 @@
 --墓守の神職
---Restkeeper's Priest
+--Gravekeeper's Priest
 local s,id=GetID()
 function s.initial_effect(c)
 	--spsummon

@@ -95,6 +95,6 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if c:IsRelateToEffect(e) and c:IsFaceup() and c:UpdateAttack(1000)==1000 then
 		Duel.BreakEffect()
-		if tc and tc:IsRelateToEffect(e) then Duel.SendtoRest(tc,REASON_EFFECT) end
+		if tc and tc:IsRelateToEffect(e) then Duel.SendtoGrave(tc,REASON_EFFECT) end
 	end
 end

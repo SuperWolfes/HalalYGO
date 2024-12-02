@@ -88,9 +88,9 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	if #g<1 then return end
 	Duel.ConfirmCards(tp,g)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-	local sg=g:FilterSelect(tp,aux.AND(Card.IsMonster,Card.IsAbleToRest),1,1,nil)
+	local sg=g:FilterSelect(tp,aux.AND(Card.IsMonster,Card.IsAbleToGrave),1,1,nil)
 	if #sg>0 then
-		Duel.SendtoRest(sg,REASON_EFFECT)
+		Duel.SendtoGrave(sg,REASON_EFFECT)
 		Duel.ShuffleExtra(1-tp)
 	end
 end

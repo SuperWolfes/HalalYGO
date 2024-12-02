@@ -18,7 +18,7 @@ end
 s.listed_names={160202014,160202015,160202016}
 
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
+	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,160202014)
@@ -46,11 +46,11 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SortDeckbottom(tp,tp,3)
 	local c=e:GetHandler()
 	--Effect
-	if Duel.SendtoRest(c,REASON_EFFECT)>0 then
+	if Duel.SendtoGrave(c,REASON_EFFECT)>0 then
 		if Duel.Draw(tp,3,REASON_EFFECT)>0 then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-			local dg=Duel.SelectMatchingCard(tp,Card.IsAbleToRest,tp,LOCATION_HAND,0,3,3,nil)
-			Duel.SendtoRest(dg,REASON_EFFECT)
+			local dg=Duel.SelectMatchingCard(tp,Card.IsAbleToGrave,tp,LOCATION_HAND,0,3,3,nil)
+			Duel.SendtoGrave(dg,REASON_EFFECT)
 		end
 	end
 end

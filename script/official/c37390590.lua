@@ -61,7 +61,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		local tc=e:GetLabelObject()
 		if c:IsRelateToEffect(e) and tc:IsRelateToEffect(e) and tc:IsFaceup() then
 			Duel.Equip(tp,c,tc)
-			c:CancelToRest()
+			c:CancelToGrave()
 			--Atkup
 			local e1=Effect.CreateEffect(c)
 			e1:SetType(EFFECT_TYPE_EQUIP)

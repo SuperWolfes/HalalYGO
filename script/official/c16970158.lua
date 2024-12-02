@@ -1,5 +1,5 @@
 --墓場からの呼び声
---Call of the Rest
+--Call of the Grave
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

@@ -77,7 +77,7 @@ function s.eqlimit(e,c)
 	return e:GetOwner()==c
 end
 function s.tgfilter(c,tp)
-	return c:GetFlagEffect(id)~=0 and c:IsAbleToRestAsCost()
+	return c:GetFlagEffect(id)~=0 and c:IsAbleToGraveAsCost()
 		and Duel.IsExistingMatchingCard(s.desfilter,tp,0,LOCATION_MZONE,1,nil,c:GetTextAttack())
 end
 function s.desfilter(c,atk)
@@ -90,7 +90,7 @@ function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tc=eqg:FilterSelect(tp,s.tgfilter,1,1,nil,tp):GetFirst()
 	e:SetLabel(tc:GetTextAttack())
-	Duel.SendtoRest(tc,REASON_COST)
+	Duel.SendtoGrave(tc,REASON_COST)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

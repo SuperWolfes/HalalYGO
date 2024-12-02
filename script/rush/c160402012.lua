@@ -25,6 +25,6 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=#g==1 and 1 or Duel.AnnounceNumberRange(tp,1,2)
 	local sg=g:RandomSelect(tp,ct)
 	if #sg>0 then
-		Duel.SendtoRest(sg,REASON_EFFECT)
+		Duel.SendtoGrave(sg,REASON_EFFECT)
 	end
 end

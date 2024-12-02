@@ -51,9 +51,9 @@ end
 function s.dcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	local ec=c:GetEquipTarget()
-	if chk==0 then return ec and c:IsAbleToRestAsCost() end
+	if chk==0 then return ec and c:IsAbleToGraveAsCost() end
 	Duel.SetTargetCard(ec)
-	Duel.SendtoRest(c,REASON_COST)
+	Duel.SendtoGrave(c,REASON_COST)
 end
 function s.filter(c,g,tc)
 	return c==tc or g:IsContains(c)

@@ -25,7 +25,7 @@ Duel.ReleaseLockedMaterial=(function()
 	return function(g)
 		local extra_g=g:Filter(Card.IsLocation,nil,LOCATION_EXTRA)
 		if #extra_g>0 then
-			Duel.SendtoRest(extra_g,REASON_LOCKED+REASON_EFFECT+REASON_MATERIAL)
+			Duel.SendtoGrave(extra_g,REASON_LOCKED+REASON_EFFECT+REASON_MATERIAL)
 			g:Sub(extra_g)
 		end
 		return oldfunc(g)
@@ -267,7 +267,7 @@ function(filter,_type,lv,extrafil,extraop,matfilter,stage2,location,forcedselect
 				Locked.CheckMatFilter(matfilter,e,tp,mg,mg2)
 				local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-				local tg=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(Locked.Filter),tp,location,0,1,1,e:GetHandler(),filter,_type,e,tp,mg,mg2,forcedselection,specificmatfilter,lv,requirementfunc,sumpos)
+				local tg=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(Locked.Filter),tp,location,0,1,1,e:GetHandler(),filter,_type,e,tp,mg,mg2,forcedselection,specificmatfilter,lv,requirementfunc,sumpos)
 				if #tg>0 then
 					local tc=tg:GetFirst()
 					local lv=(lv and (type(lv)=="function" and lv(tc)) or lv) or tc:GetLevel()

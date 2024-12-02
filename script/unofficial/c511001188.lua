@@ -75,7 +75,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e5:SetReset(RESET_EVENT+RESETS_STANDARD)
 		c:RegisterEffect(e5)
 	else
-		c:CancelToRest(false)
+		c:CancelToGrave(false)
 	end
 end
 function s.atkval(e,c)

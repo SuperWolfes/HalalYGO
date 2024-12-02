@@ -272,8 +272,8 @@ if not ActionDuel then
 				end
 			end
 			tc:SetStatus(STATUS_LEAVE_CONFIRMED,true)
-			tc:CancelToRest(false)
-			Duel.SendtoRest(tc,REASON_RULE)
+			tc:CancelToGrave(false)
+			Duel.SendtoGrave(tc,REASON_RULE)
 		end
 	end
 

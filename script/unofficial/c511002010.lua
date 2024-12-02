@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.damfil(c,tp)
-	return c:IsControler(tp) and c:IsAbleToRest() and c:IsActional()
+	return c:IsControler(tp) and c:IsAbleToGrave() and c:IsActional()
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return eg:IsExists(s.damfil,1,nil,tp) end
@@ -25,7 +25,7 @@ function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	local ec=c:GetEquipTarget()
 	local dc=eg:Filter(s.damfil,nil,tp):Select(tp,1,1,nil)
 	if c:IsRelateToEffect(e) then
-		Duel.SendtoRest(dc,REASON_EFFECT)
+		Duel.SendtoGrave(dc,REASON_EFFECT)
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)

@@ -81,7 +81,7 @@ function s.chkop(e,tp,eg,ep,ev,re,r,rp)
 		local ct=Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)+c:GetCounter(0x1110)-5
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=Duel.SelectMatchingCard(tp,aux.TRUE,tp,LOCATION_MZONE,0,ct,ct,nil)
-		Duel.SendtoRest(g,REASON_RULE)
+		Duel.SendtoGrave(g,REASON_RULE)
 	end
 	if dz then
 		local eff=e:GetLabelObject()
@@ -117,11 +117,11 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local hg=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
-	if chk==0 then return #hg>0 and hg:FilterCount(Card.IsAbleToRestAsCost,nil)==#hg
-		and e:GetHandler():IsAbleToRestAsCost() end
+	if chk==0 then return #hg>0 and hg:FilterCount(Card.IsAbleToGraveAsCost,nil)==#hg
+		and e:GetHandler():IsAbleToGraveAsCost() end
 	local g=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
 	g:AddCard(e:GetHandler())
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and chkc:IsAbleToHand() end

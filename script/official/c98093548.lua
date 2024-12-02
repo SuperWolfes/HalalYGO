@@ -35,7 +35,7 @@ s.listed_names={id}
 s.listed_series={0x7c,0x79}
 
 function s.cfilter(c)
-	return c:IsFaceup() and (c:IsActional() or c:IsTrap()) and c:IsSetCard(0x7c) and c:IsAbleToRestAsCost()
+	return c:IsFaceup() and (c:IsActional() or c:IsTrap()) and c:IsSetCard(0x7c) and c:IsAbleToGraveAsCost()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local nc=Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_SZONE,0,1,nil)
@@ -45,7 +45,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if nc and not (Duel.IsPlayerAffectedByEffect(tp,CARD_FIRE_FIST_EAGLE) and Duel.SelectYesNo(tp,aux.Stringid(CARD_FIRE_FIST_EAGLE,0))) then 
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_SZONE,0,1,1,nil)
-			Duel.SendtoRest(g,REASON_COST)
+			Duel.SendtoGrave(g,REASON_COST)
 	end
 end
 function s.spfilter(c,e,tp)

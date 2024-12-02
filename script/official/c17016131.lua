@@ -78,8 +78,8 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.handcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToRestAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED) end
-	Duel.SendtoRest(c,REASON_COST)
+	if chk==0 then return c:IsAbleToGraveAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED) end
+	Duel.SendtoGrave(c,REASON_COST)
 end
 function s.handtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(1-tp,1) end
@@ -98,7 +98,7 @@ function s.handop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.ConfirmCards(1-p,g)
 			Duel.Hint(HINT_SELECTMSG,p,HINTMSG_DISCARD)
 			local sg=g:FilterSelect(1-p,Card.IsMonster,1,1,nil)
-			Duel.SendtoRest(sg,REASON_EFFECT+REASON_DISCARD)
+			Duel.SendtoGrave(sg,REASON_EFFECT+REASON_DISCARD)
 			Duel.ShuffleHand(p)
 		end
 	end
@@ -114,7 +114,7 @@ function s.extdop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ConfirmCards(tp,g)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local sg=g:FilterSelect(tp,Card.IsMonster,1,1,nil)
-		Duel.SendtoRest(sg,REASON_EFFECT)
+		Duel.SendtoGrave(sg,REASON_EFFECT)
 		Duel.ShuffleExtra(1-tp)
 	end
 end

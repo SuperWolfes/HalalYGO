@@ -23,7 +23,7 @@ function s.tg1(e,c)
 end
 
 function s.repfilter(c)
-	return c:IsCode(id) and c:IsAbleToRest()
+	return c:IsCode(id) and c:IsAbleToGrave()
 end
 function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -32,7 +32,7 @@ function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 		local g=Duel.SelectMatchingCard(tp,s.repfilter,tp,LOCATION_DECK,0,1,1,nil)
-		Duel.SendtoRest(g,REASON_COST)
+		Duel.SendtoGrave(g,REASON_COST)
 		return true
 	else return false end
 end

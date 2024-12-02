@@ -82,6 +82,6 @@ function s.sgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.sgop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(tp,0xe,0xe)
-	Duel.SendtoRest(g,REASON_EFFECT)
+	Duel.SendtoGrave(g,REASON_EFFECT)
 	Duel.Draw(tp,1,REASON_EFFECT)
 end

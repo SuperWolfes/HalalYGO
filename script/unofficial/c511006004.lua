@@ -27,7 +27,7 @@ function s.lvfilter(c,se)
 	return c:GetLevel()>6 and c:IsSummonable(false,se)
 end
 function s.discardfilter(c)
-	return c:IsMonster() and c:IsAbleToRestAsCost()
+	return c:IsMonster() and c:IsAbleToGraveAsCost()
 end
 function s.filter(c,se,tp)
 	return s.lvfilter(c,se) and Duel.IsExistingMatchingCard(s.discardfilter,tp,LOCATION_HAND,0,2,c) 
@@ -40,9 +40,9 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND,0,1,nil,se,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g1=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_HAND,0,1,1,nil,se,tp)
-	Duel.SendtoRest(g1,REASON_COST)
+	Duel.SendtoGrave(g1,REASON_COST)
 	local g2=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_HAND,0,1,1,nil,se,tp)
-	Duel.SendtoRest(g2,REASON_COST)
+	Duel.SendtoGrave(g2,REASON_COST)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local se=e:GetLabelObject()

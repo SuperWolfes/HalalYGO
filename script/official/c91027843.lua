@@ -86,7 +86,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
 	local tc=eg:Filter(s.eqcfilter,nil,tp):GetFirst()
 	if ft<1 or not tc or not tc:IsFaceup() then return end
-	local g=aux.SelectUnselectGroup(Duel.GetMatchingGroup(aux.RestValleyFilter(s.eqfilter),tp,LOCATION_REST,0,nil),e,tp,1,math.min(ft,3),aux.dncheck,1,tp,HINTMSG_EQUIP)
+	local g=aux.SelectUnselectGroup(Duel.GetMatchingGroup(aux.GraveValleyFilter(s.eqfilter),tp,LOCATION_REST,0,nil),e,tp,1,math.min(ft,3),aux.dncheck,1,tp,HINTMSG_EQUIP)
 	for eqc in aux.Next(g) do
 		Duel.Equip(tp,eqc,tc,true,true)
 		--Equip limit

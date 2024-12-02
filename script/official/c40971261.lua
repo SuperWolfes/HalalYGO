@@ -78,7 +78,7 @@ function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetFlagEffect(id+1)~=0
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SendtoRest(e:GetHandler(),REASON_EFFECT)
+	Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
 end
 function s.indescond(e)
 	return Duel.IsExistingMatchingCard(nil,e:GetHandlerPlayer(),0,LOCATION_MZONE,1,nil)

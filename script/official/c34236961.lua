@@ -35,11 +35,11 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ShuffleHand(1-tp)
 	elseif atplv>ntplv then
 		Duel.Damage(1-tp,1000,REASON_EFFECT)
-		Duel.SendtoRest(g2,REASON_EFFECT)
+		Duel.SendtoGrave(g2,REASON_EFFECT)
 		Duel.ShuffleHand(tp)
 	else
 		Duel.Damage(tp,1000,REASON_EFFECT)
-		Duel.SendtoRest(g1,REASON_EFFECT)
+		Duel.SendtoGrave(g1,REASON_EFFECT)
 		Duel.ShuffleHand(1-tp)
 	end
 end

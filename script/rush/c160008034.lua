@@ -79,7 +79,7 @@ function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	--Effect
 	if Duel.Draw(tp,3,REASON_EFFECT)>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-		local dg=Duel.SelectMatchingCard(tp,Card.IsAbleToRest,tp,LOCATION_HAND,0,2,2,nil)
-		Duel.SendtoRest(dg,REASON_EFFECT)
+		local dg=Duel.SelectMatchingCard(tp,Card.IsAbleToGrave,tp,LOCATION_HAND,0,2,2,nil)
+		Duel.SendtoGrave(dg,REASON_EFFECT)
 	end
 end

@@ -20,7 +20,7 @@ local BEWD,DM=CARD_BLUEEYES_W_DRAGON,CARD_DARK_MAGICIAN
 s.listed_names={BEWD,DM,id}
 
 function s.codefilter(c,code)
-	return not c:IsCode(id) and (c:IsCode(code) or c:ListsCode(code)) and c:IsAbleToRest()
+	return not c:IsCode(id) and (c:IsCode(code) or c:ListsCode(code)) and c:IsAbleToGrave()
 end
 	--Activation legality
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -44,5 +44,5 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	else
 		g=Duel.SelectMatchingCard(tp,s.codefilter,tp,LOCATION_DECK,0,1,1,nil,DM)
 	end
-	if #g>0 then Duel.SendtoRest(g,REASON_EFFECT) end
+	if #g>0 then Duel.SendtoGrave(g,REASON_EFFECT) end
 end

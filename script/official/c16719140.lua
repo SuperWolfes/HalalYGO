@@ -34,7 +34,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 end
 function s.costfilter(c,e,tp,mg,rlv)
-	if not (c:HasLevel() and c:IsSetCard(0xed) and c:IsMonster() and c:IsAbleToRestAsCost()
+	if not (c:HasLevel() and c:IsSetCard(0xed) and c:IsMonster() and c:IsAbleToGraveAsCost()
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_DEFENSE)) then return false end
 	local lv=c:GetLevel()-rlv
 	return #mg>0 and (lv<=0 or mg:CheckWithSumGreater(Card.GetOriginalLevel,lv))
@@ -54,7 +54,7 @@ function s.sptg1(e,tp,eg,ep,ev,re,r,rp,chk)
 	mg:RemoveCard(c)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_DECK,0,1,1,nil,e,tp,mg,c:GetOriginalLevel())
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 	Duel.SetTargetCard(g)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end

@@ -25,10 +25,10 @@ function s.contactfil(tp)
 	return Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil,tp)
 end
 function s.cfilter(c,tp)
-	return c:IsAbleToRestAsCost() and (c:IsControler(tp) or c:IsFaceup())
+	return c:IsAbleToGraveAsCost() and (c:IsControler(tp) or c:IsFaceup())
 end
 function s.contactop(g,tp,c)
-	Duel.SendtoRest(g,REASON_COST+REASON_MATERIAL)
+	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL)
 	--spsummon condition
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)

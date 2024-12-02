@@ -32,7 +32,7 @@ function s.cfilter(c,tp)
 	return c:IsDiscardable() and Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,c)
 end
 function s.tgfilter(c)
-	return c:IsSetCard(0xc008) and c:IsMonster() and c:IsAbleToRest()
+	return c:IsSetCard(0xc008) and c:IsMonster() and c:IsAbleToGrave()
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil,tp) end
@@ -51,7 +51,7 @@ end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,1,nil)
-	if #g>0 and Duel.SendtoRest(g,REASON_EFFECT)~=0 and g:GetFirst():IsLocation(LOCATION_REST) then
+	if #g>0 and Duel.SendtoGrave(g,REASON_EFFECT)~=0 and g:GetFirst():IsLocation(LOCATION_REST) then
 		local tg=Duel.GetMatchingGroup(s.atkfilter,tp,LOCATION_MZONE,0,nil)
 		if #tg<=0 then return end
 		local ct=Duel.GetMatchingGroupCount(s.ctfilter,tp,LOCATION_REST,0,nil)

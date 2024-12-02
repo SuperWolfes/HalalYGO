@@ -31,7 +31,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if #g==0 or not tg then return end
 	if Duel.Destroy(tg,REASON_EFFECT)>0 and tg:IsExists(s.filter2,1,nil,e,tp) and Duel.GetLocationCount(1-tp,LOCATION_MZONE)>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local sg2=Duel.SelectMatchingCard(1-tp,aux.RestValleyFilter(s.spfilter),tp,0,LOCATION_REST,1,1,nil,e,tp,g:GetFirst():GetLevel()-1)
+		local sg2=Duel.SelectMatchingCard(1-tp,aux.GraveValleyFilter(s.spfilter),tp,0,LOCATION_REST,1,1,nil,e,tp,g:GetFirst():GetLevel()-1)
 		if #sg2>0 then
 			Duel.HintSelection(sg2)
 			Duel.SpecialSummon(sg2,0,1-tp,1-tp,false,false,POS_FACEUP_ATTACK)

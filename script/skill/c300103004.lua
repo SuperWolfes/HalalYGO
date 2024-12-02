@@ -13,9 +13,9 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,tp,id)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	end
 end
 function s.tgfilter(c)
-	return c:IsRace(RACE_CONTAMINED) and c:IsType(TYPE_NORMAL) and c:IsLevelBelow(3) and c:IsAbleToRest()
+	return c:IsRace(RACE_CONTAMINED) and c:IsType(TYPE_NORMAL) and c:IsLevelBelow(3) and c:IsAbleToGrave()
 end

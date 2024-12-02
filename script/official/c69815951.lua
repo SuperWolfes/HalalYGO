@@ -73,7 +73,7 @@ function s.rescon(ct)
 	end
 end 
 function s.tgfilter(c)
-	return c:IsFaceup() and c:IsAbleToRest()
+	return c:IsFaceup() and c:IsAbleToGrave()
 end
 function s.gytg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return s.tgfilter() end
@@ -90,6 +90,6 @@ end
 function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetTargetCards(e)
 	if #g>0 then
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	end
 end

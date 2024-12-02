@@ -47,7 +47,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		send:Merge(g2)
 	end
 	Duel.DisableShuffleCheck()
-	Duel.SendtoRest(send,REASON_EFFECT)
+	Duel.SendtoGrave(send,REASON_EFFECT)
 	Duel.SortDecktop(tp,tp,3)
 	Duel.SortDecktop(1-tp,1-tp,3)
 end

@@ -1,5 +1,5 @@
 --深すぎた墓穴
---The Deep Rest
+--The Deep Grave
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

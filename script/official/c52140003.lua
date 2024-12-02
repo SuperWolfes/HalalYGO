@@ -67,6 +67,6 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=c:GetTurnCounter()
 	c:SetTurnCounter(ct+1)
 	if ct+1>=3 then
-		Duel.SendtoRest(e:GetHandler(),REASON_EFFECT)
+		Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
 	end
 end

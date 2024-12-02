@@ -7,7 +7,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x5008}
 function s.mfilter(c)
-	return c:IsAbleToRest() and c:IsFaceup() and c:IsSetCard(0x5008)
+	return c:IsAbleToGrave() and c:IsFaceup() and c:IsSetCard(0x5008)
 end
 function s.fextra(e,tp,mg)
 	return Duel.GetMatchingGroup(s.mfilter,tp,LOCATION_SZONE,0,nil)

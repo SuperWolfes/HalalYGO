@@ -89,7 +89,7 @@ function Auxiliary.UnionOperation(f)
 		local tc=Duel.GetFirstTarget()
 		if not c:IsRelateToEffect(e) or c:IsFacedown() then return end
 		if not tc:IsRelateToEffect(e) or (f and not f(tc)) then
-			Duel.SendtoRest(c,REASON_EFFECT)
+			Duel.SendtoGrave(c,REASON_EFFECT)
 			return
 		end
 		if not Duel.Equip(tp,c,tc,false) then return end
@@ -116,7 +116,7 @@ function Auxiliary.UnionSumOperation(oldrule)
 		if oldrule then pos=POS_FACEUP_ATTACK end
 		if Duel.SpecialSummon(c,0,tp,tp,true,false,pos)==0 and Duel.GetLocationCount(tp,LOCATION_MZONE)<=0
 			and c:IsCanBeSpecialSummoned(e,0,tp,true,false,pos) then
-			Duel.SendtoRest(c,REASON_RULE)
+			Duel.SendtoGrave(c,REASON_RULE)
 		end
 	end
 end

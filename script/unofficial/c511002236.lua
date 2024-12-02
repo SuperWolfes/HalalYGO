@@ -26,7 +26,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if c:IsFacedown() or not c:IsRelateToEffect(e) or c:IsControler(1-tp) 
 		or Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then return end
 	if not tc or not tc:IsRelateToEffect(e) then
-		Duel.SendtoRest(c,REASON_EFFECT)
+		Duel.SendtoGrave(c,REASON_EFFECT)
 		return
 	end
 	if not Duel.Equip(tp,c,tc,false) then return end

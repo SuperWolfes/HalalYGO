@@ -22,7 +22,7 @@ function s.filter(c,e,tp,m)
 		and m:CheckWithSumEqual(Card.GetLockedLevel,c:GetLevel(),1,99,c)
 end
 function s.matfilter(c)
-	return c:IsType(TYPE_NORMAL) and c:IsAbleToRest()
+	return c:IsType(TYPE_NORMAL) and c:IsAbleToGrave()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
@@ -42,7 +42,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local mat=mg:SelectWithSumEqual(tp,Card.GetLockedLevel,tc:GetLevel(),1,99,tc)
 		tc:SetMaterial(mat)
-		Duel.SendtoRest(mat,REASON_EFFECT+REASON_MATERIAL+REASON_LOCKED)
+		Duel.SendtoGrave(mat,REASON_EFFECT+REASON_MATERIAL+REASON_LOCKED)
 		Duel.BreakEffect()
 		Duel.SpecialSummon(tc,SUMMON_TYPE_LOCKED,tp,tp,true,false,POS_FACEUP)
 		tc:CompleteProcedure()

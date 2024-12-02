@@ -31,7 +31,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if ft>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	if #g>0 then
 		if ft<=0 then
-			Duel.SendtoRest(g,REASON_EFFECT)
+			Duel.SendtoGrave(g,REASON_EFFECT)
 		elseif ft>=#g then
 			Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 		else
@@ -39,7 +39,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			local sg=g:Select(tp,ft,ft,nil)
 			Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)
 			g:Sub(sg)
-			Duel.SendtoRest(g,REASON_EFFECT)
+			Duel.SendtoGrave(g,REASON_EFFECT)
 		end
 	end
 	Duel.ShuffleDeck(tp)

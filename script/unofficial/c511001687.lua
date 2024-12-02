@@ -19,7 +19,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tc=eg:GetFirst()
 	if chk==0 then return tc:CheckRemoveOverlayCard(tp,1,REASON_COST) end
 	local g=tc:GetOverlayGroup()
-	Duel.SendtoRest(g,REASON_COST)	
+	Duel.SendtoGrave(g,REASON_COST)	
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()

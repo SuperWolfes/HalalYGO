@@ -50,6 +50,6 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		eqtg:RegisterEffect(e1)
 	else
-		Duel.SendtoRest(eqtg,REASON_EFFECT)
+		Duel.SendtoGrave(eqtg,REASON_EFFECT)
 	end
 end

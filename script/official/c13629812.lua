@@ -82,7 +82,7 @@ function s.retop(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsRelateToEffect(e) then
 		local seq=tc:GetPreviousSequence()
 		if seq>4 then
-			Duel.SendtoRest(tc,REASON_RULE+REASON_RETURN)
+			Duel.SendtoGrave(tc,REASON_RULE+REASON_RETURN)
 		end
 		local zone=0x1<<seq
 		Duel.ReturnToField(tc,tc:GetPreviousPosition(),zone)

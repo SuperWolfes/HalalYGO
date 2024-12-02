@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetTarget(s.reptg)
 	e2:SetValue(function(e,c)return s.repfilter(c,e:GetHandlerPlayer())end)
-	e2:SetOperation(function(e)Duel.SendtoRest(e:GetHandler(),REASON_EFFECT)end)
+	e2:SetOperation(function(e)Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)end)
 	c:RegisterEffect(e2)
 	--SS token when opp SSs
 	local e3=Effect.CreateEffect(c)

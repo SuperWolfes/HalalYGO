@@ -88,7 +88,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 					end
 				end
 			else
-				Duel.SendtoRest(tc,REASON_RULE)
+				Duel.SendtoGrave(tc,REASON_RULE)
 			end
 		end
 		if not tc:IsLocation(LOCATION_ONFIELD) or not tc:IsControler(tp) then return end
@@ -139,7 +139,7 @@ function s.ctrlop(e,tp,eg,ep,ev,re,r,rp)
 				Debug.PreEquip(tc,ec)
 			end
 		else
-			Duel.SendtoRest(tc,REASON_RULE)
+			Duel.SendtoGrave(tc,REASON_RULE)
 		end
 	end
 end

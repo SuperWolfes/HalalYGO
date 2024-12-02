@@ -16,7 +16,7 @@ s.listed_series={0xb}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,nil) end
 	local g=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
-	Duel.SendtoRest(g,REASON_COST+REASON_DISCARD)
+	Duel.SendtoGrave(g,REASON_COST+REASON_DISCARD)
 end
 function s.filter(c,e,tp)
 	return c:IsSetCard(0xb) and c:IsLocation(LOCATION_REST) and c:IsPreviousControler(tp) and c:IsReason(REASON_BATTLE)

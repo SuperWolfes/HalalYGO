@@ -63,7 +63,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		end
 		if #g1>0 then
 			Duel.BreakEffect()
-			Duel.SendtoRest(g1,REASON_EFFECT)
+			Duel.SendtoGrave(g1,REASON_EFFECT)
 		end
 	end
 end

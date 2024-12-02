@@ -54,9 +54,9 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local mzones=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	local g1=Group.CreateGroup()
 	if mzones>0 then 
-		g1=Duel.GetMatchingGroup(aux.RestValleyFilter(s.ninja),tp,LOCATION_DECK+LOCATION_REST,0,nil,e,tp)
+		g1=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.ninja),tp,LOCATION_DECK+LOCATION_REST,0,nil,e,tp)
 	end
-	local g2=Duel.GetMatchingGroup(aux.RestValleyFilter(s.ninjitsu),tp,LOCATION_DECK+LOCATION_REST,0,nil,true)
+	local g2=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.ninjitsu),tp,LOCATION_DECK+LOCATION_REST,0,nil,true)
 	g1:Merge(g2)
 	if #g1==0 then return end
 	local sg=aux.SelectUnselectGroup(g1,e,tp,1,2,s.rescon,1,tp,HINTMSG_TOFIELD)

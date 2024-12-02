@@ -32,7 +32,7 @@ function s.thfilter(c)
 		and (c:IsFaceup() or c:IsLocation(LOCATION_REST))
 end
 function s.gyfilter(c)
-	return c:IsMonster() and c:IsSetCard(0x79) and c:IsAbleToRest()
+	return c:IsMonster() and c:IsSetCard(0x79) and c:IsAbleToGrave()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_ONFIELD+LOCATION_REST) and s.thfilter(chkc) end
@@ -50,7 +50,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		local g=Duel.SelectMatchingCard(tp,s.gyfilter,tp,LOCATION_DECK,0,1,1,nil)
 		if #g>0 then
 			Duel.BreakEffect()
-			Duel.SendtoRest(g,REASON_EFFECT)
+			Duel.SendtoGrave(g,REASON_EFFECT)
 		end
 	end
 end

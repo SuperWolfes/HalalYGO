@@ -134,7 +134,7 @@ function Maximum.Operation(mats)
 		end
 		sg:Merge((tg+c))
 		g=Duel.GetFieldGroup(tp,LOCATION_MZONE,0)
-		Duel.SendtoRest(g,REASON_RULE)
+		Duel.SendtoGrave(g,REASON_RULE)
 	end
 end
 function Maximum.centerCon(e)

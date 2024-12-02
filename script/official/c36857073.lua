@@ -79,7 +79,7 @@ function s.spop2(e,tp,eg,ep,ev,re,r,rp)
 	local g1=Duel.SelectMatchingCard(tp,s.spfilter2,tp,LOCATION_DECK,0,1,1,nil,e,tp)
 	if #g1==0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g2=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter3),tp,LOCATION_REST,0,1,1,nil,e,tp,g1:GetFirst():GetLevel())
+	local g2=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.spfilter3),tp,LOCATION_REST,0,1,1,nil,e,tp,g1:GetFirst():GetLevel())
 	g1:Merge(g2)
 	Duel.SpecialSummon(g1,0,tp,tp,false,false,POS_FACEUP_DEFENSE)
 end

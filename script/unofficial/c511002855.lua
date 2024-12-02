@@ -132,6 +132,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 	Duel.Damage(1-tp,atk,REASON_EFFECT)
 	Duel.BreakEffect()
-	Duel.SendtoRest(sg,REASON_EFFECT)
+	Duel.SendtoGrave(sg,REASON_EFFECT)
 	Duel.ShuffleHand(1-tp)
 end

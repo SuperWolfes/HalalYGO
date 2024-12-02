@@ -79,7 +79,7 @@ function s.tedtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_REST+LOCATION_REMOVED)
 end
 function s.tedop(e,tp,eg,ep,ev,re,r,rp)
-	local tc=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.tedfilter),tp,LOCATION_REST+LOCATION_REMOVED,0,1,1,nil,tp):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.tedfilter),tp,LOCATION_REST+LOCATION_REMOVED,0,1,1,nil,tp):GetFirst()
 	if tc then
 		Duel.SendtoDeck(tc,tp,2,REASON_EFFECT)
 	end

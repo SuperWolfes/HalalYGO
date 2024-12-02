@@ -20,10 +20,10 @@ function s.tgfilter1(c,tp)
 		and Duel.IsExistingMatchingCard(s.tgfilter2,tp,LOCATION_DECK,0,1,nil,lv)
 end
 function s.tgfilter2(c,lv)
-	return c:IsMonster() and c:IsSetCard(0x8e) and not c:IsLevel(lv) and c:IsAbleToRest()
+	return c:IsMonster() and c:IsSetCard(0x8e) and not c:IsLevel(lv) and c:IsAbleToGrave()
 end
 function s.spfilter1(c,tp)
-	return c:IsAbleToRest() and Duel.GetMZoneCount(tp,c)>0
+	return c:IsAbleToGrave() and Duel.GetMZoneCount(tp,c)>0
 end
 function s.spfilter2(c,e,tp)
 	return c:IsSetCard(0x8e) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -67,7 +67,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local tc=Duel.GetFirstTarget()
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=Duel.SelectMatchingCard(tp,s.tgfilter2,tp,LOCATION_DECK,0,1,1,nil,tc:GetLevel())
-		if #g>0 and Duel.SendtoRest(g,REASON_EFFECT)~=0 and g:GetFirst():IsLocation(LOCATION_REST)
+		if #g>0 and Duel.SendtoGrave(g,REASON_EFFECT)~=0 and g:GetFirst():IsLocation(LOCATION_REST)
 			and tc:IsRelateToEffect(e) and tc:IsFaceup() then
 			local lv=g:GetFirst():GetLevel()
 			local e1=Effect.CreateEffect(e:GetHandler())
@@ -81,7 +81,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local tc=Duel.GetFirstTarget()
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=Duel.SelectMatchingCard(tp,s.spfilter1,tp,LOCATION_MZONE,0,1,1,nil,tp)
-		if #g>0 and Duel.SendtoRest(g,REASON_EFFECT)~=0 and g:GetFirst():IsLocation(LOCATION_REST)
+		if #g>0 and Duel.SendtoGrave(g,REASON_EFFECT)~=0 and g:GetFirst():IsLocation(LOCATION_REST)
 			and tc:IsRelateToEffect(e) then
 			Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 		end

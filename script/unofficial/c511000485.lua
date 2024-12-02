@@ -13,12 +13,12 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c)
-	return c:IsAbleToRest()
+	return c:IsAbleToGrave()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_DECK,0,2,nil) end
 	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_DECK,0,nil):RandomSelect(tp,2)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.filter(c)
 	return c:IsActional() and c:IsAbleToHand()

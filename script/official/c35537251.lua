@@ -34,7 +34,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=#mg
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVEXYZ)
 	local sg=mg:Select(tp,1,1,nil)
-	if #sg>0 and Duel.SendtoRest(sg,REASON_EFFECT)>0
+	if #sg>0 and Duel.SendtoGrave(sg,REASON_EFFECT)>0
 		and tc:GetOverlayCount()<ct then
 		local c=e:GetHandler()
 		if not c:IsRelateToEffect(e) then return end

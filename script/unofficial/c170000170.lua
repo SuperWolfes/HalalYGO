@@ -124,7 +124,7 @@ end
 -------------------------------------------------------------------
 function s.sucop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
-	Duel.SendtoRest(g,REASON_EFFECT)
+	Duel.SendtoGrave(g,REASON_EFFECT)
 	Duel.SetLP(tp,0)
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)

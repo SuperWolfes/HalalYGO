@@ -19,7 +19,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if #sg==0 then return end
 	local g=Duel.GetOverlayGroup(tp,0,1)
 	local mc=g:RandomSelect(tp,1):GetFirst()
-	if Duel.SendtoRest(mc,REASON_EFFECT)>0 then
+	if Duel.SendtoGrave(mc,REASON_EFFECT)>0 then
 		if mc:IsAttribute(ATTRIBUTE_DARK) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 
 			and mc:IsCanBeSpecialSummoned(e,0,tp,false,false) then
 			if Duel.SpecialSummon(mc,0,tp,tp,false,false,POS_FACEUP)>0 then

@@ -41,7 +41,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ConfirmCards(tp,g)
 	local sg=g:Filter(Card.IsCode,nil,rc:GetCode())
 	if #sg>0 then
-		Duel.SendtoRest(sg,REASON_EFFECT)
+		Duel.SendtoGrave(sg,REASON_EFFECT)
 	end
 	Duel.ShuffleHand(1-tp)
 	Duel.ShuffleDeck(1-tp)

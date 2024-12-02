@@ -12,13 +12,13 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c)
-	return not c:IsAbleToRestAsCost()
+	return not c:IsAbleToGraveAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g1=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
 	g1:RemoveCard(e:GetHandler())
 	if chk==0 then return #g1>0 and not g1:IsExists(s.cfilter,1,nil) end
-	Duel.SendtoRest(g1,REASON_COST)
+	Duel.SendtoGrave(g1,REASON_COST)
 end
 function s.filter(c)
 	return c:IsActional() and c:IsAbleToHand()

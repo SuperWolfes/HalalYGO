@@ -53,7 +53,7 @@ function s.initial_effect(c)
 end
 s.listed_names={90884404}
 function s.sprfilter(c)
-	return c:IsFaceup() and c:GetLevel()>7 and c:IsAbleToRestAsCost()
+	return c:IsFaceup() and c:GetLevel()>7 and c:IsAbleToGraveAsCost()
 end
 function s.sprfilter1(c,tp,g,sc)
 	local lv=c:GetLevel()
@@ -91,7 +91,7 @@ end
 function s.sprop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 	g:DeleteGroup()
 end
 function s.atkval(e,c)

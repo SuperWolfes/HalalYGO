@@ -47,7 +47,7 @@ function s.gycheck(sg,e,tp)
 	return sg:GetClassCount(Card.GetOriginalAttribute)==1 
 		and sg:GetClassCount(Card.GetOriginalRace)==1 
 		and sg:GetClassCount(Card.GetCode)==#sg
-		and Duel.IsExistingTarget(Card.IsAbleToRest,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,sg)
+		and Duel.IsExistingTarget(Card.IsAbleToGrave,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,sg)
 end
 function s.gycost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(s.gycfilter,tp,LOCATION_MZONE+LOCATION_REST,0,nil,tp)
@@ -56,15 +56,15 @@ function s.gycost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Remove(sg,POS_FACEUP,REASON_COST)
 end
 function s.gytg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsOnField() and chkc:IsAbleToRest() end
+	if chkc then return chkc:IsOnField() and chkc:IsAbleToGrave() end
 	if chk==0 then return true end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-	local g=Duel.SelectTarget(tp,Card.IsAbleToRest,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
+	local g=Duel.SelectTarget(tp,Card.IsAbleToGrave,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOREST,g,1,0,0)
 end
 function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) then
-		Duel.SendtoRest(tc,REASON_EFFECT)
+		Duel.SendtoGrave(tc,REASON_EFFECT)
 	end
 end

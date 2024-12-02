@@ -39,7 +39,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SkipPhase(Duel.GetTurnPlayer(),PHASE_BATTLE,RESET_PHASE+PHASE_BATTLE,1)
 	if sumtype&SUMMON_TYPE_FUSION==SUMMON_TYPE_FUSION and #mg>0
 		and #mg<=ft and (not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) or #mg==1) 
-		and mg:FilterCount(aux.RestValleyFilter(s.mgfilter),nil,e,tp,tc)==#mg then
+		and mg:FilterCount(aux.GraveValleyFilter(s.mgfilter),nil,e,tp,tc)==#mg then
 		Duel.BreakEffect()
 		if Duel.SpecialSummon(mg,0,tp,1-tp,false,false,POS_FACEUP) then
 			local mtg=mg:GetMaxGroup(Card.GetAttack)

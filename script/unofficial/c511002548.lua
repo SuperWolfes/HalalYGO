@@ -41,7 +41,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) then return end
 	local ct=Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)
-	if Duel.SendtoRest(c,REASON_EFFECT)>0 then
+	if Duel.SendtoGrave(c,REASON_EFFECT)>0 then
 		Duel.Damage(1-tp,ct*500,REASON_EFFECT)
 	end
 end

@@ -47,7 +47,7 @@ end
 	--Place on top of your Deck, 1 of your "Destrudic HERO" monsters that is banished, in GY, or Deck
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.filter),tp,LOCATION_DECK+LOCATION_REST+LOCATION_REMOVED,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.filter),tp,LOCATION_DECK+LOCATION_REST+LOCATION_REMOVED,0,1,1,nil)
 	local tc=g:GetFirst()
 	if not tc then return end
 	if tc:IsLocation(LOCATION_DECK) then

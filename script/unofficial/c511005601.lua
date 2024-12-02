@@ -57,6 +57,6 @@ function s.activate(e,tp,eg,ev,ep,re,r,rp)
 	local op=te:GetOperation()
 	if op then op(e,tp,eg,ep,ev,re,r,rp) end
 	if chk then
-		c:CancelToRest()
+		c:CancelToGrave()
 	end
 end

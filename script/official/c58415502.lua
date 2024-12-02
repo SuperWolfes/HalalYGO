@@ -17,7 +17,7 @@ end
 s.listed_names={CARD_JACK_KNIGHT,CARD_QUEEN_KNIGHT,CARD_KING_KNIGHT}
 function s.tgfilter(c)
 	return c:IsCode(CARD_JACK_KNIGHT,CARD_QUEEN_KNIGHT,CARD_KING_KNIGHT)
-		and (c:IsFaceup() or c:IsLocation(LOCATION_HAND)) and c:IsAbleToRest()
+		and (c:IsFaceup() or c:IsLocation(LOCATION_HAND)) and c:IsAbleToGrave()
 end
 s.listfilter=aux.OR(Card.ListsCode,Card.ListsCodeAsMaterial)
 function s.spfilter(c,e,tp)
@@ -51,7 +51,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	if #g<3 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	g=aux.SelectUnselectGroup(g,e,tp,3,3,s.tgrescon(summg),1,tp,HINTMSG_TOREST)
-	if #g==3 and Duel.SendtoRest(g,REASON_EFFECT)>0 then
+	if #g==3 and Duel.SendtoGrave(g,REASON_EFFECT)>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local sc=summg:FilterSelect(tp,s.spchkfilter,1,1,nil,nil,tp):GetFirst()
 		if sc then

@@ -52,16 +52,16 @@ function s.atkval(e,c)
 	return g:GetClassCount(Card.GetCode)*-100
 end
 function s.drcfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x121) and c:IsAbleToRestAsCost()
+	return c:IsFaceup() and c:IsSetCard(0x121) and c:IsAbleToGraveAsCost()
 end
 function s.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToRestAsCost()
+	if chk==0 then return c:IsAbleToGraveAsCost()
 		and Duel.IsExistingMatchingCard(s.drcfilter,tp,LOCATION_MZONE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.drcfilter,tp,LOCATION_MZONE,0,1,1,nil)
 	g:AddCard(c)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,1) end

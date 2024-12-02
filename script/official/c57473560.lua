@@ -35,7 +35,7 @@ end
 s.listed_names={CARD_SKULL_SERVANT,36021814,40991587}
 
 function s.tgfilter(c,code)
-	return c:IsCode(code) and c:IsAbleToRest()
+	return c:IsCode(code) and c:IsAbleToGrave()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil,CARD_SKULL_SERVANT)
@@ -51,7 +51,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local sg2=g2:Select(tp,1,1,nil)
 		sg1:Merge(sg2)
-		Duel.SendtoRest(sg1,REASON_EFFECT)
+		Duel.SendtoGrave(sg1,REASON_EFFECT)
 	end
 end
 function s.cfilter(c)

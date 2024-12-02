@@ -143,7 +143,7 @@ function s.agcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.agop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetLabelObject()
-	Duel.SendtoRest(tc,REASON_RULE)
+	Duel.SendtoGrave(tc,REASON_RULE)
 end
 function s.rstop2(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()

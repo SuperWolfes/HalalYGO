@@ -16,14 +16,14 @@ end
 s.listed_series={0x7}
 s.listed_names={83104731}
 function s.cfilter(c)
-	return c:IsSetCard(0x7) and c:IsAbleToRestAsCost()
+	return c:IsSetCard(0x7) and c:IsAbleToGraveAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(1)
 	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_MZONE,0,nil)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>-3 and #g>2 and aux.SelectUnselectGroup(g,e,tp,3,3,aux.ChkfMMZ(1),0) end
 	local sg=aux.SelectUnselectGroup(g,e,tp,3,3,aux.ChkfMMZ(1),1,tp,HINTMSG_TOREST)
-	Duel.SendtoRest(sg,REASON_COST)
+	Duel.SendtoGrave(sg,REASON_COST)
 end
 function s.filter(c,e,tp)
 	return c:IsCode(83104731) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)

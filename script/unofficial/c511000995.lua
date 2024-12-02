@@ -50,7 +50,7 @@ function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	local g=eg:GetFirst()
 	if re:GetHandler():IsRelateToEffect(re) and g:IsCanTurnSet() then
 		Duel.BreakEffect()
-		g:CancelToRest()
+		g:CancelToGrave()
 		Duel.ChangePosition(g,POS_FACEDOWN)
 		Duel.RaiseEvent(g,EVENT_SSET,e,REASON_EFFECT,1-tp,1-tp,0)
 	end

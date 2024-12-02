@@ -75,7 +75,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local rc=Duel.GetFirstTarget()
 	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=math.min(ft,1) end
 	if not rc or ct>ft then return end
-	local mg=Duel.GetMatchingGroup(aux.RestValleyFilter(s.spfilter),tp,LOCATION_HAND+LOCATION_REST+LOCATION_DECK,0,nil,e,tp,table.unpack(rc.material))
+	local mg=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.spfilter),tp,LOCATION_HAND+LOCATION_REST+LOCATION_DECK,0,nil,e,tp,table.unpack(rc.material))
 	local g=aux.SelectUnselectGroup(mg,e,tp,ct,ct,s.rescon2,1,tp,HINTMSG_SPSUMMON)
 	Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 end

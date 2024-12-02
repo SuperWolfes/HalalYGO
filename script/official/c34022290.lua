@@ -27,13 +27,13 @@ function s.spcon(e,c)
 		and not Duel.IsExistingMatchingCard(Card.IsMonster,c:GetControler(),LOCATION_REST,0,1,nil)
 end
 function s.cfilter(c)
-	return c:IsActional() and c:IsAbleToRestAsCost()
+	return c:IsActional() and c:IsAbleToGraveAsCost()
 end
 function s.rmcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():GetEquipGroup():IsExists(s.cfilter,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=e:GetHandler():GetEquipGroup():FilterSelect(tp,s.cfilter,1,1,nil)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.rmfilter(c)
 	return c:IsMonster() and c:IsAbleToRemove() and aux.SpElimFilter(c)

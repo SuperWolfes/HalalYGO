@@ -53,7 +53,7 @@ function s.actcon(e)
 	return bc and bc:IsFaceup() and bc:IsSetCard(0x18e)
 end
 function s.cacostfilter(c)
-	return c:IsType(TYPE_EQUIP) and c:IsAbleToRest()
+	return c:IsType(TYPE_EQUIP) and c:IsAbleToGrave()
 end
 function s.cacon(e,tp,eg,ep,ev,re,r,rp)
 	local bc=Duel.GetBattleMonster(tp)
@@ -63,7 +63,7 @@ function s.cacost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cacostfilter,tp,LOCATION_SZONE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cacostfilter,tp,LOCATION_SZONE,0,1,1,nil)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.caop(e,tp,eg,ep,ev,re,r,rp)
 	local bc=Duel.GetAttacker()

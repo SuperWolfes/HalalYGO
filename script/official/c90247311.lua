@@ -35,7 +35,7 @@ end
 function s.cfilter(c)
 	return ((c:IsMonster() and c:IsSetCard(0x2b)) or c:IsSetCard(0x61))
 		and (c:IsFaceup() or not c:IsOnField())
-		and c:IsAbleToRestAsCost()
+		and c:IsAbleToGraveAsCost()
 end
 function s.filter(c,e)
 	return c:IsActionalTrap() and (not e or c:IsCanBeEffectTarget(e))
@@ -87,7 +87,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local sg2=rg:FilterSelect(tp,s.costfilter2,1,1,sc,a,dg)
 		sg1:Merge(sg2)
-		Duel.SendtoRest(sg1,REASON_COST)
+		Duel.SendtoGrave(sg1,REASON_COST)
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,2,nil)

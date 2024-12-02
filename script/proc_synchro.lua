@@ -766,7 +766,7 @@ function Synchro.Operation(e,tp,eg,ep,ev,re,r,rp,c,smat,mg)
 		for tc in aux.Next(tg) do tc:ResetFlagEffect(3096468) end
 	end
 	if Synchro.Send==1 then
-		Duel.SendtoRest(g,REASON_MATERIAL+REASON_SYNCHRO+REASON_RETURN)
+		Duel.SendtoGrave(g,REASON_MATERIAL+REASON_SYNCHRO+REASON_RETURN)
 	elseif Synchro.Send==2 then
 		Duel.Remove(g,POS_FACEUP,REASON_MATERIAL+REASON_SYNCHRO)
 	elseif Synchro.Send==3 then
@@ -778,7 +778,7 @@ function Synchro.Operation(e,tp,eg,ep,ev,re,r,rp,c,smat,mg)
 	elseif Synchro.Send==6 then
 		Duel.Destroy(g,REASON_MATERIAL+REASON_SYNCHRO)
 	else
-		Duel.SendtoRest(g,REASON_MATERIAL+REASON_SYNCHRO)
+		Duel.SendtoGrave(g,REASON_MATERIAL+REASON_SYNCHRO)
 	end
 	Synchro.Send=0
 	Synchro.CheckAdditional=nil

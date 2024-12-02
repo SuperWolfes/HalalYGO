@@ -16,13 +16,13 @@ end
 s.listed_series={0x7}
 s.listed_names={CARD_POLYMERIZATION}
 function s.cfilter(c)
-	return c:IsCode(CARD_POLYMERIZATION) and c:IsAbleToRestAsCost()
+	return c:IsCode(CARD_POLYMERIZATION) and c:IsAbleToGraveAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND,0,1,1,nil)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.matfilter(c,e,tp,fc,se)
 	return c:IsMonster() and c:IsCanBeFusionMaterial(fc) and (not se or not c:IsImmuneToEffect(se)) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
@@ -97,12 +97,12 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local fc=Duel.GetFirstTarget()
-	local rg=Duel.GetMatchingGroup(aux.RestValleyFilter(s.rmfilter),tp,LOCATION_MZONE+LOCATION_REST,0,nil)
+	local rg=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.rmfilter),tp,LOCATION_MZONE+LOCATION_REST,0,nil)
 	if not fc or not fc:IsRelateToEffect(e) or not s.spfilter(fc,e,tp,rg,e) then return end
 	local minc=fc.min_material_count
 	local maxc=fc.max_material_count
 	local rsg
-	local mg=Duel.GetMatchingGroup(aux.RestValleyFilter(s.matfilter),tp,LOCATION_DECK+LOCATION_EXTRA+LOCATION_REST,0,nil,e,tp,fc,e)
+	local mg=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.matfilter),tp,LOCATION_DECK+LOCATION_EXTRA+LOCATION_REST,0,nil,e,tp,fc,e)
 	if Duel.IsPlayerAffectedByEffect(tp,69832741) then
 		local maxc2=math.min(#rg,maxc)
 		local mft=Duel.GetLocationCount(tp,LOCATION_MZONE)
@@ -142,7 +142,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 	Duel.BreakEffect()
 	fc:SetMaterial(matg)
-	Duel.SendtoRest(matg,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
+	Duel.SendtoGrave(matg,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
 	Duel.BreakEffect()
 	Duel.SpecialSummon(fc,SUMMON_TYPE_FUSION,tp,tp,false,false,POS_FACEUP)
 end

@@ -72,7 +72,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		c:RegisterEffect(e2,true)
 	end
 	Duel.SpecialSummonComplete()
-	--Restricted to level/rank 3+ monsters
+	--Gravericted to level/rank 3+ monsters
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetType(EFFECT_TYPE_FIELD)
@@ -83,7 +83,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	e3:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e3,tp)
 end
-	--Restricted to level/rank 3+ monsters
+	--Gravericted to level/rank 3+ monsters
 function s.splimit(e,c)
 	return not (c:IsLevelAbove(3) or c:IsRankAbove(3))
 end

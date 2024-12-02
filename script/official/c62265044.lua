@@ -34,7 +34,7 @@ function s.filter1(c)
 	return c:IsLevelBelow(4) and c:IsSetCard(0x29) and c:IsAbleToHand()
 end
 function s.filter2(c)
-	return c:IsRace(RACE_DRAGON) and c:IsAbleToRest()
+	return c:IsRace(RACE_DRAGON) and c:IsAbleToGrave()
 end
 function s.target1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter1,tp,LOCATION_DECK,0,1,nil) end
@@ -58,6 +58,6 @@ function s.operation2(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	end
 end

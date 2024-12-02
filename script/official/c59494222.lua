@@ -1,5 +1,5 @@
 --墓守の刻印
---Restkeeper's Engraving
+--Gravekeeper's Engraving
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)

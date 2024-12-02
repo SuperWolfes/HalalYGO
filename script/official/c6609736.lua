@@ -31,7 +31,7 @@ s.listed_names={id}
 s.listed_series={0x173}
 --Special Summon (from hand)
 function s.tgyspcheck(c,rc,e,tp)
-	return c:IsCanBeSpecialSummoned(e,0,tp,false,false) and rc:IsAbleToRest()
+	return c:IsCanBeSpecialSummoned(e,0,tp,false,false) and rc:IsAbleToGrave()
 end
 function s.cfilter(c,e,tp,rc)
 	return c:IsSetCard(0x173) and c:IsMonster() and not c:IsPublic()
@@ -58,7 +58,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local sg=g:FilterSelect(tp,Card.IsCanBeSpecialSummoned,1,1,nil,e,0,tp,false,false)
 	if #sg>0 and Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)>0 then
-		Duel.SendtoRest(g-sg,REASON_EFFECT)
+		Duel.SendtoGrave(g-sg,REASON_EFFECT)
 	end
 end
 --Special Summon (from GY)

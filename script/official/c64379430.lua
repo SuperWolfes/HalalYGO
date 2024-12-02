@@ -42,5 +42,5 @@ function s.rettg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.retop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.filter,0,LOCATION_REMOVED,LOCATION_REMOVED,nil)
-	Duel.SendtoRest(g,REASON_EFFECT+REASON_RETURN)
+	Duel.SendtoGrave(g,REASON_EFFECT+REASON_RETURN)
 end

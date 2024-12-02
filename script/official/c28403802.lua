@@ -43,7 +43,7 @@ function s.thgcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.PayLPCost(tp,600)
 end
 function s.thgfilter(c)
-	return c:IsLevel(3) and c:IsRace(RACE_MENTAL) and (c:IsAbleToHand() or c:IsAbleToRest())
+	return c:IsLevel(3) and c:IsRace(RACE_MENTAL) and (c:IsAbleToHand() or c:IsAbleToGrave())
 end
 function s.thgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thgfilter,tp,LOCATION_DECK,0,1,nil) end

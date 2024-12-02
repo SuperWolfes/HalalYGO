@@ -20,7 +20,7 @@ end
 s.listed_series={0xf4}
 s.listed_names={86120751}
 function s.matfilter(c)
-	return (c:IsLocation(LOCATION_HAND) and c:IsAbleToRest()) or (c:IsOnField() and c:IsAbleToRemove())
+	return (c:IsLocation(LOCATION_HAND) and c:IsAbleToGrave()) or (c:IsOnField() and c:IsAbleToRemove())
 end
 function s.checkmat(tp,sg,fc)
 	return fc:IsSetCard(0xf4) or not sg:IsExists(Card.IsLocation,1,nil,LOCATION_REST+LOCATION_ONFIELD)

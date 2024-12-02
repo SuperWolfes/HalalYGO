@@ -26,14 +26,14 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			if fc then Duel.Destroy(fc,REASON_RULE) end
 			of=Duel.GetFieldCard(1-tp,LOCATION_SZONE,5)
 			if of and Duel.Destroy(of,REASON_RULE)==0 then
-				Duel.SendtoRest(c,REASON_RULE)
+				Duel.SendtoGrave(c,REASON_RULE)
 				return false
 			else
 				Duel.BreakEffect()
 			end
 		else
-			if fc and Duel.SendtoRest(fc,REASON_RULE)==0 then
-				Duel.SendtoRest(c,REASON_RULE)
+			if fc and Duel.SendtoGrave(fc,REASON_RULE)==0 then
+				Duel.SendtoGrave(c,REASON_RULE)
 				return false
 			else
 				Duel.BreakEffect()

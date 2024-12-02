@@ -48,10 +48,10 @@ function s.thfilter(c)
 	return (s.filter1(c) or s.filter2(c)) and c:IsAbleToHand()
 end
 function s.tgfilter1(c)
-	return s.filter1(c) and c:IsAbleToRest()
+	return s.filter1(c) and c:IsAbleToGrave()
 end
 function s.tgfilter2(c)
-	return s.filter2(c) and c:IsAbleToRest()
+	return s.filter2(c) and c:IsAbleToGrave()
 end
 	--Activation legality
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -90,5 +90,5 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local g1,g2=Duel.GetMatchingGroup(s.tgfilter1,tp,LOCATION_DECK,0,nil),Duel.GetMatchingGroup(s.tgfilter2,tp,LOCATION_DECK,0,nil)
 	g1:Merge(g2)
 	local sg=aux.SelectUnselectGroup(g1,e,tp,1,2,s.ctcheck,1,tp,HINTMSG_TOREST)
-	if #sg>0 then Duel.SendtoRest(sg,REASON_EFFECT) end
+	if #sg>0 then Duel.SendtoGrave(sg,REASON_EFFECT) end
 end

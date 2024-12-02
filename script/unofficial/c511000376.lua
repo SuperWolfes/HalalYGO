@@ -22,6 +22,6 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
 	if #g>0 then
-		Duel.SendtoRest(g,REASON_EFFECT,1-tp)
+		Duel.SendtoGrave(g,REASON_EFFECT,1-tp)
 	end
 end

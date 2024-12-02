@@ -124,7 +124,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsRelateToEffect(e) then
 		if c:IsFaceup() and c:IsRelateToEffect(e) and tc~=c then
 			s.equipop(c,e,tp,tc)
-		else Duel.SendtoRest(tc,REASON_EFFECT) end
+		else Duel.SendtoGrave(tc,REASON_EFFECT) end
 	end
 end
 function s.eqtg2(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -148,10 +148,10 @@ function s.discon(e,tp,eg,ep,ev,re,r,rp)
 	return tg and tg:IsContains(e:GetHandler()) and Duel.IsChainDisablable(ev)
 end
 function s.discost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():GetEquipGroup():IsExists(Card.IsAbleToRestAsCost,1,nil) end
+	if chk==0 then return e:GetHandler():GetEquipGroup():IsExists(Card.IsAbleToGraveAsCost,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-	local g=e:GetHandler():GetEquipGroup():FilterSelect(tp,Card.IsAbleToRestAsCost,1,1,nil)
-	Duel.SendtoRest(g,REASON_COST)
+	local g=e:GetHandler():GetEquipGroup():FilterSelect(tp,Card.IsAbleToGraveAsCost,1,1,nil)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.distg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

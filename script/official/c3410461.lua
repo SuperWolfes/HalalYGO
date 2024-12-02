@@ -34,13 +34,13 @@ function s.splimit(e,se,sp,st)
 	return (st&SUMMON_TYPE_FUSION)==SUMMON_TYPE_FUSION
 end
 function s.matfilter(c,tp)
-	return c:IsAbleToRestAsCost() and (c:IsFaceup() or c:IsControler(tp))
+	return c:IsAbleToGraveAsCost() and (c:IsFaceup() or c:IsControler(tp))
 end
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(s.matfilter,tp,LOCATION_MZONE,LOCATION_MZONE,nil,tp)
 end
 function s.contactop(g)
-	Duel.SendtoRest(g,REASON_COST+REASON_MATERIAL)
+	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

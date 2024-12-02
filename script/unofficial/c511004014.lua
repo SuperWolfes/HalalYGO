@@ -198,8 +198,8 @@ function s.op(oc)
 	for tc2 in aux.Next(g2) do
 		tc2:RegisterFlagEffect(511004017,0,0,0)
 	end
-	local proc=Duel.SendtoRest
-	Duel.SendtoRest=function(tg,r,tp)
+	local proc=Duel.SendtoGrave
+	Duel.SendtoGrave=function(tg,r,tp)
 		if tp then
 			if type(tg)=='Card' then
 				tg:RegisterFlagEffect(511004018,RESET_EVENT+RESETS_STANDARD,0,1)
@@ -274,7 +274,7 @@ function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 		if c:GetReason()&REASON_DESTROY==REASON_DESTROY then
 			c:RegisterFlagEffect(511000173,RESET_CHAIN,0,1)
 		end
-		Duel.SendtoRest(c,c:GetReason(),c:GetControler())
+		Duel.SendtoGrave(c,c:GetReason(),c:GetControler())
 	end
 	return true
 end
@@ -287,7 +287,7 @@ end
 function s.grepop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(Card.IsStatus,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil,STATUS_LEAVE_CONFIRMED)
 	for c in aux.Next(g) do
-		c:CancelToRest()
+		c:CancelToGrave()
 		c:RegisterFlagEffect(STATUS_LEAVE_CONFIRMED,RESET_EVENT+RESETS_STANDARD,0,1)
 	end
 end
@@ -300,8 +300,8 @@ end
 function s.grepop2(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.grepfilter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil)
 	for c in aux.Next(g) do
-		c:CancelToRest(false)
-		Duel.SendtoRest(c,REASON_RULE,c:GetControler())
+		c:CancelToGrave(false)
+		Duel.SendtoGrave(c,REASON_RULE,c:GetControler())
 	end
 end
 function s.mvalue(e,fp,rp,r)

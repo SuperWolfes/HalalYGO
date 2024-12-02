@@ -1,5 +1,5 @@
 --墓守の霊術師
---Restkeeper's Guardianualist
+--Gravekeeper's Guardianualist
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion summon

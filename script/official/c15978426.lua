@@ -20,7 +20,7 @@ s.listed_series={0x9f}
 s.listed_names={}
 function s.filter(c,tohand)
 	return c:IsSetCard(0x9f) and not c:IsCode(id) and c:IsMonster()
-		and (c:IsAbleToRest() or (tohand and c:IsAbleToHand()))
+		and (c:IsAbleToGrave() or (tohand and c:IsAbleToHand()))
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
@@ -38,6 +38,6 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	if tohand then
 		aux.ToHandOrElse(tc,tp)
 	else
-		Duel.SendtoRest(tc,REASON_EFFECT)
+		Duel.SendtoGrave(tc,REASON_EFFECT)
 	end
 end

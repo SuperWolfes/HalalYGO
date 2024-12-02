@@ -25,8 +25,8 @@ function s.dmcon(e,tp,eg,ep,ev,re,r,rp)
 		or (d:GetControler()==tp and d:IsRelateToBattle())) and Duel.GetLP(tp)<Duel.GetLP(1-tp)
 end
 function s.dmcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
-	Duel.SendtoRest(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
+	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
 end
 function s.dmtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

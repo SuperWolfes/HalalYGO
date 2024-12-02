@@ -41,10 +41,10 @@ function s.initial_effect(c)
 end
 s.listed_series={0x614d,0xc0}
 function s.spfilter1(c)
-	return c:IsFaceup() and c:IsRace(RACE_MENTOR) and c:IsAbleToRestAsCost()
+	return c:IsFaceup() and c:IsRace(RACE_MENTOR) and c:IsAbleToGraveAsCost()
 end
 function s.spfilter2(c)
-	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_WATER) and c:IsLevelBelow(4) and c:IsAbleToRestAsCost()
+	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_WATER) and c:IsLevelBelow(4) and c:IsAbleToGraveAsCost()
 end
 function s.rescon(sg,e,tp,mg)
 	return aux.ChkfMMZ(1)(sg,e,tp,mg) and sg:IsExists(s.chk,1,nil,sg,tp)
@@ -77,7 +77,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 	if e:GetHandler():IsLocation(LOCATION_DECK) then
 		Duel.ShuffleDeck(tp)
 	end
@@ -95,7 +95,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(1-tp,LOCATION_HAND,0)
 	if #g==0 then return end
 	local sg=g:RandomSelect(1-tp,1)
-	if Duel.SendtoRest(sg,REASON_EFFECT)>0 then
+	if Duel.SendtoGrave(sg,REASON_EFFECT)>0 then
 		local og=Duel.GetOperatedGroup()
 		if og:GetFirst():IsLocation(LOCATION_REST) then
 			Duel.BreakEffect()

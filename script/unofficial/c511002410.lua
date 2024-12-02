@@ -38,7 +38,7 @@ function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.desrepop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	c:CancelToRest()
+	c:CancelToGrave()
 	Duel.ChangePosition(c,POS_FACEDOWN)
 	Duel.RaiseEvent(c,EVENT_SSET,e,REASON_EFFECT,tp,tp,0)
 end

@@ -43,8 +43,8 @@ function s.condition2(e,tp,eg,ep,ev,re,r,rp)
 		or (d:GetControler()==tp and d:IsAttribute(ATTRIBUTE_LIGHT) and d:IsRelateToBattle()))
 end
 function s.cost2(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
-	Duel.SendtoRest(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
+	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
 end
 function s.operation2(e,tp,eg,ep,ev,re,r,rp,chk)
 	local a=Duel.GetAttacker()

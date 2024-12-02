@@ -9,6 +9,6 @@ function s.initial_effect(c)
 end
 function s.fextra(e,tp,mg)
 	if Duel.GetFieldGroupCount(tp,LOCATION_PZONE,0)==2 then
-		return Duel.GetMatchingGroup(Card.IsAbleToRest,tp,LOCATION_PZONE,0,nil)
+		return Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,LOCATION_PZONE,0,nil)
 	end
 end

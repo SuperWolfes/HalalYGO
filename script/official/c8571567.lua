@@ -32,8 +32,8 @@ s.listed_series={0x33}
 s.listed_names={7602800,CARD_BLACK_WINGED_DRAGON}
 function s.tfcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToRestAsCost() end
-	Duel.SendtoRest(c,REASON_COST)
+	if chk==0 then return c:IsAbleToGraveAsCost() end
+	Duel.SendtoGrave(c,REASON_COST)
 end
 function s.tffilter(c,tp)
 	return c:IsCode(7602800) and not c:IsUnliked() and c:CheckUniqueOnField(tp)

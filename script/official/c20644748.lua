@@ -70,7 +70,7 @@ function s.adjustop(e,tp,eg,ep,ev,re,r,rp)
 			local g2=Duel.SelectMatchingCard(1-tp,nil,1-tp,LOCATION_ONFIELD,0,c2-5,c2-5,nil)
 			g:Merge(g2)
 		end
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 		Duel.Readjust()
 	end
 end

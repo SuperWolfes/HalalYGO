@@ -25,12 +25,12 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local ct=h1-4
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g1=Duel.SelectMatchingCard(tp,aux.TRUE,tp,LOCATION_HAND,0,ct,ct,nil)
-		Duel.SendtoRest(g1,REASON_EFFECT)
+		Duel.SendtoGrave(g1,REASON_EFFECT)
 	end
 	if h2>4 then
 		local ct=h2-4
 		Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOREST)
 		local g2=Duel.SelectMatchingCard(1-tp,aux.TRUE,1-tp,LOCATION_HAND,0,ct,ct,nil)
-		Duel.SendtoRest(g2,REASON_EFFECT)
+		Duel.SendtoGrave(g2,REASON_EFFECT)
 	end
 end

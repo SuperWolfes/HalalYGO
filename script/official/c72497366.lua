@@ -39,7 +39,7 @@ function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 		and tc:IsRace(RACE_TAINTED) and tc:IsLevelAbove(5) and tc:IsSummonType(SUMMON_TYPE_NORMAL) 
 		and not tc:IsReason(REASON_REPLACE) end
 	if Duel.SelectEffectYesNo(tp,e:GetHandler(),96) then
-		Duel.SendtoRest(e:GetHandler(),REASON_EFFECT)
+		Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
 		return true
 	else return false end
 end

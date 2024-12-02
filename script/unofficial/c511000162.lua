@@ -1,4 +1,4 @@
---Altar of Restoration
+--Altar of Graveoration
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

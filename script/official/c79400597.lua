@@ -105,6 +105,6 @@ end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local sg=Duel.GetTargetCards(e)
 	if #sg>0 then
-		Duel.SendtoRest(sg,REASON_EFFECT+REASON_RETURN)
+		Duel.SendtoGrave(sg,REASON_EFFECT+REASON_RETURN)
 	end
 end

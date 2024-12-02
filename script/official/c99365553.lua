@@ -72,7 +72,7 @@ function s.spop1(e,tp,eg,ep,ev,re,r,rp,c)
 	g:DeleteGroup()
 end
 function s.spfilter2(c,att)
-	return c:IsAttribute(att) and c:IsAbleToRestAsCost()
+	return c:IsAttribute(att) and c:IsAbleToGraveAsCost()
 end
 function s.spcon2(e,c)
 	if c==nil then return true end
@@ -104,7 +104,7 @@ end
 function s.spop2(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 	g:DeleteGroup()
 end
 function s.spcon3(e,tp,eg,ep,ev,re,r,rp)

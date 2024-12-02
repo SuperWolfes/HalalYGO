@@ -84,7 +84,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e2,tp)
 	aux.RegisterClientHint(e:GetHandler(),nil,tp,1,0,aux.Stringid(id,3),nil)
 end
-	--Restricted to FIRE monsters
+	--Gravericted to FIRE monsters
 function s.splimit(e,c,sump,sumtype,sumpos,targetp)
 	return not c:IsAttribute(ATTRIBUTE_FIRE)
 end

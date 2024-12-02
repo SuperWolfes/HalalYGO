@@ -10,7 +10,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x152}
 function s.mfilter(c)
-	return (c:IsLocation(LOCATION_HAND+LOCATION_MZONE) and c:IsAbleToRest())
+	return (c:IsLocation(LOCATION_HAND+LOCATION_MZONE) and c:IsAbleToGrave())
 		or (c:IsOriginalType(TYPE_MONSTER) and c:IsLocation(LOCATION_SZONE) and c:IsType(TYPE_EQUIP) and c:GetEquipTarget():IsSetCard(0x152))
 end
 function s.checkmat(tp,sg,fc)

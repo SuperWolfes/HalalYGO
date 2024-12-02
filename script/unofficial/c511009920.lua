@@ -17,14 +17,14 @@ function s.initial_effect(c)
 end
 s.listed_series={0x579}
 function s.costfilter(c)
-	return c:IsSetCard(0x579) and c:IsMonster() and c:IsAbleToRestAsCost()
+	return c:IsSetCard(0x579) and c:IsMonster() and c:IsAbleToGraveAsCost()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,1,c)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.spfilter(c,e,tp)
 	return c:IsSetCard(0x579) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

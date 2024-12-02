@@ -14,7 +14,7 @@ function s.initial_effect(c)
 end
 function s.filter(c,e,tp)
 	local mg=c:GetMaterial()
-	return c:IsFaceup() and c:IsType(TYPE_PLUS) and c:IsType(TYPE_MINUS) and c:IsAbleToRest() and #mg>0 
+	return c:IsFaceup() and c:IsType(TYPE_PLUS) and c:IsType(TYPE_MINUS) and c:IsAbleToGrave() and #mg>0 
 		and Duel.GetLocationCount(tp,LOCATION_MZONE)>=#mg+1 and not mg:IsExists(s.mgfilter,1,nil,e,tp,c)
 end
 function s.mgfilter(c,e,tp,card)
@@ -34,8 +34,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not tc or not tc:IsRelateToEffect(e) or tc:IsFacedown() then return end
 	local mg=tc:GetMaterial()
 	local ct=#mg
-	if Duel.SendtoRest(tc,REASON_EFFECT)>0 and ct>0 and (ct==1 or not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)) and ct<=Duel.GetLocationCount(tp,LOCATION_MZONE)
-		and mg:FilterCount(aux.RestValleyFilter(s.mgfilter),nil,e,tp,tc)==ct then
+	if Duel.SendtoGrave(tc,REASON_EFFECT)>0 and ct>0 and (ct==1 or not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)) and ct<=Duel.GetLocationCount(tp,LOCATION_MZONE)
+		and mg:FilterCount(aux.GraveValleyFilter(s.mgfilter),nil,e,tp,tc)==ct then
 		Duel.BreakEffect()
 		Duel.SpecialSummon(mg,0,tp,tp,false,false,POS_FACEUP)
 	end

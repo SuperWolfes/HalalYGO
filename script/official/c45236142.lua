@@ -64,8 +64,8 @@ function s.replaceop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.searchcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToRestAsCost() end
-	Duel.SendtoRest(c,REASON_COST)
+	if chk==0 then return c:IsAbleToGraveAsCost() end
+	Duel.SendtoGrave(c,REASON_COST)
 end
 function s.sfilter(c)
 	return c:IsCode(CARD_ADVANCED_DARK) and c:IsAbleToHand()

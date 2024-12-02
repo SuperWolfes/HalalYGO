@@ -84,7 +84,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.filter(c)
 	return (c:IsSetCard(0x99) or c:IsSetCard(0x9f)) and c:IsType(TYPE_PENDULUM)
-		and (not c:IsUnliked() or c:IsAbleToRest())
+		and (not c:IsUnliked() or c:IsAbleToGrave())
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end
@@ -96,7 +96,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil):GetFirst()
 	if not tc then return end
 	local b1=not tc:IsUnliked()
-	local b2=tc:IsAbleToRest()
+	local b2=tc:IsAbleToGrave()
 	if not (b1 or b2) then return end
 	local op=Duel.SelectEffect(tp,
 		{b1,aux.Stringid(id,4)},
@@ -104,6 +104,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if op==1 then
 		Duel.SendtoExtraP(tc,tp,REASON_EFFECT)
 	elseif op==2 then
-		Duel.SendtoRest(tc,REASON_EFFECT)
+		Duel.SendtoGrave(tc,REASON_EFFECT)
 	end
 end

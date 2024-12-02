@@ -26,7 +26,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 	local g2=Duel.SelectMatchingCard(tp,s.cfilter2,tp,LOCATION_HAND,0,1,1,g1:GetFirst(),e,tp,g1:GetFirst())
 	g1:Merge(g2)
-	Duel.SendtoRest(g1,REASON_DISCARD+REASON_COST)
+	Duel.SendtoGrave(g1,REASON_DISCARD+REASON_COST)
 end
 function s.filter(c,e,tp,c2,c3)
 	if c==c2 or c==c3 then return false end

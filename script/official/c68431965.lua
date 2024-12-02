@@ -34,7 +34,7 @@ function s.lvlcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_SYNCHRO)
 end
 function s.tgfilter(c,lv)
-	return c:IsLevelBelow(lv-1) and c:IsAbleToRest()
+	return c:IsLevelBelow(lv-1) and c:IsAbleToGrave()
 end
 function s.lvtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil,e:GetHandler():GetLevel()) end
@@ -45,7 +45,7 @@ function s.lvop(e,tp,eg,ep,ev,re,r,rp)
 	if not (c:IsRelateToEffect(e) and c:IsFaceup()) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil,c:GetLevel())
-	if #g==0 or Duel.SendtoRest(g,REASON_EFFECT)~=g:FilterCount(Card.IsLocation,nil,LOCATION_REST) then return end
+	if #g==0 or Duel.SendtoGrave(g,REASON_EFFECT)~=g:FilterCount(Card.IsLocation,nil,LOCATION_REST) then return end
 	local tc=g:GetFirst()
 	local lv=tc:GetLevel()
 	--Change Level

@@ -28,7 +28,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,1-tp,LOCATION_HAND+LOCATION_DECK)
 end
 function s.filter(c,rc,att)
-	return c:IsRace(rc) and c:IsAttribute(att) and c:IsAbleToRest()
+	return c:IsRace(rc) and c:IsAttribute(att) and c:IsAbleToGrave()
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local att=e:GetLabel()
@@ -36,7 +36,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(p,s.filter,p,LOCATION_HAND+LOCATION_DECK,0,1,1,nil,rc,att)
 	if #g>0 then
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	else
 		Duel.GoatConfirm(tp,LOCATION_HAND+LOCATION_DECK)
 	end

@@ -40,7 +40,7 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter(chkc,e,tp) end
 	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil,e,tp) 
-		and Duel.IsExistingMatchingCard(Card.IsAbleToRest,tp,LOCATION_HAND,0,1,nil) end
+		and Duel.IsExistingMatchingCard(Card.IsAbleToGrave,tp,LOCATION_HAND,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EFFECT)
 	Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil,tp,eg,ep,ev,re,r,rp)
 	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_HAND)
@@ -48,8 +48,8 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToRest,tp,LOCATION_HAND,0,1,1,nil)
-	if #g>0 and Duel.SendtoRest(g,REASON_EFFECT)~=0 then
+	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToGrave,tp,LOCATION_HAND,0,1,1,nil)
+	if #g>0 and Duel.SendtoGrave(g,REASON_EFFECT)~=0 then
 		if tc and tc:IsRelateToEffect(e) and not tc:IsHasEffect(EFFECT_CANNOT_TRIGGER) then
 			local tpe=tc:GetType()
 			local te=tc:GetActivateEffect()
@@ -77,17 +77,17 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 					if Duel.IsDuelType(DUEL_1_FIELD) then
 						if fc then Duel.Destroy(fc,REASON_RULE) end
 						fc=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
-						if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
+						if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
 					else
 						fc=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
-						if fc and Duel.SendtoRest(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
+						if fc and Duel.SendtoGrave(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
 					end
 				end
 				Duel.MoveToField(tc,tp,tp,loc,POS_FACEUP,true)
 				Duel.Hint(HINT_CARD,0,tc:GetCode())
 				tc:CreateEffectRelation(te)
 				if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 and not tc:IsHasEffect(EFFECT_REMAIN_FIELD) then
-					tc:CancelToRest(false)
+					tc:CancelToGrave(false)
 				end
 				if co then co(te,tp,eg,ep,ev,re,r,rp,1) end
 				if tg then tg(te,tp,eg,ep,ev,re,r,rp,1) end

@@ -36,7 +36,7 @@ function s.poscon(e,tp,eg,ep,ev,re,r,rp)
 		or Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,0x182),tp,LOCATION_MZONE,0,1,nil)
 end
 function s.tgfilter(c)
-	return c:IsSetCard(0x182) and c:IsMonster() and c:IsAbleToRest()
+	return c:IsSetCard(0x182) and c:IsMonster() and c:IsAbleToGrave()
 end
 function s.postg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(1-tp) and chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() and chkc:IsCanTurnSet() end
@@ -54,7 +54,7 @@ function s.posop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
 		Duel.BreakEffect()
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	end
 end
 function s.thfilter(c)
