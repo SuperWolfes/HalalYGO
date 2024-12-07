@@ -5,6 +5,7 @@ conversion_path = "output_sorted.txt"  # Path of halal conversions txt, preferab
 
 def convert_scripts_content(scripts_path, conversion_path, output="output_scripts"):
     exceptions = ["PHANT",  # PHANT because of the ELEPHANT win condition
+                  "Grave", "Forbidden", "Reviv", ""
                   "SUMMON", "Summon", "summon", "Earth", "EARTH", "earth"]
     # Some extras
     words_to_convert = {"GY": "RP"} 
