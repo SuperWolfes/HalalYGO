@@ -1,5 +1,5 @@
 --ウィッチクラフト・バイストリート
---Mintcrafter Bystreet
+--Witchcrafter Bystreet
 --Scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -18,14 +18,14 @@ function s.initial_effect(c)
 	e2:SetValue(s.indct)
 	c:RegisterEffect(e2)
 	--replace discard effect
-	local e3=aux.CreateMintcrafterReplace(c,id)
+	local e3=aux.CreateWitchcrafterReplace(c,id)
 	e3:SetDescription(aux.Stringid(id,2))
 	c:RegisterEffect(e3)
 	--to S/T Zone
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
-	e4:SetRange(LOCATION_REST)
+	e4:SetRange(LOCATION_GRAVE)
 	e4:SetCode(EVENT_PHASE+PHASE_END)
 	e4:SetCountLimit(1,id)
 	e4:SetCondition(s.tfcond)
@@ -46,7 +46,7 @@ function s.tfcond(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.tftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0 end
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,e:GetHandler(),1,tp,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,e:GetHandler(),1,tp,0)
 end
 function s.tfop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

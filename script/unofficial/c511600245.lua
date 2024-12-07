@@ -34,7 +34,7 @@ function s.spcon(e,c)
 		Duel.IsExistingMatchingCard(s.filter,c:GetControler(),LOCATION_MZONE,0,1,nil)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return re and re:GetHandler():IsDrone() and e:GetHandler():IsPreviousLocation(LOCATION_REST)
+	return re and re:GetHandler():IsDrone() and e:GetHandler():IsPreviousLocation(LOCATION_GRAVE)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

@@ -41,13 +41,13 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_ADVENTURER,0,TYPES_TOKEN,2000,2000,4,RACE_WANDERER,ATTRIBUTE_EARTH)
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_ADVENTURER,0,TYPES_TOKEN,2000,2000,4,RACE_FAIRY,ATTRIBUTE_EARTH)
 	end
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,0)
 end
 function s.plfilter(c)
-	return c:IsCode(39568067) and not c:IsUnliked()
+	return c:IsCode(39568067) and not c:IsForbidden()
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if not s.sptg(e,tp,eg,ep,ev,re,r,rp,0) then return end

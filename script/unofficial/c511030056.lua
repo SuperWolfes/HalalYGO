@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Link Summon
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Link.AddProcedure(c,s.matfilter,1)
 	--cannot be Link Material
 	local e1=Effect.CreateEffect(c)
@@ -56,11 +56,11 @@ end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local colinked=false
 	if e:GetLabel()==1 then colinked=true end
-	if chkc then return chkc:IsLocation(LOCATION_REST) and c:IsControler(tp) and s.spfilter(chkc,e,tp,colinked) end
-	if chk==0 then return Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp,colinked) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and c:IsControler(tp) and s.spfilter(chkc,e,tp,colinked) end
+	if chk==0 then return Duel.IsExistingTarget(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp,colinked) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp,colinked)
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,LOCATION_REST)
+	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp,colinked)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,LOCATION_GRAVE)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()

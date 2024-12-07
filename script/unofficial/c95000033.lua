@@ -1,4 +1,4 @@
---Gabrion, the Timewatcher
+--Gabrion, the Timelord
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableUnsummonable()
@@ -32,7 +32,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if Duel.GetLocationCount(tp,LOCATION_MZONE)>1 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) 
+	if Duel.GetLocationCount(tp,LOCATION_MZONE)>1 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) 
 		and Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0,TYPES_TOKEN,0,0,0,0,0) then
 		for i=1,2 do
 			local token=Duel.CreateToken(tp,id+i)

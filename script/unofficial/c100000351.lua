@@ -33,7 +33,7 @@ function s.filter(c)
 	return c:IsFaceup() and c:IsType(TYPE_XYZ) and c:GetOverlayCount()==0
 end
 function s.filter2(c)
-	return c:IsActionalTrap() and c:IsFacedown()
+	return c:IsSpellTrap() and c:IsFacedown()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and s.filter(chkc) end
@@ -48,7 +48,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsRelateToEffect(e) and tc:IsFaceup() and c:IsRelateToEffect(e) then
 		local g=Duel.SelectMatchingCard(tp,s.filter2,tp,0,LOCATION_SZONE,1,1,e:GetHandler())
 		if #g>0 then
-			c:CancelToRest()
+			c:CancelToGrave()
 			g:AddCard(c)
 			Duel.Overlay(tc,g)
 		end

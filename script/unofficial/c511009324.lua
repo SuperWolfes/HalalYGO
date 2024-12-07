@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_TOREST+CATEGORY_SPECIAL_SUMMON+CATEGORY_EQUIP+CATEGORY_FUSION_SUMMON)
+	e1:SetCategory(CATEGORY_TOGRAVE+CATEGORY_SPECIAL_SUMMON+CATEGORY_EQUIP+CATEGORY_FUSION_SUMMON)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
@@ -28,7 +28,7 @@ end
 s.listed_names={6205579,511009344}
 function s.filter2(c,tp,mc,e)
 	local g=Group.FromCards(c,mc)
-	return c:IsFaceup() and c:IsCode(6205579) and c:IsAbleToRest()
+	return c:IsFaceup() and c:IsCode(6205579) and c:IsAbleToGrave()
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,g)
 end
 function s.eqfilter(c)
@@ -37,7 +37,7 @@ end
 function s.filter(c,tp,e)
 	local g=c:GetEquipGroup()
 	local chk=false
-	return g:IsExists(s.eqfilter,1,nil) and c:IsAbleToRest() 
+	return g:IsExists(s.eqfilter,1,nil) and c:IsAbleToGrave() 
 		and Duel.IsExistingTarget(s.filter2,tp,LOCATION_ONFIELD,0,1,c,tp,c,e)
 end
 function s.spfilter(c,e,tp,mg)
@@ -47,19 +47,19 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
 	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil,tp,e) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g1=Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil,tp,e)
 	local tc=g1:GetFirst()
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g2=Duel.SelectTarget(tp,s.filter2,tp,LOCATION_ONFIELD,0,1,1,tc,tp,tc,e)
 	g1:Merge(g2)
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,g1,#g1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,g1,#g1,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	local tg=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
 	local g=tg:Filter(Card.IsRelateToEffect,nil,e)
-	if #g>0 and Duel.SendtoRest(g,REASON_EFFECT)>0 then
+	if #g>0 and Duel.SendtoGrave(g,REASON_EFFECT)>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local sc=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,g):GetFirst()
 		if sc and Duel.SpecialSummonStep(sc,SUMMON_TYPE_FUSION,tp,tp,false,false,POS_FACEUP) then
@@ -73,7 +73,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 			sc:RegisterEffect(e1,true)
 			Duel.SpecialSummonComplete()
-			local eqg=Duel.GetMatchingGroup(Card.IsCode,tp,LOCATION_REST,LOCATION_REST,nil,6205579)
+			local eqg=Duel.GetMatchingGroup(Card.IsCode,tp,LOCATION_GRAVE,LOCATION_GRAVE,nil,6205579)
 			if #eqg>Duel.GetLocationCount(tp,LOCATION_SZONE) then return end
 			local eqc=eqg:GetFirst()
 			while eqc do

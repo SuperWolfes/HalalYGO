@@ -9,7 +9,7 @@ function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 	--condition for the first effect:
 	local b1=Duel.GetFlagEffect(tp,id)==0
 		and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp)
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp)
 	--condition for the second effect:
 	local params={fusfilter=s.fusmonfilter,
 					matfilter=Fusion.OnFieldMat,
@@ -30,12 +30,12 @@ function s.specialcheck(tp,sg,fc)
 	return sg:GetClassCount(Card.GetLocation,nil)==#sg
 end
 function s.extrafusmat(e,tp,mg)
-	return Duel.GetMatchingGroup(Card.IsAbleToRest,tp,LOCATION_DECK,0,nil),s.specialcheck
+	return Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,LOCATION_DECK,0,nil),s.specialcheck
 end
 function s.extratarget(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,nil) end
 	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,0,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,0,tp,LOCATION_DECK)
 end
 function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SKILL_FLIP,tp,id|(1<<32))
@@ -43,7 +43,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	--For the Special Summon
 	local b1=Duel.GetFlagEffect(tp,id)==0
 		and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp)
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp)
 	--For the Fusion Summon
 	local params={fusfilter=s.fusmonfilter,
 					matfilter=Fusion.OnFieldMat,
@@ -54,11 +54,11 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 			{b1,aux.Stringid(id,0)},
 			{b2,aux.Stringid(id,1)})
 	if op==1 then
-		--OPT Register (Special Summon from RP)
+		--OPT Register (Special Summon from GY)
 		Duel.RegisterFlagEffect(tp,id,RESET_PHASE|PHASE_END,0,1)
-		--Special Summon "Humanoid Slime" or "Worm Drake" from RP
+		--Special Summon "Humanoid Slime" or "Worm Drake" from GY
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local sc=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp):GetFirst()
+		local sc=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp):GetFirst()
 		if sc then
 			Duel.SpecialSummon(sc,0,tp,tp,false,false,POS_FACEUP_ATTACK)
 			local e1=Effect.CreateEffect(e:GetHandler())
@@ -71,7 +71,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 			sc:RegisterEffect(e1)
 			local e2=e1:Clone()
 			e2:SetCode(EFFECT_UNRELEASABLE_SUM)
-			e2:SetValue(function(e,c) return not c:IsRace(RACE_MEGA) end)
+			e2:SetValue(function(e,c) return not c:IsRace(RACE_DIVINE) end)
 			sc:RegisterEffect(e2)
 		end
 	else

@@ -1,6 +1,6 @@
 --ゼラ
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 end
 s.listed_names={81756897}

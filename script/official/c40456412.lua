@@ -1,5 +1,5 @@
 --覇王龍の奇跡
---Pulse of the Supreme King
+--Miracle of the Supreme King
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -30,10 +30,10 @@ function s.spfilter(c,e,tp,ec)
 	end
 end
 function s.pcfilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_PENDULUM) and not c:IsUnliked()
+	return c:IsFaceup() and c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
 end
 function s.setfilter(c)
-	return c:IsQuickPlayActional() and c:IsSSetable()
+	return c:IsQuickPlaySpell() and c:IsSSetable()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local b1=not Duel.HasFlagEffect(tp,id)
@@ -84,7 +84,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			Duel.MoveToField(sc,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 		end
 	elseif op==3 then
-		--Set 1 Quick-Play Actional directly from your Deck
+		--Set 1 Quick-Play Spell directly from your Deck
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 		local g=Duel.SelectMatchingCard(tp,s.setfilter,tp,LOCATION_DECK,0,1,1,nil)
 		if #g>0 then

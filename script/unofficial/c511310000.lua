@@ -1,5 +1,5 @@
 --賢者ケイローン (Anime)
---Chiron the Manced (Anime)
+--Chiron the Mage (Anime)
 --Scripted by AlphaKretin
 --Re-scripted by Larry126
 local s,id=GetID()

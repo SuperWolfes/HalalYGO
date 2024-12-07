@@ -1,9 +1,9 @@
 --結束の戦士マグネット・バルキリオン
---Balkanion the Unity Warrior
+--Valkyrion the Unity Warrior
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Fusion Material
 	Fusion.AddProcMix(c,true,true,99785935,39256679,11549357)
 	--Special Summon
@@ -20,20 +20,20 @@ function s.initial_effect(c)
 end
 s.listed_names={99785935,39256679,11549357}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
+	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
 end
 function s.filter(c,e,tp)
 	return c:IsCode(99785935,39256679,11549357) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_REST,0,nil,e,tp)
+	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,nil,e,tp)
 	if chk==0 then return Duel.GetMZoneCount(tp,e:GetHandler())>=3 and aux.SelectUnselectGroup(g,e,tp,3,3,aux.dpcheck(Card.GetCode),0) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,3,tp,LOCATION_REST)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,3,tp,LOCATION_GRAVE)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if Duel.SendtoRest(c,REASON_COST)<1 then return end
-	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_REST,0,nil,e,tp)
+	if Duel.SendtoGrave(c,REASON_COST)<1 then return end
+	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,nil,e,tp)
 	local cg=aux.SelectUnselectGroup(g,e,tp,3,3,aux.dpcheck(Card.GetCode),1,tp,HINTMSG_SPSUMMON)
 	if #cg>0 then
 		Duel.SpecialSummon(cg,0,tp,tp,false,false,POS_FACEUP)

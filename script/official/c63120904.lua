@@ -16,7 +16,7 @@ function s.rfilter(c)
 	return c:IsCode(90337190,95614612)
 end
 function s.dfilter(c)
-	return c:IsType(TYPE_ACTIONAL+TYPE_TRAP)
+	return c:IsType(TYPE_SPELL+TYPE_TRAP)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then

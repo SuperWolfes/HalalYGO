@@ -24,7 +24,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local at=Duel.GetAttackTarget()
 	if not Duel.NegateAttack() then return end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_DECK,0,nil,e,tp)
 	if at and at:IsRelateToEffect(e) and at:IsReleasableByEffect() and #g>1 and (Duel.GetLocationCount(tp,LOCATION_MZONE)>1 or c:GetSequence()<5) 
 		and Duel.SelectYesNo(tp,aux.Stringid(63014935,2)) then

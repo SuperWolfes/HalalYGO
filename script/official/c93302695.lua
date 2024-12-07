@@ -1,5 +1,5 @@
 --Ｋｏｚｍｏ－ダーク・ローズ
---Kozmoll Wickedmint
+--Kozmoll Wickedwitch
 
 local s,id=GetID()
 function s.initial_effect(c)

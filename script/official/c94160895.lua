@@ -1,5 +1,5 @@
 --真竜凰マリアムネ
---Mariamne, the True Dracobird
+--Mariamne, the True Dracophoenix
 local s,id=GetID()
 function s.initial_effect(c)
 	--Special Summon itself from the hand

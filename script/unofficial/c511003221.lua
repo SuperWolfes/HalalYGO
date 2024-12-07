@@ -7,14 +7,14 @@ function s.initial_effect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_BATTLE_DESTROYED)
-	e1:SetRange(LOCATION_REST)
+	e1:SetRange(LOCATION_GRAVE)
 	e1:SetCondition(s.condition)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_REST) and Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_HAND,0,1,nil)
+	return e:GetHandler():IsLocation(LOCATION_GRAVE) and Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_HAND,0,1,nil)
 end
 function s.spfilter(c,e,tp,dam,rg)
 	if not c:HasLevel() or not c:IsAttackBelow(dam) or not c:IsCanBeSpecialSummoned(e,0,tp,false,false) then return false end
@@ -28,7 +28,7 @@ function s.spfilter(c,e,tp,dam,rg)
 	return result
 end
 function s.tgfilter(c)
-	return c:HasLevel() and c:IsAbleToRest()
+	return c:HasLevel() and c:IsAbleToGrave()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local dam=Duel.GetBattleDamage(tp)
@@ -52,9 +52,9 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local rg=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_HAND,0,nil)
 	rg:RemoveCard(tc)
 	if rg:CheckWithSumEqual(Card.GetLevel,tc:GetLevel(),1,99) then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 		local tg=rg:SelectWithSumEqual(tp,Card.GetLevel,tc:GetLevel(),1,99)
-		Duel.SendtoRest(tg,REASON_COST)
+		Duel.SendtoGrave(tg,REASON_COST)
 		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 	end
 end

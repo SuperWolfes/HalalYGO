@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Add 1 card that mentions "Max Metalmorph" from your Deck to your hand, and if you do, shuffle this card into the Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

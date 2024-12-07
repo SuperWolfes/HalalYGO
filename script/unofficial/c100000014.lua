@@ -2,7 +2,7 @@
 --Infinite Light (VG)
 local s,id=GetID()
 function s.initial_effect(c)
-	--Activate to Rest
+	--Activate to Grave
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
@@ -40,7 +40,7 @@ function s.initial_effect(c)
 	e4:SetDescription(aux.Stringid(13455953,0))
 	e4:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-	e4:SetCode(EVENT_TO_REST)
+	e4:SetCode(EVENT_TO_GRAVE)
 	e4:SetCondition(s.sephcon)
 	e4:SetTarget(s.sephtg)
 	e4:SetOperation(s.sephop)
@@ -58,13 +58,13 @@ end
 s.listed_series={0x4a}
 s.listed_names={36894320,8967776}
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsCode(36894320) and c:IsAbleToRestAsCost()
+	return c:IsFaceup() and c:IsCode(36894320) and c:IsAbleToGraveAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_ONFIELD,0,1,1,nil)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp

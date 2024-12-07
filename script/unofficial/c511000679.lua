@@ -16,12 +16,12 @@ function s.cfilter(c,code)
 	return c:IsCode(code) and c:IsAbleToRemoveAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil,511000676)
-		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil,511000677)
-		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil,511000678) end
-	local tc1=Duel.GetFirstMatchingCard(s.cfilter,tp,LOCATION_REST,0,nil,511000676)
-	local tc2=Duel.GetFirstMatchingCard(s.cfilter,tp,LOCATION_REST,0,nil,511000677)
-	local tc3=Duel.GetFirstMatchingCard(s.cfilter,tp,LOCATION_REST,0,nil,511000678)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,nil,511000676)
+		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,nil,511000677)
+		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,nil,511000678) end
+	local tc1=Duel.GetFirstMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,nil,511000676)
+	local tc2=Duel.GetFirstMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,nil,511000677)
+	local tc3=Duel.GetFirstMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,nil,511000678)
 	local g=Group.FromCards(tc1,tc2,tc3)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
@@ -43,7 +43,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 			e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
-			e1:SetValue(TYPE_ACTIONAL+TYPE_CONTINUOUS)
+			e1:SetValue(TYPE_SPELL+TYPE_CONTINUOUS)
 			tc:RegisterEffect(e1)
 			tc=g:GetNext()
 		end

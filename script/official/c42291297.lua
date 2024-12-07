@@ -1,7 +1,7 @@
 --花札衛－雨四光－
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),3,3)
 	--indes
 	local e2=Effect.CreateEffect(c)

@@ -1,9 +1,9 @@
 --幻魔の召喚神
---Illusorasmal Summoning Beast
+--Phantasmal Summoning Beast
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	--Search 1 "Uria, Watcher of Searing Flames", "Hamon, Watcher of Striking Thunder", or "Raviel, Watcher of Illusorasms"
+	--Search 1 "Uria, Lord of Searing Flames", "Hamon, Lord of Striking Thunder", or "Raviel, Lord of Phantasms"
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_SPECIAL_SUMMON)
@@ -14,12 +14,12 @@ function s.initial_effect(c)
 	e1:SetTarget(s.mzthtg)
 	e1:SetOperation(s.mzthop)
 	c:RegisterEffect(e1)
-	--Search 1 "Dimension Fusion Mismatching"
+	--Search 1 "Dimension Fusion Destruction"
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCost(aux.SelfBanishCost)
 	e2:SetTarget(s.gythtg)
@@ -31,17 +31,17 @@ function s.mzthfilter(c)
 	return c:IsCode(6007213,32491822,69890967) and c:IsAbleToHand()
 end
 function s.mzthtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.mzthfilter,tp,LOCATION_DECK|LOCATION_REST,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK|LOCATION_REST)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.mzthfilter,tp,LOCATION_DECK|LOCATION_GRAVE,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK|LOCATION_GRAVE)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND)
 end
 function s.spfilter(c,e,tp)
-	return c:IsLevel(10) and c:IsRace(RACE_PYRO|RACE_THUNDER|RACE_TAINTED) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
+	return c:IsLevel(10) and c:IsRace(RACE_PYRO|RACE_THUNDER|RACE_FIEND) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
 		and c:IsDefense(c:GetAttack()) and c:IsAttackAbove(0) and c:IsDefenseAbove(0)
 end
 function s.mzthop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.mzthfilter),tp,LOCATION_DECK|LOCATION_REST,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.mzthfilter),tp,LOCATION_DECK|LOCATION_GRAVE,0,1,1,nil)
 	if #g==0 or Duel.SendtoHand(g,nil,REASON_EFFECT)==0 then return end
 	Duel.ConfirmCards(1-tp,g)
 	Duel.ShuffleHand(tp)

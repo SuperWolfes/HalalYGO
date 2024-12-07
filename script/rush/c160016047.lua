@@ -1,9 +1,9 @@
 --疾風の竜騎士ガイア
---Swift Bia the Dragon Champion
+--Swift Gaia the Dragon Champion
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--fusion material
 	Fusion.AddProcMixN(c,true,true,28279543,1,s.matfilter,1)
 	--mill 1 for piercing

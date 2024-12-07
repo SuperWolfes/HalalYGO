@@ -54,7 +54,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.RegisterEffect(e1,tp)
 		elseif op==2 then
 			local g=Duel.GetFieldGroup(tp,LOCATION_ONFIELD,LOCATION_ONFIELD)
-			if Duel.SendtoRest(g,REASON_EFFECT)>0 then
+			if Duel.SendtoGrave(g,REASON_EFFECT)>0 then
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 				local tc=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_DECK,0,1,1,nil,e,tp)
 				Duel.SpecialSummon(tc,0,tp,tp,true,false,POS_FACEUP)

@@ -1,5 +1,5 @@
 --黄泉天輪
---Overworld Circle
+--Underworld Circle
 --fixed by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -96,12 +96,12 @@ function s.initial_effect(c)
 			end
 		end
 		local uc=c
-		local awake=Card.EnableAwakeLimit
-		Card.EnableAwakeLimit=function(c)
-			awake(uc)
+		local revive=Card.EnableReviveLimit
+		Card.EnableReviveLimit=function(c)
+			revive(uc)
 			local e8=Effect.CreateEffect(c)
 			e8:SetType(EFFECT_TYPE_SINGLE)
-			e8:SetCode(EFFECT_AWAKE_LIMIT)
+			e8:SetCode(EFFECT_REVIVE_LIMIT)
 			e8:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
 			c:RegisterEffect(e8)
 			local e9=e8:Clone()
@@ -190,24 +190,24 @@ function s.spfilter(c,e,tp)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp) end
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
 	Duel.RegisterFlagEffect(tp,id+1000,RESET_PHASE+PHASE_END,0,1)
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,0,LOCATION_REST)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,0,LOCATION_GRAVE)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp) then
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local g1=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp)
+		local g1=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
 		Duel.SpecialSummonStep(g1:GetFirst(),0,tp,tp,false,false,POS_FACEUP)
 	end
 	if Duel.GetLocationCount(1-tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(s.spfilter,1-tp,LOCATION_REST,0,1,nil,e,1-tp)
+		and Duel.IsExistingMatchingCard(s.spfilter,1-tp,LOCATION_GRAVE,0,1,nil,e,1-tp)
 		and Duel.SelectYesNo(1-tp,aux.Stringid(id,0))
 		and Duel.GetFlagEffect(1-tp,id+1000)==0 then
 		Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_SPSUMMON)
-		local g2=Duel.SelectMatchingCard(1-tp,s.spfilter,1-tp,LOCATION_REST,0,1,1,nil,e,1-tp)
+		local g2=Duel.SelectMatchingCard(1-tp,s.spfilter,1-tp,LOCATION_GRAVE,0,1,1,nil,e,1-tp)
 		Duel.SpecialSummonStep(g2:GetFirst(),0,1-tp,1-tp,false,false,POS_FACEUP)
 		Duel.RegisterFlagEffect(1-tp,id+1000,RESET_PHASE+PHASE_END,0,1)
 	end

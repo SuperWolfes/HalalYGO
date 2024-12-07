@@ -27,7 +27,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not sc then return end
 	local fc=Duel.GetFieldCard(1-tp,LOCATION_FZONE,0)
 	local can_draw=fc and fc:IsFaceup() and Duel.IsPlayerCanDraw(1-tp,1)
-	if Duel.ActivateFieldActional(sc,e,tp,eg,ep,ev,re,r,rp) and can_draw and Duel.SelectYesNo(1-tp,aux.Stringid(id,1)) then
+	if Duel.ActivateFieldSpell(sc,e,tp,eg,ep,ev,re,r,rp) and can_draw and Duel.SelectYesNo(1-tp,aux.Stringid(id,1)) then
 		Duel.BreakEffect()
 		Duel.Draw(1-tp,1,REASON_EFFECT)
 	end

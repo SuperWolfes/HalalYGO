@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion Procedure
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMixN(c,true,true,99785935,1,s.matfilter,1)
 	--Set
 	local e1=Effect.CreateEffect(c)
@@ -30,14 +30,14 @@ function s.sfilter(c)
 	return c:IsCode(160211037,160211038) and c:IsSSetable()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.sfilter,tp,LOCATION_REST,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.sfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	--Effect
 	local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
-	local sg=Duel.GetMatchingGroup(s.sfilter,tp,LOCATION_REST,0,nil)
+	local sg=Duel.GetMatchingGroup(s.sfilter,tp,LOCATION_GRAVE,0,nil)
 	local tg=aux.SelectUnselectGroup(sg,1,tp,1,math.min(ft,2),s.rescon,1,tp)
 	Duel.SSet(tp,tg)
 end

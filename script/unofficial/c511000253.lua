@@ -1,11 +1,11 @@
 --混沌幻魔アーミタイル (Anime)
---Armityle the Chaos Illusion (Anime)
+--Armityle the Chaos Phantom (Anime)
 --fixed by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,6007213,32491822,69890967)
-	--Special Summon with Dimension Fusion Mismatching
+	--Special Summon with Dimension Fusion Destruction
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -37,7 +37,7 @@ function s.initial_effect(c)
 	e4:SetTarget(s.cttg)
 	e4:SetOperation(s.ctop)
 	c:RegisterEffect(e4)
-	--Dimension Fusion Mismatching Special Summon Success
+	--Dimension Fusion Destruction Special Summon Success
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e5:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_DAMAGE_STEP)

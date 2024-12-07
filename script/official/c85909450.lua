@@ -1,10 +1,10 @@
 --ハーピィズペット幻竜
---Flybie's Pet Illusorasmal Dragon
+--Harpie's Pet Phantasmal Dragon
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WIND),4,3)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--direct attack
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)

@@ -1,5 +1,5 @@
 --ウィッチクラフトゴーレム・アルル
---Mintcrafter Gopal Aruru
+--Witchcrafter Golem Aruru
 local s,id=GetID()
 function s.initial_effect(c)
 	--Special Summon and return a target to the hand
@@ -34,7 +34,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x128}
 function s.tgfilter(c,tp)
-	return c:IsLocation(LOCATION_MZONE) and c:IsControler(tp) and c:IsRace(RACE_MENTOR) and c:IsFaceup()
+	return c:IsLocation(LOCATION_MZONE) and c:IsControler(tp) and c:IsRace(RACE_SPELLCASTER) and c:IsFaceup()
 end
 function s.thcon1(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.tgfilter,1,nil,tp)
@@ -43,15 +43,15 @@ function s.thcon2(e,tp,eg,ep,ev,re,r,rp)
 	return rp==1-tp and eg:IsExists(s.tgfilter,1,nil,tp)
 end
 function s.filter(c,tp)
-	return c:IsAbleToHand() and (c:IsControler(1-tp) or (c:IsActional() and c:IsSetCard(0x128)))
+	return c:IsAbleToHand() and (c:IsControler(1-tp) or (c:IsSpell() and c:IsSetCard(0x128)))
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_ONFIELD+LOCATION_REST) and s.filter(chkc,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_ONFIELD+LOCATION_GRAVE) and s.filter(chkc,tp) end
 	if chk==0 then return e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,false,false)
-		and Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,LOCATION_ONFIELD,1,nil,tp)
+		and Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,LOCATION_ONFIELD,1,nil,tp)
 		and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RTOHAND)
-	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,LOCATION_ONFIELD,1,1,nil,tp)
+	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,LOCATION_ONFIELD,1,1,nil,tp)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,e:GetHandler(),1,0,0)
 end

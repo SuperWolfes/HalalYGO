@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_WANDERER) and c:GetBaseAttack()==0 and c:GetBaseDefense()==0
+	return c:IsFaceup() and c:IsRace(RACE_FAIRY) and c:GetBaseAttack()==0 and c:GetBaseDefense()==0
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return ep==tp and r==REASON_RULE and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil)

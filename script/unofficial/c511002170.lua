@@ -24,7 +24,7 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local tid=Duel.GetTurnCount()
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil,tid)
-		or (Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_REST,LOCATION_REST,1,nil,tid)) end
+		or (Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,nil,tid)) end
 	local sg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,nil,tid)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,sg,#sg,0,0)
 end
@@ -34,7 +34,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if #sg>0 then
 		Duel.Remove(sg,POS_FACEUP,REASON_EFFECT)
 	end
-	local g=Duel.GetMatchingGroup(s.filter2,tp,LOCATION_REST,LOCATION_REST,nil,tid)
+	local g=Duel.GetMatchingGroup(s.filter2,tp,LOCATION_GRAVE,LOCATION_GRAVE,nil,tid)
 	if #g>0 then
 		local g1=g:Filter(Card.IsPreviousControler,nil,tp)
 		local g2=g:Filter(Card.IsPreviousControler,nil,1-tp)

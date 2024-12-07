@@ -15,7 +15,7 @@ function s.rtdfilter(c)
 	return c:IsMonster() and c:IsAbleToDeck()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.rtdfilter,tp,LOCATION_REST,LOCATION_REST,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.rtdfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,0,0)
 end
 function s.thfilter(c)
@@ -23,7 +23,7 @@ function s.thfilter(c)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	local tc=Duel.SelectMatchingCard(tp,s.rtdfilter,tp,LOCATION_REST,LOCATION_REST,1,1,nil)
+	local tc=Duel.SelectMatchingCard(tp,s.rtdfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,1,nil)
 	Duel.HintSelection(tc)
 	if Duel.SendtoDeck(tc,nil,2,REASON_EFFECT)~=0then
 		local g=Duel.GetMatchingGroup(s.thfilter,tp,0,LOCATION_MZONE,nil)

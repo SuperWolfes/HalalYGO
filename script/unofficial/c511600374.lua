@@ -71,7 +71,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x500}
 function s.accon(e,tp,eg,ep,ev,re,r,rp)
-	return re and re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_ACTIONAL)
+	return re and re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_SPELL)
 		and not re:GetHandler():IsSetCard(0x500) and Duel.IsPlayerAffectedByEffect(rp,id)
 end
 function s.acop(e,tp,eg,ep,ev,re,r,rp)

@@ -2,7 +2,7 @@
 --Supreme King Z-ARC (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Pendulum.AddProcedure(c,false)
 	--fusion proc
 	local fe=Effect.CreateEffect(c)
@@ -62,7 +62,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e5)
 	local e6=e3:Clone()
 	e6:SetCode(EFFECT_CANNOT_BE_MATERIAL)
-	e6:SetValue(aux.cannotmatfilter(SUMMON_TYPE_FUSION,SUMMON_TYPE_LOCKED))
+	e6:SetValue(aux.cannotmatfilter(SUMMON_TYPE_FUSION,SUMMON_TYPE_RITUAL))
 	c:RegisterEffect(e6)
 	--immune to Fusion/Synchro/Xyz
 	local e7=Effect.CreateEffect(c)
@@ -151,12 +151,12 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.indfilter(c,tpe)
-	return (c:IsLocation(LOCATION_REST) or c:IsFaceup()) and c:IsType(tpe)
+	return (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup()) and c:IsType(tpe)
 end
 function s.indcon(e)
-	return Duel.IsExistingMatchingCard(s.indfilter,0,LOCATION_REST|LOCATION_REMOVED,LOCATION_REST|LOCATION_REMOVED,1,nil,TYPE_FUSION)
-		and Duel.IsExistingMatchingCard(s.indfilter,0,LOCATION_REST|LOCATION_REMOVED,LOCATION_REST|LOCATION_REMOVED,1,nil,TYPE_SYNCHRO)
-		and Duel.IsExistingMatchingCard(s.indfilter,0,LOCATION_REST|LOCATION_REMOVED,LOCATION_REST|LOCATION_REMOVED,1,nil,TYPE_XYZ)
+	return Duel.IsExistingMatchingCard(s.indfilter,0,LOCATION_GRAVE|LOCATION_REMOVED,LOCATION_GRAVE|LOCATION_REMOVED,1,nil,TYPE_FUSION)
+		and Duel.IsExistingMatchingCard(s.indfilter,0,LOCATION_GRAVE|LOCATION_REMOVED,LOCATION_GRAVE|LOCATION_REMOVED,1,nil,TYPE_SYNCHRO)
+		and Duel.IsExistingMatchingCard(s.indfilter,0,LOCATION_GRAVE|LOCATION_REMOVED,LOCATION_GRAVE|LOCATION_REMOVED,1,nil,TYPE_XYZ)
 end
 function s.leaveChk(c,category)
 	local ex,tg=Duel.GetOperationInfo(0,category)
@@ -166,7 +166,7 @@ function s.imfilter(e,te)
 	local c=e:GetOwner()
 	return (c:GetDestination()>0 and c:GetReasonEffect()==te)
 		or (s.leaveChk(c,CATEGORY_TOHAND) or s.leaveChk(c,CATEGORY_DESTROY) or s.leaveChk(c,CATEGORY_REMOVE)
-		or s.leaveChk(c,CATEGORY_TODECK) or s.leaveChk(c,CATEGORY_RELEASE) or s.leaveChk(c,CATEGORY_TOREST))
+		or s.leaveChk(c,CATEGORY_TODECK) or s.leaveChk(c,CATEGORY_RELEASE) or s.leaveChk(c,CATEGORY_TOGRAVE))
 end
 function s.efilter(e,te)
 	return te:IsActiveType(TYPE_FUSION+TYPE_SYNCHRO+TYPE_XYZ) and te:GetOwnerPlayer()~=e:GetHandlerPlayer()
@@ -177,7 +177,7 @@ function s.spfilter(c,e,tp,rp)
 end
 function s.sptg2(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
-		return loc~=0 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,2,nil,e,tp,rp)
+		return loc~=0 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,2,nil,e,tp,rp)
 	end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,LOCATION_EXTRA)
 end

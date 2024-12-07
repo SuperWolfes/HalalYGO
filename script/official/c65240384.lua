@@ -23,7 +23,7 @@ function s.posop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.negcon(e,tp,eg,ep,ev,re,r,rp)
-	if re:IsActiveType(TYPE_ACTIONAL) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then
+	if re:IsActiveType(TYPE_SPELL) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then
 		local tg=Duel.GetChainInfo(ev,CHAININFO_TARGET_CARDS)
 		return #tg==1 and tg:GetFirst()==e:GetHandler() and e:GetHandler():IsFacedown()
 	else 
@@ -33,7 +33,7 @@ end
 function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.ChangePosition(e:GetHandler(),POS_FACEUP_DEFENSE) then
 		if Duel.NegateActivation(ev) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:GetHandler():IsRelateToEffect(re) then
-			Duel.SendtoRest(eg,REASON_EFFECT)
+			Duel.SendtoGrave(eg,REASON_EFFECT)
 		end
 	end
 end

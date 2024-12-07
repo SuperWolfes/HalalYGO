@@ -6,14 +6,14 @@ function s.initial_effect(c)
 	--Take 3 monsters from your Deck (1 Dinosaur, 1 Sea Serpent, and 1 Wyrm)
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_REMOVE+CATEGORY_TOREST)
+	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_REMOVE+CATEGORY_TOGRAVE)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetCountLimit(1,{id,0})
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-	--Special Summon 3 "Apodrakosis" monsters with different Types, 1 each from your Deck, RP, and banishment
+	--Special Summon 3 "Apodrakosis" monsters with different Types, 1 each from your Deck, GY, and banishment
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -28,11 +28,11 @@ end
 s.listed_names={92487128} --"Guangba, Luminous Apodrakosis of Starforge"
 s.listed_series={SET_RYU_GE}
 function s.thfilter(c)
-	return c:IsRace(RACE_DINOSAUR|RACE_SEASERPENT|RACE_WYRM) and (c:IsAbleToHand() or c:IsAbleToRemove() or c:IsAbleToRest())
+	return c:IsRace(RACE_DINOSAUR|RACE_SEASERPENT|RACE_WYRM) and (c:IsAbleToHand() or c:IsAbleToRemove() or c:IsAbleToGrave())
 end
 function s.thcheck(sg,e,tp,mg)
 	return sg:CheckDifferentProperty(Card.GetRace) and sg:FilterCount(Card.IsAbleToHand,nil)>=1
-		and sg:FilterCount(Card.IsAbleToRemove,nil)>=1 and sg:FilterCount(Card.IsAbleToRest,nil)>=1
+		and sg:FilterCount(Card.IsAbleToRemove,nil)>=1 and sg:FilterCount(Card.IsAbleToGrave,nil)>=1
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
@@ -41,7 +41,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,tp,LOCATION_DECK)
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local sg=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_DECK,0,nil)
@@ -57,7 +57,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 				local rg=g:FilterSelect(tp,Card.IsAbleToRemove,1,1,nil)
 				if #rg>0 and Duel.Remove(rg,POS_FACEUP,REASON_EFFECT)>0 then
 					g=g-rg
-					Duel.SendtoRest(g,REASON_EFFECT)
+					Duel.SendtoGrave(g,REASON_EFFECT)
 				end
 			end
 		end
@@ -81,15 +81,15 @@ function s.spcheck(sg,e,tp)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
-		local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_DECK|LOCATION_REST|LOCATION_REMOVED,0,nil,e,tp)
-		return Duel.GetLocationCount(tp,LOCATION_MZONE)>2 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)
+		local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_DECK|LOCATION_GRAVE|LOCATION_REMOVED,0,nil,e,tp)
+		return Duel.GetLocationCount(tp,LOCATION_MZONE)>2 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
 			and aux.SelectUnselectGroup(g,e,tp,3,3,s.spcheck,0)
 	end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,3,tp,LOCATION_DECK|LOCATION_REST|LOCATION_REMOVED)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,3,tp,LOCATION_DECK|LOCATION_GRAVE|LOCATION_REMOVED)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.GetLocationCount(tp,LOCATION_MZONE)<3 or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
-	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_DECK|LOCATION_REST|LOCATION_REMOVED,0,nil,e,tp)
+	if Duel.GetLocationCount(tp,LOCATION_MZONE)<3 or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
+	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_DECK|LOCATION_GRAVE|LOCATION_REMOVED,0,nil,e,tp)
 	if #g<3 then return end
 	local sg=aux.SelectUnselectGroup(g,e,tp,3,3,s.spcheck,1,tp,HINTMSG_SPSUMMON)
 	if #sg==3 then

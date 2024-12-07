@@ -22,7 +22,7 @@ function s.initial_effect(c)
 end
 function s.drcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsPreviousLocation(LOCATION_ONFIELD) and c:GetEquipTarget()~=nil and c:IsLocation(LOCATION_REST)
+	return c:IsPreviousLocation(LOCATION_ONFIELD) and c:GetEquipTarget()~=nil and c:IsLocation(LOCATION_GRAVE)
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

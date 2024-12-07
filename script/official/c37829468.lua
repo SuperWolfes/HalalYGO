@@ -29,7 +29,7 @@ function s.atktg(e,c)
 	return c:IsAttribute(ATTRIBUTE_LIGHT)
 end
 function s.atkval(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsAttribute,e:GetHandlerPlayer(),LOCATION_REST,0,nil,ATTRIBUTE_LIGHT)*100
+	return Duel.GetMatchingGroupCount(Card.IsAttribute,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil,ATTRIBUTE_LIGHT)*100
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp

@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	--equip
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,3))
-	e2:SetCategory(CATEGORY_LEAVE_REST+CATEGORY_EQUIP)
+	e2:SetCategory(CATEGORY_LEAVE_GRAVE+CATEGORY_EQUIP)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetRange(LOCATION_MZONE)
@@ -33,7 +33,7 @@ function s.mtcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp
 end
 function s.cfilter1(c)
-	return c:IsCode(36623431) and c:IsAbleToRestAsCost()
+	return c:IsCode(36623431) and c:IsAbleToGraveAsCost()
 end
 function s.cfilter2(c)
 	return c:IsMonster() and c:IsRace(RACE_WARRIOR) and not c:IsPublic()
@@ -56,9 +56,9 @@ function s.mtop(e,tp,eg,ep,ev,re,r,rp)
 		select=2
 	end
 	if select==0 then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 		local g=g1:Select(tp,1,1,nil)
-		Duel.SendtoRest(g,REASON_COST)
+		Duel.SendtoGrave(g,REASON_COST)
 	elseif select==1 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_CONFIRM)
 		local g=g2:Select(tp,1,1,nil)
@@ -69,15 +69,15 @@ function s.mtop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.filter(c)
-	return c:IsLevelBelow(3) and c:IsRace(RACE_WARRIOR) and not c:IsUnliked()
+	return c:IsLevelBelow(3) and c:IsRace(RACE_WARRIOR) and not c:IsForbidden()
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter(chkc) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter(chkc) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil) end
+		and Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,0,0)
+	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_EQUIP,g,1,0,0)
 end
 function s.equipop(c,e,tp,tc)

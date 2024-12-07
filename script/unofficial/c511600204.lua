@@ -4,10 +4,10 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_CYBERSE),2)
 	--fusion summon
-	local e1=Fusion.CreateSummonEff({handler=c,location=LOCATION_REST,fusfilter=s.lizardcheck,matfilter=aux.FALSE,
+	local e1=Fusion.CreateSummonEff({handler=c,location=LOCATION_GRAVE,fusfilter=s.lizardcheck,matfilter=aux.FALSE,
 									extrafil=s.extrafil,preselect=s.preop,desc=aux.Stringid(id,0),
 									extraop=Fusion.BanishMaterial,nosummoncheck=true,chkf=PLAYER_NONE})
 	e1:SetCategory(CATEGORY_TOEXTRA+CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 			if chk==0 then
 				return Duel.IsPlayerCanRemove(tp) and aux.CheckSummonGate(tp,2) and tg(e,tp,eg,ep,ev,re,r,rp,chk)
 			end
-			Duel.SetOperationInfo(0,CATEGORY_TOEXTRA,nil,1,tp,LOCATION_REST)
+			Duel.SetOperationInfo(0,CATEGORY_TOEXTRA,nil,1,tp,LOCATION_GRAVE)
 			Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 		end
 	end)(e1:GetTarget()))
@@ -48,13 +48,13 @@ function s.checkextra(c)
 	end
 end
 function s.extrafil(e,tp,mg)
-	return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRemove),tp,Duel.IsPlayerAffectedByEffect(tp,69832741) and LOCATION_MZONE or LOCATION_REST,0,nil),s.checkextra(e:GetHandler())
+	return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRemove),tp,Duel.IsPlayerAffectedByEffect(tp,69832741) and LOCATION_MZONE or LOCATION_GRAVE,0,nil),s.checkextra(e:GetHandler())
 end
 function s.preop(e,tc)
 	return Duel.SendtoDeck(tc,nil,2,REASON_EFFECT)~=0
 end
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsPreviousLocation(LOCATION_REST)
+	return e:GetHandler():IsPreviousLocation(LOCATION_GRAVE)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local e1=Effect.CreateEffect(e:GetHandler())
@@ -74,7 +74,7 @@ end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,tp,id)
 	Duel.Hint(HINT_CARD,1-tp,id)
-	local atk=Duel.GetMatchingGroupCount(Card.IsRace,tp,LOCATION_REST,0,nil,RACE_CYBERSE)*400
+	local atk=Duel.GetMatchingGroupCount(Card.IsRace,tp,LOCATION_GRAVE,0,nil,RACE_CYBERSE)*400
 	for tc in aux.Next(eg:Filter(s.filter,nil,1-tp)) do
 		local e1=Effect.CreateEffect(e:GetOwner())
 		e1:SetType(EFFECT_TYPE_SINGLE)

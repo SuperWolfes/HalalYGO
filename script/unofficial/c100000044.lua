@@ -2,7 +2,7 @@
 --Skiel Carrier 5 (TF6)
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -79,7 +79,7 @@ function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()
 	local bc=tc:GetBattleTarget()
 	return tc:IsRelateToBattle() and tc:IsControler(tp)
-		and bc:IsLocation(LOCATION_REST) and bc:IsReason(REASON_BATTLE)
+		and bc:IsLocation(LOCATION_GRAVE) and bc:IsReason(REASON_BATTLE)
 		and bc:IsMonster() and bc:IsPreviousControler(1-tp)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)

@@ -1,9 +1,9 @@
 --捕食植物キメラフレシア (Manga)
---Predaplant Chileanfflesia (Manga)
+--Predaplant Chimerafflesia (Manga)
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_PLANT),2)
 	--atk up
 	local e1=Effect.CreateEffect(c)

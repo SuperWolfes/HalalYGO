@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--Send your entire hand to the RP during your Standby Phase or destroy this card
+	--Send your entire hand to the GY during your Standby Phase or destroy this card
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -30,7 +30,7 @@ end
 s.listed_series={SET_CLOUDIAN}
 function s.mtop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)>0 and Duel.SelectYesNo(tp,aux.Stringid(79850798,1)) then
-		Duel.SendtoRest(Duel.GetFieldGroup(tp,LOCATION_HAND,0),REASON_COST)
+		Duel.SendtoGrave(Duel.GetFieldGroup(tp,LOCATION_HAND,0),REASON_COST)
 	else
 		Duel.Destroy(e:GetHandler(),REASON_RULE)
 	end

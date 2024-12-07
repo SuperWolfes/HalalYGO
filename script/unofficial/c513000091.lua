@@ -26,7 +26,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g1,#g1,0,0)
 end
 function s.filter(c,tp)
-	return c:IsLocation(LOCATION_REST) and c:IsPreviousControler(tp) and c:IsMonster()
+	return c:IsLocation(LOCATION_GRAVE) and c:IsPreviousControler(tp) and c:IsMonster()
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Neither player can Normal/Special Summon monsters until the end of the next turn
@@ -41,7 +41,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local e2=e1:Clone()
 	e2:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
 	Duel.RegisterEffect(e2,tp)
-	--Destroy all monsters and inflict damage per each sent to the RP
+	--Destroy all monsters and inflict damage per each sent to the GY
 	local g=Duel.GetMatchingGroup(nil,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
 	if Duel.Destroy(g,REASON_EFFECT)>0 then
 		local og=Duel.GetOperatedGroup()

@@ -28,7 +28,7 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local c=e:GetHandler()
-	--to rest
+	--to grave
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_IGNORE_IMMUNE)
@@ -67,6 +67,6 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=c:GetTurnCounter()
 	c:SetTurnCounter(ct+1)
 	if ct+1>=3 then
-		Duel.SendtoRest(e:GetHandler(),REASON_EFFECT)
+		Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
 	end
 end

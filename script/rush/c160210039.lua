@@ -1,5 +1,5 @@
 --超銀河王ロード・オブ・ギャラクティカ［Ｒ］
---Super Galaxy King Watcher of Galactica [R]
+--Super Galaxy King Lord of Galactica [R]
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -25,7 +25,7 @@ function s.filter(c,g)
 	return g:CheckWithSumEqual(Card.GetLevel,c:GetLevel(),1,99)
 end
 function s.filter2(c)
-	return c:IsMonster() and c:IsType(TYPE_NORMAL) and c:IsAbleToRest()
+	return c:IsMonster() and c:IsType(TYPE_NORMAL) and c:IsAbleToGrave()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(s.filter2,tp,LOCATION_HAND,0,nil)
@@ -38,7 +38,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.SelectMatchingCard(tp,s.filter,tp,0,LOCATION_MZONE,1,1,nil,g):GetFirst()
 	Duel.HintSelection(tc,true)
 	local tg=g:SelectWithSumEqual(tp,Card.GetLevel,tc:GetLevel(),1,99)
-	if Duel.SendtoRest(tg,REASON_EFFECT)>0 and tc:GetAttack()>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+	if Duel.SendtoGrave(tg,REASON_EFFECT)>0 and tc:GetAttack()>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		local c=e:GetHandler()
 		--Gain ATK
 		local e2=Effect.CreateEffect(c)

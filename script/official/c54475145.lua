@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.thtg)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
-	--Possession of this card cannot smint
+	--Possession of this card cannot switch
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -24,11 +24,11 @@ function s.initial_effect(c)
 	--Special Summon this card
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
-	e3:SetCategory(CATEGORY_TOREST+CATEGORY_SPECIAL_SUMMON)
+	e3:SetCategory(CATEGORY_TOGRAVE+CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e3:SetProperty(EFFECT_FLAG_DELAY,EFFECT_FLAG2_CHECK_SIMULTANEOUS)
 	e3:SetCode(EVENT_SUMMON_SUCCESS)
-	e3:SetRange(LOCATION_REST)
+	e3:SetRange(LOCATION_GRAVE)
 	e3:SetCountLimit(1,{id,1},EFFECT_COUNT_CODE_DUEL)
 	e3:SetCondition(s.spcon)
 	e3:SetTarget(s.sptg)
@@ -56,7 +56,7 @@ end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsDiscardable() end
-	Duel.SendtoRest(c,REASON_COST|REASON_DISCARD)
+	Duel.SendtoGrave(c,REASON_COST|REASON_DISCARD)
 end
 function s.thfilter(c)
 	return c:IsCode(CARD_MILLENNIUM_CROSS) and c:IsAbleToHand()
@@ -74,7 +74,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.spconfilter(c,tp)
-	return c:IsSummonPlayer(1-tp) and (c:IsLevelAbove(8) or c:IsAttackAbove(3000)) and c:IsFaceup() and c:IsAbleToRest()
+	return c:IsSummonPlayer(1-tp) and (c:IsLevelAbove(8) or c:IsAttackAbove(3000)) and c:IsFaceup() and c:IsAbleToGrave()
 		and c:IsLocation(LOCATION_MZONE)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
@@ -86,13 +86,13 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetMZoneCount(tp,g)>0
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false) end
 	Duel.SetTargetCard(g)
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,g,#g,tp,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,g,#g,tp,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,tp,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local g=Duel.GetTargetCards(e)
-	if #g>0 and Duel.SendtoRest(g,REASON_EFFECT)>0 and g:IsExists(Card.IsLocation,1,nil,LOCATION_REST)
+	if #g>0 and Duel.SendtoGrave(g,REASON_EFFECT)>0 and g:IsExists(Card.IsLocation,1,nil,LOCATION_GRAVE)
 		and c:IsRelateToEffect(e) then
 		Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)
 	end

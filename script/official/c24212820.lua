@@ -1,29 +1,29 @@
 --幻影騎士団ダーク・ガントレット
---The Illusion Knights of Dark Gauntlets
+--The Phantom Knights of Dark Gauntlets
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send 1 "Illusion Knights" actional/trap from deck to RP
+	--Send 1 "Phantom Knights" spell/trap from deck to GY
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_TOREST)
+	e1:SetCategory(CATEGORY_TOGRAVE)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	e1:SetHintTiming(0,TIMING_END_PHASE)
 	c:RegisterEffect(e1)
-	--Special summon itself from RP as a monster
+	--Special summon itself from GY as a monster
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_ATTACK_ANNOUNCE)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCondition(s.spcon)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
-	--Gains 300 DEF for each "Illusion Knights" actional/trap in your RP
+	--Gains 300 DEF for each "Phantom Knights" spell/trap in your GY
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -36,17 +36,17 @@ end
 s.listed_series={0xdb}
 
 function s.tgfilter(c)
-	return c:IsSetCard(0xdb) and c:IsActionalTrap() and c:IsAbleToRest()
+	return c:IsSetCard(0xdb) and c:IsSpellTrap() and c:IsAbleToGrave()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	end
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
@@ -82,8 +82,8 @@ function s.defcon(e)
 	return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+1
 end
 function s.filter(c)
-	return c:IsSetCard(0xdb) and c:IsActionalTrap()
+	return c:IsSetCard(0xdb) and c:IsSpellTrap()
 end
 function s.defval(e,c)
-	return Duel.GetMatchingGroupCount(s.filter,c:GetControler(),LOCATION_REST,0,nil)*300
+	return Duel.GetMatchingGroupCount(s.filter,c:GetControler(),LOCATION_GRAVE,0,nil)*300
 end

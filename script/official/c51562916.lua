@@ -27,7 +27,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ct==0 or ft<=0 then return end
 	ct=math.min(ct,ft)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ct=math.min(ct,1) end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ct=math.min(ct,1) end
 	Duel.RaiseEvent(Group.CreateGroup(),EVENT_ADJUST,nil,0,PLAYER_NONE,PLAYER_NONE,0)
 	local sg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_HAND,0,nil,e,tp)
 	if #sg~=0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then

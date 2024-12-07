@@ -1,5 +1,5 @@
 --女神スクルドの託宣
---Monsterdess Skuld's Overseer
+--Goddess Skuld's Oracle
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -63,6 +63,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	aux.RegisterClientHint(e:GetHandler(),nil,tp,1,0,aux.Stringid(id,2),nil)
 end
 function s.sumlimit(e,c,sump,sumtype,sumpos,targetp)
-	return not c:IsRace(RACE_WANDERER)
+	return not c:IsRace(RACE_FAIRY)
 end
 

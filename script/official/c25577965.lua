@@ -1,18 +1,18 @@
 --炎魔刃フレイムタン
---Flametongue the Blazing Mentoral Blade
+--Flametongue the Blazing Magical Blade
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Link Summon Procedure
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_FIRE),2,2)
-	--Face-up Actionals/Traps you control cannot be destroyed by the opponent
+	--Face-up Spells/Traps you control cannot be destroyed by the opponent
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetTargetRange(LOCATION_ONFIELD,0)
-	e1:SetTarget(function(e,c) return c:IsFaceup() and c:IsActionalTrap() end)
+	e1:SetTarget(function(e,c) return c:IsFaceup() and c:IsSpellTrap() end)
 	e1:SetValue(aux.indoval)
 	c:RegisterEffect(e1)
 	--Add 1 banished FIRE monster to the hand

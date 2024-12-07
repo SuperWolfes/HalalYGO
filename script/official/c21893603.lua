@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_TOHAND)
 	e3:SetType(EFFECT_TYPE_IGNITION)
-	e3:SetRange(LOCATION_REST)
+	e3:SetRange(LOCATION_GRAVE)
 	e3:SetCountLimit(1,{id,1})
 	e3:SetCost(s.thcost2)
 	e3:SetTarget(s.thtg2)
@@ -44,13 +44,13 @@ function s.thop1(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.thcfilter(c)
-	return c:IsMonster() and c:IsAbleToRestAsCost()
+	return c:IsMonster() and c:IsAbleToGraveAsCost()
 end
 function s.thcost2(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thcfilter,tp,LOCATION_HAND+LOCATION_MZONE,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.thcfilter,tp,LOCATION_HAND+LOCATION_MZONE,0,1,1,nil)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.thtg2(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

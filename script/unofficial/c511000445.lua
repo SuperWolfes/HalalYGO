@@ -1,8 +1,8 @@
 --奇跡の瞬間
---Pulse Moment
+--Miracle Moment
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon "Bronze Warrior" when "Panther Warrior" equipped with "Path to Destrudic" is destroyed by battle
+	--Special Summon "Bronze Warrior" when "Panther Warrior" equipped with "Path to Destiny" is destroyed by battle
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-	--Keep track if a "Panther Warrior" was equipped with "Path to Destrudic"
+	--Keep track if a "Panther Warrior" was equipped with "Path to Destiny"
 	aux.GlobalCheck(s,function()
 		local ge1=Effect.CreateEffect(c)
 		ge1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)

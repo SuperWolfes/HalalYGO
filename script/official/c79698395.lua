@@ -1,5 +1,5 @@
 --未界域－ユーマリア大陸
---Territory of Danger!
+--Realm of Danger!
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)

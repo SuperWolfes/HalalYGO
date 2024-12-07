@@ -1,12 +1,12 @@
 --Japanese name
---Mimirahul Throne
+--Mimighoul Throne
 --Scripted by the Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
-	--Xyz Summon procedure: 2 Level 1 "Mimirahul" monsters
-	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_MIMIRAHUL),1,2)
-	--Special Summon 1 "Mimirahul Master" from your hand, Deck or RP
+	c:EnableReviveLimit()
+	--Xyz Summon procedure: 2 Level 1 "Mimighoul" monsters
+	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_MIMIGHOUL),1,2)
+	--Special Summon 1 "Mimighoul Master" from your hand, Deck or GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1,false,REGISTER_FLAG_DETACH_XMAT)
-	--Equip this card to 1 "Mimirahul Master" you control
+	--Equip this card to 1 "Mimighoul Master" you control
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_EQUIP+CATEGORY_TOHAND)
@@ -32,20 +32,20 @@ function s.initial_effect(c)
 	e2:SetOperation(s.eqop)
 	c:RegisterEffect(e2)
 end
-s.listed_series={SET_MIMIRAHUL}
-s.listed_names={55537983} --"Mimirahul Master"
+s.listed_series={SET_MIMIGHOUL}
+s.listed_names={55537983} --"Mimighoul Master"
 function s.spfilter(c,e,tp)
 	return c:IsCode(55537983) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK|LOCATION_REST,0,1,nil,e,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND|LOCATION_DECK|LOCATION_REST)
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK|LOCATION_GRAVE,0,1,nil,e,tp) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND|LOCATION_DECK|LOCATION_GRAVE)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_HAND|LOCATION_DECK|LOCATION_REST,0,1,1,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_HAND|LOCATION_DECK|LOCATION_GRAVE,0,1,1,nil,e,tp)
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end
@@ -65,7 +65,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if not c:IsRelateToEffect(e) then return end
 	local tc=Duel.GetFirstTarget()
 	if not (tc:IsRelateToEffect(e) and tc:IsFaceup() and Duel.GetLocationCount(tp,LOCATION_SZONE)>0) then
-		return Duel.SendtoRest(c,REASON_RULE,PLAYER_NONE,PLAYER_NONE)
+		return Duel.SendtoGrave(c,REASON_RULE,PLAYER_NONE,PLAYER_NONE)
 	else
 		local ct=c:GetOverlayCount()
 		if not Duel.Equip(tp,c,tc) then return end

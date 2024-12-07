@@ -1,5 +1,5 @@
 --振楽姫チューバルディッシュ
---Tubardiche the Nasheed Princess
+--Tubardiche the Music Princess
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -26,13 +26,13 @@ function s.thfilter2(c)
 	return c:IsMonster() and c:IsRace(RACE_WARRIOR) and c:IsType(TYPE_NORMAL) and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil)
-		and Duel.IsExistingMatchingCard(s.thfilter2,tp,LOCATION_REST,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,2,tp,LOCATION_REST)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil)
+		and Duel.IsExistingMatchingCard(s.thfilter2,tp,LOCATION_GRAVE,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,2,tp,LOCATION_GRAVE)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Effect
-	local sg=Duel.GetMatchingGroup(Card.IsAbleToHand,tp,LOCATION_REST,0,nil)
+	local sg=Duel.GetMatchingGroup(Card.IsAbleToHand,tp,LOCATION_GRAVE,0,nil)
 	if #sg>0 then
 		local tg=aux.SelectUnselectGroup(sg,1,tp,2,2,s.rescon,1,tp,HINTMSG_ATOHAND)
 		Duel.SendtoHand(tg,nil,REASON_EFFECT)

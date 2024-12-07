@@ -1,5 +1,5 @@
 --骸魔妖ー夜叉 
---Yasha,the Skeletal Mayashi
+--Yasha,the Skeletal Mayakashi
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)

@@ -13,7 +13,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x4}
 function s.check(c1,c2,tp)
-	return c1:IsLocation(LOCATION_REST) and c1:IsReason(REASON_BATTLE) and c1:GetPreviousControler()~=tp and c2:IsSetCard(0x4)
+	return c1:IsLocation(LOCATION_GRAVE) and c1:IsReason(REASON_BATTLE) and c1:GetPreviousControler()~=tp and c2:IsSetCard(0x4)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local dc=eg:GetFirst()

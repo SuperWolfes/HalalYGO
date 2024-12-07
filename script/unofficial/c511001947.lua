@@ -1,11 +1,11 @@
 --Ｂ・Ｆ－霊弓のアズサ
---Battlewasp - Azusa the Miss Bow
+--Battlewasp - Azusa the Ghost Bow
 --updated by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--double
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_QUICK_O)

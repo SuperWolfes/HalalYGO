@@ -27,7 +27,7 @@ function s.tcfilter(tc,ec,tp,eg,ep,ev,re,r,rp)
 	return false
 end
 function s.ecfilter(c,tp,eg,ep,ev,re,r,rp)
-	return c:GetType()&TYPE_ACTIONAL+TYPE_CONTINUOUS==TYPE_ACTIONAL+TYPE_CONTINUOUS and c:GetCardTargetCount()==1 
+	return c:GetType()&TYPE_SPELL+TYPE_CONTINUOUS==TYPE_SPELL+TYPE_CONTINUOUS and c:GetCardTargetCount()==1 
 		and Duel.IsExistingMatchingCard(s.tcfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,c:GetFirstCardTarget(),c,tp,eg,ep,ev,re,r,rp)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)

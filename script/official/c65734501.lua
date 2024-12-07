@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Add to hand 1 "Rescue-ACE" Actional from Deck
+	--Add to hand 1 "Rescue-ACE" Spell from Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -34,7 +34,7 @@ end
 s.listed_series={0x18c}
 s.listed_names={id}
 function s.thfilter(c)
-	return c:IsSetCard(0x18c) and c:IsActional() and c:IsAbleToHand()
+	return c:IsSetCard(0x18c) and c:IsSpell() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

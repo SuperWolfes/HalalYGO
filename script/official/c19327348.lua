@@ -1,5 +1,5 @@
 --闇霊使いダルク
---Dharc the Dark Chaumer
+--Dharc the Dark Charmer
 local s,id=GetID()
 function s.initial_effect(c)
 	--flip

@@ -2,21 +2,21 @@
 --Chemicritter Oxy Ox
 local s,id=GetID()
 function s.initial_effect(c)
-	Dual.AddProcedure(c)
-	--Special Summon 1 Dual monster and change levels to that monster's level
+	Gemini.AddProcedure(c)
+	--Special Summon 1 Gemini monster and change levels to that monster's level
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1,id)
-	e1:SetCondition(Dual.EffectStatusCondition)
+	e1:SetCondition(Gemini.EffectStatusCondition)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
 end
 function s.filter(c,e,tp)
-	return c:IsType(TYPE_DUAL) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsType(TYPE_GEMINI) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
@@ -24,7 +24,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND)
 end
 function s.gmfilter(c,lv)
-	return c:IsFaceup() and c:IsType(TYPE_DUAL) and c:HasLevel() and not c:IsLevel(lv)
+	return c:IsFaceup() and c:IsType(TYPE_GEMINI) and c:HasLevel() and not c:IsLevel(lv)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)

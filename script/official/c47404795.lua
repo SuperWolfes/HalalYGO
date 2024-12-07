@@ -3,7 +3,7 @@
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	-- Link Summon procedure
 	Link.AddProcedure(c,nil,2,2,s.lcheck)
 	-- Destroy 1 face-up card
@@ -24,7 +24,7 @@ end
 s.listed_names={77297908}
 s.listed_series={SET_ABYSS_ACTOR}
 function s.lcheck(g,lc,sumtype,tp)
-	return g:IsExists(Card.IsRace,1,nil,RACE_TAINTED,lc,sumtype,tp)
+	return g:IsExists(Card.IsRace,1,nil,RACE_FIEND,lc,sumtype,tp)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and chkc:IsControler(tp) and chkc:IsFaceup() end
@@ -34,10 +34,10 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
 end
 function s.fldfilter(c)
-	return c:IsCode(77297908) and c:IsFieldActional() and not c:IsUnliked()
+	return c:IsCode(77297908) and c:IsFieldSpell() and not c:IsForbidden()
 end
 function s.pendfilter(c)
-	return c:IsSetCard(SET_ABYSS_ACTOR) and c:IsType(TYPE_PENDULUM) and not c:IsUnliked()
+	return c:IsSetCard(SET_ABYSS_ACTOR) and c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
@@ -56,7 +56,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 		if not tc then return end
 		local fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
 		if fc then
-			Duel.SendtoRest(fc,REASON_RULE)
+			Duel.SendtoGrave(fc,REASON_RULE)
 		end
 		Duel.BreakEffect()
 		Duel.MoveToField(tc,tp,tp,LOCATION_FZONE,POS_FACEUP,true)

@@ -14,13 +14,13 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(Card.IsRace,tp,LOCATION_REST,0,5,nil,RACE_SEASERPENT)
+	return Duel.IsExistingMatchingCard(Card.IsRace,tp,LOCATION_GRAVE,0,5,nil,RACE_SEASERPENT)
 end
 function s.tdfilter(c)
 	return c:IsMonster() and c:IsAbleToDeckAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_GRAVE,0,nil)
 	if chk==0 then return #g>0 and #g==g:FilterCount(Card.IsAbleToDeckAsCost,nil) end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -29,7 +29,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	local g=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_GRAVE,0,nil)
 	if #g>0 and Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_COST)==#g then
 		--Effect
 		local pg=Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_MZONE,nil)

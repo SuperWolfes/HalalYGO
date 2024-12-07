@@ -44,7 +44,7 @@ end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 	local dg=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND,0,1,1,nil)
-	if #dg>0 and Duel.SendtoRest(dg,REASON_EFFECT+REASON_DISCARD)>0 then
+	if #dg>0 and Duel.SendtoGrave(dg,REASON_EFFECT+REASON_DISCARD)>0 then
 		local og=Duel.GetOperatedGroup()
 		local sg=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsSetCard,0x6),tp,LOCATION_MZONE,0,nil)
 		if #sg==0 then return end
@@ -61,7 +61,7 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.dfilter(c,tp)
-	return c:IsControler(tp) and c:IsPreviousControler(tp) and c:IsOriginalRace(RACE_TAINTED) and c:IsReason(REASON_EFFECT)
+	return c:IsControler(tp) and c:IsPreviousControler(tp) and c:IsOriginalRace(RACE_FIEND) and c:IsReason(REASON_EFFECT)
 end
 function s.drwcond(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.dfilter,1,nil,tp) and (re:GetHandler():IsSetCard(0x6) or rp==1-tp)
@@ -74,7 +74,7 @@ end
 function s.drwop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 	local g=Duel.SelectMatchingCard(tp,Card.IsDiscardable,tp,LOCATION_HAND,0,1,1,nil)
-	if #g>0 and Duel.SendtoRest(g,REASON_EFFECT+REASON_DISCARD)>0 then
+	if #g>0 and Duel.SendtoGrave(g,REASON_EFFECT+REASON_DISCARD)>0 then
 		Duel.BreakEffect()
 		Duel.Draw(tp,2,REASON_EFFECT)
 	end

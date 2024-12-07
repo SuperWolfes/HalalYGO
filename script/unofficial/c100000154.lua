@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	c:AddSetcodesRule(id,false,0x601)
 	--Dark Synchro procedure
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Synchro.AddDarkSynchroProcedure(c,Synchro.NonTuner(nil),nil,6)
 	--Prevent activations when it attacks
 	local e1=Effect.CreateEffect(c)
@@ -68,7 +68,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 		if c:IsFaceup() and c:IsRelateToEffect(e) then
 			s.equipop(c,e,tp,tc)
 		else
-			Duel.SendtoRest(tc,REASON_EFFECT)
+			Duel.SendtoGrave(tc,REASON_EFFECT)
 		end
 	end
 end

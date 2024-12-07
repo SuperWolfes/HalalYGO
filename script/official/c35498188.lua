@@ -1,5 +1,5 @@
 --アクションマジック－ダブル・バンキング
---Action Ment - Double Banking
+--Action Magic - Double Banking
 --
 local s,id=GetID()
 function s.initial_effect(c)
@@ -16,11 +16,11 @@ function s.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCondition(aux.exccon)
 	e2:SetCost(s.setcost)
 	e2:SetTarget(s.settg)
-	e2:SetOperation(s.vetop)
+	e2:SetOperation(s.setop)
 	c:RegisterEffect(e2)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
@@ -54,7 +54,7 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ChainAttack()
 end
 function s.costfilter(c)
-	return c:IsActional() and c:IsDiscardable()
+	return c:IsSpell() and c:IsDiscardable()
 end
 function s.setcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil) end
@@ -62,9 +62,9 @@ function s.setcost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsSSetable() end
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,e:GetHandler(),1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,e:GetHandler(),1,0,0)
 end
-function s.vetop(e,tp,eg,ep,ev,re,r,rp)
+function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and c:IsSSetable() then
 		Duel.SSet(tp,c)

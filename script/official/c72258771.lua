@@ -34,7 +34,7 @@ function s.mtcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp
 end
 function s.cfilter1(c)
-	return c:IsCode(36623431) and c:IsAbleToRestAsCost()
+	return c:IsCode(36623431) and c:IsAbleToGraveAsCost()
 end
 function s.mtop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -47,9 +47,9 @@ function s.mtop(e,tp,eg,ep,ev,re,r,rp)
 		select=Duel.SelectOption(tp,aux.Stringid(id,1))+1
 	end
 	if select==0 then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 		local g=g1:Select(tp,1,1,nil)
-		Duel.SendtoRest(g,REASON_COST)
+		Duel.SendtoGrave(g,REASON_COST)
 	else
 		Duel.Destroy(c,REASON_COST)
 	end

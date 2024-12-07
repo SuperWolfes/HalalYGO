@@ -29,14 +29,14 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if tc:IsMonster() and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 
 		and tc:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEDOWN_DEFENSE) 
 		and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
-		local dg=Duel.GetMatchingGroup(Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,nil)
+		local dg=Duel.GetMatchingGroup(Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,nil)
 		if Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEDOWN_DEFENSE)>0 and tc:IsLevel(2) and #dg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 			local sg=dg:Select(tp,1,1,nil)
 			Duel.HintSelection(sg,true)
 			Duel.Destroy(sg,REASON_EFFECT)
 		end
-	elseif tc:IsActionalTrap() and (tc:IsType(TYPE_FIELD) or Duel.GetLocationCount(tp,LOCATION_SZONE)>0)
+	elseif tc:IsSpellTrap() and (tc:IsType(TYPE_FIELD) or Duel.GetLocationCount(tp,LOCATION_SZONE)>0)
 		and tc:IsSSetable() and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.SSet(tp,tc)
 	end

@@ -1,5 +1,5 @@
 --超伝導波サンダーフォース
---Thunderfcoree Attack
+--Thunderforce Attack
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -31,7 +31,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 end
 function s.filter(c,p)
-	return c:IsControler(p) and c:IsLocation(LOCATION_REST) and c:IsMonster()
+	return c:IsControler(p) and c:IsLocation(LOCATION_GRAVE) and c:IsMonster()
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local sg=Duel.GetMatchingGroup(Card.IsFaceup,tp,0,LOCATION_MZONE,nil)

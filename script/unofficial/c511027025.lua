@@ -1,5 +1,5 @@
 --黒薔薇の魔女 (Anime)
---Mint of the Black Rose (Anime)
+--Witch of the Black Rose (Anime)
 --added by ClaireStanfield
 local s,id,alias=GetID()
 function s.initial_effect(c)

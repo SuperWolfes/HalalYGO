@@ -37,9 +37,9 @@ function s.rescon(ag,g1,g2)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	if chk==0 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return false end
-	local g1=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_REST|LOCATION_REMOVED,LOCATION_REST|LOCATION_REMOVED,nil,e,tp,tp)
-	local g2=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_REST|LOCATION_REMOVED,LOCATION_REST|LOCATION_REMOVED,nil,e,tp,1-tp)
+	if chk==0 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return false end
+	local g1=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_GRAVE|LOCATION_REMOVED,LOCATION_GRAVE|LOCATION_REMOVED,nil,e,tp,tp)
+	local g2=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_GRAVE|LOCATION_REMOVED,LOCATION_GRAVE|LOCATION_REMOVED,nil,e,tp,1-tp)
 	local b1=(#g1>1 and #g2>1) or (#(g1&g2)~=#g1 and #(g1&g2)~=#g2)
 	local ag=g1:Filter(Card.IsCanBeSpecialSummoned,nil,e,0,tp,false,false,POS_FACEUP_DEFENSE)
 	local b2=#ag>1
@@ -78,7 +78,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.GetTargetCards(e)
 	local ft1=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if #tg<2 or ft1<1 or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
+	if #tg<2 or ft1<1 or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
 	local b1=Duel.GetLocationCount(1-tp,LOCATION_MZONE)>0 and tg:IsExists(s.spownfilter,1,nil,e,tp,tg)
 	local b2=ft1>1 and e:GetLabel()==100
 		and tg:FilterCount(Card.IsCanBeSpecialSummoned,nil,e,0,tp,false,false,POS_FACEUP_DEFENSE)==2

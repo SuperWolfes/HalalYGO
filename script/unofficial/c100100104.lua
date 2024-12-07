@@ -1,5 +1,5 @@
 --Ｓｐ－ジ・エンド・オブ・ストーム
---Speed Actional - The End of the Storm
+--Speed Spell - The End of the Storm
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

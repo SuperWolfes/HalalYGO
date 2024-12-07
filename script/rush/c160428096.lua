@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.drcostfilter(c)
-	return c:IsMonster() and c:IsLevel(8) and c:IsAbleToRestAsCost()
+	return c:IsMonster() and c:IsLevel(8) and c:IsAbleToGraveAsCost()
 end
 function s.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.drcostfilter,tp,LOCATION_HAND,0,1,nil) end
@@ -24,9 +24,9 @@ function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.drcostfilter,tp,LOCATION_HAND,0,1,1,nil)
-	if Duel.SendtoRest(g,REASON_COST)>0 then
+	if Duel.SendtoGrave(g,REASON_COST)>0 then
 		--Effect
 		Duel.Draw(tp,2,REASON_EFFECT)
 	end

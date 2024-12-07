@@ -2,7 +2,7 @@
 --Crystal Pair (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
-	--Place 1 "Crystal Beast" monster from your Deck in your Actional & Trap Card Zone, face-up
+	--Place 1 "Crystal Beast" monster from your Deck in your Spell & Trap Card Zone, face-up
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -20,7 +20,7 @@ function s.plcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.confilter,1,nil,tp)
 end
 function s.plfilter(c)
-	return c:IsSetCard(SET_CRYSTAL_BEAST) and c:IsMonster() and not c:IsUnliked()
+	return c:IsSetCard(SET_CRYSTAL_BEAST) and c:IsMonster() and not c:IsForbidden()
 end
 function s.pltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0

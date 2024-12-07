@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.costfilter(c)
-	return c:IsRace(RACE_PLANT) and c:IsFaceup() and c:IsAbleToRestAsCost()
+	return c:IsRace(RACE_PLANT) and c:IsFaceup() and c:IsAbleToGraveAsCost()
 		and Duel.IsExistingMatchingCard(aux.AND(Card.IsDefensePos,Card.IsCanChangePosition),0,LOCATION_MZONE,LOCATION_MZONE,1,c)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -25,11 +25,11 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	-- Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_MZONE,0,1,1,nil)
 	if #g==0 then return end
 	g=g:AddMaximumCheck()
-	if Duel.SendtoRest(g,REASON_COST)==0 then return end
+	if Duel.SendtoGrave(g,REASON_COST)==0 then return end
 	-- Effect
 	local tc=Duel.SelectMatchingCard(tp,aux.AND(Card.IsDefensePos,Card.IsCanChangePosition),tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil):GetFirst()
 	if tc and Duel.ChangePosition(tc,0,0,POS_FACEUP_ATTACK,POS_FACEUP_ATTACK)>0 and Duel.IsPlayerCanDraw(tp,1)

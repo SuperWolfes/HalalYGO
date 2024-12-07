@@ -14,13 +14,13 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Add this card to hand to return 1 banished monster to RP
+	--Add this card to hand to return 1 banished monster to GY
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_TOREST+CATEGORY_TOHAND+CATEGORY_LEAVE_REST)
+	e2:SetCategory(CATEGORY_TOGRAVE+CATEGORY_TOHAND+CATEGORY_LEAVE_GRAVE)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetTarget(s.rettg)
 	e2:SetOperation(s.retop)
@@ -63,7 +63,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		end
 	end
 end
---RP/Banished return effect
+--GY/Banished return effect
 function s.retfilter(c)
 	return c:IsMonster() and c:IsFaceup()
 end
@@ -74,7 +74,7 @@ function s.rettg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,0))
 	local g=Duel.SelectTarget(tp,s.retfilter,tp,LOCATION_REMOVED,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,c,1,0,0)
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,g,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,g,1,0,0)
 	
 end
 function s.retop(e,tp,eg,ep,ev,re,r,rp)
@@ -82,7 +82,7 @@ function s.retop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()	
 	if tc and tc:IsRelateToEffect(e) and c and c:IsRelateToEffect(e) then 
 		if Duel.SendtoHand(c,nil,REASON_EFFECT)>0 and c:IsLocation(LOCATION_HAND) then
-			Duel.SendtoRest(tc,REASON_EFFECT+REASON_RETURN)
+			Duel.SendtoGrave(tc,REASON_EFFECT+REASON_RETURN)
 		end
 	end
 end

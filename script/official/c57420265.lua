@@ -55,12 +55,12 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local sg=g:FilterSelect(tp,s.spfilter,1,1,nil,e,tp,g)
 	if #sg==1 then
 		Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)
-		Duel.SendtoRest(g:Sub(sg),REASON_EFFECT|REASON_DISCARD)
+		Duel.SendtoGrave(g:Sub(sg),REASON_EFFECT|REASON_DISCARD)
 	end
 end
 function s.discon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsLocation(LOCATION_REST) and r==REASON_SYNCHRO and c:GetReasonCard():IsAttribute(ATTRIBUTE_WATER)
+	return c:IsLocation(LOCATION_GRAVE) and r==REASON_SYNCHRO and c:GetReasonCard():IsAttribute(ATTRIBUTE_WATER)
 end
 function s.disfilter(c)
 	return c:IsNegatableMonster() and c:IsType(TYPE_EFFECT)

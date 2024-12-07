@@ -1,5 +1,5 @@
---S.D.ダイナマイト
---S.D. Dynamite
+--D.D.ダイナマイト
+--D.D. Dynamite
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

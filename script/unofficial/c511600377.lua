@@ -1,5 +1,5 @@
 --RUM－リミテッド・バリアンズ・フォース (Anime)
---Rank-Up-Ment Limited Barian's Fcoree (Anime)
+--Rank-Up-Magic Limited Barian's Force (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

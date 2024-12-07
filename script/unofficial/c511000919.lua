@@ -1,5 +1,5 @@
 --月輪鏡
---Full Horizon Mirror
+--Full Moon Mirror
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(0x99)
@@ -44,8 +44,8 @@ function s.accon(e)
 	return e:GetHandler():GetCounter(0x99)==10
 end
 function s.accost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
-	Duel.SendtoRest(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
+	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
 end
 function s.filter(c,tp)
 	return c:IsCode(100000080) and c:GetActivateEffect():IsActivatable(tp,true,true)
@@ -64,10 +64,10 @@ function s.acop(e,tp,eg,ep,ev,re,r,rp)
 			if Duel.GetFlagEffect(tp,62765383)>0 then
 				if fc then Duel.Destroy(fc,REASON_RULE) end
 				of=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
-				if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
+				if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
 			else
 				Duel.GetFieldCard(tp,LOCATION_FZONE,0)
-				if fc and Duel.SendtoRest(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
+				if fc and Duel.SendtoGrave(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
 			end
 		end
 		Duel.MoveToField(tc,tp,tp,loc,POS_FACEUP,true)

@@ -16,7 +16,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(1)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeck(tp,5) end
 	Duel.DiscardDeck(tp,5,REASON_COST)
-	local g=Duel.GetOperatedGroup():Filter(Card.IsLocation,nil,LOCATION_REST)
+	local g=Duel.GetOperatedGroup():Filter(Card.IsLocation,nil,LOCATION_GRAVE)
 	Duel.SetTargetCard(g)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)

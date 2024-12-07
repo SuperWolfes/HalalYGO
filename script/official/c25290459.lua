@@ -14,7 +14,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x41}
 function s.costfilter(c,e,tp)
-	if not c:IsSetCard(0x41) or not c:IsAbleToRestAsCost() or not c:IsFaceup() then return false end
+	if not c:IsSetCard(0x41) or not c:IsAbleToGraveAsCost() or not c:IsFaceup() then return false end
 	return c.listed_names and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil,c,e,tp)
 end
 function s.spfilter(c,class,e,tp)
@@ -31,9 +31,9 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 		e:SetLabel(0)
 		return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_MZONE,0,1,nil,e,tp) 
 			and Duel.GetLocationCount(tp,LOCATION_MZONE)>-1 end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_MZONE,0,1,1,nil,e,tp)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 	local code=g:GetFirst():GetOriginalCode()
 	Duel.SetTargetParam(code)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND+LOCATION_DECK)

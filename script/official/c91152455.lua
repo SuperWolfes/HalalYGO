@@ -50,7 +50,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if tc and Duel.SpecialSummon(tc,0,tp,tp,true,false,POS_FACEUP)>0 then
 		if not (c:IsRelateToEffect(e) and Duel.SelectYesNo(tp,aux.Stringid(id,1))) then return end
-		c:CancelToRest(true)
+		c:CancelToGrave(true)
 		Duel.BreakEffect()
 		if not tc:EquipByEffectAndLimitRegister(e,tp,c,nil,true) then return end
 		--Equip limit
@@ -61,7 +61,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e0:SetValue(function(e,c) return c==tc end)
 		e0:SetReset(RESET_EVENT|RESETS_STANDARD)
 		c:RegisterEffect(e0)
-		--If the equipped monster would be destroyed by battle or card effect, you can send this card to the RP instead
+		--If the equipped monster would be destroyed by battle or card effect, you can send this card to the GY instead
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_EQUIP+EFFECT_TYPE_CONTINUOUS)
 		e1:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
@@ -75,6 +75,6 @@ function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	local ec=c:GetEquipTarget()
 	if chk==0 then return ec:IsReason(REASON_BATTLE|REASON_EFFECT) and not ec:IsReason(REASON_REPLACE)
-		and c:IsAbleToRest() and not c:IsStatus(STATUS_DESTROY_CONFIRMED) end
-	return Duel.SelectEffectYesNo(tp,c,96) and Duel.SendtoRest(c,REASON_EFFECT)>0
+		and c:IsAbleToGrave() and not c:IsStatus(STATUS_DESTROY_CONFIRMED) end
+	return Duel.SelectEffectYesNo(tp,c,96) and Duel.SendtoGrave(c,REASON_EFFECT)>0
 end

@@ -2,7 +2,7 @@
 --Dark Red Enchanter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableCounterPermit(COUNTER_ACTIONAL)
+	c:EnableCounterPermit(COUNTER_SPELL)
 	--summon success
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -46,27 +46,27 @@ function s.initial_effect(c)
 	e4:SetOperation(s.desop)
 	c:RegisterEffect(e4)
 end
-s.counter_place_list={COUNTER_ACTIONAL}
+s.counter_place_list={COUNTER_SPELL}
 function s.addct(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,2,0,COUNTER_ACTIONAL)
+	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,2,0,COUNTER_SPELL)
 end
 function s.addc(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():IsRelateToEffect(e) then
-		e:GetHandler():AddCounter(COUNTER_ACTIONAL,2)
+		e:GetHandler():AddCounter(COUNTER_SPELL,2)
 	end
 end
 function s.acop(e,tp,eg,ep,ev,re,r,rp)
-	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_ACTIONAL) and e:GetHandler():GetFlagEffect(1)>0 then
-		e:GetHandler():AddCounter(COUNTER_ACTIONAL,1)
+	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_SPELL) and e:GetHandler():GetFlagEffect(1)>0 then
+		e:GetHandler():AddCounter(COUNTER_SPELL,1)
 	end
 end
 function s.attackup(e,c)
-	return c:GetCounter(COUNTER_ACTIONAL)*300
+	return c:GetCounter(COUNTER_SPELL)*300
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,COUNTER_ACTIONAL,2,REASON_COST) end
-	e:GetHandler():RemoveCounter(tp,COUNTER_ACTIONAL,2,REASON_COST)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,COUNTER_SPELL,2,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,COUNTER_SPELL,2,REASON_COST)
 end
 function s.destarg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroupCount(tp,0,LOCATION_HAND)>0 end
@@ -76,5 +76,5 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(tp,0,LOCATION_HAND,nil)
 	if #g==0 then return end
 	local sg=g:RandomSelect(1-tp,1)
-	Duel.SendtoRest(sg,REASON_DISCARD+REASON_EFFECT)
+	Duel.SendtoGrave(sg,REASON_DISCARD+REASON_EFFECT)
 end

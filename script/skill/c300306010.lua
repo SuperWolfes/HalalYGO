@@ -1,4 +1,4 @@
---Dragon Fcoree
+--Dragon Force
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
@@ -12,17 +12,17 @@ function s.rmvfilter(c,tp)
 	return c:IsType(TYPE_NORMAL) and c:IsRace(RACE_DRAGON) and c:HasLevel() and c:IsMonster() and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c) and Duel.IsExistingMatchingCard(s.dfilter,tp,LOCATION_MZONE,0,1,nil)
 end
 function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
-	return aux.CanActivateSkill(tp) and Duel.IsExistingMatchingCard(s.rmvfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,nil,tp)
+	return aux.CanActivateSkill(tp) and Duel.IsExistingMatchingCard(s.rmvfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil,tp)
 end
 function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SKILL_FLIP,tp,id|(1<<32))
 	Duel.Hint(HINT_CARD,tp,id)
 	local c=e:GetHandler()
-	--Banish 1 Dragon Normal Monster from RP to give piecring/ATK gain to Dragon Normal monster on field
+	--Banish 1 Dragon Normal Monster from GY to give piecring/ATK gain to Dragon Normal monster on field
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local tc=Duel.SelectMatchingCard(tp,s.rmvfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,1,nil,tp):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,s.rmvfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,nil,tp):GetFirst()
 	local atk=tc:GetLevel()*200
-	if Duel.Remove(tc,POS_FACEUP,REASON_COST)>0 and tc:IsPreviousLocation(LOCATION_REST) then
+	if Duel.Remove(tc,POS_FACEUP,REASON_COST)>0 and tc:IsPreviousLocation(LOCATION_GRAVE) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SELECT)
 		local sc=Duel.SelectMatchingCard(tp,s.dfilter,tp,LOCATION_MZONE,0,1,1,nil,tp):GetFirst()
 		if sc then

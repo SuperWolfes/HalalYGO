@@ -24,7 +24,7 @@ function s.initial_effect(c)
 		Duel.RegisterEffect(e2,0)
 		local e3=Effect.CreateEffect(c)
 		e3:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
-		e3:SetCode(EVENT_TO_REST)
+		e3:SetCode(EVENT_TO_GRAVE)
 		e3:SetOperation(s.set)
 		Duel.RegisterEffect(e3,0)
 	end

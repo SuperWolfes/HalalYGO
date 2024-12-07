@@ -15,7 +15,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_ASSAULT_MODE}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_REST) and r==REASON_SYNCHRO
+	return e:GetHandler():IsLocation(LOCATION_GRAVE) and r==REASON_SYNCHRO
 end
 function s.filter(c)
 	return c:IsCode(CARD_ASSAULT_MODE) and c:IsAbleToHand()

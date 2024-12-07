@@ -1,5 +1,5 @@
 --Ｓｐ－二重召喚
---Speed Actional - Double Summon
+--Speed Spell - Double Summon
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

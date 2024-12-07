@@ -3,7 +3,7 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Fusion summon 1 "Destrudic HERO" fusion monster
+	--Fusion summon 1 "Destiny HERO" fusion monster
 	--Using monsters you control as fusion material
 	c:RegisterEffect(Fusion.CreateSummonEff(c,nil,Fusion.OnFieldMat(aux.FilterBoolFunction(Card.IsSetCard,0xc008)),nil,nil,nil,s.stage2))
 end

@@ -1,4 +1,4 @@
---Amazonian Curse Mirror
+--Amazoness Curse Mirror
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

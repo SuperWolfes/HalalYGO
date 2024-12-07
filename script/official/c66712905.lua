@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	-- Special Summon
-	local e1,e2=Effect.CreateMysteruneQPEffect(c,id,CATEGORY_TOREST+CATEGORY_HANDES,s.tgtg,s.tgop,2,EFFECT_FLAG_DELAY,EVENT_TO_HAND)
+	local e1,e2=Effect.CreateMysteruneQPEffect(c,id,CATEGORY_TOGRAVE+CATEGORY_HANDES,s.tgtg,s.tgop,2,EFFECT_FLAG_DELAY,EVENT_TO_HAND)
 	e1:SetCondition(s.tgcon)
 	c:RegisterEffect(e1)
 	c:RegisterEffect(e2)
@@ -25,6 +25,6 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(tp,0,LOCATION_HAND)
 	if #g>0 then
 		local sg=g:RandomSelect(1-tp,1)
-		return #sg>0 and Duel.SendtoRest(sg,REASON_EFFECT+REASON_DISCARD)>0
+		return #sg>0 and Duel.SendtoGrave(sg,REASON_EFFECT+REASON_DISCARD)>0
 	end
 end

@@ -55,7 +55,7 @@ function s.initial_effect(c)
 	e7:SetType(EFFECT_TYPE_FIELD)
 	e7:SetRange(LOCATION_MZONE)
 	e7:SetTargetRange(0,LOCATION_HAND)
-	e7:SetCode(EFFECT_CANNOT_TO_REST_AS_COST)
+	e7:SetCode(EFFECT_CANNOT_TO_GRAVE_AS_COST)
 	e7:SetCondition(s.excon)
 	c:RegisterEffect(e7)
 end
@@ -64,7 +64,7 @@ function s.atkval(e,c)
 	return c:GetLevel()*300
 end
 function s.lvcon(e,tp,eg,ep,ev,re,r,rp)
-	return re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) and re:GetHandler():IsSetCard(0x107)
+	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP) and re:GetHandler():IsSetCard(0x107)
 end
 function s.lvop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

@@ -18,7 +18,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x9b}
 function s.condition(e,c)
-	return c:IsRace(RACE_WANDERER)
+	return c:IsRace(RACE_FAIRY)
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetFlagEffect(tp,id)~=0 then return end

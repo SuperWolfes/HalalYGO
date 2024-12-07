@@ -15,10 +15,10 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
-	--Send 2 monsters with different names from extra deck to RP
+	--Send 2 monsters with different names from extra deck to GY
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_TOREST)
+	e2:SetCategory(CATEGORY_TOGRAVE)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCountLimit(1,{id,1})
@@ -35,9 +35,9 @@ end
 	--Banish a fusion/synchro/Xyz/link monster as cost
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_REST,0,1,nil,ft) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_GRAVE,0,1,nil,ft) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_REST,0,1,1,nil,ft)
+	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_GRAVE,0,1,1,nil,ft)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 	--Activation legality
@@ -54,24 +54,24 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 end
 	--Activation legality
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(Card.IsAbleToRest,tp,LOCATION_EXTRA,0,nil)
-	local g2=Duel.GetMatchingGroup(Card.IsAbleToRest,tp,0,LOCATION_EXTRA,nil)
+	local g=Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,LOCATION_EXTRA,0,nil)
+	local g2=Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,0,LOCATION_EXTRA,nil)
 	if chk==0 then return g:GetClassCount(Card.GetCode)>=2 and #g2>=2 end
-	--Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,2,tp,LOCATION_EXTRA)
+	--Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,2,tp,LOCATION_EXTRA)
 end
-	--Send 2 monsters with different names from extra deck to RP, opponent also sends 2
+	--Send 2 monsters with different names from extra deck to GY, opponent also sends 2
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(Card.IsAbleToRest,tp,LOCATION_EXTRA,0,nil)
+	local g=Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,LOCATION_EXTRA,0,nil)
 	if g:GetClassCount(Card.GetCode)>=2 then
-		--Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-		local sg=aux.SelectUnselectGroup(g,e,tp,2,2,aux.dncheck,1,tp,HINTMSG_TOREST)
-		Duel.SendtoRest(sg,REASON_EFFECT)
+		--Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		local sg=aux.SelectUnselectGroup(g,e,tp,2,2,aux.dncheck,1,tp,HINTMSG_TOGRAVE)
+		Duel.SendtoGrave(sg,REASON_EFFECT)
 	end
-	local dg=Duel.GetMatchingGroup(Card.IsAbleToRest,tp,0,LOCATION_EXTRA,nil)
+	local dg=Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,0,LOCATION_EXTRA,nil)
 	if #dg>=2 then
-		Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOREST)
+		Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOGRAVE)
 		local tg=dg:Select(1-tp,2,2,nil)
-		Duel.SendtoRest(tg,REASON_EFFECT)
+		Duel.SendtoGrave(tg,REASON_EFFECT)
 	end
 	local ge1=Effect.CreateEffect(e:GetHandler())
 	ge1:SetType(EFFECT_TYPE_FIELD)

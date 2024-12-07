@@ -1,5 +1,5 @@
 --カウンターマシンガンパンチ
---Continuous Mismatching Punch (GOAT)
+--Continuous Destruction Punch (GOAT)
 --The monster is considered as having the destroyed status starting
 --when they would normally be considered as such
 local s,id=GetID()

@@ -29,5 +29,5 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e2,tp)
 end
 function s.efilter(e,te)
-	return te:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) and e:GetOwnerPlayer()~=te:GetOwnerPlayer()
+	return te:IsActiveType(TYPE_SPELL+TYPE_TRAP) and e:GetOwnerPlayer()~=te:GetOwnerPlayer()
 end

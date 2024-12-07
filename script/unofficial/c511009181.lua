@@ -17,7 +17,7 @@ function s.cfilter(c)
 	return c:IsYomi() and c:IsMonster()
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetMatchingGroupCount(s.cfilter,tp,LOCATION_REST,0,nil)==2
+	return Duel.GetMatchingGroupCount(s.cfilter,tp,LOCATION_GRAVE,0,nil)==2
 end
 function s.filter(c,e,tp)
 	return c:IsYomi() and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

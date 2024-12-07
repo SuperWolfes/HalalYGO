@@ -19,7 +19,7 @@ function s.filter(c,e,tp)
 	else
 		ct=#og
 	end
-	return c:IsLocation(LOCATION_REST) and c:IsPreviousControler(tp) and c:IsReason(REASON_BATTLE)
+	return c:IsLocation(LOCATION_GRAVE) and c:IsPreviousControler(tp) and c:IsReason(REASON_BATTLE)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and c:IsAttribute(ATTRIBUTE_WATER) and c:IsType(TYPE_XYZ)
 		and Duel.GetLocationCount(tp,LOCATION_MZONE)>ct
 end
@@ -35,7 +35,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=eg:Filter(s.filter,nil,e,tp):GetFirst()
 	if tc then
-		local og=tc:GetMaterial():Filter(Card.IsCanBeSpecialSummoned,nil,e,0,tp,false,false):Filter(Card.IsLocation,nil,LOCATION_REST)
+		local og=tc:GetMaterial():Filter(Card.IsCanBeSpecialSummoned,nil,e,0,tp,false,false):Filter(Card.IsLocation,nil,LOCATION_GRAVE)
 		local ct=0
 		if #og>2 then
 			ct=2

@@ -1,8 +1,8 @@
 --ティンダングル・アキュート・ケルベロス 
---Tindangle Acute Cebrar (Anime)
+--Tindangle Acute Cerberus (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunction(Card.IsSetCard,0x10b),3,3)
 	--atk
 	local e1=Effect.CreateEffect(c)
@@ -36,7 +36,7 @@ end
 s.listed_series={0x10b}
 s.listed_names={68860936}
 function s.atkval1(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsCode,c:GetControler(),LOCATION_REST,0,nil,31759689,68860936)*1500
+	return Duel.GetMatchingGroupCount(Card.IsCode,c:GetControler(),LOCATION_GRAVE,0,nil,31759689,68860936)*1500
 end
 function s.atkfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0x10b)
@@ -49,13 +49,13 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,75119041,0x10b,TYPES_TOKEN,0,0,1,RACE_TAINTED,ATTRIBUTE_DARK) end
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,75119041,0x10b,TYPES_TOKEN,0,0,1,RACE_FIEND,ATTRIBUTE_DARK) end
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)>0 
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,75119041,0x10b,TYPES_TOKEN,0,0,1,RACE_TAINTED,ATTRIBUTE_DARK) then
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,75119041,0x10b,TYPES_TOKEN,0,0,1,RACE_FIEND,ATTRIBUTE_DARK) then
 		local token=Duel.CreateToken(tp,75119041)
 		Duel.SpecialSummon(token,0,tp,tp,false,false,POS_FACEUP)
 	end

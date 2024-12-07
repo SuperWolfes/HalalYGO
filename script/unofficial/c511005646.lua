@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.cttg)
 	e2:SetOperation(s.ctop)
 	c:RegisterEffect(e2)
-	--send to rest -1000 for each counter
+	--send to grave -1000 for each counter
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(21521304,0))
 	e3:SetType(EFFECT_TYPE_IGNITION)
@@ -31,8 +31,8 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.ctcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,nil) end
-	Duel.DiscardHand(tp,Card.IsAbleToRestAsCost,1,1,REASON_COST)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,nil) end
+	Duel.DiscardHand(tp,Card.IsAbleToGraveAsCost,1,1,REASON_COST)
 end
 function s.cttg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -46,9 +46,9 @@ function s.ctop(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:GetCounter(0x32)>0 and c:IsAbleToRestAsCost() end
+	if chk==0 then return c:GetCounter(0x32)>0 and c:IsAbleToGraveAsCost() end
 	e:SetLabel(c:GetCounter(0x32))
-	Duel.SendtoRest(e:GetHandler(),REASON_COST)
+	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chkc then return chkc:IsControler(1-tp) and chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() end

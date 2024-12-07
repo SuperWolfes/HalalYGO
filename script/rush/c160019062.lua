@@ -19,14 +19,14 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return atkr and atkr:IsControler(1-tp)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	local ct=Duel.GetMatchingGroupCount(Card.IsCode,tp,LOCATION_REST,0,nil,CARD_SKULL_SERVANT)
+	local ct=Duel.GetMatchingGroupCount(Card.IsCode,tp,LOCATION_GRAVE,0,nil,CARD_SKULL_SERVANT)
 	if chk==0 then return ct>0 end
 	Duel.SetOperationInfo(0,CATEGORY_ATKCHANGE,tc,1,0,-1000*ct)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Effect
 	local tc=Duel.GetAttacker()
-	local ct=Duel.GetMatchingGroupCount(Card.IsCode,tp,LOCATION_REST,0,nil,CARD_SKULL_SERVANT)
+	local ct=Duel.GetMatchingGroupCount(Card.IsCode,tp,LOCATION_GRAVE,0,nil,CARD_SKULL_SERVANT)
 	if tc and tc:IsRelateToBattle() and tc:IsFaceup() and ct>0 then
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)

@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--equip
 	aux.AddEquipProcedure(c,0,s.eqfilter,s.eqlimit)
-	--Cannot be destroyed by actional effects
+	--Cannot be destroyed by spell effects
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_EQUIP)
 	e1:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
@@ -26,7 +26,7 @@ function s.eqlimit(e,c)
 	return c:IsFaceup()
 end
 function s.efilter(e,te)
-	return te:IsActionalEffect()
+	return te:IsSpellEffect()
 end
 function s.condition(e)
 	return Duel.GetTurnPlayer()==e:GetHandler():GetControler()

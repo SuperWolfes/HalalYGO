@@ -1,5 +1,5 @@
 --レジェンド・デビル
---Legendary Tainted
+--Legendary Fiend
 local s,id=GetID()
 function s.initial_effect(c)
 	--Increase its ATK

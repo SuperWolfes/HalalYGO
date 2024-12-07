@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e2:SetCountLimit(1,{id,1})
-	e2:SetCondition(function(e) return e:GetHandler():IsSummonLocation(LOCATION_REST) end)
+	e2:SetCondition(function(e) return e:GetHandler():IsSummonLocation(LOCATION_GRAVE) end)
 	e2:SetTarget(function(e,tp,eg,ep,ev,re,r,rp,chk) if chk==0 then return not e:GetHandler():IsType(TYPE_TUNER) end end)
 	e2:SetOperation(s.tnop)
 	c:RegisterEffect(e2)
@@ -50,7 +50,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoRest(g,REASON_DISCARD|REASON_COST)
+	Duel.SendtoGrave(g,REASON_DISCARD|REASON_COST)
 	g:DeleteGroup()
 end
 function s.tnop(e,tp,eg,ep,ev,re,r,rp)

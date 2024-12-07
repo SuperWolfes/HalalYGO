@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Link.AddProcedure(c,s.matfilter,1,1)
 	--destroy
 	local e1=Effect.CreateEffect(c)

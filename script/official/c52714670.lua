@@ -1,5 +1,5 @@
 --メタファイズ・ディメンション
---Metadata Dimension
+--Metaphys Dimension
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

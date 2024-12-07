@@ -1,5 +1,5 @@
 --デコード・エンド
---Decode Mismatching
+--Decode Destruction
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

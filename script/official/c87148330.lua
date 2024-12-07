@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c)
-	return c:IsRace(RACE_WANDERER) and not c:IsPublic()
+	return c:IsRace(RACE_FAIRY) and not c:IsPublic()
 end
 function s.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return ep==tp and eg:IsExists(s.filter,1,nil) end

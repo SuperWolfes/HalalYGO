@@ -1,5 +1,5 @@
 -- 氷水艇エーギロカシス
--- Icejade Matching Aegirocassis
+-- Icejade Creation Aegirocassis
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_QUICK_O)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e3:SetCode(EVENT_FREE_CHAIN)
-	e3:SetRange(LOCATION_HAND|LOCATION_REST)
+	e3:SetRange(LOCATION_HAND|LOCATION_GRAVE)
 	e3:SetCountLimit(1,id)
 	e3:SetHintTiming(0,TIMINGS_CHECK_MONSTER_E|TIMING_MAIN_END)
 	e3:SetTarget(s.eqtg)
@@ -49,8 +49,8 @@ function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SelectTarget(tp,aux.FaceupFilter(Card.IsSetCard,SET_ICEJADE),tp,LOCATION_MZONE,0,1,1,nil)
 	local c=e:GetHandler()
 	Duel.SetOperationInfo(0,CATEGORY_EQUIP,c,1,0,0)
-	if c:IsLocation(LOCATION_REST) then
-		Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,c,1,0,0)
+	if c:IsLocation(LOCATION_GRAVE) then
+		Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,c,1,0,0)
 	end
 end
 function s.eqop(e,tp,eg,ep,ev,re,r,rp)
@@ -69,7 +69,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetLabelObject(tc)
 		c:RegisterEffect(e1)
 	elseif c:IsLocation(LOCATION_HAND) then
-		Duel.SendtoRest(c,REASON_RULE)
+		Duel.SendtoGrave(c,REASON_RULE)
 	end
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)

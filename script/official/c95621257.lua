@@ -1,5 +1,5 @@
 --フレムベル・マジカル
---Flamvell Mentor
+--Flamvell Magician
 local s,id=GetID()
 function s.initial_effect(c)
 	--Gain 400 ATK if you control an "Ally of Justice" monster

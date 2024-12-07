@@ -25,7 +25,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x1550}
 function s.filter(c)
-	return c:IsFaceup() and c:IsRace(RACE_WANDERER)
+	return c:IsFaceup() and c:IsRace(RACE_FAIRY)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,0,1,nil) end

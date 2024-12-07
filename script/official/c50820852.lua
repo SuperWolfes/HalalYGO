@@ -1,10 +1,10 @@
 --雛神鳥シムルグ
---Sisbird, Bird of Beginnings
+--Simorgh, Bird of Beginnings
 --Scripted by AlphaKretin
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Gain an extra normal summon for "Sisbird" monsters
+	--Gain an extra normal summon for "Simorgh" monsters
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_TRIGGER_O+EFFECT_TYPE_SINGLE)
@@ -14,12 +14,12 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sumtg)
 	e1:SetOperation(s.sumop)
 	c:RegisterEffect(e1)
-	--Special summon itself from RP
+	--Special summon itself from GY
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(s.sscon)
 	e2:SetTarget(s.sstg)

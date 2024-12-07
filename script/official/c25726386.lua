@@ -3,10 +3,10 @@
 --Scripted by Hel
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
-	local locked_target_params={handler=c,lvtype=RITPROC_GREATER,filter=function(locked_c) return locked_c:IsSetCard(SET_MEGALITH) and locked_c~=c end,fcoreedselection=s.fcoreedselection}
-	local locked_operation_params={handler=c,lvtype=RITPROC_GREATER,filter=function(locked_c) return locked_c:IsSetCard(SET_MEGALITH) end}
-	--Locked Summon 1 "Megalith" Locked Monster from your hand, by Tributing monsters from your hand or field whose total Levels equal or exceed its Level
+	c:EnableReviveLimit()
+	local ritual_target_params={handler=c,lvtype=RITPROC_GREATER,filter=function(ritual_c) return ritual_c:IsSetCard(SET_MEGALITH) and ritual_c~=c end,forcedselection=s.forcedselection}
+	local ritual_operation_params={handler=c,lvtype=RITPROC_GREATER,filter=function(ritual_c) return ritual_c:IsSetCard(SET_MEGALITH) end}
+	--Ritual Summon 1 "Megalith" Ritual Monster from your hand, by Tributing monsters from your hand or field whose total Levels equal or exceed its Level
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_RELEASE+CATEGORY_SPECIAL_SUMMON)
@@ -17,8 +17,8 @@ function s.initial_effect(c)
 	e1:SetHintTiming(0,TIMING_MAIN_END|TIMINGS_CHECK_MONSTER)
 	e1:SetCondition(function() return Duel.IsMainPhase() end)
 	e1:SetCost(aux.SelfDiscardCost)
-	e1:SetTarget(Locked.Target(locked_target_params))
-	e1:SetOperation(Locked.Operation(locked_operation_params))
+	e1:SetTarget(Ritual.Target(ritual_target_params))
+	e1:SetOperation(Ritual.Operation(ritual_operation_params))
 	c:RegisterEffect(e1)
 	--Negate the activation of an opponent's effect that targets a card you control
 	local e2=Effect.CreateEffect(c)
@@ -35,7 +35,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 s.listed_series={SET_MEGALITH}
-function s.fcoreedselection(e,tp,g,sc)
+function s.forcedselection(e,tp,g,sc)
 	local c=e:GetHandler()
 	return not g:IsContains(c),g:IsContains(c)
 end
@@ -48,13 +48,13 @@ function s.negcon(e,tp,eg,ep,ev,re,r,rp)
 	return tg and tg:IsExists(s.negconfilter,1,nil,tp)
 end
 function s.tdfilter(c)
-	return c:IsLockedMonster() and c:IsAbleToDeck()
+	return c:IsRitualMonster() and c:IsAbleToDeck()
 end
 function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_GRAVE,0,1,nil) end
 	local rc=re:GetHandler()
-	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_REST)
+	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_GRAVE)
 	Duel.SetOperationInfo(0,CATEGORY_NEGATE,eg,1,tp,0)
 	if rc:IsDestructable() and rc:IsRelateToEffect(re) then
 		Duel.SetOperationInfo(0,CATEGORY_DESTROY,eg,1,tp,0)
@@ -62,7 +62,7 @@ function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local sc=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_REST,0,1,1,nil):GetFirst()
+	local sc=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_GRAVE,0,1,1,nil):GetFirst()
 	if not sc then return end
 	Duel.HintSelection(sc)
 	if Duel.SendtoDeck(sc,nil,SEQ_DECKBOTTOM,REASON_EFFECT)>0 and sc:IsLocation(LOCATION_DECK)

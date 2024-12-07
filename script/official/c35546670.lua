@@ -30,10 +30,10 @@ function s.initial_effect(c)
 	e4:SetTarget(s.drtg)
 	e4:SetOperation(s.drop)
 	c:RegisterEffect(e4)
-	--to rest
+	--to grave
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(id,1))
-	e5:SetCategory(CATEGORY_TOREST)
+	e5:SetCategory(CATEGORY_TOGRAVE)
 	e5:SetType(EFFECT_TYPE_IGNITION)
 	e5:SetRange(LOCATION_FZONE)
 	e5:SetCost(s.tgcost)
@@ -62,10 +62,10 @@ function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Draw(p,d,REASON_EFFECT)
 end
 function s.costfilter2(c)
-	return c:IsSetCard(0x10c) and c:IsMonster() and (c:IsLocation(LOCATION_REST) or c:IsFaceup()) and c:IsAbleToRemoveAsCost()
+	return c:IsSetCard(0x10c) and c:IsMonster() and (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup()) and c:IsAbleToRemoveAsCost()
 end
 function s.tgcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(s.costfilter2,tp,LOCATION_ONFIELD+LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(s.costfilter2,tp,LOCATION_ONFIELD+LOCATION_GRAVE,0,nil)
 	if chk==0 then return aux.SelectUnselectGroup(g,e,tp,8,8,aux.dncheck,0) end
 	local rg=aux.SelectUnselectGroup(g,e,tp,8,8,aux.dncheck,1,tp,HINTMSG_REMOVE)
 	if rg then
@@ -73,13 +73,13 @@ function s.tgcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRest,tp,0,LOCATION_HAND+LOCATION_EXTRA,1,nil) end
-	local g=Duel.GetMatchingGroup(Card.IsAbleToRest,tp,0,LOCATION_HAND+LOCATION_EXTRA,nil)
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,g,#g,0,0)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGrave,tp,0,LOCATION_HAND+LOCATION_EXTRA,1,nil) end
+	local g=Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,0,LOCATION_HAND+LOCATION_EXTRA,nil)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,g,#g,0,0)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
-	local g=Duel.GetMatchingGroup(Card.IsAbleToRest,tp,0,LOCATION_HAND+LOCATION_EXTRA,nil)
-	Duel.SendtoRest(g,REASON_EFFECT)
+	local g=Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,0,LOCATION_HAND+LOCATION_EXTRA,nil)
+	Duel.SendtoGrave(g,REASON_EFFECT)
 end
 

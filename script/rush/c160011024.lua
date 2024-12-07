@@ -1,5 +1,5 @@
 --風彩のプロフェシーフレーズ
---Prediction Phrase of the Colors of the Wind
+--Prophecy Phrase of the Colors of the Wind
 local s,id=GetID()
 function s.initial_effect(c)
 	--ATK increase
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c)
-	return c:IsRace(RACE_MENTAL) and c:IsAttribute(ATTRIBUTE_WIND)
+	return c:IsRace(RACE_PSYCHIC) and c:IsAttribute(ATTRIBUTE_WIND)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,0,nil)
@@ -37,8 +37,8 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.PayLPCost(tp,1000)
 	--Effect
 	local g=Duel.GetFieldGroup(tp,LOCATION_HAND,LOCATION_HAND)
-	if Duel.SendtoRest(g,REASON_EFFECT+REASON_DISCARD)<1
-		or #g:Match(Card.IsLocation,nil,LOCATION_REST)<1 then return end
+	if Duel.SendtoGrave(g,REASON_EFFECT+REASON_DISCARD)<1
+		or #g:Match(Card.IsLocation,nil,LOCATION_GRAVE)<1 then return end
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
 	local dam=Duel.Damage(p,#g*200,REASON_EFFECT)
 	local g2=Duel.GetMatchingGroup(aux.FilterMaximumSideFunctionEx(Card.IsFaceup),tp,0,LOCATION_MZONE,nil)

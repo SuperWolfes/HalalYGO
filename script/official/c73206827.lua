@@ -40,7 +40,7 @@ function s.initial_effect(c)
 	e4:SetOperation(s.recop)
 	c:RegisterEffect(e4)
 end
-s.listed_series={SET_ARCANA_FCOREE}
+s.listed_series={SET_ARCANA_FORCE}
 s.toss_coin=true
 function s.cointg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -60,7 +60,7 @@ end
 function s.reccon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local rc=eg:GetFirst()
-	return rc:IsRelateToBattle() and rc:IsSetCard(SET_ARCANA_FCOREE) and rc:IsFaceup() and rc:IsControler(tp)
+	return rc:IsRelateToBattle() and rc:IsSetCard(SET_ARCANA_FORCE) and rc:IsFaceup() and rc:IsControler(tp)
 		and (c:GetFlagEffect(id+1)==0 or c:IsHasEffect(EFFECT_CANNOT_DISABLE))
 end
 function s.rectg(e,tp,eg,ep,ev,re,r,rp,chk)

@@ -91,7 +91,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil)
 end
 function s.eqfilter(c)
-	return c:IsSetCard(0x12b) and c:IsLinkMonster() and not c:IsUnliked()
+	return c:IsSetCard(0x12b) and c:IsLinkMonster() and not c:IsForbidden()
 end
 function s.eqcon(sg,e,tp,mg)
 	return sg:GetClassCount(Card.GetLink)==#sg
@@ -99,18 +99,18 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return eg:IsContains(chkc) and s.cfilter(chkc) end
 	if chk==0 then return eg:IsExists(s.cfilter,1,nil) and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and Duel.IsExistingMatchingCard(s.eqfilter,tp,LOCATION_REST,0,1,nil) end
+		and Duel.IsExistingMatchingCard(s.eqfilter,tp,LOCATION_GRAVE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 	local g=eg:FilterSelect(tp,s.cfilter,1,1,nil)
 	Duel.SetTargetCard(g)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,nil,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,nil,1,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
 	local tc=Duel.GetFirstTarget()
 	if ft<1 or not tc or not tc:IsRelateToEffect(e) or not tc:IsFaceup() then return end
-	local g=aux.SelectUnselectGroup(Duel.GetMatchingGroup(aux.NecroValleyFilter(s.eqfilter),tp,LOCATION_REST,0,nil),e,tp,1,math.min(ft,3),s.eqcon,1,tp,HINTMSG_EQUIP)
+	local g=aux.SelectUnselectGroup(Duel.GetMatchingGroup(aux.NecroValleyFilter(s.eqfilter),tp,LOCATION_GRAVE,0,nil),e,tp,1,math.min(ft,3),s.eqcon,1,tp,HINTMSG_EQUIP)
 	for eqc in aux.Next(g) do
 		Duel.Equip(tp,eqc,tc,true,true)
 		--Equip limit

@@ -1,5 +1,5 @@
 --聖騎士と聖剣の巨城
---Camelot, Territory of Noble Knights and Noble Arms
+--Camelot, Realm of Noble Knights and Noble Arms
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--Mismatching replacement for "Noble Knight" cards
+	--Destruction replacement for "Noble Knight" cards
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EFFECT_DESTROY_REPLACE)
@@ -64,17 +64,17 @@ end
 function s.spfilter(c,e,tp,rmc)
 	return c:IsSetCard(SET_TOPOLOGIC) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 		and ((c:IsLocation(LOCATION_EXTRA) and Duel.GetLocationCountFromEx(tp,tp,rmc,c)>0)
-		or (c:IsLocation(LOCATION_REST) and Duel.GetMZoneCount(tp,rmc)>0))
+		or (c:IsLocation(LOCATION_GRAVE) and Duel.GetMZoneCount(tp,rmc)>0))
 end
 function s.tofieldfilter(c)
-	return c:IsCode(55742055) and not c:IsUnliked()
+	return c:IsCode(55742055) and not c:IsForbidden()
 end
 function s.tofieldtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToRemove() and Duel.IsExistingMatchingCard(s.tofieldfilter,tp,LOCATION_HAND|LOCATION_DECK|LOCATION_REST,0,1,nil) end
+	if chk==0 then return c:IsAbleToRemove() and Duel.IsExistingMatchingCard(s.tofieldfilter,tp,LOCATION_HAND|LOCATION_DECK|LOCATION_GRAVE,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,c,1,tp,0)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK|LOCATION_REST)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK|LOCATION_REST)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK|LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK|LOCATION_GRAVE)
 end
 function s.cfilter(c,e,tp,ft)
 	return (c:IsSetCard(SET_NOBLE_ARMS) and c:IsAbleToHand())
@@ -84,13 +84,13 @@ function s.tofieldop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and aux.RemoveUntil(c,nil,REASON_EFFECT,PHASE_STANDBY,id,e,tp,s.returnop) and c:IsLocation(LOCATION_REMOVED) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
-		local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.tofieldfilter),tp,LOCATION_HAND|LOCATION_DECK|LOCATION_REST,0,1,1,nil):GetFirst()
+		local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.tofieldfilter),tp,LOCATION_HAND|LOCATION_DECK|LOCATION_GRAVE,0,1,1,nil):GetFirst()
 		if not tc or not Duel.MoveToField(tc,tp,tp,LOCATION_FZONE,POS_FACEUP,true) then return end
-		--Special Summon 1 "Artorigus" monster, or add to your hand 1 "Noble Arms" card, from your Deck or RP
+		--Special Summon 1 "Artorigus" monster, or add to your hand 1 "Noble Arms" card, from your Deck or GY
 		local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-		if Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.cfilter),tp,LOCATION_DECK|LOCATION_REST,0,1,nil,e,tp,ft) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+		if Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.cfilter),tp,LOCATION_DECK|LOCATION_GRAVE,0,1,nil,e,tp,ft) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,2))
-			local sc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.cfilter),tp,LOCATION_DECK|LOCATION_REST,0,1,1,nil,e,tp,ft):GetFirst()
+			local sc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.cfilter),tp,LOCATION_DECK|LOCATION_GRAVE,0,1,1,nil,e,tp,ft):GetFirst()
 			if not sc then return end
 			local b1=ft>0 and sc:IsSetCard(SET_ARTORIGUS) and sc:IsCanBeSpecialSummoned(e,0,tp,false,false)
 			local b2=sc:IsSetCard(SET_NOBLE_ARMS) and sc:IsAbleToHand()
@@ -115,7 +115,7 @@ end
 function s.returnop(rg,e,tp,eg,ep,ev,re,r,rp)
 	local fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
 	if fc then
-		Duel.SendtoRest(fc,REASON_RULE)
+		Duel.SendtoGrave(fc,REASON_RULE)
 		Duel.BreakEffect()
 	end
 	Duel.MoveToField(e:GetHandler(),tp,tp,LOCATION_FZONE,POS_FACEUP,true)

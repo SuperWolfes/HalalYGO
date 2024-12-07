@@ -79,7 +79,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			Duel.ConfirmCards(1-p,sg)
 			Duel.ShuffleHand(p)
 		else
-			Duel.SendtoRest(sg,REASON_RULE)
+			Duel.SendtoGrave(sg,REASON_RULE)
 		end
 		Duel.BreakEffect()
 		Duel.ShuffleDeck(p)

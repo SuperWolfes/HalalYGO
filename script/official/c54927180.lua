@@ -25,14 +25,14 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		local atk2=tc2:GetTextAttack()
 		if atk1<0 then atk1=0 end
 		if atk2<0 then atk2=0 end
-		if atk1>atk2 and tc1:IsAbleToHand() and tc2:IsAbleToRest() then
+		if atk1>atk2 and tc1:IsAbleToHand() and tc2:IsAbleToGrave() then
 			Duel.DisableShuffleCheck()
 			Duel.SendtoHand(tc1,tp,REASON_EFFECT)
-			Duel.SendtoRest(tc2,REASON_EFFECT)
-		elseif atk1<atk2 and tc2:IsAbleToHand() and tc1:IsAbleToRest() then
+			Duel.SendtoGrave(tc2,REASON_EFFECT)
+		elseif atk1<atk2 and tc2:IsAbleToHand() and tc1:IsAbleToGrave() then
 			Duel.DisableShuffleCheck()
 			Duel.SendtoHand(tc2,1-tp,REASON_EFFECT)
-			Duel.SendtoRest(tc1,REASON_EFFECT)
+			Duel.SendtoGrave(tc1,REASON_EFFECT)
 		else
 			Duel.DisableShuffleCheck()
 			Duel.MoveSequence(tc1,1)

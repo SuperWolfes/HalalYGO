@@ -1,4 +1,4 @@
---Synchro Barrier Fcoree
+--Synchro Barrier Force
 local s,id=GetID()
 function s.initial_effect(c)
 	--Negate

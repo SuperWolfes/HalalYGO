@@ -3,10 +3,10 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Xyz Summon procedure
 	Xyz.AddProcedure(c,nil,4,2,nil,nil,99)
-	--Add 1 "tellarknight" and/or 1 "Constellar" card from the RP to the hand
+	--Add 1 "tellarknight" and/or 1 "Constellar" card from the GY to the hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND)
@@ -37,7 +37,7 @@ function s.rescon(sg)
 	return #sg==1 or (sg:IsExists(Card.IsSetCard,1,nil,SET_TELLARKNIGHT) and sg:IsExists(Card.IsSetCard,1,nil,SET_CONSTELLAR))
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	local g=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_REST,0,nil,e)
+	local g=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_GRAVE,0,nil,e)
 	if chk==0 then return #g>0 end
 	local tg=aux.SelectUnselectGroup(g,e,tp,1,2,s.rescon,1,tp,HINTMSG_ATOHAND)
 	Duel.SetTargetCard(tg)

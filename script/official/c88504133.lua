@@ -1,5 +1,5 @@
 --ＲＵＭ－ファントム・フォース
---Rank-Up-Ment Illusion Knights' Fcoree
+--Rank-Up-Magic Phantom Knights' Force
 --scripted by AlphaKretin and by edo9300
 local s,id=GetID()
 function s.initial_effect(c)
@@ -51,7 +51,7 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local exg=Duel.GetMatchingGroup(s.extrafil,tp,LOCATION_EXTRA,0,nil,e,tp)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and s.fieldfil(chkc,e) and s.filter1(chkc,e,tp,Group.FromCards(chkc),exg,e:GetLabel()) end
-	local g=Duel.GetMatchingGroup(s.rmfilter,tp,LOCATION_REST+LOCATION_MZONE,0,nil)
+	local g=Duel.GetMatchingGroup(s.rmfilter,tp,LOCATION_GRAVE+LOCATION_MZONE,0,nil)
 	local fg=Duel.GetMatchingGroup(s.fieldfil,tp,LOCATION_MZONE,0,nil,e)
 	local _,maxrel1=fg:GetMinGroup(Card.GetRank)
 	local _,maxrel2=exg:GetMaxGroup(Card.GetRank)

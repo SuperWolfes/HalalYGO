@@ -1,5 +1,5 @@
 --ウィジャ盤
---Destrudic Board
+--Destiny Board
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.plop)
 	e2:SetValue(s.extraop)
 	c:RegisterEffect(e2)
-	--torest
+	--tograve
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e3:SetRange(LOCATION_SZONE)
@@ -48,14 +48,14 @@ function s.plcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()~=tp and e:GetHandler():GetFlagEffect(id)<4
 end
 function s.plfilter(c,code)
-	return c:IsCode(code) and not c:IsUnliked()
+	return c:IsCode(code) and not c:IsForbidden()
 end
 function s.plop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.IsPlayerAffectedByEffect(tp,CARD_DARK_SANCTUARY) then return s.extraop(e,tp,eg,ep,ev,re,r,rp) end
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) then return end
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then return end
-	local passcode=CARDS_GUARDIAN_MESSAGE[c:GetFlagEffect(id)+1]
+	local passcode=CARDS_SPIRIT_MESSAGE[c:GetFlagEffect(id)+1]
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,1))
 	local g=Duel.SelectMatchingCard(tp,s.plfilter,tp,LOCATION_DECK+LOCATION_HAND,0,1,1,nil,passcode)
 	if #g>0 and Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_SZONE,POS_FACEUP,true) then
@@ -65,14 +65,14 @@ end
 function s.extraop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) then return end
-	local cid=CARDS_GUARDIAN_MESSAGE[c:GetFlagEffect(id)+1]
+	local cid=CARDS_SPIRIT_MESSAGE[c:GetFlagEffect(id)+1]
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,1))
 	local g=Duel.SelectMatchingCard(tp,s.plfilter,tp,LOCATION_DECK+LOCATION_HAND,0,1,1,nil,cid)
 	local tc=g:GetFirst()
-	if tc and Duel.IsPlayerCanSpecialSummonMonster(tp,cid,0,0x11,0,0,1,RACE_TAINTED,ATTRIBUTE_DARK,POS_FACEUP,tp,181)
+	if tc and Duel.IsPlayerCanSpecialSummonMonster(tp,cid,0,0x11,0,0,1,RACE_FIEND,ATTRIBUTE_DARK,POS_FACEUP,tp,181)
 		and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and (Duel.GetLocationCount(tp,LOCATION_SZONE)<1 or Duel.SelectYesNo(tp,aux.Stringid(CARD_DARK_SANCTUARY,0))) then
-		tc:AddMonsterAttribute(TYPE_NORMAL,ATTRIBUTE_DARK,RACE_TAINTED,1,0,0)
+		tc:AddMonsterAttribute(TYPE_NORMAL,ATTRIBUTE_DARK,RACE_FIEND,1,0,0)
 		Duel.SpecialSummonStep(tc,181,tp,tp,true,false,POS_FACEUP)
 		tc:AddMonsterAttributeComplete()
 		--immune
@@ -113,14 +113,14 @@ function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.cfilter2,tp,LOCATION_ONFIELD,0,nil)
-	Duel.SendtoRest(g,REASON_EFFECT)
+	Duel.SendtoGrave(g,REASON_EFFECT)
 end
 function s.cfilter3(c)
-	return c:IsFaceup() and c:IsCode(table.unpack(CARDS_GUARDIAN_MESSAGE))
+	return c:IsFaceup() and c:IsCode(table.unpack(CARDS_SPIRIT_MESSAGE))
 end
 function s.winop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.cfilter3,tp,LOCATION_ONFIELD,0,e:GetHandler())
 	if g:GetClassCount(Card.GetCode)==4 then
-		Duel.Win(tp,WIN_REASON_DESTRUDIC_BOARD)
+		Duel.Win(tp,WIN_REASON_DESTINY_BOARD)
 	end
 end

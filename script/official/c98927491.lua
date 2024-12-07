@@ -2,7 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,24311595,36378213)
 	--spsummon condition
 	local e1=Effect.CreateEffect(c)
@@ -25,7 +25,7 @@ function s.initial_effect(c)
 end
 s.material_setcode=0x16
 function s.filter(c,e,tp)
-	return c:IsLocation(LOCATION_REST) and c:IsReason(REASON_BATTLE) and c:IsPreviousControler(tp)
+	return c:IsLocation(LOCATION_GRAVE) and c:IsReason(REASON_BATTLE) and c:IsPreviousControler(tp)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)

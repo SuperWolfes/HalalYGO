@@ -1,5 +1,5 @@
 --オッドアイズ・ファンタズマ・ドラゴン
---Odd-Eyes Illusorasma Dragon
+--Odd-Eyes Phantasma Dragon
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)

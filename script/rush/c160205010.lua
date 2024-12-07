@@ -1,5 +1,5 @@
 --焔魔神ベルシュドロス［Ｌ］
---Blaze Tainted Overwatchers Beelucitaroth [L]
+--Blaze Fiend Overlords Beelucitaroth [L]
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)

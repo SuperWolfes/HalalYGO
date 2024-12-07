@@ -1,5 +1,5 @@
 --マグマックス・マントルヴェーダ
---Magmax Mantle-Ayurbeta
+--Magmax Mantle-Ayurveda
 
 local s,id=GetID()
 function s.initial_effect(c)
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 end
 
 function s.costfilter(c,tp)
-	return c:IsMonster() and c:IsRace(RACE_PYRO) and c:IsAbleToRestAsCost()
+	return c:IsMonster() and c:IsRace(RACE_PYRO) and c:IsAbleToGraveAsCost()
 	and Duel.IsExistingMatchingCard(s.desfilter,tp,0,LOCATION_MZONE,1,nil,c:GetLevel()) 
 end
 function s.desfilter(c,lvl)
@@ -32,7 +32,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tg=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,1,nil,tp)
-	if Duel.SendtoRest(tg,REASON_COST)==1 then
+	if Duel.SendtoGrave(tg,REASON_COST)==1 then
 		local g=Duel.GetMatchingGroup(s.desfilter,tp,0,LOCATION_MZONE,nil,tg:GetFirst():GetLevel())
 		if #g>0 then
 			Duel.Destroy(g,REASON_EFFECT)

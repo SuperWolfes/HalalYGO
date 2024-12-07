@@ -18,13 +18,13 @@ function s.copycon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsStatus(STATUS_SUMMON_TURN+STATUS_SPSUMMON_TURN)
 end
 function s.costfilter(c)
-	return c:IsSetCard(0x99) and c:IsMonster() and c:IsAbleToRestAsCost()
+	return c:IsSetCard(0x99) and c:IsMonster() and c:IsAbleToGraveAsCost()
 end
 function s.copycost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_DECK,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_DECK,0,1,1,nil)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 	e:SetLabel(g:GetFirst():GetCode())
 end
 function s.copyop(e,tp,eg,ep,ev,re,r,rp)

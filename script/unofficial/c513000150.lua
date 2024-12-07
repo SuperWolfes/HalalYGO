@@ -1,5 +1,5 @@
 --Ｓｐ－ハーフ・シーズ
---Speed Actional - Half Seize (Anime)
+--Speed Spell - Half Seize (Anime)
 --scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)

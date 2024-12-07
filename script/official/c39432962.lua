@@ -1,5 +1,5 @@
 --ドドドウィッチ
---Dododo Mint
+--Dododo Witch
 local s,id=GetID()
 function s.initial_effect(c)
 	--spsummon

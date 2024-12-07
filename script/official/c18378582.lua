@@ -1,8 +1,8 @@
 --大天使ゼラート
---Archwatcher Zerato
+--Archlord Zerato
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Cannot Special Summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -58,7 +58,7 @@ function s.descon(e,tp,eg,ep,ev,re,r,rp)
 		or Duel.IsEnvironment(CARD_SANCTUARY_SKY,tp)
 end
 function s.cfilter(c)
-	return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsDiscardable() and c:IsAbleToRestAsCost()
+	return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsDiscardable() and c:IsAbleToGraveAsCost()
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end

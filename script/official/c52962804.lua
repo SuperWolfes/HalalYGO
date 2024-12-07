@@ -28,14 +28,14 @@ function s.thfilter(c,e)
 		and c:IsAbleToHand() and c:IsCanBeEffectTarget(e) 
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.thfilter(chkc,e) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.thfilter(chkc,e) end
 	if chk==0 then return true end
-	local g=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_REST,0,nil,e)
+	local g=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_GRAVE,0,nil,e)
 	if #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 		local sg=g:Select(tp,1,1,nil)
 		Duel.SetTargetCard(sg)
-		Duel.SetOperationInfo(0,CATEGORY_TOHAND,sg,1,0,LOCATION_REST)
+		Duel.SetOperationInfo(0,CATEGORY_TOHAND,sg,1,0,LOCATION_GRAVE)
 	end
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)

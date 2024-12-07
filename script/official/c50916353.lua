@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
-	return ev==1 and e:GetHandler():IsLocation(LOCATION_REST)
+	return ev==1 and e:GetHandler():IsLocation(LOCATION_GRAVE)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local total=Duel.GetBattleDamage(tp)

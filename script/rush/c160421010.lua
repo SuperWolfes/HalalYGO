@@ -27,7 +27,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,0,LOCATION_ONFIELD)
 end
 function s.thfilter(c)
-	return c:IsRace(RACE_MENTAL) and c:IsLevel(1) and c:IsType(TYPE_NORMAL) and c:IsAbleToHand()
+	return c:IsRace(RACE_PSYCHIC) and c:IsLevel(1) and c:IsType(TYPE_NORMAL) and c:IsAbleToHand()
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
@@ -39,11 +39,11 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
 		local g2=Duel.SelectMatchingCard(tp,s.tdfilter,tp,0,LOCATION_ONFIELD,1,1,nil)
 		Duel.HintSelection(g2,true)
-		local spg=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_REST,0,nil)
+		local spg=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_GRAVE,0,nil)
 		if #g2>0 and Duel.SendtoDeck(g2,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)>0 and Duel.GetLP(tp)<Duel.GetLP(1-tp)
 			and#spg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-			local g3=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
+			local g3=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 			if #g3>0 then
 				Duel.SendtoHand(g3,nil,REASON_EFFECT)
 				Duel.ConfirmCards(1-tp,g3)

@@ -5,10 +5,10 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--If this card is special summoned, send 1 "Fossil" fusion monster from extra deck to RP
+	--If this card is special summoned, send 1 "Fossil" fusion monster from extra deck to GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_TOREST)
+	e1:SetCategory(CATEGORY_TOGRAVE)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
@@ -39,27 +39,27 @@ function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_EXTRA,0,1,nil)	
 		and Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_HANDES,nil,0,tp,1)
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_EXTRA)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_EXTRA)
 end
 	--Check for a "Fossil" fusion monster
 function s.tgfilter(c)
-	return c:IsType(TYPE_FUSION) and c:IsSetCard(0x14c) and c:IsAbleToRest()
+	return c:IsType(TYPE_FUSION) and c:IsSetCard(0x14c) and c:IsAbleToGrave()
 end
-	--Send 1 "Fossil" fusion monster from extra deck to RP
+	--Send 1 "Fossil" fusion monster from extra deck to GY
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_DISCARD+REASON_EFFECT)~=0 then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 		local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_EXTRA,0,1,1,nil)
 		if #g>0 then
-			Duel.SendtoRest(g,REASON_EFFECT)
+			Duel.SendtoGrave(g,REASON_EFFECT)
 		end
 	end
 end
 	--If this card was sent from field
 function s.damcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToRestAsCost() end
-	Duel.SendtoRest(c,REASON_COST)
+	if chk==0 then return c:IsAbleToGraveAsCost() end
+	Duel.SendtoGrave(c,REASON_COST)
 end
 	--Activation legality
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -76,14 +76,14 @@ end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
 	if Duel.Damage(p,d,REASON_EFFECT)~=0 then
-		local ck=Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,CARD_FOSSIL_FUSION)
+		local ck=Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,CARD_FOSSIL_FUSION)
 		local g=Duel.GetMatchingGroup(s.rmfilter,tp,LOCATION_REMOVED,0,nil)
 		if ck and #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 			Duel.BreakEffect()
-			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 			local sg=g:Select(tp,1,1,nil)
 			Duel.HintSelection(sg)
-			Duel.SendtoRest(sg,REASON_EFFECT+REASON_RETURN)
+			Duel.SendtoGrave(sg,REASON_EFFECT+REASON_RETURN)
 		end
 	end
 end

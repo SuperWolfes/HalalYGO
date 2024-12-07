@@ -1,5 +1,5 @@
 --Ｖ・ＨＥＲＯウィッチ・レイド
---Vision HERO Mint Raider
+--Vision HERO Witch Raider
 
 local s,id=GetID()
 function s.initial_effect(c)
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetTarget(aux.TargetBoolFunction(Card.IsTrap))
 	e1:SetValue(POS_FACEUP)
 	c:RegisterEffect(e1)
-	--When normal summoned, destroy all of opponent's actionals/traps
+	--When normal summoned, destroy all of opponent's spells/traps
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_DESTROY)
@@ -51,7 +51,7 @@ function s.splimit(e,c,sump,sumtype,sumpos,targetp,se)
 	return not c:IsSetCard(0x8)
 end
 function s.desfilter(c)
-	return c:IsType(TYPE_ACTIONAL+TYPE_TRAP)
+	return c:IsType(TYPE_SPELL+TYPE_TRAP)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.desfilter,tp,0,LOCATION_ONFIELD,1,nil) end

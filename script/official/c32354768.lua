@@ -1,5 +1,5 @@
 --セフィラの神託
---Overseer of Zebra
+--Oracle of Zefra
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-	--Locked
+	--Ritual
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TODECK)
@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e2:SetCondition(s.effcon)
 	e2:SetTarget(s.tdtg)
 	e2:SetOperation(s.tdop)
-	e2:SetLabel(TYPE_LOCKED)
+	e2:SetLabel(TYPE_RITUAL)
 	c:RegisterEffect(e2)
 	--Fusion
 	local e3=e2:Clone()

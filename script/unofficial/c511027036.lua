@@ -1,5 +1,5 @@
 --連鎖破壊 (Manga)
---Chain Mismatching (Manga)
+--Chain Destruction (Manga)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Destroy 1 of those Summoned monsters, and if you do, destroy all copies of it in the controller's Deck

@@ -48,11 +48,11 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ConfirmCards(1-tp,g1)
 	Duel.ConfirmCards(tp,g2)
 	if lose1 or lose2 then return end
-	Duel.SendtoRest(g1,REASON_EFFECT)
-	Duel.SendtoRest(g2,REASON_EFFECT)
+	Duel.SendtoGrave(g1,REASON_EFFECT)
+	Duel.SendtoGrave(g2,REASON_EFFECT)
 	local lv1=0
 	local lv2=0
-	local dam=Duel.GetMatchingGroupCount(Card.IsMonster,tp,LOCATION_MZONE+LOCATION_REST,LOCATION_MZONE+LOCATION_REST,nil)*200
+	local dam=Duel.GetMatchingGroupCount(Card.IsMonster,tp,LOCATION_MZONE+LOCATION_GRAVE,LOCATION_MZONE+LOCATION_GRAVE,nil)*200
 	local tc1=g1:GetFirst()
 	while tc1 do
 		if tc1:IsMonster() then

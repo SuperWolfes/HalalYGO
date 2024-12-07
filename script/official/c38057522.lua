@@ -1,5 +1,5 @@
 --大霊術－「一輪」
---Grand Spilocked Art - Ichirin
+--Grand Spiritual Art - Ichirin
 --Scripted by ahtelel
 
 local s,id=GetID()
@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.negf(c,tp)
-	return c:IsFaceup() and c:GetDefense()==1500 and c:IsRace(RACE_MENTOR)
+	return c:IsFaceup() and c:GetDefense()==1500 and c:IsRace(RACE_SPELLCASTER)
 end
 function s.negcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.negf,tp,LOCATION_MZONE,0,1,nil)
@@ -41,7 +41,7 @@ function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.NegateEffect(ev)
 end
 function s.thfilter(c,e,tp)
-	return c:IsRace(RACE_MENTOR) and not c:IsPublic()
+	return c:IsRace(RACE_SPELLCASTER) and not c:IsPublic()
 		and Duel.IsExistingMatchingCard(s.thfilter2,tp,LOCATION_DECK,0,1,nil,c:GetAttribute(),e,tp,c)
 end
 function s.thfilter2(c,att)

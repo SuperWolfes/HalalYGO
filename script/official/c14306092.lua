@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	c:EnableCounterPermit(0x2e)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,3,3,nil,nil,5)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--counter
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

@@ -1,9 +1,9 @@
 --アトラクト・ゴーレム
---Attract Gopal
+--Attract Golem
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send the top 2 cards of your Deck to the RP
+	--Send the top 2 cards of your Deck to the GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DECKDES+CATEGORY_DAMAGE)

@@ -3,10 +3,10 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Xyz Summon Procedure
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_MADOLCHE),5,3,s.ovfilter,aux.Stringid(id,0),3,s.xyzop)
-	--Shuffle "Madolche" cards from your RP and cards your opponent controls into the Deck 
+	--Shuffle "Madolche" cards from your GY and cards your opponent controls into the Deck 
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TODECK)
@@ -46,11 +46,11 @@ function s.mdlchfilter(c)
 	return c:IsSetCard(SET_MADOLCHE) and c:IsAbleToDeck()
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.mdlchfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.mdlchfilter,tp,LOCATION_REST,0,1,nil)
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.mdlchfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.mdlchfilter,tp,LOCATION_GRAVE,0,1,nil)
 		and Duel.IsExistingMatchingCard(Card.IsAbleToDeck,tp,0,LOCATION_ONFIELD,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectTarget(tp,s.mdlchfilter,tp,LOCATION_REST,0,1,2,nil)
+	local g=Duel.SelectTarget(tp,s.mdlchfilter,tp,LOCATION_GRAVE,0,1,2,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,#g,tp,0)
 end
 function s.tdop(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -68,7 +68,7 @@ function s.tdop(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.texcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsLocation(LOCATION_REST) and c:IsReasonPlayer(1-tp) and c:IsPreviousControler(tp)
+	return c:IsLocation(LOCATION_GRAVE) and c:IsReasonPlayer(1-tp) and c:IsPreviousControler(tp)
 end
 function s.textg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

@@ -1,11 +1,11 @@
 --ツイン・ハイドライブ・ナイト
---Twin Hyddendrive Knight
+--Twin Hydradrive Knight
 --fixed by Larry126 and MLD
 local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
 	Link.AddProcedure(c,s.mfilter,2,2)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -33,7 +33,7 @@ function s.attcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_LINK)
 end
 function s.cfilter(c,e,tp)
-	return c:IsSetCard(0x577) and c:IsLinkMonster() and c:IsLocation(LOCATION_REST)
+	return c:IsSetCard(0x577) and c:IsLinkMonster() and c:IsLocation(LOCATION_GRAVE)
 		and c:IsControler(tp) and c:IsCanBeEffectTarget(e)
 end
 function s.mgfilter(sg,e,tp,mg)

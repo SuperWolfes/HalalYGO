@@ -1,8 +1,8 @@
 --D-HERO ダスクユートピアガイ
---Destrudic HERO - Dusktopia
+--Destiny HERO - Dusktopia
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,s.matfilter,aux.FilterBoolFunctionEx(Card.IsSetCard,0xc008))
 	--fusion success
 	local e1=Effect.CreateEffect(c)

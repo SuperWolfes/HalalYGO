@@ -1,7 +1,7 @@
 --V・HERO トリニティー
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--fusion material
 	Fusion.AddProcMixRep(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x5008),2,3)
 	--summon success

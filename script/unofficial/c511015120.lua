@@ -2,7 +2,7 @@
 --Junk Anchor (Manga)
 local s,id=GetID()
 function s.initial_effect(c)
-	--Synchro Summon using this card and 1 "Junk" monster in your RP
+	--Synchro Summon using this card and 1 "Junk" monster in your GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -26,14 +26,14 @@ function s.synfilter(c,mg)
 	return c:IsSynchroSummonable(nil,mg)
 end
 function s.syntg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.matfilter,tp,LOCATION_REST,0,1,nil,e,tp,e:GetHandler()) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.matfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp,e:GetHandler()) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function s.synop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SMATERIAL)
-	local tc=Duel.SelectMatchingCard(tp,s.matfilter,tp,LOCATION_REST,0,1,1,nil,e,tp,e:GetHandler()):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,s.matfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp,e:GetHandler()):GetFirst()
 	local mg=Group.FromCards(tc,c)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local sc=Duel.SelectMatchingCard(tp,s.synfilter,tp,LOCATION_EXTRA,0,1,1,nil,mg):GetFirst()

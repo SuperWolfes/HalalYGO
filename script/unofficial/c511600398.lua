@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetCode(EVENT_EQUIP)
 	e1:SetOperation(s.eqop)
 	c:RegisterEffect(e1)
-	--Control of this card cannot smint
+	--Control of this card cannot switch
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetCode(EFFECT_CANNOT_CHANGE_CONTROL)
@@ -26,7 +26,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 	local e4=e3:Clone()
 	e4:SetCode(EFFECT_CANNOT_BE_MATERIAL)
-	e4:SetValue(aux.cannotmatfilter(SUMMON_TYPE_FUSION,SUMMON_TYPE_LOCKED))
+	e4:SetValue(aux.cannotmatfilter(SUMMON_TYPE_FUSION,SUMMON_TYPE_RITUAL))
 	c:RegisterEffect(e4)
 	--Last for 1 turn & block
 	local e5=Effect.CreateEffect(c)
@@ -137,11 +137,11 @@ function s.efilter(e,te,c)
 	local c=e:GetOwner()
 	local tc=te:GetOwner()
 	return (te:IsTrapEffect() and te:IsActivated())
-		or (((te:IsActionalEffect() and te:IsHasProperty(EFFECT_FLAG_CARD_TARGET) and Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS):IsContains(c))
-		or (te:IsMonsterEffect() and tc~=c and not tc:IsOriginalAttribute(ATTRIBUTE_MEGA)))
+		or (((te:IsSpellEffect() and te:IsHasProperty(EFFECT_FLAG_CARD_TARGET) and Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS):IsContains(c))
+		or (te:IsMonsterEffect() and tc~=c and not tc:IsOriginalAttribute(ATTRIBUTE_DIVINE)))
 		and ((c:GetDestination()>0 and c:GetReasonEffect()==te)
 		or (s.leaveChk(c,CATEGORY_TOHAND) or s.leaveChk(c,CATEGORY_DESTROY) or s.leaveChk(c,CATEGORY_REMOVE)
-		or s.leaveChk(c,CATEGORY_TODECK) or s.leaveChk(c,CATEGORY_RELEASE) or s.leaveChk(c,CATEGORY_TOREST))))
+		or s.leaveChk(c,CATEGORY_TODECK) or s.leaveChk(c,CATEGORY_RELEASE) or s.leaveChk(c,CATEGORY_TOGRAVE))))
 end
 function s.stgop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -156,11 +156,11 @@ function s.stgop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.spchk(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if re and (re:IsActionalEffect() or re:IsMonsterEffect()) then
+	if re and (re:IsSpellEffect() or re:IsMonsterEffect()) then
 		local prevCtrl=c:GetPreviousControler()
 		aux.DelayedOperation(c,PHASE_END,id,e,tp,function()
-			if c:IsPreviousLocation(LOCATION_REST) then
-				Duel.SendtoRest(c,REASON_EFFECT,prevCtrl)
+			if c:IsPreviousLocation(LOCATION_GRAVE) then
+				Duel.SendtoGrave(c,REASON_EFFECT,prevCtrl)
 			elseif c:IsPreviousLocation(LOCATION_DECK) then
 				Duel.SendtoDeck(c,prevCtrl,SEQ_DECKSHUFFLE,REASON_EFFECT)
 			elseif c:IsPreviousLocation(LOCATION_HAND) then
@@ -190,7 +190,7 @@ end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return Duel.IsBattlePhase() and Duel.GetCurrentChain()==0 and (not c:IsHasEffect(EFFECT_CANNOT_ATTACK_ANNOUNCE)
-		and not c:IsHasEffect(EFFECT_UNLIKED) and not c:IsHasEffect(EFFECT_CANNOT_ATTACK)
+		and not c:IsHasEffect(EFFECT_FORBIDDEN) and not c:IsHasEffect(EFFECT_CANNOT_ATTACK)
 		and not Duel.IsPlayerAffectedByEffect(tp,EFFECT_CANNOT_ATTACK_ANNOUNCE)
 		and not Duel.IsPlayerAffectedByEffect(tp,EFFECT_CANNOT_ATTACK)
 		or c:IsHasEffect(EFFECT_UNSTOPPABLE_ATTACK))

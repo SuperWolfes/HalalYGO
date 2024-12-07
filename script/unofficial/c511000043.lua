@@ -23,16 +23,16 @@ function s.tkspcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.tksptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if chk==0 then return ft>1 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) 
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,511000042,0,TYPES_TOKEN,0,0,1,RACE_TAINTED,ATTRIBUTE_DARK) end
+	if chk==0 then return ft>1 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) 
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,511000042,0,TYPES_TOKEN,0,0,1,RACE_FIEND,ATTRIBUTE_DARK) end
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,2,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,0)
 end
 function s.tkspop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if Duel.GetLocationCount(tp,LOCATION_MZONE)<2 or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
-	if Duel.IsPlayerCanSpecialSummonMonster(tp,511000042,0,TYPES_TOKEN,0,0,1,RACE_TAINTED,ATTRIBUTE_DARK) then
+	if Duel.GetLocationCount(tp,LOCATION_MZONE)<2 or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
+	if Duel.IsPlayerCanSpecialSummonMonster(tp,511000042,0,TYPES_TOKEN,0,0,1,RACE_FIEND,ATTRIBUTE_DARK) then
 		local g=Group.CreateGroup()
 		for i=1,2 do
 			local token=Duel.CreateToken(tp,511000042)

@@ -27,7 +27,7 @@ function s.thfilter(c)
 	return c:IsLevelBelow(4) and c:IsSetCard(SET_DRAGUNITY) and c:IsAbleToHand()
 end
 function s.tgfilter(c)
-	return c:IsRace(RACE_DRAGON) and c:IsAbleToRest()
+	return c:IsRace(RACE_DRAGON) and c:IsAbleToGrave()
 end
 function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local b1=Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil)
@@ -41,8 +41,8 @@ function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 		e:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 		Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 	elseif op==2 then
-		e:SetCategory(CATEGORY_TOREST)
-		Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
+		e:SetCategory(CATEGORY_TOGRAVE)
+		Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
 	end
 end
 function s.effop(e,tp,eg,ep,ev,re,r,rp)
@@ -56,11 +56,11 @@ function s.effop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.ConfirmCards(1-tp,g)
 		end
 	elseif op==2 then
-		--Send 1 Dragon monster from your Deck to the RP
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+		--Send 1 Dragon monster from your Deck to the GY
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 		local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 		if #g>0 then
-			Duel.SendtoRest(g,REASON_EFFECT)
+			Duel.SendtoGrave(g,REASON_EFFECT)
 		end
 	end
 end

@@ -25,8 +25,8 @@ function s.typecheck(sc,card_type)
 	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsType,card_type),0,LOCATION_MZONE,LOCATION_MZONE,1,sc)
 end
 function s.drcfilter(c)
-	if c:IsSummonType(SUMMON_TYPE_LOCKED) then
-		return s.typecheck(c,TYPE_LOCKED)
+	if c:IsSummonType(SUMMON_TYPE_RITUAL) then
+		return s.typecheck(c,TYPE_RITUAL)
 	elseif c:IsSummonType(SUMMON_TYPE_FUSION) then
 		return s.typecheck(c,TYPE_FUSION)
 	elseif c:IsSummonType(SUMMON_TYPE_SYNCHRO) then

@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--activate
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_TOREST)
+	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_TOGRAVE)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
-		local ct=Duel.GetMatchingGroupCount(Card.IsCode,tp,LOCATION_REST,0,nil,id)+3
+		local ct=Duel.GetMatchingGroupCount(Card.IsCode,tp,LOCATION_GRAVE,0,nil,id)+3
 		if Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)<ct then return false end
 		local g=Duel.GetDecktopGroup(tp,ct)
 		local result=g:FilterCount(Card.IsAbleToHand,nil)>0
@@ -23,10 +23,10 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 end
 function s.filter(c)
-	return c:GetType()&(TYPE_MONSTER|TYPE_ACTIONAL|TYPE_TRAP)
+	return c:GetType()&(TYPE_MONSTER|TYPE_SPELL|TYPE_TRAP)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local ct=Duel.GetMatchingGroupCount(Card.IsCode,tp,LOCATION_REST,0,nil,id)+3
+	local ct=Duel.GetMatchingGroupCount(Card.IsCode,tp,LOCATION_GRAVE,0,nil,id)+3
 	Duel.ConfirmDecktop(tp,ct)
 	local g=Duel.GetDecktopGroup(tp,ct)
 	if #g==0 then return end
@@ -38,7 +38,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			Duel.ConfirmCards(1-tp,sg)
 			g:RemoveCard(sg:GetFirst())
 		end
-		Duel.SendtoRest(g,REASON_EFFECT|REASON_EXCAVATE)
+		Duel.SendtoGrave(g,REASON_EFFECT|REASON_EXCAVATE)
 	else
 		Duel.ShuffleDeck(tp)
 	end

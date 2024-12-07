@@ -1,9 +1,9 @@
 -- 相剣大師－赤霄
--- Chi Xiao, the Grand Swordmiss Swordmaster
+-- Chi Xiao, the Grand Swordsoul Swordmaster
 local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTunerEx(Card.IsRace,RACE_WYRM),1,99)
 	--search and add to hand or banish
 	local e1=Effect.CreateEffect(c)
@@ -55,9 +55,9 @@ function s.costfilter(c)
 		and (c:IsLocation(LOCATION_HAND) or aux.SpElimFilter(c,true))
 end
 function s.ngcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_REST+LOCATION_HAND+LOCATION_MZONE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_GRAVE+LOCATION_HAND+LOCATION_MZONE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_REST+LOCATION_HAND+LOCATION_MZONE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_GRAVE+LOCATION_HAND+LOCATION_MZONE,0,1,1,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.ngtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

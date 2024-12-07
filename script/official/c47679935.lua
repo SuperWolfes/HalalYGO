@@ -64,7 +64,7 @@ function s.limop(e,tp,eg,ep,ev,re,r,rp)
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		e1:SetCode(EVENT_CHAINING)
-		e1:SetOperation(s.revetop)
+		e1:SetOperation(s.resetop)
 		Duel.RegisterEffect(e1,tp)
 		local e2=e1:Clone()
 		e2:SetCode(EVENT_BREAK_EFFECT)
@@ -72,7 +72,7 @@ function s.limop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.RegisterEffect(e2,tp)
 	end
 end
-function s.revetop(e,tp,eg,ep,ev,re,r,rp)
+function s.resetop(e,tp,eg,ep,ev,re,r,rp)
 	e:GetHandler():ResetFlagEffect(id)
 	e:Reset()
 end

@@ -2,7 +2,7 @@
 --scripted by andré
 local s,id=GetID()
 function s.initial_effect(c)
-	--place on actional field
+	--place on spell field
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_CHAINING)

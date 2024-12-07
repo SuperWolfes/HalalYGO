@@ -1,5 +1,5 @@
 --魔轟神マルコシア
---Fablous Marchosia
+--Fabled Marchosia
 --Scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -13,12 +13,12 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Add 1 "Fablous" Actional/Trap from deck to hand
+	--Add 1 "Fabled" Spell/Trap from deck to hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	e2:SetCode(EVENT_TO_REST)
+	e2:SetCode(EVENT_TO_GRAVE)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(s.thcond)
 	e2:SetTarget(s.tgtg)
@@ -43,7 +43,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_HAND,0,e:GetHandler())
 	local og=aux.SelectUnselectGroup(g,e,tp,1,2,s.rescon,1,tp,HINTMSG_DISCARD,s.rescon)
 	if og and #og>0 then
-		local ct=Duel.SendtoRest(og,REASON_EFFECT+REASON_DISCARD)
+		local ct=Duel.SendtoGrave(og,REASON_EFFECT+REASON_DISCARD)
 		if c:IsRelateToEffect(e) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)>0 and ct>0 then
 			local e1=Effect.CreateEffect(c)
 			e1:SetType(EFFECT_TYPE_SINGLE)
@@ -60,7 +60,7 @@ function s.thcond(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsPreviousLocation(LOCATION_HAND) and (r&REASON_DISCARD)~=0
 end
 function s.thfilter(c)
-    return c:IsSetCard(0x35) and c:IsActionalTrap() and c:IsAbleToHand()
+    return c:IsSetCard(0x35) and c:IsSpellTrap() and c:IsAbleToHand()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
     if chk==0 then return true end

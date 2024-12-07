@@ -1,5 +1,5 @@
 --終焔魔神ディスペラシオン［Ｒ］
---Doomblaze Tainted Overwatcher Despairacion [R]
+--Doomblaze Fiend Overlord Despairacion [R]
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -25,7 +25,7 @@ function s.initial_effect(c)
 end
 s.MaximumSide="Right"
 function s.sumlimit(e,c,sump,sumtype,sumpos,targetp,se)
-	return c:IsLocation(LOCATION_HAND|LOCATION_REST) and c:IsLevel(7)
+	return c:IsLocation(LOCATION_HAND|LOCATION_GRAVE) and c:IsLevel(7)
 end
 function s.maxCon(e)
 	return e:GetHandler():IsMaximumMode()

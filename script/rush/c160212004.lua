@@ -1,5 +1,5 @@
 --古代の機械巨人
---Ancient Gear Gopal
+--Ancient Gear Golem
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)

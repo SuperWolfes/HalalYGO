@@ -74,7 +74,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			Duel.HintSelection(mgsel)
 			local mat1=Duel.SelectFusionMaterial(tp,tc,mg2,mgc,chkf)
 			tc:SetMaterial(mat1)
-			Duel.SendtoRest(mat1,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION+REASON_RETURN)
+			Duel.SendtoGrave(mat1,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION+REASON_RETURN)
 			Duel.BreakEffect()
 			Duel.SpecialSummon(tc,SUMMON_TYPE_FUSION,tp,tp,false,false,POS_FACEUP)
 		end

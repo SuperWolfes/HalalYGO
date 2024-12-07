@@ -6,5 +6,5 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.fextra(e,tp,mg)
-	return Duel.GetMatchingGroup(Card.IsAbleToRest,tp,LOCATION_PZONE,LOCATION_PZONE,nil)
+	return Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,LOCATION_PZONE,LOCATION_PZONE,nil)
 end

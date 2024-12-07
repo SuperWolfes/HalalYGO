@@ -1,8 +1,8 @@
---Amazonian Liger
+--Amazoness Liger
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,10979723,aux.FilterBoolFunctionEx(Card.IsSetCard,0x4))
 	--atkup
 	local e1=Effect.CreateEffect(c)

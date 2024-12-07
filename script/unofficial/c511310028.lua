@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetRange(LOCATION_HAND)
 	e1:SetCondition(s.spcon)
 	c:RegisterEffect(e1)
-	--Place 1 non-Machine monster you control face-up in your Actional & Trap Zone as a Continuous Actional
+	--Place 1 non-Machine monster you control face-up in your Spell & Trap Zone as a Continuous Spell
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_IGNITION)
@@ -41,7 +41,7 @@ function s.spcon(e,c)
 		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,id),tp,LOCATION_ONFIELD,0,1,nil)
 end
 function s.plfilter(c)
-	return not c:IsRace(RACE_MACHINE) and c:IsFaceup() and not c:IsUnliked()
+	return not c:IsRace(RACE_MACHINE) and c:IsFaceup() and not c:IsForbidden()
 end
 function s.pltg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.plfilter(chkc) end
@@ -54,20 +54,20 @@ function s.plop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not tc:IsRelateToEffect(e) then return end
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then
-		Duel.SendtoRest(d,REASON_RULE,nil,PLAYER_NONE)
+		Duel.SendtoGrave(d,REASON_RULE,nil,PLAYER_NONE)
 	elseif Duel.MoveToField(tc,tp,tp,LOCATION_SZONE,POS_FACEUP,tc:IsMonsterCard()) then
-		--Treated as a Continuous Actional
+		--Treated as a Continuous Spell
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 		e1:SetCode(EFFECT_CHANGE_TYPE)
-		e1:SetValue(TYPE_ACTIONAL|TYPE_CONTINUOUS)
+		e1:SetValue(TYPE_SPELL|TYPE_CONTINUOUS)
 		e1:SetReset(RESET_EVENT|RESETS_STANDARD&~RESET_TURN_SET)
 		tc:RegisterEffect(e1)
 	end
 end
 function s.cpfilter(c,hc)
-	return c:IsMonsterCard() and c:IsContinuousActional() and c:IsFaceup() and not hc:HasFlagEffect(-c:GetFieldID())
+	return c:IsMonsterCard() and c:IsContinuousSpell() and c:IsFaceup() and not hc:HasFlagEffect(-c:GetFieldID())
 end
 function s.cptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
@@ -83,7 +83,7 @@ function s.cpop(e,tp,eg,ep,ev,re,r,rp)
 	if not (c:IsRelateToEffect(e) and c:IsFaceup() and tc:IsRelateToEffect(e)) then return end
 	local fid=tc:GetFieldID()
 	c:RegisterFlagEffect(-fid,RESET_EVENT|RESETS_STANDARD,0,1)
-	--While it is in the Actional & Trap Zone, the name, Type, Attribute, Level, and ATK/DEF of this card become the same as that card's
+	--While it is in the Spell & Trap Zone, the name, Type, Attribute, Level, and ATK/DEF of this card become the same as that card's
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_CHANGE_CODE)

@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Return 1 Link monster to the Extra Deck, then you can Special Summon 1 material from your RP
+	--Return 1 Link monster to the Extra Deck, then you can Special Summon 1 material from your GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOEXTRA+CATEGORY_SPECIAL_SUMMON)
@@ -24,10 +24,10 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
 	local g=Duel.SelectTarget(tp,s.tgfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOEXTRA,g,1,0,0)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
 end
 function s.mgfilter(c,e,tp,link)
-	return c:IsControler(tp) and c:IsLocation(LOCATION_REST)
+	return c:IsControler(tp) and c:IsLocation(LOCATION_GRAVE)
 		and (c:GetReason()&(REASON_MATERIAL|REASON_LINK))==REASON_MATERIAL|REASON_LINK and c:GetReasonCard()==link
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end

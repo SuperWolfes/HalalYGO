@@ -1,8 +1,8 @@
---Horizon-Light Lio Dancer
+--Moon-Light Lio Dancer
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMixN(c,true,true,97165977,1,aux.FilterBoolFunction(Card.IsSetCard,0xdf),2)
 	--immune
 	local e1=Effect.CreateEffect(c)

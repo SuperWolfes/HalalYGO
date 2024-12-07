@@ -3,12 +3,12 @@
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	--Becomes a Normal Monster while on he field or in the RP
+	--Becomes a Normal Monster while on he field or in the GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e1:SetCode(EFFECT_ADD_TYPE)
-	e1:SetRange(LOCATION_MZONE+LOCATION_REST)
+	e1:SetRange(LOCATION_MZONE+LOCATION_GRAVE)
 	e1:SetValue(TYPE_NORMAL)
 	c:RegisterEffect(e1)
 	local e2=e1:Clone()
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e3:SetCode(EFFECT_CHANGE_CODE)
-	e3:SetRange(LOCATION_MZONE+LOCATION_REST)
+	e3:SetRange(LOCATION_MZONE+LOCATION_GRAVE)
 	e3:SetValue(27288416)
 	c:RegisterEffect(e3)
 	--Search 1 "Mokey Mokey" card
@@ -39,7 +39,7 @@ s.listed_series={0x184}
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsDiscardable() end
-	Duel.SendtoRest(c,REASON_COST+REASON_DISCARD)
+	Duel.SendtoGrave(c,REASON_COST+REASON_DISCARD)
 end
 function s.thfilter(c)
 	return c:IsSetCard(0x184) and c:IsAbleToHand() and not c:IsCode(id)

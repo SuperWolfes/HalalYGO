@@ -82,7 +82,7 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.efilterS(e,te)
-	return te:IsActiveType(TYPE_ACTIONAL) and e:GetHandlerPlayer()~=te:GetHandlerPlayer()
+	return te:IsActiveType(TYPE_SPELL) and e:GetHandlerPlayer()~=te:GetHandlerPlayer()
 end
 function s.efilterT(e,te)
 	return te:IsActiveType(TYPE_TRAP) and e:GetHandlerPlayer()~=te:GetHandlerPlayer()

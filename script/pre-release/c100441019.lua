@@ -1,5 +1,5 @@
 --結晶魔術 光の涙
---Verre Ment - Lacrima of Light
+--Verre Magic - Lacrima of Light
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -13,16 +13,16 @@ function s.initial_effect(c)
 	e1:SetOperation(s.effop)
 	c:RegisterEffect(e1)
 end
-s.listed_series={SET_MAGISTUS,SET_MINTCRAFTER}
+s.listed_series={SET_MAGISTUS,SET_WITCHCRAFTER}
 function s.tgfilter(c)
-	return (c:IsActional() or c:IsRace(RACE_MENTOR)) and c:IsAbleToRest()
+	return (c:IsSpell() or c:IsRace(RACE_SPELLCASTER)) and c:IsAbleToGrave()
 end
 function s.spfilter(c,e,tp)
-	return c:IsSetCard({SET_MAGISTUS,SET_MINTCRAFTER}) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsSetCard({SET_MAGISTUS,SET_WITCHCRAFTER}) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local b1=not Duel.HasFlagEffect(tp,id)
-		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,{SET_MAGISTUS,SET_MINTCRAFTER}),tp,LOCATION_MZONE,0,1,nil)
+		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,{SET_MAGISTUS,SET_WITCHCRAFTER}),tp,LOCATION_MZONE,0,1,nil)
 		and Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil)
 	local event_chaining,_,event_player=Duel.CheckEvent(EVENT_CHAINING,true)
 	local b2=not Duel.HasFlagEffect(tp,id+100) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
@@ -34,9 +34,9 @@ function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 		{b2,aux.Stringid(id,2)})
 	e:SetLabel(op)
 	if op==1 then
-		e:SetCategory(CATEGORY_TOREST)
+		e:SetCategory(CATEGORY_TOGRAVE)
 		Duel.RegisterFlagEffect(tp,id,RESET_PHASE|PHASE_END,0,1)
-		Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
+		Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
 	elseif op==2 then
 		e:SetCategory(CATEGORY_SPECIAL_SUMMON)
 		Duel.RegisterFlagEffect(tp,id+100,RESET_PHASE|PHASE_END,0,1)
@@ -46,14 +46,14 @@ end
 function s.effop(e,tp,eg,ep,ev,re,r,rp)
 	local op=e:GetLabel()
 	if op==1 then
-		--Send 1 Mentor monster or 1 Actional from your Deck to the RP
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+		--Send 1 Spellcaster monster or 1 Spell from your Deck to the GY
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 		local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 		if #g>0 then
-			Duel.SendtoRest(g,REASON_EFFECT)
+			Duel.SendtoGrave(g,REASON_EFFECT)
 		end
 	elseif op==2 then
-		--Special Summon 1 "Magistus" or "Mintcrafter" monster from your hand or Deck
+		--Special Summon 1 "Magistus" or "Witchcrafter" monster from your hand or Deck
 		if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_HAND|LOCATION_DECK,0,1,1,nil,e,tp)

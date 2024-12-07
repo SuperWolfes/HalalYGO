@@ -1,5 +1,5 @@
 --捨て身の宝札
---Card of Sorting (Anime)
+--Card of Sacrifice (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

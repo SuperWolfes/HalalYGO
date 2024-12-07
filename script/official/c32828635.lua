@@ -2,13 +2,13 @@
 --Cycle of the World
 local s,id=GetID()
 function s.initial_effect(c)
-	Locked.AddProcGreater({handler=c,filter=s.lockedfil,matfilter=s.fcoreedgroup})
-	--Add 1 listed Locked monster from the RP to the hand
+	Ritual.AddProcGreater({handler=c,filter=s.ritualfil,matfilter=s.forcedgroup})
+	--Add 1 listed Ritual monster from the GY to the hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND)
 	e1:SetType(EFFECT_TYPE_IGNITION)
-	e1:SetRange(LOCATION_REST)
+	e1:SetRange(LOCATION_GRAVE)
 	e1:SetCondition(aux.exccon)
 	e1:SetCost(s.thcost)
 	e1:SetTarget(s.thtg)
@@ -17,10 +17,10 @@ function s.initial_effect(c)
 end
 s.listed_names={8198712}
 s.fit_monster={46427957,72426662}
-function s.lockedfil(c)
-	return c:IsCode(46427957,72426662) and c:IsLockedMonster()
+function s.ritualfil(c)
+	return c:IsCode(46427957,72426662) and c:IsRitualMonster()
 end
-function s.fcoreedgroup(c,e,tp)
+function s.forcedgroup(c,e,tp)
 	return c:IsLocation(LOCATION_ONFIELD)
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -36,7 +36,7 @@ end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
@@ -44,7 +44,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	if #g>0 then
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)
-		local mg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.filter2),tp,LOCATION_REST,0,nil)
+		local mg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.filter2),tp,LOCATION_GRAVE,0,nil)
 		if #mg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			Duel.BreakEffect()
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)

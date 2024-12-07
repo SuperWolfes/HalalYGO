@@ -45,7 +45,7 @@ end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return not Duel.IsExistingMatchingCard(nil,tp,LOCATION_ONFIELD,0,1,e:GetHandler())
 		and Duel.GetFieldGroupCount(tp,0,LOCATION_MZONE)<=3
-		and Duel.GetMatchingGroupCount(Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,nil)<=3
+		and Duel.GetMatchingGroupCount(Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,nil)<=3
 end
 function s.mvalue(e,fp,rp,r)
 	if r~=LOCATION_REASON_TOFIELD then return 99 end
@@ -65,5 +65,5 @@ function s.aclimit(e,re,tp)
 	return false
 end
 function s.setlimit(e,c,tp)
-	return c:IsFieldActional() and not Duel.GetFieldCard(tp,LOCATION_FZONE,0) and Duel.GetFieldGroupCount(tp,LOCATION_SZONE,0)>2
+	return c:IsFieldSpell() and not Duel.GetFieldCard(tp,LOCATION_FZONE,0) and Duel.GetFieldGroupCount(tp,LOCATION_SZONE,0)>2
 end

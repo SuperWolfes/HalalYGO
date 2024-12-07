@@ -25,10 +25,10 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_SZONE,0,nil)
 	if #g>0 then
-		Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOREST)
+		Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOGRAVE)
 		local sg=g:Select(1-tp,1,1,nil)
-		Duel.SendtoRest(sg,REASON_EFFECT)
-		if sg:GetFirst():IsLocation(LOCATION_REST) then
+		Duel.SendtoGrave(sg,REASON_EFFECT)
+		if sg:GetFirst():IsLocation(LOCATION_GRAVE) then
 			Duel.Draw(tp,2,REASON_EFFECT)
 		end
 	end

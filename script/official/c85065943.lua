@@ -3,16 +3,16 @@
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Fusion Materials: 1 Level 6 or higher Fusion Monster + 1 Level 6 or higher Synchro Monster
 	Fusion.AddProcMix(c,true,true,s.matfilter(TYPE_FUSION),s.matfilter(TYPE_SYNCHRO))
-	--Your opponent cannot target this card, cards they control, and cards in their RP and banishment with card effects
+	--Your opponent cannot target this card, cards they control, and cards in their GY and banishment with card effects
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE+EFFECT_FLAG_SET_AVAILABLE)
 	e1:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
 	e1:SetRange(LOCATION_MZONE)
-	e1:SetTargetRange(LOCATION_MZONE,LOCATION_ONFIELD|LOCATION_REST|LOCATION_REMOVED)
+	e1:SetTargetRange(LOCATION_MZONE,LOCATION_ONFIELD|LOCATION_GRAVE|LOCATION_REMOVED)
 	e1:SetTarget(function(e,c) return c==e:GetHandler() or c:IsControler(1-e:GetHandlerPlayer()) end)
 	e1:SetValue(aux.tgoval)
 	c:RegisterEffect(e1)
@@ -47,7 +47,7 @@ function s.initial_effect(c)
 	e3a:SetOperation(function(e) e:GetHandler():RegisterFlagEffect(id,RESETS_STANDARD_PHASE_END,0,1) end)
 	c:RegisterEffect(e3a)
 end
-s.pulse_synchro_fusion=true
+s.miracle_synchro_fusion=true
 s.listed_series={SET_AZAMINA}
 function s.matfilter(ctype)
 	return function(c,...) return c:IsLevelAbove(6) and c:IsType(ctype,...) end

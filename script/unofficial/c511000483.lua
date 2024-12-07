@@ -1,5 +1,5 @@
 --魂の結束－ソウル・ユニオン
---Miss Union
+--Soul Union
 --updated by ClaireStanfield
 local s,id=GetID()
 function s.initial_effect(c)
@@ -23,10 +23,10 @@ function s.cfilter(c)
 	return c:IsSetCard(0x3008)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chk==0 then return Duel.IsExistingTarget(s.cfilter,tp,LOCATION_REST,0,1,nil) end
+	if chk==0 then return Duel.IsExistingTarget(s.cfilter,tp,LOCATION_GRAVE,0,1,nil) end
 	Duel.GetAttackTarget():CreateEffectRelation(e)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	Duel.SelectTarget(tp,s.cfilter,tp,LOCATION_REST,0,1,1,nil)
+	Duel.SelectTarget(tp,s.cfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local d=Duel.GetAttackTarget()

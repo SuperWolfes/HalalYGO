@@ -1,5 +1,5 @@
 -- 山と雪解の春化精
--- Vernalizer Wanderer of Mountains and Melting Snow
+-- Vernalizer Fairy of Mountains and Melting Snow
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)

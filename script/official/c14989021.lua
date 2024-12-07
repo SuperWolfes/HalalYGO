@@ -34,11 +34,11 @@ function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
-	local c1=Duel.GetMatchingGroupCount(Card.IsActionalTrap,tp,LOCATION_ONFIELD,0,nil)
+	local c1=Duel.GetMatchingGroupCount(Card.IsSpellTrap,tp,LOCATION_ONFIELD,0,nil)
 	if c1<2 then
 		Duel.Damage(tp,1000-c1*500,REASON_EFFECT)
 	end
-	local c2=Duel.GetMatchingGroupCount(Card.IsActionalTrap,1-tp,LOCATION_ONFIELD,0,nil)
+	local c2=Duel.GetMatchingGroupCount(Card.IsSpellTrap,1-tp,LOCATION_ONFIELD,0,nil)
 	if c2<2 then
 		Duel.Damage(1-tp,1000-c2*500,REASON_EFFECT)
 	end

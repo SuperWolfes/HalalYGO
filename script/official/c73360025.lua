@@ -7,8 +7,8 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--Fusion summon 1 Tainted monster
-	local params = {fusfilter=aux.FilterBoolFunction(Card.IsRace,RACE_TAINTED),extrafil=s.fextra,extraop=s.extraop,extratg=s.extratarget}
+	--Fusion summon 1 Fiend monster
+	local params = {fusfilter=aux.FilterBoolFunction(Card.IsRace,RACE_FIEND),extrafil=s.fextra,extraop=s.extraop,extratg=s.extratarget}
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)
@@ -32,16 +32,16 @@ function s.initial_effect(c)
 end
 s.listed_series={0xaf}
 function s.checkmat(tp,sg,fc)
-	return fc:IsSetCard(0xaf) or not sg:IsExists(Card.IsLocation,1,nil,LOCATION_REST)
+	return fc:IsSetCard(0xaf) or not sg:IsExists(Card.IsLocation,1,nil,LOCATION_GRAVE)
 end
 function s.fextra(e,tp,mg)
 	if not Duel.IsPlayerAffectedByEffect(tp,69832741) then
-		return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRemove),tp,LOCATION_REST,0,nil),s.checkmat
+		return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRemove),tp,LOCATION_GRAVE,0,nil),s.checkmat
 	end
 	return nil
 end
 function s.extraop(e,tc,tp,sg)
-	local rg=sg:Filter(Card.IsLocation,nil,LOCATION_REST)
+	local rg=sg:Filter(Card.IsLocation,nil,LOCATION_GRAVE)
 	if #rg>0 then
 		Duel.Remove(rg,POS_FACEUP,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
 		sg:Sub(rg)
@@ -49,7 +49,7 @@ function s.extraop(e,tc,tp,sg)
 end
 function s.extratarget(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_REMOVE,nil,0,tp,LOCATION_REST)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_REMOVE,nil,0,tp,LOCATION_GRAVE)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

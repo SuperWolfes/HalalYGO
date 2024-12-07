@@ -3,7 +3,7 @@
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	-- 1 "Ultimate Crystal" Monster + 7 "Crystal Beast" Monsters
 	Fusion.AddProcMixRep(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x1034),7,7,aux.FilterBoolFunctionEx(Card.IsSetCard,0x2034))
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,s.contactlim,s.contactcon)
@@ -47,7 +47,7 @@ end
 s.listed_series={0x2034,0x1034}
 s.listed_materials={0x2034,0x1034}
 function s.contactfil(tp)
-	local loc=Duel.IsPlayerAffectedByEffect(tp,CARD_GUARDIAN_ELIMINATION) and LOCATION_MZONE or LOCATION_MZONE+LOCATION_REST
+	local loc=Duel.IsPlayerAffectedByEffect(tp,CARD_SPIRIT_ELIMINATION) and LOCATION_MZONE or LOCATION_MZONE+LOCATION_GRAVE
 	return Duel.GetMatchingGroup(Card.IsAbleToRemoveAsCost,tp,loc,0,nil)
 end
 function s.contactop(g)
@@ -91,7 +91,7 @@ function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	if #g<=0 or Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)<=0 then return end
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ft<=0 then return end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local sg=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_REMOVED,0,1,ft,nil,e,tp)
 	if #sg>0 then

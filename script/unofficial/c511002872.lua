@@ -6,7 +6,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,5,4)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Rank Up Check
 	aux.EnableCheckRankUp(c,nil,nil,59627393)
 	--battle indestructable
@@ -48,7 +48,7 @@ s.xyz_number=105
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local bc=c:GetBattleTarget()
-	return c:IsRelateToBattle() and bc:IsLocation(LOCATION_REST)
+	return c:IsRelateToBattle() and bc:IsLocation(LOCATION_GRAVE)
 		and bc:IsMonster() and bc:IsPreviousControler(1-tp)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)

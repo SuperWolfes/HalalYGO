@@ -10,20 +10,20 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter1(c)
-	return c:IsRace(RACE_MACHINE) and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsAttackBelow(1200) and c:IsAbleToRest()
+	return c:IsRace(RACE_MACHINE) and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsAttackBelow(1200) and c:IsAbleToGrave()
 end
 function s.filter2(c,e,tp)
 	return c:IsRace(RACE_MACHINE) and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsAttackBelow(1200)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter2(chkc,e,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter2(chkc,e,tp) end
 	if chk==0 then return true end
 	local op=0
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,0))
 	local t1=Duel.IsExistingMatchingCard(s.filter1,tp,LOCATION_DECK,0,1,nil)
 	local t2=Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(s.filter2,tp,LOCATION_REST,0,1,nil,e,tp)
+		and Duel.IsExistingTarget(s.filter2,tp,LOCATION_GRAVE,0,1,nil,e,tp)
 	if t1 and t2 then
 		op=Duel.SelectOption(tp,aux.Stringid(id,1),aux.Stringid(id,2))+1
 	elseif t1 then
@@ -36,14 +36,14 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	e:SetLabel(op)
 	if op==2 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local g=Duel.SelectTarget(tp,s.filter2,tp,LOCATION_REST,0,1,1,nil,e,tp)
+		local g=Duel.SelectTarget(tp,s.filter2,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
 		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 		e:SetProperty(EFFECT_FLAG_CARD_TARGET)
 		e:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	elseif op==1 then
-		Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
+		Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
 		e:SetProperty(0)
-		e:SetCategory(CATEGORY_TOREST)
+		e:SetCategory(CATEGORY_TOGRAVE)
 	else
 		e:SetProperty(0)
 		e:SetCategory(0)
@@ -56,10 +56,10 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 		end
 	elseif e:GetLabel()==1 then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 		local g=Duel.SelectMatchingCard(tp,s.filter1,tp,LOCATION_DECK,0,1,1,nil)
 		if #g>0 then
-			Duel.SendtoRest(g,REASON_EFFECT)
+			Duel.SendtoGrave(g,REASON_EFFECT)
 		end
 	end
 end

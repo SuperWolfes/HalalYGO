@@ -1,4 +1,4 @@
---Temptation of the Monsterdess
+--Temptation of the Goddess
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

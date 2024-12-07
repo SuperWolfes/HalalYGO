@@ -1,5 +1,5 @@
 --デスルークデーモン
---Desrook Archtainted
+--Desrook Archfiend
 local s,id=GetID()
 function s.initial_effect(c)
 	--maintain
@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetType(EFFECT_TYPE_QUICK_O)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_STEP)
-	e3:SetCode(EVENT_TO_REST)
+	e3:SetCode(EVENT_TO_GRAVE)
 	e3:SetRange(LOCATION_HAND)
 	e3:SetCost(s.spcost)
 	e3:SetTarget(s.sptg)
@@ -57,8 +57,8 @@ function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
-	Duel.SendtoRest(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
+	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
 end
 function s.filter(c,e,tp)
 	return c:IsCode(35975813) and c:IsPreviousControler(tp) and c:IsPreviousLocation(LOCATION_ONFIELD)

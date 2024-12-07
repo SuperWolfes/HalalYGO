@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
 	e3:SetRange(LOCATION_FZONE)
-	e3:SetTargetRange(LOCATION_HAND+LOCATION_REST,0)
+	e3:SetTargetRange(LOCATION_HAND+LOCATION_GRAVE,0)
 	e3:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,SET_INFERNOID))
 	e3:SetCode(id)
 	c:RegisterEffect(e3)
@@ -49,13 +49,13 @@ s.listed_names={id+1} --Infernoid Token
 s.listed_series={SET_INFERNOID}
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,SET_INFERNOID,TYPES_TOKEN,0,0,1,RACE_TAINTED,ATTRIBUTE_FIRE) end
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,SET_INFERNOID,TYPES_TOKEN,0,0,1,RACE_FIEND,ATTRIBUTE_FIRE) end
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0
-		or not Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,SET_INFERNOID,TYPES_TOKEN,0,0,1,RACE_TAINTED,ATTRIBUTE_FIRE) then return end
+		or not Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,SET_INFERNOID,TYPES_TOKEN,0,0,1,RACE_FIEND,ATTRIBUTE_FIRE) then return end
 	local token=Duel.CreateToken(tp,id+1)
 	Duel.SpecialSummon(token,0,tp,tp,false,false,POS_FACEUP)
 end

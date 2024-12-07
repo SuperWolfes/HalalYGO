@@ -1,10 +1,10 @@
 --魔弾－ネバー・エンドルフィン
---Mentoral Musket - Steady Hands
+--Magical Musket - Steady Hands
 --Scripted by Eerie Code
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Targeted "Mentoral Musket" monster's ATK/DEF becomes double of original ATK/DEF
+	--Targeted "Magical Musket" monster's ATK/DEF becomes double of original ATK/DEF
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_DEFCHANGE)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)

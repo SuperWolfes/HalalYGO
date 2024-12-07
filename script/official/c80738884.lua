@@ -1,5 +1,5 @@
 --ＶＳ龍帝ノ槍
---Vanquish Miss - Calamity Kaiser
+--Vanquish Soul - Calamity Kaiser
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -15,12 +15,12 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.listed_series={SET_VANQUISH_MISS}
+s.listed_series={SET_VANQUISH_SOUL}
 function s.filter(c,p)
 	return c:IsOnField() and c:IsControler(p)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	if rp==tp or not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,SET_VANQUISH_MISS),tp,LOCATION_MZONE,0,1,nil) then return false end
+	if rp==tp or not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,SET_VANQUISH_SOUL),tp,LOCATION_MZONE,0,1,nil) then return false end
 	if not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then return false end
 	local tg=Duel.GetChainInfo(ev,CHAININFO_TARGET_CARDS)
 	return tg and tg:IsExists(s.filter,1,nil,tp) and Duel.IsChainNegatable(ev)
@@ -36,7 +36,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 end
 function s.damfilter(c)
-	return c:IsFaceup() and c:IsSetCard(SET_VANQUISH_MISS) and c:GetAttack()>0
+	return c:IsFaceup() and c:IsSetCard(SET_VANQUISH_SOUL) and c:GetAttack()>0
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.NegateActivation(ev) and re:GetHandler():IsRelateToEffect(re) and Duel.Destroy(eg,REASON_EFFECT)>0 then

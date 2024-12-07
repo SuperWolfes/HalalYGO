@@ -1,7 +1,7 @@
 --ロード・オブ・ザ・レッド
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--damage
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DESTROY)
@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	end)
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
-	return s[0]>1 and re:IsActiveType(TYPE_ACTIONAL) and re:IsHasType(EFFECT_TYPE_ACTIVATE) 
+	return s[0]>1 and re:IsActiveType(TYPE_SPELL) and re:IsHasType(EFFECT_TYPE_ACTIVATE) 
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDestructable,tp,LOCATION_MZONE,LOCATION_MZONE,1,e:GetHandler()) end
@@ -41,7 +41,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Destroy(sg,REASON_EFFECT)
 end
 function s.checkop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.GetFlagEffect(0,id)==0 and re:IsActiveType(TYPE_ACTIONAL) and re:IsHasType(EFFECT_TYPE_ACTIVATE) then
+	if Duel.GetFlagEffect(0,id)==0 and re:IsActiveType(TYPE_SPELL) and re:IsHasType(EFFECT_TYPE_ACTIVATE) then
 		s[0]=s[0]+1
 		Duel.RegisterFlagEffect(0,id,RESET_CHAIN,0,1)
 	end

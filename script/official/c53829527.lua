@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e1:SetTargetRange(0,1)
 	e1:SetTarget(s.rmlimit)
 	c:RegisterEffect(e1)
-	--Shuffle 1 "Crystron" card from your RP or banishment and destroy 1 face-up card on the field
+	--Shuffle 1 "Crystron" card from your GY or banishment and destroy 1 face-up card on the field
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TODECK+CATEGORY_DESTROY)
@@ -48,16 +48,16 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local exc=not c:IsStatus(STATUS_EFFECT_ENABLED) and c or nil
 	if chkc then return chkc:IsOnField() and chkc:IsFaceup() and (not exc or chkc~=exc) end
 	if chk==0 then return Duel.IsExistingTarget(Card.IsFaceup,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,exc)
-		and Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST|LOCATION_REMOVED,0,1,nil) end
+		and Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_GRAVE|LOCATION_REMOVED,0,1,nil) end
 	local ct=Duel.IsExistingMatchingCard(s.crystsyncfilter,tp,LOCATION_MZONE,0,1,nil) and 2 or 1
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local g=Duel.SelectTarget(tp,Card.IsFaceup,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,ct,nil)
-	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_REST|LOCATION_REMOVED)
+	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_GRAVE|LOCATION_REMOVED)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,tp,0)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.tdfilter),tp,LOCATION_REST|LOCATION_REMOVED,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.tdfilter),tp,LOCATION_GRAVE|LOCATION_REMOVED,0,1,1,nil)
 	if #g==0 then return end
 	Duel.HintSelection(g)
 	if Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)==0 then return end

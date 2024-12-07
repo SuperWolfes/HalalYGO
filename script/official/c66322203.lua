@@ -1,5 +1,5 @@
 --F.A.ダウンフォース
---F.A. Downfcoree
+--F.A. Downforce
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -12,10 +12,10 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
-	--Increase levels from the RP
+	--Increase levels from the GY
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetCondition(aux.exccon)

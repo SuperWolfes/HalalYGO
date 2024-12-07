@@ -18,9 +18,9 @@ function s.sfilter(c,e,tp)
 		and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter1(chkc,e,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter1(chkc,e,tp) end
 	if chk==0 then return Duel.IsExistingMatchingCard(s.sfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp)
-		and Duel.GetMatchingGroup(s.vfilter,tp,LOCATION_REST,0,nil):GetCount()>4 end
+		and Duel.GetMatchingGroup(s.vfilter,tp,LOCATION_GRAVE,0,nil):GetCount()>4 end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
@@ -69,7 +69,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.val(e,c)
-	local g=Duel.GetMatchingGroup(s.vfilter,c:GetControler(),LOCATION_REST,0,c)
+	local g=Duel.GetMatchingGroup(s.vfilter,c:GetControler(),LOCATION_GRAVE,0,c)
 	return g:GetSum(Card.GetBaseAttack)
 end
 function s.eqlimit(e,c)
@@ -79,9 +79,9 @@ function s.sendfilter(c)
 	return c:IsType(TYPE_SYNCHRO) and c:IsRace(RACE_DRAGON) and c:IsAbleToExtra()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.sendfilter,tp,LOCATION_REST,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.sendfilter,tp,LOCATION_GRAVE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,s.sendfilter,tp,LOCATION_REST,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.sendfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 	Duel.SendtoDeck(g,nil,1,REASON_COST)
 end
 function s.atcon(e,tp,eg,ep,ev,re,r,rp)

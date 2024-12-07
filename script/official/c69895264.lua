@@ -18,13 +18,13 @@ end
 s.listed_names={id}
 s.listed_series={0x17f}
 function s.tdfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x17f) and c:IsActionalTrap() and not c:IsCode(id) and c:IsAbleToDeck()
+	return c:IsFaceup() and c:IsSetCard(0x17f) and c:IsSpellTrap() and not c:IsCode(id) and c:IsAbleToDeck()
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST+LOCATION_REMOVED) and s.tdfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.tdfilter,tp,LOCATION_REST+LOCATION_REMOVED,0,2,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE+LOCATION_REMOVED) and s.tdfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.tdfilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,2,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectTarget(tp,s.tdfilter,tp,LOCATION_REST+LOCATION_REMOVED,0,2,2,nil)
+	local g=Duel.SelectTarget(tp,s.tdfilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,2,2,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,#g,0,0)
 end
 function s.setfilter(c)
@@ -35,7 +35,7 @@ function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	if #tg<1 or Duel.SendtoDeck(tg,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)<1 then return end
 	local ct=Duel.GetOperatedGroup():FilterCount(Card.IsLocation,nil,LOCATION_DECK)
 	if ct<1 or ct>Duel.GetLocationCount(tp,LOCATION_SZONE)
-		or not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_TAINTED),tp,LOCATION_MZONE,0,1,nil) then return end
+		or not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_FIEND),tp,LOCATION_MZONE,0,1,nil) then return end
 	local g=Duel.GetMatchingGroup(s.setfilter,tp,LOCATION_DECK,0,nil)
 	if aux.SelectUnselectGroup(g,e,tp,ct,ct,aux.dncheck,0) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		local sg=aux.SelectUnselectGroup(g,e,tp,ct,ct,aux.dncheck,1,tp,HINTMSG_SET)

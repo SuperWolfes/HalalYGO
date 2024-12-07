@@ -1,9 +1,9 @@
 --創星神 tierra
---Tierra, Source of Mismatching
+--Tierra, Source of Destruction
 
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)

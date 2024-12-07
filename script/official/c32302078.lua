@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Xyz Summon procedure: 2+ Level 6 monsters
 	Xyz.AddProcedure(c,nil,6,2,nil,nil,99)
 	--Treat 1 monster you control with a Level owned by your opponent as Level 6 for Xyz Summon
@@ -16,10 +16,10 @@ function s.initial_effect(c)
 	e1:SetTarget(function(e,c) return c:HasLevel() and c:GetOwner()~=e:GetHandlerPlayer() end)
 	e1:SetValue(s.lvval)
 	c:RegisterEffect(e1)
-	--Send 1 card your opponent controls to the RP
+	--Send 1 card your opponent controls to the GY
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
-	e2:SetCategory(CATEGORY_TOREST)
+	e2:SetCategory(CATEGORY_TOGRAVE)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetRange(LOCATION_MZONE)
@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.tgtg)
 	e2:SetOperation(s.tgop)
 	c:RegisterEffect(e2,false,REGISTER_FLAG_DETACH_XMAT)
-	--Special Summon 1 monster from your opponent's RP
+	--Special Summon 1 monster from your opponent's GY
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -44,11 +44,11 @@ function s.initial_effect(c)
 	local g=Group.CreateGroup()
 	g:KeepAlive()
 	e3:SetLabelObject(g)
-	--Keep track of monsters sent to your opponent's RP
+	--Keep track of monsters sent to your opponent's GY
 	local e3a=Effect.CreateEffect(c)
 	e3a:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e3a:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	e3a:SetCode(EVENT_TO_REST)
+	e3a:SetCode(EVENT_TO_GRAVE)
 	e3a:SetRange(LOCATION_MZONE)
 	e3a:SetLabelObject(e3)
 	e3a:SetOperation(s.regop)
@@ -65,18 +65,18 @@ end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and chkc:IsControler(1-tp) end
 	if chk==0 then return Duel.IsExistingTarget(nil,tp,0,LOCATION_ONFIELD,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectTarget(tp,nil,tp,0,LOCATION_ONFIELD,1,1,nil)
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,g,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,g,1,0,0)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) then
-		Duel.SendtoRest(tc,REASON_EFFECT)
+		Duel.SendtoGrave(tc,REASON_EFFECT)
 	end
 end
 function s.spfilter(c,e,tp)
-	return c:IsPreviousLocation(LOCATION_ONFIELD) and c:IsLocation(LOCATION_REST) 
+	return c:IsPreviousLocation(LOCATION_ONFIELD) and c:IsLocation(LOCATION_GRAVE) 
 		and c:IsControler(1-tp) and c:IsReason(REASON_BATTLE|REASON_EFFECT) 
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
 end

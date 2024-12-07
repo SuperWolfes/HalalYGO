@@ -1,11 +1,11 @@
 --天威の龍鬼神
---Draco Berserker of the Tenbree
+--Draco Berserker of the Tenyi
 --Scripted by Larry126
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before awaking
-	c:EnableAwakeLimit()
+	--Must be properly summoned before reviving
+	c:EnableReviveLimit()
 	--Synchro summon procedure
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	--Banish opponent's monster, that activated its effect
@@ -51,7 +51,7 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local bc=c:GetBattleTarget()
 	return Duel.GetAttacker()==c and c:IsRelateToBattle()
-		and bc:IsLocation(LOCATION_REST) and bc:IsType(TYPE_EFFECT)
+		and bc:IsLocation(LOCATION_GRAVE) and bc:IsType(TYPE_EFFECT)
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

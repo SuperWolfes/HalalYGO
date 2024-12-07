@@ -68,7 +68,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local sc=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_EXTRA,0,1,1,nil,tp,mg,e:GetHandler()):GetFirst()
 	if sc then
-		c:CancelToRest()
+		c:CancelToGrave()
 		Duel.SynchroSummon(tp,sc,c,mg)
 	end
 end

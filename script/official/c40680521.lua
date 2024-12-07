@@ -3,7 +3,7 @@
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Pendulum.AddProcedure(c,false)
 	--Fusion Materials: 3 "Vaylantz" monsters
 	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_VAYLANTZ),3)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.efftg)
 	e1:SetOperation(s.effop)
 	c:RegisterEffect(e1)
-	--Place 1 Effect Monster in your opponent's Main Monster Zone face-up as a Continuous Actional in their Actional & Trap Zone in its same column
+	--Place 1 Effect Monster in your opponent's Main Monster Zone face-up as a Continuous Spell in their Spell & Trap Zone in its same column
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_DESTROY)
@@ -97,12 +97,12 @@ function s.plop(e,tp,eg,ep,ev,re,r,rp)
 	end
 	if Duel.CheckLocation(1-tp,LOCATION_SZONE,seq)
 		and Duel.MoveToField(tc,tp,1-tp,LOCATION_SZONE,POS_FACEUP,tc:IsMonsterCard(),1<<seq) then
-		--Treated as a Continuous Actional
+		--Treated as a Continuous Spell
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 		e1:SetCode(EFFECT_CHANGE_TYPE)
-		e1:SetValue(TYPE_ACTIONAL|TYPE_CONTINUOUS)
+		e1:SetValue(TYPE_SPELL|TYPE_CONTINUOUS)
 		e1:SetReset(RESET_EVENT|RESETS_STANDARD&~RESET_TURN_SET)
 		tc:RegisterEffect(e1)
 	end

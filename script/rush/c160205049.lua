@@ -1,5 +1,5 @@
 --破滅の竜魔導士
---Destroyer of Dragon Scoreerers
+--Destroyer of Dragon Sorcerers
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -15,10 +15,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c)
-	return c:IsRace(RACE_MENTOR|RACE_DRAGON) and c:IsAbleToDeckOrExtraAsCost()
+	return c:IsRace(RACE_SPELLCASTER|RACE_DRAGON) and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,4,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,4,nil) end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsFaceup,tp,LOCATION_MZONE,0,1,nil) end
@@ -29,7 +29,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_REST,0,4,4,nil)
+	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_GRAVE,0,4,4,nil)
 	Duel.HintSelection(g,true)
 	if #g==0 or Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_COST)==0 then return end
 	--Effect
@@ -46,11 +46,11 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetValue(function(e,re,rp) return re:IsTrapEffect() and re:GetOwnerPlayer()~=e:GetOwnerPlayer() end)
 	e1:SetReset(RESETS_STANDARD_PHASE_END)
 	tc:RegisterEffect(e1)
-	--Set 1 "Dark Revelation" from your RP
-	local sg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.sfilter),tp,LOCATION_REST,0,nil)
+	--Set 1 "Dark Revelation" from your GY
+	local sg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.sfilter),tp,LOCATION_GRAVE,0,nil)
 	if #sg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
-		local tg=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.sfilter),tp,LOCATION_REST,0,1,1,nil)
+		local tg=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.sfilter),tp,LOCATION_GRAVE,0,1,1,nil)
 		if #tg==0 then return end
 		Duel.BreakEffect()
 		Duel.SSet(tp,tg)

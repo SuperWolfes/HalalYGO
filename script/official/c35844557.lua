@@ -37,7 +37,7 @@ function s.spcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
 	return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(s.spconfilter,tp,LOCATION_MZONE|LOCATION_REST,0,1,nil)
+		and Duel.IsExistingMatchingCard(s.spconfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,1,nil)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	--You cannot Special Summon from the Extra Deck for the rest of this turn, except Rank 4 Xyz Monsters

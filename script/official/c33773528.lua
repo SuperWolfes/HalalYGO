@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCountLimit(1,id)
 	c:RegisterEffect(e2)
-	--Set 1 "Attraction" Trap that is banished or in the RP
+	--Set 1 "Attraction" Trap that is banished or in the GY
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e3:SetCode(EVENT_PHASE+PHASE_END)
@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	e3:SetCountLimit(1,{id,1})
 	e3:SetCost(s.setcost)
 	e3:SetTarget(s.settg)
-	e3:SetOperation(s.vetop)
+	e3:SetOperation(s.setop)
 	c:RegisterEffect(e3)
 end
 s.listed_series={SET_ATTRACTION}
@@ -41,30 +41,30 @@ function s.eqfilter(c,ec)
 	return c:GetEquipGroup():IsContains(ec)
 end
 function s.setfilter(c,ec)
-	return c:IsTrap() and c:IsSetCard(SET_ATTRACTION) and (c:IsFaceup() or c:IsLocation(LOCATION_REST))
+	return c:IsTrap() and c:IsSetCard(SET_ATTRACTION) and (c:IsFaceup() or c:IsLocation(LOCATION_GRAVE))
 		and not c:IsCode(ec:GetCode()) and c:IsSSetable(true)
 end
 function s.cfilter(c,tp)
 	return c:IsFaceup() and c:IsTrap() and c:IsSetCard(SET_ATTRACTION)
 		and Duel.IsExistingMatchingCard(s.eqfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil,c)
-		and Duel.IsExistingTarget(s.setfilter,tp,LOCATION_REST|LOCATION_REMOVED,0,1,nil,c)
+		and Duel.IsExistingTarget(s.setfilter,tp,LOCATION_GRAVE|LOCATION_REMOVED,0,1,nil,c)
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST|LOCATION_REMOVED) and chkc:IsControler(tp) and s.setfilter(chkc,e:GetLabelObject()) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE|LOCATION_REMOVED) and chkc:IsControler(tp) and s.setfilter(chkc,e:GetLabelObject()) end
 	if chk==0 then
 		if e:GetLabel()~=1 then return false end
 		e:SetLabel(0)
 		return Duel.GetLocationCount(tp,LOCATION_SZONE)>-1 and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_SZONE,0,1,nil,tp)
 	end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local gc=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_SZONE,0,1,1,nil,tp):GetFirst()
 	e:SetLabelObject(gc)
-	Duel.SendtoRest(gc,REASON_COST)
+	Duel.SendtoGrave(gc,REASON_COST)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
-	local g=Duel.SelectTarget(tp,s.setfilter,tp,LOCATION_REST|LOCATION_REMOVED,0,1,1,nil,gc)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,0,0)
+	local g=Duel.SelectTarget(tp,s.setfilter,tp,LOCATION_GRAVE|LOCATION_REMOVED,0,1,1,nil,gc)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,0,0)
 end
-function s.vetop(e,tp,eg,ep,ev,re,r,rp)
+function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and tc:IsSSetable() then
 		Duel.SSet(tp,tc)

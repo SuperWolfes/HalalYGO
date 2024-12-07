@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	c:AddSetcodesRule(id,false,0x601)
 	--dark synchro summon
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Synchro.AddDarkSynchroProcedure(c,Synchro.NonTuner(nil),nil,8)
 	--copy
 	local e2=Effect.CreateEffect(c)
@@ -30,7 +30,7 @@ function s.filter(c)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,nil)
 	g:Remove(s.codefilterchk,nil,e:GetHandler())
 	if c:IsFacedown() or #g<=0 then return end
 	repeat
@@ -50,7 +50,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetLabel(cid)
 		e1:SetLabelObject(e0)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-		e1:SetOperation(s.revetop)
+		e1:SetOperation(s.resetop)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		c:RegisterEffect(e1,true)
 		g:Remove(s.codefilter,nil,code)
@@ -62,16 +62,16 @@ end
 function s.codefilterchk(c,sc)
 	return sc:GetFlagEffect(c:GetOriginalCode())>0
 end
-function s.revetop(e,tp,eg,ep,ev,re,r,rp)
+function s.resetop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,nil)
 	if not g:IsExists(s.codefilter,1,nil,e:GetLabelObject():GetLabel()) or c:IsDisabled() then
 		c:ResetEffect(e:GetLabel(),RESET_COPY)
 		c:ResetFlagEffect(e:GetLabelObject():GetLabel())
 	end
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_REST)
+	return e:GetHandler():IsLocation(LOCATION_GRAVE)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToHand,tp,LOCATION_DECK,0,1,nil) end

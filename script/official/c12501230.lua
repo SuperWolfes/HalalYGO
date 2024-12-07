@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(0x20e)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--1 Tuner + 1+ non-Tuner monsters
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	--Cannot be destroyed by card effect once per turn

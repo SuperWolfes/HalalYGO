@@ -3,12 +3,12 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Xyz.AddProcedure(c,nil,9,2,nil,nil,99)
-	--Send 1 monster from the Extra Deck to the RP
+	--Send 1 monster from the Extra Deck to the GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_TOREST)
+	e1:SetCategory(CATEGORY_TOGRAVE)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DELAY)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
@@ -33,7 +33,7 @@ function s.initial_effect(c)
 	e3:SetCategory(CATEGORY_DISABLE)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_CARD_TARGET)
-	e3:SetCode(EVENT_TO_REST)
+	e3:SetCode(EVENT_TO_GRAVE)
 	e3:SetCountLimit(1,{id,2})
 	e3:SetTarget(s.distg)
 	e3:SetOperation(s.disop)
@@ -43,29 +43,29 @@ function s.tgcond(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_XYZ)
 end
 function s.tgfilter(c)
-	return c:IsMonster() and c:IsAbleToRest()
+	return c:IsMonster() and c:IsAbleToGrave()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_EXTRA,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_EXTRA)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_EXTRA)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_EXTRA,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	end
 end
 function s.atchtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and chkc:IsMonster() end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and chkc:IsMonster() end
 	local c=e:GetHandler()
 	local ct=#c:GetOverlayGroup()
 	if chk==0 then return ct>0 and c:CheckRemoveOverlayCard(tp,1,REASON_EFFECT)
-		and Duel.IsExistingTarget(Card.IsMonster,tp,LOCATION_REST,0,1,nil) end
+		and Duel.IsExistingTarget(Card.IsMonster,tp,LOCATION_GRAVE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local g=Duel.SelectTarget(tp,Card.IsMonster,tp,LOCATION_REST,0,1,ct,nil)
+	local g=Duel.SelectTarget(tp,Card.IsMonster,tp,LOCATION_GRAVE,0,1,ct,nil)
 	e:SetLabel(#g)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,#g,tp,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,#g,tp,0)
 end
 function s.atchop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

@@ -72,7 +72,7 @@ function s.naop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.spcfilter(c,code)
-	return c:IsCode(code) and c:IsAbleToRestAsCost()
+	return c:IsCode(code) and c:IsAbleToGraveAsCost()
 end
 function s.rescon(ct)
 	return	function(sg,e,tp,mg)
@@ -89,11 +89,11 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=g1:Clone()
 	g:Merge(g2)
 	local dec=c:GetSequence()<5 and 1 or 0
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>-3 and e:GetHandler():IsAbleToRestAsCost()
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>-3 and e:GetHandler():IsAbleToGraveAsCost()
 		and #g1>0 and #g2>0 and aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon(dec),0) end
-	local sg=aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon(dec),1,tp,HINTMSG_TOREST)
+	local sg=aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon(dec),1,tp,HINTMSG_TOGRAVE)
 	sg:AddCard(c)
-	Duel.SendtoRest(sg,REASON_COST)
+	Duel.SendtoGrave(sg,REASON_COST)
 end
 function s.spfilter(c,e,tp)
 	return c:IsCode(16898077) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)

@@ -25,8 +25,8 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 		or (d and d:IsControler(tp) and d:IsFaceup() and d:IsCode(id)))
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
-	Duel.SendtoRest(e:GetHandler(),REASON_COST+REASON_DISCARD)
+	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
+	Duel.SendtoGrave(e:GetHandler(),REASON_COST+REASON_DISCARD)
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
@@ -53,12 +53,12 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 		e2:SetCode(EVENT_DAMAGE_STEP_END)
 		e2:SetReset(RESET_EVENT+RESETS_STANDARD)
-		e2:SetOperation(s.revetop)
+		e2:SetOperation(s.resetop)
 		e2:SetLabelObject(e1)
 		tc:RegisterEffect(e2)
 	end
 end
-function s.revetop(e,tp,eg,ep,ev,re,r,rp)
+function s.resetop(e,tp,eg,ep,ev,re,r,rp)
 	e:GetLabelObject():Reset()
 	e:Reset()
 end

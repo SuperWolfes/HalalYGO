@@ -49,7 +49,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsLocation(LOCATION_REST) and r&REASON_LINK>0 and c:GetReasonCard():IsSetCard(SET_TRICKSTAR)
+	return c:IsLocation(LOCATION_GRAVE) and r&REASON_LINK>0 and c:GetReasonCard():IsSetCard(SET_TRICKSTAR)
 end
 function s.thfilter(c)
 	return c:IsCode(88693151,63181559) and c:IsAbleToHand()

@@ -9,7 +9,7 @@ function s.initial_effect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
-	e1:SetRange(LOCATION_HAND+LOCATION_REST)
+	e1:SetRange(LOCATION_HAND+LOCATION_GRAVE)
 	e1:SetCode(EVENT_DESTROYED)
 	e1:SetCountLimit(1,id)
 	e1:SetCondition(s.spcon)
@@ -41,10 +41,10 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_BLUEEYES_W_DRAGON}
 function s.filter(c)
-	return c:IsCode(CARD_BLUEEYES_W_DRAGON) and (c:IsFaceup() and c:IsOnField() or c:IsLocation(LOCATION_REST))
+	return c:IsCode(CARD_BLUEEYES_W_DRAGON) and (c:IsFaceup() and c:IsOnField() or c:IsLocation(LOCATION_GRAVE))
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_ONFIELD+LOCATION_REST,0,1,nil)
+	return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_ONFIELD+LOCATION_GRAVE,0,1,nil)
 end
 function s.spcfilter(c)
 	return c:IsReason(REASON_BATTLE+REASON_EFFECT) and c:IsPreviousLocation(LOCATION_ONFIELD)
@@ -56,7 +56,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,false,false)
-		and ((c:IsLocation(LOCATION_REST) and not eg:IsContains(c)) 
+		and ((c:IsLocation(LOCATION_GRAVE) and not eg:IsContains(c)) 
 		or (c:IsLocation(LOCATION_HAND))) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,e:GetHandler(),1,0,0)
 end

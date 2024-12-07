@@ -1,3 +1,3 @@
 --Ｈ・Ｄ・Ｄ
---H.S.D. - Hundred Mega Dragon
+--H.D.D. - Hundred Divine Dragon
 Duel.LoadCardScriptAlias(160205045)

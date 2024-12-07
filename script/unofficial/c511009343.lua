@@ -1,4 +1,4 @@
---The Illusion Knights of Possession
+--The Phantom Knights of Possession
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

@@ -1,5 +1,5 @@
 --旋楽姫ヌンチャクラリネット
---Nuncharinet the Nasheed Princess
+--Nuncharinet the Music Princess
 local s,id=GetID()
 function s.initial_effect(c)
 	--ATK increase

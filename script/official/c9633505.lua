@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	local e3=e1:Clone()
 	e3:SetCode(EFFECT_SPSUMMON_CONDITION)
 	c:RegisterEffect(e3)
-	--immune actional
+	--immune spell
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_SINGLE)
 	e4:SetCode(EFFECT_IMMUNE_EFFECT)
@@ -39,5 +39,5 @@ function s.sumlimit(e)
 	return not Duel.IsExistingMatchingCard(s.cfilter,e:GetHandlerPlayer(),LOCATION_ONFIELD,0,1,nil)
 end
 function s.efilter(e,te)
-	return te:IsActiveType(TYPE_ACTIONAL)
+	return te:IsActiveType(TYPE_SPELL)
 end

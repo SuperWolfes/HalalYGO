@@ -1,5 +1,5 @@
 --魔力統轄
---Actional Power Mastery
+--Spell Power Mastery
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
 end
-s.counter_place_list={COUNTER_ACTIONAL}
+s.counter_place_list={COUNTER_SPELL}
 s.listed_series={0x12a}
 s.listed_names={75014062}
 function s.thfilter(c)
@@ -28,14 +28,14 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 and Duel.SendtoHand(g,nil,REASON_EFFECT)>0 then
 		Duel.ConfirmCards(1-tp,g)
-		local ct=Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsCode,id,75014062),tp,LOCATION_ONFIELD+LOCATION_REST,0,nil)
-		local cg=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsCanAddCounter,COUNTER_ACTIONAL,1),tp,LOCATION_ONFIELD,0,nil)
+		local ct=Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsCode,id,75014062),tp,LOCATION_ONFIELD+LOCATION_GRAVE,0,nil)
+		local cg=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsCanAddCounter,COUNTER_SPELL,1),tp,LOCATION_ONFIELD,0,nil)
 		if ct>0 and #cg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 			Duel.BreakEffect()
 			while ct>0 and #cg>0 do
-				cg:Select(tp,1,1,nil):GetFirst():AddCounter(COUNTER_ACTIONAL,1)
+				cg:Select(tp,1,1,nil):GetFirst():AddCounter(COUNTER_SPELL,1)
 				ct=ct-1
-				cg=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsCanAddCounter,COUNTER_ACTIONAL,1),tp,LOCATION_ONFIELD,0,nil)
+				cg=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsCanAddCounter,COUNTER_SPELL,1),tp,LOCATION_ONFIELD,0,nil)
 			end
 		end
 	end

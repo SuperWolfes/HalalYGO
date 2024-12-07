@@ -3,7 +3,7 @@
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	-- 2 Level 2 monsters
 	Xyz.AddProcedure(c,nil,2,2)
 	-- Search 1 "Purrely" card
@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e2:SetCode(EVENT_BATTLED)
 	e2:SetOperation(function(e) e:GetHandler():RegisterFlagEffect(id,RESET_PHASE|PHASE_DAMAGE,0,1) end)
 	c:RegisterEffect(e2)
-	-- Attach "Purrely" Quick-Play Actional
+	-- Attach "Purrely" Quick-Play Spell
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_TOHAND)
@@ -75,7 +75,7 @@ end
 function s.qpovcon(e,tp,eg,ep,ev,re,r,rp)
 	if rp==1-tp or not re:IsHasType(EFFECT_TYPE_ACTIVATE) then return false end
 	local rc=re:GetHandler()
-	return rc:IsSetCard(SET_PURRELY) and rc:IsQuickPlayActional()
+	return rc:IsSetCard(SET_PURRELY) and rc:IsQuickPlaySpell()
 		and rc:IsOnField() and rc:IsCanBeXyzMaterial(e:GetHandler(),tc,REASON_EFFECT)
 end
 function s.qpovtg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -83,7 +83,7 @@ function s.qpovtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,1-tp,LOCATION_ONFIELD)
 end
 function s.rthfilter(c)
-	return c:IsActionalTrap() and c:IsAbleToHand()
+	return c:IsSpellTrap() and c:IsAbleToHand()
 end
 function s.qpovop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -93,7 +93,7 @@ function s.qpovop(e,tp,eg,ep,ev,re,r,rp)
 		and rc:IsCanBeXyzMaterial(c,tp,REASON_EFFECT) then
 		Duel.Overlay(c,rc)
 		if not c:GetOverlayGroup():IsContains(rc) then return end
-		rc:CancelToRest()
+		rc:CancelToGrave()
 		if Duel.IsExistingMatchingCard(s.rthfilter,tp,0,LOCATION_ONFIELD,1,nil)
 			and Duel.SelectYesNo(tp,aux.Stringid(id,3)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RTOHAND)

@@ -1,5 +1,5 @@
 --強引な安全協定
---Fcoreed Ceasefire
+--Forced Ceasefire
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

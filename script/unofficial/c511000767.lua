@@ -1,4 +1,4 @@
---Blackwing - Sharnga the Waning Horizon
+--Blackwing - Sharnga the Waning Moon
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon

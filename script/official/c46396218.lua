@@ -3,8 +3,8 @@
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
-	--Fusion Materials: 1 Illusion monster + 1 LIGHT Mentor monster
+	c:EnableReviveLimit()
+	--Fusion Materials: 1 Illusion monster + 1 LIGHT Spellcaster monster
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_ILLUSION),s.matfilter)
 	--Battle damage of other "Azamina" monsters is doubled
 	local e1=Effect.CreateEffect(c)
@@ -44,7 +44,7 @@ end
 s.listed_names={id}
 s.listed_series={SET_AZAMINA,SET_SINFUL_SPOILS}
 function s.matfilter(c,fc,sumtype,tp)
-	return c:IsAttribute(ATTRIBUTE_LIGHT,fc,sumtype,tp) and c:IsRace(RACE_MENTOR,fc,sumtype,tp)
+	return c:IsAttribute(ATTRIBUTE_LIGHT,fc,sumtype,tp) and c:IsRace(RACE_SPELLCASTER,fc,sumtype,tp)
 end
 function s.distg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

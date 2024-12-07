@@ -14,27 +14,27 @@ function s.initial_effect(c)
 	e2:SetCountLimit(1)
 	e2:SetCost(s.setcost)
 	e2:SetTarget(s.settg)
-	e2:SetOperation(s.vetop)
+	e2:SetOperation(s.setop)
 	c:RegisterEffect(e2)
 end
 s.listed_series={0x2b,0x61}
 s.listed_names={id}
 function s.costfilter(c)
-	return c:IsSetCard(0x2b) and c:IsMonster() and c:IsAbleToRestAsCost()
+	return c:IsSetCard(0x2b) and c:IsMonster() and c:IsAbleToGraveAsCost()
 end
 function s.setcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,1,nil)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.setfilter(c)
-	return c:IsSetCard(0x61) and c:IsActionalTrap() and not c:IsCode(id) and c:IsSSetable()
+	return c:IsSetCard(0x61) and c:IsSpellTrap() and not c:IsCode(id) and c:IsSSetable()
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_DECK,0,1,nil) end
 end
-function s.vetop(e,tp,eg,ep,ev,re,r,rp)
+function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 	local g=Duel.SelectMatchingCard(tp,s.setfilter,tp,LOCATION_DECK,0,1,1,nil)

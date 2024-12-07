@@ -1,4 +1,4 @@
---War Rock Guardian
+--War Rock Spirit
 --Scripted by Rundas
 local s,id=GetID()
 function s.initial_effect(c)
@@ -23,9 +23,9 @@ function s.filter(c,e,tp,pos)
 	return c:IsSetCard(0x161) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,pos)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST) and s.filter(chkc,e,tp) end
-	local atk=Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil,e,tp,POS_FACEUP_ATTACK)
-	local def=Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil,e,tp,POS_FACEUP_DEFENSE)
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and s.filter(chkc,e,tp) end
+	local atk=Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil,e,tp,POS_FACEUP_ATTACK)
+	local def=Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil,e,tp,POS_FACEUP_DEFENSE)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and (atk or def) end
 	local choice=-1
 	local pos=0
@@ -40,8 +40,8 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	elseif choice==1 then pos=POS_FACEUP_DEFENSE end
 	e:SetLabel(choice)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil,e,tp,pos)
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,LOCATION_REST)
+	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp,pos)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,LOCATION_GRAVE)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c,tc=e:GetHandler(),Duel.GetFirstTarget()

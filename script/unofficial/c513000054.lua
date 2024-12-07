@@ -1,5 +1,5 @@
 --クロス・ソウル (Anime)
---Miss Exchange (Anime)
+--Soul Exchange (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

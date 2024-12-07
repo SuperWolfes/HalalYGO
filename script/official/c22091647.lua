@@ -1,5 +1,5 @@
 --ゴッドフェニックス・ギア・フリード
---Immortal Bird Gearfried
+--Immortal Phoenix Gearfried
 --Scripted by Logical Nonsense and AlphaKretin
 --Substitute ID
 local s,id=GetID()
@@ -42,17 +42,17 @@ function s.initial_effect(c)
 	e3:SetOperation(s.ngop)
 	c:RegisterEffect(e3)
 end
-	--Check for equip actional to banish
+	--Check for equip spell to banish
 function s.spfilter(c,tp)
-	return c:IsAbleToRemoveAsCost() and c:IsEquipActional() and (c:IsFaceup() or c:IsLocation(LOCATION_REST))
+	return c:IsAbleToRemoveAsCost() and c:IsEquipSpell() and (c:IsFaceup() or c:IsLocation(LOCATION_GRAVE))
 end
-	--Cost of banishing from field/RP
+	--Cost of banishing from field/GY
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():GetFlagEffect(id)==0
-		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_SZONE|LOCATION_REST,0,1,nil,tp) end
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_SZONE|LOCATION_GRAVE,0,1,nil,tp) end
 	e:GetHandler():RegisterFlagEffect(id,RESET_EVENT|RESETS_STANDARD|RESET_PHASE|PHASE_END,0,1)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_SZONE|LOCATION_REST,0,1,1,nil,tp)
+	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_SZONE|LOCATION_GRAVE,0,1,1,nil,tp)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 	--Activation legality
@@ -72,7 +72,7 @@ function s.eqcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetAttacker()==e:GetHandler() and #g==0
 end
 function s.eqfilter(c,tp)
-	return c:IsFaceup() and (c:IsControler(tp) or c:IsAbleToChangeControler()) and c:CheckUniqueOnField(tp) and not c:IsUnliked()
+	return c:IsFaceup() and (c:IsControler(tp) or c:IsAbleToChangeControler()) and c:CheckUniqueOnField(tp) and not c:IsForbidden()
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.eqfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,e:GetHandler(),tp)
@@ -103,16 +103,16 @@ function s.ngcon(e,tp,eg,ep,ev,re,r,rp)
 	return not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED) and re:IsMonsterEffect()
 		and Duel.IsChainNegatable(ev)
 end
-	--Check for equip actional
+	--Check for equip spell
 function s.ngfilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_EQUIP) and c:IsAbleToRestAsCost()
+	return c:IsFaceup() and c:IsType(TYPE_EQUIP) and c:IsAbleToGraveAsCost()
 end
-	--Cost of sending equip to RP
+	--Cost of sending equip to GY
 function s.ngcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.ngfilter,tp,LOCATION_SZONE,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.ngfilter,tp,LOCATION_SZONE,0,1,1,nil)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.ngtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

@@ -1,5 +1,5 @@
 --Ｓｐ－タイラント・フォース (Anime)
---Speed Actional - Tyrant Fcoree (Anime)
+--Speed Spell - Tyrant Force (Anime)
 --scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)

@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 	--Target and roll dice when attack is declared
 	local e2=Effect.CreateEffect(c)
-	e2:SetCategory(CATEGORY_SUFFICE)
+	e2:SetCategory(CATEGORY_DICE)
 	e2:SetType(EFFECT_TYPE_TRIGGER_O+EFFECT_TYPE_FIELD)
 	e2:SetCode(EVENT_ATTACK_ANNOUNCE)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
@@ -35,7 +35,7 @@ function s.initial_effect(c)
 		s.diceEffects[1]={}
 		local ge1=Effect.CreateEffect(c)
 		ge1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-		ge1:SetCode(EVENT_TOSS_SUFFICE)
+		ge1:SetCode(EVENT_TOSS_DICE)
 		ge1:SetProperty(EFFECT_FLAG_DELAY)
 		ge1:SetOperation(s.checkop)
 		Duel.RegisterEffect(ge1,0)
@@ -43,7 +43,7 @@ function s.initial_effect(c)
 		ge2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		ge2:SetCode(EVENT_ADJUST)
 		ge2:SetCountLimit(1)
-		ge2:SetOperation(s.revetop)
+		ge2:SetOperation(s.resetop)
 		Duel.RegisterEffect(ge2,0)
 	end)
 end
@@ -52,7 +52,7 @@ s.listed_series={0x577}
 function s.checkop(e,tp,eg,ep,ev,re,r,rp)
 	table.insert(s.diceEffects[ep],re:GetHandler():GetFieldID())
 end
-function s.revetop(e,tp,eg,ep,ev,re,r,rp)
+function s.resetop(e,tp,eg,ep,ev,re,r,rp)
 	s.diceEffects[0]={}
 	s.diceEffects[1]={}
 end

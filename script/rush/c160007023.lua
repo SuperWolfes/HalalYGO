@@ -1,5 +1,5 @@
 --カタオモイルカ 
---Kaposmoirutra
+--Kataomoiruka
 local s,id=GetID()
 function s.initial_effect(c)
 	--Draw
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_UMI,CARD_BIG_UMI}
 function s.costfilter(c)
-	return (c:IsCode(CARD_UMI) or c:IsCode(CARD_BIG_UMI)) and c:IsAbleToRestAsCost()
+	return (c:IsCode(CARD_UMI) or c:IsCode(CARD_BIG_UMI)) and c:IsAbleToGraveAsCost()
 end
 function s.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil) end
@@ -30,9 +30,9 @@ function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	--requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,1,nil)
-	if g and Duel.SendtoRest(g,REASON_COST)>0 then
+	if g and Duel.SendtoGrave(g,REASON_COST)>0 then
 		--effect
 		local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
 		Duel.Draw(p,d,REASON_EFFECT)

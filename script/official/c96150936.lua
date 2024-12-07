@@ -2,7 +2,7 @@
 --Madolche Fresh Sistart
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x71),2,2)
 	--destroy replace
 	local e1=Effect.CreateEffect(c)
@@ -34,12 +34,12 @@ function s.desrepfilter(c)
 end
 function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return not e:GetHandler():IsReason(REASON_RULE)
-		and Duel.IsExistingMatchingCard(s.desrepfilter,tp,LOCATION_REST,0,1,nil) end
+		and Duel.IsExistingMatchingCard(s.desrepfilter,tp,LOCATION_GRAVE,0,1,nil) end
 	return Duel.SelectEffectYesNo(tp,e:GetHandler(),96)
 end
 function s.desrepop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,s.desrepfilter,tp,LOCATION_REST,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.desrepfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 	Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT+REASON_REPLACE)
 end
 function s.linkfilter(c)
@@ -49,5 +49,5 @@ function s.indescon(e,c)
 	return e:GetHandler():GetLinkedGroup():IsExists(s.linkfilter,1,nil)
 end
 function s.indestg(e,c)
-	return c:IsFaceup() and c:IsSetCard(0x71) and c:IsActionalTrap()
+	return c:IsFaceup() and c:IsSetCard(0x71) and c:IsSpellTrap()
 end

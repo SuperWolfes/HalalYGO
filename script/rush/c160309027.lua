@@ -1,5 +1,5 @@
 --透幻郷の万緑
---Verdant Vegetation of Beinl Shangri-La
+--Verdant Vegetation of Spectral Shangri-La
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

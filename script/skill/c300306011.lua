@@ -20,7 +20,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SKILL_FLIP,tp,id|(1<<32))
 	Duel.Hint(HINT_CARD,tp,id)
 	local c=e:GetHandler()
-	--Effect handling for battle damage from your Toxic "Vampire" monsters
+	--Effect handling for battle damage from your Zombie "Vampire" monsters
 	aux.GlobalCheck(s,function()
 		local ge1=Effect.CreateEffect(c)
 		ge1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
@@ -50,7 +50,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e2,tp)
 end
 function s.vfilter(c,tp)
-	return c:IsRace(RACE_TOXIC) and c:IsSetCard(SET_VAMPIRE) and c:IsControler(tp)
+	return c:IsRace(RACE_ZOMBIE) and c:IsSetCard(SET_VAMPIRE) and c:IsControler(tp)
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	return ep==1-tp

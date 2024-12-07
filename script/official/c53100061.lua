@@ -16,7 +16,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0xd}
 function s.filter(c)
-	return c:IsSetCard(0xd) and c:IsLocation(LOCATION_REST) and c:IsReason(REASON_BATTLE)
+	return c:IsSetCard(0xd) and c:IsLocation(LOCATION_GRAVE) and c:IsReason(REASON_BATTLE)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.filter,1,nil)

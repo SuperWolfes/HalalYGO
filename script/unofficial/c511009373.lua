@@ -1,4 +1,4 @@
---Deceitful Dark Contract with the War Being
+--Deceitful Dark Contract with the War Deity
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

@@ -1,5 +1,5 @@
 --Ｓｐ－スピード・フォース
---Speed Actional - Speed Fcoree
+--Speed Spell - Speed Force
 --fixed by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -27,5 +27,5 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.indval(e,re,rp)
-	return re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) and re:GetOwnerPlayer()~=e:GetOwnerPlayer()
+	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP) and re:GetOwnerPlayer()~=e:GetOwnerPlayer()
 end

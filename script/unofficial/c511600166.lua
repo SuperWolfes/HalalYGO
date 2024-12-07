@@ -13,5 +13,5 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.val(e,c)
-	return Duel.GetMatchingGroup(Card.IsReason,c:GetControler(),LOCATION_REST,0,nil,REASON_BATTLE):GetSum(Card.GetAttack)/5
+	return Duel.GetMatchingGroup(Card.IsReason,c:GetControler(),LOCATION_GRAVE,0,nil,REASON_BATTLE):GetSum(Card.GetAttack)/5
 end

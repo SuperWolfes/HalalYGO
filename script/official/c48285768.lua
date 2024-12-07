@@ -7,12 +7,12 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz summon procedure
 	Xyz.AddProcedure(c,nil,4,2)
-	--Must be properly summoned before awaking
-	c:EnableAwakeLimit()
-	--Send 1 "Sprigguns" monster from deck to RP
+	--Must be properly summoned before reviving
+	c:EnableReviveLimit()
+	--Send 1 "Sprigguns" monster from deck to GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_TOREST)
+	e1:SetCategory(CATEGORY_TOGRAVE)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
@@ -40,19 +40,19 @@ s.listed_series={0x158}
 
 	--Check for a "Sprigguns" monster
 function s.tgfilter(c)
-	return c:IsMonster() and c:IsSetCard(0x158) and c:IsAbleToRest()
+	return c:IsMonster() and c:IsSetCard(0x158) and c:IsAbleToGrave()
 end
 	--Activation legality
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
 end
-	--Send 1 "Sprigguns" monster from deck to RP
+	--Send 1 "Sprigguns" monster from deck to GY
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	end
 end
 	--Check if current phase is opponent's main phase or battle phase
@@ -81,13 +81,13 @@ function s.banop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetCountLimit(1)
 		e1:SetOperation(s.retop)
 		Duel.RegisterEffect(e1,tp)
-		--Send 1 fusion monster that lists "Fallen of Albaz" from extra deck to RP
+		--Send 1 fusion monster that lists "Fallen of Albaz" from extra deck to GY
 		if ct>=2 and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 			Duel.BreakEffect()
-			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 			local g=Duel.SelectMatchingCard(tp,s.edfilter,tp,LOCATION_EXTRA,0,1,1,nil)
 			if #g>0 then
-				Duel.SendtoRest(g,REASON_EFFECT)
+				Duel.SendtoGrave(g,REASON_EFFECT)
 			end
 		end
 	end

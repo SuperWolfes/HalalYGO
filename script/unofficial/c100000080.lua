@@ -43,9 +43,9 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetTurnPlayer()
 	local ct=Duel.GetLocationCount(p,LOCATION_MZONE,p,LOCATION_REASON_COUNT)
 	local ft=Duel.GetLocationCount(p,LOCATION_MZONE)
-	if Duel.IsPlayerAffectedByEffect(p,CARD_BLUEEYES_GUARDIAN) then ft=math.min(ft,1) end
+	if Duel.IsPlayerAffectedByEffect(p,CARD_BLUEEYES_SPIRIT) then ft=math.min(ft,1) end
 	if ft~=ct or ct<=0
-		or not Duel.IsPlayerCanSpecialSummonMonster(p,100000082,0,TYPES_TOKEN,3000,1000,10,RACE_TAINTED,ATTRIBUTE_DARK) then return end
+		or not Duel.IsPlayerCanSpecialSummonMonster(p,100000082,0,TYPES_TOKEN,3000,1000,10,RACE_FIEND,ATTRIBUTE_DARK) then return end
 	for i=1,ft do
 		local token=Duel.CreateToken(p,100000082)
 		Duel.SpecialSummonStep(token,0,p,p,false,false,POS_FACEUP)

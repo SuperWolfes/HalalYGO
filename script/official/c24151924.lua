@@ -1,9 +1,9 @@
 --Ｇゴーレム・インヴァリッド・ドルメン
---G Gopal Invalid Dolmen
+--G Golem Invalid Dolmen
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_EARTH),2)
 	--Co-linked monsters you control are unaffected by opponent's activated monster effects
 	local e1=Effect.CreateEffect(c)

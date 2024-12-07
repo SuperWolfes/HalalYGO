@@ -1,9 +1,9 @@
---Mega Serpent Geh (Anime)
+--Divine Serpent Geh (Anime)
 --updated infinity ATK handling by Larry126
 --fixed Attack Cost by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--cannot special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -124,7 +124,7 @@ end
 -------------------------------------------------------------------
 function s.sucop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
-	Duel.SendtoRest(g,REASON_EFFECT)
+	Duel.SendtoGrave(g,REASON_EFFECT)
 	Duel.SetLP(tp,0)
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)

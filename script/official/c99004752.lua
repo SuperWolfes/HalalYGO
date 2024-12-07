@@ -47,13 +47,13 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetReset(RESET_PHASE+PHASE_END)
 		e2:SetLabelObject(tc)
 		Duel.RegisterEffect(e2,tp)
-		tc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD_EXC_REST+RESET_PHASE+PHASE_END,0,1)
+		tc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD_EXC_GRAVE+RESET_PHASE+PHASE_END,0,1)
 	end
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetLabelObject()
 	return eg:IsContains(tc) and tc:GetFlagEffect(id)~=0 and tc:GetOwner()==1-tp
-		and tc:IsLocation(LOCATION_REST) and tc:IsReason(REASON_BATTLE)
+		and tc:IsLocation(LOCATION_GRAVE) and tc:IsReason(REASON_BATTLE)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

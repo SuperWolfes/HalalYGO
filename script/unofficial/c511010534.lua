@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--atkup
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(44035031,0))
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	local e3=e1:Clone()
 	e3:SetCode(EVENT_FLIP_SUMMON_SUCCESS)
 	c:RegisterEffect(e3)
-	--Fcoree Attack
+	--Force Attack
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(44035031,1))
 	e4:SetProperty(EFFECT_FLAG_CARD_TARGET)

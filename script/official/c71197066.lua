@@ -1,5 +1,5 @@
 --機巧蛇－叢雲遠呂智
---Gizmek Ortich, the Serpentron Sky Slasher
+--Gizmek Orochi, the Serpentron Sky Slasher
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
@@ -9,7 +9,7 @@ function s.initial_effect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
 	e1:SetCode(EVENT_FREE_CHAIN)
-	e1:SetRange(LOCATION_HAND+LOCATION_REST)
+	e1:SetRange(LOCATION_HAND+LOCATION_GRAVE)
 	e1:SetHintTiming(0,TIMING_END_PHASE)
 	e1:SetCountLimit(1,id)
 	e1:SetCost(s.spcost)

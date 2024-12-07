@@ -20,7 +20,7 @@ function s.cfilter(c)
 	return c:IsCode(64428736) or (c:IsMonster() and c:IsAttribute(ATTRIBUTE_DARK) and c:IsDefense(1200))
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil)
+	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,nil)
 end
 function s.posfilter(c)
 	return c:IsLevelBelow(8) and c:IsCanTurnSet() and c:IsCanChangePositionRush()

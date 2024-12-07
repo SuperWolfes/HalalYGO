@@ -14,36 +14,36 @@ end
 s.fit_monster={id+1}
 function s.filter(c,e,tp,m)
 	local cd=c:GetCode()
-	if cd~=id+1 or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_LOCKED,tp,true,false) then return false end
+	if cd~=id+1 or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,false) then return false end
 	if m:IsContains(c) then
 		m:RemoveCard(c)
-		result=m:CheckWithSumGreater(Card.GetLockedLevel,c:GetLevel(),c)
+		result=m:CheckWithSumGreater(Card.GetRitualLevel,c:GetLevel(),c)
 		m:AddCard(c)
 	else
-		result=m:CheckWithSumGreater(Card.GetLockedLevel,c:GetLevel(),c)
+		result=m:CheckWithSumGreater(Card.GetRitualLevel,c:GetLevel(),c)
 	end
 	return result
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
-		local mg=Duel.GetLockedMaterial(tp)
+		local mg=Duel.GetRitualMaterial(tp)
 		return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil,e,tp,mg)
 	end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local mg=Duel.GetLockedMaterial(tp)
+	local mg=Duel.GetRitualMaterial(tp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local tg=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil,e,tp,mg)
 	if #tg>0 then
 		local tc=tg:GetFirst()
 		mg:RemoveCard(tc)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
-		local mat=mg:SelectWithSumGreater(tp,Card.GetLockedLevel,tc:GetLevel(),tc)
+		local mat=mg:SelectWithSumGreater(tp,Card.GetRitualLevel,tc:GetLevel(),tc)
 		tc:SetMaterial(mat)
-		Duel.ReleaseLockedMaterial(mat)
+		Duel.ReleaseRitualMaterial(mat)
 		Duel.BreakEffect()
-		Duel.SpecialSummon(tc,SUMMON_TYPE_LOCKED,tp,tp,true,false,POS_FACEUP)
+		Duel.SpecialSummon(tc,SUMMON_TYPE_RITUAL,tp,tp,true,false,POS_FACEUP)
 		tc:CompleteProcedure()
 	end
 end

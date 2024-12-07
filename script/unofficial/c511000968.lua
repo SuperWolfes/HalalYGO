@@ -1,4 +1,4 @@
---Junk Guardian
+--Junk Spirit
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c,e,tp)
-	return c:IsSetCard(0x43) and c:IsLocation(LOCATION_REST) and c:IsPreviousControler(tp) and c:IsReason(REASON_BATTLE)
+	return c:IsSetCard(0x43) and c:IsLocation(LOCATION_GRAVE) and c:IsPreviousControler(tp) and c:IsReason(REASON_BATTLE)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.con(e,tp,eg,ep,ev,re,r,rp)
@@ -29,7 +29,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
-	if e:GetLabelObject():IsLocation(LOCATION_REST) then
+	if e:GetLabelObject():IsLocation(LOCATION_GRAVE) then
 		Duel.SpecialSummon(e:GetLabelObject(),0,tp,tp,false,false,POS_FACEUP)
 	end
 end

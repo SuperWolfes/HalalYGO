@@ -1,21 +1,21 @@
 --Japanese name
---Giant Mimirahul
+--Giant Mimighoul
 --Scripted by the Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Xyz Summon procedure: 2 Level 1 monsters
 	Xyz.AddProcedure(c,nil,1,2)
-	--Your non-Xyz "Mimirahul" monsters can attack directly while your opponent controls a face-down monster
+	--Your non-Xyz "Mimighoul" monsters can attack directly while your opponent controls a face-down monster
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_DIRECT_ATTACK)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetTargetRange(LOCATION_MZONE,0)
-	e1:SetTarget(function(e,c) return not c:IsType(TYPE_XYZ) and c:IsSetCard(SET_MIMIRAHUL) end)
+	e1:SetTarget(function(e,c) return not c:IsType(TYPE_XYZ) and c:IsSetCard(SET_MIMIGHOUL) end)
 	e1:SetCondition(function(e) return Duel.IsExistingMatchingCard(Card.IsFacedown,e:GetHandlerPlayer(),0,LOCATION_MZONE,1,nil) end)
 	c:RegisterEffect(e1)
-	--Add 1 "Mimirahul" card from your Deck to your hand
+	--Add 1 "Mimighoul" card from your Deck to your hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -40,9 +40,9 @@ function s.initial_effect(c)
 	e3:SetOperation(s.desop)
 	c:RegisterEffect(e3,false,REGISTER_FLAG_DETACH_XMAT)
 end
-s.listed_series={SET_MIMIRAHUL}
+s.listed_series={SET_MIMIGHOUL}
 function s.thfilter(c)
-	return c:IsSetCard(SET_MIMIRAHUL) and c:IsAbleToHand()
+	return c:IsSetCard(SET_MIMIGHOUL) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

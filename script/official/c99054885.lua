@@ -1,5 +1,5 @@
 -- 破壊の代行者 ヴィーナス
--- The Agent of Mismatching – Summit
+-- The Agent of Destruction – Venus
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -33,9 +33,9 @@ function s.hspcostfilter(c,tp)
 		and Duel.GetMZoneCount(tp,c)>0
 end
 function s.hspcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.hspcostfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,nil,tp) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.hspcostfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.hspcostfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,1,nil,tp)
+	local g=Duel.SelectMatchingCard(tp,s.hspcostfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,nil,tp)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.hsptg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -54,10 +54,10 @@ function s.spfilter(c,e,tp)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local sg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_REST+LOCATION_REMOVED,0,nil,e,tp)
+	local sg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,nil,e,tp)
 	local ct=math.min(#sg,Duel.GetLocationCount(tp,LOCATION_MZONE))
 	if chk==0 then return ct>0 and Duel.CheckLPCost(tp,500) end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ct=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ct=1 end
 	local lp=Duel.GetLP(tp)
 	local max=math.min(ct,lp//500)
 	local t={}
@@ -72,12 +72,12 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local ct=e:GetLabel()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local sg=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_REST+LOCATION_REMOVED,0,ct,ct,nil,e,tp)
+	local sg=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,ct,ct,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,sg,#sg,tp,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetTargetCards(e)
-	if #g==0 or Duel.GetLocationCount(tp,LOCATION_MZONE)<#g or (#g>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)) then return end
+	if #g==0 or Duel.GetLocationCount(tp,LOCATION_MZONE)<#g or (#g>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)) then return end
 	local c=e:GetHandler()
 	for sc in g:Iter() do
 		if Duel.SpecialSummonStep(sc,0,tp,tp,false,false,POS_FACEUP) then

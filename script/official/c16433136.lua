@@ -1,10 +1,10 @@
 --御巫の祓舞
---Purifying Dance of the Sibango
+--Purifying Dance of the Mikanko
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddEquipProcedure(c,nil,aux.FilterBoolFunction(Card.IsSetCard,0x18e))
-	--Prevent mismatching by effects
+	--Prevent destruction by effects
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_EQUIP)
 	e1:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)

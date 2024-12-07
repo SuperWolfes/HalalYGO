@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target1)
 	e1:SetOperation(s.operation1)
 	c:RegisterEffect(e1)
-	--Target 1 Defense Position EARTH Machine Xyz monster you control and 1 Actional/Trap your opponent controls
+	--Target 1 Defense Position EARTH Machine Xyz monster you control and 1 Spell/Trap your opponent controls
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_POSITION+CATEGORY_DESTROY)

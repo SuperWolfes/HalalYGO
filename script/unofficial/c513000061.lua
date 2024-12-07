@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,10,3)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--spsummon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(51543904,1))
@@ -42,11 +42,11 @@ function s.filter(c,e,tp)
 	return c:IsSetCard(0x48) and c:IsType(TYPE_XYZ) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter(chkc,e,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter(chkc,e,tp) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil,e,tp) end
+		and Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil,e,tp)
+	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
@@ -76,7 +76,7 @@ function s.negcon(e,tp,eg,ep,ev,re,r,rp)
 	if eb and tg and tg:IsContains(e:GetHandler()) then return true end
 	local eb,tg,tc=Duel.GetOperationInfo(ev,CATEGORY_TODECK)
 	if eb and tg and tg:IsContains(e:GetHandler()) then return true end
-	local eb,tg,tc=Duel.GetOperationInfo(ev,CATEGORY_TOREST)
+	local eb,tg,tc=Duel.GetOperationInfo(ev,CATEGORY_TOGRAVE)
 	if eb and tg and tg:IsContains(e:GetHandler()) then return true end
 	local eb,tg,tc=Duel.GetOperationInfo(ev,CATEGORY_TOHAND)
 	if eb and tg and tg:IsContains(e:GetHandler()) then return true end

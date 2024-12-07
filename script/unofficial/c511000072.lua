@@ -1,5 +1,5 @@
 --ＴＧ サイバー・マジシャン (TF5)
---T.G. Cyber Mentor (TF5)
+--T.G. Cyber Magician (TF5)
 --fixed by ClaireStanfield
 local s,id=GetID()
 function s.initial_effect(c)
@@ -32,19 +32,19 @@ function s.initial_effect(c)
 	e4:SetRange(LOCATION_MZONE)
 	e4:SetValue(RACE_MACHINE)
 	c:RegisterEffect(e4)
-	--Search 1 "T.G. Cyber Mentor"
+	--Search 1 "T.G. Cyber Magician"
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(id,0))
 	e5:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-	e5:SetCode(EVENT_TO_REST)
+	e5:SetCode(EVENT_TO_GRAVE)
 	e5:SetCondition(s.scon)
 	e5:SetTarget(s.stg)
 	e5:SetOperation(s.sop)
 	c:RegisterEffect(e5)
 end
 s.listed_series={SET_TG}
-s.listed_names={64910482} --T.G. Cyber Mentor
+s.listed_names={64910482} --T.G. Cyber Magician
 function s.synlimit(e,c)
 	if not c then return false end
 	return not c:IsSetCard(SET_TG)

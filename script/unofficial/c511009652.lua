@@ -1,9 +1,9 @@
 --ダークマミー・サージカル・クーパー
---Dark Mummy Surgical Fcoreeps
+--Dark Mummy Surgical Forceps
 --fixed by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Link Summon procedure
 	Link.AddProcedure(c,aux.FilterBoolFunction(Card.IsSetCard,0x56f),3,3)
 	--Increase ATK

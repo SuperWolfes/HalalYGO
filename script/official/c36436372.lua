@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Change this card's Level to the Level of the "Gimmick Puppet" monster sent to the RP
+	--Change this card's Level to the Level of the "Gimmick Puppet" monster sent to the GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_LVCHANGE)
@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	e3:SetCategory(CATEGORY_LVCHANGE)
 	e3:SetType(EFFECT_TYPE_IGNITION)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e3:SetRange(LOCATION_REST)
+	e3:SetRange(LOCATION_GRAVE)
 	e3:SetCost(aux.SelfBanishCost)
 	e3:SetTarget(s.gplvtg)
 	e3:SetOperation(s.gplvop)
@@ -32,14 +32,14 @@ function s.initial_effect(c)
 end
 s.listed_series={SET_GIMMICK_PUPPET}
 function s.lvcostfilter(c,lv)
-	return c:IsSetCard(SET_GIMMICK_PUPPET) and c:IsMonster() and not c:IsLevel(lv) and c:IsAbleToRestAsCost()
+	return c:IsSetCard(SET_GIMMICK_PUPPET) and c:IsMonster() and not c:IsLevel(lv) and c:IsAbleToGraveAsCost()
 end
 function s.selflvcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local lv=e:GetHandler():GetLevel()
 	if chk==0 then return Duel.IsExistingMatchingCard(s.lvcostfilter,tp,LOCATION_DECK,0,1,nil,lv) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.lvcostfilter,tp,LOCATION_DECK,0,1,1,nil,lv)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 	e:SetLabel(g:GetFirst():GetLevel())
 end
 function s.selflvtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

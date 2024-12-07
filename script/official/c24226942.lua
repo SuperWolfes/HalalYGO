@@ -1,9 +1,9 @@
 --カオス・ネフティス
---Chaos Nepolonis
+--Chaos Nephthys
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Special Summon condition
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
 	e2:SetCode(EVENT_DESTROYED)
-	e2:SetRange(LOCATION_HAND+LOCATION_REST)
+	e2:SetRange(LOCATION_HAND+LOCATION_GRAVE)
 	e2:SetCountLimit(1,id)
 	e2:SetCondition(s.spcon)
 	e2:SetCost(s.spcost)
@@ -54,7 +54,7 @@ function s.sprescon(sg,e,tp,mg)
 	return sg:IsExists(s.attrfilter,1,nil,sg) and aux.ChkfMMZ(1)(sg,e,tp,mg)
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE+LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil)
 	if chk==0 then return aux.SelectUnselectGroup(g,e,tp,2,2,s.sprescon,0) end
 	local sg=aux.SelectUnselectGroup(g,e,tp,2,2,s.sprescon,1,tp,HINTMSG_REMOVE)
 	Duel.Remove(sg,POS_FACEUP,REASON_COST)
@@ -62,7 +62,7 @@ end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsCanBeSpecialSummoned(e,0,tp,true,true,POS_FACEUP)
-		and ((c:IsLocation(LOCATION_REST) and not eg:IsContains(c)) or c:IsLocation(LOCATION_HAND)) end
+		and ((c:IsLocation(LOCATION_GRAVE) and not eg:IsContains(c)) or c:IsLocation(LOCATION_HAND)) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,tp,c:GetLocation())
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
@@ -73,14 +73,14 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.rmrescon(sg,e,tp,mg)
-	return sg:FilterCount(Card.IsOnField,nil)==1 and sg:FilterCount(Card.IsLocation,nil,LOCATION_REST)==2
+	return sg:FilterCount(Card.IsOnField,nil)==1 and sg:FilterCount(Card.IsLocation,nil,LOCATION_GRAVE)==2
 end
 function s.rmfilter(c,e)
 	return c:IsAbleToRemove() and c:IsCanBeEffectTarget(e)
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	local g=Duel.GetMatchingGroup(s.rmfilter,tp,0,LOCATION_ONFIELD+LOCATION_REST,nil,e)
+	local g=Duel.GetMatchingGroup(s.rmfilter,tp,0,LOCATION_ONFIELD+LOCATION_GRAVE,nil,e)
 	if chk==0 then return aux.SelectUnselectGroup(g,e,tp,3,3,s.rmrescon,0) end
 	local sg=aux.SelectUnselectGroup(g,e,tp,3,3,s.rmrescon,1,tp,HINTMSG_REMOVE)
 	Duel.SetTargetCard(sg)

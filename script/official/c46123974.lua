@@ -1,5 +1,5 @@
 -- 
--- Librobouncer Geek Boy
+-- Libromancer Geek Boy
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	-- Search 1 "Librobouncer" Actional
+	-- Search 1 "Libromancer" Spell
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND)
@@ -28,7 +28,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x17d}
 function s.spcostfilter(c)
-	return c:IsLockedMonster() and not c:IsPublic()
+	return c:IsRitualMonster() and not c:IsPublic()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -51,7 +51,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.thfilter(c)
-	return c:IsSetCard(0x17d) and c:IsActional() and c:IsAbleToHand()
+	return c:IsSetCard(0x17d) and c:IsSpell() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

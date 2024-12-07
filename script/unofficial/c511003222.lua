@@ -1,5 +1,5 @@
 --機皇帝グランエル∞
---Mekwatcher Emperor Granel ∞ (Anime)
+--Meklord Emperor Granel ∞ (Anime)
 --Scripted by The Razgriz
 Duel.LoadScript("c420.lua")
 local s,id=GetID()
@@ -93,7 +93,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 				e2:SetValue(atk)
 				tc:RegisterEffect(e2)
 			end
-		else Duel.SendtoRest(tc,REASON_EFFECT) end
+		else Duel.SendtoGrave(tc,REASON_EFFECT) end
 	end
 end
 function s.atkop(e,c)

@@ -1,9 +1,9 @@
---Shining Rerest
+--Shining Reborn
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_TOREST+CATEGORY_SPECIAL_SUMMON)
+	e1:SetCategory(CATEGORY_TOGRAVE+CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetCost(s.cost)
@@ -32,19 +32,19 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 		if e:GetLabel()==0 and Duel.GetLocationCount(1-tp,LOCATION_MZONE)<=0 then return false end
 		e:SetLabel(0)
 		return Duel.GetFieldGroupCount(tp,0,LOCATION_HAND)~=0 
-			and Duel.IsExistingMatchingCard(s.filter,tp,0,LOCATION_REST,1,nil,e,tp)
+			and Duel.IsExistingMatchingCard(s.filter,tp,0,LOCATION_GRAVE,1,nil,e,tp)
 	end
 	local g=Duel.GetFieldGroup(tp,0,LOCATION_HAND)
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,g,#g,0,0)
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,1-tp,LOCATION_REST)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,g,#g,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,1-tp,LOCATION_GRAVE)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(1-tp,LOCATION_MZONE)<=0 then return end
 	local g=Duel.GetFieldGroup(tp,0,LOCATION_HAND)
-	if Duel.SendtoRest(g,REASON_EFFECT)>0 then
+	if Duel.SendtoGrave(g,REASON_EFFECT)>0 then
 		Duel.BreakEffect()
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local sp=Duel.SelectMatchingCard(tp,s.filter,tp,0,LOCATION_REST,1,1,nil,e,tp)
+		local sp=Duel.SelectMatchingCard(tp,s.filter,tp,0,LOCATION_GRAVE,1,1,nil,e,tp)
 		if #sp>0 and Duel.SpecialSummon(sp,0,tp,1-tp,false,false,POS_FACEUP)>0 then
 			local setg=Duel.GetMatchingGroup(Card.IsSSetable,1-tp,0,LOCATION_HAND,nil)
 			if #setg>0 and Duel.SelectYesNo(tp,aux.Stringid(60082869,0)) then

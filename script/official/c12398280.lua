@@ -25,10 +25,10 @@ function s.initial_effect(c)
 end
 s.listed_names={id}
 function s.tg(e,c)
-	return c:IsRace(RACE_WANDERER)
+	return c:IsRace(RACE_FAIRY)
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsRace(RACE_WANDERER) and not c:IsCode(id)
+	return c:IsFaceup() and c:IsRace(RACE_FAIRY) and not c:IsCode(id)
 end
 function s.con(e)
 	local c=e:GetHandler()

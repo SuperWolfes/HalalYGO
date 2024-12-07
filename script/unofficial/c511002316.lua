@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.filter(c)
-	return c:IsLevelBelow(3) and c:IsRace(RACE_WANDERER)
+	return c:IsLevelBelow(3) and c:IsRace(RACE_FAIRY)
 end
 function s.con(e)
 	return not Duel.IsExistingMatchingCard(Card.IsAttackPos,e:GetHandlerPlayer(),0,LOCATION_MZONE,1,nil)

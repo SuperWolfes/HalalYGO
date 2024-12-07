@@ -9,7 +9,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 end
-s.listed_names={CARD_FLYBIE_LADY}
+s.listed_names={CARD_HARPIE_LADY}
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local bc=c:GetBattleTarget()
@@ -17,12 +17,12 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_DISABLE)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD_EXC_REST)
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD_EXC_GRAVE)
 		bc:RegisterEffect(e1)
 		local e2=Effect.CreateEffect(c)
 		e2:SetType(EFFECT_TYPE_SINGLE)
 		e2:SetCode(EFFECT_DISABLE_EFFECT)
-		e2:SetReset(RESET_EVENT+RESETS_STANDARD_EXC_REST)
+		e2:SetReset(RESET_EVENT+RESETS_STANDARD_EXC_GRAVE)
 		bc:RegisterEffect(e2)
 	end
 end

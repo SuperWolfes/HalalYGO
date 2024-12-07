@@ -1,5 +1,5 @@
 --帝王の開岩
---Return of the Moppar
+--Return of the Monarch
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

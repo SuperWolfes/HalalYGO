@@ -1,5 +1,5 @@
 --妖精伝姫－ラチカ
---Wanderer Tail - Rochka
+--Fairy Tail - Rochka
 --Scripted by DyXel
 
 local s,id=GetID()
@@ -15,10 +15,10 @@ function s.initial_effect(c)
 	e1:SetTarget(s.exctg)
 	e1:SetOperation(s.excop)
 	c:RegisterEffect(e1)
-	--When battling, send itself to the RP
+	--When battling, send itself to the GY
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_TOREST)
+	e2:SetCategory(CATEGORY_TOGRAVE)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_BATTLE_CONFIRM)
 	e2:SetCondition(s.sgycon)
@@ -50,7 +50,7 @@ function s.excop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.ConfirmCards(1-tp,sc)
 			Duel.ShuffleHand(tp)
 		else
-			Duel.SendtoRest(sc,REASON_RULE)
+			Duel.SendtoGrave(sc,REASON_RULE)
 		end
 		Duel.ShuffleDeck(tp)
 	end
@@ -62,10 +62,10 @@ function s.sgycon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.sgytg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToRest() end
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,c,1,tp,0)
+	if chk==0 then return c:IsAbleToGrave() end
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,c,1,tp,0)
 end
 function s.sgyop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:IsRelateToEffect(e) then Duel.SendtoRest(c,REASON_EFFECT) end
+	if c:IsRelateToEffect(e) then Duel.SendtoGrave(c,REASON_EFFECT) end
 end

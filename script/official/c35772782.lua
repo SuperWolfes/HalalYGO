@@ -3,11 +3,11 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Xyz.AddProcedure(c,nil,5,2,nil,nil,99)
 	--roll dice
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_SUFFICE)
+	e1:SetCategory(CATEGORY_DICE)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_MZONE)
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	--result to 7
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e2:SetCode(EVENT_TOSS_SUFFICE_NEGATE)
+	e2:SetCode(EVENT_TOSS_DICE_NEGATE)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCondition(s.dicecon)
 	e2:SetOperation(s.diceop)
@@ -37,7 +37,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,PLAYER_ALL,1)
+	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,0,PLAYER_ALL,1)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local d1,d2,d3,d4=Duel.TossDice(tp,2,2)

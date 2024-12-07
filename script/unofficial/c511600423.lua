@@ -1,5 +1,5 @@
 --インフィニティ・フォース (TF5)
---Infinity Fcoree (TF5)
+--Infinity Force (TF5)
 Duel.LoadScript("c420.lua")
 local s,id=GetID()
 function s.initial_effect(c)

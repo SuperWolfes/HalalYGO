@@ -25,6 +25,6 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) or c:IsStatus(STATUS_LEAVE_CONFIRMED) then return end
 	if not Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
-		c:CancelToRest(false)
+		c:CancelToGrave(false)
 	end
 end

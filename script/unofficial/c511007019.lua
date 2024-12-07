@@ -34,12 +34,12 @@ function s.initial_effect(c)
 		local ge3=Effect.CreateEffect(c)
 		ge3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		ge3:SetCode(EVENT_CHAIN_SOLVED)
-		ge3:SetOperation(s.revetop)
+		ge3:SetOperation(s.resetop)
 		ge3:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
 		Duel.RegisterEffect(ge3,0)
 		local ge4=ge1:Clone()
 		ge4:SetCode(EVENT_SUMMON_SUCCESS)
-		ge4:SetOperation(s.revetop2)
+		ge4:SetOperation(s.resetop2)
 		Duel.RegisterEffect(ge4,0)
 		local ge5=ge4:Clone()
 		ge5:SetCode(EVENT_FLIP_SUMMON_SUCCESS)
@@ -49,7 +49,7 @@ function s.initial_effect(c)
 		Duel.RegisterEffect(ge6,0)
 		local ge7=ge4:Clone()
 		ge7:SetCode(EVENT_CHANGE_POS)
-		ge7:SetOperation(s.revetop3)
+		ge7:SetOperation(s.resetop3)
 		Duel.RegisterEffect(ge7,0)
 	end)
 end
@@ -82,15 +82,15 @@ function s.checkop(e,tp,eg,ep,ev,re,r,rp)
 		s[1-tp]=false
 	end
 end
-function s.revetop(e,tp,eg,ep,ev,re,r,rp)
+function s.resetop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetFlagEffect(rp,id)==0 then s[rp]=false end
 	s[1-rp]=false
 end
-function s.revetop2(e,tp,eg,ep,ev,re,r,rp)
+function s.resetop2(e,tp,eg,ep,ev,re,r,rp)
 	s[0]=false
 	s[1]=false
 end
-function s.revetop3(e,tp,eg,ep,ev,re,r,rp)
+function s.resetop3(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetCurrentChain()==0 then
 		s[0]=false
 		s[1]=false

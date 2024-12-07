@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	aux.AddVrainsSkillProcedure(c,s.flipcon,s.flipop,EVENT_SPSUMMON_SUCCESS)
 end
 function s.cfilter(c)
-	return c:IsLinkMonster() and c:IsPreviousLocation(LOCATION_REST)
+	return c:IsLinkMonster() and c:IsPreviousLocation(LOCATION_GRAVE)
 end
 function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 	--condition

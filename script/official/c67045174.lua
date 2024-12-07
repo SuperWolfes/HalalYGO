@@ -1,5 +1,5 @@
 --二重の落とし穴
---Dual Trap Hole
+--Gemini Trap Hole
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -19,9 +19,9 @@ function s.initial_effect(c)
 		Duel.RegisterEffect(ge1,0)
 	end)
 end
-s.listed_card_types={TYPE_DUAL}
+s.listed_card_types={TYPE_GEMINI}
 function s.gmreg(c)
-	if c and c:IsDualStatus() and c:IsStatus(STATUS_BATTLE_DESTROYED) then
+	if c and c:IsGeminiStatus() and c:IsStatus(STATUS_BATTLE_DESTROYED) then
 		c:RegisterFlagEffect(id,RESET_PHASE+PHASE_DAMAGE,0,1)
 	end
 end

@@ -16,11 +16,11 @@ function s.filter(c)
 	return c:IsRace(RACE_PYRO) and c:IsAbleToDeck()
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter(chkc) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter(chkc) end
 	if chk==0 then return true end
-	if Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,4,nil) then
+	if Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,4,nil) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-		local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,4,4,nil)
+		local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,4,4,nil)
 		Duel.SetOperationInfo(0,CATEGORY_TODECK,g,#g,0,0)
 		Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,2)
 	end

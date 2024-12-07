@@ -19,18 +19,18 @@ function s.tdfilter(c)
 	return c:IsMonster() and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.tdcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST,0,5,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_GRAVE,0,5,nil) end
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToDeck,tp,0,LOCATION_REST,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,5,tp,LOCATION_REST)
-	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,2,1-tp,LOCATION_REST)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToDeck,tp,0,LOCATION_GRAVE,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,5,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,2,1-tp,LOCATION_GRAVE)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_DRAW,nil,0,tp,2)
 end
 function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g1=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_REST,0,5,5,nil)
+	local g1=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_GRAVE,0,5,5,nil)
 	Duel.HintSelection(g1,true)
 	if #g1==0 then return end
 	Duel.SendtoDeck(g1,nil,SEQ_DECKTOP,REASON_EFFECT)
@@ -42,11 +42,11 @@ function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	if ct>0 then
 		--Effect
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-		local g3=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(Card.IsAbleToDeck),tp,0,LOCATION_REST,1,2,nil)
+		local g3=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(Card.IsAbleToDeck),tp,0,LOCATION_GRAVE,1,2,nil)
 		Duel.HintSelection(g3,true)
 		if #g3==0 then return end
 		if Duel.SendtoDeck(g3,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)>0 then
-			local g4=Duel.GetMatchingGroup(Card.IsCode,tp,LOCATION_REST,0,nil,67169062,id)
+			local g4=Duel.GetMatchingGroup(Card.IsCode,tp,LOCATION_GRAVE,0,nil,67169062,id)
 			local dct=g4:GetClassCount(Card.GetCode)
 			if #g4>0 and Duel.IsPlayerCanDraw(tp,dct) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 				Duel.BreakEffect()

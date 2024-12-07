@@ -3,7 +3,7 @@
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Pendulum.AddProcedure(c,false)
 	--2 Level 4 monsters
 	Xyz.AddProcedure(c,nil,4,2)
@@ -59,19 +59,19 @@ function s.ovop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.pltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckPendulumZones(tp) and e:GetHandler():IsType(TYPE_PENDULUM) end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOEXTRA,nil,1,tp,LOCATION_REST)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOEXTRA,nil,1,tp,LOCATION_GRAVE)
 end
 function s.tefilter(c)
-	return c:IsType(TYPE_PENDULUM) and not c:IsUnliked()
+	return c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
 end
 function s.plop(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.CheckPendulumZones(tp) then return end
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
-		and Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.tefilter),tp,LOCATION_REST,0,1,nil)
+		and Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.tefilter),tp,LOCATION_GRAVE,0,1,nil)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,3)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SELECT)
-		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.tefilter),tp,LOCATION_REST,0,1,1,nil)
+		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.tefilter),tp,LOCATION_GRAVE,0,1,1,nil)
 		if #g>0 then
 			Duel.BreakEffect()
 			Duel.SendtoExtraP(g,tp,REASON_EFFECT)

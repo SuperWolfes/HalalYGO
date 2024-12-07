@@ -10,9 +10,9 @@ function s.initial_effect(c)
 	e1:SetValue(s.efilter)
 	c:RegisterEffect(e1)
 end
-s.listed_names={CARD_RESTVALLEY}
+s.listed_names={CARD_NECROVALLEY}
 function s.con(e)
-	return Duel.IsEnvironment(CARD_RESTVALLEY)
+	return Duel.IsEnvironment(CARD_NECROVALLEY)
 end
 function s.efilter(e,te)
 	return te:GetOwner()~=e:GetOwner()

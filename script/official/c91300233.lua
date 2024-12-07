@@ -1,9 +1,9 @@
 --騎甲虫クルーエル・サターン
---Beetrooper Cruel Echoas
+--Beetrooper Cruel Saturnas
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Fusion Summon procedure
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_BEETROOPER),aux.FilterBoolFunctionEx(Card.IsRace,RACE_INSECT))
 	--Can only Special Summon Insect monsters

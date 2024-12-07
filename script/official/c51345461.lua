@@ -15,11 +15,11 @@ function s.initial_effect(c)
 	aux.AddEREquipLimit(c,nil,aux.FilterBoolFunction(Card.IsMonster),s.equipop,e1)
 end
 function s.filter(c,rc,tid)
-	return c:IsReason(REASON_BATTLE) and c:GetReasonCard()==rc and c:GetTurnID()==tid and not c:IsUnliked()
+	return c:IsReason(REASON_BATTLE) and c:GetReasonCard()==rc and c:GetTurnID()==tid and not c:IsForbidden()
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_REST,LOCATION_REST,nil,e:GetHandler(),Duel.GetTurnCount())
+	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,LOCATION_GRAVE,nil,e:GetHandler(),Duel.GetTurnCount())
 	Duel.SetOperationInfo(0,CATEGORY_EQUIP,g,#g,0,0)
 end
 function s.equipop(c,e,tp,tc,chk)
@@ -46,7 +46,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if ft<=0 then return end
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) or c:IsFacedown() then return end
-	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_REST,LOCATION_REST,nil,e:GetHandler(),Duel.GetTurnCount())
+	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,LOCATION_GRAVE,nil,e:GetHandler(),Duel.GetTurnCount())
 	if #g==0 then return end
 	if #g>ft then return end
 	for tc in g:Iter() do

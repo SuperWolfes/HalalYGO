@@ -13,10 +13,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.atkfilter(c)
-	return c:IsLevelBetween(7,9) and c:IsRace(RACE_TAINTED|RACE_BEASTWARRIOR|RACE_MACHINE) and c:IsFaceup()
+	return c:IsLevelBetween(7,9) and c:IsRace(RACE_FIEND|RACE_BEASTWARRIOR|RACE_MACHINE) and c:IsFaceup()
 end
 function s.atkfilter2(c)
-	return c:IsRace(RACE_WANDERER|RACE_DRAGON|RACE_MENTOR) and c:IsFaceup()
+	return c:IsRace(RACE_FAIRY|RACE_DRAGON|RACE_SPELLCASTER) and c:IsFaceup()
 end
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	local at=Duel.GetAttackTarget()

@@ -59,10 +59,10 @@ function s.rescon(sg,e,tp)
 end
 function s.sptg2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp) and chkc~=c end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp) and chkc~=c end
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=math.min(ft,1) end
-	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_REST,0,c,e,tp)
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=math.min(ft,1) end
+	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_GRAVE,0,c,e,tp)
 	if chk==0 then return ft>0 and #g>0 and aux.SelectUnselectGroup(g,e,tp,1,math.min(ft,2),aux.dpcheck(Card.GetRace),0) end
 	local sg=aux.SelectUnselectGroup(g,e,tp,1,math.min(ft,2),aux.dpcheck(Card.GetRace),1,tp,HINTMSG_SPSUMMON)
 	Duel.SetTargetCard(sg)
@@ -72,7 +72,7 @@ function s.spop2(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	local sg=Duel.GetTargetCards(e)
 	if #sg==0 or ft==0 then return end
-	if #sg>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
+	if #sg>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
 	if #sg>ft then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		sg=sg:Select(tp,ft,ft,nil)

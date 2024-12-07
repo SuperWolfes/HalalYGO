@@ -23,8 +23,8 @@ end
 s.listed_names={94585852}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToRestAsCost() and c:IsDiscardable() end
-	Duel.SendtoRest(c,REASON_COST+REASON_DISCARD)
+	if chk==0 then return c:IsAbleToGraveAsCost() and c:IsDiscardable() end
+	Duel.SendtoGrave(c,REASON_COST+REASON_DISCARD)
 end
 function s.filter(c)
 	return c:IsCode(94585852) and c:IsAbleToHand()

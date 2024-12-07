@@ -34,7 +34,7 @@ function s.eftg(e,c)
 	return e:GetHandler():GetEquipTarget()==c
 end
 function s.value(e,c)
-	return Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsActional),e:GetHandlerPlayer(),LOCATION_ONFIELD,0,nil)*200
+	return Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsSpell),e:GetHandlerPlayer(),LOCATION_ONFIELD,0,nil)*200
 end
 function s.condition(e)
 	return e:GetHandler():GetEquipTarget():IsAttribute(ATTRIBUTE_DARK)

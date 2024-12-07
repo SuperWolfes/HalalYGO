@@ -14,13 +14,13 @@ function s.initial_effect(c)
 	e1:SetTarget(s.rmtg)
 	e1:SetOperation(s.rmop)
 	c:RegisterEffect(e1)
-	-- Add 1 banished Tainted monster to the hand
+	-- Add 1 banished Fiend monster to the hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCondition(aux.exccon)
 	e2:SetCost(aux.bfgcost)
 	e2:SetTarget(s.thtg)
@@ -31,10 +31,10 @@ function s.rmfilter(c,tp)
 	return c:IsAbleToRemove(tp) and aux.SpElimFilter(c,false)
 end
 function s.tgfilter(c)
-	return c:IsRace(RACE_TAINTED) and c:IsDiscardable(REASON_EFFECT)
+	return c:IsRace(RACE_FIEND) and c:IsDiscardable(REASON_EFFECT)
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	local loc=LOCATION_REST+LOCATION_MZONE
+	local loc=LOCATION_GRAVE+LOCATION_MZONE
 	if chkc then return chkc:IsLocation(loc) and s.rmfilter(chkc,tp) end
 	if chk==0 then return Duel.IsExistingTarget(s.rmfilter,tp,loc,loc,1,nil,tp)
 		and Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_HAND,0,1,nil) end
@@ -51,12 +51,12 @@ function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 		local dg=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_HAND,0,1,1,nil)
 		if #dg>0 then
 			Duel.BreakEffect()
-			Duel.SendtoRest(dg,REASON_EFFECT+REASON_DISCARD)
+			Duel.SendtoGrave(dg,REASON_EFFECT+REASON_DISCARD)
 		end
 	end
 end
 function s.thfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_TAINTED) and c:IsAbleToHand()
+	return c:IsFaceup() and c:IsRace(RACE_FIEND) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REMOVED) and s.thfilter(chkc) end

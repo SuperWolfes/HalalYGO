@@ -1,4 +1,4 @@
---Reinfcoree Truth (Anime)
+--Reinforce Truth (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

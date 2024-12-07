@@ -3,10 +3,10 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before awaking
-	c:EnableAwakeLimit()
+	--Must be properly summoned before reviving
+	c:EnableReviveLimit()
 	--Synchro summon procedure
-	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTunerEx(Card.IsRace,RACE_TAINTED),1,99)
+	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTunerEx(Card.IsRace,RACE_FIEND),1,99)
 	--During opponent's turn, negate 1 effect monster
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -21,13 +21,13 @@ function s.initial_effect(c)
 	e1:SetTarget(s.negtg)
 	e1:SetOperation(s.negop)
 	c:RegisterEffect(e1)
-	--Apply protection when a tainted sent from hand to RP
+	--Apply protection when a fiend sent from hand to GY
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetProperty(EFFECT_FLAG_DELAY)
 	e2:SetRange(LOCATION_MZONE)
-	e2:SetCode(EVENT_TO_REST)
+	e2:SetCode(EVENT_TO_GRAVE)
 	e2:SetCondition(s.condition)
 	e2:SetOperation(s.effop)
 	c:RegisterEffect(e2)
@@ -69,7 +69,7 @@ function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.cfilter(c,tp)
-	return c:IsMonster() and c:IsRace(RACE_TAINTED) and c:IsControler(tp) and c:IsPreviousLocation(LOCATION_HAND)
+	return c:IsMonster() and c:IsRace(RACE_FIEND) and c:IsControler(tp) and c:IsPreviousLocation(LOCATION_HAND)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

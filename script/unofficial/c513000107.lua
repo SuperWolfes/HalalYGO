@@ -1,5 +1,5 @@
 --ハーピィ・レディ －鳳凰の陣－ (Anime)
---Flybie Lady Bird Formation (Anime)
+--Harpie Lady Phoenix Formation (Anime)
 --fixed by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	Duel.AddCustomActivityCounter(id,ACTIVITY_ATTACK,s.counterfilter)
 end
 s.listed_series={0x64}
-s.listed_names={CARD_FLYBIE_LADY}
+s.listed_names={CARD_HARPIE_LADY}
 function s.counterfilter(c)
 	return not c:IsSetCard(0x64)
 end
@@ -31,7 +31,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsCode(CARD_FLYBIE_LADY)
+	return c:IsFaceup() and c:IsCode(CARD_HARPIE_LADY)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(aux.TRUE,tp,0,LOCATION_MZONE,1,nil) 

@@ -1,5 +1,5 @@
 --誕生の祝福
---Celebration of Matching
+--Celebration of Creation
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

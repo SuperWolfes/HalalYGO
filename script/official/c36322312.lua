@@ -4,8 +4,8 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before awaking
-	c:EnableAwakeLimit()
+	--Must be properly summoned before reviving
+	c:EnableReviveLimit()
 	--Must be special summon by its own method
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -49,7 +49,7 @@ end
 s.listed_series={0x51}
 
 function s.spfilter(c)
-	return c:IsOriginalType(TYPE_MONSTER) and c:IsSetCard(0x51) and c:IsAbleToRestAsCost() and (c:IsFaceup() or c:IsLocation(LOCATION_HAND))
+	return c:IsOriginalType(TYPE_MONSTER) and c:IsSetCard(0x51) and c:IsAbleToGraveAsCost() and (c:IsFaceup() or c:IsLocation(LOCATION_HAND))
 end
 function s.spcon(e,c)
 	if c==nil then return true end
@@ -59,7 +59,7 @@ function s.spcon(e,c)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,c)
 	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_HAND+LOCATION_ONFIELD,0,c)
-	local g=aux.SelectUnselectGroup(rg,e,tp,2,2,aux.ChkfMMZ(1),1,tp,HINTMSG_TOREST)
+	local g=aux.SelectUnselectGroup(rg,e,tp,2,2,aux.ChkfMMZ(1),1,tp,HINTMSG_TOGRAVE)
 	if #g>0 then
 		g:KeepAlive()
 		e:SetLabelObject(g)
@@ -70,7 +70,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 	g:DeleteGroup()
 end
 function s.indesfil(c)

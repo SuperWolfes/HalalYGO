@@ -1,8 +1,8 @@
 --虚竜魔王アモルファクターＰ
---Amorphactor Pain, the Imagination Dracoverwatcher
+--Amorphactor Pain, the Imagination Dracoverlord
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Skip the MP1 of the opponent's next turn
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
@@ -18,12 +18,12 @@ function s.initial_effect(c)
 	e2:SetCode(EFFECT_DISABLE)
 	e2:SetTarget(s.distg)
 	c:RegisterEffect(e2)
-	--Search 1 "Dracoverwatcher" monster
+	--Search 1 "Dracoverlord" monster
 	local e3=Effect.CreateEffect(c)
 	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetProperty(EFFECT_FLAG_DELAY)
-	e3:SetCode(EVENT_TO_REST)
+	e3:SetCode(EVENT_TO_GRAVE)
 	e3:SetCondition(s.thcon)
 	e3:SetTarget(s.thtg)
 	e3:SetOperation(s.thop)
@@ -32,7 +32,7 @@ end
 s.listed_series={0xda}
 s.listed_names={23160024,id}
 function s.skipcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_LOCKED)
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_RITUAL)
 end
 function s.skipop(e,tp,eg,ep,ev,re,r,rp)
 	--Skip the MP1 of the opponent's next turn

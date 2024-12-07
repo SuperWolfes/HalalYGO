@@ -3,7 +3,7 @@
 --
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--link summon
 	Link.AddProcedure(c,nil,2,2)
 	--splimit

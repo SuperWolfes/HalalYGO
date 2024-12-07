@@ -18,13 +18,13 @@ function s.cfilter(c,e,tp,eg,ep,ev,re,r,rp)
 	return not c:IsHasEffect(511001408) and not c:IsHasEffect(511001283) and s.filter(c,e,tp,eg,ep,ev,re,r,rp)
 end
 function s.filter(c,e,tp,eg,ep,ev,re,r,rp)
-	return c:IsActionalTrap() and c:CheckActivateEffect(false,false,false)~=nil
+	return c:IsSpellTrap() and c:CheckActivateEffect(false,false,false)~=nil
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST) or chkc:IsLocation(LOCATION_MZONE) and chkc:GetControler()~=tp and s.filter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.cfilter,tp,0,LOCATION_REST,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) or chkc:IsLocation(LOCATION_MZONE) and chkc:GetControler()~=tp and s.filter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.cfilter,tp,0,LOCATION_GRAVE,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectTarget(tp,s.filter,tp,0,LOCATION_REST,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.filter,tp,0,LOCATION_GRAVE,1,1,nil)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -67,6 +67,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		if tg then tg(e,tp,eg,ep,ev,re,r,rp,1) end
 		Duel.BreakEffect()
 		if op then op(e,tp,eg,ep,ev,re,r,rp) end
-		c:CancelToRest()
+		c:CancelToGrave()
 	end
 end

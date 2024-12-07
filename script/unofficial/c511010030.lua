@@ -1,9 +1,9 @@
 --No.30 破滅のアシッド・ゴーレム (Anime)
---Number 30: Acid Gopal of Mismatching (Anime)
+--Number 30: Acid Golem of Destruction (Anime)
 Duel.LoadCardScript("c81330115.lua")
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Xyz Summon Procedure
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGHT),3,2)
 	--Detach 1 material from this card or take 2000 damage

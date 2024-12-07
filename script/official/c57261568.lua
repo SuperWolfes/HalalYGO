@@ -2,7 +2,7 @@
 --Flower Cardian Peony with Butterfly
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--special summon rule
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE)
@@ -77,7 +77,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			end
 		else
 			Duel.BreakEffect()
-			Duel.SendtoRest(tc,REASON_EFFECT)
+			Duel.SendtoGrave(tc,REASON_EFFECT)
 		end
 		Duel.ShuffleHand(tp)
 	end

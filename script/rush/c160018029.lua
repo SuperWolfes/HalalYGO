@@ -1,5 +1,5 @@
 --叛骨のメイニ
---Meini the Defiant Miss
+--Meini the Defiant Soul
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)

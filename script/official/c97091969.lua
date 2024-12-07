@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.opttarget)
 	e2:SetOperation(s.opteffect)
 	c:RegisterEffect(e2)
-	--Mismatching replacemente
+	--Destruction replacemente
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
 	e3:SetCode(EFFECT_DESTROY_REPLACE)
@@ -41,7 +41,7 @@ function s.opttarget(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 	local tc=Duel.SelectTarget(tp,s.optfilter,tp,LOCATION_MZONE,0,1,1,nil)
 	local op=0
-	if Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil,tc:GetFirst():GetLevel()) then
+	if Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil,tc:GetFirst():GetLevel()) then
 		op=Duel.SelectOption(tp,aux.Stringid(id,1),aux.Stringid(id,2))
 	else
 		op=0
@@ -68,7 +68,7 @@ function s.opteffect(e,tp,eg,ep,ev,re,r,rp)
 	end
 	if op~=0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-		local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil,tc:GetLevel())
+		local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil,tc:GetLevel())
 		if #g>0 then
 			Duel.SendtoHand(g,nil,REASON_EFFECT)
 			Duel.ConfirmCards(1-tp,g)
@@ -87,5 +87,5 @@ function s.repval(e,c)
 	return s.repfilter(c,e:GetHandlerPlayer())
 end
 function s.repop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SendtoRest(e:GetHandler(),REASON_EFFECT)
+	Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
 end

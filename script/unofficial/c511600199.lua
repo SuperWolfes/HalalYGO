@@ -1,5 +1,5 @@
 --黒魔術のヴェール (Anime)
---Dark Ment Veil (Anime)
+--Dark Magic Veil (Anime)
 --scriipted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -13,13 +13,13 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.listed_names={CARD_DARK_MENTOR}
+s.listed_names={CARD_DARK_MAGICIAN}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckLPCost(tp,1000) end
 	Duel.PayLPCost(tp,1000)
 end
 function s.filter(c,e,tp)
-	return c:IsCode(CARD_DARK_MENTOR) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsCode(CARD_DARK_MAGICIAN) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

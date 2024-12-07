@@ -3,10 +3,10 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Your opponent can send any number of monsters they control to the RP
+	--Your opponent can send any number of monsters they control to the GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_TOREST+CATEGORY_RECOVER+CATEGORY_REMOVE)
+	e1:SetCategory(CATEGORY_TOGRAVE+CATEGORY_RECOVER+CATEGORY_REMOVE)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
@@ -18,17 +18,17 @@ function s.initial_effect(c)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,nil,1,1-tp,LOCATION_MZONE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,nil,1,1-tp,LOCATION_MZONE)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_RECOVER,nil,1,1-tp,2000)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_REMOVE,nil,1,1-tp,LOCATION_HAND)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(Card.IsAbleToRest,tp,0,LOCATION_MZONE,nil)
+	local g=Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,0,LOCATION_MZONE,nil)
 	if #g>0 and Duel.SelectYesNo(1-tp,aux.Stringid(id,1)) then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-		local g=Duel.SelectMatchingCard(1-tp,Card.IsAbleToRest,1-tp,LOCATION_MZONE,0,1,#g,nil)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		local g=Duel.SelectMatchingCard(1-tp,Card.IsAbleToGrave,1-tp,LOCATION_MZONE,0,1,#g,nil)
 		if #g>0 then
-			Duel.SendtoRest(g,REASON_EFFECT,PLAYER_NONE,1-tp)
+			Duel.SendtoGrave(g,REASON_EFFECT,PLAYER_NONE,1-tp)
 		end
 	end
 	local ct=Duel.GetMatchingGroupCount(nil,tp,0,LOCATION_MZONE,nil)

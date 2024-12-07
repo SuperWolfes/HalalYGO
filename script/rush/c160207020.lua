@@ -26,10 +26,10 @@ function s.filter2(c)
 	return c:IsCode(160207021)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsMaximumMode() and Duel.IsExistingMatchingCard(Card.IsRace,tp,LOCATION_REST,0,10,nil,RACE_SEASERPENT)
+	return e:GetHandler():IsMaximumMode() and Duel.IsExistingMatchingCard(Card.IsRace,tp,LOCATION_GRAVE,0,10,nil,RACE_SEASERPENT)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,nil) end
 end
 function s.filter(c)
 	return c:IsFaceup() and not c:IsMaximumModeSide()
@@ -41,9 +41,9 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	--Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,1,nil)
-	if Duel.SendtoRest(g,REASON_COST)<1 then return end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,1,nil)
+	if Duel.SendtoGrave(g,REASON_COST)<1 then return end
 	--Effect
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,0,LOCATION_MZONE,1,1,nil)

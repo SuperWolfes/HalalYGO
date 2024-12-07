@@ -17,10 +17,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.costfilter(c,tp)
-	return c:IsAbleToRestAsCost() and Duel.IsExistingMatchingCard(s.costfilter2,tp,LOCATION_HAND,0,1,c)
+	return c:IsAbleToGraveAsCost() and Duel.IsExistingMatchingCard(s.costfilter2,tp,LOCATION_HAND,0,1,c)
 end
 function s.costfilter2(c)
-	return c:IsMonster() and c:IsRace(RACE_WYRM) and c:IsAbleToRestAsCost()
+	return c:IsMonster() and c:IsRace(RACE_WYRM) and c:IsAbleToGraveAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil,tp) end
@@ -39,9 +39,9 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	--requirement
-	local g=Duel.GetMatchingGroup(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,e:GetHandler())
+	local g=Duel.GetMatchingGroup(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,e:GetHandler())
 	local og=aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,1,tp,HINTMSG_DISCARD,s.rescon)
-	if Duel.SendtoRest(og,REASON_COST)<2 then return end
+	if Duel.SendtoGrave(og,REASON_COST)<2 then return end
 	local g=Duel.GetMatchingGroup(s.desfilter,tp,0,LOCATION_MZONE,nil)
 	if Duel.Destroy(g,REASON_EFFECT)>0 then
 		local ct=Duel.GetOperatedGroup():FilterCount(s.damfilter,nil)

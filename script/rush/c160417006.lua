@@ -1,3 +1,3 @@
 --死者蘇生
--- Monster Rerest (Rush)
+-- Monster Reborn (Rush)
 Duel.LoadCardScriptAlias(160417004)

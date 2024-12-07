@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
 	e1:SetCondition(s.selfspcon)
 	c:RegisterEffect(e1)
-	--Special Summon 1 "Ancient Gear Gopal", or 1 monster that mentions it, from your hand or Deck, ignoring its Summoning conditions
+	--Special Summon 1 "Ancient Gear Golem", or 1 monster that mentions it, from your hand or Deck, ignoring its Summoning conditions
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.hdspop)
 	c:RegisterEffect(e2)
 end
-s.listed_names={CARD_ANCIENT_GEAR_GOPAL}
+s.listed_names={CARD_ANCIENT_GEAR_GOLEM}
 function s.selfspcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
@@ -33,7 +33,7 @@ function s.selfspcon(e,c)
 		and Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)<Duel.GetFieldGroupCount(tp,0,LOCATION_MZONE)
 end
 function s.hdspfilter(c,e,tp)
-	return (c:IsCode(CARD_ANCIENT_GEAR_GOPAL) or c:ListsCode(CARD_ANCIENT_GEAR_GOPAL)) and c:IsMonster() and not c:IsCode(id)
+	return (c:IsCode(CARD_ANCIENT_GEAR_GOLEM) or c:ListsCode(CARD_ANCIENT_GEAR_GOLEM)) and c:IsMonster() and not c:IsCode(id)
 		and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
 end
 function s.hdsptg(e,tp,eg,ep,ev,re,r,rp,chk)

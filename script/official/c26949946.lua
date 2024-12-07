@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x101b),1,1,Synchro.NonTunerEx(Card.IsSetCard,0x101b),1,99)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--handes
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -35,19 +35,19 @@ function s.initial_effect(c)
 	e4:SetCode(EVENT_DESTROYED)
 	e4:SetCondition(s.setcon)
 	e4:SetTarget(s.settg)
-	e4:SetOperation(s.vetop)
+	e4:SetOperation(s.setop)
 	c:RegisterEffect(e4)
 end
 s.listed_series={0x101b}
-s.listed_names={TOKEN_MECHA_ILLUSION_BEAST}
+s.listed_names={TOKEN_MECHA_PHANTOM_BEAST}
 function s.hdcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_SYNCHRO)
 end
 function s.hdcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.CheckReleaseGroupCost(tp,Card.IsCode,1,false,nil,nil,TOKEN_MECHA_ILLUSION_BEAST)
+	if chk==0 then return Duel.CheckReleaseGroupCost(tp,Card.IsCode,1,false,nil,nil,TOKEN_MECHA_PHANTOM_BEAST)
 		and Duel.GetFieldGroupCount(tp,0,LOCATION_HAND)>0 end
 	local ct=Duel.GetFieldGroupCount(tp,0,LOCATION_HAND)
-	local g=Duel.SelectReleaseGroupCost(tp,Card.IsCode,1,ct,false,nil,nil,TOKEN_MECHA_ILLUSION_BEAST)
+	local g=Duel.SelectReleaseGroupCost(tp,Card.IsCode,1,ct,false,nil,nil,TOKEN_MECHA_PHANTOM_BEAST)
 	e:SetLabel(#g)
 	Duel.Release(g,REASON_COST)
 end
@@ -59,7 +59,7 @@ function s.hdop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(tp,0,LOCATION_HAND)
 	if #g>0 then
 		local sg=g:RandomSelect(1-tp,e:GetLabel())
-		Duel.SendtoRest(sg,REASON_DISCARD+REASON_EFFECT)
+		Duel.SendtoGrave(sg,REASON_DISCARD+REASON_EFFECT)
 	end
 end
 function s.indtg(e,c)
@@ -69,13 +69,13 @@ function s.setcon(e,tp,eg,ep,ev,re,r,rp)
 	return rp~=tp and e:GetHandler():IsPreviousControler(tp)
 end
 function s.filter(c)
-	return c:GetType()==TYPE_ACTIONAL+TYPE_QUICKPLAY and c:IsSSetable()
+	return c:GetType()==TYPE_SPELL+TYPE_QUICKPLAY and c:IsSSetable()
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
 		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end
 end
-function s.vetop(e,tp,eg,ep,ev,re,r,rp)
+function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then

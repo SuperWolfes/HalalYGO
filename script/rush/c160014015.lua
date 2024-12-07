@@ -1,5 +1,5 @@
 --火轟嵐凰ヴォルカライズ・フェニックス［Ｌ］
---Blazebolt Chemistorm Fenghuang Volcalize Bird [L]
+--Blazebolt Chemistorm Fenghuang Volcalize Phoenix [L]
 local s,id=GetID()
 function s.initial_effect(c)
 	--Destroy 1 level 9 monster, then destroy 1 monster if in max mode
@@ -20,7 +20,7 @@ function s.costfilter(c)
 	return c:IsRace(RACE_THUNDER) and c:IsAttribute(ATTRIBUTE_FIRE) and c:IsMonster() and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_REST,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_GRAVE,0,1,nil) end
 end
 function s.desfilter(c)
 	return c:IsFaceup() and c:IsLevelBelow(9)
@@ -32,7 +32,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local tdg=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_REST,0,1,1,nil)
+	local tdg=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 	Duel.HintSelection(tdg,true)
 	if Duel.SendtoDeck(tdg,nil,SEQ_DECKSHUFFLE,REASON_COST)~=1 then return end
 	--Effect

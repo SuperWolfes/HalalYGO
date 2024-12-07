@@ -1,5 +1,5 @@
 --暗黒の魔再生 (Manga)
---Dark Actional Regeneration (Manga)
+--Dark Spell Regeneration (Manga)
 --Scripted by Larry126
 local s,id,alias=GetID()
 function s.initial_effect(c)
@@ -16,7 +16,7 @@ function s.filter(c,e,tp,eg,ep,ev,re,r,rp,b)
 	if c:IsCode(alias) then return false end
 	local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
 	local te=c:CheckActivateEffect(false,false,false)
-	if ((b and ft>1) or (not b and ft>0)) and c:IsActional()
+	if ((b and ft>1) or (not b and ft>0)) and c:IsSpell()
 		and not c:IsType(TYPE_FIELD) and te then
 		if c:IsSetCard(0x95) then
 			local tg=te:GetTarget()
@@ -29,12 +29,12 @@ function s.filter(c,e,tp,eg,ep,ev,re,r,rp,b)
 	return false
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,0,LOCATION_REST,1,e:GetHandler(),e,tp,eg,ep,ev,re,r,rp,e:GetHandler():IsLocation(LOCATION_HAND)) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,0,LOCATION_GRAVE,1,e:GetHandler(),e,tp,eg,ep,ev,re,r,rp,e:GetHandler():IsLocation(LOCATION_HAND)) end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local b=e:GetHandler():IsLocation(LOCATION_HAND)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_OPPO)
-	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,0,LOCATION_REST,1,1,nil,e,tp,eg,ep,ev,re,r,rp,b):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,0,LOCATION_GRAVE,1,1,nil,e,tp,eg,ep,ev,re,r,rp,b):GetFirst()
 	if not tc then return end
 	local tpe=tc:GetType()
 	local te=tc:GetActivateEffect()
@@ -50,7 +50,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 	Duel.MoveToField(tc,tp,tp,loc,POS_FACEUP,true)
 	if tpe&(TYPE_FIELD|TYPE_CONTINUOUS|TYPE_EQUIP)==0 and not tc:IsHasEffect(EFFECT_REMAIN_FIELD) then
-		tc:CancelToRest(false)
+		tc:CancelToGrave(false)
 	end
 	tc:CreateEffectRelation(te)
 	if co then co(te,tp,eg,ep,ev,re,r,rp,1) end
@@ -94,12 +94,12 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.rtcon(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetLabelObject()
-	return not (tc:IsControler(1-tp) and tc:IsLocation(LOCATION_REST)) and not tc:IsHasEffect(EFFECT_REST_VALLEY)
+	return not (tc:IsControler(1-tp) and tc:IsLocation(LOCATION_GRAVE)) and not tc:IsHasEffect(EFFECT_NECRO_VALLEY)
 end
 function s.rtop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetLabelObject()
-	if tc:IsLocation(LOCATION_REST) then
+	if tc:IsLocation(LOCATION_GRAVE) then
 		Duel.SendtoDeck(tc,nil,-2,REASON_EFFECT)
 	end
-	Duel.SendtoRest(tc,REASON_EFFECT,1-tp)
+	Duel.SendtoGrave(tc,REASON_EFFECT,1-tp)
 end

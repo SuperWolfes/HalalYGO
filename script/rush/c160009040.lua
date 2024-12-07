@@ -3,7 +3,7 @@
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Fusion Materials
 	Fusion.AddProcMix(c,true,true,160305015,160009007)
 	--Make this card gain 200 ATK for each EARTH monster you control

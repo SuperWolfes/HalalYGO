@@ -51,7 +51,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		g1=Duel.GetFieldGroup(turnp,LOCATION_HAND,0)
 	else
 		h1=4
-		Duel.Hint(HINT_SELECTMSG,turnp,HINTMSG_TOREST)
+		Duel.Hint(HINT_SELECTMSG,turnp,HINTMSG_TOGRAVE)
 		g1=Duel.SelectMatchingCard(turnp,aux.TRUE,turnp,LOCATION_HAND,0,4,4,nil)
 	end
 	Duel.ConfirmCards(1-turnp,g1)
@@ -63,12 +63,12 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		g2=Duel.GetFieldGroup(1-turnp,LOCATION_HAND,0)
 	else
 		h2=4
-		Duel.Hint(HINT_SELECTMSG,1-turnp,HINTMSG_TOREST)
+		Duel.Hint(HINT_SELECTMSG,1-turnp,HINTMSG_TOGRAVE)
 		g2=Duel.SelectMatchingCard(1-turnp,aux.TRUE,1-turnp,LOCATION_HAND,0,4,4,nil)
 	end
 	Duel.ConfirmCards(turnp,g2)
 	g1:Merge(g2)
-	Duel.SendtoRest(g1,REASON_EFFECT)
+	Duel.SendtoGrave(g1,REASON_EFFECT)
 	Duel.BreakEffect()
 	Duel.Draw(turnp,h1,REASON_EFFECT)
 	Duel.Draw(1-turnp,h2,REASON_EFFECT)

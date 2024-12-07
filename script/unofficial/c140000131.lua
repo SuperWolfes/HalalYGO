@@ -1,10 +1,10 @@
 --タイムマジック・ハンマー (Anime)
---Time Ment Hammer (Anime)
+--Time Magic Hammer (Anime)
 --reworked by senpaizuri
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcCodeFun(c,71625222,46232525,1,true,true)
 	--spsummon condition
 	local e1=Effect.CreateEffect(c)
@@ -121,7 +121,7 @@ function s.act(e,tp,eg,ep,ev,re,r,rp)
 					Duel.ReturnToField(tc)
 					g:RemoveCard(tc)
 				end
-				Duel.SendtoRest(g,REASON_RULE+REASON_RETURN)
+				Duel.SendtoGrave(g,REASON_RULE+REASON_RETURN)
 			else
 				for tc in aux.Next(g) do
 					Duel.ReturnToField(tc)

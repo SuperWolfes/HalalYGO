@@ -2,7 +2,7 @@
 --Raidraptor - Blade Burner Falcon (Manga)
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Xyz Summon procedure
 	Xyz.AddProcedure(c,nil,4,2)
 	--Gains 3000 ATK

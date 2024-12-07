@@ -22,7 +22,7 @@ function s.initial_effect(c)
 end
 s.listed_names={id,CARD_ALBAZ}
 function s.effconfilter(c,tp)
-	return c:IsSummonPlayer(1-tp) and c:IsType(TYPE_LOCKED|TYPE_FUSION|TYPE_SYNCHRO|TYPE_XYZ|TYPE_LINK) and c:IsFaceup()
+	return c:IsSummonPlayer(1-tp) and c:IsType(TYPE_RITUAL|TYPE_FUSION|TYPE_SYNCHRO|TYPE_XYZ|TYPE_LINK) and c:IsFaceup()
 end
 function s.effcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.effconfilter,1,nil,tp)

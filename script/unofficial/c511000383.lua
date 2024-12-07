@@ -1,5 +1,5 @@
 --封印されし者の憤怒
---Rage of the Unliked One
+--Rage of the Forbidden One
 local s,id=GetID()
 function s.initial_effect(c)
 	--Negate the effects of all your opponent cards
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.listed_names={13893596} --Exdudius the Ultimate Unliked Watcher
+s.listed_names={13893596} --Exodius the Ultimate Forbidden Lord
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,13893596),tp,LOCATION_MZONE,0,1,nil)
 end

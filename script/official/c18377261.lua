@@ -1,5 +1,5 @@
 -- 剣の御巫ハレ
--- Hare the Sword Sibango
+-- Hare the Sword Mikanko
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	local e3=e2:Clone()
 	e3:SetCode(EFFECT_REFLECT_BATTLE_DAMAGE)
 	c:RegisterEffect(e3)
-	-- Search 1 "Sibango" Equip Actional
+	-- Search 1 "Mikanko" Equip Spell
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,0))
 	e4:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -36,7 +36,7 @@ function s.eqcon(e)
 	return e:GetHandler():GetEquipCount()>0
 end
 function s.thfilter(c)
-	return c:IsSetCard(0x18e) and c:IsType(TYPE_EQUIP) and c:IsActional() and c:IsAbleToHand()
+	return c:IsSetCard(0x18e) and c:IsType(TYPE_EQUIP) and c:IsSpell() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

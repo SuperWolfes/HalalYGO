@@ -1,4 +1,4 @@
---Adamantine Sword Awakal
+--Adamantine Sword Revival
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 end
 s.listed_names={id+1}
 function s.cfilter(c,tp)
-	return c:IsRace(RACE_DRAGON) and c:IsPreviousLocation(LOCATION_REST)
+	return c:IsRace(RACE_DRAGON) and c:IsPreviousLocation(LOCATION_GRAVE)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local g=eg:Filter(s.cfilter,nil)

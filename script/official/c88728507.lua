@@ -1,5 +1,5 @@
 --ヴァンパイア・ソーサラー
---Vampire Scoreerer
+--Vampire Sorcerer
 local s,id=GetID()
 function s.initial_effect(c)
 	--Add to hand
@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
-	e1:SetCode(EVENT_TO_REST)
+	e1:SetCode(EVENT_TO_GRAVE)
 	e1:SetCondition(s.condition)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCost(aux.bfgcost)
 	e2:SetOperation(s.sumop)
 	c:RegisterEffect(e2)
@@ -27,7 +27,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return rp==1-tp and e:GetHandler():IsPreviousControler(tp)
 end
 function s.filter(c)
-	return c:IsSetCard(0x8e) and (c:IsActionalTrap() or c:IsAttribute(ATTRIBUTE_DARK)) and c:IsAbleToHand()
+	return c:IsSetCard(0x8e) and (c:IsSpellTrap() or c:IsAttribute(ATTRIBUTE_DARK)) and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end

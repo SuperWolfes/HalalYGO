@@ -1,4 +1,4 @@
---The grand FINITE
+--The grand JUPITER
 local s,id=GetID()
 function s.initial_effect(c)
 	--equip

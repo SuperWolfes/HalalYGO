@@ -73,7 +73,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.lvcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsDiscardable() end
-	Duel.SendtoRest(e:GetHandler(),REASON_DISCARD)
+	Duel.SendtoGrave(e:GetHandler(),REASON_DISCARD)
 end
 function s.filter(c)
 	return (c:IsSetCard(0x9f) or c:IsSetCard(0x99)) and c:IsMonster() and c:IsLevelAbove(2)

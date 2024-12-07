@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Fusion Summon using materials from hand or field, including a Mentor monster
+	--Fusion Summon using materials from hand or field, including a Spellcaster monster
 	local params = {nil,nil,function(e,tp,mg) return nil,s.fcheck end}
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
@@ -26,17 +26,17 @@ function s.initial_effect(c)
 	e2:SetOperation(Fusion.SummonEffOP(table.unpack(params)))
 	c:RegisterEffect(e2)
 end
-s.listed_names={CARD_DARK_MENTOR}
+s.listed_names={CARD_DARK_MAGICIAN}
 function s.spcfilter(c,tp)
-	return c:IsAbleToRestAsCost() and (c:IsFaceup() or c:IsLocation(LOCATION_HAND))
-		and ((c:IsMonster() and c:IsRace(RACE_MENTOR)) or (c:IsActionalTrap() and c:ListsCode(CARD_DARK_MENTOR)))
+	return c:IsAbleToGraveAsCost() and (c:IsFaceup() or c:IsLocation(LOCATION_HAND))
+		and ((c:IsMonster() and c:IsRace(RACE_SPELLCASTER)) or (c:IsSpellTrap() and c:ListsCode(CARD_DARK_MAGICIAN)))
 		and Duel.GetMZoneCount(tp,c)>0
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.spcfilter,tp,LOCATION_ONFIELD|LOCATION_HAND,0,1,nil,tp) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.spcfilter,tp,LOCATION_ONFIELD|LOCATION_HAND,0,1,1,nil,tp)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,false,false) end
@@ -49,5 +49,5 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.fcheck(tp,sg,fc)
-	return sg:IsExists(Card.IsRace,1,nil,RACE_MENTOR)
+	return sg:IsExists(Card.IsRace,1,nil,RACE_SPELLCASTER)
 end

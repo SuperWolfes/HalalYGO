@@ -1,5 +1,5 @@
 --次元融合殺
---Dimension Fusion Mismatching
+--Dimension Fusion Destruction
 --fixed by Larry126
 local s,id=GetID()
 function s.initial_effect(c)

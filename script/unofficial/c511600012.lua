@@ -14,13 +14,13 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c,code)
-	return c:IsAbleToRestAsCost() and c:IsCanBeFusionMaterial() and not c:IsOriginalCode(code) and c:IsMonster()
+	return c:IsAbleToGraveAsCost() and c:IsCanBeFusionMaterial() and not c:IsOriginalCode(code) and c:IsMonster()
 end
 function s.coscost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil,e:GetHandler():GetCode()) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local cg=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil,e:GetHandler():GetCode())
-	Duel.SendtoRest(cg,REASON_COST)
+	Duel.SendtoGrave(cg,REASON_COST)
 	e:SetLabel(cg:GetFirst():GetOriginalCode())
 end
 function s.cosoperation(e,tp,eg,ep,ev,re,r,rp)

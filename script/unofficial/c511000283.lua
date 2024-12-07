@@ -30,7 +30,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return not Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_REST,0,1,nil)
+	return not Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_GRAVE,0,1,nil)
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()~=tp
@@ -38,10 +38,10 @@ end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) then return end
-	local g=Duel.GetMatchingGroup(Card.IsMonster,tp,0,LOCATION_REST,nil)
+	local g=Duel.GetMatchingGroup(Card.IsMonster,tp,0,LOCATION_GRAVE,nil)
 	local dam=#g*100
 	Duel.Damage(1-tp,dam,REASON_EFFECT)
 end
 function s.sdcon2(e)
-	return Duel.IsExistingMatchingCard(Card.IsMonster,e:GetHandler():GetControler(),LOCATION_REST,0,1,nil)
+	return Duel.IsExistingMatchingCard(Card.IsMonster,e:GetHandler():GetControler(),LOCATION_GRAVE,0,1,nil)
 end

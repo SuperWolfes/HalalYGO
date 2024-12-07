@@ -2,7 +2,7 @@
 --マイケル・ローレンス・ディーによってスクリプト
 --Scripted by MLD, credit to TPD & Cybercatman
 --Updated and currently maintained by Larry126
-Duel.EnableUnofficialProc(PROC_MEGA_HIERARCHY)
+Duel.EnableUnofficialProc(PROC_DIVINE_HIERARCHY)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Summon with 3 Tribute
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e3:SetTarget(s.destg)
 	e3:SetOperation(s.desop)
 	c:RegisterEffect(e3)
-	--Miss Energy Max
+	--Soul Energy Max
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetType(EFFECT_TYPE_QUICK_O)
@@ -107,7 +107,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return Duel.CheckReleaseGroupCost(tp,nil,2,false,nil,c)
 		and ((not c:IsHasEffect(EFFECT_CANNOT_ATTACK_ANNOUNCE)
-		and not c:IsHasEffect(EFFECT_UNLIKED) and not c:IsHasEffect(EFFECT_CANNOT_ATTACK)
+		and not c:IsHasEffect(EFFECT_FORBIDDEN) and not c:IsHasEffect(EFFECT_CANNOT_ATTACK)
 		and not Duel.IsPlayerAffectedByEffect(tp,EFFECT_CANNOT_ATTACK_ANNOUNCE)
 		and not Duel.IsPlayerAffectedByEffect(tp,EFFECT_CANNOT_ATTACK))
 		or c:IsHasEffect(EFFECT_UNSTOPPABLE_ATTACK)) end

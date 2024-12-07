@@ -1,5 +1,5 @@
 --Ｄ－ＨＥＲＯ ダッシュガイ
---Destrudic HERO - Dasher
+--Destiny HERO - Dasher
 local s,id=GetID()
 function s.initial_effect(c)
 	--Increase ATK
@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e3:SetProperty(EFFECT_FLAG_NO_TURN_RESET)
 	e3:SetCode(EVENT_DRAW)
-	e3:SetRange(LOCATION_REST)
+	e3:SetRange(LOCATION_GRAVE)
 	e3:SetCountLimit(1)
 	e3:SetCondition(s.spcon)
 	e3:SetTarget(s.sptg)

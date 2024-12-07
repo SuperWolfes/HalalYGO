@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_IGNITION)
-	e1:SetRange(LOCATION_HAND|LOCATION_REST)
+	e1:SetRange(LOCATION_HAND|LOCATION_GRAVE)
 	e1:SetCountLimit(1,id)
 	e1:SetCondition(function(e,tp) return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_THUNDER),tp,LOCATION_MZONE,0,2,nil) end)
 	e1:SetTarget(s.sptg)
@@ -51,7 +51,7 @@ function s.attachfilter(c,xyzc,tp)
 end
 function s.xyzfilter(c,tp,ec)
 	return c:IsType(TYPE_XYZ) and c:IsFaceup() and s.attachfilter(ec,c,tp)
-		and Duel.IsExistingMatchingCard(s.attachfilter,tp,LOCATION_HAND|LOCATION_MZONE|LOCATION_REST,0,1,ec,c,tp)
+		and Duel.IsExistingMatchingCard(s.attachfilter,tp,LOCATION_HAND|LOCATION_MZONE|LOCATION_GRAVE,0,1,ec,c,tp)
 end
 function s.attachtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
@@ -65,7 +65,7 @@ function s.attachop(e,tp,eg,ep,ev,re,r,rp)
 	if not (tc:IsRelateToEffect(e) and tc:IsType(TYPE_XYZ)) then return end
 	local c=e:GetHandler()
 	if not (c:IsRelateToEffect(e) and c:IsControler(tp) and s.attachfilter(c,tc,tp)) then return end
-	local mg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.attachfilter),tp,LOCATION_HAND|LOCATION_MZONE|LOCATION_REST,0,c,tc,tp)
+	local mg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.attachfilter),tp,LOCATION_HAND|LOCATION_MZONE|LOCATION_GRAVE,0,c,tc,tp)
 	if #mg==0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTACH)
 	local g=mg:Select(tp,1,1,nil)

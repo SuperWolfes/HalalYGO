@@ -35,19 +35,19 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 end
 
 
-function s.exist(e,p) return Duel.IsExistingMatchingCard(s.ssf,p,LOCATION_REST,0,1,nil,e,p) end
+function s.exist(e,p) return Duel.IsExistingMatchingCard(s.ssf,p,LOCATION_GRAVE,0,1,nil,e,p) end
 function s.ssf(c,e,p) return c:IsCanBeSpecialSummoned(e,0,p,false,false) and c:IsAttribute(ATTRIBUTE_LIGHT) end
 function s.cf(c,p) return c:GetSummonPlayer()~=p end
 
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chkc then return chkc:GetLocation()==LOCATION_REST and chkc:GetControler()==tp and chkc:IsCanBeSpecialSummoned(e,0,tp,false,false) and chkc:GetAttribute()==ATTRIBUTE_LIGHT end
+	if chkc then return chkc:GetLocation()==LOCATION_GRAVE and chkc:GetControler()==tp and chkc:IsCanBeSpecialSummoned(e,0,tp,false,false) and chkc:GetAttribute()==ATTRIBUTE_LIGHT end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and eg:Filter(s.cf,nil,tp) and s.exist(e,tp) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,0,0)
 end
 function s.op(e,tp)
 	local c=e:GetHandler()
 	if not s.exist(e,tp) or not c:IsRelateToEffect(e) then return end
-	local tc=Duel.SelectMatchingCard(tp,s.ssf,tp,LOCATION_REST,0,1,1,nil,e,tp):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,s.ssf,tp,LOCATION_GRAVE,0,1,1,nil,e,tp):GetFirst()
 	if Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)==0 then return end
 	Duel.Equip(tp,c,tc)
 	local e1=Effect.CreateEffect(c)

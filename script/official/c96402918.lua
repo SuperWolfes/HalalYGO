@@ -1,12 +1,12 @@
 --氷霊山の龍祖 ランセア
---Lancea, Dragonic Ancestor of the Ice Guardian Mountain
+--Lancea, Dragonic Ancestor of the Ice Spirit Mountain
 --Scripted by fiftyfour
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Synchro Summon procedure
 	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WATER),1,1,Synchro.NonTuner(nil),1,99)
-	--Special Summon 1 "Ice Barrier" monster from your hand, Deck, Extra Deck, or RP
+	--Special Summon 1 "Ice Barrier" monster from your hand, Deck, Extra Deck, or GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_POSITION)
@@ -32,7 +32,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 s.listed_series={SET_ICE_BARRIER}
-local LOCATION_HAND_DECK_EXTRA_REST=LOCATION_HAND|LOCATION_DECK|LOCATION_EXTRA|LOCATION_REST
+local LOCATION_HAND_DECK_EXTRA_GRAVE=LOCATION_HAND|LOCATION_DECK|LOCATION_EXTRA|LOCATION_GRAVE
 function s.spfilter(c,e,tp)
 	if not (c:IsSetCard(SET_ICE_BARRIER) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)) then return false end
 	if c:IsLocation(LOCATION_EXTRA) then
@@ -43,14 +43,14 @@ function s.spfilter(c,e,tp)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return not c:HasFlagEffect(id) and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND_DECK_EXTRA_REST,0,1,nil,e,tp) end
+	if chk==0 then return not c:HasFlagEffect(id) and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND_DECK_EXTRA_GRAVE,0,1,nil,e,tp) end
 	c:RegisterFlagEffect(id,RESET_EVENT|RESETS_STANDARD|RESET_CHAIN,0,1)
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND_DECK_EXTRA_REST)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND_DECK_EXTRA_GRAVE)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_POSITION,nil,1,1-tp,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_HAND_DECK_EXTRA_REST,0,1,1,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_HAND_DECK_EXTRA_GRAVE,0,1,1,nil,e,tp)
 	if #g==0 or Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)==0 then return end
 	if Duel.IsExistingMatchingCard(aux.AND(Card.IsAttackPos,Card.IsCanChangePosition),tp,0,LOCATION_MZONE,1,nil)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then

@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e3:SetCode(EFFECT_DIRECT_ATTACK)
 	e3:SetCondition(s.havefieldcon)
 	c:RegisterEffect(e3)
-	--Unaffected by Actional and Trap Cards
+	--Unaffected by Spell and Trap Cards
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_SINGLE)
 	e4:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -67,7 +67,7 @@ function s.havefieldcon(e)
 	return Duel.IsExistingMatchingCard(Card.IsFaceup,0,LOCATION_FZONE,LOCATION_FZONE,1,nil)
 end
 function s.unaffectedval(e,te)
-	return te:IsActionalTrapEffect() and te:GetOwnerPlayer()~=e:GetHandlerPlayer()
+	return te:IsSpellTrapEffect() and te:GetOwnerPlayer()~=e:GetHandlerPlayer()
 end
 function s.replacetg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

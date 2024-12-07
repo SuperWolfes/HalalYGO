@@ -3,10 +3,10 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Synchro Summon procedure: 1 Tuner + 1+ non-Tuner monsters
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
-	--Add 1 Cyberse monster from your RP or banishment to your hand
+	--Add 1 Cyberse monster from your GY or banishment to your hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND)
@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.lvtg)
 	e2:SetOperation(s.lvop)
 	c:RegisterEffect(e2)
-	--Add 1 "A.I." Actional from your Deck to your hand
+	--Add 1 "A.I." Spell from your Deck to your hand
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -37,7 +37,7 @@ function s.initial_effect(c)
 	e3:SetProperty(EFFECT_FLAG_DELAY)
 	e3:SetCode(EVENT_BE_MATERIAL)
 	e3:SetCountLimit(1,{id,2})
-	e3:SetCondition(function(e,tp,eg,ep,ev,re,r,rp) return e:GetHandler():IsLocation(LOCATION_REST) and r==REASON_LINK end)
+	e3:SetCondition(function(e,tp,eg,ep,ev,re,r,rp) return e:GetHandler():IsLocation(LOCATION_GRAVE) and r==REASON_LINK end)
 	e3:SetTarget(s.deckthtg)
 	e3:SetOperation(s.deckthop)
 	c:RegisterEffect(e3)
@@ -47,10 +47,10 @@ function s.gyrmthfilter(c)
 	return c:IsRace(RACE_CYBERSE) and c:IsFaceup() and c:IsAbleToHand()
 end
 function s.gyrmthtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST|LOCATION_REMOVED) and chkc:IsControler(tp) and s.gyrmthfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.gyrmthfilter,tp,LOCATION_REST|LOCATION_REMOVED,0,1,nil,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE|LOCATION_REMOVED) and chkc:IsControler(tp) and s.gyrmthfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.gyrmthfilter,tp,LOCATION_GRAVE|LOCATION_REMOVED,0,1,nil,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectTarget(tp,s.gyrmthfilter,tp,LOCATION_REST|LOCATION_REMOVED,0,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.gyrmthfilter,tp,LOCATION_GRAVE|LOCATION_REMOVED,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,tp,0)
 end
 function s.gyrmthop(e,tp,eg,ep,ev,re,r,rp)
@@ -85,7 +85,7 @@ function s.lvop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.deckthfilter(c)
-	return c:IsSetCard(SET_AI) and c:IsActional() and c:IsAbleToHand()
+	return c:IsSetCard(SET_AI) and c:IsSpell() and c:IsAbleToHand()
 end
 function s.deckthtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.deckthfilter,tp,LOCATION_DECK,0,1,nil) end

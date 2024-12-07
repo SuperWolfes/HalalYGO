@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz Summon Procedure
 	Xyz.AddProcedure(c,nil,4,5,s.ovfilter,aux.Stringid(id,0),nil,s.xyzop)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Gain the ATK/DEF of all "Zoodiac" monsters attached to itself
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -17,10 +17,10 @@ function s.initial_effect(c)
 	e2:SetCode(EFFECT_UPDATE_DEFENSE)
 	e2:SetValue(s.defval)
 	c:RegisterEffect(e2)
-	--Send cards on the field to the RP
+	--Send cards on the field to the GY
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
-	e3:SetCategory(CATEGORY_TOREST+CATEGORY_POSITION)
+	e3:SetCategory(CATEGORY_TOGRAVE+CATEGORY_POSITION)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetCode(EVENT_BATTLE_DAMAGE)
 	e3:SetCondition(s.condition)
@@ -63,13 +63,13 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetFieldGroup(tp,0,LOCATION_HAND|LOCATION_ONFIELD)
 	if chk==0 then return #g>0 end
 	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,g,#g,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,g,#g,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(tp,0,LOCATION_HAND|LOCATION_ONFIELD)
-	if #g>0 and Duel.SendtoRest(g,REASON_EFFECT)>0 then
+	if #g>0 and Duel.SendtoGrave(g,REASON_EFFECT)>0 then
 		local og=Duel.GetOperatedGroup()
-		if og:FilterCount(Card.IsLocation,0,LOCATION_REST)==0 then return end
+		if og:FilterCount(Card.IsLocation,0,LOCATION_GRAVE)==0 then return end
 		local c=e:GetHandler()
 		if c:IsRelateToEffect(e) and c:IsFaceup() then
 			Duel.BreakEffect()

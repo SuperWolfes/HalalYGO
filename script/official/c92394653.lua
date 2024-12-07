@@ -1,5 +1,5 @@
 --スピリットの誘い
---Guardian's Invitation
+--Spirit's Invitation
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -29,10 +29,10 @@ function s.initial_effect(c)
 	e3:SetOperation(s.mtop)
 	c:RegisterEffect(e3)
 end
-s.listed_card_types={TYPE_GUARDIAN}
+s.listed_card_types={TYPE_SPIRIT}
 function s.filter(c,tp)
 	return c:IsPreviousLocation(LOCATION_MZONE) and c:IsPreviousPosition(POS_FACEUP)
-		and c:IsControler(tp) and c:IsType(TYPE_GUARDIAN)
+		and c:IsControler(tp) and c:IsType(TYPE_SPIRIT)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.filter,1,nil,tp) and e:GetHandler():IsStatus(STATUS_EFFECT_ENABLED)

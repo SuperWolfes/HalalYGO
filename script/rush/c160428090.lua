@@ -1,9 +1,9 @@
 --呪腐竜ディアーガ
---Unclean Skeletal Dragon Diarga
+--Cursed Skeletal Dragon Diarga
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send itself to the RP and decrease ATK
+	--Send itself to the GY and decrease ATK
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_ATKCHANGE)
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -16,10 +16,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_TOXIC),tp,LOCATION_MZONE,0,1,e:GetHandler())
+	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_ZOMBIE),tp,LOCATION_MZONE,0,1,e:GetHandler())
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
+	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
 end
 function s.atkfilter(c)
 	return c:IsFaceup() and c:IsLevelAbove(5)
@@ -31,7 +31,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
 	local c=e:GetHandler()
-	if Duel.SendtoRest(c,REASON_COST)<1 then return end
+	if Duel.SendtoGrave(c,REASON_COST)<1 then return end
 	--Effect
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATKDEF)
 	local g=Duel.SelectMatchingCard(tp,aux.FilterMaximumSideFunctionEx(s.atkfilter),tp,0,LOCATION_MZONE,1,1,nil)

@@ -20,7 +20,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_SUMMONED_SKULL),tp,LOCATION_MZONE,0,1,nil)
 end
 function s.cfilter(c)
-	return c:IsRace(RACE_TAINTED) and c:IsAbleToRestAsCost()
+	return c:IsRace(RACE_FIEND) and c:IsAbleToGraveAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end
@@ -35,9 +35,9 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND,0,1,1,nil)
-	if #g>0 and Duel.SendtoRest(g,REASON_COST)>0 then
+	if #g>0 and Duel.SendtoGrave(g,REASON_COST)>0 then
 		--Effect
 		local sg=Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_MZONE,nil)
 		Duel.Destroy(sg,REASON_EFFECT)

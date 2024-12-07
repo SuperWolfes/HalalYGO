@@ -1,11 +1,11 @@
 --グランド・ハイドライブ
---Grand Hyddendrive
+--Grand Hydradrive
 --fixed by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
 	Link.AddProcedure(c,s.matfilter,1,1)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--cannot link
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)

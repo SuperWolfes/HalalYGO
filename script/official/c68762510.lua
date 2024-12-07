@@ -2,7 +2,7 @@
 --Lucky Pied Piper
 local s,id=GetID()
 function s.initial_effect(c)
-	Dual.AddProcedure(c)
+	Gemini.AddProcedure(c)
 	--Draw 1 card
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -16,11 +16,11 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.con(e,tp,eg,ep,ev,re,r,rp)
-	if not Dual.EffectStatusCondition(e) then return false end
+	if not Gemini.EffectStatusCondition(e) then return false end
 	local c=e:GetHandler()
 	if not c:IsRelateToBattle() or c:IsFacedown() then return false end
 	local bc=c:GetBattleTarget()
-	return bc and bc:IsLocation(LOCATION_REST) and bc:IsReason(REASON_BATTLE) and bc:IsMonster()
+	return bc and bc:IsLocation(LOCATION_GRAVE) and bc:IsReason(REASON_BATTLE) and bc:IsMonster()
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

@@ -1,8 +1,8 @@
 --ＤＴ 黒の女神ウィタカ
---Dark Tuner - Dark Monsterdess Witaka
+--Dark Tuner - Dark Goddess Witaka
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Synchro summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)

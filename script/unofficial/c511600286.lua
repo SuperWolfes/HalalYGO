@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,21844576,20721928,79979666)
 	--spsummon condition
 	local e1=Effect.CreateEffect(c)
@@ -25,11 +25,11 @@ end
 s.material_setcode={0x8,0x3008}
 function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsReason(REASON_BATTLE) and Duel.IsExistingMatchingCard(Card.IsAbleToRest,tp,LOCATION_ONFIELD,0,1,c) end
+	if chk==0 then return c:IsReason(REASON_BATTLE) and Duel.IsExistingMatchingCard(Card.IsAbleToGrave,tp,LOCATION_ONFIELD,0,1,c) end
 	if Duel.SelectEffectYesNo(tp,c,96) then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-		local g=Duel.SelectMatchingCard(tp,Card.IsAbleToRest,tp,LOCATION_ONFIELD,0,1,1,c)
-		Duel.SendtoRest(g,REASON_EFFECT+REASON_REPLACE)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		local g=Duel.SelectMatchingCard(tp,Card.IsAbleToGrave,tp,LOCATION_ONFIELD,0,1,1,c)
+		Duel.SendtoGrave(g,REASON_EFFECT+REASON_REPLACE)
 		return true
 	else return false end
 end

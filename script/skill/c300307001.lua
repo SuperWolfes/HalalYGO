@@ -1,4 +1,4 @@
---Ultimate Chemistry
+--Ultimate Wizardry
 --Scripted by the Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
@@ -13,9 +13,9 @@ function s.initial_effect(c)
 	e1:SetOperation(s.flipop2)
 	c:RegisterEffect(e1)
 end
-s.counter_place_list={COUNTER_ACTIONAL}
+s.counter_place_list={COUNTER_SPELL}
 function s.filter(c)
-	return c:IsFaceup() and c:IsMonster() and c:IsRace(RACE_MENTOR)and c:IsCanAddCounter(COUNTER_ACTIONAL,1)
+	return c:IsFaceup() and c:IsMonster() and c:IsRace(RACE_SPELLCASTER)and c:IsCanAddCounter(COUNTER_SPELL,1)
 end
 function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_MZONE,0,nil)
@@ -24,10 +24,10 @@ end
 function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SKILL_FLIP,tp,id|(1<<32))
 	Duel.Hint(HINT_CARD,tp,id)
-	--Place 1 Actional Counter on all Mentors
+	--Place 1 Spell Counter on all Spellcasters
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_MZONE,0,nil)
 	for tc in g:Iter() do
-		tc:AddCounter(COUNTER_ACTIONAL,1)
+		tc:AddCounter(COUNTER_SPELL,1)
 	end
 	Duel.RegisterFlagEffect(tp,id,0,0,0)
 end
@@ -49,6 +49,6 @@ function s.ctop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_COUNTER)
 	local sg=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_MZONE,0,1,1,nil)
 	if #sg>0 then
-		sg:GetFirst():AddCounter(COUNTER_ACTIONAL,1)
+		sg:GetFirst():AddCounter(COUNTER_SPELL,1)
 	end
 end

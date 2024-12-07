@@ -1,5 +1,5 @@
 --冥界流傀儡術
---The Puppet Ment of Dark Ruler
+--The Puppet Magic of Dark Ruler
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 end
 function s.spfilter(c,e,tp,ft,rg)
 	local lv=c:GetLevel()
-	return lv>0 and c:IsRace(RACE_TAINTED) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return lv>0 and c:IsRace(RACE_FIEND) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 		and rg:CheckWithSumEqual(Card.GetLevel,lv,ft,99)
 end
 function s.rmfilter(c)
@@ -26,11 +26,11 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if ft<=0 then ft=-ft+1 else ft=1 end
 	if chk==0 then
 		local rg=Duel.GetMatchingGroup(s.rmfilter,tp,LOCATION_MZONE,0,nil)
-		return Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp,ft,rg)
+		return Duel.IsExistingTarget(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp,ft,rg)
 	end
 	local rg=Duel.GetMatchingGroup(s.rmfilter,tp,LOCATION_MZONE,0,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp,ft,rg)
+	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp,ft,rg)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)

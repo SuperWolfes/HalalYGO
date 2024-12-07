@@ -14,7 +14,7 @@ s.listed_series={0x3a}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsDiscardable() end
-	Duel.SendtoRest(c,REASON_COST+REASON_DISCARD)
+	Duel.SendtoGrave(c,REASON_COST+REASON_DISCARD)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local e1=Effect.CreateEffect(e:GetHandler())
@@ -39,7 +39,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.chainop(e,tp,eg,ep,ev,re,r,rp)
 	local rc=re:GetHandler()
-	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and rc:IsSetCard(0x3a) and rc:IsType(TYPE_LOCKED) then
+	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and rc:IsSetCard(0x3a) and rc:IsType(TYPE_RITUAL) then
 		Duel.SetChainLimit(s.chainlm)
 	end
 end
@@ -47,7 +47,7 @@ function s.chainlm(e,rp,tp)
 	return tp==rp
 end
 function s.sucfilter(c)
-	return c:IsSetCard(0x3a) and c:IsType(TYPE_LOCKED) and c:IsSummonType(SUMMON_TYPE_LOCKED)
+	return c:IsSetCard(0x3a) and c:IsType(TYPE_RITUAL) and c:IsSummonType(SUMMON_TYPE_RITUAL)
 end
 function s.sucop(e,tp,eg,ep,ev,re,r,rp)
 	if eg:IsExists(s.sucfilter,1,nil) then

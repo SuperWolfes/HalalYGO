@@ -1,4 +1,4 @@
---A Terrible Bate
+--A Terrible Fate
 --Scripted by the Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
@@ -23,13 +23,13 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.rfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_MENTOR) and c:IsReleasable()
+	return c:IsFaceup() and c:IsRace(RACE_SPELLCASTER) and c:IsReleasable()
 end
 function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsTurnPlayer(tp)
 		and Duel.IsExistingMatchingCard(s.rfilter,tp,LOCATION_MZONE,0,1,nil)
 		and (Duel.IsExistingMatchingCard(Card.IsDestructable,tp,0,LOCATION_ONFIELD,1,nil)
-		or Duel.IsExistingMatchingCard(Card.IsAbleToRest,tp,0,LOCATION_HAND,1,nil))
+		or Duel.IsExistingMatchingCard(Card.IsAbleToGrave,tp,0,LOCATION_HAND,1,nil))
 end
 function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.SelectYesNo(tp,aux.Stringid(id,0)) then return end
@@ -42,7 +42,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,s.rfilter,tp,LOCATION_MZONE,0,1,1,nil,tp)
 	if #g>0 and Duel.Release(g,REASON_COST)>0 then
 		local b1=Duel.IsExistingMatchingCard(Card.IsDestructable,tp,0,LOCATION_ONFIELD,1,nil)
-		local b2=Duel.IsExistingMatchingCard(Card.IsAbleToRest,tp,0,LOCATION_HAND,1,nil) 
+		local b2=Duel.IsExistingMatchingCard(Card.IsAbleToGrave,tp,0,LOCATION_HAND,1,nil) 
 		local op=Duel.SelectEffect(1-tp,{b1,aux.Stringid(id,1)},{b2,aux.Stringid(id,2)})
 		if op==1 then
 			Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_DESTROY)
@@ -51,10 +51,10 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 				Duel.Destroy(dg,REASON_EFFECT)
 			end
 		else
-			Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOREST)
-			local gyg=Duel.SelectMatchingCard(1-tp,Card.IsAbleToRest,1-tp,LOCATION_HAND,0,1,1,nil)
+			Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOGRAVE)
+			local gyg=Duel.SelectMatchingCard(1-tp,Card.IsAbleToGrave,1-tp,LOCATION_HAND,0,1,1,nil)
 			if #gyg>0 then
-				Duel.SendtoRest(gyg,REASON_EFFECT)
+				Duel.SendtoGrave(gyg,REASON_EFFECT)
 			end
 		end
 	end

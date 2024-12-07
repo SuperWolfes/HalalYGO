@@ -1,5 +1,5 @@
 --オッドアイズ・ファンタズマ・ドラゴン (Anime)
---Odd-Eyes Illusorasma Dragon (Anime)
+--Odd-Eyes Phantasma Dragon (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--pendulum summon

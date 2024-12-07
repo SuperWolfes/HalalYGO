@@ -1,5 +1,5 @@
 --天地の宝札
---Card of Spectrum and Earth
+--Card of Heaven and Earth
 --Fixed by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -72,7 +72,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	while tc do
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_FIELD)
-		e1:SetCode(EFFECT_UNLIKED)
+		e1:SetCode(EFFECT_FORBIDDEN)
 		e1:SetRange(0xff)
 		e1:SetTargetRange(0x7f,0x7f)
 		e1:SetTarget(function(e,c) return c==e:GetHandler() end)

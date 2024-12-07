@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x35),1,1,Synchro.NonTuner(nil),1,99)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--draw
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x35}
 function s.costfilter(c)
-	return c:IsRace(RACE_TAINTED) and c:IsDiscardable()
+	return c:IsRace(RACE_FIEND) and c:IsDiscardable()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil) end

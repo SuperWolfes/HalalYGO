@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_TRIGGER_O+EFFECT_TYPE_FIELD)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetCode(EVENT_PHASE+PHASE_STANDBY)
-	e1:SetRange(LOCATION_REST)
+	e1:SetRange(LOCATION_GRAVE)
 	e1:SetCountLimit(1)
 	e1:SetCondition(s.condition)
 	e1:SetTarget(s.target)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 end
 s.listed_names={id}
 function s.filter(c)
-	return c:IsActionalTrap() or (c:IsCode(id) and c:IsFaceup())
+	return c:IsSpellTrap() or (c:IsCode(id) and c:IsFaceup())
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return tp==Duel.GetTurnPlayer() and not Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_ONFIELD,0,1,nil) 

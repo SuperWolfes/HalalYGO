@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	Pendulum.AddProcedure(c,false)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	-- 2 "Valiants" monsters
 	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_VAYLANTZ),2)
 	-- Special Summon limitation

@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e1:SetCode(EFFECT_CHANGE_CODE)
-	e1:SetRange(LOCATION_MZONE+LOCATION_REST)
+	e1:SetRange(LOCATION_MZONE+LOCATION_GRAVE)
 	e1:SetValue(41091257)
 	c:RegisterEffect(e1)
 	--destroy
@@ -38,7 +38,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetDecktopGroup(1-tp,1)
 	local tc=g:GetFirst()
 	local opt=e:GetLabel()
-	if (opt==0 and tc:IsMonster()) or (opt==1 and tc:IsActional()) or (opt==2 and tc:IsTrap()) then
+	if (opt==0 and tc:IsMonster()) or (opt==1 and tc:IsSpell()) or (opt==2 and tc:IsTrap()) then
 		Duel.Destroy(dc,REASON_EFFECT)
 	end
 end

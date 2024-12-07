@@ -25,12 +25,12 @@ function s.damfilter(c)
 	return c:IsType(TYPE_NORMAL) and c:IsAttribute(ATTRIBUTE_EARTH)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	local ct=Duel.GetMatchingGroupCount(s.damfilter,tp,LOCATION_REST,0,nil)
+	local ct=Duel.GetMatchingGroupCount(s.damfilter,tp,LOCATION_GRAVE,0,nil)
 	if chk==0 then return ct>0 end
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,ct*100)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
-	local ct=Duel.GetMatchingGroupCount(s.damfilter,tp,LOCATION_REST,0,nil)
+	local ct=Duel.GetMatchingGroupCount(s.damfilter,tp,LOCATION_GRAVE,0,nil)
 	if ct>0 and Duel.Damage(1-tp,ct*100,REASON_EFFECT)>0
 		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsType,TYPE_NORMAL),tp,0,LOCATION_MZONE,1,nil)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then

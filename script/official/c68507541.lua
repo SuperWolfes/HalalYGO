@@ -1,7 +1,7 @@
 --アマゾネスペット虎獅子
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,10979723,aux.FilterBoolFunctionEx(Card.IsSetCard,0x4))
 	--atk up
 	local e1=Effect.CreateEffect(c)

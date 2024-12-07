@@ -3,7 +3,7 @@
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	--Actionals/Traps cannot be returned
+	--Spells/Traps cannot be returned
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_CANNOT_TO_DECK)
@@ -35,7 +35,7 @@ function s.indcond(e)
 	return Duel.IsTurnPlayer(1-e:GetHandlerPlayer())
 end
 function s.indtg(e,c)
-	return c:IsActionalTrap()
+	return c:IsSpellTrap()
 end
 function s.value(e,re,rp)
 	return nil~=re

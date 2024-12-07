@@ -44,15 +44,15 @@ function s.filter(c)
 	return c:IsMonster() and c:IsSetCard(0x70) and c:IsAbleToRemove() and aux.SpElimFilter(c,true)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_MZONE+LOCATION_REST) and chkc:IsControler(tp) and s.filter(chkc) end
+	if chkc then return chkc:IsLocation(LOCATION_MZONE+LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter(chkc) end
 	if chk==0 then
 		if not Duel.IsPlayerCanDiscardDeck(tp,2)
-			or not Duel.IsExistingTarget(s.filter,tp,LOCATION_MZONE+LOCATION_REST,0,1,nil) then return false end
+			or not Duel.IsExistingTarget(s.filter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil) then return false end
 		local g=Duel.GetDecktopGroup(tp,2)
 		return g:FilterCount(Card.IsAbleToHand,nil)>0
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE+LOCATION_REST,0,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,0,LOCATION_DECK)
 end
@@ -72,7 +72,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			end
 			if #g>0 then
 				Duel.DisableShuffleCheck()
-				Duel.SendtoRest(g,REASON_EFFECT)
+				Duel.SendtoGrave(g,REASON_EFFECT)
 			end
 		end
 	end

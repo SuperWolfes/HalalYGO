@@ -34,7 +34,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Draw(p,d,REASON_EFFECT)
 	Duel.ConfirmCards(1-p,tc)
 	Duel.ShuffleHand(p)
-	if Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and tc:GetType()==TYPE_ACTIONAL
+	if Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and tc:GetType()==TYPE_SPELL
 		and tc:CheckActivateEffect(false,false,false)~=nil and Duel.SelectEffectYesNo(tp,tc) then
 		local tpe=tc:GetType()
 		local te=tc:GetActivateEffect()
@@ -48,7 +48,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_CARD,0,tc:GetOriginalCode())
 		tc:CreateEffectRelation(te)
 		if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 and not tc:IsHasEffect(EFFECT_REMAIN_FIELD) then
-			tc:CancelToRest(false)
+			tc:CancelToGrave(false)
 		end
 		if te:GetCode()==EVENT_CHAINING then
 			local te2=Duel.GetChainInfo(chain,CHAININFO_TRIGGERING_EFFECT)

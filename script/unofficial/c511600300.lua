@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	c:EnableCounterPermit(0x135)
 	c:SetCounterLimit(0x135,1)
 	--link summon
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttackAbove,1500),2,nil,s.lcheck)
 	--summmon success
 	local e1=Effect.CreateEffect(c)

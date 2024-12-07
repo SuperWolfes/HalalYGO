@@ -36,10 +36,10 @@ function s.initial_effect(c)
 	e4:SetCondition(s.sdcon)
 	c:RegisterEffect(e4)
 end
-s.listed_names={CARD_RED_DRAGON_ARCHTAINTED}
+s.listed_names={CARD_RED_DRAGON_ARCHFIEND}
 function s.econ(e)
-	return not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_RED_DRAGON_ARCHTAINTED),e:GetHandlerPlayer(),LOCATION_ONFIELD,0,1,nil) or e:GetHandler():IsHasEffect(EFFECT_CANNOT_DISABLE)
+	return not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_RED_DRAGON_ARCHFIEND),e:GetHandlerPlayer(),LOCATION_ONFIELD,0,1,nil) or e:GetHandler():IsHasEffect(EFFECT_CANNOT_DISABLE)
 end
 function s.sdcon(e)
-	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_RED_DRAGON_ARCHTAINTED),e:GetHandlerPlayer(),LOCATION_ONFIELD,0,1,nil)
+	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_RED_DRAGON_ARCHFIEND),e:GetHandlerPlayer(),LOCATION_ONFIELD,0,1,nil)
 end

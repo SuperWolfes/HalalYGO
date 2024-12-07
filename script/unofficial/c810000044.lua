@@ -1,4 +1,4 @@
--- Miss Guide
+-- Soul Guide
 -- scripted by: UnknownGuest
 --fixed by MLD
 local s,id=GetID()

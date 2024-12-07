@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_DRAW+CATEGORY_DECKDES+CATEGORY_SUFFICE)
+	e1:SetCategory(CATEGORY_DRAW+CATEGORY_DECKDES+CATEGORY_DICE)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetTarget(s.target)
@@ -14,7 +14,7 @@ end
 s.roll_dice=true
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>=6 end
-	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,2)
+	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,0,tp,2)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local t={}

@@ -52,7 +52,7 @@ function s.thnegop(e,tp,eg,ep,ev,re,r,rp)
 				Duel.BreakEffect()
 				Duel.SendtoDeck(dg,nil,SEQ_DECKBOTTOM,REASON_EFFECT)
 			end
-		elseif sc:IsActional() then
+		elseif sc:IsSpell() then
 			Duel.BreakEffect()
 			local atkg=Duel.GetMatchingGroup(s.materiactorxyzfilter,tp,LOCATION_MZONE,0,nil)
 			for tc in atkg:Iter() do

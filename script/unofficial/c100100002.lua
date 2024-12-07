@@ -19,7 +19,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--spsummon
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e1:SetCode(EVENT_TO_REST)
+	e1:SetCode(EVENT_TO_GRAVE)
 	e1:SetCondition(s.check)
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e1,tp)

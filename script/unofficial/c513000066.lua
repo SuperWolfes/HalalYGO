@@ -1,5 +1,5 @@
 --ウィジャ盤 (Manga)
---Destrudic Board (Manga)
+--Destiny Board (Manga)
 --Updated by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
-	e1:SetCode(EVENT_TO_REST)
+	e1:SetCode(EVENT_TO_GRAVE)
 	e1:SetTarget(s.target)
 	e1:SetCondition(s.condition)
 	c:RegisterEffect(e1)
@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	e3:SetRange(LOCATION_SZONE)
 	e3:SetOperation(s.winop)
 	c:RegisterEffect(e3)
-	--Trap Actional
+	--Trap Spell
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_SINGLE)
 	e4:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -50,7 +50,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	c:RegisterFlagEffect(id,RESET_EVENT|RESETS_STANDARD,EFFECT_FLAG_CLIENT_HINT,1,0,aux.Stringid(id,0))
 end
 function s.lettercon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetTurnPlayer()~=tp and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,31829185)
+	return Duel.GetTurnPlayer()~=tp and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,31829185)
 end
 function s.letterop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

@@ -1,5 +1,5 @@
 --光天使セプター
---Star Watcher Scepter
+--Star Seraph Scepter
 local s,id=GetID()
 function s.initial_effect(c)
 	--search

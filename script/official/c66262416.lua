@@ -1,15 +1,15 @@
 --Ｄ－ＨＥＲＯ ドリームガイ
---Destrudic HERO - Dreamer
+--Destiny HERO - Dreamer
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special summon itself from RP
+	--Special summon itself from GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
 	e1:SetCode(EVENT_PRE_DAMAGE_CALCULATE)
-	e1:SetRange(LOCATION_REST)
+	e1:SetRange(LOCATION_GRAVE)
 	e1:SetCountLimit(1,id)
 	e1:SetCondition(s.spcon)
 	e1:SetTarget(s.sptg)

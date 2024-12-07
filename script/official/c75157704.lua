@@ -18,14 +18,14 @@ end
 s.listed_names={id}
 s.listed_series={0x14e}
 function s.filter(c)
-	return c:IsActionalTrap() and c:IsSetCard(0x14e) and not c:IsCode(id)
+	return c:IsSpellTrap() and c:IsSetCard(0x14e) and not c:IsCode(id)
 		and c:IsAbleToRemoveAsCost() and c:CheckActivateEffect(false,true,false)~=nil
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(1)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_REST,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil)
 	e:SetLabelObject(g:GetFirst())
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end

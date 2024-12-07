@@ -2,11 +2,11 @@
 --Salamangreat Heatleo
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
-	aux.EnableCheckReincorporation(c)
+	c:EnableReviveLimit()
+	aux.EnableCheckReincarnation(c)
 	--Link Summon procedure
 	Link.AddProcedure(c,s.matfilter,2)
-	--Shuffle 1 card in the opponent's Actional/Trap Zone into the Deck
+	--Shuffle 1 card in the opponent's Spell/Trap Zone into the Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TODECK)
@@ -49,7 +49,7 @@ function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsReincorporationSummoned() and c:IsSummonType(SUMMON_TYPE_LINK)
+	return c:IsReincarnationSummoned() and c:IsSummonType(SUMMON_TYPE_LINK)
 end
 function s.filter1(c,tp)
 	return c:IsMonster() and Duel.IsExistingTarget(s.filter2,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil,c:GetAttack())
@@ -59,9 +59,9 @@ function s.filter2(c,atk)
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	if chk==0 then return Duel.IsExistingTarget(s.filter1,tp,LOCATION_REST,0,1,nil,tp) end
+	if chk==0 then return Duel.IsExistingTarget(s.filter1,tp,LOCATION_GRAVE,0,1,nil,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SELF)
-	local g1=Duel.SelectTarget(tp,s.filter1,tp,LOCATION_REST,0,1,1,nil,tp)
+	local g1=Duel.SelectTarget(tp,s.filter1,tp,LOCATION_GRAVE,0,1,1,nil,tp)
 	e:SetLabelObject(g1:GetFirst())
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 	Duel.SelectTarget(tp,s.filter2,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil,g1:GetFirst():GetAttack())

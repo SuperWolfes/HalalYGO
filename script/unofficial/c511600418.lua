@@ -1,5 +1,5 @@
 --機皇帝グランエル∞ (TF5)
---Mekwatcher Emperor Granel ∞ (TF5)
+--Meklord Emperor Granel ∞ (TF5)
 Duel.LoadScript("c420.lua")
 local s,id=GetID()
 function s.initial_effect(c)

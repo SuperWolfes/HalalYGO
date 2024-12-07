@@ -40,8 +40,8 @@ s.listed_names={CARD_STARDUST_DRAGON,24696097}
 function s.filter(c,e,tp)
 	if not c:IsCode(CARD_STARDUST_DRAGON) then return false end
 	local code=c:GetOriginalCode()
-	local tuner=Duel.GetMatchingGroup(s.matfilter1,tp,LOCATION_REST,0,nil,c)
-	local nontuner=Duel.GetMatchingGroup(s.matfilter2,tp,LOCATION_REST,0,nil,c)
+	local tuner=Duel.GetMatchingGroup(s.matfilter1,tp,LOCATION_GRAVE,0,nil,c)
+	local nontuner=Duel.GetMatchingGroup(s.matfilter2,tp,LOCATION_GRAVE,0,nil,c)
 	if not c:IsType(TYPE_SYNCHRO) or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_SYNCHRO,tp,true,false) then return false end
 	if c:IsSetCard(0x301) then
 		return nontuner:IsExists(s.lvfilter2,1,nil,c,tuner)
@@ -108,8 +108,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local tc=g:Select(tp,1,1,nil):GetFirst()
 		local code=tc:GetOriginalCode()
-		local tuner=Duel.GetMatchingGroup(s.matfilter1,tp,LOCATION_REST,0,nil,tc)
-		local nontuner=Duel.GetMatchingGroup(s.matfilter2,tp,LOCATION_REST,0,nil,tc)
+		local tuner=Duel.GetMatchingGroup(s.matfilter1,tp,LOCATION_GRAVE,0,nil,tc)
+		local nontuner=Duel.GetMatchingGroup(s.matfilter2,tp,LOCATION_GRAVE,0,nil,tc)
 		local mat1
 		if tc:IsSetCard(0x301) then
 			nontuner=nontuner:Filter(s.lvfilter2,nil,tc,tuner)
@@ -155,16 +155,16 @@ function s.vfilter(c)
 	return c:IsType(TYPE_SYNCHRO) and c:IsRace(RACE_DRAGON)
 end
 function s.val(e,c)
-	local g=Duel.GetMatchingGroup(s.vfilter,c:GetControler(),LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(s.vfilter,c:GetControler(),LOCATION_GRAVE,0,nil)
 	return g:GetSum(Card.GetAttack)
 end
 function s.cfilter(c)
 	return c:IsType(TYPE_SYNCHRO) and c:IsAbleToExtraAsCost()
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_REST,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 	Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_COST)
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

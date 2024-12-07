@@ -1,5 +1,5 @@
 --ケミカライズ・ストラクチャーフォース
---Chemicalize Structure Fcoree
+--Chemicalize Structure Force
 local s,id=GetID()
 function s.initial_effect(c)
 	--Equip

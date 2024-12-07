@@ -16,7 +16,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(Card.IsSummonPlayer,1,nil,1-tp)
 end
 function s.filter(c)
-	return c:IsFaceup() and (c:IsRace(RACE_OMEGAMENTAL) or c:IsRace(RACE_MENTAL))
+	return c:IsFaceup() and (c:IsRace(RACE_OMEGAPSYCHIC) or c:IsRace(RACE_PSYCHIC))
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(aux.FilterMaximumSideFunctionEx(s.filter),tp,LOCATION_MZONE,0,1,nil) end

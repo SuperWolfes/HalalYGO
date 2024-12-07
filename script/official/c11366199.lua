@@ -1,5 +1,5 @@
 --ダーク・シムルグ
---Dark Sisbird
+--Dark Simorgh
 local s,id=GetID()
 function s.initial_effect(c)
 	--Add WIND attribute
@@ -20,9 +20,9 @@ function s.initial_effect(c)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
-	--Special summon itself from the rest
+	--Special summon itself from the grave
 	local e3=e2:Clone()
-	e3:SetRange(LOCATION_REST)
+	e3:SetRange(LOCATION_GRAVE)
 	e3:SetCost(s.spcost2)
 	c:RegisterEffect(e3)
 	--Cannot set
@@ -58,8 +58,8 @@ function s.spfilter1(c,att)
 	return c:IsAttribute(att) and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
 end
 function s.spcost1(e,tp,eg,ep,ev,re,r,rp,chk)
-	local rg1=Duel.GetMatchingGroup(s.spfilter1,tp,LOCATION_MZONE+LOCATION_REST,0,nil,ATTRIBUTE_WIND)
-	local rg2=Duel.GetMatchingGroup(s.spfilter1,tp,LOCATION_MZONE+LOCATION_REST,0,nil,ATTRIBUTE_DARK)
+	local rg1=Duel.GetMatchingGroup(s.spfilter1,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil,ATTRIBUTE_WIND)
+	local rg2=Duel.GetMatchingGroup(s.spfilter1,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil,ATTRIBUTE_DARK)
 	local rg=rg1:Clone()
 	rg:Merge(rg2)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)

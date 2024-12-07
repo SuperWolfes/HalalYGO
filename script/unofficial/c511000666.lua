@@ -29,5 +29,5 @@ function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	return Duel.SelectYesNo(e:GetOwnerPlayer(),aux.Stringid(id,0))
 end
 function s.repop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SendtoRest(e:GetHandler(),REASON_EFFECT+REASON_REPLACE)
+	Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT+REASON_REPLACE)
 end

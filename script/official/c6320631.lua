@@ -14,7 +14,7 @@ function s.initial_effect(c)
 end
 s.listed_names={36623431}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_REST) and e:GetHandler():IsReason(REASON_BATTLE)
+	return e:GetHandler():IsLocation(LOCATION_GRAVE) and e:GetHandler():IsReason(REASON_BATTLE)
 end
 function s.filter(c)
 	return (c:IsCode(36623431) or (c:IsLevelBelow(4) and c:IsSetCard(0x1d))) and c:IsAbleToHand()

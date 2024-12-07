@@ -1,5 +1,5 @@
 --アルカナフォースＸＩＩ－ＴＨＥ ＨＡＮＧＥＤ ＭＡＮ
---Arcana Fcoree XII - The Hangman
+--Arcana Force XII - The Hangman
 --Fixed by Larry126
 local s,id=GetID()
 function s.initial_effect(c)

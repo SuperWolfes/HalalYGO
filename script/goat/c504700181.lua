@@ -1,12 +1,12 @@
 --精霊術師 ドリアード
 --Elemental Mistress Doriado (GOAT)
---Effect applies in hand/RP as well
+--Effect applies in hand/GY as well
 --Effect never applies if its attribute is changed by another effect
 --Effect cannot be negated because it is also a condition
 --scripted by senpaizuri
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Attribute
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)

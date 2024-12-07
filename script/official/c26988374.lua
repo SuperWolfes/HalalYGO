@@ -1,9 +1,9 @@
 --魔鍵憑神－アシュタルトゥ
---Menkey Avatar - Astartu
+--Magikey Avatar - Astartu
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Xyz Summon Procedure
 	Xyz.AddProcedure(c,nil,8,2)
 	--Inflict damage
@@ -35,11 +35,11 @@ function s.initial_effect(c)
 	e2:SetOperation(s.rmop)
 	c:RegisterEffect(e2)
 end
-s.listed_series={SET_MENKEY}
+s.listed_series={SET_MAGIKEY}
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	local rc,bc=Duel.GetBattleMonster(tp)
 	return rc and bc and bc:GetBaseAttack()>0
-		and (rc:IsType(TYPE_NORMAL) or rc:IsSetCard(SET_MENKEY)) and rc:IsControler(tp) and bc:IsPreviousControler(1-tp)
+		and (rc:IsType(TYPE_NORMAL) or rc:IsSetCard(SET_MAGIKEY)) and rc:IsControler(tp) and bc:IsPreviousControler(1-tp)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local _,bc=Duel.GetBattleMonster(tp)
@@ -54,14 +54,14 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Damage(p,d,REASON_EFFECT)
 end
 function s.attrfilter(c)
-	return c:IsMonster() and (c:IsType(TYPE_NORMAL) or c:IsSetCard(SET_MENKEY)) and c:IsFaceup()
+	return c:IsMonster() and (c:IsType(TYPE_NORMAL) or c:IsSetCard(SET_MAGIKEY)) and c:IsFaceup()
 end
 function s.rmfilter(c,ag)
 	if not (c:IsFaceup() and c:IsAbleToRemove()) then return false end
 	return ag:IsExists(Card.IsAttribute,1,nil,c:GetAttribute())
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	local ag=Duel.GetMatchingGroup(s.attrfilter,tp,LOCATION_MZONE|LOCATION_REST,0,nil)
+	local ag=Duel.GetMatchingGroup(s.attrfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,nil)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) and s.rmfilter(chkc,ag) end
 	if chk==0 then return Duel.IsExistingTarget(s.rmfilter,tp,0,LOCATION_MZONE,1,nil,ag)
 		and e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_EFFECT) end

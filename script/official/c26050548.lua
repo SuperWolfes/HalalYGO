@@ -1,9 +1,9 @@
 --エクストクス・ハイドラ
---Extox Hydden
+--Extox Hydra
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--2+ monsters you control Special Summoned from the Extra Deck
 	Fusion.AddProcMixRep(c,true,true,s.ffilter,2,99)
 	--Check materials used for Fusion Summon

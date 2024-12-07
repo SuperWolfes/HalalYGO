@@ -1,5 +1,5 @@
 --魔神王の禁断契約書 (anime)
---Unliked Dark Contract with the Swamp King (Anime)
+--Forbidden Dark Contract with the Swamp King (Anime)
 --scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--Special summon 1 Tainted monster from hand
+	--Special summon 1 Fiend monster from hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(41546,1)) --Special Summon
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
 	--Fusion summon
-	local params = {aux.FilterBoolFunction(Card.IsRace,RACE_TAINTED),nil,function(e,tc,mg) return nil,s.extrafil(e:GetHandler():GetCardTarget()) end}
+	local params = {aux.FilterBoolFunction(Card.IsRace,RACE_FIEND),nil,function(e,tc,mg) return nil,s.extrafil(e:GetHandler():GetCardTarget()) end}
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)
@@ -48,7 +48,7 @@ function s.extrafil(g)
 	end
 end
 function s.spfilter(c,e,tp)
-	return c:IsRace(RACE_TAINTED) and c:IsLevelAbove(5) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsRace(RACE_FIEND) and c:IsLevelAbove(5) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

@@ -8,7 +8,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_REDBOOT_B_DRAGON}
 function s.cfilter(c)
-	return c:IsLocation(LOCATION_REST) and c:IsCode(CARD_REDBOOT_B_DRAGON)
+	return c:IsLocation(LOCATION_GRAVE) and c:IsCode(CARD_REDBOOT_B_DRAGON)
 end
 function s.stage2(e,tc,tp,mg,chk)
 	if chk==0 then
@@ -17,7 +17,7 @@ function s.stage2(e,tc,tp,mg,chk)
 		if ct>0 and Duel.IsPlayerCanDiscardDeck(tp,7) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			Duel.DiscardDeck(tp,7,REASON_EFFECT)
 			local g=Duel.GetOperatedGroup()
-			local ct2=g:FilterCount(Card.IsLocation,nil,LOCATION_REST)
+			local ct2=g:FilterCount(Card.IsLocation,nil,LOCATION_GRAVE)
 			if ct2>0 and Duel.IsPlayerCanDiscardDeck(1-tp,7) and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 				Duel.BreakEffect()
 				Duel.DiscardDeck(1-tp,7,REASON_EFFECT)

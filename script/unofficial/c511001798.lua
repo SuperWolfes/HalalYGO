@@ -1,4 +1,4 @@
---Abyss Stage - Treasure Ship of the Seven Lucky Monsters
+--Abyss Stage - Treasure Ship of the Seven Lucky Gods
 local s,id=GetID()
 function s.initial_effect(c)
 	--activate

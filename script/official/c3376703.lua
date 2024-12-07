@@ -1,9 +1,9 @@
 --アルカナフォースＶ－ＴＨＥ ＨＩＥＲＯＰＨＡＮＴ
---Arcana Fcoree V - The Hieroilluso
+--Arcana Force V - The Hierophant
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
-	--Apply a "your opponent cannot activate cards or effects when an "Arcana Fcoree" monster(s) is Summoned to your field" effect
+	--Apply a "your opponent cannot activate cards or effects when an "Arcana Force" monster(s) is Summoned to your field" effect
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -28,18 +28,18 @@ function s.initial_effect(c)
 	e4:SetCode(EVENT_FLIP_SUMMON_SUCCESS)
 	c:RegisterEffect(e4)
 end
-s.listed_series={SET_ARCANA_FCOREE}
+s.listed_series={SET_ARCANA_FORCE}
 s.toss_coin=true
 function s.limeffcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsDiscardable() end
-	Duel.SendtoRest(c,REASON_COST|REASON_DISCARD)
+	Duel.SendtoGrave(c,REASON_COST|REASON_DISCARD)
 end
 function s.limeffop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.HasFlagEffect(tp,id) then return end
 	Duel.RegisterFlagEffect(tp,id,RESET_PHASE|PHASE_END,0,1)
 	local c=e:GetHandler()
-	--Your opponent cannot activate cards or effects when an "Arcana Fcoree" monster(s) is Summoned to your field
+	--Your opponent cannot activate cards or effects when an "Arcana Force" monster(s) is Summoned to your field
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e1:SetCode(EVENT_SUMMON_SUCCESS)
@@ -59,7 +59,7 @@ function s.limeffop(e,tp,eg,ep,ev,re,r,rp)
 	aux.RegisterClientHint(c,nil,tp,1,0,aux.Stringid(id,2))
 end
 function s.limopfilter(c,tp)
-	return c:IsSetCard(SET_ARCANA_FCOREE) and c:IsFaceup() and c:IsControler(tp)
+	return c:IsSetCard(SET_ARCANA_FORCE) and c:IsFaceup() and c:IsControler(tp)
 end
 function s.limop1(e,tp,eg,ep,ev,re,r,rp)
 	if eg and eg:IsExists(s.limopfilter,1,nil,tp) then
@@ -78,14 +78,14 @@ function s.cointg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK)
 end
 function s.headsspfilter(c,e,tp)
-	return c:IsLevelBelow(4) and c:IsSetCard(SET_ARCANA_FCOREE) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
-		and not Duel.IsExistingMatchingCard(s.samenamefilter,tp,LOCATION_MZONE|LOCATION_REST,0,1,nil,c:GetCode())
+	return c:IsLevelBelow(4) and c:IsSetCard(SET_ARCANA_FORCE) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+		and not Duel.IsExistingMatchingCard(s.samenamefilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,1,nil,c:GetCode())
 end
 function s.samenamefilter(c,code)
 	return c:IsCode(code) and c:IsFaceup() and c:IsMonster()
 end
 function s.tailsspfilter(c,e,tp)
-	return c:IsSetCard(SET_ARCANA_FCOREE) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP,1-tp)
+	return c:IsSetCard(SET_ARCANA_FORCE) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP,1-tp)
 end
 function s.coinop(e,tp,eg,ep,ev,re,r,rp)
 	local coin=nil
@@ -103,14 +103,14 @@ function s.coinop(e,tp,eg,ep,ev,re,r,rp)
 		coin=Duel.TossCoin(tp,1)
 	end
 	if coin==COIN_HEADS then
-		--Heads: Special Summon 1 Level 4 or lower "Arcana Fcoree" monster from your Deck with a different name from the monsters you control and in your RP
+		--Heads: Special Summon 1 Level 4 or lower "Arcana Force" monster from your Deck with a different name from the monsters you control and in your GY
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local g=Duel.SelectMatchingCard(tp,s.headsspfilter,tp,LOCATION_DECK,0,1,1,nil,e,tp)
 		if #g>0 then
 			Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 		end
 	elseif coin==COIN_TAILS then
-		--Tails: Special Summon 1 "Arcana Fcoree" monster from your Deck to your opponent's field
+		--Tails: Special Summon 1 "Arcana Force" monster from your Deck to your opponent's field
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local g=Duel.SelectMatchingCard(tp,s.tailsspfilter,tp,LOCATION_DECK,0,1,1,nil,e,tp)
 		if #g>0 then

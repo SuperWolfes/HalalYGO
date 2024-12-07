@@ -1,5 +1,5 @@
 --超古代生物の墓場
---Rest of the Super Ancient Organism
+--Grave of the Super Ancient Organism
 local s,id=GetID()
 function s.initial_effect(c)
 	--activate

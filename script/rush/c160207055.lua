@@ -1,5 +1,5 @@
 --閃光のバリア－シャイニング・フォース－
---Radiant Mirror Fcoree (Rush)
+--Radiant Mirror Force (Rush)
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)

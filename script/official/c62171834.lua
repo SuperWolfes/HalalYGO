@@ -1,5 +1,5 @@
 --夢幻の夢魔鏡
---Dream Mirror Illusorasms
+--Dream Mirror Phantasms
 --Scripted by Eerie Code
 
 local s,id=GetID()

@@ -22,7 +22,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.PayLPCost(tp,1000)
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsRace(RACE_MENTOR)
+	return c:IsFaceup() and c:IsRace(RACE_SPELLCASTER)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.filter(chkc) end
@@ -59,6 +59,6 @@ function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	local e1=Effect.CreateEffect(e:GetOwner())
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_CANNOT_TRIGGER)
-	e1:SetReset(RESET_EVENT+RESETS_STANDARD_EXC_REST)
+	e1:SetReset(RESET_EVENT+RESETS_STANDARD_EXC_GRAVE)
 	bc:RegisterEffect(e1)
 end

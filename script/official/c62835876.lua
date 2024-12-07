@@ -1,12 +1,12 @@
 --善悪の彼岸
 local s,id=GetID()
 function s.initial_effect(c)
-	Locked.AddProcGreaterCode(c,6,nil,35330871)
+	Ritual.AddProcGreaterCode(c,6,nil,35330871)
 	--search
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e1:SetType(EFFECT_TYPE_IGNITION)
-	e1:SetRange(LOCATION_REST)
+	e1:SetRange(LOCATION_GRAVE)
 	e1:SetCountLimit(1,id)
 	e1:SetCondition(aux.exccon)
 	e1:SetCost(s.thcost)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0xb1}
 function s.cfilter(c)
-	return c:IsSetCard(0xb1) and c:IsMonster() and c:IsAbleToRestAsCost()
+	return c:IsSetCard(0xb1) and c:IsMonster() and c:IsAbleToGraveAsCost()
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsAbleToRemoveAsCost()

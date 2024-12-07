@@ -1,5 +1,5 @@
 --粛聖のライト・ソーサラー
---Light Scoreerer of Sanctity
+--Light Sorcerer of Sanctity
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -22,7 +22,7 @@ function s.filter(c)
 	return c:IsFaceup() and c:IsNotMaximumModeSide()
 end
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_MENTOR) and c:IsAttribute(ATTRIBUTE_LIGHT)
+	return c:IsFaceup() and c:IsRace(RACE_SPELLCASTER) and c:IsAttribute(ATTRIBUTE_LIGHT)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,0,LOCATION_MZONE,1,nil)

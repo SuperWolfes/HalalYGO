@@ -14,7 +14,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x16}
 function s.filter(c,tp)
-	return c:IsLocation(LOCATION_REST) and c:IsReason(REASON_BATTLE) and c:IsPreviousControler(tp)
+	return c:IsLocation(LOCATION_GRAVE) and c:IsReason(REASON_BATTLE) and c:IsPreviousControler(tp)
 		and c:IsSetCard(0x16) and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)

@@ -1,10 +1,10 @@
 --A BF－神立のオニマル
---Assault Blacwing - Onimaru the Mega Thunder
+--Assault Blacwing - Onimaru the Divine Thunder
 local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--add type
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
@@ -74,10 +74,10 @@ function s.lvfilter(c,lv)
 	return c:IsSetCard(0x33) and c:HasLevel() and c:GetLevel()~=lv
 end
 function s.lvtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.lvfilter(chkc,e:GetHandler():GetLevel()) end
-	if chk==0 then return Duel.IsExistingTarget(s.lvfilter,tp,LOCATION_REST,0,1,nil,e:GetHandler():GetLevel()) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.lvfilter(chkc,e:GetHandler():GetLevel()) end
+	if chk==0 then return Duel.IsExistingTarget(s.lvfilter,tp,LOCATION_GRAVE,0,1,nil,e:GetHandler():GetLevel()) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
-	Duel.SelectTarget(tp,s.lvfilter,tp,LOCATION_REST,0,1,1,nil,e:GetHandler():GetLevel())
+	Duel.SelectTarget(tp,s.lvfilter,tp,LOCATION_GRAVE,0,1,1,nil,e:GetHandler():GetLevel())
 end
 function s.lvop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

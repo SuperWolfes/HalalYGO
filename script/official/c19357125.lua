@@ -22,13 +22,13 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.atkval(e,c)
-	local ct=Duel.GetMatchingGroupCount(Card.IsAttribute,c:GetControler(),LOCATION_REST,0,nil,ATTRIBUTE_DARK)
+	local ct=Duel.GetMatchingGroupCount(Card.IsAttribute,c:GetControler(),LOCATION_GRAVE,0,nil,ATTRIBUTE_DARK)
 	if ct<=1 then return -400
 	elseif ct<=4 then return 400
 	else return 0 end
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return not e:GetHandler():IsDisabled() and Duel.IsExistingMatchingCard(Card.IsAttribute,tp,LOCATION_REST,0,5,nil,ATTRIBUTE_DARK)
+	return not e:GetHandler():IsDisabled() and Duel.IsExistingMatchingCard(Card.IsAttribute,tp,LOCATION_GRAVE,0,5,nil,ATTRIBUTE_DARK)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsReleasable() end

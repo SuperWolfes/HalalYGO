@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.damcostfilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_NORMAL) and c:IsAbleToRestAsCost()
+	return c:IsFaceup() and c:IsType(TYPE_NORMAL) and c:IsAbleToGraveAsCost()
 end
 function s.damcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.damcostfilter,tp,LOCATION_MZONE,0,1,nil) end
@@ -29,9 +29,9 @@ function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	-- Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.damcostfilter,tp,LOCATION_MZONE,0,1,1,nil)
-	if #g>0 and Duel.SendtoRest(g,REASON_COST)>0 then
+	if #g>0 and Duel.SendtoGrave(g,REASON_COST)>0 then
 		-- Effect
 		local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
 		Duel.Damage(p,d,REASON_EFFECT)

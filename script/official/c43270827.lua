@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.listed_names={CARD_ARRPRO_SYSTEM}
+s.listed_names={CARD_ARGYRO_SYSTEM}
 s.listed_series={0x17b}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return rp==1-tp and re:IsActiveType(TYPE_MONSTER)
@@ -23,7 +23,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local rc=re:GetHandler()
 	local b1=Duel.IsChainDisablable(ev) and not rc:IsDisabled()
 	local b2=rc:IsAbleToRemove() and rc:IsRelateToEffect(re) and not rc:IsLocation(LOCATION_REMOVED)
-	local b3=b1 and b2 and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,CARD_ARRPRO_SYSTEM)
+	local b3=b1 and b2 and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,CARD_ARGYRO_SYSTEM)
 	if chk==0 then return b1 or b2 or b3 end
 	local op=Duel.SelectEffect(tp,
 		{b1,aux.Stringid(id,0)},

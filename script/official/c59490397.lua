@@ -50,7 +50,7 @@ end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local cid=Duel.GetChainInfo(ev,CHAININFO_CHAIN_ID)
 	if cid~=e:GetLabel() then return end
-	e:GetOwner():CancelToRest(false)
+	e:GetOwner():CancelToGrave(false)
 end
 function s.filter(c)
 	return c:IsFaceup() and c:IsLinkMonster() and c:IsSetCard(0x10b)
@@ -95,7 +95,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e4:SetValue(aux.tgoval)
 		c:RegisterEffect(e4)
 	else
-		c:CancelToRest(false)
+		c:CancelToGrave(false)
 	end
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)

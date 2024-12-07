@@ -1,5 +1,5 @@
 --ウィッチクラフト・マスターピース
---Mintcrafter Masterpiece
+--Witchcrafter Masterpiece
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_FREE_CHAIN)
 	e2:SetCountLimit(1,{id,1})
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetHintTiming(0,TIMING_END_PHASE)
 	e2:SetCondition(aux.exccon)
 	e2:SetCost(s.spcost)
@@ -34,16 +34,16 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,0x128),tp,LOCATION_MZONE,0,1,nil)
 end
 function s.cfilter(c,tp)
-	return c:IsActional() and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil,c)
+	return c:IsSpell() and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil,c)
 end
 function s.thfilter(c,oc)
 	return c:IsCode(oc:GetCode()) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST) and s.cfilter(chkc,tp) end
-	if chk==0 then return Duel.IsExistingTarget(s.cfilter,tp,LOCATION_REST,LOCATION_REST,1,nil,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and s.cfilter(chkc,tp) end
+	if chk==0 then return Duel.IsExistingTarget(s.cfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,nil,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	Duel.SelectTarget(tp,s.cfilter,tp,LOCATION_REST,LOCATION_REST,1,1,nil,tp)
+	Duel.SelectTarget(tp,s.cfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,1,nil,tp)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
@@ -61,7 +61,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	return true
 end
 function s.cfilter2(c)
-	return c:IsActional() and c:IsAbleToRemoveAsCost()
+	return c:IsSpell() and c:IsAbleToRemoveAsCost()
 end
 function s.spfilter(c,e,tp,lv)
 	return c:IsSetCard(0x128) and c:IsLevelBelow(lv) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -71,11 +71,11 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		if e:GetLabel()~=100 then return false end
 		e:SetLabel(0)
-		local cg=Duel.GetMatchingGroup(s.cfilter2,tp,LOCATION_REST,0,nil)
+		local cg=Duel.GetMatchingGroup(s.cfilter2,tp,LOCATION_GRAVE,0,nil)
 		return aux.bfgcost(e,tp,eg,ep,ev,re,r,rp,0) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 			and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,0,1,nil,e,tp,#cg)
 	end
-	local cg=Duel.GetMatchingGroup(s.cfilter2,tp,LOCATION_REST,0,nil)
+	local cg=Duel.GetMatchingGroup(s.cfilter2,tp,LOCATION_GRAVE,0,nil)
 	local tg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_DECK,0,nil,e,tp,#cg)
 	local lvt={}
 	local tc=tg:GetFirst()

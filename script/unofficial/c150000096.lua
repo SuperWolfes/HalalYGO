@@ -1,5 +1,5 @@
 --伏魔殿の魅災硫
---Drowned Missile
+--Haunted Missile
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)

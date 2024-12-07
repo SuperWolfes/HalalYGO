@@ -2,7 +2,7 @@
 --Lunalight Panther Dancer (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Fustion Materials
 	Fusion.AddProcMix(c,true,true,51777272,aux.FilterBoolFunction(Card.IsSetCard,SET_LUNALIGHT))
 	--Cannot be destroyed by your opponent's card effects

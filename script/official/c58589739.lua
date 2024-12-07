@@ -1,5 +1,5 @@
 --Ｓ－Ｆｏｒｃｅ プロフェッサーϜ
---S-Fcoree Professor DiGamma
+--S-Force Professor DiGamma
 --Scripted by edo9300
 local s,id=GetID()
 function s.initial_effect(c)
@@ -17,17 +17,17 @@ function s.initial_effect(c)
 	local e2=e1:Clone()
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e2)
-	--Monsters in the same column as your "S-Fcoree" monsters cannot change their battle positions
+	--Monsters in the same column as your "S-Force" monsters cannot change their battle positions
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCode(EFFECT_CANNOT_CHANGE_POSITION)
 	e2:SetProperty(EFFECT_FLAG_SET_AVAILABLE)
 	e2:SetTargetRange(0,LOCATION_MZONE)
-	e2:SetTarget(aux.SFcoreeTarget)
+	e2:SetTarget(aux.SForceTarget)
 	c:RegisterEffect(e2)
 end
-s.listed_series={SET_S_FCOREE}
+s.listed_series={SET_S_FORCE}
 function s.filter(c)
 	return c:IsFaceup() and c:IsCanChangePosition()
 end

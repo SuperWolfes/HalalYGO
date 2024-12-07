@@ -1,8 +1,8 @@
 --劫火の翼竜 ゴースト・ワイバーン
---Hellfire Dragon, Miss Wyvern
+--Hellfire Dragon, Ghost Wyvern
 local s,id=GetID()
 function s.initial_effect(c)
-	--Search 1 "Miss Fusion"
+	--Search 1 "Ghost Fusion"
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND)
@@ -22,10 +22,10 @@ function s.initial_effect(c)
 	e3:SetCode(EVENT_REMOVE)
 	e3:SetOperation(s.regop)
 	c:RegisterEffect(e3)
-	--Search or send to the RP 1 Level 2 or lower Toxic Tuner
+	--Search or send to the GY 1 Level 2 or lower Zombie Tuner
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
-	e4:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_TOREST)
+	e4:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_TOGRAVE)
 	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e4:SetCode(EVENT_PHASE+PHASE_END)
 	e4:SetRange(LOCATION_REMOVED)
@@ -60,7 +60,7 @@ function s.thgcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetFlagEffect(id)>0
 end
 function s.thgfilter(c)
-	return c:IsLevelBelow(2) and c:IsRace(RACE_TOXIC) and c:IsType(TYPE_TUNER) and (c:IsAbleToHand() or c:IsAbleToRest())
+	return c:IsLevelBelow(2) and c:IsRace(RACE_ZOMBIE) and c:IsType(TYPE_TUNER) and (c:IsAbleToHand() or c:IsAbleToGrave())
 end
 function s.thgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thgfilter,tp,LOCATION_DECK,0,1,nil) end

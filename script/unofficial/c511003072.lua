@@ -23,10 +23,10 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local tc=Duel.GetAttackTarget()
 	if chkc then return chkc==tc end
-	if chk==0 then return tc and tc:IsCanBeEffectTarget(e) and Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil,tp,tc) end
+	if chk==0 then return tc and tc:IsCanBeEffectTarget(e) and Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil,tp,tc) end
 	Duel.SetTargetCard(tc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SMATERIAL)
-	Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil,tp,tc)
+	Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil,tp,tc)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)

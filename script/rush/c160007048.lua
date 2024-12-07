@@ -22,14 +22,14 @@ function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroupCount(tp,0,LOCATION_DECK)>=5
-		and Duel.IsExistingMatchingCard(aux.AND(s.damconfilter,Card.IsAbleToRestAsCost),tp,LOCATION_HAND,0,1,nil) end
+		and Duel.IsExistingMatchingCard(aux.AND(s.damconfilter,Card.IsAbleToGraveAsCost),tp,LOCATION_HAND,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,0)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	-- Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-	local cg=Duel.SelectMatchingCard(tp,aux.AND(s.damconfilter,Card.IsAbleToRestAsCost),tp,LOCATION_HAND,0,1,1,nil)
-	if #cg<1 or Duel.SendtoRest(cg,REASON_COST)<1 then return end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	local cg=Duel.SelectMatchingCard(tp,aux.AND(s.damconfilter,Card.IsAbleToGraveAsCost),tp,LOCATION_HAND,0,1,1,nil)
+	if #cg<1 or Duel.SendtoGrave(cg,REASON_COST)<1 then return end
 	-- Effect
 	local g=Duel.GetDeckbottomGroup(1-tp,5)
 	if #g<5 then return end

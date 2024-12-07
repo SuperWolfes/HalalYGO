@@ -1,5 +1,5 @@
 --幻影騎士団ロスト・ヴァンブレイズ
---The Illusion Knights of Lost Vambrace
+--The Phantom Knights of Lost Vambrace
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

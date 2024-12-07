@@ -21,7 +21,7 @@ function s.dfilter(c,tp)
 	return c:IsControler(tp) and c:IsReason(REASON_BATTLE)
 end
 function s.repfilter(c)
-	return c:IsRace(RACE_ROCK) and c:IsAbleToRest()
+	return c:IsRace(RACE_ROCK) and c:IsAbleToGrave()
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return eg:IsExists(s.dfilter,1,nil,tp)
@@ -32,7 +32,7 @@ function s.value(e,c)
 	return c:IsControler(e:GetHandlerPlayer()) and c:IsReason(REASON_BATTLE)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.repfilter,tp,LOCATION_DECK,0,1,1,nil)
-	Duel.SendtoRest(g,REASON_EFFECT)
+	Duel.SendtoGrave(g,REASON_EFFECT)
 end

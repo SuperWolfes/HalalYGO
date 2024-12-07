@@ -26,7 +26,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.handsptg)
 	e2:SetOperation(s.handspop)
 	c:RegisterEffect(e2)
-	--Add 1 "Gladiator" Actional/Trap from your Deck to your hand
+	--Add 1 "Gladiator" Spell/Trap from your Deck to your hand
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -76,7 +76,7 @@ function s.handspcost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.handsptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)
+	if chk==0 then return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
 		and Duel.GetLocationCount(tp,LOCATION_MZONE)>=2
 		and c:IsCanBeSpecialSummoned(e,100,tp,false,false) end
 	local rc=e:GetLabelObject()
@@ -85,7 +85,7 @@ function s.handsptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,2,tp,0)
 end
 function s.handspop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) or Duel.GetLocationCount(tp,LOCATION_MZONE)<2 then return end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) or Duel.GetLocationCount(tp,LOCATION_MZONE)<2 then return end
 	local sg=Duel.GetTargetCards(e)
 	if #sg==2 and sg:FilterCount(Card.IsCanBeSpecialSummoned,nil,e,100,tp,false,false)==2
 		and Duel.SpecialSummon(sg,100,tp,tp,false,false,POS_FACEUP)==2 then
@@ -95,7 +95,7 @@ function s.handspop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.thfilter(c)
-	return c:IsSetCard(SET_GLADIATOR) and c:IsActionalTrap() and c:IsAbleToHand()
+	return c:IsSetCard(SET_GLADIATOR) and c:IsSpellTrap() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

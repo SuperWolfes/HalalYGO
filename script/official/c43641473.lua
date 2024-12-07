@@ -38,7 +38,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		if tc:IsFaceup() and tc:IsRelateToEffect(e) then
 			Duel.Equip(tp,ec,tc)
 		else 
-			Duel.SendtoRest(ec,REASON_EFFECT) 
+			Duel.SendtoGrave(ec,REASON_EFFECT) 
 		end
 	end
 end

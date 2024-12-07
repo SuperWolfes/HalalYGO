@@ -17,8 +17,8 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e2:SetCode(EFFECT_CHANGE_CODE)
-	e2:SetRange(LOCATION_MZONE+LOCATION_REST)
-	e2:SetValue(CARD_FLYBIE_LADY)
+	e2:SetRange(LOCATION_MZONE+LOCATION_GRAVE)
+	e2:SetValue(CARD_HARPIE_LADY)
 	c:RegisterEffect(e2)
 	--change level
 	local e3=Effect.CreateEffect(c)
@@ -31,7 +31,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 s.listed_series={0x64}
-s.listed_names={CARD_FLYBIE_LADY}
+s.listed_names={CARD_HARPIE_LADY}
 function s.cfilter(c)
 	return c:IsSetCard(0x64) and c:IsDiscardable()
 end

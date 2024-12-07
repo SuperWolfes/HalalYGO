@@ -1,5 +1,5 @@
 --はぐれ者傭兵部隊
---Missing Fcoree
+--Missing Force
 local s,id=GetID()
 function s.initial_effect(c)
 	--control

@@ -1,5 +1,5 @@
 --ロード・オブ・ドラゴン－ドラゴンの支配者－ (Deck Master)
---Watcher of D. (Deck Master)
+--Lord of D. (Deck Master)
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)

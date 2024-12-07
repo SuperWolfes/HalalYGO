@@ -1,5 +1,5 @@
 --生贄の祭壇
---Stone for Tribute
+--Altar for Tribute
 --Tokens can be selected to send for cost (but no LP gain occurs)
 local s,id=GetID()
 function s.initial_effect(c)
@@ -15,18 +15,18 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c)
-	return c:IsAbleToRestAsCost() or c:IsType(TYPE_TOKEN)
+	return c:IsAbleToGraveAsCost() or c:IsType(TYPE_TOKEN)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(1)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_MZONE,0,1,1,nil)
 	local tc=g:GetFirst()
 	local atk=(tc:IsType(TYPE_TOKEN) and 0) or tc:GetTextAttack()
 	if atk<0 then atk=0 end
 	e:SetLabel(atk)
-	Duel.SendtoRest(tc,REASON_COST)
+	Duel.SendtoGrave(tc,REASON_COST)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then

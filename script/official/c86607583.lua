@@ -52,7 +52,7 @@ end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local cid=Duel.GetChainInfo(ev,CHAININFO_CHAIN_ID)
 	if cid~=e:GetLabel() then return end
-	e:GetOwner():CancelToRest(false)
+	e:GetOwner():CancelToGrave(false)
 end
 function s.spfilter(c,e,tp)
 	return c:IsSetCard(0x101) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0
@@ -63,8 +63,8 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsCanAddCounter(tp,0x47,1,e:GetHandler())
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp)
-		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil) end
-	local ct=Duel.GetMatchingGroupCount(s.cfilter,tp,LOCATION_REST,0,nil)
+		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	local ct=Duel.GetMatchingGroupCount(s.cfilter,tp,LOCATION_GRAVE,0,nil)
 	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,ct,0,0x47)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 	Duel.SetOperationInfo(0,CATEGORY_EQUIP,e:GetHandler(),1,0,0)
@@ -74,7 +74,7 @@ function s.eqlimit(e,c)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local ct=Duel.GetMatchingGroupCount(s.cfilter,tp,LOCATION_REST,0,nil)
+	local ct=Duel.GetMatchingGroupCount(s.cfilter,tp,LOCATION_GRAVE,0,nil)
 	if c:IsRelateToEffect(e) and ct>0 and c:IsCanAddCounter(0x47,ct) then
 		c:AddCounter(0x47,ct)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
@@ -93,7 +93,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			c:RegisterEffect(e1)
 			Duel.SpecialSummonComplete()
 		elseif not c:IsStatus(STATUS_LEAVE_CONFIRMED) and c:IsLocation(LOCATION_ONFIELD) then
-			c:CancelToRest(false)
+			c:CancelToGrave(false)
 		end
 	end
 end

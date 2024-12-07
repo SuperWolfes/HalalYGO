@@ -9,18 +9,18 @@ function s.initial_effect(c)
 	e1:SetCondition(function() return Duel.IsMainPhase() end)
 	e1:SetCountLimit(1,id)
 	c:RegisterEffect(e1)
-	--Destroy 1 "Memento" monster you control and search 1 "Memento" Actional/Trap
+	--Destroy 1 "Memento" monster you control and search 1 "Memento" Spell/Trap
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_DESTROY+CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCost(aux.SelfBanishCost)
 	e2:SetTarget(s.thtg)
 	e2:SetOperation(s.thop)
 	c:RegisterEffect(e2)
-	--Register mismatching of monsters
+	--Register destruction of monsters
 	aux.GlobalCheck(s,function()
 		local ge1=Effect.CreateEffect(c)
 		ge1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
@@ -51,16 +51,16 @@ end
 function s.fextra(e,tp,mg)
 	local sg=nil
 	if Duel.HasFlagEffect(tp,id) then
-		sg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.extramatfilter),tp,LOCATION_REST,0,nil)
+		sg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.extramatfilter),tp,LOCATION_GRAVE,0,nil)
 	end
 	return sg,s.checkmat
 end
 function s.extratg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_REST)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_GRAVE)
 end
 function s.extraop(e,tc,tp,sg)
-	local rg=sg:Filter(Card.IsLocation,nil,LOCATION_REST)
+	local rg=sg:Filter(Card.IsLocation,nil,LOCATION_GRAVE)
 	if #rg>0 then
 		Duel.HintSelection(rg,true)
 		Duel.SendtoDeck(rg,nil,SEQ_DECKSHUFFLE,REASON_EFFECT|REASON_MATERIAL|REASON_FUSION)
@@ -68,7 +68,7 @@ function s.extraop(e,tc,tp,sg)
 	end
 end
 function s.thfilter(c)
-	return c:IsSetCard(SET_MEMENTO) and c:IsActionalTrap() and c:IsAbleToHand()
+	return c:IsSetCard(SET_MEMENTO) and c:IsSpellTrap() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(nil,tp,LOCATION_MZONE,0,nil)

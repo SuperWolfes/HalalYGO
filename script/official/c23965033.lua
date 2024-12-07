@@ -1,13 +1,13 @@
 --アマゾネス女帝王
---Amazonian Kaiserin
+--Amazoness Kaiserin
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
 	--Must first be properly Summoned
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Fusion Summon procedure
-	Fusion.AddProcMix(c,true,true,s.matfilter,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_AMAZONIAN))
-	--Special Summon 1 "Amazonian" from your Deck
+	Fusion.AddProcMix(c,true,true,s.matfilter,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_AMAZONESS))
+	--Special Summon 1 "Amazoness" from your Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -19,17 +19,17 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Other "Amazonian" cards cannot be targted by opponent's card effects
+	--Other "Amazoness" cards cannot be targted by opponent's card effects
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
 	e2:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetTargetRange(LOCATION_ONFIELD,0)
-	e2:SetTarget(function(e,c) return c~=e:GetHandler() and c:IsFaceup() and c:IsSetCard(SET_AMAZONIAN) end)
+	e2:SetTarget(function(e,c) return c~=e:GetHandler() and c:IsFaceup() and c:IsSetCard(SET_AMAZONESS) end)
 	e2:SetValue(aux.tgoval)
 	c:RegisterEffect(e2)
-	--Other "Amazonian" cards cannot be destroyed by opponent's card effects
+	--Other "Amazoness" cards cannot be destroyed by opponent's card effects
 	local e3=e2:Clone()
 	e3:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
 	e3:SetValue(aux.indoval)
@@ -43,21 +43,21 @@ function s.initial_effect(c)
 	e4:SetCondition(s.atkcon)
 	e4:SetValue(1)
 	c:RegisterEffect(e4)
-	--Checks if "Amazonian Queen" and/or "Amazonian Empress" was used as Fusion Material
+	--Checks if "Amazoness Queen" and/or "Amazoness Empress" was used as Fusion Material
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_SINGLE)
 	e5:SetCode(EFFECT_MATERIAL_CHECK)
 	e5:SetValue(s.valcheck)
 	c:RegisterEffect(e5)
 end
-s.listed_names={15951532,4591250} --Amazonian Queen, Amazonian Empress
-s.listed_series={SET_AMAZONIAN}
-s.material_setcode={SET_AMAZONIAN}
+s.listed_names={15951532,4591250} --Amazoness Queen, Amazoness Empress
+s.listed_series={SET_AMAZONESS}
+s.material_setcode={SET_AMAZONESS}
 function s.matfilter(c,fc,sumtype,tp)
-	return c:IsType(TYPE_FUSION,fc,sumtype,tp) and c:IsSetCard(SET_AMAZONIAN,fc,sumtype,tp)
+	return c:IsType(TYPE_FUSION,fc,sumtype,tp) and c:IsSetCard(SET_AMAZONESS,fc,sumtype,tp)
 end
 function s.spfilter(c,e,tp)
-	return c:IsSetCard(SET_AMAZONIAN) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsSetCard(SET_AMAZONESS) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

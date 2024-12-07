@@ -31,7 +31,7 @@ function s.initial_effect(c)
 	e4:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e4:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL+EFFECT_FLAG_DELAY)
-	e4:SetCode(EVENT_TO_REST)
+	e4:SetCode(EVENT_TO_GRAVE)
 	e4:SetCountLimit(1,{id,1})
 	e4:SetCondition(s.spcon)
 	e4:SetTarget(s.sptg)
@@ -42,7 +42,7 @@ s.listed_series={0x137}
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local c=e:GetHandler()
-	--Send itself to RP
+	--Send itself to GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
@@ -64,7 +64,7 @@ function s.sop(e,tp,eg,ep,ev,re,r,rp)
 	ct=ct+1
 	c:SetTurnCounter(ct)
 	if ct==2 then
-		Duel.SendtoRest(c,REASON_RULE)
+		Duel.SendtoGrave(c,REASON_RULE)
 	end
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)

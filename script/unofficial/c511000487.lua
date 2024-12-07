@@ -18,7 +18,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingTarget(aux.FaceupFilter(Card.IsSetCard,SET_ELEMENTAL_HERO),tp,LOCATION_MZONE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 	Duel.SelectTarget(tp,aux.FaceupFilter(Card.IsSetCard,SET_ELEMENTAL_HERO),tp,LOCATION_MZONE,0,1,1,nil)
-	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,1)
+	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,0,tp,1)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
@@ -27,10 +27,10 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		--Take damage equal to target monster's ATK
 		if dice==1 then
 			Duel.Damage(tp,tc:GetAttack(),REASON_EFFECT)
-		--Destroy 1 Actional you control
-		elseif dice==2 and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsActional),tp,LOCATION_ONFIELD,0,1,e:GetHandler()) then
+		--Destroy 1 Spell you control
+		elseif dice==2 and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSpell),tp,LOCATION_ONFIELD,0,1,e:GetHandler()) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-			local dg=Duel.SelectMatchingCard(tp,aux.FaceupFilter(Card.IsActional),tp,LOCATION_ONFIELD,0,1,1,e:GetHandler())
+			local dg=Duel.SelectMatchingCard(tp,aux.FaceupFilter(Card.IsSpell),tp,LOCATION_ONFIELD,0,1,1,e:GetHandler())
 			Duel.Destroy(dg,REASON_EFFECT)
 		--Destroy 1 monster you control
 		elseif dice==3 and Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_MZONE,0,1,e:GetHandler()) then
@@ -42,10 +42,10 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 			local dg=Duel.SelectMatchingCard(tp,Card.IsMonster,tp,0,LOCATION_MZONE,1,1,nil)
 			Duel.Destroy(dg,REASON_EFFECT)
-		--Destroy 1 Actional your opponent controls
-		elseif dice==5 and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsActional),tp,0,LOCATION_ONFIELD,1,e:GetHandler()) then
+		--Destroy 1 Spell your opponent controls
+		elseif dice==5 and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSpell),tp,0,LOCATION_ONFIELD,1,e:GetHandler()) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-			local dg=Duel.SelectMatchingCard(tp,aux.FaceupFilter(Card.IsActional),tp,0,LOCATION_ONFIELD,1,1,e:GetHandler())
+			local dg=Duel.SelectMatchingCard(tp,aux.FaceupFilter(Card.IsSpell),tp,0,LOCATION_ONFIELD,1,1,e:GetHandler())
 			Duel.Destroy(dg,REASON_EFFECT)
 		--Target monster can attack directly this turn
 		elseif dice==6 then

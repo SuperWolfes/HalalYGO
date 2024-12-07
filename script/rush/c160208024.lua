@@ -1,9 +1,9 @@
 --連楽鬼サンセツコントラ
---Sansetsukontra the Nasheed Tainted
+--Sansetsukontra the Music Fiend
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send the top 3 cards of deck to RP
+	--Send the top 3 cards of deck to GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetCategory(CATEGORY_DECKDES+CATEGORY_DRAW)

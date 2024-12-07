@@ -1,5 +1,5 @@
 --真帝王領域
---Domain of the True Moppars
+--Domain of the True Monarchs
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

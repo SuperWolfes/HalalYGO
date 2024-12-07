@@ -3,11 +3,11 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before awaking
-	c:EnableAwakeLimit()
+	--Must be properly summoned before reviving
+	c:EnableReviveLimit()
 	--Xyz summon procedure
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGHT),4,2)
-	--All your "Constellar" become unaffected by actionals/traps
+	--All your "Constellar" become unaffected by spells/traps
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_QUICK_O)
@@ -28,7 +28,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsSetCard,0x53),tp,LOCATION_MZONE,0,nil)
 	local tc=g:GetFirst()
 	for tc in aux.Next(g) do
-		--Unaffected by actionals/traps
+		--Unaffected by spells/traps
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetDescription(3104)
 		e1:SetType(EFFECT_TYPE_SINGLE)
@@ -41,5 +41,5 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.efilter(e,te)
-	return te:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP)
+	return te:IsActiveType(TYPE_SPELL+TYPE_TRAP)
 end

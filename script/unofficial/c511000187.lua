@@ -2,7 +2,7 @@
 --Armored Xyz (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
-	--Equip 1 Xyz monster from the RP to an Xyz Monster
+	--Equip 1 Xyz monster from the GY to an Xyz Monster
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_EQUIP)
@@ -14,16 +14,16 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.eqfilter(c)
-	return c:IsType(TYPE_XYZ) and not c:IsUnliked()
+	return c:IsType(TYPE_XYZ) and not c:IsForbidden()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.eqfilter(chkc) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.eqfilter(chkc) end
 	local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
 	if e:GetHandler():IsLocation(LOCATION_HAND) then ft=ft-1 end
-	if chk==0 then return ft>0 and Duel.IsExistingTarget(s.eqfilter,tp,LOCATION_REST,0,1,nil)
+	if chk==0 then return ft>0 and Duel.IsExistingTarget(s.eqfilter,tp,LOCATION_GRAVE,0,1,nil)
 		and Duel.IsExistingTarget(aux.FaceupFilter(Card.IsType,TYPE_XYZ),tp,LOCATION_MZONE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-	local g=Duel.SelectTarget(tp,s.eqfilter,tp,LOCATION_REST,0,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.eqfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_EQUIP,g,1,tp,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
@@ -75,6 +75,6 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToRestAsCost() end
-	Duel.SendtoRest(c,REASON_COST)
+	if chk==0 then return c:IsAbleToGraveAsCost() end
+	Duel.SendtoGrave(c,REASON_COST)
 end

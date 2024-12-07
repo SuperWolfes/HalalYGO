@@ -15,10 +15,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c)
-	return c:IsRace(RACE_MENTOR) and c:IsAttribute(ATTRIBUTE_DARK)
+	return c:IsRace(RACE_SPELLCASTER) and c:IsAttribute(ATTRIBUTE_DARK)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetMatchingGroupCount(s.filter,tp,LOCATION_REST,0,nil)>=8
+	return Duel.GetMatchingGroupCount(s.filter,tp,LOCATION_GRAVE,0,nil)>=8
 		and e:GetHandler():IsStatus(STATUS_SPSUMMON_TURN)
 end
 function s.desfilter(c)

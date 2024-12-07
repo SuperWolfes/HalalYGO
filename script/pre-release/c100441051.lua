@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--If this face-up card is used as Fusion Material, its name can be treated as "Aleister the Invalidater"
+	--If this face-up card is used as Fusion Material, its name can be treated as "Aleister the Invoker"
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.selfsptg)
 	e2:SetOperation(s.selfspop)
 	c:RegisterEffect(e2)
-	--Fusion Summon 1 "Magistus" or "Invalidated" Fusion Monster from your Extra Deck, using monsters from your hand or field as material
+	--Fusion Summon 1 "Magistus" or "Invoked" Fusion Monster from your Extra Deck, using monsters from your hand or field as material
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)
@@ -32,15 +32,15 @@ function s.initial_effect(c)
 	e3:SetProperty(EFFECT_FLAG_DELAY)
 	e3:SetCode(EVENT_SUMMON_SUCCESS)
 	e3:SetCountLimit(1,{id,1})
-	e3:SetTarget(Fusion.SummonEffTG(aux.FilterBoolFunction(Card.IsSetCard,{SET_MAGISTUS,SET_INVALIDATED})))
-	e3:SetOperation(Fusion.SummonEffOP(aux.FilterBoolFunction(Card.IsSetCard,{SET_MAGISTUS,SET_INVALIDATED})))
+	e3:SetTarget(Fusion.SummonEffTG(aux.FilterBoolFunction(Card.IsSetCard,{SET_MAGISTUS,SET_INVOKED})))
+	e3:SetOperation(Fusion.SummonEffOP(aux.FilterBoolFunction(Card.IsSetCard,{SET_MAGISTUS,SET_INVOKED})))
 	c:RegisterEffect(e3)
 	local e4=e3:Clone()
 	e4:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e4)
 end
-s.listed_names={86120751} --"Aleister the Invalidater"
-s.listed_series={SET_MAGISTUS,SET_INVALIDATED}
+s.listed_names={86120751} --"Aleister the Invoker"
+s.listed_series={SET_MAGISTUS,SET_INVOKED}
 function s.selfsptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

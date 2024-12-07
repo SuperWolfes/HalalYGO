@@ -1,20 +1,20 @@
 --魔弾の射手 スター
---Mentoral Musketeer Starfire
+--Magical Musketeer Starfire
 local s,id=GetID()
 function s.initial_effect(c)
-	--"Mentoral Musket" Actional/Traps can be activated from the hand
+	--"Magical Musket" Spell/Traps can be activated from the hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_QP_ACT_IN_NTPHAND)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetTargetRange(LOCATION_HAND,0)
-	e1:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,SET_MENTORAL_MUSKET))
+	e1:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,SET_MAGICAL_MUSKET))
 	c:RegisterEffect(e1)
 	local e2=e1:Clone()
 	e2:SetCode(EFFECT_TRAP_ACT_IN_HAND)
 	c:RegisterEffect(e2)
-	--Special Summon 1 Level 4 or lower "Mentoral Musket" monster from the Deck
+	--Special Summon 1 Level 4 or lower "Magical Musket" monster from the Deck
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e3:SetOperation(s.spop)
 	c:RegisterEffect(e3)
 end
-s.listed_series={SET_MENTORAL_MUSKET}
+s.listed_series={SET_MAGICAL_MUSKET}
 s.listed_names={id}
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and e:GetHandler():GetColumnGroup():IsContains(re:GetHandler())
@@ -48,7 +48,7 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	]]
 end
 function s.spfilter(c,e,tp)
-	return c:IsLevelBelow(4) and c:IsSetCard(SET_MENTORAL_MUSKET) and not c:IsCode(id)
+	return c:IsLevelBelow(4) and c:IsSetCard(SET_MAGICAL_MUSKET) and not c:IsCode(id)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)

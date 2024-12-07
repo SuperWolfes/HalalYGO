@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.tdcostfilter(c,e,tp)
-	return c:IsAbleToRestAsCost()
+	return c:IsAbleToGraveAsCost()
 		and Duel.IsExistingMatchingCard(s.tdfilter,tp,0,LOCATION_MZONE,1,nil,e,c:GetType()&(TYPE_EXTRA|TYPE_PENDULUM))
 end
 function s.tdfilter(c,e,extype)
@@ -24,9 +24,9 @@ function s.tdfilter(c,e,extype)
 end
 function s.tdcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tdcostfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.tdcostfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 	e:SetLabel(g:GetFirst():GetType()&(TYPE_EXTRA|TYPE_PENDULUM))
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

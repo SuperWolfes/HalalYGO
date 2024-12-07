@@ -3,9 +3,9 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before awaking
-	c:EnableAwakeLimit()
-	--Must be locked summoned
+	--Must be properly summoned before reviving
+	c:EnableReviveLimit()
+	--Must be ritual summoned
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -38,7 +38,7 @@ function s.initial_effect(c)
 	e4:SetTarget(s.postg)
 	e4:SetOperation(s.posop)
 	c:RegisterEffect(e4)
-	--Check if it was locked summoned with "Blue-Eyes White Dragon"
+	--Check if it was ritual summoned with "Blue-Eyes White Dragon"
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_SINGLE)
 	e5:SetCode(EFFECT_MATERIAL_CHECK)
@@ -52,7 +52,7 @@ function s.indval(e,re,tp)
 end
 function s.poscon(e)
 	local c=e:GetHandler()
-	return c:IsSummonType(SUMMON_TYPE_LOCKED) and c:GetFlagEffect(id)~=0
+	return c:IsSummonType(SUMMON_TYPE_RITUAL) and c:GetFlagEffect(id)~=0
 end
 function s.postg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsCanChangePosition,tp,0,LOCATION_MZONE,1,nil) end

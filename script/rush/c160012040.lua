@@ -3,7 +3,7 @@
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Fusion Summon procedure
 	Fusion.AddProcMix(c,true,true,160012025,CARD_SKYSAVIOR_SOLEIL)
 	--ATK increase

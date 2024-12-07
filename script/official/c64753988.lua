@@ -33,7 +33,7 @@ end
 s.listed_series={0x4093}
 function s.thfilter(c,tp)
 	return c:IsMonster() and c:IsSetCard(0x4093) and c:IsAbleToHand()
-		and not Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,c:GetCode())
+		and not Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,c:GetCode())
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end

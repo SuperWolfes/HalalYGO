@@ -41,7 +41,7 @@ function s.selfilter(c)
 	return c:IsFaceup() and not c:IsType(TYPE_TOKEN+TYPE_TRAP)
 end
 function s.rmfilter(c)
-	return c:IsLocation(LOCATION_MZONE) or c:IsLocation(LOCATION_REST)
+	return c:IsLocation(LOCATION_MZONE) or c:IsLocation(LOCATION_GRAVE)
 end
 function s.sp(g,tp,pos)
 	local sc=g:GetFirst()
@@ -52,7 +52,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetLabelObject()
 	local ft1=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if ft1>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft1=1 end
+	if ft1>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft1=1 end
 	local gg=Group.CreateGroup()
 	if ft1>0 and tc:IsFaceup() and tc:IsRelateToEffect(e) then
 		local g=Duel.GetMatchingGroup(s.filter,tp,0x13,0,nil,tc:GetCode(),e,tp)
@@ -66,7 +66,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		end
 	end
 	local ft2=Duel.GetLocationCount(1-tp,LOCATION_MZONE)
-	if ft2>1 and Duel.IsPlayerAffectedByEffect(1-tp,CARD_BLUEEYES_GUARDIAN) then ft2=1 end
+	if ft2>1 and Duel.IsPlayerAffectedByEffect(1-tp,CARD_BLUEEYES_SPIRIT) then ft2=1 end
 	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_FACEUP)
 	local sg=Duel.SelectMatchingCard(1-tp,s.selfilter,1-tp,LOCATION_MZONE,0,1,1,nil)
 	if #sg>0 then
@@ -81,5 +81,5 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		end
 	end
 	Duel.SpecialSummonComplete()
-	Duel.SendtoRest(gg,REASON_EFFECT)
+	Duel.SendtoGrave(gg,REASON_EFFECT)
 end

@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Set 1 "Metalmorph" Trap from your Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetCountLimit(1,id)
 	e1:SetCost(s.setcost)
 	e1:SetTarget(s.settg)
-	e1:SetOperation(s.vetop)
+	e1:SetOperation(s.setop)
 	c:RegisterEffect(e1)
 	--Destroy 1 face-up monster your opponent controls
 	local e2=Effect.CreateEffect(c)
@@ -24,12 +24,12 @@ function s.initial_effect(c)
 	e2:SetCode(EVENT_CHAINING)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCountLimit(2)
-	e2:SetCondition(function(e,tp,eg,ep,ev,re,r,rp) return rp==1-tp and (re:IsMonsterEffect() or re:IsActionalEffect()) end)
+	e2:SetCondition(function(e,tp,eg,ep,ev,re,r,rp) return rp==1-tp and (re:IsMonsterEffect() or re:IsSpellEffect()) end)
 	e2:SetTarget(s.destg)
 	e2:SetOperation(s.desop)
 	c:RegisterEffect(e2)
 end
-s.max_metalmorph_stats={5,RACE_TAINTED}
+s.max_metalmorph_stats={5,RACE_FIEND}
 s.listed_names={CARD_MAX_METALMORPH}
 s.listed_series={SET_METALMORPH}
 function s.setcost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -46,7 +46,7 @@ function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return c:IsAbleToDeck() and Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_DECK,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,c,1,tp,0)
 end
-function s.vetop(e,tp,eg,ep,ev,re,r,rp)
+function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 	local g=Duel.SelectMatchingCard(tp,s.setfilter,tp,LOCATION_DECK,0,1,1,nil)

@@ -71,7 +71,7 @@ function s.otcon(e,c,minc)
 	if c==nil then return true end
 	local tp=c:GetControler()
 	return minc<=2 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(s.tribrepfilter,tp,LOCATION_REST,0,2,nil)
+		and Duel.IsExistingMatchingCard(s.tribrepfilter,tp,LOCATION_GRAVE,0,2,nil)
 end
 function s.ottg(e,c)
 	local mi,ma=c:GetTributeRequirement()
@@ -79,7 +79,7 @@ function s.ottg(e,c)
 end
 function s.sumtg(e,tp,eg,ep,ev,re,r,rp,c)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.tribrepfilter,tp,LOCATION_REST,0,2,2,true,nil)
+	local g=Duel.SelectMatchingCard(tp,s.tribrepfilter,tp,LOCATION_GRAVE,0,2,2,true,nil)
 	if g then
 		g:KeepAlive()
 		e:SetLabelObject(g)

@@ -20,7 +20,7 @@ function s.cfilter(c,lv,ft)
 	return c:IsFaceup() and c:IsAbleToRemoveAsCost() and c:GetOriginalLevel()>=lv and (ft>0 or c:GetSequence()<5)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	local sg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_REST,0,nil,e,tp)
+	local sg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_GRAVE,0,nil,e,tp)
 	if chkc then return sg:IsContains(chkc) and chkc:IsLevelBelow(e:GetLabel()) end
 	if #sg==0 then return false end
 	local mg,mlv=sg:GetMinGroup(Card.GetLevel)

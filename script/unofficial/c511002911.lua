@@ -1,5 +1,5 @@
 --奇跡の軌跡 (Anime)
---Pulse Locus (Anime)
+--Miracle Locus (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

@@ -1,5 +1,5 @@
 --セメタリー・リバウンド
---Resting Place Rebound
+--Graveyard Rebound
 --Rescripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_TODECK)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e2:SetCode(EVENT_PREDRAW)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetProperty(EFFECT_FLAG_NO_TURN_RESET)
 	e2:SetCondition(s.tdcon)
 	e2:SetTarget(s.tdtg)
@@ -36,17 +36,17 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(function(c) return c:IsActionalTrap() and c:GetFlagEffect(id)==0 end,tp,LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(function(c) return c:IsSpellTrap() and c:GetFlagEffect(id)==0 end,tp,LOCATION_GRAVE,0,nil)
 	for tc in g:Iter() do
 		local te=tc:GetActivateEffect()
 		if te then
 			local e1=te:Clone()
-			e1:SetRange(LOCATION_REST)
+			e1:SetRange(LOCATION_GRAVE)
 			e1:SetReset(RESET_EVENT|RESETS_STANDARD|RESET_PHASE|PHASE_END)
-			if tc:IsFieldActional() then
+			if tc:IsFieldSpell() then
 				local flag1,flag2=te:GetProperty()
 				e1:SetValue(LOCATION_FZONE)
-				e1:SetProperty(flag1,flag2|EFFECT_FLAG2_FCOREE_ACTIVATE_LOCATION)
+				e1:SetProperty(flag1,flag2|EFFECT_FLAG2_FORCE_ACTIVATE_LOCATION)
 			end
 			tc:RegisterEffect(e1)
 		end

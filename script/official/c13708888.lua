@@ -1,8 +1,8 @@
 --Ｅ－ＨＥＲＯ ネオス・ロード
---Evil HERO Neos Watcher
+--Evil HERO Neos Lord
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Fusion Materials: "Elemental HERO Neos" or 1 Fusion Monster that mentions it + 1 Effect Monster on the field
 	Fusion.AddProcMix(c,true,true,{CARD_NEOS,s.neosfusionmatfilter},s.effectmatfilter)
 	c:AddMustBeSpecialSummonedByDarkFusion()
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	local e2=e1:Clone()
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DELAY,EFFECT_FLAG2_CHECK_SIMULTANEOUS)
-	e2:SetCode(EVENT_TO_REST)
+	e2:SetCode(EVENT_TO_GRAVE)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCondition(s.ctrlcon)
 	c:RegisterEffect(e2)

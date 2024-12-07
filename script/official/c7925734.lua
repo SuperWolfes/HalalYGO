@@ -31,7 +31,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false) end
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,tp,LOCATION_EXTRA)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,tp,0)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,c,1,tp,0)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,c,1,tp,0)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
@@ -45,7 +45,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)
 	else
 		Duel.BreakEffect()
-		if Duel.SendtoRest(c,REASON_EFFECT+REASON_DISCARD)>0 then
+		if Duel.SendtoGrave(c,REASON_EFFECT+REASON_DISCARD)>0 then
 			Duel.Draw(tp,1,REASON_EFFECT)
 		end
 	end

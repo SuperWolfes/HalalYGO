@@ -43,31 +43,31 @@ function s.initial_effect(c)
 end
 s.listed_series={0x17b}
 function s.eqfilter(c)
-	return c:IsMonster() and (c:IsSetCard(0x17b) or c:IsRace(RACE_MENTAL))
+	return c:IsMonster() and (c:IsSetCard(0x17b) or c:IsRace(RACE_PSYCHIC))
 end
 function s.eqval(ec,c,tp)
 	return ec:IsControler(tp) and s.eqfilter(ec)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and s.eqfilter(chkc) and not chkc:IsUnliked() end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.eqfilter(chkc) and not chkc:IsForbidden() end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
-		and Duel.IsExistingTarget(aux.AND(s.eqfilter,aux.NOT(Card.IsUnliked)),tp,LOCATION_REST,0,1,nil)
+		and Duel.IsExistingTarget(aux.AND(s.eqfilter,aux.NOT(Card.IsForbidden)),tp,LOCATION_GRAVE,0,1,nil)
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-	local g=Duel.SelectTarget(tp,aux.AND(s.eqfilter,aux.NOT(Card.IsUnliked)),tp,LOCATION_REST,0,1,1,nil)
+	local g=Duel.SelectTarget(tp,aux.AND(s.eqfilter,aux.NOT(Card.IsForbidden)),tp,LOCATION_GRAVE,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,0,LOCATION_HAND)
 	Duel.SetOperationInfo(0,CATEGORY_EQUIP,g,1,0,0)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
 	if c:IsRelateToEffect(e) and Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)>0 
 		and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and tc:IsRelateToEffect(e)
-		and tc:IsMonster() and not tc:IsUnliked() then
+		and tc:IsMonster() and not tc:IsForbidden() then
 		c:EquipByEffectAndLimitRegister(e,tp,tc)
 	end
 end

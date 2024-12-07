@@ -30,7 +30,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 		local seq=e:GetHandler():GetSequence()
 		if seq<5 and bit.extract(zone,seq)~=0 then ct=ct+1 end
 		if ct<=0 then return false end
-		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ct=1 end
+		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ct=1 end
 		local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_DECK,0,nil,e,tp)
 		return g:CheckWithSumEqual(Card.GetLevel,6,1,ct)
 	end
@@ -41,7 +41,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local zone=aux.GetMMZonesPointedTo(tp)
 	local ct=Duel.GetLocationCount(tp,LOCATION_MZONE,tp,LOCATION_REASON_TOFIELD,zone)
 	if ct<=0 then return end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ct=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ct=1 end
 	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_DECK,0,nil,e,tp)
 	if g:CheckWithSumEqual(Card.GetLevel,6,1,ct) then
 		local fid=c:GetFieldID()

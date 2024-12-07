@@ -16,7 +16,7 @@ function s.initial_effect(c)
 		s[0]=0
 		local ge1=Effect.CreateEffect(c)
 		ge1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-		ge1:SetCode(EVENT_TO_REST)
+		ge1:SetCode(EVENT_TO_GRAVE)
 		ge1:SetOperation(s.checkop)
 		Duel.RegisterEffect(ge1,0)
 		aux.AddValuesReset(function()
@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	end)
 end
 function s.checkop(e,tp,eg,ep,ev,re,r,rp)
-	s[0]=s[0]+eg:FilterCount(Card.IsRace,nil,RACE_MENTAL)
+	s[0]=s[0]+eg:FilterCount(Card.IsRace,nil,RACE_PSYCHIC)
 end
 function s.reccon(e,tp,eg,ep,ev,re,r,rp,chk)
 	return Duel.GetCurrentPhase()==PHASE_END

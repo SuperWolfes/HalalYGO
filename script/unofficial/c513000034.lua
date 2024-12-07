@@ -25,7 +25,7 @@ end
 function s.repop(p,op)
 	return	function (e,tp,eg,ep,ev,re,r,rp)
 				if e:IsHasType(EFFECT_TYPE_ACTIVATE) then
-					e:GetHandler():CancelToRest(false)
+					e:GetHandler():CancelToGrave(false)
 				end
 				if op then op(e,tp,eg,ep,ev,re,r,rp) end
 				local sg=Duel.GetMatchingGroup(Card.IsDestructable,p,LOCATION_ONFIELD,0,nil)

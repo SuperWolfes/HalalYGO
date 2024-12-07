@@ -3,10 +3,10 @@
 --Scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Synchro Summon procedure
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
-	--Prevent mismatching by opponent's Actional/Trap
+	--Prevent destruction by opponent's Spell/Trap
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_EQUIP)
 	e1:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
@@ -39,7 +39,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x152}
 function s.indesvalue(e,re,rp)
-	return re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) and rp==1-e:GetHandlerPlayer()
+	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP) and rp==1-e:GetHandlerPlayer()
 end
 function s.descon1(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

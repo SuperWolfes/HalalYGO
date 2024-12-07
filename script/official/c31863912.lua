@@ -31,7 +31,7 @@ function s.target1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if res and teg:IsExists(s.cfilter,1,nil,1-tp) then
 		e:SetLabel(1)
 		Duel.SetTargetCard(teg)
-		Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,1)
+		Duel.SetOperationInfo(0,CATEGORY_DICE,nil,0,tp,1)
 	else
 		e:SetLabel(0)
 	end
@@ -39,7 +39,7 @@ end
 function s.target2(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return eg:IsExists(s.cfilter,1,nil,1-tp) end
 	Duel.SetTargetCard(eg)
-	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,1)
+	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,0,tp,1)
 end
 function s.filter(c,sp,e,lv)
 	return c:IsFaceup() and c:GetSummonPlayer()==sp and c:GetLevel()==lv and c:IsAbleToHand() and c:IsRelateToEffect(e)

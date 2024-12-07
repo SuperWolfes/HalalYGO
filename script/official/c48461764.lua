@@ -1,5 +1,5 @@
 --紫毒の魔術師
---Purple Poison Mentor
+--Purple Poison Magician
 local s,id=GetID()
 function s.initial_effect(c)
 	Pendulum.AddProcedure(c)
@@ -32,7 +32,7 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	if not a:IsControler(tp) then
 		a=Duel.GetAttackTarget()
 	end
-	return a and a:IsAttribute(ATTRIBUTE_DARK) and a:IsRace(RACE_MENTOR)
+	return a and a:IsAttribute(ATTRIBUTE_DARK) and a:IsRace(RACE_SPELLCASTER)
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

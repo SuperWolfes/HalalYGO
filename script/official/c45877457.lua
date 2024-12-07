@@ -1,9 +1,9 @@
 --魔鍵砲－ガレスヴェート
---Menkey Cannon - Garesvet
+--Magikey Cannon - Garesvet
 --scripted by Rundas
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--ATK Up
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-	e3:SetCode(EVENT_TO_REST)
+	e3:SetCode(EVENT_TO_GRAVE)
 	e3:SetProperty(EFFECT_FLAG_DELAY)
 	e2:SetCountLimit(1,{id,1})
 	e3:SetCondition(s.thcon)
@@ -40,7 +40,7 @@ s.listed_names={99426088}
 s.listed_series={0x167}
 --ATK Up
 function s.atkval(e,c)
-	local g=Duel.GetMatchingGroup(Card.IsMonster,e:GetHandlerPlayer(),LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(Card.IsMonster,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil)
 	return g:GetClassCount(Card.GetAttribute)*300
 end
 --Negate
@@ -48,8 +48,8 @@ function s.negcon(e,tp,eg,ep,ev,re,r,rp)
 	local c,rc,att=e:GetHandler(),re:GetHandler(),0
 	local mat=c:GetMaterial()
 	if re:IsActiveType(TYPE_MONSTER) and rp==1-tp and not c:IsStatus(STATUS_BATTLE_DESTROYED) and Duel.IsChainNegatable(ev)
-		and c:IsSummonType(SUMMON_TYPE_LOCKED) and mat:GetClassCount(Card.GetAttribute)>1 then
-		for tc in Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_REST,0,nil):Iter() do
+		and c:IsSummonType(SUMMON_TYPE_RITUAL) and mat:GetClassCount(Card.GetAttribute)>1 then
+		for tc in Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_GRAVE,0,nil):Iter() do
 			att=att|tc:GetAttribute()
 		end
 		return rc:GetAttribute()&att>0
@@ -74,7 +74,7 @@ function s.thfilter(c)
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsPreviousLocation(LOCATION_MZONE) and c:IsSummonType(SUMMON_TYPE_LOCKED)
+	return c:IsPreviousLocation(LOCATION_MZONE) and c:IsSummonType(SUMMON_TYPE_RITUAL)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

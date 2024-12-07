@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon
-	local e1=Locked.CreateProc({handler=c,lvtype=RITPROC_EQUAL,filter=s.cfilter,extrafil=s.extrafil,matfilter=s.filter,fcoreedselection=s.ritcheck,customoperation=s.customoperation})
+	local e1=Ritual.CreateProc({handler=c,lvtype=RITPROC_EQUAL,filter=s.cfilter,extrafil=s.extrafil,matfilter=s.filter,forcedselection=s.ritcheck,customoperation=s.customoperation})
 	e1:SetTarget(s.registerloccount(e1:GetTarget()))
 	e1:SetOperation(s.registerloccount(e1:GetOperation()))
 	c:RegisterEffect(e1)
@@ -13,7 +13,7 @@ function s.registerloccount(func)
 	return function(e,tp,...)
 		local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 		if not Duel.IsPlayerCanSpecialSummonCount(tp,2) then ft=0 end
-		if ft>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
+		if ft>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
 		e:SetLabel(ft)
 		local res=func(e,tp,...)
 		e:SetLabel(0)
@@ -41,9 +41,9 @@ function s.customoperation(mg,e,tp,eg,ep,ev,re,r,rp,tc)
 		local og=Duel.GetOperatedGroup()
 		Duel.ConfirmCards(1-tp,og)
 		tc:SetMaterial(og)
-		Duel.Release(og,REASON_EFFECT+REASON_LOCKED+REASON_MATERIAL)
+		Duel.Release(og,REASON_EFFECT+REASON_RITUAL+REASON_MATERIAL)
 		Duel.BreakEffect()
-		Duel.SpecialSummon(tc,SUMMON_TYPE_LOCKED,tp,tp,false,true,POS_FACEUP)
+		Duel.SpecialSummon(tc,SUMMON_TYPE_RITUAL,tp,tp,false,true,POS_FACEUP)
 		tc:CompleteProcedure()
 	end
 end

@@ -1,5 +1,5 @@
 --サイコウィールダー
---Mental Whewise
+--Psychic Wheelder
 local s,id=GetID()
 function s.initial_effect(c)
 	--Special summon itself from the hand
@@ -35,7 +35,7 @@ function s.spcon(e,c)
 		and Duel.IsExistingMatchingCard(s.spfilter,c:GetControler(),LOCATION_MZONE,0,1,nil)
 end
 function s.con(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_REST) and r & REASON_SYNCHRO == REASON_SYNCHRO 
+	return e:GetHandler():IsLocation(LOCATION_GRAVE) and r & REASON_SYNCHRO == REASON_SYNCHRO 
 end
 function s.filter(c,rc)
 	return c:IsFaceup() and c:GetAttack()<rc:GetAttack()

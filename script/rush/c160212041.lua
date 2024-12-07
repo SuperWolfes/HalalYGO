@@ -3,12 +3,12 @@
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	--Treated as a Legend Card in the hand or RP
+	--Treated as a Legend Card in the hand or GY
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
 	e0:SetCode(EFFECT_IS_LEGEND)
 	e0:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	e0:SetRange(LOCATION_HAND|LOCATION_REST)
+	e0:SetRange(LOCATION_HAND|LOCATION_GRAVE)
 	c:RegisterEffect(e0)
 	--Increase ATK
 	local e1=Effect.CreateEffect(c)

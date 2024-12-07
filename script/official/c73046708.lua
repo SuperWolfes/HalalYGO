@@ -15,18 +15,18 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.eqfilter(c)
-	return c:IsType(TYPE_XYZ) and not c:IsUnliked()
+	return c:IsType(TYPE_XYZ) and not c:IsForbidden()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
 	local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
 	if e:GetHandler():IsLocation(LOCATION_HAND) then ft=ft-1 end
 	if chk==0 then return ft>0 and Duel.IsExistingTarget(Card.IsFaceup,tp,LOCATION_MZONE,0,1,nil)
-		and Duel.IsExistingTarget(s.eqfilter,tp,LOCATION_REST,0,1,nil) end
+		and Duel.IsExistingTarget(s.eqfilter,tp,LOCATION_GRAVE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 	local tc=Duel.SelectTarget(tp,Card.IsFaceup,tp,LOCATION_MZONE,0,1,1,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-	local eqc=Duel.SelectTarget(tp,s.eqfilter,tp,LOCATION_REST,0,1,1,nil)
+	local eqc=Duel.SelectTarget(tp,s.eqfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_EQUIP,eqc,1,tp,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
@@ -34,7 +34,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetTargetCards(e)
 	if #g~=2 then return end
 	local tc=g:Filter(Card.IsLocation,nil,LOCATION_MZONE):GetFirst()
-	local eqc=g:Filter(Card.IsLocation,nil,LOCATION_REST):GetFirst()
+	local eqc=g:Filter(Card.IsLocation,nil,LOCATION_GRAVE):GetFirst()
 	if tc and eqc then
 		if not tc:EquipByEffectAndLimitRegister(e,tp,eqc,nil,true) then return end
 		local atk=eqc:GetBaseAttack()
@@ -78,6 +78,6 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToRestAsCost() end
-	Duel.SendtoRest(c,REASON_COST)
+	if chk==0 then return c:IsAbleToGraveAsCost() end
+	Duel.SendtoGrave(c,REASON_COST)
 end

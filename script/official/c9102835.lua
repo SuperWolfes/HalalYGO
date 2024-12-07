@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_UPDATE_ATTACK)
 	e1:SetValue(700)
 	c:RegisterEffect(e1)
-	--Mismatching replacement for the equipped monster
+	--Destruction replacement for the equipped monster
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_EQUIP+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EFFECT_DESTROY_REPLACE)
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	--Special Summon 1 "Flame Swordsman" or 1 Fusion Monster that mentions it from your Extra Deck
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
-	e3:SetCategory(CATEGORY_TOREST+CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)
+	e3:SetCategory(CATEGORY_TOGRAVE+CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)
 	e3:SetType(EFFECT_TYPE_IGNITION)
 	e3:SetRange(LOCATION_SZONE)
 	e3:SetCountLimit(1,id)
@@ -60,9 +60,9 @@ end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	local ec=c:GetEquipTarget()
-	if chk==0 then return c:IsAbleToRest() and ec:IsAbleToRest()
+	if chk==0 then return c:IsAbleToGrave() and ec:IsAbleToGrave()
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,ec) end
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,Group.FromCards(c,ec),2,tp,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,Group.FromCards(c,ec),2,tp,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
@@ -70,7 +70,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local ec=c:GetEquipTarget()
 	if not (c:IsRelateToEffect(e) and ec) then return end
 	local g=Group.FromCards(c,ec)
-	if Duel.SendtoRest(g,REASON_EFFECT)==0 or g:FilterCount(Card.IsLocation,nil,LOCATION_REST)==0 then return end
+	if Duel.SendtoGrave(g,REASON_EFFECT)==0 or g:FilterCount(Card.IsLocation,nil,LOCATION_GRAVE)==0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local sc=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,nil):GetFirst()
 	if not sc then return end

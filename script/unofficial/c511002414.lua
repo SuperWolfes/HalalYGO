@@ -19,7 +19,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) or Duel.GetLocationCount(tp,LOCATION_MZONE)<2 
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) or Duel.GetLocationCount(tp,LOCATION_MZONE)<2 
 		or not Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_MOTOR_PARTS,0x537,TYPES_TOKEN,0,0,1,RACE_MACHINE,ATTRIBUTE_DARK) then return end
 	for i=1,2 do
 		local token=Duel.CreateToken(tp,TOKEN_MOTOR_PARTS)

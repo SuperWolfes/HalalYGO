@@ -15,14 +15,14 @@ function s.initial_effect(c)
 end
 s.listed_names={18036057,CARD_SANCTUARY_SKY}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_REST) and e:GetHandler():IsReason(REASON_BATTLE)
+	return e:GetHandler():IsLocation(LOCATION_GRAVE) and e:GetHandler():IsReason(REASON_BATTLE)
 end
 function s.filter1(c,e,tp)
-	return c:IsAttackBelow(1500) and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_WANDERER)
+	return c:IsAttackBelow(1500) and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_FAIRY)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.filter2(c,e,tp)
-	return (c:IsCode(18036057) or (c:IsAttackBelow(1500) and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_WANDERER)))
+	return (c:IsCode(18036057) or (c:IsAttackBelow(1500) and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_FAIRY)))
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.envfilter(c)

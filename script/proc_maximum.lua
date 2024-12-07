@@ -16,14 +16,14 @@ end
 function Debug.AddMaximumCard(player,center,left,right)
 	local c=Debug.AddCard(center,player,player,LOCATION_MZONE,2,POS_FACEUP_ATTACK,true)
 	c:RegisterFlagEffect(FLAG_MAXIMUM_CENTER,RESET_EVENT+RESETS_STANDARD-RESET_TOFIELD,0,1)
-	c:RegisterFlagEffect(FLAG_MAXIMUM_CENTER_PREONFIELD,RESET_EVENT+RESETS_STANDARD-RESET_TOFIELD-RESET_TOREST-RESET_LEAVE,0,1)
+	c:RegisterFlagEffect(FLAG_MAXIMUM_CENTER_PREONFIELD,RESET_EVENT+RESETS_STANDARD-RESET_TOFIELD-RESET_TOGRAVE-RESET_LEAVE,0,1)
 
 	local l=Debug.AddCard(left,player,player,LOCATION_MZONE,1,POS_FACEUP_ATTACK,true)
 	local r=Debug.AddCard(right,player,player,LOCATION_MZONE,3,POS_FACEUP_ATTACK,true)
 	--side
 	for _,tc in ipairs({l,r}) do
 		tc:RegisterFlagEffect(FLAG_MAXIMUM_SIDE,RESET_EVENT+RESETS_STANDARD-RESET_TOFIELD,0,1)
-		tc:RegisterFlagEffect(FLAG_MAXIMUM_SIDE_PREONFIELD,RESET_EVENT+RESETS_STANDARD-RESET_TOFIELD-RESET_TOREST-RESET_LEAVE,0,1)
+		tc:RegisterFlagEffect(FLAG_MAXIMUM_SIDE_PREONFIELD,RESET_EVENT+RESETS_STANDARD-RESET_TOFIELD-RESET_TOGRAVE-RESET_LEAVE,0,1)
 	end
 end
 --Maximum Summon
@@ -127,16 +127,16 @@ function Maximum.Operation(mats)
 		--adding the "maximum mode" flag
 		--center
 		c:RegisterFlagEffect(FLAG_MAXIMUM_CENTER,RESET_EVENT+RESETS_STANDARD-RESET_TOFIELD,0,1)
-		c:RegisterFlagEffect(FLAG_MAXIMUM_CENTER_PREONFIELD,RESET_EVENT+RESETS_STANDARD-RESET_TOFIELD-RESET_TOREST-RESET_LEAVE,0,1)
+		c:RegisterFlagEffect(FLAG_MAXIMUM_CENTER_PREONFIELD,RESET_EVENT+RESETS_STANDARD-RESET_TOFIELD-RESET_TOGRAVE-RESET_LEAVE,0,1)
 
 		--side
 		for tc in aux.Next(tg) do
 			tc:RegisterFlagEffect(FLAG_MAXIMUM_SIDE,RESET_EVENT+RESETS_STANDARD-RESET_TOFIELD,0,1)
-			tc:RegisterFlagEffect(FLAG_MAXIMUM_SIDE_PREONFIELD,RESET_EVENT+RESETS_STANDARD-RESET_TOFIELD-RESET_TOREST-RESET_LEAVE,0,1)
-			tc:RegisterFlagEffect(FLAG_MAXIMUM_SIDE_RELATION+c:GetCardID(),RESET_EVENT+RESETS_STANDARD-RESET_TOFIELD-RESET_TOREST-RESET_LEAVE,0,1)
+			tc:RegisterFlagEffect(FLAG_MAXIMUM_SIDE_PREONFIELD,RESET_EVENT+RESETS_STANDARD-RESET_TOFIELD-RESET_TOGRAVE-RESET_LEAVE,0,1)
+			tc:RegisterFlagEffect(FLAG_MAXIMUM_SIDE_RELATION+c:GetCardID(),RESET_EVENT+RESETS_STANDARD-RESET_TOFIELD-RESET_TOGRAVE-RESET_LEAVE,0,1)
 		end
 		g=Duel.GetFieldGroup(tp,LOCATION_MZONE,0)
-		Duel.SendtoRest(g,REASON_RULE)
+		Duel.SendtoGrave(g,REASON_RULE)
 		Duel.MoveToField(c,tp,tp,LOCATION_MZONE,POS_FACEUP_ATTACK,true)
 		for tc in aux.Next(tg) do
 			Duel.MoveToField(tc,tp,tp,LOCATION_MZONE,POS_FACEUP_ATTACK,true)
@@ -391,7 +391,7 @@ end
 local function initial_effect()
 	local e1=Effect.GlobalEffect()
 	e1:SetType(EFFECT_TYPE_FIELD)
-	e1:SetCode(EFFECT_FCOREE_SPSUMMON_POSITION)
+	e1:SetCode(EFFECT_FORCE_SPSUMMON_POSITION)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e1:SetTargetRange(1,1)
 	e1:SetTarget(summon_pos_target)
@@ -399,7 +399,7 @@ local function initial_effect()
 	Duel.RegisterEffect(e1,0)
 	local e2=Effect.GlobalEffect()
 	e2:SetType(EFFECT_TYPE_FIELD)
-	e2:SetCode(EFFECT_FCOREE_MZONE)
+	e2:SetCode(EFFECT_FORCE_MZONE)
 	e2:SetTargetRange(0xff,0xff)
 	e2:SetTarget(summon_pos_target)
 	e2:SetValue(function(e,c)
@@ -414,7 +414,7 @@ local function initial_effect()
 end
 initial_effect()
 
---handling sort summon (when a Maximum monster is Tributed, its side pieces go at the same place as the center piece for the same reason)
+--handling for tribute summon (when a Maximum monster is Tributed, its side pieces go at the same place as the center piece for the same reason)
 function Maximum.cfilter(c,tp)
 	return c:IsReason(REASON_SUMMON) and c:IsPreviousLocation(LOCATION_MZONE) and c:IsPreviousControler(tp) and c:WasMaximumMode()
 end
@@ -429,7 +429,7 @@ function Maximum.tribop(e,tp,eg,ep,ev,re,r,rp)
 		tc:SetReason(c:GetReason())
 	end
 end
---handling for battle mismatching (same as above but for battle mismatching)
+--handling for battle destruction (same as above but for battle destruction)
 function Maximum.battlecon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return c:IsReason(REASON_BATTLE) and eg:IsExists(Card.IsControler,1,nil,tp)

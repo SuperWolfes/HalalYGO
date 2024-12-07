@@ -48,7 +48,7 @@ function s.hspcostfilter(c)
 		and (c:IsLocation(LOCATION_HAND) or aux.SpElimFilter(c,true))
 end
 function s.hspcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local loc=LOCATION_HAND|LOCATION_MZONE|LOCATION_REST
+	local loc=LOCATION_HAND|LOCATION_MZONE|LOCATION_GRAVE
 	if chk==0 then return Duel.IsExistingMatchingCard(s.hspcostfilter,tp,loc,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	local g=Duel.SelectMatchingCard(tp,s.hspcostfilter,tp,loc,0,1,1,nil)

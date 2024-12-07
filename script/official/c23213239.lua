@@ -55,10 +55,10 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.descfilter(c)
-	return c:IsSetCard(0x11e) and c:IsActionalTrap() and c:IsAbleToRemoveAsCost()
+	return c:IsSetCard(0x11e) and c:IsSpellTrap() and c:IsAbleToRemoveAsCost()
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(s.descfilter,tp,LOCATION_REST,0,1,nil)
+	local g=Duel.GetMatchingGroup(s.descfilter,tp,LOCATION_GRAVE,0,1,nil)
 	if chk==0 then return aux.SelectUnselectGroup(g,e,tp,3,3,aux.dncheck,0) end
 	local sg=aux.SelectUnselectGroup(g,e,tp,3,3,aux.dncheck,1,tp,HINTMSG_REMOVE)
 	Duel.Remove(sg,POS_FACEUP,REASON_COST)

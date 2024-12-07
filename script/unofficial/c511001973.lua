@@ -4,11 +4,11 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,1)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--todeck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(95100034,0))
-	e1:SetCategory(CATEGORY_TODECK+CATEGORY_TOREST+CATEGORY_SPECIAL_SUMMON)
+	e1:SetCategory(CATEGORY_TODECK+CATEGORY_TOGRAVE+CATEGORY_SPECIAL_SUMMON)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_MZONE)
@@ -45,7 +45,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e5)
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsType(TYPE_SYNCHRO) and (c:IsAbleToRest() or c:IsAbleToExtra())
+	return c:IsFaceup() and c:IsType(TYPE_SYNCHRO) and (c:IsAbleToGrave() or c:IsAbleToExtra())
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.filter(chkc) end
@@ -56,19 +56,19 @@ function s.tg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if tc:IsAbleToExtra() then
 		Duel.SetOperationInfo(0,CATEGORY_TODECK,g,1,0,0)
 	end
-	if tc:IsAbleToRest() then
-		Duel.SetOperationInfo(0,CATEGORY_TOREST,g,1,0,0)
+	if tc:IsAbleToGrave() then
+		Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,g,1,0,0)
 	end
 end
 function s.mgfilter(c,e,tp,sync)
-	return c:IsControler(tp) and c:IsLocation(LOCATION_REST)
+	return c:IsControler(tp) and c:IsLocation(LOCATION_GRAVE)
 		and c:GetReason()&0x80008==0x80008 and c:GetReasonCard()==sync
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not tc or not tc:IsRelateToEffect(e) then return end
-	local a=tc:IsAbleToRest()
+	local a=tc:IsAbleToGrave()
 	local b=tc:IsAbleToExtra()
 	local op=2
 	if a and b then
@@ -83,9 +83,9 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local mg=tc:GetMaterial():Filter(Card.IsType,nil,TYPE_SYNCHRO)
 	local sumtype=tc:GetSummonType()
 	local sumable=false
-	if op==0 and Duel.SendtoRest(tc,REASON_EFFECT)>0 then sumable=true end
+	if op==0 and Duel.SendtoGrave(tc,REASON_EFFECT)>0 then sumable=true end
 	if op==1 and Duel.SendtoDeck(tc,nil,0,REASON_EFFECT)>0 then sumable=true end
-	local ft=Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) and 1 or Duel.GetLocationCount(tp,LOCATION_MZONE)
+	local ft=Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) and 1 or Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if sumable and sumtype==SUMMON_TYPE_SYNCHRO and #mg>0 and #mg<=ft and mg:FilterCount(aux.NecroValleyFilter(s.mgfilter),nil,e,tp,tc)==#mg and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 		Duel.BreakEffect()
 		Duel.SpecialSummon(mg,0,tp,tp,false,false,POS_FACEUP)

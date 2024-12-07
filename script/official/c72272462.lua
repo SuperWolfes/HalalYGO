@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x166),s.matfilter)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Change ATK to 0
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

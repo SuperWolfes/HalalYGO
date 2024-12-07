@@ -41,7 +41,7 @@ s.listed_series={0x88}
 
 function s.cfilter(c,tp)
 	return c:IsSetCard(0x88) and c:IsPreviousControler(tp)
-		and c:IsPreviousLocation(LOCATION_MZONE+LOCATION_REST) and c:IsPreviousPosition(POS_FACEUP)
+		and c:IsPreviousLocation(LOCATION_MZONE+LOCATION_GRAVE) and c:IsPreviousPosition(POS_FACEUP)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,tp)

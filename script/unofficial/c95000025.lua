@@ -1,7 +1,7 @@
 --Number C1000: Numerronius
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--no type/attribute/level
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -56,7 +56,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	if ct>0 then
 		local dg=Duel.GetOperatedGroup()
 		local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-		if ft>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
+		if ft>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
 		if dg:FilterCount(aux.NecroValleyFilter(s.mgfilter),nil,e,tp)==#dg and #dg<=ft 
 			and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			Duel.BreakEffect()

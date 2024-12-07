@@ -29,7 +29,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local count=0
 	local ft1=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ft1>0 then
-		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft1=1 end
+		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft1=1 end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_REMOVED,0,ft1,ft1,nil,e,tp)
 		if #g>0 then
@@ -43,7 +43,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	end
 	local ft2=Duel.GetLocationCount(1-tp,LOCATION_MZONE)
 	if ft2>0 then
-		if Duel.IsPlayerAffectedByEffect(1-tp,CARD_BLUEEYES_GUARDIAN) then ft2=1 end
+		if Duel.IsPlayerAffectedByEffect(1-tp,CARD_BLUEEYES_SPIRIT) then ft2=1 end
 		Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_SPSUMMON)
 		local g=Duel.SelectMatchingCard(1-tp,s.filter,tp,0,LOCATION_REMOVED,ft2,ft2,nil,e,1-tp)
 		if #g>0 then

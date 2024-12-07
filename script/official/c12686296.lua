@@ -1,10 +1,10 @@
 --アルカナフォースＥＸ－ＴＨＥ ＣＨＡＯＳ ＲＵＬＥＲ
---Arcana Fcoree EX - The Chaos Ruler
+--Arcana Force EX - The Chaos Ruler
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
-	--Fusion Materials: 3 "Arcana Fcoree" monsters with different names
+	c:EnableReviveLimit()
+	--Fusion Materials: 3 "Arcana Force" monsters with different names
 	Fusion.AddProcMixN(c,true,true,s.ffilter,3)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,true)
 	--Toss a coin and apply the appropriate effect
@@ -28,23 +28,23 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 s.toss_coin=true
-s.listed_series={SET_ARCANA_FCOREE}
-s.material_setcode={SET_ARCANA_FCOREE}
+s.listed_series={SET_ARCANA_FORCE}
+s.material_setcode={SET_ARCANA_FORCE}
 s.listed_names={CARD_LIGHT_BARRIER}
 function s.ffilter(c,fc,sumtype,tp,sub,mg,sg)
-	return c:IsSetCard(SET_ARCANA_FCOREE,fc,0,tp) and (not sg or not sg:IsExists(s.fusfilter,1,c,c:GetCode(fc,0,tp),fc,0,tp))
+	return c:IsSetCard(SET_ARCANA_FORCE,fc,0,tp) and (not sg or not sg:IsExists(s.fusfilter,1,c,c:GetCode(fc,0,tp),fc,0,tp))
 end
 function s.fusfilter(c,code,fc,sumtype,tp)
 	return c:IsSummonCode(fc,0,tp,code) and not c:IsHasEffect(511002961)
 end
 function s.contactfilter(c,tp)
-	return c:IsSetCard(SET_ARCANA_FCOREE) and c:IsAbleToRestAsCost() and (c:IsControler(tp) or c:IsFaceup())
+	return c:IsSetCard(SET_ARCANA_FORCE) and c:IsAbleToGraveAsCost() and (c:IsControler(tp) or c:IsFaceup())
 end
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(s.contactfilter,tp,LOCATION_MZONE,LOCATION_MZONE,nil,tp)
 end
 function s.contactop(g,tp,c)
-	Duel.SendtoRest(g,REASON_COST|REASON_MATERIAL)
+	Duel.SendtoGrave(g,REASON_COST|REASON_MATERIAL)
 end
 function s.cointg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -53,7 +53,7 @@ function s.cointg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
 function s.spfilter(c,e,tp)
-	return c:IsLevel(10) and c:IsSetCard(SET_ARCANA_FCOREE) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
+	return c:IsLevel(10) and c:IsSetCard(SET_ARCANA_FORCE) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
 end
 function s.thfilter(c)
 	return c.toss_coin and c:IsAbleToHand()
@@ -73,7 +73,7 @@ function s.coinop(e,tp,eg,ep,ev,re,r,rp)
 		coin=Duel.TossCoin(tp,1)
 	end
 	if coin==COIN_HEADS then
-		--Heads: Special Summon 1 Level 10 "Arcana Fcoree" monster from your hand or Deck, ignoring its Summoning conditions
+		--Heads: Special Summon 1 Level 10 "Arcana Force" monster from your hand or Deck, ignoring its Summoning conditions
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_HAND|LOCATION_DECK,0,1,1,nil,e,tp)
 		if #g>0 then

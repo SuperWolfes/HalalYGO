@@ -1,4 +1,4 @@
---Eco Actional - Reduce Waste
+--Eco Spell - Reduce Waste
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

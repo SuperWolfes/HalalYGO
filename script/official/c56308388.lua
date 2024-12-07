@@ -1,5 +1,5 @@
 --クロノダイバー・リューズ
---Time Tactitian Winder
+--Time Thief Winder
 local s,id=GetID()
 function s.initial_effect(c)
 	--Special Summon this card from your hand
@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Add 1 "Time Tactitian" card from your Deck to your hand, except "Time Tactitian Winder"
+	--Add 1 "Time Thief" card from your Deck to your hand, except "Time Thief Winder"
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e3)
 end
-s.listed_series={SET_TIME_TACTITIAN}
+s.listed_series={SET_TIME_THIEF}
 s.listed_names={id}
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckRemoveOverlayCard(tp,1,0,1,REASON_COST) end
@@ -47,7 +47,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.thfilter(c)
-	return c:IsSetCard(SET_TIME_TACTITIAN) and not c:IsCode(id) and c:IsAbleToHand()
+	return c:IsSetCard(SET_TIME_THIEF) and not c:IsCode(id) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

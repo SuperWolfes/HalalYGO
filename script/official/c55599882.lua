@@ -37,7 +37,7 @@ end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	local bc=c:GetBattleTarget()
-	if chk==0 then return bc and bc:IsLocation(LOCATION_REST) and bc:IsReason(REASON_BATTLE) and bc:IsMonster()
+	if chk==0 then return bc and bc:IsLocation(LOCATION_GRAVE) and bc:IsReason(REASON_BATTLE) and bc:IsMonster()
 		and c:GetBaseAttack()<=bc:GetAttack() and bc:IsAbleToRemove() end
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,bc,1,0,0)
 end
@@ -47,7 +47,7 @@ end
 function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetHandler():GetBattleTarget()
 	if Duel.Remove(tc,POS_FACEUP,REASON_EFFECT)==0 then return end
-	local g=Duel.GetMatchingGroup(s.rmfilter,tp,0,LOCATION_HAND+LOCATION_DECK+LOCATION_EXTRA+LOCATION_REST,nil,tc:GetCode())
+	local g=Duel.GetMatchingGroup(s.rmfilter,tp,0,LOCATION_HAND+LOCATION_DECK+LOCATION_EXTRA+LOCATION_GRAVE,nil,tc:GetCode())
 	if #g>0 then
 		Duel.BreakEffect()
 		Duel.Remove(g,POS_FACEUP,REASON_EFFECT)

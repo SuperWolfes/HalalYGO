@@ -1,5 +1,5 @@
 --エレメント・マジシャン
---Element Mentor (GOAT)
+--Element Magician (GOAT)
 --Battle destroyed registers while the mosnter is on field
 local s,id=GetID()
 function s.initial_effect(c)

@@ -1,9 +1,9 @@
 --E・HERO ゴッド・ネオス
---Elemental HERO Mega Neos
+--Elemental HERO Divine Neos
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMixRep(c,true,true,s.ffilter,2,2,aux.FilterBoolFunctionEx(Card.IsSetCard,0x9),aux.FilterBoolFunctionEx(Card.IsSetCard,0x1f),aux.FilterBoolFunctionEx(Card.IsSetCard,0x8))
 	--copy
 	local e2=Effect.CreateEffect(c)
@@ -30,13 +30,13 @@ function s.ffilter(c,fc,sumtype,tp)
 end
 function s.filter(c)
 	return (c:IsSetCard(0x9) or c:IsSetCard(0x1f) or c:IsSetCard(0x8)) and c:IsMonster()
-		and not c:IsUnliked() and c:IsAbleToRemove() and aux.SpElimFilter(c,true)
+		and not c:IsForbidden() and c:IsAbleToRemove() and aux.SpElimFilter(c,true)
 end
 function s.copytg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_MZONE+LOCATION_REST) and chkc:IsControler(tp) and s.filter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_MZONE+LOCATION_REST,0,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_MZONE+LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE+LOCATION_REST,0,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,1,0,0)
 end
 function s.copyop(e,tp,eg,ep,ev,re,r,rp)

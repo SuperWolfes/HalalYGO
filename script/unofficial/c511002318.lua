@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e2:SetCode(EFFECT_DECREASE_TRIBUTE)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetTargetRange(LOCATION_HAND,LOCATION_HAND)
-	e2:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_WANDERER))
+	e2:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_FAIRY))
 	e2:SetValue(0x1)
 	c:RegisterEffect(e2)
 	--atk
@@ -26,5 +26,5 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.target(e,c)
-	return c:IsFaceup() and not c:IsRace(RACE_WANDERER)
+	return c:IsFaceup() and not c:IsRace(RACE_FAIRY)
 end

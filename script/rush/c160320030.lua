@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.costfilter(c,fc)
-	return c:IsMonster() and c:IsRace(RACE_WARRIOR) and fc.material and c:IsCode(table.unpack(fc.material)) and c:IsAbleToRestAsCost()
+	return c:IsMonster() and c:IsRace(RACE_WARRIOR) and fc.material and c:IsCode(table.unpack(fc.material)) and c:IsAbleToGraveAsCost()
 end
 function s.revealfilter(c,tp)
 	return c:IsRace(RACE_WARRIOR) and c:IsType(TYPE_FUSION) and c:IsLevel(6,7) and not c:IsPublic()
@@ -35,18 +35,18 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.SelectMatchingCard(tp,s.revealfilter,tp,LOCATION_EXTRA,0,1,1,nil,tp):GetFirst()
 	Duel.ConfirmCards(1-tp,tc)
 	Duel.ShuffleExtra(tp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,1,nil,tc)
-	if Duel.SendtoRest(g,REASON_COST)<1 then return end
+	if Duel.SendtoGrave(g,REASON_COST)<1 then return end
 	--Effect
 	if Duel.Draw(tp,3,REASON_EFFECT)==3 then
 		Duel.ShuffleHand(tp)
 		Duel.BreakEffect()
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-		local g=Duel.SelectMatchingCard(tp,Card.IsAbleToRest,tp,LOCATION_HAND,0,1,1,nil)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		local g=Duel.SelectMatchingCard(tp,Card.IsAbleToGrave,tp,LOCATION_HAND,0,1,1,nil)
 		if #g<1 then return end
 		Duel.BreakEffect()
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	end
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD)

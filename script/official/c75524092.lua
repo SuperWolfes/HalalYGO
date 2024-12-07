@@ -36,7 +36,7 @@ function s.desrepop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,aux.TRUE,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,exc)
 	if Duel.Destroy(g,REASON_EFFECT)>0 and Duel.Damage(1-tp,600,REASON_EFFECT)~=0 then
 		if Duel.GetLocationCount(1-tp,LOCATION_MZONE,tp)>0
-			and Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0,TYPES_TOKEN,2500,2500,7,RACE_TAINTED,ATTRIBUTE_DARK,POS_FACEUP,1-tp) then
+			and Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0,TYPES_TOKEN,2500,2500,7,RACE_FIEND,ATTRIBUTE_DARK,POS_FACEUP,1-tp) then
 			local token=Duel.CreateToken(tp,id+1)
 			Duel.SpecialSummon(token,0,tp,1-tp,false,false,POS_FACEUP)
 		end

@@ -1,5 +1,5 @@
 --サクリファイス・ランクアップ
---Sorting Level-Up
+--Sacrifice Level-Up
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)

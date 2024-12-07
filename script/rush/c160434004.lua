@@ -1,3 +1,3 @@
 --ブラック・マジシャン・ガール
---Dark Mentor Girl (Rush)
+--Dark Magician Girl (Rush)
 Duel.LoadCardScriptAlias(160411002)

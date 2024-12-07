@@ -75,7 +75,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		c:RegisterEffect(e1)
 	else
-		c:CancelToRest(false)
+		c:CancelToGrave(false)
 	end
 end
 function s.condition(e)

@@ -1,9 +1,9 @@
 --ゴーストリックの妖精
---Missrick Wanderer
+--Ghostrick Fairy
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
-	--Cannot be normal summoned if player controls no "Missrick" monster
+	--Cannot be normal summoned if player controls no "Ghostrick" monster
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_CANNOT_SUMMON)
@@ -18,19 +18,19 @@ function s.initial_effect(c)
 	e2:SetTarget(s.postg)
 	e2:SetOperation(s.posop)
 	c:RegisterEffect(e2)
-	--Set 1 "Missrick" card from RP
+	--Set 1 "Ghostrick" card from GY
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetCode(EVENT_FLIP)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_STEP)
 	e3:SetTarget(s.settg)
-	e3:SetOperation(s.vetop)
+	e3:SetOperation(s.setop)
 	c:RegisterEffect(e3)
 end
-s.listed_series={SET_MISSRICK}
+s.listed_series={SET_GHOSTRICK}
 function s.sumcon(e)
-	return not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,SET_MISSRICK),e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
+	return not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,SET_GHOSTRICK),e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
 end
 function s.postg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -45,28 +45,28 @@ function s.posop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.setfilter(c,e,tp)
-	if not c:IsSetCard(SET_MISSRICK) then return end
+	if not c:IsSetCard(SET_GHOSTRICK) then return end
 	if c:IsMonster() then
 		return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEDOWN_DEFENSE)
-	elseif c:IsActionalTrap() then
-		return (c:IsFieldActional() or Duel.GetLocationCount(tp,LOCATION_SZONE)>0) and c:IsSSetable()
+	elseif c:IsSpellTrap() then
+		return (c:IsFieldSpell() or Duel.GetLocationCount(tp,LOCATION_SZONE)>0) and c:IsSSetable()
 	end
 	return false
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.setfilter(chkc,e,tp) end
-	if chk==0 then return Duel.IsExistingTarget(s.setfilter,tp,LOCATION_REST,0,1,nil,e,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.setfilter(chkc,e,tp) end
+	if chk==0 then return Duel.IsExistingTarget(s.setfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
-	local tc=Duel.SelectTarget(tp,s.setfilter,tp,LOCATION_REST,0,1,1,nil,e,tp):GetFirst()
+	local tc=Duel.SelectTarget(tp,s.setfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp):GetFirst()
 	if tc:IsMonster() then
 		e:SetCategory(CATEGORY_SPECIAL_SUMMON)
-		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,LOCATION_REST)
-	elseif tc:IsActionalTrap() then
+		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,LOCATION_GRAVE)
+	elseif tc:IsSpellTrap() then
 		e:SetCategory(0)
-		Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,tp,LOCATION_REST)
+		Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,tp,LOCATION_GRAVE)
 	end
 end
-function s.vetop(e,tp,eg,ep,ev,re,r,rp)
+function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not tc or not tc:IsRelateToEffect(e) then return end
 	local andifyoudo=false
@@ -74,11 +74,11 @@ function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 		if Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEDOWN_DEFENSE)>0 then
 			andifyoudo=true
 		end
-	elseif tc:IsActionalTrap() then
-		if tc:IsFieldActional() then
+	elseif tc:IsSpellTrap() then
+		if tc:IsFieldSpell() then
 			local fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
 			if fc then
-				Duel.SendtoRest(fc,REASON_RULE)
+				Duel.SendtoGrave(fc,REASON_RULE)
 				Duel.BreakEffect()
 			end
 		end

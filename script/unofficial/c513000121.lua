@@ -1,4 +1,4 @@
---Anti-Ment Arrows
+--Anti-Magic Arrows
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

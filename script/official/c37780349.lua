@@ -1,5 +1,5 @@
 --D－HERO ダイナマイトガイ
---Destrudic HERO - Dynatag
+--Destiny HERO - Dynatag
 local s,id=GetID()
 function s.initial_effect(c)
 	--Damage to 0
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_ATKCHANGE)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetCost(aux.bfgcost)
 	e2:SetTarget(s.atktg)
@@ -32,7 +32,7 @@ function s.dmcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.dmcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsDiscardable() end
-	Duel.SendtoRest(e:GetHandler(),REASON_COST+REASON_DISCARD)
+	Duel.SendtoGrave(e:GetHandler(),REASON_COST+REASON_DISCARD)
 end
 function s.dmtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

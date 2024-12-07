@@ -1,5 +1,5 @@
 --堕天使ゼラート
---Darkwarden Zerato (Rush)
+--Darklord Zerato (Rush)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Summon with 1 tribute
@@ -17,11 +17,11 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.otfilter(c,tp)
-	local ag=Duel.GetMatchingGroup(Card.IsAttribute,tp,LOCATION_REST,0,nil,ATTRIBUTE_DARK)
+	local ag=Duel.GetMatchingGroup(Card.IsAttribute,tp,LOCATION_GRAVE,0,nil,ATTRIBUTE_DARK)
 	return c:IsAttribute(ATTRIBUTE_DARK) and ag:GetClassCount(Card.GetCode)>=4
 end
 function s.costfilter(c)
-	return c:IsMonster() and c:IsAttribute(ATTRIBUTE_DARK) and c:IsAbleToRestAsCost()
+	return c:IsMonster() and c:IsAttribute(ATTRIBUTE_DARK) and c:IsAbleToGraveAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil) end
@@ -33,9 +33,9 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,1,nil)
-	if Duel.SendtoRest(g,REASON_COST)>0 then
+	if Duel.SendtoGrave(g,REASON_COST)>0 then
 		--Effect
 		local g=Duel.GetMatchingGroup(Card.IsNotMaximumModeSide,tp,0,LOCATION_MZONE,nil)
 		Duel.Destroy(g,REASON_EFFECT)

@@ -40,7 +40,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	e3:SetTarget(function(e,c) return c:IsMonster() and c:IsLevelAbove(7) and c:IsRace(RACE_INSECT) end)
 	e3:SetTargetRange(LOCATION_MZONE,0)
 	Duel.RegisterEffect(e3,tp)
-	--Place 1 "Parasite Paracide" from your RP face-up on opponent's Deck as if it were placed by its own effect
+	--Place 1 "Parasite Paracide" from your GY face-up on opponent's Deck as if it were placed by its own effect
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e4:SetCode(EVENT_FREE_CHAIN)
@@ -65,7 +65,7 @@ end
 function s.ppcon(e,tp,eg,ep,ev,re,r,rp)
 	return aux.CanActivateSkill(tp) and Duel.GetFlagEffect(tp,id)==0
 		and Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,nil)
-		and Duel.IsExistingMatchingCard(s.ppfilter,tp,LOCATION_REST,0,1,nil)
+		and Duel.IsExistingMatchingCard(s.ppfilter,tp,LOCATION_GRAVE,0,1,nil)
 end
 function s.ppop(e,tp,eg,ep,ev,re,r,rp)
 	--OPD Register
@@ -75,7 +75,7 @@ function s.ppop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST|REASON_DISCARD,nil)
 	if ct>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-		local sg=Duel.SelectMatchingCard(tp,s.ppfilter,tp,LOCATION_REST,0,1,1,nil)
+		local sg=Duel.SelectMatchingCard(tp,s.ppfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 		if #sg>0 then
 			local c=sg:GetFirst()
 			Duel.SendtoDeck(sg,1-tp,SEQ_DECKTOP,REASON_EFFECT)

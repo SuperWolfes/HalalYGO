@@ -1,5 +1,5 @@
 --迅雷の魔王－スカル・デーモン
---Skull Archtainted of Lightning
+--Skull Archfiend of Lightning
 local s,id=GetID()
 function s.initial_effect(c)
 	--maintain

@@ -2,7 +2,7 @@
 --Geargia Change
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon 2 or more "Geargiano" monsters with different names from your RP and Xyz Summon 1 Xyz Monster using the Summoned monsters
+	--Special Summon 2 or more "Geargiano" monsters with different names from your GY and Xyz Summon 1 Xyz Monster using the Summoned monsters
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -26,10 +26,10 @@ function s.rescon(sg,e,tp,mg)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	local mg=Duel.GetMatchingGroup(s.gyspfilter,tp,LOCATION_REST,0,nil,e,tp)
+	local mg=Duel.GetMatchingGroup(s.gyspfilter,tp,LOCATION_GRAVE,0,nil,e,tp)
 	local maxct=math.min(Duel.GetLocationCount(tp,LOCATION_MZONE),mg:GetClassCount(Card.GetCode))
 	if chk==0 then return Duel.IsPlayerCanSpecialSummonCount(tp,2)
-		and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)
+		and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
 		and maxct>=2 and aux.SelectUnselectGroup(mg,e,tp,2,maxct,s.rescon,0) end
 	local sg=aux.SelectUnselectGroup(mg,e,tp,2,maxct,s.rescon,1,tp,HINTMSG_SPSUMMON)
 	Duel.SetTargetCard(sg)
@@ -40,7 +40,7 @@ function s.xyzfilter(c,mg,ct)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local sg=Duel.GetTargetCards(e):Filter(Card.IsCanBeSpecialSummoned,nil,e,0,tp,false,false)
-	if #sg>=2 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
+	if #sg>=2 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if #sg>ft then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)

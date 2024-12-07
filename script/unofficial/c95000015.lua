@@ -1,5 +1,5 @@
 --ペガサス／魔法Ｂ
---Pegasus/Actional B (Doppleganger)
+--Pegasus/Spell B (Doppleganger)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -27,14 +27,14 @@ function s.filter(c,e,tp)
 	if e:GetHandler():IsLocation(LOCATION_HAND) then
 		ft=ft-1
 	end
-	return c:IsActional() and c:CheckActivateEffect(false,false,false)~=nil
+	return c:IsSpell() and c:CheckActivateEffect(false,false,false)~=nil
 		and (ft>0 or c:IsType(TYPE_FIELD))
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(1-tp) and s.filter(chkc,e,tp) end
-	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,0,LOCATION_REST,1,nil,e,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(1-tp) and s.filter(chkc,e,tp) end
+	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,0,LOCATION_GRAVE,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EFFECT)
-	Duel.SelectTarget(tp,s.filter,tp,0,LOCATION_REST,1,1,nil,e,tp)
+	Duel.SelectTarget(tp,s.filter,tp,0,LOCATION_GRAVE,1,1,nil,e,tp)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
@@ -60,13 +60,13 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			local of=Duel.GetFieldCard(1-tp,LOCATION_FZONE,0)
 			if of then Duel.Destroy(of,REASON_RULE) end
 			of=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
-			if of and Duel.Destroy(of,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
+			if of and Duel.Destroy(of,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
 		end
 		Duel.MoveToField(tc,tp,tp,loc,POS_FACEUP,true)
 		Duel.Hint(HINT_CARD,0,tc:GetCode())
 		tc:CreateEffectRelation(te)
 		if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 and not tc:IsHasEffect(EFFECT_REMAIN_FIELD) then
-			tc:CancelToRest(false)
+			tc:CancelToGrave(false)
 		end
 		if co then co(te,tp,eg,ep,ev,re,r,rp,1) end
 		if tg then tg(te,tp,eg,ep,ev,re,r,rp,1) end

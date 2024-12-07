@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0xdf),3)
 	--spsummon condition
 	local e1=Effect.CreateEffect(c)
@@ -34,7 +34,7 @@ function s.initial_effect(c)
 	e4:SetCategory(CATEGORY_ATKCHANGE)
 	e4:SetType(EFFECT_TYPE_IGNITION)
 	e4:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e4:SetRange(LOCATION_REST)
+	e4:SetRange(LOCATION_GRAVE)
 	e4:SetCondition(aux.exccon)
 	e4:SetCost(aux.bfgcost)
 	e4:SetTarget(s.atktg)
@@ -45,10 +45,10 @@ end
 s.listed_series={0xdf}
 s.material_setcode=0xdf
 function s.atkfilter(c)
-	return (c:IsLocation(LOCATION_REST) or c:IsFaceup()) and c:IsRace(RACE_BEASTWARRIOR)
+	return (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup()) and c:IsRace(RACE_BEASTWARRIOR)
 end
 function s.atkval(e,c)
-	return Duel.GetMatchingGroupCount(s.atkfilter,c:GetControler(),LOCATION_REST+LOCATION_REMOVED,LOCATION_REST+LOCATION_REMOVED,nil)*200
+	return Duel.GetMatchingGroupCount(s.atkfilter,c:GetControler(),LOCATION_GRAVE+LOCATION_REMOVED,LOCATION_GRAVE+LOCATION_REMOVED,nil)*200
 end
 function s.atkfilter2(c)
 	return c:IsFaceup() and c:IsType(TYPE_FUSION)

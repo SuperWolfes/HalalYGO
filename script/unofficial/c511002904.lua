@@ -50,9 +50,9 @@ function s.ctop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RaiseEvent(c,511002905,e,REASON_EFFECT,tp,tp,GEARSPRING_COUNTER)
 end
 function s.plcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
+	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
 	e:SetLabel(e:GetHandler():GetCounter(GEARSPRING_COUNTER))
-	Duel.SendtoRest(e:GetHandler(),REASON_COST)
+	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
 end
 function s.pltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

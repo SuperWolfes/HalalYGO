@@ -1,10 +1,10 @@
 -- Ａくま・リリス
--- Diabearical Lipsick
+-- Diabearical Lilith
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
-	-- "Ama Lipsick" + "A.I. Bear Can"
+	c:EnableReviveLimit()
+	-- "Ama Lilith" + "A.I. Bear Can"
 	Fusion.AddProcMix(c,true,true,160428042,160428037)
 	-- Return 1 monster to the hand
 	local e1=Effect.CreateEffect(c)

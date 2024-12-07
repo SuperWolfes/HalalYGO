@@ -1,5 +1,5 @@
 --禁じられた聖杯
---Unliked Chalice
+--Forbidden Chalice
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

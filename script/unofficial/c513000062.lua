@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,4,2)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--equip
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(876330,0))
@@ -50,7 +50,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not c:IsRelateToEffect(e) or c:IsFacedown() then return end
 	if not tc or not tc:IsRelateToEffect(e) or tc:IsFacedown() then
-		Duel.SendtoRest(c,REASON_EFFECT)
+		Duel.SendtoGrave(c,REASON_EFFECT)
 		return
 	end
 	if not Duel.Equip(tp,c,tc,false) then return end
@@ -95,16 +95,16 @@ function s.rmcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRemove,tp,0,LOCATION_REST,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRemove,tp,0,LOCATION_GRAVE,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,0,0)
 end
 function s.rmfilter(c,ty)
 	return c:IsType(ty) and c:IsAbleToRemove()
 end
 function s.rmop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(Card.IsAbleToRemove,tp,0,LOCATION_REST,nil,typ)
+	local g=Duel.GetMatchingGroup(Card.IsAbleToRemove,tp,0,LOCATION_GRAVE,nil,typ)
 	local a=g:IsExists(Card.IsMonster,1,nil)
-	local b=g:IsExists(Card.IsActional,1,nil)
+	local b=g:IsExists(Card.IsSpell,1,nil)
 	local c=g:IsExists(Card.IsTrap,1,nil)
 	local op=3
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(53839837,5))
@@ -130,7 +130,7 @@ function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 	end
 	local type=0
 	if op==0 then type=TYPE_MONSTER
-	elseif op==1 then type=TYPE_ACTIONAL
+	elseif op==1 then type=TYPE_SPELL
 	elseif op==2 then type=TYPE_TRAP end
 	local sg=g:Filter(s.rmfilter,nil,type)
 	Duel.Remove(sg,POS_FACEUP,REASON_EFFECT)
@@ -141,14 +141,14 @@ end
 function s.btcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	local eq=c:GetEquipTarget()
-	if chk==0 then return c:IsDestructable() and c:IsAbleToRestAsCost() end
+	if chk==0 then return c:IsDestructable() and c:IsAbleToGraveAsCost() end
 	Duel.Destroy(c,REASON_COST)
-	Duel.SendtoRest(c,REASON_COST)
+	Duel.SendtoGrave(c,REASON_COST)
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(67441435,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_IGNITION)
-	e1:SetRange(LOCATION_REST)
+	e1:SetRange(LOCATION_GRAVE)
 	e1:SetCost(s.spcost)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
@@ -191,13 +191,13 @@ function s.refcon(e,re,val,r,rp,rc)
 	return val/2
 end
 function s.spcfilter(c)
-	return c:IsMonster() and c:IsAbleToRestAsCost()
+	return c:IsMonster() and c:IsAbleToGraveAsCost()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.spcfilter,tp,LOCATION_HAND,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local sg=Duel.SelectMatchingCard(tp,s.spcfilter,tp,LOCATION_HAND,0,1,1,nil)
-	Duel.SendtoRest(sg,REASON_COST)
+	Duel.SendtoGrave(sg,REASON_COST)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

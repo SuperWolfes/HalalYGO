@@ -1,12 +1,12 @@
 --天威龍－ムーダ・アーダラ
---Tenbree Guardian - Mula Adhara
+--Tenyi Spirit - Mula Adhara
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Synchro Summon procedure: 1 Tuner + 1+ non-Tuner monsters
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
-	--Add 1 Field Actional from your Deck to your hand
+	--Add 1 Field Spell from your Deck to your hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -39,11 +39,11 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function s.thfilter(c)
-	return c:IsFieldActional() and c:IsAbleToHand()
+	return c:IsFieldSpell() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil)
-		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_WYRM),tp,LOCATION_REST|LOCATION_REMOVED,0,2,nil) end
+		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_WYRM),tp,LOCATION_GRAVE|LOCATION_REMOVED,0,2,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)

@@ -2,10 +2,10 @@
 --Frightfur Sheep (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Fusion Summon Procedure
 	Fusion.AddProcMix(c,true,true,98280324,61173621)
-	--Your opponent cannot activate Actional/Trap cards and their effects until the end of the Battle Phase
+	--Your opponent cannot activate Spell/Trap cards and their effects until the end of the Battle Phase
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_QUICK_O)

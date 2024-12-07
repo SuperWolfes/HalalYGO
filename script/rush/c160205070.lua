@@ -24,7 +24,7 @@ function s.stage2(e,tc,tp,sg,chk)
 	end
 end
 function s.matfilter(c)
-	return c:IsLocation(LOCATION_HAND|LOCATION_MZONE) and c:IsAbleToRest()
+	return c:IsLocation(LOCATION_HAND|LOCATION_MZONE) and c:IsAbleToGrave()
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Damage(tp,e:GetLabel(),REASON_EFFECT)

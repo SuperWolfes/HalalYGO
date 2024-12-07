@@ -1,5 +1,5 @@
 --折々の紙神
---Origami Monsterdess
+--Origami Goddess
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)

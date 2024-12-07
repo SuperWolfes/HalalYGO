@@ -1,5 +1,5 @@
 --連合軍
---The A. Fcorees
+--The A. Forces
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -21,7 +21,7 @@ function s.tg(e,c)
 	return c:IsRace(RACE_WARRIOR)
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsRace(RACE_WARRIOR+RACE_MENTOR)
+	return c:IsFaceup() and c:IsRace(RACE_WARRIOR+RACE_SPELLCASTER)
 end
 function s.val(e,c)
 	return Duel.GetMatchingGroupCount(s.filter,c:GetControler(),LOCATION_MZONE,0,nil)*200

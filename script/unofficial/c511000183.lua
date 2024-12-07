@@ -1,9 +1,9 @@
 --Ｎｏ．２３ 冥界の霊騎士ランスロット (Anime)
---Number 23: Lancelot, Miss Knight of the Overworld (Anime)
+--Number 23: Lancelot, Ghost Knight of the Underworld (Anime)
 Duel.LoadCardScript("c66547759.lua")
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Xyz Summon Procedure
 	Xyz.AddProcedure(c,nil,8,2)
 	--Can attack directly

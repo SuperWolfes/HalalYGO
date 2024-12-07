@@ -15,9 +15,9 @@ function s.initial_effect(c)
 	e1:SetTarget(s.thtg)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
-	--Same as above, but if sent to RP by card effect
+	--Same as above, but if sent to GY by card effect
 	local e2=e1:Clone()
-	e2:SetCode(EVENT_TO_REST)
+	e2:SetCode(EVENT_TO_GRAVE)
 	e2:SetCondition(s.thcon)
 	c:RegisterEffect(e2)
 	--Lose 600 ATK during each of your end phases
@@ -39,7 +39,7 @@ function s.thfilter(c)
 	return c:IsAbleToHand() and not c:IsCode(id)
 	and (c:IsCode(CARD_FOSSIL_FUSION) or c:ListsCode(CARD_FOSSIL_FUSION))
 end
-	--If sent to the RP by card effect
+	--If sent to the GY by card effect
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsReason(REASON_EFFECT)
 end

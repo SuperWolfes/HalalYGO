@@ -2,7 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddEquipProcedure(c)
-	--negates Actional&Traps
+	--negates Spell&Traps
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e3:SetRange(LOCATION_SZONE)
@@ -48,7 +48,7 @@ function s.lmop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e3,tp)
 end
 function s.distg(e,c)
-	return c~=e:GetHandler() and c:IsType(TYPE_TRAP+TYPE_ACTIONAL)
+	return c~=e:GetHandler() and c:IsType(TYPE_TRAP+TYPE_SPELL)
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

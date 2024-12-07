@@ -22,9 +22,9 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if e:GetHandler():IsLocation(LOCATION_HAND) then ft=ft-1 end
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and chkc:IsFaceup() end
 	if chk==0 then return ft>0 and Duel.IsExistingTarget(Card.IsFaceup,tp,LOCATION_MZONE,0,1,nil)
-		and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,6205579) end
+		and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,6205579) end
 	local g=Duel.SelectTarget(tp,Card.IsFaceup,tp,LOCATION_MZONE,0,1,1,nil)
-	Duel.SetOperationInfo(0,CATEGORY_EQUIP,nil,1,tp,LOCATION_REST)
+	Duel.SetOperationInfo(0,CATEGORY_EQUIP,nil,1,tp,LOCATION_GRAVE)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
@@ -32,7 +32,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if tc and tc:IsFaceup() and tc:IsRelateToEffect(e) then 
 		Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(12152769,2))
-		local g=Duel.SelectMatchingCard(tp,Card.IsCode,tp,LOCATION_REST,0,1,1,nil,6205579)
+		local g=Duel.SelectMatchingCard(tp,Card.IsCode,tp,LOCATION_GRAVE,0,1,1,nil,6205579)
 		local ec=g:GetFirst()
 		if ec then
 			Duel.HintSelection(g)

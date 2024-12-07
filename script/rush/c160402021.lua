@@ -23,13 +23,13 @@ function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeck(tp,2) and Duel.IsPlayerCanDiscardDeck(1-tp,2) end
 end
 function s.filter(c)
-	return c:IsMonster() and c:IsLocation(LOCATION_REST)
+	return c:IsMonster() and c:IsLocation(LOCATION_GRAVE)
 end
 function s.posfilter(c)
 	return c:IsAttackPos() and c:IsCanChangePositionRush()
 end
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_EQUIP) and c:IsActional()
+	return c:IsFaceup() and c:IsType(TYPE_EQUIP) and c:IsSpell()
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.DiscardDeck(tp,2,REASON_EFFECT)

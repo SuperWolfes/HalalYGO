@@ -49,7 +49,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local sc=g:GetFirst()
 	if sc and Duel.SpecialSummon(sc,0,tp,tp,false,false,POS_FACEUP)~=0 then
 		if c:IsRelateToEffect(e) then
-			c:CancelToRest()
+			c:CancelToGrave()
 			Duel.Overlay(sc,c)
 		end
 		local fid=c:GetFieldID()
@@ -74,5 +74,5 @@ function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 	else return true end
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SendtoRest(e:GetLabelObject(),REASON_EFFECT)
+	Duel.SendtoGrave(e:GetLabelObject(),REASON_EFFECT)
 end

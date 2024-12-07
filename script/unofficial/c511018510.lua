@@ -1,5 +1,5 @@
 --ＲＵＭ－光波追撃
---Rank-Up-Ment Cipher Pursuit
+--Rank-Up-Magic Cipher Pursuit
 --cleaned up by MLD
 local s,id=GetID()
 function s.initial_effect(c)

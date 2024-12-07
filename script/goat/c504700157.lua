@@ -12,15 +12,15 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.listed_names={CARD_FLYBIE_LADY,CARD_FLYBIE_LADY_SISTERS}
+s.listed_names={CARD_HARPIE_LADY,CARD_HARPIE_LADY_SISTERS}
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsCode(CARD_FLYBIE_LADY)
+	return c:IsFaceup() and c:IsCode(CARD_HARPIE_LADY)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil)
 end
 function s.filter(c,e,tp)
-	return c:IsCode(CARD_FLYBIE_LADY,CARD_FLYBIE_LADY_SISTERS) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
+	return c:IsCode(CARD_HARPIE_LADY,CARD_HARPIE_LADY_SISTERS) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 end

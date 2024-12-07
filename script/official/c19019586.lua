@@ -33,7 +33,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.cfilter(c)
-	return c:IsType(TYPE_NORMAL) and c:IsAbleToRestAsCost()
+	return c:IsType(TYPE_NORMAL) and c:IsAbleToGraveAsCost()
 end
 function s.defcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -42,9 +42,9 @@ end
 function s.defcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():GetFlagEffect(id)==0
 		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND,0,1,1,nil)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 	e:GetHandler():RegisterFlagEffect(id,RESET_PHASE+PHASE_DAMAGE_CAL,0,1)
 end
 function s.defop(e,tp,eg,ep,ev,re,r,rp)

@@ -2,7 +2,7 @@
 --fixed by MLD
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,511003050,s.ffilter)
 	--multiattack
 	local e1=Effect.CreateEffect(c)

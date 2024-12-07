@@ -2,7 +2,7 @@
 --Reptilianne Vaskii
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	c:SetUniqueOnField(1,1,id)
 	--cannot special summon
 	local e1=Effect.CreateEffect(c)

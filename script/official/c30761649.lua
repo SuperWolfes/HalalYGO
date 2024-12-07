@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	e2:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
 	e2:SetValue(aux.tgoval)
 	c:RegisterEffect(e2)
-	--Attach 1 monster your opponent controls to 1 Xyz Monster you Special Summoned with a "Rank-Up-Ment" Actional's effect
+	--Attach 1 monster your opponent controls to 1 Xyz Monster you Special Summoned with a "Rank-Up-Magic" Spell's effect
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
@@ -36,14 +36,14 @@ function s.initial_effect(c)
 	e3:SetOperation(s.attachop)
 	c:RegisterEffect(e3)
 end
-s.listed_series={SET_BARIANS,SET_NUMBER,SET_CXYZ,SET_NUMBER_C,SET_RANK_UP_MENT}
+s.listed_series={SET_BARIANS,SET_NUMBER,SET_CXYZ,SET_NUMBER_C,SET_RANK_UP_MAGIC}
 function s.protectiontg(e,c)
 	local no=c.xyz_number
 	return ((c:IsSetCard(SET_NUMBER) and no and no>=101 and no<=107) or c:IsSetCard({SET_CXYZ,SET_NUMBER_C})) and c:IsFaceup()
 end
 function s.attachconfilter(c,tp,re)
-	return c:IsType(TYPE_XYZ) and c:IsFaceup() and c:IsLocation(LOCATION_MZONE) and c:IsSummonPlayer(tp) and re and re:IsActionalEffect()
-		and re:GetHandler():IsSetCard(SET_RANK_UP_MENT)
+	return c:IsType(TYPE_XYZ) and c:IsFaceup() and c:IsLocation(LOCATION_MZONE) and c:IsSummonPlayer(tp) and re and re:IsSpellEffect()
+		and re:GetHandler():IsSetCard(SET_RANK_UP_MAGIC)
 end
 function s.attachcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.attachconfilter,1,nil,tp,re)

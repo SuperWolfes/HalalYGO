@@ -1,5 +1,5 @@
 --魔力の布施
---Mentoral Alms
+--Magical Alms
 local s,id=GetID()
 function s.initial_effect(c)
 	--activation
@@ -76,7 +76,7 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Damage(Duel.GetTurnPlayer(),e:GetLabel()*1000,REASON_EFFECT)
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
-	if re:IsActiveType(TYPE_ACTIONAL) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and rp==Duel.GetTurnPlayer() then
+	if re:IsActiveType(TYPE_SPELL) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and rp==Duel.GetTurnPlayer() then
 		local i=e:GetLabel()
 		e:SetLabel(i+1)
 	end

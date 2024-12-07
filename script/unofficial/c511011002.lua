@@ -23,7 +23,7 @@ function s.initial_effect(c)
 end
 s.listed_names={100000370,111215001}
 function s.cfilter(c,tp)
-	return c:IsLocation(LOCATION_REST) and c:IsReason(REASON_DESTROY) and c:IsPreviousControler(tp)
+	return c:IsLocation(LOCATION_GRAVE) and c:IsReason(REASON_DESTROY) and c:IsPreviousControler(tp)
 		and c:GetFlagEffectLabel(id) and c:GetFlagEffectLabel(id)>0
 end
 function s.filter(c)
@@ -69,7 +69,7 @@ end
 function s.checkop(e,tp,eg,ep,ev,re,r,rp)
 	local g=eg:Filter(Card.IsCode,nil,100000370)
 	for tc in aux.Next(g) do
-		tc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD-RESET_LEAVE-RESET_TOREST,0,1,tc:GetCounter(0x95))
+		tc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD-RESET_LEAVE-RESET_TOGRAVE,0,1,tc:GetCounter(0x95))
 	end
 	if re then
 		Duel.RaiseEvent(g,EVENT_CUSTOM+id,re,r,rp,ep,ev)

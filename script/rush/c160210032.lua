@@ -37,5 +37,5 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return rp==1-tp and re:IsActionalEffect() and re:IsHasType(EFFECT_TYPE_ACTIVATE)
+	return rp==1-tp and re:IsSpellEffect() and re:IsHasType(EFFECT_TYPE_ACTIVATE)
 end

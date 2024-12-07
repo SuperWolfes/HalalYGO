@@ -15,11 +15,11 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Mismatching replacement for "Photon" or "Galaxy" monsters
+	--Destruction replacement for "Photon" or "Galaxy" monsters
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EFFECT_DESTROY_REPLACE)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetTarget(s.reptg)
 	e2:SetValue(s.repval)
 	e2:SetOperation(s.repop)
@@ -30,7 +30,7 @@ s.listed_series={SET_PHOTON,SET_GALAXY}
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsDiscardable() end
-	Duel.SendtoRest(c,REASON_COST+REASON_DISCARD)
+	Duel.SendtoGrave(c,REASON_COST+REASON_DISCARD)
 	c:RegisterFlagEffect(id,RESET_EVENT|RESETS_STANDARD|RESET_CHAIN,0,1)
 end
 function s.spfilter(c,e,tp)
@@ -55,7 +55,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.BreakEffect()
 		local c=e:GetHandler()
 		local xg=Duel.GetMatchingGroup(s.matfilter,tp,LOCATION_MZONE,LOCATION_MZONE,nil,e)
-		if Duel.ChangeAttackTarget(g:GetFirst()) and c:HasFlagEffect(id) and c:IsLocation(LOCATION_REST) and aux.nvfilter(c)
+		if Duel.ChangeAttackTarget(g:GetFirst()) and c:HasFlagEffect(id) and c:IsLocation(LOCATION_GRAVE) and aux.nvfilter(c)
 			and #xg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			Duel.BreakEffect()
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)

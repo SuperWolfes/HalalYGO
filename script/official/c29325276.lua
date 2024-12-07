@@ -3,7 +3,7 @@
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Synchro Summon procedure: 1 Tuner + 1+ non-Tuner monsters
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	--Special Summon 1 face-up Pendulum Monster from your Extra Deck
@@ -17,12 +17,12 @@ function s.initial_effect(c)
 	e1:SetTarget(s.pendsptg)
 	e1:SetOperation(s.pendspop)
 	c:RegisterEffect(e1)
-	--Special Summon this card from your RP
+	--Special Summon this card from your GY
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCountLimit(1,id)
 	e2:SetCost(s.selfspcost)
 	e2:SetTarget(s.selfsptg)
@@ -69,9 +69,9 @@ end
 function s.selfspcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(1)
 	local c=e:GetHandler()
-	if chk==0 then return Duel.IsExistingMatchingCard(s.selfspcostfilter,tp,LOCATION_REST|LOCATION_MZONE,0,2,c,tp) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.selfspcostfilter,tp,LOCATION_GRAVE|LOCATION_MZONE,0,2,c,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.selfspcostfilter,tp,LOCATION_REST|LOCATION_MZONE,0,2,2,c,tp)
+	local g=Duel.SelectMatchingCard(tp,s.selfspcostfilter,tp,LOCATION_GRAVE|LOCATION_MZONE,0,2,2,c,tp)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.selfsptg(e,tp,eg,ep,ev,re,r,rp,chk)

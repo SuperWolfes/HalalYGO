@@ -7,7 +7,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_REDEYES_B_DRAGON,CARD_SUMMONED_SKULL,64271667}
 function s.matfilter(c)
-	return c:IsLocation(LOCATION_HAND|LOCATION_MZONE) and c:IsAbleToRest()
+	return c:IsLocation(LOCATION_HAND|LOCATION_MZONE) and c:IsAbleToGrave()
 end
 function s.checkmat(tp,sg,fc)
 	return sg:IsExists(Card.IsSummonCode,1,nil,fc,SUMMON_TYPE_FUSION,tp,CARD_REDEYES_B_DRAGON,CARD_SUMMONED_SKULL,64271667)

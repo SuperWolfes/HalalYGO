@@ -1,5 +1,5 @@
 --ヴィサス＝サンサーラ
---Visas Sam
+--Visas Samsara
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e1:SetCode(EFFECT_CHANGE_CODE)
-	e1:SetRange(LOCATION_MZONE|LOCATION_REST)
+	e1:SetRange(LOCATION_MZONE|LOCATION_GRAVE)
 	e1:SetValue(CARD_VISAS_STARFROST)
 	c:RegisterEffect(e1)
 	--Special Summon itself from the hand
@@ -36,7 +36,7 @@ function s.tdfilter(c,tp)
 	return c:IsFaceup() and c:IsSetCard(SET_VISAS) and c:IsMonster() and c:IsAbleToDeck() and Duel.GetMZoneCount(tp,c)>0
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	local loc=LOCATION_MZONE|LOCATION_REMOVED|LOCATION_REST
+	local loc=LOCATION_MZONE|LOCATION_REMOVED|LOCATION_GRAVE
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(loc) and s.tdfilter(chkc,tp) end
 	local c=e:GetHandler()
 	if chk==0 then return c:IsCanBeSpecialSummoned(e,0,tp,false,false)

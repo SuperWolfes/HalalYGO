@@ -1,5 +1,5 @@
 --摩頂の武士
---Guardian Summit Warrior
+--Spirit Summit Warrior
 local s,id=GetID()
 function s.initial_effect(c)
 	--Summon 1 Level 3 or lower Warrior-type monster 

@@ -1,10 +1,10 @@
 --キュウドウ魂 ＨＡＮ－ＳＨＩ
---Han-Shi Kyudo Guardian
+--Han-Shi Kyudo Spirit
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
 	Pendulum.AddProcedure(c)
-	Guardian.AddProcedure(c,EVENT_SUMMON_SUCCESS,EVENT_FLIP)
+	Spirit.AddProcedure(c,EVENT_SUMMON_SUCCESS,EVENT_FLIP)
 	--Return this card from the Pendulum Zone
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

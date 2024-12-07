@@ -1,5 +1,5 @@
 --時の魔術師
---Time Chemist
+--Time Wizard
 local s,id=GetID()
 function s.initial_effect(c)
 	--destroy

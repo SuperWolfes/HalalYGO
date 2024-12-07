@@ -16,7 +16,7 @@ function s.cfilter(c,tpe)
 	return c:IsFaceup() and c:GetType()&tpe==tpe and c:IsAbleToRemoveAsCost()
 end
 function s.rescon(sg,e,tp,mg)
-	return aux.ChkfMMZ(1)(sg,e,tp,mg) and sg:IsExists(s.chk,1,nil,sg,Group.CreateGroup(),TYPE_MONSTER,TYPE_ACTIONAL+TYPE_CONTINUOUS,TYPE_TRAP+TYPE_CONTINUOUS)
+	return aux.ChkfMMZ(1)(sg,e,tp,mg) and sg:IsExists(s.chk,1,nil,sg,Group.CreateGroup(),TYPE_MONSTER,TYPE_SPELL+TYPE_CONTINUOUS,TYPE_TRAP+TYPE_CONTINUOUS)
 end
 function s.chk(c,sg,g,tpe,...)
 	if c:GetType()&tpe~=tpe then return false end
@@ -32,7 +32,7 @@ function s.chk(c,sg,g,tpe,...)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g1=Duel.GetMatchingGroup(Card.IsAbleToRemoveAsCost,tp,LOCATION_MZONE,0,nil)
-	local g2=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_ONFIELD,0,nil,TYPE_ACTIONAL+TYPE_CONTINUOUS)
+	local g2=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_ONFIELD,0,nil,TYPE_SPELL+TYPE_CONTINUOUS)
 	local g3=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_ONFIELD,0,nil,TYPE_TRAP+TYPE_CONTINUOUS)
 	local g=g1:Clone()
 	g:Merge(g2)

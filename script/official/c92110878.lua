@@ -3,7 +3,7 @@
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
-	--Search 1 "Shining Sarcophagus", or 1 Actional/Trap that mentions it
+	--Search 1 "Shining Sarcophagus", or 1 Spell/Trap that mentions it
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -26,12 +26,12 @@ function s.initial_effect(c)
 	e3:SetCountLimit(1,{id,1})
 	e3:SetCondition(function(e) return e:GetHandler():IsReason(REASON_BATTLE|REASON_EFFECT) end)
 	e3:SetTarget(s.settg)
-	e3:SetOperation(s.vetop)
+	e3:SetOperation(s.setop)
 	c:RegisterEffect(e3)
 end
 s.listed_names={CARD_SHINING_SARCOPHAGUS,27157727} --Stronghold the Hidden Fortress
 function s.thfilter(c)
-	return (c:IsCode(CARD_SHINING_SARCOPHAGUS) or (c:IsActionalTrap() and c:ListsCode(CARD_SHINING_SARCOPHAGUS))) and c:IsAbleToHand()
+	return (c:IsCode(CARD_SHINING_SARCOPHAGUS) or (c:IsSpellTrap() and c:ListsCode(CARD_SHINING_SARCOPHAGUS))) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -51,7 +51,7 @@ end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_DECK,0,1,nil) end
 end
-function s.vetop(e,tp,eg,ep,ev,re,r,rp)
+function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 	local g=Duel.SelectMatchingCard(tp,s.setfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then

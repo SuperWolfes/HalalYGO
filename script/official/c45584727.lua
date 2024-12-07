@@ -1,10 +1,10 @@
 --ワルキューレの抱擁
---Balkanie's Embrace
+--Valkyrie's Embrace
 --Scripted by Naim
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Change 1 of your "Balkanie" monsters to defense position, banish 1 of opponent's monsters
+	--Change 1 of your "Valkyrie" monsters to defense position, banish 1 of opponent's monsters
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_POSITION+CATEGORY_REMOVE)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)

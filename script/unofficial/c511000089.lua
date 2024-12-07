@@ -2,7 +2,7 @@
 --Royal Straight Slasher (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--spsummon limit
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -26,19 +26,19 @@ function s.splimit(e,se,sp,st)
 	return se:GetHandler():IsCode(58415502)
 end
 function s.desfilter1(c)
-	return c:IsMonster() and c:GetLevel()==1 and c:IsAbleToRest()
+	return c:IsMonster() and c:GetLevel()==1 and c:IsAbleToGrave()
 end
 function s.desfilter2(c)
-	return c:IsMonster() and c:GetLevel()==2 and c:IsAbleToRest()
+	return c:IsMonster() and c:GetLevel()==2 and c:IsAbleToGrave()
 end
 function s.desfilter3(c)
-	return c:IsMonster() and c:GetLevel()==3 and c:IsAbleToRest()
+	return c:IsMonster() and c:GetLevel()==3 and c:IsAbleToGrave()
 end
 function s.desfilter4(c)
-	return c:IsMonster() and c:GetLevel()==4 and c:IsAbleToRest()
+	return c:IsMonster() and c:GetLevel()==4 and c:IsAbleToGrave()
 end
 function s.desfilter5(c)
-	return c:IsMonster() and c:GetLevel()==5 and c:IsAbleToRest()
+	return c:IsMonster() and c:GetLevel()==5 and c:IsAbleToGrave()
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.desfilter1,tp,LOCATION_DECK,0,1,nil)
@@ -47,7 +47,7 @@ function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 		and Duel.IsExistingMatchingCard(s.desfilter4,tp,LOCATION_DECK,0,1,nil)
 		and Duel.IsExistingMatchingCard(s.desfilter5,tp,LOCATION_DECK,0,1,nil)
 	end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g1=Duel.SelectMatchingCard(tp,s.desfilter1,tp,LOCATION_DECK,0,1,1,nil)
 	local g2=Duel.SelectMatchingCard(tp,s.desfilter2,tp,LOCATION_DECK,0,1,1,nil)
 	local g3=Duel.SelectMatchingCard(tp,s.desfilter3,tp,LOCATION_DECK,0,1,1,nil)
@@ -58,7 +58,7 @@ function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	g1:Merge(g4)
 	g1:Merge(g5)
 	if #g1==5 then
-		Duel.SendtoRest(g1,REASON_COST)
+		Duel.SendtoGrave(g1,REASON_COST)
 	end
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)

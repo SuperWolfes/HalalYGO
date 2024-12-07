@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Fusion Summon procedure
 	Fusion.AddProcMix(c,true,true,s.matfilter(TYPE_FUSION),s.matfilter(TYPE_SYNCHRO))
 	--Must be Fusion Summoned
@@ -49,7 +49,7 @@ function s.initial_effect(c)
 end
 s.listed_series={SET_EARTHBOUND}
 s.material_setcode=SET_EARTHBOUND
-s.pulse_synchro_fusion=true
+s.miracle_synchro_fusion=true
 function s.matfilter(ty)
 	return function(c,fc,sumtype,tp)
 				return c:IsType(ty,fc,sumtype,tp) and c:IsSetCard(SET_EARTHBOUND,fc,sumtype,tp)

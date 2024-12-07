@@ -1,5 +1,5 @@
 --幻銃士
---Illusion Skyblaster
+--Phantom Skyblaster
 local s,id=GetID()
 function s.initial_effect(c)
 	--Special Summon tokens
@@ -46,7 +46,7 @@ function s.checkop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0x49,TYPES_TOKEN,500,500,4,RACE_TAINTED,ATTRIBUTE_DARK) end
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0x49,TYPES_TOKEN,500,500,4,RACE_FIEND,ATTRIBUTE_DARK) end
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,0)
 end
@@ -55,8 +55,8 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)
 	if ft>ct then ft=ct end
 	if ft<=0 then return end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
-	if not Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0x49,TYPES_TOKEN,500,500,4,RACE_TAINTED,ATTRIBUTE_DARK) then return end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if not Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0x49,TYPES_TOKEN,500,500,4,RACE_FIEND,ATTRIBUTE_DARK) then return end
 	local ctn=true
 	while ft>0 and ctn do
 		local token=Duel.CreateToken(tp,id+1)

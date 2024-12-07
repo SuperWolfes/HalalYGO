@@ -1,4 +1,4 @@
---Clean Arrow
+--Sacred Arrow
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -36,7 +36,7 @@ function s.initial_effect(c)
 	end)
 end
 function s.chkfilter(c,tp)
-	return c:IsMonster() and c:IsPreviousLocation(LOCATION_MZONE) and c:IsLocation(LOCATION_REST) 
+	return c:IsMonster() and c:IsPreviousLocation(LOCATION_MZONE) and c:IsLocation(LOCATION_GRAVE) 
 		and c:IsPreviousControler(tp)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)

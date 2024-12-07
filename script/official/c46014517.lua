@@ -3,7 +3,7 @@
 --scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Xyz Summon procedure: 2+ Level 6 monsters
 	Xyz.AddProcedure(c,nil,6,2,nil,nil,99)
 	--Attach face-up monsters your opponent controls up to the number of "Goblin" monsters you control to this card
@@ -16,10 +16,10 @@ function s.initial_effect(c)
 	e1:SetTarget(s.attachtg)
 	e1:SetOperation(s.attachop)
 	c:RegisterEffect(e1)
-	--Send cards your opponent controls up to the number of "Goblin" Xyz Monsters you control to the RP
+	--Send cards your opponent controls up to the number of "Goblin" Xyz Monsters you control to the GY
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_TOREST)
+	e2:SetCategory(CATEGORY_TOGRAVE)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetCode(EVENT_FREE_CHAIN)
@@ -54,18 +54,18 @@ function s.tgctfilter(c)
 	return c:IsSetCard(SET_GOBLIN) and c:IsType(TYPE_XYZ) and c:IsFaceup()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsOnField() and chkc:IsControler(1-tp) and chkc:IsAbleToRest() end
+	if chkc then return chkc:IsOnField() and chkc:IsControler(1-tp) and chkc:IsAbleToGrave() end
 	local ct=Duel.GetMatchingGroupCount(s.tgctfilter,tp,LOCATION_MZONE,0,nil)
 	if chk==0 then return ct>0 and Duel.CheckRemoveOverlayCard(tp,1,0,3,REASON_EFFECT)
-		and Duel.IsExistingTarget(Card.IsAbleToRest,tp,0,LOCATION_ONFIELD,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-	local g=Duel.SelectTarget(tp,Card.IsAbleToRest,tp,0,LOCATION_ONFIELD,1,ct,nil)
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,g,#g,tp,0)
+		and Duel.IsExistingTarget(Card.IsAbleToGrave,tp,0,LOCATION_ONFIELD,1,nil) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	local g=Duel.SelectTarget(tp,Card.IsAbleToGrave,tp,0,LOCATION_ONFIELD,1,ct,nil)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,g,#g,tp,0)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.RemoveOverlayCard(tp,1,0,3,3,REASON_EFFECT)~=3 then return end
 	local tg=Duel.GetTargetCards(e)
 	if #tg>0 then
-		Duel.SendtoRest(tg,REASON_EFFECT)
+		Duel.SendtoGrave(tg,REASON_EFFECT)
 	end
 end

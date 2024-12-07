@@ -1,4 +1,4 @@
---Actionalbook Inside the Pot
+--Spellbook Inside the Pot
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

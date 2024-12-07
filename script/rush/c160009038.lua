@@ -3,8 +3,8 @@
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
-	--"Constructor Warrior Shovelon" + "Picklon the Constructor Wanderer"
+	c:EnableReviveLimit()
+	--"Constructor Warrior Shovelon" + "Picklon the Constructor Fairy"
 	Fusion.AddProcMix(c,true,true,160004002,160004025)
 	--Increase ATK
 	local e1=Effect.CreateEffect(c)
@@ -22,7 +22,7 @@ function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeckAsCost(tp,1) end
 end
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_FIELD) and c:IsActional()
+	return c:IsFaceup() and c:IsType(TYPE_FIELD) and c:IsSpell()
 end
 function s.thfilter(c,e,tp)
 	return c:IsCode(160004042,160203030) and c:IsAbleToHand()
@@ -41,10 +41,10 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetValue(200)
 	c:RegisterEffect(e1)
 	if not Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,0,1,nil)
-		and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil)
+		and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-		local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
+		local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 		if #g>0 then
 			Duel.BreakEffect()
 			Duel.SendtoHand(g,nil,REASON_EFFECT)

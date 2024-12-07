@@ -1,5 +1,5 @@
 --ミラクル・ファイヤー
---Pulse Fire
+--Miracle Fire
 local s,id=GetID()
 function s.initial_effect(c)
 	--Apply the effect of an Action card activated this turn
@@ -29,11 +29,11 @@ function s.filter(c)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return s.filter(chkc) end
-	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,LOCATION_REST,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,nil) end
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local tg=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_REST,LOCATION_REST,1,1,nil)
+	local tg=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,1,nil)
 	if not tg then return end
 	Duel.HintSelection(tg,true)
 	local te=tg:GetFirst():GetActivateEffect()

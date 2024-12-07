@@ -1,9 +1,9 @@
 --ＣＮｏ．３２ 海咬龍シャーク・ドレイク・リバイス
---Number C32: Shark Drake Eel
+--Number C32: Shark Drake Leviathan
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Xyz Summon Procedure: 4 Level 5 monsters
 	Xyz.AddProcedure(c,nil,5,4,s.altmatfilter,aux.Stringid(id,0),4,s.xyzop)
 	--Negate the effects of an Effect Monster your opponent controls and change its ATK/DEF to 0
@@ -39,13 +39,13 @@ function s.altmatfilter(c,tp,xyzc)
 	return c:IsRank(4) and c:IsSetCard(SET_SHARK_DRAKE,xyzc,SUMMON_TYPE_XYZ,tp) and c:IsType(TYPE_XYZ,xyzc,SUMMON_TYPE_XYZ,tp) and c:IsFaceup()
 end
 function s.altproccostfilter(c)
-	return c:IsActional() and c:IsDiscardable()
+	return c:IsSpell() and c:IsDiscardable()
 end
 function s.xyzop(e,tp,chk,mc)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.altproccostfilter,tp,LOCATION_HAND,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 	local sc=Duel.GetMatchingGroup(s.altproccostfilter,tp,LOCATION_HAND,0,nil):SelectUnselect(Group.CreateGroup(),tp,false,Xyz.ProcCancellable)
-	return sc and Duel.SendtoRest(sc,REASON_DISCARD|REASON_COST)>0
+	return sc and Duel.SendtoGrave(sc,REASON_DISCARD|REASON_COST)>0
 end
 function s.disfilter(c)
 	return c:IsNegatableMonster() and c:IsType(TYPE_EFFECT)

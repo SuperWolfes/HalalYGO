@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion Material
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,s.ffilter1,s.ffilter2)
 	--Special Summon Condition
 	local e1=Effect.CreateEffect(c)
@@ -26,10 +26,10 @@ function s.splimit(e,se,sp,st)
 	return se:GetHandler():IsCode(CARD_FOSSIL_FUSION)
 end
 function s.ffilter1(c,fc,sumtype,tp)
-	return c:IsRace(RACE_ROCK,fc,sumtype,tp) and c:IsLocation(LOCATION_REST) and c:IsControler(tp)
+	return c:IsRace(RACE_ROCK,fc,sumtype,tp) and c:IsLocation(LOCATION_GRAVE) and c:IsControler(tp)
 end
 function s.ffilter2(c,fc,sumtype,tp)
-	return (c:IsLevel(5) or c:IsLevel(6)) and c:IsLocation(LOCATION_REST) and c:IsControler(1-tp)
+	return (c:IsLevel(5) or c:IsLevel(6)) and c:IsLocation(LOCATION_GRAVE) and c:IsControler(1-tp)
 end
 function s.atcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler()==Duel.GetAttacker() and e:GetHandler():CanChainAttack()

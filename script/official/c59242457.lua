@@ -1,9 +1,9 @@
 -- エクソシスターズ・マニフィカ
--- Insisters Magnifica
+-- Exosisters Magnifica
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	-- 2 Rank 4 "Exorsister" Xyz Monsters
 	Xyz.AddProcedure(c,s.xyzfilter,nil,2,nil,nil,nil,nil,false)
 	-- Must be Xyz Summoned using the correct materials

@@ -26,7 +26,7 @@ function s.checkeq(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.retcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsLocation(LOCATION_REST) and c:IsReason(REASON_DESTROY) and c:GetEquipTarget()~=nil
+	return c:IsLocation(LOCATION_GRAVE) and c:IsReason(REASON_DESTROY) and c:GetEquipTarget()~=nil
 end
 function s.rettg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsAbleToHand() end

@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	e2:SetCode(EVENT_SUMMON_SUCCESS)
 	e2:SetOperation(s.effop)
 	c:RegisterEffect(e2)
-	--Place up to 2 "ARG☆S" Continuous Traps with different names from your hand and/or Deck face-up in your Actional & Trap Zone
+	--Place up to 2 "ARG☆S" Continuous Traps with different names from your hand and/or Deck face-up in your Spell & Trap Zone
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetType(EFFECT_TYPE_IGNITION)
@@ -74,7 +74,7 @@ function s.actop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.plfilter(c)
-	return c:IsSetCard(SET_ARGOSTARS) and c:IsContinuousTrap() and not c:IsUnliked()
+	return c:IsSetCard(SET_ARGOSTARS) and c:IsContinuousTrap() and not c:IsForbidden()
 end
 function s.pltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0

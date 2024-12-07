@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Grant effects to 1 monster you control with "Exdude" in its original name
+	--Grant effects to 1 monster you control with "Exodia" in its original name
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -13,9 +13,9 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.listed_series={SET_EXDUDE,SET_UNLIKED_ONE}
+s.listed_series={SET_EXODIA,SET_FORBIDDEN_ONE}
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsLevelAbove(10) and c:IsOriginalSetCard(SET_EXDUDE) and not c:HasFlagEffect(id)
+	return c:IsFaceup() and c:IsLevelAbove(10) and c:IsOriginalSetCard(SET_EXODIA) and not c:HasFlagEffect(id)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil) end
@@ -27,7 +27,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.HintSelection(tc,true)
 		local c=e:GetHandler()
 		tc:RegisterFlagEffect(id,RESET_EVENT|RESETS_STANDARD,EFFECT_FLAG_CLIENT_HINT,1,0,aux.Stringid(id,1))
-		--Destroy cards in the Actional/Trap Zone and equip 5 "Unliked One" monsters to this card
+		--Destroy cards in the Spell/Trap Zone and equip 5 "Forbidden One" monsters to this card
 		local e1=Effect.CreateEffect(tc)
 		e1:SetDescription(aux.Stringid(id,2))
 		e1:SetCategory(CATEGORY_DESTROY+CATEGORY_EQUIP)
@@ -51,7 +51,7 @@ function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.PayLPCost(tp,Duel.GetLP(tp)//2)
 end
 function s.eqfilter(c,tp)
-	return c:IsSetCard(SET_UNLIKED_ONE) and c:IsMonster() and c:CheckUniqueOnField(tp) and not c:IsUnliked()
+	return c:IsSetCard(SET_FORBIDDEN_ONE) and c:IsMonster() and c:CheckUniqueOnField(tp) and not c:IsForbidden()
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(nil,tp,LOCATION_STZONE,LOCATION_STZONE,1,nil)

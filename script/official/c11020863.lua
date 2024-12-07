@@ -3,7 +3,7 @@
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	-- Must be Special Summoned by "Royal Straight"
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	-- Destroy all opponent cards
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
-	e2:SetCategory(CATEGORY_TOREST+CATEGORY_DESTROY)
+	e2:SetCategory(CATEGORY_TOGRAVE+CATEGORY_DESTROY)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCountLimit(1,id)
@@ -35,12 +35,12 @@ function s.initial_effect(c)
 end
 s.listed_names={58415502,CARD_JACK_KNIGHT,CARD_QUEEN_KNIGHT,CARD_KING_KNIGHT}
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,CARD_JACK_KNIGHT)
-		and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,CARD_QUEEN_KNIGHT)
-		and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,CARD_KING_KNIGHT)
+	return Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,CARD_JACK_KNIGHT)
+		and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,CARD_QUEEN_KNIGHT)
+		and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,CARD_KING_KNIGHT)
 end
 function s.tgfilter(c)
-	return c:IsMonster() and c:IsLevelAbove(1) and c:IsLevelBelow(5) and c:IsAbleToRest()
+	return c:IsMonster() and c:IsLevelAbove(1) and c:IsLevelBelow(5) and c:IsAbleToGrave()
 end
 function s.tgrescon(sg)
 	local res=#sg==sg:GetClassCount(Card.GetLevel)
@@ -53,14 +53,14 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 		local tg=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_HAND+LOCATION_DECK,0,nil)
 		return #tg>4 and aux.SelectUnselectGroup(tg,e,tp,5,5,s.tgrescon,0)
 	end
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,5,tp,LOCATION_HAND+LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,5,tp,LOCATION_HAND+LOCATION_DECK)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,dg,#dg,0,0)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_HAND+LOCATION_DECK,0,nil)
 	if #g<5 then return end
-	local tg=aux.SelectUnselectGroup(g,e,tp,5,5,s.tgrescon,1,tp,HINTMSG_TOREST)
-	if #tg==5 and Duel.SendtoRest(tg,REASON_EFFECT)>0 then
+	local tg=aux.SelectUnselectGroup(g,e,tp,5,5,s.tgrescon,1,tp,HINTMSG_TOGRAVE)
+	if #tg==5 and Duel.SendtoGrave(tg,REASON_EFFECT)>0 then
 		local dg=Duel.GetMatchingGroup(nil,tp,0,LOCATION_ONFIELD,nil)
 		if #dg<1 then return end
 		Duel.Destroy(dg,REASON_EFFECT)
@@ -71,17 +71,17 @@ function s.spfilter(c,e,tp)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp) end
 	local ft=math.min(3,Duel.GetLocationCount(tp,LOCATION_MZONE))
-	if chk==0 then return ft>0 and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp) end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
+	if chk==0 then return ft>0 and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_REST,0,1,ft,nil,e,tp)
+	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,ft,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,#g,0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetTargetCards(e)
-	if #g>0 and (#g<2 or not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)) then
+	if #g>0 and (#g<2 or not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)) then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end
 end

@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Xyz.AddProcedure(c,nil,3,2,nil,nil,7)
 	--Change effect
 	local e1=Effect.CreateEffect(c)

@@ -36,7 +36,7 @@ s.listed_series={SET_AROMA}
 function s.reccost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsDiscardable() end
-	Duel.SendtoRest(c,REASON_COST|REASON_DISCARD)
+	Duel.SendtoGrave(c,REASON_COST|REASON_DISCARD)
 end
 function s.recfilter(c)
 	return c:IsSetCard(SET_AROMA) and c:IsFaceup() and c:GetAttack()>0

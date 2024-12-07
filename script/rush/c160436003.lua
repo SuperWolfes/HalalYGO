@@ -3,7 +3,7 @@
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Fusion Summon Procedure
 	Fusion.AddProcMixN(c,true,true,CARD_TAMABOT,2)
 	--Draw and gain ATK

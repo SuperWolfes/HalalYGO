@@ -3,7 +3,7 @@
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	--Negate the activation of a Actional/Trap Card, or monster effect, and destroy that card
+	--Negate the activation of a Spell/Trap Card, or monster effect, and destroy that card
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_NEGATE+CATEGORY_DESTROY)
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_TODECK+CATEGORY_DRAW)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_FREE_CHAIN)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetHintTiming(0,TIMING_STANDBY_PHASE|TIMING_MAIN_END|TIMINGS_CHECK_MONSTER_E)
 	e2:SetCountLimit(1,id)
 	e2:SetCost(aux.SelfBanishCost)
@@ -56,15 +56,15 @@ function s.tdfilter(c)
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetCounter(tp,1,0,COUNTER_RESONANCE)>0
-		and Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_EXTRA|LOCATION_REMOVED|LOCATION_REST,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_EXTRA|LOCATION_REMOVED|LOCATION_REST)
+		and Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_EXTRA|LOCATION_REMOVED|LOCATION_GRAVE,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_EXTRA|LOCATION_REMOVED|LOCATION_GRAVE)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
 end
 function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=Duel.GetCounter(tp,1,0,COUNTER_RESONANCE)
 	if ct==0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_EXTRA|LOCATION_REMOVED|LOCATION_REST,0,1,ct,nil)
+	local g=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_EXTRA|LOCATION_REMOVED|LOCATION_GRAVE,0,1,ct,nil)
 	if #g==0 then return end
 	Duel.HintSelection(g)
 	if Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)==0 then return end

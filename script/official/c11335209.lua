@@ -1,24 +1,24 @@
 --ホルスの祝福－ドゥアムテフ
---Duamutef, Blessing of Humus
+--Duamutef, Blessing of Horus
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon itself from the RP if you control "King's Sarcophagus"
+	--Special Summon itself from the GY if you control "King's Sarcophagus"
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_SPSUMMON_PROC)
-	e1:SetRange(LOCATION_REST)
+	e1:SetRange(LOCATION_GRAVE)
 	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
 	e1:SetCondition(s.spcon)
 	c:RegisterEffect(e1)
-	--Gains 1200 ATK/DEF for each "Humus" monster you control
+	--Gains 1200 ATK/DEF for each "Horus" monster you control
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e2:SetCode(EFFECT_UPDATE_ATTACK)
 	e2:SetRange(LOCATION_MZONE)
-	e2:SetValue(function(e,c) return Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsSetCard,SET_HUMUS),c:GetControler(),LOCATION_MZONE,0,nil)*1200 end)
+	e2:SetValue(function(e,c) return Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsSetCard,SET_HORUS),c:GetControler(),LOCATION_MZONE,0,nil)*1200 end)
 	c:RegisterEffect(e2)
 	local e3=e2:Clone()
 	e3:SetCode(EFFECT_UPDATE_DEFENSE)
@@ -38,10 +38,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 s.listed_names={CARD_KING_SARCOPHAGUS}
-s.listed_series={SET_HUMUS}
+s.listed_series={SET_HORUS}
 function s.spcon(e,c)
 	if c==nil then return true end
-	local eff={c:GetCardEffect(EFFECT_REST_VALLEY)}
+	local eff={c:GetCardEffect(EFFECT_NECRO_VALLEY)}
 	for _,te in ipairs(eff) do
 		local op=te:GetOperation()
 		if not op or op(e,c) then return false end

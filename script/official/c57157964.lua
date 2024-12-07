@@ -7,8 +7,8 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Susion summon procedure
 	Fusion.AddProcMix(c,true,true,s.ffilter,aux.FilterBoolFunctionEx(Card.IsLevelAbove,7))
-	--Must be properly summoned before awaking
-	c:EnableAwakeLimit()
+	--Must be properly summoned before reviving
+	c:EnableReviveLimit()
 	--Clock Lizard check
 	Auxiliary.addLizardCheck(c)
 	--Must first be special summoned with "Fossil Fusion"
@@ -51,9 +51,9 @@ end
 --Specifically lists "Fossil Fusion"
 s.listed_names={CARD_FOSSIL_FUSION}
 
-	--Check for a rock monster in your RP
+	--Check for a rock monster in your GY
 function s.ffilter(c,fc,sumtype,tp)
-	return c:IsRace(RACE_ROCK) and c:IsLocation(LOCATION_REST) and c:IsControler(tp)
+	return c:IsRace(RACE_ROCK) and c:IsLocation(LOCATION_GRAVE) and c:IsControler(tp)
 end
 	--If fusion summoned
 function s.condition(e)

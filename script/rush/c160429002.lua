@@ -1,5 +1,5 @@
 --炎帝テスタロス
---Thestalos the Firestorm Moppar (Rush)
+--Thestalos the Firestorm Monarch (Rush)
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -27,7 +27,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(tp,0,LOCATION_HAND)
 	if #g>0 then
 		local sg=g:RandomSelect(1-tp,1)
-		Duel.SendtoRest(sg,REASON_EFFECT)
+		Duel.SendtoGrave(sg,REASON_EFFECT)
 		local tc=sg:GetFirst()
 		if tc:IsMonster() then
 			Duel.Damage(1-tp,tc:GetLevel()*100,REASON_EFFECT)

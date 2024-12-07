@@ -1,4 +1,4 @@
---Mentoral Pendulum Box
+--Magical Pendulum Box
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -24,7 +24,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ConfirmCards(1-p,dg)
 	local rct=dg:FilterCount(Card.IsType,nil,TYPE_PENDULUM)
 	if rct~=2 then
-		Duel.SendtoRest(dg,REASON_EFFECT)
+		Duel.SendtoGrave(dg,REASON_EFFECT)
 	end
 	Duel.ShuffleHand(p)
 end

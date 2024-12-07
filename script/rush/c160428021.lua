@@ -13,12 +13,12 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.listed_names={CARD_SEVENS_ROAD_MENTOR}
+s.listed_names={CARD_SEVENS_ROAD_MAGICIAN}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return ep==1-tp
 end
 function s.dspfilter(c)
-	return c:IsRace(RACE_MENTOR) and c:IsAttribute(ATTRIBUTE_DARK) and c:IsFaceup() and c:IsNotMaximumModeSide()
+	return c:IsRace(RACE_SPELLCASTER) and c:IsAttribute(ATTRIBUTE_DARK) and c:IsFaceup() and c:IsNotMaximumModeSide()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.dspfilter,tp,LOCATION_MZONE,0,1,nil) end
@@ -32,7 +32,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if #g>0 then
 		local c=e:GetHandler()
 		for tc in g:Iter() do
-			--Prevent DARK Mentors from being destroyed by opponent's card effects
+			--Prevent DARK Spellcasters from being destroyed by opponent's card effects
 			local e1=Effect.CreateEffect(c)
 			e1:SetDescription(3060)
 			e1:SetProperty(EFFECT_FLAG_CLIENT_HINT)
@@ -44,7 +44,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		end
 	end
 	local pg=eg:Filter(s.posfilter,nil)
-	if Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,CARD_SEVENS_ROAD_MENTOR) and #pg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
+	if Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,CARD_SEVENS_ROAD_MAGICIAN) and #pg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		Duel.ChangePosition(pg:GetFirst(),POS_FACEUP_DEFENSE)
 	end
 end

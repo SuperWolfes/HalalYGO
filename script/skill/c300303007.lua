@@ -32,12 +32,12 @@ end
 function s.contactfil(tp)
 	local loc=LOCATION_ONFIELD
 	if Duel.GetFlagEffect(tp,id+100)==0 then
-		loc=LOCATION_ONFIELD+LOCATION_REST
+		loc=LOCATION_ONFIELD+LOCATION_GRAVE
 	end
 	return Duel.GetMatchingGroup(Card.IsAbleToRemoveAsCost,tp,loc,0,nil)
 end
 function s.contactop(g,tp,c)
-	if g:IsExists(Card.IsLocation,1,nil,LOCATION_REST) then
+	if g:IsExists(Card.IsLocation,1,nil,LOCATION_GRAVE) then
 		--Can only apply this effect OPT
 		Duel.RegisterFlagEffect(tp,id+100,RESET_PHASE+PHASE_END,0,1)
 		--Opponent takes no damage this turn
@@ -57,5 +57,5 @@ function s.contactop(g,tp,c)
 	Duel.Remove(g,POS_FACEUP,REASON_COST+REASON_MATERIAL)
 end
 function s.splimit(e,se,sp,st)
-	return not e:GetHandler():IsLocation(LOCATION_EXTRA+LOCATION_REST)
+	return not e:GetHandler():IsLocation(LOCATION_EXTRA+LOCATION_GRAVE)
 end

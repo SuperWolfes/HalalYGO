@@ -1,11 +1,11 @@
 --ＣＮｏ.６５ 裁断魔王ジャッジ・デビル (Anime)
---Number C65: King Overtainted (Anime)
+--Number C65: King Overfiend (Anime)
 Duel.LoadCardScript("c49195710.lua")
 local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz Summon
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_DARK),3,3)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Rank Up Check
 	aux.EnableCheckRankUp(c,nil,nil,3790062)
 	--Cannot be destroyed by battle, except with "Number" monsters

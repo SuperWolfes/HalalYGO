@@ -1,5 +1,5 @@
 -- 
--- S.D. Assault Carrier
+-- D.D. Assault Carrier
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -23,14 +23,14 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.atkcost(e,c,tp)
-	return Duel.IsExistingMatchingCard(Card.IsAbleToRemoveAsCost,tp,LOCATION_REST,0,1,nil)
+	return Duel.IsExistingMatchingCard(Card.IsAbleToRemoveAsCost,tp,LOCATION_GRAVE,0,1,nil)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local coststatus=Duel.IsAttackCostPaid()
 	if coststatus~=2 and c:IsLocation(LOCATION_MZONE) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-		local cg=Duel.GetMatchingGroup(Card.IsAbleToRemoveAsCost,tp,LOCATION_REST,0,nil)
+		local cg=Duel.GetMatchingGroup(Card.IsAbleToRemoveAsCost,tp,LOCATION_GRAVE,0,nil)
 		local tc=cg:SelectUnselect(Group.CreateGroup(),tp,coststatus==0,coststatus==0)
 		if tc then
 			Duel.Remove(tc,POS_FACEUP,REASON_COST)

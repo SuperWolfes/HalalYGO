@@ -20,10 +20,10 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return at and at:IsControler(1-tp) and at:IsAttackPos() and at:IsOnField() and at:IsCanChangePositionRush()
 end
 function s.cfilter(c)
-	return c:IsMonster() and c:IsRace(RACE_MENTAL) and c:IsAbleToDeckOrExtraAsCost()
+	return c:IsMonster() and c:IsRace(RACE_PSYCHIC) and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,2,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,2,nil) end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local at=Duel.GetAttacker()
@@ -31,12 +31,12 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_POSITION,at,1,0,0)
 end
 function s.filter(c)
-	return c:IsMonster() and c:IsRace(RACE_MENTAL) and c:IsType(TYPE_NORMAL)
+	return c:IsMonster() and c:IsRace(RACE_PSYCHIC) and c:IsType(TYPE_NORMAL)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_REST,0,2,4,nil)
+	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_GRAVE,0,2,4,nil)
 	Duel.HintSelection(g)
 	if Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_COST)<=0 then return end
 	Duel.ShuffleDeck(tp)
@@ -44,7 +44,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local at=Duel.GetAttacker()
 	local ct=Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)
 	if at and at:IsAttackPos() and at:IsRelateToBattle() and Duel.ChangePosition(at,POS_FACEUP_DEFENSE)>0 
-		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,1,nil)
+		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,1,nil)
 		and ct<6 and Duel.IsPlayerCanDraw(tp,6-ct) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.Draw(tp,6-ct,REASON_EFFECT)
 	end

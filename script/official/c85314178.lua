@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Target 1 Field Actional, then activate this effect based on who controls it
+	--Target 1 Field Spell, then activate this effect based on who controls it
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_IGNITION)
@@ -44,11 +44,11 @@ function s.tgfieldfilter(c,tp)
 	if c:IsControler(tp) then
 		return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil,c:GetCode())
 	else
-		return c:IsNegatableActionalTrap() and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil)
+		return c:IsNegatableSpellTrap() and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil)
 	end
 end
 function s.thfilter(c,code)
-	return c:IsFieldActional() and c:IsAbleToHand() and not (code and c:IsCode(code))
+	return c:IsFieldSpell() and c:IsAbleToHand() and not (code and c:IsCode(code))
 end
 function s.fieldefftg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_FZONE) and s.tgfieldfilter(chkc,tp) end
@@ -71,7 +71,7 @@ function s.fieldeffop(e,tp,eg,ep,ev,re,r,rp)
 	if not tc:IsRelateToEffect(e) then return end
 	local op=e:GetLabel()
 	if op==1 then
-		--Destroy it, and if you do, add 1 Field Actional with a different name from your Deck to your hand
+		--Destroy it, and if you do, add 1 Field Spell with a different name from your Deck to your hand
 		local code=tc:GetCode()
 		if Duel.Destroy(tc,REASON_EFFECT)==0 then return end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
@@ -81,8 +81,8 @@ function s.fieldeffop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.ConfirmCards(1-tp,g)
 		end
 	elseif op==2 then
-		--Negate its effects (until the end of this turn), and if you do, add 1 Field Actional from your Deck to your hand
-		if not (tc:IsNegatableActionalTrap() and tc:IsCanBeDisabledByEffect(e)) then return end
+		--Negate its effects (until the end of this turn), and if you do, add 1 Field Spell from your Deck to your hand
+		if not (tc:IsNegatableSpellTrap() and tc:IsCanBeDisabledByEffect(e)) then return end
 		tc:NegateEffects(e:GetHandler(),RESET_PHASE|PHASE_END,true)
 		Duel.AdjustInstantly(tc)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)

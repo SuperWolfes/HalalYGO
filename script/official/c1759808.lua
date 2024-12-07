@@ -1,5 +1,5 @@
 --幻魔の肖像
---Taintedish Portrait
+--Fiendish Portrait
 --Scripted by ahtelel
 local s,id=GetID()
 function s.initial_effect(c)

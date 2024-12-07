@@ -1,5 +1,5 @@
 --不知火流 輪廻の陣
---Shiranui Style Sam
+--Shiranui Style Samsara
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -43,7 +43,7 @@ function s.initial_effect(c)
 end
 s.listed_names={40005099}
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_TOXIC) and c:IsAbleToRemoveAsCost()
+	return c:IsFaceup() and c:IsRace(RACE_ZOMBIE) and c:IsAbleToRemoveAsCost()
 end
 function s.damcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil) end
@@ -67,7 +67,7 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e2,tp)
 end
 function s.tdfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_TOXIC) and c:IsDefenseBelow(0) and c:IsAbleToDeck()
+	return c:IsFaceup() and c:IsRace(RACE_ZOMBIE) and c:IsDefenseBelow(0) and c:IsAbleToDeck()
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REMOVED) and chkc:IsControler(tp) and s.tdfilter(chkc) end

@@ -43,7 +43,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if ft<=0 then return end
 	if not Duel.IsPlayerCanSpecialSummonMonster(tp,64213018,0x172,TYPES_TOKEN,1000,1000,3,RACE_INSECT,ATTRIBUTE_EARTH) then return end
 	ft=math.min(ft,e:GetLabel())
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
 	if ft>1 then ft=Duel.AnnounceNumberRange(tp,1,ft) end
 	local sg=Group.CreateGroup()
 	for i=1,ft do

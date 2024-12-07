@@ -1,10 +1,10 @@
 --魔鍵変鬼－トランスフルミネ
---Menkey-Mutated Ogre - Transfurmine
+--Magikey-Mutated Ogre - Transfurmine
 --scripted by the Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
 	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x167),1,1,Synchro.NonTunerEx(Card.IsType,TYPE_NORMAL),1,99)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Make up to 2 attacks on monsters each Battle Phase
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2a:SetCode(EFFECT_MATERIAL_CHECK)
 	e2a:SetValue(s.matcheck)
 	c:RegisterEffect(e2a)
-	--Set 1 Menkey S/T from Deck to S/T Zone
+	--Set 1 Magikey S/T from Deck to S/T Zone
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetType(EFFECT_TYPE_IGNITION)
@@ -28,9 +28,9 @@ function s.initial_effect(c)
 	e2:SetLabelObject(e2a)
 	e2:SetCondition(s.setcon)
 	e2:SetTarget(s.settg)
-	e2:SetOperation(s.vetop)
+	e2:SetOperation(s.setop)
 	c:RegisterEffect(e2)
-	--Destroy a NS/SSd monster with the same Att as monsters in your RP
+	--Destroy a NS/SSd monster with the same Att as monsters in your GY
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_DESTROY)
@@ -56,13 +56,13 @@ function s.setcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_SYNCHRO) and obj and obj:GetLabel()>1
 end
 function s.setfilter(c)
-	return c:IsSetCard(0x167) and c:IsActionalTrap() and not c:IsType(TYPE_FIELD) and c:IsSSetable()
+	return c:IsSetCard(0x167) and c:IsSpellTrap() and not c:IsType(TYPE_FIELD) and c:IsSSetable()
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
 		and Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_DECK,0,1,nil) end
 end
-function s.vetop(e,tp,eg,ep,ev,re,r,rp)
+function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 	local g=Duel.SelectMatchingCard(tp,s.setfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
@@ -72,7 +72,7 @@ function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.get_attr(tp)
 	local att=0
-	for tc in Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_REST,0,nil):Iter() do
+	for tc in Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_GRAVE,0,nil):Iter() do
 		att=att|tc:GetAttribute()
 	end
 	return att

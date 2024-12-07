@@ -1,5 +1,5 @@
 --白の輪廻
---White Reincorporation
+--White Reincarnation
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -59,7 +59,7 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.desconfilter(c,tp)
 	return c:IsFaceup() and c:IsLevelAbove(8) and c:IsRace(RACE_FISH) and c:IsType(TYPE_SYNCHRO)
-		and c:IsSummonLocation(LOCATION_REST) and c:IsPreviousControler(tp)
+		and c:IsSummonLocation(LOCATION_GRAVE) and c:IsPreviousControler(tp)
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.desconfilter,1,nil,tp)

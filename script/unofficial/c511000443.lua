@@ -1,4 +1,4 @@
---Path to Destrudic
+--Path to Destiny
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddEquipProcedure(c,nil,aux.FilterBoolFunction(Card.IsRace,RACE_BEASTWARRIOR))

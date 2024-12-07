@@ -25,7 +25,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.filter1,1,nil,tp) 
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_MZONE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_MZONE,0,1,nil) end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,3) end
@@ -39,8 +39,8 @@ function s.spfilter(c,e,tp)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	local g=Duel.GetMatchingGroup(Card.IsAbleToRestAsCost,tp,LOCATION_MZONE,0,nil)
-	if Duel.SendtoRest(g,REASON_COST)<=0 then return end
+	local g=Duel.GetMatchingGroup(Card.IsAbleToGraveAsCost,tp,LOCATION_MZONE,0,nil)
+	if Duel.SendtoGrave(g,REASON_COST)<=0 then return end
 	--Effect
 	if Duel.Draw(tp,3,REASON_EFFECT)<2 then return end
 	local dg=Duel.GetOperatedGroup()
@@ -48,7 +48,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ct=dg:FilterCount(s.spfilter,nil,e,tp)
 	if ct==0 then return end
 	local ft=math.min(ct,Duel.GetMZoneCount(tp))
-	if ft>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
+	if ft>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
 	if ft>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		local sg=dg:FilterSelect(tp,s.spfilter,1,ft,nil,e,tp)
 		if #sg>0 then

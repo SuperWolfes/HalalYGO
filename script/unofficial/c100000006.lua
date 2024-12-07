@@ -1,5 +1,5 @@
 --時械神 カミオン
---Kamion, the Timewatcher (VG)
+--Kamion, the Timelord (VG)
 local s,id=GetID()
 function s.initial_effect(c)
 	--cannot special summon

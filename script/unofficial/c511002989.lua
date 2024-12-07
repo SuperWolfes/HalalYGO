@@ -32,11 +32,11 @@ function s.filter(c,e,tp)
 	return c:IsType(TYPE_SYNCHRO) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter(chkc,e,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter(chkc,e,tp) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil,e,tp) end
+		and Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil,e,tp)
+	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 end
 function s.eqlimit(e,c)
@@ -74,14 +74,14 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local ec=c:GetPreviousEquipTarget()
 	if not ec then return end
-	if c:IsReason(REASON_LOST_TARGET) and ec:IsLocation(LOCATION_REST+LOCATION_REMOVED+LOCATION_EXTRA)
+	if c:IsReason(REASON_LOST_TARGET) and ec:IsLocation(LOCATION_GRAVE+LOCATION_REMOVED+LOCATION_EXTRA)
 		and ec:GetReasonEffect() and (ec:GetReason()&0x41)==0x41 and ec:GetReasonEffect():GetOwner()~=c then
 		local e1=Effect.CreateEffect(c)
 		e1:SetDescription(aux.Stringid(37534148,0))
 		e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 		e1:SetCode(EVENT_PHASE+PHASE_END)
-		e1:SetRange(LOCATION_REST+LOCATION_REMOVED+LOCATION_HAND)
+		e1:SetRange(LOCATION_GRAVE+LOCATION_REMOVED+LOCATION_HAND)
 		e1:SetCountLimit(1)
 		e1:SetTarget(s.sptg)
 		e1:SetOperation(s.spop)

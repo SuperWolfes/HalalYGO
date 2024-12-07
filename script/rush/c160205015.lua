@@ -1,9 +1,9 @@
 --焔魔の帰還
---Return of the Blaze Tainteds
+--Return of the Blaze Fiends
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Return up to 2 Tainted Maximum monsters to the hand
+	--Return up to 2 Fiend Maximum monsters to the hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND)
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.thfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_TAINTED) and c:IsType(TYPE_MAXIMUM) and c:IsAbleToHand() and not c:IsMaximumModeSide()
+	return c:IsFaceup() and c:IsRace(RACE_FIEND) and c:IsType(TYPE_MAXIMUM) and c:IsAbleToHand() and not c:IsMaximumModeSide()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_MZONE,0,1,nil) end

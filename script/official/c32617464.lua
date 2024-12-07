@@ -1,10 +1,10 @@
 --トライゲート・ウィザード
---Tri-Gate Chemist
+--Tri-Gate Wizard
 local s,id=GetID()
 function s.initial_effect(c)
 	--Link Summon procedure
 	Link.AddProcedure(c,s.matfilter,2)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Double damage
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)

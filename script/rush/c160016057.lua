@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	-- Add excavated monster to hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_TOREST+CATEGORY_DRAW)
+	e1:SetCategory(CATEGORY_TOGRAVE+CATEGORY_DRAW)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetTarget(s.target)
@@ -16,7 +16,7 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>=4
 		and Duel.GetFieldGroupCount(tp,0,LOCATION_DECK)>=4 end
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,0,0)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_DRAW,nil,1,0,0)
 end
 function s.filter(c)
@@ -33,7 +33,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	sg:AddCard(g)
 	sg:AddCard(g2)
 	if sg:IsExists(s.filter,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 		local dg=sg:FilterSelect(tp,s.filter,1,2,nil)
 		for tc in dg:Iter() do
 			if tc:GetOwner()==tp then
@@ -42,7 +42,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 				g2:RemoveCard(tc)
 			end
 		end
-		Duel.SendtoRest(dg,REASON_EFFECT)
+		Duel.SendtoGrave(dg,REASON_EFFECT)
 		local og=Duel.GetOperatedGroup()
 		Duel.BreakEffect()
 		--Place on bottom of the Deck

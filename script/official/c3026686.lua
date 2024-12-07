@@ -1,5 +1,5 @@
 --ワルキューレ・ドリット
---Balkanie Dritte
+--Valkyrie Dritte
 --scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)

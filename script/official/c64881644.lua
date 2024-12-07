@@ -5,10 +5,10 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Pendulum Summon
 	Pendulum.AddProcedure(c)
-	--Send 1 "Melodious" monster from your Deck to the RP
+	--Send 1 "Melodious" monster from your Deck to the GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_TOREST+CATEGORY_ATKCHANGE)
+	e1:SetCategory(CATEGORY_TOGRAVE+CATEGORY_ATKCHANGE)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetRange(LOCATION_PZONE)
@@ -49,7 +49,7 @@ function s.atkfilter(c)
 	return c:IsSetCard(SET_MELODIOUS) and c:IsType(TYPE_FUSION) and c:IsFaceup()
 end
 function s.tgfilter(c)
-	return c:IsSetCard(SET_MELODIOUS) and c:IsMonster() and c:IsAbleToRest()
+	return c:IsSetCard(SET_MELODIOUS) and c:IsMonster() and c:IsAbleToGrave()
 end
 function s.tgatktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.atkfilter(chkc) end
@@ -57,12 +57,12 @@ function s.tgatktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		and Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATKDEF)
 	Duel.SelectTarget(tp,s.atkfilter,tp,LOCATION_MZONE,0,1,1,nil)
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
 end
 function s.tgatkop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local sc=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil):GetFirst()
-	if not (sc and Duel.SendtoRest(sc,REASON_EFFECT)>0 and sc:IsLocation(LOCATION_REST)) then return end
+	if not (sc and Duel.SendtoGrave(sc,REASON_EFFECT)>0 and sc:IsLocation(LOCATION_GRAVE)) then return end
 	local tc=Duel.GetFirstTarget()
 	if not (tc:IsRelateToEffect(e) and tc:IsFaceup()) then return end
 	--Gains ATK equal to the sent monster's Level x 200

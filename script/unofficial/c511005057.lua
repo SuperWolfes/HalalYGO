@@ -25,7 +25,7 @@ function s.initial_effect(c)
 end
 function s.checkop(e,tp,eg,ep,ev,re,r,rp)
 	local rc=re:GetHandler()
-	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and rc:IsActional() and Duel.GetTurnPlayer()==rc:GetControler() then
+	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and rc:IsSpell() and Duel.GetTurnPlayer()==rc:GetControler() then
 		rc:RegisterFlagEffect(id,RESET_PHASE+PHASE_END+RESET_SELF_TURN,0,2)
 		rc:RegisterFlagEffect(id+1,RESET_PHASE+PHASE_END+RESET_SELF_TURN,0,1)
 	end
@@ -35,7 +35,7 @@ function s.filter(c,e,tp)
 	if e:GetHandler():IsLocation(LOCATION_HAND) then
 		ft=ft-1
 	end
-	return c:GetFlagEffect(id)>0 and c:GetFlagEffect(id+1)==0 and c:IsActional() and (ft>0 or c:IsType(TYPE_FIELD))
+	return c:GetFlagEffect(id)>0 and c:GetFlagEffect(id+1)==0 and c:IsSpell() and (ft>0 or c:IsType(TYPE_FIELD))
 		and c:CheckActivateEffect(false,false,false)~=nil
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -43,10 +43,10 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if e:GetHandler():IsLocation(LOCATION_HAND) then
 		ft=ft-1
 	end
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter(chkc,e,tp) end
-	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil,e,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter(chkc,e,tp) end
+	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EFFECT)
-	Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil,e,tp)
+	Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
@@ -65,13 +65,13 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			local of=Duel.GetFieldCard(1-tp,LOCATION_FZONE,0)
 			if of then Duel.Destroy(of,REASON_RULE) end
 			of=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
-			if of and Duel.Destroy(of,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
+			if of and Duel.Destroy(of,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
 		end
 		Duel.MoveToField(tc,tp,tp,loc,POS_FACEUP,true)
 		Duel.Hint(HINT_CARD,0,tc:GetCode())
 		tc:CreateEffectRelation(te)
 		if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 and not tc:IsHasEffect(EFFECT_REMAIN_FIELD) then
-			tc:CancelToRest(false)
+			tc:CancelToGrave(false)
 		end
 		if co then co(te,tp,eg,ep,ev,re,r,rp,1) end
 		if tg then tg(te,tp,eg,ep,ev,re,r,rp,1) end

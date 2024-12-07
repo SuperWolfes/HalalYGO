@@ -16,7 +16,7 @@ s.listed_names={id}
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	if r~=REASON_SUMMON then return false end
 	local rc=e:GetHandler():GetReasonCard()
-	return rc:IsFaceup() and rc:IsRace(RACE_TAINTED)
+	return rc:IsFaceup() and rc:IsRace(RACE_FIEND)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

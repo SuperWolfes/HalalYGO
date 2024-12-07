@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--There can only be 1 "Earthbound Immortal" on the field
 	c:SetUniqueOnField(1,1,aux.FilterBoolFunction(Card.IsSetCard,SET_EARTHBOUND_IMMORTAL),LOCATION_MZONE)
-	--Destroy it if no face-up Field Actional is on the field
+	--Destroy it if no face-up Field Spell is on the field
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -60,7 +60,7 @@ function s.hdop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=sg:FilterCount(Card.IsLocation,nil,LOCATION_DECK|LOCATION_EXTRA)
 	if ct==0 then return end
 	local dg=Duel.GetFieldGroup(tp,0,LOCATION_HAND):RandomSelect(tp,ct)
-	local dt=Duel.SendtoRest(dg,REASON_EFFECT+REASON_DISCARD)
+	local dt=Duel.SendtoGrave(dg,REASON_EFFECT+REASON_DISCARD)
 	local c=e:GetHandler()
 	if dt~=0 and c:IsRelateToEffect(e) and c:IsFaceup() then
 		local e1=Effect.CreateEffect(c)

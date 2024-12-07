@@ -1,5 +1,5 @@
 --魔法除去 (Rush)
---De-Actional (Rush)
+--De-Spell (Rush)
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c)
-	return c:IsFacedown() or c:IsActional()
+	return c:IsFacedown() or c:IsSpell()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,0,LOCATION_SZONE,1,nil) end
@@ -26,5 +26,5 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,0,LOCATION_SZONE,1,1,nil)
 	Duel.HintSelection(g,true)
 	if g:GetFirst():IsFacedown() then Duel.ConfirmCards(tp,g) end
-	if g:GetFirst():IsActional() then Duel.Destroy(g,REASON_EFFECT) end
+	if g:GetFirst():IsSpell() then Duel.Destroy(g,REASON_EFFECT) end
 end

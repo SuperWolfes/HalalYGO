@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.drtg)
 	e1:SetOperation(s.drop)
 	c:RegisterEffect(e1)
-	--Your opponent: Smint the equipped monster's current ATK and DEF, until the end of this turn.
+	--Your opponent: Switch the equipped monster's current ATK and DEF, until the end of this turn.
 	local e2=e1:Clone()
 	e2:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
 	e2:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_DEFCHANGE)

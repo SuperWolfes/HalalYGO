@@ -43,7 +43,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 			if Cardian.CheckSpCondition(tc) then
 				Duel.ShuffleHand(tp)
 			else
-				Duel.SendtoRest(tc,REASON_EFFECT)
+				Duel.SendtoGrave(tc,REASON_EFFECT)
 			end
 		end
 	end

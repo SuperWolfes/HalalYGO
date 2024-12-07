@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Draw 1 card
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.drtg)
 	e1:SetOperation(s.drop)
 	c:RegisterEffect(e1)
-	--Special Summon 1 Level 4 or 5 "Nouvelles" Locked Monster
+	--Special Summon 1 Level 4 or 5 "Nouvelles" Ritual Monster
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_RELEASE+CATEGORY_SPECIAL_SUMMON)
@@ -49,7 +49,7 @@ function s.selfnouvfilter(c,tp)
 	return c:IsControler(tp) and c:IsSetCard(SET_NOUVELLES)
 end
 function s.spfilter(c,e,tp)
-	return c:IsSetCard(SET_NOUVELLES) and c:IsLockedMonster() and c:IsLevel(4,5)
+	return c:IsSetCard(SET_NOUVELLES) and c:IsRitualMonster() and c:IsLevel(4,5)
 		and c:IsCanBeSpecialSummoned(e,SUMMON_BY_NOUVELLES,tp,false,true)
 end
 function s.rescon(sg,e,tp,mg)

@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_TOREST+CATEGORY_SPECIAL_SUMMON)
+	e1:SetCategory(CATEGORY_TOGRAVE+CATEGORY_SPECIAL_SUMMON)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
@@ -42,12 +42,12 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		return ft>-1 and Duel.IsExistingTarget(s.filter1,tp,LOCATION_MZONE,0,1,nil,tp,mlv,ft)
 	end
 	local mg,mlv=sg:GetMinGroup(Card.GetLevel)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g1=Duel.SelectTarget(tp,s.filter1,tp,LOCATION_MZONE,0,1,1,nil,tp,mlv,ft)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g2=Duel.SelectTarget(tp,s.filter2,tp,0,LOCATION_MZONE,1,1,nil,g1:GetFirst():GetLevel(),mlv)
 	g1:Merge(g2)
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,g1,2,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,g1,2,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
@@ -56,13 +56,13 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
 	local tg=g:Filter(Card.IsRelateToEffect,nil,e)
 	if #tg==0 then return end
-	Duel.SendtoRest(tg,REASON_EFFECT)
+	Duel.SendtoGrave(tg,REASON_EFFECT)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	local tc=tg:GetFirst()
 	local lv=0
-	if tc:IsLocation(LOCATION_REST) then lv=lv+tc:GetLevel() end
+	if tc:IsLocation(LOCATION_GRAVE) then lv=lv+tc:GetLevel() end
 	tc=tg:GetNext()
-	if tc and tc:IsLocation(LOCATION_REST) then lv=lv+tc:GetLevel() end
+	if tc and tc:IsLocation(LOCATION_GRAVE) then lv=lv+tc:GetLevel() end
 	if lv==0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_DECK,0,1,1,nil,e,tp,lv)

@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_TOREST+CATEGORY_DECKDES)
+	e1:SetCategory(CATEGORY_TOGRAVE+CATEGORY_DECKDES)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e1:SetTarget(s.target)
@@ -17,20 +17,20 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return eg:IsExists(s.cfilter,2,nil,1-tp) end
 	local g=eg:Filter(s.cfilter,nil,1-tp)
 	Duel.SetTargetCard(g)
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,g,#g,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,g,#g,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS):Filter(s.cfilter,nil,1-tp,e)
-	Duel.SendtoRest(g,REASON_EFFECT)
+	Duel.SendtoGrave(g,REASON_EFFECT)
 	local exg=Group.CreateGroup()
 	local g1=Duel.GetOperatedGroup()
 	local tc=g1:GetFirst()
 	for tc in aux.Next(g1) do
-		if tc:IsLocation(LOCATION_REST) then
+		if tc:IsLocation(LOCATION_GRAVE) then
 			local fg=Duel.GetMatchingGroup(Card.IsCode,tp,0,LOCATION_DECK+LOCATION_HAND,nil,tc:GetCode())
 			exg:Merge(fg)
 		end
 	end
 	Duel.BreakEffect()
-	Duel.SendtoRest(exg,REASON_EFFECT)
+	Duel.SendtoGrave(exg,REASON_EFFECT)
 end

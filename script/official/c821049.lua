@@ -1,9 +1,9 @@
 --ヴィサス＝アムリターラ
---Visas Amilie
+--Visas Amritara
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Synchro Summon procedure
 	Synchro.AddProcedure(c,nil,1,99,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGHT),1,1)
 	--Treated as "Visas Starfrost"
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetValue(CARD_VISAS_STARFROST)
 	c:RegisterEffect(e1)
-	--Search 1 Actional/Trap that mentions "Visas Starfrost"
+	--Search 1 Spell/Trap that mentions "Visas Starfrost"
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -39,7 +39,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_VISAS_STARFROST}
 function s.thfilter(c)
-	return c:ListsCode(CARD_VISAS_STARFROST) and c:IsActionalTrap() and c:IsAbleToHand()
+	return c:ListsCode(CARD_VISAS_STARFROST) and c:IsSpellTrap() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

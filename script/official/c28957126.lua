@@ -1,5 +1,5 @@
 --ゴルゴネイオの呪眼
---Goodie of Jonjore
+--Evil Eye of Gorgone
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	local e3=Effect.CreateEffect(c)
 	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e3:SetType(EFFECT_TYPE_IGNITION)
-	e3:SetRange(LOCATION_REST)
+	e3:SetRange(LOCATION_GRAVE)
 	e3:SetCountLimit(1,{id,1})
 	e3:SetCost(s.thcost)
 	e3:SetTarget(s.thtg)
@@ -50,7 +50,7 @@ function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.DiscardHand(tp,s.thcfilter,1,1,REASON_COST+REASON_DISCARD,nil)
 end
 function s.thfilter(c)
-	return c:IsSetCard(0x129) and c:IsActionalTrap() and not c:IsCode(id) and c:IsAbleToHand()
+	return c:IsSetCard(0x129) and c:IsSpellTrap() and not c:IsCode(id) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

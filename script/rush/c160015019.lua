@@ -19,10 +19,10 @@ s.listed_names={58873391,160015018}
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeck(tp,2) end
 	Duel.SetOperationInfo(0,CATEGORY_DECKDES,nil,0,tp,2)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
 end
 function s.cfilter(c)
-	return c:IsLocation(LOCATION_REST) and c:IsCode(58873391,160015018) and c:IsAbleToHand()
+	return c:IsLocation(LOCATION_GRAVE) and c:IsCode(58873391,160015018) and c:IsAbleToHand()
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Effect

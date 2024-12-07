@@ -1,5 +1,5 @@
 --地霊使いアウス
---Aussa the Earth Chaumer
+--Aussa the Earth Charmer
 local s,id=GetID()
 function s.initial_effect(c)
 	--flip

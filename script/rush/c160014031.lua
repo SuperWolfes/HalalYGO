@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetCondition(s.spcon)
 	c:RegisterEffect(e1)
 	--Change name to "Curse of Dragon" and Fusion Summon
-	local params={nil,Fusion.OnFieldMat(Card.IsAbleToDeck),s.fextra,Fusion.ShuffleMaterial,Fusion.FcoreedHandler,nil,2}
+	local params={nil,Fusion.OnFieldMat(Card.IsAbleToDeck),s.fextra,Fusion.ShuffleMaterial,Fusion.ForcedHandler,nil,2}
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetType(EFFECT_TYPE_IGNITION)
@@ -33,7 +33,7 @@ function s.matfilter(c)
 	return c:IsMonster() and c:IsAbleToDeck()
 end
 function s.fextra(e,tp,mg)
-	return Duel.GetMatchingGroup(aux.NecroValleyFilter(s.matfilter),tp,LOCATION_REST,0,nil)
+	return Duel.GetMatchingGroup(aux.NecroValleyFilter(s.matfilter),tp,LOCATION_GRAVE,0,nil)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeckAsCost(tp,1) end
@@ -43,7 +43,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return not c:IsCode(28279543) end
 	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_FUSION_SUMMON,nil,1,tp,0)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TODECK,c,2,tp,LOCATION_MZONE|LOCATION_REST)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TODECK,c,2,tp,LOCATION_MZONE|LOCATION_GRAVE)
 end
 function s.operation(oldtg,oldop)
 	return function(e,tp,eg,ep,ev,re,r,rp)

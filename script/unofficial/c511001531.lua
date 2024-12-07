@@ -1,5 +1,5 @@
 --七皇転生 (Anime)
---Reincorporation of the Seventh Emperors (Anime)
+--Reincarnation of the Seventh Emperors (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

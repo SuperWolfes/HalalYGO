@@ -48,13 +48,13 @@ function s.target(montype,chkfun)
 	return function(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		local exg=Duel.GetMatchingGroup(s.filter(montype,chkfun),tp,LOCATION_EXTRA,0,nil,nil,tp)
 		local cancelcon=s.rescon(exg,chkfun)
-		if chkc then return chkc:IsControler(tp) and c:IsLocation(LOCATION_REST) and c:IsSetCard(0x132) and chkc:IsCanBeSpecialSummoned(e,0,tp,false,false) and cancelcon(Group.FromCards(chkc)) end
-		local mg=Duel.GetMatchingGroup(s.matfilter,tp,LOCATION_REST,0,nil,e,tp)
-		local min=math.min(math.min(Duel.GetLocationCount(tp,LOCATION_MZONE),Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) and 1 or 99),1)
+		if chkc then return chkc:IsControler(tp) and c:IsLocation(LOCATION_GRAVE) and c:IsSetCard(0x132) and chkc:IsCanBeSpecialSummoned(e,0,tp,false,false) and cancelcon(Group.FromCards(chkc)) end
+		local mg=Duel.GetMatchingGroup(s.matfilter,tp,LOCATION_GRAVE,0,nil,e,tp)
+		local min=math.min(math.min(Duel.GetLocationCount(tp,LOCATION_MZONE),Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) and 1 or 99),1)
 		local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 		if ft>3 then ft=3 end
 		if chk==0 then return min>0 and Duel.IsPlayerCanSpecialSummonCount(tp,2)
-			and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)
+			and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
 			and aux.SelectUnselectGroup(mg,e,tp,min,ft,cancelcon,0) end
 		local sg=aux.SelectUnselectGroup(mg,e,tp,min,ft,cancelcon,chk,tp,HINTMSG_SPSUMMON,cancelcon)
 		Duel.SetTargetCard(sg)
@@ -64,7 +64,7 @@ end
 function s.operation(montype,chkfun,fun)
 	return function(e,tp,eg,ep,ev,re,r,rp)
 		local g=Duel.GetTargetCards(e):Filter(s.relfilter,nil,e,tp)
-		if Duel.GetLocationCount(tp,LOCATION_MZONE)<#g or #g==0 or (Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) and #g>1) then return end
+		if Duel.GetLocationCount(tp,LOCATION_MZONE)<#g or #g==0 or (Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) and #g>1) then return end
 		for tc in aux.Next(g) do
 			Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP)
 			local e1=Effect.CreateEffect(e:GetHandler())

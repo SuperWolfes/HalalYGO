@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	--counter
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e2:SetCode(EVENT_TO_REST)
+	e2:SetCode(EVENT_TO_GRAVE)
 	e2:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
 	e2:SetRange(LOCATION_FZONE)
 	e2:SetCondition(s.ctcon)
@@ -74,7 +74,7 @@ end
 function s.chop(e,te,tp,tc,mat,sumtype,sg,sumpos)
 	if not sumtype then sumtype=SUMMON_TYPE_FUSION end
 	tc:SetMaterial(mat)
-	Duel.SendtoRest(mat,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
+	Duel.SendtoGrave(mat,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
 	if mat:IsExists(Card.IsControler,1,nil,1-tp) then
 		e:GetHandler():RemoveCounter(tp,0x16,3,REASON_EFFECT)
 	end

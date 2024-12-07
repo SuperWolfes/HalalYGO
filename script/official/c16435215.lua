@@ -1,10 +1,10 @@
 --墓穴の道連れ
---Dragged Down into the Rest
+--Dragged Down into the Grave
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_TOREST+CATEGORY_HANDES+CATEGORY_DRAW)
+	e1:SetCategory(CATEGORY_TOGRAVE+CATEGORY_HANDES+CATEGORY_DRAW)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetCondition(s.condition)
@@ -34,7 +34,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_DISCARD)
 	local sg2=g2:Select(1-tp,1,1,nil)
 	sg1:Merge(sg2)
-	Duel.SendtoRest(sg1,REASON_EFFECT+REASON_DISCARD)
+	Duel.SendtoGrave(sg1,REASON_EFFECT+REASON_DISCARD)
 	Duel.ShuffleHand(tp)
 	Duel.ShuffleHand(1-tp)
 	Duel.BreakEffect()

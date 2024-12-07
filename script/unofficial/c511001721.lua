@@ -44,7 +44,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 				e3:SetCode(EFFECT_SET_DEFENSE_FINAL)
 				tc:RegisterEffect(e3)
 			elseif not tc:IsMonster() or not tc:IsSetCard(0xe6) then
-				Duel.SendtoRest(tc,REASON_EFFECT)
+				Duel.SendtoGrave(tc,REASON_EFFECT)
 				Duel.Damage(p,1000,REASON_EFFECT)
 			end
 		end

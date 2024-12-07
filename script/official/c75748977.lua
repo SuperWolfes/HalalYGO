@@ -3,7 +3,7 @@
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Fusion Materials
 	Fusion.AddProcMix(c,true,true,70860415,6355563,33744268)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,s.splimit)
@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_MZONE|LOCATION_REST)
+	e2:SetRange(LOCATION_MZONE|LOCATION_GRAVE)
 	e2:SetCost(s.spcost)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
@@ -41,7 +41,7 @@ function s.matfilter(c)
 	return c:IsAbleToRemoveAsCost() and (c:IsLocation(LOCATION_SZONE) or aux.SpElimFilter(c,false,true))
 end
 function s.contactfil(tp)
-	return Duel.GetMatchingGroup(s.matfilter,tp,LOCATION_ONFIELD|LOCATION_REST,0,nil)
+	return Duel.GetMatchingGroup(s.matfilter,tp,LOCATION_ONFIELD|LOCATION_GRAVE,0,nil)
 end
 function s.contactop(g)
 	Duel.Remove(g,POS_FACEUP,REASON_COST|REASON_MATERIAL)
@@ -65,7 +65,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.revealfilter(c,e,tp)
 	return c:IsLevel(8) and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_MACHINE) and c:IsType(TYPE_FUSION) and c.material
-		and not c:IsPublic() and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST|LOCATION_REMOVED,0,1,nil,e,tp,c)
+		and not c:IsPublic() and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE|LOCATION_REMOVED,0,1,nil,e,tp,c)
 end
 function s.spfilter(c,e,tp,fc)
 	return c:IsCode(table.unpack(fc.material)) and c:IsFaceup() and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -83,15 +83,15 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetMZoneCount(tp,e:GetHandler())>0 end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST|LOCATION_REMOVED)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE|LOCATION_REMOVED)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ft==0 then return end
 	ft=math.min(ft,3)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST|LOCATION_REMOVED,0,1,ft,nil,e,tp,e:GetLabelObject())
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_GRAVE|LOCATION_REMOVED,0,1,ft,nil,e,tp,e:GetLabelObject())
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end

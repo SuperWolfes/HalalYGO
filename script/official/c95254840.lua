@@ -28,7 +28,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if e:IsHasType(EFFECT_TYPE_ACTIVATE) then
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_FIELD)
-		e1:SetCode(EFFECT_TO_REST_REDIRECT)
+		e1:SetCode(EFFECT_TO_GRAVE_REDIRECT)
 		e1:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
 		e1:SetTargetRange(LOCATION_MZONE,0)
 		e1:SetTarget(s.rmtg)

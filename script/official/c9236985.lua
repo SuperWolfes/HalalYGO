@@ -1,5 +1,5 @@
 --リチュアの写魂鏡
---Giojiki Photomirror
+--Gishki Photomirror
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -10,14 +10,14 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-	if not s.locked_matching_function then
-		s.locked_matching_function={}
+	if not s.ritual_matching_function then
+		s.ritual_matching_function={}
 	end
-	s.locked_matching_function[c]=aux.FilterEqualFunction(Card.IsSetCard,0x3a)
+	s.ritual_matching_function[c]=aux.FilterEqualFunction(Card.IsSetCard,0x3a)
 end
 s.listed_series={0x3a}
 function s.filter(c,e,tp,lp)
-	if not c:IsLockedMonster() or not c:IsSetCard(0x3a) or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_LOCKED,tp,true,false) then
+	if not c:IsRitualMonster() or not c:IsSetCard(0x3a) or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,false) then
 		return false
 	end
 	return lp>c:GetLevel()*500
@@ -41,7 +41,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.PayLPCost(tp,tc:GetLevel()*500)
 		mustpay=false
 		tc:SetMaterial(nil)
-		Duel.SpecialSummon(tc,SUMMON_TYPE_LOCKED,tp,tp,true,false,POS_FACEUP)
+		Duel.SpecialSummon(tc,SUMMON_TYPE_RITUAL,tp,tp,true,false,POS_FACEUP)
 		tc:CompleteProcedure()
 	end
 end

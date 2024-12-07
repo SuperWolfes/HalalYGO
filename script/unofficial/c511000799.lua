@@ -1,4 +1,4 @@
---Wicked Imam Chilam Sabak
+--Wicked Priest Chilam Sabak
 local s,id=GetID()
 function s.initial_effect(c)
 	--summon
@@ -9,7 +9,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_SUMMON_PROC)
 	e1:SetCondition(s.ntcon)
 	c:RegisterEffect(e1)
-	--Awakal
+	--Revival
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)

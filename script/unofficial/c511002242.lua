@@ -1,10 +1,10 @@
 --EinRoid
 local s,id=GetID()
 function s.initial_effect(c)
-	--send to rest
+	--send to grave
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(100000506,0))
-	e1:SetCategory(CATEGORY_TOREST)
+	e1:SetCategory(CATEGORY_TOGRAVE)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e1:SetCode(EVENT_BATTLE_DESTROYED)
 	e1:SetTarget(s.target)
@@ -12,19 +12,19 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.tgfilter(c)
-	return c:IsSetCard(0x16) and c:IsMonster() and c:IsAbleToRest()
+	return c:IsSetCard(0x16) and c:IsMonster() and c:IsAbleToGrave()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,2,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,2,tp,LOCATION_DECK)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_DECK,0,nil)
-	local ct=Duel.GetMatchingGroupCount(Card.IsAbleToRest,tp,LOCATION_DECK,0,nil)
+	local ct=Duel.GetMatchingGroupCount(Card.IsAbleToGrave,tp,LOCATION_DECK,0,nil)
 	if #g>1 then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 		local sg=g:Select(tp,2,2,nil)
-		Duel.SendtoRest(sg,REASON_EFFECT)
+		Duel.SendtoGrave(sg,REASON_EFFECT)
 	elseif #g==1 then
 		Duel.ConfirmCards(1-tp,g)
 		Duel.ConfirmCards(tp,g)

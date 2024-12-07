@@ -1,5 +1,5 @@
 --溶岩魔神ラヴァ・ゴーレム (Anime)
---Lava Gopal (Anime)
+--Lava Golem (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Requires 2 Tributes from your opponent's side of the field to Normal Summon to their field (cannot be Normal Set)

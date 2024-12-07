@@ -35,8 +35,8 @@ function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if bc then
 		Duel.SetTargetCard(bc)
 		Duel.SetOperationInfo(0,CATEGORY_EQUIP,bc,1,0,0)
-		if bc:IsLocation(LOCATION_REST) then
-			Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,bc,1,0,0)
+		if bc:IsLocation(LOCATION_GRAVE) then
+			Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,bc,1,0,0)
 		end
 	end
 end
@@ -45,7 +45,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local bc=c:GetBattleTarget()
 	if not bc or c:IsStatus(STATUS_BATTLE_DESTROYED) then return end
-	if c:IsFaceup() and c:IsRelateToEffect(e) and bc and bc:IsRelateToEffect(e) and bc:IsLocation(LOCATION_SZONE+LOCATION_HAND+LOCATION_REST+LOCATION_REMOVED) then
+	if c:IsFaceup() and c:IsRelateToEffect(e) and bc and bc:IsRelateToEffect(e) and bc:IsLocation(LOCATION_SZONE+LOCATION_HAND+LOCATION_GRAVE+LOCATION_REMOVED) then
 		c:EquipByEffectAndLimitRegister(e,tp,bc)
 	end
 end
@@ -75,7 +75,7 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	if not tg or #tg<=0 then return end
 	local g=tg:Filter(s.spfilter,nil,e,tp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if ft>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
+	if ft>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
 	if #g>ft then return end
 	local tc=g:GetFirst()
 	for tc in aux.Next(g) do

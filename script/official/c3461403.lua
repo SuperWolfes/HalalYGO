@@ -8,12 +8,12 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--Monsters in your RP become Warrior
+	--Monsters in your GY become Warrior
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_CHANGE_RACE)
 	e2:SetRange(LOCATION_SZONE)
-	e2:SetTargetRange(LOCATION_REST,0)
+	e2:SetTargetRange(LOCATION_GRAVE,0)
 	e2:SetValue(RACE_WARRIOR)
 	e2:SetTarget(s.tg)
 	c:RegisterEffect(e2)
@@ -41,7 +41,7 @@ end
 function s.tg(e,c)
 	if c:GetFlagEffect(1)==0 then
 		c:RegisterFlagEffect(1,0,0,0)
-		local eff={c:GetCardEffect(EFFECT_REST_VALLEY)}
+		local eff={c:GetCardEffect(EFFECT_NECRO_VALLEY)}
 		c:ResetFlagEffect(1)
 		for _,te in ipairs(eff) do
 			local op=te:GetOperation()

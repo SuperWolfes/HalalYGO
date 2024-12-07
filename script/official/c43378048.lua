@@ -1,9 +1,9 @@
 --混沌幻魔アーミタイル
---Armityle the Chaos Illusion
+--Armityle the Chaos Phantom
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,6007213,32491822,69890967)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,s.splimit)
 	--Cannot be destroyed by battle

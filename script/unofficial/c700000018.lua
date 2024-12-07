@@ -1,5 +1,5 @@
 --魔界台本 「ファンタジー・マジック」 (Anime)
---Abyss Script - Fantasy Ment (Anime)
+--Abyss Script - Fantasy Magic (Anime)
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -27,7 +27,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if tc:IsFaceup() and tc:IsRelateToEffect(e) then
 		local c=e:GetHandler()
 		local fid=c:GetFieldID()
-		tc:RegisterFlagEffect(id,RESET_EVENT|RESET_PHASE|PHASE_END|RESETS_STANDARD&~(RESET_LEAVE|RESET_TODECK|RESET_TEMP_REMOVE|RESET_REMOVE|RESET_TOREST),EFFECT_FLAG_CLIENT_HINT,1,fid,aux.Stringid(id,0))
+		tc:RegisterFlagEffect(id,RESET_EVENT|RESET_PHASE|PHASE_END|RESETS_STANDARD&~(RESET_LEAVE|RESET_TODECK|RESET_TEMP_REMOVE|RESET_REMOVE|RESET_TOGRAVE),EFFECT_FLAG_CLIENT_HINT,1,fid,aux.Stringid(id,0))
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		e1:SetCode(EVENT_BATTLED)

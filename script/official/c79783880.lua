@@ -1,5 +1,5 @@
 --逢魔ノ妖刀-不知火
---Shiranui Beinlsword Shade
+--Shiranui Spectralsword Shade
 --Scripted by AlphaKretin and ahtelel
 local s,id=GetID()
 function s.initial_effect(c)
@@ -26,11 +26,11 @@ function s.rescon(sg,e,tp,mg)
 	return aux.ChkfMMZ(1)(sg,e,tp,mg) and sg:IsExists(Card.IsSetCard,1,nil,0xd9)
 end
 function s.filter(c,e,tp)
-	return c:IsRace(RACE_TOXIC) and not c:IsCode(id) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
+	return c:IsRace(RACE_ZOMBIE) and not c:IsCode(id) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_REMOVED,0,nil,e,tp)
-	if chk==0 then return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) 
+	if chk==0 then return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) 
 		and aux.SelectUnselectGroup(g,1,tp,2,2,s.rescon,chk) 
 	end
 	local tg=aux.SelectUnselectGroup(g,1,tp,2,2,s.rescon,chk,tp) 
@@ -51,7 +51,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
 	local sg=g:Filter(Card.IsRelateToEffect,nil,e)
-	if #sg>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
+	if #sg>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
 	local tc=sg:GetFirst()
 	for tc in aux.Next(sg) do
 		if Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP_DEFENSE) then
@@ -70,6 +70,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SpecialSummonComplete()
 end
 function s.splimit(e,c,tp,sumtp,sumpos)
-	return not c:IsRace(RACE_TOXIC)
+	return not c:IsRace(RACE_ZOMBIE)
 end
 

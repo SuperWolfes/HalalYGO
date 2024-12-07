@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.rmtg)
 	e1:SetOperation(s.rmop)
 	c:RegisterEffect(e1)
-	--Locked Summon or add to the hand
+	--Ritual Summon or add to the hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_FREE_CHAIN)
@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.filter(c)
-	return c:IsLockedMonster() and c:IsAbleToRemove()
+	return c:IsRitualMonster() and c:IsAbleToRemove()
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end
@@ -42,21 +42,21 @@ function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToRestAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED) end
-	Duel.SendtoRest(c,REASON_COST)
+	if chk==0 then return c:IsAbleToGraveAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED) end
+	Duel.SendtoGrave(c,REASON_COST)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tc=e:GetLabelObject():GetLabelObject()
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if chk==0 then
 		if not tc or tc:IsFacedown() or tc:GetFlagEffect(id)==0 then return false end
-		local b1=tc:IsCanBeSpecialSummoned(e,SUMMON_TYPE_LOCKED,tp,false,true) 
-			and Duel.IsExistingMatchingCard(s.relfilter,tp,LOCATION_MZONE+LOCATION_HAND+LOCATION_REST,0,1,tc,e,tp,tc,ft)
+		local b1=tc:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,false,true) 
+			and Duel.IsExistingMatchingCard(s.relfilter,tp,LOCATION_MZONE+LOCATION_HAND+LOCATION_GRAVE,0,1,tc,e,tp,tc,ft)
 		local b2=tc:IsAbleToHand()
 		return b1 or b2
 	end
-	local b1=tc:IsCanBeSpecialSummoned(e,SUMMON_TYPE_LOCKED,tp,false,true) 
-		and Duel.IsExistingMatchingCard(s.relfilter,tp,LOCATION_MZONE+LOCATION_HAND+LOCATION_REST,0,1,tc,e,tp,tc,ft)
+	local b1=tc:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,false,true) 
+		and Duel.IsExistingMatchingCard(s.relfilter,tp,LOCATION_MZONE+LOCATION_HAND+LOCATION_GRAVE,0,1,tc,e,tp,tc,ft)
 	local b2=tc:IsAbleToHand()
 	local sel=0
 	if b1 and b2 then
@@ -70,7 +70,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 		e:SetCategory(CATEGORY_TODECK+CATEGORY_SPECIAL_SUMMON)
 		e:SetOperation(s.spop)
 		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,tc,1,tp,0)
-		Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_REST)
+		Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_GRAVE)
 	else
 		e:SetCategory(CATEGORY_TOHAND)
 		e:SetOperation(s.thop)
@@ -79,13 +79,13 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.relfilter(c,e,tp,tc,ft)
 	local lv=tc:GetLevel()
-	aux.LockedSummoningLevel=lv
-	local mlv=c:GetLockedLevel(tc)
-	aux.LockedSummoningLevel=nil
+	aux.RitualSummoningLevel=lv
+	local mlv=c:GetRitualLevel(tc)
+	aux.RitualSummoningLevel=nil
 	if not ((mlv&0xffff)>=lv or (mlv>>16)>=lv) then return false end
-	if tc.mat_filter and not tc.mat_filter(c) or (tc.locked_custom_check and not tc.locked_custom_check(e,tp,Group.FromCards(c),tc)) then return false end
-	if c:IsLocation(LOCATION_REST) then
-		return c:IsType(TYPE_LOCKED) and ft>0 and c:IsAbleToDeck()
+	if tc.mat_filter and not tc.mat_filter(c) or (tc.ritual_custom_check and not tc.ritual_custom_check(e,tp,Group.FromCards(c),tc)) then return false end
+	if c:IsLocation(LOCATION_GRAVE) then
+		return c:IsType(TYPE_RITUAL) and ft>0 and c:IsAbleToDeck()
 	else
 		return (ft>0 or c:IsControler(tp)) and c:IsReleasableByEffect(e)
 	end
@@ -93,18 +93,18 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local rc=e:GetLabelObject():GetLabelObject()
 	if not rc or rc:IsFacedown() or rc:GetFlagEffect(id)==0 then return end
-	if not rc:IsCanBeSpecialSummoned(e,SUMMON_TYPE_LOCKED,tp,false,true) then return end
+	if not rc:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,false,true) then return end
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
-	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.relfilter),tp,LOCATION_MZONE+LOCATION_HAND+LOCATION_REST,0,1,1,rc,e,tp,rc,ft):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.relfilter),tp,LOCATION_MZONE+LOCATION_HAND+LOCATION_GRAVE,0,1,1,rc,e,tp,rc,ft):GetFirst()
 	if tc then
 		rc:SetMaterial(Group.FromCards(tc))
-		if tc:IsLocation(LOCATION_REST) then
-			if Duel.SendtoDeck(tc,nil,2,REASON_EFFECT+REASON_MATERIAL+REASON_LOCKED)==0 then return end
+		if tc:IsLocation(LOCATION_GRAVE) then
+			if Duel.SendtoDeck(tc,nil,2,REASON_EFFECT+REASON_MATERIAL+REASON_RITUAL)==0 then return end
 		else
-			if Duel.Release(tc,REASON_EFFECT+REASON_MATERIAL+REASON_LOCKED)==0 then return end
+			if Duel.Release(tc,REASON_EFFECT+REASON_MATERIAL+REASON_RITUAL)==0 then return end
 		end
-		Duel.SpecialSummon(rc,SUMMON_TYPE_LOCKED,tp,tp,false,true,POS_FACEUP)
+		Duel.SpecialSummon(rc,SUMMON_TYPE_RITUAL,tp,tp,false,true,POS_FACEUP)
 		rc:CompleteProcedure()
 	end
 end

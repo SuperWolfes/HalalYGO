@@ -1,5 +1,5 @@
 --終焔魔神ディスペラシオン［Ｌ］
---Doomblaze Tainted Overwatcher Despairacion [L]
+--Doomblaze Fiend Overlord Despairacion [L]
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -26,5 +26,5 @@ function s.maxCon(e)
 	return e:GetHandler():IsMaximumMode()
 end
 function s.indval2(e,re,rp)
-	return re:IsActionalEffect() and aux.indoval(e,re,rp)
+	return re:IsSpellEffect() and aux.indoval(e,re,rp)
 end

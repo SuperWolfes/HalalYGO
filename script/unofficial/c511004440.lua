@@ -48,7 +48,7 @@ function s.target(e,tp,eg,ev,ep,re,r,rp,chk)
 	local g=e:GetLabelObject()
 	local sg=Duel.GetMatchingGroup(s.sfilter,tp,0x30,0x30,nil,e,tp,g)
 	if chk==0 then return Duel.GetLocationCount(1-tp,LOCATION_MZONE)>=#g and #sg>0
-		and #g==#sg and not (Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) and #sg>1) end
+		and #g==#sg and not (Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) and #sg>1) end
 	Duel.SetTargetCard(sg)
 end
 function s.operation(e,tp,eg,ev,ep,re,r,rp)
@@ -57,7 +57,7 @@ function s.operation(e,tp,eg,ev,ep,re,r,rp)
 	local og=e:GetLabelObject()
 	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
 	local ft=Duel.GetLocationCount(1-tp,LOCATION_MZONE)
-	if #g>ft or (Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) and #g>1) then return end
+	if #g>ft or (Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) and #g>1) then return end
 	if not #g==g:FilterCount(s.sfilter,nil,e,tp) or not #g==g:FilterCount(Card.IsRelateToEffect,nil,e) then return end
 	local tc=g:GetFirst()
 	local sg=Group.CreateGroup()

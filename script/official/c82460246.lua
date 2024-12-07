@@ -61,11 +61,11 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.atkvalue(e)
-	return Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsType,TYPE_TUNER),e:GetHandlerPlayer(),LOCATION_MZONE|LOCATION_REST,0,nil)*100
+	return Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsType,TYPE_TUNER),e:GetHandlerPlayer(),LOCATION_MZONE|LOCATION_GRAVE,0,nil)*100
 end
 function s.tgfilter(c,tp,e)
 	return c:IsPreviousLocation(LOCATION_MZONE) and c:IsPreviousPosition(POS_FACEUP)
-		and c:IsLocation(LOCATION_REST|LOCATION_REMOVED) and c:IsFaceup()
+		and c:IsLocation(LOCATION_GRAVE|LOCATION_REMOVED) and c:IsFaceup()
 		and c:GetPreviousTypeOnField()&TYPE_TUNER>0 and c:IsPreviousControler(tp)
 		and c:IsReason(REASON_BATTLE|REASON_EFFECT) and c:IsCanBeEffectTarget(e)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

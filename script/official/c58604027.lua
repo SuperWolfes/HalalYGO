@@ -1,8 +1,8 @@
 --召喚神エクゾディア
---The Legendary Exdude Incorporate
+--The Legendary Exodia Incarnate
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--cannot special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -59,19 +59,19 @@ function s.initial_effect(c)
 	e6:SetOperation(s.drop)
 	c:RegisterEffect(e6)
 end
-s.listed_series={SET_UNLIKED_ONE}
+s.listed_series={SET_FORBIDDEN_ONE}
 function s.atkfilter(c)
-	return c:IsMonster() and c:IsSetCard(SET_UNLIKED_ONE)
+	return c:IsMonster() and c:IsSetCard(SET_FORBIDDEN_ONE)
 end
 function s.atkval(e,c)
-	return Duel.GetMatchingGroupCount(s.atkfilter,c:GetControler(),LOCATION_REST,0,nil)*1000
+	return Duel.GetMatchingGroupCount(s.atkfilter,c:GetControler(),LOCATION_GRAVE,0,nil)*1000
 end
 function s.spcon(e,c)
 	if c==nil then return true end
-	return Duel.CheckReleaseGroup(c:GetControler(),Card.IsSetCard,1,false,1,true,c,c:GetControler(),nil,false,nil,SET_UNLIKED_ONE)
+	return Duel.CheckReleaseGroup(c:GetControler(),Card.IsSetCard,1,false,1,true,c,c:GetControler(),nil,false,nil,SET_FORBIDDEN_ONE)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,c)
-	local g=Duel.SelectReleaseGroup(tp,Card.IsSetCard,1,1,false,true,true,c,nil,nil,false,nil,SET_UNLIKED_ONE)
+	local g=Duel.SelectReleaseGroup(tp,Card.IsSetCard,1,1,false,true,true,c,nil,nil,false,nil,SET_FORBIDDEN_ONE)
 	if g then
 		g:KeepAlive()
 		e:SetLabelObject(g)
@@ -95,25 +95,25 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp
 end
 function s.thfilter(c)
-	return c:IsMonster() and c:IsSetCard(SET_UNLIKED_ONE) and c:IsAbleToHand()
+	return c:IsMonster() and c:IsSetCard(SET_FORBIDDEN_ONE) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 	if #g>0 then
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)
 	end
 end
 function s.drcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_REST) and e:GetHandler():IsReason(REASON_BATTLE)
+	return e:GetHandler():IsLocation(LOCATION_GRAVE) and e:GetHandler():IsReason(REASON_BATTLE)
 end
 function s.cfilter(c)
-	return c:IsMonster() and c:IsSetCard(SET_UNLIKED_ONE) and not c:IsPublic()
+	return c:IsMonster() and c:IsSetCard(SET_FORBIDDEN_ONE) and not c:IsPublic()
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,1)

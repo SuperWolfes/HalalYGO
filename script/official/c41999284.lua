@@ -2,7 +2,7 @@
 --Linkuriboh
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Link Summon
 	Link.AddProcedure(c,aux.FilterBoolFunction(Card.IsLevel,1),1)
 	--Change ATK to 0
@@ -15,12 +15,12 @@ function s.initial_effect(c)
 	e1:SetCost(s.atkcost)
 	e1:SetOperation(s.atkop)
 	c:RegisterEffect(e1)
-	--Special Summon itself from the RP
+	--Special Summon itself from the GY
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_FREE_CHAIN)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetHintTiming(0,TIMING_BATTLE_START+TIMING_END_PHASE)
 	e2:SetCountLimit(1,id)
 	e2:SetCost(s.spcost)

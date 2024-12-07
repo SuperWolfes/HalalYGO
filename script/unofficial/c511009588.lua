@@ -3,7 +3,7 @@
 --scripted by Cybercatman
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Synchro Summon procedure
 	Synchro.AddProcedure(c,nil,1,1,aux.FilterBoolFunction(Card.IsCode,82044279),1,1)
 	--Pendulum Summon
@@ -52,7 +52,7 @@ function s.initial_effect(c)
 	e4:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
 	e4:SetTarget(aux.PersistentTargetFilter)
 	c:RegisterEffect(e4)
-	--Place this card in your Pendulum Zone instead of battle mismatching
+	--Place this card in your Pendulum Zone instead of battle destruction
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e5:SetCode(EFFECT_DESTROY_REPLACE)

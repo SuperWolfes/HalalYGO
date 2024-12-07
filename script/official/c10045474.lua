@@ -51,7 +51,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		if c:IsRelateToEffect(e) and pos&POS_FACEDOWN>0 then
 			Duel.BreakEffect()
 			c:RegisterFlagEffect(id,RESET_CHAIN,0,0)
-			--Negate Actional/Trap effects in the same column
+			--Negate Spell/Trap effects in the same column
 			local e3=Effect.CreateEffect(c)
 			e3:SetType(EFFECT_TYPE_FIELD)
 			e3:SetCode(EFFECT_DISABLE)
@@ -78,11 +78,11 @@ end
 function s.distg(e,c)
 	local seq=e:GetLabel()
 	if c:IsControler(1-e:GetHandlerPlayer()) then seq=4-seq end
-	return c:IsActionalTrap() and seq==c:GetSequence() and c:GetFlagEffect(id)==0
+	return c:IsSpellTrap() and seq==c:GetSequence() and c:GetFlagEffect(id)==0
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	local cseq=e:GetLabel()
-	if not re:IsActionalTrapEffect() then return end
+	if not re:IsSpellTrapEffect() then return end
 	local rc=re:GetHandler()
 	if rc:HasFlagEffect(id) then return end
 	local p,loc,seq=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_CONTROLER,CHAININFO_TRIGGERING_LOCATION,CHAININFO_TRIGGERING_SEQUENCE)

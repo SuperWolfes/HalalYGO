@@ -1,8 +1,8 @@
 --オルフェゴール・ガラテア
---Galatea, the Coreust Automaton
+--Galatea, the Orcust Automaton
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_EFFECT),2,nil,s.matcheck)
 	--Cannot be destroyed by battle while it is linked
 	local e1=Effect.CreateEffect(c)
@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetCondition(function(e) return e:GetHandler():IsLinked() end)
 	e1:SetValue(1)
 	c:RegisterEffect(e1)
-	--Shuffle 1 Machine monster into the Deck and set 1 "Coreust" Actional/Trap
+	--Shuffle 1 Machine monster into the Deck and set 1 "Orcust" Spell/Trap
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TODECK)
@@ -31,15 +31,15 @@ function s.initial_effect(c)
 	e3:SetCondition(s.tdcon2)
 	c:RegisterEffect(e3)
 end
-s.listed_series={SET_COREUST}
+s.listed_series={SET_ORCUST}
 function s.matcheck(g,lc,sumtype,tp)
-	return g:IsExists(Card.IsSetCard,1,nil,SET_COREUST,lc,sumtype,tp)
+	return g:IsExists(Card.IsSetCard,1,nil,SET_ORCUST,lc,sumtype,tp)
 end
 function s.tdcon1(e,tp,eg,ep,ev,re,r,rp)
-	return not Duel.IsPlayerAffectedByEffect(tp,CARD_COREUSTRATED_BABEL)
+	return not Duel.IsPlayerAffectedByEffect(tp,CARD_ORCUSTRATED_BABEL)
 end
 function s.tdcon2(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsPlayerAffectedByEffect(tp,CARD_COREUSTRATED_BABEL)
+	return Duel.IsPlayerAffectedByEffect(tp,CARD_ORCUSTRATED_BABEL)
 end
 function s.tdfilter(c)
 	return c:IsFaceup() and c:IsRace(RACE_MACHINE) and c:IsAbleToDeck()
@@ -52,7 +52,7 @@ function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,#g,0,0)
 end
 function s.filter(c)
-	return c:IsSetCard(SET_COREUST) and c:IsActionalTrap() and c:IsSSetable()
+	return c:IsSetCard(SET_ORCUST) and c:IsSpellTrap() and c:IsSSetable()
 end
 function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

@@ -18,15 +18,15 @@ function s.initial_effect(c)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckRemoveOverlayCard(tp,1,0,1,REASON_EFFECT) end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_LEAVE_REST,nil,1,tp,LOCATION_REST)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_LEAVE_GRAVE,nil,1,tp,LOCATION_GRAVE)
 end
 	--Detach 1 Xyz material from your monster
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.RemoveOverlayCard(tp,1,0,1,1,REASON_EFFECT)<1 then return end
 	--Set the detached card
 	local rc=Duel.GetOperatedGroup():GetFirst()
-	if not (rc:IsLocation(LOCATION_REST) and rc:IsControler(tp)) then return end
+	if not (rc:IsLocation(LOCATION_GRAVE) and rc:IsControler(tp)) then return end
 	if rc:IsMonster() and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 
 		and rc:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEDOWN_DEFENSE)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then

@@ -1,5 +1,5 @@
 --妖仙獣 鎌弐太刀
---Yosakhi Kama 2
+--Yosenju Kama 2
 local s,id=GetID()
 function s.initial_effect(c)
 	--Perform a Normal Summon

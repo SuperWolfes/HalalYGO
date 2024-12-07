@@ -24,5 +24,5 @@ function s.filter(c)
 	return c:IsSetCard(0x2a) and c:IsMonster()
 end
 function s.atkval(e,c)
-	return Duel.GetMatchingGroupCount(s.filter,c:GetControler(),LOCATION_REST,0,nil)*200
+	return Duel.GetMatchingGroupCount(s.filter,c:GetControler(),LOCATION_GRAVE,0,nil)*200
 end

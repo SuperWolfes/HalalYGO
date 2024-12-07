@@ -13,13 +13,13 @@ function s.initial_effect(c)
 end
 s.listed_series={0x56}
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x56) and c:IsAbleToRestAsCost()
+	return c:IsFaceup() and c:IsSetCard(0x56) and c:IsAbleToGraveAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,0,5,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_ONFIELD,0,5,5,nil)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -44,5 +44,5 @@ function s.actcon(e)
 	return ph>PHASE_MAIN1 and ph<PHASE_MAIN2
 end
 function s.aclimit(e,re,tp)
-	return re:GetHandler():IsMonster() and re:GetHandler():IsLocation(LOCATION_HAND+LOCATION_REST)
+	return re:GetHandler():IsMonster() and re:GetHandler():IsLocation(LOCATION_HAND+LOCATION_GRAVE)
 end

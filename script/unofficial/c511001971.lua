@@ -1,4 +1,4 @@
---Legendary Boss Red Queen the Biker Monsterdess
+--Legendary Boss Red Queen the Biker Goddess
 local s,id=GetID()
 function s.initial_effect(c)
 	--control

@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	c:SetSPSummonOnce(id)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Special Summon condition
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_SPSUMMON_PROC)
 	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-	e2:SetRange(LOCATION_HAND|LOCATION_REST)
+	e2:SetRange(LOCATION_HAND|LOCATION_GRAVE)
 	e2:SetValue(1)
 	e2:SetCondition(s.spcon)
 	e2:SetTarget(s.sptg)
@@ -30,7 +30,7 @@ function s.initial_effect(c)
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e2:SetCondition(function(e) return e:GetHandler():IsSummonType(SUMMON_TYPE_SPECIAL+1) end)
 	e2:SetTarget(s.damsettg)
-	e2:SetOperation(s.damvetop)
+	e2:SetOperation(s.damsetop)
 	c:RegisterEffect(e2)
 	--Inflict 500 damage when your opponent Special Summons
 	local e3=Effect.CreateEffect(c)
@@ -55,13 +55,13 @@ end
 function s.spcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
-	local rg=Duel.GetMatchingGroup(s.spcfilter,tp,LOCATION_ONFIELD|LOCATION_REST,0,c)
+	local rg=Duel.GetMatchingGroup(s.spcfilter,tp,LOCATION_ONFIELD|LOCATION_GRAVE,0,c)
 	return #rg>0 and aux.SelectUnselectGroup(rg,e,tp,1,3,s.rescon,0)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,c)
 	local c=e:GetHandler()
 	local g=nil
-	local rg=Duel.GetMatchingGroup(s.spcfilter,tp,LOCATION_ONFIELD|LOCATION_REST,0,c)
+	local rg=Duel.GetMatchingGroup(s.spcfilter,tp,LOCATION_ONFIELD|LOCATION_GRAVE,0,c)
 	local g=aux.SelectUnselectGroup(rg,e,tp,1,3,s.rescon,1,tp,HINTMSG_REMOVE,s.rescon,nil,true)
 	if #g>0 then
 		g:KeepAlive()
@@ -84,7 +84,7 @@ end
 function s.setfilter(c)
 	return c:IsSetCard(SET_VOLCANIC) and c:IsTrap() and c:IsSSetable()
 end
-function s.damvetop(e,tp,eg,ep,ev,re,r,rp)
+function s.damsetop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsRace,RACE_PYRO),tp,LOCATION_REMOVED,0,nil)
 	if #g==0 then return end
 	if Duel.Damage(1-tp,#g*500,REASON_EFFECT)>0

@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_SYNCHRO),1,1,aux.FilterBoolFunction(Card.IsCode,CARD_STARDUST_DRAGON),1,1)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Synchto Summon this card on your opponent's turn
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(575512,0))

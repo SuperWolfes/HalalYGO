@@ -1,5 +1,5 @@
 --デーモンの宣告
---Archtainted's Oath
+--Archfiend's Oath
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -44,6 +44,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ShuffleHand(tp)
 	else
 		Duel.DisableShuffleCheck()
-		Duel.SendtoRest(tc,REASON_EFFECT|REASON_EXCAVATE)
+		Duel.SendtoGrave(tc,REASON_EFFECT|REASON_EXCAVATE)
 	end
 end

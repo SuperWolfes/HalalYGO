@@ -3,7 +3,7 @@
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	--Search 1 "Purrely" card, except a Quick-Play Actional
+	--Search 1 "Purrely" card, except a Quick-Play Spell
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	--Special Summon 1 "Purrely" Xyz monster
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
-	e3:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_LEAVE_REST)
+	e3:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_LEAVE_GRAVE)
 	e3:SetType(EFFECT_TYPE_IGNITION)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e3:SetRange(LOCATION_MZONE)
@@ -31,7 +31,7 @@ function s.initial_effect(c)
 end
 s.listed_series={SET_PURRELY}
 function s.thfilter(c)
-	return c:IsSetCard(SET_PURRELY) and not c:IsQuickPlayActional() and c:IsAbleToHand()
+	return c:IsSetCard(SET_PURRELY) and not c:IsQuickPlaySpell() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -46,7 +46,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.qpfilter(c,e,tp,mc)
-	return c:IsSetCard(SET_PURRELY) and c:IsQuickPlayActional()
+	return c:IsSetCard(SET_PURRELY) and c:IsQuickPlaySpell()
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,mc,c)
 end
 function s.spfilter(c,e,tp,mc,sc)
@@ -59,12 +59,12 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		local pg=aux.GetMustBeMaterialGroup(tp,Group.FromCards(c),tp,nil,nil,REASON_XYZ)
 		return (#pg<=0 or (#pg==1 and pg:IsContains(c)))
-			and Duel.IsExistingTarget(s.qpfilter,tp,LOCATION_REST,0,1,nil,e,tp,c)
+			and Duel.IsExistingTarget(s.qpfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp,c)
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local g=Duel.SelectTarget(tp,s.qpfilter,tp,LOCATION_REST,0,1,1,nil,e,tp,c)
+	local g=Duel.SelectTarget(tp,s.qpfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp,c)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

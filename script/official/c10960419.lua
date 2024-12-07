@@ -1,8 +1,8 @@
 --タイムマジック・ハンマー
---Time Ment Hammer
+--Time Magic Hammer
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--special summon condition
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 s.roll_dice=true
-s.material_race=RACE_MENTOR
+s.material_race=RACE_SPELLCASTER
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() and chkc~=e:GetHandler() end
 	if chk==0 then return true end
@@ -33,7 +33,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) or c:IsLocation(LOCATION_SZONE) or c:IsFacedown() then return end
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 or tc:IsFacedown() or not tc:IsRelateToEffect(e) then
-		Duel.SendtoRest(c,REASON_EFFECT)
+		Duel.SendtoGrave(c,REASON_EFFECT)
 		return
 	end
 	Duel.Equip(tp,c,tc)
@@ -47,7 +47,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	c:RegisterEffect(e1)
 	--remove
 	local e2=Effect.CreateEffect(c)
-	e2:SetCategory(CATEGORY_REMOVE+CATEGORY_SUFFICE)
+	e2:SetCategory(CATEGORY_REMOVE+CATEGORY_DICE)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_BATTLE_START)
 	e2:SetRange(LOCATION_SZONE)
@@ -68,7 +68,7 @@ function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tc=ec:GetBattleTarget()
 	if chk==0 then return tc and tc:IsAbleToRemove() end
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,tc,1,0,0)
-	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,1)
+	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,0,tp,1)
 end
 function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

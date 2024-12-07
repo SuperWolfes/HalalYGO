@@ -1,20 +1,20 @@
 --魔弾の射手 カスパール
---Mentoral Musketeer Caspar
+--Magical Musketeer Caspar
 local s,id=GetID()
 function s.initial_effect(c)
-	--"Mentoral Musket" Actional/Traps can be activated from the hand
+	--"Magical Musket" Spell/Traps can be activated from the hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,2))
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_QP_ACT_IN_NTPHAND)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetTargetRange(LOCATION_HAND,0)
-	e1:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,SET_MENTORAL_MUSKET))
+	e1:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,SET_MAGICAL_MUSKET))
 	c:RegisterEffect(e1)
 	local e2=e1:Clone()
 	e2:SetCode(EFFECT_TRAP_ACT_IN_HAND)
 	c:RegisterEffect(e2)
-	--Add 1 "Mentoral Musket" card from the Deck to the hand
+	--Add 1 "Magical Musket" card from the Deck to the hand
 	local g=Group.CreateGroup()
 	g:KeepAlive()
 	local e3=Effect.CreateEffect(c)
@@ -42,7 +42,7 @@ function s.initial_effect(c)
 	e5:SetOperation(s.thop)
 	c:RegisterEffect(e5)
 end
-s.listed_series={SET_MENTORAL_MUSKET}
+s.listed_series={SET_MAGICAL_MUSKET}
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local flageff={c:GetFlagEffectLabel(1)}
@@ -70,7 +70,7 @@ function s.regop2(e,tp,eg,ep,ev,re,r,rp)
 	e:GetHandler():RegisterFlagEffect(1,RESET_EVENT|RESETS_STANDARD&~RESET_TURN_SET|RESET_CHAIN,0,1,ev)
 end
 function s.thfilter(c,codes)
-	return c:IsSetCard(SET_MENTORAL_MUSKET) and not c:IsCode(codes) and c:IsAbleToHand()
+	return c:IsSetCard(SET_MAGICAL_MUSKET) and not c:IsCode(codes) and c:IsAbleToHand()
 end
 function s.chk(c,tp,e)
 	return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,c,c:GetCode())

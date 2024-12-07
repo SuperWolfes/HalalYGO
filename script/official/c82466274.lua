@@ -1,5 +1,5 @@
 --呪眼の死徒 サリエル
---Serziel, Watcher of the Goodie
+--Serziel, Watcher of the Evil Eye
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)

@@ -30,7 +30,7 @@ function s.maxCon(e)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local bc=e:GetHandler():GetBattleTarget()
-	if bc and bc:IsLocation(LOCATION_REST) then
+	if bc and bc:IsLocation(LOCATION_GRAVE) then
 		Duel.Damage(1-tp,2400,REASON_EFFECT)
 	end
 end

@@ -1,5 +1,5 @@
 --D－HERO ドリルガイ
---Destrudic HERO - Drilldark
+--Destiny HERO - Drilldark
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon

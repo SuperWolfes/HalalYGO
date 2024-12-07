@@ -1,5 +1,5 @@
 --ロード・マジック－レイズオルター
---Road Ment - Uplifter
+--Road Magic - Uplifter
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -15,13 +15,13 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsLevelAbove(7) and c:IsRace(RACE_MENTOR)
+	return c:IsFaceup() and c:IsLevelAbove(7) and c:IsRace(RACE_SPELLCASTER)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil)
 end
 function s.costfilter(c,e,tp)
-	return c:IsMonster() and c:IsAbleToRestAsCost() and c:IsAttribute(ATTRIBUTE_LIGHT)
+	return c:IsMonster() and c:IsAbleToGraveAsCost() and c:IsAttribute(ATTRIBUTE_LIGHT)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,e:GetHandler()) end

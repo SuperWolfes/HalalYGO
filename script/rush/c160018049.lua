@@ -1,10 +1,10 @@
 --天堂始終の面妖姫
---Beingss of Spectrum's Eternity
+--Spectress of Heaven's Eternity
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,160428092,160014035)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION,nil,false)
 	--Direct attack

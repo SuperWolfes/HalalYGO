@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.tgfilter(c)
-	return c:IsFaceup() and (not c:IsRace(RACE_MACHINE) or c:GetAttribute()~=ATTRIBUTE_ALL&~ATTRIBUTE_MEGA)
+	return c:IsFaceup() and (not c:IsRace(RACE_MACHINE) or c:GetAttribute()~=ATTRIBUTE_ALL&~ATTRIBUTE_DIVINE)
 end
 function s.changetg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and s.tgfilter(chkc) end
@@ -37,7 +37,7 @@ function s.changeop(e,tp,eg,ep,ev,re,r,rp)
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_ADD_ATTRIBUTE)
-		e1:SetValue(ATTRIBUTE_ALL&~ATTRIBUTE_MEGA)
+		e1:SetValue(ATTRIBUTE_ALL&~ATTRIBUTE_DIVINE)
 		e1:SetReset(RESET_EVENT|RESETS_STANDARD)
 		tc:RegisterEffect(e1)
 		--Becomes a Machine monster

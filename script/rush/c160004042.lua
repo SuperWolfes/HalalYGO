@@ -1,5 +1,5 @@
 --透幻郷の嶮峻
---The Insurmountable Summit of Beinl Shangri-La
+--The Insurmountable Summit of Spectral Shangri-La
 local s,id=GetID()
 function s.initial_effect(c)
 	--activate

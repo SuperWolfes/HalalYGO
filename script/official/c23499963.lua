@@ -5,10 +5,10 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Add 1 "Vast Desert Gold Golgonda" from deck
-	--Or add 1 "Sprigans" monster from deck, and if you do, send 1 "Sprigans" monster from deck to RP
+	--Or add 1 "Sprigans" monster from deck, and if you do, send 1 "Sprigans" monster from deck to GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_TOREST)
+	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_TOGRAVE)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
@@ -22,7 +22,7 @@ function s.fcfilter(c)
 	return c:IsCode(60884672) and c:IsAbleToHand()
 end
 function s.tgfilter(c)
-	return c:IsMonster() and c:IsSetCard(SET_SPRINGANS) and c:IsAbleToRest()
+	return c:IsMonster() and c:IsSetCard(SET_SPRINGANS) and c:IsAbleToGrave()
 end
 function s.mcfilter(c,tp)
 	return c:IsMonster() and c:IsSetCard(SET_SPRINGANS) and c:IsAbleToHand()
@@ -45,9 +45,9 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local g=Duel.SelectMatchingCard(tp,s.mcfilter,tp,LOCATION_DECK,0,1,1,nil,tp)
 		if #g>0 and Duel.SendtoHand(g,nil,REASON_EFFECT)>0 then
 			Duel.ConfirmCards(1-tp,g)
-			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 			local cg=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
-			if #cg>0 then Duel.SendtoRest(cg,REASON_EFFECT) end
+			if #cg>0 then Duel.SendtoGrave(cg,REASON_EFFECT) end
 		end
 	else
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)

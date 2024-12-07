@@ -1,5 +1,5 @@
 --機皇兵グランエル・アイン
---Mekwatcher Army of Granel
+--Meklord Army of Granel
 local s,id=GetID()
 function s.initial_effect(c)
 	--atkup

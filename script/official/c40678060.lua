@@ -7,13 +7,13 @@ function s.initial_effect(c)
 	aux.AddEquipProcedure(c,nil,s.eqfilter)
 	--Can only control 1 "Angel Ring"
 	c:SetUniqueOnField(1,0,id)
-	--Negate an opponent's activated Actional effect
+	--Negate an opponent's activated Spell effect
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e1:SetCode(EVENT_CHAIN_SOLVING)
 	e1:SetRange(LOCATION_SZONE)
 	e1:SetCountLimit(1)
-	e1:SetCondition(function(e,tp,eg,ep,ev,re,r,rp) return rp==1-tp and re:IsActionalEffect() and Duel.IsChainDisablable(ev) end)
+	e1:SetCondition(function(e,tp,eg,ep,ev,re,r,rp) return rp==1-tp and re:IsSpellEffect() and Duel.IsChainDisablable(ev) end)
 	e1:SetOperation(function(e,tp,eg,ep,ev,re,r,rp) Duel.NegateEffect(ev) end)
 	c:RegisterEffect(e1)
 	--Gain 500 LP, then destroy this card

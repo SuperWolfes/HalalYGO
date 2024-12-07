@@ -16,7 +16,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	return true
 end
 function s.cfilter(c)
-	return c:IsActional() and c:IsAbleToRemove()
+	return c:IsSpell() and c:IsAbleToRemove()
 end
 function s.filter(c,def)
 	return c:IsFaceup() and c:IsDefenseBelow(def)
@@ -25,10 +25,10 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		if e:GetLabel()~=1 then return false end
 		e:SetLabel(0)
-		local ct=Duel.GetMatchingGroupCount(s.cfilter,tp,LOCATION_REST,0,nil)
+		local ct=Duel.GetMatchingGroupCount(s.cfilter,tp,LOCATION_GRAVE,0,nil)
 		return Duel.IsExistingMatchingCard(s.filter,tp,0,LOCATION_MZONE,1,nil,ct*300)
 	end
-	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_GRAVE,0,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 	e:SetLabel(#g*300)
 	local sg=Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_MZONE,nil,#g*300)

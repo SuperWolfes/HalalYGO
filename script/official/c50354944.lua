@@ -1,5 +1,5 @@
 --暗黒騎士ガイアオリジン
---Bia the Fierce Knight Origin
+--Gaia the Fierce Knight Origin
 --Logical Nonsense
 --Substitute ID
 local s,id=GetID()
@@ -22,14 +22,14 @@ function s.initial_effect(c)
 	e2:SetCode(EFFECT_DOUBLE_TRIBUTE)
 	e2:SetValue(s.dccon)
 	c:RegisterEffect(e2)
-	--Banish from RP; reset a monster's ATK to its original ATK
+	--Banish from GY; reset a monster's ATK to its original ATK
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetCategory(CATEGORY_ATKCHANGE)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_STEP)
 	e3:SetType(EFFECT_TYPE_QUICK_O)
 	e3:SetCode(EVENT_FREE_CHAIN)
-	e3:SetRange(LOCATION_REST)
+	e3:SetRange(LOCATION_GRAVE)
 	e3:SetHintTiming(TIMING_DAMAGE_STEP)
 	e3:SetCountLimit(1,{id,1})
 	e3:SetCondition(s.atkcon)
@@ -42,9 +42,9 @@ end
 s.listed_names={id}
 	--Check for level 5+ monster
 function s.spfilter(c)
-	return c:IsLevelAbove(5) and c:IsAbleToRestAsCost()
+	return c:IsLevelAbove(5) and c:IsAbleToGraveAsCost()
 end
-	--Send 1 level 5+ monster from hand to the RP as cost
+	--Send 1 level 5+ monster from hand to the GY as cost
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND,0,1,e:GetHandler()) end
 	Duel.DiscardHand(tp,s.spfilter,1,1,REASON_COST,e:GetHandler())

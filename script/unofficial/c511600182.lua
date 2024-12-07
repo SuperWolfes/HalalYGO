@@ -1,14 +1,14 @@
 --転生炎獣 ヴァイオレット・キマイラ (Anime)
---Salamangreat Violet Chilean (Anime)
+--Salamangreat Violet Chimera (Anime)
 --scripted by Larry126
 local s,id,alias=GetID()
 function s.initial_effect(c)
 	alias=c:GetOriginalCodeRule()
 	--Fusion Material
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,41463181,s.ffilter)
-	--Reincorporation Check
-	aux.EnableCheckReincorporation(c)
+	--Reincarnation Check
+	aux.EnableCheckReincarnation(c)
 	--ATK UP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(2091298,0))
@@ -103,7 +103,7 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.atkcon2(e,tp,eg,ep,ev,re,r,rp)
 	local ph=Duel.GetCurrentPhase()
-	return e:GetHandler():IsReincorporationSummoned() and ph==PHASE_DAMAGE_CAL
+	return e:GetHandler():IsReincarnationSummoned() and ph==PHASE_DAMAGE_CAL
 end
 function s.atktg2(e,c)
 	return c==e:GetHandler():GetBattleTarget()

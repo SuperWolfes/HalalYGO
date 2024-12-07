@@ -1,4 +1,4 @@
---Speed Actional - Tyrant Fcoree
+--Speed Spell - Tyrant Force
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

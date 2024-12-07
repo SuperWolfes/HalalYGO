@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetCode(EVENT_PRE_DAMAGE_CALCULATE)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(s.atkcon)
 	e2:SetCost(aux.bfgcost)
@@ -56,17 +56,17 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	return true
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and chkc:IsLinkMonster() end
-	if chk==0 then return Duel.IsExistingTarget(Card.IsType,tp,LOCATION_REST,0,1,nil,TYPE_LINK) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and chkc:IsLinkMonster() end
+	if chk==0 then return Duel.IsExistingTarget(Card.IsType,tp,LOCATION_GRAVE,0,1,nil,TYPE_LINK) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local tg=Duel.SelectTarget(tp,Card.IsType,tp,LOCATION_REST,0,1,1,nil,TYPE_LINK)
+	local tg=Duel.SelectTarget(tp,Card.IsType,tp,LOCATION_GRAVE,0,1,1,nil,TYPE_LINK)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=e:GetLabelObject()
 	local tgc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToBattle() and tc:IsFaceup() and 
-		tgc and tgc:IsRelateToEffect(e) and tgc:IsLocation(LOCATION_REST) and 
+		tgc and tgc:IsRelateToEffect(e) and tgc:IsLocation(LOCATION_GRAVE) and 
 		tc:UpdateAttack(tgc:GetAttack(),RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,c)==tgc:GetAttack() then
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)

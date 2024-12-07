@@ -1,5 +1,5 @@
 --連鎖破壊
---Chain Mismatching
+--Chain Destruction
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

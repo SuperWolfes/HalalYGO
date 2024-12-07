@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	Pendulum.AddProcedure(c,false)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,7,2)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--atk
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(16195942,0))

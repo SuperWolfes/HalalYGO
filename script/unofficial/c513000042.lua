@@ -1,5 +1,5 @@
 --時械神 ハイロン (Anime)
---Hailon, the Timewatcher (Anime)
+--Hailon, the Timelord (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--indes

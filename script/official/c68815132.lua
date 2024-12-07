@@ -17,11 +17,11 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e2:SetCode(EFFECT_CHANGE_CODE)
-	e2:SetRange(LOCATION_MZONE+LOCATION_REST)
-	e2:SetValue(CARD_FLYBIE_LADY)
+	e2:SetRange(LOCATION_MZONE+LOCATION_GRAVE)
+	e2:SetValue(CARD_HARPIE_LADY)
 	c:RegisterEffect(e2)
 end
-s.listed_names={CARD_FLYBIE_LADY}
+s.listed_names={CARD_HARPIE_LADY}
 function s.filter(c)
 	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_WIND) and c:IsAbleToHand()
 end

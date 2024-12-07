@@ -1,5 +1,5 @@
 --女神ウルドの裁断
---Monsterdess Urd's Verdict
+--Goddess Urd's Verdict
 --Scripted by Eerie Code and AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	---Prevent mismatching by opponent's effect
+	---Prevent destruction by opponent's effect
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)

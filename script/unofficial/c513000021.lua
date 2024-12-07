@@ -1,10 +1,7 @@
--- Beast Machine King Bardaco Ür (manga)
-local s,id=GetID()
-function s.initial_effect(c)
-	c:EnableAwakeLimit()
+-- Beast Machine King Barbaros Ür (manga)local s,id=GetID()function s.initial_effect(c)
+	c:EnableReviveLimit()
 	Fusion.AddProcCode2(c,78651105,96938777,true,true)
-	-- attack limite
-	local e1=Effect.CreateEffect(c)
+	-- attack limite	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_CANNOT_SELECT_BATTLE_TARGET)
 	e1:SetValue(s.vala)

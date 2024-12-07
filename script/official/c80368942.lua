@@ -19,7 +19,7 @@ function s.spfilter(c,e,tp)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
-		local g=Duel.GetMatchingGroup(s.gfilter,tp,LOCATION_REST,0,nil)
+		local g=Duel.GetMatchingGroup(s.gfilter,tp,LOCATION_GRAVE,0,nil)
 		local ct=s.count_unique_code(g)
 		e:SetLabel(ct)
 		return ct>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>=ct
@@ -28,7 +28,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,e:GetLabel(),tp,LOCATION_DECK)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(s.gfilter,tp,LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(s.gfilter,tp,LOCATION_GRAVE,0,nil)
 	local ct=s.count_unique_code(g)
 	if ct==0 and Duel.GetLocationCount(tp,LOCATION_MZONE)<ct then return end
 	local sg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_DECK,0,nil,e,tp)

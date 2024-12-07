@@ -1,9 +1,9 @@
 --クリアー・ファントム
---Clear Illusion
+--Clear Phantom
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	--Add 2 cards that are either "Clear World" and/or Actionals/Traps that mention it from your Deck to your hand
+	--Add 2 cards that are either "Clear World" and/or Spells/Traps that mention it from your Deck to your hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetTargetRange(1,0)
 	c:RegisterEffect(e2)
-	--Destroy 1 monster your opponent controls, and if you do, send the top 3 cards of their Deck to the RP
+	--Destroy 1 monster your opponent controls, and if you do, send the top 3 cards of their Deck to the GY
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_DESTROY+CATEGORY_DECKDES)
@@ -40,10 +40,10 @@ function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 	local g=Duel.SelectMatchingCard(tp,Card.IsDiscardable,tp,LOCATION_HAND,0,1,1,c)
 	g:AddCard(c)
-	Duel.SendtoRest(g,REASON_COST|REASON_DISCARD)
+	Duel.SendtoGrave(g,REASON_COST|REASON_DISCARD)
 end
 function s.thfilter(c)
-	return (c:IsCode(CARD_CLEAR_WORLD) or (c:IsActionalTrap() and c:ListsCode(CARD_CLEAR_WORLD))) and c:IsAbleToHand()
+	return (c:IsCode(CARD_CLEAR_WORLD) or (c:IsSpellTrap() and c:ListsCode(CARD_CLEAR_WORLD))) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,2,nil) end

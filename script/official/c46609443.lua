@@ -16,7 +16,7 @@ end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()
 	return #eg==1 and tc:GetReasonCard()==e:GetHandler()
-		and tc:IsLocation(LOCATION_REST) and tc:IsReason(REASON_BATTLE) 
+		and tc:IsLocation(LOCATION_GRAVE) and tc:IsReason(REASON_BATTLE) 
 end
 function s.filter(c,e,tp)
 	return c:IsAttackBelow(1600) and c:IsLevelAbove(5) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e3:SetCode(EVENT_CHAIN_SOLVED)
 	e3:SetCondition(s.ctcon2)
 	c:RegisterEffect(e3)
-	--Place "Crystal Beast" monsters to your Actional/Trap Zone
+	--Place "Crystal Beast" monsters to your Spell/Trap Zone
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetType(EFFECT_TYPE_IGNITION)
@@ -58,12 +58,12 @@ function s.ctop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.plcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToRestAsCost() end
+	if chk==0 then return c:IsAbleToGraveAsCost() end
 	e:SetLabel(c:GetCounter(0x6))
-	Duel.SendtoRest(c,REASON_COST)
+	Duel.SendtoGrave(c,REASON_COST)
 end
 function s.plfilter(c)
-	return c:IsSetCard(0x1034) and c:IsMonster() and not c:IsUnliked()
+	return c:IsSetCard(0x1034) and c:IsMonster() and not c:IsForbidden()
 end
 function s.pltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ct=e:GetHandler():GetCounter(0x6)
@@ -79,13 +79,13 @@ function s.plop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	for tc in g:Iter() do
 		Duel.MoveToField(tc,tp,tp,LOCATION_SZONE,POS_FACEUP,true)
-		--Treat it as a Continuous Actional
+		--Treat it as a Continuous Spell
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_CHANGE_TYPE)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
-		e1:SetValue(TYPE_ACTIONAL+TYPE_CONTINUOUS)
+		e1:SetValue(TYPE_SPELL+TYPE_CONTINUOUS)
 		tc:RegisterEffect(e1)
 	end
 end

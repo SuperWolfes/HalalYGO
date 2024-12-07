@@ -1,9 +1,9 @@
 --ゴーストリックの雪女
---Missrick Yuki-onna
+--Ghostrick Yuki-onna
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Cannot be normal summoned if player controls no "Missrick" monster
+	--Cannot be normal summoned if player controls no "Ghostrick" monster
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_CANNOT_SUMMON)
@@ -50,7 +50,7 @@ function s.posop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.poscon2(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_REST) and e:GetHandler():IsReason(REASON_BATTLE)
+	return e:GetHandler():IsLocation(LOCATION_GRAVE) and e:GetHandler():IsReason(REASON_BATTLE)
 		and e:GetHandler():GetReasonCard():IsRelateToBattle()
 end
 function s.postg2(e,tp,eg,ep,ev,re,r,rp,chk)

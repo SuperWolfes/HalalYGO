@@ -1,5 +1,5 @@
 --ワルキューレ・ドリット (Anime)
---Balkanie Dritte (Anime)
+--Valkyrie Dritte (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--atk/def

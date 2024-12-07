@@ -3,9 +3,9 @@
 --Scripted by Hel
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send 1 card to the RP and Special Summon
+	--Send 1 card to the GY and Special Summon
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_TOREST+CATEGORY_SPECIAL_SUMMON)
+	e1:SetCategory(CATEGORY_TOGRAVE+CATEGORY_SPECIAL_SUMMON)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_HAND)
@@ -15,12 +15,12 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 s.listed_series={0x150}
-local key=TYPE_MONSTER+TYPE_ACTIONAL+TYPE_TRAP
-function s.torestfilter(c,ctype)
-	return c:IsSetCard(0x150) and not c:IsType(ctype&key) and c:IsAbleToRest()
+local key=TYPE_MONSTER+TYPE_SPELL+TYPE_TRAP
+function s.togravefilter(c,ctype)
+	return c:IsSetCard(0x150) and not c:IsType(ctype&key) and c:IsAbleToGrave()
 end
 function s.tgfilter(c,tp)
-	return c:IsFaceup() and c:IsSetCard(0x150) and Duel.IsExistingMatchingCard(s.torestfilter,tp,LOCATION_DECK,0,1,nil,c:GetType())
+	return c:IsFaceup() and c:IsSetCard(0x150) and Duel.IsExistingMatchingCard(s.togravefilter,tp,LOCATION_DECK,0,1,nil,c:GetType())
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_ONFIELD) and chkc:IsControler(tp) and s.tgfilter(chkc,tp) end
@@ -28,9 +28,9 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		and e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,false,false) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 	Duel.SelectTarget(tp,s.tgfilter,tp,LOCATION_ONFIELD,0,1,1,nil,tp)
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,e:GetHandler(),1,0,0)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
 end
 function s.ssummonfilter(c,tgid,e,tp)
 	return c:IsSetCard(0x150) and c:IsMonster() and not c:IsCode(tgid) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
@@ -48,15 +48,15 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e1,tp)
 	aux.RegisterClientHint(c,nil,tp,1,0,aux.Stringid(id,1),nil)
-	--Send to RP and Special Summon
+	--Send to GY and Special Summon
 	if tc and tc:IsRelateToEffect(e) then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-		local g=Duel.SelectMatchingCard(tp,s.torestfilter,tp,LOCATION_DECK,0,1,1,nil,tc:GetType())
-		if #g>0 and Duel.SendtoRest(g,REASON_EFFECT)>0 then
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		local g=Duel.SelectMatchingCard(tp,s.togravefilter,tp,LOCATION_DECK,0,1,1,nil,tc:GetType())
+		if #g>0 and Duel.SendtoGrave(g,REASON_EFFECT)>0 then
 			local ogc=Duel.GetOperatedGroup():GetFirst()
-			if ogc:IsLocation(LOCATION_REST) and c:IsRelateToEffect(e) and Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)>0 then
-				--Special Summon from RP
-				local gss=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.ssummonfilter),tp,LOCATION_REST,0,nil,g:GetFirst():GetCode(),e,tp)
+			if ogc:IsLocation(LOCATION_GRAVE) and c:IsRelateToEffect(e) and Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)>0 then
+				--Special Summon from GY
+				local gss=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.ssummonfilter),tp,LOCATION_GRAVE,0,nil,g:GetFirst():GetCode(),e,tp)
 				if #gss>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 					Duel.BreakEffect()
 					Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)

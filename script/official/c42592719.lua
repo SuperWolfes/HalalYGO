@@ -1,7 +1,7 @@
 --剣闘獣アレクサンデル
 local s,id=GetID()
 function s.initial_effect(c)
-	--immune actional
+	--immune spell
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_IMMUNE_EFFECT)
@@ -39,7 +39,7 @@ function s.imcon(e)
 	return e:GetHandler():GetFlagEffect(id)>0
 end
 function s.imfilter(e,te)
-	return te:IsActiveType(TYPE_ACTIONAL)
+	return te:IsActiveType(TYPE_SPELL)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetBattledGroupCount()>0

@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,nil,1,1,aux.FilterBoolFunction(Card.IsCode,2403771),1,1)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--change lp
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

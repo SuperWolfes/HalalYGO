@@ -32,9 +32,9 @@ function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	local h2=Duel.Draw(1-tp,1,REASON_EFFECT)
 	if h1>0 or h2>0 then Duel.BreakEffect() end
 	local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
-	local sg=Duel.GetMatchingGroup(s.sfilter,tp,LOCATION_REST,0,nil)
+	local sg=Duel.GetMatchingGroup(s.sfilter,tp,LOCATION_GRAVE,0,nil)
 	if h1>0 and h2>0 and ft>0 and #sg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
-		local tg=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.sfilter),tp,LOCATION_REST,0,1,1,nil,e,tp)
+		local tg=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.sfilter),tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
 		Duel.HintSelection(tg)
 		Duel.SSet(tp,tg)
 	end

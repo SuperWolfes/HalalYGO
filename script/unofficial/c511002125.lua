@@ -1,5 +1,5 @@
 --リジェクト・リボーン (Anime)
---Reject Rerest (Anime)
+--Reject Reborn (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -53,7 +53,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local ct=s[0]
 		local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 		if ft<ct then return end
-		local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.filter),tp,LOCATION_REST,0,nil,e,tp)
+		local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.filter),tp,LOCATION_GRAVE,0,nil,e,tp)
 		if #g>=ct then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 			local sumg=g:Select(tp,ct,ct,nil)

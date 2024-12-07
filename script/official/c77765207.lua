@@ -16,10 +16,10 @@ function s.initial_effect(c)
 end
 s.listed_series={SET_CENTURION}
 function s.plfilter(c)
-	return c:IsSetCard(SET_CENTURION) and c:IsMonster() and not c:IsUnliked()
+	return c:IsSetCard(SET_CENTURION) and c:IsMonster() and not c:IsForbidden()
 end
 function s.setfilter(c,ft)
-	return c:IsSetCard(SET_CENTURION) and c:IsActionalTrap() and c:IsSSetable() and (ft>0 or c:IsFieldActional())
+	return c:IsSetCard(SET_CENTURION) and c:IsSpellTrap() and c:IsSSetable() and (ft>0 or c:IsFieldSpell())
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
@@ -36,7 +36,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local op=e:GetLabel()
 	local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
 	if op==1 then
-		--Place 1 "Centurion" monster from your Deck to your Actional & Trap Zone as a Continuous Trap
+		--Place 1 "Centurion" monster from your Deck to your Spell & Trap Zone as a Continuous Trap
 		if ft<=0 then return end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
 		local sc=Duel.SelectMatchingCard(tp,s.plfilter,tp,LOCATION_DECK,0,1,1,nil):GetFirst()
@@ -66,7 +66,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			aux.addTempLizardCheck(c,tp,function(_e,_c) return not _c:IsOriginalSetCard(SET_CENTURION) end)
 		end
 	elseif op==2 then
-		--Set 1 "Centurion" Actional/Trap directly from your Deck
+		--Set 1 "Centurion" Spell/Trap directly from your Deck
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 		local g=Duel.SelectMatchingCard(tp,s.setfilter,tp,LOCATION_DECK,0,1,1,nil,ft)
 		if #g>0 then

@@ -1,4 +1,4 @@
--- Pharaonic Guardian Drinx
+-- Pharaonic Guardian Sphinx
 -- 王家の守護者スフィンクス
 local s,id=GetID()
 function s.initial_effect(c)

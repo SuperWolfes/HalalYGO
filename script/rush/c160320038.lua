@@ -1,5 +1,5 @@
 --砂塵のバリア －ダスト・フォース－
---Quaking Mirror Fcoree
+--Quaking Mirror Force
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)

@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,8,3)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--negate
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -76,7 +76,7 @@ end
 function s.atop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetOverlayGroup(tp,0,1)
 	if #g==0 then return end
-	Duel.SendtoRest(g,REASON_EFFECT)
+	Duel.SendtoGrave(g,REASON_EFFECT)
 	Duel.BreakEffect()
 	local c=e:GetHandler()
 	if c:IsFacedown() or not c:IsRelateToEffect(e) then return end

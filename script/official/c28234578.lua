@@ -1,5 +1,5 @@
 --霊子もつれ
---Spilocked Entanglement
+--Spiritual Entanglement
 --scripted by Logical Nonsense
 --Substitute ID
 local s,id=GetID()

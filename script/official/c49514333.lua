@@ -1,5 +1,5 @@
 --ソウル・オブ・スタチュー
---Tiki Miss
+--Tiki Soul
 local s,id=GetID()
 function s.initial_effect(c)
 	--Special Summon this card as an Effect monster
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-	--Set Trap cards that are monsters instead of sending them to the RP if they are destroyed
+	--Set Trap cards that are monsters instead of sending them to the GY if they are destroyed
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EFFECT_SEND_REPLACE)
@@ -40,7 +40,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.repfilter(c,tp)
 	return c:IsOriginalType(TYPE_TRAP) and c:IsLocation(LOCATION_MZONE) and c:IsFaceup()
-		and c:IsReason(REASON_DESTROY) and c:GetDestination()==LOCATION_REST
+		and c:IsReason(REASON_DESTROY) and c:GetDestination()==LOCATION_GRAVE
 		and c:GetReasonPlayer()==1-tp and c:GetOwner()==tp and c:IsCanTurnSet()
 end
 function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)

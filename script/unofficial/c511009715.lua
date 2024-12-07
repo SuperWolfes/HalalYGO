@@ -1,5 +1,5 @@
 --ハイドライブ・アクセラレーター
---Hyddendrive Accelerator
+--Hydradrive Accelerator
 --fixed by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -36,7 +36,7 @@ function s.efilter(e,re)
 	local eqc=c:GetEquipTarget()
 	return c:GetControler()~=re:GetOwnerPlayer()
 		and (eqc:IsAttribute(ATTRIBUTE_WATER) and re:IsActiveType(TYPE_TRAP)
-		or eqc:IsAttribute(ATTRIBUTE_FIRE) and re:IsActiveType(TYPE_ACTIONAL))
+		or eqc:IsAttribute(ATTRIBUTE_FIRE) and re:IsActiveType(TYPE_SPELL))
 end
 function s.tfilter(c,tp)
 	return c:IsFaceup() and c:IsControler(tp) and c:IsLocation(LOCATION_ONFIELD)

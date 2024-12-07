@@ -52,7 +52,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e3:SetCondition(s.atkcon)
 		c:RegisterEffect(e3)
 	else
-		c:CancelToRest(false)
+		c:CancelToGrave(false)
 	end
 end
 function s.eqlimit(e,c)

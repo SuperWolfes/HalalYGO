@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Destroy 1 monster and search 1 "Peaceful Planet Calarium" or 1 "Mannadium" Actional/Trap
+	--Destroy 1 monster and search 1 "Peaceful Planet Calarium" or 1 "Mannadium" Spell/Trap
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DESTROY+CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCost(aux.bfgcost)
 	e2:SetTarget(s.sptg)
@@ -29,7 +29,7 @@ end
 s.listed_names={id,CARD_VISAS_STARFROST,82460246} --Peaceful Planet Calarium
 s.listed_series={SET_MANNADIUM}
 function s.thfilter(c,alt)
-	return c:IsAbleToHand() and (c:IsCode(82460246) or (alt and c:IsSetCard(SET_MANNADIUM) and c:IsActionalTrap() and not c:IsCode(id)))
+	return c:IsAbleToHand() and (c:IsCode(82460246) or (alt and c:IsSetCard(SET_MANNADIUM) and c:IsSpellTrap() and not c:IsCode(id)))
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) end

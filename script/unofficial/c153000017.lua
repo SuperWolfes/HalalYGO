@@ -23,7 +23,7 @@ function s.dmop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,tp,id)
 	Duel.Hint(HINT_CARD,1-tp,id)
 	local c=e:GetOwner()
-	local g=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_REST,LOCATION_REST,nil)
+	local g=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_GRAVE,LOCATION_GRAVE,nil)
 	Duel.SendtoDeck(g,0,-2,REASON_EFFECT)
 	g:KeepAlive()
 	local e1=Effect.CreateEffect(c)
@@ -73,7 +73,7 @@ function s.dmop(e,tp,eg,ep,ev,re,r,rp)
 	--Replace rule
 	local e7=Effect.CreateEffect(c)
 	e7:SetType(EFFECT_TYPE_FIELD)
-	e7:SetCode(EFFECT_TO_REST_REDIRECT)
+	e7:SetCode(EFFECT_TO_GRAVE_REDIRECT)
 	e7:SetValue(LOCATION_DECKBOT)
 	e7:SetTargetRange(0xff,0xff)
 	e7:SetTarget(s.repRuleTg)
@@ -117,7 +117,7 @@ function s.repcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsDeckMaster(tp,id)
 end
 function s.repfilter(c)
-	return c:GetDestination()&LOCATION_REST==LOCATION_REST and c:IsMonster()
+	return c:GetDestination()&LOCATION_GRAVE==LOCATION_GRAVE and c:IsMonster()
 end
 function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return eg:IsExists(s.repfilter,1,nil) end
@@ -203,7 +203,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		local c=Duel.GetDeckMaster(tp)
 		c:Recreate(153000018,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,true)
 		if not c:IsLocation(LOCATION_ONFIELD) then Duel.Hint(HINT_SKILL,tp,153000018) end
-		if g:GetFirst() then Duel.SendtoRest(g,REASON_RULE) end
+		if g:GetFirst() then Duel.SendtoGrave(g,REASON_RULE) end
 	elseif op==2 then
 		Duel.ConfirmCards(tp,g)
 	elseif op==3 then
@@ -258,7 +258,7 @@ function s.gycon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetLabelObject():GetFirst() and not Duel.IsDeckMaster(tp,id)
 end
 function s.gyop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SendtoRest(e:GetLabelObject(),REASON_RULE)
+	Duel.SendtoGrave(e:GetLabelObject(),REASON_RULE)
 end
 function s.chcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetFlagEffect(tp,id)==7 and Duel.IsTurnPlayer(tp) and Duel.IsDeckMaster(tp,id)
@@ -269,5 +269,5 @@ function s.chop(e,tp,eg,ep,ev,re,r,rp)
 	local c=Duel.GetDeckMaster(tp)
 	c:Recreate(153000018,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,true)
 	if not c:IsLocation(LOCATION_ONFIELD) then Duel.Hint(HINT_SKILL,tp,153000018) end
-	if e:GetLabelObject():GetFirst() then Duel.SendtoRest(e:GetLabelObject(),REASON_RULE) end
+	if e:GetLabelObject():GetFirst() then Duel.SendtoGrave(e:GetLabelObject(),REASON_RULE) end
 end

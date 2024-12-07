@@ -69,7 +69,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.attachfilter(c,tp)
-	return c:IsActionalTrap() and (c:IsControler(tp) or c:IsAbleToChangeControler())
+	return c:IsSpellTrap() and (c:IsControler(tp) or c:IsAbleToChangeControler())
 end
 function s.attachtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chkc then return chkc:IsOnField() and s.attachfilter(chkc,tp) end

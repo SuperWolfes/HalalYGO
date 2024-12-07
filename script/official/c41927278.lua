@@ -16,9 +16,9 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_EQUIP)
 	e2:SetCode(EFFECT_BOTH_BATTLE_DAMAGE)
 	c:RegisterEffect(e2)
-	--to rest
+	--to grave
 	local e3=Effect.CreateEffect(c)
-	e3:SetCategory(CATEGORY_TOREST)
+	e3:SetCategory(CATEGORY_TOGRAVE)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e3:SetCode(EVENT_BATTLE_DAMAGE)
 	e3:SetRange(LOCATION_SZONE)
@@ -31,7 +31,7 @@ function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():IsRelateToEffect(e) then
-		Duel.SendtoRest(e:GetHandler(),REASON_EFFECT)
+		Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
 	end
 end
 

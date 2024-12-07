@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_ATKCHANGE)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCost(aux.bfgcost)
 	e2:SetTarget(s.atktg)
@@ -28,7 +28,7 @@ function s.initial_effect(c)
 end
 s.listed_series={SET_CHEMICRITTER}
 s.listed_names={65959844,25669282}
-s.listed_card_types={TYPE_DUAL}
+s.listed_card_types={TYPE_GEMINI}
 function s.codefilter(c,code)
 	return c:IsCode(code) and c:IsAbleToHand()
 end
@@ -70,7 +70,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.atkrescon(sg,e,tp,mg)
-	return sg:IsExists(Card.IsDualStatus,1,nil) and sg:IsExists(Card.IsAttackAbove,1,nil,1)
+	return sg:IsExists(Card.IsGeminiStatus,1,nil) and sg:IsExists(Card.IsAttackAbove,1,nil,1)
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end

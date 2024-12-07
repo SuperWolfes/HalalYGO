@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCondition(function(e,tp) return not Duel.HasFlagEffect(tp,id) end)
 	e2:SetCost(aux.SelfBanishCost)
 	e2:SetOperation(s.effop)
@@ -46,7 +46,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoRest(g,REASON_DISCARD|REASON_COST)
+	Duel.SendtoGrave(g,REASON_DISCARD|REASON_COST)
 	g:DeleteGroup()
 end
 function s.effop(e,tp,eg,ep,ev,re,r,rp)

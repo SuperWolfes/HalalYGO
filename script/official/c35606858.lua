@@ -1,10 +1,10 @@
 --パーペチュアルキングデーモン
---Masterking Archtainted
+--Masterking Archfiend
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Link Summon procedure
-	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_TAINTED),2,2)
+	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_FIEND),2,2)
 	--Maintenance cost
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
@@ -15,10 +15,10 @@ function s.initial_effect(c)
 	e1:SetCondition(function(_,tp) return Duel.IsTurnPlayer(tp) end)
 	e1:SetOperation(s.mtop)
 	c:RegisterEffect(e1)
-	--Send 1 Tainted from your Deck to the RP
+	--Send 1 Fiend from your Deck to the GY
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
-	e2:SetCategory(CATEGORY_TOREST)
+	e2:SetCategory(CATEGORY_TOGRAVE)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
 	e2:SetCode(EVENT_PAY_LPCOST)
@@ -31,7 +31,7 @@ function s.initial_effect(c)
 	--Roll a die and apply the appropriate result
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
-	e3:SetCategory(CATEGORY_SUFFICE+CATEGORY_TOHAND+CATEGORY_TODECK+CATEGORY_SPECIAL_SUMMON)
+	e3:SetCategory(CATEGORY_DICE+CATEGORY_TOHAND+CATEGORY_TODECK+CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetProperty(EFFECT_FLAG_DELAY)
 	e3:SetCode(EVENT_CUSTOM+id)
@@ -43,10 +43,10 @@ function s.initial_effect(c)
 	local g=Group.CreateGroup()
 	g:KeepAlive()
 	e3:SetLabelObject(g)
-	--Register Tainted monsters sent to your RP
+	--Register Fiend monsters sent to your GY
 	local e3a=Effect.CreateEffect(c)
 	e3a:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e3a:SetCode(EVENT_TO_REST)
+	e3a:SetCode(EVENT_TO_GRAVE)
 	e3a:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e3a:SetRange(LOCATION_MZONE)
 	e3a:SetLabelObject(e3)
@@ -62,25 +62,25 @@ function s.mtop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.tgfilter(c,val)
-	return c:IsRace(RACE_TAINTED) and c:IsMonster() and (c:IsAttack(val) or c:IsDefense(val)) and c:IsAbleToRest()
+	return c:IsRace(RACE_FIEND) and c:IsMonster() and (c:IsAttack(val) or c:IsDefense(val)) and c:IsAbleToGrave()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil,ev) end
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil,ev)
 	if #g>0 then
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	end
 end
 function s.cfilter(c,e,tp,ft)
-	return c:IsRace(RACE_TAINTED) and c:IsControler(tp) and (c:IsAbleToHand() or c:IsAbleToDeck()
+	return c:IsRace(RACE_FIEND) and c:IsControler(tp) and (c:IsAbleToHand() or c:IsAbleToDeck()
 		or (ft>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false))) and c:HasFlagEffect(id+1)
 end
 function s.regfilter(c,tp)
-	return c:IsRace(RACE_TAINTED) and c:IsControler(tp)
+	return c:IsRace(RACE_FIEND) and c:IsControler(tp)
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local tg=eg:Filter(s.regfilter,nil,tp)
@@ -102,11 +102,11 @@ function s.dctg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=e:GetLabelObject():Filter(s.cfilter,nil,e,tp,ft)
 	if chk==0 then return #g>0 end
 	Duel.SetTargetCard(g)
-	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,1)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,tp,0)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_REST)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
+	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,0,tp,1)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,tp,0)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
 end
 function s.dcop(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)

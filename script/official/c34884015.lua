@@ -1,5 +1,5 @@
 --魂のペンデュラム
---Miss Pendulum
+--Soul Pendulum
 --scripted started by andré
 local s,id=GetID()
 function s.initial_effect(c)
@@ -166,7 +166,7 @@ function s.penop(e,tp,eg,ep,ev,re,r,rp,c,sg,og)
 	local ft1=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	local ft2=Duel.GetLocationCountFromEx(tp)
 	local ft=Duel.GetUsableMZoneCount(tp)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then
 		if ft1>0 then ft1=1 end
 		if ft2>0 then ft2=1 end
 		ft=1

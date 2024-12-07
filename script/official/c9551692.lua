@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Fusion Summon Procedure
 	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_BEAST),2)
 	--Special Summon 1 Flip monster from your hand or Deck
@@ -21,12 +21,12 @@ function s.initial_effect(c)
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e2:SetCondition(function(e) return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION) end)
 	c:RegisterEffect(e2)
-	--Special Summon itself from the RP
+	--Special Summon itself from the GY
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_IGNITION)
-	e3:SetRange(LOCATION_REST)
+	e3:SetRange(LOCATION_GRAVE)
 	e3:SetCountLimit(1,{id,1})
 	e3:SetCost(s.selfspcost)
 	e3:SetTarget(s.selfsptg)
@@ -53,7 +53,7 @@ function s.rmvfiler(c)
 	return c:IsType(TYPE_FLIP) and c:IsFaceup() and c:IsAbleToRemoveAsCost()
 end
 function s.selfspcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(s.rmvfiler,tp,LOCATION_MZONE|LOCATION_REST,0,e:GetHandler())
+	local g=Duel.GetMatchingGroup(s.rmvfiler,tp,LOCATION_MZONE|LOCATION_GRAVE,0,e:GetHandler())
 	if chk==0 then return #g>=2 and aux.SelectUnselectGroup(g,e,tp,2,2,aux.ChkfMMZ(1),0) end
 	local rg=aux.SelectUnselectGroup(g,e,tp,2,2,aux.ChkfMMZ(1),1,tp,HINTMSG_REMOVE)
 	Duel.Remove(rg,POS_FACEUP,REASON_COST)

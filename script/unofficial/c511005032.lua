@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e2:SetTarget(aux.TargetBoolFunction(Card.IsLineMonster))
 	e2:SetValue(500)
 	c:RegisterEffect(e2)
-	--destroyed to opp rest
+	--destroyed to opp grave
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e3:SetRange(LOCATION_FZONE)
@@ -36,6 +36,6 @@ function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 		if not c then c=re:GetHandler() end
 		Duel.RaiseEvent(c, id, e, r, rp, ep, ev)
 	end
-	Duel.SendtoRest(eg,REASON_EFFECT,rp)
+	Duel.SendtoGrave(eg,REASON_EFFECT,rp)
 	return true
 end

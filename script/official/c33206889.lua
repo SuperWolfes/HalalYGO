@@ -1,28 +1,28 @@
 --Ｅｍトラピーズ・フォーズ・ウィッチ
---Performanced Trapeze Mint
+--Performage Trapeze Witch
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
-	--Fusiom Materials: 2 "Performanced" monsters
-	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_PERFORMANCED),2)
-	--Your "Performanced" monsters cannot be targted by opponent's card effects
+	c:EnableReviveLimit()
+	--Fusiom Materials: 2 "Performage" monsters
+	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_PERFORMAGE),2)
+	--Your "Performage" monsters cannot be targted by opponent's card effects
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
 	e1:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetTargetRange(LOCATION_MZONE,0)
-	e1:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,SET_PERFORMANCED))
+	e1:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,SET_PERFORMAGE))
 	e1:SetValue(aux.tgoval)
 	c:RegisterEffect(e1)
-	--Your "Performanced" monsters cannot be destroyed by your card effects
+	--Your "Performage" monsters cannot be destroyed by your card effects
 	local e2=e1:Clone()
 	e2:SetProperty(0)
 	e2:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
 	e2:SetValue(aux.indsval)
 	c:RegisterEffect(e2)
-	--Your opponent's monsters cannot target this card for attacks while you control another "Performanced" monster
+	--Your opponent's monsters cannot target this card for attacks while you control another "Performage" monster
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -43,16 +43,16 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 s.listed_names={id}
-s.listed_series={SET_PERFORMANCED}
+s.listed_series={SET_PERFORMAGE}
 function s.cannotatkfilter(c)
-	return c:IsSetCard(SET_PERFORMANCED) and c:IsFaceup() and not c:IsCode(id)
+	return c:IsSetCard(SET_PERFORMAGE) and c:IsFaceup() and not c:IsCode(id)
 end
 function s.cannotatkcon(e)
 	return Duel.IsExistingMatchingCard(s.cannotatkfilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local bc0,bc1=Duel.GetBattleMonster(tp)
-	if chk==0 then return bc0 and bc1 and bc0:IsFaceup() and bc1:IsFaceup() and bc0:IsSetCard(SET_PERFORMANCED) end
+	if chk==0 then return bc0 and bc1 and bc0:IsFaceup() and bc1:IsFaceup() and bc0:IsSetCard(SET_PERFORMAGE) end
 	e:SetLabelObject(bc1)
 	Duel.SetOperationInfo(0,CATEGORY_ATKCHANGE,bc1,1,tp,-600)
 end

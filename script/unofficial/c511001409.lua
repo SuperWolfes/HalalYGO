@@ -21,12 +21,12 @@ function s.cfilter(c,atk)
 end
 function s.costfilter(c,tp)
 	return not Duel.IsPlayerAffectedByEffect(c:GetControler(),69832741) and c:IsMonster() and c:IsSetCard(0x10af) and c:IsAbleToRemoveAsCost() 
-		and not Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil,c:GetAttack())
+		and not Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,nil,c:GetAttack())
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_REST,0,1,nil,tp) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_GRAVE,0,1,nil,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_REST,0,1,1,nil,tp)
+	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_GRAVE,0,1,1,nil,tp)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.filter(c)

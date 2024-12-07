@@ -36,18 +36,18 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.cfilter(c,tp)
-	return c:IsActional() and c:IsAbleToHand()
+	return c:IsSpell() and c:IsAbleToHand()
 end
 function s.sgfilter(sg,e,tp,mg)
 	return sg:GetClassCount(Card.GetCode)==1
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	local mg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST,0,nil)
+	local mg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_GRAVE,0,nil)
 	if chk==0 then return aux.SelectUnselectGroup(mg,e,tp,3,3,s.sgfilter,0) end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,3,tp,LOCATION_REST)
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,3,tp,LOCATION_GRAVE)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local mg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST,0,nil)
+	local mg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_GRAVE,0,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 	local sg=aux.SelectUnselectGroup(mg,e,tp,3,3,s.sgfilter,1,tp,HINTMSG_ATOHAND)
 	if #sg>0 then

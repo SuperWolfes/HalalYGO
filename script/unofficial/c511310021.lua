@@ -1,5 +1,5 @@
 --魂をふきこむ彫刻家
---Miss Infusing Sculptor
+--Soul Infusing Sculptor
 --AlphaKretin
 --Credit to edo9300 for implementing the Ice Pillar mechanic
 Duel.EnableUnofficialProc(PROC_ICE_PILLAR)

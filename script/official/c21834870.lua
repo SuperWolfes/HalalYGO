@@ -1,5 +1,5 @@
 --天威無双の拳
---Fists of the Unrivaled Tenbree
+--Fists of the Unrivaled Tenyi
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -35,7 +35,7 @@ function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.NegateActivation(ev) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:GetHandler():IsRelateToEffect(re) then
-		Duel.SendtoRest(eg,REASON_EFFECT)
+		Duel.SendtoGrave(eg,REASON_EFFECT)
 	end
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)

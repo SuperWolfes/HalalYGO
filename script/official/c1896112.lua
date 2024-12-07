@@ -32,13 +32,13 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		and Duel.IsExistingTarget(s.filter,tp,LOCATION_REMOVED,0,1,nil,e,tp)
 		and Duel.IsExistingTarget(s.filter,1-tp,LOCATION_REMOVED,0,1,nil,e,1-tp) end
 	local ft1=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft1=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft1=1 end
 	if ft1>2 then ft1=2 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g1=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REMOVED,0,1,ft1,nil,e,tp)
 	local ft2=Duel.GetLocationCount(1-tp,LOCATION_MZONE)
 	if ft2>2 then ft2=2 end
-	if Duel.IsPlayerAffectedByEffect(1-tp,CARD_BLUEEYES_GUARDIAN) then ft2=1 end
+	if Duel.IsPlayerAffectedByEffect(1-tp,CARD_BLUEEYES_SPIRIT) then ft2=1 end
 	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_SPSUMMON)
 	local g2=Duel.SelectTarget(1-tp,s.filter,1-tp,LOCATION_REMOVED,0,1,ft2,nil,e,1-tp)
 	g1:Merge(g2)
@@ -50,7 +50,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g2=g:Filter(Card.IsControler,nil,1-tp)
 	local ft1=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	local ct1=#g1
-	if ft1>=ct1 and (ct1==1 or not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)) then
+	if ft1>=ct1 and (ct1==1 or not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)) then
 		local tc=g1:GetFirst()
 		for tc in aux.Next(g1) do
 			Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP)
@@ -58,7 +58,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 	local ft2=Duel.GetLocationCount(1-tp,LOCATION_MZONE)
 	local ct2=#g2
-	if ft2>=ct2 and (ct2==1 or not Duel.IsPlayerAffectedByEffect(1-tp,CARD_BLUEEYES_GUARDIAN)) then
+	if ft2>=ct2 and (ct2==1 or not Duel.IsPlayerAffectedByEffect(1-tp,CARD_BLUEEYES_SPIRIT)) then
 		local tc=g2:GetFirst()
 		for tc in aux.Next(g2) do
 			Duel.SpecialSummonStep(tc,0,1-tp,1-tp,false,false,POS_FACEUP)

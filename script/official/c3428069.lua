@@ -1,5 +1,5 @@
 --破壊剣の使い手－バスター・ブレイダー
---Buster Blader, the Mismatching Swordmaster
+--Buster Blader, the Destruction Swordmaster
 local s,id=GetID()
 function s.initial_effect(c)
 	--Code
@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e1:SetCode(EFFECT_CHANGE_CODE)
-	e1:SetRange(LOCATION_MZONE+LOCATION_REST)
+	e1:SetRange(LOCATION_MZONE+LOCATION_GRAVE)
 	e1:SetValue(78193831)
 	c:RegisterEffect(e1)
 	--Equip
@@ -36,7 +36,7 @@ function s.initial_effect(c)
 end
 function s.filter(c,e,tp)
 	return c:IsMonster() and c:IsPreviousLocation(LOCATION_MZONE) and c:IsPreviousControler(1-tp)
-		and c:IsLocation(LOCATION_REST) and c:IsReason(REASON_EFFECT+REASON_BATTLE) and c:IsCanBeEffectTarget(e) and not c:IsUnliked()
+		and c:IsLocation(LOCATION_GRAVE) and c:IsReason(REASON_EFFECT+REASON_BATTLE) and c:IsCanBeEffectTarget(e) and not c:IsForbidden()
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return eg:IsContains(chkc) and s.filter(chkc,e,tp) end
@@ -51,7 +51,7 @@ function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		tc=g:GetFirst()
 	end
 	Duel.SetTargetCard(tc)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,tc,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,tc,1,0,0)
 end
 function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -61,7 +61,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.tgfilter(c,tp)
-	return c:IsAbleToRestAsCost()
+	return c:IsAbleToGraveAsCost()
 		and Duel.IsExistingMatchingCard(s.desfilter,tp,0,LOCATION_MZONE,1,nil,c:GetRace())
 end
 function s.desfilter(c,rc)
@@ -69,10 +69,10 @@ function s.desfilter(c,rc)
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():GetEquipGroup():IsExists(s.tgfilter,1,nil,tp) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=e:GetHandler():GetEquipGroup():FilterSelect(tp,s.tgfilter,1,1,nil,tp)
 	e:SetLabel(g:GetFirst():GetRace())
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

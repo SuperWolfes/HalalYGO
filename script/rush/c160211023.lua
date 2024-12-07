@@ -22,13 +22,13 @@ function s.tdfilter(c)
 	return ((c:IsMonster() and c:IsRace(RACE_CYBERSE)) or (c:IsCode(160211020,CARD_FUSION))) and c:IsAbleToDeck()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST,0,3,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_REST)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_GRAVE,0,3,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_GRAVE)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Effect
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local tdg=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_REST,0,3,6,nil)
+	local tdg=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_GRAVE,0,3,6,nil)
 	Duel.HintSelection(tdg,true)
 	if Duel.SendtoDeck(tdg,nil,SEQ_DECKTOP,REASON_EFFECT)>0 then
 		local ct=Duel.GetOperatedGroup():FilterCount(Card.IsLocation,nil,LOCATION_DECK)

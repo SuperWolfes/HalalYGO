@@ -17,9 +17,9 @@ end
 function s.rettg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local g=Duel.GetMatchingGroup(nil,0,LOCATION_REMOVED,LOCATION_REMOVED,nil)
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,g,#g,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,g,#g,0,0)
 end
 function s.retop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(nil,0,LOCATION_REMOVED,LOCATION_REMOVED,nil)
-	Duel.SendtoRest(g,REASON_EFFECT+REASON_RETURN)
+	Duel.SendtoGrave(g,REASON_EFFECT+REASON_RETURN)
 end

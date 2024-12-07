@@ -15,7 +15,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local ec=eg:GetFirst()
 	return #eg==1 and ec:IsPreviousControler(tp) and ec:IsRace(RACE_REPTILE)
 		and (ec:GetPreviousRaceOnField()&RACE_REPTILE)~=0
-		and ec==Duel.GetAttackTarget() and ec:IsLocation(LOCATION_REST) and ec:IsReason(REASON_BATTLE)
+		and ec==Duel.GetAttackTarget() and ec:IsLocation(LOCATION_GRAVE) and ec:IsReason(REASON_BATTLE)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tc=eg:GetFirst():GetReasonCard()

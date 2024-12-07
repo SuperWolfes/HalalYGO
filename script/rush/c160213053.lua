@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion Summon Procedure
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,s.matfilter1,s.matfilter2)
 	--Face-up Insect monsters you control cannot be destroyed by your opponent's effects
 	local e1=Effect.CreateEffect(c)

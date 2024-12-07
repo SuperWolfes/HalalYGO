@@ -1,9 +1,9 @@
 --魔鍵召竜－アンドラビムス
---Menkey Summon Dragon - Andrabimus
+--Magikey Summon Dragon - Andrabimus
 --scripted by Rundas
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,s.matfilter1,s.matfilter2)
 	--No Cards and Effects on Fusion Summon
 	local e0=Effect.CreateEffect(c)
@@ -63,7 +63,7 @@ function s.limop(e,tp,eg,ep,ev,re,r,rp)
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		e1:SetCode(EVENT_CHAINING)
-		e1:SetOperation(s.revetop)
+		e1:SetOperation(s.resetop)
 		Duel.RegisterEffect(e1,tp)
 		local e2=e1:Clone()
 		e2:SetCode(EVENT_BREAK_EFFECT)
@@ -77,7 +77,7 @@ function s.limop2(e,tp,eg,ep,ev,re,r,rp)
 	end
 	e:GetHandler():ResetFlagEffect(id)
 end
-function s.revetop(e,tp,eg,ep,ev,re,r,rp)
+function s.resetop(e,tp,eg,ep,ev,re,r,rp)
 	e:GetHandler():ResetFlagEffect(id)
 	e:Reset()
 end
@@ -93,10 +93,10 @@ function s.desfilter(c,att)
 	return c:IsAttribute(att) and c:IsMonster() and c:IsFaceup()
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.attfilter(chkc,tp) end
-	if chk==0 then return Duel.IsExistingTarget(s.attfilter,tp,LOCATION_REST,0,1,nil,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.attfilter(chkc,tp) end
+	if chk==0 then return Duel.IsExistingTarget(s.attfilter,tp,LOCATION_GRAVE,0,1,nil,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local tc=Duel.SelectTarget(tp,s.attfilter,tp,LOCATION_REST,0,1,1,nil,tp):GetFirst()
+	local tc=Duel.SelectTarget(tp,s.attfilter,tp,LOCATION_GRAVE,0,1,1,nil,tp):GetFirst()
 	local g=Duel.GetMatchingGroup(s.desfilter,tp,0,LOCATION_MZONE,nil,tc:GetAttribute())
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,#g,1-tp,LOCATION_MZONE)
 end
@@ -116,7 +116,7 @@ end
 function s.drcon(e,tp,eg,ep,ev,re,r,rp)
 	local att,mat=0,e:GetHandler():GetMaterial()
 	if e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION) and mat:GetClassCount(Card.GetAttribute)>1 then
-		for tc in Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_REST,0,nil):Iter() do
+		for tc in Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_GRAVE,0,nil):Iter() do
 			att=att|tc:GetAttribute()
 		end
 		return att>0 and eg:IsExists(s.drfilter,1,nil,tp,att)

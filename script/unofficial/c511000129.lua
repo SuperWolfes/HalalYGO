@@ -1,5 +1,5 @@
 --聖地の守護結界 (Anime)
---Clean Defense Barrier (Anime)
+--Sacred Defense Barrier (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

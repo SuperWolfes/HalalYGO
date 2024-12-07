@@ -12,7 +12,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x3008}
 function s.filter(c)
-	return c:IsType(TYPE_ACTIONAL+TYPE_TRAP)
+	return c:IsType(TYPE_SPELL+TYPE_TRAP)
 end
 function s.cfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0x3008)

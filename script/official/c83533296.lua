@@ -21,7 +21,7 @@ function s.filter1(c,e,tp)
 end
 function s.filter2(c)
 	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_FIRE)
-		and c:IsType(TYPE_LOCKED|TYPE_EXTRA) and c:GetAttack()~=c:GetBaseAttack()
+		and c:IsType(TYPE_RITUAL|TYPE_EXTRA) and c:GetAttack()~=c:GetBaseAttack()
 end
 function s.rescon(sg,e,tp,mg)
 	return sg:IsExists(s.spcheck,1,nil,sg,e,tp)
@@ -31,7 +31,7 @@ function s.spcheck(c,sg,e,tp)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
-	local g=Duel.GetMatchingGroup(s.filter1,tp,LOCATION_REST|LOCATION_REMOVED,0,nil,e,tp)
+	local g=Duel.GetMatchingGroup(s.filter1,tp,LOCATION_GRAVE|LOCATION_REMOVED,0,nil,e,tp)
 	local b1=#g>=3 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and aux.SelectUnselectGroup(g,e,tp,3,3,s.rescon,0)
 	local b2=Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_MZONE,0,1,nil)
 		and Duel.IsExistingTarget(nil,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,c)

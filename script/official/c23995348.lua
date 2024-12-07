@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion Procedure
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMixN(c,true,true,CARD_BLUEEYES_W_DRAGON,3)
 end
 s.material_setcode=SET_BLUE_EYES

@@ -1,11 +1,11 @@
 --Ｅｍカップ・トリッカー
---Performanced Cup Tricker
+--Performage Cup Tricker
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
 	--Pendulum Summon procedure
 	Pendulum.AddProcedure(c)
-	--Attach this card to 1 "Performanced" Xyz Monster you control
+	--Attach this card to 1 "Performage" Xyz Monster you control
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.pendattachtg)
 	e1:SetOperation(s.pendattachop)
 	c:RegisterEffect(e1)
-	--Add 1 "Performanced" monster from your face-up Extra Deck to your hand
+	--Add 1 "Performage" monster from your face-up Extra Deck to your hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND)
@@ -44,16 +44,16 @@ function s.initial_effect(c)
 	e4:SetDescription(aux.Stringid(id,3))
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e4:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_CARD_TARGET)
-	e4:SetCode(EVENT_TO_REST)
+	e4:SetCode(EVENT_TO_GRAVE)
 	e4:SetCountLimit(1,{id,3})
 	e4:SetCondition(s.attachcon)
 	e4:SetTarget(s.attachtg)
 	e4:SetOperation(s.attachop)
 	c:RegisterEffect(e4)
 end
-s.listed_series={SET_PERFORMANCED}
+s.listed_series={SET_PERFORMAGE}
 function s.pendattachfilter(c,tp,hc)
-	return c:IsSetCard(SET_PERFORMANCED) and c:IsType(TYPE_XYZ) and c:IsFaceup() and hc:IsCanBeXyzMaterial(c,tp,REASON_EFFECT)
+	return c:IsSetCard(SET_PERFORMAGE) and c:IsType(TYPE_XYZ) and c:IsFaceup() and hc:IsCanBeXyzMaterial(c,tp,REASON_EFFECT)
 end
 function s.pendattachtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
@@ -76,7 +76,7 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.thconfilter,1,nil,tp)
 end
 function s.thfilter(c)
-	return c:IsSetCard(SET_PERFORMANCED) and c:IsFaceup() and c:IsType(TYPE_PENDULUM) and c:IsAbleToHand()
+	return c:IsSetCard(SET_PERFORMAGE) and c:IsFaceup() and c:IsType(TYPE_PENDULUM) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_EXTRA,0,1,nil) end

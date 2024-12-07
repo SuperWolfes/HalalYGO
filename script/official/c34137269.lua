@@ -1,5 +1,5 @@
 --時械神 ハイロン
---Hairon, the Timewatcher
+--Hairon, the Timelord
 --Scripted by ahtelel
 local s,id=GetID()
 function s.initial_effect(c)

@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	--No damage
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCode(EVENT_FREE_CHAIN)
 	e2:SetCondition(s.damcon)
 	e2:SetCost(aux.bfgcost)
@@ -42,7 +42,7 @@ function s.cfilter(c)
 	return c:IsSetCard(0xba) and c:IsMonster()
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetFlagEffect(tp,id+1)==0 and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil)
+	return Duel.GetFlagEffect(tp,id+1)==0 and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,nil)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterFlagEffect(tp,id+1,RESET_PHASE+PHASE_END,0,1)

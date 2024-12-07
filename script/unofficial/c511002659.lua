@@ -30,7 +30,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		if ft>1 and Duel.IsPlayerCanSpecialSummonMonster(tp,11050416,0,TYPES_TOKEN,0,0,1,RACE_BEAST,ATTRIBUTE_EARTH) then
 			Duel.BreakEffect()
 			ft=ft-1
-			if ft>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
+			if ft>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
 			for i=1,ft do
 				local token=Duel.CreateToken(tp,18027138+((i-1)%3+1))
 				Duel.SpecialSummonStep(token,0,tp,tp,false,false,POS_FACEUP)

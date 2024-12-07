@@ -1,5 +1,5 @@
 --捕食植物ドロソフィルム・ヒドラ (Anime)
---Predaplant Drosophyllum Hydden (Anime)
+--Predaplant Drosophyllum Hydra (Anime)
 --fixed by MLD
 local s,id=GetID()
 function s.initial_effect(c)
@@ -18,10 +18,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 	--halve battle damage
 	local e2=Effect.CreateEffect(c)
-	e2:SetCategory(CATEGORY_TOREST)
+	e2:SetCategory(CATEGORY_TOGRAVE)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_PRE_DAMAGE_CALCULATE)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetLabel(2)
 	e2:SetCost(s.cost)
 	e2:SetCondition(s.retcon)
@@ -34,9 +34,9 @@ function s.cfil(c,label)
 		and (label~=1 or Duel.IsExistingTarget(Card.IsFaceup,0,LOCATION_MZONE,LOCATION_MZONE,1,c))
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cfil,tp,LOCATION_MZONE+LOCATION_REST,0,1,nil,e:GetLabel()) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cfil,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil,e:GetLabel()) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.cfil,tp,LOCATION_MZONE+LOCATION_REST,0,1,1,nil,e:GetLabel())
+	local g=Duel.SelectMatchingCard(tp,s.cfil,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,nil,e:GetLabel())
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -61,12 +61,12 @@ function s.retcon(e,tp,eg,ev,ep,re,r,rp)
 end
 function s.rettg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_REMOVED,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,0,0)
 end
 function s.retop(e,tp,eg,ev,ep,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(48976825,0))
 	local g=Duel.SelectMatchingCard(tp,Card.IsMonster,tp,LOCATION_REMOVED,0,1,1,nil)
-	if Duel.SendtoRest(g,REASON_EFFECT)~=0 then
+	if Duel.SendtoGrave(g,REASON_EFFECT)~=0 then
 		Duel.BreakEffect()
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)

@@ -28,7 +28,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetTargetRange(LOCATION_MZONE,0)
 	e1:SetValue(s.imfilter)
 	Duel.RegisterEffect(e1,tp)
-	--Add 1 WATER monster from RP to hand
+	--Add 1 WATER monster from GY to hand
 	local e2=Effect.CreateEffect(e:GetHandler())
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EVENT_FREE_CHAIN)
@@ -51,15 +51,15 @@ function s.thcon(e)
 	local tp=e:GetHandlerPlayer()
 	return aux.CanActivateSkill(tp) and Duel.GetFlagEffect(tp,id)==0
 		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_UMI),tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) 
-		and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil)
+		and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,tp,id)
 	--OPT register
 	Duel.RegisterFlagEffect(tp,id,RESET_PHASE|PHASE_END,0,1)
-	--Add 1 WATER monster from RP to hand
+	--Add 1 WATER monster from GY to hand
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 	local tc=g:GetFirst()
 	if #g>0 then
 		Duel.SendtoHand(g,tp,REASON_EFFECT)

@@ -1,6 +1,6 @@
 --燃えさかる大地
 --Burning Land (Pre-Errata)
---Requires a field actional to be faceup to be activated, it'll always destroy any field actional
+--Requires a field spell to be faceup to be activated, it'll always destroy any field spell
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

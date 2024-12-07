@@ -1,4 +1,4 @@
---Enigma the Mega
+--Enigma the Creator
 local s,id=GetID()
 function s.initial_effect(c)
 	--token
@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_REST)
+	return e:GetHandler():IsLocation(LOCATION_GRAVE)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

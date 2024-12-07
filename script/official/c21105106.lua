@@ -2,8 +2,8 @@
 --Nekroz of Sophia
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
-	--Must be Locked Summoned
+	c:EnableReviveLimit()
+	--Must be Ritual Summoned
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -33,7 +33,7 @@ function s.initial_effect(c)
 end
 s.listed_series={SET_NEKROZ}
 function s.splimit(e,se,sp,st)
-	return e:GetHandler():IsLocation(LOCATION_HAND) and (st&SUMMON_TYPE_LOCKED)==SUMMON_TYPE_LOCKED
+	return e:GetHandler():IsLocation(LOCATION_HAND) and (st&SUMMON_TYPE_RITUAL)==SUMMON_TYPE_RITUAL
 end
 function s.mat_filter(c)
 	return c:IsLocation(LOCATION_ONFIELD)
@@ -41,7 +41,7 @@ end
 function s.onfieldcontroller(c,tp)
 	return c:IsLocation(LOCATION_MZONE) and c:IsControler(tp)
 end
-function s.locked_custom_check(e,tp,g,c)
+function s.ritual_custom_check(e,tp,g,c)
 	local count=#g
 	local class_count=g:GetClassCount(Card.GetRace)
 	local onfield_self_count=g:FilterCount(s.onfieldcontroller,nil,tp)
@@ -51,7 +51,7 @@ function s.discon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCurrentPhase()==PHASE_MAIN1
 end
 function s.cfilter(c)
-	return c:IsSetCard(SET_NEKROZ) and c:IsActional() and c:IsDiscardable()
+	return c:IsSetCard(SET_NEKROZ) and c:IsSpell() and c:IsDiscardable()
 end
 function s.discost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsDiscardable()
@@ -59,7 +59,7 @@ function s.discost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND,0,1,1,nil)
 	g:AddCard(e:GetHandler())
-	Duel.SendtoRest(g,REASON_DISCARD+REASON_COST)
+	Duel.SendtoGrave(g,REASON_DISCARD+REASON_COST)
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	local e1=Effect.CreateEffect(e:GetHandler())
@@ -76,7 +76,7 @@ function s.sumlimit(e,c,sump,sumtype,sumpos,targetp,se)
 	return c:IsLocation(LOCATION_EXTRA)
 end
 function s.rmcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_LOCKED)
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_RITUAL)
 end
 function s.rmcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetActivityCount(tp,ACTIVITY_NORMALSUMMON)==0
@@ -102,11 +102,11 @@ function s.rmfilter(c)
 	return c:IsAbleToRemove() and (c:IsLocation(LOCATION_SZONE) or aux.SpElimFilter(c,false,true))
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.rmfilter,tp,LOCATION_ONFIELD|LOCATION_REST,LOCATION_ONFIELD|LOCATION_REST,1,e:GetHandler()) end
-	local g=Duel.GetMatchingGroup(s.rmfilter,tp,LOCATION_ONFIELD|LOCATION_REST,LOCATION_ONFIELD|LOCATION_REST,e:GetHandler())
+	if chk==0 then return Duel.IsExistingMatchingCard(s.rmfilter,tp,LOCATION_ONFIELD|LOCATION_GRAVE,LOCATION_ONFIELD|LOCATION_GRAVE,1,e:GetHandler()) end
+	local g=Duel.GetMatchingGroup(s.rmfilter,tp,LOCATION_ONFIELD|LOCATION_GRAVE,LOCATION_ONFIELD|LOCATION_GRAVE,e:GetHandler())
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,#g,0,0)
 end
 function s.rmop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(s.rmfilter,tp,LOCATION_ONFIELD|LOCATION_REST,LOCATION_ONFIELD|LOCATION_REST,e:GetHandler())
+	local g=Duel.GetMatchingGroup(s.rmfilter,tp,LOCATION_ONFIELD|LOCATION_GRAVE,LOCATION_ONFIELD|LOCATION_GRAVE,e:GetHandler())
 	Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
 end

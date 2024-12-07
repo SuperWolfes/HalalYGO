@@ -1,5 +1,5 @@
 --サイキック・イントロダクション
---Mental Introduction
+--Psychic Introduction
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -16,7 +16,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp,chk)
 	return ep==1-tp
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	local ct=Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsRace,RACE_MENTAL),tp,LOCATION_MZONE,0,nil)
+	local ct=Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsRace,RACE_PSYCHIC),tp,LOCATION_MZONE,0,nil)
 	if chk==0 then return ct>0 end
 	Duel.SetTargetPlayer(tp)
 	Duel.SetTargetParam(ct*500)

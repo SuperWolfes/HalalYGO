@@ -2,7 +2,7 @@
 --Link Disciple
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Link Summon procedure
 	Link.AddProcedure(c,s.matfilter,1,1)
 	--Draw 1 card and return 1 card to the Deck

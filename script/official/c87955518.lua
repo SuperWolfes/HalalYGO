@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCost(aux.bfgcost)
 	e2:SetCondition(s.tribtcond)
@@ -32,7 +32,7 @@ end
 s.listed_names={30243636}
 s.listed_series={SET_NOUVELLES}
 function s.cfilter(c)
-	return c:IsLockedMonster() and c:IsSetCard(SET_NOUVELLES) and c:IsFaceup()
+	return c:IsRitualMonster() and c:IsSetCard(SET_NOUVELLES) and c:IsFaceup()
 end
 function s.negcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil)

@@ -1,10 +1,10 @@
 --魔導獣 マスターケルベロス
---Mythical Beast Master Cebrar
+--Mythical Beast Master Cerberus
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
 	Pendulum.AddProcedure(c)
-	c:EnableCounterPermit(COUNTER_ACTIONAL)
+	c:EnableCounterPermit(COUNTER_SPELL)
 	--destroy & search
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -53,7 +53,7 @@ function s.initial_effect(c)
 	e5:SetOperation(s.rmop)
 	c:RegisterEffect(e5)
 end
-s.counter_place_list={COUNTER_ACTIONAL}
+s.counter_place_list={COUNTER_SPELL}
 s.listed_series={0x10d}
 s.listed_names={55424270}
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
@@ -81,17 +81,17 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.acop(e,tp,eg,ep,ev,re,r,rp)
-	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_ACTIONAL) and e:GetHandler():GetFlagEffect(1)>0 then
-		e:GetHandler():AddCounter(COUNTER_ACTIONAL,2)
+	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_SPELL) and e:GetHandler():GetFlagEffect(1)>0 then
+		e:GetHandler():AddCounter(COUNTER_SPELL,2)
 	end
 end
 function s.incon(e)
-	return Duel.GetCounter(e:GetHandlerPlayer(),1,0,COUNTER_ACTIONAL)>=4
+	return Duel.GetCounter(e:GetHandlerPlayer(),1,0,COUNTER_SPELL)>=4
 end
 function s.rmcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return Duel.IsCanRemoveCounter(tp,1,0,COUNTER_ACTIONAL,4,REASON_COST) end
-	Duel.RemoveCounter(tp,1,0,COUNTER_ACTIONAL,4,REASON_COST)
+	if chk==0 then return Duel.IsCanRemoveCounter(tp,1,0,COUNTER_SPELL,4,REASON_COST) end
+	Duel.RemoveCounter(tp,1,0,COUNTER_SPELL,4,REASON_COST)
 end
 function s.rmfilter(c)
 	return c:IsAbleToRemove()

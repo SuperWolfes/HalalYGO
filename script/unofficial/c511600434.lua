@@ -1,5 +1,5 @@
 --ＲＵＭ－ヌメロン・フォース (Anime)
---Rank-Up-Ment Numeron Fcoree (Anime)
+--Rank-Up-Magic Numeron Force (Anime)
 --Scripted by Larry126
 Duel.LoadScript("c420.lua")
 Duel.EnableUnofficialProc(PROC_CANNOT_BATTLE_INDES)
@@ -54,7 +54,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Overlay(sc,tc)
 		Duel.SpecialSummon(sc,SUMMON_TYPE_XYZ,tp,tp,false,false,POS_FACEUP)
 		sc:CompleteProcedure()
-		--Negate battle inmismatching
+		--Negate battle indestruction
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_FIELD)
 		e1:SetCode(EFFECT_CANNOT_BATTLE_INDES)

@@ -1,8 +1,8 @@
 --花札衛－桐に鳳凰－
---Flower Cardian Paulownia with Bird
+--Flower Cardian Paulownia with Phoenix
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--special summon summon from hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -76,7 +76,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 				Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 			end
 		else
-			Duel.SendtoRest(tc,REASON_EFFECT)
+			Duel.SendtoGrave(tc,REASON_EFFECT)
 		end
 		Duel.ShuffleHand(tp)
 	end

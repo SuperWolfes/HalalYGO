@@ -1,12 +1,12 @@
 --三日月の剣豪将軍
---Kengo Shogun of the Crescent Horizon
+--Kengo Shogun of the Crescent Moon
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	-- 1 "Masaki the Legendary Samurai General" + 1 "Hero of the Yeast"
 	Fusion.AddProcMix(c,true,true,160201007,160305015)
-	-- Mismatching immunity
+	-- Destruction immunity
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_IGNITION)

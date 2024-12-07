@@ -4,8 +4,8 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion summon procedure
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0xe1),aux.FilterBoolFunctionEx(Card.IsType,TYPE_FUSION))
-	--Must be properly summoned before awaking
-	c:EnableAwakeLimit()
+	--Must be properly summoned before reviving
+	c:EnableReviveLimit()
 	--Enable pendulum summon
 	Pendulum.AddProcedure(c,false)
 	--Destroy 1 card on the field

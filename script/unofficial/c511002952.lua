@@ -1,4 +1,4 @@
---Wind Mint - Snow Bell
+--Wind Witch - Snow Bell
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon

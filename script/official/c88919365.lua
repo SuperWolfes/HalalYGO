@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	-- Return 1 face-up Actional/Trap to hand
+	-- Return 1 face-up Spell/Trap to hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND)
@@ -82,7 +82,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.fextra(e,tp,mg)
-	return Duel.GetMatchingGroup(Card.IsAbleToRest,tp,LOCATION_PZONE,0,nil)
+	return Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,LOCATION_PZONE,0,nil)
 end
 function s.fuscon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

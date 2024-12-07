@@ -1,7 +1,7 @@
---Gilti-Gearfried the Mentoral Steel Knight
+--Gilti-Gearfried the Magical Steel Knight
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,423705,51828629)
 end

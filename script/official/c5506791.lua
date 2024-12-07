@@ -1,5 +1,5 @@
 --マジェスペクター・キャット
---Majespecter Cat - Kitty
+--Majespecter Cat - Nekomata
 local s,id=GetID()
 function s.initial_effect(c)
 	--Pendulum Summon

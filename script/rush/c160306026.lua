@@ -1,5 +1,5 @@
 --サイコの落とし穴
---Mental Trap Hole
+--Psychic Trap Hole
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate(summon)
@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_MENTAL) 
+	return c:IsFaceup() and c:IsRace(RACE_PSYCHIC) 
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,2,nil)

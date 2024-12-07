@@ -28,10 +28,10 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeck(tp,3) end
 	Duel.SetOperationInfo(0,CATEGORY_DECKDES,nil,0,tp,3)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
 end
 function s.thfilter(c,lvl)
-	return c:IsLocation(LOCATION_REST) and c:IsRace(RACE_PYRO|RACE_AQUA|RACE_THUNDER) and c:IsLevel(lvl)  and c:IsAbleToHand()
+	return c:IsLocation(LOCATION_GRAVE) and c:IsRace(RACE_PYRO|RACE_AQUA|RACE_THUNDER) and c:IsLevel(lvl)  and c:IsAbleToHand()
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement

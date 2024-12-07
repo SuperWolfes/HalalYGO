@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Damage
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_SUFFICE)
+	e1:SetCategory(CATEGORY_DICE)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_FLIP)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
@@ -13,7 +13,7 @@ end
 s.roll_dice=true
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,PLAYER_ALL,1)
+	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,0,PLAYER_ALL,1)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local d1=0

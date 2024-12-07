@@ -30,7 +30,7 @@ function s.mltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DECKDES,nil,0,tp,3)
 end
 function s.filter(c)
-	return c:IsLocation(LOCATION_REST) and c:IsCode(CARD_FUSION) and c:IsAbleToHand()
+	return c:IsLocation(LOCATION_GRAVE) and c:IsCode(CARD_FUSION) and c:IsAbleToHand()
 end
 function s.mlop(e,tp,eg,ep,ev,re,r,rp)
 	--Effect

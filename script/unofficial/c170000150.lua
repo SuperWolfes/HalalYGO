@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,57728570,11082056)
 	--Destroy all monsters your opponent controls with 1500 or more ATK
 	local e1=Effect.CreateEffect(c)

@@ -4,18 +4,18 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special summon itself from RP
+	--Special summon itself from GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_IGNITION)
-	e1:SetRange(LOCATION_REST)
+	e1:SetRange(LOCATION_GRAVE)
 	e1:SetCountLimit(1,id)
 	e1:SetCost(s.spcost)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Grant effect to "Vendread" monster locked summoned, using this card
+	--Grant effect to "Vendread" monster ritual summoned, using this card
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e2:SetProperty(EFFECT_FLAG_EVENT_PLAYER+EFFECT_FLAG_CANNOT_DISABLE)
@@ -28,12 +28,12 @@ end
 s.listed_series={0x106}
 
 function s.cfilter(c)
-	return c:IsRace(RACE_TOXIC) and c:IsAbleToRemoveAsCost()
+	return c:IsRace(RACE_ZOMBIE) and c:IsAbleToRemoveAsCost()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,e:GetHandler()) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,e:GetHandler()) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_REST,0,1,1,e:GetHandler())
+	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_GRAVE,0,1,1,e:GetHandler())
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -56,7 +56,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.mtcon(e,tp,eg,ep,ev,re,r,rp)
-	return r==REASON_LOCKED and e:GetHandler():IsPreviousLocation(LOCATION_MZONE)
+	return r==REASON_RITUAL and e:GetHandler():IsPreviousLocation(LOCATION_MZONE)
 		and eg:IsExists(Card.IsSetCard,1,nil,0x106)
 end
 function s.mtop(e,tp,eg,ep,ev,re,r,rp)

@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Search 1 "Ancient Gear" Actional/Trap
+	--Search 1 "Ancient Gear" Spell/Trap
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -46,7 +46,7 @@ function s.initial_effect(c)
 		Duel.RegisterEffect(ge4,0)
 	end)
 end
-s.listed_names={CARD_ANCIENT_GEAR_GOPAL,id}
+s.listed_names={CARD_ANCIENT_GEAR_GOLEM,id}
 s.listed_series={SET_ANCIENT_GEAR}
 function s.checkposfilter(c)
 	return c:IsPreviousPosition(POS_FACEUP) and c:IsFacedown()
@@ -84,7 +84,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.RegisterEffect(e4,tp)
 end
 function s.thfilter(c)
-	return c:IsSetCard(SET_ANCIENT_GEAR) and c:IsActionalTrap() and not c:IsCode(id) and c:IsAbleToHand()
+	return c:IsSetCard(SET_ANCIENT_GEAR) and c:IsSpellTrap() and not c:IsCode(id) and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -113,7 +113,7 @@ function s.drwop(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
 	if Duel.Draw(p,d,REASON_EFFECT)==0 then return end
 	local c=e:GetHandler()
-	--"Ancient Gear Gopal" or monsters that mention it can be Normal Summoned without Tributing
+	--"Ancient Gear Golem" or monsters that mention it can be Normal Summoned without Tributing
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,3))
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -130,5 +130,5 @@ function s.ntcon(e,c,minc)
 	return minc==0 and Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
 end
 function s.nttg(e,c)
-	return (c:IsCode(CARD_ANCIENT_GEAR_GOPAL) or c:ListsCode(CARD_ANCIENT_GEAR_GOPAL)) and c:IsLevelAbove(5)
+	return (c:IsCode(CARD_ANCIENT_GEAR_GOLEM) or c:ListsCode(CARD_ANCIENT_GEAR_GOLEM)) and c:IsLevelAbove(5)
 end

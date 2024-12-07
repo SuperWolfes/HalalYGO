@@ -33,7 +33,7 @@ function s.initial_effect(c)
 	e4:SetCondition(s.con)
 	e4:SetValue(aux.imval1)
 	c:RegisterEffect(e4)
-	--smint
+	--switch
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(id,0))
 	e5:SetCategory(CATEGORY_CONTROL)

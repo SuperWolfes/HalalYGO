@@ -1,3 +1,3 @@
 -- 鋼機神ミラーイノベイター
---Steeltek Being Mirror Innovator
+--Steeltek Deity Mirror Innovator
 Duel.LoadCardScriptAlias(160004015)

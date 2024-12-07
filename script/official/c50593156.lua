@@ -1,5 +1,5 @@
 --サンド・ギャンブラー
---Sand Chancer
+--Sand Gambler
 local s,id=GetID()
 function s.initial_effect(c)
 	--Toss 3 coins and destroy monsters on the field

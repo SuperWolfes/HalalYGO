@@ -9,13 +9,13 @@ function s.initial_effect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DELAY)
-	e1:SetCode(EVENT_TO_REST)
+	e1:SetCode(EVENT_TO_GRAVE)
 	e1:SetCountLimit(1,id)
 	e1:SetCondition(function(e) return e:GetHandler():IsPreviousLocation(LOCATION_HAND|LOCATION_DECK) end)
 	e1:SetTarget(s.selfsptg)
 	e1:SetOperation(s.selfspop)
 	c:RegisterEffect(e1)
-	--Special Summon 1 monster sent to your RP face-down
+	--Special Summon 1 monster sent to your GY face-down
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -38,11 +38,11 @@ function s.initial_effect(c)
 	e3:SetCode(EVENT_FLIP)
 	e3:SetOperation(function(e) e:GetHandler():RegisterFlagEffect(id,RESET_EVENT|RESETS_STANDARD,0,1) end)
 	c:RegisterEffect(e3)
-	--Keep track of monsters sent from the hand or Deck to your RP
+	--Keep track of monsters sent from the hand or Deck to your GY
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e4:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	e4:SetCode(EVENT_TO_REST)
+	e4:SetCode(EVENT_TO_GRAVE)
 	e4:SetRange(LOCATION_MZONE)
 	e4:SetLabelObject(e2)
 	e4:SetCondition(function(e) return e:GetHandler():HasFlagEffect(id) and not Duel.IsPhase(PHASE_DAMAGE) end)
@@ -63,7 +63,7 @@ function s.selfspop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.spfilter(c,e,tp)
-	return c:IsMonster() and c:IsControler(tp) and c:IsPreviousLocation(LOCATION_HAND|LOCATION_DECK) and c:IsLocation(LOCATION_REST)
+	return c:IsMonster() and c:IsControler(tp) and c:IsPreviousLocation(LOCATION_HAND|LOCATION_DECK) and c:IsLocation(LOCATION_GRAVE)
 		and c:IsCanBeEffectTarget(e) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEDOWN_DEFENSE)	
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
@@ -81,7 +81,7 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local g=e:GetLabelObject():Filter(s.spfilter,nil,e,tp)
-	if chkc then return g:IsContains(chkc) and chkc:IsLocation(LOCATION_REST) and s.spfilter(chkc,e,tp) end
+	if chkc then return g:IsContains(chkc) and chkc:IsLocation(LOCATION_GRAVE) and s.spfilter(chkc,e,tp) end
 	if chk==0 then return #g>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 end
 	local tc=g:GetFirst()
 	if #g>1 then

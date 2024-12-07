@@ -2,7 +2,7 @@
 --Amaterasu
 local s,id=GetID()
 function s.initial_effect(c)
-	Guardian.AddProcedure(c,EVENT_FLIP)
+	Spirit.AddProcedure(c,EVENT_FLIP)
 	--Cannot be Normal or Special Summoned
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)

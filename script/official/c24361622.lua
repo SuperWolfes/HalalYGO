@@ -1,10 +1,10 @@
 --天球の聖刻印
---Hieratic Seal of the Spectrumly Spheres
+--Hieratic Seal of the Heavenly Spheres
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_DRAGON),2,2)
 	--add to hand
 	local e1=Effect.CreateEffect(c)

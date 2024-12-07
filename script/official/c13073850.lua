@@ -70,7 +70,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0xaa}
 function s.splimcon(e)
-	return not e:GetHandler():IsUnliked()
+	return not e:GetHandler():IsForbidden()
 end
 function s.splimit(e,c)
 	return not c:IsSetCard(0xaa)

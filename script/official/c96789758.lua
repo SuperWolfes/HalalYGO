@@ -1,5 +1,5 @@
 --アロマージ－ジャスミン
---Aromanced Jasmine
+--Aromage Jasmine
 local s,id=GetID()
 function s.initial_effect(c)
 	--extra summon

@@ -18,9 +18,9 @@ function s.initial_effect(c)
 	--return
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
-	e3:SetCategory(CATEGORY_TOREST)
+	e3:SetCategory(CATEGORY_TOGRAVE)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	e3:SetCode(EVENT_TO_REST)
+	e3:SetCode(EVENT_TO_GRAVE)
 	e3:SetCondition(s.retcon)
 	e3:SetTarget(s.rettg)
 	e3:SetOperation(s.retop)
@@ -38,9 +38,9 @@ end
 function s.rettg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local g=Duel.GetMatchingGroup(s.filter,0,LOCATION_REMOVED,LOCATION_REMOVED,nil)
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,g,#g,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,g,#g,0,0)
 end
 function s.retop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.filter,0,LOCATION_REMOVED,LOCATION_REMOVED,nil)
-	Duel.SendtoRest(g,REASON_EFFECT+REASON_RETURN)
+	Duel.SendtoGrave(g,REASON_EFFECT+REASON_RETURN)
 end

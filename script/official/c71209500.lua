@@ -1,9 +1,9 @@
 --アマゾネス・スカウト
---Amazonian Scouts
+--Amazoness Scouts
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Your "Amazonian" monsters cannot targeted by monster effects, also cannot be destroyed by card effects
+	--Your "Amazoness" monsters cannot targeted by monster effects, also cannot be destroyed by card effects
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_QUICK_O)

@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e2:SetCode(EFFECT_UPDATE_ATTACK)
 	e2:SetRange(LOCATION_FZONE)
 	e2:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
-	e2:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,SET_RESTKEEPERS))
+	e2:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,SET_GRAVEKEEPERS))
 	e2:SetValue(500)
 	c:RegisterEffect(e2)
 	local e3=e2:Clone()
@@ -24,28 +24,28 @@ function s.initial_effect(c)
 	e4:SetType(EFFECT_TYPE_FIELD)
 	e4:SetCode(EFFECT_CANNOT_REMOVE)
 	e4:SetRange(LOCATION_FZONE)
-	e4:SetTargetRange(LOCATION_REST,0)
+	e4:SetTargetRange(LOCATION_GRAVE,0)
 	e4:SetCondition(s.contp)
 	c:RegisterEffect(e4)
 	local e5=e4:Clone()
-	e5:SetTargetRange(0,LOCATION_REST)
+	e5:SetTargetRange(0,LOCATION_GRAVE)
 	e5:SetCondition(s.conntp)
 	c:RegisterEffect(e5)
 	--"Necrovalley" effect
 	local e6=Effect.CreateEffect(c)
 	e6:SetType(EFFECT_TYPE_FIELD)
-	e6:SetCode(EFFECT_REST_VALLEY)
+	e6:SetCode(EFFECT_NECRO_VALLEY)
 	e6:SetRange(LOCATION_FZONE)
-	e6:SetTargetRange(LOCATION_REST,0)
+	e6:SetTargetRange(LOCATION_GRAVE,0)
 	e6:SetCondition(s.contp)
 	c:RegisterEffect(e6)
 	local e7=e6:Clone()
-	e7:SetTargetRange(0,LOCATION_REST)
+	e7:SetTargetRange(0,LOCATION_GRAVE)
 	e7:SetCondition(s.conntp)
 	c:RegisterEffect(e7)
 	local e8=Effect.CreateEffect(c)
 	e8:SetType(EFFECT_TYPE_FIELD)
-	e8:SetCode(EFFECT_REST_VALLEY)
+	e8:SetCode(EFFECT_NECRO_VALLEY)
 	e8:SetRange(LOCATION_FZONE)
 	e8:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e8:SetTargetRange(1,0)
@@ -55,14 +55,14 @@ function s.initial_effect(c)
 	e9:SetTargetRange(0,1)
 	e9:SetCondition(s.conntp)
 	c:RegisterEffect(e9)
-	--Negate an effect when it resolves if it would move a card in the RP
+	--Negate an effect when it resolves if it would move a card in the GY
 	local e10=Effect.CreateEffect(c)
 	e10:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e10:SetCode(EVENT_CHAIN_SOLVING)
 	e10:SetRange(LOCATION_FZONE)
 	e10:SetOperation(s.disop)
 	c:RegisterEffect(e10)
-	--Prevent non-activated effects from Special Summoning from the RP (e.g. unclassified summoning effects or delayed effects)
+	--Prevent non-activated effects from Special Summoning from the GY (e.g. unclassified summoning effects or delayed effects)
 	local e11=Effect.CreateEffect(c)
 	e11:SetType(EFFECT_TYPE_FIELD)
 	e11:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
@@ -72,21 +72,21 @@ function s.initial_effect(c)
 	e11:SetTarget(s.cannotsptg)
 	c:RegisterEffect(e11)
 end
-s.listed_series={SET_RESTKEEPERS}
+s.listed_series={SET_GRAVEKEEPERS}
 function s.contp(e)
-	return not Duel.IsPlayerAffectedByEffect(e:GetHandler():GetControler(),EFFECT_REST_VALLEY_IM)
+	return not Duel.IsPlayerAffectedByEffect(e:GetHandler():GetControler(),EFFECT_NECRO_VALLEY_IM)
 end
 function s.conntp(e)
-	return not Duel.IsPlayerAffectedByEffect(1-e:GetHandler():GetControler(),EFFECT_REST_VALLEY_IM)
+	return not Duel.IsPlayerAffectedByEffect(1-e:GetHandler():GetControler(),EFFECT_NECRO_VALLEY_IM)
 end
 function s.disfilter(c,not_im0,not_im1,re)
-	if c:IsControler(0) then return not_im0 and c:IsHasEffect(EFFECT_REST_VALLEY) and c:IsRelateToEffect(re)
-	else return not_im1 and c:IsHasEffect(EFFECT_REST_VALLEY) and c:IsRelateToEffect(re) end
+	if c:IsControler(0) then return not_im0 and c:IsHasEffect(EFFECT_NECRO_VALLEY) and c:IsRelateToEffect(re)
+	else return not_im1 and c:IsHasEffect(EFFECT_NECRO_VALLEY) and c:IsRelateToEffect(re) end
 end
 function s.discheck(ev,category,re,not_im0,not_im1)
 	local ex,tg,ct,p,v=Duel.GetOperationInfo(ev,category)
 	if not ex then return false end
-	if (category==CATEGORY_LEAVE_REST or v==LOCATION_REST) and ct>0 and not tg then
+	if (category==CATEGORY_LEAVE_GRAVE or v==LOCATION_GRAVE) and ct>0 and not tg then
 		if p==0 then return not_im0
 		elseif p==1 then return not_im1
 		elseif p==PLAYER_ALL then return not_im0 or not_im1
@@ -100,21 +100,21 @@ function s.discheck(ev,category,re,not_im0,not_im1)
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=re:GetHandler()
-	if not Duel.IsChainDisablable(ev) or tc:IsHasEffect(EFFECT_REST_VALLEY_IM) then return end
+	if not Duel.IsChainDisablable(ev) or tc:IsHasEffect(EFFECT_NECRO_VALLEY_IM) then return end
 	local res=false
-	local not_im0=not Duel.IsPlayerAffectedByEffect(0,EFFECT_REST_VALLEY_IM)
-	local not_im1=not Duel.IsPlayerAffectedByEffect(1,EFFECT_REST_VALLEY_IM)
+	local not_im0=not Duel.IsPlayerAffectedByEffect(0,EFFECT_NECRO_VALLEY_IM)
+	local not_im1=not Duel.IsPlayerAffectedByEffect(1,EFFECT_NECRO_VALLEY_IM)
 	if not res and s.discheck(ev,CATEGORY_SPECIAL_SUMMON,re,not_im0,not_im1) then res=true end
 	if not res and s.discheck(ev,CATEGORY_REMOVE,re,not_im0,not_im1) then res=true end
 	if not res and s.discheck(ev,CATEGORY_TOHAND,re,not_im0,not_im1) then res=true end
 	if not res and s.discheck(ev,CATEGORY_TODECK,re,not_im0,not_im1) then res=true end
 	if not res and s.discheck(ev,CATEGORY_TOEXTRA,re,not_im0,not_im1) then res=true end
 	if not res and s.discheck(ev,CATEGORY_EQUIP,re,not_im0,not_im1) then res=true end
-	if not res and s.discheck(ev,CATEGORY_LEAVE_REST,re,not_im0,not_im1) then res=true end
+	if not res and s.discheck(ev,CATEGORY_LEAVE_GRAVE,re,not_im0,not_im1) then res=true end
 	if res then Duel.NegateEffect(ev) end
 end
 function s.cannotsptg(e,c,sp,sumtype,sumpos,target_p,sumeff)
-	return c:IsLocation(LOCATION_REST) and sumeff and not sumeff:IsActivated() and not sumeff:IsHasProperty(EFFECT_FLAG_CANNOT_DISABLE)
-		and not Duel.IsPlayerAffectedByEffect(c:GetControler(),EFFECT_REST_VALLEY_IM) and not c:IsHasEffect(EFFECT_REST_VALLEY_IM)
-		and not sumeff:GetHandler():IsHasEffect(EFFECT_REST_VALLEY_IM)
+	return c:IsLocation(LOCATION_GRAVE) and sumeff and not sumeff:IsActivated() and not sumeff:IsHasProperty(EFFECT_FLAG_CANNOT_DISABLE)
+		and not Duel.IsPlayerAffectedByEffect(c:GetControler(),EFFECT_NECRO_VALLEY_IM) and not c:IsHasEffect(EFFECT_NECRO_VALLEY_IM)
+		and not sumeff:GetHandler():IsHasEffect(EFFECT_NECRO_VALLEY_IM)
 end

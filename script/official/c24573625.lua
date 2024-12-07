@@ -42,13 +42,13 @@ function s.initial_effect(c)
 end
 s.listed_series={0xab}
 function s.splimcon(e)
-	return not e:GetHandler():IsUnliked()
+	return not e:GetHandler():IsForbidden()
 end
 function s.splimit(e,c,tp,sumtp,sumpos)
 	return not c:IsSetCard(0xab) and (sumtp&SUMMON_TYPE_PENDULUM)==SUMMON_TYPE_PENDULUM
 end
 function s.value(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsSetCard,c:GetControler(),LOCATION_REST,0,nil,0xab)*500
+	return Duel.GetMatchingGroupCount(Card.IsSetCard,c:GetControler(),LOCATION_GRAVE,0,nil,0xab)*500
 end
 function s.tglimit(e,c)
 	return c:IsSetCard(0xab) and c~=e:GetHandler()

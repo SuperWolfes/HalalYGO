@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.target)
 	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
-	--Send itself to the RP
+	--Send itself to the GY
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e3:SetCode(EVENT_PHASE+PHASE_END)
@@ -53,5 +53,5 @@ function s.tgcon(e)
 	return Duel.IsTurnPlayer(tp) and e:GetHandler():GetFlagEffect(id)==0
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SendtoRest(e:GetHandler(),REASON_EFFECT)
+	Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
 end

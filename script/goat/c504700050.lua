@@ -1,5 +1,5 @@
 --闇の呪縛
---Shadow Actional (Goat)
+--Shadow Spell (Goat)
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddPersistentProcedure(c,1,aux.FilterBoolFunction(Card.IsFaceup),CATEGORY_POSITION,EFFECT_FLAG_DAMAGE_CAL,TIMING_DAMAGE_STEP,TIMING_DAMAGE_STEP,s.condition)

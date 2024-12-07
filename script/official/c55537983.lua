@@ -1,9 +1,9 @@
 --Japanese name
---Mimirahul Master
+--Mimighoul Master
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	--Cannot be destroyed by battle or card effects while your opponent controls any face-down monsters or you control a "Mimirahul" monster other than "Mimirahul Master"
+	--Cannot be destroyed by battle or card effects while your opponent controls any face-down monsters or you control a "Mimighoul" monster other than "Mimighoul Master"
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	local e2=e1:Clone()
 	e2:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
 	c:RegisterEffect(e2)
-	--Add 1 "Mimirahul" monster from your Deck to your hand, except "Mimirahul Master"
+	--Add 1 "Mimighoul" monster from your Deck to your hand, except "Mimighoul Master"
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND)
@@ -44,9 +44,9 @@ function s.initial_effect(c)
 	c:RegisterEffect(e5)
 end
 s.listed_names={id}
-s.listed_series={SET_MIMIRAHUL}
+s.listed_series={SET_MIMIGHOUL}
 function s.indesconfilter(c)
-	return c:IsFaceup() and c:IsSetCard(SET_MIMIRAHUL) and not c:IsCode(id)
+	return c:IsFaceup() and c:IsSetCard(SET_MIMIGHOUL) and not c:IsCode(id)
 end
 function s.indescon(e)
 	local tp=e:GetHandlerPlayer()
@@ -54,7 +54,7 @@ function s.indescon(e)
 		or Duel.IsExistingMatchingCard(s.indesconfilter,tp,LOCATION_MZONE,0,1,nil)
 end
 function s.thfilter(c)
-	return c:IsSetCard(SET_MIMIRAHUL) and c:IsMonster() and not c:IsCode(id) and c:IsAbleToHand()
+	return c:IsSetCard(SET_MIMIGHOUL) and c:IsMonster() and not c:IsCode(id) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

@@ -1,5 +1,5 @@
 --アマゾネス拝謁の間
---Amazonian Hall
+--Amazoness Hall
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -29,17 +29,17 @@ end
 s.listed_series={0x4}
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST+LOCATION_EXTRA)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE+LOCATION_EXTRA)
 end
 function s.pendfilter(c,tp)
-	return c:IsType(TYPE_PENDULUM) and not c:IsUnliked() and Duel.CheckPendulumZones(tp)
+	return c:IsType(TYPE_PENDULUM) and not c:IsForbidden() and Duel.CheckPendulumZones(tp)
 end
 function s.cfilter(c,tp)
 	return c:IsMonster() and c:IsSetCard(0x4) and c:IsFaceup() and (c:IsAbleToHand() or s.pendfilter(c,tp))
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
-	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.cfilter),tp,LOCATION_REST+LOCATION_EXTRA,0,nil,tp)
+	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.cfilter),tp,LOCATION_GRAVE+LOCATION_EXTRA,0,nil,tp)
 	if #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,2))
 		local tc=g:Select(tp,1,1,nil)

@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Xyz.AddProcedure(c,nil,8,2,s.ovfilter,aux.Stringid(id,0),99,s.xyzop)
 	--Search 1 "Springans" or "Therion" card
 	local e1=Effect.CreateEffect(c)

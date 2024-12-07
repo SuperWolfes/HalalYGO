@@ -1,7 +1,7 @@
 --Sin 真紅眼の黒竜
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	c:SetUniqueOnField(1,1,aux.MaleficUniqueFilter(c),LOCATION_MZONE)
 	aux.AddMaleficSummonProcedure(c,CARD_REDEYES_B_DRAGON,LOCATION_DECK)
 	--selfdes

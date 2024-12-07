@@ -16,10 +16,10 @@ function s.flipop(e,tp,ep,eg,ev,re,r,rp)
 	if Duel.IsDuelType(DUEL_1_FIELD) then
 		if fc then Duel.Destroy(fc,REASON_RULE) end
 		fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
-		if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoRest(c,REASON_RULE) end
+		if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoGrave(c,REASON_RULE) end
 	else
 		fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
-		if fc and Duel.SendtoRest(fc,REASON_RULE)==0 then Duel.SendtoRest(c,REASON_RULE) end
+		if fc and Duel.SendtoGrave(fc,REASON_RULE)==0 then Duel.SendtoGrave(c,REASON_RULE) end
 	end
 	Duel.MoveToField(c,tp,tp,LOCATION_FZONE,POS_FACEUP,true,0)
 	Duel.Hint(HINT_SKILL_REMOVE,tp,c:GetOriginalCode())
@@ -28,11 +28,11 @@ function s.flipop(e,tp,ep,eg,ev,re,r,rp)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--Change Atsort DARK
+	--Change Attribute to DARK
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetRange(LOCATION_FZONE)
-	e2:SetTargetRange(LOCATION_MZONE+LOCATION_REST,LOCATION_MZONE+LOCATION_REST)
+	e2:SetTargetRange(LOCATION_MZONE+LOCATION_GRAVE,LOCATION_MZONE+LOCATION_GRAVE)
 	e2:SetCode(EFFECT_CHANGE_ATTRIBUTE)
 	e2:SetTarget(s.tg)
 	e2:SetValue(ATTRIBUTE_DARK)
@@ -72,9 +72,9 @@ function s.tg(e,c)
 		c:RegisterFlagEffect(1,0,0,0)
 		local eff
 		if c:IsLocation(LOCATION_MZONE) then
-			eff={Duel.GetPlayerEffect(c:GetControler(),EFFECT_REST_VALLEY)}
+			eff={Duel.GetPlayerEffect(c:GetControler(),EFFECT_NECRO_VALLEY)}
 		else
-			eff={c:GetCardEffect(EFFECT_REST_VALLEY)}
+			eff={c:GetCardEffect(EFFECT_NECRO_VALLEY)}
 		end
 		c:ResetFlagEffect(1)
 		for _,te in ipairs(eff) do
@@ -116,13 +116,13 @@ function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 		and ((a:IsControler(tp) and a:IsSetCard(SET_CRYSTAL_BEAST)) or (at and at:IsControler(tp) and at:IsSetCard(SET_CRYSTAL_BEAST)))
 end
 function s.dfilter(c)
-	return c:IsSetCard(SET_CRYSTAL_BEAST) and c:IsType(TYPE_MONSTER) and c:IsAbleToRestAsCost()
+	return c:IsSetCard(SET_CRYSTAL_BEAST) and c:IsType(TYPE_MONSTER) and c:IsAbleToGraveAsCost()
 end
 function s.damcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.dfilter,tp,LOCATION_DECK,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.dfilter,tp,LOCATION_DECK,0,1,1,nil)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

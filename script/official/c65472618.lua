@@ -1,5 +1,5 @@
 --魔装戦士 ドラゴディウス
---Dramonsteries, the Empowered Warrior
+--Dragodies, the Empowered Warrior
 local s,id=GetID()
 function s.initial_effect(c)
 	--Pendulum Summon
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetCost(s.atkcost)
 	e1:SetOperation(s.atkop)
 	c:RegisterEffect(e1)
-	--Search 1 Warrior or Mentor with 2000 or less ATK
+	--Search 1 Warrior or Spellcaster with 2000 or less ATK
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND)
@@ -74,7 +74,7 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.thfilter(c)
-	return c:IsAttackBelow(2000) and c:IsRace(RACE_WARRIOR+RACE_MENTOR) and not c:IsCode(id) and c:IsAbleToHand()
+	return c:IsAttackBelow(2000) and c:IsRace(RACE_WARRIOR+RACE_SPELLCASTER) and not c:IsCode(id) and c:IsAbleToHand()
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil)

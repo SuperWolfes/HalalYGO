@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.damtg)
 	e1:SetOperation(s.damop)
 	c:RegisterEffect(e1)
-	--Tribute 1 monster to destroy 1 Actional/Trap Card and damage owner of Tributed monster
+	--Tribute 1 monster to destroy 1 Spell/Trap Card and damage owner of Tributed monster
 	local e2=e1:Clone()
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_DESTROY+CATEGORY_DAMAGE)
@@ -52,11 +52,11 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Damage(p,d,REASON_EFFECT)
 end
 function s.sttg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsActionalTrap),tp,0,LOCATION_ONFIELD,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSpellTrap),tp,0,LOCATION_ONFIELD,1,nil) end
 	local tc=e:GetLabelObject()
 	local dam=tc:GetBaseAttack()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-	local g=Duel.SelectMatchingCard(tp,aux.FaceupFilter(Card.IsActionalTrap),tp,0,LOCATION_ONFIELD,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,aux.FaceupFilter(Card.IsSpellTrap),tp,0,LOCATION_ONFIELD,1,1,nil)
 	Duel.SetTargetCard(g:GetFirst())
 	Duel.SetTargetPlayer(tc:GetOwner())
 	Duel.SetTargetParam(dam/2)

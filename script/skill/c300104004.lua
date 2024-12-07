@@ -29,13 +29,13 @@ function s.sumtg(e,tp,eg,ep,ev,re,r,rp,chk)
     Duel.SetOperationInfo(0,CATEGORY_RELEASE,nil,1,0,0)
     Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK)
 end
---Shuffle 1 Insect monster from your RP into Deck and draw 1 card
+--Shuffle 1 Insect monster from your GY into Deck and draw 1 card
 function s.tdfilter(c)
     return c:IsRace(RACE_INSECT) and c:IsAbleToDeck()
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-    if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and s.tdfilter(chkc) end
-    if chk==0 then return Duel.IsExistingTarget(s.tdfilter,tp,LOCATION_REST,0,1,nil)
+    if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.tdfilter(chkc) end
+    if chk==0 then return Duel.IsExistingTarget(s.tdfilter,tp,LOCATION_GRAVE,0,1,nil)
         and Duel.IsPlayerCanDraw(tp,1) end
     Duel.SetOperationInfo(0,CATEGORY_TODECK,g,1,0,0)
     Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
@@ -81,7 +81,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
     elseif (b2 and p==2) or Duel.GetFlagEffect(ep,id)>0 then
         Duel.RegisterFlagEffect(ep,id+1,0,0,0)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-        local tc=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_REST,0,1,1,nil):GetFirst()
+        local tc=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_GRAVE,0,1,1,nil):GetFirst()
         if Duel.SendtoDeck(tc,nil,0,REASON_EFFECT)~=0 and tc:IsLocation(LOCATION_DECK+LOCATION_EXTRA) then
             if tc:IsLocation(LOCATION_DECK) then Duel.ShuffleDeck(tc:GetControler()) end
             Duel.BreakEffect()

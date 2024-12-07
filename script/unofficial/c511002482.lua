@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,9,3)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Rank Up Check
 	aux.EnableCheckRankUp(c,nil,nil,88120966)
 	--battle indestructable

@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Place 1 face-up monster in its owner's Actional/Trap Zone
+	--Place 1 face-up monster in its owner's Spell/Trap Zone
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -32,14 +32,14 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not (tc:IsRelateToEffect(e) and not tc:IsImmuneToEffect(e)) then return end
 	if Duel.GetLocationCount(tc:GetOwner(),LOCATION_SZONE)==0 then
-		Duel.SendtoRest(tc,REASON_RULE,nil,PLAYER_NONE)
+		Duel.SendtoGrave(tc,REASON_RULE,nil,PLAYER_NONE)
 	elseif Duel.MoveToField(tc,tp,tc:GetOwner(),LOCATION_SZONE,POS_FACEUP,tc:IsMonsterCard()) then
-		--Treated as a Continuous Actional
+		--Treated as a Continuous Spell
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 		e1:SetCode(EFFECT_CHANGE_TYPE)
-		e1:SetValue(TYPE_ACTIONAL|TYPE_CONTINUOUS)
+		e1:SetValue(TYPE_SPELL|TYPE_CONTINUOUS)
 		e1:SetReset(RESET_EVENT|(RESETS_STANDARD&~RESET_TURN_SET))
 		tc:RegisterEffect(e1)
 	end

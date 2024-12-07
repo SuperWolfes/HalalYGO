@@ -1,5 +1,5 @@
 --ジャスティス・ワールド
---Territory of Light
+--Realm of Light
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(0x5)
@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	--Add counter
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
-	e2:SetCode(EVENT_TO_REST)
+	e2:SetCode(EVENT_TO_GRAVE)
 	e2:SetRange(LOCATION_FZONE)
 	e2:SetOperation(s.acop)
 	c:RegisterEffect(e2)

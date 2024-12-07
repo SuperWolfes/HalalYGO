@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send 1 "Tri-Brigade" card to the RP and apply a matching effect
+	--Send 1 "Tri-Brigade" card to the GY and apply a matching effect
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -33,8 +33,8 @@ function s.cfilter3(c)
 	return s.cfilter(c) and c:IsAbleToHand()
 end
 function s.costfilter(c,op1,op2,op3)
-	return c:IsSetCard(SET_TRI_BRIGADE) and c:IsAbleToRestAsCost() and
-		((c:IsMonster() and op1) or (c:IsActional() and op2) or (c:IsTrap() and op3))
+	return c:IsSetCard(SET_TRI_BRIGADE) and c:IsAbleToGraveAsCost() and
+		((c:IsMonster() and op1) or (c:IsSpell() and op2) or (c:IsTrap() and op3))
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local phase=Duel.GetCurrentPhase()
@@ -42,16 +42,16 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local op2=Duel.IsExistingTarget(s.cfilter2,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil) and phase~=PHASE_DAMAGE
 	local op3=Duel.IsExistingTarget(s.cfilter3,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil) and phase~=PHASE_DAMAGE
 	if chk==0 then return (op1 or op2 or op3) and Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_DECK|LOCATION_EXTRA,0,1,nil,op1,op2,op3) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local sc=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_DECK|LOCATION_EXTRA,0,1,1,nil,op1,op2,op3):GetFirst()
-	Duel.SendtoRest(sc,REASON_COST)
+	Duel.SendtoGrave(sc,REASON_COST)
 	if sc:IsMonster() then
 		e:SetLabel(1)
 		e:SetCategory(CATEGORY_ATKCHANGE)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATKDEF)
 		local tc=Duel.SelectTarget(tp,s.cfilter1,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil):GetFirst()
 		Duel.SetOperationInfo(0,CATEGORY_ATKCHANGE,tc,1,tp,-tc:GetAttack())
-	elseif sc:IsActional() then
+	elseif sc:IsSpell() then
 		e:SetLabel(2)
 		e:SetCategory(CATEGORY_DISABLE)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_NEGATE)

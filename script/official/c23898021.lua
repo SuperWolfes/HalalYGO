@@ -1,5 +1,5 @@
 --悪魔嬢リリス
---Lipsick, Lady of Lament
+--Lilith, Lady of Lament
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

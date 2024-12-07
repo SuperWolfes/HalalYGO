@@ -13,12 +13,12 @@ function s.initial_effect(c)
 	e1:SetCondition(s.ntcon)
 	e1:SetValue(1)
 	c:RegisterEffect(e1)
-	--Special summon itself from RP
+	--Special summon itself from GY
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCountLimit(1,id)
 	e2:SetCost(s.spcost)
 	e2:SetTarget(s.sptg)
@@ -26,7 +26,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.cfilter(c)
-	return c:IsFacedown() or not (c:IsRace(RACE_MENTAL) or c:IsRace(RACE_WYRM))
+	return c:IsFacedown() or not (c:IsRace(RACE_PSYCHIC) or c:IsRace(RACE_WYRM))
 end
 function s.ntcon(e,c,minc,zone)
 	if c==nil then return true end
@@ -35,7 +35,7 @@ function s.ntcon(e,c,minc,zone)
 		and (Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)==0 or not Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil))
 end
 function s.tgfilter(c)
-	return c:IsDiscardable() and c:IsMonster() and (c:IsRace(RACE_MENTAL) or c:IsRace(RACE_WYRM))
+	return c:IsDiscardable() and c:IsMonster() and (c:IsRace(RACE_PSYCHIC) or c:IsRace(RACE_WYRM))
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_HAND,0,1,nil) end

@@ -1,5 +1,5 @@
 --封魔の矢
---Anti-Ment Arrows
+--Anti-Magic Arrows
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -33,5 +33,5 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.aclimit(e,re,tp)
-	return re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP)
+	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP)
 end

@@ -21,11 +21,11 @@ function s.filter2(c,lv,e,sp)
 	return c:IsLevelBelow(lv) and c:IsSetCard(0xc008)  and c:IsCanBeSpecialSummoned(e,0,sp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter1(chkc,e,tp) end
-	if chk==0 then return Duel.IsExistingTarget(s.filter1,tp,LOCATION_REST,0,1,nil,e,tp)
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter1(chkc,e,tp) end
+	if chk==0 then return Duel.IsExistingTarget(s.filter1,tp,LOCATION_GRAVE,0,1,nil,e,tp)
 		and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 end
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,0))
-	Duel.SelectTarget(tp,s.filter1,tp,LOCATION_REST,0,1,1,nil,e,tp)
+	Duel.SelectTarget(tp,s.filter1,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)

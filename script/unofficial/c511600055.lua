@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_CYBERSE),2,2)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	c:EnableCounterPermit(0x55)
 	--direct attack
 	local e1=Effect.CreateEffect(c)

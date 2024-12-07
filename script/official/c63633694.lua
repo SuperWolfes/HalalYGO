@@ -1,5 +1,5 @@
 --機巧蹄-天迦久御雷
---Gizmek Kabo, the Supreme Shining Sky Stag
+--Gizmek Kaku, the Supreme Shining Sky Stag
 --scripted by Logical Nonsense
 --Substitute ID
 local s,id=GetID()
@@ -59,7 +59,7 @@ end
 	--Check for face-up monster in EMZ
 function s.eqfilter(c,tp)
 	return c:IsFaceup() and (c:IsControler(tp) or c:IsAbleToChangeControler())
-		and not c:IsUnliked()
+		and not c:IsForbidden()
 end
 function s.eqcon(e,tp,eg,ep,ev,re,r,rp)
 	local g=e:GetHandler():GetEquipGroup():Filter(Card.HasFlagEffect,nil,id)

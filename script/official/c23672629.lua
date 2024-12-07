@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	Xyz.AddProcedure(c,nil,5,2)
 	--Xyz Summon Procedure
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Destroy a monster you control
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	e2:SetHintTiming(TIMING_END_PHASE)
 	e2:SetCondition(s.quickcon)
 	c:RegisterEffect(e2)
-	--Place 1 Actional on top of your Deck
+	--Place 1 Spell on top of your Deck
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
@@ -65,11 +65,11 @@ function s.tdcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.tdcfilter,1,nil,tp)
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsActional,tp,LOCATION_DECK,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsSpell,tp,LOCATION_DECK,0,1,nil) end
 end
 function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,2))
-	local tc=Duel.SelectMatchingCard(tp,Card.IsActional,tp,LOCATION_DECK,0,1,1,nil):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,Card.IsSpell,tp,LOCATION_DECK,0,1,1,nil):GetFirst()
 	if tc then
 		Duel.ShuffleDeck(tp)
 		Duel.MoveSequence(tc,0)

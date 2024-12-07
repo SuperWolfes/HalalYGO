@@ -1,5 +1,5 @@
 --剣闘獣の闘器デーモンズシールド
---Gladiator Beast's Battle Archtainted Shield
+--Gladiator Beast's Battle Archfiend Shield
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddEquipProcedure(c,nil,aux.FilterBoolFunction(Card.IsSetCard,0x19))
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TOHAND)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	e2:SetCode(EVENT_TO_REST)
+	e2:SetCode(EVENT_TO_GRAVE)
 	e2:SetCondition(s.retcon)
 	e2:SetTarget(s.rettg)
 	e2:SetOperation(s.retop)

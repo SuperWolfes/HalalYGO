@@ -3,7 +3,7 @@
 --Scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Link Summon
 	Link.AddProcedure(c,s.matfilter,1)
 	--Cannot be used as Link Material

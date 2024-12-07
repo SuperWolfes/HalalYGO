@@ -1,5 +1,5 @@
 --Ｓｐ－ラピッド・ショットウィング
---Speed Actional - Rapid Shotwing
+--Speed Spell - Rapid Shotwing
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

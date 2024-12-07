@@ -1,4 +1,4 @@
---Guardian Wave Barrier
+--Spirit Wave Barrier
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

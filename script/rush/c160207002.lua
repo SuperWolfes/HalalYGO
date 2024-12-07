@@ -1,5 +1,5 @@
 --超魔軌道マグナム・オーバーロード
---Supreme Fullsteam Magnum Overwatcher
+--Supreme Fullsteam Magnum Overlord
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)

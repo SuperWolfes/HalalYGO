@@ -1,5 +1,5 @@
 --魔轟神ディフ
---Fablous Dyf
+--Fabled Dyf
 local s,id=GetID()
 function s.initial_effect(c)
 	--Special summon
@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
-	e1:SetCode(EVENT_TO_REST)
+	e1:SetCode(EVENT_TO_GRAVE)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCost(s.spcost)
 	e1:SetTarget(s.sptg)

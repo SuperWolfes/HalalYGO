@@ -1,5 +1,5 @@
 --ハーピィの羽根休め
---Flybie's Feather Rest
+--Harpie's Feather Rest
 --scripted by Logical Nonsense
 --Substitute ID
 local s,id=GetID()
@@ -17,24 +17,24 @@ function s.initial_effect(c)
 end
 s.listed_series={0x64}
 	--This card lists names in its text
-s.listed_names={CARD_FLYBIE_LADY,CARD_FLYBIE_LADY_SISTERS}
-	--Check for "Flybie Lady" or "Flybie Sisters"
+s.listed_names={CARD_HARPIE_LADY,CARD_HARPIE_LADY_SISTERS}
+	--Check for "Harpie Lady" or "Harpie Sisters"
 function s.drfilter(c)
-	return c:IsCode(CARD_FLYBIE_LADY,CARD_FLYBIE_LADY_SISTERS) and c:IsAbleToDeck()
+	return c:IsCode(CARD_HARPIE_LADY,CARD_HARPIE_LADY_SISTERS) and c:IsAbleToDeck()
 end
 	--Activation legality
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local ct=1
 	if Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,0,1,nil) then ct=2 end
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.drfilter(chkc) end
-	if chk==0 then return Duel.IsPlayerCanDraw(tp,ct) and Duel.IsExistingTarget(s.drfilter,tp,LOCATION_REST,0,3,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.drfilter(chkc) end
+	if chk==0 then return Duel.IsPlayerCanDraw(tp,ct) and Duel.IsExistingTarget(s.drfilter,tp,LOCATION_GRAVE,0,3,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectTarget(tp,s.drfilter,tp,LOCATION_REST,0,3,3,nil)
+	local g=Duel.SelectTarget(tp,s.drfilter,tp,LOCATION_GRAVE,0,3,3,nil)
 	e:SetLabel(ct)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,#g,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,ct)
 end
-	--Check for level 5 or higher "Flybie"
+	--Check for level 5 or higher "Harpie"
 function s.filter(c)
 	return c:IsFaceup() and c:IsSetCard(0x64) and c:IsLevelAbove(5)
 end

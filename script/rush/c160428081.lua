@@ -1,5 +1,5 @@
 --ゾンビ・カーニバル
---Toxic Carnival
+--Zombie Carnival
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e2:SetCode(EFFECT_UPDATE_ATTACK)
 	e2:SetRange(LOCATION_FZONE)
 	e2:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
-	e2:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_TOXIC))
+	e2:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_ZOMBIE))
 	e2:SetValue(s.value)
 	c:RegisterEffect(e2)
 	--Increase DEF
@@ -23,5 +23,5 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.value(e,c)
-	return 100*Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsRace,RACE_TOXIC),e:GetHandlerPlayer(),LOCATION_MZONE,LOCATION_MZONE,nil)
+	return 100*Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsRace,RACE_ZOMBIE),e:GetHandlerPlayer(),LOCATION_MZONE,LOCATION_MZONE,nil)
 end

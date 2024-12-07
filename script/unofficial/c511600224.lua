@@ -1,5 +1,5 @@
 --Ｇゴーレム・ペブルドッグ
---G Gopal Pebble Dog
+--G Golem Pebble Dog
 --Scripted by Larry126
 local s,id,alias=GetID()
 function s.initial_effect(c)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
 	local e2=e1:Clone()
-	e2:SetCode(EVENT_TO_REST)
+	e2:SetCode(EVENT_TO_GRAVE)
 	e2:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
 	e2:SetCondition(s.thcon)
 	c:RegisterEffect(e2)

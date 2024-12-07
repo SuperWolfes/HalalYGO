@@ -1,5 +1,5 @@
 --ダークネス／魔法Ａ
---Darkness/Actional A (Darkness)
+--Darkness/Spell A (Darkness)
 local s,id=GetID()
 function s.initial_effect(c)
 	--activate
@@ -75,7 +75,7 @@ function s.efilter(e,ct)
 	return tc:GetType()==TYPE_TRAP+TYPE_CONTINUOUS
 end
 function s.thfilter(c)
-	return c:IsActionalTrap() and c:IsAbleToHand()
+	return c:IsSpellTrap() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,e:GetHandler()) end 

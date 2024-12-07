@@ -46,7 +46,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function s.spval(e,se,sp,st)
-	return st==SUMMON_TYPE_SPECIAL+SUMMON_WITH_MONSTER_REREST and Duel.IsPlayerAffectedByEffect(sp,41044418) and e:GetHandler():IsControler(sp)
+	return st==SUMMON_TYPE_SPECIAL+SUMMON_WITH_MONSTER_REBORN and Duel.IsPlayerAffectedByEffect(sp,41044418) and e:GetHandler():IsControler(sp)
 end
 function s.genchainlm(c)
 	return	function(e,rp,tp)

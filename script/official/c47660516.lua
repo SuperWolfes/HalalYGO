@@ -1,5 +1,5 @@
 --RUM－バリアンズ・フォース
---Rank-Up-Ment Barian's Fcoree
+--Rank-Up-Magic Barian's Force
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

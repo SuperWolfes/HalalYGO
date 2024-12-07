@@ -1,5 +1,5 @@
 --クリアー・レイジ・ゴーレム
---Clear Rage Gopal
+--Clear Rage Golem
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)

@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	c:AddSetcodesRule(id,false,0x601)
 	--dark synchro summon
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Synchro.AddDarkSynchroProcedure(c,Synchro.NonTuner(nil),nil,6)
 	--actlimit
 	local e1=Effect.CreateEffect(c)
@@ -74,17 +74,17 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsFaceup() and tc:IsRelateToEffect(e) and tc:IsMonster() then
 		if c:IsFaceup() and c:IsRelateToEffect(e) then
 			s.equipop(c,e,tp,tc)
-		else Duel.SendtoRest(tc,REASON_EFFECT) end
+		else Duel.SendtoGrave(tc,REASON_EFFECT) end
 	end
 end
 function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	local ec=c:GetEquipGroup():Filter(s.eqfilter,nil):GetFirst()
 	if chk==0 then return not c:IsReason(REASON_REPLACE) and ec and ec:IsHasCardTarget(c)
-		and ec:IsAbleToRest() and not ec:IsStatus(STATUS_DESTROY_CONFIRMED) end
+		and ec:IsAbleToGrave() and not ec:IsStatus(STATUS_DESTROY_CONFIRMED) end
 	return Duel.SelectEffectYesNo(tp,c,96)
 end
 function s.desrepop(e,tp,eg,ep,ev,re,r,rp)
 	local ec=e:GetHandler():GetEquipGroup():Filter(s.eqfilter,nil):GetFirst()
-	Duel.SendtoRest(ec,REASON_EFFECT+REASON_REPLACE)
+	Duel.SendtoGrave(ec,REASON_EFFECT+REASON_REPLACE)
 end

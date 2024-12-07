@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return eg:IsExists(Card.IsSummonPlayer,1,nil,1-tp) and not Duel.IsExistingMatchingCard(Card.IsTrap,tp,LOCATION_REST,0,1,nil)
+	return eg:IsExists(Card.IsSummonPlayer,1,nil,1-tp) and not Duel.IsExistingMatchingCard(Card.IsTrap,tp,LOCATION_GRAVE,0,1,nil)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(aux.FilterMaximumSideFunctionEx(aux.TRUE),tp,LOCATION_MZONE,LOCATION_MZONE,nil)

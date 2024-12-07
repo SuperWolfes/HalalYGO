@@ -1,9 +1,9 @@
 --異端なるフォボスコボス
---Unadherental Phoboscobos
+--Heretical Phoboscobos
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Xyz Summon procedure
 	Xyz.AddProcedure(c,nil,4,2)
 	--Negate the effects of an opponent's monster

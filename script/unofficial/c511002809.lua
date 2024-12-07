@@ -2,8 +2,8 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableAwakeLimit()
-	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x10f2),aux.FilterBoolFunctionEx(Card.IsRace,RACE_MENTOR))
+	c:EnableReviveLimit()
+	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x10f2),aux.FilterBoolFunctionEx(Card.IsRace,RACE_SPELLCASTER))
 	--multi attack
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
@@ -45,7 +45,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.matfilter(c,sc)
 	return c:IsLocation(LOCATION_ONFIELD) and c:IsControler(sc:GetControler())
-		and c:IsRace(RACE_MENTOR,c,SUMMON_TYPE_FUSION) and c:IsLevelBelow(2147483647)
+		and c:IsRace(RACE_SPELLCASTER,c,SUMMON_TYPE_FUSION) and c:IsLevelBelow(2147483647)
 end
 function s.valcheck(e,c)
 	local mg=c:GetMaterial():Filter(s.matfilter,nil,c)

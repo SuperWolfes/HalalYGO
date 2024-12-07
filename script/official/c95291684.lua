@@ -1,8 +1,8 @@
 --異次元の一角戦士
---S.D. Unicorn Knight
+--D.D. Unicorn Knight
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Special Summon procedure
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)

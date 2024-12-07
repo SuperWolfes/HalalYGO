@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY+EFFECT_FLAG_CARD_TARGET)
-	e1:SetCode(EVENT_TO_REST)
+	e1:SetCode(EVENT_TO_GRAVE)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
@@ -29,12 +29,12 @@ function s.checkop(e,tp,eg,ep,ev,re,r,rp)
 	local sg=eg:Filter(s.cfilter,nil)
 	if sg and #sg>0 then
 		for tc in sg:Iter() do
-			tc:RegisterFlagEffect(id,RESET_EVENT|RESETS_STANDARD&~(RESET_TOREST|RESET_LEAVE),0,1)
+			tc:RegisterFlagEffect(id,RESET_EVENT|RESETS_STANDARD&~(RESET_TOGRAVE|RESET_LEAVE),0,1)
 		end
 	end
 end
 function s.spfilter(c,e,tp)
-	return c:GetFlagEffect(id)>0 and c:IsLocation(LOCATION_REST) and c:IsControler(tp) and c:IsReason(REASON_DESTROY)
+	return c:GetFlagEffect(id)>0 and c:IsLocation(LOCATION_GRAVE) and c:IsControler(tp) and c:IsReason(REASON_DESTROY)
 		and (c:IsReason(REASON_BATTLE) or (c:IsReason(REASON_EFFECT) and c:GetReasonPlayer()==1-tp))
 		and c:IsCanBeEffectTarget(e) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 		and Duel.IsExistingMatchingCard(s.exfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,c:GetCode())
@@ -44,15 +44,15 @@ function s.exfilter(c,e,tp,code)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return eg:IsContains(chkc) and s.spfilter(chkc,e,tp) end
-	if chk==0 then return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
+	if chk==0 then return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and Duel.GetUsableMZoneCount(tp)>1 and eg:IsExists(s.spfilter,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=eg:FilterSelect(tp,s.spfilter,1,1,nil,e,tp)
 	Duel.SetTargetCard(g)
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,2,tp,LOCATION_REST+LOCATION_EXTRA)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,2,tp,LOCATION_GRAVE+LOCATION_EXTRA)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)==0 or Duel.GetUsableMZoneCount(tp)<=1 then return end
 	local tc=Duel.GetFirstTarget()
 	if not tc:IsRelateToEffect(e) then return end

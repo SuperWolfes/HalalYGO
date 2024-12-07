@@ -51,11 +51,11 @@ function s.descon(e)
 	return not Duel.IsExistingMatchingCard(s.filter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
 end
 function s.distg(e,c)
-	return c:IsActional()
+	return c:IsSpell()
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	local tl=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_LOCATION)
-	if (tl&LOCATION_SZONE)~=0 and re:IsActiveType(TYPE_ACTIONAL) then
+	if (tl&LOCATION_SZONE)~=0 and re:IsActiveType(TYPE_SPELL) then
 		Duel.NegateEffect(ev)
 	end
 end

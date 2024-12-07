@@ -14,7 +14,7 @@ function s.initial_effect(c)
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsLocation(LOCATION_REST) and r==REASON_SYNCHRO
+	return c:IsLocation(LOCATION_GRAVE) and r==REASON_SYNCHRO
 		and c:GetReasonCard():IsAttribute(ATTRIBUTE_LIGHT)
 end
 function s.filter(c)

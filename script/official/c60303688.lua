@@ -1,5 +1,5 @@
 --教導の聖女エクレシア
---Dogmatika Ecclipse, the Virtuous
+--Dogmatika Ecclesia, the Virtuous
 --Scripted by ahtelel
 local s,id=GetID()
 function s.initial_effect(c)

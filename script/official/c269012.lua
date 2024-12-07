@@ -1,5 +1,5 @@
 --神縛りの塚
---Mound of the Bound Mega
+--Mound of the Bound Creator
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -38,7 +38,7 @@ function s.initial_effect(c)
 	e5:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e5:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
-	e5:SetCode(EVENT_TO_REST)
+	e5:SetCode(EVENT_TO_GRAVE)
 	e5:SetCondition(s.thcon)
 	e5:SetTarget(s.thtg)
 	e5:SetOperation(s.thop)
@@ -50,7 +50,7 @@ end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	local des=eg:GetFirst()
 	local rc=des:GetReasonCard()
-	return des:IsLocation(LOCATION_REST) and des:IsMonster() and rc:IsRelateToBattle() and rc:IsLevelAbove(10)
+	return des:IsLocation(LOCATION_GRAVE) and des:IsMonster() and rc:IsRelateToBattle() and rc:IsLevelAbove(10)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -68,7 +68,7 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return (r&(REASON_EFFECT+REASON_DESTROY))==(REASON_EFFECT+REASON_DESTROY) and e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD)
 end
 function s.filter(c)
-	return c:IsAttribute(ATTRIBUTE_MEGA) and c:IsMonster() and c:IsAbleToHand()
+	return c:IsAttribute(ATTRIBUTE_DIVINE) and c:IsMonster() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end

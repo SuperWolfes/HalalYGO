@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e1:SetLabelObject({s.extrafil_replacement})
 	c:RegisterEffect(e1)
 	--Fusion Summon using this card as material
-	local params = {nil,nil,nil,s.extraop,Fusion.FcoreedHandler}
+	local params = {nil,nil,nil,s.extraop,Fusion.ForcedHandler}
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)

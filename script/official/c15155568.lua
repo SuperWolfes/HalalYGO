@@ -1,5 +1,5 @@
 --破壊剣一閃
---Mismatching Sword Flash
+--Destruction Sword Flash
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCategory(CATEGORY_DISABLE+CATEGORY_DESTROY)
 	e2:SetCode(EVENT_CHAINING)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCondition(s.discon)
 	e2:SetCost(aux.bfgcost)
 	e2:SetTarget(s.distg)

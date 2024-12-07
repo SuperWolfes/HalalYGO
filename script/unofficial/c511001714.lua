@@ -18,7 +18,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.cfilter(c,tp)
 	local lv=c:GetLevel()
-	return lv>0 and c:IsType(TYPE_PENDULUM) and Duel.IsExistingMatchingCard(s.eqfilter,tp,0,LOCATION_REST,1,nil,lv)
+	return lv>0 and c:IsType(TYPE_PENDULUM) and Duel.IsExistingMatchingCard(s.eqfilter,tp,0,LOCATION_GRAVE,1,nil,lv)
 end
 function s.eqfilter(c,lv)
 	return c:GetLevel()>0 and c:IsLevel(lv)
@@ -41,13 +41,13 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local g=Duel.SelectReleaseGroupCost(tp,s.cfilter,1,1,false,nil,g,tp)
 	e:SetLabel(g:GetFirst():GetLevel())
 	Duel.Release(g,REASON_COST)
-	Duel.SetOperationInfo(0,CATEGORY_EQUIP,nil,1,0,LOCATION_REST)
+	Duel.SetOperationInfo(0,CATEGORY_EQUIP,nil,1,0,LOCATION_GRAVE)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) and tc:IsFaceup() then
 		Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(12152769,2))
-		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.eqfilter),tp,0,LOCATION_REST,1,1,nil,e:GetLabel())
+		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.eqfilter),tp,0,LOCATION_GRAVE,1,1,nil,e:GetLabel())
 		local ec=g:GetFirst()
 		if ec then
 			Duel.HintSelection(g)

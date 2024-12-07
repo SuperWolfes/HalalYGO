@@ -1,5 +1,5 @@
 --天威無崩の地
---Tenbree Wubeng Stance
+--Tenyi Wubeng Stance
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

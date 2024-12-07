@@ -3,7 +3,7 @@
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	--Equip only to a Mental monster
+	--Equip only to a Psychic monster
 	aux.AddEquipProcedure(c,0,s.eqfilter,s.eqlimit)
 	--Increase ATK by 4000
 	local e1=Effect.CreateEffect(c)
@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.eqfilter(c)
-	return c:IsFaceup() and c:GetOriginalRace()==RACE_MENTAL and not c:IsMaximumModeSide()
+	return c:IsFaceup() and c:GetOriginalRace()==RACE_PSYCHIC and not c:IsMaximumModeSide()
 end
 function s.eqlimit(e,c)
 	return c:IsFaceup()

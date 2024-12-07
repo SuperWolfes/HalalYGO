@@ -16,13 +16,13 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter1(c)
-	return c:IsRace(RACE_CYBERSE) and c:IsAbleToRestAsCost()
+	return c:IsRace(RACE_CYBERSE) and c:IsAbleToGraveAsCost()
 end
 function s.cfilter2(c)
 	return c:IsRace(RACE_CYBERSE) and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local cg=Duel.GetMatchingGroup(s.cfilter2,tp,LOCATION_REST,0,nil)
+	local cg=Duel.GetMatchingGroup(s.cfilter2,tp,LOCATION_GRAVE,0,nil)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter1,tp,LOCATION_HAND,0,1,nil) or aux.SelectUnselectGroup(cg,e,tp,5,5,s.rescon,0) end
 end
 function s.rescon(sg,e,tp,mg)
@@ -36,14 +36,14 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	local cg=Duel.GetMatchingGroup(s.cfilter2,tp,LOCATION_REST,0,nil)
+	local cg=Duel.GetMatchingGroup(s.cfilter2,tp,LOCATION_GRAVE,0,nil)
 	local b1=Duel.IsExistingMatchingCard(s.cfilter1,tp,LOCATION_HAND,0,1,nil)
 	local b2=aux.SelectUnselectGroup(cg,e,tp,5,5,s.rescon,0)
 	local op=Duel.SelectEffect(tp,{b1,aux.Stringid(id,1)},{b2,aux.Stringid(id,2)})
 	if op==1 then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 		local dg=Duel.SelectMatchingCard(tp,s.cfilter1,tp,LOCATION_HAND,0,1,1,nil)
-		if Duel.SendtoRest(dg,REASON_COST)==0 then return end
+		if Duel.SendtoGrave(dg,REASON_COST)==0 then return end
 	elseif op==2 then
 		local tdg=aux.SelectUnselectGroup(cg,e,tp,5,5,s.rescon,1,tp,HINTMSG_TODECK)
 		Duel.HintSelection(tdg)

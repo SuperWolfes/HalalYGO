@@ -16,7 +16,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_STRAYNGE_CAT,160209016}
 function s.drcostfilter(c)
-	return c:IsMonster() and c:IsRace(RACE_MENTOR) and c:IsAbleToRestAsCost()
+	return c:IsMonster() and c:IsRace(RACE_SPELLCASTER) and c:IsAbleToGraveAsCost()
 end
 function s.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.drcostfilter,tp,LOCATION_HAND,0,1,nil) end
@@ -26,12 +26,12 @@ function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
 end
 function s.drop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local tc=Duel.SelectMatchingCard(tp,s.drcostfilter,tp,LOCATION_HAND,0,1,1,nil):GetFirst()
-	if Duel.SendtoRest(tc,REASON_COST)==1 then 
+	if Duel.SendtoGrave(tc,REASON_COST)==1 then 
 		Duel.BreakEffect()
 		Duel.Draw(tp,1,REASON_EFFECT)
-		if Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,2,nil,CARD_STRAYNGE_CAT,160209016) then
+		if Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,2,nil,CARD_STRAYNGE_CAT,160209016) then
 			Duel.BreakEffect()
 			Duel.Draw(tp,1,REASON_EFFECT)
 		end

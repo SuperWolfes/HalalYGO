@@ -1,5 +1,5 @@
 --守護霊のお守り
---Deal of Illusion (Goat)
+--Deal of Phantom (Goat)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -30,7 +30,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
-		e1:SetValue(Duel.GetMatchingGroupCount(Card.IsMonster,tp,LOCATION_REST,0,nil)*100)
+		e1:SetValue(Duel.GetMatchingGroupCount(Card.IsMonster,tp,LOCATION_GRAVE,0,nil)*100)
 		tc:RegisterEffect(e1)
 	end
 end

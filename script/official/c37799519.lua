@@ -3,12 +3,12 @@
 -- scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	-- special summon itself from hand or RP
+	-- special summon itself from hand or GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_IGNITION)
-	e1:SetRange(LOCATION_HAND+LOCATION_REST)
+	e1:SetRange(LOCATION_HAND+LOCATION_GRAVE)
 	e1:SetCountLimit(1,id)
 	e1:SetCost(s.spcost)
 	e1:SetTarget(s.sptg)
@@ -73,7 +73,7 @@ function s.lizfilter(e,c)
 	return not c:IsOriginalType(TYPE_SYNCHRO)
 end
 function s.thfilter(c)
-	return c:IsAbleToHand() and c:IsActionalTrap() and c:ListsCode(CARD_STARDUST_DRAGON)
+	return c:IsAbleToHand() and c:IsSpellTrap() and c:ListsCode(CARD_STARDUST_DRAGON)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

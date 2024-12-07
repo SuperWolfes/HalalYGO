@@ -4,8 +4,8 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion Summon
-	c:EnableAwakeLimit()
-	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_MENTOR),aux.FilterBoolFunctionEx(Card.IsRace,RACE_DRAGON))
+	c:EnableReviveLimit()
+	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_SPELLCASTER),aux.FilterBoolFunctionEx(Card.IsRace,RACE_DRAGON))
 	--Cannot be used as Fusion Material
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)

@@ -16,7 +16,7 @@ function s.initial_effect(c)
 end
 function s.rmfilter1(c,e,tp)
 	return c:IsAttribute(ATTRIBUTE_FIRE) and c:IsDefense(200) and not c:IsType(TYPE_TUNER) and c:IsAbleToRemove() 
-		and Duel.IsExistingMatchingCard(s.rmfilter2,tp,LOCATION_REST+LOCATION_MZONE,0,1,nil,e,tp,c:GetOriginalLevel()) and aux.SpElimFilter(c,true)
+		and Duel.IsExistingMatchingCard(s.rmfilter2,tp,LOCATION_GRAVE+LOCATION_MZONE,0,1,nil,e,tp,c:GetOriginalLevel()) and aux.SpElimFilter(c,true)
 end
 function s.rmfilter2(c,e,tp,lv)
 	return c:IsAttribute(ATTRIBUTE_FIRE) and c:IsDefense(200) and c:IsType(TYPE_TUNER) and c:IsAbleToRemove()
@@ -26,12 +26,12 @@ function s.spfilter(c,e,tp,lv)
 	return c:GetLevel()==lv and c:IsType(TYPE_SYNCHRO) and c:IsAttribute(ATTRIBUTE_FIRE) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.rmfilter1(chkc,e,tp) end
-	if chk==0 then return Duel.IsExistingTarget(s.rmfilter1,tp,LOCATION_REST,0,1,nil,e,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.rmfilter1(chkc,e,tp) end
+	if chk==0 then return Duel.IsExistingTarget(s.rmfilter1,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g1=Duel.SelectTarget(tp,s.rmfilter1,tp,LOCATION_REST,0,1,1,nil,e,tp)
+	local g1=Duel.SelectTarget(tp,s.rmfilter1,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g2=Duel.SelectTarget(tp,s.rmfilter2,tp,LOCATION_REST,0,1,1,nil,e,tp,g1:GetFirst():GetLevel())
+	local g2=Duel.SelectTarget(tp,s.rmfilter2,tp,LOCATION_GRAVE,0,1,1,nil,e,tp,g1:GetFirst():GetLevel())
 	g1:Merge(g2)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g1,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)

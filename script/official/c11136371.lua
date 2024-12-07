@@ -2,7 +2,7 @@
 --Counter Gem
 local s,id=GetID()
 function s.initial_effect(c)
-	--Place as many "Crystal Beast" monsters as possible from your RP face-up in your S/Trap Zone
+	--Place as many "Crystal Beast" monsters as possible from your GY face-up in your S/Trap Zone
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -15,22 +15,22 @@ end
 s.listed_series={SET_CRYSTAL_BEAST}
 function s.plcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(nil,tp,LOCATION_STZONE,0,e:GetHandler())
-	if chk==0 then return #g>0 and #g==g:FilterCount(Card.IsAbleToRestAsCost,nil) end
-	g:Filter(Card.IsAbleToRestAsCost,nil)
-	Duel.SendtoRest(g,REASON_COST)
+	if chk==0 then return #g>0 and #g==g:FilterCount(Card.IsAbleToGraveAsCost,nil) end
+	g:Filter(Card.IsAbleToGraveAsCost,nil)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.plfilter(c)
-	return c:IsSetCard(SET_CRYSTAL_BEAST) and not c:IsUnliked()
+	return c:IsSetCard(SET_CRYSTAL_BEAST) and not c:IsForbidden()
 end
 function s.pltg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.plfilter,tp,LOCATION_REST,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,nil,1,tp,LOCATION_REST)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.plfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,nil,1,tp,LOCATION_GRAVE)
 end
 function s.plop(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
 	if ft<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
-	local g=Duel.SelectMatchingCard(tp,s.plfilter,tp,LOCATION_REST,0,ft,ft,nil)
+	local g=Duel.SelectMatchingCard(tp,s.plfilter,tp,LOCATION_GRAVE,0,ft,ft,nil)
 	if #g>0 then
 		for tc in g:Iter() do
 			Duel.MoveToField(tc,tp,tp,LOCATION_SZONE,POS_FACEUP,true)
@@ -39,7 +39,7 @@ function s.plop(e,tp,eg,ep,ev,re,r,rp)
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 			e1:SetReset(RESET_EVENT|(RESETS_STANDARD&~RESET_TURN_SET))
-			e1:SetValue(TYPE_ACTIONAL+TYPE_CONTINUOUS)
+			e1:SetValue(TYPE_SPELL+TYPE_CONTINUOUS)
 			tc:RegisterEffect(e1)
 		end
 		Duel.RaiseEvent(g,EVENT_CUSTOM+47408488,e,0,tp,0,0)--Event used by Crystal Tree

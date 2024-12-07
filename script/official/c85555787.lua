@@ -1,5 +1,5 @@
 --悪のデッキ破壊ウイルス
---Grinning Rest Virus
+--Grinning Grave Virus
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -36,14 +36,14 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ct=math.floor(atk/500)
 	local g=Duel.SelectMatchingCard(1-tp,nil,1-tp,LOCATION_DECK+LOCATION_HAND,0,ct,ct,nil)
 	if #g~=0 and Duel.Destroy(g,REASON_EFFECT)~=0 then
-		local og=Duel.GetOperatedGroup():Filter(Card.IsLocation,nil,LOCATION_REST)
+		local og=Duel.GetOperatedGroup():Filter(Card.IsLocation,nil,LOCATION_GRAVE)
 		for oc in aux.Next(og) do
 			local e1=Effect.CreateEffect(c)
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetCode(EFFECT_CANNOT_TRIGGER)
 			e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-			e1:SetRange(LOCATION_REST)
-			e1:SetReset(RESET_EVENT+RESETS_STANDARD_EXC_REST+RESET_PHASE+PHASE_END)
+			e1:SetRange(LOCATION_GRAVE)
+			e1:SetReset(RESET_EVENT+RESETS_STANDARD_EXC_GRAVE+RESET_PHASE+PHASE_END)
 			oc:RegisterEffect(e1)
 			local e2=e1:Clone()
 			e2:SetCode(EFFECT_CANNOT_ACTIVATE)
@@ -85,14 +85,14 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ConfirmCards(1-ep,hg)
 	local dg=hg:Filter(Card.IsMonster,nil)
 	if Duel.Destroy(dg,REASON_EFFECT)~=0 then
-		local og=Duel.GetOperatedGroup():Filter(Card.IsLocation,nil,LOCATION_REST)
+		local og=Duel.GetOperatedGroup():Filter(Card.IsLocation,nil,LOCATION_GRAVE)
 		for oc in aux.Next(og) do
 			local e1=Effect.CreateEffect(c)
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetCode(EFFECT_CANNOT_TRIGGER)
 			e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-			e1:SetRange(LOCATION_REST)
-			e1:SetReset(RESET_EVENT+RESETS_STANDARD_EXC_REST+RESET_PHASE+PHASE_END)
+			e1:SetRange(LOCATION_GRAVE)
+			e1:SetReset(RESET_EVENT+RESETS_STANDARD_EXC_GRAVE+RESET_PHASE+PHASE_END)
 			oc:RegisterEffect(e1)
 			local e2=e1:Clone()
 			e2:SetCode(EFFECT_CANNOT_ACTIVATE)

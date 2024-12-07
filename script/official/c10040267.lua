@@ -7,8 +7,8 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Susion summon procedure
 	Fusion.AddProcMix(c,true,true,s.ffilter,aux.FilterBoolFunctionEx(Card.IsLevelBelow,4))
-	--Must be properly summoned before awaking
-	c:EnableAwakeLimit()
+	--Must be properly summoned before reviving
+	c:EnableReviveLimit()
 	--Clock Lizard check
 	Auxiliary.addLizardCheck(c)
 	--Must first be special summoned with "Fossil Fusion"
@@ -34,7 +34,7 @@ function s.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCost(aux.bfgcost)
 	e2:SetTarget(s.thtg)
 	e2:SetOperation(s.thop)
@@ -44,9 +44,9 @@ end
 --Specifically lists "Fossil Fusion"
 s.listed_names={CARD_FOSSIL_FUSION}
 
-	--Check for a rock monster in your RP
+	--Check for a rock monster in your GY
 function s.ffilter(c,fc,sumtype,tp)
-	return c:IsRace(RACE_ROCK) and c:IsLocation(LOCATION_REST) and c:IsControler(tp)
+	return c:IsRace(RACE_ROCK) and c:IsLocation(LOCATION_GRAVE) and c:IsControler(tp)
 end
 	--Activation legality
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)

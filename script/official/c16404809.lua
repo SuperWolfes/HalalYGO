@@ -29,7 +29,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeck(tp,5) end
 end
 function s.filter(c)
-	return c:IsAbleToHand() and c:IsActionalTrap()
+	return c:IsAbleToHand() and c:IsSpellTrap()
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.IsPlayerCanDiscardDeck(tp,5) then return end
@@ -45,6 +45,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			Duel.ShuffleHand(tp)
 			g:Sub(sg)
 		end
-		Duel.SendtoRest(g,REASON_EFFECT|REASON_EXCAVATE)
+		Duel.SendtoGrave(g,REASON_EFFECT|REASON_EXCAVATE)
 	end
 end

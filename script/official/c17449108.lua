@@ -2,7 +2,7 @@
 --Nobleman of Extermination
 local s,id=GetID()
 function s.initial_effect(c)
-	--Destroy 1 face-down Actional/Trap card, banish it if it is a Trap and all cards with the same name
+	--Destroy 1 face-down Spell/Trap card, banish it if it is a Trap and all cards with the same name
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DESTROY+CATEGORY_REMOVE)

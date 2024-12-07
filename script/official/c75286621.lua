@@ -1,9 +1,9 @@
 --召喚獣メルカバー
---Invalidated Mechaba
+--Invoked Mechaba
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion Summon procedure
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,86120751,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGHT))
 	--Negate and banish
 	local e1=Effect.CreateEffect(c)
@@ -26,7 +26,7 @@ function s.negcon(e,tp,eg,ep,ev,re,r,rp)
 		and (re:IsActiveType(TYPE_MONSTER) or re:IsHasType(EFFECT_TYPE_ACTIVATE)) and Duel.IsChainNegatable(ev)
 end
 function s.cfilter(c,rtype)
-	return c:IsType(rtype) and c:IsAbleToRestAsCost()
+	return c:IsType(rtype) and c:IsAbleToGraveAsCost()
 end
 function s.negcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local rtype=(re:GetActiveType()&0x7)

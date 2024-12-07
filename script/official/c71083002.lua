@@ -1,5 +1,5 @@
 --殲滅のタキオン・スパイラル
---Tachyon Spiral of Mismatching
+--Tachyon Spiral of Destruction
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
@@ -30,16 +30,16 @@ end
 function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then
 		local op=e:GetLabel()
-		if op==1 or not (chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST)) then return false end
+		if op==1 or not (chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE)) then return false end
 		return (op==2 and s.thfilter(chkc)) or (op==3 and s.spfilter(chkc,e,tp))
 	end
 	local b1=Duel.IsExistingMatchingCard(s.galaxyfilter,tp,LOCATION_MZONE,0,1,nil)
 		and Duel.IsExistingMatchingCard(s.desfilter,tp,0,LOCATION_ONFIELD,1,nil)
 		and not Duel.HasFlagEffect(tp,id)
-	local b2=Duel.IsExistingTarget(s.thfilter,tp,LOCATION_REST,0,1,nil)
+	local b2=Duel.IsExistingTarget(s.thfilter,tp,LOCATION_GRAVE,0,1,nil)
 		and not Duel.HasFlagEffect(tp,id+1)
 	local b3=Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp)
+		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp)
 		and not Duel.HasFlagEffect(tp,id+2)
 	if chk==0 then return b1 or b2 or b3 end
 	local op=Duel.SelectEffect(tp,
@@ -58,14 +58,14 @@ function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		e:SetCategory(CATEGORY_TOHAND)
 		e:SetProperty(EFFECT_FLAG_CARD_TARGET)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-		local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
+		local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 		Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,tp,0)
 	elseif op==3 then
 		Duel.RegisterFlagEffect(tp,id+2,RESET_PHASE|PHASE_END,0,1)
 		e:SetCategory(CATEGORY_SPECIAL_SUMMON)
 		e:SetProperty(EFFECT_FLAG_CARD_TARGET)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp)
+		local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
 		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,0)
 	end
 end
@@ -78,13 +78,13 @@ function s.effop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.Destroy(g,REASON_EFFECT)
 		end
 	elseif op==2 then
-		--Add 1 "Tachyon" card from your RP to your hand
+		--Add 1 "Tachyon" card from your GY to your hand
 		local tc=Duel.GetFirstTarget()
 		if tc:IsRelateToEffect(e) then
 			Duel.SendtoHand(tc,tp,REASON_EFFECT)
 		end
 	elseif op==3 then
-		--Special Summon 1 "Number" monster from your RP in Defense Position
+		--Special Summon 1 "Number" monster from your GY in Defense Position
 		local tc=Duel.GetFirstTarget()
 		if tc:IsRelateToEffect(e) then
 			Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP_DEFENSE)

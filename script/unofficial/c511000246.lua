@@ -1,8 +1,8 @@
 --降雷皇ハモン (Anime)
---Hamon, Watcher of Striking Thunder (Anime)
+--Hamon, Lord of Striking Thunder (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Cannot Special Summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -45,16 +45,16 @@ function s.initial_effect(c)
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(id,1))
 	e5:SetType(EFFECT_TYPE_TRIGGER_F+EFFECT_TYPE_SINGLE)
-	e5:SetCode(EVENT_TO_REST)
+	e5:SetCode(EVENT_TO_GRAVE)
 	e5:SetCondition(s.nodmgcon)
 	e5:SetOperation(s.nodmgop)
 	c:RegisterEffect(e5)
 end
 function s.spfilter(c)
-	return c:IsActional() and c:IsAbleToRestAsCost()
+	return c:IsSpell() and c:IsAbleToGraveAsCost()
 end
 function s.exfilter(c)
-	return s.spfilter(c) or (c:IsFacedown() and c:IsActional() and c:IsAbleToRestAsCost())
+	return s.spfilter(c) or (c:IsFacedown() and c:IsSpell() and c:IsAbleToGraveAsCost())
 end
 function s.spcon(e,c)
 	if c==nil then return true end
@@ -74,7 +74,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,c)
 	else
 		g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_ONFIELD,0,nil)
 	end
-	local sg=aux.SelectUnselectGroup(g,e,tp,3,3,aux.ChkfMMZ(1),1,tp,HINTMSG_TOREST,nil,nil,true)
+	local sg=aux.SelectUnselectGroup(g,e,tp,3,3,aux.ChkfMMZ(1),1,tp,HINTMSG_TOGRAVE,nil,nil,true)
 	local dg=sg:Filter(Card.IsFacedown,nil)
 	if #dg>0 then
 		Duel.ConfirmCards(1-tp,dg)
@@ -89,13 +89,13 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 	g:DeleteGroup()
 end
 function s.dmgcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local bc=c:GetBattleTarget()
-	return c:IsRelateToBattle() and bc:IsLocation(LOCATION_REST) and bc:IsReason(REASON_BATTLE) and bc:IsMonster()
+	return c:IsRelateToBattle() and bc:IsLocation(LOCATION_GRAVE) and bc:IsReason(REASON_BATTLE) and bc:IsMonster()
 end
 function s.dmgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

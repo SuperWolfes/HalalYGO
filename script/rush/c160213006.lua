@@ -1,10 +1,10 @@
 --メテオ・スカル・デーモン
---Meteor Skull Archtainted
+--Meteor Skull Archfiend
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion Procedure
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMixN(c,true,true,CARD_SUMMONED_SKULL,1,s.ffilter,1)
 	--Monsters cannot be returned
 	local e1=Effect.CreateEffect(c)

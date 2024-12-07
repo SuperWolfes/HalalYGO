@@ -1,5 +1,5 @@
 --魔導書庫ソレイン
---Actionalbook Library of the Heliosphere
+--Spellbook Library of the Heliosphere
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -24,15 +24,15 @@ function s.initial_effect(c)
 end
 s.listed_series={0x106e}
 function s.checkop(e,tp,eg,ep,ev,re,r,rp)
-	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_ACTIONAL) and not re:GetHandler():IsSetCard(0x106e) then
+	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_SPELL) and not re:GetHandler():IsSetCard(0x106e) then
 		Duel.RegisterFlagEffect(rp,id+1,RESET_PHASE+PHASE_END,0,1)
 	end
 end
 function s.cfilter(c)
-	return c:IsActional() and c:IsSetCard(0x106e)
+	return c:IsSpell() and c:IsSetCard(0x106e)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,5,nil)
+	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,5,nil)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFlagEffect(tp,id+1)==0 end
@@ -48,7 +48,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	aux.RegisterClientHint(e:GetHandler(),nil,tp,1,0,aux.Stringid(id,1),nil)
 end
 function s.aclimit(e,re,tp)
-	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_ACTIONAL) and not re:GetHandler():IsSetCard(0x106e)
+	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_SPELL) and not re:GetHandler():IsSetCard(0x106e)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then 
@@ -60,7 +60,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,0,LOCATION_DECK)
 end
 function s.filter(c)
-	return c:IsActional() and c:IsSetCard(0x106e)
+	return c:IsSpell() and c:IsSetCard(0x106e)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
@@ -74,7 +74,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 				Duel.ConfirmCards(1-p,sg)
 				Duel.ShuffleHand(p)
 			else
-				Duel.SendtoRest(sg,REASON_EFFECT)
+				Duel.SendtoGrave(sg,REASON_EFFECT)
 			end
 		end
 		Duel.ShuffleDeck(p)

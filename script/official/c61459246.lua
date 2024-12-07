@@ -4,7 +4,7 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--While "Dream Mirror of Joy" is on the field, negate the activation of opponent's actional/trap card
+	--While "Dream Mirror of Joy" is on the field, negate the activation of opponent's spell/trap card
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_NEGATE+CATEGORY_DESTROY)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)

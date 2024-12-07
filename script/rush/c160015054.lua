@@ -11,11 +11,11 @@ function s.filter(c)
 	return c:IsAttribute(ATTRIBUTE_WATER) and c:IsRace(RACE_FISH)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,5,nil)
+	return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,5,nil)
 end
 function s.mfilter(c)
-	return s.filter(c) and c:IsLocation(LOCATION_REST|LOCATION_MZONE) and c:IsAbleToDeck()
+	return s.filter(c) and c:IsLocation(LOCATION_GRAVE|LOCATION_MZONE) and c:IsAbleToDeck()
 end
 function s.fextra(e,tp,mg)
-	return Duel.GetMatchingGroup(s.mfilter,tp,LOCATION_REST|LOCATION_MZONE,0,nil)
+	return Duel.GetMatchingGroup(s.mfilter,tp,LOCATION_GRAVE|LOCATION_MZONE,0,nil)
 end

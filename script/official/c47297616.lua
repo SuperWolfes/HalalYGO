@@ -35,7 +35,7 @@ function s.initial_effect(c)
 	e4:SetDescription(aux.Stringid(id,4))
 	e4:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_DESTROY)
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	e4:SetCode(EVENT_TO_REST)
+	e4:SetCode(EVENT_TO_GRAVE)
 	e4:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e4:SetCondition(s.cdspsum)
 	e4:SetTarget(s.tgspsum)
@@ -62,7 +62,7 @@ function s.opdisable(e,tp,eg,ep,ev,re,r,rp)
 	end
 	if Duel.NegateActivation(ev) then
 		if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:GetHandler():IsRelateToEffect(re) then
-			Duel.SendtoRest(eg,REASON_EFFECT)
+			Duel.SendtoGrave(eg,REASON_EFFECT)
 		end
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
@@ -84,11 +84,11 @@ function s.cdspsum(e)
 	return e:GetHandler():IsReason(REASON_DESTROY)
 end
 function s.tgspsum(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp)
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp)
 		and chkc:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP,tp) end
 	if chk==0 then return true end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,Card.IsCanBeSpecialSummoned,tp,LOCATION_REST,0,1,1,nil,e,0,tp,false,false,POS_FACEUP,tp)
+	local g=Duel.SelectTarget(tp,Card.IsCanBeSpecialSummoned,tp,LOCATION_GRAVE,0,1,1,nil,e,0,tp,false,false,POS_FACEUP,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 	local dg=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,dg,#dg,0,0)

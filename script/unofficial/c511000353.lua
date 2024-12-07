@@ -1,4 +1,4 @@
---Dragon's Goodie
+--Dragon's Evil Eye
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.desfilter(c)
-	return c:IsActionalTrap() and c:IsDestructable()
+	return c:IsSpellTrap() and c:IsDestructable()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()

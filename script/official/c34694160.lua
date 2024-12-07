@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.reccon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetTurnPlayer()~=tp and Duel.IsExistingMatchingCard(Card.IsActional,tp,0,LOCATION_HAND,1,nil)
+	return Duel.GetTurnPlayer()~=tp and Duel.IsExistingMatchingCard(Card.IsSpell,tp,0,LOCATION_HAND,1,nil)
 end
 function s.rectg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

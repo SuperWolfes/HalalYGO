@@ -1,5 +1,5 @@
 --機皇神龍アステリスク (Anime)
---Mekwatcher Astro Dragon Asterisk (Anime)
+--Meklord Astro Dragon Asterisk (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Special Summon this card
@@ -47,11 +47,11 @@ function s.initial_effect(c)
 	e5:SetTarget(s.desreptg)
 	c:RegisterEffect(e5)
 end
-s.listed_series={SET_MEKWATCHER}
+s.listed_series={SET_MEKLORD}
 function s.spcon(e,c)
 	if c==nil then return true end
 	return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,SET_MEKWATCHER),c:GetControler(),LOCATION_MZONE,0,3,nil)
+		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,SET_MEKLORD),c:GetControler(),LOCATION_MZONE,0,3,nil)
 end
 function s.atkfilter(c)
 	return c:IsPosition(POS_FACEUP_ATTACK) and c:IsRace(RACE_MACHINE)
@@ -94,9 +94,9 @@ function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return not c:IsReason(REASON_REPLACE)
 		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_MACHINE),tp,LOCATION_MZONE,0,1,c) end
 	if Duel.SelectEffectYesNo(tp,c,96) then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 		local g=Duel.SelectMatchingCard(tp,aux.FaceupFilter(Card.IsRace,RACE_MACHINE),tp,LOCATION_MZONE,0,1,1,c)
-		Duel.SendtoRest(g,REASON_EFFECT|REASON_REPLACE)
+		Duel.SendtoGrave(g,REASON_EFFECT|REASON_REPLACE)
 		return true
 	else return false end
 end

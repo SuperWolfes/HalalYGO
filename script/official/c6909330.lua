@@ -1,5 +1,5 @@
 --魂縛門
---Miss Binding Gate
+--Soul Binding Gate
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -36,7 +36,7 @@ end
 s.listed_names={62499965}
 function s.checkop(e,tp,eg,ep,ev,re,r,rp)
 	for tc in aux.Next(eg) do
-		if tc:GetPreviousTypeOnField() & (TYPE_ACTIONAL+TYPE_TRAP)~=0 and tc:IsPreviousPosition(POS_FACEDOWN) 
+		if tc:GetPreviousTypeOnField() & (TYPE_SPELL+TYPE_TRAP)~=0 and tc:IsPreviousPosition(POS_FACEDOWN) 
 			and tc:IsPreviousLocation(LOCATION_ONFIELD) and tc:IsReason(REASON_EFFECT) then
 			Duel.RegisterFlagEffect(tc:GetPreviousControler(),id,RESET_PHASE+PHASE_END,0,1)
 		end
@@ -48,7 +48,7 @@ end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()
 	return Duel.IsMainPhase() and #eg==1 and tc:IsFaceup() and tc:GetAttack()<Duel.GetLP(tp)
-		and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,62499965)
+		and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,62499965)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

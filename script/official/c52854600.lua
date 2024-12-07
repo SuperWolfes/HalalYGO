@@ -1,5 +1,5 @@
 --天威龍－スールヤ
---Tenbree Guardian - Surya
+--Tenyi Spirit - Surya
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.selfsptg)
 	e1:SetOperation(s.selfspop)
 	c:RegisterEffect(e1)
-	--Special Summon 1 "Tenbree" Link Monster from your Extra Deck
+	--Special Summon 1 "Tenyi" Link Monster from your Extra Deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.extraspop)
 	c:RegisterEffect(e2)
 end
-s.listed_series={SET_TENBREE}
+s.listed_series={SET_TENYI}
 function s.selfspconfilter(c)
 	return (c:IsRace(RACE_WYRM) or c:IsNonEffectMonster()) and c:IsFaceup()
 end
@@ -48,10 +48,10 @@ function s.selfspop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.extraspcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsLocation(LOCATION_REST) and (r&REASON_SYNCHRO)==REASON_SYNCHRO and c:GetReasonCard():IsRace(RACE_WYRM)
+	return c:IsLocation(LOCATION_GRAVE) and (r&REASON_SYNCHRO)==REASON_SYNCHRO and c:GetReasonCard():IsRace(RACE_WYRM)
 end
 function s.extraspfilter(c,e,tp)
-	return c:IsSetCard(SET_TENBREE) and c:IsLinkMonster() and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0
+	return c:IsSetCard(SET_TENYI) and c:IsLinkMonster() and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.extrasptg(e,tp,eg,ep,ev,re,r,rp,chk)

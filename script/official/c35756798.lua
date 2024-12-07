@@ -15,11 +15,11 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-	--Check for Synchro Monsters sent to the RP
+	--Check for Synchro Monsters sent to the GY
 	aux.GlobalCheck(s,function()
 		local ge1=Effect.CreateEffect(c)
 		ge1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-		ge1:SetCode(EVENT_TO_REST)
+		ge1:SetCode(EVENT_TO_GRAVE)
 		ge1:SetOperation(s.checkop)
 		Duel.RegisterEffect(ge1,0)
 	end)
@@ -59,9 +59,9 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT|RESETS_STANDARD|RESET_PHASE|PHASE_END)
 		tc:RegisterEffect(e1)
 		if not s.archetypetest(tc) then return end
-		if Duel.IsExistingMatchingCard(s.atkfilter,tp,LOCATION_REST,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+		if Duel.IsExistingMatchingCard(s.atkfilter,tp,LOCATION_GRAVE,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SELECT)
-			local atkc=Duel.SelectMatchingCard(tp,s.atkfilter,tp,LOCATION_REST,0,1,1,nil):GetFirst()
+			local atkc=Duel.SelectMatchingCard(tp,s.atkfilter,tp,LOCATION_GRAVE,0,1,1,nil):GetFirst()
 			Duel.HintSelection(atkc,true)
 			--Gain ATK equal to the ATK of the Synchro monster
 			Duel.BreakEffect()

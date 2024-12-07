@@ -27,7 +27,7 @@ function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetMatchingGroupCount(s.filter,tp,LOCATION_MZONE,0,nil)>0 end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
 	Duel.SetOperationInfo(0,CATEGORY_ATKCHANGE,nil,1,tp,0)
 end
 function s.thfilter(c)
@@ -48,7 +48,7 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESETS_STANDARD_PHASE_END)
 		tc:RegisterEffect(e1)
 	end
-	local thg=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_REST,0,nil)
+	local thg=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_GRAVE,0,nil)
 	if #thg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		local sg=thg:Select(tp,1,1,nil)
 		Duel.HintSelection(sg)

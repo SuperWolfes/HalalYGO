@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_REST) and r & REASON_LINK == REASON_LINK
+	return e:GetHandler():IsLocation(LOCATION_GRAVE) and r & REASON_LINK == REASON_LINK
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local sc=e:GetHandler():GetReasonCard()

@@ -1,5 +1,5 @@
 ----マジック・リバウンダー
---Ment Rebounder
+--Magic Rebounder
 --By Shad3
 --fixed by MLD
 local s,id=GetID()

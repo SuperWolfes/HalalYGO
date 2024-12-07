@@ -1,5 +1,5 @@
 --アルカナフォース０－THE FOOL
---Arcana Fcoree 0 - The Fool
+--Arcana Force 0 - The Fool
 local s,id=GetID()
 function s.initial_effect(c)
 	--Cannot be destroyed by battle

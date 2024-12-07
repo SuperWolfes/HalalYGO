@@ -13,14 +13,14 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetFieldGroupCount(tp,LOCATION_REST,0)>=15
-		and Duel.GetFieldGroupCount(tp,0,LOCATION_REST)>=15
+	return Duel.GetFieldGroupCount(tp,LOCATION_GRAVE,0)>=15
+		and Duel.GetFieldGroupCount(tp,0,LOCATION_GRAVE)>=15
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckLPCost(tp,1000) end
 	Duel.PayLPCost(tp,1000)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SwapDeckAndRest(tp)
-	Duel.SwapDeckAndRest(1-tp)
+	Duel.SwapDeckAndGrave(tp)
+	Duel.SwapDeckAndGrave(1-tp)
 end

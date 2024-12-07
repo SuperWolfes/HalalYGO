@@ -9,7 +9,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--Your "White" monsters gain 500 ATK for each "White" monster sent to the Resting Place
+	--Your "White" monsters gain 500 ATK for each "White" monster sent to the Graveyard
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_ATKCHANGE)
@@ -23,13 +23,13 @@ function s.initial_effect(c)
 end
 s.listed_series={0x55d}
 function s.costfilter(c)
-	return c:IsWhite() and c:IsMonster() and c:IsAbleToRestAsCost()
+	return c:IsWhite() and c:IsMonster() and c:IsAbleToGraveAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,99,nil)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 	e:SetLabel(#g)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

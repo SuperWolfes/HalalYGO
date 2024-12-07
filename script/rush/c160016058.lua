@@ -19,13 +19,13 @@ function s.fusfilter(c)
 	return c:IsAttribute(ATTRIBUTE_EARTH|ATTRIBUTE_DARK) and c:IsRace(RACE_MACHINE) and c:IsLevelBelow(9)
 end
 function s.matfilter(c)
-	return c:IsLocation(LOCATION_HAND|LOCATION_MZONE) and c:IsAbleToRest()
+	return c:IsLocation(LOCATION_HAND|LOCATION_MZONE) and c:IsAbleToGrave()
 end
 function s.cfilter(c)
 	return c:IsMonster() and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,2,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,2,nil) end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsCanChangePositionRush,tp,0,LOCATION_MZONE,1,nil) end
@@ -35,7 +35,7 @@ function s.operation(fustg,fusop)
 	return function(e,tp,eg,ep,ev,re,r,rp)
 		--Requirement
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-		local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_REST,0,2,2,nil)
+		local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_GRAVE,0,2,2,nil)
 		Duel.HintSelection(g,true)
 		if Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_COST)<=0 then return end
 		--Effect

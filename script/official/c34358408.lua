@@ -1,17 +1,17 @@
 --儀式魔人プレサイダー
---Dlilt Presider of Lockeds
+--Djinn Presider of Rituals
 local s,id=GetID()
 function s.initial_effect(c)
-	--Can be used for a Locked Summon while it is in the RP
+	--Can be used for a Ritual Summon while it is in the GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	e1:SetCode(EFFECT_EXTRA_LOCKED_MATERIAL)
-	e1:SetRange(LOCATION_REST)
+	e1:SetCode(EFFECT_EXTRA_RITUAL_MATERIAL)
+	e1:SetRange(LOCATION_GRAVE)
 	e1:SetCondition(s.con)
 	e1:SetValue(1)
 	c:RegisterEffect(e1)
-	--Grants an effect if it is used for a Locked Summon
+	--Grants an effect if it is used for a Ritual Summon
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
@@ -24,7 +24,7 @@ function s.con(e)
 	return not Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(),69832741)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return r==REASON_LOCKED
+	return r==REASON_RITUAL
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	for rc in eg:Iter() do

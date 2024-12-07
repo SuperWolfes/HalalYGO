@@ -1,5 +1,5 @@
 --魔鍵錠－解－
---Menkey Lock - Unlock
+--Magikey Lock - Unlock
 --scripted by XyleN5967
 local s,id=GetID()
 function s.initial_effect(c)
@@ -16,11 +16,11 @@ function s.initial_effect(c)
 end
 s.listed_series={0x167}
 function s.cfilter(c) 
-	return c:IsFaceup() and c:IsSetCard(0x167) and (c:IsType(TYPE_LOCKED) or c:IsSummonLocation(LOCATION_EXTRA))
+	return c:IsFaceup() and c:IsSetCard(0x167) and (c:IsType(TYPE_RITUAL) or c:IsSummonLocation(LOCATION_EXTRA))
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil) then return false end
-	return ep~=tp and re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and Duel.IsChainNegatable(ev)
+	return ep~=tp and re:IsActiveType(TYPE_SPELL+TYPE_TRAP) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and Duel.IsChainNegatable(ev)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

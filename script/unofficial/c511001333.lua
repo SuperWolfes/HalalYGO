@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.cfilter(c,tp,eq)
-	return c:IsControler(tp) and c:IsLocation(LOCATION_REST) and (c:GetReason()&0x40008)==0x40008 and c:GetReasonCard()==eq
+	return c:IsControler(tp) and c:IsLocation(LOCATION_GRAVE) and (c:GetReason()&0x40008)==0x40008 and c:GetReasonCard()==eq
 		and c:IsAbleToRemoveAsCost() and c:IsAttackBelow(1000) and c:GetAttack()>0
 end
 function s.damcost(e,tp,eg,ep,ev,re,r,rp,chk)

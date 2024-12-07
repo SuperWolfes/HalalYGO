@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.otfilter(c,tp)
-	return c:IsRace(RACE_MENTOR) and (c:IsControler(tp) or c:IsFaceup())
+	return c:IsRace(RACE_SPELLCASTER) and (c:IsControler(tp) or c:IsFaceup())
 end
 function s.actlimit(e,tp,eg,ep,ev,re,r,rp)
 	local e1=Effect.CreateEffect(e:GetHandler())

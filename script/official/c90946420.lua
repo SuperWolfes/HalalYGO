@@ -15,13 +15,13 @@ function s.initial_effect(c)
 	e1:SetTarget(s.xyzsumtg)
 	e1:SetOperation(s.xyzsumop)
 	c:RegisterEffect(e1)
-	--Attach 1 card from the RP to a "Goblin" Xyz Monster you control
+	--Attach 1 card from the GY to a "Goblin" Xyz Monster you control
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetCode(EVENT_FREE_CHAIN)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetHintTiming(0,TIMINGS_CHECK_MONSTER_E)
 	e2:SetCost(aux.SelfBanishCost)
@@ -61,7 +61,7 @@ function s.xyzsumop(e,tp,eg,ep,ev,re,r,rp)
 		--Attach this card to the Xyz Monster
 		local c=e:GetHandler()
 		if c:IsRelateToEffect(e) then
-			c:CancelToRest()
+			c:CancelToGrave()
 			Duel.Overlay(sc,c)
 		end
 	end
@@ -75,13 +75,13 @@ end
 function s.mattg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and s.xyzfilter(chkc) end
 	if chk==0 then return Duel.IsExistingTarget(s.xyzfilter,tp,LOCATION_MZONE,0,1,nil)
-		and Duel.IsExistingTarget(s.atchfilter,tp,LOCATION_REST,LOCATION_REST,1,e:GetHandler(),tp) end
+		and Duel.IsExistingTarget(s.atchfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,e:GetHandler(),tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 	local xyzc=Duel.SelectTarget(tp,s.xyzfilter,tp,LOCATION_MZONE,0,1,1,nil,tp):GetFirst()
 	e:SetLabelObject(xyzc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTACH)
-	local tc=Duel.SelectTarget(tp,s.atchfilter,tp,LOCATION_REST,LOCATION_REST,1,1,nil,tp)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,tc,1,0,0)
+	local tc=Duel.SelectTarget(tp,s.atchfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,1,nil,tp)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,tc,1,0,0)
 end
 function s.matop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetTargetCards(e)

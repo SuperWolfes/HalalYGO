@@ -1,5 +1,5 @@
 --デーモンの光来
---Archtainted's Arrival
+--Archfiend's Arrival
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)

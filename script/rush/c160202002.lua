@@ -1,5 +1,5 @@
 --超魔機神マグナム・オーバーロード
---Supreme Machine Magnum Overwatcher
+--Supreme Machine Magnum Overlord
 local s,id=GetID()
 function s.initial_effect(c)
 	Maximum.AddProcedure(c,nil,s.filter1,s.filter2)

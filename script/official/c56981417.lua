@@ -1,8 +1,8 @@
 --セフェルの魔導書
---Actionalbook of the Master
+--Spellbook of the Master
 local s,id=GetID()
 function s.initial_effect(c)
-	--copy a "Actionalbook" Actional
+	--copy a "Spellbook" Spell
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
@@ -16,7 +16,7 @@ end
 s.listed_names={id}
 s.listed_series={0x106e}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_MENTOR),tp,LOCATION_MZONE,0,1,nil)
+	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_SPELLCASTER),tp,LOCATION_MZONE,0,1,nil)
 end
 function s.cffilter(c)
 	return c:IsSetCard(0x106e) and not c:IsPublic()
@@ -29,18 +29,18 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.ShuffleHand(tp)
 end
 function s.filter(c)
-	return c:IsSetCard(0x106e) and not c:IsCode(id) and c:GetType()==TYPE_ACTIONAL and c:CheckActivateEffect(true,true,false)~=nil
+	return c:IsSetCard(0x106e) and not c:IsCode(id) and c:GetType()==TYPE_SPELL and c:CheckActivateEffect(true,true,false)~=nil
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then
 		local tg=e:GetLabelObject():GetTarget()
 		return tg and tg(e,tp,eg,ep,ev,re,r,rp,0,chkc)
 	end
-	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil) end
+	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil) end
 	e:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e:SetCategory(0)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil)
 	local te=g:GetFirst():CheckActivateEffect(true,true,false)
 	Duel.ClearTargetCard()
 	e:SetProperty(te:GetProperty())

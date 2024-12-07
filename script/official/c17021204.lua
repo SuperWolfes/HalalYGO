@@ -14,13 +14,13 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.spfilter(c)
-	return c:IsPosition(POS_FACEUP_DEFENSE) and c:IsAbleToRestAsCost()
+	return c:IsPosition(POS_FACEUP_DEFENSE) and c:IsAbleToGraveAsCost()
 end
 function s.cfilter(c)
 	return c:GetRace()~=RACE_INSECT
 end
 function s.check(tp)
-	local g=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_GRAVE,0,nil)
 	return #g~=0 and not g:IsExists(s.cfilter,1,nil)
 end
 function s.spcon(e,c)

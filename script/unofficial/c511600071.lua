@@ -23,7 +23,7 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
 	local c=e:GetHandler()
-	local mg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_REST,0,nil,e)
+	local mg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,nil,e)
 	local notSg=mg:Filter(aux.NOT(Card.IsSetCard),nil,SET_NUMBER_S)
 	for _c in notSg:Iter() do
 		local e1=Effect.CreateEffect(c)
@@ -41,7 +41,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 	local tg=aux.SelectUnselectGroup(mg,e,tp,1,99,s.rescon,1,tp,HINTMSG_XMATERIAL,s.rescon)
 	Duel.SetTargetCard(tg)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,tg,#tg,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,tg,#tg,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 	notSg:ForEach(function(_c) _c:ResetEffect(id,RESET_CARD) end)
 end

@@ -28,7 +28,7 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 		e:GetHandler():GetPreviousControler()~=e:GetHandler():GetReasonPlayer() then return false end
 	e:SetLabel(e:GetHandler():GetPreviousControler())
 	local rc=e:GetHandler():GetReasonCard()
-	return rc:IsFaceup() and rc:IsRace(RACE_TAINTED)
+	return rc:IsFaceup() and rc:IsRace(RACE_FIEND)
 end
 function s.spcon2(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -37,7 +37,7 @@ function s.spcon2(e,tp,eg,ep,ev,re,r,rp)
 		 or e:GetHandler():GetPreviousControler()~=e:GetHandler():GetReasonPlayer()
 		or not c:IsReason(REASON_SUMMON) then return false end
 	e:SetLabel(e:GetHandler():GetPreviousControler())
-	return tc:IsRace(RACE_TAINTED)
+	return tc:IsRace(RACE_FIEND)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

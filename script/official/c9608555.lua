@@ -3,11 +3,11 @@
 --Scripted by ahtelel
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
-	aux.EnableCheckReincorporation(c)
+	c:EnableReviveLimit()
+	aux.EnableCheckReincarnation(c)
 	--Xyz Summon procedure
 	Xyz.AddProcedure(c,nil,4,2)
-	--Detach 1 material from this card to prevent mismatching
+	--Detach 1 material from this card to prevent destruction
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -75,7 +75,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsReincorporationSummoned() and c:IsSummonType(SUMMON_TYPE_XYZ)
+	return c:IsReincarnationSummoned() and c:IsSummonType(SUMMON_TYPE_XYZ)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(nil,tp,0,LOCATION_MZONE,nil)

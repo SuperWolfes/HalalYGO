@@ -15,7 +15,7 @@ end
 s.listed_names={id}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsLocation(LOCATION_REST) and tp==c:GetPreviousControler() and c:IsReason(REASON_BATTLE)
+	return c:IsLocation(LOCATION_GRAVE) and tp==c:GetPreviousControler() and c:IsReason(REASON_BATTLE)
 end
 function s.filter(c)
 	return c:IsCode(id) and c:IsAbleToHand()

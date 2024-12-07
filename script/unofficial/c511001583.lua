@@ -1,4 +1,4 @@
---Fortress of Prediction
+--Fortress of Prophecy
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_MENTOR)
+	return c:IsFaceup() and c:IsRace(RACE_SPELLCASTER)
 end
 function s.atcon(e)
 	return Duel.IsExistingMatchingCard(s.cfilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)

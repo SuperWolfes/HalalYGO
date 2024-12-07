@@ -2,15 +2,15 @@
 --Crystal Beast Ruby Carbuncle (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
-	--Place this card in Actional/Trap Zone instead of sending to RP
+	--Place this card in Spell/Trap Zone instead of sending to GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
-	e1:SetCode(EFFECT_TO_REST_REDIRECT_CB)
+	e1:SetCode(EFFECT_TO_GRAVE_REDIRECT_CB)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
 	e1:SetCondition(s.repcon)
 	e1:SetOperation(s.repop)
 	c:RegisterEffect(e1)
-	--Special Summon "Crystal Beast" monsters in Actional/Trap Zones
+	--Special Summon "Crystal Beast" monsters in Spell/Trap Zones
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(32710364,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -42,7 +42,7 @@ function s.repop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
-	e1:SetValue(TYPE_ACTIONAL+TYPE_CONTINUOUS)
+	e1:SetValue(TYPE_SPELL+TYPE_CONTINUOUS)
 	c:RegisterEffect(e1)
 	Duel.RaiseEvent(c,47408488,e,0,tp,0,0)
 end
@@ -69,7 +69,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_SZONE,0,nil,e,tp)
 	local gc=#g
 	if gc==0 then return end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ct=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ct=1 end
 	if gc<=ct then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	else

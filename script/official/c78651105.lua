@@ -1,5 +1,5 @@
 --神獣王バルバロス
---Beast King Bardaco
+--Beast King Barbaros
 local s,id=GetID()
 function s.initial_effect(c)
 	--summon & set with no tribute

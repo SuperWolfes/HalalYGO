@@ -20,7 +20,7 @@ function s.initial_effect(c)
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	local p,loc=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_CONTROLER,CHAININFO_TRIGGERING_LOCATION)
-	if re:GetActiveType()==TYPE_PENDULUM+TYPE_ACTIONAL and p~=tp and (loc&LOCATION_PZONE)~=0 then
+	if re:GetActiveType()==TYPE_PENDULUM+TYPE_SPELL and p~=tp and (loc&LOCATION_PZONE)~=0 then
 		Duel.NegateEffect(ev)
 	end
 end

@@ -19,9 +19,9 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local b1=not Duel.HasFlagEffect(tp,id)
-		and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,81332143)
+		and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,81332143)
 	local b2=not Duel.HasFlagEffect(tp,id+1)
-		and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,14731897)
+		and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,14731897)
 	if chk==0 then return b1 or b2 end
 	local op=Duel.SelectEffect(tp,
 		{b1,aux.Stringid(id,1)},
@@ -31,9 +31,9 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local op=e:GetLabel()
 	local c=e:GetHandler()
-	if op==1 and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,81332143)
+	if op==1 and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,81332143)
 		and not Duel.HasFlagEffect(tp,id) then
-		--If "Yu-Jo Friendship" is in your RP
+		--If "Yu-Jo Friendship" is in your GY
 		Duel.RegisterFlagEffect(tp,id,RESET_PHASE|PHASE_END,0,1)
 		--Your opponent cannot Normal Summon/Set, Flip Summon, Special Summon, or Set a monster until the end of this turn
 		local e1=Effect.CreateEffect(c)
@@ -77,11 +77,11 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e8:SetOperation(function(e,tp,eg,ep,ev,re,r,rp) Duel.NegateEffect(ev) end)
 		e8:SetReset(RESET_PHASE|PHASE_END)
 		Duel.RegisterEffect(e8,tp)
-	elseif op==2 and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,14731897)
+	elseif op==2 and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,14731897)
 		and not Duel.HasFlagEffect(tp,id+1) then
-		--If "Unity" is in your RP
+		--If "Unity" is in your GY
 		Duel.RegisterFlagEffect(tp,id+1,RESET_PHASE|PHASE_END,0,1)
-		--Your opponent cannot Set Actional/Trap Cards or activate Actional/Trap Cards or effects
+		--Your opponent cannot Set Spell/Trap Cards or activate Spell/Trap Cards or effects
 		local e9=Effect.CreateEffect(c)
 		e9:SetDescription(aux.Stringid(id,4))
 		e9:SetType(EFFECT_TYPE_FIELD)
@@ -92,9 +92,9 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.RegisterEffect(e9,tp)
 		local e10=e9:Clone()
 		e10:SetCode(EFFECT_CANNOT_ACTIVATE)
-		e10:SetValue(function(e,re,tp) return re:IsActionalTrapEffect() end)
+		e10:SetValue(function(e,re,tp) return re:IsSpellTrapEffect() end)
 		Duel.RegisterEffect(e10,tp)
-		--The effects of Actionals/Traps your opponent controls are negated
+		--The effects of Spells/Traps your opponent controls are negated
 		local e11=Effect.CreateEffect(c)
 		e11:SetType(EFFECT_TYPE_FIELD)
 		e11:SetCode(EFFECT_DISABLE)
@@ -105,11 +105,11 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e12:SetCode(EFFECT_DISABLE_TRAPMONSTER)
 		e12:SetTargetRange(0,LOCATION_MZONE)
 		Duel.RegisterEffect(e12,tp)
-		--Your opponent's Actional/Trap effects are negated
+		--Your opponent's Spell/Trap effects are negated
 		local e13=Effect.CreateEffect(c)
 		e13:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		e13:SetCode(EVENT_CHAIN_SOLVING)
-		e13:SetCondition(function(e,tp,eg,ep,ev,re,r,rp) return rp==1-tp and re:IsActionalTrapEffect() end)
+		e13:SetCondition(function(e,tp,eg,ep,ev,re,r,rp) return rp==1-tp and re:IsSpellTrapEffect() end)
 		e13:SetOperation(function(e,tp,eg,ep,ev,re,r,rp) Duel.NegateEffect(ev) end)
 		e13:SetReset(RESET_PHASE|PHASE_END)
 		Duel.RegisterEffect(e13,tp)

@@ -1,18 +1,18 @@
 --幻想魔獣キマイラ
---Chilean the Illusion Mentoral Beast
+--Chimera the Illusion Magical Beast
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Fusion procedure
-	Fusion.AddProcMixRep(c,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_ILLUSION),1,99,CARD_CHILEAN_MYTHICAL_BEAST)
-	--Name is treated as "Chilean the Flying Mythical Beast"
+	Fusion.AddProcMixRep(c,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_ILLUSION),1,99,CARD_CHIMERA_MYTHICAL_BEAST)
+	--Name is treated as "Chimera the Flying Mythical Beast"
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e1:SetCode(EFFECT_CHANGE_CODE)
-	e1:SetRange(LOCATION_MZONE|LOCATION_REST)
-	e1:SetValue(CARD_CHILEAN_MYTHICAL_BEAST)
+	e1:SetRange(LOCATION_MZONE|LOCATION_GRAVE)
+	e1:SetValue(CARD_CHIMERA_MYTHICAL_BEAST)
 	c:RegisterEffect(e1)
 	--Register multiple attacks effect
 	local e2=Effect.CreateEffect(c)
@@ -40,7 +40,7 @@ function s.initial_effect(c)
 	e4:SetOperation(s.atkop)
 	c:RegisterEffect(e4)
 end
-s.listed_names={CARD_CHILEAN_MYTHICAL_BEAST}
+s.listed_names={CARD_CHIMERA_MYTHICAL_BEAST}
 function s.matcheck(e,c)
 	local g=c:GetMaterial()
 	local e1=Effect.CreateEffect(c)

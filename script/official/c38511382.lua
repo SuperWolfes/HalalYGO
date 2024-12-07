@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_DISABLE)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_CHAINING)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCountLimit(1,id)
 	e2:SetCondition(s.gydiscon)
 	e2:SetCost(aux.bfgcost)
@@ -32,15 +32,15 @@ function s.initial_effect(c)
 end
 s.listed_series={SET_DIABELLESTARR,SET_SINFUL_SPOILS}
 function s.tgfilter(c,cc)
-	return c:IsMonster() and c:IsSetCard(SET_DIABELLESTARR) and (c:IsLocation(LOCATION_HAND) or c:IsFaceup()) and c:IsAbleToRestAsCost()
+	return c:IsMonster() and c:IsSetCard(SET_DIABELLESTARR) and (c:IsLocation(LOCATION_HAND) or c:IsFaceup()) and c:IsAbleToGraveAsCost()
 		and Duel.IsExistingTarget(Card.IsNegatable,0,LOCATION_ONFIELD,LOCATION_ONFIELD,1,Group.FromCards(c,cc)+c:GetEquipGroup())
 end
 function s.discost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_HAND|LOCATION_MZONE,0,1,nil,c) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_HAND|LOCATION_MZONE,0,1,1,nil,c)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.distg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
@@ -62,7 +62,7 @@ function s.gydiscon(e,tp,eg,ep,ev,re,r,rp)
 	local ch_player,ch_eff=Duel.GetChainInfo(ch,CHAININFO_TRIGGERING_PLAYER,CHAININFO_TRIGGERING_EFFECT)
 	local ch_c=ch_eff:GetHandler()
 	return ch_player==tp and ((ch_c:IsSetCard(SET_DIABELLESTARR) and ch_eff:IsMonsterEffect())
-		or (ch_c:IsSetCard(SET_SINFUL_SPOILS) and ch_eff:IsActionalTrapEffect()))
+		or (ch_c:IsSetCard(SET_SINFUL_SPOILS) and ch_eff:IsSpellTrapEffect()))
 end
 function s.gydistg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

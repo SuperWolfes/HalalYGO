@@ -1,12 +1,12 @@
 --歴戦の暗黒騎士ガイア
---Veteran Bia the Fierce Knight
+--Veteran Gaia the Fierce Knight
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
 	--Summon with 1 tribute
 	local e1=aux.AddNormalSummonProcedure(c,true,true,1,1,SUMMON_TYPE_TRIBUTE,aux.Stringid(id,0),s.otfilter)
 	--Change name to "Curse of Dragon" and Fusion Summon
-	local params={nil,Fusion.OnFieldMat(Card.IsAbleToDeck),s.fextra,Fusion.ShuffleMaterial,Fusion.FcoreedHandler,nil,2}
+	local params={nil,Fusion.OnFieldMat(Card.IsAbleToDeck),s.fextra,Fusion.ShuffleMaterial,Fusion.ForcedHandler,nil,2}
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)
@@ -17,12 +17,12 @@ function s.initial_effect(c)
 	e2:SetOperation(s.operation(Fusion.SummonEffTG(table.unpack(params)),Fusion.SummonEffOP(table.unpack(params))))
 	c:RegisterEffect(e2)
 end
-s.listed_names={6368038} --Bia the Fierce Knight
+s.listed_names={6368038} --Gaia the Fierce Knight
 function s.otfilter(c)
 	return c:IsLevelAbove(5) and c:IsFaceup()
 end
 function s.fextra(e,tp,mg)
-	return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToDeck),tp,LOCATION_REST,0,nil)
+	return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToDeck),tp,LOCATION_GRAVE,0,nil)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeckAsCost(tp,1) end

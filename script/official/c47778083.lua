@@ -20,15 +20,15 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
 	if chk==0 then
 		return Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)~=0
-			and Duel.IsExistingTarget(s.filter,tp,0,LOCATION_REST,1,nil,e,tp)
+			and Duel.IsExistingTarget(s.filter,tp,0,LOCATION_GRAVE,1,nil,e,tp)
 			and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-			and Duel.IsExistingTarget(s.filter,1-tp,0,LOCATION_REST,1,nil,e,1-tp)
+			and Duel.IsExistingTarget(s.filter,1-tp,0,LOCATION_GRAVE,1,nil,e,1-tp)
 			and Duel.GetLocationCount(1-tp,LOCATION_MZONE)>0
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local sg=Duel.SelectTarget(tp,s.filter,tp,0,LOCATION_REST,1,1,nil,e,tp)
+	local sg=Duel.SelectTarget(tp,s.filter,tp,0,LOCATION_GRAVE,1,1,nil,e,tp)
 	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_SPSUMMON)
-	local og=Duel.SelectTarget(1-tp,s.filter,1-tp,0,LOCATION_REST,1,1,nil,e,1-tp)
+	local og=Duel.SelectTarget(1-tp,s.filter,1-tp,0,LOCATION_GRAVE,1,1,nil,e,1-tp)
 	local sc=sg:GetFirst()
 	local oc=og:GetFirst()
 	local g=Group.FromCards(sc,oc)

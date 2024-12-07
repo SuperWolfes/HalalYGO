@@ -16,7 +16,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_BLUETOOTH_B_DRAGON,CARD_REDBOOT_B_DRAGON,160013048,160013049}
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsPlayerCanDiscardDeckAsCost(tp,2) and e:GetHandler():IsAbleToRestAsCost() end
+	if chk==0 then return Duel.IsPlayerCanDiscardDeckAsCost(tp,2) and e:GetHandler():IsAbleToGraveAsCost() end
 end
 function s.filter(c,e,tp)
 	return c:IsCode(CARD_REDBOOT_B_DRAGON,CARD_BLUETOOTH_B_DRAGON) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
@@ -33,17 +33,17 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
 	Duel.DiscardDeck(tp,2,REASON_COST)
-	Duel.SendtoRest(e:GetHandler(),REASON_COST)
+	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
 	--Effect
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_HAND,0,1,1,nil,e,tp)
 	if #g>0 
 		and Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP_DEFENSE)>0
-		and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil)
+		and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-		local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
+		local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 		if #g>0 then
 			Duel.BreakEffect()
 			Duel.SendtoHand(g,nil,REASON_EFFECT)

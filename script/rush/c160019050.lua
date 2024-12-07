@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
 	e0:SetCode(EFFECT_CHANGE_CODE)
 	e0:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	e0:SetRange(LOCATION_REST)
+	e0:SetRange(LOCATION_GRAVE)
 	e0:SetValue(160014049)
 	c:RegisterEffect(e0)
 	--atk up
@@ -36,7 +36,7 @@ function s.filter(c)
 	return c:IsAttribute(ATTRIBUTE_FIRE) and c:IsRace(RACE_PYRO|RACE_AQUA|RACE_THUNDER) and c:IsType(TYPE_MAXIMUM)
 end
 function s.value(e,c)
-	return Duel.GetMatchingGroupCount(s.filter,e:GetHandlerPlayer(),LOCATION_REST,0,nil)*300
+	return Duel.GetMatchingGroupCount(s.filter,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil)*300
 end
 function s.efilter(e,te)
 	return te:GetOwnerPlayer()~=e:GetOwnerPlayer()

@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),2,99)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--cannot special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -25,7 +25,7 @@ function s.initial_effect(c)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local dg=eg:GetFirst()
-	return #eg==1 and dg:IsLocation(LOCATION_REST) and dg:IsReason(REASON_BATTLE)
+	return #eg==1 and dg:IsLocation(LOCATION_GRAVE) and dg:IsReason(REASON_BATTLE)
 		and dg:GetBattlePosition()==POS_FACEDOWN_DEFENSE and dg:GetReasonCard()==e:GetHandler()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)

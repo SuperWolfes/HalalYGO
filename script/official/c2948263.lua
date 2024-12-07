@@ -1,8 +1,8 @@
 --ゴゴゴゴーレム－GF
---Gogogo Gopal - Golden Form
+--Gogogo Golem - Golden Form
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Cannot be special summoned
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)

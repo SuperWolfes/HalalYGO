@@ -1,5 +1,5 @@
 --守護神エクゾディア
---Exdude, the Legendary Defender
+--Exodia, the Legendary Defender
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
@@ -44,10 +44,10 @@ end
 function s.winop(e,tp,eg,ep,ev,re,r,rp)
 	local des=eg:GetFirst()
 	local rc=des:GetReasonCard()
-	if (des:GetPreviousRaceOnField()&RACE_TAINTED==RACE_TAINTED and des:GetPreviousAttributeOnField()&ATTRIBUTE_DARK==ATTRIBUTE_DARK
+	if (des:GetPreviousRaceOnField()&RACE_FIEND==RACE_FIEND and des:GetPreviousAttributeOnField()&ATTRIBUTE_DARK==ATTRIBUTE_DARK
 		and des:GetOwner()==(1-tp) and rc:IsRelateToBattle() and rc==e:GetHandler() and rc:GetSummonType()==SUMMON_TYPE_TRIBUTE+1)
 		then
-		Duel.Win(tp,WIN_REASON_EXDUDE_DEFENDER) end
+		Duel.Win(tp,WIN_REASON_EXODIA_DEFENDER) end
 end
 function s.ttcon(e,c,minc)
 	if c==nil then return true end

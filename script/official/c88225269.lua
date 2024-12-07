@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_DISABLE+CATEGORY_ATKCHANGE)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_CHAINING)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(s.negcon)
 	e2:SetCost(s.negcost)
@@ -31,13 +31,13 @@ end
 s.listed_series={SET_GEM_KNIGHT}
 s.listed_names={1264319} -- "Gem-Knight Fusion"
 function s.spcostfilter(c)
-	return (c:IsCode(1264319) or (c:IsSetCard(SET_GEM_KNIGHT) and c:IsType(TYPE_NORMAL))) and c:IsAbleToRestAsCost()
+	return (c:IsCode(1264319) or (c:IsSetCard(SET_GEM_KNIGHT) and c:IsType(TYPE_NORMAL))) and c:IsAbleToGraveAsCost()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.spcostfilter,tp,LOCATION_DECK,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.spcostfilter,tp,LOCATION_DECK,0,1,1,nil)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -63,9 +63,9 @@ end
 function s.negcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsAbleToRemoveAsCost() and
-		Duel.IsExistingMatchingCard(s.negcostfilter,tp,LOCATION_REST,0,2,c) end
+		Duel.IsExistingMatchingCard(s.negcostfilter,tp,LOCATION_GRAVE,0,2,c) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.negcostfilter,tp,LOCATION_REST,0,2,2,c)
+	local g=Duel.SelectMatchingCard(tp,s.negcostfilter,tp,LOCATION_GRAVE,0,2,2,c)
 	Duel.Remove(g+c,POS_FACEUP,REASON_COST)
 end
 function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk)

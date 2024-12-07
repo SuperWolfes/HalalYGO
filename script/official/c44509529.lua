@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--2 "Prank-Kids" monsters
 	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x120),2)
 	--Activation Limit
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetValue(1)
 	e1:SetCondition(s.actcon)
 	c:RegisterEffect(e1)
-	--Special Summon 2 non-Fusion "Prank-Kids" monsters with different names from RP
+	--Special Summon 2 non-Fusion "Prank-Kids" monsters with different names from GY
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -42,7 +42,7 @@ end
 function s.spcostextracon(base,e,tp,eg,ep,ev,re,r,rp)
 	local bc=base:GetHandler()
 	if Duel.GetMZoneCount(tp,bc)<2 then return false end
-	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_REST,0,bc,e,tp)
+	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_GRAVE,0,bc,e,tp)
 	return aux.SelectUnselectGroup(g,e,tp,2,2,s.spcheck,0)
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -59,8 +59,8 @@ function s.spcheck(sg,e,tp)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_REST,0,nil,e,tp)
-	if chk==0 then return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)
+	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_GRAVE,0,nil,e,tp)
+	if chk==0 then return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
 		and aux.SelectUnselectGroup(g,e,tp,2,2,s.spcheck,0) end
 	local tg=aux.SelectUnselectGroup(g,e,tp,2,2,s.spcheck,1,tp,HINTMSG_SPSUMMON)
 	Duel.SetTargetCard(tg)
@@ -69,7 +69,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetTargetCards(e)
 	if #g==0 or Duel.GetLocationCount(tp,LOCATION_MZONE)<#g
-		or (#g>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)) then return end
+		or (#g>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)) then return end
 	local c=e:GetHandler()
 	for tc in g:Iter() do
 		if Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP) then

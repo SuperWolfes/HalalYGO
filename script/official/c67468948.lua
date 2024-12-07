@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsRace(RACE_WANDERER) and c:IsAbleToHand()
+	return c:IsFaceup() and c:IsRace(RACE_FAIRY) and c:IsAbleToHand()
 end
 function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	if not re:IsHasType(EFFECT_TYPE_ACTIVATE) or not re:IsActiveType(TYPE_COUNTER) then return end

@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_DESTROY)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(s.descond)
 	e2:SetCost(aux.bfgcost)
@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.desop)
 	c:RegisterEffect(e2)
 end
-s.listed_series={SET_BETA}
+s.listed_series={SET_VEDA}
 s.listed_names={CARD_VISAS_STARFROST}
 function s.cfilter(c,e,tp)
 	return (c:IsControler(tp) or (c:IsControler(1-tp) and c:IsNegatableMonster() and c:IsType(TYPE_EFFECT)))
@@ -66,11 +66,11 @@ function s.negtop(e,tp,eg,ep,ev,re,r,rp)
 		end
 	end
 end
-function s.betafilter(c)
-	return c:IsFaceup() and c:IsSetCard(SET_BETA) and c:IsOriginalType(TYPE_MONSTER)
+function s.vedafilter(c)
+	return c:IsFaceup() and c:IsSetCard(SET_VEDA) and c:IsOriginalType(TYPE_MONSTER)
 end
 function s.descond(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(s.betafilter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil)
+	return Duel.IsExistingMatchingCard(s.vedafilter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(nil,tp,LOCATION_MZONE,0,nil)

@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	-- fusion
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,160008007,CARD_JELLYPLUG)
 	--All pyro monsters you control gain ATK
 	local e1=Effect.CreateEffect(c)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 end
-	--Check for card in deck to send to RP
+	--Check for card in deck to send to GY
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeckAsCost(tp,1) end
 end
@@ -24,7 +24,7 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_THUNDER),tp,LOCATION_MZONE,0,1,nil) end
 end
-	--Send 1 top card of deck to RP to make all pyro monsters you control gain ATK
+	--Send 1 top card of deck to GY to make all pyro monsters you control gain ATK
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	--Requirement

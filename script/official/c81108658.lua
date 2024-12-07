@@ -31,11 +31,11 @@ function s.bancon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,e:GetHandler())
 end
 function s.bantg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return s.bfilter(chkc) and chkc:IsLocation(LOCATION_REST) and chkc:IsControler(1-tp) end
-	if chk==0 then return Duel.IsExistingTarget(s.bfilter,tp,0,LOCATION_REST,1,nil) end
+	if chkc then return s.bfilter(chkc) and chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(1-tp) end
+	if chk==0 then return Duel.IsExistingTarget(s.bfilter,tp,0,LOCATION_GRAVE,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local tc=Duel.SelectTarget(tp,s.bfilter,tp,0,LOCATION_REST,1,1,nil)
-	Duel.SetOperationInfo(0,CATEGORY_REMOVE,tc,1,tp,LOCATION_REST)
+	local tc=Duel.SelectTarget(tp,s.bfilter,tp,0,LOCATION_GRAVE,1,1,nil)
+	Duel.SetOperationInfo(0,CATEGORY_REMOVE,tc,1,tp,LOCATION_GRAVE)
 end
 function s.banop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()	

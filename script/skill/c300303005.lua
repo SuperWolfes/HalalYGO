@@ -1,4 +1,4 @@
---The Mental Duelist
+--The Psychic Duelist
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
@@ -27,7 +27,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 			local tc=stg:Select(tp,1,1,nil):GetFirst()
 			local opt=Duel.SelectOption(tp,70,71,72)
 			Duel.ConfirmCards(tp,tc)
-			if (opt==0 and tc:IsOriginalType(TYPE_MONSTER) or (opt==1 and tc:IsOriginalType(TYPE_ACTIONAL)) or (opt==2 and tc:IsOriginalType(TYPE_TRAP))) then
+			if (opt==0 and tc:IsOriginalType(TYPE_MONSTER) or (opt==1 and tc:IsOriginalType(TYPE_SPELL)) or (opt==2 and tc:IsOriginalType(TYPE_TRAP))) then
 				local e1=Effect.CreateEffect(c)
 				e1:SetDescription(aux.Stringid(id,0))
 				e1:SetType(EFFECT_TYPE_SINGLE)
@@ -44,7 +44,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 			local rand=hg:RandomSelect(tp,1):GetFirst()
 			local opt=Duel.SelectOption(tp,70,71,72)
 			Duel.ConfirmCards(tp,rand)
-			if (opt==0 and rand:IsOriginalType(TYPE_MONSTER) or (opt==1 and rand:IsOriginalType(TYPE_ACTIONAL)) or (opt==2 and rand:IsOriginalType(TYPE_TRAP))) then
+			if (opt==0 and rand:IsOriginalType(TYPE_MONSTER) or (opt==1 and rand:IsOriginalType(TYPE_SPELL)) or (opt==2 and rand:IsOriginalType(TYPE_TRAP))) then
 				Duel.Damage(1-tp,500,REASON_EFFECT)
 			end
 	end

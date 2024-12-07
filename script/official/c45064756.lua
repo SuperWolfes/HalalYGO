@@ -24,7 +24,7 @@ function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local rc=Duel.AnnounceRace(tp,1,RACE_ALL)
 	e:SetLabel(rc)
 	--Operation info needed to handle the interaction with "Necrovalley"
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,nil,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,nil,1,0,0)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -33,7 +33,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_CHANGE_RACE)
-	e1:SetTargetRange(LOCATION_REST,LOCATION_REST)
+	e1:SetTargetRange(LOCATION_GRAVE,LOCATION_GRAVE)
 	e1:SetTarget(s.rctg)
 	e1:SetValue(race)
 	e1:SetReset(RESET_PHASE+PHASE_END)
@@ -53,9 +53,9 @@ function s.rctg(e,c)
 		c:RegisterFlagEffect(1,0,0,0)
 		local eff
 		if c:IsLocation(LOCATION_MZONE) then
-			eff={Duel.GetPlayerEffect(c:GetControler(),EFFECT_REST_VALLEY)}
+			eff={Duel.GetPlayerEffect(c:GetControler(),EFFECT_NECRO_VALLEY)}
 		else
-			eff={c:GetCardEffect(EFFECT_REST_VALLEY)}
+			eff={c:GetCardEffect(EFFECT_NECRO_VALLEY)}
 		end
 		c:ResetFlagEffect(1)
 		for _,te in ipairs(eff) do

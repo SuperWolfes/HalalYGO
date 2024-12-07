@@ -3,13 +3,13 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	Locked.AddProcGreater({handler=c,filter=aux.FilterBoolFunction(Card.IsCode,34072799),stage2=s.stage2})
+	Ritual.AddProcGreater({handler=c,filter=aux.FilterBoolFunction(Card.IsCode,34072799),stage2=s.stage2})
 	--to gy
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_TOREST)
+	e1:SetCategory(CATEGORY_TOGRAVE)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e1:SetRange(LOCATION_REST)
+	e1:SetRange(LOCATION_GRAVE)
 	e1:SetCountLimit(1,id)
 	e1:SetCost(aux.bfgcost)
 	e1:SetTarget(s.gytg)
@@ -29,11 +29,11 @@ function s.stage2(mat,e,tp,eg,ep,ev,re,r,rp,tc)
 	tc:RegisterEffect(e1)
 end
 function s.gyfilter1(c,tp)
-	return c:IsFaceup() and c:IsLockedMonster() 
+	return c:IsFaceup() and c:IsRitualMonster() 
 		and Duel.IsExistingMatchingCard(s.gyfilter2,tp,LOCATION_DECK,0,1,nil,c)
 end
 function s.gyfilter2(c,tc)
-	return c:IsLockedMonster() and c:IsAbleToRest()
+	return c:IsRitualMonster() and c:IsAbleToGrave()
 		and (c:IsAttribute(tc:GetAttribute()) or c:IsRace(tc:GetRace()))
 end
 function s.gytg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -41,15 +41,15 @@ function s.gytg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingTarget(s.gyfilter1,tp,LOCATION_MZONE,0,1,nil,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 	Duel.SelectTarget(tp,s.gyfilter1,tp,LOCATION_MZONE,0,1,1,nil,tp)
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
 end
 function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and tc:IsFaceup() then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 		local g=Duel.SelectMatchingCard(tp,s.gyfilter2,tp,LOCATION_DECK,0,1,1,nil,tc)
 		if #g>0 then
-			Duel.SendtoRest(g,REASON_EFFECT)
+			Duel.SendtoGrave(g,REASON_EFFECT)
 		end
 	end
 end

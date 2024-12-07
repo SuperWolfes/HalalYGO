@@ -20,11 +20,11 @@ function s.counterfilter(c)
 	return not (c:IsSummonLocation(LOCATION_EXTRA) and not c:IsType(TYPE_FUSION|TYPE_SYNCHRO))
 end
 function s.cfilter1(c,e,tp)
-	return c:IsFaceup() and c:IsType(TYPE_TUNER) and c:IsAbleToRestAsCost() and not c:IsOriginalType(TYPE_TRAP)
+	return c:IsFaceup() and c:IsType(TYPE_TUNER) and c:IsAbleToGraveAsCost() and not c:IsOriginalType(TYPE_TRAP)
 		and Duel.IsExistingMatchingCard(s.cfilter2,tp,LOCATION_MZONE,0,1,c,e,tp,c)
 end
 function s.cfilter2(c,e,tp,tun)
-	if not (c:IsFaceup() and not c:IsType(TYPE_TUNER) and c:IsAbleToRestAsCost() and not c:IsOriginalType(TYPE_TRAP)) then return false end
+	if not (c:IsFaceup() and not c:IsType(TYPE_TUNER) and c:IsAbleToGraveAsCost() and not c:IsOriginalType(TYPE_TRAP)) then return false end
 	local g=Group.FromCards(tun,c)
 	for tc in g:Iter() do
 		tc:AssumeProperty(ASSUME_CODE,tc:GetOriginalCodeRule())
@@ -42,7 +42,7 @@ function s.cfilter2(c,e,tp,tun)
 	return chk
 end
 function s.fusfilter(c,e,tp,mg)
-	if not (c:IsFacedown() and c:IsType(TYPE_FUSION) and (not c.material_location or (c.material_location&LOCATION_REST)>0)) then return false end
+	if not (c:IsFacedown() and c:IsType(TYPE_FUSION) and (not c.material_location or (c.material_location&LOCATION_GRAVE)>0)) then return false end
 	return c:IsCanBeSpecialSummoned(e,0,tp,false,false) and c:CheckFusionMaterial(mg)
 end
 function s.syncfilter(c,e,tp,mg)
@@ -53,12 +53,12 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(100)
 	if chk==0 then return Duel.GetCustomActivityCount(id,tp,ACTIVITY_SPSUMMON)==0
 		and Duel.IsExistingMatchingCard(s.cfilter1,tp,LOCATION_MZONE,0,1,nil,e,tp) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local tun=Duel.SelectMatchingCard(tp,s.cfilter1,tp,LOCATION_MZONE,0,1,1,nil,e,tp):GetFirst()
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local nt=Duel.SelectMatchingCard(tp,s.cfilter2,tp,LOCATION_MZONE,0,1,1,tun,e,tp,tun):GetFirst()
 	local g=Group.FromCards(tun,nt)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 	Duel.SetTargetCard(g)
 	local c=e:GetHandler()
 	--Cannot Special Summon from the Extra Deck, except Fusion and Synchro Monsters
@@ -78,13 +78,13 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		if e:GetLabel()~=100 then return false end
 		e:SetLabel(0)
-		return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)
+		return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
 	end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,LOCATION_EXTRA)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local mg=Duel.GetTargetCards(e)
-	if #mg~=2 or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) or Duel.GetLocationCountFromEx(tp,tp,mg,TYPE_FUSION)<2 then return end
+	if #mg~=2 or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) or Duel.GetLocationCountFromEx(tp,tp,mg,TYPE_FUSION)<2 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local fc=Duel.SelectMatchingCard(tp,s.fusfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,mg):GetFirst()
 	if not fc then return end

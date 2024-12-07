@@ -15,7 +15,7 @@ function s.tg(e,tp,eg,ev,ep,re,r,rp,chk)
 	local a=Duel.GetAttacker()
 	local d=Duel.GetAttackTarget()
 	local t1=Duel.CheckEvent(EVENT_ATTACK_ANNOUNCE) and a and d and d:IsFaceup() and d:IsAttribute(ATTRIBUTE_DARK) and a:IsControler(1-tp)
-	local t2=not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) and Duel.GetLocationCount(tp,LOCATION_MZONE)>2 
+	local t2=not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) and Duel.GetLocationCount(tp,LOCATION_MZONE)>2 
 		and Duel.IsPlayerCanSpecialSummonMonster(tp,511004422,0x10f3,TYPES_TOKEN,0,0,1,RACE_PLANT,ATTRIBUTE_DARK)
 	if chk==0 then return t1 or t2 end
 	e:SetCategory(0)
@@ -61,7 +61,7 @@ function s.op(e,tp,eg,ev,ep,re,r,rp)
 		end
 	end
 	if opt==1 or opt==2 then
-		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
+		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
 		if Duel.GetLocationCount(tp,LOCATION_MZONE)>2 
 			and Duel.IsPlayerCanSpecialSummonMonster(tp,511004422,0x10f3,TYPES_TOKEN,0,0,1,RACE_PLANT,ATTRIBUTE_DARK) then
 			for i=1,3 do

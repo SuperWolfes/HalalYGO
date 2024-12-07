@@ -1,5 +1,5 @@
 --アマゾネスの里
---Amazonian Village
+--Amazoness Village
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -16,14 +16,14 @@ function s.initial_effect(c)
 	e2:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,0x4))
 	e2:SetValue(200)
 	c:RegisterEffect(e2)
-	--Special Summon 1 "Amazonian" from your Deck
+	--Special Summon 1 "Amazoness" from your Deck
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e3:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
 	e3:SetRange(LOCATION_FZONE)
-	e3:SetCode(EVENT_TO_REST)
+	e3:SetCode(EVENT_TO_GRAVE)
 	e3:SetCountLimit(1)
 	e3:SetCondition(s.spcon)
 	e3:SetTarget(s.sptg)

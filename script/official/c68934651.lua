@@ -3,9 +3,9 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 local COUNTER_FW=0x14c
-local TYPES=TYPE_FUSION+TYPE_LOCKED+TYPE_SYNCHRO+TYPE_XYZ
+local TYPES=TYPE_FUSION+TYPE_RITUAL+TYPE_SYNCHRO+TYPE_XYZ
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	c:EnableCounterPermit(COUNTER_FW)
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_EFFECT),3)
 	--counter
@@ -50,7 +50,7 @@ function s.ctfilter(c)
 end
 local function getcount(tp)
 	local tottype=0
-	Duel.GetMatchingGroup(s.ctfilter,tp,LOCATION_REST,0,nil):ForEach(function(c) tottype=tottype|c:GetType() end)
+	Duel.GetMatchingGroup(s.ctfilter,tp,LOCATION_GRAVE,0,nil):ForEach(function(c) tottype=tottype|c:GetType() end)
 	tottype=tottype&(TYPES)
 	local ct=0
 	while tottype~=0 do

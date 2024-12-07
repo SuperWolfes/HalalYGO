@@ -1,5 +1,5 @@
 --魔法妖精 バーガンディ
---Burgundy the Ment Elf
+--Burgundy the Magic Elf
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_BATTLE_DESTROYED)
 	e2:SetCountLimit(1,{id,1})
-	e2:SetCondition(function(e) return e:GetHandler():IsLocation(LOCATION_REST) end)
+	e2:SetCondition(function(e) return e:GetHandler():IsLocation(LOCATION_GRAVE) end)
 	e2:SetTarget(s.distg)
 	e2:SetOperation(s.disop)
 	c:RegisterEffect(e2)
@@ -53,6 +53,6 @@ function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(tp,0,LOCATION_HAND)
 	if #g>0 then
 		local sg=g:RandomSelect(tp,1)
-		Duel.SendtoRest(sg,REASON_DISCARD|REASON_EFFECT)
+		Duel.SendtoGrave(sg,REASON_DISCARD|REASON_EFFECT)
 	end
 end

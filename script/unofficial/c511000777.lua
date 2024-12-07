@@ -17,13 +17,13 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 		and Duel.GetAttacker():IsStatus(STATUS_OPPO_BATTLE)
 end
 function s.costfilter(c)
-	return c:IsSetCard(0x33) and c:IsAbleToRestAsCost()
+	return c:IsSetCard(0x33) and c:IsAbleToGraveAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,1,nil)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.GetAttacker():CanChainAttack(0,true) end

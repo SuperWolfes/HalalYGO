@@ -20,14 +20,14 @@ function s.initial_effect(c)
 	local e3=e1:Clone()
 	e3:SetCode(EVENT_CHAINING)
 	e3:SetProperty(EFFECT_FLAG_DELAY)
-	e3:SetCondition(s.actionalcondition)
+	e3:SetCondition(s.spellcondition)
 	c:RegisterEffect(e3)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(Card.IsSummonPlayer,1,nil,1-tp)
 end
 function s.costfilter(c)
-	return c:IsRace(RACE_FISH) and c:IsFaceup() and c:IsAbleToRestAsCost()
+	return c:IsRace(RACE_FISH) and c:IsFaceup() and c:IsAbleToGraveAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_MZONE,0,1,nil) end
@@ -40,10 +40,10 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local sg=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_MZONE,0,1,1,nil)
 	sg=sg:AddMaximumCheck()
-	local ct=Duel.SendtoRest(sg,REASON_COST)
+	local ct=Duel.SendtoGrave(sg,REASON_COST)
 	if ct>0 then
 		--Effect
 		local g=Duel.GetMatchingGroup(nil,tp,0,LOCATION_ONFIELD,nil)
@@ -60,6 +60,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		end
 	end
 end
-function s.actionalcondition(e,tp,eg,ep,ev,re,r,rp)
-	return rp==1-tp and re:IsActionalEffect() and re:IsHasType(EFFECT_TYPE_ACTIVATE)
+function s.spellcondition(e,tp,eg,ep,ev,re,r,rp)
+	return rp==1-tp and re:IsSpellEffect() and re:IsHasType(EFFECT_TYPE_ACTIVATE)
 end

@@ -35,7 +35,7 @@ function s.target(e,c)
 	return c==e:GetHandler()
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsCode(CARD_ANCIENT_GEAR_GOPAL,56094445,10509340) and not c:IsMaximumModeSide()
+	return c:IsFaceup() and c:IsCode(CARD_ANCIENT_GEAR_GOLEM,56094445,10509340) and not c:IsMaximumModeSide()
 end
 function s.ntcon(e,c)
 	return Duel.IsExistingMatchingCard(s.filter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)

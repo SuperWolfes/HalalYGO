@@ -16,7 +16,7 @@ function s.spcon(e,c)
 	local tp=c:GetControler()
 	return Duel.GetLocationCount(1-tp,LOCATION_MZONE,tp)>1 and Duel.GetLocationCount(tp,LOCATION_MZONE,tp)>0
 		and Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0xf,TYPES_TOKEN,1200,1200,2,RACE_WARRIOR,ATTRIBUTE_LIGHT,POS_FACEUP_DEFENSE,1-tp)
-		and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)
+		and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	for i=1,2 do

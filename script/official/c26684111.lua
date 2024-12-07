@@ -1,5 +1,5 @@
 -- 天空の聖水
--- The Clean Water of the Sky
+-- The Sacred Water of the Sky
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -12,11 +12,11 @@ function s.initial_effect(c)
 	e1:SetTarget(s.acthtg)
 	e1:SetOperation(s.acthop)
 	c:RegisterEffect(e1)
-	-- Banish self from RP to replace mismatching
+	-- Banish self from GY to replace destruction
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EFFECT_DESTROY_REPLACE)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetTarget(s.reptg)
 	e2:SetValue(s.repval)
@@ -58,7 +58,7 @@ function s.acthop(e,tp,eg,ep,ev,re,r,rp)
 	if op==0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
 		local tc=Duel.SelectMatchingCard(tp,s.acfilter,tp,LOCATION_DECK,0,1,1,nil,tp):GetFirst()
-		if tc then gainlp=Duel.ActivateFieldActional(tc,e,tp,eg,ep,ev,re,r,rp) end
+		if tc then gainlp=Duel.ActivateFieldSpell(tc,e,tp,eg,ep,ev,re,r,rp) end
 	elseif op==1 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 		local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_DECK,0,1,1,nil)
@@ -69,7 +69,7 @@ function s.acthop(e,tp,eg,ep,ev,re,r,rp)
 	end
 	-- Gain LP
 	if gainlp and (Duel.IsEnvironment(CARD_SANCTUARY_SKY) 
-		or Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_SANCTUARY_SKY),0,LOCATION_ONFIELD+LOCATION_REST,LOCATION_ONFIELD+LOCATION_REST,1,nil))
+		or Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_SANCTUARY_SKY),0,LOCATION_ONFIELD+LOCATION_GRAVE,LOCATION_ONFIELD+LOCATION_GRAVE,1,nil))
 		and Duel.IsExistingMatchingCard(s.lpfilter,tp,LOCATION_MZONE,0,1,nil)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 		Duel.BreakEffect()

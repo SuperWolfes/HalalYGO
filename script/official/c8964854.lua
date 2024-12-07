@@ -19,7 +19,7 @@ s.listed_card_types={TYPE_UNION}
 function s.tgfilter(c,e,tp)
 	if c:GetAttackAnnouncedCount()==0 then return false end
 	local g=c:GetEquipGroup():Filter(s.spfilter,nil,e,tp)
-	if #g==0 or (#g>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)) then return false end
+	if #g==0 or (#g>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)) then return false end
 	local g1,g2=g:Split(Card.IsControler,nil,tp)
 	return (#g1==0 or Duel.GetLocationCount(tp,LOCATION_MZONE)>=#g1) and (#g2==0 or Duel.GetLocationCount(1-tp,LOCATION_MZONE)>=#g2)
 end
@@ -37,7 +37,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not (tc:IsRelateToEffect(e) and tc:IsFaceup()) then return end
 	local g=tc:GetEquipGroup():Filter(s.spfilter,nil,e,tp)
-	if #g==0 or (#g>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)) then return false end
+	if #g==0 or (#g>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)) then return false end
 	for tc in g:Iter() do
 		Duel.SpecialSummonStep(tc,0,tp,tc:GetControler(),false,false,POS_FACEUP)
 	end

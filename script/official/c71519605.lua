@@ -28,7 +28,7 @@ function s.atlimit(e,c)
 	return c:IsFacedown() or c:GetCode()~=id
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_REST) and e:GetHandler():IsReason(REASON_BATTLE)
+	return e:GetHandler():IsLocation(LOCATION_GRAVE) and e:GetHandler():IsReason(REASON_BATTLE)
 end
 function s.filter(c)
 	return c:IsAttackBelow(500) and c:IsRace(RACE_REPTILE) and c:IsAbleToHand()

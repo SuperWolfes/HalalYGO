@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Synchro Summon procedure
 	Synchro.AddProcedure(c,nil,1,1,aux.FilterBoolFunctionEx(Card.IsSetCard,0x556),1,1)
 	--Place Thorn Counters on monsters 
@@ -89,7 +89,7 @@ function s.nbcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.PayLPCost(tp,400)
 end
 function s.mgfilter(c,e,tp,sync)
-	return c:IsControler(tp) and c:IsLocation(LOCATION_REST)
+	return c:IsControler(tp) and c:IsLocation(LOCATION_GRAVE)
 		and c:GetReason()&0x80008==0x80008 and c:GetReasonCard()==sync
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 		and c:IsCanBeEffectTarget(e)
@@ -100,7 +100,7 @@ function s.nbtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local ct=#mg
 	local sumtype=c:GetSummonType()
 	if chkc then return false end
-	if chk==0 then return sumtype==SUMMON_TYPE_SYNCHRO and ct>0 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) 
+	if chk==0 then return sumtype==SUMMON_TYPE_SYNCHRO and ct>0 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) 
 		and ct<=Duel.GetLocationCount(tp,LOCATION_MZONE) and mg:FilterCount(s.mgfilter,nil,e,tp,c)==ct end
 	Duel.SetTargetCard(mg)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,mg,#mg,0,0)
@@ -143,8 +143,8 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local g=e:GetLabelObject()
 	local tg=g:Filter(s.spfilter,nil,e:GetValue())
-	if not c:IsLocation(LOCATION_REST) or not c:IsCanBeSpecialSummoned(e,0,tp,false,false) or #tg~=e:GetLabel() then return end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
+	if not c:IsLocation(LOCATION_GRAVE) or not c:IsCanBeSpecialSummoned(e,0,tp,false,false) or #tg~=e:GetLabel() then return end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
 	tg:AddCard(c)
 	Duel.SpecialSummon(tg,0,tp,tp,false,false,POS_FACEUP_ATTACK)
 end

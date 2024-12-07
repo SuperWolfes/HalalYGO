@@ -17,7 +17,7 @@ end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local bc=c:GetBattleTarget()
-	return bc:IsLocation(LOCATION_REST) and bc:IsReason(REASON_BATTLE) and c:IsRelateToBattle()
+	return bc:IsLocation(LOCATION_GRAVE) and bc:IsReason(REASON_BATTLE) and c:IsRelateToBattle()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsReleasable() end

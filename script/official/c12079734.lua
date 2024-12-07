@@ -22,11 +22,11 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
 	if chkc then
-		if e:GetLabel()==0 then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter1(chkc,c)
+		if e:GetLabel()==0 then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter1(chkc,c)
 		else return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.filter2(chkc) end
 	end
 	local b1=Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and Duel.IsExistingTarget(s.filter1,tp,LOCATION_REST,0,1,nil,c)
+		and Duel.IsExistingTarget(s.filter1,tp,LOCATION_GRAVE,0,1,nil,c)
 	local b2=Duel.IsExistingTarget(s.filter2,tp,LOCATION_MZONE,0,1,nil) and Duel.IsPlayerCanDraw(tp,1)
 	if chk==0 then return b1 or b2 end
 	local op=0
@@ -38,9 +38,9 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	e:SetLabel(op)
 	if op==0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-		local g=Duel.SelectTarget(tp,s.filter1,tp,LOCATION_REST,0,1,1,nil,c)
+		local g=Duel.SelectTarget(tp,s.filter1,tp,LOCATION_GRAVE,0,1,1,nil,c)
 		e:SetCategory(CATEGORY_EQUIP)
-		Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,0,0)
+		Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,0,0)
 	else
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
 		local g=Duel.SelectTarget(tp,s.filter2,tp,LOCATION_MZONE,0,1,1,nil)

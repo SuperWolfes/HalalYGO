@@ -17,16 +17,16 @@ function s.initial_effect(c)
 end
 s.listed_names={160206045}
 function s.tdfilter(c)
-	return c:IsAbleToDeck() and (c:IsEquipActional() or (c:IsMonster() and c:IsType(TYPE_NORMAL) and c:IsLevelBelow(4)))
+	return c:IsAbleToDeck() and (c:IsEquipSpell() or (c:IsMonster() and c:IsType(TYPE_NORMAL) and c:IsLevelBelow(4)))
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,0,LOCATION_REST)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,0,LOCATION_GRAVE)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_DRAW,nil,1,tp,1)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local tg=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_REST,0,1,1,nil)
+	local tg=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 	Duel.HintSelection(tg,true)
 	Duel.SendtoDeck(tg,nil,0,REASON_EFFECT)
 	local tc=tg:GetFirst()

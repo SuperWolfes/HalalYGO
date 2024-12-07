@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_PREDRAW)
-	e1:SetRange(LOCATION_REST)
+	e1:SetRange(LOCATION_GRAVE)
 	e1:SetCost(aux.bfgcost)
 	e1:SetCondition(s.condition)
 	e1:SetTarget(s.target)
@@ -25,9 +25,9 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return tp==Duel.GetTurnPlayer() and Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>0
 		and Duel.GetDrawCount(tp)>0 and Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)==0
 end
-	--Check for a "Void" actional/trap
+	--Check for a "Void" spell/trap
 function s.filter(c)
-	return c:IsSetCard(0xc5) and c:IsActionalTrap() and c:IsSSetable()
+	return c:IsSetCard(0xc5) and c:IsSpellTrap() and c:IsSSetable()
 end
 	--Activation legality
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -45,7 +45,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 		e:SetOperation(s.topop)
 		s.toptg(e,tp,eg,ep,ev,re,r,rp,1)
 	else
-		e:SetOperation(s.vetop)
+		e:SetOperation(s.setop)
 		s.settg(e,tp,eg,ep,ev,re,r,rp,1)
 	end
 	local dt=Duel.GetDrawCount(tp)
@@ -67,8 +67,8 @@ function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
 		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end
 end
-	--Set 1 "Void" actional/trap from deck
-function s.vetop(e,tp,eg,ep,ev,re,r,rp)
+	--Set 1 "Void" spell/trap from deck
+function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	_replace_count=_replace_count+1
 	if _replace_count<=_replace_max then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)

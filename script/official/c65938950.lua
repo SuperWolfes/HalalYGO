@@ -21,10 +21,10 @@ function s.initial_effect(c)
 	e2:SetTarget(s.drtg)
 	e2:SetOperation(s.drop)
 	c:RegisterEffect(e2)
-	--Lose 2000 LP and send this card to the RP
+	--Lose 2000 LP and send this card to the GY
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
-	e3:SetCategory(CATEGORY_TOREST)
+	e3:SetCategory(CATEGORY_TOGRAVE)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e3:SetCode(EVENT_CUSTOM+id)
 	e3:SetRange(LOCATION_FZONE)
@@ -63,9 +63,9 @@ function s.drop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.gytg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,e:GetHandler(),1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,e:GetHandler(),1,0,0)
 end
 function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SetLP(tp,Duel.GetLP(tp)-2000)
-	Duel.SendtoRest(e:GetHandler(),REASON_EFFECT)
+	Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
 end

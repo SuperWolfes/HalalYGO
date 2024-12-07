@@ -1,4 +1,4 @@
---The splendid SUMMIT
+--The splendid VENUS
 local s,id=GetID()
 function s.initial_effect(c)
 	--atk,def
@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_UPDATE_ATTACK)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
-	e1:SetTarget(aux.NOT(aux.TargetBoolFunction(Card.IsRace,RACE_WANDERER)))
+	e1:SetTarget(aux.NOT(aux.TargetBoolFunction(Card.IsRace,RACE_FAIRY)))
 	e1:SetValue(-500)
 	c:RegisterEffect(e1)
 	local e2=e1:Clone()
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetTargetRange(LOCATION_ONFIELD,0)
 	e3:SetProperty(EFFECT_FLAG_SET_AVAILABLE)
-	e3:SetTarget(aux.TargetBoolFunction(Card.IsActionalTrap))
+	e3:SetTarget(aux.TargetBoolFunction(Card.IsSpellTrap))
 	c:RegisterEffect(e3)
 	--inactivatable
 	local e4=Effect.CreateEffect(c)
@@ -36,5 +36,5 @@ end
 function s.effectfilter(e,ct)
 	local p=e:GetHandler():GetControler()
 	local te,tp=Duel.GetChainInfo(ct,CHAININFO_TRIGGERING_EFFECT,CHAININFO_TRIGGERING_PLAYER)
-	return p==tp and te:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP)
+	return p==tp and te:IsActiveType(TYPE_SPELL+TYPE_TRAP)
 end

@@ -19,7 +19,7 @@ function s.filter(c,e)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_MZONE+LOCATION_REST,0,nil,e)
+	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil,e)
 	if chk==0 then return #g>4
 		and g:IsExists(Card.IsSetCard,1,nil,0xa7) and g:IsExists(Card.IsSetCard,1,nil,0xa8)
 		and Duel.IsExistingMatchingCard(aux.TRUE,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) end

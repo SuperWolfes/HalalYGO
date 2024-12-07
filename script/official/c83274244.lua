@@ -43,7 +43,7 @@ function s.atop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	local loc=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_LOCATION)
-	if ep~=tp and loc==LOCATION_REST then
+	if ep~=tp and loc==LOCATION_GRAVE then
 		Duel.NegateEffect(ev)
 	end
 end

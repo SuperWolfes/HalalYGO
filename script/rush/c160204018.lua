@@ -3,7 +3,7 @@
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	-- "Kuribott" + "Siesta Torero"
 	Fusion.AddProcMix(c,true,true,CARD_KURIBOT,160005035)
 	-- Return to hand

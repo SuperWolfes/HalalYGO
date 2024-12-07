@@ -1,15 +1,15 @@
 --黒き魔術師－ブラック・マジシャン
---Dark Mentor the Ebon Scoreerer
+--Dark Magician the Ebon Sorcerer
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	--This card's name becomes "Dark Mentor" while in the Monster Zone
+	--This card's name becomes "Dark Magician" while in the Monster Zone
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e1:SetCode(EFFECT_CHANGE_CODE)
 	e1:SetRange(LOCATION_MZONE)
-	e1:SetValue(CARD_DARK_MENTOR)
+	e1:SetValue(CARD_DARK_MAGICIAN)
 	c:RegisterEffect(e1)
 	--Special Summon this card from your hand
 	local e2=Effect.CreateEffect(c)
@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.hsptg)
 	e2:SetOperation(s.hspop)
 	c:RegisterEffect(e2)
-	--Special Summon this card then you can Set 1 Actional/Trap that mentions "Dark Mentor" from your Deck
+	--Special Summon this card then you can Set 1 Spell/Trap that mentions "Dark Magician" from your Deck
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -35,7 +35,7 @@ function s.initial_effect(c)
 	e3:SetOperation(s.desspop)
 	c:RegisterEffect(e3)
 end
-s.listed_names={CARD_DARK_MENTOR,CARD_SHINING_SARCOPHAGUS}
+s.listed_names={CARD_DARK_MAGICIAN,CARD_SHINING_SARCOPHAGUS}
 function s.hsptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
@@ -56,7 +56,7 @@ function s.dessptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,tp,0)
 end
 function s.setfilter(c)
-	return c:ListsCode(CARD_DARK_MENTOR) and c:IsActionalTrap() and c:IsSSetable()
+	return c:ListsCode(CARD_DARK_MAGICIAN) and c:IsSpellTrap() and c:IsSSetable()
 end
 function s.desspop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

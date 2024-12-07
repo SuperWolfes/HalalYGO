@@ -23,7 +23,7 @@ function s.drcon(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()
 	local bc=tc:GetBattleTarget()
 	return Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)==0 and #eg==1
-		and tc:IsLocation(LOCATION_REST) and tc:IsReason(REASON_BATTLE)
+		and tc:IsLocation(LOCATION_GRAVE) and tc:IsReason(REASON_BATTLE)
 		and bc:IsRelateToBattle() and bc:IsControler(tp) and bc:IsLevelBelow(2)
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)

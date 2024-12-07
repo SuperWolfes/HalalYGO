@@ -23,7 +23,7 @@ end
 s.af="a"
 function s.val(e,c)
 	local r=c:GetRace()
-	if (r&RACE_TAINTED+RACE_MENTOR)>0 then return 200
-	elseif (r&RACE_WANDERER)>0 then return -200
+	if (r&RACE_FIEND+RACE_SPELLCASTER)>0 then return 200
+	elseif (r&RACE_FAIRY)>0 then return -200
 	else return 0 end
 end

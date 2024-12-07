@@ -1,5 +1,5 @@
 --妖仙獣 侍郎風
---Yosakhi Saburokaze
+--Yosenju Saburokaze
 --scripted by AlphaKreitn
 local s,id=GetID()
 function s.initial_effect(c)
@@ -57,7 +57,7 @@ function s.tgfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0xb3) and c:IsAbleToDeck()
 end
 function s.acfilter(c,tp)
-	return c:IsCode(62681049,79861914) and not c:IsUnliked() --and c:GetActivateEffect():IsActivatable(tp)
+	return c:IsCode(62681049,79861914) and not c:IsForbidden() --and c:GetActivateEffect():IsActivatable(tp)
 end
 function s.actg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and s.tgfilter(chkc) end

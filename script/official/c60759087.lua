@@ -3,7 +3,7 @@
 --Scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Smint control
+	--Switch control
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_CONTROL)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.conttg)
 	e1:SetOperation(s.contop)
 	c:RegisterEffect(e1)
-	--Shuffle a set Actional/Trap into the Deck
+	--Shuffle a set Spell/Trap into the Deck
 	local e2=e1:Clone()
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TODECK)
@@ -57,7 +57,7 @@ function s.contop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.filter3(c)
-	return c:IsFacedown() and c:IsActionalTrap() and c:IsAbleToDeck()
+	return c:IsFacedown() and c:IsSpellTrap() and c:IsAbleToDeck()
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_ONFIELD) and s.filter3(chkc) and chkc:IsControler(1-tp) end

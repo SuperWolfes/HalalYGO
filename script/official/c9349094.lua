@@ -1,16 +1,16 @@
 --神樹獣ハイペリュトン
---Clean Tree Beast, Hyperyton
+--Sacred Tree Beast, Hyperyton
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz summon procedure
 	Xyz.AddProcedure(c,nil,9,2)
-	--Must be properly summoned before awaking
-	c:EnableAwakeLimit()
-	--Attach 1 card from your RP to this card
+	--Must be properly summoned before reviving
+	c:EnableReviveLimit()
+	--Attach 1 card from your GY to this card
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_LEAVE_REST)
+	e1:SetCategory(CATEGORY_LEAVE_GRAVE)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
 	e1:SetCode(EVENT_CHAINING)
 	e1:SetRange(LOCATION_MZONE)
@@ -39,12 +39,12 @@ function s.attcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp and rp==tp and not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED)
 end
 function s.atttg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	local rt=re:GetActiveType()&(TYPE_ACTIONAL|TYPE_MONSTER|TYPE_TRAP)
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and chkc:IsType(rt) end
-	if chk==0 then return Duel.IsExistingTarget(Card.IsType,tp,LOCATION_REST,0,1,nil,rt) end
+	local rt=re:GetActiveType()&(TYPE_SPELL|TYPE_MONSTER|TYPE_TRAP)
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and chkc:IsType(rt) end
+	if chk==0 then return Duel.IsExistingTarget(Card.IsType,tp,LOCATION_GRAVE,0,1,nil,rt) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local g=Duel.SelectTarget(tp,Card.IsType,tp,LOCATION_REST,0,1,1,nil,rt)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,0,0)
+	local g=Duel.SelectTarget(tp,Card.IsType,tp,LOCATION_GRAVE,0,1,1,nil,rt)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,0,0)
 end
 function s.attop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -60,7 +60,7 @@ function s.negcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then 
-		local rt=re:GetActiveType()&(TYPE_ACTIONAL|TYPE_MONSTER|TYPE_TRAP)
+		local rt=re:GetActiveType()&(TYPE_SPELL|TYPE_MONSTER|TYPE_TRAP)
 		return e:GetHandler():GetOverlayGroup():IsExists(Card.IsType,1,nil,rt)
 	end
 	Duel.SetOperationInfo(0,CATEGORY_NEGATE,eg,1,0,0)
@@ -70,12 +70,12 @@ function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local rt=re:GetActiveType()&(TYPE_ACTIONAL|TYPE_MONSTER|TYPE_TRAP)
+	local rt=re:GetActiveType()&(TYPE_SPELL|TYPE_MONSTER|TYPE_TRAP)
 	local ov=c:GetOverlayGroup():Filter(Card.IsType,nil,rt)
 	if #ov<1 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)
 	local sg=ov:Select(tp,1,1,nil)
-	if #sg>0 and Duel.SendtoRest(sg,REASON_EFFECT)>0 then
+	if #sg>0 and Duel.SendtoGrave(sg,REASON_EFFECT)>0 then
 		Duel.RaiseSingleEvent(c,EVENT_DETACH_MATERIAL,e,0,0,0,0)
 		if Duel.NegateActivation(ev) and re:GetHandler():IsRelateToEffect(re) then
 			Duel.Destroy(eg,REASON_EFFECT)

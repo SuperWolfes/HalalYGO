@@ -45,17 +45,17 @@ function s.initial_effect(c)
 	e4:SetTarget(s.rectg)
 	e4:SetOperation(s.recop)
 	c:RegisterEffect(e4)
-	--Negate the effects of all non-"Arcana Fcoree" monsters on the field
+	--Negate the effects of all non-"Arcana Force" monsters on the field
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_FIELD)
 	e5:SetCode(EFFECT_DISABLE)
 	e5:SetRange(LOCATION_FZONE)
 	e5:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
 	e5:SetCondition(s.effectcon)
-	e5:SetTarget(aux.NOT(aux.TargetBoolFunction(Card.IsSetCard,SET_ARCANA_FCOREE)))
+	e5:SetTarget(aux.NOT(aux.TargetBoolFunction(Card.IsSetCard,SET_ARCANA_FORCE)))
 	c:RegisterEffect(e5)
 end
-s.listed_series={SET_ARCANA_FCOREE}
+s.listed_series={SET_ARCANA_FORCE}
 s.toss_coin=true
 function s.effectcon(e)
 	local c=e:GetHandler()

@@ -37,7 +37,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) or not tc or tc:IsFacedown() or not tc:IsRelateToEffect(e) then return end
 	if not Duel.IsPlayerCanSpecialSummonMonster(tp,id,0,0x11,tc:GetAttack(),tc:GetDefense(),tc:GetLevel(),tc:GetRace(),tc:GetAttribute()) then return end
-	c:AddMonsterAttribute(TYPE_NORMAL+TYPE_ACTIONAL+TYPE_TRAP)
+	c:AddMonsterAttribute(TYPE_NORMAL+TYPE_SPELL+TYPE_TRAP)
 	Duel.SpecialSummon(c,0,tp,tp,true,false,POS_FACEUP)
 	c:AddMonsterAttributeComplete()
 	local e1=Effect.CreateEffect(c)

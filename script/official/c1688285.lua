@@ -3,7 +3,7 @@
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	-- 2 Level 4 monsters
 	Xyz.AddProcedure(c,nil,4,2)
 	-- Unaffected by Trap effects and effects of monsters with the same type as its materials
@@ -38,8 +38,8 @@ function s.initial_effect(c)
 	e3:SetOperation(s.ovop)
 	c:RegisterEffect(e3)
 	local e4=e3:Clone()
-	e4:SetCategory(CATEGORY_LEAVE_REST)
-	e4:SetCode(EVENT_TO_REST)
+	e4:SetCategory(CATEGORY_LEAVE_GRAVE)
+	e4:SetCode(EVENT_TO_GRAVE)
 	c:RegisterEffect(e4)
 end
 s.listed_series={SET_TRAPTRIX}
@@ -67,15 +67,15 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.ovfilter(c,e,xc,tp)
 	return c:IsMonster() and c:IsFaceup() and c:IsReason(REASON_EFFECT)
-		and c:GetOwner()==1-tp and c:IsLocation(LOCATION_REST|LOCATION_REMOVED)
+		and c:GetOwner()==1-tp and c:IsLocation(LOCATION_GRAVE|LOCATION_REMOVED)
 		and not c:IsImmuneToEffect(e) and c:IsCanBeXyzMaterial(xc,tp,REASON_EFFECT)
 end
 function s.ovtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsType(TYPE_XYZ) and eg:IsExists(s.ovfilter,1,nil,e,c,tp) end
 	Duel.SetTargetCard(eg)
-	if e:GetCode()==EVENT_TO_REST then
-		Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,nil,1,1-tp,0)
+	if e:GetCode()==EVENT_TO_GRAVE then
+		Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,nil,1,1-tp,0)
 	end
 end
 function s.ovop(e,tp,eg,ep,ev,re,r,rp)

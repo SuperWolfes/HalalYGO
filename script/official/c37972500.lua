@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_PENDULUM),2,2)
 	--to hand (extra)
 	local e1=Effect.CreateEffect(c)
@@ -30,7 +30,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x164}
 function s.xthfilter1(c,tp)
-	return c:IsType(TYPE_PENDULUM) and not c:IsUnliked()
+	return c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
 		and Duel.IsExistingMatchingCard(s.xthfilter2,tp,LOCATION_EXTRA,0,1,c,c)
 end
 function s.xthfilter2(c,ac)

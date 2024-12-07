@@ -1,5 +1,5 @@
 --昇天の黒角笛
---Black Horn of Spectrum
+--Black Horn of Heaven
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

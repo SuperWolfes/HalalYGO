@@ -1,9 +1,9 @@
 --高尚儀式術
---High Locked Art
+--High Ritual Art
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	local e1=Locked.CreateProc({handler=c,lvtype=RITPROC_EQUAL,location=LOCATION_DECK,matfilter=s.mfilter,stage2=s.stage2})
+	local e1=Ritual.CreateProc({handler=c,lvtype=RITPROC_EQUAL,location=LOCATION_DECK,matfilter=s.mfilter,stage2=s.stage2})
 	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
 	c:RegisterEffect(e1)
 end

@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	-- Send cards from the top of your Deck to the RP
+	-- Send cards from the top of your Deck to the GY
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_DECKDES+CATEGORY_DAMAGE)
@@ -32,9 +32,9 @@ function s.spcostfilter(c)
 	return c:IsSetCard(SET_MARINCESS) and c:IsMonster() and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.spcostfilter,tp,LOCATION_MZONE|LOCATION_REST,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.spcostfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.spcostfilter,tp,LOCATION_MZONE|LOCATION_REST,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.spcostfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,1,1,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -51,7 +51,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.mlcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsLocation(LOCATION_REST) and r==REASON_LINK and c:GetReasonCard():IsAttribute(ATTRIBUTE_WATER)
+	return c:IsLocation(LOCATION_GRAVE) and r==REASON_LINK and c:GetReasonCard():IsAttribute(ATTRIBUTE_WATER)
 end
 function s.mltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ct=Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsSetCard,SET_MARINCESS),tp,LOCATION_MZONE,0,nil)
@@ -62,7 +62,7 @@ end
 function s.mlop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsSetCard,SET_MARINCESS),tp,LOCATION_MZONE,0,nil)
 	if ct<1 or Duel.DiscardDeck(tp,ct,REASON_EFFECT)<1 then return end
-	local dc=Duel.GetOperatedGroup():Match(Card.IsSetCard,nil,SET_MARINCESS):Match(Card.IsLocation,nil,LOCATION_REST):GetCount()
+	local dc=Duel.GetOperatedGroup():Match(Card.IsSetCard,nil,SET_MARINCESS):Match(Card.IsLocation,nil,LOCATION_GRAVE):GetCount()
 	if dc>0 then
 		Duel.BreakEffect()
 		Duel.Damage(1-tp,dc*200,REASON_EFFECT)

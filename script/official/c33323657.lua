@@ -1,5 +1,5 @@
 --サイコ・ソウル
---Mental Miss
+--Psychic Soul
 local s,id=GetID()
 function s.initial_effect(c)
 	--recover
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c)
-	return c:GetLevel()>0 and c:IsRace(RACE_MENTAL)
+	return c:GetLevel()>0 and c:IsRace(RACE_PSYCHIC)
 end
 function s.reccost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(1)

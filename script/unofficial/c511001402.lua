@@ -14,5 +14,5 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.condition(e)
-	return Duel.GetFieldGroupCount(e:GetHandlerPlayer(),LOCATION_REST,0)>=30
+	return Duel.GetFieldGroupCount(e:GetHandlerPlayer(),LOCATION_GRAVE,0)>=30
 end

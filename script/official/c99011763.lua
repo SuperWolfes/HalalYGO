@@ -1,10 +1,10 @@
 --魔界の警邏課デスポリス
---Beat Cop from the Overworld
+--Beat Cop from the Underworld
 --Scripted by ahtelel
 local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Link.AddProcedure(c,nil,2,2)
 	--effect gain
 	local e1=Effect.CreateEffect(c)

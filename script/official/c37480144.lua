@@ -1,5 +1,5 @@
 --アスポート
---Column Smint
+--Column Switch
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

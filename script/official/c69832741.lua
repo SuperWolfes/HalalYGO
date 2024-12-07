@@ -1,5 +1,5 @@
 --霊魂消滅
---Guardian Elimination
+--Spirit Elimination
 --fully implemented now?
 --OF COURSE, SINCE PERCYPRO'S SCRIPTERS ARE THE BEST!!!!!
 local s,id=GetID()

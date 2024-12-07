@@ -1,4 +1,4 @@
--- Cards Descended from Matching of Ascension
+-- Cards Descended from Creation of Ascension
 -- scripted by: UnknownGuest
 local s,id=GetID()
 function s.initial_effect(c)
@@ -13,16 +13,16 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.costfilter(c)
-	return c:IsAbleToRestAsCost() and c:IsMonster()
+	return c:IsAbleToGraveAsCost() and c:IsMonster()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,1,nil)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.filter(c)
-	return c:IsSetCard(0x95) and c:IsActional() and c:IsAbleToHand()
+	return c:IsSetCard(0x95) and c:IsSpell() and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end

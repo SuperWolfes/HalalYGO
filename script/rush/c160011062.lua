@@ -20,7 +20,7 @@ end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetAttackTarget()
 	local ac=Duel.GetAttacker()
-	return ac:IsControler(1-tp) and tc and tc:IsControler(tp) and tc:IsFaceup() and tc:IsAttackPos() and tc:IsRace(RACE_WANDERER)
+	return ac:IsControler(1-tp) and tc and tc:IsControler(tp) and tc:IsFaceup() and tc:IsAttackPos() and tc:IsRace(RACE_FAIRY)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Fusion Summon Procedure
 	Fusion.AddProcFun2(c,aux.FilterBoolFunction(Card.IsRace,RACE_AQUA),aux.FilterBoolFunction(Card.IsRace,RACE_THUNDER),true)
 	--Gain ATK equal to the sum of the sent monsters' levels x 100
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c)
-	return c:IsMonster() and c:IsAbleToRestAsCost()
+	return c:IsMonster() and c:IsAbleToGraveAsCost()
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end
@@ -32,11 +32,11 @@ function s.rescon(sg,e,tp,mg)
 	return sg:IsExists(Card.IsMonster,1,nil)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,nil)
+	local g=Duel.GetMatchingGroup(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,nil)
 	if #g==0 then return end
-	local tg=aux.SelectUnselectGroup(g,e,tp,1,math.min(3,#g),s.rescon,1,tp,HINTMSG_TOREST,s.rescon)
-	if #tg>0 and Duel.SendtoRest(tg,REASON_COST)>0 then
-		local og=Duel.GetOperatedGroup():Filter(aux.AND(Card.IsLocation,Card.IsMonster),nil,LOCATION_REST)
+	local tg=aux.SelectUnselectGroup(g,e,tp,1,math.min(3,#g),s.rescon,1,tp,HINTMSG_TOGRAVE,s.rescon)
+	if #tg>0 and Duel.SendtoGrave(tg,REASON_COST)>0 then
+		local og=Duel.GetOperatedGroup():Filter(aux.AND(Card.IsLocation,Card.IsMonster),nil,LOCATION_GRAVE)
 		local c=e:GetHandler()
 		if not c:IsRelateToEffect(e) then return end
 		--Gain 100 ATK x total level of the sent monsters

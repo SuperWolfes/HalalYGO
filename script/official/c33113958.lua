@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Xyz Summon Procedure: 2 Level 3 monsters
 	Xyz.AddProcedure(c,nil,3,2)
 	--Add 1 "Virtue Stream" from your Deck to your hand
@@ -57,7 +57,7 @@ function s.overlayfilter(c)
 end
 function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local b1=Duel.CheckRemoveOverlayCard(tp,1,0,1,REASON_EFFECT)
-		and Duel.IsExistingMatchingCard(s.thgyfilter,tp,LOCATION_REST,0,1,nil)
+		and Duel.IsExistingMatchingCard(s.thgyfilter,tp,LOCATION_GRAVE,0,1,nil)
 	local g=Duel.GetMatchingGroup(s.xyzfilter,tp,LOCATION_MZONE,LOCATION_MZONE,nil,e)
 	local b2=#g>=2 and aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,0)
 	if chk==0 then return b1 or b2 end
@@ -68,7 +68,7 @@ function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if op==1 then
 		e:SetCategory(CATEGORY_TOHAND)
 		e:SetProperty(0)
-		Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
+		Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
 	elseif op==2 then
 		e:SetCategory(0)
 		e:SetProperty(EFFECT_FLAG_CARD_TARGET)
@@ -79,10 +79,10 @@ end
 function s.effop(e,tp,eg,ep,ev,re,r,rp)
 	local op=e:GetLabel()
 	if op==1 then
-		--Detach 1 Xyz Material from a monster you control, then add 1 Fish, Sea Serpent, or Aqua monster from your RP to your hand
+		--Detach 1 Xyz Material from a monster you control, then add 1 Fish, Sea Serpent, or Aqua monster from your GY to your hand
 		if Duel.RemoveOverlayCard(tp,1,0,1,1,REASON_EFFECT)==0 then return end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-		local g=Duel.SelectMatchingCard(tp,s.thgyfilter,tp,LOCATION_REST,0,1,1,nil)
+		local g=Duel.SelectMatchingCard(tp,s.thgyfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 		if #g>0 then
 			Duel.BreakEffect()
 			Duel.SendtoHand(g,nil,REASON_EFFECT)

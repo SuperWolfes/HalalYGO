@@ -1,5 +1,5 @@
 --ＲＵＭ－ヌメロン・フォース
---Rank-Up-Ment Numeron Fcoree
+--Rank-Up-Magic Numeron Force
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

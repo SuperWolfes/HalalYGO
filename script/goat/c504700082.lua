@@ -1,6 +1,6 @@
 --無敗将軍 フリード
 --Freed the Matchless General (GOAT)
---If awaked by premature burial, not destroyed
+--If revived by premature burial, not destroyed
 local s,id=GetID()
 function s.initial_effect(c)
 	--disable
@@ -39,10 +39,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function s.distg(e,c)
-	return c:IsActional() and c:GetCardTarget():IsContains(e:GetHandler())
+	return c:IsSpell() and c:GetCardTarget():IsContains(e:GetHandler())
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
-	if not re:IsActiveType(TYPE_ACTIONAL) then return end
+	if not re:IsActiveType(TYPE_SPELL) then return end
 	if not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then return end
 	local g=Duel.GetChainInfo(ev,CHAININFO_TARGET_CARDS)
 	if not g or #g==0 then return end

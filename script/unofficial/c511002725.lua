@@ -20,16 +20,16 @@ function s.filter1(c)
 	return c:IsSetCard(SET_EARTHBOUND) and c:IsMonster() and c:IsAbleToHand()
 end
 function s.filter2(c)
-	return c:IsActional() and c:IsAbleToHand()
+	return c:IsSpell() and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.filter1,tp,LOCATION_REST,0,1,nil)
-		and Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_REST,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,2,tp,LOCATION_REST)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.filter1,tp,LOCATION_GRAVE,0,1,nil)
+		and Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_GRAVE,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,2,tp,LOCATION_GRAVE)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local g1=Duel.GetMatchingGroup(s.filter1,tp,LOCATION_REST,0,nil)
-	local g2=Duel.GetMatchingGroup(s.filter2,tp,LOCATION_REST,0,nil)
+	local g1=Duel.GetMatchingGroup(s.filter1,tp,LOCATION_GRAVE,0,nil)
+	local g2=Duel.GetMatchingGroup(s.filter2,tp,LOCATION_GRAVE,0,nil)
 	if #g1>0 and #g2>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 		local sg1=g1:Select(tp,1,1,nil)

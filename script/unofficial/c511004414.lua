@@ -62,7 +62,7 @@ end
 function s.operation(e,tp,eg,ev,ep,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
-	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=1 or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) 
+	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=1 or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) 
 		or not Duel.IsPlayerCanSpecialSummonMonster(tp,511009337,0,TYPES_TOKEN,0,0,1,RACE_WARRIOR,ATTRIBUTE_LIGHT) then return end
 	if c:IsRelateToEffect(e) and tc and tc:IsFaceup() and tc:IsRelateToEffect(e) and Duel.SelectYesNo(tp,aux.Stringid(14089428,0)) then
 		for i=1,2 do

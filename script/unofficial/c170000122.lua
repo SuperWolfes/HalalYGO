@@ -1,5 +1,5 @@
 --マグネット・フォース・プラス
---Magnet Fcoree Plus
+--Magnet Force Plus
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -68,7 +68,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e6:SetValue(s.atkval)
 		c:RegisterEffect(e6)
 	else
-		c:CancelToRest(false)
+		c:CancelToGrave(false)
 	end
 end
 function s.nacon(e,tp,eg,ep,ev,re,r,rp)

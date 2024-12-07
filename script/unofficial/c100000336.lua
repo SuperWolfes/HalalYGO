@@ -1,8 +1,8 @@
 --琰魔竜 レッド・デーモン (Manga)
---Hot Red Dragon Archtainted (Manga)
+--Hot Red Dragon Archfiend (Manga)
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Synchro Summon
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	--Destroy all other Attack Position monsters

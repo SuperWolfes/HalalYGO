@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	c:SetUniqueOnField(1,0,id)
 	aux.AddEquipProcedure(c,nil,aux.FilterBoolFunction(Card.IsSetCard,0x119))
-	aux.EnableCheckReincorporation(c)
+	aux.EnableCheckReincarnation(c)
 	--indes
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_EQUIP)
@@ -29,6 +29,6 @@ end
 s.listed_series={0x119}
 function s.macon(e)
 	local c=e:GetHandler():GetEquipTarget()
-	return c:IsSetCard(0x119) and c:IsLinkMonster() and c:IsReincorporationSummoned()
+	return c:IsSetCard(0x119) and c:IsLinkMonster() and c:IsReincarnationSummoned()
 end
 

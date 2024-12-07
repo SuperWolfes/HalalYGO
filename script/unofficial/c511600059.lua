@@ -24,12 +24,12 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 		and d:IsLinkMonster() and d:GetLink()>a:GetLink()
 end
 function s.cfilter(c)
-	return c:IsActionalTrap() and c:IsAbleToRemoveAsCost()
+	return c:IsSpellTrap() and c:IsAbleToRemoveAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST+LOCATION_ONFIELD,0,2,e:GetLabelObject()) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE+LOCATION_ONFIELD,0,2,e:GetLabelObject()) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_REST+LOCATION_ONFIELD,0,2,2,e:GetLabelObject())
+	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_GRAVE+LOCATION_ONFIELD,0,2,2,e:GetLabelObject())
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)

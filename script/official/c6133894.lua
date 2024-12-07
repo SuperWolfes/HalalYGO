@@ -2,7 +2,7 @@
 --Mazera DeVille
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--cannot special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -56,6 +56,6 @@ end
 function s.hdop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.IsEnvironment(94585852) then
 		local g=Duel.GetFieldGroup(tp,0,LOCATION_HAND):RandomSelect(tp,3)
-		Duel.SendtoRest(g,REASON_EFFECT+REASON_DISCARD)
+		Duel.SendtoGrave(g,REASON_EFFECT+REASON_DISCARD)
 	end
 end

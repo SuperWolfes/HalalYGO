@@ -39,8 +39,8 @@ function s.desrescon(max0,max1)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	local ct0=Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsSetCard,SET_SINFUL_SPOILS),tp,LOCATION_REST|LOCATION_REMOVED,0,nil)
-	local ct1=Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsSetCard,SET_SINFUL_SPOILS),tp,0,LOCATION_REST|LOCATION_REMOVED,nil)
+	local ct0=Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsSetCard,SET_SINFUL_SPOILS),tp,LOCATION_GRAVE|LOCATION_REMOVED,0,nil)
+	local ct1=Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsSetCard,SET_SINFUL_SPOILS),tp,0,LOCATION_GRAVE|LOCATION_REMOVED,nil)
 	local g0=Duel.GetMatchingGroup(Card.IsCanBeEffectTarget,tp,LOCATION_ONFIELD,0,e:GetHandler(),e)
 	local g1=Duel.GetMatchingGroup(Card.IsCanBeEffectTarget,tp,0,LOCATION_ONFIELD,nil,e)
 	if chk==0 then return (#g0>0 and ct0>0) or (#g1>0 and ct1>0) end

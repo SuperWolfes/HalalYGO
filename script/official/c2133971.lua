@@ -3,11 +3,11 @@
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Fusion Materials: 1 LIGHT Machine monster + "Y-Dragon Yearhead" or "Z-Zillion Tank"
 	Fusion.AddProcMix(c,true,true,s.matfilter,{6355563,33744268})
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,s.splimit)
-	--Add 1 Actional/Trap from your Deck to your hand that mentions "Union monster" in its text
+	--Add 1 Spell/Trap from your Deck to your hand that mentions "Union monster" in its text
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -44,7 +44,7 @@ function s.contactop(g)
 	Duel.Remove(g,POS_FACEUP,REASON_COST|REASON_MATERIAL)
 end
 function s.thfilter(c)
-	return c:IsActionalTrap() and c:ListsCardType(TYPE_UNION) and c:IsAbleToHand()
+	return c:IsSpellTrap() and c:ListsCardType(TYPE_UNION) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

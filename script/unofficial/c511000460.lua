@@ -1,5 +1,5 @@
 --聖なる旋風－ディバイン・ウィンド
---Mega Wind
+--Divine Wind
 --re-scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)

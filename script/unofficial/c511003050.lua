@@ -1,7 +1,7 @@
 --ＣＣ 隻眼のパスト・アイ
 --C/C Critical Eye
 local s,id=GetID()
-cetempchk=false --Critical Eye temp check, handling C/C Actionals that negate Critical Eye
+cetempchk=false --Critical Eye temp check, handling C/C Spells that negate Critical Eye
 function s.initial_effect(c)
 	--Fusion, synchro, and Xyz material limitations
 	local e1=Effect.CreateEffect(c)

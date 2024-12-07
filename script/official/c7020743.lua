@@ -3,13 +3,13 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Xyz Summon Procedure
 	Xyz.AddProcedure(c,nil,1,2)
 	--Attach up to 2 cards to this card
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_LEAVE_REST)
+	e1:SetCategory(CATEGORY_LEAVE_GRAVE)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DELAY)
 	e1:SetCode(EVENT_CHAIN_NEGATED)
@@ -54,13 +54,13 @@ function s.initial_effect(c)
 	c:RegisterEffect(e6,false,REGISTER_FLAG_DETACH_XMAT)
 end
 function s.atchtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsType(TYPE_XYZ) and Duel.GetFieldGroupCount(0,LOCATION_REST,LOCATION_REST)>0 end
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,nil,1,PLAYER_ALL,LOCATION_REST)
+	if chk==0 then return e:GetHandler():IsType(TYPE_XYZ) and Duel.GetFieldGroupCount(0,LOCATION_GRAVE,LOCATION_GRAVE)>0 end
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,nil,1,PLAYER_ALL,LOCATION_GRAVE)
 end
 function s.atchop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) then return end
-	local g=Duel.GetFieldGroup(0,LOCATION_REST,LOCATION_REST)
+	local g=Duel.GetFieldGroup(0,LOCATION_GRAVE,LOCATION_GRAVE)
 	local sg=aux.SelectUnselectGroup(g,e,tp,1,2,aux.dpcheck(Card.GetControler),1,tp,HINTMSG_ATTACH)
 	if #sg>0 then
 		Duel.HintSelection(sg,true)

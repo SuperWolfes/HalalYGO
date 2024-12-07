@@ -2,8 +2,8 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
-	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_TAINTED),1,1,Synchro.NonTuner(nil),1,99)
-	c:EnableAwakeLimit()
+	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_FIEND),1,1,Synchro.NonTuner(nil),1,99)
+	c:EnableReviveLimit()
 	--chain attack
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -23,7 +23,7 @@ end
 function s.atcon1(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local bc=c:GetBattleTarget()
-	return Duel.GetTurnPlayer()==tp and bc:IsLocation(LOCATION_REST) and bc:IsMonster()
+	return Duel.GetTurnPlayer()==tp and bc:IsLocation(LOCATION_GRAVE) and bc:IsMonster()
 		and c:CanChainAttack() and c:IsStatus(STATUS_OPPO_BATTLE)
 end
 function s.atop1(e,tp,eg,ep,ev,re,r,rp)
@@ -41,7 +41,7 @@ function s.atcon2(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local bc=c:GetBattleTarget()
 	return Duel.GetTurnPlayer()~=tp and c:IsRelateToBattle() and c:IsStatus(STATUS_OPPO_BATTLE) 
-		and bc:IsLocation(LOCATION_REST) and bc:IsMonster()
+		and bc:IsLocation(LOCATION_GRAVE) and bc:IsMonster()
 end
 function s.atop2(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

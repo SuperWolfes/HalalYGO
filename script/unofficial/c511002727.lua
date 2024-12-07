@@ -3,7 +3,7 @@
 Duel.LoadCardScript("c54366836.lua")
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Xyz Summon Procedure
 	Xyz.AddProcedure(c,nil,1,3)
 	--Cannot be destroyed by battle, except with a "Number" monster

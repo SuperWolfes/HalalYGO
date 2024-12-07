@@ -1,5 +1,5 @@
 --呪縛牢
---Unclean Prison
+--Cursed Prison
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

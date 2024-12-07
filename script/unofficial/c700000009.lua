@@ -1,5 +1,5 @@
 --Scripted by Eerie Code
---Performapal Odd-Eyes Light Bird
+--Performapal Odd-Eyes Light Phoenix
 local s,id=GetID()
 function s.initial_effect(c)
 	--pendulum summon

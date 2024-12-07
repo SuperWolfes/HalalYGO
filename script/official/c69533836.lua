@@ -1,11 +1,11 @@
 --魂を刻む右
---Miss Fist
+--Soul Fist
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
 	--Equip only to a Dragon Synchro Monster you control
 	aux.AddEquipProcedure(c,0,s.eqfilter)
-	--A "Red Dragon Archtainted" equipped with this card is unaffected by your opponent's activated effects
+	--A "Red Dragon Archfiend" equipped with this card is unaffected by your opponent's activated effects
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_EQUIP)
 	e1:SetCode(EFFECT_IMMUNE_EFFECT)
@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.oppatktg)
 	e2:SetOperation(s.oppatkop)
 	c:RegisterEffect(e2)
-	--Banish 1 monster from your opponent's RP, and if you do, the equipped monster gains ATK equal to the banished monster's
+	--Banish 1 monster from your opponent's GY, and if you do, the equipped monster gains ATK equal to the banished monster's
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_REMOVE+CATEGORY_ATKCHANGE)
@@ -36,13 +36,13 @@ function s.initial_effect(c)
 	e3:SetOperation(s.rmop)
 	c:RegisterEffect(e3)
 end
-s.listed_names={CARD_RED_DRAGON_ARCHTAINTED}
+s.listed_names={CARD_RED_DRAGON_ARCHFIEND}
 function s.eqfilter(c)
 	return c:IsRace(RACE_DRAGON) and c:IsType(TYPE_SYNCHRO)
 end
 function s.immcon(e)
 	local ec=e:GetHandler():GetEquipTarget()
-	return ec and ec:IsCode(CARD_RED_DRAGON_ARCHTAINTED)
+	return ec and ec:IsCode(CARD_RED_DRAGON_ARCHFIEND)
 end
 function s.oppatktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
@@ -67,10 +67,10 @@ function s.oppatkop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return c:IsControler(1-tp) and c:IsLocation(LOCATION_REST) and c:IsMonster() and c:IsAbleToRemove() end
-	if chk==0 then return Duel.IsExistingTarget(aux.AND(Card.IsMonster,Card.IsAbleToRemove),tp,0,LOCATION_REST,1,nil) end
+	if chkc then return c:IsControler(1-tp) and c:IsLocation(LOCATION_GRAVE) and c:IsMonster() and c:IsAbleToRemove() end
+	if chk==0 then return Duel.IsExistingTarget(aux.AND(Card.IsMonster,Card.IsAbleToRemove),tp,0,LOCATION_GRAVE,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectTarget(tp,aux.AND(Card.IsMonster,Card.IsAbleToRemove),tp,0,LOCATION_REST,1,1,nil)
+	local g=Duel.SelectTarget(tp,aux.AND(Card.IsMonster,Card.IsAbleToRemove),tp,0,LOCATION_GRAVE,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,1,tp,0)
 end
 function s.rmop(e,tp,eg,ep,ev,re,r,rp)

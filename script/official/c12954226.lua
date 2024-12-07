@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Synchro Summon Procedure
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	--Additional Normal Summon for Insect or Plant monster
@@ -31,7 +31,7 @@ function s.initial_effect(c)
 end
 function s.damcfilter(c,tp)
 	local rc=c:GetReasonCard()
-	if not (c:IsLocation(LOCATION_REST) and rc) then return false end
+	if not (c:IsLocation(LOCATION_GRAVE) and rc) then return false end
 	if c:IsPreviousControler(tp) then
 		local prev_race=c:GetPreviousRaceOnField()
 		return prev_race&RACE_INSECT>0 or prev_race&RACE_PLANT>0
@@ -48,7 +48,7 @@ function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.damcfilter,1,nil,tp)
 end
 function s.damtgfilter(c,e)
-	return c:IsLocation(LOCATION_REST) and c:IsCanBeEffectTarget(e) and c:GetPreviousAttackOnField()>0
+	return c:IsLocation(LOCATION_GRAVE) and c:IsCanBeEffectTarget(e) and c:GetPreviousAttackOnField()>0
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return eg:IsContains(chkc) and s.damtgfilter(chkc,e) end

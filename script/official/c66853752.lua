@@ -3,12 +3,12 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special summon itself from RP
+	--Special summon itself from GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
-	e1:SetRange(LOCATION_REST)
+	e1:SetRange(LOCATION_GRAVE)
 	e1:SetCountLimit(1,id)
 	e1:SetCondition(s.condition)
 	e1:SetTarget(s.target)
@@ -26,7 +26,7 @@ function s.cfilter(c)
 	return c:GetCode()~=id and c:IsMonster()
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_GRAVE,0,nil)
 	return #g>0 and g:FilterCount(Card.IsAttribute,nil,ATTRIBUTE_WATER)==#g
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -37,7 +37,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 then
-		local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST,0,nil)
+		local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_GRAVE,0,nil)
 		if #g>0 and g:FilterCount(Card.IsAttribute,nil,ATTRIBUTE_WATER)==#g
 			and Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)~=0 then
 			--Banish it if it leaves the field

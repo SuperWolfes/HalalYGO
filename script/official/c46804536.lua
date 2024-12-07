@@ -3,13 +3,13 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Xyz Summon Procedure
 	Xyz.AddProcedure(c,nil,4,2)
-	--Take 1 Level 4 or lower FIRE Warrior or 1 "Battlin' Boxing" Actional/Trap
+	--Take 1 Level 4 or lower FIRE Warrior or 1 "Battlin' Boxing" Spell/Trap
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_TOREST)
+	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_TOGRAVE)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DELAY)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
@@ -31,8 +31,8 @@ function s.initial_effect(c)
 end
 s.listed_series={SET_BATTLIN_BOXING,SET_BATTLIN_BOXER}
 function s.cfilter(c)
-	if not (c:IsAbleToHand() or c:IsAbleToRest()) then return false end
-	if c:IsActionalTrap() then
+	if not (c:IsAbleToHand() or c:IsAbleToGrave()) then return false end
+	if c:IsSpellTrap() then
 		return c:IsSetCard(SET_BATTLIN_BOXING)
 	else
 		return c:IsAttribute(ATTRIBUTE_FIRE) and c:IsRace(RACE_WARRIOR) and c:IsLevelBelow(4)
@@ -41,7 +41,7 @@ end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_DECK,0,1,nil) end
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,2))

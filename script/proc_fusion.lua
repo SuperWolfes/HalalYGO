@@ -740,7 +740,7 @@ function Fusion.CheckSelectMixRepUnfix(tp,mg,sg,mustg,g,fc,sub,sub2,chkf,minc,ma
 end
 function Fusion.CheckSelectMixRepUnfixAll(c,tp,mg,sg,mustg,g,fc,sub,sub2,chkf,minc,maxc,...)
 	if maxc==0 then return false end
-	--Second layer check for harmonizing mentor, checking teh possible selected group for the fusion summon
+	--Second layer check for harmonizing magician, checking teh possible selected group for the fusion summon
 	local mg2=mg:Clone()
 	if not contact then
 		if c:IsHasEffect(EFFECT_FUSION_MAT_RESTRICTION) then
@@ -803,7 +803,7 @@ function Fusion.SelectMixRepUnfix(c,tp,mg,sg,mustg,fc,sub,sub2,minc,maxc,chkf,..
 		maxc=Fusion.CheckExact
 		minc=Fusion.CheckExact
 	end
-	--First layer check for harmonizing mentor, checking only the selected group given when the function is called
+	--First layer check for harmonizing magician, checking only the selected group given when the function is called
 	--c has the fusion limit
 	if c:IsHasEffect(EFFECT_FUSION_MAT_RESTRICTION) then
 		local eff={c:GetCardEffect(EFFECT_FUSION_MAT_RESTRICTION)}

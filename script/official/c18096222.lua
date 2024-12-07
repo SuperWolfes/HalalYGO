@@ -1,5 +1,5 @@
 --デュアル・ブースター
---Dual Booster
+--Gemini Booster
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
-	--Treat 1 Dual monster as Effect monster
+	--Treat 1 Gemini monster as Effect monster
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
@@ -26,12 +26,12 @@ function s.initial_effect(c)
 	e2:SetOperation(s.daop)
 	c:RegisterEffect(e2)
 end
-s.listed_card_types={TYPE_DUAL}
+s.listed_card_types={TYPE_GEMINI}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsType(TYPE_DUAL)
+	return c:IsFaceup() and c:IsType(TYPE_GEMINI)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and s.filter(chkc) end
@@ -62,11 +62,11 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetReset(RESET_EVENT+RESETS_STANDARD)
 		c:RegisterEffect(e2)
 	else
-		c:CancelToRest(false)
+		c:CancelToGrave(false)
 	end
 end
 function s.eqlimit(e,c)
-	return c:GetControler()==e:GetOwnerPlayer() and c:IsType(TYPE_DUAL)
+	return c:GetControler()==e:GetOwnerPlayer() and c:IsType(TYPE_GEMINI)
 end
 function s.dacon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -74,10 +74,10 @@ function s.dacon(e,tp,eg,ep,ev,re,r,rp)
 	if c:IsReason(REASON_LOST_TARGET) then
 		ec=c:GetPreviousEquipTarget()
 	end
-	return c:IsLocation(LOCATION_REST) and c:IsReason(REASON_DESTROY) and ec~=nil
+	return c:IsLocation(LOCATION_GRAVE) and c:IsReason(REASON_DESTROY) and ec~=nil
 end
 function s.dafilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_DUAL) and not c:IsDualStatus()
+	return c:IsFaceup() and c:IsType(TYPE_GEMINI) and not c:IsGeminiStatus()
 end
 function s.datg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and s.dafilter(chkc) end
@@ -88,7 +88,7 @@ end
 function s.daop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) and s.dafilter(tc) then
-		tc:EnableDualStatus()
+		tc:EnableGeminiStatus()
 		tc:RegisterFlagEffect(0,RESET_EVENT+RESETS_STANDARD,EFFECT_FLAG_CLIENT_HINT,1,0,64)
 	end
 end

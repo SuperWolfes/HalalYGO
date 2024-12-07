@@ -1,5 +1,5 @@
 --シンクロ・フォースバック
---Synchro Fcoreeback
+--Synchro Forceback
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)

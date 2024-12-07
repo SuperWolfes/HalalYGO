@@ -1,5 +1,5 @@
 --鋼鉄の大魔人ゴルゴイル
---Golgoil the Iron Giant Dlilt
+--Golgoil the Iron Giant Djinn
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.indestg)
 	e1:SetValue(1)
 	c:RegisterEffect(e1)
-	--Special Summon 1 of your monsters that is banished or in your RP
+	--Special Summon 1 of your monsters that is banished or in your GY
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -50,11 +50,11 @@ function s.rmgyspfilter(c,e,tp)
 	return c:IsFaceup() and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.rmgysptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REMOVED|LOCATION_REST) and chkc:IsControler(tp) and s.rmgyspfilter(chkc,e,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_REMOVED|LOCATION_GRAVE) and chkc:IsControler(tp) and s.rmgyspfilter(chkc,e,tp) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(s.rmgyspfilter,tp,LOCATION_REMOVED|LOCATION_REST,0,1,nil,e,tp) end
+		and Duel.IsExistingTarget(s.rmgyspfilter,tp,LOCATION_REMOVED|LOCATION_GRAVE,0,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.rmgyspfilter,tp,LOCATION_REMOVED|LOCATION_REST,0,1,1,nil,e,tp)
+	local g=Duel.SelectTarget(tp,s.rmgyspfilter,tp,LOCATION_REMOVED|LOCATION_GRAVE,0,1,1,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,0)
 end
 function s.rmgyspop(e,tp,eg,ep,ev,re,r,rp)

@@ -1,4 +1,4 @@
---Ragka
+--Ragnarok
 local s,id=GetID()
 function s.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 end
-s.listed_names={CARD_DARK_MENTOR,92377303,CARD_DARK_MENTOR_GIRL,30208479}
+s.listed_names={CARD_DARK_MAGICIAN,92377303,CARD_DARK_MAGICIAN_GIRL,30208479}
 function s.cfilter(c)
 	return c:IsFaceup() and c:IsCode(table.unpack(s.listed_names))
 end

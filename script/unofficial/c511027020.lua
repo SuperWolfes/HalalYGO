@@ -31,7 +31,7 @@ function s.initial_effect(c)
 	e3:SetCountLimit(1)
 	e3:SetCondition(s.setcon)
 	e3:SetTarget(s.settg)
-	e3:SetOperation(s.vetop)
+	e3:SetOperation(s.setop)
 	c:RegisterEffect(e3)
 end
 function s.filter(c)
@@ -88,7 +88,7 @@ end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 end
-function s.vetop(e,tp,eg,ep,ev,re,r,rp)
+function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and c:IsSSetable(true) then
 		Duel.ChangePosition(c,POS_FACEDOWN)

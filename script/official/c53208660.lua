@@ -18,7 +18,7 @@ s.listed_series={0x98}
 function s.chainfilter(re,tp,cid)
 	local rc=re:GetHandler()
 	local loc=Duel.GetChainInfo(cid,CHAININFO_TRIGGERING_LOCATION)
-	return not (re:GetActiveType()==TYPE_PENDULUM+TYPE_ACTIONAL and not re:IsHasType(EFFECT_TYPE_ACTIVATE)
+	return not (re:GetActiveType()==TYPE_PENDULUM+TYPE_SPELL and not re:IsHasType(EFFECT_TYPE_ACTIVATE)
 		and (loc&LOCATION_PZONE)==LOCATION_PZONE and rc:IsSetCard(0x98))
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)

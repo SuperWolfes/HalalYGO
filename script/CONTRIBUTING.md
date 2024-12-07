@@ -8,7 +8,7 @@ External contributions: please speak with a member of staff in `#card-scripting-
 - The title should be a short description, including the name of the card fixed, ideally an action in present tense.
 - Describe the bug that is fixed in the description in detail
 - Add `Closes #xxx` if this pull request is meant to close a particular issue
-- A replay or puzzle wardenstrating the incorrect interaction and reference to correct rulings is helpful
+- A replay or puzzle demonstrating the incorrect interaction and reference to correct rulings is helpful
 
 ## New additions to the unofficial script project
 - A pull request should contain only one card, except in the case of very closely coupled cards

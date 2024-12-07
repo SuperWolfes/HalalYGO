@@ -1,5 +1,5 @@
 --捕食植物スパイダー・オーキッド
---Predaplant Spider Corehid
+--Predaplant Spider Orchid
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetRange(LOCATION_HAND)
 	e1:SetCost(s.reg)
 	c:RegisterEffect(e1)
-	--Destroy a Actional/Trap
+	--Destroy a Spell/Trap
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_DESTROY)
 	e2:SetType(EFFECT_TYPE_IGNITION)

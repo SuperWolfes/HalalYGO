@@ -3,7 +3,7 @@
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon 1 "M∀LICE" monster from your RP or banishment
+	--Special Summon 1 "M∀LICE" monster from your GY or banishment
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_RECOVER)
@@ -59,9 +59,9 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 			zone_chk=Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		end
 		e:SetLabel(0)
-		return zone_chk and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST|LOCATION_REMOVED,0,1,nil,e,tp)
+		return zone_chk and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE|LOCATION_REMOVED,0,1,nil,e,tp)
 	end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST|LOCATION_REMOVED)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE|LOCATION_REMOVED)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,0)
 end
 function s.linkfilter(c)
@@ -69,7 +69,7 @@ function s.linkfilter(c)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST|LOCATION_REMOVED,0,1,1,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_GRAVE|LOCATION_REMOVED,0,1,1,nil,e,tp)
 	if #g==0 or Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)==0 then return end
 	local atk=g:GetFirst():GetBaseAttack()
 	if atk>0 and Duel.IsExistingMatchingCard(s.linkfilter,tp,LOCATION_MZONE,0,1,nil)

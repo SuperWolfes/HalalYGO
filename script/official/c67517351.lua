@@ -1,5 +1,5 @@
 --HRUM-ユートピア・フォース
---Hyper-Rank-Up-Ment Hope Fcoree
+--Hyper-Rank-Up-Magic Hope Force
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_CUSTOM+id)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DELAY)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetTarget(s.mtg)
 	e2:SetOperation(s.mop)
@@ -34,7 +34,7 @@ function s.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	e3:SetRange(LOCATION_REST)
+	e3:SetRange(LOCATION_GRAVE)
 	e3:SetLabelObject(e2)
 	e3:SetOperation(s.regop)
 	c:RegisterEffect(e3)
@@ -104,7 +104,7 @@ function s.mtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		local tc=g:Select(tp,1,1,nil)
 		Duel.SetTargetCard(tc)
 	end
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,e:GetHandler(),1,tp,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,e:GetHandler(),1,tp,0)
 end
 function s.mop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

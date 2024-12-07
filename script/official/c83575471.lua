@@ -3,19 +3,19 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	Duel.EnableGlobalFlag(GLOBALFLAG_SELF_TOREST)
-	--Send itself to the RP if "Adanced Dark" is not face-up in the Field Actional Zone
+	Duel.EnableGlobalFlag(GLOBALFLAG_SELF_TOGRAVE)
+	--Send itself to the GY if "Adanced Dark" is not face-up in the Field Spell Zone
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e1:SetRange(LOCATION_MZONE)
-	e1:SetCode(EFFECT_SELF_TOREST)
+	e1:SetCode(EFFECT_SELF_TOGRAVE)
 	e1:SetCondition(s.tgcon)
 	c:RegisterEffect(e1)
-	--Place itself in the S/T instead of sending it to the RP
+	--Place itself in the S/T instead of sending it to the GY
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
-	e2:SetCode(EFFECT_TO_REST_REDIRECT_CB)
+	e2:SetCode(EFFECT_TO_GRAVE_REDIRECT_CB)
 	e2:SetProperty(EFFECT_FLAG_UNCOPYABLE)
 	e2:SetCondition(s.replacecon)
 	e2:SetOperation(s.replaceop)
@@ -48,12 +48,12 @@ function s.replaceop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e1:SetReset(RESET_EVENT|RESETS_STANDARD&~RESET_TURN_SET)
-	e1:SetValue(TYPE_ACTIONAL+TYPE_CONTINUOUS)
+	e1:SetValue(TYPE_SPELL+TYPE_CONTINUOUS)
 	c:RegisterEffect(e1)
 	Duel.RaiseEvent(c,EVENT_CUSTOM+47408488,e,0,tp,0,0)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsContinuousActional()
+	return e:GetHandler():IsContinuousSpell()
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -71,7 +71,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 		local sg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_SZONE,0,nil,e,tp)
 		if #sg==0 or ft<=0 then return end
-		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
+		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
 		if Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 			local g=sg:Select(tp,ft,ft,nil)

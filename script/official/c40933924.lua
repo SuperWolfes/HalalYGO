@@ -14,7 +14,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return ep~=tp
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOREST)
-	local g=Duel.SelectMatchingCard(1-tp,Card.IsActional,1-tp,LOCATION_DECK,0,1,1,nil)
-	Duel.SendtoRest(g,REASON_EFFECT)
+	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOGRAVE)
+	local g=Duel.SelectMatchingCard(1-tp,Card.IsSpell,1-tp,LOCATION_DECK,0,1,1,nil)
+	Duel.SendtoGrave(g,REASON_EFFECT)
 end

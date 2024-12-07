@@ -2,7 +2,7 @@
 --Crusadia Regulex
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Link Summon Procedure
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_EFFECT),2,2,s.lcheck)
 	--Gains ATK equal to the ATK of the monsters it points to
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
 	e2:SetTarget(s.atklimit)
 	c:RegisterEffect(e2)
-	--Search 1 "Crusadia" Actional/Trap
+	--Search 1 "Crusadia" Spell/Trap
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -54,7 +54,7 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.thcfilter,1,nil,tp,lg)
 end
 function s.thfilter(c,tp)
-	return c:IsSetCard(SET_CRUSADIA) and c:IsActionalTrap() and c:IsAbleToHand()
+	return c:IsSetCard(SET_CRUSADIA) and c:IsSpellTrap() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil,tp) end

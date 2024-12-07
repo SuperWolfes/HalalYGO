@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
 	e3:SetProperty(EFFECT_FLAG_SET_AVAILABLE+EFFECT_FLAG_IGNORE_RANGE+EFFECT_FLAG_IGNORE_IMMUNE)
-	e3:SetCode(EFFECT_TO_REST_REDIRECT)
+	e3:SetCode(EFFECT_TO_GRAVE_REDIRECT)
 	e3:SetRange(LOCATION_SZONE)
 	e3:SetTargetRange(0,LOCATION_ALL)
 	e3:SetCondition(s.rmcon)
@@ -62,6 +62,6 @@ end
 function s.rmtg(e,c)
 	local tp=e:GetHandlerPlayer()
 	return c:GetOwner()==1-tp and Duel.IsPlayerCanRemove(tp,c) and c:GetReasonPlayer()==1-tp
-		and (c:GetReason()&(REASON_RELEASE|REASON_LOCKED)==(REASON_RELEASE|REASON_LOCKED)
+		and (c:GetReason()&(REASON_RELEASE|REASON_RITUAL)==(REASON_RELEASE|REASON_RITUAL)
 		or c:IsReason(REASON_FUSION|REASON_SYNCHRO|REASON_LINK))
 end

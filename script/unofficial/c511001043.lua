@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	Pendulum.AddProcedure(c)
 	--scale change
 	local e2=Effect.CreateEffect(c)
-	e2:SetCategory(CATEGORY_TOREST)
+	e2:SetCategory(CATEGORY_TOGRAVE)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e2:SetRange(LOCATION_PZONE)
@@ -28,14 +28,14 @@ function s.sccon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp
 end
 function s.filter(c,lsc,rsc)
-	return c:IsFaceup() and c:IsAbleToRest() and (c:IsLevelBelow(lsc) or c:IsLevelBelow(rsc)) and c:IsSummonType(SUMMON_TYPE_PENDULUM)
+	return c:IsFaceup() and c:IsAbleToGrave() and (c:IsLevelBelow(lsc) or c:IsLevelBelow(rsc)) and c:IsSummonType(SUMMON_TYPE_PENDULUM)
 end
 function s.sctg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local lsc=e:GetHandler():GetLeftScale()*2
 	local rsc=e:GetHandler():GetRightScale()*2
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_MZONE,0,nil,lsc,rsc)
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,g,#g,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,g,#g,0,0)
 end
 function s.scop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -56,7 +56,7 @@ function s.scop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_MZONE,0,nil,lsc,rsc)
 	if #g>0 then
 		Duel.BreakEffect()
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	end
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)

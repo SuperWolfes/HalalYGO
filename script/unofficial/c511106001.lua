@@ -1,5 +1,5 @@
 --ハイドライブ・インパクト
---Hyddendrive Impact (Anime)
+--Hydradrive Impact (Anime)
 --scripted by Hatter
 
 local s,id=GetID()

@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Make this card's ATK/DEF become equal to a "Galaxy" monster's in your RP
+	--Make this card's ATK/DEF become equal to a "Galaxy" monster's in your GY
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_DEFCHANGE)
@@ -66,10 +66,10 @@ end
 function s.atkdeftg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
 	local atk,def=c:GetAttack(),c:GetDefense()
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.atkdeffilter(chkc,atk,def) end
-	if chk==0 then return Duel.IsExistingTarget(s.atkdeffilter,tp,LOCATION_REST,0,1,nil,atk,def) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.atkdeffilter(chkc,atk,def) end
+	if chk==0 then return Duel.IsExistingTarget(s.atkdeffilter,tp,LOCATION_GRAVE,0,1,nil,atk,def) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	Duel.SelectTarget(tp,s.atkdeffilter,tp,LOCATION_REST,0,1,1,nil,atk,def)
+	Duel.SelectTarget(tp,s.atkdeffilter,tp,LOCATION_GRAVE,0,1,1,nil,atk,def)
 end
 function s.atkdefop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

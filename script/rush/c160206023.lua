@@ -38,7 +38,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetDecktopGroup(tp,3)
 	local ft=math.min(Duel.GetMZoneCount(tp),2)
 	if ft>0 then
-		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
+		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
 		if g:IsExists(s.spfilter,1,nil,e,tp) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 			local tg=g:FilterSelect(tp,s.spfilter,1,ft,nil,e,tp)
@@ -48,5 +48,5 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 			end
 		end
 	end
-	Duel.SendtoRest(g,REASON_EFFECT|REASON_EXCAVATE)
+	Duel.SendtoGrave(g,REASON_EFFECT|REASON_EXCAVATE)
 end

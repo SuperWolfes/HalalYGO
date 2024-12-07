@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Xyz.AddProcedure(c,s.xyzfilter,nil,3,s.ovfilter,aux.Stringid(id,0),nil,s.xyzop,false,s.xyzcheck)
 	--xyz summon cannot be negated
 	local e2=Effect.CreateEffect(c)
@@ -53,7 +53,7 @@ function s.xyzcheck(g,tp,xyz)
 	return mg:GetClassCount(Card.GetRank)==1
 end
 function s.cfilter(c)
-	return c:IsSetCard(0x95) and c:GetType()==TYPE_ACTIONAL and c:IsDiscardable()
+	return c:IsSetCard(0x95) and c:GetType()==TYPE_SPELL and c:IsDiscardable()
 end
 function s.ovfilter(c,tp,lc)
 	return c:IsFaceup() and c:IsSetCard(0x107f,lc,SUMMON_TYPE_XYZ,tp)
@@ -63,7 +63,7 @@ function s.xyzop(e,tp,chk,mc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 	local tc=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_HAND,0,nil):SelectUnselect(Group.CreateGroup(),tp,false,Xyz.ProcCancellable)
 	if tc then
-		Duel.SendtoRest(tc,REASON_DISCARD+REASON_COST)
+		Duel.SendtoGrave(tc,REASON_DISCARD+REASON_COST)
 		return true
 	else return false end
 end

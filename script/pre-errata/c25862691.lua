@@ -1,8 +1,8 @@
 --エンシェント・フェアリー・ドラゴン (Pre-Errata)
---Ancient Wanderer Dragon (Pre-Errata)
+--Ancient Fairy Dragon (Pre-Errata)
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Synchro Summon procedure
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	--Special Summon 1 Level 4 or lower monster from your hand
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Destroy Field Actionals and gain LP
+	--Destroy Field Spells and gain LP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_DESTROY+CATEGORY_RECOVER+CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -66,7 +66,7 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
 function s.thfilter(c)
-	return c:IsFieldActional() and c:IsAbleToHand()
+	return c:IsFieldSpell() and c:IsAbleToHand()
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local dg=Duel.GetFieldGroup(0,LOCATION_FZONE,LOCATION_FZONE)

@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	-- Place in Actional/Trap Zone
+	-- Place in Spell/Trap Zone
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_IGNITION)
@@ -67,7 +67,7 @@ function s.splimit(e,c)
 	return not c:IsSetCard(0x17e) and not c:IsLocation(LOCATION_EXTRA)
 end
 function s.penfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x17e) and not c:IsUnliked()
+	return c:IsFaceup() and c:IsSetCard(0x17e) and not c:IsForbidden()
 end
 function s.sztg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -79,13 +79,13 @@ function s.szop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
 	local tc=Duel.SelectMatchingCard(tp,s.penfilter,tp,LOCATION_EXTRA,0,1,1,nil):GetFirst()
 	if tc and Duel.MoveToField(tc,tp,tp,LOCATION_SZONE,POS_FACEUP,true) then
-		-- Treat as Continuous Actional
+		-- Treat as Continuous Spell
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetCode(EFFECT_CHANGE_TYPE)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
-		e1:SetValue(TYPE_ACTIONAL+TYPE_CONTINUOUS)
+		e1:SetValue(TYPE_SPELL+TYPE_CONTINUOUS)
 		tc:RegisterEffect(e1)
 	end
 end

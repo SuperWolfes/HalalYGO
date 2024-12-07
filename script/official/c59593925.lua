@@ -35,7 +35,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:GetHandler():SetTurnCounter(0)
 end
 function s.cfilter(c)
-	return c:IsLocation(LOCATION_REST) and c:IsSetCard(0x57)
+	return c:IsLocation(LOCATION_GRAVE) and c:IsSetCard(0x57)
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	return r==REASON_SYNCHRO and eg:IsExists(s.cfilter,1,nil)

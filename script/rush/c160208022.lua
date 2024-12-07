@@ -1,5 +1,5 @@
 --獣楽鬼トランペット虎
---Trumpetiger the Nasheed Tainted
+--Trumpetiger the Music Fiend
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)

@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,6,2)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--atk/def
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3,false,REGISTER_FLAG_DETACH_XMAT)
 end
 function s.value(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsAttribute,0,LOCATION_REST,LOCATION_REST,nil,ATTRIBUTE_DARK)*200
+	return Duel.GetMatchingGroupCount(Card.IsAttribute,0,LOCATION_GRAVE,LOCATION_GRAVE,nil,ATTRIBUTE_DARK)*200
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
@@ -43,5 +43,5 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g2=Duel.GetDecktopGroup(1-tp,5)
 	g1:Merge(g2)
 	Duel.DisableShuffleCheck()
-	Duel.SendtoRest(g1,REASON_EFFECT)
+	Duel.SendtoGrave(g1,REASON_EFFECT)
 end

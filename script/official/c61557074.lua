@@ -1,5 +1,5 @@
 --霊神の聖殿
---Masjid of the Elemental Watchers
+--Temple of the Elemental Lords
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -46,7 +46,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x400d}
 function s.atkval(e,c)
-	local g=Duel.GetMatchingGroup(Card.IsMonster,e:GetHandlerPlayer(),LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(Card.IsMonster,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil)
 	return g:GetClassCount(Card.GetAttribute)*200
 end
 function s.thfilter(c)

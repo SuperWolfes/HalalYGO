@@ -1,5 +1,5 @@
 --沈黙の邪悪霊
---Dark Guardian of the Silent
+--Dark Spirit of the Silent
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

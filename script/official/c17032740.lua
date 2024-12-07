@@ -2,7 +2,7 @@
 --Elemental HERO Chaos Neos
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Fusion Summon Procedure
 	Fusion.AddProcMix(c,true,true,CARD_NEOS,43237273,17732278)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,s.splimit)

@@ -1,4 +1,4 @@
---Actional Spice Pepper
+--Spell Spice Pepper
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

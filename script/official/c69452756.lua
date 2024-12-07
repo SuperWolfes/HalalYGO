@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	e0:SetType(EFFECT_TYPE_ACTIVATE)
 	e0:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e0)
-	--Destroy 1 face-up Actional/Trap on the field
+	--Destroy 1 face-up Spell/Trap on the field
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DESTROY)
@@ -29,10 +29,10 @@ end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
 	local exc=not c:IsStatus(STATUS_EFFECT_ENABLED) and c or nil
-	if chkc then return chkc:IsOnField() and chkc:IsActionalTrap() and chkc:IsFaceup() and (not exc or chkc~=exc) end
-	if chk==0 then return Duel.IsExistingTarget(aux.FaceupFilter(Card.IsActionalTrap),tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,exc) end
+	if chkc then return chkc:IsOnField() and chkc:IsSpellTrap() and chkc:IsFaceup() and (not exc or chkc~=exc) end
+	if chk==0 then return Duel.IsExistingTarget(aux.FaceupFilter(Card.IsSpellTrap),tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,exc) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-	local g=Duel.SelectTarget(tp,aux.FaceupFilter(Card.IsActionalTrap),tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
+	local g=Duel.SelectTarget(tp,aux.FaceupFilter(Card.IsSpellTrap),tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,tp,0)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)

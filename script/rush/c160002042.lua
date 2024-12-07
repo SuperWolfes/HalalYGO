@@ -1,5 +1,5 @@
 --神風剣
---Blades of Mega Wind
+--Blades of Divine Wind
 --Scripted by Naim
 
 local s,id=GetID()

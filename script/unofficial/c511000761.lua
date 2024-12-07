@@ -1,4 +1,4 @@
---Ment King Horizon Star
+--Magic King Moon Star
 local s,id=GetID()
 function s.initial_effect(c)
 	--change lv

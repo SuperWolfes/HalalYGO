@@ -1,5 +1,5 @@
 --霊獣使いの長老
---Locked Beast Tamer Wise
+--Ritual Beast Tamer Elder
 local s,id=GetID()
 function s.initial_effect(c)
 	c:SetSPSummonOnce(id)

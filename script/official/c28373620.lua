@@ -5,11 +5,11 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before awaking
-	c:EnableAwakeLimit()
+	--Must be properly summoned before reviving
+	c:EnableReviveLimit()
 	--2 "Mysterune" monsters
 	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x180),2)
-	--If Special Summoned from the Extra Deck, add 1 "Mysterune" non-Quick-Play Actional from RP
+	--If Special Summoned from the Extra Deck, add 1 "Mysterune" non-Quick-Play Spell from GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND)
@@ -42,19 +42,19 @@ end
 	--Lists "Mysterune" archetype
 s.listed_series={0x180}
 
-	--Check for a non-Quick-Play "Mysterune" Actional
+	--Check for a non-Quick-Play "Mysterune" Spell
 function s.thfilter(c)
-	return c:IsSetCard(0x180) and not c:IsType(TYPE_QUICKPLAY) and c:IsActional() and c:IsAbleToHand()
+	return c:IsSetCard(0x180) and not c:IsType(TYPE_QUICKPLAY) and c:IsSpell() and c:IsAbleToHand()
 end
 	--Activation legality
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and s.thfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.thfilter,tp,LOCATION_REST,0,1,nil) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.thfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.thfilter,tp,LOCATION_GRAVE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,0,LOCATION_REST)
+	local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,0,LOCATION_GRAVE)
 end
-	--Add 1 "Mysterune" non-Quick-Play Actional from RP
+	--Add 1 "Mysterune" non-Quick-Play Spell from GY
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) then

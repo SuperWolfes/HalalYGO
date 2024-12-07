@@ -1,5 +1,5 @@
 --RUM－バリアンズ・フォース (Anime)
---Rank-Up-Ment Barian's Fcoree (Anime)
+--Rank-Up-Magic Barian's Force (Anime)
 Duel.LoadScript("c420.lua")
 Duel.EnableUnofficialProc(PROC_CANNOT_BATTLE_INDES)
 local s,id=GetID()
@@ -47,7 +47,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummon(sc,SUMMON_TYPE_XYZ,tp,tp,false,false,POS_FACEUP)
 		sc:CompleteProcedure()
 		local c=e:GetHandler()
-		--Negate battle inmismatching
+		--Negate battle indestruction
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_FIELD)
 		e1:SetCode(EFFECT_CANNOT_BATTLE_INDES)
@@ -92,7 +92,7 @@ function s.detop(e,tp,eg,ep,ev,re,r,rp)
 	if tc:IsRelateToEffect(e) and tc:IsFaceup() and sc then
 		local og=tc:GetOverlayGroup()
 		if #og==0 then return end
-		if Duel.SendtoRest(og,REASON_EFFECT)>0 then
+		if Duel.SendtoGrave(og,REASON_EFFECT)>0 then
 			Duel.Overlay(sc,og)
 			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetType(EFFECT_TYPE_SINGLE)

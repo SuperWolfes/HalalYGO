@@ -2,8 +2,8 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
-	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_TAINTED),1,1,Synchro.NonTunerEx(Card.IsRace,RACE_TAINTED),1,99)
-	c:EnableAwakeLimit()
+	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_FIEND),1,1,Synchro.NonTunerEx(Card.IsRace,RACE_FIEND),1,99)
+	c:EnableReviveLimit()
 	--disable spsummon
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetTargetRange(1,1)
 	e1:SetTarget(s.splimit)
 	c:RegisterEffect(e1)
-	--send to rest
+	--send to grave
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_DESTROY+CATEGORY_DAMAGE)

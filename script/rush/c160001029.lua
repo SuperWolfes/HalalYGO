@@ -1,5 +1,5 @@
 --ジャンク・ブレイカー
---Taintedish Commander Yameruler
+--Fiendish Commander Yameruler
 local s,id=GetID()
 function s.initial_effect(c)
 	--disable

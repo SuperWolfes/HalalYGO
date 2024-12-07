@@ -32,52 +32,52 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.filter(c,e,tp,m)
 	local cd=c:GetCode()
-	if cd~=44665365 or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_LOCKED,tp,true,false) then return false end
+	if cd~=44665365 or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,false) then return false end
 	if m:IsContains(c) then
 		m:RemoveCard(c)
-		result=m:CheckWithSumEqual(Card.GetLockedLevel,c:GetLevel(),1,99,c)
+		result=m:CheckWithSumEqual(Card.GetRitualLevel,c:GetLevel(),1,99,c)
 		m:AddCard(c)
 	else
-		result=m:CheckWithSumEqual(Card.GetLockedLevel,c:GetLevel(),1,99,c)
+		result=m:CheckWithSumEqual(Card.GetRitualLevel,c:GetLevel(),1,99,c)
 	end
 	return result
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
-		local mg=Duel.GetLockedMaterial(tp)
+		local mg=Duel.GetRitualMaterial(tp)
 		return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND,0,1,nil,e,tp,mg)
 	end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local mg=Duel.GetLockedMaterial(tp)
+	local mg=Duel.GetRitualMaterial(tp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local tg=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_HAND,0,1,1,nil,e,tp,mg)
 	if #tg>0 then
 		local tc=tg:GetFirst()
 		mg:RemoveCard(tc)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
-		local mat=mg:SelectWithSumEqual(tp,Card.GetLockedLevel,tc:GetLevel(),1,99,tc)
+		local mat=mg:SelectWithSumEqual(tp,Card.GetRitualLevel,tc:GetLevel(),1,99,tc)
 		tc:SetMaterial(mat)
-		Duel.ReleaseLockedMaterial(mat)
+		Duel.ReleaseRitualMaterial(mat)
 		Duel.BreakEffect()
-		Duel.SpecialSummon(tc,SUMMON_TYPE_LOCKED,tp,tp,true,false,POS_FACEUP)
+		Duel.SpecialSummon(tc,SUMMON_TYPE_RITUAL,tp,tp,true,false,POS_FACEUP)
 		tc:CompleteProcedure()
 		e:SetLabelObject(tc)
 		Duel.RaiseSingleEvent(e:GetHandler(),id,e,0,tp,tp,0)
 	end
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsLocation(LOCATION_REST) and e:GetHandler():IsAbleToRemove() end
+	if chk==0 then return e:GetHandler():IsLocation(LOCATION_GRAVE) and e:GetHandler():IsAbleToRemove() end
 	Duel.Remove(e:GetHandler(),POS_FACEUP,REASON_COST)
 end
 function s.thfilter(c)
-	return c:IsLocation(LOCATION_REST) and c:IsAbleToHand()
+	return c:IsLocation(LOCATION_GRAVE) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local tc=e:GetLabelObject():GetLabelObject()
 	local mat=tc:GetMaterial()
-	if chkc then return chkc:IsLocation(LOCATION_REST) and mat:IsContains(chkc) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and mat:IsContains(chkc) end
 	if chk==0 then return mat:IsExists(s.thfilter,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RTOHAND)
 	local g=mat:FilterSelect(tp,s.thfilter,1,1,nil)

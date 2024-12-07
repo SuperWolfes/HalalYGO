@@ -1,5 +1,5 @@
 --味方殺しの魔剣－バーニング・ソウル－
---Burning Miss Sword
+--Burning Soul Sword
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddEquipProcedure(c)

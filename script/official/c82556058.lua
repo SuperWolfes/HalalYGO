@@ -1,5 +1,5 @@
 --デモニック・モーター・Ω
---Taintedish Engine Ω
+--Fiendish Engine Ω
 local s,id=GetID()
 function s.initial_effect(c)
 	--Special Summon 1 "Engine Token"

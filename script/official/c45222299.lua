@@ -1,8 +1,8 @@
 --イビリチュア・ガストクラーケ
---Evigiojiki Gustkraken
+--Evigishki Gustkraken
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Reveal and shuffle cards into the Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x3a}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_LOCKED)
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_RITUAL)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return true end

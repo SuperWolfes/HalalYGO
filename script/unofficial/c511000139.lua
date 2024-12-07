@@ -1,5 +1,5 @@
 --不死のワーウルフ
---Toxic Werewolf
+--Zombie Werewolf
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_REST)
+	return e:GetHandler():IsLocation(LOCATION_GRAVE)
 end
 function s.filter(c,e,tp)
 	return c:IsCode(e:GetHandler():GetCode()) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

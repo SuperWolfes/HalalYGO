@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,false,false,97023549,11460577)
 	--Cannot be destroyed by battle
 	local e1=Effect.CreateEffect(c)

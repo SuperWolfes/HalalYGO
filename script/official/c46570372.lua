@@ -1,5 +1,5 @@
 -- 鎮魂の決闘
--- Battle of Sleeping Guardians
+-- Battle of Sleeping Spirits
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -22,14 +22,14 @@ function s.spfilter(c,e,tp,turn)
 end
 function s.cansummon(e,p,turn)
 	return Duel.GetLocationCount(p,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(s.spfilter,p,LOCATION_REST,0,1,nil,e,p,turn)
+		and Duel.IsExistingMatchingCard(s.spfilter,p,LOCATION_GRAVE,0,1,nil,e,p,turn)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		local turn=Duel.GetTurnCount()
 		return s.cansummon(e,tp,turn) or s.cansummon(e,1-tp,turn)
 	end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,PLAYER_ALL,LOCATION_REST)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,PLAYER_ALL,LOCATION_GRAVE)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local turn_p=Duel.GetTurnPlayer()
@@ -40,7 +40,7 @@ end
 function s.spsummon(e,p,turn,tp)
 	if not s.cansummon(e,p,turn) or not Duel.SelectYesNo(p,aux.Stringid(id,1)) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local tc=Duel.SelectMatchingCard(p,s.spfilter,p,LOCATION_REST,0,1,1,nil,e,p,turn):GetFirst()
+	local tc=Duel.SelectMatchingCard(p,s.spfilter,p,LOCATION_GRAVE,0,1,1,nil,e,p,turn):GetFirst()
 	if tc and Duel.SpecialSummon(tc,0,p,p,false,false,POS_FACEUP_ATTACK)>0
 		and p==tp and tc:IsCode(CARD_NEOS) then
 		-- Double ATK during Damage Step

@@ -1,5 +1,5 @@
 --幻影騎士団ダーク・ガントレット
---The Illusion Knights of Dark Gauntlet (Manga)
+--The Phantom Knights of Dark Gauntlet (Manga)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -47,5 +47,5 @@ function s.atkcon(e)
 	return Duel.GetAttackTarget() and e:GetHandler()==Duel.GetAttackTarget()
 end
 function s.atkval(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsSetCard,e:GetHandlerPlayer(),LOCATION_REST,0,nil,0x10db)*300
+	return Duel.GetMatchingGroupCount(Card.IsSetCard,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil,0x10db)*300
 end

@@ -1,5 +1,5 @@
 --霊子エネルギー固定装置
---Spilocked Energy Settle Machine
+--Spiritual Energy Settle Machine
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -7,14 +7,14 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--Guardian monsters do not return to the hand
+	--Spirit monsters do not return to the hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
-	e2:SetCode(EFFECT_GUARDIAN_DONOT_RETURN)
+	e2:SetCode(EFFECT_SPIRIT_DONOT_RETURN)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
 	c:RegisterEffect(e2)
-	--Return all Guardian monsters to the hand
+	--Return all Spirit monsters to the hand
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e3:SetCode(EVENT_LEAVE_FIELD)
@@ -31,9 +31,9 @@ function s.initial_effect(c)
 	e4:SetOperation(s.mtop)
 	c:RegisterEffect(e4)
 end
-s.listed_card_types={TYPE_GUARDIAN}
+s.listed_card_types={TYPE_SPIRIT}
 function s.levop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsType,TYPE_GUARDIAN),tp,LOCATION_MZONE,LOCATION_MZONE,nil)
+	local g=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsType,TYPE_SPIRIT),tp,LOCATION_MZONE,LOCATION_MZONE,nil)
 	if #g>0 then
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 	end

@@ -1,5 +1,5 @@
 --魔法吸収 (Anime)
---Actional Absorption (Anime)
+--Spell Absorption (Anime)
 Duel.EnableUnofficialProc(PROC_STATS_CHANGED)
 local s,id=GetID()
 function s.initial_effect(c)
@@ -19,7 +19,7 @@ function s.cfilter(c,tp)
 	return c:IsFaceup() and c:IsControler(1-tp) and c:GetAttack()~=val
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return eg:IsExists(s.cfilter,1,nil,tp) and re and re:IsActiveType(TYPE_ACTIONAL)
+	return eg:IsExists(s.cfilter,1,nil,tp) and re and re:IsActiveType(TYPE_SPELL)
 end
 function s.diffilter1(c,g)
 	local dif=0

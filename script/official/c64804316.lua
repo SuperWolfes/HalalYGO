@@ -1,5 +1,5 @@
 --ゴーストリック・セイレーン
---Missrick Siren
+--Ghostrick Siren
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	--Mill 2 cards
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
-	e3:SetCategory(CATEGORY_TOREST+CATEGORY_DECKDES+CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_POSITION)
+	e3:SetCategory(CATEGORY_TOGRAVE+CATEGORY_DECKDES+CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_POSITION)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e3:SetCode(EVENT_SUMMON_SUCCESS)
 	e3:SetTarget(s.gytg)
@@ -53,19 +53,19 @@ end
 function s.gytg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local g=Duel.GetDecktopGroup(tp,2)
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,g,#g,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,g,#g,tp,LOCATION_DECK)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_POSITION,nil,1,1-tp,LOCATION_MZONE)
 end
 function s.thfilter(c)
-	return c:IsSetCard(0x8d) and c:IsActionalTrap() and c:IsAbleToHand()
+	return c:IsSetCard(0x8d) and c:IsSpellTrap() and c:IsAbleToHand()
 end
 function s.posfilter(c)
 	return c:IsFaceup() and c:IsType(TYPE_EFFECT) and c:IsCanTurnSet()
 end
 function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.DiscardDeck(tp,2,REASON_EFFECT)~=2 then return end
-	local og=Duel.GetOperatedGroup():Match(Card.IsSetCard,nil,0x8d):Match(Card.IsLocation,nil,LOCATION_REST)
+	local og=Duel.GetOperatedGroup():Match(Card.IsSetCard,nil,0x8d):Match(Card.IsLocation,nil,LOCATION_GRAVE)
 	if #og==0 then return end
 	local g1=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_DECK,0,nil)
 	local g2=Duel.GetMatchingGroup(s.posfilter,tp,0,LOCATION_MZONE,0,nil)

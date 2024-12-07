@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcCodeFun(c,30860696,46232525,1,true,true)
 	aux.AddEquipProcedure(c)
 	--Hermos Cannon Blast!

@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	--
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
-	e2:SetCategory(CATEGORY_TOREST)
+	e2:SetCategory(CATEGORY_TOGRAVE)
 	e2:SetType(EFFECT_TYPE_TRIGGER_O+EFFECT_TYPE_FIELD)
 	e2:SetRange(LOCATION_FZONE)
 	e2:SetCode(EVENT_PHASE+PHASE_END)
@@ -66,21 +66,21 @@ function s.confilter(c)
 end
 function s.effcon(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetTurnPlayer()~=tp then return false end
-	local g=Duel.GetMatchingGroup(s.confilter,tp,LOCATION_REST+LOCATION_ONFIELD,0,nil)
+	local g=Duel.GetMatchingGroup(s.confilter,tp,LOCATION_GRAVE+LOCATION_ONFIELD,0,nil)
 	return g:GetClassCount(Card.GetCode)>=e:GetLabel()
 end
 function s.filter1(c)
-	return c:IsSetCard(0x107a) and c:IsAbleToRest()
+	return c:IsSetCard(0x107a) and c:IsAbleToGrave()
 end
 function s.target1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter1,tp,LOCATION_DECK,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
 end
 function s.operation1(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.filter1,tp,LOCATION_DECK,0,1,1,nil)
-	Duel.SendtoRest(g,REASON_EFFECT)
+	Duel.SendtoGrave(g,REASON_EFFECT)
 end
 function s.filter2(c,e,tp)
 	return  c:IsSetCard(0x107a) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -112,10 +112,10 @@ function s.thfilter(c)
 	return c:IsSetCard(0x107a) and c:IsMonster() and c:IsAbleToHand()
 end
 function s.target3(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.thfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.thfilter,tp,LOCATION_REST,0,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.thfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.thfilter,tp,LOCATION_GRAVE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,0,0)
 end
 function s.operation3(e,tp,eg,ep,ev,re,r,rp)
@@ -127,7 +127,7 @@ function s.operation3(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.condition4(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetTurnPlayer()~=tp then return false end
-	local g=Duel.GetMatchingGroup(s.confilter,tp,LOCATION_REST+LOCATION_ONFIELD,0,nil)
+	local g=Duel.GetMatchingGroup(s.confilter,tp,LOCATION_GRAVE+LOCATION_ONFIELD,0,nil)
 	return g:GetClassCount(Card.GetCode)==12
 end
 function s.target4(e,tp,eg,ep,ev,re,r,rp,chk)

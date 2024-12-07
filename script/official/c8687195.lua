@@ -1,5 +1,5 @@
 --幻影の妖精
---Dreamrise
+--Dreamsprite
 local s,id=GetID()
 function s.initial_effect(c)
 	--change attack target

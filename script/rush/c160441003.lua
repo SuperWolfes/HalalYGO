@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMixN(c,true,true,CARD_GALACTICA_OBLIVION,1,s.matfilter,2)
 	-- Mill and gain atk
 	local e1=Effect.CreateEffect(c)
@@ -26,7 +26,7 @@ function s.tdfilter(c)
 	return c:IsMonster() and c:IsRace(RACE_GALAXY) and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST,0,5,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_GRAVE,0,5,nil) end
 end
 function s.mltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeck(tp,3) end
@@ -35,7 +35,7 @@ end
 function s.mlop(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local td=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_REST,0,5,5,nil)
+	local td=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_GRAVE,0,5,5,nil)
 	if #td==0 then return end
 	Duel.HintSelection(td,true)
 	if Duel.SendtoDeck(td,nil,SEQ_DECKSHUFFLE,REASON_COST)~=5 then return end
@@ -52,7 +52,7 @@ function s.mlop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetValue(s.efilter)
 	e1:SetReset(RESETS_STANDARD_PHASE_END)
 	c:RegisterEffect(e1)
-	local ct=Duel.GetMatchingGroupCount(Card.IsMonster,tp,LOCATION_REST,0,nil)
+	local ct=Duel.GetMatchingGroupCount(Card.IsMonster,tp,LOCATION_GRAVE,0,nil)
 	if ct>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		--Gain ATK
 		local e2=Effect.CreateEffect(c)

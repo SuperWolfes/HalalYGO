@@ -1,25 +1,25 @@
 --進化合獣ヒュードラゴン
---Poly-Chemicritter Hyddengon
+--Poly-Chemicritter Hydragon
 local s,id=GetID()
 function s.initial_effect(c)
-	Dual.AddProcedure(c)
-	--Increast ATK/DEF of 1 Dual monster
+	Gemini.AddProcedure(c)
+	--Increast ATK/DEF of 1 Gemini monster
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_ATKCHANGE)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_SUMMON_SUCCESS)
 	e1:SetRange(LOCATION_MZONE)
-	e1:SetCondition(Dual.EffectStatusCondition)
+	e1:SetCondition(Gemini.EffectStatusCondition)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
-	--Replace mismatching of a Dual monster(s)
+	--Replace destruction of a Gemini monster(s)
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EFFECT_DESTROY_REPLACE)
 	e2:SetRange(LOCATION_MZONE)
-	e2:SetCondition(Dual.EffectStatusCondition)
+	e2:SetCondition(Gemini.EffectStatusCondition)
 	e2:SetTarget(s.reptg)
 	e2:SetValue(s.repval)
 	e2:SetOperation(s.repop)
@@ -27,7 +27,7 @@ function s.initial_effect(c)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tc=eg:GetFirst()
-	if chk==0 then return tc:IsType(TYPE_DUAL) and tc~=e:GetHandler() end
+	if chk==0 then return tc:IsType(TYPE_GEMINI) and tc~=e:GetHandler() end
 	Duel.SetTargetCard(tc)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
@@ -51,7 +51,7 @@ function s.desfilter(c,e,tp)
 end
 function s.repfilter(c,tp)
 	return c:IsFaceup() and c:IsControler(tp) and c:IsLocation(LOCATION_MZONE)
-		and c:IsType(TYPE_DUAL) and c:IsReason(REASON_EFFECT) and not c:IsReason(REASON_REPLACE)
+		and c:IsType(TYPE_GEMINI) and c:IsReason(REASON_EFFECT) and not c:IsReason(REASON_REPLACE)
 end
 function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

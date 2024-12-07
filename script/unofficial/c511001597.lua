@@ -64,7 +64,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		if tc:IsAbleToHand() then 
 			Duel.SendtoHand(tc,nil,REASON_EFFECT)
 		else
-			Duel.SendtoRest(tc,REASON_EFFECT)
+			Duel.SendtoGrave(tc,REASON_EFFECT)
 		end
 		e:GetHandler():ResetFlagEffect(id)
 	else

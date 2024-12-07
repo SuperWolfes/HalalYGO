@@ -16,9 +16,9 @@ function s.condition(e)
 	return Duel.IsExistingMatchingCard(Card.IsCode,e:GetHandler():GetControler(),LOCATION_MZONE,0,1,nil,57116033)
 end
 function s.cfilter(c,e,tp)
-	if not c:IsCode(57116033) or not c:IsAbleToRestAsCost() then return false end
+	if not c:IsCode(57116033) or not c:IsAbleToGraveAsCost() then return false end
 	local ct=c:GetSequence()<5 and 1 or 0
-	local g=Duel.GetMatchingGroup(s.costfilter,tp,LOCATION_MZONE+LOCATION_REST,0,c)
+	local g=Duel.GetMatchingGroup(s.costfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,c)
 	return #g>2 and aux.SelectUnselectGroup(g,e,tp,3,3,aux.ChkfMMZ(1-ct),0)
 end
 function s.costfilter(c)
@@ -26,12 +26,12 @@ function s.costfilter(c)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>-1 and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil,e,tp) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local tg=Duel.SelectMatchingCard(tp,s.cfilter1,tp,LOCATION_MZONE,0,1,1,nil)
 	local ct=tg:GetFirst():GetSequence()<5 and 1 or 0
-	local g=Duel.GetMatchingGroup(s.costfilter,tp,LOCATION_MZONE+LOCATION_REST,0,tg)
+	local g=Duel.GetMatchingGroup(s.costfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,tg)
 	local sg=aux.SelectUnselectGroup(g,e,tp,3,3,aux.ChkfMMZ(1-ct),1,tp,HINTMSG_TOREMOVE)
-	Duel.SendtoRest(tg,REASON_COST)
+	Duel.SendtoGrave(tg,REASON_COST)
 	Duel.Remove(sg,POS_FACEUP,REASON_COST)
 end
 function s.filter(c,e,tp)

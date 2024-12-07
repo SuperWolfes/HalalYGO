@@ -2,7 +2,7 @@
 --Borreload Dragon
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Link Summon procedure
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_EFFECT),3)
 	--Cannot be targeted by monster effects
@@ -80,10 +80,10 @@ function s.ctop(e,tp,eg,ep,ev,re,r,rp)
 	local zone=c:GetLinkedZone()&ZONES_MMZ
 	if Duel.GetControl(tc,tp,0,0,zone) then
 		local turn_ct=Duel.GetTurnCount()
-		--Send it to the RP during the End Phase of the next turn
+		--Send it to the GY during the End Phase of the next turn
 		aux.DelayedOperation(tc,PHASE_END,id,e,tp,
 			function(ag)
-				Duel.SendtoRest(ag,REASON_EFFECT)
+				Duel.SendtoGrave(ag,REASON_EFFECT)
 			end,
 			function()
 				return Duel.GetTurnCount()==turn_ct+1

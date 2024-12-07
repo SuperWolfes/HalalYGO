@@ -1,5 +1,5 @@
 --スタック・リバイバー
---Stack Awaker
+--Stack Reviver
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon
@@ -19,7 +19,7 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return r==REASON_LINK
 end
 function s.spfilter(c,e,tp)
-	return c:IsLocation(LOCATION_REST) and c:IsControler(tp) and c:IsLevelBelow(4) and c:IsRace(RACE_CYBERSE)
+	return c:IsLocation(LOCATION_GRAVE) and c:IsControler(tp) and c:IsLevelBelow(4) and c:IsRace(RACE_CYBERSE)
 		and c:IsCanBeEffectTarget(e) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

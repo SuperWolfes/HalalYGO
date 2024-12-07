@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,7,3)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--spsummon limit
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 end
 s.illegal=true
 function s.spfilter(c)
-	return c:IsRace(RACE_MENTOR)
+	return c:IsRace(RACE_SPELLCASTER)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local g=e:GetHandler():GetMaterial()

@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e3:SetTargetRange(1,0)
 	e3:SetValue(99)
 	c:RegisterEffect(e3)
-	--rest to hand
+	--grave to hand
 	local e4=Effect.CreateEffect(c)
 	e4:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
@@ -66,7 +66,7 @@ function s.initial_effect(c)
 	local e10=Effect.CreateEffect(c)
 	e10:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e10:SetType(EFFECT_TYPE_SINGLE)
-	e10:SetCode(EFFECT_CANNOT_TO_REST)
+	e10:SetCode(EFFECT_CANNOT_TO_GRAVE)
 	c:RegisterEffect(e10)
 	local e11=e10:Clone()
 	e11:SetCode(EFFECT_CANNOT_TO_HAND)
@@ -160,7 +160,7 @@ function s.stop(e)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetTurnPlayer()~=tp then return end
-	local g=Duel.GetMatchingGroup(nil,tp,LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(nil,tp,LOCATION_GRAVE,0,nil)
 	if #g>0 then
 		Duel.Hint(HINT_CARD,0,id)
 		Duel.SendtoHand(g,nil,REASON_RULE)
@@ -198,7 +198,7 @@ end
 function s.banop(e,tp,eg,ep,ev,re,r,rp)
 	local g=eg:Filter(s.banfilter,nil,tp)
 	if #g>0 then
-		Duel.SendtoRest(g,r+REASON_DESTROY+REASON_RETURN)
+		Duel.SendtoGrave(g,r+REASON_DESTROY+REASON_RETURN)
 	end
 end
 function s.repfilter(c,tp)

@@ -1,5 +1,5 @@
 --連撃の帝王
---Escalation of the Moppars
+--Escalation of the Monarchs
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

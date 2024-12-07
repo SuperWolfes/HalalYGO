@@ -3,11 +3,11 @@
 --Logical Nonsense
 local s,id=GetID()
 function s.initial_effect(c)
-	--Place itself in the Actional & Trap Zone as a Continuous Actional
+	--Place itself in the Spell & Trap Zone as a Continuous Spell
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
-	e1:SetCode(EFFECT_TO_REST_REDIRECT_CB)
+	e1:SetCode(EFFECT_TO_GRAVE_REDIRECT_CB)
 	e1:SetCondition(s.repcon)
 	e1:SetOperation(s.repop)
 	c:RegisterEffect(e1)
@@ -30,7 +30,7 @@ function s.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_IGNITION)
 	e3:SetRange(LOCATION_SZONE)
 	e3:SetCountLimit(1,{id,1})
-	e3:SetCondition(function(e) return e:GetHandler():IsContinuousActional() end)
+	e3:SetCondition(function(e) return e:GetHandler():IsContinuousSpell() end)
 	e3:SetCost(aux.bfgcost)
 	e3:SetTarget(s.spthtg)
 	e3:SetOperation(s.spthop)
@@ -43,12 +43,12 @@ function s.repcon(e)
 end
 function s.repop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	--Treated as a Continuous Actional
+	--Treated as a Continuous Spell
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e1:SetCode(EFFECT_CHANGE_TYPE)
-	e1:SetValue(TYPE_ACTIONAL|TYPE_CONTINUOUS)
+	e1:SetValue(TYPE_SPELL|TYPE_CONTINUOUS)
 	e1:SetReset(RESET_EVENT|RESETS_STANDARD&~RESET_TURN_SET)
 	c:RegisterEffect(e1)
 	Duel.RaiseEvent(c,EVENT_CUSTOM+47408488,e,0,tp,0,0)

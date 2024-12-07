@@ -16,7 +16,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x3b}
 function s.cfilter(c)
-	return c:IsSetCard(0x3b) and c:GetLevel()==7 and c:IsAbleToRestAsCost()
+	return c:IsSetCard(0x3b) and c:GetLevel()==7 and c:IsAbleToGraveAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end
@@ -27,10 +27,10 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetTargetPlayer(tp)
 	Duel.SetTargetParam(2)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,2)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
 end
 function s.tgfilter(c)
-	return c:IsSetCard(0x3b) and c:GetLevel()==7 and c:IsAbleToRest()
+	return c:IsSetCard(0x3b) and c:GetLevel()==7 and c:IsAbleToGrave()
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
@@ -38,8 +38,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.tgfilter,p,LOCATION_DECK,0,nil)
 	if dr~=0 and #g>0 and Duel.SelectYesNo(p,aux.Stringid(id,0)) then
 		Duel.BreakEffect()
-		Duel.Hint(HINT_SELECTMSG,p,HINTMSG_TOREST)
+		Duel.Hint(HINT_SELECTMSG,p,HINTMSG_TOGRAVE)
 		local sg=g:Select(p,1,1,nil)
-		Duel.SendtoRest(sg,REASON_EFFECT)
+		Duel.SendtoGrave(sg,REASON_EFFECT)
 	end
 end

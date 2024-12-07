@@ -1,5 +1,5 @@
 --霊獣の継聖
---Locked Beast Inheritance
+--Ritual Beast Inheritance
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--Monsters your opponent controls lose 200 ATK for each different Type "Locked Beast" monster you control
+	--Monsters your opponent controls lose 200 ATK for each different Type "Ritual Beast" monster you control
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_UPDATE_ATTACK)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e2:SetTargetRange(0,LOCATION_MZONE)
 	e2:SetValue(s.atkvalue)
 	c:RegisterEffect(e2)
-	--Search 1 "Locked Beast" monster then discard 1 card
+	--Search 1 "Ritual Beast" monster then discard 1 card
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_HANDES)
@@ -41,17 +41,17 @@ function s.initial_effect(c)
 	e4:SetOperation(s.posop)
 	c:RegisterEffect(e4)
 end
-s.listed_series={SET_LOCKED_BEAST}
+s.listed_series={SET_RITUAL_BEAST}
 function s.atkvalue(e,c)
-	local g=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsSetCard,SET_LOCKED_BEAST),e:GetHandlerPlayer(),LOCATION_MZONE,0,nil)
+	local g=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsSetCard,SET_RITUAL_BEAST),e:GetHandlerPlayer(),LOCATION_MZONE,0,nil)
 	return -200*g:GetClassCount(Card.GetRace)
 end
 function s.cfilter(c,tp)
-	return c:IsSetCard(SET_LOCKED_BEAST) and c:IsMonster() and not c:IsPublic()
+	return c:IsSetCard(SET_RITUAL_BEAST) and c:IsMonster() and not c:IsPublic()
 		and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil,c:GetRace())
 end
 function s.thfilter(c,rac)
-	return c:IsSetCard(SET_LOCKED_BEAST) and c:IsMonster() and c:IsAbleToHand() and c:IsDifferentRace(rac)
+	return c:IsSetCard(SET_RITUAL_BEAST) and c:IsMonster() and c:IsAbleToHand() and c:IsDifferentRace(rac)
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil,tp) end

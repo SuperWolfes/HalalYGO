@@ -40,9 +40,9 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			e1:SetValue(-500)
 			e1:SetReset(RESETS_STANDARD_PHASE_END)
 			g:GetFirst():RegisterEffect(e1)
-			if Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
+			if Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-				local thg=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
+				local thg=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 				if #thg<1 then return end
 				Duel.BreakEffect()
 				Duel.SendtoHand(thg,nil,REASON_EFFECT)

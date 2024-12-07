@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.posconfilter(c,tp)
-	return c:IsFaceup() and c:IsSummonPlayer(1-tp) and c:IsSummonLocation(LOCATION_REST|LOCATION_HAND)
+	return c:IsFaceup() and c:IsSummonPlayer(1-tp) and c:IsSummonLocation(LOCATION_GRAVE|LOCATION_HAND)
 end
 function s.poscon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.posconfilter,1,nil,tp)

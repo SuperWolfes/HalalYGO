@@ -39,7 +39,7 @@ function s.recop(e,tp,eg,ep,ev,re,r,rp)
 		local e2=e1:Clone()
 		e2:SetCode(EFFECT_CANNOT_DISABLE_SPSUMMON)
 		Duel.RegisterEffect(e2,p)
-		--Cannot negate activation of Actional/Trap/Monster effects to SS a monster
+		--Cannot negate activation of Spell/Trap/Monster effects to SS a monster
 		local e3=Effect.CreateEffect(c)
 		e3:SetType(EFFECT_TYPE_FIELD)
 		e3:SetCode(EFFECT_CANNOT_INACTIVATE)
@@ -47,7 +47,7 @@ function s.recop(e,tp,eg,ep,ev,re,r,rp)
 		e3:SetValue(s.efilter)
 		e3:SetReset(RESET_PHASE+PHASE_END)
 		Duel.RegisterEffect(e3,p)
-		--Set Actional/Traps cannot be destroyed or targeted 
+		--Set Spell/Traps cannot be destroyed or targeted 
 		local e4=Effect.CreateEffect(c)
 		e4:SetType(EFFECT_TYPE_FIELD)
 		e4:SetProperty(EFFECT_FLAG_SET_AVAILABLE)
@@ -67,7 +67,7 @@ end
 function s.efilter(e,ct)
 	local p=Duel.GetTurnPlayer()
 	local te,tp=Duel.GetChainInfo(ct,CHAININFO_TRIGGERING_EFFECT,CHAININFO_TRIGGERING_PLAYER)
-	return p==tp and te:IsHasCategory(CATEGORY_SPECIAL_SUMMON) and te:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP+TYPE_MONSTER)
+	return p==tp and te:IsHasCategory(CATEGORY_SPECIAL_SUMMON) and te:IsActiveType(TYPE_SPELL+TYPE_TRAP+TYPE_MONSTER)
 end
 function s.tgvalue(e,re,rp)
 	return rp==1-e:GetHandlerPlayer()

@@ -1,12 +1,12 @@
 --熾天の騎士ガイアプロミネンス
---Bia Prominence, the Fierce Fcoree
+--Gaia Prominence, the Fierce Force
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Fusion Materials
 	Fusion.AddProcMix(c,true,true,9709452,s.matfilter)
-	--Negate an opponent's monster effect in the hand or RP
+	--Negate an opponent's monster effect in the hand or GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DISABLE+CATEGORY_DESTROY)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.distg)
 	e1:SetOperation(s.disop)
 	c:RegisterEffect(e1)
-	--Special Summon 1 FIRE monster from your RP
+	--Special Summon 1 FIRE monster from your GY
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -32,14 +32,14 @@ function s.initial_effect(c)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
 end
-s.listed_names={9709452} --Bia Blaze, the Fcoree of the Sun
-s.pulse_synchro_fusion=true
+s.listed_names={9709452} --Gaia Blaze, the Force of the Sun
+s.miracle_synchro_fusion=true
 function s.matfilter(c,fc,sumtype,tp)
 	return c:IsOnField() and c:IsFaceup() and c:IsControler(tp)
 end
 function s.discon(e,tp,eg,ep,ev,re,r,rp)
 	local act_loc=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_LOCATION)
-	return ep==1-tp and re:IsMonsterEffect() and (act_loc==LOCATION_HAND or act_loc==LOCATION_REST) and Duel.IsChainNegatable(ev)
+	return ep==1-tp and re:IsMonsterEffect() and (act_loc==LOCATION_HAND or act_loc==LOCATION_GRAVE) and Duel.IsChainNegatable(ev)
 end
 function s.cfilter(c)
 	return c:IsMonster() and c:IsDiscardable()
@@ -65,11 +65,11 @@ function s.spfilter(c,e,tp)
 	return c:IsAttribute(ATTRIBUTE_FIRE) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp) end
+		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp)
+	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)

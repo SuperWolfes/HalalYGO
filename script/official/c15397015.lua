@@ -55,10 +55,10 @@ function s.sumlimit(e,se,sp,st,pos,tp)
 	return Duel.GetFieldGroupCount(sp,LOCATION_MZONE,0)==0
 end
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_FUSION+TYPE_LOCKED+TYPE_SYNCHRO+TYPE_XYZ+TYPE_PENDULUM+TYPE_LINK)
+	return c:IsFaceup() and c:IsType(TYPE_FUSION+TYPE_RITUAL+TYPE_SYNCHRO+TYPE_XYZ+TYPE_PENDULUM+TYPE_LINK)
 end
 function s.typecount(c)
-	return c:GetType()&TYPE_FUSION+TYPE_LOCKED+TYPE_SYNCHRO+TYPE_XYZ+TYPE_PENDULUM+TYPE_LINK
+	return c:GetType()&TYPE_FUSION+TYPE_RITUAL+TYPE_SYNCHRO+TYPE_XYZ+TYPE_PENDULUM+TYPE_LINK
 end
 function s.aclimit1(e,tp,eg,ep,ev,re,r,rp)
 	if ep==1-tp or not re:IsActiveType(TYPE_MONSTER) then return end

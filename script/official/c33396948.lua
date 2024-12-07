@@ -1,5 +1,5 @@
 --封印されしエクゾディア
---Exdude the Unliked One
+--Exodia the Forbidden One
 local s,id=GetID()
 function s.initial_effect(c)
 	--win
@@ -37,13 +37,13 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local wntp=s.check(g2)
 	if wtp and not wntp then
 		Duel.ConfirmCards(1-tp,g1)
-		Duel.Win(tp,WIN_REASON_EXDUDE)
+		Duel.Win(tp,WIN_REASON_EXODIA)
 	elseif not wtp and wntp then
 		Duel.ConfirmCards(tp,g2)
-		Duel.Win(1-tp,WIN_REASON_EXDUDE)
+		Duel.Win(1-tp,WIN_REASON_EXODIA)
 	elseif wtp and wntp then
 		Duel.ConfirmCards(1-tp,g1)
 		Duel.ConfirmCards(tp,g2)
-		Duel.Win(PLAYER_NONE,WIN_REASON_EXDUDE)
+		Duel.Win(PLAYER_NONE,WIN_REASON_EXODIA)
 	end
 end

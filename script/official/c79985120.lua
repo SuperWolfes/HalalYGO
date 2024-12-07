@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_WINGEDBEAST),6,3,s.ovfilter,aux.Stringid(id,0),3,s.xyzop)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--atkup
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,1))
@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
-	e2:SetCode(EVENT_TO_REST)
+	e2:SetCode(EVENT_TO_GRAVE)
 	e2:SetCondition(s.spcon)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
@@ -31,7 +31,7 @@ end
 s.listed_series={0x95,0xba}
 s.listed_names={81927732}
 function s.cfilter(c)
-	return c:IsSetCard(0x95) and c:IsActional() and c:IsDiscardable()
+	return c:IsSetCard(0x95) and c:IsSpell() and c:IsDiscardable()
 end
 function s.ovfilter(c,tp,xyzc)
 	return c:IsFaceup() and c:IsSetCard(0xba,xyzc,SUMMON_TYPE_XYZ,tp) and c:IsType(TYPE_XYZ,xyzc,SUMMON_TYPE_XYZ,tp) and c:IsRankBelow(5)
@@ -41,7 +41,7 @@ function s.xyzop(e,tp,chk,mc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 	local tc=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_HAND,0,nil):SelectUnselect(Group.CreateGroup(),tp,false,Xyz.ProcCancellable)
 	if tc then
-		Duel.SendtoRest(tc,REASON_DISCARD+REASON_COST)
+		Duel.SendtoGrave(tc,REASON_DISCARD+REASON_COST)
 		return true
 	else return false end
 end

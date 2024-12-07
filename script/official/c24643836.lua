@@ -1,5 +1,5 @@
 --おジャマジック
---Ojament
+--Ojamagic
 local s,id=GetID()
 function s.initial_effect(c)
 	--Add 1 each of "Ojama Green", "Ojama Yellow", and "Ojama Black" from your Deck to your hand
@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	e1:SetCode(EVENT_TO_REST)
+	e1:SetCode(EVENT_TO_GRAVE)
 	e1:SetCondition(function(e) return e:GetHandler():IsPreviousLocation(LOCATION_HAND|LOCATION_ONFIELD) end)
 	e1:SetTarget(s.thtg)
 	e1:SetOperation(s.thop)

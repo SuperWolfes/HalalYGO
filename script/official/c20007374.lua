@@ -34,7 +34,7 @@ function s.cfilter(c)
 	return c:IsType(TYPE_SYNCHRO) and c:IsRace(RACE_DRAGON)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_GRAVE,0,nil)
 	return g:GetClassCount(Card.GetCode)>=5
 end
 function s.filter(c,e,tp,rp)
@@ -76,7 +76,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummonComplete()
 		tc:CompleteProcedure()
 	else
-		c:CancelToRest(false)
+		c:CancelToGrave(false)
 	end
 end
 function s.eqlimit(e,c)
@@ -97,7 +97,7 @@ function s.atkfilter(c)
 	return s.cfilter(c) and c:GetAttack()>0
 end
 function s.atkval(e,c)
-	local g=Duel.GetMatchingGroup(s.atkfilter,e:GetHandlerPlayer(),LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(s.atkfilter,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil)
 	return g:GetSum(Card.GetAttack)
 end
 function s.cacon(e,tp,eg,ep,ev,re,r,rp)
@@ -108,9 +108,9 @@ function s.cafilter(c)
 	return s.cfilter(c) and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
 end
 function s.cacost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cafilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,e:GetHandler():GetEquipTarget()) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cafilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,e:GetHandler():GetEquipTarget()) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.cafilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,1,e:GetHandler():GetEquipTarget())
+	local g=Duel.SelectMatchingCard(tp,s.cafilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,e:GetHandler():GetEquipTarget())
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.catg(e,tp,eg,ep,ev,re,r,rp,chk)

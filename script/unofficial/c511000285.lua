@@ -1,11 +1,11 @@
---Egyptian Monster Slime 
+--Egyptian God Slime 
 --ジェムナイト·ジルコニア
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,26905245,31709826)
-	--Awakal
+	--Revival
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e1:SetCode(EVENT_BATTLE_DESTROYED)
@@ -41,7 +41,7 @@ end
 s.listed_names={26905245}
 s.material_setcode=0x54b
 function s.regcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_REST) and e:GetHandler():IsReason(REASON_BATTLE)
+	return e:GetHandler():IsLocation(LOCATION_GRAVE) and e:GetHandler():IsReason(REASON_BATTLE)
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RaiseSingleEvent(e:GetHandler(),id,e,r,rp,e:GetHandler():GetPreviousControler(),0)

@@ -45,7 +45,7 @@ function s.cfilter(c,tp)
 	return c:IsPreviousLocation(LOCATION_SZONE) and c:IsPreviousControler(tp) and c:IsMonster()
 end
 function s.stfilter(c)
-	return c:IsType(TYPE_TRAP+TYPE_ACTIONAL) and c:IsSSetable()
+	return c:IsType(TYPE_TRAP+TYPE_SPELL) and c:IsSSetable()
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,tp) and Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)==0 and Duel.GetTurnPlayer()==1-tp and Duel.IsMainPhase()

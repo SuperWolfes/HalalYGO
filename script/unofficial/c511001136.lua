@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c)
-	return c:IsActional() and c:IsAbleToRestAsCost()
+	return c:IsSpell() and c:IsAbleToGraveAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRemoveAsCost,tp,LOCATION_DECK,0,5,nil) end
@@ -21,11 +21,11 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingTarget(Card.IsExistingMatchingCard,tp,0,LOCATION_REST,1,nil) end
+	if chk==0 then return Duel.IsExistingTarget(Card.IsExistingMatchingCard,tp,0,LOCATION_GRAVE,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,0,LOCATION_REST,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,0,LOCATION_GRAVE,1,1,nil)
 	if #g>0 then
 		Duel.SendtoHand(g,tp,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)

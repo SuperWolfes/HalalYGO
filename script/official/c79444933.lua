@@ -22,14 +22,14 @@ function s.damcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Release(g,REASON_COST)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAttribute,tp,LOCATION_REST,0,1,nil,ATTRIBUTE_FIRE) end
-	local dam=Duel.GetMatchingGroupCount(Card.IsAttribute,tp,LOCATION_REST,0,nil,ATTRIBUTE_FIRE)*100
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAttribute,tp,LOCATION_GRAVE,0,1,nil,ATTRIBUTE_FIRE) end
+	local dam=Duel.GetMatchingGroupCount(Card.IsAttribute,tp,LOCATION_GRAVE,0,nil,ATTRIBUTE_FIRE)*100
 	Duel.SetTargetPlayer(1-tp)
 	Duel.SetTargetParam(dam)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,0,0,1-tp,dam)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
-	local dam=Duel.GetMatchingGroupCount(Card.IsAttribute,tp,LOCATION_REST,0,nil,ATTRIBUTE_FIRE)*100
+	local dam=Duel.GetMatchingGroupCount(Card.IsAttribute,tp,LOCATION_GRAVE,0,nil,ATTRIBUTE_FIRE)*100
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
 	Duel.Damage(p,dam,REASON_EFFECT)
 end

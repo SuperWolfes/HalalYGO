@@ -1,8 +1,8 @@
 -- 相剣大邪－七星龍淵
--- Swordmiss Sinister Sovereign - Qixing Longyuan
+-- Swordsoul Sinister Sovereign - Qixing Longyuan
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Synchro Summon procedure
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTunerEx(Card.IsRace,RACE_WYRM),1,99)
 	--Draw 1 card when a Wyrm monster is Synchro Summoned
@@ -43,7 +43,7 @@ function s.initial_effect(c)
 	e2a:SetLabelObject(e2)
 	e2a:SetOperation(s.regop)
 	c:RegisterEffect(e2a)
-	--Banish Actional/Trap and inflict 1200 Damage
+	--Banish Spell/Trap and inflict 1200 Damage
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetCategory(CATEGORY_REMOVE+CATEGORY_DAMAGE)
@@ -111,7 +111,7 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.rmcon2(e,tp,eg,ep,ev,re,r,rp)
-	return ep==1-tp and re:IsActionalTrapEffect() and re:GetHandler():IsRelateToEffect(re)
+	return ep==1-tp and re:IsSpellTrapEffect() and re:GetHandler():IsRelateToEffect(re)
 end
 function s.rmtg2(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return re:GetHandler():IsAbleToRemove() end

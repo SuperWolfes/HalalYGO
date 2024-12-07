@@ -49,11 +49,11 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetReset(RESET_EVENT+RESETS_STANDARD)
 		c:RegisterEffect(e2)
 	else
-		c:CancelToRest(false)
+		c:CancelToGrave(false)
 	end
 end
 function s.refcon(e,re,val,r,rp,rc)
-	return r&REASON_EFFECT~=0 and re:IsActiveType(TYPE_ACTIONAL) and val==e:GetHandler():GetEquipTarget():GetBaseAttack()
+	return r&REASON_EFFECT~=0 and re:IsActiveType(TYPE_SPELL) and val==e:GetHandler():GetEquipTarget():GetBaseAttack()
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetHandler():GetFirstCardTarget()

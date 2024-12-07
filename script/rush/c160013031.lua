@@ -33,8 +33,8 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetReset(RESETS_STANDARD_PHASE_END)
 	c:RegisterEffect(e1)
 	--gy recover
-	local sg=Duel.GetMatchingGroup(s.sfilter,tp,LOCATION_REST,0,nil)
-	if Duel.GetMatchingGroupCount(s.filter,tp,LOCATION_REST,0,nil)>4 and
+	local sg=Duel.GetMatchingGroup(s.sfilter,tp,LOCATION_GRAVE,0,nil)
+	if Duel.GetMatchingGroupCount(s.filter,tp,LOCATION_GRAVE,0,nil)>4 and
 		#sg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.BreakEffect()
 		local tg=aux.SelectUnselectGroup(sg,1,tp,1,2,s.rescon,1,tp)

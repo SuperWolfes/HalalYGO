@@ -20,14 +20,14 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return ep==1-tp
 end
 function s.cosfilter(c,e,tp)
-	return c:IsCode(511310107) and c:IsAbleToRestAsCost()
+	return c:IsCode(511310107) and c:IsAbleToGraveAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToRestAsCost()
+	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost()
 	 and Duel.IsExistingMatchingCard(s.cosfilter,tp,LOCATION_ONFIELD,0,1,nil) end
 	local tc=Duel.SelectMatchingCard(tp,s.cosfilter,tp,LOCATION_ONFIELD,0,1,1,nil)
 	tc:AddCard(e:GetHandler())
-	Duel.SendtoRest(tc,REASON_COST)
+	Duel.SendtoGrave(tc,REASON_COST)
 end
 function s.filter(c,e,tp)
 	return c:IsCode(60417395) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

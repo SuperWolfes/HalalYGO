@@ -3,10 +3,10 @@
 --scripted by Rundas
 local s,id=GetID()
 function s.initial_effect(c)
-	--To Rest
+	--To Grave
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_TOREST+CATEGORY_SPECIAL_SUMMON)
+	e1:SetCategory(CATEGORY_TOGRAVE+CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetCountLimit(1,id)
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,3))
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCost(aux.bfgcost)
 	e2:SetTarget(s.lvtg)
@@ -27,17 +27,17 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_STARDUST_DRAGON}
 s.listed_series={0xa3}
---To Rest
+--To Grave
 function s.ssfilter(c)
 	return c:IsFaceup() and (c:IsCode(CARD_STARDUST_DRAGON) or (c:ListsCode(CARD_STARDUST_DRAGON) and c:IsType(TYPE_SYNCHRO)))
 end
 function s.tgfilter(c,e,tp,ss,mz)
-	return c:IsMonster() and c:IsSetCard(0xa3) and (c:IsAbleToRest() or (ss and mz and c:IsCanBeSpecialSummoned(e,0,tp,false,false)))
+	return c:IsMonster() and c:IsSetCard(0xa3) and (c:IsAbleToGrave() or (ss and mz and c:IsCanBeSpecialSummoned(e,0,tp,false,false)))
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ss,mz=Duel.IsExistingMatchingCard(s.ssfilter,tp,LOCATION_MZONE,0,1,nil),Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil,e,tp,ss,mz) end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
@@ -48,7 +48,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 		if ss and mz and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 			Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 		else
-			Duel.SendtoRest(g,REASON_EFFECT)
+			Duel.SendtoGrave(g,REASON_EFFECT)
 		end
 	end
 end

@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon 1 monster that cannot be Normal Summoned/Set and mentions "Max Metalmorph" from your hand/Deck/RP
+	--Special Summon 1 monster that cannot be Normal Summoned/Set and mentions "Max Metalmorph" from your hand/Deck/GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_EQUIP)
@@ -19,7 +19,7 @@ end
 s.listed_names={CARD_MAX_METALMORPH}
 function s.costfilter(c,e,tp)
 	return c:IsFaceup() and Duel.GetMZoneCount(tp,c)>0
-		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK|LOCATION_REST,0,1,nil,e,tp,c:GetLevel(),c:GetRace())
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK|LOCATION_GRAVE,0,1,nil,e,tp,c:GetLevel(),c:GetRace())
 end
 function s.spfilter(c,e,tp,cost_lv,cost_race)
 	if not (c:IsMonster() and not c:IsSummonableCard() and c:ListsCode(CARD_MAX_METALMORPH)) then return false end
@@ -41,11 +41,11 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		local res=e:GetLabel()==1 or (Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-			and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK|LOCATION_REST,0,1,nil,e,tp))
+			and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK|LOCATION_GRAVE,0,1,nil,e,tp))
 		e:SetLabel(0)
 		return res
 	end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND|LOCATION_DECK|LOCATION_REST)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND|LOCATION_DECK|LOCATION_GRAVE)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_EQUIP,e:GetHandler(),1,tp,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
@@ -53,11 +53,11 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local cost_lv,cost_race=e:GetLabel()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_HAND|LOCATION_DECK|LOCATION_REST,0,1,1,nil,e,tp,cost_lv,cost_race):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_HAND|LOCATION_DECK|LOCATION_GRAVE,0,1,1,nil,e,tp,cost_lv,cost_race):GetFirst()
 	if tc and Duel.SpecialSummon(tc,0,tp,tp,true,true,POS_FACEUP)>0 then
 		tc:CompleteProcedure()
 		if not (c:IsRelateToEffect(e) and Duel.SelectYesNo(tp,aux.Stringid(id,1))) then return end
-		c:CancelToRest(true)
+		c:CancelToGrave(true)
 		Duel.BreakEffect()
 		if not tc:EquipByEffectAndLimitRegister(e,tp,c,nil,true) then return end
 		--Equip limit
@@ -78,18 +78,18 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local e2=e1:Clone()
 		e2:SetCode(EFFECT_UPDATE_DEFENSE)
 		c:RegisterEffect(e2)
-		--The equipped monster cannot be destroyed by monster and Actional effects
+		--The equipped monster cannot be destroyed by monster and Spell effects
 		local e3=Effect.CreateEffect(c)
 		e3:SetType(EFFECT_TYPE_EQUIP)
 		e3:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
-		e3:SetValue(function(e,re,rc,c) return re:IsMonsterEffect() or re:IsActionalEffect() end)
+		e3:SetValue(function(e,re,rc,c) return re:IsMonsterEffect() or re:IsSpellEffect() end)
 		e3:SetReset(RESET_EVENT|RESETS_STANDARD)
 		c:RegisterEffect(e3)
-		--Your opponent cannot target the monster with monster and Actional effects
+		--Your opponent cannot target the monster with monster and Spell effects
 		local e4=e3:Clone()
 		e4:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
 		e4:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
-		e4:SetValue(function(e,re,rp) return rp==1-e:GetHandlerPlayer() and (re:IsMonsterEffect() or re:IsActionalEffect()) end)
+		e4:SetValue(function(e,re,rp) return rp==1-e:GetHandlerPlayer() and (re:IsMonsterEffect() or re:IsSpellEffect()) end)
 		c:RegisterEffect(e4)
 	end
 end

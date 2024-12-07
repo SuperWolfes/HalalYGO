@@ -24,7 +24,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	reset:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	reset:SetCode(EVENT_PHASE+PHASE_END)
 	reset:SetCountLimit(1)
-	reset:SetOperation(s.revetop)
+	reset:SetOperation(s.resetop)
 	reset:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(reset,tp)
 	for tc in aux.Next(hg) do
@@ -52,7 +52,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetOperation(s.hlvop(reset))
 	Duel.RegisterEffect(e2,tp)
 end
-function s.revetop(e,tp,eg,ep,ev,re,r,rp)
+function s.resetop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RaiseEvent(e:GetHandler(),id,e,0,0,0,0)
 end
 function s.clearcon(reset)

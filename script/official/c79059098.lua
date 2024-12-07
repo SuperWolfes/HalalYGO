@@ -1,5 +1,5 @@
 --プランキッズの大暴走
---Prank-Kids Panwardenium
+--Prank-Kids Pandemonium
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

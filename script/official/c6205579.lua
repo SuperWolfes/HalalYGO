@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e2:SetCode(id)
 	c:RegisterEffect(e2)
 	--special summon
-	local params = {nil,Fusion.OnFieldMat,nil,nil,Fusion.FcoreedHandler}
+	local params = {nil,Fusion.OnFieldMat,nil,nil,Fusion.ForcedHandler}
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)
@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.subcon(e)
-	return e:GetHandler():IsLocation(LOCATION_HAND+LOCATION_ONFIELD+LOCATION_REST)
+	return e:GetHandler():IsLocation(LOCATION_HAND+LOCATION_ONFIELD+LOCATION_GRAVE)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local ph=Duel.GetCurrentPhase()

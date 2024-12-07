@@ -1,4 +1,4 @@
---Black Feather Unclean Guard
+--Black Feather Cursed Guard
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

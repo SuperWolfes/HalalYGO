@@ -60,7 +60,7 @@ function s.negcon(e,tp,eg,ep,ev,re,r,rp)
 	return trig_loc&LOCATION_MZONE>0 and trig_typ&TYPE_MONSTER>0 and e:GetHandler():GetAttack()>trig_atk
 end
 function s.costfilter(c)
-	return c:IsSetCard(SET_RYU_GE) and c:IsContinuousActional() and c:IsFaceup() and c:IsAbleToDeckAsCost()
+	return c:IsSetCard(SET_RYU_GE) and c:IsContinuousSpell() and c:IsFaceup() and c:IsAbleToDeckAsCost()
 end
 function s.negcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_ONFIELD,0,1,nil) end

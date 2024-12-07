@@ -1,12 +1,12 @@
 --魔砲戦機ダルマ・カルマ
---Destructive Daruma Kaom Cannon
+--Destructive Daruma Karma Cannon
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_POSITION+CATEGORY_TOREST)
+	e1:SetCategory(CATEGORY_POSITION+CATEGORY_TOGRAVE)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetHintTiming(0,TIMINGS_CHECK_MONSTER_E)
@@ -20,7 +20,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_POSITION,g,#g,0,0)
 	local tg=Duel.GetMatchingGroup(aux.NOT(Card.IsCanTurnSet),tp,LOCATION_MZONE,LOCATION_MZONE,nil)
 	if #tg>0 then
-		Duel.SetOperationInfo(0,CATEGORY_TOREST,tg,#tg,0,0)
+		Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,tg,#tg,0,0)
 	end
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
@@ -32,10 +32,10 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		if #g1==0 and #g2==0 then return end
 		Duel.BreakEffect()
 		if #g1>0 then
-			Duel.SendtoRest(g1,REASON_RULE,PLAYER_NONE,turn_p)
+			Duel.SendtoGrave(g1,REASON_RULE,PLAYER_NONE,turn_p)
 		end
 		if #g2>0 then
-			Duel.SendtoRest(g2,REASON_RULE,PLAYER_NONE,1-turn_p)
+			Duel.SendtoGrave(g2,REASON_RULE,PLAYER_NONE,1-turn_p)
 		end
 	end
 end

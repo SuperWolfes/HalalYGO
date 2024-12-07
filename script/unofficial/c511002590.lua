@@ -1,5 +1,5 @@
 --RUM－レヴォリューション・フォース (Anime)
---Rank-Up-Ment Revolution Fcoree (Anime)
+--Rank-Up-Magic Revolution Force (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

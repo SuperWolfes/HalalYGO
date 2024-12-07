@@ -1,5 +1,5 @@
 --妖仙獣 鎌参太刀
---Yosakhi Kama 3
+--Yosenju Kama 3
 local s,id=GetID()
 function s.initial_effect(c)
 	--summon

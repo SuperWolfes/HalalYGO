@@ -1,11 +1,11 @@
 --クインテット・マジシャン
---Quintet Mentor
+--Quintet Magician
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableAwakeLimit()
-	Fusion.AddProcFunRep(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_MENTOR),5,true)
+	c:EnableReviveLimit()
+	Fusion.AddProcFunRep(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_SPELLCASTER),5,true)
 	--spsummon condition
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -50,7 +50,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e7)
 end
 function s.valcheck(e,c)
-	local g=c:GetMaterial():Filter(Card.IsRace,nil,RACE_MENTOR)
+	local g=c:GetMaterial():Filter(Card.IsRace,nil,RACE_SPELLCASTER)
 	if g:GetClassCount(Card.GetCode)==5 then e:GetLabelObject():SetLabel(1) end
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)

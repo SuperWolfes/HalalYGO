@@ -1,9 +1,9 @@
 --ガイストーチ・ゴーレム
---Geist Grinder Gopal
+--Geist Grinder Golem
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	--Can only Special Summon "Geist Grinder Gopal" once per turn
+	--Can only Special Summon "Geist Grinder Golem" once per turn
 	c:SetSPSummonOnce(id)
 	--Special Summon this card to your opponent's field
 	local e1=Effect.CreateEffect(c)
@@ -33,7 +33,7 @@ function s.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e3:SetProperty(EFFECT_FLAG_DELAY,EFFECT_FLAG2_CHECK_SIMULTANEOUS)
 	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
-	e3:SetRange(LOCATION_REST)
+	e3:SetRange(LOCATION_GRAVE)
 	e3:SetCondition(s.gspcon)
 	e3:SetTarget(s.gsptg)
 	e3:SetOperation(s.gspop)

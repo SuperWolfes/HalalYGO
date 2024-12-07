@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_DAMAGE)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	e2:SetCode(EVENT_TO_REST)
+	e2:SetCode(EVENT_TO_GRAVE)
 	e2:SetCondition(s.damcon)
 	e2:SetTarget(s.damtg)
 	e2:SetOperation(s.damop)
@@ -45,12 +45,12 @@ end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	Duel.SetTargetPlayer(1-tp)
-	local dam=Duel.GetMatchingGroupCount(s.filter,tp,LOCATION_REST,0,nil)*500
+	local dam=Duel.GetMatchingGroupCount(s.filter,tp,LOCATION_GRAVE,0,nil)*500
 	Duel.SetTargetParam(dam)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,500)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
-	local dam=Duel.GetMatchingGroupCount(s.filter,tp,LOCATION_REST,0,nil)*500
+	local dam=Duel.GetMatchingGroupCount(s.filter,tp,LOCATION_GRAVE,0,nil)*500
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
 	Duel.Damage(p,dam,REASON_EFFECT)
 end

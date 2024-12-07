@@ -1,5 +1,5 @@
 --ＷＷ－ブリザード・ベル
---Windmint - Blizzard Bell
+--Windwitch - Blizzard Bell
 --Logical Nonsense
 
 --Substitute ID
@@ -29,12 +29,12 @@ function s.initial_effect(c)
 	e2:SetCountLimit(1,id)
 	c:RegisterEffect(e2)
 end
-	--Lists “Windmint" archetype
+	--Lists “Windwitch" archetype
 s.listed_series={0xf0}
 	--Specifically lists itself
 s.listed_names={id}
 
-	--Check for non-"Windmint" monster
+	--Check for non-"Windwitch" monster
 function s.filter(c)
 	return c:IsFacedown() or not c:IsSetCard(0xf0)
 end
@@ -47,14 +47,14 @@ end
 	--Send itself as cost
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToRestAsCost() end
-	Duel.SendtoRest(c,REASON_COST)
+	if chk==0 then return c:IsAbleToGraveAsCost() end
+	Duel.SendtoGrave(c,REASON_COST)
 end
-	--Check if player controls a "Windmint" monster other than this card's name
+	--Check if player controls a "Windwitch" monster other than this card's name
 function s.cfilter(c)
 	return c:IsSetCard(0xf0) and c:IsFaceup() and not c:IsCode(id)
 end
-	--Check if it's opponent's main phase and player controls a "Windmint" monster other than this card's name
+	--Check if it's opponent's main phase and player controls a "Windwitch" monster other than this card's name
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil) and Duel.GetTurnPlayer()~=tp and Duel.IsMainPhase()
 end

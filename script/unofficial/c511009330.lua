@@ -24,11 +24,11 @@ function s.cfilter(c)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.crfilter,tp,LOCATION_MZONE,0,1,nil,tp) 
-		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,LOCATION_REST,1,nil) end
+		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	local rg=Duel.SelectMatchingCard(tp,s.crfilter,tp,LOCATION_MZONE,0,1,1,nil,tp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SELECT)
-	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_REST,LOCATION_REST,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,1,nil)
 	Duel.Remove(rg,POS_FACEUP,REASON_COST)
 	Duel.Overlay(e:GetHandler(),g)
 end

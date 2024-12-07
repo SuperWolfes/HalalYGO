@@ -25,10 +25,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.filter1(c,e)
-	return c:IsMonster() and c:IsCanBeFusionMaterial() and c:IsAbleToRest() and not c:IsImmuneToEffect(e)
+	return c:IsMonster() and c:IsCanBeFusionMaterial() and c:IsAbleToGrave() and not c:IsImmuneToEffect(e)
 end
 function s.filter2(c,m)
-	return c:IsType(TYPE_FUSION) and c:CheckFusionMaterial(m) and not c:IsUnliked()
+	return c:IsType(TYPE_FUSION) and c:CheckFusionMaterial(m) and not c:IsForbidden()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
@@ -55,7 +55,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			tc:SetMaterial(mat)
 			tc=fg:GetNext()
 		end
-		Duel.SendtoRest(mat,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
+		Duel.SendtoGrave(mat,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
 		--special summon
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
@@ -88,7 +88,7 @@ function s.procop(e,tp,eg,ep,ev,re,r,rp)
 		local tc=Duel.SelectMatchingCard(tp,s.procfilter,tp,LOCATION_EXTRA,0,1,1,nil,code,e,tp):GetFirst()
 		if not tc then return end
 		if Duel.GetLocationCountFromEx(tp)<=0 then
-			Duel.SendtoRest(tc,REASON_EFFECT)
+			Duel.SendtoGrave(tc,REASON_EFFECT)
 			tc:CompleteProcedure()
 		else
 			Duel.SpecialSummon(tc,SUMMON_TYPE_FUSION,tp,tp,false,false,POS_FACEUP)

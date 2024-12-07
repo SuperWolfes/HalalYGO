@@ -1,5 +1,5 @@
 --水霊使いエリア
---Eria the Water Chaumer
+--Eria the Water Charmer
 local s,id=GetID()
 function s.initial_effect(c)
 	--flip

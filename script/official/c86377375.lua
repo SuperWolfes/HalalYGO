@@ -29,7 +29,7 @@ s.listed_names={59160188}
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsDiscardable() end
-	Duel.SendtoRest(c,REASON_COST+REASON_DISCARD)
+	Duel.SendtoGrave(c,REASON_COST+REASON_DISCARD)
 end
 function s.thfilter1(c)
 	return c:IsCode(59160188) and c:IsAbleToHand()

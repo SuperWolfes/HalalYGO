@@ -2,7 +2,7 @@
 --マイケル・ローレンス・ディーによってスクリプト
 --Scripted by MLD, credit to TPD & Cybercatman
 --Updated and currently maintained by Larry126
-Duel.EnableUnofficialProc(PROC_MEGA_HIERARCHY,PROC_RA_DEFUSION)
+Duel.EnableUnofficialProc(PROC_DIVINE_HIERARCHY,PROC_RA_DEFUSION)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Summon With 3 Tributes
@@ -16,11 +16,11 @@ function s.initial_effect(c)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetCondition(function(e) return e:GetHandler():IsSummonType(SUMMON_TYPE_SPECIAL) end)
 	c:RegisterEffect(e3)
-	--Protection
+	--Resurrection
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e4:SetCode(EVENT_SPSUMMON_SUCCESS)
-	e4:SetCondition(function(e) return e:GetHandler():IsPreviousLocation(LOCATION_REST) end)
+	e4:SetCondition(function(e) return e:GetHandler():IsPreviousLocation(LOCATION_GRAVE) end)
 	e4:SetTarget(s.immortal)
 	c:RegisterEffect(e4)
 	--Stats when Normal Summoned
@@ -35,7 +35,7 @@ function s.initial_effect(c)
 	e6:SetOperation(function() e5:SetLabel(1) end)
 	c:RegisterEffect(e6)
 end
---Protection
+--Resurrection
 function s.immortal(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local op=Duel.SelectEffect(tp,
@@ -242,11 +242,11 @@ function s.dirop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 -------------------------------------------
---Monster Bird
+--God Phoenix
 function s.egpop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsFaceup() then
-		--Treated as Monster Bird
+		--Treated as God Phoenix
 		local e0=Effect.CreateEffect(c)
 		e0:SetType(EFFECT_TYPE_SINGLE)
 		e0:SetCode(EFFECT_CHANGE_CODE)
@@ -269,7 +269,7 @@ function s.egpop(e,tp,eg,ep,ev,re,r,rp)
 		c:RegisterEffect(e2)
 		local e3=e1:Clone()
 		e3:SetCode(EFFECT_CANNOT_BE_MATERIAL)
-		e3:SetValue(aux.cannotmatfilter(SUMMON_TYPE_FUSION,SUMMON_TYPE_LOCKED))
+		e3:SetValue(aux.cannotmatfilter(SUMMON_TYPE_FUSION,SUMMON_TYPE_RITUAL))
 		c:RegisterEffect(e3)
 		local e4=Effect.CreateEffect(c)
 		e4:SetType(EFFECT_TYPE_SINGLE)
@@ -277,10 +277,10 @@ function s.egpop(e,tp,eg,ep,ev,re,r,rp)
 		e4:SetValue(1)
 		e4:SetReset(RESET_EVENT|RESETS_STANDARD|RESET_PHASE|PHASE_END)
 		c:RegisterEffect(e4)
-		--Send to Resting Place
+		--Send to Graveyard
 		local e5=Effect.CreateEffect(c)
 		e5:SetDescription(aux.Stringid(id,4))
-		e5:SetCategory(CATEGORY_TOREST)
+		e5:SetCategory(CATEGORY_TOGRAVE)
 		e5:SetType(EFFECT_TYPE_QUICK_O)
 		e5:SetCode(EVENT_FREE_CHAIN)
 		e5:SetProperty(EFFECT_FLAG_CARD_TARGET)
@@ -301,12 +301,12 @@ function s.imfilter(e,te)
 	local c=e:GetOwner()
 	return (c:GetDestination()>0 and c:GetReasonEffect()==te)
 		or (s.leaveChk(c,CATEGORY_TOHAND) or s.leaveChk(c,CATEGORY_DESTROY) or s.leaveChk(c,CATEGORY_REMOVE)
-		or s.leaveChk(c,CATEGORY_TODECK) or s.leaveChk(c,CATEGORY_RELEASE) or s.leaveChk(c,CATEGORY_TOREST))
+		or s.leaveChk(c,CATEGORY_TODECK) or s.leaveChk(c,CATEGORY_RELEASE) or s.leaveChk(c,CATEGORY_TOGRAVE))
 end
 function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return c:IsHasEffect(EFFECT_UNSTOPPABLE_ATTACK) or (not c:IsHasEffect(EFFECT_CANNOT_ATTACK_ANNOUNCE)
-		and not c:IsHasEffect(EFFECT_UNLIKED) and not c:IsHasEffect(EFFECT_CANNOT_ATTACK)
+		and not c:IsHasEffect(EFFECT_FORBIDDEN) and not c:IsHasEffect(EFFECT_CANNOT_ATTACK)
 		and not Duel.IsPlayerAffectedByEffect(tp,EFFECT_CANNOT_ATTACK_ANNOUNCE)
 		and not Duel.IsPlayerAffectedByEffect(tp,EFFECT_CANNOT_ATTACK))
 end
@@ -317,9 +317,9 @@ end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) and chkc~=e:GetHandler() end
 	if chk==0 then return Duel.IsExistingTarget(nil,tp,LOCATION_MZONE,LOCATION_MZONE,1,e:GetHandler()) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectTarget(tp,nil,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,e:GetHandler())
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,g,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,g,1,0,0)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -347,7 +347,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 		tc:RegisterEffect(e3,true)
 		Duel.AdjustInstantly(c)
 	end
-	Duel.SendtoRest(tc,REASON_EFFECT)
+	Duel.SendtoGrave(tc,REASON_EFFECT)
 	e:SetProperty(e:GetProperty()&~EFFECT_FLAG_IGNORE_IMMUNE)
 end
 -------------------------------------------

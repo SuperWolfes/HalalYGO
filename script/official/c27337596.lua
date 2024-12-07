@@ -1,9 +1,9 @@
 --聖刻龍王－アトゥムス
---Hieratic Dragon King of Atomo
+--Hieratic Dragon King of Atum
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before awaking
-	c:EnableAwakeLimit()
+	--Must be properly summoned before reviving
+	c:EnableReviveLimit()
 	--Xyz summon procedure
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_DRAGON),6,2)
 	--Special summon 1 dragon monster from deck

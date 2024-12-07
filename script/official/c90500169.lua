@@ -21,7 +21,7 @@ function s.tdfilter(c,e,tp)
 	if Duel.GetMZoneCount(owner,c,tp)<=0 then return false end
 	local class=c:GetMetatable(true)
 	return class and class.LVnum and class.LVset
-		and Duel.IsExistingMatchingCard(s.spfilter,owner,LOCATION_REST,0,1,nil,e,tp,owner,class.LVnum,class.LVset)
+		and Duel.IsExistingMatchingCard(s.spfilter,owner,LOCATION_GRAVE,0,1,nil,e,tp,owner,class.LVnum,class.LVset)
 end
 function s.spfilter(c,e,tp,owner,lvnum,lvset)
 	local class=c:GetMetatable(true)
@@ -34,7 +34,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
 	local tc=Duel.SelectTarget(tp,s.tdfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil,e,tp):GetFirst()
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,tc,1,tp,0)
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tc:GetOwner(),LOCATION_REST)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tc:GetOwner(),LOCATION_GRAVE)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
@@ -44,7 +44,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not (Duel.SendtoDeck(tc,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)>0 and tc:IsLocation(LOCATION_DECK|LOCATION_EXTRA)
 		and Duel.GetLocationCount(owner,LOCATION_MZONE)>0 and class and class.LVnum and class.LVset) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,s.spfilter,owner,LOCATION_REST,0,1,1,nil,e,tp,owner,class.LVnum,class.LVset)
+	local g=Duel.SelectMatchingCard(tp,s.spfilter,owner,LOCATION_GRAVE,0,1,1,nil,e,tp,owner,class.LVnum,class.LVset)
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,owner,true,false,POS_FACEUP)
 	end

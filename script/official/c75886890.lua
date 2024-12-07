@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	e1:SetCategory(CATEGORY_EQUIP)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DELAY)
-	e1:SetCode(EVENT_TO_REST)
+	e1:SetCode(EVENT_TO_GRAVE)
 	e1:SetCondition(s.eqcon)
 	e1:SetCost(s.eqcost)
 	e1:SetTarget(s.eqtg)
@@ -61,19 +61,19 @@ function s.eqlimit(e,c)
 	return c:IsControler(tp)
 end
 function s.eqcost2(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
+	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
 	e:SetLabelObject(e:GetHandler():GetEquipTarget())
-	Duel.SendtoRest(e:GetHandler(),REASON_COST)
+	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
 end
 function s.filter2(c,ec)
 	return c:IsType(TYPE_EQUIP) and c:CheckEquipTarget(ec)
 end
 function s.eqtg2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local ec=e:GetHandler():GetEquipTarget()
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter2(chkc,ec) end
-	if chk==0 then return ec and Duel.IsExistingTarget(s.filter2,tp,LOCATION_REST,0,1,nil,ec) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter2(chkc,ec) end
+	if chk==0 then return ec and Duel.IsExistingTarget(s.filter2,tp,LOCATION_GRAVE,0,1,nil,ec) end
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,2))
-	Duel.SelectTarget(tp,s.filter2,tp,LOCATION_REST,0,1,1,nil,e:GetLabelObject())
+	Duel.SelectTarget(tp,s.filter2,tp,LOCATION_GRAVE,0,1,1,nil,e:GetLabelObject())
 	e:GetLabelObject():CreateEffectRelation(e)
 end
 function s.eqop2(e,tp,eg,ep,ev,re,r,rp)

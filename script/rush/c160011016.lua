@@ -20,7 +20,7 @@ function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsDefense,500),tp,LOCATION_MZONE,0,1,e:GetHandler())
 end
 function s.costfilter(c)
-	return c:IsDefense(500) and c:IsFaceup() and c:IsAbleToRestAsCost()
+	return c:IsDefense(500) and c:IsFaceup() and c:IsAbleToGraveAsCost()
 end
 function s.damcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_MZONE,0,1,nil) end
@@ -36,9 +36,9 @@ function s.atkfilter(c)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local rg=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_MZONE,0,1,1,nil)
-	if Duel.SendtoRest(rg,REASON_COST)==0 or not rg:GetFirst():IsLocation(LOCATION_REST) then return end
+	if Duel.SendtoGrave(rg,REASON_COST)==0 or not rg:GetFirst():IsLocation(LOCATION_GRAVE) then return end
 	--Effect
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
 	if Duel.Damage(p,d,REASON_EFFECT)>0 and Duel.IsExistingMatchingCard(aux.FilterMaximumSideFunctionEx(s.atkfilter),tp,0,LOCATION_MZONE,1,nil)

@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz Summon
 	Xyz.AddProcedure(c,nil,5,2)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Increase ATK and attach material
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -41,22 +41,22 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.gyfilter(c)
 	return (c:IsSetCard(0x70) or c:IsType(TYPE_XYZ)) and c:IsMonster()
-		and c:GetAttack()>0 and not c:IsUnliked()
+		and c:GetAttack()>0 and not c:IsForbidden()
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
 	if chk==0 then return Duel.IsExistingTarget(Card.IsFaceup,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil)
-		and Duel.IsExistingTarget(s.gyfilter,tp,LOCATION_REST,0,1,nil) end
+		and Duel.IsExistingTarget(s.gyfilter,tp,LOCATION_GRAVE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATKDEF)
 	local g1=Duel.SelectTarget(tp,Card.IsFaceup,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local g2=Duel.SelectTarget(tp,s.gyfilter,tp,LOCATION_REST,0,1,1,nil)
+	local g2=Duel.SelectTarget(tp,s.gyfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_ATKCHANGE,g1,1,0,0)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g2,1,0,LOCATION_REST)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g2,1,0,LOCATION_GRAVE)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local ex,g1=Duel.GetOperationInfo(0,CATEGORY_ATKCHANGE)
-	local ex,g2=Duel.GetOperationInfo(0,CATEGORY_LEAVE_REST)
+	local ex,g2=Duel.GetOperationInfo(0,CATEGORY_LEAVE_GRAVE)
 	local c=e:GetHandler()
 	local tc1,tc2=g1:GetFirst(),g2:GetFirst()
 	if tc1:IsRelateToEffect(e) and tc1:IsFaceup()
@@ -87,6 +87,6 @@ function s.distg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.NegateActivation(ev) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:GetHandler():IsRelateToEffect(re) then
-		Duel.SendtoRest(eg,REASON_EFFECT)
+		Duel.SendtoGrave(eg,REASON_EFFECT)
 	end
 end

@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	--Increase the ATK of 1 monster you control
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_DAMAGE+CATEGORY_TOREST)
+	e1:SetCategory(CATEGORY_DAMAGE+CATEGORY_TOGRAVE)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_CUSTOM+id)
 	e1:SetTarget(s.target)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e0:SetProperty(EFFECT_FLAG_SET_AVAILABLE)
-	e0:SetCode(EVENT_TO_REST)
+	e0:SetCode(EVENT_TO_GRAVE)
 	e0:SetRange(LOCATION_SZONE)
 	e0:SetLabelObject(e1)
 	e0:SetCondition(s.condition)
@@ -40,7 +40,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return ct>0 and Duel.IsMainPhase() and Duel.IsTurnPlayer(1-tp) end
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,ct*300)
 	if e:GetLabel()>0 then
-		Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,0,tp,1)
+		Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,0,tp,1)
 	end
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
@@ -48,7 +48,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ct=#dg
 	if ct>0 and Duel.Damage(1-tp,ct*300,REASON_EFFECT)>0 and e:GetLabel()>0 then
 		local g=dg:RandomSelect(tp,1)
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	end
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)

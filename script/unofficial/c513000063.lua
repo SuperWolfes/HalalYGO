@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz Summon
 	Xyz.AddProcedure(c,nil,5,3)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Rank Up Check
 	aux.EnableCheckRankUp(c,nil,nil,93568288)
 	--Cannot be destroyed by battle, except with "Number" monsters
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_INDESTRUCTABLE_BATTLE)
 	e1:SetValue(aux.NOT(aux.TargetBoolFunction(Card.IsSetCard,SET_NUMBER)))
 	c:RegisterEffect(e1)
-	--Banish cards from opponent's Monster or Actional/Trap Zones
+	--Banish cards from opponent's Monster or Spell/Trap Zones
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_REMOVE)
@@ -83,7 +83,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if not c:IsRelateToEffect(e) or c:IsFacedown() then return end
 	local tc=Duel.GetFirstTarget()
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 or tc:GetControler()~=tp or tc:IsFacedown() or not tc:IsRelateToEffect(e) then
-		Duel.SendtoRest(c,REASON_EFFECT)
+		Duel.SendtoGrave(c,REASON_EFFECT)
 		return
 	end
 	Duel.Equip(tp,c,tc,true)
@@ -132,12 +132,12 @@ end
 function s.repop(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	c:SetStatus(STATUS_DESTROY_CONFIRMED,false)
-	Duel.SendtoRest(c,REASON_EFFECT+REASON_REPLACE)
+	Duel.SendtoGrave(c,REASON_EFFECT+REASON_REPLACE)
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,2))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_IGNITION)
-	e1:SetRange(LOCATION_REST)
+	e1:SetRange(LOCATION_GRAVE)
 	e1:SetCost(s.spcost)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
@@ -148,7 +148,7 @@ function s.repop2(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if not c:IsStatus(STATUS_DESTROY_CONFIRMED)
 		and Duel.SelectEffectYesNo(tp,e:GetHandler()) then
-		Duel.SendtoRest(c,REASON_EFFECT+REASON_REPLACE)
+		Duel.SendtoGrave(c,REASON_EFFECT+REASON_REPLACE)
 		local cid=Duel.GetChainInfo(ev,CHAININFO_CHAIN_ID)
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_FIELD)
@@ -163,7 +163,7 @@ function s.repop2(e,tp,eg,ep,ev,re,r,rp,chk)
 		e2:SetDescription(aux.Stringid(id,2))
 		e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 		e2:SetType(EFFECT_TYPE_IGNITION)
-		e2:SetRange(LOCATION_REST)
+		e2:SetRange(LOCATION_GRAVE)
 		e2:SetCost(s.spcost)
 		e2:SetTarget(s.sptg)
 		e2:SetOperation(s.spop)
@@ -179,10 +179,10 @@ function s.refcon(e,re,val,r,rp,rc)
 	else return val end
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-	local sg=Duel.SelectMatchingCard(tp,Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,1,nil)
-	Duel.SendtoRest(sg,REASON_COST)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,nil) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	local sg=Duel.SelectMatchingCard(tp,Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,1,nil)
+	Duel.SendtoGrave(sg,REASON_COST)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

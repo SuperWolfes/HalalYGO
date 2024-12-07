@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	--gy
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_TOREST)
+	e1:SetCategory(CATEGORY_TOGRAVE)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_SUMMON_SUCCESS)
 	e1:SetProperty(EFFECT_FLAG_DELAY)
@@ -44,17 +44,17 @@ function s.initial_effect(c)
 end
 s.listed_names={44586427}
 function s.tgfilter(c)
-	return c:IsRace(RACE_THUNDER) and c:IsAbleToRest()
+	return c:IsRace(RACE_THUNDER) and c:IsAbleToGrave()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	end
 end
 function s.tkcon(e,tp,eg,ep,ev,re,r,rp)
@@ -73,20 +73,20 @@ function s.tkop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.nmfilter(c,cd)
-	return (c:IsFaceup() or c:IsLocation(LOCATION_REST)) and c:IsType(TYPE_EFFECT) 
+	return (c:IsFaceup() or c:IsLocation(LOCATION_GRAVE)) and c:IsType(TYPE_EFFECT) 
 		and c:IsOriginalSetCard(0x28) and not c:IsOriginalCode(cd)
 end
 function s.nmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local cd=e:GetHandler():GetCode()
-	if chkc then return chkc:IsLocation(LOCATION_MZONE+LOCATION_REST) and chkc:IsControler(tp) and s.nmfilter(chkc,cd) end
-	if chk==0 then return Duel.IsExistingTarget(s.nmfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,nil,cd) end
+	if chkc then return chkc:IsLocation(LOCATION_MZONE+LOCATION_GRAVE) and chkc:IsControler(tp) and s.nmfilter(chkc,cd) end
+	if chk==0 then return Duel.IsExistingTarget(s.nmfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil,cd) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	Duel.SelectTarget(tp,s.nmfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,1,nil,cd)
+	Duel.SelectTarget(tp,s.nmfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,nil,cd)
 end
 function s.nmop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
-	if c:IsRelateToEffect(e) and c:IsFaceup() and tc and tc:IsRelateToEffect(e) and (tc:IsLocation(LOCATION_REST) or tc:IsFaceup()) then
+	if c:IsRelateToEffect(e) and c:IsFaceup() and tc and tc:IsRelateToEffect(e) and (tc:IsLocation(LOCATION_GRAVE) or tc:IsFaceup()) then
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_CHANGE_CODE)

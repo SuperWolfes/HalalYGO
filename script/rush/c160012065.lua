@@ -1,5 +1,5 @@
 --ファントム・ロアー
---Illusion Roar
+--Phantom Roar
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -26,7 +26,7 @@ function s.costfilter(c)
 	return c:IsLevelAbove(5) and c:IsMonster() and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_REST,0,2,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_GRAVE,0,2,nil) end
 end
 function s.desfilter(c)
 	return c:IsFaceup() and c:IsMonster() and c:IsLevelBelow(8) and not c:IsMaximumModeSide()
@@ -38,7 +38,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_REST,0,2,2,nil)
+	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_GRAVE,0,2,2,nil)
 	Duel.HintSelection(g,true)
 	if Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_COST)<1 then return end
 	--Effect

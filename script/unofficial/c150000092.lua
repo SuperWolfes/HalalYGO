@@ -1,5 +1,5 @@
 --伏魔殿の螺暈崇
---Drowned Lance
+--Haunted Lance
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)

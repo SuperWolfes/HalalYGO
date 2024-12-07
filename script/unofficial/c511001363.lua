@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,7,3,nil,nil,99)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_XYZ_MATERIAL)
@@ -110,7 +110,7 @@ function s.copycost(oc)
 		Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,0))
 		local op=Duel.SelectEffect(tp,{a,aux.Stringid(id,1)},{b,aux.Stringid(id,2)})
 		if op==1 then
-			Duel.SendtoRest(oc,REASON_COST)
+			Duel.SendtoGrave(oc,REASON_COST)
 		else
 			Duel.PayLPCost(tp,400)
 		end

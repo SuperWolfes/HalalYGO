@@ -1,12 +1,12 @@
 --ギミック・パペット－キメラ・ドール
---Gimmick Puppet Chilean Doll
+--Gimmick Puppet Chimera Doll
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Link Summon Procedure
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_MACHINE),2,2)
-	--Take 1 "Gimmick Puppet" monster from your Deck, and either add it to your hand or send it to the RP
+	--Take 1 "Gimmick Puppet" monster from your Deck, and either add it to your hand or send it to the GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_DECKDES+CATEGORY_SPECIAL_SUMMON)
@@ -20,12 +20,12 @@ function s.initial_effect(c)
 end
 s.listed_series={SET_GIMMICK_PUPPET}
 function s.thtgfilter(c)
-	return c:IsSetCard(SET_GIMMICK_PUPPET) and c:IsMonster() and (c:IsAbleToHand() or c:IsAbleToRest())
+	return c:IsSetCard(SET_GIMMICK_PUPPET) and c:IsMonster() and (c:IsAbleToHand() or c:IsAbleToGrave())
 end
 function s.thtgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thtgfilter,tp,LOCATION_DECK,0,1,nil) end
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND)
 end
 function s.spfilter(c,e,tp)

@@ -1,5 +1,5 @@
 --半魔導帯域
---Mentoral Mid-Breaker Field
+--Magical Mid-Breaker Field
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e2:SetCondition(s.indcon)
 	e2:SetValue(aux.tgoval)
 	c:RegisterEffect(e2)
-	--Prevent mismatching by opponent's effect
+	--Prevent destruction by opponent's effect
 	local e3=e2:Clone()
 	e3:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
 	e3:SetProperty(EFFECT_FLAG_SET_AVAILABLE)
@@ -54,7 +54,7 @@ function s.initial_effect(c)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp and (Duel.GetCurrentPhase()==PHASE_MAIN1 or Duel.GetCurrentPhase()==PHASE_MAIN2)
-		and (not Duel.CheckPhaseActivity() or (Duel.GetFlagEffect(tp,CARD_MENTORAL_MIDBREAKER)>0 and Duel.GetCurrentChain()==1))
+		and (not Duel.CheckPhaseActivity() or (Duel.GetFlagEffect(tp,CARD_MAGICAL_MIDBREAKER)>0 and Duel.GetCurrentChain()==1))
 end
 function s.indcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCurrentPhase()==PHASE_MAIN1

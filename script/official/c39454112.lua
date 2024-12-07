@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	--Change die result
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e2:SetCode(EVENT_TOSS_SUFFICE_NEGATE)
+	e2:SetCode(EVENT_TOSS_DICE_NEGATE)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetOperation(s.diceop)
 	c:RegisterEffect(e2)

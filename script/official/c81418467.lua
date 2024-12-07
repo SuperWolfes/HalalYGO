@@ -90,7 +90,7 @@ function s.sumop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.rmvfilter(c,tp)
 	return c:IsFaceup() and c:IsAbleToRemove()
-		and Duel.IsExistingMatchingCard(s.matchfilter,tp,LOCATION_REST,0,1,nil,c:GetRace(),c:GetAttribute())
+		and Duel.IsExistingMatchingCard(s.matchfilter,tp,LOCATION_GRAVE,0,1,nil,c:GetRace(),c:GetAttribute())
 end
 function s.matchfilter(c,race,att)
 	return c:IsType(TYPE_NORMAL) and (c:IsRace(race) or c:IsAttribute(att))
@@ -116,7 +116,7 @@ function s.effop(e,tp,eg,ep,ev,re,r,rp,chk)
 		Duel.AdjustInstantly(tc)
 		break_chk=true
 	end
-	--Banish all monsters with the same Type/Attributes as Normal Monsters in your RP
+	--Banish all monsters with the same Type/Attributes as Normal Monsters in your GY
 	local rmvg=Duel.GetMatchingGroup(s.rmvfilter,tp,0,LOCATION_MZONE,nil,tp)
 	if #rmvg>0 then
 		if break_chk then Duel.BreakEffect() end

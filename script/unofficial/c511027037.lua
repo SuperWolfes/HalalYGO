@@ -1,5 +1,5 @@
 --破壊輪 (Manga)
---Ring of Mismatching (Manga)
+--Ring of Destruction (Manga)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Destroy an opponent's attacking monster, and if you do, inflict damage to your opponent equal to its ATK

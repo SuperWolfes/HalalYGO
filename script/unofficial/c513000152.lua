@@ -1,5 +1,5 @@
 --Ｓｐ－シルバー・コントレイル (Anime)
---Speed Actional - Silver Contrails (Anime)
+--Speed Spell - Silver Contrails (Anime)
 --scripted by Larry126
 --fixed by ClaireStanfield
 local s,id=GetID()

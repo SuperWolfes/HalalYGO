@@ -1,10 +1,10 @@
 -- 御巫神楽
--- Sibango Jargona
+-- Mikanko Kagura
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	-- Locked Summon
-	local e1=Locked.AddProcGreater({
+	-- Ritual Summon
+	local e1=Ritual.AddProcGreater({
 		handler=c,
 		filter=aux.FilterBoolFunction(Card.IsSetCard,0x18e),
 		stage2=s.stage2
@@ -16,7 +16,7 @@ s.listed_series={0x18e}
 function s.stage2(mat,e,tp,eg,ep,ev,re,r,rp,tc)
 	local g=Duel.GetFieldGroup(tp,0,LOCATION_ONFIELD)
 	if #g==0 then return end
-	local eg=Duel.GetMatchingGroup(Card.IsType,tp,LOCATION_REST,0,nil,TYPE_EQUIP)
+	local eg=Duel.GetMatchingGroup(Card.IsType,tp,LOCATION_GRAVE,0,nil,TYPE_EQUIP)
 	local ct=eg:GetClassCount(Card.GetCode)
 	if ct==0 or not Duel.SelectYesNo(tp,aux.Stringid(id,1)) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)

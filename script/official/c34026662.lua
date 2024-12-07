@@ -1,5 +1,5 @@
 --進化の奇跡
---Evo-Pulse
+--Evo-Miracle
 
 local s,id=GetID()
 function s.initial_effect(c)

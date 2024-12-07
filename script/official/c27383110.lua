@@ -1,7 +1,7 @@
 --宣告者の預言
 local s,id=GetID()
 function s.initial_effect(c)
-	local e1=Locked.AddProcEqual(c,s.lockedfil,6,nil,nil,nil,nil,s.stage2)
+	local e1=Ritual.AddProcEqual(c,s.ritualfil,6,nil,nil,nil,nil,s.stage2)
 	--salvage
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_TOHAND)
@@ -9,7 +9,7 @@ function s.initial_effect(c)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_CUSTOM+id)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCondition(s.thcon)
 	e2:SetCost(s.thcost)
 	e2:SetTarget(s.thtg)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e3:SetCode(EVENT_CHAIN_END)
-	e3:SetRange(LOCATION_REST)
+	e3:SetRange(LOCATION_GRAVE)
 	e3:SetCondition(s.evcon)
 	e3:SetOperation(s.evop)
 	c:RegisterEffect(e3)
@@ -27,8 +27,8 @@ function s.initial_effect(c)
 end
 s.listed_names={44665365}
 s.fit_monster={44665365}
-function s.lockedfil(c)
-	return c:IsCode(44665365) and c:IsLockedMonster()
+function s.ritualfil(c)
+	return c:IsCode(44665365) and c:IsRitualMonster()
 end
 function s.stage2(mg,e,tp,eg,ep,ev,re,r,rp,tc)
 	e:GetLabelObject():SetLabelObject(tc)
@@ -37,11 +37,11 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return re:GetHandler()==e:GetHandler()
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsLocation(LOCATION_REST) and e:GetHandler():IsAbleToRemove() end
+	if chk==0 then return e:GetHandler():IsLocation(LOCATION_GRAVE) and e:GetHandler():IsAbleToRemove() end
 	Duel.Remove(e:GetHandler(),POS_FACEUP,REASON_COST)
 end
 function s.thfilter(c,e,tp)
-	return c:IsLocation(LOCATION_REST) and c:IsControler(tp) and c:IsAbleToHand() and c:IsCanBeEffectTarget(e)
+	return c:IsLocation(LOCATION_GRAVE) and c:IsControler(tp) and c:IsAbleToHand() and c:IsCanBeEffectTarget(e)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local tc=eg:GetFirst()

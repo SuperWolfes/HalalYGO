@@ -1,5 +1,5 @@
 --ロイヤルデモンズ・インヴェイジョン
---Royal Warden’s Invasion
+--Royal Demon’s Invasion
 local s,id=GetID()
 function s.initial_effect(c)
 	--mat check

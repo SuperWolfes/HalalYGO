@@ -1,7 +1,7 @@
 --神の進化
---Mega Evolution
+--Divine Evolution
 --updated by Larry126
-Duel.EnableUnofficialProc(PROC_MEGA_HIERARCHY)
+Duel.EnableUnofficialProc(PROC_DIVINE_HIERARCHY)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c)
-	return c:IsFaceup() and c:HasFlagEffect(FLAG_MEGA_HIERARCHY) and not c:HasFlagEffect(id+1000)
+	return c:IsFaceup() and c:HasFlagEffect(FLAG_DIVINE_HIERARCHY) and not c:HasFlagEffect(id+1000)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,0,1,nil) end
@@ -24,9 +24,9 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_MZONE,0,nil)
 	for tc in aux.Next(g) do
-		local hr=tc:GetFlagEffectLabel(FLAG_MEGA_HIERARCHY)+1
-		tc:ResetFlagEffect(FLAG_MEGA_HIERARCHY)
-		tc:RegisterFlagEffect(FLAG_MEGA_HIERARCHY,RESET_EVENT|RESETS_STANDARD,0,1,hr)
+		local hr=tc:GetFlagEffectLabel(FLAG_DIVINE_HIERARCHY)+1
+		tc:ResetFlagEffect(FLAG_DIVINE_HIERARCHY)
+		tc:RegisterFlagEffect(FLAG_DIVINE_HIERARCHY,RESET_EVENT|RESETS_STANDARD,0,1,hr)
 		--Atk/Def up
 		local e1=Effect.CreateEffect(c)
 		e1:SetDescription(aux.Stringid(id,1))

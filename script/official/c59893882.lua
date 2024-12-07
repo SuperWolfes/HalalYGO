@@ -2,11 +2,11 @@
 --Evil HERO Inferno Wing - Infernal Backlash
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Fusion Materials: "Elemental HERO Avian" or "Elemental HERO Burstinatrix" + 1 "HERO" monster
 	Fusion.AddProcMix(c,true,true,{21844576,58932615},aux.FilterBoolFunctionEx(Card.IsSetCard,SET_HERO))
 	c:AddMustBeSpecialSummonedByDarkFusion()
-	--Add 1 "Dark Fusion" or 1 card that mentions it from your Deck or RP to your hand, except a Fusion Monster
+	--Add 1 "Dark Fusion" or 1 card that mentions it from your Deck or GY to your hand, except a Fusion Monster
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -38,12 +38,12 @@ function s.thfilter(c)
 	return (c:IsCode(CARD_DARK_FUSION) or c:ListsCode(CARD_DARK_FUSION)) and not c:IsType(TYPE_FUSION) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK|LOCATION_REST,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK|LOCATION_REST)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK|LOCATION_GRAVE,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK|LOCATION_GRAVE)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thfilter),tp,LOCATION_DECK|LOCATION_REST,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thfilter),tp,LOCATION_DECK|LOCATION_GRAVE,0,1,1,nil)
 	if #g>0 then
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)

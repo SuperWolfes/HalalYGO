@@ -1,5 +1,5 @@
 -- サイコカウンター
--- Mentalounter
+-- Psychicounter
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.damconfilter(c,tp)
-	return c:GetPreviousRaceOnField()&RACE_MENTAL>0 and (c:IsReason(REASON_BATTLE) and Duel.GetAttacker():IsControler(1-tp))
+	return c:GetPreviousRaceOnField()&RACE_PSYCHIC>0 and (c:IsReason(REASON_BATTLE) and Duel.GetAttacker():IsControler(1-tp))
 		and c:GetReasonPlayer()==1-tp and c:IsPreviousControler(tp) and c:IsPreviousLocation(LOCATION_MZONE)
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)

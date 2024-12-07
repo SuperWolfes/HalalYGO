@@ -1,5 +1,5 @@
 --大電脳兵廠
---Mental Arsenal
+--Psychic Arsenal
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -14,13 +14,13 @@ function s.initial_effect(c)
 	e1:SetTarget(s.thtg)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
-	--Return 1 banished Mental/Machine monster to deck and add another to the hand
+	--Return 1 banished Psychic/Machine monster to deck and add another to the hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TODECK+CATEGORY_TOHAND)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(aux.exccon)
 	e2:SetCost(aux.SelfBanishCost)
@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.cfilter(c,tp)
-	return c:IsFaceup() and c:IsRace(RACE_MENTAL) and c:HasLevel() and Duel.CheckLPCost(tp,c:GetLevel()*200)
+	return c:IsFaceup() and c:IsRace(RACE_PSYCHIC) and c:HasLevel() and Duel.CheckLPCost(tp,c:GetLevel()*200)
 		and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil,c:GetAttribute(),c:GetLevel())
 end
 function s.thfilter(c,att,lv)
@@ -54,7 +54,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.tdhndfilter(c,e)
-	return c:IsFaceup() and c:IsRace(RACE_MENTAL|RACE_MACHINE)
+	return c:IsFaceup() and c:IsRace(RACE_PSYCHIC|RACE_MACHINE)
 		and (c:IsAbleToDeck() or c:IsAbleToHand()) and c:IsCanBeEffectTarget(e)
 end
 function s.rescon(sg,e,tp,mg)

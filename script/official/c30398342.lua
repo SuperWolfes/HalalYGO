@@ -1,5 +1,5 @@
 --竜星の具象化
---Bang Zing Matching
+--Yang Zing Creation
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

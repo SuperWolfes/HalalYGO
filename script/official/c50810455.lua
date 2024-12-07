@@ -53,7 +53,7 @@ function s.spfilter(c,e,tp,ct,g)
 		and Duel.GetLocationCountFromEx(tp,tp,g,c)>0
 end
 function s.spcost2(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(s.rmfilter,tp,LOCATION_MZONE+LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(s.rmfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil)
 	local nums={}
 	for i=1,#g do
 		if Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,i,g) then

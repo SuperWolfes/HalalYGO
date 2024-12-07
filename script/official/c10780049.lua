@@ -42,10 +42,10 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,LOCATION_EXTRA|LOCATION_DECK)
 end
 function s.attachfilter(c,xc)
-	return xc:GetOverlayGroup():IsExists(s.tgmatfilter,1,nil,c:GetCode()) and not c:IsUnliked()
+	return xc:GetOverlayGroup():IsExists(s.tgmatfilter,1,nil,c:GetCode()) and not c:IsForbidden()
 end
 function s.tgmatfilter(c,code)
-	return c:IsQuickPlayActional() and c:IsSetCard(SET_PURRELY) and c:IsCode(code)
+	return c:IsQuickPlaySpell() and c:IsSetCard(SET_PURRELY) and c:IsCode(code)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end

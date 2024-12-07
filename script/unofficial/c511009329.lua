@@ -1,4 +1,4 @@
---Wanderer Rail
+--Fairy Rail
 --cleaned up and fixed by MLD
 Duel.LoadScript("c420.lua")
 local s,id=GetID()
@@ -23,7 +23,7 @@ function s.con(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetBattleDamage(tp)>0
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsWanderer()
+	return c:IsFaceup() and c:IsFairy()
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.filter(chkc) end

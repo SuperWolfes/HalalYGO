@@ -1,5 +1,5 @@
 --暗黒の熾天使
---Watcher of Darkness
+--Seraph of Darkness
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)

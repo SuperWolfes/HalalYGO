@@ -1,5 +1,5 @@
 --魔女の一撃
---Mint's Strike
+--Witch's Strike
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

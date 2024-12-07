@@ -1,5 +1,5 @@
 --幻影騎士団トゥーム・シールド
---The Illusion Knights of Tomb Shield
+--The Phantom Knights of Tomb Shield
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_FREE_CHAIN)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCondition(s.negcon)
 	e2:SetCost(aux.bfgcost)
 	e2:SetTarget(s.negtg)

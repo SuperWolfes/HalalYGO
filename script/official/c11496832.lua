@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_TOHAND)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCost(aux.SelfBanishCost)
 	e2:SetTarget(s.efftg)
@@ -53,24 +53,24 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.efftgfilter(c,tp)
 	return c:IsMonster() and not c:IsSummonableCard() and c:IsSetCard(SET_GUARDIAN) and (c:IsAbleToHand()
-		or Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil,c))
+		or Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil,c))
 end
 function s.thfilter(c,tc)
 	return tc:ListsCode(c:GetCode()) and c:IsAbleToHand()
 end
 function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then
-		if not (chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and chkc:IsMonster()
+		if not (chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and chkc:IsMonster()
 			and not chkc:IsSummonableCard() and chkc:IsSetCard(SET_GUARDIAN)) then return false end
 		local label=e:GetLabel()
 		return (label==1 and chkc:IsAbleToHand())
-			or (label==2 and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil,chkc))
+			or (label==2 and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil,chkc))
 	end
-	if chk==0 then return Duel.IsExistingTarget(s.efftgfilter,tp,LOCATION_REST,0,1,nil,tp) end
+	if chk==0 then return Duel.IsExistingTarget(s.efftgfilter,tp,LOCATION_GRAVE,0,1,nil,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local tc=Duel.SelectTarget(tp,s.efftgfilter,tp,LOCATION_REST,0,1,1,nil,tp):GetFirst()
+	local tc=Duel.SelectTarget(tp,s.efftgfilter,tp,LOCATION_GRAVE,0,1,1,nil,tp):GetFirst()
 	local b1=tc:IsAbleToHand()
-	local b2=Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil,tc)
+	local b2=Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil,tc)
 	local op=Duel.SelectEffect(tp,
 		{b1,aux.Stringid(id,2)},
 		{b2,aux.Stringid(id,3)})
@@ -78,7 +78,7 @@ function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if op==1 then
 		Duel.SetOperationInfo(0,CATEGORY_TOHAND,tc,1,tp,0)
 	elseif op==2 then
-		Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
+		Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
 	end
 end
 function s.effop(e,tp,eg,ep,ev,re,r,rp)
@@ -90,9 +90,9 @@ function s.effop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SendtoHand(tc,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,tc)
 	else
-		--Add 1 card mentioned on it from your RP to your hand
+		--Add 1 card mentioned on it from your GY to your hand
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-		local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil,tc)
+		local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil,tc)
 		if #g>0 then
 			Duel.SendtoHand(g,nil,REASON_EFFECT)
 			Duel.ConfirmCards(1-tp,g)

@@ -15,7 +15,7 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tc=eg:GetFirst()
 	if chk==0 then return Duel.GetLocationCount(tc:GetPreviousControler(),LOCATION_MZONE)>0 and #eg==1
-		and tc:IsLocation(LOCATION_REST) and tc:IsReason(REASON_BATTLE)
+		and tc:IsLocation(LOCATION_GRAVE) and tc:IsReason(REASON_BATTLE)
 		and tc:IsCanBeSpecialSummoned(e,0,tp,false,false,tc:GetPreviousPosition(),tc:GetPreviousControler()) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,eg,1,0,0)
 end
@@ -28,7 +28,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummon(tc,0,tp,tc:GetPreviousControler(),false,false,tc:GetPreviousPosition(),0x4)
 		tc:RegisterFlagEffect(FLAG_MAXIMUM_CENTER,RESET_EVENT+RESETS_STANDARD-RESET_TOFIELD,0,1)
 
-		local maxg=Duel.GetMatchingGroup(s.maxfilter,tc:GetPreviousControler(),LOCATION_REST,0,nil,tc)
+		local maxg=Duel.GetMatchingGroup(s.maxfilter,tc:GetPreviousControler(),LOCATION_GRAVE,0,nil,tc)
 		for maxc in aux.Next(maxg) do
 			local zone=0x8
 			if maxc.MaximumSide=="Left" then zone=0x2 end

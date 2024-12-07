@@ -1,11 +1,11 @@
 --漆黒のズムウォル (Anime)
---Dark Megar (Anime)
+--Dark Diviner (Anime)
 --scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
 	c:AddSetcodesRule(id,false,0x601)
 	--dark synchro summon
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Synchro.AddDarkSynchroProcedure(c,Synchro.NonTuner(nil),nil,4)
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)

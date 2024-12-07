@@ -68,7 +68,7 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	return Duel.SelectYesNo(tp,aux.Stringid(id,0))
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SendtoRest(e:GetHandler(),REASON_EFFECT)
+	Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
 end
 function s.drcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetEquipTarget() and e:GetHandler():GetEquipTarget():IsRelateToBattle()

@@ -1,7 +1,7 @@
---Amatsu, Okabr of the Mega Peaks
+--Amatsu, Okami of the Divine Peaks
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Link.AddProcedure(c,s.filter,3)
 	--match kill
 	local e1=Effect.CreateEffect(c)

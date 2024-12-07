@@ -26,10 +26,10 @@ function s.filter(c)
 end
 function s.val(e,c)
 	local tp=e:GetHandler():GetControler()
-	local ct=Duel.GetMatchingGroupCount(s.filter,tp,LOCATION_REST,0,nil)
+	local ct=Duel.GetMatchingGroupCount(s.filter,tp,LOCATION_GRAVE,0,nil)
 	return ct*500
 end
 function s.indcon(e)
 	local tp=e:GetHandlerPlayer()
-	return Duel.GetMatchingGroupCount(s.filter,tp,LOCATION_REST,0,nil)>2 and Duel.IsTurnPlayer(1-tp)
+	return Duel.GetMatchingGroupCount(s.filter,tp,LOCATION_GRAVE,0,nil)>2 and Duel.IsTurnPlayer(1-tp)
 end

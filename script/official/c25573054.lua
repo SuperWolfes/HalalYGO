@@ -14,7 +14,7 @@ function s.initial_effect(c)
 end
 s.listed_names={57116033,98585345}
 function s.tgfilter(c)
-	return c:IsCode(57116033) and c:IsAbleToRestAsCost()
+	return c:IsCode(57116033) and c:IsAbleToGraveAsCost()
 end
 function s.spfilter(c,e,tp)
 	return c:IsCode(98585345) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
@@ -28,14 +28,14 @@ function s.chk(c,sg,e,tp)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(1)
-	local hg=Duel.GetMatchingGroup(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,e:GetHandler())
+	local hg=Duel.GetMatchingGroup(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,e:GetHandler())
 	local mg=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_ONFIELD,0,e:GetHandler())
 	local g=hg:Clone()
 	g:Merge(mg)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if chk==0 then return ft>-1 and #hg>1 and #mg>0 and aux.SelectUnselectGroup(g,e,tp,3,3,s.rescon,0) end
-	local sg=aux.SelectUnselectGroup(g,e,tp,3,3,s.rescon,1,tp,HINTMSG_TOREST)
-	Duel.SendtoRest(sg,REASON_COST)
+	local sg=aux.SelectUnselectGroup(g,e,tp,3,3,s.rescon,1,tp,HINTMSG_TOGRAVE)
+	Duel.SendtoGrave(sg,REASON_COST)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then

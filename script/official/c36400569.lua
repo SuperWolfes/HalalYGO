@@ -15,14 +15,14 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-	--Special Summon 1 Xyz Monster from either RP to either field in Defense Position
+	--Special Summon 1 Xyz Monster from either GY to either field in Defense Position
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetCode(EVENT_FREE_CHAIN)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetHintTiming(0,TIMING_MAIN_END|TIMINGS_CHECK_MONSTER_E)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(function(e,tp) return aux.exccon(e) and Duel.IsExistingMatchingCard(s.gpxyzfilter,tp,LOCATION_MZONE,0,1,nil) end)
@@ -58,10 +58,10 @@ end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local ftpl=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	local ftopp=Duel.GetLocationCount(1-tp,LOCATION_MZONE,tp)
-	if chkc then return chkc:IsLocation(LOCATION_REST) and s.spfilter(chkc,e,tp,ftpl,ftopp) end
-	if chk==0 then return Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,LOCATION_REST,1,nil,e,tp,ftpl,ftopp) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and s.spfilter(chkc,e,tp,ftpl,ftopp) end
+	if chk==0 then return Duel.IsExistingTarget(s.spfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,nil,e,tp,ftpl,ftopp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_REST,LOCATION_REST,1,1,nil,e,tp,ftpl,ftopp)
+	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,1,nil,e,tp,ftpl,ftopp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)

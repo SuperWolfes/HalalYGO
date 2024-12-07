@@ -1,10 +1,10 @@
 --神・スライム
---Egyptian Monster Slime
+--Egyptian God Slime
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion summon
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_AQUA),s.matfilter)
 	--special summon
 	local e1=Effect.CreateEffect(c)

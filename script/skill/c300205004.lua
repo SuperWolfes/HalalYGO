@@ -87,7 +87,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		local g=Duel.GetFieldGroup(1-tp,LOCATION_HAND,0)
 		if #g==0 then return end
 		local sg=g:RandomSelect(1-tp,1)
-		Duel.SendtoRest(sg,REASON_DISCARD|REASON_EFFECT)
+		Duel.SendtoGrave(sg,REASON_DISCARD|REASON_EFFECT)
 	else
 		e:GetLabelObject():SetLabel(e:GetLabelObject():GetLabel()-3)
 		s.updatedescription(e,tp)

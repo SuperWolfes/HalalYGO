@@ -1,12 +1,12 @@
 --星界樹イルミスティル
---Astellar World Tree Illumistil
+--Astral World Tree Illumistil
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Link Summon procedure
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_EFFECT),3)
-	--You can only control 1 "Astellar World Tree Illumistil"
+	--You can only control 1 "Astral World Tree Illumistil"
 	c:SetUniqueOnField(1,0,id)
 	--Gain LP equal to the ATK of a monster(s) Special Summoned by your opponent
 	local e1=Effect.CreateEffect(c)

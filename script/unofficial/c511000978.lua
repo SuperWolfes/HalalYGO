@@ -1,5 +1,5 @@
 --Ｓｐ－テイク・オーバー
---Speed Actional - Takeover
+--Speed Spell - Takeover
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

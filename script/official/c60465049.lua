@@ -1,10 +1,10 @@
 --サイコ・エンド・パニッシャー
---Mental End Punisher
+--Psychic End Punisher
 --Scripted by Yuno
 local s,id=GetID()
 function s.initial_effect(c)
 	--Synchro Summon procedure
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	--Unaffected by the opponent's activated effects
 	local e1=Effect.CreateEffect(c)

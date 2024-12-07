@@ -1,5 +1,5 @@
 --楽姫の独演
---Nasheed Maiden's Solo Performance
+--Music Maiden's Solo Performance
 local s,id=GetID()
 function s.initial_effect(c)
 	--Negate opponent monster's attack

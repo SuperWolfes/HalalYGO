@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_DESTROY+CATEGORY_DAMAGE)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_FREE_CHAIN)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCost(aux.bfgcost)
 	e2:SetTarget(s.destg)
 	e2:SetOperation(s.desop)
@@ -40,10 +40,10 @@ function s.initial_effect(c)
 end
 s.listed_series={0x1157}
 function s.regcon(e,tp,eg,ep,ev,re,r,rp)
-	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP)
+	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_SPELL+TYPE_TRAP)
 end
 function s.regop1(e,tp,eg,ep,ev,re,r,rp)
-	re:GetHandler():RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD+RESET_OVERLAY-RESET_TOREST-RESET_LEAVE+RESET_PHASE+PHASE_END,0,1)
+	re:GetHandler():RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD+RESET_OVERLAY-RESET_TOGRAVE-RESET_LEAVE+RESET_PHASE+PHASE_END,0,1)
 end
 function s.regop2(e,tp,eg,ep,ev,re,r,rp)
 	re:GetHandler():ResetFlagEffect(id)
@@ -80,7 +80,7 @@ function s.actfilter(c)
 	return c:GetFlagEffect(id)>0
 end
 function s.desfilter(c,ec)
-	return c:IsFaceup() and c:IsLevelBelow(Duel.GetMatchingGroupCount(s.actfilter,0,LOCATION_REST,LOCATION_REST,ec))
+	return c:IsFaceup() and c:IsLevelBelow(Duel.GetMatchingGroupCount(s.actfilter,0,LOCATION_GRAVE,LOCATION_GRAVE,ec))
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.desfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil,e:GetHandler()) end

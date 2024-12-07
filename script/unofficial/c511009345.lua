@@ -1,5 +1,5 @@
 --複蘇生寄生
---Parasite Rerest
+--Parasite Reborn
 --fixed by MLD
 local s,id=GetID()
 function s.initial_effect(c)
@@ -17,8 +17,8 @@ s.listed_names={6205579}
 function s.filter(c,ft1,ft2,tp)
 	local p=c:GetControler()
 	if c:IsFacedown() then return false end
-	local g1=Duel.GetMatchingGroupCount(Card.IsCode,tp,LOCATION_REST,0,nil,6205579)
-	local g2=Duel.GetMatchingGroupCount(Card.IsCode,tp,0,LOCATION_REST,nil,6205579)
+	local g1=Duel.GetMatchingGroupCount(Card.IsCode,tp,LOCATION_GRAVE,0,nil,6205579)
+	local g2=Duel.GetMatchingGroupCount(Card.IsCode,tp,0,LOCATION_GRAVE,nil,6205579)
 	local ft=0
 	if Duel.GetLocationCount(p,LOCATION_SZONE)<=1 then return false end
 	if g1>1 and ft1>1 then return true end
@@ -34,7 +34,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil,ft1,ft2,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
 	Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil,ft1,ft2,tp)
-	Duel.SetOperationInfo(0,CATEGORY_EQUIP,nil,2,tp,LOCATION_REST)
+	Duel.SetOperationInfo(0,CATEGORY_EQUIP,nil,2,tp,LOCATION_GRAVE)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ft1=Duel.GetLocationCount(tp,LOCATION_SZONE)
@@ -43,8 +43,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsFaceup() and tc:IsRelateToEffect(e) and s.filter(tc,ft1,ft2,tp) then
 		local p=tc:GetControler()
 		if Duel.GetLocationCount(p,LOCATION_SZONE)<=1 then return end
-		local g1=Duel.GetMatchingGroup(Card.IsCode,tp,LOCATION_REST,0,nil,6205579)
-		local g2=Duel.GetMatchingGroup(Card.IsCode,tp,0,LOCATION_REST,nil,6205579)
+		local g1=Duel.GetMatchingGroup(Card.IsCode,tp,LOCATION_GRAVE,0,nil,6205579)
+		local g2=Duel.GetMatchingGroup(Card.IsCode,tp,0,LOCATION_GRAVE,nil,6205579)
 		local chk1=#g1>1 and ft1>1
 		local chk2=#g2>1 and ft2>1
 		local chk3=#g2>0 and ft2>0 and #g1>0 and ft1>0

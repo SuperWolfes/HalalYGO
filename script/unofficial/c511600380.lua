@@ -1,5 +1,5 @@
 --ミラクル・コンタクト (Anime)
---Pulse Contact (Anime)
+--Miracle Contact (Anime)
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -13,9 +13,9 @@ function s.spfilter(c)
 	return c:IsSetCard(0x3008) and c:ListsCodeAsMaterial(CARD_NEOS)
 end
 function s.fextra(e,tp,mg)
-	return Duel.GetMatchingGroup(aux.NecroValleyFilter(Fusion.IsMonsterFilter(Card.IsAbleToDeck)),tp,LOCATION_REST,0,nil)
+	return Duel.GetMatchingGroup(aux.NecroValleyFilter(Fusion.IsMonsterFilter(Card.IsAbleToDeck)),tp,LOCATION_GRAVE,0,nil)
 end
 function s.extratg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_ONFIELD+LOCATION_REST)
+	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_ONFIELD+LOCATION_GRAVE)
 end

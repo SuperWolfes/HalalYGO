@@ -19,7 +19,7 @@ function s.eqfilter(c)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tid=Duel.GetTurnCount()
-	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_REST,0,nil,e,tp,tid)
+	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_GRAVE,0,nil,e,tp,tid)
 	local sg=Duel.GetMatchingGroup(s.eqfilter,tp,LOCATION_MZONE,0,nil)
 	if chk==0 then return #g>0 and (#g>1 or #sg>0)
 		and Duel.GetLocationCount(tp,LOCATION_MZONE)>=#g and Duel.GetLocationCount(tp,LOCATION_SZONE)>=#g+#sg-1 end
@@ -28,7 +28,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tid=Duel.GetTurnCount()
-	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_REST,0,nil,e,tp,tid)
+	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_GRAVE,0,nil,e,tp,tid)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<#g then return end
 	if #g>0 and Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)~=0 then
 		local sg=Duel.GetMatchingGroup(s.eqfilter,tp,LOCATION_MZONE,0,nil)

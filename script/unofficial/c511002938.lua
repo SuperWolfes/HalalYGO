@@ -1,4 +1,4 @@
---Offerings to the Bound Being
+--Offerings to the Bound Deity
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

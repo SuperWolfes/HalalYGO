@@ -3,19 +3,19 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Can be Set as a Actional
+	--Can be Set as a Spell
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_MONSTER_SSET)
-	e1:SetValue(TYPE_ACTIONAL)
+	e1:SetValue(TYPE_SPELL)
 	c:RegisterEffect(e1)
-	--Special Summon itself if it was sent to the RP while it was Set in the Actional/Trap Zone
+	--Special Summon itself if it was sent to the GY while it was Set in the Spell/Trap Zone
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
-	e2:SetCode(EVENT_TO_REST)
+	e2:SetCode(EVENT_TO_GRAVE)
 	e2:SetCountLimit(1,id)
 	e2:SetCondition(s.spcon)
 	e2:SetTarget(s.sptg)

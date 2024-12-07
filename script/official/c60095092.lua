@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(function() return Duel.GetFieldGroupCount(0,LOCATION_FZONE,LOCATION_FZONE)>0 end)
 	e2:SetCost(aux.bfgcost)
@@ -27,7 +27,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x17e}
 function s.pzfilter(c)
-	return c:IsSetCard(0x17e) and c:IsType(TYPE_PENDULUM) and not c:IsUnliked()
+	return c:IsSetCard(0x17e) and c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
 end
 function s.pztg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.pzfilter,tp,LOCATION_DECK,0,1,nil)

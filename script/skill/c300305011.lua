@@ -23,7 +23,7 @@ end
 function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsMonster),tp,LOCATION_MZONE,0,nil)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	local b1=g:FilterCount(Card.IsSetCard,nil,SET_ELEMENTAL_HERO)>0 and Duel.IsExistingMatchingCard(s.dtpfilter,tp,LOCATION_HAND,0,1,nil) and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil) and Duel.GetFlagEffect(tp,id)==0
+	local b1=g:FilterCount(Card.IsSetCard,nil,SET_ELEMENTAL_HERO)>0 and Duel.IsExistingMatchingCard(s.dtpfilter,tp,LOCATION_HAND,0,1,nil) and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil) and Duel.GetFlagEffect(tp,id)==0
 	local b2=g:FilterCount(s.rfilter,nil)>0 and Duel.IsExistingMatchingCard(s.dspfilter,tp,LOCATION_HAND,0,1,nil) and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,0,1,nil,e,tp) and ft>0 and Duel.GetFlagEffect(tp,id+100)==0
 	local b3=g:FilterCount(s.rhfilter,nil,tp)>0 and s.fusTarget(e,tp,eg,ep,ev,re,r,rp,0) and Duel.GetFlagEffect(tp,id+200)==0
 	return aux.CanActivateSkill(tp) and (b1 or b2 or b3)
@@ -33,7 +33,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	--Apply effect
 	local g=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsMonster),tp,LOCATION_MZONE,0,nil)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	local b1=g:FilterCount(Card.IsSetCard,nil,SET_ELEMENTAL_HERO)>0 and Duel.IsExistingMatchingCard(s.dtpfilter,tp,LOCATION_HAND,0,1,nil) and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil) and Duel.GetFlagEffect(tp,id)==0
+	local b1=g:FilterCount(Card.IsSetCard,nil,SET_ELEMENTAL_HERO)>0 and Duel.IsExistingMatchingCard(s.dtpfilter,tp,LOCATION_HAND,0,1,nil) and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil) and Duel.GetFlagEffect(tp,id)==0
 	local b2=g:FilterCount(s.rfilter,nil)>0 and ft>0 and Duel.IsExistingMatchingCard(s.dspfilter,tp,LOCATION_HAND,0,1,nil) and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,0,1,nil,e,tp) and Duel.GetFlagEffect(tp,id+100)==0
 	local b3=g:FilterCount(s.rhfilter,nil,tp)>0 and s.fusTarget(e,tp,eg,ep,ev,re,r,rp,0) and Duel.GetFlagEffect(tp,id+200)==0
 	local op=Duel.SelectEffect(tp,{b1,aux.Stringid(id,0)},{b2,aux.Stringid(id,1)},{b3,aux.Stringid(id,2)})
@@ -44,9 +44,9 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 		--Discard 1 Trap to add "roid" to hand
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 		local dtc=Duel.SelectMatchingCard(tp,s.dtpfilter,tp,LOCATION_HAND,0,1,1,nil)
-		if Duel.SendtoRest(dtc,REASON_COST+REASON_DISCARD)>0 then
+		if Duel.SendtoGrave(dtc,REASON_COST+REASON_DISCARD)>0 then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-			local thc=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil):GetFirst()
+			local thc=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil):GetFirst()
 			local atk=thc:GetAttack()
 			if Duel.SendtoHand(thc,tp,REASON_EFFECT)>0 then
 				Duel.ConfirmCards(1-tp,thc)
@@ -58,14 +58,14 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 				end
 			end
 		end
-	--Discard 1 Actional to Special Summon 1 Level 6 or lower Machine "roid" or "Elemental HERO" from Deck
+	--Discard 1 Spell to Special Summon 1 Level 6 or lower Machine "roid" or "Elemental HERO" from Deck
 	elseif op==2 then
 		--OPD Register
 		Duel.RegisterFlagEffect(tp,id+100,0,0,0)
-		--Discard 1 Actional to Special Summon "roid" or "Elemental HERO" monster
+		--Discard 1 Spell to Special Summon "roid" or "Elemental HERO" monster
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 		local dsc=Duel.SelectMatchingCard(tp,s.dspfilter,tp,LOCATION_HAND,0,1,1,nil)
-		if Duel.SendtoRest(dsc,REASON_COST+REASON_DISCARD)>0 then
+		if Duel.SendtoGrave(dsc,REASON_COST+REASON_DISCARD)>0 then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 			local sc=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_DECK,0,1,1,nil,e,tp):GetFirst()
 			if Duel.SpecialSummon(sc,0,tp,tp,false,false,POS_FACEUP_DEFENSE)>0 then
@@ -104,7 +104,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 			if sg1:IsContains(tc) and (sg2==nil or not sg2:IsContains(tc) or not Duel.SelectYesNo(tp,ce:GetDescription())) then
 				local mat1=Duel.SelectFusionMaterial(tp,tc,mg1,nil,chkf)
 				tc:SetMaterial(mat1)
-				Duel.SendtoRest(mat1,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
+				Duel.SendtoGrave(mat1,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
 				Duel.BreakEffect()
 				Duel.SpecialSummon(tc,SUMMON_TYPE_FUSION,tp,tp,false,false,POS_FACEUP)
 			else
@@ -118,7 +118,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 end
 --Discard/Search/Destroy Functions
 function s.dtpfilter(c)
-	return c:IsTrap() and c:IsAbleToRestAsCost()
+	return c:IsTrap() and c:IsAbleToGraveAsCost()
 end
 function s.thfilter(c)
 	return c:IsLevelBelow(6) and c:IsSetCard(SET_ROID) and c:IsRace(RACE_MACHINE) and c:IsAbleToHand()
@@ -131,7 +131,7 @@ function s.rfilter(c)
 	return c:IsRace(RACE_MACHINE) and c:IsSetCard(SET_ROID) and c:IsMonster()
 end
 function s.dspfilter(c)
-	return c:IsActional() and c:IsAbleToRestAsCost()
+	return c:IsSpell() and c:IsAbleToGraveAsCost()
 end
 function s.spfilter(c,e,tp)
 	return ((s.rfilter(c) and c:IsLevelBelow(6)) or c:IsSetCard(SET_ELEMENTAL_HERO)) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
@@ -156,8 +156,8 @@ function s.fusTarget(e,tp,eg,ep,ev,re,r,rp,chk)
 			res=Duel.IsExistingMatchingCard(s.fusfilter,tp,LOCATION_EXTRA,0,1,c,e,tp,mg2,mf,chkf)
 		end
 	end
-	if chk==0 then return res and Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,nil,e,tp) end
-	Duel.DiscardHand(tp,Card.IsAbleToRestAsCost,1,1,REASON_COST+REASON_DISCARD,nil,e,tp)
+	if chk==0 then return res and Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,nil,e,tp) end
+	Duel.DiscardHand(tp,Card.IsAbleToGraveAsCost,1,1,REASON_COST+REASON_DISCARD,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function s.matfilter(c,e)

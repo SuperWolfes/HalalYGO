@@ -1,12 +1,12 @@
 --宵星の騎士エンリルギルス
---Enlilgirsu, the Coreust Mekk-Knight
+--Enlilgirsu, the Orcust Mekk-Knight
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
-	--Link Summon procedure: 2+ monsters, including an "Coreust" Link Monster
+	c:EnableReviveLimit()
+	--Link Summon procedure: 2+ monsters, including an "Orcust" Link Monster
 	Link.AddProcedure(c,nil,2,4,s.matcheck)
-	--Add 1 of your banished "Coreust" or "World Legacy" cards to your hand
+	--Add 1 of your banished "Orcust" or "World Legacy" cards to your hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_TODECK+CATEGORY_CONTROL)
@@ -18,26 +18,26 @@ function s.initial_effect(c)
 	e1:SetTarget(s.thtg)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
-	--Quick version if "Coreustrated Babel" is applying
+	--Quick version if "Orcustrated Babel" is applying
 	local e1a=e1:Clone()
 	e1a:SetType(EFFECT_TYPE_QUICK_O)
 	e1a:SetCode(EVENT_FREE_CHAIN)
 	e1a:SetHintTiming(0,TIMING_STANDBY_PHASE|TIMING_MAIN_END|TIMINGS_CHECK_MONSTER_E)
 	e1a:SetCondition(s.babelthcon)
 	c:RegisterEffect(e1a)
-	--Send 1 card on the field to the RP
+	--Send 1 card on the field to the GY
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_TOREST)
+	e2:SetCategory(CATEGORY_TOGRAVE)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(s.tgcond)
 	e2:SetCost(aux.SelfBanishCost)
 	e2:SetTarget(s.tgtg)
 	e2:SetOperation(s.tgop)
 	c:RegisterEffect(e2)
-	--Quick version if "Coreustrated Babel" is applying
+	--Quick version if "Orcustrated Babel" is applying
 	local e2a=e2:Clone()
 	e2a:SetType(EFFECT_TYPE_QUICK_O)
 	e2a:SetCode(EVENT_FREE_CHAIN)
@@ -45,18 +45,18 @@ function s.initial_effect(c)
 	e2a:SetCondition(s.babeltgcond)
 	c:RegisterEffect(e2a)
 end
-s.listed_series={SET_COREUST,SET_WORLD_LEGACY}
+s.listed_series={SET_ORCUST,SET_WORLD_LEGACY}
 function s.matfilter(c,lc,sumtype,tp)
-	return c:IsSetCard(SET_COREUST,lc,sumtype,tp) and c:IsType(TYPE_LINK,lc,sumtype,tp)
+	return c:IsSetCard(SET_ORCUST,lc,sumtype,tp) and c:IsType(TYPE_LINK,lc,sumtype,tp)
 end
 function s.matcheck(g,lc,sumtype,tp)
 	return g:IsExists(s.matfilter,1,nil,lc,sumtype,tp)
 end
 function s.babelthcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsPlayerAffectedByEffect(tp,CARD_COREUSTRATED_BABEL)
+	return Duel.IsPlayerAffectedByEffect(tp,CARD_ORCUSTRATED_BABEL)
 end
 function s.thfilter(c)
-	return c:IsSetCard{SET_COREUST,SET_WORLD_LEGACY} and c:IsAbleToHand() and c:IsFaceup()
+	return c:IsSetCard{SET_ORCUST,SET_WORLD_LEGACY} and c:IsAbleToHand() and c:IsFaceup()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REMOVED) and chkc:IsControler(tp) and s.thfilter(chkc) end
@@ -89,24 +89,24 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.tgcond(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return not Duel.IsPlayerAffectedByEffect(tp,CARD_COREUSTRATED_BABEL)
+	return not Duel.IsPlayerAffectedByEffect(tp,CARD_ORCUSTRATED_BABEL)
 		and c:IsPreviousLocation(LOCATION_EMZONE) and c:GetTurnID()==Duel.GetTurnCount()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRest,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) end
-	local g=Duel.GetMatchingGroup(Card.IsAbleToRest,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil)
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,g,1,tp,0)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGrave,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) end
+	local g=Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,g,1,tp,0)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,nil,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
 	if #g>0 then
 		Duel.HintSelection(g)
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	end
 end
 function s.babeltgcond(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return Duel.IsPlayerAffectedByEffect(tp,CARD_COREUSTRATED_BABEL) and Duel.IsMainPhase()
+	return Duel.IsPlayerAffectedByEffect(tp,CARD_ORCUSTRATED_BABEL) and Duel.IsMainPhase()
 		and c:IsPreviousLocation(LOCATION_EMZONE) and c:GetTurnID()==Duel.GetTurnCount()
 end

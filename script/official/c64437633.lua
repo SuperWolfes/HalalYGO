@@ -2,7 +2,7 @@
 --Aquamirror Illusion
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon 1 "Giojiki" Locked Monster from your hand
+	--Special Summon 1 "Gishki" Ritual Monster from your hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x3a}
 function s.spfilter(c,e,tp)
-	return c:IsSetCard(0x3a) and c:IsLockedMonster() and c:IsCanBeSpecialSummoned(e,0,tp,false,true)
+	return c:IsSetCard(0x3a) and c:IsRitualMonster() and c:IsCanBeSpecialSummoned(e,0,tp,false,true)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

@@ -1,9 +1,9 @@
 --白き森の魔狼シルウィア
---Silvera, Mintwolf of the White Forest
+--Silvera, Witchwolf of the White Forest
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--1 Tuner + 1+ non-Tuner monsters
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	--Flip all opponent monsters face-down
@@ -16,16 +16,16 @@ function s.initial_effect(c)
 	e1:SetTarget(s.postg)
 	e1:SetOperation(s.posop)
 	c:RegisterEffect(e1)
-	--Illusion and Mentor Synchro Monsters gain 500 ATK
+	--Illusion and Spellcaster Synchro Monsters gain 500 ATK
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_UPDATE_ATTACK)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetTargetRange(LOCATION_MZONE,0)
-	e2:SetTarget(function(e,c) return c:IsRace(RACE_ILLUSION|RACE_MENTOR) and c:IsType(TYPE_SYNCHRO) end)
+	e2:SetTarget(function(e,c) return c:IsRace(RACE_ILLUSION|RACE_SPELLCASTER) and c:IsType(TYPE_SYNCHRO) end)
 	e2:SetValue(500)
 	c:RegisterEffect(e2)
-	--Illusion and Mentor Synchro Monsters inflict double piercing damage
+	--Illusion and Spellcaster Synchro Monsters inflict double piercing damage
 	local e3=e2:Clone()
 	e3:SetCode(EFFECT_PIERCE)
 	e3:SetValue(DOUBLE_DAMAGE)

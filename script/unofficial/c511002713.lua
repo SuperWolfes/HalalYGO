@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Synchro Summon
 	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_EARTHBOUND),1,1,Synchro.NonTunerEx(Card.IsSetCard,SET_EARTHBOUND),1,99)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Skip Battle Phase or gain LP
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DESTROY)

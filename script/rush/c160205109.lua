@@ -1,3 +1,3 @@
 --終焔魔神ディスペラシオン［Ｒ］
---Doomblaze Tainted Overwatcher Despairacion [R]
+--Doomblaze Fiend Overlord Despairacion [R]
 Duel.LoadCardScriptAlias(160205009)

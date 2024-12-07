@@ -3,8 +3,8 @@
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
-	--Fusion Materials: 1 Illusion monster + 1 LIGHT Mentor monster
+	c:EnableReviveLimit()
+	--Fusion Materials: 1 Illusion monster + 1 LIGHT Spellcaster monster
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_ILLUSION),s.matfilter)
 	--Monsters your opponent controls lose 500 ATK/DEF for each "Azamina" monster you control
 	local e1=Effect.CreateEffect(c)
@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	e3:SetTarget(s.thtg)
 	e3:SetOperation(s.thop)
 	c:RegisterEffect(e3)
-	--Add 1 "Sinful Spoils" Actional from your Deck to your hand
+	--Add 1 "Sinful Spoils" Spell from your Deck to your hand
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -44,7 +44,7 @@ function s.initial_effect(c)
 end
 s.listed_series={SET_AZAMINA,SET_SINFUL_SPOILS}
 function s.matfilter(c,fc,sumtype,tp)
-	return c:IsAttribute(ATTRIBUTE_LIGHT,fc,sumtype,tp) and c:IsRace(RACE_MENTOR,fc,sumtype,tp)
+	return c:IsAttribute(ATTRIBUTE_LIGHT,fc,sumtype,tp) and c:IsRace(RACE_SPELLCASTER,fc,sumtype,tp)
 end
 function s.thfilter(c,tp)
 	return c:IsSetCard({SET_AZAMINA,SET_SINFUL_SPOILS}) and c:IsAbleToHand()
@@ -62,7 +62,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.desthfilter(c)
-	return c:IsSetCard(SET_SINFUL_SPOILS) and c:IsActional() and c:IsAbleToHand()
+	return c:IsSetCard(SET_SINFUL_SPOILS) and c:IsSpell() and c:IsAbleToHand()
 end
 function s.desthtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.desthfilter,tp,LOCATION_DECK,0,1,nil) end

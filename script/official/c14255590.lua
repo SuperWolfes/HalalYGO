@@ -24,7 +24,7 @@ end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:GetControler()~=tp or not c:IsRelateToEffect(e) or c:IsFacedown() then return end
-	local ct=Duel.GetMatchingGroupCount(Card.IsCode,tp,LOCATION_REST,0,nil,id)
+	local ct=Duel.GetMatchingGroupCount(Card.IsCode,tp,LOCATION_GRAVE,0,nil,id)
 	if ct>0 then
 		Duel.DiscardDeck(1-tp,ct,REASON_EFFECT)
 	end

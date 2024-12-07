@@ -1,4 +1,4 @@
---Actional Spice Caraway
+--Spell Spice Caraway
 local s,id=GetID()
 function s.initial_effect(c)
 	--recover&damage

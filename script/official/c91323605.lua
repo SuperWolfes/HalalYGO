@@ -25,7 +25,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,tp,rp)
 end
 function s.fieldfilter(c,codes)
-	return c:IsFieldActional() and not c:IsCode(codes) and not c:IsUnliked()
+	return c:IsFieldSpell() and not c:IsCode(codes) and not c:IsForbidden()
 end
 function s.spfilter(c,e,tp)
 	return c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -47,7 +47,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if not tc then return end
 	local fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
 	if fc then
-		Duel.SendtoRest(fc,REASON_RULE)
+		Duel.SendtoGrave(fc,REASON_RULE)
 		Duel.BreakEffect()
 	end
 	if Duel.MoveToField(tc,tp,tp,LOCATION_FZONE,POS_FACEUP,true) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 then

@@ -20,10 +20,10 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 		return #g>0 and g:FilterCount(Card.IsDiscardable,nil)==#g
 	end
 	local g=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
-	Duel.SendtoRest(g,REASON_COST+REASON_DISCARD)
+	Duel.SendtoGrave(g,REASON_COST+REASON_DISCARD)
 end
 function s.filter(c,e,tp)
-	return c:IsLocation(LOCATION_REST) and c:IsControler(tp) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsLocation(LOCATION_GRAVE) and c:IsControler(tp) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 		and c:IsCanBeEffectTarget(e)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -32,7 +32,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		and eg and eg:IsExists(s.filter,1,nil,e,tp) end
 	local g=eg:Filter(s.filter,nil,e,tp)
 	Duel.SetTargetCard(g)
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,LOCATION_REST)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,LOCATION_GRAVE)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()

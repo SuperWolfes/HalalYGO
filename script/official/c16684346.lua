@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	e3:SetCategory(CATEGORY_TOEXTRA)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e3:SetCode(EVENT_PHASE+PHASE_END)
-	e3:SetRange(LOCATION_REST)
+	e3:SetRange(LOCATION_GRAVE)
 	e3:SetCountLimit(1,id)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e3:SetCondition(function(_,tp) return Duel.IsTurnPlayer(tp) end)
@@ -77,7 +77,7 @@ function s.rescon(sg,e,tp)
 end
 function s.tetg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	local rg=Duel.GetMatchingGroup(s.tedfilter,tp,LOCATION_REST,0,nil,e)
+	local rg=Duel.GetMatchingGroup(s.tedfilter,tp,LOCATION_GRAVE,0,nil,e)
 	if chk==0 then return #rg>=2 and aux.SelectUnselectGroup(rg,e,tp,2,2,s.rescon,0) end
 	local g=aux.SelectUnselectGroup(rg,e,tp,2,2,s.rescon,1,tp,HINTMSG_TODECK)
 	Duel.SetTargetCard(g)

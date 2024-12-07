@@ -18,7 +18,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.cfilter(c,lv)
-	return c:GetLevel()==lv and c:IsAttribute(ATTRIBUTE_DARK) and c:IsAbleToRestAsCost()
+	return c:GetLevel()==lv and c:IsAttribute(ATTRIBUTE_DARK) and c:IsAbleToGraveAsCost()
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local a=Duel.GetAttacker()
@@ -27,9 +27,9 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_DECK,0,1,nil,lv) 
 		and Duel.SelectYesNo(tp,aux.Stringid(92720564,0)) then
 		Duel.Hint(HINT_CARD,0,id)
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 		local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_DECK,0,1,1,nil,lv)
-		Duel.SendtoRest(g,REASON_COST)
+		Duel.SendtoGrave(g,REASON_COST)
 		Duel.NegateAttack()
 	end
 end

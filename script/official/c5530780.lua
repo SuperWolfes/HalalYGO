@@ -3,7 +3,7 @@
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	-- 2 Level 4 monsters
 	Xyz.AddProcedure(c,nil,4,2)
 	-- Check materials on Xyz Summon
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e0:SetCode(EFFECT_MATERIAL_CHECK)
 	e0:SetValue(s.valcheck)
 	c:RegisterEffect(e0)
-	-- Effect mismatching immunity
+	-- Effect destruction immunity
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetRange(LOCATION_MZONE)
@@ -55,7 +55,7 @@ function s.valcheck(e,c)
 end
 function s.indval(e,re,rp)
 	local rc=re:GetHandler()
-	return rc:IsSummonType(SUMMON_TYPE_SPECIAL) and rc:IsSummonLocation(LOCATION_REST)
+	return rc:IsSummonType(SUMMON_TYPE_SPECIAL) and rc:IsSummonLocation(LOCATION_GRAVE)
 		and re:IsActiveType(TYPE_MONSTER) and re:IsActivated()
 end
 function s.ngtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

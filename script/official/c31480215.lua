@@ -1,8 +1,8 @@
 --幻獣機ウォーブラン
---Mecha Illusion Beast Warbluran
+--Mecha Phantom Beast Warbluran
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon 1 "Mecha Illusion Beast Token"
+	--Special Summon 1 "Mecha Phantom Beast Token"
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOKEN)
@@ -35,7 +35,7 @@ function s.initial_effect(c)
 	e4:SetOperation(s.lvop)
 	c:RegisterEffect(e4)
 end
-s.listed_names={TOKEN_MECHA_ILLUSION_BEAST}
+s.listed_names={TOKEN_MECHA_PHANTOM_BEAST}
 function s.tknfilter(c)
 	return c:IsType(TYPE_TOKEN) or c:IsOriginalType(TYPE_TOKEN)
 end
@@ -43,7 +43,7 @@ function s.indcon(e)
 	return Duel.IsExistingMatchingCard(s.tknfilter,e:GetHandlerPlayer(),LOCATION_ONFIELD,0,1,nil)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_REST) and r==REASON_SYNCHRO
+	return e:GetHandler():IsLocation(LOCATION_GRAVE) and r==REASON_SYNCHRO
 		and e:GetHandler():GetReasonCard():IsRace(RACE_MACHINE)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -61,8 +61,8 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetTarget(s.splimit)
 	e1:SetReset(RESET_PHASE|PHASE_END)
 	Duel.RegisterEffect(e1,tp)
-	if Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_MECHA_ILLUSION_BEAST,SET_MECHA_ILLUSION_BEAST,TYPES_TOKEN,0,0,3,RACE_MACHINE,ATTRIBUTE_WIND) then
-		local token=Duel.CreateToken(tp,TOKEN_MECHA_ILLUSION_BEAST)
+	if Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_MECHA_PHANTOM_BEAST,SET_MECHA_PHANTOM_BEAST,TYPES_TOKEN,0,0,3,RACE_MACHINE,ATTRIBUTE_WIND) then
+		local token=Duel.CreateToken(tp,TOKEN_MECHA_PHANTOM_BEAST)
 		Duel.SpecialSummon(token,0,tp,tp,false,false,POS_FACEUP)
 	end
 end
@@ -70,8 +70,8 @@ function s.splimit(e,c,tp,sumtp,sumpos)
 	return not c:IsAttribute(ATTRIBUTE_WIND)
 end
 function s.lvcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.CheckReleaseGroupCost(tp,Card.IsSetCard,1,false,nil,e:GetHandler(),SET_MECHA_ILLUSION_BEAST) end
-	local g=Duel.SelectReleaseGroupCost(tp,Card.IsSetCard,1,1,false,nil,e:GetHandler(),SET_MECHA_ILLUSION_BEAST)
+	if chk==0 then return Duel.CheckReleaseGroupCost(tp,Card.IsSetCard,1,false,nil,e:GetHandler(),SET_MECHA_PHANTOM_BEAST) end
+	local g=Duel.SelectReleaseGroupCost(tp,Card.IsSetCard,1,1,false,nil,e:GetHandler(),SET_MECHA_PHANTOM_BEAST)
 	Duel.Release(g,REASON_COST)
 end
 function s.lvop(e,tp,eg,ep,ev,re,r,rp)

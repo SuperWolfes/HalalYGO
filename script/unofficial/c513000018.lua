@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,4,3)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--act limit
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(54719828,0))
@@ -64,7 +64,7 @@ function s.distarget(e,c)
 	if e:GetLabel()==0 then
 		type=TYPE_MONSTER
 	elseif e:GetLabel()==1 then
-		type=TYPE_ACTIONAL
+		type=TYPE_SPELL
 	else
 		type=TYPE_TRAP
 	end
@@ -75,7 +75,7 @@ function s.disoperation(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetLabel()==0 then
 		type=TYPE_MONSTER
 	elseif e:GetLabel()==1 then
-		type=TYPE_ACTIONAL
+		type=TYPE_SPELL
 	else
 		type=TYPE_TRAP
 	end

@@ -1,5 +1,5 @@
 -- 墓守の罠
--- Restkeeper's Trap
+-- Gravekeeper's Trap
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	-- Cannot activate effects or Special Summon from the RP
+	-- Cannot activate effects or Special Summon from the GY
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
@@ -17,12 +17,12 @@ function s.initial_effect(c)
 	e2:SetTargetRange(0,1)
 	e2:SetCondition(s.limcon)
 	local e3=e2:Clone()
-	e2:SetValue(function(_,re) return re:GetActivateLocation()==LOCATION_REST end)
+	e2:SetValue(function(_,re) return re:GetActivateLocation()==LOCATION_GRAVE end)
 	c:RegisterEffect(e2)
 	e3:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
-	e3:SetTarget(function(_,c) return c:IsLocation(LOCATION_REST) end)
+	e3:SetTarget(function(_,c) return c:IsLocation(LOCATION_GRAVE) end)
 	c:RegisterEffect(e3)
-	-- Search 1 "Restkeeper's" or EARTH Wanderer monster
+	-- Search 1 "Gravekeeper's" or EARTH Fairy monster
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,0))
 	e4:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND)
@@ -39,7 +39,7 @@ function s.initial_effect(c)
 	-- Declare card name
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(id,1))
-	e5:SetCategory(CATEGORY_TOREST)
+	e5:SetCategory(CATEGORY_TOGRAVE)
 	e5:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e5:SetCode(EVENT_PREDRAW)
 	e5:SetRange(LOCATION_SZONE)
@@ -57,10 +57,10 @@ function s.initial_effect(c)
 		Duel.RegisterEffect(ge1,0)
 	end)
 end
-s.listed_names={CARD_EXCHANGE_GUARDIAN}
-s.listed_series={SET_RESTKEEPERS}
+s.listed_names={CARD_EXCHANGE_SPIRIT}
+s.listed_series={SET_GRAVEKEEPERS}
 function s.limcon(e)
-	return Duel.IsExistingMatchingCard(Card.IsCode,e:GetHandlerPlayer(),LOCATION_REST,0,1,nil,CARD_EXCHANGE_GUARDIAN)
+	return Duel.IsExistingMatchingCard(Card.IsCode,e:GetHandlerPlayer(),LOCATION_GRAVE,0,1,nil,CARD_EXCHANGE_SPIRIT)
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,nil) end
@@ -68,7 +68,7 @@ function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.thfilter(c)
 	return c:IsAbleToHand() and c:IsMonster()
-		and (c:IsSetCard(SET_RESTKEEPERS) or (c:IsAttribute(ATTRIBUTE_EARTH) and c:IsRace(RACE_WANDERER)))
+		and (c:IsSetCard(SET_GRAVEKEEPERS) or (c:IsAttribute(ATTRIBUTE_EARTH) and c:IsRace(RACE_FAIRY)))
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -109,7 +109,7 @@ function s.drawcheck(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ConfirmCards(tp,eg)
 		local dg=eg:Filter(Card.IsCode,nil,e:GetLabel())
 		if #dg>0 then
-			Duel.SendtoRest(dg,REASON_EFFECT)
+			Duel.SendtoGrave(dg,REASON_EFFECT)
 		end
 		Duel.ShuffleHand(1-tp)
 	end

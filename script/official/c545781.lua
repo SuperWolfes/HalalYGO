@@ -1,5 +1,5 @@
 --妖竜マハーマ
---Mahaama the Wanderer Dragon
+--Mahaama the Fairy Dragon
 --Scripted by Hatter
 
 local s,id=GetID()

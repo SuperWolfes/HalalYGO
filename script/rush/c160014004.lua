@@ -41,5 +41,5 @@ function s.cfilter(c)
 	return c:IsRace(RACE_MACHINE) and c:IsLevelAbove(7)
 end
 function s.indcon2(e)
-	return e:GetHandler():IsMaximumMode() and Duel.IsExistingMatchingCard(s.cfilter,e:GetHandlerPlayer(),LOCATION_REST,0,1,nil)
+	return e:GetHandler():IsMaximumMode() and Duel.IsExistingMatchingCard(s.cfilter,e:GetHandlerPlayer(),LOCATION_GRAVE,0,1,nil)
 end

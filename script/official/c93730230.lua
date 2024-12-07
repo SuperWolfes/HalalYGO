@@ -3,8 +3,8 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before awaking
-	c:EnableAwakeLimit()	
+	--Must be properly summoned before reviving
+	c:EnableReviveLimit()	
 	--Xyz summon procedure
 	Xyz.AddProcedure(c,nil,3,2)
 	--When targeted for attack, make itself unable to be destroyed by battle or card effect

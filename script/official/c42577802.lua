@@ -24,13 +24,13 @@ function s.extrafil(e,tp,mg)
 	if Duel.GetCustomActivityCount(id,1-e:GetHandlerPlayer(),ACTIVITY_CHAIN)==0 then return nil end
 	local loc=LOCATION_DECK
 	if not Duel.IsPlayerAffectedByEffect(tp,69832741) then
-		loc=loc|LOCATION_REST
+		loc=loc|LOCATION_GRAVE
 	end
 	local g=Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRemove),tp,loc,0,mg)
-	return g,s.check(g:Split(Card.IsLocation,nil,LOCATION_REST))
+	return g,s.check(g:Split(Card.IsLocation,nil,LOCATION_GRAVE))
 end
 function s.extrtarget(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,0,tp,LOCATION_HAND+LOCATION_MZONE)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_REMOVE,nil,0,tp,LOCATION_REST+LOCATION_DECK)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_REMOVE,nil,0,tp,LOCATION_GRAVE+LOCATION_DECK)
 end

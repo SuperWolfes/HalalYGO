@@ -1,8 +1,8 @@
 --Ｂ・Ｆ－神事弓のサチ
---Battlewasp - Sachi the Locked Bow
+--Battlewasp - Sachi the Ritual Bow
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Synchro Summon procedure: 1 Insect Tuner + 1+ non-Tuner monsters
 	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_INSECT),1,1,Synchro.NonTuner(nil),1,99)
 	--Treat this card as a Tuner
@@ -34,7 +34,7 @@ function s.initial_effect(c)
 	e3:SetProperty(EFFECT_FLAG_DELAY)
 	e3:SetCode(EVENT_BE_MATERIAL)
 	e3:SetCountLimit(1,id)
-	e3:SetCondition(function(e,tp,eg,ep,ev,re,r,rp) return e:GetHandler():IsLocation(LOCATION_REST) and r==REASON_SYNCHRO end)
+	e3:SetCondition(function(e,tp,eg,ep,ev,re,r,rp) return e:GetHandler():IsLocation(LOCATION_GRAVE) and r==REASON_SYNCHRO end)
 	e3:SetTarget(s.damtg)
 	e3:SetOperation(s.damop)
 	c:RegisterEffect(e3)
@@ -55,7 +55,7 @@ function s.tnop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.sumcostfilter(c)
-	return c:IsContinuousActional() and c:IsAbleToHandAsCost() and c:IsFaceup()
+	return c:IsContinuousSpell() and c:IsAbleToHandAsCost() and c:IsFaceup()
 end
 function s.sumcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.sumcostfilter,tp,LOCATION_ONFIELD,0,1,nil) end

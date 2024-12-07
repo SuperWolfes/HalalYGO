@@ -1,10 +1,10 @@
 --神竜騎士フェルグラント
---Mega Dragon Knight Felgrand
+--Divine Dragon Knight Felgrand
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before awaking
-	c:EnableAwakeLimit()
+	--Must be properly summoned before reviving
+	c:EnableReviveLimit()
 	--Xyz summon procedure
 	Xyz.AddProcedure(c,nil,8,2)
 	--Targeted monster has its effects negated, also is unaffected by other card effects

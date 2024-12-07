@@ -1,5 +1,5 @@
 --
---Mentoral Hound
+--Magical Hound
 --Scripted by Hel
 local s,id=GetID()
 function s.initial_effect(c)
@@ -8,14 +8,14 @@ function s.initial_effect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e1:SetRange(LOCATION_HAND+LOCATION_REST)
+	e1:SetRange(LOCATION_HAND+LOCATION_GRAVE)
 	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_DUEL)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
 end
 function s.thfilter(c)
-	return c:IsFaceup() and (c:IsActional() or c:IsTrap()) and c:IsAbleToHand() 
+	return c:IsFaceup() and (c:IsSpell() or c:IsTrap()) and c:IsAbleToHand() 
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return s.thfilter(chkc) end

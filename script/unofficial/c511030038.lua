@@ -1,5 +1,5 @@
 --ハイドライブ・プロテクション
---Hyddendrive Protection
+--Hydradrive Protection
 --Scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
@@ -25,7 +25,7 @@ function s.monfilter(c)
 	return c:IsLinkMonster() and c:IsSetCard(0x577) and c:IsFaceup()
 end
 function s.stfilter(c)
-	return c:GetSequence()<5 and c:IsActionalTrap() and c:IsFaceup()
+	return c:GetSequence()<5 and c:IsSpellTrap() and c:IsFaceup()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end

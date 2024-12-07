@@ -1,6 +1,6 @@
 --ウェポンチェンジ
 --Weapon Change (GOAT)
---The atk/def is still linked to the actional
+--The atk/def is still linked to the spell
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

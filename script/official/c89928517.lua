@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOREST+CATEGORY_DRAW)
+	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOGRAVE+CATEGORY_DRAW)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1)
@@ -39,17 +39,17 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			Duel.SpecialSummonStep(tc2,0,1-tp,1-tp,false,false,POS_FACEUP)
 		end
 		Duel.SpecialSummonComplete()
-	elseif tc1:IsActional() and tc2:IsActional()
+	elseif tc1:IsSpell() and tc2:IsSpell()
 		and Duel.IsPlayerCanDraw(tp,2) and Duel.IsPlayerCanDraw(1-tp,2) then
 		Duel.Draw(tp,2,REASON_EFFECT)
 		Duel.Draw(1-tp,2,REASON_EFFECT)
 	elseif tc1:IsTrap() and tc2:IsTrap()
-		and Duel.IsExistingMatchingCard(Card.IsAbleToRest,tp,LOCATION_DECK,0,2,nil)
-		and Duel.IsExistingMatchingCard(Card.IsAbleToRest,tp,0,LOCATION_DECK,2,nil) then
+		and Duel.IsExistingMatchingCard(Card.IsAbleToGrave,tp,LOCATION_DECK,0,2,nil)
+		and Duel.IsExistingMatchingCard(Card.IsAbleToGrave,tp,0,LOCATION_DECK,2,nil) then
 		for p=0,1 do
-			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-			local g=Duel.SelectMatchingCard(p,Card.IsAbleToRest,p,LOCATION_DECK,0,2,2,nil)
-			Duel.SendtoRest(g,REASON_EFFECT)
+			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+			local g=Duel.SelectMatchingCard(p,Card.IsAbleToGrave,p,LOCATION_DECK,0,2,2,nil)
+			Duel.SendtoGrave(g,REASON_EFFECT)
 		end
 	end
 end

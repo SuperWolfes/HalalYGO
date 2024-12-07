@@ -1,5 +1,5 @@
 --力天使ヴァルキリア
---Power Angel Balkania
+--Power Angel Valkyria
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon
@@ -20,7 +20,7 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return dp==tp and (re:IsActiveType(TYPE_MONSTER) or re:IsHasType(EFFECT_TYPE_ACTIVATE))
 end
 function s.thfilter(c)
-	return c:IsRace(RACE_WANDERER) and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsAbleToHand()
+	return c:IsRace(RACE_FAIRY) and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

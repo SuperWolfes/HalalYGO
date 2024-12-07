@@ -5,10 +5,10 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--When normal summoned, send any number of "Fluorescent Vluorescences" from deck to RP
+	--When normal summoned, send any number of "Fluorescent Vluorescences" from deck to GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_TOREST)
+	e1:SetCategory(CATEGORY_TOGRAVE)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_SUMMON_SUCCESS)
 	e1:SetCost(s.tgcost)
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCountLimit(1)
 	e2:SetTarget(s.atttg)
 	e2:SetOperation(s.attop)
@@ -40,21 +40,21 @@ function s.tgcost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 	--Check for "Fluorescent Vluorescences"
 function s.tgfilter(c)
-	return c:IsCode(id) and c:IsAbleToRest()
+	return c:IsCode(id) and c:IsAbleToGrave()
 end
 	--Activation legality
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
 end
-	--Send any number of "Fluorescent Vluorescences" from deck to RP
+	--Send any number of "Fluorescent Vluorescences" from deck to GY
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_DECK,0,nil)
 	if #g>0 then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 		local sg=g:Select(tp,1,99,nil)
-		Duel.SendtoRest(sg,REASON_EFFECT)
+		Duel.SendtoGrave(sg,REASON_EFFECT)
 	end
 end
 	--Activation legality
@@ -62,7 +62,7 @@ function s.atttg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return not e:GetHandler():IsAttribute(ATTRIBUTE_DARK) end
 	--Operation info needed to handle the interaction with "Necrovalley"
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,c,1,tp,LOCATION_REST)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,c,1,tp,LOCATION_GRAVE)
 end
 	--Make itself become DARK
 function s.attop(e,tp,eg,ep,ev,re,r,rp)

@@ -43,7 +43,7 @@ function s.initial_effect(c)
 	e6:SetDescription(aux.Stringid(id,2))
 	e6:SetCategory(CATEGORY_TODECK)
 	e6:SetType(EFFECT_TYPE_IGNITION)
-	e6:SetRange(LOCATION_REST)
+	e6:SetRange(LOCATION_GRAVE)
 	e6:SetCost(aux.bfgcost)
 	e6:SetTarget(s.tdtg)
 	e6:SetOperation(s.tdop)
@@ -86,11 +86,11 @@ function s.tdfilter(c)
 	return c:IsSetCard(0x15) and c:IsAbleToDeck()
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST,0,1,e:GetHandler()) end
-	local g=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_REST,0,nil)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_GRAVE,0,1,e:GetHandler()) end
+	local g=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_GRAVE,0,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,1,0,0)
 end
 function s.tdop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_GRAVE,0,nil)
 	Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
 end

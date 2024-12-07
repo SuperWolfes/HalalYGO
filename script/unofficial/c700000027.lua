@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_WINGEDBEAST),8,2)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Reduce ATK
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_ATKCHANGE)
@@ -28,12 +28,12 @@ function s.atkfilter(c)
 end
 function s.target(e,tp,ep,eg,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.HasNonZeroAttack,tp,0,LOCATION_MZONE,1,nil) 
-		and Duel.IsExistingMatchingCard(s.atkfilter,tp,LOCATION_REST,0,1,nil) end
+		and Duel.IsExistingMatchingCard(s.atkfilter,tp,LOCATION_GRAVE,0,1,nil) end
 end
 function s.operation(e,tp,ep,eg,ev,re,r,rp)
 	local mg=Duel.GetMatchingGroupCount(s.filter,tp,0,LOCATION_MZONE,nil,e)
-	local rc=Duel.GetMatchingGroupCount(s.atkfilter,tp,LOCATION_REST,0,nil)
-	local g=Duel.GetMatchingGroup(s.atkfilter,tp,LOCATION_REST,0,nil)
+	local rc=Duel.GetMatchingGroupCount(s.atkfilter,tp,LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.atkfilter,tp,LOCATION_GRAVE,0,nil)
 	local ct=g:GetFirst()
 	if mg==0 or rc==0 then return end
 	repeat

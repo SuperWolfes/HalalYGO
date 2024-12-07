@@ -1,5 +1,5 @@
 --聖装ストラビショップ
---Clean Arms - Strabishop
+--Sacred Arms - Strabishop
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.eqfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_MENTAL) and not c:IsMaximumModeSide()
+	return c:IsFaceup() and c:IsRace(RACE_PSYCHIC) and not c:IsMaximumModeSide()
 end
 function s.eqlimit(e,c)
 	return c:IsFaceup()

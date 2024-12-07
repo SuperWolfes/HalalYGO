@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--Search 1 "Abyss Script" Actional
+	--Search 1 "Abyss Script" Spell
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.thtg)
 	e2:SetOperation(s.thop)
 	c:RegisterEffect(e2)
-	--Change a monster effect to "Destroy 1 Set Actional/Trap your opponent controls"
+	--Change a monster effect to "Destroy 1 Set Spell/Trap your opponent controls"
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e3:SetCode(EVENT_CHAIN_SOLVING)
@@ -34,11 +34,11 @@ function s.cfilter(c)
 	return c:IsSetCard(SET_ABYSS_ACTOR) and c:IsType(TYPE_PENDULUM) and not c:IsPublic()
 end
 function s.cfilter2(c,tp)
-	return c:IsSetCard(SET_ABYSS_SCRIPT) and c:IsActional() and not c:IsPublic()
+	return c:IsSetCard(SET_ABYSS_SCRIPT) and c:IsSpell() and not c:IsPublic()
 		and Duel.IsExistingMatchingCard(s.cfilter3,tp,LOCATION_DECK,0,1,nil,c:GetCode())
 end
 function s.cfilter3(c,code)
-	return c:IsSetCard(SET_ABYSS_SCRIPT) and c:IsActional() and not c:IsCode(code) and c:IsAbleToHand()
+	return c:IsSetCard(SET_ABYSS_SCRIPT) and c:IsSpell() and not c:IsCode(code) and c:IsAbleToHand()
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil)
@@ -76,7 +76,7 @@ function s.confilter(c)
 	return c:IsFaceup() and c:IsSetCard(SET_ABYSS_ACTOR) and c:IsSummonType(SUMMON_TYPE_PENDULUM)
 end
 function s.desfilter(c)
-	return c:IsFacedown() and c:IsActionalTrap()
+	return c:IsFacedown() and c:IsSpellTrap()
 end
 function s.repop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,0,id)

@@ -1,11 +1,11 @@
 --幻影騎士団ブレイクソード (Anime)
---The Illusion Knights of Break Sword (Anime)
+--The Phantom Knights of Break Sword (Anime)
 --rescripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz Summon
 	Xyz.AddProcedure(c,aux.FilterBoolFunction(Card.IsAttribute,ATTRIBUTE_DARK),3,2)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--registration before leaving
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
@@ -42,17 +42,17 @@ function s.sumtg(e,tp,eg,ep,ev,re,r,rp,chk)
 		g2=g:Filter(s.spfilter,nil,e,tp)
 	end
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if ft>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
+	if ft>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
 	if chk==0 then return g and g1 and g2 and #g1==#g2 and ft>=#g2 end
 	local loc=0
-	if g2:IsExists(Card.IsLocation,1,nil,LOCATION_REST) then loc=LOCATION_REST end
+	if g2:IsExists(Card.IsLocation,1,nil,LOCATION_GRAVE) then loc=LOCATION_GRAVE end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g2,#g2,tp,loc)
 end
 function s.sumop(e,tp,eg,ep,ev,re,r,rp)
 	local g=e:GetLabelObject():GetLabelObject()
 	g=g:Filter(s.spfilter,nil,e,tp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if ft>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
+	if ft>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
 	if ft<#g then return end
 	for tc in aux.Next(g) do
 		Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP)

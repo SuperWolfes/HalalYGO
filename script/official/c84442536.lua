@@ -59,6 +59,6 @@ function s.repop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Destroy(tc,REASON_EFFECT)
 	end
 	if e:IsHasType(EFFECT_TYPE_ACTIVATE) then
-		e:GetHandler():CancelToRest(false)
+		e:GetHandler():CancelToGrave(false)
 	end
 end

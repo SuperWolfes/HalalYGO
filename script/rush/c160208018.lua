@@ -1,10 +1,10 @@
 --環幻楽鬼神トランスゴッドブレス
---Trancemonsterbreath the Nasheed Tainted Being
+--Trancegodbreath the Music Fiend Deity
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,160004029,160208031)
 	--Gain piercing damage+trap protection
 	local e1=Effect.CreateEffect(c)
@@ -21,14 +21,14 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsAbleToEnterBP() and e:GetHandler():CanGetPiercingRush()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,nil) end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	--Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,3,nil)
-	if Duel.SendtoRest(g,REASON_COST)==0 then return end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,3,nil)
+	if Duel.SendtoGrave(g,REASON_COST)==0 then return end
 	--Effect
 	if c:IsRelateToEffect(e) and c:IsFaceup() then
 		--Cannot be destroyed by opponent's trap

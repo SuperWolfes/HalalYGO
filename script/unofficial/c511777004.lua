@@ -1,5 +1,5 @@
 --魔法の歯車 (Anime)
---Actional Gear (Anime)
+--Spell Gear (Anime)
 --fixed by MLD
 local s,id=GetID()
 function s.initial_effect(c)
@@ -16,14 +16,14 @@ end
 s.listed_series={0x7}
 s.listed_names={83104731}
 function s.cfilter(c)
-	return c:IsSetCard(0x7) and c:IsAbleToRestAsCost()
+	return c:IsSetCard(0x7) and c:IsAbleToGraveAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(1)
 	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_MZONE,0,nil)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>-3 and #g>2 and aux.SelectUnselectGroup(g,e,tp,3,3,aux.ChkfMMZ(1),0) end
-	local sg=aux.SelectUnselectGroup(g,e,tp,3,3,aux.ChkfMMZ(1),1,tp,HINTMSG_TOREST)
-	Duel.SendtoRest(sg,REASON_COST)
+	local sg=aux.SelectUnselectGroup(g,e,tp,3,3,aux.ChkfMMZ(1),1,tp,HINTMSG_TOGRAVE)
+	Duel.SendtoGrave(sg,REASON_COST)
 end
 function s.filter(c,e,tp)
 	return c:IsCode(83104731) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
@@ -39,7 +39,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ft<=0 then return end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
 	local dg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_DECK,0,nil,e,tp)
 	local hg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_HAND,0,nil,e,tp)
 	if #dg>0 then

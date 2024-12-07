@@ -3,7 +3,7 @@
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	--Equip 1 Equip Actional from your Deck to your Warrior monster
+	--Equip 1 Equip Spell from your Deck to your Warrior monster
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_EQUIP)
@@ -39,13 +39,13 @@ s.listed_series={SET_INFERNOBLE_KNIGHT}
 function s.eqcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsDiscardable() end
-	Duel.SendtoRest(c,REASON_COST+REASON_DISCARD)
+	Duel.SendtoGrave(c,REASON_COST+REASON_DISCARD)
 end
 function s.tgfilter(c,tp)
 	return c:IsFaceup() and c:IsRace(RACE_WARRIOR) and Duel.IsExistingMatchingCard(s.eqfilter,tp,LOCATION_DECK,0,1,nil,c,tp)
 end
 function s.eqfilter(c,tc,tp)
-	return c:IsEquipActional() and c:CheckEquipTarget(tc) and c:CheckUniqueOnField(tp) and not c:IsUnliked()
+	return c:IsEquipSpell() and c:CheckEquipTarget(tc) and c:CheckUniqueOnField(tp) and not c:IsForbidden()
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.tgfilter(chkc,tp) end
@@ -68,7 +68,7 @@ end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local bc=c:GetBattleTarget()
-	return c:IsLocation(LOCATION_REST) and rp==1-tp and bc:IsFaceup() and bc:IsRelateToBattle() and e:GetLabel()==1
+	return c:IsLocation(LOCATION_GRAVE) and rp==1-tp and bc:IsFaceup() and bc:IsRelateToBattle() and e:GetLabel()==1
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

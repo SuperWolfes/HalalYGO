@@ -3,7 +3,7 @@
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Xyz Summon Procedure
 	Xyz.AddProcedure(c,nil,3,2,nil,nil,99)
 	--Change the ATK/DEF of a monster whose current ATK and/or DEF is different from its original value to its original ATK/DEF

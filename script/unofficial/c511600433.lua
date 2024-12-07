@@ -26,7 +26,7 @@ function s.initial_effect(c)
 end
 s.listed_names={53855410}
 function s.gfilter(c,tp)
-	return c:GetPreviousLocation()==LOCATION_REST and c:IsPreviousControler(tp)
+	return c:GetPreviousLocation()==LOCATION_GRAVE and c:IsPreviousControler(tp)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.gfilter,1,nil,tp)
@@ -43,7 +43,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.tkcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_REST) and r==REASON_SYNCHRO
+	return e:GetHandler():IsLocation(LOCATION_GRAVE) and r==REASON_SYNCHRO
 end
 function s.tktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

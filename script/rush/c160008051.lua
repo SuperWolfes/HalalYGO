@@ -2,7 +2,7 @@
 --Release Wrath
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send the top 2 cards of your Deck to the RP
+	--Send the top 2 cards of your Deck to the GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DECKDES)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -24,7 +24,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DECKDES,nil,0,tp,5)
 end
 function s.cfilter(c)
-	return c:IsLocation(LOCATION_REST) and c:IsRace(RACE_REPTILE) and c:IsMonster()
+	return c:IsLocation(LOCATION_GRAVE) and c:IsRace(RACE_REPTILE) and c:IsMonster()
 end
 function s.filter(c)
 	return c:IsRace(RACE_REPTILE) and c:IsFaceup() 

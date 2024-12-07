@@ -1,5 +1,5 @@
 --幻影の妖精 (Anime)
---Dreamrise (Anime)
+--Dreamsprite (Anime)
 --scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)

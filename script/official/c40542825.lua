@@ -1,5 +1,5 @@
 --憑依装着－ライナ
---Familiar-Interwoven - Lyna
+--Familiar-Possessed - Lyna
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon proc
@@ -32,10 +32,10 @@ function s.initial_effect(c)
 end
 s.listed_names={73318863}
 function s.spfilter1(c)
-	return c:IsFaceup() and c:IsCode(73318863) and c:IsAbleToRestAsCost()
+	return c:IsFaceup() and c:IsCode(73318863) and c:IsAbleToGraveAsCost()
 end
 function s.spfilter2(c)
-	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsAbleToRestAsCost()
+	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsAbleToGraveAsCost()
 end
 function s.rescon(sg,e,tp,mg)
 	return aux.ChkfMMZ(1)(sg,e,tp,mg) and sg:IsExists(s.chk,1,nil,sg)
@@ -57,7 +57,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,c)
 	local g1=Duel.GetMatchingGroup(s.spfilter1,tp,LOCATION_MZONE,0,nil)
 	local g2=Duel.GetMatchingGroup(s.spfilter2,tp,LOCATION_MZONE,0,nil)
 	g1:Merge(g2)
-	local g=aux.SelectUnselectGroup(g1,e,tp,2,2,s.rescon,1,tp,HINTMSG_TOREST)
+	local g=aux.SelectUnselectGroup(g1,e,tp,2,2,s.rescon,1,tp,HINTMSG_TOGRAVE)
 	if #g>0 then
 		g:KeepAlive()
 		e:SetLabelObject(g)
@@ -68,11 +68,11 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 	Duel.ShuffleDeck(tp)
 end
 function s.thfilter(c)
-	return c:GetDefense()==1500 and c:IsRace(RACE_MENTOR) and not c:IsCode(id) and c:IsAbleToHand()
+	return c:GetDefense()==1500 and c:IsRace(RACE_SPELLCASTER) and not c:IsCode(id) and c:IsAbleToHand()
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_SPECIAL+1)

@@ -35,6 +35,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			Duel.ShuffleHand(tp)
 			g:Sub(sg)
 		end
-		Duel.SendtoRest(g,REASON_EFFECT|REASON_EXCAVATE)
+		Duel.SendtoGrave(g,REASON_EFFECT|REASON_EXCAVATE)
 	end
 end

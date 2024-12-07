@@ -29,7 +29,7 @@ function s.discost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local hg=Duel.GetMatchingGroup(s.discostfilter,tp,LOCATION_HAND,0,nil)
 	if chk==0 then return aux.SelectUnselectGroup(hg,e,tp,2,2,s.rescon,0) end
 	local g=aux.SelectUnselectGroup(hg,e,tp,2,2,s.rescon,1,tp,HINTMSG_DISCARD)
-	Duel.SendtoRest(g,REASON_COST|REASON_DISCARD)
+	Duel.SendtoGrave(g,REASON_COST|REASON_DISCARD)
 end
 function s.distg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(1-tp) and chkc:IsLocation(LOCATION_MZONE) and not chkc:HasFlagEffect(id) and chkc:IsFaceup() end

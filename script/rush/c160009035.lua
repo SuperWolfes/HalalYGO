@@ -1,5 +1,5 @@
 --グランド・ケルベロス
---Ground Cebrar
+--Ground Cerberus
 local s,id=GetID()
 function s.initial_effect(c)
 	--Inflict damage equal to the number of your EARTH Machines x 300

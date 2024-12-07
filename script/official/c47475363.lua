@@ -1,5 +1,5 @@
 --波紋のバリア －ウェーブ・フォース－
---Drowning Mirror Fcoree
+--Drowning Mirror Force
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

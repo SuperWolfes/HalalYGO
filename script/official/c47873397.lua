@@ -1,9 +1,9 @@
 --トーテムポール
---Tower Pole
+--Totem Pole
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	Duel.EnableGlobalFlag(GLOBALFLAG_SELF_TOREST)
+	Duel.EnableGlobalFlag(GLOBALFLAG_SELF_TOGRAVE)
 	c:EnableCounterPermit(0x20f)
 	--Activate
 	local e0=Effect.CreateEffect(c)
@@ -31,11 +31,11 @@ function s.initial_effect(c)
 	e2:SetCost(s.btcost)
 	e2:SetOperation(s.btop)
 	c:RegisterEffect(e2)
-	--Send this card to the RP
+	--Send this card to the GY
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	e3:SetCode(EFFECT_SELF_TOREST)
+	e3:SetCode(EFFECT_SELF_TOGRAVE)
 	e3:SetRange(LOCATION_SZONE)
 	e3:SetCondition(function(e) return e:GetHandler():GetCounter(0x20f)==3 end)
 	c:RegisterEffect(e3)
@@ -44,7 +44,7 @@ function s.initial_effect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetType(EFFECT_TYPE_QUICK_O)
 	e4:SetCode(EVENT_FREE_CHAIN)
-	e4:SetRange(LOCATION_REST)
+	e4:SetRange(LOCATION_GRAVE)
 	e4:SetCondition(s.damcon)
 	e4:SetCost(aux.bfgcost)
 	e4:SetOperation(s.damop)
@@ -66,7 +66,7 @@ function s.btop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
-	return not Duel.HasFlagEffect(tp,id) and Duel.GetMatchingGroup(s.filter,tp,LOCATION_REST,0,nil):GetClassCount(Card.GetCode)>=3
+	return not Duel.HasFlagEffect(tp,id) and Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,nil):GetClassCount(Card.GetCode)>=3
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.HasFlagEffect(tp,id) then return end

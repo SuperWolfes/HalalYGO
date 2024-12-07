@@ -48,7 +48,7 @@ function s.initial_effect(c)
 	e7:SetCategory(CATEGORY_DRAW)
 	e7:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e7:SetProperty(EFFECT_FLAG_DELAY)
-	e7:SetCode(EVENT_TO_REST)
+	e7:SetCode(EVENT_TO_GRAVE)
 	e7:SetCountLimit(1)
 	e7:SetCondition(s.drcon)
 	e7:SetTarget(s.drtg)
@@ -77,7 +77,7 @@ function s.tdcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetBattledGroupCount()>0
 end
 function s.tdfilter(c)
-	return c:IsActionalTrap() and c:IsAbleToDeck()
+	return c:IsSpellTrap() and c:IsAbleToDeck()
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

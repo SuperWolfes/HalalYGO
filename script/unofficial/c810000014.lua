@@ -1,4 +1,4 @@
---The Legendary Chancer
+--The Legendary Gambler
 --scripted by: UnknownGuest
 local s,id=GetID()
 function s.initial_effect(c)
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_NEGATE)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e2:SetCode(EVENT_TOSS_SUFFICE_NEGATE)
+	e2:SetCode(EVENT_TOSS_DICE_NEGATE)
 	e2:SetRange(LOCATION_SZONE)
 	--e2:SetCondition(s.condition)
 	--e2:SetTarget(s.target)
@@ -22,7 +22,7 @@ end
 s.roll_dice=true
 --[[function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.IsChainNegatable(ev) then return false end
-	local ex=Duel.GetOperationInfo(ev,CATEGORY_SUFFICE)
+	local ex=Duel.GetOperationInfo(ev,CATEGORY_DICE)
 	return ex and re:GetHandler():GetControler(1-tp)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)

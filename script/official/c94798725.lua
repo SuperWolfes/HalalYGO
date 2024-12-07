@@ -6,7 +6,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz Summon.
 	Xyz.AddProcedure(c,nil,5,2)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Negate card effects.
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

@@ -3,7 +3,7 @@
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--"Etraynze the Shadow Flower Ninja" + "Etraynze the Shadow Flower Ninja"
 	Fusion.AddProcMix(c,true,true,160005029,160005029)
 	--Reduce ATK/DEF

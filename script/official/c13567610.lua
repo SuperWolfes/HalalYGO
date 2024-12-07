@@ -3,7 +3,7 @@
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--You can only Special Summon "Etermakina Carnord(s)" once per turn
 	c:SetSPSummonOnce(id)
 	--Special Summon procedure
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE)
 	e1:SetCode(EFFECT_SPSUMMON_PROC)
-	e1:SetRange(LOCATION_HAND|LOCATION_REST)
+	e1:SetRange(LOCATION_HAND|LOCATION_GRAVE)
 	e1:SetCondition(s.spcon)
 	c:RegisterEffect(e1)
 	--This card gains 1000 ATK
@@ -32,12 +32,12 @@ function s.initial_effect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetCategory(CATEGORY_TODECK)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	e3:SetCode(EVENT_TO_REST)
+	e3:SetCode(EVENT_TO_GRAVE)
 	e3:SetCondition(function(e) return not e:GetHandler():IsPreviousLocation(LOCATION_HAND|LOCATION_DECK) end)
 	e3:SetTarget(s.tdtg)
 	e3:SetOperation(s.tdop)
 	c:RegisterEffect(e3)
-	--Register if a player activated a monster effect in the hand or RP this Duel
+	--Register if a player activated a monster effect in the hand or GY this Duel
 	aux.GlobalCheck(s,function()
 		local ge1=Effect.CreateEffect(c)
 		ge1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
@@ -50,7 +50,7 @@ s.listed_names={id}
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	if not re:IsMonsterEffect() or Duel.HasFlagEffect(rp,id) then return end
 	local loc=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_LOCATION)
-	if loc==LOCATION_HAND or loc==LOCATION_REST then
+	if loc==LOCATION_HAND or loc==LOCATION_GRAVE then
 		Duel.RegisterFlagEffect(rp,id,0,0,0)
 	end
 end

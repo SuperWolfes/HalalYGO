@@ -1,8 +1,8 @@
 --二重魔法
---Double Actional
+--Double Spell
 local s,id=GetID()
 function s.initial_effect(c)
-	--copy actional
+	--copy spell
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x95}
 function s.cfilter(c)
-	return c:IsDiscardable() and c:IsActional()
+	return c:IsDiscardable() and c:IsSpell()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,e:GetHandler()) end
@@ -22,7 +22,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.filter1(c,e,tp,eg,ep,ev,re,r,rp)
 	local te=c:CheckActivateEffect(false,false,false)
-	if c:IsActional() and te then
+	if c:IsSpell() and te then
 		if c:IsSetCard(0x95) then
 			local tg=te:GetTarget()
 			return not tg or tg(e,tp,eg,ep,ev,re,r,rp,0)
@@ -34,7 +34,7 @@ function s.filter1(c,e,tp,eg,ep,ev,re,r,rp)
 end
 function s.filter2(c,e,tp,eg,ep,ev,re,r,rp)
 	local te=c:CheckActivateEffect(false,false,false)
-	if c:IsActional() and not c:IsType(TYPE_EQUIP+TYPE_CONTINUOUS) and te then
+	if c:IsSpell() and not c:IsType(TYPE_EQUIP+TYPE_CONTINUOUS) and te then
 		if c:IsSetCard(0x95) then
 			local tg=te:GetTarget()
 			return not tg or tg(e,tp,eg,ep,ev,re,r,rp,0)
@@ -50,16 +50,16 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		local b=e:GetHandler():IsLocation(LOCATION_HAND)
 		local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
 		if (b and ft>1) or (not b and ft>0) then
-			return Duel.IsExistingTarget(s.filter1,tp,0,LOCATION_REST,1,e:GetHandler(),e,tp,eg,ep,ev,re,r,rp)
+			return Duel.IsExistingTarget(s.filter1,tp,0,LOCATION_GRAVE,1,e:GetHandler(),e,tp,eg,ep,ev,re,r,rp)
 		else
-			return Duel.IsExistingTarget(s.filter2,tp,0,LOCATION_REST,1,e:GetHandler(),e,tp,eg,ep,ev,re,r,rp)
+			return Duel.IsExistingTarget(s.filter2,tp,0,LOCATION_GRAVE,1,e:GetHandler(),e,tp,eg,ep,ev,re,r,rp)
 		end
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)>0 then
-		Duel.SelectTarget(tp,s.filter1,tp,0,LOCATION_REST,1,1,nil,e,tp,eg,ep,ev,re,r,rp)
+		Duel.SelectTarget(tp,s.filter1,tp,0,LOCATION_GRAVE,1,1,nil,e,tp,eg,ep,ev,re,r,rp)
 	else
-		Duel.SelectTarget(tp,s.filter2,tp,0,LOCATION_REST,1,1,nil,e,tp,eg,ep,ev,re,r,rp)
+		Duel.SelectTarget(tp,s.filter2,tp,0,LOCATION_GRAVE,1,1,nil,e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)

@@ -26,13 +26,13 @@ function s.initial_effect(c)
 	e2:SetLabelObject(e3)
 end
 function s.actlimit(e,te,tp)
-	if not te:IsHasType(EFFECT_TYPE_ACTIVATE) or not te:IsActiveType(TYPE_ACTIONAL) then return false end
+	if not te:IsHasType(EFFECT_TYPE_ACTIVATE) or not te:IsActiveType(TYPE_SPELL) then return false end
 	if tp==e:GetHandlerPlayer() then return e:GetLabel()==1
 	else return e:GetLabel()==2 end
 end
 function s.adjustop(e,tp,eg,ep,ev,re,r,rp)
-	local b1=Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_MENTOR),tp,LOCATION_MZONE,0,1,nil)
-	local b2=Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_MENTOR),tp,0,LOCATION_MZONE,1,nil)
+	local b1=Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_SPELLCASTER),tp,LOCATION_MZONE,0,1,nil)
+	local b2=Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_SPELLCASTER),tp,0,LOCATION_MZONE,1,nil)
 	local te=e:GetLabelObject()
 	if not b1 then te:SetLabel(1)
 	elseif b1 and not b2 then te:SetLabel(2)

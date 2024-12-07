@@ -1,5 +1,5 @@
 --太陽神の合一
---Sun Monster Unification
+--Sun God Unification
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)

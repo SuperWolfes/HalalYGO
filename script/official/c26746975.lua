@@ -3,7 +3,7 @@
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Must be Special Summoned with "Dark Element" or its own procedure
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e1:SetCode(EFFECT_SPSUMMON_PROC)
-	e1:SetRange(LOCATION_HAND|LOCATION_REST)
+	e1:SetRange(LOCATION_HAND|LOCATION_GRAVE)
 	e1:SetCondition(s.spproccon)
 	e1:SetTarget(s.spproctg)
 	e1:SetOperation(s.spprocop)
@@ -36,7 +36,7 @@ function s.initial_effect(c)
 	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e3:SetOperation(s.regop)
 	c:RegisterEffect(e3)
-	--Unaffected by other monsters' effects and your opponent's activated Actional effects
+	--Unaffected by other monsters' effects and your opponent's activated Spell effects
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_SINGLE)
 	e4:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -48,7 +48,7 @@ function s.initial_effect(c)
 end
 s.listed_names={25955164,62340868,98434877,53194323}
 function s.tdfilter(c)
-	return c:IsCode(CARDS_SANGA_KAZEJIN_SUIJIN) and c:IsAbleToDeckAsCost() and (c:IsFaceup() or c:IsLocation(LOCATION_HAND|LOCATION_REST))
+	return c:IsCode(CARDS_SANGA_KAZEJIN_SUIJIN) and c:IsAbleToDeckAsCost() and (c:IsFaceup() or c:IsLocation(LOCATION_HAND|LOCATION_GRAVE))
 end
 function s.rescon(sg,e,tp,mg)
 	return Duel.GetMZoneCount(tp,sg)>0
@@ -59,11 +59,11 @@ end
 function s.spproccon(e,c)
 	if c==nil then return true end
 	local tp=e:GetHandlerPlayer()
-	local rg=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_ONFIELD|LOCATION_HAND|LOCATION_REST|LOCATION_REMOVED,0,e:GetHandler())
+	local rg=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_ONFIELD|LOCATION_HAND|LOCATION_GRAVE|LOCATION_REMOVED,0,e:GetHandler())
 	return aux.SelectUnselectGroup(rg,e,tp,3,3,s.rescon,0)
 end
 function s.spproctg(e,tp,eg,ep,ev,re,r,rp,c)
-	local rg=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_ONFIELD|LOCATION_HAND|LOCATION_REST|LOCATION_REMOVED,0,e:GetHandler())
+	local rg=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_ONFIELD|LOCATION_HAND|LOCATION_GRAVE|LOCATION_REMOVED,0,e:GetHandler())
 	local g=aux.SelectUnselectGroup(rg,e,tp,3,3,s.rescon,1,tp,HINTMSG_TODECK,nil,nil,true)
 	if #g>0 then
 		g:KeepAlive()
@@ -86,5 +86,5 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.immvalue(e,te)
 	return (te:IsMonsterEffect() and te:GetOwner()~=e:GetOwner())
-		or (te:IsActivated() and te:IsActionalEffect() and te:GetOwnerPlayer()~=e:GetHandlerPlayer())
+		or (te:IsActivated() and te:IsSpellEffect() and te:GetOwnerPlayer()~=e:GetHandlerPlayer())
 end

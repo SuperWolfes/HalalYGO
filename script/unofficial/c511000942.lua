@@ -1,4 +1,4 @@
---Buried Miss Talisman
+--Buried Soul Talisman
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -17,7 +17,7 @@ function s.cfilter(c,tp,tid)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local tid=Duel.GetTurnCount()
-	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,LOCATION_REST,2,nil,tp,tid)
+	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,2,nil,tp,tid)
 end
 function s.filter(c,e,tp)
 	return c:IsLevelAbove(5) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -25,7 +25,7 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tid=Duel.GetTurnCount()
 	local dg=Group.CreateGroup()
-	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST,LOCATION_REST,nil,tp,tid)
+	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,nil,tp,tid)
 	local tc=g:GetFirst()
 	while tc do
 		dg:AddCard(tc:GetReasonCard())
@@ -41,7 +41,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tid=Duel.GetTurnCount()
 	local dg=Group.CreateGroup()
-	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST,LOCATION_REST,nil,tp,tid)
+	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,nil,tp,tid)
 	local tc=g:GetFirst()
 	while tc do
 		dg:AddCard(tc:GetReasonCard())

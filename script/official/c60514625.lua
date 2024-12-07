@@ -54,7 +54,7 @@ function s.tkop(e,tp,eg,ep,ev,re,r,rp)
 		local def=tc:GetDefense()
 		local p=tc:GetControler()
 		if Duel.Destroy(tc,REASON_EFFECT)==0 then return end
-		if Duel.GetLocationCount(p,LOCATION_MZONE)>0 and Duel.IsPlayerCanSpecialSummonMonster(p,id+1,0,TYPES_TOKEN,atk,def,1,RACE_MENTOR,ATTRIBUTE_DARK) then
+		if Duel.GetLocationCount(p,LOCATION_MZONE)>0 and Duel.IsPlayerCanSpecialSummonMonster(p,id+1,0,TYPES_TOKEN,atk,def,1,RACE_SPELLCASTER,ATTRIBUTE_DARK) then
 			local token=Duel.CreateToken(p,id+1) 
 			if Duel.SpecialSummonStep(token,0,p,p,false,false,POS_FACEUP) then
 				--Set ATK/DEF

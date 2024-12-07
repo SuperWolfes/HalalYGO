@@ -13,13 +13,13 @@ function s.initial_effect(c)
 end
 function s.cfilter(c,tp)
 	return c:IsType(TYPE_SYNCHRO) and c:IsPreviousLocation(LOCATION_ONFIELD) and c:IsPreviousPosition(POS_FACEUP) and c:IsControler(1-tp)
-		and c:IsLocation(LOCATION_REST)
+		and c:IsLocation(LOCATION_GRAVE)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,tp)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(1-tp) and s.cfilter(chkc) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(1-tp) and s.cfilter(chkc) end
 	if chk==0 then return true end
 	local g=eg:Filter(s.cfilter,nil,tp)
 	local tc=g:GetFirst()

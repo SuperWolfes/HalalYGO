@@ -56,7 +56,7 @@ function s.chk(c,tp,sg,g,sc,...)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local sg=Group.CreateGroup()
-	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST,0,nil,sg,e,tp)
+	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_GRAVE,0,nil,sg,e,tp)
 	if chk==0 then
 		if e:GetLabel()~=1 then return false end
 		e:SetLabel(0)

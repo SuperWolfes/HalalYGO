@@ -3,7 +3,7 @@
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Fusion Materials
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_AROMA),aux.FilterBoolFunctionEx(Card.IsRace,RACE_PLANT))
 	--Plant monsters you control cannot be destroyed by your opponent's card effects

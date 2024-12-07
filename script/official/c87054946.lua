@@ -1,10 +1,10 @@
 --焔凰神－ネフティス
---Nepolonis, the Clean Flame
+--Nephthys, the Sacred Flame
 local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
 	Link.AddProcedure(c,nil,2,99,s.lcheck)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--effect gain
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -23,10 +23,10 @@ function s.initial_effect(c)
 end
 s.listed_series={0x11f}
 function s.lcheck(g,lc,sumtype,tp)
-	return g:IsExists(Card.IsType,1,nil,TYPE_LOCKED,lc,sumtype,tp)
+	return g:IsExists(Card.IsType,1,nil,TYPE_RITUAL,lc,sumtype,tp)
 end
 function s.matcheck(e,c)
-	local ct=c:GetMaterial():FilterCount(Card.IsType,nil,TYPE_LOCKED)
+	local ct=c:GetMaterial():FilterCount(Card.IsType,nil,TYPE_RITUAL)
 	if ct>=1 then
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)

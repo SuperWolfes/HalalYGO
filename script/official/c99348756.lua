@@ -25,7 +25,7 @@ function s.atktg(e,c)
 	return c:GetCode()~=id and c:IsFaceup() and c:IsRace(RACE_WARRIOR)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_REST) and e:GetHandler():IsReason(REASON_BATTLE)
+	return e:GetHandler():IsLocation(LOCATION_GRAVE) and e:GetHandler():IsReason(REASON_BATTLE)
 end
 function s.rmfilter(c,e,tp,g)
 	return c:IsAbleToRemoveAsCost() and g:IsExists(s.spfilter,1,c,e,tp)
@@ -34,8 +34,8 @@ function s.spfilter(c,e,tp)
 	return c:IsCanBeEffectTarget(e) and c:IsLevelAbove(5) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp) end
-	local g=Duel.GetMatchingGroup(Card.IsRace,tp,LOCATION_REST,0,e:GetHandler(),RACE_WARRIOR)
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp) end
+	local g=Duel.GetMatchingGroup(Card.IsRace,tp,LOCATION_GRAVE,0,e:GetHandler(),RACE_WARRIOR)
 	if chk==0 then return aux.bfgcost(e,tp,eg,ep,ev,re,r,rp,0) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 
 		and g:IsExists(s.rmfilter,1,nil,e,tp,g) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)

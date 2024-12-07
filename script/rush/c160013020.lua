@@ -1,5 +1,5 @@
 --雷帝ザボルグ
---Zaborg the Thunder Moppar (Rush)
+--Zaborg the Thunder Monarch (Rush)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Destroy 1 monster on the field

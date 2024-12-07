@@ -1,5 +1,5 @@
 --占い魔女 スィーちゃん
---Fortune Wanderer Swee
+--Fortune Fairy Swee
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)

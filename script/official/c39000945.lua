@@ -1,9 +1,9 @@
 --エンプレス・オブ・エンディミオン
---Reflection of Edypsos
+--Reflection of Endymion
 --scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableCounterPermit(COUNTER_ACTIONAL,LOCATION_PZONE+LOCATION_MZONE)
+	c:EnableCounterPermit(COUNTER_SPELL,LOCATION_PZONE+LOCATION_MZONE)
 	c:SetSPSummonOnce(id)
 	Pendulum.AddProcedure(c)
 	--Special Summon itself and from the hand
@@ -47,7 +47,7 @@ function s.initial_effect(c)
 	e5:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e5:SetOperation(s.regop)
 	c:RegisterEffect(e5)
-	--Add 1 "Edypsos" card to the hand
+	--Add 1 "Endymion" card to the hand
 	local e6=Effect.CreateEffect(c)
 	e6:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND)
 	e6:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
@@ -58,21 +58,21 @@ function s.initial_effect(c)
 	e6:SetLabelObject(e5)
 	c:RegisterEffect(e6)
 end
-s.counter_place_list={COUNTER_ACTIONAL}
+s.counter_place_list={COUNTER_SPELL}
 s.listed_series={0x12a}
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,COUNTER_ACTIONAL,3,REASON_COST) end 
-		e:GetHandler():RemoveCounter(tp,COUNTER_ACTIONAL,3,REASON_COST)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,COUNTER_SPELL,3,REASON_COST) end 
+		e:GetHandler():RemoveCounter(tp,COUNTER_SPELL,3,REASON_COST)
 end
 function s.cfilter(c,e,tp)
-	return c:IsCanAddCounter(COUNTER_ACTIONAL,1,false,LOCATION_MZONE) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsCanAddCounter(COUNTER_SPELL,1,false,LOCATION_MZONE) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>1 
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false) 
 		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil,e,tp)
-		and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) 
+		and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) 
 	end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,2,tp,LOCATION_PZONE+LOCATION_HAND)
 end
@@ -81,7 +81,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if (Duel.GetLocationCount(tp,LOCATION_MZONE)<=1)
 		or not c:IsRelateToEffect(e)
 		or not c:IsCanBeSpecialSummoned(e,0,tp,false,false) 
-		or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
+		or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND,0,1,1,nil,e,tp)
 	g:AddCard(c)
@@ -89,17 +89,17 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.BreakEffect()
 		local ct=g:GetFirst()
 		for ct in aux.Next(g) do
-			ct:AddCounter(COUNTER_ACTIONAL,1)
+			ct:AddCounter(COUNTER_SPELL,1)
 		end
 	end
 end
 function s.acop(e,tp,eg,ep,ev,re,r,rp)
-	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_ACTIONAL) and e:GetHandler():GetFlagEffect(1)>0 then
-		e:GetHandler():AddCounter(COUNTER_ACTIONAL,1)
+	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_SPELL) and e:GetHandler():GetFlagEffect(1)>0 then
+		e:GetHandler():AddCounter(COUNTER_SPELL,1)
 	end
 end
 function s.thfilter(c,e)
-	return c:GetCounter(COUNTER_ACTIONAL)>0 and e:GetHandler():IsCanAddCounter(COUNTER_ACTIONAL,c:GetCounter(COUNTER_ACTIONAL),false,LOCATION_MZONE)
+	return c:GetCounter(COUNTER_SPELL)>0 and e:GetHandler():IsCanAddCounter(COUNTER_SPELL,c:GetCounter(COUNTER_SPELL),false,LOCATION_MZONE)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -121,17 +121,17 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	if oc and oc:IsControler(tp) then tg:RemoveCard(oc) end
 	if #tg==0 then return end
 	local ct=0
-	if tg:IsContains(sc) then ct=sc:GetCounter(COUNTER_ACTIONAL) end
+	if tg:IsContains(sc) then ct=sc:GetCounter(COUNTER_SPELL) end
 	local c=e:GetHandler()
 	if #tg>0 and Duel.SendtoHand(tg,nil,REASON_EFFECT)>0 and ct>0 and tg:IsExists(Card.IsLocation,1,nil,LOCATION_HAND)
 		and c:IsRelateToEffect(e) then
 		Duel.BreakEffect()
-		c:AddCounter(COUNTER_ACTIONAL,ct)
+		c:AddCounter(COUNTER_SPELL,ct)
 	end
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local ct=c:GetCounter(COUNTER_ACTIONAL)
+	local ct=c:GetCounter(COUNTER_SPELL)
 	e:SetLabel(ct)
 end
 function s.srcon(e,tp,eg,ep,ev,re,r,rp)

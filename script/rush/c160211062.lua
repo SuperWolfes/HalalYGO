@@ -1,10 +1,10 @@
 --セブンスロード・チャームウイッチ
---Sevens Road Chaum Mint
+--Sevens Road Charm Witch
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMixN(c,true,true,160401001,1,s.matfilter,1)
 	--Change monster's battle position
 	local e1=Effect.CreateEffect(c)
@@ -19,9 +19,9 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 s.named_material={160401001}
-s.listed_names={CARD_SEVENS_ROAD_MENTOR}
+s.listed_names={CARD_SEVENS_ROAD_MAGICIAN}
 function s.matfilter(c,scard,sumtype,tp)
-	return c:IsLevel(1) and c:IsAttribute(ATTRIBUTE_EARTH,scard,sumtype,tp) and c:IsRace(RACE_MENTOR,scard,sumtype,tp)
+	return c:IsLevel(1) and c:IsAttribute(ATTRIBUTE_EARTH,scard,sumtype,tp) and c:IsRace(RACE_SPELLCASTER,scard,sumtype,tp)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeckAsCost(tp,1) end
@@ -39,7 +39,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if #g>0 and Duel.ChangePosition(g,POS_FACEUP_DEFENSE,POS_FACEDOWN_DEFENSE,POS_FACEUP_ATTACK,POS_FACEUP_ATTACK)>0 then
 		local c=e:GetHandler()
 		c:AddPiercing(RESETS_STANDARD_PHASE_END)
-		if Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,CARD_SEVENS_ROAD_MENTOR) then
+		if Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,CARD_SEVENS_ROAD_MAGICIAN) then
 			--Cannot be destroyed by card effects
 			local e1=Effect.CreateEffect(c)
 			e1:SetType(EFFECT_TYPE_SINGLE)

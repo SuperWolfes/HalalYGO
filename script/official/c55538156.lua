@@ -4,7 +4,7 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Negate the activation of opponent's actional/trap card
+	--Negate the activation of opponent's spell/trap card
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_NEGATE+CATEGORY_DESTROY)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -21,7 +21,7 @@ function s.filter1(c)
 	return c:IsFaceup() and c:IsSetCard(0x79) and c:IsMonster()
 end
 function s.filter2(c)
-	return c:IsFaceup() and c:IsSetCard(0x7c) and (c:IsActional() or c:IsTrap())
+	return c:IsFaceup() and c:IsSetCard(0x7c) and (c:IsSpell() or c:IsTrap())
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and Duel.IsChainNegatable(ev)

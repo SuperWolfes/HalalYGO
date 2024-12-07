@@ -44,7 +44,7 @@ function s.cfop(e,tp,eg,ep,ev,re,r,rp)
 	end
 	local tc=cg:GetFirst()
 	while tc do
-		if tc:IsActional() then
+		if tc:IsSpell() then
 			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetDescription(aux.Stringid(id,0))
 			e1:SetType(EFFECT_TYPE_FIELD)

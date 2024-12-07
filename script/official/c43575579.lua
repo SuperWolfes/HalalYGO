@@ -26,7 +26,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and Duel.Remove(c,POS_FACEUP,REASON_EFFECT)>0 then
-		local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_DECK+LOCATION_ONFIELD+LOCATION_HAND+LOCATION_REST,0,nil)
+		local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_DECK+LOCATION_ONFIELD+LOCATION_HAND+LOCATION_GRAVE,0,nil)
 		Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
 		if Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REMOVED,0,1,nil) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)

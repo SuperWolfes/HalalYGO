@@ -37,7 +37,7 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
 	if Duel.Damage(p,d,REASON_EFFECT)~=300 then return end
 	local ft=math.min(2,Duel.GetLocationCount(tp,LOCATION_MZONE))
-	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_REST,0,nil,e,tp)
+	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_GRAVE,0,nil,e,tp)
 	if ft<1 or #g<1 or not Duel.SelectYesNo(tp,aux.Stringid(id,0)) then return end
 	local sg=g:Select(tp,1,ft,nil)
 	if #sg>0 then

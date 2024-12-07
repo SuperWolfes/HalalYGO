@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddEquipProcedure(c)
-	--Change the equipped monster's Level to that of the revealed Locked Monster
+	--Change the equipped monster's Level to that of the revealed Ritual Monster
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_LVCHANGE)
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_DESTROY)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_CARD_TARGET)
-	e2:SetCode(EVENT_TO_REST)
+	e2:SetCode(EVENT_TO_GRAVE)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(s.descon)
 	e2:SetTarget(s.destg)
@@ -33,7 +33,7 @@ function s.lvcon(e,tp,eg,ep,ev,re,r,rp)
 	return ec and ec:HasLevel()
 end
 function s.lvfilter(c,lv)
-	return c:IsLockedMonster() and not c:IsLevel(lv) and c:HasLevel() and not c:IsPublic()
+	return c:IsRitualMonster() and not c:IsLevel(lv) and c:HasLevel() and not c:IsPublic()
 end
 function s.lvtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ec=e:GetHandler():GetEquipTarget()

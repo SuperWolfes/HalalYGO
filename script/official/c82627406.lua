@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetTargetRange(LOCATION_MZONE,0)
-	e2:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_MENTOR))
+	e2:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_SPELLCASTER))
 	e2:SetValue(1)
 	c:RegisterEffect(e2)
 	--cannot be target
@@ -38,17 +38,17 @@ end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsDiscardable() end
-	Duel.SendtoRest(c,REASON_COST+REASON_DISCARD)
+	Duel.SendtoGrave(c,REASON_COST+REASON_DISCARD)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,0x20a2),tp,LOCATION_MZONE,0,1,nil) end
 end
 function s.ctfilter(c)
-	return (c:IsLocation(LOCATION_REST) or c:IsFaceup()) and c:IsMonster() and c:IsSetCard(0x20a2)
+	return (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup()) and c:IsMonster() and c:IsSetCard(0x20a2)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsSetCard,0x20a2),tp,LOCATION_MZONE,0,nil)
-	local g=Duel.GetMatchingGroup(s.ctfilter,tp,LOCATION_MZONE+LOCATION_REST,LOCATION_MZONE+LOCATION_REST,nil)
+	local g=Duel.GetMatchingGroup(s.ctfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,LOCATION_MZONE+LOCATION_GRAVE,nil)
 	if #tg>0 and #g>0 then
 		local d=g:GetClassCount(Card.GetCode)*300
 		local sc=tg:GetFirst()

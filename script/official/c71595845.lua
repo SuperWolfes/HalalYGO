@@ -25,10 +25,10 @@ function s.initial_effect(c)
 	e2:SetCondition(s.atcon)
 	e2:SetValue(s.atlimit)
 	c:RegisterEffect(e2)
-	--Destroy 1 monster from hand/field, send 1 "Doll Monster" card from deck to RP
+	--Destroy 1 monster from hand/field, send 1 "Doll Monster" card from deck to GY
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
-	e3:SetCategory(CATEGORY_DESTROY+CATEGORY_TOREST)
+	e3:SetCategory(CATEGORY_DESTROY+CATEGORY_TOGRAVE)
 	e3:SetType(EFFECT_TYPE_IGNITION)
 	e3:SetRange(LOCATION_SZONE)
 	e3:SetCountLimit(1)
@@ -70,7 +70,7 @@ function s.atlimit(e,c)
 end
 	--Check for a "Doll Monster" card
 function s.tgfilter(c)
-	return c:IsSetCard(0x15c) and c:IsAbleToRest()
+	return c:IsSetCard(0x15c) and c:IsAbleToGrave()
 end
 	--Activation legality
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -82,19 +82,19 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	else
 		Duel.SetOperationInfo(0,CATEGORY_DESTROY,nil,1,tp,LOCATION_HAND+LOCATION_MZONE)
 	end
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
 end
-	--Destroy 1 monster from hand/field, send 1 "Doll Monster" card from deck to RP
+	--Destroy 1 monster from hand/field, send 1 "Doll Monster" card from deck to GY
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local g1=Duel.SelectMatchingCard(tp,Card.IsMonster,tp,LOCATION_HAND+LOCATION_MZONE,0,1,1,nil)
 	if #g1>0 and Duel.Destroy(g1,REASON_EFFECT)~=0 then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 		local g2=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 		if #g2>0 then
-			Duel.SendtoRest(g2,REASON_EFFECT)
+			Duel.SendtoGrave(g2,REASON_EFFECT)
 		end
 	end
 	local e1=Effect.CreateEffect(c)

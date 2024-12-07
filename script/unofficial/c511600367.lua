@@ -1,5 +1,5 @@
 --捕食植物スパイダー・オーキッド (Manga)
---Predaplant Spider Corehid (Manga)
+--Predaplant Spider Orchid (Manga)
 local s,id=GetID()
 function s.initial_effect(c)
 	--pendulum summon

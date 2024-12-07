@@ -35,7 +35,7 @@ function s.initial_effect(c)
 	e4:SetCondition(s.rdcon1)
 	e4:SetOperation(s.rdop1)
 	c:RegisterEffect(e4)
-	--If you would take 1000 or more damage from a battle involving a "Clear" monster you control, send this card to the RP 
+	--If you would take 1000 or more damage from a battle involving a "Clear" monster you control, send this card to the GY 
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e5:SetRange(LOCATION_SZONE)

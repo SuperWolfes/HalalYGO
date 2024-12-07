@@ -1,9 +1,9 @@
 --召喚獣カリギュラ
---Invalidated Caliga
+--Invoked Caliga
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,86120751,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_DARK))
 	--activate limit
 	local e1=Effect.CreateEffect(c)

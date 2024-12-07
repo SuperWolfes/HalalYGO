@@ -1,5 +1,5 @@
 --機巧鳥－常世宇受賣長鳴
---Gizmek Nordic, the Sunrise Signaler
+--Gizmek Naganaki, the Sunrise Signaler
 --scripted by Rundas
 local s,id=GetID()
 function s.initial_effect(c)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCost(aux.bfgcost)
 	e2:SetTarget(s.thtg)

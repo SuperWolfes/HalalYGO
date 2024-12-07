@@ -201,48 +201,48 @@ end
 
 
 Card.IsMonster=aux.FilterBoolFunction(Card.IsType,TYPE_MONSTER)
-Card.IsActional=aux.FilterBoolFunction(Card.IsType,TYPE_ACTIONAL)
+Card.IsSpell=aux.FilterBoolFunction(Card.IsType,TYPE_SPELL)
 Card.IsTrap=aux.FilterBoolFunction(Card.IsType,TYPE_TRAP)
-Card.IsActionalTrap=aux.FilterBoolFunction(Card.IsType,TYPE_ACTIONAL|TYPE_TRAP)
+Card.IsSpellTrap=aux.FilterBoolFunction(Card.IsType,TYPE_SPELL|TYPE_TRAP)
 
 local function make_exact_type_check(type)
 	return aux.FilterBoolFunction(Card.IsExactType,type)
 end
 
-Card.IsQuickPlayActional=make_exact_type_check(TYPE_ACTIONAL|TYPE_QUICKPLAY)
-Card.IsContinuousActional=make_exact_type_check(TYPE_ACTIONAL|TYPE_CONTINUOUS)
-Card.IsEquipActional=make_exact_type_check(TYPE_ACTIONAL|TYPE_EQUIP)
-Card.IsFieldActional=make_exact_type_check(TYPE_ACTIONAL|TYPE_FIELD)
-Card.IsLockedActional=make_exact_type_check(TYPE_ACTIONAL|TYPE_LOCKED)
-Card.IsLinkActional=make_exact_type_check(TYPE_ACTIONAL|TYPE_LINK)
+Card.IsQuickPlaySpell=make_exact_type_check(TYPE_SPELL|TYPE_QUICKPLAY)
+Card.IsContinuousSpell=make_exact_type_check(TYPE_SPELL|TYPE_CONTINUOUS)
+Card.IsEquipSpell=make_exact_type_check(TYPE_SPELL|TYPE_EQUIP)
+Card.IsFieldSpell=make_exact_type_check(TYPE_SPELL|TYPE_FIELD)
+Card.IsRitualSpell=make_exact_type_check(TYPE_SPELL|TYPE_RITUAL)
+Card.IsLinkSpell=make_exact_type_check(TYPE_SPELL|TYPE_LINK)
 
 Card.IsContinuousTrap=make_exact_type_check(TYPE_TRAP|TYPE_CONTINUOUS)
 Card.IsCounterTrap=make_exact_type_check(TYPE_TRAP|TYPE_COUNTER)
 
-Card.IsLockedMonster=make_exact_type_check(TYPE_MONSTER|TYPE_LOCKED)
+Card.IsRitualMonster=make_exact_type_check(TYPE_MONSTER|TYPE_RITUAL)
 Card.IsLinkMonster=make_exact_type_check(TYPE_MONSTER|TYPE_LINK)
 
-function Card.IsNormalActional(c)
-	return c:GetType()==TYPE_ACTIONAL
+function Card.IsNormalSpell(c)
+	return c:GetType()==TYPE_SPELL
 end
 
 function Card.IsNormalTrap(c)
 	return c:GetType()==TYPE_TRAP
 end
 
-function Card.IsNormalActionalTrap(c)
-	return c:IsNormalActional() or c:IsNormalTrap()
+function Card.IsNormalSpellTrap(c)
+	return c:IsNormalSpell() or c:IsNormalTrap()
 end
-function Card.IsContinuousActionalTrap(c)
-	return c:IsContinuousActional() or c:IsContinuousTrap()
+function Card.IsContinuousSpellTrap(c)
+	return c:IsContinuousSpell() or c:IsContinuousTrap()
 end
 
 Card.IsEquipCard=aux.FilterBoolFunction(Card.IsType,TYPE_EQUIP)
 
 Card.IsMonsterCard=aux.FilterBoolFunction(Card.IsOriginalType,TYPE_MONSTER)
-Card.IsActionalCard=aux.FilterBoolFunction(Card.IsOriginalType,TYPE_ACTIONAL)
+Card.IsSpellCard=aux.FilterBoolFunction(Card.IsOriginalType,TYPE_SPELL)
 Card.IsTrapCard=aux.FilterBoolFunction(Card.IsOriginalType,TYPE_TRAP)
-Card.IsActionalTrapCard=aux.FilterBoolFunction(Card.IsOriginalType,TYPE_ACTIONAL|TYPE_TRAP)
+Card.IsSpellTrapCard=aux.FilterBoolFunction(Card.IsOriginalType,TYPE_SPELL|TYPE_TRAP)
 
 function Card.IsTrapMonster(c)
 	return c:IsTrapCard() and (c:GetOriginalLevel()>0 or c:GetOriginalAttribute()>0 or c:GetOriginalRace()>0)
@@ -305,14 +305,14 @@ end
 function Card.IsFlipSummoned(c)
 	return c:IsSummonType(SUMMON_TYPE_FLIP)
 end
-function Card.IsDualSummoned(c)
-	return c:IsSummonType(SUMMON_TYPE_DUAL)
+function Card.IsGeminiSummoned(c)
+	return c:IsSummonType(SUMMON_TYPE_GEMINI)
 end
 function Card.IsSpecialSummoned(c)
 	return c:IsSummonType(SUMMON_TYPE_SPECIAL)
 end
-function Card.IsLockedSummoned(c)
-	return c:IsSummonType(SUMMON_TYPE_LOCKED)
+function Card.IsRitualSummoned(c)
+	return c:IsSummonType(SUMMON_TYPE_RITUAL)
 end
 function Card.IsFusionSummoned(c)
 	return c:IsSummonType(SUMMON_TYPE_FUSION)
@@ -833,16 +833,16 @@ function Effect.IsMonsterEffect(e)
 	return e:IsActiveType(TYPE_MONSTER)
 end
 
-function Effect.IsActionalEffect(e)
-	return e:IsActiveType(TYPE_ACTIONAL)
+function Effect.IsSpellEffect(e)
+	return e:IsActiveType(TYPE_SPELL)
 end
 
 function Effect.IsTrapEffect(e)
 	return e:IsActiveType(TYPE_TRAP)
 end
 
-function Effect.IsActionalTrapEffect(e)
-	return e:IsActiveType(TYPE_ACTIONAL|TYPE_TRAP)
+function Effect.IsSpellTrapEffect(e)
+	return e:IsActiveType(TYPE_SPELL|TYPE_TRAP)
 end
 
 
@@ -998,12 +998,12 @@ Card.RegisterEffect=(function()
 		if val==1 then return 511002571	end -- access to effects that activate that detach an Xyz Material as cost
 		if val==2 then return 511001692 end -- access to Cardian Summoning conditions/effects
 		if val==4 then return  12081875 end -- access to Thunder Dragon effects that activate by discarding
-		if val==8 then return 511310036	end -- access to Allure Queen effects that activate by sending themselves to RP
+		if val==8 then return 511310036	end -- access to Allure Queen effects that activate by sending themselves to GY
 		if val==16 then return 58858807 end -- access to tellarknights/constellar effects that activate when Normal Summoned
 		return nil
 	end
-	return function(c,e,fcoreed,...)
-		local reg_e=oldf(c,e,fcoreed)
+	return function(c,e,forced,...)
+		local reg_e=oldf(c,e,forced)
 		if not reg_e or reg_e<=0 then return reg_e end
 		local resetflag,resetcount=e:GetReset()
 		for _,val in ipairs{...} do
@@ -1117,13 +1117,13 @@ end
 function Card.IsNegatableMonster(c)
 	return c:IsFaceup() and not c:IsDisabled() and (not c:IsNonEffectMonster() or c:GetOriginalType()&TYPE_EFFECT~=0)
 end
---"Can be negated" check for Actionals/Traps
-function Card.IsNegatableActionalTrap(c)
-	return c:IsFaceup() and not c:IsDisabled() and c:IsActionalTrap()
+--"Can be negated" check for Spells/Traps
+function Card.IsNegatableSpellTrap(c)
+	return c:IsFaceup() and not c:IsDisabled() and c:IsSpellTrap()
 end
 --"Can be negated" check for cards
 function Card.IsNegatable(c)
-	return c:IsNegatableMonster() or c:IsNegatableActionalTrap()
+	return c:IsNegatableMonster() or c:IsNegatableSpellTrap()
 end
 --condition of EVENT_BATTLE_DESTROYING
 function Auxiliary.bdcon(e,tp,eg,ep,ev,re,r,rp)
@@ -1135,28 +1135,28 @@ function Auxiliary.bdocon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return c:IsRelateToBattle() and c:IsStatus(STATUS_OPPO_BATTLE)
 end
---condition of EVENT_BATTLE_DESTROYING + to_rest
+--condition of EVENT_BATTLE_DESTROYING + to_grave
 function Auxiliary.bdgcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local bc=c:GetBattleTarget()
-	return c:IsRelateToBattle() and bc:IsLocation(LOCATION_REST) and bc:IsMonster()
+	return c:IsRelateToBattle() and bc:IsLocation(LOCATION_GRAVE) and bc:IsMonster()
 end
---condition of EVENT_BATTLE_DESTROYING + opponent monster + to_rest
+--condition of EVENT_BATTLE_DESTROYING + opponent monster + to_grave
 function Auxiliary.bdogcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local bc=c:GetBattleTarget()
-	return c:IsRelateToBattle() and c:IsStatus(STATUS_OPPO_BATTLE) and bc:IsLocation(LOCATION_REST) and bc:IsMonster()
+	return c:IsRelateToBattle() and c:IsStatus(STATUS_OPPO_BATTLE) and bc:IsLocation(LOCATION_GRAVE) and bc:IsMonster()
 end
---condition of EVENT_TO_REST + destroyed_by_opponent_from_field
+--condition of EVENT_TO_GRAVE + destroyed_by_opponent_from_field
 function Auxiliary.dogcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return c:IsPreviousControler(tp) and c:IsReason(REASON_DESTROY) and rp==1-tp
 end
---condition of "except the turn this card was sent to the Resting Place"
+--condition of "except the turn this card was sent to the Graveyard"
 function Auxiliary.exccon(e)
 	return Duel.GetTurnCount()~=e:GetHandler():GetTurnID() or e:GetHandler():IsReason(REASON_RETURN)
 end
---flag effect for actional counter
+--flag effect for spell counter
 function Auxiliary.chainreg(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():GetFlagEffect(1)==0 then
 		e:GetHandler():RegisterFlagEffect(1,RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET+RESET_CHAIN,0,1)
@@ -1208,9 +1208,9 @@ end
 function Auxiliary.fuslimit(e,se,sp,st)
 	return aux.sumlimit(SUMMON_TYPE_FUSION)(e,se,sp,st)
 end
---sp_summon condition for locked monster
+--sp_summon condition for ritual monster
 function Auxiliary.ritlimit(e,se,sp,st)
-	return aux.sumlimit(SUMMON_TYPE_LOCKED)(e,se,sp,st)
+	return aux.sumlimit(SUMMON_TYPE_RITUAL)(e,se,sp,st)
 end
 --sp_summon condition for synchro monster
 function Auxiliary.synlimit(e,se,sp,st)
@@ -1253,8 +1253,8 @@ function Card.AddMustBeSpecialSummonedByCardEffect(c)
 	c:RegisterEffect(e0)
 	return e0
 end
-function Card.AddMustBeLockedSummoned(c)
-	--Must be Locked Summoned
+function Card.AddMustBeRitualSummoned(c)
+	--Must be Ritual Summoned
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
 	e0:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -1314,13 +1314,13 @@ function Card.AddMustBeLinkSummoned(c)
 	return e0
 end
 --Registers a "Must first be X Summoned" Summoning condition to card "c"
-function Card.AddMustFirstBeLockedSummoned(c)
-	--Must first be Locked Summoned
+function Card.AddMustFirstBeRitualSummoned(c)
+	--Must first be Ritual Summoned
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
 	e0:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e0:SetCode(EFFECT_SPSUMMON_CONDITION)
-	e0:SetValue(function(e,sum_eff,sum_p,sum_type) return e:GetHandler():IsStatus(STATUS_PROC_COMPLETE) or (sum_type&SUMMON_TYPE_LOCKED)==SUMMON_TYPE_LOCKED end)
+	e0:SetValue(function(e,sum_eff,sum_p,sum_type) return e:GetHandler():IsStatus(STATUS_PROC_COMPLETE) or (sum_type&SUMMON_TYPE_RITUAL)==SUMMON_TYPE_RITUAL end)
 	c:RegisterEffect(e0)
 	return e0
 end
@@ -1391,18 +1391,18 @@ function Auxiliary.cannotmatfilter(val1,...)
 		return false
 	end
 end
---effects inflicting damanced to tp
+--effects inflicting damage to tp
 function Auxiliary.damcon1(e,tp,eg,ep,ev,re,r,rp)
-	local e1=Duel.IsPlayerAffectedByEffect(tp,EFFECT_REVERSE_DAMANCED)
+	local e1=Duel.IsPlayerAffectedByEffect(tp,EFFECT_REVERSE_DAMAGE)
 	local e2=Duel.IsPlayerAffectedByEffect(tp,EFFECT_REVERSE_RECOVER)
 	local rd=e1 and not e2
 	local rr=not e1 and e2
-	local ex,cg,ct,cp,cv=Duel.GetOperationInfo(ev,CATEGORY_DAMANCED)
-	if ex and (cp==tp or cp==PLAYER_ALL) and not rd and not Duel.IsPlayerAffectedByEffect(tp,EFFECT_NO_EFFECT_DAMANCED) then
+	local ex,cg,ct,cp,cv=Duel.GetOperationInfo(ev,CATEGORY_DAMAGE)
+	if ex and (cp==tp or cp==PLAYER_ALL) and not rd and not Duel.IsPlayerAffectedByEffect(tp,EFFECT_NO_EFFECT_DAMAGE) then
 		return true
 	end
 	ex,cg,ct,cp,cv=Duel.GetOperationInfo(ev,CATEGORY_RECOVER)
-	return ex and (cp==tp or cp==PLAYER_ALL) and rr and not Duel.IsPlayerAffectedByEffect(tp,EFFECT_NO_EFFECT_DAMANCED)
+	return ex and (cp==tp or cp==PLAYER_ALL) and rr and not Duel.IsPlayerAffectedByEffect(tp,EFFECT_NO_EFFECT_DAMAGE)
 end
 
 function Auxiliary.BeginPuzzle()
@@ -1449,10 +1449,10 @@ Auxiliary.SelfBanishCost=aux.bfgcost
 Auxiliary.SelfReleaseCost=aux.selfreleasecost
 Auxiliary.SelfTributeCost=aux.selfreleasecost
 
-function Auxiliary.SelfToRestCost(e,tp,eg,ep,ev,re,r,rp,chk)
+function Auxiliary.SelfToGraveCost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToRestAsCost() end
-	Duel.SendtoRest(c,REASON_COST)
+	if chk==0 then return c:IsAbleToGraveAsCost() end
+	Duel.SendtoGrave(c,REASON_COST)
 end
 function Auxiliary.SelfToHandCost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -1472,12 +1472,12 @@ end
 function Auxiliary.SelfDiscardCost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsDiscardable() end
-	Duel.SendtoRest(c,REASON_DISCARD|REASON_COST)
+	Duel.SendtoGrave(c,REASON_DISCARD|REASON_COST)
 end
-function Auxiliary.SelfDiscardToRestCost(e,tp,eg,ep,ev,re,r,rp,chk)
+function Auxiliary.SelfDiscardToGraveCost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsDiscardable() and c:IsAbleToRestAsCost() end
-	Duel.SendtoRest(c,REASON_DISCARD|REASON_COST)
+	if chk==0 then return c:IsDiscardable() and c:IsAbleToGraveAsCost() end
+	Duel.SendtoGrave(c,REASON_DISCARD|REASON_COST)
 end
 function Auxiliary.SelfRevealCost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -1756,7 +1756,7 @@ function Auxiliary.RemainFieldDisabled(e,tp,eg,ep,ev,re,r,rp)
 	local cid=Duel.GetChainInfo(ev,CHAININFO_CHAIN_ID)
 	if cid~=e:GetLabel() then return end
 	if e:GetOwner():IsLocation(LOCATION_ONFIELD) then
-		e:GetOwner():CancelToRest(false)
+		e:GetOwner():CancelToGrave(false)
 	end
 end
 --autocheck for Summoning a Group containing Extra Deck/non-Extra Deck monsters to avoid zone issues
@@ -1972,7 +1972,7 @@ function Auxiliary.GetAttributeStrings(v)
 		[ATTRIBUTE_WIND] = 1013,
 		[ATTRIBUTE_LIGHT] = 1014,
 		[ATTRIBUTE_DARK] = 1015,
-		[ATTRIBUTE_MEGA] = 1016
+		[ATTRIBUTE_DIVINE] = 1016
 	}
 	local res={}
 	local ct=0
@@ -1988,10 +1988,10 @@ end
 function Auxiliary.GetRaceStrings(v)
 	local t = {
 		[RACE_WARRIOR] = 1020,
-		[RACE_MENTOR] = 1021,
-		[RACE_WANDERER] = 1022,
-		[RACE_TAINTED] = 1023,
-		[RACE_TOXIC] = 1024,
+		[RACE_SPELLCASTER] = 1021,
+		[RACE_FAIRY] = 1022,
+		[RACE_FIEND] = 1023,
+		[RACE_ZOMBIE] = 1024,
 		[RACE_MACHINE] = 1025,
 		[RACE_AQUA] = 1026,
 		[RACE_PYRO] = 1027,
@@ -2007,9 +2007,9 @@ function Auxiliary.GetRaceStrings(v)
 		[RACE_FISH] = 1037,
 		[RACE_SEASERPENT] = 1038,
 		[RACE_REPTILE] = 1039,
-		[RACE_MENTAL] = 1040,
-		[RACE_MEGA] = 1041,
-		[RACE_MEGAMONSTER] = 1042,
+		[RACE_PSYCHIC] = 1040,
+		[RACE_DIVINE] = 1041,
+		[RACE_CREATORGOD] = 1042,
 		[RACE_WYRM] = 1043,
 		[RACE_CYBERSE] = 1044,
 		[RACE_ILLUSION] = 1045
@@ -2285,13 +2285,13 @@ end
 Function to perform "Either add it to the hand or do X"
 -card: affected card or group of cards to be moved;
 -player: player performing the operation
--check: condition for the secondary action, if not provided the default action is "Send it to the RP";
+-check: condition for the secondary action, if not provided the default action is "Send it to the GY";
 oper: secondary action;
 str: string to be used in the secondary option
 ]]
 function Auxiliary.ToHandOrElse(card,player,check,oper,str,...)
 	if card then
-		if not check then check=Card.IsAbleToRest end
+		if not check then check=Card.IsAbleToGrave end
 		if not oper then oper=aux.thoeSend end
 		if not str then str=574 end
 		local b1,b2=true,true
@@ -2326,7 +2326,7 @@ function Auxiliary.ToHandOrElse(card,player,check,oper,str,...)
 	end
 end
 function Auxiliary.thoeSend(card)
-	return Duel.SendtoRest(card,REASON_EFFECT)
+	return Duel.SendtoGrave(card,REASON_EFFECT)
 end
 
 --Helper function to use with cards that normal summon or set a monster
@@ -2400,7 +2400,7 @@ end
 function Auxiliary.HarmonizingMagFilter(c,e,f)
 	return f and not f(e,c)
 end
-function Duel.ActivateFieldActional(c,e,tp,eg,ep,ev,re,r,rp,target_p)
+function Duel.ActivateFieldSpell(c,e,tp,eg,ep,ev,re,r,rp,target_p)
 	if not target_p then target_p=tp end
 	if c then
 		local fc=Duel.GetFieldCard(target_p,LOCATION_FZONE,0)
@@ -2408,14 +2408,14 @@ function Duel.ActivateFieldActional(c,e,tp,eg,ep,ev,re,r,rp,target_p)
 			if fc then Duel.Destroy(fc,REASON_RULE) end
 			of=Duel.GetFieldCard(1-target_p,LOCATION_FZONE,0)
 			if of and Duel.Destroy(of,REASON_RULE)==0 then
-				Duel.SendtoRest(c,REASON_RULE)
+				Duel.SendtoGrave(c,REASON_RULE)
 				return false
 			else
 				Duel.BreakEffect()
 			end
 		else
-			if fc and Duel.SendtoRest(fc,REASON_RULE)==0 then
-				Duel.SendtoRest(c,REASON_RULE)
+			if fc and Duel.SendtoGrave(fc,REASON_RULE)==0 then
+				Duel.SendtoGrave(c,REASON_RULE)
 				return false
 			else
 				Duel.BreakEffect()
@@ -2445,7 +2445,7 @@ function Duel.GoatConfirm(tp,loc)
 	end
 end
 
-function Auxiliary.ChangeBattleDamanced(player,value)
+function Auxiliary.ChangeBattleDamage(player,value)
 	return function(e,damp)
 				if player==0 then
 					if e:GetOwnerPlayer()==damp then
@@ -2508,7 +2508,7 @@ and "oppo_location", from the perspective of "player".
 - The first parameter, "player", is mandatory, all other parameters are optional, to use the default value of a parameter just pass it as nil.
 - The filter by default checks that the card is face-up and is a Link Card, any additional check (e.g. archetype) is added onto that.
 - Both locations default to LOCATION_MZONE if not provided since most cards care about zones that any Link Monster points to, if you want to
-include Link Actionals then use LOCATION_ONFIELD, or LOCATION_SZONE to exclude Link Monsters and check for Link Actionals only.
+include Link Spells then use LOCATION_ONFIELD, or LOCATION_SZONE to exclude Link Monsters and check for Link Spells only.
 - The second location defaults to the first one if not provided, if you want to not count a side of the field then you need to specifically pass 0 for that location.
 - "target_player" defaults to "player" if not provided.
 - Any additional parameters that "by_filter" might need can be passed to this function as "..." after "target_player".
@@ -2642,8 +2642,8 @@ end
 Duel.LoadScript("debug_utility.lua")
 Duel.LoadScript("cards_specific_functions.lua")
 Duel.LoadScript("proc_fusion.lua")
-Duel.LoadScript("proc_fusion_actional.lua")
-Duel.LoadScript("proc_locked.lua")
+Duel.LoadScript("proc_fusion_spell.lua")
+Duel.LoadScript("proc_ritual.lua")
 Duel.LoadScript("proc_synchro.lua")
 Duel.LoadScript("proc_union.lua")
 Duel.LoadScript("proc_xyz.lua")
@@ -2656,8 +2656,8 @@ Duel.LoadScript("proc_normal.lua")
 Duel.LoadScript("proc_skill.lua")
 Duel.LoadScript("proc_rush.lua")
 Duel.LoadScript("proc_maximum.lua")
-Duel.LoadScript("proc_dual.lua")
-Duel.LoadScript("proc_guardian.lua")
+Duel.LoadScript("proc_gemini.lua")
+Duel.LoadScript("proc_spirit.lua")
 Duel.LoadScript("proc_unofficial.lua")
 Duel.LoadScript("deprecated_functions.lua")
 pcall(dofile,"init.lua")

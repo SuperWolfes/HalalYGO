@@ -15,10 +15,10 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Send to rest
+	--Send to grave
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_DRAW+CATEGORY_TOREST)
+	e2:SetCategory(CATEGORY_DRAW+CATEGORY_TOGRAVE)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
 	e2:SetCode(EVENT_BE_MATERIAL)
@@ -49,7 +49,7 @@ function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 	return r==REASON_LINK and Duel.GetMatchingGroupCount(s.tgfilter,tp,0,LOCATION_SZONE,nil)==1
 end
 function s.tgfilter(c)
-	return c:GetSequence()<5 and c:IsAbleToRest()
+	return c:GetSequence()<5 and c:IsAbleToGrave()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(1-tp,1) 
@@ -59,13 +59,13 @@ function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetTargetPlayer(1-tp)
 	Duel.SetTargetParam(1)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,1-tp,1)
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,0,0)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
 	local g=e:GetLabelObject()
 	if g then
-		if Duel.SendtoRest(g,REASON_EFFECT)>0 then
+		if Duel.SendtoGrave(g,REASON_EFFECT)>0 then
 			Duel.Draw(p,d,REASON_EFFECT)
 		end
 	end

@@ -16,13 +16,13 @@ end
 function s.eqcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local bc=c:GetBattleTarget()
-	return c:IsLocation(LOCATION_REST) and c:IsReason(REASON_BATTLE) and rp~=tp 
+	return c:IsLocation(LOCATION_GRAVE) and c:IsReason(REASON_BATTLE) and rp~=tp 
 		and bc:IsFaceup() and bc:IsRelateToBattle()
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	Duel.SetOperationInfo(0,CATEGORY_EQUIP,e:GetHandler(),1,0,0)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,e:GetHandler(),1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,e:GetHandler(),1,0,0)
 end
 function s.eqlimit(e,c)
 	return e:GetOwner()==c

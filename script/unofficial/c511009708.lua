@@ -1,5 +1,5 @@
 --ハイドライブ・ブースター
---Hyddendrive Booster
+--Hydradrive Booster
 local s,id=GetID()
 function s.initial_effect(c)
 	--Special Summon procedure

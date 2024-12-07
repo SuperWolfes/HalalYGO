@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	--Apply appropriate effect, depending on dice results
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_SUFFICE+CATEGORY_ATKCHANGE+CATEGORY_DRAW)
+	e1:SetCategory(CATEGORY_DICE+CATEGORY_ATKCHANGE+CATEGORY_DRAW)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1)
@@ -17,7 +17,7 @@ s.roll_dice=true
 
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,3)
+	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,0,tp,3)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

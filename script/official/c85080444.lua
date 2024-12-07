@@ -1,24 +1,24 @@
 --アーティファクト－アイギス
---Artifact Bogus
+--Artifact Aegis
 local s,id=GetID()
 function s.initial_effect(c)
 	--Set itself to the S/T zone
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_MONSTER_SSET)
-	e1:SetValue(TYPE_ACTIONAL)
+	e1:SetValue(TYPE_SPELL)
 	c:RegisterEffect(e1)
 	--Special summon itself
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	e2:SetCode(EVENT_TO_REST)
+	e2:SetCode(EVENT_TO_GRAVE)
 	e2:SetCondition(s.spcon)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
-	--Prevent mismatching by opponent's effect
+	--Prevent destruction by opponent's effect
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)

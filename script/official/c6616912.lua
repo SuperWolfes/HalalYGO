@@ -1,5 +1,5 @@
 --時械神 ガブリオン
---Gabrion, the Timewatcher
+--Gabrion, the Timelord
 --Scripted by ahtelel
 local s,id=GetID()
 function s.initial_effect(c)

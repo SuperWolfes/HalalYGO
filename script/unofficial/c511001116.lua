@@ -1,5 +1,5 @@
 --ダブルマジックアームバインド (Anime)
---Double Mentoral Arm Bind (Anime)
+--Double Magical Arm Bind (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

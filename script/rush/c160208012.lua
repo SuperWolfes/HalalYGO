@@ -1,5 +1,5 @@
 --ハーピィズフルドレス
---Flybie's Full Dress
+--Harpie's Full Dress
 local s,id=GetID()
 function s.initial_effect(c)
 	--equip
@@ -27,9 +27,9 @@ function s.initial_effect(c)
 	e4:SetLabelObject(e3)
 	c:RegisterEffect(e4)
 end
-s.listed_names={CARD_FLYBIE_LADY,160208002} --Flybie Ladies
+s.listed_names={CARD_HARPIE_LADY,160208002} --Harpie Ladies
 function s.eqfilter(c)
-	return c:IsFaceup() and c:IsCode(CARD_FLYBIE_LADY,160208002) and not c:IsMaximumModeSide()
+	return c:IsFaceup() and c:IsCode(CARD_HARPIE_LADY,160208002) and not c:IsMaximumModeSide()
 end
 function s.eqlimit(e,c)
 	return c:IsFaceup()

@@ -1,5 +1,5 @@
 --黒・魔・導・連・弾
---Dark Ment Twin Burst
+--Dark Magic Twin Burst
 --Scripted by ahtelel
 local s,id=GetID()
 function s.initial_effect(c)
@@ -14,22 +14,22 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 end
-s.listed_names={CARD_DARK_MENTOR_GIRL,CARD_DARK_MENTOR}
+s.listed_names={CARD_DARK_MAGICIAN_GIRL,CARD_DARK_MAGICIAN}
 function s.atkfilter(c)
-	return (c:IsFaceup() or not c:IsOnField()) and c:IsCode(CARD_DARK_MENTOR_GIRL)
+	return (c:IsFaceup() or not c:IsOnField()) and c:IsCode(CARD_DARK_MAGICIAN_GIRL)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and chkc:IsCode(CARD_DARK_MENTOR) end
-	if chk==0 then return Duel.IsExistingTarget(aux.FaceupFilter(Card.IsCode,CARD_DARK_MENTOR),tp,LOCATION_MZONE,0,1,nil)
-		and Duel.IsExistingMatchingCard(s.atkfilter,tp,LOCATION_MZONE+LOCATION_REST,LOCATION_MZONE+LOCATION_REST,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and chkc:IsCode(CARD_DARK_MAGICIAN) end
+	if chk==0 then return Duel.IsExistingTarget(aux.FaceupFilter(Card.IsCode,CARD_DARK_MAGICIAN),tp,LOCATION_MZONE,0,1,nil)
+		and Duel.IsExistingMatchingCard(s.atkfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,LOCATION_MZONE+LOCATION_GRAVE,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
-	Duel.SelectTarget(tp,aux.FaceupFilter(Card.IsCode,CARD_DARK_MENTOR),tp,LOCATION_MZONE,0,1,1,nil)
+	Duel.SelectTarget(tp,aux.FaceupFilter(Card.IsCode,CARD_DARK_MAGICIAN),tp,LOCATION_MZONE,0,1,1,nil)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and tc:IsFaceup() then
 		local atk=0
-		local g=Duel.GetMatchingGroup(s.atkfilter,tp,LOCATION_MZONE+LOCATION_REST,LOCATION_MZONE+LOCATION_REST,nil)
+		local g=Duel.GetMatchingGroup(s.atkfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,LOCATION_MZONE+LOCATION_GRAVE,nil)
 		local bc=g:GetFirst()
 		for bc in aux.Next(g) do
 			atk=atk+bc:GetAttack()

@@ -1,5 +1,5 @@
 --アストログラフ・マジシャン
---Astrograph Scoreerer
+--Astrograph Sorcerer
 local s,id=GetID()
 function s.initial_effect(c)
 	Pendulum.AddProcedure(c)
@@ -48,7 +48,7 @@ s.listed_names={94415058,13331639}
 function s.checkop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()
 	for tc in aux.Next(eg) do
-		if tc:IsLocation(LOCATION_REST+LOCATION_REMOVED) then
+		if tc:IsLocation(LOCATION_GRAVE+LOCATION_REMOVED) then
 			tc:RegisterFlagEffect(id,RESET_EVENT+0x1f20000+RESET_PHASE+PHASE_END,0,1)
 		elseif tc:IsLocation(LOCATION_EXTRA) then
 			tc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1)
@@ -56,7 +56,7 @@ function s.checkop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.rpfilter(c,e,tp)
-	return c:IsCode(94415058) and (not c:IsUnliked()
+	return c:IsCode(94415058) and (not c:IsForbidden()
 		or (Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)))
 end
 function s.rptg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -99,7 +99,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.thfilter1(c,tp)
 	return c:IsMonster() and c:GetFlagEffect(id)~=0
-		and (c:IsLocation(LOCATION_REST) or c:IsFaceup())
+		and (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup())
 		and Duel.IsExistingMatchingCard(s.thfilter2,tp,LOCATION_DECK,0,1,nil,c:GetCode())
 end
 function s.thfilter2(c,code)
@@ -138,7 +138,7 @@ function s.hnfilter(c,e,tp,sg)
 end
 function s.hncost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	local mg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_HAND+LOCATION_MZONE+LOCATION_REST,0,c)
+	local mg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_HAND+LOCATION_MZONE+LOCATION_GRAVE,0,c)
 	local checkfunc=aux.PropertyTableFilter(Card.GetSetCard,0x10f2,0x2073,0x2017,0x1046)
 	if chk==0 then return c:IsAbleToRemoveAsCost() and aux.SelectUnselectGroup(mg,e,tp,4,4,s.rescon(checkfunc),0) end
 	local sg=aux.SelectUnselectGroup(mg,e,tp,4,4,s.rescon(checkfunc),1,tp,HINTMSG_REMOVE,s.rescon(checkfunc))+c

@@ -1,8 +1,8 @@
 --ホルスの黒炎竜 LV8
---Humus the Black Flame Dragon LV8
+--Horus the Black Flame Dragon LV8
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--cannot special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -28,7 +28,7 @@ s.LVnum=8
 s.LVset=0x3
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED) and re:IsHasType(EFFECT_TYPE_ACTIVATE)
-		and re:IsActiveType(TYPE_ACTIONAL) and Duel.IsChainNegatable(ev)
+		and re:IsActiveType(TYPE_SPELL) and Duel.IsChainNegatable(ev)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

@@ -1,4 +1,4 @@
---Chronomaly Aztec Mask Gopal
+--Chronomaly Aztec Mask Golem
 --fixed by MLD
 local s,id=GetID()
 function s.initial_effect(c)
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	Duel.AddCustomActivityCounter(id,ACTIVITY_CHAIN,s.chainfilter)
 end
 function s.chainfilter(re,tp,cid)
-	return not re:IsHasType(EFFECT_TYPE_ACTIVATE) or not re:IsActiveType(TYPE_ACTIONAL)
+	return not re:IsHasType(EFFECT_TYPE_ACTIVATE) or not re:IsActiveType(TYPE_SPELL)
 end
 function s.hspcon(e,c)
 	if c==nil then return true end

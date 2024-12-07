@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e2:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
-	e2:SetCode(EVENT_TO_REST)
+	e2:SetCode(EVENT_TO_GRAVE)
 	e2:SetOperation(s.rmop)
 	c:RegisterEffect(e2)
 	local e3=Effect.CreateEffect(c)
@@ -35,7 +35,7 @@ function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.xyzlimit(e,c)
 	if not c then return false end
-	return not e:GetHandler():IsLocation(LOCATION_REST)
+	return not e:GetHandler():IsLocation(LOCATION_GRAVE)
 end
 function s.regcon(e,tp,eg,ep,ev,re,r,rp)
 	return r==REASON_XYZ

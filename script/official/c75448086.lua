@@ -19,7 +19,7 @@ function s.cfilter(c)
 	return c:IsSetCard(0x134) and c:IsMonster() and not c:IsPublic() and c:IsAbleToDeck()
 end
 function s.thfilter(c)
-	return not c:IsCode(id) and c:IsSetCard(0x134) and c:IsActionalTrap() and c:IsAbleToHand()
+	return not c:IsCode(id) and c:IsSetCard(0x134) and c:IsSpellTrap() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_DECK,0,nil)

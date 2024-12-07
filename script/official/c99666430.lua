@@ -2,8 +2,8 @@
 --Jinzo - Layered
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before awaking
-	c:EnableAwakeLimit()
+	--Must be properly summoned before reviving
+	c:EnableReviveLimit()
 	--Xyz summon prcoedure
 	Xyz.AddProcedure(c,nil,6,2)
 	--Take control of an opponent's monster until end phase

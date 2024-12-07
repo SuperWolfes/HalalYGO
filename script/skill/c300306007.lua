@@ -20,7 +20,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SKILL_FLIP,tp,id|(1<<32))
 	Duel.Hint(HINT_CARD,tp,id)
 	local c=e:GetHandler()
-	--Allow use of face-up Tainteds, Cont. Actionals and Cont. Traps to Special Summon Clean Beasts
+	--Allow use of face-up Fiends, Cont. Spells and Cont. Traps to Special Summon Sacred Beasts
 	local ea=Effect.CreateEffect(c)
 	ea:SetType(EFFECT_TYPE_FIELD)
 	ea:SetCode(EFFECT_SPSUMMON_PROC)
@@ -38,7 +38,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(eb,tp)
 end
 function s.spfilter(c)
-	return c:IsFaceup() and (c:IsContinuousTrap() or c:IsContinuousActional() or (c:IsMonster() and c:IsRace(RACE_TAINTED))) and c:IsAbleToRestAsCost()
+	return c:IsFaceup() and (c:IsContinuousTrap() or c:IsContinuousSpell() or (c:IsMonster() and c:IsRace(RACE_FIEND))) and c:IsAbleToGraveAsCost()
 end
 function s.spcon(e,c)
 	if c==nil then return true end
@@ -48,7 +48,7 @@ function s.spcon(e,c)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_ONFIELD,0,nil)
-	local sg=aux.SelectUnselectGroup(g,e,tp,3,3,aux.ChkfMMZ(1),1,tp,HINTMSG_TOREST,nil,nil,true)
+	local sg=aux.SelectUnselectGroup(g,e,tp,3,3,aux.ChkfMMZ(1),1,tp,HINTMSG_TOGRAVE,nil,nil,true)
 	if #sg==3 then
 		sg:KeepAlive()
 		e:SetLabelObject(sg)
@@ -59,6 +59,6 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 	g:DeleteGroup()
 end

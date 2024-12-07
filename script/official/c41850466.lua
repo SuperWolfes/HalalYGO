@@ -1,5 +1,5 @@
 --ヌメロン・カオス・リチューアル
---Numeron Chaos Locked
+--Numeron Chaos Ritual
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -45,24 +45,24 @@ function s.matfilter(c)
 end
 function s.rmgchk(f,id)
 	return function(c)
-		return (c:IsLocation(LOCATION_REST) or c:IsFaceup()) and f(c,id)
+		return (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup()) and f(c,id)
 	end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chkc then return false end
-	if chk==0 then return Duel.IsExistingTarget(s.rmgchk(Card.IsCode,CARD_NUMERON_NETWORK),tp,LOCATION_REST+LOCATION_REMOVED,0,1,nil)
-		and Duel.IsExistingTarget(s.rmgchk(s.matfilter),tp,LOCATION_REST+LOCATION_REMOVED,0,4,nil)
+	if chk==0 then return Duel.IsExistingTarget(s.rmgchk(Card.IsCode,CARD_NUMERON_NETWORK),tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,nil)
+		and Duel.IsExistingTarget(s.rmgchk(s.matfilter),tp,LOCATION_GRAVE+LOCATION_REMOVED,0,4,nil)
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)
-	local atg1=Duel.SelectTarget(tp,s.rmgchk(Card.IsCode,CARD_NUMERON_NETWORK),tp,LOCATION_REST+LOCATION_REMOVED,0,1,1,nil)
+	local atg1=Duel.SelectTarget(tp,s.rmgchk(Card.IsCode,CARD_NUMERON_NETWORK),tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,1,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)
-	local atg2=Duel.SelectTarget(tp,s.rmgchk(s.matfilter),tp,LOCATION_REST+LOCATION_REMOVED,0,4,4,nil)
+	local atg2=Duel.SelectTarget(tp,s.rmgchk(s.matfilter),tp,LOCATION_GRAVE+LOCATION_REMOVED,0,4,4,nil)
 	local sg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_EXTRA,0,nil,e,tp)
 	atg1:Merge(atg2)
-	local lvgg=atg1:Filter(Card.IsLocation,nil,LOCATION_REST)
+	local lvgg=atg1:Filter(Card.IsLocation,nil,LOCATION_GRAVE)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,sg,1,tp,LOCATION_EXTRA)
 	if #lvgg>0 then
-		Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,lvgg,#lvgg,0,0)
+		Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,lvgg,#lvgg,0,0)
 	end
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)

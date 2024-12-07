@@ -38,7 +38,7 @@ s.listed_names={74388798}
 s.LVnum=3
 s.LVset=0xe7
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
-	if not re:GetHandler():IsActional() or rp==tp then return end
+	if not re:GetHandler():IsSpell() or rp==tp then return end
 	if not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then return end
 	local g=Duel.GetChainInfo(ev,CHAININFO_TARGET_CARDS)
 	if g and g:IsContains(e:GetHandler()) then 
@@ -52,8 +52,8 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return tp==Duel.GetTurnPlayer() and e:GetHandler():GetFlagEffect(id)==0
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
-	Duel.SendtoRest(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
+	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
 end
 function s.spfilter(c,e,tp)
 	return c:IsCode(74388798) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)

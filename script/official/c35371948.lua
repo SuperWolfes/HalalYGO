@@ -9,7 +9,7 @@ function s.initial_effect(c)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-	--Prevent the activation of a Actional/Trap targeted
+	--Prevent the activation of a Spell/Trap targeted
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_IGNITION)
@@ -79,7 +79,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetCondition(s.rstcon)
 		e2:SetOperation(s.rstop)
 		Duel.RegisterEffect(e2,tp)
-		--send to rest
+		--send to grave
 		local e3=Effect.CreateEffect(c)
 		e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		e3:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
@@ -135,7 +135,7 @@ function s.agcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.agop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetLabelObject()
-	Duel.SendtoRest(tc,REASON_RULE,PLAYER_NONE,1-tp)
+	Duel.SendtoGrave(tc,REASON_RULE,PLAYER_NONE,1-tp)
 end
 function s.rstop2(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()

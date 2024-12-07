@@ -13,7 +13,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x32}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_REST) and e:GetHandler():IsReason(REASON_BATTLE)
+	return e:GetHandler():IsLocation(LOCATION_GRAVE) and e:GetHandler():IsReason(REASON_BATTLE)
 end
 function s.filter(c)
 	return c:IsSetCard(0x32) and c:IsMonster()

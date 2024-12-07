@@ -1,5 +1,5 @@
 --占い魔女 フウちゃん
---Fortune Wanderer Hu
+--Fortune Fairy Hu
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
@@ -47,7 +47,7 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsPreviousLocation(LOCATION_HAND)
 end
 function s.thfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_MENTOR) and c:IsAbleToHand()
+	return c:IsFaceup() and c:IsRace(RACE_SPELLCASTER) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REMOVED) and s.thfilter(chkc) end

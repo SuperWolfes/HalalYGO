@@ -3,7 +3,7 @@
 --Scripted by Cybercatman
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Xyz Summon procedure
 	Xyz.AddProcedure(c,nil,10,2,s.ovfilter,aux.Stringid(id,0),2,s.xyzop)
 	--Make LIGHT monsters you currently control unable to be targeted by your opponent's card effects
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.cannottgtg)
 	e1:SetOperation(s.cannottgop)
 	c:RegisterEffect(e1,false,REGISTER_FLAG_DETACH_XMAT)
-	--Return 1 Rank 9 or lower Dragon Xyz Monster from your RP to the Extra Deck
+	--Return 1 Rank 9 or lower Dragon Xyz Monster from your GY to the Extra Deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,2))
 	e2:SetCategory(CATEGORY_TOEXTRA+CATEGORY_SPECIAL_SUMMON)
@@ -66,13 +66,13 @@ function s.texfilter(c)
 	return c:IsRankBelow(9) and c:IsRace(RACE_DRAGON) and c:IsType(TYPE_XYZ) and c:IsAbleToExtra()
 end
 function s.texsptg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.texfilter,tp,LOCATION_REST,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOEXTRA,nil,1,tp,LOCATION_REST)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.texfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TOEXTRA,nil,1,tp,LOCATION_GRAVE)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function s.texspop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local sc=Duel.SelectMatchingCard(tp,s.texfilter,tp,LOCATION_REST,0,1,1,nil):GetFirst()
+	local sc=Duel.SelectMatchingCard(tp,s.texfilter,tp,LOCATION_GRAVE,0,1,1,nil):GetFirst()
 	if not sc then return end
 	Duel.HintSelection(sc)
 	if not (Duel.SendtoDeck(sc,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)>0 and sc:IsLocation(LOCATION_EXTRA)) then return end

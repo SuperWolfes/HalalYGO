@@ -1,12 +1,12 @@
 -- 巨骸竜フェルグラント 
--- Corpse Dragon Watcher Felgrand
+-- Corpse Dragon Lord Felgrand
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
-	-- 1 Toxic Tuner + 1+ non-Tuner monsters
-	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_TOXIC),1,1,Synchro.NonTuner(nil),1,99)
-	-- Banish a monster from opponent's field or RP
+	c:EnableReviveLimit()
+	-- 1 Zombie Tuner + 1+ non-Tuner monsters
+	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_ZOMBIE),1,1,Synchro.NonTuner(nil),1,99)
+	-- Banish a monster from opponent's field or GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_REMOVE)
@@ -35,10 +35,10 @@ function s.rmfilter(c)
 	return c:IsMonster() and c:IsAbleToRemove() and aux.SpElimFilter(c,false,true)
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_MZONE+LOCATION_REST) and chkc:IsControler(1-tp) and s.rmfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.rmfilter,tp,0,LOCATION_MZONE+LOCATION_REST,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_MZONE+LOCATION_GRAVE) and chkc:IsControler(1-tp) and s.rmfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.rmfilter,tp,0,LOCATION_MZONE+LOCATION_GRAVE,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectTarget(tp,s.rmfilter,tp,0,LOCATION_MZONE+LOCATION_REST,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.rmfilter,tp,0,LOCATION_MZONE+LOCATION_GRAVE,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,1,0,0)
 end
 function s.rmop(e,tp,eg,ep,ev,re,r,rp)
@@ -49,7 +49,7 @@ function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.ngcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return not eg:IsContains(c) and eg:IsExists(Card.IsSummonLocation,1,c,LOCATION_REST)
+	return not eg:IsContains(c) and eg:IsExists(Card.IsSummonLocation,1,c,LOCATION_GRAVE)
 end
 function s.ngtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()

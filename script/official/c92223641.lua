@@ -21,7 +21,7 @@ end
 function s.filter(g,tp)
 	local c=g:GetFirst()
 	if c:IsControler(1-tp) then c=g:GetNext() end
-	if c and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsLocation(LOCATION_REST) then return c end
+	if c and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsLocation(LOCATION_GRAVE) then return c end
 	return nil
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)

@@ -33,7 +33,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetValue(1)
 	Duel.RegisterEffect(e2,tp)
 	if e:GetHandler():IsRelateToEffect(e) then
-		e:GetHandler():CancelToRest()
+		e:GetHandler():CancelToGrave()
 		Duel.SendtoDeck(e:GetHandler(),nil,1,REASON_EFFECT)
 	end
 end

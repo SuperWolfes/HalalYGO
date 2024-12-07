@@ -1,5 +1,5 @@
 --魂の転身
---Miss Transition
+--Soul Transition
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

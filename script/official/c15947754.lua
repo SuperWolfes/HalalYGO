@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	--Your opponent calls the original type of the Equip Card
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
-	e3:SetCategory(CATEGORY_TOREST+CATEGORY_HANDES+CATEGORY_TOHAND)
+	e3:SetCategory(CATEGORY_TOGRAVE+CATEGORY_HANDES+CATEGORY_TOHAND)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e3:SetCode(EVENT_PHASE+PHASE_END)
 	e3:SetRange(LOCATION_MZONE)
@@ -59,7 +59,7 @@ end
 function s.calltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local c=e:GetHandler()
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,c,1,tp,0)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,c,1,tp,0)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_HANDES,nil,0,1-tp,1)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,c,1,tp,0)
 end
@@ -68,20 +68,20 @@ function s.callop(e,tp,eg,ep,ev,re,r,rp)
 	if not c:IsRelateToEffect(e) then return end
 	local ec=c:GetEquipGroup():Filter(Card.HasFlagEffect,nil,id):GetFirst()
 	if not ec then return end
-	local op=Duel.SelectOption(1-tp,DECLTYPE_MONSTER,DECLTYPE_ACTIONAL,DECLTYPE_TRAP)
+	local op=Duel.SelectOption(1-tp,DECLTYPE_MONSTER,DECLTYPE_SPELL,DECLTYPE_TRAP)
 	Duel.ConfirmCards(1-tp,ec)
 	local res=(op==0 and ec:IsMonsterCard())
-		or (op==1 and ec:IsActionalCard())
+		or (op==1 and ec:IsSpellCard())
 		or (op==2 and ec:IsTrapCard())
 	if res then
-		--Send this card to the RP
-		Duel.SendtoRest(c,REASON_EFFECT)
+		--Send this card to the GY
+		Duel.SendtoGrave(c,REASON_EFFECT)
 	else
 		--Discard 1 random card from your opponent's hand, and if you do, return this card to the hand
 		local g=Duel.GetFieldGroup(tp,0,LOCATION_HAND,nil)
 		if #g==0 then return end
 		local sg=g:RandomSelect(1-tp,1)
-		if Duel.SendtoRest(sg,REASON_DISCARD|REASON_EFFECT)>0 then
+		if Duel.SendtoGrave(sg,REASON_DISCARD|REASON_EFFECT)>0 then
 			Duel.SendtoHand(c,nil,REASON_EFFECT)
 		end
 	end

@@ -37,9 +37,9 @@ function s.sum_fil(c,e,tp)
 	return c:IsSetCard(0x7b) and c:IsDefenseBelow(s.dmg[tp]) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingTarget(s.sum_fil,tp,LOCATION_REST,0,1,nil,e,tp) end
+	if chk==0 then return Duel.IsExistingTarget(s.sum_fil,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.sum_fil,tp,LOCATION_REST,0,1,1,nil,e,tp)
+	local g=Duel.SelectTarget(tp,s.sum_fil,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,0)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)

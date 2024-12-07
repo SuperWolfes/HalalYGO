@@ -54,7 +54,7 @@ function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetLabelObject()
 	local bc=tc:GetBattleTarget()
 	return eg:IsContains(tc) and tc:GetFlagEffect(id)~=0
-		and bc:IsLocation(LOCATION_REST) and bc:IsReason(REASON_BATTLE)
+		and bc:IsLocation(LOCATION_GRAVE) and bc:IsReason(REASON_BATTLE)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

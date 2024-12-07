@@ -1,5 +1,5 @@
 --ＲＤＭ－ホープ・フォール
---Rank-Down-Ment Utopia Fall
+--Rank-Down-Magic Utopia Fall
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

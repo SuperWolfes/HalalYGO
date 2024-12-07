@@ -3,7 +3,7 @@
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	-- If Normal or Special Summoned, add 1 "Myutant" Actional/Trap
+	-- If Normal or Special Summoned, add 1 "Myutant" Spell/Trap
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND)
@@ -32,7 +32,7 @@ end
 s.listed_series={0x159}
 s.listed_names={CARD_MYUTANT_BEAST,CARD_MYUTANT_MIST,CARD_MYUTANT_ARSENAL}
 function s.thfilter(c)
-	return c:IsSetCard(0x159) and (c:IsActional() or c:IsTrap()) and c:IsAbleToHand()
+	return c:IsSetCard(0x159) and (c:IsSpell() or c:IsTrap()) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -52,7 +52,7 @@ end
 function s.getspcode(c)
 	local type=c:GetOriginalType()
 	if type&TYPE_MONSTER==TYPE_MONSTER then return CARD_MYUTANT_BEAST end
-	if type&TYPE_ACTIONAL==TYPE_ACTIONAL then return CARD_MYUTANT_MIST end
+	if type&TYPE_SPELL==TYPE_SPELL then return CARD_MYUTANT_MIST end
 	return type&TYPE_TRAP==TYPE_TRAP and CARD_MYUTANT_ARSENAL or -1
 end
 function s.spcostfilter(c,e,tp,ft)

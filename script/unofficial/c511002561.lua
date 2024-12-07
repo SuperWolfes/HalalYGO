@@ -1,4 +1,4 @@
---Dlilt Cycle
+--Djinn Cycle
 --NOTE: Edit out, remove comments when Trigger is already handled by YGoPro Percy
 local s,id=GetID()
 function s.initial_effect(c)

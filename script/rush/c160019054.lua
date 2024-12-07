@@ -3,12 +3,12 @@
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	--Treated as a Legend Card in the hand or RP
+	--Treated as a Legend Card in the hand or GY
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
 	e0:SetCode(EFFECT_IS_LEGEND)
 	e0:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	e0:SetRange(LOCATION_HAND|LOCATION_REST)
+	e0:SetRange(LOCATION_HAND|LOCATION_GRAVE)
 	c:RegisterEffect(e0)
 	-- Activate
 	local e1=Effect.CreateEffect(c)
@@ -29,19 +29,19 @@ function s.cfilter(c)
 	return c:IsMonster() and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,2,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,2,nil) end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeck(tp,4) end
 	Duel.SetOperationInfo(0,CATEGORY_DECKDES,nil,0,tp,4)
 end
 function s.thfilter(c)
-	return c:IsLocation(LOCATION_REST) and c:IsAbleToHand() and c:IsLegend() and (c:IsMonster() or c:IsTrap())
+	return c:IsLocation(LOCATION_GRAVE) and c:IsAbleToHand() and c:IsLegend() and (c:IsMonster() or c:IsTrap())
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_REST,0,2,2,nil)
+	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_GRAVE,0,2,2,nil)
 	if #g==0 then return end
 	Duel.HintSelection(g)
 	if Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)~=2 then return end

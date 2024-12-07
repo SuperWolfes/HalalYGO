@@ -2,7 +2,7 @@
 --Curse of Dragonfire
 local s,id=GetID()
 function s.initial_effect(c)
-	--Destroy a field Actionall
+	--Destroy a field Spelll
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DESTROY)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e2)
 	--Perform a Fusion Summon
-	local params = {nil,Fusion.OnFieldMat,nil,nil,Fusion.FcoreedHandler}
+	local params = {nil,Fusion.OnFieldMat,nil,nil,Fusion.ForcedHandler}
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)

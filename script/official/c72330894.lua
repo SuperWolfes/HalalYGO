@@ -1,10 +1,10 @@
 --王神鳥シムルグ
---Sisbird, Bird of Sovereignty
+--Simorgh, Bird of Sovereignty
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
 	--Link Summon
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Link.AddProcedure(c,nil,2,3,s.lcheck)
 	--Cannot be Link Material
 	local e1=Effect.CreateEffect(c)
@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.indtg)
 	e2:SetValue(aux.tgoval)
 	c:RegisterEffect(e2)
-	--Mismatching replacement
+	--Destruction replacement
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_SINGLE)
 	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -43,7 +43,7 @@ function s.initial_effect(c)
 	e4:SetOperation(s.spop)
 	c:RegisterEffect(e4)
 end
-s.listed_series={SET_SISBIRD}
+s.listed_series={SET_SIMORGH}
 function s.lcheck(g,lc,sumtype,tp)
 	return g:IsExists(Card.IsRace,1,nil,RACE_WINGEDBEAST,lc,sumtype,tp)
 end
@@ -52,7 +52,7 @@ function s.indtg(e,c)
 	return c==oc or (c:IsRace(RACE_WINGEDBEAST) and oc:GetLinkedGroup():IsContains(c))
 end
 function s.repfilter(c,e)
-	return c:IsFaceup() and c:IsSetCard(SET_SISBIRD)
+	return c:IsFaceup() and c:IsSetCard(SET_SIMORGH)
 		and c:IsDestructable(e) and not c:IsStatus(STATUS_DESTROY_CONFIRMED)
 end
 function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)

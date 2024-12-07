@@ -2,7 +2,7 @@
 --Majestic Red Dragon
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Synchro Summon Procedure
 	Synchro.AddMajesticProcedure(c,aux.FilterBoolFunction(Card.IsCode,21159309),true,aux.FilterBoolFunction(Card.IsCode,70902743),true,Synchro.NonTuner(nil),false)
 	--Destroy all Defense Position monsters
@@ -26,7 +26,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.distg)
 	e2:SetOperation(s.disop)
 	c:RegisterEffect(e2)
-	--Return itself to the Extra Deck and Special Summon 1 "Red Dragon Archtainted"
+	--Return itself to the Extra Deck and Special Summon 1 "Red Dragon Archfiend"
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
@@ -54,7 +54,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e5)
 end
 s.material={70902743,21159309}
-s.listed_names={70902743,21159309} -- Red Dragon Archtainted, Majestic Dragon
+s.listed_names={70902743,21159309} -- Red Dragon Archfiend, Majestic Dragon
 s.synchro_nt_required=1
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler()==Duel.GetAttacker()
@@ -107,10 +107,10 @@ function s.spfilter(c,e,tp)
 	return c:IsCode(70902743) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp) end
 	if chk==0 then return true end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp)
+	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,e:GetHandler(),1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 end

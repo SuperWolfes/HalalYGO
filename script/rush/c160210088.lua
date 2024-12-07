@@ -24,7 +24,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.filter1,1,nil,tp) and Duel.IsTurnPlayer(1-tp)
 end
 function s.tgfilter(c)
-	return c:IsFaceup() and c:IsLevelAbove(5) and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_TAINTED)
+	return c:IsFaceup() and c:IsLevelAbove(5) and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_FIEND)
 end
 function s.filter(c)
 	return c:IsFaceup() and c:IsType(TYPE_EFFECT) and c:IsLevelAbove(4)

@@ -1,5 +1,5 @@
 --デーモンの杖
---Archtainted Staff of Despair
+--Archfiend Staff of Despair
 --Scripted by DyXel
 
 local s,id=GetID()
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetCountLimit(1,id)
 	e1:SetOperation(s.actop)
 	c:RegisterEffect(e1)
-	--Add this card from RP to hand
+	--Add this card from GY to hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
@@ -46,7 +46,7 @@ function s.actop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.retcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsLocation(LOCATION_REST) and c:GetEquipTarget()~=nil
+	return c:IsLocation(LOCATION_GRAVE) and c:GetEquipTarget()~=nil
 end
 function s.retcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckLPCost(tp,1000) end

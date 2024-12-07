@@ -1,5 +1,5 @@
 --ハイドライブ・トレランス
---Hyddendrive Tolerance
+--Hydradrive Tolerance
 --Scripted by Playmaker 772211
 --Fixed by Larry126
 local s,id=GetID()
@@ -23,11 +23,11 @@ function s.filter(c,tid)
 		and c:GetReason()&REASON_DESTROY~=0 and c:GetLink()>0
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and s.filter(chkc,Duel.GetTurnCount()) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.filter(chkc,Duel.GetTurnCount()) end
 	local tid=Duel.GetTurnCount()
-	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil,tid) end
+	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil,tid) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil,tid)
+	Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil,tid)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()

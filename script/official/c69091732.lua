@@ -25,5 +25,5 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
 	local g=Duel.GetFieldGroup(p,LOCATION_HAND,0)
 	local dg=g:RandomSelect(tp,1)
-	Duel.SendtoRest(dg,REASON_EFFECT+REASON_DISCARD)
+	Duel.SendtoGrave(dg,REASON_EFFECT+REASON_DISCARD)
 end

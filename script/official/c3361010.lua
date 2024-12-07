@@ -1,9 +1,9 @@
 --愉怪な燐のきつねびゆらら
---Yutrai na Rin no Kitsunebi Yurara
+--Yukai na Rin no Kitsunebi Yurara
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Change monsters' Atsort FIRE
+	--Change monsters' Attribute to FIRE
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_CHANGE_ATTRIBUTE)
@@ -11,12 +11,12 @@ function s.initial_effect(c)
 	e1:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
 	e1:SetValue(ATTRIBUTE_FIRE)
 	c:RegisterEffect(e1)
-	--Special Summon itself from RP
+	--Special Summon itself from GY
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCountLimit(1,id)
 	e2:SetCondition(s.spcon)
 	e2:SetTarget(s.sptg)
@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsAttribute,ATTRIBUTE_FIRE),tp,0,LOCATION_MZONE|LOCATION_REST,1,nil)
+	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsAttribute,ATTRIBUTE_FIRE),tp,0,LOCATION_MZONE|LOCATION_GRAVE,1,nil)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

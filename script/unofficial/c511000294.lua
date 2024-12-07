@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz summon
 	Xyz.AddProcedure(c,nil,12,5)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--negate and cannot attack
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetTargetRange(0,LOCATION_MZONE)
 	e2:SetTarget(s.filter)--aux.TargetBoolFunction(Card.IsC))
 	c:RegisterEffect(e2)
-	--Mismatching replacement
+	--Destruction replacement
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_SINGLE)
 	e3:SetCode(EFFECT_DESTROY_REPLACE)
@@ -136,8 +136,8 @@ function s.bpop(e,tp,eg,ep,ev,re,r,rp)
 	local tid=Duel.GetTurnCount()
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ft<=0 then return end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
-	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_REST,LOCATION_REST,nil,e,tp,tid)
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,nil,e,tp,tid)
 	if #g>ft then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		g=g:Select(tp,ft,ft,nil)

@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Link.AddProcedure(c,s.matfilter,1,1)
 	--spsummon
 	local e1=Effect.CreateEffect(c)
@@ -28,7 +28,7 @@ end
 function s.pfilter(c,cd)
 	return c:IsSetCard(0x10ec) and c:IsType(TYPE_PENDULUM)
 		and (c:IsFaceup() or not c:IsLocation(LOCATION_EXTRA))
-		and not c:IsUnliked() and not c:IsCode(cd)
+		and not c:IsForbidden() and not c:IsCode(cd)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_PZONE) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp) end

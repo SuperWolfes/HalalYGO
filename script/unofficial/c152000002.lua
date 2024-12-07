@@ -8,7 +8,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0xfb}
 function s.cfilter(c)
-	return c:IsSetCard(0xfb) and c:IsAbleToRest()
+	return c:IsSetCard(0xfb) and c:IsAbleToGrave()
 end
 function s.tkfilter(c)
 	return c:IsMonster() and c:IsSetCard(0xfb)
@@ -32,7 +32,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=3-Duel.GetFieldGroupCount(tp,0,LOCATION_HAND)
 	local cg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_HAND,0,nil)
 	if ct>0 and Duel.IsPlayerCanDraw(1-tp,ct) and cg:GetFirst() then
-		Duel.SendtoRest(cg:Select(tp,1,1,nil),REASON_EFFECT)
+		Duel.SendtoGrave(cg:Select(tp,1,1,nil),REASON_EFFECT)
 		Duel.Draw(1-tp,ct,REASON_EFFECT)
 	end
 	local e1=Effect.CreateEffect(e:GetHandler())
@@ -45,7 +45,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.banop(e,tp,eg,ep,ev,re,r,rp)
 	local hg=Duel.GetFieldGroup(1-tp,LOCATION_HAND,0):Filter(Card.IsAbleToRemove,nil)
-	local gyc=Duel.GetMatchingGroupCount(s.tkfilter,tp,LOCATION_REST,0,nil)
+	local gyc=Duel.GetMatchingGroupCount(s.tkfilter,tp,LOCATION_GRAVE,0,nil)
 	if #hg==0 or gyc==0 then return end
 	if #hg<=gyc then
 		Duel.Remove(hg,POS_FACEUP,REASON_EFFECT)

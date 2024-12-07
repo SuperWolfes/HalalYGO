@@ -2,7 +2,7 @@
 --Re-qliate
 local s,id=GetID()
 function s.initial_effect(c)
-	Duel.EnableGlobalFlag(GLOBALFLAG_SELF_TOREST)
+	Duel.EnableGlobalFlag(GLOBALFLAG_SELF_TOGRAVE)
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -30,13 +30,13 @@ function s.initial_effect(c)
 	e4:SetTarget(s.distg2)
 	e4:SetOperation(s.disop2)
 	c:RegisterEffect(e4)
-	--send itself to the Rest
+	--send itself to the Grave
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(id,2))
 	e5:SetType(EFFECT_TYPE_SINGLE)
 	e5:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e5:SetRange(LOCATION_SZONE)
-	e5:SetCode(EFFECT_SELF_TOREST)
+	e5:SetCode(EFFECT_SELF_TOGRAVE)
 	e5:SetCondition(s.sdcon)
 	c:RegisterEffect(e5)
 end

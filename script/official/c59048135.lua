@@ -34,13 +34,13 @@ end
 s.listed_names={id}
 s.listed_series={0x76,0x92}
 function s.counterfilter(c)
-	return c:IsRace(RACE_MENTAL) and c:IsType(TYPE_XYZ) or c:IsSetCard(0x76)
+	return c:IsRace(RACE_PSYCHIC) and c:IsType(TYPE_XYZ) or c:IsSetCard(0x76)
 end
 function s.etarget(e,c)
-	return c:IsRace(RACE_MENTAL) and c:IsType(TYPE_XYZ)
+	return c:IsRace(RACE_PSYCHIC) and c:IsType(TYPE_XYZ)
 end
 function s.evalue(e,re,rp)
-	return re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP)
+	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP)
 end
 function s.cfilter(c)
 	return c:IsSetCard(0x76) and c:IsMonster() and c:IsDiscardable()
@@ -64,10 +64,10 @@ function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	aux.RegisterClientHint(e:GetHandler(),nil,tp,1,0,aux.Stringid(id,1),nil)
 end
 function s.splimit(e,c)
-	return not (c:IsRace(RACE_MENTAL) and c:IsType(TYPE_XYZ)) and not c:IsSetCard(0x76)
+	return not (c:IsRace(RACE_PSYCHIC) and c:IsType(TYPE_XYZ)) and not c:IsSetCard(0x76)
 end
 function s.filter(c)
-	return c:IsSetCard(0x92) and c:IsActionalTrap() and not c:IsCode(id) and c:IsAbleToHand()
+	return c:IsSetCard(0x92) and c:IsSpellTrap() and not c:IsCode(id) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end

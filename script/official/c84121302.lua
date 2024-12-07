@@ -1,5 +1,5 @@
 --リブロマンサー・オリジン
---Librobouncer Origin
+--Libromancer Origin
 --scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -9,18 +9,18 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
-	e1:SetOperation(s.vetop)
+	e1:SetOperation(s.setop)
 	c:RegisterEffect(e1)
-	--"Librobouncer" Locked Monsters gain ATK
+	--"Libromancer" Ritual Monsters gain ATK
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_UPDATE_ATTACK)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetTargetRange(LOCATION_MZONE,0)
-	e2:SetTarget(function(_,c) return c:IsSetCard(SET_LIBROBOUNCER) and c:IsLockedMonster() end)
+	e2:SetTarget(function(_,c) return c:IsSetCard(SET_LIBROMANCER) and c:IsRitualMonster() end)
 	e2:SetValue(function(_,c) return c:GetLevel()*100 end)
 	c:RegisterEffect(e2)
-	--Destroy 1 Actional/Trap your opponent controls
+	--Destroy 1 Spell/Trap your opponent controls
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_DESTROY)
@@ -35,11 +35,11 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 s.listed_names={id}
-s.listed_series={SET_LIBROBOUNCER}
+s.listed_series={SET_LIBROMANCER}
 function s.setfilter(c)
-	return c:IsSetCard(SET_LIBROBOUNCER) and c:IsActionalTrap() and not c:IsCode(id) and c:IsSSetable()
+	return c:IsSetCard(SET_LIBROMANCER) and c:IsSpellTrap() and not c:IsCode(id) and c:IsSSetable()
 end
-function s.vetop(e,tp,eg,ep,ev,re,r,rp)
+function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.setfilter,tp,LOCATION_DECK,0,nil)
 	if #g==0 or not Duel.SelectYesNo(tp,aux.Stringid(id,0)) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
@@ -49,16 +49,16 @@ function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.desconfilter(c,tp)
-	return c:IsFaceup() and c:IsLockedMonster() and c:IsControler(tp) and c:IsSummonType(SUMMON_TYPE_LOCKED)
+	return c:IsFaceup() and c:IsRitualMonster() and c:IsControler(tp) and c:IsSummonType(SUMMON_TYPE_RITUAL)
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.desconfilter,1,nil,tp)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsOnField() and chkc:IsControler(1-tp) and chkc:IsActionalTrap() end
-	if chk==0 then return Duel.IsExistingTarget(Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,1,nil) end
+	if chkc then return chkc:IsOnField() and chkc:IsControler(1-tp) and chkc:IsSpellTrap() end
+	if chk==0 then return Duel.IsExistingTarget(Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-	local g=Duel.SelectTarget(tp,Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,1,1,nil)
+	local g=Duel.SelectTarget(tp,Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)

@@ -34,7 +34,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,#g,0,0)
 end
 function s.setfilter(c,code)
-	return c:IsCode(code) and c:IsSummonableCard() and not c:IsStatus(STATUS_UNLIKED) and not c:IsHasEffect(EFFECT_CANNOT_MSET)
+	return c:IsCode(code) and c:IsSummonableCard() and not c:IsStatus(STATUS_FORBIDDEN) and not c:IsHasEffect(EFFECT_CANNOT_MSET)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end

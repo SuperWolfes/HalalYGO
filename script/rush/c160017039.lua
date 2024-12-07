@@ -26,12 +26,12 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,200)
 end
 function s.cfilter(c)
-	return (c:IsMonster() and c:IsRace(RACE_CYBERSE) and c:IsAttribute(ATTRIBUTE_FIRE) and c:IsLevel(3)) or c:IsEquipActional()
+	return (c:IsMonster() and c:IsRace(RACE_CYBERSE) and c:IsAttribute(ATTRIBUTE_FIRE) and c:IsLevel(3)) or c:IsEquipSpell()
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local p,val=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
 	if Duel.Damage(p,val,REASON_EFFECT)>0 
-		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil)
+		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,nil)
 		and Duel.IsExistingMatchingCard(Card.IsFaceup,tp,0,LOCATION_MZONE,1,nil) 
 		and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATKDEF)

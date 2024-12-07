@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.pttg)
 	e2:SetOperation(s.ptop)
 	c:RegisterEffect(e2)
-	-- Search 1 Field Actional
+	-- Search 1 Field Spell
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_HANDES)
@@ -71,7 +71,7 @@ end
 function s.ptcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsDiscardable() end
-	Duel.SendtoRest(c,REASON_COST+REASON_DISCARD)
+	Duel.SendtoGrave(c,REASON_COST+REASON_DISCARD)
 end
 function s.pttg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFlagEffect(tp,id)==0 end
@@ -89,7 +89,7 @@ function s.ptop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetValue(aux.tgoval)
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e1,tp)
-	-- "Dracoslayer" monsters mismatching protection
+	-- "Dracoslayer" monsters destruction protection
 	local e2=e1:Clone()
 	e2:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
 	e2:SetProperty(0)
@@ -101,7 +101,7 @@ function s.fthcon(e,tp,eg,ep,ev,re,r,rp)
 	return re and re:GetHandler():IsSetCard(0xc7) or e:GetHandler():IsSummonType(SUMMON_TYPE_PENDULUM)
 end
 function s.fthfilter(c)
-	return c:IsType(TYPE_FIELD) and c:IsActional() and c:IsAbleToHand()
+	return c:IsType(TYPE_FIELD) and c:IsSpell() and c:IsAbleToHand()
 end
 function s.fthtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.fthfilter,tp,LOCATION_DECK,0,1,nil) end

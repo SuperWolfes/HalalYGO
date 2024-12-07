@@ -1,9 +1,9 @@
 --花牙一輪ドウシン・カイカ
---Doushin Kaika the Shadow Flower Full Horizon
+--Doushin Kaika the Shadow Flower Full Moon
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Fusion Summon procedure
 	Fusion.AddProcMix(c,true,true,160005028,160005007)
 	--Allow 1 plant monster to attack directly this turn
@@ -46,9 +46,9 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			e1:SetReset(RESETS_STANDARD_PHASE_END)
 			tc:RegisterEffect(e1)
 		end
-		local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.setfilter),tp,LOCATION_REST,0,nil)
+		local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.setfilter),tp,LOCATION_GRAVE,0,nil)
 		if #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
-			--Set 1 "Shadow Flower Stance" from the RP
+			--Set 1 "Shadow Flower Stance" from the GY
 			Duel.BreakEffect()
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 			local sg=g:Select(tp,1,1,nil)

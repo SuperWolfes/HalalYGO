@@ -1,5 +1,5 @@
 --顕限竜マクスシール
---Expressriction Dragon Maxseal
+--Manifestriction Dragon Maxseal
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)

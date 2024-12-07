@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	-- Activate
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_TOREST)
+	e1:SetCategory(CATEGORY_TOGRAVE)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_DRAW)
 	e1:SetCondition(s.condition)
@@ -24,6 +24,6 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local sg=eg:Filter(Card.IsRelateToEffect,nil,e):Filter(Card.IsControler,nil,1-tp)
 	if #sg>0 then
-		Duel.SendtoRest(sg,REASON_EFFECT)
+		Duel.SendtoGrave(sg,REASON_EFFECT)
 	end
 end

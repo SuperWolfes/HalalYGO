@@ -39,13 +39,13 @@ function s.distg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DISABLE,eg,1,tp,0)
 	local rc=re:GetHandler()
 	if rc:IsRelateToEffect(re) and rc:IsDestructable()
-		and Duel.IsExistingMatchingCard(Card.IsTrap,tp,LOCATION_REST,0,1,nil) then
+		and Duel.IsExistingMatchingCard(Card.IsTrap,tp,LOCATION_GRAVE,0,1,nil) then
 		Duel.SetOperationInfo(0,CATEGORY_DESTROY,eg,1,tp,0)
 	end
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.NegateEffect(ev) and re:GetHandler():IsRelateToEffect(re)
-		and Duel.IsExistingMatchingCard(Card.IsTrap,tp,LOCATION_REST,0,1,nil) then
+		and Duel.IsExistingMatchingCard(Card.IsTrap,tp,LOCATION_GRAVE,0,1,nil) then
 		Duel.BreakEffect()
 		Duel.Destroy(eg,REASON_EFFECT)
 	end

@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	--remove
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
-	e2:SetCode(EFFECT_TO_REST_REDIRECT)
+	e2:SetCode(EFFECT_TO_GRAVE_REDIRECT)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
 	e2:SetTargetRange(LOCATION_SZONE,LOCATION_SZONE)
@@ -52,12 +52,12 @@ s.listed_names={id} --not standard, but required for Level Up!
 s.LVnum=9
 s.LVset=0x10a4
 function s.checkop1(e,tp,eg,ep,ev,re,r,rp)
-	if re and re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_ACTIONAL) then
+	if re and re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_SPELL) then
 		re:GetHandler():RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1)
 	end
 end
 function s.checkop2(e,tp,eg,ep,ev,re,r,rp)
-	if re and re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_ACTIONAL) then
+	if re and re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_SPELL) then
 		re:GetHandler():ResetFlagEffect(id)
 	end
 end
@@ -79,5 +79,5 @@ function s.rmtarget(e,c)
 	return c:IsFaceup() and c:GetFlagEffect(id)>0 and Duel.IsPlayerCanRemove(e:GetHandlerPlayer(),c)
 end
 function s.val(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsActional,c:GetControler(),0,LOCATION_REST,nil)*500
+	return Duel.GetMatchingGroupCount(Card.IsSpell,c:GetControler(),0,LOCATION_GRAVE,nil)*500
 end

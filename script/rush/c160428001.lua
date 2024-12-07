@@ -1,5 +1,5 @@
 --超魔輝獣マグナム・オーバーロード［Ｌ］
---Supreme Beast Magnum Overwatcher [L]
+--Supreme Beast Magnum Overlord [L]
 local s,id=GetID()
 function s.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
@@ -28,5 +28,5 @@ function s.val(e,c)
 	return Duel.GetFieldGroupCountRush(c:GetControler(),0,LOCATION_MZONE)*500
 end
 function s.pcon(e)
-	return e:GetHandler():IsMaximumMode() and Duel.GetMatchingGroupCount(Card.IsMonster,e:GetHandler():GetControler(),LOCATION_REST,0,nil)>=10
+	return e:GetHandler():IsMaximumMode() and Duel.GetMatchingGroupCount(Card.IsMonster,e:GetHandler():GetControler(),LOCATION_GRAVE,0,nil)>=10
 end

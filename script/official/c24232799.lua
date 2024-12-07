@@ -3,14 +3,14 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Fusion Summon Procedure
 	Fusion.AddProcMix(c,true,true,{12275533,99733359},aux.FilterBoolFunctionEx(Card.IsRace,RACE_MACHINE|RACE_DINOSAUR))
 	--Cannot be destroyed by battle
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_INDESTRUCTABLE_BATTLE)
-	e1:SetCondition(function(e) return Duel.IsExistingMatchingCard(Card.IsSummonLocation,e:GetHandlerPlayer(),LOCATION_MZONE,LOCATION_MZONE,1,nil,LOCATION_REST) end)
+	e1:SetCondition(function(e) return Duel.IsExistingMatchingCard(Card.IsSummonLocation,e:GetHandlerPlayer(),LOCATION_MZONE,LOCATION_MZONE,1,nil,LOCATION_GRAVE) end)
 	e1:SetValue(1)
 	c:RegisterEffect(e1)
 	--Destroy 1 card you control and 1 card your opponent controls

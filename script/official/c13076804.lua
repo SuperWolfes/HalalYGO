@@ -1,9 +1,9 @@
 --カオス・デーモン－混沌の魔神－
---Chaos Archtainted
+--Chaos Archfiend
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Synchro Summon Procedure
 	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGHT),1,1,Synchro.NonTunerEx(Card.IsAttribute,ATTRIBUTE_DARK),1,99)
 	--Gains 2000 ATK the turn a card is banished

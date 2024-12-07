@@ -68,7 +68,7 @@ function s.disconfilter(c)
 	return c:IsSetCard(SET_EARTHBOUND) and c:IsFaceup() and c:IsMonster()
 end
 function s.distg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.disconfilter,tp,LOCATION_MZONE|LOCATION_REST,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.disconfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,1,nil) end
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SetLP(1-tp,Duel.GetLP(1-tp)/2,REASON_EFFECT)

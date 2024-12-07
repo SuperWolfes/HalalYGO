@@ -3,7 +3,7 @@
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send the top 3 cards of your Deck to the RP
+	--Send the top 3 cards of your Deck to the GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DECKDES+CATEGORY_RECOVER)
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -20,8 +20,8 @@ function s.condfilter(c)
 	return c:IsMonster() and not c:IsAttribute(ATTRIBUTE_LIGHT)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_REST,0,1,nil)
-		and not Duel.IsExistingMatchingCard(s.condfilter,tp,LOCATION_REST,0,1,nil)
+	return Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_GRAVE,0,1,nil)
+		and not Duel.IsExistingMatchingCard(s.condfilter,tp,LOCATION_GRAVE,0,1,nil)
 end
 function s.cfilter(c)
 	return c:IsMonster() and c:IsType(TYPE_EFFECT) and c:IsLevel(7,8) and not c:IsPublic()
@@ -43,9 +43,9 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ConfirmCards(1-tp,tc)
 	--Effect
 	if Duel.DiscardDeck(tp,3,REASON_EFFECT)~=3 then return end
-	if Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+	if Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-		local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
+		local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 		if #g>0 then
 			Duel.BreakEffect()
 			Duel.SendtoHand(g,nil,REASON_EFFECT)

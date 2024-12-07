@@ -1,5 +1,5 @@
 --神鳥の霊峰エルブルズ
---Elborz, the Clean Lands of Sisbird
+--Elborz, the Sacred Lands of Simorgh
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

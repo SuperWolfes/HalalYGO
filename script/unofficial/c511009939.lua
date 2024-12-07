@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOKEN)
 	e2:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-	e2:SetCode(EVENT_TO_REST)
+	e2:SetCode(EVENT_TO_GRAVE)
 	e2:SetCountLimit(1,id)
 	e2:SetCondition(s.tokencon)
 	e2:SetTarget(s.tokentg)
@@ -55,7 +55,7 @@ end
 function s.tokenop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=2
 	if ct==0 then return end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ct=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ct=1 end
 	repeat
 		local b1=Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0x119,TYPES_TOKEN,0,0,1,RACE_CYBERSE,ATTRIBUTE_FIRE,POS_FACEUP_DEFENSE,tp)
 		local b2=Duel.GetLocationCount(1-tp,LOCATION_MZONE)>0 and Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0x119,TYPES_TOKEN,0,0,1,RACE_CYBERSE,ATTRIBUTE_FIRE,POS_FACEUP_DEFENSE,1-tp)

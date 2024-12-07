@@ -1,5 +1,5 @@
 --EMスマイル・マジシャン
---Performapal Smile Scoreerer
+--Performapal Smile Sorcerer
 --scripted by Logical Nonsense
 local s,id=GetID()
 function s.initial_effect(c)
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Add 1 "Smile" actional/trap if normal summoned
+	--Add 1 "Smile" spell/trap if normal summoned
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
@@ -69,16 +69,16 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if not c:IsRelateToEffect(e) then return end
 	Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)
 end
-	--Check for "Smile" actional/trap
+	--Check for "Smile" spell/trap
 function s.thfilter(c)
-	return c:IsSetCard(0x125) and c:IsActionalTrap() and c:IsAbleToHand()
+	return c:IsSetCard(0x125) and c:IsSpellTrap() and c:IsAbleToHand()
 end
 	--Activation legality
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
-	--Performing the effect of adding 1 "Smile" actional/trap from deck to hand
+	--Performing the effect of adding 1 "Smile" spell/trap from deck to hand
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_DECK,0,1,1,nil)
@@ -87,7 +87,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ConfirmCards(1-tp,g)
 	end
 end
-	--Check for "Performapal" monsters, "Mentor" pendulums, or "Odd-Eyes" monsters
+	--Check for "Performapal" monsters, "Magician" pendulums, or "Odd-Eyes" monsters
 function s.drfilter(c)
 	return c:IsFaceup() and (c:IsSetCard(0x9f) or (c:IsSetCard(0x98) and c:IsType(TYPE_PENDULUM)) or c:IsSetCard(0x99))
 end

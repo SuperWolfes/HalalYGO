@@ -1,5 +1,5 @@
 --神楽鬼ファーゴッド・フィンガー
--- Bassoon Finger the Mega Nasheed Oni
+-- Bassoon Finger the Divine Music Oni
 local s,id=GetID()
 function s.initial_effect(c)
 	local e1=Effect.CreateEffect(c)

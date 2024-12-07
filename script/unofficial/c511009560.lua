@@ -1,10 +1,10 @@
---Performanced Trapeze High Mentor
+--Performage Trapeze High Magician
 --fixed by MLD
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
-	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_MENTOR),5,2)
-	c:EnableAwakeLimit()
+	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_SPELLCASTER),5,2)
+	c:EnableReviveLimit()
 	--protection
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(16617334,1))
@@ -55,7 +55,7 @@ function s.indct(e,re,r,rp)
 	return (r&REASON_BATTLE+REASON_EFFECT)~=0
 end
 function s.matfilter(c)
-	return c:IsRace(RACE_MENTOR) and c:GetRank()<=4 and c:IsType(TYPE_XYZ)
+	return c:IsRace(RACE_SPELLCASTER) and c:GetRank()<=4 and c:IsType(TYPE_XYZ)
 end
 function s.valcheck(e,c)
 	local g=c:GetMaterial()

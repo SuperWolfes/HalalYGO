@@ -1,10 +1,10 @@
 --ゴーストリックの駄天使
---Missrick Angel of Mischief
+--Ghostrick Angel of Mischief
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,4,2,s.ovfilter,aux.Stringid(id,0))
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--win
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
@@ -44,7 +44,7 @@ function s.ovfilter(c,tp,xyzc)
 end
 function s.winop(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():GetOverlayCount()==10 then
-		Duel.Win(tp,WIN_REASON_MISSRICK_MISCHIEF)
+		Duel.Win(tp,WIN_REASON_GHOSTRICK_MISCHIEF)
 	end
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -52,7 +52,7 @@ function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
 end
 function s.thfilter(c)
-	return c:IsSetCard(0x8d) and c:IsActionalTrap() and c:IsAbleToHand()
+	return c:IsSetCard(0x8d) and c:IsSpellTrap() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

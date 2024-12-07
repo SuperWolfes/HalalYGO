@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Xyz Summon Procedure
 	Xyz.AddProcedure(c,nil,5,3)
 	--Gain 200 ATK per each material attached
@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	--Attach monsters when an attack is declared involving a "Battlin' Boxer" monster
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
-	e3:SetCategory(CATEGORY_TOREST)
+	e3:SetCategory(CATEGORY_TOGRAVE)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e3:SetCode(EVENT_ATTACK_ANNOUNCE)
 	e3:SetRange(LOCATION_MZONE)
@@ -63,18 +63,18 @@ function s.atchcond(e,tp,eg,ep,ev,re,r,rp)
 	return a and b and a:IsFaceup() and a:IsSetCard(SET_BATTLIN_BOXER)
 end
 function s.tgfilter(c)
-	return c:IsSetCard(SET_BATTLIN_BOXER) and c:IsMonster() and c:IsAbleToRest()
+	return c:IsSetCard(SET_BATTLIN_BOXER) and c:IsMonster() and c:IsAbleToGrave()
 end
 function s.atchtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local _,b=Duel.GetBattleMonster(tp)
 	if chk==0 then return b:IsAbleToChangeControler() and b:IsCanBeXyzMaterial(e:GetHandler(),tp,REASON_EFFECT)
 		and Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_HAND|LOCATION_DECK,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_HAND|LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_HAND|LOCATION_DECK)
 end
 function s.atchop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_HAND|LOCATION_DECK,0,1,1,nil)
-	if #g>0 and Duel.SendtoRest(g,REASON_EFFECT)>0 and g:GetFirst():IsLocation(LOCATION_REST) then
+	if #g>0 and Duel.SendtoGrave(g,REASON_EFFECT)>0 and g:GetFirst():IsLocation(LOCATION_GRAVE) then
 		local c=e:GetHandler()
 		local _,tc=Duel.GetBattleMonster(tp)
 		if tc and tc:IsRelateToBattle() and tc:IsControler(1-tp)

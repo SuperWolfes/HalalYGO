@@ -17,10 +17,10 @@ function s.fusfilter(c)
 	return c:IsRace(RACE_CYBORG)
 end
 function s.matfilter(c)
-	return c:IsLocation(LOCATION_REST|LOCATION_MZONE) and c:IsAbleToDeck()
+	return c:IsLocation(LOCATION_GRAVE|LOCATION_MZONE) and c:IsAbleToDeck()
 end
 function s.fextra(e,tp,mg)
-	return Duel.GetMatchingGroup(s.mfilter,tp,LOCATION_REST|LOCATION_MZONE,0,nil)
+	return Duel.GetMatchingGroup(s.mfilter,tp,LOCATION_GRAVE|LOCATION_MZONE,0,nil)
 end
 function s.filter1(c,tp)
 	return c:IsSummonPlayer(1-tp) and c:IsLocation(LOCATION_MZONE)

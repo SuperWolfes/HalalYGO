@@ -30,8 +30,8 @@ function s.eqfilter(c)
 	return c:IsRace(RACE_MACHINE) and c:IsSetCard(0x51) and c:IsFaceup() and c:IsMonster()
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	local g=Duel.GetMatchingGroup(s.eqfilter,tp,LOCATION_REST+LOCATION_MZONE,0,nil)
-	if chkc then return chkc:IsLocation(LOCATION_REST+LOCATION_MZONE) and chkc:IsControler(tp) and s.eqfilter(chkc) end
+	local g=Duel.GetMatchingGroup(s.eqfilter,tp,LOCATION_GRAVE+LOCATION_MZONE,0,nil)
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE+LOCATION_MZONE) and chkc:IsControler(tp) and s.eqfilter(chkc) end
 	local ft=math.min(Duel.GetLocationCount(tp,LOCATION_SZONE),2)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and ft>0
 		and aux.SelectUnselectGroup(g,e,tp,1,ft,aux.dncheck,chk)
@@ -39,7 +39,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local tg=aux.SelectUnselectGroup(g,e,tp,1,ft,aux.dncheck,1,tp,HINTMSG_EQUIP)
 	Duel.SetTargetCard(tg)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,e:GetHandler(),1,0,0)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,#g,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,#g,0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end

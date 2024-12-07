@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon this card from your hand and equip up to 3 "Therion" monsters from your RP to it
+	--Special Summon this card from your hand and equip up to 3 "Therion" monsters from your GY to it
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_EQUIP)
@@ -38,27 +38,27 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 s.listed_series={SET_THERION}
-s.listed_names={CARD_ARRPRO_SYSTEM}
+s.listed_names={CARD_ARGYRO_SYSTEM}
 function s.eqfilter(c)
-	return c:IsSetCard(SET_THERION) and c:IsMonster() and not c:IsUnliked()
+	return c:IsSetCard(SET_THERION) and c:IsMonster() and not c:IsForbidden()
 end
 function s.hsptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.eqfilter(chkc) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.eqfilter(chkc) end
 	local c=e:GetHandler()
 	local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and ft>0
-		and Duel.IsExistingTarget(s.eqfilter,tp,LOCATION_REST,0,1,nil)
+		and Duel.IsExistingTarget(s.eqfilter,tp,LOCATION_GRAVE,0,1,nil)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false) end
 	ft=math.min(ft,3)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-	local g=Duel.SelectTarget(tp,s.eqfilter,tp,LOCATION_REST,0,1,ft,nil)
+	local g=Duel.SelectTarget(tp,s.eqfilter,tp,LOCATION_GRAVE,0,1,ft,nil)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,tp,0)
 	Duel.SetOperationInfo(0,CATEGORY_EQUIP,g,#g,tp,0)
 end
 function s.hspop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) or Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)==0 then return end
-	local tg=Duel.GetTargetCards(e):Match(aux.NOT(Card.IsUnliked),nil)
+	local tg=Duel.GetTargetCards(e):Match(aux.NOT(Card.IsForbidden),nil)
 	if #tg==0 then return end
 	local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
 	if ft>0 and #tg>ft then
@@ -80,7 +80,7 @@ function s.hspop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.EquipComplete()
 end
 function s.descostfilter(c)
-	return c:IsCode(CARD_ARRPRO_SYSTEM) and c:IsDiscardable()
+	return c:IsCode(CARD_ARGYRO_SYSTEM) and c:IsDiscardable()
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.descostfilter,tp,LOCATION_HAND,0,1,nil) end

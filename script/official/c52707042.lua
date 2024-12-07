@@ -1,10 +1,10 @@
 --
---Librobouncer Mystigirl
+--Libromancer Mystigirl
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
-	--Check materials on Locked Summon
+	c:EnableReviveLimit()
+	--Check materials on Ritual Summon
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
 	e0:SetCode(EFFECT_MATERIAL_CHECK)
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetTargetRange(LOCATION_MZONE,0)
 	e1:SetCondition(s.immcon)
-	e1:SetTarget(function(e,c) return c:IsLockedMonster() end)
+	e1:SetTarget(function(e,c) return c:IsRitualMonster() end)
 	e1:SetValue(s.immval)
 	c:RegisterEffect(e1)
 	--Change ATK to 0 and negate effects
@@ -42,7 +42,7 @@ function s.matcheck(e,c)
 end
 function s.immcon(e)
 	local c=e:GetHandler()
-	return c:IsSummonType(SUMMON_TYPE_LOCKED) and c:GetFlagEffect(id)>0
+	return c:IsSummonType(SUMMON_TYPE_RITUAL) and c:GetFlagEffect(id)>0
 end
 function s.immval(e,re,rp)
 	return aux.tgoval(e,re,rp) and re:IsActiveType(TYPE_MONSTER)

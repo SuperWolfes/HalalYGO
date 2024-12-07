@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 s.listed_names={id}
-s.listed_series={SET_CHAUMER}
+s.listed_series={SET_CHARMER}
 function s.disfilter(c,tp,cc)
 	return c:IsAttribute(ATTRIBUTE_EARTH) and c:IsDiscardable()
 		and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil,cc:GetOriginalRace(),c:GetOriginalRace())
@@ -43,7 +43,7 @@ function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.SelectMatchingCard(tp,s.disfilter,tp,LOCATION_HAND,0,1,1,c,tp,c)
 	e:SetLabel(c:GetOriginalRace(),g:GetFirst():GetOriginalRace())
 	g:AddCard(c)
-	Duel.SendtoRest(g,REASON_COST+REASON_DISCARD)
+	Duel.SendtoGrave(g,REASON_COST+REASON_DISCARD)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

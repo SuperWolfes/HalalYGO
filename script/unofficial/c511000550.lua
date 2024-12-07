@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e3:SetTarget(s.intg)
 	e3:SetOperation(s.inop)
 	c:RegisterEffect(e3)
-	--fcoree atk
+	--force atk
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(511000489,0))
 	e4:SetCategory(CATEGORY_DAMAGE)

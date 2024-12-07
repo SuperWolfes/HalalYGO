@@ -1,9 +1,9 @@
 --召命の神弓－アポロウーサ
---Apollousa, Bow of the Monsterdess
+--Apollousa, Bow of the Goddess
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	c:SetUniqueOnField(1,0,id)
 	--Link Summon procedure
 	Link.AddProcedure(c,aux.NOT(aux.FilterBoolFunctionEx(Card.IsType,TYPE_TOKEN)),2,99,s.lcheck)

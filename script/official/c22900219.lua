@@ -1,9 +1,9 @@
 --ダイナレスラー・キメラ・Ｔレッスル
---Dinowrestler Chilean T Wrextle 
+--Dinowrestler Chimera T Wrextle 
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,s.matfilter,aux.FilterBoolFunctionEx(Card.IsSetCard,0x11a))
 	--actlimit upon attacking
 	local e1=Effect.CreateEffect(c)

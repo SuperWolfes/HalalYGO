@@ -1,5 +1,5 @@
 --超重武者装留ファイヤー・アーマー
---Superheavy Samurai Missfire Suit
+--Superheavy Samurai Soulfire Suit
 local s,id=GetID()
 function s.initial_effect(c)
 	--Equip this monster to 1 "Superheavy Samurai" monster you control
@@ -59,13 +59,13 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetReset(RESET_EVENT|RESETS_STANDARD)
 		c:RegisterEffect(e2)
 	else
-		Duel.SendtoRest(c,REASON_RULE)
+		Duel.SendtoGrave(c,REASON_RULE)
 	end
 end
 function s.defcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsDiscardable() end
-	Duel.SendtoRest(c,REASON_COST|REASON_DISCARD)
+	Duel.SendtoGrave(c,REASON_COST|REASON_DISCARD)
 end
 function s.deffilter(c)
 	return c:IsPosition(POS_FACEUP_DEFENSE) and c:IsSetCard(SET_SUPERHEAVY_SAMURAI)

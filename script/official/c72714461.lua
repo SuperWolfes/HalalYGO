@@ -32,7 +32,7 @@ function s.pencon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_PZONE,0,1,e:GetHandler())
 end
 function s.penfilter(c)
-	return c:IsSetCard(0x98) and c:IsType(TYPE_PENDULUM) and not c:IsCode(id) and not c:IsUnliked()
+	return c:IsSetCard(0x98) and c:IsType(TYPE_PENDULUM) and not c:IsCode(id) and not c:IsForbidden()
 end
 function s.pentg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.penfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -51,7 +51,7 @@ function s.penop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.sccost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsDiscardable() end
-	Duel.SendtoRest(e:GetHandler(),REASON_DISCARD+REASON_COST)
+	Duel.SendtoGrave(e:GetHandler(),REASON_DISCARD+REASON_COST)
 end
 function s.scfilter(c)
 	return c:GetLeftScale()~=c:GetOriginalLeftScale()

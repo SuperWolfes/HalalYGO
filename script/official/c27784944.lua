@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	--Place 1 "The Weather" Actional/Trap
+	--Place 1 "The Weather" Spell/Trap
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.immtg)
 	e2:SetValue(aux.tgoval)
 	c:RegisterEffect(e2)
-	--Prevent mismatching by opponent's effect
+	--Prevent destruction by opponent's effect
 	local e3=e2:Clone()
 	e3:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
 	e3:SetValue(aux.indoval)
@@ -48,23 +48,23 @@ function s.initial_effect(c)
 end
 s.listed_series={0x109}
 function s.tffilter(c,tp)
-	return c:IsActionalTrap() and c:IsSetCard(0x109) and not c:IsUnliked() and c:CheckUniqueOnField(tp)
+	return c:IsSpellTrap() and c:IsSetCard(0x109) and not c:IsForbidden() and c:CheckUniqueOnField(tp)
 		and not c:IsType(TYPE_FIELD)
 end
 function s.tftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and Duel.IsExistingMatchingCard(s.tffilter,tp,LOCATION_HAND+LOCATION_REST+LOCATION_DECK,0,1,nil,tp) end
+		and Duel.IsExistingMatchingCard(s.tffilter,tp,LOCATION_HAND+LOCATION_GRAVE+LOCATION_DECK,0,1,nil,tp) end
 end
 function s.tfop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
-	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.tffilter),tp,LOCATION_HAND+LOCATION_REST+LOCATION_DECK,0,1,1,nil,tp):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.tffilter),tp,LOCATION_HAND+LOCATION_GRAVE+LOCATION_DECK,0,1,1,nil,tp):GetFirst()
 	if tc then
 		Duel.MoveToField(tc,tp,tp,LOCATION_SZONE,POS_FACEUP,true)
 	end
 end
 function s.immtg(e,c)
-	return c:IsSetCard(0x109) and c:IsActionalTrap()
+	return c:IsSetCard(0x109) and c:IsSpellTrap()
 end
 function s.spreg(e,tp,eg,ep,ev,re,r,rp)
 	if not re then return end

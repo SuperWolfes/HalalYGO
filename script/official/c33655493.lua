@@ -25,5 +25,5 @@ function s.tg(e,c)
 	return c:IsFaceup() and c:GetCode()~=id
 end
 function s.tgval(e,re,rp)
-	return re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) and rp==1-e:GetHandlerPlayer()
+	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP) and rp==1-e:GetHandlerPlayer()
 end

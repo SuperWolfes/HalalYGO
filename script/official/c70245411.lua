@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetProperty(EFFECT_FLAG_DELAY)
-	e3:SetCode(EVENT_TO_REST)
+	e3:SetCode(EVENT_TO_GRAVE)
 	e3:SetTarget(s.thtg)
 	e3:SetOperation(s.thop)
 	c:RegisterEffect(e3)
@@ -60,7 +60,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		end
 	else
 		Duel.BreakEffect()
-		Duel.SendtoRest(tc,REASON_EFFECT+REASON_DISCARD)
+		Duel.SendtoGrave(tc,REASON_EFFECT+REASON_DISCARD)
 	end
 	Duel.ShuffleHand(tp)
 end

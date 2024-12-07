@@ -1,5 +1,5 @@
 --星帝エストローム
---Estrome the Star Moppar
+--Estrome the Star Monarch
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)

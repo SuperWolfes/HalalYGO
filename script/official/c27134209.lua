@@ -18,12 +18,12 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e2:SetCode(EFFECT_SPSUMMON_PROC)
-	e2:SetRange(LOCATION_HAND|LOCATION_REST)
+	e2:SetRange(LOCATION_HAND|LOCATION_GRAVE)
 	e2:SetCondition(s.spcon)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
-	--Prevent response to the activation of your Actional/Traps
+	--Prevent response to the activation of your Spell/Traps
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e3:SetCode(EVENT_CHAINING)
@@ -51,15 +51,15 @@ function s.spcon(e,c)
 	local c=e:GetHandler()
 	local g=nil
 	local rg1=Duel.GetMatchingGroup(s.costfilter,tp,LOCATION_MZONE|LOCATION_HAND,0,c)
-	local rg2=Duel.GetMatchingGroup(s.costfilter,tp,LOCATION_REST|LOCATION_HAND,0,c)
-	local rg=Duel.IsPlayerAffectedByEffect(tp,CARD_GUARDIAN_ELIMINATION) and rg1 or rg2
+	local rg2=Duel.GetMatchingGroup(s.costfilter,tp,LOCATION_GRAVE|LOCATION_HAND,0,c)
+	local rg=Duel.IsPlayerAffectedByEffect(tp,CARD_SPIRIT_ELIMINATION) and rg1 or rg2
 	return aux.SelectUnselectGroup(rg,e,tp,3,3,aux.ChkfMMZ(1),0)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,c)
 	local c=e:GetHandler()
 	local rg1=Duel.GetMatchingGroup(s.costfilter,tp,LOCATION_MZONE|LOCATION_HAND,0,c)
-	local rg2=Duel.GetMatchingGroup(s.costfilter,tp,LOCATION_REST|LOCATION_HAND,0,c)
-	local rg=Duel.IsPlayerAffectedByEffect(tp,CARD_GUARDIAN_ELIMINATION) and rg1 or rg2
+	local rg2=Duel.GetMatchingGroup(s.costfilter,tp,LOCATION_GRAVE|LOCATION_HAND,0,c)
+	local rg=Duel.IsPlayerAffectedByEffect(tp,CARD_SPIRIT_ELIMINATION) and rg1 or rg2
 	local g=aux.SelectUnselectGroup(rg,e,tp,3,3,aux.ChkfMMZ(1),1,tp,HINTMSG_REMOVE,nil,nil,true)
 	if #g>0 then
 		g:KeepAlive()
@@ -75,7 +75,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	g:DeleteGroup()
 end
 function s.chainop(e,tp,eg,ep,ev,re,r,rp)
-	if re:IsActionalTrapEffect() and re:GetOwnerPlayer()==tp then
+	if re:IsSpellTrapEffect() and re:GetOwnerPlayer()==tp then
 		Duel.SetChainLimit(s.chainlm)
 	end
 end

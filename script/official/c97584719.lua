@@ -3,7 +3,7 @@
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Xyz Summon procedure
 	Xyz.AddProcedure(c,nil,9,2)
 	--Attach an opponent's monster that this card destroyed by battle to this card as material
@@ -27,12 +27,12 @@ function s.initial_effect(c)
 	e2:SetTarget(s.destg)
 	e2:SetOperation(s.desop)
 	c:RegisterEffect(e2,false,REGISTER_FLAG_DETACH_XMAT)
-	--Special Summon this card from the RP in Defense Position
+	--Special Summon this card from the GY in Defense Position
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_IGNITION)
-	e3:SetRange(LOCATION_REST)
+	e3:SetRange(LOCATION_GRAVE)
 	e3:SetCountLimit(1,{id,1})
 	e3:SetCost(s.spcost)
 	e3:SetTarget(s.sptg)
@@ -45,8 +45,8 @@ function s.atchtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return c:IsType(TYPE_XYZ) and bc:IsMonster() and bc:IsFaceup()
 		and bc:IsCanBeXyzMaterial(c,tp,REASON_EFFECT) end
 	Duel.SetTargetCard(bc)
-	if bc:IsLocation(LOCATION_REST) then
-		Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,bc,1,tp,0)
+	if bc:IsLocation(LOCATION_GRAVE) then
+		Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,bc,1,tp,0)
 	end
 end
 function s.atchop(e,tp,eg,ep,ev,re,r,rp)

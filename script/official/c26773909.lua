@@ -1,5 +1,5 @@
 --才呼粉身
---Mental Fervor
+--Psychic Fervor
 --Scripted by Hatter
 
 local s,id=GetID()

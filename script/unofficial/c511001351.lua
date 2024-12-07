@@ -1,4 +1,4 @@
---Mentoral Longicorn
+--Magical Longicorn
 local s,id=GetID()
 function s.initial_effect(c)
 	--disable and destroy
@@ -10,6 +10,6 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
-	if ep~=tp or not re:IsActiveType(TYPE_ACTIONAL) or not re:IsHasType(EFFECT_TYPE_ACTIVATE) or not e:GetHandler():IsAttackPos() then return end
+	if ep~=tp or not re:IsActiveType(TYPE_SPELL) or not re:IsHasType(EFFECT_TYPE_ACTIVATE) or not e:GetHandler():IsAttackPos() then return end
 	Duel.NegateEffect(ev)
 end

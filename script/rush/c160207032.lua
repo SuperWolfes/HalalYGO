@@ -3,7 +3,7 @@
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	-- Mill 3 cards and add 2 Sea Serpent monster from the RP to the hand
+	-- Mill 3 cards and add 2 Sea Serpent monster from the GY to the hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DECKDES+CATEGORY_TOHAND)
@@ -16,15 +16,15 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.mlcond(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetMatchingGroupCount(Card.IsMonster,tp,LOCATION_REST,0,nil)<=5
+	return Duel.GetMatchingGroupCount(Card.IsMonster,tp,LOCATION_GRAVE,0,nil)<=5
 end
 function s.mltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeck(tp,3) end
 	Duel.SetOperationInfo(0,CATEGORY_DECKDES,nil,0,tp,3)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,0,tp,LOCATION_REST)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,0,tp,LOCATION_GRAVE)
 end
 function s.cfilter(c)
-	return c:IsLocation(LOCATION_REST) and c:IsRace(RACE_SEASERPENT)
+	return c:IsLocation(LOCATION_GRAVE) and c:IsRace(RACE_SEASERPENT)
 end
 function s.thfilter(c)
 	return c:IsRace(RACE_SEASERPENT) and c:IsLevelAbove(7) and c:HasLevel() and c:IsAbleToHand()
@@ -32,7 +32,7 @@ end
 function s.mlop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.DiscardDeck(tp,3,REASON_EFFECT)
 	if Duel.GetOperatedGroup():FilterCount(s.cfilter,nil)==0 then return end
-	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.thfilter),tp,LOCATION_REST,0,1,1,nil)
+	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.thfilter),tp,LOCATION_GRAVE,0,1,1,nil)
 	if #g>=2 and aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,0) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		local sg=aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,1,tp,HINTMSG_ATOHAND)
 		if #sg>0 then

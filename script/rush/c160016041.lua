@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMixN(c,true,true,160016017,1,s.matfilter,2)
 	--Piercing battle damage
 	local e1=Effect.CreateEffect(c)
@@ -28,7 +28,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
 end
 function s.cfilter(c,code)
-	return c:IsLocation(LOCATION_REST) and c:IsOriginalCodeRule(code)
+	return c:IsLocation(LOCATION_GRAVE) and c:IsOriginalCodeRule(code)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

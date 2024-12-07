@@ -76,7 +76,7 @@ function s.rmcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,tp)
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	local loc=LOCATION_ONFIELD+LOCATION_REST+LOCATION_HAND
+	local loc=LOCATION_ONFIELD+LOCATION_GRAVE+LOCATION_HAND
 	if chkc then return chkc:IsOnField() and chkc:IsFaceup() end
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRemove,tp,0,loc,1,nil) end
 	local g=Duel.GetMatchingGroup(Card.IsAbleToRemove,tp,0,loc,1,1,nil)
@@ -85,7 +85,7 @@ end
 function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local loc=LOCATION_ONFIELD+LOCATION_REST+LOCATION_HAND
+	local loc=LOCATION_ONFIELD+LOCATION_GRAVE+LOCATION_HAND
 	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToRemove,tp,0,loc,1,1,nil)
 	if #g>0 then
 		Duel.HintSelection(g)

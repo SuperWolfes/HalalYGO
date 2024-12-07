@@ -3,10 +3,10 @@
 --Fixed by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Synchro Summon procedure
 	Synchro.AddProcedure(c,nil,2,2,aux.FilterBoolFunction(Card.IsCode,70902743),1,1)
-	--Gains 500 ATK for each Tuner in your Resting Place
+	--Gains 500 ATK for each Tuner in your Graveyard
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -55,7 +55,7 @@ s.material={70902743}
 s.listed_names={70902743}
 s.synchro_nt_required=1
 function s.atkval(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsType,c:GetControler(),LOCATION_REST,0,nil,TYPE_TUNER)*500
+	return Duel.GetMatchingGroupCount(Card.IsType,c:GetControler(),LOCATION_GRAVE,0,nil,TYPE_TUNER)*500
 end
 function s.bancon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsTurnPlayer(1-tp) and (Duel.IsAbleToEnterBP() or Duel.IsBattlePhase())

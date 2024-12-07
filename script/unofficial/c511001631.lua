@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c,e,tp)
-	return c:IsRace(RACE_DRAGON) and not c:IsType(TYPE_XYZ) and c:GetLevel()>0 and c:IsAbleToRestAsCost()
+	return c:IsRace(RACE_DRAGON) and not c:IsType(TYPE_XYZ) and c:GetLevel()>0 and c:IsAbleToGraveAsCost()
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,c:GetLevel(),tc)
 end
 function s.spfilter(c,e,tp,lv,tc)
@@ -30,10 +30,10 @@ function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 		e:SetLabel(0)
 		local pg=aux.GetMustBeMaterialGroup(tp,Group.CreateGroup(),tp,nil,nil,REASON_XYZ)
 		return #pg<=0 and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil,e,tp) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_MZONE,0,1,1,nil,e,tp)
 	Duel.SetTargetParam(g:GetFirst():GetLevel())
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)

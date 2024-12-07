@@ -1,5 +1,5 @@
 --忘却の海底神殿
---Forgotten Masjid of the Deep
+--Forgotten Temple of the Deep
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

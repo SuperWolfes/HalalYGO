@@ -16,13 +16,13 @@ function s.initial_effect(c)
 end
 s.listed_series={0x2b}
 function s.costfilter(c)
-	return c:IsTrap() and c:IsAbleToRestAsCost()
+	return c:IsTrap() and c:IsAbleToGraveAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local cg=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,1,nil)
-	Duel.SendtoRest(cg,REASON_COST)
+	Duel.SendtoGrave(cg,REASON_COST)
 end
 function s.filter(c,e,tp)
 	return c:IsLevelBelow(4) and c:IsSetCard(0x2b) and

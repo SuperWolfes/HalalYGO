@@ -3,11 +3,11 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before awaking
-	c:EnableAwakeLimit()
+	--Must be properly summoned before reviving
+	c:EnableReviveLimit()
 	--Link summon procedure
 	Link.AddProcedure(c,s.matfilter,2,2)
-	--Add 1 "Dragunity" actional/trap or 1 "Dragon Ravine" from deck
+	--Add 1 "Dragunity" spell/trap or 1 "Dragon Ravine" from deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -43,7 +43,7 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_LINK)
 end
 function s.thfilter(c)
-	return (c:IsSetCard(0x29) and c:IsActionalTrap()) or c:IsCode(62265044) and c:IsAbleToHand()
+	return (c:IsSetCard(0x29) and c:IsSpellTrap()) or c:IsCode(62265044) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

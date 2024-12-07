@@ -3,7 +3,7 @@
 Duel.LoadScript("c420.lua")
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Fusion material
 	Fusion.AddProcMix(c,true,true,s.fusfilter1,s.fusfilter2)
 	--Change ATK of opponent's battling monster to 0
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 s.material_setcode=0x2021
-s.pulse_synchro_fusion=true
+s.miracle_synchro_fusion=true
 function s.fusfilter1(c,fc,sumtype,tp)
 	return c:IsEarthboundServant() and c:IsType(TYPE_FUSION,fc,sumtype,tp)
 end

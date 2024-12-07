@@ -1,5 +1,5 @@
 --精霊炉
---Guardian Reactor
+--Spirit Reactor
 --fixed by MLD
 local s,id=GetID()
 function s.initial_effect(c)

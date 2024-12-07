@@ -1,10 +1,10 @@
 --呪眼の眷属 カトブレパス
---Catoblepas, Familiar of the Goodie
+--Catoblepas, Familiar of the Evil Eye
 --Scripted by Naim
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Targeted "Goodie" actional/trap cannot be destroyed by opponent's card effects
+	--Targeted "Evil Eye" spell/trap cannot be destroyed by opponent's card effects
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -14,12 +14,12 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
-	--Special summon itself from RP
+	--Special summon itself from GY
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(s.sscond)
 	e2:SetTarget(s.sstg)

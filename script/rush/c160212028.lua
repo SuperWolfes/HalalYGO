@@ -1,5 +1,5 @@
 --ファンタズム・マスクマスター
---Illusorasm Mask Master
+--Phantasm Mask Master
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)

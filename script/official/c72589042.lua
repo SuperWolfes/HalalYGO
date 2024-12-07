@@ -1,5 +1,5 @@
 --煌々たる逆転の女神
---Monsterdess of Sweet Revenge
+--Goddess of Sweet Revenge
 local s,id=GetID()
 function s.initial_effect(c)
 	--Destroy opponent's cards and Special summon from the Deck
@@ -21,7 +21,7 @@ end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsDiscardable() end
-	Duel.SendtoRest(c,REASON_COST+REASON_DISCARD)
+	Duel.SendtoGrave(c,REASON_COST+REASON_DISCARD)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local sg=Duel.GetMatchingGroup(nil,tp,0,LOCATION_ONFIELD,nil)

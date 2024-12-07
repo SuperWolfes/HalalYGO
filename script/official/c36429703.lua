@@ -3,8 +3,8 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before awaking
-	c:EnableAwakeLimit()
+	--Must be properly summoned before reviving
+	c:EnableReviveLimit()
 	--Link summon procedure
 	Link.AddProcedure(c,s.matfilter,2,2)
 	--Special summon 1 level 4 DARK winged beast monster from deck
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Set 1 "Rank-Up-Ment" actional from deck
+	--Set 1 "Rank-Up-Magic" spell from deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,2))
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
@@ -28,10 +28,10 @@ function s.initial_effect(c)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(s.setcon)
-	e2:SetOperation(s.vetop)
+	e2:SetOperation(s.setop)
 	c:RegisterEffect(e2)
 end
-s.listed_series={SET_RAIDRAPTOR,SET_RANK_UP_MENT}
+s.listed_series={SET_RAIDRAPTOR,SET_RANK_UP_MAGIC}
 function s.matfilter(c,rc,st,tp)
 	return c:IsAttribute(ATTRIBUTE_DARK,rc,st,tp) and c:IsRace(RACE_WINGEDBEAST,rc,st,tp)
 end
@@ -82,15 +82,15 @@ function s.setcon(e,tp,eg,ep,ev,re,r,rp)
 	]]
 end
 function s.setfilter(c)
-	return c:IsActional() and c:IsSetCard(SET_RANK_UP_MENT) and c:IsSSetable()
+	return c:IsSpell() and c:IsSetCard(SET_RANK_UP_MAGIC) and c:IsSSetable()
 end
-function s.vetop(e,tp,eg,ep,ev,re,r,rp)
+function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<1 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 	local tc=Duel.SelectMatchingCard(tp,s.setfilter,tp,LOCATION_DECK,0,1,1,nil):GetFirst()
 	if tc then
 		Duel.SSet(tp,tc)
-		if tc:IsQuickPlayActional() then
+		if tc:IsQuickPlaySpell() then
 			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetDescription(aux.Stringid(id,1))
 			e1:SetType(EFFECT_TYPE_SINGLE)

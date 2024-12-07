@@ -1,5 +1,5 @@
 --Ｓｐ－オーバー・チューン (Anime)
---Speed Actional - Overtune (Anime)
+--Speed Spell - Overtune (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

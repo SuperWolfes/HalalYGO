@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e2:SetCode(EFFECT_INDESTRUCTABLE_BATTLE)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetTargetRange(LOCATION_MZONE,0)
-	e2:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_MENTOR))
+	e2:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_SPELLCASTER))
 	e2:SetValue(1)
 	c:RegisterEffect(e2)
 	local e3=e2:Clone()
@@ -43,7 +43,7 @@ function s.cfilter(c,tp)
 	return c:IsFaceup() and c:IsCode(73734821) and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,0,1,c)
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsRace(RACE_MENTOR) 
+	return c:IsFaceup() and c:IsRace(RACE_SPELLCASTER) 
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.cfilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil,tp)
@@ -53,7 +53,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:GetHandler():RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,0)
 end
 function s.atlimit(e,c)
-	return c:IsFaceup() and c:IsRace(RACE_MENTOR) and not c:IsCode(73734821)
+	return c:IsFaceup() and c:IsRace(RACE_SPELLCASTER) and not c:IsCode(73734821)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():GetFlagEffect(id)>0 then

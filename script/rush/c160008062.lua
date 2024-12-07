@@ -1,5 +1,5 @@
 --最強闘志 
--- Ultimate Fighting Guardian
+-- Ultimate Fighting Spirit
 
 local s,id=GetID()
 function s.initial_effect(c)

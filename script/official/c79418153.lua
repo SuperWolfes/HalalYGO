@@ -1,5 +1,5 @@
 --ランサー・デーモン
---Lancer Archtainted
+--Lancer Archfiend
 local s,id=GetID()
 function s.initial_effect(c)
 	--Make a monster inflict piercing damage

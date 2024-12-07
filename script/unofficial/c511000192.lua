@@ -3,7 +3,7 @@
 Duel.LoadCardScript("c65305468.lua")
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Xyz Summon
 	Xyz.AddProcedure(c,s.xyzfilter,nil,2)
 	--Treat its Rank as 0
@@ -31,7 +31,7 @@ function s.initial_effect(c)
 	e3:SetTarget(s.atktg)
 	e3:SetOperation(s.atkop)
 	c:RegisterEffect(e3)
-	--Prevent mismatching by battle or effect
+	--Prevent destruction by battle or effect
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(59251766,0))
 	e4:SetType(EFFECT_TYPE_QUICK_O)

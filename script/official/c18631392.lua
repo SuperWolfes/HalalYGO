@@ -2,7 +2,7 @@
 --Ma'at
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--cannot special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -34,15 +34,15 @@ function s.rescon(sg,e,tp,mg)
 	return aux.ChkfMMZ(1)(sg,e,tp,mg) and sg:IsExists(s.atchk1,1,nil,sg)
 end
 function s.atchk1(c,sg)
-	return c:IsRace(RACE_WANDERER) and sg:FilterCount(Card.IsRace,c,RACE_DRAGON)==1
+	return c:IsRace(RACE_FAIRY) and sg:FilterCount(Card.IsRace,c,RACE_DRAGON)==1
 end
 function s.spfilter(c,rac)
-	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(rac) and c:IsAbleToRestAsCost()
+	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(rac) and c:IsAbleToGraveAsCost()
 end
 function s.spcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
-	local rg1=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE,0,nil,RACE_WANDERER)
+	local rg1=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE,0,nil,RACE_FAIRY)
 	local rg2=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE,0,nil,RACE_DRAGON)
 	local rg=rg1:Clone()
 	rg:Merge(rg2)
@@ -50,8 +50,8 @@ function s.spcon(e,c)
 		and aux.SelectUnselectGroup(rg,e,tp,2,2,s.rescon,0)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,c)
-	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE,0,nil,RACE_WANDERER|RACE_DRAGON)
-	local g=aux.SelectUnselectGroup(rg,e,tp,2,2,s.rescon,1,tp,HINTMSG_TOREST)
+	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE,0,nil,RACE_FAIRY|RACE_DRAGON)
+	local g=aux.SelectUnselectGroup(rg,e,tp,2,2,s.rescon,1,tp,HINTMSG_TOGRAVE)
 	if #g>0 then
 		g:KeepAlive()
 		e:SetLabelObject(g)
@@ -62,7 +62,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 	g:DeleteGroup()
 end
 function s.anctg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -100,7 +100,7 @@ function s.retop(code1,code2,code3)
 			end
 			if #g~=0 then
 				Duel.DisableShuffleCheck()
-				Duel.SendtoRest(g,REASON_EFFECT|REASON_EXCAVATE)
+				Duel.SendtoGrave(g,REASON_EFFECT|REASON_EXCAVATE)
 			end
 			if c:IsRelateToEffect(e) then
 				local e1=Effect.CreateEffect(c)

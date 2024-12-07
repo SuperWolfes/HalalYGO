@@ -1,5 +1,5 @@
 --RUM－レヴォリューション・フォース
---Rank-Up-Ment Revolution Fcoree
+--Rank-Up-Magic Revolution Force
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

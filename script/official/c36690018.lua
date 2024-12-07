@@ -1,5 +1,5 @@
 --逆転する運命
---Reversal of Bate
+--Reversal of Fate
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -11,9 +11,9 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.listed_series={SET_ARCANA_FCOREE}
+s.listed_series={SET_ARCANA_FORCE}
 function s.filter(c)
-	return c:IsSetCard(SET_ARCANA_FCOREE) and c:GetFlagEffect(CARD_REVERSAL_OF_BATE)>0
+	return c:IsSetCard(SET_ARCANA_FORCE) and c:GetFlagEffect(CARD_REVERSAL_OF_FATE)>0
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.filter(chkc) end

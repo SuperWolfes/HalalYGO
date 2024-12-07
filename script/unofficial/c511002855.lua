@@ -1,10 +1,10 @@
 --ＣＸ 熱血指導神アルティメットレーナー (Anime)
---CXyz Coach Watcher Ultimatrainer (Anime)
+--CXyz Coach Lord Ultimatrainer (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,9,4)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Rank Up Check
 	aux.EnableCheckRankUp(c,nil,nil,30741334)
 	--negate
@@ -64,7 +64,7 @@ function s.uncon(e,tp,eg,ep,ev,re,r,rp)
 	if ex and tg~=nil and tg:IsContains(c) then
 		return true
 	end
-	ex,tg,tc=Duel.GetOperationInfo(ev,CATEGORY_TOREST)
+	ex,tg,tc=Duel.GetOperationInfo(ev,CATEGORY_TOGRAVE)
 	if ex and tg~=nil and tg:IsContains(c) then
 		return true
 	end
@@ -130,6 +130,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 	Duel.Damage(1-tp,atk,REASON_EFFECT)
 	Duel.BreakEffect()
-	Duel.SendtoRest(sg,REASON_EFFECT)
+	Duel.SendtoGrave(sg,REASON_EFFECT)
 	Duel.ShuffleHand(1-tp)
 end

@@ -1,7 +1,7 @@
---Mentoral Sky Mirror
+--Magical Sky Mirror
 local s,id=GetID()
 function s.initial_effect(c)
-	--copy actional
+	--copy spell
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -28,11 +28,11 @@ function s.filter(c,e,tp,eg,ep,ev,re,r,rp,tid)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local tid=Duel.GetTurnCount()
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(1-tp) and s.filter(chkc,tp,eg,ep,ev,re,r,rp,tid) end
-	if chk==0 then return Duel.IsExistingTarget(s.cfilter,tp,0,LOCATION_REST,1,nil,e,tp,eg,ep,ev,re,r,rp,tid) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(1-tp) and s.filter(chkc,tp,eg,ep,ev,re,r,rp,tid) end
+	if chk==0 then return Duel.IsExistingTarget(s.cfilter,tp,0,LOCATION_GRAVE,1,nil,e,tp,eg,ep,ev,re,r,rp,tid) end
 	e:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local tc=Duel.SelectTarget(tp,s.filter,tp,0,LOCATION_REST,1,1,nil,e,tp,eg,ep,ev,re,r,rp,tid):GetFirst()
+	local tc=Duel.SelectTarget(tp,s.filter,tp,0,LOCATION_GRAVE,1,1,nil,e,tp,eg,ep,ev,re,r,rp,tid):GetFirst()
 	local te=tc:GetActivateEffect()
 	local tg=te:GetTarget()
 	e:SetLabelObject(te)

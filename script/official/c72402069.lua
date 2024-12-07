@@ -1,7 +1,7 @@
 --DDD超死偉王ホワイテスト・ヘル・アーマゲドン
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Pendulum.AddProcedure(c,false)
 	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0xaf),1,1,Synchro.NonTunerEx(Card.IsSetCard,0x10af),1,99)
 	--destroy and damage

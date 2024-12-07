@@ -17,13 +17,13 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>=10 and Duel.GetMatchingGroupCountRush(Card.IsActional,tp,LOCATION_REST,0,nil)==3
+	return Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>=10 and Duel.GetMatchingGroupCountRush(Card.IsSpell,tp,LOCATION_GRAVE,0,nil)==3
 end
 function s.tdfilter(c)
-	return c:IsActional() and c:IsAbleToDeckAsCost()
+	return c:IsSpell() and c:IsAbleToDeckAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST,0,3,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_GRAVE,0,3,nil) end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -31,7 +31,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	local g=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_GRAVE,0,nil)
 	Duel.SendtoDeck(g,nil,SEQ_DECKBOTTOM,REASON_COST)
 	Duel.SortDeckbottom(tp,tp,#g)
 	--Effect

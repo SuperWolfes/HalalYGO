@@ -4,7 +4,7 @@ Duel.LoadScript("c420.lua")
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx2(Card.IsGoyo),2)
 	--
 	local e1=Effect.CreateEffect(c)

@@ -1,5 +1,5 @@
 --占い魔女 エンちゃん
---Fortune Wanderer En
+--Fortune Fairy En
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)

@@ -3,7 +3,7 @@
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	--Add to the hand 1 Level 5+ Tainted with 0 or 2000 DEF from the RP
+	--Add to the hand 1 Level 5+ Fiend with 0 or 2000 DEF from the GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND)
@@ -17,23 +17,23 @@ function s.initial_effect(c)
 end
 s.listed_names={160210083}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(Card.IsRace,tp,LOCATION_REST,0,3,nil,RACE_TAINTED) or Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,160210083)
+	return Duel.IsExistingMatchingCard(Card.IsRace,tp,LOCATION_GRAVE,0,3,nil,RACE_FIEND) or Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,160210083)
 end
 function s.thfilter(c)
-	return c:IsMonster() and c:IsRace(RACE_TAINTED) and c:IsLevelAbove(5) and (c:IsDefense(0) or c:IsDefense(2000)) and c:IsAbleToHand()
+	return c:IsMonster() and c:IsRace(RACE_FIEND) and c:IsLevelAbove(5) and (c:IsDefense(0) or c:IsDefense(2000)) and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Effect
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thfilter),tp,LOCATION_REST,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thfilter),tp,LOCATION_GRAVE,0,1,1,nil)
 	if #g>0 then
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)
-		--Prevent non-Tainteds from attacking
+		--Prevent non-Fiends from attacking
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_FIELD)
 		e1:SetCode(EFFECT_CANNOT_ATTACK)
@@ -45,5 +45,5 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.ftarget(e,c)
-	return not c:IsRace(RACE_TAINTED)
+	return not c:IsRace(RACE_FIEND)
 end

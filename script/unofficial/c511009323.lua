@@ -1,5 +1,5 @@
 --幻影騎士団ロスト・ヴァンブレイズ (Anime)
---The Illusion Knights of Lost Vambrace (Anime)
+--The Phantom Knights of Lost Vambrace (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--1 monster your opponent controls loses ATK/Special Summon this card
@@ -14,14 +14,14 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.listed_series={SET_THE_ILLUSION_KNIGHTS}
+s.listed_series={SET_THE_PHANTOM_KNIGHTS}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
     return Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) and chkc:IsFaceup() end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and e:IsHasType(EFFECT_TYPE_ACTIVATE)
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,id,SET_THE_ILLUSION_KNIGHTS,0x11,2,600,0,RACE_WARRIOR,ATTRIBUTE_DARK)
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,id,SET_THE_PHANTOM_KNIGHTS,0x11,2,600,0,RACE_WARRIOR,ATTRIBUTE_DARK)
 		and Duel.IsExistingTarget(Card.IsFaceup,tp,0,LOCATION_MZONE,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 	Duel.SelectTarget(tp,Card.IsFaceup,tp,0,LOCATION_MZONE,1,1,nil)
@@ -39,19 +39,19 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetValue(-600)
 		tc:RegisterEffect(e1)
 	end
-	if c:IsRelateToEffect(e) and Duel.IsPlayerCanSpecialSummonMonster(tp,id,SET_THE_ILLUSION_KNIGHTS,0x11,2,600,0,RACE_WARRIOR,ATTRIBUTE_DARK) then
+	if c:IsRelateToEffect(e) and Duel.IsPlayerCanSpecialSummonMonster(tp,id,SET_THE_PHANTOM_KNIGHTS,0x11,2,600,0,RACE_WARRIOR,ATTRIBUTE_DARK) then
 		Duel.BreakEffect()
 		c:AddMonsterAttribute(TYPE_NORMAL)
 		Duel.SpecialSummonStep(c,0,tp,tp,true,false,POS_FACEUP_ATTACK)
 		c:AddMonsterAttributeComplete()
-		--"The Illusion Knights" monsters you control cannot be destroyed by battle this turn
+		--"The Phantom Knights" monsters you control cannot be destroyed by battle this turn
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_FIELD)
 		e1:SetCode(EFFECT_INDESTRUCTABLE_BATTLE)
 		e1:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
 		e1:SetTargetRange(LOCATION_MZONE,0)
 		e1:SetReset(RESET_PHASE|PHASE_END)
-		e1:SetTarget(function(e,c) return c:IsSetCard(SET_THE_ILLUSION_KNIGHTS) end)
+		e1:SetTarget(function(e,c) return c:IsSetCard(SET_THE_PHANTOM_KNIGHTS) end)
 		e1:SetValue(1)
 		Duel.RegisterEffect(e1,tp)
 		Duel.SpecialSummonComplete()

@@ -1,5 +1,5 @@
 --アルカナフォースＶＩＩＩ－ＳＴＲＥＮＧＴＨ (Anime)
---Arcana Fcoree VIII - The Strength (Anime)
+--Arcana Force VIII - The Strength (Anime)
 --Scripted by Keddy
 --Fixed by The Razgriz
 local s,id=GetID()

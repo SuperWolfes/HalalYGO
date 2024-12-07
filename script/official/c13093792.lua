@@ -1,5 +1,5 @@
 --Ｄ－ＨＥＲＯ ダイヤモンドガイ
---Destrudic HERO - Diamond Dude
+--Destiny HERO - Diamond Dude
 local s,id=GetID()
 function s.initial_effect(c)
 	--Excavate the top card of your Deck
@@ -15,37 +15,37 @@ function s.initial_effect(c)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>0 end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)==0 then return end
 	Duel.ConfirmDecktop(tp,1)
 	local g=Duel.GetDecktopGroup(tp,1)
 	local tc=g:GetFirst()
-	if tc:GetType()==TYPE_ACTIONAL then
+	if tc:GetType()==TYPE_SPELL then
 		Duel.DisableShuffleCheck()
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 		local ae=tc:GetActivateEffect()
-		if tc:GetLocation()==LOCATION_REST and ae then
+		if tc:GetLocation()==LOCATION_GRAVE and ae then
 			local e1=Effect.CreateEffect(tc)
 			e1:SetDescription(ae:GetDescription())
 			e1:SetType(EFFECT_TYPE_IGNITION)
 			e1:SetCountLimit(1)
-			e1:SetRange(LOCATION_REST)
+			e1:SetRange(LOCATION_GRAVE)
 			e1:SetReset(RESET_EVENT|RESETS_STANDARD|RESET_CONTROL|RESET_PHASE|PHASE_END|RESET_SELF_TURN&~RESET_TOFIELD,2)
-			e1:SetCondition(s.actionalcon)
-			e1:SetTarget(s.actionaltg)
-			e1:SetOperation(s.actionalop)
+			e1:SetCondition(s.spellcon)
+			e1:SetTarget(s.spelltg)
+			e1:SetOperation(s.spellop)
 			tc:RegisterEffect(e1)
 		end
 	else
 		Duel.MoveToDeckBottom(tc)
 	end
 end
-function s.actionalcon(e,tp,eg,ep,ev,re,r,rp,chk)
+function s.spellcon(e,tp,eg,ep,ev,re,r,rp,chk)
 	return e:GetHandler():GetTurnID()~=Duel.GetTurnCount()
 end
-function s.actionaltg(e,tp,eg,ep,ev,re,r,rp,chk)
+function s.spelltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ae=e:GetHandler():GetActivateEffect()
 	local ftg=ae:GetTarget()
 	if chk==0 then
@@ -58,7 +58,7 @@ function s.actionaltg(e,tp,eg,ep,ev,re,r,rp,chk)
 		ftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 end
-function s.actionalop(e,tp,eg,ep,ev,re,r,rp)
+function s.spellop(e,tp,eg,ep,ev,re,r,rp)
 	local ae=e:GetHandler():GetActivateEffect()
 	local fop=ae:GetOperation()
 	fop(e,tp,eg,ep,ev,re,r,rp)

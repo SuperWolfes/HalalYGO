@@ -1,5 +1,5 @@
 --透幻郷の銀嶺
---The Snow-Capped Summit of Beinl Shangri-La
+--The Snow-Capped Summit of Spectral Shangri-La
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

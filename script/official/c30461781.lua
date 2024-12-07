@@ -1,8 +1,8 @@
 --八汰烏の骸
---Legacy of Yardi-Gara
+--Legacy of Yata-Garasu
 local s,id=GetID()
 function s.initial_effect(c)
-	--Draw 1 card or 2 if the opponent controls a Guardian monster
+	--Draw 1 card or 2 if the opponent controls a Spirit monster
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DRAW)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -12,9 +12,9 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.listed_card_types={TYPE_GUARDIAN}
+s.listed_card_types={TYPE_SPIRIT}
 function s.filter(c)
-	return c:IsType(TYPE_GUARDIAN) and c:IsFaceup()
+	return c:IsType(TYPE_SPIRIT) and c:IsFaceup()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,1) end

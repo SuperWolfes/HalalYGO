@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_ILLUSION|RACE_MENTOR),tp,LOCATION_MZONE,0,1,nil)
+	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_ILLUSION|RACE_SPELLCASTER),tp,LOCATION_MZONE,0,1,nil)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local ak=Duel.GetAttacker()
@@ -33,7 +33,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		{b3,aux.Stringid(id,3)})
 	e:SetLabel(op)
 	if op==1 then
-		--Your Illusion or Mentor monsters cannot be destroyed by battle this turn
+		--Your Illusion or Spellcaster monsters cannot be destroyed by battle this turn
 		e:SetCategory(0)
 		e:SetProperty(0)
 	elseif op==2 then
@@ -56,12 +56,12 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if op==1 then
 		if Duel.HasFlagEffect(tp,id) then return end
 		Duel.RegisterFlagEffect(tp,id,RESET_PHASE|PHASE_END,0,1)
-		--Your Illusion and Mentor monsters cannot be destroyed by battle
+		--Your Illusion and Spellcaster monsters cannot be destroyed by battle
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_FIELD)
 		e1:SetCode(EFFECT_INDESTRUCTABLE_BATTLE)
 		e1:SetTargetRange(LOCATION_MZONE,0)
-		e1:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_ILLUSION|RACE_MENTOR))
+		e1:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_ILLUSION|RACE_SPELLCASTER))
 		e1:SetValue(1)
 		e1:SetReset(RESET_PHASE|PHASE_END)
 		Duel.RegisterEffect(e1,tp)

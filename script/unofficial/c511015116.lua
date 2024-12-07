@@ -1,7 +1,7 @@
---Machina Fcoree (Manga)
+--Machina Force (Manga)
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMixRep(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x36),2,99)
 	--cannot special summon
 	local e1=Effect.CreateEffect(c)

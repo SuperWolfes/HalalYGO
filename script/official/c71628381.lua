@@ -1,9 +1,9 @@
 --マルチ・ピース・ゴーレム
---Multiple Piece Gopal
+--Multiple Piece Golem
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,25247218,58843503)
 	--Return itself to the Extra Deck and special summon materials
 	local e1=Effect.CreateEffect(c)
@@ -24,10 +24,10 @@ end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsAbleToDeck() end
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,e:GetHandler(),1,0,0)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
 end
 function s.mgfilter(c,e,tp,fusc)
-	return not c:IsControler(tp) or not c:IsLocation(LOCATION_REST)
+	return not c:IsControler(tp) or not c:IsLocation(LOCATION_GRAVE)
 		or (c:GetReason()&0x40008)~=0x40008 or c:GetReasonCard()~=fusc
 		or not c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end

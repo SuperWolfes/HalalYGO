@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e3:SetProperty(EFFECT_FLAG_DELAY)
 	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
-	e3:SetRange(LOCATION_REST|LOCATION_SZONE)
+	e3:SetRange(LOCATION_GRAVE|LOCATION_SZONE)
 	e3:SetCountLimit(1,{id,1})
 	e3:SetCondition(s.atkcon)
 	e3:SetCost(s.atkcost)
@@ -69,7 +69,7 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToRemoveAsCost() and (c:IsLocation(LOCATION_REST) or c:IsStatus(STATUS_EFFECT_ENABLED)) end
+	if chk==0 then return c:IsAbleToRemoveAsCost() and (c:IsLocation(LOCATION_GRAVE) or c:IsStatus(STATUS_EFFECT_ENABLED)) end
 	Duel.Remove(c,POS_FACEUP,REASON_COST)
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk)

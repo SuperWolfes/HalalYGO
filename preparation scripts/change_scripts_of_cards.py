@@ -5,9 +5,7 @@ conversion_path = "output_sorted.txt"  # Path of halal conversions txt, preferab
 
 def convert_scripts_content(scripts_path, conversion_path, output="output_scripts"):
     exceptions = ["PHANT",  # PHANT because of the ELEPHANT win condition
-                  "Dice", "dice", "SUMMON", "Summon", "summon",
-                  "NecroValley", "Necro", # Functions from auxiliary that cannot be changed
-                  "Earth", "EARTH", "earth"]
+                  "SUMMON", "Summon", "summon", "Earth", "EARTH", "earth"]
     words_to_convert = {"GY": "RP"} # Some extras
         # The original block for reading conversion rules remains unchanged
     with open(conversion_path, "r", encoding="utf-8") as filec:

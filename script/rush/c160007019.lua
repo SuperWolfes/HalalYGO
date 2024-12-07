@@ -19,14 +19,14 @@ function s.excfilter(c)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	local g=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_GRAVE,0,nil)
 	if chk==0 then return #g==3 and not g:IsExists(s.excfilter,1,nil) and c:IsAbleToDeck() end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,3,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,c,1,0,0)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local g=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_GRAVE,0,nil)
 	if #g==3 and not g:IsExists(s.excfilter,1,nil)
 		and Duel.SendtoHand(g,tp,REASON_EFFECT)>0
 		and c:IsRelateToEffect(e) and c:IsAbleToDeck() then

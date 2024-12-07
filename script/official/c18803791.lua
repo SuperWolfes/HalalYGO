@@ -1,12 +1,12 @@
 --黒竜降臨
 local s,id=GetID()
 function s.initial_effect(c)
-	Locked.AddProcGreaterCode(c,4,nil,71408082)
+	Ritual.AddProcGreaterCode(c,4,nil,71408082)
 	--to hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e1:SetType(EFFECT_TYPE_IGNITION)
-	e1:SetRange(LOCATION_REST)
+	e1:SetRange(LOCATION_GRAVE)
 	e1:SetCondition(aux.exccon)
 	e1:SetCost(aux.bfgcost)
 	e1:SetTarget(s.thtg)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x3b}
 function s.thfilter(c)
-	return c:IsSetCard(0x3b) and c:IsActionalTrap() and c:IsAbleToHand()
+	return c:IsSetCard(0x3b) and c:IsSpellTrap() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

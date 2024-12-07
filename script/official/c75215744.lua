@@ -6,7 +6,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz summon
 	Xyz.AddProcedure(c,nil,4,2)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Destroy 1 card your opponent controls
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -74,11 +74,11 @@ end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local effs=e:GetLabel()
-	--"Gutran Suship Shari": Draw 1 card
+	--"Gukan Suship Shari": Draw 1 card
 	if (effs&1)>0 and Duel.IsPlayerCanDraw(tp,1) then
 		Duel.Draw(tp,1,REASON_EFFECT)
 	end
-	--"Gutran Suship Ikura": This card can make a second attack during each Battle Phase.
+	--"Gukan Suship Ikura": This card can make a second attack during each Battle Phase.
 	if (effs&2)>0 then
 		local e1=Effect.CreateEffect(c)
 		e1:SetDescription(3201)
@@ -93,9 +93,9 @@ end
 function s.valcheck(e,c)
 	local g=c:GetMaterial()
 	local effs=0
-	--Check for "Gutran Suship Shari":
+	--Check for "Gukan Suship Shari":
 	if g:IsExists(Card.IsCode,1,nil,CARD_SUSHIP_SHARI) then effs=effs|1 end
-	--Check for "Gutran Suship Ikura":
+	--Check for "Gukan Suship Ikura":
 	if g:IsExists(Card.IsCode,1,nil,CARD_SUSHIP_IKURA) then effs=effs|2 end
 	e:GetLabelObject():SetLabel(effs)
 end

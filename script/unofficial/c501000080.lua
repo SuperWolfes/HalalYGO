@@ -38,14 +38,14 @@ function s.initial_effect(c)
 end
 s.illegal=true
 function s.cfilter(c)
-	return c:IsRace(RACE_MENTOR) and c:IsType(TYPE_PENDULUM) and c:IsAbleToRemoveAsCost()
+	return c:IsRace(RACE_SPELLCASTER) and c:IsType(TYPE_PENDULUM) and c:IsAbleToRemoveAsCost()
 end
 function s.filter(c,e,tp)
 	return c:IsFaceup() and c:IsType(TYPE_PENDULUM) and (not e or c:IsCanBeEffectTarget(e)) 
 		and (not tp or Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,3,c))
 end
 function s.nsfilter(c)
-	return not c:IsRace(RACE_MENTOR)
+	return not c:IsRace(RACE_SPELLCASTER)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local pentg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_MZONE,0,nil,e,tp)
@@ -97,7 +97,7 @@ function s.splimit(e,se,sp,st)
 	return (st&SUMMON_TYPE_PENDULUM)==SUMMON_TYPE_PENDULUM
 end
 function s.tlimit(e,c)
-	return not c:IsRace(RACE_MENTOR)
+	return not c:IsRace(RACE_SPELLCASTER)
 end
 function s.con(e)
 	local tp=e:GetHandler():GetControler()

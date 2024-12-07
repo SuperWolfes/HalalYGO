@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.condition2(e,tp,eg,ep,ev,re,r,rp)
-	return rp==1-tp and re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActionalEffect()
+	return rp==1-tp and re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsSpellEffect()
 end
 function s.filter1(c,tp)
 	return c:IsSummonPlayer(1-tp)
@@ -32,7 +32,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.filter1,1,nil,tp)
 end
 function s.costfilter(c)
-	return c:IsRace(RACE_WINGEDBEAST) and c:IsFaceup() and c:IsAbleToRestAsCost() and not c:IsMaximumModeSide()
+	return c:IsRace(RACE_WINGEDBEAST) and c:IsFaceup() and c:IsAbleToGraveAsCost() and not c:IsMaximumModeSide()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_MZONE,0,1,nil) end
@@ -44,10 +44,10 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_MZONE,0,1,1,nil)
 	g=g:AddMaximumCheck()
-	if Duel.SendtoRest(g,REASON_COST)==0 then return end
+	if Duel.SendtoGrave(g,REASON_COST)==0 then return end
 	--Effect
 	local g=Duel.GetMatchingGroup(Card.IsNotMaximumModeSide,tp,0,LOCATION_ONFIELD,nil)
 	if #g>0 then

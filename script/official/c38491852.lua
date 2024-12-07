@@ -23,7 +23,7 @@ function s.nonpendfilter(c)
 end
 function s.cfilter(c)
 	return c:IsSetCard(SET_VAALMONICA) and c:IsMonster() and c:IsType(TYPE_PENDULUM)
-		and (c:IsAbleToHand() or not c:IsUnliked())
+		and (c:IsAbleToHand() or not c:IsForbidden())
 end
 function s.extrachk(c,sg)
 	return c:IsAbleToHand() and sg:IsExists(aux.TRUE,1,c)

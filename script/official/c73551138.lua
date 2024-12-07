@@ -1,8 +1,8 @@
 --リチュア・エミリア
---Giojiki Emilia
+--Gishki Emilia
 local s,id=GetID()
 function s.initial_effect(c)
-	Guardian.AddProcedure(c,EVENT_SUMMON_SUCCESS,EVENT_FLIP)
+	Spirit.AddProcedure(c,EVENT_SUMMON_SUCCESS,EVENT_FLIP)
 	--Cannot be Special Summoned
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -32,10 +32,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e5)
 	aux.DoubleSnareValidity(c,LOCATION_MZONE)
 end
-s.listed_series={SET_GIOJIKI}
+s.listed_series={SET_GISHKI}
 function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,SET_GIOJIKI),tp,LOCATION_MZONE,0,1,c) then return end
+	if not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,SET_GISHKI),tp,LOCATION_MZONE,0,1,c) then return end
 	--Negate face-up traps
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)

@@ -40,7 +40,7 @@ function s.initial_effect(c)
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_FIELD)
 	e5:SetProperty(EFFECT_FLAG_SET_AVAILABLE+EFFECT_FLAG_IGNORE_RANGE+EFFECT_FLAG_IGNORE_IMMUNE)
-	e5:SetCode(EFFECT_TO_REST_REDIRECT)
+	e5:SetCode(EFFECT_TO_GRAVE_REDIRECT)
 	e5:SetRange(LOCATION_MZONE)
 	e5:SetCondition(s.excon)
 	e5:SetTarget(s.extg)
@@ -67,7 +67,7 @@ function s.immval(e,te)
 	else return false end
 end
 function s.lvcon(e,tp,eg,ep,ev,re,r,rp)
-	return re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) and re:GetHandler():IsSetCard(0x107)
+	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP) and re:GetHandler():IsSetCard(0x107)
 end
 function s.lvop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

@@ -24,7 +24,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=g:GetFirst()
 	if tc then
 		Duel.HintSelection(g)
-		c:CancelToRest()
+		c:CancelToGrave()
 		Duel.Overlay(tc,c)
 	end
 end

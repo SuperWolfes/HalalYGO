@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_DRAGON),7,2)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--pendulum summon
 	Pendulum.AddProcedure(c,false)
 	--pendulum set
@@ -45,7 +45,7 @@ function s.initial_effect(c)
 	e5:SetDescription(aux.Stringid(35952884,1))
 	e5:SetType(EFFECT_TYPE_TRIGGER_O+EFFECT_TYPE_SINGLE)
 	e5:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
-	e5:SetCode(EVENT_TO_REST)
+	e5:SetCode(EVENT_TO_GRAVE)
 	e5:SetCondition(s.pencon)
 	e5:SetTarget(s.pentg)
 	e5:SetOperation(s.penop)
@@ -74,7 +74,7 @@ function s.initial_effect(c)
 	end)
 end
 function s.pcfilter(c)
-	return c:IsType(TYPE_PENDULUM) and not c:IsUnliked()
+	return c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
 end
 function s.pctg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckPendulumZones(tp)

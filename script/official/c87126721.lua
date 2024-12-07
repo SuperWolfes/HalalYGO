@@ -1,5 +1,5 @@
 --マルチャミー・ニャルス
---Mulchaumy Nyalus
+--Mulcharmy Nyalus
 local s,id=GetID()
 function s.initial_effect(c)
 	--Apply effects for the rest of the turn
@@ -15,15 +15,15 @@ function s.initial_effect(c)
 	e1:SetTarget(s.efftg)
 	e1:SetOperation(s.effop)
 	c:RegisterEffect(e1)
-	--Keep track of the activations of a "Mulchaumy" monster's effect
-	Duel.AddCustomActivityCounter(id,ACTIVITY_CHAIN,function(re) return not (re:GetHandler():IsSetCard(SET_MULCHAUMY) and re:IsMonsterEffect()) end)
+	--Keep track of the activations of a "Mulcharmy" monster's effect
+	Duel.AddCustomActivityCounter(id,ACTIVITY_CHAIN,function(re) return not (re:GetHandler():IsSetCard(SET_MULCHARMY) and re:IsMonsterEffect()) end)
 end
-s.listed_series={SET_MULCHAUMY}
+s.listed_series={SET_MULCHARMY}
 function s.effcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsDiscardable() and Duel.GetCustomActivityCount(id,tp,ACTIVITY_CHAIN)<2 end
-	Duel.SendtoRest(c,REASON_COST|REASON_DISCARD)
-	--You can only activate 1 other "Mulchaumy" monster effect, the turn you activate this effect
+	Duel.SendtoGrave(c,REASON_COST|REASON_DISCARD)
+	--You can only activate 1 other "Mulcharmy" monster effect, the turn you activate this effect
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,1))
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -31,7 +31,7 @@ function s.effcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e1:SetCode(EFFECT_CANNOT_ACTIVATE)
 	e1:SetTargetRange(1,0)
 	e1:SetCondition(function(e) return Duel.GetCustomActivityCount(id,e:GetHandlerPlayer(),ACTIVITY_CHAIN)>=2 end)
-	e1:SetValue(function(e,re,tp) return re:GetHandler():IsSetCard(SET_MULCHAUMY) and re:IsMonsterEffect() end)
+	e1:SetValue(function(e,re,tp) return re:GetHandler():IsSetCard(SET_MULCHARMY) and re:IsMonsterEffect() end)
 	e1:SetReset(RESET_PHASE|PHASE_END)
 	Duel.RegisterEffect(e1,tp)
 end
@@ -42,7 +42,7 @@ function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.effop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	--Draw 1 card each time your opponent Special Summons a monster(s) from the RP and/or banishment
+	--Draw 1 card each time your opponent Special Summons a monster(s) from the GY and/or banishment
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
@@ -60,7 +60,7 @@ function s.effop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e2,tp)
 end
 function s.drconfilter(c,tp)
-	return c:IsSummonPlayer(1-tp) and c:IsSummonLocation(LOCATION_REST|LOCATION_REMOVED)
+	return c:IsSummonPlayer(1-tp) and c:IsSummonLocation(LOCATION_GRAVE|LOCATION_REMOVED)
 end
 function s.drcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.drconfilter,1,nil,tp)

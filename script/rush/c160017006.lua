@@ -20,7 +20,7 @@ function s.cfilter(c)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
-		local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST,0,nil)
+		local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_GRAVE,0,nil)
 		return aux.SelectUnselectGroup(g,e,tp,4,4,s.rescon,0)
 	end
 end
@@ -33,7 +33,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_GRAVE,0,nil)
 	local rqg=aux.SelectUnselectGroup(g,e,tp,4,4,s.rescon,1,tp,HINTMSG_TODECK)
 	if #rqg==0 then return end
 	Duel.HintSelection(rqg,true)
@@ -52,7 +52,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetDescription(aux.Stringid(id,1))
 			e1:SetType(EFFECT_TYPE_FIELD)
-			e1:SetCode(EFFECT_FCOREE_SPSUMMON_POSITION)
+			e1:SetCode(EFFECT_FORCE_SPSUMMON_POSITION)
 			e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CLIENT_HINT)
 			e1:SetTargetRange(1,1)
 			e1:SetTarget(s.sumlimit)

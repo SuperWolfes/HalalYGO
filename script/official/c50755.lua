@@ -1,5 +1,5 @@
 --マジシャンズ・サークル
---Mentor's Circle
+--Magician's Circle
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -13,10 +13,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetAttacker():IsRace(RACE_MENTOR)
+	return Duel.GetAttacker():IsRace(RACE_SPELLCASTER)
 end
 function s.filter(c,e,tp)
-	return c:IsAttackBelow(2000) and c:IsRace(RACE_MENTOR) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsAttackBelow(2000) and c:IsRace(RACE_SPELLCASTER) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil,e,tp)

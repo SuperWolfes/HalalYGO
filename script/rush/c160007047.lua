@@ -1,4 +1,4 @@
---Hot-Blooded Guardians Stadium
+--Hot-Blooded Spirits Stadium
 -- 熱血スピリッツ・スタジアム
 local s,id=GetID()
 function s.initial_effect(c)

@@ -2,10 +2,10 @@
 --Transamu Praime Full Armor Nova
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Fusion Summon Procedure
 	Fusion.AddProcMix(c,true,true,CARD_TRANSAMU_RAINAC,160016008)
-	--Gains 300 ATK per different Types of monsters in the RPs
+	--Gains 300 ATK per different Types of monsters in the GYs
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -35,10 +35,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.atkval(e,c)
-	local g=Duel.GetMatchingGroup(Card.IsMonster,0,LOCATION_REST,LOCATION_REST,nil)
+	local g=Duel.GetMatchingGroup(Card.IsMonster,0,LOCATION_GRAVE,LOCATION_GRAVE,nil)
 	return g:GetClassCount(Card.GetRace)*300
 end
 function s.con(e)
-	local g=Duel.GetMatchingGroup(Card.IsMonster,0,LOCATION_REST,LOCATION_REST,nil)
+	local g=Duel.GetMatchingGroup(Card.IsMonster,0,LOCATION_GRAVE,LOCATION_GRAVE,nil)
 	return g:GetClassCount(Card.GetRace)>=e:GetLabel()
 end

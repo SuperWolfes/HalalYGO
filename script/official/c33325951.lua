@@ -3,9 +3,9 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Return this card to the hand during the End Phase of the turn it was Special Summoned
-	Guardian.AddProcedure(c,EVENT_SPSUMMON_SUCCESS)
+	Spirit.AddProcedure(c,EVENT_SPSUMMON_SUCCESS)
 	--This card's name become "Shinobaroness Peacock"
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetRange(LOCATION_MZONE|LOCATION_HAND)
 	e1:SetValue(25415052)
 	c:RegisterEffect(e1)
-	--Search 1 Actional/Trap that has "Guardian monster" in its text
+	--Search 1 Spell/Trap that has "Spirit monster" in its text
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e2:SetCountLimit(1,id)
-	e2:SetCondition(function(e) return e:GetHandler():IsSummonType(SUMMON_TYPE_LOCKED) end)
+	e2:SetCondition(function(e) return e:GetHandler():IsSummonType(SUMMON_TYPE_RITUAL) end)
 	e2:SetTarget(s.thtg)
 	e2:SetOperation(s.thop)
 	c:RegisterEffect(e2)
@@ -40,9 +40,9 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 s.listed_names={73055622,25415052} --Shinobird's Calling, Shinobaroness Peacock
-s.listed_card_types={TYPE_GUARDIAN}
+s.listed_card_types={TYPE_SPIRIT}
 function s.thfilter(c)
-	return c:IsActionalTrap() and c:ListsCardType(TYPE_GUARDIAN) and c:IsAbleToHand()
+	return c:IsSpellTrap() and c:ListsCardType(TYPE_SPIRIT) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

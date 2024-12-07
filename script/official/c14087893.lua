@@ -1,5 +1,5 @@
 --月の書
---Book of Horizon
+--Book of Moon
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

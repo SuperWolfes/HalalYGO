@@ -71,7 +71,7 @@ function s.atkfilter(c)
 	if c:IsType(TYPE_NORMAL) then
 		return c:IsLevelAbove(5)
 	else
-		local summon_types={SUMMON_TYPE_LOCKED,SUMMON_TYPE_FUSION,SUMMON_TYPE_SYNCHRO,SUMMON_TYPE_XYZ}
+		local summon_types={SUMMON_TYPE_RITUAL,SUMMON_TYPE_FUSION,SUMMON_TYPE_SYNCHRO,SUMMON_TYPE_XYZ}
 		return c:GetFlagEffect(id)>0 and c:IsSummonType(table.unpack(summon_types))		
 	end
 end

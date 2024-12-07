@@ -6,7 +6,7 @@ function s.initial_effect(c)
 end
 s.listed_names={21420702,32543380}
 function s.tgfilter(c)
-	return c:IsFaceup() and c:IsCode(21420702) and c:IsAbleToRestAsCost()
+	return c:IsFaceup() and c:IsCode(21420702) and c:IsAbleToGraveAsCost()
 end
 function s.spfilter(c,e,tp)
 	return c:IsCode(32543380) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
@@ -14,19 +14,19 @@ end
 function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 	return aux.CanActivateSkill(tp) and Duel.GetFlagEffect(tp,id)==0
 		and Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_SZONE,0,1,nil)
-		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND+LOCATION_DECK+LOCATION_REST,0,1,nil,e,tp)
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND+LOCATION_DECK+LOCATION_GRAVE,0,1,nil,e,tp)
 end
 function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SKILL_FLIP,tp,id|(1<<32))
 	Duel.Hint(HINT_CARD,tp,id)
 	--OPD register
 	Duel.RegisterFlagEffect(tp,id,0,0,0)
-	--Send 1 "Tri-Blaze Acceletor" to RP/Special Summon 1 "Volcanic Doomfire" from hand, Deck or RP
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	--Send 1 "Tri-Blaze Acceletor" to GY/Special Summon 1 "Volcanic Doomfire" from hand, Deck or GY
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local tc=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_SZONE,0,1,1,nil):GetFirst()
-	if Duel.SendtoRest(tc,REASON_COST)>0 and tc:IsLocation(LOCATION_REST) then
+	if Duel.SendtoGrave(tc,REASON_COST)>0 and tc:IsLocation(LOCATION_GRAVE) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local sc=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_HAND+LOCATION_DECK+LOCATION_REST,0,1,1,nil,e,tp):GetFirst()
+		local sc=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_HAND+LOCATION_DECK+LOCATION_GRAVE,0,1,1,nil,e,tp):GetFirst()
 		Duel.SpecialSummon(sc,0,tp,tp,true,false,POS_FACEUP)
 	end
 	--Your opponents takes no effect damage for the rest of this turn

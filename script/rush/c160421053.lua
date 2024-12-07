@@ -46,13 +46,13 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetCode(EFFECT_UPDATE_DEFENSE)
 		tc:RegisterEffect(e2)
 	end
-	if Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST,0,1,nil)
+	if Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_GRAVE,0,1,nil)
 		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_REDEYES_B_DRAGON),tp,LOCATION_MZONE,0,1,nil)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
-		local tg=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_REST,0,1,1,nil)
+		local tg=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 		Duel.SendtoDeck(tg,nil,0,REASON_EFFECT)
 	end
 end
 function s.tdfilter(c)
-	return c:IsAbleToDeck() and c:IsActional()
+	return c:IsAbleToDeck() and c:IsSpell()
 end

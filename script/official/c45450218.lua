@@ -29,7 +29,7 @@ function s.checkop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local dg=eg:GetFirst()
-	return #eg==1 and dg:IsLocation(LOCATION_REST) and dg:IsReason(REASON_BATTLE)
+	return #eg==1 and dg:IsLocation(LOCATION_GRAVE) and dg:IsReason(REASON_BATTLE)
 		and dg:IsAttribute(ATTRIBUTE_LIGHT) and dg:GetReasonCard()==e:GetHandler() and e:GetLabelObject():GetLabel()==1
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)

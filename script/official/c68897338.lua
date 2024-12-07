@@ -1,9 +1,9 @@
 --魔轟神獣ベヒルモス
---The Fablous Behillmoth
+--The Fabled Behillmoth
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
-	--Discard 2 or more "Fablous" monsters and Special Summon 1 "Fablous" Synchro Monster from your Extra Deck
+	--Discard 2 or more "Fabled" monsters and Special Summon 1 "Fabled" Synchro Monster from your Extra Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_HANDES+CATEGORY_SPECIAL_SUMMON)
@@ -13,14 +13,14 @@ function s.initial_effect(c)
 	e1:SetTarget(s.extrasptg)
 	e1:SetOperation(s.extraspop)
 	c:RegisterEffect(e1)
-	--Special Summon 1 "Fablous" monster from your hand
+	--Special Summon 1 "Fabled" monster from your hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY,EFFECT_FLAG2_CHECK_SIMULTANEOUS)
-	e2:SetCode(EVENT_TO_REST)
-	e2:SetRange(LOCATION_REST)
+	e2:SetCode(EVENT_TO_GRAVE)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(s.handspcon)
 	e2:SetCost(aux.SelfBanishCost)
@@ -28,15 +28,15 @@ function s.initial_effect(c)
 	e2:SetOperation(s.handspop)
 	c:RegisterEffect(e2)
 end
-s.listed_series={SET_FABLOUS}
+s.listed_series={SET_FABLED}
 function s.discardfilter(c)
-	return c:IsSetCard(SET_FABLOUS) and c:IsMonster() and c:HasLevel() and c:IsDiscardable(REASON_EFFECT)
+	return c:IsSetCard(SET_FABLED) and c:IsMonster() and c:HasLevel() and c:IsDiscardable(REASON_EFFECT)
 end
 function s.rescon(sg,e,tp,mg)
 	return Duel.IsExistingMatchingCard(s.extraspfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,sg:GetSum(Card.GetOriginalLevel)+e:GetHandler():GetOriginalLevel())
 end
 function s.extraspfilter(c,e,tp,lv)
-	return c:IsSetCard(SET_FABLOUS) and c:IsType(TYPE_SYNCHRO) and c:IsLevel(lv)
+	return c:IsSetCard(SET_FABLED) and c:IsType(TYPE_SYNCHRO) and c:IsLevel(lv)
 		and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0
 		and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_SYNCHRO,tp,false,false)
 end
@@ -59,7 +59,7 @@ function s.extraspop(e,tp,eg,ep,ev,re,r,rp)
 	local rg=aux.SelectUnselectGroup(g,e,tp,1,#g,s.rescon,1,tp,HINTMSG_DISCARD)
 	if #rg==0 then return end
 	rg:AddCard(c)
-	if Duel.SendtoRest(rg,REASON_DISCARD|REASON_EFFECT)==0 then return end
+	if Duel.SendtoGrave(rg,REASON_DISCARD|REASON_EFFECT)==0 then return end
 	local pg=aux.GetMustBeMaterialGroup(tp,Group.CreateGroup(),tp,nil,nil,REASON_SYNCHRO)
 	if #pg>0 then return end
 	local lv=rg:GetSum(Card.GetOriginalLevel)
@@ -76,7 +76,7 @@ function s.handspcon(e,tp,eg,ep,ev,re,r,rp)
 	return not eg:IsContains(e:GetHandler()) and eg:IsExists(s.handspconfilter,1,nil,tp)
 end
 function s.handspfilter(c,e,tp)
-	return c:IsSetCard(SET_FABLOUS) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsSetCard(SET_FABLED) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.handsptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

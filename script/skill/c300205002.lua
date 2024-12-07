@@ -6,7 +6,7 @@ end
 function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 	--condition
 	local b1=Duel.IsPlayerCanDraw(tp,1)
-	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_GRAVE,0,nil)
 	local ct=g:GetClassCount(Card.GetCode)
 	local b2=(Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) and ct>3)
 	return aux.CanActivateSkill(tp)	and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND,0,1,nil) and (b1 or b2)
@@ -16,7 +16,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,tp,id)
 	Duel.DiscardHand(tp,s.filter,1,1,REASON_COST+REASON_DISCARD)
 	local b1=Duel.IsPlayerCanDraw(tp,1)
-	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_GRAVE,0,nil)
 	local ct=g:GetClassCount(Card.GetCode)
 	local b2=(Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) and ct>3)
 	local opt=0
@@ -39,10 +39,10 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SKILL_FLIP,tp,id|(2<<32))
 end
 function s.filter(c)
-	return c:IsType(TYPE_NORMAL) and c:IsRace(RACE_TAINTED) and c:IsDiscardable()
+	return c:IsType(TYPE_NORMAL) and c:IsRace(RACE_FIEND) and c:IsDiscardable()
 end
 function s.cfilter(c)
-	return c:IsType(TYPE_NORMAL) and c:IsMonster() and c:IsRace(RACE_TAINTED)
+	return c:IsType(TYPE_NORMAL) and c:IsMonster() and c:IsRace(RACE_FIEND)
 end
 function s.thfilter(c)
 	return c:IsMonster() and c:IsAbleToHand()

@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e0:SetOperation(Link.Operation(s.matfilter,1,1,nil))
 	e0:SetValue(s.linksumval)
 	c:RegisterEffect(e0)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Cannot be attack target while linked
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)

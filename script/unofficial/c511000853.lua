@@ -1,4 +1,4 @@
---Klaret the Elite Ment Elf
+--Klaret the Elite Magic Elf
 local s,id=GetID()
 function s.initial_effect(c)
 	--atk

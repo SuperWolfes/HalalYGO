@@ -26,8 +26,8 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	end
 	if not tc or not bc or tc:IsControler(1-tp)
 		or tc:IsHasEffect(EFFECT_LEAVE_FIELD_REDIRECT) 
-		or tc:IsHasEffect(EFFECT_TO_REST_REDIRECT) 
-		or tc:IsHasEffect(EFFECT_TO_REST_REDIRECT_CB)
+		or tc:IsHasEffect(EFFECT_TO_GRAVE_REDIRECT) 
+		or tc:IsHasEffect(EFFECT_TO_GRAVE_REDIRECT_CB)
 		or bc:IsHasEffect(EFFECT_BATTLE_DESTROY_REDIRECT) 
 		or tc:IsType(TYPE_PENDULUM) then return false end
 	local tcsp={tc:GetCardEffect(EFFECT_SPSUMMON_CONDITION)}
@@ -105,7 +105,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	local tc=e:GetLabelObject()
-	if tc:IsLocation(LOCATION_REST) and Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)>0 then
+	if tc:IsLocation(LOCATION_GRAVE) and Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)>0 then
 		Duel.BreakEffect()
 		local turnp=Duel.GetTurnPlayer()
 		Duel.SkipPhase(turnp,PHASE_MAIN1,RESET_PHASE+PHASE_END,1)

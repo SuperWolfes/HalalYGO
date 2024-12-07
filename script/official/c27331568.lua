@@ -25,14 +25,14 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 end
 	--Defining cost
 function s.costfilter(c,tp)
-	return c:IsLockedMonster() and c:IsReleasable() and c:IsSetCard(0x2093)
+	return c:IsRitualMonster() and c:IsReleasable() and c:IsSetCard(0x2093)
 		and Duel.IsExistingMatchingCard(s.atkfilter,tp,LOCATION_MZONE,0,1,c)
 end
-	--Check for LIGHT wanderer monster
+	--Check for LIGHT fairy monster
 function s.atkfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_WANDERER) and c:IsAttribute(ATTRIBUTE_LIGHT)
+	return c:IsFaceup() and c:IsRace(RACE_FAIRY) and c:IsAttribute(ATTRIBUTE_LIGHT)
 end
-	--Cost of tribute "Cyber Angel" locked monster from hand or field
+	--Cost of tribute "Cyber Angel" ritual monster from hand or field
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckReleaseGroupCost(tp,s.costfilter,1,true,nil,nil,tp) end
 	local g=Duel.SelectReleaseGroupCost(tp,s.costfilter,1,1,true,nil,nil,tp)

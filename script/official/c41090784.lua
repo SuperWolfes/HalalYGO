@@ -35,5 +35,5 @@ function s.poop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.indval(e,re,rp)
-	return re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP)
+	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP)
 end

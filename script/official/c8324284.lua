@@ -1,5 +1,5 @@
 --死霊の盾
---Guardian Shield
+--Spirit Shield
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
@@ -33,29 +33,29 @@ function s.initial_effect(c)
 	e2:SetTarget(s.negefftg)
 	e2:SetOperation(function(e,tp,eg,ep,ev,re,r,rp) Duel.NegateActivation(ev) end)
 	c:RegisterEffect(e2)
-	--Send this card to the RP
+	--Send this card to the GY
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
-	e3:SetCategory(CATEGORY_TOREST)
+	e3:SetCategory(CATEGORY_TOGRAVE)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e3:SetCode(EVENT_PHASE+PHASE_END)
 	e3:SetRange(LOCATION_SZONE)
 	e3:SetCountLimit(1)
-	e3:SetCondition(function(e,tp) return not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_TAINTED|RACE_TOXIC),tp,LOCATION_MZONE,0,1,nil) end)
+	e3:SetCondition(function(e,tp) return not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_FIEND|RACE_ZOMBIE),tp,LOCATION_MZONE,0,1,nil) end)
 	e3:SetTarget(s.tgtg)
-	e3:SetOperation(function(e) Duel.SendtoRest(e:GetHandler(),REASON_EFFECT) end)
+	e3:SetOperation(function(e) Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT) end)
 	c:RegisterEffect(e3)
 end
 function s.negcostfilter(c)
-	return c:IsRace(RACE_TAINTED|RACE_TOXIC) and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
+	return c:IsRace(RACE_FIEND|RACE_ZOMBIE) and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
 end
 function s.negatkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return not c:HasFlagEffect(id)
-		and Duel.IsExistingMatchingCard(s.negcostfilter,tp,LOCATION_MZONE|LOCATION_REST,0,1,nil) end
+		and Duel.IsExistingMatchingCard(s.negcostfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,1,nil) end
 	c:RegisterFlagEffect(id,RESET_EVENT|RESETS_STANDARD|RESET_PHASE|PHASE_DAMAGE,0,1)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.negcostfilter,tp,LOCATION_MZONE|LOCATION_REST,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.negcostfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,1,1,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.negatktg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -66,9 +66,9 @@ function s.negatktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
 end
 function s.negeffcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.negcostfilter,tp,LOCATION_MZONE|LOCATION_REST,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.negcostfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.negcostfilter,tp,LOCATION_MZONE|LOCATION_REST,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.negcostfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,1,1,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.negefftg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -78,5 +78,5 @@ function s.negefftg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,e:GetHandler(),1,tp,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,e:GetHandler(),1,tp,0)
 end

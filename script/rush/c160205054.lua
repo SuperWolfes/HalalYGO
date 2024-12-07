@@ -1,5 +1,5 @@
 --未来風師
---Future Aerobouncer
+--Future Aeromancer
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -19,19 +19,19 @@ function s.tdfilter(c)
 	return c:IsMonster() and c:IsAttribute(ATTRIBUTE_WIND) and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST,0,2,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_GRAVE,0,2,nil) end
 end
 function s.mltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeck(tp,3) end
 	Duel.SetOperationInfo(0,CATEGORY_DECKDES,nil,0,tp,3)
 end
 function s.cfilter(c)
-	return c:IsLocation(LOCATION_REST) and c:IsActional() and c:IsType(TYPE_EQUIP) and c:IsAbleToHand()
+	return c:IsLocation(LOCATION_GRAVE) and c:IsSpell() and c:IsType(TYPE_EQUIP) and c:IsAbleToHand()
 end
 function s.mlop(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local td=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_REST,0,2,2,nil)
+	local td=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_GRAVE,0,2,2,nil)
 	if #td==0 then return end
 	Duel.HintSelection(td,true)
 	if Duel.SendtoDeck(td,nil,SEQ_DECKSHUFFLE,REASON_COST)~=2 then return end

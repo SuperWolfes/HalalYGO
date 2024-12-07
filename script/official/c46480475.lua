@@ -42,6 +42,6 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	ct=ct-1
 	e:SetLabel(ct)
 	if ct==0 then
-		Duel.SendtoRest(e:GetHandler(),REASON_EFFECT)
+		Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
 	end
 end

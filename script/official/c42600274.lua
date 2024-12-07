@@ -25,10 +25,10 @@ function s.initial_effect(c)
 end
 function s.hspcon(e,c)
 	if c==nil then return true end
-	return Duel.CheckReleaseGroup(c:GetControler(),Card.IsRace,1,true,1,true,c,c:GetControler(),nil,false,e:GetHandler(),RACE_WARRIOR+RACE_WANDERER)
+	return Duel.CheckReleaseGroup(c:GetControler(),Card.IsRace,1,true,1,true,c,c:GetControler(),nil,false,e:GetHandler(),RACE_WARRIOR+RACE_FAIRY)
 end
 function s.hsptg(e,tp,eg,ep,ev,re,r,rp,c)
-	local g=Duel.SelectReleaseGroup(tp,Card.IsRace,1,1,true,true,true,c,nil,nil,false,e:GetHandler(),RACE_WARRIOR+RACE_WANDERER)
+	local g=Duel.SelectReleaseGroup(tp,Card.IsRace,1,1,true,true,true,c,nil,nil,false,e:GetHandler(),RACE_WARRIOR+RACE_FAIRY)
 	if g then
 		g:KeepAlive()
 		e:SetLabelObject(g)
@@ -43,16 +43,16 @@ function s.hspop(e,tp,eg,ep,ev,re,r,rp,c)
 	g:DeleteGroup()
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsReason(REASON_LOCKED)
+	return e:GetHandler():IsReason(REASON_RITUAL)
 end
 function s.thfilter(c)
 	return c:GetType()==0x82 and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.thfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.thfilter,tp,LOCATION_REST,0,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.thfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.thfilter,tp,LOCATION_GRAVE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,0,0)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)

@@ -3,7 +3,7 @@
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--2 Pendulum Monsters, including a "Majespecter" monster
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_PENDULUM),2,2,s.lcheck)
 	--Add 2 "Majespecter" Pendulum Monsters to the hand
@@ -32,7 +32,7 @@ function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOEXTRA,nil,1,tp,LOCATION_DECK)
 end
 function s.tefilter(c)
-	return c:IsSetCard(SET_MAJESPECTER) and c:IsType(TYPE_PENDULUM) and not c:IsUnliked()
+	return c:IsSetCard(SET_MAJESPECTER) and c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

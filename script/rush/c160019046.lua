@@ -4,9 +4,9 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,CARD_IMAGINARY_ACTOR,160019001)
-	--reveal face-down cards and destroy actionals
+	--reveal face-down cards and destroy spells
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DESTROY)
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.revtg)
 	e1:SetOperation(s.revop)
 	c:RegisterEffect(e1)
-	--Take control of an opponent's wanderer monster
+	--Take control of an opponent's fairy monster
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,2))
 	e2:SetCategory(CATEGORY_CONTROL)
@@ -41,13 +41,13 @@ function s.revop(e,tp,eg,ep,ev,re,r,rp)
 	--Effect
 	local sg=Duel.GetMatchingGroup(Card.IsFacedown,tp,0,LOCATION_ONFIELD,nil)
 	Duel.ConfirmCards(tp,sg)
-	local dg=sg:Filter(Card.IsActional,nil)
+	local dg=sg:Filter(Card.IsSpell,nil)
 	if #dg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.Destroy(dg,REASON_EFFECT)
 	end
 end
 function s.ctrlfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_WANDERER) and not c:IsType(TYPE_MAXIMUM) and c:IsControlerCanBeChanged(true)
+	return c:IsFaceup() and c:IsRace(RACE_FAIRY) and not c:IsType(TYPE_MAXIMUM) and c:IsControlerCanBeChanged(true)
 end
 function s.ctrltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

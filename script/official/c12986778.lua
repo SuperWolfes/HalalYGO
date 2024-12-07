@@ -1,5 +1,5 @@
 --機皇帝の賜与
---Boon of the Mekwatcher Emperor
+--Boon of the Meklord Emperor
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

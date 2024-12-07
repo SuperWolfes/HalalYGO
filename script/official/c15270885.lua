@@ -1,5 +1,5 @@
 --トゥーン・ゴブリン突撃部隊
---Toon Goblin Attack Fcoree
+--Toon Goblin Attack Force
 
 local s,id=GetID()
 function s.initial_effect(c)

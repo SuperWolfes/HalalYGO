@@ -15,10 +15,10 @@ function s.initial_effect(c)
 	e1:SetCost(s.untgcost)
 	e1:SetOperation(s.untgop)
 	c:RegisterEffect(e1)
-	-- Send up to 2 "Memento" cards with different names from your Deck to the RP
+	-- Send up to 2 "Memento" cards with different names from your Deck to the GY
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_DESTROY+CATEGORY_TOREST)
+	e2:SetCategory(CATEGORY_DESTROY+CATEGORY_TOGRAVE)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCountLimit(1,{id,1})
@@ -34,7 +34,7 @@ end
 function s.untgcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsDiscardable() end
-	Duel.SendtoRest(c,REASON_COST|REASON_DISCARD)
+	Duel.SendtoGrave(c,REASON_COST|REASON_DISCARD)
 end
 function s.untgop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -51,22 +51,22 @@ function s.untgop(e,tp,eg,ep,ev,re,r,rp)
 	aux.RegisterClientHint(c,nil,tp,1,0,aux.Stringid(id,2))
 end
 function s.tgfilter(c)
-	return c:IsSetCard(SET_MEMENTO) and c:IsAbleToRest() and not c:IsCode(id)
+	return c:IsSetCard(SET_MEMENTO) and c:IsAbleToGrave() and not c:IsCode(id)
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsSetCard,SET_MEMENTO),tp,LOCATION_MZONE,0,nil)
 	if chk==0 then return #g>0 and Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,tp,LOCATION_MZONE)
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local g=Duel.SelectMatchingCard(tp,aux.FaceupFilter(Card.IsSetCard,SET_MEMENTO),tp,LOCATION_MZONE,0,1,1,nil)
 	if #g>0 and Duel.Destroy(g,REASON_EFFECT)>0 then
 		local tg=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_DECK,0,nil)
-		local sg=aux.SelectUnselectGroup(tg,e,tp,1,2,aux.dncheck,1,tp,HINTMSG_TOREST)
+		local sg=aux.SelectUnselectGroup(tg,e,tp,1,2,aux.dncheck,1,tp,HINTMSG_TOGRAVE)
 		if #sg>0 then
-			Duel.SendtoRest(sg,REASON_EFFECT)
+			Duel.SendtoGrave(sg,REASON_EFFECT)
 		end
 	end
 end

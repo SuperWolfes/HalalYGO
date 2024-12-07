@@ -1,12 +1,12 @@
 --イビリチュア・テトラオーグル
---Evigiojiki Tetrogre
+--Evigishki Tetrogre
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
-	--Send to the RP 1 card from the opponent's Deck
+	c:EnableReviveLimit()
+	--Send to the GY 1 card from the opponent's Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_HANDES+CATEGORY_TOREST)
+	e1:SetCategory(CATEGORY_HANDES+CATEGORY_TOGRAVE)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1)
@@ -21,7 +21,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ac=Duel.SelectOption(tp,aux.Stringid(id,1),aux.Stringid(id,2),aux.Stringid(id,3))
 	e:SetLabel(ac)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_HANDES,nil,0,1-tp,1)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,nil,1,PLAYER_ALL,LOCATION_DECK)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,nil,1,PLAYER_ALL,LOCATION_DECK)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetFieldGroupCount(tp,0,LOCATION_HAND)>0 and Duel.IsChainDisablable(0)
@@ -30,12 +30,12 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		return
 	end
 	local ty=TYPE_MONSTER
-	if e:GetLabel()==1 then ty=TYPE_ACTIONAL
+	if e:GetLabel()==1 then ty=TYPE_SPELL
 	elseif e:GetLabel()==2 then ty=TYPE_TRAP end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g1=Duel.SelectMatchingCard(tp,Card.IsType,tp,LOCATION_DECK,0,1,1,nil,ty)
-	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOGRAVE)
 	local g2=Duel.SelectMatchingCard(1-tp,Card.IsType,1-tp,LOCATION_DECK,0,1,1,nil,ty)
 	g1:Merge(g2)
-	Duel.SendtoRest(g1,REASON_EFFECT)
+	Duel.SendtoGrave(g1,REASON_EFFECT)
 end

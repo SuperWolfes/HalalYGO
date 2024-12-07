@@ -1,10 +1,10 @@
 --幻魔帝トリロジーグ
---Illusorasm Emperor Trilojig
+--Phantasm Emperor Trilojig
 --Scripted by AlphaKretin, manga version updated by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion material
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMixN(c,false,false,aux.FilterBoolFunction(Card.IsLevel,10),3)
 	--Damage
 	local e1=Effect.CreateEffect(c)
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c,tp,hc)
-	return c:IsControler(tp) and (c:GetPreviousLocation()==LOCATION_REST or c==hc)
+	return c:IsControler(tp) and (c:GetPreviousLocation()==LOCATION_GRAVE or c==hc)
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.filter,1,nil,tp,e:GetHandler())

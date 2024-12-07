@@ -1,5 +1,5 @@
 --帝王の凍志
---The Moppars Awaken
+--The Monarchs Awaken
 
 local s,id=GetID()
 function s.initial_effect(c)

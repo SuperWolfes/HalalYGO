@@ -2,8 +2,8 @@
 --Superheavy Samurai Brave Masurawo
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before awaking
-	c:EnableAwakeLimit()
+	--Must be properly summoned before reviving
+	c:EnableReviveLimit()
 	--Synchro Summon procedure
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	--Attack while in defense position
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_DEFENSE_ATTACK)
 	e1:SetValue(1)
 	c:RegisterEffect(e1)
-	--Mismatching replacement
+	--Destruction replacement
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
@@ -68,7 +68,7 @@ function s.repop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Destroy(tc,REASON_EFFECT|REASON_REPLACE)
 end
 function s.drcon(e,tp,eg,ep,ev,re,r,rp)
-	return rp==1-tp and re:IsActionalTrapEffect()
+	return rp==1-tp and re:IsSpellTrapEffect()
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local h=Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)

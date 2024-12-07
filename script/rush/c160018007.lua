@@ -20,7 +20,7 @@ function s.cfilter(c)
 	return c:IsMonster() and c:IsRace(RACE_MACHINE)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil)
+	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,nil)
 end
 function s.rvlfilter(c)
 	return c:IsRace(RACE_DRAGON) and c:IsLevel(7,8) and not c:IsPublic()

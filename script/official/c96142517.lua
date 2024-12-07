@@ -1,5 +1,5 @@
 --RUM－千死蛮巧
---Rank-Up-Ment Admiration of the Thousands
+--Rank-Up-Magic Admiration of the Thousands
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -37,7 +37,7 @@ end
 function s.filter1(c,e,tp)
 	local rk=c:GetRank()
 	return c:IsType(TYPE_XYZ)
-		and Duel.IsExistingMatchingCard(s.filter2,tp,0,LOCATION_REST,1,nil,e,tp,rk,Group.FromCards(c))
+		and Duel.IsExistingMatchingCard(s.filter2,tp,0,LOCATION_GRAVE,1,nil,e,tp,rk,Group.FromCards(c))
 end
 function s.filter2(c,e,tp,rk,g1)
 	local g=g1:Clone()
@@ -52,14 +52,14 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(s.filter1,tp,LOCATION_REST,0,1,nil,e,tp) end
+		and Duel.IsExistingTarget(s.filter1,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local g1=Duel.SelectTarget(tp,s.filter1,tp,LOCATION_REST,0,1,1,nil,e,tp)
+	local g1=Duel.SelectTarget(tp,s.filter1,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
 	local rk=g1:GetFirst():GetRank()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local g2=Duel.SelectTarget(tp,s.filter2,tp,0,LOCATION_REST,1,1,nil,e,tp,rk,g1)
+	local g2=Duel.SelectTarget(tp,s.filter2,tp,0,LOCATION_GRAVE,1,1,nil,e,tp,rk,g1)
 	g1:Merge(g2)
-	local g=Duel.GetMatchingGroup(s.filter2,tp,LOCATION_REST,LOCATION_REST,nil,e,tp,rk,g1)
+	local g=Duel.GetMatchingGroup(s.filter2,tp,LOCATION_GRAVE,LOCATION_GRAVE,nil,e,tp,rk,g1)
 	g:Sub(g1)
 	if #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
@@ -68,7 +68,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		g1:Merge(sg)
 	end
 	Duel.SetTargetParam(rk)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g1,#g1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g1,#g1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)

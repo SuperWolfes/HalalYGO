@@ -1,5 +1,5 @@
 --マジカル・ファイアストーム
---Mentoral Firestorm
+--Magical Firestorm
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -17,7 +17,7 @@ function s.desfilter(c)
 	return c:IsFaceup() and c:GetOriginalLevel()<=6 and not c:IsMaximumModeSide()
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsRace(RACE_MENTOR)
+	return c:IsFaceup() and c:IsRace(RACE_SPELLCASTER)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ct=Duel.GetMatchingGroupCount(aux.FilterMaximumSideFunctionEx(s.filter),tp,LOCATION_MZONE,0,nil)

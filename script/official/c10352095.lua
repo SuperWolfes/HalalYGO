@@ -1,5 +1,5 @@
 --幻惑の巻物
---Scroll of Bemintment
+--Scroll of Bewitchment
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddEquipProcedure(c,nil,nil,nil,nil,s.target)

@@ -1,15 +1,15 @@
 --魔弾の射手 ワイルド
---Mentoral Musketeer Wild
+--Magical Musketeer Wild
 local s,id=GetID()
 function s.initial_effect(c)
-	--"Mentoral Musket" Actional/Trap cards can be activated from the hand
+	--"Magical Musket" Spell/Trap cards can be activated from the hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,1))
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_QP_ACT_IN_NTPHAND)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetTargetRange(LOCATION_HAND,0)
-	e1:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,SET_MENTORAL_MUSKET))
+	e1:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,SET_MAGICAL_MUSKET))
 	c:RegisterEffect(e1)
 	local e2=e1:Clone()
 	e2:SetCode(EFFECT_TRAP_ACT_IN_HAND)
@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e3:SetOperation(s.tdop)
 	c:RegisterEffect(e3)
 end
-s.listed_series={SET_MENTORAL_MUSKET}
+s.listed_series={SET_MAGICAL_MUSKET}
 function s.tdcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local rc=re:GetHandler()
@@ -37,14 +37,14 @@ function s.tdcon(e,tp,eg,ep,ev,re,r,rp)
 	return c:IsColumn(seq,p,LOCATION_SZONE)
 end
 function s.filter(c)
-	return c:IsSetCard(SET_MENTORAL_MUSKET) and c:IsAbleToDeck()
+	return c:IsSetCard(SET_MAGICAL_MUSKET) and c:IsAbleToDeck()
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter(chkc) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter(chkc) end
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,1)
-		and Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,3,nil) end
+		and Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,3,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,3,3,nil)
+	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,3,3,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,#g,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
 end

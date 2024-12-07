@@ -23,14 +23,14 @@ function s.eqfilter(c)
 end
 function s.eqcon(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetHandler():GetBattleTarget()
-	return aux.bdogcon(e,tp,eg,ep,ev,re,r,rp) and not tc:IsUnliked() 
+	return aux.bdogcon(e,tp,eg,ep,ev,re,r,rp) and not tc:IsForbidden() 
 		and s.eqconc(e)
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0 end
 	local tc=e:GetHandler():GetBattleTarget()
 	Duel.SetTargetCard(tc)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,tc,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,tc,1,0,0)
 end
 function s.equipop(c,e,tp,tc)
 	local atk=tc:GetBaseAttack()

@@ -20,11 +20,11 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_FUSION,160012053}
 function s.cfilter(c)
-	return (c:IsRace(RACE_WANDERER) or (c:IsRace(RACE_WARRIOR) and c:IsAttribute(ATTRIBUTE_WATER))) and c:IsAbleToDeckOrExtraAsCost()
+	return (c:IsRace(RACE_FAIRY) or (c:IsRace(RACE_WARRIOR) and c:IsAttribute(ATTRIBUTE_WATER))) and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
-		local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST,0,nil)
+		local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_GRAVE,0,nil)
 		return aux.SelectUnselectGroup(g,e,tp,2,2,aux.dpcheck(Card.GetRace),0)
 	end
 end
@@ -34,14 +34,14 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,0,LOCATION_MZONE,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_MZONE)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_LEAVE_REST,nil,1,tp,0)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_LEAVE_GRAVE,nil,1,tp,0)
 end
 function s.setfilter(c)
 	return c:IsCode(CARD_FUSION,160012053) and c:IsSSetable()
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_GRAVE,0,nil)
 	local rqg=aux.SelectUnselectGroup(g,e,tp,2,2,aux.dpcheck(Card.GetRace),1,tp,HINTMSG_TODECK)
 	if #rqg==0 then return end
 	Duel.HintSelection(rqg,true)
@@ -55,7 +55,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	dg=dg:AddMaximumCheck()
 	Duel.HintSelection(dg,true)
 	if Duel.SendtoDeck(dg,nil,SEQ_DECKBOTTOM,REASON_EFFECT)==0 then return end
-	local stg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.setfilter),tp,LOCATION_REST,0,nil)
+	local stg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.setfilter),tp,LOCATION_GRAVE,0,nil)
 	if #stg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 		local sg=stg:Select(tp,1,1,nil)

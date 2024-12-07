@@ -1,7 +1,7 @@
 --Infernity Zero
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Survival
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_QUICK_O)
@@ -57,7 +57,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 	local g=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
 	g:RemoveCard(e:GetHandler())
-	Duel.SendtoRest(g,REASON_COST+REASON_DISCARD)
+	Duel.SendtoGrave(g,REASON_COST+REASON_DISCARD)
 	e:SetLabel(#g)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)

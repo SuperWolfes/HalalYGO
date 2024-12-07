@@ -1,5 +1,5 @@
 --時の女神の悪戯
---Mischief of the Time Monsterdess
+--Mischief of the Time Goddess
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -31,7 +31,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) then
-		Duel.SendtoRest(c,REASON_EFFECT)
+		Duel.SendtoGrave(c,REASON_EFFECT)
 	end
 	--skip phases until Battle Phase
 	Duel.SkipPhase(tp,PHASE_BATTLE,RESET_PHASE+PHASE_END,1)
@@ -63,7 +63,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetTargetRange(1,0)
 	e2:SetReset(RESET_PHASE+PHASE_MAIN1+RESET_SELF_TURN)
 	Duel.RegisterEffect(e2,tp)
-	--prevent activation of "Mischief of the Time Monsterdess"
+	--prevent activation of "Mischief of the Time Goddess"
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
 	e3:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_OATH+EFFECT_FLAG_CLIENT_HINT)

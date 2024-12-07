@@ -13,10 +13,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_FUSION+TYPE_LOCKED+TYPE_SYNCHRO+TYPE_XYZ)
+	return c:IsFaceup() and c:IsType(TYPE_FUSION+TYPE_RITUAL+TYPE_SYNCHRO+TYPE_XYZ)
 end
 function s.typecast(c)
-	return (c:GetType()&TYPE_FUSION+TYPE_LOCKED+TYPE_SYNCHRO+TYPE_XYZ)
+	return (c:GetType()&TYPE_FUSION+TYPE_RITUAL+TYPE_SYNCHRO+TYPE_XYZ)
 end
 function s.filter1(c,e)
 	return c:IsFaceup() and c:IsMonster() and c:IsAbleToHand() and c:IsCanBeEffectTarget(e)
@@ -25,15 +25,15 @@ function s.filter2(c,e)
 	return c:IsTrap() and c:IsAbleToHand() and c:IsCanBeEffectTarget(e)
 end
 function s.filter3(c,e)
-	return c:IsActional() and c:GetCode()~=id and c:IsAbleToHand() and c:IsCanBeEffectTarget(e)
+	return c:IsSpell() and c:GetCode()~=id and c:IsAbleToHand() and c:IsCanBeEffectTarget(e)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
 	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_MZONE,0,nil)
 	local ct=g:GetClassCount(s.typecast)
-	local g1=Duel.GetMatchingGroup(s.filter1,tp,LOCATION_REST+LOCATION_REMOVED,0,nil,e)
-	local g2=Duel.GetMatchingGroup(s.filter2,tp,LOCATION_REST,0,nil,e)
-	local g3=Duel.GetMatchingGroup(s.filter3,tp,LOCATION_REST,0,nil,e)
+	local g1=Duel.GetMatchingGroup(s.filter1,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,nil,e)
+	local g2=Duel.GetMatchingGroup(s.filter2,tp,LOCATION_GRAVE,0,nil,e)
+	local g3=Duel.GetMatchingGroup(s.filter3,tp,LOCATION_GRAVE,0,nil,e)
 	if chk==0 then return (ct>1 and #g1>0) or (ct>2 and #g2>0) or (ct>3 and #g3>0) end
 	local tg=Group.CreateGroup()
 	local off=0

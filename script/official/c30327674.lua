@@ -1,5 +1,5 @@
 -- カオス・ウィッチ－混沌の魔女
--- Chaos Mint
+-- Chaos Witch
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1,id)
-	e1:SetLabel(id+1,0,TYPES_TOKEN,1000,500,2,RACE_TAINTED,ATTRIBUTE_DARK)
+	e1:SetLabel(id+1,0,TYPES_TOKEN,1000,500,2,RACE_FIEND,ATTRIBUTE_DARK)
 	e1:SetCost(s.tkcost)
 	e1:SetTarget(s.tktg)
 	e1:SetOperation(s.tkop)
@@ -23,8 +23,8 @@ function s.initial_effect(c)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
 	e2:SetCode(EVENT_REMOVE)
 	e2:SetCountLimit(1,id)
-	e2:SetLabel(id+2,0,TYPES_TOKEN+TYPE_TUNER,500,1000,2,RACE_WANDERER,ATTRIBUTE_LIGHT)
-	e2:SetCondition(function(e) return e:GetHandler():IsPreviousLocation(LOCATION_HAND|LOCATION_REST) end)
+	e2:SetLabel(id+2,0,TYPES_TOKEN+TYPE_TUNER,500,1000,2,RACE_FAIRY,ATTRIBUTE_LIGHT)
+	e2:SetCondition(function(e) return e:GetHandler():IsPreviousLocation(LOCATION_HAND|LOCATION_GRAVE) end)
 	e2:SetCost(s.tkcost)
 	e2:SetTarget(s.tktg)
 	e2:SetOperation(s.tkop)
@@ -65,7 +65,7 @@ function s.lizfilter(e,c)
 end
 function s.tktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetMZoneCount(tp,e:GetHandler())>1
-		and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)
+		and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
 		and Duel.IsPlayerCanSpecialSummonMonster(tp,e:GetLabel())
 	end
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,2,0,0)

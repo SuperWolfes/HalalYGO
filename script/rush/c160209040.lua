@@ -1,10 +1,10 @@
 --天翔流麗キメテラス
---Kimeterasu the Mega Ruler
+--Kimeterasu the Divine Ruler
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,160201001,CARD_NEEDLKYRIE)
 	--Direct attack
 	local e1=Effect.CreateEffect(c)

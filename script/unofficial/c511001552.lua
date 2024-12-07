@@ -24,7 +24,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,a,1,0,0)
 end
 function s.mgfilter(c,e,tp,fusc)
-	return c:IsControler(1-tp) and c:IsLocation(LOCATION_REST)
+	return c:IsControler(1-tp) and c:IsLocation(LOCATION_GRAVE)
 		and c:GetReason()&0x40008==0x40008 and c:GetReasonCard()==fusc
 		and c:IsCanBeSpecialSummoned(e,0,1-tp,false,false,POS_FACEUP,1-tp)
 end
@@ -34,11 +34,11 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local mg=tc:GetMaterial()
 	local sumtype=tc:GetSummonType()
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if ft>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
+	if ft>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
 	if Duel.SendtoDeck(tc,nil,0,REASON_EFFECT)==0 then return end
 	Duel.SkipPhase(Duel.GetTurnPlayer(),PHASE_BATTLE,RESET_PHASE+PHASE_BATTLE,1)
 	if sumtype&SUMMON_TYPE_FUSION==SUMMON_TYPE_FUSION and #mg>0
-		and #mg<=ft and (not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) or #mg==1) 
+		and #mg<=ft and (not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) or #mg==1) 
 		and mg:FilterCount(aux.NecroValleyFilter(s.mgfilter),nil,e,tp,tc)==#mg then
 		Duel.BreakEffect()
 		if Duel.SpecialSummon(mg,0,tp,1-tp,false,false,POS_FACEUP) then

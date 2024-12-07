@@ -14,13 +14,13 @@ function s.initial_effect(c)
 end
 s.listed_names={21420702,32543380}
 function s.costfilter(c)
-	return c:IsFaceup() and c:IsCode(21420702) and c:IsAbleToRestAsCost()
+	return c:IsFaceup() and c:IsCode(21420702) and c:IsAbleToGraveAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_SZONE,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_SZONE,0,1,1,nil)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.filter(c,e,tp)
 	return c:IsCode(32543380) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)

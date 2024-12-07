@@ -63,7 +63,7 @@ function s.regop2(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.penfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x99) and c:IsType(TYPE_PENDULUM) and not c:IsCode(id) and not c:IsUnliked()
+	return c:IsFaceup() and c:IsSetCard(0x99) and c:IsType(TYPE_PENDULUM) and not c:IsCode(id) and not c:IsForbidden()
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetFlagEffect(id+1)~=0

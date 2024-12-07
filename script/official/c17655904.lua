@@ -1,5 +1,5 @@
 --滅びの爆裂疾風弾
---Burst Stream of Mismatching
+--Burst Stream of Destruction
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

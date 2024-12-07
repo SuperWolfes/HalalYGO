@@ -1,5 +1,5 @@
 --白き霊龍
---Dragon Guardian of White
+--Dragon Spirit of White
 local s,id=GetID()
 function s.initial_effect(c)
 	--Normal monster
@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e1:SetCode(EFFECT_ADD_TYPE)
-	e1:SetRange(LOCATION_HAND+LOCATION_REST)
+	e1:SetRange(LOCATION_HAND+LOCATION_GRAVE)
 	e1:SetValue(TYPE_NORMAL)
 	c:RegisterEffect(e1)
 	local e2=e1:Clone()
@@ -41,7 +41,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_BLUEEYES_W_DRAGON}
 function s.rmfilter(c)
-	return c:IsActionalTrap() and c:IsAbleToRemove()
+	return c:IsSpellTrap() and c:IsAbleToRemove()
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_ONFIELD) and chkc:IsControler(1-tp) and s.rmfilter(chkc) end

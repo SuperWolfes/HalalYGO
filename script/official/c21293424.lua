@@ -6,7 +6,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz Summon.
 	Xyz.AddProcedure(c,nil,4,2)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--"Gunkan" monsters cannot be destroyed by opponent's effects
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_FIELD)
@@ -57,7 +57,7 @@ function s.regcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_XYZ) and e:GetLabel()>0
 end
 function s.sfilter(c)
-	return c:IsSetCard(SET_GUNKAN) and c:IsActionalTrap() and c:IsAbleToHand()
+	return c:IsSetCard(SET_GUNKAN) and c:IsSpellTrap() and c:IsAbleToHand()
 end
 function s.regtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local effs=e:GetLabel()
@@ -77,11 +77,11 @@ function s.regtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local effs=e:GetLabel()
-	--"Gutran Suship Shari": Draw 1 card.
+	--"Gukan Suship Shari": Draw 1 card.
 	if (effs&1)>0 then
 		Duel.Draw(tp,1,REASON_EFFECT)
 	end
-	--"Gutran Suship Shirauo": Add 1 "Gunkan" Actional/Trap from your Deck to your hand.
+	--"Gukan Suship Shirauo": Add 1 "Gunkan" Spell/Trap from your Deck to your hand.
 	if (effs&2)>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 		local g=Duel.SelectMatchingCard(tp,s.sfilter,tp,LOCATION_DECK,0,1,1,nil)
@@ -94,9 +94,9 @@ end
 function s.valcheck(e,c)
 	local g=c:GetMaterial()
 	local effs=0
-	--Check for "Gutran Suship Shari":
+	--Check for "Gukan Suship Shari":
 	if g:IsExists(Card.IsCode,1,nil,CARD_SUSHIP_SHARI) then effs=effs|1 end
-	--Check for "Gutran Suship Shirauo":
+	--Check for "Gukan Suship Shirauo":
 	if g:IsExists(Card.IsCode,1,nil,CARD_SUSHIP_SHIRAUO) then effs=effs|2 end
 	e:GetLabelObject():SetLabel(effs)
 end

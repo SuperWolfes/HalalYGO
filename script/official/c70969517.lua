@@ -1,5 +1,5 @@
 --幻獣ロックリザード
---Illusion Beast Rock-Lizard
+--Phantom Beast Rock-Lizard
 local s,id=GetID()
 function s.initial_effect(c)
 	--summon with 1 tribute
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_DAMAGE)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	e2:SetCode(EVENT_TO_REST)
+	e2:SetCode(EVENT_TO_GRAVE)
 	e2:SetCondition(s.damcon2)
 	e2:SetTarget(s.damtg2)
 	e2:SetOperation(s.damop)

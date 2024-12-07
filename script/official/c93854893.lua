@@ -1,10 +1,10 @@
 --宵星の機神ディンギルス
---Dingirsu, the Coreust of the Evening Star
+--Dingirsu, the Orcust of the Evening Star
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
-	--You can only Special Summon "Dingirsu, the Coreust of the Evening Star(s)" once per turn
+	c:EnableReviveLimit()
+	--You can only Special Summon "Dingirsu, the Orcust of the Evening Star(s)" once per turn
 	c:SetSPSummonOnce(id)
 	--Xyz Summon Procedure
 	Xyz.AddProcedure(c,nil,8,2,s.ovfilter,aux.Stringid(id,0))
@@ -27,9 +27,9 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 s.listed_names={id}
-s.listed_series={SET_COREUST}
+s.listed_series={SET_ORCUST}
 function s.ovfilter(c,tp,xyzc)
-	return c:IsFaceup() and c:IsType(TYPE_LINK,xyzc,SUMMON_TYPE_XYZ,tp) and c:IsSetCard(SET_COREUST,xyzc,SUMMON_TYPE_XYZ,tp)
+	return c:IsFaceup() and c:IsType(TYPE_LINK,xyzc,SUMMON_TYPE_XYZ,tp) and c:IsSetCard(SET_ORCUST,xyzc,SUMMON_TYPE_XYZ,tp)
 end
 function s.repfilter(c,tp)
 	return c:IsControler(tp) and c:IsOnField() and c:IsReason(REASON_BATTLE|REASON_EFFECT) and not c:IsReason(REASON_REPLACE)
@@ -46,7 +46,7 @@ function s.matfilter(c,tp)
 	return c:IsRace(RACE_MACHINE) and c:IsFaceup() and c:IsCanBeXyzMaterial(nil,tp,REASON_EFFECT)
 end
 function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
-	local b1=Duel.IsExistingMatchingCard(Card.IsAbleToRest,tp,0,LOCATION_ONFIELD,1,nil)
+	local b1=Duel.IsExistingMatchingCard(Card.IsAbleToGrave,tp,0,LOCATION_ONFIELD,1,nil)
 	local b2=e:GetHandler():IsType(TYPE_XYZ) and Duel.IsExistingMatchingCard(s.matfilter,tp,LOCATION_REMOVED,0,1,nil,tp)
 	if chk==0 then return b1 or b2 end
 	local op=Duel.SelectEffect(tp,
@@ -54,8 +54,8 @@ function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 		{b2,aux.Stringid(id,3)})
 	e:SetLabel(op)
 	if op==1 then
-		e:SetCategory(CATEGORY_TOREST)
-		Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,1-tp,LOCATION_ONFIELD)
+		e:SetCategory(CATEGORY_TOGRAVE)
+		Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,1-tp,LOCATION_ONFIELD)
 	elseif op==2 then
 		e:SetCategory(0)
 	end
@@ -63,12 +63,12 @@ end
 function s.effop(e,tp,eg,ep,ev,re,r,rp)
 	local op=e:GetLabel()
 	if op==1 then
-		--Send 1 card your opponent controls to the RP
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-		local g=Duel.SelectMatchingCard(tp,Card.IsAbleToRest,tp,0,LOCATION_ONFIELD,1,1,nil)
+		--Send 1 card your opponent controls to the GY
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		local g=Duel.SelectMatchingCard(tp,Card.IsAbleToGrave,tp,0,LOCATION_ONFIELD,1,1,nil)
 		if #g>0 then
 			Duel.HintSelection(g,true)
-			Duel.SendtoRest(g,REASON_EFFECT)
+			Duel.SendtoGrave(g,REASON_EFFECT)
 		end
 	elseif op==2 then
 		--Attach 1 of your banished Machine monsters to this card as material

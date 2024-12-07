@@ -1,4 +1,4 @@
---Performanced String Figure
+--Performage String Figure
 --fixed by MLD
 local s,id=GetID()
 function s.initial_effect(c)
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 	--Perform a Fusion Summon
-	local params = {nil,Fusion.OnFieldMat,nil,nil,Fusion.FcoreedHandler}
+	local params = {nil,Fusion.OnFieldMat,nil,nil,Fusion.ForcedHandler}
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)

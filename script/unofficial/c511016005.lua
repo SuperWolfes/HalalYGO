@@ -35,7 +35,7 @@ function s.spfilter(c,e,tp,mg)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local mg=Duel.GetMatchingGroup(s.mfilter,tp,LOCATION_MZONE,0,nil)
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) 
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) 
 		and Duel.IsPlayerCanSpecialSummonCount(tp,2) and mg:IsExists(s.filter1,1,nil,e,nil,e,tp,mg) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FMATERIAL)
 	local g1=mg:FilterSelect(tp,s.filter1,1,1,nil,e,nil,e,tp,mg)
@@ -50,7 +50,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 end
 function s.mspfilter(c,e,tp)
-	return c:IsCanBeSpecialSummoned(e,0,tp,false,false) and c:IsLocation(LOCATION_REST+LOCATION_REMOVED+LOCATION_EXTRA)
+	return c:IsCanBeSpecialSummoned(e,0,tp,false,false) and c:IsLocation(LOCATION_GRAVE+LOCATION_REMOVED+LOCATION_EXTRA)
 end
 function s.lvfilter(c)
 	return c:GetLevel()~=4
@@ -67,11 +67,11 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local sg=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,g)
 	local tc=sg:GetFirst()
 	tc:SetMaterial(g)
-	Duel.SendtoRest(g,REASON_MATERIAL+REASON_FUSION+REASON_EFFECT)
+	Duel.SendtoGrave(g,REASON_MATERIAL+REASON_FUSION+REASON_EFFECT)
 	Duel.BreakEffect()
 	if Duel.SpecialSummon(tc,SUMMON_TYPE_FUSION,tp,tp,false,false,POS_FACEUP) then
 		tc:CompleteProcedure()
-		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
+		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
 		local spg=g:Filter(aux.NecroValleyFilter(s.mspfilter),nil,e,tp)
 		if #spg>1 then
 			Duel.BreakEffect()
@@ -114,7 +114,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 						gc=spg:GetNext()
 					end
 				elseif op==1 then
-					Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+					Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 					local tug=spg:FilterSelect(tp,s.tunerfilter,1,1,nil)
 					Duel.HintSelection(tug)
 					local e2=Effect.CreateEffect(e:GetHandler())

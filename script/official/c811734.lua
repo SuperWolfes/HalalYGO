@@ -22,7 +22,7 @@ function s.thfilter(c)
 	return c:IsLevelBelow(4) and c:IsSetCard(0xaf) and c:IsType(TYPE_PENDULUM) and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	local b1=Duel.IsExistingMatchingCard(s.atkfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,nil)
+	local b1=Duel.IsExistingMatchingCard(s.atkfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil)
 	local b2=Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil)
 	if chk==0 then return b1 or b2 end
 	local op=0
@@ -39,7 +39,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 		if Duel.IsPlayerAffectedByEffect(tp,69832741) then
 			Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,tp,LOCATION_MZONE)
 		else
-			Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,tp,LOCATION_REST)
+			Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,tp,LOCATION_GRAVE)
 		end
 	else
 		e:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -49,7 +49,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetLabel()==0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-		local g=Duel.SelectMatchingCard(tp,s.atkfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,1,nil)
+		local g=Duel.SelectMatchingCard(tp,s.atkfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,nil)
 		if #g==0 then return end
 		local atk=g:GetFirst():GetAttack()
 		local tc=Duel.GetAttacker()

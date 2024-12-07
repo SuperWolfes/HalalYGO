@@ -1,5 +1,5 @@
 --賢帝ヴィルヘル
---Wilhel the Wisdom Moppar
+--Wilhel the Wisdom Monarch
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -28,7 +28,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.SelectMatchingCard(tp,Card.IsFacedown,tp,0,LOCATION_SZONE,1,1,nil):GetFirst()
 	if not tc then return end
 	Duel.ConfirmCards(tp,tc)
-	if tc:IsActional() and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+	if tc:IsSpell() and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.BreakEffect()
 		Duel.Destroy(tc,REASON_EFFECT)
 	end

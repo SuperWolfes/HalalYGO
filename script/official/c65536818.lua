@@ -1,11 +1,11 @@
 --源竜星－ボウテンコウ
---Pingpong, First of the Bang Zing
+--Denglong, First of the Yang Zing
 local s,id=GetID()
 function s.initial_effect(c)
 	c:SetSPSummonOnce(id)
 	--synchro summon
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--search
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -55,14 +55,14 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.costfilter(c,lv)
 	local clv=c:GetLevel()
-	return clv>0 and clv~=lv and c:IsRace(RACE_WYRM) and c:IsAbleToRestAsCost()
+	return clv>0 and clv~=lv and c:IsRace(RACE_WYRM) and c:IsAbleToGraveAsCost()
 end
 function s.lvcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local lv=e:GetHandler():GetLevel()
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_DECK,0,1,nil,lv) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_DECK,0,1,1,nil,lv)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 	e:SetLabel(g:GetFirst():GetLevel())
 end
 function s.lvop(e,tp,eg,ep,ev,re,r,rp)

@@ -25,7 +25,7 @@ end
 function s.recop(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
 	Duel.Recover(p,d,REASON_EFFECT)
-	local gc=Duel.GetMatchingGroupCount(Card.IsCode,p,LOCATION_REST,0,nil,id)
+	local gc=Duel.GetMatchingGroupCount(Card.IsCode,p,LOCATION_GRAVE,0,nil,id)
 	if gc>0 then
 		Duel.Recover(p,500*gc,REASON_EFFECT)
 	end

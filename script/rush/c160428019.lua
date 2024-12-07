@@ -1,5 +1,5 @@
 --ロード・マジック－ダークナイト
---Road Ment - Dark Night
+--Road Magic - Dark Night
 --Scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -16,13 +16,13 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsLevelAbove(7) and c:IsRace(RACE_MENTOR)
+	return c:IsFaceup() and c:IsLevelAbove(7) and c:IsRace(RACE_SPELLCASTER)
 end
 function s.descond(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil)
 end
 function s.costfilter(c)
-	return c:IsMonster() and c:IsAttribute(ATTRIBUTE_DARK) and c:IsAbleToRestAsCost()
+	return c:IsMonster() and c:IsAttribute(ATTRIBUTE_DARK) and c:IsAbleToGraveAsCost()
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil) end

@@ -34,7 +34,7 @@ end
 s.listed_names={27288416}
 function s.cfilter(c,tp)
 	return c:IsPreviousLocation(LOCATION_MZONE) and c:IsPreviousPosition(POS_FACEUP)
-		and c:IsPreviousControler(tp) and c:IsRace(RACE_WANDERER)
+		and c:IsPreviousControler(tp) and c:IsRace(RACE_FAIRY)
 end
 function s.regcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetFlagEffect(id)==0 and eg:IsExists(s.cfilter,1,nil,tp)
@@ -42,7 +42,7 @@ function s.regcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.cfilter2(c,tp)
 	return c and c:IsLocation(LOCATION_MZONE) and c:IsPosition(POS_FACEUP)
-		and c:IsControler(tp) and c:IsRace(RACE_WANDERER) and c:IsBattleDestroyed()
+		and c:IsControler(tp) and c:IsRace(RACE_FAIRY) and c:IsBattleDestroyed()
 end
 function s.regcon2(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetFlagEffect(id)==0 and (s.cfilter2(Duel.GetAttacker(),tp) or s.cfilter2(Duel.GetAttackTarget(),tp))

@@ -52,7 +52,7 @@ end
 function s.getspcode(c)
 	local type=c:GetOriginalType()
 	if type&TYPE_MONSTER==TYPE_MONSTER then return CARD_MYUTANT_BEAST end
-	if type&TYPE_ACTIONAL==TYPE_ACTIONAL then return CARD_MYUTANT_MIST end
+	if type&TYPE_SPELL==TYPE_SPELL then return CARD_MYUTANT_MIST end
 	return type&TYPE_TRAP==TYPE_TRAP and CARD_MYUTANT_ARSENAL or -1
 end
 function s.spcostfilter(c,e,tp,ft)

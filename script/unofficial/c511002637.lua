@@ -14,7 +14,7 @@ function s.initial_effect(c)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCurrentPhase()>=PHASE_BATTLE_START and Duel.GetCurrentPhase()<=PHASE_BATTLE 
-		and Duel.IsExistingMatchingCard(Card.IsChampion,tp,LOCATION_REST,0,2,nil)
+		and Duel.IsExistingMatchingCard(Card.IsChampion,tp,LOCATION_GRAVE,0,2,nil)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return true end

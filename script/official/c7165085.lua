@@ -53,7 +53,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			e:SetProperty(te:GetProperty())
 			Duel.Hint(HINT_CARD,0,tc:GetOriginalCode())
 			if tc:IsNormalTrap() then
-				tc:CancelToRest(false)
+				tc:CancelToGrave(false)
 			end
 			tc:CreateEffectRelation(te)
 			if cost then cost(te,tep,eg,ep,ev,re,r,rp,1) end
@@ -78,7 +78,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			end
 		else
 			if Duel.Destroy(tc,REASON_EFFECT)==0 then
-				Duel.SendtoRest(tc,REASON_RULE)
+				Duel.SendtoGrave(tc,REASON_RULE)
 			end
 		end
 	else
@@ -88,7 +88,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.todeckop(c,e)
 	if c:IsRelateToEffect(e) and e:IsHasType(EFFECT_TYPE_ACTIVATE) then
-		c:CancelToRest()
+		c:CancelToGrave()
 		Duel.SendtoDeck(c,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
 	end
 end

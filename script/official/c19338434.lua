@@ -1,12 +1,12 @@
 --Japanese name
---Mimirahul Fork
+--Mimighoul Fork
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
 	--Your opponent chooses 1 effect for you to apply
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_POSITION+CATEGORY_TOREST+CATEGORY_DRAW)
+	e1:SetCategory(CATEGORY_POSITION+CATEGORY_TOGRAVE+CATEGORY_DRAW)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetCode(EVENT_FREE_CHAIN)
@@ -14,12 +14,12 @@ function s.initial_effect(c)
 	e1:SetTarget(s.efftg)
 	e1:SetOperation(s.effop)
 	c:RegisterEffect(e1)
-	--Add 1 "Mimirahul Fork" from your Deck to your hand
+	--Add 1 "Mimighoul Fork" from your Deck to your hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCost(aux.SelfBanishCost)
 	e2:SetTarget(s.thtg)
@@ -28,7 +28,7 @@ function s.initial_effect(c)
 end
 s.listed_names={id}
 function s.tgfilter(c)
-	return c:IsFacedown() and (c:IsCanChangePosition() or (c:IsAbleToRest() and Duel.IsPlayerCanDraw(c:GetOwner(),2)))
+	return c:IsFacedown() and (c:IsCanChangePosition() or (c:IsAbleToGrave() and Duel.IsPlayerCanDraw(c:GetOwner(),2)))
 end
 function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return c:IsLocation(LOCATION_MZONE) and c:IsControler(1-tp) and s.tgfilter(chkc) end
@@ -36,14 +36,14 @@ function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 	local tc=Duel.SelectTarget(tp,s.tgfilter,tp,0,LOCATION_MZONE,1,1,nil):GetFirst()
 	Duel.SetPossibleOperationInfo(0,CATEGORY_POSITION,tc,1,tp,POS_FACEUP)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,tc,1,tp,0)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,tc,1,tp,0)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_DRAW,nil,0,tc:GetOwner(),2)
 end
 function s.effop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not tc:IsRelateToEffect(e) then return end
 	local b1=tc:IsCanChangePosition()
-	local b2=tc:IsAbleToRest() and Duel.IsPlayerCanDraw(tc:GetOwner(),2)
+	local b2=tc:IsAbleToGrave() and Duel.IsPlayerCanDraw(tc:GetOwner(),2)
 	if not (b1 or b2) then return end
 	local op=Duel.SelectEffect(1-tp,
 		{b1,aux.Stringid(id,2)},
@@ -54,8 +54,8 @@ function s.effop(e,tp,eg,ep,ev,re,r,rp)
 		pos=Duel.SelectPosition(tp,tc,pos)
 		Duel.ChangePosition(tc,pos)
 	elseif op==2 then
-		--Send it to the RP, then its owner draws 2 cards
-		if Duel.SendtoRest(tc,REASON_EFFECT)>0 and tc:IsLocation(LOCATION_REST) then
+		--Send it to the GY, then its owner draws 2 cards
+		if Duel.SendtoGrave(tc,REASON_EFFECT)>0 and tc:IsLocation(LOCATION_GRAVE) then
 			Duel.BreakEffect()
 			Duel.Draw(tc:GetOwner(),2,REASON_EFFECT)
 		end

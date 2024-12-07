@@ -1,5 +1,5 @@
 -- 竜剣士イグニスＰ
--- Ignis Bird, the Dracoslayer
+-- Ignis Phoenix, the Dracoslayer
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)

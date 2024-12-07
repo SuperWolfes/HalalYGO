@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	e8:SetDescription(aux.Stringid(id,0))
 	e8:SetCategory(CATEGORY_TOHAND)
 	e8:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-	e8:SetCode(EVENT_TO_REST)
+	e8:SetCode(EVENT_TO_GRAVE)
 	e8:SetProperty(EFFECT_FLAG_DELAY)
 	e8:SetCountLimit(1,id)
 	e8:SetCondition(s.thcon)
@@ -38,7 +38,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0xd2}
 function s.filter(c)
-	return c:IsSetCard(0xd2) and c:IsRace(RACE_MENTAL)
+	return c:IsSetCard(0xd2) and c:IsRace(RACE_PSYCHIC)
 end
 function s.dircon(e)
 	return e:GetHandler():GetEquipTarget():GetAttackAnnouncedCount()>0

@@ -29,7 +29,7 @@ function s.mtcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp
 end
 function s.cfilter1(c)
-	return c:IsCode(36623431) and c:IsAbleToRestAsCost()
+	return c:IsCode(36623431) and c:IsAbleToGraveAsCost()
 end
 function s.cfilter2(c)
 	return c:IsMonster() and c:IsRace(RACE_BEASTWARRIOR) and not c:IsPublic()
@@ -52,9 +52,9 @@ function s.mtop(e,tp,eg,ep,ev,re,r,rp)
 		select=2
 	end
 	if select==0 then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 		local g=g1:Select(tp,1,1,nil)
-		Duel.SendtoRest(g,REASON_COST)
+		Duel.SendtoGrave(g,REASON_COST)
 	elseif select==1 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_CONFIRM)
 		local g=g2:Select(tp,1,1,nil)

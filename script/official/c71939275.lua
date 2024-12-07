@@ -1,9 +1,9 @@
 --死霊の残像
---Guardian Illusion
+--Spirit Illusion
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Equip only to a Level 5 or higher Tainted or Toxic monster
+	--Equip only to a Level 5 or higher Fiend or Zombie monster
 	aux.AddEquipProcedure(c,nil,s.eqfilter)
 	--Make the opponent's monster lose ATK equal to the equipped monster's
 	local e1=Effect.CreateEffect(c)
@@ -28,7 +28,7 @@ function s.initial_effect(c)
 end
 s.listed_names={id+1} --"Doppelganger Token"
 function s.eqfilter(c)
-	return c:IsLevelAbove(5) and c:IsRace(RACE_TAINTED|RACE_TOXIC)
+	return c:IsLevelAbove(5) and c:IsRace(RACE_FIEND|RACE_ZOMBIE)
 end
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	local at,bt=Duel.GetBattleMonster(tp)

@@ -1,5 +1,5 @@
 --奇跡の逆鱗
---Pulse of Draconian Wrath
+--Miracle of Draconian Wrath
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -21,7 +21,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil)
 end
 function s.setfilter(c)
-	return c:IsActionalTrap() and c:IsSSetable()
+	return c:IsSpellTrap() and c:IsSSetable()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)

@@ -53,14 +53,14 @@ function s.cfilter(tc)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local chain=Duel.GetCurrentChain()
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter1,tp,LOCATION_REST,LOCATION_REST,1,nil,e,tp,eg,ep,ev,re,r,rp,chain)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter1,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,nil,e,tp,eg,ep,ev,re,r,rp,chain)
 		and (s.cfilter(Duel.GetFieldCard(tp,LOCATION_FZONE,0)) or s.cfilter(Duel.GetFieldCard(1-tp,LOCATION_FZONE,0))) end
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local chain=Duel.GetCurrentChain()-1
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then return end
-	if not Duel.IsExistingMatchingCard(s.cfilter1,tp,LOCATION_REST,LOCATION_REST,1,nil,e,tp,eg,ep,ev,re,r,rp,chain) then return end
-	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_REST,LOCATION_REST,1,1,nil,e,tp,eg,ep,ev,re,r,rp,chain)
+	if not Duel.IsExistingMatchingCard(s.cfilter1,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,nil,e,tp,eg,ep,ev,re,r,rp,chain) then return end
+	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,1,nil,e,tp,eg,ep,ev,re,r,rp,chain)
 	if #g>0 then
 		local tc=g:GetFirst()
 		local tpe=tc:GetType()
@@ -78,10 +78,10 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			if Duel.IsDuelType(DUEL_1_FIELD) then
 				if fc then Duel.Destroy(fc,REASON_RULE) end
 				fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
-				if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
+				if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
 			else
 				fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
-				if fc and Duel.SendtoRest(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
+				if fc and Duel.SendtoGrave(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
 			end
 		end
 		Duel.MoveToField(tc,tp,tp,loc,POS_FACEUP,true)
@@ -91,7 +91,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_CARD,0,tc:GetCode())
 		tc:CreateEffectRelation(te)
 		if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 and not tc:IsHasEffect(EFFECT_REMAIN_FIELD) then
-			tc:CancelToRest(false)
+			tc:CancelToGrave(false)
 		end
 		if te:GetCode()==EVENT_CHAINING then
 			local te2=Duel.GetChainInfo(chain,CHAININFO_TRIGGERING_EFFECT)

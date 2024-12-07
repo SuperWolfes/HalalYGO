@@ -3,12 +3,12 @@
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	--Name becomes "Jinzo" in the Resting Place
+	--Name becomes "Jinzo" in the Graveyard
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_CHANGE_CODE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	e1:SetRange(LOCATION_REST)
+	e1:SetRange(LOCATION_GRAVE)
 	e1:SetValue(CARD_JINZO)
 	c:RegisterEffect(e1)
 	--Make itself unable to be destroyed by opponent's traps
@@ -40,8 +40,8 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetValue(s.efilter)
 		e1:SetReset(RESETS_STANDARD_PHASE_END)
 		c:RegisterEffect(e1)
-		if Duel.IsExistingMatchingCard(Card.IsRace,tp,LOCATION_REST,0,1,e:GetHandler(),RACE_MACHINE) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
-			local ct=Duel.GetMatchingGroupCount(Card.IsRace,tp,LOCATION_REST,0,e:GetHandler(),RACE_MACHINE)
+		if Duel.IsExistingMatchingCard(Card.IsRace,tp,LOCATION_GRAVE,0,1,e:GetHandler(),RACE_MACHINE) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+			local ct=Duel.GetMatchingGroupCount(Card.IsRace,tp,LOCATION_GRAVE,0,e:GetHandler(),RACE_MACHINE)
 			local e2=Effect.CreateEffect(c)
 			e2:SetType(EFFECT_TYPE_SINGLE)
 			e2:SetCode(EFFECT_UPDATE_ATTACK)

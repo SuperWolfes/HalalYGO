@@ -1,5 +1,5 @@
 --女神スクルドの託宣 (Anime)
---Monsterdess Skuld's Overseer (Anime)
+--Goddess Skuld's Oracle (Anime)
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

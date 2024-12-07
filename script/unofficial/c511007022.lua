@@ -1,9 +1,9 @@
 --サイバー・フェニックス (Anime)
---Cyber Bird (Anime)
+--Cyber Phoenix (Anime)
 --Scripted by Lyris, modified by MLD
 local s,id=GetID()
 function s.initial_effect(c)
-	--Negate the activated effects of Actionals/Traps
+	--Negate the activated effects of Spells/Traps
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e1:SetCode(EVENT_CHAIN_SOLVING)
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_DRAW)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	e2:SetCode(EVENT_TO_REST)
+	e2:SetCode(EVENT_TO_GRAVE)
 	e2:SetCondition(function(e) return e:GetHandler():IsReason(REASON_DESTROY) end)
 	e2:SetTarget(s.target)
 	e2:SetOperation(s.operation)

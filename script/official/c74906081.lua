@@ -25,16 +25,16 @@ function s.plfilter(c)
 	local p=c:GetOwner()
 	return c:IsFaceup() and c:IsMonster() and Duel.GetLocationCount(p,LOCATION_SZONE)>0
 		and c:CheckUniqueOnField(p,LOCATION_SZONE)
-		and (c:IsLocation(LOCATION_MZONE) or not c:IsUnliked())
+		and (c:IsLocation(LOCATION_MZONE) or not c:IsForbidden())
 end
 function s.spfilter(c,e,tp)
-	return c:IsFaceup() and c:IsOriginalType(TYPE_MONSTER) and c:IsContinuousActional()
+	return c:IsFaceup() and c:IsOriginalType(TYPE_MONSTER) and c:IsContinuousSpell()
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return (e:GetLabel()==1 and chkc:IsControler(1-tp) and chkc:IsLocation(LOCATION_MZONE|LOCATION_REST) and s.plfilter(chkc))
+	if chkc then return (e:GetLabel()==1 and chkc:IsControler(1-tp) and chkc:IsLocation(LOCATION_MZONE|LOCATION_GRAVE) and s.plfilter(chkc))
 		or (e:GetLabel()==2 and chkc:IsLocation(LOCATION_SZONE) and s.spfilter(chkc,e,tp)) end
-	local b1=Duel.IsExistingTarget(s.plfilter,tp,0,LOCATION_MZONE|LOCATION_REST,1,nil)
+	local b1=Duel.IsExistingTarget(s.plfilter,tp,0,LOCATION_MZONE|LOCATION_GRAVE,1,nil)
 	local b2=Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_SZONE,LOCATION_SZONE,1,nil,e,tp)
 	if chk==0 then return b1 or b2 end
@@ -45,9 +45,9 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if op==1 then
 		e:SetCategory(0)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-		local g=Duel.SelectTarget(tp,s.plfilter,tp,0,LOCATION_MZONE|LOCATION_REST,1,1,nil)
-		if g:GetFirst():IsLocation(LOCATION_REST) then
-			Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,0,0)
+		local g=Duel.SelectTarget(tp,s.plfilter,tp,0,LOCATION_MZONE|LOCATION_GRAVE,1,1,nil)
+		if g:GetFirst():IsLocation(LOCATION_GRAVE) then
+			Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,0,0)
 		end
 	elseif op==2 then
 		e:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -61,16 +61,16 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not tc:IsRelateToEffect(e) or tc:IsImmuneToEffect(e) then return end
 	local op=e:GetLabel()
 	if op==1 then
-		--Place it face-up in its owner's Actional & Trap Zone as a Continuous Actional
+		--Place it face-up in its owner's Spell & Trap Zone as a Continuous Spell
 		if tc:IsLocation(LOCATION_MZONE) and Duel.GetLocationCount(tc:GetOwner(),LOCATION_SZONE)==0 then
-			Duel.SendtoRest(tc,REASON_RULE,nil,PLAYER_NONE)
+			Duel.SendtoGrave(tc,REASON_RULE,nil,PLAYER_NONE)
 		elseif Duel.MoveToField(tc,tp,tc:GetOwner(),LOCATION_SZONE,POS_FACEUP,tc:IsMonsterCard()) then
-			--Treated as a Continuous Actional
+			--Treated as a Continuous Spell
 			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 			e1:SetCode(EFFECT_CHANGE_TYPE)
-			e1:SetValue(TYPE_ACTIONAL|TYPE_CONTINUOUS)
+			e1:SetValue(TYPE_SPELL|TYPE_CONTINUOUS)
 			e1:SetReset(RESET_EVENT|(RESETS_STANDARD&~RESET_TURN_SET))
 			tc:RegisterEffect(e1)
 		end

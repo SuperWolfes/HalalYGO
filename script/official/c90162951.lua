@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz Summon
 	Xyz.AddProcedure(c,nil,10,2)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Gain ATK and DEF equal to the difference in LP
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)

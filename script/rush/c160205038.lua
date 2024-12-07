@@ -19,7 +19,7 @@ function s.filter(c)
 	return c:IsMonster() and c:IsLevel(6) and c:IsDefense(500) and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_REST,0,nil,e,tp)
+	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,nil,e,tp)
 	if chk==0 then return g:GetClassCount(Card.GetCode)>=4 end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -30,7 +30,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_REST,0,nil,e,tp)
+	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,nil,e,tp)
 	local sg=aux.SelectUnselectGroup(g,e,tp,4,4,aux.dncheck,1,tp,HINTMSG_TODECK)
 	Duel.HintSelection(sg,true)
 	if Duel.SendtoDeck(sg,nil,4,REASON_COST)>0 then

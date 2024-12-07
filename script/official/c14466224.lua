@@ -2,7 +2,7 @@
 --The Atmosphere
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -34,7 +34,7 @@ function s.spcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
 	local rg1=Duel.GetMatchingGroup(Card.IsAbleToRemoveAsCost,tp,LOCATION_MZONE,0,nil)
-	local rg2=Duel.GetMatchingGroup(s.gfilter,tp,LOCATION_REST,0,nil)
+	local rg2=Duel.GetMatchingGroup(s.gfilter,tp,LOCATION_GRAVE,0,nil)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=-2 then return false end
 	if Duel.IsPlayerAffectedByEffect(tp,69832741) then
 		return aux.SelectUnselectGroup(rg1,e,tp,3,3,aux.ChkfMMZ(1),0)
@@ -45,7 +45,7 @@ function s.spcon(e,c)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,c)
 	local rg1=Duel.GetMatchingGroup(Card.IsAbleToRemoveAsCost,tp,LOCATION_MZONE,0,nil)
-	local rg2=Duel.GetMatchingGroup(s.gfilter,tp,LOCATION_REST,0,nil)
+	local rg2=Duel.GetMatchingGroup(s.gfilter,tp,LOCATION_GRAVE,0,nil)
 	local g1
 	if Duel.IsPlayerAffectedByEffect(tp,69832741) then
 		g1=aux.SelectUnselectGroup(rg1,e,tp,3,3,aux.ChkfMMZ(1),1,tp,HINTMSG_REMOVE,nil,nil,true)

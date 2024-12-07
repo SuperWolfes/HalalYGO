@@ -1,5 +1,5 @@
 --聖刻龍－トフェニドラゴン
---Hieratic Dragon of Tafnuin
+--Hieratic Dragon of Tefnuit
 
 local s,id=GetID()
 function s.initial_effect(c)
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetCondition(s.hspcon)
 	e1:SetOperation(s.hspop)
 	c:RegisterEffect(e1)
-	--If tributed, special summon 1 dragon normal monster from hand, deck, or RP
+	--If tributed, special summon 1 dragon normal monster from hand, deck, or GY
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)

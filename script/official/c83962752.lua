@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon 1 Tuner and any number of non-Tuners from your RP
+	--Special Summon 1 Tuner and any number of non-Tuners from your GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -73,9 +73,9 @@ end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local synchg=s.desgroup[tp]:Filter(s.cfilter,nil,tp,e)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	local sumg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_REST,0,nil,e,tp)
+	local sumg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_GRAVE,0,nil,e,tp)
 	if chkc then return synchg:IsContains(chkc) and aux.SelectUnselectGroup(sumg,e,tp,2,ft,s.rescon(chkc:GetLevel(),ft),0) end
-	if chk==0 then return ft>=2 and #sumg>=2 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)
+	if chk==0 then return ft>=2 and #sumg>=2 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
 		and synchg:IsExists(s.specialcheck,1,nil,sumg,ft)
 	end
 	local tc=nil
@@ -86,7 +86,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		tc=synchg:FilterSelect(tp,s.specialcheck,1,1,nil,sumg,ft)
 	end
 	Duel.SetTargetCard(tc)
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,LOCATION_REST)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,LOCATION_GRAVE)
 	local c=e:GetHandler()
 	--Destroy this card during your 3rd Standby Phase after activation
 	local e1=Effect.CreateEffect(c)
@@ -103,10 +103,10 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	if not tc:IsRelateToEffect(e) or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
+	if not tc:IsRelateToEffect(e) or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ft<2 then return end
-	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_REST,0,nil,e,tp)
+	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_GRAVE,0,nil,e,tp)
 	if #g<2 then return end
 	local lvl=tc:GetLevel()
 	local sg=aux.SelectUnselectGroup(g,e,tp,2,math.min(ft,#g),s.rescon(lvl,ft),1,tp,HINTMSG_SPSUMMON,s.rescon(lvl,ft))

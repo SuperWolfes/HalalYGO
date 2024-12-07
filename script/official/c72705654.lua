@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.selfsptg)
 	e1:SetOperation(s.selfspop)
 	c:RegisterEffect(e1)
-	--Special Summon 1 "Tachyon" monster from your Deck or RP
+	--Special Summon 1 "Tachyon" monster from your Deck or GY
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -32,7 +32,7 @@ function s.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e3:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_CARD_TARGET,EFFECT_FLAG2_CHECK_SIMULTANEOUS)
 	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
-	e3:SetRange(LOCATION_HAND|LOCATION_REST)
+	e3:SetRange(LOCATION_HAND|LOCATION_GRAVE)
 	e3:SetCountLimit(1,{id,2})
 	e3:SetTarget(s.attachtg)
 	e3:SetOperation(s.attachop)
@@ -57,13 +57,13 @@ function s.dspfilter(c,e,tp)
 end
 function s.dsptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetMZoneCount(tp,e:GetHandler())
-		and Duel.IsExistingMatchingCard(s.dspfilter,tp,LOCATION_DECK|LOCATION_REST,0,1,nil,e,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK|LOCATION_REST)
+		and Duel.IsExistingMatchingCard(s.dspfilter,tp,LOCATION_DECK|LOCATION_GRAVE,0,1,nil,e,tp) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK|LOCATION_GRAVE)
 end
 function s.dspop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.dspfilter),tp,LOCATION_DECK|LOCATION_REST,0,1,1,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.dspfilter),tp,LOCATION_DECK|LOCATION_GRAVE,0,1,1,nil,e,tp)
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end
@@ -79,8 +79,8 @@ function s.attachtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local g=eg:FilterSelect(tp,s.attachfilter,1,1,nil,e,tp)
 	Duel.SetTargetCard(g)
 	local c=e:GetHandler()
-	if c:IsLocation(LOCATION_REST) then
-		Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,c,1,tp,0)
+	if c:IsLocation(LOCATION_GRAVE) then
+		Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,c,1,tp,0)
 	end
 end
 function s.attachop(e,tp,eg,ep,ev,re,r,rp)

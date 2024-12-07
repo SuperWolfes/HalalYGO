@@ -1,5 +1,5 @@
 --アロマージ－ローズマリー
---Aromanced Rosemary
+--Aromage Rosemary
 local s,id=GetID()
 function s.initial_effect(c)
 	--active limit

@@ -1,17 +1,17 @@
 --ハーピィ・レディ３
---Flybie Lady 3 (Rush)
+--Harpie Lady 3 (Rush)
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	--Name becomes "Flybie Lady" while in the RP
+	--Name becomes "Harpie Lady" while in the GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_CHANGE_CODE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	e1:SetRange(LOCATION_REST)
-	e1:SetValue(CARD_FLYBIE_LADY)
+	e1:SetRange(LOCATION_GRAVE)
+	e1:SetValue(CARD_HARPIE_LADY)
 	c:RegisterEffect(e1)
-	--Change name to "Flybie Lady" and prevent a monster from attacking
+	--Change name to "Harpie Lady" and prevent a monster from attacking
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetType(EFFECT_TYPE_IGNITION)
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
 end
-s.listed_names={CARD_FLYBIE_LADY}
+s.listed_names={CARD_HARPIE_LADY}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeckAsCost(tp,1) end
 end
@@ -37,7 +37,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e1:SetCode(EFFECT_CHANGE_CODE)
-	e1:SetValue(CARD_FLYBIE_LADY)
+	e1:SetValue(CARD_HARPIE_LADY)
 	e1:SetReset(RESETS_STANDARD_PHASE_END,2)
 	c:RegisterEffect(e1)
 	if Duel.IsExistingMatchingCard(aux.FilterMaximumSideFunctionEx(s.filter),tp,0,LOCATION_MZONE,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then

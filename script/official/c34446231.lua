@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Link Summon procedure
 	Link.AddProcedure(c,nil,2,nil,s.matcheck)
 	--Negate an opponent's Special Summon and banish that monster(s)
@@ -64,7 +64,7 @@ function s.negsumop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Remove(eg,POS_FACEUP,REASON_EFFECT)
 end
 function s.cfilter(c,tp)
-	return c:IsPreviousLocation(LOCATION_REST) and c:IsPreviousControler(tp)
+	return c:IsPreviousLocation(LOCATION_GRAVE) and c:IsPreviousControler(tp)
 end
 function s.rmvcond(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,tp)

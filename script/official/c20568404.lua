@@ -3,10 +3,10 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Destroy 1 card you control, send 1 Dinosaur monster to the RP, then you can Special Summon "Jurrac" monsters whose total Levels equal the sent monster's Level
+	--Destroy 1 card you control, send 1 Dinosaur monster to the GY, then you can Special Summon "Jurrac" monsters whose total Levels equal the sent monster's Level
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_DESTROY+CATEGORY_TOREST+CATEGORY_SPECIAL_SUMMON)
+	e1:SetCategory(CATEGORY_DESTROY+CATEGORY_TOGRAVE+CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1,id)
@@ -26,13 +26,13 @@ end
 s.listed_series={SET_JURRAC}
 s.listed_names={id}
 function s.tgfilter(c)
-	return c:IsRace(RACE_DINOSAUR) and c:IsAbleToRest()
+	return c:IsRace(RACE_DINOSAUR) and c:IsAbleToGrave()
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(nil,tp,LOCATION_ONFIELD,0,nil)
 	if chk==0 then return #g>0 and Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,tp,0)
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND|LOCATION_DECK)
 end
 function s.spfilter(c,e,tp)
@@ -54,12 +54,12 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	if #dg==0 then return end
 	Duel.HintSelection(dg)
 	if Duel.Destroy(dg,REASON_EFFECT)==0 then return end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local tgc=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil):GetFirst()
-	if tgc and Duel.SendtoRest(tgc,REASON_EFFECT)>0 and tgc:IsLocation(LOCATION_REST) then
+	if tgc and Duel.SendtoGrave(tgc,REASON_EFFECT)>0 and tgc:IsLocation(LOCATION_GRAVE) then
 		local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 		if ft==0 then return end
-		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
+		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
 		local lvl=tgc:GetLevel()
 		local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK,0,nil,e,tp)
 		if #g>0 and g:CheckWithSumEqual(Card.GetLevel,lvl,1,ft) and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then

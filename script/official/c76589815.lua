@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,3,2)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--must attack
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -51,7 +51,7 @@ function s.cftg(e,tp,eg,ep,ev,re,r,rp,chk)
 		and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 end
 end
 function s.cffilter(c)
-	return c:IsActional() and c:IsSSetable()
+	return c:IsSpell() and c:IsSSetable()
 end
 function s.cfop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(tp,0,LOCATION_HAND)

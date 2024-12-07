@@ -33,9 +33,9 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 s.listed_series={0x64}
-s.listed_names={CARD_FLYBIE_LADY,CARD_FLYBIE_LADY_SISTERS}
+s.listed_names={CARD_HARPIE_LADY,CARD_HARPIE_LADY_SISTERS}
 function s.cfilter(c,tp)
-	return c:IsReason(REASON_BATTLE) and (c:GetPreviousCodeOnField()==CARD_FLYBIE_LADY or c:GetPreviousCodeOnField()==CARD_FLYBIE_LADY_SISTERS)
+	return c:IsReason(REASON_BATTLE) and (c:GetPreviousCodeOnField()==CARD_HARPIE_LADY or c:GetPreviousCodeOnField()==CARD_HARPIE_LADY_SISTERS)
 		and c:IsPreviousControler(tp) and c:IsPreviousLocation(LOCATION_ONFIELD) and c:IsPreviousPosition(POS_FACEUP)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
@@ -70,10 +70,10 @@ function s.spcon2(e,tp,eg,ep,ev,re,r,rp)
 		and r&REASON_EFFECT==REASON_EFFECT
 	end
 function s.sptg2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter(chkc,e,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter(chkc,e,tp) end
 	if chk==0 then return true end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil,e,tp)
+	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 end
 function s.spop2(e,tp,eg,ep,ev,re,r,rp)

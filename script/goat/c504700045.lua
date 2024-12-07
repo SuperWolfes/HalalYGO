@@ -1,11 +1,11 @@
 --YZ－キャタピラー・ドラゴン
 --YZ-Tank Dragon (GOAT)
 --Only mosnters in the mzone allowed as material
---nomi monster instead of seminomi + "Cannot be SS from RP"
+--nomi monster instead of seminomi + "Cannot be SS from GY"
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,65622692,64500000)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,true)
 	--destroy

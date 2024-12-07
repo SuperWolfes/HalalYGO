@@ -1,4 +1,4 @@
---Blue Horizon
+--Blue Moon
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -15,11 +15,11 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return false
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsActionalTrap()
+	return c:IsFaceup() and c:IsSpellTrap()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.GetLocationCount(1-tp,LOCATION_MZONE)>0
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0,TYPES_TOKEN,0,800,2,RACE_WANDERER,ATTRIBUTE_LIGHT) end
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0,TYPES_TOKEN,0,800,2,RACE_FAIRY,ATTRIBUTE_LIGHT) end
 	if Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_ONFIELD,0,1,e:GetHandler()) then
 		Duel.SetOperationInfo(0,CATEGORY_DESTROY,nil,1,0,0)
 	end
@@ -46,14 +46,14 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Destroy(g2,REASON_EFFECT)
 	end
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 or Duel.GetLocationCount(1-tp,LOCATION_MZONE)<=0
-		or not Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0,TYPES_TOKEN,0,800,2,RACE_WANDERER,ATTRIBUTE_LIGHT) then return end
+		or not Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0,TYPES_TOKEN,0,800,2,RACE_FAIRY,ATTRIBUTE_LIGHT) then return end
 	for i=0,1 do
 		local token=Duel.CreateToken(tp,id+1)
 		Duel.SpecialSummonStep(token,0,tp,math.abs(i-tp),false,false,POS_FACEUP_DEFENSE)
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_ADD_TYPE)
-		e1:SetValue(TYPE_ACTIONAL+TYPE_CONTINUOUS)
+		e1:SetValue(TYPE_SPELL+TYPE_CONTINUOUS)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		token:RegisterEffect(e1,true)
 		local e2=Effect.CreateEffect(e:GetHandler())

@@ -39,9 +39,9 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP_ATTACK)>0
-		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,1,nil,c:GetAttack())
+		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,1,nil,c:GetAttack())
 		and Duel.SelectYesNo(tp,aux.Stringid(21686473,1)) then
-		local atk=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_REST,0,1,1,nil,c:GetAttack()):GetFirst():GetAttack()
+		local atk=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil,c:GetAttack()):GetFirst():GetAttack()
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_SET_ATTACK_FINAL)

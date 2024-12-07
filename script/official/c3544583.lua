@@ -4,6 +4,6 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion Summon
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsType,TYPE_NORMAL),2)
 end

@@ -22,7 +22,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.fextra(exc)
 	return function(e,tp,mg)
-		return Duel.GetMatchingGroup(Card.IsAbleToRest,tp,LOCATION_HAND|LOCATION_MZONE|LOCATION_DECK,0,nil),s.fcheck(exc)
+		return Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,LOCATION_HAND|LOCATION_MZONE|LOCATION_DECK,0,nil),s.fcheck(exc)
 	end
 end
 function s.fcheckmatfilter(c,fc,tp)

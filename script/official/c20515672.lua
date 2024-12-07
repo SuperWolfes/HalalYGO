@@ -1,9 +1,9 @@
 --Ｓ－Ｆｏｒｃｅ ナイトチェイサー
---S-Fcoree Nightchaser
+--S-Force Nightchaser
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Link Summon procedure
 	Link.AddProcedure(c,s.matfilter,1,1)
 	--Limit attack target selection
@@ -18,9 +18,9 @@ function s.initial_effect(c)
 	e1b:SetRange(LOCATION_MZONE)
 	e1b:SetLabelObject(e1a)
 	e1b:SetTargetRange(0,LOCATION_MZONE)
-	e1b:SetTarget(aux.SFcoreeTarget)
+	e1b:SetTarget(aux.SForceTarget)
 	c:RegisterEffect(e1b)
-	--Shuffle 1 "S-Fcoree" monster into the Deck and Special Summon banished "S-Fcoree" monster
+	--Shuffle 1 "S-Force" monster into the Deck and Special Summon banished "S-Force" monster
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TODECK+CATEGORY_SPECIAL_SUMMON)
@@ -35,15 +35,15 @@ function s.initial_effect(c)
 	e2:SetOperation(s.tdop)
 	c:RegisterEffect(e2)
 end
-s.listed_series={SET_S_FCOREE}
+s.listed_series={SET_S_FORCE}
 function s.matfilter(c,lc,stype,tp)
-	return c:IsSetCard(SET_S_FCOREE,lc,stype,tp) and not c:IsType(TYPE_LINK,lc,stype,tp)
+	return c:IsSetCard(SET_S_FORCE,lc,stype,tp) and not c:IsType(TYPE_LINK,lc,stype,tp)
 end
 function s.atlimit(e,c)
 	return e:GetHandler():GetColumnGroup():IsContains(c)
 end
 function s.tdfilter(c)
-	return c:IsSetCard(SET_S_FCOREE) and c:IsFaceup() and c:IsAbleToDeck()
+	return c:IsSetCard(SET_S_FORCE) and c:IsFaceup() and c:IsAbleToDeck()
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and s.tdfilter(chkc) end
@@ -54,7 +54,7 @@ function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REMOVED)
 end
 function s.spfilter(c,e,tp)
-	return c:IsSetCard(SET_S_FCOREE) and c:IsFaceup() and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsSetCard(SET_S_FORCE) and c:IsFaceup() and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()

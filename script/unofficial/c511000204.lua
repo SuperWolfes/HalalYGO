@@ -1,5 +1,5 @@
 --魔封印の宝札
---Card of Actional Containment
+--Card of Spell Containment
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -39,7 +39,7 @@ function s.initial_effect(c)
 	end)
 end
 function s.checkop1(e,tp,eg,ep,ev,re,r,rp)
-	if re:IsActiveType(TYPE_ACTIONAL) then
+	if re:IsActiveType(TYPE_SPELL) then
 		Duel.RegisterFlagEffect(rp,id,RESET_PHASE+PHASE_END,0,1)
 	end
 end
@@ -94,7 +94,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	aux.RegisterClientHint(c,nil,tp,1,0,aux.Stringid(id,0),nil)
 end
 function s.aclimit(e,re,tp)
-	return re:GetHandler():IsActional()
+	return re:GetHandler():IsSpell()
 end
 function s.sumlimit(e,c,sump,sumtype,sumpos,targetp)
 	return (sumpos&POS_FACEDOWN)~=0

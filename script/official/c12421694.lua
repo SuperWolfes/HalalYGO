@@ -3,7 +3,7 @@
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Can only Special Summon "Sky Striker Ace - Kaina" once per turn
 	c:SetSPSummonOnce(id)
 	--Link Summon procedure
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.natg)
 	e1:SetOperation(s.naop)
 	c:RegisterEffect(e1)
-	--Gain 100 LP each time you activate a "Sky Striker" Actional or effect
+	--Gain 100 LP each time you activate a "Sky Striker" Spell or effect
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
@@ -60,7 +60,7 @@ function s.naop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.lpop(e,tp,eg,ep,ev,re,r,rp)
-	if re:IsActionalEffect() and rp==tp and re:GetHandler():IsSetCard(SET_SKY_STRIKER) then
+	if re:IsSpellEffect() and rp==tp and re:GetHandler():IsSetCard(SET_SKY_STRIKER) then
 		Duel.Hint(HINT_CARD,0,id)
 		Duel.Recover(tp,100,REASON_EFFECT)
 	end

@@ -26,7 +26,7 @@ end
 function s.target(e,tp,eg,ev,ep,re,r,rp,chk)
 	local a=Duel.GetAttacker()
 	local d=Duel.GetAttackTarget()
-	if chk==0 then return a and a:GetControler() and d==nil and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.GetLocationCount(1-tp,LOCATION_MZONE)>1 and Duel.IsExistingMatchingCard(s.filter1,tp,LOCATION_HAND,0,1,nil,e,tp) and Duel.IsExistingMatchingCard(s.filter2,tp,0,0x13,1,nil,e,tp,a) and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) end
+	if chk==0 then return a and a:GetControler() and d==nil and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.GetLocationCount(1-tp,LOCATION_MZONE)>1 and Duel.IsExistingMatchingCard(s.filter1,tp,LOCATION_HAND,0,1,nil,e,tp) and Duel.IsExistingMatchingCard(s.filter2,tp,0,0x13,1,nil,e,tp,a) and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) end
 	Duel.SetTargetCard(a)
 end
 function s.operation(e,tp,eg,ev,ep,re,r,rp)
@@ -34,7 +34,7 @@ function s.operation(e,tp,eg,ev,ep,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	local tg=Group.CreateGroup()
 	tg:AddCard(tc)
-	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 or Duel.GetLocationCount(1-tp,LOCATION_MZONE)<=1 or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
+	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 or Duel.GetLocationCount(1-tp,LOCATION_MZONE)<=1 or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
 	local sg1=Duel.GetMatchingGroup(s.filter1,tp,LOCATION_HAND,0,nil,e,tp)
 	local sg2=Duel.GetMatchingGroup(s.filter2,tp,0,0x13,nil,e,tp,tc)
 	if #sg1==0 or #sg2<=1 then return end

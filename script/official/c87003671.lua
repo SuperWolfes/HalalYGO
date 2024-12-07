@@ -1,10 +1,10 @@
 --影霊依の舞巫女 エミリア
---Emilia, Dance Helperess of the Nekroz
+--Emilia, Dance Priestess of the Nekroz
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	--If you Locked Summon exactly 1 "Nekroz" Locked Monster with a card effect that requires use of monsters, this card you control can be used as the entire Tribute
-	local e1=Locked.AddWholeLevelTribute(c,aux.FilterBoolFunction(Card.IsSetCard,SET_NEKROZ))
+	--If you Ritual Summon exactly 1 "Nekroz" Ritual Monster with a card effect that requires use of monsters, this card you control can be used as the entire Tribute
+	local e1=Ritual.AddWholeLevelTribute(c,aux.FilterBoolFunction(Card.IsSetCard,SET_NEKROZ))
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e1:SetRange(LOCATION_MZONE)
 	--Special Summon this card from your hand
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
-	--Add 1 "Nekroz" Locked Monster or 1 "Nekroz" Actional from your Deck to your hand
+	--Add 1 "Nekroz" Ritual Monster or 1 "Nekroz" Spell from your Deck to your hand
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND)
@@ -38,7 +38,7 @@ function s.spconfilter(c)
 	return c:IsRace(RACE_WARRIOR) and c:IsSetCard(SET_NEKROZ) and c:IsFaceup()
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(s.spconfilter,tp,LOCATION_MZONE|LOCATION_REST,0,1,nil)
+	return Duel.IsExistingMatchingCard(s.spconfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,1,nil)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -53,7 +53,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.thfilter(c)
-	return c:IsSetCard(SET_NEKROZ) and (c:IsLockedMonster() or c:IsActional()) and c:IsAbleToHand()
+	return c:IsSetCard(SET_NEKROZ) and (c:IsRitualMonster() or c:IsSpell()) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

@@ -5,10 +5,10 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before awaking
+	--Must be properly summoned before reviving
 	Link.AddProcedure(c,s.matfilter,2,2)
 	--Link summon procedure
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--If your cyberse monster battles, negate all other card effects on the field, also use original ATK/DEF
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e1:SetCondition(s.condition)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
-	--If sent to RP as link material, that link monster can make a second attack
+	--If sent to GY as link material, that link monster can make a second attack
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_BE_MATERIAL)
@@ -134,7 +134,7 @@ function s.disop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()
-	return tc:IsLocation(LOCATION_REST) and tc:IsMonster() and not tc:IsPreviousControler(tp)
+	return tc:IsLocation(LOCATION_GRAVE) and tc:IsMonster() and not tc:IsPreviousControler(tp)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -146,7 +146,7 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Damage(p,d,REASON_EFFECT)
 end
 function s.matcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_REST)
+	return e:GetHandler():IsLocation(LOCATION_GRAVE)
 		and r & REASON_LINK == REASON_LINK and e:GetHandler():GetReasonCard():IsLinkMonster()
 end
 function s.matop(e,tp,eg,ep,ev,re,r,rp)

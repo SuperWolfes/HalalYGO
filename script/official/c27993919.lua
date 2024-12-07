@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	-- Pendulum procedure
 	Pendulum.AddProcedure(c)
-	-- Prevent the activation of Actional/Traps or monster effects when you Pendulum Summon
+	-- Prevent the activation of Spell/Traps or monster effects when you Pendulum Summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e1:SetRange(LOCATION_PZONE)
@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
-	-- Prevent the activation of Actional/Traps or monster effects when "Solfachord" monsters attack
+	-- Prevent the activation of Spell/Traps or monster effects when "Solfachord" monsters attack
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e3:SetCode(EVENT_ATTACK_ANNOUNCE)
@@ -41,7 +41,7 @@ function s.sucop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.chainlm(e,rp,tp)
-	return tp==rp or (e:IsActionalTrapEffect() and not e:IsHasType(EFFECT_TYPE_ACTIVATE))
+	return tp==rp or (e:IsSpellTrapEffect() and not e:IsHasType(EFFECT_TYPE_ACTIVATE))
 end
 function s.cfilter(c,e,tp)
 	return c:IsSetCard(SET_SOLFACHORD) and c:IsType(TYPE_PENDULUM) and c:IsReleasableByEffect()
@@ -88,5 +88,5 @@ function s.actcon(e)
 	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsOddScale),e:GetHandlerPlayer(),LOCATION_PZONE,0,1,nil)
 end
 function s.actlimit(e,re,tp)
-	return re:IsActionalTrapEffect()
+	return re:IsSpellTrapEffect()
 end

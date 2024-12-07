@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e3:SetTarget(s.thtg)
 	e3:SetOperation(s.thop)
 	c:RegisterEffect(e3)
-	--Special Summon 1 "Noble Knight" monster from your Actional & Trap Zone
+	--Special Summon 1 "Noble Knight" monster from your Spell & Trap Zone
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_SPECIAL_SUMMON)

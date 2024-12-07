@@ -14,5 +14,5 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_SKULL_SERVANT,36021814}
 function s.val(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsCode,c:GetControler(),LOCATION_REST,0,nil,CARD_SKULL_SERVANT,36021814)*1000
+	return Duel.GetMatchingGroupCount(Card.IsCode,c:GetControler(),LOCATION_GRAVE,0,nil,CARD_SKULL_SERVANT,36021814)*1000
 end

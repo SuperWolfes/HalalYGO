@@ -16,10 +16,10 @@ function s.initial_effect(c)
 	e1:SetTarget(s.cttg)
 	e1:SetOperation(s.ctop)
 	c:RegisterEffect(e1)
-	--Avoid damanced
+	--Avoid damage
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
-	e3:SetCode(EFFECT_AVOID_BATTLE_DAMANCED)
+	e3:SetCode(EFFECT_AVOID_BATTLE_DAMAGE)
 	e3:SetValue(1)
 	c:RegisterEffect(e3)
 	--Give control to the opponent
@@ -34,7 +34,7 @@ function s.initial_effect(c)
 	e4:SetTarget(s.cttg2)
 	e4:SetOperation(s.ctop2)
 	c:RegisterEffect(e4)
-	--Destroy Actional/Trap
+	--Destroy Spell/Trap
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(id,2))
 	e5:SetCategory(CATEGORY_DESTROY)
@@ -85,7 +85,7 @@ function s.ctop2(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.desfilter(c)
-	return c:IsFacedown() and c:IsActional() and c:IsSetCard(0x20ec)
+	return c:IsFacedown() and c:IsSpell() and c:IsSetCard(0x20ec)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

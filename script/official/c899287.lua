@@ -1,5 +1,5 @@
 --怪鳥グライフ
---Glife the Illusion Bird
+--Glife the Phantom Bird
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
@@ -31,7 +31,7 @@ s.listed_names={CARD_STROMBERG}
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsDiscardable() end
-	Duel.SendtoRest(c,REASON_COST+REASON_DISCARD)
+	Duel.SendtoGrave(c,REASON_COST+REASON_DISCARD)
 end
 function s.thfilter(c)
 	return c:IsCode(CARD_STROMBERG) and c:IsAbleToHand()

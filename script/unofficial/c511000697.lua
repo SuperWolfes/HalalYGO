@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e1:SetCondition(s.atkcon)
 	e1:SetValue(s.atkval)
 	c:RegisterEffect(e1)
-	--Send this card to the RP to prevent battle mismatching
+	--Send this card to the GY to prevent battle destruction
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_EQUIP)
 	e2:SetCode(EFFECT_DESTROY_REPLACE)
@@ -36,7 +36,7 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	Duel.SendtoRest(c,REASON_EFFECT|REASON_REPLACE)
+	Duel.SendtoGrave(c,REASON_EFFECT|REASON_REPLACE)
 	if Duel.GetTurnPlayer()==tp and Duel.IsBattlePhase() then
 		if Duel.IsExistingMatchingCard(Card.IsFaceup,tp,0,LOCATION_MZONE,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATKDEF)

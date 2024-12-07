@@ -21,9 +21,9 @@ function s.tdfilter(c)
 	return c:IsMonster() and c:IsAbleToDeck()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(s.tdfilter,tp,0,LOCATION_REST,nil)
+	local g=Duel.GetMatchingGroup(s.tdfilter,tp,0,LOCATION_GRAVE,nil)
 	if chk==0 then return #g>1 and g:IsExists(Card.IsType,1,nil,TYPE_NORMAL) end
-	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,2,1-tp,LOCATION_REST)
+	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,2,1-tp,LOCATION_GRAVE)
 end
 function s.rescon(sg,e,tp,mg)
 	return sg:IsExists(Card.IsType,1,nil,TYPE_NORMAL)
@@ -32,7 +32,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	-- Requirement
 	if Duel.DiscardDeck(tp,1,REASON_COST)==0 then return end
 	--Effect:
-	local g=Duel.GetMatchingGroup(s.tdfilter,tp,0,LOCATION_REST,nil)
+	local g=Duel.GetMatchingGroup(s.tdfilter,tp,0,LOCATION_GRAVE,nil)
 	if #g==0 then return end
 	local sg=aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,1,tp,HINTMSG_TODECK)
 	if #sg>0 then

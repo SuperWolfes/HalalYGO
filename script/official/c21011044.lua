@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	--fusion
 	local e2=Fusion.CreateSummonEff({handler=c,fusfilter=aux.FilterBoolFunction(Card.IsSetCard,0x9d),matfilter=Fusion.OnFieldMat(Card.IsAbleToRemove),
 									extrafil=s.fextra,extraop=Fusion.BanishMaterial,stage2=s.sstage2,desc=aux.Stringid(id,0),extratg=s.extratarget})
-	e2:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON+CATEGORY_TOREST)
+	e2:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON+CATEGORY_TOGRAVE)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetHintTiming(0,TIMING_MAIN_END)
 	e2:SetCountLimit(1,id)
@@ -26,7 +26,7 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.fextra(e,tp,mg)
 	if not Duel.IsPlayerAffectedByEffect(tp,69832741) then
-		return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRemove),tp,LOCATION_REST,0,nil)
+		return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRemove),tp,LOCATION_GRAVE,0,nil)
 	end
 end
 function s.sstage2(e,tc,tp,sg,chk)
@@ -44,16 +44,16 @@ function s.sstage2(e,tc,tp,sg,chk)
 			local tg=Duel.SelectMatchingCard(tp,s.sameatt,tp,0,LOCATION_MZONE,1,1,nil,att)
 			if #tg>0 then
 				Duel.HintSelection(tg)
-				Duel.SendtoRest(tg,REASON_EFFECT)
+				Duel.SendtoGrave(tg,REASON_EFFECT)
 			end
 		end
 	end
 end
 function s.sameatt(c,att)
-	return c:IsFaceup() and c:IsAttribute(att) and c:IsAbleToRest()
+	return c:IsFaceup() and c:IsAttribute(att) and c:IsAbleToGrave()
 end
 function s.extratarget(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,tp,LOCATION_MZONE+LOCATION_REST)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,nil,1,1-tp,LOCATION_MZONE)
+	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,tp,LOCATION_MZONE+LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,nil,1,1-tp,LOCATION_MZONE)
 end

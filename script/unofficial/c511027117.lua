@@ -1,9 +1,9 @@
 --ゴルゴニック・ガーディアン (Anime)
---Jonjoric Guardian (Anime)
+--Gorgonic Guardian (Anime)
 --Scripted by the Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Xyz Summon procedure
 	Xyz.AddProcedure(c,nil,3,2)
 	--Destroy monsters with 0 ATK

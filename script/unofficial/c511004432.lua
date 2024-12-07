@@ -37,12 +37,12 @@ function s.cop(e,tp,eg,ev,ep,re,r,rp)
 	end
 end
 function s.cfilter(c)
-	return c:IsActionalTrap() and c:IsAbleToRestAsCost()
+	return c:IsSpellTrap() and c:IsAbleToGraveAsCost()
 end
 function s.bcost(e,tp,eg,ev,ep,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end
 	local tg=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND,0,1,1,nil)
-	Duel.SendtoRest(tg,REASON_COST)
+	Duel.SendtoGrave(tg,REASON_COST)
 end
 function s.bcon(e,tp,eg,ev,ep,re,r,rp)
 	local a=Duel.GetAttacker()

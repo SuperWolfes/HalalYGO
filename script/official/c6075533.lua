@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_DISABLE)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_CHAINING)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(s.discon)
 	e2:SetCost(aux.bfgcost)
@@ -41,11 +41,11 @@ function s.bantg(e,tp,eg,ep,ev,re,r,rp,chk)
 		local dnc=math.min(g:GetClassCount(Card.GetCode),3)
 		if dnc==0 then return false end
 		local b1=dnc>0 and s.bancheck(tp,LOCATION_ONFIELD)
-		local b2=dnc>1 and s.bancheck(tp,LOCATION_REST)
+		local b2=dnc>1 and s.bancheck(tp,LOCATION_GRAVE)
 		local b3=dnc>2 and s.bancheck(tp,LOCATION_HAND)
 		return b1 or b2 or b3
 	end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_REMOVE,nil,1,1-tp,LOCATION_ONFIELD+LOCATION_REST+LOCATION_HAND)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_REMOVE,nil,1,1-tp,LOCATION_ONFIELD+LOCATION_GRAVE+LOCATION_HAND)
 end
 function s.banlocop(tp,loc,gf)
 	local g=Duel.GetMatchingGroup(Card.IsAbleToRemove,tp,0,loc,nil)
@@ -67,7 +67,7 @@ function s.banop(e,tp,eg,ep,ev,re,r,rp)
 	end
 	if dnc>1 then
 		if break_chk>0 then Duel.BreakEffect() end
-		break_chk=s.banlocop(tp,LOCATION_REST,Group.Select)
+		break_chk=s.banlocop(tp,LOCATION_GRAVE,Group.Select)
 	end
 	if dnc>2 then
 		if break_chk>0 then Duel.BreakEffect() end

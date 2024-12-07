@@ -34,15 +34,15 @@ function s.pfilter(c)
 end
 function s.value(e,c)
 	local tp=e:GetHandlerPlayer()
-	local g=Duel.GetMatchingGroupCount(s.pfilter,tp,LOCATION_ONFIELD+LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroupCount(s.pfilter,tp,LOCATION_ONFIELD+LOCATION_GRAVE,0,nil)
 	return g*900
 end
 --Sarcophagus functions
 function s.tgfilter(c,tp)
-	return c:IsLevel(2) and c:IsRace(RACE_TOXIC) and c:IsAbleToRestAsCost() and Duel.IsExistingMatchingCard(s.sfilter,tp,LOCATION_DECK+LOCATION_REST+LOCATION_REMOVED,0,1,nil)
+	return c:IsLevel(2) and c:IsRace(RACE_ZOMBIE) and c:IsAbleToGraveAsCost() and Duel.IsExistingMatchingCard(s.sfilter,tp,LOCATION_DECK+LOCATION_GRAVE+LOCATION_REMOVED,0,1,nil)
 end
 function s.sfilter(c)
-	return c:IsCode(31076103,4081094,78697395) and not c:IsUnliked() and (c:IsFaceup() or c:IsLocation(LOCATION_REST+LOCATION_DECK))
+	return c:IsCode(31076103,4081094,78697395) and not c:IsForbidden() and (c:IsFaceup() or c:IsLocation(LOCATION_GRAVE+LOCATION_DECK))
 end
 function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 	return aux.CanActivateSkill(tp) and Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil,tp) and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
@@ -50,11 +50,11 @@ end
 function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then return end
 	Duel.Hint(HINT_CARD,0,id)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil,tp)
-	if #g>0 and Duel.SendtoRest(g,REASON_COST)>0 then
+	if #g>0 and Duel.SendtoGrave(g,REASON_COST)>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,0))
-		local sg=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.sfilter),tp,LOCATION_DECK+LOCATION_REST+LOCATION_REMOVED,0,1,1,nil)
+		local sg=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.sfilter),tp,LOCATION_DECK+LOCATION_GRAVE+LOCATION_REMOVED,0,1,1,nil)
 		if #sg>0 then
 			Duel.MoveToField(sg:GetFirst(),tp,tp,LOCATION_SZONE,POS_FACEUP,true)
 		end

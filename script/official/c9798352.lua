@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	local e2=e1:Clone()
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e2)
-	--Banish 1 Trap from the RP to gain 1 Level
+	--Banish 1 Trap from the GY to gain 1 Level
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_REMOVE)
@@ -60,10 +60,10 @@ function s.bgfilter(c)
 	return c:IsTrap() and c:IsAbleToRemove()
 end
 function s.bgtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST) and s.bgfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.bgfilter,tp,LOCATION_REST,LOCATION_REST,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and s.bgfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.bgfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectTarget(tp,s.bgfilter,tp,LOCATION_REST,LOCATION_REST,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.bgfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,1,0,0)
 end
 function s.bgop(e,tp,eg,ep,ev,re,r,rp)

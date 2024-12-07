@@ -1,12 +1,12 @@
 --ＢＦ－毒風のシムーン
---Blackwing - Sihorizon the Poison Wind
+--Blackwing - Simoon the Poison Wind
 --Scripted by ahtelel
 local s,id=GetID()
 function s.initial_effect(c)
-	--Place 1 "Black Whirlwind" from your Deck face-up in your Actional & Trap Zone
+	--Place 1 "Black Whirlwind" from your Deck face-up in your Spell & Trap Zone
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_SUMMON+CATEGORY_TOREST)
+	e1:SetCategory(CATEGORY_SUMMON+CATEGORY_TOGRAVE)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_HAND)
 	e1:SetCountLimit(1,id)
@@ -29,7 +29,7 @@ function s.plcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.plfilter(c,tp)
-	return c:IsCode(91351370) and not c:IsUnliked() and c:CheckUniqueOnField(tp)
+	return c:IsCode(91351370) and not c:IsForbidden() and c:CheckUniqueOnField(tp)
 end
 function s.pltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -43,11 +43,11 @@ function s.pltg(e,tp,eg,ep,ev,re,r,rp,chk)
 		c:RegisterEffect(e1)
 		local summonable=c:IsSummonable(true,e1)
 		e1:Reset()
-		return (summonable or c:IsAbleToRest()) and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
+		return (summonable or c:IsAbleToGrave()) and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
 			and Duel.IsExistingMatchingCard(s.plfilter,tp,LOCATION_DECK,0,1,nil,tp)
 	end
 	Duel.SetPossibleOperationInfo(0,CATEGORY_SUMMON,c,1,tp,0)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,c,1,tp,0)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,c,1,tp,0)
 end
 function s.ntcon(e,c,minc)
 	if c==nil then return true end
@@ -71,7 +71,7 @@ function s.plop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
 	local tc=Duel.SelectMatchingCard(tp,s.plfilter,tp,LOCATION_DECK,0,1,1,nil,tp):GetFirst()
 	if tc and Duel.MoveToField(tc,tp,tp,LOCATION_SZONE,POS_FACEUP,true) then
-		--Send it to the RP during the End Phase and take 1000 damage
+		--Send it to the GY during the End Phase and take 1000 damage
 		aux.DelayedOperation(tc,PHASE_END,id,e,tp,s.gyop,nil,0,0,aux.Stringid(id,2))
 		if not c:IsRelateToEffect(e) then return end
 		--Can be Normal Summoned without Tributes
@@ -82,7 +82,7 @@ function s.plop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetCondition(s.ntcon)
 		e1:SetReset(RESET_EVENT|RESETS_STANDARD|RESET_PHASE|PHASE_END)
 		c:RegisterEffect(e1)
-		local b1=c:IsAbleToRest()
+		local b1=c:IsAbleToGrave()
 		local b2=c:IsSummonable(true,e1)
 		if not (b1 or b2) then
 			e1:Reset()
@@ -93,13 +93,13 @@ function s.plop(e,tp,eg,ep,ev,re,r,rp)
 			{b2,aux.Stringid(id,4)})
 		Duel.BreakEffect()
 		if op==1 then
-			Duel.SendtoRest(c,REASON_EFFECT)
+			Duel.SendtoGrave(c,REASON_EFFECT)
 		else
 			Duel.Summon(tp,c,true,e1)
 		end
 	end
 end
 function s.gyop(ag,e,tp,eg,ep,ev,re,r,rp)
-	Duel.SendtoRest(ag,REASON_EFFECT)
+	Duel.SendtoGrave(ag,REASON_EFFECT)
 	Duel.Damage(tp,1000,REASON_EFFECT)
 end

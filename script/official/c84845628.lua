@@ -26,10 +26,10 @@ function s.initial_effect(c)
 end
 function s.adval(e,c)
 	local tp=c:GetControler()
-	return Duel.GetMatchingGroupCount(Card.IsType,tp,LOCATION_REST,0,nil,TYPE_TUNER)*100
+	return Duel.GetMatchingGroupCount(Card.IsType,tp,LOCATION_GRAVE,0,nil,TYPE_TUNER)*100
 end
 function s.cfilter(c)
-	return c:IsType(TYPE_TUNER) and c:IsAbleToRestAsCost()
+	return c:IsType(TYPE_TUNER) and c:IsAbleToGraveAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end

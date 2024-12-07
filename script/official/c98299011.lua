@@ -1,5 +1,5 @@
 --ホーリー・エルフの祝福
---Gift of The Vague Elf
+--Gift of The Mystical Elf
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

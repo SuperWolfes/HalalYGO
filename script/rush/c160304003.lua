@@ -34,7 +34,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetValue(2000)
 	e1:SetReset(RESETS_STANDARD_PHASE_END)
 	c:RegisterEffect(e1)
-	local g=Duel.GetMatchingGroup(Card.IsMonster,tp,0,LOCATION_REST,nil)
+	local g=Duel.GetMatchingGroup(Card.IsMonster,tp,0,LOCATION_GRAVE,nil)
 	if #g>=8 then
 		--Cannot be destroyed by opponent's trap
 		local e1=Effect.CreateEffect(c)

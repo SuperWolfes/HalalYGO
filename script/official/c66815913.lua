@@ -2,7 +2,7 @@
 --Shinobird Crane
 local s,id=GetID()
 function s.initial_effect(c)
-	Guardian.AddProcedure(c,EVENT_SUMMON_SUCCESS,EVENT_FLIP)
+	Spirit.AddProcedure(c,EVENT_SUMMON_SUCCESS,EVENT_FLIP)
 	--Cannot be Special Summoned
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -26,9 +26,9 @@ function s.initial_effect(c)
 	e3:SetCode(EVENT_SUMMON_SUCCESS)
 	c:RegisterEffect(e3)
 end
-s.listed_card_types={TYPE_GUARDIAN}
+s.listed_card_types={TYPE_SPIRIT}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return not eg:IsContains(e:GetHandler()) and eg:IsExists(aux.FaceupFilter(Card.IsType,TYPE_GUARDIAN),1,nil)
+	return not eg:IsContains(e:GetHandler()) and eg:IsExists(aux.FaceupFilter(Card.IsType,TYPE_SPIRIT),1,nil)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,1) end

@@ -3,7 +3,7 @@
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send the top 3 cards of your Deck to the RP
+	--Send the top 3 cards of your Deck to the GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DECKDES)
@@ -26,7 +26,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DECKDES,nil,0,tp,3)
 end
 function s.cfilter(c,e,tp)
-	return c:IsLocation(LOCATION_REST) and c:IsMonster() and c:IsRace(RACE_CYBERSE) and c:IsLevelAbove(7)
+	return c:IsLocation(LOCATION_GRAVE) and c:IsMonster() and c:IsRace(RACE_CYBERSE) and c:IsLevelAbove(7)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)

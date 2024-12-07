@@ -19,15 +19,15 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ct=Duel.GetFieldGroupCount(tp,0xe,0)
 	local g=Group.CreateGroup()
 	if ct>=6 then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 		local sg=Duel.SelectMatchingCard(tp,nil,tp,0xe,0,ct-5,ct-5,e:GetHandler())
 		g:Merge(sg)
 	end
 	ct=Duel.GetFieldGroupCount(1-tp,0xe,0)
 	if ct>=6 then
-		Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOREST)
+		Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOGRAVE)
 		local sg=Duel.SelectMatchingCard(1-tp,nil,1-tp,0xe,0,ct-5,ct-5,e:GetHandler())
 		g:Merge(sg)
 	end
-	Duel.SendtoRest(g,REASON_EFFECT)
+	Duel.SendtoGrave(g,REASON_EFFECT)
 end

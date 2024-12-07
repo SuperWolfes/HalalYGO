@@ -13,21 +13,21 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-	--Register the fact it was sent from field to RP
+	--Register the fact it was sent from field to GY
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	e2:SetCode(EVENT_TO_REST)
+	e2:SetCode(EVENT_TO_GRAVE)
 	e2:SetCondition(s.regcon)
 	e2:SetOperation(s.regop)
 	c:RegisterEffect(e2)
-	--Search 1 "Polymerization"/"Fusion" Actional, or 1 "Parasite Fusioner"
+	--Search 1 "Polymerization"/"Fusion" Spell, or 1 "Parasite Fusioner"
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e3:SetCode(EVENT_PHASE+PHASE_END)
-	e3:SetRange(LOCATION_REST)
+	e3:SetRange(LOCATION_GRAVE)
 	e3:SetCountLimit(1,{id,1})
 	e3:SetCondition(s.thcon)
 	e3:SetTarget(s.thtg)
@@ -37,7 +37,7 @@ end
 s.listed_names={6205579}
 s.listed_series={0x46}
 function s.spfilter(c,e,tp)
-	return c:IsLevelBelow(4) and c:IsRace(RACE_WANDERER|RACE_MENTOR|RACE_WINGEDBEAST|RACE_BEASTWARRIOR) 
+	return c:IsLevelBelow(4) and c:IsRace(RACE_FAIRY|RACE_SPELLCASTER|RACE_WINGEDBEAST|RACE_BEASTWARRIOR) 
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -86,7 +86,7 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetFlagEffect(id)>0
 end
 function s.thfilter2(c)
-	return ((c:IsSetCard(0x46) and c:IsActional()) or c:IsCode(6205579)) and c:IsAbleToHand()
+	return ((c:IsSetCard(0x46) and c:IsSpell()) or c:IsCode(6205579)) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter2,tp,LOCATION_DECK,0,1,nil) end

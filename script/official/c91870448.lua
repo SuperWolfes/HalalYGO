@@ -1,5 +1,5 @@
 --サイコ・ギガサイバー
---Mental Megacyber
+--Psychic Megacyber
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
 	e1:SetCondition(s.spcon)
 	c:RegisterEffect(e1)
-	--Place the opponent's Effect Monster that this card attacked face-up in their Actional & Trap Zone as a Continuous Trap
+	--Place the opponent's Effect Monster that this card attacked face-up in their Spell & Trap Zone as a Continuous Trap
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
@@ -30,7 +30,7 @@ function s.spcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
 	return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.GetMatchingGroupCount(Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,nil)>Duel.GetMatchingGroupCount(Card.IsActionalTrap,tp,LOCATION_ONFIELD,0,nil)
+		and Duel.GetMatchingGroupCount(Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,nil)>Duel.GetMatchingGroupCount(Card.IsSpellTrap,tp,LOCATION_ONFIELD,0,nil)
 end
 function s.pltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local d=Duel.GetAttackTarget()
@@ -42,7 +42,7 @@ function s.plop(e,tp,eg,ep,ev,re,r,rp)
 	local d=Duel.GetAttackTarget()
 	if d:IsRelateToBattle() and d:IsControler(1-tp) and d:IsRelateToEffect(e) and not d:IsImmuneToEffect(e) then
 		if Duel.GetLocationCount(1-tp,LOCATION_SZONE)==0 then
-			Duel.SendtoRest(d,REASON_RULE,nil,PLAYER_NONE)
+			Duel.SendtoGrave(d,REASON_RULE,nil,PLAYER_NONE)
 		elseif Duel.MoveToField(d,tp,1-tp,LOCATION_SZONE,POS_FACEUP,d:IsMonsterCard()) then
 			--Treated as a Continuous Trap
 			local e1=Effect.CreateEffect(e:GetHandler())

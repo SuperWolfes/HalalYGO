@@ -1,7 +1,7 @@
 --上級魔術士の呪文詠唱
---Master Mentor's Incantation
+--Master Magician's Incantation
 --original script by Shad3
---Works perfectly for "EVENT_FREE_CHAIN" and "EVENT_CHAINING" actionals only
+--Works perfectly for "EVENT_FREE_CHAIN" and "EVENT_CHAINING" spells only
 local s,id=GetID()
 function s.initial_effect(c)
 	--Flag to avoid infinite loop
@@ -26,7 +26,7 @@ function s.flag_op(e,tp,eg,ep,ev,re,r,rp)
 	s['cstore_'..ch]={eg,ep,ev,re,r,rp}
 end
 function s.hnd_fil(c,e,tp,eg,ep,ev,re,r,rp)
-	if c:IsActional() and not c['no_react_ev'] then
+	if c:IsSpell() and not c['no_react_ev'] then
 	local te=c:GetActivateEffect()
 	if not te then return end
 	local cd=te:GetCondition()
@@ -96,8 +96,8 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ChangePosition(tc,POS_FACEUP)
 	end
 	Duel.Hint(HINT_CARD,0,tc:GetOriginalCode())
-	if not (tc:IsActional() and tc:IsType(TYPE_CONTINUOUS+TYPE_EQUIP)) then tc:CancelToRest(false) end
-	if not tc:IsActional() then return end
+	if not (tc:IsSpell() and tc:IsType(TYPE_CONTINUOUS+TYPE_EQUIP)) then tc:CancelToGrave(false) end
+	if not tc:IsSpell() then return end
 	tc:CreateEffectRelation(te)
 	if cs then cs(te,tp,neg,nep,nev,nre,nr,nrp,1) end
 	if tg then tg(te,tp,neg,nep,nev,nre,nr,nrp,1) end

@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	-- Reveal 3 "Abyss Script" Actionals
+	-- Reveal 3 "Abyss Script" Spells
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	e2:SetCondition(function(e) return e:GetHandler():IsSummonLocation(LOCATION_PZONE) end)
 	e2:SetOperation(s.revop)
 	c:RegisterEffect(e2)
-	-- Shuffle 1 "Abyss Script" Actional to the Deck
+	-- Shuffle 1 "Abyss Script" Spell to the Deck
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetCategory(CATEGORY_TODECK)
@@ -55,7 +55,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.revfilter(c)
-	return c:IsSetCard(SET_ABYSS_SCRIPT) and c:IsActional() and c:IsSSetable() and not c:IsPublic()
+	return c:IsSetCard(SET_ABYSS_SCRIPT) and c:IsSpell() and c:IsSSetable() and not c:IsPublic()
 end
 function s.revop(e,tp,eg,ep,ev,re,r,rp)
 	local owner=e:GetHandler():GetOwner()
@@ -70,15 +70,15 @@ function s.revop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.tdfilter(c)
-	return c:IsSetCard(SET_ABYSS_SCRIPT) and c:IsActional() and c:IsAbleToDeck()
+	return c:IsSetCard(SET_ABYSS_SCRIPT) and c:IsSpell() and c:IsAbleToDeck()
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_REST)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_GRAVE)
 end
 function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_REST,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 	if #g>0 then
 		Duel.HintSelection(g,true)
 		Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)

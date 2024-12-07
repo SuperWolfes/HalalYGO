@@ -1,5 +1,5 @@
 --Ｌマジマージ
---Lil' Maji Manced
+--Lil' Maji Mage
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -17,13 +17,13 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Gains ATK equal to the total Link Ratings of all Link Monsters in your RP x 400
+	--Gains ATK equal to the total Link Ratings of all Link Monsters in your GY x 400
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e2:SetCode(EFFECT_UPDATE_ATTACK)
 	e2:SetRange(LOCATION_MZONE)
-	e2:SetValue(function(e,c) return 400*Duel.GetMatchingGroup(Card.IsLinkMonster,e:GetHandlerPlayer(),LOCATION_REST,0,nil):GetSum(Card.GetLink) end)
+	e2:SetValue(function(e,c) return 400*Duel.GetMatchingGroup(Card.IsLinkMonster,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil):GetSum(Card.GetLink) end)
 	c:RegisterEffect(e2)
 end
 function s.spcfilter(c,tp)

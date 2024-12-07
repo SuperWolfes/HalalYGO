@@ -1,5 +1,5 @@
 --火轟嵐凰ヴォルカライズ・フェニックス
---Blazebolt Chemistorm Fenghuang Volcalize Bird
+--Blazebolt Chemistorm Fenghuang Volcalize Phoenix
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -27,7 +27,7 @@ function s.condition(e)
 	return e:GetHandler():IsMaximumMode()
 end
 function s.cfilter(c)
-	return (c:IsRace(RACE_PYRO) or c:IsAttribute(ATTRIBUTE_FIRE)) and c:IsAbleToRestAsCost()
+	return (c:IsRace(RACE_PYRO) or c:IsAttribute(ATTRIBUTE_FIRE)) and c:IsAbleToGraveAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end
@@ -35,9 +35,9 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	--Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND,0,1,1,nil)
-	if Duel.SendtoRest(g,REASON_COST)~=1 then return end
+	if Duel.SendtoGrave(g,REASON_COST)~=1 then return end
 	--Effect
 	Duel.Damage(1-tp,1000,REASON_EFFECT)
 	local e1=Effect.CreateEffect(c)

@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Xyz Summon procedure
 	Xyz.AddProcedure(c,nil,3,2)
 	--Special Summon 1 "Salamangreat" monster from your Deck
@@ -60,7 +60,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsSummonType(SUMMON_TYPE_XYZ) and c:IsLocation(LOCATION_REST) and r&REASON_LINK>0
+	return c:IsSummonType(SUMMON_TYPE_XYZ) and c:IsLocation(LOCATION_GRAVE) and r&REASON_LINK>0
 		and c:GetReasonCard():IsSetCard(SET_SALAMANGREAT)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

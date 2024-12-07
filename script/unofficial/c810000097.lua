@@ -30,7 +30,7 @@ function s.spcon(e,c)
 end
 function s.con(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsPreviousLocation(LOCATION_ONFIELD) or c:IsPreviousLocation(LOCATION_REST)
+	return c:IsPreviousLocation(LOCATION_ONFIELD) or c:IsPreviousLocation(LOCATION_GRAVE)
 end
 function s.filter(c)
 	return c:GetCode()==CARD_POLYMERIZATION and c:IsAbleToHand()

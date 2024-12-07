@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	--Make 1 Dragon "Galaxy" monster unaffected by other card effects and prevent battle mismatching
+	--Make 1 Dragon "Galaxy" monster unaffected by other card effects and prevent battle destruction
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)

@@ -1,10 +1,10 @@
 --Ａｉの儀式
---A.I.'s Locked
+--A.I.'s Ritual
 --Scripted by edo9300
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
-	local e1=Locked.CreateProc(c,RITPROC_GREATER,aux.FilterBoolFunction(Card.IsRace,RACE_CYBERSE),nil,nil,s.extrafil,nil,aux.FilterBoolFunction(Card.IsSetCard,0x135))
+	local e1=Ritual.CreateProc(c,RITPROC_GREATER,aux.FilterBoolFunction(Card.IsRace,RACE_CYBERSE),nil,nil,s.extrafil,nil,aux.FilterBoolFunction(Card.IsSetCard,0x135))
 	local tg=e1:GetTarget()
 	e1:SetTarget(function(e,tp,eg,ep,ev,re,r,rp,chk,...)
 					if chk==0 then
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 						end
 					end
 					if chk==1 and e:GetLabel()==1 then
-						Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,tp,LOCATION_REST)
+						Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,tp,LOCATION_GRAVE)
 					end
 					return tg(e,tp,eg,ep,ev,re,r,rp,chk,...)
 				end)
@@ -36,6 +36,6 @@ function s.mfilter(c)
 end
 function s.extrafil(e,tp,eg,ep,ev,re,r,rp,chk)
 	if e:GetLabel()==1 then
-		return Duel.GetMatchingGroup(s.mfilter,tp,LOCATION_REST,0,nil)
+		return Duel.GetMatchingGroup(s.mfilter,tp,LOCATION_GRAVE,0,nil)
 	end
 end

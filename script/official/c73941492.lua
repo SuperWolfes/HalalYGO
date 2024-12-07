@@ -1,11 +1,11 @@
 --調弦の魔術師
---Harmonizing Mentor
+--Harmonizing Magician
 
 local s,id=GetID()
 function s.initial_effect(c)
 	--Enable pendulum summon
 	Pendulum.AddProcedure(c)
-	--All your monsters gain 100 ATK/DEF for each "Mentor" pendulum monster in your face-up extra deck
+	--All your monsters gain 100 ATK/DEF for each "Magician" pendulum monster in your face-up extra deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_UPDATE_ATTACK)
@@ -37,7 +37,7 @@ function s.initial_effect(c)
 	local e6=e4:Clone()
 	e6:SetCode(EFFECT_XYZ_MAT_RESTRICTION)
 	c:RegisterEffect(e6)
-	--When pendulum summoned from hand, special summon 1 "Mentor" pendulum monster from deck
+	--When pendulum summoned from hand, special summon 1 "Magician" pendulum monster from deck
 	local e7=Effect.CreateEffect(c)
 	e7:SetDescription(aux.Stringid(id,0))
 	e7:SetCategory(CATEGORY_SPECIAL_SUMMON)

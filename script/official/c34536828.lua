@@ -32,7 +32,7 @@ function s.initial_effect(c)
 end
 --Negate an activated monster effect
 function s.filter(c)
-	return c:IsFaceup() and c:IsRace(RACE_TAINTED) and c:IsType(TYPE_FUSION) and c:IsLevelAbove(8)
+	return c:IsFaceup() and c:IsRace(RACE_FIEND) and c:IsType(TYPE_FUSION) and c:IsLevelAbove(8)
 end
 function s.discon(e,tp,eg,ep,ev,re,r,rp)
 	local rc=re:GetHandler()

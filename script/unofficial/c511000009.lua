@@ -1,8 +1,8 @@
 --デーモンズ・マタドール
---Archtainted Matador
+--Archfiend Matador
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Cannot attack
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)

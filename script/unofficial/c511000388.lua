@@ -1,5 +1,5 @@
 --封印獣ボア・ボーラン
---Unliked Beast Boa Bolan
+--Forbidden Beast Boa Bolan
 local s,id=GetID()
 function s.initial_effect(c)
 	--Destroy a monster that battles this card

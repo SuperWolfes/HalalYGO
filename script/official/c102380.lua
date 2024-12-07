@@ -1,8 +1,8 @@
 --溶岩魔神ラヴァ・ゴーレム
---Lava Gopal
+--Lava Golem
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Special Summon procedure
 	aux.AddLavaProcedure(c,2,POS_FACEUP,nil,0,aux.Stringid(id,0))
 	--Take 1000 damage

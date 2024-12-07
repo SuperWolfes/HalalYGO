@@ -13,12 +13,12 @@ function s.checkmat(tp,sg,fc)
 end
 function s.fextra(e,tp,mg)
 	local fusg=Duel.GetMatchingGroup(Fusion.OnFieldMat,tp,LOCATION_MZONE,0,nil)
-	local extrag=Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRest),tp,LOCATION_HAND,0,nil)
+	local extrag=Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToGrave),tp,LOCATION_HAND,0,nil)
 	fusg:Merge(extrag)
 	return fusg,s.checkmat
 end
 function s.cfilter(c)
-	return c:IsLocation(LOCATION_REST) and c:WasMaximumMode()
+	return c:IsLocation(LOCATION_GRAVE) and c:WasMaximumMode()
 end
 function s.stage2(e,tc,tp,mg,chk)
 	if chk==0 then

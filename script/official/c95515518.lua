@@ -1,10 +1,10 @@
 --月天気アルシエル
---The Weather Painter Horizonbow
+--The Weather Painter Moonbow
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
 	--Link Summon
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x109),3,3)
 	--Special Summon 1 of your banished "The Weather" monsters
 	local e1=Effect.CreateEffect(c)

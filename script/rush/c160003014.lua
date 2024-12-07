@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	-- Make 1 opponent monster lose 500 ATK
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_LEAVE_REST)
+	e1:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_LEAVE_GRAVE)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1)
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 end
 s.listed_names={76103675,160301014}
 function s.costfilter(c)
-	return c:IsMonster() and c:IsLevelBelow(4) and c:IsAbleToRestAsCost()
+	return c:IsMonster() and c:IsLevelBelow(4) and c:IsAbleToGraveAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil) end
@@ -35,7 +35,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	-- Requirement
 	local tg=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,1,nil)
-	if Duel.SendtoRest(tg,REASON_COST)==1 then
+	if Duel.SendtoGrave(tg,REASON_COST)==1 then
 		-- Effect
 		if c:IsRelateToEffect(e) and c:IsFaceup() then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
@@ -51,7 +51,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			end
 			-- Set cards
 			local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
-			local sg=Duel.GetMatchingGroup(s.sfilter,tp,LOCATION_REST,0,nil)
+			local sg=Duel.GetMatchingGroup(s.sfilter,tp,LOCATION_GRAVE,0,nil)
 			if ft>0 and #sg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 				Duel.BreakEffect()
 				local tg=aux.SelectUnselectGroup(sg,1,tp,1,ft,s.rescon,1,tp)

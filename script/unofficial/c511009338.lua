@@ -1,5 +1,5 @@
 --パラサイト・マジック
---Parasite Actional
+--Parasite Spell
 --fixed by MLD
 Duel.LoadScript("c420.lua")
 local s,id=GetID()
@@ -23,7 +23,7 @@ end
 function s.acfilter(c,e,tp,eg,ep,ev,re,r,rp,chain)
 	local te=c:GetActivateEffect()
 	if not te then return false end
-	if not c:IsActional() or not c:IsSSetable(true) then return false end
+	if not c:IsSpell() or not c:IsSSetable(true) then return false end
 	if not c:IsType(TYPE_FIELD) and Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then return false end
 	if c:IsHasEffect(EFFECT_CANNOT_TRIGGER) then return false end
 	local pre={Duel.GetPlayerEffect(tp,EFFECT_CANNOT_ACTIVATE)}
@@ -55,12 +55,12 @@ function s.acfilter(c,e,tp,eg,ep,ev,re,r,rp,chain)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local chain=Duel.GetCurrentChain()
-	if chkc then return chkc:IsLocation(LOCATION_REST) and s.acfilter(chkc,e,tp,eg,ep,ev,re,r,rp,chain) end
-	if chk==0 then return Duel.IsExistingTarget(s.acfilter,tp,LOCATION_REST,LOCATION_REST,1,nil,e,tp,eg,ep,ev,re,r,rp,chain) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and s.acfilter(chkc,e,tp,eg,ep,ev,re,r,rp,chain) end
+	if chk==0 then return Duel.IsExistingTarget(s.acfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,nil,e,tp,eg,ep,ev,re,r,rp,chain) end
 	chain=chain-1
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(511000770,1))
-	local g=Duel.SelectTarget(tp,s.acfilter,tp,LOCATION_REST,LOCATION_REST,1,1,nil,e,tp,eg,ep,ev,re,r,rp,chain)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,0,0)
+	local g=Duel.SelectTarget(tp,s.acfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,1,nil,e,tp,eg,ep,ev,re,r,rp,chain)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
@@ -71,10 +71,10 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			if Duel.IsDuelType(DUEL_1_FIELD) then
 				if fc then Duel.Destroy(fc,REASON_RULE) end
 				fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
-				if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
+				if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
 			else
 				fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
-				if fc and Duel.SendtoRest(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
+				if fc and Duel.SendtoGrave(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
 			end
 		end
 		Duel.SSet(tp,tc)
@@ -99,7 +99,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_CARD,0,tc:GetOriginalCode())
 		tc:CreateEffectRelation(te)
 		if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 then
-			tc:CancelToRest(false)
+			tc:CancelToGrave(false)
 		end
 		if te:GetCode()==EVENT_CHAINING then
 			local chain=Duel.GetCurrentChain()-1

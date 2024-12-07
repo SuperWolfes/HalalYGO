@@ -3,7 +3,7 @@
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Special Summon procedure
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_FIELD)
@@ -32,7 +32,7 @@ function s.initial_effect(c)
 	e3:SetCost(function(_,_,tp) return Duel.GetActivityCount(tp,ACTIVITY_SPSUMMON)==0 end)
 	e3:SetOperation(s.spcostop)
 	c:RegisterEffect(e3)
-	--Shuffle all other monsters that are banished, on the field, and in the RPs into the Deck
+	--Shuffle all other monsters that are banished, on the field, and in the GYs into the Deck
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,0))
 	e4:SetCategory(CATEGORY_TODECK)
@@ -45,7 +45,7 @@ end
 function s.spcon(e,c)
 	if c==nil then return true end
 	if Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)<=0 then return false end
-	local g=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsLinkMonster),0,LOCATION_MZONE|LOCATION_REST,LOCATION_MZONE|LOCATION_REST,nil)
+	local g=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsLinkMonster),0,LOCATION_MZONE|LOCATION_GRAVE,LOCATION_MZONE|LOCATION_GRAVE,nil)
 	return g:GetClassCount(Card.GetCode)>=8
 end
 function s.spcostop(e,tp,eg,ep,ev,re,r,rp)
@@ -64,14 +64,14 @@ function s.tdfilter(c)
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	local LOCATION_MZONE_REST_REMOVED=LOCATION_MZONE|LOCATION_REST|LOCATION_REMOVED
-	local g=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_MZONE_REST_REMOVED,LOCATION_MZONE_REST_REMOVED,e:GetHandler())
+	local LOCATION_MZONE_GRAVE_REMOVED=LOCATION_MZONE|LOCATION_GRAVE|LOCATION_REMOVED
+	local g=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_MZONE_GRAVE_REMOVED,LOCATION_MZONE_GRAVE_REMOVED,e:GetHandler())
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,#g,tp,0)
 	Duel.SetChainLimit(aux.FALSE)
 end
 function s.tdop(e,tp,eg,ep,ev,re,r,rp,chk)
-	local LOCATION_MZONE_REST_REMOVED=LOCATION_MZONE|LOCATION_REST|LOCATION_REMOVED
-	local g=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_MZONE_REST_REMOVED,LOCATION_MZONE_REST_REMOVED,e:GetHandler())
+	local LOCATION_MZONE_GRAVE_REMOVED=LOCATION_MZONE|LOCATION_GRAVE|LOCATION_REMOVED
+	local g=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_MZONE_GRAVE_REMOVED,LOCATION_MZONE_GRAVE_REMOVED,e:GetHandler())
 	if #g>0 then
 		Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
 	end

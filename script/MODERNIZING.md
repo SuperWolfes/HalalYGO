@@ -6,7 +6,7 @@ The following list has been created so that these "modernization steps" are docu
 
 ## Use UTF-8 encoding and Unix line endings
 
-Configure your editor to follow these settings, or make it obey the `.editcoreonfig` in the root of the repository. Be wary of editing files directly in the browser as it sometimes causes issues with line endings.
+Configure your editor to follow these settings, or make it obey the `.editorconfig` in the root of the repository. Be wary of editing files directly in the browser as it sometimes causes issues with line endings.
 
 ## Add missing or update OCG/TCG names
 
@@ -25,7 +25,7 @@ Activated effects should have their own descriptions, set through `Effect.SetDes
 
 Rather than trying to think of such or similar scenarios in each individual script, it it more practical to simply be consistent about it and have a description explicitly associated to each activated effect. It also has the added benefit of letting AI frameworks like Windbot properly check which effect is which through their descriptions.
 
-The exceptions to this are the activations of Field Actionals, Continuous Actionals, Pendulum Actionals, _i.e._, their `EFFECT_TYPE_ACTIVATE` effects that place them face-up on the field.
+The exceptions to this are the activations of Field Spells, Continuous Spells, Pendulum Spells, _i.e._, their `EFFECT_TYPE_ACTIVATE` effects that place them face-up on the field.
 
 Note that their database strings would also have to be updated to add the missing strings for the new descriptions, especially if some older strings need to be moved up to match the script (string `0` may become string `1` due to a newly-added description).
 
@@ -83,7 +83,7 @@ end
 
 ## Use `Duel.GetMZoneCount` for effects that remove monsters on the field and Summon another
 
-If an effect summons a monster but requires (either by effect or by cost) removing another another monster from the field (_e.g._: Tributing/banishing/destroying it, etc) before performing the summon, using only `Duel.GetLocationCount` will not be enough to account for the possibility of that monster removed setting free a Monster Zone. Instead, `Duel.GetMZoneCount` should be used, providing it the matching exclusion parameter to properly handle these interactions. _e.g._: "Condemned Mint".
+If an effect summons a monster but requires (either by effect or by cost) removing another another monster from the field (_e.g._: Tributing/banishing/destroying it, etc) before performing the summon, using only `Duel.GetLocationCount` will not be enough to account for the possibility of that monster removed setting free a Monster Zone. Instead, `Duel.GetMZoneCount` should be used, providing it the matching exclusion parameter to properly handle these interactions. _e.g._: "Condemned Witch".
 
 ## Use `Duel.SelectEffect` when choosing effects to apply/activate
 
@@ -134,9 +134,9 @@ Do not simply call `Duel.Overlay` or `Card.Overlay`, first check if the card(s) 
 
 ## Use `aux.SelectUnselectGroup` for effects that target/select cards with different filters at the same time
 
-If an effect targets/selects cards that must meet different criteria at the same time, `SelectUnselectGroup` provides a clean way to do it, possibly shortening the script and/or avoiding multiple nested filters. _e.g._: "Swordmiss Blackout", "Marincess Aqua Argonaut" and "Ninjitsu Art Notebook of Mystery".
+If an effect targets/selects cards that must meet different criteria at the same time, `SelectUnselectGroup` provides a clean way to do it, possibly shortening the script and/or avoiding multiple nested filters. _e.g._: "Swordsoul Blackout", "Marincess Aqua Argonaut" and "Ninjitsu Art Notebook of Mystery".
 
-## Replace the id in effect codes if they are a ment value meant to be used to interact with other cards
+## Replace the id in effect codes if they are a magic value meant to be used to interact with other cards
 
 If a card needs to check for effects hardcoded as the ID of the card that implements them, the corresponding constant should be used instead of such id. If the constant does not exist and the effect is commonly used, it should be created and put in `constant.lua`. _e.g._:
 
@@ -159,4 +159,4 @@ Constants like location, timing, resets, etc. should be binary or'd (op `|`) ins
 
 ## Remove the `IsRelateToEffect` check from cards that need to remain face-up to resolve their effects
 
-The behaviour of continuous-like Actionals/Traps which must remain face-up on the field to resolve their activated effects is now automatically handled in the core, rendering the check redundant. Plus, in the off chance that another card/effect can apply that effect's operation function that check existing could cause wrong interactions in some cases.
+The behaviour of continuous-like Spells/Traps which must remain face-up on the field to resolve their activated effects is now automatically handled in the core, rendering the check redundant. Plus, in the off chance that another card/effect can apply that effect's operation function that check existing could cause wrong interactions in some cases.

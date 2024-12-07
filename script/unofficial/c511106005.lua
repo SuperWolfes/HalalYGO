@@ -18,7 +18,7 @@ end
 function s.ddcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local rc=c:GetReasonCard()
-	return c:IsLocation(LOCATION_REST) and r & REASON_LINK == REASON_LINK
+	return c:IsLocation(LOCATION_GRAVE) and r & REASON_LINK == REASON_LINK
 		and rc:IsSetCard(0x11a) and rc:IsLinkMonster()
 end
 function s.ddtg(e,tp,eg,ep,ev,re,r,rp,chk)

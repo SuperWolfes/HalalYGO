@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	e4:SetCode(EFFECT_CANNOT_BE_LINK_MATERIAL)
 	e4:SetValue(1)
 	c:RegisterEffect(e4)
-	--Self-mismatching
+	--Self-destruction
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
 	e5:SetRange(LOCATION_SZONE)
@@ -91,7 +91,7 @@ function s.tkop(e,tp,eg,ep,ev,re,r,rp)
 	if not c:IsRelateToEffect(e) then return end
 	local ft=math.min(c:GetFirstCardTarget():GetLink(),Duel.GetLocationCount(tp,LOCATION_MZONE))
 	if ft<=0 or not Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0x581,TYPES_TOKEN,0,0,1,RACE_MACHINE,ATTRIBUTE_WIND) then return end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
 	local ct=ft
 	if ft~=1 then
 		local selct = {}

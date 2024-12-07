@@ -1,5 +1,5 @@
 --サイバース・ウィザード
---Cyberse Chemist
+--Cyberse Wizard
 local s,id=GetID()
 function s.initial_effect(c)
 	--change pos

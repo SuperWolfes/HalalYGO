@@ -1,5 +1,5 @@
 --時読みの魔術師 (Anime)
---Timegazer Mentor (Anime)
+--Timegazer Magician (Anime)
 --fixed by MLD
 local s,id=GetID()
 function s.initial_effect(c)
@@ -14,10 +14,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsOnField() and chkc:IsControler(tp) and chkc:IsType(TYPE_TRAP+TYPE_ACTIONAL) end
-	if chk==0 then return Duel.IsExistingTarget(Card.IsType,tp,LOCATION_ONFIELD,0,1,nil,TYPE_TRAP+TYPE_ACTIONAL) end
+	if chkc then return chkc:IsOnField() and chkc:IsControler(tp) and chkc:IsType(TYPE_TRAP+TYPE_SPELL) end
+	if chk==0 then return Duel.IsExistingTarget(Card.IsType,tp,LOCATION_ONFIELD,0,1,nil,TYPE_TRAP+TYPE_SPELL) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	Duel.SelectTarget(tp,Card.IsType,tp,LOCATION_ONFIELD,0,1,1,nil,TYPE_TRAP+TYPE_ACTIONAL)
+	Duel.SelectTarget(tp,Card.IsType,tp,LOCATION_ONFIELD,0,1,1,nil,TYPE_TRAP+TYPE_SPELL)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()

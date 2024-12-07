@@ -1,5 +1,5 @@
 --強欲な壺の精霊
---Guardian of the Pot of Greed
+--Spirit of the Pot of Greed
 local s,id=GetID()
 function s.initial_effect(c)
 	--The player that activates "Pot of Greed" can draw 1 card

@@ -1,5 +1,5 @@
 --虚無魔人
---Vanity's Tainted (Rush)
+--Vanity's Fiend (Rush)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Cannot be Special Summoned

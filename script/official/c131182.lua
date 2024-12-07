@@ -1,5 +1,5 @@
 --ミラクル・フリッパー
---Pulse Flipper
+--Miracle Flipper
 local s,id=GetID()
 function s.initial_effect(c)
 	--sumlimit
@@ -80,7 +80,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
-	return (r&REASON_EFFECT)~=0 and re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP)
+	return (r&REASON_EFFECT)~=0 and re:IsActiveType(TYPE_SPELL+TYPE_TRAP)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) end

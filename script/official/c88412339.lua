@@ -45,7 +45,7 @@ function s.pencost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Release(e:GetHandler(),REASON_COST)
 end
 function s.penfilter(c)
-	return c:IsSetCard(0x10ec) and c:IsType(TYPE_PENDULUM) and not c:IsUnliked()
+	return c:IsSetCard(0x10ec) and c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
 end
 function s.pentg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.penfilter,tp,LOCATION_DECK,0,1,nil)
@@ -88,5 +88,5 @@ function s.splimit(e,c)
 end
 function s.aclimit(e,re,tp)
 	local rc=re:GetHandler()
-	return rc:IsCode(id) and re:GetActiveType()==TYPE_PENDULUM+TYPE_ACTIONAL and not re:IsHasType(EFFECT_TYPE_ACTIVATE) and rc:IsLocation(LOCATION_PZONE)
+	return rc:IsCode(id) and re:GetActiveType()==TYPE_PENDULUM+TYPE_SPELL and not re:IsHasType(EFFECT_TYPE_ACTIVATE) and rc:IsLocation(LOCATION_PZONE)
 end

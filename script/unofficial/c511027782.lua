@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	--Inflict 400 damage
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e2:SetCode(EVENT_TO_REST)
+	e2:SetCode(EVENT_TO_GRAVE)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetCondition(s.condition)
 	e2:SetOperation(s.operation)

@@ -1,5 +1,5 @@
 --海皇精 アビスライン
---Abyssrhine the Atlantean Guardian
+--Abyssrhine the Atlantean Spirit
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_DRAW)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_FREE_CHAIN)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetHintTiming(0,TIMING_STANDBY_PHASE|TIMING_MAIN_END|TIMINGS_CHECK_MONSTER_E)
 	e2:SetCondition(function(e,tp) return Duel.IsTurnPlayer(1-tp) end)
@@ -88,9 +88,9 @@ end
 function s.drawcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsAbleToRemoveAsCost()
-		and Duel.IsExistingMatchingCard(aux.AND(Card.IsDiscardable,Card.IsAbleToRestAsCost),tp,LOCATION_HAND,0,1,nil) end
+		and Duel.IsExistingMatchingCard(aux.AND(Card.IsDiscardable,Card.IsAbleToGraveAsCost),tp,LOCATION_HAND,0,1,nil) end
 	Duel.Remove(c,POS_FACEUP,REASON_COST)
-	Duel.DiscardHand(tp,aux.AND(Card.IsDiscardable,Card.IsAbleToRestAsCost),1,1,REASON_COST|REASON_DISCARD)
+	Duel.DiscardHand(tp,aux.AND(Card.IsDiscardable,Card.IsAbleToGraveAsCost),1,1,REASON_COST|REASON_DISCARD)
 end
 function s.drawtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,1) end

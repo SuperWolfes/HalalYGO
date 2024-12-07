@@ -1,4 +1,4 @@
---Mental Wave
+--Psychic Wave
 --scripted by: UnknownGuest
 local s,id=GetID()
 function s.initial_effect(c)
@@ -14,13 +14,13 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_JINZO,9418534}
 function s.costfilter(c)
-	return c:IsCode(CARD_JINZO) and c:IsAbleToRestAsCost()
+	return c:IsCode(CARD_JINZO) and c:IsAbleToGraveAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,1,nil)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.cfilter(c)
 	return c:IsFaceup() and c:IsAttackPos() and c:IsCode(9418534)

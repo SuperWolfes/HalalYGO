@@ -36,7 +36,7 @@ function s.initial_effect(c)
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOKEN)
 	e3:SetType(EFFECT_TYPE_QUICK_O)
 	e3:SetCode(EVENT_FREE_CHAIN)
-	e3:SetRange(LOCATION_REST)
+	e3:SetRange(LOCATION_GRAVE)
 	e3:SetHintTiming(0,TIMING_BATTLE_PHASE)
 	e3:SetLabelObject(e0)
 	e3:SetCondition(s.tkcon2)
@@ -103,7 +103,7 @@ function s.tkop2(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.IsPlayerCanSpecialSummonMonster(tp,alias+1,0,TYPES_TOKEN,0,0,1,RACE_CYBERSE,ATTRIBUTE_DARK) then return end
 	local ct=math.min(Duel.GetMatchingGroupCount(s.filter,tp,0,LOCATION_MZONE,nil),Duel.GetLocationCount(tp,LOCATION_MZONE))
 	if ct<1 then return end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ct=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ct=1 end
 	repeat
 		local token=Duel.CreateToken(tp,alias+1)
 		Duel.SpecialSummonStep(token,0,tp,tp,false,false,POS_FACEUP)

@@ -34,5 +34,5 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.efilter(e,re,rp)
-	return re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) and re:GetOwner()~=e:GetOwner()
+	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP) and re:GetOwner()~=e:GetOwner()
 end

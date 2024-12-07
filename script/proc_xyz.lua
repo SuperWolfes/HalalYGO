@@ -27,7 +27,7 @@ end
 --Xyz monster, lv k*n
 function Xyz.AddProcedure(c,f,lv,ct,alterf,desc,maxct,op,mustbemat,exchk)
 	--exchk for special xyz, checking other materials
-	--mustbemat for Startime Mentor
+	--mustbemat for Startime Magician
 	if not maxct then maxct=ct end  
 	if c.xyz_filter==nil then
 		local mt=c:GetMetatable()
@@ -93,7 +93,7 @@ function Xyz.MatGenerate(e,tp,eg,ep,ev,re,r,rp)
 end
 --Xyz Summon(normal)
 function Xyz.MatFilter2(c,f,lv,xyz,tp)
-	if c:IsLocation(LOCATION_REST) and not c:IsHasEffect(511002793) then return false end
+	if c:IsLocation(LOCATION_GRAVE) and not c:IsHasEffect(511002793) then return false end
 	if c:IsLocation(LOCATION_MZONE) and c:IsFacedown() then return false end
 	return Xyz.MatFilter(c,f,lv,xyz,tp)
 end
@@ -406,9 +406,9 @@ function Xyz.Condition(f,lv,minc,maxc,mustbemat,exchk)
 					g=og
 					mg=og:Filter(Xyz.MatFilter,nil,f,lv,c,tp)
 				else
-					g=Duel.GetMatchingGroup(function(cc) return ((cc:IsLocation(LOCATION_REST) and cc:IsHasEffect(511002793)) 
-						or cc:IsFaceup()) and (cc:IsControler(tp) or Xyz.EffectXyzMaterialChk(cc,c,tp)) end,tp,LOCATION_MZONE+LOCATION_REST,LOCATION_MZONE,nil)
-					mg=Duel.GetMatchingGroup(Xyz.MatFilter2,tp,LOCATION_MZONE+LOCATION_REST,LOCATION_MZONE,nil,f,lv,c,tp)
+					g=Duel.GetMatchingGroup(function(cc) return ((cc:IsLocation(LOCATION_GRAVE) and cc:IsHasEffect(511002793)) 
+						or cc:IsFaceup()) and (cc:IsControler(tp) or Xyz.EffectXyzMaterialChk(cc,c,tp)) end,tp,LOCATION_MZONE+LOCATION_GRAVE,LOCATION_MZONE,nil)
+					mg=Duel.GetMatchingGroup(Xyz.MatFilter2,tp,LOCATION_MZONE+LOCATION_GRAVE,LOCATION_MZONE,nil,f,lv,c,tp)
 					if not mustbemat then
 						local eqmg=Group.CreateGroup()
 						for tc in aux.Next(mg) do
@@ -416,14 +416,14 @@ function Xyz.Condition(f,lv,minc,maxc,mustbemat,exchk)
 							eqmg:Merge(eq)
 						end
 						mg:Merge(eqmg)
-						mg:Merge(Duel.GetMatchingGroup(Xyz.SubMatFilter,tp,LOCATION_ONFIELD+LOCATION_REST,0,nil,f,lv,xg,c,tp))
+						mg:Merge(Duel.GetMatchingGroup(Xyz.SubMatFilter,tp,LOCATION_ONFIELD+LOCATION_GRAVE,0,nil,f,lv,xg,c,tp))
 					end
 				end
 				local mustg=Auxiliary.GetMustBeMaterialGroup(tp,g,tp,c,mg,REASON_XYZ)
 				if must then mustg:Merge(must) end
 				if not mg:Includes(mustg) then return false end
 				if not mustbemat then
-					mg:Merge(Duel.GetMatchingGroup(Card.IsHasEffect,tp,LOCATION_HAND+LOCATION_ONFIELD+LOCATION_REST+LOCATION_REMOVED,0,nil,511002116))
+					mg:Merge(Duel.GetMatchingGroup(Card.IsHasEffect,tp,LOCATION_HAND+LOCATION_ONFIELD+LOCATION_GRAVE+LOCATION_REMOVED,0,nil,511002116))
 				end
 				if min and min~=99 then
 					return mg:IsExists(Xyz.RecursionChk1,1,nil,mg,c,tp,min,max,minc,maxc,Group.CreateGroup(),Group.CreateGroup(),0,0,mustbemat,exchk,f,mustg,lv)
@@ -447,7 +447,7 @@ function Xyz.Target(f,lv,minc,maxc,mustbemat,exchk)
 						local matg=Group.CreateGroup()
 						local sg=Group.CreateGroup()
 						local mg=og:Clone()
-						mg:Merge(Duel.GetMatchingGroup(Card.IsHasEffect,tp,LOCATION_HAND+LOCATION_ONFIELD+LOCATION_REST+LOCATION_REMOVED,0,nil,511002116))
+						mg:Merge(Duel.GetMatchingGroup(Card.IsHasEffect,tp,LOCATION_HAND+LOCATION_ONFIELD+LOCATION_GRAVE+LOCATION_REMOVED,0,nil,511002116))
 						local finish=false
 						while ct<max and matct<maxc do
 							local selg=mg:Filter(Xyz.RecursionChk1,sg,mg,c,tp,min,max,minc,maxc,sg,matg,ct,matct,mustbemat,exchk,f,mustg,lv)
@@ -533,9 +533,9 @@ function Xyz.Target(f,lv,minc,maxc,mustbemat,exchk)
 						g=og
 						mg=og:Filter(Xyz.MatFilter,nil,f,lv,c,tp)
 					else
-						g=Duel.GetMatchingGroup(function(cc) return ((cc:IsLocation(LOCATION_REST) and cc:IsHasEffect(511002793)) 
-							or cc:IsFaceup()) and (cc:IsControler(tp) or Xyz.EffectXyzMaterialChk(cc,c,tp)) end,tp,LOCATION_MZONE+LOCATION_REST,LOCATION_MZONE,nil)
-						mg=Duel.GetMatchingGroup(Xyz.MatFilter2,tp,LOCATION_MZONE+LOCATION_REST,LOCATION_MZONE,nil,f,lv,c,tp)
+						g=Duel.GetMatchingGroup(function(cc) return ((cc:IsLocation(LOCATION_GRAVE) and cc:IsHasEffect(511002793)) 
+							or cc:IsFaceup()) and (cc:IsControler(tp) or Xyz.EffectXyzMaterialChk(cc,c,tp)) end,tp,LOCATION_MZONE+LOCATION_GRAVE,LOCATION_MZONE,nil)
+						mg=Duel.GetMatchingGroup(Xyz.MatFilter2,tp,LOCATION_MZONE+LOCATION_GRAVE,LOCATION_MZONE,nil,f,lv,c,tp)
 						if not mustbemat then
 							local eqmg=Group.CreateGroup()
 							for tc in aux.Next(mg) do
@@ -543,13 +543,13 @@ function Xyz.Target(f,lv,minc,maxc,mustbemat,exchk)
 								eqmg:Merge(eq)
 							end
 							mg:Merge(eqmg)
-							mg:Merge(Duel.GetMatchingGroup(Xyz.SubMatFilter,tp,LOCATION_ONFIELD+LOCATION_REST,0,nil,f,lv,xg,c,tp))
+							mg:Merge(Duel.GetMatchingGroup(Xyz.SubMatFilter,tp,LOCATION_ONFIELD+LOCATION_GRAVE,0,nil,f,lv,xg,c,tp))
 						end
 					end
 					local mustg=Auxiliary.GetMustBeMaterialGroup(tp,g,tp,c,mg,REASON_XYZ)
 					if must then mustg:Merge(must) end
 					if not mustbemat then
-						mg:Merge(Duel.GetMatchingGroup(Card.IsHasEffect,tp,LOCATION_HAND+LOCATION_ONFIELD+LOCATION_REST+LOCATION_REMOVED,0,nil,511002116))
+						mg:Merge(Duel.GetMatchingGroup(Card.IsHasEffect,tp,LOCATION_HAND+LOCATION_ONFIELD+LOCATION_GRAVE+LOCATION_REMOVED,0,nil,511002116))
 					end
 					local finish=false
 					if not og or max==99 then

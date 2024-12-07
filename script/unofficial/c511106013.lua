@@ -1,10 +1,10 @@
 --キュービック・ハイドライブ・ロード
---Cubed Hyddendrive Watcher
+--Cubed Hydradrive Lord
 --scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Link.AddProcedure(c,s.matfilter,3,3,s.spcheck)
 	--attribute
 	local e1=Effect.CreateEffect(c)
@@ -84,7 +84,7 @@ function s.atop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ChainAttack()
 end
 function s.drcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_REST) and r==REASON_LINK
+	return e:GetHandler():IsLocation(LOCATION_GRAVE) and r==REASON_LINK
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

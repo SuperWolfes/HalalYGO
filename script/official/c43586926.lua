@@ -1,11 +1,11 @@
 --ドル・ドラ
 local s,id=GetID()
 function s.initial_effect(c)
-	--to rest
+	--to grave
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	e1:SetCode(EVENT_TO_REST)
+	e1:SetCode(EVENT_TO_GRAVE)
 	e1:SetOperation(s.regop)
 	c:RegisterEffect(e1)
 end
@@ -17,7 +17,7 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetDescription(aux.Stringid(id,0))
 		e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
-		e1:SetRange(LOCATION_REST)
+		e1:SetRange(LOCATION_GRAVE)
 		e1:SetCode(EVENT_PHASE+PHASE_END)
 		e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_DUEL)
 		e1:SetTarget(s.sptg)

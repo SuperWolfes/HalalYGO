@@ -28,7 +28,7 @@ function s.atklimit(e,tp,eg,ep,ev,re,r,rp)
 	e:GetHandler():RegisterEffect(e1)
 end
 function s.indcon(e,tp,eg,ep,ev,re,r,rp)
-	return r==REASON_FUSION and e:GetHandler():IsLocation(LOCATION_REST)
+	return r==REASON_FUSION and e:GetHandler():IsLocation(LOCATION_GRAVE)
 end
 function s.indop(e,tp,eg,ep,ev,re,r,rp)
 	local e1=Effect.CreateEffect(e:GetHandler())

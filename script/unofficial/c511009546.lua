@@ -25,7 +25,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 			and Duel.GetCustomActivityCount(51109546,tp,ACTIVITY_ATTACK)==0
 	end
 	local g=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
-	Duel.SendtoRest(g,REASON_COST+REASON_DISCARD)
+	Duel.SendtoGrave(g,REASON_COST+REASON_DISCARD)
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_CANNOT_ATTACK_ANNOUNCE)

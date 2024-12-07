@@ -43,7 +43,7 @@ function s.tknop(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0,TYPES_TOKEN,200,200,1,RACE_MACHINE,ATTRIBUTE_FIRE) then return end
 	local ft=math.min(e:GetLabel(),Duel.GetLocationCount(tp,LOCATION_MZONE))
 	if ft==0 then return end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
 	local c=e:GetHandler()
 	local ct=Duel.AnnounceNumberRange(tp,1,ft)
 	for i=1,ct do

@@ -3,7 +3,7 @@
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Other "Drytron" monsters you control cannot be destroyed by your opponent's card effects
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.negtg)
 	e2:SetOperation(s.negop)
 	c:RegisterEffect(e2)
-	--Special Summon 1 Locked Monster with 4000 ATK from your hand or Deck
+	--Special Summon 1 Ritual Monster with 4000 ATK from your hand or Deck
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -46,7 +46,7 @@ function s.negcostfilter(c)
 end
 function s.negcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local atk=re:GetHandler():GetBaseAttack()
-	local g=Duel.GetMatchingGroup(s.negcostfilter,tp,LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(s.negcostfilter,tp,LOCATION_GRAVE,0,nil)
 	if chk==0 then return #g>0 and g:CheckWithSumGreater(Card.GetAttack,atk) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	local rg=Group.CreateGroup()
@@ -71,13 +71,13 @@ function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.spfilter(c,e,tp)
-	local pg=aux.GetMustBeMaterialGroup(tp,Group.CreateGroup(),tp,c,nil,REASON_LOCKED)
-	return #pg<=0 and c:IsLockedMonster() and c:IsAttack(4000) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_LOCKED,tp,true,false)
+	local pg=aux.GetMustBeMaterialGroup(tp,Group.CreateGroup(),tp,c,nil,REASON_RITUAL)
+	return #pg<=0 and c:IsRitualMonster() and c:IsAttack(4000) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,false)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return rp==1-tp and c:IsPreviousControler(tp) and c:IsPreviousLocation(LOCATION_MZONE)
-		and c:IsSummonType(SUMMON_TYPE_LOCKED)
+		and c:IsSummonType(SUMMON_TYPE_RITUAL)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
@@ -87,7 +87,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local tc=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_HAND|LOCATION_DECK,0,1,1,nil,e,tp):GetFirst()
-	if tc and Duel.SpecialSummon(tc,SUMMON_TYPE_LOCKED,tp,tp,true,false,POS_FACEUP)>0 then
+	if tc and Duel.SpecialSummon(tc,SUMMON_TYPE_RITUAL,tp,tp,true,false,POS_FACEUP)>0 then
 		tc:CompleteProcedure()
 	end
 end

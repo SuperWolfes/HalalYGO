@@ -52,7 +52,7 @@ end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	if not re then return false end
 	local c=e:GetHandler()
-	return c:IsReason(REASON_EFFECT) and c:IsLocation(LOCATION_REST) and re:GetHandler():IsSetCard(SET_SCRAP)
+	return c:IsReason(REASON_EFFECT) and c:IsLocation(LOCATION_GRAVE) and re:GetHandler():IsSetCard(SET_SCRAP)
 end
 function s.thfilter(c)
 	return (c:IsCode(28388296) or (c:IsSetCard(SET_SCRAP) and c:IsMonster() and not c:IsType(TYPE_TUNER))) and c:IsAbleToHand()

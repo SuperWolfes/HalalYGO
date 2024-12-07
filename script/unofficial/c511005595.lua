@@ -1,4 +1,4 @@
---Negative Imanced Inversion
+--Negative Image Inversion
 --Scripted by GameMaster(GM)
 local s,id=GetID()
 function s.initial_effect(c)

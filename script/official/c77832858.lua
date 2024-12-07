@@ -1,5 +1,5 @@
 --邪炎帝王テスタロス
---Thestalos the Shadowfire Moppar
+--Thestalos the Shadowfire Monarch
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
@@ -38,9 +38,9 @@ end
 function s.cfilter(c,relzone,tp)
 	return aux.IsZone(c,relzone,tp) and c:IsReleasable() and (c:IsSummonType(SUMMON_TYPE_TRIBUTE) or c:IsControler(1-tp))
 end
-function s.rescon(miss_ex_g,zone)
+function s.rescon(soul_ex_g,zone)
 	return	function(sg,e,tp,mg)
-				return (#miss_ex_g==0 or sg&miss_ex_g==miss_ex_g) and Duel.GetMZoneCount(tp,sg,tp,LOCATION_REASON_TOFIELD,zone)>0
+				return (#soul_ex_g==0 or sg&soul_ex_g==soul_ex_g) and Duel.GetMZoneCount(tp,sg,tp,LOCATION_REASON_TOFIELD,zone)>0
 					and sg:FilterCount(Card.IsControler,nil,tp)==1
 			end
 end
@@ -49,13 +49,13 @@ function s.sumcon(e,c,minc,zone,relzone,exeff)
 	if minc>2 or c:IsLevelBelow(6) then return false end
 	local tp=c:GetControler()
 	local mg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_MZONE,LOCATION_MZONE,nil,relzone,tp)
-	local miss_ex_g=Duel.GetMatchingGroup(Card.IsHasEffect,tp,LOCATION_MZONE,LOCATION_MZONE,nil,EFFECT_EXTRA_RELEASE)
-	return #mg>=2 and aux.SelectUnselectGroup(mg,e,tp,2,2,s.rescon(miss_ex_g,zone),0)
+	local soul_ex_g=Duel.GetMatchingGroup(Card.IsHasEffect,tp,LOCATION_MZONE,LOCATION_MZONE,nil,EFFECT_EXTRA_RELEASE)
+	return #mg>=2 and aux.SelectUnselectGroup(mg,e,tp,2,2,s.rescon(soul_ex_g,zone),0)
 end
 function s.sumtg(e,tp,eg,ep,ev,re,r,rp,chk,c,minc,zone,relzone,exeff)
 	local mg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_MZONE,LOCATION_MZONE,nil,relzone,tp)
-	local miss_ex_g=Duel.GetMatchingGroup(Card.IsHasEffect,tp,LOCATION_MZONE,LOCATION_MZONE,nil,EFFECT_EXTRA_RELEASE)
-	local g=aux.SelectUnselectGroup(mg,e,tp,2,2,s.rescon(miss_ex_g,zone),1,tp,HINTMSG_RELEASE,nil,nil,true)
+	local soul_ex_g=Duel.GetMatchingGroup(Card.IsHasEffect,tp,LOCATION_MZONE,LOCATION_MZONE,nil,EFFECT_EXTRA_RELEASE)
+	local g=aux.SelectUnselectGroup(mg,e,tp,2,2,s.rescon(soul_ex_g,zone),1,tp,HINTMSG_RELEASE,nil,nil,true)
 	if g and #g>0 then
 		g:KeepAlive()
 		e:SetLabelObject(g)

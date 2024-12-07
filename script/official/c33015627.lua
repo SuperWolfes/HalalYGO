@@ -1,5 +1,5 @@
 --時械神 サンダイオン
--- Sandaion the Timewatcher
+-- Sandaion the Timelord
 local s,id=GetID()
 function s.initial_effect(c)
 	c:SetUniqueOnField(1,0,id)

@@ -3,9 +3,9 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Fusion summon 1 tainted fusion monster
+	--Fusion summon 1 fiend fusion monster
 	--Using monsters from hand or field as material
-	c:RegisterEffect(Fusion.CreateSummonEff({handler=c,fusfilter=aux.FilterBoolFunction(Card.IsRace,RACE_TAINTED),stage2=s.stage2}))
+	c:RegisterEffect(Fusion.CreateSummonEff({handler=c,fusfilter=aux.FilterBoolFunction(Card.IsRace,RACE_FIEND),stage2=s.stage2}))
 end
 function s.stage2(e,tc,tp,sg,chk)
 	if chk==1 then

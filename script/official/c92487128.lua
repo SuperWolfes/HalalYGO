@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Pendulum Summon procedure
 	Pendulum.AddProcedure(c)
 	--Must be Special Summoned by its own effect
@@ -67,12 +67,12 @@ end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tributefilter,tp,LOCATION_MZONE,0,1,nil,e,tp,c)
-		and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_LOCKED,tp,true,true) end
+		and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,true) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,tp,0)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_DESTROY,nil,1,tp,LOCATION_ONFIELD)
 end
 function s.plfilter(c)
-	return c:IsSetCard(SET_RYU_GE) and c:IsContinuousActional() and not c:IsUnliked()
+	return c:IsSetCard(SET_RYU_GE) and c:IsContinuousSpell() and not c:IsForbidden()
 end
 function s.tfcheck(sg,e,tp)
 	return Duel.GetLocationCount(tp,LOCATION_SZONE)>0 or sg:IsExists(Card.IsLocation,1,nil,LOCATION_STZONE)
@@ -82,7 +82,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
 	local rg=Duel.SelectMatchingCard(tp,s.tributefilter,tp,LOCATION_MZONE,0,1,1,nil,e,tp,c)
 	if #rg==0 or Duel.Release(rg,REASON_EFFECT)==0 then return end
-	if c:IsRelateToEffect(e) and Duel.SpecialSummon(c,SUMMON_TYPE_LOCKED,tp,tp,true,true,POS_FACEUP)>0 then
+	if c:IsRelateToEffect(e) and Duel.SpecialSummon(c,SUMMON_TYPE_RITUAL,tp,tp,true,true,POS_FACEUP)>0 then
 		c:CompleteProcedure()
 		local fg=Duel.GetFieldGroup(tp,LOCATION_ONFIELD,0)
 		local dg=Duel.GetMatchingGroup(s.plfilter,tp,LOCATION_DECK,0,nil)

@@ -1,7 +1,7 @@
 --エクゾディア・ネクロス
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--cannot destroy
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -45,7 +45,7 @@ function s.initial_effect(c)
 end
 s.listed_names={8124921,44519536,70903634,7902349,33396948}
 function s.efdes(e,re)
-	return re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP)
+	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP)
 end
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	return tp==Duel.GetTurnPlayer()
@@ -63,9 +63,9 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.descon(e)
 	local p=e:GetHandlerPlayer()
-	return not Duel.IsExistingMatchingCard(Card.IsCode,p,LOCATION_REST,0,1,nil,8124921)
-		or not Duel.IsExistingMatchingCard(Card.IsCode,p,LOCATION_REST,0,1,nil,44519536)
-		or not Duel.IsExistingMatchingCard(Card.IsCode,p,LOCATION_REST,0,1,nil,70903634)
-		or not Duel.IsExistingMatchingCard(Card.IsCode,p,LOCATION_REST,0,1,nil,7902349)
-		or not Duel.IsExistingMatchingCard(Card.IsCode,p,LOCATION_REST,0,1,nil,33396948)
+	return not Duel.IsExistingMatchingCard(Card.IsCode,p,LOCATION_GRAVE,0,1,nil,8124921)
+		or not Duel.IsExistingMatchingCard(Card.IsCode,p,LOCATION_GRAVE,0,1,nil,44519536)
+		or not Duel.IsExistingMatchingCard(Card.IsCode,p,LOCATION_GRAVE,0,1,nil,70903634)
+		or not Duel.IsExistingMatchingCard(Card.IsCode,p,LOCATION_GRAVE,0,1,nil,7902349)
+		or not Duel.IsExistingMatchingCard(Card.IsCode,p,LOCATION_GRAVE,0,1,nil,33396948)
 end

@@ -1,5 +1,5 @@
 --俊炎星－ゾウセイ
---Brotherhood of the Fire Fist - Eleilluso
+--Brotherhood of the Fire Fist - Elephant
 --Scripted by Hel
 
 local s,id=GetID()
@@ -19,7 +19,7 @@ local e1=Effect.CreateEffect(c)
 	local e2=e1:Clone()
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e2)
-	--Shuffle 1 "Fire Formation" actional/trap from RP to deck
+	--Shuffle 1 "Fire Formation" spell/trap from GY to deck
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_TODECK+CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -35,7 +35,7 @@ s.listed_names={id}
 s.listed_series={0x7c,0x79}
 
 function s.cfilter(c)
-	return c:IsFaceup() and (c:IsActional() or c:IsTrap()) and c:IsSetCard(0x7c) and c:IsAbleToRestAsCost()
+	return c:IsFaceup() and (c:IsSpell() or c:IsTrap()) and c:IsSetCard(0x7c) and c:IsAbleToGraveAsCost()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local nc=Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_SZONE,0,1,nil)
@@ -43,9 +43,9 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 		if Duel.IsPlayerAffectedByEffect(tp,CARD_FIRE_FIST_EAGLE) then return true else return nc end
 	end
 	if nc and not (Duel.IsPlayerAffectedByEffect(tp,CARD_FIRE_FIST_EAGLE) and Duel.SelectYesNo(tp,aux.Stringid(CARD_FIRE_FIST_EAGLE,0))) then 
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 		local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_SZONE,0,1,1,nil)
-			Duel.SendtoRest(g,REASON_COST)
+			Duel.SendtoGrave(g,REASON_COST)
 	end
 end
 function s.spfilter(c,e,tp)
@@ -65,16 +65,16 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.shfilter(c)
-	return c:IsAbleToDeck() and c:IsSetCard(0x7c) and (c:IsActional() or c:IsTrap())
+	return c:IsAbleToDeck() and c:IsSetCard(0x7c) and (c:IsSpell() or c:IsTrap())
 end
 function s.addfilter(c)
 	return c:IsMonster() and c:IsSetCard(0x79) and c:IsAbleToHand() and c:IsLevelAbove(5)
 end
 function s.addtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and s.shfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.shfilter,tp,LOCATION_REST,0,1,nil) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.shfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.shfilter,tp,LOCATION_GRAVE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectTarget(tp,s.shfilter,tp,LOCATION_REST,0,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.shfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,#g,0,0)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end

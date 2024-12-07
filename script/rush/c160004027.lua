@@ -1,5 +1,5 @@
 --突楽姫トランペットンファー
---Trumpetonfa the Stabbing Nasheed Maiden
+--Trumpetonfa the Stabbing Music Maiden
 local s,id=GetID()
 function s.initial_effect(c)
 	--ATK increase
@@ -21,7 +21,7 @@ function s.filter(c)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsFaceup,tp,LOCATION_MZONE,0,1,nil)
-		and Duel.GetMatchingGroupCount(s.filter,tp,LOCATION_REST,0,1,nil)>0
+		and Duel.GetMatchingGroupCount(s.filter,tp,LOCATION_GRAVE,0,1,nil)>0
 	end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
@@ -35,7 +35,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			local e1=Effect.CreateEffect(c)
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetCode(EFFECT_UPDATE_ATTACK)
-			e1:SetValue(Duel.GetMatchingGroupCount(s.filter,tp,LOCATION_REST,0,nil,1)*100)
+			e1:SetValue(Duel.GetMatchingGroupCount(s.filter,tp,LOCATION_GRAVE,0,nil,1)*100)
 			e1:SetReset(RESETS_STANDARD_PHASE_END)
 			g:GetFirst():RegisterEffect(e1)
 		end

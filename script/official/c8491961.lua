@@ -2,7 +2,7 @@
 --Lyrilusc - Recital Starling
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Xyz.AddProcedure(c,nil,1,2,nil,nil,99)
 	--ATK Up
 	local e1=Effect.CreateEffect(c)

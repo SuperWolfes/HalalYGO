@@ -31,11 +31,11 @@ function s.initial_effect(c)
 end
 s.listed_series={0xaf}
 function s.pcfilter(c)
-	return (c:IsLocation(LOCATION_REST) or c:IsFaceup()) and c:IsSetCard(0xaf) and c:IsType(TYPE_PENDULUM) and not c:IsUnliked()
+	return (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup()) and c:IsSetCard(0xaf) and c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
 end
 function s.pctg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.pcfilter(chkc) end
-	local b1=Duel.IsExistingTarget(s.pcfilter,tp,LOCATION_REST,0,1,nil)
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.pcfilter(chkc) end
+	local b1=Duel.IsExistingTarget(s.pcfilter,tp,LOCATION_GRAVE,0,1,nil)
 	local b2=Duel.IsExistingMatchingCard(s.pcfilter,tp,LOCATION_EXTRA,0,1,nil)
 	if chk==0 then
 		if not Duel.CheckPendulumZones(tp) then return false end
@@ -49,8 +49,8 @@ function s.pctg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if op==0 then
 		e:SetProperty(EFFECT_FLAG_CARD_TARGET)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
-		local g=Duel.SelectTarget(tp,s.pcfilter,tp,LOCATION_REST,0,1,1,nil)
-		Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,0,0)
+		local g=Duel.SelectTarget(tp,s.pcfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+		Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,0,0)
 	else
 		e:SetProperty(0)
 	end

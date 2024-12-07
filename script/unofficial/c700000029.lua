@@ -5,7 +5,7 @@ Duel.LoadScript("c420.lua")
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMixRep(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x9b),1,99,aux.FilterBoolFunctionEx2(Card.IsMelodiousSongtress))
 	--summon success
 	local e1=Effect.CreateEffect(c)

@@ -38,10 +38,10 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 			or (ft2>0 and Duel.IsExistingTarget(s.filter,1-tp,LOCATION_REMOVED,0,1,nil,e,1-tp))
 	end
 	local ft1=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft1=math.min(ft1,1) end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft1=math.min(ft1,1) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g1=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REMOVED,0,ft1,ft1,nil,e,tp)
-	if Duel.IsPlayerAffectedByEffect(1-tp,CARD_BLUEEYES_GUARDIAN) then ft2=math.min(ft2,1) end
+	if Duel.IsPlayerAffectedByEffect(1-tp,CARD_BLUEEYES_SPIRIT) then ft2=math.min(ft2,1) end
 	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_SPSUMMON)
 	local g2=Duel.SelectTarget(1-tp,s.filter,1-tp,LOCATION_REMOVED,0,ft2,ft2,nil,e,1-tp)
 	g1:Merge(g2)

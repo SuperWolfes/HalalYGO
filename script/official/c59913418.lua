@@ -1,8 +1,8 @@
 --終焉の覇王デミス
---Demise, Supreme King of Cataclysm
+--Demise, Supreme King of Armageddon
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Change name
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e1:SetRange(LOCATION_MZONE+LOCATION_HAND)
 	e1:SetValue(72426662)
 	c:RegisterEffect(e1)
-	--Prevent battle mismatching
+	--Prevent battle destruction
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_INDESTRUCTABLE_BATTLE)
@@ -45,13 +45,13 @@ end
 s.listed_names={32828635,72426662}
 function s.indcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsSummonType(SUMMON_TYPE_LOCKED)
+	return c:IsSummonType(SUMMON_TYPE_RITUAL)
 end
 function s.indtg(e,c)
-	return c:IsType(TYPE_LOCKED)
+	return c:IsType(TYPE_RITUAL)
 end
 function s.mfilter1(c)
-	return not c:IsType(TYPE_LOCKED)
+	return not c:IsType(TYPE_RITUAL)
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckLPCost(tp,2000) end
@@ -75,7 +75,7 @@ end
 function s.costcon(e)
 	local c=e:GetHandler()
 	local mg=c:GetMaterial()
-	return c:GetSummonType()==SUMMON_TYPE_LOCKED and #mg>0 and not mg:IsExists(s.mfilter1,1,nil)
+	return c:GetSummonType()==SUMMON_TYPE_RITUAL and #mg>0 and not mg:IsExists(s.mfilter1,1,nil)
 end
 function s.costchange(e,re,rp,val)
 	if re and re:IsActivated() and re:GetHandler()==e:GetHandler() then

@@ -1,9 +1,9 @@
 --禁じられた聖槍
---Unliked Lance
+--Forbidden Lance
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Targeted monster becomes unaffected by actionals/traps
+	--Targeted monster becomes unaffected by spells/traps
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_ATKCHANGE)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -35,7 +35,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 		e1:SetValue(-800)
 		tc:RegisterEffect(e1)
-		--Unaffected by actionals/traps
+		--Unaffected by spells/traps
 		local e2=Effect.CreateEffect(c)
 		e2:SetDescription(3104)
 		e2:SetType(EFFECT_TYPE_SINGLE)
@@ -48,5 +48,5 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.efilter(e,te)
-	return te:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) and te:GetOwner()~=e:GetOwner()
+	return te:IsActiveType(TYPE_SPELL+TYPE_TRAP) and te:GetOwner()~=e:GetOwner()
 end

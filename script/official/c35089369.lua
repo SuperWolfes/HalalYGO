@@ -1,15 +1,15 @@
 --風竜星－ホロウ
---Pulao, Wind of the Bang Zing
+--Pulao, Wind of the Yang Zing
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special summon 1 "Bang Zing" monster from deck
+	--Special summon 1 "Yang Zing" monster from deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
-	e1:SetCode(EVENT_TO_REST)
+	e1:SetCode(EVENT_TO_GRAVE)
 	e1:SetCountLimit(1,id)
 	e1:SetCondition(s.condition)
 	e1:SetTarget(s.target)
@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.sctg)
 	e2:SetOperation(s.scop)
 	c:RegisterEffect(e2)
-	--A synchro monster using this card is unaffected by actionals
+	--A synchro monster using this card is unaffected by spells
 	local e3=Effect.CreateEffect(c)
 	e3:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
@@ -88,7 +88,7 @@ end
 function s.immop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local rc=c:GetReasonCard()
-	--Unaffected by actional effects
+	--Unaffected by spell effects
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(3102)
 	e1:SetProperty(EFFECT_FLAG_CLIENT_HINT)
@@ -99,5 +99,5 @@ function s.immop(e,tp,eg,ep,ev,re,r,rp)
 	rc:RegisterEffect(e1)
 end
 function s.efilter(e,te)
-	return te:IsActiveType(TYPE_ACTIONAL)
+	return te:IsActiveType(TYPE_SPELL)
 end

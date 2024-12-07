@@ -1,5 +1,5 @@
 --運命のウラドラ
---Uradora of Bate
+--Uradora of Fate
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -48,7 +48,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetOperation(s.drop)
 		e2:SetReset(RESET_PHASE|PHASE_END|RESET_OPPO_TURN)
 		Duel.RegisterEffect(e2,tp)
-		tc:RegisterFlagEffect(id,RESETS_STANDARD_PHASE_END|RESET_OPPO_TURN&~(RESET_LEAVE|RESET_TODECK|RESET_TEMP_REMOVE|RESET_REMOVE|RESET_TOREST),0,1)
+		tc:RegisterFlagEffect(id,RESETS_STANDARD_PHASE_END|RESET_OPPO_TURN&~(RESET_LEAVE|RESET_TODECK|RESET_TEMP_REMOVE|RESET_REMOVE|RESET_TOGRAVE),0,1)
 	end
 end
 function s.drcon(e,tp,eg,ep,ev,re,r,rp)

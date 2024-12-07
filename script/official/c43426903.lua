@@ -1,5 +1,5 @@
 --レプティレス・ゴルゴーン
---Reptilianne Jonjor
+--Reptilianne Gorgon
 
 local s,id=GetID()
 function s.initial_effect(c)

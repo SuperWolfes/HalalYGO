@@ -1,5 +1,5 @@
 --幻煌龍の浸渦
---Illusorasm Spiral Power
+--Phantasm Spiral Power
 local s,id=GetID()
 function s.initial_effect(c)
 	--Decrease the ATK/DEF of a monster by 1000 and negate its effects
@@ -20,20 +20,20 @@ function s.initial_effect(c)
 	e2:SetCode(EFFECT_TRAP_ACT_IN_HAND)
 	e2:SetCondition(function() return Duel.IsEnvironment(CARD_UMI) end)
 	c:RegisterEffect(e2)
-	--Equip 1 "Illusorasm Spiral" Equip Actional to a Normal Monster
+	--Equip 1 "Phantasm Spiral" Equip Spell to a Normal Monster
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_EQUIP)
 	e3:SetType(EFFECT_TYPE_QUICK_O)
 	e3:SetCode(EVENT_FREE_CHAIN)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e3:SetRange(LOCATION_REST)
+	e3:SetRange(LOCATION_GRAVE)
 	e3:SetCost(aux.bfgcost)
 	e3:SetTarget(s.eqtg)
 	e3:SetOperation(s.eqop)
 	c:RegisterEffect(e3)
 end
-s.listed_series={SET_ILLUSORASM_SPIRAL}
+s.listed_series={SET_PHANTASM_SPIRAL}
 s.listed_names={CARD_UMI}
 function s.cfilter(c)
 	return c:IsFacedown() or not c:IsType(TYPE_NORMAL)
@@ -84,10 +84,10 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.efilter(c,tp)
 	return c:IsFaceup() and c:IsType(TYPE_NORMAL)
-		and Duel.IsExistingMatchingCard(s.eqfilter,tp,LOCATION_REST|LOCATION_HAND,0,1,nil,c)
+		and Duel.IsExistingMatchingCard(s.eqfilter,tp,LOCATION_GRAVE|LOCATION_HAND,0,1,nil,c)
 end
 function s.eqfilter(c,tc)
-	return c:IsEquipActional() and c:IsSetCard(SET_ILLUSORASM_SPIRAL) and c:CheckEquipTarget(tc)
+	return c:IsEquipSpell() and c:IsSetCard(SET_PHANTASM_SPIRAL) and c:CheckEquipTarget(tc)
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and s.efilter(chkc,tp) end
@@ -100,7 +100,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not tc or tc:IsFacedown() or not tc:IsRelateToEffect(e) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.eqfilter),tp,LOCATION_REST|LOCATION_HAND,0,1,1,nil,tc)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.eqfilter),tp,LOCATION_GRAVE|LOCATION_HAND,0,1,1,nil,tc)
 	local eq=g:GetFirst()
 	if eq then
 		Duel.Equip(tp,eq,tc,true)

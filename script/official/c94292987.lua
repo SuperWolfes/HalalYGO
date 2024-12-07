@@ -1,22 +1,22 @@
 --魔轟神ガミュジン
---Fablous Gamygyn
+--Fabled Gamygyn
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
-	--Synchro Summon procedure: 1 "Fablous" Tuner + 1+ non-Tuner monsters
-	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_FABLOUS),1,1,Synchro.NonTuner(nil),1,99)
-	--Your opponent cannot target other "Fablous" Synchro Monsters you control with card effects
+	c:EnableReviveLimit()
+	--Synchro Summon procedure: 1 "Fabled" Tuner + 1+ non-Tuner monsters
+	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_FABLED),1,1,Synchro.NonTuner(nil),1,99)
+	--Your opponent cannot target other "Fabled" Synchro Monsters you control with card effects
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
 	e1:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetTargetRange(LOCATION_MZONE,0)
-	e1:SetTarget(function(e,c) return c:IsType(TYPE_SYNCHRO) and c:IsSetCard(SET_FABLOUS) and c~=e:GetHandler() end)
+	e1:SetTarget(function(e,c) return c:IsType(TYPE_SYNCHRO) and c:IsSetCard(SET_FABLED) and c~=e:GetHandler() end)
 	e1:SetValue(aux.tgoval)
 	c:RegisterEffect(e1)
-	--Special Summon 1 "Fablous" monster from your hand or Deck
+	--Special Summon 1 "Fabled" monster from your hand or Deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -28,21 +28,21 @@ function s.initial_effect(c)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
-	--Draw cards equal to the number of "Fablous" Synchro Monsters you control, then discard 1 card
+	--Draw cards equal to the number of "Fabled" Synchro Monsters you control, then discard 1 card
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_DRAW+CATEGORY_HANDES)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetProperty(EFFECT_FLAG_DELAY)
-	e3:SetCode(EVENT_TO_REST)
+	e3:SetCode(EVENT_TO_GRAVE)
 	e3:SetCountLimit(1,{id,1})
 	e3:SetTarget(s.drtg)
 	e3:SetOperation(s.drop)
 	c:RegisterEffect(e3)
 end
-s.listed_series={SET_FABLOUS}
+s.listed_series={SET_FABLED}
 function s.spfilter(c,e,tp)
-	return c:IsSetCard(SET_FABLOUS) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsSetCard(SET_FABLED) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
@@ -58,7 +58,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.drctfilter(c)
-	return c:IsSetCard(SET_FABLOUS) and c:IsType(TYPE_SYNCHRO) and c:IsFaceup()
+	return c:IsSetCard(SET_FABLED) and c:IsType(TYPE_SYNCHRO) and c:IsFaceup()
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ct=Duel.GetMatchingGroupCount(s.drctfilter,tp,LOCATION_MZONE,0,nil)

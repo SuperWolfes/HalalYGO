@@ -2,8 +2,8 @@
 --Number 47: Nightmare Shark
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must first be properly summoned before awaking
-	c:EnableAwakeLimit()
+	--Must first be properly summoned before reviving
+	c:EnableReviveLimit()
 	--Xyz Summon procedure
 	Xyz.AddProcedure(c,nil,3,2)
 	--Attach 1 Level 3 WATER monster from hand or field to this card

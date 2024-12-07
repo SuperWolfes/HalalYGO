@@ -1,9 +1,9 @@
 -- 丘と芽吹の春化精
--- Vernalizer Wanderer of Hills and Blooms
+-- Vernalizer Fairy of Hills and Blooms
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	-- Effect mismatching protection
+	-- Effect destruction protection
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,0x183))
 	e1:SetValue(1)
 	c:RegisterEffect(e1)
-	-- Search 1 "Vernalizer Wanderer" card
+	-- Search 1 "Vernalizer Fairy" card
 	c:RegisterEffect(Effect.CreateVernalizerSPEffect(c,id,0,CATEGORY_TOHAND+CATEGORY_SEARCH,s.thtg,s.thop))
 end
 s.listed_names={id}

@@ -21,14 +21,14 @@ function s.otfilter(c)
 	return c:IsType(TYPE_MAXIMUM)
 end
 function s.matfilter(c)
-	return c:IsLocation(LOCATION_HAND|LOCATION_MZONE) and c:IsRace(RACE_WYRM) and c:IsAbleToRest()
+	return c:IsLocation(LOCATION_HAND|LOCATION_MZONE) and c:IsRace(RACE_WYRM) and c:IsAbleToGrave()
 end
 function s.cfilter(c)
 	return c:IsMonster() and not c:IsRace(RACE_WYRM)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>=10 and Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_REST,0,1,nil)
-		and not Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil)
+	return Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>=10 and Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_GRAVE,0,1,nil)
+		and not Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,nil)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,1) end

@@ -1,5 +1,5 @@
 --Ｗａｌｋｕｒｅｎ Ｒｉｔｔ
---Ride of the Balkanies
+--Ride of the Valkyries
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon
@@ -19,14 +19,14 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_HAND,0,nil)
 	local ct=#g
 	if chk==0 then return ct>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>=ct
-		and (ct==1 or not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)) 
+		and (ct==1 or not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)) 
 		and g:FilterCount(Card.IsCanBeSpecialSummoned,nil,e,0,tp,false,false)==ct end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,ct,tp,LOCATION_HAND)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_HAND,0,nil,e,tp)
 	local ct=#g
-	if ct<=0 or Duel.GetLocationCount(tp,LOCATION_MZONE)<ct or (ct>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)) 
+	if ct<=0 or Duel.GetLocationCount(tp,LOCATION_MZONE)<ct or (ct>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)) 
 		or g:FilterCount(Card.IsCanBeSpecialSummoned,nil,e,0,tp,false,false)~=ct then return end
 	local c=e:GetHandler()
 	local fid=c:GetFieldID()

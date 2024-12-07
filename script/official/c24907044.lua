@@ -42,7 +42,7 @@ function s.initial_effect(c)
 	e4:SetCode(EVENT_DESTROYED)
 	e4:SetCondition(s.setcon)
 	e4:SetTarget(s.settg)
-	e4:SetOperation(s.vetop)
+	e4:SetOperation(s.setop)
 	c:RegisterEffect(e4)
 end
 s.listed_series={0x10ec,0x20ec}
@@ -105,12 +105,12 @@ function s.setcon(e,tp,eg,ep,ev,re,r,rp)
 		or (rp==1-tp and c:IsReason(REASON_EFFECT) and c:GetPreviousControler()==tp and c:IsPreviousLocation(LOCATION_MZONE))
 end
 function s.cfilter(c)
-	return c:IsSetCard(0x20ec) and c:IsActional() and c:IsSSetable()
+	return c:IsSetCard(0x20ec) and c:IsSpell() and c:IsSSetable()
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_DECK,0,1,nil) end
 end
-function s.vetop(e,tp,eg,ep,ev,re,r,rp)
+function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then

@@ -34,7 +34,7 @@ function s.decltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>0
 		and Duel.GetFieldGroupCount(tp,0,LOCATION_DECK)>0 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_OPTION)
-	local op=Duel.SelectOption(tp,DECLTYPE_MONSTER,DECLTYPE_ACTIONAL,DECLTYPE_TRAP)
+	local op=Duel.SelectOption(tp,DECLTYPE_MONSTER,DECLTYPE_SPELL,DECLTYPE_TRAP)
 	e:SetLabel(op)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,PLAYER_ALL,LOCATION_DECK)
 end
@@ -42,7 +42,7 @@ function s.declop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)==0 or Duel.GetFieldGroupCount(tp,0,LOCATION_DECK)==0 then return end
 	local label=e:GetLabel()
 	local decl_type=(label==0 and TYPE_MONSTER)
-		or (label==1 and TYPE_ACTIONAL)
+		or (label==1 and TYPE_SPELL)
 		or (label==2 and TYPE_TRAP)
 	local c1=Duel.GetDeckbottomGroup(tp,1):GetFirst()
 	local c2=Duel.GetDeckbottomGroup(1-tp,1):GetFirst()

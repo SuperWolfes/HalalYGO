@@ -1,4 +1,4 @@
---Shizutra the Spectrumly Dancer
+--Shizuka the Heavenly Dancer
 local s,id=GetID()
 function s.initial_effect(c)
 	--gain lp

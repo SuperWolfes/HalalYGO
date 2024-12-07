@@ -1,4 +1,4 @@
---Jonjor's Eye (Anime)
+--Gorgon's Eye (Anime)
 --scripted by GameMaster (GM)
 --fixed by MLD
 local s,id=GetID()

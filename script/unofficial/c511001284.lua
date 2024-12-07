@@ -1,4 +1,4 @@
---Illusion Fog Blade
+--Phantom Fog Blade
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddPersistentProcedure(c,1,s.filter,CATEGORY_DISABLE,nil,nil,nil,nil,nil,s.target,nil,true)

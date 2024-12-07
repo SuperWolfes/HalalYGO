@@ -54,10 +54,10 @@ function s.select(e,tp,b1,b2)
 end
 function s.eqfilter1(c)
 	return c:IsFaceup() and c:IsSetCard(0x4093) and c:IsType(TYPE_EFFECT) 
-		and Duel.IsExistingMatchingCard(s.eqfilter2,0,LOCATION_REST,LOCATION_REST,1,nil)
+		and Duel.IsExistingMatchingCard(s.eqfilter2,0,LOCATION_GRAVE,LOCATION_GRAVE,1,nil)
 end
 function s.eqfilter2(c)
-	return c:IsRace(RACE_DRAGON+RACE_MACHINE) and c:IsMonster() and not c:IsUnliked()
+	return c:IsRace(RACE_DRAGON+RACE_MACHINE) and c:IsMonster() and not c:IsForbidden()
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.eqfilter1(chkc) end
@@ -66,7 +66,7 @@ function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 	local g=Duel.SelectTarget(tp,s.eqfilter1,tp,LOCATION_MZONE,0,1,1,nil)
 	Duel.RegisterFlagEffect(tp,id,RESET_PHASE+PHASE_END,0,1)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,nil,1,PLAYER_EITHER,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,nil,1,PLAYER_EITHER,0)
 end
 function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -75,7 +75,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local ec=Duel.GetFirstTarget()
 	if ec and ec:IsRelateToEffect(e) and ec:IsFaceup() then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.eqfilter2),tp,LOCATION_REST,LOCATION_REST,1,1,nil)
+		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.eqfilter2),tp,LOCATION_GRAVE,LOCATION_GRAVE,1,1,nil)
 		local tc=g:GetFirst()
 		if not tc or not Duel.Equip(tp,tc,ec,true) then return end
 		--Equip limit
@@ -100,15 +100,15 @@ function s.eqlimit(e,c)
 end
 function s.descfilter(c)
 	local ec=c:GetEquipTarget()
-	return ec and ec:IsRace(RACE_MACHINE) and c:IsAbleToRestAsCost()
+	return ec and ec:IsRace(RACE_MACHINE) and c:IsAbleToGraveAsCost()
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local mg=Duel.GetMatchingGroup(s.descfilter,tp,LOCATION_SZONE,0,nil)
 	local dg=Duel.GetMatchingGroup(nil,tp,0,LOCATION_ONFIELD,nil)
 	if chk==0 then return Duel.GetFlagEffect(tp,id+1)==0 and #mg>0 and #dg>0 end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=mg:Select(tp,1,1,nil)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 	Duel.RegisterFlagEffect(tp,id+1,RESET_PHASE+PHASE_END,0,1)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,dg,1,1-tp,LOCATION_ONFIELD)
 end

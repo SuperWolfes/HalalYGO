@@ -33,7 +33,7 @@ function s.initial_effect(c)
 	e4:SetTarget(s.destg)
 	e4:SetOperation(s.desop)
 	c:RegisterEffect(e4)
-	--Add to hand or Special Summon 1 "Dracoslayer" or "Dracovewatcher" monster
+	--Add to hand or Special Summon 1 "Dracoslayer" or "Dracovelord" monster
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(id,1))
 	e5:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND+CATEGORY_SPECIAL_SUMMON)

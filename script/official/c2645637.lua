@@ -1,13 +1,13 @@
 --零氷の魔妖－雪女
---Yuki-Onna, the Absolute Zero Mayashi
+--Yuki-Onna, the Absolute Zero Mayakashi
 --scripted by CyberCatMan
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
-	--You can only control 1 "Yuki-Onna, the Absolute Zero Mayashi"
+	c:EnableReviveLimit()
+	--You can only control 1 "Yuki-Onna, the Absolute Zero Mayakashi"
 	c:SetUniqueOnField(1,0,id)
 	--Link Summon procedure
-	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_TOXIC),2)
+	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_ZOMBIE),2)
 	--Negated any activated effects of your opponent's banished monsters
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCountLimit(2,id)
-	e2:SetCondition(function(e,tp,eg) return eg:IsExists(Card.IsSummonLocation,1,e:GetHandler(),LOCATION_REST) end)
+	e2:SetCondition(function(e,tp,eg) return eg:IsExists(Card.IsSummonLocation,1,e:GetHandler(),LOCATION_GRAVE) end)
 	e2:SetTarget(s.atktg)
 	e2:SetOperation(s.atkop)
 	c:RegisterEffect(e2)
@@ -68,5 +68,5 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.atkchaincon(e,tp,eg,ep,ev,re,r,rp,chk)
 	local loc=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_LOCATION)
-	return loc==LOCATION_REST and re:IsMonsterEffect()
+	return loc==LOCATION_GRAVE and re:IsMonsterEffect()
 end

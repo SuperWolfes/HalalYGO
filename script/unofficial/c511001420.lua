@@ -58,7 +58,7 @@ function s.retop(e,tp,eg,ep,ev,re,r,rp)
 	e:SetLabel(ct)
 	e:GetHandler():SetTurnCounter(ct)
 	if ct==3 then
-		if tc and tc:IsLocation(LOCATION_REST) then
+		if tc and tc:IsLocation(LOCATION_GRAVE) then
 			Duel.SpecialSummon(tc,0,1-tp,1-tp,false,false,POS_FACEUP_ATTACK)
 		end
 		if re then re:Reset() end

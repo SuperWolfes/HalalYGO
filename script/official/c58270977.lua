@@ -22,14 +22,14 @@ function s.costfilter(c,e,tp)
 	return c:IsMonster() and c:IsSetCard(SET_HERO) and c:IsFaceup() and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true,true)
 end
 function s.spcheck(sg,e,tp)
-	return Duel.GetMZoneCount(tp,sg)>0 and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,0,1,sg,e,tp)
+	return Duel.GetMZoneCount(tp,sg)>0 and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_GRAVE,0,1,sg,e,tp)
 end
 function s.spfilter(c,e,tp)
 	return c:IsMonster() and c:IsSetCard(SET_HERO) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(-1)
-	local rg=Duel.GetMatchingGroup(s.costfilter,tp,LOCATION_MZONE|LOCATION_REST,0,nil,e,tp)
+	local rg=Duel.GetMatchingGroup(s.costfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,nil,e,tp)
 	if chk==0 then return #rg>=4 and aux.SelectUnselectGroup(rg,e,tp,4,4,s.spcheck,0) end
 	local g=aux.SelectUnselectGroup(rg,e,tp,4,4,s.spcheck,1,tp,HINTMSG_REMOVE)
 	if g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_EARTH)
@@ -41,16 +41,16 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and s.spfilter(chkc,e,tp) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.spfilter(chkc,e,tp) end
 	if chk==0 then
 		local res=(e:GetLabel()==-1 or Duel.GetLocationCount(tp,LOCATION_MZONE)>0)
-			and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp)
+			and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp)
 		e:SetLabel(0)
 		return res
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp)
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,LOCATION_REST)
+	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,LOCATION_GRAVE)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()

@@ -13,7 +13,7 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroupCount(tp,0,LOCATION_HAND)>0 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_CODE)
-	s.announce_filter={TYPE_ACTIONAL,OPCODE_ISTYPE}
+	s.announce_filter={TYPE_SPELL,OPCODE_ISTYPE}
 	local ac=Duel.AnnounceCard(tp,table.unpack(s.announce_filter))
 	Duel.SetTargetParam(ac)
 	e:GetHandler():SetHint(CHINT_CARD,ac)
@@ -37,17 +37,17 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 				if Duel.IsDuelType(DUEL_1_FIELD) then
 					if fc then Duel.Destroy(fc,REASON_RULE) end
 					fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
-					if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
+					if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
 				else
 					Duel.GetFieldCard(1-tp,LOCATION_FZONE,0)
-					if fc and Duel.SendtoRest(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
+					if fc and Duel.SendtoGrave(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
 				end
 			end
 			Duel.MoveToField(tc,1-tp,1-tp,loc,POS_FACEUP,true)
 			Duel.Hint(HINT_CARD,0,tc:GetOriginalCode())
 			tc:CreateEffectRelation(te)
 			if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 then
-				tc:CancelToRest(false)
+				tc:CancelToGrave(false)
 			end
 			if co then co(te,1-tp,eg,ep,ev,re,r,rp,1) end
 			if tg then tg(te,1-tp,eg,ep,ev,re,r,rp,1) end

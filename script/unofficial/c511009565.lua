@@ -1,5 +1,5 @@
 --Ｅｍリバーサル・ダンサー
---Performanced Reversal Dancer
+--Performage Reversal Dancer
 --fixed by MLD
 Duel.EnableUnofficialProc(PROC_STATS_CHANGED)
 local s,id=GetID()
@@ -36,7 +36,7 @@ function s.initial_effect(c)
 	e4:SetCountLimit(1,0,EFFECT_COUNT_CODE_SINGLE)
 	c:RegisterEffect(e4)
 end
-s.listed_series={SET_PERFORMANCED}
+s.listed_series={SET_PERFORMAGE}
 function s.con(e,tp,eg,ep,ev,re,r,rp)
 	local ec=eg:GetFirst()
 	if #eg~=1 then return false end
@@ -45,7 +45,7 @@ function s.con(e,tp,eg,ep,ev,re,r,rp)
 	return ec:IsControler(1-tp) and ec:GetAttack()~=val
 end
 function s.filter(c,label)
-	return c:IsFaceup() and (label==LOCATION_PZONE or c:IsSetCard(SET_PERFORMANCED))
+	return c:IsFaceup() and (label==LOCATION_PZONE or c:IsSetCard(SET_PERFORMAGE))
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local label=e:GetLabel()

@@ -22,8 +22,8 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_TODECK)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
-	e2:SetCode(EVENT_TO_REST)
-	e2:SetRange(LOCATION_REST)
+	e2:SetCode(EVENT_TO_GRAVE)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCountLimit(1,id)
 	e2:SetCondition(s.tdcon)
 	e2:SetTarget(s.tdtg)
@@ -34,7 +34,7 @@ end
 s.listed_names={id}
 --Search
 function s.sfilter(c)
-	return c:IsRace(RACE_WANDERER) and c:IsAttribute(ATTRIBUTE_EARTH) and c:IsAbleToHand() and not c:IsCode(id)
+	return c:IsRace(RACE_FAIRY) and c:IsAttribute(ATTRIBUTE_EARTH) and c:IsAbleToHand() and not c:IsCode(id)
 end
 function s.scon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetSummonType()&SUMMON_TYPE_SPECIAL==0
@@ -57,7 +57,7 @@ function s.sop(e,tp,eg,ep,ev,re,r,rp)
 end
 --To Decktop
 function s.tgfilter(c,tp)
-	return c:IsRace(RACE_WANDERER)
+	return c:IsRace(RACE_FAIRY)
 		and c:IsPreviousLocation(LOCATION_MZONE) and c:IsPreviousPosition(POS_FACEUP) and c:GetPreviousControler()==tp
 end
 function s.tdcon(e,tp,eg,ep,ev,re,r,rp)
@@ -65,7 +65,7 @@ function s.tdcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsAbleToDeck() end
-	Duel.SetOperationInfo(0,CATEGORY_TODECK,e:GetHandler(),1,tp,LOCATION_REST)
+	Duel.SetOperationInfo(0,CATEGORY_TODECK,e:GetHandler(),1,tp,LOCATION_GRAVE)
 end
 function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsAbleToDeck() then return end

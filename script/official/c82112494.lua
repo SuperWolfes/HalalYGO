@@ -42,10 +42,10 @@ end
 s.listed_names={id}
 s.listed_series={SET_SUPERHEAVY_SAMURAI}
 function s.gycon(e,tp,eg,ep,ev,re,r,rp)
-	return not Duel.IsExistingMatchingCard(Card.IsActionalTrap,tp,LOCATION_REST,0,1,nil)
+	return not Duel.IsExistingMatchingCard(Card.IsSpellTrap,tp,LOCATION_GRAVE,0,1,nil)
 end
 function s.plfilter(c)
-	return c:IsSetCard(SET_SUPERHEAVY_SAMURAI) and c:IsType(TYPE_PENDULUM) and not c:IsCode(id) and not c:IsUnliked()
+	return c:IsSetCard(SET_SUPERHEAVY_SAMURAI) and c:IsType(TYPE_PENDULUM) and not c:IsCode(id) and not c:IsForbidden()
 end
 function s.pltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

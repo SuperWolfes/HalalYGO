@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_TOREST)
+	e1:SetCategory(CATEGORY_TOGRAVE)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_TO_HAND)
 	e1:SetCountLimit(1)
@@ -29,7 +29,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=eg:Filter(s.filter,nil,e,1-tp)
 	if #g==0 then return end
 	Duel.ConfirmCards(1-ep,g)
-	local dg=g:Filter(Card.IsActional,nil)
+	local dg=g:Filter(Card.IsSpell,nil)
 	Duel.Destroy(dg,REASON_EFFECT)
 	Duel.ShuffleHand(ep)
 end

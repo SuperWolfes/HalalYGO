@@ -1,8 +1,8 @@
 --サモン・ソーサレス (Pre-Errata)
---Summon Scoreeress (Pre-Errata)
+--Summon Sorceress (Pre-Errata)
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Link Summon procedure
 	Link.AddProcedure(c,aux.NOT(aux.FilterBoolFunctionEx(Card.IsType,TYPE_TOKEN)),2,3,s.lcheck)
 	--Special Summon 1 monster from your hand in Defense Position

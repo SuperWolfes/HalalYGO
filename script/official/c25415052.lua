@@ -2,8 +2,8 @@
 --Shinobaroness Peacock
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
-	local sme,soe=Guardian.AddProcedure(c,EVENT_SPSUMMON_SUCCESS)
+	c:EnableReviveLimit()
+	local sme,soe=Spirit.AddProcedure(c,EVENT_SPSUMMON_SUCCESS)
 	--Mandatory return
 	sme:SetCategory(CATEGORY_TOHAND+CATEGORY_SPECIAL_SUMMON+CATEGORY_TOKEN)
 	sme:SetTarget(s.mrettg)
@@ -12,14 +12,14 @@ function s.initial_effect(c)
 	soe:SetCategory(CATEGORY_TOHAND+CATEGORY_SPECIAL_SUMMON+CATEGORY_TOKEN)
 	soe:SetTarget(s.orettg)
 	soe:SetOperation(s.retop)
-	--Must be Locked Summoned
+	--Must be Ritual Summoned
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e1:SetCode(EFFECT_SPSUMMON_CONDITION)
 	e1:SetValue(aux.ritlimit)
 	c:RegisterEffect(e1)
-	--Shuffle up to 3 opponent Actional/Trap cards to the Deck
+	--Shuffle up to 3 opponent Spell/Trap cards to the Deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TODECK+CATEGORY_SPECIAL_SUMMON)
@@ -32,12 +32,12 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 s.listed_names={73055622,TOKEN_SHINOBIRD}
-s.listed_card_types={TYPE_GUARDIAN}
+s.listed_card_types={TYPE_SPIRIT}
 function s.tdcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_LOCKED)
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_RITUAL)
 end
 function s.tdfilter(c)
-	return c:IsActionalTrap() and c:IsAbleToDeck()
+	return c:IsSpellTrap() and c:IsAbleToDeck()
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,0,LOCATION_ONFIELD,1,nil) end
@@ -45,7 +45,7 @@ function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK)
 end
 function s.spfilter(c,e,tp)
-	return c:IsType(TYPE_GUARDIAN) and c:IsLevelBelow(4) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
+	return c:IsType(TYPE_SPIRIT) and c:IsLevelBelow(4) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
 end
 function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
@@ -64,17 +64,17 @@ function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.mrettg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Guardian.MandatoryReturnTarget(e,tp,eg,ep,ev,re,r,rp,1)
+	Spirit.MandatoryReturnTarget(e,tp,eg,ep,ev,re,r,rp,1)
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,2,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,0)
 end
 function s.tkcheck(e,tp)
-	return Duel.GetMZoneCount(tp,e:GetHandler())>1 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)
+	return Duel.GetMZoneCount(tp,e:GetHandler())>1 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
 		and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_SHINOBIRD,0,TYPES_TOKEN,1500,1500,4,RACE_WINGEDBEAST,ATTRIBUTE_WIND)
 end
 function s.orettg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Guardian.OptionalReturnTarget(e,tp,eg,ep,ev,re,r,rp,0) and s.tkcheck(e,tp) end
-	Guardian.OptionalReturnTarget(e,tp,eg,ep,ev,re,r,rp,1)
+	if chk==0 then return Spirit.OptionalReturnTarget(e,tp,eg,ep,ev,re,r,rp,0) and s.tkcheck(e,tp) end
+	Spirit.OptionalReturnTarget(e,tp,eg,ep,ev,re,r,rp,1)
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,2,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,0)
 end

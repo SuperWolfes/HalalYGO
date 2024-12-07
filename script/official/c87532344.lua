@@ -34,12 +34,12 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	local fustg=Fusion.SummonEffTG(nil,Fusion.OnFieldMat,s.fextra)
-	--Special Summon 1 of your "Yubel" monsters that is banished or in your RP
+	--Special Summon 1 of your "Yubel" monsters that is banished or in your GY
 	local b1=not Duel.HasFlagEffect(tp,id) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST|LOCATION_REMOVED,0,1,nil,e,tp)
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE|LOCATION_REMOVED,0,1,nil,e,tp)
 	--Fusion Summon using monsters from either field as material, including a "Yubel" monster
 	local b2=not Duel.HasFlagEffect(tp,id+1) and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_YUBEL),tp,LOCATION_ONFIELD,0,1,nil)
-		and c:IsAbleToRestAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED)
+		and c:IsAbleToGraveAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED)
 		and Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,nil)
 		and fustg(e,tp,eg,ep,ev,re,r,rp,0)
 	if chk==0 then return b1 or b2 end
@@ -50,11 +50,11 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if op==1 then
 		e:SetCategory(CATEGORY_SPECIAL_SUMMON)
 		Duel.RegisterFlagEffect(tp,id,RESET_PHASE|PHASE_END,0,1)
-		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST|LOCATION_REMOVED)
+		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE|LOCATION_REMOVED)
 	elseif op==2 then
 		e:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)
 		Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST|REASON_DISCARD)
-		Duel.SendtoRest(c,REASON_COST)
+		Duel.SendtoGrave(c,REASON_COST)
 		fustg(e,tp,eg,ep,ev,re,r,rp,1)
 		Duel.RegisterFlagEffect(tp,id+1,RESET_PHASE|PHASE_END,0,1)
 	end
@@ -62,10 +62,10 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local op=e:GetLabel()
 	if op==1 then
-		--Special Summon 1 of your "Yubel" monsters that is banished or in your RP
+		--Special Summon 1 of your "Yubel" monsters that is banished or in your GY
 		if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local sc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST|LOCATION_REMOVED,0,1,1,nil,e,tp):GetFirst()
+		local sc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_GRAVE|LOCATION_REMOVED,0,1,1,nil,e,tp):GetFirst()
 		if sc and Duel.SpecialSummonStep(sc,0,tp,tp,false,false,POS_FACEUP) then
 			sc:RegisterFlagEffect(id,RESET_EVENT|RESETS_STANDARD,0,1)
 			--Neither player can activate cards or effects when that monster is Special Summoned

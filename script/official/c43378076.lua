@@ -2,7 +2,7 @@
 --Rasetsu
 local s,id=GetID()
 function s.initial_effect(c)
-	Guardian.AddProcedure(c,EVENT_SUMMON_SUCCESS,EVENT_FLIP)
+	Spirit.AddProcedure(c,EVENT_SUMMON_SUCCESS,EVENT_FLIP)
 	--Cannot be Special Summoned
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -25,9 +25,9 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 s.listed_names={id}
-s.listed_card_types={TYPE_GUARDIAN}
+s.listed_card_types={TYPE_SPIRIT}
 function s.cfilter(c)
-	return c:IsType(TYPE_GUARDIAN) and not c:IsCode(id) and not c:IsPublic()
+	return c:IsType(TYPE_SPIRIT) and not c:IsCode(id) and not c:IsPublic()
 end
 function s.sretcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetActivityCount(tp,ACTIVITY_SPSUMMON)==0

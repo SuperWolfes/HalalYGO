@@ -3,8 +3,8 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
-	--Add 1 Locked monster from the Deck to the hand
+	c:EnableReviveLimit()
+	--Add 1 Ritual monster from the Deck to the hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_TODECK)
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.thtg)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
-	--Perform a Locked summon
+	--Perform a Ritual summon
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -34,18 +34,18 @@ function s.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetCode(EVENT_RELEASE)
 	e3:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_CARD_TARGET)
-	e3:SetCondition(function(e) return e:GetHandler():IsSummonType(SUMMON_TYPE_LOCKED) end)
+	e3:SetCondition(function(e) return e:GetHandler():IsSummonType(SUMMON_TYPE_RITUAL) end)
 	e3:SetTarget(s.negtg)
 	e3:SetOperation(s.negop)
 	c:RegisterEffect(e3)
 end
 s.listed_names={17888577}
 function s.thfilter1(c,tp)
-	return c:IsLockedActional() and not c:IsPublic() and c:IsAbleToDeck()
+	return c:IsRitualSpell() and not c:IsPublic() and c:IsAbleToDeck()
 		and Duel.IsExistingMatchingCard(s.thfilter2,tp,LOCATION_DECK,0,1,nil,c)
 end
 function s.thfilter2(c,mc)
-	return c:IsLockedMonster() and c:IsAbleToHand() and s.isfit(c,mc)
+	return c:IsRitualMonster() and c:IsAbleToHand() and s.isfit(c,mc)
 end
 function s.isfit(c,mc)
 	return (mc.fit_monster and c:IsCode(table.unpack(mc.fit_monster))) or mc:ListsCode(c:GetCode())
@@ -72,7 +72,7 @@ function s.ritcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	return true
 end
 function s.ritfilter(c)
-	return c:IsLockedActional() and c:IsAbleToRestAsCost() and c:CheckActivateEffect(true,true,false)~=nil
+	return c:IsRitualSpell() and c:IsAbleToGraveAsCost() and c:CheckActivateEffect(true,true,false)~=nil
 end
 function s.rittg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then 
@@ -81,11 +81,11 @@ function s.rittg(e,tp,eg,ep,ev,re,r,rp,chk)
 		return Duel.IsExistingMatchingCard(s.ritfilter,tp,LOCATION_DECK,0,1,nil)
 	end
 	e:SetLabel(0)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local tc=Duel.SelectMatchingCard(tp,s.ritfilter,tp,LOCATION_DECK,0,1,1,nil):GetFirst()
 	local te=tc:CheckActivateEffect(true,true,false)
 	e:SetLabelObject(te)
-	Duel.SendtoRest(tc,REASON_COST)
+	Duel.SendtoGrave(tc,REASON_COST)
 	e:SetProperty(te:GetProperty())
 	local tg=te:GetTarget()
 	if tg then tg(e,tp,eg,ep,ev,re,r,rp,1) end

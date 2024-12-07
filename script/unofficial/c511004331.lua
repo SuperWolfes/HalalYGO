@@ -1,5 +1,5 @@
 --ゴーレムの合掌
---Gopal's Clap
+--Golem's Clap
 --scripted by andré
 local s,id=GetID()
 function s.initial_effect(c)

@@ -86,10 +86,10 @@ function s.splimit(e,c)
 	return not (c:IsSetCard(0x10ec) and c:IsType(TYPE_PENDULUM))
 end
 function s.valfilter(c)
-	return c:IsSetCard(0x20ec) and c:IsActional()
+	return c:IsSetCard(0x20ec) and c:IsSpell()
 end
 function s.val(e,c)
-	return Duel.GetMatchingGroupCount(s.valfilter,c:GetControler(),LOCATION_REST,0,nil)*100
+	return Duel.GetMatchingGroupCount(s.valfilter,c:GetControler(),LOCATION_GRAVE,0,nil)*100
 end
 function s.cfilter(c,tp)
 	return c:IsType(TYPE_PENDULUM) and c:IsPreviousLocation(LOCATION_MZONE) and c:IsPreviousControler(tp)
@@ -108,7 +108,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)
 end
 function s.spcon2(e,tp,eg,ep,ev,re,r,rp)
-	return re:IsActiveType(TYPE_ACTIONAL)and re:GetHandler():IsSetCard(0x20ec)
+	return re:IsActiveType(TYPE_SPELL)and re:GetHandler():IsSetCard(0x20ec)
 end
 function s.spfilter(c,e,tp)
 	return c:IsLevelBelow(4) and c:IsSetCard(0x10ec) and c:IsType(TYPE_PENDULUM) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

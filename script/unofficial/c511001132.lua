@@ -91,8 +91,8 @@ function s.rettg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_ALL-LOCATION_MZONE,LOCATION_ALL-LOCATION_MZONE,nil,id+tp)
 	if chk==0 then return #g>0 and #g==Duel.GetFlagEffect(tp,id+2) and g:FilterCount(s.retfilter,nil,tp)==#g
 		and g:GetClassCount(Card.GetPreviousSequence)==#g and s[tp]>=1000 end
-	local sg=g:Filter(Card.IsLocation,nil,LOCATION_REST)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,sg,#sg,0,0)
+	local sg=g:Filter(Card.IsLocation,nil,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,sg,#sg,0,0)
 end
 function s.retop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_ALL-LOCATION_MZONE,LOCATION_ALL-LOCATION_MZONE,nil,id+tp)

@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Return Actional/Trap to the hand + Draw and Shuffle
+	--Return Spell/Trap to the hand + Draw and Shuffle
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_DRAW+CATEGORY_TODECK)
@@ -68,7 +68,7 @@ function s.ffilter(c,code)
 	return c:IsFaceup() and c:IsCode(code)
 end
 function s.thfilter(c)
-	return c:IsActionalTrap() and c:IsAbleToHand()
+	return c:IsSpellTrap() and c:IsAbleToHand()
 end
 function s.op2(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.IsExistingMatchingCard(s.ffilter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil,CARD_DREAM_MIRROR_JOY)

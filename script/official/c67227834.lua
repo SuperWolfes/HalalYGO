@@ -1,7 +1,7 @@
 --魔術の呪文書
 local s,id=GetID()
 function s.initial_effect(c)
-	aux.AddEquipProcedure(c,nil,aux.FilterBoolFunction(Card.IsCode,CARD_DARK_MENTOR,CARD_DARK_MENTOR_GIRL))
+	aux.AddEquipProcedure(c,nil,aux.FilterBoolFunction(Card.IsCode,CARD_DARK_MAGICIAN,CARD_DARK_MAGICIAN_GIRL))
 	--Atk up
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_EQUIP)
@@ -14,13 +14,13 @@ function s.initial_effect(c)
 	e4:SetCategory(CATEGORY_RECOVER)
 	e4:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	e4:SetCode(EVENT_TO_REST)
+	e4:SetCode(EVENT_TO_GRAVE)
 	e4:SetCondition(s.reccon)
 	e4:SetTarget(s.rectg)
 	e4:SetOperation(s.recop)
 	c:RegisterEffect(e4)
 end
-s.listed_names={CARD_DARK_MENTOR,CARD_DARK_MENTOR_GIRL}
+s.listed_names={CARD_DARK_MAGICIAN,CARD_DARK_MAGICIAN_GIRL}
 function s.reccon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD)
 end

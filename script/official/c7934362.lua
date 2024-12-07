@@ -1,11 +1,11 @@
 --Ｅｍファイヤー・ダンサー
---Performanced Fire Dancer
+--Performage Fire Dancer
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
 	--Pendulum Summon procedure
 	Pendulum.AddProcedure(c)
-	--Grant piercing to 1 "Performanced" monster you control
+	--Grant piercing to 1 "Performage" monster you control
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.piercetg)
 	e1:SetOperation(s.pierceop)
 	c:RegisterEffect(e1)
-	--Add 1 "Performanced" monster from your Deck to your hand
+	--Add 1 "Performage" monster from your Deck to your hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -41,10 +41,10 @@ function s.initial_effect(c)
 	e4:SetOperation(s.atkop)
 	c:RegisterEffect(e4)
 end
-s.listed_series={SET_PERFORMANCED}
+s.listed_series={SET_PERFORMAGE}
 s.listed_names={id}
 function s.piercefilter(c)
-	return c:IsFaceup() and c:IsSetCard(SET_PERFORMANCED) and not c:IsHasEffect(EFFECT_PIERCE)
+	return c:IsFaceup() and c:IsSetCard(SET_PERFORMAGE) and not c:IsHasEffect(EFFECT_PIERCE)
 end
 function s.piercetg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.piercefilter(chkc) end
@@ -66,7 +66,7 @@ function s.pierceop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.thfilter(c)
-	return c:IsSetCard(SET_PERFORMANCED) and c:IsMonster() and c:IsAbleToHand() and not c:IsCode(id)
+	return c:IsSetCard(SET_PERFORMAGE) and c:IsMonster() and c:IsAbleToHand() and not c:IsCode(id)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

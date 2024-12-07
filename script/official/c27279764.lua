@@ -38,10 +38,10 @@ function s.initial_effect(c)
 	local e7=e6:Clone()
 	e7:SetCode(EFFECT_UPDATE_DEFENSE)
 	c:RegisterEffect(e7)
-	--Make the opponent send 1 monster to the RP
+	--Make the opponent send 1 monster to the GY
 	local e8=Effect.CreateEffect(c)
 	e8:SetDescription(aux.Stringid(id,1))
-	e8:SetCategory(CATEGORY_TOREST)
+	e8:SetCategory(CATEGORY_TOGRAVE)
 	e8:SetType(EFFECT_TYPE_IGNITION)
 	e8:SetRange(LOCATION_MZONE)
 	e8:SetCountLimit(1)
@@ -54,7 +54,7 @@ function s.tlimit(e,c)
 	return not c:IsSetCard(SET_QLI)
 end
 function s.efilter(e,te)
-	if te:IsActionalTrapEffect() then
+	if te:IsSpellTrapEffect() then
 		return true
 	else
 		return aux.qlifilter(e,te)
@@ -65,14 +65,14 @@ function s.adtg(e,c)
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroupCount(tp,0,LOCATION_MZONE|LOCATION_HAND)>0 end
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,0,LOCATION_MZONE|LOCATION_HAND)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,0,LOCATION_MZONE|LOCATION_HAND)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(Card.IsMonster,1-tp,LOCATION_MZONE|LOCATION_HAND,0,nil)
 	if #g>0 then
-		Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOREST)
+		Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOGRAVE)
 		local sg=g:Select(1-tp,1,1,nil)
 		Duel.HintSelection(sg)
-		Duel.SendtoRest(sg,REASON_RULE,PLAYER_NONE,1-tp)
+		Duel.SendtoGrave(sg,REASON_RULE,PLAYER_NONE,1-tp)
 	end
 end

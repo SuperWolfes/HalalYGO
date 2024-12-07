@@ -11,14 +11,14 @@ function s.initial_effect(c)
 	e1:SetHintTiming(0,TIMING_END_PHASE)
 	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
 	e1:SetTarget(s.settg)
-	e1:SetOperation(s.vetop)
+	e1:SetOperation(s.setop)
 	c:RegisterEffect(e1)
 	--Name Change
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e2:SetCode(EFFECT_CHANGE_CODE)
-	e2:SetRange(LOCATION_SZONE+LOCATION_REST)
+	e2:SetRange(LOCATION_SZONE+LOCATION_GRAVE)
 	e2:SetValue(CARD_SANCTUARY_SKY)
 	c:RegisterEffect(e2)
 	--Negate
@@ -39,12 +39,12 @@ end
 s.listed_names={CARD_SANCTUARY_SKY}
 --Set
 function s.setfilter(c)
-	return c:IsSSetable() and (c:IsCode(CARD_SANCTUARY_SKY) or (c:ListsCode(CARD_SANCTUARY_SKY) and c:IsActionalTrap()))
+	return c:IsSSetable() and (c:IsCode(CARD_SANCTUARY_SKY) or (c:ListsCode(CARD_SANCTUARY_SKY) and c:IsSpellTrap()))
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_DECK,0,1,nil) end
 end
-function s.vetop(e,tp,eg,ep,ev,re,r,rp)
+function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
@@ -55,12 +55,12 @@ function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 end
 --Negate
 function s.remfilter(c)
-	return c:IsRace(RACE_WANDERER) and c:IsAbleToRemoveAsCost() and c:IsMonster() and aux.SpElimFilter(c,true,false)
+	return c:IsRace(RACE_FAIRY) and c:IsAbleToRemoveAsCost() and c:IsMonster() and aux.SpElimFilter(c,true,false)
 end
 function s.negcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.remfilter,tp,LOCATION_REST,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.remfilter,tp,LOCATION_GRAVE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local tc=Duel.SelectMatchingCard(tp,s.remfilter,tp,LOCATION_REST,0,1,1,nil)
+	local tc=Duel.SelectMatchingCard(tp,s.remfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 	Duel.Remove(tc,POS_FACEUP,REASON_COST)
 end
 function s.negfilter(c)

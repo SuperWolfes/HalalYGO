@@ -1,5 +1,5 @@
 --メタファイズ・アセンション
---Metadata Ascension
+--Metaphys Ascension
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

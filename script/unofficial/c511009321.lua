@@ -1,8 +1,8 @@
---The Illusion Knights of Unclean Javelin
+--The Phantom Knights of Cursed Javelin
 local s,id=GetID()
 function s.initial_effect(c)
 	Xyz.AddProcedure(c,nil,2,2)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--atk down
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(62070231,0))

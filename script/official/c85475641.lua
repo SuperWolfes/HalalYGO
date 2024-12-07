@@ -8,14 +8,14 @@ function s.initial_effect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_BATTLE_DESTROYED)
-	e1:SetRange(LOCATION_REST)
+	e1:SetRange(LOCATION_GRAVE)
 	e1:SetCondition(s.spcon)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
 end
 function s.filter(c,tp)
-	return c:IsLocation(LOCATION_REST) and c:IsReason(REASON_BATTLE) and c:HasLevel()
+	return c:IsLocation(LOCATION_GRAVE) and c:IsReason(REASON_BATTLE) and c:HasLevel()
 		and c:IsControler(tp) and c:IsPreviousControler(tp) and c:GetCode()~=id
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)

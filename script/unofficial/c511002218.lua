@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddEquipProcedure(c,nil,nil,nil,nil,s.tg,s.op)
-	--Mismatching replacement for the equipped monster
+	--Destruction replacement for the equipped monster
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_EQUIP)
 	e1:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)

@@ -63,16 +63,16 @@ function s.repfilter(c,tp)
 		and c:IsLocation(LOCATION_MZONE) and c:IsControler(tp) and c:IsReason(REASON_BATTLE+REASON_EFFECT) and not c:IsReason(REASON_REPLACE)
 end
 function s.tgfilter(c)
-	return c:IsType(TYPE_NORMAL) and c:IsAbleToRest()
+	return c:IsType(TYPE_NORMAL) and c:IsAbleToGrave()
 end
 function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return eg:IsExists(s.repfilter,1,nil,tp) and #eg==1
 		and Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil) end
 	if Duel.SelectEffectYesNo(tp,e:GetHandler(),96) then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 		local sg=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,1,nil)
 		Duel.Hint(HINT_CARD,0,id)
-		Duel.SendtoRest(sg,REASON_EFFECT+REASON_REPLACE)
+		Duel.SendtoGrave(sg,REASON_EFFECT+REASON_REPLACE)
 		return true
 	else return false end
 end

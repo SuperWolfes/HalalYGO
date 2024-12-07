@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetCondition(s.lkcon)
 	e1:SetOperation(s.lkop)
 	c:RegisterEffect(e1)
-	--RP recycle, if special summoned
+	--GY recycle, if special summoned
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(6480253,0))
 	e2:SetCategory(CATEGORY_TOHAND)
@@ -26,7 +26,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.thtg)
 	e2:SetOperation(s.thop)
 	c:RegisterEffect(e2)
-	--RP recycle, if added to hand
+	--GY recycle, if added to hand
 	local e3=e2:Clone()
 	e3:SetCode(EVENT_TO_HAND)
 	e3:SetCondition(s.thcon2)
@@ -51,14 +51,14 @@ function s.lkop(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
 	rc:RegisterEffect(e2)
 end
-	--If this card was special summoned from RP
+	--If this card was special summoned from GY
 function s.thcon1(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsPreviousLocation(LOCATION_REST)
+	return e:GetHandler():IsPreviousLocation(LOCATION_GRAVE)
 end
-	--If this card was added from RP to hand
+	--If this card was added from GY to hand
 function s.thcon2(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return (r&REASON_EFFECT)~=0 and c:IsPreviousLocation(LOCATION_REST) and c:GetPreviousControler()==tp
+	return (r&REASON_EFFECT)~=0 and c:IsPreviousLocation(LOCATION_GRAVE) and c:GetPreviousControler()==tp
 end
 	--Reveal this card from hand
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -66,10 +66,10 @@ function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 	--Activation legality
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and chkc:IsAbleToHand() end
-	if chk==0 then return Duel.IsExistingTarget(Card.IsAbleToHand,tp,LOCATION_REST,0,1,e:GetHandler()) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and chkc:IsAbleToHand() end
+	if chk==0 then return Duel.IsExistingTarget(Card.IsAbleToHand,tp,LOCATION_GRAVE,0,1,e:GetHandler()) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectTarget(tp,Card.IsAbleToHand,tp,LOCATION_REST,0,1,1,e:GetHandler())
+	local g=Duel.SelectTarget(tp,Card.IsAbleToHand,tp,LOCATION_GRAVE,0,1,1,e:GetHandler())
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,0,0)
 end
 	--Performing the recycle effect

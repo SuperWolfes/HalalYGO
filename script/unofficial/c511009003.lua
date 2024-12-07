@@ -1,4 +1,4 @@
---Mystic Spectrum Gate
+--Mystic Heaven Gate
 local s,id=GetID()
 function s.initial_effect(c)
 	--pendulum summon

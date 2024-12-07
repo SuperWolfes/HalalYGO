@@ -22,7 +22,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			Duel.ConfirmCards(1-tp,add)
 			Duel.ShuffleHand(tp)
 		else
-			Duel.SendtoRest(add,REASON_EFFECT)
+			Duel.SendtoGrave(add,REASON_EFFECT)
 		end
 		local back=Duel.GetDecktopGroup(tp,1)
 		Duel.MoveSequence(back:GetFirst(),1)

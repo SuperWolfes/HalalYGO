@@ -1,5 +1,5 @@
 --破壊神の系譜 (Anime)
---Lineage of Mismatching (Anime)
+--Lineage of Destruction (Anime)
 --fixed by Larry126
 local s,id=GetID()
 function s.initial_effect(c)

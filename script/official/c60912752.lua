@@ -17,5 +17,5 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.bpcon(e)
-	return not Duel.IsExistingMatchingCard(Card.IsActional,e:GetHandlerPlayer(),LOCATION_REST,0,1,nil)
+	return not Duel.IsExistingMatchingCard(Card.IsSpell,e:GetHandlerPlayer(),LOCATION_GRAVE,0,1,nil)
 end

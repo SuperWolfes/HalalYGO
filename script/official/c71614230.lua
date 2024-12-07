@@ -1,10 +1,10 @@
 --ケンドウ魂ＫＡＩ－ＤＥＮ
---Kai-Den Kendo Guardian
+--Kai-Den Kendo Spirit
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
 	Pendulum.AddProcedure(c)
-	Guardian.AddProcedure(c,EVENT_SUMMON_SUCCESS,EVENT_FLIP)
+	Spirit.AddProcedure(c,EVENT_SUMMON_SUCCESS,EVENT_FLIP)
 	--Return this card from the Pendulum Zone
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -16,10 +16,10 @@ function s.initial_effect(c)
 	e1:SetTarget(s.thtg)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
-	--Send to RP
+	--Send to GY
 	local e2=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_TOREST)
+	e2:SetCategory(CATEGORY_TOGRAVE)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_SUMMON_SUCCESS)
 	e2:SetTarget(s.gytg)
@@ -43,7 +43,7 @@ function s.gyfilter(c,tp)
 end
 function s.gytg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.gyfilter,tp,LOCATION_PZONE,0,1,nil,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,0,1-tp,LOCATION_ONFIELD)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,0,1-tp,LOCATION_ONFIELD)
 end
 function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 	local pg=Duel.GetMatchingGroup(s.gyfilter,tp,LOCATION_PZONE,0,nil,tp)
@@ -54,6 +54,6 @@ function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.HintSelection(pc,true)
 	local g=pc:GetColumnGroup():Filter(Card.IsControler,nil,1-tp)
 	if #g>0 then
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	end
 end

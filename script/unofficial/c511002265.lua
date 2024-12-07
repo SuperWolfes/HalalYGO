@@ -10,6 +10,6 @@ function s.initial_effect(c)
 end
 function s.atkcon(e)
 	local c=e:GetHandler()
-	return c:GetPreviousLocation()==LOCATION_REST 
+	return c:GetPreviousLocation()==LOCATION_GRAVE 
 		and (c:GetSummonType()&SUMMON_TYPE_SPECIAL)==SUMMON_TYPE_SPECIAL
 end

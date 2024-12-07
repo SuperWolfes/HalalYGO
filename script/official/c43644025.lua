@@ -24,7 +24,7 @@ function s.filter1(c,e,tp)
 	if c:IsFacedown() then return false end
 	local code=c:GetCode()
 	local tcode=s.list[code]
-	return tcode and Duel.IsExistingTarget(s.filter2,tp,LOCATION_REST,LOCATION_REST,1,nil,tcode,e,tp)
+	return tcode and Duel.IsExistingTarget(s.filter2,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,nil,tcode,e,tp)
 end
 function s.filter2(c,tcode,e,tp)
 	return c:IsCode(tcode) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
@@ -46,7 +46,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local tcode=s.list[code]
 	Duel.Release(rg,REASON_COST)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.filter2,tp,LOCATION_REST,LOCATION_REST,1,1,nil,tcode,e,tp)
+	local g=Duel.SelectTarget(tp,s.filter2,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,1,nil,tcode,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)

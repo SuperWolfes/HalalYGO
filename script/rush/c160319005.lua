@@ -1,5 +1,5 @@
 --ロード・オブ・ドラゴン－ドラゴンの絶対者
---Absolute Watcher of D.
+--Absolute Lord of D.
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)

@@ -1,5 +1,5 @@
 --幻影鱗粉
---Illusion Scales
+--Phantom Scales
 --original script by Shad3
 local s,id=GetID()
 function s.initial_effect(c)

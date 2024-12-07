@@ -1,5 +1,5 @@
 --呪魂の仮面
---Mask if the Acunclean (GOAT)
+--Mask if the Accursed (GOAT)
 --If monster is immuned, no damage occurs
 local s,id=GetID()
 function s.initial_effect(c)

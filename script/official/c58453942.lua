@@ -1,9 +1,9 @@
 --サイコ・ウォールド
---Mental Snail
+--Psychic Snail
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Targeted mental monster can make a second attack
+	--Targeted psychic monster can make a second attack
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
@@ -31,7 +31,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:GetHandler():RegisterEffect(e1)
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsRace(RACE_MENTAL) and c:GetEffectCount(EFFECT_EXTRA_ATTACK)==0
+	return c:IsFaceup() and c:IsRace(RACE_PSYCHIC) and c:GetEffectCount(EFFECT_EXTRA_ATTACK)==0
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.filter(chkc) end

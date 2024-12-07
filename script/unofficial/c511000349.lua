@@ -15,12 +15,12 @@ function s.tgfilter(c)
 	return c:IsMonster() and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.tgfilter(chkc) end
-	if chk==0 then return Duel.IsPlayerCanDraw(1-tp,2) and Duel.IsExistingTarget(s.tgfilter,tp,LOCATION_REST,0,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.tgfilter(chkc) end
+	if chk==0 then return Duel.IsPlayerCanDraw(1-tp,2) and Duel.IsExistingTarget(s.tgfilter,tp,LOCATION_GRAVE,0,1,nil) end
 	Duel.SetTargetPlayer(1-tp)
 	Duel.SetTargetParam(2)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local sg=Duel.SelectTarget(tp,s.tgfilter,tp,LOCATION_REST,0,1,1,nil)
+	local sg=Duel.SelectTarget(tp,s.tgfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,sg,#sg,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,1-tp,2)
 end

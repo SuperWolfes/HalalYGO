@@ -1,5 +1,5 @@
 --風霊使いウィン
---Wynn the Wind Chaumer
+--Wynn the Wind Charmer
 local s,id=GetID()
 function s.initial_effect(c)
 	--flip

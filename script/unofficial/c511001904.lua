@@ -1,4 +1,4 @@
---Amazonian Call
+--Amazoness Call
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -29,7 +29,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,1,0,0)
 end
 function s.mgfilter(c,e,tp,fusc)
-	return c:IsLocation(LOCATION_REST) and c:GetReason()&0x40008==0x40008 
+	return c:IsLocation(LOCATION_GRAVE) and c:GetReason()&0x40008==0x40008 
 		and c:GetReasonCard()==fusc and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)

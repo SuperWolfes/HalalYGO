@@ -36,5 +36,5 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if op then op(e,tp,eg,ep,ev,re,r,rp) end
 end
 function s.repop(e,tp,eg,ep,ev,re,r,rp)
-	e:GetHandler():CancelToRest(false)
+	e:GetHandler():CancelToGrave(false)
 end

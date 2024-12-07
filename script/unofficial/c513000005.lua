@@ -1,5 +1,5 @@
 --千眼の死霊
---Thousand-Eyed Miss
+--Thousand-Eyed Ghost
 local s,id=GetID()
 function s.initial_effect(c)
 	--Special Summon 1 Level 4 or lower monster from your Deck
@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	e1:SetDescription(aux.Stringid(id,1))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	e1:SetCode(EVENT_TO_REST)
+	e1:SetCode(EVENT_TO_GRAVE)
 	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
 	e1:SetCondition(s.spcon)
 	e1:SetTarget(s.sptg)

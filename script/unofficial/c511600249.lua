@@ -1,5 +1,5 @@
 --ドローン・フォース・フュージョン
---Drone Fcoree Fusion
+--Drone Force Fusion
 --scripted by Larry126
 Duel.LoadScript("c420.lua")
 local s,id=GetID()

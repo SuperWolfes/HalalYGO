@@ -1,5 +1,5 @@
 --氷結界の鏡魔師
---Mirror Ment Master of the Ice Barrier
+--Mirror Magic Master of the Ice Barrier
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
-	e2:SetCode(EVENT_TO_REST)
+	e2:SetCode(EVENT_TO_GRAVE)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetTarget(s.thtg)
 	e2:SetOperation(s.thop)
@@ -60,7 +60,7 @@ function s.tkop(e,tp,eg,ep,ev,re,r,rp)
 	aux.addTempLizardCheck(c,tp,function(_,c) return not c:IsOriginalType(TYPE_SYNCHRO) or not c:IsOriginalAttribute(ATTRIBUTE_WATER) end)
 	local ft=math.min(3,Duel.GetLocationCount(tp,LOCATION_MZONE))
 	if ft==0 or not Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_ICE_BARRIER,SET_ICE_BARRIER,TYPES_TOKEN,0,0,1,RACE_AQUA,ATTRIBUTE_WATER,POS_FACEUP) then return end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
 	local ct=Duel.AnnounceNumberRange(tp,1,ft)
 	for i=1,ct do
 		local token=Duel.CreateToken(tp,TOKEN_ICE_BARRIER)

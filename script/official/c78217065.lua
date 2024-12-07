@@ -38,7 +38,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e1,tp)
 	if not e:IsHasType(EFFECT_TYPE_ACTIVATE) then return end
-	--Cannot Special Summon, except with Actional effects
+	--Cannot Special Summon, except with Spell effects
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,2))
 	e2:SetType(EFFECT_TYPE_FIELD)
@@ -72,5 +72,5 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.splimit(e,c,sump,sumtype,sumpos,targetp,se)
-	return not (se and se:IsActiveType(TYPE_ACTIONAL))
+	return not (se and se:IsActiveType(TYPE_SPELL))
 end

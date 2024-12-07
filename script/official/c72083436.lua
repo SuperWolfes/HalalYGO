@@ -15,12 +15,12 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 s.listed_card_types={TYPE_UNION}
-s.listed_series={SET_BALKANIE}
+s.listed_series={SET_VALKYRIE}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsAbleToEnterBP() and Duel.IsExistingMatchingCard(Card.IsType,tp,LOCATION_REST,0,1,nil,TYPE_UNION)
+	return Duel.IsAbleToEnterBP() and Duel.IsExistingMatchingCard(Card.IsType,tp,LOCATION_GRAVE,0,1,nil,TYPE_UNION)
 end
 function s.tgfilter(c)
-	return c:IsSetCard(SET_BALKANIE) and c:IsFaceup() and c:CanAttack() and not c:IsHasEffect(EFFECT_DIRECT_ATTACK)
+	return c:IsSetCard(SET_VALKYRIE) and c:IsFaceup() and c:CanAttack() and not c:IsHasEffect(EFFECT_DIRECT_ATTACK)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and s.tgfilter(chkc) end

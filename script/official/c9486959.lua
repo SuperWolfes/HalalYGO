@@ -1,11 +1,11 @@
 --神隠し鬼火丸
---Guardianing-Away Onibimaru
+--Spiriting-Away Onibimaru
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz Summon
 	Xyz.AddProcedure(c,nil,2,2,nil,nil,99)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Banish until the opponent's End Phase
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

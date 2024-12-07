@@ -1,5 +1,5 @@
 --神竜 ティタノマキア
---Mega Dragon Titanomakhia
+--Divine Dragon Titanomakhia
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.destg)
 	e2:SetOperation(s.desop)
 	c:RegisterEffect(e2)
-	--Send cards from the top of your Deck to the RP
+	--Send cards from the top of your Deck to the GY
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_DECKDES)
@@ -43,7 +43,7 @@ function s.rescon(sg,e,tp,mg)
 	return sg:IsContains(e:GetHandler())
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_MZONE+LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil)
 	if chk==0 then return #g>0 and aux.SelectUnselectGroup(g,e,tp,3,3,s.rescon,0) end
 	local rg=aux.SelectUnselectGroup(g,e,tp,3,3,s.rescon,1,tp,HINTMSG_REMOVE)
 	Duel.Remove(rg,POS_FACEUP,REASON_COST)

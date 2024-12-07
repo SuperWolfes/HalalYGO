@@ -1,5 +1,5 @@
 --冥界の麗人イゾルデ
---Isolde, Belle of the Overworld
+--Isolde, Belle of the Underworld
 local s,id=GetID()
 function s.initial_effect(c)
 	--cannot special summon
@@ -34,7 +34,7 @@ function s.spcon(e,c)
 		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,96163807),tp,LOCATION_ONFIELD,0,1,nil)
 end
 function s.filter(c)
-	return c:IsFaceup() and c:HasLevel() and c:IsRace(RACE_TOXIC)
+	return c:IsFaceup() and c:HasLevel() and c:IsRace(RACE_ZOMBIE)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.filter(chkc) end
@@ -75,5 +75,5 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	aux.RegisterClientHint(e:GetHandler(),nil,tp,1,0,aux.Stringid(id,2),nil)
 end
 function s.splimit(e,c)
-	return c:GetRace()~=RACE_TOXIC
+	return c:GetRace()~=RACE_ZOMBIE
 end

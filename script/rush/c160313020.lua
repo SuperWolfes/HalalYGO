@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.costfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_GALAXY) and c:IsLevel(1) and c:IsAbleToRestAsCost() and not c:IsMaximumModeSide()
+	return c:IsFaceup() and c:IsRace(RACE_GALAXY) and c:IsLevel(1) and c:IsAbleToGraveAsCost() and not c:IsMaximumModeSide()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_MZONE,0,3,nil) end
@@ -26,9 +26,9 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_MZONE,0,3,3,nil)
-	local ct=Duel.SendtoRest(g,REASON_COST)
+	local ct=Duel.SendtoGrave(g,REASON_COST)
 	if ct>0 then
 		--Effect
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)

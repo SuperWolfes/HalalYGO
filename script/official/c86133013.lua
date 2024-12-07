@@ -20,7 +20,7 @@ function s.tgfilter(c,e,tp,ft)
 	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_DECK,0,nil,e,tp,lv)
 	return (c:IsReason(REASON_BATTLE) or (c:IsReason(REASON_EFFECT) and c:GetReasonPlayer()==1-tp))
 		and c:IsPreviousLocation(LOCATION_MZONE) and c:IsPreviousControler(tp) and c:IsFaceup()
-		and c:IsLocation(LOCATION_REST|LOCATION_REMOVED) and c:IsCanBeEffectTarget(e)
+		and c:IsLocation(LOCATION_GRAVE|LOCATION_REMOVED) and c:IsCanBeEffectTarget(e)
 		and c:HasLevel() and not c:IsType(TYPE_TOKEN) and g:CheckWithSumEqual(Card.GetLevel,lv,1,ft)
 end
 function s.spfilter(c,e,tp,lv)
@@ -28,7 +28,7 @@ function s.spfilter(c,e,tp,lv)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=math.min(ft,1) end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=math.min(ft,1) end
 	local tg=eg:Filter(s.tgfilter,nil,e,tp,ft)
 	if chk==0 then return ft>0 and #tg>0 end
 	local tc=nil
@@ -44,7 +44,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ft==0 then return end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
 	local tc=Duel.GetFirstTarget()
 	if not tc:IsRelateToEffect(e) then return end
 	local lv=tc:GetLevel()

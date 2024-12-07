@@ -1,5 +1,5 @@
 --地帝グランマーグ
---Granmarg the Rock Moppar
+--Granmarg the Rock Monarch
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)

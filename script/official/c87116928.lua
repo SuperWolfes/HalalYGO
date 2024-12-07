@@ -2,7 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMixRep(c,true,true,s.matfilter,1,99,aux.FilterBoolFunctionEx(Card.IsSetCard,0x1093))
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,s.splimit)
 	--cannot be fusion material
@@ -22,13 +22,13 @@ function s.splimit(e,se,sp,st)
 	return e:GetHandler():GetLocation()~=LOCATION_EXTRA
 end
 function s.cfilter(c,tp)
-	return c:IsAbleToRestAsCost() and (c:IsControler(tp) or c:IsFaceup())
+	return c:IsAbleToGraveAsCost() and (c:IsControler(tp) or c:IsFaceup())
 end
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_MZONE,LOCATION_MZONE,nil,tp)
 end
 function s.contactop(g,tp,c)
-	Duel.SendtoRest(g,REASON_COST+REASON_MATERIAL)
+	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL)
 	--spsummon condition
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)

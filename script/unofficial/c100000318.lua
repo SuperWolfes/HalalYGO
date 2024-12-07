@@ -26,8 +26,8 @@ function s.chk(c,sg)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(1)
-	local g1=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_HAND+LOCATION_MZONE+LOCATION_REST,0,nil,RACE_MACHINE)
-	local g2=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_HAND+LOCATION_MZONE+LOCATION_REST,0,nil,RACE_DINOSAUR)
+	local g1=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_HAND+LOCATION_MZONE+LOCATION_GRAVE,0,nil,RACE_MACHINE)
+	local g2=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_HAND+LOCATION_MZONE+LOCATION_GRAVE,0,nil,RACE_DINOSAUR)
 	local g=g1:Clone()
 	g:Merge(g2)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>-2 and #g1>0 and #g2>0 

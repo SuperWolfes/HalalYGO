@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	--add counter
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
-	e3:SetCode(EVENT_TO_REST)
+	e3:SetCode(EVENT_TO_GRAVE)
 	e3:SetRange(LOCATION_SZONE)
 	e3:SetProperty(EFFECT_FLAG_DELAY)
 	e3:SetCondition(s.accon)
@@ -42,25 +42,25 @@ end
 s.listed_series={0x38}
 s.counter_place_list={0x5}
 function s.costfilter(c)
-	return c:IsMonster() and c:IsSetCard(0x38) and c:IsAbleToRestAsCost()
+	return c:IsMonster() and c:IsSetCard(0x38) and c:IsAbleToGraveAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,e:GetHandler()) end
 	local g=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local sg=g:FilterSelect(tp,s.costfilter,1,1,nil)
 	e:SetLabelObject(sg:GetFirst())
-	Duel.SendtoRest(sg,REASON_COST)
+	Duel.SendtoGrave(sg,REASON_COST)
 end
 function s.tgfilter(c)
 	return c:IsMonster() and c:IsSetCard(0x38) and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local cc=e:GetLabelObject()
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.tgfilter(chkc) and chkc~=cc end
-	if chk==0 then return Duel.IsExistingTarget(s.tgfilter,tp,LOCATION_REST,0,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.tgfilter(chkc) and chkc~=cc end
+	if chk==0 then return Duel.IsExistingTarget(s.tgfilter,tp,LOCATION_GRAVE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local sg=Duel.SelectTarget(tp,s.tgfilter,tp,LOCATION_REST,0,1,1,cc)
+	local sg=Duel.SelectTarget(tp,s.tgfilter,tp,LOCATION_GRAVE,0,1,1,cc)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,sg,1,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)

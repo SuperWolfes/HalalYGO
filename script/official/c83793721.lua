@@ -3,7 +3,7 @@
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Fusion Summon Procedure
 	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_MELODIOUS_MAESTRA),1,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_MELODIOUS),2)
 	--Banish any number of your "Melodious" monsters, then you can return up to that many opponent's cards to hand

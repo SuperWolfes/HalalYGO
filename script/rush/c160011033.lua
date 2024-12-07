@@ -1,5 +1,5 @@
 --ゴースト・ビシャス
---Miss Vicious
+--Ghost Vicious
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsLevel(5) and c:IsRace(RACE_TOXIC)
+	return c:IsFaceup() and c:IsLevel(5) and c:IsRace(RACE_ZOMBIE)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,0,1,e:GetHandler())

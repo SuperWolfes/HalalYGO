@@ -1,10 +1,10 @@
 --ＷＷ－ダイヤモンド・ベル
---Windmint - Diamond Bell
+--Windwitch - Diamond Bell
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
 	--Synchro Summon
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTunerEx(Card.IsAttribute,ATTRIBUTE_WIND),1,99)
 	--Inflict damage
 	local e1=Effect.CreateEffect(c)
@@ -44,10 +44,10 @@ function s.damfil(c)
 	return c:IsMonster() and c:IsSetCard(0xf0) and c:IsAttackAbove(1)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and s.damfil(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.damfil,tp,LOCATION_REST,0,1,nil) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.damfil(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.damfil,tp,LOCATION_GRAVE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local g=Duel.SelectTarget(tp,s.damfil,tp,LOCATION_REST,0,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.damfil,tp,LOCATION_GRAVE,0,1,1,nil)
 	local d=g:GetFirst():GetAttack()//2
 	Duel.SetTargetPlayer(1-tp)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,d)

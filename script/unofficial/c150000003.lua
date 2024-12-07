@@ -1,5 +1,5 @@
 --アタック・フォース
---Attack Fcoree
+--Attack Force
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

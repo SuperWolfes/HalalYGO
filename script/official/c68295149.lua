@@ -1,10 +1,10 @@
 --リンクメイル・デーモン
---Linkmail Archtainted
+--Linkmail Archfiend
 --Scripted by Eerie Code
 local s,id=GetID()
-local TYPE_FRSX=TYPE_FUSION+TYPE_LOCKED+TYPE_SYNCHRO+TYPE_XYZ
+local TYPE_FRSX=TYPE_FUSION+TYPE_RITUAL+TYPE_SYNCHRO+TYPE_XYZ
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Link.AddProcedure(c,nil,2,4,s.lcheck)
 	--atk down
 	local e1=Effect.CreateEffect(c)
@@ -39,14 +39,14 @@ function s.lcheck(g,lc,sumtype,tp)
 end
 function s.atkfilter(c)
 	return c:IsType(TYPE_FRSX) and c:GetAttack()>0
-		and (c:IsFaceup() or c:IsLocation(LOCATION_REST))
+		and (c:IsFaceup() or c:IsLocation(LOCATION_GRAVE))
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST+LOCATION_MZONE) and s.atkfilter(chkc) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE+LOCATION_MZONE) and s.atkfilter(chkc) end
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsFaceup,tp,0,LOCATION_MZONE,1,nil)
-		and Duel.IsExistingTarget(s.atkfilter,tp,LOCATION_REST+LOCATION_MZONE,0,1,nil) end
+		and Duel.IsExistingTarget(s.atkfilter,tp,LOCATION_GRAVE+LOCATION_MZONE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	Duel.SelectTarget(tp,s.atkfilter,tp,LOCATION_REST+LOCATION_MZONE,0,1,1,nil)
+	Duel.SelectTarget(tp,s.atkfilter,tp,LOCATION_GRAVE+LOCATION_MZONE,0,1,1,nil)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
@@ -73,10 +73,10 @@ end
 function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return not c:IsReason(REASON_REPLACE) and c:IsLocation(LOCATION_MZONE) and c:IsFaceup()
-		and Duel.IsExistingMatchingCard(s.repfilter,tp,LOCATION_REST,0,1,c,e) end
+		and Duel.IsExistingMatchingCard(s.repfilter,tp,LOCATION_GRAVE,0,1,c,e) end
 	if Duel.SelectEffectYesNo(tp,c,96) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESREPLACE)
-		local g=Duel.SelectMatchingCard(tp,s.repfilter,tp,LOCATION_REST,0,1,1,c,e)
+		local g=Duel.SelectMatchingCard(tp,s.repfilter,tp,LOCATION_GRAVE,0,1,1,c,e)
 		e:SetLabelObject(g:GetFirst())
 		return true
 	else return false end

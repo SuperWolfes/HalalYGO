@@ -36,7 +36,7 @@ function s.initial_effect(c)
 	local e4=e3:Clone()
 	e4:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e4)
-	Duel.AddCustomActivityCounter(id,ACTIVITY_CHAIN,function(re,tp,cid) return not (re:IsActionalEffect() and re:IsHasType(EFFECT_TYPE_ACTIVATE)) end)
+	Duel.AddCustomActivityCounter(id,ACTIVITY_CHAIN,function(re,tp,cid) return not (re:IsSpellEffect() and re:IsHasType(EFFECT_TYPE_ACTIVATE)) end)
 end
 s.listed_series={SET_SHARK}
 function s.xyzlv(e,c,rc)

@@ -1,10 +1,10 @@
 --バイナル・ソーサレス
---Binal Scoreeress
+--Binal Sorceress
 local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
 	Link.AddProcedure(c,s.matfilter,2,2)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--recover
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

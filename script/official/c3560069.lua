@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
-	return (r & REASON_EFFECT)~=0 and e:GetHandler():IsPreviousLocation(LOCATION_REST)
+	return (r & REASON_EFFECT)~=0 and e:GetHandler():IsPreviousLocation(LOCATION_GRAVE)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

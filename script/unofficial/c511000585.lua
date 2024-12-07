@@ -40,10 +40,10 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local check2=#(d2&rg2)>0
 	Duel.BreakEffect()
 	if not check1 then
-		Duel.SendtoRest(d1,REASON_EFFECT+REASON_DISCARD)
+		Duel.SendtoGrave(d1,REASON_EFFECT+REASON_DISCARD)
 	end
 	if not check2 then
-		Duel.SendtoRest(d2,REASON_EFFECT+REASON_DISCARD)
+		Duel.SendtoGrave(d2,REASON_EFFECT+REASON_DISCARD)
 	end
 	Duel.BreakEffect()
 	Duel.ShuffleHand(tp)

@@ -17,20 +17,20 @@ function s.initial_effect(c)
 end
 s.listed_series={0x152}
 function s.tgfilter(c,tp,check)
-	return c:IsFaceup() and c:IsSetCard(0x152) and Duel.IsExistingMatchingCard(s.eqfilter,tp,LOCATION_EXTRA+LOCATION_MZONE+LOCATION_REST,0,1,c,check)
+	return c:IsFaceup() and c:IsSetCard(0x152) and Duel.IsExistingMatchingCard(s.eqfilter,tp,LOCATION_EXTRA+LOCATION_MZONE+LOCATION_GRAVE,0,1,c,check)
 end
 function s.eqfilter(c,check)
-	return not c:IsUnliked() and c:IsMonster()
+	return not c:IsForbidden() and c:IsMonster()
 		and ((check and c:IsLocation(LOCATION_EXTRA) and c:IsType(TYPE_EXTRA)) or (c:IsSetCard(0x152) and not c:IsLevel(4)))
 end
 function s.chkfilter(c,typ)
 	return c:IsMonster() and c:IsSetCard(0x152) and c:IsType(typ)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	local check=Duel.IsExistingMatchingCard(s.chkfilter,tp,LOCATION_REST,0,1,nil,TYPE_FUSION)
-		and Duel.IsExistingMatchingCard(s.chkfilter,tp,LOCATION_REST,0,1,nil,TYPE_SYNCHRO)
-		and Duel.IsExistingMatchingCard(s.chkfilter,tp,LOCATION_REST,0,1,nil,TYPE_XYZ)
-		and Duel.IsExistingMatchingCard(s.chkfilter,tp,LOCATION_REST,0,1,nil,TYPE_LINK)
+	local check=Duel.IsExistingMatchingCard(s.chkfilter,tp,LOCATION_GRAVE,0,1,nil,TYPE_FUSION)
+		and Duel.IsExistingMatchingCard(s.chkfilter,tp,LOCATION_GRAVE,0,1,nil,TYPE_SYNCHRO)
+		and Duel.IsExistingMatchingCard(s.chkfilter,tp,LOCATION_GRAVE,0,1,nil,TYPE_XYZ)
+		and Duel.IsExistingMatchingCard(s.chkfilter,tp,LOCATION_GRAVE,0,1,nil,TYPE_LINK)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and s.tgfilter(chkc,tp,check) end
 	local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
 	if e:GetHandler():IsLocation(LOCATION_HAND) then ft=ft-1 end
@@ -41,12 +41,12 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not tc or tc:IsFacedown() or not tc:IsRelateToEffect(e) then return end
-	local check=Duel.IsExistingMatchingCard(s.chkfilter,tp,LOCATION_REST,0,1,nil,TYPE_FUSION)
-		and Duel.IsExistingMatchingCard(s.chkfilter,tp,LOCATION_REST,0,1,nil,TYPE_SYNCHRO)
-		and Duel.IsExistingMatchingCard(s.chkfilter,tp,LOCATION_REST,0,1,nil,TYPE_XYZ)
-		and Duel.IsExistingMatchingCard(s.chkfilter,tp,LOCATION_REST,0,1,nil,TYPE_LINK)
+	local check=Duel.IsExistingMatchingCard(s.chkfilter,tp,LOCATION_GRAVE,0,1,nil,TYPE_FUSION)
+		and Duel.IsExistingMatchingCard(s.chkfilter,tp,LOCATION_GRAVE,0,1,nil,TYPE_SYNCHRO)
+		and Duel.IsExistingMatchingCard(s.chkfilter,tp,LOCATION_GRAVE,0,1,nil,TYPE_XYZ)
+		and Duel.IsExistingMatchingCard(s.chkfilter,tp,LOCATION_GRAVE,0,1,nil,TYPE_LINK)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-	local g=Duel.SelectMatchingCard(tp,s.eqfilter,tp,LOCATION_EXTRA+LOCATION_MZONE+LOCATION_REST,0,1,1,tc,check)
+	local g=Duel.SelectMatchingCard(tp,s.eqfilter,tp,LOCATION_EXTRA+LOCATION_MZONE+LOCATION_GRAVE,0,1,1,tc,check)
 	local eq=g:GetFirst()
 	if eq then
 		Duel.Equip(tp,eq,tc,true)

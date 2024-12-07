@@ -1,5 +1,5 @@
 --交差する魂
---Miss Crossing
+--Soul Crossing
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -17,10 +17,10 @@ function s.initial_effect(c)
 end
 function s.chainfilter(re,tp,cid)
 	if Duel.GetFlagEffect(tp,id)==0 then return true end
-	return not (re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) or not re:GetHandler():IsRace(RACE_MEGA))
+	return not (re:IsActiveType(TYPE_SPELL+TYPE_TRAP) or not re:GetHandler():IsRace(RACE_DIVINE))
 end
 function s.filter(c,e,ec)
-	if not c:IsRace(RACE_MEGA) then return false end
+	if not c:IsRace(RACE_DIVINE) then return false end
 	local e1=Effect.CreateEffect(ec)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -95,5 +95,5 @@ function s.accon(e)
 	return Duel.GetCustomActivityCount(id,e:GetHandlerPlayer(),ACTIVITY_CHAIN)>0
 end
 function s.aclimit(e,re,tp)
-	return re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) or not re:GetHandler():IsRace(RACE_MEGA)
+	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP) or not re:GetHandler():IsRace(RACE_DIVINE)
 end

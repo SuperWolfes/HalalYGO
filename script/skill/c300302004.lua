@@ -7,7 +7,7 @@ function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 	--opd check
 	if Duel.GetFlagEffect(ep,id)>0 then return end
 	--condition
-	return aux.CanActivateSkill(tp) and Duel.GetMatchingGroupCount(Card.IsAbleToRemove,tp,LOCATION_REST,0,nil,POS_FACEUP)>=3
+	return aux.CanActivateSkill(tp) and Duel.GetMatchingGroupCount(Card.IsAbleToRemove,tp,LOCATION_GRAVE,0,nil,POS_FACEUP)>=3
 	and Duel.IsPlayerCanDraw(tp,1)
 end
 function s.flipop(e,tp,eg,ep,ev,re,r,rp)
@@ -20,7 +20,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.IsPlayerAffectedByEffect(tp,69832741) then
 		g=Duel.SelectMatchingCard(tp,Card.IsAbleToRemove,tp,LOCATION_MZONE,0,3,3,nil)
 	else
-		g=Duel.SelectMatchingCard(tp,Card.IsAbleToRemove,tp,LOCATION_REST,0,3,3,nil)
+		g=Duel.SelectMatchingCard(tp,Card.IsAbleToRemove,tp,LOCATION_GRAVE,0,3,3,nil)
 	end
 	if #g>0 then
 		if Duel.Remove(g,POS_FACEUP,REASON_EFFECT)~=0 then

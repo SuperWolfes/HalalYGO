@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetCondition(s.ndcon)
 	e1:SetValue(s.damval)
 	c:RegisterEffect(e1)
-	--Add 1 "Polymerization" actional or "fusion" actional from deck
+	--Add 1 "Polymerization" spell or "fusion" spell from deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -85,7 +85,7 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_PZONE,0,1,e:GetHandler(),22211622)
 end
 function s.thfilter(c)
-	return c:IsActional() and c:IsSetCard(0x46) and c:IsAbleToHand()
+	return c:IsSpell() and c:IsSetCard(0x46) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -178,8 +178,8 @@ function s.pencon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.pentg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckPendulumZones(tp) end
-	if e:GetHandler():IsLocation(LOCATION_REST) then
-		Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,e:GetHandler(),1,0,0)
+	if e:GetHandler():IsLocation(LOCATION_GRAVE) then
+		Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,e:GetHandler(),1,0,0)
 	end
 end
 function s.penop(e,tp,eg,ep,ev,re,r,rp)

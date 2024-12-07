@@ -34,7 +34,7 @@ function s.efilter(e,te)
 	return te:GetOwnerPlayer()~=e:GetOwnerPlayer()
 end
 function s.condition(e)
-	return Duel.IsExistingMatchingCard(Card.IsEquipActional,e:GetHandlerPlayer(),LOCATION_REST,0,1,nil)
+	return Duel.IsExistingMatchingCard(Card.IsEquipSpell,e:GetHandlerPlayer(),LOCATION_GRAVE,0,1,nil)
 end
 function s.eftg(e,c)
 	return e:GetHandler():GetEquipTarget()==c

@@ -25,7 +25,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
 function s.thfilter(c)
-	return c:IsSetCard(SET_VAALMONICA) and c:IsActionalTrap() and not c:IsCode(id) and c:IsAbleToHand()
+	return c:IsSetCard(SET_VAALMONICA) and c:IsSpellTrap() and not c:IsCode(id) and c:IsAbleToHand()
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp,angello_or_dimonno) --Additional parameter used by "Angello Vaalmonica" and "Dimonno Vaalmonica"
 	local op=nil
@@ -50,7 +50,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp,angello_or_dimonno) --Additional param
 			Duel.Draw(tp,2,REASON_EFFECT)
 		end
 	elseif op==2 then
-		--Take 500 damage and search 1 "Valmonica" Actional/Trap
+		--Take 500 damage and search 1 "Valmonica" Spell/Trap
 		local g=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_DECK,0,nil)
 		if Duel.Damage(tp,500,REASON_EFFECT)>0 and #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,6)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)

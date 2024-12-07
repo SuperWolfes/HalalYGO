@@ -17,16 +17,16 @@ s.listed_names={21770260,31709826}
 function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 	return aux.CanActivateSkill(tp)
 		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,21770260),tp,LOCATION_ONFIELD,0,1,nil,tp)
-		and Duel.IsExistingMatchingCard(Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,1,nil)
+		and Duel.IsExistingMatchingCard(Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,1,nil)
 end
 function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SKILL_FLIP,tp,id|(1<<32))
 	Duel.Hint(HINT_CARD,tp,id)
-	--Destroy 1 "Jam Breeding Machine" and 1 Actional/Trap your opponent controls
+	--Destroy 1 "Jam Breeding Machine" and 1 Spell/Trap your opponent controls
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local g1=Duel.SelectMatchingCard(tp,aux.FaceupFilter(Card.IsCode,21770260),tp,LOCATION_ONFIELD,0,1,1,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-	local g2=Duel.SelectMatchingCard(tp,Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,1,1,nil)
+	local g2=Duel.SelectMatchingCard(tp,Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,1,1,nil)
 	g1:Merge(g2)
 	Duel.HintSelection(g1)
 	Duel.Destroy(g1,REASON_EFFECT)
@@ -48,7 +48,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		Duel.RegisterEffect(ge1,0)
 	end)
 end
---"Awakal Jam" check/Draw Functions
+--"Revival Jam" check/Draw Functions
 function s.checkop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()
 	if eg:IsExists(Card.IsCode,1,nil,31709826) and #eg==1 and re and re:GetHandler()==tc then

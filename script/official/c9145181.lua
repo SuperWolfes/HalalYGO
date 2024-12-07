@@ -1,5 +1,5 @@
 --儀式降臨封印の書
---Locked Sealing
+--Ritual Sealing
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsType(TYPE_LOCKED)
+	return c:IsFaceup() and c:IsType(TYPE_RITUAL)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and s.filter(chkc) end

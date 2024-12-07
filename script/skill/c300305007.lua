@@ -41,28 +41,28 @@ function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
              and Duel.IsExistingMatchingCard(s.desfilter,tp,LOCATION_MZONE,0,1,nil)
              and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsMonster),tp,0,LOCATION_MZONE,1,nil)
 	local b2=#g>0 and g:FilterCount(Card.IsAttribute,nil,ATTRIBUTE_WIND)>0
-             and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsActionalTrap),tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil)
+             and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSpellTrap),tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil)
 	local b3=#g>0 and g:FilterCount(Card.IsAttribute,nil,ATTRIBUTE_FIRE)>0
              and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil)
 	local b4=#g>0 and g:FilterCount(Card.IsAttribute,nil,ATTRIBUTE_WATER)>0 and Duel.IsPlayerCanDraw(tp,1)
 	local b5=#g>0 and g:FilterCount(Card.IsAttribute,nil,ATTRIBUTE_LIGHT)>0
              and Duel.IsExistingMatchingCard(s.posfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil)
 	return aux.CanActivateSkill(tp) and (b1 or b2 or b3 or b4 or b5)
-		and Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,nil)
+		and Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,nil)
 end
 function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,0,id)
 	--Discard Hand
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
-	local tc=Duel.SelectMatchingCard(tp,Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,1,nil)
-	Duel.SendtoRest(tc,REASON_COST+REASON_DISCARD)
+	local tc=Duel.SelectMatchingCard(tp,Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,1,nil)
+	Duel.SendtoGrave(tc,REASON_COST+REASON_DISCARD)
 	--Apply effect
 	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_MZONE,0,nil)
 	local b1=#g>0 and g:FilterCount(Card.IsAttribute,nil,ATTRIBUTE_EARTH)>0
              and Duel.IsExistingMatchingCard(s.desfilter,tp,LOCATION_MZONE,0,1,nil)
              and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsMonster),tp,0,LOCATION_MZONE,1,nil)
 	local b2=#g>0 and g:FilterCount(Card.IsAttribute,nil,ATTRIBUTE_WIND)>0
-             and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsActionalTrap),tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil)
+             and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSpellTrap),tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil)
 	local b3=#g>0 and g:FilterCount(Card.IsAttribute,nil,ATTRIBUTE_FIRE)>0
              and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil)
 	local b4=#g>0 and g:FilterCount(Card.IsAttribute,nil,ATTRIBUTE_WATER)>0 and Duel.IsPlayerCanDraw(tp,1)
@@ -82,10 +82,10 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 		pg:Merge(og)
 		Duel.HintSelection(pg,true)
 		Duel.Destroy(pg,REASON_EFFECT)
-	--Destroy 1 face-up Actional/Trap on field
+	--Destroy 1 face-up Spell/Trap on field
 	elseif op==2 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-		local sg=Duel.SelectMatchingCard(tp,aux.FaceupFilter(Card.IsActionalTrap),tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
+		local sg=Duel.SelectMatchingCard(tp,aux.FaceupFilter(Card.IsSpellTrap),tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
 		Duel.HintSelection(sg,true)
 		Duel.Destroy(sg,REASON_EFFECT)
 	--Return all non-FIRE Special Summoned monsters on field to hand

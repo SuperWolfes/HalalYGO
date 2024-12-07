@@ -1,5 +1,5 @@
 --幻想の見習い魔導師
---Apprentice Illusion Mentor
+--Apprentice Illusion Magician
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon
@@ -37,7 +37,7 @@ function s.initial_effect(c)
 	e4:SetOperation(s.atkop)
 	c:RegisterEffect(e4)
 end
-s.listed_names={CARD_DARK_MENTOR}
+s.listed_names={CARD_DARK_MAGICIAN}
 function s.spcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
@@ -57,11 +57,11 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoRest(g,REASON_DISCARD+REASON_COST)
+	Duel.SendtoGrave(g,REASON_DISCARD+REASON_COST)
 	g:DeleteGroup()
 end
 function s.filter(c)
-	return c:IsCode(CARD_DARK_MENTOR) and c:IsAbleToHand()
+	return c:IsCode(CARD_DARK_MAGICIAN) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end
@@ -80,12 +80,12 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	if not c then return false end
 	if c:IsControler(1-tp) then c=Duel.GetAttacker() end
 	e:SetLabelObject(c)
-	return c and c~=e:GetHandler() and c:IsRace(RACE_MENTOR)
+	return c and c~=e:GetHandler() and c:IsRace(RACE_SPELLCASTER)
 		and c:IsAttribute(ATTRIBUTE_DARK) and c:IsRelateToBattle()
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
-	Duel.SendtoRest(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
+	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetLabelObject()

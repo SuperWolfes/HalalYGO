@@ -34,9 +34,9 @@ function s.effop(e,tp,eg,ep,ev,re,r,rp)
 		local g=Duel.GetFieldGroup(tp,0,LOCATION_HAND,nil)
 		if #g==0 then return end
 		local sg=g:RandomSelect(tp,1)
-		Duel.SendtoRest(sg,REASON_DISCARD|REASON_EFFECT)
+		Duel.SendtoGrave(sg,REASON_DISCARD|REASON_EFFECT)
 	else
-		--Send the top 2 cards of your opponent's Deck to the RP
+		--Send the top 2 cards of your opponent's Deck to the GY
 		Duel.DiscardDeck(1-tp,2,REASON_EFFECT)
 	end
 end

@@ -1,5 +1,5 @@
 --機皇帝グランエル∞ (TF6)
---Mekwatcher Emperor Granel ∞ (TF6)
+--Meklord Emperor Granel ∞ (TF6)
 local s,id=GetID()
 function s.initial_effect(c)
 	c:SetUniqueOnField(1,0,aux.FilterBoolFunction(Card.IsSetCard,0x3013),LOCATION_MZONE)

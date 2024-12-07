@@ -1,9 +1,9 @@
 --ＶＳＤｒ．マッドラヴ
---Vanquish Miss Dr. Madlove
+--Vanquish Soul Dr. Madlove
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	--Search 1 "Vanquish Miss" Actional/Trap
+	--Search 1 "Vanquish Soul" Spell/Trap
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -32,13 +32,13 @@ function s.initial_effect(c)
 	e3:SetOperation(s.vsop)
 	c:RegisterEffect(e3)
 end
-s.listed_series={SET_VANQUISH_MISS}
+s.listed_series={SET_VANQUISH_SOUL}
 function s.opccost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFlagEffect(tp,id)==0 end
 	Duel.RegisterFlagEffect(tp,id,RESET_CHAIN,0,1)
 end
 function s.thfilter(c)
-	return c:IsSetCard(SET_VANQUISH_MISS) and c:IsActionalTrap() and c:IsAbleToHand()
+	return c:IsSetCard(SET_VANQUISH_SOUL) and c:IsSpellTrap() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

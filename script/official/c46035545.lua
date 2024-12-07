@@ -83,7 +83,7 @@ function s.thfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0x10af) and c:IsAbleToHand()
 end
 function s.pfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0xaf) and c:IsType(TYPE_PENDULUM) and not c:IsUnliked()
+	return c:IsFaceup() and c:IsSetCard(0xaf) and c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.thfilter(chkc) end

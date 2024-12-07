@@ -52,7 +52,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(tp,0,LOCATION_EXTRA)
 	if #g<3 then return end
 	Duel.ConfirmCards(tp,g)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-	local sg=Duel.SelectMatchingCard(tp,Card.IsAbleToRest,tp,0,LOCATION_EXTRA,3,3,nil)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	local sg=Duel.SelectMatchingCard(tp,Card.IsAbleToGrave,tp,0,LOCATION_EXTRA,3,3,nil)
 	Duel.Remove(sg,POS_FACEUP,REASON_EFFECT)
 end

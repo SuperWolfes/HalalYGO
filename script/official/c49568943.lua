@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-	--Special Summon 1 monster from the Actional/Trap Zone
+	--Special Summon 1 monster from the Spell/Trap Zone
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -26,8 +26,8 @@ end
 s.listed_series={SET_VAYLANTZ}
 s.listed_names={id}
 function s.filter(c)
-	return c:IsFieldActional() and c:IsSetCard(SET_VAYLANTZ) and not c:IsCode(id)
-		and not c:IsUnliked()
+	return c:IsFieldSpell() and c:IsSetCard(SET_VAYLANTZ) and not c:IsCode(id)
+		and not c:IsForbidden()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end
@@ -39,7 +39,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local tc=g:GetFirst()
 		local fc=Duel.GetFieldCard(1-tp,LOCATION_FZONE,0)
 		if fc then
-			Duel.SendtoRest(fc,REASON_RULE)
+			Duel.SendtoGrave(fc,REASON_RULE)
 			Duel.BreakEffect()
 		end
 		Duel.MoveToField(tc,tp,1-tp,LOCATION_FZONE,POS_FACEUP,true)

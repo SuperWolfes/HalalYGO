@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.nstg)
 	e1:SetOperation(s.nsop)
 	c:RegisterEffect(e1)
-	--Send to RP instead of detaching materials
+	--Send to GY instead of detaching materials
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
@@ -58,9 +58,9 @@ function s.rcon(e,tp,eg,ep,ev,re,r,rp)
 	local rc=re:GetHandler()
 	return (r&REASON_COST)~=0 and re:IsActivated()
 		and re:IsActiveType(TYPE_XYZ) and (rc:IsSetCard(0x70) or rc:IsSetCard(0x48))
-		and e:GetHandler():IsAbleToRestAsCost()
+		and e:GetHandler():IsAbleToGraveAsCost()
 		and ep==e:GetOwnerPlayer() and ev>=1 and rc:GetOverlayCount()>=ev-1
 end
 function s.rop(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.SendtoRest(e:GetHandler(),REASON_COST)
+	return Duel.SendtoGrave(e:GetHandler(),REASON_COST)
 end

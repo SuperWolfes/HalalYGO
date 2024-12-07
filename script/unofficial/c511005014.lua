@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.fil(c)
-	return c:IsFaceup() and c:GetType()==TYPE_EQUIP+TYPE_ACTIONAL
+	return c:IsFaceup() and c:GetType()==TYPE_EQUIP+TYPE_SPELL
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and s.fil(chkc) end

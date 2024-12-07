@@ -3,7 +3,7 @@
 --scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
-	--Destroy 1 targeted oppo's Link by banishing one with the same rating from your RP, if banished a Cyberse, destroy 1 faceup card in oppo's Actional & Trap zone
+	--Destroy 1 targeted oppo's Link by banishing one with the same rating from your GY, if banished a Cyberse, destroy 1 faceup card in oppo's Spell & Trap zone
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DESTROY+CATEGORY_REMOVE)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 end
 function s.filter(c,tp)
 	return c:IsFaceup() and c:IsLinkMonster()
-		and Duel.IsExistingMatchingCard(s.rmfilter,tp,LOCATION_REST,0,1,nil,c:GetLink())
+		and Duel.IsExistingMatchingCard(s.rmfilter,tp,LOCATION_GRAVE,0,1,nil,c:GetLink())
 end
 function s.rmfilter(c,link)
 	return c:IsMonster() and c:IsLink(link) and c:IsAbleToRemove()
@@ -26,13 +26,13 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local g=Duel.SelectTarget(tp,s.filter,tp,0,LOCATION_MZONE,1,1,nil,tp)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
-	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,tp,LOCATION_REST)
+	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,tp,LOCATION_GRAVE)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not tc:IsRelateToEffect(e) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.rmfilter),tp,LOCATION_REST,0,1,1,nil,tc:GetLink())
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.rmfilter),tp,LOCATION_GRAVE,0,1,1,nil,tc:GetLink())
 	if Duel.Remove(g,0,REASON_EFFECT)~=0 then
 		Duel.Destroy(tc,REASON_EFFECT)
 		if g:GetFirst():IsOriginalRace(RACE_CYBERSE) then

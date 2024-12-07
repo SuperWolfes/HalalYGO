@@ -18,9 +18,9 @@ s.listed_series={SET_VAALMONICA}
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	Duel.SetPossibleOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,500)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,500)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
 end
 function s.spfilter(c,e,tp)
 	return c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -40,8 +40,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp,angello_or_dimonno) --Additional param
 			{true,aux.Stringid(id,2+offset)})
 	end
 	if op==1 then
-		--Gain 500 LP and Special Summon 1 monster from your RP
-		local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,e,tp)
+		--Gain 500 LP and Special Summon 1 monster from your GY
+		local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_GRAVE,0,nil,e,tp)
 		if Duel.Recover(tp,500,REASON_EFFECT)>0 and #g>0 then
 			Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_SPSUMMON)
 			local sg=g:Select(1-tp,1,1,nil)
@@ -49,8 +49,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp,angello_or_dimonno) --Additional param
 			Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)
 		end
 	elseif op==2 then
-		--Take 500 damage and add 1 Level 4 monster from your RP to your hand
-		local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.thfilter),tp,LOCATION_REST,0,nil)
+		--Take 500 damage and add 1 Level 4 monster from your GY to your hand
+		local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.thfilter),tp,LOCATION_GRAVE,0,nil)
 		if Duel.Damage(tp,500,REASON_EFFECT)>0 and #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,5)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 			local hg=g:Select(tp,1,1,nil)

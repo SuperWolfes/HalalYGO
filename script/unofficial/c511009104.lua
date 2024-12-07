@@ -1,4 +1,4 @@
---Rank-Up-Ment Cipher Ascension
+--Rank-Up-Magic Cipher Ascension
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

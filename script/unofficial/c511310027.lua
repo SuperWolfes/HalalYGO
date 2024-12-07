@@ -1,5 +1,5 @@
 --フェニックス・ギア・ブレード
---Bird Gearblade
+--Phoenix Gearblade
 --Scripted by AlphaKretin
 local card, code = GetID()
 function card.initial_effect(c)
@@ -29,9 +29,9 @@ end
 
 function card.racost(e, tp, eg, ep, ev, re, r, rp, chk)
 	if chk == 0 then
-		return e:GetHandler():IsAbleToRestAsCost()
+		return e:GetHandler():IsAbleToGraveAsCost()
 	end
-	Duel.SendtoRest(e:GetHandler(), REASON_COST)
+	Duel.SendtoGrave(e:GetHandler(), REASON_COST)
 end
 
 function card.rafilter(e, c)

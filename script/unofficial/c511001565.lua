@@ -1,4 +1,4 @@
---Performanced Mirror Conductor
+--Performage Mirror Conductor
 local s,id=GetID()
 function s.initial_effect(c)
 	--pendulum summon
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	local e2=e1:Clone()
 	e2:SetCode(EFFECT_SET_BASE_DEFENSE)
 	c:RegisterEffect(e2)
-	--smint
+	--switch
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_DEFCHANGE)

@@ -1,5 +1,5 @@
 --ＢＫ スイッチヒッター
---Battlin' Boxer Smintitter (Anime)
+--Battlin' Boxer Switchitter (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	local e1=Effect.CreateEffect(c)

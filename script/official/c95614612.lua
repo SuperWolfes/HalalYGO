@@ -1,7 +1,7 @@
 --砲弾ヤリ貝
 local s,id=GetID()
 function s.initial_effect(c)
-	--immune actional
+	--immune spell
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_IMMUNE_EFFECT)
@@ -16,5 +16,5 @@ function s.econ(e)
 	return Duel.IsEnvironment(CARD_UMI)
 end
 function s.efilter(e,te)
-	return te:IsActiveType(TYPE_ACTIONAL)
+	return te:IsActiveType(TYPE_SPELL)
 end

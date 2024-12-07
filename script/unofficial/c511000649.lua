@@ -28,7 +28,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		while Duel.GetFieldGroupCount(tp,0,LOCATION_HAND)>5 do
 			Duel.BreakEffect()
 			local sg=g:RandomSelect(p,1)
-			Duel.SendtoRest(sg,REASON_EFFECT+REASON_DISCARD)
+			Duel.SendtoGrave(sg,REASON_EFFECT+REASON_DISCARD)
 			g:RemoveCard(sg:GetFirst())
 		end
 	end

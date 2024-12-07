@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e0)
 	--activate
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_TOREST)
+	e1:SetCategory(CATEGORY_TOGRAVE)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL)
 	e1:SetCode(EVENT_CHAINING)
@@ -47,16 +47,16 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return ep==1-tp and (aux.damcon1(e,0,eg,ep,ev,re,r,rp) or aux.damcon1(e,1,eg,ep,ev,re,r,rp))
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRest,tp,LOCATION_HAND,0,1,e:GetHandler()) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGrave,tp,LOCATION_HAND,0,1,e:GetHandler()) end
 	Duel.RegisterFlagEffect(tp,e:GetHandler():GetFieldID(),RESET_PHASE+PHASE_END+RESET_SELF_TURN,0,1)
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_HAND)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_HAND)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) then return end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToRest,tp,LOCATION_HAND,0,1,1,e:GetHandler())
-	if Duel.SendtoRest(g,REASON_EFFECT) then
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToGrave,tp,LOCATION_HAND,0,1,1,e:GetHandler())
+	if Duel.SendtoGrave(g,REASON_EFFECT) then
 		local cid=Duel.GetChainInfo(ev,CHAININFO_CHAIN_ID)
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_FIELD)
@@ -67,9 +67,9 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetValue(s.damval)
 		e1:SetReset(RESET_CHAIN)
 		Duel.RegisterEffect(e1,tp)
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-		local g2=Duel.SelectMatchingCard(tp,Card.IsAbleToRest,tp,LOCATION_HAND,0,0,1,true,e:GetHandler())
-		if g2 and Duel.SendtoRest(g2,REASON_EFFECT)>0 then
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		local g2=Duel.SelectMatchingCard(tp,Card.IsAbleToGrave,tp,LOCATION_HAND,0,0,1,true,e:GetHandler())
+		if g2 and Duel.SendtoGrave(g2,REASON_EFFECT)>0 then
 			Duel.RegisterFlagEffect(tp,c:GetFieldID(),RESET_PHASE+PHASE_END+RESET_SELF_TURN,0,2)
 		end
 	end

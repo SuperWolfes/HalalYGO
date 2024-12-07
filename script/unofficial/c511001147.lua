@@ -1,4 +1,4 @@
---Pumpking the King of Misss
+--Pumpking the King of Ghosts
 local s,id=GetID()
 function s.initial_effect(c)
 	--atk up
@@ -35,7 +35,7 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RaiseEvent(Group.CreateGroup(),id,e,REASON_EFFECT,Duel.GetTurnPlayer(),Duel.GetTurnPlayer(),0)
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsRace(RACE_TOXIC)
+	return c:IsFaceup() and c:IsRace(RACE_ZOMBIE)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_MZONE,0,e:GetHandler())

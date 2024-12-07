@@ -1,5 +1,5 @@
 --Ｓｐ－突然変異
---Speed Actional - Metamorphosis
+--Speed Spell - Metamorphosis
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

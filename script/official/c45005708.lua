@@ -3,12 +3,12 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--This card's name becomes "Fallen of Albaz" on the field or in the RP
+	--This card's name becomes "Fallen of Albaz" on the field or in the GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e1:SetCode(EFFECT_CHANGE_CODE)
-	e1:SetRange(LOCATION_MZONE|LOCATION_REST)
+	e1:SetRange(LOCATION_MZONE|LOCATION_GRAVE)
 	e1:SetValue(CARD_ALBAZ)
 	c:RegisterEffect(e1)
 	--Take control of or Special Summon 1 Dragon monster
@@ -48,24 +48,24 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
 	local label=e:GetLabel()
-	if chkc then return chkc:IsControler(1-tp) and chkc:IsLocation(LOCATION_MZONE|LOCATION_REST) and ((label==1 and s.ctrlfilter(chkc,tp,c)) or (label==2 and s.spfilter(chkc,e,tp,c))) end
-	if chk==0 then return c:IsAbleToRest() and Duel.IsExistingTarget(s.tgfilter,tp,0,LOCATION_MZONE|LOCATION_REST,1,nil,e,tp,c) end
+	if chkc then return chkc:IsControler(1-tp) and chkc:IsLocation(LOCATION_MZONE|LOCATION_GRAVE) and ((label==1 and s.ctrlfilter(chkc,tp,c)) or (label==2 and s.spfilter(chkc,e,tp,c))) end
+	if chk==0 then return c:IsAbleToGrave() and Duel.IsExistingTarget(s.tgfilter,tp,0,LOCATION_MZONE|LOCATION_GRAVE,1,nil,e,tp,c) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local tc=Duel.SelectTarget(tp,s.tgfilter,tp,0,LOCATION_MZONE|LOCATION_REST,1,1,nil,e,tp,c):GetFirst()
+	local tc=Duel.SelectTarget(tp,s.tgfilter,tp,0,LOCATION_MZONE|LOCATION_GRAVE,1,1,nil,e,tp,c):GetFirst()
 	if tc:IsLocation(LOCATION_MZONE) then
 		e:SetLabel(1)
-		e:SetCategory(CATEGORY_TOREST|CATEGORY_CONTROL)
+		e:SetCategory(CATEGORY_TOGRAVE|CATEGORY_CONTROL)
 		Duel.SetOperationInfo(0,CATEGORY_CONTROL,tc,1,0,0)
 	else
 		e:SetLabel(2)
-		e:SetCategory(CATEGORY_TOREST|CATEGORY_SPECIAL_SUMMON)
+		e:SetCategory(CATEGORY_TOGRAVE|CATEGORY_SPECIAL_SUMMON)
 		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,tc,1,tp,0)
 	end
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,c,1,tp,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,c,1,tp,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:IsRelateToEffect(e) and Duel.SendtoRest(c,REASON_EFFECT)>0 and c:IsLocation(LOCATION_REST) then
+	if c:IsRelateToEffect(e) and Duel.SendtoGrave(c,REASON_EFFECT)>0 and c:IsLocation(LOCATION_GRAVE) then
 		local tc=Duel.GetFirstTarget()
 		if not tc:IsRelateToEffect(e) then return end
 		local label=e:GetLabel()

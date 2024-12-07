@@ -1,9 +1,9 @@
 --Ｅｍトラピーズ・フォーズ・ウィッチ
---Performanced Trapeze Mint
+--Performage Trapeze Witch
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0xc6),2)
 	--indes
 	local e2=Effect.CreateEffect(c)

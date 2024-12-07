@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion Summon Procedure
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,160012001,160210065)
 	--Gains ATK
 	local e1=Effect.CreateEffect(c)
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	--Disable SpSummon
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
-	e2:SetCode(EFFECT_FCOREE_SPSUMMON_POSITION)
+	e2:SetCode(EFFECT_FORCE_SPSUMMON_POSITION)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e2:SetTargetRange(1,1)
@@ -38,7 +38,7 @@ function s.cfilter(c)
 	return c:IsRace(RACE_PYRO|RACE_THUNDER|RACE_AQUA) and c:IsType(TYPE_MAXIMUM)
 end
 function s.condition(e)
-	return Duel.IsExistingMatchingCard(s.cfilter,e:GetHandlerPlayer(),LOCATION_REST,0,3,nil)
+	return Duel.IsExistingMatchingCard(s.cfilter,e:GetHandlerPlayer(),LOCATION_GRAVE,0,3,nil)
 end
 function s.target(e,c)
 	return c:IsLocation(LOCATION_HAND) and not c:IsAttribute(ATTRIBUTE_FIRE)

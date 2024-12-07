@@ -1,9 +1,9 @@
 --アブソリュート・パワーフォース
---Absolute Powerfcoree
+--Absolute Powerforce
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	--Apply effects to 1 "Red Dragon Archtainted" you control
+	--Apply effects to 1 "Red Dragon Archfiend" you control
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -15,12 +15,12 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.listed_names={CARD_RED_DRAGON_ARCHTAINTED}
+s.listed_names={CARD_RED_DRAGON_ARCHFIEND}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsAbleToEnterBP() or (Duel.IsBattlePhase() and (Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()))
 end
 function s.tgfilter(c)
-	return c:IsFaceup() and c:IsCode(CARD_RED_DRAGON_ARCHTAINTED) and not c:HasFlagEffect(id)
+	return c:IsFaceup() and c:IsCode(CARD_RED_DRAGON_ARCHFIEND) and not c:HasFlagEffect(id)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and s.tgfilter(chkc) end

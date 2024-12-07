@@ -1,5 +1,5 @@
 --夢魔鏡の乙女－イケロス
---Ikelos, the Dream Mirror Rise
+--Ikelos, the Dream Mirror Sprite
 --Scripted by Eerie Code
 
 local s,id=GetID()

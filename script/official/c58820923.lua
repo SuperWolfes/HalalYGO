@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,9,3,s.ovfilter,aux.Stringid(id,0))
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--xyzlimit
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -38,19 +38,19 @@ function s.rmcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_XYZ)
 end
 function s.cfilter(c)
-	return c:IsRace(RACE_DRAGON) and c:IsAbleToRestAsCost()
+	return c:IsRace(RACE_DRAGON) and c:IsAbleToGraveAsCost()
 end
 function s.rmcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_DECK,0,nil)
 	if chk==0 then return g:GetClassCount(Card.GetCode)>2 end
 	local tg=Group.CreateGroup()
 	for i=1,3 do
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 		local sg=g:Select(tp,1,1,nil)
 		g:Remove(Card.IsCode,nil,sg:GetFirst():GetCode())
 		tg:Merge(sg)
 	end
-	Duel.SendtoRest(tg,REASON_COST)
+	Duel.SendtoGrave(tg,REASON_COST)
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroupCount(tp,0,LOCATION_DECK)>2

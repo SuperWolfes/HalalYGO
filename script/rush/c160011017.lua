@@ -22,7 +22,7 @@ function s.tdcostrescon(sg,e,tp,mg)
 end
 function s.tdcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
-		local cg=Duel.GetMatchingGroup(s.tdcostfilter,tp,LOCATION_REST,0,nil)
+		local cg=Duel.GetMatchingGroup(s.tdcostfilter,tp,LOCATION_GRAVE,0,nil)
 		return aux.SelectUnselectGroup(cg,e,tp,2,2,s.tdcostrescon,0)
 	end
 end
@@ -35,7 +35,7 @@ function s.tdfilter(c)
 end
 function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	--requirement
-	local g=Duel.GetMatchingGroup(s.tdcostfilter,tp,LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(s.tdcostfilter,tp,LOCATION_GRAVE,0,nil)
 	local cg=aux.SelectUnselectGroup(g,e,tp,2,2,s.tdcostrescon,1,tp,HINTMSG_TODECK)
 	if Duel.SendtoDeck(cg,nil,SEQ_DECKSHUFFLE,REASON_COST)>0 then
 		--Effect

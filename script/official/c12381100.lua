@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Fusion Summon procedure ("Blue-Eyes Ultimate Dragon")
 	local f0=Fusion.AddProcMix(c,true,true,23995346,s.ffilter)[1]
 	f0:SetDescription(aux.Stringid(id,0))
@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.negtg)
 	e2:SetOperation(s.negop)
 	c:RegisterEffect(e2)
-	--Special Summon 1 "Blue-Eyes" monster, or 1 "Chaos" or "Black Luster Soldier" Locked Monster, from your Extra Deck or RP
+	--Special Summon 1 "Blue-Eyes" monster, or 1 "Chaos" or "Black Luster Soldier" Ritual Monster, from your Extra Deck or GY
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,3))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -54,14 +54,14 @@ end
 s.listed_names={23995346}
 s.listed_series={SET_BLUE_EYES,SET_CHAOS}
 function s.ffilter(c,fc,sumtype,tp)
-	return c:IsSetCard(SET_CHAOS,fc,sumtype,tp) and c:IsType(TYPE_LOCKED,fc,sumtype,tp)
+	return c:IsSetCard(SET_CHAOS,fc,sumtype,tp) and c:IsType(TYPE_RITUAL,fc,sumtype,tp)
 end
 function s.negcon(e,tp,eg,ep,ev,re,r,rp)
 	return rp==1-tp and not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED) and Duel.IsChainNegatable(ev) and s.type_list[tp]&re:GetActiveType()==0
 end
 function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	s.type_list[tp]=s.type_list[tp]|(re:GetActiveType()&(TYPE_MONSTER|TYPE_ACTIONAL|TYPE_TRAP))
+	s.type_list[tp]=s.type_list[tp]|(re:GetActiveType()&(TYPE_MONSTER|TYPE_SPELL|TYPE_TRAP))
 	Duel.SetOperationInfo(0,CATEGORY_NEGATE,eg,1,0,0)
 	local rc=re:GetHandler()
 	if rc:IsRelateToEffect(re) and rc:IsDestructable() then
@@ -78,9 +78,9 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return c:IsPreviousPosition(POS_FACEUP) and c:IsPreviousControler(tp) and rp==1-tp
 end
 function s.spfilter(c,e,tp,mmz_chk)
-	if not ((c:IsSetCard(SET_BLUE_EYES) or (c:IsSetCard(SET_CHAOS) and c:IsLockedMonster()))
+	if not ((c:IsSetCard(SET_BLUE_EYES) or (c:IsSetCard(SET_CHAOS) and c:IsRitualMonster()))
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)) then return false end
-	if c:IsLocation(LOCATION_REST) then
+	if c:IsLocation(LOCATION_GRAVE) then
 		return mmz_chk
 	else
 		return Duel.GetLocationCountFromEx(tp,tp,nil,c)>0
@@ -88,13 +88,13 @@ function s.spfilter(c,e,tp,mmz_chk)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local mmz_chk=Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-	if chk==0 then return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA|LOCATION_REST,0,1,nil,e,tp,mmz_chk) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA|LOCATION_REST)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA|LOCATION_GRAVE,0,1,nil,e,tp,mmz_chk) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA|LOCATION_GRAVE)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local mmz_chk=Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_EXTRA|LOCATION_REST,0,1,1,nil,e,tp,mmz_chk)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_EXTRA|LOCATION_GRAVE,0,1,1,nil,e,tp,mmz_chk)
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end

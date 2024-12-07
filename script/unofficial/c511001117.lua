@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion Materials
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,41230939,77625948,3019642)
 	--Must be Fusion Sumoned
 	local e1=Effect.CreateEffect(c)
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_SPSUMMON_CONDITION)
 	e1:SetValue(aux.fuslimit)
 	c:RegisterEffect(e1)
-	--Equip 1 Dragon monster from either Resting Place to this card
+	--Equip 1 Dragon monster from either Graveyard to this card
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_EQUIP)
@@ -31,7 +31,7 @@ function s.initial_effect(c)
 	e4:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e4)
 	aux.AddEREquipLimit(c,nil,aux.FilterBoolFunction(Card.IsRace,RACE_DRAGON),s.equipop,e4)
-	--Gains 100 ATK for each card in your Resting Place
+	--Gains 100 ATK for each card in your Graveyard
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_SINGLE)
 	e5:SetCode(EFFECT_UPDATE_ATTACK)
@@ -43,13 +43,13 @@ end
 s.listed_names={41230939,77625948,3019642}
 s.material_setcode={SET_CYBER,SET_CYBERDARK}
 function s.filter(c,tp)
-	return c:IsRace(RACE_DRAGON) and c:CheckUniqueOnField(tp) and not c:IsUnliked()
+	return c:IsRace(RACE_DRAGON) and c:CheckUniqueOnField(tp) and not c:IsForbidden()
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REST) and s.filter(chkc,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and s.filter(chkc,tp) end
 	if chk==0 then return true end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,LOCATION_REST,1,1,nil,tp)
+	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,1,nil,tp)
 	Duel.SetOperationInfo(0,CATEGORY_EQUIP,g,1,0,0)
 end
 function s.equipop(c,e,tp,tc)
@@ -83,5 +83,5 @@ function s.repval(e,re,r,rp)
 end
 function s.atkval(e,c)
 	local tp=e:GetHandlerPlayer()
-	return Duel.GetFieldGroupCount(tp,LOCATION_REST,0)*100
+	return Duel.GetFieldGroupCount(tp,LOCATION_GRAVE,0)*100
 end

@@ -1,5 +1,5 @@
 --RUM－クイック・カオス
---Rank-Up-Ment Quick Chaos
+--Rank-Up-Magic Quick Chaos
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

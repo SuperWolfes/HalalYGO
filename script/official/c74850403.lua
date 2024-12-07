@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
 	e2:SetTargetRange(LOCATION_MZONE,0)
-	e2:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_MENTOR))
+	e2:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_SPELLCASTER))
 	e2:SetValue(s.evalue)
 	c:RegisterEffect(e2)
 	--Search
@@ -30,7 +30,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x98}
 function s.evalue(e,re,rp)
-	return re:IsActiveType(TYPE_ACTIONAL) and rp~=e:GetHandlerPlayer()
+	return re:IsActiveType(TYPE_SPELL) and rp~=e:GetHandlerPlayer()
 end
 function s.thcfilter(c,tp)
 	return c:IsType(TYPE_PENDULUM) and c:IsPreviousSetCard(0x98)

@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Link Summon procedure
 	Link.AddProcedure(c,nil,2,2,s.lcheck)
 	--Return targets to the Deck
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.tdtg)
 	e1:SetOperation(s.tdop)
 	c:RegisterEffect(e1)
-	--Target 1 Locked monster in the RP and either Special Summon it or add it to the hand
+	--Target 1 Ritual monster in the GY and either Special Summon it or add it to the hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SPECIAL_SUMMON)
@@ -34,17 +34,17 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.lcheck(g,lc,sumtype,tp)
-	return g:IsExists(Card.IsType,1,nil,TYPE_LOCKED,lc,sumtype,tp)
+	return g:IsExists(Card.IsType,1,nil,TYPE_RITUAL,lc,sumtype,tp)
 end
 function s.tgfilter(c,e)
-	return c:IsCanBeEffectTarget(e) and c:IsAbleToDeck() and (c:IsLocation(LOCATION_ONFIELD) or c:IsLockedMonster())
+	return c:IsCanBeEffectTarget(e) and c:IsAbleToDeck() and (c:IsLocation(LOCATION_ONFIELD) or c:IsRitualMonster())
 end
 function s.rescon(sg,e,tp)
-	return sg:FilterCount(Card.IsLocation,nil,LOCATION_REST)==1
+	return sg:FilterCount(Card.IsLocation,nil,LOCATION_GRAVE)==1
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	local tdg=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_ONFIELD|LOCATION_REST,LOCATION_ONFIELD,nil,e)
+	local tdg=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_ONFIELD|LOCATION_GRAVE,LOCATION_ONFIELD,nil,e)
 	if chk==0 then return #tdg>1 and aux.SelectUnselectGroup(tdg,e,tp,2,2,s.rescon,0) end
 	local tg=aux.SelectUnselectGroup(tdg,e,tp,2,2,s.rescon,1,tp,HINTMSG_TODECK)
 	Duel.SetTargetCard(tg)
@@ -56,14 +56,14 @@ function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
 end
 function s.thspfilter(c,e,tp,rc)
-	return c:IsLockedMonster() and (c:IsAbleToHand() or (Duel.GetMZoneCount(tp,rc)>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)))
+	return c:IsRitualMonster() and (c:IsAbleToHand() or (Duel.GetMZoneCount(tp,rc)>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)))
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
-	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.thspfilter(chkc,e,tp,c) end
-	if chk==0 then return Duel.IsExistingTarget(s.thspfilter,tp,LOCATION_REST,0,1,nil,e,tp,c) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.thspfilter(chkc,e,tp,c) end
+	if chk==0 then return Duel.IsExistingTarget(s.thspfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp,c) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local g=Duel.SelectTarget(tp,s.thspfilter,tp,LOCATION_REST,0,1,1,nil,e,tp,c)
+	local g=Duel.SelectTarget(tp,s.thspfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp,c)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,g,1,tp,0)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,0)
 end

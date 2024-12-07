@@ -1,5 +1,5 @@
 --魂を刻む右
---Miss Fist
+--Soul Fist
 Duel.LoadScript("c420.lua")
 local s,id=GetID()
 function s.initial_effect(c)

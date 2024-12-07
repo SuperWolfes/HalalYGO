@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCost(aux.bfgcost)
 	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
@@ -32,14 +32,14 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return c:IsSetCard(SET_MARINCESS) and c:IsRelateToBattle() and not c:GetBattleTarget():IsControler(tp)
 end
 function s.cfilter(c)
-	return c:IsSetCard(SET_MARINCESS) and c:IsMonster() and c:IsAbleToRestAsCost()
+	return c:IsSetCard(SET_MARINCESS) and c:IsMonster() and c:IsAbleToGraveAsCost()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return not c:IsPublic() and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,c) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND,0,1,1,c)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -80,7 +80,7 @@ function s.filter(c)
 end
 function s.damval(e,re,val,r,rp,rc)
 	if r&REASON_BATTLE~=REASON_BATTLE then return val end
-	local g=Duel.GetMatchingGroup(s.filter,e:GetHandlerPlayer(),LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(s.filter,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil)
 	local g2=g:Clone()
 	for c in aux.Next(g) do
 		if g2:FilterCount(Card.IsCode,nil,c:GetCode())>1 then

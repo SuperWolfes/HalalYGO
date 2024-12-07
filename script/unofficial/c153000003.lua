@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	dme1:SetCondition(s.dmcon)
 	dme1:SetOperation(s.dmop)
 	DeckMaster.RegisterAbilities(c,dme1)
-	--immune actional
+	--immune spell
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_IMMUNE_EFFECT)
@@ -28,7 +28,7 @@ function s.econ(e)
 	return Duel.IsEnvironment(CARD_UMI)
 end
 function s.efilter(e,te)
-	return te:IsActiveType(TYPE_ACTIONAL)
+	return te:IsActiveType(TYPE_SPELL)
 end
 function s.dmcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsDeckMaster(tp,id) and Duel.GetAttackTarget():IsControler(tp)

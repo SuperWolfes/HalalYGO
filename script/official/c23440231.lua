@@ -2,9 +2,9 @@
 --Infernoid Devyaty
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Infernoid.RegisterSummonProcedure(c,3)
-	--Destroy all non-"Void" Actional/Trap cards on the field
+	--Destroy all non-"Void" Spell/Trap cards on the field
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DESTROY)
@@ -30,7 +30,7 @@ function s.initial_effect(c)
 end
 s.listed_series={SET_INFERNOID,SET_VOID}
 function s.desfilter(c)
-	return (c:IsFacedown() or not c:IsSetCard(SET_VOID)) and c:IsActionalTrap()
+	return (c:IsFacedown() or not c:IsSetCard(SET_VOID)) and c:IsSpellTrap()
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.desfilter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) end

@@ -1,5 +1,5 @@
 --神の束縛ドローミ
---Dromi the Clean Shackles
+--Dromi the Sacred Shackles
 --Rescripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsRace(RACE_MEGA)
+	return c:IsFaceup() and c:IsRace(RACE_DIVINE)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end

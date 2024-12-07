@@ -2,7 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMixN(c,false,false,CARD_CYBER_DRAGON,2)
 	--extra att
 	local e2=Effect.CreateEffect(c)

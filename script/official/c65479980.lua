@@ -1,5 +1,5 @@
 --Ｓ－Ｆｏｒｃｅ ドッグ・タッグ
---S-Fcoree Dog Tag
+--S-Force Dog Tag
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	local e2=e1:Clone()
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e2)
-	--Monsters in the same column as your "S-Fcoree" monsters cannot activate their effects during your Main Phase
+	--Monsters in the same column as your "S-Force" monsters cannot activate their effects during your Main Phase
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
 	e3:SetRange(LOCATION_MZONE)
@@ -27,13 +27,13 @@ function s.initial_effect(c)
 	e3:SetCondition(s.atcon)
 	e3:SetValue(s.atlimit)
 	e3:SetTargetRange(0,LOCATION_MZONE)
-	e3:SetTarget(aux.SFcoreeTarget)
+	e3:SetTarget(aux.SForceTarget)
 	c:RegisterEffect(e3)
 end
-s.listed_series={SET_S_FCOREE}
+s.listed_series={SET_S_FORCE}
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(Card.IsSummonPlayer,1,nil,1-tp) 
-		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,SET_S_FCOREE),tp,LOCATION_MZONE,0,1,nil)
+		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,SET_S_FORCE),tp,LOCATION_MZONE,0,1,nil)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

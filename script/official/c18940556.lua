@@ -2,7 +2,7 @@
 --Ultimate Conductor Tyranno
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Special summon procedure
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -32,10 +32,10 @@ function s.initial_effect(c)
 	e3:SetCode(EFFECT_ATTACK_ALL)
 	e3:SetValue(1)
 	c:RegisterEffect(e3)
-	--Send defense position monster to the RP
+	--Send defense position monster to the GY
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
-	e4:SetCategory(CATEGORY_DAMAGE+CATEGORY_TOREST)
+	e4:SetCategory(CATEGORY_DAMAGE+CATEGORY_TOGRAVE)
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e4:SetCode(EVENT_BATTLE_START)
 	e4:SetTarget(s.tgtg)
@@ -48,11 +48,11 @@ end
 function s.sprcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
-	local rg=Duel.GetMatchingGroup(s.sprfilter,tp,LOCATION_MZONE+LOCATION_REST,0,nil)
+	local rg=Duel.GetMatchingGroup(s.sprfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil)
 	return Duel.GetLocationCount(tp,LOCATION_MZONE)>-2 and #rg>1 and aux.SelectUnselectGroup(rg,e,tp,2,2,aux.ChkfMMZ(1),0)
 end
 function s.sprtg(e,tp,eg,ep,ev,re,r,rp,c)
-	local rg=Duel.GetMatchingGroup(s.sprfilter,tp,LOCATION_MZONE+LOCATION_REST,0,nil)
+	local rg=Duel.GetMatchingGroup(s.sprfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil)
 	local g=aux.SelectUnselectGroup(rg,e,tp,2,2,aux.ChkfMMZ(1),1,tp,HINTMSG_REMOVE)
 	if #g>0 then
 		g:KeepAlive()
@@ -102,13 +102,13 @@ function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local d=Duel.GetAttackTarget()
 	if chk ==0 then return Duel.GetAttacker()==e:GetHandler() and d and d:IsDefensePos() end
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,1000)
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,d,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,d,1,0,0)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.Damage(1-tp,1000,REASON_EFFECT)~=0 then
 		local d=Duel.GetAttackTarget()
 		if d:IsRelateToBattle() and d:IsDefensePos() then
-			Duel.SendtoRest(d,REASON_EFFECT)
+			Duel.SendtoGrave(d,REASON_EFFECT)
 		end
 	end
 end

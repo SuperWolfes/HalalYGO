@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetCost(s.cost)
 	c:RegisterEffect(e1)
-	--Players must send 1 Actional card from the Deck to activate Actional cards
+	--Players must send 1 Spell card from the Deck to activate Spell cards
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_ACTIVATE_COST)
@@ -34,18 +34,18 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Release(rg,REASON_COST)
 end
 function s.actvcostfilter(c)
-	return c:IsActional() and c:IsAbleToRestAsCost()
+	return c:IsSpell() and c:IsAbleToGraveAsCost()
 end
 function s.actcost(e,te,tp)
 	local ct=#{Duel.GetPlayerEffect(tp,id)}
 	return Duel.IsExistingMatchingCard(s.actvcostfilter,tp,LOCATION_DECK,0,ct,nil)
 end
 function s.actcosttarget(e,te,tp)
-	return te:IsActionalEffect() and te:IsHasType(EFFECT_TYPE_ACTIVATE)
+	return te:IsSpellEffect() and te:IsHasType(EFFECT_TYPE_ACTIVATE)
 end
 function s.actcostop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=#{Duel.GetPlayerEffect(tp,id)}
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.actvcostfilter,tp,LOCATION_DECK,0,ct,ct,nil)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end

@@ -1,5 +1,5 @@
 --三眼の死霊
---Three-Eyed Miss
+--Three-Eyed Ghost
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -17,8 +17,8 @@ function s.initial_effect(c)
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToRestAsCost() end
-	Duel.SendtoRest(c,REASON_COST)
+	if chk==0 then return c:IsAbleToGraveAsCost() end
+	Duel.SendtoGrave(c,REASON_COST)
 end
 function s.thfilter(c)
 	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsLevel(10) and c:IsAbleToHand()

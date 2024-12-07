@@ -12,11 +12,11 @@ function s.initial_effect(c)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,PLAYER_ALL,LOCATION_REST)
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,PLAYER_ALL,LOCATION_GRAVE)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local tc1=Duel.GetFieldCard(tp,LOCATION_REST,Duel.GetFieldGroupCount(tp,LOCATION_REST,0)-1)
-	local tc2=Duel.GetFieldCard(1-tp,LOCATION_REST,Duel.GetFieldGroupCount(1-tp,LOCATION_REST,0)-1)
+	local tc1=Duel.GetFieldCard(tp,LOCATION_GRAVE,Duel.GetFieldGroupCount(tp,LOCATION_GRAVE,0)-1)
+	local tc2=Duel.GetFieldCard(1-tp,LOCATION_GRAVE,Duel.GetFieldGroupCount(1-tp,LOCATION_GRAVE,0)-1)
 	if tc1 and tc1:IsAbleToHand() and tc2 and tc2:IsAbleToHand() then
 		local g=Group.CreateGroup()
 		g:AddCard(tc1)

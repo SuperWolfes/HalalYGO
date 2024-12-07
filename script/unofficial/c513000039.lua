@@ -1,5 +1,5 @@
 --時械神メタイオン (Anime)
---Metaion, the Timewatcher (Anime)
+--Metaion, the Timelord (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--indes

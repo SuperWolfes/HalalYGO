@@ -1,5 +1,5 @@
 --ゴーティスの妖精シフ
---Shif, Wanderer of the Ghoti
+--Shif, Fairy of the Ghoti
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -9,7 +9,7 @@ function s.initial_effect(c)
 	e1:SetCategory(CATEGORY_ATKCHANGE)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e1:SetRange(LOCATION_REST)
+	e1:SetRange(LOCATION_GRAVE)
 	e1:SetCountLimit(1,id)
 	e1:SetCost(aux.bfgcost)
 	e1:SetTarget(s.atktg)

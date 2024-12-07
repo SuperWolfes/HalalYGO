@@ -1,5 +1,5 @@
 --封魔閃光
---Radiance of the Unliked Actional
+--Radiance of the Forbidden Spell
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)

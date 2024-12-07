@@ -1,4 +1,4 @@
---Actional Summon Stopper
+--Spell Summon Stopper
 --original script by Shad3
 local s,id=GetID()
 function s.initial_effect(c)
@@ -28,5 +28,5 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,p)
 end
 function s.lm_val(e,re,tp)
-	return Duel.GetTurnCount()>e:GetLabel() and re:IsActiveType(TYPE_ACTIONAL) and (re:IsHasCategory(CATEGORY_SUMMON) or re:IsHasCategory(CATEGORY_SPECIAL_SUMMON))
+	return Duel.GetTurnCount()>e:GetLabel() and re:IsActiveType(TYPE_SPELL) and (re:IsHasCategory(CATEGORY_SUMMON) or re:IsHasCategory(CATEGORY_SPECIAL_SUMMON))
 end

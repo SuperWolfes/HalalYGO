@@ -1,6 +1,6 @@
 --群雄割拠
---Rivalry of Warwatchers (GOAT)
---Ignores cards without race (Mentoral hats)
+--Rivalry of Warlords (GOAT)
+--Ignores cards without race (Magical hats)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_FIELD)
 	e4:SetRange(LOCATION_SZONE)
-	e4:SetCode(EFFECT_FCOREE_SPSUMMON_POSITION)
+	e4:SetCode(EFFECT_FORCE_SPSUMMON_POSITION)
 	e4:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e4:SetTargetRange(1,1)
 	e4:SetTarget(s.sumlimit)
@@ -93,7 +93,7 @@ function s.adjustop(e,tp,eg,ep,ev,re,r,rp)
 	end
 	g1:Merge(g2)
 	if #g1>0 then
-		Duel.SendtoRest(g1,REASON_RULE)
+		Duel.SendtoGrave(g1,REASON_RULE)
 		Duel.Readjust()
 	end
 end

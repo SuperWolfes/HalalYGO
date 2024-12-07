@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Pendulum Summon
 	Pendulum.AddProcedure(c)
-	--Destroy all cards in the Actional/Trap Zone and increase ATK
+	--Destroy all cards in the Spell/Trap Zone and increase ATK
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_DESTROY)
@@ -34,7 +34,7 @@ function s.initial_effect(c)
 end
 s.listed_series={SET_PERFORMAPAL}
 function s.cfilter(c)
-	return c:IsSetCard(SET_PERFORMAPAL) and c:IsMonster() and c:IsAbleToRestAsCost()
+	return c:IsSetCard(SET_PERFORMAPAL) and c:IsMonster() and c:IsAbleToGraveAsCost()
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local g=Duel.GetFieldGroup(tp,LOCATION_PZONE,0)
@@ -42,9 +42,9 @@ function s.descost(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return #g==g:FilterCount(Card.IsAbleToRemoveAsCost,nil) and sct>0
 		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_DECK,0,sct,nil) end
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local gc=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_DECK,0,sct,sct,nil)
-	Duel.SendtoRest(gc,REASON_COST)
+	Duel.SendtoGrave(gc,REASON_COST)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() and chkc:IsControler(tp) end

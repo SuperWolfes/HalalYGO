@@ -35,8 +35,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=g:GetFirst()
 	if tc and not tc:IsImmuneToEffect(e) then
 		if tc:IsOnField() and tc:IsFacedown() then Duel.ConfirmCards(1-tp,tc) end
-		Duel.SendtoRest(tc,REASON_EFFECT)
-		if not tc:IsLocation(LOCATION_REST) then return end
+		Duel.SendtoGrave(tc,REASON_EFFECT)
+		if not tc:IsLocation(LOCATION_GRAVE) then return end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local sg=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,tc:GetCode())
 		if tc:IsPreviousLocation(LOCATION_SZONE) and tc:IsPreviousPosition(POS_FACEUP) then 

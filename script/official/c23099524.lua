@@ -57,10 +57,10 @@ function s.atkfilter(c)
 	return c:IsTrap() and c:IsType(TYPE_CONTINUOUS) and c:IsFaceup()
 end
 function s.atkval(e,c)
-	return Duel.GetMatchingGroupCount(s.atkfilter,e:GetHandlerPlayer(),LOCATION_ONFIELD+LOCATION_REST,LOCATION_ONFIELD+LOCATION_REST,nil)*300
+	return Duel.GetMatchingGroupCount(s.atkfilter,e:GetHandlerPlayer(),LOCATION_ONFIELD+LOCATION_GRAVE,LOCATION_ONFIELD+LOCATION_GRAVE,nil)*300
 end
 function s.thcfilter(c)
-	return c:IsRace(RACE_WANDERER+RACE_TAINTED+RACE_REPTILE)
+	return c:IsRace(RACE_FAIRY+RACE_FIEND+RACE_REPTILE)
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckReleaseGroupCost(tp,s.thcfilter,1,false,nil,nil) end

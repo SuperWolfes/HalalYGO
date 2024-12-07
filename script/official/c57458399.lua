@@ -27,7 +27,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x66,0xa3,0x1017}
 function s.gfilter(c,tp)
-	return c:GetPreviousLocation()==LOCATION_REST and c:GetPreviousControler()==tp
+	return c:GetPreviousLocation()==LOCATION_GRAVE and c:GetPreviousControler()==tp
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.gfilter,1,nil,tp)
@@ -49,7 +49,7 @@ function s.cfilter(c,e,tp,sc)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetLevel()~=4 
-	and  Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,nil)
+	and  Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

@@ -1,13 +1,13 @@
 --幻影騎士団ティアースケイル
---The Illusion Knights of Tear Scale
+--The Phantom Knights of Tear Scale
 --Scripted by Larry126
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send 1 "Illusion Knights" card from deck to RP
+	--Send 1 "Phantom Knights" card from deck to GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_TOREST)
+	e1:SetCategory(CATEGORY_TOGRAVE)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1,id)
@@ -15,14 +15,14 @@ function s.initial_effect(c)
 	e1:SetTarget(s.tgtg)
 	e1:SetOperation(s.tgop)
 	c:RegisterEffect(e1)
-	--Special summon itself from RP if a "Illusion Knights" card is banished from RP
+	--Special summon itself from GY if a "Phantom Knights" card is banished from GY
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_REMOVE)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(s.spcon)
 	e2:SetTarget(s.sptg)
@@ -37,23 +37,23 @@ function s.tgcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
 end
 function s.tgfilter(c)
-	return ((c:IsSetCard(0x10db) and c:IsMonster()) or (c:IsSetCard(0xdb) and c:IsActionalTrap()))
-		and not c:IsCode(id) and c:IsAbleToRest()
+	return ((c:IsSetCard(0x10db) and c:IsMonster()) or (c:IsSetCard(0xdb) and c:IsSpellTrap()))
+		and not c:IsCode(id) and c:IsAbleToGrave()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoRest(g,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	end
 end
 function s.cfilter(c,tp)
-	return ((c:IsSetCard(0x10db) and c:IsMonster()) or (c:IsSetCard(0xdb) and c:IsActionalTrap()))
-		and c:IsPreviousLocation(LOCATION_REST) and c:IsControler(tp)
+	return ((c:IsSetCard(0x10db) and c:IsMonster()) or (c:IsSetCard(0xdb) and c:IsSpellTrap()))
+		and c:IsPreviousLocation(LOCATION_GRAVE) and c:IsControler(tp)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,tp)

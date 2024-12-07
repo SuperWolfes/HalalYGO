@@ -29,7 +29,7 @@ end
 function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsTurnPlayer(tp) and Duel.GetFlagEffect(ep,id)==0
 		and Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,nil)
-		and Duel.IsExistingMatchingCard(s.spfilter,tp,0,LOCATION_REST,1,nil,e,tp,Duel.GetTurnCount())
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,0,LOCATION_GRAVE,1,nil,e,tp,Duel.GetTurnCount())
 end
 function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.SelectYesNo(tp,aux.Stringid(id,0)) then return end
@@ -37,11 +37,11 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,tp,id)
 	--OPD register
 	Duel.RegisterFlagEffect(ep,id,0,0,0)
-	--Discard 1 card to Set 1 monster from opponent's RP to your field
+	--Discard 1 card to Set 1 monster from opponent's GY to your field
 	local ct=Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST|REASON_DISCARD,nil)
 	if ct>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
-		local sg=Duel.SelectMatchingCard(tp,s.spfilter,tp,0,LOCATION_REST,1,1,nil,e,tp,Duel.GetTurnCount())
+		local sg=Duel.SelectMatchingCard(tp,s.spfilter,tp,0,LOCATION_GRAVE,1,1,nil,e,tp,Duel.GetTurnCount())
 		if #sg>0 then
 			Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEDOWN_DEFENSE)
 			Duel.ConfirmCards(1-tp,sg)

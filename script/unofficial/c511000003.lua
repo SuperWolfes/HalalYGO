@@ -1,5 +1,5 @@
 --ゼロ・スプライト
---Zero Rise
+--Zero Sprite
 --Fixed by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -57,6 +57,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e3:SetReset(RESET_EVENT|RESETS_STANDARD)
 		c:RegisterEffect(e3)
 	else
-		c:CancelToRest(false)
+		c:CancelToGrave(false)
 	end
 end

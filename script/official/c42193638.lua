@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_RECOVER+CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_DAMAGE+CATEGORY_TOREST)
+	e1:SetCategory(CATEGORY_RECOVER+CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_DAMAGE+CATEGORY_TOGRAVE)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
@@ -21,10 +21,10 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,500)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,500)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
 end
 function s.tgfilter(c)
-	return c:IsSetCard(SET_VAALMONICA) and not c:IsCode(id) and c:IsAbleToRest()
+	return c:IsSetCard(SET_VAALMONICA) and not c:IsCode(id) and c:IsAbleToGrave()
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp,angello_or_dimonno) --Additional parameter used by "Angello Vaalmonica" and "Dimonno Vaalmonica"
 	local op=nil
@@ -50,17 +50,17 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp,angello_or_dimonno) --Additional param
 				Duel.SendtoHand(spcard,nil,REASON_EFFECT)
 				Duel.ConfirmCards(1-tp,spcard)
 			else
-				Duel.SendtoRest(spcard,REASON_RULE)
+				Duel.SendtoGrave(spcard,REASON_RULE)
 			end
 		end
 	elseif op==2 then
-		--Take 500 damage and send 1 "Vaalmonica" card from your Deck to the RP
+		--Take 500 damage and send 1 "Vaalmonica" card from your Deck to the GY
 		local g=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_DECK,0,nil)
 		if Duel.Damage(tp,500,REASON_EFFECT)>0 and #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,6)) then
-			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 			local sg=g:Select(tp,1,1,nil)
 			Duel.BreakEffect()
-			Duel.SendtoRest(sg,REASON_EFFECT)
+			Duel.SendtoGrave(sg,REASON_EFFECT)
 		end
 	end
 end

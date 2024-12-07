@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.condition(e,c)
-	return c:IsRace(RACE_WANDERER)
+	return c:IsRace(RACE_FAIRY)
 end
 function s.spcon(e,c)
 	if c==nil then return true end

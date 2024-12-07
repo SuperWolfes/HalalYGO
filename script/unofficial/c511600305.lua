@@ -1,11 +1,11 @@
 --アースゴーレム＠イグニスター (Anime)
---Earth Gopal @Ignister (Anime)
+--Earth Golem @Ignister (Anime)
 --Scripted by Larry126
 local s,id,alias=GetID()
 function s.initial_effect(c)
 	alias=c:GetOriginalCodeRule()
 	--fusion material
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,s.matfilter,aux.FilterBoolFunctionEx(Card.IsType,TYPE_LINK))
 	--summon success
 	local e1=Effect.CreateEffect(c)

@@ -3,7 +3,7 @@
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	-- 2 "Ninja" monsters with different Types
 	Fusion.AddProcMixN(c,true,true,s.ffilter,2)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,s.splimit,nil,nil,nil,false)
@@ -40,13 +40,13 @@ end
 function s.rmcostfilter(c)
 	return (c:IsSetCard(SET_NINJA) or c:IsSetCard(SET_NINJITSU_ART)) and c:IsAbleToRemoveAsCost()
 		and (c:IsFaceup() or not c:IsOnField())
-		and (not c:IsLocation(LOCATION_REST) or aux.SpElimFilter(c,true))
+		and (not c:IsLocation(LOCATION_GRAVE) or aux.SpElimFilter(c,true))
 end
 function s.rmcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return Duel.IsExistingMatchingCard(s.rmcostfilter,tp,LOCATION_HAND|LOCATION_ONFIELD|LOCATION_REST,0,1,c) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.rmcostfilter,tp,LOCATION_HAND|LOCATION_ONFIELD|LOCATION_GRAVE,0,1,c) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.rmcostfilter,tp,LOCATION_HAND|LOCATION_ONFIELD|LOCATION_REST,0,1,1,c)
+	local g=Duel.SelectMatchingCard(tp,s.rmcostfilter,tp,LOCATION_HAND|LOCATION_ONFIELD|LOCATION_GRAVE,0,1,1,c)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

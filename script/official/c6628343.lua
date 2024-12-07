@@ -24,7 +24,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x10cf}
 function s.mtcon(e,tp,eg,ep,ev,re,r,rp)
-	return r==REASON_LOCKED and eg:IsExists(Card.IsSetCard,1,nil,0x10cf)
+	return r==REASON_RITUAL and eg:IsExists(Card.IsSetCard,1,nil,0x10cf)
 end
 function s.mtop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -80,10 +80,10 @@ function s.atop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ChainAttack()
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsPreviousLocation(LOCATION_REST)
+	return e:GetHandler():IsPreviousLocation(LOCATION_GRAVE)
 end
 function s.thfilter(c)
-	return c:GetType()==TYPE_ACTIONAL+TYPE_LOCKED and c:IsAbleToHand()
+	return c:GetType()==TYPE_SPELL+TYPE_RITUAL and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

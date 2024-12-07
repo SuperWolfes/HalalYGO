@@ -1,9 +1,9 @@
 --メタファイズ・ホルス・ドラゴン
---Metadata Humus
+--Metaphys Horus
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before awaking
-	c:EnableAwakeLimit()
+	--Must be properly summoned before reviving
+	c:EnableReviveLimit()
 	--Synchro summon procedure
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	--Check materials used for its synchro summon

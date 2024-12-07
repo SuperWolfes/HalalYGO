@@ -2,17 +2,17 @@
 --Goblin Recon Squad
 local s,id=GetID()
 function s.initial_effect(c)
-	--Look at 1 random card in opponent's hand. Send it to RP if actional
+	--Look at 1 random card in opponent's hand. Send it to GY if spell
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_TOREST)
+	e1:SetCategory(CATEGORY_TOGRAVE)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_BATTLE_DAMAGE)
 	e1:SetCondition(s.condition)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
-	--Smint to defense position after attacking
+	--Switch to defense position after attacking
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EVENT_PHASE+PHASE_BATTLE)
@@ -33,8 +33,8 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if #g==0 then return end
 	local sg=g:RandomSelect(ep,1)
 	Duel.ConfirmCards(tp,sg)
-	if sg:GetFirst():IsActional() then
-		Duel.SendtoRest(sg,REASON_EFFECT)
+	if sg:GetFirst():IsSpell() then
+		Duel.SendtoGrave(sg,REASON_EFFECT)
 	end
 	Duel.ShuffleHand(1-tp)
 end

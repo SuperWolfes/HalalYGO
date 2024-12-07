@@ -1,10 +1,10 @@
 --デコード・トーカー・ヒートソウル
---Decode Talker Heatmiss
+--Decode Talker Heatsoul
 local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_CYBERSE),2,99,s.lcheck)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Increase ATK
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)

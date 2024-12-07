@@ -34,18 +34,18 @@ function s.chcon(e,tp,eg,ep,ev,re,r,rp)
 	return ep==1-tp and re:IsMonsterEffect() and Duel.GetCurrentChain(true)>=2
 end
 function s.plfilter(c,tp)
-	return c:IsSetCard(SET_CENTURION) and c:IsMonster() and c:IsFaceup() and not c:IsUnliked()
+	return c:IsSetCard(SET_CENTURION) and c:IsMonster() and c:IsFaceup() and not c:IsForbidden()
 		and c:CheckUniqueOnField(tp)
 end
 function s.chtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and Duel.IsExistingMatchingCard(s.plfilter,tp,LOCATION_MZONE|LOCATION_REST,0,1,nil,tp) end
+		and Duel.IsExistingMatchingCard(s.plfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,1,nil,tp) end
 end
 function s.plop(e,tp,eg,ep,ev,re,r,rp)
 	local p=1-tp
 	if Duel.GetLocationCount(p,LOCATION_SZONE)==0 then return end
 	Duel.Hint(HINT_SELECTMSG,p,HINTMSG_TOFIELD)
-	local tc=Duel.SelectMatchingCard(p,aux.NecroValleyFilter(s.plfilter),p,LOCATION_MZONE|LOCATION_REST,0,1,1,nil,tp):GetFirst()
+	local tc=Duel.SelectMatchingCard(p,aux.NecroValleyFilter(s.plfilter),p,LOCATION_MZONE|LOCATION_GRAVE,0,1,1,nil,tp):GetFirst()
 	if tc and Duel.MoveToField(tc,p,p,LOCATION_SZONE,POS_FACEUP,tc:IsMonsterCard()) then
 		--Treat it as a Continuous Trap
 		local e1=Effect.CreateEffect(e:GetHandler())

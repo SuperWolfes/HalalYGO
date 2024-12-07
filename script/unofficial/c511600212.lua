@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	e3:SetCountLimit(1)
 	e3:SetValue(s.indct)
 	c:RegisterEffect(e3)
-	--to rest
+	--to grave
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(59251766,0))
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
@@ -44,7 +44,7 @@ function s.indcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local ec=c:GetEquipTarget()
 	e:SetLabelObject(ec)
-	return ec and c:IsLocation(LOCATION_REST) and ec:IsFaceup() and ec:IsLocation(LOCATION_MZONE)
+	return ec and c:IsLocation(LOCATION_GRAVE) and ec:IsFaceup() and ec:IsLocation(LOCATION_MZONE)
 end
 function s.indtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

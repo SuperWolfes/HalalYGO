@@ -1,7 +1,7 @@
 --スターダストン
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--cannot special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -52,7 +52,7 @@ function s.aclimit(e,re,tp)
 	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and rc:IsLocation(LOCATION_SZONE) and rc:IsFacedown()
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsSetCard(0x80) and c:IsAbleToRestAsCost()
+	return c:IsFaceup() and c:IsSetCard(0x80) and c:IsAbleToGraveAsCost()
 end
 function s.spcon(e,c)
 	if c==nil then return true end
@@ -73,7 +73,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local rg=e:GetLabelObject()
 	if not rg then return end
-	local ct=Duel.SendtoRest(rg,REASON_COST)
+	local ct=Duel.SendtoGrave(rg,REASON_COST)
 	rg:DeleteGroup()
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)

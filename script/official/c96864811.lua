@@ -1,5 +1,5 @@
 --禁じられた聖衣
---Unliked Dress
+--Forbidden Dress
 
 local s,id=GetID()
 function s.initial_effect(c)

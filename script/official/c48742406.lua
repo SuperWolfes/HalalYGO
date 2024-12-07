@@ -1,5 +1,5 @@
 --フェアリー・アーチャー
---Wanderer Archer
+--Fairy Archer
 local s,id=GetID()
 function s.initial_effect(c)
 	--Inflict damage equal to number of your LIGHT monsters x 400

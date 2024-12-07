@@ -20,16 +20,16 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(aux.FaceupFilter(s.cfilter),tp,LOCATION_MZONE,0,1,nil) end
 end
 function s.filter(c)
-	return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_MACHINE) and c:IsAbleToRestAsCost()
+	return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_MACHINE) and c:IsAbleToGraveAsCost()
 end
 function s.cfilter(c)
 	return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_MACHINE) and c:CanGetPiercingRush()
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	-- Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local cg=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_HAND,0,1,1,nil)
-	if Duel.SendtoRest(cg,REASON_COST)>0 then
+	if Duel.SendtoGrave(cg,REASON_COST)>0 then
 		-- Effect
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 		local g=Duel.SelectMatchingCard(tp,aux.FaceupFilter(s.cfilter),tp,LOCATION_MZONE,0,1,1,nil)

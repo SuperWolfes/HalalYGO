@@ -2,7 +2,7 @@
 --Neo Galaxy-Eyes Cipher Dragon
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Xyz Summon Procedure
 	Xyz.AddProcedure(c,nil,9,3)
 	--Take control of the opponent's monsters

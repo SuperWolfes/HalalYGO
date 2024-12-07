@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c)
-	return c:IsRace(RACE_TOXIC) and c:IsAbleToRestAsCost()
+	return c:IsRace(RACE_ZOMBIE) and c:IsAbleToGraveAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end
@@ -26,17 +26,17 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_DAMAGE,nil,1,1-tp,700)
 end
 function s.zmbfilter(c)
-	return c:IsRace(RACE_TOXIC) and c:IsLevel(7)
+	return c:IsRace(RACE_ZOMBIE) and c:IsLevel(7)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND,0,1,1,nil)
-	if #g>0 and Duel.SendtoRest(g,REASON_COST)>0 then
+	if #g>0 and Duel.SendtoGrave(g,REASON_COST)>0 then
 		--Effect
 		local c=e:GetHandler()
 		if c:IsFaceup() and c:IsRelateToEffect(e) and c:UpdateAttack(1000,RESETS_STANDARD_PHASE_END)==1000
-			and Duel.IsExistingMatchingCard(s.zmbfilter,tp,LOCATION_REST,0,1,nil) then
+			and Duel.IsExistingMatchingCard(s.zmbfilter,tp,LOCATION_GRAVE,0,1,nil) then
 			Duel.BreakEffect()
 			Duel.Damage(1-tp,700,REASON_EFFECT)
 		end

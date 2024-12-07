@@ -14,11 +14,11 @@ function s.initial_effect(c)
 	e1:SetTarget(s.thtg)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
-	--Attach to 1 LL Xyz monster from RP
+	--Attach to 1 LL Xyz monster from GY
 	local e2=Effect.CreateEffect(c)
-	e2:SetCategory(CATEGORY_LEAVE_REST)
+	e2:SetCategory(CATEGORY_LEAVE_GRAVE)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetTarget(s.atchtg)
@@ -27,7 +27,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0xf7}
 function s.thfilter(c)
-	return c:IsSetCard(0xf7) and c:IsActionalTrap() and c:IsAbleToHand()
+	return c:IsSetCard(0xf7) and c:IsSpellTrap() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -48,7 +48,7 @@ function s.atchtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_MZONE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 	Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE,0,1,1,nil)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,e:GetHandler(),1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,e:GetHandler(),1,0,0)
 end
 function s.atchop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

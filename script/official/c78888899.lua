@@ -3,14 +3,14 @@
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	--Place 1 "Centur-Ion" monster in the Actional/Trap Zone as Continuous Trap
+	--Place 1 "Centur-Ion" monster in the Spell/Trap Zone as Continuous Trap
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetCode(EVENT_FREE_CHAIN)
-	e1:SetRange(LOCATION_HAND|LOCATION_REST)
+	e1:SetRange(LOCATION_HAND|LOCATION_GRAVE)
 	e1:SetCountLimit(1,id)
 	e1:SetHintTiming(0,TIMING_MAIN_END|TIMINGS_CHECK_MONSTER_E)
 	e1:SetCondition(function(e,tp) return Duel.IsTurnPlayer(1-tp) end)
@@ -34,7 +34,7 @@ end
 s.listed_names={id}
 s.listed_series={SET_CENTURION}
 function s.plfilter(c,tp)
-	return c:IsSetCard(SET_CENTURION) and c:IsFaceup() and not c:IsUnliked()
+	return c:IsSetCard(SET_CENTURION) and c:IsFaceup() and not c:IsForbidden()
 		and not c:IsCode(id) and Duel.GetMZoneCount(tp,c)>0
 end
 function s.pltg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -53,7 +53,7 @@ function s.plop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and not tc:IsImmuneToEffect(e) then
 		if Duel.GetLocationCount(tp,LOCATION_SZONE)==0 then
-			Duel.SendtoRest(tc,REASON_RULE,nil,PLAYER_NONE)
+			Duel.SendtoGrave(tc,REASON_RULE,nil,PLAYER_NONE)
 		elseif Duel.MoveToField(tc,tp,tp,LOCATION_SZONE,POS_FACEUP,tc:IsMonsterCard()) then
 			--Treat as Continuous Trap
 			local e1=Effect.CreateEffect(c)

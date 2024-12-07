@@ -15,7 +15,7 @@ function s.initial_effect(c)
 end
 function s.filter1(c,tp)
 	return c:IsLevelAbove(1) and c:IsSetCard(0x9f)
-		and Duel.IsExistingTarget(s.filter2,tp,LOCATION_REST,0,1,c,c:GetLevel())
+		and Duel.IsExistingTarget(s.filter2,tp,LOCATION_GRAVE,0,1,c,c:GetLevel())
 end
 function s.filter2(c,lvl)
 	return c:IsLevelAbove(1) and c:IsSetCard(0x9f) and (c:GetLevel()+lvl)<=12
@@ -27,11 +27,11 @@ function s.filter(c)
 end
 function s.lvtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() end
-	if chk==0 then return Duel.IsExistingTarget(s.filter1,tp,LOCATION_REST,0,1,nil,tp) end
+	if chk==0 then return Duel.IsExistingTarget(s.filter1,tp,LOCATION_GRAVE,0,1,nil,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
-	local g1=Duel.SelectMatchingCard(tp,s.filter1,tp,LOCATION_REST,0,1,1,nil,tp)
+	local g1=Duel.SelectMatchingCard(tp,s.filter1,tp,LOCATION_GRAVE,0,1,1,nil,tp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
-	local g2=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_REST,0,1,1,g1:GetFirst(),g1:GetFirst():GetLevel())
+	local g2=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_GRAVE,0,1,1,g1:GetFirst(),g1:GetFirst():GetLevel())
 	local lvl=g1:GetFirst():GetLevel()+g2:GetFirst():GetLevel()
 	Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil,lvl)
 	e:SetLabel(lvl)

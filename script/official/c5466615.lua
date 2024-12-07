@@ -43,22 +43,22 @@ s.listed_series={0x159}
 	--Activation legality
 function s.distg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsNegatableMonster() and chkc:IsControler(1-tp) and chkc:IsLocation(LOCATION_MZONE) end
-	if chk==0 then return Duel.IsExistingTarget(Card.IsNegatableMonster,tp,0,LOCATION_MZONE,1,nil) and Duel.IsExistingMatchingCard(s.rmfilter,tp,LOCATION_REST,0,1,nil) end
+	if chk==0 then return Duel.IsExistingTarget(Card.IsNegatableMonster,tp,0,LOCATION_MZONE,1,nil) and Duel.IsExistingMatchingCard(s.rmfilter,tp,LOCATION_GRAVE,0,1,nil) end
 	if Duel.IsExistingTarget(Card.IsNegatableMonster,tp,0,LOCATION_MZONE,1,nil,e,tp) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 		local g=Duel.SelectTarget(tp,Card.IsNegatableMonster,tp,0,LOCATION_MZONE,1,1,nil)
 		Duel.SetOperationInfo(0,CATEGORY_DISABLE,g,1,0,0)
-		Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,tp,LOCATION_REST)
+		Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,tp,LOCATION_GRAVE)
 	end
 end
 	--Check for "Myutant" monster to banish
 function s.rmfilter(c)
 	return c:IsAbleToRemove() and c:IsMonster() and c:IsSetCard(0x159)
 end
-	--Banish 1 "Myutant" monster from RP, and if you do, negate targeted monster's effects
+	--Banish 1 "Myutant" monster from GY, and if you do, negate targeted monster's effects
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local rc=Duel.SelectMatchingCard(tp,s.rmfilter,tp,LOCATION_REST,0,1,1,nil)
+	local rc=Duel.SelectMatchingCard(tp,s.rmfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 	if #rc>0 and Duel.Remove(rc,POS_FACEUP,REASON_EFFECT)>0 then
 		local c=e:GetHandler()
 		local tc=Duel.GetFirstTarget()

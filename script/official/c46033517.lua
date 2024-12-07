@@ -1,22 +1,22 @@
 --マシンナーズ・ルインフォース
---Machina Ruinfcoree
+--Machina Ruinforce
 --Scripted by DyXel
 
 local s,id=GetID()
 function s.initial_effect(c)
 	--Can only be summoned with its on procedure
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	local e0=Effect.CreateEffect(c)
 	e0:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e0:SetType(EFFECT_TYPE_SINGLE)
 	e0:SetCode(EFFECT_SPSUMMON_CONDITION)
 	c:RegisterEffect(e0)
-	--Special summon procedure (from RP)
+	--Special summon procedure (from GY)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_SPSUMMON_PROC)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
-	e1:SetRange(LOCATION_REST)
+	e1:SetRange(LOCATION_GRAVE)
 	e1:SetCondition(s.spcon)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
@@ -56,11 +56,11 @@ function s.spcon(e,c)
 	if c==nil then return true end
 	local tp=e:GetHandlerPlayer()
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return false end
-	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_REST,0,e:GetHandler())
+	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_GRAVE,0,e:GetHandler())
 	return g:CheckWithSumGreater(Card.GetLevel,12)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,c)
-	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_REST,0,e:GetHandler())
+	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_GRAVE,0,e:GetHandler())
 	local g=rg:SelectWithSumGreater(tp,Card.GetLevel,12)
 	if #g>0 then
 		g:KeepAlive()
@@ -90,7 +90,7 @@ end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.NegateActivation(ev) then return end
 	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:GetHandler():IsRelateToEffect(re) then
-		Duel.SendtoRest(eg,REASON_EFFECT)
+		Duel.SendtoGrave(eg,REASON_EFFECT)
 	end
 	Duel.SetLP(1-tp,Duel.GetLP(1-tp)//2)
 end
@@ -110,7 +110,7 @@ end
 function s.spop2(e,tp,eg,ep,ev,re,r,rp)
 	local lc=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if lc<=0 then return end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then lc=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then lc=1 end
 	local rg=Duel.GetMatchingGroup(s.spfilter2,tp,LOCATION_REMOVED,0,nil,e,tp)
 	local g=aux.SelectUnselectGroup(rg,e,tp,1,math.min(lc,3),s.rescon2,1,tp,HINTMSG_SPSUMMON)
 	if #g>0 then

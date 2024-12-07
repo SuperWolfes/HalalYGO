@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion Summon Procedure
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,81480460,25551951)
 	--Toss 3 coins and destroy monsters on the field
 	local e1=Effect.CreateEffect(c)

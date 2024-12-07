@@ -1,5 +1,5 @@
 --煌星帝エストローム
---Estrome the Mega Moppar
+--Estrome the Mega Monarch
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)

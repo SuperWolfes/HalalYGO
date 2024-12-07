@@ -15,12 +15,12 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)==0
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chk==0 then return Duel.GetFieldGroupCount(tp,LOCATION_REST,0)>0 and Duel.IsPlayerCanDraw(tp,2) end
-	local g=Duel.GetFieldGroup(tp,LOCATION_HAND+LOCATION_REST,0)
+	if chk==0 then return Duel.GetFieldGroupCount(tp,LOCATION_GRAVE,0)>0 and Duel.IsPlayerCanDraw(tp,2) end
+	local g=Duel.GetFieldGroup(tp,LOCATION_HAND+LOCATION_GRAVE,0)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,#g,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetFieldGroup(tp,LOCATION_REST,0)
+	local g=Duel.GetFieldGroup(tp,LOCATION_GRAVE,0)
 	if Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT) then
 		Duel.ShuffleDeck(tp)
 		Duel.BreakEffect()

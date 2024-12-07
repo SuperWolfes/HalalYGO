@@ -39,11 +39,11 @@ function s.distg(e,c)
 	local ec=e:GetHandler()
 	if c==ec or c:GetCardTargetCount()==0 then return false end
 	local eq=ec:GetEquipTarget()
-	return eq and (c:IsHasCardTarget(eq) or c:GetCardTarget():IsExists(s.eqfilter,1,nil,eq,c)) and c:IsActional()
+	return eq and (c:IsHasCardTarget(eq) or c:GetCardTarget():IsExists(s.eqfilter,1,nil,eq,c)) and c:IsSpell()
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	local ec=e:GetHandler()
-	if not ec:GetEquipTarget() or not re:IsActiveType(TYPE_ACTIONAL) or not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then return end
+	if not ec:GetEquipTarget() or not re:IsActiveType(TYPE_SPELL) or not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then return end
 	local g=Duel.GetChainInfo(ev,CHAININFO_TARGET_CARDS)
 	if not g or not g:IsContains(ec:GetEquipTarget()) then return end
 	if Duel.NegateEffect(ev) and re:GetHandler():IsRelateToEffect(re) then

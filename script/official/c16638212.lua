@@ -1,5 +1,5 @@
 --異次元の精霊
---S.D. Rise
+--D.D. Sprite
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon

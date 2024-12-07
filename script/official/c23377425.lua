@@ -1,5 +1,5 @@
---S-Fcoree ブリッジヘッド
---Security Fcoree Bridgehead
+--S-Force ブリッジヘッド
+--Security Force Bridgehead
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

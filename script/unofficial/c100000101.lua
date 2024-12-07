@@ -30,9 +30,9 @@ function card.rescon(sg,e,tp,mg)
 	return aux.ChkfMMZ(3)(sg,e,tp,mg) and sg:GetClassCount(Card.GetCode)>2
 end
 function card.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	local g=Duel.GetMatchingGroup(card.spfilter,tp,LOCATION_REST,0,nil,e,tp)
+	local g=Duel.GetMatchingGroup(card.spfilter,tp,LOCATION_GRAVE,0,nil,e,tp)
 	if chkc then return false end
-	if chk==0 then return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) 
+	if chk==0 then return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) 
 		and aux.SelectUnselectGroup(g,e,tp,3,3,card.rescon,chk) end
 	local tg=aux.SelectUnselectGroup(g,e,tp,3,3,card.rescon,1,tp,HINTMSG_SPSUMMON)
 	Duel.SetTargetCard(tg)
@@ -44,7 +44,7 @@ function card.activate(e,tp,eg,ep,ev,re,r,rp)
 	if ft<=0 then return end
 	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
 	local sg=g:Filter(Card.IsRelateToEffect,nil,e)
-	if #sg>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
+	if #sg>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
 	if #sg>ft then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		sg=sg:Select(tp,ft,ft,nil)

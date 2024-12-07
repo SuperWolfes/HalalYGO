@@ -1,8 +1,8 @@
 --マシンナーズ・フォース
---Machina Fcoree
+--Machina Force
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Must be Special Summoned by its own condition
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e2:SetCost(s.atcost)
 	e2:SetOperation(s.atop)
 	c:RegisterEffect(e2)
-	--Special Summon 3 monsters from the RP
+	--Special Summon 3 monsters from the GY
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -39,32 +39,32 @@ function s.atop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
-	Duel.SendtoRest(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
+	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
 end
 function s.filter(c,code,e,tp)
 	return c:IsCode(code) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	if chk==0 then return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)
+	if chk==0 then return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
 		and Duel.GetLocationCount(tp,LOCATION_MZONE)>=2
-		and Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil,60999392,e,tp)
-		and Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil,23782705,e,tp)
-		and Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil,96384007,e,tp)
+		and Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil,60999392,e,tp)
+		and Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil,23782705,e,tp)
+		and Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil,96384007,e,tp)
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g1=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil,60999392,e,tp)
+	local g1=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil,60999392,e,tp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g2=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil,23782705,e,tp)
+	local g2=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil,23782705,e,tp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g3=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil,96384007,e,tp)
+	local g3=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil,96384007,e,tp)
 	g1:Merge(g2)
 	g1:Merge(g3)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g1,3,0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<3 then return end
 	local g=Duel.GetTargetCards(e)
 	if #g==3 then

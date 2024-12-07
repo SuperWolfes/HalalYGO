@@ -2,10 +2,10 @@
 --Master of Sevens Road
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Fusion Summon Procedure
-	Fusion.AddProcMix(c,true,true,CARD_SEVENS_ROAD_MENTOR,160401001)
-	--Gains ATK per each Mentor monster with different name
+	Fusion.AddProcMix(c,true,true,CARD_SEVENS_ROAD_MAGICIAN,160401001)
+	--Gains ATK per each Spellcaster monster with different name
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -21,12 +21,12 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.cfilter(c)
-	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsRace(RACE_MENTOR)
+	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsRace(RACE_SPELLCASTER)
 end
 function s.atkval(e,c)
-	local g=Duel.GetMatchingGroup(s.cfilter,e:GetHandler():GetControler(),LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(s.cfilter,e:GetHandler():GetControler(),LOCATION_GRAVE,0,nil)
 	return g:GetClassCount(Card.GetCode)*300
 end
 function s.pcon(e)
-	return Duel.GetMatchingGroupCount(s.cfilter,e:GetHandler():GetControler(),LOCATION_REST,0,nil)>=7
+	return Duel.GetMatchingGroupCount(s.cfilter,e:GetHandler():GetControler(),LOCATION_GRAVE,0,nil)>=7
 end

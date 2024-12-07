@@ -62,7 +62,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	else
 		local og=c:GetOverlayGroup()
 		if #og>0 then
-			Duel.SendtoRest(og,REASON_RULE)
+			Duel.SendtoGrave(og,REASON_RULE)
 		end
 	end
 end
@@ -71,7 +71,7 @@ function s.remop(e,tp,eg,ep,ev,re,r,rp)
 	if c:IsDisabled() and c:IsFacedown() then
 		local og=c:GetOverlayGroup()
 		if #og>0 then
-			Duel.SendtoRest(og,REASON_RULE)
+			Duel.SendtoGrave(og,REASON_RULE)
 		end
 	end
 end

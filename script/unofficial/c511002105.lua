@@ -95,7 +95,7 @@ function s.condition2(e,tp,eg,ep,ev,re,r,rp)
 		e:SetLabelObject(g:GetFirst())
 		return true
 	end
-	ex,tg,tc=Duel.GetOperationInfo(ev,CATEGORY_TOREST)
+	ex,tg,tc=Duel.GetOperationInfo(ev,CATEGORY_TOGRAVE)
 	if ex and tg~=nil and tc+tg:FilterCount(s.cfilter,nil,tp)-#tg==1 then
 		local g=tg:Filter(s.cfilter,nil,tp)
 		e:SetLabelObject(g:GetFirst())

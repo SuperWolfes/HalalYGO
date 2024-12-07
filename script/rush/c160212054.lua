@@ -1,14 +1,14 @@
 --現世の戦い
---Bate of the World
+--Fate of the World
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	--Treated as a Legend Card in the hand or RP
+	--Treated as a Legend Card in the hand or GY
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
 	e0:SetCode(EFFECT_IS_LEGEND)
 	e0:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	e0:SetRange(LOCATION_HAND|LOCATION_REST)
+	e0:SetRange(LOCATION_HAND|LOCATION_GRAVE)
 	c:RegisterEffect(e0)
 	--Activate(summon)
 	local e1=Effect.CreateEffect(c)
@@ -41,7 +41,7 @@ function s.tdfilter(c)
 	return c:IsMonster() and c:IsLegend() and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_GRAVE,0,1,nil) end
 end
 function s.filter(c)
 	return c:IsFaceup() and not c:IsMaximumModeSide()
@@ -53,7 +53,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
 	local c=e:GetHandler()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_REST,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 	Duel.HintSelection(g,true)
 	if Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_COST)<1 then return end
 	--Effect

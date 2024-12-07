@@ -2,8 +2,8 @@
 --Arcane Barrier
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableCounterPermit(COUNTER_ACTIONAL)
-	c:SetCounterLimit(COUNTER_ACTIONAL,4)
+	c:EnableCounterPermit(COUNTER_SPELL)
+	c:SetCounterLimit(COUNTER_SPELL,4)
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -29,30 +29,30 @@ function s.initial_effect(c)
 	e3:SetOperation(s.drop)
 	c:RegisterEffect(e3)
 end
-s.counter_place_list={COUNTER_ACTIONAL}
+s.counter_place_list={COUNTER_SPELL}
 function s.ctfilter(c)
-	return c:IsPreviousLocation(LOCATION_MZONE) and c:IsPreviousPosition(POS_FACEUP) and (c:GetPreviousRaceOnField()&RACE_MENTOR)~=0
+	return c:IsPreviousLocation(LOCATION_MZONE) and c:IsPreviousPosition(POS_FACEUP) and (c:GetPreviousRaceOnField()&RACE_SPELLCASTER)~=0
 end
 function s.ctcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.ctfilter,1,nil)
 end
 function s.ctop(e,tp,eg,ep,ev,re,r,rp)
-	e:GetHandler():AddCounter(COUNTER_ACTIONAL,1)
+	e:GetHandler():AddCounter(COUNTER_SPELL,1)
 end
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_MENTOR) and c:IsAbleToRestAsCost()
+	return c:IsFaceup() and c:IsRace(RACE_SPELLCASTER) and c:IsAbleToGraveAsCost()
 end
 function s.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToRestAsCost()
+	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost()
 		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil) end
-	e:SetLabel(e:GetHandler():GetCounter(COUNTER_ACTIONAL))
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	e:SetLabel(e:GetHandler():GetCounter(COUNTER_SPELL))
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_MZONE,0,1,1,nil)
 	g:AddCard(e:GetHandler())
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():GetCounter(COUNTER_ACTIONAL)>0 end
+	if chk==0 then return e:GetHandler():GetCounter(COUNTER_SPELL)>0 end
 	Duel.SetTargetPlayer(tp)
 	Duel.SetTargetParam(e:GetLabel())
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,e:GetLabel())

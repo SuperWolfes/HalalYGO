@@ -1,6 +1,6 @@
 --スピリット・ドラゴン
---Guardian Ryu (GOAT)
---the effect is actional speed 1; implemented as quick effect that can only be CL1
+--Spirit Ryu (GOAT)
+--the effect is spell speed 1; implemented as quick effect that can only be CL1
 local s,id=GetID()
 function s.initial_effect(c)
 	--atk up
@@ -21,7 +21,7 @@ function s.adcon(e,tp,eg,ep,ev,re,r,rp)
 		and (e:GetHandler()==Duel.GetAttacker() or e:GetHandler()==Duel.GetAttackTarget())
 end
 function s.cfilter(c)
-	return c:IsRace(RACE_DRAGON) and c:IsDiscardable() and c:IsAbleToRestAsCost()
+	return c:IsRace(RACE_DRAGON) and c:IsDiscardable() and c:IsAbleToGraveAsCost()
 end
 function s.adcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end

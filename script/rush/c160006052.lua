@@ -17,7 +17,7 @@ function s.atkcostfilter(c)
 	return c:IsRace(RACE_PYRO) and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.atkcostfilter,tp,LOCATION_REST,0,4,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.atkcostfilter,tp,LOCATION_GRAVE,0,4,nil) end
 end
 function s.atkfilter(c)
 	return c:IsFaceup() and c:IsRace(RACE_PYRO) and c:IsAttribute(ATTRIBUTE_EARTH)
@@ -29,7 +29,7 @@ end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	-- Requirement
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,s.atkcostfilter,tp,LOCATION_REST,0,4,4,nil)
+	local g=Duel.SelectMatchingCard(tp,s.atkcostfilter,tp,LOCATION_GRAVE,0,4,4,nil)
 	if #g>0 and Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_COST)>0 then
 		Duel.ShuffleDeck(tp)
 		-- Effect

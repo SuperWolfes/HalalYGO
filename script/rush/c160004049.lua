@@ -28,7 +28,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,s.hdfilter,tp,LOCATION_HAND,0,1,1,nil,e,tp):GetFirst()
 	if Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)>0 then
-		local og=Duel.GetMatchingGroup(s.gyfilter,tp,0,LOCATION_REST,nil)
+		local og=Duel.GetMatchingGroup(s.gyfilter,tp,0,LOCATION_GRAVE,nil)
 		if #og>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 			Duel.BreakEffect()
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)

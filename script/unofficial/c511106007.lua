@@ -1,11 +1,11 @@
 --ハイドライブ・サイクル
---Hyddendrive Cycle (Anime)
+--Hydradrive Cycle (Anime)
 --scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
 	--activate
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_LEAVE_REST+CATEGORY_DRAW+CATEGORY_SPECIAL_SUMMON)
+	e1:SetCategory(CATEGORY_LEAVE_GRAVE+CATEGORY_DRAW+CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_DESTROYED)
 	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
@@ -28,7 +28,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x577}
 function s.filter(c,e,tp)
-	return c:IsPreviousControler(tp) and (c:IsActional() or c:IsTrap())
+	return c:IsPreviousControler(tp) and (c:IsSpell() or c:IsTrap())
 end
 function s.exfilter(c)
 	return c:IsLinkMonster() and c:IsSetCard(0x577) and c:IsAbleToExtra()
@@ -40,12 +40,12 @@ function s.spfilter(c,e,tp)
 	return c:IsSetCard(0x577) and c:IsLinkMonster() and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.exfilter,tp,LOCATION_REST,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.exfilter,tp,LOCATION_GRAVE,0,1,nil) end
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SELECT)
-	local g=Duel.SelectMatchingCard(tp,s.exfilter,tp,LOCATION_REST,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.exfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 	if #g>0 then
 		if Duel.SendtoDeck(g,tp,0,REASON_EFFECT)~=0 then
 			if #g==1 then
@@ -57,11 +57,11 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 					end
 				end
 			end
-			if Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp) and
+			if Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) and
 				Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and
 				Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-				local sg=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp)
+				local sg=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
 				if #sg>0 then
 					Duel.BreakEffect()
 					if Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)~=0 then

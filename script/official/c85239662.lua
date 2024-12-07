@@ -1,5 +1,5 @@
 --神秘の妖精 エルフィリア
---Vague Wanderer Elfuria
+--Mystical Fairy Elfuria
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz limit

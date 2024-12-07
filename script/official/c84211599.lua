@@ -74,7 +74,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			Duel.MoveToDeckBottom(g,p)
 			Duel.SortDeckbottom(p,p,#g)
 		else
-			Duel.SendtoRest(sc,REASON_RULE)
+			Duel.SendtoGrave(sc,REASON_RULE)
 		end
 	end
 	-- halve battle damage

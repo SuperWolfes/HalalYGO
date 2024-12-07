@@ -39,11 +39,11 @@ function s.cfilter(c)
 end
 function s.damcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,c) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,c) end
 	c:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1)
 	c:RegisterFlagEffect(e:GetFieldID(),RESET_CHAIN,0,1,c:GetFlagEffect(id))
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,1,c)
+	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,c)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -59,10 +59,10 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Damage(p,d,REASON_EFFECT)
 	end
 	local ct=e:GetHandler():GetFlagEffectLabel(e:GetFieldID())
-	if not Duel.IsExistingMatchingCard(Card.IsRace,tp,LOCATION_REST,0,1,nil,RACE_PLANT) and ct then
+	if not Duel.IsExistingMatchingCard(Card.IsRace,tp,LOCATION_GRAVE,0,1,nil,RACE_PLANT) and ct then
 		Duel.Damage(p,ct*300,REASON_EFFECT)
 	end
 end
 function s.sdcon(e)
-	return not Duel.IsExistingMatchingCard(Card.IsRace,e:GetHandler():GetControler(),LOCATION_REST,0,1,nil,RACE_PLANT)
+	return not Duel.IsExistingMatchingCard(Card.IsRace,e:GetHandler():GetControler(),LOCATION_GRAVE,0,1,nil,RACE_PLANT)
 end

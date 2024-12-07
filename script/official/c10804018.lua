@@ -1,9 +1,9 @@
 --粛声なる竜神サフィラ
---Saffira, the Silenfcoreing Being of Dragons
+--Saffira, the Silenforcing Deity of Dragons
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Draw 2 cards and discard 1
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_DELAY)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e1:SetCountLimit(1,id)
-	e1:SetCondition(function(e) return e:GetHandler():IsSummonType(SUMMON_TYPE_LOCKED) end)
+	e1:SetCondition(function(e) return e:GetHandler():IsSummonType(SUMMON_TYPE_RITUAL) end)
 	e1:SetTarget(s.drwtg)
 	e1:SetOperation(s.drwop)
 	c:RegisterEffect(e1)
@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.hnddestg)
 	e2:SetOperation(s.hnddesop)
 	c:RegisterEffect(e2)
-	--Add 1 monster from the RP to your hand during the opponent's End Phase
+	--Add 1 monster from the GY to your hand during the opponent's End Phase
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetCategory(CATEGORY_TOHAND)
@@ -41,10 +41,10 @@ function s.initial_effect(c)
 	e3:SetOperation(s.thop)
 	c:RegisterEffect(e3)
 end
-s.listed_names={39114494,25801745} --Silenfcoreing Blessing / Novox, the Silenfcoreer Disciple
+s.listed_names={39114494,25801745} --Silenforcing Blessing / Novox, the Silenforcer Disciple
 function s.drwtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,2)
-		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,25801745),tp,LOCATION_ONFIELD|LOCATION_REST,0,1,nil) end
+		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,25801745),tp,LOCATION_ONFIELD|LOCATION_GRAVE,0,1,nil) end
 	Duel.SetTargetPlayer(tp)
 	Duel.SetTargetParam(2)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,2)
@@ -59,7 +59,7 @@ function s.drwop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.cfilter(c)
-	return c and c:IsFaceup() and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_WARRIOR|RACE_DRAGON) and c:IsLockedMonster()
+	return c and c:IsFaceup() and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_WARRIOR|RACE_DRAGON) and c:IsRitualMonster()
 end
 function s.hnddescon(e,tp,eg,ep,ev,re,r,rp)
 	local att,atg=Duel.GetBattleMonster(tp)
@@ -73,19 +73,19 @@ function s.hnddesop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(tp,0,LOCATION_HAND)
 	if #g>0 then
 		local sg=g:RandomSelect(tp,1)
-		Duel.SendtoRest(sg,REASON_DISCARD|REASON_EFFECT)
+		Duel.SendtoGrave(sg,REASON_DISCARD|REASON_EFFECT)
 	end
 end
 function s.thfilter(c)
 	return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 	if #g>0 then
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)

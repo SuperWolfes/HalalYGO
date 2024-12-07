@@ -2,7 +2,7 @@
 --Odd-Eyes Raging Dragon (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Pendulum.AddProcedure(c,false)
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_DRAGON),7,2)
 	--pendulum set
@@ -60,7 +60,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e7)
 end
 function s.pcfilter(c)
-	return c:IsType(TYPE_PENDULUM) and not c:IsUnliked()
+	return c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
 end
 function s.pctg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckPendulumZones(tp)
@@ -81,7 +81,7 @@ function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:GetHandler():RemoveOverlayCard(tp,ct,ct,REASON_COST)
 end
 function s.negfilter(c)
-	return c:IsActionalTrap() and c:IsFaceup() and not c:IsDisabled()
+	return c:IsSpellTrap() and c:IsFaceup() and not c:IsDisabled()
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.negfilter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) end

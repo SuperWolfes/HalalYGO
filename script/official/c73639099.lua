@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Link summon method
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Link.AddProcedure(c,s.matfilter,1,1)
 	--Unaffected by trap effects, continuous effect
 	local e1=Effect.CreateEffect(c)
@@ -38,7 +38,7 @@ function s.initial_effect(c)
 	e5:SetCountLimit(1,{id,1})
 	e5:SetCondition(s.setcon)
 	e5:SetTarget(s.settg)
-	e5:SetOperation(s.vetop)
+	e5:SetOperation(s.setop)
 	c:RegisterEffect(e5)
 end
 s.listed_series={0x108a,0x4c,0x89}
@@ -95,7 +95,7 @@ function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_DECK,0,1,nil) end
 end
 	--Performing the effect of setting 1 "Trap Hole" normal trap from deck to S/T zones
-function s.vetop(e,tp,eg,ep,ev,re,r,rp)
+function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 	local g=Duel.SelectMatchingCard(tp,s.setfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then

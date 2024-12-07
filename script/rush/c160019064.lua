@@ -23,7 +23,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>=6 end
-	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,2)
+	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,0,tp,2)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Effect

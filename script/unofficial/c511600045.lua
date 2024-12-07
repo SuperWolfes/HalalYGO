@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetCode(EVENT_FREE_CHAIN)
 	e2:SetCondition(s.setcon)
 	e2:SetCost(s.setcost)
-	e2:SetOperation(s.vetop)
+	e2:SetOperation(s.setop)
 	c:RegisterEffect(e2)
 	--Destroy
 	local e3=Effect.CreateEffect(c)
@@ -107,7 +107,7 @@ function s.setcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetTargetCard(g:GetFirst())
 	g:GetFirst():RegisterFlagEffect(511600044,RESET_EVENT+RESETS_STANDARD+RESET_CHAIN,0,1,fid)
 end
-function s.vetop(e,tp,eg,ep,ev,re,r,rp)
+function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
 	if c:IsRelateToEffect(e) and s.setcon(e,tp,eg,ep,ev,re,r,rp) and tc and tc:IsSSetable()
@@ -133,7 +133,7 @@ function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetReset(RESET_EVENT+RESETS_STANDARD)
 		tc:RegisterEffect(e2)
 	else
-		Duel.SendtoRest(tc,REASON_RULE)
+		Duel.SendtoGrave(tc,REASON_RULE)
 	end
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)

@@ -14,8 +14,8 @@ function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.HasFlagEffect(tp,id) then return false end
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ft<=0 then return false end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
-	local g=Duel.GetMatchingGroup(s.gkfilter,tp,LOCATION_REST|LOCATION_REMOVED|LOCATION_EXTRA,0,nil,Duel.GetTurnCount())
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	local g=Duel.GetMatchingGroup(s.gkfilter,tp,LOCATION_GRAVE|LOCATION_REMOVED|LOCATION_EXTRA,0,nil,Duel.GetTurnCount())
 	return #g>0 and ft>=#g and g:FilterCount(Card.IsCanBeSpecialSummoned,nil,e,0,tp,false,false)==#g
 end
 function s.flipop(e,tp,eg,ep,ev,re,r,rp)
@@ -28,7 +28,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	--Check if the Skill is negated ("Anti Skill")
 	if aux.CheckSkillNegation(e,tp) then return end
 	--Special Summon all your "Gouki" monsters that were destroyed by battle this turn
-	local g=Duel.GetMatchingGroup(s.gkfilter,tp,LOCATION_REST|LOCATION_REMOVED|LOCATION_EXTRA,0,nil,Duel.GetTurnCount()):Filter(Card.IsCanBeSpecialSummoned,nil,e,0,tp,false,false)
+	local g=Duel.GetMatchingGroup(s.gkfilter,tp,LOCATION_GRAVE|LOCATION_REMOVED|LOCATION_EXTRA,0,nil,Duel.GetTurnCount()):Filter(Card.IsCanBeSpecialSummoned,nil,e,0,tp,false,false)
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end

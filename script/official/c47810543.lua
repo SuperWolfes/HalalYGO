@@ -1,5 +1,5 @@
 --魔弾-ブラッディ・クラウン
---Mentoral Musket - Crooked Crown
+--Magical Musket - Crooked Crown
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

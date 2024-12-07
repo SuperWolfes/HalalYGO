@@ -15,7 +15,7 @@ function s.valcheck(e,c)
 	local sp=false
 	for tc in aux.Next(g) do
 		if tc:IsRace(RACE_REPTILE) and not tc:IsType(TYPE_TOKEN) then
-			tc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD_EXC_REST+RESET_PHASE+PHASE_END,0,1)
+			tc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD_EXC_GRAVE+RESET_PHASE+PHASE_END,0,1)
 			sp=true
 		end
 	end

@@ -21,5 +21,5 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.tg(e,c)
-	return c:IsFacedown() and c:IsActionalTrap()
+	return c:IsFacedown() and c:IsSpellTrap()
 end

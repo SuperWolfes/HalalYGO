@@ -1,4 +1,4 @@
---Ring of Taintedish Power
+--Ring of Fiendish Power
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -35,15 +35,15 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function s.filter(c,atk)
-	return c:IsFaceup() and c:IsRace(RACE_TAINTED) and c:GetBaseAttack()>atk
+	return c:IsFaceup() and c:IsRace(RACE_FIEND) and c:GetBaseAttack()>atk
 end
 function s.atlimit(e,c)
-	return c:IsFacedown() or not c:IsRace(RACE_TAINTED) 
+	return c:IsFacedown() or not c:IsRace(RACE_FIEND) 
 		or Duel.IsExistingMatchingCard(s.filter,e:GetHandler():GetControler(),LOCATION_MZONE,0,1,c,c:GetBaseAttack())
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()
-	return tc:IsControler(tp) and tc:IsRace(RACE_TAINTED)
+	return tc:IsControler(tp) and tc:IsRace(RACE_FIEND)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -60,7 +60,7 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Damage(p,d,REASON_EFFECT)
 end
 function s.desfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_TAINTED)
+	return c:IsFaceup() and c:IsRace(RACE_FIEND)
 end
 function s.descon(e)
 	return not Duel.IsExistingMatchingCard(s.desfilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)

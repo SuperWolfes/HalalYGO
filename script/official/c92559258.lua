@@ -1,12 +1,12 @@
 --サーヴァント・オブ・エンディミオン
---Servant of Edypsos
+--Servant of Endymion
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
 	c:SetSPSummonOnce(id)
-	c:EnableCounterPermit(COUNTER_ACTIONAL,LOCATION_PZONE+LOCATION_MZONE)
+	c:EnableCounterPermit(COUNTER_SPELL,LOCATION_PZONE+LOCATION_MZONE)
 	Pendulum.AddProcedure(c)
-	--Place a Actional Counter on itself each time a Actional resolves
+	--Place a Spell Counter on itself each time a Spell resolves
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
 	e1:SetCode(EVENT_CHAIN_SOLVING)
@@ -24,13 +24,13 @@ function s.initial_effect(c)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
-	--Can attack direct while it has Actional Counters
+	--Can attack direct while it has Spell Counters
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetCode(EFFECT_DIRECT_ATTACK)
 	e3:SetCondition(function(e) return e:GetHandler():GetCounter(0x1)>0 end)
 	c:RegisterEffect(e3)
-	--Place 1 Actional Counter on each card that can hold Actional Counters
+	--Place 1 Spell Counter on each card that can hold Spell Counters
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_COUNTER)
@@ -43,7 +43,7 @@ function s.initial_effect(c)
 	e4:SetTarget(s.cttg2)
 	e4:SetOperation(s.ctop2)
 	c:RegisterEffect(e4)
-	--Actional Counter check
+	--Spell Counter check
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e5:SetCode(EVENT_DESTROY)
@@ -62,37 +62,37 @@ function s.initial_effect(c)
 	e6:SetOperation(s.penop)
 	c:RegisterEffect(e6)
 end
-s.counter_place_list={COUNTER_ACTIONAL}
+s.counter_place_list={COUNTER_SPELL}
 function s.ctop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActionalEffect() and re:GetHandler()~=c then
-		c:AddCounter(COUNTER_ACTIONAL,1)
+	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsSpellEffect() and re:GetHandler()~=c then
+		c:AddCounter(COUNTER_SPELL,1)
 	end
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsCanRemoveCounter(tp,COUNTER_ACTIONAL,3,REASON_COST) end
-	c:RemoveCounter(tp,COUNTER_ACTIONAL,3,REASON_COST)
+	if chk==0 then return c:IsCanRemoveCounter(tp,COUNTER_SPELL,3,REASON_COST) end
+	c:RemoveCounter(tp,COUNTER_SPELL,3,REASON_COST)
 end
 function s.spfilter(c,e,tp)
-	return c:IsCanAddCounter(COUNTER_ACTIONAL,1,false,LOCATION_MZONE) and c:IsAttackAbove(1000) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) 
+	return c:IsCanAddCounter(COUNTER_SPELL,1,false,LOCATION_MZONE) and c:IsAttackAbove(1000) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) 
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>=2 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
-		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,0,1,nil,e,tp) and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) end
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,0,1,nil,e,tp) and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,2,tp,LOCATION_PZONE+LOCATION_DECK)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not (c:IsRelateToEffect(e) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and (Duel.GetLocationCount(tp,LOCATION_MZONE)>=2))
-		or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
+		or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_DECK,0,1,1,nil,e,tp)
 	if #g>0 then
 		g:AddCard(c)
 		if Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)==2 then
-			g:ForEach(Card.AddCounter,COUNTER_ACTIONAL,1)
+			g:ForEach(Card.AddCounter,COUNTER_SPELL,1)
 		end
 	end
 end
@@ -101,18 +101,18 @@ function s.ctcost2(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
 end
 function s.cttg2(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCanAddCounter,COUNTER_ACTIONAL,1),tp,LOCATION_ONFIELD,0,1,nil) end
-	local g=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsCanAddCounter,COUNTER_ACTIONAL,1),tp,LOCATION_ONFIELD,0,nil)
+	if chk==0 then return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCanAddCounter,COUNTER_SPELL,1),tp,LOCATION_ONFIELD,0,1,nil) end
+	local g=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsCanAddCounter,COUNTER_SPELL,1),tp,LOCATION_ONFIELD,0,nil)
 	Duel.SetOperationInfo(0,CATEGORY_COUNTER,g,#g,tp,0)
 end
 function s.ctop2(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsCanAddCounter,COUNTER_ACTIONAL,1),tp,LOCATION_ONFIELD,0,nil)
+	local g=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsCanAddCounter,COUNTER_SPELL,1),tp,LOCATION_ONFIELD,0,nil)
 	if #g>0 then
-		g:ForEach(Card.AddCounter,COUNTER_ACTIONAL,1)
+		g:ForEach(Card.AddCounter,COUNTER_SPELL,1)
 	end
 end
 function s.ctchk(e,tp,eg,ep,ev,re,r,rp)
-	e:SetLabel(e:GetHandler():GetCounter(COUNTER_ACTIONAL))
+	e:SetLabel(e:GetHandler():GetCounter(COUNTER_SPELL))
 end
 function s.pencon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -121,7 +121,7 @@ end
 function s.pentg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ct=e:GetLabelObject():GetLabel()
 	if chk==0 then return Duel.CheckPendulumZones(tp)
-		and (ct==0 or e:GetHandler():IsCanAddCounter(COUNTER_ACTIONAL,ct,false,LOCATION_PZONE)) end
+		and (ct==0 or e:GetHandler():IsCanAddCounter(COUNTER_SPELL,ct,false,LOCATION_PZONE)) end
 end
 function s.penop(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.CheckPendulumZones(tp) then return false end
@@ -129,6 +129,6 @@ function s.penop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=e:GetLabelObject():GetLabel()
 	if c:IsRelateToEffect(e) and Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true) then
 		Duel.BreakEffect()
-		c:AddCounter(COUNTER_ACTIONAL,ct)
+		c:AddCounter(COUNTER_SPELL,ct)
 	end
 end

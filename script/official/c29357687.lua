@@ -1,11 +1,11 @@
 --呪眼の女王 ゴルゴーネ
---Jonjor, Empress of the Goodied
+--Gorgon, Empress of the Evil Eyed
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Link.AddProcedure(c,nil,2,2,s.matcheck)
-	--Gain 100 ATK for each "Goodie" card in the RP
+	--Gain 100 ATK for each "Evil Eye" card in the GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_UPDATE_ATTACK)
@@ -44,7 +44,7 @@ function s.matcheck(g,lc,sumtype,tp)
 	return g:IsExists(Card.IsSetCard,1,nil,SET_EVIL_EYE,lc,sumtype,tp)
 end
 function s.atkval(e,c)
-	local g=Duel.GetMatchingGroup(Card.IsSetCard,e:GetHandlerPlayer(),LOCATION_REST,0,nil,SET_EVIL_EYE)
+	local g=Duel.GetMatchingGroup(Card.IsSetCard,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil,SET_EVIL_EYE)
 	return g:GetClassCount(Card.GetCode)*100
 end
 function s.discon(e,tp,eg,ep,ev,re,r,rp)

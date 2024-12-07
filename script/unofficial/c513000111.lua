@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_TOREST)
+	e1:SetCategory(CATEGORY_TOGRAVE)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetTarget(s.target)
@@ -29,7 +29,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local send=ct1+ct2
 	if ct1>3 then send=send-3 end
 	if ct2>3 then send=send-3 end
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,g,send,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,g,send,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
@@ -47,7 +47,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		send:Merge(g2)
 	end
 	Duel.DisableShuffleCheck()
-	Duel.SendtoRest(send,REASON_EFFECT)
+	Duel.SendtoGrave(send,REASON_EFFECT)
 	Duel.SortDecktop(tp,tp,3)
 	Duel.SortDecktop(1-tp,1-tp,3)
 end

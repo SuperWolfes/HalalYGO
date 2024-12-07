@@ -46,7 +46,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetCode(EFFECT_PIERCE)
 		e2:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 		tc:RegisterEffect(e2)
-		--Destroy 1 actional/trap on the field
+		--Destroy 1 spell/trap on the field
 		local e3=Effect.CreateEffect(e:GetHandler())
 		e3:SetDescription(aux.Stringid(id,0))
 		e3:SetCategory(CATEGORY_DESTROY)
@@ -65,7 +65,7 @@ function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	return ep~=tp and eg:GetFirst()==e:GetLabelObject()
 end
 function s.desfilter(c)
-	return c:IsType(TYPE_ACTIONAL+TYPE_TRAP)
+	return c:IsType(TYPE_SPELL+TYPE_TRAP)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and s.desfilter(chkc) end

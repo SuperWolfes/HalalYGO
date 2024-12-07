@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.costfilter(c)
-	return c:IsActionalTrap() and c:IsAbleToRestAsCost()
+	return c:IsSpellTrap() and c:IsAbleToGraveAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil) end
@@ -34,20 +34,20 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local og=Duel.GetMatchingGroup(s.oppfilter,tp,0,LOCATION_MZONE,nil)
 	local lvl=og:GetSum(Card.GetLevel)
-	local dg=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_REST,0,nil)
+	local dg=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_GRAVE,0,nil)
 	if chk==0 then return #dg>=3 and aux.SelectUnselectGroup(dg,e,tp,3,3,s.rescon(lvl),0) end
-	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,3,tp,LOCATION_REST)
+	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,3,tp,LOCATION_GRAVE)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,og,#og,tp,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,1,nil)
-	if Duel.SendtoRest(g,REASON_COST)>0 then
+	if Duel.SendtoGrave(g,REASON_COST)>0 then
 		--Effect
 		local og=Duel.GetMatchingGroup(s.oppfilter,tp,0,LOCATION_MZONE,nil)
 		local lvl=og:GetSum(Card.GetLevel)
-		local dg=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_REST,0,nil)
+		local dg=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_GRAVE,0,nil)
 		if #dg<3 then return end
 		local g=aux.SelectUnselectGroup(dg,e,tp,3,3,s.rescon(lvl),1,tp,HINTMSG_TODECK)
 		Duel.HintSelection(g,true)

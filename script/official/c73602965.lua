@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetCondition(function() return Duel.IsMainPhase() end)
 	e1:SetCost(s.spsetcost)
 	e1:SetTarget(s.spsettarget)
-	e1:SetOperation(s.spvetop)
+	e1:SetOperation(s.spsetop)
 	c:RegisterEffect(e1)
 	--Special Summon this card
 	local e2=Effect.CreateEffect(c)
@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_CHAINING)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(s.selfspcon)
 	e2:SetTarget(s.selfsptg)
@@ -34,8 +34,8 @@ s.listed_series={SET_LABRYNTH}
 s.listed_names={id}
 function s.spsetcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToRestAsCost() end
-	Duel.SendtoRest(c,REASON_COST)
+	if chk==0 then return c:IsAbleToGraveAsCost() end
+	Duel.SendtoGrave(c,REASON_COST)
 end
 function s.spsetfilter(c,e,tp,ft)
 	return (ft>0 and c:IsSetCard(SET_LABRYNTH) and c:IsCanBeSpecialSummoned(e,0,tp,false,false))
@@ -47,7 +47,7 @@ function s.spsettarget(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.spsetfilter,tp,LOCATION_HAND,0,1,c,e,tp,ft) end
 	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND)
 end
-function s.spvetop(e,tp,eg,ep,ev,re,r,rp)
+function s.spsetop(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,2))
 	local sc=Duel.SelectMatchingCard(tp,s.spsetfilter,tp,LOCATION_HAND,0,1,1,nil,e,tp,ft):GetFirst()
@@ -77,7 +77,7 @@ function s.selfsptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,0,LOCATION_REST)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,0,LOCATION_GRAVE)
 end
 function s.selfspop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

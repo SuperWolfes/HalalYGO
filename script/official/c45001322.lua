@@ -1,10 +1,10 @@
 --リブロマンサー・ファイアスターター
---Librobouncer Firestarter
+--Libromancer Firestarter
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
-	--Check materials use for its Locked Summon
+	c:EnableReviveLimit()
+	--Check materials use for its Ritual Summon
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
 	e0:SetCode(EFFECT_MATERIAL_CHECK)
@@ -46,7 +46,7 @@ function s.initial_effect(c)
 	e4:SetOperation(s.atkop)
 	c:RegisterEffect(e4)
 end
-s.listed_series={SET_LIBROBOUNCER}
+s.listed_series={SET_LIBROMANCER}
 function s.matcheck(e,c)
 	if c:GetMaterial():IsExists(Card.IsLocation,1,nil,LOCATION_MZONE) then
 		local reset=RESET_EVENT|RESETS_STANDARD&~RESET_TOFIELD
@@ -55,7 +55,7 @@ function s.matcheck(e,c)
 end
 function s.matcon(e)
 	local c=e:GetHandler()
-	return c:IsSummonType(SUMMON_TYPE_LOCKED) and c:HasFlagEffect(id)
+	return c:IsSummonType(SUMMON_TYPE_RITUAL) and c:HasFlagEffect(id)
 end
 function s.chainop(e,tp,eg,ep,ev,re,r,rp)
 	e:GetHandler():RegisterFlagEffect(id+1,RESET_EVENT|RESETS_STANDARD|RESET_CHAIN|RESET_TURN_SET,0,1)

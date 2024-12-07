@@ -3,12 +3,12 @@
 --Scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special summon procedure (from hand or RP)
+	--Special summon procedure (from hand or GY)
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_IGNITION)
-	e1:SetRange(LOCATION_HAND|LOCATION_REST)
+	e1:SetRange(LOCATION_HAND|LOCATION_GRAVE)
 	e1:SetCountLimit(1,id)
 	e1:SetCost(s.spcost)
 	e1:SetTarget(s.sptg)
@@ -43,7 +43,7 @@ function s.spfilter(c)
 	return c:IsRace(RACE_WINGEDBEAST|RACE_DRAGON) and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE|LOCATION_REST,0,e:GetHandler())
+	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,e:GetHandler())
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>-2 and #rg>1
 		and aux.SelectUnselectGroup(rg,e,tp,2,2,aux.ChkfMMZ(1),0) end
 	local g=aux.SelectUnselectGroup(rg,e,tp,2,2,aux.ChkfMMZ(1),1,tp,HINTMSG_REMOVE)
@@ -100,11 +100,11 @@ function s.negop(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 end
 function s.eqpfilter(c,tp)
-	return c:IsMonster() and c:IsLocation(LOCATION_REST) and c:IsReason(REASON_BATTLE)
+	return c:IsMonster() and c:IsLocation(LOCATION_GRAVE) and c:IsReason(REASON_BATTLE)
 		and c:IsPreviousControler(1-tp) and s.exfilter(c,tp)
 end
 function s.exfilter(c,tp)
-	return not c:IsUnliked() and c:CheckUniqueOnField(tp)
+	return not c:IsForbidden() and c:CheckUniqueOnField(tp)
 end
 function s.eqpcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.eqpfilter,1,nil,tp)
@@ -113,7 +113,7 @@ function s.eqptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local eqg=eg:Filter(s.eqpfilter,nil,tp)
 	if chk==0 then return #eqg>0 and Duel.GetLocationCount(tp,LOCATION_SZONE)>=#eqg end
 	Duel.SetTargetCard(eqg)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,eqg,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,eqg,1,0,0)
 end
 function s.eqpop(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)

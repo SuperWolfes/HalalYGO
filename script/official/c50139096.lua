@@ -3,7 +3,7 @@
 --Scripted by ahtelel
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Change this card's name
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
@@ -20,19 +20,19 @@ function s.initial_effect(c)
 	e1:SetCondition(s.atkcon)
 	e1:SetOperation(s.atkop)
 	c:RegisterEffect(e1)
-	--Opponent cannot activate cards/effects when your Locked attacks
+	--Opponent cannot activate cards/effects when your Ritual attacks
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_CARD_TARGET)
-	e2:SetCode(EVENT_TO_REST)
+	e2:SetCode(EVENT_TO_GRAVE)
 	e2:SetTarget(s.aclimtg)
 	e2:SetOperation(s.aclimop)
 	c:RegisterEffect(e2)
 end
 s.listed_names={32828635,46427957}
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsAbleToEnterBP() and e:GetHandler():IsSummonType(SUMMON_TYPE_LOCKED) 
+	return Duel.IsAbleToEnterBP() and e:GetHandler():IsSummonType(SUMMON_TYPE_RITUAL) 
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -48,15 +48,15 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.aclimtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and chkc:IsFaceup() and chkc:IsType(TYPE_LOCKED) end
-	if chk==0 then return Duel.IsExistingTarget(aux.FaceupFilter(Card.IsType,TYPE_LOCKED),tp,LOCATION_MZONE,0,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and chkc:IsFaceup() and chkc:IsType(TYPE_RITUAL) end
+	if chk==0 then return Duel.IsExistingTarget(aux.FaceupFilter(Card.IsType,TYPE_RITUAL),tp,LOCATION_MZONE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
-	Duel.SelectTarget(tp,aux.FaceupFilter(Card.IsType,TYPE_LOCKED),tp,LOCATION_MZONE,0,1,1,nil)
+	Duel.SelectTarget(tp,aux.FaceupFilter(Card.IsType,TYPE_RITUAL),tp,LOCATION_MZONE,0,1,1,nil)
 end
 function s.aclimop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and tc:IsFaceup() then
-		--Cannot activate cards/effects when your Locked attacks
+		--Cannot activate cards/effects when your Ritual attacks
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		e1:SetCode(EVENT_ATTACK_ANNOUNCE)
@@ -75,7 +75,7 @@ function s.actcon(e,tp,eg,ep,ev,re,r,rp)
 		return false
 	end
 	local ac=Duel.GetAttacker()
-	return ac and ac:IsControler(tp) and ac:IsType(TYPE_LOCKED) and tc:GetFlagEffect(id)>0
+	return ac and ac:IsControler(tp) and ac:IsType(TYPE_RITUAL) and tc:GetFlagEffect(id)>0
 end
 function s.actop(e,tp,eg,ep,ev,re,r,rp)
 	--Cannot activate

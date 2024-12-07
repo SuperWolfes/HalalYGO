@@ -1,5 +1,5 @@
 --ナンバーズ・カルマ
---Number Kaom
+--Number Karma
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

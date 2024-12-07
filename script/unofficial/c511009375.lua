@@ -17,20 +17,20 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetAttacker():IsControler(1-tp)
 end
 function s.filter1(c,e,tp)
-	return c:IsMonster() and c:IsCanBeSpecialSummoned(e,0,tp,true,false) and Duel.IsPlayerCanSpecialSummonMonster(tp,c:GetCode(),nil,0x11,0,0,1,RACE_MENTOR,ATTRIBUTE_LIGHT,POS_FACEDOWN_ATTACK)
+	return c:IsMonster() and c:IsCanBeSpecialSummoned(e,0,tp,true,false) and Duel.IsPlayerCanSpecialSummonMonster(tp,c:GetCode(),nil,0x11,0,0,1,RACE_SPELLCASTER,ATTRIBUTE_LIGHT,POS_FACEDOWN_ATTACK)
 		and Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_HAND,0,1,c,e,tp)
 end
 function s.filter2(c,e,tp)
-	return c:IsActionalTrap() and c:IsCanBeSpecialSummoned(e,0,tp,true,false) 
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,c:GetCode(),nil,0x11,0,0,1,RACE_MENTOR,ATTRIBUTE_LIGHT,POS_FACEDOWN_ATTACK)
+	return c:IsSpellTrap() and c:IsCanBeSpecialSummoned(e,0,tp,true,false) 
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,c:GetCode(),nil,0x11,0,0,1,RACE_SPELLCASTER,ATTRIBUTE_LIGHT,POS_FACEDOWN_ATTACK)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter1,tp,LOCATION_HAND,0,1,nil,e,tp)
-		and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) and Duel.GetLocationCount(tp,LOCATION_MZONE)>1 end
+		and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) and Duel.GetLocationCount(tp,LOCATION_MZONE)>1 end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,LOCATION_DECK)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) or Duel.GetLocationCount(tp,LOCATION_MZONE)<2 then return end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) or Duel.GetLocationCount(tp,LOCATION_MZONE)<2 then return end
 	local g1=Duel.GetMatchingGroup(s.filter1,tp,LOCATION_HAND,0,nil,e,tp)
 	if #g1<1 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
@@ -53,7 +53,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		tc:RegisterEffect(e1,true)
 		local e2=e1:Clone()
 		e2:SetCode(EFFECT_CHANGE_RACE)
-		e2:SetValue(RACE_MENTOR)
+		e2:SetValue(RACE_SPELLCASTER)
 		tc:RegisterEffect(e2,true)
 		local e3=e1:Clone()
 		e3:SetCode(EFFECT_CHANGE_ATTRIBUTE)
@@ -161,7 +161,7 @@ end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local g=e:GetLabelObject()
 	local tc=g:Filter(s.damfilter,nil,e:GetLabel()):GetFirst()
-	if tc:IsOriginalType(TYPE_ACTIONAL+TYPE_TRAP) then
+	if tc:IsOriginalType(TYPE_SPELL+TYPE_TRAP) then
 		Duel.ChangeBattleDamage(tp,0)
 		Duel.ChangeBattleDamage(1-tp,0)
 	else

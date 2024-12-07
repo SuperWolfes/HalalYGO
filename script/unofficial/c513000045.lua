@@ -1,5 +1,5 @@
 --時械神 ミチオン (Anime)
---Michion, the Timewatcher (Anime)
+--Michion, the Timelord (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--indes

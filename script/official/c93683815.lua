@@ -1,5 +1,5 @@
 --Japanese name
---Vulmina, Statue of the Clean Dragon
+--Vulmina, Statue of the Sacred Dragon
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)

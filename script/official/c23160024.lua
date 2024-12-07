@@ -29,10 +29,10 @@ function s.initial_effect(c)
 	e4:SetCondition(s.drcon)
 	e4:SetOperation(s.drop)
 	c:RegisterEffect(e4)
-	--Locked Summon
-	local e5=Locked.CreateProc({handler=c,lvtype=RITPROC_EQUAL,filter=aux.FilterBoolFunction(Card.IsCode,98287529),lv=8,matfilter=aux.FilterBoolFunction(Card.IsType,TYPE_PENDULUM)})
+	--Ritual Summon
+	local e5=Ritual.CreateProc({handler=c,lvtype=RITPROC_EQUAL,filter=aux.FilterBoolFunction(Card.IsCode,98287529),lv=8,matfilter=aux.FilterBoolFunction(Card.IsType,TYPE_PENDULUM)})
 	e5:SetType(EFFECT_TYPE_IGNITION)
-	e5:SetRange(LOCATION_REST)
+	e5:SetRange(LOCATION_GRAVE)
 	e5:SetCost(aux.bfgcost)
 	c:RegisterEffect(e5)
 end

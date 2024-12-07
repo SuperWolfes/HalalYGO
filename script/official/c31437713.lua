@@ -3,8 +3,8 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before awaking
-	c:EnableAwakeLimit()
+	--Must be properly summoned before reviving
+	c:EnableReviveLimit()
 	--Xyz summon procedure
 	Xyz.AddProcedure(c,nil,4,2)
 	--Cannot be targeted for attack
@@ -29,7 +29,7 @@ function s.initial_effect(c)
 end
 s.xyz_number=82
 function s.filter(c)
-	return c:IsFaceup() and c:IsActional()
+	return c:IsFaceup() and c:IsSpell()
 end
 function s.atkcon(e)
 	return Duel.IsExistingMatchingCard(s.filter,e:GetHandlerPlayer(),LOCATION_ONFIELD,0,1,nil)

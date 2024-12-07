@@ -1,10 +1,10 @@
 --ベクター・スケア・デーモン
---Vector Scare Archtainted
+--Vector Scare Archfiend
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before awaking
-	c:EnableAwakeLimit()
+	--Must be properly summoned before reviving
+	c:EnableReviveLimit()
 	--Link summon procedure
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_CYBERSE),2)
 	--Special summon back a monster this card destroyed by battle

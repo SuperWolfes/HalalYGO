@@ -3,8 +3,8 @@
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
-	aux.EnableCheckReincorporation(c)
+	c:EnableReviveLimit()
+	aux.EnableCheckReincarnation(c)
 	--destroy
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -60,7 +60,7 @@ function s.desop2(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Damage(1-tp,tc:GetBaseAttack(),REASON_EFFECT)
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsReincorporationSummoned()
+	return e:GetHandler():IsReincarnationSummoned()
 end
 function s.desfilter(c)
 	return c:IsSummonType(SUMMON_TYPE_SPECIAL)

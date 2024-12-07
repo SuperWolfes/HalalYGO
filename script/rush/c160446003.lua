@@ -1,9 +1,9 @@
 --ハーピィ・チェーロ
---Flybie Cielo
+--Harpie Cielo
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send the top 2 cards of deck to RP
+	--Send the top 2 cards of deck to GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_DECKDES)
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 end
-s.listed_names={CARD_FLYBIE_LADY,160208002,160208016}
+s.listed_names={CARD_HARPIE_LADY,160208002,160208016}
 function s.costfilter(c)
 	return c:IsFaceup() and c:IsCode(160208002) and c:IsAbleToHand()
 end
@@ -26,7 +26,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DECKDES,nil,0,tp,3)
 end
 function s.cfilter(c)
-	return c:IsLocation(LOCATION_REST) and c:IsCode(CARD_FLYBIE_LADY,160208002)
+	return c:IsLocation(LOCATION_GRAVE) and c:IsCode(CARD_HARPIE_LADY,160208002)
 end
 function s.thfilter(c)
 	return c:IsCode(160208016) and c:IsAbleToHand()
@@ -40,9 +40,9 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Effect
 	Duel.DiscardDeck(tp,3,REASON_EFFECT)
 	local ct=Duel.GetOperatedGroup():FilterCount(s.cfilter,nil)
-	if ct>0 and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+	if ct>0 and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thfilter),tp,LOCATION_REST,0,1,1,nil)
+		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thfilter),tp,LOCATION_GRAVE,0,1,1,nil)
 		if #g>0 then
 			Duel.SendtoHand(g,nil,REASON_EFFECT)
 			Duel.ConfirmCards(1-tp,g)

@@ -1,4 +1,4 @@
--- Laplace the Tainted Mathematician
+-- Laplace the Fiend Mathematician
 -- Scripted by UnknownGuest
 local s,id=GetID()
 function s.initial_effect(c)

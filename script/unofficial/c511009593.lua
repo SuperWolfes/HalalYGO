@@ -1,10 +1,10 @@
---D/D/D Superdoom King Purplish Cataclysm
+--D/D/D Superdoom King Purplish Armageddon
 --cleaned up by MLD
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion summon
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x10af),aux.FilterBoolFunctionEx(Card.IsSetCard,0xaf))
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--pendulum summon
 	Pendulum.AddProcedure(c,false)
 	--fusion indes

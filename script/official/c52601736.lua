@@ -2,7 +2,7 @@
 --Inzektor Hopper
 local s,id=GetID()
 function s.initial_effect(c)
-	--Equip 1 "Inzektor" from your hand or RP to this card
+	--Equip 1 "Inzektor" from your hand or GY to this card
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_EQUIP)
@@ -31,18 +31,18 @@ function s.initial_effect(c)
 end
 s.listed_series={SET_INZEKTOR}
 function s.eqfilter(c)
-	return c:IsSetCard(SET_INZEKTOR) and c:IsMonster() and not c:IsUnliked()
+	return c:IsSetCard(SET_INZEKTOR) and c:IsMonster() and not c:IsForbidden()
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and Duel.IsExistingMatchingCard(s.eqfilter,tp,LOCATION_REST|LOCATION_HAND,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_EQUIP,nil,1,tp,LOCATION_REST|LOCATION_HAND)
+		and Duel.IsExistingMatchingCard(s.eqfilter,tp,LOCATION_GRAVE|LOCATION_HAND,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_EQUIP,nil,1,tp,LOCATION_GRAVE|LOCATION_HAND)
 end
 function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 or c:IsFacedown() or not c:IsRelateToEffect(e) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.eqfilter),tp,LOCATION_REST|LOCATION_HAND,0,1,1,nil):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.eqfilter),tp,LOCATION_GRAVE|LOCATION_HAND,0,1,1,nil):GetFirst()
 	if tc then
 		s.equipop(c,e,tp,tc)
 	end
@@ -59,10 +59,10 @@ function s.dacon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.dacost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToRestAsCost() end
+	if chk==0 then return c:IsAbleToGraveAsCost() end
 	local tc=c:GetEquipTarget()
 	Duel.SetTargetCard(tc)
-	Duel.SendtoRest(c,REASON_COST)
+	Duel.SendtoGrave(c,REASON_COST)
 	--Other monsters cannot attack the turn you activate this effect
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)

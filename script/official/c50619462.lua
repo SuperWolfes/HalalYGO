@@ -17,7 +17,7 @@ function s.initial_effect(c)
 end
 function s.cfilter(c,e,tp)
 	local race=c:GetOriginalRace()
-	return c:IsFaceup() and (race==RACE_WINGEDBEAST or race==RACE_BEAST or race==RACE_BEASTWARRIOR) and c:IsAbleToRestAsCost()
+	return c:IsFaceup() and (race==RACE_WINGEDBEAST or race==RACE_BEAST or race==RACE_BEASTWARRIOR) and c:IsAbleToGraveAsCost()
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,race,c)
 end
 function s.spfilter(c,e,tp,race,sc)
@@ -33,10 +33,10 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 		e:SetLabel(0)
 		return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil,e,tp)
 	end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_MZONE,0,1,1,nil,e,tp)
 	local tc=g:GetFirst()
-	Duel.SendtoRest(tc,REASON_COST)
+	Duel.SendtoGrave(tc,REASON_COST)
 	e:SetLabelObject(tc)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end

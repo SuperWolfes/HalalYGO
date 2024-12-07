@@ -1,5 +1,5 @@
 --進撃の帝王
---March of the Moppars
+--March of the Monarchs
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

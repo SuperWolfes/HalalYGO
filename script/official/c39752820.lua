@@ -3,17 +3,17 @@
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before awaking
-	c:EnableAwakeLimit()
+	--Must be properly summoned before reviving
+	c:EnableReviveLimit()
 	--Link Summon procedure: 2 monsters
 	Link.AddProcedure(c,nil,2,2)
-	--Can only be Link Summoned while you have a "World Legacy" card in your RP
+	--Can only be Link Summoned while you have a "World Legacy" card in your GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_SPSUMMON_COST)
 	e1:SetCost(s.spcost)
 	c:RegisterEffect(e1)
-	--Set 1 "World Legacy" Actional/Trap directly from your Deck
+	--Set 1 "World Legacy" Spell/Trap directly from your Deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TODECK)
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCountLimit(1,id)
 	e2:SetTarget(s.settg)
-	e2:SetOperation(s.vetop)
+	e2:SetOperation(s.setop)
 	c:RegisterEffect(e2)
 	--Shuffle 1 card on the field into the Deck
 	local e3=Effect.CreateEffect(c)
@@ -39,22 +39,22 @@ end
 s.listed_series={SET_WORLD_LEGACY}
 function s.spcost(e,c,tp,st)
 	if (st&SUMMON_TYPE_LINK)~=SUMMON_TYPE_LINK then return true end
-	return Duel.IsExistingMatchingCard(Card.IsSetCard,tp,LOCATION_REST,0,1,nil,SET_WORLD_LEGACY)
+	return Duel.IsExistingMatchingCard(Card.IsSetCard,tp,LOCATION_GRAVE,0,1,nil,SET_WORLD_LEGACY)
 end
 function s.setfilter(c)
-	return c:IsSetCard(SET_WORLD_LEGACY) and c:IsActionalTrap() and c:IsSSetable()
+	return c:IsSetCard(SET_WORLD_LEGACY) and c:IsSpellTrap() and c:IsSSetable()
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_DECK,0,1,1,nil) 
 		and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 end
 end
-function s.vetop(e,tp,eg,ep,ev,re,r,rp)
+function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
 	local tc=Duel.SelectMatchingCard(tp,s.setfilter,tp,LOCATION_DECK,0,1,1,nil):GetFirst()
 	if tc then
 		Duel.SSet(tp,tc)
-		--Cannot be activated this turn while you have no "World Legacy" monster in your RP
+		--Cannot be activated this turn while you have no "World Legacy" monster in your GY
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_CANNOT_TRIGGER)
@@ -67,11 +67,11 @@ function s.cfilter(c)
 	return c:IsSetCard(SET_WORLD_LEGACY) and c:IsMonster()
 end
 function s.ctcon(e)
-	return not Duel.IsExistingMatchingCard(s.cfilter,e:GetHandlerPlayer(),LOCATION_REST,0,1,nil)
+	return not Duel.IsExistingMatchingCard(s.cfilter,e:GetHandlerPlayer(),LOCATION_GRAVE,0,1,nil)
 end
 function s.tdcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsLocation(LOCATION_REST) and r==REASON_LINK and c:IsSummonType(SUMMON_TYPE_LINK)
+	return c:IsLocation(LOCATION_GRAVE) and r==REASON_LINK and c:IsSummonType(SUMMON_TYPE_LINK)
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(Card.IsAbleToDeck,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil)

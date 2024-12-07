@@ -1,11 +1,11 @@
 --魔導耀士 デイブレイカー
---Day-Breaker the Shinning Mentoral Knight
+--Day-Breaker the Shinning Magical Knight
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableCounterPermit(COUNTER_ACTIONAL)
-	c:EnableAwakeLimit()
-	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_MENTOR),2,2)
+	c:EnableCounterPermit(COUNTER_SPELL)
+	c:EnableReviveLimit()
+	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_SPELLCASTER),2,2)
 	--add counter (self summon)
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -47,25 +47,25 @@ function s.initial_effect(c)
 	e4:SetOperation(s.desop)
 	c:RegisterEffect(e4)
 end
-s.counter_place_list={COUNTER_ACTIONAL}
+s.counter_place_list={COUNTER_SPELL}
 function s.ctcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_LINK)
 end
 function s.cttg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,1,0,COUNTER_ACTIONAL)
+	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,1,0,COUNTER_SPELL)
 end
 function s.ctop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) then
-		c:AddCounter(COUNTER_ACTIONAL,1)
+		c:AddCounter(COUNTER_SPELL,1)
 	end
 end
 function s.atkval(e,c)
-	return c:GetCounter(COUNTER_ACTIONAL)*300
+	return c:GetCounter(COUNTER_SPELL)*300
 end
 function s.cfilter(c,g)
-	return c:IsFaceup() and c:IsRace(RACE_MENTOR) and g:IsContains(c)
+	return c:IsFaceup() and c:IsRace(RACE_SPELLCASTER) and g:IsContains(c)
 end
 function s.ctcon2(e,tp,eg,ep,ev,re,r,rp)
 	local lg=e:GetHandler():GetLinkedGroup()
@@ -73,8 +73,8 @@ function s.ctcon2(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsCanRemoveCounter(tp,COUNTER_ACTIONAL,2,REASON_COST) end
-	c:RemoveCounter(tp,COUNTER_ACTIONAL,2,REASON_COST)
+	if chk==0 then return c:IsCanRemoveCounter(tp,COUNTER_SPELL,2,REASON_COST) end
+	c:RemoveCounter(tp,COUNTER_SPELL,2,REASON_COST)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() end

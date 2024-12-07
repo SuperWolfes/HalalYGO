@@ -1,5 +1,5 @@
 --法眼の魔術師
---Dharma-Eye Mentor
+--Dharma-Eye Magician
 local s,id=GetID()
 function s.initial_effect(c)
 	--Pendulum attributes
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e3:SetOperation(s.sumsuc)
 	c:RegisterEffect(e3)
-	--Prevent mismatching by opponent's effect
+	--Prevent destruction by opponent's effect
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_FIELD)
 	e4:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)

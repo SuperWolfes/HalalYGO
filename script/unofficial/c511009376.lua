@@ -1,10 +1,10 @@
 --Ｄ－ＨＥＲＯ ダスクユートピアガイ (Anime)
---Destrudic HERO - Dusktopia (Anime)
+--Destiny HERO - Dusktopia (Anime)
 --fixed by MLD
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,90579153,aux.FilterBoolFunctionEx(Card.IsSetCard,0xc008))
 	--summon success
 	local e1=Effect.CreateEffect(c)

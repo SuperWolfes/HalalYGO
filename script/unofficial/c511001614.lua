@@ -1,4 +1,4 @@
---Guardian Xyz Spark
+--Spirit Xyz Spark
 local s,id=GetID()
 function s.initial_effect(c)
 	--activate

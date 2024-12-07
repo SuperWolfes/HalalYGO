@@ -1,5 +1,5 @@
 --魔導皇士 アンプール
---Emperor of Prediction
+--Emperor of Prophecy
 
 local s,id=GetID()
 function s.initial_effect(c)
@@ -19,7 +19,7 @@ end
 s.listed_series={0x106e}
 
 function s.cfilter1(c)
-	return c:IsFaceup() and c:IsRace(RACE_MENTOR) and c:IsAbleToRemoveAsCost()
+	return c:IsFaceup() and c:IsRace(RACE_SPELLCASTER) and c:IsAbleToRemoveAsCost()
 end
 function s.cfilter2(c)
 	return c:IsSetCard(0x106e) and c:IsAbleToRemoveAsCost()
@@ -27,11 +27,11 @@ end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():GetAttackAnnouncedCount()==0
 		and Duel.IsExistingMatchingCard(s.cfilter1,tp,LOCATION_MZONE,0,1,e:GetHandler())
-		and Duel.IsExistingMatchingCard(s.cfilter2,tp,LOCATION_REST,0,1,nil) end
+		and Duel.IsExistingMatchingCard(s.cfilter2,tp,LOCATION_GRAVE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	local g1=Duel.SelectMatchingCard(tp,s.cfilter1,tp,LOCATION_MZONE,0,1,1,e:GetHandler())
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g2=Duel.SelectMatchingCard(tp,s.cfilter2,tp,LOCATION_REST,0,1,1,nil)
+	local g2=Duel.SelectMatchingCard(tp,s.cfilter2,tp,LOCATION_GRAVE,0,1,1,nil)
 	g1:Merge(g2)
 	Duel.Remove(g1,POS_FACEUP,REASON_COST)
 	--Cannot attack this turn

@@ -1,10 +1,10 @@
 --No.23 冥界の霊騎士ランスロット
---Number 23: Lancelot, Dark Knight of the Overworld
+--Number 23: Lancelot, Dark Knight of the Underworld
 local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz summon
 	Xyz.AddProcedure(c,nil,8,2)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Direct attack
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -70,6 +70,6 @@ function s.distg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.NegateActivation(ev) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:GetHandler():IsRelateToEffect(re) then
-		Duel.SendtoRest(eg,REASON_EFFECT)
+		Duel.SendtoGrave(eg,REASON_EFFECT)
 	end
 end

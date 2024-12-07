@@ -12,7 +12,7 @@ function s.nsfilter(c)
 	return c:IsSetCard(SET_CYBERDARK) and c:IsSummonable(true,nil)
 end
 function s.tgfilter(c)
-	return c:IsOriginalType(TYPE_MONSTER) and (c:GetEquipTarget():IsSetCard(SET_CYBERDARK) and c:GetEquipTarget():IsType(TYPE_FUSION)) and c:IsAbleToRestAsCost()
+	return c:IsOriginalType(TYPE_MONSTER) and (c:GetEquipTarget():IsSetCard(SET_CYBERDARK) and c:GetEquipTarget():IsType(TYPE_FUSION)) and c:IsAbleToGraveAsCost()
 end
 function s.eqfilter(c)
 	return c:IsFaceup() and c:IsMonster() and c:IsAbleToChangeControler()
@@ -47,9 +47,9 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 		end
 	elseif op==2 then
 		Duel.RegisterFlagEffect(tp,id,0,0,0)
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 		local gc=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_STZONE,0,1,1,nil):GetFirst()
-		if Duel.SendtoRest(gc,REASON_COST)>0 then
+		if Duel.SendtoGrave(gc,REASON_COST)>0 then
 			local ec=gc:GetPreviousEquipTarget()
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SELECT)
 			local sc=Duel.SelectMatchingCard(tp,s.eqfilter,tp,0,LOCATION_MZONE,1,1,nil):GetFirst()

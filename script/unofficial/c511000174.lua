@@ -1,5 +1,5 @@
 --死霊導師デスクレジットメイジ
---Disgraced Manced
+--Disgraced Mage
 local s,id=GetID()
 function s.initial_effect(c)
 	--to deck

@@ -1,5 +1,5 @@
 --超魔旗艦マグナム・オーバーロード[R]
---Supreme Skystream Magnum Overwatcher [R]
+--Supreme Skystream Magnum Overlord [R]
 local s,id=GetID()
 function s.initial_effect(c)
 	local e1=Effect.CreateEffect(c)

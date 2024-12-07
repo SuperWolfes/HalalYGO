@@ -1,5 +1,5 @@
 --強制発動
---Fcoreed Activation
+--Forced Activation
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -54,7 +54,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp,chk)
 			Duel.Hint(HINT_CARD,0,tc:GetCode())
 			tc:CreateEffectRelation(te)
 			if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 then
-				tc:CancelToRest(false)
+				tc:CancelToGrave(false)
 			end
 			if te:GetCode()==EVENT_FREE_CHAIN then
 				if co then co(te,tc:GetControler(),eg,ep,ev,re,r,rp,1) end

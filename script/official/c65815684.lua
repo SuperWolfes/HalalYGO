@@ -3,7 +3,7 @@
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--"Visas Starfrost" + 1 monster with 1500 ATK/2100 DEF
 	Fusion.AddProcMix(c,true,true,CARD_VISAS_STARFROST,s.matfilter)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,true)
@@ -29,8 +29,8 @@ function s.matfilter(c)
 	return c:IsMonster() and c:IsAttack(1500) and c:IsDefense(2100)
 end
 function s.contactfil(tp)
-	local loc=LOCATION_ONFIELD|LOCATION_REST
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_GUARDIAN_ELIMINATION) then loc=LOCATION_ONFIELD end
+	local loc=LOCATION_ONFIELD|LOCATION_GRAVE
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_SPIRIT_ELIMINATION) then loc=LOCATION_ONFIELD end
 	return Duel.GetMatchingGroup(Card.IsAbleToRemoveAsCost,tp,loc,0,nil)
 end
 function s.contactop(g)

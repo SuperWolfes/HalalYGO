@@ -17,12 +17,12 @@ function s.ffilter(c)
 	return c:ListsCodeAsMaterial(CARD_BLUEEYES_W_DRAGON,CARD_BLUEEYES_U_DRAGON)
 end
 function s.fextra(e,tp,mg,sumtype)
-	return Duel.GetMatchingGroup(aux.NecroValleyFilter(Fusion.IsMonsterFilter(Card.IsAbleToDeck)),tp,LOCATION_REST,0,nil),s.fcheck
+	return Duel.GetMatchingGroup(aux.NecroValleyFilter(Fusion.IsMonsterFilter(Card.IsAbleToDeck)),tp,LOCATION_GRAVE,0,nil),s.fcheck
 end
 function s.fcheck(tp,sg,fc,sumtype,tp)
-	return sg:IsExists(s.fcoreedmatfilter,1,nil,fc,sumtype,tp)
+	return sg:IsExists(s.forcedmatfilter,1,nil,fc,sumtype,tp)
 end
-function s.fcoreedmatfilter(c,fc,sumtype,tp)
+function s.forcedmatfilter(c,fc,sumtype,tp)
 	return c:IsCode(CARD_BLUEEYES_W_DRAGON,CARD_BLUEEYES_U_DRAGON) and c:IsSummonCode(fc,sumtype,tp,fc.material)
 end
 function s.desfilter(c)
@@ -45,6 +45,6 @@ function s.desop(e,tc,tp,mg,chk)
 end
 function s.extrtarget(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,0,tp,LOCATION_HAND|LOCATION_MZONE|LOCATION_REST)
+	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,0,tp,LOCATION_HAND|LOCATION_MZONE|LOCATION_GRAVE)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_DESTROY,nil,0,1-tp,LOCATION_ONFIELD)
 end

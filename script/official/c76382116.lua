@@ -35,7 +35,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_HAND,0,nil,e,tp)
 	if chk==0 then return Duel.CheckReleaseGroupCost(tp,s.cfilter,1,false,s.check(g),nil) end
 	local max=5
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then max=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then max=1 end
 	local rg=Duel.SelectReleaseGroupCost(tp,s.cfilter,1,max,false,s.check(g),nil)
 	Duel.Release(rg,REASON_COST)
 	local og=Duel.GetOperatedGroup()
@@ -53,7 +53,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_HAND,0,nil,e,tp):Filter(aux.NOT(Card.IsCode),nil,table.unpack(codes))
 	local ct=math.min(#rg,Duel.GetLocationCount(tp,LOCATION_MZONE))
 	if #g>0 and ct>0 then
-		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ct=1 end
+		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ct=1 end
 		local sg=aux.SelectUnselectGroup(g,e,tp,ct,ct,aux.dncheck,1,tp,HINTMSG_SPSUMMON)
 		if #sg>0 then
 			Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP_DEFENSE)

@@ -38,7 +38,7 @@ function s.initial_effect(c)
 	e6:SetCategory(CATEGORY_EQUIP)
 	e6:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e6:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
-	e6:SetCode(EVENT_TO_REST)
+	e6:SetCode(EVENT_TO_GRAVE)
 	e6:SetCondition(s.eqcon2)
 	e6:SetTarget(s.eqtg2)
 	e6:SetOperation(s.eqop)
@@ -67,7 +67,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsFaceup() and tc:IsRelateToEffect(e) then
 		Duel.Equip(tp,c,tc)
 	else
-		Duel.SendtoRest(c,REASON_EFFECT) 
+		Duel.SendtoGrave(c,REASON_EFFECT) 
 	end
 end
 function s.attg(e,c)

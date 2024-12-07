@@ -1,4 +1,4 @@
---Speed Actional - Final Attack (Anime)
+--Speed Spell - Final Attack (Anime)
 --Ｓｐ－ファイナル・アタック
 --scripted by Larry126
 local s,id=GetID()

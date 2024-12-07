@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetProperty(EFFECT_FLAG_SET_AVAILABLE+EFFECT_FLAG_IGNORE_RANGE)
-	e2:SetCode(EFFECT_TO_REST_REDIRECT)
+	e2:SetCode(EFFECT_TO_GRAVE_REDIRECT)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetTarget(s.rmtarget)
 	e2:SetTargetRange(0xff,0xff)
@@ -40,7 +40,7 @@ function s.initial_effect(c)
 end
 s.listed_names={511001218}
 function s.rmtarget(e,c)
-	if not c:IsLocation(0x80) and not c:IsActionalTrap() then
+	if not c:IsLocation(0x80) and not c:IsSpellTrap() then
 		if c:GetOwner()==e:GetHandler():GetOwner() then
 			c:RegisterFlagEffect(id,RESET_EVENT+0x1760000,0,0)
 		end

@@ -1,4 +1,4 @@
---Mentor's Card
+--Magician's Card
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

@@ -48,18 +48,18 @@ function s.drcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+1
 end
 function s.cfilter(c)
-	if c:IsFacedown() or not c:IsAbleToRestAsCost() then return false end
+	if c:IsFacedown() or not c:IsAbleToGraveAsCost() then return false end
 	return (c:IsSetCard(0x10db) and c:IsMonster())
-		or (c:IsSetCard(0xdb) and c:IsActionalTrap() and c:IsType(TYPE_CONTINUOUS))
+		or (c:IsSetCard(0xdb) and c:IsSpellTrap() and c:IsType(TYPE_CONTINUOUS))
 end
 function s.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToRestAsCost()
+	if chk==0 then return c:IsAbleToGraveAsCost()
 		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,0,1,c) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_ONFIELD,0,1,1,c)
 	g:AddCard(c)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,2) end

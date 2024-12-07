@@ -1,8 +1,8 @@
 --妖精王 アルヴェルド
---Wanderer King Albverdich
+--Fairy King Albverdich
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Xyz Summon procedure
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_EARTH),4,2)
 	--Non-EARTH monsters lose 500 ATK/DEF

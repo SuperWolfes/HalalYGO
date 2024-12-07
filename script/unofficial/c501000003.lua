@@ -24,5 +24,5 @@ function s.initial_effect(c)
 end
 s.illegal=true
 function s.tlimit(e,c)
-	return not c:IsRace(RACE_WANDERER)
+	return not c:IsRace(RACE_FAIRY)
 end

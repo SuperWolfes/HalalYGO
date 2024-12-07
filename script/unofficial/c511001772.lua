@@ -67,7 +67,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			Duel.RegisterEffect(e1,tp)
 		end
 		Duel.BreakEffect()
-		Duel.SendtoRest(tc,REASON_EFFECT)
+		Duel.SendtoGrave(tc,REASON_EFFECT)
 	end
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)

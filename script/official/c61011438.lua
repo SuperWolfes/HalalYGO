@@ -43,13 +43,13 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SpecialSummon(c,1,tp,tp,false,false,POS_FACEUP)
 end
 function s.cpcostfilter(c)
-	return (c:IsSetCard(0x1047) or c:IsSetCard(0x9b)) and c:IsAbleToRestAsCost()
+	return (c:IsSetCard(0x1047) or c:IsSetCard(0x9b)) and c:IsAbleToGraveAsCost()
 end
 function s.cpcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cpcostfilter,tp,LOCATION_EXTRA,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.cpcostfilter,tp,LOCATION_EXTRA,0,1,1,nil)
-	Duel.SendtoRest(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_COST)
 	e:SetLabelObject(g:GetFirst())
 end
 function s.cpop(e,tp,eg,ep,ev,re,r,rp)

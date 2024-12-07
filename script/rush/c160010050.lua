@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send the top 4 cards to the RP
+	--Send the top 4 cards to the GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DECKDES+CATEGORY_ATKCHANGE)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -22,7 +22,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_ATKCHANGE,nil,1,tp,1200)
 end
 function s.filter(c)
-	return c:IsRace(RACE_BEASTWARRIOR) and c:IsLocation(LOCATION_REST)
+	return c:IsRace(RACE_BEASTWARRIOR) and c:IsLocation(LOCATION_GRAVE)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.DiscardDeck(tp,4,REASON_EFFECT)

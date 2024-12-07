@@ -1,5 +1,5 @@
 --呪炎王バースト・カースド
---Unclean Fire King Doom Burst
+--Cursed Fire King Doom Burst
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
@@ -38,7 +38,7 @@ function s.initial_effect(c)
 end
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsLocation(LOCATION_REST) and c:IsReason(REASON_BATTLE|REASON_EFFECT)
+	return c:IsLocation(LOCATION_GRAVE) and c:IsReason(REASON_BATTLE|REASON_EFFECT)
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() and chkc:IsControler(1-tp) end
@@ -60,7 +60,7 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.tunerfilter(c)
-	return c:IsRace(RACE_TAINTED) and c:IsType(TYPE_TUNER) and c:IsFaceup()
+	return c:IsRace(RACE_FIEND) and c:IsType(TYPE_TUNER) and c:IsFaceup()
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.tunerfilter,tp,LOCATION_MZONE,0,1,nil)

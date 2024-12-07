@@ -18,7 +18,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,0,1,nil)
 end
 function s.tgfilter(c,code)
-	return c:IsFaceup() and c:IsCode(code) and c:IsAbleToRest()
+	return c:IsFaceup() and c:IsCode(code) and c:IsAbleToGrave()
 end
 function s.spfilter(c,e,tp)
 	return c:IsCode(id+1) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
@@ -31,7 +31,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 		and Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_MZONE,0,1,nil,511001461) 
 		and Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_MZONE,0,1,nil,511001463) 
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,0,1,nil,e,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,4,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,4,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
@@ -43,18 +43,18 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=-1 then return end
 	if #g1>0 and #g2>0 and #g3>0 and #g4>0 
 		and #sp>0 then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 		local sg1=g1:Select(tp,1,1,nil)
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 		local sg2=g2:Select(tp,1,1,nil)
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 		local sg3=g3:Select(tp,1,1,nil)
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 		local sg4=g4:Select(tp,1,1,nil)
 		sg1:Merge(sg2)
 		sg1:Merge(sg3)
 		sg1:Merge(sg4)
-		if Duel.SendtoRest(sg1,REASON_EFFECT) then
+		if Duel.SendtoGrave(sg1,REASON_EFFECT) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 			local spg=sp:Select(tp,1,1,nil)
 			if #spg>0 and Duel.SpecialSummon(spg,0,tp,tp,true,true,POS_FACEUP) then

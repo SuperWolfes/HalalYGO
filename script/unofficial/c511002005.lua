@@ -1,5 +1,5 @@
 --Ｅｍウィング・サンドイッチマン
---Performanced Wing Sandwichman
+--Performage Wing Sandwichman
 local s,id=GetID()
 function s.initial_effect(c)
 	--pendulum summon

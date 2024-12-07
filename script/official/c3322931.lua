@@ -5,8 +5,8 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Only control 1 of this card
 	c:SetUniqueOnField(1,0,id)
-	--Must properly Summon before awaking
-	c:EnableAwakeLimit()
+	--Must properly Summon before reviving
+	c:EnableReviveLimit()
 	--Synchro procedure
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	--Gain ATK when monster effect is activated

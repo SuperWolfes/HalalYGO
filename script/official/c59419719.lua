@@ -4,17 +4,17 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion summon 1 "Fossil" fusion monster
-	--By banishing appropriate monsters from either RP as material
+	--By banishing appropriate monsters from either GY as material
 	local e1=Fusion.CreateSummonEff({handler=c,fusfilter=aux.FilterBoolFunction(Card.IsSetCard,0x14c),matfilter=aux.FALSE,extrafil=s.fextra,
 										stage2=s.stage2,extraop=Fusion.BanishMaterial,extratg=s.extratarget})
 	c:RegisterEffect(e1)
-	--Add this card from RP to hand
+	--Add this card from GY to hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
-	e2:SetRange(LOCATION_REST)
+	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCode(EVENT_DESTROYED)
 	e2:SetCountLimit(1,id)
 	e2:SetCondition(s.thcon)
@@ -25,7 +25,7 @@ end
 s.listed_series={0x14c}
 function s.fextra(e,tp,mg)
 	if not Duel.IsPlayerAffectedByEffect(tp,69832741) then
-		return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRemove),tp,LOCATION_REST,LOCATION_REST,nil)
+		return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRemove),tp,LOCATION_GRAVE,LOCATION_GRAVE,nil)
 	else
 		return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRemove),tp,LOCATION_ONFIELD,0,nil)
 	end
@@ -33,7 +33,7 @@ function s.fextra(e,tp,mg)
 end
 function s.stage2(e,tc,tp,sg,chk)
 	if chk==3 then
-		local mats=sg:Filter(Card.IsPreviousLocation,nil,LOCATION_REST)
+		local mats=sg:Filter(Card.IsPreviousLocation,nil,LOCATION_GRAVE)
 		if mats:IsExists(Card.IsPreviousControler,1,nil,tp) and mats:IsExists(Card.IsPreviousControler,1,nil,1-tp) then
 			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetDescription(3003)
@@ -49,7 +49,7 @@ function s.stage2(e,tc,tp,sg,chk)
 end
 function s.extratarget(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,PLAYER_EITHER,LOCATION_REST)
+	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,PLAYER_EITHER,LOCATION_GRAVE)
 end
 function s.tgval(e,re,rp)
 	local rc=re:GetHandler()

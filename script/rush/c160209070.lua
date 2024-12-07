@@ -39,12 +39,12 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			local sg=dg:Select(tp,1,1,nil)
 			Duel.HintSelection(sg,true)
 			if Duel.Destroy(sg,REASON_EFFECT)>0 then
-				--Prevent non-Mental or Omega Mental from attacking
+				--Prevent non-Psychic or Omega Psychic from attacking
 				local e1=Effect.CreateEffect(e:GetHandler())
 				e1:SetType(EFFECT_TYPE_FIELD)
 				e1:SetCode(EFFECT_CANNOT_ATTACK)
 				e1:SetTargetRange(LOCATION_MZONE,0)
-				e1:SetTarget(function(_,c) return not (c:IsRace(RACE_MENTAL) or c:IsRace(RACE_OMEGAMENTAL)) end)
+				e1:SetTarget(function(_,c) return not (c:IsRace(RACE_PSYCHIC) or c:IsRace(RACE_OMEGAPSYCHIC)) end)
 				e1:SetReset(RESET_PHASE|PHASE_END)
 				Duel.RegisterEffect(e1,tp)
 			end

@@ -1,5 +1,5 @@
 --きまぐれの女神
---Monsterdess of Whim
+--Goddess of Whim
 local s,id=GetID()
 function s.initial_effect(c)
 	--Toss a coin and either double or halve ATK

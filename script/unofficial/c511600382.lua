@@ -25,7 +25,7 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsSetCard,0x1e),tp,LOCATION_MZONE,LOCATION_MZONE,nil)
 	if chk==0 then 
-		if not (#g>0 and g:FilterCount(Card.IsAbleToRest,nil)==#g) then return false end
+		if not (#g>0 and g:FilterCount(Card.IsAbleToGrave,nil)==#g) then return false end
 		local tok=e:GetLabelObject()
 		local tg=Group.CreateGroup()
 		for c in aux.Next(g) do
@@ -45,8 +45,8 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsSetCard,0x1e),tp,LOCATION_MZONE,LOCATION_MZONE,nil)
-	if Duel.SendtoRest(g,REASON_EFFECT)>0 then
-		local sg=g:Filter(Card.IsLocation,nil,LOCATION_REST)
+	if Duel.SendtoGrave(g,REASON_EFFECT)>0 then
+		local sg=g:Filter(Card.IsLocation,nil,LOCATION_GRAVE)
 		if #sg==0 then return end
 		local tok=e:GetLabelObject()
 		local tg=Group.CreateGroup()

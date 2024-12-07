@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetTargetRange(LOCATION_HAND+LOCATION_MZONE,LOCATION_HAND+LOCATION_MZONE)
 	e2:SetCode(EFFECT_EXTRA_SUMMON_COUNT)
-	e2:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_MENTAL))
+	e2:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_PSYCHIC))
 	e2:SetOperation(s.esop)
 	c:RegisterEffect(e2)
 	local e3=Effect.CreateEffect(c)
@@ -63,7 +63,7 @@ function s.lrcon(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLP(ep)<ev then return false end
 	if not (re and re:IsActivated()) then return false end
 	local rc=re:GetHandler()
-	return rc:IsLocation(LOCATION_MZONE) and rc:IsRace(RACE_MENTAL)
+	return rc:IsLocation(LOCATION_MZONE) and rc:IsRace(RACE_PSYCHIC)
 end
 function s.lrop(e,tp,eg,ep,ev,re,r,rp)
 	e:GetHandler():AddCounter(0x4,1)

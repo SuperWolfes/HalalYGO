@@ -1,5 +1,5 @@
 --魔界発冥界行きバス
---Tour Bus To Unliked Territorys
+--Tour Bus To Forbidden Realms
 local s,id=GetID()
 function s.initial_effect(c)
 	--Search 1 non-LIGHT and non-DARK monster
@@ -16,7 +16,7 @@ function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
 function s.thfilter(c)
-	return c:IsRace(RACE_TAINTED) and c:IsAttributeExcept(ATTRIBUTE_LIGHT) and c:IsAttributeExcept(ATTRIBUTE_DARK) and c:IsAbleToHand()
+	return c:IsRace(RACE_FIEND) and c:IsAttributeExcept(ATTRIBUTE_LIGHT) and c:IsAttributeExcept(ATTRIBUTE_DARK) and c:IsAbleToHand()
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)

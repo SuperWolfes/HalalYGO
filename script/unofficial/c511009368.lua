@@ -1,4 +1,4 @@
---Performapal Gatling Rahul
+--Performapal Gatling Ghoul
 --Fixed by TheOnePharaoh
 --Fixed by MLD
 --Fixed by Larry126
@@ -6,7 +6,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
 	Fusion.AddProcMix(c,true,true,s.ffilter,aux.FilterBoolFunctionEx(Card.IsSetCard,0x9f))
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--damage
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(29343734,0))

@@ -1,5 +1,5 @@
 --ファイア・ゴーレム
---Fire Gopal
+--Fire Golem
 local s,id=GetID()
 function s.initial_effect(c)
 	--Decrease DEF by 600

@@ -1,10 +1,10 @@
 --ゴルゴニック・ガーディアン
---Jonjoric Guardian
+--Gorgonic Guardian
 local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz summon
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_ROCK),3,2)
-	c:EnableAwakeLimit()
+	c:EnableReviveLimit()
 	--Negate effects
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

@@ -1,5 +1,5 @@
 -- 鏡の御巫ニニ
--- Nini the Mirror Sibango
+-- Nini the Mirror Mikanko
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)

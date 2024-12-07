@@ -30,7 +30,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) or not tc or tc:IsFacedown() or not tc:IsRelateToEffect(e) then return end
 	if not Duel.IsPlayerCanSpecialSummonMonster(tp,id,0,TYPE_MONSTER,tc:GetAttack(),tc:GetDefense(),tc:GetLevel(),tc:GetRace(),tc:GetAttribute()) then return end
-	c:AddMonsterAttribute(TYPE_MONSTER|TYPE_ACTIONAL,tc:GetAttribute(),tc:GetRace(),tc:GetLevel(),tc:GetAttack(),tc:GetDefense())
+	c:AddMonsterAttribute(TYPE_MONSTER|TYPE_SPELL,tc:GetAttribute(),tc:GetRace(),tc:GetLevel(),tc:GetAttack(),tc:GetDefense())
 	if Duel.SpecialSummonStep(c,0,tp,tp,true,false,POS_FACEUP) then
 		c:AddMonsterAttributeComplete()
 		--Add monster attributes

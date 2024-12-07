@@ -1,5 +1,5 @@
 --時械神 ガブリオン (Anime)
---Gabrion, the Timewatcher (Anime)
+--Gabrion, the Timelord (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--indes

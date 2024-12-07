@@ -1,5 +1,5 @@
 --幻煌龍の天渦
---Illusorasm Spiral Assault
+--Phantasm Spiral Assault
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -17,17 +17,17 @@ function s.initial_effect(c)
 	e2:SetCode(EFFECT_TRAP_ACT_IN_HAND)
 	e2:SetCondition(s.handcon)
 	c:RegisterEffect(e2)
-	--Mismatching replacement for Normal Monsters
+	--Destruction replacement for Normal Monsters
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e3:SetCode(EFFECT_DESTROY_REPLACE)
-	e3:SetRange(LOCATION_REST)
+	e3:SetRange(LOCATION_GRAVE)
 	e3:SetTarget(s.reptg)
 	e3:SetValue(s.repval)
 	e3:SetOperation(s.repop)
 	c:RegisterEffect(e3)
 end
-s.listed_series={SET_ILLUSORASM_SPIRAL}
+s.listed_series={SET_PHANTASM_SPIRAL}
 s.listed_names={56649609,CARD_UMI}
 function s.filter(c)
 	return c:IsFaceup() and c:IsCode(56649609)
@@ -60,7 +60,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.winfilter(c)
-	return c:IsSetCard(SET_ILLUSORASM_SPIRAL) and c:IsEquipActional()
+	return c:IsSetCard(SET_PHANTASM_SPIRAL) and c:IsEquipSpell()
 end
 function s.wincon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -74,7 +74,7 @@ function s.winop(e,tp,eg,ep,ev,re,r,rp)
 	te:SetValue(value)
 	e:GetOwner():SetTurnCounter(value)
 	if value>2 then
-		Duel.Win(tp,WIN_REASON_ILLUSORASM_SPIRAL)
+		Duel.Win(tp,WIN_REASON_PHANTASM_SPIRAL)
 	end
 end
 function s.handcon(e)

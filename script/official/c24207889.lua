@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
 	e3:SetRange(LOCATION_SZONE)
-	e3:SetCode(EFFECT_FCOREE_SPSUMMON_POSITION)
+	e3:SetCode(EFFECT_FORCE_SPSUMMON_POSITION)
 	e3:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e3:SetTargetRange(1,1)
 	e3:SetTarget(s.sumlimit)
@@ -72,18 +72,18 @@ function s.adjustop(e,tp,eg,ep,ev,re,r,rp)
 			while (RACE_ALL&race)~=0 do
 				local rg=g:Filter(Card.IsRace,nil,race)
 				if s.lastFieldId[p] then
-					local fcoreed
-					fcoreed,rg=rg:Split(s.fidfilter,nil,s.lastFieldId[p])
+					local forced
+					forced,rg=rg:Split(s.fidfilter,nil,s.lastFieldId[p])
 					if #rg==0 then
-						rg=fcoreed
+						rg=forced
 						update_fid=true
 					else
-						sg:Merge(fcoreed)
+						sg:Merge(forced)
 					end
 				end
 				local rc=#rg
 				if rc>1 then
-					Duel.Hint(HINT_SELECTMSG,p,HINTMSG_TOREST)
+					Duel.Hint(HINT_SELECTMSG,p,HINTMSG_TOGRAVE)
 					sg:Merge(rg:Select(p,rc-1,rc-1,nil))
 				end
 				race=race<<1
@@ -101,11 +101,11 @@ function s.adjustop(e,tp,eg,ep,ev,re,r,rp)
 		g1,g2=sg:Split(Card.IsControler,nil,p)
 	end
 	if #g1>0 then
-		Duel.SendtoRest(g1,REASON_RULE,PLAYER_NONE,p)
+		Duel.SendtoGrave(g1,REASON_RULE,PLAYER_NONE,p)
 		readjust=true
 	end
 	if #g2>0 then
-		Duel.SendtoRest(g2,REASON_RULE,PLAYER_NONE,1-p)
+		Duel.SendtoGrave(g2,REASON_RULE,PLAYER_NONE,1-p)
 		readjust=true
 	end
 	if readjust then Duel.Readjust() end

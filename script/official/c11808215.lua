@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	--At the start of the Battle Phase, roll die and apply effects
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_SUFFICE+CATEGORY_ATKCHANGE)
+	e2:SetCategory(CATEGORY_DICE+CATEGORY_ATKCHANGE)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_PHASE+PHASE_BATTLE_START)
 	e2:SetRange(LOCATION_FZONE)
@@ -42,7 +42,7 @@ function s.dicetg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local b1=Duel.IsExistingMatchingCard(Card.IsFaceup,tp,LOCATION_MZONE,0,1,nil)
 	local b2=Duel.IsExistingMatchingCard(Card.IsFaceup,tp,0,LOCATION_MZONE,1,nil)
 	if chk==0 then return b1 or b2 end
-	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,1,PLAYER_ALL,0)
+	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,1,PLAYER_ALL,0)
 end
 function s.diceop(e,tp,eg,ep,ev,re,r,rp)
 	local turn_p=Duel.GetTurnPlayer()
