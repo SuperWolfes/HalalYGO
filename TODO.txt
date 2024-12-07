@@ -1,0 +1,1 @@
+Fix IsOnField function (some reason doesnt work)
