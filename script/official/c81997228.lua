@@ -2,7 +2,7 @@
 --Prank-Kids Battle Butler
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--"Prank-Kids Lampsies" + "Prank-Kids Dropsies" + "Prank-Kids Fansies"
 	Fusion.AddProcMix(c,true,true,81119816,18236002,55725117)
 	--Must be Fusion Summoned

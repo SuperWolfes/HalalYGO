@@ -3,7 +3,7 @@
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send to GY
+	--Send to RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TOREST+CATEGORY_DESTROY)
 	e1:SetType(EFFECT_TYPE_IGNITION)

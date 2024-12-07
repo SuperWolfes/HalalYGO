@@ -1,4 +1,4 @@
---Gorgonic Pile
+--Jonjoric Pile
 Duel.LoadScript("c420.lua")
 local s,id=GetID()
 function s.initial_effect(c)
@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsGorgonic()
+	return c:IsFaceup() and c:IsJonjoric()
 end
 function s.filter(c)
 	return c:IsFaceup() and c:IsRace(RACE_ROCK) and c:GetLevel()>0

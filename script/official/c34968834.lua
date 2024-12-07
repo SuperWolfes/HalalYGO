@@ -1,5 +1,5 @@
 --暗黒界の鬼神 ケルト
---Lucent, Netherlord of Dark World
+--Lucent, Netherwatcher of Dark World
 local s,id=GetID()
 function s.initial_effect(c)
 	--Special summon itself

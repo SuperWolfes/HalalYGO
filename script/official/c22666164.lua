@@ -14,7 +14,7 @@ function s.initial_effect(c)
 end
 s.listed_names={58054262}
 function s.cfilter(c,...)
-	return c:IsFaceup() and c:IsCode(...) and c:IsAbleToGraveAsCost()
+	return c:IsFaceup() and c:IsCode(...) and c:IsAbleToRestAsCost()
 end
 function s.rescon(sg,e,tp,mg)
 	return aux.ChkfMMZ(1)(sg,e,tp,mg) and sg:IsExists(s.chk,1,nil,sg,Group.CreateGroup(),60999392,23782705,96384007)
@@ -41,7 +41,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return #g1>0 and #g2>0 and #g3>0
 		and aux.SelectUnselectGroup(g,e,tp,3,3,s.rescon,0) end
 	local sg=aux.SelectUnselectGroup(g,e,tp,3,3,s.rescon,1,tp,HINTMSG_TOREST)
-	Duel.SendtoGrave(sg,REASON_COST)
+	Duel.SendtoRest(sg,REASON_COST)
 end
 function s.filter(c,e,tp)
 	return c:IsCode(58054262) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)

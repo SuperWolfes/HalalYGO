@@ -1,9 +1,9 @@
 -- 相剣大師－赤霄
--- Chi Xiao, the Grand Swordsoul Swordmaster
+-- Chi Xiao, the Grand Swordmiss Swordmaster
 local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTunerEx(Card.IsRace,RACE_WYRM),1,99)
 	--search and add to hand or banish
 	local e1=Effect.CreateEffect(c)

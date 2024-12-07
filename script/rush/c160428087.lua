@@ -16,7 +16,7 @@ function s.initial_effect(c)
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCurrentPhase()==PHASE_DRAW and ep==1-tp and r==REASON_RULE
-		and Duel.IsExistingMatchingCard(Card.IsRace,tp,LOCATION_REST,0,1,nil,RACE_CONTAMINED)
+		and Duel.IsExistingMatchingCard(Card.IsRace,tp,LOCATION_REST,0,1,nil,RACE_TOXIC)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -40,6 +40,6 @@ end
 function s.atklimit(e,c)
 	local g=Duel.GetMatchingGroup(aux.FaceupFilter(Card.HasLevel),e:GetHandlerPlayer(),LOCATION_MZONE,0,nil)
 	if #g==0 then return end
-	local maxg,lv=g:GetMaxGroup(Card.GetLevel)
-	return c:IsFaceup() and (not c:HasLevel() or (#g~=#maxg and c:IsLevelAbove(lv)))
+	local maxg,lv=g:GetMinGroup(Card.GetLevel)
+	return c:IsFaceup() and (not c:HasLevel() or c:GetLevel()~=lv)
 end

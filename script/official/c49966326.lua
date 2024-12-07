@@ -1,5 +1,5 @@
 --電脳堺麟－麟々
---Virtual World Kirin - Lili
+--Virtual World Kojais - Lili
 --Scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -22,10 +22,10 @@ function s.tgtfilter(c,tp)
 	return c:IsFaceup() and c:IsSetCard(0x150) and Duel.IsExistingMatchingCard(s.tgvfilter,tp,LOCATION_DECK,0,1,nil,c:GetType()&key)
 end
 function s.tgvfilter(c,type1)
-	return c:IsAbleToGrave() and c:IsSetCard(0x150) and not c:IsType(type1)
+	return c:IsAbleToRest() and c:IsSetCard(0x150) and not c:IsType(type1)
 end
 function s.tgvfilter2(c,type1,type2)
-	return c:IsAbleToGrave() and c:IsSetCard(0x150) and not c:IsType(type1) and not c:IsType(type2) and not c:IsCode(id)
+	return c:IsAbleToRest() and c:IsSetCard(0x150) and not c:IsType(type1) and not c:IsType(type2) and not c:IsCode(id)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_ONFIELD) and chkc:IsControler(tp) and s.tgtfilter(chkc,tp) end
@@ -53,7 +53,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsRelateToEffect(e) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local tg=Duel.SelectMatchingCard(tp,s.tgvfilter,tp,LOCATION_DECK,0,1,1,nil,tc:GetType()&key)
-		if #tg>0 and Duel.SendtoGrave(tg,REASON_EFFECT)>0 then
+		if #tg>0 and Duel.SendtoRest(tg,REASON_EFFECT)>0 then
 			local ogc=Duel.GetOperatedGroup():GetFirst()
 			if ogc:IsLocation(LOCATION_REST) and c:IsRelateToEffect(e) and Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)>0 then
 				local tg1=tg:GetFirst()
@@ -62,7 +62,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 					local tg2=Duel.SelectMatchingCard(tp,s.tgvfilter2,tp,LOCATION_DECK,0,1,1,nil,tc:GetType()&key,tg1:GetType()&key)
 					if #tg2>0 then
 						Duel.BreakEffect()
-						Duel.SendtoGrave(tg2,REASON_EFFECT)
+						Duel.SendtoRest(tg2,REASON_EFFECT)
 					end
 				end
 			end

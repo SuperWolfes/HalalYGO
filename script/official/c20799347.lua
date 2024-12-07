@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetCondition(s.ntcon)
 	e1:SetValue(1)
 	c:RegisterEffect(e1)
-	--Special summon itself from GY
+	--Special summon itself from RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -66,7 +66,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetReset(RESET_EVENT+RESETS_REDIRECT)
 		e2:SetValue(LOCATION_REMOVED)
 		c:RegisterEffect(e2,true)
-		--Gravericted to level/rank 3+ monsters
+		--Restricted to level/rank 3+ monsters
 		local e3=Effect.CreateEffect(e:GetHandler())
 		e3:SetDescription(aux.Stringid(id,2))
 		e3:SetType(EFFECT_TYPE_FIELD)

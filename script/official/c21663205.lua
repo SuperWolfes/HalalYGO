@@ -1,5 +1,5 @@
 --墓守の神職
---Gravekeeper's Priest
+--Restkeeper's Imam
 local s,id=GetID()
 function s.initial_effect(c)
 	--spsummon
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	local e3=e1:Clone()
 	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e3)
-	--immune to necro valley
+	--immune to rest valley
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_SINGLE)
 	e4:SetCode(EFFECT_REST_VALLEY_IM)

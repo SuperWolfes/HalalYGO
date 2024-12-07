@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
 	local e1=Locked.CreateProc({handler=c,lvtype=RITPROC_EQUAL,filter=aux.FilterBoolFunction(Card.IsSetCard,0x10cf),lv=8,extrafil=s.extragroup,
-									extraop=s.extraop,matfilter=s.matfilter,location=LOCATION_HAND|LOCATION_REST,forcedselection=s.ritcheck,specificmatfilter=s.specificfilter,extratg=s.extratg})
+									extraop=s.extraop,matfilter=s.matfilter,location=LOCATION_HAND|LOCATION_REST,fcoreedselection=s.ritcheck,specificmatfilter=s.specificfilter,extratg=s.extratg})
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_DECKDES)
 	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
 	c:RegisterEffect(e1)
@@ -14,7 +14,7 @@ function s.extragroup(e,tp,eg,ep,ev,re,r,rp,chk)
 	return Duel.GetMatchingGroup(s.matfilter1,tp,LOCATION_HAND+LOCATION_DECK,0,nil)
 end
 function s.extraop(mat,e,tp,eg,ep,ev,re,r,rp,tc)
-	Duel.SendtoGrave(mat,REASON_EFFECT+REASON_MATERIAL+REASON_LOCKED)
+	Duel.SendtoRest(mat,REASON_EFFECT+REASON_MATERIAL+REASON_LOCKED)
 end
 function s.extratg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -33,7 +33,7 @@ function s.matfilter(c,e,tp)
 	return s.matfilter1(c)
 end
 function s.matfilter1(c)
-	return c:IsAttribute(ATTRIBUTE_LIGHT+ATTRIBUTE_DARK) and c:IsLocation(LOCATION_HAND+LOCATION_DECK) and c:IsAbleToGrave()
+	return c:IsAttribute(ATTRIBUTE_LIGHT+ATTRIBUTE_DARK) and c:IsLocation(LOCATION_HAND+LOCATION_DECK) and c:IsAbleToRest()
 end
 function s.ritcheck(e,tp,g,sc)
 	return #g==2 and g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_LIGHT) and g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_DARK) and g:IsExists(Card.IsLocation,1,nil,LOCATION_HAND) and g:IsExists(Card.IsLocation,1,nil,LOCATION_DECK),#g>2

@@ -67,7 +67,7 @@ function s.actop(e,tp,eg,ep,ev,re,r,rp)
 	--workaround to not reveal card names
 	local ac=s.SelectCardByZone(ag,tp,HINTMSG_RESOLVEEFFECT)
 	if ac then
-		--Force activation
+		--Fcoree activation
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		e1:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)

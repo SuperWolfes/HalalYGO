@@ -89,7 +89,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetCode(EVENT_ADJUST)
 		e1:SetRange(LOCATION_SZONE)
 		e1:SetLabel(cid)
-		e1:SetOperation(s.resetop)
+		e1:SetOperation(s.revetop)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		tc:RegisterEffect(e1)
 		local og=Duel.SelectMatchingCard(tp,s.ovfilter,tp,LOCATION_DECK,0,1,1,nil)
@@ -129,18 +129,18 @@ end
 function s.cfilter(c)
 	return c:IsFaceup() and c:IsCode(id) and not c:IsDisabled()
 end
-function s.resetop(e,tp,eg,ep,ev,re,r,rp)
+function s.revetop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_SZONE,0,1,nil) then
 		c:ResetEffect(e:GetLabel(),RESET_COPY)
 		c:ResetFlagEffect(id)
 		e:Reset()
 		if c:GetType()&TYPE_CONTINUOUS+TYPE_FIELD==0 then
-			Duel.SendtoGrave(c,REASON_RULE)
+			Duel.SendtoRest(c,REASON_RULE)
 		elseif not c:IsCode(id+1) then
 			local og=c:GetOverlayGroup()
 			if #og>0 then
-				Duel.SendtoGrave(og,REASON_RULE)
+				Duel.SendtoRest(og,REASON_RULE)
 			end
 		end
 	end
@@ -150,7 +150,7 @@ function s.discon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.NegateEffect(ev)
-	re:GetHandler():CancelToGrave()
+	re:GetHandler():CancelToRest()
 end
 function s.acfilter(c,tp)
 	local te=c:GetActivateEffect()
@@ -158,7 +158,7 @@ function s.acfilter(c,tp)
 end
 function s.actg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)
-	if chk==0 then return #g>0 and (Duel.GetLocationCount(tp,LOCATION_SZONE)>0 or g:FilterCount(Card.IsLocation,nil,LOCATION_SZONE)>0) 
+	if chk==0 then return #g>0 and (Duel.GetLocationCount(tp,LOCATION_SZONE)>0 or g:FilterCount(Card.IsLocation,nil,LOCATION_SZONE)>0)
 		and Duel.IsExistingMatchingCard(s.acfilter,tp,0x13,0,1,nil,tp) end
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,#g,0,0)
 end
@@ -166,7 +166,7 @@ function s.acop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)
 	if Duel.Destroy(g,REASON_EFFECT)>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EFFECT)
-		local tc=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.acfilter),tp,0x13,0,1,1,nil,tp):GetFirst()
+		local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.acfilter),tp,0x13,0,1,1,nil,tp):GetFirst()
 		if tc then
 			local tpe=tc:GetType()
 			local te=tc:GetActivateEffect()
@@ -177,21 +177,21 @@ function s.acop(e,tp,eg,ep,ev,re,r,rp)
 			e:SetProperty(te:GetProperty())
 			Duel.ClearTargetCard()
 			if (tpe&TYPE_FIELD)~=0 then
-				local fc=Duel.GetFieldCard(1-tp,LOCATION_SZONE,5)
+				local fc=Duel.GetFieldCard(1-tp,LOCATION_FZONE,0)
 				if Duel.IsDuelType(DUEL_1_FIELD) then
 					if fc then Duel.Destroy(fc,REASON_RULE) end
-					fc=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
-					if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
+					fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
+					if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
 				else
-					Duel.GetFieldCard(tp,LOCATION_SZONE,5)
-					if fc and Duel.SendtoGrave(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
+					Duel.GetFieldCard(tp,LOCATION_FZONE,0)
+					if fc and Duel.SendtoRest(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
 				end
 			end
 			Duel.MoveToField(tc,tp,tp,LOCATION_SZONE,POS_FACEUP,true)
 			Duel.Hint(HINT_CARD,0,tc:GetCode())
 			tc:CreateEffectRelation(te)
 			if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 then
-				tc:CancelToGrave(false)
+				tc:CancelToRest(false)
 			end
 			if co then co(te,tp,eg,ep,ev,re,r,rp,1) end
 			if tg then tg(te,tp,eg,ep,ev,re,r,rp,1) end

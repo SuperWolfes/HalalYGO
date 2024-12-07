@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Gain LP and Special Summon 1"Magical Sheep Girl Meeeg-chan"
+	--Gain LP and Special Summon 1"Mentoral Sheep Girl Meeeg-chan"
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_RECOVER+CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 end
-s.listed_names={160009006} --Magical Sheep Girl Meeeg-chan
+s.listed_names={160009006} --Mentoral Sheep Girl Meeeg-chan
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeckAsCost(tp,1) end
 end

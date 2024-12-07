@@ -1,4 +1,5 @@
---機皇神マシニクル∞
+--機皇神マシニクル∞³ (Anime)
+--Mekwatcher Astro Mekanikle (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--equip
@@ -28,10 +29,11 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 	--gain eff
 	local e5=Effect.CreateEffect(c)
-	e5:SetDescription(aux.Stringid(10032958,0))
+	e5:SetDescription(aux.Stringid(id,2))
 	e5:SetType(EFFECT_TYPE_QUICK_O)
 	e5:SetCode(EVENT_FREE_CHAIN)
 	e5:SetRange(LOCATION_MZONE)
+	e5:SetCondition(function(_,tp) return Duel.IsTurnPlayer(tp) end)
 	e5:SetCost(s.effcost)
 	e5:SetTarget(s.efftg)
 	e5:SetOperation(s.effop)
@@ -75,20 +77,20 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsFaceup() and tc:IsRelateToEffect(e) and tc:IsMonster() then
 		if c:IsFaceup() and c:IsRelateToEffect(e) then
 			s.equipop(c,e,tp,tc)
-		else Duel.SendtoGrave(tc,REASON_EFFECT) end
+		else Duel.SendtoRest(tc,REASON_EFFECT) end
 	end
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp
 end
 function s.dcfilter(c)
-	return c:GetFlagEffect(id)~=0 and c:IsAbleToGraveAsCost()
+	return c:GetFlagEffect(id)~=0 and c:IsAbleToRestAsCost()
 end
 function s.damcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():GetEquipGroup():IsExists(s.dcfilter,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=e:GetHandler():GetEquipGroup():FilterSelect(tp,s.dcfilter,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	local atk=g:GetFirst():GetTextAttack()
 	if atk<0 then atk=0 end
 	e:SetLabel(atk)
@@ -107,13 +109,13 @@ function s.filter(c)
 	return c:IsSetCard(0x557) or c:IsSetCard(0x507) or c:IsSetCard(0x525) or c:IsSetCard(0x50d)
 end
 function s.cfilter(c)
-	return s.filter(c) and c:IsAbleToGraveAsCost()
+	return s.filter(c) and c:IsAbleToRestAsCost()
 end
 function s.effcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	e:SetLabelObject(g:GetFirst())
 end
 function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -133,7 +135,7 @@ function s.repfilter(c)
 end
 function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return not c:IsReason(REASON_REPLACE) 
+	if chk==0 then return not c:IsReason(REASON_REPLACE)
 		and Duel.IsExistingMatchingCard(s.repfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,nil) end
 	if Duel.SelectEffectYesNo(tp,e:GetHandler(),96) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)

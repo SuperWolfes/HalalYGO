@@ -36,6 +36,6 @@ function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 		if not c then c=re:GetHandler() end
 		Duel.RaiseEvent(c, id, e, r, rp, ep, ev)
 	end
-	Duel.SendtoGrave(eg,REASON_EFFECT,rp)
+	Duel.SendtoRest(eg,REASON_EFFECT,rp)
 	return true
 end

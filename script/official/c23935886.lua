@@ -1,9 +1,9 @@
 --天威の龍拳聖
---Tenyi Master of the Dragon Fist
+--Tenbree Master of the Dragon Fist
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,nil,2,3,s.lcheck)
 	--indes
 	local e1=Effect.CreateEffect(c)

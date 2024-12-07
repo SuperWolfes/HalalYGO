@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.distg)
 	e2:SetOperation(s.disop)
 	c:RegisterEffect(e2)
-	--If sent to GY, make 1 of your monsters unaffected by opponent's card effects
+	--If sent to RP, make 1 of your monsters unaffected by opponent's card effects
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)

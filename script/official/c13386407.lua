@@ -3,7 +3,7 @@
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	local rparams={handler=c,lvtype=RITPROC_GREATER,filter=s.lockedfil,matfilter=s.matfilter,extrafil=s.extrafil,location=LOCATION_HAND|LOCATION_REST,forcedselection=s.ritcheck}
+	local rparams={handler=c,lvtype=RITPROC_GREATER,filter=s.lockedfil,matfilter=s.matfilter,extrafil=s.extrafil,location=LOCATION_HAND|LOCATION_REST,fcoreedselection=s.ritcheck}
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

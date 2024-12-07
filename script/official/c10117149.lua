@@ -34,7 +34,7 @@ function s.initial_effect(c)
 	e4:SetRange(LOCATION_MZONE)
 	e4:SetValue(s.atkval)
 	c:RegisterEffect(e4)
-	--Special Summon 1 "Deskbot" from your GY
+	--Special Summon 1 "Deskbot" from your RP
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(id,1))
 	e5:SetCategory(CATEGORY_SPECIAL_SUMMON)

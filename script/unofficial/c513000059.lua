@@ -1,27 +1,25 @@
 --ＣＮｏ.１０１ Ｓ・Ｈ・Ｄａｒｋ Ｋｎｉｇｈｔ (Anime)
 --Number C101: Silent Honor DARK (Anime)
 --Fixed by Larry126
-Duel.LoadScript("rankup_functions.lua")
 Duel.LoadCardScript("c12744567.lua")
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,5,3)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Rank Up Check
 	aux.EnableCheckRankUp(c,nil,nil,48739166)
 	--battle indestructable
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_INDESTRUCTABLE_BATTLE)
-	e1:SetValue(aux.NOT(aux.TargetBoolFunction(Card.IsSetCard,0x48)))
+	e1:SetValue(aux.NOT(aux.TargetBoolFunction(Card.IsSetCard,SET_NUMBER)))
 	c:RegisterEffect(e1)
 	--spsummon
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_RECOVER)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	e2:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
 	e2:SetCode(EVENT_TO_REST)
 	e2:SetCondition(s.spcon)
 	e2:SetTarget(s.sptg)
@@ -46,14 +44,13 @@ function s.initial_effect(c)
 	e4:SetCost(s.spcost)
 	e4:SetTarget(s.sptg2)
 	e4:SetOperation(s.spop2)
-	e4:SetLabel(RESET_EVENT+RESETS_STANDARD)
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_SINGLE)
 	e5:SetCode(EFFECT_RANKUP_EFFECT)
 	e5:SetLabelObject(e4)
 	c:RegisterEffect(e5,false,REGISTER_FLAG_DETACH_XMAT)
 end
-s.listed_series={0x48}
+s.listed_series={SET_NUMBER}
 s.listed_names={48739166}
 s.xyz_number=101
 function s.filter(c)

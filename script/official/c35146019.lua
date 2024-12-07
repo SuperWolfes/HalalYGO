@@ -63,7 +63,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetLabelObject(tc)
 		c:RegisterEffect(e1)
 	elseif c:IsRelateToEffect(e) and not c:IsStatus(STATUS_LEAVE_CONFIRMED) then
-		c:CancelToGrave(false)
+		c:CancelToRest(false)
 	end
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)

@@ -20,7 +20,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	return true
 end
 function s.cfilter(c,tp)
-	return c:IsMonster() and c:IsAbleToGraveAsCost()
+	return c:IsMonster() and c:IsAbleToRestAsCost()
 		and Duel.IsExistingTarget(s.filter,tp,LOCATION_REST+LOCATION_REMOVED,0,1,c)
 end
 function s.filter(c)
@@ -36,7 +36,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local sc=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND+LOCATION_MZONE,0,1,1,nil,tp):GetFirst()
-	Duel.SendtoGrave(sc,REASON_COST)
+	Duel.SendtoRest(sc,REASON_COST)
 	e:SetLabelObject(sc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST+LOCATION_REMOVED,0,1,1,sc)

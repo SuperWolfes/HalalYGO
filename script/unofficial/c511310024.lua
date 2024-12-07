@@ -20,7 +20,7 @@ function s.spcon(e, tp, eg, ep, ev, re, r, rp)
 end
 
 function s.spfilter(c, e, tp, tid)
-	return c:IsRace(RACE_CONTAMINED) and c:IsAttackBelow(1000) and c:IsCanBeSpecialSummoned(e, 0, tp, false, false) and
+	return c:IsRace(RACE_TOXIC) and c:IsAttackBelow(1000) and c:IsCanBeSpecialSummoned(e, 0, tp, false, false) and
 		c:IsCanBeEffectTarget(e) and
 		(c:GetReason() & 0x41) == 0x41 and
 		c:GetTurnID() == tid

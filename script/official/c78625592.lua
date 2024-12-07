@@ -1,5 +1,5 @@
 --光の護封霊剣
---Guardianual Swords of Revealing Light
+--Spilocked Swords of Revealing Light
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

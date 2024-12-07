@@ -3,9 +3,9 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMixRep(c,true,true,s.mfilter2,1,99,s.mfilter1)
-	--Special summon from the Grave Place
+	--Special summon from the Resting Place
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)

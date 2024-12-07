@@ -1,5 +1,5 @@
 --呪い猫の皿勘定
---The Cursed Cat Counting Dishes
+--The Unclean Cat Counting Dishes
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.zfilter(c)
-	return c:IsRace(RACE_CONTAMINED) and c:IsLevelAbove(7) and c:IsFaceup()
+	return c:IsRace(RACE_TOXIC) and c:IsLevelAbove(7) and c:IsFaceup()
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetAttacker()

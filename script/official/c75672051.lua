@@ -1,5 +1,5 @@
 --黒牙の魔術師
---Black Fang Magician
+--Black Fang Mentor
 local s,id=GetID()
 function s.initial_effect(c)
 	Pendulum.AddProcedure(c)

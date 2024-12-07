@@ -1,5 +1,5 @@
 --溟界の蛇睡蓮
---Ogdoadic Water Lily
+--Ogtasic Water Lily
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.tgfilter(c)
-	return c:IsMonster() and c:IsRace(RACE_REPTILE) and c:IsAbleToGrave()
+	return c:IsMonster() and c:IsRace(RACE_REPTILE) and c:IsAbleToRest()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -28,15 +28,15 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
-	if #g>0 and Duel.SendtoGrave(g,REASON_EFFECT)>0 and Duel.GetOperatedGroup():GetFirst():IsLocation(LOCATION_REST) then
+	if #g>0 and Duel.SendtoRest(g,REASON_EFFECT)>0 and Duel.GetOperatedGroup():GetFirst():IsLocation(LOCATION_REST) then
 		local rg=Duel.GetMatchingGroup(Card.IsRace,tp,LOCATION_REST,0,nil,RACE_REPTILE)
 		local ct=rg:GetClassCount(Card.GetCode)
 		if ct>=5 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-			and Duel.IsExistingMatchingCard(aux.GraveValleyFilter(s.spfilter),tp,LOCATION_REST,0,1,nil,e,tp)
+			and Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,0,1,nil,e,tp)
 			and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			Duel.BreakEffect()
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-			local sg=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.spfilter),tp,LOCATION_REST,0,1,1,nil,e,tp)
+			local sg=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,0,1,1,nil,e,tp)
 			if #sg>0 then
 				Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)
 			end

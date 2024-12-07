@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunction(Card.IsSetCard,0x19),2,2)
 	--indes
 	local e1=Effect.CreateEffect(c)

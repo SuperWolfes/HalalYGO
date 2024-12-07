@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,6,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--equip
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -92,6 +92,6 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
 	local tg=g:Filter(s.tgfilter,nil,e)
 	if #tg>0 then
-		Duel.SendtoGrave(tg,REASON_EFFECT)
+		Duel.SendtoRest(tg,REASON_EFFECT)
 	end
 end

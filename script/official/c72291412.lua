@@ -2,9 +2,9 @@
 --D/D Necro Slime
 local s,id=GetID()
 function s.initial_effect(c)
-	--Fusion summon using materials from the GY
+	--Fusion summon using materials from the RP
 	local params = {fusfilter=aux.FilterBoolFunction(Card.IsSetCard,0x10af),matfilter=aux.FALSE,extrafil=s.fextra,
-					extraop=Fusion.BanishMaterial,gc=Fusion.ForcedHandler,extratg=s.extratarget}
+					extraop=Fusion.BanishMaterial,gc=Fusion.FcoreedHandler,extratg=s.extratarget}
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)
 	e1:SetType(EFFECT_TYPE_IGNITION)

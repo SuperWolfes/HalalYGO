@@ -1,5 +1,5 @@
 --Ｆａｉｒｙ Ｔａｌｅ最終章 忘却の妖月
---Wanderer Tale Final Chapter: Moon of Oblivion
+--Wanderer Tale Final Chapter: Horizon of Oblivion
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

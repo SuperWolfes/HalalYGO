@@ -1,11 +1,11 @@
 --ペンギン僧侶
---Penguin Priest
+--Penguin Imam
 --Logical Nonsense
 
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special summon 1 of your "Penguin" monsters that was sent to GY
+	--Special summon 1 of your "Penguin" monsters that was sent to RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_HANDES+CATEGORY_SPECIAL_SUMMON)
@@ -31,7 +31,7 @@ end
 	--Lists "Penguin" archetype
 s.listed_series={0x5a}
 
-	--Check for a "Penguin" monster that was sent to GY by opponent's card
+	--Check for a "Penguin" monster that was sent to RP by opponent's card
 function s.cfilter(c,e,tp)
 	return c:IsPreviousLocation(LOCATION_MZONE) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEDOWN_DEFENSE) and c:IsPreviousSetCard(0x5a)
 		and c:GetReasonPlayer()==1-tp and c:IsPreviousControler(tp) and c:IsCanBeEffectTarget(e) and c:IsPreviousPosition(POS_FACEUP)
@@ -51,11 +51,11 @@ function s.sstg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetTargetCard(c)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,LOCATION_REST)
 end
-	--Special summon 1 of your "Penguin" monsters that was sent to GY
+	--Special summon 1 of your "Penguin" monsters that was sent to RP
 function s.ssop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
-	if c:IsRelateToEffect(e) and Duel.SendtoGrave(c,REASON_EFFECT+REASON_DISCARD)==1
+	if c:IsRelateToEffect(e) and Duel.SendtoRest(c,REASON_EFFECT+REASON_DISCARD)==1
 		and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and tc and tc:IsRelateToEffect(e) then
 		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEDOWN_DEFENSE)
 	end

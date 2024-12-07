@@ -3,8 +3,8 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Link Summon procedure
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x47),2,2)
 	--Add 1 "Gem-Knight" card from deck
@@ -58,7 +58,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.PayLPCost(tp,1000)
 end
 function s.fextra(e,tp,mg)
-	return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(aux.GraveValleyFilter(Card.IsFaceup,Card.IsAbleToDeck)),tp,LOCATION_REST+LOCATION_REMOVED,0,nil)
+	return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(aux.NecroValleyFilter(Card.IsFaceup,Card.IsAbleToDeck)),tp,LOCATION_REST+LOCATION_REMOVED,0,nil)
 end
 function s.stage2(e,tc,tp,mg,chk)
 	if chk==1 then

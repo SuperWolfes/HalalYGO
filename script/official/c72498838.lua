@@ -3,7 +3,7 @@
 --Scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Add "Magistus" Actional/Trap to the hand or return 1 Mentor to the GY
+	--Add "Magistus" Actional/Trap to the hand or return 1 Mentor to the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
@@ -78,7 +78,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		if Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_REMOVED,0,1,nil) then
 			local tg=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_REMOVED,0,1,1,nil)
 			if #tg>0 then
-				Duel.SendtoGrave(tg,REASON_EFFECT+REASON_RETURN)
+				Duel.SendtoRest(tg,REASON_EFFECT+REASON_RETURN)
 			end
 		end
 	end
@@ -101,7 +101,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if not (tc:IsRelateToEffect(e) and tc:IsFaceup() and tc:IsLocation(LOCATION_MZONE)
 		and Duel.GetLocationCount(tp,LOCATION_SZONE)>0) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-	local ec=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.eqfilter),tp,LOCATION_REST,0,1,1,nil):GetFirst()
+	local ec=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.eqfilter),tp,LOCATION_REST,0,1,1,nil):GetFirst()
 	if ec then
 		Duel.Equip(tp,ec,tc,true)
 		local e1=Effect.CreateEffect(e:GetHandler())

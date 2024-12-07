@@ -1,5 +1,5 @@
 --魔轟神トピー
---Fabled Topi
+--Fablous Topi
 local s,id=GetID()
 function s.initial_effect(c)
 	--Destroy

@@ -1,10 +1,10 @@
 --ＷＷ－ダイヤモンド・ベル
---Windwitch - Diamond Bell
+--Windmint - Diamond Bell
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
 	--Synchro Summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTunerEx(Card.IsAttribute,ATTRIBUTE_WIND),1,99)
 	--Inflict damage
 	local e1=Effect.CreateEffect(c)

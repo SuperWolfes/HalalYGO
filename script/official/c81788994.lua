@@ -74,7 +74,7 @@ end
 function s.chop(e,te,tp,tc,mat,sumtype,sg,sumpos)
 	if not sumtype then sumtype=SUMMON_TYPE_FUSION end
 	tc:SetMaterial(mat)
-	Duel.SendtoGrave(mat,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
+	Duel.SendtoRest(mat,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
 	if mat:IsExists(Card.IsControler,1,nil,1-tp) then
 		e:GetHandler():RemoveCounter(tp,0x16,3,REASON_EFFECT)
 	end

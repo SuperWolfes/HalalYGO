@@ -61,7 +61,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	g:DeleteGroup()
 end
 function s.cfilter(c)
-	return c:IsRace(RACE_DRAGON) and c:IsAbleToGraveAsCost()
+	return c:IsRace(RACE_DRAGON) and c:IsAbleToRestAsCost()
 end
 function s.rmcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil)
@@ -71,7 +71,7 @@ function s.rmcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g2=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_DECK,0,1,1,nil)
 	g1:Merge(g2)
-	Duel.SendtoGrave(g1,REASON_COST)
+	Duel.SendtoRest(g1,REASON_COST)
 end
 function s.rmfilter(c)
 	return c:IsAbleToRemove() and aux.SpElimFilter(c)

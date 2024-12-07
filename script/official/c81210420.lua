@@ -1,5 +1,5 @@
 --マジカルシルクハット
---Magical Hats
+--Mentoral Hats
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -102,5 +102,5 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	g:DeleteGroup()
 	Duel.Destroy(tg,REASON_EFFECT)
 	local tg2=tg:Filter(s.desfilter,nil,fid)
-	Duel.SendtoGrave(tg2,REASON_EFFECT)
+	Duel.SendtoRest(tg2,REASON_EFFECT)
 end

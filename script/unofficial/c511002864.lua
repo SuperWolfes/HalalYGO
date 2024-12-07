@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,3,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(93730230,0))

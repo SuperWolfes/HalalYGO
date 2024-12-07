@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e2:SetCode(id)
 	c:RegisterEffect(e2)
 	--special summon
-	local params = {nil,Fusion.OnFieldMat,nil,nil,Fusion.ForcedHandler}
+	local params = {nil,Fusion.OnFieldMat,nil,nil,Fusion.FcoreedHandler}
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)

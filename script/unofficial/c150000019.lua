@@ -1,5 +1,5 @@
 --カースド・クリスタル
---Cursed Gem
+--Unclean Gem
 local s,id=GetID()
 function s.initial_effect(c)
 	--damage

@@ -4,9 +4,9 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Link Summon procedure
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,nil,3,3,s.lcheck)
-	--Special Summon "@Ignister" monsters from your GY
+	--Special Summon "@Ignister" monsters from your RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg1)
 	e1:SetOperation(s.spop1)
 	c:RegisterEffect(e1)
-	--Special Summon 1 Cyberse monster from your GY
+	--Special Summon 1 Cyberse monster from your RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -47,7 +47,7 @@ function s.spop1(e,tp,eg,ep,ev,re,r,rp)
 	local zone=c:GetLinkedZone(tp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE,tp,LOCATION_REASON_TOFIELD,zone)
 	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
-	local sg=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.spfilter),tp,LOCATION_REST,0,ft,ft,nil,e,tp,zone)
+	local sg=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,0,ft,ft,nil,e,tp,zone)
 	for sc in aux.Next(sg) do
 		if Duel.SpecialSummonStep(sc,0,tp,tp,false,false,POS_FACEUP,zone)~=0 then
 			local e1=Effect.CreateEffect(c)
@@ -74,7 +74,7 @@ function s.sptg2(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.spop2(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.filter),tp,LOCATION_REST,0,1,1,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,LOCATION_REST,0,1,1,nil,e,tp)
 	if #g>0 then 
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end

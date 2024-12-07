@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(33698022,1))
 	e2:SetCategory(CATEGORY_TOHAND)

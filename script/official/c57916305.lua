@@ -1,5 +1,5 @@
 --ウィッチクラフト・クリエイション
---Witchcrafter Creation
+--Mintcrafter Matching
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)

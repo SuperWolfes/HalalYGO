@@ -1,9 +1,9 @@
 --調律の魔術師
---Tuning Magician
+--Tuning Mentor
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special summon itself from GY
+	--Special summon itself from RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)

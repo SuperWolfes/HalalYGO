@@ -3,11 +3,11 @@
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Xyz summon procedure
 	Xyz.AddProcedure(c,nil,6,2)
-	--Indestructible while monster from GY is on field
+	--Indestructible while monster from RP is on field
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	local e2=e1:Clone()
 	e2:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
 	c:RegisterEffect(e2)
-	--Special Summon Level 5 or lower monster from GY
+	--Special Summon Level 5 or lower monster from RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -34,7 +34,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3,false,REGISTER_FLAG_DETACH_XMAT)
 end
 s.listed_names={id}
-	--Filter for cards summoned from GY
+	--Filter for cards summoned from RP
 function s.indesfil(c)
 	return c:IsSummonLocation(LOCATION_REST) and c:IsFaceup() and not c:IsCode(id)
 end

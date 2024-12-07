@@ -2,7 +2,7 @@
 --Gladiator Beast Andabata
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMixN(c,true,true,7573135,1,aux.FilterBoolFunctionEx(Card.IsSetCard,0x19),2)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,s.splimit,aux.TRUE,1)
 	--extra summon

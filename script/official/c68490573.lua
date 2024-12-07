@@ -1,5 +1,5 @@
  -- 大いなる魂
- -- The Great Soul
+ -- The Great Miss
 local s,id=GetID()
 function s.initial_effect(c)
 	--Special Summon

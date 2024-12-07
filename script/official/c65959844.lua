@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--1 Level 5 or higher DUAL monster can be Normal Summoned without tribute
+	--1 Level 5 or higher Dual monster can be Normal Summoned without tribute
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetType(EFFECT_TYPE_FIELD)
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e2:SetCondition(s.ntcon)
 	e2:SetTarget(aux.FieldSummonProcTg(s.nttg))
 	c:RegisterEffect(e2)
-	--Can Normal Summon 1 additional DUAL monster
+	--Can Normal Summon 1 additional Dual monster
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetType(EFFECT_TYPE_FIELD)
@@ -63,13 +63,13 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	local rc=Duel.SelectMatchingCard(tp,s.rmfilter,tp,LOCATION_MZONE,0,1,1,nil):GetFirst()
 	if not rc then return end
-	local reset=RESET_PHASE+PHASE_END+RESET_OPPO_TURN
+	local reset=RESET_PHASE|PHASE_END|RESET_OPPO_TURN
 	if aux.RemoveUntil(rc,nil,REASON_EFFECT,PHASE_END,id,e,tp,aux.DefaultFieldReturnOp,s.retcon,reset) then
 		local tc=Duel.GetFirstTarget()
 		if not tc:IsRelateToEffect(e) then return end
 		Duel.Destroy(tc,REASON_EFFECT)
 	end
 end
-function s.retcon(e,tp,eg,ep,ev,re,r,rp)
+function s.retcon(ag,e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsTurnPlayer(1-tp)
 end

@@ -1,5 +1,5 @@
 --武神降臨
---Bujincarnation
+--Bujincorporation
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

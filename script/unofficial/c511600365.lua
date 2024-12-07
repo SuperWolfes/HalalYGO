@@ -1,11 +1,11 @@
 --キメラ・ハイドライブ・ドラグリッド
---Chimera Hydradrive Dragrid
+--Chilean Hyddendrive Dragrid
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(0x577)
 	--link summon
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_LINK),5,5,s.lcheck)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--place
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.ctop)
 	c:RegisterEffect(e1)
 end
-s.roll_suffice=true
+s.roll_dice=true
 function s.lcheck(g,lc,sumtype,tp)
 	return g:CheckDifferentPropertyBinary(Card.GetAttribute,lc,sumtype,tp)
 end

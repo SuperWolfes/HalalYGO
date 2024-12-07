@@ -1,8 +1,8 @@
 --ティンダングル・アキュート・ケルベロス
---Tindangle Acute Cerberus
+--Tindangle Acute Cebrar
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x10b),3,3)
 	--atk
 	local e1=Effect.CreateEffect(c)

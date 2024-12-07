@@ -1,5 +1,5 @@
 --ネオス・スパイラル・フォース
---Neos Spiral Force
+--Neos Spiral Fcoree
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

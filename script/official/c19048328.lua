@@ -1,10 +1,10 @@
 --幻竜星－チョウホウ
---Chaofeng, Illusion of the Yang Zing
+--Crafin, Illusion of the Bang Zing
 local s,id=GetID()
 function s.initial_effect(c)
 	--Synchro summon
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Material check
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)

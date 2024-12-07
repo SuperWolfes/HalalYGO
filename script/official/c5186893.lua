@@ -1,5 +1,5 @@
 --真紅眼の不死竜
---Red-Eyes Contaminated Dragon
+--Red-Eyes Toxic Dragon
 local s,id=GetID()
 function s.initial_effect(c)
 	--summon with 1 tribute
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.otfilter(c,tp)
-	return c:IsRace(RACE_CONTAMINED) and (c:IsControler(tp) or c:IsFaceup())
+	return c:IsRace(RACE_TOXIC) and (c:IsControler(tp) or c:IsFaceup())
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -24,7 +24,7 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	if c==tc then tc=Duel.GetAttackTarget() end
 	e:SetLabelObject(tc)
 	if not c:IsRelateToBattle() or c:IsFacedown() then return false end
-	return tc:IsLocation(LOCATION_REST) and tc:IsRace(RACE_CONTAMINED)
+	return tc:IsLocation(LOCATION_REST) and tc:IsRace(RACE_TOXIC)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tc=e:GetLabelObject()
@@ -35,7 +35,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetLabelObject()
-	if tc:IsRelateToEffect(e) and tc:IsRace(RACE_CONTAMINED) then
+	if tc:IsRelateToEffect(e) and tc:IsRace(RACE_TOXIC) then
 		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 	end
 end

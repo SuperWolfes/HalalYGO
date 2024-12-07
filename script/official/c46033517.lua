@@ -1,17 +1,17 @@
 --マシンナーズ・ルインフォース
---Machina Ruinforce
+--Machina Ruinfcoree
 --Scripted by DyXel
 
 local s,id=GetID()
 function s.initial_effect(c)
 	--Can only be summoned with its on procedure
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	local e0=Effect.CreateEffect(c)
 	e0:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e0:SetType(EFFECT_TYPE_SINGLE)
 	e0:SetCode(EFFECT_SPSUMMON_CONDITION)
 	c:RegisterEffect(e0)
-	--Special summon procedure (from GY)
+	--Special summon procedure (from RP)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_SPSUMMON_PROC)
@@ -90,7 +90,7 @@ end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.NegateActivation(ev) then return end
 	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:GetHandler():IsRelateToEffect(re) then
-		Duel.SendtoGrave(eg,REASON_EFFECT)
+		Duel.SendtoRest(eg,REASON_EFFECT)
 	end
 	Duel.SetLP(1-tp,Duel.GetLP(1-tp)//2)
 end

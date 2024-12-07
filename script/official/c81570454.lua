@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.equiptg)
 	e1:SetOperation(s.equipop)
 	c:RegisterEffect(e1)
-	--If sent to GY this turn
+	--If sent to RP this turn
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
@@ -55,7 +55,7 @@ function s.equipop(e,tp,eg,ep,ev,re,r,rp)
 	if c:IsLocation(LOCATION_MZONE) and c:IsFacedown() then return end
 	local tc=Duel.GetFirstTarget()
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 or tc:IsFacedown() or not tc:IsRelateToEffect(e) then
-		Duel.SendtoGrave(c,REASON_EFFECT)
+		Duel.SendtoRest(c,REASON_EFFECT)
 		return
 	end
 	Duel.Equip(tp,c,tc,true)
@@ -77,7 +77,7 @@ end
 function s.eqlimit(e,c)
 	return c==e:GetLabelObject()
 end
-	--If sent to GY this turn, flag
+	--If sent to RP this turn, flag
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	c:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1)

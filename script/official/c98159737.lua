@@ -1,5 +1,5 @@
 --天威龍－アーダラ
---Skyforce Dragon - Adara
+--Skyfcoree Dragon - Adara
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)

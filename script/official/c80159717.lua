@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_DRAGON),1,1,Synchro.NonTunerEx(Card.IsRace,RACE_WINGEDBEAST),1,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--extra
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -19,10 +19,10 @@ end
 function s.excost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ct=Duel.GetFieldGroupCount(tp,0,LOCATION_EXTRA)
 	if ct>3 then ct=3 end
-	if chk==0 then return ct>0 and Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_ONFIELD,0,1,nil) end
+	if chk==0 then return ct>0 and Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_ONFIELD,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToGraveAsCost,tp,LOCATION_ONFIELD,0,1,ct,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToRestAsCost,tp,LOCATION_ONFIELD,0,1,ct,nil)
+	Duel.SendtoRest(g,REASON_COST)
 	e:SetLabel(#g)
 end
 function s.exop(e,tp,eg,ep,ev,re,r,rp)
@@ -31,7 +31,7 @@ function s.exop(e,tp,eg,ep,ev,re,r,rp)
 	if #g<ct then return end
 	Duel.ConfirmCards(tp,g)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-	local sg=Duel.SelectMatchingCard(tp,Card.IsAbleToGrave,tp,0,LOCATION_EXTRA,ct,ct,nil)
-	Duel.SendtoGrave(sg,REASON_EFFECT)
+	local sg=Duel.SelectMatchingCard(tp,Card.IsAbleToRest,tp,0,LOCATION_EXTRA,ct,ct,nil)
+	Duel.SendtoRest(sg,REASON_EFFECT)
 	Duel.ShuffleExtra(1-tp)
 end

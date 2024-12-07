@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Link Summon procedure
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_FLIP),2,2)
 	--Fusion summon
 	local params = {aux.FilterBoolFunction(Card.IsSetCard,0x9d)}
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetTarget(Fusion.SummonEffTG(table.unpack(params)))
 	e1:SetOperation(Fusion.SummonEffOP(table.unpack(params)))
 	c:RegisterEffect(e1)
-	--Special summon itself from the GY
+	--Special summon itself from the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -29,7 +29,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x9d}
 function s.cfilter(c)
-	return (c:IsLocation(LOCATION_HAND) or c:IsFaceup()) and c:IsSetCard(0x9d) and c:IsAbleToGraveAsCost()
+	return (c:IsLocation(LOCATION_HAND) or c:IsFaceup()) and c:IsSetCard(0x9d) and c:IsAbleToRestAsCost()
 end
 function s.mzfilter(c)
 	return c:IsLocation(LOCATION_MZONE) and c:GetSequence()<5
@@ -54,7 +54,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		g=sg:Select(tp,1,1,nil)
 	end
-	if Duel.SendtoGrave(g,REASON_EFFECT)~=0 and g:GetFirst():IsLocation(LOCATION_REST) then
+	if Duel.SendtoRest(g,REASON_EFFECT)~=0 and g:GetFirst():IsLocation(LOCATION_REST) then
 		Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)
 	end
 end

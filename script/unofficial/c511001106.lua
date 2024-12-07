@@ -33,7 +33,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(1-tp,LOCATION_MZONE)
 	if ft>1 and Duel.IsPlayerAffectedByEffect(1-tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	if Duel.SendtoDeck(tc,nil,0,REASON_EFFECT)>0 and sumtype==SUMMON_TYPE_SYNCHRO and #mg>0 
-		and #mg<=ft or mg:FilterCount(aux.GraveValleyFilter(s.mgfilter),nil,e,tp,tc)==#mg then
+		and #mg<=ft or mg:FilterCount(aux.NecroValleyFilter(s.mgfilter),nil,e,tp,tc)==#mg then
 		Duel.BreakEffect()
 		Duel.SpecialSummon(mg,0,tp,1-tp,false,false,POS_FACEUP)
 	end

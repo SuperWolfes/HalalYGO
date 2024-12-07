@@ -1,8 +1,8 @@
 --デストーイ・デアデビル
---Frightfur Daredevil
+--Frightfur Darewell
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0xc3),aux.FilterBoolFunctionEx(Card.IsSetCard,0xa9))
 	--damage after destroying
 	local e1=Effect.CreateEffect(c)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.damtg1)
 	e1:SetOperation(s.damop1)
 	c:RegisterEffect(e1)
-	--damage after destruction
+	--damage after mismatching
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_DAMAGE)

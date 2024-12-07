@@ -1,7 +1,7 @@
 --エルシャドール・ウェンディゴ
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x9d),s.matfilter)
 	--cannot spsummon
 	local e2=Effect.CreateEffect(c)

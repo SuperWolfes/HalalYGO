@@ -2,7 +2,7 @@
 --Orichalcos Shunoros (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Must be Special Summoned by the effect of Orichalcos Kyutora
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	e3:SetCondition(s.statcon2)
 	e3:SetOperation(s.statop2)
 	c:RegisterEffect(e3)
-	--Summon Divine Serpent Geh on destruction
+	--Summon Mega Serpent Geh on mismatching
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e4:SetProperty(EFFECT_FLAG_DAMAGE_STEP)

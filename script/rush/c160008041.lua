@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	-- fusion
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,160008025,CARD_JELLYPLUG)
 	--All pyro monsters you control gain ATK
 	local e1=Effect.CreateEffect(c)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 s.listed_names={160008025}
-	--Check for card in deck to send to GY
+	--Check for card in deck to send to RP
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeckAsCost(tp,1) end
 end
@@ -42,7 +42,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 				e1:SetType(EFFECT_TYPE_SINGLE)
 				e1:SetCode(EFFECT_UPDATE_ATTACK)
 				e1:SetValue(800)
-				e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+				e1:SetReset(RESETS_STANDARD_PHASE_END)
 				c:RegisterEffect(e1)
 				local ag=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsLevel,8),tp,0,LOCATION_MZONE,nil)
 				for tc in ag:Iter() do
@@ -50,7 +50,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 					e1:SetType(EFFECT_TYPE_SINGLE)
 					e1:SetCode(EFFECT_UPDATE_ATTACK)
 					e1:SetValue(-800)
-					e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+					e1:SetReset(RESETS_STANDARD_PHASE_END)
 					tc:RegisterEffect(e1)
 				end
 			end

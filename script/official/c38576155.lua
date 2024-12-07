@@ -1,5 +1,5 @@
 --女神スクルドの託宣
---Monsterdess Skuld's Oracle
+--Monsterdess Skuld's Overseer
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

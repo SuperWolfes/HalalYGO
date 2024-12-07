@@ -1,4 +1,4 @@
---Flower of Destruction
+--Flower of Mismatching
 --fixed by MLD
 local s,id=GetID()
 function s.initial_effect(c)
@@ -39,7 +39,7 @@ function s.cost(e,tp,eg,ev,ep,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,e:GetHandler()) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tg=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,e:GetHandler())
-	Duel.SendtoGrave(tg,REASON_COST)
+	Duel.SendtoRest(tg,REASON_COST)
 end
 function s.dacon(e,tp,eg,ev,ep,re,r,rp)
 	return eg and eg:IsExists(Card.IsControler,1,nil,tp)
@@ -80,7 +80,7 @@ function s.mtcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp
 end
 function s.tgfilter(c)
-	return c:IsActional() and c:IsType(TYPE_CONTINUOUS) and c:IsFaceup() and c:IsAbleToGrave()
+	return c:IsActional() and c:IsType(TYPE_CONTINUOUS) and c:IsFaceup() and c:IsAbleToRest()
 end
 function s.mttg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsOnField() and s.tgfilter(chkc) and chkc~=e:GetHandler() end
@@ -95,7 +95,7 @@ function s.mtop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsFacedown() or not c:IsRelateToEffect(e) then return end
 	local tc=Duel.GetFirstTarget()
-	if not tc or not tc:IsRelateToEffect(e) or Duel.SendtoGrave(tc,REASON_EFFECT)==0 then
+	if not tc or not tc:IsRelateToEffect(e) or Duel.SendtoRest(tc,REASON_EFFECT)==0 then
 		Duel.Damage(tp,1000,REASON_EFFECT)
 	end
 end

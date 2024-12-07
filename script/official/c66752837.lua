@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_DOUBLE_TRIBUTE)
 	e1:SetValue(function (e,c) return c:IsRace(RACE_DRAGON) end)
 	c:RegisterEffect(e1)
-	--Special Summon itself from the GY and add 1 Dragon monster from the GY to the hand
+	--Special Summon itself from the RP and add 1 Dragon monster from the RP to the hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOHAND)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
@@ -49,7 +49,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	local c=e:GetHandler()
-	local g=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.thfilter),tp,LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.thfilter),tp,LOCATION_REST,0,nil)
 	if not c:IsRelateToEffect(e) then return end
 	if Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)~=0 and e:GetLabel()==1
 		and #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then

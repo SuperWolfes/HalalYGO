@@ -4,7 +4,7 @@
 local s,id,alias=GetID()
 function s.initial_effect(c)
 	alias=c:GetOriginalCodeRule()
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--cannot special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -97,7 +97,7 @@ function s.equipop(c,e,tp,tc)
 		e2:SetType(EFFECT_TYPE_EQUIP)
 		e2:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE+EFFECT_FLAG_OWNER_RELATE)
 		e2:SetCode(EFFECT_UPDATE_ATTACK)
-		e2:SetReset(RESET_EVENT+RESETS_STANDARD)
+		e2:SetReset(RESET_EVENT|RESETS_STANDARD)
 		e2:SetValue(atk)
 		tc:RegisterEffect(e2)
 	end
@@ -117,7 +117,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsRelateToEffect(e) then
 		if c:IsFaceup() and c:IsRelateToEffect(e) then
 			s.equipop(c,e,tp,tc)
-		else Duel.SendtoGrave(tc,REASON_RULE) end
+		else Duel.SendtoRest(tc,REASON_RULE) end
 	end
 end
 function s.econ(e)
@@ -129,11 +129,11 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local eq=c:GetEquipTarget()
 	local o=e:GetOwner()
 	local code=c:GetOriginalCode()
-	if eq==o and eq:IsFaceup() and eq:GetFlagEffect(code)==0 and not eq:IsDisabled() then
-		local cid=eq:CopyEffect(code,RESET_EVENT+RESETS_STANDARD,1)
-		eq:RegisterFlagEffect(code,RESET_EVENT+RESETS_STANDARD,0,1)
+	if eq==o and eq:IsFaceup() and eq:GetFlagEffect(id+code)==0 and not eq:IsDisabled() then
+		local cid=eq:CopyEffect(code,RESET_EVENT|RESETS_STANDARD,1)
+		eq:RegisterFlagEffect(id+code,RESET_EVENT|RESETS_STANDARD,0,1)
 		e:SetLabel(cid)
-	end 
+	end
 	if not eq or o~=eq or eq:IsDisabled() then
 		local cid=e:GetLabel()
 		o:ResetEffect(cid,RESET_COPY)

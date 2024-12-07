@@ -20,12 +20,12 @@ function s.initial_effect(c)
 end
 s.listed_series={0x134}
 function s.cfilter(c,e,tp,ft)
-	return (c:IsRace(RACE_CONTAMINED) or (c:IsSetCard(0x134) and c:IsMonster()))
+	return (c:IsRace(RACE_TOXIC) or (c:IsSetCard(0x134) and c:IsMonster()))
 		and (ft>0 or (c:IsControler(tp) and c:GetSequence()<5)) and (c:IsControler(tp) or c:IsFaceup())
 			and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp,c:GetCode())
 end
 function s.spfilter(c,e,tp,code)
-	return not c:IsCode(code) and (c:IsRace(RACE_CONTAMINED) or c:IsSetCard(0x134)) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
+	return not c:IsCode(code) and (c:IsRace(RACE_TOXIC) or c:IsSetCard(0x134)) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)

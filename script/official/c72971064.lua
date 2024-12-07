@@ -3,8 +3,8 @@
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly SSd before reviving
-	c:EnableReviveLimit()
+	--Must be properly SSd before awaking
+	c:EnableAwakeLimit()
 	--Xyz Procedure
 	Xyz.AddProcedure(c,nil,1,2,nil,nil,99)
 	--ATK Up
@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.target)
 	e2:SetOperation(s.activate)
 	c:RegisterEffect(e2,false,REGISTER_FLAG_DETACH_XMAT)
-	--Add 1 LL monster from GY to hand
+	--Add 1 LL monster from RP to hand
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_TOHAND)

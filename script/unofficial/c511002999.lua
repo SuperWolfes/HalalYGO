@@ -82,6 +82,6 @@ function s.acop(e,tp,eg,ep,ev,re,r,rp)
 	local op=te:GetOperation()
 	if op then op(te,tp,eg,ep,ev,re,r,rp) end
 	if (te:GetHandler():GetType()&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 then
-		e:GetHandler():CancelToGrave(false)
+		e:GetHandler():CancelToRest(false)
 	end
 end

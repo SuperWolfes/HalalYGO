@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Equip procedure
 	aux.AddEquipProcedure(c)
-	--Return 1 FIRE Warrior from your GY to your hand
+	--Return 1 FIRE Warrior from your RP to your hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_DESTROY)

@@ -2,7 +2,7 @@
 -- Warning Scale Phosphorescence
 local s,id=GetID()
 function s.initial_effect(c)
-	--When your opponent normal/special summons a monster, prevent attack and shuffle monsters from the GY
+	--When your opponent normal/special summons a monster, prevent attack and shuffle monsters from the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TODECK)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)

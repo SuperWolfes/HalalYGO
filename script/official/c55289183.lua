@@ -1,5 +1,5 @@
 --享楽の堕天使
---Capricious Darklord
+--Capricious Darkwarden
 --Logical Nonsense
 --Substitute ID
 local s,id=GetID()

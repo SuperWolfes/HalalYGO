@@ -44,7 +44,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 				Duel.ChangePosition(tc,POS_FACEUP)
 				Duel.Hint(HINT_CARD,0,tc:GetOriginalCode())
 				if tc:GetType()==TYPE_TRAP then
-					tc:CancelToGrave(false)
+					tc:CancelToRest(false)
 				end
 				tc:CreateEffectRelation(te)
 				if cost then cost(te,tep,eg,ep,ev,re,r,rp,1) end

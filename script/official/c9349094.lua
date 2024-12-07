@@ -1,13 +1,13 @@
 --神樹獣ハイペリュトン
---Sacred Tree Beast, Hyperyton
+--Clean Tree Beast, Hyperyton
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz summon procedure
 	Xyz.AddProcedure(c,nil,9,2)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
-	--Attach 1 card from your GY to this card
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
+	--Attach 1 card from your RP to this card
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_LEAVE_REST)
@@ -75,7 +75,7 @@ function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	if #ov<1 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)
 	local sg=ov:Select(tp,1,1,nil)
-	if #sg>0 and Duel.SendtoGrave(sg,REASON_EFFECT)>0 then
+	if #sg>0 and Duel.SendtoRest(sg,REASON_EFFECT)>0 then
 		Duel.RaiseSingleEvent(c,EVENT_DETACH_MATERIAL,e,0,0,0,0)
 		if Duel.NegateActivation(ev) and re:GetHandler():IsRelateToEffect(re) then
 			Duel.Destroy(eg,REASON_EFFECT)

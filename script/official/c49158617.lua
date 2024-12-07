@@ -1,5 +1,5 @@
 --双天の調伏
---Guardian Avatar Defeating Evil
+--Dual Avatar Defeating Evil
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)

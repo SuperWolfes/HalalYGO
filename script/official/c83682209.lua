@@ -4,7 +4,7 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special summon itself from GY
+	--Special summon itself from RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_ATKCHANGE)
@@ -47,7 +47,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 	if Duel.SpecialSummonComplete()>0 then
 		local ct=Duel.GetMatchingGroupCount(Card.IsAttribute,tp,LOCATION_REST,0,nil,ATTRIBUTE_WATER)
-		--Gains 100 ATK per WATER monster in GY
+		--Gains 100 ATK per WATER monster in RP
 		local e2=Effect.CreateEffect(c)
 		e2:SetType(EFFECT_TYPE_SINGLE)
 		e2:SetCode(EFFECT_UPDATE_ATTACK)

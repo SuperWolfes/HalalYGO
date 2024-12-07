@@ -1,5 +1,5 @@
 --アロマージ－マジョラム
---Aromage Marjoram
+--Aromanced Marjoram
 --Scripted by Hel
 local s,id=GetID()
 function s.initial_effect(c)

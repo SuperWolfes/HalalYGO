@@ -1,10 +1,10 @@
 --DDD呪血王サイフリート
---D/D/D Cursed King Siegfried
+--D/D/D Unclean King Siegfried
 local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTunerEx(Card.IsSetCard,0xaf),1,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Negate Actional/Trap
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

@@ -38,7 +38,7 @@ end
 s.listed_series={0x133}
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsDiscardable() end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST+REASON_DISCARD)
+	Duel.SendtoRest(e:GetHandler(),REASON_COST+REASON_DISCARD)
 end
 function s.spfilter1(c,e,tp)
 	return c:IsSetCard(0x133) and c:IsLevelBelow(4) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP)

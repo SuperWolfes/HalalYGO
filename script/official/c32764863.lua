@@ -1,5 +1,5 @@
 --エクシーズ・リバイブ・スプラッシュ
---Xyz Revive Splash
+--Xyz Awake Splash
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)

@@ -1,8 +1,8 @@
 --DDD超死偉王ダークネス・ヘル・アーマゲドン
---D/D/D Super Doom King Dark Armageddon
+--D/D/D Super Doom King Dark Cataclysm
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Pendulum.AddProcedure(c,false)
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x10af),8,2)
 	--special summon 1 "D/D/D" from the Extra Deck

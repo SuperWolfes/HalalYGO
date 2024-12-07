@@ -3,7 +3,7 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send the top 3 cards of deck to GY
+	--Send the top 3 cards of deck to RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_DECKDES)
@@ -41,7 +41,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local ct=g:FilterCount(s.cfilter,nil)
 	if ct>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-		local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.thfilter),tp,LOCATION_REST,0,1,1,nil)
+		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thfilter),tp,LOCATION_REST,0,1,1,nil)
 		Duel.HintSelection(g)
 		if #g>0 then
 			Duel.SendtoHand(g,nil,REASON_EFFECT)

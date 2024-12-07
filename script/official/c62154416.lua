@@ -1,5 +1,5 @@
 --マジカルフィシアリスト
---Frequency Magician
+--Frequency Mentor
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(COUNTER_ACTIONAL)

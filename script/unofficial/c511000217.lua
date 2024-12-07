@@ -1,5 +1,5 @@
 --霧の祭壇
---Altar of Mist
+--Stone of Mist
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -44,7 +44,7 @@ function s.tohand(e,tp,eg,ep,ev,re,r,rp)
 	local ct=e:GetLabel()
 	e:GetHandler():SetTurnCounter(ct+1)
 	if ct==2 then
-		if Duel.SendtoGrave(e:GetHandler(),REASON_RULE)>0 then
+		if Duel.SendtoRest(e:GetHandler(),REASON_RULE)>0 then
 			local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil)
 			if #g>0 then
 				Duel.SendtoHand(g,nil,REASON_EFFECT)

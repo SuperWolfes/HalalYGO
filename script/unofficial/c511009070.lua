@@ -1,4 +1,4 @@
---Full Throttle Soul
+--Full Throttle Miss
 --fixed by MLD
 local s,id=GetID()
 function s.initial_effect(c)

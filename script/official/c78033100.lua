@@ -44,9 +44,9 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=nil
 	if e:GetLabel()==0 then
-		g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.spfilter1),tp,0x13,0,1,1,nil,e,tp)
+		g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter1),tp,0x13,0,1,1,nil,e,tp)
 	else
-		g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.spfilter2),tp,0x13,0,1,1,nil,e,tp)
+		g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter2),tp,0x13,0,1,1,nil,e,tp)
 	end
 	local tc=g:GetFirst()
 	if not tc then return end

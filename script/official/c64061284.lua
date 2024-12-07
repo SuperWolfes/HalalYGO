@@ -17,7 +17,7 @@ function s.fcheck(tp,sg,fc)
 end
 function s.fextra(e,tp,mg)
 	if mg:IsExists(s.filterchk,1,nil) then
-		local eg=Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToGrave),tp,LOCATION_DECK,0,nil)
+		local eg=Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRest),tp,LOCATION_DECK,0,nil)
 		if eg and #eg>0 then
 			return eg,s.fcheck
 		end

@@ -25,7 +25,7 @@ function s.filter(c,e,tp,eg,ep,ev,re,r,rp,b)
 			return true
 		end
 	end
-	if c:IsType(TYPE_FIELD) and Duel.CheckLocation(tp,LOCATION_SZONE,5) and te then return true end
+	if c:IsType(TYPE_FIELD) and Duel.CheckLocation(tp,LOCATION_FZONE,0) and te then return true end
 	return false
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -34,7 +34,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local b=e:GetHandler():IsLocation(LOCATION_HAND)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_OPPO)
-	local tc=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.filter),tp,0,LOCATION_REST,1,1,nil,e,tp,eg,ep,ev,re,r,rp,b):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,0,LOCATION_REST,1,1,nil,e,tp,eg,ep,ev,re,r,rp,b):GetFirst()
 	if not tc then return end
 	local tpe=tc:GetType()
 	local te=tc:GetActivateEffect()
@@ -50,7 +50,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 	Duel.MoveToField(tc,tp,tp,loc,POS_FACEUP,true)
 	if tpe&(TYPE_FIELD|TYPE_CONTINUOUS|TYPE_EQUIP)==0 and not tc:IsHasEffect(EFFECT_REMAIN_FIELD) then
-		tc:CancelToGrave(false)
+		tc:CancelToRest(false)
 	end
 	tc:CreateEffectRelation(te)
 	if co then co(te,tp,eg,ep,ev,re,r,rp,1) end
@@ -101,5 +101,5 @@ function s.rtop(e,tp,eg,ep,ev,re,r,rp)
 	if tc:IsLocation(LOCATION_REST) then
 		Duel.SendtoDeck(tc,nil,-2,REASON_EFFECT)
 	end
-	Duel.SendtoGrave(tc,REASON_EFFECT,1-tp)
+	Duel.SendtoRest(tc,REASON_EFFECT,1-tp)
 end

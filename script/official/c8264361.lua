@@ -1,10 +1,10 @@
 --暗影の闇霊使いダルク
---Dharc the Dark Charmer, Umbral
+--Dharc the Dark Chaumer, Umbral
 local s,id=GetID()
 function s.initial_effect(c)
 	--Link Summon
 	Link.AddProcedure(c,nil,2,2,s.lcheck)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Special Summon
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))

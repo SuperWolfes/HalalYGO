@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetCountLimit(1,id)
 	e1:SetCost(s.setcost)
 	e1:SetTarget(s.settg)
-	e1:SetOperation(s.setop)
+	e1:SetOperation(s.vetop)
 	c:RegisterEffect(e1)
 	--If special summoned by effect of a "Fire Fist" monster, set 1 "Fire Formation" actional/trap from deck
 	local e2=Effect.CreateEffect(c)
@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(s.setcon2)
 	e2:SetTarget(s.settg2)
-	e2:SetOperation(s.setop2)
+	e2:SetOperation(s.vetop2)
 	c:RegisterEffect(e2)
 end
 s.listed_series={0x7c,0x79}
@@ -46,7 +46,7 @@ function s.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 	Duel.SelectTarget(tp,s.setfilter,tp,LOCATION_ONFIELD,0,1,1,nil,tp)
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not (tc:IsRelateToEffect(e) and tc:IsFaceup()) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
@@ -65,7 +65,7 @@ end
 function s.settg2(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.setfilter3,tp,LOCATION_DECK,0,1,nil,tp) end
 end
-function s.setop2(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop2(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 	local g=Duel.SelectMatchingCard(tp,s.setfilter3,tp,LOCATION_DECK,0,1,1,nil,tp)
 	if #g>0 then

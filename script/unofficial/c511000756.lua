@@ -1,4 +1,4 @@
---Cursed Shield
+--Unclean Shield
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddEquipProcedure(c)

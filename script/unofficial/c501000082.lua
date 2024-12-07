@@ -1,4 +1,4 @@
---Shelga, the Tri-Warlord
+--Shelga, the Tri-Warwatcher
 local s,id=GetID()
 function s.initial_effect(c)
 	--pendulum summon

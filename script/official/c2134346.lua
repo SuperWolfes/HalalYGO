@@ -1,5 +1,5 @@
 --阿修羅
---Asura Priest
+--Asura Imam
 local s,id=GetID()
 function s.initial_effect(c)
 	Guardian.AddProcedure(c,EVENT_SUMMON_SUCCESS,EVENT_FLIP)

@@ -55,7 +55,7 @@ end
 function s.rmfilter(c)
 	return c:IsAbleToRemove() and c:IsMonster() and c:IsSetCard(0x159)
 end
-	--Banish 1 "Myutant" monster from GY, and if you do, negate targeted monster's effects
+	--Banish 1 "Myutant" monster from RP, and if you do, negate targeted monster's effects
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	local rc=Duel.SelectMatchingCard(tp,s.rmfilter,tp,LOCATION_REST,0,1,1,nil)

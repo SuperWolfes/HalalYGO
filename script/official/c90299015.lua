@@ -32,20 +32,20 @@ function s.initial_effect(c)
 end
 s.listed_series={0x8e}
 function s.thcostfilter(c)
-	return c:IsSetCard(0x8e) and c:IsAbleToGraveAsCost() and (c:IsFaceup() or c:IsLocation(LOCATION_HAND))
+	return c:IsSetCard(0x8e) and c:IsAbleToRestAsCost() and (c:IsFaceup() or c:IsLocation(LOCATION_HAND))
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thcostfilter,tp,LOCATION_HAND+LOCATION_ONFIELD,0,1,c) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local cg=Duel.SelectMatchingCard(tp,s.thcostfilter,tp,LOCATION_HAND+LOCATION_ONFIELD,0,1,1,c)
-	Duel.SendtoGrave(cg,REASON_COST)
+	Duel.SendtoRest(cg,REASON_COST)
 end
 function s.thfilter(c)
 	return c:IsSetCard(0x8e) and c:IsLevelAbove(4) and c:IsAbleToHand()
 end
 function s.tgfilter(c)
-	return c:IsSetCard(0x8e) and c:IsLevelBelow(2) and c:IsAbleToGrave()
+	return c:IsSetCard(0x8e) and c:IsLevelBelow(2) and c:IsAbleToRest()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil)
@@ -61,7 +61,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 		if #g>0 then
-			Duel.SendtoGrave(g,REASON_EFFECT)
+			Duel.SendtoRest(g,REASON_EFFECT)
 		end
 	end
 end

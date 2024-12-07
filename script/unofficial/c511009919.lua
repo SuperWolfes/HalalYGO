@@ -73,7 +73,7 @@ end
 function s.linkop(e,tp,eg,ep,ev,re,r,rp,c)
 	local mg=e:GetLabelObject()
 	c:SetMaterial(mg)
-	Duel.SendtoGrave(mg,REASON_MATERIAL+REASON_LINK)
+	Duel.SendtoRest(mg,REASON_MATERIAL+REASON_LINK)
 	Duel.RegisterFlagEffect(tp,alias,RESET_PHASE+PHASE_END,0,1)
 end
 function s.mattg(e,c)

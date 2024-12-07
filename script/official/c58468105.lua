@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0xc3),1,aux.FilterBoolFunctionEx(Card.IsSetCard,0xa9),2)
 	--atk up
 	local e1=Effect.CreateEffect(c)
@@ -47,7 +47,7 @@ function s.gycon(e,tp,eg,ep,ev,re,r,rp)
 	return aux.bdcon(e,tp,eg,ep,ev,re,r,rp) and e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
 end
 function s.gyfilter(c)
-	return c:IsAbleToGrave() and c:IsMonster()
+	return c:IsAbleToRest() and c:IsMonster()
 		and (c:IsSetCard(0xc3) or c:IsSetCard(0xa9) or c:IsSetCard(0xad))
 end
 function s.gytg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -62,7 +62,7 @@ function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.gyfilter,tp,LOCATION_DECK,0,lv,lv,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end
 function s.discon(e,tp,eg,ep,ev,re,r,rp)

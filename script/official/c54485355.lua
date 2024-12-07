@@ -4,7 +4,7 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Equip 1 FIRE warrior or DUAL monster from hand or deck to this card
+	--Equip 1 FIRE warrior or dual monster from hand or deck to this card
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_EQUIP)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	e3:SetCode(EVENT_LEAVE_FIELD_P)
 	e3:SetOperation(s.eqcheck)
 	c:RegisterEffect(e3)
-	--Special summon all DUAL monsters that were equipped to this card
+	--Special summon all dual monsters that were equipped to this card
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -71,7 +71,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if c:IsFaceup() and c:IsRelateToEffect(e) then
 		s.equipop(c,e,tp,tc)
 	else
-		Duel.SendtoGrave(tc,REASON_EFFECT)
+		Duel.SendtoRest(tc,REASON_EFFECT)
 	end
 end
 function s.eqcheck(e,tp,eg,ep,ev,re,r,rp)

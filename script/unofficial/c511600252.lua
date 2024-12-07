@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	alias=c:GetOriginalCodeRule()
 	--link summon
 	Link.AddProcedure(c,s.matfilter,1,1)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--recycle
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(alias,0))

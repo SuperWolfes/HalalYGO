@@ -1,5 +1,5 @@
 --眷現の呪眼
---Evil Eye Reemergence
+--Goodie Reemergence
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)

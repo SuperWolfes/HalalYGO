@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x101b),1,1,Synchro.NonTunerEx(Card.IsSetCard,0x101b),1,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--handes
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -35,7 +35,7 @@ function s.initial_effect(c)
 	e4:SetCode(EVENT_DESTROYED)
 	e4:SetCondition(s.setcon)
 	e4:SetTarget(s.settg)
-	e4:SetOperation(s.setop)
+	e4:SetOperation(s.vetop)
 	c:RegisterEffect(e4)
 end
 s.listed_series={0x101b}
@@ -59,7 +59,7 @@ function s.hdop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(tp,0,LOCATION_HAND)
 	if #g>0 then
 		local sg=g:RandomSelect(1-tp,e:GetLabel())
-		Duel.SendtoGrave(sg,REASON_DISCARD+REASON_EFFECT)
+		Duel.SendtoRest(sg,REASON_DISCARD+REASON_EFFECT)
 	end
 end
 function s.indtg(e,c)
@@ -75,7 +75,7 @@ function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
 		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then

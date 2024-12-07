@@ -26,9 +26,9 @@ function s.initial_effect(c)
 	e3:SetOperation(s.operation)
 	c:RegisterEffect(e3)
 end
-s.listed_names={CARD_DARK_MAGICIAN}
+s.listed_names={CARD_DARK_MENTOR}
 function s.thfilter(c)
-	return c:ListsCode(CARD_DARK_MAGICIAN) and c:IsActionalTrap() and c:IsAbleToHand()
+	return c:ListsCode(CARD_DARK_MENTOR) and c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

@@ -1,9 +1,9 @@
 --魔導原典 クロウリー
---Crowley the Origin of Prophecy
+--Crowley the Origin of Prediction
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_MENTOR),2,2)
 	--to hand
 	local e1=Effect.CreateEffect(c)

@@ -45,7 +45,7 @@ end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local dam=Duel.GetChainInfo(0,CHAININFO_TARGET_PARAM)
 	if Duel.Damage(tp,dam,REASON_EFFECT)~=0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 then
-		local g=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,e,tp,dam)
+		local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,e,tp,dam)
 		if #g~=0 and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 			local sg=g:Select(tp,1,1,nil)

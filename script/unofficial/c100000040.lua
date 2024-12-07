@@ -1,5 +1,5 @@
 --インフィニティ・フォース (TF6)
---Infinity Force (TF6)
+--Infinity Fcoree (TF6)
 local s,id=GetID()
 function s.initial_effect(c)
 	--destroy

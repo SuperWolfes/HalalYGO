@@ -1,5 +1,5 @@
 --狂食召喚－グール・サモナー
---Ghoul Summoner
+--Rahul Summoner
 --updated by ClaireStanfield
 local s,id=GetID()
 function s.initial_effect(c)

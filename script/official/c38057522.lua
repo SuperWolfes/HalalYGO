@@ -1,5 +1,5 @@
 --大霊術－「一輪」
---Grand Guardianual Art - Ichirin
+--Grand Spilocked Art - Ichirin
 --Scripted by ahtelel
 
 local s,id=GetID()

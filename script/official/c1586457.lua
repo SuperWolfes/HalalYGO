@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.spfilter(c)
-	return c:IsRace(RACE_MACHINE) and c:IsAbleToGraveAsCost()
+	return c:IsRace(RACE_MACHINE) and c:IsAbleToRestAsCost()
 end
 function s.spcon(e,c)
 	if c==nil then return true end
@@ -36,6 +36,6 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	g:DeleteGroup()
 end

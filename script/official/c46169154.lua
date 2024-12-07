@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetCondition(s.sumcon)
 	e1:SetValue(1)
 	c:RegisterEffect(e1)
-	--Send to GY and increase ATK
+	--Send to RP and increase ATK
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOREST+CATEGORY_ATKCHANGE)
@@ -38,13 +38,13 @@ function s.sumcon(e,c,minc,zone)
 	return minc==0 and c:GetLevel()>4 and Duel.GetLocationCount(tp,LOCATION_MZONE,tp,LOCATION_REASON_TOFIELD,zone)>0
 		and (Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)==0 or not Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil))
 end
---Send to GY and increase ATK
+--Send to RP and increase ATK
 function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 	local bc=Duel.GetBattleMonster(tp)
 	return bc and bc:IsAttribute(ATTRIBUTE_EARTH) and bc:IsRace(RACE_WARRIOR)
 end
 function s.tgfilter(c)
-	return c:IsAttribute(ATTRIBUTE_EARTH) and c:IsRace(RACE_WARRIOR) and not c:IsCode(id) and c:IsAbleToGrave()
+	return c:IsAttribute(ATTRIBUTE_EARTH) and c:IsRace(RACE_WARRIOR) and not c:IsCode(id) and c:IsAbleToRest()
 end
 function s.atkfilter(c)
 	return c:IsSetCard(0x161) and c:IsFaceup() and not c:IsStatus(STATUS_BATTLE_DESTROYED)
@@ -57,7 +57,7 @@ end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local sg=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
-	if #sg>0 and Duel.SendtoGrave(sg,REASON_EFFECT)>0 and sg:GetFirst():IsLocation(LOCATION_REST) then
+	if #sg>0 and Duel.SendtoRest(sg,REASON_EFFECT)>0 and sg:GetFirst():IsLocation(LOCATION_REST) then
 		local atkg=Duel.GetMatchingGroup(s.atkfilter,tp,LOCATION_MZONE,0,nil)
 		if #atkg==0 then return end
 		Duel.BreakEffect()

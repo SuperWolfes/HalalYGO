@@ -6,7 +6,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz summon
 	Xyz.AddProcedure(c,nil,1,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -142,7 +142,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.MoveToField(tc,tp,p,loc,pos,true,(1<<seq))
 		end
 	end
-	Duel.SendtoGrave(sg2:Filter(s.fil2,nil),REASON_RULE)
+	Duel.SendtoRest(sg2:Filter(s.fil2,nil),REASON_RULE)
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

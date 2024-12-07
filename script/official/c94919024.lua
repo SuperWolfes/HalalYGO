@@ -63,7 +63,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.NegateActivation(ev) then
 		if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:GetHandler():IsRelateToEffect(re) then
-			Duel.SendtoGrave(eg,REASON_EFFECT)
+			Duel.SendtoRest(eg,REASON_EFFECT)
 		end
 		Duel.Recover(tp,1000,REASON_EFFECT)
 		Duel.Recover(1-tp,1000,REASON_EFFECT)

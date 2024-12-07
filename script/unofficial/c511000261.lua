@@ -1,7 +1,7 @@
---Raviel, Emperor of Illusorasmal Demons
+--Raviel, Emperor of Illusorasmal Wardens
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	c:SetUniqueOnField(1,1,id)
 	--Cannot Special Summon
 	local e1=Effect.CreateEffect(c)

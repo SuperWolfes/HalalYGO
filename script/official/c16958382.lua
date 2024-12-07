@@ -3,7 +3,7 @@
 --Scripted by ahtelel & pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	aux.AddMaleficSummonProcedure(c,nil,LOCATION_EXTRA,s.spcon)
 	--Special Summon condition
 	local e1=Effect.CreateEffect(c)
@@ -40,13 +40,13 @@ function s.descon(e)
 	return not (Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,27564031),e:GetHandlerPlayer(),LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) or Duel.IsEnvironment(27564031))
 end
 function s.costfilter(c)
-	return c:IsSetCard(0x23) and c:IsAbleToGraveAsCost()
+	return c:IsSetCard(0x23) and c:IsAbleToRestAsCost()
 end
 function s.retcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_DECK,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_DECK,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.retfilter(c)
 	return c:IsType(TYPE_SYNCHRO) and c:IsLevel(8) and c:IsAbleToExtra() and c:IsFaceup()

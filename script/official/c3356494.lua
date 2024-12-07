@@ -3,9 +3,9 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGHT),2,2,s.lcheck)
-	--Add from rest place to hand
+	--Add from resting place to hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND)
@@ -70,7 +70,7 @@ function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(s.descfilter,tp,LOCATION_HAND,0,nil)
 	if chk==0 then return aux.SelectUnselectGroup(g,e,tp,1,2,s.rescon,0) end
 	local sg=aux.SelectUnselectGroup(g,e,tp,1,2,s.rescon,1,tp,HINTMSG_DISCARD,s.rescon)
-	Duel.SendtoGrave(sg,REASON_COST+REASON_DISCARD)
+	Duel.SendtoRest(sg,REASON_COST+REASON_DISCARD)
 end
 function s.filter(c)
 	return c:IsSummonType(SUMMON_TYPE_SPECIAL)

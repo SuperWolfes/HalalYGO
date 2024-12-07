@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Synchro Summon
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),2,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	c:SetUniqueOnField(1,0,id)
 	--Effect Absorber
 	local e1=Effect.CreateEffect(c)

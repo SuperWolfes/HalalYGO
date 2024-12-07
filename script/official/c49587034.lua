@@ -1,5 +1,5 @@
 --光の封札剣
---Lightforce Sword
+--Lightfcoree Sword
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

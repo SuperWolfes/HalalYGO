@@ -1,5 +1,5 @@
 --呪眼の眷属 バジリウス
---Basilius, Retainer of the Evil Eye
+--Basilius, Retainer of the Goodie
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
@@ -31,7 +31,7 @@ function s.spcon(e,c)
 		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,0x129),tp,LOCATION_MZONE,0,1,nil)
 end
 function s.tgfilter(c)
-	return c:IsActionalTrap() and c:IsSetCard(0x129) and c:IsAbleToGrave()
+	return c:IsActionalTrap() and c:IsSetCard(0x129) and c:IsAbleToRest()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -41,6 +41,6 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end

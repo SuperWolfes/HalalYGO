@@ -4,11 +4,11 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion summon 1 "Fossil" fusion monster
-	--By banishing appropriate monsters from either GY as material
+	--By banishing appropriate monsters from either RP as material
 	local e1=Fusion.CreateSummonEff({handler=c,fusfilter=aux.FilterBoolFunction(Card.IsSetCard,0x14c),matfilter=aux.FALSE,extrafil=s.fextra,
 										stage2=s.stage2,extraop=Fusion.BanishMaterial,extratg=s.extratarget})
 	c:RegisterEffect(e1)
-	--Add this card from GY to hand
+	--Add this card from RP to hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND)

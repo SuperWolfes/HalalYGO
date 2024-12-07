@@ -3,7 +3,7 @@
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--2 "Prank-Kids" monsters
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x120),2,2)
 	--A "Prank-Kids" pointed by this card gains 1000 ATK/DEF
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.atktg)
 	e1:SetValue(1000)
 	c:RegisterEffect(e1)
-	--Add 2 "Prank-Kids" cards from GY
+	--Add 2 "Prank-Kids" cards from RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TOHAND)

@@ -1,7 +1,7 @@
 --Sin 青眼の白龍
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	c:SetUniqueOnField(1,1,aux.MaleficUniqueFilter(c),LOCATION_MZONE)
 	aux.AddMaleficSummonProcedure(c,CARD_BLUEEYES_W_DRAGON,LOCATION_DECK)
 	--selfdes

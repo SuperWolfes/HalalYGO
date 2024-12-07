@@ -48,7 +48,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	if bc:IsFaceup() and bc:IsRelateToBattle() then
 		local rk=bc:GetRank()
 		local g=nil
-		local tg=Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,0,LOCATION_EXTRA,nil)
+		local tg=Duel.GetMatchingGroup(Card.IsAbleToRest,tp,0,LOCATION_EXTRA,nil)
 		if #tg==0 then return end
 		if rk<4 then
 			Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOREST)
@@ -62,7 +62,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 			g=tg:Select(1-tp,rk,rk,nil)
 		end
 		if #g>0 then
-			Duel.SendtoGrave(g,REASON_EFFECT)
+			Duel.SendtoRest(g,REASON_EFFECT)
 		end
 		if rk==4 then
 			Duel.ShuffleExtra(1-tp)

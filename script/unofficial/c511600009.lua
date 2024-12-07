@@ -16,7 +16,7 @@ function s.filter(c)
 	return c:IsFaceup() and c:IsRace(RACE_MACHINE) and c:GetLevel()>0
 end
 function s.cfilter(c)
-	return c:IsAbleToGrave() and c:IsCode(id)
+	return c:IsAbleToRest() and c:IsCode(id)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and s.filter(chkc) and chkc:IsControler(tp) end
@@ -32,7 +32,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsRelateToEffect(e) and tc:IsFaceup() then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local sg=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_DECK,0,1,99,nil)
-		Duel.SendtoGrave(sg,REASON_EFFECT)
+		Duel.SendtoRest(sg,REASON_EFFECT)
 		local ct=sg:FilterCount(Card.IsLocation,nil,LOCATION_REST)
 		if ct>0 then
 			Duel.Damage(1-tp,ct*tc:GetLevel()*100,REASON_EFFECT)

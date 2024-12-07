@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.thtg)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
-	--Send to GY
+	--Send to RP
 	local e2=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOREST)
@@ -54,6 +54,6 @@ function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.HintSelection(pc,true)
 	local g=pc:GetColumnGroup():Filter(Card.IsControler,nil,1-tp)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end

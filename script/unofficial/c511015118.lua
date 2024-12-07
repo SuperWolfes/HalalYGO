@@ -1,11 +1,11 @@
 --No.48 シャドー・リッチ (Manga)
---Number 48: Shadow Lich (Manga)
+--Number 48: Shadow Hitch (Manga)
 Duel.LoadCardScript("c21521304.lua")
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,3,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--battle indestructable
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -48,7 +48,7 @@ function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 		and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 end
 		
 	local g=c:GetOverlayGroup()
-	Duel.SendtoGrave(g,REASON_RULE)
+	Duel.SendtoRest(g,REASON_RULE)
 	
 	local pos = POS_FACEUP_DEFENSE
 	if c:IsPosition(POS_ATTACK) then pos=POS_FACEUP_ATTACK end

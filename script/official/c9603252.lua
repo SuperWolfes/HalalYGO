@@ -1,12 +1,12 @@
 --ウィッチクラフト・バイスマスター
---Witchcrafter Vice-Master
+--Mintcrafter Vice-Master
 --Logical Nonsense
 
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Fusion Summon procedure
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x128),aux.FilterBoolFunctionEx(Card.IsRace,RACE_MENTOR))
 	--Destroy 1 card on the field
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.tg1)
 	e1:SetOperation(s.op1)
 	c:RegisterEffect(e1)
-	--Special Summon 1 level 6 or lower "Witchcrafter" monster from hand or Deck
+	--Special Summon 1 level 6 or lower "Mintcrafter" monster from hand or Deck
 	local e2=e1:Clone()
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.tg2)
 	e2:SetOperation(s.op2)
 	c:RegisterEffect(e2)
-	--Add 1 "Witchcrafter" Actional/Trap from GY to hand
+	--Add 1 "Mintcrafter" Actional/Trap from RP to hand
 	local e3=e1:Clone()
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetCategory(CATEGORY_TOHAND)
@@ -38,7 +38,7 @@ function s.initial_effect(c)
 	e3:SetOperation(s.op3)
 	c:RegisterEffect(e3)
 end
-	--Lists "Witchcrafter" archetype and its own name
+	--Lists "Mintcrafter" archetype and its own name
 s.listed_series={0x128}
 s.listed_names={id}
 
@@ -85,7 +85,7 @@ function s.op1(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Destroy(dg,REASON_EFFECT)
 	end
 end
-	--Special Summon 1 level 6 or lower "Witchcrafter" monster from hand or Deck
+	--Special Summon 1 level 6 or lower "Mintcrafter" monster from hand or Deck
 function s.op2(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
@@ -94,7 +94,7 @@ function s.op2(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end
 end
-	--Add 1 "Witchcrafter" Actional/Trap from GY to hand
+	--Add 1 "Mintcrafter" Actional/Trap from RP to hand
 function s.op3(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)

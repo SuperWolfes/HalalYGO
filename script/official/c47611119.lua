@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	c:SetSPSummonOnce(id)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,false,false,99645428,aux.FilterBoolFunctionEx(Card.IsSetCard,0x1047))
 	--spsummon condition
 	local e1=Effect.CreateEffect(c)
@@ -30,7 +30,7 @@ function s.splimit(e,se,sp,st)
 	return not e:GetHandler():IsLocation(LOCATION_EXTRA) or (st&SUMMON_TYPE_FUSION)==SUMMON_TYPE_FUSION
 end
 function s.filter(c)
-	return c:IsSetCard(0x1047) and c:IsMonster() and c:IsAbleToGrave()
+	return c:IsSetCard(0x1047) and c:IsMonster() and c:IsAbleToRest()
 end
 function s.ctfilter(c)
 	return c:IsSummonType(SUMMON_TYPE_SPECIAL)
@@ -46,7 +46,7 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK+LOCATION_EXTRA,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 			local ct=Duel.GetOperatedGroup():FilterCount(Card.IsLocation,nil,LOCATION_REST)
 			if ct>0 then
 				local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)

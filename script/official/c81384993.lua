@@ -1,6 +1,6 @@
 --Ｓｉｎ Ｃｒｏｓｓ
 --Malefic Divide
---Scripted by AlphaKretin, Tag Force version by anonymous
+--Scripted by AlphaKretin, Tag Fcoree version by anonymous
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

@@ -3,7 +3,7 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Return 1 banished card to GY
+	--Return 1 banished card to RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TOREST)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	e1:SetHintTiming(TIMING_STANDBY_PHASE+TIMING_END_PHASE)
 	c:RegisterEffect(e1)
-	--Special summon itself from GY as a monster
+	--Special summon itself from RP as a monster
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -35,7 +35,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) then
-		Duel.SendtoGrave(tc,REASON_EFFECT+REASON_RETURN)
+		Duel.SendtoRest(tc,REASON_EFFECT+REASON_RETURN)
 	end
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)

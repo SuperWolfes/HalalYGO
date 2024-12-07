@@ -1,5 +1,5 @@
 --天空賢者ミネルヴァ
---Minerva, Scholar of the Sky
+--Miner, Looker of the Sky
 local s,id=GetID()
 function s.initial_effect(c)
 	--atk
@@ -35,7 +35,7 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	c:RegisterEffect(e1)
 	local rc=re:GetHandler()
 	if not rc then return end
-	local g=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.thfilter),tp,LOCATION_REST,0,nil,rc:GetCode())
+	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.thfilter),tp,LOCATION_REST,0,nil,rc:GetCode())
 	if Duel.IsEnvironment(CARD_SANCTUARY_SKY) and #g>0 then
 		Duel.Hint(HINT_CARD,0,id)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)

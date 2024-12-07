@@ -1,7 +1,6 @@
 --デスペラード・リボルバー・ドラゴン
 --Desperado Barrel Dragon
 local s,id=GetID()
-
 function s.initial_effect(c)
 	--Special summon itself from hand
 	local e1=Effect.CreateEffect(c)
@@ -18,10 +17,9 @@ function s.initial_effect(c)
 	--Toss a coin 3 times, destroy monsters on the field, up to number of heads
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCategory(CATEGORY_DESTROY+CATEGORY_COIN+CATEGORY_DRAW)
+	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_FREE_CHAIN)
-	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCountLimit(1)
 	e2:SetCondition(s.descon)
@@ -71,7 +69,7 @@ function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_OATH+EFFECT_FLAG_CLIENT_HINT)
 	e1:SetCode(EFFECT_CANNOT_ATTACK)
-	e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+	e1:SetReset(RESET_EVENT|RESETS_STANDARD|RESET_PHASE|PHASE_END)
 	e:GetHandler():RegisterEffect(e1)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -83,14 +81,14 @@ end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
 	if #g==0 then return end
-	local c1,c2,c3=Duel.TossCoin(tp,3)
-	local ct=c1+c2+c3
+	local heads=Duel.CountHeads(Duel.TossCoin(tp,3))
+	local ct=heads
 	if ct==0 then return end
 	if ct>#g then ct=#g end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local dg=g:Select(tp,1,ct,nil)
 	Duel.HintSelection(dg)
-	if Duel.Destroy(dg,REASON_EFFECT)>0 and c1+c2+c3==3 then
+	if Duel.Destroy(dg,REASON_EFFECT)>0 and heads==3 then
 		Duel.BreakEffect()
 		Duel.Draw(tp,1,REASON_EFFECT)
 	end

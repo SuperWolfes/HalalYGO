@@ -21,7 +21,7 @@ function s.lockedfil(c)
 	return c:IsSetCard(0x106) and c:IsLockedMonster()
 end
 function s.mfilter(c)
-	return not Duel.IsPlayerAffectedByEffect(c:GetControler(),69832741) and c:HasLevel() and c:IsRace(RACE_CONTAMINED)
+	return not Duel.IsPlayerAffectedByEffect(c:GetControler(),69832741) and c:HasLevel() and c:IsRace(RACE_TOXIC)
 		and c:IsMonster() and c:IsAbleToRemove()
 end
 function s.extrafil(e,tp,eg,ep,ev,re,r,rp,chk)

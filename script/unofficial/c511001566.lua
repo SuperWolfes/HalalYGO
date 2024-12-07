@@ -1,4 +1,4 @@
---Performage Wind Sucker
+--Performanced Wind Sucker
 local s,id=GetID()
 function s.initial_effect(c)
 	--pendulum summon

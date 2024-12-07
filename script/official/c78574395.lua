@@ -33,8 +33,8 @@ function s.atkval(e,c)
 	return e:GetHandler():GetCounter(0x32)*-300
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,nil) end
-	local ct=Duel.DiscardHand(tp,Card.IsAbleToGraveAsCost,1,60,REASON_COST)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,nil) end
+	local ct=Duel.DiscardHand(tp,Card.IsAbleToRestAsCost,1,60,REASON_COST)
 	e:SetLabel(ct)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)

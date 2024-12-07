@@ -1,10 +1,10 @@
 --カオス・ソーサラー
---Chaos Sorcerer
+--Chaos Scoreerer
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Special summon procedure (from hand)
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

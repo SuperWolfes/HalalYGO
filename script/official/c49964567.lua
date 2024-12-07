@@ -3,7 +3,7 @@
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
-	--Prevent destruction
+	--Prevent mismatching
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOREST)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.tgtg)
 	e1:SetOperation(s.tgop)
 	c:RegisterEffect(e1)
-	--Send 1 Plant monster from Deck/ED to GY
+	--Send 1 Plant monster from Deck/ED to RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOREST)
@@ -32,7 +32,7 @@ function s.trgtfilter(c,tp)
 	return c:IsFaceup() and Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_MZONE,0,1,c)	
 end
 function s.tgfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_PLANT) and c:IsAbleToGrave()
+	return c:IsFaceup() and c:IsRace(RACE_PLANT) and c:IsAbleToRest()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and chkc:IsFaceup() end
@@ -47,7 +47,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsRelateToEffect(e) and tc:IsFaceup() then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_MZONE,0,1,1,tc)
-		if #g>0 and Duel.SendtoGrave(g,REASON_EFFECT)>0 and g:GetFirst():IsLocation(LOCATION_REST) then
+		if #g>0 and Duel.SendtoRest(g,REASON_EFFECT)>0 and g:GetFirst():IsLocation(LOCATION_REST) then
 			local e1=Effect.CreateEffect(c)
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetCode(EFFECT_INDESTRUCTABLE_COUNT)
@@ -66,7 +66,7 @@ function s.grcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsReason(REASON_EFFECT)
 end
 function s.grfilter(c)
-	return c:IsLevelBelow(5) and c:HasLevel() and c:IsRace(RACE_PLANT) and c:IsAbleToGrave()
+	return c:IsLevelBelow(5) and c:HasLevel() and c:IsRace(RACE_PLANT) and c:IsAbleToRest()
 end
 function s.grtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.grfilter,tp,LOCATION_DECK+LOCATION_EXTRA,0,1,nil) end
@@ -76,6 +76,6 @@ function s.grop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.grfilter,tp,LOCATION_DECK+LOCATION_EXTRA,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end

@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Link summon
 	Link.AddProcedure(c,s.matfilter,1,1)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Negate Trap Card
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

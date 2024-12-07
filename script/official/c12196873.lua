@@ -1,5 +1,5 @@
 --メタファイズ・デコイドラゴン
---Metaphys Decoy Dragon
+--Metadata Decoy Dragon
 --
 local s,id=GetID()
 function s.initial_effect(c)

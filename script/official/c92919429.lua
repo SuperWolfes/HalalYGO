@@ -1,9 +1,9 @@
 --宣告者の神巫
---Diviner of the Herald
+--Megar of the Herald
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send 1 monster to the GY and change level
+	--Send 1 monster to the RP and change level
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOREST)
@@ -31,7 +31,7 @@ function s.initial_effect(c)
 end
 s.listed_names={id}
 function s.tgfilter(c)
-	return c:IsRace(RACE_WANDERER) and c:IsAbleToGrave()
+	return c:IsRace(RACE_WANDERER) and c:IsAbleToRest()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK+LOCATION_EXTRA,0,1,nil)
@@ -42,7 +42,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tc=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK+LOCATION_EXTRA,0,1,1,nil):GetFirst()
-	if tc and Duel.SendtoGrave(tc,REASON_EFFECT)>0 and tc:IsLocation(LOCATION_REST) and tc:HasLevel() and c:IsFaceup() and c:IsRelateToEffect(e) then
+	if tc and Duel.SendtoRest(tc,REASON_EFFECT)>0 and tc:IsLocation(LOCATION_REST) and tc:HasLevel() and c:IsFaceup() and c:IsRelateToEffect(e) then
 		c:UpdateLevel(tc:GetLevel(),RESET_EVENT+RESETS_STANDARD_DISABLE+RESET_PHASE+PHASE_END)
 	end
 end

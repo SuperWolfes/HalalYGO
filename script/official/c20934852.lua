@@ -3,16 +3,15 @@
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	-- 2+ WATER monsters
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WATER),2)
 	-- Attack target limit
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_CANNOT_SELECT_BATTLE_TARGET)
-	e1:SetRange(LOCATION_MZONE)
+	e1:SetRange(LOCATION_EMZONE)
 	e1:SetTargetRange(0,LOCATION_MZONE)
-	e1:SetCondition(function(e)return e:GetHandler():IsInExtraMZone()end)
 	e1:SetValue(function(e,c)return c~=e:GetHandler()end)
 	c:RegisterEffect(e1)
 	-- Return to hand
@@ -39,13 +38,13 @@ function s.initial_effect(c)
 	e3:SetOperation(s.spop)
 	c:RegisterEffect(e3)
 end
-s.listed_series={0x12b}
+s.listed_series={SET_MARINCESS}
 function s.thfilter(c,e,tp)
 	return ((c:IsMonster() and c:IsAttribute(ATTRIBUTE_WATER) and c:IsFaceup() and c:IsControler(tp))
 		or c:IsControler(1-tp)) and c:IsAbleToHand() and c:IsCanBeEffectTarget(e)
 end
 function s.rescon(sg,e,tp,mg)
-    return sg:FilterCount(Card.IsControler,nil,tp)==1
+	return sg:FilterCount(Card.IsControler,nil,tp)==1
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
@@ -62,12 +61,11 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsTurnPlayer(1-tp) and re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP)
+	return Duel.IsTurnPlayer(1-tp) and re:IsActionalTrapEffect() and Duel.IsChainDisablable(ev)
 		and (Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_LOCATION)&LOCATION_ONFIELD)~=0
-		and Duel.IsChainDisablable(ev)
 end
 function s.spfilter(c,e,tp)
-	return c:IsSetCard(0x12b) and c:IsOriginalType(TYPE_MONSTER) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsSetCard(SET_MARINCESS) and c:IsOriginalType(TYPE_MONSTER) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

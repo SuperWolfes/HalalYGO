@@ -19,7 +19,7 @@ function card.spcon(e, tp, eg, ep, ev, re, r, rp)
 end
 
 function card.spfilter(c, e, tp)
-	return c:IsRace(RACE_CONTAMINED) and c:IsAttackBelow(1000) and c:IsCanBeSpecialSummoned(e, 0, tp, false, false)
+	return c:IsRace(RACE_TOXIC) and c:IsAttackBelow(1000) and c:IsCanBeSpecialSummoned(e, 0, tp, false, false)
 end
 
 function card.rescon(sg, e, tp, mg)

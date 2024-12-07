@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Contact Fusion procedure
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,CARD_NEOS,17955766,54959865)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,s.splimit)
 	--Destroy all Actionals/Traps on the field

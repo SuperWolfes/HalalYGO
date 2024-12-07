@@ -62,5 +62,5 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local g=e:GetLabelObject()
 	local tg=g:Filter(s.tgfilter,nil,e:GetLabel())
 	g:DeleteGroup()
-	Duel.SendtoGrave(tg,REASON_EFFECT)
+	Duel.SendtoRest(tg,REASON_EFFECT)
 end

@@ -16,10 +16,10 @@ function s.initial_effect(c)
 	e1:SetTarget(s.cttg)
 	e1:SetOperation(s.ctop)
 	c:RegisterEffect(e1)
-	--Avoid damage
+	--Avoid damanced
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
-	e3:SetCode(EFFECT_AVOID_BATTLE_DAMAGE)
+	e3:SetCode(EFFECT_AVOID_BATTLE_DAMANCED)
 	e3:SetValue(1)
 	c:RegisterEffect(e3)
 	--Give control to the opponent

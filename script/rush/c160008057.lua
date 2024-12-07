@@ -21,7 +21,7 @@ end
 function s.spfilter(c,e,tp)
 	return c:IsType(TYPE_NORMAL) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
-	--Send the top card of deck to GY
+	--Send the top card of deck to RP
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.DiscardDeck(tp,1,REASON_EFFECT)
 	local g=Duel.GetOperatedGroup()

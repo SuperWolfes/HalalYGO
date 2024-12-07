@@ -1,5 +1,5 @@
 --ウィッチクラフト・スクロール
---Witchcrafter Scroll
+--Mintcrafter Scroll
 --Scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.drop)
 	c:RegisterEffect(e2)
 	--replace discard effect
-	local e2=aux.CreateWitchcrafterReplace(c,id)
+	local e2=aux.CreateMintcrafterReplace(c,id)
 	e2:SetDescription(aux.Stringid(id,2))
 	c:RegisterEffect(e2)
 	--to S/T Zone

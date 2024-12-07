@@ -810,6 +810,309 @@ WHERE
 UPDATE texts
 SET 
 desc = REPLACE(
+REPLACE(REPLACE(' ' || desc || ' ', ' Roll ', ' Play '), 
+LOWER(' Roll '), LOWER(' Play ')), 
+UPPER(' Roll '), UPPER(' Play ')
+),
+name = REPLACE(
+REPLACE(REPLACE(' ' || name || ' ', ' Roll ', ' Play '), 
+LOWER(' Roll '), LOWER(' Play ')), 
+UPPER(' Roll '), UPPER(' Play ')
+),
+str1 = REPLACE(
+REPLACE(REPLACE(' ' || str1 || ' ', ' Roll ', ' Play '), 
+LOWER(' Roll '), LOWER(' Play ')), 
+UPPER(' Roll '), UPPER(' Play ')
+),
+str2 = REPLACE(
+REPLACE(REPLACE(' ' || str2 || ' ', ' Roll ', ' Play '), 
+LOWER(' Roll '), LOWER(' Play ')), 
+UPPER(' Roll '), UPPER(' Play ')
+),
+str3 = REPLACE(
+REPLACE(REPLACE(' ' || str3 || ' ', ' Roll ', ' Play '), 
+LOWER(' Roll '), LOWER(' Play ')), 
+UPPER(' Roll '), UPPER(' Play ')
+),
+str4 = REPLACE(
+REPLACE(REPLACE(' ' || str4 || ' ', ' Roll ', ' Play '), 
+LOWER(' Roll '), LOWER(' Play ')), 
+UPPER(' Roll '), UPPER(' Play ')
+),
+str5 = REPLACE(
+REPLACE(REPLACE(' ' || str5 || ' ', ' Roll ', ' Play '), 
+LOWER(' Roll '), LOWER(' Play ')), 
+UPPER(' Roll '), UPPER(' Play ')
+),
+str6 = REPLACE(
+REPLACE(REPLACE(' ' || str6 || ' ', ' Roll ', ' Play '), 
+LOWER(' Roll '), LOWER(' Play ')), 
+UPPER(' Roll '), UPPER(' Play ')
+),
+str7 = REPLACE(
+REPLACE(REPLACE(' ' || str7 || ' ', ' Roll ', ' Play '), 
+LOWER(' Roll '), LOWER(' Play ')), 
+UPPER(' Roll '), UPPER(' Play ')
+),
+str8 = REPLACE(
+REPLACE(REPLACE(' ' || str8 || ' ', ' Roll ', ' Play '), 
+LOWER(' Roll '), LOWER(' Play ')), 
+UPPER(' Roll '), UPPER(' Play ')
+),
+str9 = REPLACE(
+REPLACE(REPLACE(' ' || str9 || ' ', ' Roll ', ' Play '), 
+LOWER(' Roll '), LOWER(' Play ')), 
+UPPER(' Roll '), UPPER(' Play ')
+),
+str10 = REPLACE(
+REPLACE(REPLACE(' ' || str10 || ' ', ' Roll ', ' Play '), 
+LOWER(' Roll '), LOWER(' Play ')), 
+UPPER(' Roll '), UPPER(' Play ')
+),
+str11 = REPLACE(
+REPLACE(REPLACE(' ' || str11 || ' ', ' Roll ', ' Play '), 
+LOWER(' Roll '), LOWER(' Play ')), 
+UPPER(' Roll '), UPPER(' Play ')
+),
+str12 = REPLACE(
+REPLACE(REPLACE(' ' || str12 || ' ', ' Roll ', ' Play '), 
+LOWER(' Roll '), LOWER(' Play ')), 
+UPPER(' Roll '), UPPER(' Play ')
+),
+str13 = REPLACE(
+REPLACE(REPLACE(' ' || str13 || ' ', ' Roll ', ' Play '), 
+LOWER(' Roll '), LOWER(' Play ')), 
+UPPER(' Roll '), UPPER(' Play ')
+),
+str14 = REPLACE(
+REPLACE(REPLACE(' ' || str14 || ' ', ' Roll ', ' Play '), 
+LOWER(' Roll '), LOWER(' Play ')), 
+UPPER(' Roll '), UPPER(' Play ')
+),
+str15 = REPLACE(
+REPLACE(REPLACE(' ' || str15 || ' ', ' Roll ', ' Play '), 
+LOWER(' Roll '), LOWER(' Play ')), 
+UPPER(' Roll '), UPPER(' Play ')
+),
+str16 = REPLACE(
+REPLACE(REPLACE(' ' || str16 || ' ', ' Roll ', ' Play '), 
+LOWER(' Roll '), LOWER(' Play ')), 
+UPPER(' Roll '), UPPER(' Play ')
+)
+WHERE 
+' ' || desc || ' ' LIKE '% Roll %' OR 
+' ' || desc || ' ' LIKE '% ' || LOWER('Roll') || ' %' OR 
+' ' || desc || ' ' LIKE '% ' || UPPER('Roll') || ' %' OR 
+' ' || name || ' ' LIKE '% Roll %' OR 
+' ' || name || ' ' LIKE '% ' || LOWER('Roll') || ' %' OR 
+' ' || name || ' ' LIKE '% ' || UPPER('Roll') || ' %';
+
+
+UPDATE texts
+SET 
+desc = REPLACE(
+REPLACE(REPLACE(' ' || desc || ' ', ' ROLL ', ' PLAY '), 
+LOWER(' ROLL '), LOWER(' PLAY ')), 
+UPPER(' ROLL '), UPPER(' PLAY ')
+),
+name = REPLACE(
+REPLACE(REPLACE(' ' || name || ' ', ' ROLL ', ' PLAY '), 
+LOWER(' ROLL '), LOWER(' PLAY ')), 
+UPPER(' ROLL '), UPPER(' PLAY ')
+),
+str1 = REPLACE(
+REPLACE(REPLACE(' ' || str1 || ' ', ' ROLL ', ' PLAY '), 
+LOWER(' ROLL '), LOWER(' PLAY ')), 
+UPPER(' ROLL '), UPPER(' PLAY ')
+),
+str2 = REPLACE(
+REPLACE(REPLACE(' ' || str2 || ' ', ' ROLL ', ' PLAY '), 
+LOWER(' ROLL '), LOWER(' PLAY ')), 
+UPPER(' ROLL '), UPPER(' PLAY ')
+),
+str3 = REPLACE(
+REPLACE(REPLACE(' ' || str3 || ' ', ' ROLL ', ' PLAY '), 
+LOWER(' ROLL '), LOWER(' PLAY ')), 
+UPPER(' ROLL '), UPPER(' PLAY ')
+),
+str4 = REPLACE(
+REPLACE(REPLACE(' ' || str4 || ' ', ' ROLL ', ' PLAY '), 
+LOWER(' ROLL '), LOWER(' PLAY ')), 
+UPPER(' ROLL '), UPPER(' PLAY ')
+),
+str5 = REPLACE(
+REPLACE(REPLACE(' ' || str5 || ' ', ' ROLL ', ' PLAY '), 
+LOWER(' ROLL '), LOWER(' PLAY ')), 
+UPPER(' ROLL '), UPPER(' PLAY ')
+),
+str6 = REPLACE(
+REPLACE(REPLACE(' ' || str6 || ' ', ' ROLL ', ' PLAY '), 
+LOWER(' ROLL '), LOWER(' PLAY ')), 
+UPPER(' ROLL '), UPPER(' PLAY ')
+),
+str7 = REPLACE(
+REPLACE(REPLACE(' ' || str7 || ' ', ' ROLL ', ' PLAY '), 
+LOWER(' ROLL '), LOWER(' PLAY ')), 
+UPPER(' ROLL '), UPPER(' PLAY ')
+),
+str8 = REPLACE(
+REPLACE(REPLACE(' ' || str8 || ' ', ' ROLL ', ' PLAY '), 
+LOWER(' ROLL '), LOWER(' PLAY ')), 
+UPPER(' ROLL '), UPPER(' PLAY ')
+),
+str9 = REPLACE(
+REPLACE(REPLACE(' ' || str9 || ' ', ' ROLL ', ' PLAY '), 
+LOWER(' ROLL '), LOWER(' PLAY ')), 
+UPPER(' ROLL '), UPPER(' PLAY ')
+),
+str10 = REPLACE(
+REPLACE(REPLACE(' ' || str10 || ' ', ' ROLL ', ' PLAY '), 
+LOWER(' ROLL '), LOWER(' PLAY ')), 
+UPPER(' ROLL '), UPPER(' PLAY ')
+),
+str11 = REPLACE(
+REPLACE(REPLACE(' ' || str11 || ' ', ' ROLL ', ' PLAY '), 
+LOWER(' ROLL '), LOWER(' PLAY ')), 
+UPPER(' ROLL '), UPPER(' PLAY ')
+),
+str12 = REPLACE(
+REPLACE(REPLACE(' ' || str12 || ' ', ' ROLL ', ' PLAY '), 
+LOWER(' ROLL '), LOWER(' PLAY ')), 
+UPPER(' ROLL '), UPPER(' PLAY ')
+),
+str13 = REPLACE(
+REPLACE(REPLACE(' ' || str13 || ' ', ' ROLL ', ' PLAY '), 
+LOWER(' ROLL '), LOWER(' PLAY ')), 
+UPPER(' ROLL '), UPPER(' PLAY ')
+),
+str14 = REPLACE(
+REPLACE(REPLACE(' ' || str14 || ' ', ' ROLL ', ' PLAY '), 
+LOWER(' ROLL '), LOWER(' PLAY ')), 
+UPPER(' ROLL '), UPPER(' PLAY ')
+),
+str15 = REPLACE(
+REPLACE(REPLACE(' ' || str15 || ' ', ' ROLL ', ' PLAY '), 
+LOWER(' ROLL '), LOWER(' PLAY ')), 
+UPPER(' ROLL '), UPPER(' PLAY ')
+),
+str16 = REPLACE(
+REPLACE(REPLACE(' ' || str16 || ' ', ' ROLL ', ' PLAY '), 
+LOWER(' ROLL '), LOWER(' PLAY ')), 
+UPPER(' ROLL '), UPPER(' PLAY ')
+)
+WHERE 
+' ' || desc || ' ' LIKE '% ROLL %' OR 
+' ' || desc || ' ' LIKE '% ' || LOWER('ROLL') || ' %' OR 
+' ' || desc || ' ' LIKE '% ' || UPPER('ROLL') || ' %' OR 
+' ' || name || ' ' LIKE '% ROLL %' OR 
+' ' || name || ' ' LIKE '% ' || LOWER('ROLL') || ' %' OR 
+' ' || name || ' ' LIKE '% ' || UPPER('ROLL') || ' %';
+
+
+UPDATE texts
+SET 
+desc = REPLACE(
+REPLACE(REPLACE(' ' || desc || ' ', ' roll ', ' play '), 
+LOWER(' roll '), LOWER(' play ')), 
+UPPER(' roll '), UPPER(' play ')
+),
+name = REPLACE(
+REPLACE(REPLACE(' ' || name || ' ', ' roll ', ' play '), 
+LOWER(' roll '), LOWER(' play ')), 
+UPPER(' roll '), UPPER(' play ')
+),
+str1 = REPLACE(
+REPLACE(REPLACE(' ' || str1 || ' ', ' roll ', ' play '), 
+LOWER(' roll '), LOWER(' play ')), 
+UPPER(' roll '), UPPER(' play ')
+),
+str2 = REPLACE(
+REPLACE(REPLACE(' ' || str2 || ' ', ' roll ', ' play '), 
+LOWER(' roll '), LOWER(' play ')), 
+UPPER(' roll '), UPPER(' play ')
+),
+str3 = REPLACE(
+REPLACE(REPLACE(' ' || str3 || ' ', ' roll ', ' play '), 
+LOWER(' roll '), LOWER(' play ')), 
+UPPER(' roll '), UPPER(' play ')
+),
+str4 = REPLACE(
+REPLACE(REPLACE(' ' || str4 || ' ', ' roll ', ' play '), 
+LOWER(' roll '), LOWER(' play ')), 
+UPPER(' roll '), UPPER(' play ')
+),
+str5 = REPLACE(
+REPLACE(REPLACE(' ' || str5 || ' ', ' roll ', ' play '), 
+LOWER(' roll '), LOWER(' play ')), 
+UPPER(' roll '), UPPER(' play ')
+),
+str6 = REPLACE(
+REPLACE(REPLACE(' ' || str6 || ' ', ' roll ', ' play '), 
+LOWER(' roll '), LOWER(' play ')), 
+UPPER(' roll '), UPPER(' play ')
+),
+str7 = REPLACE(
+REPLACE(REPLACE(' ' || str7 || ' ', ' roll ', ' play '), 
+LOWER(' roll '), LOWER(' play ')), 
+UPPER(' roll '), UPPER(' play ')
+),
+str8 = REPLACE(
+REPLACE(REPLACE(' ' || str8 || ' ', ' roll ', ' play '), 
+LOWER(' roll '), LOWER(' play ')), 
+UPPER(' roll '), UPPER(' play ')
+),
+str9 = REPLACE(
+REPLACE(REPLACE(' ' || str9 || ' ', ' roll ', ' play '), 
+LOWER(' roll '), LOWER(' play ')), 
+UPPER(' roll '), UPPER(' play ')
+),
+str10 = REPLACE(
+REPLACE(REPLACE(' ' || str10 || ' ', ' roll ', ' play '), 
+LOWER(' roll '), LOWER(' play ')), 
+UPPER(' roll '), UPPER(' play ')
+),
+str11 = REPLACE(
+REPLACE(REPLACE(' ' || str11 || ' ', ' roll ', ' play '), 
+LOWER(' roll '), LOWER(' play ')), 
+UPPER(' roll '), UPPER(' play ')
+),
+str12 = REPLACE(
+REPLACE(REPLACE(' ' || str12 || ' ', ' roll ', ' play '), 
+LOWER(' roll '), LOWER(' play ')), 
+UPPER(' roll '), UPPER(' play ')
+),
+str13 = REPLACE(
+REPLACE(REPLACE(' ' || str13 || ' ', ' roll ', ' play '), 
+LOWER(' roll '), LOWER(' play ')), 
+UPPER(' roll '), UPPER(' play ')
+),
+str14 = REPLACE(
+REPLACE(REPLACE(' ' || str14 || ' ', ' roll ', ' play '), 
+LOWER(' roll '), LOWER(' play ')), 
+UPPER(' roll '), UPPER(' play ')
+),
+str15 = REPLACE(
+REPLACE(REPLACE(' ' || str15 || ' ', ' roll ', ' play '), 
+LOWER(' roll '), LOWER(' play ')), 
+UPPER(' roll '), UPPER(' play ')
+),
+str16 = REPLACE(
+REPLACE(REPLACE(' ' || str16 || ' ', ' roll ', ' play '), 
+LOWER(' roll '), LOWER(' play ')), 
+UPPER(' roll '), UPPER(' play ')
+)
+WHERE 
+' ' || desc || ' ' LIKE '% roll %' OR 
+' ' || desc || ' ' LIKE '% ' || LOWER('roll') || ' %' OR 
+' ' || desc || ' ' LIKE '% ' || UPPER('roll') || ' %' OR 
+' ' || name || ' ' LIKE '% roll %' OR 
+' ' || name || ' ' LIKE '% ' || LOWER('roll') || ' %' OR 
+' ' || name || ' ' LIKE '% ' || UPPER('roll') || ' %';
+
+
+UPDATE texts
+SET 
+desc = REPLACE(
 REPLACE(REPLACE(' ' || desc || ' ', ' Geb ', ' jeo '), 
 LOWER(' Geb '), LOWER(' jeo ')), 
 UPPER(' Geb '), UPPER(' jeo ')
@@ -1007,6 +1310,309 @@ WHERE
 ' ' || name || ' ' LIKE '% Imp %' OR 
 ' ' || name || ' ' LIKE '% ' || LOWER('Imp') || ' %' OR 
 ' ' || name || ' ' LIKE '% ' || UPPER('Imp') || ' %';
+
+
+UPDATE texts
+SET 
+desc = REPLACE(
+REPLACE(REPLACE(' ' || desc || ' ', ' die ', ' suffice '), 
+LOWER(' die '), LOWER(' suffice ')), 
+UPPER(' die '), UPPER(' suffice ')
+),
+name = REPLACE(
+REPLACE(REPLACE(' ' || name || ' ', ' die ', ' suffice '), 
+LOWER(' die '), LOWER(' suffice ')), 
+UPPER(' die '), UPPER(' suffice ')
+),
+str1 = REPLACE(
+REPLACE(REPLACE(' ' || str1 || ' ', ' die ', ' suffice '), 
+LOWER(' die '), LOWER(' suffice ')), 
+UPPER(' die '), UPPER(' suffice ')
+),
+str2 = REPLACE(
+REPLACE(REPLACE(' ' || str2 || ' ', ' die ', ' suffice '), 
+LOWER(' die '), LOWER(' suffice ')), 
+UPPER(' die '), UPPER(' suffice ')
+),
+str3 = REPLACE(
+REPLACE(REPLACE(' ' || str3 || ' ', ' die ', ' suffice '), 
+LOWER(' die '), LOWER(' suffice ')), 
+UPPER(' die '), UPPER(' suffice ')
+),
+str4 = REPLACE(
+REPLACE(REPLACE(' ' || str4 || ' ', ' die ', ' suffice '), 
+LOWER(' die '), LOWER(' suffice ')), 
+UPPER(' die '), UPPER(' suffice ')
+),
+str5 = REPLACE(
+REPLACE(REPLACE(' ' || str5 || ' ', ' die ', ' suffice '), 
+LOWER(' die '), LOWER(' suffice ')), 
+UPPER(' die '), UPPER(' suffice ')
+),
+str6 = REPLACE(
+REPLACE(REPLACE(' ' || str6 || ' ', ' die ', ' suffice '), 
+LOWER(' die '), LOWER(' suffice ')), 
+UPPER(' die '), UPPER(' suffice ')
+),
+str7 = REPLACE(
+REPLACE(REPLACE(' ' || str7 || ' ', ' die ', ' suffice '), 
+LOWER(' die '), LOWER(' suffice ')), 
+UPPER(' die '), UPPER(' suffice ')
+),
+str8 = REPLACE(
+REPLACE(REPLACE(' ' || str8 || ' ', ' die ', ' suffice '), 
+LOWER(' die '), LOWER(' suffice ')), 
+UPPER(' die '), UPPER(' suffice ')
+),
+str9 = REPLACE(
+REPLACE(REPLACE(' ' || str9 || ' ', ' die ', ' suffice '), 
+LOWER(' die '), LOWER(' suffice ')), 
+UPPER(' die '), UPPER(' suffice ')
+),
+str10 = REPLACE(
+REPLACE(REPLACE(' ' || str10 || ' ', ' die ', ' suffice '), 
+LOWER(' die '), LOWER(' suffice ')), 
+UPPER(' die '), UPPER(' suffice ')
+),
+str11 = REPLACE(
+REPLACE(REPLACE(' ' || str11 || ' ', ' die ', ' suffice '), 
+LOWER(' die '), LOWER(' suffice ')), 
+UPPER(' die '), UPPER(' suffice ')
+),
+str12 = REPLACE(
+REPLACE(REPLACE(' ' || str12 || ' ', ' die ', ' suffice '), 
+LOWER(' die '), LOWER(' suffice ')), 
+UPPER(' die '), UPPER(' suffice ')
+),
+str13 = REPLACE(
+REPLACE(REPLACE(' ' || str13 || ' ', ' die ', ' suffice '), 
+LOWER(' die '), LOWER(' suffice ')), 
+UPPER(' die '), UPPER(' suffice ')
+),
+str14 = REPLACE(
+REPLACE(REPLACE(' ' || str14 || ' ', ' die ', ' suffice '), 
+LOWER(' die '), LOWER(' suffice ')), 
+UPPER(' die '), UPPER(' suffice ')
+),
+str15 = REPLACE(
+REPLACE(REPLACE(' ' || str15 || ' ', ' die ', ' suffice '), 
+LOWER(' die '), LOWER(' suffice ')), 
+UPPER(' die '), UPPER(' suffice ')
+),
+str16 = REPLACE(
+REPLACE(REPLACE(' ' || str16 || ' ', ' die ', ' suffice '), 
+LOWER(' die '), LOWER(' suffice ')), 
+UPPER(' die '), UPPER(' suffice ')
+)
+WHERE 
+' ' || desc || ' ' LIKE '% die %' OR 
+' ' || desc || ' ' LIKE '% ' || LOWER('die') || ' %' OR 
+' ' || desc || ' ' LIKE '% ' || UPPER('die') || ' %' OR 
+' ' || name || ' ' LIKE '% die %' OR 
+' ' || name || ' ' LIKE '% ' || LOWER('die') || ' %' OR 
+' ' || name || ' ' LIKE '% ' || UPPER('die') || ' %';
+
+
+UPDATE texts
+SET 
+desc = REPLACE(
+REPLACE(REPLACE(' ' || desc || ' ', ' DIE ', ' Suffice '), 
+LOWER(' DIE '), LOWER(' Suffice ')), 
+UPPER(' DIE '), UPPER(' Suffice ')
+),
+name = REPLACE(
+REPLACE(REPLACE(' ' || name || ' ', ' DIE ', ' Suffice '), 
+LOWER(' DIE '), LOWER(' Suffice ')), 
+UPPER(' DIE '), UPPER(' Suffice ')
+),
+str1 = REPLACE(
+REPLACE(REPLACE(' ' || str1 || ' ', ' DIE ', ' Suffice '), 
+LOWER(' DIE '), LOWER(' Suffice ')), 
+UPPER(' DIE '), UPPER(' Suffice ')
+),
+str2 = REPLACE(
+REPLACE(REPLACE(' ' || str2 || ' ', ' DIE ', ' Suffice '), 
+LOWER(' DIE '), LOWER(' Suffice ')), 
+UPPER(' DIE '), UPPER(' Suffice ')
+),
+str3 = REPLACE(
+REPLACE(REPLACE(' ' || str3 || ' ', ' DIE ', ' Suffice '), 
+LOWER(' DIE '), LOWER(' Suffice ')), 
+UPPER(' DIE '), UPPER(' Suffice ')
+),
+str4 = REPLACE(
+REPLACE(REPLACE(' ' || str4 || ' ', ' DIE ', ' Suffice '), 
+LOWER(' DIE '), LOWER(' Suffice ')), 
+UPPER(' DIE '), UPPER(' Suffice ')
+),
+str5 = REPLACE(
+REPLACE(REPLACE(' ' || str5 || ' ', ' DIE ', ' Suffice '), 
+LOWER(' DIE '), LOWER(' Suffice ')), 
+UPPER(' DIE '), UPPER(' Suffice ')
+),
+str6 = REPLACE(
+REPLACE(REPLACE(' ' || str6 || ' ', ' DIE ', ' Suffice '), 
+LOWER(' DIE '), LOWER(' Suffice ')), 
+UPPER(' DIE '), UPPER(' Suffice ')
+),
+str7 = REPLACE(
+REPLACE(REPLACE(' ' || str7 || ' ', ' DIE ', ' Suffice '), 
+LOWER(' DIE '), LOWER(' Suffice ')), 
+UPPER(' DIE '), UPPER(' Suffice ')
+),
+str8 = REPLACE(
+REPLACE(REPLACE(' ' || str8 || ' ', ' DIE ', ' Suffice '), 
+LOWER(' DIE '), LOWER(' Suffice ')), 
+UPPER(' DIE '), UPPER(' Suffice ')
+),
+str9 = REPLACE(
+REPLACE(REPLACE(' ' || str9 || ' ', ' DIE ', ' Suffice '), 
+LOWER(' DIE '), LOWER(' Suffice ')), 
+UPPER(' DIE '), UPPER(' Suffice ')
+),
+str10 = REPLACE(
+REPLACE(REPLACE(' ' || str10 || ' ', ' DIE ', ' Suffice '), 
+LOWER(' DIE '), LOWER(' Suffice ')), 
+UPPER(' DIE '), UPPER(' Suffice ')
+),
+str11 = REPLACE(
+REPLACE(REPLACE(' ' || str11 || ' ', ' DIE ', ' Suffice '), 
+LOWER(' DIE '), LOWER(' Suffice ')), 
+UPPER(' DIE '), UPPER(' Suffice ')
+),
+str12 = REPLACE(
+REPLACE(REPLACE(' ' || str12 || ' ', ' DIE ', ' Suffice '), 
+LOWER(' DIE '), LOWER(' Suffice ')), 
+UPPER(' DIE '), UPPER(' Suffice ')
+),
+str13 = REPLACE(
+REPLACE(REPLACE(' ' || str13 || ' ', ' DIE ', ' Suffice '), 
+LOWER(' DIE '), LOWER(' Suffice ')), 
+UPPER(' DIE '), UPPER(' Suffice ')
+),
+str14 = REPLACE(
+REPLACE(REPLACE(' ' || str14 || ' ', ' DIE ', ' Suffice '), 
+LOWER(' DIE '), LOWER(' Suffice ')), 
+UPPER(' DIE '), UPPER(' Suffice ')
+),
+str15 = REPLACE(
+REPLACE(REPLACE(' ' || str15 || ' ', ' DIE ', ' Suffice '), 
+LOWER(' DIE '), LOWER(' Suffice ')), 
+UPPER(' DIE '), UPPER(' Suffice ')
+),
+str16 = REPLACE(
+REPLACE(REPLACE(' ' || str16 || ' ', ' DIE ', ' Suffice '), 
+LOWER(' DIE '), LOWER(' Suffice ')), 
+UPPER(' DIE '), UPPER(' Suffice ')
+)
+WHERE 
+' ' || desc || ' ' LIKE '% DIE %' OR 
+' ' || desc || ' ' LIKE '% ' || LOWER('DIE') || ' %' OR 
+' ' || desc || ' ' LIKE '% ' || UPPER('DIE') || ' %' OR 
+' ' || name || ' ' LIKE '% DIE %' OR 
+' ' || name || ' ' LIKE '% ' || LOWER('DIE') || ' %' OR 
+' ' || name || ' ' LIKE '% ' || UPPER('DIE') || ' %';
+
+
+UPDATE texts
+SET 
+desc = REPLACE(
+REPLACE(REPLACE(' ' || desc || ' ', ' Die ', ' Suffice '), 
+LOWER(' Die '), LOWER(' Suffice ')), 
+UPPER(' Die '), UPPER(' Suffice ')
+),
+name = REPLACE(
+REPLACE(REPLACE(' ' || name || ' ', ' Die ', ' Suffice '), 
+LOWER(' Die '), LOWER(' Suffice ')), 
+UPPER(' Die '), UPPER(' Suffice ')
+),
+str1 = REPLACE(
+REPLACE(REPLACE(' ' || str1 || ' ', ' Die ', ' Suffice '), 
+LOWER(' Die '), LOWER(' Suffice ')), 
+UPPER(' Die '), UPPER(' Suffice ')
+),
+str2 = REPLACE(
+REPLACE(REPLACE(' ' || str2 || ' ', ' Die ', ' Suffice '), 
+LOWER(' Die '), LOWER(' Suffice ')), 
+UPPER(' Die '), UPPER(' Suffice ')
+),
+str3 = REPLACE(
+REPLACE(REPLACE(' ' || str3 || ' ', ' Die ', ' Suffice '), 
+LOWER(' Die '), LOWER(' Suffice ')), 
+UPPER(' Die '), UPPER(' Suffice ')
+),
+str4 = REPLACE(
+REPLACE(REPLACE(' ' || str4 || ' ', ' Die ', ' Suffice '), 
+LOWER(' Die '), LOWER(' Suffice ')), 
+UPPER(' Die '), UPPER(' Suffice ')
+),
+str5 = REPLACE(
+REPLACE(REPLACE(' ' || str5 || ' ', ' Die ', ' Suffice '), 
+LOWER(' Die '), LOWER(' Suffice ')), 
+UPPER(' Die '), UPPER(' Suffice ')
+),
+str6 = REPLACE(
+REPLACE(REPLACE(' ' || str6 || ' ', ' Die ', ' Suffice '), 
+LOWER(' Die '), LOWER(' Suffice ')), 
+UPPER(' Die '), UPPER(' Suffice ')
+),
+str7 = REPLACE(
+REPLACE(REPLACE(' ' || str7 || ' ', ' Die ', ' Suffice '), 
+LOWER(' Die '), LOWER(' Suffice ')), 
+UPPER(' Die '), UPPER(' Suffice ')
+),
+str8 = REPLACE(
+REPLACE(REPLACE(' ' || str8 || ' ', ' Die ', ' Suffice '), 
+LOWER(' Die '), LOWER(' Suffice ')), 
+UPPER(' Die '), UPPER(' Suffice ')
+),
+str9 = REPLACE(
+REPLACE(REPLACE(' ' || str9 || ' ', ' Die ', ' Suffice '), 
+LOWER(' Die '), LOWER(' Suffice ')), 
+UPPER(' Die '), UPPER(' Suffice ')
+),
+str10 = REPLACE(
+REPLACE(REPLACE(' ' || str10 || ' ', ' Die ', ' Suffice '), 
+LOWER(' Die '), LOWER(' Suffice ')), 
+UPPER(' Die '), UPPER(' Suffice ')
+),
+str11 = REPLACE(
+REPLACE(REPLACE(' ' || str11 || ' ', ' Die ', ' Suffice '), 
+LOWER(' Die '), LOWER(' Suffice ')), 
+UPPER(' Die '), UPPER(' Suffice ')
+),
+str12 = REPLACE(
+REPLACE(REPLACE(' ' || str12 || ' ', ' Die ', ' Suffice '), 
+LOWER(' Die '), LOWER(' Suffice ')), 
+UPPER(' Die '), UPPER(' Suffice ')
+),
+str13 = REPLACE(
+REPLACE(REPLACE(' ' || str13 || ' ', ' Die ', ' Suffice '), 
+LOWER(' Die '), LOWER(' Suffice ')), 
+UPPER(' Die '), UPPER(' Suffice ')
+),
+str14 = REPLACE(
+REPLACE(REPLACE(' ' || str14 || ' ', ' Die ', ' Suffice '), 
+LOWER(' Die '), LOWER(' Suffice ')), 
+UPPER(' Die '), UPPER(' Suffice ')
+),
+str15 = REPLACE(
+REPLACE(REPLACE(' ' || str15 || ' ', ' Die ', ' Suffice '), 
+LOWER(' Die '), LOWER(' Suffice ')), 
+UPPER(' Die '), UPPER(' Suffice ')
+),
+str16 = REPLACE(
+REPLACE(REPLACE(' ' || str16 || ' ', ' Die ', ' Suffice '), 
+LOWER(' Die '), LOWER(' Suffice ')), 
+UPPER(' Die '), UPPER(' Suffice ')
+)
+WHERE 
+' ' || desc || ' ' LIKE '% Die %' OR 
+' ' || desc || ' ' LIKE '% ' || LOWER('Die') || ' %' OR 
+' ' || desc || ' ' LIKE '% ' || UPPER('Die') || ' %' OR 
+' ' || name || ' ' LIKE '% Die %' OR 
+' ' || name || ' ' LIKE '% ' || LOWER('Die') || ' %' OR 
+' ' || name || ' ' LIKE '% ' || UPPER('Die') || ' %';
 
 
 UPDATE texts
@@ -2548,6 +3154,33 @@ str13 LIKE '%Denglong%' OR str14 LIKE '%Denglong%' OR str15 LIKE '%Denglong%' OR
 str16 LIKE '%Denglong%';
 
 UPDATE texts 
+SET desc = REPLACE(REPLACE(REPLACE(desc, 'Divinity', 'Megali'), LOWER('Divinity'), LOWER('Megali')), UPPER('Divinity'), UPPER('Megali')),
+name = REPLACE(REPLACE(REPLACE(name, 'Divinity', 'Megali'), LOWER('Divinity'), LOWER('Megali')), UPPER('Divinity'), UPPER('Megali')),
+str1 = REPLACE(REPLACE(REPLACE(str1, 'Divinity', 'Megali'), LOWER('Divinity'), LOWER('Megali')), UPPER('Divinity'), UPPER('Megali')),
+str2 = REPLACE(REPLACE(REPLACE(str2, 'Divinity', 'Megali'), LOWER('Divinity'), LOWER('Megali')), UPPER('Divinity'), UPPER('Megali')),
+str3 = REPLACE(REPLACE(REPLACE(str3, 'Divinity', 'Megali'), LOWER('Divinity'), LOWER('Megali')), UPPER('Divinity'), UPPER('Megali')),
+str4 = REPLACE(REPLACE(REPLACE(str4, 'Divinity', 'Megali'), LOWER('Divinity'), LOWER('Megali')), UPPER('Divinity'), UPPER('Megali')),
+str5 = REPLACE(REPLACE(REPLACE(str5, 'Divinity', 'Megali'), LOWER('Divinity'), LOWER('Megali')), UPPER('Divinity'), UPPER('Megali')),
+str6 = REPLACE(REPLACE(REPLACE(str6, 'Divinity', 'Megali'), LOWER('Divinity'), LOWER('Megali')), UPPER('Divinity'), UPPER('Megali')),
+str7 = REPLACE(REPLACE(REPLACE(str7, 'Divinity', 'Megali'), LOWER('Divinity'), LOWER('Megali')), UPPER('Divinity'), UPPER('Megali')),
+str8 = REPLACE(REPLACE(REPLACE(str8, 'Divinity', 'Megali'), LOWER('Divinity'), LOWER('Megali')), UPPER('Divinity'), UPPER('Megali')),
+str9 = REPLACE(REPLACE(REPLACE(str9, 'Divinity', 'Megali'), LOWER('Divinity'), LOWER('Megali')), UPPER('Divinity'), UPPER('Megali')),
+str10 = REPLACE(REPLACE(REPLACE(str10, 'Divinity', 'Megali'), LOWER('Divinity'), LOWER('Megali')), UPPER('Divinity'), UPPER('Megali')),
+str11 = REPLACE(REPLACE(REPLACE(str11, 'Divinity', 'Megali'), LOWER('Divinity'), LOWER('Megali')), UPPER('Divinity'), UPPER('Megali')),
+str12 = REPLACE(REPLACE(REPLACE(str12, 'Divinity', 'Megali'), LOWER('Divinity'), LOWER('Megali')), UPPER('Divinity'), UPPER('Megali')),
+str13 = REPLACE(REPLACE(REPLACE(str13, 'Divinity', 'Megali'), LOWER('Divinity'), LOWER('Megali')), UPPER('Divinity'), UPPER('Megali')),
+str14 = REPLACE(REPLACE(REPLACE(str14, 'Divinity', 'Megali'), LOWER('Divinity'), LOWER('Megali')), UPPER('Divinity'), UPPER('Megali')),
+str15 = REPLACE(REPLACE(REPLACE(str15, 'Divinity', 'Megali'), LOWER('Divinity'), LOWER('Megali')), UPPER('Divinity'), UPPER('Megali')),
+str16 = REPLACE(REPLACE(REPLACE(str16, 'Divinity', 'Megali'), LOWER('Divinity'), LOWER('Megali')), UPPER('Divinity'), UPPER('Megali'))
+WHERE desc LIKE '%Divinity%' OR name LIKE '%Divinity%' OR
+str1 LIKE '%Divinity%' OR str2 LIKE '%Divinity%' OR str3 LIKE '%Divinity%' OR
+str4 LIKE '%Divinity%' OR str5 LIKE '%Divinity%' OR str6 LIKE '%Divinity%' OR
+str7 LIKE '%Divinity%' OR str8 LIKE '%Divinity%' OR str9 LIKE '%Divinity%' OR
+str10 LIKE '%Divinity%' OR str11 LIKE '%Divinity%' OR str12 LIKE '%Divinity%' OR
+str13 LIKE '%Divinity%' OR str14 LIKE '%Divinity%' OR str15 LIKE '%Divinity%' OR
+str16 LIKE '%Divinity%';
+
+UPDATE texts 
 SET desc = REPLACE(REPLACE(REPLACE(desc, 'Destiny', 'Destrudic'), LOWER('Destiny'), LOWER('Destrudic')), UPPER('Destiny'), UPPER('Destrudic')),
 name = REPLACE(REPLACE(REPLACE(name, 'Destiny', 'Destrudic'), LOWER('Destiny'), LOWER('Destrudic')), UPPER('Destiny'), UPPER('Destrudic')),
 str1 = REPLACE(REPLACE(REPLACE(str1, 'Destiny', 'Destrudic'), LOWER('Destiny'), LOWER('Destrudic')), UPPER('Destiny'), UPPER('Destrudic')),
@@ -2600,6 +3233,33 @@ str7 LIKE '%Divine%' OR str8 LIKE '%Divine%' OR str9 LIKE '%Divine%' OR
 str10 LIKE '%Divine%' OR str11 LIKE '%Divine%' OR str12 LIKE '%Divine%' OR
 str13 LIKE '%Divine%' OR str14 LIKE '%Divine%' OR str15 LIKE '%Divine%' OR
 str16 LIKE '%Divine%';
+
+UPDATE texts 
+SET desc = REPLACE(REPLACE(REPLACE(desc, 'DIVINE', 'MEGA'), LOWER('DIVINE'), LOWER('MEGA')), UPPER('DIVINE'), UPPER('MEGA')),
+name = REPLACE(REPLACE(REPLACE(name, 'DIVINE', 'MEGA'), LOWER('DIVINE'), LOWER('MEGA')), UPPER('DIVINE'), UPPER('MEGA')),
+str1 = REPLACE(REPLACE(REPLACE(str1, 'DIVINE', 'MEGA'), LOWER('DIVINE'), LOWER('MEGA')), UPPER('DIVINE'), UPPER('MEGA')),
+str2 = REPLACE(REPLACE(REPLACE(str2, 'DIVINE', 'MEGA'), LOWER('DIVINE'), LOWER('MEGA')), UPPER('DIVINE'), UPPER('MEGA')),
+str3 = REPLACE(REPLACE(REPLACE(str3, 'DIVINE', 'MEGA'), LOWER('DIVINE'), LOWER('MEGA')), UPPER('DIVINE'), UPPER('MEGA')),
+str4 = REPLACE(REPLACE(REPLACE(str4, 'DIVINE', 'MEGA'), LOWER('DIVINE'), LOWER('MEGA')), UPPER('DIVINE'), UPPER('MEGA')),
+str5 = REPLACE(REPLACE(REPLACE(str5, 'DIVINE', 'MEGA'), LOWER('DIVINE'), LOWER('MEGA')), UPPER('DIVINE'), UPPER('MEGA')),
+str6 = REPLACE(REPLACE(REPLACE(str6, 'DIVINE', 'MEGA'), LOWER('DIVINE'), LOWER('MEGA')), UPPER('DIVINE'), UPPER('MEGA')),
+str7 = REPLACE(REPLACE(REPLACE(str7, 'DIVINE', 'MEGA'), LOWER('DIVINE'), LOWER('MEGA')), UPPER('DIVINE'), UPPER('MEGA')),
+str8 = REPLACE(REPLACE(REPLACE(str8, 'DIVINE', 'MEGA'), LOWER('DIVINE'), LOWER('MEGA')), UPPER('DIVINE'), UPPER('MEGA')),
+str9 = REPLACE(REPLACE(REPLACE(str9, 'DIVINE', 'MEGA'), LOWER('DIVINE'), LOWER('MEGA')), UPPER('DIVINE'), UPPER('MEGA')),
+str10 = REPLACE(REPLACE(REPLACE(str10, 'DIVINE', 'MEGA'), LOWER('DIVINE'), LOWER('MEGA')), UPPER('DIVINE'), UPPER('MEGA')),
+str11 = REPLACE(REPLACE(REPLACE(str11, 'DIVINE', 'MEGA'), LOWER('DIVINE'), LOWER('MEGA')), UPPER('DIVINE'), UPPER('MEGA')),
+str12 = REPLACE(REPLACE(REPLACE(str12, 'DIVINE', 'MEGA'), LOWER('DIVINE'), LOWER('MEGA')), UPPER('DIVINE'), UPPER('MEGA')),
+str13 = REPLACE(REPLACE(REPLACE(str13, 'DIVINE', 'MEGA'), LOWER('DIVINE'), LOWER('MEGA')), UPPER('DIVINE'), UPPER('MEGA')),
+str14 = REPLACE(REPLACE(REPLACE(str14, 'DIVINE', 'MEGA'), LOWER('DIVINE'), LOWER('MEGA')), UPPER('DIVINE'), UPPER('MEGA')),
+str15 = REPLACE(REPLACE(REPLACE(str15, 'DIVINE', 'MEGA'), LOWER('DIVINE'), LOWER('MEGA')), UPPER('DIVINE'), UPPER('MEGA')),
+str16 = REPLACE(REPLACE(REPLACE(str16, 'DIVINE', 'MEGA'), LOWER('DIVINE'), LOWER('MEGA')), UPPER('DIVINE'), UPPER('MEGA'))
+WHERE desc LIKE '%DIVINE%' OR name LIKE '%DIVINE%' OR
+str1 LIKE '%DIVINE%' OR str2 LIKE '%DIVINE%' OR str3 LIKE '%DIVINE%' OR
+str4 LIKE '%DIVINE%' OR str5 LIKE '%DIVINE%' OR str6 LIKE '%DIVINE%' OR
+str7 LIKE '%DIVINE%' OR str8 LIKE '%DIVINE%' OR str9 LIKE '%DIVINE%' OR
+str10 LIKE '%DIVINE%' OR str11 LIKE '%DIVINE%' OR str12 LIKE '%DIVINE%' OR
+str13 LIKE '%DIVINE%' OR str14 LIKE '%DIVINE%' OR str15 LIKE '%DIVINE%' OR
+str16 LIKE '%DIVINE%';
 
 UPDATE texts 
 SET desc = REPLACE(REPLACE(REPLACE(desc, 'Deity', 'Being'), LOWER('Deity'), LOWER('Being')), UPPER('Deity'), UPPER('Being')),
@@ -2681,6 +3341,43 @@ str7 LIKE '%Devil%' OR str8 LIKE '%Devil%' OR str9 LIKE '%Devil%' OR
 str10 LIKE '%Devil%' OR str11 LIKE '%Devil%' OR str12 LIKE '%Devil%' OR
 str13 LIKE '%Devil%' OR str14 LIKE '%Devil%' OR str15 LIKE '%Devil%' OR
 str16 LIKE '%Devil%';
+
+UPDATE texts SET
+desc = REPLACE(desc, 'DIE', 'Suffice'),
+name = REPLACE(name, 'DIE', 'Suffice')
+WHERE desc REGEXP 'DIE[,.-;:s'']' OR name REGEXP 'DIE[,.-;:s'']';
+
+UPDATE texts SET
+desc = REPLACE(desc, 'Die', 'Suffice'),
+name = REPLACE(name, 'Die', 'Suffice')
+WHERE desc REGEXP 'Die[,.-;:s'']' OR name REGEXP 'Die[,.-;:s'']';
+
+UPDATE texts 
+SET desc = REPLACE(REPLACE(REPLACE(desc, 'Divin', 'Meg'), LOWER('Divin'), LOWER('Meg')), UPPER('Divin'), UPPER('Meg')),
+name = REPLACE(REPLACE(REPLACE(name, 'Divin', 'Meg'), LOWER('Divin'), LOWER('Meg')), UPPER('Divin'), UPPER('Meg')),
+str1 = REPLACE(REPLACE(REPLACE(str1, 'Divin', 'Meg'), LOWER('Divin'), LOWER('Meg')), UPPER('Divin'), UPPER('Meg')),
+str2 = REPLACE(REPLACE(REPLACE(str2, 'Divin', 'Meg'), LOWER('Divin'), LOWER('Meg')), UPPER('Divin'), UPPER('Meg')),
+str3 = REPLACE(REPLACE(REPLACE(str3, 'Divin', 'Meg'), LOWER('Divin'), LOWER('Meg')), UPPER('Divin'), UPPER('Meg')),
+str4 = REPLACE(REPLACE(REPLACE(str4, 'Divin', 'Meg'), LOWER('Divin'), LOWER('Meg')), UPPER('Divin'), UPPER('Meg')),
+str5 = REPLACE(REPLACE(REPLACE(str5, 'Divin', 'Meg'), LOWER('Divin'), LOWER('Meg')), UPPER('Divin'), UPPER('Meg')),
+str6 = REPLACE(REPLACE(REPLACE(str6, 'Divin', 'Meg'), LOWER('Divin'), LOWER('Meg')), UPPER('Divin'), UPPER('Meg')),
+str7 = REPLACE(REPLACE(REPLACE(str7, 'Divin', 'Meg'), LOWER('Divin'), LOWER('Meg')), UPPER('Divin'), UPPER('Meg')),
+str8 = REPLACE(REPLACE(REPLACE(str8, 'Divin', 'Meg'), LOWER('Divin'), LOWER('Meg')), UPPER('Divin'), UPPER('Meg')),
+str9 = REPLACE(REPLACE(REPLACE(str9, 'Divin', 'Meg'), LOWER('Divin'), LOWER('Meg')), UPPER('Divin'), UPPER('Meg')),
+str10 = REPLACE(REPLACE(REPLACE(str10, 'Divin', 'Meg'), LOWER('Divin'), LOWER('Meg')), UPPER('Divin'), UPPER('Meg')),
+str11 = REPLACE(REPLACE(REPLACE(str11, 'Divin', 'Meg'), LOWER('Divin'), LOWER('Meg')), UPPER('Divin'), UPPER('Meg')),
+str12 = REPLACE(REPLACE(REPLACE(str12, 'Divin', 'Meg'), LOWER('Divin'), LOWER('Meg')), UPPER('Divin'), UPPER('Meg')),
+str13 = REPLACE(REPLACE(REPLACE(str13, 'Divin', 'Meg'), LOWER('Divin'), LOWER('Meg')), UPPER('Divin'), UPPER('Meg')),
+str14 = REPLACE(REPLACE(REPLACE(str14, 'Divin', 'Meg'), LOWER('Divin'), LOWER('Meg')), UPPER('Divin'), UPPER('Meg')),
+str15 = REPLACE(REPLACE(REPLACE(str15, 'Divin', 'Meg'), LOWER('Divin'), LOWER('Meg')), UPPER('Divin'), UPPER('Meg')),
+str16 = REPLACE(REPLACE(REPLACE(str16, 'Divin', 'Meg'), LOWER('Divin'), LOWER('Meg')), UPPER('Divin'), UPPER('Meg'))
+WHERE desc LIKE '%Divin%' OR name LIKE '%Divin%' OR
+str1 LIKE '%Divin%' OR str2 LIKE '%Divin%' OR str3 LIKE '%Divin%' OR
+str4 LIKE '%Divin%' OR str5 LIKE '%Divin%' OR str6 LIKE '%Divin%' OR
+str7 LIKE '%Divin%' OR str8 LIKE '%Divin%' OR str9 LIKE '%Divin%' OR
+str10 LIKE '%Divin%' OR str11 LIKE '%Divin%' OR str12 LIKE '%Divin%' OR
+str13 LIKE '%Divin%' OR str14 LIKE '%Divin%' OR str15 LIKE '%Divin%' OR
+str16 LIKE '%Divin%';
 
 UPDATE texts 
 SET desc = REPLACE(REPLACE(REPLACE(desc, 'Djinn', 'Dlilt'), LOWER('Djinn'), LOWER('Dlilt')), UPPER('Djinn'), UPPER('Dlilt')),
@@ -8206,24 +8903,24 @@ str13 LIKE '%Yazi%' OR str14 LIKE '%Yazi%' OR str15 LIKE '%Yazi%' OR
 str16 LIKE '%Yazi%';
 
 UPDATE texts 
-SET desc = REPLACE(REPLACE(REPLACE(desc, 'Zombie-Type', 'Toxic-TypeZodiac'), LOWER('Zombie-Type'), LOWER('Toxic-TypeZodiac')), UPPER('Zombie-Type'), UPPER('Toxic-TypeZodiac')),
-name = REPLACE(REPLACE(REPLACE(name, 'Zombie-Type', 'Toxic-TypeZodiac'), LOWER('Zombie-Type'), LOWER('Toxic-TypeZodiac')), UPPER('Zombie-Type'), UPPER('Toxic-TypeZodiac')),
-str1 = REPLACE(REPLACE(REPLACE(str1, 'Zombie-Type', 'Toxic-TypeZodiac'), LOWER('Zombie-Type'), LOWER('Toxic-TypeZodiac')), UPPER('Zombie-Type'), UPPER('Toxic-TypeZodiac')),
-str2 = REPLACE(REPLACE(REPLACE(str2, 'Zombie-Type', 'Toxic-TypeZodiac'), LOWER('Zombie-Type'), LOWER('Toxic-TypeZodiac')), UPPER('Zombie-Type'), UPPER('Toxic-TypeZodiac')),
-str3 = REPLACE(REPLACE(REPLACE(str3, 'Zombie-Type', 'Toxic-TypeZodiac'), LOWER('Zombie-Type'), LOWER('Toxic-TypeZodiac')), UPPER('Zombie-Type'), UPPER('Toxic-TypeZodiac')),
-str4 = REPLACE(REPLACE(REPLACE(str4, 'Zombie-Type', 'Toxic-TypeZodiac'), LOWER('Zombie-Type'), LOWER('Toxic-TypeZodiac')), UPPER('Zombie-Type'), UPPER('Toxic-TypeZodiac')),
-str5 = REPLACE(REPLACE(REPLACE(str5, 'Zombie-Type', 'Toxic-TypeZodiac'), LOWER('Zombie-Type'), LOWER('Toxic-TypeZodiac')), UPPER('Zombie-Type'), UPPER('Toxic-TypeZodiac')),
-str6 = REPLACE(REPLACE(REPLACE(str6, 'Zombie-Type', 'Toxic-TypeZodiac'), LOWER('Zombie-Type'), LOWER('Toxic-TypeZodiac')), UPPER('Zombie-Type'), UPPER('Toxic-TypeZodiac')),
-str7 = REPLACE(REPLACE(REPLACE(str7, 'Zombie-Type', 'Toxic-TypeZodiac'), LOWER('Zombie-Type'), LOWER('Toxic-TypeZodiac')), UPPER('Zombie-Type'), UPPER('Toxic-TypeZodiac')),
-str8 = REPLACE(REPLACE(REPLACE(str8, 'Zombie-Type', 'Toxic-TypeZodiac'), LOWER('Zombie-Type'), LOWER('Toxic-TypeZodiac')), UPPER('Zombie-Type'), UPPER('Toxic-TypeZodiac')),
-str9 = REPLACE(REPLACE(REPLACE(str9, 'Zombie-Type', 'Toxic-TypeZodiac'), LOWER('Zombie-Type'), LOWER('Toxic-TypeZodiac')), UPPER('Zombie-Type'), UPPER('Toxic-TypeZodiac')),
-str10 = REPLACE(REPLACE(REPLACE(str10, 'Zombie-Type', 'Toxic-TypeZodiac'), LOWER('Zombie-Type'), LOWER('Toxic-TypeZodiac')), UPPER('Zombie-Type'), UPPER('Toxic-TypeZodiac')),
-str11 = REPLACE(REPLACE(REPLACE(str11, 'Zombie-Type', 'Toxic-TypeZodiac'), LOWER('Zombie-Type'), LOWER('Toxic-TypeZodiac')), UPPER('Zombie-Type'), UPPER('Toxic-TypeZodiac')),
-str12 = REPLACE(REPLACE(REPLACE(str12, 'Zombie-Type', 'Toxic-TypeZodiac'), LOWER('Zombie-Type'), LOWER('Toxic-TypeZodiac')), UPPER('Zombie-Type'), UPPER('Toxic-TypeZodiac')),
-str13 = REPLACE(REPLACE(REPLACE(str13, 'Zombie-Type', 'Toxic-TypeZodiac'), LOWER('Zombie-Type'), LOWER('Toxic-TypeZodiac')), UPPER('Zombie-Type'), UPPER('Toxic-TypeZodiac')),
-str14 = REPLACE(REPLACE(REPLACE(str14, 'Zombie-Type', 'Toxic-TypeZodiac'), LOWER('Zombie-Type'), LOWER('Toxic-TypeZodiac')), UPPER('Zombie-Type'), UPPER('Toxic-TypeZodiac')),
-str15 = REPLACE(REPLACE(REPLACE(str15, 'Zombie-Type', 'Toxic-TypeZodiac'), LOWER('Zombie-Type'), LOWER('Toxic-TypeZodiac')), UPPER('Zombie-Type'), UPPER('Toxic-TypeZodiac')),
-str16 = REPLACE(REPLACE(REPLACE(str16, 'Zombie-Type', 'Toxic-TypeZodiac'), LOWER('Zombie-Type'), LOWER('Toxic-TypeZodiac')), UPPER('Zombie-Type'), UPPER('Toxic-TypeZodiac'))
+SET desc = REPLACE(REPLACE(REPLACE(desc, 'Zombie-Type', 'Toxic-Type'), LOWER('Zombie-Type'), LOWER('Toxic-Type')), UPPER('Zombie-Type'), UPPER('Toxic-Type')),
+name = REPLACE(REPLACE(REPLACE(name, 'Zombie-Type', 'Toxic-Type'), LOWER('Zombie-Type'), LOWER('Toxic-Type')), UPPER('Zombie-Type'), UPPER('Toxic-Type')),
+str1 = REPLACE(REPLACE(REPLACE(str1, 'Zombie-Type', 'Toxic-Type'), LOWER('Zombie-Type'), LOWER('Toxic-Type')), UPPER('Zombie-Type'), UPPER('Toxic-Type')),
+str2 = REPLACE(REPLACE(REPLACE(str2, 'Zombie-Type', 'Toxic-Type'), LOWER('Zombie-Type'), LOWER('Toxic-Type')), UPPER('Zombie-Type'), UPPER('Toxic-Type')),
+str3 = REPLACE(REPLACE(REPLACE(str3, 'Zombie-Type', 'Toxic-Type'), LOWER('Zombie-Type'), LOWER('Toxic-Type')), UPPER('Zombie-Type'), UPPER('Toxic-Type')),
+str4 = REPLACE(REPLACE(REPLACE(str4, 'Zombie-Type', 'Toxic-Type'), LOWER('Zombie-Type'), LOWER('Toxic-Type')), UPPER('Zombie-Type'), UPPER('Toxic-Type')),
+str5 = REPLACE(REPLACE(REPLACE(str5, 'Zombie-Type', 'Toxic-Type'), LOWER('Zombie-Type'), LOWER('Toxic-Type')), UPPER('Zombie-Type'), UPPER('Toxic-Type')),
+str6 = REPLACE(REPLACE(REPLACE(str6, 'Zombie-Type', 'Toxic-Type'), LOWER('Zombie-Type'), LOWER('Toxic-Type')), UPPER('Zombie-Type'), UPPER('Toxic-Type')),
+str7 = REPLACE(REPLACE(REPLACE(str7, 'Zombie-Type', 'Toxic-Type'), LOWER('Zombie-Type'), LOWER('Toxic-Type')), UPPER('Zombie-Type'), UPPER('Toxic-Type')),
+str8 = REPLACE(REPLACE(REPLACE(str8, 'Zombie-Type', 'Toxic-Type'), LOWER('Zombie-Type'), LOWER('Toxic-Type')), UPPER('Zombie-Type'), UPPER('Toxic-Type')),
+str9 = REPLACE(REPLACE(REPLACE(str9, 'Zombie-Type', 'Toxic-Type'), LOWER('Zombie-Type'), LOWER('Toxic-Type')), UPPER('Zombie-Type'), UPPER('Toxic-Type')),
+str10 = REPLACE(REPLACE(REPLACE(str10, 'Zombie-Type', 'Toxic-Type'), LOWER('Zombie-Type'), LOWER('Toxic-Type')), UPPER('Zombie-Type'), UPPER('Toxic-Type')),
+str11 = REPLACE(REPLACE(REPLACE(str11, 'Zombie-Type', 'Toxic-Type'), LOWER('Zombie-Type'), LOWER('Toxic-Type')), UPPER('Zombie-Type'), UPPER('Toxic-Type')),
+str12 = REPLACE(REPLACE(REPLACE(str12, 'Zombie-Type', 'Toxic-Type'), LOWER('Zombie-Type'), LOWER('Toxic-Type')), UPPER('Zombie-Type'), UPPER('Toxic-Type')),
+str13 = REPLACE(REPLACE(REPLACE(str13, 'Zombie-Type', 'Toxic-Type'), LOWER('Zombie-Type'), LOWER('Toxic-Type')), UPPER('Zombie-Type'), UPPER('Toxic-Type')),
+str14 = REPLACE(REPLACE(REPLACE(str14, 'Zombie-Type', 'Toxic-Type'), LOWER('Zombie-Type'), LOWER('Toxic-Type')), UPPER('Zombie-Type'), UPPER('Toxic-Type')),
+str15 = REPLACE(REPLACE(REPLACE(str15, 'Zombie-Type', 'Toxic-Type'), LOWER('Zombie-Type'), LOWER('Toxic-Type')), UPPER('Zombie-Type'), UPPER('Toxic-Type')),
+str16 = REPLACE(REPLACE(REPLACE(str16, 'Zombie-Type', 'Toxic-Type'), LOWER('Zombie-Type'), LOWER('Toxic-Type')), UPPER('Zombie-Type'), UPPER('Toxic-Type'))
 WHERE desc LIKE '%Zombie-Type%' OR name LIKE '%Zombie-Type%' OR
 str1 LIKE '%Zombie-Type%' OR str2 LIKE '%Zombie-Type%' OR str3 LIKE '%Zombie-Type%' OR
 str4 LIKE '%Zombie-Type%' OR str5 LIKE '%Zombie-Type%' OR str6 LIKE '%Zombie-Type%' OR
@@ -8233,24 +8930,51 @@ str13 LIKE '%Zombie-Type%' OR str14 LIKE '%Zombie-Type%' OR str15 LIKE '%Zombie-
 str16 LIKE '%Zombie-Type%';
 
 UPDATE texts 
-SET desc = REPLACE(REPLACE(REPLACE(desc, 'Zombie', 'Contamined'), LOWER('Zombie'), LOWER('Contamined')), UPPER('Zombie'), UPPER('Contamined')),
-name = REPLACE(REPLACE(REPLACE(name, 'Zombie', 'Contamined'), LOWER('Zombie'), LOWER('Contamined')), UPPER('Zombie'), UPPER('Contamined')),
-str1 = REPLACE(REPLACE(REPLACE(str1, 'Zombie', 'Contamined'), LOWER('Zombie'), LOWER('Contamined')), UPPER('Zombie'), UPPER('Contamined')),
-str2 = REPLACE(REPLACE(REPLACE(str2, 'Zombie', 'Contamined'), LOWER('Zombie'), LOWER('Contamined')), UPPER('Zombie'), UPPER('Contamined')),
-str3 = REPLACE(REPLACE(REPLACE(str3, 'Zombie', 'Contamined'), LOWER('Zombie'), LOWER('Contamined')), UPPER('Zombie'), UPPER('Contamined')),
-str4 = REPLACE(REPLACE(REPLACE(str4, 'Zombie', 'Contamined'), LOWER('Zombie'), LOWER('Contamined')), UPPER('Zombie'), UPPER('Contamined')),
-str5 = REPLACE(REPLACE(REPLACE(str5, 'Zombie', 'Contamined'), LOWER('Zombie'), LOWER('Contamined')), UPPER('Zombie'), UPPER('Contamined')),
-str6 = REPLACE(REPLACE(REPLACE(str6, 'Zombie', 'Contamined'), LOWER('Zombie'), LOWER('Contamined')), UPPER('Zombie'), UPPER('Contamined')),
-str7 = REPLACE(REPLACE(REPLACE(str7, 'Zombie', 'Contamined'), LOWER('Zombie'), LOWER('Contamined')), UPPER('Zombie'), UPPER('Contamined')),
-str8 = REPLACE(REPLACE(REPLACE(str8, 'Zombie', 'Contamined'), LOWER('Zombie'), LOWER('Contamined')), UPPER('Zombie'), UPPER('Contamined')),
-str9 = REPLACE(REPLACE(REPLACE(str9, 'Zombie', 'Contamined'), LOWER('Zombie'), LOWER('Contamined')), UPPER('Zombie'), UPPER('Contamined')),
-str10 = REPLACE(REPLACE(REPLACE(str10, 'Zombie', 'Contamined'), LOWER('Zombie'), LOWER('Contamined')), UPPER('Zombie'), UPPER('Contamined')),
-str11 = REPLACE(REPLACE(REPLACE(str11, 'Zombie', 'Contamined'), LOWER('Zombie'), LOWER('Contamined')), UPPER('Zombie'), UPPER('Contamined')),
-str12 = REPLACE(REPLACE(REPLACE(str12, 'Zombie', 'Contamined'), LOWER('Zombie'), LOWER('Contamined')), UPPER('Zombie'), UPPER('Contamined')),
-str13 = REPLACE(REPLACE(REPLACE(str13, 'Zombie', 'Contamined'), LOWER('Zombie'), LOWER('Contamined')), UPPER('Zombie'), UPPER('Contamined')),
-str14 = REPLACE(REPLACE(REPLACE(str14, 'Zombie', 'Contamined'), LOWER('Zombie'), LOWER('Contamined')), UPPER('Zombie'), UPPER('Contamined')),
-str15 = REPLACE(REPLACE(REPLACE(str15, 'Zombie', 'Contamined'), LOWER('Zombie'), LOWER('Contamined')), UPPER('Zombie'), UPPER('Contamined')),
-str16 = REPLACE(REPLACE(REPLACE(str16, 'Zombie', 'Contamined'), LOWER('Zombie'), LOWER('Contamined')), UPPER('Zombie'), UPPER('Contamined'))
+SET desc = REPLACE(REPLACE(REPLACE(desc, 'Zodiac', 'Zoopac'), LOWER('Zodiac'), LOWER('Zoopac')), UPPER('Zodiac'), UPPER('Zoopac')),
+name = REPLACE(REPLACE(REPLACE(name, 'Zodiac', 'Zoopac'), LOWER('Zodiac'), LOWER('Zoopac')), UPPER('Zodiac'), UPPER('Zoopac')),
+str1 = REPLACE(REPLACE(REPLACE(str1, 'Zodiac', 'Zoopac'), LOWER('Zodiac'), LOWER('Zoopac')), UPPER('Zodiac'), UPPER('Zoopac')),
+str2 = REPLACE(REPLACE(REPLACE(str2, 'Zodiac', 'Zoopac'), LOWER('Zodiac'), LOWER('Zoopac')), UPPER('Zodiac'), UPPER('Zoopac')),
+str3 = REPLACE(REPLACE(REPLACE(str3, 'Zodiac', 'Zoopac'), LOWER('Zodiac'), LOWER('Zoopac')), UPPER('Zodiac'), UPPER('Zoopac')),
+str4 = REPLACE(REPLACE(REPLACE(str4, 'Zodiac', 'Zoopac'), LOWER('Zodiac'), LOWER('Zoopac')), UPPER('Zodiac'), UPPER('Zoopac')),
+str5 = REPLACE(REPLACE(REPLACE(str5, 'Zodiac', 'Zoopac'), LOWER('Zodiac'), LOWER('Zoopac')), UPPER('Zodiac'), UPPER('Zoopac')),
+str6 = REPLACE(REPLACE(REPLACE(str6, 'Zodiac', 'Zoopac'), LOWER('Zodiac'), LOWER('Zoopac')), UPPER('Zodiac'), UPPER('Zoopac')),
+str7 = REPLACE(REPLACE(REPLACE(str7, 'Zodiac', 'Zoopac'), LOWER('Zodiac'), LOWER('Zoopac')), UPPER('Zodiac'), UPPER('Zoopac')),
+str8 = REPLACE(REPLACE(REPLACE(str8, 'Zodiac', 'Zoopac'), LOWER('Zodiac'), LOWER('Zoopac')), UPPER('Zodiac'), UPPER('Zoopac')),
+str9 = REPLACE(REPLACE(REPLACE(str9, 'Zodiac', 'Zoopac'), LOWER('Zodiac'), LOWER('Zoopac')), UPPER('Zodiac'), UPPER('Zoopac')),
+str10 = REPLACE(REPLACE(REPLACE(str10, 'Zodiac', 'Zoopac'), LOWER('Zodiac'), LOWER('Zoopac')), UPPER('Zodiac'), UPPER('Zoopac')),
+str11 = REPLACE(REPLACE(REPLACE(str11, 'Zodiac', 'Zoopac'), LOWER('Zodiac'), LOWER('Zoopac')), UPPER('Zodiac'), UPPER('Zoopac')),
+str12 = REPLACE(REPLACE(REPLACE(str12, 'Zodiac', 'Zoopac'), LOWER('Zodiac'), LOWER('Zoopac')), UPPER('Zodiac'), UPPER('Zoopac')),
+str13 = REPLACE(REPLACE(REPLACE(str13, 'Zodiac', 'Zoopac'), LOWER('Zodiac'), LOWER('Zoopac')), UPPER('Zodiac'), UPPER('Zoopac')),
+str14 = REPLACE(REPLACE(REPLACE(str14, 'Zodiac', 'Zoopac'), LOWER('Zodiac'), LOWER('Zoopac')), UPPER('Zodiac'), UPPER('Zoopac')),
+str15 = REPLACE(REPLACE(REPLACE(str15, 'Zodiac', 'Zoopac'), LOWER('Zodiac'), LOWER('Zoopac')), UPPER('Zodiac'), UPPER('Zoopac')),
+str16 = REPLACE(REPLACE(REPLACE(str16, 'Zodiac', 'Zoopac'), LOWER('Zodiac'), LOWER('Zoopac')), UPPER('Zodiac'), UPPER('Zoopac'))
+WHERE desc LIKE '%Zodiac%' OR name LIKE '%Zodiac%' OR
+str1 LIKE '%Zodiac%' OR str2 LIKE '%Zodiac%' OR str3 LIKE '%Zodiac%' OR
+str4 LIKE '%Zodiac%' OR str5 LIKE '%Zodiac%' OR str6 LIKE '%Zodiac%' OR
+str7 LIKE '%Zodiac%' OR str8 LIKE '%Zodiac%' OR str9 LIKE '%Zodiac%' OR
+str10 LIKE '%Zodiac%' OR str11 LIKE '%Zodiac%' OR str12 LIKE '%Zodiac%' OR
+str13 LIKE '%Zodiac%' OR str14 LIKE '%Zodiac%' OR str15 LIKE '%Zodiac%' OR
+str16 LIKE '%Zodiac%';
+
+UPDATE texts 
+SET desc = REPLACE(REPLACE(REPLACE(desc, 'Zombie', 'Toxic'), LOWER('Zombie'), LOWER('Toxic')), UPPER('Zombie'), UPPER('Toxic')),
+name = REPLACE(REPLACE(REPLACE(name, 'Zombie', 'Toxic'), LOWER('Zombie'), LOWER('Toxic')), UPPER('Zombie'), UPPER('Toxic')),
+str1 = REPLACE(REPLACE(REPLACE(str1, 'Zombie', 'Toxic'), LOWER('Zombie'), LOWER('Toxic')), UPPER('Zombie'), UPPER('Toxic')),
+str2 = REPLACE(REPLACE(REPLACE(str2, 'Zombie', 'Toxic'), LOWER('Zombie'), LOWER('Toxic')), UPPER('Zombie'), UPPER('Toxic')),
+str3 = REPLACE(REPLACE(REPLACE(str3, 'Zombie', 'Toxic'), LOWER('Zombie'), LOWER('Toxic')), UPPER('Zombie'), UPPER('Toxic')),
+str4 = REPLACE(REPLACE(REPLACE(str4, 'Zombie', 'Toxic'), LOWER('Zombie'), LOWER('Toxic')), UPPER('Zombie'), UPPER('Toxic')),
+str5 = REPLACE(REPLACE(REPLACE(str5, 'Zombie', 'Toxic'), LOWER('Zombie'), LOWER('Toxic')), UPPER('Zombie'), UPPER('Toxic')),
+str6 = REPLACE(REPLACE(REPLACE(str6, 'Zombie', 'Toxic'), LOWER('Zombie'), LOWER('Toxic')), UPPER('Zombie'), UPPER('Toxic')),
+str7 = REPLACE(REPLACE(REPLACE(str7, 'Zombie', 'Toxic'), LOWER('Zombie'), LOWER('Toxic')), UPPER('Zombie'), UPPER('Toxic')),
+str8 = REPLACE(REPLACE(REPLACE(str8, 'Zombie', 'Toxic'), LOWER('Zombie'), LOWER('Toxic')), UPPER('Zombie'), UPPER('Toxic')),
+str9 = REPLACE(REPLACE(REPLACE(str9, 'Zombie', 'Toxic'), LOWER('Zombie'), LOWER('Toxic')), UPPER('Zombie'), UPPER('Toxic')),
+str10 = REPLACE(REPLACE(REPLACE(str10, 'Zombie', 'Toxic'), LOWER('Zombie'), LOWER('Toxic')), UPPER('Zombie'), UPPER('Toxic')),
+str11 = REPLACE(REPLACE(REPLACE(str11, 'Zombie', 'Toxic'), LOWER('Zombie'), LOWER('Toxic')), UPPER('Zombie'), UPPER('Toxic')),
+str12 = REPLACE(REPLACE(REPLACE(str12, 'Zombie', 'Toxic'), LOWER('Zombie'), LOWER('Toxic')), UPPER('Zombie'), UPPER('Toxic')),
+str13 = REPLACE(REPLACE(REPLACE(str13, 'Zombie', 'Toxic'), LOWER('Zombie'), LOWER('Toxic')), UPPER('Zombie'), UPPER('Toxic')),
+str14 = REPLACE(REPLACE(REPLACE(str14, 'Zombie', 'Toxic'), LOWER('Zombie'), LOWER('Toxic')), UPPER('Zombie'), UPPER('Toxic')),
+str15 = REPLACE(REPLACE(REPLACE(str15, 'Zombie', 'Toxic'), LOWER('Zombie'), LOWER('Toxic')), UPPER('Zombie'), UPPER('Toxic')),
+str16 = REPLACE(REPLACE(REPLACE(str16, 'Zombie', 'Toxic'), LOWER('Zombie'), LOWER('Toxic')), UPPER('Zombie'), UPPER('Toxic'))
 WHERE desc LIKE '%Zombie%' OR name LIKE '%Zombie%' OR
 str1 LIKE '%Zombie%' OR str2 LIKE '%Zombie%' OR str3 LIKE '%Zombie%' OR
 str4 LIKE '%Zombie%' OR str5 LIKE '%Zombie%' OR str6 LIKE '%Zombie%' OR
@@ -8285,6 +9009,38 @@ str7 LIKE '%Zefra%' OR str8 LIKE '%Zefra%' OR str9 LIKE '%Zefra%' OR
 str10 LIKE '%Zefra%' OR str11 LIKE '%Zefra%' OR str12 LIKE '%Zefra%' OR
 str13 LIKE '%Zefra%' OR str14 LIKE '%Zefra%' OR str15 LIKE '%Zefra%' OR
 str16 LIKE '%Zefra%';
+
+UPDATE texts SET
+desc = REPLACE(desc, 'die', 'Suffice'),
+name = REPLACE(name, 'die', 'Suffice')
+WHERE desc REGEXP 'die[,.-;:s'']' OR name REGEXP 'die[,.-;:s'']';
+
+UPDATE texts 
+SET desc = REPLACE(REPLACE(REPLACE(desc, 'six-sided', 'game of'), LOWER('six-sided'), LOWER('game of')), UPPER('six-sided'), UPPER('game of')),
+name = REPLACE(REPLACE(REPLACE(name, 'six-sided', 'game of'), LOWER('six-sided'), LOWER('game of')), UPPER('six-sided'), UPPER('game of')),
+str1 = REPLACE(REPLACE(REPLACE(str1, 'six-sided', 'game of'), LOWER('six-sided'), LOWER('game of')), UPPER('six-sided'), UPPER('game of')),
+str2 = REPLACE(REPLACE(REPLACE(str2, 'six-sided', 'game of'), LOWER('six-sided'), LOWER('game of')), UPPER('six-sided'), UPPER('game of')),
+str3 = REPLACE(REPLACE(REPLACE(str3, 'six-sided', 'game of'), LOWER('six-sided'), LOWER('game of')), UPPER('six-sided'), UPPER('game of')),
+str4 = REPLACE(REPLACE(REPLACE(str4, 'six-sided', 'game of'), LOWER('six-sided'), LOWER('game of')), UPPER('six-sided'), UPPER('game of')),
+str5 = REPLACE(REPLACE(REPLACE(str5, 'six-sided', 'game of'), LOWER('six-sided'), LOWER('game of')), UPPER('six-sided'), UPPER('game of')),
+str6 = REPLACE(REPLACE(REPLACE(str6, 'six-sided', 'game of'), LOWER('six-sided'), LOWER('game of')), UPPER('six-sided'), UPPER('game of')),
+str7 = REPLACE(REPLACE(REPLACE(str7, 'six-sided', 'game of'), LOWER('six-sided'), LOWER('game of')), UPPER('six-sided'), UPPER('game of')),
+str8 = REPLACE(REPLACE(REPLACE(str8, 'six-sided', 'game of'), LOWER('six-sided'), LOWER('game of')), UPPER('six-sided'), UPPER('game of')),
+str9 = REPLACE(REPLACE(REPLACE(str9, 'six-sided', 'game of'), LOWER('six-sided'), LOWER('game of')), UPPER('six-sided'), UPPER('game of')),
+str10 = REPLACE(REPLACE(REPLACE(str10, 'six-sided', 'game of'), LOWER('six-sided'), LOWER('game of')), UPPER('six-sided'), UPPER('game of')),
+str11 = REPLACE(REPLACE(REPLACE(str11, 'six-sided', 'game of'), LOWER('six-sided'), LOWER('game of')), UPPER('six-sided'), UPPER('game of')),
+str12 = REPLACE(REPLACE(REPLACE(str12, 'six-sided', 'game of'), LOWER('six-sided'), LOWER('game of')), UPPER('six-sided'), UPPER('game of')),
+str13 = REPLACE(REPLACE(REPLACE(str13, 'six-sided', 'game of'), LOWER('six-sided'), LOWER('game of')), UPPER('six-sided'), UPPER('game of')),
+str14 = REPLACE(REPLACE(REPLACE(str14, 'six-sided', 'game of'), LOWER('six-sided'), LOWER('game of')), UPPER('six-sided'), UPPER('game of')),
+str15 = REPLACE(REPLACE(REPLACE(str15, 'six-sided', 'game of'), LOWER('six-sided'), LOWER('game of')), UPPER('six-sided'), UPPER('game of')),
+str16 = REPLACE(REPLACE(REPLACE(str16, 'six-sided', 'game of'), LOWER('six-sided'), LOWER('game of')), UPPER('six-sided'), UPPER('game of'))
+WHERE desc LIKE '%six-sided%' OR name LIKE '%six-sided%' OR
+str1 LIKE '%six-sided%' OR str2 LIKE '%six-sided%' OR str3 LIKE '%six-sided%' OR
+str4 LIKE '%six-sided%' OR str5 LIKE '%six-sided%' OR str6 LIKE '%six-sided%' OR
+str7 LIKE '%six-sided%' OR str8 LIKE '%six-sided%' OR str9 LIKE '%six-sided%' OR
+str10 LIKE '%six-sided%' OR str11 LIKE '%six-sided%' OR str12 LIKE '%six-sided%' OR
+str13 LIKE '%six-sided%' OR str14 LIKE '%six-sided%' OR str15 LIKE '%six-sided%' OR
+str16 LIKE '%six-sided%';
 
 UPDATE texts SET 
 desc = LTRIM(desc),

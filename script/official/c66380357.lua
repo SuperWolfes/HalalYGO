@@ -37,7 +37,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=Duel.GetFirstTarget()
 	local zone=c:GetFreeLinkedZone()&0x1f
 	local count=s.zone_count(zone)
-	local sg=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,e,tp,c)
+	local sg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,e,tp,c)
 	if #sg<count then count=#sg end
 	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then count=1 end
 	if c and c:IsFaceup() and c:IsRelateToEffect(e) and zone~=0 then

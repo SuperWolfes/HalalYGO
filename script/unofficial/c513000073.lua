@@ -2,7 +2,7 @@
 --Malefic Rainbow Dragon (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--spsummon condition
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
@@ -54,7 +54,7 @@ end
 s.listed_series={0x23}
 s.listed_names={79856792,27564031}
 function s.spfilter(c)
-	return c:IsCode(79856792) and c:IsAbleToGraveAsCost()
+	return c:IsCode(79856792) and c:IsAbleToRestAsCost()
 end
 function s.spcon(e,c)
 	if c==nil then return true end
@@ -75,7 +75,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	g:DeleteGroup()
 end
 function s.descon(e)
@@ -85,12 +85,12 @@ function s.atcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()
 end
 function s.afilter(c)
-	return c:IsSetCard(0x23) and c:IsAbleToGraveAsCost()
+	return c:IsSetCard(0x23) and c:IsAbleToRestAsCost()
 end
 function s.atcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.afilter,tp,LOCATION_MZONE,0,1,e:GetHandler()) end
-	local g=Duel.GetMatchingGroup(Card.IsAbleToGraveAsCost,tp,LOCATION_MZONE,0,e:GetHandler())
-	Duel.SendtoGrave(g,REASON_COST)
+	local g=Duel.GetMatchingGroup(Card.IsAbleToRestAsCost,tp,LOCATION_MZONE,0,e:GetHandler())
+	Duel.SendtoRest(g,REASON_COST)
 	local ct=g:FilterCount(Card.IsSetCard,nil,0x23)
 	e:SetLabel(ct)
 end

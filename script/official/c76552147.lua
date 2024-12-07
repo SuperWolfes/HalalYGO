@@ -1,4 +1,4 @@
---D.D.D. - Different Dimension Derby
+--S.D.D. - Same Dimension Derby
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

@@ -1,17 +1,18 @@
 --ライジング・ホープ
 --Utopia Rising
---Scripted by urielkama, fixed by MLD
+--Scripted by urielkama, fixed by ML, updated by the Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
-	--Activate
+	--Special Summon N39 Utopia from RP and equip with this card
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
+	e1:SetCost(aux.RemainFieldCost)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
-	--Destroy
+	--Destroy Summoned monster if this card leaves the field
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_SINGLE)
 	e2:SetCode(EVENT_LEAVE_FIELD)
@@ -35,12 +36,13 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 or not c:IsRelateToEffect(e) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.spfilter),tp,LOCATION_REST,0,1,1,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,0,1,1,nil,e,tp)
 	local tc=g:GetFirst()
-	if tc then
-		Duel.HintSelection(g)
-		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
+	if tc and Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)>0 then
+		if not c:IsRelateToEffect(e) or c:IsStatus(STATUS_LEAVE_CONFIRMED) then return end
+		Duel.HintSelection(g,true)
 		Duel.Equip(tp,c,tc)
+		--Equip Limit
 		local e0=Effect.CreateEffect(tc)
 		e0:SetType(EFFECT_TYPE_SINGLE)
 		e0:SetCode(EFFECT_EQUIP_LIMIT)
@@ -48,10 +50,11 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e0:SetReset(RESET_EVENT+RESETS_STANDARD)
 		e0:SetValue(s.eqlimit)
 		c:RegisterEffect(e0)
+		--Equipped monster gains effects of all other Xyz monsters on your field
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		e1:SetCode(EVENT_ADJUST)
-		e1:SetRange(LOCATION_MZONE) 
+		e1:SetRange(LOCATION_MZONE)
 		e1:SetOperation(s.copyop)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		tc:RegisterEffect(e1)
@@ -87,7 +90,7 @@ function s.copyop(e,tp,eg,ep,ev,re,r,rp)
 					rste:SetCode(EVENT_ADJUST)
 					rste:SetLabelObject({tec2,tec})
 					rste:SetLabel(code)
-					rste:SetOperation(s.resetop)
+					rste:SetOperation(s.revetop)
 					Duel.RegisterEffect(rste,tp)
 				end
 			end
@@ -101,7 +104,7 @@ function s.codechk(c,code)
 	end
 	return false
 end
-function s.resetop(e,tp,eg,ep,ev,re,r,rp)
+function s.revetop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetOwner():GetEquipTarget()
 	if not tc or tc:IsDisabled() or e:GetOwner():IsDisabled()
 		or not Duel.IsExistingMatchingCard(s.codechk,tp,LOCATION_MZONE,0,1,tc,e:GetLabel()) then

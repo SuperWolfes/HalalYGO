@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsLevelAbove(7) and c:IsAttribute(ATTRIBUTE_WATER+ATTRIBUTE_FIRE)
+	return c:IsFaceup() and c:IsLevelAbove(7) and c:IsAttribute(ATTRIBUTE_WATER|ATTRIBUTE_FIRE)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil)
@@ -25,7 +25,7 @@ function s.cfilter2(c,att)
 end
 function s.spfilter(c,tid,e,tp)
 	local re=c:GetReasonEffect()
-	return c:GetTurnID()==tid and c:IsReason(REASON_COST) and re and re:IsActivated() and re:IsActiveType(TYPE_MONSTER)
+	return c:GetTurnID()==tid and c:IsReason(REASON_COST) and re and re:IsActivated() and re:IsMonsterEffect()
 		and c:IsAttribute(ATTRIBUTE_WATER) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -43,15 +43,15 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local break_chk=false
-	--WATER: Special Summon from the GY
+	--WATER: Special Summon from the RP
 	if Duel.IsExistingMatchingCard(s.cfilter2,tp,LOCATION_MZONE,0,1,nil,ATTRIBUTE_WATER) then
 		local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-		local ct=Duel.GetMatchingGroupCount(aux.GraveValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,Duel.GetTurnCount(),e,tp)
+		local ct=Duel.GetMatchingGroupCount(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,Duel.GetTurnCount(),e,tp)
 		ft=math.min(ft,ct)
 		if ft>0 then
 			if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-			local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.spfilter),tp,LOCATION_REST,0,ft,ft,nil,Duel.GetTurnCount(),e,tp)
+			local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,0,ft,ft,nil,Duel.GetTurnCount(),e,tp)
 			if #g>0 and Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)>0 then
 				break_chk=true
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
@@ -71,7 +71,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		if #g>0 then
 			Duel.HintSelection(g,true)
 			if break_chk then Duel.BreakEffect() end
-			if Duel.Destroy(g,REASON_EFFECT)>0 and Duel.GetFieldGroup(tp,LOCATION_HAND,0)>0 then
+			if Duel.Destroy(g,REASON_EFFECT)>0 and Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)>0 then
 				Duel.BreakEffect()
 				Duel.DiscardHand(tp,nil,1,1,REASON_DISCARD+REASON_EFFECT)
 			end

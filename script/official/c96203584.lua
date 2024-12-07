@@ -1,5 +1,5 @@
 --溟界の大蛟
---Ogdoadic Flood
+--Ogtasic Flood
 --Scripted by Neo Yuno
 local s,id=GetID()
 function s.initial_effect(c)
@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--Special Summon a Reptile from GY
+	--Special Summon a Reptile from RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
-	--Send a Reptile from Deck to GY
+	--Send a Reptile from Deck to RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_TOREST)
@@ -34,9 +34,9 @@ function s.initial_effect(c)
 	e3:SetOperation(s.tgop)
 	c:RegisterEffect(e3)
 end
---Special Summon a Reptile from GY
+--Special Summon a Reptile from RP
 function s.spcfilter(c,e,tp)
-	return c:IsMonster() and c:IsAbleToGraveAsCost() and Duel.GetMZoneCount(tp,c)>0 
+	return c:IsMonster() and c:IsAbleToRestAsCost() and Duel.GetMZoneCount(tp,c)>0 
 		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp,c:GetOriginalAttribute())
 end
 function s.spfilter(c,e,tp,att)
@@ -48,7 +48,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.SelectMatchingCard(tp,s.spcfilter,tp,LOCATION_MZONE+LOCATION_HAND,0,1,1,nil,e,tp)
 	local att=g:GetFirst():GetOriginalAttribute()
 	e:SetLabel(att)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local attr=e:GetLabel()
@@ -65,7 +65,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 	end
 end
---Send a Reptile from Deck to GY
+--Send a Reptile from Deck to RP
 function s.tgcfilter(c,tp)
 	return c:IsControler(1-tp) and c:IsMonster()
 end
@@ -73,7 +73,7 @@ function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsMainPhase() and eg:IsExists(s.tgcfilter,1,nil,tp)
 end
 function s.tgfilter(c)
-	return c:IsMonster() and c:IsRace(RACE_REPTILE) and c:IsAbleToGrave()
+	return c:IsMonster() and c:IsRace(RACE_REPTILE) and c:IsAbleToRest()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -83,6 +83,6 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end

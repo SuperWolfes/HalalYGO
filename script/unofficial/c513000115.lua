@@ -21,7 +21,7 @@ function s.initial_effect(c)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():IsDiscardable() and ep==tp and Duel.GetAttackTarget()==nil and Duel.SelectYesNo(tp,aux.Stringid(81275309,0)) 
-		and Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT+REASON_REPLACE+REASON_DISCARD) then
+		and Duel.SendtoRest(e:GetHandler(),REASON_EFFECT+REASON_REPLACE+REASON_DISCARD) then
 		Duel.ChangeBattleDamage(tp,0)
 	end
 end

@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	Dual.AddProcedure(c)
-	--Special Summon 1 DUAL monster
+	--Special Summon 1 Dual monster
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)

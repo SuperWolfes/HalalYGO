@@ -3,7 +3,7 @@
 --scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
-	--Activate
+	--Destroy 1 targeted oppo's Link by banishing one with the same rating from your RP, if banished a Cyberse, destroy 1 faceup card in oppo's Actional & Trap zone
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DESTROY+CATEGORY_REMOVE)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -32,11 +32,11 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not tc:IsRelateToEffect(e) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.rmfilter),tp,LOCATION_REST,0,1,1,nil,tc:GetLink())
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.rmfilter),tp,LOCATION_REST,0,1,1,nil,tc:GetLink())
 	if Duel.Remove(g,0,REASON_EFFECT)~=0 then
 		Duel.Destroy(tc,REASON_EFFECT)
-		if (g:GetFirst():GetOriginalRace()&RACE_CYBERSE)>0 then
-			local sg=Duel.GetMatchingGroup(Card.IsFaceup,tp,0,LOCATION_SZONE,nil)
+		if g:GetFirst():IsOriginalRace(RACE_CYBERSE) then
+			local sg=Duel.GetMatchingGroup(Card.IsFaceup,tp,0,LOCATION_STZONE,nil)
 			if #sg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 				Duel.BreakEffect()
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)

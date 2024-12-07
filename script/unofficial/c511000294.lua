@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz summon
 	Xyz.AddProcedure(c,nil,12,5)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--negate and cannot attack
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetTargetRange(0,LOCATION_MZONE)
 	e2:SetTarget(s.filter)--aux.TargetBoolFunction(Card.IsC))
 	c:RegisterEffect(e2)
-	--Destruction replacement
+	--Mismatching replacement
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_SINGLE)
 	e3:SetCode(EFFECT_DESTROY_REPLACE)

@@ -1,11 +1,11 @@
 --烙印追放
---Branded Exile
+--Branded Banishment
 --Logical Nonsense
 
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon 1 "Despia" or level 8+ fusion monster from GY
+	--Special Summon 1 "Despia" or level 8+ fusion monster from RP
 	local fparams={aux.FilterBoolFunction(Card.IsLevelAbove,8),Fusion.OnFieldMat(Card.IsAbleToRemove),s.fextra,Fusion.BanishMaterial,nil,nil}
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -20,11 +20,11 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 	--Lists "Despia" archetype
-s.listed_series={0x166}
+s.listed_series={SET_DESPIA}
 
 	--Check for "Despia" or level 8+ monster
 function s.spfilter(c,e,tp)
-	return (c:IsSetCard(0x166) or (c:IsLevelAbove(8) and c:IsType(TYPE_FUSION))) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return (c:IsSetCard(SET_DESPIA) or (c:IsLevelAbove(8) and c:IsType(TYPE_FUSION))) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 	--Activation legality
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -35,7 +35,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 end
-	--Special Summon 1 "Despia" or level 8+ fusion monster from GY
+	--Special Summon 1 "Despia" or level 8+ fusion monster from RP
 function s.activate(fustg,fusop)
 	return function(e,tp,eg,ep,ev,re,r,rp)
 		local tc=Duel.GetFirstTarget()
@@ -49,5 +49,5 @@ function s.activate(fustg,fusop)
 	end
 end
 function s.fextra(e,tp,mg)
-	return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsFaceup),tp,0,LOCATION_ONFIELD,nil)
+	return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsFaceup,Card.IsAbleToRemove),tp,0,LOCATION_ONFIELD,nil)
 end

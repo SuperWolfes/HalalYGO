@@ -1,5 +1,5 @@
 --ウィッチクラフト・バイストリート
---Witchcrafter Bystreet
+--Mintcrafter Bystreet
 --Scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e2:SetValue(s.indct)
 	c:RegisterEffect(e2)
 	--replace discard effect
-	local e3=aux.CreateWitchcrafterReplace(c,id)
+	local e3=aux.CreateMintcrafterReplace(c,id)
 	e3:SetDescription(aux.Stringid(id,2))
 	c:RegisterEffect(e3)
 	--to S/T Zone

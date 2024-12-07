@@ -1,4 +1,5 @@
---Altar of Graveoration
+--復活の祭壇
+--Stone of Restoration
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

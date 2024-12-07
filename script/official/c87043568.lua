@@ -51,7 +51,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetLabelObject(tc)
 		c:RegisterEffect(e2)
 	else
-		c:CancelToGrave(false)
+		c:CancelToRest(false)
 	end
 end
 function s.eqlimit(e,c)
@@ -64,14 +64,14 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 		and ph==PHASE_DAMAGE and not Duel.IsDamageCalculated()
 end
 function s.cfilter(c)
-	return c:IsMonster() and c:IsAttackBelow(1000) and c:IsAbleToGraveAsCost()
+	return c:IsMonster() and c:IsAttackBelow(1000) and c:IsAbleToRestAsCost()
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND,0,1,1,nil)
 	e:SetLabel(g:GetFirst():GetAttack())
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

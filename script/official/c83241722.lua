@@ -27,6 +27,6 @@ function s.coinop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.RegisterFlagEffect(tp,id,RESET_PHASE+PHASE_END,0,1)
 		local ct1=(ev&0xff)
 		local ct2=(ev>>16)
-		Duel.TossSuffice(ep,ct1,ct2)
+		Duel.TossDice(ep,ct1,ct2)
 	end
 end

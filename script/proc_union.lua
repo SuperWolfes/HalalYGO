@@ -23,6 +23,8 @@ function Auxiliary.AddUnionProcedure(c,f,oldequip,oldprotect)
 	e2:SetRange(LOCATION_SZONE)
 	if oldequip then
 		e2:SetCondition(Auxiliary.IsUnionState)
+	else
+		e2:SetCondition(function(e) return e:GetHandler():GetEquipTarget()end)
 	end
 	e2:SetTarget(Auxiliary.UnionSumTarget(oldequip))
 	e2:SetOperation(Auxiliary.UnionSumOperation(oldequip))
@@ -34,6 +36,8 @@ function Auxiliary.AddUnionProcedure(c,f,oldequip,oldprotect)
 	e3:SetCode(EFFECT_DESTROY_SUBSTITUTE)
 	if oldprotect then
 		e3:SetCondition(Auxiliary.IsUnionState)
+	else
+		e3:SetCondition(function(e) return e:GetHandler():GetEquipTarget()end)
 	end
 	e3:SetValue(Auxiliary.UnionReplace(oldprotect))
 	c:RegisterEffect(e3)
@@ -48,14 +52,6 @@ function Auxiliary.AddUnionProcedure(c,f,oldequip,oldprotect)
 	if oldequip then
 		local m=c:GetMetatable()
 		m.old_union=true
-	end
-end
-if not Card.CheckUnionTarget then
-	Card.CheckUnionTarget=function(c,target)
-		local ct1,ct2=c:GetUnionCount()
-		return c:IsHasEffect(EFFECT_UNION_LIMIT) and (((not c:IsHasEffect(EFFECT_OLDUNION_STATUS)) or ct1 == 0)
-			and ((not c:IsHasEffect(EFFECT_UNION_STATUS)) or ct2 == 0))
-	
 	end
 end
 function Auxiliary.UnionFilter(c,f,oldrule)
@@ -89,7 +85,7 @@ function Auxiliary.UnionOperation(f)
 		local tc=Duel.GetFirstTarget()
 		if not c:IsRelateToEffect(e) or c:IsFacedown() then return end
 		if not tc:IsRelateToEffect(e) or (f and not f(tc)) then
-			Duel.SendtoGrave(c,REASON_EFFECT)
+			Duel.SendtoRest(c,REASON_EFFECT)
 			return
 		end
 		if not Duel.Equip(tp,c,tc,false) then return end
@@ -116,7 +112,7 @@ function Auxiliary.UnionSumOperation(oldrule)
 		if oldrule then pos=POS_FACEUP_ATTACK end
 		if Duel.SpecialSummon(c,0,tp,tp,true,false,pos)==0 and Duel.GetLocationCount(tp,LOCATION_MZONE)<=0
 			and c:IsCanBeSpecialSummoned(e,0,tp,true,false,pos) then
-			Duel.SendtoGrave(c,REASON_RULE)
+			Duel.SendtoRest(c,REASON_RULE)
 		end
 	end
 end

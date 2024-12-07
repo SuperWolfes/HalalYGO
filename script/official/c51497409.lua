@@ -1,7 +1,7 @@
 --DDD磐石王ダリウス
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_TAINTED),3,2)
 	--Destroy and Draw
 	local e1=Effect.CreateEffect(c)

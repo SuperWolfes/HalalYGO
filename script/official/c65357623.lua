@@ -1,11 +1,11 @@
 --アンデット・ストラグル
---Contaminated Power Struggle
+--Toxic Power Struggle
 --Logical Nonsense
 
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Targeted contaminated monster either gains or loses 1000 ATK
+	--Targeted toxic monster either gains or loses 1000 ATK
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_ATKCHANGE)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-	--Set itself from GY
+	--Set itself from RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_TODECK)
 	e2:SetDescription(aux.Stringid(id,1))
@@ -25,16 +25,16 @@ function s.initial_effect(c)
 	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,id)
 	e2:SetTarget(s.settg)
-	e2:SetOperation(s.setop)
+	e2:SetOperation(s.vetop)
 	c:RegisterEffect(e2)
 end
 	--If damage isn't being calculated
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()
 end
-	--Check for a contaminated monster
+	--Check for a toxic monster
 function s.filter(c)
-	return c:IsFaceup() and c:IsRace(RACE_CONTAMINED)
+	return c:IsFaceup() and c:IsRace(RACE_TOXIC)
 end
 	--Activation legality
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc,race)
@@ -43,7 +43,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc,race)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 	Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil)
 end
-	--Targeted contaminated monster either gains or loses 1000 ATK
+	--Targeted toxic monster either gains or loses 1000 ATK
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) and tc:IsFaceup() then
@@ -57,9 +57,9 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		tc:RegisterEffect(e1)
 	end
 end
-	--Check for a contaminated monster to return to deck
+	--Check for a toxic monster to return to deck
 function s.setfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_CONTAMINED) and c:IsAbleToDeck()
+	return c:IsFaceup() and c:IsRace(RACE_TOXIC) and c:IsAbleToDeck()
 end
 	--Activation legality
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -67,8 +67,8 @@ function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 		and Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_REMOVED,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,e:GetHandler(),1,0,0)
 end
-	--Shuffle 1 of your banished contaminateds, and if you, set this card
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+	--Shuffle 1 of your banished toxics, and if you, set this card
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
 	local g=Duel.SelectMatchingCard(tp,s.setfilter,tp,LOCATION_REMOVED,0,1,1,nil)

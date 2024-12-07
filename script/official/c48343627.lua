@@ -1,5 +1,5 @@
 --グレイブ・スクワーマー
---Grave Squirmer
+--Rest Squirmer
 local s,id=GetID()
 function s.initial_effect(c)
 	--Destroy

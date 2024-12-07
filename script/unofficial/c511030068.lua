@@ -33,7 +33,7 @@ function s.initial_effect(c)
 	e3:SetTarget(s.sptg)
 	e3:SetOperation(s.spop)
 	c:RegisterEffect(e3)
-	--send to GY
+	--send to RP
 	local e4=Effect.CreateEffect(c)
 	e4:SetCategory(CATEGORY_TOREST)
 	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
@@ -47,7 +47,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x102}
 function s.actfilter(c)
-	return c:IsSetCard(0x102) and c:IsMonster() and c:IsAbleToGrave()
+	return c:IsSetCard(0x102) and c:IsMonster() and c:IsAbleToRest()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
@@ -73,7 +73,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,tp)
 	local g=Duel.SelectMatchingCard(tp,s.actfilter,tp,LOCATION_DECK,0,2,2,nil)
 	if #g>1 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 		local og=Duel.GetOperatedGroup()
 		if og:IsExists(Card.IsLocation,1,nil,LOCATION_REST) then
 			local lg=Duel.GetMatchingGroup(Card.IsLinkAbove,tp,LOCATION_MZONE,LOCATION_MZONE,nil,3)
@@ -141,6 +141,6 @@ function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():IsRelateToEffect(e) then
-		Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
+		Duel.SendtoRest(e:GetHandler(),REASON_EFFECT)
 	end
 end

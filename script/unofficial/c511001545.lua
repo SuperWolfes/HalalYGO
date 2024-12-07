@@ -2,7 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,s.fusfilter1,s.fusfilter2)
 	--damage
 	local e1=Effect.CreateEffect(c)
@@ -64,7 +64,7 @@ function s.sumop(e,tp,eg,ep,ev,re,r,rp)
 	local mg=c:GetMaterial()
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ft>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
-	if #mg<=ft and mg:FilterCount(aux.GraveValleyFilter(s.mgfilter),nil,e,tp,c)==#mg then
+	if #mg<=ft and mg:FilterCount(aux.NecroValleyFilter(s.mgfilter),nil,e,tp,c)==#mg then
 		Duel.SpecialSummon(mg,0,tp,tp,false,false,POS_FACEUP)
 	end
 end

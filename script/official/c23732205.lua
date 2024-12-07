@@ -4,8 +4,8 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Link summon procedure
 	Link.AddProcedure(c,s.matfilter,2,2)
 	--Destroy of 1 opponent's monsters, inflict damage equal to its original ATK
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.dmgtg)
 	e1:SetOperation(s.dmgop)
 	c:RegisterEffect(e1)
-	--Special summon itself from GY
+	--Special summon itself from RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)

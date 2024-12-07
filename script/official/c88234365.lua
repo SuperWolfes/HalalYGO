@@ -1,5 +1,5 @@
 --堕天使テスカトリポカ
---Darklord Tezcatlipoca
+--Darkwarden Termapolsh
 local s,id=GetID()
 function s.initial_effect(c)
 	c:SetSPSummonOnce(id)
@@ -39,7 +39,7 @@ function s.repval(e,c)
 	return s.repfilter(c,e:GetHandlerPlayer())
 end
 function s.repop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT+REASON_DISCARD)
+	Duel.SendtoRest(e:GetHandler(),REASON_EFFECT+REASON_DISCARD)
 end
 function s.cpcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckLPCost(tp,1000) end

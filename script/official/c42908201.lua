@@ -1,5 +1,5 @@
 --デスマニア・デビル
---Desmania Devil
+--Desmania Well
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

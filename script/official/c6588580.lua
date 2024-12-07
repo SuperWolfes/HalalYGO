@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,aux.FilterSummonCode(68505803),1,1,Synchro.NonTunerEx(Card.IsAttribute,ATTRIBUTE_FIRE),1,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--atkup
 	local e1=Effect.CreateEffect(c)
 	e1:SetCode(EFFECT_UPDATE_ATTACK)

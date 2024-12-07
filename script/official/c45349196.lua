@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	c:SetSPSummonOnce(id)
 	--fusion material
 	Fusion.AddProcMix(c,true,true,s.mfilter1,s.mfilter2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--aclimit
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)

@@ -1,9 +1,9 @@
 --レストレーション・ポイントガード (Anime)
---Graveoration Point Guard (Anime)
+--Restoration Point Guard (Anime)
 --scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_CYBERSE),2,2)
 	--indes
 	local e1=Effect.CreateEffect(c)

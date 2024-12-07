@@ -1,5 +1,5 @@
 --妖眼の相剣師
---The Iris Swordsoul
+--The Iris Swordmiss
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)

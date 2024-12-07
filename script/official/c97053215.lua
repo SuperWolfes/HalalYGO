@@ -5,8 +5,8 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Link Summon
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_EARTH),2,2)
-	c:EnableReviveLimit()
-	--Recover or Special Summon 1 EARTH from your GY
+	c:EnableAwakeLimit()
+	--Recover or Special Summon 1 EARTH from your RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SPECIAL_SUMMON)

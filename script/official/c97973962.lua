@@ -1,8 +1,8 @@
 --暴走召喚師アレイスター
---Aleister the Meltdown Invoker
+--Aleister the Meltdown Invalidater
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,nil,2,nil,s.spcheck)
 	--code
 	local e1=Effect.CreateEffect(c)

@@ -2,7 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,61538782,98049038,71218746,984114)
 	--equip
 	local e1=Effect.CreateEffect(c)
@@ -62,7 +62,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsFaceup() and tc:IsMonster() and not tc:IsRace(RACE_MACHINE) and tc:IsRelateToEffect(e) then
 		if c:IsFaceup() and c:IsRelateToEffect(e) then
 			s.equipop(c,e,tp,tc)
-		else Duel.SendtoGrave(tc,REASON_EFFECT) end
+		else Duel.SendtoRest(tc,REASON_EFFECT) end
 	end
 end
 function s.atcon(e)

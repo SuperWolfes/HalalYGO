@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Enable pendulum summon
 	Pendulum.AddProcedure(c)
-	--When a contaminated monster(s) is pendulum summoned, make it unable to be destroyed by battle or card effects
+	--When a toxic monster(s) is pendulum summoned, make it unable to be destroyed by battle or card effects
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.indtg)
 	e2:SetOperation(s.indop)
 	c:RegisterEffect(e2)
-	--Add 1 pendulum monster from GY
+	--Add 1 pendulum monster from RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.cfilter(c,e,tp)
-	return c:IsRace(RACE_CONTAMINED) and c:IsSummonPlayer(tp) and c:IsSummonType(SUMMON_TYPE_PENDULUM)
+	return c:IsRace(RACE_TOXIC) and c:IsSummonPlayer(tp) and c:IsSummonType(SUMMON_TYPE_PENDULUM)
 		and (not e or c:IsRelateToEffect(e))
 end
 function s.indcon(e,tp,eg,ep,ev,re,r,rp)

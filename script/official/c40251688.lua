@@ -2,10 +2,10 @@
 --Infernoble Knight Captain Roland
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Synchro Summon procedure
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
-	--Send 1 Equip from the Deck to the GY and search 1 Warrior during the End Phase
+	--Send 1 Equip from the Deck to the RP and search 1 Warrior during the End Phase
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOREST+CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetCondition(function(e) return e:GetHandler():IsSummonType(SUMMON_TYPE_SYNCHRO) end)
 	e1:SetOperation(s.regop)
 	c:RegisterEffect(e1)
-	--Equip itself from GY to 1 warrior monster
+	--Equip itself from RP to 1 warrior monster
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_EQUIP)
@@ -47,7 +47,7 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.tgfilter(c)
-	return c:IsType(TYPE_EQUIP) and c:IsActional() and c:IsAbleToGrave()
+	return c:IsType(TYPE_EQUIP) and c:IsActional() and c:IsAbleToRest()
 end
 function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil)
@@ -58,7 +58,7 @@ end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local gc=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil):GetFirst()
-	if gc and Duel.SendtoGrave(gc,REASON_EFFECT)>0 and gc:IsLocation(LOCATION_REST) then
+	if gc and Duel.SendtoRest(gc,REASON_EFFECT)>0 and gc:IsLocation(LOCATION_REST) then
 		local sg=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_DECK,0,nil)
 		if #sg==0 then return end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)

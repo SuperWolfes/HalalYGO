@@ -1,5 +1,5 @@
 --機皇枢インフィニティ・コア
---Meklord Nucleus Infinity Core
+--Mekwatcher Nucleus Infinity Core
 --Scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)

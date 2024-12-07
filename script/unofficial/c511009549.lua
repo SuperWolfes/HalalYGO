@@ -1,4 +1,4 @@
---Abyss Script - Heavenly Evil Guardian
+--Abyss Script - Spectrumly Evil Guardian
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

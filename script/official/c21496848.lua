@@ -1,9 +1,9 @@
 --イビリチュア・テトラオーグル
---Evigishki Tetrogre
+--Evigiojiki Tetrogre
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
-	--Send to the GY 1 card from the opponent's Deck
+	c:EnableAwakeLimit()
+	--Send to the RP 1 card from the opponent's Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_HANDES+CATEGORY_TOREST)
@@ -37,5 +37,5 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOREST)
 	local g2=Duel.SelectMatchingCard(1-tp,Card.IsType,1-tp,LOCATION_DECK,0,1,1,nil,ty)
 	g1:Merge(g2)
-	Duel.SendtoGrave(g1,REASON_EFFECT)
+	Duel.SendtoRest(g1,REASON_EFFECT)
 end

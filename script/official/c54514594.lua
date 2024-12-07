@@ -3,7 +3,7 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Inflict damage equal to number of "Volcanic" monsters in your GY x 200
+	--Inflict damage equal to number of "Volcanic" monsters in your RP x 200
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DAMAGE)

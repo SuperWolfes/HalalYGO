@@ -1,5 +1,5 @@
---トリックスター・トリート (Anime)
---Trickstar Treat (Anime)
+--トリックスター・トリート
+--Trickstar Treat
 --scripted by Larry126, fixed by MLD
 local s,id=GetID()
 function s.initial_effect(c)
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetCode(EVENT_FREE_CHAIN)
 	e2:SetCondition(s.setcon)
 	e2:SetCost(s.setcost)
-	e2:SetOperation(s.setop)
+	e2:SetOperation(s.vetop)
 	c:RegisterEffect(e2)
 	--Destroy
 	local e3=Effect.CreateEffect(c)
@@ -92,7 +92,7 @@ function s.setcon(e,tp,eg,ep,ev,re,r,rp)
 	return not Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_SZONE,LOCATION_SZONE,1,nil)
 end
 function s.cfilter(c,tp)
-	return c:IsTrap() and c:IsSetCard(0xfb) and not c:IsPublic() and c:IsSSetable() 
+	return c:IsTrap() and c:IsSetCard(0xfb) and not c:IsPublic() and c:IsSSetable()
 		and c:GetFlagEffect(511600044)==0
 end
 function s.setcost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -107,7 +107,7 @@ function s.setcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetTargetCard(g:GetFirst())
 	g:GetFirst():RegisterFlagEffect(511600044,RESET_EVENT+RESETS_STANDARD+RESET_CHAIN,0,1,fid)
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
 	if c:IsRelateToEffect(e) and s.setcon(e,tp,eg,ep,ev,re,r,rp) and tc and tc:IsSSetable()
@@ -128,11 +128,12 @@ function s.setop(e,tp,eg,ep,ev,re,r,rp)
 		local e2=Effect.CreateEffect(c)
 		e2:SetType(EFFECT_TYPE_SINGLE)
 		e2:SetCode(EFFECT_TRAP_ACT_IN_SET_TURN)
+		e2:SetDescription(aux.Stringid(id,1))
 		e2:SetProperty(EFFECT_FLAG_SET_AVAILABLE)
 		e2:SetReset(RESET_EVENT+RESETS_STANDARD)
 		tc:RegisterEffect(e2)
 	else
-		Duel.SendtoGrave(tc,REASON_RULE)
+		Duel.SendtoRest(tc,REASON_RULE)
 	end
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)

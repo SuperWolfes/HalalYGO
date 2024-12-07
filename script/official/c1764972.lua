@@ -2,7 +2,7 @@
 --Doomkaiser Dragon/Assault Mode
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Cannot special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -35,7 +35,7 @@ end
 s.listed_names={CARD_ASSAULT_MODE,6021033}
 s.assault_mode=6021033
 function s.filter1(c,e,tp)
-	return c:IsRace(RACE_CONTAMINED) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsRace(RACE_TOXIC) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg1(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REST) and s.filter1(chkc,e,tp) end
@@ -48,7 +48,7 @@ function s.sptg1(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,#g,0,0)
 end
 function s.sfilter(c,e,tp)
-	return c:IsRelateToEffect(e) and c:IsRace(RACE_CONTAMINED) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsRelateToEffect(e) and c:IsRace(RACE_TOXIC) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.spop1(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)

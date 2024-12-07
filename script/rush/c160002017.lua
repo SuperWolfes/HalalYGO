@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.tgfilter(c,tp)
-	return c:IsMonster() and c:IsAbleToGrave() and c:HasLevel()
+	return c:IsMonster() and c:IsAbleToRest() and c:HasLevel()
 		and Duel.IsExistingMatchingCard(s.atkfilter,tp,0,LOCATION_MZONE,1,nil,c:GetAttribute())
 end
 function s.atkfilter(c,att)
@@ -25,8 +25,9 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	--requirement
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tc=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_HAND,0,1,1,nil,tp):GetFirst()
-	if Duel.SendtoGrave(tc,REASON_COST)>0 then
+	if Duel.SendtoRest(tc,REASON_COST)>0 then
 		--effect
 		local og=Duel.GetOperatedGroup():GetFirst()
 		local g=Duel.GetMatchingGroup(s.atkfilter,tp,0,LOCATION_MZONE,nil,og:GetAttribute())
@@ -36,7 +37,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 				local e1=Effect.CreateEffect(e:GetHandler())
 				e1:SetType(EFFECT_TYPE_SINGLE)
 				e1:SetCode(EFFECT_UPDATE_ATTACK)
-				e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+				e1:SetReset(RESETS_STANDARD_PHASE_END)
 				e1:SetValue(-lv*300)
 				sc:RegisterEffect(e1)
 				local e2=e1:Clone()

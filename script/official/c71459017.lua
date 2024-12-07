@@ -1,5 +1,5 @@
 --禰須三破鳴比
---Hinezumi Hanabi
+--Himuzoomi Hanabi
 --scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
@@ -46,7 +46,7 @@ function s.initial_effect(c)
 	e5:SetOperation(s.desop)
 	c:RegisterEffect(e5)
 end
-s.roll_suffice=true
+s.roll_dice=true
 function s.cttg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,3,0,0x203)
@@ -78,7 +78,7 @@ end
 function s.desop(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if not c:IsCanRemoveCounter(tp,0x203,1,REASON_EFFECT) then return end
-	local ct=math.min(Duel.TossSuffice(tp,1),c:GetCounter(0x203))
+	local ct=math.min(Duel.TossDice(tp,1),c:GetCounter(0x203))
 	c:RemoveCounter(tp,0x203,ct,REASON_EFFECT)
 	if c:GetCounter(0x203)==0 and Duel.Destroy(c,REASON_EFFECT)>0 then
 		Duel.Damage(tp,2000,REASON_EFFECT)

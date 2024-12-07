@@ -29,12 +29,12 @@ end
 
 --gain atk
 function card.atkfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_CONTAMINED)
+	return c:IsFaceup() and c:IsRace(RACE_TOXIC)
 end
 
 function card.atkop(e, tp, eg, ep, ev, re, r, rp)
 	local ac = Duel.GetAttacker()
-	if ac and ac:IsRace(RACE_CONTAMINED) then
+	if ac and ac:IsRace(RACE_TOXIC) then
 		ac:UpdateAttack(
 			Duel.GetMatchingGroupCount(card.atkfilter, tp, LOCATION_MZONE, 0, nil) * 100,
 			RESET_PHASE + PHASE_END + RESET_EVENT + RESETS_STANDARD,
@@ -45,7 +45,7 @@ end
 
 --to hand
 function card.thcfilter(c)
-	return c:IsMonster() and c:IsRace(RACE_CONTAMINED) and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c, true)
+	return c:IsMonster() and c:IsRace(RACE_TOXIC) and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c, true)
 end
 
 --unselect checking function - group must all be of same name and there must be a card left to add
@@ -55,7 +55,7 @@ function card.rescon(sg, e, tp, mg)
 end
 
 function card.thfilter(c)
-	return c:IsRace(RACE_CONTAMINED) and c:IsAbleToHand()
+	return c:IsRace(RACE_TOXIC) and c:IsAbleToHand()
 end
 
 function card.thcost(e, tp, eg, ep, ev, re, r, rp, chk)

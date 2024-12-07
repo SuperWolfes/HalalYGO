@@ -1,5 +1,5 @@
 -- エクソシスター・マルファ
--- Exosister Martha
+-- Insister Martha
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -36,7 +36,7 @@ function s.hspcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.hspcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetCustomActivityCount(id,tp,ACTIVITY_SPSUMMON)==0 end
-	-- Cannot Special Summon monsters, except "Exosister" monsters
+	-- Cannot Special Summon monsters, except "Insister" monsters
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetDescription(aux.Stringid(id,2))
 	e1:SetType(EFFECT_TYPE_FIELD)

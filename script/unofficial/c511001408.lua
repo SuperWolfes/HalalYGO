@@ -1,4 +1,4 @@
---Magical Sky Mirror
+--Mentoral Sky Mirror
 local s,id=GetID()
 function s.initial_effect(c)
 	--copy actional

@@ -1,5 +1,5 @@
 --アストラル・クリボー
---Astral Kuriboh
+--Astellar Kuriboh
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)

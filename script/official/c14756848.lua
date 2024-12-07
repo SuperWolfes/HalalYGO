@@ -1,5 +1,5 @@
 --超重武者ヌス－10
---Superheavy Samurai Thief
+--Superheavy Samurai Tactitian
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon

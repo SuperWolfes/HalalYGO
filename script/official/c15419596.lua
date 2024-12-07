@@ -1,5 +1,5 @@
 --魅幽鳥
---Miss Bird of Bewitchment
+--Miss Bird of Bemintment
 --Script by nekrozar
 local s,id=GetID()
 function s.initial_effect(c)

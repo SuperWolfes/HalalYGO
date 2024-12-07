@@ -1,7 +1,7 @@
 --Speedroid Lightning Archduke
 local s,id=GetID()
 function s.initial_effect(c)
-	--revive 
+	--awake 
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(92826944,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)

@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,30012506,77411244,3405259)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,s.splimit)
 	--remove
@@ -99,6 +99,6 @@ function s.spop2(e,tp,eg,ep,ev,re,r,rp)
 		local sg=g:Select(tp,ft,ft,nil)
 		Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)
 		g:Sub(sg)
-		Duel.SendtoGrave(g,REASON_RULE)
+		Duel.SendtoRest(g,REASON_RULE)
 	end
 end

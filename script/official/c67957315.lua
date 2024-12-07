@@ -20,7 +20,7 @@ function s.adcon(e,tp,eg,ep,ev,re,r,rp)
 		and (e:GetHandler()==Duel.GetAttacker() or e:GetHandler()==Duel.GetAttackTarget())
 end
 function s.cfilter(c)
-	return c:IsRace(RACE_DRAGON) and c:IsDiscardable() and c:IsAbleToGraveAsCost()
+	return c:IsRace(RACE_DRAGON) and c:IsDiscardable() and c:IsAbleToRestAsCost()
 end
 function s.adcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end

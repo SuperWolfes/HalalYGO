@@ -1,5 +1,5 @@
 --紫毒の魔術師
---Purple Poison Magician
+--Purple Poison Mentor
 local s,id=GetID()
 function s.initial_effect(c)
 	Pendulum.AddProcedure(c)

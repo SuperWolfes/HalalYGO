@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--ATK gain and no control switch
+	--ATK gain and no control smint
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EVENT_BE_MATERIAL)
@@ -62,7 +62,7 @@ end
 function s.lizfilter(e,c)
 	return not c:IsOriginalType(TYPE_XYZ)
 end
---ATK gain and no control switch
+--ATK gain and no control smint
 function s.effcon(e,tp,eg,ep,ev,re,r,rp)
 	return (r&REASON_XYZ)==REASON_XYZ and e:GetHandler():GetReasonCard():IsAttribute(ATTRIBUTE_WIND) and e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD)
 end
@@ -76,7 +76,7 @@ function s.effop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetValue(200)
 	e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 	rc:RegisterEffect(e1)
-	--Possession cannot switch
+	--Possession cannot smint
 	local e2=Effect.CreateEffect(rc)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)

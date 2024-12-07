@@ -1,5 +1,5 @@
 --ドローン・クラフト・フォース
---Drone Force
+--Drone Fcoree
 --Scripted by the Razgriz
 local s,id=GetID()
 function s.initial_effect(c)

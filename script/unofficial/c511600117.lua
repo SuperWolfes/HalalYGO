@@ -1,5 +1,5 @@
 --マジカル・スター・イリュージョン (Anime)
---Magical Star Illusion (Anime)
+--Mentoral Star Illusion (Anime)
 --scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)

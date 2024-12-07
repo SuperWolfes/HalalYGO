@@ -29,7 +29,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	return true
 end
 function s.cfilter(c,tp)
-	return c:IsSetCard(0xf) and (c:IsFaceup() or not c:IsOnField()) and c:IsAbleToGraveAsCost()
+	return c:IsSetCard(0xf) and (c:IsFaceup() or not c:IsOnField()) and c:IsAbleToRestAsCost()
 		and Duel.IsExistingMatchingCard(s.filter1,tp,LOCATION_DECK+LOCATION_REST,0,1,c,c:GetCode())
 		and Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_DECK+LOCATION_REST,0,1,c)
 end
@@ -49,13 +49,13 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND+LOCATION_ONFIELD,0,1,1,e:GetHandler(),tp)
 	e:SetLabelObject(g:GetFirst())
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,2,tp,LOCATION_DECK+LOCATION_REST)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local sc=e:GetLabelObject()
-	local g1=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.filter1),tp,LOCATION_DECK+LOCATION_REST,0,sc,sc:GetCode())
-	local g2=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.filter2),tp,LOCATION_DECK+LOCATION_REST,0,sc)
+	local g1=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.filter1),tp,LOCATION_DECK+LOCATION_REST,0,sc,sc:GetCode())
+	local g2=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.filter2),tp,LOCATION_DECK+LOCATION_REST,0,sc)
 	if #g1==0 or #g2==0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 	local g=g1:Select(tp,1,1,nil)

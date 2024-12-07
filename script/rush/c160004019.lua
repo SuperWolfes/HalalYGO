@@ -1,5 +1,5 @@
 --祭神モドリーナ
---Enshrined Deity Modorina
+--Enshrined Being Modorina
 
 local s,id=GetID()
 function s.initial_effect(c)

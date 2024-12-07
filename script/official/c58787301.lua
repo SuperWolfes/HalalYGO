@@ -1,5 +1,5 @@
 --堕天使降臨
---Darklord Descent
+--Darkwarden Descent
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

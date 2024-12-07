@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	c:SetSPSummonOnce(id)
 	--synchro summon
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--destroy
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -34,7 +34,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		local b1=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,0,nil)
 		local b2=Duel.GetMatchingGroup(nil,tp,LOCATION_SZONE,LOCATION_SZONE,nil)
 		local b3=Duel.GetMatchingGroup(nil,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
-		if tc:IsRace(RACE_CONTAMINED) and #b1>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+		if tc:IsRace(RACE_TOXIC) and #b1>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			local t1=b1:GetFirst()
 			for t1 in aux.Next(b1) do
 				local e1=Effect.CreateEffect(e:GetHandler())

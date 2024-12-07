@@ -35,7 +35,7 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RaiseEvent(Group.CreateGroup(),id,e,REASON_EFFECT,Duel.GetTurnPlayer(),Duel.GetTurnPlayer(),0)
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsRace(RACE_CONTAMINED)
+	return c:IsFaceup() and c:IsRace(RACE_TOXIC)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_MZONE,0,e:GetHandler())

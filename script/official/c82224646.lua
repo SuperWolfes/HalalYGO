@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetValue(LOCATION_REMOVED)
 	e2:SetCondition(s.rmcon)
 	c:RegisterEffect(e2)
-	--Special Summon from GY
+	--Special Summon from RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)

@@ -4,7 +4,7 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send 1 LIGHT and 1 DARK monster from deck to GY
+	--Send 1 LIGHT and 1 DARK monster from deck to RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOREST)
@@ -24,7 +24,7 @@ function s.rescon(atk)
 	end
 end
 function s.tgfilter(c)
-	return c:IsAttribute(ATTRIBUTE_DARK+ATTRIBUTE_LIGHT) and c:IsAbleToGrave()
+	return c:IsAttribute(ATTRIBUTE_DARK+ATTRIBUTE_LIGHT) and c:IsAbleToRest()
 end
 function s.cfilter(c,e,tp,g)
 	return c:IsFaceup() and aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon(c:GetAttack()),0)
@@ -62,7 +62,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_DECK,0,nil)
 	local tg=aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon(tc:GetAttack()),1,tp,HINTMSG_TOREST,nil,nil)
 	if #tg>0 then
-		Duel.SendtoGrave(tg,REASON_EFFECT)
+		Duel.SendtoRest(tg,REASON_EFFECT)
 	end
 end
 function s.aclimit(e,tp,eg,ep,ev,re,r,rp)

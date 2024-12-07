@@ -34,7 +34,7 @@ function s.atkcon(e,tp,ev,ep,eg,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.atkfilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,e:GetHandler())
 end
 function s.tgfilter(c,lv)
-	return c:IsLevelBelow(3) and c:IsSetCard(0x2f) and c:IsAbleToGrave()
+	return c:IsLevelBelow(3) and c:IsSetCard(0x2f) and c:IsAbleToRest()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -44,7 +44,7 @@ end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tc=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil):GetFirst()
-	if tc and Duel.SendtoGrave(tc,REASON_EFFECT)>0 and tc:IsLocation(LOCATION_REST) then
+	if tc and Duel.SendtoRest(tc,REASON_EFFECT)>0 and tc:IsLocation(LOCATION_REST) then
 		local c=e:GetHandler()
 		if not (c:IsRelateToEffect(e) and c:IsFaceup()) then return end
 		--Change Level

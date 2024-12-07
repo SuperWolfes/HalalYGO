@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	e1:SetCountLimit(1,id)
 	e1:SetHintTiming(0,TIMINGS_CHECK_MONSTER_E)
 	c:RegisterEffect(e1)
-	--Add 2 "Dogmatika" monsters from your GY to your hand and Deck
+	--Add 2 "Dogmatika" monsters from your RP to your hand and Deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_TODECK)

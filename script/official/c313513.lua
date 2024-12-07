@@ -25,7 +25,7 @@ end
 s.listed_series={0x7}
 s.listed_names={83104731}
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x7) and c:IsAbleToGraveAsCost()
+	return c:IsFaceup() and c:IsSetCard(0x7) and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_ONFIELD,0,nil)
@@ -35,7 +35,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 	local c=e:GetHandler()
 	local g=aux.SelectUnselectGroup(tg,e,tp,3,3,aux.ChkfMMZ(1),1,tp,HINTMSG_TOREST)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	if not e:IsHasType(EFFECT_TYPE_ACTIVATE) then return end
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)

@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Special Summon (from GY)
+	--Special Summon (from RP)
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -31,7 +31,7 @@ s.listed_names={id}
 s.listed_series={0x173}
 --Special Summon (from hand)
 function s.tgyspcheck(c,rc,e,tp)
-	return c:IsCanBeSpecialSummoned(e,0,tp,false,false) and rc:IsAbleToGrave()
+	return c:IsCanBeSpecialSummoned(e,0,tp,false,false) and rc:IsAbleToRest()
 end
 function s.cfilter(c,e,tp,rc)
 	return c:IsSetCard(0x173) and c:IsMonster() and not c:IsPublic()
@@ -58,10 +58,10 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local sg=g:FilterSelect(tp,Card.IsCanBeSpecialSummoned,1,1,nil,e,0,tp,false,false)
 	if #sg>0 and Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)>0 then
-		Duel.SendtoGrave(g-sg,REASON_EFFECT)
+		Duel.SendtoRest(g-sg,REASON_EFFECT)
 	end
 end
---Special Summon (from GY)
+--Special Summon (from RP)
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD)
 end

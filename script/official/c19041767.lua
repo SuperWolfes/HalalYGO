@@ -1,5 +1,5 @@
 --デュアル・サモナー
---DUAL Summoner
+--Dual Summoner
 local s,id=GetID()
 function s.initial_effect(c)
 	--battle indes

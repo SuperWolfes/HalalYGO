@@ -31,7 +31,7 @@ function s.initial_effect(c)
 	e6:SetCondition(s.descon)
 	e6:SetOperation(s.desop)
 	c:RegisterEffect(e6)
-	--Special summon 1 "The Illusion Knights" monster from GY
+	--Special summon 1 "The Illusion Knights" monster from RP
 	local e7=Effect.CreateEffect(c)
 	e7:SetDescription(aux.Stringid(id,0))
 	e7:SetCategory(CATEGORY_SPECIAL_SUMMON)

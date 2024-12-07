@@ -2,7 +2,7 @@
 --Supreme King Z-ARC
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,s.fusfilter1,s.fusfilter2,s.fusfilter3,s.fusfilter4)
 	Pendulum.AddProcedure(c,false)
 	--spsummon condition

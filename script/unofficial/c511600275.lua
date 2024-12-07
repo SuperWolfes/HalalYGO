@@ -95,7 +95,7 @@ function s.con(e,tp,eg,ep,ev,re,r,rp)
 	return des:IsLocation(LOCATION_REST) and rc:IsRelateToBattle() and rc:IsRelateToEffect(e)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT) then
+	if Duel.SendtoRest(e:GetHandler(),REASON_EFFECT) then
 		Duel.BreakEffect()
 		Duel.Damage(1-tp,eg:GetFirst():GetBaseAttack(),REASON_EFFECT)
 	end

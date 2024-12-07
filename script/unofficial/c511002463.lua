@@ -1,7 +1,7 @@
 --キメラテック・フォートレス・ドラゴン
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--fusion material
 	Fusion.AddProcMixRep(c,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_MACHINE),1,99,CARD_CYBER_DRAGON)
 	--spsummon condition
@@ -63,7 +63,7 @@ function s.atkcon(e)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(nil,tp,LOCATION_ONFIELD,0,e:GetHandler())
-	Duel.SendtoGrave(g,REASON_EFFECT)
+	Duel.SendtoRest(g,REASON_EFFECT)
 end
 function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.NegateAttack()

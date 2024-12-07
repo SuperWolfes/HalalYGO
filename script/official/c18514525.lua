@@ -3,8 +3,8 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Fusion summon procedure
 	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x120),2)
 	--If fusion summoned, lose 1000 ATK, also can attack directly
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e1:SetCondition(s.atkcon)
 	e1:SetOperation(s.atkop)
 	c:RegisterEffect(e1)
-	--Special summon non-fusion "Prank-Kids" monsters with different names from GY
+	--Special summon non-fusion "Prank-Kids" monsters with different names from RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetDescription(aux.Stringid(id,1))

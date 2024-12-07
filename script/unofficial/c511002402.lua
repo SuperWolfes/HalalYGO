@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_SINGLE_RANGE)
 	e3:SetCode(1082946)
 	e3:SetRange(LOCATION_MZONE)
-	e3:SetOperation(s.resetop)
+	e3:SetOperation(s.revetop)
 	c:RegisterEffect(e3)
 end
 s.listed_series={0x508}
@@ -61,12 +61,12 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if ft>3 then ft=3 end
 	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.filter),tp,0x13,0,1,ft,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,0x13,0,1,ft,nil,e,tp)
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end
 end
-function s.resetop(e,tp,eg,ep,ev,re,r,rp)
+function s.revetop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	c:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,0)
 	local ct=c:GetFlagEffect(id)

@@ -1,19 +1,18 @@
 --ＣＮｏ.６ 先史遺産カオス・アトランタル (Anime)
 --Number C6: Chronomaly Chaos Atlandis (Anime)
-Duel.LoadScript("rankup_functions.lua")
 Duel.LoadCardScript("c6387204.lua")
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,7,3)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Rank Up Check
 	aux.EnableCheckRankUp(c,nil,nil,9161357)
 	--battle indestructable
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
 	e0:SetCode(EFFECT_INDESTRUCTABLE_BATTLE)
-	e0:SetValue(aux.NOT(aux.TargetBoolFunction(Card.IsSetCard,0x48)))
+	e0:SetValue(aux.NOT(aux.TargetBoolFunction(Card.IsSetCard,SET_NUMBER)))
 	c:RegisterEffect(e0)
 	--equip
 	local e1=Effect.CreateEffect(c)
@@ -25,8 +24,7 @@ function s.initial_effect(c)
 	e1:SetCountLimit(1)
 	e1:SetTarget(s.eqtg)
 	e1:SetOperation(s.eqop)
-	e1:SetLabel(RESET_EVENT+RESETS_STANDARD)
-	aux.AddEREquipLimit(c,nil,aux.FilterBoolFunction(Card.IsSetCard,0x48),s.equipop,e1,nil)
+	aux.AddEREquipLimit(c,nil,aux.FilterBoolFunction(Card.IsSetCard,SET_NUMBER),s.equipop,e1,nil)
 	--equip 2
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
@@ -35,7 +33,6 @@ function s.initial_effect(c)
 	e2:SetCode(EVENT_BATTLED)
 	e2:SetTarget(s.eqtg2)
 	e2:SetOperation(s.eqop)
-	e2:SetLabel(RESET_EVENT+RESETS_STANDARD)
 	aux.AddEREquipLimit(c,nil,aux.NOT(aux.FilterBoolFunction(Card.IsType,TYPE_TOKEN)),s.equipop,e2,nil)
 	--atkup
 	local e3=Effect.CreateEffect(c)
@@ -44,7 +41,6 @@ function s.initial_effect(c)
 	e3:SetCode(EFFECT_UPDATE_ATTACK)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetValue(s.val)
-	e3:SetLabel(RESET_EVENT+RESETS_STANDARD)
 	--
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,2))
@@ -57,7 +53,6 @@ function s.initial_effect(c)
 	e4:SetCost(s.discost)
 	e4:SetTarget(s.distg)
 	e4:SetOperation(s.disop)
-	e4:SetLabel(RESET_EVENT+RESETS_STANDARD)
 	--lp 1
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(id,3))
@@ -66,7 +61,6 @@ function s.initial_effect(c)
 	e5:SetCost(s.lpcost)
 	e5:SetTarget(s.lptg)
 	e5:SetOperation(s.lpop)
-	e5:SetLabel(RESET_EVENT+RESETS_STANDARD)
 	--spsummon
 	local e6=Effect.CreateEffect(c)
 	e6:SetDescription(aux.Stringid(id,4))
@@ -77,7 +71,6 @@ function s.initial_effect(c)
 	e6:SetCondition(s.spcon)
 	e6:SetTarget(s.sptg)
 	e6:SetOperation(s.spop)
-	e6:SetLabel(RESET_EVENT+RESETS_STANDARD)
 	--
 	local e7=Effect.CreateEffect(c)
 	e7:SetType(EFFECT_TYPE_SINGLE)
@@ -101,11 +94,11 @@ function s.initial_effect(c)
 	c:RegisterEffect(e12)
 	aux.DoubleSnareValidity(c,LOCATION_MZONE)
 end
-s.listed_series={0x48}
+s.listed_series={SET_NUMBER}
 s.listed_names={9161357}
 s.xyz_number=6
 function s.eqfilter(c,tp)
-	return c:IsSetCard(0x48) and (c:IsAbleToChangeControler() or c:IsControler(tp))
+	return c:IsSetCard(SET_NUMBER) and (c:IsAbleToChangeControler() or c:IsControler(tp))
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) and s.eqfilter(chkc,tp) end
@@ -121,10 +114,10 @@ end
 function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
-	if tc and tc:IsRelateToEffect(e) then
+	if tc:IsRelateToEffect(e) then
 		if c:IsFaceup() and c:IsRelateToEffect(e) and tc~=c then
 			s.equipop(c,e,tp,tc)
-		else Duel.SendtoGrave(tc,REASON_EFFECT) end
+		else Duel.SendtoRest(tc,REASON_EFFECT) end
 	end
 end
 function s.eqtg2(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -148,10 +141,10 @@ function s.discon(e,tp,eg,ep,ev,re,r,rp)
 	return tg and tg:IsContains(e:GetHandler()) and Duel.IsChainDisablable(ev)
 end
 function s.discost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():GetEquipGroup():IsExists(Card.IsAbleToGraveAsCost,1,nil) end
+	if chk==0 then return e:GetHandler():GetEquipGroup():IsExists(Card.IsAbleToRestAsCost,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-	local g=e:GetHandler():GetEquipGroup():FilterSelect(tp,Card.IsAbleToGraveAsCost,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	local g=e:GetHandler():GetEquipGroup():FilterSelect(tp,Card.IsAbleToRestAsCost,1,1,nil)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.distg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

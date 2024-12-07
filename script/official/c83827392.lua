@@ -1,9 +1,9 @@
 -- エクスピュアリィ・ノアール
--- Expurery Noir
+-- Expurrely Noir
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	-- 2 Level 7 monsters, or 1 Rank 2 monster with 5+ Xyz materials
 	Xyz.AddProcedure(c,nil,7,2,s.ovfilter,aux.Stringid(id,0))
 	-- Unaffected by opponent's activated effects
@@ -30,15 +30,15 @@ function s.initial_effect(c)
 	local e3=e2:Clone()
 	e3:SetType(EFFECT_TYPE_QUICK_O)
 	e3:SetCode(EVENT_FREE_CHAIN)
-	e3:SetHintTiming(0,TIMINGS_CHECK_MONSTER_E+TIMING_MAIN_END)
+	e3:SetHintTiming(0,TIMINGS_CHECK_MONSTER_E|TIMING_MAIN_END)
 	c:RegisterEffect(e3)
 end
-s.listed_series={0x18d}
+s.listed_series={SET_PURRELY}
 function s.ovfilter(c,tp,lc)
 	return c:IsFaceup() and c:IsRank(2) and c:GetOverlayCount()>=5
 end
 function s.tdconfilter(c)
-	return c:IsSetCard(0x18d) and c:IsLevel(1)
+	return c:IsSetCard(SET_PURRELY) and c:IsLevel(1)
 end
 function s.tdcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:IsHasType(EFFECT_TYPE_QUICK_O)==e:GetHandler():GetOverlayGroup():IsExists(s.tdconfilter,1,nil)

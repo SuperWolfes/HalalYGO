@@ -2,7 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,511000107,511000108,511000109)
 	Fusion.AddContactProc(c,s.contactfilter,s.contactop,s.splimit)
 	--damage

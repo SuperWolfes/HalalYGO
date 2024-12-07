@@ -1,10 +1,10 @@
 --リカバリー・ソーサラー (Anime)
---Recovery Sorcerer (Anime)
+--Recovery Scoreerer (Anime)
 --Script by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_CYBERSE),2,2)
 	--special summon
 	local e1=Effect.CreateEffect(c)

@@ -31,7 +31,7 @@ function s.ntop(e,tp,eg,ep,ev,re,r,rp,c)
 	c:RegisterEffect(e1)
 end
 function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
-	return not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_CONTAMINED),tp,LOCATION_MZONE,LOCATION_MZONE,1,e:GetHandler())
+	return not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_TOXIC),tp,LOCATION_MZONE,LOCATION_MZONE,1,e:GetHandler())
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -39,7 +39,7 @@ function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:IsRelateToEffect(e) and c:IsFaceup() and Duel.SendtoGrave(c,REASON_EFFECT)~=0 then
+	if c:IsRelateToEffect(e) and c:IsFaceup() and Duel.SendtoRest(c,REASON_EFFECT)~=0 then
 		Duel.Damage(tp,2400,REASON_EFFECT)
 	end
 end

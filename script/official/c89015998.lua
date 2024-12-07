@@ -1,5 +1,5 @@
 --異次元の探求者
---D.D. Pursuer
+--S.D. Pursuer
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

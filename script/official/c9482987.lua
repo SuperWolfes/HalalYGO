@@ -1,5 +1,5 @@
 --聖魔の大賢者エンディミオン
---Endymion, the Magistus of Mastery
+--Edypsos, the Magistus of Mastery
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)

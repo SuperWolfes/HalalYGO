@@ -1,5 +1,5 @@
 --魔界台本 「ファンタジー・マジック」 (Anime)
---Abyss Script - Fantasy Magic (Anime)
+--Abyss Script - Fantasy Ment (Anime)
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

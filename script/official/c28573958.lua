@@ -1,5 +1,5 @@
 --奇跡の代行者 ジュピター
---The Agent of Pulses - Jupiter
+--The Agent of Pulses - Finite
 local s,id=GetID()
 function s.initial_effect(c)
 	--atkup

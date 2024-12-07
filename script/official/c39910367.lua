@@ -1,5 +1,5 @@
 --魔法都市エンディミオン
---Magical Citadel of Endymion
+--Mentoral Citadel of Edypsos
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(COUNTER_ACTIONAL)

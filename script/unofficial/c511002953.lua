@@ -1,9 +1,9 @@
---Wind Witch - Winter Bell
+--Wind Mint - Winter Bell
 local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0xf0),1,1,Synchro.NonTunerEx(Card.IsSetCard,0xf0),1,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--copy
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(30312361,0))

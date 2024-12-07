@@ -1,5 +1,5 @@
 --異次元の哨戒機
---D.D. Patrol Plane
+--S.D. Patrol Plane
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)

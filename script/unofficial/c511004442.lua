@@ -1,4 +1,4 @@
---Cubic Karma (movie)
+--Cubic Kaom (movie)
 Duel.LoadScript("c420.lua")
 local s,id=GetID()
 function s.initial_effect(c)
@@ -48,8 +48,8 @@ function s.condition0(e,tp,eg,ev,ep,re,r,rp)
 end
 function s.cost0(e,tp,eg,ev,ep,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(c,REASON_COST)
+	if chk==0 then return c:IsAbleToRestAsCost() end
+	Duel.SendtoRest(c,REASON_COST)
 end
 function s.target0(e,tp,eg,ev,ep,re,r,rp,chk)
 	if chk==0 then return true end

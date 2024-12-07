@@ -1,5 +1,5 @@
 --怨邪帝ガイウス
---Caius the Mega Monarch
+--Kais the Mega Moppar
 local s,id=GetID()
 function s.initial_effect(c)
 	--summon with 1 tribute

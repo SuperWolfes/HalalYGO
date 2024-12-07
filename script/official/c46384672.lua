@@ -42,7 +42,7 @@ end
 function s.cfilter(c,tp)
 	local atk=c:GetAttack()
 	if atk<0 then atk=0 end
-	return c:IsMonster() and c:IsAbleToGraveAsCost()
+	return c:IsMonster() and c:IsAbleToRestAsCost()
 		and Duel.IsExistingTarget(s.dfilter,tp,0,LOCATION_MZONE,1,nil,atk)
 end
 function s.dfilter(c,atk)
@@ -55,7 +55,7 @@ function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local atk=g:GetFirst():GetAttack()
 	if atk<0 then atk=0 end
 	e:SetLabel(atk)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(1-tp) and chkc:IsLocation(LOCATION_MZONE) and s.dfilter(chkc,e:GetLabel()) end
@@ -74,8 +74,8 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetFlagEffect(id)>0
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
+	Duel.SendtoRest(e:GetHandler(),REASON_COST)
 end
 function s.spfilter(c,e,tp)
 	return c:IsCode(73879377) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)

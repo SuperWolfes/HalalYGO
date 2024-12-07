@@ -1,5 +1,5 @@
 --魔導戦士 ブレイカー
---Breaker the Magical Warrior
+--Breaker the Mentoral Warrior
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(COUNTER_ACTIONAL)

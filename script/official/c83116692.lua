@@ -48,24 +48,27 @@ end
 function s.sstg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local c=e:GetHandler()
-	Duel.SetPossibleOperationInfo(0,CATEGORY_REMOVE,c,2,PLAYER_ALL,LOCATION_MZONE+LOCATION_REST)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_REMOVE,c,2,PLAYER_ALL,LOCATION_MZONE|LOCATION_REST)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,c,2,PLAYER_ALL,LOCATION_MZONE)
 end
 function s.ssop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
+	if not c:IsRelateToEffect(e) then return end
 	local ctm=Duel.GetMatchingGroupCount(Card.IsMonster,tp,0,LOCATION_REST,nil)
-	local ctst=Duel.GetMatchingGroupCount(Card.IsType,tp,0,LOCATION_REST,nil,TYPE_ACTIONAL+TYPE_TRAP)
-	local tg=ctm<ctst and Duel.IsExistingMatchingCard(Card.IsAbleToGrave,tp,0,LOCATION_MZONE,1,nil) and c:IsAbleToGrave()
-	local rem=ctm>ctst and Duel.IsExistingMatchingCard(aux.GraveValleyFilter(s.remfilter),tp,0,LOCATION_REST,1,nil) and c:IsAbleToRemove()
+	local ctst=Duel.GetMatchingGroupCount(Card.IsActionalTrap,tp,0,LOCATION_REST,nil)
+	local tg=ctm<ctst and c:IsAbleToRest()
+		and Duel.IsExistingMatchingCard(Card.IsAbleToRest,tp,0,LOCATION_MZONE,1,nil)
+	local rem=ctm>ctst and c:IsAbleToRemove()
+		and Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.remfilter),tp,0,LOCATION_REST,1,nil)
 	if not (tg or rem) then return end
 	local tc
 	if rem and Duel.Remove(c,POS_FACEUP,REASON_EFFECT)>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-		tc=Duel.SelectMatchingCard(1-tp,aux.GraveValleyFilter(s.remfilter),tp,0,LOCATION_REST,1,1,nil)
+		tc=Duel.SelectMatchingCard(1-tp,aux.NecroValleyFilter(s.remfilter),tp,0,LOCATION_REST,1,1,nil)
 		Duel.Remove(tc,POS_FACEUP,REASON_EFFECT)
-	elseif tg and Duel.SendtoGrave(c,REASON_EFFECT)>0 and c:IsLocation(LOCATION_REST) then
+	elseif tg and Duel.SendtoRest(c,REASON_EFFECT)>0 and c:IsLocation(LOCATION_REST) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-		tc=Duel.SelectMatchingCard(1-tp,Card.IsAbleToGrave,tp,0,LOCATION_MZONE,1,1,nil)
-		Duel.SendtoGrave(tc,REASON_EFFECT)
+		tc=Duel.SelectMatchingCard(1-tp,Card.IsAbleToRest,tp,0,LOCATION_MZONE,1,1,nil)
+		Duel.SendtoRest(tc,REASON_EFFECT)
 	end
 end

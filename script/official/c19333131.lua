@@ -3,8 +3,8 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,5,2)
-	c:EnableReviveLimit()
-	--Negate destruction
+	c:EnableAwakeLimit()
+	--Negate mismatching
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_QUICK_O)

@@ -45,7 +45,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 		e:SetOperation(s.topop)
 		s.toptg(e,tp,eg,ep,ev,re,r,rp,1)
 	else
-		e:SetOperation(s.setop)
+		e:SetOperation(s.vetop)
 		s.settg(e,tp,eg,ep,ev,re,r,rp,1)
 	end
 	local dt=Duel.GetDrawCount(tp)
@@ -68,7 +68,7 @@ function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end
 end
 	--Set 1 "Void" actional/trap from deck
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	_replace_count=_replace_count+1
 	if _replace_count<=_replace_max then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)

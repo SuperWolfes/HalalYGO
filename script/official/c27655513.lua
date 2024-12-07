@@ -16,7 +16,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsReason(REASON_BATTLE)
 end
 function s.filter(c)
-	return c:IsAttribute(ATTRIBUTE_WATER) and c:IsAbleToGrave()
+	return c:IsAttribute(ATTRIBUTE_WATER) and c:IsAbleToRest()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -27,6 +27,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if #g>1 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local sg=g:Select(tp,2,2,nil)
-		Duel.SendtoGrave(sg,REASON_EFFECT)
+		Duel.SendtoRest(sg,REASON_EFFECT)
 	end
 end

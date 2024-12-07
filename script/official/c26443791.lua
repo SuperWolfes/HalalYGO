@@ -1,10 +1,10 @@
 --B・F－決戦のビッグ・バリスタ
---Battlewasp - Ballista the Armageddon
+--Battlewasp - Ballista the Cataclysm
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	--pierce
 	local e1=Effect.CreateEffect(c)

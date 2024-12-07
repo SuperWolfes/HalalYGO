@@ -1,5 +1,5 @@
 --影王デュークシェード
---Duke Shade, the Sinister Shadow Lord
+--Duke Shade, the Sinister Shadow Watcher
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

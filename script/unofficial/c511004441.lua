@@ -51,7 +51,7 @@ function s.operation(e,tp,eg,ev,ep,re,r,rp)
 		local mg=tg:Clone()
 		local tc=tg:GetFirst()
 		while tc do
-			if tc:GetOverlayCount()~=0 then Duel.SendtoGrave(tc:GetOverlayGroup(),REASON_RULE) end
+			if tc:GetOverlayCount()~=0 then Duel.SendtoRest(tc:GetOverlayGroup(),REASON_RULE) end
 			tc=tg:GetNext()
 		end
 		c:SetMaterial(mg)

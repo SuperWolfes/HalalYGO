@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_DARK),4,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--target
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(76067258,0))
@@ -72,7 +72,7 @@ function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if Duel.SelectYesNo(tp,aux.Stringid(76067258,1)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=e:GetHandler():GetCardTarget():FilterSelect(tp,s.repfilter,1,1,nil,tp)
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 		return true
 	else return false end
 end

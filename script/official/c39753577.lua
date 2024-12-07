@@ -1,9 +1,9 @@
 --魔妖変生
---Mayakashi Metamorphosis
+--Mayashi Metamorphosis
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special summon 1 of your "Mayakashi" monsters, that is banished or in GY
+	--Special summon 1 of your "Mayashi" monsters, that is banished or in RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)

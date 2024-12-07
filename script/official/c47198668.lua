@@ -1,5 +1,5 @@
 --ＤＤＤ死偉王ヘル・アーマゲドン
---D/D/D Doom King Armageddon
+--D/D/D Doom King Cataclysm
 
 local s,id=GetID()
 function s.initial_effect(c)

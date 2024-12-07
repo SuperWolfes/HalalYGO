@@ -1,8 +1,8 @@
 --DDD超死偉王パープリッシュ・ヘル・アーマゲドン
---D/D/D Super Doom King Purplish Armageddon
+--D/D/D Super Doom King Purplish Cataclysm
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Pendulum.AddProcedure(c,false)
 	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x10af),2)
 	--atk

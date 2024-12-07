@@ -55,7 +55,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.matfilter,tp,LOCATION_DECK+LOCATION_MZONE,0,nil)
 	local rg=aux.SelectUnselectGroup(g,e,tp,3,3,s.spcheck,1,tp,HINTMSG_TOREST)
-	if #rg==3 and Duel.SendtoGrave(rg,REASON_EFFECT)==3 then
+	if #rg==3 and Duel.SendtoRest(rg,REASON_EFFECT)==3 then
 		Duel.BreakEffect()
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local sg=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)

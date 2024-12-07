@@ -1,10 +1,10 @@
 --重起士道－ゴルドナイト
---DUALze Lord Golknight
+--Dualze Watcher Golknight
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
 	Dual.AddProcedure(c)
-	--Search 1 Actional/Trap card that mentions "DUAL monster"
+	--Search 1 Actional/Trap card that mentions "Dual monster"
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)

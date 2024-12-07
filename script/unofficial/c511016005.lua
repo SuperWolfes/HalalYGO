@@ -67,12 +67,12 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local sg=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,g)
 	local tc=sg:GetFirst()
 	tc:SetMaterial(g)
-	Duel.SendtoGrave(g,REASON_MATERIAL+REASON_FUSION+REASON_EFFECT)
+	Duel.SendtoRest(g,REASON_MATERIAL+REASON_FUSION+REASON_EFFECT)
 	Duel.BreakEffect()
 	if Duel.SpecialSummon(tc,SUMMON_TYPE_FUSION,tp,tp,false,false,POS_FACEUP) then
 		tc:CompleteProcedure()
 		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
-		local spg=g:Filter(aux.GraveValleyFilter(s.mspfilter),nil,e,tp)
+		local spg=g:Filter(aux.NecroValleyFilter(s.mspfilter),nil,e,tp)
 		if #spg>1 then
 			Duel.BreakEffect()
 			local fid=e:GetHandler():GetFieldID()

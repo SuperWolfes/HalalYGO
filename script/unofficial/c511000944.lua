@@ -11,9 +11,9 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.roll_suffice=true
+s.roll_dice=true
 function s.con(e,tp,eg,ep,ev,re,r,rp)
-	local tc=Duel.GetFieldCard(e:GetHandler():GetControler(),LOCATION_SZONE,5)
+	local tc=Duel.GetFieldCard(e:GetHandler():GetControler(),LOCATION_FZONE,0)
 	return tc and tc:GetCounter(0x91)>1
 end
 function s.filter(c)
@@ -29,7 +29,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsFaceup() and tc:IsRelateToEffect(e) then
-		local d=Duel.TossSuffice(tp,1)
+		local d=Duel.TossDice(tp,1)
 		local lv=0
 		if d==1 or d==2 then
 			lv=1

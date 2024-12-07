@@ -1,5 +1,5 @@
 --エンド・オブ・アヌビス
---The End of Anubis
+--The End of Anpios
 local s,id=GetID()
 function s.initial_effect(c)
 	--negate

@@ -52,7 +52,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.splimit(e,c)
-	return not c:IsRace(RACE_CONTAMINED)
+	return not c:IsRace(RACE_TOXIC)
 end
 function s.mtcon(e,tp,eg,ep,ev,re,r,rp)
 	return r==REASON_LOCKED and eg:IsExists(Card.IsSetCard,1,nil,0x106)

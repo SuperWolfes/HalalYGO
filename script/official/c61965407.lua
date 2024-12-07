@@ -1,5 +1,5 @@
 --遡洸する煉獄
---Void Purification
+--Void Entertaining
 local s,id=GetID()
 function s.initial_effect(c)
 	Duel.EnableGlobalFlag(GLOBALFLAG_SELF_TOREST)
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.thop)
 	e2:SetCountLimit(1,id)
 	c:RegisterEffect(e2)
-	--Return to the GY
+	--Return to the RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetCategory(CATEGORY_TOREST)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
@@ -34,7 +34,7 @@ function s.initial_effect(c)
 	e3:SetCountLimit(1,{id,1})
 	e3:SetLabel(2)
 	c:RegisterEffect(e3)
-	--Send itself to the GY
+	--Send itself to the RP
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_SINGLE)
 	e4:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -82,7 +82,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) then
-		Duel.SendtoGrave(tc,REASON_EFFECT+REASON_RETURN)
+		Duel.SendtoRest(tc,REASON_EFFECT+REASON_RETURN)
 	end
 end
 function s.sdfilter(c)

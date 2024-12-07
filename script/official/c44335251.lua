@@ -1,8 +1,8 @@
 --魂喰いオヴィラプター
---Souleating Oviraptor
+--Misseating Oviraptor
 local s,id=GetID()
 function s.initial_effect(c)
-	--Search or send to the GY 1 Dinosaur from your Deck
+	--Search or send to the RP 1 Dinosaur from your Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_TOREST)
@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.cfilter(c)
-	return c:IsMonster() and c:IsRace(RACE_DINOSAUR) and (c:IsAbleToHand() or c:IsAbleToGrave())
+	return c:IsMonster() and c:IsRace(RACE_DINOSAUR) and (c:IsAbleToHand() or c:IsAbleToRest())
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_DECK,0,1,nil) end

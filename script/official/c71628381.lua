@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,25247218,58843503)
 	--Return itself to the Extra Deck and special summon materials
 	local e1=Effect.CreateEffect(c)

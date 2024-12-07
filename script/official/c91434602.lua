@@ -1,5 +1,5 @@
 -- マジェスティ・ヒュペリオン
--- Majesty Hyperion
+-- Majesty Hyperbond
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e2:SetTargetRange(LOCATION_MZONE,0)
 	e2:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_WANDERER))
 	c:RegisterEffect(e2)
-	-- Banish card from either GY
+	-- Banish card from either RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_REMOVE)

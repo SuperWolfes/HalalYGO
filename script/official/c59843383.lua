@@ -3,8 +3,8 @@ local s,id=GetID()
 function s.initial_effect(c)
 	c:SetSPSummonOnce(id)
 	--synchro summon
-	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_CONTAMINED),1,1,Synchro.NonTunerEx(Card.IsRace,RACE_CONTAMINED),1,99)
-	c:EnableReviveLimit()
+	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_TOXIC),1,1,Synchro.NonTunerEx(Card.IsRace,RACE_TOXIC),1,99)
+	c:EnableAwakeLimit()
 	--to deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -26,7 +26,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0xd9}
 function s.tdfilter(c)
-	return (c:IsLocation(LOCATION_REST) or c:IsFaceup()) and c:IsType(TYPE_SYNCHRO) and c:IsRace(RACE_CONTAMINED) and c:IsAbleToDeck()
+	return (c:IsLocation(LOCATION_REST) or c:IsFaceup()) and c:IsType(TYPE_SYNCHRO) and c:IsRace(RACE_TOXIC) and c:IsAbleToDeck()
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST+LOCATION_REMOVED,0,1,nil) end
@@ -47,7 +47,7 @@ function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.repfilter(c,tp)
-	return c:IsFaceup() and c:IsControler(tp) and c:IsLocation(LOCATION_MZONE) and c:IsRace(RACE_CONTAMINED) 
+	return c:IsFaceup() and c:IsControler(tp) and c:IsLocation(LOCATION_MZONE) and c:IsRace(RACE_TOXIC) 
 		and not c:IsReason(REASON_REPLACE) and c:IsReason(REASON_BATTLE+REASON_EFFECT)
 end
 function s.rmfilter(c)

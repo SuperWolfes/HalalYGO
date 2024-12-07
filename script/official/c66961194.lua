@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
 	e3:SetRange(LOCATION_MZONE)
-	e3:SetCode(EFFECT_PATRICIAN_OF_DARKNESS)
+	e3:SetCode(EFFECT_PATR_OF_DARKNESS)
 	e3:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e3:SetTargetRange(0,1)
 	e3:SetCondition(s.condition)
@@ -38,13 +38,13 @@ end
 s.listed_series={0xdd}
 s.listed_names={CARD_BLUEEYES_W_DRAGON}
 function s.tgfilter(c)
-	return c:IsCode(CARD_BLUEEYES_W_DRAGON) and c:IsAbleToGraveAsCost()
+	return c:IsCode(CARD_BLUEEYES_W_DRAGON) and c:IsAbleToRestAsCost()
 end
 function s.spcost1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,e:GetHandler()) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,1,e:GetHandler())
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.sptg1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

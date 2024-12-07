@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -62,5 +62,5 @@ function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.desrepop(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
-	Duel.SendtoGrave(tg,REASON_EFFECT+REASON_REPLACE)
+	Duel.SendtoRest(tg,REASON_EFFECT+REASON_REPLACE)
 end

@@ -1,7 +1,7 @@
 --涅槃の超魔導剣士
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--pendulum summon
 	Pendulum.AddProcedure(c,false)
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTunerEx(Card.IsType,TYPE_SYNCHRO),1,99,s.matfilter)

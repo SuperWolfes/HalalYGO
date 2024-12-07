@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Xyz.AddProcedure(c,nil,12,3,nil,nil,99,nil,false)
 	--Special Summon
 	local e1=Effect.CreateEffect(c)

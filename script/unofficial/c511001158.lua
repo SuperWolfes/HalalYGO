@@ -1,5 +1,5 @@
 --ネクロ・サクリファイス
---Necro Sacrifice
+--Necro Sorting
 local s,id=GetID()
 function s.initial_effect(c)
 	--activate

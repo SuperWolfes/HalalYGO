@@ -1,8 +1,8 @@
 --降雷皇ハモン
---Hamon, Lord of Striking Thunder
+--Hamon, Watcher of Striking Thunder
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Cannot be special summoned
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -41,10 +41,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function s.spfilter(c)
-	return c:IsFaceup() and c:GetType()==TYPE_ACTIONAL+TYPE_CONTINUOUS and c:IsAbleToGraveAsCost()
+	return c:IsFaceup() and c:GetType()==TYPE_ACTIONAL+TYPE_CONTINUOUS and c:IsAbleToRestAsCost()
 end
 function s.exfilter(c)
-	return s.spfilter(c) or (c:IsFacedown() and c:IsActional() and c:IsAbleToGraveAsCost())
+	return s.spfilter(c) or (c:IsFacedown() and c:IsActional() and c:IsAbleToRestAsCost())
 end
 function s.spcon(e,c)
 	if c==nil then return true end
@@ -79,7 +79,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	g:DeleteGroup()
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)

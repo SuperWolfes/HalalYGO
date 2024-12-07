@@ -1,5 +1,5 @@
 --覚醒の三幻魔
---Awakening of the Sacred Beasts
+--Awakening of the Clean Beasts
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)

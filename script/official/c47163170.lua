@@ -3,7 +3,7 @@
 --Scripted by Kohana Sonogami
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Link Summon
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x14f),2,2)
 	--Special Summon 1 banished Level 4 or lower Beast/Beast-Warrior/Winged Beast

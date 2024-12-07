@@ -1,5 +1,5 @@
 --ソウルエナジーＭＡＸ！！
---Soul Energy MAX!!
+--Miss Energy MAX!!
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -32,7 +32,7 @@ function s.initial_effect(c)
 end
 s.listed_names={10000000}
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsCode(10000000) and c:IsOriginalAttribute(ATTRIBUTE_DIVINE)
+	return c:IsFaceup() and c:IsCode(10000000) and c:IsOriginalAttribute(ATTRIBUTE_MEGA)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,0,1,nil)
@@ -74,7 +74,7 @@ function s.sumfilter(c)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local tc=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.thfilter),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thfilter),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil):GetFirst()
 	if tc and Duel.SendtoHand(tc,nil,REASON_EFFECT)>0 and tc:IsLocation(LOCATION_HAND) then
 		Duel.ConfirmCards(1-tp,tc)
 		local g=Duel.GetMatchingGroup(s.sumfilter,tp,LOCATION_HAND,0,nil)

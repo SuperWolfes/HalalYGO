@@ -4,9 +4,9 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion Summon procedure
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,CARD_CAN_D,160428037)
-	--Special Summon 1 Level 6 or lower Mental monster from the GY
+	--Special Summon 1 Level 6 or lower Mental monster from the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)

@@ -198,7 +198,7 @@ end
 function s.banop(e,tp,eg,ep,ev,re,r,rp)
 	local g=eg:Filter(s.banfilter,nil,tp)
 	if #g>0 then
-		Duel.SendtoGrave(g,r+REASON_DESTROY+REASON_RETURN)
+		Duel.SendtoRest(g,r+REASON_DESTROY+REASON_RETURN)
 	end
 end
 function s.repfilter(c,tp)
@@ -266,7 +266,7 @@ function s.effop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetType(EFFECT_TYPE_FIELD)
 		e1:SetCode(EFFECT_SET_ATTACK_FINAL)
 		e1:SetTargetRange(LOCATION_MZONE,0)
-		e1:SetCondition(Duel.IsBattlePhase)
+		e1:SetCondition(function() return Duel.IsBattlePhase() end)
 		e1:SetValue(s.atkval)
 		e1:SetReset(RESET_PHASE+PHASE_END)
 		Duel.RegisterEffect(e1,1-tp)

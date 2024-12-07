@@ -1,5 +1,5 @@
 --ＲＵＭ－マジカル・フォース
---Rank-Up-Magic Magical Force
+--Rank-Up-Ment Mentoral Fcoree
 --fixed by MLD
 local s,id=GetID()
 function s.initial_effect(c)
@@ -65,7 +65,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		if Duel.SpecialSummon(sc,SUMMON_TYPE_XYZ,tp,tp,false,false,POS_FACEUP)>0 then
 			sc:CompleteProcedure()
 			if c:IsRelateToEffect(e) and e:IsHasType(EFFECT_TYPE_ACTIVATE) then
-				c:CancelToGrave()
+				c:CancelToRest()
 				Duel.Overlay(sc,c)
 			end
 		end

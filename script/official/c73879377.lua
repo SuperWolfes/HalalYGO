@@ -2,7 +2,7 @@
 --Armed Dragon LV7
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--cannot special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -27,7 +27,7 @@ s.LVset=0x111
 function s.cfilter(c,tp)
 	local atk=c:GetAttack()
 	if atk<0 then atk=0 end
-	return c:IsMonster() and c:IsAbleToGraveAsCost()
+	return c:IsMonster() and c:IsAbleToRestAsCost()
 		and Duel.IsExistingMatchingCard(s.dfilter,tp,0,LOCATION_MZONE,1,nil,atk)
 end
 function s.dfilter(c,atk)
@@ -40,7 +40,7 @@ function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local atk=g:GetFirst():GetAttack()
 	if atk<0 then atk=0 end
 	e:SetLabel(atk)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

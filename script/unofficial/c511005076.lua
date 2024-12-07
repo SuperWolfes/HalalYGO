@@ -1,7 +1,6 @@
---Shining Horizon
 --シャイニング・ホライゾン
---By Shad3
---fixed by MLD
+--Shining Horizon
+--Scripted by Shad3, fixed by MLD
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -36,7 +35,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ConfirmCards(1-p,tc)
 	Duel.ShuffleHand(p)
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and tc:GetType()==TYPE_ACTIONAL
-		and tc:CheckActivateEffect(false,false,false)~=nil and Duel.SelectYesNo(tp,7) then
+		and tc:CheckActivateEffect(false,false,false)~=nil and Duel.SelectEffectYesNo(tp,tc) then
 		local tpe=tc:GetType()
 		local te=tc:GetActivateEffect()
 		local tg=te:GetTarget()
@@ -49,7 +48,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_CARD,0,tc:GetOriginalCode())
 		tc:CreateEffectRelation(te)
 		if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 and not tc:IsHasEffect(EFFECT_REMAIN_FIELD) then
-			tc:CancelToGrave(false)
+			tc:CancelToRest(false)
 		end
 		if te:GetCode()==EVENT_CHAINING then
 			local te2=Duel.GetChainInfo(chain,CHAININFO_TRIGGERING_EFFECT)

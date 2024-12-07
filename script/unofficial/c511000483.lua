@@ -1,5 +1,5 @@
 --魂の結束－ソウル・ユニオン
---Soul Union
+--Miss Union
 --updated by ClaireStanfield
 local s,id=GetID()
 function s.initial_effect(c)

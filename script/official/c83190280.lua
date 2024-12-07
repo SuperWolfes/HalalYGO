@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Enable pendulum summon
 	Pendulum.AddProcedure(c)
-	--Special summon 1 "Lunalight" monster from GY
+	--Special summon 1 "Lunalight" monster from RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--If destroyed by battle or card effect, special summon 1 "Lunalight" monster from GY
+	--If destroyed by battle or card effect, special summon 1 "Lunalight" monster from RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)

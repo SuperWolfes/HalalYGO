@@ -32,7 +32,7 @@ s.listed_series={0x119}
 function s.cfilter(c)
 	return c:IsMonster() and c:IsSetCard(0x119)
 end
-	--Check for 3+ "Salamangreat" monsters in your GY
+	--Check for 3+ "Salamangreat" monsters in your RP
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,3,nil)
 end

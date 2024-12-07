@@ -21,13 +21,13 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return a and d and a:IsControler(tp) and a:IsType(TYPE_LINK) and not d:IsControler(tp)
 end
 function s.costfilter(c)
-	return c:IsRace(RACE_CYBERSE) and c:IsAbleToGraveAsCost()
+	return c:IsRace(RACE_CYBERSE) and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_EXTRA,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_EXTRA,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

@@ -1,4 +1,4 @@
---Micron Force
+--Micron Fcoree
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddPersistentProcedure(c,nil,aux.FilterBoolFunction(Card.IsFaceup),CATEGORY_ATKCHANGE,EFFECT_FLAG_DAMAGE_STEP,TIMING_DAMAGE_STEP,TIMING_DAMAGE_STEP,s.condition)

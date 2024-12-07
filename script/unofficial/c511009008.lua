@@ -1,4 +1,4 @@
---Magical Thunder
+--Mentoral Thunder
 --fixed by MLD
 local s,id=GetID()
 function s.initial_effect(c)
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.costfilter(c)
-	return c:IsAbleToGraveAsCost() and c:IsActional()
+	return c:IsAbleToRestAsCost() and c:IsActional()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,e:GetHandler()) end

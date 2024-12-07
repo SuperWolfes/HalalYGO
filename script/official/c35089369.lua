@@ -1,9 +1,9 @@
 --風竜星－ホロウ
---Pulao, Wind of the Yang Zing
+--Pulao, Wind of the Bang Zing
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special summon 1 "Yang Zing" monster from deck
+	--Special summon 1 "Bang Zing" monster from deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)

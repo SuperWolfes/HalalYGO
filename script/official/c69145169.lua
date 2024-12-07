@@ -1,5 +1,5 @@
 --JP name
---Successor Soul
+--Successor Miss
 --Scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -26,7 +26,7 @@ function s.initial_effect(c)
 	end)
 end
 function s.filter(c,e)
-	return c:IsFaceup() and c:IsType(TYPE_EFFECT) and c:IsAbleToGrave() and (not e or c:IsCanBeEffectTarget(e))
+	return c:IsFaceup() and c:IsType(TYPE_EFFECT) and c:IsAbleToRest() and (not e or c:IsCanBeEffectTarget(e))
 end
 function s.cfilter(c)
 	return c:IsMonster() and c:IsType(TYPE_EFFECT)
@@ -65,7 +65,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	if tc and tc:IsRelateToEffect(e) and Duel.SendtoGrave(tc,REASON_EFFECT)>0 and Duel.GetOperatedGroup():GetFirst():IsLocation(LOCATION_REST) then
+	if tc and tc:IsRelateToEffect(e) and Duel.SendtoRest(tc,REASON_EFFECT)>0 and Duel.GetOperatedGroup():GetFirst():IsLocation(LOCATION_REST) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,1,nil,e,tp)
 		if #g>0 then

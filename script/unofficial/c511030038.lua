@@ -1,5 +1,5 @@
 --ハイドライブ・プロテクション
---Hydradrive Protection
+--Hyddendrive Protection
 --Scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)

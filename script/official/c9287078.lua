@@ -36,9 +36,9 @@ function s.spfilter(c,e,tp)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetTargetCards(e)
-	if #g==2 and Duel.SendtoGrave(g,REASON_EFFECT)==2 and g:IsExists(Card.IsLocation,2,nil,LOCATION_REST) then
+	if #g==2 and Duel.SendtoRest(g,REASON_EFFECT)==2 and g:IsExists(Card.IsLocation,2,nil,LOCATION_REST) then
 		if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
-		local sg=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.spfilter),tp,LOCATION_DECK+LOCATION_REST,0,nil,e,tp)
+		local sg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_DECK+LOCATION_REST,0,nil,e,tp)
 		if #sg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 			Duel.BreakEffect()
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)

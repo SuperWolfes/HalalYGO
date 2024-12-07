@@ -3,8 +3,8 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
-	Fusion.AddProcMix(c,true,true,160007017,CARD_VALKYRIAN_SEWKYRIE)
+	c:EnableAwakeLimit()
+	Fusion.AddProcMix(c,true,true,160007017,CARD_NEEDLKYRIE)
 	--add 1 0 atk monster to hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

@@ -1,5 +1,5 @@
 --ラヴァル・ランスロッド
---Laval Lancelord
+--Laval Lancewatcher
 local s,id=GetID()
 function s.initial_effect(c)
 	--Summon with no tribute
@@ -52,7 +52,7 @@ end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and c:IsFaceup() then
-		Duel.SendtoGrave(c,REASON_EFFECT)
+		Duel.SendtoRest(c,REASON_EFFECT)
 	end
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)

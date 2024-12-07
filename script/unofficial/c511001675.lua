@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.roll_suffice=true
+s.roll_dice=true
 function s.filter(c)
 	return c:IsFaceup() and c:GetLevel()>0
 end
@@ -30,15 +30,15 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) and tc:IsFaceup() then
-		local suffice=Duel.TossSuffice(tp,1)
+		local dice=Duel.TossDice(tp,1)
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_LEVEL)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
-		e1:SetValue(suffice)
+		e1:SetValue(dice)
 		tc:RegisterEffect(e1)
 		local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_HAND,0,nil,tc:GetLevel(),e,tp)
-		if tc:IsReleasableByEffect() and (Duel.GetLocationCount(tp,LOCATION_MZONE)>0 or tc:IsInMainMZone()) and #g>0 and Duel.SelectYesNo(tp,aux.Stringid(102380,0)) then
+		if tc:IsReleasableByEffect() and Duel.GetMZoneCount(tp,tc)>0 and #g>0 and Duel.SelectYesNo(tp,aux.Stringid(102380,0)) then
 			Duel.Release(tc,REASON_EFFECT)
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 			local sg=g:Select(tp,1,1,nil)

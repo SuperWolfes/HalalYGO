@@ -23,7 +23,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 		return #g>0 and g:FilterCount(Card.IsDiscardable,nil)==#g
 	end
 	local g=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
-	Duel.SendtoGrave(g,REASON_COST+REASON_DISCARD)
+	Duel.SendtoRest(g,REASON_COST+REASON_DISCARD)
 end
 function s.filter(c)
 	return c:IsDirectAttacked() and c:IsAttackBelow(1500)
@@ -44,7 +44,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local gc=Duel.GetOperatedGroup():GetFirst()
 		Duel.ConfirmCards(tp,gc)
 		if gc and gc:IsMonster() then		
-			if Duel.SendtoGrave(gc,REASON_EFFECT)~=0 then	
+			if Duel.SendtoRest(gc,REASON_EFFECT)~=0 then	
 				Duel.Damage(1-tp,tc:GetAttack(),REASON_EFFECT)
 				if (Duel.GetLP(1-tp)<=0 and not Duel.IsPlayerAffectedByEffect(1-tp,EFFECT_CANNOT_LOSE_LP)) 
 					or (Duel.GetLP(tp)<=0 and not Duel.IsPlayerAffectedByEffect(tp,EFFECT_CANNOT_LOSE_LP)) then

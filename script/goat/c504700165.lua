@@ -1,5 +1,5 @@
 --万魔殿－悪魔の巣窟－
---Pandemonium (GOAT)
+--Panwardenium (GOAT)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

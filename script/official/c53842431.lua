@@ -1,5 +1,5 @@
 --魔導獣 マスターケルベロス
---Mythical Beast Master Cerberus
+--Mythical Beast Master Cebrar
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

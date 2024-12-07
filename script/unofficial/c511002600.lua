@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,8,3)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--detach
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(48995978,0))
@@ -28,7 +28,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:IsRelateToEffect(e) and c:IsFaceup() and c:RemoveOverlayCard(tp,1,1,REASON_EFFECT) then
+	if c:IsRelateToEffect(e) and c:IsFaceup() and c:RemoveOverlayCard(tp,1,1,REASON_EFFECT)>0 then
 		if c:GetOverlayCount()==0 then
 			Duel.Win(c:GetControler(),WIN_REASON_PUPPET_LEO)
 		end

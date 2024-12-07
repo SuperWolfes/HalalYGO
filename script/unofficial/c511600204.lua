@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_CYBERSE),2)
 	--fusion summon
 	local e1=Fusion.CreateSummonEff({handler=c,location=LOCATION_REST,fusfilter=s.lizardcheck,matfilter=aux.FALSE,

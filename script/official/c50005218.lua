@@ -62,7 +62,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ShuffleDeck(tp)
 		if g:IsExists(Card.IsSetCard,1,nil,0x115) and tc:IsRelateToEffect(e) then
 				Duel.BreakEffect()
-				Duel.SendtoGrave(tc,REASON_EFFECT)
+				Duel.SendtoRest(tc,REASON_EFFECT)
 		end
 	end
 end

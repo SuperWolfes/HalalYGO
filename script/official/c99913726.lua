@@ -1,5 +1,5 @@
 --捕食植物ドロソフィルム・ヒドラ
---Predaplant Drosophyllum Hydra
+--Predaplant Drosophyllum Hydden
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon rule

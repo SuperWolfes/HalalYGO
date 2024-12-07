@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.tdtg)
 	e1:SetOperation(s.tdop)
 	c:RegisterEffect(e1)
-	--Special Summon 1 "Morphtronic" monster that is banished or in the GY
+	--Special Summon 1 "Morphtronic" monster that is banished or in the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)

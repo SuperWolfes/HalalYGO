@@ -22,14 +22,14 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.atcost(e,c,tp)
-	if c:IsRace(RACE_MACHINE+RACE_CONTAMINED) or c:IsImmuneToEffect(e) then return true end
+	if c:IsRace(RACE_MACHINE+RACE_TOXIC) or c:IsImmuneToEffect(e) then return true end
 	local ct=#{Duel.GetPlayerEffect(tp,51100970)}
 	return Duel.CheckReleaseGroup(tp,Card.IsRace,ct,c,c:GetRace())
 end
 function s.atop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetAttacker()
 	if Duel.IsAttackCostPaid()~=2 and tc:IsLocation(LOCATION_MZONE) then
-		if tc:IsRace(RACE_MACHINE+RACE_CONTAMINED) or tc:IsImmuneToEffect(e) then
+		if tc:IsRace(RACE_MACHINE+RACE_TOXIC) or tc:IsImmuneToEffect(e) then
 			Duel.AttackCostPaid()
 		else
 			local minc=Duel.GetFlagEffect(tp,id)==0 and 0 or 1

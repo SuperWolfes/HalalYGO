@@ -50,7 +50,7 @@ function s.cannotDrawCondition(e)
 	return Duel.GetFlagEffect(e:GetHandlerPlayer(),id)>0
 end
 function s.acfilter(c)
-	return c:IsType(TYPE_ACTION) and not c:IsType(TYPE_FIELD) and c:IsAbleToGrave()
+	return c:IsType(TYPE_ACTION) and not c:IsType(TYPE_FIELD) and c:IsAbleToRest()
 end
 function s.canDiscardCondition(e,tp)
 	return Duel.GetFlagEffect(tp,id)>0 and Duel.IsExistingMatchingCard(s.acfilter,tp,LOCATION_HAND,0,1,nil)
@@ -60,7 +60,7 @@ function s.discardOp(e,tp)
 	local g=Duel.SelectMatchingCard(tp,s.acfilter,tp,LOCATION_HAND,0,1,1,nil)
 	if #g>0 then
 		Duel.Hint(HINT_CARD,0,id)
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 		Duel.ResetFlagEffect(tp,id)
 	end
 end

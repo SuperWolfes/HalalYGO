@@ -1,5 +1,5 @@
 --EMスマイル・マジシャン
---Performapal Smile Sorcerer
+--Performapal Smile Scoreerer
 --scripted by Logical Nonsense
 local s,id=GetID()
 function s.initial_effect(c)
@@ -87,7 +87,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ConfirmCards(1-tp,g)
 	end
 end
-	--Check for "Performapal" monsters, "Magician" pendulums, or "Odd-Eyes" monsters
+	--Check for "Performapal" monsters, "Mentor" pendulums, or "Odd-Eyes" monsters
 function s.drfilter(c)
 	return c:IsFaceup() and (c:IsSetCard(0x9f) or (c:IsSetCard(0x98) and c:IsType(TYPE_PENDULUM)) or c:IsSetCard(0x99))
 end

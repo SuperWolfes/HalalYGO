@@ -37,8 +37,8 @@ function s.ctop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() and e:GetHandler():GetCounter(0x34)>1 end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() and e:GetHandler():GetCounter(0x34)>1 end
+	Duel.SendtoRest(e:GetHandler(),REASON_COST)
 end
 function s.filter(c,e,tp)
 	return c:IsAttribute(ATTRIBUTE_EARTH) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

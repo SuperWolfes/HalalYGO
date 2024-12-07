@@ -1,5 +1,5 @@
 --Ｅｍフレイム・イーター
---Performage Flame Eater
+--Performanced Flame Eater
 
 local s,id=GetID()
 function s.initial_effect(c)

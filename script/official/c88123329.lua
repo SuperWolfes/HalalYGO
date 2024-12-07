@@ -14,7 +14,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0xb5}
 function s.tgfilter(c,rac)
-	return c:IsSetCard(0xb5) and c:IsRace(rac) and c:IsAbleToGrave()
+	return c:IsSetCard(0xb5) and c:IsRace(rac) and c:IsAbleToRest()
 end
 function s.rmfilter(c,tp)
 	return c:IsSetCard(0xb5) and c:IsAbleToRemove()
@@ -31,6 +31,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if #g>0 and Duel.Remove(g,POS_FACEUP,REASON_EFFECT)~=0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local sg=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil,g:GetFirst():GetRace())
-		Duel.SendtoGrave(sg,REASON_EFFECT)
+		Duel.SendtoRest(sg,REASON_EFFECT)
 	end
 end

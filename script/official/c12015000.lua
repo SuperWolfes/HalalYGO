@@ -6,8 +6,8 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion summon procedure
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_ROCK),s.ffilter)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Clock Lizard check
 	Auxiliary.addLizardCheck(c)
 	--Must first be special summoned with "Fossil Fusion"

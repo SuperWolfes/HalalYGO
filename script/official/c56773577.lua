@@ -1,5 +1,5 @@
 --ネクロバレーの神殿
---Necrovalley Temple
+--Necrovalley Masjid
 
 local s,id=GetID()
 function s.initial_effect(c)
@@ -39,7 +39,7 @@ function s.initial_effect(c)
 	e5:SetProperty(EFFECT_FLAG_DELAY)
 	e5:SetCondition(s.setcon)
 	e5:SetTarget(s.settg)
-	e5:SetOperation(s.setop)
+	e5:SetOperation(s.vetop)
 	c:RegisterEffect(e5)
 end
 s.listed_series={0x2e,0x91}
@@ -58,7 +58,7 @@ end
 function s.acop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
-	local tc=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.filter),tp,LOCATION_HAND+LOCATION_REST,0,1,1,nil,tp):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,LOCATION_HAND+LOCATION_REST,0,1,1,nil,tp):GetFirst()
 	Duel.ActivateFieldActional(tc,e,tp,eg,ep,ev,re,r,rp)
 end
 function s.setcon(e,tp,eg,ep,ev,re,r,rp)
@@ -71,7 +71,7 @@ end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_DECK,0,1,nil) end
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 	local tc=Duel.SelectMatchingCard(tp,s.setfilter,tp,LOCATION_DECK,0,1,1,nil):GetFirst()
 	if tc then

@@ -5,7 +5,7 @@ local s,id=GetID()
 local COUNTER_FW=0x14c
 local TYPES=TYPE_FUSION+TYPE_LOCKED+TYPE_SYNCHRO+TYPE_XYZ
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	c:EnableCounterPermit(COUNTER_FW)
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_EFFECT),3)
 	--counter

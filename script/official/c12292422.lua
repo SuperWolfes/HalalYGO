@@ -19,7 +19,7 @@ function s.fffilter(c)
 	return c:IsCode(CARD_FOSSIL_FUSION) and not c:IsPublic()
 end
 function s.tgyfilter(c)
-	return c:IsMonster() and c:IsAbleToGrave()
+	return c:IsMonster() and c:IsAbleToRest()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.fffilter,tp,LOCATION_HAND,0,1,nil) end
@@ -35,11 +35,11 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,1-tp,LOCATION_HAND+LOCATION_DECK)
 end
 function s.filter(c,typ,lv)
-	return c:IsRace(typ) and c:IsLevel(lv) and c:IsAbleToGrave()
+	return c:IsRace(typ) and c:IsLevel(lv) and c:IsAbleToRest()
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.SelectMatchingCard(tp,s.tgyfilter,tp,LOCATION_HAND,0,1,1,nil):GetFirst()
-	if tc and Duel.SendtoGrave(tc,REASON_EFFECT)~=0 and tc:IsLocation(LOCATION_REST) then
+	if tc and Duel.SendtoRest(tc,REASON_EFFECT)~=0 and tc:IsLocation(LOCATION_REST) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RACE)
 		local typ=Duel.AnnounceRace(tp,1,RACE_ALL)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_LVRANK)
@@ -47,7 +47,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=Duel.SelectMatchingCard(1-tp,s.filter,1-tp,LOCATION_HAND+LOCATION_DECK,0,1,1,nil,typ,lv)
 			if #g>0 then
-			Duel.SendtoGrave(g,REASON_EFFECT)
+			Duel.SendtoRest(g,REASON_EFFECT)
 		end
 	end
 end

@@ -1,6 +1,6 @@
 --無敗将軍 フリード
 --Freed the Matchless General (GOAT)
---If revived by premature burial, not destroyed
+--If awaked by premature burial, not destroyed
 local s,id=GetID()
 function s.initial_effect(c)
 	--disable

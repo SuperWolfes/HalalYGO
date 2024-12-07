@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local tc=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
+	local tc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
 	if chk==0 then return Duel.CheckLPCost(tp,1000) and tc and tc:IsCanRemoveCounter(tp,0x91,8,REASON_COST) end
 	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
 	tc:RemoveCounter(tp,0x91,8,REASON_COST)
@@ -29,12 +29,12 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(p,0,LOCATION_HAND)
 	if #g>0 then
 		local sg=g:RandomSelect(p,1)
-		Duel.SendtoGrave(sg,REASON_EFFECT+REASON_DISCARD)
+		Duel.SendtoRest(sg,REASON_EFFECT+REASON_DISCARD)
 		g:RemoveCard(sg:GetFirst())
 		if #g>0 then
 			Duel.Hint(HINT_SELECTMSG,1-p,HINTMSG_DISCARD)
 			sg=g:Select(1-p,1,1,nil)
-			Duel.SendtoGrave(sg,REASON_EFFECT+REASON_DISCARD)
+			Duel.SendtoRest(sg,REASON_EFFECT+REASON_DISCARD)
 		end
 	end
 end

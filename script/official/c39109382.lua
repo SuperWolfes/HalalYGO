@@ -1,5 +1,5 @@
 --機皇統制
---Meklord Assembly
+--Mekwatcher Assembly
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)

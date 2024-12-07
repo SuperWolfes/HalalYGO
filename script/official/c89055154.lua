@@ -1,5 +1,5 @@
 --力天使ヴァルキリア
---Power Angel Valkyria
+--Power Angel Balkania
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon

@@ -1,4 +1,4 @@
---Lifeline from the Grave Place
+--Lifeline from the Resting Place
 local s,id=GetID()
 function s.initial_effect(c)
 	--spsummon

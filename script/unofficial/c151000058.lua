@@ -1,5 +1,5 @@
 --アンデットワールド (Action Field)
---Contaminated World (Action Field)
+--Toxic World (Action Field)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e2:SetRange(LOCATION_FZONE)
 	e2:SetTargetRange(LOCATION_MZONE+LOCATION_REST,LOCATION_MZONE+LOCATION_REST)
 	e2:SetCode(EFFECT_CHANGE_RACE)
-	e2:SetValue(RACE_CONTAMINED)
+	e2:SetValue(RACE_TOXIC)
 	e2:SetTarget(s.tg)
 	c:RegisterEffect(e2)
 	--summon limit
@@ -58,8 +58,8 @@ function s.tg(e,c)
 end
 function s.val(e,c,re,chk)
 	if chk==0 then return true end
-	return RACE_CONTAMINED
+	return RACE_TOXIC
 end
 function s.sumlimit(e,c,tp,sumtp)
-	return sumtp&SUMMON_TYPE_TRIBUTE==SUMMON_TYPE_TRIBUTE and not c:IsRace(RACE_CONTAMINED)
+	return sumtp&SUMMON_TYPE_TRIBUTE==SUMMON_TYPE_TRIBUTE and not c:IsRace(RACE_TOXIC)
 end

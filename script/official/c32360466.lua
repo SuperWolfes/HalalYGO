@@ -1,5 +1,5 @@
 --天地開闢
---Beginning of Heaven and Earth
+--Beginning of Spectrum and Earth
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -40,6 +40,6 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			Duel.SendtoHand(tc,nil,REASON_EFFECT)
 			sg:RemoveCard(tc)
 		end
-		Duel.SendtoGrave(sg,REASON_EFFECT)
+		Duel.SendtoRest(sg,REASON_EFFECT)
 	end
 end

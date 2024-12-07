@@ -1,9 +1,9 @@
 --スプライト・エルフ
---Splight Elf
+--Spright Elf
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,nil,2,2,s.lcheck)
 	--Cannot be Link Material the turn it's Link Summoned
 	local e1=Effect.CreateEffect(c)
@@ -23,14 +23,14 @@ function s.initial_effect(c)
 	e2:SetTarget(function(e,c) return e:GetHandler():GetLinkedGroup():IsContains(c) end)
 	e2:SetValue(aux.tgoval)
 	c:RegisterEffect(e2)
-	--Special Summon 1 Level/Rank/Link-2 from your GY
+	--Special Summon 1 Level/Rank/Link-2 from your RP
 	local e3=Effect.CreateEffect(c)
-	e3:SetCode(CATEGORY_SPECIAL_SUMMON)
+	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_QUICK_O)
 	e3:SetCode(EVENT_FREE_CHAIN)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e3:SetRange(LOCATION_MZONE)
-	e3:SetHintTiming(0,TIMINGS_CHECK_MONSTER+TIMING_MAIN_END)
+	e3:SetHintTiming(0,TIMINGS_CHECK_MONSTER|TIMING_MAIN_END)
 	e3:SetCountLimit(1,id)
 	e3:SetCondition(function() return Duel.IsMainPhase() end)
 	e3:SetTarget(s.sptg)

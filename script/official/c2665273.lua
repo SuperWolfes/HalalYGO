@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	c:SetUniqueOnField(1,0,id)
 	Xyz.AddProcedure(c,nil,9,2,nil,nil,99)
 	--This card's original ATK/DEF become 1000 x its number of materials
@@ -17,13 +17,14 @@ function s.initial_effect(c)
 	local e2=e1:Clone()
 	e2:SetCode(EFFECT_SET_BASE_DEFENSE)
 	c:RegisterEffect(e2)
-	--Draws for each player plus attaching to this card
+	--Each player draws 1 card and attaches 1 card to this card
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_DRAW)
 	e3:SetType(EFFECT_TYPE_QUICK_O)
 	e3:SetCode(EVENT_FREE_CHAIN)
 	e3:SetRange(LOCATION_MZONE)
+	e3:SetHintTiming(0,TIMINGS_CHECK_MONSTER_E)
 	e3:SetCountLimit(1,id)
 	e3:SetCost(aux.dxmcostgen(1,1,nil))
 	e3:SetTarget(s.target)
@@ -32,9 +33,6 @@ function s.initial_effect(c)
 end
 function s.atkval(e,c)
 	return c:GetOverlayCount()*1000
-end
-function s.filter(c)
-	return not c:IsType(TYPE_TOKEN)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,1) and Duel.IsPlayerCanDraw(1-tp,1) end
@@ -55,9 +53,10 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if not (pc and c:IsRelateToEffect(e) and c:IsFaceup()) then return end
 	Duel.BreakEffect()
 	for _,p in pairs(ps) do
-		local tc=Duel.SelectMatchingCard(p,s.filter,p,LOCATION_HAND+LOCATION_ONFIELD,0,1,1,c):GetFirst()
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTACH)
+		local tc=Duel.SelectMatchingCard(p,Card.IsCanBeXyzMaterial,p,LOCATION_HAND|LOCATION_ONFIELD,0,1,1,c,c,tp,REASON_EFFECT):GetFirst()
 		if tc then
-			tc:CancelToGrave()
+			tc:CancelToRest()
 			Duel.Overlay(c,tc,true)
 		end
 	end

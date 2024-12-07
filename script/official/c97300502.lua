@@ -1,10 +1,10 @@
 --召喚獣アウゴエイデス
---Invoked Augoeides
+--Invalidated Augoeides
 --Scripted by ahtelel
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,86120751,aux.FilterBoolFunctionEx(Card.IsType,TYPE_FUSION))
 	--atk up
 	local e1=Effect.CreateEffect(c)

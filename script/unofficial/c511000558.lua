@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,nil,1,1,aux.FilterBoolFunction(Card.IsCode,2403771),1,1)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--change lp
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -86,7 +86,7 @@ function s.valcheck(e,c)
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-		e1:SetCode(21142671)
+		e1:SetCode(EFFECT_MULTIPLE_TUNERS)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TOFIELD+RESET_PHASE+PHASE_END)
 		c:RegisterEffect(e1)
 	end

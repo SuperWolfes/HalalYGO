@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--sum limit
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--special summon
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)

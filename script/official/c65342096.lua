@@ -1,5 +1,5 @@
 --魔法都市の実験施設
---Endymion's Lab
+--Edypsos's Lab
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)

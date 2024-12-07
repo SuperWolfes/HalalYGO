@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,s.matfilter,aux.FilterBoolFunctionEx(Card.IsSetCard,0xfb))
 	--avoid damage
 	local e1=Effect.CreateEffect(c)
@@ -97,7 +97,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 				chk=true
 			end
 		end
-		local g=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.thfilter),tp,LOCATION_REST,0,nil)
+		local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.thfilter),tp,LOCATION_REST,0,nil)
 		if chk and #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 			Duel.BreakEffect()
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)

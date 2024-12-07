@@ -1,5 +1,5 @@
 --魔妖壊劫
---Mayakashi Memorial
+--Mayashi Memorial
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -52,16 +52,16 @@ function s.atkval(e,c)
 	return g:GetClassCount(Card.GetCode)*-100
 end
 function s.drcfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x121) and c:IsAbleToGraveAsCost()
+	return c:IsFaceup() and c:IsSetCard(0x121) and c:IsAbleToRestAsCost()
 end
 function s.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGraveAsCost()
+	if chk==0 then return c:IsAbleToRestAsCost()
 		and Duel.IsExistingMatchingCard(s.drcfilter,tp,LOCATION_MZONE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.drcfilter,tp,LOCATION_MZONE,0,1,1,nil)
 	g:AddCard(c)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,1) end
@@ -74,7 +74,7 @@ function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Draw(p,d,REASON_EFFECT)
 end
 function s.cfilter(c,e,tp)
-	return c:IsRace(RACE_CONTAMINED) and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
+	return c:IsRace(RACE_TOXIC) and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
 		and (Duel.GetLocationCount(tp,LOCATION_MZONE)>0 or (c:IsLocation(LOCATION_MZONE) and c:GetSequence()<5))
 		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,0,1,c,e,tp)
 end

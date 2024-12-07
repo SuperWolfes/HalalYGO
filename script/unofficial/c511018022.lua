@@ -1,5 +1,5 @@
 --星読みの魔術師
---Timegazer Magician (Anime)
+--Timegazer Mentor (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--indes

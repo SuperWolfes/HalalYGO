@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local tc=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
+	local tc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
 	if chk==0 then return tc and tc:IsCanRemoveCounter(tp,0x91,4,REASON_COST) end
 	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
 	tc:RemoveCounter(tp,0x91,4,REASON_COST)
@@ -22,7 +22,7 @@ function s.filter(c,e,tp,m)
 		and m:CheckWithSumEqual(Card.GetLockedLevel,c:GetLevel(),1,99,c)
 end
 function s.matfilter(c)
-	return c:IsType(TYPE_NORMAL) and c:IsAbleToGrave()
+	return c:IsType(TYPE_NORMAL) and c:IsAbleToRest()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
@@ -42,7 +42,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local mat=mg:SelectWithSumEqual(tp,Card.GetLockedLevel,tc:GetLevel(),1,99,tc)
 		tc:SetMaterial(mat)
-		Duel.SendtoGrave(mat,REASON_EFFECT+REASON_MATERIAL+REASON_LOCKED)
+		Duel.SendtoRest(mat,REASON_EFFECT+REASON_MATERIAL+REASON_LOCKED)
 		Duel.BreakEffect()
 		Duel.SpecialSummon(tc,SUMMON_TYPE_LOCKED,tp,tp,true,false,POS_FACEUP)
 		tc:CompleteProcedure()

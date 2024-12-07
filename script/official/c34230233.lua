@@ -1,5 +1,5 @@
 --暗黒界の龍神 グラファ
---Grapha, Dragon Lord of Dark World
+--Grapha, Dragon Watcher of Dark World
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon

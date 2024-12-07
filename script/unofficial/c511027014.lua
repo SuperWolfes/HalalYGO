@@ -1,5 +1,5 @@
 --ハイドライブ・リ・アドベント
---Hydradrive Readvent
+--Hyddendrive Readvent
 --Scripted by Playmaker 772211
 --Fixed by Larry126
 local s,id=GetID()

@@ -1,5 +1,5 @@
 --パーシアスの神域
---The Sanctum of Parshath
+--The Sanctum of Parhaf
 local s,id=GetID()
 function s.initial_effect(c)
 	--activate

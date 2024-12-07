@@ -1,5 +1,5 @@
 --毒の魔妖－束脛
---Tsukahagi,the Poisonous Mayakashi
+--Tsutrahagi,the Poisonous Mayashi
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)

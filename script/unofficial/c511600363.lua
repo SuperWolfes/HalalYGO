@@ -1,5 +1,5 @@
 --カルマセプト・ドラゴン
---Karmacept Dragon
+--Kaomcept Dragon
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -59,7 +59,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if c:IsLocation(LOCATION_MZONE) and c:IsFacedown() then return end
 	local tc=Duel.GetFirstTarget()
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 or tc:IsControler(tp) or tc:IsFacedown() or not tc:IsRelateToEffect(e) then
-		Duel.SendtoGrave(c,REASON_EFFECT)
+		Duel.SendtoRest(c,REASON_EFFECT)
 		return
 	end
 	Duel.Equip(tp,c,tc,true)

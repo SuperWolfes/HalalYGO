@@ -21,13 +21,14 @@ function s.initial_effect(c)
 	e3:SetOperation(s.desop2)
 	c:RegisterEffect(e3)
 	e3:SetLabelObject(e2)
-	--Return cards in the GY to the Deck
+	--Return cards in the RP to the Deck
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,0))
-	e4:SetCategory(CATEGORY_TOHAND)
-	e4:SetType(EFFECT_TYPE_TRIGGER_F+EFFECT_TYPE_SINGLE)
+	e4:SetCategory(CATEGORY_TODECK)
+	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e4:SetCode(EVENT_TO_REST)
 	e4:SetCondition(s.retcon)
+	e4:SetTarget(s.rettg)
 	e4:SetOperation(s.retop)
 	c:RegisterEffect(e4)
 end
@@ -46,7 +47,12 @@ end
 function s.retcon(e,tp,eg,ep,ev,re,r,rp)
 	return re and re:GetHandler()==e:GetHandler()
 end
+function s.rettg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return true end
+	local g=Duel.GetFieldGroup(tp,0,LOCATION_REST)
+	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,#g,1-tp,LOCATION_REST)
+end
 function s.retop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(tp,0,LOCATION_REST)
-	Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
+	Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT,1-tp)
 end

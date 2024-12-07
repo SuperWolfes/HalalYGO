@@ -1,5 +1,5 @@
 --薔薇障壁大旋風
---Rose Barrier Force
+--Rose Barrier Fcoree
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

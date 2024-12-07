@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	e4:SetCode(EFFECT_CANNOT_BE_LINK_MATERIAL)
 	e4:SetValue(1)
 	c:RegisterEffect(e4)
-	--Self-destruction
+	--Self-mismatching
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
 	e5:SetRange(LOCATION_SZONE)

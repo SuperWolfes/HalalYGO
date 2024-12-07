@@ -6,7 +6,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	Locked.AddProcGreaterCode(c,4,nil,75901113)
-	--Special summon 1 "Paladin of Armored Dragon" from GY
+	--Special summon 1 "Paladin of Armored Dragon" from RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_REMOVE+CATEGORY_SPECIAL_SUMMON)
@@ -46,7 +46,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,c,1,tp,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end
-	--Banish itself from GY, and if you do, special summon 1 "Paladin of Armored Dragon" from GY
+	--Banish itself from RP, and if you do, special summon 1 "Paladin of Armored Dragon" from RP
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and Duel.Remove(c,POS_FACEUP,REASON_EFFECT)~=0 then

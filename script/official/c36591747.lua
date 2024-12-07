@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--From cards_specific_functions.lua
 	aux.AddAttractionEquipProc(c)
-	--You: Change battle position and Set 1 "Attraction" Trap from your GY
+	--You: Change battle position and Set 1 "Attraction" Trap from your RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_POSITION)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetHintTiming(0,TIMING_END_PHASE)
 	e1:SetCondition(aux.AttractionEquipCon(true))
 	e1:SetTarget(s.settg)
-	e1:SetOperation(s.setop)
+	e1:SetOperation(s.vetop)
 	c:RegisterEffect(e1)
 	--Your opponent: Banish the equipped monster until the End Phase
 	local e2=e1:Clone()
@@ -37,7 +37,7 @@ function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_POSITION,tc,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,nil,1,tp,0)
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetHandler():GetEquipTarget()
 	if tc and tc:IsLocation(LOCATION_MZONE) and Duel.ChangePosition(tc,POS_FACEUP_DEFENSE,POS_FACEDOWN_DEFENSE,POS_FACEUP_ATTACK,POS_FACEUP_ATTACK)>0 then
 		Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_SET)

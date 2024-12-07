@@ -78,7 +78,7 @@ function s.discon(e,tp,eg,ep,ev,re,r,rp)
 	return rp==1-tp and Duel.IsChainDisablable(ev)
 end
 function s.discostfilter(c)
-	return c:IsSetCard(0x17b) and c:IsOriginalType(TYPE_MONSTER) and c:IsAbleToGraveAsCost()
+	return c:IsSetCard(0x17b) and c:IsOriginalType(TYPE_MONSTER) and c:IsAbleToRestAsCost()
 		and (c:IsFaceup() or c:IsLocation(LOCATION_HAND))
 end
 function s.discost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -86,7 +86,7 @@ function s.discost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.discostfilter,tp,LOCATION_ONFIELD+LOCATION_HAND,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.distg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return not re:GetHandler():IsDisabled() end

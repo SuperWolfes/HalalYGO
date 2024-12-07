@@ -1,5 +1,5 @@
 --魔導戒厳令
---Magic Law
+--Ment Law
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -19,11 +19,11 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.tgfilter(c,tp)
-	return c:IsMonster() and c:IsAbleToGrave()
+	return c:IsMonster() and c:IsAbleToRest()
 		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND,0,2,c,c:GetCode())
 end
 function s.filter(c,code)
-	return c:IsMonster() and c:IsAbleToGrave() and c:IsCode(code)
+	return c:IsMonster() and c:IsAbleToRest() and c:IsCode(code)
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -36,7 +36,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	if #g>0 then
 		local g2=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_HAND,0,2,2,g:GetFirst(),g:GetFirst():GetCode())
 		g:Merge(g2)
-		if Duel.SendtoGrave(g,REASON_EFFECT)~=0 then
+		if Duel.SendtoRest(g,REASON_EFFECT)~=0 then
 			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetType(EFFECT_TYPE_FIELD)
 			e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)

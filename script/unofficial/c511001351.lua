@@ -1,4 +1,4 @@
---Magical Longicorn
+--Mentoral Longicorn
 local s,id=GetID()
 function s.initial_effect(c)
 	--disable and destroy

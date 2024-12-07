@@ -4,7 +4,7 @@
 local s,id=GetID()
 local TYPE_FRSX=TYPE_FUSION+TYPE_LOCKED+TYPE_SYNCHRO+TYPE_XYZ
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,nil,2,4,s.lcheck)
 	--atk down
 	local e1=Effect.CreateEffect(c)

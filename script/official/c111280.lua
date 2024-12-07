@@ -1,9 +1,9 @@
 --黒魔導強化
---Dark Magic Expanded
+--Dark Ment Expanded
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Apply various effects, depending on the number of "Dark Magicians" and "Dark Magician Girls" in GY
+	--Apply various effects, depending on the number of "Dark Mentors" and "Dark Mentor Girls" in RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_ATKCHANGE)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -15,10 +15,10 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.listed_names={CARD_DARK_MAGICIAN,CARD_DARK_MAGICIAN_GIRL}
+s.listed_names={CARD_DARK_MENTOR,CARD_DARK_MENTOR_GIRL}
 
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsCode(CARD_DARK_MAGICIAN,CARD_DARK_MAGICIAN_GIRL)
+	return c:IsFaceup() and c:IsCode(CARD_DARK_MENTOR,CARD_DARK_MENTOR_GIRL)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local ct=Duel.GetMatchingGroupCount(s.cfilter,tp,LOCATION_ONFIELD+LOCATION_REST,LOCATION_ONFIELD+LOCATION_REST,nil)

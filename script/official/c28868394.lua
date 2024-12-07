@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
-	--Set 1 "Hole" normal trap from GY
+	--Set 1 "Hole" normal trap from RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetType(EFFECT_TYPE_IGNITION)
@@ -34,7 +34,7 @@ function s.initial_effect(c)
 	e3:SetCost(aux.bfgcost)
 	e3:SetCondition(s.setcon)
 	e3:SetTarget(s.settg)
-	e3:SetOperation(s.setop)
+	e3:SetOperation(s.vetop)
 	c:RegisterEffect(e3)
 end
 	--Lists "Hole" archetype
@@ -47,14 +47,14 @@ function s.efilter(e,te)
 end
 	--Check for a set trap
 function s.cfilter(c)
-	return c:IsTrap() and c:IsFacedown() and c:IsAbleToGraveAsCost()
+	return c:IsTrap() and c:IsFacedown() and c:IsAbleToRestAsCost()
 end
-	--Send 1 set trap to GY as cost
+	--Send 1 set trap to RP as cost
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_ONFIELD,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 	--Activation legality
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -88,8 +88,8 @@ function s.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local g=Duel.SelectTarget(tp,s.setfilter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,0,0)
 end
-	--Set 1 "Hole" normal trap from GY
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+	--Set 1 "Hole" normal trap from RP
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) and tc:IsSSetable() then
 		Duel.SSet(tp,tc)

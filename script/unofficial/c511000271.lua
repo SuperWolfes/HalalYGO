@@ -72,7 +72,7 @@ function s.drop(e,tp,eg,ep,ev,re,r,rp)
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 				sg=sg:Select(p,1,1,nil)
 			end
-			Duel.SendtoGrave(sg,REASON_EFFECT+REASON_DISCARD)
+			Duel.SendtoRest(sg,REASON_EFFECT+REASON_DISCARD)
 		end
 		Duel.ShuffleHand(p)
 	end

@@ -1,5 +1,5 @@
 --RUM－千死蛮巧
---Rank-Up-Magic Admiration of the Thousands
+--Rank-Up-Ment Admiration of the Thousands
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

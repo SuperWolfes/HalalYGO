@@ -1,5 +1,5 @@
 -- 墓守の罠
--- Gravekeeper's Trap
+-- Restkeeper's Trap
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	-- Cannot activate effects or Special Summon from the GY
+	-- Cannot activate effects or Special Summon from the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e3:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
 	e3:SetTarget(function(_,c) return c:IsLocation(LOCATION_REST) end)
 	c:RegisterEffect(e3)
-	-- Search 1 "Gravekeeper's" or EARTH Wanderer monster
+	-- Search 1 "Restkeeper's" or EARTH Wanderer monster
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,0))
 	e4:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND)
@@ -30,7 +30,7 @@ function s.initial_effect(c)
 	e4:SetCode(EVENT_FREE_CHAIN)
 	e4:SetRange(LOCATION_SZONE)
 	e4:SetCountLimit(1,id)
-	e4:SetHintTiming(0,TIMINGS_CHECK_MONSTER+TIMING_MAIN_END)
+	e4:SetHintTiming(0,TIMINGS_CHECK_MONSTER|TIMING_MAIN_END)
 	e4:SetCondition(function() return Duel.IsMainPhase() end)
 	e4:SetCost(s.thcost)
 	e4:SetTarget(s.thtg)
@@ -58,7 +58,7 @@ function s.initial_effect(c)
 	end)
 end
 s.listed_names={CARD_EXCHANGE_GUARDIAN}
-s.listed_series={0x2e}
+s.listed_series={SET_RESTKEEPERS}
 function s.limcon(e)
 	return Duel.IsExistingMatchingCard(Card.IsCode,e:GetHandlerPlayer(),LOCATION_REST,0,1,nil,CARD_EXCHANGE_GUARDIAN)
 end
@@ -68,14 +68,13 @@ function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.thfilter(c)
 	return c:IsAbleToHand() and c:IsMonster()
-		and (c:IsSetCard(0x2e) or (c:IsAttribute(ATTRIBUTE_EARTH) and c:IsRace(RACE_WANDERER)))
+		and (c:IsSetCard(SET_RESTKEEPERS) or (c:IsAttribute(ATTRIBUTE_EARTH) and c:IsRace(RACE_WANDERER)))
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
-	if not e:GetHandler():IsRelateToEffect(e) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
@@ -94,7 +93,7 @@ function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if not c:IsRelateToEffect(e) or Duel.GetDrawCount(1-tp)~=1 then return end
+	if not c:IsRelateToEffect(e) or Duel.GetDrawCount(1-tp)<1 then return end
 	--Look at the drawn card
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
@@ -102,22 +101,21 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetCountLimit(1)
 	e1:SetOperation(s.drawcheck)
 	e1:SetLabel(e:GetLabel())
-	e1:SetReset(RESET_PHASE+PHASE_DRAW)
+	e1:SetReset(RESET_PHASE|PHASE_DRAW)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.drawcheck(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.GetCurrentPhase()==PHASE_DRAW and (r&REASON_RULE)==REASON_RULE then
-		local dc=eg:GetFirst()
-		if not dc then return end
-		Duel.ConfirmCards(tp,dc)
-		if dc:IsCode(e:GetLabel()) then
-			Duel.SendtoGrave(dc,REASON_EFFECT)
+	if Duel.GetCurrentPhase()==PHASE_DRAW and (r&REASON_RULE)==REASON_RULE and #eg>0 then
+		Duel.ConfirmCards(tp,eg)
+		local dg=eg:Filter(Card.IsCode,nil,e:GetLabel())
+		if #dg>0 then
+			Duel.SendtoRest(dg,REASON_EFFECT)
 		end
 		Duel.ShuffleHand(1-tp)
 	end
 end
 function s.checkop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetCurrentPhase()==PHASE_DRAW and (r&REASON_RULE)==REASON_RULE then
-		Duel.RegisterFlagEffect(ep,id,RESET_PHASE+PHASE_STANDBY,0,1)
+		Duel.RegisterFlagEffect(ep,id,RESET_PHASE|PHASE_STANDBY,0,1)
 	end
 end

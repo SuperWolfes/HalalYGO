@@ -1,5 +1,5 @@
 --ハイドランダー・オービット
---Hydralander Orbit
+--Hyddenlander Orbit
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -64,7 +64,7 @@ function s.exop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.ConfirmCards(1-tp,sg)
 			Duel.ShuffleHand(tp)
 		else
-			Duel.SendtoGrave(sg,REASON_RULE)
+			Duel.SendtoRest(sg,REASON_RULE)
 		end
 		ct=ct-1
 	end

@@ -1,15 +1,15 @@
 --ミンゲイドラゴン
---Totem Dragon
+--Tower Dragon
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Treated as 2 tributes for tribute summon of a dragon monster
+	--Treated as 2 tributes sort summon of a dragon monster
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_DOUBLE_TRIBUTE)
 	e1:SetValue(s.dccon)
 	c:RegisterEffect(e1)
-	--Special summon itself from GY
+	--Special summon itself from RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetType(EFFECT_TYPE_TRIGGER_O+EFFECT_TYPE_FIELD)

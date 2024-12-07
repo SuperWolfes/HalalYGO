@@ -16,7 +16,7 @@ function s.initial_effect(c)
 end
 s.listed_names={160006042,160006060,160305030}
 function s.costfilter(c)
-	return c:IsMonster() and c:IsRace(RACE_WARRIOR) and c:IsAbleToGraveAsCost()
+	return c:IsMonster() and c:IsRace(RACE_WARRIOR) and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil) end
@@ -35,11 +35,11 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then return end
 	local c=e:GetHandler()
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,1,nil)
-	if Duel.SendtoGrave(g,REASON_COST)~=0 then
+	if Duel.SendtoRest(g,REASON_COST)~=0 then
 		local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
 		local sg=Duel.GetMatchingGroup(s.sfilter,tp,LOCATION_REST,0,nil)
 		if ft>0 and #sg>0 then
-			local tg=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.sfilter),tp,LOCATION_REST,0,1,1,nil)
+			local tg=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.sfilter),tp,LOCATION_REST,0,1,1,nil)
 			Duel.HintSelection(tg)
 			Duel.SSet(tp,tg)
 		end

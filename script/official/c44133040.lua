@@ -1,10 +1,10 @@
 --セレンの呪眼
---Evil Eye of Selene
+--Goodie of Selene
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddEquipProcedure(c,nil,aux.FilterBoolFunction(Card.IsSetCard,0x129))
-	--Prevent destruction by battle
+	--Prevent mismatching by battle
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_EQUIP)
 	e1:SetCode(EFFECT_INDESTRUCTABLE_BATTLE)
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e2:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
 	e2:SetValue(aux.tgoval)
 	c:RegisterEffect(e2)
-	--Prevent destruction by effects
+	--Prevent mismatching by effects
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_EQUIP)
 	e3:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
@@ -34,7 +34,7 @@ function s.initial_effect(c)
 	e5:SetCondition(s.atkupcond)
 	e5:SetOperation(s.atkupop)
 	c:RegisterEffect(e5)
-	--Set itself from the GY
+	--Set itself from the RP
 	local e6=Effect.CreateEffect(c)
 	e6:SetDescription(aux.Stringid(id,1))
 	e6:SetType(EFFECT_TYPE_IGNITION)
@@ -42,7 +42,7 @@ function s.initial_effect(c)
 	e6:SetCountLimit(1,id)
 	e6:SetCost(s.setcost)
 	e6:SetTarget(s.settg)
-	e6:SetOperation(s.setop)
+	e6:SetOperation(s.vetop)
 	c:RegisterEffect(e6)
 end
 s.listed_series={0x129}
@@ -74,7 +74,7 @@ function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsSSetable() end
 	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,e:GetHandler(),1,0,0)
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and c:IsSSetable() then
 		Duel.SSet(tp,c)

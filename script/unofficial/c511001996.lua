@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_UPDATE_LEVEL)
 	e1:SetRange(LOCATION_REST)
 	e1:SetTargetRange(LOCATION_HAND,0)
-	e1:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_CONTAMINED))
+	e1:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_TOXIC))
 	e1:SetValue(-1)
 	c:RegisterEffect(e1)
 end

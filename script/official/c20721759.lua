@@ -28,7 +28,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not tc:IsRelateToEffect(e) then return end
-	Duel.SendtoGrave(tc,REASON_EFFECT)
+	Duel.SendtoRest(tc,REASON_EFFECT)
 	if not tc:IsLocation(LOCATION_REST) then return end
 	local atk=tc:GetBaseAttack()
 	if atk<0 then atk=0 end

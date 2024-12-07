@@ -70,7 +70,7 @@ function s.effcon(e,tp,eg,ep,ev,re,r,rp)
 	return g:GetClassCount(Card.GetCode)>=e:GetLabel()
 end
 function s.filter1(c)
-	return c:IsSetCard(0x107a) and c:IsAbleToGrave()
+	return c:IsSetCard(0x107a) and c:IsAbleToRest()
 end
 function s.target1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter1,tp,LOCATION_DECK,0,1,nil) end
@@ -80,7 +80,7 @@ function s.operation1(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.filter1,tp,LOCATION_DECK,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_EFFECT)
+	Duel.SendtoRest(g,REASON_EFFECT)
 end
 function s.filter2(c,e,tp)
 	return  c:IsSetCard(0x107a) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

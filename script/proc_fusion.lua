@@ -106,7 +106,7 @@ function Fusion.ConditionMix(insf,sub,...)
 				if contact then mustg:Clear() end
 				if not mg:Includes(mustg) or mustg:IsExists(aux.NOT(Card.IsCanBeFusionMaterial),1,nil,c,sumtype) then return false end
 				if gc then
-					if gc:IsExists(aux.NOT(Card.IsCanBeFusionMaterial),1,nil,c,sumtype) 
+					if gc:IsExists(aux.NOT(Card.IsCanBeFusionMaterial),1,nil,c,sumtype)
 						or gc:IsExists(aux.NOT(Fusion.ConditionFilterMix),1,nil,c,sub,sub,contact,sumtype,matcheck,tp,table.unpack(funs)) then return false end
 					mustg:Merge(gc)
 				end
@@ -205,7 +205,7 @@ function Fusion.CheckMixGoal(tp,sg,fc,sub,sub2,contact,sumtype,chkf,...)
 	local g=Group.CreateGroup()
 	return sg:IsExists(Fusion.CheckMix,1,nil,sg,g,fc,sub,sub2,contact,sumtype,tp,...) and
 		(chkf==PLAYER_NONE or (fc:IsLocation(LOCATION_EXTRA) and Duel.GetLocationCountFromEx(tp,tp,sg,fc) or Duel.GetMZoneCount(tp,sg,tp))>0)
-		and (not Fusion.CheckAdditional or Fusion.CheckAdditional(tp,sg,fc))
+		and (not Fusion.CheckAdditional or Fusion.CheckAdditional(tp,sg,fc,sumtype,tp))
 end
 function Fusion.SelectMix(c,tp,mg,sg,mustg,fc,sub,sub2,contact,sumtype,chkf,...)
 	local res
@@ -329,7 +329,7 @@ function Fusion.ConditionMixRep(insf,sub,fun1,minc,maxc,...)
 				end
 				local sg=Group.CreateGroup()
 				mg:Merge(mustg)
-				return mg:IsExists(Fusion.SelectMixRep,1,nil,tp,mg,sg,mustg,c,sub,sub,contact,sumtype,chkf,fun1,minc,maxc,table.unpack(funs)) 
+				return mg:IsExists(Fusion.SelectMixRep,1,nil,tp,mg,sg,mustg,c,sub,sub,contact,sumtype,chkf,fun1,minc,maxc,table.unpack(funs))
 			end
 end
 function Fusion.OperationMixRep(insf,sub,fun1,minc,maxc,...)
@@ -390,15 +390,15 @@ function Fusion.CheckMixRep(sg,g,fc,sub,sub2,contact,sumtype,chkf,tp,fun1,minc,m
 	if fun2 then
 		return sg:IsExists(Fusion.CheckMixRepFilter,1,g,sg,g,fc,sub,sub2,contact,sumtype,chkf,tp,fun1,minc,maxc,fun2,...)
 	else
-		local ct1=sg:FilterCount(fun1,g,fc,sub,sub2,mg,sg,tp,contact,sumtype)
-		local ct2=sg:FilterCount(fun1,g,fc,false,sub2,mg,sg,tp,contact,sumtype)
+		local ct1=sg:FilterCount(fun1,g,fc,sub,sub2,sg,g,tp,contact,sumtype)
+		local ct2=sg:FilterCount(fun1,g,fc,false,sub2,sg,g,tp,contact,sumtype)
 		return ct1==#sg-#g and ct1-ct2<=1
 	end
 end
 function Fusion.CheckMixRepFilter(c,sg,g,fc,sub,sub2,contact,sumtype,chkf,tp,fun1,minc,maxc,fun2,...)
-	if fun2(c,fc,sub,sub2,mg,sg,tp,contact,sumtype) then
+	if fun2(c,fc,sub,sub2,sg,(g+c),tp,contact,sumtype) then
 		g:AddCard(c)
-		local sub=sub and fun2(c,fc,false,sub2,mg,sg,tp,contact,sumtype)
+		local sub=sub and fun2(c,fc,false,sub2,sg,g,tp,contact,sumtype)
 		local res=Fusion.CheckMixRep(sg,g,fc,sub,sub2,contact,sumtype,chkf,tp,fun1,minc,maxc,...)
 		g:RemoveCard(c)
 		return res
@@ -409,13 +409,13 @@ function Fusion.CheckMixRepGoal(tp,sg,mustg,fc,sub,sub2,contact,sumtype,chkf,fun
 	if #sg<minc+#{...} or #sg>maxc+#{...} then return false end
 	local g=Group.CreateGroup()
 	return Fusion.CheckMixRep(sg,g,fc,sub,sub2,contact,sumtype,chkf,tp,fun1,minc,maxc,...) and (chkf==PLAYER_NONE or Duel.GetLocationCountFromEx(tp,tp,sg,fc)>0)
-		and (not Fusion.CheckAdditional or Fusion.CheckAdditional(tp,sg,fc))
+		and (not Fusion.CheckAdditional or Fusion.CheckAdditional(tp,sg,fc,sumtype,tp))
 end
 function Fusion.CheckMixRepTemplate(c,cond,tp,mg,sg,mustg,g,fc,sub,sub2,contact,sumtype,chkf,fun1,minc,maxc,...)
 	for i,f in ipairs({...}) do
-		if f(c,fc,sub,sub2,mg,sg,tp,contact,sumtype) then
+		if f(c,fc,sub,sub2,mg,(g+c),tp,contact,sumtype) then
 			g:AddCard(c)
-			local sub=sub and f(c,fc,false,sub2,mg,sg,tp,contact,sumtype)
+			local sub=sub and f(c,fc,false,sub2,mg,g,tp,contact,sumtype)
 			local t={...}
 			table.remove(t,i)
 			local res=cond(tp,mg,sg,mustg-c,g,fc,sub,sub2,contact,sumtype,chkf,fun1,minc,maxc,table.unpack(t))
@@ -424,9 +424,9 @@ function Fusion.CheckMixRepTemplate(c,cond,tp,mg,sg,mustg,g,fc,sub,sub2,contact,
 		end
 	end
 	if maxc>0 then
-		if fun1(c,fc,sub,sub2,mg,sg,tp,contact,sumtype) then
+		if fun1(c,fc,sub,sub2,mg,(g+c),tp,contact,sumtype) then
 			g:AddCard(c)
-			local sub=sub and fun1(c,fc,false,sub2,mg,sg,tp,contact,sumtype)
+			local sub=sub and fun1(c,fc,false,sub2,mg,g,tp,contact,sumtype)
 			local res=cond(tp,mg,sg,mustg-c,g,fc,sub,sub2,contact,sumtype,chkf,fun1,minc-1,maxc-1,...)
 			g:RemoveCard(c)
 			if res then return true end
@@ -445,7 +445,7 @@ function Fusion.CheckMixRepSelected(c,...)
 	return Fusion.CheckMixRepTemplate(c,Fusion.CheckMixRepSelectedCond,...)
 end
 function Fusion.CheckSelectMixRep(tp,mg,sg,mustg,g,fc,sub,sub2,contact,sumtype,chkf,fun1,minc,maxc,...)
-	if Fusion.CheckAdditional and not Fusion.CheckAdditional(tp,g,fc) then return false end
+	if Fusion.CheckAdditional and not Fusion.CheckAdditional(tp,g,fc,sumtype,tp) then return false end
 	if chkf==PLAYER_NONE or Duel.GetLocationCountFromEx(tp,tp,g,fc)>0 then
 		if minc<=0 and #{...}==0 and g:Includes(mustg) then return true end
 		return mg:IsExists(Fusion.CheckSelectMixRepAll,1,g,tp,mg,sg,mustg,g,fc,sub,sub2,contact,sumtype,chkf,fun1,minc,maxc,...)
@@ -455,16 +455,16 @@ function Fusion.CheckSelectMixRep(tp,mg,sg,mustg,g,fc,sub,sub2,contact,sumtype,c
 end
 function Fusion.CheckSelectMixRepAll(c,tp,mg,sg,mustg,g,fc,sub,sub2,contact,sumtype,chkf,fun1,minc,maxc,fun2,...)
 	if fun2 then
-		if fun2(c,fc,sub,sub2,mg,sg,tp,contact,sumtype) then
+		if fun2(c,fc,sub,sub2,mg,(g+c),tp,contact,sumtype) then
 			g:AddCard(c)
-			local sub=sub and fun2(c,fc,false,sub2,mg,sg,tp,contact,sumtype)
+			local sub=sub and fun2(c,fc,false,sub2,mg,g,tp,contact,sumtype)
 			local res=Fusion.CheckSelectMixRep(tp,mg,sg,mustg,g,fc,sub,sub2,contact,sumtype,chkf,fun1,minc,maxc,...)
 			g:RemoveCard(c)
 			return res
 		end
-	elseif maxc>0 and fun1(c,fc,sub,sub2,mg,sg,tp,contact,sumtype) then
+	elseif maxc>0 and fun1(c,fc,sub,sub2,mg,(g+c),tp,contact,sumtype) then
 		g:AddCard(c)
-		local sub=sub and fun1(c,fc,false,sub2,mg,sg,tp,contact,sumtype)
+		local sub=sub and fun1(c,fc,false,sub2,mg,g,tp,contact,sumtype)
 		local res=Fusion.CheckSelectMixRep(tp,mg,sg,mustg,g,fc,sub,sub2,contact,sumtype,chkf,fun1,minc-1,maxc-1)
 		g:RemoveCard(c)
 		return res
@@ -524,7 +524,7 @@ function Fusion.SelectMixRep(c,tp,mg,sg,mustg,fc,sub,sub2,contact,sumtype,chkf,f
 	end
 	sg:AddCard(c)
 	local res=false
-	if Fusion.CheckAdditional and not Fusion.CheckAdditional(tp,sg,fc) then
+	if Fusion.CheckAdditional and not Fusion.CheckAdditional(tp,sg,fc,sumtype,tp) then
 		res=false
 	elseif Fusion.CheckMixRepGoal(tp,sg,mustg,fc,sub,sub2,contact,sumtype,chkf,fun1,minc,maxc,...) then
 		res=true
@@ -730,7 +730,7 @@ function Fusion.CheckMixRepUnfixSelected(c,...)
 	return Fusion.CheckMixRepUnfixTemplate(c,Fusion.CheckMixRepUnfixSelectedCond,...)
 end
 function Fusion.CheckSelectMixRepUnfix(tp,mg,sg,mustg,g,fc,sub,sub2,chkf,minc,maxc,...)
-	if Fusion.CheckAdditional and not Fusion.CheckAdditional(tp,g,fc) then return false end
+	if Fusion.CheckAdditional and not Fusion.CheckAdditional(tp,g,fc,sumtype,tp) then return false end
 	if chkf==PLAYER_NONE or Duel.GetLocationCountFromEx(tp,tp,g,fc)>0 then
 		if minc<=0 and g:Includes(mustg) then return true end
 		return mg:IsExists(Fusion.CheckSelectMixRepUnfixAll,1,g,tp,mg,sg,mustg,g,fc,sub,sub2,chkf,minc,maxc,...)
@@ -740,7 +740,7 @@ function Fusion.CheckSelectMixRepUnfix(tp,mg,sg,mustg,g,fc,sub,sub2,chkf,minc,ma
 end
 function Fusion.CheckSelectMixRepUnfixAll(c,tp,mg,sg,mustg,g,fc,sub,sub2,chkf,minc,maxc,...)
 	if maxc==0 then return false end
-	--Second layer check for harmonizing magician, checking teh possible selected group for the fusion summon
+	--Second layer check for harmonizing mentor, checking teh possible selected group for the fusion summon
 	local mg2=mg:Clone()
 	if not contact then
 		if c:IsHasEffect(EFFECT_FUSION_MAT_RESTRICTION) then
@@ -803,7 +803,7 @@ function Fusion.SelectMixRepUnfix(c,tp,mg,sg,mustg,fc,sub,sub2,minc,maxc,chkf,..
 		maxc=Fusion.CheckExact
 		minc=Fusion.CheckExact
 	end
-	--First layer check for harmonizing magician, checking only the selected group given when the function is called
+	--First layer check for harmonizing mentor, checking only the selected group given when the function is called
 	--c has the fusion limit
 	if c:IsHasEffect(EFFECT_FUSION_MAT_RESTRICTION) then
 		local eff={c:GetCardEffect(EFFECT_FUSION_MAT_RESTRICTION)}
@@ -830,7 +830,7 @@ function Fusion.SelectMixRepUnfix(c,tp,mg,sg,mustg,fc,sub,sub2,minc,maxc,chkf,..
 	end
 	sg:AddCard(c)
 	local res=false
-	if Fusion.CheckAdditional and not Fusion.CheckAdditional(tp,sg,fc) then
+	if Fusion.CheckAdditional and not Fusion.CheckAdditional(tp,sg,fc,sumtype,tp) then
 		res=false
 	else
 		local g=Group.CreateGroup()
@@ -890,7 +890,7 @@ function Fusion.ContactCon(f,fcon)
 		if c==nil then return true end
 		local m=f(e:GetHandlerPlayer())
 		local chkf=c:GetControler()|FUSPROC_CONTACTFUS
-		return c:CheckFusionMaterial(m,nil,chkf) and (not fcon or fcon(e:GetHandlerPlayer()))
+		return c:IsFacedown() and c:CheckFusionMaterial(m,nil,chkf) and (not fcon or fcon(e:GetHandlerPlayer()))
 	end
 end
 function Fusion.ContactTg(f)

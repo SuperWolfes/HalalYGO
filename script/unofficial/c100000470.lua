@@ -1,5 +1,5 @@
 --スピリッツ・フュージョン
---Soul Fusion
+--Miss Fusion
 --scripted by Naim (to match the Fusion Summon procedure)
 local s,id=GetID()
 function s.initial_effect(c)

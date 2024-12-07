@@ -1,4 +1,4 @@
---Armor Ninjitsu art of revival
+--Armor Ninjitsu art of awakal
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

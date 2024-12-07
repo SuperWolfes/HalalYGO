@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	--pendulum summon
 	Pendulum.AddProcedure(c,false)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsType,TYPE_PENDULUM),aux.FilterBoolFunctionEx(Card.IsLevelAbove,5))
 	--reduce
 	local e1=Effect.CreateEffect(c)
@@ -109,6 +109,6 @@ end
 function s.acop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
 	for tc in g:Iter() do
-		tc:AddCounter(0x1149,#eg,REASON_EFFECT)
+		tc:AddCounter(0x1149,#eg,true)
 	end
 end

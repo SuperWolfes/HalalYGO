@@ -1,5 +1,5 @@
 --魔轟神獣ケルベラル
---The Fabled Cerburrel
+--The Fablous Cerburrel
 local s,id=GetID()
 function s.initial_effect(c)
 	--Special summon itself

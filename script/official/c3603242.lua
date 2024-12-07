@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c,tp)
-	return c:IsRace(RACE_MACHINE) and c:IsAbleToGraveAsCost()
+	return c:IsRace(RACE_MACHINE) and c:IsAbleToRestAsCost()
 		and Duel.IsExistingTarget(s.dfilter,tp,0,LOCATION_MZONE,1,nil,c:GetLevel())
 end
 function s.dfilter(c,lv)
@@ -27,7 +27,7 @@ function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND,0,1,1,nil,tp)
 	local lv=g:GetFirst():GetLevel()
 	e:SetLabel(lv)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(1-tp) and chkc:IsLocation(LOCATION_MZONE) and s.dfilter(chkc,e:GetLabel()) end

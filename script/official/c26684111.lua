@@ -1,5 +1,5 @@
 -- 天空の聖水
--- The Sacred Water of the Sky
+-- The Clean Water of the Sky
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.acthtg)
 	e1:SetOperation(s.acthop)
 	c:RegisterEffect(e1)
-	-- Banish self from GY to replace destruction
+	-- Banish self from RP to replace mismatching
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EFFECT_DESTROY_REPLACE)

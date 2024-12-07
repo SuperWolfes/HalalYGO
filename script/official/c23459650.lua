@@ -1,5 +1,5 @@
 --ネフティスの輪廻
---Rebirth of Nephthys
+--Rebirth of Nepolonis
 local s,id=GetID()
 function s.initial_effect(c)
 	Locked.AddProcGreater({handler=c,filter=s.lockedfil,stage2=s.stage2})

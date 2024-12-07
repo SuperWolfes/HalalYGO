@@ -1,9 +1,9 @@
 --溟界の昏闇－アレート
---Aleirtt, the Ogdoadic Dark
+--Aleirtt, the Ogtasic Dark
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special summon itself from the GY
+	--Special summon itself from the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Return banished monsters to the GY
+	--Return banished monsters to the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOREST)
@@ -46,7 +46,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		and Duel.SelectYesNo(1-tp,aux.Stringid(id,2)) then
 		Duel.BreakEffect()
 		Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_RTOHAND)
-		local sg=Duel.SelectMatchingCard(1-tp,aux.GraveValleyFilter(s.thfilter),tp,0,LOCATION_REST,1,1,nil)
+		local sg=Duel.SelectMatchingCard(1-tp,aux.NecroValleyFilter(s.thfilter),tp,0,LOCATION_REST,1,1,nil)
 		if #sg>0 then
 			Duel.SendtoHand(sg,nil,REASON_EFFECT)
 		end
@@ -70,6 +70,6 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
 	local sg=tg:Filter(Card.IsRelateToEffect,nil,e)
 	if #sg>0 then
-		Duel.SendtoGrave(sg,REASON_EFFECT+REASON_RETURN)
+		Duel.SendtoRest(sg,REASON_EFFECT+REASON_RETURN)
 	end
 end

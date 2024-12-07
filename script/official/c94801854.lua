@@ -27,7 +27,7 @@ end
 s.listed_series={0xd9}
 s.listed_names={40005099}
 function s.spcfilter(c,ft,tp)
-	return c:IsRace(RACE_CONTAMINED)
+	return c:IsRace(RACE_TOXIC)
 		and (ft>0 or (c:IsControler(tp) and c:GetSequence()<5)) and (c:IsControler(tp) or c:IsFaceup())
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -37,7 +37,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Release(sg,REASON_COST)
 end
 function s.spfilter1(c,e,tp)
-	return c:IsRace(RACE_CONTAMINED) and c:IsType(TYPE_TUNER) and c:IsDefenseBelow(0) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsRace(RACE_TOXIC) and c:IsType(TYPE_TUNER) and c:IsDefenseBelow(0) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.spfilter1,tp,LOCATION_DECK,0,1,nil,e,tp) end

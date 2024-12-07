@@ -1,8 +1,8 @@
---Wind Witch - Crystal Bell
+--Wind Mint - Crystal Bell
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,14577226,aux.FilterBoolFunctionEx(Card.IsSetCard,0xf0))
 	--copy
 	local e1=Effect.CreateEffect(c)

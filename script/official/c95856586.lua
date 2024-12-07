@@ -96,7 +96,7 @@ function s.mop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if e:GetHandler():IsRelateToEffect(e) and tc:IsFaceup() and tc:IsRelateToEffect(e) and not tc:IsImmuneToEffect(e) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)
-		local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(Card.IsType),tp,LOCATION_REST+LOCATION_EXTRA,0,1,1,tc,TYPE_XYZ)
+		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(Card.IsType),tp,LOCATION_REST+LOCATION_EXTRA,0,1,1,tc,TYPE_XYZ)
 		if #g>0 then
 			Duel.Overlay(tc,g,true)
 		end

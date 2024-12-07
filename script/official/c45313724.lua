@@ -9,7 +9,7 @@ function s.initial_effect(c)
 	e0:SetType(EFFECT_TYPE_ACTIVATE)
 	e0:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e0)
-	--Banish to prevent destruction
+	--Banish to prevent mismatching
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e1:SetCode(EFFECT_DESTROY_REPLACE)
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e1:SetValue(s.repval)
 	e1:SetOperation(s.repop)
 	c:RegisterEffect(e1)
-	--Send to GY
+	--Send to RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)

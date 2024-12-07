@@ -1,5 +1,5 @@
 --剛鬼ムーンサルト
---Gouki Moonsault
+--Gouki Horizonsault
 local s,id=GetID()
 function s.initial_effect(c)
 	--Special summon itself and return target to the hand
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Return target to the Extra Deck and add 1 "Gouki" monster from the GY to the hand
+	--Return target to the Extra Deck and add 1 "Gouki" monster from the RP to the hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOEXTRA+CATEGORY_TOHAND)
@@ -72,7 +72,7 @@ end
 function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and Duel.SendtoDeck(tc,nil,2,REASON_EFFECT)~=0 and tc:IsLocation(LOCATION_EXTRA) then
-		local g=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.thfilter),tp,LOCATION_REST,0,nil)
+		local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.thfilter),tp,LOCATION_REST,0,nil)
 		if #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 			Duel.BreakEffect()
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)

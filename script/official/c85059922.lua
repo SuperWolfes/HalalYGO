@@ -3,9 +3,9 @@
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	-- Fusion Materials
-	Fusion.AddProcMix(c,true,true,CARD_DARK_MAGICIAN,s.ffilter)
+	Fusion.AddProcMix(c,true,true,CARD_DARK_MENTOR,s.ffilter)
 	-- Special Summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -42,8 +42,8 @@ function s.initial_effect(c)
 	e3:SetOperation(s.thop)
 	c:RegisterEffect(e3)
 end
-s.material={CARD_DARK_MAGICIAN}
-s.listed_names={CARD_DARK_MAGICIAN}
+s.material={CARD_DARK_MENTOR}
+s.listed_names={CARD_DARK_MENTOR}
 s.listed_series={0xcf}
 s.material_setcode={0xcf}
 function s.ffilter(c,fc,sumtype,tp)

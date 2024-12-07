@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_CYBERSE),aux.FilterBoolFunctionEx(Card.IsType,TYPE_LINK))
 	--change damage
 	local e1=Effect.CreateEffect(c)

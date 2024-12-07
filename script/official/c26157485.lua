@@ -16,13 +16,13 @@ function s.initial_effect(c)
 end
 s.listed_series={0x25}
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x25) and c:IsAbleToGraveAsCost()
+	return c:IsFaceup() and c:IsSetCard(0x25) and c:IsAbleToRestAsCost()
 end
 function s.damcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_MZONE,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

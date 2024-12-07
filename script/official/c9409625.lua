@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e2:SetHintTiming(0,TIMING_END_PHASE)
 	e2:SetTarget(s.reptg)
 	c:RegisterEffect(e2)
-	--[[ untested version of Fluo's destruction count
+	--[[ untested version of Fluo's mismatching count
 	--indes
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)

@@ -1,8 +1,8 @@
 --智天の神星龍
---Zefraath
+--Zebraath
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Pendulum.AddProcedure(c)
 	--change scale
 	local e1=Effect.CreateEffect(c)

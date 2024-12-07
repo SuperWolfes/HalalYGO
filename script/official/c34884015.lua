@@ -1,5 +1,5 @@
 --魂のペンデュラム
---Soul Pendulum
+--Miss Pendulum
 --scripted started by andré
 local s,id=GetID()
 function s.initial_effect(c)

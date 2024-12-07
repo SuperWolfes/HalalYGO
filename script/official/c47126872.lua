@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e2:SetCode(EVENT_LEAVE_FIELD)
 	e2:SetCondition(s.setcon)
 	e2:SetTarget(s.settg)
-	e2:SetOperation(s.setop)
+	e2:SetOperation(s.vetop)
 	e2:SetLabelObject(e1)
 	c:RegisterEffect(e2)
 end
@@ -56,7 +56,7 @@ function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 		e:SetCategory(0)
 	end
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not tc:IsRelateToEffect(e) then return end
 	if tc:IsMonster() then

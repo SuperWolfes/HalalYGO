@@ -1,5 +1,5 @@
 --滅びの爆裂疾風弾
---Burst Stream of Destruction (GOAT)
+--Burst Stream of Mismatching (GOAT)
 --If effect is negated, restriction doesn't apply
 --If monsters are immuned, restruction doesn't apply
 local s,id=GetID()

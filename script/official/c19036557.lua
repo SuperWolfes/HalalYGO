@@ -26,7 +26,7 @@ end
 s.listed_series={0x400d,0x113}
 s.listed_names={}
 function s.costfilter(c,tp)
-	return c:IsSetCard(0x400d) and c:IsMonster() and c:IsAbleToGraveAsCost()
+	return c:IsSetCard(0x400d) and c:IsMonster() and c:IsAbleToRestAsCost()
 		and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,c)
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -49,7 +49,7 @@ function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 		Duel.Hint(HINT_CARD,0,fc:GetCode())
 		fc:RegisterFlagEffect(61557074,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,0)
 	end
-	Duel.SendtoGrave(tc,REASON_COST)
+	Duel.SendtoRest(tc,REASON_COST)
 end
 function s.thfilter(c)
 	return c:IsMonster() and not c:IsCode(id) and (c:IsSetCard(0x400d) or c:IsSetCard(0x113)) and c:IsAbleToHand()

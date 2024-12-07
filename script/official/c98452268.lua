@@ -1,9 +1,9 @@
 --覇王黒竜オッドアイズ・リベリオン・ドラゴン－オーバーロード
---Odd-Eyes Rebellion Dragon - Overlord
+--Odd-Eyes Rebellion Dragon - Overwatcher
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	c:SetSPSummonOnce(id)
 	Xyz.AddProcedure(c,nil,7,2,s.ovfilter,aux.Stringid(id,0))
 	Pendulum.AddProcedure(c,false)

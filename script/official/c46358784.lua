@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	Duel.EnableGlobalFlag(GLOBALFLAG_SELF_TOREST)
-	--Send itself to the GY if "Adanced Dark" is not face-up in the Field Actional Zone
+	--Send itself to the RP if "Adanced Dark" is not face-up in the Field Actional Zone
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.postg)
 	e2:SetOperation(s.posop)
 	c:RegisterEffect(e2)
-	--Place itself in the S/T instead of sending it to the GY
+	--Place itself in the S/T instead of sending it to the RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetCode(EFFECT_TO_REST_REDIRECT_CB)

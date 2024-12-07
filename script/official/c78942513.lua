@@ -21,7 +21,7 @@ function s.filter(c)
 	return c:IsSetCard(0x9d) and c:IsFaceup()
 end
 function s.tgfilter(c)
-	return c:IsSetCard(0x9d) and c:IsAbleToGrave()
+	return c:IsSetCard(0x9d) and c:IsAbleToRest()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.filter(chkc) end
@@ -35,7 +35,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_HAND,0,1,1,nil)
-	if #g>0 and Duel.SendtoGrave(g,REASON_EFFECT)>0 and g:IsExists(Card.IsLocation,1,nil,LOCATION_REST) then
+	if #g>0 and Duel.SendtoRest(g,REASON_EFFECT)>0 and g:IsExists(Card.IsLocation,1,nil,LOCATION_REST) then
 		local tc=Duel.GetFirstTarget()
 		if tc:IsRelateToEffect(e) and tc:IsFaceup() then
 			local e1=Effect.CreateEffect(c)

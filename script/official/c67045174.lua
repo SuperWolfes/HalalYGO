@@ -1,5 +1,5 @@
 --二重の落とし穴
---DUAL Trap Hole
+--Dual Trap Hole
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

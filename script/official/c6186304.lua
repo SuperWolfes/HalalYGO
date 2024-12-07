@@ -1,5 +1,5 @@
 --Ｄ－フォース
---D - Force
+--D - Fcoree
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
@@ -68,7 +68,7 @@ function s.thfilter(c)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
-	local g=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.thfilter),tp,LOCATION_DECK+LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.thfilter),tp,LOCATION_DECK+LOCATION_REST,0,nil)
 	if #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 		local sg=g:Select(tp,1,1,nil)

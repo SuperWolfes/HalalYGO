@@ -1,5 +1,5 @@
 --神竜 ティタノマキア
---Divine Dragon Titanomakhia
+--Mega Dragon Titanomakhia
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.destg)
 	e2:SetOperation(s.desop)
 	c:RegisterEffect(e2)
-	--Send cards from the top of your Deck to the GY
+	--Send cards from the top of your Deck to the RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_DECKDES)

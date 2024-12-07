@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.roll_suffice=true
+s.roll_dice=true
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>=6 end
 	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,2)
@@ -27,7 +27,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 	t[p]=nil
 	local a2=Duel.AnnounceNumber(tp,table.unpack(t))
-	local dc=Duel.TossSuffice(1-tp,1)
+	local dc=Duel.TossDice(1-tp,1)
 	if dc==a1 or dc==a2 then
 		Duel.Draw(tp,dc,REASON_EFFECT)
 	else

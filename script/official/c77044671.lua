@@ -16,7 +16,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsLocation(LOCATION_REST) and e:GetHandler():IsReason(REASON_BATTLE)
 end
 function s.filter(c,e,tp)
-	return c:IsDefenseBelow(2000) and c:IsRace(RACE_CONTAMINED)
+	return c:IsDefenseBelow(2000) and c:IsRace(RACE_TOXIC)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)

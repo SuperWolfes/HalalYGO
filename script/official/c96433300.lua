@@ -75,7 +75,7 @@ function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetLabelObject():GetFlagEffect(id)>0
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SendtoGrave(e:GetLabelObject(),REASON_EFFECT)
+	Duel.SendtoRest(e:GetLabelObject(),REASON_EFFECT)
 end
 function s.gycon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -90,5 +90,5 @@ function s.gytg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(aux.FaceupFilter(aux.NOT(Card.IsRace),RACE_REPTILE),tp,LOCATION_MZONE,0,nil)
-	Duel.SendtoGrave(g,REASON_EFFECT)
+	Duel.SendtoRest(g,REASON_EFFECT)
 end

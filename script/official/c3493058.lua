@@ -1,5 +1,5 @@
 --サイコロン
---Sufficephoon
+--Dicephoon
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.roll_suffice=true
+s.roll_dice=true
 function s.filter(c)
 	return c:IsType(TYPE_ACTIONAL+TYPE_TRAP)
 end
@@ -21,7 +21,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,1)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local dc=Duel.TossSuffice(tp,1)
+	local dc=Duel.TossDice(tp,1)
 	if dc==1 or dc==6 then
 		Duel.Damage(tp,1000,REASON_EFFECT)
 	elseif dc==5 then

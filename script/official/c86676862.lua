@@ -2,7 +2,7 @@
 --Evil HERO Malicious Tainted
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion material
 	Fusion.AddProcMix(c,true,true,58554959,s.ffilter)
 	--lizard check

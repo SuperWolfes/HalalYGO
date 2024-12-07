@@ -40,7 +40,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.tgfilter(c)
-	return c:IsActionalTrap() and c:IsAbleToGrave()
+	return c:IsActionalTrap() and c:IsAbleToRest()
 end
 function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetHandler():GetBattleTarget()
@@ -53,7 +53,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local tg=Duel.SelectMatchingCard(tp,s.tgfilter,tp,0,LOCATION_ONFIELD,1,1,nil)
 		if #tg>0 then
-			Duel.SendtoGrave(tg,REASON_EFFECT)
+			Duel.SendtoRest(tg,REASON_EFFECT)
 		end
 	end
 end

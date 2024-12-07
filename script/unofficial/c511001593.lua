@@ -1,5 +1,5 @@
 --魂の綱 (Anime)
---Soul Rope (Anime)
+--Miss Rope (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

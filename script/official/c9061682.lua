@@ -1,5 +1,5 @@
 --魔轟神アンドレイス
---Fabled Andraith
+--Fablous Andraith
 --Logical Nonsense
 
 --Substitute ID
@@ -7,8 +7,8 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Synchro summon procedure
 	Synchro.AddProcedure(c,s.tfilter,1,1,Synchro.NonTuner(nil),1,99)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Draw 2 cards, discard 1. Opponent can negate this by discarding 1 card
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -37,7 +37,7 @@ end
 	--Specifically lists itself
 s.listed_names={id}
 	
-	--Check for "Fabled" monster
+	--Check for "Fablous" monster
 function s.tfilter(c,lc,stype,tp)
 	return c:IsSetCard(0x35,lc,stype,tp)
 end
@@ -76,7 +76,7 @@ end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,tp)
 end
-	--Check for opponent's sent monster in GY/banished
+	--Check for opponent's sent monster in RP/banished
 function s.spfilter(c,e,tp)
 	return c:IsCanBeSpecialSummoned(e,0,tp,false,false) and s.cfilter(c,tp)
 		and c:IsCanBeEffectTarget(e) and c:IsLocation(LOCATION_REST)

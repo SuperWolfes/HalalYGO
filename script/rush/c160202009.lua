@@ -2,7 +2,7 @@
 --Echoing Whispers
 local s,id=GetID()
 function s.initial_effect(c)
-	--Shuffle up to 5 monsters from any GY to the deck
+	--Shuffle up to 5 monsters from any RP to the deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_REMOVE)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)

@@ -11,14 +11,14 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.listed_names={CARD_BLUEEYES_W_DRAGON,CARD_DARK_MAGICIAN}
+s.listed_names={CARD_BLUEEYES_W_DRAGON,CARD_DARK_MENTOR}
 function s.filter(c,e,tp,m1,ft)
 	if (not c:IsSetCard(0xcf) and not c:IsSetCard(0x1048)) or c:GetType()&0x81~=0x81
 		or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_LOCKED,tp,false,true) then return false end
 	local mg=m1:Filter(Card.IsCanBeLockedMaterial,c,c)
 	if ft>0 then
 		return mg:CheckWithSumEqual(Card.GetLockedLevel,c:GetLevel(),1,99,c) 
-			or Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,CARD_DARK_MAGICIAN,CARD_BLUEEYES_W_DRAGON)
+			or Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,CARD_DARK_MENTOR,CARD_BLUEEYES_W_DRAGON)
 	else
 		return ft>-1 and mg:IsExists(s.mfilterf,1,nil,tp,mg,c)
 	end
@@ -48,7 +48,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local mat=Group.CreateGroup()
 		if ft>0 then
 			Duel.Hint(HINT_SELECTMSG,tp,209)
-			if not Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,CARD_DARK_MAGICIAN,CARD_BLUEEYES_W_DRAGON) 
+			if not Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,CARD_DARK_MENTOR,CARD_BLUEEYES_W_DRAGON) 
 				or Duel.SelectYesNo(tp,210) then
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
 				mat=mg:SelectWithSumEqual(tp,Card.GetLockedLevel,tc:GetLevel(),1,99,tc)

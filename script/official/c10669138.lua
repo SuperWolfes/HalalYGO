@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,nil,5,5)
 	--must link summon
 	local e1=Effect.CreateEffect(c)
@@ -97,12 +97,12 @@ function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) then return end
 	local g=Duel.GetMatchingGroup(Card.IsAbleToRemove,tp,LOCATION_REST,0,nil)
-	if #g<5 then Duel.SendtoGrave(c,REASON_EFFECT) end
+	if #g<5 then Duel.SendtoRest(c,REASON_EFFECT) end
 	if #g>=5 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 		local sg=g:Select(tp,5,5,nil)
 		if #sg~=5 or Duel.Remove(sg,POS_FACEDOWN,REASON_EFFECT)~=5 then
-			Duel.SendtoGrave(c,REASON_EFFECT)
+			Duel.SendtoRest(c,REASON_EFFECT)
 		end
 	end
 end

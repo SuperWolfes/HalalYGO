@@ -1,5 +1,5 @@
 --捕食植物ドロソフィルム・ヒドラ (Anime)
---Predaplant Drosophyllum Hydra (Anime)
+--Predaplant Drosophyllum Hydden (Anime)
 --fixed by MLD
 local s,id=GetID()
 function s.initial_effect(c)
@@ -66,7 +66,7 @@ end
 function s.retop(e,tp,eg,ev,ep,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(48976825,0))
 	local g=Duel.SelectMatchingCard(tp,Card.IsMonster,tp,LOCATION_REMOVED,0,1,1,nil)
-	if Duel.SendtoGrave(g,REASON_EFFECT)~=0 then
+	if Duel.SendtoRest(g,REASON_EFFECT)~=0 then
 		Duel.BreakEffect()
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)

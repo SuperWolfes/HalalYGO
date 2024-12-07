@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Special Summon itself by banishing 1 "Morphtronic" monster from the hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.target_a)
 	e2:SetOperation(s.operation_a)
 	c:RegisterEffect(e2)
-	--Add 1 "Morphtronic" monster from GY to the hand, then return 1 card to the Deck
+	--Add 1 "Morphtronic" monster from RP to the hand, then return 1 card to the Deck
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_TODECK)

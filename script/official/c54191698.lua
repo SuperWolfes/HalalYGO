@@ -2,7 +2,7 @@
 --Number 29: Mannequin Cat
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Xyz.AddProcedure(c,nil,2,2)
 	--Special summon (Ignition)
 	local e1=Effect.CreateEffect(c)

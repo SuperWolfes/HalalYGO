@@ -1,5 +1,5 @@
 --竜超天山
---Dragon Surpassing the Heavenly Heights
+--Dragon Surpassing the Spectrumly Heights
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)

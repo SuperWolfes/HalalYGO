@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	Dual.AddProcedure(c)
-	--Special Summon 1 Contaminated monster
+	--Special Summon 1 Toxic monster
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.filter(c,e,tp)
-	return c:IsRace(RACE_CONTAMINED) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsRace(RACE_TOXIC) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
@@ -32,7 +32,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.filter),tp,LOCATION_REST|LOCATION_HAND,LOCATION_REST,1,1,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,LOCATION_REST|LOCATION_HAND,LOCATION_REST,1,1,nil,e,tp)
 	if #g==0 or Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)==0 then return end
 	local c=e:GetHandler()
 	if c:IsFaceup() and c:IsRelateToEffect(e) then
@@ -40,7 +40,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
-	local dg=e:GetHandler():GetCardTarget():Filter(aux.FaceupFilter(Card.IsRace,RACE_CONTAMINED),nil)
+	local dg=e:GetHandler():GetCardTarget():Filter(aux.FaceupFilter(Card.IsRace,RACE_TOXIC),nil)
 	if #dg>0 then
 		Duel.Destroy(dg,REASON_EFFECT)
 	end

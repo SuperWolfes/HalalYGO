@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	Duel.EnableGlobalFlag(GLOBALFLAG_SELF_TOREST)
-	--Send itself to the GY if it's not the Battle Phase
+	--Send itself to the RP if it's not the Battle Phase
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -27,13 +27,13 @@ function s.initial_effect(c)
 end
 function s.costfilter(c,tp)
 	return c:IsRace(RACE_PLANT) and (c:IsLocation(LOCATION_HAND) or c:IsFaceup())
-		and c:IsAbleToGraveAsCost() and Duel.GetMZoneCount(tp,c)>0
+		and c:IsAbleToRestAsCost() and Duel.GetMZoneCount(tp,c)>0
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND+LOCATION_MZONE,0,1,nil,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND+LOCATION_MZONE,0,1,1,nil,tp)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -51,10 +51,10 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	if Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)>0 then
 		sg:AddCard(c)
 		if Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-			and Duel.IsExistingMatchingCard(aux.GraveValleyFilter(s.spfilter),tp,LOCATION_REST,LOCATION_REST,1,nil,e,tp)
+			and Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,LOCATION_REST,1,nil,e,tp)
 			and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-			local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.spfilter),tp,LOCATION_REST,LOCATION_REST,1,1,nil,e,tp)
+			local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,LOCATION_REST,1,1,nil,e,tp)
 			if #g>0 then
 				Duel.BreakEffect()
 				if Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)>0 then
@@ -68,7 +68,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 		tc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1,fid)
 	end
 	sg:KeepAlive()
-	--Send the summoned monsters to the GY
+	--Send the summoned monsters to the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e1:SetCode(EVENT_PHASE+PHASE_BATTLE)
@@ -94,5 +94,5 @@ end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local g=e:GetLabelObject()
 	local tg=g:Filter(s.tgfilter,nil,e:GetLabel())
-	Duel.SendtoGrave(tg,REASON_EFFECT)
+	Duel.SendtoRest(tg,REASON_EFFECT)
 end

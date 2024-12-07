@@ -1,5 +1,5 @@
 --氷の魔妖－雪娘
---Yuki-Musume, the Ice Mayakashi
+--Yuki-Musume, the Ice Mayashi
 local s,id=GetID()
 function s.initial_effect(c)
 	--spsummon
@@ -51,12 +51,12 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 		if #g>0 then
 			Duel.BreakEffect()
-			Duel.SendtoGrave(g,REASON_EFFECT)
+			Duel.SendtoRest(g,REASON_EFFECT)
 		end
 	end
 end
 function s.tgfilter(c)
-	return c:IsRace(RACE_CONTAMINED) and c:IsAbleToGrave()
+	return c:IsRace(RACE_TOXIC) and c:IsAbleToRest()
 end
 function s.sslimit(e,c,sump,sumtype,sumpos,targetp,se)
 	return c:IsLocation(LOCATION_EXTRA) and not c:IsSetCard(0x121)

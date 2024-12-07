@@ -67,7 +67,7 @@ function s.initial_effect(c)
 	e3:SetCountLimit(1)
 	e3:SetCondition(s.normalsetcondition)
 	e3:SetTarget(s.normalsettarget)
-	e3:SetOperation(s.normalsetoperation)
+	e3:SetOperation(s.normalvetoperation)
 	c:RegisterEffect(e3)
 	--declare a actional activation
 	local e4=Effect.CreateEffect(c)
@@ -121,7 +121,7 @@ end
 function s.activeoperation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	Duel.Hint(HINT_CARD,0,id)
-	if not Duel.SelectYesNo(1-tp,aux.Stringid(4007,1)) or not Duel.SelectYesNo(tp,aux.Stringid(4007,1)) then
+	if not Duel.SelectYesNo(1-tp,aux.Stringid(id,0)) or not Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		local sg=Duel.GetMatchingGroup(Card.IsCode,tp,0x7f,0x7f,nil,id)
 		Duel.SendtoDeck(sg,nil,-2,REASON_RULE)
 		return
@@ -156,7 +156,7 @@ end
 function s.nl(e,tp,eg,ep,ev,re,r,rp)
 	return false
 end
-function s.normalsetoperation(e,tp,eg,ep,ev,re,r,rp)
+function s.normalvetoperation(e,tp,eg,ep,ev,re,r,rp)
 	local n=Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)
 	local r={}
 	for i=1,n do
@@ -173,7 +173,7 @@ function s.normalsetoperation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ConfirmCards(1-tp,c)
 	if c:IsMonster() and (c:IsSummonable(true,nil) or c:IsMSetable(true,nil)) and ((Duel.IsExistingMatchingCard(Card.IsReleasable,tp,LOCATION_MZONE,0,tmin,nil) and Duel.GetLocationCount(tp,LOCATION_MZONE)>-tmin) or (Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and tmin==0)) then
 		local poi=0 --set/summon control variable
-		if c:IsSummonable(true,nil) or c:IsMSetable(true,nil) then 
+		if c:IsSummonable(true,nil) or c:IsMSetable(true,nil) then
 			poi=Duel.SelectOption(tp,1,1153)
 		elseif c:IsSummonable(true,nil) then
 			poi=0
@@ -193,7 +193,7 @@ function s.normalsetoperation(e,tp,eg,ep,ev,re,r,rp)
 			Duel.DisableShuffleCheck()
 			Duel.SendtoDeck(c,tp,an,REASON_RULE)
 			unliked[tp][an+1]=true
-			Duel.Hint(HINT_MESSAGE,tp,aux.Stringid(4002,9))
+			Duel.Hint(HINT_MESSAGE,tp,aux.Stringid(id,1))
 		else
 			--re organize unliked list
 			for i=an+1,n do
@@ -202,7 +202,7 @@ function s.normalsetoperation(e,tp,eg,ep,ev,re,r,rp)
 		end
 	else
 		unliked[tp][an+1]=true
-		Duel.Hint(HINT_MESSAGE,tp,aux.Stringid(4002,9))
+		Duel.Hint(HINT_MESSAGE,tp,aux.Stringid(id,1))
 	end
 end
 --actional
@@ -233,14 +233,14 @@ function s.actionaloperation(e,tp,eg,ep,ev,re,r,rp)
 			local loc=LOCATION_SZONE
 			if (tpe&TYPE_FIELD)~=0 then
 				loc=LOCATION_FZONE
-				local fc=Duel.GetFieldCard(1-tp,LOCATION_SZONE,5)
+				local fc=Duel.GetFieldCard(1-tp,LOCATION_FZONE,0)
 				if Duel.GetFlagEffect(tp,62765383)>0 then
 					if fc then Duel.Destroy(fc,REASON_RULE) end
-					of=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
-					if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
+					of=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
+					if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
 				else
-					Duel.GetFieldCard(tp,LOCATION_SZONE,5)
-					if fc and Duel.SendtoGrave(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
+					Duel.GetFieldCard(tp,LOCATION_FZONE,0)
+					if fc and Duel.SendtoRest(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
 				end
 			end
 			Duel.DisableShuffleCheck()
@@ -260,12 +260,12 @@ function s.actionaloperation(e,tp,eg,ep,ev,re,r,rp)
 			end
 			if op then
 				if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 and not tc:IsHasEffect(EFFECT_REMAIN_FIELD) then
-					tc:CancelToGrave(false)
+					tc:CancelToRest(false)
 				end
 				if op then op(e,tp,eg,ep,ev,re,r,rp) end
 			end
 			tc:ReleaseEffectRelation(te)
-			if etc then 
+			if etc then
 				etc=g:GetFirst()
 				while etc do
 					etc:ReleaseEffectRelation(te)
@@ -278,11 +278,11 @@ function s.actionaloperation(e,tp,eg,ep,ev,re,r,rp)
 			end
 		else
 			unliked[tp][an+1]=true
-			Duel.Hint(HINT_MESSAGE,tp,aux.Stringid(4002,9))
+			Duel.Hint(HINT_MESSAGE,tp,aux.Stringid(id,1))
 		end
 	else
 		unliked[tp][an+1]=true
-		Duel.Hint(HINT_MESSAGE,tp,aux.Stringid(4002,9))
+		Duel.Hint(HINT_MESSAGE,tp,aux.Stringid(id,1))
 	end
 end
 --trap
@@ -330,12 +330,12 @@ function s.trapoperation(e,tp,eg,ep,ev,re,r,rp)
 			end
 			if op then
 				if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 and not tc:IsHasEffect(EFFECT_REMAIN_FIELD) then
-					tc:CancelToGrave(false)
+					tc:CancelToRest(false)
 				end
 				if op then op(e,tp,eg,ep,ev,re,r,rp) end
 			end
 			tc:ReleaseEffectRelation(te)
-			if etc then 
+			if etc then
 				etc=g:GetFirst()
 				while etc do
 					etc:ReleaseEffectRelation(te)
@@ -348,11 +348,11 @@ function s.trapoperation(e,tp,eg,ep,ev,re,r,rp)
 			end
 		else
 			unliked[tp][an+1]=true
-			Duel.Hint(HINT_MESSAGE,tp,aux.Stringid(4002,9))
+			Duel.Hint(HINT_MESSAGE,tp,aux.Stringid(id,1))
 		end
 	else
 		unliked[tp][an+1]=true
-		Duel.Hint(HINT_MESSAGE,tp,aux.Stringid(4002,9))
+		Duel.Hint(HINT_MESSAGE,tp,aux.Stringid(id,1))
 	end
 end
 --[[

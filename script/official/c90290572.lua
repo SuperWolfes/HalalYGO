@@ -1,12 +1,12 @@
 -- 代行者の近衛 ムーン
--- Guard of the Agents - Moon
+-- Guard of the Agents - Horizon
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	-- 2 Wanderer Monsters
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_WANDERER),2,2)
-	-- Send to GY or add to hand
+	-- Send to RP or add to hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOREST+CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -40,7 +40,7 @@ function s.ghcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_LINK)
 end
 function s.tgfilter(c)
-	return (c:IsCode(CARD_SANCTUARY_SKY) or c:ListsCode(CARD_SANCTUARY_SKY)) and c:IsAbleToGrave()
+	return (c:IsCode(CARD_SANCTUARY_SKY) or c:ListsCode(CARD_SANCTUARY_SKY)) and c:IsAbleToRest()
 end
 function s.thfilter(c)
 	return c:IsCode(91188343) and c:IsAbleToHand()
@@ -55,7 +55,7 @@ function s.ghtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.ghop(e,tp,eg,ep,ev,re,r,rp)
 	local gg=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_DECK,0,nil)
-	local hg=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.thfilter),tp,LOCATION_DECK+LOCATION_REST,0,nil)
+	local hg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.thfilter),tp,LOCATION_DECK+LOCATION_REST,0,nil)
 	if (#hg>0 and s.sanct()) and (#gg<1 or Duel.SelectYesNo(tp,aux.Stringid(id,2))) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 		local g=hg:Select(tp,1,1,nil)
@@ -67,7 +67,7 @@ function s.ghop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=gg:Select(tp,1,1,nil)
 		if #g>0 then
-			Duel.SendtoGrave(g,REASON_EFFECT)
+			Duel.SendtoRest(g,REASON_EFFECT)
 		end
 	end
 end

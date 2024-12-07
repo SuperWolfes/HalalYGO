@@ -22,8 +22,8 @@ function s.initial_effect(c)
 	e2:SetTarget(s.drtg)
 	e2:SetOperation(s.drop)
 	c:RegisterEffect(e2)
-	--Send this face-up card to GY to activate 1 of these effects
-	--Opponent draws 1, then you send 1 monster from their hand to GY
+	--Send this face-up card to RP to activate 1 of these effects
+	--Opponent draws 1, then you send 1 monster from their hand to RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_HANDES+CATEGORY_DRAW)
@@ -38,7 +38,7 @@ function s.initial_effect(c)
 	e3:SetOperation(s.handop)
 	e3:SetHintTiming(TIMING_STANDBY_PHASE+TIMING_END_PHASE)
 	c:RegisterEffect(e3)
-	--Look at opponent's extra deck and send 1 monster from it to GY
+	--Look at opponent's extra deck and send 1 monster from it to RP
 	local e4=e3:Clone()
 	e4:SetDescription(aux.Stringid(id,2))
 	e4:SetCategory(CATEGORY_TOREST)
@@ -78,8 +78,8 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.handcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGraveAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED) end
-	Duel.SendtoGrave(c,REASON_COST)
+	if chk==0 then return c:IsAbleToRestAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED) end
+	Duel.SendtoRest(c,REASON_COST)
 end
 function s.handtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(1-tp,1) end
@@ -98,7 +98,7 @@ function s.handop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.ConfirmCards(1-p,g)
 			Duel.Hint(HINT_SELECTMSG,p,HINTMSG_DISCARD)
 			local sg=g:FilterSelect(1-p,Card.IsMonster,1,1,nil)
-			Duel.SendtoGrave(sg,REASON_EFFECT+REASON_DISCARD)
+			Duel.SendtoRest(sg,REASON_EFFECT+REASON_DISCARD)
 			Duel.ShuffleHand(p)
 		end
 	end
@@ -114,7 +114,7 @@ function s.extdop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ConfirmCards(tp,g)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local sg=g:FilterSelect(tp,Card.IsMonster,1,1,nil)
-		Duel.SendtoGrave(sg,REASON_EFFECT)
+		Duel.SendtoRest(sg,REASON_EFFECT)
 		Duel.ShuffleExtra(1-tp)
 	end
 end

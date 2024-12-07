@@ -1,5 +1,5 @@
 --時械神 サンダイオン (Anime)
---Sandaion, the Timelord (Anime)
+--Sandaion, the Timewatcher (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--indes

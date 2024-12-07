@@ -1,5 +1,5 @@
 --究極封印解放儀式術
---Ultimate Locked of the Unliked Lord
+--Ultimate Locked of the Unliked Watcher
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -7,12 +7,13 @@ function s.initial_effect(c)
 	e1:SetCategory(CATEGORY_TODECK+CATEGORY_TOREST+CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
+	e1:SetProperty(0,EFFECT_FLAG2_FCOREE_ACTIVATE_LOCATION)
+	e1:SetValue(LOCATION_SZONE)
 	e1:SetRange(LOCATION_REST)
 	e1:SetCondition(s.condition)
 	e1:SetCost(s.cost)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
-	e1:SetValue(LOCATION_SZONE)
 	c:RegisterEffect(e1)
 	--Return
 	local e2=Effect.CreateEffect(c)
@@ -38,7 +39,7 @@ function s.filter(c,e,tp)
 	return c:IsCode(13893596) and c:IsCanBeSpecialSummoned(e,0,tp,false,c:IsOriginalCode(511000243))
 end
 function s.dfilter(c)
-	return c:IsSetCard(0x40) and c:IsAbleToGrave()
+	return c:IsSetCard(0x40) and c:IsAbleToRest()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local rg=Duel.GetMatchingGroup(Card.IsSetCard,tp,LOCATION_REST,0,nil,0x40)
@@ -66,7 +67,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.SelectMatchingCard(tp,s.dfilter,tp,LOCATION_HAND,0,2,2,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local tc=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_HAND+LOCATION_DECK,0,1,1,nil,e,tp):GetFirst()
-	Duel.SendtoGrave(tg,REASON_EFFECT)
+	Duel.SendtoRest(tg,REASON_EFFECT)
 	Duel.SpecialSummon(tc,0,tp,tp,false,tc:IsOriginalCode(511000243),POS_FACEUP)
 	tc:CompleteProcedure()
 end
@@ -76,9 +77,9 @@ function s.retfilter(c)
 end
 function s.retcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,13893596),tp,LOCATION_MZONE,0,1,nil)
-		and eg:IsExists(aux.GraveValleyFilter(s.retfilter),1,nil)
+		and eg:IsExists(aux.NecroValleyFilter(s.retfilter),1,nil)
 end
 function s.retop(e,tp,eg,ep,ev,re,r,rp)
-	local g=eg:Filter(aux.GraveValleyFilter(s.retfilter),nil)
+	local g=eg:Filter(aux.NecroValleyFilter(s.retfilter),nil)
 	Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
 end

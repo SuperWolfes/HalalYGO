@@ -26,7 +26,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.rettg)
 	e2:SetOperation(s.retop)
 	c:RegisterEffect(e2)
-	--Search 1 "Guardianual Wind Art" card or 1 "Interwoven" Actional/Trap
+	--Search 1 "Spilocked Wind Art" card or 1 "Interwoven" Actional/Trap
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND)
@@ -41,10 +41,10 @@ function s.initial_effect(c)
 end
 s.listed_series={0xa14d,0xc0}
 function s.spfilter1(c)
-	return c:IsFaceup() and c:IsRace(RACE_MENTOR) and c:IsAbleToGraveAsCost()
+	return c:IsFaceup() and c:IsRace(RACE_MENTOR) and c:IsAbleToRestAsCost()
 end
 function s.spfilter2(c)
-	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_WIND) and c:IsLevelBelow(4) and c:IsAbleToGraveAsCost()
+	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_WIND) and c:IsLevelBelow(4) and c:IsAbleToRestAsCost()
 end
 function s.rescon(sg,e,tp,mg)
 	return aux.ChkfMMZ(1)(sg,e,tp,mg) and sg:IsExists(s.chk,1,nil,sg,tp)
@@ -77,7 +77,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	if e:GetHandler():IsLocation(LOCATION_DECK) then
 		Duel.ShuffleDeck(tp)
 	end

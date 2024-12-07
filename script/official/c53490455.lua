@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.lptg)
 	e1:SetOperation(s.lpop)
 	c:RegisterEffect(e1)
-	--Add this card from GY to hand
+	--Add this card from RP to hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND)
@@ -36,8 +36,8 @@ function s.lpcon(e,tp,eg,ep,ev,re,r,rp)
 	return d and d:IsControler(tp) and d:IsFaceup() and d:IsSetCard(0x119)
 end
 function s.lpcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
+	Duel.SendtoRest(e:GetHandler(),REASON_COST)
 end
 function s.lpfilter(c,e)
 	return c and c:IsOnField() and c:IsFaceup() and c:IsCanBeEffectTarget(e)

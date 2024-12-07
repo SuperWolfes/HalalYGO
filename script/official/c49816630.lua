@@ -1,10 +1,10 @@
 --甲纏竜ガイアーム
---Gaiarmor Dragonshell
+--Biarmor Dragonshell
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
 	--Synchro Summon procedure
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	--Return 3 Synchros to the Extra Deck
 	local e1=Effect.CreateEffect(c)

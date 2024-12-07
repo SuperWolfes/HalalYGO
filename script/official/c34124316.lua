@@ -42,8 +42,8 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.BreakEffect()
 	local p=Duel.GetTurnPlayer()
 	local summonable1,nonsummonable1=Duel.GetDecktopGroup(p,5):Split(s.spchk,nil,e,p)
-	local summonable2,nonsummonable2=Duel.GetDecktopGroup(1-p,5):Split(s.spchk,nil,e,p)
-	
+	local summonable2,nonsummonable2=Duel.GetDecktopGroup(1-p,5):Split(s.spchk,nil,e,1-p)
+
 	local ft1=Duel.GetLocationCount(p,LOCATION_MZONE)
 	if ft1>1 and Duel.IsPlayerAffectedByEffect(p,CARD_BLUEEYES_GUARDIAN) and #summonable1>1 then
 		nonsummonable1:Merge(summonable1)
@@ -54,14 +54,14 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		nonsummonable2:Merge(summonable2)
 		summonable2:Clear()
 	end
-	
+
 	local tohand,torest=nonsummonable1:Merge(nonsummonable2):Split(Card.IsAbleToHand,nil)
-	
+
 	Duel.DisableShuffleCheck()
-	
+
 	Duel.ConfirmDecktop(p,5)
 	summon(summonable1,e,p,torest,ft1)
-	
+
 	Duel.ConfirmDecktop(1-p,5)
 	summon(summonable2,e,1-p,torest,ft2)
 	Duel.SpecialSummonComplete()
@@ -71,7 +71,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ShuffleHand(1-tp)
 	end
 	if #torest>0 then
-		Duel.SendtoGrave(torest,REASON_EFFECT)
+		Duel.SendtoRest(torest,REASON_EFFECT)
 	end
 	local fg=Duel.GetMatchingGroup(Card.IsFacedown,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
 	Duel.ShuffleSetCard(fg)

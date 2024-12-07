@@ -1,9 +1,9 @@
 --イビリチュア・マインドオーガス
---Evigishki Mind Augus
+--Evigiojiki Mind Augus
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
-	--Shuffle cards from the GY into the Deck
+	c:EnableAwakeLimit()
+	--Shuffle cards from the RP into the Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TODECK)

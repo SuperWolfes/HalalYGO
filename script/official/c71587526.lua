@@ -1,5 +1,5 @@
 --因果切断
---Karma Cut
+--Kaom Cut
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

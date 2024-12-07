@@ -1,5 +1,5 @@
 --帝王の轟毅
---Strike of the Monarchs
+--Strike of the Moppars
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

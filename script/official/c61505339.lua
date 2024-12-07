@@ -35,9 +35,9 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-	local sg=Duel.SelectMatchingCard(tp,Card.IsAbleToGrave,tp,LOCATION_HAND,0,1,1,nil)
+	local sg=Duel.SelectMatchingCard(tp,Card.IsAbleToRest,tp,LOCATION_HAND,0,1,1,nil)
 	if #sg==0 then return end
-	if Duel.SendtoGrave(sg,REASON_EFFECT)==0 or not sg:GetFirst():IsLocation(LOCATION_REST) then return end
+	if Duel.SendtoRest(sg,REASON_EFFECT)==0 or not sg:GetFirst():IsLocation(LOCATION_REST) then return end
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) then
 		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)

@@ -1,5 +1,5 @@
 --アマゾネスペット仔虎
---Amazoness Baby Tiger
+--Amazonian Baby Tiger
 local s,id=GetID()
 function s.initial_effect(c)
 	--spsummon

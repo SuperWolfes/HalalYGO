@@ -30,13 +30,13 @@ function s.initial_effect(c)
 end
 s.listed_names={id}
 function s.rmcfilter(c)
-	return c:IsAttribute(ATTRIBUTE_FIRE) and c:IsAbleToGraveAsCost()
+	return c:IsAttribute(ATTRIBUTE_FIRE) and c:IsAbleToRestAsCost()
 end
 function s.rmcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.rmcfilter,tp,LOCATION_HAND,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.rmcfilter,tp,LOCATION_HAND,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(1-tp) and chkc:IsLocation(LOCATION_REST) and chkc:IsAbleToRemove() end
@@ -58,7 +58,7 @@ function s.gycon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.gycfilter,1,nil,tp)
 end
 function s.gyfilter(c)
-	return c:IsAttribute(ATTRIBUTE_FIRE) and c:IsDefenseBelow(200) and not c:IsCode(id) and c:IsAbleToGrave()
+	return c:IsAttribute(ATTRIBUTE_FIRE) and c:IsDefenseBelow(200) and not c:IsCode(id) and c:IsAbleToRest()
 end
 function s.gytg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.gyfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -68,7 +68,7 @@ function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.gyfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end
 

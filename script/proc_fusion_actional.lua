@@ -3,10 +3,10 @@
 --fusfilter		filter for the monster to be Fusion Summoned
 --matfilter		restriction on the default materials returned by GetFusionMaterial
 --extrafil		function that returns a group of extra cards that can be used as fusion materials, and as second optional parameter the additional filter function
---extraop		function called right before sending the monsters to the rest place as material
+--extraop		function called right before sending the monsters to the resting place as material
 --gc			mandatory card or function returning a group to be used (for effects like Soprano)
 --stage2		function called after the monster has been summoned
---exactcount	
+--exactcount
 --location		location where to summon fusion monsters from (default LOCATION_EXTRA)
 --chkf			FUSPROC flags for the fusion summon
 --desc			summon effect description
@@ -37,7 +37,7 @@ Debug.ReloadFieldBegin=(function()
 				return Fusion.ExtraGroup and Fusion.ExtraGroup:IsContains(c)
 			end)
 			geff:SetValue(aux.TRUE)
-			Duel.RegisterEffect(geff,0)	
+			Duel.RegisterEffect(geff,0)
 		end
 	end
 )()
@@ -86,7 +86,7 @@ local function ExtraMatOPTCheck(mg1,e,tp,extrafil,efmg)
 			--the RP (so that effects like "Dragon's Mirror" are excluded),
 			--remove all the EFFECT_EXTRA_FUSION_MATERIAL cards
 			--that are in the RP from the material group.
-			--Hardcoded to REST_PLACE since it's currently
+			--Hardcoded to LOCATION_REST since it's currently
 			--impossible to get the TargetRange of the
 			--EFFECT_EXTRA_FUSION_MATERIAL effect (but the only OPT effect atm uses the RP).
 			local extra_feff_loc=extra_feff:GetTargetRange()
@@ -147,16 +147,14 @@ function Fusion.SummonEffFilter(c,fusfilter,e,tp,mg,gc,chkf,value,sumlimit,nosum
 	--Attempt to fix the interaction between an EFFECT_EXTRA_FUSION_MATERIAL effect
 	--and Fusion Summoning effects that normally allow you to only use a single location
 	--(e.g. with "Flash Fusion" you can normally only use monsters on your field).
-	if efmg and #efmg>0 then
-		if #(efmg:Match(GetExtraMatEff,nil,c))>0 then
-			mg:Merge(efmg)
-		end
+	if efmg then
+		mg:Merge(efmg:Filter(GetExtraMatEff,nil,c))
 	end
 	return c:IsType(TYPE_FUSION) and (not fusfilter or fusfilter(c,tp)) and (nosummoncheck or c:IsCanBeSpecialSummoned(e,value,tp,sumlimit,false,sumpos))
 			and c:CheckFusionMaterial(mg,gc,chkf)
 end
 
-function Fusion.ForcedMatValidity(c,e)
+function Fusion.FcoreedMatValidity(c,e)
 	if c==e:GetHandler() then
 		return not c:IsRelateToEffect(e)
 	end
@@ -181,7 +179,7 @@ function(fusfilter,matfilter,extrafil,extraop,gc2,stage2,exactcount,value,locati
 				local gc=gc2
 				gc=type(gc)=="function" and gc(e,tp,eg,ep,ev,re,r,rp,chk) or gc
 				gc=type(gc)=="Card" and Group.FromCards(gc) or gc
-				matfilter=matfilter or Card.IsAbleToGrave
+				matfilter=matfilter or Card.IsAbleToRest
 				stage2 = stage2 or aux.TRUE
 				if chk==0 then
 					--Separate the Fusion Materials filtered by matfilter
@@ -201,7 +199,11 @@ function(fusfilter,matfilter,extrafil,extraop,gc2,stage2,exactcount,value,locati
 							if not extrafil then
 								local ret = {repl_function[1](e,tp,mg1)}
 								if ret[1] then
-									ret[1]:Match(matfilter,nil)
+									ret[1]:Match(matfilter,nil,e,tp,0)
+									if repl_function[2] then
+										ret[1]:Match(repl_function[2],nil,e,tp)
+										efmg:Match(repl_function[2],nil,e,tp)
+									end
 									Fusion.ExtraGroup=ret[1]:Filter(Card.IsCanBeFusionMaterial,nil,nil,value):Match(aux.NOT(Card.IsImmuneToEffect),nil,e)
 									mg1:Merge(ret[1])
 								end
@@ -211,7 +213,7 @@ function(fusfilter,matfilter,extrafil,extraop,gc2,stage2,exactcount,value,locati
 								local ret = {extrafil(e,tp,mg1)}
 								local repl={repl_function[1](e,tp,mg1)}
 								if ret[1] then
-									repl[1]:Match(matfilter,nil)
+									repl[1]:Match(matfilter,nil,e,tp,0)
 									ret[1]:Merge(repl[1])
 									Fusion.ExtraGroup=ret[1]:Filter(Card.IsCanBeFusionMaterial,nil,nil,value):Match(aux.NOT(Card.IsImmuneToEffect),nil,e)
 									mg1:Merge(ret[1])
@@ -271,7 +273,7 @@ function(fusfilter,matfilter,extrafil,extraop,gc2,stage2,exactcount,value,locati
 								Fusion.CheckAdditional=nil
 								Fusion.ExtraGroup=nil
 							end
-						end		
+						end
 					end
 					Fusion.CheckExact=nil
 					Fusion.CheckMin=nil
@@ -319,7 +321,7 @@ function (fusfilter,matfilter,extrafil,extraop,gc2,stage2,exactcount,value,locat
 				local gc=gc2
 				gc=type(gc)=="function" and gc(e,tp,eg,ep,ev,re,r,rp,chk) or gc
 				gc=type(gc)=="Card" and Group.FromCards(gc) or gc
-				matfilter=matfilter or Card.IsAbleToGrave
+				matfilter=matfilter or Card.IsAbleToRest
 				stage2 = stage2 or aux.TRUE
 				local checkAddition
 				--Same as line 167 above
@@ -337,7 +339,11 @@ function (fusfilter,matfilter,extrafil,extraop,gc2,stage2,exactcount,value,locat
 						if not extrafil then
 							local ret = {repl_function[1](e,tp,mg1)}
 							if ret[1] then
-								ret[1]:Match(matfilter,nil)
+								ret[1]:Match(matfilter,nil,e,tp,1)
+								if repl_function[2] then
+									ret[1]:Match(repl_function[2],nil,e,tp)
+									efmg:Match(repl_function[2],nil,e,tp)
+								end
 								Fusion.ExtraGroup=ret[1]:Filter(Card.IsCanBeFusionMaterial,nil,nil,value):Match(aux.NOT(Card.IsImmuneToEffect),nil,e)
 								mg1:Merge(ret[1])
 							end
@@ -347,7 +353,7 @@ function (fusfilter,matfilter,extrafil,extraop,gc2,stage2,exactcount,value,locat
 							local ret = {extrafil(e,tp,mg1)}
 							local repl={repl_function[1](e,tp,mg1)}
 							if ret[1] then
-								repl[1]:Match(matfilter,nil)
+								repl[1]:Match(matfilter,nil,e,tp,1)
 								ret[1]:Merge(repl[1])
 								Fusion.ExtraGroup=ret[1]:Filter(Card.IsCanBeFusionMaterial,nil,nil,value):Match(aux.NOT(Card.IsImmuneToEffect),nil,e)
 								mg1:Merge(ret[1])
@@ -371,7 +377,7 @@ function (fusfilter,matfilter,extrafil,extraop,gc2,stage2,exactcount,value,locat
 					checkAddition=ret[2]
 				end
 				mg1:Match(Card.IsCanBeFusionMaterial,nil,nil,value):Match(aux.NOT(Card.IsImmuneToEffect),nil,e)
-				if gc and (not mg1:Includes(gc) or gc:IsExists(Fusion.ForcedMatValidity,1,nil,e)) then
+				if gc and (not mg1:Includes(gc) or gc:IsExists(Fusion.FcoreedMatValidity,1,nil,e)) then
 					Fusion.ExtraGroup=nil
 					return false
 				end
@@ -445,7 +451,9 @@ function (fusfilter,matfilter,extrafil,extraop,gc2,stage2,exactcount,value,locat
 					if sel[1]==e then
 						Fusion.ExtraGroup=nil
 						backupmat=mat1:Clone()
-						tc:SetMaterial(mat1)
+						if not notfusion then
+							tc:SetMaterial(mat1)
+						end
 						--Checks for the case that the Fusion Summoning effect has an "extraop"
 						local extra_feff_mg=mat1:Filter(GetExtraMatEff,nil,tc)
 						if #extra_feff_mg>0 and extraop then
@@ -462,7 +470,7 @@ function (fusfilter,matfilter,extrafil,extraop,gc2,stage2,exactcount,value,locat
 										local extrafil_g=extrafil(e,tp,mg1)
 										if #extrafil_g>=0 and not extrafil_g:IsExists(Card.IsLocation,1,nil,extra_feff:GetTargetRange()) then
 											--The Fusion effect by default does not use the RP
-											--so the player is forced to apply this effect.
+											--so the player is fcoreed to apply this effect.
 											mat1:Sub(extra_feff_mg)
 											extra_feff_op(e,tc,tp,extra_feff_mg)
 											flag=true
@@ -480,7 +488,7 @@ function (fusfilter,matfilter,extrafil,extraop,gc2,stage2,exactcount,value,locat
 										end
 									else
 										--The Fusion effect by default does not use the RP
-										--so the player is forced to apply this effect.
+										--so the player is fcoreed to apply this effect.
 										mat1:Sub(extra_feff_mg)
 										extra_feff_op(e,tc,tp,extra_feff_mg)
 										flag=true
@@ -505,15 +513,17 @@ function (fusfilter,matfilter,extrafil,extraop,gc2,stage2,exactcount,value,locat
 							local extra_feff_mg,normal_mg=mat1:Split(GetExtraMatEff,nil,tc)
 							local extra_feff
 							if #extra_feff_mg>0 then extra_feff=GetExtraMatEff(extra_feff_mg:GetFirst(),tc) end
-							if #normal_mg>0 then
-								Duel.SendtoGrave(normal_mg,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
+							if #normal_mg>0 and (not extra_feff or extra_feff:GetLabel()~=160018042) then
+								normal_mg=normal_mg:AddMaximumCheck()
+								Duel.SendtoRest(normal_mg,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
 							end
 							if extra_feff then
 								local extra_feff_op=extra_feff:GetOperation()
 								if extra_feff_op then
 									extra_feff_op(e,tc,tp,extra_feff_mg)
 								else
-									Duel.SendtoGrave(extra_feff_mg,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
+									extra_feff_mg=extra_feff_mg:AddMaximumCheck()
+									Duel.SendtoRest(extra_feff_mg,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
 								end
 								--If the EFFECT_EXTRA_FUSION_MATERIAL effect is OPT
 								--then "use" its count limit.
@@ -551,14 +561,16 @@ function Fusion.BanishMaterial(e,tc,tp,sg)
 end
 function Fusion.ShuffleMaterial(e,tc,tp,sg)
 	local rg=sg:Filter(Card.IsFacedown,nil)
+	local hg=sg:Filter(Card.IsLocation,nil,LOCATION_REST|LOCATION_REMOVED)
 	if #rg>0 then Duel.ConfirmCards(1-tp,rg) end
-	Duel.SendtoDeck(sg,nil,2,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
+	if #hg>0 then Duel.HintSelection(hg,true) end
+	Duel.SendtoDeck(sg,nil,2,REASON_EFFECT|REASON_MATERIAL|REASON_FUSION)
 	sg:Clear()
 end
 function Fusion.OnFieldMat(filter,...)
 	if type(filter) == "Card" then
 		--filter is actually the card parameter
-		return filter:IsOnField() and filter:IsAbleToGrave()
+		return filter:IsOnField() and filter:IsAbleToRest()
 	end
 	local funs={filter,...}
 	return function (c,...)
@@ -576,7 +588,7 @@ end
 function Fusion.InHandMat(filter,...)
 	if type(filter) == "Card" then
 		--filter is actually the card parameter
-		return filter:IsLocation(LOCATION_HAND) and filter:IsAbleToGrave()
+		return filter:IsLocation(LOCATION_HAND) and filter:IsAbleToRest()
 	end
 	local funs={filter,...}
 	return function (c,...)
@@ -605,7 +617,7 @@ function Fusion.IsMonsterFilter(f1,...)
 		return res
 	end
 end
-function Fusion.ForcedHandler(e)
+function Fusion.FcoreedHandler(e)
 	return e:GetHandler()
 end
 function Fusion.CheckWithHandler(fun,...)

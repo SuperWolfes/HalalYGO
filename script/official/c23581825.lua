@@ -1,5 +1,5 @@
 --RUM－ソウル・シェイブ・フォース
---Rank-Up-Magic Soul Shave Force
+--Rank-Up-Ment Miss Shave Fcoree
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

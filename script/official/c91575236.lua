@@ -3,10 +3,10 @@
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	-- 1 Tuner + 1+ non-Tuner monsters
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
-	-- Send a Contaminated to the GY
+	-- Send a Toxic to the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOREST+CATEGORY_LVCHANGE)
@@ -31,7 +31,7 @@ function s.initial_effect(c)
 end
 function s.tgfilter(c,ec)
 	local diff=math.abs(ec:GetOriginalLevel()-c:GetOriginalLevel())
-	return c:IsRace(RACE_CONTAMINED) and diff>0 and c:IsAbleToGrave()
+	return c:IsRace(RACE_TOXIC) and diff>0 and c:IsAbleToRest()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil,e:GetHandler()) end
@@ -42,7 +42,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	if not (c:IsFaceup() and c:IsRelateToEffect(e)) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tc=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil,c):GetFirst()
-	if tc and Duel.SendtoGrave(tc,REASON_EFFECT)>0 and tc:IsLocation(LOCATION_REST) then
+	if tc and Duel.SendtoRest(tc,REASON_EFFECT)>0 and tc:IsLocation(LOCATION_REST) then
 		-- Change Level
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
@@ -54,7 +54,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.spconfilter(c,tp)
-	return c:IsPreviousControler(tp) and c:GetPreviousRaceOnField()&RACE_CONTAMINED==RACE_CONTAMINED
+	return c:IsPreviousControler(tp) and c:GetPreviousRaceOnField()&RACE_TOXIC==RACE_TOXIC
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

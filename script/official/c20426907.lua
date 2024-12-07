@@ -30,7 +30,7 @@ function s.initial_effect(c)
 	e4:SetTarget(s.distg2)
 	e4:SetOperation(s.disop2)
 	c:RegisterEffect(e4)
-	--send itself to the Grave
+	--send itself to the Rest
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(id,2))
 	e5:SetType(EFFECT_TYPE_SINGLE)

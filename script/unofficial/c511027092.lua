@@ -18,6 +18,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetCode(EFFECT_TRAP_ACT_IN_HAND)
 	e2:SetCondition(s.con)
+	e2:SetDescription(aux.Stringid(id,0))
 	c:RegisterEffect(e2)
 	--Destroys itself in End Phase
 	local e3=Effect.CreateEffect(c)
@@ -29,7 +30,7 @@ function s.initial_effect(c)
 	e3:SetOperation(s.desop)
 	c:RegisterEffect(e3)
 end
-s.roll_suffice=true
+s.roll_dice=true
 function s.lkfilter(c,p)
 	return s.cfilter(c,p) and c:IsType(TYPE_LINK)
 end
@@ -65,8 +66,8 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	local c=e:GetHandler()
-	local suffice=Duel.TossSuffice(1-tp,1)
-	local att=2^(suffice-1)
+	local dice=Duel.TossDice(1-tp,1)
+	local att=2^(dice-1)
 	local tg=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
 	local g=Group.CreateGroup()
 	for tc in tg:Iter() do

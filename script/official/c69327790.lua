@@ -1,5 +1,5 @@
 --烈風帝ライザー
---Raiza the Mega Monarch
+--Raiza the Mega Moppar
 local s,id=GetID()
 function s.initial_effect(c)
 	--summon with 1 tribute

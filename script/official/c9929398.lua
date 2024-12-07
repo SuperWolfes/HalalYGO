@@ -3,8 +3,8 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Special summon procedure (from hand)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.tkntg)
 	e2:SetOperation(s.tknop)
 	c:RegisterEffect(e2)
-	--Special summon 1 "Blackwing" synchro monster from GY, treated as a tuner
+	--Special summon 1 "Blackwing" synchro monster from RP, treated as a tuner
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)

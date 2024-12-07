@@ -25,7 +25,7 @@ end
 s.listed_names={CARD_ALBAZ}
 s.listed_series={0x160}
 function s.cfilter(c,e,tp)
-	if not ((c:IsCode(CARD_ALBAZ) or (c:IsSetCard(0x160) and c:IsActionalTrap())) and c:IsAbleToGraveAsCost()) then return false end
+	if not ((c:IsCode(CARD_ALBAZ) or (c:IsSetCard(0x160) and c:IsActionalTrap())) and c:IsAbleToRestAsCost()) then return false end
 	local hc=e:GetHandler()
 	if c:IsLocation(LOCATION_HAND) then
 		return Duel.GetLocationCount(tp,LOCATION_MZONE,0)>0 and hc:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -39,7 +39,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tc=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,1,nil,e,tp):GetFirst()
 	local label=tc:IsLocation(LOCATION_DECK) and 1 or 0
 	e:SetLabel(label)
-	Duel.SendtoGrave(tc,REASON_COST)
+	Duel.SendtoRest(tc,REASON_COST)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

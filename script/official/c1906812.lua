@@ -4,8 +4,8 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()	
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()	
 	--Fusion summon procedure
 	Fusion.AddProcMix(c,true,true,CARD_ALBAZ,aux.FilterBoolFunctionEx(s.filter))
 	--Move itself to 1 of your unused MMZ
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.seqtg)
 	e1:SetOperation(s.seqop)
 	c:RegisterEffect(e1)
-	--Register the fact it was sent to GY
+	--Register the fact it was sent to RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)

@@ -1,5 +1,5 @@
 --壱世壊＝ペルレイノ
---Perlayno, the Primal Parallel Ruined Realm
+--Perlayno, the Primal Parallel Ruined Territory
 --scripted by Zefile
 local s,id=GetID()
 function s.initial_effect(c)

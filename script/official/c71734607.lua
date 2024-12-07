@@ -3,7 +3,7 @@
 --Scripted by ahtelel
 local s,id=GetID()
 function s.initial_effect(c)
-	--Search or send to GY
+	--Search or send to RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_TOREST)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -29,7 +29,7 @@ end
 s.listed_series={0x141}
 s.listed_names={id}
 function s.filter(c)
-	return c:IsSetCard(0x141) and c:IsMonster() and (c:IsAbleToHand() or c:IsAbleToGrave()) and not c:IsCode(id)
+	return c:IsSetCard(0x141) and c:IsMonster() and (c:IsAbleToHand() or c:IsAbleToRest()) and not c:IsCode(id)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end

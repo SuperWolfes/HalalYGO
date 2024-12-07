@@ -1,19 +1,19 @@
 --黄金狂エルドリッチ
---El Rey Conquista Eldlich
+--El Rey Conquista Eldhitch
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Fusion summon procedure
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x142),s.matfilter)
-	--Name becomes "Eldlich the Golden Lord" while in monster zones
+	--Name becomes "Eldhitch the Golden Watcher" while in monster zones
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e1:SetCode(EFFECT_CHANGE_CODE)
 	e1:SetRange(LOCATION_MZONE)
-	e1:SetValue(CARD_GOLDEN_LORD)
+	e1:SetValue(CARD_GOLDEN_WATCHER)
 	c:RegisterEffect(e1)
 	--Cannot be destroyed by battle or card effects
 	local e2=Effect.CreateEffect(c)
@@ -39,12 +39,12 @@ function s.initial_effect(c)
 	e4:SetOperation(s.ctop)
 	c:RegisterEffect(e4)
 end
-s.listed_names={CARD_GOLDEN_LORD}
+s.listed_names={CARD_GOLDEN_WATCHER}
 s.listed_series={0x142}
 s.material_setcode={0x142}
 
 function s.matfilter(c,fc,sumtype,tp)
-	return c:IsRace(RACE_CONTAMINED,fc,sumtype,tp) and c:IsLevelAbove(5)
+	return c:IsRace(RACE_TOXIC,fc,sumtype,tp) and c:IsLevelAbove(5)
 end
 function s.filter(c,e)
 	return c:IsFaceup() and c:IsAbleToChangeControler() and (not e or c:IsCanBeEffectTarget(e))
@@ -52,7 +52,7 @@ end
 function s.cfilter(c,ft,tp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE,tp,LOCATION_REASON_CONTROL)
 	if c:IsControler(tp) and c:GetSequence()<5 then ft=ft+1 end
-	return c:IsRace(RACE_CONTAMINED) and ft>0 and Duel.IsExistingTarget(s.filter,tp,0,LOCATION_MZONE,1,c)
+	return c:IsRace(RACE_TOXIC) and ft>0 and Duel.IsExistingTarget(s.filter,tp,0,LOCATION_MZONE,1,c)
 end
 function s.ctcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local dg=Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_MZONE,nil,e)

@@ -4,8 +4,8 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Fusion summon procedure
 	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_BEASTWARRIOR),2)
 	--If special summoned, inflict 200 damage per "Fire Formation" actional/trap 
@@ -58,7 +58,7 @@ function s.descon(e,tp,eg,ep,ev,re,r,rp)
 		and (Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated())
 end
 function s.descfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x7c) and c:IsActionalTrap() and c:IsAbleToGraveAsCost()
+	return c:IsFaceup() and c:IsSetCard(0x7c) and c:IsActionalTrap() and c:IsAbleToRestAsCost()
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local nc=Duel.IsExistingMatchingCard(s.descfilter,tp,LOCATION_ONFIELD,0,1,nil)
@@ -68,7 +68,7 @@ function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if nc and not (Duel.IsPlayerAffectedByEffect(tp,CARD_FIRE_FIST_EAGLE) and Duel.SelectYesNo(tp,aux.Stringid(CARD_FIRE_FIST_EAGLE,0))) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=Duel.SelectMatchingCard(tp,s.descfilter,tp,LOCATION_ONFIELD,0,1,1,nil)
-		Duel.SendtoGrave(g,REASON_COST)
+		Duel.SendtoRest(g,REASON_COST)
 	end
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

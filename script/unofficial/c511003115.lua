@@ -1,4 +1,4 @@
---Blackwing - Pinaka the Waxing Moon
+--Blackwing - Pinaka the Waxing Horizon
 --rescripted by cybercatman
 local s,id=GetID()
 function s.initial_effect(c)

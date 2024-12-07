@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send the top 4 cards from the Deck to the GY
+	--Send the top 4 cards from the Deck to the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DECKDES)
 	e1:SetType(EFFECT_TYPE_IGNITION)

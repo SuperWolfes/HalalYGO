@@ -1,5 +1,5 @@
 --機巧菟－稻羽之淤岐素
---Gizmek Inaba
+--Gizmek Alban
 --Scripted by the Razgriz
 local s,id=GetID()
 function s.initial_effect(c)

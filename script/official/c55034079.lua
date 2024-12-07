@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	e2:SetCondition(s.ctcon)
 	e2:SetOperation(s.ctop)
 	c:RegisterEffect(e2)
-	--Special summon 1 "Rokket" monster from GY
+	--Special summon 1 "Rokket" monster from RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_QUICK_O)

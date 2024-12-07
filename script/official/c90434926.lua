@@ -51,7 +51,7 @@ end
 function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetLabelObject()
 	if not e:GetHandler():IsRelateToEffect(e) or not tc:IsRelateToEffect(e) then return end
-	Duel.SendtoGrave(tc,REASON_EFFECT)
+	Duel.SendtoRest(tc,REASON_EFFECT)
 	if tc:IsLocation(LOCATION_REST) and Duel.IsPlayerCanDraw(tp,1) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.BreakEffect()
 		Duel.Draw(tp,1,REASON_EFFECT)

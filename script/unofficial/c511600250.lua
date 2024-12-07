@@ -6,7 +6,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(0x581)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx2(Card.IsDrone),2)
 	--counter
 	local e1=Effect.CreateEffect(c)

@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
-	e1:SetHintTiming(TIMING_STANDBY_PHASE,TIMING_STANDBY_PHASE+TIMINGS_CHECK_MONSTER)
+	e1:SetHintTiming(TIMING_STANDBY_PHASE,TIMING_STANDBY_PHASE|TIMINGS_CHECK_MONSTER)
 	e1:SetTarget(s.acttg)
 	c:RegisterEffect(e1)
 	--adjust
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_FIELD)
 	e4:SetRange(LOCATION_SZONE)
-	e4:SetCode(EFFECT_FORCE_SPSUMMON_POSITION)
+	e4:SetCode(EFFECT_FCOREE_SPSUMMON_POSITION)
 	e4:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e4:SetTargetRange(1,1)
 	e4:SetTarget(s.sumlimit)
@@ -48,8 +48,7 @@ function s.sumlimit(e,c,sump,sumtype,sumpos,targetp)
 end
 function s.getattribute(g)
 	local aat=0
-	local tc=g:GetFirst()
-	for tc in aux.Next(g) do
+	for tc in g:Iter() do
 		aat=(aat|tc:GetAttribute())
 	end
 	return aat
@@ -87,9 +86,14 @@ function s.adjustop(e,tp,eg,ep,ev,re,r,rp)
 		g2:Remove(s.rmfilter,nil,att)
 		s[1-tp]=att
 	end
-	g1:Merge(g2)
+	local readjust=false
 	if #g1>0 then
-		Duel.SendtoGrave(g1,REASON_RULE)
-		Duel.Readjust()
+		Duel.SendtoRest(g1,REASON_RULE,PLAYER_NONE,tp)
+		readjust=true
 	end
+	if #g2>0 then
+		Duel.SendtoRest(g2,REASON_RULE,PLAYER_NONE,1-tp)
+		readjust=true
+	end
+	if readjust then Duel.Readjust() end
 end

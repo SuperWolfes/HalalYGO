@@ -1,5 +1,5 @@
 --昇天の角笛
---Horn of Heaven
+--Horn of Spectrum
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate(summon)

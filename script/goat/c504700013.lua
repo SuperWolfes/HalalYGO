@@ -1,5 +1,5 @@
 --見習い魔術師
---Apprentice Magician (GOAT)
+--Apprentice Mentor (GOAT)
 --Triggers on the field
 local s,id=GetID()
 function s.initial_effect(c)

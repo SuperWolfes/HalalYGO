@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--2 "Prank-Kids" monsters
 	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x120),2)
 	--Activation Limit
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetValue(1)
 	e1:SetCondition(s.actcon)
 	c:RegisterEffect(e1)
-	--Special Summon 2 non-Fusion "Prank-Kids" monsters with different names from GY
+	--Special Summon 2 non-Fusion "Prank-Kids" monsters with different names from RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)

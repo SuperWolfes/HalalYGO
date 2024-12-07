@@ -13,14 +13,14 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.accon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsPreviousPosition(POS_FACEDOWN) and e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD) 
+	return e:GetHandler():IsPreviousPosition(POS_FACEDOWN) and e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD)
 		and e:GetHandler():IsReason(REASON_DESTROY)
 end
 function s.filter(c)
 	return c:CheckActivateEffect(false,false,false) and c:IsAbleToRemove()
 end
 function s.actg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,0x13,0,1,nil) 
+	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,0x13,0,1,nil)
 		and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 end
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,tp,0x13)
 end
@@ -60,10 +60,10 @@ function s.acop(e,tp,eg,ep,ev,re,r,rp)
 		e3:SetReset(RESET_EVENT+RESETS_STANDARD)
 		c:RegisterEffect(e3)
 		if (tpe&TYPE_FIELD)~=0 then
-			local of=Duel.GetFieldCard(1-tp,LOCATION_SZONE,5)
+			local of=Duel.GetFieldCard(1-tp,LOCATION_FZONE,0)
 			if of then Duel.Destroy(of,REASON_RULE) end
-			of=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
-			if of and Duel.Destroy(of,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
+			of=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
+			if of and Duel.Destroy(of,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
 			Duel.MoveSequence(c,0,LOCATION_FZONE)
 		end
 		Duel.ClearTargetCard()
@@ -73,9 +73,9 @@ function s.acop(e,tp,eg,ep,ev,re,r,rp)
 		e:SetProperty(te:GetProperty())
 		if tg then tg(e,tp,teg,tep,tev,tre,tr,trp,1) end
 		if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 then
-			c:CancelToGrave(false)
+			c:CancelToRest(false)
 		else
-			c:CancelToGrave(true)
+			c:CancelToRest(true)
 			c:CopyEffect(code,RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET,1)
 		end
 		Duel.BreakEffect()

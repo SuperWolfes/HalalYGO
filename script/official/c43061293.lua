@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.damop)
 	c:RegisterEffect(e1)
 end
-s.roll_suffice=true
+s.roll_dice=true
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)==0
 end
@@ -25,6 +25,6 @@ function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
-	local d1,d2,d3=Duel.TossSuffice(tp,3)
+	local d1,d2,d3=Duel.TossDice(tp,3)
 	Duel.Damage(p,(d1+d2+d3)*100,REASON_EFFECT)
 end

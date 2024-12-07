@@ -1,4 +1,4 @@
---Revival of Sennen Genjin
+--Awakal of Sennen Genjin
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -33,7 +33,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local mg=Duel.GetLockedMaterial(tp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local tg=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.filter),tp,LOCATION_HAND+LOCATION_DECK,0,1,1,nil,e,tp,mg)
+	local tg=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,LOCATION_HAND+LOCATION_DECK,0,1,1,nil,e,tp,mg)
 	if #tg>0 then
 		local tc=tg:GetFirst()
 		mg:RemoveCard(tc)

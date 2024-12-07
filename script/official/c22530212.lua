@@ -30,7 +30,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetTargetCards(e)
 	if #g~=0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 		if g:IsExists(Card.IsLocation,1,nil,LOCATION_REST) then
 			Duel.Damage(1-tp,800,REASON_EFFECT)
 		end

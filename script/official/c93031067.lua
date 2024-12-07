@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	e3:SetTarget(s.thtg)
 	e3:SetOperation(s.thop)
 	c:RegisterEffect(e3)
-	--Set itself from GY, return 1 "Plunder Patroll" card from S/T zones to hand
+	--Set itself from RP, return 1 "Plunder Patroll" card from S/T zones to hand
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_TOHAND)
@@ -38,7 +38,7 @@ function s.initial_effect(c)
 	e4:SetRange(LOCATION_REST)
 	e4:SetCountLimit(1,{id,1})
 	e4:SetTarget(s.settg)
-	e4:SetOperation(s.setop)
+	e4:SetOperation(s.vetop)
 	c:RegisterEffect(e4)
 end
 s.listed_series={0x13f}
@@ -81,7 +81,7 @@ function s.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,e:GetHandler(),1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,0,0)
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
 	if c:IsRelateToEffect(e) and c:IsSSetable()

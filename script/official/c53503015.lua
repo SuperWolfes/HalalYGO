@@ -1,5 +1,5 @@
 --冷薔薇の抱香
---Frozen Roars
+--Frozen Rose
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -20,7 +20,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 end
 function s.cfilter(c,chk,p,chk1,chk2)
-	return c:IsFaceup() and c:IsAbleToGraveAsCost() and ((chk == 0 and c:IsRace(RACE_PLANT)==p)
+	return c:IsFaceup() and c:IsAbleToRestAsCost() and ((chk == 0 and c:IsRace(RACE_PLANT)==p)
 		or ((c:IsRace(RACE_PLANT) and chk1) or (not c:IsRace(RACE_PLANT) and chk2)))
 end
 function s.thfilter(c)
@@ -40,10 +40,10 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_MZONE,0,1,1,nil,1,nil,chk1,chk2)
 	local opt=g:GetFirst():IsRace(RACE_PLANT) and 0 or 1
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	if opt == 0 then
 		e:SetLabel(1)
-		e:SetCategory(CATEGORY_DRAW)
+		e:SetCategory(CATEGORY_DRAW+CATEGORY_HANDES)
 		Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,2)
 		Duel.SetOperationInfo(0,CATEGORY_HANDES,nil,0,tp,1)
 	else
@@ -64,11 +64,10 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local opt=e:GetLabel()
 	if opt==1 then
 		local e1=Effect.CreateEffect(e:GetHandler())
-		e1:SetCategory(CATEGORY_DRAW+CATEGORY_HANDES)
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		e1:SetCode(EVENT_PHASE+PHASE_END)
 		e1:SetCountLimit(1)
-		e1:SetReset(RESET_PHASE+PHASE_END)
+		e1:SetReset(RESET_PHASE|PHASE_END)
 		e1:SetOperation(s.drop)
 		Duel.RegisterEffect(e1,tp)
 	elseif opt==2 then
@@ -80,4 +79,3 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		end
 	end
 end
-

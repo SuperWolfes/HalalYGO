@@ -36,7 +36,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsMainPhase() or Duel.IsBattlePhase()
 end
 function s.copfilter(c)
-	return c:IsAbleToGraveAsCost() and c:ListsCode(CARD_JACK_KNIGHT,CARD_KING_KNIGHT,CARD_QUEEN_KNIGHT) 
+	return c:IsAbleToRestAsCost() and c:ListsCode(CARD_JACK_KNIGHT,CARD_KING_KNIGHT,CARD_QUEEN_KNIGHT) 
 		and c:IsActional() and c:CheckActivateEffect(true,true,false)~=nil
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -49,7 +49,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	end
 	if chk==0 then return Duel.IsExistingMatchingCard(s.copfilter,tp,LOCATION_DECK,0,1,nil) end
 	local g=Duel.SelectMatchingCard(tp,s.copfilter,tp,LOCATION_DECK,0,1,1,nil)
-	if not Duel.SendtoGrave(g,REASON_COST) then return end
+	if not Duel.SendtoRest(g,REASON_COST) then return end
 	local te=g:GetFirst():CheckActivateEffect(true,true,false)
 	e:SetLabel(te:GetLabel())
 	e:SetLabelObject(te:GetLabelObject())

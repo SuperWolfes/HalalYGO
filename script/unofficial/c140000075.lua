@@ -1,4 +1,4 @@
---Adamantine Sword Revival
+--Adamantine Sword Awakal
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

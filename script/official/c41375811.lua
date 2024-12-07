@@ -3,8 +3,8 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Xyz summon procedure
 	Xyz.AddProcedure(c,nil,4,2,s.ovfilter,aux.Stringid(id,0),99,s.xyzop)
 	--Gains ATK/DEF equal to the total ATK/DEF of the "Zoodiac" monsters attached
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetCode(EFFECT_UPDATE_DEFENSE)
 	e2:SetValue(s.defval)
 	c:RegisterEffect(e2)
-	--Special summon 1 "Zoodiac" monster from GY
+	--Special summon 1 "Zoodiac" monster from RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)

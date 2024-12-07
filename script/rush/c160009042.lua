@@ -3,10 +3,10 @@
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--1 "Surge Bolt Lizard" + 1 "Surge Bolt Lizard"
 	Fusion.AddProcMix(c,true,true,160005010,160005010)
-	--Add 1 "Electrical Discharge" from your GY to your hand
+	--Add 1 "Electrical Discharge" from your RP to your hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND)

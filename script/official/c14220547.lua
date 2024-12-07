@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--Look at either Extra Deck and send 1 monster from it to the GY
+	--Look at either Extra Deck and send 1 monster from it to the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TOREST)
@@ -56,10 +56,10 @@ function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 	local g=(op==1) and g1 or g2
 	if op==2 then Duel.ConfirmCards(tp,g) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-	local tg=g:FilterSelect(tp,aux.AND(Card.IsMonster,Card.IsAbleToGrave),1,1,nil)
+	local tg=g:FilterSelect(tp,aux.AND(Card.IsMonster,Card.IsAbleToRest),1,1,nil)
 	if #tg>0 then
 		Duel.BreakEffect()
-		Duel.SendtoGrave(tg,REASON_EFFECT)
+		Duel.SendtoRest(tg,REASON_EFFECT)
 		if op==2 then Duel.ShuffleExtra(1-tp) end
 	end
 end

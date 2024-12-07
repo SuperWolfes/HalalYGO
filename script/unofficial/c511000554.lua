@@ -1,4 +1,4 @@
---Heaven's Lost Property
+--Spectrum's Lost Property
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

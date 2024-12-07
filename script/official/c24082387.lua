@@ -24,7 +24,7 @@ function s.filter1(c,e,tp,cg,minc)
 		and cg:CheckWithSumEqual(Card.GetLevel,c:GetLevel(),minc,99)
 end
 function s.cgfilter(c)
-	return c:HasLevel() and c:IsAbleToGraveAsCost() and (c:GetOriginalType()&TYPE_MONSTER)~=0
+	return c:HasLevel() and c:IsAbleToRestAsCost() and (c:GetOriginalType()&TYPE_MONSTER)~=0
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local cg=Duel.GetMatchingGroup(s.cgfilter,tp,LOCATION_MZONE,0,nil)
@@ -41,7 +41,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(rg:GetFirst():GetLevel())
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local sg=cg:SelectWithSumEqual(tp,Card.GetLevel,e:GetLabel(),minc,99)
-	Duel.SendtoGrave(sg,REASON_COST)
+	Duel.SendtoRest(sg,REASON_COST)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK)
 end
 function s.filter2(c,e,tp,lv)

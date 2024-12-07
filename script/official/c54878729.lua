@@ -1,11 +1,11 @@
 --クロニクル・ソーサレス
---Chronicle Sorceress
+--Chronicle Scoreeress
 --Logical Nonsense
 
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send 1 card from Deck to GY, based on Attributes in GY
+	--Send 1 card from Deck to RP, based on Attributes in RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TOREST)
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -15,12 +15,12 @@ function s.initial_effect(c)
 	e1:SetOperation(s.tgop)
 	c:RegisterEffect(e1)
 end
-local BEWD,DM=CARD_BLUEEYES_W_DRAGON,CARD_DARK_MAGICIAN
-	--Mentions "Blue-Eyes White Dragon" and "Dark Magician"
+local BEWD,DM=CARD_BLUEEYES_W_DRAGON,CARD_DARK_MENTOR
+	--Mentions "Blue-Eyes White Dragon" and "Dark Mentor"
 s.listed_names={BEWD,DM,id}
 
 function s.codefilter(c,code)
-	return not c:IsCode(id) and (c:IsCode(code) or c:ListsCode(code)) and c:IsAbleToGrave()
+	return not c:IsCode(id) and (c:IsCode(code) or c:ListsCode(code)) and c:IsAbleToRest()
 end
 	--Activation legality
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -35,7 +35,7 @@ function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(op)
 	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
-	--Send 1 card from Deck to GY, based on attributes in GY
+	--Send 1 card from Deck to RP, based on attributes in RP
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local g
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
@@ -44,5 +44,5 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	else
 		g=Duel.SelectMatchingCard(tp,s.codefilter,tp,LOCATION_DECK,0,1,1,nil,DM)
 	end
-	if #g>0 then Duel.SendtoGrave(g,REASON_EFFECT) end
+	if #g>0 then Duel.SendtoRest(g,REASON_EFFECT) end
 end

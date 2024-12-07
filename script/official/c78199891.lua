@@ -1,5 +1,5 @@
 --御巫かみくらべ
---Mikanko Catfight
+--Sibango Catfight
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.eqptg)
 	e1:SetOperation(s.eqpop)
 	c:RegisterEffect(e1)
-	--Add 1 Equip Actional from the GY to the hand
+	--Add 1 Equip Actional from the RP to the hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND)

@@ -1,5 +1,5 @@
 --黒魔術のカーテン (Anime)
---Dark Magic Curtain (Anime)
+--Dark Ment Curtain (Anime)
 --fixed by Larry126
 local s,id=GetID()
 function s.initial_effect(c)

@@ -55,5 +55,5 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.target(e,c)
-	return c:IsRace(RACE_CONTAMINED)
+	return c:IsRace(RACE_TOXIC)
 end

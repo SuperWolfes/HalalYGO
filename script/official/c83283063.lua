@@ -3,8 +3,8 @@ local s,id=GetID()
 function s.initial_effect(c)
 	c:SetSPSummonOnce(id)
 	--synchro summon
-	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_CONTAMINED),1,1,Synchro.NonTunerEx(Card.IsRace,RACE_CONTAMINED),1,99)
-	c:EnableReviveLimit()
+	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_TOXIC),1,1,Synchro.NonTunerEx(Card.IsRace,RACE_TOXIC),1,99)
+	c:EnableAwakeLimit()
 	--
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -26,7 +26,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.cfilter(c)
-	return c:IsRace(RACE_CONTAMINED) and c:GetBaseAttack()>0 and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
+	return c:IsRace(RACE_TOXIC) and c:GetBaseAttack()>0 and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,e:GetHandler()) end
@@ -51,7 +51,7 @@ function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 	return c:IsPreviousLocation(LOCATION_ONFIELD) and c:IsReason(REASON_DESTROY) and c:IsReason(REASON_BATTLE+REASON_EFFECT)
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsRace(RACE_CONTAMINED) and c:IsDefenseBelow(0)
+	return c:IsFaceup() and c:IsRace(RACE_TOXIC) and c:IsDefenseBelow(0)
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REMOVED) and s.filter(chkc) end
@@ -63,6 +63,6 @@ end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) then
-		Duel.SendtoGrave(tc,REASON_EFFECT+REASON_RETURN)
+		Duel.SendtoRest(tc,REASON_EFFECT+REASON_RETURN)
 	end
 end

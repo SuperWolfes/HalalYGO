@@ -2,7 +2,7 @@
 --G Gopal Crystal Heart
 local cid, id = GetID()
 function cid.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_CYBERSE),2)
 	--special summon
 	local e1=Effect.CreateEffect(c)

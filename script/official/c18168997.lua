@@ -1,5 +1,5 @@
 --堕天使ネルガル
---Darklord Nergal
+--Darkwarden Nergal
 --Logical Nonsense
 --Substitute ID
 local s,id=GetID()
@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetTargetRange(LOCATION_MZONE,0)
 	e1:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_WANDERER))
 	c:RegisterEffect(e1)
-	--Pay 1000 LP; copy the effect of 1 "Darklord" S/T, then shuffle it into deck
+	--Pay 1000 LP; copy the effect of 1 "Darkwarden" S/T, then shuffle it into deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TODECK)
@@ -28,14 +28,14 @@ function s.initial_effect(c)
 	e2:SetOperation(s.cpop)
 	c:RegisterEffect(e2)
 end
-	--Lists "Darklord" archetype
+	--Lists "Darkwarden" archetype
 s.listed_series={0xef}
 	--Pay 1000 LP
 function s.cpcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckLPCost(tp,1000) end
 	Duel.PayLPCost(tp,1000)
 end
-	--Check for "Darklord" actional/trap
+	--Check for "Darkwarden" actional/trap
 function s.cpfilter(c)
 	return c:IsSetCard(0xef) and c:IsActionalTrap() and c:IsAbleToDeck() and c:CheckActivateEffect(false,true,false)~=nil
 end
@@ -47,7 +47,7 @@ function s.cptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local g=Duel.SelectTarget(tp,s.cpfilter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,1,0,0)
 end
-	--Copy the effect of 1 "Darklord" S/T, then shuffle it into deck
+	--Copy the effect of 1 "Darkwarden" S/T, then shuffle it into deck
 function s.cpop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not (tc and tc:IsRelateToEffect(e)) then return end

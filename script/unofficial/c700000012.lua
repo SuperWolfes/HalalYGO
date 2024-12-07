@@ -1,5 +1,5 @@
 --Scripted by Eerie Code
---Abyss Actor - Devil Heel
+--Abyss Actor - Well Heel
 local s,id=GetID()
 function s.initial_effect(c)
 	--pendulum summon

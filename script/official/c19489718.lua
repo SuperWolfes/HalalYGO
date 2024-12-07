@@ -1,10 +1,10 @@
 --魔鍵銃－バトスバスター
---Magikey Blaster - Batosbuster
+--Menkey Blaster - Batosbuster
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
-	--Add 1 Magikey card from Deck to hand
+	c:EnableAwakeLimit()
+	--Add 1 Menkey card from Deck to hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)

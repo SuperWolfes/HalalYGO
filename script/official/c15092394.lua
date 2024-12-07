@@ -1,7 +1,7 @@
 --RR－エトランゼ・ファルコン
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Xyz.AddProcedure(c,nil,5,2)
 	--destroy
 	local e1=Effect.CreateEffect(c)

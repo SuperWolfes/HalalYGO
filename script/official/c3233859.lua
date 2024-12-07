@@ -1,5 +1,5 @@
 --サイコウィールダー
---Mental Wheelder
+--Mental Whewise
 local s,id=GetID()
 function s.initial_effect(c)
 	--Special summon itself from the hand

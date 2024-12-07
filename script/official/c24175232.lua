@@ -1,9 +1,9 @@
 --ネフティスの蒼凰神
---Sacred Azure Bird of Nephthys
+--Clean Azure Bird of Nepolonis
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--destroy
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DESTROY)

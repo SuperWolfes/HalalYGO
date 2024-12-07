@@ -2,7 +2,7 @@
 --Legendary Knight Hermos (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--change battle target
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(100000047,1))

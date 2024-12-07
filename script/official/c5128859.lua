@@ -2,7 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcCode2(c,CARD_NEOS,78734254,false,false)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,s.splimit)
 	--destroy

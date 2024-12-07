@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e2:SetTargetRange(LOCATION_MZONE,0)
 	e2:SetValue(s.atkval)
 	c:RegisterEffect(e2)
-	--Your "Charmer" and "Familiar-Interwoven" monsters cannot be destroyed by card effects
+	--Your "Chaumer" and "Familiar-Interwoven" monsters cannot be destroyed by card effects
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
 	e3:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)

@@ -1,4 +1,4 @@
---Switch Off
+--Smint Off
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

@@ -49,7 +49,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.costfilter(c,tp)
-	return c:IsCode(CARD_MONSTER_REREST) and c:IsAbleToGraveAsCost() and (c:IsFacedown() or not c:IsOnField())
+	return c:IsCode(CARD_MONSTER_REREST) and c:IsAbleToRestAsCost() and (c:IsFacedown() or not c:IsOnField())
 		and Duel.GetMZoneCount(tp,c)>0
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -58,7 +58,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	aux.bfgcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND+LOCATION_ONFIELD,0,1,1,nil,tp)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.spfilter(c,e,tp)
 	return c:IsCode(CARD_RA) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
@@ -74,7 +74,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if #g<1 or Duel.SpecialSummon(g,0,tp,tp,true,false,POS_FACEUP)<1 then return end
 	local tc=g:GetFirst()
 	tc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,EFFECT_FLAG_CLIENT_HINT,1,0,aux.Stringid(id,3))
-	-- Send to GY in the End Phase
+	-- Send to RP in the End Phase
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e1:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
@@ -85,13 +85,13 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetOperation(s.desop)
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e1,tp)
-	if Duel.IsExistingMatchingCard(Card.IsAbleToGrave,tp,0,LOCATION_MZONE,1,nil)
+	if Duel.IsExistingMatchingCard(Card.IsAbleToRest,tp,0,LOCATION_MZONE,1,nil)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-		local sg=Duel.SelectMatchingCard(tp,Card.IsAbleToGrave,tp,0,LOCATION_MZONE,1,1,nil)
+		local sg=Duel.SelectMatchingCard(tp,Card.IsAbleToRest,tp,0,LOCATION_MZONE,1,1,nil)
 		if #sg>0 then
 			Duel.BreakEffect()
-			Duel.SendtoGrave(sg,REASON_EFFECT)
+			Duel.SendtoRest(sg,REASON_EFFECT)
 		end
 	end
 end
@@ -99,5 +99,5 @@ function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetLabelObject():GetFlagEffect(id)>0
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SendtoGrave(e:GetLabelObject(),REASON_EFFECT)
+	Duel.SendtoRest(e:GetLabelObject(),REASON_EFFECT)
 end

@@ -4,7 +4,7 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send 1 "Marincess" monster from deck to GY when NS
+	--Send 1 "Marincess" monster from deck to RP when NS
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOREST)
@@ -36,19 +36,19 @@ s.listed_names={id}
 s.listed_series={0x12b}
 	--Check for "Marincess" monster, besides same name
 function s.tgfilter(c)
-	return c:IsMonster() and c:IsSetCard(0x12b) and not c:IsCode(id) and c:IsAbleToGrave()
+	return c:IsMonster() and c:IsSetCard(0x12b) and not c:IsCode(id) and c:IsAbleToRest()
 end
 	--Activation legality
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
-	--Sending a "Marincess" from deck to GY
+	--Sending a "Marincess" from deck to RP
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end
 	--If used for a WATER link monster

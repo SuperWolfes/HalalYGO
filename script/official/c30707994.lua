@@ -2,7 +2,7 @@
 --Maximum Six
 local s,id=GetID()
 function s.initial_effect(c)
-	--suffice
+	--dice
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SUFFICE)
@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 end
-s.roll_suffice=true
+s.roll_dice=true
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_TRIBUTE)
 end
@@ -24,13 +24,13 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and c:IsFaceup() then
-		local suffice=Duel.TossSuffice(tp,1)
+		local dice=Duel.TossDice(tp,1)
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)
 		e1:SetProperty(EFFECT_FLAG_COPY_INHERIT)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE)
-		e1:SetValue(suffice*200)
+		e1:SetValue(dice*200)
 		c:RegisterEffect(e1)
 	end
 end

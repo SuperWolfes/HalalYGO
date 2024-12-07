@@ -1,7 +1,7 @@
 --Cyber Angel - Vishnu
 local s,id=GetID()
 function s.initial_effect(c)
-	 c:EnableReviveLimit()
+	 c:EnableAwakeLimit()
 	--destroy
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_DESTROY+CATEGORY_DAMAGE)

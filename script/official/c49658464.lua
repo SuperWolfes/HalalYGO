@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.target)
 	e2:SetOperation(s.operation(true))
 	c:RegisterEffect(e2)
-	--Change ATK/DEF on destruction
+	--Change ATK/DEF on mismatching
 	local e3=e2:Clone()
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)

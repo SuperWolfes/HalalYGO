@@ -39,7 +39,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 		tc:RegisterEffect(e1)
 		if Duel.GetMatchingGroupCount(Card.IsActional,tp,LOCATION_REST,0,nil)>=3 then
-			--Cannot be destroyed by battle if 3+ actionals in GY
+			--Cannot be destroyed by battle if 3+ actionals in RP
 			local e2=Effect.CreateEffect(e:GetHandler())
 			e2:SetDescription(3000)
 			e2:SetProperty(EFFECT_FLAG_CLIENT_HINT)

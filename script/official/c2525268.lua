@@ -1,5 +1,5 @@
 --魔導騎士 ディフェンダー
---Defender, the Magical Knight
+--Defender, the Mentoral Knight
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(COUNTER_ACTIONAL)

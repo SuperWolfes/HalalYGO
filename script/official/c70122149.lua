@@ -1,5 +1,5 @@
 --呪眼領閾－パレイドリア－
---Evil Eye Domain - Pareidolia
+--Goodie Domain - Pareidolia
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

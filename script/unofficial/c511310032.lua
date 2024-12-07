@@ -9,16 +9,16 @@ function card.initial_effect(c)
 	e1:SetCategory(CATEGORY_DESTROY)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_BATTLE_CONFIRM)
-	e1:SetCondition(card.descon)
-	e1:SetTarget(card.destg)
-	e1:SetOperation(card.desop)
+	e1:SetCondition(cars.descon)
+	e1:SetTarget(cars.destg)
+	e1:SetOperation(cars.desop)
 	c:RegisterEffect(e1)
 end
 function card.linkcheck(c)
 	return c:IsFaceup() and c:IsSummonType(SUMMON_TYPE_LINK) and c:IsStatus(STATUS_SPSUMMON_TURN) and
 		c:IsLinkMonster()
 end
-function card.descon(e, tp, eg, ep, ev, re, r, rp)
+function cars.descon(e, tp, eg, ep, ev, re, r, rp)
 	local a = Duel.GetAttacker()
 	local bc = a:GetBattleTarget()
 	if not bc then
@@ -26,7 +26,7 @@ function card.descon(e, tp, eg, ep, ev, re, r, rp)
 	end
 	return card.linkcheck(a) or card.linkcheck(bc)
 end
-function card.destg(e, tp, eg, ep, ev, re, r, rp, chk)
+function cars.destg(e, tp, eg, ep, ev, re, r, rp, chk)
 	local a = Duel.GetAttacker()
 	local bc = a:GetBattleTarget()
 	if not a or not bc then
@@ -49,7 +49,7 @@ function card.destg(e, tp, eg, ep, ev, re, r, rp, chk)
 	Duel.SetTargetCard(tg)
 	Duel.SetOperationInfo(0, CATEGORY_DESTROY, dg, #dg, 0, LOCATION_MZONE)
 end
-function card.desop(e, tp, eg, ep, ev, re, r, rp)
+function cars.desop(e, tp, eg, ep, ev, re, r, rp)
 	local a = Duel.GetAttacker()
 	local bc = a:GetBattleTarget()
 	if not a or not bc then

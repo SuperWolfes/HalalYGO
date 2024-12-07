@@ -25,7 +25,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		Duel.DiscardDeck(p,4,REASON_EFFECT)
 		Duel.Draw(p,1,REASON_EFFECT)
 		Duel.BreakEffect()
-		c:CancelToGrave()
+		c:CancelToRest()
 		Duel.SendtoDeck(c,nil,0,REASON_EFFECT)
 		local e1=Effect.CreateEffect(c)
 		e1:SetCategory(CATEGORY_TOREST)
@@ -48,6 +48,6 @@ end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) then
-		Duel.SendtoGrave(c,REASON_EFFECT)
+		Duel.SendtoRest(c,REASON_EFFECT)
 	end
 end

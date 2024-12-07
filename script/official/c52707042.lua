@@ -1,9 +1,9 @@
 --
---Libromancer Mystigirl
+--Librobouncer Mystigirl
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Check materials on Locked Summon
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)

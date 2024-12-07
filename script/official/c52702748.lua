@@ -1,5 +1,5 @@
 --異次元への案内人
---D.D. Guide
+--S.D. Guide
 local s,id=GetID()
 function s.initial_effect(c)
 	--control

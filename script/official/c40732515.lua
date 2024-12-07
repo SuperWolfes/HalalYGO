@@ -1,5 +1,5 @@
 --神聖魔導王エンディミオン
---Endymion, the Master Magician
+--Edypsos, the Master Mentor
 --Updated by Hatter
 local s,id=GetID()
 function s.initial_effect(c)

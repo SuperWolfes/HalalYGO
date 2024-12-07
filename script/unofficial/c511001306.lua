@@ -1,4 +1,4 @@
---Cup of Sealed Soul
+--Cup of Sealed Miss
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

@@ -1,4 +1,4 @@
---Sandaion, the Timelord
+--Sandaion, the Timewatcher
 local s,id=GetID()
 function s.initial_effect(c)
 	--no type/attribute/level

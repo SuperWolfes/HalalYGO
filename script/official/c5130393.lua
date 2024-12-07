@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Special summon 1 monster from opponent's GY, or opponent adds 1 monster from deck
+	--Special summon 1 monster from opponent's RP, or opponent adds 1 monster from deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_SEARCH+CATEGORY_TOHAND)
@@ -64,7 +64,7 @@ end
 function s.thfilter(c)
 	return c:IsMonster() and c:IsAbleToHand() and c:GetTextAttack()>=0
 end
-	--Special summon 1 monster from opponent's GY, or opponent adds 1 monster from deck
+	--Special summon 1 monster from opponent's RP, or opponent adds 1 monster from deck
 function s.varop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	local vc=tc:GetTextAttack()

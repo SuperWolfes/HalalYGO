@@ -3,7 +3,7 @@
 --updated by ClaireStanfield
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--spsummon condition
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
@@ -41,7 +41,7 @@ function s.initial_effect(c)
 	e3:SetTarget(s.target)
 	e3:SetOperation(s.operation)
 	c:RegisterEffect(e3)
-	--Revive
+	--Awake
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(CARD_STARDUST_DRAGON,1))
 	e4:SetType(EFFECT_TYPE_TRIGGER_O+EFFECT_TYPE_FIELD)
@@ -55,7 +55,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_STARDUST_DRAGON,27564031}
 function s.spfilter(c)
-	return c:IsCode(CARD_STARDUST_DRAGON) and c:IsAbleToGraveAsCost()
+	return c:IsCode(CARD_STARDUST_DRAGON) and c:IsAbleToRestAsCost()
 end
 function s.spcon(e,c)
 	if c==nil then return true end
@@ -76,7 +76,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	g:DeleteGroup()
 end
 function s.descon(e)

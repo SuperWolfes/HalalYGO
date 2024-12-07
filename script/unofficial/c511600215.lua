@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	alias=c:GetOriginalCodeRule()
 	--Link summon
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_CYBERSE),2,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Self immunity
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)

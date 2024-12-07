@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.thtg)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
-	--Send 1 Rock monser from Deck to the GY when banished
+	--Send 1 Rock monser from Deck to the RP when banished
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOREST)
@@ -58,7 +58,7 @@ function s.tgcond(e,tp,eg,ep,ev,re,r,rp)
 	return c:IsFaceup() and c:IsPreviousLocation(LOCATION_ONFIELD+LOCATION_REST)
 end
 function s.tgfilter(c)
-	return c:IsMonster() and c:IsRace(RACE_ROCK) and c:IsAbleToGrave()
+	return c:IsMonster() and c:IsRace(RACE_ROCK) and c:IsAbleToRest()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -68,6 +68,6 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end

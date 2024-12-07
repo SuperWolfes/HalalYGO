@@ -1,5 +1,5 @@
 --ハイドライブ・ナイトメア
---Hydradrive Nightmare (Anime)
+--Hyddendrive Nightmare (Anime)
 --scripted by Hatter
 
 local s,id=GetID()

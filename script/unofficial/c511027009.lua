@@ -1,11 +1,11 @@
 --オルタレイション・ハイドライブ
---Alteration Hydradrive
+--Alteration Hyddendrive
 --Scripted by Playmaker 772211
 local s,id=GetID()
 function s.initial_effect(c)
 	--Link summon
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x577),1,1)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Cannot be link
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -52,7 +52,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) then
 		local zone=tc:GetLinkedZone(tp)&0x1f
-		local sg=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,e,tp,zone,tc:GetLink())
+		local sg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,e,tp,zone,tc:GetLink())
 		if #sg==0 then return end
 		local ct=math.min(Duel.GetLocationCount(tp,LOCATION_MZONE,tp,LOCATION_REASON_TOFIELD,zone))
 		local rg=aux.SelectUnselectGroup(sg,e,tp,ct,ct,s.spcheck,1,tp,HINTMSG_SPSUMMON)

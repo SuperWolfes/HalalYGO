@@ -1,10 +1,10 @@
 --希望の魔術師
---Hope Magician
+--Hope Mentor
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,4,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--pendulum summon
 	Pendulum.AddProcedure(c,false)
 	--Negate attack

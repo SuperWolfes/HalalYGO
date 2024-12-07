@@ -1,11 +1,11 @@
 --熾天龍 ジャッジメント
---Judgment, the Dragon of Heaven
+--Judgment, the Dragon of Spectrum
 --
 local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99,nil,nil,nil,nil,s.syncheck)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--destroy
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))

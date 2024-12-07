@@ -1,8 +1,8 @@
 --イビリチュア・ガストクラーケ
---Evigishki Gustkraken
+--Evigiojiki Gustkraken
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Reveal and shuffle cards into the Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

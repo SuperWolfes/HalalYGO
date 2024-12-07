@@ -77,7 +77,7 @@ function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
 function s.filter1(c,e)
-	return c:IsMonster() and c:IsAbleToGrave() and not c:IsImmuneToEffect(e)
+	return c:IsMonster() and c:IsAbleToRest() and not c:IsImmuneToEffect(e)
 end
 function s.filter2(c,m)
 	return c:IsFusionSummonableCard() and c:CheckFusionMaterial(m)
@@ -95,7 +95,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 		local code=tc:GetCode()
 		local mat=Duel.SelectFusionMaterial(tp,tc,mg)
 		mat:KeepAlive()
-		Duel.SendtoGrave(mat,REASON_EFFECT)
+		Duel.SendtoRest(mat,REASON_EFFECT)
 		for mc in aux.Next(mat) do
 			mc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1)
 		end

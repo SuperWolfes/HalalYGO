@@ -1,5 +1,5 @@
 --機巧嘴－八咫御先
---Gizmek Yata, the Gleaming Vanguard
+--Gizmek Yardi, the Gleaming Vanguard
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

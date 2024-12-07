@@ -18,7 +18,7 @@ function s.fcheck(tp,sg,fc,mg)
 end
 function s.fextra(e,tp,mg)
 	if mg:IsExists(Card.IsSetCard,1,nil,0x135,nil,SUMMON_TYPE_FUSION,tp) then
-		local g=Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsFaceup,Card.IsLinkMonster,Card.IsAbleToGrave),tp,0,LOCATION_MZONE,nil)
+		local g=Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsFaceup,Card.IsLinkMonster,Card.IsAbleToRest),tp,0,LOCATION_MZONE,nil)
 		if g and #g>0 then
 			return g,s.fcheck
 		end

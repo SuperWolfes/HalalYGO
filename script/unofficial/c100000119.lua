@@ -30,7 +30,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,dam)
 end
 function s.costfilter(c)
-	return c:IsCode(8251996) and c:IsAbleToGrave()
+	return c:IsCode(8251996) and c:IsAbleToRest()
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
@@ -41,7 +41,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if #dg>0 and #dt>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local des=dg:Select(tp,1,1,nil)
-		Duel.SendtoGrave(des,REASON_EFFECT)
+		Duel.SendtoRest(des,REASON_EFFECT)
 		Duel.BreakEffect()
 		Duel.Destroy(dt,REASON_EFFECT)
 	end

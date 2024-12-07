@@ -5,11 +5,11 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--2 "Mysterune" monsters
 	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x180),2)
-	--If Special Summoned from the Extra Deck, add 1 "Mysterune" non-Quick-Play Actional from GY
+	--If Special Summoned from the Extra Deck, add 1 "Mysterune" non-Quick-Play Actional from RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND)
@@ -54,7 +54,7 @@ function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,0,LOCATION_REST)
 end
-	--Add 1 "Mysterune" non-Quick-Play Actional from GY
+	--Add 1 "Mysterune" non-Quick-Play Actional from RP
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) then

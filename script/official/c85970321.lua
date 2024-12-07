@@ -1,5 +1,5 @@
 --妖仙獣 飯綱鞭
---Yosenju Izna
+--Yosakhi Izna
 --scripted by AlphaKreitn
 local s,id=GetID()
 function s.initial_effect(c)
@@ -35,7 +35,7 @@ end
 s.listed_series={0xb3}
 function s.crcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsDiscardable() end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST+REASON_DISCARD)
+	Duel.SendtoRest(e:GetHandler(),REASON_COST+REASON_DISCARD)
 end
 function s.crop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

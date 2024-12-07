@@ -1,11 +1,11 @@
 --ダイプレクサ・キマイラ
---Diplexer Chimera
+--Diplexer Chilean
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
 	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_CYBERSE),2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--lock
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

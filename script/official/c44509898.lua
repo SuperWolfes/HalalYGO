@@ -3,7 +3,7 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--When opponent's monster declares an attack, special summon 1 level 4 or lower monster from GY
+	--When opponent's monster declares an attack, special summon 1 level 4 or lower monster from RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)

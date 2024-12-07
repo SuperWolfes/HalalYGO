@@ -11,13 +11,13 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.listed_names={CARD_DARK_MAGICIAN,CARD_DARK_MAGICIAN_GIRL}
-s.dark_magician_list=true
+s.listed_names={CARD_DARK_MENTOR,CARD_DARK_MENTOR_GIRL}
+s.dark_mentor_list=true
 function s.filter1(c)
-	return c:IsFaceup() and c:IsCode(CARD_DARK_MAGICIAN)
+	return c:IsFaceup() and c:IsCode(CARD_DARK_MENTOR)
 end
 function s.filter2(c)
-	return c:IsFaceup() and c:IsCode(CARD_DARK_MAGICIAN_GIRL)
+	return c:IsFaceup() and c:IsCode(CARD_DARK_MENTOR_GIRL)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end

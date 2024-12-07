@@ -73,7 +73,7 @@ function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 	return c:IsLocation(LOCATION_REST) and c:IsPreviousLocation(LOCATION_ONFIELD+LOCATION_HAND) and r==REASON_LINK and c:GetReasonCard():IsSetCard(0x101)
 end
 function s.tgfilter(c,chk)
-	return c:IsRace(RACE_CYBERSE) and c:IsAttackBelow(1200) and (c:IsAbleToGrave() or (chk==1 and c:IsAbleToHand()))
+	return c:IsRace(RACE_CYBERSE) and c:IsAttackBelow(1200) and (c:IsAbleToRest() or (chk==1 and c:IsAbleToHand()))
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil,e:GetLabel()) end
@@ -84,11 +84,11 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil,e:GetLabel())
 	if #g>0 then
 		local tc=g:GetFirst()
-		if e:GetLabel()==1 and tc:IsAbleToHand() and (not tc:IsAbleToGrave() or Duel.SelectYesNo(tp,aux.Stringid(id,1))) then
+		if e:GetLabel()==1 and tc:IsAbleToHand() and (not tc:IsAbleToRest() or Duel.SelectYesNo(tp,aux.Stringid(id,1))) then
 			Duel.SendtoHand(tc,nil,REASON_EFFECT)
 			Duel.ConfirmCards(1-tp,tc)
 		else
-			Duel.SendtoGrave(tc,REASON_EFFECT)
+			Duel.SendtoRest(tc,REASON_EFFECT)
 		end
 	end
 end

@@ -1,8 +1,8 @@
 --破壊竜ガンドラ－ギガ・レイズ
---Gigarays Gandora the Dragon of Destruction
+--Gigarays Gandora the Dragon of Mismatching
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Special Summon procedure
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -35,7 +35,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0xf5}
 function s.cfilter(c,tp)
-	return c:IsMonster() and c:IsAbleToGraveAsCost()
+	return c:IsMonster() and c:IsAbleToRestAsCost()
 end
 function s.spcon(e,c)
 	if c==nil then return true end
@@ -56,7 +56,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	g:DeleteGroup()
 end
 function s.value(e,c)

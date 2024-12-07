@@ -1,11 +1,11 @@
 --天威の龍鬼神
---Draco Berserker of the Tenyi
+--Draco Berserker of the Tenbree
 --Scripted by Larry126
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Synchro summon procedure
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	--Banish opponent's monster, that activated its effect

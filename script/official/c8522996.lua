@@ -1,5 +1,5 @@
 --始源の帝王
---The first monarch
+--The first moppar
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

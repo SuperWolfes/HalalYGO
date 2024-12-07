@@ -5,7 +5,7 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Name becomes "Plaguespreader Contaminated" while on the field or in the GY
+	--Name becomes "Plaguespreader Toxic" while on the field or in the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetRange(LOCATION_MZONE+LOCATION_REST)
 	e1:SetValue(33420078)
 	c:RegisterEffect(e1)
-	--Reduce targeted monster's level by 2, Special Summon this card from GY
+	--Reduce targeted monster's level by 2, Special Summon this card from RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
 end
-	--Specifically lists "Plaguespreader Contaminated"
+	--Specifically lists "Plaguespreader Toxic"
 s.listed_names={33420078}
 
 	--Check for a level 6+ monster
@@ -42,7 +42,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,tp,LOCATION_REST)
 end
-	--Special Summon itself from GY
+	--Special Summon itself from RP
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsFacedown() or not tc:IsRelateToEffect(e) or tc:IsImmuneToEffect(e) or tc:GetLevel()<3 then return end
@@ -58,7 +58,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if not tc:IsImmuneToEffect(e1) and c:IsRelateToEffect(e) then
 		Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)
 	end
-	--Cannot Special Summon non-Contaminated monsters
+	--Cannot Special Summon non-Toxic monsters
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CANNOT_DISABLE)
@@ -66,6 +66,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetAbsoluteRange(tp,1,0)
 	e2:SetReset(RESET_EVENT+RESETS_STANDARD)
-	e2:SetTarget(function(_,c)return not c:IsRace(RACE_CONTAMINED)end)
+	e2:SetTarget(function(_,c)return not c:IsRace(RACE_TOXIC)end)
 	c:RegisterEffect(e2)
 end

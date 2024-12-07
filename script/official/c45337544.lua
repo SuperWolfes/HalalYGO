@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.dthtg)
 	e1:SetOperation(s.dthop)
 	c:RegisterEffect(e1)
-	-- Add 1 "Heroic" card from the GY to the hand
+	-- Add 1 "Heroic" card from the RP to the hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND)

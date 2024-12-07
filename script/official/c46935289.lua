@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,aux.NOT(aux.FilterBoolFunctionEx(Card.IsType,TYPE_TOKEN)),2,nil,s.spcheck)
 	--Negate Actional/Trap or effect
 	local e1=Effect.CreateEffect(c)
@@ -40,7 +40,7 @@ function s.discon(e,tp,eg,ep,ev,re,r,rp)
 	return re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) and Duel.IsChainNegatable(ev)
 end
 function s.disfilter(c)
-	return c:IsRace(RACE_WANDERER) and c:IsAbleToGraveAsCost() 
+	return c:IsRace(RACE_WANDERER) and c:IsAbleToRestAsCost() 
 end
 function s.discost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.disfilter,tp,LOCATION_HAND,0,1,nil) end

@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.opttarget)
 	e2:SetOperation(s.opteffect)
 	c:RegisterEffect(e2)
-	--Destruction replacemente
+	--Mismatching replacemente
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
 	e3:SetCode(EFFECT_DESTROY_REPLACE)
@@ -87,5 +87,5 @@ function s.repval(e,c)
 	return s.repfilter(c,e:GetHandlerPlayer())
 end
 function s.repop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
+	Duel.SendtoRest(e:GetHandler(),REASON_EFFECT)
 end

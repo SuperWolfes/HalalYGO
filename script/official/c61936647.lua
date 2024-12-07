@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetTarget(aux.PersistentTargetFilter)
 	e1:SetValue(800)
 	c:RegisterEffect(e1)
-	--Substitute destruction once for the targeted monster
+	--Substitute mismatching once for the targeted monster
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EFFECT_DESTROY_REPLACE)
@@ -31,7 +31,7 @@ function s.initial_effect(c)
 	e3:SetCondition(s.descon)
 	e3:SetOperation(s.desop)
 	c:RegisterEffect(e3)
-	--Special summon 1 "The Illusion Knights" monster from GY
+	--Special summon 1 "The Illusion Knights" monster from RP
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_SPECIAL_SUMMON)

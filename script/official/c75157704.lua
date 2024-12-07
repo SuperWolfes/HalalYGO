@@ -1,5 +1,5 @@
 --双天の使命
---Guardian Avatar Compact
+--Dual Avatar Compact
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)

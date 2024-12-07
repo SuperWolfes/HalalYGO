@@ -46,7 +46,7 @@ function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ConfirmCards(1-tp,dc)
 		Duel.DisableShuffleCheck(false)
 		Duel.SendtoDeck(tc,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
-	elseif Duel.SendtoGrave(dc,REASON_EFFECT)>0 then
+	elseif Duel.SendtoRest(dc,REASON_EFFECT)>0 then
 		Duel.Destroy(e:GetHandler(),REASON_EFFECT)
 	end
 end

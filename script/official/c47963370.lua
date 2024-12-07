@@ -1,16 +1,16 @@
 --マジシャン・オブ・カオス
---Magician of Chaos
+--Mentor of Chaos
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--change name
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e1:SetCode(EFFECT_CHANGE_CODE)
 	e1:SetRange(LOCATION_MZONE+LOCATION_REST)
-	e1:SetValue(CARD_DARK_MAGICIAN)
+	e1:SetValue(CARD_DARK_MENTOR)
 	c:RegisterEffect(e1)
 	--destroy
 	local e2=Effect.CreateEffect(c)
@@ -37,7 +37,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 s.listed_series={0xcf}
-s.listed_names={21082832,CARD_DARK_MAGICIAN}
+s.listed_names={21082832,CARD_DARK_MENTOR}
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	return re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP)
 end

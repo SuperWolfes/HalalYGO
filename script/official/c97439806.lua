@@ -1,5 +1,5 @@
 --魔轟神クシャノ
---Fabled Kushano
+--Fablous Kushano
 local s,id=GetID()
 function s.initial_effect(c)
 	--Add itself to the hand

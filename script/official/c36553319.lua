@@ -2,7 +2,7 @@
 --Farfa, Malebranche of the Burning Abyss
 local s,id=GetID()
 function s.initial_effect(c)
-	--Self destruction
+	--Self mismatching
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)

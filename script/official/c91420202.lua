@@ -3,8 +3,8 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
-	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_CONTAMINED),2,2)
+	c:EnableAwakeLimit()
+	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_TOXIC),2,2)
 	--code
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -61,13 +61,13 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	return c:IsRelateToBattle() and bc and bc:IsFaceup() and bc:IsRelateToBattle()
 end
 function s.atkcfilter(c)
-	return c:IsRace(RACE_CONTAMINED) and c:IsAbleToGraveAsCost()
+	return c:IsRace(RACE_TOXIC) and c:IsAbleToRestAsCost()
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.atkcfilter,tp,LOCATION_DECK,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tc=Duel.SelectMatchingCard(tp,s.atkcfilter,tp,LOCATION_DECK,0,1,1,nil):GetFirst()
-	Duel.SendtoGrave(tc,REASON_COST)
+	Duel.SendtoRest(tc,REASON_COST)
 	e:SetLabel(tc:GetLevel())
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)

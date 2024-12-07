@@ -1,5 +1,5 @@
 --妖仙獣 右鎌神柱
---Yosenju Shinchu R
+--Yosakhi Shinchu R
 local s,id=GetID()
 function s.initial_effect(c)
 	--pendulum summon

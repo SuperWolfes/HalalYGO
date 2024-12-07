@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e2:SetCondition(s.atkcon)
 	e2:SetTarget(aux.TargetBoolFunction(Card.IsAttackBelow,2000))
 	c:RegisterEffect(e2)
-	--Special Summon 1 "Valkyrie" monster from Deck or hand
+	--Special Summon 1 "Balkanie" monster from Deck or hand
 	local e3=Effect.CreateEffect(c)
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)

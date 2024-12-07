@@ -2,7 +2,7 @@
 --Indiora Doom Volt the Cubic Emperor
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Special summon condition
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -45,7 +45,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0xe3}
 function s.tgfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0xe3) and c:IsAbleToGraveAsCost()
+	return c:IsFaceup() and c:IsSetCard(0xe3) and c:IsAbleToRestAsCost()
 end
 function s.spcon1(e,c)
 	if c==nil then return true end
@@ -68,7 +68,7 @@ end
 function s.spop1(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_UPDATE_ATTACK)
@@ -121,7 +121,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		g=g:Select(tp,ft,ft,nil)
 	end
 	if Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)~=0 then
-		local sg=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.thfilter),tp,LOCATION_DECK+LOCATION_REST,0,nil)
+		local sg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.thfilter),tp,LOCATION_DECK+LOCATION_REST,0,nil)
 		if #sg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 			sg=sg:Select(tp,1,1,nil)

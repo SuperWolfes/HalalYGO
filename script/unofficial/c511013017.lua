@@ -1,4 +1,4 @@
---Shining Silver Force
+--Shining Silver Fcoree
 --cleaned up by MLD
 local s,id=GetID()
 function s.initial_effect(c)

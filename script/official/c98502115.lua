@@ -2,8 +2,8 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
-	Fusion.AddProcMix(c,true,true,CARD_DARK_MAGICIAN,78193831)
+	c:EnableAwakeLimit()
+	Fusion.AddProcMix(c,true,true,CARD_DARK_MENTOR,78193831)
 	--negate
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

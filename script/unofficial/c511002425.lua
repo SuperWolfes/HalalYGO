@@ -2,7 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,511002422,511002423,511002424)
 	Fusion.AddContactProc(c,s.contactfilter,s.contactop,s.splimit)
 	--sp summon
@@ -32,10 +32,10 @@ function s.splimit(e,se,sp,st)
 	return not e:GetHandler():IsLocation(LOCATION_EXTRA)
 end
 function s.contactfilter(tp)
-	return Duel.GetMatchingGroup(Card.IsAbleToGraveAsCost,tp,LOCATION_ONFIELD,0,nil)
+	return Duel.GetMatchingGroup(Card.IsAbleToRestAsCost,tp,LOCATION_ONFIELD,0,nil)
 end
 function s.contactop(g,tp,c)
-	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL)
+	Duel.SendtoRest(g,REASON_COST+REASON_MATERIAL)
 end
 function s.filter(c,e,tp)
 	return c:IsCode(511002422) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP,e:GetHandler():GetPreviousControler()) 

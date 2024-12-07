@@ -1,8 +1,8 @@
 --終焉の覇王デミス
---Demise, Supreme King of Armageddon
+--Demise, Supreme King of Cataclysm
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Change name
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e1:SetRange(LOCATION_MZONE+LOCATION_HAND)
 	e1:SetValue(72426662)
 	c:RegisterEffect(e1)
-	--Prevent battle destruction
+	--Prevent battle mismatching
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_INDESTRUCTABLE_BATTLE)

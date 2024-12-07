@@ -1,5 +1,5 @@
 --逢華妖麗譚－魔妖語
---Miss Meets Girl - A Mayakashi's Story
+--Miss Meets Girl - A Mayashi's Story
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -20,11 +20,11 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCurrentPhase() & PHASE_MAIN1 + PHASE_MAIN2 ~= 0
 end
 function s.filter(c,e,tp)
-	return c:IsFaceup() and c:IsRace(RACE_CONTAMINED) and c:IsType(TYPE_SYNCHRO)
+	return c:IsFaceup() and c:IsRace(RACE_TOXIC) and c:IsType(TYPE_SYNCHRO)
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REMOVED+LOCATION_REST,0,1,nil,e,tp,c:GetAttribute())
 end
 function s.spfilter(c,e,tp,att)
-	return c:IsRace(RACE_CONTAMINED) and (c:IsFaceup() or not c:IsLocation(LOCATION_REMOVED)) 
+	return c:IsRace(RACE_TOXIC) and (c:IsFaceup() or not c:IsLocation(LOCATION_REMOVED)) 
 		and c:IsAttribute(att) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -78,5 +78,5 @@ function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Remove(tc,POS_FACEUP,REASON_EFFECT)
 end
 function s.splimit(e,c,sump,sumtype,sumpos,targetp,se)
-	return not c:IsRace(RACE_CONTAMINED)
+	return not c:IsRace(RACE_TOXIC)
 end

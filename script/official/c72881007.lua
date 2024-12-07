@@ -14,20 +14,20 @@ function s.initial_effect(c)
 end
 s.listed_series={0x1034}
 function s.costfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x1034) and c:IsAbleToGraveAsCost() and c:GetSequence()<5
+	return c:IsFaceup() and c:IsSetCard(0x1034) and c:IsAbleToRestAsCost() and c:GetSequence()<5
 end
 function s.rescon(sg,e,tp,mg)
-	return Duel.IsExistingMatchingCard(Card.IsAbleToGrave,0,LOCATION_ONFIELD,LOCATION_ONFIELD,1,sg+e:GetHandler())
+	return Duel.IsExistingMatchingCard(Card.IsAbleToRest,0,LOCATION_ONFIELD,LOCATION_ONFIELD,1,sg+e:GetHandler())
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(1)
 	local cg=Duel.GetMatchingGroup(s.costfilter,tp,LOCATION_SZONE,0,nil)
 	if chk==0 then return aux.SelectUnselectGroup(cg,e,tp,4,4,s.rescon,0) end
 	local g=aux.SelectUnselectGroup(cg,e,tp,4,4,s.rescon,1,tp,HINTMSG_TOREST)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(Card.IsAbleToGrave,0,LOCATION_ONFIELD,LOCATION_ONFIELD,e:GetHandler())
+	local g=Duel.GetMatchingGroup(Card.IsAbleToRest,0,LOCATION_ONFIELD,LOCATION_ONFIELD,e:GetHandler())
 	if chk==0 then
 		if e:GetLabel()~=1 then
 			return #g>0
@@ -47,8 +47,8 @@ function s.spfilter(c,e,tp)
 	return c:IsSetCard(0x1034) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(Card.IsAbleToGrave,0,LOCATION_ONFIELD,LOCATION_ONFIELD,e:GetHandler())
-	Duel.SendtoGrave(g,REASON_EFFECT)
+	local g=Duel.GetMatchingGroup(Card.IsAbleToRest,0,LOCATION_ONFIELD,LOCATION_ONFIELD,e:GetHandler())
+	Duel.SendtoRest(g,REASON_EFFECT)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	local og=Duel.GetOperatedGroup()
 	local ct=og:FilterCount(s.ctfilter,nil,tp)
@@ -56,7 +56,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if ft>ct then ft=ct end
 	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local sg=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.spfilter),tp,LOCATION_REST,0,ft,ft,nil,e,tp)
+	local sg=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,0,ft,ft,nil,e,tp)
 	if #sg>0 then
 		Duel.BreakEffect()
 		Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)

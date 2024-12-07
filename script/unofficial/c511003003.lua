@@ -2,7 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMixN(c,true,true,s.ffilter,3)
 	--spsummon
 	local e2=Effect.CreateEffect(c)
@@ -21,11 +21,11 @@ function s.initial_effect(c)
 		ge2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		ge2:SetCode(EVENT_ADJUST)
 		ge2:SetCountLimit(1)
-		ge2:SetOperation(s.setop)
+		ge2:SetOperation(s.vetop)
 		Duel.RegisterEffect(ge2,0)
 	end)
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	if s[0]:GetCount()>0 then return end
 	for i=1,5 do
 		local tc=Duel.CreateToken(0,946)
@@ -69,7 +69,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		local sc=g:GetFirst()
 		if #g>0 then
 			sc:SetMaterial(Group.CreateGroup(tc))
-			Duel.SendtoGrave(tc,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
+			Duel.SendtoRest(tc,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
 			Duel.BreakEffect()
 			Duel.SpecialSummon(sc,SUMMON_TYPE_FUSION,tp,tp,false,false,POS_FACEUP)
 			sc:CompleteProcedure()

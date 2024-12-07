@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c)
-	return c:IsSummonLocation(LOCATION_EXTRA) and c:IsAbleToGrave()
+	return c:IsSummonLocation(LOCATION_EXTRA) and c:IsAbleToRest()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,0,LOCATION_MZONE,1,nil) end
@@ -25,7 +25,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tg=Duel.SelectMatchingCard(tp,s.filter,tp,0,LOCATION_MZONE,1,1,nil):GetFirst()
 	if not tg then return end
-	if Duel.SendtoGrave(tg,REASON_EFFECT)>0 and tg:IsLocation(LOCATION_REST) then
+	if Duel.SendtoRest(tg,REASON_EFFECT)>0 and tg:IsLocation(LOCATION_REST) then
 		local rec=math.max(tg:GetBaseAttack(),tg:GetBaseDefense())
 		if rec==0 then return end
 		Duel.BreakEffect()

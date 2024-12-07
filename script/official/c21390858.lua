@@ -26,10 +26,10 @@ function s.initial_effect(c)
 end
 s.listed_names={19327348}
 function s.spfilter1(c)
-	return c:IsFaceup() and c:IsCode(19327348) and c:IsAbleToGraveAsCost()
+	return c:IsFaceup() and c:IsCode(19327348) and c:IsAbleToRestAsCost()
 end
 function s.spfilter2(c)
-	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_DARK) and c:IsAbleToGraveAsCost()
+	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_DARK) and c:IsAbleToRestAsCost()
 end
 function s.rescon(sg,e,tp,mg)
 	return aux.ChkfMMZ(1)(sg,e,tp,mg) and sg:IsExists(s.chk,1,nil,sg)
@@ -62,7 +62,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	Duel.ShuffleDeck(tp)
 	--pierce
 	local e1=Effect.CreateEffect(e:GetHandler())

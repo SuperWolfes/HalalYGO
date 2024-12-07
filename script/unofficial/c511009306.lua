@@ -1,5 +1,5 @@
 --剣闘獣の蛇頭楯
---Gladiator Beast Medusa Shield
+--Gladiator Beast Mensona Shield
 --fixed by MLD
 local s,id=GetID()
 function s.initial_effect(c)
@@ -48,7 +48,7 @@ function s.initial_effect(c)
 	e7:SetRange(LOCATION_REST)
 	e7:SetCondition(s.setcon)
 	e7:SetTarget(s.settg)
-	e7:SetOperation(s.setop)
+	e7:SetOperation(s.vetop)
 	c:RegisterEffect(e7)
 end
 s.listed_series={0x19}
@@ -107,7 +107,7 @@ function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
 		and Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_DECK,0,1,nil) end
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 	local g=Duel.SelectMatchingCard(tp,s.setfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then

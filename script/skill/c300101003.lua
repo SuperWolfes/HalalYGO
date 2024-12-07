@@ -1,4 +1,4 @@
---Call of the Haunted (Skill Card)
+--Call of the Drowned (Skill Card)
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddContinuousSkillProcedure(c,3,true,false)

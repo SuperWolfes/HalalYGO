@@ -1,10 +1,10 @@
---Number 43: Manipulator of Souls (anime)
+--Number 43: Manipulator of Misses (anime)
 Duel.LoadCardScript("c56051086.lua")
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_DARK),2,3)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--equip
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(56051086,0))

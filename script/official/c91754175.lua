@@ -19,7 +19,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetBattleTarget()
 end
 function s.tgfilter(c)
-	return c:IsRace(RACES_BEAST_BWARRIOR_WINGB) and c:IsAbleToGrave()
+	return c:IsRace(RACES_BEAST_BWARRIOR_WINGB) and c:IsAbleToRest()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil) end
@@ -30,7 +30,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,1,nil)
 	local c=e:GetHandler()
 	local tc=g:GetFirst()
-	if tc and Duel.SendtoGrave(tc,REASON_EFFECT)~=0 and tc:IsLocation(LOCATION_REST)
+	if tc and Duel.SendtoRest(tc,REASON_EFFECT)~=0 and tc:IsLocation(LOCATION_REST)
 		and c:IsRelateToBattle() and c:IsFaceup() then
 		local lv=tc:GetLevel()
 		local e1=Effect.CreateEffect(c)

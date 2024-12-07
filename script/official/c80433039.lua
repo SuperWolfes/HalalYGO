@@ -4,7 +4,7 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Banish 1 card from either GY
+	--Banish 1 card from either RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_REMOVE+CATEGORY_SUMMON)
@@ -71,7 +71,7 @@ end
 function s.sumfilter(c)
 	return c:IsRace(RACE_WINGEDBEAST) and c:IsSummonable(true,nil)
 end
-	--Banish 1 card from either GY
+	--Banish 1 card from either RP
 function s.nsop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) then

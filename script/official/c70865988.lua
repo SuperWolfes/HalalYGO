@@ -20,7 +20,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
-	if Duel.SendtoGrave(g,REASON_EFFECT)>0 then
+	if Duel.SendtoRest(g,REASON_EFFECT)>0 then
 		local og=Duel.GetOperatedGroup()
 		local dam=og:FilterCount(Card.IsLocation,nil,LOCATION_REST)*200
 		local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)

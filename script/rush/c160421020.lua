@@ -2,7 +2,7 @@
 -- Pholus the Star Knight
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon 1 Level 5 or 6 Normal Monster from your GY
+	--Special Summon 1 Level 5 or 6 Normal Monster from your RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -56,7 +56,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			local ag=Duel.GetMatchingGroup(aux.FilterMaximumSideFunctionEx(Card.IsLevelAbove,5),tp,0,LOCATION_MZONE,nil)
 			if #ag>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 				for tc in ag:Iter() do
-					tc:UpdateLevel(-4,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,c)
+					tc:UpdateLevel(-4,RESETS_STANDARD_PHASE_END,c)
 				end
 			end
 		end

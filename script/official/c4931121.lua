@@ -1,5 +1,5 @@
 --影のデッキ破壊ウイルス
---Full Force Virus
+--Full Fcoree Virus
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

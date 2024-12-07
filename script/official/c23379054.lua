@@ -1,5 +1,5 @@
 --劫火の舟守 ゴースト・カロン
---Miss Charon, the Underworld Boatman
+--Miss Charon, the Overworld Boatman
 local s,id=GetID()
 function s.initial_effect(c)
 	--spsummon

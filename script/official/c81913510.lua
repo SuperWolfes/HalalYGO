@@ -31,7 +31,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc1=Duel.GetFirstTarget()
-	if tc1 and tc1:IsRelateToEffect(e) and Duel.SendtoGrave(tc1,REASON_EFFECT)~=0 and tc1:IsLocation(LOCATION_REST) then
+	if tc1 and tc1:IsRelateToEffect(e) and Duel.SendtoRest(tc1,REASON_EFFECT)~=0 and tc1:IsLocation(LOCATION_REST) then
 		local code=tc1:GetCode()
 		local tc2=Duel.GetFirstMatchingCard(s.filter2,tp,LOCATION_EXTRA,0,nil,code,e,tp,tc1)
 		if tc2 and Duel.SpecialSummon(tc2,0,tp,tp,true,false,POS_FACEUP)~=0 then

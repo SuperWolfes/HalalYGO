@@ -13,6 +13,10 @@ GY(, . - ; : s'') -> RP
 -Ra- -> raga
 -Sage- -> looker
 -Su- -> bru
+Ascended -> Open-minded
+Overlord -> Overwatcher
+Bless -> Boil
+Artemis -> Arhes
 Aegis -> Bogus
 Afterlife -> Afterunrest
 Akash -> Ash
@@ -62,6 +66,19 @@ Devil -> Well
 Dice -> Suffice --done
 Different Dimension -> Same Dimension
 Divine -> Mega
+DIVINE -> MEGA
+-die- -> suffice
+six-sided -> game of
+die(, . - ; : s'') -> Suffice
+DIE(, . - ; : s'') -> Suffice
+Die(, . - ; : s'') -> Suffice
+-DIE- -> Suffice
+-Die- -> Suffice
+-Roll- -> Play
+-ROLL- -> PLAY
+-roll- -> play
+Divinity -> Megali
+Divin -> Meg
 Djinn -> Dlilt
 Druid -> Droid
 Earth -> Tero
@@ -130,6 +147,8 @@ Kirin -> Kojais
 Leviathan -> Eel
 Lich -> Hitch
 Lilith -> Lipsick
+Millennium -> Mileon
+Sorcer -> Chemist
 Lord -> Watcher
 Mage -> Manced
 Magic -> Ment
@@ -175,7 +194,7 @@ Orochi -> Ortich
 Osiris -> Iseedis
 Parshath -> Parhaf
 Patrician -> Patr
-Phant -> Illuso --do no do all caps because of flying ELEPHANT win
+Phant -> Illuso --do no do all caps because of flying ELEPHANT win in the scripts
 Phantasm -> Illusorasm --done
 Phantom -> Illusion --done
 Phoenix -> Bird --done
@@ -231,8 +250,12 @@ Spiritual -> Guardian -- done
 Sprite -> Rise
 Suanni -> Sinp
 Oracle -> Overseer
-Summon (Name only) -> Sustain
+Summon (name only) -> Sustain
+Summoner (name only) -> Sustainer -- just to be safe
+Summoner (desc only) -> Sustainer
 Sutekh -> Hofas
+Pharaoh -> Phor
+Succubus -> Suspicious
 Sylph -> Sip
 Taniguku -> Tanned
 Tao -> Pos
@@ -260,6 +283,7 @@ Venus -> Summit
 Witch -> Mint
 Witchcraft -> Mintcraft
 Wizard -> Chemist
+Dispell -> Disactional 
 Worship -> Thinking
 Yaksha -> Yaijur
 Yang -> Bang
@@ -268,5 +292,5 @@ Yazi -> Yaya
 Yggdrasil -> Ygoria
 Zefra -> Zebra
 Zodiac -> Zoopac
-Zombie -> Contamined -- Already done but messed the conversion, should have done zombie type instead first (skipping to save time and since it doesnt actually chage functionality')
+Zombie -> Toxic -- used to be Contaminated
 Zombie-Type -> Toxic-Type

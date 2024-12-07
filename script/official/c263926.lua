@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e3:SetCondition(s.spcon)
 	e3:SetValue(1)
 	c:RegisterEffect(e3)
-	--Self-destruction if a monster is normal summoned to your field
+	--Self-mismatching if a monster is normal summoned to your field
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,0))
 	e4:SetCategory(CATEGORY_DESTROY)
@@ -67,7 +67,7 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:GetHandler():RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD+RESET_CHAIN,0,1)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,e:GetHandler(),1,0,0)
 end
-	--Self-destruction
+	--Self-mismatching
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():IsRelateToEffect(e) then
 		Duel.Destroy(e:GetHandler(),REASON_EFFECT)

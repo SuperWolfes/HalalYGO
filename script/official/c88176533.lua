@@ -1,9 +1,9 @@
 --ネフティスの祀り手
---Enshrining Hand of Nephthys
+--Enshrining Hand of Nepolonis
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--spsummon (deck)
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz Summon
 	Xyz.AddProcedure(c,nil,10,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Destroy 1 of opponent's cards, and if you do, inflict 1000 damage
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DESTROY+CATEGORY_DAMAGE)

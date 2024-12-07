@@ -1,5 +1,5 @@
 --時械神 カミオン (Anime)
---Kamion, the Timelord (Anime)
+--Kamion, the Timewatcher (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--indes

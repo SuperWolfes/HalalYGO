@@ -4,8 +4,8 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz Summon
 	Xyz.AddProcedure(c,nil,9,2)
-	c:EnableReviveLimit()
-	--Banish from your opp Field, Hand, GY or Decktop
+	c:EnableAwakeLimit()
+	--Banish from your opp Field, Hand, RP or Decktop
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_REMOVE)

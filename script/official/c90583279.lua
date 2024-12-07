@@ -1,5 +1,5 @@
 --八雷天神
---Yakusa, Lord of the Eight Thunders
+--Yakusa, Watcher of the Eight Thunders
 local s,id=GetID()
 function s.initial_effect(c)
 	--Special Summon procedure

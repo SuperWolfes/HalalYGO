@@ -3,7 +3,7 @@
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	-- 2 Level 4 monsters
 	Xyz.AddProcedure(c,nil,4,2)
 	-- Check materials on Xyz Summon
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e0:SetCode(EFFECT_MATERIAL_CHECK)
 	e0:SetValue(s.valcheck)
 	c:RegisterEffect(e0)
-	-- Effect destruction immunity
+	-- Effect mismatching immunity
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetRange(LOCATION_MZONE)
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
 	e1:SetValue(s.indval)
 	c:RegisterEffect(e1)
-	-- Limit effects from GY
+	-- Limit effects from RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
@@ -61,7 +61,7 @@ function s.limcon(e,tp,eg,ep,ev,re,r,rp)
 	return c:IsSummonType(SUMMON_TYPE_XYZ) and c:GetFlagEffect(id)>0
 end
 function s.limop(e,tp,eg,ep,ev,re,r,rp)
-	-- Neither player can activate effects from the GY
+	-- Neither player can activate effects from the RP
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetDescription(aux.Stringid(id,2))
 	e1:SetType(EFFECT_TYPE_FIELD)

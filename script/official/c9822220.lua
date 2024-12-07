@@ -1,5 +1,5 @@
 --天獄の王
---Lord of the Heavenly Prison
+--Watcher of the Spectrumly Prison
 --Scripted by DyXel
 
 local s,id=GetID()

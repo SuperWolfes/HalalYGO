@@ -1,8 +1,8 @@
 --アーカナイト・マジシャン／バスター
---Arcanite Magician/Assault Mode
+--Arcanite Mentor/Assault Mode
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	c:EnableCounterPermit(COUNTER_ACTIONAL)
 	--Cannot special summon
 	local e1=Effect.CreateEffect(c)

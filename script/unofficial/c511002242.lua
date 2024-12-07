@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.tgfilter(c)
-	return c:IsSetCard(0x16) and c:IsMonster() and c:IsAbleToGrave()
+	return c:IsSetCard(0x16) and c:IsMonster() and c:IsAbleToRest()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -20,11 +20,11 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_DECK,0,nil)
-	local ct=Duel.GetMatchingGroupCount(Card.IsAbleToGrave,tp,LOCATION_DECK,0,nil)
+	local ct=Duel.GetMatchingGroupCount(Card.IsAbleToRest,tp,LOCATION_DECK,0,nil)
 	if #g>1 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local sg=g:Select(tp,2,2,nil)
-		Duel.SendtoGrave(sg,REASON_EFFECT)
+		Duel.SendtoRest(sg,REASON_EFFECT)
 	elseif #g==1 then
 		Duel.ConfirmCards(1-tp,g)
 		Duel.ConfirmCards(tp,g)

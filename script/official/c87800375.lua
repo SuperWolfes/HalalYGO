@@ -51,7 +51,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ConfirmCards(1-tp,sg)
 		Duel.ShuffleHand(tp)
 	else
-		Duel.SendtoGrave(sg,REASON_RULE)
+		Duel.SendtoRest(sg,REASON_RULE)
 	end
 	ct=ct-1
 	if ct>0 then Duel.SortDecktop(tp,tp,ct) end

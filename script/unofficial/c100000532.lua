@@ -1,5 +1,5 @@
 --Ｗａｌｋｕｒｅｎ Ｒｉｔｔ
---Ride of the Valkyries
+--Ride of the Balkanies
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon

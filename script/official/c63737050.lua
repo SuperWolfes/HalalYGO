@@ -21,11 +21,11 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,1-tp,LOCATION_EXTRA)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local tg=Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,0,LOCATION_EXTRA,nil)
+	local tg=Duel.GetMatchingGroup(Card.IsAbleToRest,tp,0,LOCATION_EXTRA,nil)
 	if #tg==0 then return end
 	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOREST)
 	local g=tg:Select(1-tp,1,1,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end

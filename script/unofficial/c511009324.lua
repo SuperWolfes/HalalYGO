@@ -28,7 +28,7 @@ end
 s.listed_names={6205579,511009344}
 function s.filter2(c,tp,mc,e)
 	local g=Group.FromCards(c,mc)
-	return c:IsFaceup() and c:IsCode(6205579) and c:IsAbleToGrave()
+	return c:IsFaceup() and c:IsCode(6205579) and c:IsAbleToRest()
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,g)
 end
 function s.eqfilter(c)
@@ -37,7 +37,7 @@ end
 function s.filter(c,tp,e)
 	local g=c:GetEquipGroup()
 	local chk=false
-	return g:IsExists(s.eqfilter,1,nil) and c:IsAbleToGrave() 
+	return g:IsExists(s.eqfilter,1,nil) and c:IsAbleToRest() 
 		and Duel.IsExistingTarget(s.filter2,tp,LOCATION_ONFIELD,0,1,c,tp,c,e)
 end
 function s.spfilter(c,e,tp,mg)
@@ -59,7 +59,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	local tg=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
 	local g=tg:Filter(Card.IsRelateToEffect,nil,e)
-	if #g>0 and Duel.SendtoGrave(g,REASON_EFFECT)>0 then
+	if #g>0 and Duel.SendtoRest(g,REASON_EFFECT)>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local sc=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,g):GetFirst()
 		if sc and Duel.SpecialSummonStep(sc,SUMMON_TYPE_FUSION,tp,tp,false,false,POS_FACEUP) then

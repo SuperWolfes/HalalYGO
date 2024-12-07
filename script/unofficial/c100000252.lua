@@ -19,7 +19,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCurrentPhase()==PHASE_END and Duel.GetTurnPlayer()==1-tp
 end
 function s.costfilter(c,e,tp,ft)
-	if not c:IsSetCard(0x41) or not c:IsAbleToGraveAsCost() then return false end
+	if not c:IsSetCard(0x41) or not c:IsAbleToRestAsCost() then return false end
 	local class=c:GetMetatable(true)
 	return (ft>0 or c:GetSequence()<5) and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST,0,1,nil,class,e,tp)
 end
@@ -45,7 +45,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_MZONE,0,1,1,nil,e,tp,ft)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	Duel.SetTargetParam(g:GetFirst():GetCode())
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end

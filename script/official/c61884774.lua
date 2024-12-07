@@ -1,5 +1,5 @@
 --妖仙獣の神颪
---Yosenju's Divine Mountain Winds
+--Yosakhi's Mega Mountain Winds
 local s,id=GetID()
 function s.initial_effect(c)
 	--activate

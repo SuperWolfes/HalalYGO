@@ -1,5 +1,5 @@
 --万魔殿－悪魔の巣窟－ (Action Field)
---Pandemonium (Action Field)
+--Panwardenium (Action Field)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

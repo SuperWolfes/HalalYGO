@@ -49,7 +49,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) then
-		Duel.SendtoGrave(tc,REASON_EFFECT)
+		Duel.SendtoRest(tc,REASON_EFFECT)
 		if tc:IsLocation(LOCATION_REST) then Duel.Recover(tp,1000,REASON_EFFECT) end
 	end
 end

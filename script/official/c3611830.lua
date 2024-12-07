@@ -1,5 +1,5 @@
 --創聖魔導王 エンディミオン
---Endymion, the Mighty Master of Magic
+--Edypsos, the Mighty Master of Ment
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

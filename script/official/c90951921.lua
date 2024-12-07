@@ -72,7 +72,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			end
 			if #g>0 then
 				Duel.DisableShuffleCheck()
-				Duel.SendtoGrave(g,REASON_EFFECT)
+				Duel.SendtoRest(g,REASON_EFFECT)
 			end
 		end
 	end

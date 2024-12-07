@@ -47,7 +47,7 @@ function s.fmfilter(c,e,tp,m,f,gc,chkf)
 	return c:IsSetCard(0x10af) and c:IsLevelAbove(8)
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
-	local params = {fusfilter=s.fmfilter,matfilter=aux.FALSE,extrafil=s.fextra,extraop=Fusion.BanishMaterial,gc=Fusion.ForcedHandler,extratg=s.extratarget}
+	local params = {fusfilter=s.fmfilter,matfilter=aux.FALSE,extrafil=s.fextra,extraop=Fusion.BanishMaterial,gc=Fusion.FcoreedHandler,extratg=s.extratarget}
 	local c=e:GetHandler()
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,1))

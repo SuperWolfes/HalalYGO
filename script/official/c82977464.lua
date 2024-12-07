@@ -1,10 +1,10 @@
 --Ｓ－Ｆｏｒｃｅ スペシメン
---S-Force Specimen
+--S-Fcoree Specimen
 --Scripted by edo9300
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special summon 1 "Security Force" monster, that is banished or in your GY
+	--Special summon 1 "Security Fcoree" monster, that is banished or in your RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	e1:SetHintTiming(0,TIMINGS_CHECK_MONSTER_E)
 	c:RegisterEffect(e1)
-	--Move 1 "Security Force" to another of your MMZ
+	--Move 1 "Security Fcoree" to another of your MMZ
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_FREE_CHAIN)

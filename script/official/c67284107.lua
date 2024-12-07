@@ -15,7 +15,7 @@ end
 s.listed_names={67284108}
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0,TYPES_TOKEN,0,0,1,RACE_CONTAMINED,ATTRIBUTE_DARK) end
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0,TYPES_TOKEN,0,0,1,RACE_TOXIC,ATTRIBUTE_DARK) end
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,0)
 end
@@ -23,7 +23,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local ft=5
 	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	ft=math.min(ft,Duel.GetLocationCount(tp,LOCATION_MZONE))
-	if ft<=0 or not Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0,TYPES_TOKEN,0,0,1,RACE_CONTAMINED,ATTRIBUTE_DARK) then return end
+	if ft<=0 or not Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0,TYPES_TOKEN,0,0,1,RACE_TOXIC,ATTRIBUTE_DARK) then return end
 	local i=0
 	repeat
 		local token=Duel.CreateToken(tp,id+1+i)

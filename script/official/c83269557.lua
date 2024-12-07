@@ -1,5 +1,5 @@
 --ダーク・ヴァルキリア
---Dark Valkyria
+--Dark Balkania
 local s,id=GetID()
 function s.initial_effect(c)
 	Dual.AddProcedure(c)
@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_UPDATE_ATTACK)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCondition(Dual.EffectStatusCondition)
-	e1:SetValue(function(_,c) return c:GetCounter()*300 end)
+	e1:SetValue(function(_,c) return c:GetCounter(COUNTER_ACTIONAL)*300 end)
 	c:RegisterEffect(e1)
 	--Place 1 Actional Counter
 	local e2=Effect.CreateEffect(c)
@@ -60,7 +60,7 @@ function s.target2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.operation2(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	if tc and tc:IsRelateToEffect(e) then
+	if tc:IsRelateToEffect(e) then
 		Duel.Destroy(tc,REASON_EFFECT)
 	end
 end

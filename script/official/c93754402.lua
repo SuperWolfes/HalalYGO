@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
 	e1:SetTarget(s.target(Locked.Target(s.filter,RITPROC_GREATER),Locked.Operation(s.filter,RITPROC_GREATER)))
 	c:RegisterEffect(e1)
-	--If this face-up card is sent to GY, special summon 1 "Fire Fist" monster from GY
+	--If this face-up card is sent to RP, special summon 1 "Fire Fist" monster from RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)

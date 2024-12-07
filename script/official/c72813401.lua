@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WIND),2,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Normal Summon 1 WIND monsters
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -96,5 +96,5 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=cg:GetFirst()
 	Duel.SendtoHand(tc,nil,REASON_EFFECT)
 	sg:RemoveCard(tc)
-	Duel.SendtoGrave(sg,REASON_EFFECT)
+	Duel.SendtoRest(sg,REASON_EFFECT)
 end

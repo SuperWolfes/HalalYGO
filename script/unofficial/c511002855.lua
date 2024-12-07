@@ -1,11 +1,10 @@
 --ＣＸ 熱血指導神アルティメットレーナー (Anime)
---CXyz Coach Lord Ultimatrainer (Anime)
-Duel.LoadScript("rankup_functions.lua")
+--CXyz Coach Watcher Ultimatrainer (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,9,4)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Rank Up Check
 	aux.EnableCheckRankUp(c,nil,nil,30741334)
 	--negate
@@ -29,7 +28,6 @@ function s.initial_effect(c)
 	e2:SetCost(s.cost)
 	e2:SetTarget(s.target)
 	e2:SetOperation(s.operation)
-	e2:SetLabel(RESET_EVENT+RESETS_STANDARD)
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetCode(EFFECT_RANKUP_EFFECT)
@@ -132,6 +130,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 	Duel.Damage(1-tp,atk,REASON_EFFECT)
 	Duel.BreakEffect()
-	Duel.SendtoGrave(sg,REASON_EFFECT)
+	Duel.SendtoRest(sg,REASON_EFFECT)
 	Duel.ShuffleHand(1-tp)
 end

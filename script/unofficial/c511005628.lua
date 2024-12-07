@@ -19,8 +19,8 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,2,nil) end
-	Duel.DiscardHand(tp,Card.IsAbleToGraveAsCost,2,2,REASON_COST)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,2,nil) end
+	Duel.DiscardHand(tp,Card.IsAbleToRestAsCost,2,2,REASON_COST)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	if re and tp==ep and re:GetActiveType()==TYPE_ACTIONAL+TYPE_CONTINUOUS and e:GetHandler():GetFlagEffect(id)==0 then

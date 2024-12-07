@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c,e,tp)
-	return c:IsRace(RACE_DRAGON) and not c:IsType(TYPE_XYZ) and c:GetLevel()>0 and c:IsAbleToGraveAsCost()
+	return c:IsRace(RACE_DRAGON) and not c:IsType(TYPE_XYZ) and c:GetLevel()>0 and c:IsAbleToRestAsCost()
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,c:GetLevel(),tc)
 end
 function s.spfilter(c,e,tp,lv,tc)
@@ -33,7 +33,7 @@ function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_MZONE,0,1,1,nil,e,tp)
 	Duel.SetTargetParam(g:GetFirst():GetLevel())
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)

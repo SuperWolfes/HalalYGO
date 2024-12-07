@@ -27,7 +27,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetCountLimit(1)
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	e1:SetCondition(s.setcon)
-	e1:SetOperation(s.setop)
+	e1:SetOperation(s.vetop)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.sfilter(c)
@@ -40,7 +40,7 @@ end
 function s.setcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.sfilter,tp,LOCATION_MZONE,0,1,nil)
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.sfilter,tp,LOCATION_MZONE,0,nil)
 	if #g>0 then
 		Duel.ChangePosition(g,POS_FACEDOWN_DEFENSE)

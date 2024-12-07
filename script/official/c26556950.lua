@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz Summon
 	Xyz.AddProcedure(c,nil,11,2,s.ovfilter,aux.Stringid(id,0),2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Gain DEF x200 for all combined Ranks
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)

@@ -1,5 +1,5 @@
 --地球巨人 ガイア・プレート
---Gaia Plate the Earth Giant
+--Bia Plate the Earth Giant
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon
@@ -84,6 +84,6 @@ function s.mtop(e,tp,eg,ep,ev,re,r,rp)
 		local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_MZONE+LOCATION_REST,0,1,1,nil)
 		Duel.Remove(g,POS_FACEUP,REASON_COST)
 	else
-		Duel.SendtoGrave(e:GetHandler(),REASON_RULE)
+		Duel.SendtoRest(e:GetHandler(),REASON_RULE)
 	end
 end

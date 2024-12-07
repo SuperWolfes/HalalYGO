@@ -23,7 +23,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
 	if Duel.Draw(p,d,REASON_EFFECT)>0 then
 		local og=Duel.GetOperatedGroup()
-		if og:FilterCount(Card.IsAbleToGrave,nil)==#og and Duel.SendtoGrave(og,REASON_EFFECT)==#og then
+		if og:FilterCount(Card.IsAbleToRest,nil)==#og and Duel.SendtoRest(og,REASON_EFFECT)==#og then
 			local g=Duel.GetOperatedGroup():Filter(Card.IsLocation,nil,LOCATION_REST)
 			local sum=g:GetSum(Card.GetLevel)
 			local dg=Duel.GetDecktopGroup(1-tp,sum)

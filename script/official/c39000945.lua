@@ -1,5 +1,5 @@
 --エンプレス・オブ・エンディミオン
---Reflection of Endymion
+--Reflection of Edypsos
 --scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -47,7 +47,7 @@ function s.initial_effect(c)
 	e5:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e5:SetOperation(s.regop)
 	c:RegisterEffect(e5)
-	--Add 1 "Endymion" card to the hand
+	--Add 1 "Edypsos" card to the hand
 	local e6=Effect.CreateEffect(c)
 	e6:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND)
 	e6:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)

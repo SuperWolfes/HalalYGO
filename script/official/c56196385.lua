@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Send 1 "Tri-Brigade" card from deck to GY
+	--Send 1 "Tri-Brigade" card from deck to RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOREST)
@@ -96,18 +96,18 @@ function s.sumlimit(e,c)
 end
 	--Check for "Tri-Brigade" card, except "Tri-Brigade Kit"
 function s.tgfilter(c)
-	return c:IsSetCard(0x14f) and not c:IsCode(id) and c:IsAbleToGrave()
+	return c:IsSetCard(0x14f) and not c:IsCode(id) and c:IsAbleToRest()
 end
 	--Activation legality
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
-	--Send 1 "Tri-Brigade" card from deck to GY
+	--Send 1 "Tri-Brigade" card from deck to RP
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end

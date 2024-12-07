@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,4,3,s.ovfilter,aux.Stringid(86532744,1))
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Banish
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_REMOVE+CATEGORY_DAMAGE)
@@ -30,7 +30,7 @@ end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:CheckRemoveOverlayCard(tp,1,REASON_COST) and Duel.GetLP(tp)>1 end
-	Duel.SendtoGrave(c:GetOverlayGroup(),REASON_COST)
+	Duel.SendtoRest(c:GetOverlayGroup(),REASON_COST)
 	Duel.SetLP(tp,1)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)

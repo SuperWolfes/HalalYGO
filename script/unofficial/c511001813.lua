@@ -33,7 +33,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local mg=Duel.GetLockedMaterial(tp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local tg=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.filter),tp,0x13,0,1,1,nil,e,tp,mg)
+	local tg=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,0x13,0,1,1,nil,e,tp,mg)
 	if #tg>0 then
 		local tc=tg:GetFirst()
 		mg:RemoveCard(tc)

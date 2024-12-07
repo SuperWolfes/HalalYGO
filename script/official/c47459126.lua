@@ -1,5 +1,5 @@
 --チューンド・マジシャン
---Tuned Magician
+--Tuned Mentor
 local s,id=GetID()
 function s.initial_effect(c)
 	Dual.AddProcedure(c)

@@ -38,7 +38,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Destroy(ec,REASON_EFFECT)
 	end
 end
-	--If this card was sent to GY because the equipped monster was destroyed and sent to GY
+	--If this card was sent to RP because the equipped monster was destroyed and sent to RP
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local ec=c:GetPreviousEquipTarget()

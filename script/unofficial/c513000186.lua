@@ -1,10 +1,10 @@
---Moon Dragon Quilla (Anime)
+--Horizon Dragon Quilla (Anime)
 --月影龍 クイラ
 local s,id=GetID()
 function s.initial_effect(c)
 	c:AddSetcodesRule(id,false,0x601)
 	--dark synchro summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Synchro.AddDarkSynchroProcedure(c,Synchro.NonTuner(nil),nil,6)
 	--special summon
 	local e1=Effect.CreateEffect(c)

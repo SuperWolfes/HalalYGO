@@ -3,7 +3,7 @@
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Guardian.AddProcedure(c,EVENT_SPSUMMON_SUCCESS)
 	--Cannot be Special Summoned
 	local e1=Effect.CreateEffect(c)
@@ -32,6 +32,7 @@ function s.initial_effect(c)
 	e3:SetOperation(s.aclimop)
 	c:RegisterEffect(e3)
 end
+s.listed_card_types={TYPE_GUARDIAN}
 function s.spcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
@@ -53,7 +54,7 @@ function s.aclimop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetProperty(EFFECT_FLAG_CLIENT_HINT)
 		e1:SetCode(EFFECT_CANNOT_TRIGGER)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+		e1:SetReset(RESET_EVENT|RESETS_STANDARD|RESET_PHASE|PHASE_END)
 		tc:RegisterEffect(e1)
 	end
 end

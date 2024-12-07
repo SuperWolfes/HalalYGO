@@ -2,7 +2,7 @@
 --Number 7: Lucky Straight
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Xyz Summon procedure
 	Xyz.AddProcedure(c,nil,7,3)
 	--Roll a die twice
@@ -16,13 +16,13 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1,false,REGISTER_FLAG_DETACH_XMAT)
 end
-s.roll_suffice=true
+s.roll_dice=true
 s.xyz_number=7
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,2)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,nil,1,PLAYER_ALL,LOCATION_ONFIELD)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,PLAYER_ALL,LOCATION_HAND+LOCATION_REST)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,PLAYER_ALL,LOCATION_HAND|LOCATION_REST)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_DRAW,nil,0,tp,3)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_HANDES,nil,0,tp,2)
 end
@@ -32,35 +32,35 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) then return end
-	local d1,d2=Duel.TossSuffice(tp,2)
+	local d1,d2=Duel.TossDice(tp,2)
 	if d2>d1 then d1,d2=d2,d1 end
 	--Change ATK
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_SET_ATTACK_FINAL)
 	e1:SetValue(d1*700)
-	e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,2)
+	e1:SetReset(RESET_EVENT|RESETS_STANDARD|RESET_PHASE|PHASE_END,2)
 	c:RegisterEffect(e1)
 	if d1+d2~=7 then return end
 	--If the total roll is exactly 7, apply 1 effect
-	local b1=Duel.IsExistingMatchingCard(Card.IsAbleToGrave,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,c)
-	local b2=Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(aux.GraveValleyFilter(s.spfilter),tp,LOCATION_HAND+LOCATION_REST,LOCATION_REST,1,nil,e,tp)
+	local b1=Duel.IsExistingMatchingCard(Card.IsAbleToRest,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,c)
+	local b2=Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_HAND|LOCATION_REST,LOCATION_REST,1,nil,e,tp)
 	local b3=Duel.IsPlayerCanDraw(tp,3)
 	if not (b1 or b2 or b3) then return end
 	local op=Duel.SelectEffect(tp,
 		{b1,aux.Stringid(id,1)},
 		{b2,aux.Stringid(id,2)},
-		{b2,aux.Stringid(id,3)})
+		{b3,aux.Stringid(id,3)})
 	if op==1 then
-		--Send all other cards on the field to the GY
-		local g=Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,c)
+		--Send all other cards on the field to the RP
+		local g=Duel.GetMatchingGroup(Card.IsAbleToRest,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,c)
 		if #g==0 then return end
 		Duel.BreakEffect()
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	elseif op==2 then
-		--Special Summon 1 monster from your hand or either GY
+		--Special Summon 1 monster from your hand or either RP
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local sg=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.spfilter),tp,LOCATION_HAND+LOCATION_REST,LOCATION_REST,1,1,nil,e,tp)
+		local sg=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_HAND|LOCATION_REST,LOCATION_REST,1,1,nil,e,tp)
 		if #sg==0 then return end
 		Duel.BreakEffect()
 		Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)
@@ -68,6 +68,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		--Draw 3 cards, then discard 2 cards
 		if Duel.Draw(tp,3,REASON_EFFECT)~=3 then return end
 		Duel.BreakEffect()
-		Duel.DiscardHand(tp,aux.TRUE,2,2,REASON_EFFECT+REASON_DISCARD)
+		Duel.DiscardHand(tp,nil,2,2,REASON_EFFECT|REASON_DISCARD)
 	end
 end

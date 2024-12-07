@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e1:SetCondition(s.spcon)
 	e1:SetValue(1)
 	c:RegisterEffect(e1)
-	--Special Summon from the opponent's GY
+	--Special Summon from the opponent's RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -37,7 +37,7 @@ function s.filter(c,e,tp)
 	return c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.filter),1-tp,LOCATION_REST,0,nil,e,1-tp)
+	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.filter),1-tp,LOCATION_REST,0,nil,e,1-tp)
 	if #g>0 and Duel.GetLocationCount(1-tp,LOCATION_MZONE)>0
 		and Duel.SelectYesNo(1-tp,aux.Stringid(id,1)) then
 		Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_SPSUMMON)

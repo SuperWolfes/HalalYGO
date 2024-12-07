@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	alias=c:GetOriginalCodeRule()
 	--link summon
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WATER),2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--tohand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(alias,0))
@@ -50,7 +50,7 @@ function s.negcon(e,tp,eg,ep,ev,re,r,rp)
 	return not Duel.GetAttacker():IsControler(tp)
 end
 function s.cfilter(c)
-	return c:IsSetCard(0x12b) and c:IsMonster() and c:IsAbleToGraveAsCost()
+	return c:IsSetCard(0x12b) and c:IsMonster() and c:IsAbleToRestAsCost()
 end
 function s.negcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end

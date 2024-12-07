@@ -23,10 +23,10 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local sg=eg:Filter(Card.IsRelateToEffect,nil,e)
 	if #sg==0 then
 	elseif #sg==1 then
-		Duel.SendtoGrave(sg,REASON_EFFECT+REASON_DISCARD)
+		Duel.SendtoRest(sg,REASON_EFFECT+REASON_DISCARD)
 	else
 		Duel.Hint(HINT_SELECTMSG,ep,HINTMSG_TOREST)
 		local dg=sg:Select(ep,1,1,nil)
-		Duel.SendtoGrave(dg,REASON_EFFECT+REASON_DISCARD)
+		Duel.SendtoRest(dg,REASON_EFFECT+REASON_DISCARD)
 	end
 end

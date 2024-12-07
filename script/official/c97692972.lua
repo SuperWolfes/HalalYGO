@@ -1,5 +1,5 @@
 -- アマゾネスの金鞭使い
--- Amazoness Golden Whip Master
+-- Amazonian Golden Whip Master
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)

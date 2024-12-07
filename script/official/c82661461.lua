@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.atktg)
 	e1:SetOperation(s.atkop)
 	c:RegisterEffect(e1)
-	-- Send 1 "Performapal" or "Odd-Eyes" monster from your Deck to the GY
+	-- Send 1 "Performapal" or "Odd-Eyes" monster from your Deck to the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOREST+CATEGORY_LVCHANGE)
@@ -65,7 +65,7 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.tgfilter(c)
-	return c:IsAbleToGrave() and (c:IsSetCard(0x9f) or c:IsSetCard(0x99)) and c:IsMonster()
+	return c:IsAbleToRest() and (c:IsSetCard(0x9f) or c:IsSetCard(0x99)) and c:IsMonster()
 		and not c:IsCode(id)
 end
 function s.lvtg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -77,7 +77,7 @@ function s.lvop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 	local tc=g:GetFirst()
-	if tc and Duel.SendtoGrave(tc,REASON_EFFECT)>0 and tc:IsLocation(LOCATION_REST)
+	if tc and Duel.SendtoRest(tc,REASON_EFFECT)>0 and tc:IsLocation(LOCATION_REST)
 		and c:IsRelateToEffect(e) then
 		-- Change this card's Level
 		local e1=Effect.CreateEffect(c)

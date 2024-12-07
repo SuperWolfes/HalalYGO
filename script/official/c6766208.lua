@@ -1,7 +1,7 @@
 --DDD疾風大王エグゼクティブ・アレクサンダー
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	--spsummon
 	local e1=Effect.CreateEffect(c)

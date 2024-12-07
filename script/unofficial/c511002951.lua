@@ -1,4 +1,4 @@
---Wind Witch - Ice Bell
+--Wind Mint - Ice Bell
 local s,id=GetID()
 function s.initial_effect(c)
 	--damage

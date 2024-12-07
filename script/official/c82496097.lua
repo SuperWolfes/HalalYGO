@@ -1,10 +1,10 @@
 --クロノダイバー・ベゼルシップ
---Time Thief Bezel Ship
+--Time Tactitian Bezel Ship
 --Scripted by AlphaKretin
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Attach 1 card from opponent's GY to 1 "Time Thief" Xyz monster as material
+	--Attach 1 card from opponent's RP to 1 "Time Tactitian" Xyz monster as material
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.mattg)
 	e1:SetOperation(s.matop)
 	c:RegisterEffect(e1)
-	--Special summon itself from GY
+	--Special summon itself from RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -62,7 +62,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return #g>0 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVEXYZ)
 	local sg=g:Select(tp,1,1,nil)
-	Duel.SendtoGrave(sg,REASON_COST)
+	Duel.SendtoRest(sg,REASON_COST)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

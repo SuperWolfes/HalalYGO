@@ -1,7 +1,7 @@
 --LL－インディペンデント・ナイチンゲール
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,48608796,aux.FilterBoolFunctionEx(Card.IsSetCard,0xf7))
 	--increase level
 	local e1=Effect.CreateEffect(c)

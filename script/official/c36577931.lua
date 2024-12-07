@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	local e2=e1:Clone()
 	e2:SetCode(EVENT_REMOVE)
 	c:RegisterEffect(e2)
-	--Set 1 "Stigmatika" Actional/Trap from your GY
+	--Set 1 "Stigmatika" Actional/Trap from your RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetType(EFFECT_TYPE_IGNITION)
@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	e3:SetCountLimit(1,id)
 	e3:SetCost(aux.bfgcost)
 	e3:SetTarget(s.settg)
-	e3:SetOperation(s.setop)
+	e3:SetOperation(s.vetop)
 	c:RegisterEffect(e3)
 end
 s.listed_series={0x166,0x160}
@@ -61,7 +61,7 @@ function s.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local tc=Duel.SelectTarget(tp,s.setfilter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,tc,1,0,0)
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) then
 		Duel.SSet(tp,tc)

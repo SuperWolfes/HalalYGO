@@ -5,7 +5,7 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Attach itself to 1 "Sprigguns" Xyz monster from hand, field, or GY
+	--Attach itself to 1 "Sprigguns" Xyz monster from hand, field, or RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.mattg)
 	e1:SetOperation(s.matop)
 	c:RegisterEffect(e1)
-	--If normal or special summoned, add 1 "Sprigguns" monster or "Vast Desert – Gold Golgonda" from GY
+	--If normal or special summoned, add 1 "Sprigguns" monster or "Vast Desert – Gold Golgonda" from RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND)
@@ -49,7 +49,7 @@ function s.mattg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,e:GetHandler(),1,0,0)
 	end
 end
-	--Attach itself to targeted "Sprigguns" Xyz monster from hand, field, or GY
+	--Attach itself to targeted "Sprigguns" Xyz monster from hand, field, or RP
 function s.matop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
@@ -69,7 +69,7 @@ function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,0,0)
 end
-	--Add 1 "Sprigguns" or "Vast Desert – Gold Golgonda" from GY
+	--Add 1 "Sprigguns" or "Vast Desert – Gold Golgonda" from RP
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) then

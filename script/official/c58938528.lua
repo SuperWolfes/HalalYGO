@@ -75,7 +75,7 @@ function s.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return c:IsDiscardable() and Duel.IsExistingMatchingCard(s.drcostfilter,tp,LOCATION_HAND,0,1,c) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 	local g=Duel.SelectMatchingCard(tp,s.drcostfilter,tp,LOCATION_HAND,0,1,1,c)
-	Duel.SendtoGrave(g+c,REASON_DISCARD+REASON_COST)
+	Duel.SendtoRest(g+c,REASON_DISCARD+REASON_COST)
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,2) end

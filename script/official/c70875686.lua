@@ -2,7 +2,7 @@
 --Prank-Kids Rip-Roarin-Roaster
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--2+ "Prank-Kids" monsters
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x120),2)
 	--Must be Link Summoned

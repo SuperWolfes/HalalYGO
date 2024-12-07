@@ -5,7 +5,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,81846636,aux.FilterBoolFunctionEx(Card.IsSetCard,0x1047))
 	--damage
 	local e1=Effect.CreateEffect(c)
@@ -22,7 +22,7 @@ end
 s.material_setcode={0x47,0x1047}
 function s.filter(c,e)
 	local name=e:GetHandler():GetCode()
-	return c:IsCode(name) and c:IsAbleToGraveAsCost()
+	return c:IsCode(name) and c:IsAbleToRestAsCost()
 end
 function s.ctfilter(c)
 	return c:IsSummonType(SUMMON_TYPE_SPECIAL) and c:IsSummonLocation(LOCATION_EXTRA)
@@ -32,7 +32,7 @@ function s.damcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_EXTRA,0,1,1,nil,e)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_COST)
+		Duel.SendtoRest(g,REASON_COST)
 	end
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)

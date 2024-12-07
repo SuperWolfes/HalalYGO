@@ -1,5 +1,5 @@
 --力の代行者 マーズ
---The Agent of Force - Mars
+--The Agent of Fcoree - Quest
 local s,id=GetID()
 function s.initial_effect(c)
 	--immune actional

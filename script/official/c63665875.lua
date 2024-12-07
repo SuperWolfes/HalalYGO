@@ -40,7 +40,7 @@ function s.srtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
 function s.filter(c)
-	return c:IsDefenseBelow(1200) and c:IsRace(RACE_CONTAMINED) and c:IsAbleToHand()
+	return c:IsDefenseBelow(1200) and c:IsRace(RACE_TOXIC) and c:IsAbleToHand()
 end
 function s.srop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)

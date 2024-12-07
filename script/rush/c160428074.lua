@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon up to 2 level 4 or lower Contaminated Normal monsters from the GY
+	--Special Summon up to 2 level 4 or lower Toxic Normal monsters from the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c)
-	return c:IsRace(RACE_CONTAMINED) and c:IsType(TYPE_NORMAL) and c:IsLevelBelow(4)
+	return c:IsRace(RACE_TOXIC) and c:IsType(TYPE_NORMAL) and c:IsLevelBelow(4)
 end
 function s.spcond(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsStatus(STATUS_SUMMON_TURN) and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil)

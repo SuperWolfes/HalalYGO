@@ -1,20 +1,19 @@
 --ＣＮｏ.１０７ 超銀河眼の時空龍 (Anime)
 --Number C107: Neo Galaxy-Eyes Tachyon Dragon (Anime)
 --Scripted By TheOnePharaoh, fixed by MLD & Larry126
-Duel.LoadScript("rankup_functions.lua")
 Duel.LoadCardScript("c68396121.lua")
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,9,3)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Rank Up Check
 	aux.EnableCheckRankUp(c,nil,nil,88177324)
 	--battle indestructable
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_INDESTRUCTABLE_BATTLE)
-	e1:SetValue(aux.NOT(aux.TargetBoolFunction(Card.IsSetCard,0x48)))
+	e1:SetValue(aux.NOT(aux.TargetBoolFunction(Card.IsSetCard,SET_NUMBER)))
 	c:RegisterEffect(e1)
 	--negate
 	local e2=Effect.CreateEffect(c)
@@ -22,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCountLimit(1)
-	e2:SetCost(s.negcost)
+	e2:SetCost(aux.dxmcostgen(1,1,nil))
 	e2:SetOperation(s.negop)
 	c:RegisterEffect(e2,false,REGISTER_FLAG_DETACH_XMAT)
 	--Double Snare
@@ -36,7 +35,6 @@ function s.initial_effect(c)
 	e4:SetCost(s.atkcost)
 	e4:SetTarget(s.atktg)
 	e4:SetOperation(s.atkop)
-	e4:SetLabel(RESET_EVENT+RESETS_STANDARD)
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_SINGLE)
 	e5:SetCode(EFFECT_RANKUP_EFFECT)
@@ -56,7 +54,7 @@ function s.initial_effect(c)
 		Duel.RegisterEffect(ge2,0)
 	end)
 end
-s.listed_series={0x48}
+s.listed_series={SET_NUMBER}
 s.listed_names={88177324}
 s.xyz_number=107
 function s.checkop(e,tp,eg,ep,ev,re,r,rp)
@@ -73,11 +71,6 @@ function s.startop(e,tp,eg,ep,ev,re,r,rp)
 		tc:RegisterFlagEffect(511010210,RESET_PHASE+PHASE_END,0,1,tc:GetPosition())
 		tc:RegisterFlagEffect(511010211,RESET_PHASE+PHASE_END,0,1,tc:GetSequence())
 	end
-end
-function s.negcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local c=e:GetHandler()
-	if chk==0 then return c:CheckRemoveOverlayCard(tp,1,REASON_COST) end
-	c:RemoveOverlayCard(tp,1,1,REASON_COST)
 end
 function s.filter(c)
 	return c:IsFaceup() and (c:IsLocation(LOCATION_SZONE) or c:IsType(TYPE_EFFECT)) and not c:IsDisabled()
@@ -125,7 +118,7 @@ function s.negop(e,tp,eg,ep,ev,re,r,rp)
 		if rc:GetFlagEffectLabel(id+1)==LOCATION_HAND then
 			Duel.SendtoHand(rc,rc:GetFlagEffectLabel(511010209),REASON_EFFECT)
 		elseif rc:GetFlagEffectLabel(id+1)==LOCATION_REST then
-			Duel.SendtoGrave(rc,REASON_EFFECT,rc:GetFlagEffectLabel(511010209))
+			Duel.SendtoRest(rc,REASON_EFFECT,rc:GetFlagEffectLabel(511010209))
 		elseif rc:GetFlagEffectLabel(id+1)==LOCATION_REMOVED then
 			Duel.Remove(rc,rc:GetPreviousPosition(),REASON_EFFECT,rc:GetFlagEffectLabel(511010209))
 		elseif rc:GetFlagEffectLabel(id+1)==LOCATION_DECK then
@@ -134,7 +127,7 @@ function s.negop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.SendtoDeck(rc,rc:GetFlagEffectLabel(511010209),0,REASON_EFFECT)
 		else
 			if rc:IsStatus(STATUS_LEAVE_CONFIRMED) then
-				rc:CancelToGrave()
+				rc:CancelToRest()
 			end
 			local loc=rc:GetFlagEffectLabel(id+1)
 			if rc:IsType(TYPE_FIELD) then

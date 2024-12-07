@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	alias=c:Alias()
 	c:AddSetcodesRule(id,false,0x601)
 	--dark synchro summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Synchro.AddDarkSynchroProcedure(c,Synchro.NonTuner(nil),nil,5)
 	--actlimit
 	local e1=Effect.CreateEffect(c)

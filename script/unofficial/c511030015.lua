@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,s.matfilter,1,1)
 	--after link summon
 	local e1=Effect.CreateEffect(c)
@@ -51,5 +51,5 @@ function s.repval(e,c)
 	return s.repfilter(c,e,e:GetHandlerPlayer())
 end
 function s.repop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT+REASON_REPLACE)
+	Duel.SendtoRest(e:GetHandler(),REASON_EFFECT+REASON_REPLACE)
 end

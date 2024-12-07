@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	dme1:SetOperation(s.dmop)
 	DeckMaster.RegisterAbilities(c,dme1)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,92421852,38916461)
 	--atk up
 	local e1=Effect.CreateEffect(c)

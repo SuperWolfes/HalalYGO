@@ -2,7 +2,7 @@
 --Malefic Rainbow Dragon
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	c:SetUniqueOnField(1,1,aux.MaleficUniqueFilter(c),LOCATION_MZONE)
 	aux.AddMaleficSummonProcedure(c,79856792,LOCATION_HAND+LOCATION_DECK)
 	--selfdes

@@ -22,7 +22,7 @@ function s.tgtfilter(c,tp)
 	return c:IsFaceup() and c:IsSetCard(0x150) and Duel.IsExistingMatchingCard(s.tgvfilter,tp,LOCATION_DECK,0,1,nil,c:GetType()&key)
 end
 function s.tgvfilter(c,type1)
-	return c:IsAbleToGrave() and c:IsSetCard(0x150) and not c:IsType(type1)
+	return c:IsAbleToRest() and c:IsSetCard(0x150) and not c:IsType(type1)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_ONFIELD) and chkc:IsControler(tp) and s.tgtfilter(chkc,tp) end
@@ -51,7 +51,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsRelateToEffect(e) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local tg=Duel.SelectMatchingCard(tp,s.tgvfilter,tp,LOCATION_DECK,0,1,1,nil,tc:GetType()&key)
-		if #tg>0 and Duel.SendtoGrave(tg,REASON_EFFECT)>0 then
+		if #tg>0 and Duel.SendtoRest(tg,REASON_EFFECT)>0 then
 			local ogc=Duel.GetOperatedGroup():GetFirst()
 			if ogc:IsLocation(LOCATION_REST) and c:IsRelateToEffect(e) and Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)>0 then
 				local e1=Effect.CreateEffect(c)
@@ -70,12 +70,12 @@ function s.thfilter(c)
 	return c:IsSetCard(0x150) and c:IsMonster() and c:IsAbleToHand() and not c:IsCode(id)
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(aux.GraveValleyFilter(s.thfilter),tp,LOCATION_REST,0,1,nil)
+	return Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.thfilter),tp,LOCATION_REST,0,1,nil)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-		local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.thfilter),tp,LOCATION_REST,0,1,1,nil)
+		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thfilter),tp,LOCATION_REST,0,1,1,nil)
 		local tc=g:GetFirst()
 		if tc then
 			Duel.SendtoHand(tc,nil,REASON_EFFECT)

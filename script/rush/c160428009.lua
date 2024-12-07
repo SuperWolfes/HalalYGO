@@ -1,4 +1,3 @@
 --セブンスロード・マジシャン
---Sevens Road Magician
---Alt artwork
-Duel.LoadScript("c160301001.lua")
+--Sevens Road Mentor
+Duel.LoadCardScriptAlias(CARD_SEVENS_ROAD_MENTOR)

@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-	--Send to GY and return to hand
+	--Send to RP and return to hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_TOREST+CATEGORY_TOHAND)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
@@ -33,13 +33,13 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_MACHINE),tp,LOCATION_MZONE,0,1,nil)
 end
 function s.costfilter(c)
-	return c:IsCode(CARD_JINZO) and c:IsAbleToGraveAsCost()
+	return c:IsCode(CARD_JINZO) and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -55,7 +55,7 @@ function s.thfilter(c)
 	return c:IsRace(RACE_MACHINE) and c:IsMonster() and c:IsAbleToHand()
 end
 function s.tgyfilter(c)
-	return c:IsSetCard(0xbc) and c:IsMonster() and c:IsAbleToGrave()
+	return c:IsSetCard(0xbc) and c:IsMonster() and c:IsAbleToRest()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and s.thfilter(chkc) end
@@ -70,7 +70,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgyfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 		local og=Duel.GetOperatedGroup()
 		local tc=Duel.GetFirstTarget()
 		if og:GetFirst():IsLocation(LOCATION_REST) and tc and tc:IsRelateToEffect(e) then

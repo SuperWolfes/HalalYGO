@@ -1,5 +1,5 @@
 --マジシャン・オブ・ブラック・イリュージョン
---Magician of Dark Illusion
+--Mentor of Dark Illusion
 local s,id=GetID()
 function s.initial_effect(c)
 	--change name
@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e1:SetCode(EFFECT_CHANGE_CODE)
 	e1:SetRange(LOCATION_MZONE)
-	e1:SetValue(CARD_DARK_MAGICIAN)
+	e1:SetValue(CARD_DARK_MENTOR)
 	c:RegisterEffect(e1)
 	--spsummon (self)
 	local e2=Effect.CreateEffect(c)
@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.target1)
 	e2:SetOperation(s.operation1)
 	c:RegisterEffect(e2)
-	--Special Summon "Dark Magician"
+	--Special Summon "Dark Mentor"
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -37,7 +37,7 @@ function s.initial_effect(c)
 	e4:SetOperation(s.operation2)
 	c:RegisterEffect(e4)
 end
-s.listed_names={CARD_DARK_MAGICIAN}
+s.listed_names={CARD_DARK_MENTOR}
 function s.condition1(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()~=tp and rp==tp and re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP)
 end
@@ -56,7 +56,7 @@ function s.condition2(e,tp,eg,ep,ev,re,r,rp)
 	return rp==tp and re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.filter(c,e,tp)
-	return c:IsCode(CARD_DARK_MAGICIAN) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsCode(CARD_DARK_MENTOR) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter(chkc,e,tp) end

@@ -47,7 +47,7 @@ function s.initial_effect(c)
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetCode(EFFECT_CHANGE_RACE)
 			e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-			e1:SetValue(RACE_CONTAMINED)
+			e1:SetValue(RACE_TOXIC)
 			e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 			tc:RegisterEffect(e1)
 			local e2=Effect.CreateEffect(e:GetHandler())
@@ -62,7 +62,7 @@ function s.initial_effect(c)
 	end
  end
  function s.filter(c,e,tp)
-	return c:IsLocation(LOCATION_REST) and c:GetPreviousControler()==tp and c:IsReason(REASON_BATTLE) and c:GetOriginalRace()~=RACE_CONTAMINED
+	return c:IsLocation(LOCATION_REST) and c:GetPreviousControler()==tp and c:IsReason(REASON_BATTLE) and c:GetOriginalRace()~=RACE_TOXIC
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
  end
  function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -78,7 +78,7 @@ function s.initial_effect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_CHANGE_RACE)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-		e1:SetValue(RACE_CONTAMINED)
+		e1:SetValue(RACE_TOXIC)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		tc:RegisterEffect(e1)
 		local e2=Effect.CreateEffect(e:GetHandler())

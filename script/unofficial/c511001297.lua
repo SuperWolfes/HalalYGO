@@ -1,5 +1,5 @@
 --バーバリアンの呪術
---Battleguard Sorcery
+--Battleguard Scoreery
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

@@ -55,11 +55,11 @@ function s.splimit(e,se,sp,st)
 	return (se:IsActiveType(TYPE_MONSTER) and se:GetHandler():IsSetCard(0x2b)) or se:GetHandler():IsSetCard(0x61)
 end
 function s.cfilter1(c,tp)
-	return (c:IsLocation(LOCATION_HAND) or c:IsFaceup()) and c:IsMonster() and c:IsSetCard(0x2b) and c:IsAbleToGraveAsCost()
+	return (c:IsLocation(LOCATION_HAND) or c:IsFaceup()) and c:IsMonster() and c:IsSetCard(0x2b) and c:IsAbleToRestAsCost()
 		and Duel.IsExistingMatchingCard(s.cfilter2,tp,LOCATION_HAND+LOCATION_ONFIELD,0,1,c,c)
 end
 function s.cfilter2(c,cc)
-	return (c:IsLocation(LOCATION_HAND) or c:IsFaceup()) and c:IsSetCard(0x61) and c:IsAbleToGraveAsCost()
+	return (c:IsLocation(LOCATION_HAND) or c:IsFaceup()) and c:IsSetCard(0x61) and c:IsAbleToRestAsCost()
 		and Duel.IsExistingTarget(s.rmfilter,0,LOCATION_MZONE,LOCATION_MZONE,1,c,cc)
 end
 function s.rmfilter(c,cc)
@@ -73,7 +73,7 @@ function s.rmcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g2=Duel.SelectMatchingCard(tp,s.cfilter2,tp,LOCATION_HAND+LOCATION_ONFIELD,0,1,1,cc,cc)
 	g1:Merge(g2)
-	Duel.SendtoGrave(g1,REASON_COST)
+	Duel.SendtoRest(g1,REASON_COST)
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsAbleToRemove() end

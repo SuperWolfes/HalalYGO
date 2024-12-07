@@ -1,5 +1,5 @@
 -- 剣神官ムドラ
--- Mudora the Cestus Oracle
+-- Mudora the Sword Overseer
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	-- Return cards from the GY to the Deck
+	-- Return cards from the RP to the Deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TODECK)
@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	e2:SetCode(EVENT_FREE_CHAIN)
 	e2:SetRange(LOCATION_MZONE+LOCATION_REST)
 	e2:SetCountLimit(1,{id,1})
-	e2:SetHintTiming(0,TIMINGS_CHECK_MONSTER_E+TIMING_MAIN_END)
+	e2:SetHintTiming(0,TIMINGS_CHECK_MONSTER_E|TIMING_MAIN_END)
 	e2:SetCost(aux.bfgcost)
 	e2:SetTarget(s.rmtg)
 	e2:SetOperation(s.rmop)
@@ -49,7 +49,7 @@ function s.plfilter(c)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:IsRelateToEffect(e) and Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)>0 
+	if c:IsRelateToEffect(e) and Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)>0
 		and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
 		and Duel.IsExistingMatchingCard(s.plfilter,tp,LOCATION_DECK,0,1,nil)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
@@ -66,11 +66,11 @@ function s.rmfilter(c)
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
-	if chkc then return c~=chkc and chkc:IsLocation(LOCATION_MZONE+LOCATION_REST) and s.rmfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.rmfilter,tp,LOCATION_MZONE+LOCATION_REST,LOCATION_MZONE+LOCATION_REST,1,c) end
-	local max=(Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_EXCHANGE_GUARDIAN),tp,LOCATION_ONFIELD+LOCATION_REST,0,1,nil) and 5 or 3)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectTarget(tp,s.rmfilter,tp,LOCATION_MZONE+LOCATION_REST,LOCATION_MZONE+LOCATION_REST,1,max,c)
+	if chkc then return c~=chkc and chkc:IsLocation(LOCATION_MZONE|LOCATION_REST) and s.rmfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.rmfilter,tp,LOCATION_MZONE|LOCATION_REST,LOCATION_MZONE|LOCATION_REST,1,c) end
+	local max=(Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_EXCHANGE_GUARDIAN),tp,LOCATION_ONFIELD|LOCATION_REST,0,1,nil) and 5 or 3)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
+	local g=Duel.SelectTarget(tp,s.rmfilter,tp,LOCATION_MZONE|LOCATION_REST,LOCATION_MZONE|LOCATION_REST,1,max,c)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,1,0,0)
 end
 function s.rmop(e,tp,eg,ep,ev,re,r,rp,chk)

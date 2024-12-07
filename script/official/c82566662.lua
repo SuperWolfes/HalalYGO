@@ -1,11 +1,11 @@
 --トウテツドラゴン
---Taotie Dragon
+--Postie Dragon
 --Scripted by Naim
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Link summon procedure
 	Link.AddProcedure(c,s.matfilter,2)
 	--Check materials used for its link summon

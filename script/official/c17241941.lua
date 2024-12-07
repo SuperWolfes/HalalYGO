@@ -1,5 +1,5 @@
 --ダイカミナリ・ジャイクロプス
---Daikaminari Gyclops
+--Daikamijira Gyclops
 --Logical Nonsense
 
 --Substitute ID

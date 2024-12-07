@@ -1,4 +1,4 @@
---Charming Resort Staff
+--Chauming Resort Staff
 local s,id=GetID()
 function s.initial_effect(c)
 	--atkdown

@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	c:AddSetcodesRule(id,false,0x601)
 	--dark synchro summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Synchro.AddDarkSynchroProcedure(c,Synchro.NonTuner(nil),nil,6)
 	--destroy
 	local e2=Effect.CreateEffect(c)

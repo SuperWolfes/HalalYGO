@@ -1,9 +1,9 @@
 --ウォーターリヴァイアサン＠イグニスター
---Water Leviathan @Ignister
+--Water Eel @Ignister
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--tohand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

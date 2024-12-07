@@ -55,6 +55,6 @@ function s.mtop(e,tp,eg,ep,ev,re,r,rp)
 		local g=Duel.SelectReleaseGroupCost(tp,s.rfilter,1,1,false,nil,nil)
 		Duel.Release(g,REASON_RULE)
 	else
-		Duel.SendtoGrave(e:GetHandler(),REASON_RULE)
+		Duel.SendtoRest(e:GetHandler(),REASON_RULE)
 	end
 end

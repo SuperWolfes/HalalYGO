@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.costfilter(c)
-	return c:IsRace(RACE_BEASTWARRIOR) and c:IsLevelBelow(4) and c:IsFaceup() and c:IsAbleToGraveAsCost()
+	return c:IsRace(RACE_BEASTWARRIOR) and c:IsLevelBelow(4) and c:IsFaceup() and c:IsAbleToRestAsCost()
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_MZONE,0,2,e:GetHandler()) end
@@ -24,7 +24,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_MZONE,0,2,2,e:GetHandler())
-	local ct=Duel.SendtoGrave(g,REASON_COST)
+	local ct=Duel.SendtoRest(g,REASON_COST)
 	if ct>1 then
 		--Gain ATK
 		local lv=(g:GetFirst():GetLevel())+(g:GetNext():GetLevel())
@@ -39,12 +39,12 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetType(EFFECT_TYPE_SINGLE)
 		e2:SetCode(EFFECT_CANNOT_SELECT_BATTLE_TARGET)
 		e2:SetValue(s.bttg)
-		e2:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+		e2:SetReset(RESETS_STANDARD_PHASE_END)
 		c:RegisterEffect(e2)
 		local e3=Effect.CreateEffect(c)
 		e3:SetType(EFFECT_TYPE_SINGLE)
 		e3:SetCode(EFFECT_CANNOT_DIRECT_ATTACK)
-		e3:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+		e3:SetReset(RESETS_STANDARD_PHASE_END)
 		c:RegisterEffect(e3)
 		--Other monsters cannot attack
 		local e4=Effect.CreateEffect(c)
@@ -60,7 +60,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 		e5:SetType(EFFECT_TYPE_SINGLE)
 		e5:SetValue(1)
 		e5:SetCode(EFFECT_ATTACK_ALL)
-		e5:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+		e5:SetReset(RESETS_STANDARD_PHASE_END)
 		c:RegisterEffect(e5)
 	end
 end

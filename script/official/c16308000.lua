@@ -37,6 +37,6 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	ct=ct-1
 	e:SetLabel(ct)
 	if ct==0 and e:GetHandler():IsHasCardTarget(e:GetLabelObject()) then
-		Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
+		Duel.SendtoRest(e:GetHandler(),REASON_EFFECT)
 	end
 end

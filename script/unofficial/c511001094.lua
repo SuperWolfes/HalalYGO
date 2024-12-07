@@ -1,4 +1,4 @@
---Pendulum Statue Red Devil
+--Pendulum Statue Red Well
 local s,id=GetID()
 function s.initial_effect(c)
 	--pendulum summon

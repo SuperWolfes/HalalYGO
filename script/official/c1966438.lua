@@ -1,5 +1,5 @@
 --雙極の破械神
---Abominable Unchained Soul
+--Abominable Unchained Miss
 
 local s,id=GetID()
 function s.initial_effect(c)
@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.destg)
 	e2:SetOperation(s.desop)
 	c:RegisterEffect(e2)
-	--Register the fact it was sent to GY
+	--Register the fact it was sent to RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
@@ -36,7 +36,7 @@ function s.initial_effect(c)
 	e3:SetCondition(s.regcon)
 	e3:SetOperation(s.regop)
 	c:RegisterEffect(e3)
-	--Special summon itself from GY
+	--Special summon itself from RP
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,2))
 	e4:SetCategory(CATEGORY_SPECIAL_SUMMON)

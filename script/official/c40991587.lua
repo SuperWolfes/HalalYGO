@@ -3,7 +3,7 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Name becomes "Skull Servant" while in GY
+	--Name becomes "Skull Servant" while in RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_CHANGE_CODE)
 	e1:SetValue(CARD_SKULL_SERVANT)
 	c:RegisterEffect(e1)
-	--Other level 3 or lower contaminated monsters cannot be destroyed by battle
+	--Other level 3 or lower toxic monsters cannot be destroyed by battle
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_INDESTRUCTABLE_BATTLE)
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.etarget)
 	e2:SetValue(1)
 	c:RegisterEffect(e2)
-	--Other level 3 or lower contaminated monsters are unaffected by actionals/traps
+	--Other level 3 or lower toxic monsters are unaffected by actionals/traps
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
 	e3:SetCode(EFFECT_IMMUNE_EFFECT)
@@ -33,7 +33,7 @@ end
 s.listed_names={CARD_SKULL_SERVANT}
 
 function s.etarget(e,c)
-	return c:GetCode()~=id and c:IsRace(RACE_CONTAMINED) and c:IsLevelBelow(3)
+	return c:GetCode()~=id and c:IsRace(RACE_TOXIC) and c:IsLevelBelow(3)
 end
 function s.efilter(e,te)
 	return te:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) and not te:GetHandler():IsCode(4064256)

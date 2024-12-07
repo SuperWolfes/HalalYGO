@@ -1,5 +1,5 @@
 --時械神 ザフィオン (Anime)
---Zaphion, the Timelord (Anime)
+--Zaphion, the Timewatcher (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--indes

@@ -1,5 +1,5 @@
 -- 
--- Libromancer Magigirl
+-- Librobouncer Magigirl
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	-- Locked Summon 1 "Libromancer" monster
+	-- Locked Summon 1 "Librobouncer" monster
 	local e2=Locked.CreateProc(c,RITPROC_GREATER,aux.FilterBoolFunction(Card.IsSetCard,0x17d),nil,aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetRange(LOCATION_MZONE)

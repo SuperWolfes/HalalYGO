@@ -1,4 +1,4 @@
---Fortress of Prophecy
+--Fortress of Prediction
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

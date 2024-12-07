@@ -1,36 +1,78 @@
 --Utilities to be added to the core
-Duel.Overlay=(function()
-	local oldf=Duel.Overlay
-	return function(c,g,autosend)
-		if autosend then
-			local sg
-			if type(g)=="Group" then
-				sg=Group.CreateGroup()
-				for tc in g:Iter() do
-					sg:Merge(tc:GetOverlayGroup())
-				end
-			else
-				sg=g:GetOverlayGroup()
-			end
-			Duel.SendtoGrave(sg,REASON_RULE)
-		end
-		return oldf(c,g)
+
+--[[
+	A monster that is temporarily banished shouldn't be treated as a monster that was Normal, Flip, or Special Summoned that turn, or as a monster that has already changed its battle position, after it returns to the field.
+	Manually sets the relevant statuses to "false" before returning the monster to the field.
+--]]
+Duel.ReturnToField=(function()
+	local oldfunc=Duel.ReturnToField
+	return function(card,pos,zone,...)
+		if not card:IsReason(REASON_TEMPORARY) then return false end
+		card:SetStatus(STATUS_FORM_CHANGED,false)
+		card:SetStatus(STATUS_SUMMON_TURN,false)
+		card:SetStatus(STATUS_FLIP_SUMMON_TURN,false)
+		card:SetStatus(STATUS_SPSUMMON_TURN,false)
+		pos=pos or card:GetPreviousPosition()
+		zone=zone or 0xff
+		return oldfunc(card,pos,zone,...)
 	end
 end)()
---Raise the EVENT_TOHAND_CONFIRM event when a card in the hand is revealed (used by "Puppet King" and "Puppet Queen")
-Duel.ConfirmCards=(function()
-	local oldfunc=Duel.ConfirmCards
-	return function(tp,obj,...)
-		local res=oldfunc(tp,obj,...)
-		local handg=Group.CreateGroup():Merge(obj):Match(Card.IsLocation,nil,LOCATION_HAND)
-		if Duel.CheckEvent(EVENT_TO_HAND) and #handg>0 then
-			Duel.RaiseEvent(handg,EVENT_TOHAND_CONFIRM,nil,0,tp,tp,0)
+
+--[[
+	Places a hint that says "Added to the hand by a currently resolving effect" (string 225) on any cards added to the hand for the duration of that Chain's/effect's resolution.
+	Used to differentiate which card(s) were just added to the hand and which ones were already there for cases of multiple copies of the same card being present.
+	The card ID used for the flag effect (30336082) belongs to "Brimming Sangen Manor", the card that initially needed this workaround.
+--]]
+Duel.SendtoHand=(function()
+	local oldfunc=Duel.SendtoHand
+	return function(card_or_group,dest_player,reason,reason_player,...)
+		local res=oldfunc(card_or_group,dest_player,reason,reason_player,...)
+		if res==0 then return res end
+		if type(card_or_group)=="Group" then
+			local hand_group=card_or_group:Filter(Card.IsLocation,nil,LOCATION_HAND)
+			for tc in hand_group:Iter() do
+				tc:RegisterFlagEffect(30336082,RESET_EVENT|RESETS_STANDARD|RESET_CHAIN,EFFECT_FLAG_CLIENT_HINT,1,0,225)
+			end
+		elseif type(card_or_group)=="Card" and card_or_group:IsLocation(LOCATION_HAND) then
+			card_or_group:RegisterFlagEffect(30336082,RESET_EVENT|RESETS_STANDARD|RESET_CHAIN,EFFECT_FLAG_CLIENT_HINT,1,0,225)
 		end
 		return res
 	end
 end)()
 
-Duel.AnnounceNumberRange=Duel.AnnounceLevel
+--Use the "selected" string by default. Pass "false" as the boolean to use the "targeted" string instead.
+Duel.HintSelection=(function()
+	local oldfunc=Duel.HintSelection
+	return function(card_or_group,log_as_selection,...)
+		if log_as_selection==nil then log_as_selection=true end
+		return oldfunc(card_or_group,log_as_selection,...)
+	end
+end)()
+
+--[[
+	If called while an effect isn't resolving (e.g. a regular Xyz Summon or through an effect like "Wonder Xyz") then proceed as usual with the attaching.
+	If called while an effect is resolving treat it as attaching by card effect and handle the relevant rulings.
+	Attaching by card effect is ruled to affect both the Xyz Monster and the cards that are to be attached.
+	Return early if the Xyz Monster is unaffected by the currently resolving effect.
+	Remove any cards that are unaffected by the currently resolving effect from the group of cards to be attached.
+	If all the cards to be attached are unaffected by the currently resolving effect then return early.
+	Proceed as usual with the attaching otherwise.
+Duel.Overlay=(function()
+	local oldfunc=Duel.Overlay
+	return function(xyz_monster,xyz_mats,send_to_rest)
+		if not Duel.IsChainSolving() then return oldfunc(xyz_monster,xyz_mats,send_to_rest) end
+		local trig_eff=Duel.GetChainInfo(0,CHAININFO_TRIGGERING_EFFECT)
+		if xyz_monster:IsImmuneToEffect(trig_eff) then return end
+		if type(xyz_mats)=="Group" then
+			xyz_mats:Match(aux.NOT(Card.IsImmuneToEffect),nil,trig_eff)
+			if #xyz_mats==0 then return end
+		elseif type(xyz_mats)=="Card" and xyz_mats:IsImmuneToEffect(trig_eff) then
+			return
+		end
+		return oldfunc(xyz_monster,xyz_mats,send_to_rest)
+	end
+end)()
+--]]
 
 --Remove counter from only 1 card if it is the only card with counter
 local p_rem=Duel.RemoveCounter
@@ -174,7 +216,7 @@ function Duel.CheckReleaseGroupCost(tp,f,minc,maxc,use_hand,check,ex,...)
 		maxc,use_hand,check,ex=minc,maxc,use_hand,check
 	end
 	if not ex then ex=Group.CreateGroup() end
-	local mg=Duel.GetReleaseGroup(tp,use_hand):Match(f and f or aux.TRUE,ex,table.unpack(params))
+	local mg=Duel.GetReleaseGroup(tp,use_hand):Match(f or aux.TRUE,ex,table.unpack(params))
 	local g,exg=mg:Split(Auxiliary.ReleaseCostFilter,nil,tp)
 	local specialchk=Auxiliary.MakeSpecialCheck(check,tp,exg,table.unpack(params))
 	local mustg=g:Match(function(c,tp)return c:IsHasEffect(EFFECT_EXTRA_RELEASE) and c:IsControler(1-tp)end,nil,tp)
@@ -183,7 +225,7 @@ function Duel.CheckReleaseGroupCost(tp,f,minc,maxc,use_hand,check,ex,...)
 end
 function Duel.SelectReleaseGroupCost(tp,f,minc,maxc,use_hand,check,ex,...)
 	if not ex then ex=Group.CreateGroup() end
-	local mg=Duel.GetReleaseGroup(tp,use_hand):Match(f and f or aux.TRUE,ex,...)
+	local mg=Duel.GetReleaseGroup(tp,use_hand):Match(f or aux.TRUE,ex,...)
 	local g,exg=mg:Split(Auxiliary.ReleaseCostFilter,nil,tp)
 	local specialchk=Auxiliary.MakeSpecialCheck(check,tp,exg,...)
 	local mustg=g:Match(function(c,tp)return c:IsHasEffect(EFFECT_EXTRA_RELEASE) and c:IsControler(1-tp)end,nil,tp)
@@ -194,6 +236,7 @@ function Duel.SelectReleaseGroupCost(tp,f,minc,maxc,use_hand,check,ex,...)
 		local cg=mg:Filter(Auxiliary.RelCheckRecursive,sg,tp,sg,mg,exg,mustg,#sg,minc,maxc,specialchk)
 		if #cg==0 then break end
 		cancel=Auxiliary.RelCheckGoal(tp,sg,exg,mustg,#sg,minc,maxc,specialchk)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
 		local tc=Group.SelectUnselect(cg,sg,tp,cancel,cancel,1,1)
 		if not tc then break end
 		if #mustg==0 or not mustg:IsContains(tc) then

@@ -1,4 +1,4 @@
---Constructive Destruction
+--Constructive Mismatching
 --fixed by MLD
 local s,id=GetID()
 function s.initial_effect(c)

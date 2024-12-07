@@ -2,7 +2,7 @@
 --Ultimate Conductor Tyranno
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Special summon procedure
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -32,7 +32,7 @@ function s.initial_effect(c)
 	e3:SetCode(EFFECT_ATTACK_ALL)
 	e3:SetValue(1)
 	c:RegisterEffect(e3)
-	--Send defense position monster to the GY
+	--Send defense position monster to the RP
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_DAMAGE+CATEGORY_TOREST)
@@ -108,7 +108,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.Damage(1-tp,1000,REASON_EFFECT)~=0 then
 		local d=Duel.GetAttackTarget()
 		if d:IsRelateToBattle() and d:IsDefensePos() then
-			Duel.SendtoGrave(d,REASON_EFFECT)
+			Duel.SendtoRest(d,REASON_EFFECT)
 		end
 	end
 end

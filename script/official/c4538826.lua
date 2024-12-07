@@ -1,14 +1,14 @@
 --終焉龍 カオス・エンペラー
---Chaos Emperor, the Dragon of Armageddon
+--Chaos Emperor, the Dragon of Cataclysm
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Pendulum.AddProcedure(c)
-	--to hand
+	--Add 1 banished Dragon monster to the hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_DESTROY)
+	e1:SetCategory(CATEGORY_DESTROY+CATEGORY_TOHAND)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetRange(LOCATION_PZONE)
@@ -17,24 +17,24 @@ function s.initial_effect(c)
 	e1:SetTarget(s.thtg)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
-	--spsummon condition
+	--Special Summon condition
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e2:SetCode(EFFECT_SPSUMMON_CONDITION)
 	c:RegisterEffect(e2)
-	--special summon
+	--Special Summon procedure
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
 	e3:SetCode(EFFECT_SPSUMMON_PROC)
 	e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e3:SetCountLimit(1,{id,1},EFFECT_COUNT_CODE_OATH)
-	e3:SetRange(LOCATION_EXTRA+LOCATION_HAND)
+	e3:SetRange(LOCATION_EXTRA|LOCATION_HAND)
 	e3:SetCondition(s.spcon)
 	e3:SetTarget(s.sptg)
 	e3:SetOperation(s.spop)
 	c:RegisterEffect(e3)
-	--gy and damage
+	--Send cards to the RP and inflict damage
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_TOREST+CATEGORY_DAMAGE)
@@ -45,19 +45,19 @@ function s.initial_effect(c)
 	e4:SetTarget(s.gytg)
 	e4:SetOperation(s.gyop)
 	c:RegisterEffect(e4)
-	--redirect
+	--Send itself to the Deck if it leaves the field
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_SINGLE)
 	e5:SetCode(EFFECT_LEAVE_FIELD_REDIRECT)
 	e5:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	e5:SetCondition(s.dbcon)
+	e5:SetCondition(function(e) return e:GetHandler():HasFlagEffect(id) end)
 	e5:SetValue(LOCATION_DECKBOT)
 	c:RegisterEffect(e5)
 	local e6=Effect.CreateEffect(c)
 	e6:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e6:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e6:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	e6:SetOperation(s.op)
+	e6:SetOperation(function(e) e:GetHandler():RegisterFlagEffect(id,RESET_EVENT|RESETS_STANDARD,0,1) end)
 	c:RegisterEffect(e6)
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -73,7 +73,7 @@ function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 	local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_REMOVED,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,e:GetHandler(),1,0,0)
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,tp,0)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -96,15 +96,15 @@ end
 function s.spcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
-	local rg1=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE+LOCATION_REST,0,nil,ATTRIBUTE_LIGHT)
-	local rg2=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE+LOCATION_REST,0,nil,ATTRIBUTE_DARK)
+	local rg1=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE|LOCATION_REST,0,nil,ATTRIBUTE_LIGHT)
+	local rg2=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE|LOCATION_REST,0,nil,ATTRIBUTE_DARK)
 	local rg=rg1:Clone()
 	rg:Merge(rg2)
-	return Duel.GetLocationCount(tp,LOCATION_MZONE)>-2 and #rg1>0 and #rg2>0 
+	return Duel.GetLocationCount(tp,LOCATION_MZONE)>-2 and #rg1>0 and #rg2>0
 		and aux.SelectUnselectGroup(rg,e,tp,2,2,s.rescon,0)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,c)
-	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE+LOCATION_REST,0,nil,ATTRIBUTE_LIGHT+ATTRIBUTE_DARK)
+	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE|LOCATION_REST,0,nil,ATTRIBUTE_LIGHT|ATTRIBUTE_DARK)
 	local g=aux.SelectUnselectGroup(rg,e,tp,2,2,s.rescon,1,tp,HINTMSG_REMOVE,nil,nil,true)
 	if #g>0 then
 		g:KeepAlive()
@@ -123,14 +123,11 @@ function s.gycost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	Duel.PayLPCost(tp,math.floor(Duel.GetLP(tp)/2))
 end
-function s.gyfilter(c)
-	return not c:IsLocation(LOCATION_MZONE) or c:GetSequence()<5
-end
 function s.sgfilter(c,p)
 	return c:IsLocation(LOCATION_REST) and c:IsControler(p)
 end
 function s.gytg(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(s.gyfilter,tp,LOCATION_ONFIELD,0,nil)
+	local g=Duel.GetMatchingGroup(nil,tp,LOCATION_SZONE|LOCATION_MMZONE,0,nil)
 	local og=Duel.GetFieldGroup(tp,0,LOCATION_ONFIELD)
 	if chk==0 then return #g>0 and #og>0 end
 	local oc=#og
@@ -139,20 +136,16 @@ function s.gytg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,0,0,1-tp,oc*300)
 end
 function s.gyop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(s.gyfilter,tp,LOCATION_ONFIELD,0,nil)
-	if #g==0 or Duel.SendtoGrave(g,REASON_EFFECT)==0 then return end
-	local oc=Duel.GetOperatedGroup():FilterCount(s.sgfilter,nil,tp)
+	local g=Duel.GetMatchingGroup(nil,tp,LOCATION_SZONE|LOCATION_MMZONE,0,nil)
+	if #g==0 or Duel.SendtoRest(g,REASON_EFFECT)==0 then return end
+	local oc=Duel.GetOperatedGroup():FilterCount(Card.IsLocation,nil,LOCATION_REST)
 	if oc==0 then return end
+	local dc=Duel.GetOperatedGroup():FilterCount(s.sgfilter,nil,1-tp)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local og=Duel.SelectMatchingCard(tp,nil,tp,0,LOCATION_ONFIELD,1,oc,nil)
-	if Duel.SendtoGrave(og,REASON_EFFECT)>0 then
+	if Duel.SendtoRest(og,REASON_EFFECT)>0 then
 		Duel.BreakEffect()
-		local dc=Duel.GetOperatedGroup():FilterCount(s.sgfilter,nil,1-tp)
+		dc=dc+Duel.GetOperatedGroup():FilterCount(s.sgfilter,nil,1-tp)
 		Duel.Damage(1-tp,dc*300,REASON_EFFECT)
 	end
-end
-function s.dbcon(e)
-	return e:GetHandler():GetFlagEffect(id)>0
-end
-function s.op(e,tp,eg,ep,ev,re,r,rp)
-	e:GetHandler():RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1)
 end

@@ -1,9 +1,9 @@
 -- エクソシスター・ミカエリス
--- Exorsister Mikailis
+-- Exorsister Kailis
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	-- 2 Level 4 monsters
 	Xyz.AddProcedure(c,nil,4,2)
 	-- Check materials on Xyz Summon
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e0:SetCode(EFFECT_MATERIAL_CHECK)
 	e0:SetValue(s.valcheck)
 	c:RegisterEffect(e0)
-	-- Battle destruction immunity
+	-- Battle mismatching immunity
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetRange(LOCATION_MZONE)
@@ -34,7 +34,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.rmtg)
 	e2:SetOperation(s.rmop)
 	c:RegisterEffect(e2)
-	-- Search 1 "Exosister" Actional/Trap
+	-- Search 1 "Insister" Actional/Trap
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)

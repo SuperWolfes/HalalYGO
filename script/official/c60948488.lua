@@ -1,5 +1,5 @@
 --クロニクル・マジシャン
---Chronicle Magician
+--Chronicle Mentor
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
@@ -31,7 +31,7 @@ function s.initial_effect(c)
 	e3:SetOperation(s.atkop)
 	c:RegisterEffect(e3)
 end
-s.listed_names={CARD_DARK_MAGICIAN,CARD_BLUEEYES_W_DRAGON}
+s.listed_names={CARD_DARK_MENTOR,CARD_BLUEEYES_W_DRAGON}
 function s.spcfilter(c,tp)
 	return c:IsFaceup() and c:IsControler(tp) and (c:GetBaseAttack()==2500 or c:GetBaseDefense()==2500)
 end
@@ -51,7 +51,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.atkfilter(c)
-	return c:IsCode(CARD_DARK_MAGICIAN,CARD_BLUEEYES_W_DRAGON) and c:IsFaceup()
+	return c:IsCode(CARD_DARK_MENTOR,CARD_BLUEEYES_W_DRAGON) and c:IsFaceup()
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and s.atkfilter(chkc) end

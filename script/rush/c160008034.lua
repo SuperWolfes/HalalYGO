@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,160201028,160002023)
 	--inflct 800 damage
 	local e1=Effect.CreateEffect(c)
@@ -79,7 +79,7 @@ function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	--Effect
 	if Duel.Draw(tp,3,REASON_EFFECT)>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-		local dg=Duel.SelectMatchingCard(tp,Card.IsAbleToGrave,tp,LOCATION_HAND,0,2,2,nil)
-		Duel.SendtoGrave(dg,REASON_EFFECT)
+		local dg=Duel.SelectMatchingCard(tp,Card.IsAbleToRest,tp,LOCATION_HAND,0,2,2,nil)
+		Duel.SendtoRest(dg,REASON_EFFECT)
 	end
 end

@@ -1,15 +1,15 @@
+--Ｄスケイル・ピアースソーリー
 --D-Scale Piercing Saury
 --fixed by MLD
 local s,id=GetID()
 function s.initial_effect(c)
-	--special summon
+	--Special Summon 1 "D-Scale" monster from RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetRange(LOCATION_MZONE)
-	e1:SetCountLimit(1)
 	e1:SetCost(s.spcost)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
@@ -17,14 +17,14 @@ function s.initial_effect(c)
 end
 s.listed_series={0x579}
 function s.costfilter(c)
-	return c:IsSetCard(0x579) and c:IsMonster() and c:IsAbleToGraveAsCost()
+	return c:IsSetCard(0x579) and c:IsMonster() and c:IsAbleToRestAsCost()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,1,c)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.spfilter(c,e,tp)
 	return c:IsSetCard(0x579) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -45,7 +45,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
 		e1:SetCode(EFFECT_SET_ATTACK)
 		e1:SetValue(tc:GetAttack()/2)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
+		e1:SetReset(RESET_EVENT|RESETS_STANDARD)
 		tc:RegisterEffect(e1,true)
 		Duel.SpecialSummonComplete()
 	end

@@ -1,10 +1,10 @@
 --クインテット・マジシャン
---Quintet Magician
+--Quintet Mentor
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcFunRep(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_MENTOR),5,true)
 	--spsummon condition
 	local e1=Effect.CreateEffect(c)

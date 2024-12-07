@@ -1,5 +1,5 @@
 --ガスタの神官 ムスト
---Musto, Oracle of Gusto
+--Musto, Overseer of Gusto
 local s,id=GetID()
 function s.initial_effect(c)
 	--disable

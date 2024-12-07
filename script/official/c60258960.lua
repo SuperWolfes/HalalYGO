@@ -1,8 +1,8 @@
 --伝説の爆炎使い
---Legendary Flame Lord
+--Legendary Flame Watcher
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	c:EnableCounterPermit(COUNTER_ACTIONAL)
 	--add counter
 	local e0=Effect.CreateEffect(c)

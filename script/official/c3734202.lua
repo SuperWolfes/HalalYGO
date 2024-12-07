@@ -1,5 +1,5 @@
 --ナチュルの神星樹
---Naturia Sacred Tree
+--Naturia Clean Tree
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

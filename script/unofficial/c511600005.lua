@@ -1,4 +1,4 @@
---Magicians Unite (Manga)
+--Mentors Unite (Manga)
 --マジシャンズ・クロス
 --scripted by Larry126
 local s,id=GetID()

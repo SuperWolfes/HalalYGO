@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.spop)
 	e1:SetValue(1)
 	c:RegisterEffect(e1)
-	--If summoned with above effect, special summon 2 level 4 fish monsters from GY
+	--If summoned with above effect, special summon 2 level 4 fish monsters from RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)

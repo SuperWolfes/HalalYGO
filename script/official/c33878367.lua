@@ -38,18 +38,18 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_MZONE)
 end
 function s.tgfilter(c,race,att)
-	return c:IsFaceup() and (c:IsRace(race) or c:IsAttribute(att)) and c:IsAbleToGrave()
+	return c:IsFaceup() and (c:IsRace(race) or c:IsAttribute(att)) and c:IsAbleToRest()
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<1 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local sc=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.spfilter),tp,LOCATION_REST+LOCATION_DECK,0,1,1,nil,e,tp):GetFirst()
+	local sc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST+LOCATION_DECK,0,1,1,nil,e,tp):GetFirst()
 	if not sc or Duel.SpecialSummon(sc,0,tp,tp,false,false,POS_FACEUP)<1 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_MZONE,0,1,1,nil,sc:GetRace(),sc:GetAttribute())
 	if #g>0 then
 		Duel.BreakEffect()
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end
 function s.thfilter(c)

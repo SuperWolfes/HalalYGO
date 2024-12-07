@@ -24,7 +24,7 @@ function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 	return #eg==1 and tc:IsPreviousLocation(LOCATION_REST) and tc:IsControler(tp) and tc:IsMonster()
 end
 function s.filter(c,att)
-	return not c:IsAttribute(att) and c:IsMonster() and c:IsAbleToGrave()
+	return not c:IsAttribute(att) and c:IsMonster() and c:IsAbleToRest()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsRelateToEffect(e)
@@ -37,6 +37,6 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil,e:GetLabel())
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end

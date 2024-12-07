@@ -1,5 +1,5 @@
 --デュアル・ランサー
---DUAL Lancer
+--Dual Lancer
 local s,id=GetID()
 function s.initial_effect(c)
 	Dual.AddProcedure(c)

@@ -5,8 +5,8 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Fusion Summon procedure
 	Fusion.AddProcMixN(c,true,true,s.ffilter,3)
 	--Negate the activation of card/effect
@@ -52,7 +52,7 @@ end
 function s.cfilter(c,rtype)
 	return c:IsSetCard(0x159) and (not c:IsOnField() or c:IsFaceup()) and c:IsType(rtype) and c:IsAbleToRemoveAsCost()
 end
-	--Banish 1 "Myutant" card from hand/face-up field/GY with same card type as activated card/effect as cost
+	--Banish 1 "Myutant" card from hand/face-up field/RP with same card type as activated card/effect as cost
 function s.negcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local rtype=(re:GetActiveType()&0x7)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND+LOCATION_ONFIELD+LOCATION_REST,0,1,nil,rtype) end

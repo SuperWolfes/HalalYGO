@@ -1,5 +1,5 @@
 -- 魔鍵錠－施－
--- Magikey Locking
+-- Menkey Locking
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)

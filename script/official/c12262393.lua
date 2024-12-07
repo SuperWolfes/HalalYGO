@@ -31,7 +31,7 @@ end
 s.listed_series={0x2066}
 s.listed_names={75347539}
 function s.tgfilter(c)
-	return c:IsMonster() and c:IsSetCard(0x2066) and c:IsLevelBelow(4) and c:IsAbleToGrave()
+	return c:IsMonster() and c:IsSetCard(0x2066) and c:IsLevelBelow(4) and c:IsAbleToRest()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -41,7 +41,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end
 function s.cfilter(c)

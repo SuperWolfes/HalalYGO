@@ -1,5 +1,5 @@
 -- 
--- Libromancer Geek Boy
+-- Librobouncer Geek Boy
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	-- Search 1 "Libromancer" Actional
+	-- Search 1 "Librobouncer" Actional
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND)

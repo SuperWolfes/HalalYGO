@@ -1,10 +1,9 @@
 --タイラント・プランテーション
 --Tyrant Farm
 --Scripted by Naim
-
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special summon 1 non-effect monster from GY
+	--Special summon 1 non-effect monster from RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -22,7 +21,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 end
 function s.costfilter(c,e,tp)
-	return c:IsType(TYPE_EFFECT) and (Duel.GetLocationCount(tp,LOCATION_MZONE)>0 or c:IsInMainMZone()) and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp,c)
+	return c:IsType(TYPE_EFFECT) and Duel.GetMZoneCount(tp,c)>0 and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp,c)
 end
 function s.spfilter(c,e,tp,tc)
 	return c:IsNonEffectMonster()
@@ -50,7 +49,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.spfilter),tp,LOCATION_REST,0,1,1,nil,e,tp,tc)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,0,1,1,nil,e,tp,tc)
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end

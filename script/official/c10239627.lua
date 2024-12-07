@@ -1,5 +1,5 @@
 --マジカル・アブダクター
---Magical Abductor
+--Mentoral Abductor
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(COUNTER_ACTIONAL,LOCATION_PZONE+LOCATION_MZONE)

@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,12,3)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--immune
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -60,7 +60,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_REMOVED,0,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT+REASON_RETURN)
+		Duel.SendtoRest(g,REASON_EFFECT+REASON_RETURN)
 	end
 end
 function s.atcon(e,tp,eg,ep,ev,re,r,rp)

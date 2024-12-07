@@ -1,5 +1,5 @@
 --ハイドライブ・トレランス
---Hydradrive Tolerance
+--Hyddendrive Tolerance
 --Scripted by Playmaker 772211
 --Fixed by Larry126
 local s,id=GetID()

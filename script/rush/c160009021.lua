@@ -4,7 +4,7 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Shuffle 3 monsters from opponent's GY to deck
+	--Shuffle 3 monsters from opponent's RP to deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TODECK)
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -19,7 +19,7 @@ end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsStatus(STATUS_SUMMON_TURN) and Duel.GetFieldGroupCount(tp,0,LOCATION_MZONE)>0
 end
-	--Check for card in hand to send to GY
+	--Check for card in hand to send to RP
 function s.tdcfilter(c)
 	return c:IsMonster() and c:IsAbleToDeckOrExtraAsCost()
 end
@@ -35,7 +35,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,0,LOCATION_REST,3,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,3,1-tp,LOCATION_REST)
 end
-	-- shuffle 3 monsters from your Grave Place into the Deck. to shuffle 3 monsters from opponent's GY to deck
+	-- shuffle 3 monsters from your Resting Place into the Deck. to shuffle 3 monsters from opponent's RP to deck
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)

@@ -5,7 +5,7 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--If a level 3 monster is normal summoned, special summon this card from GY
+	--If a level 3 monster is normal summoned, special summon this card from RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -49,7 +49,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,tp,0)
 end
-	--Special summon this card from GY as a tuner, banish it if it leaves, estricted to level/rank 3+ monsters
+	--Special summon this card from RP as a tuner, banish it if it leaves, estricted to level/rank 3+ monsters
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and Duel.SpecialSummonStep(c,0,tp,tp,false,false,POS_FACEUP) then
@@ -72,7 +72,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		c:RegisterEffect(e2,true)
 	end
 	Duel.SpecialSummonComplete()
-	--Gravericted to level/rank 3+ monsters
+	--Restricted to level/rank 3+ monsters
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetType(EFFECT_TYPE_FIELD)
@@ -83,7 +83,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	e3:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e3,tp)
 end
-	--Gravericted to level/rank 3+ monsters
+	--Restricted to level/rank 3+ monsters
 function s.splimit(e,c)
 	return not (c:IsLevelAbove(3) or c:IsRankAbove(3))
 end

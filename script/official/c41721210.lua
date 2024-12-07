@@ -1,18 +1,18 @@
 --竜騎士ブラック・マジシャン
---Dark Magician the Dragon Knight
+--Dark Mentor the Dragon Knight
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion material
-	c:EnableReviveLimit()
-	Fusion.AddProcMix(c,true,true,CARD_DARK_MAGICIAN,aux.FilterBoolFunctionEx(Card.IsRace,RACE_DRAGON))
+	c:EnableAwakeLimit()
+	Fusion.AddProcMix(c,true,true,CARD_DARK_MENTOR,aux.FilterBoolFunctionEx(Card.IsRace,RACE_DRAGON))
 	--Change name
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e1:SetCode(EFFECT_CHANGE_CODE)
 	e1:SetRange(LOCATION_MZONE+LOCATION_REST)
-	e1:SetValue(CARD_DARK_MAGICIAN)
+	e1:SetValue(CARD_DARK_MENTOR)
 	c:RegisterEffect(e1)
 	--Prevent effect target
 	local e3=Effect.CreateEffect(c)
@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	e3:SetTarget(aux.TargetBoolFunction(Card.IsActionalTrap))
 	e3:SetValue(aux.indoval)
 	c:RegisterEffect(e3)
-	--Prevent destruction by opponent's effect
+	--Prevent mismatching by opponent's effect
 	local e4=e3:Clone()
 	e4:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
 	e4:SetProperty(EFFECT_FLAG_SET_AVAILABLE+EFFECT_FLAG_IGNORE_IMMUNE)
@@ -32,4 +32,4 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 s.material_setcode=0x10a2
-s.listed_names={CARD_DARK_MAGICIAN}
+s.listed_names={CARD_DARK_MENTOR}

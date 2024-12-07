@@ -2,7 +2,7 @@
 --F.A. Dawn Dragster
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	--ATK increase
 	local e1=Effect.CreateEffect(c)

@@ -1,5 +1,5 @@
 --機皇兵廠オブリガード
---Meklord Army Arsenal of Obbligato
+--Mekwatcher Army Arsenal of Obbligato
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)

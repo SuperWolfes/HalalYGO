@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--fusion substitute
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetCondition(s.subcon)
 	c:RegisterEffect(e1)
 	--fusion summon summon
-	local params = {nil,Fusion.OnFieldMat,nil,nil,Fusion.ForcedHandler}
+	local params = {nil,Fusion.OnFieldMat,nil,nil,Fusion.FcoreedHandler}
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)

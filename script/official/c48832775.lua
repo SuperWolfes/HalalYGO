@@ -3,7 +3,7 @@
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	-- 2 “Dinoruffia” monsters with different names
 	Fusion.AddProcMixN(c,true,true,s.ffilter,2)
 	-- Lose ATK equal to LP

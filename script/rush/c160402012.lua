@@ -3,7 +3,7 @@
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	-- Send 2 random cards from opponent's hand to the GY
+	-- Send 2 random cards from opponent's hand to the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOREST)
@@ -25,6 +25,6 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=#g==1 and 1 or Duel.AnnounceNumberRange(tp,1,2)
 	local sg=g:RandomSelect(tp,ct)
 	if #sg>0 then
-		Duel.SendtoGrave(sg,REASON_EFFECT)
+		Duel.SendtoRest(sg,REASON_EFFECT)
 	end
 end

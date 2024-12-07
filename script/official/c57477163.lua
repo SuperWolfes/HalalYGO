@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,61173621,aux.FilterBoolFunctionEx(Card.IsSetCard,0xa9))
 	--actlimit
 	local e1=Effect.CreateEffect(c)

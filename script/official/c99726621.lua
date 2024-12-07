@@ -3,7 +3,7 @@
 --Scripted by the Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACES_BEAST_BWARRIOR_WINGB),2,4)
 	--Banish a card when summoned
 	local e1=Effect.CreateEffect(c)

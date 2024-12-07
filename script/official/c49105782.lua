@@ -4,11 +4,11 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Link summon procedure
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WIND),2)
-	--Gains 2400 ATK if opponent has no monsters in their GY
+	--Gains 2400 ATK if opponent has no monsters in their RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e1:SetCondition(s.atkcond)
 	e1:SetValue(2400)
 	c:RegisterEffect(e1)
-	--Shuffle 1 monster from opponent's GY to deck
+	--Shuffle 1 monster from opponent's RP to deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TODECK)

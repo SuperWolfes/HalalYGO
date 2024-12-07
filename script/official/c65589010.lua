@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	e3:SetTarget(s.destg)
 	e3:SetOperation(s.desop)
 	c:RegisterEffect(e3)
-	--Send to the rest place
+	--Send to the resting place
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_TOREST)
@@ -77,12 +77,12 @@ function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 	local sg=Group.CreateGroup()
 	for p=0,1 do
 		Duel.Hint(HINT_SELECTMSG,p,HINTMSG_TOREST)
-		local g=Duel.SelectMatchingCard(p,Card.IsAbleToGrave,p,LOCATION_EXTRA,0,1,1,nil)
+		local g=Duel.SelectMatchingCard(p,Card.IsAbleToRest,p,LOCATION_EXTRA,0,1,1,nil)
 		if #g>0 then
 			sg:AddCard(g:GetFirst())
 		end
 	end
 	if #sg>0 then
-		Duel.SendtoGrave(sg,REASON_EFFECT)
+		Duel.SendtoRest(sg,REASON_EFFECT)
 	end
 end

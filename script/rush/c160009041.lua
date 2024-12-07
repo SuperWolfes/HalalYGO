@@ -3,7 +3,7 @@
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	-- "Masaki the Legendary Samurai" + "Century Ancient Wooden Sword"
 	Fusion.AddProcMix(c,true,true,160201007,160009009)
 	-- Destroy

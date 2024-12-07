@@ -1,10 +1,10 @@
 --聖刻天龍－エネアード
---Hieratic Heavenly Dragon Overlord of Heliopolis
+--Hieratic Spectrumly Dragon Overwatcher of Heliopolis
 local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz summon
 	Xyz.AddProcedure(c,nil,8,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Negate
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

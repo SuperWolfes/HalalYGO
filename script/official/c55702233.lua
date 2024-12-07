@@ -1,10 +1,10 @@
 --生きる偲びのシルキィ
---Ret-time Reviver Emit-ter
+--Ret-time Awaker Emit-ter
 --Scripted by AlphaKretin
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special summon itself from hand or GY
+	--Special summon itself from hand or RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_POSITION+CATEGORY_SPECIAL_SUMMON)

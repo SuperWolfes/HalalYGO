@@ -17,7 +17,7 @@ function s.VirtualWorldStart()
 	e2:SetCode(EFFECT_CANNOT_ATTACK)
 	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE) 
 	e2:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
-	e2:SetTarget(function(e,c) return c:IsStatus(STATUS_SPSUMMON_TURN) and (c:IsSummonLocation(LOCATION_EXTRA) or (c:IsAttribute(ATTRIBUTE_DIVINE) and c:IsSummonLocation(LOCATION_REST))) and not c:IsHasEffect(511004016) end)
+	e2:SetTarget(function(e,c) return c:IsStatus(STATUS_SPSUMMON_TURN) and (c:IsSummonLocation(LOCATION_EXTRA) or (c:IsAttribute(ATTRIBUTE_MEGA) and c:IsSummonLocation(LOCATION_REST))) and not c:IsHasEffect(511004016) end)
 	Duel.RegisterEffect(e2,0)
 	--Deck Master
 	local dm=Duel.CreateToken(0,153000000)

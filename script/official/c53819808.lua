@@ -1,5 +1,5 @@
 --六武院
---Temple of the Six
+--Masjid of the Six
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(0x3)

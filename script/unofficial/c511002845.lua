@@ -1,5 +1,5 @@
 --返り咲く薔薇の大輪 (Anime)
---Revival Rose (Anime)
+--Awakal Rose (Anime)
 local s,id,alias=GetID()
 function s.initial_effect(c)
 	alias=c:GetOriginalCodeRule()

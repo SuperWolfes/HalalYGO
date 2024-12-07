@@ -6,8 +6,14 @@
 -Monk- -> Imam
 -Nuit- -> Suit
 -Sage- -> looker
+-Roll- -> Play
+-ROLL- -> PLAY
+-roll- -> play
 -Geb- -> jeo
 -Imp- -> Impression
+-die- -> suffice
+-DIE- -> Suffice
+-Die- -> Suffice
 -El- -> Le
 -GY- -> RP
 -Ra- -> raga
@@ -54,11 +60,16 @@ Destruction -> Mismatching
 Different Dimension -> Same Dimension
 Darklord -> Darkwarden
 Denglong -> Pingpong
+Divinity -> Megali
 Destiny -> Destrudic
 Divine -> Mega
+DIVINE -> MEGA
 Deity -> Being
 Demon -> Warden
 Devil -> Well
+DIE(, . - ; : s'') -> Suffice
+Die(, . - ; : s'') -> Suffice
+Divin -> Meg
 Djinn -> Dlilt
 Druid -> Droid
 Dice -> Suffice --done
@@ -187,7 +198,7 @@ Phoenix -> Bird --done
 Psychic -> Mental --done
 Priest -> Imam
 Pluto -> Polar
-Phant -> Illuso --do no do all caps because of flying ELEPHANT win
+Phant -> Illuso --do no do all caps because of flying ELEPHANT win in the scripts
 Ponix -> Juni
 Prana -> Posta
 Pulau -> Poulaw 
@@ -266,6 +277,9 @@ Yaksha -> Yaijur
 Yang -> Bang
 Yata -> Yardi
 Yazi -> Yaya
-Zombie-Type -> Toxic-TypeZodiac -> Zoopac
-Zombie -> Contamined -- Already done but messed the conversion, should have done zombie type instead first (skipping to save time and since it doesnt actually chage functionality')
+Zombie-Type -> Toxic-Type
+Zodiac -> Zoopac
+Zombie -> Toxic -- used to be Contaminated
 Zefra -> Zebra
+die(, . - ; : s'') -> Suffice
+six-sided -> game of

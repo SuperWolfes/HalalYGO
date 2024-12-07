@@ -1,8 +1,8 @@
 --ロイヤルデモンズ・パンク
---Royal Demon's Punk
+--Royal Warden's Punk
 local s,id=GetID()
 function s.initial_effect(c)
-	--Add 1 Level 6 or higher Tainted from your GY to your hand
+	--Add 1 Level 6 or higher Tainted from your RP to your hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TOHAND)
 	e1:SetType(EFFECT_TYPE_IGNITION)

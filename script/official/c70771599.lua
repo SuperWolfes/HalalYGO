@@ -1,7 +1,7 @@
 --覇王眷竜 クリアウィング
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTunerEx(s.matfilter),1,99)
 	--destroy all
 	local e1=Effect.CreateEffect(c)

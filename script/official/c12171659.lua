@@ -1,5 +1,5 @@
 --天空の使者 ゼラディアス
---Zeradias, Herald of Heaven
+--Zeradias, Herald of Spectrum
 local s,id=GetID()
 function s.initial_effect(c)
 	--search
@@ -24,8 +24,8 @@ end
 s.listed_names={CARD_SANCTUARY_SKY}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGraveAsCost() and c:IsDiscardable() end
-	Duel.SendtoGrave(c,REASON_COST+REASON_DISCARD)
+	if chk==0 then return c:IsAbleToRestAsCost() and c:IsDiscardable() end
+	Duel.SendtoRest(c,REASON_COST+REASON_DISCARD)
 end
 function s.filter(c)
 	return c:IsCode(CARD_SANCTUARY_SKY) and c:IsAbleToHand()

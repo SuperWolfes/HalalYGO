@@ -1,5 +1,5 @@
 --カオス・ネクロマンサー
---Chaos Necromancer
+--Chaos Necrobouncer
 local s,id=GetID()
 function s.initial_effect(c)
 	--attack

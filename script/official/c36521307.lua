@@ -33,13 +33,13 @@ end
 s.listed_series={0x132}
 s.listed_names={id}
 function s.spcfilter(c)
-	return c:IsSetCard(0x132) and c:IsMonster() and not c:IsCode(id) and c:IsAbleToGraveAsCost()
+	return c:IsSetCard(0x132) and c:IsMonster() and not c:IsCode(id) and c:IsAbleToRestAsCost()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.spcfilter,tp,LOCATION_DECK,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.spcfilter,tp,LOCATION_DECK,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

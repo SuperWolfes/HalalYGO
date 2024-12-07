@@ -3,7 +3,7 @@
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	-- 1 "Ultimate Crystal" Monster + 7 "Crystal Beast" Monsters
 	Fusion.AddProcMixRep(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x1034),7,7,aux.FilterBoolFunctionEx(Card.IsSetCard,0x2034))
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,s.contactlim,s.contactcon)

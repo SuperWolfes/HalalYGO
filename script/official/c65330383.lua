@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
 	Link.AddProcedure(c,nil,2,99,s.lcheck)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Set
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetCondition(s.setcon)
 	e1:SetCost(s.setcost)
 	e1:SetTarget(s.settg)
-	e1:SetOperation(s.setop)
+	e1:SetOperation(s.vetop)
 	c:RegisterEffect(e1)
 	--Cannot activate
 	local e2=Effect.CreateEffect(c)
@@ -57,7 +57,7 @@ function s.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if e:GetLabel()==1 then cat=cat+CATEGORY_DRAW end
 	e:SetCategory(cat)
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) and tc:IsSSetable() and Duel.SSet(tp,tc)>0 then
 		--Cannot be activated this turn

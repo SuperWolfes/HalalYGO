@@ -1,4 +1,4 @@
---Guardian-Colored Eyes
+--Dual-Colored Eyes
 --fixed by Larry126
 local s,id=GetID()
 function s.initial_effect(c)

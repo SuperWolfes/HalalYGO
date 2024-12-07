@@ -1,5 +1,5 @@
 --ハイドライブ・サイクル
---Hydradrive Cycle (Anime)
+--Hyddendrive Cycle (Anime)
 --scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)

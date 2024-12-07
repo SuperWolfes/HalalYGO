@@ -1,5 +1,5 @@
 --巨神竜の遺跡
---Ruins of the Divine Dragon Lords
+--Ruins of the Mega Dragon Watchers
 local s,id=GetID()
 function s.initial_effect(c)
 	--activate
@@ -81,14 +81,14 @@ function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.tkcostfilter(c,ft)
-	return c:IsFaceup() and c:IsAbleToGraveAsCost() and (ft>0 or (c:IsLocation(LOCATION_MZONE) and c:GetSequence()<5))
+	return c:IsFaceup() and c:IsAbleToRestAsCost() and (ft>0 or (c:IsLocation(LOCATION_MZONE) and c:GetSequence()<5))
 end
 function s.tkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if chk==0 then return ft>-1 and Duel.IsExistingMatchingCard(s.tkcostfilter,tp,LOCATION_ONFIELD,0,1,e:GetHandler(),ft) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tkcostfilter,tp,LOCATION_ONFIELD,0,1,1,e:GetHandler(),ft)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.tktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0,TYPES_TOKEN,0,0,1,RACE_DRAGON,ATTRIBUTE_LIGHT) end
@@ -103,14 +103,14 @@ function s.tkop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.thcostfilter(c)
-	return c:IsRace(RACE_DRAGON) and (c:IsLevel(7) or c:IsLevel(8)) and c:IsAbleToGraveAsCost()
+	return c:IsRace(RACE_DRAGON) and (c:IsLevel(7) or c:IsLevel(8)) and c:IsAbleToRestAsCost()
 		and (c:IsLocation(LOCATION_HAND) or c:IsFaceup())
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thcostfilter,tp,LOCATION_MZONE+LOCATION_HAND,0,1,e:GetHandler()) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.thcostfilter,tp,LOCATION_MZONE+LOCATION_HAND,0,1,1,e:GetHandler())
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsAbleToHand() end

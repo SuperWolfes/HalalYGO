@@ -16,7 +16,7 @@ function s.cfilter(c,e,tp)
 	local te,eg,ep,ev,re,r,rp=c:CheckActivateEffect(true,true,true)
 	if not te then return false end
 	local target=te:GetTarget()
-	return c:GetType()==TYPE_ACTIONAL and c:IsAbleToGraveAsCost() and (not target or target(e,tp,eg,ep,ev,re,r,rp,0))
+	return c:GetType()==TYPE_ACTIONAL and c:IsAbleToRestAsCost() and (not target or target(e,tp,eg,ep,ev,re,r,rp,0))
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(1)
@@ -31,7 +31,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND,0,1,1,nil,e,tp)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	local te=g:GetFirst():CheckActivateEffect(true,true,false)
 	Duel.ClearTargetCard()
 	local tg=te:GetTarget()

@@ -27,7 +27,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ec=re:GetHandler()
 	Duel.NegateActivation(ev)
 	if re:GetHandler():IsRelateToEffect(re) then
-		ec:CancelToGrave()
+		ec:CancelToRest()
 		Duel.SendtoDeck(ec,nil,2,REASON_EFFECT)
 		if not ec:IsLocation(LOCATION_DECK) then return end
 		Duel.ShuffleDeck(1-tp)

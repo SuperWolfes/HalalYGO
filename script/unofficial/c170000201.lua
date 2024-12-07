@@ -79,9 +79,9 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=2 or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
-	local g1=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.spfilter),tp,0x33,0,nil,e,tp,80019195)
-	local g2=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.spfilter),tp,0x33,0,nil,e,tp,85800949)
-	local g3=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.spfilter),tp,0x33,0,nil,e,tp,84565800)
+	local g1=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,0x33,0,nil,e,tp,80019195)
+	local g2=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,0x33,0,nil,e,tp,85800949)
+	local g3=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,0x33,0,nil,e,tp,84565800)
 	if #g1>0 and #g2>0 and #g3>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local sg1=g1:Select(tp,1,1,nil)
@@ -116,5 +116,5 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 	Duel.BreakEffect()
 	Duel.Destroy(g,REASON_EFFECT)
-	Duel.SendtoGrave(g,REASON_EFFECT)
+	Duel.SendtoRest(g,REASON_EFFECT)
 end

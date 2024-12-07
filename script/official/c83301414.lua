@@ -1,5 +1,5 @@
 --ウィッチクラフト・サボタージュ
---Witchcrafter Holiday
+--Mintcrafter Holiday
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
@@ -33,7 +33,7 @@ end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
 	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter(chkc,e,tp) end
-	--Excluding itself in the target check here is needed for a proper interaction with "Witchcrafter Genni" [64756282]
+	--Excluding itself in the target check here is needed for a proper interaction with "Mintcrafter Genni" [64756282]
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,0,1,c,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)

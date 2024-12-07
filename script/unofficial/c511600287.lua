@@ -35,7 +35,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.BreakEffect()
 		if Duel.Draw(p,d,REASON_EFFECT)==d then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-			Duel.SendtoGrave(Duel.GetOperatedGroup():FilterSelect(tp,Card.IsAbleToGrave,1,1,nil),REASON_EFFECT)
+			Duel.SendtoRest(Duel.GetOperatedGroup():FilterSelect(tp,Card.IsAbleToRest,1,1,nil),REASON_EFFECT)
 			Duel.ShuffleHand(p)
 		end
 	end

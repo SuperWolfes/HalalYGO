@@ -2,7 +2,7 @@
 --D/D/D Wave High King Caesar
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Xyz Summon procedure
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_TAINTED),6,2)
 	--Negate the activation of an effect that includes Special Summoning

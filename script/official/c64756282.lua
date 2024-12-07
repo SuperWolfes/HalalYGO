@@ -1,9 +1,9 @@
 --ウィッチクラフト・ジェニー
---Witchcrafter Genni
+--Mintcrafter Genni
 --Scripted by ahtelel
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon 1 "Witchcrafter" from your Deck
+	--Special Summon 1 "Mintcrafter" from your Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -13,25 +13,24 @@ function s.initial_effect(c)
 	e1:SetCountLimit(1,id)
 	e1:SetHintTiming(0,TIMING_MAIN_END)
 	e1:SetCondition(function() return Duel.IsMainPhase() end)
-	e1:SetCost(aux.WitchcrafterDiscardAndReleaseCost)
+	e1:SetCost(aux.MintcrafterDiscardAndReleaseCost)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Copy the effect of 1 "Witchcrafter" Actional in your GY
+	--Copy the effect of 1 "Mintcrafter" Actional in your RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,{id,1})
-	e2:SetCost(s.cost)
 	e2:SetTarget(s.target)
 	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
 end
 s.listed_names={id}
-s.listed_series={0x128}
+s.listed_series={SET_MINTCRAFTER}
 function s.spfilter(c,e,tp)
-	return c:IsSetCard(0x128) and not c:IsCode(id) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsSetCard(SET_MINTCRAFTER) and not c:IsCode(id) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetMZoneCount(tp,e:GetHandler())>0
@@ -46,86 +45,39 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end
 end
-function s.filter(c)
-	return c:IsSetCard(0x128) and c:IsActional() and c:IsAbleToRemoveAsCost()
-		and c:CheckActivateEffect(false,true,false)~=nil and c:CheckActivateEffect(false,true,false):GetOperation()~=nil
-end
-function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local c=e:GetHandler()
-	local chain=Duel.GetCurrentChain()
-	if chk==0 then return c:IsAbleToRemoveAsCost()
-		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,1,nil,e,tp,chk,chain) end
-	chain=chain-1
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_REST,0,1,1,nil,e,tp,chk,chain)
-	local te,teg,tep,tev,tre,tr,trp=g:GetFirst():CheckActivateEffect(false,true,true)
-	if not te then te=g:GetFirst():GetActivateEffect() end
-	if te:GetCode()==EVENT_CHAINING then
-		if chain<=0 then return false end
-		local te2,p=Duel.GetChainInfo(chain,CHAININFO_TRIGGERING_EFFECT,CHAININFO_TRIGGERING_PLAYER)
-		local tc=te2:GetHandler()
-		local g=Group.FromCards(tc)
-		teg,tep,tev,tre,tr,trp=g,p,chain,te2,REASON_EFFECT,p
-	end
-	s[Duel.GetCurrentChain()]=te
-	g:AddCard(c)
-	Duel.Remove(g,POS_FACEUP,REASON_COST)
-	e:SetTarget(s.targetchk(teg,tep,tev,tre,tr,trp))
-	e:SetOperation(s.operationchk(teg,tep,tev,tre,tr,trp))
-	local e1=Effect.CreateEffect(e:GetHandler())
-	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e1:SetCode(EVENT_CHAIN_SOLVED)
-	e1:SetReset(RESET_CHAIN)
-	e1:SetLabelObject(e)
-	e1:SetOperation(s.resetop)
-	Duel.RegisterEffect(e1,tp)
-end
-function s.targetchk(teg,tep,tev,tre,tr,trp)
-	return function(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-				local te=s[Duel.GetCurrentChain()]
-				if chkc then
-					local tg=te:GetTarget()
-					return tg(e,tp,teg,tep,tev,tre,tr,trp,0,true)
-				end
-				if chk==0 then return true end
-				if not te then return end
-				e:SetCategory(te:GetCategory())
-				e:SetProperty(te:GetProperty())
-				local tg=te:GetTarget()
-				if tg then tg(e,tp,teg,tep,tev,tre,tr,trp,1) end
-			end
-end
-function s.operationchk(teg,tep,tev,tre,tr,trp)
-	return function(e,tp,eg,ep,ev,re,r,rp)
-				local te=s[Duel.GetCurrentChain()]
-				if not te then return end
-				local op=te:GetOperation()
-				if op then op(e,tp,teg,tep,tev,tre,tr,trp) end
-			end
-end
-function s.resetop(e,tp,eg,ep,ev,re,r,rp)
-	local te=e:GetLabelObject()
-	if te then
-		te:SetTarget(s.target)
-		te:SetOperation(s.operation)
-	end
+function s.copyfilter(c)
+	return c:IsSetCard(SET_MINTCRAFTER) and c:IsActional() and c:IsAbleToRemoveAsCost()
+		and c:CheckActivateEffect(false,true,false)~=nil
+		and c:CheckActivateEffect(false,true,false):GetOperation()~=nil
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	local te=s[Duel.GetCurrentChain()]
 	if chkc then
-		local tg=te:GetTarget()
-		return tg(e,tp,eg,ep,ev,re,r,rp,0,true)
+		local te=e:GetLabelObject()
+		return tg and tg(e,tp,eg,ep,ev,re,r,rp,0,chkc)
 	end
-	if chk==0 then return true end
-	if not te then return end
-	e:SetProperty(te:GetProperty())
+	local c=e:GetHandler()
+	if chk==0 then return c:IsAbleToRemoveAsCost() and Duel.IsExistingMatchingCard(s.copyfilter,tp,LOCATION_REST,0,1,nil) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
+	local tc=Duel.SelectMatchingCard(tp,s.copyfilter,tp,LOCATION_REST,0,1,1,nil):GetFirst()
+	Duel.Remove(Group.FromCards(tc,c),POS_FACEUP,REASON_COST)
+	local te=tc:CheckActivateEffect(true,true,false)
+	e:SetLabel(te:GetLabel())
+	e:SetLabelObject(te:GetLabelObject())
 	local tg=te:GetTarget()
 	if tg then tg(e,tp,eg,ep,ev,re,r,rp,1) end
+	te:SetLabel(e:GetLabel())
+	te:SetLabelObject(e:GetLabelObject())
+	e:SetLabelObject(te)
 	Duel.ClearOperationInfo(0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local te=s[Duel.GetCurrentChain()]
-	if not te then return end
-	local op=te:GetOperation()
-	if op then op(e,tp,eg,ep,ev,re,r,rp) end
+	local te=e:GetLabelObject()
+	if te then
+		e:SetLabel(te:GetLabel())
+		e:SetLabelObject(te:GetLabelObject())
+		local op=te:GetOperation()
+		if op then op(e,tp,eg,ep,ev,re,r,rp) end
+		te:SetLabel(e:GetLabel())
+		te:SetLabelObject(e:GetLabelObject())
+	end
 end

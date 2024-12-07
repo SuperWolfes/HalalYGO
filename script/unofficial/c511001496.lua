@@ -21,16 +21,16 @@ end
 s.listed_series={0x40}
 s.listed_names={id}
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsCode(id) and c:IsAbleToGraveAsCost()
+	return c:IsFaceup() and c:IsCode(id) and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGraveAsCost() 
+	if chk==0 then return c:IsAbleToRestAsCost() 
 		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,0,1,c) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_ONFIELD,0,1,1,c)
 	g:AddCard(c)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.afilter(c)
 	return c:IsSetCard(0x40) and c:IsMonster() and c:IsAbleToHand()

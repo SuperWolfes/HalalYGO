@@ -1,5 +1,5 @@
 --時読みの魔術師 (Anime)
---Timegazer Magician (Anime)
+--Timegazer Mentor (Anime)
 --fixed by MLD
 local s,id=GetID()
 function s.initial_effect(c)

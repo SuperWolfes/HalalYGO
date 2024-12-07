@@ -1,5 +1,5 @@
 --機巧蛙－磐盾多邇具久
---Gizmek Taniguku
+--Gizmek Tanned
 --scripted by Rundas
 local s,id=GetID()
 function s.initial_effect(c)

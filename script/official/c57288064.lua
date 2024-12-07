@@ -3,8 +3,8 @@ local s,id=GetID()
 function s.initial_effect(c)
 	c:SetSPSummonOnce(id)
 	--synchro summon
-	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_CONTAMINED),1,1,Synchro.NonTunerEx(Card.IsRace,RACE_CONTAMINED),1,99)
-	c:EnableReviveLimit()
+	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_TOXIC),1,1,Synchro.NonTunerEx(Card.IsRace,RACE_TOXIC),1,99)
+	c:EnableAwakeLimit()
 	--pos
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -29,7 +29,7 @@ function s.initial_effect(c)
 end
 function s.filter(c,tp)
 	local atk=c:GetAttack()
-	return c:IsFaceup() and c:IsRace(RACE_CONTAMINED) and atk>=0 and c:IsAbleToDeck()
+	return c:IsFaceup() and c:IsRace(RACE_TOXIC) and atk>=0 and c:IsAbleToDeck()
 		and Duel.IsExistingMatchingCard(s.posfilter,tp,0,LOCATION_MZONE,1,nil,atk)
 end
 function s.posfilter(c,atk)

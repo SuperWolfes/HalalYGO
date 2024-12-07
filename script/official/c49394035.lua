@@ -4,7 +4,7 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special summon itself from GY
+	--Special summon itself from RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -28,7 +28,7 @@ end
 s.listed_series={0x106}
 
 function s.cfilter(c)
-	return c:IsRace(RACE_CONTAMINED) and c:IsAbleToRemoveAsCost()
+	return c:IsRace(RACE_TOXIC) and c:IsAbleToRemoveAsCost()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,e:GetHandler()) end

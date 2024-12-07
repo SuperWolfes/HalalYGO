@@ -5,10 +5,10 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
+	--Must be properly summoned before awaking
 	Link.AddProcedure(c,s.matfilter,2,2)
 	--Link summon procedure
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--If your cyberse monster battles, negate all other card effects on the field, also use original ATK/DEF
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e1:SetCondition(s.condition)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
-	--If sent to GY as link material, that link monster can make a second attack
+	--If sent to RP as link material, that link monster can make a second attack
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_BE_MATERIAL)

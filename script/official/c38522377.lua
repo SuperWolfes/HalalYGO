@@ -1,8 +1,8 @@
 --機皇神龍アステリスク
---Meklord Astro Dragon Asterisk
+--Mekwatcher Astro Dragon Asterisk
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -54,7 +54,7 @@ end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS):Filter(s.atkfilter,nil,e)
-	Duel.SendtoGrave(g,REASON_EFFECT)
+	Duel.SendtoRest(g,REASON_EFFECT)
 	local ct=Duel.GetOperatedGroup():Filter(Card.IsLocation,nil,LOCATION_REST)
 	if #ct>0 then
 		if not c:IsRelateToEffect(e) or c:IsFacedown() then return end

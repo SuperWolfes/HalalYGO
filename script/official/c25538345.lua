@@ -4,7 +4,7 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send 1 "Illusion Knights" card from deck to GY
+	--Send 1 "Illusion Knights" card from deck to RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOREST)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.tgtg)
 	e1:SetOperation(s.tgop)
 	c:RegisterEffect(e1)
-	--Special summon itself from GY if a "Illusion Knights" card is banished from GY
+	--Special summon itself from RP if a "Illusion Knights" card is banished from RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -38,7 +38,7 @@ function s.tgcost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.tgfilter(c)
 	return ((c:IsSetCard(0x10db) and c:IsMonster()) or (c:IsSetCard(0xdb) and c:IsActionalTrap()))
-		and not c:IsCode(id) and c:IsAbleToGrave()
+		and not c:IsCode(id) and c:IsAbleToRest()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -48,7 +48,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end
 function s.cfilter(c,tp)

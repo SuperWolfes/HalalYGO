@@ -1,5 +1,5 @@
 --無差別破壊
---Blind Destruction
+--Blind Mismatching
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.rdop)
 	c:RegisterEffect(e2)
 end
-s.roll_suffice=true
+s.roll_dice=true
 function s.rdcon(e,tp,eg,ep,ev,re,r,rp)
 	return tp==Duel.GetTurnPlayer()
 end
@@ -38,7 +38,7 @@ function s.rdfilter(c,lv)
 end
 function s.rdop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
-	local d1=Duel.TossSuffice(tp,1)
+	local d1=Duel.TossDice(tp,1)
 	local g=Duel.GetMatchingGroup(s.rdfilter,tp,LOCATION_MZONE,LOCATION_MZONE,nil,d1)
 	Duel.Destroy(g,REASON_EFFECT)
 end

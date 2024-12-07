@@ -2,7 +2,7 @@
 --Miss Fusion
 local s,id=GetID()
 function s.initial_effect(c)
-	local e1=Fusion.CreateSummonEff(c,nil,Fusion.OnFieldMat(aux.FilterBoolFunction(Card.IsRace,RACE_CONTAMINED)),s.fextra,s.extraop,nil,nil,nil,nil,nil,nil,nil,nil,nil,s.extratg)
+	local e1=Fusion.CreateSummonEff(c,nil,Fusion.OnFieldMat(aux.FilterBoolFunction(Card.IsRace,RACE_TOXIC)),s.fextra,s.extraop,nil,nil,nil,nil,nil,nil,nil,nil,nil,s.extratg)
 	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
 	c:RegisterEffect(e1)
 end
@@ -20,7 +20,7 @@ function s.fextra(e,tp,mg)
 	return nil
 end
 function s.exfilter0(c)
-	return c:IsRace(RACE_CONTAMINED) and c:IsAbleToRemove()
+	return c:IsRace(RACE_TOXIC) and c:IsAbleToRemove()
 end
 function s.extraop(e,tc,tp,sg)
 	local rg=sg:Filter(Card.IsLocation,nil,LOCATION_HAND_DECK_REST)

@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,160204031,160004017)
 	--Gain LP
 	local e1=Effect.CreateEffect(c)
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.tgfilter(c)
-	return c:IsActionalTrap() and c:IsAbleToGraveAsCost()
+	return c:IsActionalTrap() and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_HAND,0,1,nil) end
@@ -34,7 +34,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local ctdeck=Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)
 	if ctdeck>3 then ctdeck=3 end 
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_HAND,0,1,ctdeck,nil)
-	local count=Duel.SendtoGrave(g,REASON_COST)
+	local count=Duel.SendtoRest(g,REASON_COST)
 	--Effect
 	Duel.Draw(tp,count,REASON_EFFECT)
 	if count>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then

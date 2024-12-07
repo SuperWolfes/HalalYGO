@@ -1,7 +1,7 @@
 --覇王眷竜ダーク・リベリオン
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Xyz.AddProcedure(c,s.matfilter,4,2)
 	--change atk
 	local e1=Effect.CreateEffect(c)

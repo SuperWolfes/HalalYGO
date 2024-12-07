@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcCodeFun(c,CARD_REDEYES_B_DRAGON,aux.FilterBoolFunction(Card.IsRace,RACE_WARRIOR),1,true)
 	--Equip
 	local e1=Effect.CreateEffect(c)
@@ -99,13 +99,13 @@ function s.ngcon(e,tp,eg,ep,ev,re,r,rp)
 	return g and g:IsExists(s.ngcfilter,1,nil,tp) and Duel.IsChainNegatable(ev)
 end
 function s.ngfilter(c,e,tp)
-	return c:IsType(TYPE_EQUIP) and c:IsAbleToGraveAsCost()
+	return c:IsType(TYPE_EQUIP) and c:IsAbleToRestAsCost()
 end
 function s.ngcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.ngfilter,tp,LOCATION_SZONE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.ngfilter,tp,LOCATION_SZONE,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.ngtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

@@ -1,5 +1,5 @@
 --影光の聖選士
---Lashaddoll Incarnation
+--Lashaddoll Incorporation
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

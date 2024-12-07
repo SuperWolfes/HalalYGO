@@ -1,10 +1,10 @@
 --ネフティスの繋ぎ手
---Conductor of Nephthys
+--Conductor of Nepolonis
 --Scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
-	--Special Summon 1 "Nephthys" Locked from your hand/Deck
+	c:EnableAwakeLimit()
+	--Special Summon 1 "Nepolonis" Locked from your hand/Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Register if Tributed by a "Nephthys" card's effect
+	--Register if Tributed by a "Nepolonis" card's effect
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_DESTROY)
@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.regtg)
 	e2:SetOperation(s.regop)
 	c:RegisterEffect(e2)
-	--Register if destroyed by a "Nephthys" card's effect
+	--Register if destroyed by a "Nepolonis" card's effect
 	local e3=e2:Clone()
 	e3:SetCode(EVENT_DESTROYED)
 	c:RegisterEffect(e3)
@@ -62,7 +62,7 @@ function s.regtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=Duel.GetCurrentPhase()==PHASE_STANDBY and 2 or 1
-	--Destroy up to 3 "Nephthys" cards from your hand/Deck/field
+	--Destroy up to 3 "Nepolonis" cards from your hand/Deck/field
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e1:SetCode(EVENT_PHASE+PHASE_STANDBY)

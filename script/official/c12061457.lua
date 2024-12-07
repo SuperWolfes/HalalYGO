@@ -1,9 +1,9 @@
 --ソウル・シザー
---Soul Scissors
+--Miss Scissors
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon itself from the GY
+	--Special Summon itself from the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)

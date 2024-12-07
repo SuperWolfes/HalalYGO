@@ -1,17 +1,17 @@
 --超重荒神スサノ－O (Anime)
---Superheavy Samurai Warlord Susanowo (Anime)
+--Superheavy Samurai Warwatcher Susanowo (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Synchro summon
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTunerEx(Card.IsSetCard,0x9a),1,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Attack while in Defense position
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_DEFENSE_ATTACK)
 	e1:SetValue(1)
 	c:RegisterEffect(e1)
-	--Activate 1 Actional from opponent's GY
+	--Activate 1 Actional from opponent's RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetType(EFFECT_TYPE_QUICK_O)
@@ -66,21 +66,21 @@ function s.acop(e,tp,eg,ep,ev,re,r,rp)
 		local loc=LOCATION_SZONE
 		if (tpe&TYPE_FIELD)~=0 then
 			loc=LOCATION_FZONE
-			local fc=Duel.GetFieldCard(1-tp,LOCATION_SZONE,5)
+			local fc=Duel.GetFieldCard(1-tp,LOCATION_FZONE,0)
 			if Duel.IsDuelType(DUEL_1_FIELD) then
 				if fc then Duel.Destroy(fc,REASON_RULE) end
-				fc=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
-				if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
+				fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
+				if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
 			else
-				fc=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
-				if fc and Duel.SendtoGrave(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
+				fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
+				if fc and Duel.SendtoRest(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
 			end
 		end
 		Duel.MoveToField(tc,tp,tp,loc,POS_FACEUP,true)
 		Duel.Hint(HINT_CARD,0,tc:GetCode())
 		tc:CreateEffectRelation(te)
 		if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 and not tc:IsHasEffect(EFFECT_REMAIN_FIELD) then
-			tc:CancelToGrave(false)
+			tc:CancelToRest(false)
 		end
 		if co then co(te,tp,eg,ep,ev,re,r,rp,1) end
 		if tg then tg(te,tp,eg,ep,ev,re,r,rp,1) end

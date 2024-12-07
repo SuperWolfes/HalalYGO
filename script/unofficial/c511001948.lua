@@ -1,10 +1,10 @@
 --Ｂ・Ｆ－決戦のビッグ・バリスタ
---Battlewasp - Ballista the Armageddon
+--Battlewasp - Ballista the Cataclysm
 --updated by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	--atk down
 	local e2=Effect.CreateEffect(c)

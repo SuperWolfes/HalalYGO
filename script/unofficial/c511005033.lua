@@ -1,4 +1,4 @@
---Line World Revival
+--Line World Awakal
 --original script by Shad3
 local s,id=GetID()
 function s.initial_effect(c)

@@ -15,7 +15,7 @@ function s.initial_effect(c)
 end
 s.listed_names={91027843}
 s.listed_series={0x12b}
---Special Summon from GY filter
+--Special Summon from RP filter
 function s.spgfilter(c,e,tp)
 	return c:IsSetCard(0x12b) and not c:IsType(TYPE_LINK) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end

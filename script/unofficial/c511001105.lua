@@ -36,7 +36,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.Remove(tc,POS_FACEUP,REASON_EFFECT)~=0 and sumtype==SUMMON_TYPE_SYNCHRO
 		and ct>0 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)
 		and ct<=Duel.GetLocationCount(tp,LOCATION_MZONE)
-		and mg:FilterCount(aux.GraveValleyFilter(s.mgfilter),nil,e,tp,tc)==ct
+		and mg:FilterCount(aux.NecroValleyFilter(s.mgfilter),nil,e,tp,tc)==ct
 		and Duel.SelectYesNo(tp,aux.Stringid(32441317,0)) then
 		Duel.BreakEffect()
 		Duel.SpecialSummon(mg,0,tp,tp,false,false,POS_FACEUP)

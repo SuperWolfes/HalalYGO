@@ -1,5 +1,5 @@
 --ロイヤルデモンズ・フェイザー
---Royal Demon’s Phaser
+--Royal Warden’s Phaser
 local s,id=GetID()
 function s.initial_effect(c)
 	--Special summon
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
 end
 function s.filter(c)
 	return c:IsFaceup() and c:IsLevelAbove(7) and c:IsRace(RACE_TAINTED)
@@ -34,7 +34,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if Duel.SendtoGrave(c,REASON_COST)~=0 then
+	if Duel.SendtoRest(c,REASON_COST)~=0 then
 		--Effect
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp)

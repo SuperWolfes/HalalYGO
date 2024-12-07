@@ -17,7 +17,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return tc:IsControler(1-tp) and Duel.GetAttackTarget()==nil
 end
 function s.cfilter(c)
-	return c:GetAttack()>0 and c:IsRace(RACE_WARRIOR) and c:IsAbleToGraveAsCost()
+	return c:GetAttack()>0 and c:IsRace(RACE_WARRIOR) and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(1)
@@ -32,7 +32,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND,0,1,1,nil)
 	local atk=g:GetFirst():GetBaseAttack()
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	Duel.SetTargetParam(atk)
 	Duel.SetTargetCard(tc)
 end

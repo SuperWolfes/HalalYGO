@@ -1,5 +1,5 @@
 --RUM－アストラル・フォース
---Rank-Up-Magic Astral Force
+--Rank-Up-Ment Astellar Fcoree
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

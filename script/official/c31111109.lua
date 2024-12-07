@@ -1,9 +1,9 @@
 --E・HERO ゴッド・ネオス
---Elemental HERO Divine Neos
+--Elemental HERO Mega Neos
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMixRep(c,true,true,s.ffilter,2,2,aux.FilterBoolFunctionEx(Card.IsSetCard,0x9),aux.FilterBoolFunctionEx(Card.IsSetCard,0x1f),aux.FilterBoolFunctionEx(Card.IsSetCard,0x8))
 	--copy
 	local e2=Effect.CreateEffect(c)

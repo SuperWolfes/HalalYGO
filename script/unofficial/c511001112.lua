@@ -1,11 +1,13 @@
---機械じかけのマジックミラー
---Magical Trick Mirror
+--機械じかけのマジックミラー (Anime)
+--Mentoral Trick Mirror (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
-	--copy Actional
+	--Activate
 	local e1=Effect.CreateEffect(c)
+	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_ATTACK_ANNOUNCE)
+	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetCondition(s.condition)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
@@ -28,8 +30,8 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REST) or chkc:IsLocation(LOCATION_MZONE) and chkc:GetControler()~=tp and s.filter(chkc) end
 	if chk==0 then return Duel.IsExistingTarget(s.cfilter,tp,0,LOCATION_REST,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectTarget(tp,s.filter,tp,0,LOCATION_REST,1,1,nil)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
+	Duel.SelectTarget(tp,s.filter,tp,0,LOCATION_REST,1,1,nil)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -41,7 +43,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_CHANGE_TYPE)
 		e1:SetValue(tpe)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
+		e1:SetReset(RESET_EVENT|RESETS_STANDARD&~RESET_TURN_SET)
 		c:RegisterEffect(e1)
 		local te=tc:GetActivateEffect()
 		local tg=te:GetTarget()
@@ -61,7 +63,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_CHANGE_TYPE)
 		e1:SetValue(tpe)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
+		e1:SetReset(RESET_EVENT|RESETS_STANDARD&~RESET_TURN_SET)
 		c:RegisterEffect(e1)
 		local te=tc:GetActivateEffect()
 		local tg=te:GetTarget()
@@ -72,6 +74,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		if tg then tg(e,tp,eg,ep,ev,re,r,rp,1) end
 		Duel.BreakEffect()
 		if op then op(e,tp,eg,ep,ev,re,r,rp) end
-		c:CancelToGrave()
+		c:CancelToRest()
 	end
 end

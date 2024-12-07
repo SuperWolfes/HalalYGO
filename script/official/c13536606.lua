@@ -1,9 +1,9 @@
 --V－LAN ヒドラ
---V-LAN Hydra
+--V-LAN Hydden
 local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,s.matfilter,2)
 	--atk
 	local e1=Effect.CreateEffect(c)

@@ -24,7 +24,7 @@ function s.spfilter(c,e,tp)
 	return c:IsCode(100000022) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,true,false)
 end
 function s.gfilter(c)
-	return c:IsCode(50400231) and c:IsAbleToGrave()
+	return c:IsCode(50400231) and c:IsAbleToRest()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
@@ -37,7 +37,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 or #g1~=2 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g2=g1:Select(tp,2,2,nil)
-	Duel.SendtoGrave(g2,REASON_EFFECT)
+	Duel.SendtoRest(g2,REASON_EFFECT)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
 	local tc=g:GetFirst()

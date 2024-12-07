@@ -29,14 +29,14 @@ end
 s.listed_series={0x77}
 s.listed_names={id}
 function s.cfilter(c,tp)
-	return c:IsSetCard(0x77) and c:IsMonster() and not c:IsCode(id) and c:IsAbleToGraveAsCost()
+	return c:IsSetCard(0x77) and c:IsMonster() and not c:IsCode(id) and c:IsAbleToRestAsCost()
 		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,c)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_DECK,0,1,nil,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_DECK,0,1,1,nil,tp)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.filter(c)
 	return c:IsSetCard(0x77) and not c:IsCode(id) and c:IsAbleToHand()

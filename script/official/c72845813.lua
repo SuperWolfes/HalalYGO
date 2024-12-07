@@ -1,4 +1,4 @@
---A・O・J D.D.チェッカー
+--A・O・J S.D.チェッカー
 local s,id=GetID()
 function s.initial_effect(c)
 	--disable spsummon

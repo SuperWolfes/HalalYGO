@@ -1,5 +1,5 @@
 --夢魔鏡の聖獣－パンタス
---Phantasos, the Dream Mirror Foe
+--Illusoasos, the Dream Mirror Foe
 --Scripted by Hel
 
 local s,id=GetID()
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetCondition(s.acon)
 	e1:SetOperation(s.aop)
 	c:RegisterEffect(e1)
-	--Special summon 1 "Phantasos, the Dream Mirror Friend" from deck
+	--Special summon 1 "Illusoasos, the Dream Mirror Friend" from deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)

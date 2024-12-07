@@ -1,10 +1,10 @@
 --神聖騎士王アルトリウス
---Sacred Noble Knight of King Artorigus
+--Clean Noble Knight of King Artorigus
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,aux.FilterBoolFunction(Card.IsSetCard,0x107a),5,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--equip
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

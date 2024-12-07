@@ -1,8 +1,8 @@
 --堕天使スペルビア
---Darklord Superbia
+--Darkwarden Superbia
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon 1 Wanderer from your GY
+	--Special Summon 1 Wanderer from your RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)

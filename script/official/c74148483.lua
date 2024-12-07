@@ -30,7 +30,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0xb}
 function s.spfilter(c)
-	return c:IsMonster() and c:IsSetCard(0xb) and c:IsAbleToGraveAsCost()
+	return c:IsMonster() and c:IsSetCard(0xb) and c:IsAbleToRestAsCost()
 end
 function s.spcon(e,c)
 	if c==nil then return true end
@@ -52,7 +52,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	g:DeleteGroup()
 end
 function s.lvcon(e,tp,eg,ep,ev,re,r,rp)

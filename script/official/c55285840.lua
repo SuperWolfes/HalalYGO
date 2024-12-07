@@ -1,9 +1,9 @@
 --クロノダイバー・リダン
---Time Thief Redoer
+--Time Tactitian Redoer
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Xyz.AddProcedure(c,nil,4,2)
 	--Attach top deck card during the Standby Phase
 	local e1=Effect.CreateEffect(c)
@@ -68,7 +68,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		lb=lb | tc:GetType()
 	end
 	lb=lb & 0x7
-	Duel.SendtoGrave(sg,REASON_EFFECT)
+	Duel.SendtoRest(sg,REASON_EFFECT)
 	Duel.RaiseSingleEvent(c,EVENT_DETACH_MATERIAL,e,0,0,0,0)
 	Duel.BreakEffect()
 	if lb & TYPE_MONSTER ~=0 then

@@ -70,7 +70,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		break_chk=Duel.Remove(og,POS_FACEUP,REASON_EFFECT)
 	end
 	if g:IsExists(Card.IsType,1,nil,TYPE_LINK) and rg:IsExists(Card.IsLocation,1,nil,LOCATION_REST) then
-		--Link: Banish up to 3 cards in the opponent's GY
+		--Link: Banish up to 3 cards in the opponent's RP
 		if break_chk>0 then Duel.BreakEffect() end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 		og=rg:FilterSelect(tp,Card.IsLocation,1,3,nil,LOCATION_REST)

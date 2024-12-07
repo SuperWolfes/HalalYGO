@@ -1,5 +1,5 @@
 -- 破壊の代行者 ヴィーナス
--- The Agent of Destruction – Venus
+-- The Agent of Mismatching – Summit
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)

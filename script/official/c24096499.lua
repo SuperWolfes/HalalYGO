@@ -1,5 +1,5 @@
 --森の聖獣 ヴァレリフォーン
---Valerifawn, Mystical Beast of the Forest
+--Valerifawn, Vague Beast of the Forest
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon

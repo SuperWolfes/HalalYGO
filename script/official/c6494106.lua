@@ -1,5 +1,5 @@
 --妬絶の呪眼
---Evil Eye Defeat
+--Goodie Defeat
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

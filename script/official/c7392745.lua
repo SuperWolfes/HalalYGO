@@ -19,7 +19,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) or Duel.GetLocationCount(1-tp,LOCATION_MZONE)<3 
-		or not Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0,TYPES_TOKEN,100,300,1,RACE_CONTAMINED,ATTRIBUTE_EARTH,POS_FACEUP_DEFENSE,1-tp) then return end
+		or not Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0,TYPES_TOKEN,100,300,1,RACE_TOXIC,ATTRIBUTE_EARTH,POS_FACEUP_DEFENSE,1-tp) then return end
 	for i=1,3 do
 		local token=Duel.CreateToken(tp,id+1)
 		Duel.SpecialSummonStep(token,0,tp,1-tp,false,false,POS_FACEUP_DEFENSE)

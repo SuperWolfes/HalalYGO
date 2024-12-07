@@ -2,7 +2,7 @@
 --Odd-Eyes Advent
 local s,id=GetID()
 function s.initial_effect(c)
-	local e1=Locked.CreateProc({handler=c,lvtype=RITPROC_GREATER,filter=s.lockedfil,extrafil=s.extrafil,extraop=s.extraop,matfilter=s.forcedgroup,location=LOCATION_HAND+LOCATION_REST})
+	local e1=Locked.CreateProc({handler=c,lvtype=RITPROC_GREATER,filter=s.lockedfil,extrafil=s.extrafil,extraop=s.extraop,matfilter=s.fcoreedgroup,location=LOCATION_HAND+LOCATION_REST})
 	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
 	c:RegisterEffect(e1)
 end
@@ -11,7 +11,7 @@ function s.lockedfil(c)
 	return c:IsRace(RACE_DRAGON)
 end
 function s.exfilter0(c)
-	return c:IsSetCard(0x99) and c:IsLevelAbove(1) and c:IsAbleToGrave()
+	return c:IsSetCard(0x99) and c:IsLevelAbove(1) and c:IsAbleToRest()
 end
 function s.extrafil(e,tp,eg,ep,ev,re,r,rp,chk)
 	if Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)==0 and Duel.GetFieldGroupCount(tp,0,LOCATION_MZONE)>1 then
@@ -22,8 +22,8 @@ function s.extraop(mg,e,tp,eg,ep,ev,re,r,rp)
 	local mat2=mg:Filter(Card.IsLocation,nil,LOCATION_EXTRA)
 	mg:Sub(mat2)
 	Duel.ReleaseLockedMaterial(mg)
-	Duel.SendtoGrave(mat2,REASON_EFFECT+REASON_MATERIAL+REASON_LOCKED)
+	Duel.SendtoRest(mat2,REASON_EFFECT+REASON_MATERIAL+REASON_LOCKED)
 end
-function s.forcedgroup(c,e,tp)
+function s.fcoreedgroup(c,e,tp)
 	return (c:IsType(TYPE_PENDULUM) and c:IsLocation(LOCATION_HAND+LOCATION_ONFIELD)) or (c:IsSetCard(0x99) and c:IsLocation(LOCATION_EXTRA))
 end

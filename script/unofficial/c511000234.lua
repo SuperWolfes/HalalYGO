@@ -1,7 +1,7 @@
---Uria, Emperor of Divine Flames
+--Uria, Emperor of Mega Flames
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	c:SetUniqueOnField(1,1,id)
 	--Cannot Special Summon except by its own Effect
 	local e1=Effect.CreateEffect(c)
@@ -31,7 +31,7 @@ function s.initial_effect(c)
 	local e4=e3:Clone()
 	e4:SetCode(EFFECT_UPDATE_DEFENSE)
 	c:RegisterEffect(e4)
-	--Trap Destruction
+	--Trap Mismatching
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(id,0))
 	e5:SetCategory(CATEGORY_DESTROY)
@@ -50,7 +50,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e6)
 end
 function s.spfilter(c,tp)
-	return c:IsTrap() and c:IsAbleToGraveAsCost()
+	return c:IsTrap() and c:IsAbleToRestAsCost()
 end
 function s.spcon(e,c)
 	if c==nil then return true end
@@ -75,7 +75,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	g:DeleteGroup()
 end
 function s.atkdefval(e,c)

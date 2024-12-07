@@ -41,7 +41,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(1-tp,LOCATION_MZONE)<=0 then return end
 	local g=Duel.GetFieldGroup(tp,0,LOCATION_HAND)
-	if Duel.SendtoGrave(g,REASON_EFFECT)>0 then
+	if Duel.SendtoRest(g,REASON_EFFECT)>0 then
 		Duel.BreakEffect()
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local sp=Duel.SelectMatchingCard(tp,s.filter,tp,0,LOCATION_REST,1,1,nil,e,tp)

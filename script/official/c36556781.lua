@@ -5,9 +5,9 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Synchro summon procedure
 	Synchro.AddProcedure(c,aux.FilterBoolFunction(Card.IsSetCard,0x29),1,1,Synchro.NonTuner(nil),1,99)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
-	--Equip 1 "Dragunity" tuner from GY to this card
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
+	--Equip 1 "Dragunity" tuner from RP to this card
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_LEAVE_REST+CATEGORY_EQUIP)
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.eqop)
 	c:RegisterEffect(e1)
 	aux.AddEREquipLimit(c,nil,s.eqval,Card.EquipByEffectAndLimitRegister,e1)
-	--Banish up to 2 cards from opponent's GY
+	--Banish up to 2 cards from opponent's RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_REMOVE)
@@ -69,10 +69,10 @@ function s.eqcheck(e,tp,eg,ep,ev,re,r,rp)
 	e:SetLabelObject(g)
 end
 function s.rmcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():GetEquipGroup():Filter(Card.IsControler,nil,tp):IsExists(Card.IsAbleToGraveAsCost,1,nil) end
+	if chk==0 then return e:GetHandler():GetEquipGroup():Filter(Card.IsControler,nil,tp):IsExists(Card.IsAbleToRestAsCost,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-	local g=e:GetHandler():GetEquipGroup():Filter(Card.IsControler,nil,tp):FilterSelect(tp,Card.IsAbleToGraveAsCost,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	local g=e:GetHandler():GetEquipGroup():Filter(Card.IsControler,nil,tp):FilterSelect(tp,Card.IsAbleToRestAsCost,1,1,nil)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.rmfilter(c)
 	return c:IsAbleToRemove() and aux.SpElimFilter(c)

@@ -1,5 +1,5 @@
 -- 運命の抱く爆弾
--- Blast Held by Fate
+-- Blast Held by Bate
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)

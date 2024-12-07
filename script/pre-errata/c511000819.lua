@@ -2,7 +2,7 @@
 --Chaos Emperor Dragon - Envoy of the End (Pre-Errata)
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -74,7 +74,7 @@ function s.sgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.sgop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(tp,0xe,0xe)
-	Duel.SendtoGrave(g,REASON_EFFECT)
+	Duel.SendtoRest(g,REASON_EFFECT)
 	local og=Duel.GetOperatedGroup()
 	local ct=og:FilterCount(Card.IsLocation,nil,LOCATION_REST)
 	Duel.BreakEffect()

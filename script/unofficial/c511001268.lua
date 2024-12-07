@@ -1,5 +1,5 @@
 --転生輪
---Reincarnation Ring
+--Reincorporation Ring
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

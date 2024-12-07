@@ -1,5 +1,5 @@
 --生贄の祭壇
---Altar for Tribute
+--Stone for Tribute
 --Tokens can be selected to send for cost (but no LP gain occurs)
 local s,id=GetID()
 function s.initial_effect(c)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c)
-	return c:IsAbleToGraveAsCost() or c:IsType(TYPE_TOKEN)
+	return c:IsAbleToRestAsCost() or c:IsType(TYPE_TOKEN)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(1)
@@ -26,7 +26,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local atk=(tc:IsType(TYPE_TOKEN) and 0) or tc:GetTextAttack()
 	if atk<0 then atk=0 end
 	e:SetLabel(atk)
-	Duel.SendtoGrave(tc,REASON_COST)
+	Duel.SendtoRest(tc,REASON_COST)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then

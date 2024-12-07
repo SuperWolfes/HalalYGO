@@ -1,9 +1,9 @@
 --セフィラ・メタトロン
---Zefra Metaltron
+--Zebra Metaltron
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,s.matfilter,2)
 	--Add 1 monster to your hand
 	local e1=Effect.CreateEffect(c)
@@ -66,7 +66,7 @@ function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.thfilter),tp,LOCATION_REST+LOCATION_EXTRA,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thfilter),tp,LOCATION_REST+LOCATION_EXTRA,0,1,1,nil)
 	if #g>0 then
 		Duel.HintSelection(g,true)
 		Duel.SendtoHand(g,nil,REASON_EFFECT)

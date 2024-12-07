@@ -1,4 +1,4 @@
--- Mythic Sword Surprise Attack
+--Constructor Ambush
 local s,id=GetID()
 function s.initial_effect(c)
 	--Decrease ATK
@@ -17,7 +17,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return tc and tc:IsFaceup() and tc:IsControler(tp) and tc:IsRace(RACE_WYRM)
 end
 function s.tgfilter(c)
-	return c:IsRace(RACE_WYRM) and c:IsLevelBelow(6) and c:IsAbleToGraveAsCost() and c:IsAttackAbove(1)
+	return c:IsRace(RACE_WYRM) and c:IsLevelBelow(6) and c:IsAbleToRestAsCost() and c:IsAttackAbove(1)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_HAND,0,1,nil) end
@@ -30,14 +30,14 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_HAND,0,1,1,nil)
 	if #g>0 then
 		Duel.HintSelection(g)
-		Duel.SendtoGrave(g,REASON_COST)
+		Duel.SendtoRest(g,REASON_COST)
 		local atk=g:GetFirst():GetAttack()
 		--Decrease ATK
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+		e1:SetReset(RESETS_STANDARD_PHASE_END)
 		e1:SetValue(-atk)
-		bc:RegisterEffectRush(e1)
+		bc:RegisterEffect(e1)
 	end
 end

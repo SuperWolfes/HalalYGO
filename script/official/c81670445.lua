@@ -1,5 +1,5 @@
 --クロノダイバー・ハック
---Time Thief Hack
+--Time Tactitian Hack
 --Scripted by Naim
 
 local s,id=GetID()

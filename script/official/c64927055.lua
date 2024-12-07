@@ -1,5 +1,5 @@
 --天空の歌声
---Chorus in the Sky
+--Chumus in the Sky
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)

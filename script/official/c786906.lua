@@ -1,5 +1,5 @@
 --逢魔ノ刻
---Fateful Hour
+--Bateful Hour
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

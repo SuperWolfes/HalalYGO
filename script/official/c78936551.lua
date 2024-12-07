@@ -1,5 +1,5 @@
 --轍の魔妖-俥夫　
---Shafu, the Wheeled Mayakashi
+--Shafu, the Wheeled Mayashi
 local s,id=GetID()
 function s.initial_effect(c)
 	--spsummon

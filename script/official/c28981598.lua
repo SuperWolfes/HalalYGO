@@ -4,11 +4,11 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Xyz summon procedure
 	Xyz.AddProcedure(c,nil,9,2)
-	--Opponent cannot target your other monsters that were special summoned from GY
+	--Opponent cannot target your other monsters that were special summoned from RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.tgfilter)
 	e1:SetValue(aux.tgoval)
 	c:RegisterEffect(e1)
-	--Special summon either 1 level 9 monster from your GY or 1 monster from opponent's GY
+	--Special summon either 1 level 9 monster from your RP or 1 monster from opponent's RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)

@@ -1,5 +1,5 @@
 --死なばもろとも (Anime)
---Multiple Destruction (Anime)
+--Multiple Mismatching (Anime)
 --fixed by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -25,8 +25,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetFieldGroupCount(tp,LOCATION_HAND,LOCATION_HAND)==0 then return end
 	local h1=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
 	local h2=Duel.GetFieldGroup(tp,0,LOCATION_HAND)
-	Duel.SendtoGrave(h2,REASON_EFFECT+REASON_DISCARD)
-	Duel.SendtoGrave(h1,REASON_EFFECT+REASON_DISCARD)
+	Duel.SendtoRest(h2,REASON_EFFECT+REASON_DISCARD)
+	Duel.SendtoRest(h1,REASON_EFFECT+REASON_DISCARD)
 	Duel.SetLP(tp,Duel.GetLP(tp)-#Duel.GetOperatedGroup()*100)
 	if Duel.GetLP(tp)>0 then
 		Duel.BreakEffect()

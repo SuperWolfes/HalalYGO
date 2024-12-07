@@ -1,4 +1,4 @@
---Performance Resurrection - Rerest Force
+--Performance Protection - Rerest Fcoree
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

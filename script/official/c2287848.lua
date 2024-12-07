@@ -61,7 +61,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.drfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_CONTAMINED) and c:IsAbleToDeck()
+	return c:IsFaceup() and c:IsRace(RACE_TOXIC) and c:IsAbleToDeck()
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REMOVED) and chkc:IsControler(tp) and s.drfilter(chkc) end

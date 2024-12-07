@@ -3,7 +3,7 @@
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	-- "Masked Fiery Noodle Jonin Kaedama Gockboot" + "Taste Inspector"
 	Fusion.AddProcMix(c,true,true,160003033,CARD_TASTE_INSPECTOR)
 	-- Damage and draw

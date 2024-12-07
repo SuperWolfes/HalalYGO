@@ -1,5 +1,5 @@
 --真六武衆－エニシ
---Legendary Six Samurai - Enishi
+--Legendary Six Samurai - Nishi
 local s,id=GetID()
 function s.initial_effect(c)
 	--Return 1 face-up monster on the field to the hand

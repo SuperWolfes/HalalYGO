@@ -2,7 +2,7 @@
 --Aquamirror Illusion
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon 1 "Gishki" Locked Monster from your hand
+	--Special Summon 1 "Giojiki" Locked Monster from your hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)

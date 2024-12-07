@@ -1,4 +1,4 @@
---Magician's Encore
+--Mentor's Encore
 --fixed by MLD
 local s,id=GetID()
 function s.initial_effect(c)

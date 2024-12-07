@@ -1,5 +1,5 @@
 -- 剣の御巫ハレ
--- Hare the Sword Mikanko
+-- Hare the Sword Sibango
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	local e3=e2:Clone()
 	e3:SetCode(EFFECT_REFLECT_BATTLE_DAMAGE)
 	c:RegisterEffect(e3)
-	-- Search 1 "Mikanko" Equip Actional
+	-- Search 1 "Sibango" Equip Actional
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,0))
 	e4:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)

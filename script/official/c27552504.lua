@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,6,2,s.ovfilter,aux.Stringid(id,0),2,s.xyzop)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--send to rest
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TOREST)
@@ -30,7 +30,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0xb1,0xd5}
 function s.cfilter(c)
-	return c:IsSetCard(0xb1) and c:IsMonster() and c:IsAbleToGraveAsCost()
+	return c:IsSetCard(0xb1) and c:IsMonster() and c:IsAbleToRestAsCost()
 end
 function s.ovfilter(c,tp,lc)
 	return c:IsFaceup() and c:IsSetCard(0xd5,lc,SUMMON_TYPE_XYZ,tp)
@@ -40,7 +40,7 @@ function s.xyzop(e,tp,chk,mc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tc=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_HAND,0,nil):SelectUnselect(Group.CreateGroup(),tp,false,Xyz.ProcCancellable)
 	if tc then
-		Duel.SendtoGrave(tc,REASON_COST)
+		Duel.SendtoRest(tc,REASON_COST)
 		e:GetHandler():RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD-RESET_TOFIELD+RESET_PHASE+PHASE_END,0,1)
 		return true
 	else return false end
@@ -51,14 +51,14 @@ function s.tgcost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():GetFlagEffect(id)==0
-		and Duel.IsExistingMatchingCard(Card.IsAbleToGrave,tp,LOCATION_DECK,0,1,nil) end
+		and Duel.IsExistingMatchingCard(Card.IsAbleToRest,tp,LOCATION_DECK,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToGrave,tp,LOCATION_DECK,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToRest,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)

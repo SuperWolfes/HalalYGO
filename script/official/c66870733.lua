@@ -1,10 +1,10 @@
 --氷の魔妖-雪女　リンク
---Icicle Mayakashi - Yukionna
+--Icicle Mayashi - Yukionna
 local s,id=GetID()
 function s.initial_effect(c)
 	c:SetUniqueOnField(1,0,id)
 	-- link summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x121),2,2)
 	--untargetable
 	local e1=Effect.CreateEffect(c)

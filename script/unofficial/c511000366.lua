@@ -1,8 +1,8 @@
 --輪廻竜サンサーラ (Manga)
---Samsara Dragon (Manga)
+--Sam Dragon (Manga)
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special summon from the Grave Place
+	--Special summon from the Resting Place
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)

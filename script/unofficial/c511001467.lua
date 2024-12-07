@@ -18,7 +18,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,0,1,nil)
 end
 function s.tgfilter(c,code)
-	return c:IsFaceup() and c:IsCode(code) and c:IsAbleToGrave()
+	return c:IsFaceup() and c:IsCode(code) and c:IsAbleToRest()
 end
 function s.spfilter(c,e,tp)
 	return c:IsCode(id+1) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
@@ -54,7 +54,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		sg1:Merge(sg2)
 		sg1:Merge(sg3)
 		sg1:Merge(sg4)
-		if Duel.SendtoGrave(sg1,REASON_EFFECT) then
+		if Duel.SendtoRest(sg1,REASON_EFFECT) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 			local spg=sp:Select(tp,1,1,nil)
 			if #spg>0 and Duel.SpecialSummon(spg,0,tp,tp,true,true,POS_FACEUP) then

@@ -1,5 +1,5 @@
 --クロノダイバー・レトログラード
---Time Thief Retrograde
+--Time Tactitian Retrograde
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -33,7 +33,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_MZONE,0,nil):Filter(aux.NOT(Card.IsStatus),nil,STATUS_BATTLE_DESTROYED)
 		local tc=g:Select(tp,1,1,nil):GetFirst()
 		if tc then
-			rc:CancelToGrave()
+			rc:CancelToRest()
 			Duel.Overlay(tc,rc)
 		end
 	end

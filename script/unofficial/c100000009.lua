@@ -1,5 +1,5 @@
 --時械神 ラツィオン
---Lazion, the Timelord (VG)
+--Lazion, the Timewatcher (VG)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Cannot be special summoned from the Deck

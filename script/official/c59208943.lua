@@ -1,9 +1,9 @@
 --クロノダイバー・パーペチュア
---Time Thief Perpetua
+--Time Tactitian Perpetua
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Xyz.AddProcedure(c,nil,4,2)
 	--special summon
 	local e1=Effect.CreateEffect(c)

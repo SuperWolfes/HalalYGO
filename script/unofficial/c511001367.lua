@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c,e,tp,ft)
-	return c:GetLevel()>0 and c:IsAbleToGraveAsCost() and (ft>0 or c:GetSequence()<5) 
+	return c:GetLevel()>0 and c:IsAbleToRestAsCost() and (ft>0 or c:GetSequence()<5) 
 		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,1,nil,c:GetLevel(),e,tp)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -31,7 +31,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_MZONE,0,1,1,nil,e,tp,ft)
 	local lv=g:GetFirst():GetLevel()
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	Duel.SetTargetParam(lv)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end

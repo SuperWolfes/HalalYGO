@@ -4,7 +4,7 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send itself to GY; Special Summon from hand
+	--Send itself to RP; Special Summon from hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sstg)
 	e1:SetOperation(s.ssop)
 	c:RegisterEffect(e1)
-	--Banish itself from GY; Recover 1 Level 7 LIGHT Dragon from GY or MZONE
+	--Banish itself from RP; Recover 1 Level 7 LIGHT Dragon from RP or MZONE
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND)
@@ -38,8 +38,8 @@ function s.sscon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.sscost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(c,REASON_COST)
+	if chk==0 then return c:IsAbleToRestAsCost() end
+	Duel.SendtoRest(c,REASON_COST)
 end
 function s.ssfilter(c,e,tp)
 	return s.ldlv7filter(c) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

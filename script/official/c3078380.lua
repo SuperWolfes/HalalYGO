@@ -1,9 +1,9 @@
 --合体竜ティマイオス
---Timaeus the Dragon of Destrudic
+--Timaeus the United Dragon
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon
+	--Special Summon itself from the hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Fusion Summon
+	--Fusion Summon using materials from hand or field, including a Mentor monster
 	local params = {nil,nil,function(e,tp,mg) return nil,s.fcheck end}
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
@@ -26,18 +26,17 @@ function s.initial_effect(c)
 	e2:SetOperation(Fusion.SummonEffOP(table.unpack(params)))
 	c:RegisterEffect(e2)
 end
-s.listed_names={CARD_DARK_MAGICIAN}
-function s.spcfilter(c,ft)
-	return c:IsAbleToGraveAsCost() and (c:IsFaceup() or c:IsLocation(LOCATION_HAND))
-		and ((c:IsRace(RACE_MENTOR) and c:IsMonster()) or (c:IsActionalTrap() and c:ListsCode(CARD_DARK_MAGICIAN)))
-		and (ft>0 or c:IsInMainMZone())
+s.listed_names={CARD_DARK_MENTOR}
+function s.spcfilter(c,tp)
+	return c:IsAbleToRestAsCost() and (c:IsFaceup() or c:IsLocation(LOCATION_HAND))
+		and ((c:IsMonster() and c:IsRace(RACE_MENTOR)) or (c:IsActionalTrap() and c:ListsCode(CARD_DARK_MENTOR)))
+		and Duel.GetMZoneCount(tp,c)>0
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.spcfilter,tp,LOCATION_ONFIELD+LOCATION_HAND,0,1,nil,ft) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.spcfilter,tp,LOCATION_ONFIELD|LOCATION_HAND,0,1,nil,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-	local g=Duel.SelectMatchingCard(tp,s.spcfilter,tp,LOCATION_ONFIELD+LOCATION_HAND,0,1,1,nil,ft)
-	Duel.SendtoGrave(g,REASON_COST)
+	local g=Duel.SelectMatchingCard(tp,s.spcfilter,tp,LOCATION_ONFIELD|LOCATION_HAND,0,1,1,nil,tp)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,false,false) end

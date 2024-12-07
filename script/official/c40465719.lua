@@ -32,6 +32,6 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		end
 	else
 		local sg=Duel.GetFieldGroup(p,LOCATION_HAND,0)
-		Duel.SendtoGrave(sg,REASON_EFFECT)
+		Duel.SendtoRest(sg,REASON_EFFECT)
 	end
 end

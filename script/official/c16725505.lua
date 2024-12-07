@@ -1,5 +1,5 @@
 --SR赤目のダイス
---Speedroid Red-Eyed Suffice
+--Speedroid Red-Eyed Dice
 local s,id=GetID()
 function s.initial_effect(c)
 	--lv change

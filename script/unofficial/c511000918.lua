@@ -1,4 +1,4 @@
---Magic Mirror Guardian Nayuta
+--Ment Mirror Guardian Nayuta
 local s,id=GetID()
 function s.initial_effect(c)
 	--summon success

@@ -1,5 +1,5 @@
 --アマゾネスの里
---Amazoness Village
+--Amazonian Village
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e2:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,0x4))
 	e2:SetValue(200)
 	c:RegisterEffect(e2)
-	--Special Summon 1 "Amazoness" from your Deck
+	--Special Summon 1 "Amazonian" from your Deck
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)

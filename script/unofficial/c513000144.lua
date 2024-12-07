@@ -79,7 +79,7 @@ function s.millop(e,tp,eg,ep,ev,re,r,rp)
 		gc=gc+g:TakeatPos(Duel.GetRandomNumber(0,#g//2))
 		g=g-gc
 	end
-	Duel.SendtoGrave(gc,REASON_COST)
+	Duel.SendtoRest(gc,REASON_COST)
 end
 function s.filter(c,e,tp)
 	return c:IsLevelBelow(4) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

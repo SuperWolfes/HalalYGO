@@ -27,7 +27,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not tg or not tg:IsRelateToEffect(e) or tg:IsStatus(STATUS_ATTACK_CANCELED)
 		or not Duel.NegateAttack() then return end
 	if not tg:IsImmuneToEffect(e) and c:IsRelateToEffect(e) then
-		c:CancelToGrave()
+		c:CancelToRest()
 		Duel.Overlay(tg,c)
 	end
 end

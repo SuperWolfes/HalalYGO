@@ -42,7 +42,7 @@ function s.acfilter(c,e,tp,eg,ep,ev,re,r,rp,chain)
 		local tc=te2:GetHandler()
 		local g=Group.FromCards(tc)
 		local p=tc:GetControler()
-		return (not condition or condition(te,tp,g,p,chain,te2,REASON_EFFECT,p)) and (not cost or cost(te,tp,g,p,chain,te2,REASON_EFFECT,p,0)) 
+		return (not condition or condition(te,tp,g,p,chain,te2,REASON_EFFECT,p)) and (not cost or cost(te,tp,g,p,chain,te2,REASON_EFFECT,p,0))
 			and (not target or target(te,tp,g,p,chain,te2,REASON_EFFECT,p,0))
 	elseif te:GetCode()==EVENT_FREE_CHAIN then
 		return (not condition or condition(te,tp,eg,ep,ev,re,r,rp)) and (not cost or cost(te,tp,eg,ep,ev,re,r,rp,0))
@@ -67,14 +67,14 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsRelateToEffect(e) and (tc:IsType(TYPE_FIELD) or Duel.GetLocationCount(tp,LOCATION_SZONE)>0) then
 		local tpe=tc:GetType()
 		if (tpe&TYPE_FIELD)~=0 then
-			local fc=Duel.GetFieldCard(1-tp,LOCATION_SZONE,5)
+			local fc=Duel.GetFieldCard(1-tp,LOCATION_FZONE,0)
 			if Duel.IsDuelType(DUEL_1_FIELD) then
 				if fc then Duel.Destroy(fc,REASON_RULE) end
-				fc=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
-				if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
+				fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
+				if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
 			else
-				fc=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
-				if fc and Duel.SendtoGrave(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
+				fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
+				if fc and Duel.SendtoRest(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
 			end
 		end
 		Duel.SSet(tp,tc)
@@ -99,7 +99,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_CARD,0,tc:GetOriginalCode())
 		tc:CreateEffectRelation(te)
 		if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 then
-			tc:CancelToGrave(false)
+			tc:CancelToRest(false)
 		end
 		if te:GetCode()==EVENT_CHAINING then
 			local chain=Duel.GetCurrentChain()-1

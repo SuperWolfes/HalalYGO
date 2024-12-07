@@ -1,5 +1,5 @@
 --王立魔法図書館
---Royal Magical Library
+--Royal Mentoral Library
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(COUNTER_ACTIONAL)

@@ -3,7 +3,7 @@
 --scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -70,12 +70,12 @@ function s.atcon(e,tp,eg,ep,ev,re,r,rp)
 	return phase~=PHASE_DAMAGE or not Duel.IsDamageCalculated()
 end
 function s.afilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x1034) and c:IsAbleToGraveAsCost()
+	return c:IsFaceup() and c:IsSetCard(0x1034) and c:IsAbleToRestAsCost()
 end
 function s.atcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.afilter,tp,LOCATION_ONFIELD,0,1,nil) end
 	local g=Duel.GetMatchingGroup(s.afilter,tp,LOCATION_ONFIELD,0,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	e:SetLabel(#g)
 end
 function s.atop(e,tp,eg,ep,ev,re,r,rp)

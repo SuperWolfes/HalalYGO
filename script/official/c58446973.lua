@@ -18,7 +18,7 @@ end
 s.listed_series={0xbb}
 s.listed_names={id}
 function s.filter(c)
-	return c:IsSetCard(0xbb) and c:IsMonster() and not c:IsCode(id) and c:IsAbleToGrave()
+	return c:IsSetCard(0xbb) and c:IsMonster() and not c:IsCode(id) and c:IsAbleToRest()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end
@@ -29,7 +29,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil)
 	local tc=g:GetFirst()
 	local c=e:GetHandler()
-	if tc and Duel.SendtoGrave(tc,REASON_EFFECT)~=0 and tc:IsLocation(LOCATION_REST)
+	if tc and Duel.SendtoRest(tc,REASON_EFFECT)~=0 and tc:IsLocation(LOCATION_REST)
 		and c:IsRelateToEffect(e) and c:IsFaceup() then
 		local code=tc:GetCode()
 		local e1=Effect.CreateEffect(c)

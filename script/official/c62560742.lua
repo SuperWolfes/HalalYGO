@@ -4,8 +4,8 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Synchro Summon
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,1)
-	c:EnableReviveLimit()
-	--Send 1 "T.G." Synchro monster to the GY and special summon the materials
+	c:EnableAwakeLimit()
+	--Send 1 "T.G." Synchro monster to the RP and special summon the materials
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOREST+CATEGORY_SPECIAL_SUMMON)
@@ -40,10 +40,10 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local mg=tc:GetMaterial()
 	local ct=#mg
 	local sumtype=tc:GetSummonType()
-	if Duel.SendtoGrave(tc,REASON_EFFECT)~=0 and sumtype==SUMMON_TYPE_SYNCHRO
+	if Duel.SendtoRest(tc,REASON_EFFECT)~=0 and sumtype==SUMMON_TYPE_SYNCHRO
 		and ct>0 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)
 		and ct<=Duel.GetLocationCount(tp,LOCATION_MZONE)
-		and mg:FilterCount(aux.GraveValleyFilter(s.mgfilter),nil,e,tp,tc)==ct
+		and mg:FilterCount(aux.NecroValleyFilter(s.mgfilter),nil,e,tp,tc)==ct
 		and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.BreakEffect()
 		Duel.SpecialSummon(mg,0,tp,tp,false,false,POS_FACEUP)

@@ -1,7 +1,7 @@
 --星刻の魔術師
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Xyz.AddProcedure(c,s.matfilter,4,2,nil,nil,nil,nil,true)
 	--spsummon condition
 	local e1=Effect.CreateEffect(c)
@@ -51,7 +51,7 @@ function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.thfilter),tp,LOCATION_DECK+LOCATION_REST+LOCATION_EXTRA,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thfilter),tp,LOCATION_DECK+LOCATION_REST+LOCATION_EXTRA,0,1,1,nil)
 	local tc=g:GetFirst()
 	if not tc then return end
 	Duel.SendtoHand(tc,nil,REASON_EFFECT)
@@ -63,7 +63,7 @@ function s.repfilter(c,tp)
 		and not c:IsReason(REASON_REPLACE)
 end
 function s.tgfilter(c)
-	return c:IsRace(RACE_MENTOR) and c:IsAbleToGrave()
+	return c:IsRace(RACE_MENTOR) and c:IsAbleToRest()
 end
 function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return eg:IsExists(s.repfilter,1,nil,tp)
@@ -72,7 +72,7 @@ function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local sg=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 		Duel.Hint(HINT_CARD,0,id)
-		Duel.SendtoGrave(sg,REASON_EFFECT)
+		Duel.SendtoRest(sg,REASON_EFFECT)
 		return true
 	else return false end
 end

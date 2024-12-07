@@ -17,7 +17,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsStatus(STATUS_SUMMON_TURN)
 end
 function s.thfilter(c)
-	return c:IsRace(RACE_CONTAMINED) and c:IsType(TYPE_NORMAL) and c:IsAttack(0) and c:IsAbleToHand()
+	return c:IsRace(RACE_TOXIC) and c:IsType(TYPE_NORMAL) and c:IsAttack(0) and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil) end

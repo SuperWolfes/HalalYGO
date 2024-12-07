@@ -1,5 +1,5 @@
 --ネフティスの護り手
---Protector of Nephthys
+--Protector of Nepolonis
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon

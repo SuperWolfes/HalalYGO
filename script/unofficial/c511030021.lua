@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e3:SetTarget(s.thdtg)
 	e3:SetOperation(s.thdop)
 	c:RegisterEffect(e3)
-	--tribute to draw
+	--sort draw
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(67616300,0)) --Chicken Game
 	e4:SetCategory(CATEGORY_DRAW)

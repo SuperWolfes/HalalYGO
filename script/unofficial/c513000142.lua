@@ -1,10 +1,10 @@
 --リバイバルスライム (Anime)
---Revival Jam (Anime)
+--Awakal Jam (Anime)
 --Scripted by GameMaster (GM)
 local s,id,alias=GetID()
 function s.initial_effect(c)
 	alias=c:GetOriginalCodeRule()
-	--Revival
+	--Awakal
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(alias,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)

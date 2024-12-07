@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.thtg)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
-	--Add 1 of your banished Level 4 Contaminateds to your hand
+	--Add 1 of your banished Level 4 Toxics to your hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND)
@@ -50,7 +50,7 @@ function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
 end
 function s.thfilter2(c)
-	return c:IsFaceup() and c:IsRace(RACE_CONTAMINED) and c:IsLevelAbove(4) and c:IsMonster() and c:IsAbleToHand()
+	return c:IsFaceup() and c:IsRace(RACE_TOXIC) and c:IsLevelAbove(4) and c:IsMonster() and c:IsAbleToHand()
 end
 function s.thtg2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REMOVED) and s.thfilter2(chkc) end

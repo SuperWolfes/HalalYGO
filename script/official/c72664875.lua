@@ -1,9 +1,9 @@
 --暗黒方界邪神クリムゾン・ノヴァ・トリニティ
---Crimson Nova Trinity the Dark Cubic Lord
+--Crimson Nova Trinity the Dark Cubic Watcher
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion summon procedure
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMixN(c,false,false,30270176,3)
 	--Special Summon condition
 	local e0=Effect.CreateEffect(c)
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetValue(aux.tgoval)
 	c:RegisterEffect(e1)
-	--Prevent destruction by opponent's effect
+	--Prevent mismatching by opponent's effect
 	local e2=e1:Clone()
 	e2:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
 	e2:SetValue(aux.indoval)

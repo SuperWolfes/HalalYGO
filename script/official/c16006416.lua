@@ -2,7 +2,7 @@
 --D/D/D Flame High King Genghis
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcFun2(c,s.matfilter,aux.FilterBoolFunctionEx(Card.IsSetCard,0xaf),true)
 	--Special Summon
 	local e1=Effect.CreateEffect(c)

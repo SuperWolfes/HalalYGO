@@ -26,7 +26,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.thcfilter(c)
-	return c:IsRace(RACE_DRAGON) and c:GetOriginalLevel()>0 and c:IsAbleToGraveAsCost()
+	return c:IsRace(RACE_DRAGON) and c:GetOriginalLevel()>0 and c:IsAbleToRestAsCost()
 		and (c:IsFaceup() or not c:IsLocation(LOCATION_MZONE))
 end
 function s.thfilter(c,lv)
@@ -40,7 +40,7 @@ function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return aux.SelectUnselectGroup(g,e,tp,1,#g,s.thcheck,0) end
 	local sg=aux.SelectUnselectGroup(g,e,tp,1,#g,s.thcheck,1,tp,HINTMSG_TOREST,s.thcheck)
 	e:SetLabel(sg:GetSum(Card.GetOriginalLevel))
-	Duel.SendtoGrave(sg,REASON_COST)
+	Duel.SendtoRest(sg,REASON_COST)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

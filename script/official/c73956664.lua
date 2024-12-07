@@ -3,7 +3,7 @@
 --scripted by Zefile
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send 1 "Tearalaments" monster from your Deck to GY
+	--Send 1 "Tearalaments" monster from your Deck to RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,1))
 	e1:SetCategory(CATEGORY_TOREST)
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	local e2=e1:Clone()
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e2)
-	--Special Summon itself and send 1 "Tearalaments" from hand to the GY
+	--Special Summon itself and send 1 "Tearalaments" from hand to the RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOREST)
@@ -33,7 +33,7 @@ end
 s.listed_series={0x182}
 s.listed_names={id}
 function s.tgfilter(c)
-	return c:IsMonster() and c:IsSetCard(0x182) and c:IsAbleToGrave() and not c:IsCode(id) 
+	return c:IsMonster() and c:IsSetCard(0x182) and c:IsAbleToRest() and not c:IsCode(id) 
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -43,11 +43,11 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end
 function s.disfilter(c)
-	return c:IsSetCard(0x182) and c:IsAbleToGrave()
+	return c:IsSetCard(0x182) and c:IsAbleToRest()
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -73,7 +73,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=Duel.SelectMatchingCard(tp,s.disfilter,tp,LOCATION_HAND,0,1,1,nil)
 		if #g>0 then
-			Duel.SendtoGrave(g,REASON_EFFECT)
+			Duel.SendtoRest(g,REASON_EFFECT)
 		end
 	end
 end

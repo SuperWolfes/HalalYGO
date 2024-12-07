@@ -1,5 +1,5 @@
 --デュアル・アブレーション
---DUAL Ablation
+--Dual Ablation
 --Logical Nonsense
 
 --Substitute ID
@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetHintTiming(0,TIMINGS_CHECK_MONSTER+TIMING_MAIN_END)
 	c:RegisterEffect(e1)
-	--Special Summon 1 DUAL monster from the Deck
+	--Special Summon 1 Dual monster from the Deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -41,7 +41,7 @@ function s.discost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
 	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_DISCARD+REASON_COST,nil)
 end
-	--Check for a DUAL monster
+	--Check for a Dual monster
 function s.spfilter(c,e,tp)
 	return c:IsType(TYPE_DUAL) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP)
 end
@@ -51,7 +51,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,0,1,nil,e,tp) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK)
 end
-	--Special Summon 1 DUAL monster from the Deck, it gains its effects
+	--Special Summon 1 Dual monster from the Deck, it gains its effects
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
@@ -92,15 +92,15 @@ function s.sptg2(e,tp,eg,ep,ev,re,r,rp,chk)
 		e:SetLabel(0)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 		local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,1,nil,e,tp)
-		Duel.SendtoGrave(g,REASON_COST+REASON_DISCARD)
+		Duel.SendtoRest(g,REASON_COST+REASON_DISCARD)
 	end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND|LOCATION_DECK)
 end
-	--Check for a DUAL monster to tribute
+	--Check for a Dual monster to tribute
 function s.releasefil(c)
 	return c:IsType(TYPE_DUAL) and c:IsReleasableByEffect()
 end
-	--Tribute 1 DUAL monster, Special Summon a FIRE Warrior, destroy a card if the tributed was an effect monster
+	--Tribute 1 Dual monster, Special Summon a FIRE Warrior, destroy a card if the tributed was an effect monster
 function s.spop2(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
 	local tc=Duel.SelectMatchingCard(tp,s.releasefil,tp,LOCATION_MZONE,0,1,1,nil):GetFirst()
@@ -109,7 +109,7 @@ function s.spop2(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.Release(tc,REASON_EFFECT)==0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local sg=Duel.SelectMatchingCard(tp,s.spfilter2,tp,LOCATION_HAND+LOCATION_DECK,0,1,1,nil,e,tp)
-	if #sg==0 or Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)==0 or not DUAL_chk then return end
+	if #sg==0 or Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)==0 or not dual_chk then return end
 	local dg1=Duel.GetMatchingGroup(nil,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil)
 	if #dg1==0 or not Duel.SelectYesNo(tp,aux.Stringid(id,2)) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)

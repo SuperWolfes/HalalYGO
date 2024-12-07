@@ -24,7 +24,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_DISCARD)
 	local sg2=g2:Select(1-tp,1,1,nil)
 	sg1:Merge(sg2)
-	Duel.SendtoGrave(sg1,REASON_EFFECT+REASON_DISCARD)
+	Duel.SendtoRest(sg1,REASON_EFFECT+REASON_DISCARD)
 	local hg1=Duel.GetMatchingGroup(Card.IsAbleToHand,tp,LOCATION_REST,0,nil)
 	local hg2=Duel.GetMatchingGroup(Card.IsAbleToHand,1-tp,LOCATION_REST,0,nil)
 	if #hg1>0 and #hg2>0 then

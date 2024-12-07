@@ -1,5 +1,5 @@
 --ネクロバレーの祭殿
---Hidden Temples of Necrovalley
+--Hidden Masjids of Necrovalley
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

@@ -1,5 +1,5 @@
 --不死族の棺
---Contaminated Bed
+--Toxic Bed
 --fixed by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -21,7 +21,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 		and c:IsPreviousPosition(POS_FACEDOWN)
 end
 function s.filter(c,e,tp)
-	return c:IsRace(RACE_CONTAMINED) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsRace(RACE_TOXIC) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

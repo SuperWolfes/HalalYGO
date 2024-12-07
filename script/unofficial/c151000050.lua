@@ -1,5 +1,5 @@
 --ウォーターワールド (Action Field)
---Umiiruka (Action Field)
+--Umiirutra (Action Field)
 local s,id=GetID()
 function s.initial_effect(c)
 	--activate

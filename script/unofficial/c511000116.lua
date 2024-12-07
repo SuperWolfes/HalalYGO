@@ -25,13 +25,13 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.descon(e)
-	return not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_TAINTED+RACE_CONTAMINED),e:GetHandlerPlayer(),LOCATION_REST,0,1,nil)
+	return not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_TAINTED+RACE_TOXIC),e:GetHandlerPlayer(),LOCATION_REST,0,1,nil)
 end
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetAttacker():IsControler(1-tp)
 end
 function s.cfilter(c)
-	return c:IsRace(RACE_TAINTED+RACE_CONTAMINED) and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
+	return c:IsRace(RACE_TAINTED+RACE_TOXIC) and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,nil) end

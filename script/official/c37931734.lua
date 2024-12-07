@@ -24,7 +24,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,0))
-	local tc=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.filter),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil,tp):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil,tp):GetFirst()
 	if not Duel.ActivateFieldActional(tc,e,tp,eg,ep,ev,re,r,rp) then return end
 	Duel.BreakEffect()
 	Duel.Draw(1-tp,1,REASON_EFFECT)

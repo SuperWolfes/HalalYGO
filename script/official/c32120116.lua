@@ -25,10 +25,10 @@ function s.filter2(c,e,tp)
 	return c:IsSummonPlayer(tp) and c:IsRelateToEffect(e)
 end
 function s.rmfilter(c)
-	return c:IsRace(RACE_CONTAMINED) and c:IsAbleToRemove()
+	return c:IsRace(RACE_TOXIC) and c:IsAbleToRemove()
 end
 function s.spfilter(c,e,tp)
-	return c:IsRace(RACE_CONTAMINED) and c:IsLevelAbove(7) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsRace(RACE_TOXIC) and c:IsLevelAbove(7) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=eg:Filter(s.filter2,nil,e,1-tp)

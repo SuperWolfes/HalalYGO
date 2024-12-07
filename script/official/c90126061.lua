@@ -1,11 +1,11 @@
 --No.5 亡霊竜デス・キマイラ・ドラゴン
---Number 5: Doom Chimera Dragon
+--Number 5: Doom Chilean Dragon
 --Scripted by ahtelel
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,5,2,nil,nil,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--atk
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)

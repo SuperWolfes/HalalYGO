@@ -47,7 +47,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.costfilter(c,e,tp)
 	local code=c:GetCode()
-	return not table.includes(s.name_list[tp],code) and c:IsSetCard(0x578) and c:IsLevelBelow(4) and c:IsAbleToGraveAsCost() 
+	return not table.includes(s.name_list[tp],code) and c:IsSetCard(0x578) and c:IsLevelBelow(4) and c:IsAbleToRestAsCost() 
 		and Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_MZONE,0,1,nil,e,tp,code)
 end
 function s.tgfilter(c,e,tp,code)
@@ -66,7 +66,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,1,nil,e,tp)
 	e:SetLabel(g:GetFirst():GetCode())
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	Duel.BreakEffect()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 	local tg=Duel.SelectTarget(tp,s.tgfilter,tp,LOCATION_MZONE,0,1,1,nil,e,tp,e:GetLabel())
@@ -82,7 +82,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	local zone=tc:GetFreeLinkedZone()&0x1f
 	if zone==0 then return end
-	local sg=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,e,tp,code,zone)
+	local sg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,e,tp,code,zone)
 	if #sg<=0 then return end
 	local sg_unq=sg:GetClassCount(Card.GetCode)
 	local count=s.zone_count(zone)

@@ -1,5 +1,5 @@
 --ワルキューレ・ツヴァイト
---Valkyrie Zweite
+--Balkanie Zweite
 --scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)

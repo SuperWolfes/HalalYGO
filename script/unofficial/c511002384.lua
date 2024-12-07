@@ -2,7 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	Xyz.AddProcedure(c,nil,6,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	-- ATK
 	local e1=Effect.CreateEffect(c)
 	e1:SetCode(EVENT_FREE_CHAIN)

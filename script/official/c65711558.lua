@@ -1,10 +1,10 @@
 --戦華盟将－双龍
---Ancient Warriors Oath - Double Dragon Lords
+--Ancient Warriors Oath - Double Dragon Watchers
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
 	--Link summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_BEASTWARRIOR),2,2,s.lcheck)
 	--Add to hand
 	local e1=Effect.CreateEffect(c)
@@ -71,10 +71,10 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND+LOCATION_ONFIELD,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_HAND+LOCATION_ONFIELD,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToGraveAsCost,tp,LOCATION_HAND+LOCATION_ONFIELD,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToRestAsCost,tp,LOCATION_HAND+LOCATION_ONFIELD,0,1,1,nil)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.filter(c)
 	return c:IsFaceup() and c:IsAbleToHand()

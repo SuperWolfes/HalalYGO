@@ -1,5 +1,5 @@
 --ウイッチクラフト・エーデル
---Witchcrafter Edel
+--Mintcrafter Edel
 --scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
@@ -12,11 +12,11 @@ function s.initial_effect(c)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1,id)
 	e1:SetHintTiming(0,TIMING_MAIN_END+TIMING_END_PHASE)
-	e1:SetCost(aux.WitchcrafterDiscardCost)
+	e1:SetCost(aux.MintcrafterDiscardCost)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Special Summon from your GY
+	--Special Summon from your RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)

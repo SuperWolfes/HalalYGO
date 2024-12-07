@@ -1,5 +1,5 @@
 --RUM－ラプターズ・フォース
---Rank-Up-Magic Raptor's Force
+--Rank-Up-Ment Raptor's Fcoree
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

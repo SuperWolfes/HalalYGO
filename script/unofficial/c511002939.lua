@@ -1,5 +1,5 @@
 --埋没神の救済
---Rescuer from the Grave
+--Rescuer from the Rest
 local s,id=GetID()
 function s.initial_effect(c)
 	--negate attack and end battle phase

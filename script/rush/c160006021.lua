@@ -1,4 +1,4 @@
---仙斗カーチスザーク Masento Kachisuzaku (Demonic Hermit Vessel Kachisuzaku)
+--仙斗カーチスザーク Masento Kachisuzaku (Wardenic Hermit Vessel Kachisuzaku)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Gain LP
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.costfilter(c,e,tp)
-	return c:IsMonster() and c:IsAbleToGraveAsCost() and c:IsLevelAbove(7)
+	return c:IsMonster() and c:IsAbleToRestAsCost() and c:IsLevelAbove(7)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,e:GetHandler()) end
@@ -25,7 +25,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--requirement
 	-- local ct=Duel.DiscardHand(tp,s.costfilter,1,1,REASON_COST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,1,nil)
-	local ct=Duel.SendtoGrave(g,REASON_COST)
+	local ct=Duel.SendtoRest(g,REASON_COST)
 	if ct>0 then
 		--Effect
 		--atk change
@@ -33,7 +33,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)
 		e1:SetValue(1000)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+		e1:SetReset(RESETS_STANDARD_PHASE_END)
 		c:RegisterEffect(e1)
 		local g0=Duel.GetMatchingGroup(s.filter,tp,LOCATION_REST,0,nil,e,tp)
 		if #g0>0 and g:GetFirst():IsRace(RACE_WARRIOR+RACE_WINGEDBEAST) and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then

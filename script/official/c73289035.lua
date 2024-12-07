@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	c:SetUniqueOnField(1,0,id)
 	--xyz summon
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGHT),4,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--draw
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -40,7 +40,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
-	if #g>0 and Duel.SendtoGrave(g,REASON_EFFECT)>0 and g:FilterCount(Card.IsLocation,nil,LOCATION_REST)>0 then
+	if #g>0 and Duel.SendtoRest(g,REASON_EFFECT)>0 and g:FilterCount(Card.IsLocation,nil,LOCATION_REST)>0 then
 		Duel.Draw(tp,2,REASON_EFFECT)
 	end
 end

@@ -2,7 +2,7 @@
 --Vampire Duke
 local s,id=GetID()
 function s.initial_effect(c)
-	--Upon normal summon, special summon 1 DARK "Vampire" monster from GY
+	--Upon normal summon, special summon 1 DARK "Vampire" monster from RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Declare 1 card type; opponent mills 1 card of declared type from deck to GY
+	--Declare 1 card type; opponent mills 1 card of declared type from deck to RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOREST)
@@ -59,13 +59,13 @@ function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,1-tp,LOCATION_DECK)
 end
 function s.tgfilter(c,ty)
-	return c:IsType(ty) and c:IsAbleToGrave()
+	return c:IsType(ty) and c:IsAbleToRest()
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(1-tp,s.tgfilter,1-tp,LOCATION_DECK,0,1,1,nil,e:GetLabel())
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end
 function s.xyzlimit(e,c)

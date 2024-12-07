@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	c:SetSPSummonOnce(id)
 	--Synchro procedure
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTunerEx(Card.IsSetCard,0x10),1,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Special Summon 2 "Gusto" monsters and Synchro Summon using them
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

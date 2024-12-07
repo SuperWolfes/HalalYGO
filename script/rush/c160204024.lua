@@ -3,7 +3,7 @@
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	-- 1 "Dragon's Upsetter" + 1 "Dragon's Striker"
 	Fusion.AddProcMix(c,true,true,160001025,160002020)
 	-- Destroy

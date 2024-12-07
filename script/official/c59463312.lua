@@ -1,5 +1,5 @@
 --冥帝従騎エイドス
---Eidos the Underworld Squire
+--Eidos the Overworld Squire
 local s,id=GetID()
 function s.initial_effect(c)
 	--summon

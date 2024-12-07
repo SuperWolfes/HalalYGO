@@ -31,15 +31,15 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return ex and tg~=nil and tc+tg:FilterCount(Card.IsOnField,nil)-#tg>0
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGrave,tp,0,LOCATION_ONFIELD+LOCATION_HAND,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRest,tp,0,LOCATION_ONFIELD+LOCATION_HAND,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_DISABLE,eg,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,1-tp,LOCATION_ONFIELD+LOCATION_HAND)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.NegateEffect(ev) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-	local g1=Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,0,LOCATION_HAND,nil)
-	local g2=Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,0,LOCATION_ONFIELD,nil)
+	local g1=Duel.GetMatchingGroup(Card.IsAbleToRest,tp,0,LOCATION_HAND,nil)
+	local g2=Duel.GetMatchingGroup(Card.IsAbleToRest,tp,0,LOCATION_ONFIELD,nil)
 	local opt=0
 		if #g1>0 and #g2>0 then
 			opt=Duel.SelectOption(tp,aux.Stringid(63251695,3),aux.Stringid(63251695,4))
@@ -58,7 +58,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		sg=g2:Select(tp,1,1,nil)
 	end
 	if #sg~=0 then
-		Duel.SendtoGrave(sg,REASON_EFFECT)
+		Duel.SendtoRest(sg,REASON_EFFECT)
 	end
 end
 function s.drcon(e,tp,eg,ep,ev,re,r,rp)

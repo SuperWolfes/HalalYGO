@@ -44,14 +44,14 @@ function s.initial_effect(c)
 end
 s.listed_series={0x2016}
 function s.costfilter(c)
-	return c:IsSetCard(0x2016) and c:IsType(TYPE_TUNER) and c:IsAbleToGraveAsCost()
+	return c:IsSetCard(0x2016) and c:IsType(TYPE_TUNER) and c:IsAbleToRestAsCost()
 end
 function s.sccost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND+LOCATION_MZONE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND+LOCATION_MZONE,0,1,1,nil)
 	e:SetLabel(g:GetFirst():GetOriginalLevel())
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.scop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

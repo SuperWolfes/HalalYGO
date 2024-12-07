@@ -15,7 +15,7 @@ s.listed_names={alias}
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) then
-		c:CancelToGrave()
+		c:CancelToRest()
 		Duel.SendtoDeck(c,nil,2,REASON_EFFECT)
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)

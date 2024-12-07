@@ -1,5 +1,5 @@
 --転臨の守護竜
---Guardragon Reincarnation
+--Guardragon Reincorporation
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

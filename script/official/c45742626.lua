@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,6,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--atk/def
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -43,5 +43,5 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g2=Duel.GetDecktopGroup(1-tp,5)
 	g1:Merge(g2)
 	Duel.DisableShuffleCheck()
-	Duel.SendtoGrave(g1,REASON_EFFECT)
+	Duel.SendtoRest(g1,REASON_EFFECT)
 end

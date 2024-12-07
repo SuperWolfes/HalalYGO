@@ -1,5 +1,5 @@
 --時械神 ラツィオン (Anime)
---Lazion, the Timelord (Anime)
+--Lazion, the Timewatcher (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--indes

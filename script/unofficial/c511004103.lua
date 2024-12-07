@@ -30,7 +30,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE,0)<=0 and not c:IsRelateToEffect(e) then return end
 	if tc and tc:IsRelateToEffect(e) and Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)>0 then
 		if c:IsRelateToEffect(e) then
-			c:CancelToGrave()
+			c:CancelToRest()
 			Duel.Overlay(tc,c)
 			local e1=Effect.CreateEffect(tc)
 			e1:SetDescription(aux.Stringid(51960178,0))
@@ -58,7 +58,7 @@ end
 function s.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tc=e:GetLabelObject()
 	if chk==0 then return tc and e:GetHandler():GetOverlayGroup():IsContains(tc) end
-	Duel.SendtoGrave(tc,REASON_COST)
+	Duel.SendtoRest(tc,REASON_COST)
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,2) end

@@ -52,14 +52,14 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		local loc=LOCATION_SZONE
 		if (tpe&TYPE_FIELD)~=0 then
 			loc=LOCATION_FZONE
-			local fc=Duel.GetFieldCard(1-tp,LOCATION_SZONE,5)
+			local fc=Duel.GetFieldCard(1-tp,LOCATION_FZONE,0)
 			if Duel.IsDuelType(DUEL_1_FIELD) then
 				if fc then Duel.Destroy(fc,REASON_RULE) end
-				fc=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
-				if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
+				fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
+				if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
 			else
-				fc=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
-				if fc and Duel.SendtoGrave(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
+				fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
+				if fc and Duel.SendtoRest(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
 			end
 		end
 		Duel.MoveToField(tc,tp,tp,loc,POS_FACEUP,true)
@@ -69,7 +69,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_CARD,0,tc:GetCode())
 		tc:CreateEffectRelation(te)
 		if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 then
-			tc:CancelToGrave(false)
+			tc:CancelToRest(false)
 		end
 		if te:GetCode()==EVENT_CHAINING then
 			local chain=Duel.GetCurrentChain()-1

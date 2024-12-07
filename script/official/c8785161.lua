@@ -49,11 +49,11 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<2 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g1=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.spfilter1),tp,LOCATION_HAND+LOCATION_REST,0,1,1,nil,e,tp)
+	local g1=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter1),tp,LOCATION_HAND+LOCATION_REST,0,1,1,nil,e,tp)
 	local tc1=g1:GetFirst()
 	if not tc1 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g2=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.spfilter2),tp,LOCATION_HAND+LOCATION_REST,0,1,1,tc1,e,tp,6-tc1:GetLevel())
+	local g2=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter2),tp,LOCATION_HAND+LOCATION_REST,0,1,1,tc1,e,tp,6-tc1:GetLevel())
 	g1:Merge(g2)
 	Duel.SpecialSummon(g1,0,tp,tp,false,false,POS_FACEUP)
 end

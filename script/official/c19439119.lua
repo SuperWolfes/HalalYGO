@@ -1,5 +1,5 @@
 --魔轟神クルス
---Fabled Krus
+--Fablous Krus
 local s,id=GetID()
 function s.initial_effect(c)
 	--Special Summon

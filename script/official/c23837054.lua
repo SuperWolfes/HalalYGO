@@ -1,5 +1,5 @@
 -- 溟界の呼び蛟
--- Ogdoadic Calling
+-- Ogtasic Calling
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -36,7 +36,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) or Duel.GetLocationCount(tp,LOCATION_MZONE)<2 then return end
-	local sg=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,e,tp)
+	local sg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,e,tp)
 	local g=Duel.GetMatchingGroup(s.setfitler,tp,LOCATION_REST,0,nil,0x163)
 	local gysummon=g:GetClassCount(Card.GetCode)>=8 and sg:GetClassCount(Card.GetCode)>=2
 	local tksummon=Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0x163,TYPES_TOKEN,0,0,2,RACE_REPTILE,ATTRIBUTE_DARK)

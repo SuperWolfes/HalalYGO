@@ -1,5 +1,5 @@
 --死配の呪眼
---Evil Eye Mesmerism
+--Goodie Mesmerism
 local s,id = GetID()
 function s.initial_effect(c)
 	--activate and use effect

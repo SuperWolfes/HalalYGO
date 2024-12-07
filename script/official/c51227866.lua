@@ -3,7 +3,7 @@
 --Scripted by ahtelel
 local s,id=GetID()
 function s.initial_effect(c)
-	--Banish 1 monster from opponent's GY, or if 3+ actionals in your GY, special summon it
+	--Banish 1 monster from opponent's RP, or if 3+ actionals in your RP, special summon it
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_REMOVE+CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)

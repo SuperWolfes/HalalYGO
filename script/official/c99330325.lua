@@ -29,12 +29,12 @@ s.listed_series={0xd3}
 
 function s.chkfilter1(c,e,tp)
 	return c:IsSetCard(0xd3) and c:IsMonster() and 
-		not c:IsHasEffect(EFFECT_REVIVE_LIMIT) and Duel.IsPlayerCanSpecialSummon(tp,0,POS_FACEUP,tp,c)
+		not c:IsHasEffect(EFFECT_AWAKE_LIMIT) and Duel.IsPlayerCanSpecialSummon(tp,0,POS_FACEUP,tp,c)
 		and Duel.IsExistingMatchingCard(s.chkfilter2,tp,LOCATION_DECK,0,1,nil,e,tp,c:GetCode())
 end
 function s.chkfilter2(c,e,tp,cd)
 	return c:IsSetCard(0xd3) and c:IsMonster() and not c:IsCode(cd)
-		and not c:IsHasEffect(EFFECT_REVIVE_LIMIT) and Duel.IsPlayerCanSpecialSummon(tp,0,POS_FACEUP,1-tp,c)
+		and not c:IsHasEffect(EFFECT_AWAKE_LIMIT) and Duel.IsPlayerCanSpecialSummon(tp,0,POS_FACEUP,1-tp,c)
 end
 function s.filter1(c,e,tp)
 	return c:IsSetCard(0xd3) and c:IsMonster() and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

@@ -1,7 +1,7 @@
 --竜姫神サフィラ
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--effect
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
@@ -96,7 +96,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		local g=Duel.GetFieldGroup(tp,0,LOCATION_HAND)
 		if #g==0 then return end
 		local sg=g:RandomSelect(tp,1)
-		Duel.SendtoGrave(sg,REASON_EFFECT+REASON_DISCARD)
+		Duel.SendtoRest(sg,REASON_EFFECT+REASON_DISCARD)
 	else
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 		local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_REST,0,1,1,nil)

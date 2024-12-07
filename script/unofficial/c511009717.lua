@@ -1,11 +1,11 @@
 --ライデント・ハイドライブ・ロード
---Trident Hydradrive Lord
+--Trident Hyddendrive Watcher
 --fixed by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
 	Link.AddProcedure(c,s.mfilter,3)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

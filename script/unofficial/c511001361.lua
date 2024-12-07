@@ -1,5 +1,5 @@
 --白き盾
---Sacred Shield
+--Clean Shield
 local s,id=GetID()
 function s.initial_effect(c)
 	--reflect

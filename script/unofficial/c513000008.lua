@@ -1,5 +1,5 @@
 --RUM－七皇の剣 (Anime)
---Rank-Up-Magic - The Seventh One (Anime)
+--Rank-Up-Ment - The Seventh One (Anime)
 Duel.LoadScript("c420.lua")
 local s,id=GetID()
 function s.initial_effect(c)

@@ -31,7 +31,7 @@ function s.initial_effect(c)
 end
 s.listed_names={27780618}
 function s.spfilter(c)
-	return (c:IsSetCard(0x5008) or c:IsCode(27780618)) and c:IsLevelBelow(4) and c:IsAbleToGraveAsCost()
+	return (c:IsSetCard(0x5008) or c:IsCode(27780618)) and c:IsLevelBelow(4) and c:IsAbleToRestAsCost()
 end
 function s.spcon(e,c)
 	if c==nil then return true end
@@ -53,11 +53,11 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	g:DeleteGroup()
 end
 function s.tgfilter(c)
-	return (c:IsSetCard(0x5008) or c:IsCode(27780618)) and c:IsAbleToGrave()
+	return (c:IsSetCard(0x5008) or c:IsCode(27780618)) and c:IsAbleToRest()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -67,6 +67,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end

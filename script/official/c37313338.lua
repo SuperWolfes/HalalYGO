@@ -1,9 +1,9 @@
 --春化精の暦替
---Calendar Rotation of the Vernalizer Wanderer
+--Vernusip and the Changing Season
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	--Activate
+	--Special Summon 1 "Vernusip"
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-	--Special Summon "Vernalizer Wanderer" monsters from your GY
+	--Special Summon any number of "Vernusip" monsters from your RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
@@ -28,9 +28,9 @@ function s.initial_effect(c)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
 end
-s.listed_series={0x183}
+s.listed_series={SET_VERNUSIP}
 function s.filter(c,e,tp)
-	return c:IsSetCard(0x183) and c:IsMonster() and (c:IsAbleToHand() or (Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)))
+	return c:IsSetCard(SET_VERNUSIP) and c:IsMonster() and (c:IsAbleToHand() or (Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)))
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter(chkc,e,tp) end
@@ -55,7 +55,7 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsTurnPlayer(1-tp) and aux.exccon(e) and Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)==0
 end
 function s.spfilter(c,e,tp)
-	return c:IsSetCard(0x183) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsSetCard(SET_VERNUSIP) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
@@ -75,7 +75,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local fid=c:GetFieldID()
 	for tc in sg:Iter() do
 		if Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP) then
-			tc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1,fid)
+			tc:RegisterFlagEffect(id,RESET_EVENT|RESETS_STANDARD,0,1,fid)
 		end
 	end
 	if Duel.SpecialSummonComplete()==0 then return end
@@ -91,6 +91,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetLabelObject(sg)
 	e1:SetCondition(s.thcon)
 	e1:SetOperation(s.thop)
+	e1:SetReset(RESET_EVENT|RESETS_STANDARD|RESET_PHASE|PHASE_END,2)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.thcfilter(c,fid)
@@ -102,7 +103,7 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 		g:DeleteGroup()
 		e:Reset()
 		return false
-	else return true end
+	else return Duel.IsTurnPlayer(tp) end
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local g=e:GetLabelObject()

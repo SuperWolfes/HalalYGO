@@ -4,7 +4,7 @@ Duel.LoadCardScript("c56840427.lua")
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGHT),4,3)
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_FIELD)
@@ -52,7 +52,7 @@ function s.xyzop(e,tp,eg,ep,ev,re,r,rp,c,og,min,max)
 	c:SetMaterial(tc)
 	Duel.Overlay(c,tc)
 	if not tc:IsCode(84013237) then
-		Duel.SendtoGrave(mg2,REASON_RULE)
+		Duel.SendtoRest(mg2,REASON_RULE)
 	end
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)

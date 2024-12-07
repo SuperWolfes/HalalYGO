@@ -1,5 +1,5 @@
 --デュアル・ソルジャー
---DUAL Soldier
+--Dual Soldier
 local s,id=GetID()
 function s.initial_effect(c)
 	Dual.AddProcedure(c)
@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetCondition(Dual.EffectStatusCondition)
 	e1:SetValue(function(_,_,r) return (r&REASON_BATTLE)==REASON_BATTLE end)
 	c:RegisterEffect(e1)
-	--Special Summon 1 Level 4 or lower DUAL monster
+	--Special Summon 1 Level 4 or lower Dual monster
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)

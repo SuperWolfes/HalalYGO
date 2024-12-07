@@ -3,7 +3,7 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Name becomes "Skull Servant" while in GY
+	--Name becomes "Skull Servant" while in RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_CHANGE_CODE)
 	e1:SetValue(CARD_SKULL_SERVANT)
 	c:RegisterEffect(e1)
-	--Send 1 "Skull Servant" and 1 "The Lady in Wight" from hand/deck to GY
+	--Send 1 "Skull Servant" and 1 "The Lady in Wight" from hand/deck to RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TOREST)
@@ -35,7 +35,7 @@ end
 s.listed_names={CARD_SKULL_SERVANT,36021814,40991587}
 
 function s.tgfilter(c,code)
-	return c:IsCode(code) and c:IsAbleToGrave()
+	return c:IsCode(code) and c:IsAbleToRest()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil,CARD_SKULL_SERVANT)
@@ -51,7 +51,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local sg2=g2:Select(tp,1,1,nil)
 		sg1:Merge(sg2)
-		Duel.SendtoGrave(sg1,REASON_EFFECT)
+		Duel.SendtoRest(sg1,REASON_EFFECT)
 	end
 end
 function s.cfilter(c)

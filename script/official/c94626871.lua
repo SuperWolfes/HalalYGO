@@ -1,8 +1,8 @@
 --トリックスター・スイートデビル
---Trickstar Sweet Devil
+--Trickstar Sweet Well
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0xfb),2,2)
 	--damage
 	local e2=Effect.CreateEffect(c)

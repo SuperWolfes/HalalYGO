@@ -4,7 +4,7 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Change its battle positions, then special summon 1 EARTH normal monster from GY
+	--Change its battle positions, then special summon 1 EARTH normal monster from RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_POSITION+CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -28,7 +28,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeck(tp,3) end
 	Duel.SetOperationInfo(0,CATEGORY_POSITION,e:GetHandler(),1,0,0)
 end
-	--Change its battle positions, then special summon 1 EARTH normal monster from GY
+	--Change its battle positions, then special summon 1 EARTH normal monster from RP
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not Duel.DiscardDeck(tp,3,REASON_COST)==3 then return end

@@ -1,9 +1,9 @@
 --
---Libromancer Fireburst
+--Librobouncer Fireburst
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Check materials on Locked Summon
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
@@ -34,7 +34,7 @@ function s.initial_effect(c)
 	e3:SetCode(EFFECT_EXTRA_ATTACK_MONSTER)
 	e3:SetValue(1)
 	c:RegisterEffect(e3)
-	--Banish 1 "Libromancer" Locked monster to gain 200 ATK
+	--Banish 1 "Librobouncer" Locked monster to gain 200 ATK
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_ATKCHANGE)

@@ -1,5 +1,5 @@
 -- アマゾネスの銀剣使い
--- Amazoness Silver Sword Master
+-- Amazonian Silver Sword Master
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetTarget(function(e,c) return c:IsSetCard(0x4) and c:HasLevel() end)
 	e1:SetValue(function(e,c) return c:GetLevel()*100 end)
 	c:RegisterEffect(e1)
-	-- Add 1 "Amazoness" Actional/Trap to the hand
+	-- Add 1 "Amazonian" Actional/Trap to the hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TOHAND)

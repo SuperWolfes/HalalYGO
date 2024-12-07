@@ -1,5 +1,5 @@
 --惨禍の呪眼
---Evil Eye of Disaster
+--Goodie of Disaster
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)

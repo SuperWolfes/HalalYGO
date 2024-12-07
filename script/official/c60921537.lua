@@ -44,10 +44,10 @@ function s.stage2(mat,e,tp,eg,ep,ev,re,r,rp,tc)
 	local g=(op==1) and g1 or g2
 	if op==2 then Duel.ConfirmCards(tp,g) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-	local tg=g:FilterSelect(tp,aux.AND(Card.IsMonster,Card.IsAbleToGrave),1,1,nil)
+	local tg=g:FilterSelect(tp,aux.AND(Card.IsMonster,Card.IsAbleToRest),1,1,nil)
 	if #tg>0 then
 		Duel.BreakEffect()
-		Duel.SendtoGrave(tg,REASON_EFFECT)
+		Duel.SendtoRest(tg,REASON_EFFECT)
 		if op==2 then Duel.ShuffleExtra(1-tp) end
 	end
 end

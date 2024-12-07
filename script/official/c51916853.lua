@@ -1,5 +1,5 @@
 --
---Magical Hound
+--Mentoral Hound
 --Scripted by Hel
 local s,id=GetID()
 function s.initial_effect(c)

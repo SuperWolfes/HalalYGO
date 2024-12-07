@@ -1,5 +1,5 @@
 --失楽の魔女
---Condemned Witch
+--Condemned Mint
 --
 local s,id=GetID()
 function s.initial_effect(c)

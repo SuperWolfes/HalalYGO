@@ -1,5 +1,5 @@
 --光霊使いライナ
---Lyna the Light Charmer
+--Lyna the Light Chaumer
 local s,id=GetID()
 function s.initial_effect(c)
 	--flip

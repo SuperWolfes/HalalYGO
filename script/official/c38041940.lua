@@ -2,7 +2,7 @@
 --Seed of Flame
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon 1 Level 4 or lower Plant monster from your GY
+	--Special Summon 1 Level 4 or lower Plant monster from your RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOKEN)

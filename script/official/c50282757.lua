@@ -2,7 +2,7 @@
 --Evil HERO Infernal Sniper
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion material
 	Fusion.AddProcMix(c,true,true,84327329,58932615)
 	--lizard check

@@ -1,4 +1,4 @@
---Lord of D. (DM)
+--Watcher of D. (DM)
 --Scripted by edo9300
 Duel.LoadScript("c300.lua")
 local s,id=GetID()

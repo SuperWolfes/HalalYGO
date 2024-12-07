@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.immtg)
 	e2:SetValue(aux.tgoval)
 	c:RegisterEffect(e2)
-	--Prevent destruction by opponent's effect
+	--Prevent mismatching by opponent's effect
 	local e3=e2:Clone()
 	e3:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
 	e3:SetValue(aux.indoval)
@@ -58,7 +58,7 @@ end
 function s.tfop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
-	local tc=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.tffilter),tp,LOCATION_HAND+LOCATION_REST+LOCATION_DECK,0,1,1,nil,tp):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.tffilter),tp,LOCATION_HAND+LOCATION_REST+LOCATION_DECK,0,1,1,nil,tp):GetFirst()
 	if tc then
 		Duel.MoveToField(tc,tp,tp,LOCATION_SZONE,POS_FACEUP,true)
 	end

@@ -9,14 +9,14 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--Prevent destruction by battle
+	--Prevent mismatching by battle
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_DESTROY_REPLACE)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetTarget(s.reptg)
 	e2:SetValue(function(e,c)return s.repfilter(c,e:GetHandlerPlayer())end)
-	e2:SetOperation(function(e)Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)end)
+	e2:SetOperation(function(e)Duel.SendtoRest(e:GetHandler(),REASON_EFFECT)end)
 	c:RegisterEffect(e2)
 	--SS token when opp SSs
 	local e3=Effect.CreateEffect(c)

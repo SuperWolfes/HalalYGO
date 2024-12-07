@@ -1,13 +1,13 @@
 --ＷＷ－ウィンター・ベル
---Windwitch - Winter Bell
+--Windmint - Winter Bell
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Synchro summon procedure
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTunerEx(Card.IsAttribute,ATTRIBUTE_WIND),1,99)
-	--Inflict damage equal to targeted "Windwitch" monster's level x 200
+	--Inflict damage equal to targeted "Windmint" monster's level x 200
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DAMAGE)

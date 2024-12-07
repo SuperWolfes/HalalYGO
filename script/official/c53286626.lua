@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Substitute destruction for a plant link monster(s)
+	--Substitute mismatching for a plant link monster(s)
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EFFECT_DESTROY_REPLACE)
@@ -73,11 +73,11 @@ end
 function s.lizfilter(e,c)
 	return not c:IsOriginalRace(RACE_PLANT)
 end
-	--Gravericted to plant monsters for extra deck
+	--Restricted to plant monsters for extra deck
 function s.splimit(e,c,sump,sumtype,sumpos,targetp,se)
 	return not c:IsRace(RACE_PLANT) and c:IsLocation(LOCATION_EXTRA)
 end
-	--Substitute destruction for a plant link monster(s)
+	--Substitute mismatching for a plant link monster(s)
 function s.repfilter(c,tp)
 	return c:IsFaceup() and c:IsLocation(LOCATION_MZONE) and c:IsControler(tp) and c:IsRace(RACE_PLANT) and c:IsLinkMonster()
 		and not c:IsReason(REASON_REPLACE) and (c:IsReason(REASON_BATTLE) or (c:IsReason(REASON_EFFECT) and c:GetReasonPlayer()==1-tp))

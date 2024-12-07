@@ -1,5 +1,5 @@
 --マスター・ヒュペリオン
---Master Hyperion
+--Master Hyperbond
 local s,id=GetID()
 function s.initial_effect(c)
 	--spsummon proc

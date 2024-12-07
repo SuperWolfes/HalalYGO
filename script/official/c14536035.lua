@@ -48,7 +48,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoGrave(g,REASON_DISCARD+REASON_COST)
+	Duel.SendtoRest(g,REASON_DISCARD+REASON_COST)
 	g:DeleteGroup()
 end
 function s.costfilter(c)
@@ -59,7 +59,7 @@ function s.sgcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.DiscardHand(tp,s.costfilter,1,1,REASON_COST+REASON_DISCARD)
 end
 function s.filter(c)
-	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsAbleToGrave()
+	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsAbleToRest()
 end
 function s.sgtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
@@ -70,6 +70,6 @@ function s.sgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end

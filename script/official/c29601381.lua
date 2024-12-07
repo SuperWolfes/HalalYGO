@@ -5,7 +5,7 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Attach itself to 1 "Sprigguns" Xyz monster from hand, field, or GY
+	--Attach itself to 1 "Sprigguns" Xyz monster from hand, field, or RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -57,7 +57,7 @@ function s.mattg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,e:GetHandler(),1,0,0)
 	end
 end
-	--Attach itself to targeted "Sprigguns" Xyz monster from hand, field, or GY
+	--Attach itself to targeted "Sprigguns" Xyz monster from hand, field, or RP
 function s.matop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()

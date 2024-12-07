@@ -30,7 +30,7 @@ function s.filter(c,e,tp)
 	if e:GetHandler():IsLocation(LOCATION_HAND) then
 		ft=ft-1
 	end
-	return c:IsActional() and c:CheckActivateEffect(false,false,false)~=nil 
+	return c:IsActional() and c:CheckActivateEffect(false,false,false)~=nil
 		and (ft>0 or c:IsType(TYPE_FIELD))
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -41,7 +41,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	if tc and tc:IsRelateToEffect(e) and (tc:IsType(TYPE_FIELD) or Duel.GetLocationCount(tp,LOCATION_SZONE)>0) 
+	if tc and tc:IsRelateToEffect(e) and (tc:IsType(TYPE_FIELD) or Duel.GetLocationCount(tp,LOCATION_SZONE)>0)
 		and not tc:IsHasEffect(EFFECT_CANNOT_TRIGGER) then
 		local te=tc:GetActivateEffect()
 		local pre={Duel.GetPlayerEffect(tp,EFFECT_CANNOT_ACTIVATE)}
@@ -62,14 +62,14 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local loc=LOCATION_SZONE
 		if (tpe&TYPE_FIELD)~=0 then
 			loc=LOCATION_FZONE
-			local fc=Duel.GetFieldCard(1-tp,LOCATION_SZONE,5)
+			local fc=Duel.GetFieldCard(1-tp,LOCATION_FZONE,0)
 			if Duel.IsDuelType(DUEL_1_FIELD) then
 				if fc then Duel.Destroy(fc,REASON_RULE) end
-				fc=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
-				if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
+				fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
+				if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
 			else
-				fc=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
-				if fc and Duel.SendtoGrave(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
+				fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
+				if fc and Duel.SendtoRest(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
 			end
 		end
 		Duel.MoveToField(tc,tp,tp,loc,POS_FACEUP,true)
@@ -101,6 +101,6 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 				etc=g:GetNext()
 			end
 		end
-		Duel.SendtoGrave(tc,REASON_EFFECT,1-tp)
+		Duel.SendtoRest(tc,REASON_EFFECT,1-tp)
 	end
 end

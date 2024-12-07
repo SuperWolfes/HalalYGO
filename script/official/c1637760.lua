@@ -1,5 +1,5 @@
 --昇天の剛角笛
---Grand Horn of Heaven
+--Grand Horn of Spectrum
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

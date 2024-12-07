@@ -1,5 +1,5 @@
 --魔導召喚士 テンペル
---Temperance of Prophecy
+--Temperance of Prediction
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

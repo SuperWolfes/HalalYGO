@@ -1,5 +1,5 @@
 --方界合神
---Unification of the Cubic Lords
+--Unification of the Cubic Watchers
 
 local s,id=GetID()
 function s.initial_effect(c)

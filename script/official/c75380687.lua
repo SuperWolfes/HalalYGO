@@ -3,8 +3,8 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion Procedure
-	c:EnableReviveLimit()
-	Fusion.AddProcMix(c,false,false,CARD_DARK_MAGICIAN,aux.FilterBoolFunctionEx(Card.IsRace,RACE_DRAGON))
+	c:EnableAwakeLimit()
+	Fusion.AddProcMix(c,false,false,CARD_DARK_MENTOR,aux.FilterBoolFunctionEx(Card.IsRace,RACE_DRAGON))
 	--Must be Fusion Summoned, or Special Summoned by "The Eye of Timaeus"
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.target)
 	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
-	--Special Summon 1 Mentor from your GY
+	--Special Summon 1 Mentor from your RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -34,7 +34,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 s.material_setcode=0x10a2
-s.listed_names={CARD_DARK_MAGICIAN,1784686}
+s.listed_names={CARD_DARK_MENTOR,1784686}
 function s.splimit(e,se,sp,st)
 	return (st&SUMMON_TYPE_FUSION)==SUMMON_TYPE_FUSION or se:GetHandler():IsCode(1784686)
 end

@@ -1,5 +1,5 @@
 --超魔神イド (Anime)
---Ido the Supreme Magical Force (Anime)
+--Ido the Supreme Mentoral Fcoree (Anime)
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetCondition(s.descon)
 	e1:SetOperation(s.desop)
 	c:RegisterEffect(e1)
-	--Special Summon itself after destruction
+	--Special Summon itself after mismatching
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)

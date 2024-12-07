@@ -1,5 +1,5 @@
 --冥界流傀儡術
---The Puppet Magic of Dark Ruler
+--The Puppet Ment of Dark Ruler
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

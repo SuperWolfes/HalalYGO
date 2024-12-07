@@ -1,9 +1,9 @@
 --光竜星－リフン
---Chiwen, Light of the Yang Zing
+--Beefn, Light of the Bang Zing
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special summon 1 "Yang Zing" monster from deck
+	--Special summon 1 "Bang Zing" monster from deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
-	--Special summon itself from GY
+	--Special summon itself from RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)

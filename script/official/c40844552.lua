@@ -1,5 +1,5 @@
 --極星天ヴァルキュリア
---Valkyrie of the Nordic Ascendant
+--Balkanie of the Nordic Ascendant
 local s,id=GetID()
 function s.initial_effect(c)
 	--token

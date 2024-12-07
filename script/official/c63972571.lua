@@ -1,5 +1,5 @@
 --獣神王バルバロス
---King Beast Barbaros
+--King Beast Bardaco
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)

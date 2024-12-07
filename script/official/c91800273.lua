@@ -4,7 +4,7 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Cards sent to GY are banished instead
+	--Cards sent to RP are banished instead
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
 	e1:SetCode(EVENT_FREE_CHAIN)
@@ -14,16 +14,16 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 end
-	--If no cards in your GY
+	--If no cards in your RP
 function s.condition(e)
 	return Duel.GetFieldGroupCount(e:GetHandlerPlayer(),LOCATION_REST,0)==0
 end
-	--Send this card from hand to GY
+	--Send this card from hand to RP
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
+	Duel.SendtoRest(e:GetHandler(),REASON_COST)
 end
-	--Cards sent to GY are banished instead, lasts to next turn
+	--Cards sent to RP are banished instead, lasts to next turn
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD)

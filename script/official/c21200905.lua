@@ -1,9 +1,9 @@
 --アロマセラフィ－ジャスミン
---Aromaseraphy Jasmine
+--Aromawatchery Jasmine
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_PLANT),2,2)
 	--indes
 	local e1=Effect.CreateEffect(c)

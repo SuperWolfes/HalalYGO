@@ -2,7 +2,7 @@
 --Chaos Emperor Dragon - Envoy of the End
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Special summon limitation
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.sptg1)
 	e2:SetOperation(s.spop1)
 	c:RegisterEffect(e2)
-	--Send cards to the rest place
+	--Send cards to the resting place
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_TOREST+CATEGORY_DAMAGE)
@@ -89,7 +89,7 @@ function s.sgcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.RegisterEffect(e2,tp)
 end
 function s.damfilter(c,p)
-	return c:GetOwner()==p and c:IsAbleToGrave()
+	return c:GetOwner()==p and c:IsAbleToRest()
 end
 function s.sgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -103,7 +103,7 @@ function s.sgfilter(c,p)
 end
 function s.sgop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(tp,0xe,0xe)
-	Duel.SendtoGrave(g,REASON_EFFECT)
+	Duel.SendtoRest(g,REASON_EFFECT)
 	local og=Duel.GetOperatedGroup()
 	local ct=og:FilterCount(s.sgfilter,nil,1-tp)
 	if ct>0 then

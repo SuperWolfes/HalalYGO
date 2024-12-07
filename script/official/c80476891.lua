@@ -1,9 +1,9 @@
 --進化合獣ヒュードラゴン
---Poly-Chemicritter Hydragon
+--Poly-Chemicritter Hyddengon
 local s,id=GetID()
 function s.initial_effect(c)
 	Dual.AddProcedure(c)
-	--Increast ATK/DEF of 1 DUAL monster
+	--Increast ATK/DEF of 1 Dual monster
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_ATKCHANGE)
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
-	--Replace destruction of a DUAL monster(s)
+	--Replace mismatching of a Dual monster(s)
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EFFECT_DESTROY_REPLACE)

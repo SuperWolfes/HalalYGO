@@ -29,5 +29,5 @@ function s.handop(e,tp,eg,ep,ev,re,r,rp)
 		local sg=Duel.SelectMatchingCard(1-tp,aux.TRUE,1-tp,LOCATION_HAND,0,ht2-4,ht2-4,nil)
 		g:Merge(sg)
 	end
-	Duel.SendtoGrave(g,REASON_EFFECT)
+	Duel.SendtoRest(g,REASON_EFFECT)
 end

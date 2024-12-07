@@ -1,5 +1,5 @@
 --因幡之白兎
---Inaba White Rabbit
+--Alban White Rabbit
 local s,id=GetID()
 function s.initial_effect(c)
 	Guardian.AddProcedure(c,EVENT_SUMMON_SUCCESS,EVENT_FLIP)

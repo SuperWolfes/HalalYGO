@@ -1,5 +1,5 @@
 --堕天使ディザイア
---Darklord Desire
+--Darkwarden Desire
 local s,id=GetID()
 function s.initial_effect(c)
 	--cannot special summon
@@ -29,10 +29,10 @@ function s.otfilter(c,tp)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
-	if chkc then return chkc:GetControler()~=tp and chkc:IsLocation(LOCATION_MZONE) and chkc:IsAbleToGrave() end
-	if chk==0 then return c:GetAttack()>=1000 and Duel.IsExistingTarget(Card.IsAbleToGrave,tp,0,LOCATION_MZONE,1,nil) end
+	if chkc then return chkc:GetControler()~=tp and chkc:IsLocation(LOCATION_MZONE) and chkc:IsAbleToRest() end
+	if chk==0 then return c:GetAttack()>=1000 and Duel.IsExistingTarget(Card.IsAbleToRest,tp,0,LOCATION_MZONE,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-	local g=Duel.SelectTarget(tp,Card.IsAbleToGrave,tp,0,LOCATION_MZONE,1,1,nil)
+	local g=Duel.SelectTarget(tp,Card.IsAbleToRest,tp,0,LOCATION_MZONE,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOREST,g,#g,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
@@ -40,6 +40,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if c:IsRelateToEffect(e) and c:IsFaceup() and c:UpdateAttack(-1000)==-1000 
 		and tc and tc:IsRelateToEffect(e) then
-		Duel.SendtoGrave(tc,REASON_EFFECT)
+		Duel.SendtoRest(tc,REASON_EFFECT)
 	end
 end

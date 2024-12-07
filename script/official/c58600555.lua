@@ -2,7 +2,7 @@
 --Digital Bug Corebage
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Xyz.AddProcedure(c,s.mfilter,5,2,s.ovfilter,aux.Stringid(id,2),99,s.xyzop)
 	--Back to Deck
 	local e2=Effect.CreateEffect(c)
@@ -76,7 +76,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)
-	local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(Card.IsRace),tp,LOCATION_REST,0,1,1,nil,RACE_INSECT)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(Card.IsRace),tp,LOCATION_REST,0,1,1,nil,RACE_INSECT)
 	if #g>0 then
 		Duel.Overlay(c,g)
 	end

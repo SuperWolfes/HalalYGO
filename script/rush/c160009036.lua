@@ -1,5 +1,5 @@
 --翅甲王ディナス・ドルクス
---Bladearmor King Dynas Dorcus
+--Bladearmor King Dynas Dcoreus
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
@@ -21,7 +21,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,3,nil) end
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsRace(RACE_INSECT) and c:IsLevelAbove(5) and c:IsLevelBelow(8)
+	return c:IsFaceup() and c:IsRace(RACE_INSECT) and c:IsLevelBetween(5,8)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,0,LOCATION_MZONE,1,nil) end

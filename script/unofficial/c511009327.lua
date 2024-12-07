@@ -1,5 +1,5 @@
 --ランクアップマジック－ベアリアル・ファントム・ナイツ
---The Illusion Knights' Rank-Up-Magic Burial
+--The Illusion Knights' Rank-Up-Ment Burial
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -49,7 +49,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		sc:CompleteProcedure()
 		local c=e:GetHandler()
 		if c:IsRelateToEffect(e) then
-			c:CancelToGrave()
+			c:CancelToRest()
 			Duel.Overlay(sc,c)
 		end
 	end

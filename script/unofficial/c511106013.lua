@@ -1,10 +1,10 @@
 --キュービック・ハイドライブ・ロード
---Cubed Hydradrive Lord
+--Cubed Hyddendrive Watcher
 --scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,s.matfilter,3,3,s.spcheck)
 	--attribute
 	local e1=Effect.CreateEffect(c)

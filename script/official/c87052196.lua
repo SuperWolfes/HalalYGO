@@ -1,5 +1,5 @@
 --天威龍－アーダラ
---Tenyi Dragon - Ajna
+--Tenbree Dragon - Ajna
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)

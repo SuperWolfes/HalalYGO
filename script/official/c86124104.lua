@@ -1,9 +1,9 @@
 --終焉の悪魔デミス
---Demise, Agent of Armageddon
+--Demise, Agent of Cataclysm
 --Scripted by ahtelel
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--code
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)

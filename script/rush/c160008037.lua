@@ -1,8 +1,8 @@
--- Meika Etraynze the Shadow Flower Venus
+-- Meika Etraynze the Shadow Flower Summit
 -- 花牙絢爛メイカ・エトランゼ
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	-- fusion proc
 	Fusion.AddProcMix(c,true,true,160005029,160005029)
 	-- Special Summon

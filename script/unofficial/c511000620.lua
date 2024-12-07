@@ -97,16 +97,16 @@ function s.refcon(e,re,val,r,rp,rc)
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local eq=e:GetHandler():GetEquipTarget()
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
+	Duel.SendtoRest(e:GetHandler(),REASON_COST)
 	e:SetLabelObject(eq)
 end
 function s.filter(c)
-	return c:IsType(TYPE_EQUIP) and (c:IsDestructable() or c:IsAbleToGrave())
+	return c:IsType(TYPE_EQUIP) and (c:IsDestructable() or c:IsAbleToRest())
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_SZONE,LOCATION_SZONE,1,c) 
-	or eq:IsDestructable() or eq:IsAbleToGrave() end
+	or eq:IsDestructable() or eq:IsAbleToRest() end
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_SZONE,LOCATION_SZONE,c)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,#g,0,0)
 end
@@ -120,5 +120,5 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	g:Merge(g2)
 	Duel.Destroy(g,REASON_EFFECT)
 	g=g:Filter(s.senfilter,nil)
-	Duel.SendtoGrave(g,REASON_EFFECT)
+	Duel.SendtoRest(g,REASON_EFFECT)
 end

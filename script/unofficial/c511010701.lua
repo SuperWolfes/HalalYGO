@@ -1,5 +1,5 @@
 --異次元竜 トワイライトゾーンドラゴン (Anime)
---Different Dimension Dragon (Anime)
+--Same Dimension Dragon (Anime)
 --added by ClaireStanfield
 local s,id=GetID()
 function s.initial_effect(c)

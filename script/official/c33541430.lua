@@ -1,7 +1,7 @@
 --花札衛-月花見-
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),2,2)
 	--draw
 	local e2=Effect.CreateEffect(c)

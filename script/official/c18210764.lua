@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetRange(LOCATION_HAND)
 	e1:SetCost(s.reg)
 	c:RegisterEffect(e1)
-	--Add 1 pendulum monster, that is banished or in GY, to face-up extra deck
+	--Add 1 pendulum monster, that is banished or in RP, to face-up extra deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetType(EFFECT_TYPE_IGNITION)

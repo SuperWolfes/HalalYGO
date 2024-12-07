@@ -1,4 +1,4 @@
---Dragon's Evil Eye
+--Dragon's Goodie
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	Dual.AddProcedure(c)
-	--Send 1 DUAL monster to the GY
+	--Send 1 Dual monster to the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOREST+CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -19,7 +19,7 @@ function s.filter(c,tp)
 	return s.tgfilter(c) and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,c)
 end
 function s.tgfilter(c)
-	return c:IsType(TYPE_DUAL) and c:IsAbleToGrave()
+	return c:IsType(TYPE_DUAL) and c:IsAbleToRest()
 end
 function s.thfilter(c)
 	return c:IsType(TYPE_DUAL) and c:IsAbleToHand()
@@ -32,7 +32,7 @@ end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
-	if #g==0 or Duel.SendtoGrave(g,REASON_EFFECT)==0 or not g:GetFirst():IsLocation(LOCATION_REST) then return end
+	if #g==0 or Duel.SendtoRest(g,REASON_EFFECT)==0 or not g:GetFirst():IsLocation(LOCATION_REST) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 	local tg=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #tg>0 then

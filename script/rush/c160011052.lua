@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--equip
-	aux.AddEquipProcedure(c,0,s.eqfilter,nil,s.cost,nil,s.operation)
+	aux.AddEquipProcedure(c,0,s.eqfilter,s.eqlimit,s.cost,nil,s.operation)
 	--Multiple attacks
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_EQUIP)
@@ -15,8 +15,11 @@ end
 function s.eqfilter(c)
 	return c:IsFaceup() and c:IsRace(RACE_MENTAL) and not c:IsMaximumModeSide()
 end
+function s.eqlimit(e,c)
+	return c:IsFaceup()
+end
 function s.costfilter(c)
-	return c:IsAttribute(ATTRIBUTE_WIND) and c:IsRace(RACE_MENTAL) and c:IsDiscardable() and c:IsAbleToGraveAsCost()
+	return c:IsAttribute(ATTRIBUTE_WIND) and c:IsRace(RACE_MENTAL) and c:IsDiscardable() and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil) end
@@ -25,5 +28,5 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end

@@ -1,5 +1,5 @@
 --ヂェミナイ・デビル
---DUAL Imps
+--Dual Imps
 local s,id=GetID()
 function s.initial_effect(c)
 	--Negate
@@ -24,8 +24,8 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return re:IsHasCategory(CATEGORY_HANDES) and (not ex or p~=1-tp)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
+	Duel.SendtoRest(e:GetHandler(),REASON_COST)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

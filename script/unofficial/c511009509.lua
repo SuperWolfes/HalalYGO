@@ -1,4 +1,4 @@
---Rank-Up-Magic Devotion Force
+--Rank-Up-Ment Devotion Fcoree
 --fixed by MLD
 local s,id=GetID()
 function s.initial_effect(c)

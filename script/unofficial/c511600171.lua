@@ -1,5 +1,5 @@
 --魔術の呪文書 (Manga)
---Magic Formula (Manga)
+--Ment Formula (Manga)
 --scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)

@@ -1,5 +1,5 @@
 --Ｅｍボーナス・ディーラー
---Performage Bonus Dealer
+--Performanced Bonus Dealer
 --Scripted by Eerie Code
 --fixed by MLD
 local s,id=GetID()

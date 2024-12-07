@@ -1,5 +1,5 @@
 --ＴＧギア・ゾンビ
---T.G. Gear Contaminated
+--T.G. Gear Toxic
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)

@@ -1,12 +1,12 @@
 --パラドクス・ハイドライブ・アトラース
---Paradox Hydradrive Atlas
+--Paradox Hyddendrive Atlas
 --Scripted by Playmaker 772211, updated and fixed by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x577),2,nil,s.matcheck)
-	--Suffice
+	--Dice
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SUFFICE)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
@@ -48,7 +48,7 @@ function s.initial_effect(c)
 	e5:SetValue(aux.imval1)
 	c:RegisterEffect(e5)
 end
-s.roll_suffice=true
+s.roll_dice=true
 s.listed_series={0x577}
 function s.matfilter(c)
 	return c:IsLevelAbove(5) and c:IsType(TYPE_EFFECT)
@@ -63,7 +63,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) then
-		local dieResult=Duel.TossSuffice(tp,1)
+		local dieResult=Duel.TossDice(tp,1)
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -87,7 +87,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local zone=c:GetLinkedZone(tp)
 	if zone==0 then return end
-	local dieResult=Duel.TossSuffice(tp,1)
+	local dieResult=Duel.TossDice(tp,1)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,zone,dieResult)
 	if #g>0 then

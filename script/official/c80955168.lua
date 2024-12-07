@@ -14,7 +14,7 @@ function s.initial_effect(c)
 end
 function s.cfilter(c,tp)
 	return c:IsFaceup() and c:IsPreviousLocation(LOCATION_REST) and c:IsPreviousControler(1-tp)
-		and c:IsControler(tp) and c:IsRace(RACE_CONTAMINED)
+		and c:IsControler(tp) and c:IsRace(RACE_TOXIC)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp,chk)
 	return eg:IsExists(s.cfilter,1,nil,tp)

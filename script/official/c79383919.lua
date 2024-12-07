@@ -1,5 +1,5 @@
 --断罪の呪眼
---Evil Eye Retribution
+--Goodie Retribution
 --Scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)

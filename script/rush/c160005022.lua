@@ -1,5 +1,5 @@
 -- 魔仙斗アイスザーク 
--- Demonic Hermit Vessel Icezark
+-- Wardenic Hermit Vessel Icezark
 local s,id=GetID()
 function s.initial_effect(c)
 --Activate

@@ -31,11 +31,11 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ClearTargetCard()
 	local loc=LOCATION_SZONE
 	if (tpe&TYPE_FIELD)~=0 then
-		local fc=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
-		if fc then Duel.SendtoGrave(fc,REASON_RULE) end
+		local fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
+		if fc then Duel.SendtoRest(fc,REASON_RULE) end
 		if Duel.GetFlagEffect(tp,62765383)>0 then
-			fc=Duel.GetFieldCard(1-tp,LOCATION_SZONE,5)
-			if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
+			fc=Duel.GetFieldCard(1-tp,LOCATION_FZONE,0)
+			if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
 		end
 		loc=LOCATION_FZONE
 	end
@@ -43,7 +43,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,0,tc:GetCode())
 	tc:CreateEffectRelation(te)
 	if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 then
-		tc:CancelToGrave(false)
+		tc:CancelToRest(false)
 	end
 	if co then co(te,tp,eg,ep,ev,re,r,rp,1) end
 	if tg then tg(te,tp,eg,ep,ev,re,r,rp,1) end

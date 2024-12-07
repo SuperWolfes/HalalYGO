@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 end
-	--Check for card in deck to send to GY
+	--Check for card in deck to send to RP
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeckAsCost(tp,1) end
 end
@@ -22,7 +22,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_WINGEDBEAST),tp,LOCATION_MZONE,0,1,nil)
 	and Duel.IsExistingMatchingCard(Card.IsTrap,tp,LOCATION_REST,0,1,nil) end
 end
-	--Send 1 top card of deck to GY to this card gain 200 atk for each trap and inflict 1000 damage
+	--Send 1 top card of deck to RP to this card gain 200 atk for each trap and inflict 1000 damage
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	--Requirement

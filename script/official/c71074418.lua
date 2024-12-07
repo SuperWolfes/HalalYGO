@@ -1,5 +1,5 @@
 --ウィッチクラフトゴーレム・アルル
---Witchcrafter Gopal Aruru
+--Mintcrafter Gopal Aruru
 local s,id=GetID()
 function s.initial_effect(c)
 	--Special Summon and return a target to the hand

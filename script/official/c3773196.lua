@@ -35,7 +35,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) then
 		if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then
-			Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
+			Duel.SendtoRest(e:GetHandler(),REASON_EFFECT)
 			return
 		end
 		Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP_ATTACK)

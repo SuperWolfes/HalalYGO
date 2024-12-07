@@ -1,5 +1,5 @@
 --八汰烏
---Yata-Garasu
+--Yardi-Gara
 local s,id=GetID()
 function s.initial_effect(c)
 	Guardian.AddProcedure(c,EVENT_SUMMON_SUCCESS,EVENT_FLIP)

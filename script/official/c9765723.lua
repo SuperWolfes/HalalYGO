@@ -1,5 +1,5 @@
 --戦乙女の契約書
---Dark Contract with the Witch
+--Dark Contract with the Mint
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -52,7 +52,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()
 end
 function s.cfilter(c)
-	return (c:IsSetCard(0xaf) or c:IsSetCard(0xae)) and c:IsAbleToGraveAsCost()
+	return (c:IsSetCard(0xaf) or c:IsSetCard(0xae)) and c:IsAbleToRestAsCost()
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end

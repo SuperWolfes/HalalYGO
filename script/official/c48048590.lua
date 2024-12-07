@@ -1,5 +1,5 @@
 --竜魔導の守護者
---Keeper of Dragon Magic
+--Keeper of Dragon Ment
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

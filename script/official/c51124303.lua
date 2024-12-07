@@ -46,7 +46,7 @@ function s.filter(c,e,tp)
 	return sg:IsExists(s.rfilter,1,nil,c) or sg:CheckWithSumEqual(Card.GetLevel,c:GetLevel(),1,ft)
 end
 function s.mfilter(c)
-	return c:HasLevel() and c:IsAbleToGrave()
+	return c:HasLevel() and c:IsAbleToRest()
 end
 function s.mzfilter(c,tp)
 	return c:IsLocation(LOCATION_MZONE) and c:IsControler(tp) and c:GetSequence()<5
@@ -93,7 +93,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		if not mc:IsLocation(LOCATION_EXTRA) then
 			Duel.ReleaseLockedMaterial(mat)
 		else
-			Duel.SendtoGrave(mat,REASON_EFFECT+REASON_MATERIAL+REASON_LOCKED)
+			Duel.SendtoRest(mat,REASON_EFFECT+REASON_MATERIAL+REASON_LOCKED)
 		end
 		Duel.BreakEffect()
 		Duel.SpecialSummon(tc,SUMMON_TYPE_LOCKED,tp,tp,false,true,POS_FACEUP)
@@ -108,7 +108,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		if not mc:IsLocation(LOCATION_EXTRA) then
 			Duel.ReleaseLockedMaterial(mat)
 		else
-			Duel.SendtoGrave(mat,REASON_EFFECT+REASON_MATERIAL+REASON_LOCKED)
+			Duel.SendtoRest(mat,REASON_EFFECT+REASON_MATERIAL+REASON_LOCKED)
 		end
 		Duel.BreakEffect()
 		tc=tg:GetFirst()

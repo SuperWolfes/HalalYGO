@@ -1,10 +1,10 @@
 --No.90 銀河眼の光子卿
---Number 90: Galaxy-Eyes Photon Lord
+--Number 90: Galaxy-Eyes Photon Watcher
 local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz Summon
 	Xyz.AddProcedure(c,nil,8,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Cannot be destroyed by card effects
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)

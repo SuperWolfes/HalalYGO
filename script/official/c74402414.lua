@@ -59,8 +59,8 @@ end
 s.counter_place_list={0x25}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local hg=Duel.GetFieldGroup(tp,LOCATION_HAND,0):Filter(aux.TRUE,e:GetHandler())
-	if chk==0 then return #hg>0 and hg:FilterCount(Card.IsAbleToGraveAsCost,nil)==#hg end
-	Duel.SendtoGrave(hg,REASON_COST)
+	if chk==0 then return #hg>0 and hg:FilterCount(Card.IsAbleToRestAsCost,nil)==#hg end
+	Duel.SendtoRest(hg,REASON_COST)
 end
 function s.filter(c)
 	return c:IsActionalTrap() and c:IsAbleToRemove()

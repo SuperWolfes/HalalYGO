@@ -33,7 +33,7 @@ function s.filter(c,e,tp)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.NegateAttack() and Duel.Draw(tp,1,REASON_EFFECT)~=0 then
-		local g=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.filter),tp,LOCATION_REST|LOCATION_EXTRA,0,nil,e,tp)
+		local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.filter),tp,LOCATION_REST|LOCATION_EXTRA,0,nil,e,tp)
 		if #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 			Duel.BreakEffect()
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)

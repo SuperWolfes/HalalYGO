@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.desop)
 	c:RegisterEffect(e1)
 end
-s.roll_suffice=true
+s.roll_dice=true
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetAttackTarget()~=nil
 end
@@ -26,7 +26,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetAttackTarget()
 	if c==tc then tc=Duel.GetAttacker() end
 	if not tc or not tc:IsRelateToBattle() then return end
-	local d=Duel.TossSuffice(tp,1)
+	local d=Duel.TossDice(tp,1)
 	if d==6 then
 		if c:IsFaceup() and c:IsLocation(LOCATION_MZONE) then Duel.Destroy(tc,REASON_EFFECT) end
 	else

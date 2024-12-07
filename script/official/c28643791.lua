@@ -1,5 +1,5 @@
 --最後の進軍
---March Towards Ragnarok
+--March Towards Ragka
 
 local s,id=GetID()
 function s.initial_effect(c)

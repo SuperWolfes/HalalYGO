@@ -91,7 +91,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		if op then
 			op(e,tp,eg,ep,ev,re,r,rp)
 		end
-		c:CancelToGrave()
+		c:CancelToRest()
 	end
 	else
 		if e:GetHandler():IsRelateToEffect(e) then

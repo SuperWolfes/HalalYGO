@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	e3:SetCost(s.ndisabcost)
 	e3:SetOperation(s.ndisabop)
 	c:RegisterEffect(e3)
-	--Banish 1 monster and send to the GY 1 Contaminated monster from the Deck
+	--Banish 1 monster and send to the RP 1 Toxic monster from the Deck
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_REMOVE+CATEGORY_TOREST)
@@ -39,7 +39,7 @@ function s.initial_effect(c)
 end
 s.listed_names={40005099}
 function s.rmvfilter1(c)
-	return c:IsRace(RACE_CONTAMINED) and c:IsAbleToRemoveAsCost()
+	return c:IsRace(RACE_TOXIC) and c:IsAbleToRemoveAsCost()
 end
 function s.ndisabcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.rmvfilter1,tp,LOCATION_REST,0,1,nil) end
@@ -53,7 +53,7 @@ function s.ndisabop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_CANNOT_DISABLE_SUMMON)
 	e1:SetProperty(EFFECT_FLAG_IGNORE_RANGE+EFFECT_FLAG_SET_AVAILABLE)
-	e1:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_CONTAMINED))
+	e1:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_TOXIC))
 	e1:SetTargetRange(LOCATION_MZONE,0)
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e1,tp)
@@ -62,10 +62,10 @@ function s.ndisabop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e2,tp)
 end
 function s.rmvfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_CONTAMINED) and c:IsAbleToRemove()
+	return c:IsFaceup() and c:IsRace(RACE_TOXIC) and c:IsAbleToRemove()
 end
 function s.tgfilter(c,e,tp)
-	return c:IsRace(RACE_CONTAMINED) and c:IsDefenseBelow(0) 
+	return c:IsRace(RACE_TOXIC) and c:IsDefenseBelow(0) 
 end
 function s.rmvtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.rmvfilter(chkc) end
@@ -83,7 +83,7 @@ function s.rmvop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 		if #g>0 then
-			Duel.SendtoGrave(g,REASON_EFFECT)
+			Duel.SendtoRest(g,REASON_EFFECT)
 		end
 	end
 end

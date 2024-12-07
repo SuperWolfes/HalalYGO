@@ -1,5 +1,5 @@
 --刻剣の魔術師
---Timebreaker Magician (Anime)
+--Timebreaker Mentor (Anime)
 --fixed by MLD
 local s,id=GetID()
 function s.initial_effect(c)

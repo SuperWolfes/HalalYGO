@@ -1,5 +1,5 @@
 --終焉の指名者
---Armageddon Designator
+--Cataclysm Designator
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

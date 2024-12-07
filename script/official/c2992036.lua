@@ -1,9 +1,9 @@
 --根絶の機皇神
---Meklord Astro the Eradicator
+--Mekwatcher Astro the Eradicator
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Add to hand or Special Summon 3 "Meklord" monsters with different names in your GY
+	--Add to hand or Special Summon 3 "Mekwatcher" monsters with different names in your RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOHAND)

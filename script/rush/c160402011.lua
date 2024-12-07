@@ -2,7 +2,7 @@
 -- Onmyou Supreme Sage Douma
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,160004038,160421038)
 	-- Gain LP
 	local e1=Effect.CreateEffect(c)

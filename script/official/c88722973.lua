@@ -2,7 +2,7 @@
 --Majester Paladin, the Ascending Dracoslayer
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Xyz Summon procedure
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_PENDULUM),4,2)
 	--Search 1 Pendulum Monster during the End Phase

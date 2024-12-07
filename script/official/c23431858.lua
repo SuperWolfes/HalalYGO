@@ -1,5 +1,5 @@
 --
---Skyforce Dragon - Vishuta
+--Skyfcoree Dragon - Vishuta
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)

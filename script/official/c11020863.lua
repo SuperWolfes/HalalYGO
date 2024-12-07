@@ -3,7 +3,7 @@
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	-- Must be Special Summoned by "Royal Straight"
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -40,7 +40,7 @@ function s.descon(e,tp,eg,ep,ev,re,r,rp)
 		and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,CARD_KING_KNIGHT)
 end
 function s.tgfilter(c)
-	return c:IsMonster() and c:IsLevelAbove(1) and c:IsLevelBelow(5) and c:IsAbleToGrave()
+	return c:IsMonster() and c:IsLevelAbove(1) and c:IsLevelBelow(5) and c:IsAbleToRest()
 end
 function s.tgrescon(sg)
 	local res=#sg==sg:GetClassCount(Card.GetLevel)
@@ -60,7 +60,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_HAND+LOCATION_DECK,0,nil)
 	if #g<5 then return end
 	local tg=aux.SelectUnselectGroup(g,e,tp,5,5,s.tgrescon,1,tp,HINTMSG_TOREST)
-	if #tg==5 and Duel.SendtoGrave(tg,REASON_EFFECT)>0 then
+	if #tg==5 and Duel.SendtoRest(tg,REASON_EFFECT)>0 then
 		local dg=Duel.GetMatchingGroup(nil,tp,0,LOCATION_ONFIELD,nil)
 		if #dg<1 then return end
 		Duel.Destroy(dg,REASON_EFFECT)

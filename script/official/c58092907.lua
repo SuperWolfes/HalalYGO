@@ -1,5 +1,5 @@
 --ＥＭ天空の魔術師
---Performapal Celestial Magician
+--Performapal Celestial Mentor
 --Scripted by Eerie Code
 
 local s,id=GetID()

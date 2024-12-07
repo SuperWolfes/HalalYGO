@@ -3,11 +3,11 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Xyz summon procedure
 	Xyz.AddProcedure(c,nil,4,2)
-	--Send 1 of opponent's monsters to GY, and if you do, inflict 1000 damage
+	--Send 1 of opponent's monsters to RP, and if you do, inflict 1000 damage
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOREST+CATEGORY_DAMAGE)
@@ -49,7 +49,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) then
-		Duel.SendtoGrave(tc,REASON_EFFECT)
+		Duel.SendtoRest(tc,REASON_EFFECT)
 		if tc:IsLocation(LOCATION_REST) then
 			Duel.Damage(1-tp,1000,REASON_EFFECT)
 		end

@@ -1,5 +1,5 @@
 --堕天使アスモディウス
---Darklord Asmodeus
+--Darkwarden Asgira
 local s,id=GetID()
 function s.initial_effect(c)
 	--Special Summon condition
@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_SPSUMMON_CONDITION)
 	e1:SetValue(aux.FALSE)
 	c:RegisterEffect(e1)
-	--Send 1 Wanderer from your Deck to the GY
+	--Send 1 Wanderer from your Deck to the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TOREST)
@@ -33,7 +33,7 @@ function s.initial_effect(c)
 end
 s.listed_names={85771020,85771021}
 function s.tgfilter(c)
-	return c:IsMonster() and c:IsRace(RACE_WANDERER) and c:IsAbleToGrave()
+	return c:IsMonster() and c:IsRace(RACE_WANDERER) and c:IsAbleToRest()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -43,7 +43,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)

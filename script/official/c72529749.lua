@@ -2,7 +2,7 @@
 --Topologic Trisbaena
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_EFFECT),2)
 	--banish
 	local e1=Effect.CreateEffect(c)

@@ -5,8 +5,8 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	Xyz.AddProcedure(c,nil,4,2,nil,nil,99)
 	--Unaffected by trap effects while has material(s) attached
 	local e1=Effect.CreateEffect(c)
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e1:SetCondition(s.imcon)
 	e1:SetValue(s.efilter)
 	c:RegisterEffect(e1)
-	--Detach 2 materials; special summon 1 level 4 plant/insect from GY
+	--Detach 2 materials; special summon 1 level 4 plant/insect from RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2,false,REGISTER_FLAG_DETACH_XMAT)
-	--If an opponent's monster is in GY/banished due to your effect, special summon
+	--If an opponent's monster is in RP/banished due to your effect, special summon
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -72,11 +72,11 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end
-	--Special summon 1 level 4 plant/insect monster from GY
+	--Special summon 1 level 4 plant/insect monster from RP
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.spfilter),tp,LOCATION_REST,0,1,1,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,0,1,1,nil,e,tp)
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end
@@ -95,7 +95,7 @@ function s.cfilter(c,tp)
 	return c:IsMonster() and c:GetPreviousControler()==1-tp and c:IsPreviousLocation(LOCATION_MZONE) 
 		and c:IsReason(REASON_EFFECT) and c:GetReasonPlayer()==tp
 end
-	--Check for opponent's sent monster in GY/banished
+	--Check for opponent's sent monster in RP/banished
 function s.ssfilter(c,e,tp)
 	return c:IsCanBeSpecialSummoned(e,0,tp,false,false) and s.cfilter(c,tp)
 		and c:IsCanBeEffectTarget(e) and c:IsLocation(LOCATION_REST+LOCATION_REMOVED)
@@ -114,7 +114,7 @@ function s.sstg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetTargetCard(c)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,0,g:GetFirst():GetLocation())
 end
-	--If an opponent's monster is in GY/banished due to your effect, special summon
+	--If an opponent's monster is in RP/banished due to your effect, special summon
 function s.ssop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) then

@@ -2,7 +2,7 @@
 --Master's Cure
 local s,id=GetID()
 function s.initial_effect(c)
-	--When your opponent normal/special summons a monster, take damage and shuffle monsters from the GY
+	--When your opponent normal/special summons a monster, take damage and shuffle monsters from the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_RECOVER+CATEGORY_ATKCHANGE)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -34,14 +34,14 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		local tc2=Duel.SelectMatchingCard(tp,aux.FilterMaximumSideFunctionEx(s.filter2),tp,LOCATION_MZONE,0,1,1,nil):GetFirst()
 		if tc2 then
-			Duel.HintSelection(tc2,true)
+			Duel.HintSelection(tc2)
 			-- Update ATK
 			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetCode(EFFECT_UPDATE_ATTACK)
 			e1:SetValue(1000)
-			e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
-			tc2:RegisterEffectRush(e1)
+			e1:SetReset(RESETS_STANDARD_PHASE_END)
+			tc2:RegisterEffect(e1)
 		end
 	end
 end

@@ -1,5 +1,5 @@
 --ゾンビ・ファイヤーワーク
---Contaminated Fireworks
+--Toxic Fireworks
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -13,14 +13,14 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.zfilter(c,cost)
-	return c:IsRace(RACE_CONTAMINED) and c:IsLevelAbove(5)
-		and ((cost and not c:IsPublic()) or c:IsAbleToGrave())
+	return c:IsRace(RACE_TOXIC) and c:IsLevelAbove(5)
+		and ((cost and not c:IsPublic()) or c:IsAbleToRest())
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.zfilter,tp,LOCATION_HAND,0,1,nil,true) end
 end
 function s.spfilter(c,e,tp)
-	return c:IsRace(RACE_CONTAMINED) and c:IsLevelBelow(6) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsRace(RACE_TOXIC) and c:IsLevelBelow(6) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetMZoneCount(tp)>0
@@ -30,13 +30,13 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	--Prevent non-Contaminateds from attacking
+	--Prevent non-Toxics from attacking
 	local e0=Effect.CreateEffect(e:GetHandler())
 	e0:SetType(EFFECT_TYPE_FIELD)
 	e0:SetCode(EFFECT_CANNOT_ATTACK)
 	e0:SetProperty(EFFECT_FLAG_OATH)
 	e0:SetTargetRange(LOCATION_MZONE,0)
-	e0:SetTarget(function(e,c) return not c:IsRace(RACE_CONTAMINED) end)
+	e0:SetTarget(function(e,c) return not c:IsRace(RACE_TOXIC) end)
 	e0:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e0,tp)
 	--Requirement
@@ -57,7 +57,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local tg=Duel.SelectMatchingCard(tp,s.zfilter,tp,LOCATION_HAND,0,1,1,nil,false)
 		if #tg>0 then
 			Duel.BreakEffect()
-			Duel.SendtoGrave(tg,REASON_EFFECT)
+			Duel.SendtoRest(tg,REASON_EFFECT)
 		end
 	end
 end

@@ -24,7 +24,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	return true
 end
 function s.costfilter(c,e,tp)
-	return c:IsDiscardable() and c:IsRace(RACE_CONTAMINED) and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK+LOCATION_REST,0,1,nil,e,tp,c:GetCode())
+	return c:IsDiscardable() and c:IsRace(RACE_TOXIC) and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK+LOCATION_REST,0,1,nil,e,tp,c:GetCode())
 end
 function s.spfilter(c,e,tp,code)
 	return c:IsSetCard(0xd9) and c:IsMonster() and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and not c:IsCode(code)
@@ -38,12 +38,12 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,1,nil,e,tp)
 	e:SetLabelObject(g:GetFirst())
-	Duel.SendtoGrave(g,REASON_COST+REASON_DISCARD)
+	Duel.SendtoRest(g,REASON_COST+REASON_DISCARD)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK+LOCATION_REST)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local dc=e:GetLabelObject()
-	local g=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.spfilter),tp,LOCATION_DECK+LOCATION_REST,0,nil,e,tp,dc:GetCode())
+	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_DECK+LOCATION_REST,0,nil,e,tp,dc:GetCode())
 	if #g>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local sg=g:Select(tp,1,1,nil)
@@ -60,5 +60,5 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.splimit(e,c,sump,sumtype,sumpos,targetp,se)
-	return not c:IsRace(RACE_CONTAMINED)
+	return not c:IsRace(RACE_TOXIC)
 end

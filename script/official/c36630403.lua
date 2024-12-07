@@ -15,11 +15,11 @@ function s.initial_effect(c)
 end
 function s.filter1(c,e,tp,lv)
 	local clv=c:GetLevel()
-	return clv>0 and not c:IsType(TYPE_TUNER) and c:IsRace(RACE_CONTAMINED) and c:IsAbleToRemove()
+	return clv>0 and not c:IsType(TYPE_TUNER) and c:IsRace(RACE_TOXIC) and c:IsAbleToRemove()
 		and Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_EXTRA,0,1,nil,e,tp,lv+clv)
 end
 function s.filter2(c,e,tp,lv)
-	return c:GetLevel()==lv and c:IsRace(RACE_CONTAMINED) and c:IsType(TYPE_SYNCHRO) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0
+	return c:GetLevel()==lv and c:IsRace(RACE_TOXIC) and c:IsType(TYPE_SYNCHRO) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

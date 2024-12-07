@@ -1,10 +1,10 @@
 --夢魔鏡の聖獣－パンタス
---Phantasos, the Dream Mirror Friend
+--Illusoasos, the Dream Mirror Friend
 --Scripted by Eerie Code
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special summon 1 level 8 or lower "Dream Mirror" monster from GY
+	--Special summon 1 level 8 or lower "Dream Mirror" monster from RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg1)
 	e1:SetOperation(s.spop1)
 	c:RegisterEffect(e1)
-	--Special summon 1 "Phantasos, the Dream Mirror Foe" from deck
+	--Special summon 1 "Illusoasos, the Dream Mirror Foe" from deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_QUICK_O)

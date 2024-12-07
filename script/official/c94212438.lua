@@ -113,7 +113,7 @@ function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.cfilter2,tp,LOCATION_ONFIELD,0,nil)
-	Duel.SendtoGrave(g,REASON_EFFECT)
+	Duel.SendtoRest(g,REASON_EFFECT)
 end
 function s.cfilter3(c)
 	return c:IsFaceup() and c:IsCode(table.unpack(CARDS_GUARDIAN_MESSAGE))

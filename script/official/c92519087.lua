@@ -3,9 +3,9 @@
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
-	--Banish cards sent to GY
+	--Banish cards sent to RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_SET_AVAILABLE)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTargetRange(LOCATION_ONFIELD,LOCATION_ONFIELD)
 	e1:SetValue(LOCATION_REMOVED)
 	c:RegisterEffect(e1)
-	--Return cards to GY
+	--Return cards to RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TOREST)
@@ -55,7 +55,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,aux.FaceupFilter(Card.IsMonster),tp,LOCATION_REMOVED,LOCATION_REMOVED,1,1,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT+REASON_RETURN)
+		Duel.SendtoRest(g,REASON_EFFECT+REASON_RETURN)
 	end
 end
 function s.rmfilter(c)

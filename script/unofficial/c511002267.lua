@@ -1,5 +1,5 @@
 --魂のさまよう墓場 (Manga)
---Grave Place of Wandering Souls (Manga)
+--Resting Place of Wandering Misses (Manga)
 --Fixed by Larry126
 local s,id=GetID()
 function s.initial_effect(c)

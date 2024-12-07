@@ -1,7 +1,7 @@
 --エルシャドール・ネフィリム
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x9d),s.matfilter)
 	--cannot spsummon
 	local e2=Effect.CreateEffect(c)
@@ -48,7 +48,7 @@ function s.matfilter(c,lc,sumtype,tp)
 	return c:IsAttribute(ATTRIBUTE_LIGHT,lc,sumtype,tp) or c:IsHasEffect(4904633)
 end
 function s.tgfilter(c)
-	return c:IsSetCard(0x9d) and c:IsAbleToGrave()
+	return c:IsSetCard(0x9d) and c:IsAbleToRest()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -58,7 +58,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)

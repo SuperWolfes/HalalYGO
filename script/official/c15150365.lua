@@ -22,5 +22,5 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(ep,LOCATION_HAND,0)
 	local sg=g:RandomSelect(ep,1)
-	Duel.SendtoGrave(sg,REASON_DISCARD+REASON_EFFECT)
+	Duel.SendtoRest(sg,REASON_DISCARD+REASON_EFFECT)
 end

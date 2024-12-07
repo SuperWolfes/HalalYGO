@@ -1,5 +1,5 @@
 --白翼の魔術師
---White Wing Magician
+--White Wing Mentor
 local s,id=GetID()
 function s.initial_effect(c)
 	Pendulum.AddProcedure(c)

@@ -1,11 +1,11 @@
---Illusorasmal Lord Ultimitl Bishbaalkin (Anime)
+--Illusorasmal Watcher Ultimitl Bishbaalkin (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	c:AddSetcodesRule(id,false,0x601)
 	--level 0
 	Synchro.AddDarkSynchroProcedure(c,Synchro.NonTuner(nil),nil,0)
 	--dark synchro summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--atk
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)

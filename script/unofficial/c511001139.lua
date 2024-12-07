@@ -1,7 +1,8 @@
---Rainbow Dark Dragon
+--究極宝玉神 レインボー・ダーク・ドラゴン (Anime)
+--Rainbow Dark Dragon (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Rainbow Summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -68,13 +69,14 @@ function s.initial_effect(c)
 		Duel.RegisterEffect(ge2,0)
 	end)
 end
+s.listed_series={SET_ADVANCED_CRYSTAL_BEAST,SET_CRYSTAL_BEAST}
 function s.rainbowfilter(c)
-	return c:IsSetCard(0x5034) and (not c:IsOnField() or c:IsFaceup())
+	return c:IsSetCard(SET_ADVANCED_CRYSTAL_BEAST) and (not c:IsOnField() or c:IsFaceup())
 end
 function s.spcon(e,c)
 	if c==nil then return true end
 	if Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)<=0 then return false end
-	local g=Duel.GetMatchingGroup(s.rainbowfilter,c:GetControler(),LOCATION_ONFIELD+LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(s.rainbowfilter,c:GetControler(),LOCATION_ONFIELD|LOCATION_REST,0,nil)
 	local ct=g:GetClassCount(Card.GetCode)
 	return ct>6
 end
@@ -84,12 +86,12 @@ function s.overdrivecon(e,tp,eg,ep,ev,re,r,rp)
 	return phase~=PHASE_DAMAGE or not Duel.IsDamageCalculated()
 end
 function s.overdrivefilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x5034) and c:IsAbleToGraveAsCost()
+	return c:IsFaceup() and c:IsSetCard(SET_CRYSTAL_BEAST) and c:IsAbleToRestAsCost()
 end
 function s.overdrivecost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.overdrivefilter,tp,LOCATION_ONFIELD,0,1,nil) end
 	local g=Duel.GetMatchingGroup(s.overdrivefilter,tp,LOCATION_ONFIELD,0,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	e:SetLabel(#g)
 end
 function s.overdriveop(e,tp,eg,ep,ev,re,r,rp)
@@ -99,7 +101,7 @@ function s.overdriveop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)
 		e1:SetValue(e:GetLabel()*1000)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
+		e1:SetReset(RESET_EVENT|RESETS_STANDARD)
 		c:RegisterEffect(e1)
 	end
 end
@@ -107,7 +109,7 @@ function s.protectioncon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetFlagEffect(id)==0
 end
 function s.protectionfilter(c)
-	return c:IsSetCard(0x1034) and c:IsAbleToGraveAsCost()
+	return c:IsSetCard(SET_CRYSTAL_BEAST) and c:IsAbleToRestAsCost()
 end
 function s.protectiontg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.protectionfilter,tp,LOCATION_SZONE,0,1,nil) end
@@ -115,10 +117,10 @@ function s.protectiontg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.protectionop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,s.protectionfilter,tp,LOCATION_SZONE,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_EFFECT)
+	Duel.SendtoRest(g,REASON_EFFECT)
 end
 function s.banop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(s.rainbowfilter,tp,LOCATION_ONFIELD+LOCATION_REST,0,nil)
+	local g=Duel.GetMatchingGroup(s.rainbowfilter,tp,LOCATION_ONFIELD|LOCATION_REST,0,nil)
 	local ct=g:GetClassCount(Card.GetCode)
 	if ct<7 then
 		Duel.Remove(e:GetHandler(),POS_FACEUP,REASON_EFFECT)

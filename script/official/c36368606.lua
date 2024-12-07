@@ -29,17 +29,17 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return ac:IsControler(1-tp) and ac:IsRace(RACE_CYBERSE)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(Card.IsInMainMZone,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
+	local g=Duel.GetFieldGroup(tp,LOCATION_MMZONE,LOCATION_MMZONE)
 	if chk==0 then return #g>0 end
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,#g,0,0)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,PLAYER_ALL,LOCATION_REST)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(Card.IsInMainMZone,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
+	local g=Duel.GetFieldGroup(tp,LOCATION_MMZONE,LOCATION_MMZONE)
 	if #g>0 and Duel.Destroy(g,REASON_EFFECT)>0 then
 		local og=Duel.GetOperatedGroup()
 		for tc in og:Iter() do
-			tc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1)
+			tc:RegisterFlagEffect(id,RESET_EVENT|RESETS_STANDARD|RESET_PHASE|PHASE_END,0,1)
 		end
 		--Special Summon destroyed Cyberse Link Monsters during the End Phase
 		local e1=Effect.CreateEffect(e:GetHandler())
@@ -48,20 +48,21 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetCountLimit(1)
 		e1:SetCondition(s.spcon)
 		e1:SetOperation(s.spop)
-		e1:SetReset(RESET_PHASE+PHASE_END)
+		e1:SetReset(RESET_PHASE|PHASE_END)
 		Duel.RegisterEffect(e1,tp)
 	end
 end
 function s.spfilter(c,e,tp)
 	local owner=c:GetOwner()
-	return c:IsRace(RACE_CYBERSE) and c:IsLinkMonster() and c:GetFlagEffect(id)>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP,owner)
+	return c:IsRace(RACE_CYBERSE) and c:IsLinkMonster() and c:HasFlagEffect(id)
+		and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP,owner)
 		and Duel.GetLocationCount(owner,LOCATION_MZONE,tp)>0
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(aux.GraveValleyFilter(s.spfilter),tp,LOCATION_REST,LOCATION_REST,1,nil,e,tp)
+	return Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,LOCATION_REST,1,nil,e,tp)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.spfilter),tp,LOCATION_REST,LOCATION_REST,nil,e,tp)
+	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,LOCATION_REST,nil,e,tp)
 	if #g==0 then return end
 	local turn_p=Duel.GetTurnPlayer()
 	local step=turn_p==0 and 1 or -1
@@ -79,7 +80,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SpecialSummonComplete()
 end
 function s.immcon(e,tp,eg,ep,ev,re,r,rp)
-	return rp==1-tp and re:IsActiveType(TYPE_MONSTER)
+	return rp==1-tp and re:IsMonsterEffect()
 end
 function s.immfilter(c)
 	return c:IsRace(RACE_CYBERSE) and c:IsLinkMonster() and c:IsFaceup()
@@ -96,7 +97,7 @@ function s.immop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetProperty(EFFECT_FLAG_CLIENT_HINT)
 		e1:SetCode(EFFECT_IMMUNE_EFFECT)
 		e1:SetValue(function(e,re) return e:GetHandler()~=re:GetOwner() end)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+		e1:SetReset(RESET_EVENT|RESETS_STANDARD|RESET_PHASE|PHASE_END)
 		tc:RegisterEffect(e1)
 	end
 end

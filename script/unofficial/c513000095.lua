@@ -1,8 +1,8 @@
 --黒の魔法神官 (Anime)
---Sorcerer of Dark Magic (Anime)
+--Scoreerer of Dark Ment (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--cannot special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)

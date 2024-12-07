@@ -1,5 +1,5 @@
 --妖仙獣 侍郎風
---Yosenju Saburokaze
+--Yosakhi Saburokaze
 --scripted by AlphaKreitn
 local s,id=GetID()
 function s.initial_effect(c)

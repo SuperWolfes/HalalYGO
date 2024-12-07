@@ -1,5 +1,5 @@
 --森の聖獣 カルピポニカ
---Carpiponica, Mystical Beast of the Forest
+--Carpiponica, Vague Beast of the Forest
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)

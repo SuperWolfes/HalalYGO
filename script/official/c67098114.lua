@@ -1,10 +1,10 @@
 --極神皇ロキ
---Loki, Lord of the Aesir
+--Loki, Watcher of the Aesir
 local s,id=GetID()
 function s.initial_effect(c)
 	--Synchro summon
 	Synchro.AddProcedure(c,s.tfilter,1,1,Synchro.NonTuner(nil),2,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Negate
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

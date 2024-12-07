@@ -1,9 +1,9 @@
 --時花の魔女－フルール・ド・ソルシエール
---Sorciere de Fleur
+--Scoreiere de Fleur
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--When normal or special summoned, special summon 1 monster from opponent's GY
+	--When normal or special summoned, special summon 1 monster from opponent's RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)

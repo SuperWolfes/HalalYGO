@@ -1,5 +1,5 @@
 --ミョルニルの魔槌
---Divine Relic Mjollnir
+--Mega Relic Mjollnir
 
 local s,id=GetID()
 function s.initial_effect(c)

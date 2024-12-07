@@ -10,7 +10,7 @@ function s.op(oc)
 	--To controler's rest
 	local e1=Effect.GlobalEffect()
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_IGNORE_IMMUNE) 
+	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_IGNORE_IMMUNE)
 	e1:SetCode(EFFECT_SEND_REPLACE)
 	e1:SetTarget(s.reptg)
 	e1:SetValue(s.repval)
@@ -75,9 +75,9 @@ function s.op(oc)
 	local e6=Effect.GlobalEffect()
 	e6:SetType(EFFECT_TYPE_FIELD)
 	e6:SetCode(EFFECT_CANNOT_ATTACK)
-	e6:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE) 
+	e6:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
 	e6:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
-	e6:SetTarget(function(e,c) return c:IsStatus(STATUS_SPSUMMON_TURN) and (c:IsSummonLocation(LOCATION_EXTRA) or (c:IsAttribute(ATTRIBUTE_DIVINE) and c:IsSummonLocation(LOCATION_REST))) and not c:IsHasEffect(511004016) end)
+	e6:SetTarget(function(e,c) return c:IsStatus(STATUS_SPSUMMON_TURN) and (c:IsSummonLocation(LOCATION_EXTRA) or (c:IsAttribute(ATTRIBUTE_MEGA) and c:IsSummonLocation(LOCATION_REST))) and not c:IsHasEffect(511004016) end)
 	Duel.RegisterEffect(e6,0)
 	--Quick
 	local e7=Effect.GlobalEffect()
@@ -101,7 +101,7 @@ function s.op(oc)
 	--Negate
 	local e8=Effect.GlobalEffect()
 	e8:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e8:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE) 
+	e8:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
 	e8:SetCode(EVENT_CHAIN_SOLVING)
 	e8:SetOperation(s.negop)
 	Duel.RegisterEffect(e8,0)
@@ -125,17 +125,17 @@ function s.op(oc)
 	--Attack
 	local e11=Effect.GlobalEffect()
 	e11:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
-	e11:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE) 
+	e11:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
 	e11:SetCode(EVENT_LEAVE_FIELD)
-	e11:SetCondition(s.sacrificeEscapeCon)
+	e11:SetCondition(s.sortingEscapeCon)
 	e11:SetOperation(function() Duel.NegateAttack() end)
 	Duel.RegisterEffect(e11,0)
 	local e11a=e11:Clone()
 	e11a:SetCode(EVENT_BE_MATERIAL)
 	Duel.RegisterEffect(e11a,0)
-	if Duel.SelectYesNo(0,aux.Stringid(4013,14)) and Duel.SelectYesNo(1,aux.Stringid(4013,14)) then
-		Duel.Hint(HINT_MESSAGE,0,aux.Stringid(4013,15))
-		Duel.Hint(HINT_MESSAGE,1,aux.Stringid(4013,15))
+	if Duel.SelectYesNo(0,aux.Stringid(id,0)) and Duel.SelectYesNo(1,aux.Stringid(id,0)) then
+		Duel.Hint(HINT_MESSAGE,0,aux.Stringid(id,1))
+		Duel.Hint(HINT_MESSAGE,1,aux.Stringid(id,1))
 		--manga rules
 		local e12=Effect.GlobalEffect()
 		e12:SetType(EFFECT_TYPE_FIELD)
@@ -198,8 +198,8 @@ function s.op(oc)
 	for tc2 in aux.Next(g2) do
 		tc2:RegisterFlagEffect(511004017,0,0,0)
 	end
-	local proc=Duel.SendtoGrave
-	Duel.SendtoGrave=function(tg,r,tp)
+	local proc=Duel.SendtoRest
+	Duel.SendtoRest=function(tg,r,tp)
 		if tp then
 			if type(tg)=='Card' then
 				tg:RegisterFlagEffect(511004018,RESET_EVENT+RESETS_STANDARD,0,1)
@@ -274,7 +274,7 @@ function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 		if c:GetReason()&REASON_DESTROY==REASON_DESTROY then
 			c:RegisterFlagEffect(511000173,RESET_CHAIN,0,1)
 		end
-		Duel.SendtoGrave(c,c:GetReason(),c:GetControler())
+		Duel.SendtoRest(c,c:GetReason(),c:GetControler())
 	end
 	return true
 end
@@ -287,7 +287,7 @@ end
 function s.grepop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(Card.IsStatus,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil,STATUS_LEAVE_CONFIRMED)
 	for c in aux.Next(g) do
-		c:CancelToGrave()
+		c:CancelToRest()
 		c:RegisterFlagEffect(STATUS_LEAVE_CONFIRMED,RESET_EVENT+RESETS_STANDARD,0,1)
 	end
 end
@@ -300,8 +300,8 @@ end
 function s.grepop2(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.grepfilter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil)
 	for c in aux.Next(g) do
-		c:CancelToGrave(false)
-		Duel.SendtoGrave(c,REASON_RULE,c:GetControler())
+		c:CancelToRest(false)
+		Duel.SendtoRest(c,REASON_RULE,c:GetControler())
 	end
 end
 function s.mvalue(e,fp,rp,r)
@@ -323,7 +323,7 @@ function s.aclimit(e,re,tp)
 		return Duel.IsExistingMatchingCard(s.acfilter,tp,0xff,0,1,nil)
 	end
 	if re:IsActiveType(TYPE_FIELD) then
-		return not Duel.GetFieldCard(tp,LOCATION_SZONE,5) and Duel.GetFieldGroupCount(tp,LOCATION_ONFIELD,0)>4
+		return not Duel.GetFieldCard(tp,LOCATION_FZONE,0) and Duel.GetFieldGroupCount(tp,LOCATION_ONFIELD,0)>4
 	elseif re:IsActiveType(TYPE_PENDULUM) then
 		return Duel.GetFieldGroupCount(tp,LOCATION_ONFIELD,0)>4
 	end
@@ -332,7 +332,7 @@ end
 function s.setlimit(e,c,tp)
 	return (c:IsLocation(LOCATION_HAND) and ((c:IsActional() and Duel.GetFlagEffect(tp,TYPE_ACTIONAL)>0)
 		or (c:IsTrap() and Duel.GetFlagEffect(tp,TYPE_TRAP)>(Duel.IsPlayerAffectedByEffect(tp,511004017) and 1 or 0))))
-		or (c:IsType(TYPE_FIELD) and not Duel.GetFieldCard(tp,LOCATION_SZONE,5) and Duel.GetFieldGroupCount(tp,LOCATION_ONFIELD,0)>4)
+		or (c:IsType(TYPE_FIELD) and not Duel.GetFieldCard(tp,LOCATION_FZONE,0) and Duel.GetFieldGroupCount(tp,LOCATION_ONFIELD,0)>4)
 end
 function s.aclimit1(e,tp,eg,ep,ev,re,r,rp)
 	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_ACTIONAL) and re:GetHandler():IsPreviousLocation(LOCATION_HAND) then
@@ -355,7 +355,7 @@ function s.checkop(e,tp,eg,ep,ev,re,r,rp)
 		end
 	end
 end
-function s.sacrificeEscapeCon(e,tp,eg,ep,ev,re,r,rp)
+function s.sortingEscapeCon(e,tp,eg,ep,ev,re,r,rp)
 	local ph=Duel.GetCurrentPhase()
 	local at=Duel.GetAttackTarget()
 	return ph>=PHASE_BATTLE_STEP and ph<PHASE_DAMAGE and at~=nil and eg:IsContains(at)

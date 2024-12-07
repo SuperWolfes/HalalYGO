@@ -1,10 +1,10 @@
 --弑逆の魔轟神
---Fabled Regicide
+--Fablous Regicide
 --Scripted by Naim
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special summon 1 "Fabled" monster from GY, destroy 1 card on the field
+	--Special summon 1 "Fablous" monster from RP, destroy 1 card on the field
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_DESTROY+CATEGORY_HANDES)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)

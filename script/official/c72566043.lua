@@ -2,7 +2,7 @@
 --Lithmus Doom Swordsman
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Unnafected by Trap effects
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -37,7 +37,7 @@ function s.initial_effect(c)
 	e5:SetCode(EVENT_DESTROYED)
 	e5:SetCondition(s.setcon)
 	e5:SetTarget(s.settg)
-	e5:SetOperation(s.setop)
+	e5:SetOperation(s.vetop)
 	c:RegisterEffect(e5)
 end
 s.listed_names={8955148}
@@ -65,7 +65,7 @@ function s.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local g=Duel.SelectTarget(tp,s.setfilter,tp,LOCATION_REST,LOCATION_REST,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,0,0)
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and tc:IsSSetable() then
 		Duel.SSet(tp,tc)

@@ -1,4 +1,4 @@
---Gouki Moonsault
+--Gouki Horizonsault
 local s,id=GetID()
 function s.initial_effect(c)
 	--shuffle

@@ -54,13 +54,13 @@ function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	return true
 end
 function s.acfilter(c)
-	return c:IsFaceup() and c:IsCode(9409625) and c:IsAbleToGraveAsCost()
+	return c:IsFaceup() and c:IsCode(9409625) and c:IsAbleToRestAsCost()
 end
 function s.actcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.acfilter,tp,LOCATION_SZONE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.acfilter,tp,LOCATION_SZONE,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.acttg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc) end

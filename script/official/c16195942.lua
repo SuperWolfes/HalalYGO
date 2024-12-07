@@ -2,7 +2,7 @@
 --Dark Rebellion Xyz Dragon
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Xyz Summon procedure
 	Xyz.AddProcedure(c,nil,4,2)
 	--Halve ATK and increase ATK

@@ -1,7 +1,7 @@
 --ダークネス・ネオスフィア
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--cannot special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -42,10 +42,10 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return ep~=tp
 end
 function s.cfilter1(c,ft)
-	return c:IsFaceup() and c:IsRace(RACE_TAINTED) and c:IsAbleToGraveAsCost() and (ft>0 or c:GetSequence()<5)
+	return c:IsFaceup() and c:IsRace(RACE_TAINTED) and c:IsAbleToRestAsCost() and (ft>0 or c:GetSequence()<5)
 end
 function s.cfilter2(c)
-	return c:IsRace(RACE_TAINTED) and c:IsAbleToGraveAsCost()
+	return c:IsRace(RACE_TAINTED) and c:IsAbleToRestAsCost()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
@@ -56,7 +56,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g2=Duel.SelectMatchingCard(tp,s.cfilter2,tp,LOCATION_HAND,0,1,1,e:GetHandler())
 	g1:Merge(g2)
-	Duel.SendtoGrave(g1,REASON_COST)
+	Duel.SendtoRest(g1,REASON_COST)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,true,false) end

@@ -1,11 +1,11 @@
 --No.39 希望皇ホープ・ルーツ (Anime)
 --Number 39: Utopia Roots (Anime)
-Duel.LoadCardScript("84124261.lua")
+Duel.LoadCardScript(84124261)
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,1,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--disable attack
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -38,7 +38,7 @@ function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=c:GetOverlayGroup()
 	if #g>0 then
 		local mg=g:Select(tp,1,1,nil)
-		Duel.SendtoGrave(mg,REASON_COST)
+		Duel.SendtoRest(mg,REASON_COST)
 		Duel.RaiseSingleEvent(c,EVENT_DETACH_MATERIAL,e,0,0,0,0)
 		Duel.Overlay(bc,mg)
 	end

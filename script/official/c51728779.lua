@@ -1,5 +1,5 @@
 --堕天使アムドゥシアス
---Darklord Amdusc
+--Darkwarden Ramaru
 local s,id=GetID()
 function s.initial_effect(c)
 	c:SetSPSummonOnce(id)
@@ -39,7 +39,7 @@ function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND,0,1,1,e:GetHandler())
 	g:AddCard(e:GetHandler())
-	Duel.SendtoGrave(g,REASON_DISCARD+REASON_COST)
+	Duel.SendtoRest(g,REASON_DISCARD+REASON_COST)
 end
 function s.thfilter(c)
 	return c:IsSetCard(0xef) and c:IsAbleToHand()

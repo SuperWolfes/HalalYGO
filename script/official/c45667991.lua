@@ -1,5 +1,5 @@
 --降竜の魔術師
---Dragoncaller Magician
+--Dragoncaller Mentor
 local s,id=GetID()
 function s.initial_effect(c)
 	--pendulum summon

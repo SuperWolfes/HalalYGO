@@ -15,7 +15,7 @@ function s.spfilter(c)
 	return c:IsType(TYPE_FUSION) and c:ListsArchetypeAsMaterial(0x8)
 end
 function s.fextra(e,tp,mg)
-	return Duel.GetMatchingGroup(aux.GraveValleyFilter(Fusion.IsMonsterFilter(Card.IsAbleToDeck)),tp,LOCATION_REST,0,nil)+
+	return Duel.GetMatchingGroup(aux.NecroValleyFilter(Fusion.IsMonsterFilter(Card.IsAbleToDeck)),tp,LOCATION_REST,0,nil)+
 		Duel.GetMatchingGroup(aux.FaceupFilter(Fusion.IsMonsterFilter(Card.IsAbleToDeck)),tp,LOCATION_REMOVED,0,nil)
 end
 function s.extraop(e,tc,tp,sg)

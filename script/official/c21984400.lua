@@ -1,5 +1,5 @@
 --獣・魔・導
---Beast Magic Attack
+--Beast Ment Attack
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

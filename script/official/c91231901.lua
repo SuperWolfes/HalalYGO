@@ -26,7 +26,7 @@ end
 s.listed_series={0xc}
 s.counter_place_list={COUNTER_A}
 function s.filter(c)
-	return c:GetLevel()>0 and c:IsSetCard(0xc) and c:IsAbleToGrave()
+	return c:GetLevel()>0 and c:IsSetCard(0xc) and c:IsAbleToRest()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() end 
@@ -42,7 +42,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
 		local sg=g:GetFirst()
-		if Duel.SendtoGrave(g,REASON_EFFECT)~=0 and sg:IsLocation(LOCATION_REST) then
+		if Duel.SendtoRest(g,REASON_EFFECT)~=0 and sg:IsLocation(LOCATION_REST) then
 			local tc=Duel.GetFirstTarget()
 			if tc:IsFaceup() and tc:IsRelateToEffect(e) then
 				tc:AddCounter(COUNTER_A,sg:GetLevel())

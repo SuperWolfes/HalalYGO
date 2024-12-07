@@ -1,5 +1,5 @@
 --ZW-天風精霊翼
---ZW - Sylphid Wing
+--ZW - Sipid Wing
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -58,7 +58,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if c:IsLocation(LOCATION_MZONE) and c:IsFacedown() then return end
 	local tc=Duel.GetFirstTarget()
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 or not tc:IsRelateToEffect(e) or tc:IsFacedown() or tc:GetControler()~=tp or not c:CheckUniqueOnField(tp) then
-		Duel.SendtoGrave(c,REASON_EFFECT)
+		Duel.SendtoRest(c,REASON_EFFECT)
 		return
 	end
 	s.equipop(c,e,tp,tc)
@@ -89,10 +89,10 @@ function s.rcon(e,tp,eg,ep,ev,re,r,rp)
 	return (r&REASON_COST)~=0 and re:IsActivated()
 		and re:IsActiveType(TYPE_XYZ)
 		and rc:GetEquipGroup():IsContains(c)
-		and c:IsAbleToGraveAsCost()
+		and c:IsAbleToRestAsCost()
 		and ep==e:GetOwnerPlayer() and ev>=1
 		and rc:GetOverlayCount()>=ev-1
 end
 function s.rop(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.SendtoGrave(e:GetHandler(),REASON_COST)
+	return Duel.SendtoRest(e:GetHandler(),REASON_COST)
 end

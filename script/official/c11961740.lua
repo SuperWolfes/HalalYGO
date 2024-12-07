@@ -37,7 +37,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			e1:SetLabelObject(tc)
 			c:RegisterEffect(e1)
 		else
-			c:CancelToGrave(false)
+			c:CancelToRest(false)
 		end
 	end
 end

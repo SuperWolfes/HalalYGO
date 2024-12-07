@@ -56,14 +56,14 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tc=g2:GetFirst()
 	local tpe=tc:GetType()
 	if (tpe&TYPE_FIELD)~=0 then
-		local fc=Duel.GetFieldCard(1-tp,LOCATION_SZONE,5)
+		local fc=Duel.GetFieldCard(1-tp,LOCATION_FZONE,0)
 		if Duel.IsDuelType(DUEL_1_FIELD) then
 			if fc then Duel.Destroy(fc,REASON_RULE) end
-			fc=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
-			if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoGrave(c,REASON_RULE) end
+			fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
+			if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoRest(c,REASON_RULE) end
 		else
-			fc=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
-			if fc and Duel.SendtoGrave(fc,REASON_RULE)==0 then Duel.SendtoGrave(c,REASON_RULE) end
+			fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
+			if fc and Duel.SendtoRest(fc,REASON_RULE)==0 then Duel.SendtoRest(c,REASON_RULE) end
 		end
 	end
 	local te,teg,tep,tev,tre,tr,trp=tc:CheckActivateEffect(true,true,true)
@@ -88,7 +88,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	e1:SetCode(EVENT_CHAIN_SOLVED)
 	e1:SetReset(RESET_CHAIN)
 	e1:SetLabelObject(e)
-	e1:SetOperation(s.resetop)
+	e1:SetOperation(s.revetop)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.activateop(teg,tep,tev,tre,tr,trp)
@@ -99,9 +99,9 @@ function s.activateop(teg,tep,tev,tre,tr,trp)
 				if not te then return end
 				local tpe=te:GetHandler():GetType()
 				if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 then
-					c:CancelToGrave(false)
+					c:CancelToRest(false)
 				else
-					c:CancelToGrave(true)
+					c:CancelToRest(true)
 					local code=te:GetHandler():GetOriginalCode()
 					c:CopyEffect(code,RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET,1)
 				end
@@ -112,7 +112,7 @@ function s.activateop(teg,tep,tev,tre,tr,trp)
 				end
 			end
 end
-function s.resetop(e,tp,eg,ep,ev,re,r,rp)
+function s.revetop(e,tp,eg,ep,ev,re,r,rp)
 	local te=e:GetLabelObject()
 	if te then
 		te:SetOperation(s.activate)
@@ -125,9 +125,9 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not te then return end
 	local tpe=te:GetHandler():GetType()
 	if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 then
-		c:CancelToGrave(false)
+		c:CancelToRest(false)
 	else
-		c:CancelToGrave(true)
+		c:CancelToRest(true)
 		local code=te:GetHandler():GetOriginalCode()
 		c:CopyEffect(code,RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET,1)
 	end

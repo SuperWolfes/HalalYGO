@@ -1,4 +1,4 @@
---Rank-Up-Magic The Illusion Knights of Launch
+--Rank-Up-Ment The Illusion Knights of Launch
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -54,7 +54,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Overlay(sc,tc)
 		Duel.SpecialSummon(sc,SUMMON_TYPE_XYZ,tp,tp,false,false,POS_FACEUP)
 		if (tc:IsSetCard(0x10db) or tc:IsCode(16195942)) and Duel.SelectYesNo(tp,aux.Stringid(95100814,0)) then
-		e:GetHandler():CancelToGrave()
+		e:GetHandler():CancelToRest()
 		Duel.Overlay(sc,e:GetHandler())
 		end
 		sc:CompleteProcedure()

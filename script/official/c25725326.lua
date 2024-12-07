@@ -3,7 +3,7 @@
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--1 Level 4 or lower "Prank-Kids" monster
 	Link.AddProcedure(c,s.mfilter,1,1)
 	--Can only Link Summon "Prank-Kids Meow-Meow-Mu" once per turn

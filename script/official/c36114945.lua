@@ -1,11 +1,11 @@
 -- 垂氷の魔妖－雪女
--- Yuki-Onna, the Icicle Mayakashi
+-- Yuki-Onna, the Icicle Mayashi
 local s,id=GetID()
 function s.initial_effect(c)
 	c:SetUniqueOnField(1,0,id)
 	--Link Summon procedure
-	c:EnableReviveLimit()
-	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_CONTAMINED),2)
+	c:EnableAwakeLimit()
+	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_TOXIC),2)
 	--Negate effects
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -64,7 +64,7 @@ function s.negop(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 --Special Summon
 function s.spfilter(c,e,tp)
-	return c:IsFaceup() and c:IsRace(RACE_CONTAMINED) and c:IsType(TYPE_SYNCHRO)
+	return c:IsFaceup() and c:IsRace(RACE_TOXIC) and c:IsType(TYPE_SYNCHRO)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -75,7 +75,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.spfilter),tp,LOCATION_REST+LOCATION_REMOVED,0,1,1,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST+LOCATION_REMOVED,0,1,1,nil,e,tp)
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end

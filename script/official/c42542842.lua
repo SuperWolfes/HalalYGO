@@ -1,5 +1,5 @@
 --麗の魔妖(まやかし)-妲姫
---Dakki, the Graceful Mayakashi
+--Dakki, the Graceful Mayashi
 local s,id=GetID()
 function s.initial_effect(c)
 	c:SetUniqueOnField(1,0,id)

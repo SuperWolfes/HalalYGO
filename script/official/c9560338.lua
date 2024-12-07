@@ -1,5 +1,5 @@
 --魔導冥士 ラモール
---Reaper of Prophecy
+--Reaper of Prediction
 local s,id=GetID()
 function s.initial_effect(c)
 	--Apply effects

@@ -1,8 +1,8 @@
 --幻影騎士団カースド・ジャベリン
---The Illusion Knights of Cursed Javelin
+--The Illusion Knights of Unclean Javelin
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Xyz.AddProcedure(c,nil,2,2)
 	--Negate effects and reduce ATK
 	local e1=Effect.CreateEffect(c)

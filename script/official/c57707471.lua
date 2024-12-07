@@ -1,7 +1,7 @@
 --No.21 氷結のレディ・ジャスティス
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Xyz.AddProcedure(c,nil,6,2,s.ovfilter,aux.Stringid(id,0),2,s.xyzop)
 	--atk
 	local e2=Effect.CreateEffect(c)

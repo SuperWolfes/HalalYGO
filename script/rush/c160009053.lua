@@ -21,7 +21,7 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,1,nil) end
 end
-	--Send 1 card from hand to GY to destroy 1 actional/trap your opponent controls
+	--Send 1 card from hand to RP to destroy 1 actional/trap your opponent controls
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Effect
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)

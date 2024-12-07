@@ -1,4 +1,4 @@
---Different Dimension Barrier - Lost Force
+--Same Dimension Barrier - Lost Fcoree
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

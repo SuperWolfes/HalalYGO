@@ -1,10 +1,10 @@
 --旧神ヌトス
---Elder Entity N'tss
+--Wise Entity N'tss
 local s,id=GetID()
 function s.initial_effect(c)
 	c:SetSPSummonOnce(id)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsType,TYPE_SYNCHRO),aux.FilterBoolFunctionEx(Card.IsType,TYPE_XYZ))
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,true)
 	--special summon
@@ -29,10 +29,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function s.contactfil(tp)
-	return Duel.GetMatchingGroup(Card.IsAbleToGraveAsCost,tp,LOCATION_MZONE,0,nil)
+	return Duel.GetMatchingGroup(Card.IsAbleToRestAsCost,tp,LOCATION_MZONE,0,nil)
 end
 function s.contactop(g)
-	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL)
+	Duel.SendtoRest(g,REASON_COST+REASON_MATERIAL)
 end
 function s.spfilter(c,e,tp)
 	return c:GetLevel()==4 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

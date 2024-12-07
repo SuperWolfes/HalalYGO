@@ -1,10 +1,10 @@
 --黎明の堕天使ルシフェル
---The First Darklord
+--The First Darkwarden
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion materials
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMixN(c,true,true,s.ffilter,3)
 	--Destroy opponent's field
 	local e0=Effect.CreateEffect(c)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e0:SetTarget(s.destg)
 	e0:SetOperation(s.desop)
 	c:RegisterEffect(e0)
-	--If fusion summoned with "Darklord Morningstar"
+	--If fusion summoned with "Darkwarden Morningstar"
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_MATERIAL_CHECK)
@@ -36,7 +36,7 @@ function s.initial_effect(c)
 	e2:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_WANDERER))
 	e2:SetValue(aux.tgoval)
 	c:RegisterEffect(e2)
-	--Special summon 1 wanderer monster from hand/GY
+	--Special summon 1 wanderer monster from hand/RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_QUICK_O)
@@ -89,7 +89,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<1 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.spfilter),tp,LOCATION_REST+LOCATION_HAND,0,1,1,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST+LOCATION_HAND,0,1,1,nil,e,tp)
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP_DEFENSE)
 	end

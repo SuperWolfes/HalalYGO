@@ -1,5 +1,5 @@
 --連合軍
---The A. Forces
+--The A. Fcorees
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

@@ -1,5 +1,5 @@
 --熟練の栗魔導士
---Skilled Chestnut Magician
+--Skilled Chestnut Mentor
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -79,7 +79,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		c:RegisterEffect(e2)
 	else
 		Duel.Hint(HINT_SELECTMSG,tp, HINTMSG_ATOHAND)
-		local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.thfilter),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil)
+		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thfilter),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil)
 		if #g>0 then
 			Duel.SendtoHand(g,nil,REASON_EFFECT)
 			Duel.ConfirmCards(1-tp,g)

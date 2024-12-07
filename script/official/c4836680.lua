@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
-	--Add to Extra Deck or send to the GY
+	--Add to Extra Deck or send to the RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetCategory(CATEGORY_TOREST)
@@ -84,7 +84,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.filter(c)
 	return (c:IsSetCard(0x99) or c:IsSetCard(0x9f)) and c:IsType(TYPE_PENDULUM)
-		and (not c:IsUnliked() or c:IsAbleToGrave())
+		and (not c:IsUnliked() or c:IsAbleToRest())
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end
@@ -96,7 +96,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil):GetFirst()
 	if not tc then return end
 	local b1=not tc:IsUnliked()
-	local b2=tc:IsAbleToGrave()
+	local b2=tc:IsAbleToRest()
 	if not (b1 or b2) then return end
 	local op=Duel.SelectEffect(tp,
 		{b1,aux.Stringid(id,4)},
@@ -104,6 +104,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if op==1 then
 		Duel.SendtoExtraP(tc,tp,REASON_EFFECT)
 	elseif op==2 then
-		Duel.SendtoGrave(tc,REASON_EFFECT)
+		Duel.SendtoRest(tc,REASON_EFFECT)
 	end
 end

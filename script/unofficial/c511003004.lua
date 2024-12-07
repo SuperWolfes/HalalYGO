@@ -19,11 +19,11 @@ function s.initial_effect(c)
 		ge2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		ge2:SetCode(EVENT_ADJUST)
 		ge2:SetCountLimit(1)
-		ge2:SetOperation(s.setop)
+		ge2:SetOperation(s.vetop)
 		Duel.RegisterEffect(ge2,0)
 	end)
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	if s[0]:GetCount()>0 then return end
 	for i=1,5 do
 		local tc=Duel.CreateToken(0,946)
@@ -56,7 +56,7 @@ function s.filter(c,e,tp)
 	return c:IsCanBeEffectTarget(e) and Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,c)
 end
 function s.tgfilter(c,e,tp,tc)
-	return c:IsSetCard(0xad) and c:GetLevel()==tc:GetLevel() and c:IsAbleToGrave() and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,c,e,tp,tc)
+	return c:IsSetCard(0xad) and c:GetLevel()==tc:GetLevel() and c:IsAbleToRest() and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,c,e,tp,tc)
 end
 function s.spfilter(c,e,tp,tc)
 	return c:IsSetCard(0xad) and c:IsType(TYPE_FUSION) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,false,false) 
@@ -82,7 +82,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local tg=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,tc)
 		if #tg>0 then
 			Duel.BreakEffect()
-			if Duel.SendtoGrave(tg,REASON_EFFECT)>0 then
+			if Duel.SendtoRest(tg,REASON_EFFECT)>0 then
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 				local sg=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,tc)
 				if #sg>0 then

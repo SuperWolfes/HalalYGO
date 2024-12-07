@@ -53,7 +53,7 @@ function s.lpop(e,tp,eg,ep,ev,re,r,rp)
 		local og1=tc1:GetOverlayGroup()
 		local og2=tc2:GetOverlayGroup()
 		og1:Merge(og2)
-		if Duel.SendtoGrave(og1,REASON_EFFECT)<#og1 then return end
+		if Duel.SendtoRest(og1,REASON_EFFECT)<#og1 then return end
 		Duel.SetLP(1-tp,Duel.GetLP(1-tp)/2)
 	end
 end

@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Shuffle 5 "Salamangreat" cards from your GY to the Deck and draw 2 cards
+	--Shuffle 5 "Salamangreat" cards from your RP to the Deck and draw 2 cards
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TODECK+CATEGORY_DRAW)

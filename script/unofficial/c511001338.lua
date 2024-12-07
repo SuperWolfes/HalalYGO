@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,8,3)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--to rest
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -47,16 +47,16 @@ function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 	return (e:GetHandler():GetSummonType()&SUMMON_TYPE_XYZ)==SUMMON_TYPE_XYZ
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGrave,tp,0,LOCATION_EXTRA,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRest,tp,0,LOCATION_EXTRA,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,1-tp,LOCATION_EXTRA)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local chk=Duel.GetFieldGroup(tp,0,LOCATION_EXTRA)
 	Duel.ConfirmCards(tp,chk)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToGrave,tp,0,LOCATION_EXTRA,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToRest,tp,0,LOCATION_EXTRA,1,1,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end
 function s.mtfilter(c)

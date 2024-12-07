@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz summon procedure
 	Xyz.AddProcedure(c,nil,12,3)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Shuffle card into the deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -44,7 +44,7 @@ function s.initial_effect(c)
 	e4:SetCondition(s.drcon)
 	e4:SetTargetRange(0,1)
 	c:RegisterEffect(e4)
-	--Special Summon when sent to the GY
+	--Special Summon when sent to the RP
 	local e5=Effect.CreateEffect(c)
 	e5:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)

@@ -36,6 +36,6 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			Duel.Destroy(eg,REASON_EFFECT)
 		end
 		Duel.BreakEffect()
-		Duel.SendtoGrave(tc,REASON_EFFECT)
+		Duel.SendtoRest(tc,REASON_EFFECT)
 	end
 end

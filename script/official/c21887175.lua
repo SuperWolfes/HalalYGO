@@ -3,8 +3,8 @@
 --scripted by andré
 local s,id=GetID()
 function s.initial_effect(c)
-	--revive limit
-	c:EnableReviveLimit()
+	--awake limit
+	c:EnableAwakeLimit()
 	--link summon
 	Link.AddProcedure(c,s.mfilter,2)
 	--cannot be effect target

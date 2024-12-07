@@ -1,5 +1,5 @@
 -- 春化精の花盛
--- Flower Bloom of the Vernusylph
+-- Flower Bloom of the Vernusip
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)

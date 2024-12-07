@@ -1,5 +1,5 @@
 --ワルキューレ・エルダ
---Valkyrie Erda
+--Balkanie Erda
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

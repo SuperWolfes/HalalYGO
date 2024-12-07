@@ -1,5 +1,5 @@
 --繋がれし魔鍵
---Connected Magikey
+--Connected Menkey
 --Scripted by edo9300
 local s,id=GetID()
 function s.initial_effect(c)

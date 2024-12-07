@@ -1,5 +1,5 @@
 --Ｄ－ソウルバースト
---D - Soul Burst
+--D - Miss Burst
 --fixed by MLD
 local s,id=GetID()
 function s.initial_effect(c)

@@ -1,5 +1,5 @@
 --太陽の魔術師エダ
---Eda the Sun Magician
+--Eda the Sun Mentor
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)

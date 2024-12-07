@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.opd)
 	c:RegisterEffect(e2)
 end
-s.roll_suffice=true
+s.roll_dice=true
 s.listed_series={0x26}
 function s.cona(e,tp,eg,ep,ev,re,r,rp)
 	return not e:GetHandler():IsDisabled() and e:GetHandler():IsAttackPos()
@@ -50,7 +50,7 @@ function s.filter(c,e,tp)
 end
 function s.opa(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)==0 then return end
-	local dc=Duel.TossSuffice(tp,1)
+	local dc=Duel.TossDice(tp,1)
 	Duel.ConfirmDecktop(tp,dc)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	local g=Duel.GetDecktopGroup(tp,dc)
@@ -61,7 +61,7 @@ function s.opa(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.opd(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)==0 then return end
-	local dc=Duel.TossSuffice(tp,1)
+	local dc=Duel.TossDice(tp,1)
 	local g=Duel.GetDecktopGroup(tp,dc)
 	Duel.ConfirmCards(tp,g)
 end

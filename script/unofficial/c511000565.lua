@@ -1,4 +1,4 @@
---Dark Magician Girl (DM)
+--Dark Mentor Girl (DM)
 --Scripted by edo9300
 Duel.LoadScript("c300.lua")
 local s,id=GetID()
@@ -33,7 +33,7 @@ function s.val(e,c)
 end
 function s.filter(c)
 	local code=c:GetCode()
-	return code==CARD_DARK_MAGICIAN or code==30208479
+	return code==CARD_DARK_MENTOR or code==30208479
 end
 function s.con(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsDeckMaster()

@@ -1,11 +1,11 @@
 --見習い魔嬢
---Apprentice Witchling
+--Apprentice Mintling
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_DARK),2,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--atk/def
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)

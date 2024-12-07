@@ -1,5 +1,5 @@
 --トリックスター・リンカーネイション
---Trickstar Reincarnation
+--Trickstar Reincorporation
 local s,id=GetID()
 function s.initial_effect(c)
 	--activate

@@ -47,7 +47,7 @@ function s.scop(e,tp,eg,ep,ev,re,r,rp)
 	local pg=aux.GetMustBeMaterialGroup(tp,Group.CreateGroup(),tp,nil,nil,REASON_SYNCHRO)
 	if not c:IsRelateToEffect(e) or not tc or not tc:IsRelateToEffect(e) or #pg>0 then return end
 	local g=Group.FromCards(c,tc)
-	if Duel.SendtoGrave(g,REASON_EFFECT)==2 and c:GetLevel()>0 and c:IsLocation(LOCATION_REST)
+	if Duel.SendtoRest(g,REASON_EFFECT)==2 and c:GetLevel()>0 and c:IsLocation(LOCATION_REST)
 		and tc:GetLevel()>0 and tc:IsLocation(LOCATION_REST) then
 		local lv=c:GetLevel()+tc:GetLevel()
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)

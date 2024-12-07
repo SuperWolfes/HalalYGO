@@ -28,7 +28,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND,0,1,1,nil,tp)
 	local lvl=g:GetFirst():GetLevel()
 	local code=g:GetFirst():GetCode()
-	Duel.SendtoGrave(g,REASON_COST+REASON_DISCARD)
+	Duel.SendtoRest(g,REASON_COST+REASON_DISCARD)
 	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil,lvl,code)
 	if Duel.SendtoHand(g,nil,REASON_EFFECT)~=0 then
 		Duel.Hint(HINT_SKILL_FLIP,tp,id|(2<<32))

@@ -1,12 +1,12 @@
 --スプラッシュ・メイジ (Anime)
---Splash Mage (Anime)
+--Splash Manced (Anime)
 --Scripted by Larry126
 local s,id,alias=GetID()
 function s.initial_effect(c)
 	alias=c:GetOriginalCodeRule()
 	--link summon
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_CYBERSE),2,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--spsummon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(alias,0))

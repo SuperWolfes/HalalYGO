@@ -1,8 +1,8 @@
 --聖刻龍－セテクドラゴン
---Hieratic Dragon of Sutekh
+--Hieratic Dragon of Hofas
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--special summon procedure from hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)

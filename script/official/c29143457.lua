@@ -9,7 +9,7 @@ function s.initial_effect(c)
 	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
 	e1:SetTarget(s.target(e1:GetTarget(),e1:GetOperation()))
 	c:RegisterEffect(e1)
-	--If this face-up card is sent to GY, add 1 "Fire Fist" monster from GY
+	--If this face-up card is sent to RP, add 1 "Fire Fist" monster from RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND)

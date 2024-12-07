@@ -1,11 +1,11 @@
 --灼熱の火霊使いヒータ
---Hiita the Fire Charmer, Ablaze
+--Hiita the Fire Chaumer, Ablaze
 --Scripted by ahtelel
 local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
 	Link.AddProcedure(c,nil,2,2,s.lcheck)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Special Summon
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))

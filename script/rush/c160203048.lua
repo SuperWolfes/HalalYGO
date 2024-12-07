@@ -1,5 +1,5 @@
--- 成銀ゴブリン 
--- Startup Goblin
+--成銀ゴブリン 
+--Startup Goblin
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_UPSTART_GOBLIN}
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
 end
 function s.filter(c,e,tp)
 	return c:IsLevelBelow(6) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -27,9 +27,9 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
-	--requirement
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
-	--effect
+	--Requirement
+	Duel.SendtoRest(e:GetHandler(),REASON_COST)
+	--Effect
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_HAND,0,1,1,nil,e,tp)
@@ -38,9 +38,9 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+		e1:SetReset(RESETS_STANDARD_PHASE_END)
 		e1:SetValue(500)
-		g:GetFirst():RegisterEffectRush(e1)
+		g:GetFirst():RegisterEffect(e1)
 		local ct=Duel.GetMatchingGroupCount(Card.IsCode,tp,LOCATION_REST,0,nil,CARD_UPSTART_GOBLIN)
 		if ct>0 then
 			Duel.Damage(1-tp,500,REASON_EFFECT)

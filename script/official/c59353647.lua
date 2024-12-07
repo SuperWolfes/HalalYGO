@@ -1,9 +1,9 @@
 --アマゾネスペット虎獅王
---Amazoness King Liger
+--Amazonian King Liger
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,s.mfilter,aux.FilterBoolFunctionEx(Card.IsSetCard,0x4))
 	--Cannot attack monsters, except this one
 	local e1=Effect.CreateEffect(c)
@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_CANNOT_SELECT_BATTLE_TARGET)
 	e1:SetValue(function(e,c) return c~=e:GetHandler() end)
 	c:RegisterEffect(e1)
-	--Destroy 1 "Amazoness" card and Special Summon from the GY
+	--Destroy 1 "Amazonian" card and Special Summon from the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_DESTROY)
 	e2:SetType(EFFECT_TYPE_IGNITION)

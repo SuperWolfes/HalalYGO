@@ -1,7 +1,8 @@
 --バク団
+--Explossum
 local s,id=GetID()
 function s.initial_effect(c)
-	--equip
+	--Equip itself to 1 face-up Xyz monster your opponent controls
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -11,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.eqtg)
 	e1:SetOperation(s.eqop)
 	c:RegisterEffect(e1)
-	--remove material
+	--Remove 1 material from the equip target
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
@@ -39,39 +40,33 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if c:IsLocation(LOCATION_MZONE) and c:IsFacedown() then return end
 	local tc=Duel.GetFirstTarget()
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 or tc:IsFacedown() or not tc:IsRelateToEffect(e) then
-		Duel.SendtoGrave(c,REASON_EFFECT)
+		Duel.SendtoRest(c,REASON_EFFECT)
 		return
 	end
 	Duel.Equip(tp,c,tc,true)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_EQUIP_LIMIT)
-	e1:SetReset(RESET_EVENT+RESETS_STANDARD)
-	e1:SetValue(s.eqlimit)
+	e1:SetReset(RESET_EVENT|RESETS_STANDARD)
+	e1:SetValue(function(e,c) return c:IsType(TYPE_XYZ) end)
 	c:RegisterEffect(e1)
-	--destroy
+	--Destroy the equipped monster if it has no materials
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_EQUIP)
 	e2:SetCode(EFFECT_SELF_DESTROY)
 	e2:SetCondition(s.descon)
-	e2:SetReset(RESET_EVENT+RESETS_STANDARD)
+	e2:SetReset(RESET_EVENT|RESETS_STANDARD)
 	c:RegisterEffect(e2)
-end
-function s.eqlimit(e,c)
-	return c:IsType(TYPE_XYZ)
 end
 function s.descon(e)
 	local ec=e:GetHandler():GetEquipTarget()
 	return ec and ec:GetOverlayCount()==0
 end
 function s.rmcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetTurnPlayer()~=tp
+	return Duel.IsTurnPlayer(1-tp) and e:GetHandler():GetEquipTarget()
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then
-		local ec=e:GetHandler():GetEquipTarget()
-		return ec and ec:CheckRemoveOverlayCard(tp,1,REASON_EFFECT)
-	end
+	if chk==0 then return e:GetHandler():GetEquipTarget():CheckRemoveOverlayCard(tp,1,REASON_EFFECT) end
 end
 function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end

@@ -1,5 +1,5 @@
 --出目出し
---Suffice-nied
+--Dice-nied
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetLabel(1)
 	c:RegisterEffect(e2)
 end
-s.roll_suffice=true
+s.roll_dice=true
 function s.cfilter(c,sp)
 	return c:IsFaceup() and c:GetSummonPlayer()==sp
 end
@@ -46,7 +46,7 @@ function s.filter(c,sp,e,lv)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetLabel()==0 or not e:GetHandler():IsRelateToEffect(e) then return end
-	local dc=Duel.TossSuffice(tp,1)
+	local dc=Duel.TossDice(tp,1)
 	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS):Filter(s.filter,nil,1-tp,e,dc)
 	if #g>0 then
 		Duel.SendtoHand(g,nil,REASON_EFFECT)

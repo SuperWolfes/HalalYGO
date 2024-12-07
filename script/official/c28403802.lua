@@ -3,10 +3,10 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Synchro procedure
 	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_MENTAL),1,1,Synchro.NonTuner(nil),1,99)
-	--Search or send to the GY 1 "P.U.N.K." monster from your Deck
+	--Search or send to the RP 1 "P.U.N.K." monster from your Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND+CATEGORY_TOREST)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.thgtg)
 	e1:SetOperation(s.thgop)
 	c:RegisterEffect(e1)
-	--Special Summon itself from the GY
+	--Special Summon itself from the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -43,7 +43,7 @@ function s.thgcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.PayLPCost(tp,600)
 end
 function s.thgfilter(c)
-	return c:IsLevel(3) and c:IsRace(RACE_MENTAL) and (c:IsAbleToHand() or c:IsAbleToGrave())
+	return c:IsLevel(3) and c:IsRace(RACE_MENTAL) and (c:IsAbleToHand() or c:IsAbleToRest())
 end
 function s.thgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thgfilter,tp,LOCATION_DECK,0,1,nil) end

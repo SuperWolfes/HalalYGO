@@ -1,5 +1,5 @@
 -- アマゾネスの鎖使い (Anime)
--- Amazoness Chain Master (Anime)
+-- Amazonian Chain Master (Anime)
 -- scripted by: UnknownGuest
 -- updated by Larry126
 local s,id=GetID()

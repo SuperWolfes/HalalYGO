@@ -1,11 +1,11 @@
 --プロキシー・Ｆ・マジシャン
---Proxy F Magician
+--Proxy F Mentor
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
 	--Link Summon
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_EFFECT),2,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion Summon
 	local params = {nil,Fusion.OnFieldMat}
 	local e1=Effect.CreateEffect(c)

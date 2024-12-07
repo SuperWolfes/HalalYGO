@@ -36,7 +36,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
 	local tc=g:GetFirst()
 	if tc and Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)~=0 then
-		c:CancelToGrave()
+		c:CancelToRest()
 		Duel.Overlay(tc,c)
 	end
 	Duel.RegisterFlagEffect(tp,id,0,0,0)

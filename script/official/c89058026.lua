@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.dsptg)
 	e1:SetOperation(s.dspop)
 	c:RegisterEffect(e1)
-	-- Special Summon from GY
+	-- Special Summon from RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)

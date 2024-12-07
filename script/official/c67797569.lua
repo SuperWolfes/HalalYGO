@@ -2,8 +2,8 @@
 --Lavalval Salamander
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Synchro summon procedure
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTunerEx(Card.IsAttribute,ATTRIBUTE_FIRE),1,99)
 	--If synchro summoned, draw 2
@@ -51,7 +51,7 @@ function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	local cg=Duel.GetFieldGroup(p,LOCATION_HAND,0)
 	local og=aux.SelectUnselectGroup(cg,e,tp,2,2,s.rescon,1,tp,HINTMSG_TOREST,s.rescon)
 	if og and #og>=2 then
-		local ct=Duel.SendtoGrave(og,REASON_EFFECT)
+		local ct=Duel.SendtoRest(og,REASON_EFFECT)
 	else
 		Duel.ConfirmCards(1-p,cg)
 		Duel.SendtoDeck(cg,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)

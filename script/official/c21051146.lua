@@ -1,5 +1,5 @@
 --ブラッド・マジシャン－煉獄の魔術師－
---Blast Magician
+--Blast Mentor
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(COUNTER_ACTIONAL)

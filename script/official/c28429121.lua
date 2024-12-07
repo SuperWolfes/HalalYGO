@@ -1,5 +1,5 @@
 --リチュアに伝わりし禁断の秘術
---Unliked Arts of the Gishki
+--Unliked Arts of the Giojiki
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

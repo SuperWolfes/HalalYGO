@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EVENT_EQUIP)
-	e2:SetOperation(s.resetop)
+	e2:SetOperation(s.revetop)
 	e2:SetRange(LOCATION_SZONE)
 	c:RegisterEffect(e2)
 	local e3=Effect.CreateEffect(c)
@@ -45,7 +45,7 @@ function s.posop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ChangePosition(tc,POS_FACEUP_DEFENSE,0,POS_FACEUP_ATTACK,0)
 	end
 end
-function s.resetop(e,tp,eg,ep,ev,re,r,rp)
+function s.revetop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not eg:IsContains(c) or not c:IsLocation(LOCATION_SZONE) then return end
 	if c:GetFlagEffect(id)==0 then

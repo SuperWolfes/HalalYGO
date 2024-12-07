@@ -3,7 +3,7 @@
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,76990617,aux.FilterBoolFunctionEx(Card.IsSetCard,0x9b))
 	--Banish and gain ATK
 	local e1=Effect.CreateEffect(c)

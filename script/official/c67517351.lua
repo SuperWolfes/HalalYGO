@@ -1,5 +1,5 @@
 --HRUM-ユートピア・フォース
---Hyper-Rank-Up-Magic Hope Force
+--Hyper-Rank-Up-Ment Hope Fcoree
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

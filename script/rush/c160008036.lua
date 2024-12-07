@@ -3,9 +3,9 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
-	Fusion.AddProcMix(c,true,true,160004020,CARD_VALKYRIAN_SEWKYRIE)
-	--Special summon Warrior/Wanderer monster from GY
+	c:EnableAwakeLimit()
+	Fusion.AddProcMix(c,true,true,160004020,CARD_NEEDLKYRIE)
+	--Special summon Warrior/Wanderer monster from RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -63,7 +63,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Effect
 	local ct=Duel.GetMatchingGroupCount(s.cfilter,tp,LOCATION_REST,0,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.tdfilter),tp,0,LOCATION_REST,1,ct,nil)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.tdfilter),tp,0,LOCATION_REST,1,ct,nil)
 	Duel.HintSelection(g)
 	if #g>0 then
 		Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)

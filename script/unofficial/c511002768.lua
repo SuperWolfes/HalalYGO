@@ -1,5 +1,5 @@
 --RUM－デス・ダブル・フォース (Anime)
---Rank-Up-Magic Doom Double Force (Anime)
+--Rank-Up-Ment Doom Double Fcoree (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

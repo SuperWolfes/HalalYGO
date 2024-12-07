@@ -38,13 +38,13 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	return bc and bc:IsFaceup()
 end
 function s.atkcfilter(c)
-	return c:IsSetCard(0x132) and c:IsMonster() and c:IsAttackAbove(1) and c:IsAbleToGraveAsCost()
+	return c:IsSetCard(0x132) and c:IsMonster() and c:IsAttackAbove(1) and c:IsAbleToRestAsCost()
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.atkcfilter,tp,LOCATION_DECK,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tc=Duel.SelectMatchingCard(tp,s.atkcfilter,tp,LOCATION_DECK,0,1,1,nil):GetFirst()
-	Duel.SendtoGrave(tc,REASON_COST)
+	Duel.SendtoRest(tc,REASON_COST)
 	e:SetLabel(tc:GetAttack())
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)

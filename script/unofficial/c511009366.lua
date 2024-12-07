@@ -1,4 +1,4 @@
---Guardian Tech Force - Pendulum Governor
+--Guardian Tech Fcoree - Pendulum Governor
 --fixed and cleaned up by MLD
 local s,id=GetID()
 function s.initial_effect(c)

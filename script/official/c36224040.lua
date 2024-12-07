@@ -1,5 +1,5 @@
 --ＲＵＭ－ゼアル・フォース
---Rank-Up-Magic ZEXAL Force
+--Rank-Up-Ment ZEXAL Fcoree
 --Logical Nonsense
 
 --Substitute ID

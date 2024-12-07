@@ -3,7 +3,7 @@
 --Scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Xyz.AddProcedure(c,nil,6,2,nil,nil,99)
 	--Banish 2 targets
 	local e1=Effect.CreateEffect(c)

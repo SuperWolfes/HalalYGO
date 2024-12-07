@@ -42,8 +42,8 @@ function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGraveAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED) end
-	Duel.SendtoGrave(c,REASON_COST)
+	if chk==0 then return c:IsAbleToRestAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED) end
+	Duel.SendtoRest(c,REASON_COST)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tc=e:GetLabelObject():GetLabelObject()
@@ -96,7 +96,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if not rc:IsCanBeSpecialSummoned(e,SUMMON_TYPE_LOCKED,tp,false,true) then return end
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
-	local tc=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.relfilter),tp,LOCATION_MZONE+LOCATION_HAND+LOCATION_REST,0,1,1,rc,e,tp,rc,ft):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.relfilter),tp,LOCATION_MZONE+LOCATION_HAND+LOCATION_REST,0,1,1,rc,e,tp,rc,ft):GetFirst()
 	if tc then
 		rc:SetMaterial(Group.FromCards(tc))
 		if tc:IsLocation(LOCATION_REST) then

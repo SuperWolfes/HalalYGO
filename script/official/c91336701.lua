@@ -1,10 +1,10 @@
 --魔導耀士 デイブレイカー
---Day-Breaker the Shinning Magical Knight
+--Day-Breaker the Shinning Mentoral Knight
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(COUNTER_ACTIONAL)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_MENTOR),2,2)
 	--add counter (self summon)
 	local e1=Effect.CreateEffect(c)

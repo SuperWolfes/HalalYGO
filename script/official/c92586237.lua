@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Add 1 "Bujin" monster from your GY
+	--Add 1 "Bujin" monster from your RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND)
@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.thtg)
 	e2:SetOperation(s.thop)
 	c:RegisterEffect(e2)
-	--Send 1 "Bujin" monster from deck to GY
+	--Send 1 "Bujin" monster from deck to RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetCategory(CATEGORY_TOREST)
@@ -44,9 +44,9 @@ s.listed_series={0x88}
 
 	--Check for a "Bujin" card
 function s.cfilter(c)
-	return c:IsSetCard(0x88) and c:IsAbleToGraveAsCost()
+	return c:IsSetCard(0x88) and c:IsAbleToRestAsCost()
 end
-	--Send 1 "Bujin" card from hand to GY as cost
+	--Send 1 "Bujin" card from hand to RP as cost
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,e:GetHandler()) end
 	Duel.DiscardHand(tp,s.cfilter,1,1,REASON_COST,e:GetHandler())
@@ -63,21 +63,21 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if not c:IsRelateToEffect(e) then return end
 	Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)
 end
-	--Check for 1 "Bujin" monster to add from GY
+	--Check for 1 "Bujin" monster to add from RP
 function s.thfilter(c,cd)
 	return c:IsSetCard(0x88) and c:IsMonster() and not c:IsCode(cd) and c:IsAbleToHand()
 end
-	--Check for 1 "Bujin" monster to send to GY as cost
+	--Check for 1 "Bujin" monster to send to RP as cost
 function s.cfilter1(c,tp)
-	return c:IsMonster() and c:IsAbleToGraveAsCost() and c:IsSetCard(0x88)
+	return c:IsMonster() and c:IsAbleToRestAsCost() and c:IsSetCard(0x88)
 		and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil,c:GetCode())
 end
-	--Send 1 "Bujin" monster from hand to GY as cost
+	--Send 1 "Bujin" monster from hand to RP as cost
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter1,tp,LOCATION_HAND,0,1,nil,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local sg=Duel.SelectMatchingCard(tp,s.cfilter1,tp,LOCATION_HAND,0,1,1,nil,tp)
-	Duel.SendtoGrave(sg,REASON_COST)
+	Duel.SendtoRest(sg,REASON_COST)
 	e:SetLabel(sg:GetFirst():GetCode())
 end
 	--Activation legality
@@ -85,10 +85,10 @@ function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
 end
-	--Add 1 "Bujin" monster from your GY
+	--Add 1 "Bujin" monster from your RP
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.thfilter),tp,LOCATION_REST,0,1,1,nil,e:GetLabel())
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thfilter),tp,LOCATION_REST,0,1,1,nil,e:GetLabel())
 	if #g>0 then
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)
@@ -96,14 +96,14 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 	--Check for 1 "Bujin" monster to send from deck
 function s.tgfilter(c,cd)
-	return c:IsSetCard(0x88) and c:IsMonster() and not c:IsCode(cd) and c:IsAbleToGrave()
+	return c:IsSetCard(0x88) and c:IsMonster() and not c:IsCode(cd) and c:IsAbleToRest()
 end
 	--Check for 1 "Bujin" monster to banish as cost
 function s.cfilter2(c,tp)
 	return c:IsMonster() and c:IsAbleToRemoveAsCost() and c:IsSetCard(0x88)
 		and Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil,c:GetCode())
 end
-	--Banish 1 "Bujin" monster from GY as cost
+	--Banish 1 "Bujin" monster from RP as cost
 function s.tgcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter2,tp,LOCATION_REST,0,1,nil,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
@@ -116,11 +116,11 @@ function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
-	--Send 1 "Bujin" monster from deck to GY
+	--Send 1 "Bujin" monster from deck to RP
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil,e:GetLabel())
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end

@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Link Summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0xee),2,2)
 	--Change name to "SPYRAL Super Agent"
 	local e1=Effect.CreateEffect(c)
@@ -47,7 +47,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if (opt==0 and tc:IsMonster()) or (opt==1 and tc:IsActional()) or (opt==2 and tc:IsTrap()) then
 		local zone=e:GetHandler():GetLinkedZone(tp)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local sg=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.spfilter),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil,e,tp,zone)
+		local sg=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil,e,tp,zone)
 		local sc=sg:GetFirst()
 		if sc then
 			if zone~=0 then

@@ -1,10 +1,10 @@
---Number C5: Chaos Chimera Dragon
+--Number C5: Chaos Chilean Dragon
 --CNo.5 亡朧龍カオス・キマイラ・ドラゴン
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,6,3,nil,nil,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--atk
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)

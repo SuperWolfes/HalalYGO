@@ -1,9 +1,9 @@
 -- 席取－六双丸
--- Sekitori - Musomaru
+-- Lyrical Sumo Dice Games
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	-- 2 Level 6 monsters
 	Xyz.AddProcedure(c,nil,6,2)
 	-- Roll die and move to corresponding zone
@@ -19,34 +19,34 @@ function s.initial_effect(c)
 	e1:SetOperation(s.mvop)
 	c:RegisterEffect(e1)
 end
-s.roll_suffice=true
+s.roll_dice=true
 function s.mvtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,1)
 end
 function s.cannot_move(c)
-	Duel.SendtoGrave(c,REASON_EFFECT)
+	Duel.SendtoRest(c,REASON_EFFECT)
 end
 function s.mvop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not (c:IsRelateToEffect(e) and c:IsInMainMZone()) then return end
-	local suffice=Duel.TossSuffice(tp,1)
-	if suffice<1 or suffice>6 then return end
+	local dice=Duel.TossDice(tp,1)
+	if dice<1 or dice>6 then return end
 
 	local seq=c:GetSequence()
 	local col3=Duel.IsDuelType(DUEL_3_COLUMNS_FIELD)
 	local max=col3 and 4 or 5
-	for i=1,suffice do
+	for i=1,dice do
 		seq=seq-1
 		if seq==0 and col3 then seq=-2
 		elseif seq<-max then seq=max-1 end
 	end
 
-	local switch=seq<0
-	if switch and not c:IsAbleToChangeControler() then return s.cannot_move(c) end
+	local smint=seq<0
+	if smint and not c:IsAbleToChangeControler() then return s.cannot_move(c) end
 
-	local fp=switch and 1-tp or tp
-	local nseq=switch and 5+seq or seq
+	local fp=smint and 1-tp or tp
+	local nseq=smint and 5+seq or seq
 	local tc=Duel.GetFieldCard(fp,LOCATION_MZONE,nseq)
 	if Duel.GetMZoneCount(fp,tc,tp,nil,1<<nseq)<1 then return s.cannot_move(c) end
 
@@ -58,7 +58,7 @@ function s.mvop(e,tp,eg,ep,ev,re,r,rp)
 		win=(prev<7 and c:GetOverlayCount()>6)
 	end
 
-	if switch and Duel.GetControl(c,1-tp,0,0,1<<nseq) or Duel.MoveSequence(c,seq) then
-		if win then Duel.Win(tp,WIN_REASON_SEKITORI) end
+	if smint and Duel.GetControl(c,1-tp,0,0,1<<nseq) or Duel.MoveSequence(c,seq) then
+		if win then Duel.Win(tp,WIN_REASON_LYRICAL_SUMO) end
 	else return s.cannot_move(c) end
 end

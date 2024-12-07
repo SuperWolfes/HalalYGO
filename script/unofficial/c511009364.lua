@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.regop)
 	c:RegisterEffect(e2)
 	--perform a fusion summon
-	local params = {nil,Fusion.OnFieldMat,nil,nil,Fusion.ForcedHandler}
+	local params = {nil,Fusion.OnFieldMat,nil,nil,Fusion.FcoreedHandler}
 	local e3=Effect.CreateEffect(c)
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)
 	e3:SetType(EFFECT_TYPE_IGNITION)

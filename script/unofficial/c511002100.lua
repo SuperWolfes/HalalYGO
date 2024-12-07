@@ -1,5 +1,5 @@
 --天地の宝札
---Card of Heaven and Earth
+--Card of Spectrum and Earth
 --Fixed by Larry126
 local s,id=GetID()
 function s.initial_effect(c)

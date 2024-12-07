@@ -3,8 +3,8 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
-	Synchro.AddProcedure(c,aux.FilterSummonCode(33420078),1,1,Synchro.NonTunerEx(Card.IsRace,RACE_CONTAMINED),1,99)
-	c:EnableReviveLimit()
+	Synchro.AddProcedure(c,aux.FilterSummonCode(33420078),1,1,Synchro.NonTunerEx(Card.IsRace,RACE_TOXIC),1,99)
+	c:EnableAwakeLimit()
 	--special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -26,7 +26,7 @@ end
 s.material={33420078}
 s.listed_names={33420078}
 function s.filter(c,e,tp)
-	return c:IsRace(RACE_CONTAMINED) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsRace(RACE_TOXIC) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(1-tp) and s.filter(chkc,e,tp) end
@@ -39,7 +39,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
-	if tc:IsRelateToEffect(e) and tc:IsRace(RACE_CONTAMINED)
+	if tc:IsRelateToEffect(e) and tc:IsRace(RACE_TOXIC)
 		and Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP_ATTACK)~=0 then
 		if c:IsFacedown() or not c:IsRelateToEffect(e) then return end
 		c:SetCardTarget(tc)

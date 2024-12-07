@@ -17,7 +17,7 @@ function s.initial_effect(c)
 		ge1:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
 		ge1:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
 		ge1:SetCode(EVENT_LEAVE_FIELD)
-		ge1:SetOperation(s.resetop)
+		ge1:SetOperation(s.revetop)
 		Duel.RegisterEffect(ge1,0)
 		--counter
 		local ge2=Effect.CreateEffect(c)
@@ -31,7 +31,7 @@ end
 function s.resfilter(c)
 	return c:GetOriginalCode()==id
 end
-function s.resetop(e,tp,eg,ep,ev,re,r,rp)
+function s.revetop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.resfilter,tp,0xf7,0xf7,nil)
 	local tc=g:GetFirst()
 	while tc do

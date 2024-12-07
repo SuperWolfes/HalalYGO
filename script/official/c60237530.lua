@@ -1,11 +1,11 @@
 --双天拳 鎧阿
---Guardian Avatar Fists - Armored Ah-Gyo
+--Dual Avatar Fists - Armored Ah-Gyo
 --Scripted by edo9300
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Fusion summon procedure
 	Fusion.AddProcFunRep(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x14e),2,true)
 	--Destroy 1 of opponent's attack position monsters

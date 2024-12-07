@@ -1,8 +1,8 @@
 --星杯神楽イヴ
---Ib the World Chalice Priestess
+--Ib the World Chalice Helperess
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,nil,2,nil,s.spcheck)
 	--indes
 	local e1=Effect.CreateEffect(c)
@@ -53,14 +53,14 @@ function s.repfilter(c,tp,hc)
 		and c:IsControler(tp) and c:IsReason(REASON_EFFECT) and hc:GetLinkedGroup():IsContains(c)
 end
 function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGrave() and eg:IsExists(s.repfilter,1,nil,tp,e:GetHandler()) end
+	if chk==0 then return e:GetHandler():IsAbleToRest() and eg:IsExists(s.repfilter,1,nil,tp,e:GetHandler()) end
 	return Duel.SelectEffectYesNo(tp,e:GetHandler(),96)
 end
 function s.repval(e,c)
 	return s.repfilter(c,e:GetHandlerPlayer(),e:GetHandler())
 end
 function s.repop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
+	Duel.SendtoRest(e:GetHandler(),REASON_EFFECT)
 end
 function s.spcon2(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD)

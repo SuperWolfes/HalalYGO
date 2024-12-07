@@ -1,7 +1,7 @@
 --スーパービークロイド－モビルベース
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,s.matfilter,aux.FilterBoolFunctionEx(Card.IsSetCard,0x16))
 	--special summon
 	local e1=Effect.CreateEffect(c)

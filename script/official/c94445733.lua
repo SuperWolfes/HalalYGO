@@ -1,5 +1,5 @@
 -- 破壊の神碑
--- Mysterune of Destruction
+-- Mysterune of Mismatching
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)

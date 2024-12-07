@@ -1,5 +1,5 @@
 --奇跡のマジック・ゲート (Anime)
---Magic Gate of Pulses (Anime)
+--Ment Gate of Pulses (Anime)
 --updated by Larry126
 local s,id=GetID()
 function s.initial_effect(c)

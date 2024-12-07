@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c)
-	return (c:IsFacedown() or c:IsType(TYPE_FUSION)) and c:IsAbleToGrave()
+	return (c:IsFacedown() or c:IsType(TYPE_FUSION)) and c:IsAbleToRest()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetFieldGroup(tp,0,LOCATION_EXTRA)
@@ -20,5 +20,5 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(Card.IsType,1-tp,LOCATION_EXTRA,0,nil,TYPE_FUSION)
 	if #g<2 then return end
 	local rg=g:RandomSelect(tp,2)
-	Duel.SendtoGrave(rg,REASON_EFFECT)
+	Duel.SendtoRest(rg,REASON_EFFECT)
 end

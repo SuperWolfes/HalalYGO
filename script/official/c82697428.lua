@@ -1,5 +1,5 @@
 --Ｖ・ＨＥＲＯウィッチ・レイド
---Vision HERO Witch Raider
+--Vision HERO Mint Raider
 
 local s,id=GetID()
 function s.initial_effect(c)

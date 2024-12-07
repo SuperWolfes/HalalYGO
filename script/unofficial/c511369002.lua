@@ -36,22 +36,22 @@ function s.actcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.actcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsLocation(LOCATION_HAND) and c:IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(c,REASON_COST)
+	if chk==0 then return c:IsLocation(LOCATION_HAND) and c:IsAbleToRestAsCost() end
+	Duel.SendtoRest(c,REASON_COST)
 end
 function s.actfilter(c,tp)
 	return c:IsCode(511600232) and c:GetActivateEffect():IsActivatable(tp,true,true)
 end
 function s.acttg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(aux.GraveValleyFilter(s.actfilter),tp,LOCATION_DECK+LOCATION_REST,0,1,nil,tp) end
+	if chk==0 then return Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.actfilter),tp,LOCATION_DECK+LOCATION_REST,0,1,nil,tp) end
 end
 function s.actop(e,tp,eg,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(48934760,0))
-	local tc=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.actfilter),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil,tp):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.actfilter),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil,tp):GetFirst()
 	Duel.ActivateFieldActional(tc,e,tp,eg,ep,ev,re,r,rp)
 end
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_FIELD) and c:IsSetCard(0x580) and c:IsAbleToGrave()
+	return c:IsFaceup() and c:IsType(TYPE_FIELD) and c:IsSetCard(0x580) and c:IsAbleToRest()
 end
 function s.actcon2(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_FZONE,0,1,nil)
@@ -70,7 +70,7 @@ end
 function s.actop2(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tg=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_FZONE,0,1,1,nil):GetFirst()
-	if tg and Duel.SendtoGrave(tg,REASON_EFFECT)~=0 and tg:IsLocation(LOCATION_REST) then
+	if tg and Duel.SendtoRest(tg,REASON_EFFECT)~=0 and tg:IsLocation(LOCATION_REST) then
 		local code=tg:GetOriginalCode()
 		Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(89208725,0))
 		local g=Duel.SelectMatchingCard(tp,s.actfilter2,tp,LOCATION_DECK,0,1,1,nil,e,tp,code)

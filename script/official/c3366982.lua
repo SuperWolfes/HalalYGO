@@ -2,7 +2,7 @@
 --Alligator’s Sword Dragon
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion Material
 	Fusion.AddProcMix(c,true,true,88819587,64428736)
 	--Can attack directly

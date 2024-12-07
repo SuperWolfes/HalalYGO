@@ -1,5 +1,5 @@
 --ネフティスの鳳凰神
---Sacred Bird of Nephthys
+--Clean Bird of Nepolonis
 local s,id=GetID()
 function s.initial_effect(c)
 	--spsummon

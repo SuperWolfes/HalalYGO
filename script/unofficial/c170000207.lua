@@ -1,4 +1,5 @@
---Backup Gardna
+--バックアップ・ガードナー (Anime)
+--Backup Gardna (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Redirect Equip
@@ -28,9 +29,9 @@ function s.filter2(c,eqc)
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	if chk==0 then return Duel.IsExistingTarget(s.filter1,tp,LOCATION_SZONE,0,1,nil,tp) end
+	if chk==0 then return Duel.IsExistingTarget(s.filter1,tp,LOCATION_SZONE,LOCATION_SZONE,1,nil,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
-	local g1=Duel.SelectTarget(tp,s.filter1,tp,LOCATION_SZONE,0,1,1,nil,tp)
+	local g1=Duel.SelectTarget(tp,s.filter1,tp,LOCATION_SZONE,LOCATION_SZONE,1,1,nil,tp)
 	local eqc=g1:GetFirst()
 	e:SetLabelObject(eqc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
@@ -44,7 +45,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if tc==eqc then tc=g:GetNext() end
 	if not eqc:IsRelateToEffect(e) then return end
 	if tc:IsFacedown() or not tc:IsRelateToEffect(e) then
-		Duel.SendtoGrave(eqc,REASON_EFFECT)
+		Duel.SendtoRest(eqc,REASON_EFFECT)
 		return
 	end
 	Duel.Equip(tp,eqc,tc)
@@ -54,5 +55,5 @@ function s.indcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
 end
 function s.indop(e,tp,eg,ep,ev,re,r,rp)
-Duel.NegateAttack()
+	Duel.NegateAttack()
 end

@@ -5,7 +5,7 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	aux.EnableCheckReincarnation(c)
+	aux.EnableCheckReincorporation(c)
 	--Omni-negate
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_NEGATE+CATEGORY_DESTROY)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-	--Set itself from GY
+	--Set itself from RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
@@ -26,7 +26,7 @@ function s.initial_effect(c)
 	e2:SetCountLimit(1,id)
 	e2:SetCondition(s.setcon)
 	e2:SetTarget(s.settg)
-	e2:SetOperation(s.setop)
+	e2:SetOperation(s.vetop)
 	c:RegisterEffect(e2)
 end
 	--Lists "Salamangreat" archetype
@@ -57,7 +57,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 end
 	--Check if "Salamangreat" is rerest link summoned
 function s.lkfilter(c,tp)
-	return c:IsSetCard(0x119) and c:IsLinkMonster() and c:IsReincarnationSummoned() and c:GetControler()==tp
+	return c:IsSetCard(0x119) and c:IsLinkMonster() and c:IsReincorporationSummoned() and c:GetControler()==tp
 end
 	--If it ever happened
 function s.setcon(e,tp,eg,ep,ev,re,r,rp)
@@ -70,7 +70,7 @@ function s.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,e:GetHandler(),1,0,0)
 end
 	--Set itself back to S/T zone, banish it if it leaves the field
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and c:IsSSetable() then
 		Duel.SSet(tp,c)

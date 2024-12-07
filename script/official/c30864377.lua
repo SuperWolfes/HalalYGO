@@ -1,7 +1,7 @@
 --剣闘獣総監エーディトル
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMixN(c,true,true,s.matfilter,2)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,s.splimit)
 	--cannot be fusion material

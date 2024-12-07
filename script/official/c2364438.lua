@@ -1,5 +1,5 @@
 --魔妖廻天
---Mayakashi Return
+--Mayashi Return
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -15,7 +15,7 @@ end
 s.listed_names={id}
 s.listed_series={0x121}
 function s.filter(c)
-	return c:IsSetCard(0x121) and not c:IsCode(id) and (c:IsAbleToHand() or c:IsAbleToGrave())
+	return c:IsSetCard(0x121) and not c:IsCode(id) and (c:IsAbleToHand() or c:IsAbleToRest())
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end

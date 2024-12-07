@@ -1,5 +1,5 @@
 --Scripted by Eerie Code
---Performage Cup Tricker
+--Performanced Cup Tricker
 local s,id=GetID()
 function s.initial_effect(c)
 	--Pendulum Summon
@@ -59,7 +59,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingTarget(s.spfil,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,false,false) end
 	local tg=Duel.SelectTarget(tp,s.spfil,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil)
 	local sg=tg:GetFirst():GetOverlayGroup():Select(tp,1,1,nil)
-	Duel.SendtoGrave(sg,REASON_EFFECT)
+	Duel.SendtoRest(sg,REASON_EFFECT)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,e:GetHandler(),1,0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)

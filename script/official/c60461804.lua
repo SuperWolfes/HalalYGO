@@ -1,8 +1,8 @@
 -- Ｄ－ＨＥＲＯ デストロイフェニックスガイ
--- Destrudic HERO - Destroy Bird Enforcer
+-- Destrudic HERO - Destroy Bird Enfcoreer
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcFun2(c,s.matfilter,aux.FilterBoolFunctionEx(Card.IsSetCard,0xc008),true)
 	--Decrease the ATK of monster your opponent controls
 	local e1=Effect.CreateEffect(c)
@@ -95,7 +95,7 @@ function s.filter(c,e,tp)
 end
 function s.spop1(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.filter),tp,LOCATION_REST,0,1,1,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,LOCATION_REST,0,1,1,nil,e,tp)
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end

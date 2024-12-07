@@ -4,12 +4,12 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	Pendulum.AddProcedure(c)
-	--revive limit
+	--awake limit
 	c:EnableUnsummonable()
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
 	e0:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-	e0:SetCode(EFFECT_REVIVE_LIMIT)
+	e0:SetCode(EFFECT_AWAKE_LIMIT)
 	e0:SetCondition(s.rvlimit)
 	c:RegisterEffect(e0)
 	--splimit
@@ -152,7 +152,7 @@ function s.hspop(e,tp,eg,ep,ev,re,r,rp,c)
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsDiscardable() and Duel.CheckLPCost(tp,500) end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST+REASON_DISCARD)
+	Duel.SendtoRest(e:GetHandler(),REASON_COST+REASON_DISCARD)
 	Duel.PayLPCost(tp,500)
 end
 function s.thfilter(c)

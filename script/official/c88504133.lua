@@ -1,5 +1,5 @@
 --ＲＵＭ－ファントム・フォース
---Rank-Up-Magic Illusion Knights' Force
+--Rank-Up-Ment Illusion Knights' Fcoree
 --scripted by AlphaKretin and by edo9300
 local s,id=GetID()
 function s.initial_effect(c)

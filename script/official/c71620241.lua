@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	Duel.EnableGlobalFlag(GLOBALFLAG_SELF_TOREST)
-	--Send itself to the GY if "Adanced Dark" is not face-up in the Field Actional Zone
+	--Send itself to the RP if "Adanced Dark" is not face-up in the Field Actional Zone
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_SELF_TOREST)
 	e1:SetCondition(s.tgcon)
 	c:RegisterEffect(e1)
-	--Place itself in the S/T instead of sending it to the GY
+	--Place itself in the S/T instead of sending it to the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetCode(EFFECT_TO_REST_REDIRECT_CB)
@@ -37,7 +37,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e5)
 end
 s.listed_names={CARD_ADVANCED_DARK}
-s.listed_series={0x5034}
+s.listed_series={SET_ADVANCED_CRYSTAL_BEAST}
 function s.tgcon(e)
 	return not Duel.IsEnvironment(CARD_ADVANCED_DARK)
 end
@@ -51,22 +51,22 @@ function s.replaceop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetCode(EFFECT_CHANGE_TYPE)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
+	e1:SetReset(RESET_EVENT|RESETS_STANDARD&~RESET_TURN_SET)
 	e1:SetValue(TYPE_ACTIONAL+TYPE_CONTINUOUS)
 	c:RegisterEffect(e1)
 	Duel.RaiseEvent(c,EVENT_CUSTOM+47408488,e,0,tp,0,0)
 end
 function s.filter(c)
-	return c:IsSetCard(0x5034) and not c:IsUnliked() and (not c:IsLocation(LOCATION_REMOVED) or c:IsFaceup())
+	return c:IsSetCard(SET_ADVANCED_CRYSTAL_BEAST) and not c:IsUnliked() and (not c:IsLocation(LOCATION_REMOVED) or c:IsFaceup())
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsLocation(LOCATION_MZONE) and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK+LOCATION_REST+LOCATION_HAND+LOCATION_REMOVED,0,1,nil) end
+		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK|LOCATION_REST|LOCATION_HAND|LOCATION_REMOVED,0,1,nil) end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
-	local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.filter),tp,LOCATION_DECK+LOCATION_REST+LOCATION_HAND+LOCATION_REMOVED,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,LOCATION_DECK|LOCATION_REST|LOCATION_HAND|LOCATION_REMOVED,0,1,1,nil)
 	local tc=g:GetFirst()
 	if tc then
 		Duel.MoveToField(tc,tp,tp,LOCATION_SZONE,POS_FACEUP,true)
@@ -74,7 +74,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetCode(EFFECT_CHANGE_TYPE)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
+		e1:SetReset(RESET_EVENT|RESETS_STANDARD&~RESET_TURN_SET)
 		e1:SetValue(TYPE_ACTIONAL+TYPE_CONTINUOUS)
 		tc:RegisterEffect(e1)
 		Duel.RaiseEvent(tc,EVENT_CUSTOM+47408488,e,0,tp,0,0)

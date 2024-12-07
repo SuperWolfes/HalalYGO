@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMixN(c,true,true,73956664,1,aux.FilterBoolFunctionEx(Card.IsRace,RACE_AQUA),2)
 	--Cannot be Fusion Material
 	local e0=Effect.CreateEffect(c)
@@ -65,7 +65,7 @@ function s.tdcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.tdcfilter,1,nil,tp)
 end
 function s.gyfilter(c)
-	return c:IsSetCard(0x182) and c:IsAbleToGrave()
+	return c:IsSetCard(0x182) and c:IsAbleToRest()
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -81,7 +81,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=Duel.SelectMatchingCard(tp,s.gyfilter,tp,LOCATION_DECK,0,1,1,nil)
 		if #g>0 then
-			Duel.SendtoGrave(g,REASON_EFFECT)
+			Duel.SendtoRest(g,REASON_EFFECT)
 		end
 	end
 end

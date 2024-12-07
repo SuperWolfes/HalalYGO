@@ -1,5 +1,5 @@
 --大霊峰相剣門
---Xiangjianmen the Grand Guardianual Peak
+--Xiangjianmen the Grand Spilocked Peak
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)

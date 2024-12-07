@@ -37,7 +37,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e5)
 end
 s.listed_series={0x45}
-s.roll_suffice=true
+s.roll_dice=true
 function s.excon(e)
 	return not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,0x45),e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
 end
@@ -57,7 +57,7 @@ function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.GetChainInfo(ev,CHAININFO_TARGET_CARDS)
 	if not tg or not tg:IsContains(e:GetHandler()) or not Duel.IsChainDisablable(ev) then return false end
 	local rc=re:GetHandler()
-	local dc=Duel.TossSuffice(tp,1)
+	local dc=Duel.TossDice(tp,1)
 	if dc~=2 and dc~=5 then return end
 	if Duel.NegateEffect(ev) and rc:IsRelateToEffect(re) then
 		Duel.Destroy(rc,REASON_EFFECT)

@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion Summon procedure
 	Fusion.AddProcMix(c,true,true,s.ffilter1,s.ffilter2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Inflict piercing battle damage
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e2:SetCondition(s.damcon)
 	e2:SetValue(aux.ChangeBattleDamage(1,DOUBLE_DAMAGE))
 	c:RegisterEffect(e2)
-	--Register when sent to the GY
+	--Register when sent to the RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
@@ -39,7 +39,7 @@ end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsReason(REASON_BATTLE+REASON_EFFECT) and c:IsReason(REASON_DESTROY) then
-		--Special Summon 2 Level 7 or lower Warrior monsters from your GY
+		--Special Summon 2 Level 7 or lower Warrior monsters from your RP
 		local e1=Effect.CreateEffect(c)
 		e1:SetDescription(aux.Stringid(id,0))
 		e1:SetCategory(CATEGORY_SPECIAL_SUMMON)

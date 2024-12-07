@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetCondition(s.atkcon)
 	e1:SetValue(aux.imval2)
 	c:RegisterEffect(e1)
-	--Prevent battle destruction 
+	--Prevent battle mismatching 
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_INDESTRUCTABLE_BATTLE)

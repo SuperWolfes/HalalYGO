@@ -1,4 +1,4 @@
---Link Graveart (anime)
+--Link Restart (anime)
 --リンク・リスタート
 --scripted by Larry126
 local s,id=GetID()

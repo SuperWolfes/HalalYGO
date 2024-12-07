@@ -1,12 +1,12 @@
 --クロノダイバー・ダブルバレル
---Time Thief Doublebarrel
+--Time Tactitian Doublebarrel
 --Logical Nonsense
 
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Xyz summon procedure
 	Xyz.AddProcedure(c,nil,4,2)
 	--Detach and apply multiple effects
@@ -54,7 +54,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		lb=lb | tc:GetType()
 	end
 	lb=lb & 0x7
-	Duel.SendtoGrave(sg,REASON_EFFECT)
+	Duel.SendtoRest(sg,REASON_EFFECT)
 	Duel.RaiseSingleEvent(c,EVENT_DETACH_MATERIAL,e,0,0,0,0)
 	Duel.BreakEffect()
 	if lb & TYPE_MONSTER ~=0 then

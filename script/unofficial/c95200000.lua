@@ -32,10 +32,10 @@ function s.play(e,tp,eg,ep,ev,re,r,rp)
 	e:SetProperty(te:GetProperty())
 	Duel.ClearTargetCard()
 	if not tc:IsType(TYPE_FIELD) then
-		local of=Duel.GetFieldCard(1-tp,LOCATION_SZONE,5)
+		local of=Duel.GetFieldCard(1-tp,LOCATION_FZONE,0)
 		if of then Duel.Destroy(of,REASON_RULE) end
-		of=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
-		if of and Duel.Destroy(of,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
+		of=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
+		if of and Duel.Destroy(of,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
 	end
 	Duel.MoveToField(tc,p,p,LOCATION_FZONE,POS_FACEUP,true)
 	Duel.Hint(HINT_CARD,0,tc:GetCode())
@@ -43,7 +43,7 @@ function s.play(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_MESSAGE,1-tp,aux.Stringid(id,0))
 	tc:CreateEffectRelation(te)
 	if tc:IsType(TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 then
-		tc:CancelToGrave(false)
+		tc:CancelToRest(false)
 	end
 	if co then co(te,tp,eg,ep,ev,re,r,rp,1) end
 	if tg then tg(te,tp,eg,ep,ev,re,r,rp,1) end
@@ -58,7 +58,7 @@ function s.play(e,tp,eg,ep,ev,re,r,rp)
 	end
 	if op then op(te,tp,eg,ep,ev,re,r,rp) end
 	tc:ReleaseEffectRelation(te)
-	if etc then	
+	if etc then
 		etc=g:GetFirst()
 		while etc do
 			etc:ReleaseEffectRelation(te)

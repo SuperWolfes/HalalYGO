@@ -1,9 +1,9 @@
 --御巫の契り
---Mikanko Promise
+--Sibango Promise
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon 1 "Mikanko" monster from hand or Deck
+	--Special Summon 1 "Sibango" monster from hand or Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_EQUIP)
@@ -45,7 +45,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummonComplete()
 		--Equip the summoned monster with an appropriate Equip Actional
 		if Duel.GetLocationCount(tp,LOCATION_SZONE)==0 then return end
-		local tg=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.eqfilter),tp,LOCATION_HAND+LOCATION_REST,0,nil,tc,tp)
+		local tg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.eqfilter),tp,LOCATION_HAND+LOCATION_REST,0,nil,tc,tp)
 		if #tg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
 			local sg=tg:Select(tp,1,1,nil)

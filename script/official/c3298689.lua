@@ -1,5 +1,5 @@
 --RUM－幻影騎士団ラウンチ
---The Illusion Knights' Rank-Up-Magic Launch
+--The Illusion Knights' Rank-Up-Ment Launch
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -61,7 +61,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummon(sc,SUMMON_TYPE_XYZ,tp,tp,false,false,POS_FACEUP)
 		sc:CompleteProcedure()
 		if c:IsRelateToEffect(e) then
-			c:CancelToGrave()
+			c:CancelToRest()
 			Duel.Overlay(sc,c)
 		end
 	end

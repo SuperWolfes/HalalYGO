@@ -1,9 +1,9 @@
 --燐廻の三弦猫
---Reincarnating Shamisen Calico
+--Reincorporating Shamisen Calico
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Synchro Summon procedure
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	--Synchro Summon during the opponent's Main Phase
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.syncsumtg)
 	e1:SetOperation(s.syncsumop)
 	c:RegisterEffect(e1)
-	--Special Summon itself from GY
+	--Special Summon itself from RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOEXTRA)

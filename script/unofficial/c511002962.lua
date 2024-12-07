@@ -1,8 +1,8 @@
---Amazoness Empress
+--Amazonian Empress
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,15951532,aux.FilterBoolFunctionEx(Card.IsSetCard,0x4))
 	--indes
 	local e1=Effect.CreateEffect(c)

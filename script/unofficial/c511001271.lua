@@ -1,5 +1,5 @@
 --魂魄の格闘場
---Soul Arena
+--Miss Arena
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -33,7 +33,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 		return #g>0 and g:FilterCount(Card.IsDiscardable,nil)==#g
 	end
 	local g=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
-	Duel.SendtoGrave(g,REASON_COST+REASON_DISCARD)
+	Duel.SendtoRest(g,REASON_COST+REASON_DISCARD)
 end
 function s.spfilter(c,e,tp)
 	return c:IsSetCard(0x48) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

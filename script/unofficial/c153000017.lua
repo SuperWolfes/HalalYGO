@@ -203,7 +203,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		local c=Duel.GetDeckMaster(tp)
 		c:Recreate(153000018,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,true)
 		if not c:IsLocation(LOCATION_ONFIELD) then Duel.Hint(HINT_SKILL,tp,153000018) end
-		if g:GetFirst() then Duel.SendtoGrave(g,REASON_RULE) end
+		if g:GetFirst() then Duel.SendtoRest(g,REASON_RULE) end
 	elseif op==2 then
 		Duel.ConfirmCards(tp,g)
 	elseif op==3 then
@@ -258,7 +258,7 @@ function s.gycon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetLabelObject():GetFirst() and not Duel.IsDeckMaster(tp,id)
 end
 function s.gyop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SendtoGrave(e:GetLabelObject(),REASON_RULE)
+	Duel.SendtoRest(e:GetLabelObject(),REASON_RULE)
 end
 function s.chcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetFlagEffect(tp,id)==7 and Duel.IsTurnPlayer(tp) and Duel.IsDeckMaster(tp,id)
@@ -269,5 +269,5 @@ function s.chop(e,tp,eg,ep,ev,re,r,rp)
 	local c=Duel.GetDeckMaster(tp)
 	c:Recreate(153000018,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,true)
 	if not c:IsLocation(LOCATION_ONFIELD) then Duel.Hint(HINT_SKILL,tp,153000018) end
-	if e:GetLabelObject():GetFirst() then Duel.SendtoGrave(e:GetLabelObject(),REASON_RULE) end
+	if e:GetLabelObject():GetFirst() then Duel.SendtoRest(e:GetLabelObject(),REASON_RULE) end
 end

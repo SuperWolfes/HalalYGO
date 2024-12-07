@@ -1,4 +1,4 @@
---Burgundy the Magic Elf
+--Burgundy the Ment Elf
 local s,id=GetID()
 function s.initial_effect(c)
 	--damage

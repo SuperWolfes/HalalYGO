@@ -1,5 +1,5 @@
 --魔帝アングマール (Manga)
---Angmarl the Taintedish Monarch (Manga)
+--Angmarl the Taintedish Moppar (Manga)
 local s,id=GetID()
 function s.initial_effect(c)
 	--copy Actional

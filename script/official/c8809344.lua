@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,4,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--rankup
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -60,7 +60,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if c:IsRelateToEffect(e) and tc:IsRelateToEffect(e) then
 		local og=c:GetOverlayGroup()
 		if #og==0 then return end
-		Duel.SendtoGrave(og,REASON_EFFECT)
+		Duel.SendtoRest(og,REASON_EFFECT)
 		Duel.Overlay(c,tc)
 		if c:IsFacedown() then return end
 		local e1=Effect.CreateEffect(c)

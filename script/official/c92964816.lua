@@ -17,7 +17,7 @@ function s.initial_effect(c)
 end
 s.listed_names={4064256}
 function s.filter(c,e,tp,chk)
-	return c:IsLevelAbove(5) and c:IsRace(RACE_CONTAMINED) and (c:IsAbleToHand() or (chk and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)))
+	return c:IsLevelAbove(5) and c:IsRace(RACE_TOXIC) and (c:IsAbleToHand() or (chk and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)))
 end
 function s.fieldcond(c)
 	return c:IsFaceup() and c:IsCode(4064256)
@@ -60,6 +60,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.splimit(e,c,sump,sumtype,sumpos,targetp,se)
-	return not c:IsRace(RACE_CONTAMINED)
+	return not c:IsRace(RACE_TOXIC)
 end
 

@@ -1,5 +1,5 @@
 --オルフェゴール・カノーネ
---Orcust Brass Bombard
+--Coreust Brass Bombard
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon
@@ -24,10 +24,10 @@ end
 s.listed_series={0x11b}
 s.listed_names={id}
 function s.spcon1(e,tp,eg,ep,ev,re,r,rp)
-	return not Duel.IsPlayerAffectedByEffect(tp,CARD_ORCUSTRATED_BABEL)
+	return not Duel.IsPlayerAffectedByEffect(tp,CARD_COREUSTRATED_BABEL)
 end
 function s.spcon2(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsPlayerAffectedByEffect(tp,CARD_ORCUSTRATED_BABEL)
+	return Duel.IsPlayerAffectedByEffect(tp,CARD_COREUSTRATED_BABEL)
 end
 function s.filter(c,e,tp)
 	return c:IsSetCard(0x11b) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and not c:IsCode(id)

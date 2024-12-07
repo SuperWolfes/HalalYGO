@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetRange(LOCATION_FZONE)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	e1:SetCode(EFFECT_FORCE_SPSUMMON_POSITION)
+	e1:SetCode(EFFECT_FCOREE_SPSUMMON_POSITION)
 	e1:SetTargetRange(1,1)
 	e1:SetValue(POS_FACEUP_ATTACK)
 	c:RegisterEffect(e1)
@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	e4:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
 	e4:SetTarget(s.poslimit)
 	c:RegisterEffect(e4)
-	--Send other Action Cards in hand to GY
+	--Send other Action Cards in hand to RP
 	local e5=Effect.CreateEffect(c)
 	e5:SetCategory(CATEGORY_TOREST)
 	e5:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
@@ -67,5 +67,5 @@ end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	local g=Duel.GetMatchingGroup(s.tgfilter,1-ep,LOCATION_HAND,0,nil)
-	Duel.SendtoGrave(g,REASON_EFFECT)
+	Duel.SendtoRest(g,REASON_EFFECT)
 end

@@ -26,7 +26,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Effect
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.tdfilter),tp,LOCATION_REST,0,1,7,nil)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.tdfilter),tp,LOCATION_REST,0,1,7,nil)
 	if #g>0 then
 		Duel.HintSelection(g)
 		local val=#g*100

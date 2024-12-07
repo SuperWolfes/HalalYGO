@@ -1,5 +1,5 @@
 --獣神機王バルバロスUr
---Beast Machine King Barbaros Ür
+--Beast Machine King Bardaco Ür
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon

@@ -20,7 +20,7 @@ function s.counterfilter(c)
 	return c:IsRace(RACE_MACHINE) or c:GetSummonLocation()~=LOCATION_EXTRA
 end
 function s.cfilter(c)
-	return c:IsRace(RACE_DRAGON+RACE_MACHINE) and c:IsSetCard(0x93) and c:IsAbleToGraveAsCost()
+	return c:IsRace(RACE_DRAGON+RACE_MACHINE) and c:IsSetCard(0x93) and c:IsAbleToRestAsCost()
 end
 function s.thfilter(c)
 	return c:IsRace(RACE_DRAGON+RACE_MACHINE) and c:IsSetCard(0x93) and c:IsAbleToHand()
@@ -34,7 +34,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetCustomActivityCount(id,tp,ACTIVITY_SPSUMMON)==0
 		and aux.SelectUnselectGroup(rg,e,tp,2,2,s.check,0) end
 	local g=aux.SelectUnselectGroup(rg,e,tp,2,2,s.check,1,tp,HINTMSG_TOREST)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	--Cannot Special Summon from the Extra Deck, except Machines
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetDescription(aux.Stringid(id,1))
@@ -55,7 +55,7 @@ function s.lizfilter(e,c)
 	return not c:IsOriginalRace(RACE_MACHINE)
 end
 function s.gyfilter(c)
-	return c:IsRace(RACE_MACHINE) and c:IsSetCard(0x93) and c:IsType(TYPE_FUSION) and c:IsAbleToGrave()
+	return c:IsRace(RACE_MACHINE) and c:IsSetCard(0x93) and c:IsType(TYPE_FUSION) and c:IsAbleToRest()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.gyfilter,tp,LOCATION_EXTRA,0,1,nil) end
@@ -69,6 +69,6 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ConfirmCards(1-tp,hg)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=Duel.SelectMatchingCard(tp,s.gyfilter,tp,LOCATION_EXTRA,0,1,1,nil)
-		if #g>0 then Duel.SendtoGrave(g,REASON_EFFECT) end
+		if #g>0 then Duel.SendtoRest(g,REASON_EFFECT) end
 	end
 end

@@ -4,7 +4,7 @@
 --scripted by MLD
 --credit to TPD & Cybercatman
 --updated by Larry126
-Duel.LoadScript("c421.lua")
+Duel.EnableUnofficialProc(PROC_MEGA_HIERARCHY)
 local s,id=GetID()
 function s.initial_effect(c)
 	--summon with 3 tribute
@@ -26,7 +26,7 @@ function s.initial_effect(c)
 end
 -------------------------------------------------------------------
 function s.atktg(e,c)
-	return c~=e:GetHandler() and not c:IsRace(RACE_DIVINE)
+	return c~=e:GetHandler() and not c:IsRace(RACE_MEGA)
 end
 function s.atkval(e,c)
 	return c:GetAttack()/2

@@ -1,5 +1,5 @@
 --魔導獣 ケルベロス
---Mythical Beast Cerberus
+--Mythical Beast Cebrar
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(COUNTER_ACTIONAL)

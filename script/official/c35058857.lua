@@ -1,5 +1,5 @@
 --奇術王 ムーン・スター
---Magical King Moonstar
+--Mentoral King Horizonstar
 local s,id=GetID()
 function s.initial_effect(c)
 	--synchro limit

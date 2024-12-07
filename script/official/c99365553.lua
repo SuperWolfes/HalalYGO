@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg1)
 	e1:SetOperation(s.spop1)
 	c:RegisterEffect(e1)
-	--Special summon procedure from rest place
+	--Special summon procedure from resting place
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_SPSUMMON_PROC)
@@ -72,7 +72,7 @@ function s.spop1(e,tp,eg,ep,ev,re,r,rp,c)
 	g:DeleteGroup()
 end
 function s.spfilter2(c,att)
-	return c:IsAttribute(att) and c:IsAbleToGraveAsCost()
+	return c:IsAttribute(att) and c:IsAbleToRestAsCost()
 end
 function s.spcon2(e,c)
 	if c==nil then return true end
@@ -104,7 +104,7 @@ end
 function s.spop2(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	g:DeleteGroup()
 end
 function s.spcon3(e,tp,eg,ep,ev,re,r,rp)

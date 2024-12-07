@@ -4,12 +4,12 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Link Summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,s.matfilter,2,3)
 	--cannot Summon to a zone this monster points to
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
-	e1:SetCode(EFFECT_FORCE_MZONE)
+	e1:SetCode(EFFECT_FCOREE_MZONE)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CANNOT_DISABLE)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetTargetRange(1,0)
@@ -117,10 +117,10 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local rc=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.retfilter),tp,LOCATION_REST,0,1,1,nil,e,tp)
+	local rc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.retfilter),tp,LOCATION_REST,0,1,1,nil,e,tp)
 	if rc and Duel.SendtoDeck(rc,nil,2,REASON_EFFECT)>0 and Duel.GetOperatedGroup():GetFirst():IsLocation(LOCATION_EXTRA) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local sc=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.spfilter),tp,LOCATION_REST,0,1,1,rc,e,tp)
+		local sc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REST,0,1,1,rc,e,tp)
 		if sc then
 			Duel.BreakEffect()
 			Duel.SpecialSummon(sc,0,tp,tp,false,false,POS_FACEUP,e:GetHandler():GetLinkedZone())

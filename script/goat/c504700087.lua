@@ -1,5 +1,5 @@
 --ヴァンパイア・ロード
---Vampire Lord (GOAT)
+--Vampire Watcher (GOAT)
 --Only rerest when destroyed as monster
 local s,id=GetID()
 function s.initial_effect(c)
@@ -70,7 +70,7 @@ function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,1-tp,LOCATION_DECK)
 end
 function s.tgfilter(c,ty)
-	return c:IsType(ty) and c:IsAbleToGrave()
+	return c:IsType(ty) and c:IsAbleToRest()
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local g=nil
@@ -78,5 +78,5 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetLabel()==0 then g=Duel.SelectMatchingCard(1-tp,s.tgfilter,1-tp,LOCATION_DECK,0,1,1,nil,TYPE_MONSTER)
 	elseif e:GetLabel()==1 then g=Duel.SelectMatchingCard(1-tp,s.tgfilter,1-tp,LOCATION_DECK,0,1,1,nil,TYPE_ACTIONAL)
 	else g=Duel.SelectMatchingCard(1-tp,s.tgfilter,1-tp,LOCATION_DECK,0,1,1,nil,TYPE_TRAP) end
-	Duel.SendtoGrave(g,REASON_EFFECT)
+	Duel.SendtoRest(g,REASON_EFFECT)
 end

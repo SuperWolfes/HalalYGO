@@ -3,7 +3,7 @@
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	-- Send to GY, discard, and search
+	-- Send to RP, discard, and search
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOREST+CATEGORY_HANDES+CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -26,7 +26,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.thtg)
 	e2:SetOperation(s.thop)
 	c:RegisterEffect(e2)
-	-- Check for Fusion Monsters sent to the GY
+	-- Check for Fusion Monsters sent to the RP
 	aux.GlobalCheck(s,function()
 		local ge1=Effect.CreateEffect(c)
 		ge1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
@@ -49,7 +49,7 @@ function s.revfilter(c,tp)
 end
 function s.tgfilter(c,race)
 	return c:IsLevel(8) and c:IsType(TYPE_FUSION) and (c:IsAttack(2500)
-		or c:IsDefense(2500)) and c:IsRace(race) and c:IsAbleToGrave()
+		or c:IsDefense(2500)) and c:IsRace(race) and c:IsAbleToRest()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.revfilter,tp,LOCATION_HAND,0,1,nil,tp) end
@@ -68,11 +68,11 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local cc=rg:GetFirst()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_EXTRA,0,1,1,nil,cc:GetRace())
-	if #g>0 and Duel.SendtoGrave(g,REASON_EFFECT)>0 and g:GetFirst():IsLocation(LOCATION_REST)
+	if #g>0 and Duel.SendtoRest(g,REASON_EFFECT)>0 and g:GetFirst():IsLocation(LOCATION_REST)
 		and cc:IsDiscardable(REASON_EFFECT) and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 		Duel.BreakEffect()
-		if Duel.SendtoGrave(cc,REASON_EFFECT+REASON_DISCARD)>0 then
+		if Duel.SendtoRest(cc,REASON_EFFECT+REASON_DISCARD)>0 then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 			local hg=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_DECK,0,1,1,nil)
 			if #hg>0 then

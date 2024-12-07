@@ -1,11 +1,11 @@
 --DDD超死偉王ホワイテスト・ヘル・アーマゲドン (Anime)
---D/D/D Super Doom King Bright Armageddon (Anime)
+--D/D/D Super Doom King Bright Cataclysm (Anime)
 --fixed by Larry126 and MLD
 local s,id,alias=GetID()
 function s.initial_effect(c)
 	alias=c:GetOriginalCodeRule()
 	--synchro summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0xaf),1,1,Synchro.NonTunerEx(Card.IsSetCard,0xaf),1,99)
 	--pendulum summon
 	Pendulum.AddProcedure(c,false)
@@ -93,7 +93,7 @@ function s.disop(e,tp,eg,ep,ev,re,r,rp)
 		e3:SetLabel(flag)
 		e3:SetLabelObject(e2)
 		e3:SetRange(LOCATION_MZONE)
-		e3:SetOperation(s.resetop)
+		e3:SetOperation(s.revetop)
 		e3:SetReset(RESET_EVENT+RESETS_STANDARD)
 		Duel.RegisterEffect(e3,tp)
 		local e4=e3:Clone()
@@ -106,7 +106,7 @@ end
 function s.resetFilter(c,flag)
 	return c:GetFlagEffect(flag)>0
 end
-function s.resetop(e,tp,eg,ep,ev,re,r,rp)
+function s.revetop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.resetFilter,tp,LOCATION_MZONE,LOCATION_MZONE,nil,e:GetLabel())
 	g:ForEach(function(tc)
 		tc:ResetFlagEffect(e:GetLabel())

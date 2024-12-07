@@ -1,5 +1,5 @@
 --ネフティスの語り手
---Speaker of Nephthys
+--Speaker of Nepolonis
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon

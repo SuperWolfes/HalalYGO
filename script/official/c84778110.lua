@@ -5,7 +5,7 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--If this card is special summoned, send 1 "Fossil" fusion monster from extra deck to GY
+	--If this card is special summoned, send 1 "Fossil" fusion monster from extra deck to RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOREST)
@@ -43,23 +43,23 @@ function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 	--Check for a "Fossil" fusion monster
 function s.tgfilter(c)
-	return c:IsType(TYPE_FUSION) and c:IsSetCard(0x14c) and c:IsAbleToGrave()
+	return c:IsType(TYPE_FUSION) and c:IsSetCard(0x14c) and c:IsAbleToRest()
 end
-	--Send 1 "Fossil" fusion monster from extra deck to GY
+	--Send 1 "Fossil" fusion monster from extra deck to RP
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_DISCARD+REASON_EFFECT)~=0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_EXTRA,0,1,1,nil)
 		if #g>0 then
-			Duel.SendtoGrave(g,REASON_EFFECT)
+			Duel.SendtoRest(g,REASON_EFFECT)
 		end
 	end
 end
 	--If this card was sent from field
 function s.damcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(c,REASON_COST)
+	if chk==0 then return c:IsAbleToRestAsCost() end
+	Duel.SendtoRest(c,REASON_COST)
 end
 	--Activation legality
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -83,7 +83,7 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 			local sg=g:Select(tp,1,1,nil)
 			Duel.HintSelection(sg)
-			Duel.SendtoGrave(sg,REASON_EFFECT+REASON_RETURN)
+			Duel.SendtoRest(sg,REASON_EFFECT+REASON_RETURN)
 		end
 	end
 end

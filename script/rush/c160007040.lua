@@ -2,7 +2,7 @@
 -- Hunter of Titans
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	-- 1 Descendant of Titan + 1 Babysitter Goat
 	Fusion.AddProcMix(c,true,true,160004012,160201022)
 	-- Destroy

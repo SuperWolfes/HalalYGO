@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetTarget(s.cntg2)
 	c:RegisterEffect(e2)
-	--Substitute destruction for 1 "SPYRAL" monster
+	--Substitute mismatching for 1 "SPYRAL" monster
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e3:SetCode(EFFECT_DESTROY_REPLACE)

@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	--pendulum summon
 	Pendulum.AddProcedure(c,false)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsType,TYPE_PENDULUM),aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_DARK))
 	--Venemy Counter
 	local e1=Effect.CreateEffect(c)

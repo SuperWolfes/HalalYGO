@@ -1,5 +1,5 @@
 --DDリリス
---D/D Lilith
+--D/D Lipsick
 local s,id=GetID()
 function s.initial_effect(c)
 	--Add to hand

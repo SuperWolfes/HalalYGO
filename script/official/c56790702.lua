@@ -1,5 +1,5 @@
 -- 
--- D.D. Assault Carrier
+-- S.D. Assault Carrier
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)

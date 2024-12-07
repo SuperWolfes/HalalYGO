@@ -1,5 +1,5 @@
 --天空聖騎士アークパーシアス
---Sacred Arch-Airknight Parshath
+--Clean Arch-Airknight Parhaf
 local s,id=GetID()
 function s.initial_effect(c)
 	--Special summon

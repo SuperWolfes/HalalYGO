@@ -1,9 +1,9 @@
 --ＰＳＹフレームロード・Λ
---PSY-Framelord Lambda
+--PSY-Framewatcher Lambda
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Link Summon procedure
 	Link.AddProcedure(c,aux.NOT(aux.FilterBoolFunctionEx(Card.IsType,TYPE_TOKEN)),2,2)
 	--Can activate the effects of "PSY-Framegear" monsters even if you control a monster

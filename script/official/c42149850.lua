@@ -5,13 +5,13 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddEquipProcedure(c)
-	--Equipped monster gains 200 ATK per monster in GY
+	--Equipped monster gains 200 ATK per monster in RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_EQUIP)
 	e1:SetCode(EFFECT_UPDATE_ATTACK)
 	e1:SetValue(s.val)
 	c:RegisterEffect(e1)
-	--Register the fact it was sent from field to GY
+	--Register the fact it was sent from field to RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetCondition(s.regcon)
 	e2:SetOperation(s.regop)
 	c:RegisterEffect(e2)
-	--Set itself from GY
+	--Set itself from RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e3:SetRange(LOCATION_REST)
@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	e3:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
 	e3:SetCondition(s.setcon)
 	e3:SetTarget(s.settg)
-	e3:SetOperation(s.setop)
+	e3:SetOperation(s.vetop)
 	c:RegisterEffect(e3)
 end
 function s.val(e,c)
@@ -46,7 +46,7 @@ function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsSSetable() end
 	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,e:GetHandler(),1,0,0)
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and c:IsSSetable() then
 		Duel.SSet(tp,c)

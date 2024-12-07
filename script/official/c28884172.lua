@@ -1,5 +1,5 @@
 --ガガガマンサー
---Gagaga Mancer
+--Gagaga Bouncer
 local s,id=GetID()
 function s.initial_effect(c)
 	--Special Summon

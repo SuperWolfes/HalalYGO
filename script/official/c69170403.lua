@@ -1,5 +1,5 @@
 --アストラグールズ
---Astra Ghouls
+--Astra Rahuls
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--suffice
+	--dice
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SUFFICE)
@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.dcop)
 	c:RegisterEffect(e2)
 end
-s.roll_suffice=true
+s.roll_dice=true
 function s.spfilter(c,e,tp)
 	return c:IsLevelBelow(4) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
 end
@@ -79,7 +79,7 @@ function s.dctg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,1)
 end
 function s.dcop(e,tp,eg,ep,ev,re,r,rp)
-	local dc=Duel.TossSuffice(tp,1)
+	local dc=Duel.TossDice(tp,1)
 	local g=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsLevelAbove,1),tp,LOCATION_MZONE,0,nil)
 	for tc in aux.Next(g) do
 		local e1=Effect.CreateEffect(e:GetHandler())

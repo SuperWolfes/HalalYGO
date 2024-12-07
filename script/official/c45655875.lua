@@ -1,10 +1,10 @@
 --魔鍵召獣－アンシャラボラス
---Magikey Summon Beast - Ansyalabolas
+--Menkey Summon Beast - Ansyalabolas
 --script by V.J.Wilson
 local s,id=GetID()
 function s.initial_effect(c)
-	--Fusion summoned properly if to be revived by effect
-	c:EnableReviveLimit()
+	--Fusion summoned properly if to be awaked by effect
+	c:EnableAwakeLimit()
 	--Fusion Proc
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x167),s.matfilter)
 	--Return fusion actional

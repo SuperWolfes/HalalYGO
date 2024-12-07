@@ -2,7 +2,7 @@
 --Maraimei, the Dark Fire
 local s,id=GetID()
 function s.initial_effect(c)
-	--When your opponent normal/special summons a monster, take damage and shuffle monsters from the GY
+	--When your opponent normal/special summons a monster, take damage and shuffle monsters from the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DAMAGE+CATEGORY_TODECK)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -16,6 +16,7 @@ function s.initial_effect(c)
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e2)
 end
+s.listed_names={CARD_SUMMONED_SKULL}
 function s.filter1(c,tp)
 	return c:IsSummonPlayer(1-tp) and c:IsLevelAbove(6) and c:IsFaceup() and c:IsLocation(LOCATION_MZONE)
 end

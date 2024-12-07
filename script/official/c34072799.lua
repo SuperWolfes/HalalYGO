@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Add 1 Locked monster from the Deck to the hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -72,7 +72,7 @@ function s.ritcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	return true
 end
 function s.ritfilter(c)
-	return c:IsLockedActional() and c:IsAbleToGraveAsCost() and c:CheckActivateEffect(true,true,false)~=nil
+	return c:IsLockedActional() and c:IsAbleToRestAsCost() and c:CheckActivateEffect(true,true,false)~=nil
 end
 function s.rittg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then 
@@ -85,7 +85,7 @@ function s.rittg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tc=Duel.SelectMatchingCard(tp,s.ritfilter,tp,LOCATION_DECK,0,1,1,nil):GetFirst()
 	local te=tc:CheckActivateEffect(true,true,false)
 	e:SetLabelObject(te)
-	Duel.SendtoGrave(tc,REASON_COST)
+	Duel.SendtoRest(tc,REASON_COST)
 	e:SetProperty(te:GetProperty())
 	local tg=te:GetTarget()
 	if tg then tg(e,tp,eg,ep,ev,re,r,rp,1) end

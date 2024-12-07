@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.etarget(e,c)
-	return (c:GetOwner()==e:GetHandlerPlayer()) and c:IsFaceup() and c:IsRace(RACE_DIVINE)
+	return (c:GetOwner()==e:GetHandlerPlayer()) and c:IsFaceup() and c:IsRace(RACE_MEGA)
 end
 function s.efilter(e,te)
 	return te:IsActiveType(TYPE_TRAP) and te:GetOwner()~=e:GetOwner()

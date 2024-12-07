@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e2:SetValue(s.value)
 	c:RegisterEffect(e2)
 	e1:SetLabelObject(e2)
-	--Contaminated World-like effect
+	--Toxic World-like effect
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
 	e3:SetCode(4064256)

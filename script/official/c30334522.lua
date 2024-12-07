@@ -1,8 +1,8 @@
 --イビリチュア・プシュケローネ
---Gishki Psychelone
+--Giojiki Psychelone
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Look at 1 random card and shuffle it into the Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

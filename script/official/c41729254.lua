@@ -1,5 +1,5 @@
 --翼の魔妖－波旬
--- Hajun, the Winged Mayakashi
+-- Hajun, the Winged Mayashi
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)

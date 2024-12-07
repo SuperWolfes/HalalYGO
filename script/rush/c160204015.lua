@@ -1,10 +1,10 @@
 --魔導騎士－セブンス・パラディン
---Sevens Paladin the Magical Knight
+--Sevens Paladin the Mentoral Knight
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
-	Fusion.AddProcMix(c,true,true,CARD_SEVENS_ROAD_MAGICIAN,160204021)
+	c:EnableAwakeLimit()
+	Fusion.AddProcMix(c,true,true,CARD_SEVENS_ROAD_MENTOR,160204021)
 	--ATK increase
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

@@ -1,5 +1,5 @@
 -- 水月のアデュラリア
--- Adularia of the Moonlit Water
+-- Adularia of the Horizonlit Water
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	local e3=e2:Clone()
 	e3:SetCode(EFFECT_UPDATE_DEFENSE)
 	c:RegisterEffect(e3)
-	-- Send 1 Level 4 or lower monster to the GY
+	-- Send 1 Level 4 or lower monster to the RP
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,0))
 	e4:SetCategory(CATEGORY_TOREST)
@@ -47,13 +47,13 @@ function s.atkval(e,c)
 	return Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsActionalTrap),0,LOCATION_ONFIELD,LOCATION_ONFIELD,nil)*600
 end
 function s.tgcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(aux.AND(s.stfilter,Card.IsAbleToGraveAsCost),tp,LOCATION_SZONE,0,2,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(aux.AND(s.stfilter,Card.IsAbleToRestAsCost),tp,LOCATION_SZONE,0,2,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-	local g=Duel.SelectMatchingCard(tp,aux.AND(s.stfilter,Card.IsAbleToGraveAsCost),tp,LOCATION_SZONE,0,2,2,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	local g=Duel.SelectMatchingCard(tp,aux.AND(s.stfilter,Card.IsAbleToRestAsCost),tp,LOCATION_SZONE,0,2,2,nil)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.tgfilter(c)
-	return c:IsLevelBelow(4) and c:IsAbleToGrave()
+	return c:IsLevelBelow(4) and c:IsAbleToRest()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -63,6 +63,6 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end

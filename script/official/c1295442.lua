@@ -1,5 +1,5 @@
 -- 氷水艇エーギロカシス
--- Icejade Creation Aegirocassis
+-- Icejade Matching Aegirocassis
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -19,34 +19,39 @@ function s.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_QUICK_O)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e3:SetCode(EVENT_FREE_CHAIN)
-	e3:SetRange(LOCATION_HAND+LOCATION_REST)
+	e3:SetRange(LOCATION_HAND|LOCATION_REST)
 	e3:SetCountLimit(1,id)
-	e3:SetHintTiming(0,TIMINGS_CHECK_MONSTER_E+TIMING_MAIN_END)
+	e3:SetHintTiming(0,TIMINGS_CHECK_MONSTER_E|TIMING_MAIN_END)
 	e3:SetTarget(s.eqtg)
 	e3:SetOperation(s.eqop)
 	c:RegisterEffect(e3)
-	-- Special Summon this card
+	-- Special Summon this card while it is equipped to a monster
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e4:SetType(EFFECT_TYPE_IGNITION)
 	e4:SetRange(LOCATION_SZONE)
 	e4:SetCountLimit(1,id)
+	e4:SetCondition(function(e) return e:GetHandler():GetEquipTarget() end)
 	e4:SetTarget(s.sptg)
 	e4:SetOperation(s.spop)
 	c:RegisterEffect(e4)
 end
-s.listed_series={0x16e}
+s.listed_series={SET_ICEJADE}
 function s.atkval(e)
 	return Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsMonster),e:GetHandlerPlayer(),LOCATION_REMOVED,LOCATION_REMOVED,nil)*400
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and chkc:IsFaceup() and chkc:IsSetCard(0x16e) end
+	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and chkc:IsFaceup() and chkc:IsSetCard(SET_ICEJADE) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and Duel.IsExistingTarget(aux.FaceupFilter(Card.IsSetCard,0x16e),tp,LOCATION_MZONE,0,1,nil) end
+		and Duel.IsExistingTarget(aux.FaceupFilter(Card.IsSetCard,SET_ICEJADE),tp,LOCATION_MZONE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-	Duel.SelectTarget(tp,aux.FaceupFilter(Card.IsSetCard,0x16e),tp,LOCATION_MZONE,0,1,1,nil)
-	Duel.SetOperationInfo(0,CATEGORY_EQUIP,e:GetHandler(),1,0,0)
+	Duel.SelectTarget(tp,aux.FaceupFilter(Card.IsSetCard,SET_ICEJADE),tp,LOCATION_MZONE,0,1,1,nil)
+	local c=e:GetHandler()
+	Duel.SetOperationInfo(0,CATEGORY_EQUIP,c,1,0,0)
+	if c:IsLocation(LOCATION_REST) then
+		Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,c,1,0,0)
+	end
 end
 function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -59,18 +64,17 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_EQUIP_LIMIT)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
+		e1:SetReset(RESET_EVENT|RESETS_STANDARD)
 		e1:SetValue(function(e,c) return c==e:GetLabelObject() end)
 		e1:SetLabelObject(tc)
 		c:RegisterEffect(e1)
 	elseif c:IsLocation(LOCATION_HAND) then
-		Duel.SendtoGrave(c,REASON_RULE)
+		Duel.SendtoRest(c,REASON_RULE)
 	end
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:GetEquipTarget()
-		and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,0,0)
 end

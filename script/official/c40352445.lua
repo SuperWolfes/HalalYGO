@@ -5,8 +5,8 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Cannot special summon from the extra deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 	--Clock Lizard check
 	aux.addContinuousLizardCheck(c,LOCATION_MZONE)
-	--Send 1 monster from your extra deck to GY
+	--Send 1 monster from your extra deck to RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
@@ -35,24 +35,24 @@ end
 s.listed_names={31002402}
 	--Activation legality
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGrave,tp,LOCATION_EXTRA,0,1,nil)
-		and Duel.IsExistingMatchingCard(Card.IsAbleToGrave,tp,0,LOCATION_EXTRA,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRest,tp,LOCATION_EXTRA,0,1,nil)
+		and Duel.IsExistingMatchingCard(Card.IsAbleToRest,tp,0,LOCATION_EXTRA,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,PLAYER_ALL,LOCATION_EXTRA)
 end
-	--Send 1 monster from your extra deck to GY
+	--Send 1 monster from your extra deck to RP
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToGrave,tp,LOCATION_EXTRA,0,1,1,nil)
-	if #g>0 and Duel.SendtoGrave(g,REASON_EFFECT)>0 and g:GetFirst():IsLocation(LOCATION_REST) then
+	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToRest,tp,LOCATION_EXTRA,0,1,1,nil)
+	if #g>0 and Duel.SendtoRest(g,REASON_EFFECT)>0 and g:GetFirst():IsLocation(LOCATION_REST) then
 		local atk1=g:GetFirst():GetAttack()
-		local rg=Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,0,LOCATION_EXTRA,nil)
+		local rg=Duel.GetMatchingGroup(Card.IsAbleToRest,tp,0,LOCATION_EXTRA,nil)
 		local atk2=0
 		if #rg>0 then
 			Duel.ConfirmCards(tp,Duel.GetFieldGroup(tp,0,LOCATION_EXTRA))
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 			local sg=rg:Select(tp,1,1,nil)
-			Duel.SendtoGrave(sg,REASON_EFFECT)
+			Duel.SendtoRest(sg,REASON_EFFECT)
 			Duel.ShuffleExtra(1-tp)
 			if sg:GetFirst():IsLocation(LOCATION_REST) then atk2=sg:GetFirst():GetAttack() end
 		end

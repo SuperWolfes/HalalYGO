@@ -20,7 +20,7 @@ function s.drcond(e,tp,eg,ep,ev,re,r,rp,chk)
 	return Duel.GetFieldGroupCount(tp,0,LOCATION_MZONE)>=2
 end
 function s.costfilter(c)
-	return c:IsMonster() and c:IsRace(RACE_WANDERER) and c:IsAbleToGraveAsCost()
+	return c:IsMonster() and c:IsRace(RACE_WANDERER) and c:IsAbleToRestAsCost()
 end
 function s.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil) end
@@ -37,7 +37,7 @@ function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	if ctdeck>2 then ctdeck=2 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,ctdeck,nil)
-	local ct=Duel.SendtoGrave(g,REASON_COST)
+	local ct=Duel.SendtoRest(g,REASON_COST)
 	if ct>0 then
 		--Effect
 		local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)

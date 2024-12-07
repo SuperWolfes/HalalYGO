@@ -3,7 +3,7 @@
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_XYZ),3)
 	--immune
 	local e1=Effect.CreateEffect(c)
@@ -62,7 +62,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		and Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)~=0 then
 		local oc=tg:Filter(s.mtfilter,tc,e,tp):GetFirst()
 		if oc and oc:IsControler(1-tp) and oc:IsRelateToEffect(e) and not oc:IsImmuneToEffect(e) then
-			oc:CancelToGrave()
+			oc:CancelToRest()
 			Duel.Overlay(tc,oc,true)
 		end
 	end

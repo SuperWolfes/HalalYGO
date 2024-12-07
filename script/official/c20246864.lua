@@ -1,5 +1,5 @@
 --ＷＷ－フリーズ・ベル
---Windwitch - Freeze Bell
+--Windmint - Freeze Bell
 --Scripted by ahtelel
 
 local s,id=GetID()

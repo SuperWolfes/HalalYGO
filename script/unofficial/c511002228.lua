@@ -2,7 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMixRep(c,true,true,s.mfilter2,1,99,s.mfilter1)
 	--spsummon
 	local e2=Effect.CreateEffect(c)

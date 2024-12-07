@@ -1,5 +1,5 @@
 --天空勇士ネオパーシアス
---Neo-Parshath, the Sky Paladin
+--Neo-Parhaf, the Sky Paladin
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon

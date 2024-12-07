@@ -32,7 +32,7 @@ function s.initial_effect(c)
 end
 s.listed_names={110000100}
 function s.condition(e,tp,eg,ep,ev,re,r,rp,chk)
-	local tc=Duel.GetFieldCard(e:GetHandlerPlayer(),LOCATION_SZONE,5)
+	local tc=Duel.GetFieldCard(e:GetHandlerPlayer(),LOCATION_FZONE,0)
 	return tc and tc:IsFaceup() and tc:IsCode(110000100)
 end
 function s.cfilter(c,tp)
@@ -51,7 +51,7 @@ function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	if Duel.NegateActivation(ev) then
 		if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:GetHandler():IsRelateToEffect(re) then
-			Duel.SendtoGrave(eg,REASON_EFFECT)
+			Duel.SendtoRest(eg,REASON_EFFECT)
 		end
 	end
 end

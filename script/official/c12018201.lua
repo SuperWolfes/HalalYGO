@@ -1,10 +1,10 @@
 --ラヴァルバル・エクスロード 
---Lavalval Exlord
+--Lavalval Exwatcher
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Synchro summon procedure
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTunerEx(Card.IsAttribute,ATTRIBUTE_FIRE),1,99) 
 	--Destroy opponent monster

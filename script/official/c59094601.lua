@@ -1,5 +1,5 @@
 --蘇りし天空神
---The Revived Sky Monster
+--The Awaked Sky Monster
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -81,7 +81,7 @@ end
 function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	local deck_count=Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,2))
-	local tc=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.tdfilter),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil,deck_count):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.tdfilter),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil,deck_count):GetFirst()
 	if not tc then return end
 	if tc:IsLocation(LOCATION_DECK) then
 		Duel.ShuffleDeck(tp)
@@ -92,7 +92,7 @@ function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	end
 	if not ((tc:IsLocation(LOCATION_DECK) and Duel.GetDecktopGroup(tp,1):IsContains(tc)) or tc:IsLocation(LOCATION_EXTRA)) then return end
 	Duel.ConfirmCards(1-tp,tc)
-	if Duel.IsPlayerCanDraw(tp) and Duel.IsExistingMatchingCard(Card.IsRace,tp,LOCATION_REST,0,1,nil,RACE_DIVINE) then
+	if Duel.IsPlayerCanDraw(tp) and Duel.IsExistingMatchingCard(Card.IsRace,tp,LOCATION_REST,0,1,nil,RACE_MEGA) then
 		Duel.BreakEffect()
 		Duel.Draw(tp,1,REASON_EFFECT)
 	end

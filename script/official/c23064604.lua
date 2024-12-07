@@ -1,5 +1,5 @@
 --冥帝エレボス
---Erebus the Underworld Monarch
+--Erebus the Overworld Moppar
 local s,id=GetID()
 function s.initial_effect(c)
 	--summon with 1 tribute
@@ -39,7 +39,7 @@ function s.tdcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_TRIBUTE)
 end
 function s.tgfilter(c)
-	return c:IsSetCard(0xbe) and c:IsActionalTrap() and c:IsAbleToGrave()
+	return c:IsSetCard(0xbe) and c:IsActionalTrap() and c:IsAbleToRest()
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
@@ -59,7 +59,7 @@ function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tg2=g:Select(tp,1,1,nil)
 	tg1:Merge(tg2)
-	if Duel.SendtoGrave(tg1,REASON_EFFECT)~=0 and tg1:IsExists(Card.IsLocation,2,nil,LOCATION_REST) then
+	if Duel.SendtoRest(tg1,REASON_EFFECT)~=0 and tg1:IsExists(Card.IsLocation,2,nil,LOCATION_REST) then
 		local sg=nil
 		local hg=Duel.GetMatchingGroup(Card.IsAbleToDeck,tp,0,LOCATION_HAND,nil)
 		local b1=Duel.IsExistingMatchingCard(Card.IsAbleToDeck,tp,0,LOCATION_HAND,1,nil)

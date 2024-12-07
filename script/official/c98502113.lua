@@ -2,8 +2,8 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
-	Fusion.AddProcMix(c,true,true,CARD_DARK_MAGICIAN,78193831)
+	c:EnableAwakeLimit()
+	Fusion.AddProcMix(c,true,true,CARD_DARK_MENTOR,78193831)
 	--negate
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -34,7 +34,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 s.material_setcode={0x10a2,0xd7}
-s.listed_names={CARD_DARK_MAGICIAN,78193831}
+s.listed_names={CARD_DARK_MENTOR,78193831}
 function s.val(e,c)
 	return Duel.GetMatchingGroupCount(s.filter,0,0x14,0x14,nil)*500
 end

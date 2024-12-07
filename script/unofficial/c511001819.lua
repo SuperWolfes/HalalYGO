@@ -1,4 +1,4 @@
---Revived Serpent Night Dragon
+--Awaked Serpent Night Dragon
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -39,7 +39,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local mg=Duel.GetLockedMaterial(tp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local tg=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.filter),tp,0x32,0,1,1,nil,e,tp,mg)
+	local tg=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,0x32,0,1,1,nil,e,tp,mg)
 	if #tg>0 then
 		local tc=tg:GetFirst()
 		local mg2=Duel.GetMatchingGroup(s.filter2,tp,LOCATION_DECK,0,nil,tc)
@@ -51,7 +51,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local mat1=mat:Filter(Card.IsLocation,nil,LOCATION_DECK)
 		mat:Sub(mat1)
 		Duel.ReleaseLockedMaterial(mat)
-		Duel.SendtoGrave(mat1,REASON_EFFECT+REASON_RELEASE+REASON_MATERIAL+REASON_LOCKED)
+		Duel.SendtoRest(mat1,REASON_EFFECT+REASON_RELEASE+REASON_MATERIAL+REASON_LOCKED)
 		Duel.BreakEffect()
 		Duel.SpecialSummon(tc,SUMMON_TYPE_LOCKED,tp,tp,true,false,POS_FACEUP)
 		tc:CompleteProcedure()

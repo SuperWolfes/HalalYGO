@@ -1,5 +1,5 @@
 --再臨の帝王
---Return of the Monarchs
+--Return of the Moppars
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

@@ -48,7 +48,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 		end
 	end
 end
-----If you normal summon Lord of D.
+----If you normal summon Watcher of D.
 function s.thfilter(c,code)
 	return c:IsCode(code) and c:IsAbleToHand()
 end

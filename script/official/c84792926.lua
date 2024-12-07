@@ -34,7 +34,7 @@ function s.initial_effect(c)
 	e3:SetOperation(s.thop)
 	c:RegisterEffect(e3)
 end
-s.listed_names={CARD_ARGYRO_SYSTEM}
+s.listed_names={CARD_ARRPRO_SYSTEM}
 s.listed_series={0x17b}
 function s.thfilter(c)
 	return c:IsMonster() and c:IsSetCard(0x17b) and c:IsAbleToHand()
@@ -53,7 +53,7 @@ function s.dfilter(c,tp)
 	return c:IsControler(tp) and c:IsReason(REASON_BATTLE)
 end
 function s.repfilter(c)
-	return (c:IsSetCard(0x17b) or c:IsCode(CARD_ARGYRO_SYSTEM)) and c:IsAbleToGrave()
+	return (c:IsSetCard(0x17b) or c:IsCode(CARD_ARRPRO_SYSTEM)) and c:IsAbleToRest()
 end
 function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return eg:IsExists(s.dfilter,1,nil,tp)
@@ -66,7 +66,7 @@ end
 function s.repop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.repfilter,tp,LOCATION_DECK,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_EFFECT)
+	Duel.SendtoRest(g,REASON_EFFECT)
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(Card.IsLocation,1,nil,LOCATION_REST)

@@ -1,5 +1,5 @@
 --魔力の棘
---Magical Thorn
+--Mentoral Thorn
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

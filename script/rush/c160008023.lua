@@ -16,7 +16,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeck(tp,1) end
 end
 function s.cfilter(c)
-	return c:IsFaceup() and (c:IsLevelAbove(3) and c:IsLevelBelow(8))
+	return c:IsFaceup() and c:IsLevelBetween(3,8)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,0,LOCATION_MZONE,1,nil) end
@@ -31,7 +31,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			Duel.HintSelection(g)
 			local tc=g:GetFirst()
 			--decrease level by 2
-			tc:UpdateLevel(-2,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,c)
+			tc:UpdateLevel(-2,RESETS_STANDARD_PHASE_END,c)
 		end
 	end
 end

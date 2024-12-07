@@ -1,5 +1,5 @@
 --幻想魔術師・ノー・フェイス
---Illusionist Faceless Magician
+--Illusionist Faceless Mentor
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon

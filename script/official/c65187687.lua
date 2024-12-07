@@ -1,12 +1,12 @@
 -- 巨骸竜フェルグラント 
--- Corpse Dragon Lord Felgrand
+-- Corpse Dragon Watcher Felgrand
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
-	-- 1 Contaminated Tuner + 1+ non-Tuner monsters
-	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_CONTAMINED),1,1,Synchro.NonTuner(nil),1,99)
-	-- Banish a monster from opponent's field or GY
+	c:EnableAwakeLimit()
+	-- 1 Toxic Tuner + 1+ non-Tuner monsters
+	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_TOXIC),1,1,Synchro.NonTuner(nil),1,99)
+	-- Banish a monster from opponent's field or RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_REMOVE)

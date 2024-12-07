@@ -1,5 +1,5 @@
 --紅蓮の機界騎士
---Mekk-Knight Red Moon
+--Mekk-Knight Red Horizon
 --Scripted by Eerie Code
 
 local s,id=GetID()

@@ -1,5 +1,5 @@
 --ガイアパワー (Action Field)
---Gaia Power (Action Field)
+--Bia Power (Action Field)
 local s,id=GetID()
 function s.initial_effect(c)
 	--activate

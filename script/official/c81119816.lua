@@ -26,7 +26,7 @@ function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK+LOCATION_HAND)
 end
 function s.tgfilter(c)
-	return c:IsSetCard(0x120) and c:IsAbleToGrave() and not c:IsCode(id)
+	return c:IsSetCard(0x120) and c:IsAbleToRest() and not c:IsCode(id)
 end
 function s.spfilter(c,e,tp)
 	return c:IsSetCard(0x120) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)  and not c:IsCode(id)
@@ -35,7 +35,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 	local g2=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_DECK+LOCATION_HAND,0,g:GetFirst(),e,tp)
-	if #g>0 and Duel.SendtoGrave(g,REASON_EFFECT)~=0 and g:GetFirst():IsLocation(LOCATION_REST)
+	if #g>0 and Duel.SendtoRest(g,REASON_EFFECT)~=0 and g:GetFirst():IsLocation(LOCATION_REST)
 		and #g2>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 
 		and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.BreakEffect()

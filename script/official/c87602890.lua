@@ -1,5 +1,5 @@
 --轟雷帝ザボルグ
---Zaborg the Mega Monarch
+--Zaborg the Mega Moppar
 local s,id=GetID()
 function s.initial_effect(c)
 	--summon with 1 tribute
@@ -63,7 +63,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		end
 		if #g1>0 then
 			Duel.BreakEffect()
-			Duel.SendtoGrave(g1,REASON_EFFECT)
+			Duel.SendtoRest(g1,REASON_EFFECT)
 		end
 	end
 end

@@ -67,7 +67,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsFaceup() and tc:IsRelateToEffect(e) then
 		Duel.Equip(tp,c,tc)
 	else
-		Duel.SendtoGrave(c,REASON_EFFECT) 
+		Duel.SendtoRest(c,REASON_EFFECT) 
 	end
 end
 function s.attg(e,c)

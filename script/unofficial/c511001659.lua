@@ -1,19 +1,18 @@
 --ＣＮｏ.９ 天蓋妖星カオス・ダイソン・スフィア (Anime)
 --Number C9: Chaos Dyson Sphere (Anime)
-Duel.LoadScript("rankup_functions.lua")
 Duel.LoadCardScript("c32559361.lua")
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,10,3)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Rank Up Check
 	aux.EnableCheckRankUp(c,nil,nil,1992816)
 	--battle indestructable
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_INDESTRUCTABLE_BATTLE)
-	e1:SetValue(aux.NOT(aux.TargetBoolFunction(Card.IsSetCard,0x48)))
+	e1:SetValue(aux.NOT(aux.TargetBoolFunction(Card.IsSetCard,SET_NUMBER)))
 	c:RegisterEffect(e1)
 	--damage
 	local e2=Effect.CreateEffect(c)
@@ -44,7 +43,6 @@ function s.initial_effect(c)
 	e4:SetCode(EVENT_BATTLED)
 	e4:SetTarget(s.target)
 	e4:SetOperation(s.operation)
-	e4:SetLabel(RESET_EVENT+RESETS_STANDARD)
 	--atk limit
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_FIELD)
@@ -53,7 +51,6 @@ function s.initial_effect(c)
 	e5:SetTargetRange(0,LOCATION_MZONE)
 	e5:SetCondition(s.atcon)
 	e5:SetValue(s.atlimit)
-	e5:SetLabel(RESET_EVENT+RESETS_STANDARD)
 	local e6=Effect.CreateEffect(c)
 	e6:SetType(EFFECT_TYPE_SINGLE)
 	e6:SetCode(EFFECT_RANKUP_EFFECT)
@@ -63,7 +60,7 @@ function s.initial_effect(c)
 	e7:SetLabelObject(e5)
 	c:RegisterEffect(e7)
 end
-s.listed_series={0x48}
+s.listed_series={SET_NUMBER}
 s.listed_names={1992816}
 s.xyz_number=9
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -94,7 +91,7 @@ function s.damcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
 	local g=e:GetHandler():GetOverlayGroup()
 	local ct=#g
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	e:SetLabel(ct)
 end
 function s.damtg2(e,tp,eg,ep,ev,re,r,rp,chk)

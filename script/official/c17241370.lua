@@ -1,5 +1,5 @@
 --リチュア・ナタリア
---Gishki Natalia
+--Giojiki Natalia
 local s,id=GetID()
 function s.initial_effect(c)
 	Guardian.AddProcedure(c,EVENT_SUMMON_SUCCESS,EVENT_FLIP)
@@ -9,7 +9,7 @@ function s.initial_effect(c)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e1:SetCode(EFFECT_SPSUMMON_CONDITION)
 	c:RegisterEffect(e1)
-	--Send 1 "Gishki" monster to the Deck
+	--Send 1 "Giojiki" monster to the Deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TODECK)

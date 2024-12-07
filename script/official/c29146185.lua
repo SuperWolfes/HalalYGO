@@ -1,5 +1,5 @@
 --魔導天士 トールモンド
---World of Prophecy
+--World of Prediction
 local s,id=GetID()
 function s.initial_effect(c)
 	--ss success

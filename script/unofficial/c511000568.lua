@@ -23,13 +23,13 @@ function s.con(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsDeckMaster()
 end
 function s.costfilter(c)
-	return c:IsAbleToGraveAsCost() and c:IsRace(RACE_MACHINE)
+	return c:IsAbleToRestAsCost() and c:IsRace(RACE_MACHINE)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local cg=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,0,99,nil)
-	Duel.SendtoGrave(cg,REASON_COST)
+	Duel.SendtoRest(cg,REASON_COST)
 	e:SetLabel(#cg)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)

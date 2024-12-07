@@ -1,4 +1,4 @@
---Amazoness Secret Hot Spring
+--Amazonian Secret Hot Spring
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

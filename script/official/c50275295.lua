@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.ngtg)
 	e2:SetOperation(s.ngop)
 	c:RegisterEffect(e2)
-	--Add from deck then send to the GY
+	--Add from deck then send to the RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_HANDES)

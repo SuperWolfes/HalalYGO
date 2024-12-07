@@ -97,11 +97,11 @@ function s.activate1(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetOperation(s.thop)
 		e1:SetLabelObject(tc)
 		c:RegisterEffect(e1)
-		c:CancelToGrave()
+		c:CancelToRest()
 		if tc:IsPreviousLocation(LOCATION_DECK) then
 			Duel.SendtoDeck(c,nil,2,REASON_EFFECT)
 		else
-			Duel.SendtoGrave(c,REASON_EFFECT)
+			Duel.SendtoRest(c,REASON_EFFECT)
 		end
 		local ct=e:GetLabel()
 		ct=ct+1

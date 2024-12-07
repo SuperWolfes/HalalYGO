@@ -1,5 +1,5 @@
 --陰陽合祀
---Enshrined Guardianity
+--Enshrined Duality
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

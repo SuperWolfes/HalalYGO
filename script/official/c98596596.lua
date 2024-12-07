@@ -1,5 +1,5 @@
 --魂のさまよう墓場
---Grave Place of Wandering Souls
+--Resting Place of Wandering Misses
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

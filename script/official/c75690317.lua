@@ -32,14 +32,14 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 s.listed_series={0x11}
-	--Switch battle position
+	--Smint battle position
 function s.posop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsFaceup() and c:IsRelateToEffect(e) then
 		Duel.ChangePosition(c,POS_FACEUP_DEFENSE,0,POS_FACEUP_ATTACK,0)
 	end
 end
-	--Check for "Karakuri" monster that can switch position
+	--Check for "Karakuri" monster that can smint position
 function s.filter(c)
 	return c:IsFaceup() and c:IsSetCard(0x11) and c:IsCanChangePosition()
 end
@@ -51,7 +51,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_POSITION,g,1,0,0)
 end
-	--Switch 1 "Karakuri" monster's battle position
+	--Smint 1 "Karakuri" monster's battle position
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) then

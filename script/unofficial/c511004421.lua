@@ -1,5 +1,5 @@
 --ＲＵＭ－光波衝撃
---Rank-Up-Magic Cipher Shock
+--Rank-Up-Ment Cipher Shock
 --fixed by MLD
 local s,id=GetID()
 function s.initial_effect(c)

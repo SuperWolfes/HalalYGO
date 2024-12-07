@@ -1,10 +1,10 @@
 --魔鍵変鬼－トランスフルミネ
---Magikey-Mutated Ogre - Transfurmine
+--Menkey-Mutated Ogre - Transfurmine
 --scripted by the Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
 	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x167),1,1,Synchro.NonTunerEx(Card.IsType,TYPE_NORMAL),1,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Make up to 2 attacks on monsters each Battle Phase
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2a:SetCode(EFFECT_MATERIAL_CHECK)
 	e2a:SetValue(s.matcheck)
 	c:RegisterEffect(e2a)
-	--Set 1 Magikey S/T from Deck to S/T Zone
+	--Set 1 Menkey S/T from Deck to S/T Zone
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetType(EFFECT_TYPE_IGNITION)
@@ -28,9 +28,9 @@ function s.initial_effect(c)
 	e2:SetLabelObject(e2a)
 	e2:SetCondition(s.setcon)
 	e2:SetTarget(s.settg)
-	e2:SetOperation(s.setop)
+	e2:SetOperation(s.vetop)
 	c:RegisterEffect(e2)
-	--Destroy a NS/SSd monster with the same Att as monsters in your GY
+	--Destroy a NS/SSd monster with the same Att as monsters in your RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_DESTROY)
@@ -62,7 +62,7 @@ function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
 		and Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_DECK,0,1,nil) end
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 	local g=Duel.SelectMatchingCard(tp,s.setfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then

@@ -1,5 +1,5 @@
 --呪われしエルドランド
---Cursed Eldland
+--Unclean Eldland
 --Scripted by ahtelel
 local s,id=GetID()
 function s.initial_effect(c)
@@ -42,7 +42,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x144,0x142}
 function s.atktg(e,c)
-	return not c:IsRace(RACE_CONTAMINED)
+	return not c:IsRace(RACE_TOXIC)
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckLPCost(tp,800) end
@@ -55,7 +55,7 @@ function s.thfilter(c)
 	return s.filter(c) and c:IsAbleToHand()
 end
 function s.tgfilter(c)
-	return s.filter(c) and c:IsAbleToGrave()
+	return s.filter(c) and c:IsAbleToRest()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -82,6 +82,6 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end

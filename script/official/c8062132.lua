@@ -1,9 +1,9 @@
 --毒蛇神ヴェノミナーガ
---Vennominaga the Deity of Poisonous Snakes
+--Vennominaga the Being of Poisonous Snakes
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(0x11)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--special summon condition
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetValue(s.atkval)
 	c:RegisterEffect(e2)
-	--special summon from rest place
+	--special summon from resting place
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)

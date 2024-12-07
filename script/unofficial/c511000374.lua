@@ -1,5 +1,5 @@
 --魔の海域レベル３
---Cursed Waters Level 3
+--Unclean Waters Level 3
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

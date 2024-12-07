@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion Material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,s.ffilter1,s.ffilter2)
 	--Special Summon Condition
 	local e1=Effect.CreateEffect(c)

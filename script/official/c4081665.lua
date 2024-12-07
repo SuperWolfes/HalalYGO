@@ -1,5 +1,5 @@
 --Emスティルツ・シューター
---Performage Stilts Launcher
+--Performanced Stilts Launcher
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon rule

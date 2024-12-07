@@ -1,5 +1,5 @@
 --機皇帝ワイゼル∞ (TF6)
---Meklord Emperor Wisel ∞ (TF6)
+--Mekwatcher Emperor Wisel ∞ (TF6)
 Duel.LoadScript("c420.lua")
 local s,id=GetID()
 function s.initial_effect(c)

@@ -4,8 +4,8 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Synchro summon procedure
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	--Take 1 level 4 or lower WATER monster from deck, and either special summon it or add it to hand
@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	e2:SetCondition(s.indcon)
 	e2:SetOperation(s.indop)
 	c:RegisterEffect(e2)
-	--If sent to GY, shuffle 1 banished card into deck
+	--If sent to RP, shuffle 1 banished card into deck
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,3))
 	e3:SetCategory(CATEGORY_TODECK)

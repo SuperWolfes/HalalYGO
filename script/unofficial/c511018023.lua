@@ -1,5 +1,5 @@
 --融合破壊
---Fusion Destruction
+--Fusion Mismatching
 --fixed by MLD
 local s,id=GetID()
 function s.initial_effect(c)
@@ -27,13 +27,13 @@ end
 s.listed_series={0x46}
 s.listed_names={CARD_POLYMERIZATION}
 function s.cfilter(c)
-	return c:IsCode(CARD_POLYMERIZATION) and c:IsAbleToGraveAsCost()
+	return c:IsCode(CARD_POLYMERIZATION) and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tc=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND,0,1,1,nil)
-	Duel.SendtoGrave(tc,REASON_COST)
+	Duel.SendtoRest(tc,REASON_COST)
 end
 function s.filter(c)
 	return c:IsActionalTrap() and c:IsSetCard(0x46) and c:IsAbleToRemove()

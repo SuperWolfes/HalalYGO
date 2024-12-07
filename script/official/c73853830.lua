@@ -1,5 +1,5 @@
 --クルセイダー・オブ・エンディミオン
---Crusader of Endymion
+--Crusader of Edypsos
 local s,id=GetID()
 function s.initial_effect(c)
 	Dual.AddProcedure(c)

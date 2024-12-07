@@ -5,7 +5,7 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--When normal summoned, send any number of "Fluorescent Vluorescences" from deck to GY
+	--When normal summoned, send any number of "Fluorescent Vluorescences" from deck to RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOREST)
@@ -40,21 +40,21 @@ function s.tgcost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 	--Check for "Fluorescent Vluorescences"
 function s.tgfilter(c)
-	return c:IsCode(id) and c:IsAbleToGrave()
+	return c:IsCode(id) and c:IsAbleToRest()
 end
 	--Activation legality
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
-	--Send any number of "Fluorescent Vluorescences" from deck to GY
+	--Send any number of "Fluorescent Vluorescences" from deck to RP
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_DECK,0,nil)
 	if #g>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local sg=g:Select(tp,1,99,nil)
-		Duel.SendtoGrave(sg,REASON_EFFECT)
+		Duel.SendtoRest(sg,REASON_EFFECT)
 	end
 end
 	--Activation legality

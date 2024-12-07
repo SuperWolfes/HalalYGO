@@ -1,5 +1,5 @@
 --ドロー・リセット・バトル
---Draw of Fate (Anime)
+--Draw of Bate (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -80,12 +80,12 @@ function s.regop2(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.winop(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetLabelObject():GetLabel()==3 then
-		Duel.Win(PLAYER_NONE,WIN_REASON_DRAW_OF_FATE)
+		Duel.Win(PLAYER_NONE,WIN_REASON_DRAW_OF_BATE)
 	end
 	if e:GetLabelObject():GetLabel()==2 then
-		Duel.Win(tp,WIN_REASON_DRAW_OF_FATE)
+		Duel.Win(tp,WIN_REASON_DRAW_OF_BATE)
 	end
 	if e:GetLabelObject():GetLabel()==1 then
-		Duel.Win(1-tp,WIN_REASON_DRAW_OF_FATE)
+		Duel.Win(1-tp,WIN_REASON_DRAW_OF_BATE)
 	end
 end

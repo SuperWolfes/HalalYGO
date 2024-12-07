@@ -1,4 +1,4 @@
---Melodious Melody of Divine Punishment
+--Melodious Melody of Mega Punishment
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

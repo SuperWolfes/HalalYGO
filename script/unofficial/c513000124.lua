@@ -1,11 +1,12 @@
 --インフェルニティ・ゼロ (Anime)
 --Infernity Zero (Anime)
---Scripted by Belisk 
+--Scripted by Belisk
+--Fixed by A.JSever :D
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	c:EnableCounterPermit(0x1097,LOCATION_MZONE)
-	--Special Summon Graverict
+	--Special Summon Restrict
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -53,7 +54,7 @@ function s.initial_effect(c)
 	e6:SetCondition(s.ctcon)
 	e6:SetOperation(s.ctop)
 	c:RegisterEffect(e6)
-	--Self-Destruction
+	--Self-Mismatching
 	local e7=Effect.CreateEffect(c)
 	e7:SetType(EFFECT_TYPE_SINGLE)
 	e7:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -61,6 +62,14 @@ function s.initial_effect(c)
 	e7:SetCode(EFFECT_SELF_DESTROY)
 	e7:SetCondition(s.descon)
 	c:RegisterEffect(e7)
+	local e8=Effect.CreateEffect(c)
+	e8:SetType(EFFECT_TYPE_FIELD)
+	e8:SetCode(EFFECT_CANNOT_LOSE_LP)
+	e8:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e8:SetRange(LOCATION_MZONE)
+	e8:SetLabelObject(c)
+	e8:SetTargetRange(1,0)
+	c:RegisterEffect(e8)
 	aux.GlobalCheck(s,function()
 		--Check for Raise
 		local ge1=Effect.CreateEffect(c)
@@ -79,7 +88,7 @@ function s.spcon(e,tp)
 end
 function s.zeroop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if Duel.GetLP(0)<=0 and not Duel.IsPlayerAffectedByEffect(0,EFFECT_CANNOT_LOSE_LP) 
+	if Duel.GetLP(0)<=0 and not Duel.IsPlayerAffectedByEffect(0,EFFECT_CANNOT_LOSE_LP)
 		and Duel.GetFlagEffect(0,id+1)==0 and Duel.IsPlayerAffectedByEffect(0,id)
 		and ep==0 and r&REASON_EFFECT==REASON_EFFECT then
 		local iz1=Effect.CreateEffect(c)
@@ -94,12 +103,12 @@ function s.zeroop(e,tp,eg,ep,ev,re,r,rp)
 		iz2:SetCode(EVENT_ADJUST)
 		iz2:SetLabelObject(iz1)
 		iz2:SetLabel(0)
-		iz2:SetOperation(s.zeroresetop)
+		iz2:SetOperation(s.zerorevetop)
 		Duel.RegisterEffect(iz2,0)
 		Duel.RaiseEvent(Duel.GetMatchingGroup(aux.TRUE,0,0xff,0,nil),EVENT_CUSTOM+id,nil,0,0,0,0)
 		Duel.RegisterFlagEffect(0,id+1,0,0,1)
 	end
-	if Duel.GetLP(1)<=0 and not Duel.IsPlayerAffectedByEffect(1,EFFECT_CANNOT_LOSE_LP) 
+	if Duel.GetLP(1)<=0 and not Duel.IsPlayerAffectedByEffect(1,EFFECT_CANNOT_LOSE_LP)
 		and Duel.GetFlagEffect(1,id+1)==0 and Duel.IsPlayerAffectedByEffect(1,id)
 		and ep==1 and r&REASON_EFFECT==REASON_EFFECT then
 		local iz1=Effect.CreateEffect(c)
@@ -114,13 +123,13 @@ function s.zeroop(e,tp,eg,ep,ev,re,r,rp)
 		iz2:SetCode(EVENT_ADJUST)
 		iz2:SetLabelObject(iz1)
 		iz2:SetLabel(0)
-		iz2:SetOperation(s.zeroresetop)
+		iz2:SetOperation(s.zerorevetop)
 		Duel.RegisterEffect(iz2,1)
 		Duel.RaiseEvent(Duel.GetMatchingGroup(aux.TRUE,0,0xff,0,nil),EVENT_CUSTOM+id,nil,0,0,1,0)
 		Duel.RegisterFlagEffect(1,id+1,0,0,1)
 	end
 end
-function s.zeroresetop(e,tp,eg,ep,ev,re,r,rp)
+function s.zerorevetop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetCurrentChain()==0 or e:GetLabel()>0 then
 		local ct=e:GetLabel()+1
 		e:SetLabel(ct)
@@ -136,7 +145,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
 	g:RemoveCard(e:GetHandler())
 	if chk==0 then return #g>0 and g:FilterCount(Card.IsDiscardable,nil)==#g end
-	Duel.SendtoGrave(g,REASON_COST+REASON_DISCARD)
+	Duel.SendtoRest(g,REASON_COST+REASON_DISCARD)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
@@ -154,21 +163,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c = e:GetHandler()
 	local tp=e:GetHandlerPlayer()
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
-	if c:IsRelateToEffect(e) and Duel.SpecialSummon(c,0,tp,tp,true,false,POS_FACEUP)~=0 then
-		local e2=Effect.CreateEffect(c)
-		e2:SetType(EFFECT_TYPE_FIELD)
-		e2:SetCode(EFFECT_CANNOT_LOSE_LP)
-		e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-		e2:SetLabelObject(c)
-		e2:SetCondition(s.lcon)
-		e2:SetTargetRange(1,0)
-		Duel.RegisterEffect(e2,tp)
-	end
-end
-function s.lcon(e,tp,eg,ep,ev,re,r,rp)
-	local c = e:GetLabelObject()
-	local py = e:GetHandlerPlayer()
-	return c:IsFaceup() and c:IsLocation(LOCATION_MZONE) and c:IsControler(py)
+	Duel.SpecialSummon(c,0,tp,tp,true,false,POS_FACEUP)
 end
 function s.ctcon(e,tp,eg,ep,ev,re,r,rp)
 	return ep==tp

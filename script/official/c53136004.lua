@@ -1,5 +1,5 @@
 --魔導皇士 アンプール
---Emperor of Prophecy
+--Emperor of Prediction
 
 local s,id=GetID()
 function s.initial_effect(c)

@@ -1,5 +1,5 @@
 --墓守の審神者
---Gravekeeper's Oracle
+--Restkeeper's Overseer
 local s,id=GetID()
 function s.initial_effect(c)
 	--summon with 3 tribute

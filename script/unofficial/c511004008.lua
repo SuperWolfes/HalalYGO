@@ -1,4 +1,5 @@
---Guardianual Fusion
+--スピリチュアル・フュージョン
+--Spilocked Fusion
 --Scripted by Edo9300
 local s,id=GetID()
 function s.initial_effect(c)

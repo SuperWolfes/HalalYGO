@@ -1,8 +1,8 @@
---D.D.クロウ
---D.D. Crow
+--S.D.クロウ
+--S.D. Crow
 local s,id=GetID()
 function s.initial_effect(c)
-	--Banish 1 target from the GY
+	--Banish 1 target from the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_REMOVE)
@@ -18,8 +18,8 @@ function s.initial_effect(c)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGraveAsCost() and c:IsDiscardable() end
-	Duel.SendtoGrave(c,REASON_COST+REASON_DISCARD)
+	if chk==0 then return c:IsAbleToRestAsCost() and c:IsDiscardable() end
+	Duel.SendtoRest(c,REASON_COST+REASON_DISCARD)
 end
 function s.rmfilter(c)
 	return c:IsAbleToRemove() and aux.SpElimFilter(c)

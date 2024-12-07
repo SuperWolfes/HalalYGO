@@ -1,9 +1,9 @@
 --天装騎兵マジカ・アルクム
---Armatos Legio Magica Alcum
+--Armatos Legio Menta Alcum
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	--to GY and destroy
+	--to RP and destroy
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TOREST+CATEGORY_DESTROY)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
@@ -19,7 +19,7 @@ end
 s.listed_series={0x578}
 s.listed_names={511009503}
 function s.tgfilter(c,e,tp)
-	return c:IsCode(511009503) and c:IsFaceup() and c:GetSequence()<5 and c:IsAbleToGrave()
+	return c:IsCode(511009503) and c:IsFaceup() and c:GetSequence()<5 and c:IsAbleToRest()
 		and Duel.IsExistingMatchingCard(s.linkedfilter,tp,LOCATION_MZONE,0,1,nil,e:GetHandler(),c)
 end
 function s.linkedfilter(c,mag_alc,j_arrows)
@@ -49,7 +49,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,tp)
 	aux.RegisterClientHint(e:GetHandler(),0,tp,1,0,aux.Stringid(id,0),nil)
 	local tc=Duel.GetFirstTarget()
-	if tc:IsRelateToEffect(e) and Duel.SendtoGrave(tc,REASON_EFFECT)>0 and Duel.GetOperatedGroup():GetFirst():IsLocation(LOCATION_REST) then
+	if tc:IsRelateToEffect(e) and Duel.SendtoRest(tc,REASON_EFFECT)>0 and Duel.GetOperatedGroup():GetFirst():IsLocation(LOCATION_REST) then
 		local desg=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsSequence,0,1,2,3,4),tp,0,LOCATION_MZONE+LOCATION_SZONE,nil)
 		Duel.Destroy(desg,REASON_EFFECT)
 	end

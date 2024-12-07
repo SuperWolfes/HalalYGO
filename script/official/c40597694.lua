@@ -33,7 +33,7 @@ function s.fusfilter(c)
 	return c:IsType(TYPE_FUSION) and c:IsSetCard(0x1047) and not c:IsRace(RACE_ROCK)
 end
 function s.extrafil(e,tp,mg1)
-	return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToGrave),tp,LOCATION_DECK,0,nil)
+	return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRest),tp,LOCATION_DECK,0,nil)
 end
 function s.stage2(e,tc,tp,sg,chk)
 	if chk==1 then

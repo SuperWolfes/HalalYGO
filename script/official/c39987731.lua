@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Special summon "Jinzo" from hand or GY, then you can destroy all of opponent's traps
+	--Special summon "Jinzo" from hand or RP, then you can destroy all of opponent's traps
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_DESTROY)
@@ -31,7 +31,7 @@ function s.initial_effect(c)
 end
 	--Specifically lists itself and "Jinzo"
 s.listed_names={id,CARD_JINZO}
-	--If there is a face-up trap card on either field/in either GY
+	--If there is a face-up trap card on either field/in either RP
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsTrap),tp,LOCATION_ONFIELD+LOCATION_REST,LOCATION_ONFIELD+LOCATION_REST,1,nil)
 end
@@ -75,11 +75,11 @@ function s.sstg(e,tp,eg,ep,ev,re,r,rp,chk)
 		and Duel.IsExistingMatchingCard(s.ssfilter,tp,LOCATION_HAND+LOCATION_REST,0,1,nil,e,tp) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND+LOCATION_REST)
 end
-	--Special summon "Jinzo" from hand or GY, then you can destroy all of opponent's traps
+	--Special summon "Jinzo" from hand or RP, then you can destroy all of opponent's traps
 function s.ssop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.ssfilter),tp,LOCATION_HAND+LOCATION_REST,0,1,1,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.ssfilter),tp,LOCATION_HAND+LOCATION_REST,0,1,1,nil,e,tp)
 	local dg=Duel.GetMatchingGroup(Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,nil)
 	if #g>0 and Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)~=0 and #dg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 		Duel.BreakEffect()

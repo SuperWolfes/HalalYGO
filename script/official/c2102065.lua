@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	local e2=e1:Clone()
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e2)
-	--1000 ATK gain if sent to GY
+	--1000 ATK gain if sent to RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_ATKCHANGE)
@@ -42,7 +42,7 @@ function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingTarget(s.atkfilter,tp,LOCATION_REST,0,1,nil) end
 	Duel.SelectTarget(tp,s.atkfilter,tp,LOCATION_REST,0,1,1,nil)
 end
-	--ATK up equal to targeted WATER monster in GY
+	--ATK up equal to targeted WATER monster in RP
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()

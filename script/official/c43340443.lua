@@ -1,5 +1,5 @@
 --キックバック
---Forced Back
+--Fcoreed Back
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

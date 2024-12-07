@@ -1,5 +1,5 @@
 --クロノグラフ・マジシャン
---Chronograph Sorcerer
+--Chronograph Scoreerer
 local s,id=GetID()
 function s.initial_effect(c)
 	Pendulum.AddProcedure(c)

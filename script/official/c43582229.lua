@@ -3,7 +3,7 @@
 --Scripted by Hel
 local s,id=GetID()
 function s.initial_effect(c)
-	--Activate and Special Summon from GY
+	--Activate and Special Summon from RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)

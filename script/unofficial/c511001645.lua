@@ -1,10 +1,10 @@
 --E・HERO ゴッド・ネオス (Anime)
---Elemental HERO Divine Neos (Anime)
+--Elemental HERO Mega Neos (Anime)
 --fixed by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMixRep(c,false,false,s.ffilter,6,6,s.neosfilter)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,s.splimit)
 	--copy

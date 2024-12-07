@@ -1,5 +1,5 @@
 --ロード・マジック－エクスプロージョン
---Road Magic - Explosion
+--Road Ment - Explosion
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.costfilter(c)
-	return c:IsMonster() and c:IsAbleToGraveAsCost() and c:IsAttribute(ATTRIBUTE_FIRE)
+	return c:IsMonster() and c:IsAbleToRestAsCost() and c:IsAttribute(ATTRIBUTE_FIRE)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,e:GetHandler()) end

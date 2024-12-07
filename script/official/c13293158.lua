@@ -2,7 +2,7 @@
 --Evil HERO Wild Cyclone
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion material
 	Fusion.AddProcMix(c,true,true,21844576,86188410)
 	--lizard check

@@ -55,10 +55,10 @@ function s.rettg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local rc=e:GetHandler():GetReasonCard()
 	local mg=rc:GetMaterial()
 	if chk==0 then
-		local tdg=Duel.GetMatchingGroup(aux.GraveValleyFilter(Card.IsAbleToDeck),tp,LOCATION_REST,0,mg)
-		local thg=Duel.GetMatchingGroup(aux.GraveValleyFilter(Card.IsAbleToHand),tp,LOCATION_REST,0,mg)
-		return #mg>0 and mg:FilterCount(aux.GraveValleyFilter(s.mgfilter),nil,e,tp,rc,mg)==#mg
-			and Duel.IsExistingMatchingCard(aux.GraveValleyFilter(s.tdfilter),tp,LOCATION_REST,0,rc:GetLink()+1,mg)
+		local tdg=Duel.GetMatchingGroup(aux.NecroValleyFilter(Card.IsAbleToDeck),tp,LOCATION_REST,0,mg)
+		local thg=Duel.GetMatchingGroup(aux.NecroValleyFilter(Card.IsAbleToHand),tp,LOCATION_REST,0,mg)
+		return #mg>0 and mg:FilterCount(aux.NecroValleyFilter(s.mgfilter),nil,e,tp,rc,mg)==#mg
+			and Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.tdfilter),tp,LOCATION_REST,0,rc:GetLink()+1,mg)
 			and #tdg>=rc:GetLink() and #thg>=1
 	end
 	e:SetLabel(rc:GetLink())
@@ -70,16 +70,16 @@ function s.retop(e,tp,eg,ep,ev,re,r,rp)
 	local rc=e:GetHandler():GetReasonCard()
 	local mg=rc:GetMaterial()
 	local lr=e:GetLabel()
-	if not (mg:FilterCount(aux.GraveValleyFilter(s.mgfilter),nil,e,tp,rc,mg)==#mg) then return end
+	if not (mg:FilterCount(aux.NecroValleyFilter(s.mgfilter),nil,e,tp,rc,mg)==#mg) then return end
 	if #mg>0 and Duel.SendtoDeck(mg,nil,2,REASON_EFFECT)==#mg then
-		local tdg=Duel.GetMatchingGroup(aux.GraveValleyFilter(Card.IsAbleToDeck),tp,LOCATION_REST,0,mg)
+		local tdg=Duel.GetMatchingGroup(aux.NecroValleyFilter(Card.IsAbleToDeck),tp,LOCATION_REST,0,mg)
 		if #tdg<lr then return end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
 		local g=tdg:Select(tp,lr,lr,mg)
 		if #g<=0 then return end
 		Duel.BreakEffect()
 		if Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)==lr then
-			local thg=Duel.GetMatchingGroup(aux.GraveValleyFilter(Card.IsAbleToHand),tp,LOCATION_REST,0,mg)
+			local thg=Duel.GetMatchingGroup(aux.NecroValleyFilter(Card.IsAbleToHand),tp,LOCATION_REST,0,mg)
 			if #thg<=0 then return end
 			Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_RTOHAND)
 			local g2=thg:Select(1-tp,1,1,mg)

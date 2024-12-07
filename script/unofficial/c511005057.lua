@@ -35,7 +35,7 @@ function s.filter(c,e,tp)
 	if e:GetHandler():IsLocation(LOCATION_HAND) then
 		ft=ft-1
 	end
-	return c:GetFlagEffect(id)>0 and c:GetFlagEffect(id+1)==0 and c:IsActional() and (ft>0 or c:IsType(TYPE_FIELD)) 
+	return c:GetFlagEffect(id)>0 and c:GetFlagEffect(id+1)==0 and c:IsActional() and (ft>0 or c:IsType(TYPE_FIELD))
 		and c:CheckActivateEffect(false,false,false)~=nil
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -62,16 +62,16 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local loc=LOCATION_SZONE
 		if (tpe&TYPE_FIELD)~=0 then
 			loc=LOCATION_FZONE
-			local of=Duel.GetFieldCard(1-tp,LOCATION_SZONE,5)
+			local of=Duel.GetFieldCard(1-tp,LOCATION_FZONE,0)
 			if of then Duel.Destroy(of,REASON_RULE) end
-			of=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
-			if of and Duel.Destroy(of,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
+			of=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
+			if of and Duel.Destroy(of,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
 		end
 		Duel.MoveToField(tc,tp,tp,loc,POS_FACEUP,true)
 		Duel.Hint(HINT_CARD,0,tc:GetCode())
 		tc:CreateEffectRelation(te)
 		if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 and not tc:IsHasEffect(EFFECT_REMAIN_FIELD) then
-			tc:CancelToGrave(false)
+			tc:CancelToRest(false)
 		end
 		if co then co(te,tp,eg,ep,ev,re,r,rp,1) end
 		if tg then tg(te,tp,eg,ep,ev,re,r,rp,1) end

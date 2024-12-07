@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.dtarget)
 	e1:SetOperation(s.doperation)
 	c:RegisterEffect(e1)
-	--If banished from GY, special summon itself 
+	--If banished from RP, special summon itself 
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.dfilter(c,tp)
-	return c:IsPreviousLocation(LOCATION_REST) and c:IsPreviousControler(tp) and c:IsRace(RACE_CONTAMINED)
+	return c:IsPreviousLocation(LOCATION_REST) and c:IsPreviousControler(tp) and c:IsRace(RACE_TOXIC)
 end
 function s.dcondition(e,tp,eg,ep,ev,re,r,rp)
 	if eg:IsContains(e:GetHandler()) then return false end

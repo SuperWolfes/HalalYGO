@@ -1,5 +1,5 @@
 --ダーク・シムルグ
---Dark Simorgh
+--Dark Sisbird
 local s,id=GetID()
 function s.initial_effect(c)
 	--Add WIND attribute

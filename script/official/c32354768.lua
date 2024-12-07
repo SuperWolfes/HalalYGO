@@ -1,5 +1,5 @@
 --セフィラの神託
---Oracle of Zefra
+--Overseer of Zebra
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

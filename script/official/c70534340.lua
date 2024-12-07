@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion Summon procedure
 	Fusion.AddProcMix(c,true,true,CARD_ALBAZ,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_DARK))
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion Summon
 	local params = {fusfilter=s.fusfilter,matfilter=Fusion.OnFieldMat(Card.IsAbleToDeck),extrafil=s.fextra,extraop=Fusion.ShuffleMaterial,stage2=s.stage2,extratg=s.extratg}
 	local e1=Effect.CreateEffect(c)
@@ -33,7 +33,7 @@ function s.fusfilter(c)
 	return c:IsLevelBelow(8) and not c:IsCode(id)
 end
 function s.fextra(e,tp,mg)
-	return Duel.GetMatchingGroup(aux.GraveValleyFilter(Fusion.IsMonsterFilter(Card.IsFaceup,Card.IsAbleToDeck)),tp,LOCATION_REST+LOCATION_REMOVED,0,nil)
+	return Duel.GetMatchingGroup(aux.NecroValleyFilter(Fusion.IsMonsterFilter(Card.IsFaceup,Card.IsAbleToDeck)),tp,LOCATION_REST+LOCATION_REMOVED,0,nil)
 end
 function s.stage2(e,tc,tp,mg,chk)
 	if chk==2 then

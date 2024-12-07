@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--Send monsters Special Summoned by "Monster Rerest" to the GY
+	--Send monsters Special Summoned by "Monster Rerest" to the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
@@ -39,7 +39,7 @@ function s.adjustop(e,tp,eg,ep,ev,re,r,rp)
 	local phase=Duel.GetCurrentPhase()
 	if (phase==PHASE_DAMAGE and not Duel.IsDamageCalculated()) or phase==PHASE_DAMAGE_CAL then return end
 	local g=Duel.GetMatchingGroup(Card.IsSummonType,0,LOCATION_MZONE,LOCATION_MZONE,nil,SUMMON_TYPE_SPECIAL+SUMMON_WITH_MONSTER_REREST)
-	if Duel.SendtoGrave(g,REASON_EFFECT)>0 then
+	if Duel.SendtoRest(g,REASON_EFFECT)>0 then
 		Duel.Readjust()
 	end
 end

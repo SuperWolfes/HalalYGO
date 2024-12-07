@@ -1,5 +1,5 @@
 --ディメンジョン・ダイス
---Dimension Suffice
+--Dimension Dice
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -14,11 +14,11 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-function s.sufficefilter(c)
-	return c.roll_suffice and c:IsFaceup()
+function s.dicefilter(c)
+	return c.roll_dice and c:IsFaceup()
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(s.sufficefilter,tp,LOCATION_ONFIELD,0,1,nil)
+	return Duel.IsExistingMatchingCard(s.dicefilter,tp,LOCATION_ONFIELD,0,1,nil)
 end
 function s.spcfilter(c,tp)
 	return Duel.GetMZoneCount(tp,c)>0
@@ -29,7 +29,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Release(sg,REASON_COST)
 end
 function s.spfilter(c,e,tp)
-	return c.roll_suffice and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c.roll_dice and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 		and c:IsType(TYPE_EFFECT)
 	--pending rulings, cannot SS Normal Pendulums with a die roll Pendulum Effect
 end

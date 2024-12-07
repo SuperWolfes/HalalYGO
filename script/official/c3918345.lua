@@ -1,5 +1,5 @@
 --マジック・スライム
---Magical Reflect Slime
+--Mentoral Reflect Slime
 local s,id=GetID()
 function s.initial_effect(c)
 	Dual.AddProcedure(c)

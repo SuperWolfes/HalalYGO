@@ -1,9 +1,9 @@
---Polar Monster Sacred Emperor Odin
+--Polar Monster Clean Emperor Odin
 local s,id=GetID()
 function s.initial_effect(c)
 	--Synchro Summon
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),2,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	c:SetUniqueOnField(1,0,id)
 	--Influence of Rune
 	local e1=Effect.CreateEffect(c)
@@ -69,7 +69,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.cfilter(c)
-	return c:IsLocation(LOCATION_MZONE) and c:IsFaceup() and c:IsRace(RACE_DIVINE)
+	return c:IsLocation(LOCATION_MZONE) and c:IsFaceup() and c:IsRace(RACE_MEGA)
 end
 function s.imcon(e,tp,eg,ep,ev,re,r,rp)
 	if re:IsActiveType(TYPE_MONSTER) or not Duel.IsChainDisablable(ev) then return false end
@@ -158,7 +158,7 @@ function s.disfilter(c)
 	local eqg=c:GetEquipGroup():Filter(s.dischk,nil)
 	local tgg=Duel.GetMatchingGroup(s.tgg,0,LOCATION_ONFIELD,LOCATION_ONFIELD,nil,c)
 	eqg:Merge(tgg)
-	return c:IsRace(RACE_DIVINE) and #eqg>0
+	return c:IsRace(RACE_MEGA) and #eqg>0
 end
 function s.dischk(c)
 	return not c:IsDisabled()

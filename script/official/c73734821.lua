@@ -1,5 +1,5 @@
 --EMスカイ・マジシャン
---Performapal Sky Magician
+--Performapal Sky Mentor
 local s,id=GetID()
 function s.initial_effect(c)
 	--atk up

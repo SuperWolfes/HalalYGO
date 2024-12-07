@@ -1,5 +1,5 @@
 --精霊獣 アペライオ
---Guardianual Beast Apelio
+--Spilocked Beast Apelio
 local s,id=GetID()
 function s.initial_effect(c)
 	c:SetSPSummonOnce(id)

@@ -1,5 +1,5 @@
 --アンブラル・グール (Anime)
---Umbral Horror Ghoul (Anime)
+--Umbral Horror Rahul (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon

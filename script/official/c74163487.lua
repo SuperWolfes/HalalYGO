@@ -1,11 +1,11 @@
 --レストレーション・ポイントガード
---Graveoration Point Guard
+--Restoration Point Guard
 --Scripted by Eerie Code
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Link summon procedure
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_CYBERSE),2,2)
 	--Cannot be destroyed by battle or card effect
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e1:SetCondition(s.incon)
 	e1:SetOperation(s.inop)
 	c:RegisterEffect(e1)
-	--Special summon itself from GY if a link monster using this card is destroyed by opponent's card effect
+	--Special summon itself from RP if a link monster using this card is destroyed by opponent's card effect
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EVENT_BE_MATERIAL)

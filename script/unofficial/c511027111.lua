@@ -1,5 +1,5 @@
 --ドドドウィッチ (Anime)
---Dododo Witch (Anime)
+--Dododo Mint (Anime)
 --Script by Rundas
 local s,id=GetID()
 function s.initial_effect(c)

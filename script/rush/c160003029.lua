@@ -2,7 +2,7 @@
 --Vishwar Ranbuddy
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send to GY and destroy
+	--Send to RP and destroy
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TOHAND)
 	e1:SetType(EFFECT_TYPE_IGNITION)

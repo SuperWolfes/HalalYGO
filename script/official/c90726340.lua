@@ -1,13 +1,13 @@
 --竜魔人 クィーンドラグーン
---Queen Dragun Djinn
+--Queen Dragun Dlilt
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Xyz summon procedure
 	Xyz.AddProcedure(c,nil,4,2)
-	--Your dragon monsters, except "Queen Dragun Djinn", cannot be destroyed by battle
+	--Your dragon monsters, except "Queen Dragun Dlilt", cannot be destroyed by battle
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetRange(LOCATION_MZONE)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.indtg)
 	e1:SetValue(1)
 	c:RegisterEffect(e1)
-	--Special summon 1 level 5+ dragon monster from GY
+	--Special summon 1 level 5+ dragon monster from RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)

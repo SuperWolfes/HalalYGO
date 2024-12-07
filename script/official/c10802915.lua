@@ -1,5 +1,5 @@
 --魔界発現世行きデスガイド
---Tour Guide From the Underworld
+--Tour Guide From the Overworld
 local s,id=GetID()
 function s.initial_effect(c)
 	--spsummon

@@ -36,7 +36,7 @@ function s.cansstk(tp)
 	return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and
 	       Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0,TYPES_TOKEN,0,0,1,RACE_WANDERER,ATTRIBUTE_LIGHT)
 end
-	--If sent from monster zone to GY
+	--If sent from monster zone to RP
 function s.tkcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsPreviousLocation(LOCATION_MZONE)
 end
@@ -56,7 +56,7 @@ end
 function s.cfilter(c)
 	return c:IsActional() and c:IsAbleToRemoveAsCost()
 end
-	--Banish itself from GY and 1 actional from hand as cost
+	--Banish itself from RP and 1 actional from hand as cost
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return aux.bfgcost(e,tp,eg,ep,ev,re,r,rp,0)
@@ -102,7 +102,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e1,tp)
 end
-	--Gravericted to hand
+	--Restricted to hand
 function s.splimit(e,c,sump,sumtype,sumpos,targetp)
 	return not c:IsLocation(LOCATION_HAND)
 end

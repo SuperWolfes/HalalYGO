@@ -1,9 +1,9 @@
 --スケアクロー・ライトハート
---Scareclaw Licht Heart
+--Scareclaw Light-Heart
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,s.matfilter,1,1)
 	--Search 1 "Lifobia, the Wanton and Willful World of Desire"
 	local e1=Effect.CreateEffect(c)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.thtg)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
-	--Special Summon itself from the GY
+	--Special Summon itself from the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -29,9 +29,9 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 s.listed_names={CARD_VISAS_STARFROST,56063182}
-s.listed_series={0x17c}
+s.listed_series={SET_SCARECLAW}
 function s.matfilter(c,sc,st,tp)
-	return c:IsInMainMZone(tp) and (c:IsSetCard(0x17c,sc,st,tp) or c:IsSummonCode(sc,st,tp,CARD_VISAS_STARFROST))
+	return c:IsInMainMZone(tp) and (c:IsSetCard(SET_SCARECLAW,sc,st,tp) or c:IsSummonCode(sc,st,tp,CARD_VISAS_STARFROST))
 end
 function s.thcon(e)
 	local c=e:GetHandler()

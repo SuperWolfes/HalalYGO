@@ -76,14 +76,14 @@ function s.ngcon(e,tp,eg,ep,ev,re,r,rp)
 end
 	--Check for an equip card
 function s.ngfilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_EQUIP) and c:IsAbleToGraveAsCost()
+	return c:IsFaceup() and c:IsType(TYPE_EQUIP) and c:IsAbleToRestAsCost()
 end
-	--Send 1 equip card to GY as cost
+	--Send 1 equip card to RP as cost
 function s.ngcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.ngfilter,tp,LOCATION_SZONE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.ngfilter,tp,LOCATION_SZONE,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 	--Activation legality
 function s.ngtg(e,tp,eg,ep,ev,re,r,rp,chk)

@@ -1,5 +1,5 @@
 --セフィラの輝跡
---Zefra Path
+--Zebra Path
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

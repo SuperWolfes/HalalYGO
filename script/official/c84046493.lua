@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.scop)
 	c:RegisterEffect(e1)
 end
-s.roll_suffice=true
+s.roll_dice=true
 function s.sctg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():GetLeftScale()<10 end
 	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,1)
@@ -23,7 +23,7 @@ end
 function s.scop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) or c:GetLeftScale()>=10 then return end
-	local dc=Duel.TossSuffice(tp,1)
+	local dc=Duel.TossDice(tp,1)
 	local sch=math.min(10-c:GetLeftScale(),dc)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)

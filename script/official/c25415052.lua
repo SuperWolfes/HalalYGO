@@ -2,7 +2,7 @@
 --Shinobaroness Peacock
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	local sme,soe=Guardian.AddProcedure(c,EVENT_SPSUMMON_SUCCESS)
 	--Mandatory return
 	sme:SetCategory(CATEGORY_TOHAND+CATEGORY_SPECIAL_SUMMON+CATEGORY_TOKEN)
@@ -32,6 +32,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 s.listed_names={73055622,TOKEN_SHINOBIRD}
+s.listed_card_types={TYPE_GUARDIAN}
 function s.tdcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_LOCKED)
 end

@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation)
 	e1:SetHintTiming(0,TIMING_BATTLE_PHASE+TIMING_DAMAGE_STEP)
 	c:RegisterEffect(e1)
-	--Special summon itself from GY as a monster
+	--Special summon itself from RP as a monster
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)

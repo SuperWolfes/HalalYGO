@@ -1,10 +1,11 @@
 --破壊剣士の宿命
---Karma of the Destruction Swordsman
+--Kaom of the Mismatching Swordsman
 local s,id=GetID()
 function s.initial_effect(c)
-	--Activate
+	--Banish up to 3 monsters from the opponent's RP and increase the ATK of 1 "Buster Blader" or "Mismatching Sword" monster
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_REMOVE)
+	e1:SetDescription(aux.Stringid(id,0))
+	e1:SetCategory(CATEGORY_REMOVE+CATEGORY_ATKCHANGE)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_STEP)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
@@ -14,8 +15,9 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-	--to hand
+	--Return itself to the hand
 	local e2=Effect.CreateEffect(c)
+	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetRange(LOCATION_REST)
@@ -25,32 +27,25 @@ function s.initial_effect(c)
 	e2:SetOperation(s.thop)
 	c:RegisterEffect(e2)
 end
-s.listed_series={0xd6,0xd7}
+s.listed_series={SET_MISMATCHING_SWORD,SET_BUSTER_BLADER}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()
 end
-function s.filter1(c,tp)
-	return c:IsMonster() and c:IsAbleToRemove() and aux.SpElimFilter(c,true)
-		and Duel.IsExistingMatchingCard(s.filter3,tp,LOCATION_MZONE,0,1,c)
+function s.rmvfilter(c,e)
+	return c:IsMonster() and c:IsAbleToRemove() and c:IsCanBeEffectTarget(e)
 end
-function s.filter2(c,rc)
-	return c:IsRace(rc) and c:IsAbleToRemove() and aux.SpElimFilter(c,true)
+function s.atkfilter(c)
+	return c:IsFaceup() and c:IsSetCard({SET_MISMATCHING_SWORD,SET_BUSTER_BLADER})
 end
-function s.filter3(c)
-	return c:IsFaceup() and (c:IsSetCard(0xd6) or c:IsSetCard(0xd7))
+function s.rescon(sg)
+	return sg:GetClassCount(Card.GetRace)==1
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_MZONE+LOCATION_REST) and chkc:IsControler(1-tp) and s.filter1(chkc,tp) end
-	if chk==0 then return Duel.IsExistingTarget(s.filter1,tp,0,LOCATION_MZONE+LOCATION_REST,1,nil,tp)
-		and Duel.IsExistingMatchingCard(s.filter3,tp,LOCATION_MZONE,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g1=Duel.SelectTarget(tp,s.filter1,tp,0,LOCATION_MZONE+LOCATION_REST,1,1,nil,tp)
-	local rc=g1:GetFirst():GetRace()
-	if Duel.IsExistingTarget(s.filter2,tp,0,LOCATION_MZONE+LOCATION_REST,1,g1:GetFirst(),rc)
-		and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-		Duel.SelectTarget(tp,s.filter2,tp,0,LOCATION_MZONE+LOCATION_REST,1,2,g1:GetFirst(),rc)
-	end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(1-tp) and s.filter1(chkc,tp) end
+	local g=Duel.GetMatchingGroup(s.rmvfilter,tp,0,LOCATION_REST,nil,e)
+	if chk==0 then return #g>0 and Duel.IsExistingMatchingCard(s.atkfilter,tp,LOCATION_MZONE,0,1,nil) end
+	local rg=aux.SelectUnselectGroup(g,e,tp,1,3,s.rescon,1,tp,HINTMSG_REMOVE)
+	Duel.SetTargetCard(rg)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g1,1,0,LOCATION_REST)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
@@ -58,13 +53,12 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ct=Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
 	if ct==0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
-	local sg=Duel.SelectMatchingCard(tp,s.filter3,tp,LOCATION_MZONE,0,1,1,nil)
-	local tc=sg:GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,s.atkfilter,tp,LOCATION_MZONE,0,1,1,nil):GetFirst()
 	if tc then
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+		e1:SetReset(RESET_EVENT|RESETS_STANDARD|RESET_PHASE|PHASE_END)
 		e1:SetValue(ct*500)
 		tc:RegisterEffect(e1)
 		local e2=e1:Clone()
@@ -73,7 +67,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.cfilter(c)
-	return c:IsSetCard(0xd6) and c:IsDiscardable()
+	return c:IsSetCard(SET_MISMATCHING_SWORD) and c:IsDiscardable()
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end

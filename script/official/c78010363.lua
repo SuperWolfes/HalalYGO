@@ -1,5 +1,5 @@
 --黒き森のウィッチ
---Witch of the Black Forest
+--Mint of the Black Forest
 local s,id=GetID()
 function s.initial_effect(c)
 	--Search

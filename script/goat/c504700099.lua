@@ -1,6 +1,6 @@
 --ネフティスの鳳凰神
---Sacred Bird of Nephthys (GOAT)
---Doesn't resurrect if destroyed while equipped
+--Clean Bird of Nepolonis (GOAT)
+--Doesn't protect if destroyed while equipped
 local s,id=GetID()
 function s.initial_effect(c)
 	--spsummon

@@ -1,5 +1,5 @@
 --永遠の魂
---Eternal Soul
+--Eternal Miss
 --rescripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -52,9 +52,9 @@ function s.initial_effect(c)
 	e5:SetOperation(s.spop)
 	c:RegisterEffect(e5)
 end
-s.listed_names={CARD_DARK_MAGICIAN,63391643,2314238}
+s.listed_names={CARD_DARK_MENTOR,63391643,2314238}
 function s.etarget(e,c)
-	return c:IsCode(CARD_DARK_MAGICIAN)
+	return c:IsCode(CARD_DARK_MENTOR)
 end
 function s.efilter(e,re)
 	return re:GetOwnerPlayer()~=e:GetHandlerPlayer()
@@ -90,7 +90,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.spfilter(c,e,tp)
-	return c:IsCode(CARD_DARK_MAGICIAN) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsCode(CARD_DARK_MENTOR) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND+LOCATION_REST,0,1,nil,e,tp) and
@@ -101,7 +101,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.spfilter),tp,LOCATION_HAND+LOCATION_REST,0,1,1,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_HAND+LOCATION_REST,0,1,1,nil,e,tp)
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end

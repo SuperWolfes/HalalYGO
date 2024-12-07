@@ -4,8 +4,8 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Link summon procedure
 	Link.AddProcedure(c,nil,2,2,s.lcheck)
 	--All warrior monsters on the field gain 500 ATK
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e1:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
 	e1:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_WARRIOR))
 	c:RegisterEffect(e1)
-	--Special summon 1 non-link warrior monster from GY
+	--Special summon 1 non-link warrior monster from RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)

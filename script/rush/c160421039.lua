@@ -1,6 +1,5 @@
--- 不成ゴブリン
--- Unfulfilled Goblin
-
+--不成ゴブリン
+--Unfulfilled Goblin
 local s,id=GetID()
 function s.initial_effect(c)
 	--Increase ATK
@@ -16,34 +15,33 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_UPSTART_GOBLIN}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
 end
 function s.filter(c)
 	return c:IsFaceup() and c:IsLevelBelow(8)
 end
-	--Activation legality
+--Activation legality
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingTarget(aux.FilterMaximumSideFunctionEx(s.filter),tp,0,LOCATION_MZONE,1,e:GetHandler()) end
 end
-	--Send this card to the GY to decrease an opponent's monster atk
+--Send this card to the RP to decrease an opponent's monster atk
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	--Requirement
-	if Duel.SendtoGrave(e:GetHandler(),REASON_COST)==0 then return end
+	if Duel.SendtoRest(e:GetHandler(),REASON_COST)==0 then return end
 	--Effect
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 	local tc=Duel.SelectMatchingCard(tp,aux.FilterMaximumSideFunctionEx(s.filter),tp,0,LOCATION_MZONE,1,1,e:GetHandler()):GetFirst()
-	Duel.HintSelection(tc)
 	if tc then
+		Duel.HintSelection(tc)
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)
 		e1:SetValue(-500)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
-		tc:RegisterEffectRush(e1)
+		e1:SetReset(RESETS_STANDARD_PHASE_END)
+		tc:RegisterEffect(e1)
 		if Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 			local g=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_REST,0,1,1,nil)
-			if #g==0 then return end
 			Duel.BreakEffect()
 			local tg=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_REST,0,1,1,nil)
 			local sg=Duel.GetMatchingGroup(aux.FilterMaximumSideFunctionEx(s.filter),tp,0,LOCATION_MZONE,nil)

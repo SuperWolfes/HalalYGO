@@ -1,5 +1,5 @@
 --逢魔ノ妖刀-不知火
---Shiranui Spectralsword Shade
+--Shiranui Beinlsword Shade
 --Scripted by AlphaKretin and ahtelel
 local s,id=GetID()
 function s.initial_effect(c)
@@ -26,7 +26,7 @@ function s.rescon(sg,e,tp,mg)
 	return aux.ChkfMMZ(1)(sg,e,tp,mg) and sg:IsExists(Card.IsSetCard,1,nil,0xd9)
 end
 function s.filter(c,e,tp)
-	return c:IsRace(RACE_CONTAMINED) and not c:IsCode(id) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
+	return c:IsRace(RACE_TOXIC) and not c:IsCode(id) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_REMOVED,0,nil,e,tp)
@@ -70,6 +70,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SpecialSummonComplete()
 end
 function s.splimit(e,c,tp,sumtp,sumpos)
-	return not c:IsRace(RACE_CONTAMINED)
+	return not c:IsRace(RACE_TOXIC)
 end
 

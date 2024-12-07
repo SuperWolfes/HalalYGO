@@ -39,17 +39,17 @@ function s.filter(c,e,tp)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter(chkc,e,tp) end
-	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil,e,tp) 
-		and Duel.IsExistingMatchingCard(Card.IsAbleToGrave,tp,LOCATION_HAND,0,1,nil) end
+	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil,e,tp)
+		and Duel.IsExistingMatchingCard(Card.IsAbleToRest,tp,LOCATION_HAND,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EFFECT)
-	Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil,tp,eg,ep,ev,re,r,rp)
+	Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil,e,tp,eg,ep,ev,re,r,rp)
 	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_HAND)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToGrave,tp,LOCATION_HAND,0,1,1,nil)
-	if #g>0 and Duel.SendtoGrave(g,REASON_EFFECT)~=0 then
+	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToRest,tp,LOCATION_HAND,0,1,1,nil)
+	if #g>0 and Duel.SendtoRest(g,REASON_EFFECT)~=0 then
 		if tc and tc:IsRelateToEffect(e) and not tc:IsHasEffect(EFFECT_CANNOT_TRIGGER) then
 			local tpe=tc:GetType()
 			local te=tc:GetActivateEffect()
@@ -73,21 +73,21 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 				local loc=LOCATION_SZONE
 				if (tpe&TYPE_FIELD)~=0 then
 					loc=LOCATION_FZONE
-					local fc=Duel.GetFieldCard(1-tp,LOCATION_SZONE,5)
+					local fc=Duel.GetFieldCard(1-tp,LOCATION_FZONE,0)
 					if Duel.IsDuelType(DUEL_1_FIELD) then
 						if fc then Duel.Destroy(fc,REASON_RULE) end
-						fc=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
-						if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
+						fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
+						if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
 					else
-						fc=Duel.GetFieldCard(tp,LOCATION_SZONE,5)
-						if fc and Duel.SendtoGrave(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
+						fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
+						if fc and Duel.SendtoRest(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
 					end
 				end
 				Duel.MoveToField(tc,tp,tp,loc,POS_FACEUP,true)
 				Duel.Hint(HINT_CARD,0,tc:GetCode())
 				tc:CreateEffectRelation(te)
 				if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 and not tc:IsHasEffect(EFFECT_REMAIN_FIELD) then
-					tc:CancelToGrave(false)
+					tc:CancelToRest(false)
 				end
 				if co then co(te,tp,eg,ep,ev,re,r,rp,1) end
 				if tg then tg(te,tp,eg,ep,ev,re,r,rp,1) end
@@ -111,22 +111,23 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 				end
 			end
 		end
+		local c=e:GetHandler()
 		local a=e:GetLabelObject()
-		local e1=Effect.CreateEffect(e:GetHandler())
+		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_EXTRA_ATTACK)
 		e1:SetValue(a:GetEffectCount(EFFECT_EXTRA_ATTACK)+1)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_BATTLE)
+		e1:SetReset(RESET_EVENT|RESETS_STANDARD|RESET_PHASE|PHASE_BATTLE)
 		a:RegisterEffect(e1)
-		local e2=Effect.CreateEffect(e:GetHandler())
+		local e2=Effect.CreateEffect(c)
 		e2:SetType(EFFECT_TYPE_SINGLE)
 		e2:SetCode(EFFECT_MUST_ATTACK)
-		e2:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_BATTLE)
+		e2:SetReset(RESET_EVENT|RESETS_STANDARD|RESET_PHASE|PHASE_BATTLE)
 		a:RegisterEffect(e2)
-		local e3=Effect.CreateEffect(e:GetHandler())
+		local e3=Effect.CreateEffect(c)
 		e3:SetType(EFFECT_TYPE_SINGLE)
 		e3:SetCode(EFFECT_FIRST_ATTACK)
-		e3:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_BATTLE)
+		e3:SetReset(RESET_EVENT|RESETS_STANDARD|RESET_PHASE|PHASE_BATTLE)
 		a:RegisterEffect(e1)
 	end
 end

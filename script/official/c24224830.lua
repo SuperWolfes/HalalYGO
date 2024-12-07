@@ -1,5 +1,5 @@
 --墓穴の指名者
---Called by the Grave
+--Called by the Rest
 --Script by nekrozar
 local s,id=GetID()
 function s.initial_effect(c)

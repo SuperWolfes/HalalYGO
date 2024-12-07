@@ -3,7 +3,7 @@
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	-- 2+ monsters, including an "Evil★Twin" monster
 	Link.AddProcedure(c,nil,2,4,s.lcheck)
 	-- Special Summon up to 1 "Ki-sikil" and "Lil-la" monster each
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	-- Send 1 card on the field to the GY
+	-- Send 1 card on the field to the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOREST)
@@ -31,24 +31,23 @@ function s.initial_effect(c)
 	e2:SetOperation(s.tgop)
 	c:RegisterEffect(e2)
 end
-s.listed_series={0x153,0x154,0x155}
+s.listed_series={SET_KI_SIKIL,SET_LIL_LA,SET_EVIL_TWIN}
 function s.lcheck(g,lc,sumtype,tp)
-	return g:IsExists(Card.IsSetCard,1,nil,0x155,lc,sumtype,tp)
+	return g:IsExists(Card.IsSetCard,1,nil,SET_EVIL_TWIN,lc,sumtype,tp)
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsReleasable() end
 	Duel.Release(e:GetHandler(),REASON_COST)
 end
 function s.spfilter(c,e,tp)
-	return (c:IsSetCard(0x153) or c:IsSetCard(0x154)) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsSetCard({SET_KI_SIKIL,SET_LIL_LA}) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sprescon(sg)
-	return sg:FilterCount(Card.IsSetCard,nil,0x153)<2 and sg:FilterCount(Card.IsSetCard,nil,0x154)<2
+	return sg:FilterCount(Card.IsSetCard,nil,SET_KI_SIKIL)<2 and sg:FilterCount(Card.IsSetCard,nil,SET_LIL_LA)<2
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then
-		return (Duel.GetLocationCount(tp,LOCATION_MZONE)>0 or e:GetHandler():IsInMainMZone())
-			and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp)
+	if chk==0 then return Duel.GetMZoneCount(tp,e:GetHandler())>0
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp)
 	end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end
@@ -64,19 +63,18 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.tgcostfilter(c,ct)
-	return c:IsSetCard(0x155) and c:IsAbleToGraveAsCost() and c:IsMonster()
+	return c:IsSetCard(SET_EVIL_TWIN) and c:IsAbleToRestAsCost() and c:IsMonster()
 		and (not c:IsLocation(LOCATION_MZONE) or (c:IsFaceup() and ct>1))
 end
 function s.tgcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(nil,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil)
-	if chk==0 then
-		return #g>0 and aux.bfgcost(e,tp,eg,ep,ev,re,r,rp,0)
-			and Duel.IsExistingMatchingCard(s.tgcostfilter,tp,LOCATION_HAND+LOCATION_DECK+LOCATION_MZONE,0,1,nil,#g)
+	if chk==0 then return #g>0 and aux.bfgcost(e,tp,eg,ep,ev,re,r,rp,0)
+		and Duel.IsExistingMatchingCard(s.tgcostfilter,tp,LOCATION_HAND|LOCATION_DECK|LOCATION_MZONE,0,1,nil,#g)
 	end
 	aux.bfgcost(e,tp,eg,ep,ev,re,r,rp,1)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-	local cg=Duel.SelectMatchingCard(tp,s.tgcostfilter,tp,LOCATION_HAND+LOCATION_DECK+LOCATION_MZONE,0,1,1,nil,#g)
-	Duel.SendtoGrave(cg,REASON_COST)
+	local cg=Duel.SelectMatchingCard(tp,s.tgcostfilter,tp,LOCATION_HAND|LOCATION_DECK|LOCATION_MZONE,0,1,1,nil,#g)
+	Duel.SendtoRest(cg,REASON_COST)
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -88,6 +86,6 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,nil,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
 	if #g>0 then
 		Duel.HintSelection(g,true)
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end

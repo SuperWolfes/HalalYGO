@@ -1,5 +1,5 @@
 --霊神の聖殿
---Temple of the Elemental Lords
+--Masjid of the Elemental Watchers
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

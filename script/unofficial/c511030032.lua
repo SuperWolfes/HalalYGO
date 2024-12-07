@@ -33,7 +33,7 @@ function s.cfilter(c,e,tp)
 	end
 	return c:GetSequence()>=5 and c:IsLinkMonster() and c:IsAbleToRemove()
 		and Duel.GetLocationCount(1-tp,LOCATION_MZONE,tp)>0
-		and (not c:IsHasEffect(EFFECT_REVIVE_LIMIT) or c:IsStatus(STATUS_PROC_COMPLETE))
+		and (not c:IsHasEffect(EFFECT_AWAKE_LIMIT) or c:IsStatus(STATUS_PROC_COMPLETE))
 		and Duel.IsPlayerCanSpecialSummonMonster(tp,c:GetCode(),c:GetSetCard(),c:GetType(),c:GetAttack(),c:GetDefense(),c:GetLevel(),c:GetRace(),c:GetAttribute(),POS_FACEUP,1-tp,SUMMON_TYPE_SPECIAL)
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,c)
 end
@@ -61,7 +61,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 				Duel.SpecialSummon(tc,0,tp,1-tp,false,false,POS_FACEUP)
 			elseif tc:IsLocation(LOCATION_REMOVED) and not tc:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP,1-tp) then
 				Duel.BreakEffect()
-				Duel.SendtoGrave(tc,REASON_RULE)
+				Duel.SendtoRest(tc,REASON_RULE)
 			end
 		end
 	end

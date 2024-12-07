@@ -1,5 +1,5 @@
 --Ｔｈｅ ｓｕｐｐｒｅｓｓｉｏｎ ＰＬＵＴＯ
---The Suppression Pluto
+--The Suppression Polar
 local s,id=GetID()
 function s.initial_effect(c)
 	--announce

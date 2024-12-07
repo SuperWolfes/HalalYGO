@@ -26,14 +26,14 @@ function s.initial_effect(c)
 end
 s.listed_series={0xd2}
 function s.cfilter(c)
-	return c:IsSetCard(0xd2) and c:IsMonster() and c:IsAbleToGraveAsCost()
+	return c:IsSetCard(0xd2) and c:IsMonster() and c:IsAbleToRestAsCost()
 end
 function s.adcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_DECK,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_DECK,0,1,1,nil)
 	local tc=g:GetFirst()
-	Duel.SendtoGrave(tc,REASON_COST)
+	Duel.SendtoRest(tc,REASON_COST)
 	e:SetLabel(tc:GetLevel())
 end
 function s.adtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

@@ -1,6 +1,6 @@
 --ペンギン・ソルジャー
 --Penguin Soldier (GOAT)
---Forced trigger, but can select 0 targets
+--Fcoreed trigger, but can select 0 targets
 local s,id=GetID()
 function s.initial_effect(c)
 	--flip

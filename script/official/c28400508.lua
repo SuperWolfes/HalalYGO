@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz Summon procedure
 	Xyz.AddProcedure(c,nil,8,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Cannot be targeted by the opponent's effect
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)

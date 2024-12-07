@@ -1,5 +1,5 @@
 --邪龍復活の儀式
---Dragon Revival Locked
+--Dragon Awakal Locked
 --updated by ClaireStanfield
 local s,id=GetID()
 function s.initial_effect(c)

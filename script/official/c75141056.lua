@@ -17,7 +17,7 @@ function s.tgfilter(c)
 	return c:IsFaceup() and Duel.IsExistingMatchingCard(s.cfilter,c:GetControler(),LOCATION_DECK,0,1,nil,c)
 end
 function s.cfilter(c,tc)
-	return c:IsSetCard(0x3008) and not c:IsCode(tc:GetCode()) and c:IsMonster() and c:IsAbleToGrave()
+	return c:IsSetCard(0x3008) and not c:IsCode(tc:GetCode()) and c:IsMonster() and c:IsAbleToRest()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.tgfilter(chkc) end
@@ -31,7 +31,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_DECK,0,1,1,nil,tc)
 	if #g>0 then
 		local gc=g:GetFirst()
-		if Duel.SendtoGrave(gc,REASON_EFFECT)~=0 and gc:IsLocation(LOCATION_REST) and tc:IsRelateToEffect(e) and tc:IsFaceup() then
+		if Duel.SendtoRest(gc,REASON_EFFECT)~=0 and gc:IsLocation(LOCATION_REST) and tc:IsRelateToEffect(e) and tc:IsFaceup() then
 			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetCode(EFFECT_CHANGE_CODE)

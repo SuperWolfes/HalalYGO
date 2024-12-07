@@ -1,10 +1,10 @@
 --清冽の水霊使いエリア
---Eria the Water Charmer, Gentle
+--Eria the Water Chaumer, Gentle
 local s,id=GetID()
 function s.initial_effect(c)
 	--Link summon
 	Link.AddProcedure(c,nil,2,2,s.lcheck)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Special Summon
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))

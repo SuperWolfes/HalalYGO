@@ -1,5 +1,5 @@
 --見習い魔術師
---Apprentice Magician
+--Apprentice Mentor
 local s,id=GetID()
 function s.initial_effect(c)
 	--counter

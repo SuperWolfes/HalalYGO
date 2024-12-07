@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Add 1 other DARK monster from your GY to your hand
+	--Add 1 other DARK monster from your RP to your hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND)
@@ -81,7 +81,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	if tc:IsRelateToEffect(e) then
 		Duel.SendtoHand(tc,nil,REASON_EFFECT)
 	end
-	local g=Duel.GetMatchingGroup(aux.GraveValleyFilter(s.thfilter2),tp,0,LOCATION_REST,nil)
+	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.thfilter2),tp,0,LOCATION_REST,nil)
 	if #g>0 and Duel.SelectYesNo(1-tp,aux.Stringid(id,2)) then
 		Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_ATOHAND)
 		local sg=g:Select(1-tp,1,1,nil)

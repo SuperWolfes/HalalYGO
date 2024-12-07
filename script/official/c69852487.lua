@@ -1,5 +1,5 @@
 --希望皇アストラル・ホープ
---Utopic Astral Hope
+--Utopic Astellar Hope
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -41,10 +41,10 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_ONFIELD+LOCATION_HAND,0,1,c) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_ONFIELD+LOCATION_HAND,0,1,c) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToGraveAsCost,tp,LOCATION_ONFIELD+LOCATION_HAND,0,1,1,c)
-	Duel.SendtoGrave(g,REASON_COST)
+	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToRestAsCost,tp,LOCATION_ONFIELD+LOCATION_HAND,0,1,1,c)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.thfilter(c)
 	if not (c:IsActionalTrap() and c:IsAbleToHand()) then return false end

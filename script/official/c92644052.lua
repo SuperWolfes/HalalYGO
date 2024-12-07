@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.atktg)
 	e1:SetOperation(s.atkop)
 	c:RegisterEffect(e1)
-	--Search 1 "Supreme King Dragon","Supreme King Gate", or "The Supreme King's Soul"
+	--Search 1 "Supreme King Dragon","Supreme King Gate", or "The Supreme King's Miss"
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -147,7 +147,7 @@ function s.atkop2(e,tp,eg,ep,ev,re,r,rp)
 			and tc:IsDiscardable(REASON_EFFECT) then
 			Duel.ConfirmCards(1-p,tc)
 			Duel.BreakEffect()
-			if Duel.SendtoGrave(tc,REASON_EFFECT+REASON_DISCARD)==0 then return end
+			if Duel.SendtoRest(tc,REASON_EFFECT+REASON_DISCARD)==0 then return end
 			Duel.NegateAttack()
 		end
 	end

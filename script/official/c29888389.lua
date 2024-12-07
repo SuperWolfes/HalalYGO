@@ -18,7 +18,7 @@ s.listed_series={0x3a}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsDiscardable() end
-	Duel.SendtoGrave(c,REASON_COST+REASON_DISCARD)
+	Duel.SendtoRest(c,REASON_COST+REASON_DISCARD)
 end
 function s.filter(c)
 	return c:IsSetCard(0x3a) and c:GetType()==TYPE_ACTIONAL+TYPE_LOCKED and c:IsAbleToHand()

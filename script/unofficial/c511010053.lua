@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,5,3)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Immune
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -122,7 +122,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.repfilter(c,ec)
-	return c:GetEquipTarget()==ec and c:IsAbleToGrave() and c:GetFlagEffect(id)>0
+	return c:GetEquipTarget()==ec and c:IsAbleToRest() and c:GetFlagEffect(id)>0
 end
 function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -133,7 +133,7 @@ function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 		e:SetLabel(atk)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local sg=g:Select(tp,1,1,nil)
-		Duel.SendtoGrave(g,REASON_EFFECT+REASON_REPLACE)
+		Duel.SendtoRest(g,REASON_EFFECT+REASON_REPLACE)
 		return true
 	else return false end
 end

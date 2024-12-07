@@ -2,7 +2,7 @@
 --Madolche Fresh Sistart
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x71),2,2)
 	--destroy replace
 	local e1=Effect.CreateEffect(c)

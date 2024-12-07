@@ -14,10 +14,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsAstral()
+	return c:IsFaceup() and c:IsAstellar()
 end
 function s.filter(c,e,tp)
-	return c:IsAstral() and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsAstellar() and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil)

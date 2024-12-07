@@ -2,7 +2,7 @@
 --Decago Knight
 local s,id=GetID()
 function s.initial_effect(c)
-	--Shuffle all "Decago Knights" from GY to deck
+	--Shuffle all "Decago Knights" from RP to deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(95100664,0))
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)

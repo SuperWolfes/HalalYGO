@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,0x183))
 	e1:SetValue(aux.tgoval)
 	c:RegisterEffect(e1)
-	-- Add 1 "Vernalizer Wanderer" card from the GY to the hand
+	-- Add 1 "Vernalizer Wanderer" card from the RP to the hand
 	c:RegisterEffect(Effect.CreateVernalizerSPEffect(c,id,0,CATEGORY_TOHAND,s.thtg,s.thop))
 end
 s.listed_names={id}

@@ -1,5 +1,5 @@
 --アマゾネスの里 (Action Field)
---Amazoness Village (Action Field)
+--Amazonian Village (Action Field)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

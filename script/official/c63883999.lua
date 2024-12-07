@@ -57,7 +57,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp,chk)
 		local rg=Duel.SelectMatchingCard(tp,s.rfilter,tp,LOCATION_MZONE,0,1,1,tc,Duel.GetLocationCount(tp,LOCATION_MZONE))
 		if #rg>0 and Duel.Remove(rg,POS_FACEUP,REASON_EFFECT)>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-			local sg=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.spfilter),tp,LOCATION_HAND+LOCATION_REST+LOCATION_DECK,0,1,1,nil,tc:GetLevel(),e,tp)
+			local sg=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_HAND+LOCATION_REST+LOCATION_DECK,0,1,1,nil,tc:GetLevel(),e,tp)
 			Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)
 		end
 	end

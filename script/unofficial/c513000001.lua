@@ -1,5 +1,5 @@
 --聖なるバリア －ミラーフォース－ (Anime)
---Mirror Force (Anime)
+--Mirror Fcoree (Anime)
 --Scripted by edo9300
 local s,id=GetID()
 function s.initial_effect(c)

@@ -1,5 +1,5 @@
 --捕食植物スパイダー・オーキッド
---Predaplant Spider Orchid
+--Predaplant Spider Corehid
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

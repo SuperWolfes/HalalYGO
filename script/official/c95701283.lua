@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.sumop(g,e,tp,eg,ep,ev,re,r,rp,c,minc,zone,relzone,exeff)
-	--Send to GY during the End Phase
+	--Send to RP during the End Phase
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,1))
 	e1:SetCategory(CATEGORY_TOREST)
@@ -31,6 +31,6 @@ end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and c:IsFaceup() then
-		Duel.SendtoGrave(c,REASON_EFFECT)
+		Duel.SendtoRest(c,REASON_EFFECT)
 	end
 end

@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Opponent sends 1 card from hand to GY, then both players draw 1
+	--Opponent sends 1 card from hand to RP, then both players draw 1
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOREST+CATEGORY_DRAW)
@@ -26,7 +26,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.tgtg)
 	e2:SetOperation(s.tgop)
 	c:RegisterEffect(e2)
-	--Search 1 "Guardianual Water Art" card or 1 "Interwoven" Actional/Trap
+	--Search 1 "Spilocked Water Art" card or 1 "Interwoven" Actional/Trap
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND)
@@ -41,10 +41,10 @@ function s.initial_effect(c)
 end
 s.listed_series={0x614d,0xc0}
 function s.spfilter1(c)
-	return c:IsFaceup() and c:IsRace(RACE_MENTOR) and c:IsAbleToGraveAsCost()
+	return c:IsFaceup() and c:IsRace(RACE_MENTOR) and c:IsAbleToRestAsCost()
 end
 function s.spfilter2(c)
-	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_WATER) and c:IsLevelBelow(4) and c:IsAbleToGraveAsCost()
+	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_WATER) and c:IsLevelBelow(4) and c:IsAbleToRestAsCost()
 end
 function s.rescon(sg,e,tp,mg)
 	return aux.ChkfMMZ(1)(sg,e,tp,mg) and sg:IsExists(s.chk,1,nil,sg,tp)
@@ -77,7 +77,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	if e:GetHandler():IsLocation(LOCATION_DECK) then
 		Duel.ShuffleDeck(tp)
 	end
@@ -95,7 +95,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(1-tp,LOCATION_HAND,0)
 	if #g==0 then return end
 	local sg=g:RandomSelect(1-tp,1)
-	if Duel.SendtoGrave(sg,REASON_EFFECT)>0 then
+	if Duel.SendtoRest(sg,REASON_EFFECT)>0 then
 		local og=Duel.GetOperatedGroup()
 		if og:GetFirst():IsLocation(LOCATION_REST) then
 			Duel.BreakEffect()

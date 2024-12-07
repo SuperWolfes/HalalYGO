@@ -1,10 +1,10 @@
 --双天将 金剛
---Kongou, Heavenly General of the Souten
+--Kongou, Spectrumly General of the Souten
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion summon procedure
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMixN(c,true,true,85360035,1,aux.FilterBoolFunctionEx(Card.IsSetCard,0x14e),2)
 	--Activation limit
 	local e1=Effect.CreateEffect(c)

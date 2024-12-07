@@ -1,5 +1,5 @@
 --ぶつかり合う魂
---Clashing Souls
+--Clashing Misses
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -70,6 +70,6 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 		tg:Merge(g2)
 	end
 	if #tg>0 then
-		Duel.SendtoGrave(tg,REASON_EFFECT)
+		Duel.SendtoRest(tg,REASON_EFFECT)
 	end
 end

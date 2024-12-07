@@ -1,4 +1,4 @@
---Rank-Up-Magic Escape Force
+--Rank-Up-Ment Escape Fcoree
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

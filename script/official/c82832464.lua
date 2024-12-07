@@ -1,5 +1,5 @@
 --ネフティスの覚醒
---Awakening of Nephthys
+--Awakening of Nepolonis
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

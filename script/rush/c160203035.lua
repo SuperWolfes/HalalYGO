@@ -1,5 +1,5 @@
 --弧楽姫ホルン・ワン・ユエ
---Horn Wan Yue the Crescent Music Maiden
+--Horn Wan Yue the Crescent Nasheed Maiden
 local s,id=GetID()
 function s.initial_effect(c)
 	--ATK increase

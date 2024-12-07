@@ -13,7 +13,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_POLYMERIZATION}
 function s.cfilter(c)
-	return c:IsCode(CARD_POLYMERIZATION) and c:IsDiscardable() and c:IsAbleToGraveAsCost()
+	return c:IsCode(CARD_POLYMERIZATION) and c:IsDiscardable() and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end
@@ -40,7 +40,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local exg=Duel.SelectMatchingCard(tp,s.filter1,tp,LOCATION_EXTRA,0,1,1,nil,g)
 	if #exg>0 then
-		Duel.SendtoGrave(exg,REASON_EFFECT)
+		Duel.SendtoRest(exg,REASON_EFFECT)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local sg=g:FilterSelect(tp,s.filter2,1,1,nil,exg:GetFirst())
 		Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)
@@ -56,5 +56,5 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
+	Duel.SendtoRest(e:GetHandler(),REASON_EFFECT)
 end

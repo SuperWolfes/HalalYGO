@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0xc3),aux.FilterBoolFunctionEx(Card.IsSetCard,0xa9))
 	--Destroy 2 cards
 	local e1=Effect.CreateEffect(c)
@@ -62,7 +62,7 @@ function s.atkfilter(c)
 	return c:IsFaceup() and c:IsType(TYPE_FUSION) and c:GetBaseAttack()>0
 end
 function s.gyfilter(c)
-	return c:IsSetCard(0xad) and not c:IsCode(id) and c:IsAbleToGrave()
+	return c:IsSetCard(0xad) and not c:IsCode(id) and c:IsAbleToRest()
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and s.atkfilter(chkc) end
@@ -76,7 +76,7 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.gyfilter,tp,LOCATION_DECK+LOCATION_EXTRA,0,1,1,nil)
-	if #g>0 and Duel.SendtoGrave(g,REASON_EFFECT)>0 and g:GetFirst():IsLocation(LOCATION_REST)
+	if #g>0 and Duel.SendtoRest(g,REASON_EFFECT)>0 and g:GetFirst():IsLocation(LOCATION_REST)
 		and tc and tc:IsRelateToEffect(e) and tc:IsFaceup() then
 		--Increase ATK
 		local e1=Effect.CreateEffect(e:GetHandler())

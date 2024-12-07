@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_MENTAL),1,1,Synchro.NonTunerEx(Card.IsRace,RACE_MENTAL),2,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--remove
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

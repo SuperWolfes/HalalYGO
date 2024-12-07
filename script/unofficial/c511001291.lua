@@ -1,4 +1,4 @@
---Moonlight White Rabbit
+--Horizonlight White Rabbit
 local s,id=GetID()
 function s.initial_effect(c)
 	--to hand

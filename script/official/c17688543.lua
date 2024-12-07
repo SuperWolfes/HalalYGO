@@ -1,13 +1,15 @@
 --深すぎた墓穴
---The Deep Grave
+--The Deep Rest
 local s,id=GetID()
 function s.initial_effect(c)
-	--Activate
+	--Special Summon 1 monster during your next Standby Phase
 	local e1=Effect.CreateEffect(c)
+	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
+	e1:SetHintTiming(TIMING_END_PHASE,TIMING_END_PHASE)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
@@ -22,7 +24,7 @@ function s.filter(c,e,tp)
 			return false
 		end
 	end
-	return c:IsMonster() and (not c:IsHasEffect(EFFECT_REVIVE_LIMIT) or c:IsStatus(STATUS_PROC_COMPLETE))
+	return c:IsMonster() and (not c:IsHasEffect(EFFECT_AWAKE_LIMIT) or c:IsStatus(STATUS_PROC_COMPLETE))
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REST) and s.filter(chkc,e,tp) end
@@ -40,11 +42,11 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e1:SetCode(EVENT_PHASE+PHASE_STANDBY)
 	e1:SetCountLimit(1)
-	e1:SetReset(RESET_PHASE+PHASE_STANDBY+RESET_SELF_TURN,res)
 	e1:SetLabel(turn_asc+Duel.GetTurnCount())
 	e1:SetLabelObject(tc)
 	e1:SetCondition(s.spcon)
 	e1:SetOperation(s.spop)
+	e1:SetReset(RESET_PHASE|PHASE_STANDBY|RESET_SELF_TURN,res)
 	Duel.RegisterEffect(e1,tp)
 	tc:CreateEffectRelation(e1)
 end

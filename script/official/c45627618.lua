@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_DRAGON),7,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--pendulum summon
 	Pendulum.AddProcedure(c,false)
 	--pendulum set

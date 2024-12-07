@@ -3,7 +3,7 @@
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	-- Send 1 card to the GY and Set 1 card from the GY
+	-- Send 1 card to the RP and Set 1 card from the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOREST+CATEGORY_LEAVE_REST)
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.tgfilter(c,e)
-	return c:IsAbleToGrave() and c:IsCanBeEffectTarget(e)
+	return c:IsAbleToRest() and c:IsCanBeEffectTarget(e)
 end
 function s.setfilter(c,e,tp)
 	return c:IsCanBeEffectTarget(e) and ((c:IsActionalTrap() and c:IsSSetable(true))
@@ -54,7 +54,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.GetTargetCards(e)
 	if #tg==0 then return end
 	local g1,g2=tg:Split(Card.IsOnField,nil)
-	if #g1>0 and Duel.SendtoGrave(g1,REASON_EFFECT)>0 and g1:GetFirst():IsLocation(LOCATION_REST) then
+	if #g1>0 and Duel.SendtoRest(g1,REASON_EFFECT)>0 and g1:GetFirst():IsLocation(LOCATION_REST) then
 		local sc=g2:GetFirst()
 		if not sc then return end
 		if sc:IsMonster() and Duel.GetLocationCount(1-tp,LOCATION_MZONE)>0

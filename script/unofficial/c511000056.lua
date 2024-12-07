@@ -55,7 +55,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		sg:AddCard(tc)
 		local g1=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_EXTRA,0,nil,e,tp,2403771,sg)
 		local g2=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_EXTRA,0,nil,e,tp,25862681,sg)
-		if #g1>0 and #g2>0 and Duel.SendtoGrave(sg,REASON_EFFECT)>0 then
+		if #g1>0 and #g2>0 and Duel.SendtoRest(sg,REASON_EFFECT)>0 then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 			local sg1=g1:Select(tp,1,1,nil)
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)

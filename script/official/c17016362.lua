@@ -1,10 +1,10 @@
 --Ｅｍトラピーズ・マジシャン
---Performage Trapeze Magician
+--Performanced Trapeze Mentor
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Xyz summon procedure
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_MENTOR),4,2)
 	--Take no effect damage, if the amount is less than this card's ATK
@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.mttg)
 	e2:SetOperation(s.mtop)
 	c:RegisterEffect(e2,false,REGISTER_FLAG_DETACH_XMAT)
-	--Special summon "Performage" monster from deck
+	--Special summon "Performanced" monster from deck
 	local e3=Effect.CreateEffect(c)
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)

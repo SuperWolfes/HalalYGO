@@ -1,5 +1,5 @@
 --サーヴァント・オブ・エンディミオン
---Servant of Endymion
+--Servant of Edypsos
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
@@ -65,7 +65,7 @@ end
 s.counter_place_list={COUNTER_ACTIONAL}
 function s.ctop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_ACTIONAL) and re:GetHandler()~=c then
+	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActionalEffect() and re:GetHandler()~=c then
 		c:AddCounter(COUNTER_ACTIONAL,1)
 	end
 end
@@ -87,6 +87,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not (c:IsRelateToEffect(e) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and (Duel.GetLocationCount(tp,LOCATION_MZONE)>=2))
 		or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_DECK,0,1,1,nil,e,tp)
 	if #g>0 then
 		g:AddCard(c)

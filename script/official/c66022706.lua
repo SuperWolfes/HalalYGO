@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
 	e1:SetValue(s.hspval)
 	c:RegisterEffect(e1)
-	--Add 1 "Mekk-Knight" monster from GY to hand
+	--Add 1 "Mekk-Knight" monster from RP to hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TOHAND)

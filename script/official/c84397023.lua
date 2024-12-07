@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.op)
 	c:RegisterEffect(e1)
 end
-s.roll_suffice=true
+s.roll_dice=true
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_HAND,0,1,nil) end
 end
@@ -19,8 +19,8 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,Card.IsMonster,tp,LOCATION_HAND,0,1,1,nil)
 	if #g>0 then
 		Duel.ConfirmCards(1-tp,g)
-		local ct=Duel.TossSuffice(tp,1)
-		if ct==1 then Duel.SendtoGrave(g,REASON_EFFECT)
+		local ct=Duel.TossDice(tp,1)
+		if ct==1 then Duel.SendtoRest(g,REASON_EFFECT)
 		else
 			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetType(EFFECT_TYPE_SINGLE)

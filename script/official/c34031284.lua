@@ -2,7 +2,7 @@
 --Ojama Emperor
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_BEAST),3,nil,s.matcheck)
 	--Increase ATK
 	local e1=Effect.CreateEffect(c)

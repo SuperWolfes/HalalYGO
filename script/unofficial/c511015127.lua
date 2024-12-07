@@ -35,7 +35,7 @@ function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	return true
 end
 function s.repop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT+REASON_REPLACE,1-tp)
+	Duel.SendtoRest(e:GetHandler(),REASON_EFFECT+REASON_REPLACE,1-tp)
 end
 function s.hdcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp and not e:GetHandler():IsPreviousControler(tp)
@@ -49,6 +49,6 @@ function s.hdop(e,tp,eg,ep,ev,re,r,rp)
 		local g=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
 		if #g==0 then return end
 		local sg=g:RandomSelect(tp,1)
-		Duel.SendtoGrave(sg,REASON_DISCARD+REASON_EFFECT)
+		Duel.SendtoRest(sg,REASON_DISCARD+REASON_EFFECT)
 	end
 end

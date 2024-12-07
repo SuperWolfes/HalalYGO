@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,160006025,CARD_TASTE_INSPECTOR)
 	--Destroy all level 7 or lower monsters on the field
 	local e1=Effect.CreateEffect(c)
@@ -31,7 +31,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,#g,0,0)
 end
 function s.desfilter(c)
-	return c:IsLevelBelow(9) and c:IsFaceup() and (not c:IsAttribute(ATTRIBUTE_FIRE))
+	return c:IsLevelBelow(9) and c:IsFaceup() and (not c:IsAttribute(ATTRIBUTE_FIRE)) and c:IsNotMaximumModeSide()
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

@@ -1,5 +1,5 @@
 -- ヴァリアンツの巫女－東雲
--- Shinonome, Priestess of the Valiants
+-- Shinonome, Helperess of the Valiants
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)

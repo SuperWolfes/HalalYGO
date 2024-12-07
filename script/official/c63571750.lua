@@ -19,7 +19,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) then return end
-	c:CancelToGrave()
+	c:CancelToRest()
 	if Duel.SendtoDeck(c,tp,SEQ_DECKSHUFFLE,REASON_EFFECT)~=0 and c:IsLocation(LOCATION_DECK) then
 		c:ReverseInDeck()
 		local e1=Effect.CreateEffect(c)
@@ -45,7 +45,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) and c:IsRelateToEffect(e) then
-		if Duel.SendtoGrave(c,REASON_EFFECT)~=0 and c:IsLocation(LOCATION_REST) then
+		if Duel.SendtoRest(c,REASON_EFFECT)~=0 and c:IsLocation(LOCATION_REST) then
 			Duel.SendtoHand(tc,nil,REASON_EFFECT)
 			Duel.ConfirmCards(1-tp,tc)
 		end

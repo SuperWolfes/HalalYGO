@@ -1,5 +1,5 @@
 --機巧蛇－叢雲遠呂智
---Gizmek Orochi, the Serpentron Sky Slasher
+--Gizmek Ortich, the Serpentron Sky Slasher
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)

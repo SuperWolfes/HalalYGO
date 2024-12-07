@@ -1,5 +1,5 @@
 --奇跡のマジック・ゲート
---Magic Gate of Pulses
+--Ment Gate of Pulses
 --Updated by Larry126
 
 local s,id=GetID()

@@ -1,5 +1,5 @@
 --ナイト・ドラゴリッチ
---Night Dragolich
+--Night Dragohitch
 local s,id=GetID()
 function s.initial_effect(c)
 	--position change

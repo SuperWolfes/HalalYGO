@@ -3,7 +3,7 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special summon 1 "Sylvan" monster from hand or GY
+	--Special summon 1 "Sylvan" monster from hand or RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TODECK+CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -36,7 +36,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local opt=Duel.SelectOption(tp,aux.Stringid(id,0),aux.Stringid(id,1))
 		Duel.SendtoDeck(g,nil,opt,REASON_EFFECT)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local sg=Duel.SelectMatchingCard(tp,aux.GraveValleyFilter(s.spfilter),tp,LOCATION_HAND+LOCATION_REST,0,1,1,tc,e,tp)
+		local sg=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_HAND+LOCATION_REST,0,1,1,tc,e,tp)
 		local sc=sg:GetFirst()
 		if sc then
 			Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)

@@ -1,9 +1,9 @@
 --魔鍵召竜－アンドラビムス
---Magikey Summon Dragon - Andrabimus
+--Menkey Summon Dragon - Andrabimus
 --scripted by Rundas
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,s.matfilter1,s.matfilter2)
 	--No Cards and Effects on Fusion Summon
 	local e0=Effect.CreateEffect(c)
@@ -63,7 +63,7 @@ function s.limop(e,tp,eg,ep,ev,re,r,rp)
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		e1:SetCode(EVENT_CHAINING)
-		e1:SetOperation(s.resetop)
+		e1:SetOperation(s.revetop)
 		Duel.RegisterEffect(e1,tp)
 		local e2=e1:Clone()
 		e2:SetCode(EVENT_BREAK_EFFECT)
@@ -77,7 +77,7 @@ function s.limop2(e,tp,eg,ep,ev,re,r,rp)
 	end
 	e:GetHandler():ResetFlagEffect(id)
 end
-function s.resetop(e,tp,eg,ep,ev,re,r,rp)
+function s.revetop(e,tp,eg,ep,ev,re,r,rp)
 	e:GetHandler():ResetFlagEffect(id)
 	e:Reset()
 end

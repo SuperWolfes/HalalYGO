@@ -87,13 +87,13 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.discfilter(c)
-	return c:IsMonster() and c:IsSetCard(0x99) and c:IsAbleToGraveAsCost()
+	return c:IsMonster() and c:IsSetCard(0x99) and c:IsAbleToRestAsCost()
 end
 function s.discost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.discfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.discfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.distg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:GetControler()~=tp and chkc:IsNegatableMonster() end
@@ -170,13 +170,13 @@ function s.dm2con(e,tp,eg,ep,ev,re,r,rp)
 	return (a:IsControler(tp) or (d and d:IsControler(tp))) and Duel.GetFlagEffect(tp,id+1)==0
 end
 function s.dm2filter(c)
-	return c:IsMonster() and c:IsAbleToGraveAsCost() and c:IsSetCard(0x99)
+	return c:IsMonster() and c:IsAbleToRestAsCost() and c:IsSetCard(0x99)
 end
 function s.dm2cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.dm2filter,tp,LOCATION_HAND,0,2,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.dm2filter,tp,LOCATION_HAND,0,2,2,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	Duel.RegisterFlagEffect(tp,id+1,RESET_PHASE+PHASE_DAMAGE_CAL,0,1)
 end
 function s.dm2op(e,tp,eg,ep,ev,re,r,rp)

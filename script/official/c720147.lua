@@ -48,7 +48,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,0))
 		local g=Duel.SelectMatchingCard(tp,s.matfilter,tp,LOCATION_HAND+LOCATION_MZONE+LOCATION_REST,0,#rg,#rg,rg,tc)
 		if #g>0 then
-			g:ForEach(Card.CancelToGrave)
+			g:ForEach(Card.CancelToRest)
 			Duel.Overlay(tc,g,true)
 		end
 	end

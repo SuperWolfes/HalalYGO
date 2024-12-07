@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	local e2=e1:Clone()
 	e2:SetCode(EFFECT_UNRELEASABLE_NONSUM)
 	c:RegisterEffect(e2)
-	--Can send 1 monster from your Extra Deck to the GY to Locked Summon
+	--Can send 1 monster from your Extra Deck to the RP to Locked Summon
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
 	e3:SetCode(EFFECT_EXTRA_LOCKED_MATERIAL)
@@ -24,14 +24,14 @@ function s.initial_effect(c)
 	e3:SetCondition(function(e) return Duel.GetFlagEffect(e:GetHandlerPlayer(),id)==0 end)
 	e3:SetTarget(s.mttg)
 	e3:SetValue(1)
-	e3:SetLabelObject({s.forced_replacement})
+	e3:SetLabelObject({s.fcoreed_replacement})
 	c:RegisterEffect(e3)
 end
 function s.mttg(e,c)
 	local g=Duel.GetMatchingGroup(nil,e:GetHandlerPlayer(),LOCATION_EXTRA,0,nil)
 	return g:IsContains(c)
 end
-function s.forced_replacement(e,tp,sg,rc)
+function s.fcoreed_replacement(e,tp,sg,rc)
 	local ct=sg:FilterCount(Card.IsLocation,nil,LOCATION_EXTRA)
 	return ct<=1,ct>1
 end

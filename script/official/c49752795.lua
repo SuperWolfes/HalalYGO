@@ -1,5 +1,5 @@
 --双天の再来
---Guardian Avatar Returns
+--Dual Avatar Returns
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 s.listed_series={0x14e}
-s.listed_names={TOKEN_GUARDIAN_AVATAR_GUARDIAN}
+s.listed_names={TOKEN_DUAL_AVATAR_GUARDIAN}
 function s.filter(c,e,tp)
 	return c:IsSetCard(0x14e) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
@@ -32,10 +32,10 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) and Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)>0 then
 		if tc:HasLevel() and tc:GetOriginalLevel()<5 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-			and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_GUARDIAN_AVATAR_GUARDIAN,0x14e,TYPES_TOKEN,0,0,2,RACE_WARRIOR,ATTRIBUTE_LIGHT)
+			and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_DUAL_AVATAR_GUARDIAN,0x14e,TYPES_TOKEN,0,0,2,RACE_WARRIOR,ATTRIBUTE_LIGHT)
 			and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then 
 			Duel.BreakEffect()
-			local token=Duel.CreateToken(tp,TOKEN_GUARDIAN_AVATAR_GUARDIAN)
+			local token=Duel.CreateToken(tp,TOKEN_DUAL_AVATAR_GUARDIAN)
 			Duel.SpecialSummon(token,0,tp,tp,false,false,POS_FACEUP)
 		end
 	end

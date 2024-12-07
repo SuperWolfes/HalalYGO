@@ -19,7 +19,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local sg=Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_ONFIELD,nil)
 	local tc=sg:GetFirst()
 	while tc do
-		tc:CancelToGrave()
+		tc:CancelToRest()
 		Duel.ChangePosition(tc,POS_FACEDOWN)
 		tc=sg:GetNext()
 	end

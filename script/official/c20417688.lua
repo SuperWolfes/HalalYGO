@@ -63,7 +63,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.cpfilter(c)
-	return c:IsLockedActional() and c:IsAbleToGraveAsCost() and c:CheckActivateEffect(true,true,false)~=nil
+	return c:IsLockedActional() and c:IsAbleToRestAsCost() and c:CheckActivateEffect(true,true,false)~=nil
 end
 function s.cptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then
@@ -76,7 +76,7 @@ function s.cptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local g=Duel.SelectMatchingCard(tp,s.cpfilter,tp,LOCATION_HAND,0,1,1,nil)
 	local te=g:GetFirst():CheckActivateEffect(true,true,false)
 	e:SetLabelObject(te)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	e:SetProperty(te:GetProperty())
 	local tg=te:GetTarget()
 	if tg then tg(e,tp,eg,ep,ev,re,r,rp,1) end

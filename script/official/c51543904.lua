@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz summon
 	Xyz.AddProcedure(c,nil,10,3,s.ovfilter,aux.Stringid(id,0),3,s.xyzop)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,1))
@@ -43,7 +43,7 @@ function s.xyzop(e,tp,chk,mc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 	local tc=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_HAND,0,nil):SelectUnselect(Group.CreateGroup(),tp,false,Xyz.ProcCancellable)
 	if tc then
-		Duel.SendtoGrave(tc,REASON_DISCARD+REASON_COST)
+		Duel.SendtoRest(tc,REASON_DISCARD+REASON_COST)
 		return true
 	else return false end
 end

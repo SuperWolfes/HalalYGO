@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.rdop)
 	c:RegisterEffect(e2)
 end
-s.roll_suffice=true
+s.roll_dice=true
 function s.rdcon(e,tp,eg,ep,ev,re,r,rp)
 	return tp==Duel.GetTurnPlayer()
 end
@@ -33,7 +33,7 @@ function s.rdop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	local d1=6
 	while d1==6 do
-		d1=Duel.TossSuffice(tp,1)
+		d1=Duel.TossDice(tp,1)
 	end
 	local tc=Duel.GetFieldCard(1-tp,LOCATION_MZONE,d1-1)
 	if tc then

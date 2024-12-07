@@ -1,10 +1,10 @@
 --焔凰神－ネフティス
---Nephthys, the Sacred Flame
+--Nepolonis, the Clean Flame
 local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
 	Link.AddProcedure(c,nil,2,99,s.lcheck)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--effect gain
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)

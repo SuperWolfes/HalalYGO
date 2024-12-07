@@ -41,26 +41,26 @@ function s.initial_effect(c)
 	e4:SetOperation(s.atkop)
 	c:RegisterEffect(e4)
 end
-s.listed_series={0x8}
+s.listed_series={SET_HERO}
 function s.filter(c)
-	return c:IsLevelAbove(5) and c:IsSetCard(0x8)
+	return c:IsLevelAbove(5) and c:IsSetCard(SET_HERO)
 end
 function s.tgocon(e)
-	return Duel.GetFieldCard(e:GetHandlerPlayer(),LOCATION_SZONE,5)
+	return Duel.GetFieldCard(e:GetHandlerPlayer(),LOCATION_FZONE,0)
 end
 function s.atkval(e,c)
 	local def=c:GetBaseDefense()
 	return def>=0 and def or 0
 end
 function s.actfilter(c,tp)
-	return c:IsType(TYPE_FIELD) and c:GetActivateEffect():IsActivatable(tp,true,true)
+	return c:IsFieldActional() and c:GetActivateEffect():IsActivatable(tp,true,true)
 end
 function s.acttg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.actfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil,tp) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.actfilter,tp,LOCATION_HAND|LOCATION_DECK,0,1,nil,tp) end
 end
 function s.actop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
-	local sc=Duel.SelectMatchingCard(tp,s.actfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,1,nil,tp):GetFirst()
+	local sc=Duel.SelectMatchingCard(tp,s.actfilter,tp,LOCATION_HAND|LOCATION_DECK,0,1,1,nil,tp):GetFirst()
 	Duel.ActivateFieldActional(sc,e,tp,eg,ep,ev,re,r,rp)
 end
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
@@ -69,8 +69,8 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 		and ec:IsStatus(STATUS_OPPO_BATTLE) and ec:CanChainAttack()
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
+	Duel.SendtoRest(e:GetHandler(),REASON_COST)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ChainAttack()

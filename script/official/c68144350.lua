@@ -1,5 +1,5 @@
 --BK スイッチヒッター
---Battlin' Boxer Switchitter
+--Battlin' Boxer Smintitter
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon

@@ -1,5 +1,5 @@
 --WW－グラス・ベル
---Windwitch - Glass Bell
+--Windmint - Glass Bell
 local s,id=GetID()
 function s.initial_effect(c)
 	--tohand

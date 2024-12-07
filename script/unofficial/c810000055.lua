@@ -24,6 +24,6 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local sg=eg:Filter(Card.IsRelateToEffect,nil,e):Filter(Card.IsControler,nil,1-tp)
 	if #sg>0 then
-		Duel.SendtoGrave(sg,REASON_EFFECT)
+		Duel.SendtoRest(sg,REASON_EFFECT)
 	end
 end

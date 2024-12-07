@@ -69,7 +69,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e2,tp)
 end
-	--Gravericted to locked monsters for rest of the turn
+	--Restricted to locked monsters for rest of the turn
 function s.splimit(e,c)
 	if c:IsMonster() then
 		return not c:IsType(TYPE_LOCKED)

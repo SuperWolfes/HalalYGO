@@ -1,5 +1,5 @@
---The blazing MARS
---The Blazing Mars
+--The blazing QUEST
+--The Blazing Quest
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon
@@ -58,13 +58,13 @@ function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCurrentPhase()==PHASE_MAIN1
 end
 function s.ncostfilter(c)
-	return not c:IsAbleToGraveAsCost()
+	return not c:IsAbleToRestAsCost()
 end
 function s.damcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetFieldGroup(tp,LOCATION_MZONE,0)
 	g:RemoveCard(e:GetHandler())
 	if chk==0 then return #g>0 and not g:IsExists(s.ncostfilter,1,nil) end
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	local ct=g:FilterCount(Card.IsLocation,nil,LOCATION_REST)
 	e:SetLabel(ct)
 end

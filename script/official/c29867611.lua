@@ -6,7 +6,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--From cards_specific_functions.lua
 	aux.AddAttractionEquipProc(c)
-	--You: The equipped monster gains 500 ATK, also if it would be destroyed by battle or card effect, you can send this card to the GY instead.
+	--You: The equipped monster gains 500 ATK, also if it would be destroyed by battle or card effect, you can send this card to the RP instead.
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_EQUIP)
 	e2:SetCode(EFFECT_UPDATE_ATTACK)
@@ -39,7 +39,7 @@ function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tc=c:GetEquipTarget()
 	if chk==0 then return tc:GetControler()==tp and not tc:IsReason(REASON_REPLACE) end
 	if Duel.SelectEffectYesNo(tp,c,96) then
-		Duel.SendtoGrave(c,REASON_EFFECT)
+		Duel.SendtoRest(c,REASON_EFFECT)
 		return true
 	else return false end
 end

@@ -13,5 +13,5 @@ function s.fextra(e,tp,mg)
 	return nil
 end
 function s.exfilter(c)
-	return c:IsType(TYPE_FUSION) and c:IsAbleToGrave()
+	return c:IsType(TYPE_FUSION) and c:IsAbleToRest()
 end

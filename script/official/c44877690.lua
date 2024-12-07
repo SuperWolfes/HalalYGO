@@ -1,11 +1,11 @@
 --氷結界の神精霊
---Sacred Guardian of the Ice Barrier
+--Clean Guardian of the Ice Barrier
 local s,id=GetID()
 function s.initial_effect(c)
 	local sme,soe=Guardian.AddProcedure(c,EVENT_SUMMON_SUCCESS,EVENT_FLIP)
 	--Mandatory return
 	sme:SetDescription(aux.Stringid(id,0))
-	sme:SetCondition(aux.OR(s.icecon,Guardian.MandatoryReturnCondition))
+	sme:SetCondition(s.mretcon)
 	sme:SetTarget(s.mrettg)
 	sme:SetOperation(s.mretop)
 	--Optional return
@@ -17,14 +17,18 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_SPSUMMON_CONDITION)
 	c:RegisterEffect(e1)
 end
-s.listed_series={0x2f}
+s.listed_series={SET_ICE_BARRIER}
 function s.icecon(e,tp)
-	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,0x2f),tp,LOCATION_MZONE,0,1,e:GetHandler())
+	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,SET_ICE_BARRIER),tp,LOCATION_MZONE,0,1,e:GetHandler())
+end
+function s.mretcon(e,tp,eg,ep,ev,re,r,rp)
+	return Guardian.CommonCondition(e) and (s.icecon(e,tp) or Guardian.MandatoryReturnCondition(e))
 end
 function s.mrettg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	if s.icecon(e,tp) then
 		e:SetProperty(EFFECT_FLAG_CARD_TARGET)
+		e:GetHandler():ResetFlagEffect(FLAG_GUARDIAN_RETURN)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RTOHAND)
 		local g=Duel.SelectTarget(tp,Card.IsAbleToHand,tp,0,LOCATION_MZONE,1,1,nil)
 		Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,#g,0,0)

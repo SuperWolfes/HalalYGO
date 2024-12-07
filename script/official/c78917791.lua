@@ -1,9 +1,9 @@
 --天威の龍仙女
---Shaman of the Tenyi
+--Shaman of the Tenbree
 local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_WYRM),2,2)
 	--special summon
 	local e1=Effect.CreateEffect(c)

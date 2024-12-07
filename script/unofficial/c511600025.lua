@@ -1,4 +1,4 @@
---Guardian Assembwurm
+--Dual Assembwurm
 --デュアル・アセンブルム
 --scripted by Larry126
 --fixed by MLD

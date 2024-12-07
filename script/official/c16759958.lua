@@ -1,9 +1,9 @@
 --アロマセラフィ－アンゼリカ
---Aromaseraphy Angelica
+--Aromawatchery Angelica
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Gain LP equal to targeted "Aroma" monster in your GY
+	--Gain LP equal to targeted "Aroma" monster in your RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_RECOVER)
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.recop)
 	e1:SetHintTiming(0,TIMING_MAIN_END+TIMING_END_PHASE)
 	c:RegisterEffect(e1)
-	--Special summon itself from GY
+	--Special summon itself from RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -33,7 +33,7 @@ s.listed_series={0xc9}
 
 function s.reccost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsDiscardable() end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST+REASON_DISCARD)
+	Duel.SendtoRest(e:GetHandler(),REASON_COST+REASON_DISCARD)
 end
 function s.recfilter(c)
 	return c:IsSetCard(0xc9) and c:GetAttack()>0

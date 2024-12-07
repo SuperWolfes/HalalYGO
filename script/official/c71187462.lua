@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
 	e1:SetCondition(s.spcon)
 	c:RegisterEffect(e1)
-	-- Send this card and "Blackwing" non-tuners to the GY
+	-- Send this card and "Blackwing" non-tuners to the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TOREST+CATEGORY_SPECIAL_SUMMON)
@@ -24,9 +24,9 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 s.listed_names={id,CARD_BLACK_WINGED_DRAGON}
-s.listed_series={0x33}
+s.listed_series={SET_BLACKWING}
 function s.spconfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x33) and not c:IsCode(id)
+	return c:IsFaceup() and c:IsSetCard(SET_BLACKWING) and not c:IsCode(id)
 end
 function s.spcon(e,c)
 	if c==nil then return true end
@@ -38,7 +38,7 @@ function s.spfilter(c,e,tp,ec)
 		and Duel.GetLocationCountFromEx(tp,tp,ec,c)>0
 end
 function s.tgfilter(c)
-	return c:IsSetCard(0x33) and not c:IsType(TYPE_TUNER) and c:HasLevel() and c:IsAbleToGrave()
+	return c:IsSetCard(SET_BLACKWING) and not c:IsType(TYPE_TUNER) and c:HasLevel() and c:IsAbleToRest()
 end
 function s.tgrescon(clv)
 	return function(sg)
@@ -49,7 +49,7 @@ end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		local c=e:GetHandler()
-		if not c:IsAbleToGrave() or c:IsLevelAbove(8)
+		if not c:IsAbleToRest() or c:IsLevelAbove(8)
 			or not Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,c) then return false end
 		local g=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_DECK,0,nil)
 		return aux.SelectUnselectGroup(g,e,tp,1,#g,s.tgrescon(c:GetLevel()),0)
@@ -59,12 +59,13 @@ function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:IsRelateToEffect(e) and c:IsAbleToGrave() and c:IsLevelBelow(7) then
+	if c:IsRelateToEffect(e) and c:IsAbleToRest() and c:IsLevelBelow(7) then
 		local g=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_DECK,0,nil)
 		local rescon=s.tgrescon(c:GetLevel())
 		local mg=aux.SelectUnselectGroup(g,e,tp,1,#g,rescon,1,tp,HINTMSG_TOREST,rescon)
-		if #mg>0 and Duel.SendtoGrave(c+mg,REASON_EFFECT)>0
-			and (c:IsLocation(LOCATION_REST) or mg:IsExists(Card.IsLocation,1,nil,LOCATION_REST)) then
+		if #mg>0 and Duel.SendtoRest(c+mg,REASON_EFFECT)>0 then
+			local og=Duel.GetOperatedGroup()
+			if og:FilterCount(Card.IsLocation,nil,LOCATION_REST)~=#og then return end
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 			local sg=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
 			if #sg>0 then
@@ -80,7 +81,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
 	e1:SetTargetRange(1,0)
 	e1:SetTarget(function(_,c) return c:IsLocation(LOCATION_EXTRA) and not c:IsAttribute(ATTRIBUTE_DARK) end)
-	e1:SetReset(RESET_PHASE+PHASE_END)
+	e1:SetReset(RESET_PHASE|PHASE_END)
 	Duel.RegisterEffect(e1,tp)
 	--Clock Lizard check
 	aux.addTempLizardCheck(e:GetHandler(),tp,s.lizfilter)

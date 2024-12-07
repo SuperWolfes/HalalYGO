@@ -4,8 +4,8 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Synchro Summon procedure
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
-	c:EnableReviveLimit()
-	--Send to the GY and decrease Level
+	c:EnableAwakeLimit()
+	--Send to the RP and decrease Level
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOREST)
@@ -34,7 +34,7 @@ function s.lvlcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_SYNCHRO)
 end
 function s.tgfilter(c,lv)
-	return c:IsLevelBelow(lv-1) and c:IsAbleToGrave()
+	return c:IsLevelBelow(lv-1) and c:IsAbleToRest()
 end
 function s.lvtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil,e:GetHandler():GetLevel()) end
@@ -45,7 +45,7 @@ function s.lvop(e,tp,eg,ep,ev,re,r,rp)
 	if not (c:IsRelateToEffect(e) and c:IsFaceup()) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil,c:GetLevel())
-	if #g==0 or Duel.SendtoGrave(g,REASON_EFFECT)~=g:FilterCount(Card.IsLocation,nil,LOCATION_REST) then return end
+	if #g==0 or Duel.SendtoRest(g,REASON_EFFECT)~=g:FilterCount(Card.IsLocation,nil,LOCATION_REST) then return end
 	local tc=g:GetFirst()
 	local lv=tc:GetLevel()
 	--Change Level

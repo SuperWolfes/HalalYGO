@@ -40,7 +40,7 @@ function s.initial_effect(c)
 	local e4a=e4:Clone()
 	e4a:SetCode(EVENT_BE_MATERIAL)
 	c:RegisterEffect(e4a)
-	-- Return banished Reptiles to GY
+	-- Return banished Reptiles to RP
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(id,1))
 	e5:SetCategory(CATEGORY_TOREST)
@@ -94,6 +94,6 @@ end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsRace,RACE_REPTILE),tp,LOCATION_REMOVED,0,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT+REASON_RETURN)
+		Duel.SendtoRest(g,REASON_EFFECT+REASON_RETURN)
 	end
 end

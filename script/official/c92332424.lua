@@ -71,7 +71,7 @@ end
 function s.ptcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsDiscardable() end
-	Duel.SendtoGrave(c,REASON_COST+REASON_DISCARD)
+	Duel.SendtoRest(c,REASON_COST+REASON_DISCARD)
 end
 function s.pttg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFlagEffect(tp,id)==0 end
@@ -89,7 +89,7 @@ function s.ptop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetValue(aux.tgoval)
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e1,tp)
-	-- "Dracoslayer" monsters destruction protection
+	-- "Dracoslayer" monsters mismatching protection
 	local e2=e1:Clone()
 	e2:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
 	e2:SetProperty(0)

@@ -1,5 +1,5 @@
 --闇黒の魔王ディアボロス
---Darkest Diabolos, Lord of the Lair
+--Darkest Diabolos, Watcher of the Lair
 --Scripted by Eerie Code, completed by Lyris
 local s,id=GetID()
 function s.initial_effect(c)

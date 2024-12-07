@@ -34,7 +34,7 @@ function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	local mode=e:GetLabel()
 	local g=eg:Filter(aux.NOT(Card.IsPublic),nil)
-	if chk==0 then return (mode==0 or c:IsAbleToGrave()) and ep==tp and #g>0 end
+	if chk==0 then return (mode==0 or c:IsAbleToRest()) and ep==tp and #g>0 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_CONFIRM)
 	local sg=g:Select(tp,1,1,nil):GetFirst()
 	Duel.ConfirmCards(1-tp,sg)
@@ -48,7 +48,7 @@ end
 function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) then return end
-	if e:GetLabel()==1 and Duel.SendtoGrave(c,REASON_EFFECT)==0 then return end
+	if e:GetLabel()==1 and Duel.SendtoRest(c,REASON_EFFECT)==0 then return end
 	local tc=Duel.GetFirstTarget()
 	if not (tc and tc:IsRelateToEffect(e)) then return end
 	if Duel.SendtoDeck(tc,nil,SEQ_DECKBOTTOM,REASON_EFFECT)>0

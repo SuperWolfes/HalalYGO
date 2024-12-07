@@ -1,10 +1,10 @@
 --サウザンド・アイズ・サクリファイス
---Thousand-Eyes Graverict (GOAT)
+--Thousand-Eyes Restrict (GOAT)
 --Gains stats of trap monsters as well
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,64631466,27125110)
 	--equip
 	local e1=Effect.CreateEffect(c)

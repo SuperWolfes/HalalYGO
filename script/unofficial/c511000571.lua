@@ -37,7 +37,7 @@ function s.initial_effect(c)
 end
 s.listed_names={75923050}
 s.dm=true
-s.dm_revive_limit=true
+s.dm_awake_limit=true
 function s.atkcon(e)
 	local ph=Duel.GetCurrentPhase()
 	if not (ph==PHASE_DAMAGE or ph==PHASE_DAMAGE_CAL) then return false end

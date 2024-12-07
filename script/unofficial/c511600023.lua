@@ -89,7 +89,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			end
 		end
 		if equip and not c:IsStatus(STATUS_LEAVE_CONFIRMED) then
-			c:CancelToGrave(false)
+			c:CancelToRest(false)
 		end
 	end
 end

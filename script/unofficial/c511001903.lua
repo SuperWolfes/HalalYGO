@@ -27,7 +27,7 @@ function s.initial_effect(c)
 end
 s.listed_names={22056710}
 function s.thfilter(c)
-	return c:IsRace(RACE_CONTAMINED) and c:IsAbleToHand()
+	return c:IsRace(RACE_TOXIC) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -49,5 +49,5 @@ function s.descon(e)
 	return not Duel.IsExistingMatchingCard(s.cfilter,e:GetHandlerPlayer(),LOCATION_ONFIELD,0,1,nil)
 end
 function s.destg(e,c)
-	return (c:IsFaceup() and c:IsRace(RACE_CONTAMINED)) or c==e:GetHandler()
+	return (c:IsFaceup() and c:IsRace(RACE_TOXIC)) or c==e:GetHandler()
 end

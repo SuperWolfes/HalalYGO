@@ -36,7 +36,7 @@ end
 function s.extraop(e,tc,tp,sg)
 	local rg=sg:Filter(Card.IsLocation,nil,LOCATION_HAND)
 	if #rg>0 then
-		Duel.SendtoGrave(rg,REASON_DISCARD+REASON_EFFECT+REASON_FUSION+REASON_MATERIAL)
+		Duel.SendtoRest(rg,REASON_DISCARD+REASON_EFFECT+REASON_FUSION+REASON_MATERIAL)
 		sg:Sub(rg)
 	end
 	Fusion.BanishMaterial(e,tc,tp,sg)
@@ -63,6 +63,6 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_HAND,0,1,1,nil)
 	if #g>0 then
 		Duel.BreakEffect()
-		Duel.SendtoGrave(g,REASON_EFFECT+REASON_DISCARD)
+		Duel.SendtoRest(g,REASON_EFFECT+REASON_DISCARD)
 	end
 end

@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	--pendulum summon
 	Pendulum.AddProcedure(c)
 	--fusion summon
-	local params = {nil,Fusion.OnFieldMat,nil,nil,Fusion.ForcedHandler}
+	local params = {nil,Fusion.OnFieldMat,nil,nil,Fusion.FcoreedHandler}
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)
 	e2:SetType(EFFECT_TYPE_IGNITION)
