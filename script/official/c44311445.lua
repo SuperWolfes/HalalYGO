@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_EARTH),5,2,s.ovfilter,aux.Stringid(id,0))
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--todeck
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TODECK)
@@ -36,10 +36,10 @@ function s.tdfilter(c)
 	return c:IsSetCard(0x71) and c:IsAbleToDeck()
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.tdfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.tdfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and s.tdfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.tdfilter,tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectTarget(tp,s.tdfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.tdfilter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,1,0,0)
 end
 function s.tdop(e,tp,eg,ep,ev,re,r,rp)
@@ -50,7 +50,7 @@ function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.cfilter(c,tp)
 	return c:IsSetCard(0x71) and c:IsLocation(LOCATION_DECK)
-		and c:IsPreviousControler(tp) and c:IsPreviousLocation(LOCATION_GRAVE)
+		and c:IsPreviousControler(tp) and c:IsPreviousLocation(LOCATION_REST)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetOverlayGroup():IsExists(Card.IsCode,1,nil,74641045) and eg:IsExists(s.cfilter,1,nil,tp)

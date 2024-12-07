@@ -12,8 +12,8 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--If you Ritual Summon exactly 1 "Nekroz" Ritual Monster with a card effect that requires use of monsters, this card you control can be used as the entire Tribute
-	local e2=Ritual.AddWholeLevelTribute(c,aux.FilterBoolFunction(Card.IsSetCard,SET_NEKROZ))
+	--If you Locked Summon exactly 1 "Nekroz" Locked Monster with a card effect that requires use of monsters, this card you control can be used as the entire Tribute
+	local e2=Locked.AddWholeLevelTribute(c,aux.FilterBoolFunction(Card.IsSetCard,SET_NEKROZ))
 	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e2:SetRange(LOCATION_MZONE)
 	--Add any number of your banished "Nekroz" cards with different names to your hand

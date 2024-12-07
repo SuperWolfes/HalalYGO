@@ -6,9 +6,9 @@ local function check_and_register_flag(tp)
 		Duel.SetFlagEffectLabel(tp,id,1)
 	end
 end
-s.roll_dice=true
-Duel.TossDice=(function()
-	local oldf=Duel.TossDice
+s.roll_suffice=true
+Duel.TossSuffice=(function()
+	local oldf=Duel.TossSuffice
 	--technically this also has a count2 for the opponent, leave it
 	--unhandled for now as the core lacks the capabilities
 	return function(tp,count,...)
@@ -35,9 +35,9 @@ function s.initial_effect(c)
 	aux.GlobalCheck(s,function()
 		local ge1=Effect.CreateEffect(c)
 		ge1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-		ge1:SetCode(EFFECT_TOSS_DICE_CHOOSE)
+		ge1:SetCode(EFFECT_TOSS_SUFFICE_CHOOSE)
 		ge1:SetCondition(function(e,tp,eg,ep)return (Duel.GetFlagEffectLabel(ep,id) or 0)>0 end)
-		ge1:SetOperation(s.repop(true,Duel.SetDiceResult,function(tp)
+		ge1:SetOperation(s.repop(true,Duel.SetSufficeResult,function(tp)
 			Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,3))
 			return Duel.AnnounceNumberRange(tp,1,6)
 		end))
@@ -50,7 +50,7 @@ function s.initial_effect(c)
 		Duel.RegisterEffect(ge2,0)
 	end)
 end
-function s.repop(isdice,func2,func3)
+function s.repop(issuffice,func2,func3)
 	return function(e,tp,eg,ep,ev,re,r,rp)
 		Duel.PayLPCost(ep,1000)
 		Duel.ResetFlagEffect(ep,id)
@@ -60,7 +60,7 @@ function s.repop(isdice,func2,func3)
 		local res={}
 		res[1]=func3(ep)
 		for i=2,total do
-			if isdice then
+			if issuffice then
 				table.insert(res,Duel.GetRandomNumber(1,6))
 			else
 				table.insert(res,Duel.GetRandomNumber(0,1)==0 and COIN_TAILS or COIN_HEADS)

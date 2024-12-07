@@ -21,7 +21,7 @@ function s.rescon(sg,e,tp,mg)
 	return sg:FilterCount(s.filter,nil)>=2
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,e:GetHandler())
+	local g=Duel.GetMatchingGroup(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,e:GetHandler())
 	if chk==0 then return aux.SelectUnselectGroup(g,e,tp,3,3,s.rescon,0) end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -33,9 +33,9 @@ function s.atkfilter(c)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	local g=Duel.GetMatchingGroup(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,e:GetHandler())
+	local g=Duel.GetMatchingGroup(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,e:GetHandler())
 	local og=aux.SelectUnselectGroup(g,e,tp,3,3,s.rescon,1,tp,HINTMSG_DISCARD,s.rescon)
-	if Duel.SendtoGrave(og,REASON_COST)<1 then return end
+	if Duel.SendtoRest(og,REASON_COST)<1 then return end
 	--Effect
 	if Duel.Draw(tp,3,REASON_EFFECT)==3 and Duel.IsExistingMatchingCard(aux.FilterMaximumSideFunctionEx(s.atkfilter),tp,0,LOCATION_MZONE,1,nil)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then

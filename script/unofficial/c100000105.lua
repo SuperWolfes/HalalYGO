@@ -1,5 +1,5 @@
 --アルカナフォースＶＩＩＩ－ＳＴＲＥＮＧＴＨ
---Arcana Force VIII - The Strength
+--Arcana Fcoree VIII - The Strength
 local s,id=GetID()
 function s.initial_effect(c)
 	--coin

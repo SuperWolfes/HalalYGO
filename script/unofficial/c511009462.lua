@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	alias=c:GetOriginalCodeRule()
 	--xyz summon
 	Xyz.AddProcedure(c,nil,5,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--destroy&damage
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DESTROY+CATEGORY_DAMAGE)

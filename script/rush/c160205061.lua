@@ -20,14 +20,14 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetMatchingGroupCountRush(aux.TRUE,tp,0,LOCATION_MZONE,nil)>=2
 end
 function s.costfilter(c,tp)
-	return c:IsMonster() and c:IsAbleToGraveAsCost()
+	return c:IsMonster() and c:IsAbleToRestAsCost()
 		and Duel.IsExistingMatchingCard(s.ctrlfilter,tp,0,LOCATION_MZONE,1,nil,c:GetRace())
 end
 function s.ctrlfilter(c,race)
 	return c:IsFaceup() and c:IsRace(race) and c:IsLevelBetween(5,8) and c:IsControlerCanBeChanged(true)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() and Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil,tp) end
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() and Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil,tp) end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -36,11 +36,11 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	--Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tg=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,1,nil,tp)
 	local race=tg:GetFirst():GetRace()
 	tg:AddCard(c)
-	if Duel.SendtoGrave(tg,REASON_COST)~=2 then return end
+	if Duel.SendtoRest(tg,REASON_COST)~=2 then return end
 	--Effect
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_CONTROL)
 	local dg=Duel.SelectMatchingCard(tp,s.ctrlfilter,tp,0,LOCATION_MZONE,1,1,nil,race)

@@ -62,13 +62,13 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	return a and at and a:IsFaceup() and a:IsSetCard(SET_ROID) and a:GetBaseAttack()~=a:GetBaseDefense()
 end
 function s.atkfilter(c)
-	return c:IsMonster() and c:IsSetCard(SET_ROID) and c:IsAbleToGraveAsCost()
+	return c:IsMonster() and c:IsSetCard(SET_ROID) and c:IsAbleToRestAsCost()
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.atkfilter,tp,LOCATION_DECK,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.atkfilter,tp,LOCATION_DECK,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_EFFECT)
+	Duel.SendtoRest(g,REASON_EFFECT)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetBattleMonster(tp)

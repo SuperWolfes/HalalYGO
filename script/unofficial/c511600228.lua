@@ -20,8 +20,8 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetAttacker():GetControler()~=tp and Duel.GetAttackTarget()==nil
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() and e:GetHandler():IsDiscardable() end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() and e:GetHandler():IsDiscardable() end
+	Duel.SendtoRest(e:GetHandler(),REASON_COST)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
@@ -34,7 +34,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local ft=math.min(Duel.GetFieldGroupCount(tp,0,LOCATION_MZONE),Duel.GetLocationCount(tp,LOCATION_MZONE))
 	if Duel.NegateAttack() and ft>0 and Duel.IsPlayerCanSpecialSummonMonster(tp,511009746,0x581,TYPES_TOKEN,0,0,1,RACE_MACHINE,ATTRIBUTE_WIND) then
 		Duel.BreakEffect()
-		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 		local ct=ft
 		if ft>1 then
 			local selct = {}

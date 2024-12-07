@@ -1,4 +1,4 @@
---White Knight Lord
+--White Knight Watcher
 local s,id=GetID()
 function s.initial_effect(c)
 	--

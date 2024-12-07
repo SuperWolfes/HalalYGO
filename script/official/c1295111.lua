@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--Reincarnation Link Summon effect
+	--Reincorporation Link Summon effect
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetType(EFFECT_TYPE_FIELD)
@@ -80,7 +80,7 @@ function s.reinclinkop(e,tp,eg,ep,ev,re,r,rp,c,must,g,min,max)
 	Duel.Hint(HINT_CARD,0,id)
 	local mg=e:GetLabelObject()
 	c:SetMaterial(mg)
-	Duel.SendtoGrave(mg,REASON_MATERIAL|REASON_LINK)
+	Duel.SendtoRest(mg,REASON_MATERIAL|REASON_LINK)
 	Duel.RegisterFlagEffect(tp,id,RESET_PHASE|PHASE_END,0,1)
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)

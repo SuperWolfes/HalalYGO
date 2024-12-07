@@ -1,5 +1,5 @@
 --千年の十字
---Millennium Cross
+--Mileon Cross
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -13,14 +13,14 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.listed_series={SET_FORBIDDEN_ONE,SET_EXODIA,SET_MILLENNIUM}
-s.listed_names={83257450} --"The Phantom Exodia Incarnate"
+s.listed_series={SET_UNLIKED_ONE,SET_EXDUDE,SET_MILEON}
+s.listed_names={83257450} --"The Illusion Exdude Incorporate"
 function s.spfilter(c,e,tp)
 	return c:IsCode(83257450) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.showfilter(c)
-	return c:IsSetCard(SET_FORBIDDEN_ONE) and c:IsOriginalType(TYPE_MONSTER)
+	return c:IsSetCard(SET_UNLIKED_ONE) and c:IsOriginalType(TYPE_MONSTER)
 		and (c:IsLocation(LOCATION_HAND|LOCATION_DECK) or c:IsFaceup())
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -31,7 +31,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_ONFIELD)
 end
 function s.tdfilter(c)
-	if (c:IsSetCard(SET_EXODIA) and c:GetOriginalLevel()>=10) or c:IsSetCard(SET_MILLENNIUM) then return false end
+	if (c:IsSetCard(SET_EXDUDE) and c:GetOriginalLevel()>=10) or c:IsSetCard(SET_MILEON) then return false end
 	return c:IsOriginalType(TYPE_MONSTER) and c:IsFaceup() and c:IsAbleToDeck()
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
@@ -71,10 +71,10 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local e3=e1:Clone()
 	e3:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
 	Duel.RegisterEffect(e3,tp)
-	--Shuffle this card into the Deck instead of sending it to the GY
+	--Shuffle this card into the Deck instead of sending it to the RP
 	if c:IsRelateToEffect(e) and e:IsHasType(EFFECT_TYPE_ACTIVATE) then
 		if c:IsHasEffect(EFFECT_CANNOT_TO_DECK) then return end
-		c:CancelToGrave()
+		c:CancelToRest()
 		Duel.SendtoDeck(c,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
 	end
 end

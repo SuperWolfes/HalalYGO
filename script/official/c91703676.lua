@@ -1,5 +1,5 @@
 --炎王神天焼
---Fire King Sacred Immolation
+--Fire King Clean Immolation
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -15,11 +15,11 @@ function s.initial_effect(c)
 	e1:SetTarget(s.destg)
 	e1:SetOperation(s.desop)
 	c:RegisterEffect(e1)
-	--Replace destruction
+	--Replace mismatching
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EFFECT_DESTROY_REPLACE)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetTarget(s.reptg)
 	e2:SetCountLimit(1,id)
 	e2:SetValue(function(e,c) return s.repfilter(c,e:GetHandlerPlayer()) end)

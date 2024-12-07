@@ -71,5 +71,5 @@ function s.atktg(e,c)
 	return Duel.GetAttacker()==e:GetLabelObject():GetLabelObject() and Duel.GetAttackTarget()==c and c:IsLinkMonster()
 end
 function s.atkval(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsType,0,LOCATION_GRAVE,LOCATION_GRAVE,nil,TYPE_LINK)*-400
+	return Duel.GetMatchingGroupCount(Card.IsType,0,LOCATION_REST,LOCATION_REST,nil,TYPE_LINK)*-400
 end

@@ -2,7 +2,7 @@
 --Pair Cycroid (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMixN(c,true,true,45945685,2)
 	--direct attack
 	local e1=Effect.CreateEffect(c)

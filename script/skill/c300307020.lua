@@ -6,7 +6,7 @@ function s.initial_effect(c)
 end
 function s.fusfilter(c,e,tp)
 	return c:IsType(TYPE_FUSION) and c.material
-		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp,c)
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp,c)
 end
 function s.spfilter(c,e,tp,sc)
 	return c:IsCode(table.unpack(sc.material)) and c:IsType(TYPE_NORMAL) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -22,13 +22,13 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	--OPD register
 	Duel.RegisterFlagEffect(tp,id,0,0,0)
-	--Lose 800 LP to reveal 1 Fusion Monster, then Special Summon 1 Normal monster listed as material from GY
+	--Lose 800 LP to reveal 1 Fusion Monster, then Special Summon 1 Normal monster listed as material from RP
 	Duel.SetLP(tp,Duel.GetLP(tp)-800)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_CONFIRM)
 	local cg=Duel.SelectMatchingCard(tp,s.fusfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
 	Duel.ConfirmCards(1-tp,cg)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_GRAVE,0,1,1,nil,e,tp,cg:GetFirst()):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,0,1,1,nil,e,tp,cg:GetFirst()):GetFirst()
 	if tc and Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP) then
 		--Its ATK/DEF become 0
 		local e1=Effect.CreateEffect(e:GetHandler())

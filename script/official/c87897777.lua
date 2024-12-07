@@ -18,17 +18,17 @@ function s.initial_effect(c)
 	-- Add 1 excavated "Vaylantz" card
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_DICE+CATEGORY_TOHAND+CATEGORY_SEARCH)
+	e2:SetCategory(CATEGORY_SUFFICE+CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetTarget(s.thtg)
 	e2:SetOperation(s.thop)
 	c:RegisterEffect(e2)
-	-- Special Summon from Spell/Trap Zone
+	-- Special Summon from Actional/Trap Zone
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
-	e3:SetCategory(CATEGORY_DICE+CATEGORY_SPECIAL_SUMMON)
+	e3:SetCategory(CATEGORY_SUFFICE+CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetProperty(EFFECT_FLAG_DELAY)
 	e3:SetCode(EVENT_MOVE)
@@ -38,7 +38,7 @@ function s.initial_effect(c)
 	e3:SetOperation(s.sspop)
 	c:RegisterEffect(e3)
 end
-s.roll_dice=true
+s.roll_suffice=true
 s.listed_names={CARD_VALIANTS_KOENIGWISSEN}
 s.listed_series={SET_VAYLANTZ}
 function s.spconfilter(c)
@@ -66,7 +66,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>0 end
-	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,0,tp,1)
+	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,1)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
 function s.thfilter(c)
@@ -74,7 +74,7 @@ function s.thfilter(c)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)<1 then return end
-	local dc=Duel.TossDice(tp,1)
+	local dc=Duel.TossSuffice(tp,1)
 	Duel.ConfirmDecktop(tp,dc)
 	local dg=Duel.GetDecktopGroup(tp,dc):Filter(s.thfilter,nil)
 	if #dg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,3)) then
@@ -97,13 +97,13 @@ function s.sspfilter(c,e,tp)
 end
 function s.ssptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.sspfilter,tp,LOCATION_SZONE,0,1,nil,e,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,0,tp,1)
+	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,1)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_SZONE)
 end
 function s.sspop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.sspfilter,tp,LOCATION_SZONE,0,nil,e,tp)
 	if #g==0 then return end
-	local dc=Duel.TossDice(tp,1)
+	local dc=Duel.TossSuffice(tp,1)
 	if dc<2 or dc>5 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local tc=g:Select(tp,1,1,nil):GetFirst()

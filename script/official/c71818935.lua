@@ -1,9 +1,9 @@
 --閉ザサレシ天ノ月
---Moon of the Closed Sky
+--Horizon of the Closed Sky
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Link Summon procedure
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_EFFECT),2,2)
 	--You can use 1 opponent's monster as Link Material with this card

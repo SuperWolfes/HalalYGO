@@ -19,8 +19,8 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_TOHAND)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DELAY,EFFECT_FLAG2_CHECK_SIMULTANEOUS)
-	e2:SetCode(EVENT_TO_GRAVE)
-	e2:SetRange(LOCATION_GRAVE|LOCATION_HAND)
+	e2:SetCode(EVENT_TO_REST)
+	e2:SetRange(LOCATION_REST|LOCATION_HAND)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(s.rthcon)
 	e2:SetCost(aux.SelfBanishCost)
@@ -34,7 +34,7 @@ end
 function s.spcon(e,c)
 	if c==nil then return true end
 	return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(Card.IsLinkMonster,0,LOCATION_MZONE|LOCATION_GRAVE,LOCATION_MZONE|LOCATION_GRAVE,1,nil)
+		and Duel.IsExistingMatchingCard(Card.IsLinkMonster,0,LOCATION_MZONE|LOCATION_REST,LOCATION_MZONE|LOCATION_REST,1,nil)
 end
 function s.cfilter(c,tp)
 	return c:IsLinkMonster() and c:IsLink(2) and c:IsFaceup() and c:IsPreviousControler(tp)
@@ -47,7 +47,7 @@ function s.rthtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
 	if chkc then return chkc:IsOnField() and chkc:IsControler(1-tp) and chkc:IsAbleToHand() end
 	if chk==0 then return Duel.IsExistingTarget(Card.IsAbleToHand,tp,0,LOCATION_ONFIELD,1,nil)
-		and ((c:IsLocation(LOCATION_GRAVE) and not eg:IsContains(c)) or c:IsLocation(LOCATION_HAND)) end
+		and ((c:IsLocation(LOCATION_REST) and not eg:IsContains(c)) or c:IsLocation(LOCATION_HAND)) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RTOHAND)
 	local g=Duel.SelectTarget(tp,Card.IsAbleToHand,tp,0,LOCATION_ONFIELD,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,tp,0)

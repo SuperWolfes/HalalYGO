@@ -1,5 +1,5 @@
 --ハイマジック－ダブルアクセル
---High Magic - Double Acceleration
+--High Ment - Double Acceleration
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -15,13 +15,13 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c)
-	return c:IsMonster() and c:IsLevelAbove(5) and c:IsRace(RACE_SPELLCASTER) and c:IsAbleToDeckOrExtraAsCost() 
+	return c:IsMonster() and c:IsLevelAbove(5) and c:IsRace(RACE_MENTOR) and c:IsAbleToDeckOrExtraAsCost() 
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,2,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,2,nil) end
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsRace(RACE_SPELLCASTER) and c:GetBaseAttack()>0 and c:IsNotMaximumModeSide()
+	return c:IsFaceup() and c:IsRace(RACE_MENTOR) and c:GetBaseAttack()>0 and c:IsNotMaximumModeSide()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,0,1,nil) end
@@ -30,7 +30,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	--Requirement
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_GRAVE,0,2,2,nil)
+	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_REST,0,2,2,nil)
 	Duel.HintSelection(g)
 	if #g==0 or Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_COST)==0 then return end
 	--Effect

@@ -31,27 +31,27 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	local b1=Duel.IsExistingMatchingCard(s.cfilter2,tp,LOCATION_MZONE,0,1,nil,ATTRIBUTE_WATER)
-		and ft>0 and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,Duel.GetTurnCount(),e,tp)
+		and ft>0 and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST,0,1,nil,Duel.GetTurnCount(),e,tp)
 	local b2=Duel.IsExistingMatchingCard(s.cfilter2,tp,LOCATION_MZONE,0,1,nil,ATTRIBUTE_FIRE)
 		and Duel.IsExistingMatchingCard(nil,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil)
 	if chk==0 then return b1 or b2 end
 	local loc=b2 and LOCATION_MZONE or 0
 	local g=Duel.GetMatchingGroup(nil,tp,LOCATION_MZONE,loc,nil)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,tp,0)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_HANDES,nil,0,tp,1)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local break_chk=false
-	--WATER: Special Summon from the GY
+	--WATER: Special Summon from the RP
 	if Duel.IsExistingMatchingCard(s.cfilter2,tp,LOCATION_MZONE,0,1,nil,ATTRIBUTE_WATER) then
 		local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-		local ct=Duel.GetMatchingGroupCount(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_GRAVE,0,nil,Duel.GetTurnCount(),e,tp)
+		local ct=Duel.GetMatchingGroupCount(aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,Duel.GetTurnCount(),e,tp)
 		ft=math.min(ft,ct)
 		if ft>0 then
-			if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+			if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-			local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_GRAVE,0,ft,ft,nil,Duel.GetTurnCount(),e,tp)
+			local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,0,ft,ft,nil,Duel.GetTurnCount(),e,tp)
 			if #g>0 and Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)>0 then
 				break_chk=true
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)

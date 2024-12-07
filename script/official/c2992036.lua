@@ -1,9 +1,9 @@
 --根絶の機皇神
---Meklord Astro the Eradicator
+--Mekwatcher Astro the Eradicator
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Add to hand or Special Summon 3 "Meklord" monsters with different names in your GY
+	--Add to hand or Special Summon 3 "Mekwatcher" monsters with different names in your RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOHAND)
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_DESTROY+CATEGORY_DAMAGE)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_FREE_CHAIN)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetHintTiming(0,TIMING_END_PHASE)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(s.descond)
@@ -37,8 +37,8 @@ function s.tgfilter(c,e,tp,ft)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.tgfilter(chkc,e,tp,ft) end
-	local g=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_GRAVE,0,nil,e,tp,ft)
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.tgfilter(chkc,e,tp,ft) end
+	local g=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_REST,0,nil,e,tp,ft)
 	if chk==0 then return aux.SelectUnselectGroup(g,e,tp,3,3,aux.dncheck,0) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 	local tg=aux.SelectUnselectGroup(g,e,tp,3,3,aux.dncheck,1,tp,HINTMSG_TARGET)
@@ -50,7 +50,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.GetTargetCards(e)
 	local ct=#tg
 	if ct==0 then return end
-	if ct>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return false end
+	if ct>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return false end
 	aux.ToHandOrElse(tg,tp,
 		function(tc)
 			return Duel.GetLocationCount(tp,LOCATION_MZONE)>=ct and tc:IsCanBeSpecialSummoned(e,0,tp,true,false)

@@ -1,18 +1,18 @@
 --魔弾の悪魔 ザミエル
---Magical Musket Mastermind Zakiel
+--Mentoral Musket Mastermind Zakiel
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	-- Can be tribute Summoned using 1 "Magical Musket" monster
+	-- Can be tribute Summoned using 1 "Mentoral Musket" monster
 	local e1=aux.AddNormalSummonProcedure(c,true,true,1,1,SUMMON_TYPE_TRIBUTE,aux.Stringid(id,0),s.otfilter)
-	--"Magical Musket" Spell/Traps can be activated from the hand
+	--"Mentoral Musket" Actional/Traps can be activated from the hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,2))
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_QP_ACT_IN_NTPHAND)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetTargetRange(LOCATION_HAND,0)
-	e2:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,SET_MAGICAL_MUSKET))
+	e2:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,SET_MENTORAL_MUSKET))
 	c:RegisterEffect(e2)
 	local e3=e2:Clone()
 	e3:SetCode(EFFECT_TRAP_ACT_IN_HAND)
@@ -51,18 +51,18 @@ function s.initial_effect(c)
 	e8:SetOperation(s.clearop)
 	c:RegisterEffect(e8)
 end
-s.listed_series={SET_MAGICAL_MUSKET}
+s.listed_series={SET_MENTORAL_MUSKET}
 function s.otfilter(c,tp)
-	return c:IsSetCard(SET_MAGICAL_MUSKET) and (c:IsControler(tp) or c:IsFaceup())
+	return c:IsSetCard(SET_MENTORAL_MUSKET) and (c:IsControler(tp) or c:IsFaceup())
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
-	if re:GetHandler():IsSetCard(SET_MAGICAL_MUSKET) and rp==tp and re:IsHasType(EFFECT_TYPE_ACTIVATE) then
+	if re:GetHandler():IsSetCard(SET_MENTORAL_MUSKET) and rp==tp and re:IsHasType(EFFECT_TYPE_ACTIVATE) then
 		local val=e:GetLabelObject():GetLabel()
 		e:GetLabelObject():SetLabel(val+1)
 	end
 end
 function s.regop2(e,tp,eg,ep,ev,re,r,rp)
-	if re:GetHandler():IsSetCard(SET_MAGICAL_MUSKET) and rp==tp and re:IsHasType(EFFECT_TYPE_ACTIVATE) then
+	if re:GetHandler():IsSetCard(SET_MENTORAL_MUSKET) and rp==tp and re:IsHasType(EFFECT_TYPE_ACTIVATE) then
 		local val=e:GetLabelObject():GetLabel()
 		if val==0 then val=1 end
 		e:GetLabelObject():SetLabel(val-1)

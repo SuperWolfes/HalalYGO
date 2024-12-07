@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,s.matfilter,3,3)
 	--Draw
 	local e1=Effect.CreateEffect(c)
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	--Cannot Summon to Monster Zones
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
-	e2:SetCode(EFFECT_FORCE_MZONE)
+	e2:SetCode(EFFECT_FCOREE_MZONE)
 	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CANNOT_DISABLE)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetTargetRange(1,1)

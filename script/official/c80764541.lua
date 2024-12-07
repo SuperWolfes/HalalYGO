@@ -2,7 +2,7 @@
 --Number 44: Sky Pegasus
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Xyz Summon Procedure
 	Xyz.AddProcedure(c,nil,4,2)
 	--Destroy 1 face-up monster your opponent controls

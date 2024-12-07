@@ -19,13 +19,13 @@ function s.rfilter(c)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
-		local rg=Duel.GetMatchingGroup(s.rfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil)
+		local rg=Duel.GetMatchingGroup(s.rfilter,tp,LOCATION_MZONE+LOCATION_REST,0,nil)
 		return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND,0,1,nil,rg)
 	end
-	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,tp,LOCATION_REST)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local rg=Duel.GetMatchingGroup(s.rfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil)
+	local rg=Duel.GetMatchingGroup(s.rfilter,tp,LOCATION_MZONE+LOCATION_REST,0,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,1))
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_HAND,0,1,1,nil,rg)
 	local tc=g:GetFirst()

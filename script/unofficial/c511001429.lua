@@ -1,10 +1,10 @@
 --CNo.102 光堕天使ノーブル・デーモン (Anime)
---Number C102: Archfiend Seraph (Anime)
+--Number C102: Archtainted Watcher (Anime)
 --Fixed by Larry126
 Duel.LoadCardScript("c67173574.lua")
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Xyz Summon Procedure
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGHT),5,4)
 	--Rank Up Check

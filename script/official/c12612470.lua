@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
 	e1:SetTarget(s.coltg)
 	c:RegisterEffect(e1)
-	--Cannot activate Set cards in this card's column's Spell & Trap Zones
+	--Cannot activate Set cards in this card's column's Actional & Trap Zones
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)

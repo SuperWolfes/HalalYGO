@@ -3,7 +3,7 @@
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	-- 2+ WATER monsters
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WATER),2)
 	-- Attack target limit
@@ -61,7 +61,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsTurnPlayer(1-tp) and re:IsSpellTrapEffect() and Duel.IsChainDisablable(ev)
+	return Duel.IsTurnPlayer(1-tp) and re:IsActionalTrapEffect() and Duel.IsChainDisablable(ev)
 		and (Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_LOCATION)&LOCATION_ONFIELD)~=0
 end
 function s.spfilter(c,e,tp)

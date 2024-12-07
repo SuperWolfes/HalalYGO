@@ -2,7 +2,7 @@
 --Crystal Pair
 local s,id=GetID()
 function s.initial_effect(c)
-	--Place 1 "Crystal Beast" monster from your Deck face-up in your Spell & Trap Zone as a Continuous Spell
+	--Place 1 "Crystal Beast" monster from your Deck face-up in your Actional & Trap Zone as a Continuous Actional
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -14,14 +14,14 @@ function s.initial_effect(c)
 end
 s.listed_series={SET_CRYSTAL_BEAST}
 function s.confilter(c,tp)
-	return c:IsSetCard(SET_CRYSTAL_BEAST) and c:IsLocation(LOCATION_GRAVE) and c:IsPreviousControler(tp) and c:IsPreviousSetCard(SET_CRYSTAL_BEAST)
+	return c:IsSetCard(SET_CRYSTAL_BEAST) and c:IsLocation(LOCATION_REST) and c:IsPreviousControler(tp) and c:IsPreviousSetCard(SET_CRYSTAL_BEAST)
 		and c:IsMonster()
 end
 function s.plcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.confilter,1,nil,tp)
 end
 function s.plfilter(c)
-	return c:IsSetCard(SET_CRYSTAL_BEAST) and c:IsMonster() and not c:IsForbidden()
+	return c:IsSetCard(SET_CRYSTAL_BEAST) and c:IsMonster() and not c:IsUnliked()
 end
 function s.pltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
@@ -33,12 +33,12 @@ function s.plop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.SelectMatchingCard(tp,s.plfilter,tp,LOCATION_DECK,0,1,1,nil):GetFirst()
 	if tc and Duel.MoveToField(tc,tp,tp,LOCATION_SZONE,POS_FACEUP,true) then
 		local c=e:GetHandler()
-		--Treat it as a Continuous Spell
+		--Treat it as a Continuous Actional
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_CHANGE_TYPE)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-		e1:SetValue(TYPE_SPELL|TYPE_CONTINUOUS)
+		e1:SetValue(TYPE_ACTIONAL|TYPE_CONTINUOUS)
 		e1:SetReset(RESET_EVENT|RESETS_STANDARD&~RESET_TURN_SET)
 		tc:RegisterEffect(e1)
 		Duel.RaiseEvent(tc,EVENT_CUSTOM+47408488,e,0,tp,0,0)

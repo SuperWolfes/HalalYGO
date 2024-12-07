@@ -1,5 +1,5 @@
 --正しき力
---Rightful Magic
+--Rightful Ment
 
 local s,id=GetID()
 function s.initial_effect(c)

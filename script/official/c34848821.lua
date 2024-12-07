@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion Summon procedure
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,CARD_ALBAZ,aux.FilterBoolFunctionEx(Card.IsLevelAbove,8))
 	--Cannot be destroyed by battle
 	local e1=Effect.CreateEffect(c)
@@ -25,11 +25,11 @@ function s.initial_effect(c)
 	e2:SetTarget(s.tgtg)
 	e2:SetValue(s.tgval)
 	c:RegisterEffect(e2)
-	--Register when sent to the GY
+	--Register when sent to the RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	e3:SetCode(EVENT_TO_GRAVE)
+	e3:SetCode(EVENT_TO_REST)
 	e3:SetOperation(s.regop)
 	c:RegisterEffect(e3)
 	--Search or Special Summon
@@ -38,7 +38,7 @@ function s.initial_effect(c)
 	e4:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_SPECIAL_SUMMON)
 	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e4:SetCode(EVENT_PHASE+PHASE_END)
-	e4:SetRange(LOCATION_GRAVE)
+	e4:SetRange(LOCATION_REST)
 	e4:SetCountLimit(1,id)
 	e4:SetCondition(s.condition)
 	e4:SetTarget(s.target)

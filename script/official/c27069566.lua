@@ -1,9 +1,9 @@
 --電脳堺凰－凰々
---Datascape Phoenix - Fengfeng
+--Datascape Bird - Fengfeng
 --Scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Xyz.AddProcedure(c,nil,6,2,nil,nil,99)
 	--Banish 2 targets
 	local e1=Effect.CreateEffect(c)
@@ -38,13 +38,13 @@ end
 function s.rmvtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
 	if chk==0 then return Duel.IsExistingTarget(aux.FaceupFilter(Card.IsAbleToRemove),tp,0,LOCATION_ONFIELD,1,nil)
-		and Duel.IsExistingTarget(Card.IsAbleToRemove,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,nil) end
+		and Duel.IsExistingTarget(Card.IsAbleToRemove,tp,LOCATION_REST,LOCATION_REST,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	local g1=Duel.SelectTarget(tp,aux.FaceupFilter(Card.IsAbleToRemove),tp,0,LOCATION_ONFIELD,1,1,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g2=Duel.SelectTarget(tp,Card.IsAbleToRemove,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,1,nil)
+	local g2=Duel.SelectTarget(tp,Card.IsAbleToRemove,tp,LOCATION_REST,LOCATION_REST,1,1,nil)
 	g1:Merge(g2)
-	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g1,2,0,LOCATION_ONFIELD+LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g1,2,0,LOCATION_ONFIELD+LOCATION_REST)
 end
 function s.rmvop(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.GetTargetCards(e)
@@ -66,7 +66,7 @@ function s.rescon(sg,e,tp,mg)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
-		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return false end
+		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return false end
 		if Duel.GetLocationCount(tp,LOCATION_MZONE)<2 then return false end
 		local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_DECK,0,nil,e,tp)
 		return aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,0)
@@ -74,7 +74,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,LOCATION_DECK)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) or Duel.GetLocationCount(tp,LOCATION_MZONE)<2 then return end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) or Duel.GetLocationCount(tp,LOCATION_MZONE)<2 then return end
 	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_DECK,0,nil,e,tp)
 	local sg=aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,1,tp,HINTMSG_SPSUMMON)
 	if sg and #sg==2 then

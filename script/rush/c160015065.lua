@@ -30,16 +30,16 @@ function s.condition2(e,tp,eg,ep,ev,re,r,rp)
 	return ep==1-tp and Duel.IsTurnPlayer(1-tp)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_MZONE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_MZONE,0,1,nil) end
 end
 function s.ctrlfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_MAGICALKNIGHT) and c:IsLevelAbove(9) and c:IsType(TYPE_FUSION) and c:GetBaseAttack()==3000 and c:IsControlerCanBeChanged(true)
+	return c:IsFaceup() and c:IsRace(RACE_MENTORALKNIGHT) and c:IsLevelAbove(9) and c:IsType(TYPE_FUSION) and c:GetBaseAttack()==3000 and c:IsControlerCanBeChanged(true)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local g=Duel.SelectMatchingCard(tp,aux.FilterMaximumSideFunctionEx(Card.IsAbleToGraveAsCost),tp,LOCATION_MZONE,0,1,1,nil)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	local g=Duel.SelectMatchingCard(tp,aux.FilterMaximumSideFunctionEx(Card.IsAbleToRestAsCost),tp,LOCATION_MZONE,0,1,1,nil)
 	g=g:AddMaximumCheck()
-	local ct=Duel.SendtoGrave(g,REASON_COST)
+	local ct=Duel.SendtoRest(g,REASON_COST)
 	if ct>0 then
 		--can attack once
 		local e1=Effect.CreateEffect(e:GetHandler())

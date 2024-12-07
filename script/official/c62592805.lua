@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Xyz Summon Procedure
 	Xyz.AddProcedure(c,nil,2,2)
 	--Return cards the opponent controls to the hand
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.thtg)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
-	--Attach a "Purrely" Quick-Play Spell
+	--Attach a "Purrely" Quick-Play Actional
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_QUICK_O)
@@ -52,7 +52,7 @@ end
 function s.attachcond(e,tp,eg,ep,ev,re,r,rp)
 	if rp==1-tp or not re:IsHasType(EFFECT_TYPE_ACTIVATE) then return false end
 	local rc=re:GetHandler()
-	return rc:IsSetCard(SET_PURRELY) and rc:IsQuickPlaySpell() and rc:IsOnField()
+	return rc:IsSetCard(SET_PURRELY) and rc:IsQuickPlayActional() and rc:IsOnField()
 		and rc:IsCanBeXyzMaterial(e:GetHandler(),tc,REASON_EFFECT)
 end
 function s.setfilter(c)
@@ -65,7 +65,7 @@ function s.attachop(e,tp,eg,ep,ev,re,r,rp)
 		and not rc:IsImmuneToEffect(e) and rc:IsCanBeXyzMaterial(c,tp,REASON_EFFECT) then
 		Duel.Overlay(c,rc)
 		if not c:GetOverlayGroup():IsContains(rc) then return end
-		rc:CancelToGrave()
+		rc:CancelToRest()
 		local g=Duel.GetMatchingGroup(s.setfilter,tp,LOCATION_DECK,0,nil)
 		if #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)

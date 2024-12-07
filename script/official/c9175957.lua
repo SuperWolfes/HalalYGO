@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_TOHAND)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,id)
 	e2:SetTarget(s.gthtg)
 	e2:SetOperation(s.gthop)
@@ -44,7 +44,7 @@ function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 	local ct=Duel.GetChainInfo(0,CHAININFO_TARGET_PARAM)
 	if ct and ct>0 then
-		Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,ct,tp,LOCATION_HAND|LOCATION_GRAVE)
+		Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,ct,tp,LOCATION_HAND|LOCATION_REST)
 	end
 end
 function s.spfilter(c,e,tp)
@@ -58,8 +58,8 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ConfirmCards(1-tp,g)
 	local ct=Duel.GetChainInfo(0,CHAININFO_TARGET_PARAM)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if not ct or ct<=0 or ft<ct or (ct>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)) then return end
-	local sg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_HAND|LOCATION_GRAVE,0,nil,e,tp)
+	if not ct or ct<=0 or ft<ct or (ct>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)) then return end
+	local sg=Duel.GetMatchingGroup(aux.RestValleyFilter(s.spfilter),tp,LOCATION_HAND|LOCATION_REST,0,nil,e,tp)
 	if #sg<ct or not Duel.SelectYesNo(tp,aux.Stringid(id,3)) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local ssg=sg:Select(tp,ct,ct,nil)
@@ -77,7 +77,7 @@ function s.gthtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return c:IsAbleToHand() and Duel.IsExistingTarget(s.tgfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DEATTACHFROM)
 	Duel.SelectTarget(tp,s.tgfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil,tp)
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,c,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,c,1,tp,LOCATION_REST)
 end
 function s.gthop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()

@@ -2,7 +2,7 @@
 --Wonder Wand
 local s,id=GetID()
 function s.initial_effect(c)
-	aux.AddEquipProcedure(c,nil,aux.FilterBoolFunction(Card.IsRace,RACE_SPELLCASTER))
+	aux.AddEquipProcedure(c,nil,aux.FilterBoolFunction(Card.IsRace,RACE_MENTOR))
 	--increase ATK
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_EQUIP)
@@ -24,10 +24,10 @@ end
 function s.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	local ec=c:GetEquipTarget()
-	if chk==0 then return c:IsAbleToGraveAsCost() and ec and c:GetControler()==ec:GetControler()
-		and ec:IsAbleToGraveAsCost() end
+	if chk==0 then return c:IsAbleToRestAsCost() and ec and c:GetControler()==ec:GetControler()
+		and ec:IsAbleToRestAsCost() end
 	local g=Group.FromCards(c,ec)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,2) end

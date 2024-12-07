@@ -3,7 +3,7 @@
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Pendulum.AddProcedure(c,false)
 	-- 1 Tuner + 1+ Non-Tuner monsters
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
@@ -30,7 +30,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.dthtg)
 	e2:SetOperation(s.dthop)
 	c:RegisterEffect(e2)
-	-- Add 1 "Plunder Patroll" card from the GY to the hand
+	-- Add 1 "Plunder Patroll" card from the RP to the hand
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetCategory(CATEGORY_TOHAND)
@@ -46,7 +46,7 @@ local TOKEN_PLUNDER_PATROLL=id+1
 s.listed_names={TOKEN_PLUNDER_PATROLL}
 s.listed_names={SET_PLUNDER_PATROLL}
 function s.attcheck(tp,att,targ_p)
-	return Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_PLUNDER_PATROLL,SET_PLUNDER_PATROLL,TYPES_TOKEN,0,0,4,RACE_FIEND,att,POS_FACEUP_DEFENSE,targ_p)
+	return Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_PLUNDER_PATROLL,SET_PLUNDER_PATROLL,TYPES_TOKEN,0,0,4,RACE_TAINTED,att,POS_FACEUP_DEFENSE,targ_p)
 end
 function s.getvalidatts(tp)
 	local res=ATTRIBUTE_ALL
@@ -65,7 +65,7 @@ function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return valid_atts>0 and c:IsAbleToExtra()
 		and Duel.GetMZoneCount(tp,c)>0
 		and Duel.GetMZoneCount(1-tp,c,tp)>0
-		and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
+		and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)
 	end
 	local att=Duel.AnnounceAttribute(tp,1,valid_atts)
 	Duel.SetTargetParam(att)
@@ -82,7 +82,7 @@ function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	if not (att and att>0 and s.attcheck(tp,att,tp) and s.attcheck(tp,att,1-tp)
 		and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and Duel.GetLocationCount(1-tp,LOCATION_MZONE,tp)>0
-		and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)) then return end
+		and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)) then return end
 	for p=tp,1-tp,(tp==0 and 1 or -1) do
 		local token=Duel.CreateToken(tp,TOKEN_PLUNDER_PATROLL)
 		token:Attribute(att)
@@ -121,11 +121,11 @@ function s.dthop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.gthtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.thfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.thfilter,tp,LOCATION_GRAVE,0,1,nil)
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and s.thfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.thfilter,tp,LOCATION_REST,0,1,nil)
 		and e:GetHandler():IsType(TYPE_PENDULUM) and Duel.CheckPendulumZones(tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,0,0)
 end
 function s.gthop(e,tp,eg,ep,ev,re,r,rp)
@@ -133,7 +133,7 @@ function s.gthop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if tc:IsRelateToEffect(e) and Duel.SendtoHand(tc,nil,REASON_EFFECT)>0
 		and tc:IsLocation(LOCATION_HAND) and Duel.CheckPendulumZones(tp)
-		and c:IsRelateToEffect(e) and not c:IsForbidden() then
+		and c:IsRelateToEffect(e) and not c:IsUnliked() then
 		Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	end
 end

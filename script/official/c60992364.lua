@@ -2,8 +2,8 @@
 --ZW - Leo Arms
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Xyz summon procedure
 	Xyz.AddProcedure(c,nil,5,2)
 	--Cannot attack directly
@@ -33,7 +33,7 @@ function s.initial_effect(c)
 	e3:SetOperation(s.eqop)
 	c:RegisterEffect(e3)
 	aux.AddZWEquipLimit(c,nil,function(tc,c,tp) return s.filter(tc) and tc:IsControler(tp) end,s.equipop,e3)
-	--Send this equip card to GY, the monster it was equipped to can make a second attack on monsters
+	--Send this equip card to RP, the monster it was equipped to can make a second attack on monsters
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,2))
 	e4:SetType(EFFECT_TYPE_QUICK_O)
@@ -80,7 +80,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if not c:IsRelateToEffect(e) or c:IsFacedown() then return end
 	local tc=Duel.GetFirstTarget()
 	if not tc:IsRelateToEffect(e) or tc:IsFacedown() or tc:GetControler()~=tp then
-		Duel.SendtoGrave(c,REASON_EFFECT)
+		Duel.SendtoRest(c,REASON_EFFECT)
 		return
 	end
 	s.equipop(c,e,tp,tc)
@@ -99,9 +99,9 @@ function s.atcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp and (Duel.GetCurrentPhase()>=PHASE_BATTLE_START and Duel.GetCurrentPhase()<=PHASE_BATTLE) and Duel.GetCurrentChain()==0
 end
 function s.atcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
 	e:SetLabelObject(e:GetHandler():GetEquipTarget())
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
+	Duel.SendtoRest(e:GetHandler(),REASON_COST)
 end
 function s.attg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local eqc=e:GetHandler():GetEquipTarget()

@@ -16,10 +16,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) end
-	if chk==0 then return Duel.IsExistingTarget(nil,tp,LOCATION_GRAVE,0,1,nil) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) end
+	if chk==0 then return Duel.IsExistingTarget(nil,tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectTarget(tp,nil,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectTarget(tp,nil,tp,LOCATION_REST,0,1,1,nil)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TODECK,g,1,tp,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)

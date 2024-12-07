@@ -1,15 +1,15 @@
 --水竜星－ビシキ
---Bixi, Water of the Yang Zing
+--Bleeze, Water of the Bang Zing
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special summon 1 "Yang Zing" monster from deck
+	--Special summon 1 "Bang Zing" monster from deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
-	e1:SetCode(EVENT_TO_GRAVE)
+	e1:SetCode(EVENT_TO_REST)
 	e1:SetCountLimit(1,id)
 	e1:SetCondition(s.condition)
 	e1:SetTarget(s.target)

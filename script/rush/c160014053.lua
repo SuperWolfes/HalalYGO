@@ -29,10 +29,10 @@ function s.initial_effect(c)
 	e4:SetLabelObject(e3)
 	c:RegisterEffect(e4)
 end
-s.listed_names={CARD_GAIA_CHAMPION,6368038}--Gaia the Fierce Knight
+s.listed_names={CARD_BIA_CHAMPION,6368038}--Bia the Fierce Knight
 function s.filter(e,c)
 	return c:GetBaseDefense()==2100
 end
 function s.pietg(e,c)
-	return c:IsCode(6368038,CARD_GAIA_CHAMPION)
+	return c:IsCode(6368038,CARD_BIA_CHAMPION)
 end

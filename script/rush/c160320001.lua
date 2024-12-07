@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
 	c:AddMustBeFusionSummoned()
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,21844576,58932615)
 	--damage
 	local e2=Effect.CreateEffect(c)
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local bc=e:GetHandler():GetBattleTarget()
-	if bc and bc:IsLocation(LOCATION_GRAVE) then
+	if bc and bc:IsLocation(LOCATION_REST) then
 		local atk=bc:GetTextAttack()
 		if bc:WasMaximumMode() then
 			atk=bc:GetMaximumAttack()

@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Set 1 "Metalmorph" Trap from your Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetCountLimit(1,id)
 	e1:SetCost(s.setcost)
 	e1:SetTarget(s.settg)
-	e1:SetOperation(s.setop)
+	e1:SetOperation(s.vetop)
 	c:RegisterEffect(e1)
 	--Negate the activation of your opponent's card or effect and inflict damage to them
 	local e2=Effect.CreateEffect(c)
@@ -46,7 +46,7 @@ function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return c:IsAbleToDeck() and Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_DECK,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,c,1,tp,0)
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 	local g=Duel.SelectMatchingCard(tp,s.setfilter,tp,LOCATION_DECK,0,1,1,nil)

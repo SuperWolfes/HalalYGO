@@ -12,12 +12,12 @@ function s.initial_effect(c)
 	e1:SetCountLimit(1,id)
 	e1:SetValue(s.synval)
 	c:RegisterEffect(e1)
-	-- Send the top card from your Deck to the GY and Special Summon itself from the GY
+	-- Send the top card from your Deck to the RP and Special Summon itself from the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_DECKDES+CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,id,EFFECT_COUNT_CODE_DUEL)
 	e2:SetCondition(s.spcon)
 	e2:SetTarget(s.sptg)
@@ -43,7 +43,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.DiscardDeck(tp,1,REASON_EFFECT)>0 and Duel.GetOperatedGroup():GetFirst():IsLocation(LOCATION_GRAVE) then
+	if Duel.DiscardDeck(tp,1,REASON_EFFECT)>0 and Duel.GetOperatedGroup():GetFirst():IsLocation(LOCATION_REST) then
 		local c=e:GetHandler()
 		if c:IsRelateToEffect(e) and Duel.SpecialSummonStep(c,0,tp,tp,false,false,POS_FACEUP) then
 			--Level becomes 1

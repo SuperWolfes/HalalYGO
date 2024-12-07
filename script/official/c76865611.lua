@@ -41,7 +41,7 @@ function s.check(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.cond(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetLabelObject():GetLabel()==1
-		and e:GetHandler():IsLocation(LOCATION_GRAVE) and e:GetHandler():IsReason(REASON_BATTLE)
+		and e:GetHandler():IsLocation(LOCATION_REST) and e:GetHandler():IsReason(REASON_BATTLE)
 end
 function s.opd(e,tp,eg,ep,ev,re,r,rp)
 	local e1=Effect.CreateEffect(e:GetHandler())

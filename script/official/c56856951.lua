@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_TOHAND)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_PREDRAW)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCondition(s.thcon)
 	e2:SetTarget(s.thtg)
 	e2:SetOperation(s.thop)
@@ -28,8 +28,8 @@ function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetLP(1-tp)>3000
 end
 function s.damcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,2,nil) end
-	Duel.DiscardHand(tp,Card.IsAbleToGraveAsCost,2,2,REASON_COST)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,2,nil) end
+	Duel.DiscardHand(tp,Card.IsAbleToRestAsCost,2,2,REASON_COST)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

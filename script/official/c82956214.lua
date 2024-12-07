@@ -5,7 +5,7 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send 1 monster from extra deck to GY to destroy opponent's monster
+	--Send 1 monster from extra deck to RP to destroy opponent's monster
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,1))
 	e1:SetCategory(CATEGORY_DESTROY)
@@ -24,7 +24,7 @@ function s.desfilter(c,tp)
 end
 	--Check for a monster in player's extra deck, whose ATK is higher than opponent's monster
 function s.tgfilter(c,rc)
-	return c:GetAttack()>=rc:GetAttack() and c:IsAbleToGrave()
+	return c:GetAttack()>=rc:GetAttack() and c:IsAbleToRest()
 end
 	--Activation legality
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -34,13 +34,13 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local g=Duel.SelectTarget(tp,s.desfilter,tp,0,LOCATION_MZONE,1,1,nil,tp)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
 end
-	--Send 1 monster from extra deck to GY to destroy opponent's monster
+	--Send 1 monster from extra deck to RP to destroy opponent's monster
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) and tc:IsFaceup() then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_EXTRA,0,1,1,nil,tc)
-		if #g>0 and Duel.SendtoGrave(g,REASON_EFFECT)>0 and g:GetFirst():IsLocation(LOCATION_GRAVE) then
+		if #g>0 and Duel.SendtoRest(g,REASON_EFFECT)>0 and g:GetFirst():IsLocation(LOCATION_REST) then
 			Duel.Destroy(tc,REASON_EFFECT)
 		end
 	end

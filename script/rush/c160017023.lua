@@ -39,7 +39,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetValue(160018005)
 	e1:SetReset(RESETS_STANDARD_PHASE_END)
 	c:RegisterEffect(e1)
-	local g=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_REST,0,nil)
 	if #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.BreakEffect()
 		local g2=g:Select(tp,1,1,nil)

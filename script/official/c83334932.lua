@@ -30,12 +30,12 @@ end
 s.listed_series={SET_SUPERHEAVY_SAMURAI}
 s.listed_names={id}
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
-	return not Duel.IsExistingMatchingCard(Card.IsSpellTrap,tp,LOCATION_GRAVE,0,1,nil)
+	return not Duel.IsExistingMatchingCard(Card.IsActionalTrap,tp,LOCATION_REST,0,1,nil)
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsDiscardable() end
-	Duel.SendtoGrave(c,REASON_COST+REASON_DISCARD)
+	Duel.SendtoRest(c,REASON_COST+REASON_DISCARD)
 end
 function s.thfilter(c)
 	return c:IsSetCard(SET_SUPERHEAVY_SAMURAI) and c:IsMonster() and not c:IsCode(id) and c:IsAbleToHand()

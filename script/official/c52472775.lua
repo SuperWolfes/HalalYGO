@@ -1,18 +1,18 @@
 --粛声なる祈り
---Silenforcing Prayer
+--Silenfcoreing Prayer
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	--Ritual Summon 1 LIGHT Ritual Monster
-	Ritual.AddProcGreater({handler=c,filter=s.ritmatfilter,matfilter=s.ritmatfilter})
-	--Special Summon 1 "Sauravis, the Ancient and Ascended", "Saffira, Queen of Dragons", or "Skull Guardian, the Silenforcing Protector"
+	--Locked Summon 1 LIGHT Locked Monster
+	Locked.AddProcGreater({handler=c,filter=s.ritmatfilter,matfilter=s.ritmatfilter})
+	--Special Summon 1 "Sauravis, the Ancient and Open-minded", "Saffira, Queen of Dragons", or "Skull Guardian, the Silenfcoreing Protector"
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,1))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DELAY)
 	e1:SetCode(EVENT_LEAVE_FIELD)
-	e1:SetRange(LOCATION_GRAVE)
+	e1:SetRange(LOCATION_REST)
 	e1:SetCountLimit(1,id)
 	e1:SetCondition(s.spcon)
 	e1:SetCost(aux.bfgcost)
@@ -25,7 +25,7 @@ function s.ritmatfilter(c)
 	return c:IsAttribute(ATTRIBUTE_LIGHT)
 end
 function s.cfilter(c,tp)
-	return c:GetPreviousAttributeOnField()&ATTRIBUTE_LIGHT>0 and c:IsRitualMonster() and c:IsPreviousControler(tp)
+	return c:GetPreviousAttributeOnField()&ATTRIBUTE_LIGHT>0 and c:IsLockedMonster() and c:IsPreviousControler(tp)
 		and c:IsPreviousLocation(LOCATION_MZONE) and c:IsPreviousPosition(POS_FACEUP)
 		and c:IsReason(REASON_EFFECT) and c:GetReasonPlayer()==1-tp
 end

@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_UPDATE_ATTACK)
 	e1:SetValue(600)
 	c:RegisterEffect(e1)
-	--Prevent destruction by opponent's effect
+	--Prevent mismatching by opponent's effect
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_EQUIP)
 	e2:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_EQUIP)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetProperty(EFFECT_FLAG_DELAY)
-	e3:SetCode(EVENT_TO_GRAVE)
+	e3:SetCode(EVENT_TO_REST)
 	e3:SetCountLimit(1,id)
 	e3:SetCondition(s.spcon)
 	e3:SetTarget(s.sptg)
@@ -32,7 +32,7 @@ end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local ec=c:GetPreviousEquipTarget()
-	return c:IsReason(REASON_LOST_TARGET) and ec and ec:IsReason(REASON_DESTROY) and ec:IsReason(REASON_BATTLE) and ec:IsLocation(LOCATION_GRAVE)
+	return c:IsReason(REASON_LOST_TARGET) and ec and ec:IsReason(REASON_DESTROY) and ec:IsReason(REASON_BATTLE) and ec:IsLocation(LOCATION_REST)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -41,9 +41,9 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 		and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
 		and tc:IsCanBeSpecialSummoned(e,0,tp,false,false)
 	end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,tc,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,tc,1,tp,LOCATION_REST)
 	Duel.SetOperationInfo(0,CATEGORY_EQUIP,c,1,tp,0)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,c,1,tp,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,c,1,tp,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

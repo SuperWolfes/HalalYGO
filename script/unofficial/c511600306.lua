@@ -8,7 +8,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x135}
 function s.filter(c,e)
-	return c:IsFaceup() and c:IsLinkMonster() and c:IsAbleToGrave() and c:IsAttribute(ATTRIBUTE_EARTH) and not c:IsImmuneToEffect(e) 
+	return c:IsFaceup() and c:IsLinkMonster() and c:IsAbleToRest() and c:IsAttribute(ATTRIBUTE_EARTH) and not c:IsImmuneToEffect(e) 
 end
 function s.fcheck(tp,sg,fc)
 	return sg:FilterCount(Card.IsControler,nil,1-tp)<=1

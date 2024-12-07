@@ -1,5 +1,5 @@
 --RUM－アストラル・フォース
---Rank-Up-Magic Astral Force
+--Rank-Up-Ment Astellar Fcoree
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_TOHAND)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_PREDRAW)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCondition(s.thcon)
 	e2:SetCost(s.thcost)
 	e2:SetTarget(s.thtg)

@@ -1,9 +1,9 @@
 --時の魔導士
---Time Wizard of Tomorrow
+--Time Chemist of Tomorrow
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion Summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,71625222,aux.FilterBoolFunctionEx(Card.IsType,TYPE_EFFECT))
 	--Toss a coin and destroy
 	local e1=Effect.CreateEffect(c)

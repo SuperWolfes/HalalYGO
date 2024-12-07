@@ -2,7 +2,7 @@
 --Orea, the Sylvan High Arbiter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Xyz Summon Procedure
 	Xyz.AddProcedure(c,nil,7,2)
 	--Sort cards from the top of your Deck
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	--Excavate up to 3 cards from your Deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_TOGRAVE)
+	e2:SetCategory(CATEGORY_TOREST)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetCountLimit(1)
 	e2:SetRange(LOCATION_MZONE)
@@ -27,15 +27,15 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2,false,REGISTER_FLAG_DETACH_XMAT)
 end
 function s.cfilter(c,lv)
-	return c:IsRace(RACE_PLANT) and c:IsLevelBelow(lv) and (c:IsLocation(LOCATION_HAND) or c:IsFaceup()) and c:IsAbleToGraveAsCost()
+	return c:IsRace(RACE_PLANT) and c:IsLevelBelow(lv) and (c:IsLocation(LOCATION_HAND) or c:IsFaceup()) and c:IsAbleToRestAsCost()
 end
 function s.stcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ct=Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE|LOCATION_HAND,0,1,nil,ct) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_MZONE|LOCATION_HAND,0,1,1,nil,ct)
 	e:SetLabel(g:GetFirst():GetLevel())
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.stop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=e:GetLabel()
@@ -58,8 +58,8 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetDecktopGroup(tp,ac)
 	local sg=g:Filter(Card.IsRace,nil,RACE_PLANT)
 	Duel.DisableShuffleCheck()
-	if Duel.SendtoGrave(sg,REASON_EFFECT+REASON_EXCAVATE)~=0 then
-		local ct=Duel.GetOperatedGroup():FilterCount(Card.IsLocation,nil,LOCATION_GRAVE)
+	if Duel.SendtoRest(sg,REASON_EFFECT+REASON_EXCAVATE)~=0 then
+		local ct=Duel.GetOperatedGroup():FilterCount(Card.IsLocation,nil,LOCATION_REST)
 		if ct>0 then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RTOHAND)
 			local tg=Duel.SelectMatchingCard(tp,Card.IsAbleToHand,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,#sg,c)

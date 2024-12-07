@@ -1,10 +1,10 @@
 --華蝶風彩のプロフェシーフレイル
---Prophecy Flail of the Colors of the Wind, Butterflies, and Flowers
+--Prediction Flail of the Colors of the Wind, Butterflies, and Flowers
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,160011024,160015012)
 	--Destroy 1 monster the opponent controls
 	local e1=Effect.CreateEffect(c)
@@ -36,7 +36,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		dg:AddMaximumCheck()
 		Duel.HintSelection(dg,true)
 		if Duel.Destroy(dg,REASON_EFFECT)>0 then
-			local tdg=Duel.GetMatchingGroup(s.tdfilter,tp,0,LOCATION_GRAVE,nil)
+			local tdg=Duel.GetMatchingGroup(s.tdfilter,tp,0,LOCATION_REST,nil)
 			if #tdg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 				if Duel.SendtoDeck(tdg,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)>0 then
 					local e1=Effect.CreateEffect(c)

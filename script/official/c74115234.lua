@@ -2,7 +2,7 @@
 --Orb of Yasaka
 local s,id=GetID()
 function s.initial_effect(c)
-	aux.AddEquipProcedure(c,nil,aux.FilterBoolFunction(Card.IsType,TYPE_SPIRIT))
+	aux.AddEquipProcedure(c,nil,aux.FilterBoolFunction(Card.IsType,TYPE_GUARDIAN))
 	--Gain LP equal to the damage the equipped monster inflicts
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -20,19 +20,19 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e2:SetCategory(CATEGORY_TOHAND)
-	e2:SetCode(EVENT_TO_GRAVE)
+	e2:SetCode(EVENT_TO_REST)
 	e2:SetCondition(s.retcon)
 	e2:SetTarget(s.rettg)
 	e2:SetOperation(s.retop)
 	c:RegisterEffect(e2)
 end
-s.listed_card_types={TYPE_SPIRIT}
+s.listed_card_types={TYPE_GUARDIAN}
 function s.recon(e,tp,eg,ep,ev,re,r,rp)
 	local ec=eg:GetFirst()
 	local bc=ec:GetBattleTarget()
 	e:SetLabelObject(bc)
 	return e:GetHandler():GetEquipTarget()==eg:GetFirst() and ec:IsControler(tp)
-		and bc:IsLocation(LOCATION_GRAVE) and bc:IsMonster() and bc:IsReason(REASON_BATTLE) 
+		and bc:IsLocation(LOCATION_REST) and bc:IsMonster() and bc:IsReason(REASON_BATTLE) 
 end
 function s.retg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

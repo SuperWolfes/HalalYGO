@@ -1,5 +1,5 @@
 --聖魔の大賢者エンディミオン
---Endymion, the Magistus of Mastery
+--Edypsos, the Magistus of Mastery
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
@@ -59,7 +59,7 @@ function s.eqlimit(e,c)
 	return c==e:GetLabelObject()
 end
 function s.desfilter(c)
-	return c:IsFaceup() and c:IsSpell()
+	return c:IsFaceup() and c:IsActional()
 end 
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_ONFIELD) and s.desfilter(chkc) end

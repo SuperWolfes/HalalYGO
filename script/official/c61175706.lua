@@ -1,5 +1,5 @@
 --アルカナフォースⅣ－THE EMPEROR
---Arcana Force IV - The Emperor
+--Arcana Fcoree IV - The Emperor
 local s,id=GetID()
 function s.initial_effect(c)
 	--Toss a coin and apply the appropriate effect
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e3:SetCode(EVENT_FLIP_SUMMON_SUCCESS)
 	c:RegisterEffect(e3)
 end
-s.listed_series={SET_ARCANA_FORCE}
+s.listed_series={SET_ARCANA_FCOREE}
 s.toss_coin=true
 function s.cointg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -36,7 +36,7 @@ function s.arcanareg(c,coin)
 	e1:SetCode(EFFECT_UPDATE_ATTACK)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetTargetRange(LOCATION_MZONE,0)
-	e1:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,SET_ARCANA_FORCE))
+	e1:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,SET_ARCANA_FCOREE))
 	e1:SetValue(s.atkval)
 	e1:SetReset(RESET_EVENT|RESETS_STANDARD)
 	c:RegisterEffect(e1)

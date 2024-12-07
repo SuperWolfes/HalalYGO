@@ -1,5 +1,5 @@
 --疾風の暗黒騎士ガイア
---Swift Gaia the Fierce Knight (Rush)
+--Swift Bia the Fierce Knight (Rush)
 local s,id=GetID()
 function s.initial_effect(c)
 	--summon

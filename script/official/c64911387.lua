@@ -52,8 +52,8 @@ end
 function s.thsptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end
 function s.thspfilter(c,e,tp,ft)
 	return c:IsLevel(3) and c:IsType(TYPE_NORMAL)
@@ -65,9 +65,9 @@ function s.thspop(e,tp,eg,ep,ev,re,r,rp)
 	if #g>0 and Duel.SendtoHand(g,nil,REASON_EFFECT)>0 then
 		Duel.ConfirmCards(1-tp,g)
 		local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-		if Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.thspfilter),tp,LOCATION_GRAVE,0,1,nil,e,tp,ft) and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
+		if Duel.IsExistingMatchingCard(aux.RestValleyFilter(s.thspfilter),tp,LOCATION_REST,0,1,nil,e,tp,ft) and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 			Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,3))
-			local sc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thspfilter),tp,LOCATION_GRAVE,0,1,1,nil,e,tp,ft):GetFirst()
+			local sc=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.thspfilter),tp,LOCATION_REST,0,1,1,nil,e,tp,ft):GetFirst()
 			if not sc then return end
 			Duel.BreakEffect()
 			aux.ToHandOrElse(sc,tp,

@@ -1,9 +1,9 @@
 --黎溟界闢
---Ogdoadic Daybreak
+--Ogtasic Daybreak
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon up to 1 "Ogdoadic Token" for every 2 Levels of the Tributed monster
+	--Special Summon up to 1 "Ogtasic Token" for every 2 Levels of the Tributed monster
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOKEN)
@@ -15,20 +15,20 @@ function s.initial_effect(c)
 	e1:SetTarget(s.tnktg)
 	e1:SetOperation(s.tnkop)
 	c:RegisterEffect(e1)
-	--Shuffle 1 banished Reptile monster into the Deck and send 1 Reptile monster from the Deck to the GY
+	--Shuffle 1 banished Reptile monster into the Deck and send 1 Reptile monster from the Deck to the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_TODECK+CATEGORY_TOGRAVE)
+	e2:SetCategory(CATEGORY_TODECK+CATEGORY_TOREST)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCost(aux.bfgcost)
 	e2:SetTarget(s.tdtg)
 	e2:SetOperation(s.tdop)
 	c:RegisterEffect(e2)
 end
-s.listed_names={23837055} --Ogdoadic Token
+s.listed_names={23837055} --Ogtasic Token
 function s.cfilter(c,tp)
 	return c:IsRace(RACE_REPTILE) and c:HasLevel() and c:IsLevelAbove(2) and Duel.GetMZoneCount(tp,c)>0
 end
@@ -41,7 +41,7 @@ function s.tnktg(e,tp,eg,ep,ev,re,r,rp,chk)
 		if e:GetLabel()~=-100 then return false end
 		e:SetLabel(0)
 		return Duel.CheckReleaseGroupCost(tp,s.cfilter,1,false,nil,nil,tp)
-			and Duel.IsPlayerCanSpecialSummonMonster(tp,23837055,SET_OGDOADIC,TYPES_TOKEN,0,0,2,RACE_REPTILE,ATTRIBUTE_DARK)
+			and Duel.IsPlayerCanSpecialSummonMonster(tp,23837055,SET_OGTASIC,TYPES_TOKEN,0,0,2,RACE_REPTILE,ATTRIBUTE_DARK)
 	end
 	local g=Duel.SelectReleaseGroupCost(tp,s.cfilter,1,1,false,nil,nil,tp)
 	e:SetLabel(g:GetFirst():GetLevel()//2)
@@ -50,10 +50,10 @@ function s.tnktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,1,0,0)
 end
 function s.tnkop(e,tp,eg,ep,ev,re,r,rp)
-	if not Duel.IsPlayerCanSpecialSummonMonster(tp,23837055,SET_OGDOADIC,TYPES_TOKEN,0,0,2,RACE_REPTILE,ATTRIBUTE_DARK) then return end
+	if not Duel.IsPlayerCanSpecialSummonMonster(tp,23837055,SET_OGTASIC,TYPES_TOKEN,0,0,2,RACE_REPTILE,ATTRIBUTE_DARK) then return end
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ft==0 then return end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	ft=math.min(e:GetLabel(),ft)
 	local ct=Duel.AnnounceNumberRange(tp,1,ft)
 	for i=1,ct do
@@ -71,10 +71,10 @@ function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
 	local g=Duel.SelectTarget(tp,s.tdfilter,tp,LOCATION_REMOVED,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,1,tp,0)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
 function s.tgfilter(c)
-	return c:IsRace(RACE_REPTILE) and c:IsAbleToGrave()
+	return c:IsRace(RACE_REPTILE) and c:IsAbleToRest()
 end
 function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
@@ -82,11 +82,11 @@ function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ShuffleDeck(tp)
 	if Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 		if #g>0 then
 			Duel.BreakEffect()
-			Duel.SendtoGrave(g,REASON_EFFECT)
+			Duel.SendtoRest(g,REASON_EFFECT)
 		end
 	end
 end

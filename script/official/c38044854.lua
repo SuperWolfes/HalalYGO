@@ -1,5 +1,5 @@
 --ЯＲＵＭ－レイド・ラプターズ・フォース
---Rise Rank-Up-Magic Raidraptor's Force
+--Rise Rank-Up-Ment Raidraptor's Fcoree
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -30,14 +30,14 @@ function s.spfilter(c,e,tp,rk)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	local g=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,nil,tp)
+	local g=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_MZONE|LOCATION_REST,0,nil,tp)
 	if chk==0 then return #g>=2 and aux.SelectUnselectGroup(g,e,tp,2,#g,s.rescon,0) end
 	local tg=aux.SelectUnselectGroup(g,e,tp,2,#g,s.rescon,1,tp,HINTMSG_XMATERIAL,s.rescon)
 	Duel.SetTargetCard(tg)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
-	local gyg=tg:Filter(Card.IsLocation,nil,LOCATION_GRAVE)
+	local gyg=tg:Filter(Card.IsLocation,nil,LOCATION_REST)
 	if #gyg>0 then
-		Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,gyg,#gyg,tp,0)
+		Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,gyg,#gyg,tp,0)
 	end
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)

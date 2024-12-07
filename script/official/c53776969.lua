@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,s.matfilter,1,1)
 	--Search 1 "Lifobia, the Wanton and Willful World of Desire"
 	local e1=Effect.CreateEffect(c)
@@ -16,12 +16,12 @@ function s.initial_effect(c)
 	e1:SetTarget(s.thtg)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
-	--Special Summon itself from the GY
+	--Special Summon itself from the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,id,EFFECT_COUNT_CODE_DUEL)
 	e2:SetCondition(s.spcon)
 	e2:SetTarget(s.sptg)

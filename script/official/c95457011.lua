@@ -1,5 +1,5 @@
 --天帝従騎イデア
---Edea the Heavenly Squire
+--Edea the Spectrumly Squire
 local s,id=GetID()
 function s.initial_effect(c)
 	--summon
@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e3:SetCategory(CATEGORY_TOHAND)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DELAY)
-	e3:SetCode(EVENT_TO_GRAVE)
+	e3:SetCode(EVENT_TO_REST)
 	e3:SetCountLimit(1,{id,1})
 	e3:SetTarget(s.thtg)
 	e3:SetOperation(s.thop)
@@ -62,7 +62,7 @@ function s.splimit(e,c,sump,sumtype,sumpos,targetp,se)
 	return c:IsLocation(LOCATION_EXTRA)
 end
 function s.thfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0xbe) and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsFaceup() and c:IsSetCard(0xbe) and c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REMOVED) and s.thfilter(chkc) end

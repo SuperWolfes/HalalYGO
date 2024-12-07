@@ -22,7 +22,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.filter1(c,tp)
 	local lv=c:GetOriginalLevel()
-	return lv>1 and c:IsMonster() and c:IsDiscardable() and c:IsAbleToGraveAsCost()
+	return lv>1 and c:IsMonster() and c:IsDiscardable() and c:IsAbleToRestAsCost()
 		and Duel.IsExistingTarget(s.filter2,tp,LOCATION_MZONE,0,1,nil,lv)
 end
 function s.filter2(c,lv)
@@ -37,7 +37,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 	local cg=Duel.SelectMatchingCard(tp,s.filter1,tp,LOCATION_HAND,0,1,1,nil,tp)
-	Duel.SendtoGrave(cg,REASON_DISCARD+REASON_COST)
+	Duel.SendtoRest(cg,REASON_DISCARD+REASON_COST)
 	local lv=cg:GetFirst():GetLevel()
 	e:SetLabel(lv)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)

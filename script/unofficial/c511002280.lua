@@ -1,4 +1,4 @@
---Fallen Angel's Bewitchment
+--Fallen Angel's Bemintment
 local s,id=GetID()
 function s.initial_effect(c)
 	--change target
@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_FAIRY) and c:IsAttribute(ATTRIBUTE_DARK)
+	return c:IsFaceup() and c:IsRace(RACE_WANDERER) and c:IsAttribute(ATTRIBUTE_DARK)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil)

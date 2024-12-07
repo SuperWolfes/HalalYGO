@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	Xyz.AddProcedure(c,nil,4,2)
 	--Xyz Summon Procedure
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Equip itself to an Xyz monster
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -64,7 +64,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not c:IsRelateToEffect(e) or c:IsFacedown() then return end
 	if not tc:IsRelateToEffect(e) or tc:IsFacedown() or tc:IsControler(1-tp) then
-		Duel.SendtoGrave(c,REASON_EFFECT)
+		Duel.SendtoRest(c,REASON_EFFECT)
 		return
 	end
 	if not Duel.Equip(tp,c,tc,false) then return end

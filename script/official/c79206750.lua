@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	e2:SetCode(EVENT_TO_GRAVE)
+	e2:SetCode(EVENT_TO_REST)
 	e2:SetCondition(s.tgcon)
 	e2:SetTarget(s.tgtg)
 	e2:SetOperation(s.tgop)
@@ -53,13 +53,13 @@ end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) end
 	if chk==0 then return true end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectTarget(tp,nil,tp,0,LOCATION_MZONE,1,1,nil)
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,g,#g,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,g,#g,0,0)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) then
-		Duel.SendtoGrave(tc,REASON_EFFECT)
+		Duel.SendtoRest(tc,REASON_EFFECT)
 	end
 end

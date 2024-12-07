@@ -24,5 +24,5 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()
 end
 function s.val(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsSetCard,c:GetControler(),LOCATION_GRAVE,0,nil,0x39)*100
+	return Duel.GetMatchingGroupCount(Card.IsSetCard,c:GetControler(),LOCATION_REST,0,nil,0x39)*100
 end

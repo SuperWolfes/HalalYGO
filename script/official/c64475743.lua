@@ -1,12 +1,12 @@
 -- 遊戯王ラッシュデュエル
--- Kittytail, Mystical Beast of the Forest
+-- Kittytail, Vague Beast of the Forest
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	-- Send 1 Beast, Beast-Warrior, Winged-Beast, Insect or Plant monster to the GY
+	-- Send 1 Beast, Beast-Warrior, Winged-Beast, Insect or Plant monster to the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_TOGRAVE)
+	e1:SetCategory(CATEGORY_TOREST)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_CARD_TARGET)
 	e1:SetCode(EVENT_SUMMON_SUCCESS)
@@ -32,26 +32,26 @@ function s.initial_effect(c)
 end
 s.listed_names={id}
 function s.tgfilter(c,race)
-	return c:IsOriginalRace(race) and c:IsAbleToGrave()
+	return c:IsOriginalRace(race) and c:IsAbleToRest()
 end
 function s.tgtgfilter(c,tp)
 	return c:IsRace(RACES_BEAST_BWARRIOR_WINGB|RACE_INSECT|RACE_PLANT)
 		and Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil,c:GetOriginalRace())
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.tgtgfilter(chkc,tp) end
-	if chk==0 then return Duel.IsExistingTarget(s.tgtgfilter,tp,LOCATION_GRAVE,0,1,nil,tp) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and s.tgtgfilter(chkc,tp) end
+	if chk==0 then return Duel.IsExistingTarget(s.tgtgfilter,tp,LOCATION_REST,0,1,nil,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local g=Duel.SelectTarget(tp,s.tgtgfilter,tp,LOCATION_GRAVE,0,1,1,nil,tp)
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+	local g=Duel.SelectTarget(tp,s.tgtgfilter,tp,LOCATION_REST,0,1,1,nil,tp)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not tc:IsRelateToEffect(e) then return end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil,tc:GetOriginalRace())
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)

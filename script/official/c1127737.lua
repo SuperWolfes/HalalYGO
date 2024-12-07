@@ -1,5 +1,5 @@
 --異次元の古戦場－サルガッソ
---Sargasso the D.D. Battlefield
+--Sargasso the S.D. Battlefield
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	aux.AddSkillProcedure(c,1,false,s.flipcon,s.flipop)
 end
 s.listed_series={SET_ANCIENT_GEAR}
-s.listed_names={CARD_ANCIENT_GEAR_GOLEM}
+s.listed_names={CARD_ANCIENT_GEAR_GOPAL}
 function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 	return aux.CanActivateSkill(tp) and s.cost(e,tp,eg,ep,ev,re,r,rp,0) and not Duel.HasFlagEffect(tp,id)
 end
@@ -20,7 +20,7 @@ end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil,e,tp,eg,ep,ev,re,r,rp) end
 	Duel.DiscardHand(tp,s.costfilter,1,1,REASON_COST|REASON_DISCARD,nil,e,tp,eg,ep,ev,re,r,rp)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,nil,0,tp,LOCATION_HAND|LOCATION_DECK)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,nil,0,tp,LOCATION_HAND|LOCATION_DECK)
 end
 function s.fcheckmatfilter(c)
 	return c:IsCode(83104731,95735217,7171149,12652643) and c:IsFaceup() and c:IsOnField()
@@ -28,7 +28,7 @@ end
 function s.fextra(exc)
 	return function(e,tp,mg)
 		if mg:IsExists(s.fcheckmatfilter,1,nil) then
-			local eg=Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToGrave),tp,LOCATION_HAND|LOCATION_DECK,0,nil)
+			local eg=Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRest),tp,LOCATION_HAND|LOCATION_DECK,0,nil)
 			if eg and #eg>0 then
 				return eg,s.fcheck(exc)
 			end

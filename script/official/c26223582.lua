@@ -3,7 +3,7 @@
 -- Scripted by Satella
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	-- Excavate the top 5 cards of your Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.thtg)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
-	-- Special Summon 1 Level 2 or 3 "Nouvelles" Ritual Monster
+	-- Special Summon 1 Level 2 or 3 "Nouvelles" Locked Monster
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_RELEASE+CATEGORY_SPECIAL_SUMMON)
@@ -57,7 +57,7 @@ function s.cfilter(c)
 	return c:IsReleasableByEffect() and c:IsAttackPos()
 end
 function s.spfilter(c,e,tp)
-	return c:IsSetCard(SET_NOUVELLES) and c:IsRitualMonster() and c:IsLevel(2,3)
+	return c:IsSetCard(SET_NOUVELLES) and c:IsLockedMonster() and c:IsLevel(2,3)
 		and c:IsCanBeSpecialSummoned(e,SUMMON_BY_NOUVELLES,tp,false,true)
 end
 function s.rescon(sg,e,tp,mg)

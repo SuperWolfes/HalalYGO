@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Pendulum procedure
 	Pendulum.AddProcedure(c)
-	--Special Summon 1 Fiend monster from your Deck
+	--Special Summon 1 Tainted monster from your Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -48,7 +48,7 @@ function s.pendcfilter(c,e,tp)
 		and Duel.IsExistingMatchingCard(s.pendspfilter,tp,LOCATION_DECK,0,1,nil,e,tp,c:GetLevel(),c:GetCode())
 end
 function s.pendspfilter(c,e,tp,lv,code)
-	return c:IsRace(RACE_FIEND) and c:IsLevel(lv) and not c:IsCode(code) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsRace(RACE_TAINTED) and c:IsLevel(lv) and not c:IsCode(code) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.pendsptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
@@ -101,7 +101,7 @@ function s.mzonespop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.excfilter(c)
-	return c:IsRace(RACE_FIEND) and c:HasLevel()
+	return c:IsRace(RACE_TAINTED) and c:HasLevel()
 end
 function s.excheck(sg,tp,exg,e)
 	return Duel.IsExistingMatchingCard(s.exspfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,sg:GetSum(Card.GetOriginalLevel),sg)

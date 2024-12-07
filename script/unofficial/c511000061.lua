@@ -5,8 +5,8 @@ function s.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
-	e1:SetRange(LOCATION_GRAVE)
-	e1:SetProperty(EFFECT_FLAG_CARD_TARGET,EFFECT_FLAG2_FORCE_ACTIVATE_LOCATION)
+	e1:SetRange(LOCATION_REST)
+	e1:SetProperty(EFFECT_FLAG_CARD_TARGET,EFFECT_FLAG2_FCOREE_ACTIVATE_LOCATION)
 	e1:SetValue(LOCATION_SZONE)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
@@ -20,7 +20,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.rfilter(chkc) end
 	if chk==0 then
-		local eff={c:GetCardEffect(EFFECT_NECRO_VALLEY)}
+		local eff={c:GetCardEffect(EFFECT_REST_VALLEY)}
 		for _,te in ipairs(eff) do
 			local op=te:GetOperation()
 			if not op or op(e,c) then return false end
@@ -44,7 +44,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	c:RegisterEffect(e2)
 end
 function s.efilter(e,te)
-	return te:IsActiveType(TYPE_SPELL+TYPE_TRAP)
+	return te:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

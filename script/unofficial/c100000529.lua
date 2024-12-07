@@ -1,5 +1,5 @@
 --ワルキューレの抱擁 (Anime)
---Valkyrie's Embrace (Anime)
+--Balkanie's Embrace (Anime)
 --updated by ClaireStanfield
 local s,id=GetID()
 function s.initial_effect(c)

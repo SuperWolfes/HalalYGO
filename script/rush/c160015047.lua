@@ -4,9 +4,9 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,CARD_REDEYES_B_DRAGON,160015028)
-	--Destruction immunity
+	--Mismatching immunity
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -20,7 +20,7 @@ end
 s.listed_names={CARD_REDEYES_B_DRAGON,160015028,160015057}
 s.material_setcode=SET_RED_EYES
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,160015057)
+	return Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,160015057)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeckAsCost(tp,1) end
@@ -38,7 +38,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetValue(function(e,te)return te:GetOwnerPlayer()~=e:GetOwnerPlayer()end)
 	e1:SetReset(RESETS_STANDARD_PHASE_END,2)
 	c:RegisterEffect(e1)
-	if Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,2,nil,160015057) then
+	if Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,2,nil,160015057) then
 		Duel.BreakEffect()
 		Duel.Damage(1-tp,500,REASON_EFFECT)
 	end

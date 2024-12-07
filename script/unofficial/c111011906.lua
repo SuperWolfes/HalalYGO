@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz summon
 	Xyz.AddProcedure(c,nil,12,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Special Summon attached monsters
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -29,7 +29,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then
 		local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 		if ft<=0 then return false end
-		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 		local g=e:GetHandler():GetOverlayGroup()
 		local count=#g
 		if count==0 or count>ft then return false end
@@ -40,7 +40,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ft<=0 then return false end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	local c=e:GetHandler()
 	local g=c:GetOverlayGroup()
 	local count=#g

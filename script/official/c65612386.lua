@@ -17,16 +17,16 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_TRIBUTE)
 end
 function s.cfilter(c,tp)
-	return c:IsSpell() and c:IsAbleToRemoveAsCost()
+	return c:IsActional() and c:IsAbleToRemoveAsCost()
 		and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil,c:GetCode())
 end
 function s.thfilter(c,code)
 	return c:IsCode(code) and c:IsAbleToHand()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,nil,tp) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_GRAVE,0,1,1,nil,tp)
+	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_REST,0,1,1,nil,tp)
 	e:SetLabel(g:GetFirst():GetCode())
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end

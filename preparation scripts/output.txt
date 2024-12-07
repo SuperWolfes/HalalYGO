@@ -1,0 +1,724 @@
+!victory 0x0 Surrendered
+!setname 0x1 Ally of Justice -- SET_ALLY_OF_JUSTICE               = 0x1
+!setname 0x2 Genex -- SET_GENEX                         = 0x2
+!setname 0x3 Hungus the Flame Dragon -- SET_HORUS                         = 0x3
+!setname 0x4 Amazoness -- SET_AMAZONESS                     = 0x4
+!setname 0x10 Gusto -- SET_GUSTO                         = 0x10
+!setname 0x11 Karakuri -- SET_KARAKURI                      = 0x11
+!setname 0x12 Frog -- SET_FROG                          = 0x12
+!setname 0x13 Meklord -- SET_MEKLORD                       = 0x13
+!setname 0x14 Allure Queen -- SET_ALLURE_QUEEN                  = 0x14
+!setname 0x15 B.E.S. -- SET_BES                           = 0x15
+!setname 0x16 roid -- SET_ROID                          = 0x16
+!setname 0x17 Synchro -- SET_SYNCHRO                       = 0x17
+!setname 0x18 Cloudian -- SET_CLOUDIAN                      = 0x18
+!setname 0x19 Gladiator Beast -- SET_GLADIATOR                     = 0x19
+!setname 0x1a Dark Scorpion -- SET_DARK_SCORPION                 = 0x1a
+!setname 0x1b Phantom Beast -- SET_PHANTOM_BEAST                 = 0x1b
+!setname 0x1c Guard Message -- SET_SPIRIT_MESSAGE                = 0x1c
+!setname 0x1d Koa'ki Meiru -- SET_KOAKI_MEIRU                   = 0x1d
+!setname 0x1e Chrysalis -- SET_CHRYSALIS                     = 0x1e
+!setname 0x1f Neo-Spacian -- SET_NEO_SPACIAN                   = 0x1f
+!setname 0x20 Shien -- SET_SHIEN                         = 0x20
+!setname 0x21 Earthbound Mortal -- SET_EARTHBOUND                    = 0x21
+!setname 0x30 Vylon -- SET_VYLON                         = 0x30
+!setname 0x51 Gadget -- SET_GADGET                        = 0x51
+!setname 0x52 Guardian -- SET_GUARDIAN                      = 0x52
+!setname 0x53 Stellarwatcher -- SET_CONSTELLAR                    = 0x53
+!setname 0x54 Gagaga -- SET_GAGAGA                        = 0x54
+!setname 0x55 Photon -- SET_PHOTON                        = 0x55
+!setname 0x56 Inzektor -- SET_INZEKTOR                      = 0x56
+!setname 0x57 Resonator -- SET_RESONATOR                     = 0x57
+!setname 0x58 Wind-Up -- SET_WIND_UP                       = 0x58
+!setname 0x1002 R-Genex -- SET_R_GENEX                       = 0x1002
+!setname 0x5 Arcana Force -- SET_ARCANA_FORCE                  = 0x5
+!setname 0x6 Dark World -- SET_DARK_WORLD                    = 0x6
+!setname 0x7 Ancient Gear -- SET_ANCIENT_GEAR                  = 0x7
+!setname 0x8 HERO -- SET_HERO                          = 0x8
+!counter 0x1009 Venom Counter
+!setname 0xa lswarm -- SET_LSWARM                        = 0xa
+!setname 0xb Infernity -- SET_INFERNITY                     = 0xb
+!setname 0xc Alien -- SET_ALIEN                         = 0xc
+!setname 0xd Saber -- SET_SABER                         = 0xd
+!counter 0x100e A-Counter
+!setname 0xf Ojama -- SET_OJAMA                         = 0xf
+!counter 0x1015 Ice Counter
+!counter 0x1019 Fog Counter -- SET_GLADIATOR_BEAST               = 0x1019
+!counter 0x1021 Guard Counter -- SET_EARTHBOUND_IMMORTAL           = 0x1021
+!setname 0x22 Jurrac -- SET_JURRAC                        = 0x22
+!setname 0x23 Malefic -- SET_MALEFIC                       = 0x23
+!counter 0x1024 String Counter
+!setname 0x25 Iron Chain -- SET_IRON_CHAIN                    = 0x25
+!setname 0x26 Morphtronic -- SET_MORPHTRONIC                   = 0x26
+!setname 0x27 T.G. -- SET_TG                            = 0x27
+!setname 0x28 Batteryman -- SET_BATTERYMAN                    = 0x28
+!setname 0x29 Dragunity -- SET_DRAGUNITY                     = 0x29
+!counter 0x102a Counter ("Magic Reflector")
+!setname 0x2c Flamvell -- SET_FLAMVELL                      = 0x2c
+!setname 0x2d Nitro -- SET_NITRO                         = 0x2d
+!setname 0x2e Restkeeper's -- SET_GRAVEKEEPERS                  = 0x2e
+!setname 0x2f Ice Barrier -- SET_ICE_BARRIER                   = 0x2f
+!setname 0x2b Ninja -- SET_NINJA                         = 0x2b
+!setname 0x31 Fortune Lady -- SET_FORTUNE_LADY                  = 0x31
+!setname 0x32 Volcanic -- SET_VOLCANIC                      = 0x32
+!setname 0x33 Blackwing -- SET_BLACKWING                     = 0x33
+!setname 0x34 Crystal -- SET_CRYSTAL                       = 0x34
+!setname 0x35 Fabled -- SET_FABLED                        = 0x35
+!setname 0x36 Machina -- SET_MACHINA                       = 0x36
+!setname 0x37 Mist Valley -- SET_MIST_VALLEY                   = 0x37
+!counter 0x1038 Cubic Counter
+!counter 0x1039 Zushin Counter
+!setname 0x40 Unliked One -- SET_FORBIDDEN_ONE                 = 0x40
+!counter 0x1041 Predator Counter
+!setname 0x42 Nordic -- SET_NORDIC                        = 0x42
+!setname 0x43 Junk -- SET_JUNK                          = 0x43
+!setname 0x44 The Agent -- SET_THE_AGENT                     = 0x44
+!setname 0x1045 Red Dragon Archtained -- SET_RED_DRAGON_ARCHFIEND          = 0x1045
+!setname 0x46 Polymerization|Fusion -- SET_FUSION                        = 0x46
+!setname 0x47 Gem- -- SET_GEM                           = 0x47
+!setname 0x48 Number -- SET_NUMBER                        = 0x48
+!counter 0x1049 Patrol Counter
+!setname 0x4a Timewatched -- SET_TIMELORD                      = 0x4a
+!setname 0x95 Rank-Up-Ment -- SET_RANK_UP_MAGIC                 = 0x95
+!setname 0x147 Melffy -- SET_MELFFY                        = 0x147
+!setname 0x148 Potan -- SET_POTAN                         = 0x148
+!counter 0x1148 Signal Counter
+!counter 0x1149 Venemy Counter
+!setname 0x14a Appliancer -- SET_APPLIANCER                    = 0x14a
+!setname 0x14b Numeron -- SET_NUMERON                       = 0x14b
+!setname 0x14c Fossil -- SET_FOSSIL                        = 0x14c
+!setname 0x14d Guardian Art
+!setname 0x14e Dual Avatar -- SET_DUAL_AVATAR                   = 0x14e
+!setname 0x14f Tri-Brigade -- SET_TRI_BRIGADE                   = 0x14f
+!counter 0x200 Counter ("Pendulum of Misses") -- SET_COUNTER                       = 0x200
+!counter 0x201 Fire Fist Counter -- SET_BATTLIN_BOXING                = 0x201
+!counter 0x202 Illusorasm Counter -- SET_VEDA                          = 0x202
+!counter 0x203 Counter ("Hinezumi Hanabi") -- SET_DIABELL                       = 0x203
+!setname 0x59 Gogogo -- SET_GOGOGO                        = 0x59
+!counter 0x204 Counter ("Ursarctic Big Dipper") -- SET_SINFUL_SPOILS                 = 0x204
+!counter 0x205 Counter ("War Rock Ordeal") -- SET_SNAKE_EYE                     = 0x205
+!counter 0x206 Counter ("Sapied Scrolls of the Gizmek Legend") -- SET_PATISSCIEL                    = 0x206
+!counter 0x207 Emperor's Key Counter -- SET_HEART                         = 0x207
+!counter 0x208 Counter ("Life Shaver") -- SET_TISTINA                       = 0x208
+!counter 0x209 Counter ("Ursarctic Radiation")
+!counter 0x20a Piece Counter
+!counter 0x20b Counter ("Prisoner of Destiny")
+!counter 0x20c G Gopal Counter
+!counter 0x1207 Burnup Counter
+!setname 0x90 Sylvan -- SET_SYLVAN                        = 0x90
+!setname 0x91 Restvalley -- SET_NECROVALLEY                   = 0x91
+!setname 0x92 Heraldry -- SET_HERALDRY                      = 0x92
+!setname 0x93 Cyber -- SET_CYBER                         = 0x93
+!setname 0x94 Cybernetic -- SET_CYBERNETIC                    = 0x94
+!setname 0x96 Fishborg -- SET_FISHBORG                      = 0x96
+!setname 0x99 Odd-Eyes -- SET_ODD_EYES                      = 0x99
+!setname 0x103 Altergeist -- SET_ALTERGEIST                    = 0x103
+!setname 0x107 F.A. -- SET_FA                            = 0x107
+!counter 0x584 Counter (Ai Ai Wall)
+!counter 0x1090 Maiden Counter
+!counter 0x1096 Protection Counter
+!counter 0x1097 Des Counter
+!counter 0x1098 Chain Counter
+!setname 0x109a Superheavy Samurai Miss -- SET_SUPERHEAVY_SAMURAI_SOUL       = 0x109a
+!counter 0x1100 Aura Counter
+!counter 0x1101 Hallucination Counter
+!counter 0x1102 Gear Counter
+!counter 0x1104 Thorn Counter
+!counter 0x1105 Turn Counter
+!counter 0x1106 Shield Counter
+!counter 0x1107 Prey Counter
+!counter 0x1108 Vaccine Counter
+!counter 0x1109 Life Star Counter
+!setname 0x1110 Eyes Restrict -- SET_EYES_RESTRICT                 = 0x1110
+!counter 0x1112 Disturbance Counter
+!counter 0x1113 Charge Counter
+!setname 0x1115 Sky Striker Ace -- SET_SKY_STRIKER_ACE               = 0x1115
+!setname 0xfb Trickstar -- SET_TRICKSTAR                     = 0xfb
+!setname 0x577 Hydradrive
+!setname 0x2002 Genex Ally -- SET_GENEX_ALLY                    = 0x2002
+!setname 0x3008 Elemental HERO -- SET_ELEMENTAL_HERO                = 0x3008
+!setname 0x5008 Vision HERO -- SET_VISION_HERO                   = 0x5008
+!setname 0x6008 Evil HERO -- SET_EVIL_HERO                     = 0x6008
+!setname 0xa008 Masked HERO -- SET_MASKED_HERO                   = 0xa008
+!setname 0xc008 Destiny HERO -- SET_DESTINY_HERO                  = 0xc008
+!setname 0x9 Neos -- SET_NEOS                          = 0x9
+!setname 0x100a Steelswarm -- SET_STEELSWARM                    = 0x100a
+!setname 0x100d X-Saber -- SET_X_SABER                       = 0x100d
+!setname 0x300d XX-Saber -- SET_XX_SABER                      = 0x300d
+!setname 0x400d Elementsaber -- SET_ELEMENTSABER                  = 0x400d
+!setname 0xe Watt -- SET_WATT                          = 0xe
+!setname 0x3013 Meklord Emperor -- SET_MEKLORD_EMPEROR               = 0x3013
+!setname 0x6013 Meklord Army -- SET_MEKLORD_ARMY                  = 0x6013
+!setname 0x9013 Meklord Astro -- SET_MEKLORD_ASTRO                 = 0x9013
+!setname 0x1016 Vehicroid -- SET_VEHICROID                     = 0x1016
+!setname 0x2016 Speedroid -- SET_SPEEDROID                     = 0x2016
+!setname 0x1017 Synchron -- SET_SYNCHRON                      = 0x1017
+!setname 0x2017 Synchro Dragon -- SET_SYNCHRO_DRAGON                = 0x2017
+!setname 0x101b Mecha Phantom Beast -- SET_MECHA_PHANTOM_BEAST           = 0x101b
+!setname 0x24 Scrap -- SET_SCRAP                         = 0x24
+!setname 0x2a Naturia -- SET_NATURIA                       = 0x2a
+!setname 0x102b Armor Ninja
+!setname 0x1033 Assault Blackwing -- SET_ASSAULT_BLACKWING             = 0x1033
+!setname 0x1034 Crystal Beast -- SET_CRYSTAL_BEAST                 = 0x1034
+!setname 0x2034 Ultimate Crystal -- SET_ULTIMATE_CRYSTAL              = 0x2034
+!setname 0x38 Lightsworn -- SET_LIGHTSWORN                    = 0x38
+!setname 0x39 Laval -- SET_LAVAL                         = 0x39
+!setname 0x3a Giojiki -- SET_GISHKI                        = 0x3a
+!setname 0x3b Red-Eyes -- SET_RED_EYES                      = 0x3b
+!setname 0x3c Reptilianne -- SET_REPTILIANNE                   = 0x3c
+!setname 0x3d Six Samurai -- SET_SIX_SAMURAI                   = 0x3d
+!setname 0x103d Secret Six Samurai -- SET_SECRET_SIX_SAMURAI            = 0x103d
+!setname 0x3e Worm -- SET_WORM                          = 0x3e
+!setname 0x3f Majestic -- SET_MAJESTIC                      = 0x3f
+!setname 0x41 LV -- SET_LV                            = 0x41
+!setname 0x3042 Nordic Ascendant -- SET_NORDIC_ASCENDANT              = 0x3042
+!setname 0x6042 Nordic Beast -- SET_NORDIC_BEAST                  = 0x6042
+!setname 0xa042 Nordic Alfar -- SET_NORDIC_ALFAR                  = 0xa042
+!setname 0x5042 Nordic Relic -- SET_NORDIC_RELIC                  = 0x5042
+!setname 0x45 Archtained -- SET_ARCHFIEND                     = 0x45
+!setname 0x1046 Fusion Dragon -- SET_FUSION_DRAGON                 = 0x1046
+!setname 0x1047 Gem-Knight -- SET_GEM_KNIGHT                    = 0x1047
+!setname 0x1048 Number C -- SET_NUMBER_C                      = 0x1048
+!setname 0x5048 Number C39 -- SET_NUMBER_C39                    = 0x5048
+!setname 0x49 Skyblaster -- SET_SKYBLASTER                    = 0x49
+!setname 0x4b Fursan -- SET_AESIR                         = 0x4b
+!setname 0x4c Trap Hole -- SET_TRAP_HOLE                     = 0x4c
+!setname 0x4d Beast's Battle -- SET_BEASTS_BATTLE                 = 0x4d
+!setname 0x4e Evol
+!setname 0x304e Evoltile -- SET_EVOLTILE                      = 0x304e
+!setname 0x604e Evolsaur -- SET_EVOLSAUR                      = 0x604e
+!setname 0x504e Evolzar -- SET_EVOLZAR                       = 0x504e
+!setname 0x4f Dark Lucius -- SET_DARK_LUCIUS                   = 0x4f
+!setname 0x104f /Assault Mode -- SET_ASSAULT_MODE                  = 0x104f
+!setname 0x50 Venom -- SET_VENOM                         = 0x50
+!setname 0x1050 Starving Venom -- SET_STARVING_VENOM                = 0x1050
+!setname 0x5a Penguin -- SET_PENGUIN                       = 0x5a
+!setname 0x5b Inmato -- SET_INMATO                        = 0x5b
+!setname 0x5c Drinx -- SET_SPHINX                        = 0x5c
+!setname 0x5d Ultimate Insect -- SET_ULTIMATE_INSECT               = 0x5d
+!setname 0x5e Dark Mimic -- SET_DARK_MIMIC                    = 0x5e
+!setname 0x5f Mystic Swordsman -- SET_MYSTIC_SWORDSMAN              = 0x5f
+!setname 0x60 Bamboo Sword -- SET_BAMBOO_SWORD                  = 0x60
+!setname 0x61 Ninjitsu Art -- SET_NINJITSU_ART                  = 0x61
+!setname 0x62 Toon -- SET_TOON                          = 0x62
+!setname 0x63 Reactor -- SET_REACTOR                       = 0x63
+!setname 0x64 Flybie -- SET_HARPIE                        = 0x64
+!setname 0x65 Infestation -- SET_INFESTATION                   = 0x65
+!setname 0x66 Warrior -- SET_WARRIOR                       = 0x66
+!setname 0x1066 Symphonic Warrior -- SET_SYMPHONIC_WARRIOR             = 0x1066
+!setname 0x2066 Magnet Warrior -- SET_MAGNET_WARRIOR                = 0x2066
+!setname 0x67 Iron -- SET_KOALA                         = 0x67
+!setname 0x68 Tin -- SET_KANGAROO                      = 0x68
+!setname 0x69 Hieratic -- SET_HIERATIC                      = 0x69
+!setname 0x6a Butterspy -- SET_BUTTERSPY                     = 0x6a
+!setname 0x6b Bounzer -- SET_BOUNZER                       = 0x6b
+!setname 0x6c Lightray -- SET_HELIOS                        = 0x6c
+!setname 0x6d Dlitl -- SET_DJINN                         = 0x6d
+!setname 0x106d Djit of Locked
+!setname 0x6e Saying -- SET_PROPHECY                      = 0x6e
+!setname 0x106e Actionbook -- SET_SPELLBOOK                     = 0x106e
+!setname 0x6f Heroic -- SET_HEROIC                        = 0x6f
+!setname 0x106f Heroic Challenger -- SET_HEROIC_CHALLENGER             = 0x106f
+!setname 0x206f Heroic Champion -- SET_HEROIC_CHAMPION               = 0x206f
+!setname 0x70 Anonomaly -- SET_CHRONOMALY                    = 0x70
+!setname 0x71 Madolche -- SET_MADOLCHE                      = 0x71
+!setname 0x72 Geargia -- SET_GEARGIA                       = 0x72
+!setname 0x1072 Geargiano -- SET_GEARGIANO                     = 0x1072
+!setname 0x73 Xyz -- SET_XYZ                           = 0x73
+!setname 0x1073 CXyz -- SET_CXYZ                          = 0x1073
+!setname 0x2073 Xyz Dragon -- SET_XYZ_DRAGON                    = 0x2073
+!setname 0x74 Mermail -- SET_MERMAIL                       = 0x74
+!setname 0x75 Abyss- -- SET_ABYSS                         = 0x75
+!setname 0x76 Heraldic Beast -- SET_HERALDIC_BEAST                = 0x76
+!setname 0x77 Atlantean -- SET_ATLANTEAN                     = 0x77
+!setname 0x78 Nimble -- SET_NIMBLE                        = 0x78
+!setname 0x79 Fire Fist -- SET_FIRE_FIST                     = 0x79
+!setname 0x7a Noble
+!setname 0x107a Noble Knight -- SET_NOBLE_KNIGHT                  = 0x107a
+!setname 0x207a Noble Arms -- SET_NOBLE_ARMS                    = 0x207a
+!setname 0x7b Galaxy -- SET_GALAXY                        = 0x7b
+!setname 0x107b Galaxy-Eyes -- SET_GALAXY_EYES                   = 0x107b
+!setname 0x307b Galaxy-Eyes Tachyon Dragon -- SET_GALAXY_EYES_TACHYON_DRAGON    = 0x307b
+!setname 0x7c Fire Formation -- SET_FIRE_FORMATION                = 0x7c
+!setname 0x7d Hazy -- SET_HAZY                          = 0x7d
+!setname 0x107d Hazy Flame -- SET_HAZY_FLAME                    = 0x107d
+!setname 0x7e Zexal -- SET_ZEXAL                         = 0x7e
+!setname 0x107e ZW - -- SET_ZW                            = 0x107e
+!setname 0x207e ZS - -- SET_ZS                            = 0x207e
+!setname 0x7f Utopic -- SET_UTOPIC                        = 0x7f
+!setname 0x107f Utopia -- SET_UTOPIA                        = 0x107f
+!setname 0x207f Utopic Future -- SET_UTOPIC_FUTURE                 = 0x207f
+!setname 0x80 Duston -- SET_DUSTON                        = 0x80
+!setname 0x81 Fire Player -- SET_FIRE_KING                     = 0x81
+!setname 0x1081 Fire Player Avatar -- SET_FIRE_KING_AVATAR              = 0x1081
+!setname 0x82 Dododo -- SET_DODODO                        = 0x82
+!setname 0x83 Puppet -- SET_PUPPET                        = 0x83
+!setname 0x1083 Gimmick Puppet -- SET_GIMMICK_PUPPET                = 0x1083
+!setname 0x84 Battlin' Boxer -- SET_BATTLIN_BOXER                 = 0x84
+!setname 0x85 Super Defense Robot -- SET_SUPER_DEFENSE_ROBOT           = 0x85
+!setname 0x86 Star Watcher -- SET_STAR_SERAPH                   = 0x86
+!setname 0x87 Umbral Horror -- SET_UMBRAL_HORROR                 = 0x87
+!setname 0x88 Bu -- SET_BUJIN                         = 0x88
+!setname 0x89 Hole -- SET_HOLE                          = 0x89
+!setname 0x8a Envy
+!setname 0x108a Traptrix -- SET_TRAPTRIX                      = 0x108a
+!setname 0x8b Malicevorous -- SET_MALICEVOROUS                  = 0x8b
+!setname 0x8c Peruid
+!setname 0x8d Misstrick -- SET_GHOSTRICK                     = 0x8d
+!setname 0x8e Vampire -- SET_VAMPIRE                       = 0x8e
+!setname 0x8f Zubaba -- SET_ZUBABA                        = 0x8f
+!setname 0x1093 Cyber Dragon -- SET_CYBER_DRAGON                  = 0x1093
+!setname 0x2093 Cyber Angel -- SET_CYBER_ANGEL                   = 0x2093
+!setname 0x4093 Cyberdark -- SET_CYBERDARK                     = 0x4093
+!setname 0x97 Artifact -- SET_ARTIFACT                      = 0x97
+!setname 0x98 Mentor -- SET_MAGICIAN                      = 0x98
+!setname 0x9a Superheavy Samurai -- SET_SUPERHEAVY_SAMURAI            = 0x9a
+!setname 0x9b Melodious -- SET_MELODIOUS                     = 0x9b
+!setname 0x109b Melodious Maestra -- SET_MELODIOUS_MAESTRA             = 0x109b
+!setname 0x9c tellarknight -- SET_TELLARKNIGHT                  = 0x9c
+!setname 0x109c Stellarknight -- SET_STELLARKNIGHT                 = 0x109c
+!setname 0x9d Shaddoll -- SET_SHADDOLL                      = 0x9d
+!setname 0x9e Bang Zing -- SET_YANG_ZING                     = 0x9e
+!setname 0x9f Performapal -- SET_PERFORMAPAL                   = 0x9f
+!setname 0xa0 Legendary Knight -- SET_LEGENDARY_KNIGHT              = 0xa0
+!setname 0xa1 Legendary Dragon -- SET_LEGENDARY_DRAGON              = 0xa1
+!setname 0xa2 Mentor
+!setname 0x10a2 Dark Mentor -- SET_DARK_MAGICIAN                 = 0x10a2
+!setname 0x20a2 Mentor Girl -- SET_MAGICIAN_GIRL                 = 0x20a2
+!setname 0x30a2 Dark Mentor Girl -- SET_DARK_MAGICIAN_GIRL            = 0x30a2
+!setname 0xa3 Stardust -- SET_STARDUST                      = 0xa3
+!setname 0xa4 Kuriboh -- SET_KURIBOH                       = 0xa4
+!setname 0x10a4 Winged Kuriboh -- SET_WINGED_KURIBOH                = 0x10a4
+!setname 0xa5 Change -- SET_CHANGE                        = 0xa5
+!setname 0xa6 sprout -- SET_SPROUT                        = 0xa6
+!setname 0xa7 Artorigus -- SET_ARTORIGUS                     = 0xa7
+!setname 0xa8 Laundsallyn -- SET_LAUNDSALLYN                   = 0xa8
+!setname 0xa9 Fluffal -- SET_FLUFFAL                       = 0xa9
+!setname 0xaa Qli -- SET_QLI                           = 0xaa
+!setname 0x10aa Apoqliphort -- SET_APOQLIPHORT                   = 0x10aa
+!setname 0xab Deskbot -- SET_DESKBOT                       = 0xab
+!setname 0xac Goblin -- SET_GOBLIN                        = 0xac
+!setname 0xad Frightfur -- SET_FRIGHTFUR                     = 0xad
+!setname 0xae Contract -- SET_DARK_CONTRACT                 = 0xae
+!setname 0xaf S/D -- SET_DD                            = 0xaf
+!setname 0x10af S/D/P -- SET_DDD                           = 0x10af
+!setname 0xb0 Gottoms -- SET_GOTTOMS                       = 0xb0
+!setname 0xb1 Burning Abyss -- SET_BURNING_ABYSS                 = 0xb1
+!setname 0xb2 U.A. -- SET_UA                            = 0xb2
+!setname 0xb3 Bobenji -- SET_YOSENJU                       = 0xb3
+!setname 0xb4 Breakoz -- SET_NEKROZ                        = 0xb4
+!setname 0xb5 Locked Beast -- SET_RITUAL_BEAST                  = 0xb5
+!setname 0x10b5 Locked Beast Tamer -- SET_RITUAL_BEAST_TAMER            = 0x10b5
+!setname 0x20b5 Guardian Beast -- SET_SPIRITUAL_BEAST               = 0x20b5
+!setname 0x30b5 Guardian Beast Tamer -- SET_SPIRITUAL_BEAST_TAMER         = 0x30b5
+!setname 0x40b5 Guardian Beast Ulti- -- SET_RITUAL_BEAST_ULTI             = 0x40b5
+!setname 0xb7 Thing?
+!setname 0x10b7 Outer Thing? -- SET_OUTER_ENTITY                  = 0x10b7
+!setname 0x20b7 Elder Thing? -- SET_ELDER_ENTITY                  = 0x20b7
+!setname 0x40b7 Old Thing? -- SET_OLD_ENTITY                    = 0x40b7
+!setname 0xb9 Blaze Accelerator -- SET_BLAZE_ACCELERATOR             = 0xb9
+!setname 0xba Raidraptor -- SET_RAIDRAPTOR                    = 0xba
+!setname 0xbb Infernoid -- SET_INFERNOID                     = 0xbb
+!setname 0xbc Jinzo -- SET_JINZO                         = 0xbc
+!setname 0xbd Empyrean  The Fierce Knight -- SET_GAIA_THE_FIERCE_KNIGHT        = 0xbd
+!setname 0xbe Mopping -- SET_MONARCH                       = 0xbe
+!setname 0xbf Guider -- SET_CHARMER                       = 0xbf
+!setname 0xc0 Interwoven -- SET_POSSESSED                     = 0xc0
+!setname 0x10c0 Familiar-Interwoven -- SET_FAMILIAR_POSSESSED            = 0x10c0
+!setname 0xc1 PSY-Frame -- SET_PSY_FRAME                     = 0xc1
+!setname 0x10c1 PSY-Framegear -- SET_PSY_FRAMEGEAR                 = 0x10c1
+!setname 0xc2 Power Tool -- SET_POWER_TOOL                    = 0xc2
+!setname 0xc3 Edge Impression -- SET_EDGE_IMP                      = 0xc3
+!setname 0xc5 Void -- SET_VOID                          = 0xc5
+!setname 0xc6 Performanced -- SET_PERFORMAGE                    = 0xc6
+!setname 0xc7 Dracoslayer -- SET_DRACOSLAYER                   = 0xc7
+!setname 0xc8 Igknight -- SET_IGKNIGHT                      = 0xc8
+!setname 0xc9 Aroma -- SET_AROMA                         = 0xc9
+!setname 0xca Empowered Warrior -- SET_EMPOWERED_WARRIOR             = 0xca
+!setname 0xcb Aether -- SET_AETHER                        = 0xcb
+!setname 0xcc Prediction Princess -- SET_PREDICTION_PRINCESS           = 0xcc
+!setname 0xcd Aqua
+!setname 0x10cd Aquaactress -- SET_AQUAACTRESS                   = 0x10cd
+!setname 0x20cd Aquarium -- SET_AQUARIUM                      = 0x20cd
+!setname 0xcf Chaos -- SET_CHAOS                         = 0xcf
+!setname 0x10cf Black Luster Soldier -- SET_BLACK_LUSTER_SOLDIER          = 0x10cf
+!setname 0xd0 Majesbeing -- SET_MAJESPECTER                   = 0xd0
+!setname 0xd1 Graydle -- SET_GRAYDLE                       = 0xd1
+!setname 0xd2 Kozmo -- SET_KOZMO                         = 0xd2
+!setname 0xd3 Kaiju -- SET_KAIJU                         = 0xd3
+!setname 0xd4 Paleozoic -- SET_PALEOZOIC                     = 0xd4
+!setname 0xd5 Dante -- SET_DANTE                         = 0xd5
+!setname 0xd6 Destruction Sword -- SET_DESTRUCTION_SWORD             = 0xd6
+!setname 0xd7 Buster Blader -- SET_BUSTER_BLADER                 = 0xd7
+!setname 0xd8 Dinomist -- SET_DINOMIST                      = 0xd8
+!setname 0xd9 Shirare -- SET_SHIRANUI                      = 0xd9
+!setname 0x10d9 Shishanui Spectasword -- SET_SHIRANUI_SPECTRALSWORD        = 0x10d9
+!setname 0xda Dracowatcher -- SET_DRACOVERLORD                  = 0xda
+!setname 0xdb Illusory Knights -- SET_PHANTOM_KNIGHTS               = 0xdb
+!setname 0x10db The Illusory Knights -- SET_THE_PHANTOM_KNIGHTS           = 0x10db
+!setname 0xdc Super Quant -- SET_SUPER_QUANT                   = 0xdc
+!setname 0x10dc Super Quantum -- SET_SUPER_QUANTUM                 = 0x10dc
+!setname 0x20dc Super Quantal Mech Beast -- SET_SUPER_QUANTAL_MECH_BEAST      = 0x20dc
+!setname 0xdd Blue-Eyes -- SET_BLUE_EYES                     = 0xdd
+!setname 0xde Exdude -- SET_EXODIA                        = 0xde
+!setname 0xdf Lunalight -- SET_LUNALIGHT                     = 0xdf
+!setname 0xe0 Amorphage -- SET_AMORPHAGE                     = 0xe0
+!setname 0xe1 Metalfoes -- SET_METALFOES                     = 0xe1
+!setname 0xe2 Triamid -- SET_TRIAMID                       = 0xe2
+!setname 0xe3 Cubic -- SET_CUBIC                         = 0xe3
+!setname 0xe4 Celtic Guard -- SET_CELTIC_GUARD                  = 0xe4
+!setname 0xe5 Cipher -- SET_CIPHER                        = 0xe5
+!setname 0x10e5 Cipher Dragon -- SET_CIPHER_DRAGON                 = 0x10e5
+!setname 0xe6 Flower Cardian -- SET_FLOWER_CARDIAN                = 0xe6
+!setname 0xe8 Silent Mentor -- SET_SILENT_MAGICIAN               = 0xe8
+!setname 0xe9 Magna Warrior -- SET_MAGNA_WARRIOR                 = 0xe9
+!setname 0xea Crystron -- SET_CRYSTRON                      = 0xea
+!setname 0xeb Chemicritter -- SET_CHEMICRITTER                  = 0xeb
+!setname 0xec Abyss
+!setname 0x10ec Abyss Actor -- SET_ABYSS_ACTOR                   = 0x10ec
+!setname 0x20ec Abyss Script -- SET_ABYSS_SCRIPT                  = 0x20ec
+!setname 0xed Subterror -- SET_SUBTERROR                     = 0xed
+!setname 0x10ed Subterror Behemoth -- SET_SUBTERROR_BEHEMOTH            = 0x10ed
+!setname 0xee DRYRAL -- SET_SPYRAL                        = 0xee
+!setname 0x10ee DRYRAL GEAR -- SET_SPYRAL_GEAR                   = 0x10ee
+!setname 0x20ee DRYRAL MISSION -- SET_SPYRAL_MISSION                = 0x20ee
+!setname 0xef Darkwarden -- SET_DARKLORD                      = 0xef
+!setname 0xf0 Windmint -- SET_WINDWITCH                     = 0xf0
+!setname 0xf1 Zoopac -- SET_ZOODIAC                       = 0xf1
+!setname 0xf2 Pendulum -- SET_PENDULUM                      = 0xf2
+!setname 0x10f2 Pendulum Dragon -- SET_PENDULUM_DRAGON               = 0x10f2
+!setname 0x20f2 Chronographer -- SET_PENDULUMGRAPH                 = 0x20f2
+!setname 0xf3 Predap -- SET_PREDAP                        = 0xf3
+!setname 0x10f3 Predaplant -- SET_PREDAPLANT                    = 0x10f3
+!setname 0xf4 Invalidated -- SET_INVOKED                       = 0xf4
+!setname 0xf5 Gandora -- SET_GANDORA                       = 0xf5
+!setname 0xf6 Skyscraper -- SET_SKYSCRAPER                    = 0xf6
+!setname 0xf7 Lyrilusc -- SET_LYRILUSC                      = 0xf7
+!setname 0xf8 Supreme King
+!setname 0x10f8 Supreme King Gate -- SET_SUPREME_KING_GATE             = 0x10f8
+!setname 0x20f8 Supreme King Dragon -- SET_SUPREME_KING_DRAGON           = 0x20f8
+!setname 0xf9 False Draco|False King -- SET_TRUE_DRACO_KING               = 0xf9
+!setname 0xfa Illusorasm Spiral -- SET_PHANTASM_SPIRAL               = 0xfa
+!setname 0xfc Gouki -- SET_GOUKI                         = 0xfc
+!setname 0xfd World Chalice -- SET_WORLD_CHALICE                 = 0xfd
+!setname 0xfe World Legacy -- SET_WORLD_LEGACY                  = 0xfe
+!setname 0xff Clear Wing -- SET_CLEAR_WING                    = 0xff
+!setname 0x100 Bonding - -- SET_BONDING                       = 0x100
+!setname 0x101 Code Talker -- SET_CODE_TALKER                   = 0x101
+!setname 0x102 Rokket -- SET_ROKKET                        = 0x102
+!setname 0x104 Krawler -- SET_KRAWLER                       = 0x104
+!setname 0x105 Metadata -- SET_METAPHYS                      = 0x105
+!setname 0x106 Vendread -- SET_VENDREAD                      = 0x106
+!setname 0x108 Mentoral Musket -- SET_MAGICAL_MUSKET                = 0x108
+!setname 0x109 The Weather -- SET_THE_WEATHER                   = 0x109
+!setname 0x10a Parhaf -- SET_PARSHATH                      = 0x10a
+!setname 0x10b Tindangle -- SET_TINDANGLE                     = 0x10b
+!setname 0x10c Mekk-Knight -- SET_MEKK_KNIGHT                   = 0x10c
+!setname 0x10d Mythical Beast -- SET_MYTHICAL_BEAST                = 0x10d
+!setname 0x10e Evolution Pill -- SET_EVOLUTION_PILL                = 0x10e
+!setname 0x10f Borrel -- SET_BORREL                        = 0x10f
+!setname 0x110 Relinquished -- SET_RELINQUISHED                  = 0x110
+!setname 0x111 Armed Dragon -- SET_ARMED_DRAGON                  = 0x111
+!setname 0x112 Knightmare -- SET_KNIGHTMARE                    = 0x112
+!setname 0x113 Elemental Watcher -- SET_ELEMENTAL_LORD                = 0x113
+!setname 0x114 Fur Hire -- SET_FUR_HIRE                      = 0x114
+!setname 0x115 Sky Striker -- SET_SKY_STRIKER                   = 0x115
+!setname 0x116 Crusadia -- SET_CRUSADIA                      = 0x116
+!setname 0x117 Impression -- SET_IMPCANTATION                  = 0x117
+!setname 0x118 Cynet -- SET_CYNET                         = 0x118
+!setname 0x119 Salamangreat -- SET_SALAMANGREAT                  = 0x119
+!setname 0x11a Dinowrestler -- SET_DINOWRESTLER                  = 0x11a
+!setname 0x11b Corecrust -- SET_ORCUST                        = 0x11b
+!setname 0x11c Thunder Dragon -- SET_THUNDER_DRAGON                = 0x11c
+!setname 0x11d Forbidden -- SET_FORBIDDEN                     = 0x11d
+!setname 0x11e Danger! -- SET_DANGER                        = 0x11e
+!setname 0x11f Nepolonis -- SET_NEPHTHYS                      = 0x11f
+!setname 0x120 Prank-Kids -- SET_PRANK_KIDS                    = 0x120
+!setname 0x121 Makage -- SET_MAYAKASHI                     = 0x121
+!setname 0x122 Balkanie -- SET_VALKYRIE                      = 0x122
+!setname 0x123 Rose -- SET_ROSE                          = 0x123
+!setname 0x1123 Rose Dragon -- SET_ROSE_DRAGON                   = 0x1123
+!setname 0x124 Machine Onlooker -- SET_MACHINE_ANGEL                 = 0x124
+!setname 0x125 Smile -- SET_SMILE                         = 0x125
+!setname 0x126 Time Tactician -- SET_TIME_THIEF                    = 0x126
+!setname 0x127 Infinitrack -- SET_INFINITRACK                   = 0x127
+!setname 0x128 Mintcrafter -- SET_WITCHCRAFTER                  = 0x128
+!setname 0x129 Goodie -- SET_EVIL_EYE                      = 0x129
+!setname 0x12a Edypsos -- SET_ENDYMION                      = 0x12a
+!setname 0x12b Marincess -- SET_MARINCESS                     = 0x12b
+!setname 0x12c Tenbree -- SET_TENYI                         = 0x12c
+!setname 0x12d Sisbird -- SET_SIMORGH                       = 0x12d
+!setname 0x12e Fortune Wandery -- SET_FORTUNE_FAIRY                 = 0x12e
+!setname 0x12f Battlewasp -- SET_BATTLEWASP                    = 0x12f
+!setname 0x130 Unchained -- SET_UNCHAINED                     = 0x130
+!setname 0x1130 Unchained Miss -- SET_UNCHAINED_SOUL                = 0x1130
+!setname 0x131 Dream Mirror -- SET_DREAM_MIRROR                  = 0x131
+!setname 0x132 Mathmech -- SET_MATHMECH                      = 0x132
+!setname 0x133 Dragonmaid -- SET_DRAGONMAID                    = 0x133
+!setname 0x134 Generaider -- SET_GENERAIDER                    = 0x134
+!setname 0x135 @Ignister -- SET_IGNISTER                      = 0x135
+!setname 0x136 A.I. -- SET_AI                            = 0x136
+!setname 0x137 Ancient Warriors -- SET_ANCIENT_WARRIORS              = 0x137
+!setname 0x138 Megalith -- SET_MEGALITH                      = 0x138
+!setname 0x139 Onomat -- SET_ONOMAT                        = 0x139
+!setname 0x13a Palladium -- SET_PALLADIUM                     = 0x13a
+!setname 0x13b Rebellion -- SET_REBELLION                     = 0x13b
+!setname 0x13c Codebreaker -- SET_CODEBREAKER                   = 0x13c
+!setname 0x13d Nemeses -- SET_NEMESES                       = 0x13d
+!setname 0x13e Bardaco -- SET_BARBAROS                      = 0x13e
+!setname 0x13f Plunder Patroll -- SET_PLUNDER_PATROLL               = 0x13f
+!setname 0x140 Adamancipator -- SET_ADAMANCIPATOR                 = 0x140
+!setname 0x141 Rikka -- SET_RIKKA                         = 0x141
+!setname 0x142 Eldhitch -- SET_ELDLICH                       = 0x142
+!setname 0x143 Eldlixir -- SET_ELDLIXIR                      = 0x143
+!setname 0x144 Golden Land -- SET_GOLDEN_LAND                   = 0x144
+!setname 0x145 Illusorasm -- SET_PHANTASM                      = 0x145
+!setname 0x146 Dogmatic -- SET_DOGMATIKA                     = 0x146
+!setname 0x149 Roland -- SET_ROLAND                        = 0x149
+!setname 0x114b Numeron Gate -- SET_NUMERON_GATE                  = 0x114b
+!setname 0x314d Guardian Earth Art -- SET_SPIRITUAL_EARTH_ART           = 0x314d
+!setname 0x514d Guardian Fire Art -- SET_SPIRITUAL_FIRE_ART            = 0x514d
+!setname 0x614d Guardian Water Art -- SET_SPIRITUAL_WATER_ART           = 0x614d
+!setname 0xa14d Guardian Wind Art -- SET_SPIRITUAL_WIND_ART            = 0xa14d
+!setname 0x150 Virtual World -- SET_VIRTUAL_WORLD                 = 0x150
+!setname 0x1150 Virtual World Gate -- SET_VIRTUAL_WORLD_GATE            = 0x1150
+!setname 0x151 Drytron -- SET_DRYTRON                       = 0x151
+!setname 0x152 Menstus -- SET_MAGISTUS                      = 0x152
+!setname 0x153 Ki-sikil -- SET_KI_SIKIL                      = 0x153
+!setname 0x154 Lil-la -- SET_LIL_LA                        = 0x154
+!setname 0x155 Evil★Twin -- SET_EVIL_TWIN                     = 0x155
+!setname 0x156 Live☆Twin -- SET_LIVE_TWIN                     = 0x156
+!setname 0x157 Sun
+!setname 0x1157 Sunavol -- SET_SUNAVALON                     = 0x1157
+!setname 0x2157 Sunvine -- SET_SUNVINE                       = 0x2157
+!setname 0x4157 Sunseed -- SET_SUNSEED                       = 0x4157
+!setname 0x158 Springans -- SET_SPRINGANS                     = 0x158
+!setname 0x159 Myutant -- SET_MYUTANT                       = 0x159
+!setname 0x15a S-Force -- SET_S_FORCE                       = 0x15a
+!setname 0x15b Starry Knight -- SET_STARRY_KNIGHT                 = 0x15b
+!setname 0x15c Doll Monster -- SET_DOLL_MONSTER                  = 0x15c
+!setname 0x15d Rank-Down-Magic -- SET_RANK_DOWN_MAGIC               = 0x15d
+!setname 0x15e Amazement -- SET_AMAZEMENT                     = 0x15e
+!setname 0x15f Attraction -- SET_ATTRACTION                    = 0x15f
+!setname 0x160 Branded -- SET_BRANDED                       = 0x160
+!setname 0x161 War Rock -- SET_WAR_ROCK                      = 0x161
+!setname 0x162 Materiactor -- SET_MATERIACTOR                   = 0x162
+!setname 0x163 Ogdasic -- SET_OGDOADIC                      = 0x163
+!setname 0x164 Solfachord -- SET_SOLFACHORD                    = 0x164
+!setname 0x165 Ursarctic -- SET_URSARCTIC                     = 0x165
+!setname 0x166 Despia -- SET_DESPIA                        = 0x166
+!setname 0x167 Menkey -- SET_MAGIKEY                       = 0x167
+!setname 0x168 Gunkan -- SET_GUNKAN                        = 0x168
+!setname 0x169 of the Forest
+!setname 0x1169 Vague Beast of the Forest -- SET_MYSTICAL_BEAST_OF_THE_FOREST  = 0x1169
+!setname 0x2169 Vague Guardian of the Forest -- SET_MYSTICAL_SPIRIT_OF_THE_FOREST = 0x2169
+!setname 0x16a Stealth Kragen -- SET_STEALTH_KRAGEN                = 0x16a
+!setname 0x16b Numerounius -- SET_NUMEROUNIOUS                  = 0x16b
+!setname 0x16c Number -- SET_NUMBER_SPELL_TRAP             = 0x16c
+!setname 0x16d Swordmiss -- SET_SWORDSOUL                     = 0x16d
+!setname 0x16e Icejade -- SET_ICEJADE                       = 0x16e
+!setname 0x16f Floowandereeze -- SET_FLOOWANDEREEZE                = 0x16f
+!setname 0x170 Topologic -- SET_TOPOLOGIC                     = 0x170
+!setname 0x171 Hyperbond -- SET_HYPERION                      = 0x171
+!setname 0x172 Beetrooper -- SET_BEETROOPER                    = 0x172
+!setname 0x173 P.U.N.K. -- SET_PUNK                          = 0x173
+!setname 0x174 Insister -- SET_EXOSISTER                     = 0x174
+!setname 0x175 Dinomorphia -- SET_DINOMORPHIA                   = 0x175
+!setname 0x176 Lady with Lament -- SET_LADY_OF_LAMENT                = 0x176
+!setname 0x177 Seventh -- SET_SEVENTH                       = 0x177
+!setname 0x178 Barian
+!setname 0x1178 Barian's -- SET_BARIANS                       = 0x1178
+!setname 0x2178 Battleguard -- SET_BATTLEGUARD                   = 0x2178
+!setname 0x179 Kairyu-Fan -- SET_KAIRYU_SHIN                   = 0x179
+!setname 0x17a Sea Stealth -- SET_SEA_STEALTH                   = 0x17a
+!setname 0x17b Therion -- SET_THERION                       = 0x17b
+!setname 0x17c Scareclaw -- SET_SCARECLAW                     = 0x17c
+!setname 0x17d Librodancer -- SET_LIBROMANCER                   = 0x17d
+!setname 0x17e Vaylantz -- SET_VAYLANTZ                      = 0x17e
+!setname 0x17f Labrynth -- SET_LABRYNTH                      = 0x17f
+!setname 0x117f Welcome Labrynth -- SET_WELCOME_LABRYNTH              = 0x117f
+!setname 0x180 Runip -- SET_RUNICK                        = 0x180
+!setname 0x181 Spright -- SET_SPRIGHT                       = 0x181
+!setname 0x182 Tearlaments -- SET_TEARLAMENTS                   = 0x182
+!setname 0x183 Vernusip -- SET_VERNUSYLPH                    = 0x183
+!setname 0x184 Mokey Mokey -- SET_MOKEY_MOKEY                   = 0x184
+!setname 0x185 Wingman -- SET_WINGMAN                       = 0x185
+!setname 0x186 Doodle
+!setname 0x1186 Doodle Beast -- SET_DOODLE_BEAST                  = 0x1186
+!setname 0x2186 Doodlebook -- SET_DOODLEBOOK                    = 0x2186
+!setname 0x187 G Gopal -- SET_G_GOLEM                       = 0x187
+!setname 0x188 Rainbow Bridge -- SET_RAINBOW_BRIDGE                = 0x188
+!setname 0x189 Byssted -- SET_BYSTIAL                       = 0x189
+!setname 0x18a Kshorin -- SET_KASHTIRA                      = 0x18a
+!setname 0x18b Ghoti -- SET_GHOTI                         = 0x18b
+!setname 0x18c Rescue-ACE -- SET_RESCUE_ACE                    = 0x18c
+!setname 0x18d Purery -- SET_PURRELY                       = 0x18d
+!setname 0x18e Sibango -- SET_MIKANKO                       = 0x18e
+!setname 0x2033 Blackwing Tamer
+!setname 0x5034 Advanced Crystal Beast -- SET_ADVANCED_CRYSTAL_BEAST        = 0x5034
+!setname 0x2048 Number S
+!setname 0x209b Melodious Songstress
+!setname 0x10e3 Cubic Seed
+!setname 0x40ec Abyss Costume
+!setname 0x500 Speed Actional
+!setname 0x501 Alchemy Beast
+!setname 0x502 Alligator
+!setname 0x503 Anti
+!setname 0x504 Assassin
+!setname 0x505 Astellar
+!setname 0x506 Atlandis
+!setname 0x507 Attack
+!setname 0x508 Baby
+!setname 0x509 Barian
+!setname 0x1509 Barian's
+!setname 0x2509 Battleguard
+!setname 0x50b Beastborg
+!setname 0x50c Butterfly
+!setname 0x150c Phantom Butterfly
+!setname 0x50d Carrier
+!setname 0x50e Cat
+!setname 0x150e Cat Girl
+!setname 0x50f Cicada
+!setname 0x510 Clear
+!setname 0x511 Comics Hero
+!setname 0x512 Cookpal
+!setname 0x1512 Royal Cookpal
+!setname 0x513 Dart
+!setname 0x514 Suffice
+!setname 0x515 Dizzy
+!setname 0x516 Dog
+!setname 0x517 Doll
+!setname 0x1517 Doll Monster
+!setname 0x2517 Doll Part
+!setname 0x518 Doodle
+!setname 0x1518 Doodle Beast
+!setname 0x519 Dyson
+!setname 0x51a Earth
+!setname 0x151a Earthbound
+!setname 0x351a Earthbound Servant
+!setname 0x51b Elf
+!setname 0x151b Ment Elf
+!setname 0x51d Wanderer
+!setname 0x51e Forbidden Beast
+!setname 0x51f Forest
+!setname 0x520 Fortune Wanderer
+!setname 0x521 Gaia the Dragon Champion
+!setname 0x1521 Fossil Knight
+!setname 0x2521 Cenozoic
+!setname 0x3521 Cenozoic Fossil Knight
+!setname 0x4521 Mezozoic
+!setname 0x5521 Mezozoic Fossil Knight
+!setname 0x8521 Paleozoic
+!setname 0x9521 Paleozoic Fossil Knight
+!setname 0x522 Gorgonic
+!setname 0x523 Goyo
+!setname 0x524 Granel
+!setname 0x1524 Granel Attack
+!setname 0x2524 Granel Guard
+!setname 0x4524 Granel Top
+!setname 0x8524 Granel Carrier
+!setname 0x525 Guard
+!setname 0x526 Guts Master
+!setname 0x527 Hand
+!setname 0x528 Heart Monster
+!setname 0x529 Heavy Industry
+!setname 0x52a Inu
+!setname 0x52b Ivy
+!setname 0x52c Jester
+!setname 0x152c Jester Puppet
+!setname 0x52d Jutte
+!setname 0x52e Kabuki Stage
+!setname 0x52f King
+!setname 0x152f Champion
+!setname 0x530 Knight
+!setname 0x1530 Clock Knight
+!setname 0x531 Koala
+!setname 0x533 Landstar
+!setname 0x534 Magnet
+!setname 0x535 Mantis
+!setname 0x536 Mosquito
+!setname 0x537 Motor
+!setname 0x538 Neko
+!setname 0x1538 Stray Cat
+!setname 0x53b Numeronius
+!setname 0x53c Papillon
+!setname 0x53d Parasite
+!setname 0x53e Pixie
+!setname 0x53f Priestess
+!setname 0x540 Puppet
+!setname 0x541 Quiz
+!setname 0x1541 Quiz Panel
+!setname 0x542 Raccoon
+!setname 0x543 Red
+!setname 0x545 Seal
+!setname 0x546 Shaman
+!setname 0x547 Shark
+!setname 0x548 Shining
+!setname 0x549 Skiel
+!setname 0x1549 Skiel Attack
+!setname 0x2549 Skiel Guard
+!setname 0x4549 Skiel Top
+!setname 0x8549 Skiel Carrier
+!setname 0x54a Sky
+!setname 0x154a Onlooker
+!setname 0x254a Celestial
+!setname 0x54b Slime
+!setname 0x54c Sphere
+!setname 0x54d Spice
+!setname 0x154d Action Spice
+!setname 0x54e Guardian
+!setname 0x154e Guardian Gem
+!setname 0x54f Starship
+!setname 0x550 Statue
+!setname 0x1550 Pendulumstatue
+!setname 0x551 Stone
+!setname 0x552 Strain
+!setname 0x555 Tachyon
+!setname 0x1555 Tachyon Dragon
+!setname 0x556 Thorn Prisoner
+!setname 0x557 Top
+!setname 0x558 Toy (Arc-V)
+!setname 0x559 Toy
+!setname 0x55a V
+!setname 0x155a "V "/" V"
+!setname 0x55c Vigilante
+!setname 0x55d White
+!setname 0x155d White Knight
+!setname 0x55f Sinister Doctrine
+!setname 0x560 Wisel
+!setname 0x1560 Wisel Attack
+!setname 0x2560 Wisel Guard
+!setname 0x4560 Wisel Top
+!setname 0x8560 Wisel Carrier
+!setname 0x561 Yubel
+!setname 0x562 ∞
+!setname 0x563 Yomi
+!setname 0x564 Shogi|Line Monster
+!setname 0x565 Hunder
+!setname 0x566 Heraldic
+!setname 0x567 Jellio
+!setname 0x568 C
+!setname 0x569 Eco Actional
+!setname 0x56a Junk Robot
+!setname 0x56b W
+!setname 0x56c X
+!setname 0x56d Y
+!setname 0x56e Z
+!setname 0x56f Dark Mummy
+!setname 0x570 Tentacluster
+!setname 0x571 Monarch (monster)
+!setname 0x572 Mirror Imagine
+!setname 0x573 Helixx
+!setname 0x574 Sunavalon
+!setname 0x575 Sunvine
+!setname 0x576 Starving Venemy
+!setname 0x578 Armatos Legio
+!setname 0x579 D-Scale
+!setname 0x57a Appliancer
+!setname 0x57b Topologina
+!setname 0x580 Stormrider
+!setname 0x581 Drone
+!setname 0x583 Mask
+!setname 0x600 Dark Tuner
+!setname 0x601 Dark Synchro
+!setname 0x316 Darkness

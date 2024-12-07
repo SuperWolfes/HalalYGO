@@ -3,7 +3,7 @@
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Link Summon procedure
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_INSECT|RACE_PLANT|RACE_REPTILE),2)
 	--Destroy 2 monsters on the field
@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_TODECK+CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetTarget(s.selfsptg)
 	e2:SetOperation(s.selfspop)

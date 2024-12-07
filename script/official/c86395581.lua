@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 s.listed_names={id}
-s.listed_series={SET_CHARMER}
+s.listed_series={SET_CHAUMER}
 function s.dfilter(c)
 	return c:IsAttribute(ATTRIBUTE_WIND) and c:IsDiscardable()
 end
@@ -38,7 +38,7 @@ function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 	local g=Duel.SelectMatchingCard(tp,s.dfilter,tp,LOCATION_HAND,0,1,1,c)
 	g:AddCard(c)
-	Duel.SendtoGrave(g,REASON_COST+REASON_DISCARD)
+	Duel.SendtoRest(g,REASON_COST+REASON_DISCARD)
 end
 function s.thfilter(c)
 	return c:IsDefenseBelow(1500) and c:IsAttribute(ATTRIBUTE_WIND) and not c:IsCode(id) and c:IsAbleToHand()

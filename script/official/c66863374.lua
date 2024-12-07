@@ -5,8 +5,8 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Link Summon procedure: 2 monsters, including a "Gladiator Beast" monster
 	Link.AddProcedure(c,nil,2,2,s.lcheck)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Add 1 "Gladiator Beast" card
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

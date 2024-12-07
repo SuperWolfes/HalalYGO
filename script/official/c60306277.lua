@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e2:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
 	e2:SetTarget(function(_,c) return not c:IsType(TYPE_SYNCHRO) end)
 	c:RegisterEffect(e2)
-	--Special Summon 1 non-Tuner monster that was sent to the GY
+	--Special Summon 1 non-Tuner monster that was sent to the RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -32,11 +32,11 @@ function s.initial_effect(c)
 	local g=Group.CreateGroup()
 	g:KeepAlive()
 	e3:SetLabelObject(g)
-	--Register cards sent to the GY
+	--Register cards sent to the RP
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e4:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	e4:SetCode(EVENT_TO_GRAVE)
+	e4:SetCode(EVENT_TO_REST)
 	e4:SetRange(LOCATION_SZONE)
 	e4:SetLabelObject(e3)
 	e4:SetOperation(s.regop)
@@ -105,8 +105,8 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.synchcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGraveAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED) end
-	Duel.SendtoGrave(c,REASON_COST)
+	if chk==0 then return c:IsAbleToRestAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED) end
+	Duel.SendtoRest(c,REASON_COST)
 end
 function s.synchtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsSynchroSummonable,tp,LOCATION_EXTRA,0,1,nil,nil) end

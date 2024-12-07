@@ -1,5 +1,5 @@
 --竜星の極み
---Yang Zing Unleashed
+--Bang Zing Unleashed
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -33,8 +33,8 @@ function s.sccon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.sccost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGraveAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED) end
-	Duel.SendtoGrave(c,REASON_COST)
+	if chk==0 then return c:IsAbleToRestAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED) end
+	Duel.SendtoRest(c,REASON_COST)
 end
 function s.mfilter(c)
 	return c:IsSetCard(0x9e) and c:IsMonster()

@@ -1,8 +1,8 @@
---Spell Search
+--Actional Search
 --Scripted by edo9300
 local s,id=GetID()
 function s.initial_effect(c)
-	--Your opponent adds 1 Spell from their Deck to their Hand instead of drawing
+	--Your opponent adds 1 Actional from their Deck to their Hand instead of drawing
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -41,7 +41,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetLabel()==1 or Duel.GetFlagEffect(tp,id)>0
 end
 function s.afilter(c)
-	return c:IsSpell() and c:IsAbleToHand()
+	return c:IsActional() and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetDrawCount(1-tp)>0 and Duel.IsExistingMatchingCard(s.afilter,1-tp,LOCATION_DECK,0,1,nil) end

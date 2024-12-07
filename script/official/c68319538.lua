@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,aux.FilterSummonCode(652362),1,1,Synchro.NonTunerEx(Card.IsSetCard,0xc),1,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--to hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -34,7 +34,7 @@ s.listed_names={652362}
 s.listed_series={0xc}
 s.counter_place_list={COUNTER_A}
 function s.filter(c)
-	return c:IsFaceup() and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsFaceup() and c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and s.filter(chkc) end

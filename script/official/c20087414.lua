@@ -17,7 +17,7 @@ function s.initial_effect(c)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,id,0,TYPE_MONSTER|TYPE_EFFECT,0,0,2,RACE_FAIRY,ATTRIBUTE_EARTH,POS_FACEUP,tp,1) end
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,id,0,TYPE_MONSTER|TYPE_EFFECT,0,0,2,RACE_WANDERER,ATTRIBUTE_EARTH,POS_FACEUP,tp,1) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,e:GetHandler(),1,tp,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
@@ -25,7 +25,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if c:IsRelateToEffect(e) and s.sptg(e,tp,eg,ep,ev,re,r,rp,0) then
 		c:AddMonsterAttribute(TYPE_EFFECT|TYPE_TRAP)
 		Duel.SpecialSummonStep(c,1,tp,tp,true,false,POS_FACEUP)
-		--Set this card in the Spell/Trap Zone and negate activated monster effect
+		--Set this card in the Actional/Trap Zone and negate activated monster effect
 		local e1=Effect.CreateEffect(c)
 		e1:SetDescription(aux.Stringid(id,1))
 		e1:SetCategory(CATEGORY_DISABLE+CATEGORY_TOHAND)
@@ -35,7 +35,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetCountLimit(1,0,EFFECT_COUNT_CODE_CHAIN)
 		e1:SetCondition(s.setcon)
 		e1:SetTarget(s.settg)
-		e1:SetOperation(s.setop)
+		e1:SetOperation(s.vetop)
 		e1:SetReset(RESET_EVENT|RESETS_STANDARD)
 		c:RegisterEffect(e1,true)
 		c:AddMonsterAttributeComplete()
@@ -55,7 +55,7 @@ function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DISABLE,eg,1,tp,0)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,re:GetHandler(),1,tp,0)
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local rc=re:GetHandler()
 	if c:IsRelateToEffect(e) and c:IsLocation(LOCATION_MZONE) and c:IsSSetable() and Duel.SSet(tp,c)>0

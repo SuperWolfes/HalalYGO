@@ -1,5 +1,5 @@
 --封魔の伝承者
---Disciple of the Forbidden Spell
+--Disciple of the Unliked Actional
 local s,id=GetID()
 function s.initial_effect(c)
 	--to defense
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 end
 function s.ancop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local ct=Duel.GetMatchingGroupCount(Card.IsCode,tp,LOCATION_GRAVE,0,nil,id)
+	local ct=Duel.GetMatchingGroupCount(Card.IsCode,tp,LOCATION_REST,0,nil,id)
 	if ct>0 and c:IsFaceup() and c:IsRelateToEffect(e) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTRIBUTE)
 		local att=Duel.AnnounceAttribute(tp,ct,ATTRIBUTE_ALL)

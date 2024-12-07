@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	--Negate the activation of a Spell/Trap card
+	--Negate the activation of a Actional/Trap card
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_NEGATE+CATEGORY_DESTROY)
@@ -20,12 +20,12 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_FREE_CHAIN)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetHintTiming(TIMING_END_PHASE)
 	e2:SetCountLimit(1,id)
 	e2:SetCondition(s.setcon)
 	e2:SetTarget(s.settg)
-	e2:SetOperation(s.setop)
+	e2:SetOperation(s.vetop)
 	c:RegisterEffect(e2)
 end
 s.listed_names={CARD_BLACK_WINGED_DRAGON}
@@ -55,9 +55,9 @@ end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsSSetable() end
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,c,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,c,1,0,0)
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and c:IsSSetable() and Duel.SSet(tp,c)>0 then
 		--Banish it if it leaves the field

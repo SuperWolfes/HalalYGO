@@ -1,5 +1,5 @@
 --悪魔の手鏡
---Fiend's Hand Mirror
+--Tainted's Hand Mirror
 local s,id=GetID()
 function s.initial_effect(c)
 	--activate
@@ -13,19 +13,19 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
-	if rp==tp or not re:IsHasType(EFFECT_TYPE_ACTIVATE) or not re:IsActiveType(TYPE_SPELL)
+	if rp==tp or not re:IsHasType(EFFECT_TYPE_ACTIVATE) or not re:IsActiveType(TYPE_ACTIONAL)
 		or not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then return false end
 	local g=Duel.GetChainInfo(ev,CHAININFO_TARGET_CARDS)
 	if not g or #g~=1 then return false end
 	local tc=g:GetFirst()
 	e:SetLabelObject(tc)
-	return tc:IsOnField() and tc:IsType(TYPE_SPELL+TYPE_TRAP)
+	return tc:IsOnField() and tc:IsType(TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.filter(c,ct)
-	return c:IsSpellTrap() and Duel.CheckChainTarget(ct,c)
+	return c:IsActionalTrap() and Duel.CheckChainTarget(ct,c)
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc~=e:GetLabelObject() and chkc:IsOnField() and chkc:IsSpellTrap() and s.filter(chkc,ev) end
+	if chkc then return chkc~=e:GetLabelObject() and chkc:IsOnField() and chkc:IsActionalTrap() and s.filter(chkc,ev) end
 	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,e:GetLabelObject(),ev) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 	Duel.SelectTarget(tp,s.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,e:GetLabelObject(),ev)

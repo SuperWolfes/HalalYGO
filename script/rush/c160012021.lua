@@ -30,7 +30,7 @@ function s.mltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DECKDES,nil,0,tp,3)
 end
 function s.filter(c)
-	return c:IsLocation(LOCATION_GRAVE) and c:IsCode(CARD_FUSION) and c:IsAbleToHand()
+	return c:IsLocation(LOCATION_REST) and c:IsCode(CARD_FUSION) and c:IsAbleToHand()
 end
 function s.mlop(e,tp,eg,ep,ev,re,r,rp)
 	--Effect
@@ -44,7 +44,7 @@ function s.mlop(e,tp,eg,ep,ev,re,r,rp)
 	c:RegisterEffect(e1)
 	Duel.DiscardDeck(tp,3,REASON_EFFECT)
 	local g=Duel.GetOperatedGroup()
-	if g:FilterCount(aux.NecroValleyFilter(s.filter),nil)>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+	if g:FilterCount(aux.RestValleyFilter(s.filter),nil)>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 		local sg=g:FilterSelect(tp,s.filter,1,1,nil)
 		if #sg>0 then

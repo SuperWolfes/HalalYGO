@@ -1,5 +1,5 @@
 --妖精の伝姫
---Fairy Tail Tales
+--Wanderer Tail Tales
 --Logical Nonsense and DyXel
 local s,id=GetID()
 function s.initial_effect(c)
@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--Normal Summon/Set 1 Spellcaster with 1850 ATK
+	--Normal Summon/Set 1 Mentor with 1850 ATK
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SUMMON)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.nstg)
 	e2:SetOperation(s.nsop)
 	c:RegisterEffect(e2)
-	--The first time each turn you would take damage while you control a Spellcaster with 1850 ATK, you take no damage
+	--The first time each turn you would take damage while you control a Mentor with 1850 ATK, you take no damage
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
 	e3:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
@@ -34,7 +34,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function s.nsfilter(c,tp)
-	return c:IsAttack(1850) and c:IsRace(RACE_SPELLCASTER) and c:CanSummonOrSet(true,nil) and not c:IsPublic()
+	return c:IsAttack(1850) and c:IsRace(RACE_MENTOR) and c:CanSummonOrSet(true,nil) and not c:IsPublic()
 		and not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,c:GetCode()),tp,LOCATION_MZONE,0,1,nil)
 end
 function s.nscost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -56,7 +56,7 @@ function s.nsop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.damfilter(c)
-	return c:GetBaseAttack()==1850 and c:IsRace(RACE_SPELLCASTER) and c:IsFaceup()
+	return c:GetBaseAttack()==1850 and c:IsRace(RACE_MENTOR) and c:IsFaceup()
 end
 function s.damcon(e)
 	return not e:GetHandler():HasFlagEffect(id) and Duel.IsExistingMatchingCard(s.damfilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)

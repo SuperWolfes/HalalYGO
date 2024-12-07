@@ -1,14 +1,14 @@
 --
---Libromancer Bonded
+--Librobouncer Bonded
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	Ritual.AddProcGreater({handler=c,filter=s.ritualfil,stage2=s.stage2})
+	Locked.AddProcGreater({handler=c,filter=s.lockedfil,stage2=s.stage2})
 end
 s.listed_series={0x17d}
 s.fit_monster={88106656,45001322}
-function s.ritualfil(c)
-	return c:IsSetCard(0x17d) and c:IsRitualMonster()
+function s.lockedfil(c)
+	return c:IsSetCard(0x17d) and c:IsLockedMonster()
 end
 function s.mfilter(c)
 	return c:IsPreviousLocation(LOCATION_MZONE) and c:GetPreviousCodeOnField()==45001322

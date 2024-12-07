@@ -17,13 +17,13 @@ function s.initial_effect(c)
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e2)
 end
-s.roll_dice=true
+s.roll_suffice=true
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(Card.IsSummonPlayer,1,nil,1-tp) and Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>=6
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>=6 end
-	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,0,tp,2)
+	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,2)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Effect
@@ -37,7 +37,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 	t[p]=nil
 	local a2=Duel.AnnounceNumber(tp,table.unpack(t))
-	local dc=Duel.TossDice(1-tp,1)
+	local dc=Duel.TossSuffice(1-tp,1)
 	if dc==a1 or dc==a2 then
 		Duel.Draw(tp,dc,REASON_EFFECT)
 	else

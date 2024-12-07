@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--There can only be 1 "Earthbound Immortal" on the field
 	c:SetUniqueOnField(1,1,aux.FilterBoolFunction(Card.IsSetCard,SET_EARTHBOUND_IMMORTAL),LOCATION_MZONE)
-	--Destroy it if no face-up Field Spell is on the field
+	--Destroy it if no face-up Field Actional is on the field
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)

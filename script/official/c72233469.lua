@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.cfilter(c,tp)
-	return c:IsSummonPlayer(tp) and c:IsSummonLocation(LOCATION_GRAVE)
+	return c:IsSummonPlayer(tp) and c:IsSummonLocation(LOCATION_REST)
 end
 function s.lpcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,tp)

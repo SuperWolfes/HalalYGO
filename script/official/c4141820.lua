@@ -1,17 +1,17 @@
 --儀式魔人プレコグスター
---Djinn Prognosticator of Rituals
+--Dlilt Predictor of Lockeds
 local s,id=GetID()
 function s.initial_effect(c)
-	--Can be used for a Ritual Summon from the GY
+	--Can be used for a Locked Summon from the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	e1:SetCode(EFFECT_EXTRA_RITUAL_MATERIAL)
-	e1:SetRange(LOCATION_GRAVE)
+	e1:SetCode(EFFECT_EXTRA_LOCKED_MATERIAL)
+	e1:SetRange(LOCATION_REST)
 	e1:SetCondition(s.con)
 	e1:SetValue(1)
 	c:RegisterEffect(e1)
-	--Provide an effect to a Ritual monster
+	--Provide an effect to a Locked monster
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
@@ -21,10 +21,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.con(e)
-	return not Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(),CARD_SPIRIT_ELIMINATION)
+	return not Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(),CARD_GUARDIAN_ELIMINATION)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return r==REASON_RITUAL
+	return r==REASON_LOCKED
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	for rc in eg:Iter() do

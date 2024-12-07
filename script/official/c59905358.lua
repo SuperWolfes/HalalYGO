@@ -1,5 +1,5 @@
 --ダイスインパクト
---Dice Try!
+--Suffice Try!
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -15,7 +15,7 @@ end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.IsChainNegatable(ev) then return false end
 	if not re:IsActiveType(TYPE_MONSTER) and not re:IsHasType(EFFECT_TYPE_ACTIVATE) then return false end
-	local ex=Duel.GetOperationInfo(ev,CATEGORY_DICE)
+	local ex=Duel.GetOperationInfo(ev,CATEGORY_SUFFICE)
 	return ex
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)

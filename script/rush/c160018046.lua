@@ -1,13 +1,13 @@
 --斧楽姫チューンフルートマホーク
---Tune Flutomahawk the Music Princess
+--Tune Flutomahawk the Nasheed Princess
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,160004005,160208031)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION,nil,false)
-	--Send the top 4 cards of deck to GY
+	--Send the top 4 cards of deck to RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -34,11 +34,11 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Effect
 	Duel.DiscardDeck(tp,4,REASON_EFFECT)
-	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_GRAVE,0,nil,e,tp)
+	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_REST,0,nil,e,tp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.BreakEffect()
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local sg=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp):GetFirst()
+		local sg=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp):GetFirst()
 		Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)
 	end
 end

@@ -15,15 +15,15 @@ function s.initial_effect(c)
 end
 function s.cfilter1(c,tp,code)
 	return c:IsMonster() and c:IsRace(RACE_PYRO) and c:IsAbleToDeckOrExtraAsCost()
-		and Duel.IsExistingMatchingCard(s.cfilter2,tp,LOCATION_GRAVE,0,1,c,tp,c,code)
+		and Duel.IsExistingMatchingCard(s.cfilter2,tp,LOCATION_REST,0,1,c,tp,c,code)
 end
 function s.cfilter2(c,tp,tc,code)
 	local g=Group.FromCards(c,tc)
 	return c:IsMonster() and c:IsRace(RACE_PYRO) and c:IsAbleToDeckOrExtraAsCost()
-		and Duel.IsExistingMatchingCard(s.namefilter,tp,LOCATION_GRAVE,0,1,g,code)
+		and Duel.IsExistingMatchingCard(s.namefilter,tp,LOCATION_REST,0,1,g,code)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter1,tp,LOCATION_GRAVE,0,1,nil,tp,e:GetHandler():GetCode()) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter1,tp,LOCATION_REST,0,1,nil,tp,e:GetHandler():GetCode()) end
 end
 function s.costfilter(c)
 	return c:IsMonster() and c:IsRace(RACE_PYRO) and c:IsAbleToDeckOrExtraAsCost()
@@ -36,8 +36,8 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local code=c:GetCode()
 	--Requirement
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.GetMatchingGroup(s.costfilter,tp,LOCATION_GRAVE,0,nil)
-	local pg=Duel.GetMatchingGroup(s.namefilter,tp,LOCATION_GRAVE,0,nil,code)
+	local g=Duel.GetMatchingGroup(s.costfilter,tp,LOCATION_REST,0,nil)
+	local pg=Duel.GetMatchingGroup(s.namefilter,tp,LOCATION_REST,0,nil,code)
 	if #g<2 or #pg<1 then return end
 	local td=aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon(pg),1,tp,HINTMSG_TODECK)
 	Duel.HintSelection(td,true)
@@ -45,7 +45,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Effect
 	if c:IsFaceup() and c:IsRelateToEffect(e) then
 		--name change
-		local g2=Duel.SelectMatchingCard(tp,s.namefilter,tp,LOCATION_GRAVE,0,1,1,nil,code)
+		local g2=Duel.SelectMatchingCard(tp,s.namefilter,tp,LOCATION_REST,0,1,1,nil,code)
 		if #g2>0 then
 			Duel.HintSelection(g2,true)
 			local e1=Effect.CreateEffect(c)

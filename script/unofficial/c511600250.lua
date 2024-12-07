@@ -6,7 +6,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(0x581)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx2(Card.IsDrone),2)
 	--counter
 	local e1=Effect.CreateEffect(c)
@@ -49,7 +49,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and e:GetHandler():IsCanRemoveCounter(tp,0x581,1,REASON_COST)
 		and Duel.IsPlayerCanSpecialSummonMonster(tp,511009746,0x581,TYPES_TOKEN,0,0,1,RACE_MACHINE,ATTRIBUTE_WIND) end
 	local ct=math.min(Duel.GetLocationCount(tp,LOCATION_MZONE),e:GetHandler():GetCounter(0x581))
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ct=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ct=1 end
 	if ct>1 then
 		local selct = {}
 		for i=1,ct do selct[i]=i end
@@ -64,7 +64,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ft<=0 then return end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	if ft<e:GetLabel() then return end
 	if Duel.IsPlayerCanSpecialSummonMonster(tp,511009746,0x581,TYPES_TOKEN,0,0,1,RACE_MACHINE,ATTRIBUTE_WIND) then
 		for i=1,e:GetLabel() do

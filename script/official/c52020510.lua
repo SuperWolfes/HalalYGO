@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_CHAINING)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCondition(s.nodamcon)
 	e2:SetCost(aux.bfgcost)
 	e2:SetOperation(s.nodamop)
@@ -38,17 +38,17 @@ function s.rescon(sg,e,tp,mg)
 	return sg:GetSum(Card.GetLevel)<=8
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	local tg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_GRAVE,0,nil,e,tp)
+	local tg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_REST,0,nil,e,tp)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and aux.SelectUnselectGroup(tg,e,tp,1,1,s.rescon,0) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,0,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,0,LOCATION_REST)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local ft=math.min(Duel.GetLocationCount(tp,LOCATION_MZONE),2)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
-	local tg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_GRAVE,0,nil,e,tp)
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
+	local tg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_REST,0,nil,e,tp)
 	local g=aux.SelectUnselectGroup(tg,e,tp,1,ft,s.rescon,1,tp,HINTMSG_SPSUMMON)
-	if #g<=0 or Duel.GetLocationCount(tp,LOCATION_MZONE)<#g or (#g>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)) then return end
+	if #g<=0 or Duel.GetLocationCount(tp,LOCATION_MZONE)<#g or (#g>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)) then return end
 	if Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)==#g then
 		for tc in aux.Next(g) do
 			--Cannot declare attacks

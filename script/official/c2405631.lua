@@ -44,10 +44,10 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsAbleToRemove() end
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,c,1,0,0)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end
 function s.mgfilter(c,e,tp,sync)
-	return c:IsControler(tp) and c:IsLocation(LOCATION_GRAVE)
+	return c:IsControler(tp) and c:IsLocation(LOCATION_REST)
 		and (c:GetReason()&(REASON_SYNCHRO_MATERIAL))==(REASON_SYNCHRO_MATERIAL)
 		and c:GetReasonCard()==sync and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
@@ -58,9 +58,9 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ct=#mg
 	local sumtype=c:GetSummonType()
 	if Duel.Remove(c,POS_FACEUP,REASON_EFFECT)>0 and sumtype==SUMMON_TYPE_SYNCHRO
-		and ct>0 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
+		and ct>0 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)
 		and ct<=Duel.GetLocationCount(tp,LOCATION_MZONE)
-		and mg:FilterCount(aux.NecroValleyFilter(s.mgfilter),nil,e,tp,c)==ct
+		and mg:FilterCount(aux.RestValleyFilter(s.mgfilter),nil,e,tp,c)==ct
 		and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 		Duel.BreakEffect()
 		if Duel.SpecialSummon(mg,0,tp,tp,false,false,POS_FACEUP)~=ct then return end

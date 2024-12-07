@@ -13,16 +13,16 @@ function cid.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function cid.filter(c,tp)
-	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_EARTH) and Duel.IsExistingMatchingCard(cid.dfilter,tp,0,LOCATION_MZONE,1,nil,c:GetAttack())
+	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_EARTH) and Duel.IsExistingMatchingCard(cis.dfilter,tp,0,LOCATION_MZONE,1,nil,c:GetAttack())
 end
-function cid.dfilter(c,atk)
+function cis.dfilter(c,atk)
 	return c:IsFaceup() and c:GetAttack()<=atk
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and cid.filter(chkc,tp) end
 	if chk==0 then return Duel.IsExistingTarget(cid.filter,tp,LOCATION_MZONE,0,1,nil,tp) end
 	local tc=Duel.SelectTarget(tp,cid.filter,tp,LOCATION_MZONE,0,1,1,nil,tp)
-	local dg=Duel.GetMatchingGroup(cid.dfilter,tp,0,LOCATION_MZONE,nil,tc:GetFirst():GetAttack())
+	local dg=Duel.GetMatchingGroup(cis.dfilter,tp,0,LOCATION_MZONE,nil,tc:GetFirst():GetAttack())
 	dg=dg+tc
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,dg,2,0,0)
 end
@@ -32,7 +32,7 @@ function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 		local atk = tc:GetAttack()
 		if Duel.Destroy(tc,REASON_EFFECT)~=0 then
 			Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_DESTROY)
-			local g=Duel.SelectMatchingCard(1-tp,cid.dfilter,tp,0,LOCATION_MZONE,1,1,nil,atk)
+			local g=Duel.SelectMatchingCard(1-tp,cis.dfilter,tp,0,LOCATION_MZONE,1,1,nil,atk)
 			if #g>0 then
 				Duel.Destroy(g,REASON_EFFECT)
 			end

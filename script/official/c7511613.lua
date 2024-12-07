@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Xyz Summon procedure: 2+ Level 4 monsters
 	Xyz.AddProcedure(c,nil,4,2,nil,nil,99)
 	--For each material attached to this card, monsters you control gain 100 ATK and monsters your opponent controls lose 100 ATK
@@ -14,10 +14,10 @@ function s.initial_effect(c)
 	e1:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
 	e1:SetValue(function(e,c) return (c:IsControler(e:GetHandlerPlayer()) and 100 or -100)*e:GetHandler():GetOverlayCount() end)
 	c:RegisterEffect(e1)
-	--Attach 1 "Raizeol" monster from your GY to this card as material
+	--Attach 1 "Raizeol" monster from your RP to this card as material
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
-	e2:SetCategory(CATEGORY_LEAVE_GRAVE)
+	e2:SetCategory(CATEGORY_LEAVE_REST)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
@@ -41,14 +41,14 @@ function s.attachfilter(c,xyzc,tp)
 	return c:IsSetCard(SET_RYZEAL) and c:IsMonster() and c:IsCanBeXyzMaterial(xyzc,tp,REASON_EFFECT)
 end
 function s.attachtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.attachfilter,tp,LOCATION_GRAVE,0,1,nil,e:GetHandler(),tp) end
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,nil,1,tp,0)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.attachfilter,tp,LOCATION_REST,0,1,nil,e:GetHandler(),tp) end
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,nil,1,tp,0)
 end
 function s.attachop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)
-	local tc=Duel.SelectMatchingCard(tp,s.attachfilter,tp,LOCATION_GRAVE,0,1,1,nil,c,tp):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,s.attachfilter,tp,LOCATION_REST,0,1,1,nil,c,tp):GetFirst()
 	if tc then
 		Duel.HintSelection(tc)
 		Duel.Overlay(c,tc)

@@ -1,5 +1,5 @@
 --同契魔術
---Simult Archfiends
+--Simult Archtainteds
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 end
-local TYPE_RITUAL_FUSION_SYNCHRO_XYZ_LINK=TYPE_RITUAL|TYPE_FUSION|TYPE_SYNCHRO|TYPE_XYZ|TYPE_LINK
+local TYPE_LOCKED_FUSION_SYNCHRO_XYZ_LINK=TYPE_LOCKED|TYPE_FUSION|TYPE_SYNCHRO|TYPE_XYZ|TYPE_LINK
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFlagEffect(0,id)==0 end
 end
@@ -32,9 +32,9 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e1,tp)
 	--Increase ATK of monsters
-	local g=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsType,TYPE_RITUAL_FUSION_SYNCHRO_XYZ_LINK),tp,LOCATION_MZONE,0,nil)
+	local g=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsType,TYPE_LOCKED_FUSION_SYNCHRO_XYZ_LINK),tp,LOCATION_MZONE,0,nil)
 	if #g==0 then return end
-	local types={TYPE_RITUAL,TYPE_FUSION,TYPE_SYNCHRO,TYPE_XYZ,TYPE_LINK}
+	local types={TYPE_LOCKED,TYPE_FUSION,TYPE_SYNCHRO,TYPE_XYZ,TYPE_LINK}
 	for _,typ in ipairs(types) do
 		if g:IsExists(Card.IsType,2,nil,typ) then return end
 	end
@@ -50,6 +50,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.sumlimit(e,c,sump,sumtype,sumpos,targetp)
 	local g=Duel.GetMatchingGroup(Card.IsFaceup,sump,LOCATION_MZONE,0,nil)
-	local mtypes=g:GetBitwiseOr(Card.GetType)&TYPE_RITUAL_FUSION_SYNCHRO_XYZ_LINK
+	local mtypes=g:GetBitwiseOr(Card.GetType)&TYPE_LOCKED_FUSION_SYNCHRO_XYZ_LINK
 	return c:IsType(mtypes)
 end

@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion Procedure
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMixN(c,true,true,CARD_TRANSAMU_RAINAC,1,s.ffilter,1)
 	--atk increase
 	local e1=Effect.CreateEffect(c)
@@ -24,7 +24,7 @@ function s.tdfilter(c)
 	return c:IsMonster() and c:IsRace(RACE_GALAXY) and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_GRAVE,0,2,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST,0,2,nil) end
 end
 function s.cfilter(c)
 	return c:IsLevel(7) and c:IsType(TYPE_EFFECT) and c:IsMonster()
@@ -33,7 +33,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	--Requirement
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g1=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_GRAVE,0,2,2,nil)
+	local g1=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_REST,0,2,2,nil)
 	if #g1==0 then return end
 	Duel.HintSelection(g1,true)
 	Duel.SendtoDeck(g1,nil,SEQ_DECKTOP,REASON_EFFECT)

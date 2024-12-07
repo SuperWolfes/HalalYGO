@@ -75,7 +75,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not tc then return end
 	local c=e:GetHandler()
 	c:SetCardTarget(tc)
-	--Ngeate battle destruction
+	--Ngeate battle mismatching
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_DESTROY_REPLACE)

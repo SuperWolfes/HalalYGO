@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz Summon
 	Xyz.AddProcedure(c,nil,10,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Targeted monster becomes unaffected by other card effects
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

@@ -1,8 +1,8 @@
---Ra'ten, the Heavenly General
+--Ra'ten, the Spectrumly General
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,nil,2,99,s.lcheck)
 	--special Summon
 	local e1=Effect.CreateEffect(c)

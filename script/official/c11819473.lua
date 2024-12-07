@@ -14,12 +14,12 @@ function s.initial_effect(c)
 	e1:SetTarget(s.thtg)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
-	--Normal summon 1 "Arcana Force" monster
+	--Normal summon 1 "Arcana Fcoree" monster
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SUMMON)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCost(aux.bfgcost)
 	e2:SetTarget(s.nstg)
@@ -28,7 +28,7 @@ function s.initial_effect(c)
 end
 s.toss_coin=true
 s.listed_names={CARD_LIGHT_BARRIER}
-s.listed_series={SET_ARCANA_FORCE}
+s.listed_series={SET_ARCANA_FCOREE}
 function s.thfilter(c)
 	return c.toss_coin and c:IsAbleToHand() and not c:IsCode(id)
 end
@@ -70,7 +70,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.nsfilter(c)
-	return c:IsSetCard(SET_ARCANA_FORCE) and c:IsSummonable(true,nil)
+	return c:IsSetCard(SET_ARCANA_FCOREE) and c:IsSummonable(true,nil)
 end
 function s.nstg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.nsfilter,tp,LOCATION_HAND,0,1,nil) end

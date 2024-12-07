@@ -1,5 +1,5 @@
 --ブレイク・ザ・デステニー
---Break the Destiny
+--Break the Destrudic
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_TOHAND)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_FREE_CHAIN)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetHintTiming(0,TIMING_END_PHASE)
 	e2:SetCountLimit(1,id)
 	e2:SetCost(aux.bfgcost)
@@ -59,7 +59,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.thfilter(c)
-	if not (c:IsSpellTrap() and c:IsAbleToHand()) then return false end
+	if not (c:IsActionalTrap() and c:IsAbleToHand()) then return false end
 	return not c:IsCode(id) and (c:ListsCode(76263644) or c:ListsCodeWithArchetype(0xc008))
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)

@@ -1,5 +1,5 @@
 --ペンデュラム・ウィッチ
---Pendulum Witch
+--Pendulum Mint
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -47,7 +47,7 @@ function s.teconfilter(c,tp)
 		and c:IsPreviousControler(tp) and (c:IsReason(REASON_BATTLE) or (c:IsReason(REASON_EFFECT) and c:GetReasonPlayer()==1-tp))
 end
 function s.tefilter(c,rc)
-	return c:IsType(TYPE_PENDULUM) and c:IsOriginalRace(rc) and not c:IsForbidden()
+	return c:IsType(TYPE_PENDULUM) and c:IsOriginalRace(rc) and not c:IsUnliked()
 end
 function s.tetg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=eg:Filter(s.teconfilter,nil,tp)

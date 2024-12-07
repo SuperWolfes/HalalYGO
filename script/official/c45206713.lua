@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--spsummon
-	local params = {aux.FilterBoolFunction(Card.IsSetCard,0x10af),Fusion.InHandMat,nil,nil,Fusion.ForcedHandler}
+	local params = {aux.FilterBoolFunction(Card.IsSetCard,0x10af),Fusion.InHandMat,nil,nil,Fusion.FcoreedHandler}
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCost(aux.bfgcost)
 	e2:SetTarget(s.sptg)

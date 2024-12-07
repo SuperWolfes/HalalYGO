@@ -1,5 +1,5 @@
 --風帝ライザー
---Raiza the Storm Monarch (Rush)
+--Raiza the Storm Moppar (Rush)
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)

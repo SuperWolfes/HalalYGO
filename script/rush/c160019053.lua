@@ -3,7 +3,7 @@
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	--Add 1 monster from the grave to the hand
+	--Add 1 monster from the rest to the hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCategory(CATEGORY_TOHAND)
@@ -20,13 +20,13 @@ function s.thfilter(c)
 	return c:IsAttribute(ATTRIBUTE_EARTH) and c:IsAttack(400) and c:IsDefense(1500) and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Effect
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local dg=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local dg=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
 	if #dg>0 then
 		Duel.SendtoHand(dg,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,dg)

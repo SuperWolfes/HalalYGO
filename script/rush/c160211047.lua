@@ -21,7 +21,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsStatus(STATUS_SUMMON_TURN)
 end
 function s.cfilter(c)
-	return c:IsRace(RACE_FAIRY) and c:IsAttack(0) and not c:IsPublic()
+	return c:IsRace(RACE_WANDERER) and c:IsAttack(0) and not c:IsPublic()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end
@@ -41,9 +41,9 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ShuffleHand(tp)
 	--Effect
 	Duel.DiscardDeck(tp,3,REASON_EFFECT)
-	if Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.thfilter),tp,LOCATION_GRAVE,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+	if Duel.IsExistingMatchingCard(aux.RestValleyFilter(s.thfilter),tp,LOCATION_REST,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thfilter),tp,LOCATION_GRAVE,0,1,1,nil)
+		local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.thfilter),tp,LOCATION_REST,0,1,1,nil)
 		if #g>0 then
 			Duel.BreakEffect()
 			Duel.SendtoHand(g,nil,REASON_EFFECT)

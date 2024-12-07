@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e3:SetTarget(s.thdtg)
 	e3:SetOperation(s.thdop)
 	c:RegisterEffect(e3)
-	--tribute to draw
+	--sort draw
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(67616300,0)) --Chicken Game
 	e4:SetCategory(CATEGORY_DRAW)
@@ -50,20 +50,20 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.NegateAttack()
 end
 function s.tdfilter(c)
-	return c:IsSpell() and c:IsAbleToDeck()
+	return c:IsActional() and c:IsAbleToDeck()
 end
 function s.thfilter(c)
 	return c:IsMonster() and c:IsSetCard(0x578) and c:IsAbleToHand()
 end
 function s.thdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	if chk==0 then return Duel.IsExistingTarget(s.thfilter,tp,LOCATION_GRAVE,0,1,nil)
-		and Duel.IsExistingTarget(s.tdfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingTarget(s.thfilter,tp,LOCATION_REST,0,1,nil)
+		and Duel.IsExistingTarget(s.tdfilter,tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g1=Duel.SelectTarget(tp,s.tdfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g1=Duel.SelectTarget(tp,s.tdfilter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g1,1,0,0)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RTOHAND)
-	local g2=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g2=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g2,1,0,0)
 end
 function s.thdop(e,tp,eg,ep,ev,re,r,rp)

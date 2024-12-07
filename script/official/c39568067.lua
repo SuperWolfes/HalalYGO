@@ -1,5 +1,5 @@
 -- 運命の旅路
--- Fateful Adventure
+-- Bateful Adventure
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	-- Prevent battle destruction once
+	-- Prevent battle mismatching once
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_INDESTRUCTABLE_COUNT)
@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e3:SetTarget(s.mthtg)
 	e3:SetOperation(s.mthop)
 	c:RegisterEffect(e3)
-	-- Search Equip Spell that lists "Adventurer Token"
+	-- Search Equip Actional that lists "Adventurer Token"
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_EQUIP)
@@ -67,11 +67,11 @@ function s.adventurerfilter(c,ec)
 	return c:IsFaceup() and c:IsCode(TOKEN_ADVENTURER) and ec:CheckEquipTarget(c)
 end
 function s.eqfilter(c,tp)
-	return c:CheckUniqueOnField(tp) and not c:IsForbidden() and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
+	return c:CheckUniqueOnField(tp) and not c:IsUnliked() and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
 		and Duel.IsExistingTarget(s.adventurerfilter,tp,LOCATION_MZONE,0,1,nil,c)
 end
 function s.sthfilter(c,tp)
-	return c:IsEquipSpell() and c:ListsCode(TOKEN_ADVENTURER) and (c:IsAbleToHand() or s.eqfilter(c,tp))
+	return c:IsEquipActional() and c:ListsCode(TOKEN_ADVENTURER) and (c:IsAbleToHand() or s.eqfilter(c,tp))
 end
 function s.sthtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.sthfilter,tp,LOCATION_DECK,0,1,nil,tp) end

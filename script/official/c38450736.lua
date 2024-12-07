@@ -40,12 +40,12 @@ function s.eqval(ec,c,tp)
 	return ec:IsControler(tp) and ec:IsSetCard(0x56)
 end
 function s.filter(c)
-	return c:IsSetCard(0x56) and c:IsMonster() and not c:IsForbidden()
+	return c:IsSetCard(0x56) and c:IsMonster() and not c:IsUnliked()
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE+LOCATION_HAND,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_EQUIP,nil,1,tp,LOCATION_GRAVE+LOCATION_HAND)
+		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST+LOCATION_HAND,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_EQUIP,nil,1,tp,LOCATION_REST+LOCATION_HAND)
 end
 function s.equipop(c,e,tp,tc)
 	c:EquipByEffectAndLimitRegister(e,tp,tc,nil,true)
@@ -55,7 +55,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then return end
 	if c:IsFacedown() or not c:IsRelateToEffect(e) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,LOCATION_GRAVE+LOCATION_HAND,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.filter),tp,LOCATION_REST+LOCATION_HAND,0,1,1,nil)
 	local tc=g:GetFirst()
 	if tc then
 		s.equipop(c,e,tp,tc)
@@ -65,7 +65,7 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local ec=c:GetEquipTarget()
 	e:SetLabelObject(ec)
-	return ec and c:IsLocation(LOCATION_GRAVE) and ec:IsFaceup() and ec:IsLocation(LOCATION_MZONE)
+	return ec and c:IsLocation(LOCATION_REST) and ec:IsFaceup() and ec:IsLocation(LOCATION_MZONE)
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

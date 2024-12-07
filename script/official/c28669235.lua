@@ -57,7 +57,7 @@ function s.efftg(e,c)
 	return (c:IsSetCard(SET_RYU_GE) and c:IsType(TYPE_PENDULUM)) or (c:IsLevelAbove(10) and c:IsOriginalRace(RACE_SEASERPENT))
 end
 function s.costfilter(c)
-	return c:IsSetCard(SET_RYU_GE) and c:IsContinuousSpell() and c:IsFaceup() and c:IsAbleToDeckAsCost()
+	return c:IsSetCard(SET_RYU_GE) and c:IsContinuousActional() and c:IsFaceup() and c:IsAbleToDeckAsCost()
 		and Duel.IsExistingTarget(Card.IsAbleToHand,0,LOCATION_ONFIELD,LOCATION_ONFIELD,1,c)
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)

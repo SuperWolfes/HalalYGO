@@ -12,7 +12,7 @@ end
 function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 	--condition
 	local fgc=Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsSetCard,0xfb),tp,LOCATION_MZONE,0,nil)
-	return fgc>0 and Duel.IsPlayerCanDiscardDeck(tp,fgc) and Duel.IsExistingMatchingCard(s.tkfilter,tp,LOCATION_GRAVE,0,1,nil)
+	return fgc>0 and Duel.IsPlayerCanDiscardDeck(tp,fgc) and Duel.IsExistingMatchingCard(s.tkfilter,tp,LOCATION_REST,0,1,nil)
 end
 function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	--opd check and ask if you want to activate the skill or not
@@ -26,10 +26,10 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	--Deck Des/Add to hand
 	local fgc=Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsSetCard,0xfb),tp,LOCATION_MZONE,0,nil)
 	if fgc>0 and Duel.IsPlayerCanDiscardDeck(tp,fgc) and Duel.DiscardDeck(tp,fgc,REASON_EFFECT)>0
-		and Duel.IsExistingMatchingCard(s.tkfilter,tp,LOCATION_GRAVE,0,1,nil) then
+		and Duel.IsExistingMatchingCard(s.tkfilter,tp,LOCATION_REST,0,1,nil) then
 		Duel.BreakEffect()
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-		local thg=Duel.SelectMatchingCard(tp,s.tkfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+		local thg=Duel.SelectMatchingCard(tp,s.tkfilter,tp,LOCATION_REST,0,1,1,nil)
 		Duel.HintSelection(thg)
 		Duel.SendtoHand(thg,tp,REASON_EFFECT)
 	end

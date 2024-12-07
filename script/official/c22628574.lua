@@ -15,13 +15,13 @@ end
 s.listed_names={id}
 s.listed_series={SET_BLACKWING}
 function s.cfilter(c)
-	return c:IsSetCard(SET_BLACKWING) and c:IsMonster() and c:IsAbleToGraveAsCost()
+	return c:IsSetCard(SET_BLACKWING) and c:IsMonster() and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.filter(c)
 	return c:IsNormalTrap() and not c:IsCode(id) and c:CheckActivateEffect(false,true,false)~=nil
@@ -32,10 +32,10 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		local tg=te:GetTarget()
 		return tg and tg(e,tp,eg,ep,ev,re,r,rp,1,true)
 	end
-	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,0,LOCATION_GRAVE,1,nil) end
+	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,0,LOCATION_REST,1,nil) end
 	e:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,0))
-	local g=Duel.SelectTarget(tp,s.filter,tp,0,LOCATION_GRAVE,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.filter,tp,0,LOCATION_REST,1,1,nil)
 	if not g then return false end
 	local te,eg,ep,ev,re,r,rp=g:GetFirst():CheckActivateEffect(false,true,true)
 	e:SetLabelObject(te)

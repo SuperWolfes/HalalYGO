@@ -13,22 +13,22 @@ function s.initial_effect(c)
 	e1:SetCondition(s.spcon)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Send 1 Fish "Shark" monster or 1 "Xyz" Spell/Trap from your Deck to the GY
+	--Send 1 Fish "Shark" monster or 1 "Xyz" Actional/Trap from your Deck to the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_TOGRAVE)
+	e2:SetCategory(CATEGORY_TOREST)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCountLimit(1,id)
 	e2:SetTarget(s.tgtg)
 	e2:SetOperation(s.tgop)
 	c:RegisterEffect(e2)
-	--Add 1 "Aqua Jet" card from your Deck or GY to your hand
+	--Add 1 "Aqua Jet" card from your Deck or RP to your hand
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e3:SetType(EFFECT_TYPE_IGNITION)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetCountLimit(1,id)
 	e3:SetCost(aux.SelfBanishCost)
 	e3:SetTarget(s.thtg)
@@ -58,29 +58,29 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.tgfilter(c)
-	return ((c:IsRace(RACE_FISH) and c:IsSetCard(SET_SHARK)) or (c:IsSetCard(SET_XYZ) and c:IsSpellTrap())) and c:IsAbleToGrave()
+	return ((c:IsRace(RACE_FISH) and c:IsSetCard(SET_SHARK)) or (c:IsSetCard(SET_XYZ) and c:IsActionalTrap())) and c:IsAbleToRest()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end
 function s.thfilter(c)
 	return c:IsSetCard(SET_AQUA_JET) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK|LOCATION_GRAVE,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK|LOCATION_GRAVE)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK|LOCATION_REST,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK|LOCATION_REST)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thfilter),tp,LOCATION_DECK|LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.thfilter),tp,LOCATION_DECK|LOCATION_REST,0,1,1,nil)
 	if #g>0 then
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)

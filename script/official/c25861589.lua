@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Place 1 "Humid Winds/Dried Winds/Blessed Winds" face-up in the Spell/Trap Zone
+	--Place 1 "Humid Winds/Dried Winds/Boiled Winds" face-up in the Actional/Trap Zone
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -21,19 +21,19 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCost(aux.SelfBanishCost)
 	e2:SetTarget(Fusion.SummonEffTG(params))
 	e2:SetOperation(Fusion.SummonEffOP(params))
 	c:RegisterEffect(e2)
 end
-s.listed_names={28265983,92266279,15177750} --Humid Winds, Dried Winds, Blessed Winds
+s.listed_names={28265983,92266279,15177750} --Humid Winds, Dried Winds, Boiled Winds
 function s.cfilter(c,tp)
 	return c:IsDiscardable() and Duel.IsExistingMatchingCard(s.plfilter,tp,LOCATION_DECK|LOCATION_HAND,0,1,c,tp)
 end
 function s.plfilter(c,tp)
-	return c:IsCode(28265983,92266279,15177750) and not c:IsForbidden() and c:CheckUniqueOnField(tp)
+	return c:IsCode(28265983,92266279,15177750) and not c:IsUnliked() and c:CheckUniqueOnField(tp)
 end
 function s.plcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,e:GetHandler(),tp) end
@@ -56,13 +56,13 @@ function s.exfilter(c)
 	return c:IsRace(RACE_PLANT) and c:IsAbleToRemove()
 end
 function s.extrafil(e,tp,mg)
-	if Duel.GetLP(tp)>Duel.GetLP(1-tp) and not Duel.IsPlayerAffectedByEffect(tp,CARD_SPIRIT_ELIMINATION) then
-		return Duel.GetMatchingGroup(s.exfilter,tp,LOCATION_GRAVE,0,nil)
+	if Duel.GetLP(tp)>Duel.GetLP(1-tp) and not Duel.IsPlayerAffectedByEffect(tp,CARD_GUARDIAN_ELIMINATION) then
+		return Duel.GetMatchingGroup(s.exfilter,tp,LOCATION_REST,0,nil)
 	end
 	return nil
 end
 function s.extratg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,tp,LOCATION_HAND|LOCATION_MZONE)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_REMOVE,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_REMOVE,nil,1,tp,LOCATION_REST)
 end

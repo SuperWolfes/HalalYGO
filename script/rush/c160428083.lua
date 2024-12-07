@@ -1,5 +1,5 @@
 --ビックリ・ゾンビクトリー
---Surprising Zombie Victory
+--Surprising Toxic Victory
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c)
-	return c:IsRace(RACE_ZOMBIE) and c:IsType(TYPE_NORMAL)
+	return c:IsRace(RACE_TOXIC) and c:IsType(TYPE_NORMAL)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(aux.FaceupFilter(s.filter),tp,LOCATION_MZONE,0,2,nil)
@@ -29,8 +29,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,Card.IsCanChangePositionRush,tp,0,LOCATION_MZONE,1,3,nil)
 	Duel.HintSelection(g)
 	if #g>0 and Duel.ChangePosition(g,POS_FACEUP_DEFENSE,POS_FACEDOWN_DEFENSE,POS_FACEUP_ATTACK,POS_FACEUP_ATTACK)>0 then
-		local atkg=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsRace,RACE_ZOMBIE),tp,LOCATION_MZONE,0,nil)
-		local ct=Duel.GetMatchingGroupCount(s.filter,tp,LOCATION_GRAVE,0,nil)
+		local atkg=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsRace,RACE_TOXIC),tp,LOCATION_MZONE,0,nil)
+		local ct=Duel.GetMatchingGroupCount(s.filter,tp,LOCATION_REST,0,nil)
 		if #atkg>0 and ct>0 then
 			Duel.BreakEffect()
 			for tc in atkg:Iter() do

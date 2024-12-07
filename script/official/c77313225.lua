@@ -3,10 +3,10 @@
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--1 Tuner + 1+ non-Tuner monsters
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
-	--Search 1 "White Forest" card or 1 LIGHT Spellcaster monster
+	--Search 1 "White Forest" card or 1 LIGHT Mentor monster
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND)
@@ -18,16 +18,16 @@ function s.initial_effect(c)
 	e1:SetTarget(s.thtg)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
-	--Illusion and Spellcaster Synchro Monsters gain 500 ATK
+	--Illusion and Mentor Synchro Monsters gain 500 ATK
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_UPDATE_ATTACK)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetTargetRange(LOCATION_MZONE,0)
-	e2:SetTarget(function(e,c) return c:IsRace(RACE_ILLUSION|RACE_SPELLCASTER) and c:IsType(TYPE_SYNCHRO) end)
+	e2:SetTarget(function(e,c) return c:IsRace(RACE_ILLUSION|RACE_MENTOR) and c:IsType(TYPE_SYNCHRO) end)
 	e2:SetValue(500)
 	c:RegisterEffect(e2)
-	--Illusion and Spellcaster Synchro Monsters cannot be destroyed by opponent's card effects
+	--Illusion and Mentor Synchro Monsters cannot be destroyed by opponent's card effects
 	local e3=e2:Clone()
 	e3:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
 	e3:SetValue(aux.indoval)
@@ -35,13 +35,13 @@ function s.initial_effect(c)
 end
 s.listed_series={SET_WHITE_FOREST}
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(aux.AND(Card.IsSpellTrap,Card.IsAbleToGraveAsCost),tp,LOCATION_HAND|LOCATION_ONFIELD,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local g=Duel.SelectMatchingCard(tp,aux.AND(Card.IsSpellTrap,Card.IsAbleToGraveAsCost),tp,LOCATION_HAND|LOCATION_ONFIELD,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	if chk==0 then return Duel.IsExistingMatchingCard(aux.AND(Card.IsActionalTrap,Card.IsAbleToRestAsCost),tp,LOCATION_HAND|LOCATION_ONFIELD,0,1,nil) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	local g=Duel.SelectMatchingCard(tp,aux.AND(Card.IsActionalTrap,Card.IsAbleToRestAsCost),tp,LOCATION_HAND|LOCATION_ONFIELD,0,1,1,nil)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.thfilter(c)
-	return (c:IsSetCard(SET_WHITE_FOREST) or (c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_SPELLCASTER))) and c:IsAbleToHand()
+	return (c:IsSetCard(SET_WHITE_FOREST) or (c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_MENTOR))) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

@@ -35,7 +35,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x74}
 function s.cfilter(c)
-	return c:IsSetCard(0x74) and c:IsDiscardable() and c:IsAbleToGraveAsCost()
+	return c:IsSetCard(0x74) and c:IsDiscardable() and c:IsAbleToRestAsCost()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,4,e:GetHandler()) end
@@ -60,7 +60,7 @@ end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(1-tp) and chkc:IsOnField() end
 	if chk==0 then return true end
-	local ct=Duel.GetMatchingGroupCount(s.descount,tp,LOCATION_GRAVE,0,nil)
+	local ct=Duel.GetMatchingGroupCount(s.descount,tp,LOCATION_REST,0,nil)
 	if ct>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 		local g=Duel.SelectTarget(tp,aux.TRUE,tp,0,LOCATION_ONFIELD,1,ct,nil)

@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	--equip
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
-	e2:SetCategory(CATEGORY_LEAVE_GRAVE+CATEGORY_EQUIP)
+	e2:SetCategory(CATEGORY_LEAVE_REST+CATEGORY_EQUIP)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_SUMMON_SUCCESS)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_STEP)
@@ -30,7 +30,7 @@ function s.initial_effect(c)
 	aux.AddEREquipLimit(c,nil,s.eqval,Card.EquipByEffectAndLimitRegister,e3)
 end
 function s.spfilter(c,ft)
-	return c:IsFaceup() and c:IsSetCard(0x29) and c:IsAbleToGraveAsCost() and (ft>0 or c:GetSequence()<5)
+	return c:IsFaceup() and c:IsSetCard(0x29) and c:IsAbleToRestAsCost() and (ft>0 or c:GetSequence()<5)
 end
 function s.spcon1(e,c)
 	if c==nil then return true end
@@ -43,7 +43,7 @@ function s.sptg1(e,tp,eg,ep,ev,re,r,rp,c)
 	local c=e:GetHandler()
 	local g=nil
 	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE,0,nil,Duel.GetLocationCount(tp,LOCATION_MZONE))
-	local g=aux.SelectUnselectGroup(rg,e,tp,1,1,nil,1,tp,HINTMSG_TOGRAVE,nil,nil,true)
+	local g=aux.SelectUnselectGroup(rg,e,tp,1,1,nil,1,tp,HINTMSG_TOREST,nil,nil,true)
 	if #g>0 then
 		g:KeepAlive()
 		e:SetLabelObject(g)
@@ -54,7 +54,7 @@ end
 function s.spop1(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	g:DeleteGroup()
 end
 function s.eqval(ec,c,tp)
@@ -64,15 +64,15 @@ function s.eqcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetPreviousLocation()==LOCATION_HAND
 end
 function s.filter(c)
-	return c:IsSetCard(0x29) and c:IsRace(RACE_DRAGON) and not c:IsForbidden()
+	return c:IsSetCard(0x29) and c:IsRace(RACE_DRAGON) and not c:IsUnliked()
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter(chkc) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter(chkc) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil) end
+		and Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,0,0)
+	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_EQUIP,g,1,0,0)
 end
 function s.eqop(e,tp,eg,ep,ev,re,r,rp)

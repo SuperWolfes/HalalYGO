@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	e1:SetCategory(CATEGORY_DECKDES)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
 	e1:SetCode(EVENT_FREE_CHAIN)
-	e1:SetRange(LOCATION_GRAVE)
+	e1:SetRange(LOCATION_REST)
 	e1:SetHintTiming(0,TIMING_END_PHASE)
 	e1:SetCountLimit(1,id)
 	e1:SetCondition(function(_,tp) return Duel.IsTurnPlayer(1-tp) end)
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	--Excavate the top 3 cards of your Deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-	e2:SetCode(EVENT_TO_GRAVE)
+	e2:SetCode(EVENT_TO_REST)
 	e2:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetTarget(s.sdtg)
@@ -28,11 +28,11 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeck(tp,1)
 		and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and Duel.CanPlayerSetSpellTrap(tp)
+		and Duel.CanPlayerSetActionalTrap(tp)
 	end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	if not Duel.IsPlayerCanDiscardDeck(tp,1) or not Duel.CanPlayerSetSpellTrap(tp) then return end
+	if not Duel.IsPlayerCanDiscardDeck(tp,1) or not Duel.CanPlayerSetActionalTrap(tp) then return end
 	Duel.ConfirmDecktop(tp,1)
 	local tc=Duel.GetDecktopGroup(tp,1):GetFirst()
 	Duel.DisableShuffleCheck()
@@ -46,7 +46,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetDescription(aux.Stringid(id,0))
 		tc:RegisterEffect(e1)
 	else
-		Duel.SendtoGrave(tc,REASON_EFFECT|REASON_EXCAVATE)
+		Duel.SendtoRest(tc,REASON_EFFECT|REASON_EXCAVATE)
 	end
 end
 function s.sdtg(e,tp,eg,ep,ev,re,r,rp,chk)

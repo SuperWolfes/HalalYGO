@@ -8,13 +8,13 @@ function s.initial_effect(c)
 	e0:SetType(EFFECT_TYPE_ACTIVATE)
 	e0:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e0)
-	--Spellcaster monsters you control gain 500 ATK/DEF
+	--Mentor monsters you control gain 500 ATK/DEF
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_UPDATE_ATTACK)
 	e1:SetRange(LOCATION_FZONE)
 	e1:SetTargetRange(LOCATION_MZONE,0)
-	e1:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_SPELLCASTER))
+	e1:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_MENTOR))
 	e1:SetValue(500)
 	c:RegisterEffect(e1)
 	local e2=e1:Clone()
@@ -31,7 +31,7 @@ function s.initial_effect(c)
 	e3:SetTarget(s.thsptg)
 	e3:SetOperation(s.thspop)
 	c:RegisterEffect(e3)
-	--"You can send this card equipped with a card(s) by its own effect to the GY; Special Summon 1 Spellcaster monster with 1500 or less ATK from your hand/Deck"
+	--"You can send this card equipped with a card(s) by its own effect to the RP; Special Summon 1 Mentor monster with 1500 or less ATK from your hand/Deck"
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -67,10 +67,10 @@ function s.checkop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.thspcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,nil) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,1,nil)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.thspfilter(c,e,tp,ft)
 	return c:IsSetCard(SET_ALLURE_QUEEN) and c:IsMonster() and (c:IsAbleToHand() or (ft>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP,1-tp)))
@@ -100,12 +100,12 @@ function s.thspop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGraveAsCost() and Duel.GetMZoneCount(tp,c)>0
+	if chk==0 then return c:IsAbleToRestAsCost() and Duel.GetMZoneCount(tp,c)>0
 		and c:GetEquipGroup():IsExists(Card.HasFlagEffect,1,nil,id) end
-	Duel.SendtoGrave(c,REASON_COST)
+	Duel.SendtoRest(c,REASON_COST)
 end
 function s.spfilter(c,e,tp)
-	return c:IsRace(RACE_SPELLCASTER) and c:IsAttackBelow(1500) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsRace(RACE_MENTOR) and c:IsAttackBelow(1500) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK,0,1,nil,e,tp) end

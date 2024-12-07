@@ -29,12 +29,12 @@ function s.matfilter(c,e)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	local g=Duel.GetMatchingGroup(s.matfilter,tp,LOCATION_GRAVE,0,nil,e)
+	local g=Duel.GetMatchingGroup(s.matfilter,tp,LOCATION_REST,0,nil,e)
 	local pg=aux.GetMustBeMaterialGroup(tp,g,tp,nil,nil,REASON_XYZ)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 
-		and Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil,e,tp,g,pg) end
+		and Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil,e,tp,g,pg) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local tc=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp,g,pg):GetFirst()
+	local tc=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil,e,tp,g,pg):GetFirst()
 	tc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD+RESET_CHAIN,0,0)
 	local ct=tc.minxyzct
 	local ct2=tc.maxxyzct

@@ -41,7 +41,7 @@ function s.initial_effect(c)
 	e3:SetCode(EVENT_ADD_COUNTER+COUNTER_ACCESS)
 	e3:SetCondition(function(e) return e:GetHandler():GetCounter(COUNTER_ACCESS)==10 end)
 	e3:SetTarget(s.settg)
-	e3:SetOperation(s.setop)
+	e3:SetOperation(s.vetop)
 	c:RegisterEffect(e3)
 end
 s.listed_names={id}
@@ -68,7 +68,7 @@ function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return c:IsAbleToHand() and Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_DECK,0,1,nil,true) end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,c,1,tp,0)
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not (c:IsRelateToEffect(e) and Duel.SendtoHand(c,nil,REASON_EFFECT)>0 and c:IsLocation(LOCATION_HAND)) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)

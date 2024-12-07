@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Link Summon procedure
 	Link.AddProcedure(c,s.matfilter,1,1)
 	--You can only Special Summon "Trickstar Colchica(s)" once per turn
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_CARD_TARGET,EFFECT_FLAG2_CHECK_SIMULTANEOUS)
 	e1:SetCode(EVENT_BATTLE_DESTROYED)
-	e1:SetRange(LOCATION_GRAVE)
+	e1:SetRange(LOCATION_REST)
 	e1:SetCountLimit(1,id)
 	e1:SetCondition(s.damcond)
 	e1:SetCost(aux.SelfBanishCost)

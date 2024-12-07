@@ -1,11 +1,11 @@
 --竜魔導騎士ブラック・マジシャン
---Dark Magician the Knight of Dragon Magic
+--Dark Mentor the Knight of Dragon Ment
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion Material
-	Fusion.AddProcMix(c,true,true,CARD_DARK_MAGICIAN,s.ffilter)
+	Fusion.AddProcMix(c,true,true,CARD_DARK_MENTOR,s.ffilter)
 	--Your monsters deal piercing damage
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -26,7 +26,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.damtg)
 	e2:SetOperation(s.damop)
 	c:RegisterEffect(e2)
-	--Special Summon 1 "Dark Magician" and 1 "Gaia the Dragon Champion"
+	--Special Summon 1 "Dark Mentor" and 1 "Bia the Dragon Champion"
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -37,8 +37,8 @@ function s.initial_effect(c)
 	e3:SetOperation(s.spop)
 	c:RegisterEffect(e3)
 end
-s.listed_names={CARD_DARK_MAGICIAN,CARD_GAIA_CHAMPION}
-local LOCATION_HAND_DECK_GRAVE_EXTRA=LOCATION_HAND|LOCATION_DECK|LOCATION_GRAVE|LOCATION_EXTRA
+s.listed_names={CARD_DARK_MENTOR,CARD_BIA_CHAMPION}
+local LOCATION_HAND_DECK_REST_EXTRA=LOCATION_HAND|LOCATION_DECK|LOCATION_REST|LOCATION_EXTRA
 function s.ffilter(c,fc,sumtype,tp)
 	return c:IsLevelAbove(7) and c:IsRace(RACE_DRAGON|RACE_WARRIOR,fc,sumtype,tp)
 end
@@ -65,21 +65,21 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Damage(p,d,REASON_EFFECT)
 end
 function s.spfilter(c,e,tp)
-	return c:IsCode(CARD_DARK_MAGICIAN,CARD_GAIA_CHAMPION) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsCode(CARD_DARK_MENTOR,CARD_BIA_CHAMPION) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.rescon(sg,e,tp,mg)
-	return sg:FilterCount(Card.IsCode,nil,CARD_DARK_MAGICIAN)==1
+	return sg:FilterCount(Card.IsCode,nil,CARD_DARK_MENTOR)==1
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_HAND_DECK_GRAVE_EXTRA,0,nil,e,tp)
-	if chk==0 then return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) and Duel.GetLocationCount(tp,LOCATION_MZONE)>1
+	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_HAND_DECK_REST_EXTRA,0,nil,e,tp)
+	if chk==0 then return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) and Duel.GetLocationCount(tp,LOCATION_MZONE)>1
 		and aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,0) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,LOCATION_HAND_DECK_GRAVE_EXTRA)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,LOCATION_HAND_DECK_REST_EXTRA)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)
 		or Duel.GetLocationCount(tp,LOCATION_MZONE)<2 then return end
-	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_HAND_DECK_GRAVE_EXTRA,0,nil,e,tp)
+	local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.spfilter),tp,LOCATION_HAND_DECK_REST_EXTRA,0,nil,e,tp)
 	if #g==0 then return end
 	local sg=aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,1,tp,HINTMSG_SPSUMMON)
 	if #sg>0 then

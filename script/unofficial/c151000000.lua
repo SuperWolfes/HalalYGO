@@ -7,8 +7,8 @@ if not ActionDuel then
 		return c:IsType(TYPE_ACTION) and not c.af
 	end
 
-	function Card.IsActionSpell(c)
-		return c:IsType(TYPE_ACTION) and c:IsSpell() and not c.af
+	function Card.IsActionActional(c)
+		return c:IsType(TYPE_ACTION) and c:IsActional() and not c.af
 	end
 
 	function Card.IsActionTrap(c)
@@ -64,7 +64,7 @@ if not ActionDuel then
 		e6:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_RANGE+EFFECT_FLAG_IGNORE_IMMUNE+EFFECT_FLAG_SET_AVAILABLE)
 		e6:SetCode(EFFECT_BECOME_QUICK)
 		e6:SetTargetRange(0xff,0xff)
-		e6:SetTarget(aux.TargetBoolFunction(Card.IsActionSpell))
+		e6:SetTarget(aux.TargetBoolFunction(Card.IsActionActional))
 		Duel.RegisterEffect(e6,0)
 		local e7=e6:Clone()
 		e7:SetDescription(aux.Stringid(id,7))
@@ -151,7 +151,7 @@ if not ActionDuel then
 			ec:SetCode(EFFECT_CANNOT_TO_HAND)
 			tc:RegisterEffect(ec)
 			local ed=ea:Clone()
-			ed:SetCode(EFFECT_CANNOT_TO_GRAVE)
+			ed:SetCode(EFFECT_CANNOT_TO_REST)
 			tc:RegisterEffect(ed)
 			local ee=ea:Clone()
 			ee:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
@@ -274,8 +274,8 @@ if not ActionDuel then
 				end
 			end
 			tc:SetStatus(STATUS_LEAVE_CONFIRMED,true)
-			tc:CancelToGrave(false)
-			Duel.SendtoGrave(tc,REASON_RULE)
+			tc:CancelToRest(false)
+			Duel.SendtoRest(tc,REASON_RULE)
 		end
 	end
 

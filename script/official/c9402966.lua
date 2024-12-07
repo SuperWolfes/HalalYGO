@@ -19,7 +19,7 @@ function s.cfilter(c)
 end
 function s.sccon(e,tp,eg,ep,ev,re,r,rp)
 	return not Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil)
-		and not Duel.IsExistingMatchingCard(Card.IsType,tp,LOCATION_GRAVE,0,1,nil,TYPE_SPELL+TYPE_TRAP)
+		and not Duel.IsExistingMatchingCard(Card.IsType,tp,LOCATION_REST,0,1,nil,TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.filter(c,e,tp,lv)
 	return c:IsFaceup() and c:GetLevel()>0
@@ -35,10 +35,10 @@ function s.sctg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then
 		local pg=aux.GetMustBeMaterialGroup(tp,Group.CreateGroup(),tp,nil,nil,REASON_SYNCHRO)
 		return #pg<=0 and Duel.IsExistingTarget(s.filter,tp,0,LOCATION_MZONE,1,nil,e,tp,lv) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectTarget(tp,s.filter,tp,0,LOCATION_MZONE,1,1,nil,e,tp,lv)
 	g:AddCard(e:GetHandler())
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,g,2,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,g,2,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function s.scop(e,tp,eg,ep,ev,re,r,rp)
@@ -47,8 +47,8 @@ function s.scop(e,tp,eg,ep,ev,re,r,rp)
 	local pg=aux.GetMustBeMaterialGroup(tp,Group.CreateGroup(),tp,nil,nil,REASON_SYNCHRO)
 	if not c:IsRelateToEffect(e) or not tc or not tc:IsRelateToEffect(e) or #pg>0 then return end
 	local g=Group.FromCards(c,tc)
-	if Duel.SendtoGrave(g,REASON_EFFECT)==2 and c:GetLevel()>0 and c:IsLocation(LOCATION_GRAVE)
-		and tc:GetLevel()>0 and tc:IsLocation(LOCATION_GRAVE) then
+	if Duel.SendtoRest(g,REASON_EFFECT)==2 and c:GetLevel()>0 and c:IsLocation(LOCATION_REST)
+		and tc:GetLevel()>0 and tc:IsLocation(LOCATION_REST) then
 		local lv=c:GetLevel()+tc:GetLevel()
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local sg=Duel.SelectMatchingCard(tp,s.scfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,lv)

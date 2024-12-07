@@ -23,7 +23,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	local loc=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_LOCATION)
-	if loc==LOCATION_GRAVE then
+	if loc==LOCATION_REST then
 		Duel.NegateEffect(ev)
 	end
 end

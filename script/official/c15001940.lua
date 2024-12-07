@@ -3,8 +3,8 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
-	--Shuffle cards from the GY into the Deck
+	c:EnableAwakeLimit()
+	--Shuffle cards from the RP into the Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TODECK)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.tdtg)
 	e1:SetOperation(s.tdop)
 	c:RegisterEffect(e1)
-	--Special Summon 1 Level 5 or 6 "Nouvelles" Ritual Monster
+	--Special Summon 1 Level 5 or 6 "Nouvelles" Locked Monster
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_RELEASE+CATEGORY_SPECIAL_SUMMON)
@@ -33,10 +33,10 @@ function s.initial_effect(c)
 end
 s.listed_series={SET_RECIPE,SET_NOUVELLES}
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsAbleToDeck() end
-	if chk==0 then return Duel.IsExistingTarget(Card.IsAbleToDeck,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsAbleToDeck() end
+	if chk==0 then return Duel.IsExistingTarget(Card.IsAbleToDeck,tp,LOCATION_REST,LOCATION_REST,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectTarget(tp,Card.IsAbleToDeck,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,3,nil)
+	local g=Duel.SelectTarget(tp,Card.IsAbleToDeck,tp,LOCATION_REST,LOCATION_REST,1,3,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,#g,0,0)
 end
 function s.tdop(e,tp,eg,ep,ev,re,r,rp)
@@ -51,7 +51,7 @@ function s.selfnouvfilter(c,tp)
 	return c:IsControler(tp) and c:IsSetCard(SET_NOUVELLES)
 end
 function s.spfilter(c,e,tp)
-	return c:IsSetCard(SET_NOUVELLES) and c:IsRitualMonster() and c:IsLevel(5,6)
+	return c:IsSetCard(SET_NOUVELLES) and c:IsLockedMonster() and c:IsLevel(5,6)
 		and c:IsCanBeSpecialSummoned(e,SUMMON_BY_NOUVELLES,tp,false,true)
 end
 function s.rescon(sg,e,tp,mg)

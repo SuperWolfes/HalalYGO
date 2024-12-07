@@ -3,10 +3,10 @@
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	-- Special Summon, or send to the GY, 1 "Icejade" monster
+	-- Special Summon, or send to the RP, 1 "Icejade" monster
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_TOGRAVE+CATEGORY_SPECIAL_SUMMON)
+	e1:SetCategory(CATEGORY_TOREST+CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetCountLimit(1,id)
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_CARD_TARGET)
 	e2:SetCode(EVENT_LEAVE_FIELD)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(s.rmcon)
 	e2:SetCost(aux.bfgcost)
@@ -31,18 +31,18 @@ function s.initial_effect(c)
 end
 s.listed_series={SET_ICEJADE}
 function s.tgspcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(Card.IsMonster,tp,0,LOCATION_MZONE|LOCATION_GRAVE,1,nil)
+	return Duel.IsExistingMatchingCard(Card.IsMonster,tp,0,LOCATION_MZONE|LOCATION_REST,1,nil)
 		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsAttribute,ATTRIBUTE_WATER),tp,LOCATION_MZONE,0,1,nil)
 end
 function s.tgspfilter(c,e,tp,ft)
-	return c:IsSetCard(SET_ICEJADE) and c:IsMonster() and (c:IsAbleToGrave() or (ft>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)))
+	return c:IsSetCard(SET_ICEJADE) and c:IsMonster() and (c:IsAbleToRest() or (ft>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)))
 end
 function s.tgsptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 		return Duel.IsExistingMatchingCard(s.tgspfilter,tp,LOCATION_DECK,0,1,nil,e,tp,ft)
 	end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK)
 end
 function s.tgspop(e,tp,eg,ep,ev,re,r,rp)
@@ -50,13 +50,13 @@ function s.tgspop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,2))
 	local tc=Duel.SelectMatchingCard(tp,s.tgspfilter,tp,LOCATION_DECK,0,1,1,nil,e,tp,ft):GetFirst()
 	if not tc then return end
-	local b1=tc:IsAbleToGrave()
+	local b1=tc:IsAbleToRest()
 	local b2=(ft>0 and tc:IsCanBeSpecialSummoned(e,0,tp,false,false))
 	local op=Duel.SelectEffect(tp,
 		{b1,aux.Stringid(id,3)},
 		{b2,aux.Stringid(id,4)})
 	if op==1 then
-		Duel.SendtoGrave(tc,REASON_EFFECT)
+		Duel.SendtoRest(tc,REASON_EFFECT)
 	elseif op==2 then
 		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 	end

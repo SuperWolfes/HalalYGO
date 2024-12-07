@@ -40,7 +40,7 @@ end
 function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local b1=Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil)
 	local b2=Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REMOVED|LOCATION_HAND|LOCATION_GRAVE,0,1,nil,e,tp)
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REMOVED|LOCATION_HAND|LOCATION_REST,0,1,nil,e,tp)
 	if chk==0 then return b1 or b2 end
 	local op=Duel.SelectEffect(tp,
 		{b1,aux.Stringid(id,1)},
@@ -52,7 +52,7 @@ function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 		Duel.SetOperationInfo(0,CATEGORY_HANDES,nil,0,tp,1)
 	elseif op==2 then
 		e:SetCategory(CATEGORY_SPECIAL_SUMMON)
-		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REMOVED|LOCATION_HAND|LOCATION_GRAVE)
+		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REMOVED|LOCATION_HAND|LOCATION_REST)
 	end
 end
 function s.effop(e,tp,eg,ep,ev,re,r,rp)
@@ -68,10 +68,10 @@ function s.effop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.DiscardHand(tp,nil,1,1,REASON_DISCARD|REASON_EFFECT)
 		end
 	elseif op==2 then
-		--Special Summon 1 of your "Ragnaraika" monsters that is banished, or in your hand or GY, in Defense Position
+		--Special Summon 1 of your "Ragnaraika" monsters that is banished, or in your hand or RP, in Defense Position
 		if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_REMOVED|LOCATION_HAND|LOCATION_GRAVE,0,1,1,nil,e,tp)
+		local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,LOCATION_REMOVED|LOCATION_HAND|LOCATION_REST,0,1,1,nil,e,tp)
 		if #g>0 then
 			Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP_DEFENSE)
 		end

@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Link Summon procedure
 	Link.AddProcedure(c,nil,2,4,s.lcheck)
 	--Must first be Link Summoned
@@ -14,13 +14,13 @@ function s.initial_effect(c)
 	e0:SetRange(LOCATION_EXTRA)
 	e0:SetValue(aux.lnklimit)
 	c:RegisterEffect(e0)
-	--Loses 3000 ATK while you have no Spells in your GY
+	--Loses 3000 ATK while you have no Actionals in your RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e1:SetCode(EFFECT_UPDATE_ATTACK)
 	e1:SetRange(LOCATION_MZONE)
-	e1:SetCondition(function(e,c) return not Duel.IsExistingMatchingCard(Card.IsSpell,e:GetHandlerPlayer(),LOCATION_GRAVE,0,1,nil) end)
+	e1:SetCondition(function(e,c) return not Duel.IsExistingMatchingCard(Card.IsActional,e:GetHandlerPlayer(),LOCATION_REST,0,1,nil) end)
 	e1:SetValue(-3000)
 	c:RegisterEffect(e1)
 	--Negate the effect of opponent's activated effect and destroy 1 card your opponent controls
@@ -45,12 +45,12 @@ function s.negcon(e,tp,eg,ep,ev,re,r,rp)
 	return ep==1-tp and Duel.GetCurrentChain(true)>=2 and Duel.IsChainDisablable(ev)
 end
 function s.costfilter(c)
-	return c:IsSpell() and c:IsAbleToRemoveAsCost()
+	return c:IsActional() and c:IsAbleToRemoveAsCost()
 end
 function s.negcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND|LOCATION_GRAVE,0,2,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND|LOCATION_REST,0,2,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND|LOCATION_GRAVE,0,2,2,nil)
+	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND|LOCATION_REST,0,2,2,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk)

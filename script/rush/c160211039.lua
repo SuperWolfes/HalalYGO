@@ -1,5 +1,5 @@
 --オールラヴ・ゴッデス
---All Love Goddess
+--All Love Monsterdess
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)

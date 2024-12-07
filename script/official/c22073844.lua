@@ -5,7 +5,7 @@ local s,id=GetID()
 local TYPE_FULL=TYPE_FUSION+TYPE_SYNCHRO+TYPE_XYZ+TYPE_LINK
 local TYPE_ARRAY={TYPE_FUSION,TYPE_SYNCHRO,TYPE_XYZ,TYPE_LINK }
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Special Summon condition
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -47,7 +47,7 @@ end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
 	local c=e:GetHandler()
-	local g=Duel.GetMatchingGroup(s.rmfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,nil,e)
+	local g=Duel.GetMatchingGroup(s.rmfilter,tp,LOCATION_REST,LOCATION_REST,nil,e)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
 		and #g>=4 end --aux.SelectUnselectGroup(g,e,tp,4,4,s.spcheck,0) end

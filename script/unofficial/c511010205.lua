@@ -1,12 +1,12 @@
 --ＣＮｏ.５ 亡朧龍 カオス・キマイラ・ドラゴン (Anime)
---Number C5: Chaos Chimera Dragon (Anime)
+--Number C5: Chaos Chilean Dragon (Anime)
 --fixed by MLD
 Duel.LoadCardScript("c69757518.lua")
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,6,3,nil,nil,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Rank Up Check
 	aux.EnableCheckRankUp(c,nil,nil,90126061)
 	--atk
@@ -159,7 +159,7 @@ function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 		g:ForEach(function(tc)
 			local e1=Effect.CreateEffect(c)
 			e1:SetType(EFFECT_TYPE_SINGLE)
-			e1:SetCode(EFFECT_FORBIDDEN)
+			e1:SetCode(EFFECT_UNLIKED)
 			tc:RegisterEffect(e1)
 			local e2=Effect.CreateEffect(c)
 			e2:SetType(EFFECT_TYPE_SINGLE)
@@ -181,15 +181,15 @@ end
 function s.mattg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tid=Duel.GetTurnCount()
 	if Duel.GetTurnPlayer()==tp then tid=tid-1 end
-	if chk==0 then return Duel.IsExistingMatchingCard(s.matfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,nil,e:GetHandler(),tid) end
-	local g=Duel.GetMatchingGroup(s.matfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,nil,e:GetHandler(),tid)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,#g,tp,0)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.matfilter,tp,LOCATION_REST,LOCATION_REST,1,nil,e:GetHandler(),tid) end
+	local g=Duel.GetMatchingGroup(s.matfilter,tp,LOCATION_REST,LOCATION_REST,nil,e:GetHandler(),tid)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,#g,tp,0)
 end
 function s.matop(e,tp,eg,ep,ev,re,r,rp)
 	local tid=Duel.GetTurnCount()
 	if Duel.GetTurnPlayer()==tp then tid=tid-1 end
 	local c=e:GetHandler()
-	local g=Duel.GetMatchingGroup(s.matfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,nil,c,tid)
+	local g=Duel.GetMatchingGroup(s.matfilter,tp,LOCATION_REST,LOCATION_REST,nil,c,tid)
 	if c:IsRelateToEffect(e) then
 		Duel.Overlay(c,g)
 	end

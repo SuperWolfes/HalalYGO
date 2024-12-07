@@ -1,5 +1,5 @@
 --ユニゾンビ
---Uni-Zombie
+--Uni-Toxic
 local s,id=GetID()
 function s.initial_effect(c)
 	--level
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	--level
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_TOGRAVE)
+	e2:SetCategory(CATEGORY_TOREST)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
@@ -56,7 +56,7 @@ function s.lvop1(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.tgfilter(c)
-	return c:IsRace(RACE_ZOMBIE) and c:IsAbleToGrave()
+	return c:IsRace(RACE_TOXIC) and c:IsAbleToRest()
 end
 function s.lvtg2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and s.filter(chkc) end
@@ -64,14 +64,14 @@ function s.lvtg2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		and Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 	Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil)
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
 function s.lvop2(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
-	if #g==0 or Duel.SendtoGrave(g,REASON_EFFECT)==0 then return end
+	if #g==0 or Duel.SendtoRest(g,REASON_EFFECT)==0 then return end
 	local tc=Duel.GetFirstTarget()
-	if tc:IsFaceup() and tc:IsRelateToEffect(e) and g:GetFirst():IsLocation(LOCATION_GRAVE) then
+	if tc:IsFaceup() and tc:IsRelateToEffect(e) and g:GetFirst():IsLocation(LOCATION_REST) then
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_LEVEL)
@@ -95,5 +95,5 @@ function s.lvop2(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e3,tp)
 end
 function s.atktg(e,c)
-	return not c:IsRace(RACE_ZOMBIE)
+	return not c:IsRace(RACE_TOXIC)
 end

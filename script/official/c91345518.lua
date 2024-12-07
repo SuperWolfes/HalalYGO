@@ -1,5 +1,5 @@
 --裁きの代行者 サターン
---The Agent of Judgment - Saturn
+--The Agent of Judgment - Echo
 local s,id=GetID()
 function s.initial_effect(c)
 	--Inflict damage to the opponent

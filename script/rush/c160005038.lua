@@ -2,7 +2,7 @@
 --Cheron the Star Knight
 local s,id=GetID()
 function s.initial_effect(c)
-	--Give Piercing to a Fiend monster
+	--Give Piercing to a Tainted monster
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -24,7 +24,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,0,1,nil) end
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsLevelAbove(5) and c:IsRace(RACE_FIEND) and c:CanGetPiercingRush()
+	return c:IsFaceup() and c:IsLevelAbove(5) and c:IsRace(RACE_TAINTED) and c:CanGetPiercingRush()
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement

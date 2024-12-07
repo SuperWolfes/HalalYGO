@@ -20,7 +20,7 @@ function s.otfilter(c,tp)
 	return c:IsRace(RACE_DINOSAUR) and (c:IsControler(tp) or c:IsFaceup())
 end
 function s.cfilter(c,tp)
-	return c:IsRace(RACE_DINOSAUR) and c:IsPreviousLocation(LOCATION_GRAVE)
+	return c:IsRace(RACE_DINOSAUR) and c:IsPreviousLocation(LOCATION_REST)
 		and c:IsPreviousControler(tp)
 end
 function s.drcon(e,tp,eg,ep,ev,re,r,rp)

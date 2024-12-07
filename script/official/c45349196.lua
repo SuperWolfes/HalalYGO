@@ -1,11 +1,11 @@
 --悪魔竜ブラック・デーモンズ・ドラゴン
---Archfiend Black Skull Dragon
+--Archtainted Black Skull Dragon
 local s,id=GetID()
 function s.initial_effect(c)
 	c:SetSPSummonOnce(id)
 	--fusion material
 	Fusion.AddProcMix(c,true,true,s.mfilter1,s.mfilter2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--aclimit
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -48,10 +48,10 @@ function s.filter(c)
 	return c:IsSetCard(0x3b) and c:IsType(TYPE_NORMAL) and c:IsAbleToDeck()
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil)
 	local atk=g:GetFirst():GetBaseAttack()
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,atk)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,1,0,0)

@@ -14,23 +14,23 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.costfilter(c)
-	return c:IsFacedown() and c:IsAbleToGraveAsCost()
+	return c:IsFacedown() and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_MZONE,0,2,nil) end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,1,nil) end
-	local sg=Duel.GetMatchingGroup(Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,nil)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,1,nil) end
+	local sg=Duel.GetMatchingGroup(Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,nil)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,sg,#sg,tp,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_MZONE,0,2,2,nil)
-	if Duel.SendtoGrave(g,REASON_COST)<1 then return end
+	if Duel.SendtoRest(g,REASON_COST)<1 then return end
 	--Effect
-	local sg=Duel.GetMatchingGroup(Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,nil)
+	local sg=Duel.GetMatchingGroup(Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,nil)
 	Duel.Destroy(sg,REASON_EFFECT)
 	--Prevent monsters from attacking
 	local e1=Effect.CreateEffect(e:GetHandler())

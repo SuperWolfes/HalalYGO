@@ -29,10 +29,10 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			if Duel.IsDuelType(DUEL_1_FIELD) then
 				if fc then Duel.Destroy(fc,REASON_RULE) end
 				fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
-				if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
+				if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
 			else
 				fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
-				if fc and Duel.SendtoGrave(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
+				if fc and Duel.SendtoRest(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
 			end
 		end
 		Duel.ClearTargetCard()
@@ -65,9 +65,9 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			end
 		end
 		if tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD==0 then
-			c:CancelToGrave(false)
+			c:CancelToRest(false)
 		else
-			c:CancelToGrave(true)
+			c:CancelToRest(true)
 			local code=re:GetHandler():GetOriginalCode()
 			c:CopyEffect(code,RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET,1)
 		end

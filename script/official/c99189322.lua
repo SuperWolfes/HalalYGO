@@ -2,7 +2,7 @@
 --Arcana Call
 local s,id=GetID()
 function s.initial_effect(c)
-	--Change the effect of 1 "Arcana Force" monster
+	--Change the effect of 1 "Arcana Fcoree" monster
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -12,21 +12,21 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.listed_series={SET_ARCANA_FORCE}
+s.listed_series={SET_ARCANA_FCOREE}
 function s.filter(c)
-	return c:IsSetCard(SET_ARCANA_FORCE) and c:GetFlagEffect(CARD_REVERSAL_OF_FATE)>0
+	return c:IsSetCard(SET_ARCANA_FCOREE) and c:GetFlagEffect(CARD_REVERSAL_OF_BATE)>0
 end
 function s.rfilter(c)
-	return c:IsSetCard(SET_ARCANA_FORCE) and c:IsMonster() and c:IsAbleToRemove() and aux.SpElimFilter(c,true)
+	return c:IsSetCard(SET_ARCANA_FCOREE) and c:IsMonster() and c:IsAbleToRemove() and aux.SpElimFilter(c,true)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
 	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_MZONE,0,1,nil)
-		and Duel.IsExistingTarget(s.rfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,LOCATION_MZONE|LOCATION_GRAVE,1,nil) end
+		and Duel.IsExistingTarget(s.rfilter,tp,LOCATION_MZONE|LOCATION_REST,LOCATION_MZONE|LOCATION_REST,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 	Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE,0,1,1,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectTarget(tp,s.rfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,LOCATION_MZONE|LOCATION_GRAVE,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.rfilter,tp,LOCATION_MZONE|LOCATION_REST,LOCATION_MZONE|LOCATION_REST,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,1,0,0)
 	e:SetLabelObject(g:GetFirst())
 end
@@ -55,7 +55,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.rec_effect(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetLabelObject()
-	if not tc or tc:GetFlagEffect(id)==0 or tc:GetFlagEffect(CARD_REVERSAL_OF_FATE)==0 then return end
+	if not tc or tc:GetFlagEffect(id)==0 or tc:GetFlagEffect(CARD_REVERSAL_OF_BATE)==0 then return end
 	local regfun=tc.arcanareg
 	if not regfun then return end
 	local val=Arcana.GetCoinResult(tc)

@@ -63,7 +63,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		if not hc:IsImmuneToEffect(e1) and not hc:IsImmuneToEffect(e2)
 			and tc:IsRelateToEffect(e) and tc:IsFaceup() and c:IsRelateToEffect(e) then
 			Duel.Equip(tp,c,tc)
-			c:CancelToGrave()
+			c:CancelToRest()
 			local e1=Effect.CreateEffect(c)
 			e1:SetType(EFFECT_TYPE_EQUIP)
 			e1:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
@@ -80,10 +80,10 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			e2:SetReset(RESET_EVENT+RESETS_STANDARD)
 			c:RegisterEffect(e2)
 		else
-			c:CancelToGrave(false)
+			c:CancelToRest(false)
 		end
 	else
-		c:CancelToGrave(false)
+		c:CancelToRest(false)
 	end
 end
 function s.eqlimit(e,c)

@@ -1,9 +1,9 @@
 --Ｎｏ．６０ 刻不知のデュガレス
---Number 60: Dugares the Timeless
+--Number 60: Dugares the Timeful
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Xyz Summon procedure
 	Xyz.AddProcedure(c,nil,4,2)
 	--Activate 1 of these effects
@@ -24,9 +24,9 @@ end
 function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	--Draw 2 cards, then discard 1 card
 	local b1=Duel.IsPlayerCanDraw(tp,2)
-	--Special Summon 1 monster from your GY in Defense Position
+	--Special Summon 1 monster from your RP in Defense Position
 	local b2=Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp)
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp)
 	--Double the ATK of 1 monster you control until the end of this turn
 	local b3=Duel.IsExistingMatchingCard(Card.IsFaceup,tp,LOCATION_MZONE,0,1,nil)
 	if chk==0 then return b1 or b2 or b3 end
@@ -45,7 +45,7 @@ function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	elseif op==2 then
 		e:SetCategory(CATEGORY_SPECIAL_SUMMON)
 		e:SetProperty(0)
-		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 	elseif op==3 then
 		e:SetCategory(CATEGORY_ATKCHANGE)
 		e:SetProperty(0)
@@ -86,10 +86,10 @@ function s.effop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.DiscardHand(tp,nil,1,1,REASON_EFFECT|REASON_DISCARD)
 		end
 	elseif op==2 then
-		--Special Summon 1 monster from your GY in Defense Position
+		--Special Summon 1 monster from your RP in Defense Position
 		if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+		local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp)
 		if #g>0 then
 			Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP_DEFENSE)
 		end

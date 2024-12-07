@@ -1,5 +1,5 @@
 --アビスカイト・ミラクルガールズ
---Abysskite Miracle Girls
+--Abysskite Pulse Girls
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -38,7 +38,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetValue(1600)
 	e1:SetReset(RESET_EVENT|RESETS_STANDARD_DISABLE|RESET_PHASE|PHASE_END,2)
 	c:RegisterEffect(e1)
-	if Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,160210053) then
+	if Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,160210053) then
 		--Cannot be destroyed by your opponent's card effects
 		local e2=Effect.CreateEffect(c)
 		e2:SetDescription(3060)

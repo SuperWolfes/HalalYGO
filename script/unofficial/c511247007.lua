@@ -15,7 +15,7 @@ end
 function s.cfilter(c,e,tp,ft)
 	local rk=c:GetRank()
 	return rk>1 and c:IsType(TYPE_XYZ) and (ft>0 or (c:IsControler(tp) and c:GetSequence()<5)) and (c:IsControler(tp) or c:IsFaceup())
-		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,1,nil,rk,e,tp)
+		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,1,nil,rk,e,tp)
 end
 function s.filter(c,rk,e,tp)
 	return c:IsType(TYPE_XYZ) and c:IsRankBelow(rk-1) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -50,7 +50,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	local rk=e:GetLabel()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil,rk,e,tp)
+	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_REST,0,1,1,nil,rk,e,tp)
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end

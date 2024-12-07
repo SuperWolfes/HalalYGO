@@ -36,7 +36,7 @@ function s.cfilter(c,e,tp)
 		and c:GetMaterial():IsExists(s.spfilter,1,nil,e,tp,c)
 end
 function s.spfilter(c,e,tp,sync)
-	return c:IsControler(tp) and c:IsLocation(LOCATION_GRAVE)
+	return c:IsControler(tp) and c:IsLocation(LOCATION_REST)
 		and (c:GetReason()&(REASON_SYNCHRO+REASON_MATERIAL))==(REASON_SYNCHRO+REASON_MATERIAL)
 		and c:GetReasonCard()==sync and c:IsCanBeEffectTarget(e)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)

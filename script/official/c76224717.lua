@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--Destroy, draw, and/or add 1 monster from your GY to your hand
+	--Destroy, draw, and/or add 1 monster from your RP to your hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_DESTROY+CATEGORY_DRAW+CATEGORY_TOHAND)
@@ -52,14 +52,14 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local b1=s[tp]>0 and Duel.IsExistingMatchingCard(Card.IsFacedown,tp,0,LOCATION_ONFIELD,1,nil)
 	local b2=s[tp]>1 and Duel.IsPlayerCanDraw(tp,1)
-	local b3=s[tp]>2 and Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_GRAVE,0,1,nil)
+	local b3=s[tp]>2 and Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_REST,0,1,nil)
 	if chk==0 then return b1 or b2 or b3 end
 	if b1 then
 		local g=Duel.GetMatchingGroup(Card.IsFacedown,tp,0,LOCATION_ONFIELD,nil)
 		Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
 	end
 	Duel.SetPossibleOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
@@ -79,7 +79,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 	if s[tp]>2 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-		local g=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_GRAVE,0,1,1,nil)
+		local g=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_REST,0,1,1,nil)
 		if #g>0 then
 			if act then Duel.BreakEffect() end
 			Duel.SendtoHand(g,nil,REASON_EFFECT)

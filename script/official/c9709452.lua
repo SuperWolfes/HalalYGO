@@ -1,9 +1,9 @@
 --烈日の騎士ガイアブレイズ
---Gaiablaze the Force of Blazing Sun
+--Biablaze the Fcoree of Blazing Sun
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--1 Tuner + 1+ non-Tuner monsters
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	--Second attack
@@ -42,11 +42,11 @@ function s.thfilter(c)
 	return c:IsAttribute(ATTRIBUTE_FIRE) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.thfilter(chkc) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.thfilter(chkc) end
 	local ct=e:GetHandler():GetFlagEffect(id)
-	if chk==0 then return ct>0 and Duel.IsExistingTarget(s.thfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return ct>0 and Duel.IsExistingTarget(s.thfilter,tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,ct,nil)
+	local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_REST,0,1,ct,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,#g,0,0)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)

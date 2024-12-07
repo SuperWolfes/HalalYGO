@@ -1,16 +1,16 @@
 --御巫の水舞踏
---Arabesque of the Mikanko
+--Arabesque of the Sibango
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddEquipProcedure(c)
-	--Prevent destruction by effects
+	--Prevent mismatching by effects
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_EQUIP)
 	e1:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
 	e1:SetValue(1)
 	c:RegisterEffect(e1)
-	--Special Summon 1 "Mikanko" monster, re-equip and return equip target to the hand
+	--Special Summon 1 "Sibango" monster, re-equip and return equip target to the hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOHAND)

@@ -1,5 +1,5 @@
 --ＲＵＭ－千死蛮巧 (Anime)
---Rank-Up-Magic Admiration of the Thousands (Anime)
+--Rank-Up-Ment Admiration of the Thousands (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 end
 s.listed_series={SET_NUMBER_C}
 function s.filter(c,e)
-	return c:IsSetCard(SET_NUMBER_C) and c:IsType(TYPE_XYZ) and (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup())
+	return c:IsSetCard(SET_NUMBER_C) and c:IsType(TYPE_XYZ) and (c:IsLocation(LOCATION_REST) or c:IsFaceup())
 		and (c:GetRank()>0 or c:IsStatus(STATUS_NO_LEVEL)) and c:IsCanBeEffectTarget(e)
 end
 function s.xyzfilter(c,sg,e,tp)
@@ -57,7 +57,7 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
 	local sg=Group.CreateGroup()
-	local mg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE+LOCATION_ONFIELD,LOCATION_GRAVE+LOCATION_ONFIELD,nil,e)
+	local mg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_REST+LOCATION_ONFIELD,LOCATION_REST+LOCATION_ONFIELD,nil,e)
 	if chk==0 then return mg:IsExists(s.chkfilter,1,nil,mg,sg,e,tp) end
 	local reset={}
 	local tc

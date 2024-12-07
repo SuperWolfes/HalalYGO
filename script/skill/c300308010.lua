@@ -43,11 +43,11 @@ function s.cannotattacktg(e,c)
 	return c:IsType(TYPE_EFFECT) and c:IsStatus(STATUS_SUMMON_TURN|STATUS_SPSUMMON_TURN|STATUS_FLIP_SUMMON_TURN) 
 end
 function s.mokeycontsplfilter(c)
-	return c:IsContinuousSpell() and c:IsSetCard(SET_MOKEY_MOKEY) and not c:IsForbidden()
+	return c:IsContinuousActional() and c:IsSetCard(SET_MOKEY_MOKEY) and not c:IsUnliked()
 end
 function s.effcon(e,tp,eg,ep,ev,re,r,rp)
 	local b1=Duel.GetFlagEffect(tp,id+100)==0
-		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_FAIRY),tp,LOCATION_MZONE,0,2,nil)
+		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_WANDERER),tp,LOCATION_MZONE,0,2,nil)
 		and Duel.IsExistingMatchingCard(s.mokeycontsplfilter,tp,LOCATION_DECK,0,1,nil)
 	local b2=Duel.GetFlagEffect(tp,id+200)==0
 		and s.fuscost(e,tp,eg,ep,ev,re,r,rp,0)
@@ -55,14 +55,14 @@ function s.effcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.effop(e,tp,eg,ep,ev,re,r,rp)
 	local b1=Duel.GetFlagEffect(tp,id+100)==0
-		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_FAIRY),tp,LOCATION_MZONE,0,2,nil)
+		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_WANDERER),tp,LOCATION_MZONE,0,2,nil)
 		and Duel.IsExistingMatchingCard(s.mokeycontsplfilter,tp,LOCATION_DECK,0,1,nil)
 	local b2=Duel.GetFlagEffect(tp,id+200)==0
 		and s.fuscost(e,tp,eg,ep,ev,re,r,rp,0)
 	if not (b1 or b2) then return end
 
 	local op=Duel.SelectEffect(tp,{b1,aux.Stringid(id,0)},{b2,aux.Stringid(id,1)})
-	--Place 1 "Mokey Mokey" Continuous Spell face-up from your Deck and if you do, destroy 1 monster you control
+	--Place 1 "Mokey Mokey" Continuous Actional face-up from your Deck and if you do, destroy 1 monster you control
 	if op==1 then
 		Duel.Hint(HINT_CARD,tp,id)
 		Duel.RegisterFlagEffect(tp,id+100,0,0,0)

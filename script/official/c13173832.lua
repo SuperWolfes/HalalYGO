@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetCondition(s.lkcon)
 	e1:SetOperation(s.lkop)
 	c:RegisterEffect(e1)
-	--Add 1 FIRE monster from GY, if this card is special summoned
+	--Add 1 FIRE monster from RP, if this card is special summoned
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TOHAND)
@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.thtg)
 	e2:SetOperation(s.thop)
 	c:RegisterEffect(e2)
-	--Add 1 FIRE monster from GY, if this card is added from GY
+	--Add 1 FIRE monster from RP, if this card is added from RP
 	local e3=e2:Clone()
 	e3:SetCode(EVENT_TO_HAND)
 	e3:SetCondition(s.thcon2)
@@ -51,14 +51,14 @@ function s.lkop(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
 	rc:RegisterEffect(e2)
 end
-	--If this card was special summoned from GY
+	--If this card was special summoned from RP
 function s.thcon1(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsPreviousLocation(LOCATION_GRAVE)
+	return e:GetHandler():IsPreviousLocation(LOCATION_REST)
 end
-	--If this card was added from GY to hand
+	--If this card was added from RP to hand
 function s.thcon2(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return (r&REASON_EFFECT)~=0 and c:IsPreviousLocation(LOCATION_GRAVE) and c:IsPreviousControler(tp)
+	return (r&REASON_EFFECT)~=0 and c:IsPreviousLocation(LOCATION_REST) and c:IsPreviousControler(tp)
 end
 	--Reveal this card from hand
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -70,13 +70,13 @@ function s.thfilter(c)
 end
 	--Activation legality
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.thfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.thfilter,tp,LOCATION_GRAVE,0,1,e:GetHandler()) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.thfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.thfilter,tp,LOCATION_REST,0,1,e:GetHandler()) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,e:GetHandler())
+	local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_REST,0,1,1,e:GetHandler())
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,0,0)
 end
-	--Add 1 FIRE monster from GY
+	--Add 1 FIRE monster from RP
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) then

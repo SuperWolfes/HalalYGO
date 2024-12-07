@@ -59,8 +59,8 @@ end)()
 	Proceed as usual with the attaching otherwise.
 Duel.Overlay=(function()
 	local oldfunc=Duel.Overlay
-	return function(xyz_monster,xyz_mats,send_to_grave)
-		if not Duel.IsChainSolving() then return oldfunc(xyz_monster,xyz_mats,send_to_grave) end
+	return function(xyz_monster,xyz_mats,send_to_rest)
+		if not Duel.IsChainSolving() then return oldfunc(xyz_monster,xyz_mats,send_to_rest) end
 		local trig_eff=Duel.GetChainInfo(0,CHAININFO_TRIGGERING_EFFECT)
 		if xyz_monster:IsImmuneToEffect(trig_eff) then return end
 		if type(xyz_mats)=="Group" then
@@ -69,7 +69,7 @@ Duel.Overlay=(function()
 		elseif type(xyz_mats)=="Card" and xyz_mats:IsImmuneToEffect(trig_eff) then
 			return
 		end
-		return oldfunc(xyz_monster,xyz_mats,send_to_grave)
+		return oldfunc(xyz_monster,xyz_mats,send_to_rest)
 	end
 end)()
 --]]

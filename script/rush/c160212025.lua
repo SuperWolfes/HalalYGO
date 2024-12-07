@@ -43,9 +43,9 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetValue(CARD_IMAGINARY_ACTOR)
 	e1:SetReset(RESETS_STANDARD_PHASE_END,2)
 	c:RegisterEffect(e1)
-	if Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_GRAVE,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+	if Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.BreakEffect()
-		local tg=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+		local tg=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_REST,0,1,1,nil)
 		if Duel.SendtoDeck(tg,nil,SEQ_DECKBOTTOM,REASON_EFFECT) and Duel.IsPlayerCanDraw(tp,2) and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 			Duel.BreakEffect()
 			Duel.Draw(tp,2,REASON_EFFECT)

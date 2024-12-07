@@ -4,9 +4,9 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
-	--Set 1 "Fire Formation" spell/trap from deck or GY
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
+	--Set 1 "Fire Formation" actional/trap from deck or RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetCountLimit(1,id)
 	e1:SetCost(s.setcost)
 	e1:SetTarget(s.settg)
-	e1:SetOperation(s.setop)
+	e1:SetOperation(s.vetop)
 	c:RegisterEffect(e1)
 	--Negate the effect of opponent's activated monster effect
 	local e2=Effect.CreateEffect(c)
@@ -41,14 +41,14 @@ function s.setcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.DiscardHand(tp,s.setcfilter,1,1,REASON_COST+REASON_DISCARD)
 end
 function s.setfilter(c)
-	return c:IsSetCard(0x7c) and c:IsSpellTrap() and c:IsSSetable()
+	return c:IsSetCard(0x7c) and c:IsActionalTrap() and c:IsSSetable()
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_DECK+LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_DECK+LOCATION_REST,0,1,nil) end
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.setfilter),tp,LOCATION_DECK+LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.setfilter),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil)
 	if #g>0 then
 		Duel.SSet(tp,g:GetFirst())
 	end
@@ -58,7 +58,7 @@ function s.negcon(e,tp,eg,ep,ev,re,r,rp)
 		and ep~=tp and re:IsActiveType(TYPE_MONSTER) and Duel.IsChainDisablable(ev)
 end
 function s.cfilter(c)
-	return c:IsFaceup() and (c:IsSetCard(0x79) or c:IsSetCard(0x7c)) and not c:IsCode(id) and c:IsAbleToGraveAsCost()
+	return c:IsFaceup() and (c:IsSetCard(0x79) or c:IsSetCard(0x7c)) and not c:IsCode(id) and c:IsAbleToRestAsCost()
 end
 function s.negcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local nc=Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,0,1,nil)
@@ -66,9 +66,9 @@ function s.negcost(e,tp,eg,ep,ev,re,r,rp,chk)
 		if Duel.IsPlayerAffectedByEffect(tp,CARD_FIRE_FIST_EAGLE) then return true else return nc end
 	end
 	if nc and not (Duel.IsPlayerAffectedByEffect(tp,CARD_FIRE_FIST_EAGLE) and Duel.SelectYesNo(tp,aux.Stringid(CARD_FIRE_FIST_EAGLE,0))) then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_ONFIELD,0,1,1,nil)
-		Duel.SendtoGrave(g,REASON_COST)
+		Duel.SendtoRest(g,REASON_COST)
 	end
 end
 function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk)

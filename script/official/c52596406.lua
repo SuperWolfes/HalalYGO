@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
-	e2:SetCondition(function(e) return e:GetHandler():IsSummonLocation(LOCATION_GRAVE) end)
+	e2:SetCondition(function(e) return e:GetHandler():IsSummonLocation(LOCATION_REST) end)
 	e2:SetTarget(function(e,tp,eg,ep,ev,re,r,rp,chk) if chk==0 then return not e:GetHandler():IsType(TYPE_TUNER) end end)
 	e2:SetOperation(s.tnop)
 	c:RegisterEffect(e2)
@@ -32,20 +32,20 @@ end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
 	local codes=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_ONFIELD,0,nil):GetClass(Card.GetCode)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE)
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST)
 		and #codes>0 and s.spfilter(chkc,e,tp,table.unpack(codes)) end
 	if chk==0 then return #codes>0
-		and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
+		and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)
 		and Duel.GetLocationCount(tp,LOCATION_MZONE)>1
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
-		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp,table.unpack(codes))
+		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp,table.unpack(codes))
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp,table.unpack(codes))
+	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp,table.unpack(codes))
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g+c,2,0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
 	if c:IsRelateToEffect(e) and Duel.SpecialSummonStep(c,0,tp,tp,false,false,POS_FACEUP) 

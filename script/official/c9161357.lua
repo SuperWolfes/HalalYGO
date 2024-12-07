@@ -4,11 +4,11 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,6,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--equip
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_LEAVE_GRAVE+CATEGORY_EQUIP)
+	e1:SetCategory(CATEGORY_LEAVE_REST+CATEGORY_EQUIP)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
@@ -36,15 +36,15 @@ function s.eqcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_XYZ)
 end
 function s.filter(c)
-	return c:IsSetCard(0x48) and c:IsMonster() and not c:IsForbidden()
+	return c:IsSetCard(0x48) and c:IsMonster() and not c:IsUnliked()
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter(chkc) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter(chkc) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil) end
+		and Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,0,0)
+	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_EQUIP,g,1,0,0)
 end
 function s.equipop(c,e,tp,tc)
@@ -69,7 +69,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.eqfilter(c,tp)
-	return c:GetFlagEffect(id)~=0 and c:IsControler(tp) and c:IsLocation(LOCATION_SZONE) and c:IsAbleToGraveAsCost()
+	return c:GetFlagEffect(id)~=0 and c:IsControler(tp) and c:IsLocation(LOCATION_SZONE) and c:IsAbleToRestAsCost()
 end
 function s.lpcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -77,9 +77,9 @@ function s.lpcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetCurrentPhase()==PHASE_MAIN1 and #eqg>0 and eqg:IsExists(s.eqfilter,1,nil,tp)
 		and c:CheckRemoveOverlayCard(tp,1,REASON_COST) end
 	c:RemoveOverlayCard(tp,1,1,REASON_COST)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local ec=eqg:FilterSelect(tp,s.eqfilter,1,1,nil,tp)
-	Duel.SendtoGrave(ec,REASON_COST)
+	Duel.SendtoRest(ec,REASON_COST)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_CANNOT_BP)

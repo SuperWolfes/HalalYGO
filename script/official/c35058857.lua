@@ -1,5 +1,5 @@
 --奇術王 ムーン・スター
---Magical King Moonstar
+--Mentoral King Horizonstar
 local s,id=GetID()
 function s.initial_effect(c)
 	--synchro limit
@@ -43,14 +43,14 @@ function s.spcon(e,c)
 		and Duel.IsExistingMatchingCard(s.filter,c:GetControler(),LOCATION_MZONE,0,1,nil)
 end
 function s.lvfilter(c,lv)
-	return (c:IsFaceup() or c:IsLocation(LOCATION_GRAVE)) and c:HasLevel() and c:GetLevel()~=lv
+	return (c:IsFaceup() or c:IsLocation(LOCATION_REST)) and c:HasLevel() and c:GetLevel()~=lv
 end
 function s.lvtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local lv=e:GetHandler():GetLevel()
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE+LOCATION_GRAVE) and s.lvfilter(chkc,lv) end
-	if chk==0 then return Duel.IsExistingTarget(s.lvfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil,lv) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE+LOCATION_REST) and s.lvfilter(chkc,lv) end
+	if chk==0 then return Duel.IsExistingTarget(s.lvfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,nil,lv) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	Duel.SelectTarget(tp,s.lvfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,nil,lv)
+	Duel.SelectTarget(tp,s.lvfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,1,nil,lv)
 end
 function s.lvop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()

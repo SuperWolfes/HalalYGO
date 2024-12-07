@@ -1,5 +1,5 @@
 --幻刃奥義－突陥攻事
---Constructor Art - Buildestruction
+--Constructor Art - Builmismatching
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

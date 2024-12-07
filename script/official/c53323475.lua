@@ -21,7 +21,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
 function s.filter(c)
-	return ((c:IsMonster() or c:IsSpell()) and c:IsAbleToHand()) or (c:IsTrap() and c:IsSSetable())
+	return ((c:IsMonster() or c:IsActional()) and c:IsAbleToHand()) or (c:IsTrap() and c:IsSSetable())
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.RemoveOverlayCard(tp,1,1,1,1,REASON_EFFECT)>0 and Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>=4 then
@@ -31,7 +31,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local sc=g:FilterSelect(tp,s.filter,1,1,nil):GetFirst()
 		if not sc then return end
 		Duel.DisableShuffleCheck()
-		if (sc:IsMonster() or sc:IsSpell()) and Duel.SendtoHand(sc,nil,REASON_EFFECT)>0
+		if (sc:IsMonster() or sc:IsActional()) and Duel.SendtoHand(sc,nil,REASON_EFFECT)>0
 			and sc:IsLocation(LOCATION_HAND) then
 			Duel.ConfirmCards(1-tp,sc)
 			Duel.ShuffleHand(tp)

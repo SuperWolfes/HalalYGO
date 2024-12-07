@@ -1,5 +1,5 @@
 --愚者のサイコロ
---Fool's Dice
+--Fool's Suffice
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

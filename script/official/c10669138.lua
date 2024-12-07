@@ -1,9 +1,9 @@
 --L・G・D
---Link God Dragon
+--Link Monster Dragon
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,nil,5,5)
 	--must link summon
 	local e1=Effect.CreateEffect(c)
@@ -90,19 +90,19 @@ function s.rmcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	local g=Duel.GetMatchingGroup(Card.IsAbleToRemove,tp,LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(Card.IsAbleToRemove,tp,LOCATION_REST,0,nil)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,math.min(#g,5),0,0)
 end
 function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) then return end
-	local g=Duel.GetMatchingGroup(Card.IsAbleToRemove,tp,LOCATION_GRAVE,0,nil)
-	if #g<5 then Duel.SendtoGrave(c,REASON_EFFECT) end
+	local g=Duel.GetMatchingGroup(Card.IsAbleToRemove,tp,LOCATION_REST,0,nil)
+	if #g<5 then Duel.SendtoRest(c,REASON_EFFECT) end
 	if #g>=5 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 		local sg=g:Select(tp,5,5,nil)
 		if #sg~=5 or Duel.Remove(sg,POS_FACEDOWN,REASON_EFFECT)~=5 then
-			Duel.SendtoGrave(c,REASON_EFFECT)
+			Duel.SendtoRest(c,REASON_EFFECT)
 		end
 	end
 end

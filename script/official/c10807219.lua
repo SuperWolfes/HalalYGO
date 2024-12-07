@@ -33,7 +33,7 @@ end
 function s.spcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
-	return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(s.spconfilter,tp,LOCATION_GRAVE,0,1,nil)
+	return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(s.spconfilter,tp,LOCATION_REST,0,1,nil)
 end
 function s.thfilter(c)
 	return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_INSECT) and c:IsAbleToHand() and not c:IsCode(id)
@@ -42,19 +42,19 @@ function s.tdfilter(c)
 	return c:IsTrap() and c:IsFaceup() and c:IsAbleToDeck()
 end
 function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil)
-		or Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_GRAVE|LOCATION_REMOVED,0,1,nil) end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_GRAVE|LOCATION_REMOVED)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil)
+		or Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST|LOCATION_REMOVED,0,1,nil) end
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_REST|LOCATION_REMOVED)
 end
 function s.effop(e,tp,eg,ep,ev,re,r,rp)
 	local breakeffect=false
-	local b1=Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.thfilter),tp,LOCATION_GRAVE,0,1,nil)
-	local b2=Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.tdfilter),tp,LOCATION_GRAVE|LOCATION_REMOVED,0,1,nil)
-	--Add 1 LIGHT Insect monster from your GY to your hand, except "Newbee!"
+	local b1=Duel.IsExistingMatchingCard(aux.RestValleyFilter(s.thfilter),tp,LOCATION_REST,0,1,nil)
+	local b2=Duel.IsExistingMatchingCard(aux.RestValleyFilter(s.tdfilter),tp,LOCATION_REST|LOCATION_REMOVED,0,1,nil)
+	--Add 1 LIGHT Insect monster from your RP to your hand, except "Newbee!"
 	if b1 and (not b2 or Duel.SelectYesNo(tp,aux.Stringid(id,2))) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-		local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+		local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
 		if #g>0 then
 			Duel.HintSelection(g)
 			Duel.SendtoHand(g,nil,REASON_EFFECT)
@@ -62,10 +62,10 @@ function s.effop(e,tp,eg,ep,ev,re,r,rp)
 		end
 		breakeffect=true
 	end
-	--Place 1 Trap from your GY or banishment on the top or bottom of your Deck
+	--Place 1 Trap from your RP or banishment on the top or bottom of your Deck
 	if b2 and (not breakeffect or Duel.SelectYesNo(tp,aux.Stringid(id,3))) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.tdfilter),tp,LOCATION_GRAVE|LOCATION_REMOVED,0,1,1,nil)
+		local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.tdfilter),tp,LOCATION_REST|LOCATION_REMOVED,0,1,1,nil)
 		if #g>0 then
 			Duel.HintSelection(g)
 			local seq=Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>0 and Duel.SelectOption(tp,aux.Stringid(id,4),aux.Stringid(id,5)) or 0

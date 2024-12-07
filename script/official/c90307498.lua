@@ -3,7 +3,7 @@
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion Material
 	Fusion.AddProcMix(c,true,true,CARD_NEOS,CARD_YUBEL)
 	--Must be Fusion Summoned

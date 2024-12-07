@@ -1,5 +1,5 @@
 --ＧＯ－ＤＤＤ神零王ゼロゴッド・レイジ
---Go! - D/D/D Divine Zero King Rage
+--Go! - D/D/D Mega Zero King Rage
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -131,7 +131,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetReset(RESET_PHASE+PHASE_END)
 		Duel.RegisterEffect(e2,tp)
 	elseif op==3 then
-		--Opponent cannot activate effects in hand or GY
+		--Opponent cannot activate effects in hand or RP
 		Duel.RegisterFlagEffect(1-tp,id+2,RESET_PHASE+PHASE_END,0,1)
 		aux.RegisterClientHint(c,nil,tp,0,1,aux.Stringid(id,7),nil)
 		local e3=Effect.CreateEffect(c)
@@ -164,5 +164,5 @@ function s.aclimit1(e,re,tp)
 end
 function s.aclimit2(e,re,tp)
 	local rc=re:GetHandler()
-	return rc and rc:IsLocation(LOCATION_HAND+LOCATION_GRAVE)
+	return rc and rc:IsLocation(LOCATION_HAND+LOCATION_REST)
 end

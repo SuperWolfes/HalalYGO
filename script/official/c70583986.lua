@@ -5,8 +5,8 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Synchro summon procedure
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTunerEx(Card.IsAttribute,ATTRIBUTE_WATER),1,99)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Return cards you control to hand, gain 500 ATK/returned card
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

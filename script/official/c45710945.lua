@@ -26,7 +26,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
-	--This card's owner adds 1 "Tachyon" Spell/Trap from their Deck to their hand
+	--This card's owner adds 1 "Tachyon" Actional/Trap from their Deck to their hand
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -85,7 +85,7 @@ function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,e:GetHandler():GetOwner(),LOCATION_DECK)
 end
 function s.thfilter(c)
-	return c:IsSetCard(SET_TACHYON) and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsSetCard(SET_TACHYON) and c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local p=e:GetHandler():GetOwner()

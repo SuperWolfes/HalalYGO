@@ -1,5 +1,5 @@
 --ロード・オブ・ザ・タキオンギャラクシー
---Lord of the Tachyon Galaxy
+--Watcher of the Tachyon Galaxy
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)

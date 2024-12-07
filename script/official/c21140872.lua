@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcCodeFun(c,CARD_REDEYES_B_DRAGON,aux.FilterBoolFunction(Card.IsRace,RACE_WARRIOR),1,true)
 	--Equip
 	local e1=Effect.CreateEffect(c)
@@ -50,22 +50,22 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 s.listed_series={0x3b}
-s.listed_names={CARD_NECROVALLEY}
+s.listed_names={CARD_RESTVALLEY}
 s.material_setcode=0x3b
 function s.eqcon(e)
 	return Duel.GetAttacker():IsSetCard(0x3b)
 end
 function s.eqfilter(c,tp)
-	return c:IsRace(RACE_WARRIOR) and c:CheckUniqueOnField(tp) and c:IsMonster() and not c:IsForbidden()
+	return c:IsRace(RACE_WARRIOR) and c:CheckUniqueOnField(tp) and c:IsMonster() and not c:IsUnliked()
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.eqfilter(chkc,tp) end
-	if chk==0 then return Duel.IsExistingTarget(s.eqfilter,tp,LOCATION_GRAVE,0,1,nil,tp)
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.eqfilter(chkc,tp) end
+	if chk==0 then return Duel.IsExistingTarget(s.eqfilter,tp,LOCATION_REST,0,1,nil,tp)
 		and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-	local g=Duel.SelectTarget(tp,s.eqfilter,tp,LOCATION_GRAVE,0,1,1,nil,tp)
+	local g=Duel.SelectTarget(tp,s.eqfilter,tp,LOCATION_REST,0,1,1,nil,tp)
 	Duel.SetOperationInfo(0,CATEGORY_EQUIP,g,1,0,0)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,0,0)
 end
 function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -99,13 +99,13 @@ function s.ngcon(e,tp,eg,ep,ev,re,r,rp)
 	return g and g:IsExists(s.ngcfilter,1,nil,tp) and Duel.IsChainNegatable(ev)
 end
 function s.ngfilter(c,e,tp)
-	return c:IsType(TYPE_EQUIP) and c:IsAbleToGraveAsCost()
+	return c:IsType(TYPE_EQUIP) and c:IsAbleToRestAsCost()
 end
 function s.ngcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.ngfilter,tp,LOCATION_SZONE,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.ngfilter,tp,LOCATION_SZONE,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.ngtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -129,12 +129,12 @@ function s.spcon2(e,tp,eg,ep,ev,re,r,rp)
 	return (r&REASON_EFFECT+REASON_BATTLE)~=0
 end
 function s.spfilter2(c,e,tp)
-	return c:IsLocation(LOCATION_GRAVE) and c:IsControler(tp) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsLocation(LOCATION_REST) and c:IsControler(tp) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg2(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=e:GetLabelObject():GetLabelObject()
 	if chk==0 then return g and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and g:IsExists(s.spfilter2,1,nil,e,tp) and not Duel.IsEnvironment(CARD_NECROVALLEY) end
+		and g:IsExists(s.spfilter2,1,nil,e,tp) and not Duel.IsEnvironment(CARD_RESTVALLEY) end
 	local sg=g:Filter(s.spfilter2,nil,e,tp)
 	Duel.SetTargetCard(sg)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,sg,#sg,0,0)
@@ -143,7 +143,7 @@ function s.spop2(e,tp,eg,ep,ev,re,r,rp)
 	local sg=Duel.GetTargetCards(e)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ft<=0 then return end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	if #sg>ft then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		sg=sg:Select(tp,ft,ft,nil)

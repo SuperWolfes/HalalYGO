@@ -13,7 +13,7 @@ function s.initial_effect(c)
 end
 s.listed_names={16898077}
 function s.spcfilter(c,code)
-	return c:IsCode(code) and c:IsAbleToGraveAsCost()
+	return c:IsCode(code) and c:IsAbleToRestAsCost()
 end
 function s.rescon(sg,e,tp,mg)
 	return aux.ChkfMMZ(1)(sg,e,tp,mg) and sg:IsExists(s.chk,1,nil,sg,Group.CreateGroup(),52286175,15175429,89493368)
@@ -40,8 +40,8 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	g:Merge(g3)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>-3 and #g1>0 and #g2>0 and #g3>0 
 		and aux.SelectUnselectGroup(g,e,tp,3,3,s.rescon,0) end
-	local sg=aux.SelectUnselectGroup(g,e,tp,3,3,s.rescon,1,tp,HINTMSG_TOGRAVE)
-	Duel.SendtoGrave(sg,REASON_COST)
+	local sg=aux.SelectUnselectGroup(g,e,tp,3,3,s.rescon,1,tp,HINTMSG_TOREST)
+	Duel.SendtoRest(sg,REASON_COST)
 end
 function s.spfilter(c,e,tp)
 	return c:IsCode(16898077) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
@@ -57,7 +57,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,0x13,0,1,1,nil,e,tp):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,0x13,0,1,1,nil,e,tp):GetFirst()
 	if tc and Duel.SpecialSummon(tc,0,tp,tp,true,true,POS_FACEUP)>0 then
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_SINGLE)

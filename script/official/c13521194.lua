@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCost(aux.bfgcost)
 	e2:SetTarget(s.sptarget)
 	e2:SetOperation(s.spoperation)
@@ -43,7 +43,7 @@ function s.damoperation(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.filter(c,e,tp)
 	local atk=c:GetAttack()
-	return atk>=0 and atk<=2000 and c:IsRace(RACE_FIEND) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return atk>=0 and atk<=2000 and c:IsRace(RACE_TAINTED) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptarget(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

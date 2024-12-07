@@ -23,7 +23,7 @@ end
 function s.relfilter(e,tp)
 	return function(c)
 		return c:IsSetCard(0x577) and Duel.IsExistingTarget(s.filter,tp,LOCATION_MZONE,0,1,c)
-			and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp,c:GetAttribute())
+			and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp,c:GetAttribute())
 	end
 end
 function s.filter(c)
@@ -57,15 +57,15 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_MZONE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 	Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE,0,1,1,nil)
-	local sg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_GRAVE,0,nil,e,tp,e:GetLabel())
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,sg,1,tp,LOCATION_GRAVE)
+	local sg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_REST,0,nil,e,tp,e:GetLabel())
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,sg,1,tp,LOCATION_REST)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	local ft=math.min(tc:GetLink(),Duel.GetLocationCount(tp,LOCATION_MZONE))
-	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_GRAVE,0,nil,e,tp,e:GetLabel())
+	local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,e,tp,e:GetLabel())
 	if tc and tc:IsRelateToEffect(e) and #g>0 and ft>0 then
-		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 		local sg=g:Select(tp,1,ft,nil)
 		local c=e:GetHandler()
 		local fid=c:GetFieldID()

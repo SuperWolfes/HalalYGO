@@ -1,5 +1,5 @@
 --刻まれし魔の詠聖
---Fiendsmith Tractus
+--Taintedsmith Tractus
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
@@ -13,22 +13,22 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-	--Fusion Summon 1 "Fiendsmith" Fusion Monster using monsters from your hand or field as material
-	local params={aux.FilterBoolFunction(Card.IsSetCard,SET_FIENDSMITH)}
+	--Fusion Summon 1 "Taintedsmith" Fusion Monster using monsters from your hand or field as material
+	local params={aux.FilterBoolFunction(Card.IsSetCard,SET_TAINTEDSMITH)}
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCost(aux.SelfBanishCost)
 	e2:SetTarget(Fusion.SummonEffTG(table.unpack(params)))
 	e2:SetOperation(Fusion.SummonEffOP(table.unpack(params)))
 	c:RegisterEffect(e2)
 end
-s.listed_series={SET_FIENDSMITH}
+s.listed_series={SET_TAINTEDSMITH}
 function s.thfilter(c)
-	return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_FIEND) and c:IsAbleToHand()
+	return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_TAINTED) and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

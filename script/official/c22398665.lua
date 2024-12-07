@@ -4,23 +4,23 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Ritual Summon
-	Ritual.AddProcGreater({handler=c,filter=s.ritualfil,lv=Card.GetAttack,matfilter=s.filter,location=LOCATION_HAND|LOCATION_GRAVE,requirementfunc=Card.GetAttack,desc=aux.Stringid(id,0)})
+	--Locked Summon
+	Locked.AddProcGreater({handler=c,filter=s.lockedfil,lv=Card.GetAttack,matfilter=s.filter,location=LOCATION_HAND|LOCATION_REST,requirementfunc=Card.GetAttack,desc=aux.Stringid(id,0)})
 	--Add itself to hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_ATKCHANGE)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,id)
 	e2:SetTarget(s.thtg)
 	e2:SetOperation(s.thop)
 	c:RegisterEffect(e2)
 end
 s.listed_series={0x151}
-function s.ritualfil(c)
-	return c:GetAttack()>0 and c:IsRitualMonster()
+function s.lockedfil(c)
+	return c:GetAttack()>0 and c:IsLockedMonster()
 end
 function s.filter(c)
 	return c:IsRace(RACE_MACHINE) and c:GetAttack()>0

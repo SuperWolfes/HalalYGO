@@ -1,5 +1,5 @@
 --竜華界闢
---Apodrakosis World Creation
+--Apodrakosis World Matching
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,id)
 	e2:SetCondition(s.spcon)
 	e2:SetCost(s.spcost)
@@ -71,9 +71,9 @@ end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsAbleToRemoveAsCost()
-		and Duel.IsExistingMatchingCard(s.spcostfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
+		and Duel.IsExistingMatchingCard(s.spcostfilter,tp,LOCATION_REST,0,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.spcostfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,s.spcostfilter,tp,LOCATION_REST,0,1,1,nil,e,tp)
 	e:SetLabel(g:GetFirst():GetOriginalRace())
 	g:AddCard(c)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)

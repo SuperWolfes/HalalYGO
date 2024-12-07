@@ -1,5 +1,5 @@
 --星ほしの金きん貨 (Anime)
---Gold Moon Coin (Anime)
+--Gold Horizon Coin (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

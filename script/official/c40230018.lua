@@ -1,8 +1,8 @@
 --魔導書庫クレッセン
---Spellbook Library of the Crescent
+--Actionalbook Library of the Crescent
 local s,id=GetID()
 function s.initial_effect(c)
-	--Reveal 3 "Spellbook" Spell Cards and make the opponent randomly add 1 of them to your hand
+	--Reveal 3 "Actionalbook" Actional Cards and make the opponent randomly add 1 of them to your hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -16,15 +16,15 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 	Duel.AddCustomActivityCounter(id,ACTIVITY_CHAIN,s.chainfilter)
 end
-s.listed_series={SET_SPELLBOOK}
+s.listed_series={SET_ACTIONALBOOK}
 function s.chainfilter(re,tp,cid)
-	return not (re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsSpellEffect() and not re:GetHandler():IsSetCard(SET_SPELLBOOK))
+	return not (re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActionalEffect() and not re:GetHandler():IsSetCard(SET_ACTIONALBOOK))
 end
 function s.cfilter(c)
-	return c:IsSetCard(SET_SPELLBOOK) and c:IsSpell()
+	return c:IsSetCard(SET_ACTIONALBOOK) and c:IsActional()
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return not Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,nil)
+	return not Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetCustomActivityCount(id,tp,ACTIVITY_CHAIN)==0 end
@@ -39,10 +39,10 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.aclimit(e,re,tp)
-	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsSpellEffect() and not re:GetHandler():IsSetCard(SET_SPELLBOOK)
+	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActionalEffect() and not re:GetHandler():IsSetCard(SET_ACTIONALBOOK)
 end
 function s.filter(c)
-	return c:IsSetCard(SET_SPELLBOOK) and c:IsSpell() and c:IsAbleToHand()
+	return c:IsSetCard(SET_ACTIONALBOOK) and c:IsActional() and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then

@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	e3:SetTarget(s.etarget)
 	e3:SetValue(s.efilter)
 	c:RegisterEffect(e3)
-	--Equip up to 3 "Marincess" monsters from the GY to a monster Link Summoned
+	--Equip up to 3 "Marincess" monsters from the RP to a monster Link Summoned
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
@@ -72,21 +72,21 @@ function s.eqcfilter(c,tp)
 	return c:IsSetCard(SET_MARINCESS) and c:IsLinkMonster() and c:IsSummonType(SUMMON_TYPE_LINK) and c:GetSequence()>=5 and c:IsSummonPlayer(tp)
 end
 function s.eqfilter(c)
-	return c:IsSetCard(SET_MARINCESS) and c:IsLinkMonster() and not c:IsForbidden()
+	return c:IsSetCard(SET_MARINCESS) and c:IsLinkMonster() and not c:IsUnliked()
 end
 function s.eqcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.eqcfilter,1,nil,tp)
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and Duel.IsExistingMatchingCard(s.eqfilter,tp,LOCATION_GRAVE,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,nil,1,0,0)
+		and Duel.IsExistingMatchingCard(s.eqfilter,tp,LOCATION_REST,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,nil,1,0,0)
 end
 function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
 	local tc=eg:Filter(s.eqcfilter,nil,tp):GetFirst()
 	if ft<1 or not tc or not tc:IsFaceup() then return end
-	local g=aux.SelectUnselectGroup(Duel.GetMatchingGroup(aux.NecroValleyFilter(s.eqfilter),tp,LOCATION_GRAVE,0,nil),e,tp,1,math.min(ft,3),aux.dncheck,1,tp,HINTMSG_EQUIP)
+	local g=aux.SelectUnselectGroup(Duel.GetMatchingGroup(aux.RestValleyFilter(s.eqfilter),tp,LOCATION_REST,0,nil),e,tp,1,math.min(ft,3),aux.dncheck,1,tp,HINTMSG_EQUIP)
 	for eqc in g:Iter() do
 		Duel.Equip(tp,eqc,tc,true,true)
 		--Equip limit

@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	e1:SetCode(EVENT_TO_GRAVE)
+	e1:SetCode(EVENT_TO_REST)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_STEP)
 	e1:SetCondition(s.condition)
 	e1:SetTarget(s.target)
@@ -29,12 +29,12 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
 	if chk==0 then return true end
-	if Duel.IsExistingTarget(s.filter1,tp,LOCATION_GRAVE,0,1,nil)
-		and Duel.IsExistingTarget(s.filter2,tp,LOCATION_GRAVE,0,1,nil) then
+	if Duel.IsExistingTarget(s.filter1,tp,LOCATION_REST,0,1,nil)
+		and Duel.IsExistingTarget(s.filter2,tp,LOCATION_REST,0,1,nil) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-		local g1=Duel.SelectTarget(tp,s.filter1,tp,LOCATION_GRAVE,0,1,1,nil)
+		local g1=Duel.SelectTarget(tp,s.filter1,tp,LOCATION_REST,0,1,1,nil)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-		local g2=Duel.SelectTarget(tp,s.filter2,tp,LOCATION_GRAVE,0,1,1,nil)
+		local g2=Duel.SelectTarget(tp,s.filter2,tp,LOCATION_REST,0,1,1,nil)
 		g1:Merge(g2)
 		Duel.SetOperationInfo(0,CATEGORY_TOHAND,g1,2,0,0)
 	end

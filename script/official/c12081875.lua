@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_THUNDER),2)
 	--Apply the effect of 1 "Thunder Dragon" monster
 	local e1=Effect.CreateEffect(c)
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
-	--Destruction replacement
+	--Mismatching replacement
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EFFECT_DESTROY_REPLACE)
@@ -47,10 +47,10 @@ function s.filter(c,e,tp)
 	return false
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE+LOCATION_REMOVED) and chkc:IsControler(tp) and s.filter(chkc,e,tp) end
-	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,nil,e,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_REST+LOCATION_REMOVED) and chkc:IsControler(tp) and s.filter(chkc,e,tp) end
+	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_REST+LOCATION_REMOVED,0,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,1,nil,e,tp)
+	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST+LOCATION_REMOVED,0,1,1,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,1,tp,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
@@ -107,10 +107,10 @@ function s.repcfilter(c)
 	return c:IsAbleToRemove() and aux.SpElimFilter(c,true)
 end
 function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return eg:IsExists(s.repfilter,1,nil,tp) and Duel.IsExistingMatchingCard(s.repcfilter,tp,LOCATION_GRAVE,0,3,nil) end
+	if chk==0 then return eg:IsExists(s.repfilter,1,nil,tp) and Duel.IsExistingMatchingCard(s.repcfilter,tp,LOCATION_REST,0,3,nil) end
 	if Duel.SelectEffectYesNo(tp,e:GetHandler(),96) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESREPLACE)
-		local g=Duel.SelectMatchingCard(tp,s.repcfilter,tp,LOCATION_GRAVE,0,3,3,nil)
+		local g=Duel.SelectMatchingCard(tp,s.repcfilter,tp,LOCATION_REST,0,3,3,nil)
 		Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
 		return true
 	else return false end

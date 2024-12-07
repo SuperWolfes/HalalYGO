@@ -35,5 +35,5 @@ function s.vfilter(c)
 	return c:IsSetCard(0x3e) and c:IsRace(RACE_REPTILE)
 end
 function s.atkval(e,c)
-	return Duel.GetMatchingGroupCount(s.vfilter,c:GetControler(),LOCATION_GRAVE,0,nil)*500
+	return Duel.GetMatchingGroupCount(s.vfilter,c:GetControler(),LOCATION_REST,0,nil)*500
 end

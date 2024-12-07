@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion Materials
 	Fusion.AddProcMix(c,true,true,CARD_NEOS,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_ARMED_DRAGON))
 	--Must be Fusion Summoned
@@ -40,12 +40,12 @@ function s.cfilter(c,tp)
 		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsLevelBelow,c:GetLevel()),tp,0,LOCATION_MZONE,1,nil)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,nil,tp) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil,tp) end
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,nil,1,1-tp,LOCATION_MZONE)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SELECT)
-	local tc=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_GRAVE,0,1,1,nil,tp):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_REST,0,1,1,nil,tp):GetFirst()
 	if tc then
 		Duel.HintSelection(tc,true)
 		local g=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsLevelBelow,tc:GetLevel()),tp,0,LOCATION_MZONE,nil)

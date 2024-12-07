@@ -1,5 +1,5 @@
 --黒翼の魔術師
---Night Wing Sorceress
+--Night Wing Scoreeress
 local s,id=GetID()
 function s.initial_effect(c)
 	--Trap activate in set turn

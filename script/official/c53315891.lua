@@ -2,7 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,80019195,85800949,84565800)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,true)
 	--immune
@@ -36,10 +36,10 @@ end
 s.listed_series={0xa0}
 s.material_setcode=0xa0
 function s.contactfil(tp)
-	return Duel.GetMatchingGroup(Card.IsAbleToGraveAsCost,tp,LOCATION_ONFIELD,0,nil)
+	return Duel.GetMatchingGroup(Card.IsAbleToRestAsCost,tp,LOCATION_ONFIELD,0,nil)
 end
 function s.contactop(g)
-	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL)
+	Duel.SendtoRest(g,REASON_COST+REASON_MATERIAL)
 end
 function s.econ(e)
 	return not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED)
@@ -82,15 +82,15 @@ function s.spfilter(c,e,tp)
 	return c:IsSetCard(0xa0) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
+	if chk==0 then return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)
 		and Duel.GetLocationCount(tp,LOCATION_MZONE)>=3
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,0x13,0,3,nil,e,tp) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,3,tp,0x13)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<3 then return end
-	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,0x13,0,nil,e,tp)
+	local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.spfilter),tp,0x13,0,nil,e,tp)
 	if #g>2 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local sg=g:Select(tp,3,3,nil)

@@ -1,4 +1,4 @@
---Resurrection Tribute
+--Protection Tribute
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -29,7 +29,7 @@ end
 function s.checkop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()
 	while tc do
-		if tc:IsLocation(LOCATION_GRAVE) and tc:IsReason(REASON_BATTLE) then
+		if tc:IsLocation(LOCATION_REST) and tc:IsReason(REASON_BATTLE) then
 			s[tc:GetPreviousControler()]=true
 		end
 		tc=eg:GetNext()
@@ -48,10 +48,10 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 
 		and Duel.IsExistingMatchingCard(Card.IsDestructable,tp,0,LOCATION_MZONE,1,nil) 
-		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
+		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,1,nil,e,tp) end
 	local g=Duel.GetMatchingGroup(Card.IsDestructable,tp,0,LOCATION_MZONE,nil)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
@@ -62,7 +62,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.HintSelection(g)
 		if Duel.Destroy(g,REASON_EFFECT)>0 then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-			local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+			local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_REST,0,1,1,nil,e,tp)
 			if #g>0 then
 				Duel.BreakEffect()
 				Duel.SpecialSummon(g,0,tp,tp,true,false,POS_FACEUP_DEFENSE)

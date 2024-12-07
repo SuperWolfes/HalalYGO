@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,160003025,160204026)
 	--ATK decrease+double attack
 	local e1=Effect.CreateEffect(c)

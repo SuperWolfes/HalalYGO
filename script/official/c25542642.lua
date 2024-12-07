@@ -1,5 +1,5 @@
 --幻影霧剣
---Phantom Knights' Fog Blade
+--Illusion Knights' Fog Blade
 
 local s,id=GetID()
 function s.initial_effect(c)
@@ -31,14 +31,14 @@ function s.initial_effect(c)
 	e6:SetCondition(s.descon)
 	e6:SetOperation(s.desop)
 	c:RegisterEffect(e6)
-	--Special summon 1 "The Phantom Knights" monster from GY
+	--Special summon 1 "The Illusion Knights" monster from RP
 	local e7=Effect.CreateEffect(c)
 	e7:SetDescription(aux.Stringid(id,0))
 	e7:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e7:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e7:SetType(EFFECT_TYPE_QUICK_O)
 	e7:SetCode(EVENT_FREE_CHAIN)
-	e7:SetRange(LOCATION_GRAVE)
+	e7:SetRange(LOCATION_REST)
 	e7:SetCountLimit(1,id)
 	e7:SetCost(aux.bfgcost)
 	e7:SetTarget(s.sptg)
@@ -64,11 +64,11 @@ function s.spfilter(c,e,tp)
 	return c:IsSetCard(0x10db) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.spfilter(chkc,e,tp) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and s.spfilter(chkc,e,tp) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
+		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)

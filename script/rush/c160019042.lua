@@ -4,8 +4,8 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
-	Fusion.AddProcMix(c,true,true,CARD_SEVENS_ROAD_MAGICIAN,160204021)
+	c:EnableAwakeLimit()
+	Fusion.AddProcMix(c,true,true,CARD_SEVENS_ROAD_MENTOR,160204021)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION,nil,false)
 	--Decrease ATK
 	local e1=Effect.CreateEffect(c)
@@ -39,10 +39,10 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeckAsCost(tp,1) end
 end
 function s.atkfilter(c)
-	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsRace(RACE_SPELLCASTER)
+	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsRace(RACE_MENTOR)
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
-	local ct=Duel.GetMatchingGroup(s.atkfilter,tp,LOCATION_GRAVE,0,nil):GetClassCount(Card.GetLevel)
+	local ct=Duel.GetMatchingGroup(s.atkfilter,tp,LOCATION_REST,0,nil):GetClassCount(Card.GetLevel)
 	if chk==0 then return ct>0 and Duel.IsExistingMatchingCard(aux.FilterMaximumSideFunctionEx(Card.IsFaceup),tp,0,LOCATION_MZONE,1,nil) end
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
@@ -54,7 +54,7 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	if #sg==0 then return end
 	Duel.HintSelection(sg)
 	--Decrease ATK
-	local ct=Duel.GetMatchingGroup(s.atkfilter,tp,LOCATION_GRAVE,0,nil):GetClassCount(Card.GetLevel)
+	local ct=Duel.GetMatchingGroup(s.atkfilter,tp,LOCATION_REST,0,nil):GetClassCount(Card.GetLevel)
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_UPDATE_ATTACK)

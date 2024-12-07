@@ -5,8 +5,8 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Synchro Summon procedure
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
-	c:EnableReviveLimit()
-	--Equip up to 3 Equip Spells
+	c:EnableAwakeLimit()
+	--Equip up to 3 Equip Actionals
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_EQUIP)
@@ -38,13 +38,13 @@ function s.eqsfilter(c,tp,ec)
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and Duel.IsExistingMatchingCard(s.eqsfilter,tp,LOCATION_DECK+LOCATION_GRAVE,0,1,nil,tp,e:GetHandler()) end
-	Duel.SetOperationInfo(0,CATEGORY_EQUIP,nil,1,0,LOCATION_DECK+LOCATION_GRAVE)
+		and Duel.IsExistingMatchingCard(s.eqsfilter,tp,LOCATION_DECK+LOCATION_REST,0,1,nil,tp,e:GetHandler()) end
+	Duel.SetOperationInfo(0,CATEGORY_EQUIP,nil,1,0,LOCATION_DECK+LOCATION_REST)
 end
 function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsFacedown() or not c:IsRelateToEffect(e) then return end
-	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.eqsfilter),tp,LOCATION_DECK+LOCATION_GRAVE,0,nil,tp,c)
+	local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.eqsfilter),tp,LOCATION_DECK+LOCATION_REST,0,nil,tp,c)
 	if #g==0 then return end
 	local ft=math.min(Duel.GetLocationCount(tp,LOCATION_SZONE),3)
 	local sg=aux.SelectUnselectGroup(g,e,tp,1,ft,aux.dncheck,1,tp,HINTMSG_EQUIP)
@@ -56,14 +56,14 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.tgfilter(c,tc)
-	return c:IsType(TYPE_EQUIP) and c:IsSpell() and c:IsAbleToGraveAsCost() and c:GetEquipTarget()==tc
+	return c:IsType(TYPE_EQUIP) and c:IsActional() and c:IsAbleToRestAsCost() and c:GetEquipTarget()==tc
 end
 function s.discost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_SZONE,0,1,nil,c) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_SZONE,0,1,1,nil,c)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.disfilter(c)
 	return c:IsFaceup() and c:IsType(TYPE_EFFECT) and (c:IsNegatableMonster() or c:IsCanChangePosition())

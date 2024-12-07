@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMixN(c,true,true,s.matfilter,2)
 	--Increase ATK
 	local e1=Effect.CreateEffect(c)
@@ -29,13 +29,13 @@ function s.cfilter(c)
 	return c:IsMonster() and c:IsRace(RACE_INSECT) and not c:IsLevel(9) and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,3,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,3,nil) end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	--Requirement
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local cg=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_GRAVE,0,3,3,nil)
+	local cg=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_REST,0,3,3,nil)
 	if #cg==0 then return end
 	Duel.HintSelection(cg)
 	if Duel.SendtoDeck(cg,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)==0 then return end

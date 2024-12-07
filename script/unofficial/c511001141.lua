@@ -1,5 +1,5 @@
 --沈黙の魔術師 ＬＶ０
---Silent Magician LV0
+--Silent Mentor LV0
 --fixed by Larry126
 local s,id=GetID()
 function s.initial_effect(c)

@@ -9,7 +9,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--Place 1 Spellstone Counter each time a monster effect is activated
+	--Place 1 Actionalstone Counter each time a monster effect is activated
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
 	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
@@ -41,7 +41,7 @@ function s.initial_effect(c)
 	e4:SetCondition(function(e) return e:GetHandler():GetCounter(0x16)==2 end)
 	e4:SetTarget(function(e,c) return c:IsType(TYPE_EFFECT) end)
 	c:RegisterEffect(e4)
-	--Remove all Spellstone Counters from this card during the End Phase
+	--Remove all Actionalstone Counters from this card during the End Phase
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e5:SetCode(EVENT_PHASE+PHASE_END)

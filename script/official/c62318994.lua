@@ -1,5 +1,5 @@
 --サクリファイス・Ｄ・ロータス
---Samsara D Lotus
+--Sam D Lotus
 --Ashaki
 local s,id=GetID()
 function s.initial_effect(c)
@@ -32,7 +32,7 @@ function s.initial_effect(c)
 	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e3:SetCode(EVENT_PHASE+PHASE_END)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetCountLimit(1,{id,2})
 	e3:SetCondition(s.thcon)
 	e3:SetTarget(s.thtg)
@@ -86,7 +86,7 @@ function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)) or c:IsAbleToHand() end
 	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,tp,0)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,c,1,tp,0)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,c,1,tp,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,c,1,tp,0)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp) 
 	local c=e:GetHandler()

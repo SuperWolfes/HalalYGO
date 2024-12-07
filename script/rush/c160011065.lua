@@ -22,15 +22,15 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(Card.IsSummonPlayer,1,nil,1-tp)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsSpellTrap,tp,LOCATION_ONFIELD,0,1,e:GetHandler()) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsActionalTrap,tp,LOCATION_ONFIELD,0,1,e:GetHandler()) end
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,nil,1,tp,LOCATION_ONFIELD)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-	local tc=Duel.SelectMatchingCard(tp,Card.IsSpellTrap,tp,LOCATION_ONFIELD,0,1,1,e:GetHandler()):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,Card.IsActionalTrap,tp,LOCATION_ONFIELD,0,1,1,e:GetHandler()):GetFirst()
 	if tc then
 		Duel.HintSelection(tc,true)
-		if Duel.Destroy(tc,REASON_EFFECT)>0 and tc:IsEquipSpell()
+		if Duel.Destroy(tc,REASON_EFFECT)>0 and tc:IsEquipActional()
 			and eg:IsExists(aux.FaceupFilter(Card.IsLevelBelow,8),1,nil)
 			and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			local sg=eg:FilterSelect(tp,aux.FaceupFilter(Card.IsLevelBelow,8),1,1,nil)

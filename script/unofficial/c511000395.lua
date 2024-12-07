@@ -31,7 +31,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
 end
 function s.mgfilter(c,e,tp,fusc,mg)
-	return c:IsControler(1-tp) and c:IsLocation(LOCATION_GRAVE)
+	return c:IsControler(1-tp) and c:IsLocation(LOCATION_REST)
 		and c:GetReason()&0x40008==0x40008 and c:GetReasonCard()==fusc
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 		and fusc:CheckFusionMaterial(mg,c)
@@ -44,8 +44,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local sumtype=tc:GetSummonType()
 	if Duel.Destroy(tc,REASON_EFFECT)~=0 and sumtype&SUMMON_TYPE_FUSION==SUMMON_TYPE_FUSION
 		and ct>0 and ct<=Duel.GetLocationCount(tp,LOCATION_MZONE)
-		and mg:FilterCount(aux.NecroValleyFilter(s.mgfilter),nil,e,tp,tc,mg)==ct
-		and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then
+		and mg:FilterCount(aux.RestValleyFilter(s.mgfilter),nil,e,tp,tc,mg)==ct
+		and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then
 		Duel.BreakEffect()
 		Duel.SpecialSummon(mg,0,tp,1-tp,false,false,POS_FACEUP)
 		local mgc=mg:GetFirst()

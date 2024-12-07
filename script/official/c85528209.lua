@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTunerEx(Card.IsSetCard,0x9a),1,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--defense attack
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -23,7 +23,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x9a}
 function s.sccon(e)
-	return not Duel.IsExistingMatchingCard(Card.IsType,e:GetHandlerPlayer(),LOCATION_GRAVE,0,1,nil,TYPE_SPELL+TYPE_TRAP)
+	return not Duel.IsExistingMatchingCard(Card.IsType,e:GetHandlerPlayer(),LOCATION_REST,0,1,nil,TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.adval(e,c)
 	return Duel.GetMatchingGroupCount(s.ctfilter,c:GetControler(),0,LOCATION_MZONE,nil)*900

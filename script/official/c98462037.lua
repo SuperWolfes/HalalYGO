@@ -3,7 +3,7 @@
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	c:SetSPSummonOnce(id)
 	--Link Summon procedure
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGHT|ATTRIBUTE_DARK),2,2)
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	--Destroy 1 card on the field
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
-	e2:SetCategory(CATEGORY_DESTROY+CATEGORY_TOGRAVE)
+	e2:SetCategory(CATEGORY_DESTROY+CATEGORY_TOREST)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_CARD_TARGET)
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
@@ -45,15 +45,15 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local g=Duel.SelectTarget(tp,nil,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,e:GetHandler(),1,0,0)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,e:GetHandler(),1,0,0)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and Duel.Destroy(tc,REASON_EFFECT)>0 and c:IsRelateToEffect(e)
-		and Duel.GetMatchingGroupCount(Card.IsSpell,tp,LOCATION_GRAVE,0,nil)<=3 then
+		and Duel.GetMatchingGroupCount(Card.IsActional,tp,LOCATION_REST,0,nil)<=3 then
 		Duel.BreakEffect()
-		Duel.SendtoGrave(c,REASON_EFFECT)
+		Duel.SendtoRest(c,REASON_EFFECT)
 	end
 end
 function s.btcon(e,tp,eg,ep,ev,re,r,rp)
@@ -61,12 +61,12 @@ function s.btcon(e,tp,eg,ep,ev,re,r,rp)
 	return bc and bc:IsControler(1-tp)
 end
 function s.cfilter(c)
-	return c:IsSpell() and c:IsAbleToRemoveAsCost()
+	return c:IsActional() and c:IsAbleToRemoveAsCost()
 end
 function s.btcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.bttg(e,tp,eg,ep,ev,re,r,rp,chk)

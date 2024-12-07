@@ -1,3 +1,3 @@
 --セレブローズ・マジシャン
---Celeb Rose Magician
+--Celeb Rose Mentor
 Duel.LoadCardScriptAlias(160013012)

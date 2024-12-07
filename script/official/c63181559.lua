@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetCode(EVENT_FREE_CHAIN)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetHintTiming(0,TIMING_BATTLE_START)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(function(e,tp) return Duel.IsTurnPlayer(1-tp) and Duel.GetCurrentPhase()<=PHASE_BATTLE end)
@@ -30,7 +30,7 @@ function s.initial_effect(c)
 end
 s.listed_series={SET_TRICKSTAR}
 function s.fextra(e,tp,mg)
-	local location=not Duel.IsPlayerAffectedByEffect(tp,CARD_SPIRIT_ELIMINATION) and LOCATION_GRAVE or LOCATION_MZONE
+	local location=not Duel.IsPlayerAffectedByEffect(tp,CARD_GUARDIAN_ELIMINATION) and LOCATION_REST or LOCATION_MZONE
 	return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRemove),tp,location,0,nil)
 end
 function s.linkfilter(c)
@@ -50,7 +50,7 @@ function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(op)
 	if op==1 then
 		e:SetCategory(CATEGORY_REMOVE+CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)
-		Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,tp,LOCATION_GRAVE)
+		Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,tp,LOCATION_REST)
 	elseif op==2 then
 		e:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	end
@@ -59,7 +59,7 @@ end
 function s.effop(e,tp,eg,ep,ev,re,r,rp)
 	local op=e:GetLabel()
 	if op==1 then
-		--Fusion Summon 1 "Trickstar" Fusion Monster by banishing its materials from your GY
+		--Fusion Summon 1 "Trickstar" Fusion Monster by banishing its materials from your RP
 		local params={fusfilter=aux.FilterBoolFunction(Card.IsSetCard,SET_TRICKSTAR),
 						matfilter=aux.FALSE,
 						extrafil=s.fextra,

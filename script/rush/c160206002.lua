@@ -33,14 +33,14 @@ function s.filter(c)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ct=e:GetHandler():GetMaterialCountRush()
-	if chk==0 then return ct>0 and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,ct,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
+	if chk==0 then return ct>0 and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,ct,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local ct=e:GetHandler():GetMaterialCountRush()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_GRAVE,0,ct,ct,nil)
+	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_REST,0,ct,ct,nil)
 	if #g>0 then
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)

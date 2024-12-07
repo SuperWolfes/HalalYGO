@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_SPSUMMON_PROC)
 	e1:SetProperty(EFFECT_FLAG_SPSUM_PARAM+EFFECT_FLAG_UNCOPYABLE)
 	e1:SetTargetRange(POS_FACEUP_ATTACK,0)
-	e1:SetRange(LOCATION_GRAVE)
+	e1:SetRange(LOCATION_REST)
 	e1:SetCondition(s.spcon)
 	c:RegisterEffect(e1)
 end
@@ -17,7 +17,7 @@ function s.filter(c)
 end
 function s.spcon(e,c)
 	if c==nil then return true end
-	local eff={c:GetCardEffect(EFFECT_NECRO_VALLEY)}
+	local eff={c:GetCardEffect(EFFECT_REST_VALLEY)}
 	for _,te in ipairs(eff) do
 		local op=te:GetOperation()
 		if not op or op(e,c) then return false end

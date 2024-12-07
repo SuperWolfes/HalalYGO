@@ -1,5 +1,5 @@
 --カルマセプト・ドラゴン
---Karmacept Dragon
+--Kaomcept Dragon
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -32,7 +32,7 @@ function s.initial_effect(c)
 	local e3=Effect.CreateEffect(c)
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-	e3:SetCode(EVENT_TO_GRAVE)
+	e3:SetCode(EVENT_TO_REST)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
 	e3:SetCountLimit(1,id)
 	e3:SetTarget(s.sptg)
@@ -59,7 +59,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if c:IsLocation(LOCATION_MZONE) and c:IsFacedown() then return end
 	local tc=Duel.GetFirstTarget()
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 or tc:IsControler(tp) or tc:IsFacedown() or not tc:IsRelateToEffect(e) then
-		Duel.SendtoGrave(c,REASON_EFFECT)
+		Duel.SendtoRest(c,REASON_EFFECT)
 		return
 	end
 	Duel.Equip(tp,c,tc,true)
@@ -101,11 +101,11 @@ function s.spfilter(c,e,tp,lk)
 		and c:IsFaceup() and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and not chkc:IsControler(tp) and s.filter(chkc,e,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and not chkc:IsControler(tp) and s.filter(chkc,e,tp) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(s.filter,tp,0,LOCATION_GRAVE,1,nil,e,tp) end
+		and Duel.IsExistingTarget(s.filter,tp,0,LOCATION_REST,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local tc=Duel.SelectTarget(tp,s.filter,tp,0,LOCATION_GRAVE,1,1,nil,e,tp):GetFirst()
+	local tc=Duel.SelectTarget(tp,s.filter,tp,0,LOCATION_REST,1,1,nil,e,tp):GetFirst()
 	local sg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_REMOVED,0,nil,e,tp,tc:GetLink())
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,sg,1,0,0)
 end

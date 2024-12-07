@@ -1,5 +1,5 @@
 --ネクロ・ディフェンダー
---Necro Defender
+--Rest Defender
 local s,id=GetID()
 function s.initial_effect(c)
 	--Targeted monster cannot be destroyed by battle, also take no battle damage involving it
@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetType(EFFECT_TYPE_IGNITION)
-	e1:SetRange(LOCATION_GRAVE)
+	e1:SetRange(LOCATION_REST)
 	e1:SetCost(aux.SelfBanishCost)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)

@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.costfilter(c)
-	return c:IsRace(RACE_MACHINE) and c:IsAttribute(ATTRIBUTE_EARTH) and c:IsAbleToGraveAsCost()
+	return c:IsRace(RACE_MACHINE) and c:IsAttribute(ATTRIBUTE_EARTH) and c:IsAbleToRestAsCost()
 end
 function s.desfilter(c)
 	return c:IsFaceup() and c:HasDefense() and c:IsDefenseBelow(1600)
@@ -28,9 +28,9 @@ end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local ctmax=Duel.GetMatchingGroupCount(s.desfilter,tp,0,LOCATION_MZONE,nil)
 	if ctmax>3 then ctmax=3 end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,ctmax,nil)
-	local ct=Duel.SendtoGrave(g,REASON_COST)
+	local ct=Duel.SendtoRest(g,REASON_COST)
 	if ct>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 		local dg=Duel.SelectMatchingCard(tp,s.desfilter,tp,0,LOCATION_MZONE,ct,ct,nil)

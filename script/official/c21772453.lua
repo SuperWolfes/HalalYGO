@@ -2,7 +2,7 @@
 --Flower Cardian Maple with Deer
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--special summon rule
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE)
@@ -54,7 +54,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
 end
 function s.desfilter(c)
-	return c:IsType(TYPE_SPELL+TYPE_TRAP)
+	return c:IsType(TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
@@ -71,7 +71,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			end
 		else
 			Duel.BreakEffect()
-			Duel.SendtoGrave(tc,REASON_EFFECT)
+			Duel.SendtoRest(tc,REASON_EFFECT)
 		end
 		Duel.ShuffleHand(tp)
 	end

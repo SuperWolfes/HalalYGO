@@ -1,5 +1,5 @@
 --Ｓｔａｋｅ Ｙｏｕｒ Ｓｏｕｌ！
---Stake your Soul!
+--Stake your Miss!
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.listed_series={SET_VANQUISH_SOUL}
+s.listed_series={SET_VANQUISH_MISS}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(-1)
 	return true
@@ -24,7 +24,7 @@ function s.cfilter(c,e,tp)
 	return c:IsMonster() and not c:IsPublic() and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,0,1,nil,e,tp,c:GetAttribute(),c:GetCode())
 end
 function s.spfilter(c,e,tp,attr,code)
-	return c:IsSetCard(SET_VANQUISH_SOUL) and c:IsAttribute(attr) and not c:IsCode(code)
+	return c:IsSetCard(SET_VANQUISH_MISS) and c:IsAttribute(attr) and not c:IsCode(code)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)

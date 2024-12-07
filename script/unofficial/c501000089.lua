@@ -2,7 +2,7 @@
 --Skyfaring Castle of the Black Forest
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,s.filter,3)
 	--match kill
 	local e1=Effect.CreateEffect(c)

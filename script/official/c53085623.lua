@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	e2:SetCode(EVENT_TO_GRAVE)
+	e2:SetCode(EVENT_TO_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(s.spcon)
 	e2:SetTarget(s.sptg)
@@ -29,8 +29,8 @@ end
 s.listed_series={SET_ATLANTEAN,SET_MERMAIL}
 s.listed_names={id}
 function s.lvcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(aux.AND(Card.IsDiscardable,Card.IsAbleToGraveAsCost),tp,LOCATION_HAND,0,1,nil) end
-	Duel.DiscardHand(tp,aux.AND(Card.IsDiscardable,Card.IsAbleToGraveAsCost),1,1,REASON_COST|REASON_DISCARD)
+	if chk==0 then return Duel.IsExistingMatchingCard(aux.AND(Card.IsDiscardable,Card.IsAbleToRestAsCost),tp,LOCATION_HAND,0,1,nil) end
+	Duel.DiscardHand(tp,aux.AND(Card.IsDiscardable,Card.IsAbleToRestAsCost),1,1,REASON_COST|REASON_DISCARD)
 end
 function s.lvfilter(c)
 	return c:HasLevel() and not c:IsLevel(7) and c:IsAttribute(ATTRIBUTE_WATER) and c:IsFaceup()

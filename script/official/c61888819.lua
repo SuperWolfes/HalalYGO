@@ -1,15 +1,15 @@
 --インヴェルズ・オリジン
 --Steelswarm Origin
---force effect scripted by edo9300
+--fcoree effect scripted by edo9300
 local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_LSWARM),2,2)
-	c:EnableReviveLimit()
-	--force mzone
+	c:EnableAwakeLimit()
+	--fcoree mzone
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
-	e1:SetCode(EFFECT_FORCE_MZONE)
+	e1:SetCode(EFFECT_FCOREE_MZONE)
 	e1:SetRange(LOCATION_EMZONE)
 	e1:SetTargetRange(LOCATION_EXTRA,LOCATION_EXTRA)
 	e1:SetValue(s.fmval)
@@ -69,7 +69,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=eg:FilterCount(s.cfilter,nil)
 	ft=math.min(ft,ct)
 	if ft<=0 then return end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_DECK,0,1,ft,nil,e,tp)
 	Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP_DEFENSE)

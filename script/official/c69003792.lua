@@ -9,7 +9,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetHintTiming(TIMING_DAMAGE_STEP,TIMING_DAMAGE_STEP+TIMING_END_PHASE)
-	e1:SetTarget(s.target(Ritual.Target(ritparams),Ritual.Operation(ritparams)))
+	e1:SetTarget(s.target(Locked.Target(ritparams),Locked.Operation(ritparams)))
 	c:RegisterEffect(e1)
 end
 s.listed_series={0x138}
@@ -19,7 +19,7 @@ end
 function s.target(rtg,rtop)
 	return function(e,tp,eg,ep,ev,re,r,rp,chk)
 		local b1=Duel.GetMatchingGroupCount(Card.IsFaceup,tp,0,LOCATION_MZONE,nil)>0
-			and Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsType,TYPE_RITUAL),tp,LOCATION_MZONE,LOCATION_MZONE,nil)>0
+			and Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsType,TYPE_LOCKED),tp,LOCATION_MZONE,LOCATION_MZONE,nil)>0
 		local b2=rtg(e,tp,eg,ep,ev,re,r,rp,0)
 		if chk==0 then return b1 or b2 end
 		local stable={}
@@ -47,7 +47,7 @@ function s.target(rtg,rtop)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,0,LOCATION_MZONE,nil)
-	local atk=Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsType,TYPE_RITUAL),tp,LOCATION_MZONE,LOCATION_MZONE,nil)*(-500)
+	local atk=Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsType,TYPE_LOCKED),tp,LOCATION_MZONE,LOCATION_MZONE,nil)*(-500)
 	if #g==0 or atk==0 then return end
 	g:ForEach(s.op,e:GetHandler(),atk)
 end

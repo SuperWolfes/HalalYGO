@@ -1,5 +1,5 @@
 --妖精伝姫－シラユキ
---Fairy Tail - Snow
+--Wanderer Tail - Snow
 local s,id=GetID()
 function s.initial_effect(c)
 	--Change 1 face-up monster to face-down Defense position
@@ -15,13 +15,13 @@ function s.initial_effect(c)
 	local e2=e1:Clone()
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e2)
-	--Special Summon itself from the GY
+	--Special Summon itself from the RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_QUICK_O)
 	e3:SetCode(EVENT_FREE_CHAIN)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetCost(s.spcost)
 	e3:SetTarget(s.sptg)
 	e3:SetOperation(s.spop)
@@ -47,7 +47,7 @@ function s.rmfilter(c)
 	return c:IsAbleToRemoveAsCost() and (c:IsLocation(LOCATION_HAND|LOCATION_SZONE) or aux.SpElimFilter(c,false,true))
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local sg=Duel.GetMatchingGroup(s.rmfilter,tp,LOCATION_HAND|LOCATION_ONFIELD|LOCATION_GRAVE,0,e:GetHandler())
+	local sg=Duel.GetMatchingGroup(s.rmfilter,tp,LOCATION_HAND|LOCATION_ONFIELD|LOCATION_REST,0,e:GetHandler())
 	if chk==0 then return #sg>=7 and Duel.GetMZoneCount(tp,sg)>0 end
 	local g
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)==0 then

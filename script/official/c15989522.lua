@@ -1,10 +1,10 @@
 --竜魔道騎士ガイア
---Gaia the Magical Knight of Dragons
+--Bia the Mentoral Knight of Dragons
 --scripted by CyberCatMan
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion summon procedure
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0xbd),s.matfilter)
 	--Change name
 	local e1=Effect.CreateEffect(c)
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e1:SetCode(EFFECT_CHANGE_CODE)
 	e1:SetRange(LOCATION_MZONE)
-	e1:SetValue(CARD_GAIA_CHAMPION)
+	e1:SetValue(CARD_BIA_CHAMPION)
 	c:RegisterEffect(e1)
 	--Decrease ATK and destroy target
 	local e2=Effect.CreateEffect(c)
@@ -40,7 +40,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 s.listed_series={0xbd}
-s.listed_names={CARD_GAIA_CHAMPION}
+s.listed_names={CARD_BIA_CHAMPION}
 function s.matfilter(c,fc,sumtype,tp)
 	return c:IsRace(RACE_DRAGON,fc,sumtype,tp) and c:IsLevel(5)
 end

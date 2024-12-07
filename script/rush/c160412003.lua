@@ -13,14 +13,14 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.costfilter(c)
-	return c:IsType(TYPE_NORMAL) and c:IsFaceup() and c:IsAbleToGraveAsCost()
+	return c:IsType(TYPE_NORMAL) and c:IsFaceup() and c:IsAbleToRestAsCost()
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_MZONE,0,1,nil)
 		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND,0,1,nil,e,tp)
 end
 function s.filter(c,e,tp)
-	return c:IsRace(RACE_PSYCHIC) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsRace(RACE_MENTAL) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>-1
@@ -29,9 +29,9 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	-- requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_MZONE,0,1,1,nil)
-	local ct=Duel.SendtoGrave(g,REASON_COST)
+	local ct=Duel.SendtoRest(g,REASON_COST)
 	if ct>0 then
 		--Effect
 		if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end

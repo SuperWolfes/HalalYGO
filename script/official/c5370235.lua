@@ -1,5 +1,5 @@
 --サイバー・ダーク・キメラ
---Cyberdark Chimera
+--Cyberdark Chilean
 --Scripted by Rundas
 --Necessary changes to the Fusion Proc made by pyrQ and edo9300
 local s,id=GetID()
@@ -15,13 +15,13 @@ function s.initial_effect(c)
 	e1:SetTarget(s.thtg)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
-	--Send 1 "Cyberdark" monster from your Deck to the GY
+	--Send 1 "Cyberdark" monster from your Deck to the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_TOGRAVE)
+	e2:SetCategory(CATEGORY_TOREST)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
-	e2:SetCode(EVENT_TO_GRAVE)
+	e2:SetCode(EVENT_TO_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetTarget(s.tgtg)
 	e2:SetOperation(s.tgop)
@@ -30,8 +30,8 @@ end
 s.listed_names={37630732} --"Power Bond"
 s.listed_series={SET_CYBER,SET_CYBERDARK}
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(aux.AND(Card.IsSpellTrap,Card.IsDiscardable),tp,LOCATION_HAND,0,1,nil) end
-	Duel.DiscardHand(tp,aux.AND(Card.IsSpellTrap,Card.IsDiscardable),1,1,REASON_COST|REASON_DISCARD)
+	if chk==0 then return Duel.IsExistingMatchingCard(aux.AND(Card.IsActionalTrap,Card.IsDiscardable),tp,LOCATION_HAND,0,1,nil) end
+	Duel.DiscardHand(tp,aux.AND(Card.IsActionalTrap,Card.IsDiscardable),1,1,REASON_COST|REASON_DISCARD)
 end
 function s.thfilter(c)
 	return c:IsCode(37630732) and c:IsAbleToHand()
@@ -48,12 +48,12 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ConfirmCards(1-tp,g)
 	end
 	local c=e:GetHandler()
-	--Can also banish monsters from your GY as material once when you Fusion Summon this turn
+	--Can also banish monsters from your RP as material once when you Fusion Summon this turn
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_EXTRA_FUSION_MATERIAL)
 	e1:SetCountLimit(1)
-	e1:SetTargetRange(LOCATION_GRAVE,0)
+	e1:SetTargetRange(LOCATION_REST,0)
 	e1:SetTarget(function(e,c) return c:IsAbleToRemove() and c:IsMonster() end)
 	e1:SetOperation(Fusion.BanishMaterial)
 	e1:SetValue(1)
@@ -73,17 +73,17 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	aux.RegisterClientHint(c,0,tp,1,0,aux.Stringid(id,3))
 end
 function s.tgfilter(c,tp)
-	return c:IsSetCard(SET_CYBERDARK) and c:IsMonster() and c:IsAbleToGrave()
-		and not Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,c:GetCode())
+	return c:IsSetCard(SET_CYBERDARK) and c:IsMonster() and c:IsAbleToRest()
+		and not Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,c:GetCode())
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil,tp)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end

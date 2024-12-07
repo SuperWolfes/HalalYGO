@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,160208040,160208043)
 	--Destroy 2 of opponent's monsters
 	local e1=Effect.CreateEffect(c)

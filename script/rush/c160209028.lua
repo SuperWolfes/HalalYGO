@@ -20,15 +20,15 @@ function s.cfilter(c)
 	return c:IsMonster() and not c:IsRace(RACE_DRAGON|RACE_HIGHDRAGON)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_GRAVE,0,1,nil)
-		and not Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,nil)
+	return Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_REST,0,1,nil)
+		and not Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeckAsCost(tp,3) end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():HasLevel() end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
 end
 function s.thfilter(c)
 	return c:IsRace(RACE_DRAGON) and c:IsAttribute(ATTRIBUTE_EARTH) and c:IsLevel(7) and c:IsAbleToHand()
@@ -40,9 +40,9 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsFaceup() and c:IsRelateToEffect(e) then
 		c:UpdateLevel(4,RESETS_STANDARD_PHASE_END,c)
-		if Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.thfilter),tp,LOCATION_GRAVE,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+		if Duel.IsExistingMatchingCard(aux.RestValleyFilter(s.thfilter),tp,LOCATION_REST,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-			local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thfilter),tp,LOCATION_GRAVE,0,1,1,nil)
+			local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.thfilter),tp,LOCATION_REST,0,1,1,nil)
 			if #g>0 then
 				Duel.BreakEffect()
 				Duel.SendtoHand(g,nil,REASON_EFFECT)

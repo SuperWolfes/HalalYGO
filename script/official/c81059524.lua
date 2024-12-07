@@ -30,7 +30,7 @@ function s.initial_effect(c)
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	local bc=e:GetHandler():GetBattleTarget()
-	return bc:IsMonster() and bc:IsLocation(LOCATION_GRAVE) and bc:IsReason(REASON_BATTLE)
+	return bc:IsMonster() and bc:IsLocation(LOCATION_REST) and bc:IsReason(REASON_BATTLE)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -44,7 +44,7 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	local tpe=re:GetActiveType()
-	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and (tpe==TYPE_SPELL or tpe==TYPE_QUICKPLAY+TYPE_SPELL) and e:GetHandler():GetFlagEffect(1)>0
+	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and (tpe==TYPE_ACTIONAL or tpe==TYPE_QUICKPLAY+TYPE_ACTIONAL) and e:GetHandler():GetFlagEffect(1)>0
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

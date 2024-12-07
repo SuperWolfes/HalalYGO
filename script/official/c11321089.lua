@@ -1,9 +1,9 @@
 --ガーディアン・キマイラ
---Guardian Chimera
+--Guardian Chilean
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	local eff=Fusion.AddProcMix(c,true,false,s.ffilter1,s.ffilter2,s.ffilter3)
 	if not c:IsStatus(STATUS_COPYING_EFFECT) then
 		eff[1]:SetValue(s.matfilter)
@@ -25,17 +25,17 @@ function s.initial_effect(c)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e1:SetCountLimit(1,id)
 	e1:SetLabelObject(e0)
-	e1:SetCondition(function(e,tp,eg,ep,ev,re,r,rp) return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION) and re and re:IsSpellEffect() end)
+	e1:SetCondition(function(e,tp,eg,ep,ev,re,r,rp) return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION) and re and re:IsActionalEffect() end)
 	e1:SetTarget(s.drdestg)
 	e1:SetOperation(s.drdesop)
 	c:RegisterEffect(e1)
-	--While "Polymerization" is in your GY, your opponent cannot target this card with card effects
+	--While "Polymerization" is in your RP, your opponent cannot target this card with card effects
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE+EFFECT_FLAG_IGNORE_IMMUNE)
 	e2:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
 	e2:SetRange(LOCATION_MZONE)
-	e2:SetCondition(function(e) return Duel.IsExistingMatchingCard(Card.IsCode,e:GetHandlerPlayer(),LOCATION_GRAVE,0,1,nil,CARD_POLYMERIZATION) end)
+	e2:SetCondition(function(e) return Duel.IsExistingMatchingCard(Card.IsCode,e:GetHandlerPlayer(),LOCATION_REST,0,1,nil,CARD_POLYMERIZATION) end)
 	e2:SetValue(aux.tgoval)
 	c:RegisterEffect(e2)
 end

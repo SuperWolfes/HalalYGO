@@ -37,7 +37,7 @@ function s.initial_effect(c)
 end
 s.listed_series={SET_YUBEL}
 function s.thdesfilter(c)
-	return c:IsRace(RACE_FIEND) and c:IsAttack(0) and c:IsDefense(0)
+	return c:IsRace(RACE_TAINTED) and c:IsAttack(0) and c:IsDefense(0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.thdesfilter,tp,LOCATION_DECK,0,nil)
@@ -57,15 +57,15 @@ function s.lvfilter(c,tp,lv)
 	return clv==lv+1 or clv==lv-1
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REMOVED|LOCATION_DECK|LOCATION_GRAVE,0,1,nil,tp,eg) end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REMOVED|LOCATION_DECK|LOCATION_GRAVE)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REMOVED|LOCATION_DECK|LOCATION_REST,0,1,nil,tp,eg) end
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REMOVED|LOCATION_DECK|LOCATION_REST)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local sc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thfilter),tp,LOCATION_REMOVED|LOCATION_DECK|LOCATION_GRAVE,0,1,1,nil,tp,eg):GetFirst()
+	local sc=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.thfilter),tp,LOCATION_REMOVED|LOCATION_DECK|LOCATION_REST,0,1,1,nil,tp,eg):GetFirst()
 	if not sc then return end
-	if sc:IsLocation(LOCATION_GRAVE|LOCATION_REMOVED) then Duel.HintSelection(sc,true) end
+	if sc:IsLocation(LOCATION_REST|LOCATION_REMOVED) then Duel.HintSelection(sc,true) end
 	if not (Duel.SendtoHand(sc,nil,REASON_EFFECT)>0 and sc:IsLocation(LOCATION_HAND)) then return end
 	Duel.ConfirmCards(1-tp,sc)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and sc:IsCanBeSpecialSummoned(e,0,tp,true,false)

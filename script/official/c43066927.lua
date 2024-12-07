@@ -1,5 +1,5 @@
 --Japanese name
---Mimighoul Fairy
+--Mimirahul Wanderer
 --scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.selfspop)
 	c:RegisterEffect(e2)
 end
-s.listed_series={SET_MIMIGHOUL}
+s.listed_series={SET_MIMIRAHUL}
 function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local c=e:GetHandler()
@@ -59,7 +59,7 @@ function s.selfsptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return (Duel.GetLocationCount(1-tp,LOCATION_MZONE,tp)>0
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEDOWN_DEFENSE,1-tp))
-		or (Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,SET_MIMIGHOUL),tp,LOCATION_MZONE,0,1,nil)
+		or (Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,SET_MIMIRAHUL),tp,LOCATION_MZONE,0,1,nil)
 			and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 			and c:IsCanBeSpecialSummoned(e,0,tp,false,false)) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,tp,0)
@@ -69,7 +69,7 @@ function s.selfspop(e,tp,eg,ep,ev,re,r,rp)
 	if not c:IsRelateToEffect(e) then return end
 	local b1=Duel.GetLocationCount(1-tp,LOCATION_MZONE,tp)>0
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEDOWN_DEFENSE,1-tp)
-	local b2=Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,SET_MIMIGHOUL),tp,LOCATION_MZONE,0,1,nil)
+	local b2=Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,SET_MIMIRAHUL),tp,LOCATION_MZONE,0,1,nil)
 		and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 	local op=nil

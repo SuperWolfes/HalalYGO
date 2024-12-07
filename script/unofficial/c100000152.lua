@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	c:AddSetcodesRule(id,false,0x601)
 	--dark synchro summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Synchro.AddDarkSynchroProcedure(c,Synchro.NonTuner(nil),nil,7)
 	--actlimit
 	local e2=Effect.CreateEffect(c)
@@ -41,13 +41,13 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:GetFirst():IsControler(1-tp)
 end
 function s.cfilter(c)
-	return c:IsMonster() and c:IsAbleToGraveAsCost()
+	return c:IsMonster() and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE+LOCATION_HAND,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_MZONE+LOCATION_HAND,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local tg=Duel.GetAttacker()

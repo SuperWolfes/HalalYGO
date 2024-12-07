@@ -2,7 +2,7 @@
 --Brotherhood of the Fire Fist - Horse Prince
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Synchro Summon procedure
 	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_FIRE),1,1,Synchro.NonTuner(nil),1,99)
 	--Special Summon 1 Level 3 FIRE monster from the Deck

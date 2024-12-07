@@ -1,10 +1,10 @@
 -- 魔導竜騎士－セブンスギアス
--- Sevensgias the Magical Dragon Knight
+-- Sevensgias the Mentoral Dragon Knight
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
-	Fusion.AddProcMix(c,true,true,CARD_SEVENS_ROAD_MAGICIAN,160302001)
+	c:EnableAwakeLimit()
+	Fusion.AddProcMix(c,true,true,CARD_SEVENS_ROAD_MENTOR,160302001)
 	--ATK increase
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -41,14 +41,14 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 -- atkup
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_REST,0,1,nil) end
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	--Requirement
 	if Duel.DiscardDeck(tp,1,REASON_COST)>0 and c:IsRelateToEffect(e) and c:IsFaceup() then
 		--Effect
-		local atk=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_GRAVE,0,nil):GetClassCount(Card.GetRace)
+		local atk=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_REST,0,nil):GetClassCount(Card.GetRace)
 		--Increase ATK
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)

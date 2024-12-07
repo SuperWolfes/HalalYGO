@@ -1,5 +1,5 @@
 --デュアルスパーク
---Gemini Spark
+--Dual Spark
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.listed_card_types={TYPE_GEMINI}
+s.listed_card_types={TYPE_DUAL}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(1)
 	return true
@@ -30,7 +30,7 @@ function s.spcheck(sg,tp,exg,dg)
 	return #dg-a>=1
 end
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsLevel(4) and c:IsType(TYPE_GEMINI)
+	return c:IsFaceup() and c:IsLevel(4) and c:IsType(TYPE_DUAL)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and chkc~=e:GetHandler() end

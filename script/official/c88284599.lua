@@ -1,5 +1,5 @@
 --粛声の竜賢聖サウラヴィス
---Sauravis, the Sagely Silenforcer Dragon
+--Sauravis, the Sagely Silenfcoreer Dragon
 --Ashaki
 local s,id=GetID()
 function s.initial_effect(c)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.selfsptg)
 	e1:SetOperation(s.selfspop)
 	c:RegisterEffect(e1)
-	--Special Summon 1 LIGHT Warrior or Dragon Ritual Monster from your hand or Deck
+	--Special Summon 1 LIGHT Warrior or Dragon Locked Monster from your hand or Deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TODECK)
@@ -30,19 +30,19 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.cfilter(c)
-	return c:IsSpell() and c:IsAbleToDeckAsCost()
+	return c:IsActional() and c:IsAbleToDeckAsCost()
 end
 function s.rescon(sg,e,tp,mg)
-	return sg:IsExists(Card.IsRitualSpell,1,nil)
+	return sg:IsExists(Card.IsLockedActional,1,nil)
 end
 function s.selfspcon(e,c)
 	if c==nil then return true end
 	local tp=e:GetHandlerPlayer()
-	local rg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_HAND|LOCATION_GRAVE,0,e:GetHandler())
+	local rg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_HAND|LOCATION_REST,0,e:GetHandler())
 	return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and aux.SelectUnselectGroup(rg,e,tp,2,2,s.rescon,0)
 end
 function s.selfsptg(e,tp,eg,ep,ev,re,r,rp,chk,c)
-	local rg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_HAND|LOCATION_GRAVE,0,e:GetHandler())
+	local rg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_HAND|LOCATION_REST,0,e:GetHandler())
 	local g=aux.SelectUnselectGroup(rg,e,tp,2,2,s.rescon,1,tp,HINTMSG_TODECK,nil,nil,true)
 	if #g>0 then
 		g:KeepAlive()
@@ -64,7 +64,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SendtoHand(c,nil,REASON_COST)
 end
 function s.spfilter(c,e,tp)
-	return c:IsRitualMonster() and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_WARRIOR|RACE_DRAGON)
+	return c:IsLockedMonster() and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_WARRIOR|RACE_DRAGON)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,true)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)

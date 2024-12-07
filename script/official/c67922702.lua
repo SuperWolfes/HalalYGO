@@ -1,8 +1,8 @@
 --幻獣機テザーウルフ
---Mecha Phantom Beast Tetherwolf
+--Mecha Illusion Beast Tetherwolf
 local s,id=GetID()
 function s.initial_effect(c)
-	--Gains the levels of all "Mecha Phantom Beast Token"
+	--Gains the levels of all "Mecha Illusion Beast Token"
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	local e3=e2:Clone()
 	e3:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
 	c:RegisterEffect(e3)
-	--Special Summon 1 "Mecha Phantom Beast Token"
+	--Special Summon 1 "Mecha Illusion Beast Token"
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,0))
 	e4:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOKEN)
@@ -45,9 +45,9 @@ function s.initial_effect(c)
 	e5:SetOperation(s.atkop)
 	c:RegisterEffect(e5)
 end
-s.listed_names={TOKEN_MECHA_PHANTOM_BEAST}
+s.listed_names={TOKEN_MECHA_ILLUSION_BEAST}
 function s.lvval(e,c)
-	return Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsCode,TOKEN_MECHA_PHANTOM_BEAST),c:GetControler(),LOCATION_MZONE,0,nil):GetSum(Card.GetLevel)
+	return Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsCode,TOKEN_MECHA_ILLUSION_BEAST),c:GetControler(),LOCATION_MZONE,0,nil):GetSum(Card.GetLevel)
 end
 function s.tknfilter(c)
 	return c:IsType(TYPE_TOKEN) or c:IsOriginalType(TYPE_TOKEN)
@@ -62,8 +62,8 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_MECHA_PHANTOM_BEAST,SET_MECHA_PHANTOM_BEAST,TYPES_TOKEN,0,0,3,RACE_MACHINE,ATTRIBUTE_WIND) then
-		local token=Duel.CreateToken(tp,TOKEN_MECHA_PHANTOM_BEAST_TETHERWOLF)
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_MECHA_ILLUSION_BEAST,SET_MECHA_ILLUSION_BEAST,TYPES_TOKEN,0,0,3,RACE_MACHINE,ATTRIBUTE_WIND) then
+		local token=Duel.CreateToken(tp,TOKEN_MECHA_ILLUSION_BEAST_TETHERWOLF)
 		Duel.SpecialSummon(token,0,tp,tp,false,false,POS_FACEUP)
 	end
 end

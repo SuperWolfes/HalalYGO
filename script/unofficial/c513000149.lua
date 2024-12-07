@@ -1,4 +1,4 @@
---Speed Spell - Deceased Synchron (Anime)
+--Speed Actional - Deceased Synchron (Anime)
 --scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -18,7 +18,7 @@ function s.con(e,tp,eg,ep,ev,re,r,rp)
 	return tc and tc:GetCounter(0x91)>4
 end
 function s.spfilter(c,tp)
-	local mg=Duel.GetMatchingGroup(Card.IsCanBeSynchroMaterial,tp,LOCATION_GRAVE,0,nil,c)
+	local mg=Duel.GetMatchingGroup(Card.IsCanBeSynchroMaterial,tp,LOCATION_REST,0,nil,c)
 	return c:IsSynchroSummonable(nil,mg) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0
 end
 function s.sctg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -31,7 +31,7 @@ function s.sctg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.scop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	local mg=Duel.GetMatchingGroup(Card.IsCanBeSynchroMaterial,tp,LOCATION_GRAVE,0,nil,tc)
+	local mg=Duel.GetMatchingGroup(Card.IsCanBeSynchroMaterial,tp,LOCATION_REST,0,nil,tc)
 	Synchro.Send=2
 	if not tc then return end
 	local e1=Effect.CreateEffect(e:GetHandler())

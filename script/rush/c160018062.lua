@@ -23,7 +23,7 @@ function s.cfilter(c)
 	return c:IsRace(RACE_AQUA) and c:IsAttack(100)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return eg:IsExists(s.filter,1,nil,tp) and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,5,nil)
+	return eg:IsExists(s.filter,1,nil,tp) and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,5,nil)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(nil,tp,0,LOCATION_ONFIELD,nil)

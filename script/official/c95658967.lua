@@ -1,5 +1,5 @@
 --祝福の教会－リチューアル・チャーチ
---Ritual Sanctuary
+--Locked Sanctuary
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.thtg)
 	e2:SetOperation(s.thop)
 	c:RegisterEffect(e2)
-	--Special Summon 1 Fairy from the GY
+	--Special Summon 1 Wanderer from the RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -32,15 +32,15 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.cfilter(c)
-	return c:IsSpell() and c:IsDiscardable()
+	return c:IsActional() and c:IsDiscardable()
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end
 	Duel.DiscardHand(tp,s.cfilter,1,1,REASON_COST+REASON_DISCARD)
 end
 function s.thfilter(c)
-	return ((c:IsMonster() and c:IsAttribute(ATTRIBUTE_LIGHT)) or c:IsSpell())
-		and c:IsType(TYPE_RITUAL) and c:IsAbleToHand()
+	return ((c:IsMonster() and c:IsAttribute(ATTRIBUTE_LIGHT)) or c:IsActional())
+		and c:IsType(TYPE_LOCKED) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -57,34 +57,34 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.spfilter(c,e,tp)
 	local lv=c:GetLevel()
-	return lv>0 and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_FAIRY) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
-		and Duel.IsExistingMatchingCard(s.cfilter2,tp,LOCATION_GRAVE,0,lv,nil)
+	return lv>0 and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_WANDERER) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+		and Duel.IsExistingMatchingCard(s.cfilter2,tp,LOCATION_REST,0,lv,nil)
 end
 function s.cfilter2(c)
-	return c:IsSpell() and c:IsAbleToDeckAsCost()
+	return c:IsActional() and c:IsAbleToDeckAsCost()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(100)
 	if chk==0 then return true end
 end
 function s.spfilter2(c,e,tp,lv)
-	return c:GetLevel()==lv and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_FAIRY) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:GetLevel()==lv and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_WANDERER) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.spfilter2(chkc,e,tp,e:GetLabel()) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.spfilter2(chkc,e,tp,e:GetLabel()) end
 	if chk==0 then
 		if e:GetLabel()~=100 then return false end
 		e:SetLabel(0)
 		return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-			and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp)
+			and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp)
 	end
 	e:SetLabel(0)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp)
 	local lv=g:GetFirst():GetLevel()
 	e:SetLabel(lv)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local tg=Duel.SelectMatchingCard(tp,s.cfilter2,tp,LOCATION_GRAVE,0,lv,lv,nil)
+	local tg=Duel.SelectMatchingCard(tp,s.cfilter2,tp,LOCATION_REST,0,lv,lv,nil)
 	Duel.SendtoDeck(tg,nil,SEQ_DECKSHUFFLE,REASON_COST)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 end

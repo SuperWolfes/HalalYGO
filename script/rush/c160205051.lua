@@ -21,12 +21,12 @@ function s.tdfilter(c)
 	return c:IsMonster() and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_GRAVE,0,3,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST,0,3,nil) end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_GRAVE,0,3,3,nil)
+	local g=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_REST,0,3,3,nil)
 	Duel.HintSelection(g)
 	if Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_COST)<1 then return end
 	--Effect

@@ -14,19 +14,19 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_SPELLCASTER) and c:IsAttribute(ATTRIBUTE_LIGHT)
+	return c:IsFaceup() and c:IsRace(RACE_MENTOR) and c:IsAttribute(ATTRIBUTE_LIGHT)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetAttacker():IsControler(1-tp) and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil)
 end
 function s.filter1(c)
-	return c:IsEquipSpell() and c:IsFaceup() and c:IsAbleToDeckOrExtraAsCost()
+	return c:IsEquipActional() and c:IsFaceup() and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.filter2(c)
-	return c:IsRace(RACE_SPELLCASTER) and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsAbleToDeckOrExtraAsCost()
+	return c:IsRace(RACE_MENTOR) and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.filter1,tp,LOCATION_ONFIELD,0,1,nil) or Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_GRAVE,0,4,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.filter1,tp,LOCATION_ONFIELD,0,1,nil) or Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_REST,0,4,nil) end
 end
 function s.desfilter(c)
 	return c:IsFaceup() and c:IsAttackPos() and c:IsAbleToHand()
@@ -37,8 +37,8 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.tdfilter(c)
 	if not c:IsAbleToDeckOrExtraAsCost() then return false end
-	if c:IsLocation(LOCATION_ONFIELD) then return c:IsFaceup() and c:IsEquipSpell() end
-	return c:IsRace(RACE_SPELLCASTER) and c:IsAttribute(ATTRIBUTE_LIGHT)
+	if c:IsLocation(LOCATION_ONFIELD) then return c:IsFaceup() and c:IsEquipActional() end
+	return c:IsRace(RACE_MENTOR) and c:IsAttribute(ATTRIBUTE_LIGHT)
 end
 function s.rescon(sg,e,tp,mg)
 	return (sg:FilterCount(s.filter1,nil)==1 and sg:FilterCount(s.filter2,nil)==0)
@@ -46,7 +46,7 @@ function s.rescon(sg,e,tp,mg)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	local g=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_ONFIELD|LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_ONFIELD|LOCATION_REST,0,nil)
 	local sg=aux.SelectUnselectGroup(g,e,tp,1,4,s.rescon,1,tp,HINTMSG_TODECK,s.rescon)
 	Duel.HintSelection(sg,true)
 	if Duel.SendtoDeck(sg,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)<1 then return end

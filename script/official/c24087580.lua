@@ -1,5 +1,5 @@
 -- アマゾネスの銀剣使い
--- Amazoness Silver Sword Master
+-- Amazonian Silver Sword Master
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetTarget(function(e,c) return c:IsSetCard(0x4) and c:HasLevel() end)
 	e1:SetValue(function(e,c) return c:GetLevel()*100 end)
 	c:RegisterEffect(e1)
-	-- Add 1 "Amazoness" Spell/Trap to the hand
+	-- Add 1 "Amazonian" Actional/Trap to the hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TOHAND)
@@ -42,7 +42,7 @@ function s.initial_effect(c)
 	e4:SetDescription(aux.Stringid(id,2))
 	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e4:SetCode(EVENT_SPSUMMON_SUCCESS)
-	e4:SetRange(LOCATION_GRAVE)
+	e4:SetRange(LOCATION_REST)
 	e4:SetCountLimit(1,{id,2})
 	e4:SetCondition(s.sppencon)
 	c:RegisterEffect(e4)
@@ -53,13 +53,13 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return bc and bc:IsFaceup() and bc:IsSetCard(0x4)
 end
 function s.thfilter(c)
-	return c:IsSetCard(0x4) and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsSetCard(0x4) and c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.thfilter(c) end
-	if chk==0 then return Duel.IsExistingTarget(s.thfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.thfilter(c) end
+	if chk==0 then return Duel.IsExistingTarget(s.thfilter,tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,0,0)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)

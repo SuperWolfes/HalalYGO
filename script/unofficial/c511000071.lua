@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	e3:SetCountLimit(1)
 	e3:SetCondition(s.setcon)
 	e3:SetTarget(s.settg)
-	e3:SetOperation(s.setop)
+	e3:SetOperation(s.vetop)
 	c:RegisterEffect(e3)
 	--Damage LP
 	local e4=Effect.CreateEffect(c)
@@ -48,13 +48,13 @@ function s.aclimit(e,re,tp)
 	return re:IsHasType(EFFECT_TYPE_ACTIVATE)
 end
 function s.filter(c)
-	return c:IsSpellTrap() and c:IsSSetable()
+	return c:IsActionalTrap() and c:IsSSetable()
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0 
 		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
@@ -73,8 +73,8 @@ function s.damcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=c:GetCardTarget()
 	g:AddCard(c)
 	local ct=#g
-	if chk==0 then return ct>=2 and g:FilterCount(Card.IsAbleToGraveAsCost,nil)==ct end
-	Duel.SendtoGrave(g,REASON_COST)
+	if chk==0 then return ct>=2 and g:FilterCount(Card.IsAbleToRestAsCost,nil)==ct end
+	Duel.SendtoRest(g,REASON_COST)
 	local dam=0
 	if ct==2 then dam=500
 	elseif ct==3 then dam=1500

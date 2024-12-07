@@ -1,7 +1,7 @@
 --サイバー・エルタニン
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--cannot special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	--destroy
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
-	e3:SetCategory(CATEGORY_TOGRAVE)
+	e3:SetCategory(CATEGORY_TOREST)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e3:SetRange(LOCATION_MZONE)
@@ -40,7 +40,7 @@ function s.spcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
 	local mg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_MZONE,0,nil)
-	local gg=not Duel.IsPlayerAffectedByEffect(tp,69832741) and Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_GRAVE,0,nil) 
+	local gg=not Duel.IsPlayerAffectedByEffect(tp,69832741) and Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST,0,nil) 
 		or Group.CreateGroup()
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	return (#mg>0 and (ft>0 or (mg:IsExists(s.mzfilter,1,nil) and ft>-1))) 
@@ -51,7 +51,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	if Duel.IsPlayerAffectedByEffect(tp,69832741) then
 		g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_MZONE,0,nil)
 	else
-		g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil)
+		g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_MZONE+LOCATION_REST,0,nil)
 	end
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 	local e1=Effect.CreateEffect(c)
@@ -67,9 +67,9 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,LOCATION_MZONE,e:GetHandler())
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,g,#g,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,g,#g,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,LOCATION_MZONE,e:GetHandler())
-	Duel.SendtoGrave(g,REASON_EFFECT)
+	Duel.SendtoRest(g,REASON_EFFECT)
 end

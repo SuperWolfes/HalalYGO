@@ -3,9 +3,9 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
-	--Must be special summoned with effect of "Bonding" spell/trap
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
+	--Must be special summoned with effect of "Bonding" actional/trap
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -38,7 +38,7 @@ s.listed_names={85066822}
 
 function s.splimit(e,se,sp,st)
 	local sc=se:GetHandler()
-	return sc and sc:IsType(TYPE_SPELL+TYPE_TRAP) and sc:IsSetCard(0x100)
+	return sc and sc:IsType(TYPE_ACTIONAL+TYPE_TRAP) and sc:IsSetCard(0x100)
 end
 function s.atkfilter(c)
 	return c:IsFaceup() and c:IsType(TYPE_EFFECT)
@@ -79,11 +79,11 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if e:GetHandler():GetSequence()<5 then ft=ft+1 end
 	if chk==0 then return ft>1 and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND+LOCATION_DECK,0,2,nil,e,tp)
-		and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) end
+		and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,LOCATION_HAND+LOCATION_DECK)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.GetLocationCount(tp,LOCATION_MZONE)<2 or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
+	if Duel.GetLocationCount(tp,LOCATION_MZONE)<2 or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_HAND+LOCATION_DECK,0,2,2,nil,e,tp)
 	if #g==2 then

@@ -23,11 +23,11 @@ function s.cfilter(c)
 	return c:IsMonster() and c:IsDefense(0) and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,5,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,5,nil) end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_GRAVE,0,5,5,nil)
+	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_REST,0,5,5,nil)
 	if #g==0 then return end
 	Duel.HintSelection(g,true)
 	Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_COST)

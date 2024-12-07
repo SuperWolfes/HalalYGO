@@ -20,21 +20,21 @@ function s.thfilter(c)
 	return c:IsMonster() and c:IsType(TYPE_NORMAL) and c:IsAbleToHand()
 end
 function s.thcostrescon(sg,e,tp,mg)
-	return sg:GetClassCount(Card.GetRace)==#sg and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,sg)
+	return sg:GetClassCount(Card.GetRace)==#sg and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,sg)
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
-		local cg=Duel.GetMatchingGroup(s.thcostfilter,tp,LOCATION_GRAVE,0,nil)
+		local cg=Duel.GetMatchingGroup(s.thcostfilter,tp,LOCATION_REST,0,nil)
 		return aux.SelectUnselectGroup(cg,e,tp,3,3,s.thcostrescon,0)
 	end
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp,chk)
 	-- Requirement
-	local g=Duel.GetMatchingGroup(s.thcostfilter,tp,LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.thcostfilter,tp,LOCATION_REST,0,nil)
 	local cg=aux.SelectUnselectGroup(g,e,tp,3,3,s.thcostrescon,1,tp,HINTMSG_TODECK)
 	local ct=0
 	if Duel.SelectOption(tp,aux.Stringid(id,0),aux.Stringid(id,1))==1 then
@@ -47,7 +47,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp,chk)
 	if ct~=3 then return end
 	-- Effect
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local hg=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local hg=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
 	if #hg>0 and Duel.SendtoHand(hg,nil,REASON_EFFECT)>0 
 		and Duel.IsExistingMatchingCard(aux.FilterMaximumSideFunctionEx(Card.IsFaceup),tp,0,LOCATION_MZONE,1,nil) 
 		and Duel.SelectYesNo(tp,aux.Stringid(id,3)) then

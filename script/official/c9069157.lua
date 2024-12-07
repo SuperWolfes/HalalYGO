@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,2))
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1)
 	e2:SetTarget(s.rctg)
 	e2:SetOperation(s.rcop)
@@ -28,7 +28,7 @@ s.listed_series={SET_ROID}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsDiscardable() end
-	Duel.SendtoGrave(c,REASON_COST+REASON_DISCARD)
+	Duel.SendtoRest(c,REASON_COST+REASON_DISCARD)
 end
 function s.thfilter(c)
 	return c:IsSetCard(SET_ROID) and c:IsAttributeExcept(ATTRIBUTE_WIND) and c:IsAbleToHand()
@@ -98,7 +98,7 @@ function s.limop(e,tp,eg,ep,ev,re,r,rp)
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		e1:SetCode(EVENT_CHAINING)
-		e1:SetOperation(s.resetop)
+		e1:SetOperation(s.revetop)
 		Duel.RegisterEffect(e1,tp)
 		local e2=e1:Clone()
 		e2:SetCode(EVENT_BREAK_EFFECT)
@@ -106,7 +106,7 @@ function s.limop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.RegisterEffect(e2,tp)
 	end
 end
-function s.resetop(e,tp,eg,ep,ev,re,r,rp)
+function s.revetop(e,tp,eg,ep,ev,re,r,rp)
 	e:GetHandler():ResetFlagEffect(id)
 	e:Reset()
 end
@@ -122,8 +122,8 @@ end
 function s.rctg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return not c:IsRace(RACE_DRAGON) end
-	--Operation info needed to handle the interaction with "Necrovalley"
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,c,1,tp,LOCATION_GRAVE)
+	--Operation info needed to handle the interaction with "Restvalley"
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,c,1,tp,LOCATION_REST)
 end
 function s.rcop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

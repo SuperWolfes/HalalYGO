@@ -1,9 +1,9 @@
 --ソウル・レヴィ
---Soul Levy
+--Miss Levy
 --scripted by Logical Nonsense
 local s,id=GetID()
 function s.initial_effect(c)
-	--You can only control 1 "Soul Levy"
+	--You can only control 1 "Miss Levy"
 	c:SetUniqueOnField(1,0,id)
 	--Activate
 	local e1=Effect.CreateEffect(c)
@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetHintTiming(0,TIMING_STANDBY_PHASE)
 	c:RegisterEffect(e1)
-	--Send the top 3 cards of your opponent's Deck to the GY
+	--Send the top 3 cards of your opponent's Deck to the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
@@ -26,7 +26,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.IsChainSolving() then
 		s.mill3(e,tp,eg,ep,ev,re,r,rp)
 	else
-		--Send the top 3 cards of your opponent's Deck to the GY at the end of the Chain Link
+		--Send the top 3 cards of your opponent's Deck to the RP at the end of the Chain Link
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		e1:SetCode(EVENT_CHAIN_SOLVED)

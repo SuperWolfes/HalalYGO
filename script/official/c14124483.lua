@@ -36,7 +36,7 @@ s.listed_series={SET_HERO}
 function s.heroatkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsDiscardable() end
-	Duel.SendtoGrave(c,REASON_COST|REASON_DISCARD)
+	Duel.SendtoRest(c,REASON_COST|REASON_DISCARD)
 end
 function s.heroatktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsSetCard(SET_HERO) and chkc:IsFaceup() end
@@ -65,7 +65,7 @@ function s.selfatkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 	local sc=Duel.SelectMatchingCard(tp,s.selfatkcostfilter,tp,LOCATION_HAND,0,1,1,nil):GetFirst()
 	e:SetLabel(sc:GetAttack())
-	Duel.SendtoGrave(sc,REASON_COST|REASON_DISCARD)
+	Duel.SendtoRest(sc,REASON_COST|REASON_DISCARD)
 end
 function s.selfatkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

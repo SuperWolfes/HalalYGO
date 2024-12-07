@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e1:SetCode(EVENT_RECOVER)
 	e1:SetRange(LOCATION_PZONE)
-	e1:SetCondition(function(e,tp,eg,ep,ev,re,r,rp) return ep==tp and Duel.IsExistingMatchingCard(Card.IsOriginalRace,tp,LOCATION_PZONE,0,1,e:GetHandler(),RACE_FIEND) end)
+	e1:SetCondition(function(e,tp,eg,ep,ev,re,r,rp) return ep==tp and Duel.IsExistingMatchingCard(Card.IsOriginalRace,tp,LOCATION_PZONE,0,1,e:GetHandler(),RACE_TAINTED) end)
 	e1:SetOperation(s.ctop)
 	c:RegisterEffect(e1)
 	--Link Summon 1 "Vaalmonica" monster
@@ -37,7 +37,7 @@ function s.initial_effect(c)
 	e3:SetTarget(s.pztg)
 	e3:SetOperation(s.pzop)
 	c:RegisterEffect(e3)
-	--Apply the LP gain effect of 1 "Vaalmonica" Normal Spell/Trap
+	--Apply the LP gain effect of 1 "Vaalmonica" Normal Actional/Trap
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,2))
 	e4:SetType(EFFECT_TYPE_IGNITION)
@@ -112,7 +112,7 @@ function s.pzcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST|REASON_DISCARD,c)
 end
 function s.pzfilter(c)
-	return c:IsCode(30432463) and not c:IsForbidden()
+	return c:IsCode(30432463) and not c:IsUnliked()
 end
 function s.pztg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckLocation(tp,LOCATION_PZONE,0) and Duel.CheckLocation(tp,LOCATION_PZONE,1)
@@ -132,17 +132,17 @@ function s.cpcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	return true
 end
 function s.cpfilter(c)
-	return c:IsSetCard(SET_VAALMONICA) and (c:IsNormalSpell() or c:IsNormalTrap()) and c:IsAbleToRemoveAsCost()
+	return c:IsSetCard(SET_VAALMONICA) and (c:IsNormalActional() or c:IsNormalTrap()) and c:IsAbleToRemoveAsCost()
 		-- and c:CheckActivateEffect(false,true,false)
 end
 function s.cptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		if e:GetLabel()==0 then return false end
 		e:SetLabel(0)
-		return Duel.IsExistingMatchingCard(s.cpfilter,tp,LOCATION_GRAVE,0,1,nil)
+		return Duel.IsExistingMatchingCard(s.cpfilter,tp,LOCATION_REST,0,1,nil)
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local tc=Duel.SelectMatchingCard(tp,s.cpfilter,tp,LOCATION_GRAVE,0,1,1,nil):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,s.cpfilter,tp,LOCATION_REST,0,1,1,nil):GetFirst()
 	Duel.Remove(tc,POS_FACEUP,REASON_COST)
 	e:SetLabelObject(tc)
 end
@@ -151,6 +151,6 @@ function s.cpop(e,tp,eg,ep,ev,re,r,rp)
 	if not tc then return end
 	local eff=tc:GetActivateEffect()
 	local op=eff:GetOperation()
-	--Additional parameter checked in the script of "Vaalmonica" Normal Spells/Traps to correctly apply the LP gain effect
+	--Additional parameter checked in the script of "Vaalmonica" Normal Actionals/Traps to correctly apply the LP gain effect
 	if op then op(e,tp,eg,ep,ev,re,r,rp,1) end
 end

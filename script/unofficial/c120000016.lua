@@ -1,5 +1,5 @@
 --邪龍復活の儀式
---Dragon Revival Ritual
+--Dragon Awakal Locked
 --updated by ClaireStanfield
 local s,id=GetID()
 function s.initial_effect(c)
@@ -31,7 +31,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetCondition(s.spcon)
 	e1:SetOperation(s.spop)
 	e1:SetReset(RESET_PHASE+PHASE_END+RESET_SELF_TURN,5)
-	e1:SetValue(SUMMON_TYPE_RITUAL)
+	e1:SetValue(SUMMON_TYPE_LOCKED)
 	c:RegisterEffect(e1)
 	local g=Duel.GetMatchingGroup(Card.IsCode,tp,0xff,0,nil,99267150)
 	local tc=g:GetFirst()
@@ -45,13 +45,13 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetCondition(s.spcon2)
 		e2:SetOperation(s.spop2)
 		e2:SetReset(RESET_PHASE+PHASE_END+RESET_SELF_TURN,5)
-		e2:SetValue(SUMMON_TYPE_RITUAL)
+		e2:SetValue(SUMMON_TYPE_LOCKED)
 		tc:RegisterEffect(e2)
 		tc=g:GetNext()
 	end
 end
 function s.filter(c,e,tp)
-	return c:IsCode(99267150) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,false,true)
+	return c:IsCode(99267150) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_LOCKED,tp,false,true)
 end
 function s.spcon(e,c,og)
 	if c==nil then return true end
@@ -64,7 +64,7 @@ function s.spcon(e,c,og)
 		if (label&i)==i then spchk=spchk+1 end
 		i=i*2
 	end
-	if not Duel.GetRitualMaterial(tp):IsExists(Card.IsAttribute,1,nil,label) then return false end
+	if not Duel.GetLockedMaterial(tp):IsExists(Card.IsAttribute,1,nil,label) then return false end
 	return spchk>1 or Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND,0,1,nil,e,tp)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c,og)
@@ -73,7 +73,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,c,og)
 	local g=e:GetLabelObject()
 	if label<=0 then return false end
 	local attchk=0
-	local mg=Duel.GetRitualMaterial(tp)
+	local mg=Duel.GetLockedMaterial(tp)
 	local i=0x1
 	local spchk=0
 	while i<0x40 do
@@ -89,7 +89,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,c,og)
 		local mat=mg:FilterSelect(tp,Card.IsAttribute,1,1,nil,att)
 		g:Merge(mat)
 		mg:Sub(mat)
-		Duel.ReleaseRitualMaterial(mat)
+		Duel.ReleaseLockedMaterial(mat)
 		label=label-att
 		e:SetLabel(label)
 		attchk=attchk-att
@@ -116,7 +116,7 @@ function s.spcon2(e,c,og)
 		if (label&i)==i then spchk=spchk+1 end
 		i=i*2
 	end
-	if not Duel.GetRitualMaterial(tp):IsExists(Card.IsAttribute,1,nil,label) then return false end
+	if not Duel.GetLockedMaterial(tp):IsExists(Card.IsAttribute,1,nil,label) then return false end
 	return spchk>1 or Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND,0,1,nil,e,tp)
 end
 function s.spop2(e,tp,eg,ep,ev,re,r,rp,c,og)
@@ -125,7 +125,7 @@ function s.spop2(e,tp,eg,ep,ev,re,r,rp,c,og)
 	local g=e:GetLabelObject():GetLabelObject()
 	if label<=0 then return false end
 	local attchk=0
-	local mg=Duel.GetRitualMaterial(tp)
+	local mg=Duel.GetLockedMaterial(tp)
 	local i=0x1
 	local spchk=0
 	while i<0x40 do
@@ -141,7 +141,7 @@ function s.spop2(e,tp,eg,ep,ev,re,r,rp,c,og)
 		local mat=mg:FilterSelect(tp,Card.IsAttribute,1,1,nil,att)
 		g:Merge(mat)
 		mg:Sub(mat)
-		Duel.ReleaseRitualMaterial(mat)
+		Duel.ReleaseLockedMaterial(mat)
 		label=label-att
 		e:GetLabelObject():SetLabel(label)
 		attchk=attchk-att

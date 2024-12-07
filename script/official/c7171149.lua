@@ -1,5 +1,5 @@
 --トゥーン・アンティーク・ギアゴーレム
---Toon Ancient Gear Golem
+--Toon Ancient Gear Gopal
 local s,id=GetID()
 function s.initial_effect(c)
 	--Cannot attack

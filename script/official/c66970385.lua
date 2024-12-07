@@ -20,7 +20,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.filter(c,e,tp)
 	return c:IsSetCard(0x107a) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
-		and Duel.IsExistingTarget(s.eqfilter,tp,LOCATION_GRAVE,0,1,nil,tp,c)
+		and Duel.IsExistingTarget(s.eqfilter,tp,LOCATION_REST,0,1,nil,tp,c)
 end
 function s.eqfilter(c,tp,ec)
 	return c:IsSetCard(0x207a) and c:CheckUniqueOnField(tp) and c:CheckEquipTarget(ec)
@@ -28,14 +28,14 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
+		and Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g1=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+	local g1=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil,e,tp)
 	e:SetLabelObject(g1:GetFirst())
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-	local g2=Duel.SelectTarget(tp,s.eqfilter,tp,LOCATION_GRAVE,0,1,1,nil,tp,g1:GetFirst())
+	local g2=Duel.SelectTarget(tp,s.eqfilter,tp,LOCATION_REST,0,1,1,nil,tp,g1:GetFirst())
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g1,1,0,0)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g2,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g2,1,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetLabelObject()

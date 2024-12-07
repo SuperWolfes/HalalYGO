@@ -1,5 +1,5 @@
 --ロードブリティッシュ
---Lord British Space Fighter
+--Watcher British Space Fighter
 local s,id=GetID()
 function s.initial_effect(c)
 	local e1=Effect.CreateEffect(c)

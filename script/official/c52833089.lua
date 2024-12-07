@@ -14,7 +14,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x33}
 function s.cfilter(c,tp)
-	return c:IsSetCard(0x33) and c:IsLocation(LOCATION_GRAVE)
+	return c:IsSetCard(0x33) and c:IsLocation(LOCATION_REST)
 		and c:IsPreviousControler(tp) and (c:GetReason()&REASON_BATTLE)~=0
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)

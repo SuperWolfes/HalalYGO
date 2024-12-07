@@ -3,7 +3,7 @@
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,CARD_BLUETOOTH_B_DRAGON,CARD_TAMABOT)
 	-- Gain 500 ATK
 	local e1=Effect.CreateEffect(c)
@@ -18,19 +18,19 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_BLUETOOTH_B_DRAGON,CARD_TAMABOT}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local ct=Duel.GetMatchingGroupCount(Card.IsCode,e:GetHandlerPlayer(),LOCATION_GRAVE,LOCATION_GRAVE,nil,CARD_TAMABOT)
+	local ct=Duel.GetMatchingGroupCount(Card.IsCode,e:GetHandlerPlayer(),LOCATION_REST,LOCATION_REST,nil,CARD_TAMABOT)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeckAsCost(tp,ct) end
 end
 function s.desfilter(c)
 	return c:IsAttackAbove(1500) and c:IsFaceup()
 end
 function s.filter(c)
-	return c:IsMonster() and c:IsAttackBelow(1500) and c:IsLocation(LOCATION_GRAVE)
+	return c:IsMonster() and c:IsAttackBelow(1500) and c:IsLocation(LOCATION_REST)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	-- Requirement
 	local c=e:GetHandler()
-	local ct=Duel.GetMatchingGroupCount(Card.IsCode,c:GetControler(),LOCATION_GRAVE,LOCATION_GRAVE,nil,CARD_TAMABOT)
+	local ct=Duel.GetMatchingGroupCount(Card.IsCode,c:GetControler(),LOCATION_REST,LOCATION_REST,nil,CARD_TAMABOT)
 	if Duel.DiscardDeck(tp,ct,REASON_COST)==0 then return end
 	local og=Duel.GetOperatedGroup()
 	--Effect

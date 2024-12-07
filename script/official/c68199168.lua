@@ -4,10 +4,10 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	c:SetUniqueOnField(1,0,id)
-	--Make the opponent send 1 monster to the GY
+	--Make the opponent send 1 monster to the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_TOGRAVE)
+	e1:SetCategory(CATEGORY_TOREST)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DELAY)
 	e1:SetCode(EVENT_TO_HAND)
@@ -41,20 +41,20 @@ function s.scon0(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.stg0(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroupCount(1-tp,LOCATION_MZONE|LOCATION_HAND,0)>0 end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,0,LOCATION_MZONE|LOCATION_HAND)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,0,LOCATION_MZONE|LOCATION_HAND)
 end
 function s.sop0(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(1-tp,Card.IsMonster,1-tp,LOCATION_HAND|LOCATION_ONFIELD,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_RULE,PLAYER_NONE,1-tp)
+		Duel.SendtoRest(g,REASON_RULE,PLAYER_NONE,1-tp)
 	end
 end
 function s.discon(e,tp,eg,ep,ev,re,r,rp)
 	return not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED) and Duel.IsChainNegatable(ev)
 end
 function s.disfilter(c,tp)
-	return (c:IsRace(RACE_SPELLCASTER) or (c:IsSetCard(SET_GENERAIDER) and c:IsMonster())) and (c:IsControler(tp) or c:IsFaceup())
+	return (c:IsRace(RACE_MENTOR) or (c:IsSetCard(SET_GENERAIDER) and c:IsMonster())) and (c:IsControler(tp) or c:IsFaceup())
 end
 function s.discost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckReleaseGroupCost(tp,s.disfilter,2,false,nil,nil,tp) end

@@ -1,5 +1,5 @@
 --魅惑の堕天使
---Darklord Enchantment
+--Darkwarden Garment
 local s,id=GetID()
 function s.initial_effect(c)
 	--Take control of 1 monster your opponent controls
@@ -14,17 +14,17 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.listed_series={SET_DARKLORD}
+s.listed_series={SET_DARKWARDEN}
 function s.costfilter(c,tp)
-	return c:IsSetCard(SET_DARKLORD) and c:IsMonster() and (c:IsLocation(LOCATION_HAND) or c:IsFaceup())
-		and c:IsAbleToGraveAsCost() and Duel.GetMZoneCount(tp,c,tp,LOCATION_REASON_CONTROL)>0
+	return c:IsSetCard(SET_DARKWARDEN) and c:IsMonster() and (c:IsLocation(LOCATION_HAND) or c:IsFaceup())
+		and c:IsAbleToRestAsCost() and Duel.GetMZoneCount(tp,c,tp,LOCATION_REASON_CONTROL)>0
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(100)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND|LOCATION_MZONE,0,1,nil,tp) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND|LOCATION_MZONE,0,1,1,nil,tp)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.filter(c,ignzn)
 	return c:IsControlerCanBeChanged(ignzn) and c:IsFaceup()

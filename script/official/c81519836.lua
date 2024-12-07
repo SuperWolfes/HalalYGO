@@ -1,5 +1,5 @@
 -- 苗と霞の春化精
--- Vernalizer Fairy of Seedlings and Haze
+-- Vernalizer Wanderer of Seedlings and Haze
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -12,13 +12,13 @@ function s.initial_effect(c)
 	e1:SetTarget(function(_,c) return not c:IsSetCard(0x183) end)
 	e1:SetValue(-600)
 	c:RegisterEffect(e1)
-	-- Search 1 EARTH Fairy monster
+	-- Search 1 EARTH Wanderer monster
 	c:RegisterEffect(Effect.CreateVernalizerSPEffect(c,id,0,CATEGORY_TOHAND+CATEGORY_SEARCH,s.thtg,s.thop))
 end
 s.listed_names={id}
 s.listed_series={0x183}
 function s.thfilter(c)
-	return c:IsAttribute(ATTRIBUTE_EARTH) and c:IsRace(RACE_FAIRY) and not c:IsCode(id) and c:IsAbleToHand()
+	return c:IsAttribute(ATTRIBUTE_EARTH) and c:IsRace(RACE_WANDERER) and not c:IsCode(id) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

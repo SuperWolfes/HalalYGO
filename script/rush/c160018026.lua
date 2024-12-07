@@ -3,7 +3,7 @@
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	--Add to the hand 1 "Berry Fresh Happiness" from the GY
+	--Add to the hand 1 "Berry Fresh Happiness" from the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND)
@@ -23,18 +23,18 @@ function s.thfilter(c)
 	return c:IsCode(160010034,160018022) and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--effect
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thfilter),tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.thfilter),tp,LOCATION_REST,0,1,1,nil)
 	if #g>0 then
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)
 		if g:GetFirst():IsCode(160018022) then
-			Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
+			Duel.SendtoRest(e:GetHandler(),REASON_EFFECT)
 		end
 	end
 end

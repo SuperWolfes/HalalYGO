@@ -25,7 +25,7 @@ function s.attrescon(sg)
 end
 function s.lvtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	local rmg=Duel.GetMatchingGroup(s.rmfilter,tp,LOCATION_MZONE|LOCATION_HAND|LOCATION_GRAVE,0,c)
+	local rmg=Duel.GetMatchingGroup(s.rmfilter,tp,LOCATION_MZONE|LOCATION_HAND|LOCATION_REST,0,c)
 	local tgg=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_REMOVED,0,nil,e)
 	if chk==0 then return c:HasLevel() and (#rmg>0 or #tgg>0) end
 	e:SetCategory(0)
@@ -39,11 +39,11 @@ function s.lvtg(e,tp,eg,ep,ev,re,r,rp,chk)
 		local ct=Duel.GetOperatedGroup():FilterCount(Card.IsLocation,nil,LOCATION_REMOVED)
 		e:SetLabel(op,ct)
 	elseif op==2 then
-		e:SetCategory(CATEGORY_TOGRAVE)
+		e:SetCategory(CATEGORY_TOREST)
 		e:SetProperty(EFFECT_FLAG_CARD_TARGET)
-		local tg=aux.SelectUnselectGroup(tgg,e,tp,1,2,s.attrescon,1,tp,HINTMSG_TOGRAVE)
+		local tg=aux.SelectUnselectGroup(tgg,e,tp,1,2,s.attrescon,1,tp,HINTMSG_TOREST)
 		Duel.SetTargetCard(tg)
-		Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,tg,#tg,0,0)
+		Duel.SetOperationInfo(0,CATEGORY_TOREST,tg,#tg,0,0)
 		e:SetLabel(2)
 	end
 end
@@ -52,7 +52,7 @@ function s.lvop(e,tp,eg,ep,ev,re,r,rp)
 	if op==2 then
 		local tg=Duel.GetTargetCards(e)
 		if #tg>0 then
-			ct=Duel.SendtoGrave(tg,REASON_EFFECT+REASON_RETURN)
+			ct=Duel.SendtoRest(tg,REASON_EFFECT+REASON_RETURN)
 		end
 	elseif op~=1 then return end
 	if not ct or ct==0 then return end

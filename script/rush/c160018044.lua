@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion Material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,160017015,160017013)
 	--Excavate the top 3 cards
 	local e1=Effect.CreateEffect(c)

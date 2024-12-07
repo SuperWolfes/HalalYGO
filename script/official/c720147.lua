@@ -19,7 +19,7 @@ function s.check(sg,tp,exg)
 end
 function s.filter(c,sg,tp)
 	return c:IsFaceup() and c:IsType(TYPE_XYZ)
-		and Duel.IsExistingMatchingCard(s.matfilter,tp,LOCATION_HAND+LOCATION_MZONE+LOCATION_GRAVE,0,#sg,sg,c)
+		and Duel.IsExistingMatchingCard(s.matfilter,tp,LOCATION_HAND+LOCATION_MZONE+LOCATION_REST,0,#sg,sg,c)
 end
 function s.matfilter(c,tc)
 	return c:IsSetCard(0x134) and c:IsMonster() and not c:IsType(TYPE_TOKEN)
@@ -46,9 +46,9 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsFaceup() and tc:IsRelateToEffect(e) and rg and #rg>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,0))
-		local g=Duel.SelectMatchingCard(tp,s.matfilter,tp,LOCATION_HAND+LOCATION_MZONE+LOCATION_GRAVE,0,#rg,#rg,rg,tc)
+		local g=Duel.SelectMatchingCard(tp,s.matfilter,tp,LOCATION_HAND+LOCATION_MZONE+LOCATION_REST,0,#rg,#rg,rg,tc)
 		if #g>0 then
-			g:ForEach(Card.CancelToGrave)
+			g:ForEach(Card.CancelToRest)
 			Duel.Overlay(tc,g,true)
 		end
 	end

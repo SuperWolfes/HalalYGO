@@ -16,13 +16,13 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.filter(c)
-	return c:IsSpell() and c:IsAbleToRemove()
+	return c:IsActional() and c:IsAbleToRemove()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(1-tp) and s.filter(chkc) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(1-tp) and s.filter(chkc) end
 	if chk==0 then return true end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectTarget(tp,s.filter,tp,0,LOCATION_GRAVE,1,5,nil)
+	local g=Duel.SelectTarget(tp,s.filter,tp,0,LOCATION_REST,1,5,nil)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,#g,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)

@@ -79,11 +79,11 @@ function s.tdcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	local g=Duel.GetMatchingGroup(Card.IsAbleToDeck,tp,0,LOCATION_GRAVE,nil)
+	local g=Duel.GetMatchingGroup(Card.IsAbleToDeck,tp,0,LOCATION_REST,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,#g,0,0)
 end
 function s.tdop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(Card.IsAbleToDeck,tp,0,LOCATION_GRAVE,nil)
+	local g=Duel.GetMatchingGroup(Card.IsAbleToDeck,tp,0,LOCATION_REST,nil)
 	if #g>0 then
 		Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
 	end

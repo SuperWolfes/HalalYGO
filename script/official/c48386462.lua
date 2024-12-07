@@ -28,7 +28,7 @@ function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 		Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
 	elseif op==2 then
 		e:SetCategory(CATEGORY_HANDES+CATEGORY_DRAW)
-		Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_HAND)
+		Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_HAND)
 		Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
 	elseif op==3 then
 		e:SetCategory(CATEGORY_DRAW)

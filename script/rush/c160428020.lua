@@ -24,5 +24,5 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.target(e,c)
-	return c:IsRace(RACE_SPELLCASTER) and c:IsAttribute(ATTRIBUTE_DARK) and c:IsLevelAbove(5)
+	return c:IsRace(RACE_MENTOR) and c:IsAttribute(ATTRIBUTE_DARK) and c:IsLevelAbove(5)
 end

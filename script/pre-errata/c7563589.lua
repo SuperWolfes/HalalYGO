@@ -1,5 +1,5 @@
 --Ｅｍヒグルミ (Pre-Errata)
---Performage Plushfire (Pre-Errata)
+--Performanced Plushfire (Pre-Errata)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Pendulum Summon procedure
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.selfsptg)
 	e1:SetOperation(s.selfspop)
 	c:RegisterEffect(e1)
-	--Special Summon 1 "Performage" monster from your hand or Deck, except "Performage Plushfire"
+	--Special Summon 1 "Performanced" monster from your hand or Deck, except "Performanced Plushfire"
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -29,10 +29,10 @@ function s.initial_effect(c)
 	e2:SetOperation(s.hdspop)
 	c:RegisterEffect(e2)
 end
-s.listed_series={SET_PERFORMAGE}
+s.listed_series={SET_PERFORMANCED}
 s.listed_names={id}
 function s.selfspconfilter(c,tp)
-	return c:IsPreviousSetCard(SET_PERFORMAGE) and c:IsPreviousLocation(LOCATION_MZONE) and c:IsPreviousPosition(POS_FACEUP) and c:IsPreviousControler(tp)
+	return c:IsPreviousSetCard(SET_PERFORMANCED) and c:IsPreviousLocation(LOCATION_MZONE) and c:IsPreviousPosition(POS_FACEUP) and c:IsPreviousControler(tp)
 		and c:IsReason(REASON_BATTLE|REASON_EFFECT)
 end
 function s.selfspcon(e,tp,eg,ep,ev,re,r,rp)
@@ -53,7 +53,7 @@ function s.selfspop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.hdspfilter(c,e,tp)
-	return c:IsSetCard(SET_PERFORMAGE) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and not c:IsCode(id)
+	return c:IsSetCard(SET_PERFORMANCED) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and not c:IsCode(id)
 end
 function s.hdsptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

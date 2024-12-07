@@ -19,16 +19,16 @@ function s.cfilter(c)
 	return c:IsMonster() and not c:IsRace(RACE_CYBERSE)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_GRAVE,0,1,nil)
-		and not Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,nil)
+	return Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_REST,0,1,nil)
+		and not Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeck(tp,3) end
 	Duel.SetOperationInfo(0,CATEGORY_DECKDES,nil,0,tp,3)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
 end
 function s.thfilter(c)
-	return c:IsLocation(LOCATION_GRAVE) and c:IsRace(RACE_CYBERSE) and c:IsDefense(0) and c:IsAbleToHand()
+	return c:IsLocation(LOCATION_REST) and c:IsRace(RACE_CYBERSE) and c:IsDefense(0) and c:IsAbleToHand()
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Effect

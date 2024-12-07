@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	local ea=Effect.CreateEffect(c)
 	ea:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	ea:SetType(EFFECT_TYPE_SINGLE)
-	ea:SetCode(EFFECT_CANNOT_TO_GRAVE)
+	ea:SetCode(EFFECT_CANNOT_TO_REST)
 	c:RegisterEffect(ea)
 	local eb=ea:Clone()
 	eb:SetCode(EFFECT_CANNOT_TO_HAND)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	local ed=ea:Clone()
 	ed:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
 	c:RegisterEffect(ed)
-	--clean forbidden love
+	--clean unliked love
 	local e0=Effect.CreateEffect(c) --turn end
 	e0:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE)
 	e0:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
@@ -67,9 +67,9 @@ function s.initial_effect(c)
 	e3:SetCountLimit(1)
 	e3:SetCondition(s.normalsetcondition)
 	e3:SetTarget(s.normalsettarget)
-	e3:SetOperation(s.normalsetoperation)
+	e3:SetOperation(s.normalvetoperation)
 	c:RegisterEffect(e3)
-	--declare a spell activation
+	--declare a actional activation
 	local e4=Effect.CreateEffect(c)
 	e4:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_DISABLE_CHAIN)
 	e4:SetDescription(1051)
@@ -77,8 +77,8 @@ function s.initial_effect(c)
 	e4:SetCode(EVENT_FREE_CHAIN)
 	e4:SetRange(LOCATION_REMOVED)
 	e4:SetCountLimit(1)
-	e4:SetTarget(s.spelltarget)
-	e4:SetOperation(s.spelloperation)
+	e4:SetTarget(s.actionstoneget)
+	e4:SetOperation(s.actionaloperation)
 	c:RegisterEffect(e4)
 	--declare a trap activation
 	local e5=Effect.CreateEffect(c)
@@ -92,14 +92,14 @@ function s.initial_effect(c)
 	e5:SetOperation(s.trapoperation)
 	c:RegisterEffect(e5)
 end
-forbidden={}
-forbidden[0]={}
-forbidden[1]={}
+unliked={}
+unliked[0]={}
+unliked[1]={}
 function s.cflcon(e,tp,eg,ep,ev,re,r,rp)
 	return re and re:GetHandler()~=e:GetHandler()
 end
 function s.cfl(e,tp,eg,ep,ev,re,r,rp)
-	forbidden[tp]={}
+	unliked[tp]={}
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return re and re:GetHandler()~=e:GetHandler() and not re:GetHandler():IsCode(id) end
@@ -110,7 +110,7 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SendtoDeck(sg,nil,0,REASON_RULE)
 		if sg:IsExists(Card.IsControler,1,nil,tp) then
 			Duel.ShuffleDeck(tp)
-			forbidden[tp]={}
+			unliked[tp]={}
 		end
 	end
 end
@@ -156,11 +156,11 @@ end
 function s.nl(e,tp,eg,ep,ev,re,r,rp)
 	return false
 end
-function s.normalsetoperation(e,tp,eg,ep,ev,re,r,rp)
+function s.normalvetoperation(e,tp,eg,ep,ev,re,r,rp)
 	local n=Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)
 	local r={}
 	for i=1,n do
-		if not forbidden[tp][i] then table.insert(r,i) end
+		if not unliked[tp][i] then table.insert(r,i) end
 	end
 	local an=Duel.AnnounceNumber(tp,table.unpack(r))-1
 	local c=Duel.GetFieldCard(tp,LOCATION_DECK,an)
@@ -192,35 +192,35 @@ function s.normalsetoperation(e,tp,eg,ep,ev,re,r,rp)
 		if c:IsLocation(LOCATION_HAND) then
 			Duel.DisableShuffleCheck()
 			Duel.SendtoDeck(c,tp,an,REASON_RULE)
-			forbidden[tp][an+1]=true
+			unliked[tp][an+1]=true
 			Duel.Hint(HINT_MESSAGE,tp,aux.Stringid(id,1))
 		else
-			--re organize forbidden list
+			--re organize unliked list
 			for i=an+1,n do
-				forbidden[tp][i]=forbidden[tp][i+1]
+				unliked[tp][i]=unliked[tp][i+1]
 			end
 		end
 	else
-		forbidden[tp][an+1]=true
+		unliked[tp][an+1]=true
 		Duel.Hint(HINT_MESSAGE,tp,aux.Stringid(id,1))
 	end
 end
---spell
-function s.spelltarget(e,tp,eg,ep,ev,re,r,rp,chk)
+--actional
+function s.actionstoneget(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 end
 end
-function s.spelloperation(e,tp,eg,ep,ev,re,r,rp)
+function s.actionaloperation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local n=Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)
 	local r={}
 	for i=1,n do
-		if not forbidden[tp][i] then table.insert(r,i) end
+		if not unliked[tp][i] then table.insert(r,i) end
 	end
 	local an=Duel.AnnounceNumber(tp,table.unpack(r))-1
 	local tc=Duel.GetFieldCard(tp,LOCATION_DECK,an)
 	Duel.ConfirmCards(tp,tc)
 	Duel.ConfirmCards(1-tp,tc)
-	if tc:IsSpell() then
+	if tc:IsActional() then
 		local tpe=tc:GetType()
 		local te=tc:GetActivateEffect()
 		local tg=te:GetTarget()
@@ -237,10 +237,10 @@ function s.spelloperation(e,tp,eg,ep,ev,re,r,rp)
 				if Duel.GetFlagEffect(tp,62765383)>0 then
 					if fc then Duel.Destroy(fc,REASON_RULE) end
 					of=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
-					if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
+					if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
 				else
 					Duel.GetFieldCard(tp,LOCATION_FZONE,0)
-					if fc and Duel.SendtoGrave(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
+					if fc and Duel.SendtoRest(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
 				end
 			end
 			Duel.DisableShuffleCheck()
@@ -260,7 +260,7 @@ function s.spelloperation(e,tp,eg,ep,ev,re,r,rp)
 			end
 			if op then
 				if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 and not tc:IsHasEffect(EFFECT_REMAIN_FIELD) then
-					tc:CancelToGrave(false)
+					tc:CancelToRest(false)
 				end
 				if op then op(e,tp,eg,ep,ev,re,r,rp) end
 			end
@@ -272,16 +272,16 @@ function s.spelloperation(e,tp,eg,ep,ev,re,r,rp)
 					etc=g:GetNext()
 				end
 			end
-			--re organize forbidden list
+			--re organize unliked list
 			for i=an+1,n do
-				forbidden[tp][i]=forbidden[tp][i+1]
+				unliked[tp][i]=unliked[tp][i+1]
 			end
 		else
-			forbidden[tp][an+1]=true
+			unliked[tp][an+1]=true
 			Duel.Hint(HINT_MESSAGE,tp,aux.Stringid(id,1))
 		end
 	else
-		forbidden[tp][an+1]=true
+		unliked[tp][an+1]=true
 		Duel.Hint(HINT_MESSAGE,tp,aux.Stringid(id,1))
 	end
 end
@@ -294,7 +294,7 @@ function s.trapoperation(e,tp,eg,ep,ev,re,r,rp)
 	local n=Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)
 	local r={}
 	for i=1,n do
-		if not forbidden[tp][i] then table.insert(r,i) end
+		if not unliked[tp][i] then table.insert(r,i) end
 	end
 	local an=Duel.AnnounceNumber(tp,table.unpack(r))-1
 	local tc=Duel.GetFieldCard(tp,LOCATION_DECK,an)
@@ -330,7 +330,7 @@ function s.trapoperation(e,tp,eg,ep,ev,re,r,rp)
 			end
 			if op then
 				if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 and not tc:IsHasEffect(EFFECT_REMAIN_FIELD) then
-					tc:CancelToGrave(false)
+					tc:CancelToRest(false)
 				end
 				if op then op(e,tp,eg,ep,ev,re,r,rp) end
 			end
@@ -342,16 +342,16 @@ function s.trapoperation(e,tp,eg,ep,ev,re,r,rp)
 					etc=g:GetNext()
 				end
 			end
-			--re organize forbidden list
+			--re organize unliked list
 			for i=an+1,n do
-				forbidden[tp][i]=forbidden[tp][i+1]
+				unliked[tp][i]=unliked[tp][i+1]
 			end
 		else
-			forbidden[tp][an+1]=true
+			unliked[tp][an+1]=true
 			Duel.Hint(HINT_MESSAGE,tp,aux.Stringid(id,1))
 		end
 	else
-		forbidden[tp][an+1]=true
+		unliked[tp][an+1]=true
 		Duel.Hint(HINT_MESSAGE,tp,aux.Stringid(id,1))
 	end
 end

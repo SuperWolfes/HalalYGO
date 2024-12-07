@@ -1,5 +1,5 @@
 --炎舞－「天枢」
---Fire Formation - Tensu
+--Fire Formation - Penbu
 local s,id=GetID()
 function s.initial_effect(c)
 	local e1=Effect.CreateEffect(c)

@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	Pendulum.AddProcedure(c)
-	--Destroy itself and search 1 "Black Horn of Heaven"
+	--Destroy itself and search 1 "Black Horn of Spectrum"
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DESTROY+CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.destg)
 	e1:SetOperation(s.desop)
 	c:RegisterEffect(e1)
-	--If it is Normal or Pendulum Summoned, search 1 "Horn of Heaven"
+	--If it is Normal or Pendulum Summoned, search 1 "Horn of Spectrum"
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)

@@ -68,10 +68,10 @@ function s.spfilter(c,e,tp)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
-		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return false end
+		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return false end
 		local dg=Duel.GetMatchingGroup(s.desfilter,tp,LOCATION_MZONE,0,nil)
 		if #dg==0 then return false end
-		local sg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_EXTRA|LOCATION_GRAVE,0,nil,e,tp)
+		local sg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_EXTRA|LOCATION_REST,0,nil,e,tp)
 		if #sg<4 or not (sg:IsExists(Card.IsCode,1,nil,43387895) and sg:IsExists(Card.IsCode,1,nil,70771599)
 			and sg:IsExists(Card.IsCode,1,nil,42160203) and sg:IsExists(Card.IsCode,1,nil,96733134)) then return false end
 		local ft=Duel.GetMZoneCount(tp,dg)
@@ -84,14 +84,14 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 		end
 		return aux.SelectUnselectGroup(sg,e,tp,4,4,s.rescon(ft,ftex1,ftex2),0)
 	end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,4,tp,LOCATION_EXTRA|LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,4,tp,LOCATION_EXTRA|LOCATION_REST)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local dg=Duel.GetMatchingGroup(s.desfilter,tp,LOCATION_MZONE,0,nil)
-	if Duel.Destroy(dg,REASON_EFFECT)>0 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then
+	if Duel.Destroy(dg,REASON_EFFECT)>0 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then
 		local ftt=Duel.GetUsableMZoneCount(tp)
 		if ftt<4 then return end
-		local sg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_EXTRA|LOCATION_GRAVE,0,nil,e,tp)
+		local sg=Duel.GetMatchingGroup(aux.RestValleyFilter(s.spfilter),tp,LOCATION_EXTRA|LOCATION_REST,0,nil,e,tp)
 		if #sg<4 or not (sg:IsExists(Card.IsCode,1,nil,43387895) and sg:IsExists(Card.IsCode,1,nil,70771599)
 			and sg:IsExists(Card.IsCode,1,nil,42160203) and sg:IsExists(Card.IsCode,1,nil,96733134)) then return end
 		local ft=Duel.GetMZoneCount(tp)
@@ -117,7 +117,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 				e2:SetCode(EFFECT_DISABLE_EFFECT)
 				sc:RegisterEffect(e2,true)
 			end
-			local og=Duel.GetMatchingGroup(aux.NecroValleyFilter(Card.IsCode),tp,LOCATION_EXTRA|LOCATION_GRAVE,0,nil,69610326)
+			local og=Duel.GetMatchingGroup(aux.RestValleyFilter(Card.IsCode),tp,LOCATION_EXTRA|LOCATION_REST,0,nil,69610326)
 			local drg=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsCode,42160203),tp,LOCATION_MZONE,0,nil)
 			if #og>1 and #drg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 				Duel.BreakEffect()

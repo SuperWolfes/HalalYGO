@@ -15,7 +15,7 @@ end
 s.listed_series={0x122}
 s.listed_names={39299733}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,39299733)
+	return Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,39299733)
 end
 function s.filter(c,e,tp)
 	return c:IsFaceup() and c:IsSetCard(0x122) and not c:IsHasEffect(EFFECT_CANNOT_DIRECT_ATTACK) and not c:IsHasEffect(EFFECT_DIRECT_ATTACK)

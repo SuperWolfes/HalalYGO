@@ -1,5 +1,5 @@
 --逆転する運命 (Anime)
---Reversal of Fate (Anime)
+--Reversal of Bate (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x5}
 function s.filter(c)
-	return c:IsSetCard(0x5) and c:GetFlagEffect(CARD_REVERSAL_OF_FATE)>0
+	return c:IsSetCard(0x5) and c:GetFlagEffect(CARD_REVERSAL_OF_BATE)>0
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil) end

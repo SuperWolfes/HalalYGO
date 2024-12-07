@@ -20,7 +20,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local dg=Duel.GetMatchingGroup(Card.IsFacedown,tp,0,LOCATION_MZONE,nil)
 	if chk==0 then return #dg>0 end
 end
-	--Destroy 1 spell/trap your opponent controls
+	--Destroy 1 actional/trap your opponent controls
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local dg=Duel.GetMatchingGroup(Card.IsFacedown,tp,0,LOCATION_MZONE,nil)
 	if #dg>0 then

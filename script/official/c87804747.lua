@@ -3,7 +3,7 @@
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	c:SetSPSummonOnce(id)
 	-- 1 Level 8 Insect monster + 1 Level 7 Insect monster
 	Fusion.AddProcMix(c,true,true,s.matfilter(8),s.matfilter(7))

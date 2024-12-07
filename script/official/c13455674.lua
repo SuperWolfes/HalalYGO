@@ -2,10 +2,10 @@
 --Crystron Quariongandrax
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Synchro Summon Procedure
 	Synchro.AddProcedure(c,nil,2,99,Synchro.NonTuner(nil),1,1)
-	--Banish monsters from the opponent's field and/or GY
+	--Banish monsters from the opponent's field and/or RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_REMOVE)
@@ -39,10 +39,10 @@ function s.rmfilter(c)
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local ct=e:GetHandler():GetMaterialCount()
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE|LOCATION_MZONE) and chkc:IsControler(1-tp) and s.rmfilter(chkc) end
-	if chk==0 then return ct>0 and Duel.IsExistingTarget(s.rmfilter,tp,0,LOCATION_GRAVE|LOCATION_MZONE,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_REST|LOCATION_MZONE) and chkc:IsControler(1-tp) and s.rmfilter(chkc) end
+	if chk==0 then return ct>0 and Duel.IsExistingTarget(s.rmfilter,tp,0,LOCATION_REST|LOCATION_MZONE,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectTarget(tp,s.rmfilter,tp,0,LOCATION_GRAVE|LOCATION_MZONE,1,ct,nil)
+	local g=Duel.SelectTarget(tp,s.rmfilter,tp,0,LOCATION_REST|LOCATION_MZONE,1,ct,nil)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,#g,0,0)
 end
 function s.rmop(e,tp,eg,ep,ev,re,r,rp)

@@ -1,5 +1,5 @@
 --潔癖のバリア－クリア・フォース－
---Clean Barrier - Clear Force
+--Clean Barrier - Clear Fcoree
 --coded by Lyris
 local s,id=GetID()
 function s.initial_effect(c)

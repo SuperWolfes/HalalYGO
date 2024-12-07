@@ -24,7 +24,7 @@ function s.gyfilter(c)
 	return c:IsType(TYPE_NORMAL) and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsDefense(500)
 end
 function s.poscon(e,tp,eg,ep,ev,re,r,rp)
-	return eg:IsExists(s.sumfilter,1,nil,tp) and Duel.IsExistingMatchingCard(s.gyfilter,tp,LOCATION_GRAVE,0,1,nil)
+	return eg:IsExists(s.sumfilter,1,nil,tp) and Duel.IsExistingMatchingCard(s.gyfilter,tp,LOCATION_REST,0,1,nil)
 end
 function s.posfilter(c)
 	return c:IsAttackPos() and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsLevelAbove(8) and c:IsCanChangePositionRush()
@@ -39,7 +39,7 @@ function s.filter(c,race)
 	return c:IsRace(race) and c:IsType(TYPE_NORMAL)
 end
 function s.desfilter(c,tp)
-	return c:IsFaceup() and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,1,nil,c:GetRace())
+	return c:IsFaceup() and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,1,nil,c:GetRace())
 end
 function s.posop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_POSCHANGE)

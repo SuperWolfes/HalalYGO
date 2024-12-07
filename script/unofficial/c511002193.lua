@@ -21,8 +21,8 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			if td:IsMonster() then
 				label=TYPE_MONSTER
 				desc=70
-			elseif td:IsSpell() then
-				label=TYPE_SPELL
+			elseif td:IsActional() then
+				label=TYPE_ACTIONAL
 				desc=71
 			else
 				label=TYPE_TRAP

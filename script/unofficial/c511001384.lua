@@ -25,10 +25,10 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		Duel.DiscardDeck(p,4,REASON_EFFECT)
 		Duel.Draw(p,1,REASON_EFFECT)
 		Duel.BreakEffect()
-		c:CancelToGrave()
+		c:CancelToRest()
 		Duel.SendtoDeck(c,nil,0,REASON_EFFECT)
 		local e1=Effect.CreateEffect(c)
-		e1:SetCategory(CATEGORY_TOGRAVE)
+		e1:SetCategory(CATEGORY_TOREST)
 		e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 		e1:SetCode(EVENT_TO_HAND)
 		e1:SetCondition(s.descon)
@@ -43,11 +43,11 @@ function s.descon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsRelateToEffect(e) end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,e:GetHandler(),1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,e:GetHandler(),1,0,0)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) then
-		Duel.SendtoGrave(c,REASON_EFFECT)
+		Duel.SendtoRest(c,REASON_EFFECT)
 	end
 end

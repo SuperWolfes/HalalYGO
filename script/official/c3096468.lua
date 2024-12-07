@@ -1,5 +1,5 @@
 --タツネクロ
---Tatsunecro
+--Tatsurest
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.sslimit(e,c)
-	return not c:IsRace(RACE_ZOMBIE)
+	return not c:IsRace(RACE_TOXIC)
 end
 function s.syncon(e)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_NORMAL)

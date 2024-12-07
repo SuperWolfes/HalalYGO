@@ -1,5 +1,5 @@
 --サクリファイス・ランクアップ
---Sacrifice Level-Up
+--Sorting Level-Up
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

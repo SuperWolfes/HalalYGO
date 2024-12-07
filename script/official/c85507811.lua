@@ -3,8 +3,8 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Contact fusion procedure
 	Fusion.AddProcMix(c,true,true,CARD_NEOS,17732278)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,s.splimit)
@@ -62,7 +62,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 			e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 			c:RegisterEffect(e1)
 		--Can attack directly this turn
-		elseif tc:IsSpell() then
+		elseif tc:IsActional() then
 			local e1=Effect.CreateEffect(c)
 			e1:SetDescription(3205)
 			e1:SetType(EFFECT_TYPE_SINGLE)

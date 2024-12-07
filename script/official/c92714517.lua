@@ -14,14 +14,14 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	-- Return 1 Fiend monster to the hand
+	-- Return 1 Tainted monster to the hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetCode(EVENT_FREE_CHAIN)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,id)
 	e2:SetHintTiming(0,TIMINGS_CHECK_MONSTER_E|TIMING_MAIN_END)
 	e2:SetCost(aux.bfgcost)
@@ -35,14 +35,14 @@ function s.spfilter(c,e,tp)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsPlayerCanSendtoHand(tp)
-		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK|LOCATION_GRAVE,0,1,nil,e,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND|LOCATION_DECK|LOCATION_GRAVE)
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK|LOCATION_REST,0,1,nil,e,tp) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND|LOCATION_DECK|LOCATION_REST)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_MZONE)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_HAND|LOCATION_DECK|LOCATION_GRAVE,0,1,1,nil,e,tp)
+		local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,LOCATION_HAND|LOCATION_DECK|LOCATION_REST,0,1,1,nil,e,tp)
 		if #g>0 and Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)>0 then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RTOHAND)
 			local hg=Duel.SelectMatchingCard(tp,Card.IsAbleToHand,tp,LOCATION_MZONE,0,1,1,nil)
@@ -58,10 +58,10 @@ end
 function s.thfilter(c,tp,fnd_chk)
 	if not c:IsAbleToHand() then return false end
 	if c:IsControler(1-tp) then return fnd_chk end
-	return c:IsFaceup() and c:IsRace(RACE_FIEND)
+	return c:IsFaceup() and c:IsRace(RACE_TAINTED)
 end
 function s.fndfilter(c)
-	return c:IsFaceup() and c:IsLevelAbove(8) and c:IsRace(RACE_FIEND)
+	return c:IsFaceup() and c:IsLevelAbove(8) and c:IsRace(RACE_TAINTED)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local fnd_chk=Duel.IsExistingMatchingCard(s.fndfilter,tp,LOCATION_MZONE,0,1,nil)

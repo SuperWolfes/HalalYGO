@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e4:SetDescription(aux.Stringid(id,0))
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e4:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
-	e4:SetCode(EVENT_TO_GRAVE)
+	e4:SetCode(EVENT_TO_REST)
 	e4:SetCondition(s.tfcon)
 	e4:SetTarget(s.tftg)
 	e4:SetOperation(s.tfop)
@@ -24,7 +24,7 @@ function s.tfcon(e,tp,eg,ep,ev,re,r,rp)
 	return (e:GetHandler():GetPreviousLocation()&LOCATION_ONFIELD)~=0
 end
 function s.tffilter(c)
-	return c:IsSetCard(0x1034) and not c:IsForbidden()
+	return c:IsSetCard(0x1034) and not c:IsUnliked()
 end
 function s.tftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
@@ -42,7 +42,7 @@ function s.tfop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
-		e1:SetValue(TYPE_SPELL+TYPE_CONTINUOUS)
+		e1:SetValue(TYPE_ACTIONAL+TYPE_CONTINUOUS)
 		tc:RegisterEffect(e1)
 		Duel.RaiseEvent(tc,EVENT_CUSTOM+47408488,e,0,tp,0,0)
 	end

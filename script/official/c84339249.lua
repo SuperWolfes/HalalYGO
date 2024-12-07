@@ -1,5 +1,5 @@
 --守護天霊ロガエス
---Protecting Spirit Loagaeth
+--Protecting Guardian Loagaeth
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
@@ -59,7 +59,7 @@ function s.indesop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local trig_race,trig_loc,trig_ctrl=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_RACE,CHAININFO_TRIGGERING_LOCATION,CHAININFO_TRIGGERING_CONTROLER)
-	return trig_race and trig_race&RACE_FAIRY>0 and trig_loc==LOCATION_MZONE and trig_ctrl==tp
+	return trig_race and trig_race&RACE_WANDERER>0 and trig_loc==LOCATION_MZONE and trig_ctrl==tp
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

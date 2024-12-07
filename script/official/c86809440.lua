@@ -1,5 +1,5 @@
 --Japanese name
---Mimighoul Dungeon
+--Mimirahul Dungeon
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -8,13 +8,13 @@ function s.initial_effect(c)
 	e0:SetType(EFFECT_TYPE_ACTIVATE)
 	e0:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e0)
-	--"Mimighoul" monsters you control that were not Normal or Special Summoned this turn gain ATK equal to their original DEF
+	--"Mimirahul" monsters you control that were not Normal or Special Summoned this turn gain ATK equal to their original DEF
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_UPDATE_ATTACK)
 	e1:SetRange(LOCATION_FZONE)
 	e1:SetTargetRange(LOCATION_MZONE,0)
-	e1:SetTarget(function(e,c) return c:IsSetCard(SET_MIMIGHOUL) and not c:IsStatus(STATUS_SUMMON_TURN|STATUS_SPSUMMON_TURN) end)
+	e1:SetTarget(function(e,c) return c:IsSetCard(SET_MIMIRAHUL) and not c:IsStatus(STATUS_SUMMON_TURN|STATUS_SPSUMMON_TURN) end)
 	e1:SetValue(function(e,c) return c:GetBaseDefense() end)
 	c:RegisterEffect(e1)
 	--Any player who controls a face-down monster cannot Normal Summon monsters
@@ -35,7 +35,7 @@ function s.initial_effect(c)
 	e3:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
 	e3:SetTarget(function(e,c) return c:IsStatus(STATUS_SPSUMMON_TURN) and Duel.IsExistingMatchingCard(Card.IsFacedown,c:GetControler(),LOCATION_MZONE,0,1,nil) end)
 	c:RegisterEffect(e3)
-	--Add 1 "Mimighoul" monster from your Deck or GY to your hand
+	--Add 1 "Mimirahul" monster from your Deck or RP to your hand
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,0))
 	e4:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -46,17 +46,17 @@ function s.initial_effect(c)
 	e4:SetOperation(s.thop)
 	c:RegisterEffect(e4)
 end
-s.listed_series={SET_MIMIGHOUL}
+s.listed_series={SET_MIMIRAHUL}
 function s.thfilter(c)
-	return c:IsSetCard(SET_MIMIGHOUL) and c:IsMonster() and c:IsAbleToHand()
+	return c:IsSetCard(SET_MIMIRAHUL) and c:IsMonster() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK|LOCATION_GRAVE,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK|LOCATION_GRAVE)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK|LOCATION_REST,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK|LOCATION_REST)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thfilter),tp,LOCATION_DECK|LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.thfilter),tp,LOCATION_DECK|LOCATION_REST,0,1,1,nil)
 	if #g>0 then
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)

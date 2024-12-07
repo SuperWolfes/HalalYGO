@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Pendulum Summon
 	Pendulum.AddProcedure(c)
-	--Action Spell! "Miracle"!
+	--Action Actional! "Pulse"!
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_REMOVE)
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.atktg)
 	e1:SetOperation(s.atkop)
 	c:RegisterEffect(e1)
-	--Search 1 "Supreme King Dragon","Supreme King Gate", or "The Supreme King's Soul"
+	--Search 1 "Supreme King Dragon","Supreme King Gate", or "The Supreme King's Miss"
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.thtg)
 	e2:SetOperation(s.thop)
 	c:RegisterEffect(e2)
-	--Each player can banish 1 Spell from their Deck
+	--Each player can banish 1 Actional from their Deck
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetCategory(CATEGORY_REMOVE)
@@ -37,7 +37,7 @@ function s.initial_effect(c)
 	e3:SetCountLimit(1)
 	e3:SetOperation(s.rmop)
 	c:RegisterEffect(e3)
-	--Action Spell! "Evasion"!
+	--Action Actional! "Evasion"!
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,3))
 	e4:SetCategory(CATEGORY_TOHAND+CATEGORY_HANDES)
@@ -56,7 +56,7 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetAttacker():IsControler(tp) or bc:IsControler(tp)
 end
 function s.rmfilter(c)
-	return c:IsSpell() and c:IsAbleToRemove()
+	return c:IsActional() and c:IsAbleToRemove()
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -128,7 +128,7 @@ function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.thfilter2(c)
-	return c:IsFaceup() and c:IsSpell() and c:IsAbleToHand()
+	return c:IsFaceup() and c:IsActional() and c:IsAbleToHand()
 end
 function s.atkop2(e,tp,eg,ep,ev,re,r,rp)
 	local bc=Duel.GetAttackTarget()
@@ -147,7 +147,7 @@ function s.atkop2(e,tp,eg,ep,ev,re,r,rp)
 			and tc:IsDiscardable(REASON_EFFECT) then
 			Duel.ConfirmCards(1-p,tc)
 			Duel.BreakEffect()
-			if Duel.SendtoGrave(tc,REASON_EFFECT+REASON_DISCARD)==0 then return end
+			if Duel.SendtoRest(tc,REASON_EFFECT+REASON_DISCARD)==0 then return end
 			Duel.NegateAttack()
 		end
 	end

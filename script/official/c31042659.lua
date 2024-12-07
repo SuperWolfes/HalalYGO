@@ -5,12 +5,12 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special summon itself from hand or GY
+	--Special summon itself from hand or RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_IGNITION)
-	e1:SetRange(LOCATION_HAND+LOCATION_GRAVE)
+	e1:SetRange(LOCATION_HAND+LOCATION_REST)
 	e1:SetCountLimit(1,id)
 	e1:SetCondition(function(_,tp) return Duel.IsExistingMatchingCard(Card.IsFaceup,tp,LOCATION_FZONE,0,1,nil) end)
 	e1:SetTarget(s.sptg)
@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	e2:SetCondition(s.atkcon)
 	e2:SetValue(3000)
 	c:RegisterEffect(e2)
-	--Substitute destruction for "Great Grand Sea – Gold Golgonda"
+	--Substitute mismatching for "Great Grand Sea – Gold Golgonda"
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e3:SetCode(EFFECT_DESTROY_REPLACE)
@@ -45,7 +45,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 		and e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,e:GetHandler(),1,0,0)
 end
-	--Special summon itself from hand or GY
+	--Special summon itself from hand or RP
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)>0 then
@@ -78,16 +78,16 @@ function s.repval(e,c)
 end
 function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return eg:IsExists(s.repfilter,1,nil,tp,rp) and
-		Duel.IsExistingMatchingCard(s.rmfilter,tp,LOCATION_GRAVE,0,1,eg) end
+		Duel.IsExistingMatchingCard(s.rmfilter,tp,LOCATION_REST,0,1,eg) end
 	if Duel.SelectEffectYesNo(tp,e:GetHandler(),96) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESREPLACE)
-		local tg=Duel.SelectMatchingCard(tp,s.rmfilter,tp,LOCATION_GRAVE,0,1,1,eg)
+		local tg=Duel.SelectMatchingCard(tp,s.rmfilter,tp,LOCATION_REST,0,1,1,eg)
 		e:SetLabelObject(tg:GetFirst())
 		return true
 	end
 	return false
 end
-	--Banish 1 card from GY as cost
+	--Banish 1 card from RP as cost
 function s.repop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,1-tp,id)
 	local tc=e:GetLabelObject()

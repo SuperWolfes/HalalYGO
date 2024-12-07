@@ -2,7 +2,7 @@
 --Tin Archduke (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Xyz Summon Procedure
 	Xyz.AddProcedure(c,nil,4,3)
 	--Change the battle position of all monsters your opponent controls

@@ -79,5 +79,5 @@ end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tg=c:GetEquipTarget()
-	Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
+	Duel.SendtoRest(e:GetHandler(),REASON_EFFECT)
 end

@@ -13,20 +13,20 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.eqfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_PSYCHIC) and not c:IsMaximumModeSide()
+	return c:IsFaceup() and c:IsRace(RACE_MENTAL) and not c:IsMaximumModeSide()
 end
 function s.eqlimit(e,c)
 	return c:IsFaceup()
 end
 function s.costfilter(c)
-	return c:IsAttribute(ATTRIBUTE_WIND) and c:IsRace(RACE_PSYCHIC) and c:IsDiscardable() and c:IsAbleToGraveAsCost()
+	return c:IsAttribute(ATTRIBUTE_WIND) and c:IsRace(RACE_MENTAL) and c:IsDiscardable() and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil) end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end

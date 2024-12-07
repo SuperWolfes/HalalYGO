@@ -1,5 +1,5 @@
 --魔導槍グレイス・スピア
---Grace Spear the Magical Spear
+--Grace Spear the Mentoral Spear
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.eqfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_SPELLCASTER|RACE_MAGICALKNIGHT) and not c:IsMaximumModeSide()
+	return c:IsFaceup() and c:IsRace(RACE_MENTOR|RACE_MENTORALKNIGHT) and not c:IsMaximumModeSide()
 end
 function s.eqlimit(e,c)
 	return c:IsFaceup()
@@ -41,6 +41,6 @@ end
 function s.value(e,c)
 	local atk=0
 	local ec=e:GetHandler():GetEquipTarget()
-	if ec:IsRace(RACE_MAGICALKNIGHT) then atk=ec:GetLevel()*200 end
+	if ec:IsRace(RACE_MENTORALKNIGHT) then atk=ec:GetLevel()*200 end
 	return atk+200
 end

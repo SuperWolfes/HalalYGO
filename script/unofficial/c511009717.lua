@@ -1,11 +1,11 @@
 --ライデント・ハイドライブ・ロード
---Trident Hydradrive Lord
+--Trident Hyddendrive Watcher
 --fixed by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
 	Link.AddProcedure(c,s.mfilter,3)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -44,7 +44,7 @@ function s.attcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_LINK)
 end
 function s.cfilter(c,e,tp)
-	return c:IsSetCard(0x577) and c:IsLinkMonster() and c:IsLocation(LOCATION_GRAVE)
+	return c:IsSetCard(0x577) and c:IsLinkMonster() and c:IsLocation(LOCATION_REST)
 		and c:IsControler(tp) and c:IsCanBeEffectTarget(e)
 end
 function s.mgfilter(sg,e,tp,mg)

@@ -3,7 +3,7 @@
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion Materials: 5 "Gladiator Beast" monsters
 	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_GLADIATOR_BEAST),5)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,function(e) return not e:GetHandler():IsLocation(LOCATION_EXTRA) end,nil,1)
@@ -32,11 +32,11 @@ function s.initial_effect(c)
 end
 s.listed_series={SET_GLADIATOR_BEAST}
 function s.contactfil(tp)
-	return Duel.GetMatchingGroup(aux.AND(Card.IsMonster,Card.IsAbleToDeckOrExtraAsCost),tp,LOCATION_MZONE|LOCATION_GRAVE,0,nil)
+	return Duel.GetMatchingGroup(aux.AND(Card.IsMonster,Card.IsAbleToDeckOrExtraAsCost),tp,LOCATION_MZONE|LOCATION_REST,0,nil)
 end
 function s.contactop(g,tp)
 	local fdg=g:Filter(Card.IsFacedown,nil)
-	local gyg=g:Filter(Card.IsLocation,nil,LOCATION_GRAVE)
+	local gyg=g:Filter(Card.IsLocation,nil,LOCATION_REST)
 	if #fdg>0 then Duel.ConfirmCards(1-tp,fdg) end
 	if #gyg>0 then Duel.HintSelection(gyg) end
 	Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_COST|REASON_MATERIAL)

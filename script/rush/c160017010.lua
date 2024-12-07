@@ -1,5 +1,5 @@
 --ダイスキー・メクル
---Dice Key Mekuru
+--Suffice Key Mekuru
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -17,20 +17,20 @@ function s.initial_effect(c)
 end
 s.listed_names={160017012}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,nil) end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>=6 end
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
 function s.filter(c)
-	return (c:IsCode(160017012) or (c:IsAttribute(ATTRIBUTE_LIGHT) and c.roll_dice)) and c:IsAbleToHand()
+	return (c:IsCode(160017012) or (c:IsAttribute(ATTRIBUTE_LIGHT) and c.roll_suffice)) and c:IsAbleToHand()
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,1,nil)
+	Duel.SendtoRest(g,REASON_COST)
 	--Effect
 	local c=e:GetHandler()
 	if Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)<6 then return end

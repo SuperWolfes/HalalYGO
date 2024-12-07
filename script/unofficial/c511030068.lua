@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	c:EnableCounterPermit(0x580)
 	--activate
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_TOGRAVE+CATEGORY_COUNTER)
+	e1:SetCategory(CATEGORY_TOREST+CATEGORY_COUNTER)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetTarget(s.target)
@@ -33,9 +33,9 @@ function s.initial_effect(c)
 	e3:SetTarget(s.sptg)
 	e3:SetOperation(s.spop)
 	c:RegisterEffect(e3)
-	--send to GY
+	--send to RP
 	local e4=Effect.CreateEffect(c)
-	e4:SetCategory(CATEGORY_TOGRAVE)
+	e4:SetCategory(CATEGORY_TOREST)
 	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e4:SetRange(LOCATION_SZONE)
 	e4:SetCountLimit(1)
@@ -47,7 +47,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x102}
 function s.actfilter(c)
-	return c:IsSetCard(0x102) and c:IsMonster() and c:IsAbleToGrave()
+	return c:IsSetCard(0x102) and c:IsMonster() and c:IsAbleToRest()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
@@ -55,7 +55,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
 	if chk==0 then return Duel.IsExistingMatchingCard(s.actfilter,tp,LOCATION_DECK,0,2,nil)
 		and Duel.IsCanAddCounter(tp,0x580,#g,c) end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,2,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,2,tp,LOCATION_DECK)
 	Duel.SetOperationInfo(0,CATEGORY_COUNTER,e:GetHandler(),#g,0,0x580)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
@@ -73,9 +73,9 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,tp)
 	local g=Duel.SelectMatchingCard(tp,s.actfilter,tp,LOCATION_DECK,0,2,2,nil)
 	if #g>1 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 		local og=Duel.GetOperatedGroup()
-		if og:IsExists(Card.IsLocation,1,nil,LOCATION_GRAVE) then
+		if og:IsExists(Card.IsLocation,1,nil,LOCATION_REST) then
 			local lg=Duel.GetMatchingGroup(Card.IsLinkAbove,tp,LOCATION_MZONE,LOCATION_MZONE,nil,3)
 			if #lg>0 and Duel.IsCanAddCounter(tp,0x580,#lg,c) then
 				c:AddCounter(0x580,#lg)
@@ -100,11 +100,11 @@ function s.spfilter(c,e,tp)
 	return c:IsSetCard(0x102) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
+		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
@@ -137,10 +137,10 @@ function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,e:GetHandler(),1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,e:GetHandler(),1,0,0)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():IsRelateToEffect(e) then
-		Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
+		Duel.SendtoRest(e:GetHandler(),REASON_EFFECT)
 	end
 end

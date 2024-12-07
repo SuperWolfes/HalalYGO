@@ -1,5 +1,5 @@
 --魔法の筒
---Magic Cylinder (Rush)
+--Ment Cylinder (Rush)
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)

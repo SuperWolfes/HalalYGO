@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetOperation(s.chainop)
 	c:RegisterEffect(e2)
-	--Return 1 "Ice Barrier" monster the hand/Deck and can place 1 card on the field/GY on the bottom of the Deck
+	--Return 1 "Ice Barrier" monster the hand/Deck and can place 1 card on the field/RP on the bottom of the Deck
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_TODECK)
@@ -57,7 +57,7 @@ end
 function s.rettg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.icefilter,tp,LOCATION_MZONE,0,1,nil) end
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_MZONE)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TODECK,nil,1,PLAYER_EITHER,LOCATION_ONFIELD|LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TODECK,nil,1,PLAYER_EITHER,LOCATION_ONFIELD|LOCATION_REST)
 end
 function s.retop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,2))
@@ -88,7 +88,7 @@ function s.retop(e,tp,eg,ep,ev,re,r,rp)
 	end
 	if func(sc,table.unpack(params))==0 or not sc:IsLocation(LOCATION_HAND|LOCATION_DECK|LOCATION_EXTRA) then return end
 	if not sc:IsLocation(LOCATION_EXTRA) then shuffle_func(tp) end
-	local rg=Duel.GetMatchingGroup(aux.NecroValleyFilter(Card.IsAbleToDeck),tp,LOCATION_ONFIELD|LOCATION_GRAVE,LOCATION_ONFIELD|LOCATION_GRAVE,nil)
+	local rg=Duel.GetMatchingGroup(aux.RestValleyFilter(Card.IsAbleToDeck),tp,LOCATION_ONFIELD|LOCATION_REST,LOCATION_ONFIELD|LOCATION_REST,nil)
 	if #rg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,5)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
 		local g=rg:Select(tp,1,1,nil)

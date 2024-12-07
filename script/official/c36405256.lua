@@ -1,9 +1,9 @@
 --時花の魔女－フルール・ド・ソルシエール
---Sorciere de Fleur
+--Scoreiere de Fleur
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--When normal or special summoned, special summon 1 monster from opponent's GY
+	--When normal or special summoned, special summon 1 monster from opponent's RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -23,10 +23,10 @@ function s.filter(c,e,tp)
 	return c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(1-tp) and s.filter(chkc,e,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(1-tp) and s.filter(chkc,e,tp) end
 	if chk==0 then return e:GetHandler():IsRelateToEffect(e) and e:GetHandler():IsFaceup() end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.filter,tp,0,LOCATION_GRAVE,1,1,nil,e,tp)
+	local g=Duel.SelectTarget(tp,s.filter,tp,0,LOCATION_REST,1,1,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)

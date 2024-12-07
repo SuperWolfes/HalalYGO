@@ -1,10 +1,10 @@
 --魔法大学
---Magical Academy
+--Mentoral Academy
 --scripted by: UnknownGuest
 --fixed by MLD
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon 1 Spellcaster from your hand
+	--Special Summon 1 Mentor from your hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -23,7 +23,7 @@ function s.costfilter(c,e,tp)
     	return c:IsDiscardable(REASON_COST) and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND,0,1,c,e,tp)
 end
 function s.spfilter(c,e,tp)
-    	if not (c:IsRace(RACE_SPELLCASTER) and c:IsSummonableCard() and c:IsCanBeSpecialSummoned(e,0,tp,false,false)) then return false end
+    	if not (c:IsRace(RACE_MENTOR) and c:IsSummonableCard() and c:IsCanBeSpecialSummoned(e,0,tp,false,false)) then return false end
     	local mi,ma=c:GetTributeRequirement()
     	return (Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and mi==0) or (ma>=mi and ma>0 and Duel.CheckTribute(c,mi))
 end
@@ -47,7 +47,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
         	local exc=c:IsLocation(LOCATION_HAND) and c or nil
         	local g=Duel.GetMatchingGroup(Card.IsDiscardable,tp,LOCATION_HAND,0,exc)
         	local cost=aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,1,tp,HINTMSG_DISCARD)
-        	Duel.SendtoGrave(cost,REASON_DISCARD|REASON_COST)
+        	Duel.SendtoRest(cost,REASON_DISCARD|REASON_COST)
     	end
     	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND)
 end
@@ -73,7 +73,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetCode(EFFECT_UPDATE_ATTACK)
 		e2:SetValue(500)
 		tc:RegisterEffect(e2,true)
-		--Negate opponent's Spell/Traps that target the Summoned monster
+		--Negate opponent's Actional/Traps that target the Summoned monster
 		local e3=Effect.CreateEffect(c)
 		e3:SetType(EFFECT_TYPE_FIELD)
 		e3:SetCode(EFFECT_DISABLE)
@@ -101,7 +101,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetLabelObject()
-	if not (re:IsSpellTrapEffect() and re:GetHandler():IsControler(1-tp) and re:IsHasProperty(EFFECT_FLAG_CARD_TARGET)) then return end
+	if not (re:IsActionalTrapEffect() and re:GetHandler():IsControler(1-tp) and re:IsHasProperty(EFFECT_FLAG_CARD_TARGET)) then return end
 	local g=Duel.GetChainInfo(ev,CHAININFO_TARGET_CARDS)
 	if not g or not g:IsContains(tc) or not Duel.IsChainDisablable(ev) then return false end
 	Duel.NegateEffect(ev)

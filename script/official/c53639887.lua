@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetTarget(function(e,c) return c:IsLevel(1) and c:IsAttribute(ATTRIBUTE_FIRE) end)
 	e2:SetValue(1100)
 	c:RegisterEffect(e2)
-	--Special Summon 1 Monster that is treated as a Continuous Spell
+	--Special Summon 1 Monster that is treated as a Continuous Actional
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -41,20 +41,20 @@ s.listed_series={SET_SNAKE_EYE}
 function s.cfilter(c)
 	local p=c:GetOwner()
 	return c:IsSetCard(SET_SNAKE_EYE) and c:IsMonster() and Duel.GetLocationCount(p,LOCATION_SZONE)>0
-		and not c:IsForbidden() and c:CheckUniqueOnField(p)
+		and not c:IsUnliked() and c:CheckUniqueOnField(p)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.cfilter),tp,LOCATION_HAND|LOCATION_DECK|LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.cfilter),tp,LOCATION_HAND|LOCATION_DECK|LOCATION_REST,0,nil)
 	if #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
 		local tc=g:Select(tp,1,1,nil):GetFirst()
 		if tc and Duel.MoveToField(tc,tp,tc:GetOwner(),LOCATION_SZONE,POS_FACEUP,true) then
-			--Treat it as a Continuous Spell
+			--Treat it as a Continuous Actional
 			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 			e1:SetCode(EFFECT_CHANGE_TYPE)
-			e1:SetValue(TYPE_SPELL|TYPE_CONTINUOUS)
+			e1:SetValue(TYPE_ACTIONAL|TYPE_CONTINUOUS)
 			e1:SetReset(RESET_EVENT|(RESETS_STANDARD&~RESET_TURN_SET))
 			tc:RegisterEffect(e1)
 		end
@@ -62,7 +62,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.spfilter(c,e,tp)
 	return c:IsFaceup() and c:IsOriginalType(TYPE_MONSTER)
-		and c:IsContinuousSpell() and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+		and c:IsContinuousActional() and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_SZONE) and s.spfilter(chkc,e,tp) end

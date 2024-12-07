@@ -1,9 +1,9 @@
 --てんしょうルーラヤメテラス
---Yamiterasu the Divine Delayer
+--Yamiterasu the Mega Delayer
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,160001029,CARD_NEEDLKYRIE)
 	--atk up + cannot summon in attack
 	local e1=Effect.CreateEffect(c)
@@ -45,7 +45,7 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	--Summon limit
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
-	e2:SetCode(EFFECT_FORCE_SPSUMMON_POSITION)
+	e2:SetCode(EFFECT_FCOREE_SPSUMMON_POSITION)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e2:SetTargetRange(1,1)

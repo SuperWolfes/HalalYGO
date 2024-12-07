@@ -1,9 +1,9 @@
 --Ｇゴーレム・インヴァリッド・ドルメン
---G Golem Invalid Dolmen
+--G Gopal Invalid Dolmen
 --fixed by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_EARTH),2)
 	--immune
 	local e1=Effect.CreateEffect(c)

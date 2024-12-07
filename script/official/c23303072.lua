@@ -2,7 +2,7 @@
 --Montage Dragon
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--cannot special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.filter(c,tp)
-	return c:IsMonster() and c:IsAbleToGraveAsCost()
+	return c:IsMonster() and c:IsAbleToRestAsCost()
 end
 function s.spcon(e,c)
 	if c==nil then return true end
@@ -45,7 +45,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	local sum=0
 	local tc=g:GetFirst()
 	for tc in aux.Next(g) do

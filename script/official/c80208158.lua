@@ -1,5 +1,5 @@
 --異次元エスパー・スター・ロビン
---D.D. Esper Star Sparrow
+--S.D. Esper Star Sparrow
 
 local s,id=GetID()
 function s.initial_effect(c)
@@ -22,13 +22,13 @@ function s.initial_effect(c)
 	e2:SetTarget(s.tglimit)
 	e2:SetValue(aux.tgoval)
 	c:RegisterEffect(e2)
-	--Special summon itself from GY
+	--Special summon itself from RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e3:SetCode(EVENT_ATTACK_ANNOUNCE)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetCondition(s.spcon)
 	e3:SetTarget(s.sptg)
 	e3:SetOperation(s.spop)

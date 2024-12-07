@@ -21,9 +21,9 @@ function s.initial_effect(c)
 	e2:SetCode(EVENT_BE_MATERIAL)
 	e2:SetCondition(s.drcon)
 	c:RegisterEffect(e2)
-	--Detached and ended up in GY to activate an Xyz monster's effect
+	--Detached and ended up in RP to activate an Xyz monster's effect
 	local e3=e1:Clone()
-	e3:SetCode(EVENT_TO_GRAVE)
+	e3:SetCode(EVENT_TO_REST)
 	e3:SetCondition(s.dtchcon)
 	c:RegisterEffect(e3)
 	--Detached and ended up banished to activate an Xyz monster's effect

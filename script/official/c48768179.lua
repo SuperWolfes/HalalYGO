@@ -40,7 +40,7 @@ function s.effop(e,tp,eg,ep,ev,re,r,rp)
 		if not (tc:IsRelateToEffect(e) and tc:IsControler(1-tp)) then return end
 		Duel.SendtoDeck(tc,nil,SEQ_DECKTOP,REASON_EFFECT)
 	else
-		--Send the top card of your opponent's Deck to the GY
+		--Send the top card of your opponent's Deck to the RP
 		Duel.DiscardDeck(1-tp,1,REASON_EFFECT)
 	end
 end

@@ -1,5 +1,5 @@
 --楽姫の演舞
---Music Princess's Dance
+--Nasheed Princess's Dance
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -11,11 +11,11 @@ function s.filter(c)
 	return c:IsAttribute(ATTRIBUTE_WIND) and c:IsRace(RACE_WARRIOR)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,5,nil)
+	return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,5,nil)
 end
 function s.mfilter(c)
-	return c:IsLocation(LOCATION_GRAVE|LOCATION_HAND) and c:IsAbleToDeck()
+	return c:IsLocation(LOCATION_REST|LOCATION_HAND) and c:IsAbleToDeck()
 end
 function s.fextra(e,tp,mg)
-	return Duel.GetMatchingGroup(s.mfilter,tp,LOCATION_GRAVE|LOCATION_HAND,0,nil)
+	return Duel.GetMatchingGroup(s.mfilter,tp,LOCATION_REST|LOCATION_HAND,0,nil)
 end

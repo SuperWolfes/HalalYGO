@@ -1,16 +1,16 @@
 --千年の宝を守りしゴーレム
---Golem that Guards the Millennium Treasures
+--Gopal that Guards the Mileon Treasures
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	--The activation of your "Millennium Cross" cannot be negated
+	--The activation of your "Mileon Cross" cannot be negated
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_CANNOT_INACTIVATE)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetValue(s.efilter)
 	c:RegisterEffect(e1)
-	--Place this card face-up in your Spell & Trap Zone as a Continuous Spell
+	--Place this card face-up in your Actional & Trap Zone as a Continuous Actional
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetType(EFFECT_TYPE_IGNITION)
@@ -26,34 +26,34 @@ function s.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_IGNITION)
 	e3:SetRange(LOCATION_SZONE)
 	e3:SetCountLimit(1,{id,1})
-	e3:SetCondition(function(e) return e:GetHandler():IsContinuousSpell() end)
+	e3:SetCondition(function(e) return e:GetHandler():IsContinuousActional() end)
 	e3:SetCost(s.spcost)
 	e3:SetTarget(s.sptg)
 	e3:SetOperation(s.spop)
 	c:RegisterEffect(e3)
 end
-s.listed_names={CARD_MILLENNIUM_CROSS,63017368} --"Shrine of Wedju"
+s.listed_names={CARD_MILEON_CROSS,63017368} --"Shrine of Wedju"
 function s.efilter(e,ct)
 	local p=e:GetHandlerPlayer()
 	local te,tp=Duel.GetChainInfo(ct,CHAININFO_TRIGGERING_EFFECT,CHAININFO_TRIGGERING_PLAYER)
-	return p==tp and te:GetHandler() and te:GetHandler():IsCode(CARD_MILLENNIUM_CROSS)
+	return p==tp and te:GetHandler() and te:GetHandler():IsCode(CARD_MILEON_CROSS)
 end
 function s.plop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) or c:IsImmuneToEffect(e) then return end
 	if Duel.MoveToField(c,tp,tp,LOCATION_SZONE,POS_FACEUP,true) then
-		--Treated as a Continuous Spell
+		--Treated as a Continuous Actional
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 		e1:SetCode(EFFECT_CHANGE_TYPE)
-		e1:SetValue(TYPE_SPELL|TYPE_CONTINUOUS)
+		e1:SetValue(TYPE_ACTIONAL|TYPE_CONTINUOUS)
 		e1:SetReset(RESET_EVENT|RESETS_STANDARD&~RESET_TURN_SET)
 		c:RegisterEffect(e1)
 	end
 end
 function s.spcostfilter(c)
-	return c:IsCode(CARD_MILLENNIUM_CROSS) and not c:IsPublic()
+	return c:IsCode(CARD_MILEON_CROSS) and not c:IsPublic()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local b1=Duel.CheckLPCost(tp,2000)

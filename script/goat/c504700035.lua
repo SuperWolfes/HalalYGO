@@ -44,11 +44,11 @@ function s.filter(c)
 	return c:IsRace(RACE_BEAST) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.filter(chkc) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and s.filter(chkc) end
 	local ct=e:GetHandler():GetMaterialCount()
-	if chk==0 then return ct>0 and Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,ct,nil) end
+	if chk==0 then return ct>0 and Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,ct,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RTOHAND)
-	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,ct,ct,nil)
+	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,ct,ct,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,ct,0,0)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)

@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon 1 "Ancient Gear" monster from the hand or GY
+	--Special Summon 1 "Ancient Gear" monster from the hand or RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -29,23 +29,23 @@ function s.initial_effect(c)
 	e3:SetOperation(s.desop)
 	c:RegisterEffect(e3)
 end
-s.listed_names={CARD_ANCIENT_GEAR_GOLEM,id}
+s.listed_names={CARD_ANCIENT_GEAR_GOPAL,id}
 s.listed_series={SET_ANCIENT_GEAR}
 function s.spfilter(c,e,tp)
 	return c:IsSetCard(SET_ANCIENT_GEAR) and c:IsMonster() and not c:IsCode(id) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
-	local loc=LOCATION_HAND|(Duel.IsExistingMatchingCard(nil,tp,0,LOCATION_MZONE,1,nil) and LOCATION_GRAVE or 0)
+	local loc=LOCATION_HAND|(Duel.IsExistingMatchingCard(nil,tp,0,LOCATION_MZONE,1,nil) and LOCATION_REST or 0)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,loc,0,1,nil,e,tp) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,loc)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND|LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND|LOCATION_REST)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
-	local loc=LOCATION_HAND|(Duel.IsExistingMatchingCard(nil,tp,0,LOCATION_MZONE,1,nil) and LOCATION_GRAVE or 0)
+	local loc=LOCATION_HAND|(Duel.IsExistingMatchingCard(nil,tp,0,LOCATION_MZONE,1,nil) and LOCATION_REST or 0)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,loc,0,1,1,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,loc,0,1,1,nil,e,tp)
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,true,false,POS_FACEUP)
 	end
@@ -61,12 +61,12 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and Duel.Destroy(tc,REASON_EFFECT)>0 then
 		local c=e:GetHandler()
-		--"Ancient Gear Golem" and monsters that mention it gain 600 ATK
+		--"Ancient Gear Gopal" and monsters that mention it gain 600 ATK
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_FIELD)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)
 		e1:SetTargetRange(LOCATION_MZONE,0)
-		e1:SetTarget(function(e,c) return c:IsCode(CARD_ANCIENT_GEAR_GOLEM) or c:ListsCode(CARD_ANCIENT_GEAR_GOLEM) end)
+		e1:SetTarget(function(e,c) return c:IsCode(CARD_ANCIENT_GEAR_GOPAL) or c:ListsCode(CARD_ANCIENT_GEAR_GOPAL) end)
 		e1:SetValue(600)
 		e1:SetReset(RESET_PHASE|PHASE_END)
 		Duel.RegisterEffect(e1,tp)

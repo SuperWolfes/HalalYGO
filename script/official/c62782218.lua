@@ -34,19 +34,19 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
+	Duel.SendtoRest(e:GetHandler(),REASON_COST)
 end
 function s.spfilter(c,e,tp,satk)
 	local atk=c:GetAttack()
-	return atk>=0 and (not satk or atk==satk) and c:IsRace(RACE_ZOMBIE)
+	return atk>=0 and (not satk or atk==satk) and c:IsRace(RACE_TOXIC)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 		if ft<=0 then return false end
-		if ft==1 or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then
+		if ft==1 or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then
 			return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND,0,1,e:GetHandler(),e,tp,2000)
 		else
 			local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_HAND,0,e:GetHandler(),e,tp)
@@ -58,7 +58,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ft<=0 then return end
-	if ft==1 or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then
+	if ft==1 or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_HAND,0,1,1,nil,e,tp,2000)
 		if #g>0 then

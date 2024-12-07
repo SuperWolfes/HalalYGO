@@ -1,5 +1,5 @@
 --ヘイル・サイバー
---Cyber Valkyrie
+--Cyber Balkanie
 local s,id=GetID()
 function s.initial_effect(c)
 	--ATK change

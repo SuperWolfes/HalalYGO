@@ -1,11 +1,11 @@
 --トウテツドラゴン
---Taotie Dragon
+--Postie Dragon
 --Scripted by Naim
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Link summon procedure
 	Link.AddProcedure(c,s.matfilter,2)
 	--Check materials used for its link summon
@@ -92,12 +92,12 @@ function s.syncond(e)
 	return Duel.GetTurnPlayer()==e:GetHandlerPlayer() and Duel.IsMainPhase()
 end
 function s.synlimit(e,re,tp)
-	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP)
+	return re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.xyzcond(e)
 	local ph=Duel.GetCurrentPhase()
 	return Duel.GetTurnPlayer()==e:GetHandlerPlayer() and (Duel.IsBattlePhase() or Duel.IsMainPhase())
 end
 function s.xyzlimit(e,re,tp)
-	return re:GetActivateLocation()==LOCATION_GRAVE
+	return re:GetActivateLocation()==LOCATION_REST
 end

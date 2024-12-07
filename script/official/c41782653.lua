@@ -2,7 +2,7 @@
 --Overtex Qoatlus
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Cannot special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
-	--Destroy 1 monster and negate Spell/Trap activation
+	--Destroy 1 monster and negate Actional/Trap activation
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_NEGATE+CATEGORY_DESTROY)
@@ -38,7 +38,7 @@ function s.initial_effect(c)
 	e4:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e4:SetProperty(EFFECT_FLAG_DELAY)
-	e4:SetCode(EVENT_TO_GRAVE)
+	e4:SetCode(EVENT_TO_REST)
 	e4:SetCountLimit(1,id)
 	e4:SetCondition(s.thcon)
 	e4:SetTarget(s.thtg)
@@ -111,7 +111,7 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsReason(REASON_EFFECT)
 end
 function s.thfilter(c)
-	return c:IsSetCard(0x10e) and c:IsSpell() and c:IsAbleToHand()
+	return c:IsSetCard(0x10e) and c:IsActional() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

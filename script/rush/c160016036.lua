@@ -1,5 +1,5 @@
 --七宝神－良財
---Deity of Seven Treasures - Ryozai
+--Being of Seven Treasures - Ryozai
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -29,8 +29,8 @@ end
 function s.spcon(e,c)
 	if c==nil then return true end
 	return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(s.cfilter,c:GetControler(),LOCATION_GRAVE,0,1,nil)
+		and Duel.IsExistingMatchingCard(s.cfilter,c:GetControler(),LOCATION_REST,0,1,nil)
 end
 function s.indtg(e,c)
-	return (c:IsFaceup() and c:IsMonster() and c:IsLevel(7)) or (c:IsFacedown() and c:IsSpellTrap())
+	return (c:IsFaceup() and c:IsMonster() and c:IsLevel(7)) or (c:IsFacedown() and c:IsActionalTrap())
 end

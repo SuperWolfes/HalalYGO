@@ -1,9 +1,9 @@
 --表裏の女神
---Goddess of Duality
+--Monsterdess of Duality
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	--Add 1 monster from your Deck to your hand that has a coin tossing effect, except "Goddess of Duality"
+	--Add 1 monster from your Deck to your hand that has a coin tossing effect, except "Monsterdess of Duality"
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	--Toss a coin and call it
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
-	e3:SetCategory(CATEGORY_COIN+CATEGORY_ATKCHANGE+CATEGORY_TOGRAVE+CATEGORY_DRAW)
+	e3:SetCategory(CATEGORY_COIN+CATEGORY_ATKCHANGE+CATEGORY_TOREST+CATEGORY_DRAW)
 	e3:SetType(EFFECT_TYPE_IGNITION)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetCountLimit(1,{id,1})
@@ -47,9 +47,9 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.cointg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetFieldGroup(tp,LOCATION_MZONE,0)
-	if chk==0 then return g:IsExists(Card.IsFaceup,1,nil) or (g:IsExists(Card.IsAbleToGrave,1,nil) and Duel.IsPlayerCanDraw(tp,1)) end
+	if chk==0 then return g:IsExists(Card.IsFaceup,1,nil) or (g:IsExists(Card.IsAbleToRest,1,nil) and Duel.IsPlayerCanDraw(tp,1)) end
 	Duel.SetOperationInfo(0,CATEGORY_COIN,nil,0,tp,1)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,g,#g,tp,0)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,g,#g,tp,0)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
 end
 function s.coinop(e,tp,eg,ep,ev,re,r,rp)
@@ -68,9 +68,9 @@ function s.coinop(e,tp,eg,ep,ev,re,r,rp)
 			tc:RegisterEffect(e1)
 		end
 	else
-		--Send as many monsters you control as possible to the GY, and if you do, draw 1 card
+		--Send as many monsters you control as possible to the RP, and if you do, draw 1 card
 		local g=Duel.GetFieldGroup(tp,LOCATION_MZONE,0)
-		if #g>0 and Duel.SendtoGrave(g,REASON_EFFECT)>0 and g:IsExists(Card.IsLocation,1,nil,LOCATION_GRAVE) then
+		if #g>0 and Duel.SendtoRest(g,REASON_EFFECT)>0 and g:IsExists(Card.IsLocation,1,nil,LOCATION_REST) then
 			Duel.Draw(tp,1,REASON_EFFECT)
 		end
 	end

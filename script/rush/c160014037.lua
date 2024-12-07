@@ -3,7 +3,7 @@
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send the top 2 cards of your Deck to the GY
+	--Send the top 2 cards of your Deck to the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DECKDES+CATEGORY_SPECIAL_SUMMON)
@@ -43,10 +43,10 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Effect
 	if Duel.DiscardDeck(tp,2,REASON_EFFECT)~=2 then return end
 	if Duel.GetTurnCount()==2 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_GRAVE,LOCATION_GRAVE,1,nil,e,tp)
+		and Duel.IsExistingMatchingCard(aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,LOCATION_REST,1,nil,e,tp)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local sg=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,1,nil,e,tp)
+		local sg=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_REST,LOCATION_REST,1,1,nil,e,tp)
 		if #sg>0 then
 			Duel.BreakEffect()
 			Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)

@@ -2,7 +2,7 @@
 --Elemental HERO Neo Bubbleman
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Cannot be Special Summoned, except by its own effect
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -39,7 +39,7 @@ function s.initial_effect(c)
 end
 s.listed_names={79979666,46411259} --Elemental HERO Bubbleman, Metamorphosis
 function s.spfilter(c,...)
-	return c:IsCode(...) and c:IsAbleToGraveAsCost()
+	return c:IsCode(...) and c:IsAbleToRestAsCost()
 end
 function s.rescon(sg,e,tp,mg)
 	return aux.ChkfMMZ(1)(sg,e,tp,mg) and sg:IsExists(s.chk,1,nil,sg)
@@ -60,7 +60,7 @@ end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,c)
 	local sg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE,0,nil,79979666)
 	sg:Merge(Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_HAND,0,nil,46411259))
-	local g=aux.SelectUnselectGroup(sg,e,tp,2,2,s.rescon,1,tp,HINTMSG_TOGRAVE,nil,nil,true)
+	local g=aux.SelectUnselectGroup(sg,e,tp,2,2,s.rescon,1,tp,HINTMSG_TOREST,nil,nil,true)
 	if #g>0 then
 		g:KeepAlive()
 		e:SetLabelObject(g)
@@ -71,7 +71,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	g:DeleteGroup()
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)

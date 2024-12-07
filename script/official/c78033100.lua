@@ -27,7 +27,7 @@ s.listed_series={0x69}
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local bc=c:GetBattleTarget()
-	return c:IsRelateToBattle() and c:IsFaceup() and bc:IsLocation(LOCATION_GRAVE) and bc:IsReason(REASON_BATTLE)
+	return c:IsRelateToBattle() and c:IsFaceup() and bc:IsLocation(LOCATION_REST) and bc:IsReason(REASON_BATTLE)
 end
 function s.spfilter1(c,e,tp)
 	return c:IsType(TYPE_NORMAL) and c:IsRace(RACE_DRAGON) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -44,9 +44,9 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=nil
 	if e:GetLabel()==0 then
-		g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter1),tp,0x13,0,1,1,nil,e,tp)
+		g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter1),tp,0x13,0,1,1,nil,e,tp)
 	else
-		g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter2),tp,0x13,0,1,1,nil,e,tp)
+		g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter2),tp,0x13,0,1,1,nil,e,tp)
 	end
 	local tc=g:GetFirst()
 	if not tc then return end

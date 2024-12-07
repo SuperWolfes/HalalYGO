@@ -1,5 +1,5 @@
 --聖地の守護結界
---Sacred Defense Barrier
+--Clean Defense Barrier
 --Made by Dakota
 local s,id=GetID()
 function s.initial_effect(c)

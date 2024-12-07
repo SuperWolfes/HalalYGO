@@ -1,12 +1,12 @@
 --魔轟神レヴェルゼブル
---Fabledswarm Leverzebul
+--Fablousswarm Leverzebul
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Synchro Summon procedure: 1 Tuner + 1+ non-Tuner monsters
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
-	--Tribute any number of "Fabled" monsters and take control of that many face-up monsters your opponent controls
+	--Tribute any number of "Fablous" monsters and take control of that many face-up monsters your opponent controls
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_RELEASE+CATEGORY_CONTROL)
@@ -19,21 +19,21 @@ function s.initial_effect(c)
 	e1:SetTarget(s.cttg)
 	e1:SetOperation(s.ctop)
 	c:RegisterEffect(e1)
-	--Return this card to the Extra Deck and add 1 other "Fabled" card from your GY to your hand
+	--Return this card to the Extra Deck and add 1 other "Fablous" card from your RP to your hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOEXTRA+CATEGORY_TOHAND)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,id)
 	e2:SetTarget(s.thtg)
 	e2:SetOperation(s.thop)
 	c:RegisterEffect(e2)
 end
-s.listed_series={SET_FABLED}
+s.listed_series={SET_FABLOUS}
 function s.rlfilter(c,tp,chk)
-	return c:IsReleasableByEffect() and c:IsSetCard(SET_FABLED)
+	return c:IsReleasableByEffect() and c:IsSetCard(SET_FABLOUS)
 		and (chk==1 or Duel.GetMZoneCount(tp,c,tp,LOCATION_REASON_CONTROL)>0)
 end
 function s.cttg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -65,14 +65,14 @@ function s.ctop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.thfilter(c)
-	return c:IsSetCard(SET_FABLED) and c:IsAbleToHand()
+	return c:IsSetCard(SET_FABLOUS) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.thfilter(chkc) and chkc~=c end
-	if chk==0 then return c:IsAbleToExtra() and Duel.IsExistingTarget(s.thfilter,tp,LOCATION_GRAVE,0,1,c) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.thfilter(chkc) and chkc~=c end
+	if chk==0 then return c:IsAbleToExtra() and Duel.IsExistingTarget(s.thfilter,tp,LOCATION_REST,0,1,c) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,c)
+	local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_REST,0,1,1,c)
 	Duel.SetOperationInfo(0,CATEGORY_TOEXTRA,c,1,tp,0)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,tp,0)
 end

@@ -3,8 +3,8 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Link Summon procedure
 	Link.AddProcedure(c,nil,2,2,s.lcheck)
 	--Special Summon 1 Level 3 or lower Tuner monster from your Deck

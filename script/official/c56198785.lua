@@ -1,5 +1,5 @@
 --背護衛
---Guard Ghost
+--Guard Miss
 --Scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	e1:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_CARD_TARGET)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e1:SetCountLimit(1,id)
-	e1:SetCondition(function(e) return e:GetHandler():IsSummonLocation(LOCATION_GRAVE) end)
+	e1:SetCondition(function(e) return e:GetHandler():IsSummonLocation(LOCATION_REST) end)
 	e1:SetTarget(s.indtg)
 	e1:SetOperation(s.indop)
 	c:RegisterEffect(e1)

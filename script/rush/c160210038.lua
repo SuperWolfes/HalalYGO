@@ -1,5 +1,5 @@
 --超銀河王ロード・オブ・ギャラクティカ
---Super Galaxy King Lord of Galactica
+--Super Galaxy King Watcher of Galactica
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -47,14 +47,14 @@ function s.thfilter(c)
 	return c:IsLevel(10) and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,2,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,2,tp,LOCATION_GRAVE)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,2,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,2,tp,LOCATION_REST)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	--Effect
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_GRAVE,0,2,2,nil)
+	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,2,2,nil)
 	if #g>0 then
 		local ct=Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)

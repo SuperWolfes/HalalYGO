@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -44,7 +44,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.repfilter(c)
-	return c:IsSpell() and c:IsLocation(LOCATION_SZONE) and not c:IsStatus(STATUS_DESTROY_CONFIRMED)
+	return c:IsActional() and c:IsLocation(LOCATION_SZONE) and not c:IsStatus(STATUS_DESTROY_CONFIRMED)
 end
 function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -54,7 +54,7 @@ function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 	if Duel.SelectEffectYesNo(tp,c,96) then
 		local g=c:GetEquipGroup()
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local sg=g:FilterSelect(tp,s.repfilter,1,1,nil)
 		Duel.SetTargetCard(sg)
 		return true
@@ -62,5 +62,5 @@ function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.desrepop(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
-	Duel.SendtoGrave(tg,REASON_EFFECT+REASON_REPLACE)
+	Duel.SendtoRest(tg,REASON_EFFECT+REASON_REPLACE)
 end

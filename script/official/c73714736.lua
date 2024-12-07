@@ -1,5 +1,5 @@
 --炎の剣域
---Flame Swordsrealm
+--Flame Swordsterritory
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -49,7 +49,7 @@ function s.limop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.costfilter(c,e,tp)
-	return c:IsMonster() and c:IsAbleToGraveAsCost() and (c:IsLocation(LOCATION_HAND) or c:IsFaceup())
+	return c:IsMonster() and c:IsAbleToRestAsCost() and (c:IsLocation(LOCATION_HAND) or c:IsFaceup())
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,c)
 end
 function s.spfilter(c,e,tp,mc)
@@ -58,9 +58,9 @@ function s.spfilter(c,e,tp,mc)
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND|LOCATION_MZONE,0,1,nil,e,tp) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND|LOCATION_MZONE,0,1,1,nil,e,tp)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp) end

@@ -2,7 +2,7 @@
 --Vylon Omega
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Synchro Summon Procedure
 	Synchro.AddProcedure(c,nil,2,2,Synchro.NonTunerEx(Card.IsSetCard,SET_VYLON),1,1)
 	--Destroy all Normal Summoned/Set monsters
@@ -65,14 +65,14 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.eqfilter(c)
-	return c:IsSetCard(SET_VYLON) and c:IsMonster() and not c:IsForbidden()
+	return c:IsSetCard(SET_VYLON) and c:IsMonster() and not c:IsUnliked()
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and Duel.IsExistingTarget(s.eqfilter,tp,LOCATION_GRAVE,0,1,nil) end
+		and Duel.IsExistingTarget(s.eqfilter,tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-	local g=Duel.SelectTarget(tp,s.eqfilter,tp,LOCATION_GRAVE,0,1,1,nil)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,0,0)
+	local g=Duel.SelectTarget(tp,s.eqfilter,tp,LOCATION_REST,0,1,1,nil)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_EQUIP,g,1,0,0)
 end
 function s.equipop(c,e,tp,tc)
@@ -90,10 +90,10 @@ function s.discon(e,tp,eg,ep,ev,re,r,rp)
 		and Duel.IsChainNegatable(ev)
 end
 function s.discost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():GetEquipGroup():IsExists(Card.IsAbleToGraveAsCost,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local g=e:GetHandler():GetEquipGroup():FilterSelect(tp,Card.IsAbleToGraveAsCost,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	if chk==0 then return e:GetHandler():GetEquipGroup():IsExists(Card.IsAbleToRestAsCost,1,nil) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	local g=e:GetHandler():GetEquipGroup():FilterSelect(tp,Card.IsAbleToRestAsCost,1,1,nil)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.distg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

@@ -31,7 +31,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
 end
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_FIEND) and c:IsLevelAbove(7) and c:IsDefensePos()
+	return c:IsFaceup() and c:IsRace(RACE_TAINTED) and c:IsLevelAbove(7) and c:IsDefensePos()
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

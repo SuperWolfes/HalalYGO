@@ -1,5 +1,5 @@
 --ＶＳ 蛟龍
---Vanquish Soul Jiaolong
+--Vanquish Miss Jiaolong
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
@@ -30,14 +30,14 @@ function s.initial_effect(c)
 	e2:SetOperation(s.vsop)
 	c:RegisterEffect(e2)
 end
-s.listed_series={SET_VANQUISH_SOUL}
+s.listed_series={SET_VANQUISH_MISS}
 s.listed_names={id}
 function s.opccost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFlagEffect(tp,id)==0 end
 	Duel.RegisterFlagEffect(tp,id,RESET_CHAIN,0,1)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
-	return re and re:IsActivated() and re:GetHandler():IsSetCard(SET_VANQUISH_SOUL)
+	return re and re:IsActivated() and re:GetHandler():IsSetCard(SET_VANQUISH_MISS)
 		and r&REASON_COST>0 and rp==tp
 		and eg:IsExists(Card.IsLocation,1,nil,LOCATION_HAND)
 end
@@ -57,7 +57,7 @@ function s.vscostfilter(c)
 	return c:IsAttribute(ATTRIBUTE_FIRE) and not c:IsPublic()
 end
 function s.thfilter(c)
-	return c:IsSetCard(SET_VANQUISH_SOUL) and c:IsAbleToHand() and not c:IsCode(id)
+	return c:IsSetCard(SET_VANQUISH_MISS) and c:IsAbleToHand() and not c:IsCode(id)
 end
 function s.vstg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local cg=Duel.GetMatchingGroup(s.vscostfilter,tp,LOCATION_HAND,0,nil)
@@ -90,7 +90,7 @@ function s.vsop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.ChangePosition(g,POS_FACEUP_DEFENSE,POS_FACEUP_ATTACK,POS_FACEUP_ATTACK,POS_FACEUP_ATTACK)
 		end
 	elseif op==2 then
-		--Search 1 "Vanquish Soul" card, except "Vanquish Soul Jiaolong"
+		--Search 1 "Vanquish Miss" card, except "Vanquish Miss Jiaolong"
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 		local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_DECK,0,1,1,nil)
 		if #g>0 then

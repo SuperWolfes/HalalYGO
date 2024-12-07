@@ -45,7 +45,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetValue(400)
 		e1:SetReset(RESETS_STANDARD_PHASE_END)
 		tc:RegisterEffect(e1)
-		if not Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_GRAVE,0,1,nil) then
+		if not Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_REST,0,1,nil) then
 			Duel.BreakEffect()
 			--Gains 600 ATK
 			local e2=Effect.CreateEffect(c)

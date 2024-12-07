@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c,e,tp)
-	return c:IsSetCard(0x83) and c:IsControler(tp) and c:IsLocation(LOCATION_GRAVE) and c:IsReason(REASON_BATTLE)
+	return c:IsSetCard(0x83) and c:IsControler(tp) and c:IsLocation(LOCATION_REST) and c:IsReason(REASON_BATTLE)
 		and c:IsLevelBelow(4) and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil,c:GetCode(),e,tp)
 end
 function s.filter(c,code,e,tp)

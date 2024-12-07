@@ -1,10 +1,10 @@
 --聖刻天龍－エネアード
---Hieratic Heavenly Dragon Overlord of Heliopolis
+--Hieratic Spectrumly Dragon Overwatcher of Heliopolis
 local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz summon
 	Xyz.AddProcedure(c,nil,8,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Negate
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1,false,REGISTER_FLAG_DETACH_XMAT)
 end
 function s.tfilter(c,tp)
-	return (c:IsOnField() or c:IsLocation(LOCATION_GRAVE) or c:IsLocation(LOCATION_REMOVED)) and c:IsControler(tp)
+	return (c:IsOnField() or c:IsLocation(LOCATION_REST) or c:IsLocation(LOCATION_REMOVED)) and c:IsControler(tp)
 end
 function s.discon(e,tp,eg,ep,ev,re,r,rp)
 	if rp==tp or e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED) then return false end

@@ -68,7 +68,7 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	if typ&TYPE_MONSTER~=0 then
 		c:RegisterFlagEffect(0,RESET_EVENT+RESETS_STANDARD,EFFECT_FLAG_CLIENT_HINT,1,0,aux.Stringid(id,2))
 	end
-	if typ&TYPE_SPELL~=0 then
+	if typ&TYPE_ACTIONAL~=0 then
 		c:RegisterFlagEffect(0,RESET_EVENT+RESETS_STANDARD,EFFECT_FLAG_CLIENT_HINT,1,0,aux.Stringid(id,3))
 	end
 	if typ&TYPE_TRAP~=0 then

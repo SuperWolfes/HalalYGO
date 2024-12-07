@@ -1,9 +1,9 @@
---Performage Shadow Maker
+--Performanced Shadow Maker
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,5,3)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)

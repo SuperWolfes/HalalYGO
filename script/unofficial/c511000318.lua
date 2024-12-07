@@ -23,7 +23,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local op=Duel.SelectOption(1-tp,aux.Stringid(id,0),aux.Stringid(id,1))
 	if op==0 then
 		local sg=g:RandomSelect(1-tp,1)
-		Duel.SendtoGrave(sg,REASON_EFFECT+REASON_DISCARD)
+		Duel.SendtoRest(sg,REASON_EFFECT+REASON_DISCARD)
 	else
 		local g=Duel.GetMatchingGroup(nil,tp,0,LOCATION_HAND,nil)
 		Duel.ConfirmCards(tp,g)

@@ -1,11 +1,11 @@
 --鋼鉄の魔導騎士-ギルティギア・フリード
---Gilti-Gearfried the Magical Steel Knight
+--Gilti-Gearfried the Mentoral Steel Knight
 --Scripted by Naim
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Fusion summon procedure
 	Fusion.AddProcMixN(c,true,true,s.ffilter,2)
 	--If fusion summoned using only monsters on the field, can make a second attack
@@ -78,12 +78,12 @@ function s.valcheck(e,c)
 	end
 end
 function s.costfil(c)
-	return c:IsSpell() and c:IsAbleToRemoveAsCost()
+	return c:IsActional() and c:IsAbleToRemoveAsCost()
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.costfil,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.costfil,tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.costfil,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.costfil,tp,LOCATION_REST,0,1,1,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)

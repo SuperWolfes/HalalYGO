@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.extrafilter(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,nil,e)
+	return Duel.GetMatchingGroup(s.filter,tp,LOCATION_REST,0,nil,e)
 end
 function s.extraop(e,tc,tp,sg)
 	for sc in aux.Next(sg) do

@@ -3,10 +3,10 @@
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Xyz Summon procedure: 2+ Level 3 monsters
 	Xyz.AddProcedure(c,nil,3,2,nil,nil,99)
-	--Special Summon 1 "Materiactor" monster from your Deck, OR add 1 "Materiactor" Spell/Trap from your Deck to your hand
+	--Special Summon 1 "Materiactor" monster from your Deck, OR add 1 "Materiactor" Actional/Trap from your Deck to your hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -37,7 +37,7 @@ end
 s.listed_series={SET_MATERIACTOR}
 function s.deckspthfilter(c,e,tp,mmz_chk)
 	return c:IsSetCard(SET_MATERIACTOR) and ((c:IsMonster() and mmz_chk and c:IsCanBeSpecialSummoned(e,0,tp,false,false))
-		or (c:IsSpellTrap() and c:IsAbleToHand()))
+		or (c:IsActionalTrap() and c:IsAbleToHand()))
 end
 function s.deckspthtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.deckspthfilter,tp,LOCATION_DECK,0,1,nil,e,tp,Duel.GetLocationCount(tp,LOCATION_MZONE)>0) end
@@ -50,7 +50,7 @@ function s.deckspthop(e,tp,eg,ep,ev,re,r,rp)
 	if not sc then return end
 	if sc:IsMonster() then
 		Duel.SpecialSummon(sc,0,tp,tp,false,false,POS_FACEUP)
-	elseif sc:IsSpellTrap() then
+	elseif sc:IsActionalTrap() then
 		Duel.SendtoHand(sc,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,sc)
 	end
@@ -73,7 +73,7 @@ function s.xyzthop(e,tp,eg,ep,ev,re,r,rp)
 	local sg=aux.SelectUnselectGroup(og,e,tp,1,2,s.rescon,1,tp,HINTMSG_ATOHAND)
 	if #sg>0 and Duel.SendtoHand(sg,nil,REASON_EFFECT)>0 then
 		Duel.ConfirmCards(1-tp,sg)
-		if Duel.IsExistingMatchingCard(Card.IsType,tp,LOCATION_GRAVE,0,1,nil,TYPE_NORMAL)
+		if Duel.IsExistingMatchingCard(Card.IsType,tp,LOCATION_REST,0,1,nil,TYPE_NORMAL)
 			and Duel.IsExistingMatchingCard(Card.IsAbleToHand,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil)
 			and Duel.SelectYesNo(tp,aux.Stringid(id,3)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RTOHAND)

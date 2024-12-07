@@ -1,5 +1,5 @@
 --ＷＲＵＭ－ホープ・フォース
---Double-Rank-Up-Magic Utopia Force
+--Double-Rank-Up-Ment Utopia Fcoree
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -30,7 +30,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and s.filter1(chkc,e,tp) end
 	if chk==0 then
 		local pg=aux.GetMustBeMaterialGroup(tp,Group.CreateGroup(),tp,nil,nil,REASON_XYZ)
-		return #pg<=0 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) and aux.CheckSummonGate(tp,2)
+		return #pg<=0 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) and aux.CheckSummonGate(tp,2)
 			and Duel.IsExistingTarget(s.filter1,tp,LOCATION_MZONE,0,1,nil,e,tp)
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
@@ -39,7 +39,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local pg=aux.GetMustBeMaterialGroup(tp,Group.CreateGroup(),tp,nil,nil,REASON_XYZ)
-	if #pg>0 or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
+	if #pg>0 or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
 	if not aux.CheckSummonGate(tp,2) then return end
 	local tc=Duel.GetFirstTarget()
 	if not tc or tc:IsFacedown() or not tc:IsRelateToEffect(e) or tc:IsControler(1-tp) or tc:IsImmuneToEffect(e) then return end
@@ -58,7 +58,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			Duel.BreakEffect()
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)
 			local ovg=ov:Select(tp,2,2,nil)
-			Duel.SendtoGrave(ovg,REASON_EFFECT)
+			Duel.SendtoRest(ovg,REASON_EFFECT)
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)
 			local ovsg=ovg:Select(tp,1,1,nil)
 			local osg=sg:Select(tp,1,1,nil)

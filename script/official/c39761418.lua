@@ -1,5 +1,5 @@
 --アルカナフォースⅩⅨ－ＴＨＥ ＳＵＮ
---Arcana Force XIX - The Sun
+--Arcana Fcoree XIX - The Sun
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
@@ -45,18 +45,18 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.cointg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	local sg=Duel.GetMatchingGroup(Card.IsSpellTrap,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil)
+	local sg=Duel.GetMatchingGroup(Card.IsActionalTrap,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil)
 	Duel.SetOperationInfo(0,CATEGORY_COIN,nil,0,tp,1)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_DESTROY,sg,#sg,tp,0)
 end
 function s.setfilter(c)
-	return c.toss_coin and c:IsSpell() and c:IsSSetable()
+	return c.toss_coin and c:IsActional() and c:IsSSetable()
 end
 function s.coinop(e,tp,eg,ep,ev,re,r,rp)
 	local coin=nil
 	if Duel.IsPlayerAffectedByEffect(tp,CARD_LIGHT_BARRIER) then
 		local b1=Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_DECK,0,1,nil)
-		local b2=Duel.IsExistingMatchingCard(Card.IsSpellTrap,tp,LOCATION_STZONE,LOCATION_STZONE,1,nil)
+		local b2=Duel.IsExistingMatchingCard(Card.IsActionalTrap,tp,LOCATION_STZONE,LOCATION_STZONE,1,nil)
 		local op=Duel.SelectEffect(tp,
 			{b1,aux.GetCoinEffectHintString(COIN_HEADS)},
 			{b2,aux.GetCoinEffectHintString(COIN_TAILS)})
@@ -66,15 +66,15 @@ function s.coinop(e,tp,eg,ep,ev,re,r,rp)
 		coin=Duel.TossCoin(tp,1)
 	end
 	if coin==COIN_HEADS then
-		--Heads: Set 1 Spell from your Deck that has a coin tossing effect
+		--Heads: Set 1 Actional from your Deck that has a coin tossing effect
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 		local g=Duel.SelectMatchingCard(tp,s.setfilter,tp,LOCATION_DECK,0,1,1,nil)
 		if #g>0 then
 			Duel.SSet(tp,g)
 		end
 	elseif coin==COIN_TAILS then
-		--Tails: Destroy all cards in the Spell & Trap Zones
-		local g=Duel.GetMatchingGroup(Card.IsSpellTrap,tp,LOCATION_STZONE,LOCATION_STZONE,nil)
+		--Tails: Destroy all cards in the Actional & Trap Zones
+		local g=Duel.GetMatchingGroup(Card.IsActionalTrap,tp,LOCATION_STZONE,LOCATION_STZONE,nil)
 		if #g>0 then
 			Duel.Destroy(g,REASON_EFFECT)
 		end

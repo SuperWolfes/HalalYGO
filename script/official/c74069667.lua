@@ -1,10 +1,10 @@
 --ＤＤＤ壊薙王アビス・ラグナロク
---D/D/D Oblivion King Abyss Ragnarok
+--D/D/D Oblivion King Abyss Ragka
 local s,id=GetID()
 function s.initial_effect(c)
 	--Pendulum Summon procedure
 	Pendulum.AddProcedure(c)
-	--Special Summon 1 "D/D" monster from your GY, and if you do, take 1000 damage
+	--Special Summon 1 "D/D" monster from your RP, and if you do, take 1000 damage
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_DAMAGE)
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Special Summon 1 "D/D/D" monster from your GY
+	--Special Summon 1 "D/D/D" monster from your RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -59,11 +59,11 @@ end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local label=e:GetLabel()
 	local arch=label==1 and SET_DD or SET_DDD
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp,arch) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp,arch) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp,arch) end
+		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp,arch) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp,arch)
+	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp,arch)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,0)
 	if label==1 then
 		Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,tp,1000)

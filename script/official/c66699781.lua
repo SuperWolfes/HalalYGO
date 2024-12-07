@@ -75,7 +75,7 @@ function s.lizfilter(e,c)
 	return not c:IsOriginalType(TYPE_SYNCHRO) or not c:IsAttribute(ATTRIBUTE_LIGHT|ATTRIBUTE_DARK)
 end
 function s.rmcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_GRAVE) and r==REASON_SYNCHRO
+	return e:GetHandler():IsLocation(LOCATION_REST) and r==REASON_SYNCHRO
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ct=e:GetHandler():GetReasonCard():GetMaterialCount()-1

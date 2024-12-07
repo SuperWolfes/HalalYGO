@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMixN(c,true,true,s.ffilter,2)
 	--special summon
 	local e1=Effect.CreateEffect(c)
@@ -43,7 +43,7 @@ function s.initial_effect(c)
 	e4:SetOperation(s.ctop)
 	c:RegisterEffect(e4)
 end
-s.miracle_synchro_fusion=true
+s.pulse_synchro_fusion=true
 function s.ffilter(c,fc,sumtype,tp)
 	return c:IsAttribute(ATTRIBUTE_EARTH,fc,sumtype,tp) and c:IsRace(RACE_WARRIOR,fc,sumtype,tp) and c:IsType(TYPE_SYNCHRO,fc,sumtype,tp)
 end
@@ -51,13 +51,13 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local bc=c:GetBattleTarget()
 	if not c:IsRelateToBattle() or c:IsFacedown() then return false end
-	return bc:IsLocation(LOCATION_GRAVE) and bc:IsMonster()
+	return bc:IsLocation(LOCATION_REST) and bc:IsMonster()
 end
 function s.spcon2(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()
 	local rc=tc:GetReasonCard()
 	return #eg==1 and rc:IsControler(tp) and rc:GetOwner()~=tp
-		and tc:IsMonster() and tc:IsReason(REASON_BATTLE) and tc:IsLocation(LOCATION_GRAVE)
+		and tc:IsMonster() and tc:IsReason(REASON_BATTLE) and tc:IsLocation(LOCATION_REST)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local bc=e:GetHandler():GetBattleTarget()

@@ -23,7 +23,7 @@ end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() end
 	if chk==0 then return not Duel.IsPlayerAffectedByEffect(tp,69832741) and Duel.IsExistingTarget(s.fld_fil,tp,LOCATION_MZONE,0,1,nil) 
-	and Duel.IsExistingMatchingCard(s.grv_fil,tp,LOCATION_GRAVE,0,1,nil) end
+	and Duel.IsExistingMatchingCard(s.grv_fil,tp,LOCATION_REST,0,1,nil) end
 	Duel.SelectTarget(tp,s.fld_fil,tp,LOCATION_MZONE,0,1,1,nil)
 end
 
@@ -33,7 +33,7 @@ end
 
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	local tg=Duel.GetFieldGroup(tp,LOCATION_GRAVE,0):Filter(s.grv_fil,nil)
+	local tg=Duel.GetFieldGroup(tp,LOCATION_REST,0):Filter(s.grv_fil,nil)
 	if tc:IsRelateToEffect(e) and #tg>0 then
 		if not Duel.Remove(tg,nil,REASON_EFFECT) then return end
 		local i=tg:Filter(Card.IsLocation,nil,LOCATION_REMOVED):GetSum(s.grv_lvl_sum)

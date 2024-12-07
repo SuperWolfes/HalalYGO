@@ -14,15 +14,15 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e2:SetCode(EVENT_TO_GRAVE)
+	e2:SetCode(EVENT_TO_REST)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
 end
 function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:IsLocation(LOCATION_MZONE+LOCATION_GRAVE) then
-		c:RegisterFlagEffect(id,RESET_EVENT|(RESETS_STANDARD|RESET_OVERLAY)&~(RESET_LEAVE|RESET_TOGRAVE),0,1)
+	if c:IsLocation(LOCATION_MZONE+LOCATION_REST) then
+		c:RegisterFlagEffect(id,RESET_EVENT|(RESETS_STANDARD|RESET_OVERLAY)&~(RESET_LEAVE|RESET_TOREST),0,1)
 	end
 end
 function s.filter(c,e,tp)
@@ -32,9 +32,9 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
 	if chk==0 then return e:GetHandler():GetFlagEffect(id)~=0 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g1=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,e:GetHandler(),e,tp)
+	local g1=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,e:GetHandler(),e,tp)
 	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_SPSUMMON)
-	local g2=Duel.SelectTarget(1-tp,s.filter,1-tp,LOCATION_GRAVE,0,1,1,e:GetHandler(),e,1-tp)
+	local g2=Duel.SelectTarget(1-tp,s.filter,1-tp,LOCATION_REST,0,1,1,e:GetHandler(),e,1-tp)
 	if #g1>0 and #g2>0 then
 		g1:Merge(g2)
 		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g1,2,PLAYER_ALL,g1:GetFirst():GetOwner())

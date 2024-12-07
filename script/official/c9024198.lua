@@ -5,8 +5,8 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Link Summon
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0xaf),2)
-	--Must be properly summoned before being revived
-	c:EnableReviveLimit()
+	--Must be properly summoned before being awaked
+	c:EnableAwakeLimit()
 	--Place 2 "D/D" monsters from your Deck to your Pendulum Zones
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.pltg)
 	e1:SetOperation(s.plop)
 	c:RegisterEffect(e1)
-	--Special summon "D/D" monster from face-up extra deck or GY
+	--Special summon "D/D" monster from face-up extra deck or RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -34,7 +34,7 @@ end
 s.listed_series={0xaf}
 	--Check for "D/D" pendulum monsters
 function s.pcfilter(c)
-	return c:IsSetCard(0xaf) and c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
+	return c:IsSetCard(0xaf) and c:IsType(TYPE_PENDULUM) and not c:IsUnliked()
 end
 	--Activation legality
 function s.pltg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -84,21 +84,21 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 		and (c:IsReason(REASON_EFFECT) or (c:IsReason(REASON_BATTLE) and Duel.GetAttacker():IsControler(1-tp)))
 		and c:IsSummonType(SUMMON_TYPE_LINK) and rp==1-tp
 end
-	--Check for "D/D" monster in GY or face-up extra deck
+	--Check for "D/D" monster in RP or face-up extra deck
 function s.spfilter(c,e,tp)
-	if c:IsLocation(LOCATION_GRAVE) and Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return false end
+	if c:IsLocation(LOCATION_REST) and Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return false end
 	if c:IsLocation(LOCATION_EXTRA) and Duel.GetLocationCountFromEx(tp,tp,nil,c)<=0 then return false end
 	return c:IsSetCard(0xaf) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
 end
 	--Activation legality
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE+LOCATION_EXTRA,0,1,nil,e,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE+LOCATION_EXTRA)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST+LOCATION_EXTRA,0,1,nil,e,tp) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST+LOCATION_EXTRA)
 end
-	--Performing the effect of special summoning a "D/D" monster from face-up extra deck or GY
+	--Performing the effect of special summoning a "D/D" monster from face-up extra deck or RP
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_GRAVE+LOCATION_EXTRA,0,1,1,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST+LOCATION_EXTRA,0,1,1,nil,e,tp)
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP_DEFENSE)
 	end

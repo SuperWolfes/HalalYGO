@@ -1,4 +1,4 @@
---Tomb of the Pharaoh (Skill Card)
+--Tomb of the Phor (Skill Card)
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddFieldSkillProcedure(c,2,false)

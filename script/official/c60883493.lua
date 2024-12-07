@@ -1,5 +1,5 @@
 --ＶＳ 裏螺旋流雪風
---Vanquish Soul Snow Devil
+--Vanquish Miss Snow Well
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.listed_series={SET_VANQUISH_SOUL}
+s.listed_series={SET_VANQUISH_MISS}
 function s.cfilter(c)
 	return c:IsAttribute(ATTRIBUTE_DARK|ATTRIBUTE_EARTH|ATTRIBUTE_FIRE) and not c:IsPublic()
 end
@@ -49,7 +49,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,dam)
 end
 function s.spfilter(c,e,tp)
-	return c:IsSetCard(SET_VANQUISH_SOUL) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsSetCard(SET_VANQUISH_MISS) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ct=e:GetLabel()
@@ -68,12 +68,12 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		if break_eff then Duel.BreakEffect() end
 		Duel.Damage(1-tp,600,REASON_EFFECT)
 		local c=e:GetHandler()
-		--"Vanquish Soul" monsters cannot be destroyed by effects
+		--"Vanquish Miss" monsters cannot be destroyed by effects
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_FIELD)
 		e1:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
 		e1:SetTargetRange(LOCATION_MZONE,0)
-		e1:SetTarget(function(e,c) return c:IsSetCard(SET_VANQUISH_SOUL) end)
+		e1:SetTarget(function(e,c) return c:IsSetCard(SET_VANQUISH_MISS) end)
 		e1:SetValue(1)
 		e1:SetReset(RESET_PHASE|PHASE_END)
 		Duel.RegisterEffect(e1,tp)

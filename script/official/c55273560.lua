@@ -1,5 +1,5 @@
 --白の聖女エクレシア
---Incredible Ecclesia, the Virtuous
+--Incredible Ecclipse, the Virtuous
 local s,id=GetID()
 function s.initial_effect(c)
 	--Special Summon itself from the hand
@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
 	e1:SetCondition(s.spcon)
 	c:RegisterEffect(e1)
-	--Special Summon 1 "Swordsoul" monster or 1 "Fallen of Albaz" from hand or Deck
+	--Special Summon 1 "Swordmiss" monster or 1 "Fallen of Albaz" from hand or Deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -31,23 +31,23 @@ function s.initial_effect(c)
 	e3:SetCategory(CATEGORY_TOHAND)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e3:SetCode(EVENT_PHASE+PHASE_END)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetCountLimit(1,{id,2})
 	e3:SetCondition(function(_,tp) return Duel.GetFlagEffect(tp,id)>0 end)
 	e3:SetTarget(s.thtg)
 	e3:SetOperation(s.thop)
 	c:RegisterEffect(e3)
-	-- Check for Fusion Monsters sent to the GY
+	-- Check for Fusion Monsters sent to the RP
 	aux.GlobalCheck(s,function()
 		local ge1=Effect.CreateEffect(c)
 		ge1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-		ge1:SetCode(EVENT_TO_GRAVE)
+		ge1:SetCode(EVENT_TO_REST)
 		ge1:SetOperation(s.checkop)
 		Duel.RegisterEffect(ge1,0)
 	end)
 end
 s.listed_names={CARD_ALBAZ}
-s.listed_series={SET_SWORDSOUL}
+s.listed_series={SET_SWORDMISS}
 -- global check
 function s.checkop(e,tp,eg,ep,ev,re,r,rp)
 	for tc in eg:Iter() do
@@ -62,7 +62,7 @@ function s.spcon(e,c)
 		and Duel.GetFieldGroupCount(c:GetControler(),LOCATION_MZONE,0,nil)<Duel.GetFieldGroupCount(c:GetControler(),0,LOCATION_MZONE,nil)
 end
 function s.ssfilter(c,e,tp)
-	return (c:IsCode(CARD_ALBAZ) or c:IsSetCard(SET_SWORDSOUL)) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return (c:IsCode(CARD_ALBAZ) or c:IsSetCard(SET_SWORDMISS)) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sstg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetMZoneCount(tp,e:GetHandler())>0

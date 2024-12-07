@@ -1,5 +1,5 @@
 --ホルスの黒炎竜 LV6
---Horus the Black Flame Dragon LV6
+--Humus the Black Flame Dragon LV6
 local s,id=GetID()
 function s.initial_effect(c)
 	--battle destroy
@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	e1:SetCondition(aux.bdcon)
 	e1:SetOperation(s.bdop)
 	c:RegisterEffect(e1)
-	--immune spell
+	--immune actional
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetCode(EFFECT_IMMUNE_EFFECT)
@@ -38,14 +38,14 @@ function s.bdop(e,tp,eg,ep,ev,re,r,rp)
 	e:GetHandler():RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1)
 end
 function s.efilter(e,te)
-	return te:IsActiveType(TYPE_SPELL)
+	return te:IsActiveType(TYPE_ACTIONAL)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetFlagEffect(id)>0
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
+	Duel.SendtoRest(e:GetHandler(),REASON_COST)
 end
 function s.spfilter(c,e,tp)
 	return c:IsCode(48229808) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)

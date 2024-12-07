@@ -70,7 +70,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
     if tc:IsRelateToEffect(e) and Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)>0
 		and tc:IsLevelAbove(5) and tc:IsRace(RACE_MACHINE)
-		and Duel.IsExistingMatchingCard(s.metalmorphfilter,tp,LOCATION_ONFIELD|LOCATION_GRAVE,0,1,exc)
+		and Duel.IsExistingMatchingCard(s.metalmorphfilter,tp,LOCATION_ONFIELD|LOCATION_REST,0,1,exc)
 		and Duel.IsExistingMatchingCard(nil,tp,0,LOCATION_MZONE,1,nil)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		local dg=Duel.GetMatchingGroup(nil,tp,0,LOCATION_MZONE,nil)

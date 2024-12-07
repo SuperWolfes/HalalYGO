@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	--Special Summon this card from the hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOGRAVE)
+	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOREST)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DELAY)
 	e1:SetCode(EVENT_SUMMON_SUCCESS)
@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e3:SetCode(EVENT_CHAINING)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetCountLimit(1)
-	e3:SetCondition(function(_,_,_,_,_,re) return re:IsSpellEffect() and re:IsHasType(EFFECT_TYPE_ACTIVATE) end)
+	e3:SetCondition(function(_,_,_,_,_,re) return re:IsActionalEffect() and re:IsHasType(EFFECT_TYPE_ACTIVATE) end)
 	e3:SetTarget(s.atktg)
 	e3:SetOperation(s.atkop)
 	c:RegisterEffect(e3)
@@ -44,21 +44,21 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,tp,LOCATION_HAND)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
 function s.tgfilter(c)
-	return c:IsRace(RACE_PYRO) and c:IsLevel(8) and c:IsAbleToGrave()
+	return c:IsRace(RACE_PYRO) and c:IsLevel(8) and c:IsAbleToRest()
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)>0 then
 		local g=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_DECK,0,nil)
 		if #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
-			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 			local sg=g:Select(tp,1,1,nil)
 			if #sg==0 then return end
 			Duel.BreakEffect()
-			Duel.SendtoGrave(sg,REASON_EFFECT)
+			Duel.SendtoRest(sg,REASON_EFFECT)
 		end
 	end
 end

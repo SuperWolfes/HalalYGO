@@ -2,7 +2,7 @@
 --Masked Ninja Ebisu
 local s,id=GetID()
 function s.initial_effect(c)
-	--Return Spells/Traps your opponent controls to the hand
+	--Return Actionals/Traps your opponent controls to the hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND)
@@ -24,7 +24,7 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ct=Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsSetCard,SET_NINJA),tp,LOCATION_MZONE,0,nil)
-	if chk==0 then return ct>0 and Duel.IsExistingMatchingCard(aux.AND(Card.IsSpellTrap,Card.IsAbleToHand),tp,0,LOCATION_ONFIELD,ct,nil) end
+	if chk==0 then return ct>0 and Duel.IsExistingMatchingCard(aux.AND(Card.IsActionalTrap,Card.IsAbleToHand),tp,0,LOCATION_ONFIELD,ct,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,ct,1-tp,LOCATION_ONFIELD)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
@@ -40,7 +40,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	aux.RegisterClientHint(c,0,tp,1,0,aux.Stringid(id,1))
 	local ct=Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsSetCard,SET_NINJA),tp,LOCATION_MZONE,0,nil)
 	if ct==0 then return end
-	local g=Duel.GetMatchingGroup(aux.AND(Card.IsSpellTrap,Card.IsAbleToHand),tp,0,LOCATION_ONFIELD,nil)
+	local g=Duel.GetMatchingGroup(aux.AND(Card.IsActionalTrap,Card.IsAbleToHand),tp,0,LOCATION_ONFIELD,nil)
 	if ct>#g then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RTOHAND)
 	local sg=g:Select(tp,ct,ct,nil)

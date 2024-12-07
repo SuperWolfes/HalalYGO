@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunction(Card.IsLevel,3),2,2)
 	--indestructable
 	local e1=Effect.CreateEffect(c)
@@ -47,9 +47,9 @@ function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return not c:IsReason(REASON_REPLACE) and (c:IsReason(REASON_BATTLE) or rp~=tp)
 		and Duel.IsExistingMatchingCard(s.desfilter,tp,LOCATION_ONFIELD,0,1,c,e) end
 	if Duel.SelectEffectYesNo(tp,e:GetHandler(),96) then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=Duel.SelectMatchingCard(tp,s.desfilter,tp,LOCATION_ONFIELD,0,1,1,c,e)
-		Duel.SendtoGrave(g,REASON_EFFECT+REASON_REPLACE)
+		Duel.SendtoRest(g,REASON_EFFECT+REASON_REPLACE)
 		return true
 	else return false end
 end
@@ -61,7 +61,7 @@ function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	return true
 end
 function s.cfilter(c)
-	return c:IsLevel(3) and (c:GetBaseAttack()>0 or c:GetBaseDefense()>0) and c:IsAbleToGraveAsCost()
+	return c:IsLevel(3) and (c:GetBaseAttack()>0 or c:GetBaseDefense()>0) and c:IsAbleToRestAsCost()
 end
 function s.filter(c)
 	return c:IsFaceup() and c:IsSetCard(0xb1)
@@ -75,9 +75,9 @@ function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 			and Duel.IsExistingTarget(s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil)
 	end
 	e:SetLabel(0)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_DECK,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	e:SetLabelObject(g:GetFirst())
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 	Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil)

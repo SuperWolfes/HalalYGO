@@ -3,19 +3,19 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	Duel.EnableGlobalFlag(GLOBALFLAG_SELF_TOGRAVE)
-	--Send itself to the GY if "Adanced Dark" is not face-up in the Field Spell Zone
+	Duel.EnableGlobalFlag(GLOBALFLAG_SELF_TOREST)
+	--Send itself to the RP if "Adanced Dark" is not face-up in the Field Actional Zone
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e1:SetRange(LOCATION_MZONE)
-	e1:SetCode(EFFECT_SELF_TOGRAVE)
+	e1:SetCode(EFFECT_SELF_TOREST)
 	e1:SetCondition(s.tgcon)
 	c:RegisterEffect(e1)
-	--Place itself in the S/T instead of sending it to the GY
+	--Place itself in the S/T instead of sending it to the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
-	e2:SetCode(EFFECT_TO_GRAVE_REDIRECT_CB)
+	e2:SetCode(EFFECT_TO_REST_REDIRECT_CB)
 	e2:SetProperty(EFFECT_FLAG_UNCOPYABLE)
 	e2:SetCondition(s.replacecon)
 	e2:SetOperation(s.replaceop)
@@ -58,14 +58,14 @@ function s.replaceop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e1:SetReset(RESET_EVENT|RESETS_STANDARD&~RESET_TURN_SET)
-	e1:SetValue(TYPE_SPELL+TYPE_CONTINUOUS)
+	e1:SetValue(TYPE_ACTIONAL+TYPE_CONTINUOUS)
 	c:RegisterEffect(e1)
 	Duel.RaiseEvent(c,EVENT_CUSTOM+47408488,e,0,tp,0,0)
 end
 function s.searchcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(c,REASON_COST)
+	if chk==0 then return c:IsAbleToRestAsCost() end
+	Duel.SendtoRest(c,REASON_COST)
 end
 function s.sfilter(c)
 	return c:IsCode(CARD_ADVANCED_DARK) and c:IsAbleToHand()

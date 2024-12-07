@@ -14,13 +14,13 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-	--Shuffle 1 "T.G." monster in your GY into the Deck, or add it to your hand
+	--Shuffle 1 "T.G." monster in your RP into the Deck, or add it to your hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TODECK+CATEGORY_TOHAND)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,id)
 	e2:SetCost(aux.bfgcost)
 	e2:SetTarget(s.tdtg)
@@ -57,10 +57,10 @@ function s.tdfilter(c,tohand)
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local tohand=Duel.IsExistingMatchingCard(s.tohandfilter,tp,LOCATION_MZONE,0,1,nil)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.tdfilter(chkc,tohand) end
-	if chk==0 then return Duel.IsExistingTarget(s.tdfilter,tp,LOCATION_GRAVE,0,1,nil,tohand) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.tdfilter(chkc,tohand) end
+	if chk==0 then return Duel.IsExistingTarget(s.tdfilter,tp,LOCATION_REST,0,1,nil,tohand) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local g=Duel.SelectTarget(tp,s.tdfilter,tp,LOCATION_GRAVE,0,1,1,nil,tohand)
+	local g=Duel.SelectTarget(tp,s.tdfilter,tp,LOCATION_REST,0,1,1,nil,tohand)
 	if not tohand then
 		Duel.SetOperationInfo(0,CATEGORY_TODECK,g,1,tp,0)
 	end

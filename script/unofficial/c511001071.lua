@@ -22,7 +22,7 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local d=Duel.GetAttackTarget()
 	if chk==0 then return (d and d:IsSetCard(0x8)) 
-		or (Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil) and Duel.IsPlayerCanDraw(tp,1)) end
+		or (Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,nil) and Duel.IsPlayerCanDraw(tp,1)) end
 	if not d or not d:IsSetCard(0x8) then
 		Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
 	end
@@ -41,7 +41,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_PHASE+PHASE_DAMAGE)
 		tc:RegisterEffect(e1)
 	end
-	local sg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil)
+	local sg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_MZONE+LOCATION_REST,0,nil)
 	if #sg<=0 then return end
 	if #sg>0 and Duel.SelectYesNo(tp,aux.Stringid(52687916,2)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)

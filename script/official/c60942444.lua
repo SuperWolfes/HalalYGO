@@ -1,5 +1,5 @@
 --天威龍－アーダラ
---Tenyi Spirit - Mapura
+--Tenbree Guardian - Mapura
 --Scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_CHAINING)
 	e2:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL)
-	e2:SetRange(LOCATION_HAND+LOCATION_GRAVE)
+	e2:SetRange(LOCATION_HAND+LOCATION_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(s.negcon)
 	e2:SetCost(aux.bfgcost)

@@ -1,6 +1,6 @@
 --ホーリーライフバリアー
 --Hallowed Life Barrier (GOAT)
---Doesn't prevent battle destruction
+--Doesn't prevent battle mismatching
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

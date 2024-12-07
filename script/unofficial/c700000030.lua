@@ -24,7 +24,7 @@ function s.nbcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.PayLPCost(tp,400)
 end
 function s.nbtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) end
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) end
 	local tc=e:GetLabelObject()
 	Duel.SetTargetCard(tc)
 	e:SetLabelObject(nil)
@@ -56,8 +56,8 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=e:GetLabelObject()
-	if c:IsLocation(LOCATION_GRAVE) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and tc and tc:GetFlagEffectLabel(70000030)==e:GetValue() 
-		and Duel.GetLocationCount(tp,LOCATION_MZONE)>1 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then
+	if c:IsLocation(LOCATION_REST) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and tc and tc:GetFlagEffectLabel(70000030)==e:GetValue() 
+		and Duel.GetLocationCount(tp,LOCATION_MZONE)>1 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then
 		local g=Group.FromCards(c,tc)
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP_ATTACK)
 	end

@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_FREE_CHAIN)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCost(aux.bfgcost)
 	e2:SetTarget(s.tdtg)
@@ -67,8 +67,8 @@ function s.tdfilter(c,e)
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	if chk==0 then return Duel.IsExistingTarget(s.tdfilter,tp,LOCATION_GRAVE,0,1,nil,e) end
-	local g=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_GRAVE,0,nil,e)
+	if chk==0 then return Duel.IsExistingTarget(s.tdfilter,tp,LOCATION_REST,0,1,nil,e) end
+	local g=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_REST,0,nil,e)
 	local ct=g:GetClassCount(Card.GetCode)
 	local sg=aux.SelectUnselectGroup(g,e,tp,1,ct,aux.dncheck,1,tp,HINTMSG_TODECK)
 	Duel.SetTargetCard(sg)

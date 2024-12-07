@@ -1,5 +1,5 @@
 --トーテムポール (Anime)
---Totem Pole (Anime)
+--Tower Pole (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

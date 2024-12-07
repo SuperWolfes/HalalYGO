@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Synchro Summon Procedure
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	--Change Attribute
@@ -16,10 +16,10 @@ function s.initial_effect(c)
 	e1:SetTarget(s.atttg)
 	e1:SetOperation(s.attop)
 	c:RegisterEffect(e1)
-	--Make the opponent send 1 card to GY
+	--Make the opponent send 1 card to RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_TOGRAVE)
+	e2:SetCategory(CATEGORY_TOREST)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetRange(LOCATION_MZONE)
@@ -89,10 +89,10 @@ function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 	if tc:IsRelateToEffect(e) then
 		local g=s.group(tc:GetSequence(),1-tp)
 		if #g>0 then
-			Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOGRAVE)
+			Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOREST)
 			local sg=g:Select(1-tp,1,1,nil)
 			Duel.HintSelection(sg,true)
-			Duel.SendtoGrave(sg,REASON_RULE,PLAYER_NONE,1-tp)
+			Duel.SendtoRest(sg,REASON_RULE,PLAYER_NONE,1-tp)
 		end
 	end
 end

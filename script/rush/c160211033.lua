@@ -17,7 +17,7 @@ function s.initial_effect(c)
 end
 s.listed_names={39256679}
 function s.matfilter(c)
-	return c:IsLocation(LOCATION_HAND|LOCATION_MZONE) and c:IsRace(RACE_ROCK) and c:IsAbleToGrave()
+	return c:IsLocation(LOCATION_HAND|LOCATION_MZONE) and c:IsRace(RACE_ROCK) and c:IsAbleToRest()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeckAsCost(tp,1) end

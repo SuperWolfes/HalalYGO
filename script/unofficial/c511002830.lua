@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_DARK),8,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--counter
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(75433814,0))

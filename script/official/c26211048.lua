@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_INSECT),5,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--equip
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -23,16 +23,16 @@ function s.eqcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
 end
 function s.eqfilter(c)
-	return c:IsLocation(LOCATION_MZONE) or c:IsMonster() and not c:IsForbidden()
+	return c:IsLocation(LOCATION_MZONE) or c:IsMonster() and not c:IsUnliked()
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE+LOCATION_MZONE) and chkc:IsControler(1-tp) and s.eqfilter(chkc) end
+	if chkc then return chkc:IsLocation(LOCATION_REST+LOCATION_MZONE) and chkc:IsControler(1-tp) and s.eqfilter(chkc) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and Duel.IsExistingTarget(s.eqfilter,tp,0,LOCATION_GRAVE+LOCATION_MZONE,1,nil) end
+		and Duel.IsExistingTarget(s.eqfilter,tp,0,LOCATION_REST+LOCATION_MZONE,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-	local g=Duel.SelectTarget(tp,s.eqfilter,tp,0,LOCATION_GRAVE+LOCATION_MZONE,1,1,nil)
-	if g:GetFirst():IsLocation(LOCATION_GRAVE) then
-		Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,0,0)
+	local g=Duel.SelectTarget(tp,s.eqfilter,tp,0,LOCATION_REST+LOCATION_MZONE,1,1,nil)
+	if g:GetFirst():IsLocation(LOCATION_REST) then
+		Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,0,0)
 	end
 end
 function s.equipop(c,e,tp,tc)

@@ -1,12 +1,12 @@
 --ブレイブアイズ・ペンデュラム・ドラゴン (Anime)
 --Brave-Eyes Pendulum Dragon (Anime)
---Scripted By TheOnePharaoh
+--Scripted By TheOnePhor
 --fixed by MLD
 Duel.EnableUnofficialProc(PROC_CANNOT_BATTLE_INDES)
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_PENDULUM_DRAGON),aux.FilterBoolFunctionEx(Card.IsRace,RACE_WARRIOR))
 	--ATK Change
 	local e1=Effect.CreateEffect(c)

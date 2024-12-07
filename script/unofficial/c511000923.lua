@@ -1,5 +1,5 @@
 --奇跡のマジック・ゲート (Anime)
---Magic Gate of Miracles (Anime)
+--Ment Gate of Pulses (Anime)
 --updated by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_SPELLCASTER)
+	return c:IsFaceup() and c:IsRace(RACE_MENTOR)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,2,nil)

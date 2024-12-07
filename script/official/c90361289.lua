@@ -1,5 +1,5 @@
 --機巧狐－宇迦之御魂稲荷
---Gizmek Uka, the Festive Fox of Fecundity
+--Gizmek Utra, the Festive Fox of Fecundity
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)

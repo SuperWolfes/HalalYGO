@@ -22,8 +22,8 @@ function s.initial_effect(c)
 	e1:SetTarget(s.thtg)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
-	--Ritual Summon 1 Machine Ritual Monster from your hand or GY
-	local params={filter=s.ritualfilter,lv=Card.GetAttack,matfilter=s.matfilter,location=LOCATION_HAND|LOCATION_GRAVE,requirementfunc=Card.GetAttack}
+	--Locked Summon 1 Machine Locked Monster from your hand or RP
+	local params={filter=s.lockedfilter,lv=Card.GetAttack,matfilter=s.matfilter,location=LOCATION_HAND|LOCATION_REST,requirementfunc=Card.GetAttack}
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_RELEASE+CATEGORY_SPECIAL_SUMMON)
@@ -32,9 +32,9 @@ function s.initial_effect(c)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetHintTiming(0,TIMING_MAIN_END|TIMINGS_CHECK_MONSTER_E)
 	e2:SetCountLimit(1,{id,1})
-	e2:SetCost(s.ritualcost)
-	e2:SetTarget(Ritual.Target(params))
-	e2:SetOperation(Ritual.Operation(params))
+	e2:SetCost(s.lockedcost)
+	e2:SetTarget(Locked.Target(params))
+	e2:SetOperation(Locked.Operation(params))
 	c:RegisterEffect(e2)
 end
 s.listed_series={SET_DRYTRON}
@@ -60,19 +60,19 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SendtoHand(tg,nil,REASON_EFFECT)
 	end
 end
-function s.ritualfilter(c)
-	return c:GetAttack()>0 and c:IsRitualMonster() and c:IsRace(RACE_MACHINE)
+function s.lockedfilter(c)
+	return c:GetAttack()>0 and c:IsLockedMonster() and c:IsRace(RACE_MACHINE)
 end
 function s.matfilter(c)
 	return c:IsRace(RACE_MACHINE) and c:GetAttack()>0
 end
-function s.ritualcostfilter(c)
+function s.lockedcostfilter(c)
 	return c:IsCode(22398665) and not c:IsPublic()
 end
-function s.ritualcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.ritualcostfilter,tp,LOCATION_HAND,0,1,nil) end
+function s.lockedcost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.lockedcostfilter,tp,LOCATION_HAND,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_CONFIRM)
-	local g=Duel.SelectMatchingCard(tp,s.ritualcostfilter,tp,LOCATION_HAND,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.lockedcostfilter,tp,LOCATION_HAND,0,1,1,nil)
 	Duel.ConfirmCards(1-tp,g)
 	Duel.ShuffleHand(tp)
 end

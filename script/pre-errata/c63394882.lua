@@ -1,5 +1,5 @@
 --ポジションチェンジ
---Senet Switch (Pre-errata)
+--Senet Smint (Pre-errata)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

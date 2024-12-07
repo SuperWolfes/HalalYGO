@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_DRAW)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,id)
 	e2:SetCondition(s.drcon)
 	e2:SetCost(s.drcost)
@@ -27,7 +27,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0xc008}
 function s.desfilter(c)
-	return c:IsFaceup() and c:IsSpell()
+	return c:IsFaceup() and c:IsActional()
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and chkc:IsControler(1-tp) and s.desfilter(chkc) end
@@ -52,9 +52,9 @@ end
 function s.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return aux.bfgcost(e,tp,eg,ep,ev,re,r,rp,0)
-		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,c) end
+		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,c) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_GRAVE,0,1,1,c)
+	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_REST,0,1,1,c)
 	g:AddCard(c)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end

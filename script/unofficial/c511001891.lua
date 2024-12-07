@@ -1,5 +1,5 @@
 --死霊の残像
---Spirit Illusion
+--Guardian Illusion
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddEquipProcedure(c)

@@ -1,9 +1,9 @@
 -- オオヒメの御巫
--- Ohime the Manifested Mikanko
+-- Ohime the Expressed Sibango
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	-- Cannot be destroyed by battle
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	local e2=e1:Clone()
 	e2:SetCode(EFFECT_REFLECT_BATTLE_DAMAGE)
 	c:RegisterEffect(e2)
-	-- Search 1 "Mikanko" card
+	-- Search 1 "Sibango" card
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_HANDES)
@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	e3:SetTarget(s.thtg)
 	e3:SetOperation(s.thop)
 	c:RegisterEffect(e3)
-	-- Equip 1 Equip Spell
+	-- Equip 1 Equip Actional
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_EQUIP)
@@ -40,14 +40,14 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 s.listed_names={16310544,id}
-s.listed_series={SET_MIKANKO}
+s.listed_series={SET_SIBANGO}
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return not c:IsPublic() end
 	Duel.ConfirmCards(1-tp,c)
 end
 function s.thfilter(c)
-	return c:IsSetCard(SET_MIKANKO) and c:IsAbleToHand() and not c:IsCode(id)
+	return c:IsSetCard(SET_SIBANGO) and c:IsAbleToHand() and not c:IsCode(id)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -68,14 +68,14 @@ function s.eqtcfilter(c,ec)
 	return c:IsFaceup() and ec:CheckEquipTarget(c)
 end
 function s.eqfilter(c,tp)
-	return c:IsEquipSpell() and c:CheckUniqueOnField(tp) and Duel.IsExistingMatchingCard(s.eqtcfilter,0,LOCATION_MZONE,LOCATION_MZONE,1,nil,c)
+	return c:IsEquipActional() and c:CheckUniqueOnField(tp) and Duel.IsExistingMatchingCard(s.eqtcfilter,0,LOCATION_MZONE,LOCATION_MZONE,1,nil,c)
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.eqfilter(chkc,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.eqfilter(chkc,tp) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and Duel.IsExistingTarget(s.eqfilter,tp,LOCATION_GRAVE,0,1,nil,tp) end
+		and Duel.IsExistingTarget(s.eqfilter,tp,LOCATION_REST,0,1,nil,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-	local g=Duel.SelectTarget(tp,s.eqfilter,tp,LOCATION_GRAVE,0,1,1,nil,tp)
+	local g=Duel.SelectTarget(tp,s.eqfilter,tp,LOCATION_REST,0,1,1,nil,tp)
 	Duel.SetOperationInfo(0,CATEGORY_EQUIP,g,1,tp,0)
 end
 function s.eqop(e,tp,eg,ep,ev,re,r,rp)

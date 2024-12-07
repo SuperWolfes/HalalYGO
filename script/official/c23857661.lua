@@ -6,14 +6,14 @@ function s.initial_effect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_QUICK_O)
 	e1:SetCode(EVENT_FREE_CHAIN)
-	e1:SetRange(LOCATION_GRAVE)
+	e1:SetRange(LOCATION_REST)
 	e1:SetCost(s.cost)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 end
 s.listed_series={0x88}
 function s.cfilter(c)
-	return c:IsSetCard(0x88) and c:IsMonster() and c:IsAbleToGraveAsCost()
+	return c:IsSetCard(0x88) and c:IsMonster() and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return aux.bfgcost(e,tp,eg,ep,ev,re,r,rp,0)

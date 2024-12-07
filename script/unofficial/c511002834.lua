@@ -42,9 +42,9 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=Duel.GetMatchingGroupCount(nil,tp,LOCATION_MZONE,0,e:GetHandler())
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ft>ct then ft=ct end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=math.min(ft,1) end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=math.min(ft,1) end
 	if ft<ct then return end
-	if not Duel.IsPlayerCanSpecialSummonMonster(tp,12958920,0x49,TYPES_TOKEN,500,500,4,RACE_FIEND,ATTRIBUTE_DARK) then return end
+	if not Duel.IsPlayerCanSpecialSummonMonster(tp,12958920,0x49,TYPES_TOKEN,500,500,4,RACE_TAINTED,ATTRIBUTE_DARK) then return end
 	for i=1,ft do
 		local token=Duel.CreateToken(tp,12958920)
 		Duel.SpecialSummonStep(token,0,tp,tp,false,false,POS_FACEUP)
@@ -71,7 +71,7 @@ function s.damcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	c:RegisterEffect(e2,true)
 end
 function s.damfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x49) and c:IsRace(RACE_FIEND)
+	return c:IsFaceup() and c:IsSetCard(0x49) and c:IsRace(RACE_TAINTED)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

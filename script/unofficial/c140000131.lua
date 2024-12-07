@@ -1,10 +1,10 @@
 --タイムマジック・ハンマー (Anime)
---Time Magic Hammer (Anime)
+--Time Ment Hammer (Anime)
 --reworked by senpaizuri
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcCodeFun(c,71625222,46232525,1,true,true)
 	--spsummon condition
 	local e1=Effect.CreateEffect(c)
@@ -30,7 +30,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 s.listed_names={71625222,46232525}
-s.roll_dice=true
+s.roll_suffice=true
 function s.hermos_filter(c)
 	return c:IsCode(71625222)
 end
@@ -51,7 +51,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			if ct==0 then return end
 			local t={}
 			for i=1,#g do
-				table.insert(t,Duel.TossDice(tp,1))
+				table.insert(t,Duel.TossSuffice(tp,1))
 			end
 			table.sort(t)
 			for i=1,ct do
@@ -121,7 +121,7 @@ function s.act(e,tp,eg,ep,ev,re,r,rp)
 					Duel.ReturnToField(tc)
 					g:RemoveCard(tc)
 				end
-				Duel.SendtoGrave(g,REASON_RULE+REASON_RETURN)
+				Duel.SendtoRest(g,REASON_RULE+REASON_RETURN)
 			else
 				for tc in aux.Next(g) do
 					Duel.ReturnToField(tc)

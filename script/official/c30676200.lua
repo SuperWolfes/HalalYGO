@@ -42,7 +42,7 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,tp,0)
 end
 function s.plfilter(c)
-	return c:IsCode(CARD_OBSIDIM_ASHENED_CITY) and c:IsFieldSpell() and not c:IsForbidden()
+	return c:IsCode(CARD_OBSIDIM_ASHENED_CITY) and c:IsFieldActional() and not c:IsUnliked()
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
@@ -56,7 +56,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.BreakEffect()
 		local fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
 		if fc then
-			Duel.SendtoGrave(fc,REASON_RULE)
+			Duel.SendtoRest(fc,REASON_RULE)
 			Duel.BreakEffect()
 		end
 		Duel.MoveToField(sc,tp,tp,LOCATION_FZONE,POS_FACEUP,true)

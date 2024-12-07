@@ -1,5 +1,5 @@
 --JP name
---Priestess of the Ashened City
+--Helperess of the Ashened City
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)

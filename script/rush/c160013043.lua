@@ -1,11 +1,11 @@
 --魔導騎士－セブンス・チャリオット
---Sevens Chariot the Magical Knight
+--Sevens Chariot the Mentoral Knight
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
-	Fusion.AddProcMix(c,true,true,CARD_SEVENS_ROAD_MAGICIAN,160013013)
+	c:EnableAwakeLimit()
+	Fusion.AddProcMix(c,true,true,CARD_SEVENS_ROAD_MENTOR,160013013)
 	--ATK increase
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.atktg)
 	e1:SetOperation(s.atkop)
 	c:RegisterEffect(e1)
-	-- Destruction immunity
+	-- Mismatching immunity
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_IGNITION)

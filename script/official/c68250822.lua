@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Target 1 monster on the field and GY and activate 1 effect
+	--Target 1 monster on the field and RP and activate 1 effect
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 end
 function s.atchfilter(c,tp)
 	return c:IsMonster() and not c:IsType(TYPE_TOKEN)
-		and (c:IsControler(tp) or c:IsLocation(LOCATION_GRAVE) or c:IsAbleToChangeControler())
+		and (c:IsControler(tp) or c:IsLocation(LOCATION_REST) or c:IsAbleToChangeControler())
 		and Duel.IsExistingMatchingCard(s.xyzfilter,tp,LOCATION_MZONE,0,1,c)
 end
 function s.xyzfilter(c)
@@ -30,17 +30,17 @@ function s.spfilter(c,e,tp,zone)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local zone=aux.GetMMZonesPointedTo(tp,Card.IsLink,LOCATION_MZONE,0,nil,2)
-	local b1=Duel.IsExistingTarget(s.atchfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,LOCATION_MZONE+LOCATION_GRAVE,1,nil,tp)
+	local b1=Duel.IsExistingTarget(s.atchfilter,tp,LOCATION_MZONE+LOCATION_REST,LOCATION_MZONE+LOCATION_REST,1,nil,tp)
 	local b2=Duel.IsExistingTarget(s.ctrlfilter,tp,0,LOCATION_MZONE,1,nil,zone)
-	local b3=Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,nil,e,tp,zone)
+	local b3=Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,LOCATION_REST,1,nil,e,tp,zone)
 	if chkc then
 		local label=e:GetLabel()
 		if label==1 then
-			return chkc:IsLocation(LOCATION_MZONE+LOCATION_GRAVE) and s.atchfilter(chkc,tp)
+			return chkc:IsLocation(LOCATION_MZONE+LOCATION_REST) and s.atchfilter(chkc,tp)
 		elseif label==2 then
 			return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) and s.ctrlfilter(chkc,zone)
 		elseif label==3 then
-			return chkc:IsLocation(LOCATION_GRAVE) and s.spfilter(chkc,e,tp,zone)
+			return chkc:IsLocation(LOCATION_REST) and s.spfilter(chkc,e,tp,zone)
 		end
 	end
 	if chk==0 then return b1 or b2 or b3 end
@@ -52,9 +52,9 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if op==1 then
 		e:SetCategory(0)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-		local g=Duel.SelectTarget(tp,s.atchfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,LOCATION_MZONE+LOCATION_GRAVE,1,1,nil,tp)
-		if g:GetFirst():IsLocation(LOCATION_GRAVE) then
-			Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,0,0)
+		local g=Duel.SelectTarget(tp,s.atchfilter,tp,LOCATION_MZONE+LOCATION_REST,LOCATION_MZONE+LOCATION_REST,1,1,nil,tp)
+		if g:GetFirst():IsLocation(LOCATION_REST) then
+			Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,0,0)
 		end
 	elseif op==2 then
 		e:SetCategory(CATEGORY_CONTROL)
@@ -64,8 +64,8 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	else
 		e:SetCategory(CATEGORY_SPECIAL_SUMMON)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,1,nil,e,tp,zone)
-		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,LOCATION_GRAVE)
+		local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_REST,LOCATION_REST,1,1,nil,e,tp,zone)
+		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,LOCATION_REST)
 	end
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)

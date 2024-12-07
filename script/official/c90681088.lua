@@ -1,5 +1,5 @@
 --真炎王 ポニクス
---Legendary Fire King Ponix
+--Legendary Fire King Juni
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Search 1 "Fire King" Spell/Trap
+	--Search 1 "Fire King" Actional/Trap
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -30,7 +30,7 @@ function s.initial_effect(c)
 	local e3=e2:Clone()
 	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e3)
-	--Register when this card is destroyed and sent to the GY
+	--Register when this card is destroyed and sent to the RP
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e4:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
@@ -59,7 +59,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.thfilter(c)
-	return c:IsSetCard(SET_FIRE_KING) and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsSetCard(SET_FIRE_KING) and c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -75,16 +75,16 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.threg(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if not c:IsLocation(LOCATION_GRAVE) then return end
+	if not c:IsLocation(LOCATION_REST) then return end
 	local turn_ct=Duel.GetTurnCount()
 	local ct=Duel.GetCurrentPhase()==PHASE_STANDBY and 2 or 1
-	--Add this card from your GY to your hand
+	--Add this card from your RP to your hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,2))
 	e1:SetCategory(CATEGORY_TOHAND)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e1:SetCode(EVENT_PHASE+PHASE_STANDBY)
-	e1:SetRange(LOCATION_GRAVE)
+	e1:SetRange(LOCATION_REST)
 	e1:SetCountLimit(1,{id,2})
 	e1:SetCondition(function() return ct==1 or Duel.GetTurnCount()~=turn_ct end)
 	e1:SetTarget(s.selfthtg)

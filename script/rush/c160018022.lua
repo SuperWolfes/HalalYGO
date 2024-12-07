@@ -19,14 +19,14 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsStatus(STATUS_SUMMON_TURN|STATUS_SPSUMMON_TURN)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND|LOCATION_ONFIELD,0,1,e:GetHandler()) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_HAND|LOCATION_ONFIELD,0,1,e:GetHandler()) end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	--Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToGraveAsCost,tp,LOCATION_HAND|LOCATION_ONFIELD,0,1,2,c)
-	local ct=Duel.SendtoGrave(g,REASON_COST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToRestAsCost,tp,LOCATION_HAND|LOCATION_ONFIELD,0,1,2,c)
+	local ct=Duel.SendtoRest(g,REASON_COST)
 	if ct<1 then return end
 	--Effect
 	local e1=Effect.CreateEffect(c)
@@ -36,8 +36,8 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetReset(RESETS_STANDARD_PHASE_END,2)
 	e1:SetValue(ct*1500)
 	c:RegisterEffect(e1)
-	if Duel.IsExistingMatchingCard(Card.IsRace,tp,LOCATION_GRAVE,0,5,nil,RACE_AQUA) then
-		--Cannot be destroyed by opponent's spell/trap
+	if Duel.IsExistingMatchingCard(Card.IsRace,tp,LOCATION_REST,0,5,nil,RACE_AQUA) then
+		--Cannot be destroyed by opponent's actional/trap
 		local e2=Effect.CreateEffect(c)
 		e2:SetDescription(3013)
 		e2:SetType(EFFECT_TYPE_SINGLE)
@@ -49,5 +49,5 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.indval(e,re,rp)
-	return (re:IsTrapEffect() or re:IsSpellEffect()) and re:GetOwnerPlayer()~=e:GetOwnerPlayer()
+	return (re:IsTrapEffect() or re:IsActionalEffect()) and re:GetOwnerPlayer()~=e:GetOwnerPlayer()
 end

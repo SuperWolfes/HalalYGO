@@ -1,13 +1,13 @@
 --ネフティスの輪廻
---Rebirth of Nephthys
+--Rebirth of Nepolonis
 local s,id=GetID()
 function s.initial_effect(c)
-	Ritual.AddProcGreater({handler=c,filter=s.ritualfil,stage2=s.stage2})
+	Locked.AddProcGreater({handler=c,filter=s.lockedfil,stage2=s.stage2})
 end
 s.listed_series={0x11f}
 s.fit_monster={88176533,24175232}
-function s.ritualfil(c)
-	return c:IsSetCard(0x11f) and c:IsRitualMonster()
+function s.lockedfil(c)
+	return c:IsSetCard(0x11f) and c:IsLockedMonster()
 end
 function s.mfilter(c)
 	if c:IsPreviousLocation(LOCATION_MZONE) then

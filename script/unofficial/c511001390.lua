@@ -26,7 +26,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if #g>0 then
 		Duel.ConfirmCards(tp,g)
 		local sg=g:Select(tp,1,1,nil)
-		Duel.SendtoGrave(sg,REASON_EFFECT)
+		Duel.SendtoRest(sg,REASON_EFFECT)
 		Duel.ShuffleHand(1-tp)
 	end
 end

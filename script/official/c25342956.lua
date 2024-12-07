@@ -3,10 +3,10 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion Materials: 3 "Gem-" monsters
 	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_GEM),3)
-	--Special Summon up to 3 non-Rock "Gem-" monsters with different names from your Extra Deck and/or GY
+	--Special Summon up to 3 non-Rock "Gem-" monsters with different names from your Extra Deck and/or RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -20,13 +20,13 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Special Summon itself from the GY
+	--Special Summon itself from the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_BATTLE_DESTROYED)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(s.selfspcon)
 	e2:SetTarget(s.selfsptg)
@@ -37,8 +37,8 @@ s.listed_series={SET_GEM,SET_GEM_KNIGHT}
 s.material_setcode={SET_GEM}
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(c,REASON_COST)
+	if chk==0 then return c:IsAbleToRestAsCost() end
+	Duel.SendtoRest(c,REASON_COST)
 end
 function s.spfilter(c,e,tp,hc)
 	if not (c:IsSetCard(SET_GEM) and not c:IsRace(RACE_ROCK) and c:IsMonster() and c:IsCanBeSpecialSummoned(e,0,tp,true,false)) then return false end
@@ -49,8 +49,8 @@ function s.spfilter(c,e,tp,hc)
 	end
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE|LOCATION_EXTRA,0,1,nil,e,tp,e:GetHandler()) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE|LOCATION_EXTRA)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST|LOCATION_EXTRA,0,1,nil,e,tp,e:GetHandler()) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST|LOCATION_EXTRA)
 end
 function s.exfilter1(c)
 	return c:IsLocation(LOCATION_EXTRA) and c:IsFacedown() and c:IsType(TYPE_FUSION|TYPE_SYNCHRO|TYPE_XYZ)
@@ -76,7 +76,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local ft3=Duel.GetLocationCountFromEx(tp,tp,nil,TYPE_FUSION|TYPE_SYNCHRO|TYPE_XYZ)
 	local ft4=Duel.GetLocationCountFromEx(tp,tp,nil,TYPE_PENDULUM|TYPE_LINK)
 	local ft=math.min(Duel.GetUsableMZoneCount(tp),3)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then
 		if ft1>0 then ft1=1 end
 		if ft2>0 then ft2=1 end
 		if ft3>0 then ft3=1 end
@@ -91,10 +91,10 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		ft4=math.min(ect,ft4)
 	end
 	local loc=0
-	if ft1>0 then loc=LOCATION_GRAVE end
+	if ft1>0 then loc=LOCATION_REST end
 	if ft2>0 or ft3>0 or ft4>0 then loc=loc|LOCATION_EXTRA end
 	if loc>0 then
-		local sg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,loc,0,nil,e,tp)
+		local sg=Duel.GetMatchingGroup(aux.RestValleyFilter(s.spfilter),tp,loc,0,nil,e,tp)
 		if #sg>0 then
 			local rg=aux.SelectUnselectGroup(sg,e,tp,1,ft,s.rescon(ft1,ft2,ft3,ft4,ft),1,tp,HINTMSG_SPSUMMON)
 			Duel.SpecialSummon(rg,0,tp,tp,true,false,POS_FACEUP)

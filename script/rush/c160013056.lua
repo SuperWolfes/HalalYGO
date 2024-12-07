@@ -1,5 +1,5 @@
 --エンペラー・レルム
---Emperor Realm
+--Emperor Territory
 local s,id=GetID()
 function s.initial_effect(c)
 	--activate

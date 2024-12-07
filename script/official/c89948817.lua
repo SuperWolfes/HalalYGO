@@ -31,7 +31,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.syncsumtg)
 	e2:SetOperation(s.syncsumop)
 	c:RegisterEffect(e2)
-	--If a "Jurrac" monster(s) you control would be destroyed by card effect, you can banish 1 Dinosaur monster from your GY instead
+	--If a "Jurrac" monster(s) you control would be destroyed by card effect, you can banish 1 Dinosaur monster from your RP instead
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e3:SetCode(EFFECT_DESTROY_REPLACE)
@@ -104,10 +104,10 @@ function s.rmvfilter(c)
 end
 function s.repltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return eg:IsExists(s.replfilter,1,nil,tp)
-		and Duel.IsExistingMatchingCard(s.rmvfilter,tp,LOCATION_GRAVE,0,1,eg) end
+		and Duel.IsExistingMatchingCard(s.rmvfilter,tp,LOCATION_REST,0,1,eg) end
 	if Duel.SelectEffectYesNo(tp,e:GetHandler(),96) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESREPLACE)
-		local tg=Duel.SelectMatchingCard(tp,s.rmvfilter,tp,LOCATION_GRAVE,0,1,1,eg)
+		local tg=Duel.SelectMatchingCard(tp,s.rmvfilter,tp,LOCATION_REST,0,1,1,eg)
 		e:SetLabelObject(tg:GetFirst())
 		return true
 	end

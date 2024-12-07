@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddSkillProcedure(c,1,false,s.flipcon,s.flipop)
 end
-local TYPE_MAIN=TYPE_MONSTER|TYPE_SPELL|TYPE_TRAP
+local TYPE_MAIN=TYPE_MONSTER|TYPE_ACTIONAL|TYPE_TRAP
 function s.cfilter1(c,tp)
 	return c:IsDiscardable() and Duel.IsExistingMatchingCard(s.cfilter2,tp,LOCATION_HAND,0,1,nil,tp,c:GetType()&TYPE_MAIN)
 end
@@ -29,7 +29,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	local g1=Duel.SelectMatchingCard(tp,s.cfilter1,tp,LOCATION_HAND,0,1,1,nil,tp,TYPE_MAIN)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 	local g2=Duel.SelectMatchingCard(tp,s.cfilter2,tp,LOCATION_HAND,0,1,1,nil,tp,g1:GetFirst():GetType()&TYPE_MAIN)
-	if Duel.SendtoGrave(g1+g2,REASON_COST+REASON_DISCARD)>0 then
+	if Duel.SendtoRest(g1+g2,REASON_COST+REASON_DISCARD)>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 		local sg=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_DECK,0,1,1,nil,g1:GetFirst():GetType()&TYPE_MAIN,g2:GetFirst():GetType()&TYPE_MAIN)
 		if #sg>0 then

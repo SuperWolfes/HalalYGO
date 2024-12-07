@@ -11,29 +11,29 @@ end
 function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 	return aux.CanActivateSkill(tp) and Duel.GetFlagEffect(ep,id)<2
 		and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,nil)
+		and Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,nil)
 end
 function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SKILL_FLIP,tp,id|(1<<32))
 	Duel.Hint(HINT_CARD,tp,id)
 	--TPD Register
 	Duel.RegisterFlagEffect(ep,id,0,0,0)
-	--Send from hand to GY/Place Crystal Beasts in S/T Zones as Cont. Spells
+	--Send from hand to RP/Place Crystal Beasts in S/T Zones as Cont. Actionals
 	local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_DECK,0,nil)
-	local dg=Duel.SelectMatchingCard(tp,Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,math.min(g:GetClassCount(Card.GetCode),ft,3),nil)
-	if Duel.SendtoGrave(dg,REASON_COST)>0 and dg:FilterCount(Card.IsLocation,nil,LOCATION_GRAVE)==#dg then
+	local dg=Duel.SelectMatchingCard(tp,Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,math.min(g:GetClassCount(Card.GetCode),ft,3),nil)
+	if Duel.SendtoRest(dg,REASON_COST)>0 and dg:FilterCount(Card.IsLocation,nil,LOCATION_REST)==#dg then
 		local sg=aux.SelectUnselectGroup(g,e,tp,1,math.min(3,#dg),aux.dncheck,1,tp,HINTMSG_TOFIELD)
 		if #sg>0 then
 			for sc in sg:Iter() do
 				Duel.MoveToField(sc,tp,tp,LOCATION_SZONE,POS_FACEUP,true)
-				--Treat it as a Continuous Spell
+				--Treat it as a Continuous Actional
 				local e1=Effect.CreateEffect(e:GetHandler())
 				e1:SetType(EFFECT_TYPE_SINGLE)
 				e1:SetCode(EFFECT_CHANGE_TYPE)
 				e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 				e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
-				e1:SetValue(TYPE_SPELL+TYPE_CONTINUOUS)
+				e1:SetValue(TYPE_ACTIONAL+TYPE_CONTINUOUS)
 				sc:RegisterEffect(e1)
 				Duel.RaiseEvent(sc,EVENT_CUSTOM+47408488,e,0,tp,0,0)
 			end

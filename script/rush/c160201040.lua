@@ -1,5 +1,5 @@
 --断絶のサイコウォール
---Severing Psychic Wall
+--Severing Mental Wall
 
 local s,id=GetID()
 function s.initial_effect(c)
@@ -17,13 +17,13 @@ function s.initial_effect(c)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetAttackTarget()
-	return tc and tc:IsFaceup() and tc:IsControler(tp) and tc:IsRace(RACE_PSYCHIC)
+	return tc and tc:IsFaceup() and tc:IsControler(tp) and tc:IsRace(RACE_MENTAL)
 end
 function s.cfilter(c)
-	return c:IsRace(RACE_PSYCHIC) and c:IsMonster() and c:IsAbleToDeckOrExtraAsCost()
+	return c:IsRace(RACE_MENTAL) and c:IsMonster() and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil) end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tg=Duel.GetAttackTarget()
@@ -32,7 +32,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.HintSelection(g)
 	if Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_COST)<1 then return end
 	--Effect

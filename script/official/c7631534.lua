@@ -4,9 +4,9 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion summon procedure
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcFunRep(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x14e),2,true)
-	--Destruction replacement
+	--Mismatching replacement
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_DESTROY_REPLACE)

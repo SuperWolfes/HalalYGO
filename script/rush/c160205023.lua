@@ -29,7 +29,7 @@ function s.otfilter(c)
 	return c:IsCode(CARD_CYBER_DRAGON) and c:IsFaceup()
 end
 function s.con(e)
-	return Duel.IsExistingMatchingCard(Card.IsCode,e:GetHandlerPlayer(),LOCATION_GRAVE,0,1,nil,CARD_CYBER_DRAGON)
+	return Duel.IsExistingMatchingCard(Card.IsCode,e:GetHandlerPlayer(),LOCATION_REST,0,1,nil,CARD_CYBER_DRAGON)
 end
 function s.indval(e,re,rp)
 	local rc=re:GetHandler()

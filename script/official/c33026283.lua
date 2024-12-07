@@ -1,10 +1,10 @@
 --双天将 金剛
---Kongou, Heavenly General of the Souten
+--Kongou, Spectrumly General of the Souten
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion summon procedure
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMixN(c,true,true,85360035,1,aux.FilterBoolFunctionEx(Card.IsSetCard,0x14e),2)
 	--Activation limit
 	local e1=Effect.CreateEffect(c)
@@ -68,7 +68,7 @@ function s.discon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if rp==tp or c:IsStatus(STATUS_BATTLE_DESTROYED) or not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then return false end
 	local gp=Duel.GetChainInfo(ev,CHAININFO_TARGET_CARDS)
-	return gp and gp:IsContains(c) and Duel.IsChainDisablable(ev) and re:IsActiveType(TYPE_SPELL+TYPE_TRAP)
+	return gp and gp:IsContains(c) and Duel.IsChainDisablable(ev) and re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP)
 		and Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsType,TYPE_FUSION),tp,LOCATION_MZONE,0,nil)>=2
 end
 function s.distg(e,tp,eg,ep,ev,re,r,rp,chk)

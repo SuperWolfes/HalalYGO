@@ -1,5 +1,5 @@
 -- Ｓ－Ｆｏｒｃｅ レトロアクティヴ
--- S-Force Retroactive
+-- S-Fcoree Retroactive
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	if s.flagmap[c]==nil then
 		s.flagmap[c]={}
 	end
-	-- Special Summon 1 Level 2 or higher "S-Force" monster from the hand
+	-- Special Summon 1 Level 2 or higher "S-Fcoree" monster from the hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SPECIAL_SUMMON)
@@ -37,8 +37,8 @@ function s.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	e3:SetCode(EFFECT_SFORCE_REPLACE)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetCode(EFFECT_SFCOREE_REPLACE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetTargetRange(1,0)
 	e3:SetCountLimit(1,{id,2})
 	e3:SetCondition(s.repcon)
@@ -46,7 +46,7 @@ function s.initial_effect(c)
 	e3:SetOperation(s.repop)
 	c:RegisterEffect(e3)
 end
-s.listed_series={SET_S_FORCE}
+s.listed_series={SET_S_FCOREE}
 function s.extrafilter(c,tp)
 	return c:IsLocation(LOCATION_MZONE) and c:IsControler(tp)
 end
@@ -57,7 +57,7 @@ function s.extraval(chk,summon_type,e,...)
 	local c=e:GetHandler()
 	if chk==0 then
 		local tp,sc=...
-		if summon_type~=SUMMON_TYPE_LINK or not sc:IsSetCard(SET_S_FORCE) or Duel.GetFlagEffect(tp,id)>0 then
+		if summon_type~=SUMMON_TYPE_LINK or not sc:IsSetCard(SET_S_FCOREE) or Duel.GetFlagEffect(tp,id)>0 then
 			return Group.CreateGroup()
 		else
 			table.insert(s.flagmap[c],c:RegisterFlagEffect(id,0,0,1))
@@ -77,7 +77,7 @@ function s.extraval(chk,summon_type,e,...)
 	end
 end
 function s.spfilter(c,e,tp)
-	return c:IsSetCard(SET_S_FORCE) and c:IsLevelAbove(2) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsSetCard(SET_S_FCOREE) and c:IsLevelAbove(2) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -103,7 +103,7 @@ end
 function s.repval(base,e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	return c:IsFaceup() and c:IsControler(tp) and c:IsLocation(LOCATION_MZONE)
-		and c:IsSetCard(SET_S_FORCE)
+		and c:IsSetCard(SET_S_FCOREE)
 end
 function s.repop(base,e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,0,id)

@@ -1,5 +1,5 @@
 --朔夜しぐれ
---Ghost Mourner & Moonlit Chill
+--Miss Mourner & Horizonlit Chill
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)

@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--send to grave
+	--send to rest
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_BATTLED)
@@ -28,14 +28,14 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroupCount(tp,0,LOCATION_HAND)>0 end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,0,LOCATION_HAND)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,0,LOCATION_HAND)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(1-tp,LOCATION_HAND,0)
 	if #g>0 then
-		Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOGRAVE)
+		Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOREST)
 		local sg=g:Select(1-tp,1,1,nil)
 		Duel.HintSelection(sg)
-		Duel.SendtoGrave(sg,REASON_EFFECT)
+		Duel.SendtoRest(sg,REASON_EFFECT)
 	end
 end

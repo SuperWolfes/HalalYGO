@@ -2,7 +2,7 @@
 --Shooting Star Dragon
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Synchro Summon Procedure
 	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_SYNCHRO),1,1,aux.FilterSummonCode(CARD_STARDUST_DRAGON),1,1)
 	--Excavate the top 5 cards of your deck and gain extra attack per Tuner monster excavated

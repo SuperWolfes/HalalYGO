@@ -9,7 +9,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 	--Each player reveals 3 monsters in their Deck
 	local e2=Effect.CreateEffect(c)
-	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_TOGRAVE+CATEGORY_DAMAGE)
+	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_TOREST+CATEGORY_DAMAGE)
     	e2:SetType(EFFECT_TYPE_IGNITION)
     	e2:SetRange(LOCATION_SZONE)
     	e2:SetTarget(s.target)
@@ -17,7 +17,7 @@ function s.initial_effect(c)
     	c:RegisterEffect(e2)
 end
 function s.filter(c)
-	return c:IsMonster() and c:GetTextAttack()>=0 and c:IsAbleToHand() and c:IsAbleToGrave() and not c:IsPublic()
+	return c:IsMonster() and c:GetTextAttack()>=0 and c:IsAbleToHand() and c:IsAbleToRest() and not c:IsPublic()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
     	local c=e:GetHandler()
@@ -30,7 +30,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
         	Duel.SetOperationInfo(0,CATEGORY_DESTROY,c,1,tp,0)
     	end
     	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,PLAYER_ALL,LOCATION_DECK)
-    	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,nil,1,PLAYER_ALL,LOCATION_DECK)
+    	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,nil,1,PLAYER_ALL,LOCATION_DECK)
     	Duel.SetPossibleOperationInfo(0,CATEGORY_DAMAGE,nil,0,PLAYER_ALL,500)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
@@ -56,11 +56,11 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ConfirmCards(1-tp,sc1)
 		Duel.ConfirmCards(tp,sc2)
 		if sc1:GetAttack()==sc2:GetAttack() then
-			Duel.SendtoGrave(Group.FromCards(sc1,sc2),REASON_EFFECT)
+			Duel.SendtoRest(Group.FromCards(sc1,sc2),REASON_EFFECT)
 		else
 			if sc1:GetAttack()>sc2:GetAttack() then sc1,sc2=sc2,sc1 end
 			Duel.Damage(sc1:GetControler(),500,REASON_EFFECT)
-			Duel.SendtoGrave(sc1,REASON_EFFECT)
+			Duel.SendtoRest(sc1,REASON_EFFECT)
 			Duel.SendtoHand(sc2,nil,REASON_EFFECT)
 		end
 	end

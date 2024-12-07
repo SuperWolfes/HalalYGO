@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Increase the ATK of 1 Ritual Monster you control
+	--Increase the ATK of 1 Locked Monster you control
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_ATKCHANGE)
@@ -40,7 +40,7 @@ end
 s.listed_names={3627449} --"Skull Guardian"
 function s.spconfilter(c,tp)
 	return c:IsReason(REASON_BATTLE|REASON_EFFECT) and c:IsPreviousLocation(LOCATION_MZONE) and c:IsPreviousControler(tp)
-		and (c:IsPreviousPosition(POS_FACEDOWN) or not c:IsPreviousTypeOnField(TYPE_RITUAL))
+		and (c:IsPreviousPosition(POS_FACEDOWN) or not c:IsPreviousTypeOnField(TYPE_LOCKED))
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.spconfilter,1,nil,tp)
@@ -64,11 +64,11 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGraveAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED) end
-	Duel.SendtoGrave(c,REASON_COST)
+	if chk==0 then return c:IsAbleToRestAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED) end
+	Duel.SendtoRest(c,REASON_COST)
 end
 function s.atkfilter(c)
-	return c:IsRitualMonster() and c:IsFaceup()
+	return c:IsLockedMonster() and c:IsFaceup()
 		and Duel.IsExistingMatchingCard(aux.FaceupFilter(aux.NOT(Card.IsBaseAttack),0),0,LOCATION_MZONE,LOCATION_MZONE,1,c)
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

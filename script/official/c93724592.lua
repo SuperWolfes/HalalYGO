@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetType(EFFECT_TYPE_TRIGGER_F+EFFECT_TYPE_SINGLE)
-	e4:SetCategory(CATEGORY_TOGRAVE)
+	e4:SetCategory(CATEGORY_TOREST)
 	e4:SetCode(EVENT_FLIP)
 	e4:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e4:SetTarget(s.tgtg)
@@ -44,14 +44,14 @@ end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() end
 	if chk==0 then return true end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectTarget(tp,Card.IsFaceup,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil)
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,g,#g,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,g,#g,0,0)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsFaceup() and tc:IsRelateToEffect(e) then
-		Duel.SendtoGrave(tc,REASON_EFFECT)
+		Duel.SendtoRest(tc,REASON_EFFECT)
 	end
 end
 function s.dirop(e,tp,eg,ep,ev,re,r,rp)

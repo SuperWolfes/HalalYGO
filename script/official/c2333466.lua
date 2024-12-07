@@ -1,5 +1,5 @@
 --破壊竜ガンドラG
---Geas Gandora the Dragon of Destruction
+--Geas Gandora the Dragon of Mismatching
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)

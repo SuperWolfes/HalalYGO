@@ -1,5 +1,5 @@
 --特異点の悪魔
---Singularity Fiend
+--Singularity Tainted
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
@@ -20,10 +20,10 @@ end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsDiscardable()
-		and Duel.IsExistingMatchingCard(aux.AND(Card.IsSpell,Card.IsDiscardable),tp,LOCATION_HAND,0,1,nil) end
+		and Duel.IsExistingMatchingCard(aux.AND(Card.IsActional,Card.IsDiscardable),tp,LOCATION_HAND,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
-	local g=Duel.SelectMatchingCard(tp,aux.AND(Card.IsSpell,Card.IsDiscardable),tp,LOCATION_HAND,0,1,1,nil)
-	Duel.SendtoGrave(g+c,REASON_COST|REASON_DISCARD)
+	local g=Duel.SelectMatchingCard(tp,aux.AND(Card.IsActional,Card.IsDiscardable),tp,LOCATION_HAND,0,1,1,nil)
+	Duel.SendtoRest(g+c,REASON_COST|REASON_DISCARD)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=eg:Filter(Card.IsSummonPlayer,nil,1-tp):Match(Card.IsLocation,nil,LOCATION_MZONE)

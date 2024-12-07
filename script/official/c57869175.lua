@@ -55,18 +55,18 @@ function s.lvop(e,tp,eg,ep,ev,re,r,rp)
 	c:RegisterEffect(e1)
 end
 function s.rmfilter(c)
-	return c:IsRace(RACE_SPELLCASTER) and c:IsAbleToRemove() and (c:IsFaceup() or c:IsLocation(LOCATION_HAND))
+	return c:IsRace(RACE_MENTOR) and c:IsAbleToRemove() and (c:IsFaceup() or c:IsLocation(LOCATION_HAND))
 end
 function s.lvfilter(c,tp)
 	return c:IsFaceup() and c:HasLevel() and c:IsSetCard(SET_FORTUNE_LADY)
-		and Duel.IsExistingMatchingCard(s.rmfilter,tp,LOCATION_MZONE|LOCATION_GRAVE|LOCATION_HAND,0,1,c)
+		and Duel.IsExistingMatchingCard(s.rmfilter,tp,LOCATION_MZONE|LOCATION_REST|LOCATION_HAND,0,1,c)
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.lvfilter(chkc,tp) end
 	if chk==0 then return Duel.IsExistingTarget(s.lvfilter,tp,LOCATION_MZONE,0,1,nil,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_APPLYTO)
 	Duel.SelectTarget(tp,s.lvfilter,tp,LOCATION_MZONE,0,1,1,nil,tp)
-	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,0,LOCATION_HAND|LOCATION_GRAVE|LOCATION_MZONE)
+	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,0,LOCATION_HAND|LOCATION_REST|LOCATION_MZONE)
 end
 function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
@@ -80,9 +80,9 @@ function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 	local rg
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	if ch==0 then
-		rg=Duel.SelectMatchingCard(tp,s.rmfilter,tp,LOCATION_MZONE|LOCATION_HAND|LOCATION_GRAVE,0,1,99,tc)
+		rg=Duel.SelectMatchingCard(tp,s.rmfilter,tp,LOCATION_MZONE|LOCATION_HAND|LOCATION_REST,0,1,99,tc)
 	elseif ch==1 then
-		rg=Duel.SelectMatchingCard(tp,s.rmfilter,tp,LOCATION_MZONE|LOCATION_HAND|LOCATION_GRAVE,0,1,tc:GetLevel()-1,tc)
+		rg=Duel.SelectMatchingCard(tp,s.rmfilter,tp,LOCATION_MZONE|LOCATION_HAND|LOCATION_REST,0,1,tc:GetLevel()-1,tc)
 	end
 	if #rg>0 then
 		local ct=Duel.Remove(rg,POS_FACEUP,REASON_EFFECT)

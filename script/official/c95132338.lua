@@ -1,5 +1,5 @@
 --アクアの合唱
---Aqua Chorus
+--Aqua Chumus
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

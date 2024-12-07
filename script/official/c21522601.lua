@@ -1,9 +1,9 @@
 --ウィッチクラフトマスター・ヴェール
---Witchcrafter Madame Verre
+--Mintcrafter Madame Verre
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Increase ATK/DEF of your battling Spellcaster monster
+	--Increase ATK/DEF of your battling Mentor monster
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_DEFCHANGE)
@@ -23,17 +23,17 @@ function s.initial_effect(c)
 	e2:SetCode(EVENT_FREE_CHAIN)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCountLimit(1,{id,1})
-	e2:SetCost(aux.WitchcrafterDiscardCost)
+	e2:SetCost(aux.MintcrafterDiscardCost)
 	e2:SetTarget(s.distg)
 	e2:SetOperation(s.disop)
 	c:RegisterEffect(e2)
 end
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	local tc,bc=Duel.GetBattleMonster(tp)
-	return tc and bc and tc:IsRace(RACE_SPELLCASTER) and bc:IsControler(1-tp)
+	return tc and bc and tc:IsRace(RACE_MENTOR) and bc:IsControler(1-tp)
 end
 function s.rvfilt(c)
-	return c:IsSpell() and not c:IsPublic()
+	return c:IsActional() and not c:IsPublic()
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.rvfilt,tp,LOCATION_HAND,0,1,nil) end
@@ -60,7 +60,7 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.disfilter(c)
-	return c:IsSpell() and c:IsDiscardable()
+	return c:IsActional() and c:IsDiscardable()
 end
 function s.distg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsNegatableMonster,tp,0,LOCATION_MZONE,1,nil) end

@@ -1,9 +1,9 @@
 --魔導騎士 ディフェンダー
---Defender, the Magical Knight
+--Defender, the Mentoral Knight
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableCounterPermit(COUNTER_SPELL)
-	c:SetCounterLimit(COUNTER_SPELL,1)
+	c:EnableCounterPermit(COUNTER_ACTIONAL)
+	c:SetCounterLimit(COUNTER_ACTIONAL,1)
 	--summon success
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -24,31 +24,31 @@ function s.initial_effect(c)
 	e2:SetOperation(s.desop)
 	c:RegisterEffect(e2)
 end
-s.counter_list={COUNTER_SPELL}
+s.counter_list={COUNTER_ACTIONAL}
 function s.addct(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,1,0,COUNTER_SPELL)
+	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,1,0,COUNTER_ACTIONAL)
 end
 function s.addc(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():IsRelateToEffect(e) then
-		e:GetHandler():AddCounter(COUNTER_SPELL,1)
+		e:GetHandler():AddCounter(COUNTER_ACTIONAL,1)
 	end
 end
 function s.dfilter(c)
-	return not c:IsReason(REASON_REPLACE) and c:IsLocation(LOCATION_MZONE) and c:IsFaceup() and c:IsRace(RACE_SPELLCASTER)
+	return not c:IsReason(REASON_REPLACE) and c:IsLocation(LOCATION_MZONE) and c:IsFaceup() and c:IsRace(RACE_MENTOR)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		local count=eg:FilterCount(s.dfilter,nil)
 		e:SetLabel(count)
-		return count>0 and Duel.IsCanRemoveCounter(tp,1,0,COUNTER_SPELL,count,REASON_COST)
+		return count>0 and Duel.IsCanRemoveCounter(tp,1,0,COUNTER_ACTIONAL,count,REASON_COST)
 	end
 	return Duel.SelectEffectYesNo(tp,e:GetHandler(),96)
 end
 function s.value(e,c)
-	return c:IsFaceup() and c:GetLocation()==LOCATION_MZONE and c:IsRace(RACE_SPELLCASTER)
+	return c:IsFaceup() and c:GetLocation()==LOCATION_MZONE and c:IsRace(RACE_MENTOR)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local count=e:GetLabel()
-	Duel.RemoveCounter(tp,1,0,COUNTER_SPELL,count,REASON_COST)
+	Duel.RemoveCounter(tp,1,0,COUNTER_ACTIONAL,count,REASON_COST)
 end

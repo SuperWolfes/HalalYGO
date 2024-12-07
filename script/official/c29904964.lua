@@ -1,5 +1,5 @@
 --覚醒の暗黒騎士ガイア
---Arisen Gaia the Fierce Knight
+--Arisen Bia the Fierce Knight
 local s,id=GetID()
 function s.initial_effect(c)
 	--Can be Normal Summoned with no tribute
@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_SUMMON_PROC)
 	e1:SetCondition(s.ntcon)
 	c:RegisterEffect(e1)
-	--Special Summon 1 "Black Lust Soldier" monster from the hand or GY
+	--Special Summon 1 "Black Lust Soldier" monster from the hand or RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -21,12 +21,12 @@ function s.initial_effect(c)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
-	--Can be used for a Ritual Summoned while in the GY
+	--Can be used for a Locked Summoned while in the RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	e3:SetCode(EFFECT_EXTRA_RITUAL_MATERIAL)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetCode(EFFECT_EXTRA_LOCKED_MATERIAL)
+	e3:SetRange(LOCATION_REST)
 	e3:SetCondition(s.mtcon)
 	e3:SetValue(s.mtval)
 	c:RegisterEffect(e3)
@@ -42,18 +42,18 @@ function s.spfilter(c,e,tp)
 	return c:IsSetCard(SET_BLACK_LUSTER_SOLDIER) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_GRAVE,0,1,nil,e,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND|LOCATION_GRAVE)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_REST,0,1,nil,e,tp) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND|LOCATION_REST)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_HAND|LOCATION_GRAVE,0,1,1,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,LOCATION_HAND|LOCATION_REST,0,1,1,nil,e,tp)
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end
 end
 function s.mtcon(e)
-	return not Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(),CARD_SPIRIT_ELIMINATION)
+	return not Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(),CARD_GUARDIAN_ELIMINATION)
 end
 function s.mtval(e,c)
 	return c:IsSetCard(SET_BLACK_LUSTER_SOLDIER)

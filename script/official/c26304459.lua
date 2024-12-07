@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_FIRE),1,1,Synchro.NonTunerEx(Card.IsRace,RACE_PYRO),1,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--remove
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -21,9 +21,9 @@ end
 function s.remtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	if Duel.IsPlayerAffectedByEffect(1-tp,69832741) then
-		Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,1-tp,LOCATION_MZONE+LOCATION_GRAVE)
+		Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,1-tp,LOCATION_MZONE+LOCATION_REST)
 	else
-		Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,1-tp,LOCATION_GRAVE)
+		Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,1-tp,LOCATION_REST)
 	end
 end
 function s.rmfilter(c)
@@ -33,7 +33,7 @@ function s.remop(e,tp,eg,ep,ev,re,r,rp)
 	local ht=Duel.GetFieldGroupCount(tp,0,LOCATION_HAND)
 	if ht==0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local rg=Duel.SelectMatchingCard(tp,s.rmfilter,tp,0,LOCATION_MZONE+LOCATION_GRAVE,1,ht,nil)
+	local rg=Duel.SelectMatchingCard(tp,s.rmfilter,tp,0,LOCATION_MZONE+LOCATION_REST,1,ht,nil)
 	local c=e:GetHandler()
 	if #rg>0 then
 		Duel.Remove(rg,POS_FACEUP,REASON_EFFECT)

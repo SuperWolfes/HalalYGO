@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_REMOVE)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
-	e1:SetRange(LOCATION_GRAVE)
+	e1:SetRange(LOCATION_REST)
 	e1:SetCode(EVENT_BATTLE_DAMAGE)
 	e1:SetCondition(s.condition)
 	e1:SetTarget(s.target)
@@ -25,7 +25,7 @@ function s.filter(c)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(),69832741) and Duel.Remove(e:GetHandler(),POS_FACEUP,REASON_EFFECT)~=0
-		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,1,nil) then
+		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,1,nil) then
 		Duel.Damage(1-tp,ev,REASON_EFFECT)
 	end
 end

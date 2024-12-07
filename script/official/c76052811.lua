@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_SINGLE_RANGE)
 	e1:SetType(EFFECT_TYPE_SINGLE)
-	e1:SetRange(LOCATION_GRAVE)
+	e1:SetRange(LOCATION_REST)
 	e1:SetCode(EFFECT_SPSUMMON_CONDITION)
 	c:RegisterEffect(e1)
 	--reg
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e3:SetCategory(CATEGORY_HANDES)
 	e3:SetCode(EVENT_PHASE+PHASE_BATTLE)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetCountLimit(1)
 	e3:SetCondition(s.hdcon)
 	e3:SetTarget(s.hdtg)
@@ -29,7 +29,7 @@ function s.initial_effect(c)
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:IsLocation(LOCATION_GRAVE) and c:IsReason(REASON_BATTLE) then
+	if c:IsLocation(LOCATION_REST) and c:IsReason(REASON_BATTLE) then
 		c:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,0)
 	end
 end
@@ -47,6 +47,6 @@ function s.hdop(e,tp,eg,ep,ev,re,r,rp)
 		local g=Duel.GetFieldGroup(1-tp,LOCATION_HAND,0)
 		if #g==0 then return end
 		local sg=g:RandomSelect(1-tp,1)
-		Duel.SendtoGrave(sg,REASON_DISCARD+REASON_EFFECT)
+		Duel.SendtoRest(sg,REASON_DISCARD+REASON_EFFECT)
 	end
 end

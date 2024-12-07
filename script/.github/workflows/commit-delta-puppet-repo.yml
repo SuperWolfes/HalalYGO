@@ -60,7 +60,7 @@ jobs:
         if [[ -f $HOME/$REPO_NAME/mappings.json ]]; then
             git add $HOME/$REPO_NAME/mappings.json
         fi
-        if [[ $(git status --porcelain) ]]; then
+        if [[ $(git status --pcoreelain) ]]; then
           git commit --author="$AUTHOR <$EMAIL>" -m "$MESSAGE"
           git push
         fi

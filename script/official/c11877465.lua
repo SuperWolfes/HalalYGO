@@ -1,9 +1,9 @@
 --イビリチュア・マインドオーガス
---Evigishki Mind Augus
+--Evigiojiki Mind Augus
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
-	--Shuffle cards from the GY into the Deck
+	c:EnableAwakeLimit()
+	--Shuffle cards from the RP into the Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TODECK)
@@ -17,13 +17,13 @@ function s.initial_effect(c)
 end
 s.listed_series={0x3a}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_RITUAL)
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_LOCKED)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsAbleToDeck() end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsAbleToDeck() end
 	if chk==0 then return true end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectTarget(tp,Card.IsAbleToDeck,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,5,nil)
+	local g=Duel.SelectTarget(tp,Card.IsAbleToDeck,tp,LOCATION_REST,LOCATION_REST,1,5,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,#g,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)

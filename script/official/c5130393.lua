@@ -1,5 +1,5 @@
 --千年の血族
---Millennium Seeker
+--Mileon Seeker
 --Logical Nonsense
 
 --Substitute ID
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Special summon 1 monster from opponent's GY, or opponent adds 1 monster from deck
+	--Special summon 1 monster from opponent's RP, or opponent adds 1 monster from deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_SEARCH+CATEGORY_TOHAND)
@@ -52,11 +52,11 @@ function s.filter(c,e,tp)
 end
 	--Activation legality
 function s.vartg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(1-tp) and s.filter(chkc,e,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(1-tp) and s.filter(chkc,e,tp) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(s.filter,tp,0,LOCATION_GRAVE,1,nil,e,tp) end
+		and Duel.IsExistingTarget(s.filter,tp,0,LOCATION_REST,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.filter,tp,0,LOCATION_GRAVE,1,1,nil,e,tp)
+	local g=Duel.SelectTarget(tp,s.filter,tp,0,LOCATION_REST,1,1,nil,e,tp)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,0)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,1-tp,LOCATION_DECK)
 end
@@ -64,7 +64,7 @@ end
 function s.thfilter(c)
 	return c:IsMonster() and c:IsAbleToHand() and c:GetTextAttack()>=0
 end
-	--Special summon 1 monster from opponent's GY, or opponent adds 1 monster from deck
+	--Special summon 1 monster from opponent's RP, or opponent adds 1 monster from deck
 function s.varop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	local vc=tc:GetTextAttack()

@@ -21,7 +21,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 end
 function s.costfilter(c,e,tp)
-	return c:IsFaceup() and Duel.IsExistingMatchingCard(s.spfilter,tp,0,LOCATION_GRAVE,1,nil,e,tp,c)
+	return c:IsFaceup() and Duel.IsExistingMatchingCard(s.spfilter,tp,0,LOCATION_REST,1,nil,e,tp,c)
 end
 function s.spfilter(c,e,tp,tc)
 	return c:GetOriginalRace()==tc:GetOriginalRace()
@@ -29,7 +29,7 @@ function s.spfilter(c,e,tp,tc)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(1-tp) and s.spfilter(chkc,e,tp,tc) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(1-tp) and s.spfilter(chkc,e,tp,tc) end
 	if chk==0 then
 		if e:GetLabel()~=100 then return false end
 		e:SetLabel(0)
@@ -40,7 +40,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local bg=Duel.SelectReleaseGroupCost(tp,s.costfilter,1,1,false,nil,nil,e,tp)
 	Duel.Release(bg,REASON_COST)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.spfilter,tp,0,LOCATION_GRAVE,1,1,nil,e,tp,bg:GetFirst())
+	local g=Duel.SelectTarget(tp,s.spfilter,tp,0,LOCATION_REST,1,1,nil,e,tp,bg:GetFirst())
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)

@@ -24,13 +24,13 @@ function s.initial_effect(c)
 	e2:SetCondition(function() return Duel.IsBattlePhase() end)
 	e2:SetCost(aux.SelfTributeCost)
 	e2:SetTarget(s.settg)
-	e2:SetOperation(s.setop)
+	e2:SetOperation(s.vetop)
 	c:RegisterEffect(e2)
 end
 s.listed_names={26905245,TOKEN_SLIME}
 local SET_SLIME=0x54b
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
+	if chk==0 then return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)
 		and Duel.GetLocationCount(tp,LOCATION_MZONE)>1
 		and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_SLIME,SET_SLIME,TYPES_TOKEN,500,500,1,RACE_AQUA,ATTRIBUTE_WATER)
 	end
@@ -39,14 +39,14 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	--Summon 2 Tokens
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) or Duel.GetLocationCount(tp,LOCATION_MZONE)<2
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) or Duel.GetLocationCount(tp,LOCATION_MZONE)<2
 		or not Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_SLIME,SET_SLIME,TYPES_TOKEN,500,500,1,RACE_AQUA,ATTRIBUTE_WATER) then return end
 	for i=1,2 do
 		local token=Duel.CreateToken(tp,id+1)
 		Duel.SpecialSummonStep(token,0,tp,tp,false,false,POS_FACEUP)
 	end
 	Duel.SpecialSummonComplete()
-	--Cannot Special Summon, except Divine-Beast monsters
+	--Cannot Special Summon, except Mega-Beast monsters
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetDescription(aux.Stringid(id,2))
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -61,20 +61,20 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e2,tp)
 end
 function s.sumlimit(e,c,sump,sumtype,sumpos,targetp)
-	return not c:IsRace(RACE_DIVINE)
+	return not c:IsRace(RACE_MEGA)
 end
 function s.setfilter(c)
 	return c:IsCode(26905245) and c:IsSSetable()
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_HAND|LOCATION_DECK|LOCATION_GRAVE) and s.setfilter(chkc) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_HAND|LOCATION_DECK|LOCATION_REST) and s.setfilter(chkc) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and
-		Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_HAND|LOCATION_DECK|LOCATION_GRAVE,0,1,nil) end
+		Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_HAND|LOCATION_DECK|LOCATION_REST,0,1,nil) end
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.setfilter),tp,LOCATION_HAND|LOCATION_DECK|LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.setfilter),tp,LOCATION_HAND|LOCATION_DECK|LOCATION_REST,0,1,1,nil)
 	local tc=g:GetFirst()
 	if tc and tc:IsSSetable() then
 		Duel.SSet(tp,tc)

@@ -1,5 +1,5 @@
 --火霊使いヒータ
---Hiita the Fire Charmer
+--Hiita the Fire Chaumer
 local s,id=GetID()
 function s.initial_effect(c)
 	--flip

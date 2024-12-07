@@ -1,5 +1,5 @@
 --運命湾曲
---Bending Destiny
+--Bending Destrudic
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate(summon)

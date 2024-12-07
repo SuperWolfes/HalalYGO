@@ -3,10 +3,10 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Synchro Summon procedure: 1 Tuner + 1+ non-Tuner monsters
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
-	--Switch control of 1 opponent's face-up monster and this card
+	--Smint control of 1 opponent's face-up monster and this card
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_CONTROL)
@@ -17,13 +17,13 @@ function s.initial_effect(c)
 	e1:SetTarget(s.cttg1)
 	e1:SetOperation(s.ctop1)
 	c:RegisterEffect(e1)
-	--Switch control of 1 face-up monster on each field
+	--Smint control of 1 face-up monster on each field
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_CONTROL)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_CARD_TARGET)
-	e2:SetCode(EVENT_TO_GRAVE)
+	e2:SetCode(EVENT_TO_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(s.ctcon)
 	e2:SetTarget(s.cttg2)

@@ -19,21 +19,21 @@ function s.revcostfilter(c)
 	return c:IsMonster() and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.revcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.revcostfilter,tp,LOCATION_GRAVE,0,3,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.revcostfilter,tp,LOCATION_REST,0,3,nil) end
 end
 function s.revtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsFacedown,tp,0,LOCATION_MZONE,1,nil) end
 end
 function s.revop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,s.revcostfilter,tp,LOCATION_GRAVE,0,3,3,nil)
+	local g=Duel.SelectMatchingCard(tp,s.revcostfilter,tp,LOCATION_REST,0,3,3,nil)
 	Duel.HintSelection(g,true)
 	if #g~=3 or Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_COST)~=3 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_CONFIRM)
 	local tc=Duel.SelectMatchingCard(tp,Card.IsFacedown,tp,0,LOCATION_MZONE,1,1,nil):GetFirst()
 	if not tc then return end
 	Duel.ConfirmCards(tp,tc)
-	if Duel.IsExistingMatchingCard(Card.IsDefense,tp,0,LOCATION_GRAVE,1,nil,tc:GetBaseDefense())
+	if Duel.IsExistingMatchingCard(Card.IsDefense,tp,0,LOCATION_REST,1,nil,tc:GetBaseDefense())
 		and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.BreakEffect()
 		Duel.Destroy(tc,REASON_EFFECT)

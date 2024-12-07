@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	--choose atk
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_FIELD)
-	e4:SetCode(EFFECT_PATRICIAN_OF_DARKNESS)
+	e4:SetCode(EFFECT_PATR_OF_DARKNESS)
 	e4:SetRange(LOCATION_SZONE)
 	e4:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e4:SetTargetRange(0,1)
@@ -71,11 +71,11 @@ function s.eqgroup(tp)
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=s.eqgroup(tp)
-	g:Filter(Card.IsAbleToGraveAsCost,nil)
+	g:Filter(Card.IsAbleToRestAsCost,nil)
 	if chk==0 then return #g>0 end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tg=g:Select(tp,1,1,nil)
-	Duel.SendtoGrave(tg,REASON_COST)
+	Duel.SendtoRest(tg,REASON_COST)
 end
 function s.spfilter(c,e,tp)
 	return c:IsSetCard(SET_ALLURE_QUEEN) and c:HasLevel() and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -84,18 +84,18 @@ function s.rescon(sg,e,tp,mg)
 	return aux.ChkfMMZ(#sg)(sg,e,tp,mg) and sg:GetClassCount(Card.GetCode)==#sg
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_GRAVE,0,nil,e,tp)
+	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_REST,0,nil,e,tp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	local ct=math.min(ft,g:GetClassCount(Card.GetCode))
 	if chk==0 then return ct>0 and 
 		aux.SelectUnselectGroup(g,e,tp,ct,ct,s.rescon,chk) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,ct,0,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,ct,0,LOCATION_REST)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_GRAVE,0,nil,e,tp)
+	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_REST,0,nil,e,tp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	local ct=math.min(ft,g:GetClassCount(Card.GetCode))
 	if ct<1 then return end
 	local sg=aux.SelectUnselectGroup(g,e,tp,ct,ct,s.rescon,1,tp,HINTMSG_SPSUMMON)

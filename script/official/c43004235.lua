@@ -17,13 +17,13 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	e1:SetHintTiming(0,TIMING_END_PHASE)
 	c:RegisterEffect(e1)
-	--Equip this card to 1 of your "Plunder Patroll" monsters from GY
+	--Equip this card to 1 of your "Plunder Patroll" monsters from RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,{id,1},EFFECT_COUNT_CODE_DUEL)
 	e2:SetTarget(s.eqptg)
 	e2:SetOperation(s.eqpop)
@@ -60,7 +60,7 @@ function s.eqptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return eg and eg:IsExists(s.eqptgfilter,1,nil,tp) and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
 	Duel.SetOperationInfo(0,CATEGORY_EQUIP,e:GetHandler(),1,0,0)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,e:GetHandler(),1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,e:GetHandler(),1,0,0)
 end
 function s.eqpop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) or not eg then return end

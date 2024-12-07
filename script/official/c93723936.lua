@@ -1,5 +1,5 @@
 --白き森のあくま
---The Fiend of the White Forest
+--The Tainted of the White Forest
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -19,14 +19,14 @@ function s.initial_effect(c)
 	--Set this card
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_LEAVE_GRAVE)
+	e2:SetCategory(CATEGORY_LEAVE_REST)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
-	e2:SetCode(EVENT_TO_GRAVE)
+	e2:SetCode(EVENT_TO_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(function(e,tp,eg,ep,ev,re,r,rp) return e:GetHandler():IsReason(REASON_COST) and re:IsActivated() and re:IsMonsterEffect() end)
 	e2:SetTarget(s.settg)
-	e2:SetOperation(s.setop)
+	e2:SetOperation(s.vetop)
 	c:RegisterEffect(e2)
 end
 s.listed_series={SET_WHITE_FOREST}
@@ -50,7 +50,7 @@ function s.distg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_DISABLE,g,1,tp,0)
 	if e:GetLabel()==1 then
 		Duel.SetTargetParam(1)
-		Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+		Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 	end
 	e:SetLabel(0)
 end
@@ -66,10 +66,10 @@ function s.disop(e,tp,eg,ep,ev,re,r,rp)
 		tc:NegateEffects(c,RESET_PHASE|PHASE_END)
 		Duel.AdjustInstantly(tc)
 		if tc:IsDisabled() and Duel.GetChainInfo(0,CHAININFO_TARGET_PARAM)>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-			and Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_GRAVE,0,1,nil,e,tp)
+			and Duel.IsExistingMatchingCard(aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,0,1,nil,e,tp)
 			and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-			local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+			local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,0,1,1,nil,e,tp)
 			if #g>0 then
 				Duel.BreakEffect()
 				Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
@@ -80,9 +80,9 @@ end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsSSetable() end
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,c,1,tp,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,c,1,tp,0)
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and c:IsSSetable() then
 		Duel.SSet(tp,c)

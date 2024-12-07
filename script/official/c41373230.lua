@@ -3,7 +3,7 @@
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion Summon procedure
 	Fusion.AddProcMix(c,true,true,CARD_ALBAZ,aux.FilterBoolFunctionEx(Card.IsAttackAbove,2500))
 	--Verify materials
@@ -26,11 +26,11 @@ function s.initial_effect(c)
 	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e3:SetOperation(s.regop)
 	c:RegisterEffect(e3)
-	--Register effect when it is sent to the GY
+	--Register effect when it is sent to the RP
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e4:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	e4:SetCode(EVENT_TO_GRAVE)
+	e4:SetCode(EVENT_TO_REST)
 	e4:SetOperation(s.regop2)
 	c:RegisterEffect(e4)
 end
@@ -82,7 +82,7 @@ function s.regop2(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_PHASE+PHASE_END)
-	e1:SetRange(LOCATION_GRAVE)
+	e1:SetRange(LOCATION_REST)
 	e1:SetCountLimit(1,id)
 	e1:SetTarget(s.thtg)
 	e1:SetOperation(s.thop)

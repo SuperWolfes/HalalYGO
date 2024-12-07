@@ -16,7 +16,7 @@ function s.initial_effect(c)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local ac=Duel.GetAttacker()
-	return ac:IsControler(1-tp) and ac:IsLevelAbove(7) and Duel.IsExistingMatchingCard(Card.IsLevelAbove,tp,LOCATION_GRAVE,0,3,nil,7)
+	return ac:IsControler(1-tp) and ac:IsLevelAbove(7) and Duel.IsExistingMatchingCard(Card.IsLevelAbove,tp,LOCATION_REST,0,3,nil,7)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

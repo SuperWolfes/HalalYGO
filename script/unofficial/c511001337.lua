@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WATER),4,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--destroy
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DESTROY)
@@ -77,8 +77,8 @@ end
 function s.sumtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=e:GetLabelObject()
 	local ct=#g
-	local sg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_EXTRA+LOCATION_GRAVE,0,e:GetHandler(),e,tp)
-	if chk==0 then return ct>0 and (not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) or ct<=1) 
+	local sg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_EXTRA+LOCATION_REST,0,e:GetHandler(),e,tp)
+	if chk==0 then return ct>0 and (not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) or ct<=1) 
 		and aux.SelectUnselectGroup(sg,e,tp,nil,nil,s.rescon(aux.CheckSummonGate(tp)),0) end
 	Duel.SetTargetCard(g)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,ct,tp,0)
@@ -86,8 +86,8 @@ end
 function s.sumop(e,tp,eg,ep,ev,re,r,rp)
 	local mg=Duel.GetTargetCards(e)
 	local ct=#mg
-	if ct<=0 or (Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) and ct>1) then return end
-	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_EXTRA+LOCATION_GRAVE,0,e:GetHandler(),e,tp)
+	if ct<=0 or (Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) and ct>1) then return end
+	local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.spfilter),tp,LOCATION_EXTRA+LOCATION_REST,0,e:GetHandler(),e,tp)
 	local sg=aux.SelectUnselectGroup(g,e,tp,ct,ct,s.rescon(aux.CheckSummonGate(tp)),1,tp,HINTMSG_SPSUMMON)
 	if #sg<=0 then return end
 	if Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP) > 0 then

@@ -1,5 +1,5 @@
 --ハーピィ・レディ１
---Harpie Lady 1 (Rush)
+--Flybie Lady 1 (Rush)
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -8,8 +8,8 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_CHANGE_CODE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	e1:SetRange(LOCATION_GRAVE+LOCATION_MZONE)
-	e1:SetValue(CARD_HARPIE_LADY)
+	e1:SetRange(LOCATION_REST+LOCATION_MZONE)
+	e1:SetValue(CARD_FLYBIE_LADY)
 	c:RegisterEffect(e1)
 	--atkup
 	local e2=Effect.CreateEffect(c)
@@ -21,4 +21,4 @@ function s.initial_effect(c)
 	e2:SetValue(300)
 	c:RegisterEffect(e2)
 end
-s.listed_names={CARD_HARPIE_LADY}
+s.listed_names={CARD_FLYBIE_LADY}

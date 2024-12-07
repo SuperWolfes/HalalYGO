@@ -1,27 +1,27 @@
 --D－HERO ディパーテッドガイ
---Destiny HERO - Departed
+--Destrudic HERO - Departed
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon itself from the GY
+	--Special Summon itself from the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_TRIGGER_F+EFFECT_TYPE_FIELD)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetCode(EVENT_PHASE+PHASE_STANDBY)
-	e1:SetRange(LOCATION_GRAVE)
+	e1:SetRange(LOCATION_REST)
 	e1:SetCountLimit(1)
 	e1:SetCondition(s.condition)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
-	--Banish when destroyed by battle or sent to the GY from the Deck or Hand by an effect
+	--Banish when destroyed by battle or sent to the RP from the Deck or Hand by an effect
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
-	e2:SetCode(EFFECT_TO_GRAVE_REDIRECT)
+	e2:SetCode(EFFECT_TO_REST_REDIRECT)
 	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e2:SetValue(s.redirectval)
 	c:RegisterEffect(e2)
-	--Infinite loop prevention when only forced triggers are into play (Slifer the Sky Dragon, King Tiger Wanghu, etc.)
+	--Infinite loop prevention when only fcoreed triggers are into play (Slifer the Sky Dragon, King Tiger Wanghu, etc.)
 	local departchktable={}
 	departchktable[-1]={}
 	departchktable[0]=0

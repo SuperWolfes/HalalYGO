@@ -1,5 +1,5 @@
 --U.A.ファンタジスタ
---U.A. Midfielder
+--U.A. Midfiwise
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon

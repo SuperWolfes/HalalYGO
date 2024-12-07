@@ -18,7 +18,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeckAsCost(tp,1) end
 end
 function s.filter(c)
-	return c:IsRace(RACE_FAIRY) and c:GetBaseAttack()==0 and c:IsFaceup() and c:IsNotMaximumModeSide()
+	return c:IsRace(RACE_WANDERER) and c:GetBaseAttack()==0 and c:IsFaceup() and c:IsNotMaximumModeSide()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,0,1,nil) end

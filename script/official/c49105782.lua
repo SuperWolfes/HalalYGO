@@ -4,11 +4,11 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Link summon procedure
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WIND),2)
-	--Gains 2400 ATK if opponent has no monsters in their GY
+	--Gains 2400 ATK if opponent has no monsters in their RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e1:SetCondition(s.atkcond)
 	e1:SetValue(2400)
 	c:RegisterEffect(e1)
-	--Shuffle 1 monster from opponent's GY to deck
+	--Shuffle 1 monster from opponent's RP to deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TODECK)
@@ -32,16 +32,16 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.atkcond(e,c)
-	return not Duel.IsExistingMatchingCard(Card.IsMonster,1-e:GetHandlerPlayer(),LOCATION_GRAVE,0,1,nil)
+	return not Duel.IsExistingMatchingCard(Card.IsMonster,1-e:GetHandlerPlayer(),LOCATION_REST,0,1,nil)
 end
 function s.tdfilter(c)
 	return c:IsMonster() and c:IsAbleToDeck()
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(1-tp) and s.tdfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.tdfilter,tp,0,LOCATION_GRAVE,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(1-tp) and s.tdfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.tdfilter,tp,0,LOCATION_REST,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectTarget(tp,s.tdfilter,tp,0,LOCATION_GRAVE,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.tdfilter,tp,0,LOCATION_REST,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,1,0,0)
 end
 function s.tdop(e,tp,eg,ep,ev,re,r,rp)

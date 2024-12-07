@@ -1,3 +1,3 @@
 --セブンスロード・メイジ
---Sevens Road Mage
+--Sevens Road Manced
 Duel.LoadCardScriptAlias(160002016)

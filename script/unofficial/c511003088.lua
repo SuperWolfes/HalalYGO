@@ -31,7 +31,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		if a:IsControler(1-tp) and a:IsType(TYPE_XYZ) then
 			local og=a:GetOverlayGroup()
 			if #og>0 and Duel.SelectYesNo(tp,aux.Stringid(81330115,1)) then
-				Duel.SendtoGrave(og,REASON_EFFECT)
+				Duel.SendtoRest(og,REASON_EFFECT)
 			end
 		end
 	end

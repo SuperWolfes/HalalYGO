@@ -3,7 +3,7 @@
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	-- 2 Level 2 monsters
 	Xyz.AddProcedure(c,nil,2,2)
 	-- Can use Link 2 monsters as Level 2 materials

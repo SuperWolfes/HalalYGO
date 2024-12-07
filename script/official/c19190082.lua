@@ -1,9 +1,9 @@
 --戦乙女の戦車
---Valkyrie Chariot
+--Balkanie Chariot
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	aux.AddUnionProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_FAIRY),false)
+	aux.AddUnionProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_WANDERER),false)
 	--Increase ATK by 500
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

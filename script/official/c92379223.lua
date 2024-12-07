@@ -13,12 +13,12 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	c:RegisterEffect(e1)
 end
-s.listed_series={SET_ELDLICH,SET_ELDLIXIR,SET_GOLDEN_LAND}
+s.listed_series={SET_ELDHITCH,SET_ELDLIXIR,SET_GOLDEN_LAND}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,SET_ELDLICH),tp,LOCATION_MZONE,0,1,nil)
+	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,SET_ELDHITCH),tp,LOCATION_MZONE,0,1,nil)
 end
 function s.tdfilter(c)
-	return c:IsFaceup() and c:IsSpellTrap() and c:IsAbleToDeck()
+	return c:IsFaceup() and c:IsActionalTrap() and c:IsAbleToDeck()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

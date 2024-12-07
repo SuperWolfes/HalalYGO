@@ -2,7 +2,7 @@
 --Rainbow Dark Dragon
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Special Summon Limit
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -38,11 +38,11 @@ end
 function s.spcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
-	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil)
+	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE+LOCATION_REST,0,nil)
 	return aux.SelectUnselectGroup(rg,e,tp,7,7,s.rescon,0)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,c)
-	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil)
+	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE+LOCATION_REST,0,nil)
 	local g=aux.SelectUnselectGroup(rg,e,tp,7,7,s.rescon,1,tp,HINTMSG_REMOVE,nil,nil,true)
 	if #g>0 then
 		g:KeepAlive()
@@ -58,10 +58,10 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	g:DeleteGroup()
 end
 function s.cfilter(c)
-	return c:IsAttribute(ATTRIBUTE_DARK) and (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup()) and aux.SpElimFilter(c,true,true)
+	return c:IsAttribute(ATTRIBUTE_DARK) and (c:IsLocation(LOCATION_REST) or c:IsFaceup()) and aux.SpElimFilter(c,true,true)
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,e:GetHandler())
+	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_MZONE+LOCATION_REST,0,e:GetHandler())
 	if chk==0 then return #g>0 and g:FilterCount(Card.IsAbleToRemoveAsCost,nil)==#g end
 	e:SetLabel(#g)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)

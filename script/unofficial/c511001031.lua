@@ -17,7 +17,7 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	return d and d:IsControler(tp)
 end
 function s.filter(c)
-	return c:IsPosition(POS_FACEUP_ATTACK) and c:IsPhantomButterfly()
+	return c:IsPosition(POS_FACEUP_ATTACK) and c:IsIllusionButterfly()
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local g=Group.FromCards(Duel.GetAttacker(),Duel.GetAttackTarget())

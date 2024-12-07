@@ -14,16 +14,16 @@ function s.initial_effect(c)
 end
 s.listed_series={0xc2}
 function s.cfilter(c)
-	return c:IsFaceup() and (c:IsRace(RACE_DRAGON) or c:IsSetCard(0xc2)) and c:IsAbleToGraveAsCost()
+	return c:IsFaceup() and (c:IsRace(RACE_DRAGON) or c:IsSetCard(0xc2)) and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_MZONE,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.filter(c)
-	return c:IsFacedown() and c:IsSpellTrap() and c:IsSSetable(true)
+	return c:IsFacedown() and c:IsActionalTrap() and c:IsSSetable(true)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_ONFIELD,0,1,e:GetHandler()) end

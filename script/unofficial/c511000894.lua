@@ -1,4 +1,4 @@
---Chain of the Underworld
+--Chain of the Overworld
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c,e,tp)
-	return c:IsLocation(LOCATION_GRAVE) and c:IsPreviousControler(1-tp) and c:IsCanBeSpecialSummoned(e,0,1-tp,false,false)
+	return c:IsLocation(LOCATION_REST) and c:IsPreviousControler(1-tp) and c:IsCanBeSpecialSummoned(e,0,1-tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=eg:Filter(s.filter,nil,e,tp)

@@ -3,7 +3,7 @@
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	--Banish 1 "Genex" monster from your GY and gain its Attribute
+	--Banish 1 "Genex" monster from your RP and gain its Attribute
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -12,13 +12,13 @@ function s.initial_effect(c)
 	e1:SetCost(s.attrcost)
 	e1:SetOperation(s.attrop)
 	c:RegisterEffect(e1)
-	--Add 2 "Genex" monsters from your GY to your hand
+	--Add 2 "Genex" monsters from your RP to your hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCondition(s.thcon)
 	e2:SetTarget(s.thtg)
 	e2:SetOperation(s.thop)
@@ -30,9 +30,9 @@ function s.attrcfilter(c,attr)
 end
 function s.attrcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local attr=e:GetHandler():GetAttribute()
-	if chk==0 then return Duel.IsExistingMatchingCard(s.attrcfilter,tp,LOCATION_GRAVE,0,1,nil,attr) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.attrcfilter,tp,LOCATION_REST,0,1,nil,attr) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local sc=Duel.SelectMatchingCard(tp,s.attrcfilter,tp,LOCATION_GRAVE,0,1,1,nil,attr):GetFirst()
+	local sc=Duel.SelectMatchingCard(tp,s.attrcfilter,tp,LOCATION_REST,0,1,1,nil,attr):GetFirst()
 	Duel.Remove(sc,POS_FACEUP,REASON_COST)
 	local tn_chk=sc:IsType(TYPE_TUNER) and 1 or 0
 	e:SetLabel(sc:GetAttribute(),tn_chk)
@@ -73,9 +73,9 @@ function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
 	local c=e:GetHandler()
 	if chk==0 then return c:IsAbleToHand() and c:IsCanBeEffectTarget(e)
-		and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,c,e) end
+		and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,c,e) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,c,e)
+	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,1,c,e)
 	Duel.SetTargetCard(g+c)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,2,tp,0)
 end
@@ -85,11 +85,11 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SendtoHand(tg,nil,REASON_EFFECT)
 	end
 	local c=e:GetHandler()
-	--Banish any card sent to your GY
+	--Banish any card sent to your RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_SET_AVAILABLE+EFFECT_FLAG_IGNORE_RANGE+EFFECT_FLAG_IGNORE_IMMUNE)
-	e1:SetCode(EFFECT_TO_GRAVE_REDIRECT)
+	e1:SetCode(EFFECT_TO_REST_REDIRECT)
 	e1:SetTargetRange(0xff,0)
 	e1:SetTarget(s.rmtg)
 	e1:SetValue(LOCATION_REMOVED)

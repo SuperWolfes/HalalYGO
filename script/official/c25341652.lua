@@ -1,8 +1,8 @@
 --交響魔人マエストローク
---Maestroke the Symphony Djinn
+--Maestroke the Symphony Dlilt
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Xyz Summon Procedure
 	Xyz.AddProcedure(c,nil,4,2)
 	--Change a monster to face-down Defense Position
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.postg)
 	e1:SetOperation(s.posop)
 	c:RegisterEffect(e1,false,REGISTER_FLAG_DETACH_XMAT)
-	--Destruction replacement for a "Djinn" monster
+	--Mismatching replacement for a "Dlilt" monster
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EFFECT_DESTROY_REPLACE)
@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	e2:SetValue(function(e,c) return s.repfilter(c,e:GetHandlerPlayer()) end)
 	c:RegisterEffect(e2)
 end
-s.listed_series={SET_DJINN}
+s.listed_series={SET_DLILT}
 function s.posfilter(c)
 	return c:IsPosition(POS_FACEUP_ATTACK) and c:IsCanTurnSet()
 end
@@ -45,7 +45,7 @@ function s.posop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.repfilter(c,tp)
-	return c:IsFaceup() and c:IsControler(tp) and c:IsLocation(LOCATION_MZONE) and c:IsSetCard(SET_DJINN)
+	return c:IsFaceup() and c:IsControler(tp) and c:IsLocation(LOCATION_MZONE) and c:IsSetCard(SET_DLILT)
 		and not c:IsReason(REASON_REPLACE) and c:CheckRemoveOverlayCard(tp,1,REASON_EFFECT)
 end
 function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)

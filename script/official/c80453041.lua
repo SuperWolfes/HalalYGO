@@ -1,11 +1,11 @@
 --ファントム・オブ・ユベル
---Phantom of Yubel
+--Illusion of Yubel
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion Materials and Special Summon Procedure
-	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_YUBEL),s.fiendfilter)
+	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_YUBEL),s.taintedfilter)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,true)
 	--Cannot be used as Fusion Material
 	local e1=Effect.CreateEffect(c)
@@ -41,11 +41,11 @@ function s.initial_effect(c)
 end
 s.material_setcode=SET_YUBEL
 s.listed_series={SET_YUBEL}
-function s.fiendfilter(c)
-	return c:IsRace(RACE_FIEND) and c:IsAttack(0) and c:IsDefense(0)
+function s.taintedfilter(c)
+	return c:IsRace(RACE_TAINTED) and c:IsAttack(0) and c:IsDefense(0)
 end
 function s.contactfil(tp)
-	return Duel.GetMatchingGroup(Card.IsAbleToDeckOrExtraAsCost,tp,LOCATION_MZONE|LOCATION_HAND|LOCATION_GRAVE,0,nil)
+	return Duel.GetMatchingGroup(Card.IsAbleToDeckOrExtraAsCost,tp,LOCATION_MZONE|LOCATION_HAND|LOCATION_REST,0,nil)
 end
 function s.contactop(g,tp)
 	local fu,fd=g:Split(Card.IsFaceup,nil)
@@ -68,6 +68,6 @@ function s.repop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_DESTROY)
 	local g=Duel.SelectMatchingCard(1-tp,s.yubelfilter,1-tp,LOCATION_HAND|LOCATION_MZONE|LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.Destroy(g,REASON_EFFECT,LOCATION_GRAVE,1-tp)
+		Duel.Destroy(g,REASON_EFFECT,LOCATION_REST,1-tp)
 	end
 end

@@ -1,5 +1,5 @@
 --運命の分かれ道
---The Paths of Destiny
+--The Paths of Destrudic
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

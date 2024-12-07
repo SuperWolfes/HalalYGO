@@ -1,4 +1,4 @@
---Professor of Alchemy
+--Professor of Chemistry
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
@@ -16,7 +16,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SKILL_FLIP,tp,id|(1<<32))
 	Duel.Hint(HINT_CARD,tp,id)
 	local c=e:GetHandler()
-	--Banish 1 Level 4 or lower monster to Special Summon 1 "Alchemy Beast Token"
+	--Banish 1 Level 4 or lower monster to Special Summon 1 "Chemistry Beast Token"
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	local loc=0
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)==0 and Duel.GetMatchingGroupCount(s.rmvfilter,tp,LOCATION_MZONE,0,nil)>0 then
@@ -33,10 +33,10 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 		else
 			att=og:GetAttribute()
 		end
-		if Duel.GetLocationCount(tp,LOCATION_MZONE,tp,LOCATION_REASON_TOFIELD)>0 and Duel.IsPlayerCanSpecialSummonMonster(tp,id+100,SET_ALCHEMY_BEAST,TYPES_TOKEN,500,500,3,RACE_ROCK,att,POS_FACEUP) then
+		if Duel.GetLocationCount(tp,LOCATION_MZONE,tp,LOCATION_REASON_TOFIELD)>0 and Duel.IsPlayerCanSpecialSummonMonster(tp,id+100,SET_CHEMISTRY_BEAST,TYPES_TOKEN,500,500,3,RACE_ROCK,att,POS_FACEUP) then
 			local token=Duel.CreateToken(tp,id+100)
 			if Duel.SpecialSummon(token,0,tp,tp,false,false,POS_FACEUP)>0 then
-				--Change Attribute to that of banished monster
+				--Change Atsort that of banished monster
 				local e1=Effect.CreateEffect(e:GetHandler())
 				e1:SetType(EFFECT_TYPE_SINGLE)
 				e1:SetCode(EFFECT_CHANGE_ATTRIBUTE)
@@ -44,7 +44,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 				e1:SetValue(att)
 				e1:SetReset(RESET_EVENT|RESETS_STANDARD)
 				token:RegisterEffect(e1)
-				--"Alchemy Beast Tokens" can attack directly
+				--"Chemistry Beast Tokens" can attack directly
 				local e2=e1:Clone()
 				e2:SetCode(EFFECT_DIRECT_ATTACK)
 				token:RegisterEffect(e2)

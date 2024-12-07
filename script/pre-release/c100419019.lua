@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Add to your hand, or Special Summon, 1 "P.U.N.K." monster from your Deck or GY, except a Level 8 monster
+	--Add to your hand, or Special Summon, 1 "P.U.N.K." monster from your Deck or RP, except a Level 8 monster
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_SPECIAL_SUMMON)
@@ -45,9 +45,9 @@ function s.spcostfilter(c)
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return Duel.IsExistingMatchingCard(s.spcostfilter,tp,LOCATION_HAND|LOCATION_GRAVE|LOCATION_MZONE,0,1,c) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.spcostfilter,tp,LOCATION_HAND|LOCATION_REST|LOCATION_MZONE,0,1,c) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local tc=Duel.SelectMatchingCard(tp,s.spcostfilter,tp,LOCATION_HAND|LOCATION_GRAVE|LOCATION_MZONE,0,1,1,c)
+	local tc=Duel.SelectMatchingCard(tp,s.spcostfilter,tp,LOCATION_HAND|LOCATION_REST|LOCATION_MZONE,0,1,1,c)
 	Duel.Remove(tc,POS_FACEUP,REASON_COST)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -69,15 +69,15 @@ end
 function s.thsptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 	   local sp_chk=Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-	   return Duel.IsExistingMatchingCard(s.thspfilter,tp,LOCATION_DECK|LOCATION_GRAVE,0,1,nil,e,tp,sp_chk)
+	   return Duel.IsExistingMatchingCard(s.thspfilter,tp,LOCATION_DECK|LOCATION_REST,0,1,nil,e,tp,sp_chk)
 	end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK|LOCATION_GRAVE)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK|LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK|LOCATION_REST)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK|LOCATION_REST)
 end
 function s.thspop(e,tp,eg,ep,ev,re,r,rp)
 	local sp_chk=Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thspfilter),tp,LOCATION_DECK|LOCATION_GRAVE,0,1,1,nil,e,tp,sp_chk):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.thspfilter),tp,LOCATION_DECK|LOCATION_REST,0,1,1,nil,e,tp,sp_chk):GetFirst()
 	if not tc then return end
 	aux.ToHandOrElse(tc,tp,
 		function() return sp_chk and tc:IsCanBeSpecialSummoned(e,0,tp,false,false) end,

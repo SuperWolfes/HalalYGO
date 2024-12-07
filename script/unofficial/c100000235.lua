@@ -1,5 +1,5 @@
 --異次元格納庫
---Different Dimension Hangar
+--Same Dimension Hangar
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

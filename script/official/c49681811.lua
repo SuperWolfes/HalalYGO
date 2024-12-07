@@ -37,11 +37,11 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function s.distg(e,c)
-	if not c:IsSpell() or c:GetCardTargetCount()==0 then return false end
+	if not c:IsActional() or c:GetCardTargetCount()==0 then return false end
 	return c:GetCardTarget():IsContains(e:GetHandler())
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
-	if not re:IsActiveType(TYPE_SPELL) then return end
+	if not re:IsActiveType(TYPE_ACTIONAL) then return end
 	if not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then return end
 	local g=Duel.GetChainInfo(ev,CHAININFO_TARGET_CARDS)
 	if not g or #g==0 then return end

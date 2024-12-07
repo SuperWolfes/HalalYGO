@@ -26,7 +26,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,1,c)
 	g:AddCard(c)
-	Duel.SendtoGrave(g,REASON_COST+REASON_DISCARD)
+	Duel.SendtoRest(g,REASON_COST+REASON_DISCARD)
 end
 function s.spfilter(c,e,tp)
 	return c:IsCode(89399912) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

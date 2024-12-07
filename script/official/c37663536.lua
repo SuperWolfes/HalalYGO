@@ -1,11 +1,11 @@
 --古代の機械超巨人
---Ancient Gear Megaton Golem
+--Ancient Gear Megaton Gopal
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_ANCIENT_GEAR),3)
-	--Can make attacks up to the number of "Ancient Gear Golem" and "Ancient Gear Golem - Ultimate Pound" used for its summon
+	--Can make attacks up to the number of "Ancient Gear Gopal" and "Ancient Gear Gopal - Ultimate Pound" used for its summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetValue(s.valcheck)
 	e2:SetLabelObject(e1)
 	c:RegisterEffect(e2)
-	--Your opponent cannot activate Spell/Trap cards until the End of the Damage Step
+	--Your opponent cannot activate Actional/Trap cards until the End of the Damage Step
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
 	e3:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	e3:SetValue(function(e,re,tp) return re:IsHasType(EFFECT_TYPE_ACTIVATE) end)
 	e3:SetCondition(function(e) return Duel.GetAttacker()==e:GetHandler() end)
 	c:RegisterEffect(e3)
-	--Special Summon 1 "Ultimate Ancient Gear Golem" from your Extra Deck
+	--Special Summon 1 "Ultimate Ancient Gear Gopal" from your Extra Deck
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,0))
 	e4:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -42,7 +42,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 s.listed_series={SET_ANCIENT_GEAR}
-s.listed_names={12652643,95735217,CARD_ANCIENT_GEAR_GOLEM} --Ultimate Ancient Gear Golem, Ancient Gear Golem - Ultimate Pound
+s.listed_names={12652643,95735217,CARD_ANCIENT_GEAR_GOPAL} --Ultimate Ancient Gear Gopal, Ancient Gear Gopal - Ultimate Pound
 function s.valcheck(e,c)
 	e:GetLabelObject():SetLabel(c:GetMaterial():FilterCount(Card.IsCode,nil,83104731,95735217))
 end

@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e2)
 end
-s.listed_names={CARD_GAIA_CHAMPION}
+s.listed_names={CARD_BIA_CHAMPION}
 function s.filter1(c,tp)
 	return c:IsSummonPlayer(1-tp) and c:IsLocation(LOCATION_MZONE)
 end
@@ -29,7 +29,7 @@ function s.cfilter(c)
 	return c:IsRace(RACE_CYBERSE) and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,2,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,2,nil) end
 end
 function s.filter(c)
 	return c:IsFaceup() and c:IsLevelBelow(9) and c:IsCanTurnSet() and c:IsCanChangePositionRush()
@@ -41,7 +41,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_GRAVE,0,2,2,nil)
+	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_REST,0,2,2,nil)
 	if #g==0 then return end
 	Duel.HintSelection(g)
 	if Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_COST)==0 then return end
@@ -51,9 +51,9 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if #g==0 then return end
 	Duel.HintSelection(g)
 	if Duel.ChangePosition(g,POS_FACEDOWN_DEFENSE)>0
-		and Duel.IsExistingMatchingCard(Card.IsAbleToDeck,tp,0,LOCATION_GRAVE,1,nil)
+		and Duel.IsExistingMatchingCard(Card.IsAbleToDeck,tp,0,LOCATION_REST,1,nil)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
-		local tg=Duel.SelectMatchingCard(tp,Card.IsAbleToDeck,tp,0,LOCATION_GRAVE,1,1,nil)
+		local tg=Duel.SelectMatchingCard(tp,Card.IsAbleToDeck,tp,0,LOCATION_REST,1,1,nil)
 		Duel.HintSelection(tg)
 		local opt=Duel.SelectOption(tp,aux.Stringid(id,2),aux.Stringid(id,3))
 		if opt==0 then

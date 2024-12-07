@@ -27,10 +27,10 @@ function s.filter(c)
 	return c:IsSetCard(0x97) and c:IsMonster() and c:IsSSetable(true)
 end
 function s.desfilter(c)
-	return c:IsType(TYPE_SPELL+TYPE_TRAP)
+	return c:IsType(TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.desfilter2(c)
-	return c:IsSpellTrap() and c:GetSequence()<5
+	return c:IsActionalTrap() and c:GetSequence()<5
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and s.desfilter(chkc) and chkc~=e:GetHandler() end

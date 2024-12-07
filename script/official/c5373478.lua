@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetCode(EFFECT_CHANGE_CODE)
 	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetValue(CARD_CYBER_DRAGON)
 	c:RegisterEffect(e3)
 end
@@ -34,7 +34,7 @@ function s.atkcon(e)
 		and Duel.GetAttacker()==e:GetHandler() and Duel.GetAttackTarget()~=nil
 end
 function s.costfilter(c)
-	return c:IsSpell() and not c:IsPublic()
+	return c:IsActional() and not c:IsPublic()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil) end

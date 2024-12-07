@@ -25,7 +25,7 @@ function s.tdfilter(c)
 	return c:IsMonster() and c:IsRace(RACE_BEAST) and c:IsAbleToDeckAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_GRAVE,0,1,nil)
+	return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST,0,1,nil)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(aux.FilterMaximumSideFunctionEx(Card.IsFaceup),tp,0,LOCATION_MZONE,1,nil) end
@@ -33,7 +33,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local tg=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local tg=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.HintSelection(tg)
 	if Duel.SendtoDeck(tg,nil,SEQ_DECKTOP,REASON_COST)<1 then return end
 	--Effect

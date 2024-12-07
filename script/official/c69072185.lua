@@ -12,11 +12,11 @@ function s.initial_effect(c)
 	e0:SetRange(LOCATION_PZONE)
 	e0:SetOperation(s.amorphreg)
 	c:RegisterEffect(e0)
-	--Any card sent to the GY is banished instead
+	--Any card sent to the RP is banished instead
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_SET_AVAILABLE+EFFECT_FLAG_IGNORE_RANGE+EFFECT_FLAG_IGNORE_IMMUNE)
-	e1:SetCode(EFFECT_TO_GRAVE_REDIRECT)
+	e1:SetCode(EFFECT_TO_REST_REDIRECT)
 	e1:SetRange(LOCATION_PZONE)
 	e1:SetCondition(s.rmcon)
 	e1:SetTarget(function(e,_c) return not _c:IsOriginalSetCard(SET_AMORPHAGE) and Duel.IsPlayerCanRemove(e:GetHandlerPlayer(),_c) end)

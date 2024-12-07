@@ -13,19 +13,19 @@ function s.initial_effect(c)
 	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
 	e1:SetCondition(s.spcon)
 	c:RegisterEffect(e1)
-	--Search 1 Spell/Trap that mentions "Red Dragon Archfiend"
+	--Search 1 Actional/Trap that mentions "Red Dragon Archtainted"
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
-	e2:SetCode(EVENT_TO_GRAVE)
+	e2:SetCode(EVENT_TO_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetTarget(s.thtg)
 	e2:SetOperation(s.thop)
 	c:RegisterEffect(e2)
 end
-s.listed_names={CARD_RED_DRAGON_ARCHFIEND}
+s.listed_names={CARD_RED_DRAGON_ARCHTAINTED}
 function s.cfilter(c)
 	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_DARK) and c:IsLevelAbove(5)
 end
@@ -36,7 +36,7 @@ function s.spcon(e,c)
 		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil)
 end
 function s.thfilter(c)
-	return c:ListsCode(CARD_RED_DRAGON_ARCHFIEND) and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:ListsCode(CARD_RED_DRAGON_ARCHTAINTED) and c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

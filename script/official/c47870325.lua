@@ -23,19 +23,19 @@ function s.initial_effect(c)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_REMOVE,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_REMOVE,nil,1,tp,LOCATION_REST)
 end
 function s.rmfilter(c)
-	return c:IsSpell() and c:IsAbleToRemove(POS_FACEDOWN)
+	return c:IsActional() and c:IsAbleToRemove(POS_FACEDOWN)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local rg=Group.CreateGroup()
 	local turn_p=Duel.GetTurnPlayer()
 	local step=turn_p==0 and 1 or -1
 	for p=turn_p,1-turn_p,step do
-		if Duel.IsExistingMatchingCard(s.rmfilter,p,LOCATION_GRAVE,0,1,nil) and Duel.SelectYesNo(p,aux.Stringid(id,1)) then
+		if Duel.IsExistingMatchingCard(s.rmfilter,p,LOCATION_REST,0,1,nil) and Duel.SelectYesNo(p,aux.Stringid(id,1)) then
 			Duel.Hint(HINT_SELECTMSG,p,HINTMSG_REMOVE)
-			local g=Duel.SelectMatchingCard(p,s.rmfilter,p,LOCATION_GRAVE,0,1,5,nil)
+			local g=Duel.SelectMatchingCard(p,s.rmfilter,p,LOCATION_REST,0,1,5,nil)
 			rg:Merge(g)
 		end
 	end
@@ -68,7 +68,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 		local tc=tg:GetFirst()
 		if tc:IsDiscardable(REASON_EFFECT) and Duel.SelectYesNo(p,aux.Stringid(id,3)) then
 			Duel.BreakEffect()
-			Duel.SendtoGrave(tc,REASON_EFFECT+REASON_DISCARD)
+			Duel.SendtoRest(tc,REASON_EFFECT+REASON_DISCARD)
 			Duel.NegateAttack()
 		else
 			--double damage

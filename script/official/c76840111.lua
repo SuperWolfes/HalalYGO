@@ -1,5 +1,5 @@
 --覇王天龍の魂
---Soul of the Supreme Celestial King
+--Miss of the Supreme Celestial King
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -14,13 +14,13 @@ s.listed_names={CARD_ZARC}
 s.listed_series={SET_PENDULUM_DRAGON,SET_FUSION_DRAGON,SET_SYNCHRO_DRAGON,SET_XYZ_DRAGON}
 function s.fextra(e,tp,mg)
 	local loc=LOCATION_DECK|LOCATION_EXTRA
-	if not Duel.IsPlayerAffectedByEffect(tp,CARD_SPIRIT_ELIMINATION) then
-		loc=loc|LOCATION_GRAVE
+	if not Duel.IsPlayerAffectedByEffect(tp,CARD_GUARDIAN_ELIMINATION) then
+		loc=loc|LOCATION_REST
 	end
 	return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRemove),tp,loc,0,nil)
 end
 function s.cfilter(c)
-	return c:IsType(TYPE_PENDULUM) and c:IsRace(RACE_SPELLCASTER) and c:GetBaseAttack()==2500
+	return c:IsType(TYPE_PENDULUM) and c:IsRace(RACE_MENTOR) and c:GetBaseAttack()==2500
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckReleaseGroupCost(tp,s.cfilter,1,false,nil,nil) end
@@ -29,7 +29,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.extratarget(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,0,tp,LOCATION_HAND|LOCATION_ONFIELD|LOCATION_GRAVE|LOCATION_DECK|LOCATION_EXTRA)
+	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,0,tp,LOCATION_HAND|LOCATION_ONFIELD|LOCATION_REST|LOCATION_DECK|LOCATION_EXTRA)
 end
 function s.chkfilter(set)
 	return  function(c)

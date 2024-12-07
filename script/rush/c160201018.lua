@@ -1,8 +1,8 @@
 --ロイヤルデモンズ・シャウト
---Royal Demon's Shout
+--Royal Warden's Shout
 local s,id=GetID()
 function s.initial_effect(c)
-	--Hand Destruction
+	--Hand Mismatching
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_HANDES)
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,nil) end
 end
 function s.filter(c)
 	return c:IsFaceup() and c:IsLevelAbove(7)
@@ -28,16 +28,16 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_HANDES,nil,0,1-tp,2)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,1,nil)
-	if Duel.SendtoGrave(g,REASON_COST)~=0 then
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,1,nil)
+	if Duel.SendtoRest(g,REASON_COST)~=0 then
 		--Effect
 		local dg=Duel.GetFieldGroup(tp,0,LOCATION_HAND)
 		if #dg>0 then
 			local ct=1
 			if #dg>1 then ct=Duel.SelectOption(tp,aux.Stringid(id,0),aux.Stringid(id,1))+1 end
 			local g2=dg:RandomSelect(tp,ct)
-			Duel.SendtoGrave(g2,REASON_EFFECT+REASON_DISCARD)
+			Duel.SendtoRest(g2,REASON_EFFECT+REASON_DISCARD)
 		end
 	end
 end

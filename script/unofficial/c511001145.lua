@@ -1,5 +1,5 @@
 --魔法の教科書
---Spell Textbook
+--Actional Textbook
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -20,7 +20,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 		return #g==0 or g:FilterCount(Card.IsDiscardable,nil)==#g
 	end
 	local g=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
-	Duel.SendtoGrave(g,REASON_COST+REASON_DISCARD)
+	Duel.SendtoRest(g,REASON_COST+REASON_DISCARD)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,1) end
@@ -47,7 +47,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			if type(prev)~='function' or prev(eff,te,tp) then return end
 		end
 	end
-	if (Duel.GetLocationCount(tp,LOCATION_SZONE)>0 or tc:IsType(TYPE_FIELD)) and tc:IsSpell()
+	if (Duel.GetLocationCount(tp,LOCATION_SZONE)>0 or tc:IsType(TYPE_FIELD)) and tc:IsActional()
 		and tc:CheckActivateEffect(false,false,false)~=nil and not tc:IsHasEffect(EFFECT_CANNOT_TRIGGER) then
 		local tpe=tc:GetType()
 		local tg=te:GetTarget()
@@ -63,17 +63,17 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			if Duel.IsDuelType(DUEL_1_FIELD) then
 				if fc then Duel.Destroy(fc,REASON_RULE) end
 				fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
-				if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
+				if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
 			else
 				fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
-				if fc and Duel.SendtoGrave(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
+				if fc and Duel.SendtoRest(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
 			end
 		end
 		Duel.MoveToField(tc,tp,tp,loc,POS_FACEUP,true)
 		Duel.Hint(HINT_CARD,0,tc:GetOriginalCode())
 		tc:CreateEffectRelation(te)
 		if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 and not tc:IsHasEffect(EFFECT_REMAIN_FIELD) then
-			tc:CancelToGrave(false)
+			tc:CancelToRest(false)
 		end
 		if te:GetCode()==EVENT_CHAINING then
 			local te2=Duel.GetChainInfo(chain,CHAININFO_TRIGGERING_EFFECT)

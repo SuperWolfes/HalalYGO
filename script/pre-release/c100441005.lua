@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SUMMON)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCost(aux.SelfBanishCost)
 	e2:SetTarget(s.nstg)
@@ -29,13 +29,13 @@ function s.initial_effect(c)
 end
 s.listed_names={TOKEN_ICE_PILLAR} --"Ice Pillar Token"
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) and Duel.GetLocationCount(tp,LOCATION_MZONE)>1
+	if chk==0 then return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) and Duel.GetLocationCount(tp,LOCATION_MZONE)>1
 		and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_ICE_PILLAR,0,TYPES_TOKEN,1900,1200,4,RACE_AQUA,ATTRIBUTE_WATER,POS_FACEUP_DEFENSE) end
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,2,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
-	if not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) and Duel.GetLocationCount(tp,LOCATION_MZONE)>1
+	if not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) and Duel.GetLocationCount(tp,LOCATION_MZONE)>1
 		and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_ICE_PILLAR,0,TYPES_TOKEN,1900,1200,4,RACE_AQUA,ATTRIBUTE_WATER,POS_FACEUP_DEFENSE) then
 		for i=1,2 do
 			local token=Duel.CreateToken(tp,TOKEN_ICE_PILLAR)

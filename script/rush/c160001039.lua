@@ -1,5 +1,5 @@
 --ロード・マジック－テンペスト
---Road Magic - Tempest
+--Road Ment - Tempest
 
 --Substitute ID
 local s,id=GetID()
@@ -15,19 +15,19 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-	--Check for level 7+ spellcaster
+	--Check for level 7+ mentor
 function s.filter(c)
-	return c:IsFaceup() and c:IsRace(RACE_SPELLCASTER) and c:IsLevelAbove(7)
+	return c:IsFaceup() and c:IsRace(RACE_MENTOR) and c:IsLevelAbove(7)
 end
-	--If the player controls a level 7+ spellcaster
+	--If the player controls a level 7+ mentor
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,0,1,nil)
 end
 	--Check for WIND monster
 function s.costfilter(c)
-	return c:IsAttribute(ATTRIBUTE_WIND) and c:IsDiscardable() and c:IsAbleToGraveAsCost()
+	return c:IsAttribute(ATTRIBUTE_WIND) and c:IsDiscardable() and c:IsAbleToRestAsCost()
 end
-	--Check for WIND monster to send to GY
+	--Check for WIND monster to send to RP
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil) end
 end
@@ -35,13 +35,13 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsCanChangePositionRush,tp,0,LOCATION_MZONE,1,nil) end
 end
-	--Send 1 WIND monster from hand to GY to change the positions of up to 3 opponent's monsters
+	--Send 1 WIND monster from hand to RP to change the positions of up to 3 opponent's monsters
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	--Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,(s.costfilter),tp,LOCATION_HAND,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	--Effect
 	if c:IsRelateToEffect(e) and c:IsFaceup() then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)

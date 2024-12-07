@@ -129,8 +129,8 @@ function s.atcon2(e,tp,eg,ev,ep,re,r,rp)
 	return Duel.GetTurnPlayer()~=tp and Duel.IsBattlePhase()
 end
 function s.atcost2(e,tp,eg,ev,ep,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
+	Duel.SendtoRest(e:GetHandler(),REASON_COST)
 end
 function s.attg2(e,tp,eg,ev,ep,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,0,LOCATION_MZONE,1,nil) end
@@ -147,7 +147,7 @@ function s.atop2(e,tp,eg,ev,ep,re,r,rp)
 	if #g==0 then return end
 	local e2=Effect.CreateEffect(e:GetHandler())
 	e2:SetType(EFFECT_TYPE_FIELD)
-	e2:SetCode(EFFECT_PATRICIAN_OF_DARKNESS)
+	e2:SetCode(EFFECT_PATR_OF_DARKNESS)
 	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e2:SetReset(RESET_PHASE|PHASE_BATTLE)
 	e2:SetTargetRange(0,1)

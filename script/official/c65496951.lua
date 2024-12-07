@@ -22,7 +22,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,1,0,COUNTER_RESONANCE)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,500)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_DAMAGE,nil,0,tp,500)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE|LOCATION_REMOVED)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST|LOCATION_REMOVED)
 end
 function s.thfilter(c)
 	return c:IsSetCard(SET_VAALMONICA) and not c:IsCode(id) and c:IsFaceup() and c:IsAbleToHand()
@@ -52,8 +52,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp,angello_or_dimonno) --Additional param
 			Duel.ConfirmCards(1-tp,sg)
 		end
 	elseif op==2 then
-		--Take 500 damage, then you can add 1 "Vaalmonica" card from your GY to your hand
-		local g=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_GRAVE,0,nil)
+		--Take 500 damage, then you can add 1 "Vaalmonica" card from your RP to your hand
+		local g=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_REST,0,nil)
 		if Duel.Damage(tp,500,REASON_EFFECT)>0 and #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,4)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 			local sg=g:Select(tp,1,1,nil)

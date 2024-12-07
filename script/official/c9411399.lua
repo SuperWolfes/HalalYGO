@@ -1,13 +1,13 @@
 --Ｄ－ＨＥＲＯ ディアボリックガイ
---Destiny HERO - Malicious
+--Destrudic HERO - Malicious
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon 1 "Destiny HERO - Malicious" from your Deck
+	--Special Summon 1 "Destrudic HERO - Malicious" from your Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_IGNITION)
-	e1:SetRange(LOCATION_GRAVE)
+	e1:SetRange(LOCATION_REST)
 	e1:SetCost(aux.SelfBanishCost)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)

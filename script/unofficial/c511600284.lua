@@ -1,12 +1,12 @@
 --ＣＸ 機装魔人エンジェネラル (Anime)
---CXyz Mechquipped Djinn Angeneral (Anime)
+--CXyz Mechquipped Dlilt Angeneral (Anime)
 --Scripted by Larry126
 Duel.LoadCardScript("c41309158.lua")
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,4,3)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Rank Up Check
 	aux.EnableCheckRankUp(c,nil,nil,15914410)
 	--damage

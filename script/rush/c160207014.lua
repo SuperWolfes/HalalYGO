@@ -1,5 +1,5 @@
 --深淵竜神アビス・ポセイドラ
---Abyssal Dragon Lord Abyss Poseidra
+--Abyssal Dragon Watcher Abyss Poseidra
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -25,7 +25,7 @@ function s.initial_effect(c)
 end
 s.MaximumAttack=4000
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return not Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_GRAVE,0,1,nil)
+	return not Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_REST,0,1,nil)
 end
 function s.filter1(c)
 	return c:IsCode(160207013)
@@ -51,5 +51,5 @@ function s.actcon(e)
 	return Duel.GetAttacker()==e:GetHandler()
 end
 function s.indcon(e)
-	return e:GetHandler():IsMaximumMode() and not Duel.IsExistingMatchingCard(Card.IsMonster,e:GetHandlerPlayer(),LOCATION_GRAVE,0,1,nil)
+	return e:GetHandler():IsMaximumMode() and not Duel.IsExistingMatchingCard(Card.IsMonster,e:GetHandlerPlayer(),LOCATION_REST,0,1,nil)
 end

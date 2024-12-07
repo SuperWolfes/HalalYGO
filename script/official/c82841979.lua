@@ -2,8 +2,8 @@
 --Yamato-no-Kami
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
-	Spirit.AddProcedure(c,EVENT_SPSUMMON_SUCCESS)
+	c:EnableAwakeLimit()
+	Guardian.AddProcedure(c,EVENT_SPSUMMON_SUCCESS)
 	--Cannot be Special Summoned
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
-	--Destroy 1 Spell/Trap card
+	--Destroy 1 Actional/Trap card
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_DESTROY)
@@ -32,19 +32,19 @@ function s.initial_effect(c)
 	e3:SetOperation(s.desop)
 	c:RegisterEffect(e3)
 end
-s.listed_card_types={TYPE_SPIRIT}
+s.listed_card_types={TYPE_GUARDIAN}
 function s.spfilter(c,tp)
-	return c:IsType(TYPE_SPIRIT) and c:IsAbleToRemoveAsCost()
+	return c:IsType(TYPE_GUARDIAN) and c:IsAbleToRemoveAsCost()
 		and aux.SpElimFilter(c,true) and Duel.GetMZoneCount(tp,c)>0
 end
 function s.spcon(e,c)
 	if c==nil then return true end
 	local tp=e:GetHandlerPlayer()
-	return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,1,nil,tp)
+	return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_MZONE|LOCATION_REST,0,1,nil,tp)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,c)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,1,1,nil,tp)
+	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_MZONE|LOCATION_REST,0,1,1,nil,tp)
 	if #g==0 then return false end
 	e:SetLabelObject(g:GetFirst())
 	return true
@@ -56,10 +56,10 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	end
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsOnField() and chkc:IsControler(1-tp) and chkc:IsSpellTrap() end
-	if chk==0 then return Duel.IsExistingTarget(Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,1,nil) end
+	if chkc then return chkc:IsOnField() and chkc:IsControler(1-tp) and chkc:IsActionalTrap() end
+	if chk==0 then return Duel.IsExistingTarget(Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-	local g=Duel.SelectTarget(tp,Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,1,1,nil)
+	local g=Duel.SelectTarget(tp,Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)

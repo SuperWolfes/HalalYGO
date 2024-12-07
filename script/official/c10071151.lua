@@ -2,7 +2,7 @@
 --Lyla, Twilightsworn Enchantress
 local s,id=GetID()
 function s.initial_effect(c)
-	--Destroy 1 Spell/Trap
+	--Destroy 1 Actional/Trap
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DESTROY)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.destg)
 	e1:SetOperation(s.desop)
 	c:RegisterEffect(e1)
-	--Send the top 3 cards to the GY
+	--Send the top 3 cards to the RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_DECKDES)
@@ -31,20 +31,20 @@ function s.initial_effect(c)
 end
 s.listed_series={0x38}
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
-	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP)
+	return re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.cfilter(c)
 	return c:IsMonster() and c:IsSetCard(0x38) and c:IsAbleToRemoveAsCost()
 		and (c:IsLocation(LOCATION_HAND) or aux.SpElimFilter(c,true))
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND+LOCATION_MZONE+LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND+LOCATION_MZONE+LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND+LOCATION_MZONE+LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND+LOCATION_MZONE+LOCATION_REST,0,1,1,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.desfilter(c)
-	return c:IsFaceup() and c:IsSpellTrap()
+	return c:IsFaceup() and c:IsActionalTrap()
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and s.desfilter(chkc) end

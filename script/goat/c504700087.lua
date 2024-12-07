@@ -1,30 +1,30 @@
 --ヴァンパイア・ロード
---Vampire Lord (GOAT)
---Only reborn when destroyed as monster
+--Vampire Watcher (GOAT)
+--Only rerest when destroyed as monster
 local s,id=GetID()
 function s.initial_effect(c)
 	--spsummon
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	e1:SetCode(EVENT_TO_GRAVE)
+	e1:SetCode(EVENT_TO_REST)
 	e1:SetOperation(s.spr)
 	c:RegisterEffect(e1)
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,4))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCode(EVENT_PHASE+PHASE_STANDBY)
 	e2:SetCondition(s.spcon)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	e2:SetLabelObject(e1)
 	c:RegisterEffect(e2)
-	--to grave
+	--to rest
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
-	e3:SetCategory(CATEGORY_TOGRAVE)
+	e3:SetCategory(CATEGORY_TOREST)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e3:SetCode(EVENT_BATTLE_DAMAGE)
 	e3:SetCondition(s.tgcon)
@@ -67,16 +67,16 @@ function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,5))
 	local op=Duel.SelectOption(tp,aux.Stringid(id,1),aux.Stringid(id,2),aux.Stringid(id,3))
 	e:SetLabel(op)
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,1-tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,1-tp,LOCATION_DECK)
 end
 function s.tgfilter(c,ty)
-	return c:IsType(ty) and c:IsAbleToGrave()
+	return c:IsType(ty) and c:IsAbleToRest()
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local g=nil
-	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOREST)
 	if e:GetLabel()==0 then g=Duel.SelectMatchingCard(1-tp,s.tgfilter,1-tp,LOCATION_DECK,0,1,1,nil,TYPE_MONSTER)
-	elseif e:GetLabel()==1 then g=Duel.SelectMatchingCard(1-tp,s.tgfilter,1-tp,LOCATION_DECK,0,1,1,nil,TYPE_SPELL)
+	elseif e:GetLabel()==1 then g=Duel.SelectMatchingCard(1-tp,s.tgfilter,1-tp,LOCATION_DECK,0,1,1,nil,TYPE_ACTIONAL)
 	else g=Duel.SelectMatchingCard(1-tp,s.tgfilter,1-tp,LOCATION_DECK,0,1,1,nil,TYPE_TRAP) end
-	Duel.SendtoGrave(g,REASON_EFFECT)
+	Duel.SendtoRest(g,REASON_EFFECT)
 end

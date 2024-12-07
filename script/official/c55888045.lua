@@ -2,7 +2,7 @@
 --Number C106: Giant Red Hand
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Xyz Summon Procedure
 	Xyz.AddProcedure(c,nil,5,3)
 	--Negate the effects of all face-up cards on the field

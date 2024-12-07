@@ -19,17 +19,17 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,0,1,nil)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	local tc1=Duel.GetFieldCard(tp,LOCATION_GRAVE,Duel.GetFieldGroupCount(tp,LOCATION_GRAVE,0)-1)
-	local tc2=Duel.GetFieldCard(tp,LOCATION_GRAVE,Duel.GetFieldGroupCount(tp,LOCATION_GRAVE,0)-2)
-	local tc3=Duel.GetFieldCard(tp,LOCATION_GRAVE,Duel.GetFieldGroupCount(tp,LOCATION_GRAVE,0)-3)
+	local tc1=Duel.GetFieldCard(tp,LOCATION_REST,Duel.GetFieldGroupCount(tp,LOCATION_REST,0)-1)
+	local tc2=Duel.GetFieldCard(tp,LOCATION_REST,Duel.GetFieldGroupCount(tp,LOCATION_REST,0)-2)
+	local tc3=Duel.GetFieldCard(tp,LOCATION_REST,Duel.GetFieldGroupCount(tp,LOCATION_REST,0)-3)
 	if chk==0 then return tc1 and tc1:IsAbleToHand() and tc2 and tc2:IsAbleToHand() and tc3 and tc3:IsAbleToHand() end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,Group.FromCards(tc1,tc2,tc3),3,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local tc1=Duel.GetFieldCard(tp,LOCATION_GRAVE,Duel.GetFieldGroupCount(tp,LOCATION_GRAVE,0)-1)
-	local tc2=Duel.GetFieldCard(tp,LOCATION_GRAVE,Duel.GetFieldGroupCount(tp,LOCATION_GRAVE,0)-2)
-	local tc3=Duel.GetFieldCard(tp,LOCATION_GRAVE,Duel.GetFieldGroupCount(tp,LOCATION_GRAVE,0)-3)
+	local tc1=Duel.GetFieldCard(tp,LOCATION_REST,Duel.GetFieldGroupCount(tp,LOCATION_REST,0)-1)
+	local tc2=Duel.GetFieldCard(tp,LOCATION_REST,Duel.GetFieldGroupCount(tp,LOCATION_REST,0)-2)
+	local tc3=Duel.GetFieldCard(tp,LOCATION_REST,Duel.GetFieldGroupCount(tp,LOCATION_REST,0)-3)
 	if not tc1 or not tc1:IsAbleToHand() or not tc2 or not tc2:IsAbleToHand() or not tc3 
 		or not tc3:IsAbleToHand() then return end
 	local g=Group.FromCards(tc1,tc2,tc3)

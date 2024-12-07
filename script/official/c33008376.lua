@@ -36,7 +36,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 	local sc=Duel.SelectMatchingCard(tp,s.spcostfilter,tp,LOCATION_HAND,0,1,1,nil,e,tp):GetFirst()
 	e:SetLabel(sc:IsType(TYPE_NORMAL) and 1 or 0)
-	Duel.SendtoGrave(sc,REASON_COST|REASON_DISCARD)
+	Duel.SendtoRest(sc,REASON_COST|REASON_DISCARD)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 end

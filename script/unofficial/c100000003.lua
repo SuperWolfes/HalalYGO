@@ -1,5 +1,5 @@
 --時械神 ハイロン
---Hailon, the Timelord (VG)
+--Hailon, the Timewatcher (VG)
 local s,id=GetID()
 function s.initial_effect(c)
 	--cannot special summon

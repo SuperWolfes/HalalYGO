@@ -1,4 +1,4 @@
---テレポンD.D.
+--テレポンS.D.
 local s,id=GetID()
 function s.initial_effect(c)
 	--remove
@@ -30,7 +30,7 @@ function s.rmcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD) and e:GetHandler():IsPreviousPosition(POS_FACEUP)
 end
 function s.filter(c)
-	return c:IsAttackBelow(1500) and c:IsRace(RACE_PSYCHIC) and c:IsAbleToRemove()
+	return c:IsAttackBelow(1500) and c:IsRace(RACE_MENTAL) and c:IsAbleToRemove()
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end

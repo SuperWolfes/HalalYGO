@@ -20,7 +20,7 @@ function s.thfilter(c)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local b1=Duel.IsExistingMatchingCard(Card.IsType,tp,0,LOCATION_MZONE,1,nil,TYPE_LINK)
-	local b2=Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,7,nil) and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil)
+	local b2=Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,7,nil) and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil)
 	if chk==0 then return b1 or b2 end
 	local op=0
 	if b1 and b2 then
@@ -31,23 +31,23 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 		op=Duel.SelectOption(tp,aux.Stringid(id,1))+1 
 	end
 	if op==0 then
-		e:SetCategory(CATEGORY_TOGRAVE)
+		e:SetCategory(CATEGORY_TOREST)
 		e:SetOperation(s.gyop)
-		Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,1-tp,LOCATION_MZONE)
+		Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,1-tp,LOCATION_MZONE)
 	else
 		e:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 		e:SetOperation(s.thop)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-		local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_GRAVE,0,7,7,nil)
+		local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_REST,0,7,7,nil)
 		Duel.Remove(g,POS_FACEUP,REASON_COST)
 		Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 	end
 end
 function s.gyop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,Card.IsType,tp,0,LOCATION_MZONE,1,1,nil,TYPE_LINK)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)

@@ -32,7 +32,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 s.listed_names={25833572,511000137} --Guate Guardian, Dark Guardian
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,25833572)
+	return Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,25833572)
 end
 function s.spfilter(c,e,tp)
 	return c:IsCode(511000137) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)

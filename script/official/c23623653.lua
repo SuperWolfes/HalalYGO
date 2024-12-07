@@ -1,11 +1,11 @@
 --精霊獣使い レラ
---Spiritual Beast Tamer Lara
+--Spilocked Beast Tamer Lara
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
 	--Can only be Special Summoned once per turn
 	c:SetSPSummonOnce(id)
-	--Normal Summon 1 "Ritual Beast" monster from your hand
+	--Normal Summon 1 "Locked Beast" monster from your hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SUMMON)
@@ -16,17 +16,17 @@ function s.initial_effect(c)
 	e1:SetTarget(s.nstg)
 	e1:SetOperation(s.nsop)
 	c:RegisterEffect(e1)
-	--Destruction replacement for "Ritual Beast" cards
+	--Mismatching replacement for "Locked Beast" cards
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EFFECT_DESTROY_REPLACE)
-	e2:SetRange(LOCATION_MZONE|LOCATION_GRAVE)
+	e2:SetRange(LOCATION_MZONE|LOCATION_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetTarget(s.reptg)
 	e2:SetOperation(function(e) Duel.Remove(e:GetHandler(),POS_FACEUP,REASON_EFFECT|REASON_REPLACE) end)
 	e2:SetValue(function(e,c) return s.repfilter(c,e:GetHandlerPlayer()) end)
 	c:RegisterEffect(e2)
-	--Special Summon 1 "Ritual Beast" monster from the Deck
+	--Special Summon 1 "Locked Beast" monster from the Deck
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -38,15 +38,15 @@ function s.initial_effect(c)
 	e3:SetOperation(s.spop)
 	c:RegisterEffect(e3)
 end
-s.listed_series={SET_RITUAL_BEAST}
+s.listed_series={SET_LOCKED_BEAST}
 s.listed_names={id}
 function s.nscost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsDiscardable() end
-	Duel.SendtoGrave(c,REASON_COST|REASON_DISCARD)
+	Duel.SendtoRest(c,REASON_COST|REASON_DISCARD)
 end
 function s.nsfilter(c)
-	return c:IsSetCard(SET_RITUAL_BEAST) and c:IsSummonable(true,nil)
+	return c:IsSetCard(SET_LOCKED_BEAST) and c:IsSummonable(true,nil)
 end
 function s.nstg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.nsfilter,tp,LOCATION_HAND,0,1,e:GetHandler()) end
@@ -60,7 +60,7 @@ function s.nsop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.repfilter(c,tp)
-	return c:IsFaceup() and c:IsSetCard(SET_RITUAL_BEAST) and c:IsOnField() and c:IsControler(tp)
+	return c:IsFaceup() and c:IsSetCard(SET_LOCKED_BEAST) and c:IsOnField() and c:IsControler(tp)
 		and c:IsReason(REASON_BATTLE|REASON_EFFECT) and not c:IsReason(REASON_REPLACE)
 end
 function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -70,7 +70,7 @@ function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	return Duel.SelectEffectYesNo(tp,c,96)
 end
 function s.spfilter(c,e,tp)
-	return c:IsSetCard(SET_RITUAL_BEAST) and not c:IsCode(id) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsSetCard(SET_LOCKED_BEAST) and not c:IsCode(id) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

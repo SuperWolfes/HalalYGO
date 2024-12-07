@@ -2,7 +2,7 @@
 --Blaze Fenix, the Burning Bombardment Bird (Manga)
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion material: "Blazing Bombardment Beast" + "Firebird, the Burning Skywing"
 	Fusion.AddProcMix(c,true,true,70117791,511002226)
 	--Inflict 300 damage to your opponent for each card on the field

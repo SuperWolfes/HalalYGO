@@ -33,8 +33,8 @@ end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,0,id)
 	if Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
-		local sg=Duel.SelectMatchingCard(tp,Card.IsAbleToGrave,tp,LOCATION_HAND,0,1,1,nil)
-		Duel.SendtoGrave(sg,REASON_EFFECT)
+		local sg=Duel.SelectMatchingCard(tp,Card.IsAbleToRest,tp,LOCATION_HAND,0,1,1,nil)
+		Duel.SendtoRest(sg,REASON_EFFECT)
 	else
 		Duel.Damage(tp,3000,REASON_EFFECT)
 	end

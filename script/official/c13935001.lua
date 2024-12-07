@@ -20,13 +20,13 @@ function s.initial_effect(c)
 	e2:SetTarget(s.tktg)
 	e2:SetOperation(s.tkop)
 	c:RegisterEffect(e2)
-	--Send 1 card from the hand to the GY and Special Summon 1 "Lunalight" monster from the Deck
+	--Send 1 card from the hand to the RP and Special Summon 1 "Lunalight" monster from the Deck
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
-	e3:SetCategory(CATEGORY_TOGRAVE+CATEGORY_SPECIAL_SUMMON)
+	e3:SetCategory(CATEGORY_TOREST+CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_QUICK_O)
 	e3:SetCode(EVENT_FREE_CHAIN)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetCountLimit(1,id)
 	e3:SetCost(aux.bfgcost)
 	e3:SetCondition(s.spcon)
@@ -81,17 +81,17 @@ function s.spfilter(c,e,tp)
 end
 	--Activation legality
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGrave,tp,LOCATION_HAND,0,1,nil) 
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRest,tp,LOCATION_HAND,0,1,nil) 
 		and Duel.GetLocationCount(tp,LOCATION_MZONE,tp)>0
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,0,1,nil,e,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_HAND)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_HAND)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK)
 end
-	--Performing the effect of sending a card from hand to GY, and then special summmoning 1 "Lunalight" monster from deck
+	--Performing the effect of sending a card from hand to RP, and then special summmoning 1 "Lunalight" monster from deck
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local tgc=Duel.SelectMatchingCard(tp,Card.IsAbleToGrave,tp,LOCATION_HAND,0,1,1,nil):GetFirst()
-	if tgc and Duel.SendtoGrave(tgc,REASON_EFFECT)>0 and tgc:IsLocation(LOCATION_GRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	local tgc=Duel.SelectMatchingCard(tp,Card.IsAbleToRest,tp,LOCATION_HAND,0,1,1,nil):GetFirst()
+	if tgc and Duel.SendtoRest(tgc,REASON_EFFECT)>0 and tgc:IsLocation(LOCATION_REST)
 		and Duel.GetLocationCount(tp,LOCATION_MZONE,tp)>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local sg=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_DECK,0,1,1,nil,e,tp)

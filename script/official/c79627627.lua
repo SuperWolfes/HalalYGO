@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	--Special Summon this card in face-down Defense Position
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_TOGRAVE+CATEGORY_SPECIAL_SUMMON)
+	e2:SetCategory(CATEGORY_TOREST+CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetCode(EVENT_FREE_CHAIN)
@@ -48,22 +48,22 @@ function s.dspop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.tgfilter(c,tp)
-	return c:IsFacedown() and c:IsAbleToGrave() and Duel.GetMZoneCount(tp,c)>0
+	return c:IsFacedown() and c:IsAbleToRest() and Duel.GetMZoneCount(tp,c)>0
 end
 function s.selfsptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and s.tgfilter(chkc,tp) end
 	local c=e:GetHandler()
 	if chk==0 then return Duel.IsExistingTarget(s.tgfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil,tp)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEDOWN_DEFENSE) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tc=Duel.SelectTarget(tp,s.tgfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil,tp)
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,tc,1,tp,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,tc,1,tp,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,tp,0)
 end
 function s.selfspop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	local c=e:GetHandler()
-	if tc:IsRelateToEffect(e) and Duel.SendtoGrave(tc,REASON_EFFECT)>0 and tc:IsLocation(LOCATION_GRAVE) and c:IsRelateToEffect(e) then
+	if tc:IsRelateToEffect(e) and Duel.SendtoRest(tc,REASON_EFFECT)>0 and tc:IsLocation(LOCATION_REST) and c:IsRelateToEffect(e) then
 		Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEDOWN_DEFENSE)
 		Duel.ConfirmCards(1-tp,c)
 	end

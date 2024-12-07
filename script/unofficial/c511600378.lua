@@ -23,8 +23,8 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local sg=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsSetCard,0x1034),tp,LOCATION_SZONE,0,nil):RandomSelect(tp,1,nil)
 	if #sg>0 then
-		Duel.SendtoGrave(sg,REASON_EFFECT)
-		if sg:GetFirst():IsLocation(LOCATION_GRAVE) then
+		Duel.SendtoRest(sg,REASON_EFFECT)
+		if sg:GetFirst():IsLocation(LOCATION_REST) then
 			Duel.Draw(tp,2,REASON_EFFECT)
 		end
 	end

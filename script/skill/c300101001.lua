@@ -4,7 +4,7 @@ function s.initial_effect(c)
 	aux.AddSkillProcedure(c,1,false,s.flipcon,s.flipop,1)
 end
 function s.flipconfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_ZOMBIE)
+	return c:IsFaceup() and c:IsRace(RACE_TOXIC)
 end
 function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 	--condition
@@ -42,7 +42,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterFlagEffect(ep,id,0,0,0)
 end
 function s.atkfilter(e,c)
-	return c:IsRace(RACE_ZOMBIE)
+	return c:IsRace(RACE_TOXIC)
 end
 function s.atkvalue(e,c)
 	return Duel.GetFlagEffect(e:GetHandlerPlayer(),id)*100
@@ -51,5 +51,5 @@ function s.defvalue(e,c)
 	return Duel.GetFlagEffect(e:GetHandlerPlayer(),id)*-100
 end
 function s.damtg(e,c)
-	return c:IsRace(RACE_ZOMBIE) and c:GetBattleTarget()~=nil
+	return c:IsRace(RACE_TOXIC) and c:GetBattleTarget()~=nil
 end

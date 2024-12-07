@@ -1,18 +1,18 @@
 --ハーピィ・コンダクター
---Harpie Conductor
+--Flybie Conductor
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WIND),2,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--change name
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
 	e0:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e0:SetCode(EFFECT_CHANGE_CODE)
-	e0:SetRange(LOCATION_MZONE+LOCATION_GRAVE)
-	e0:SetValue(CARD_HARPIE_LADY)
+	e0:SetRange(LOCATION_MZONE+LOCATION_REST)
+	e0:SetValue(CARD_FLYBIE_LADY)
 	c:RegisterEffect(e0)
 	--destroy replace
 	local e1=Effect.CreateEffect(c)
@@ -44,7 +44,7 @@ function s.repfilter(c,tp)
 		and (c:IsReason(REASON_BATTLE) or c:IsReason(REASON_EFFECT)) and not c:IsReason(REASON_REPLACE)
 end
 function s.desfilter(c,e,tp)
-	return c:IsControler(tp) and c:IsSpellTrap()
+	return c:IsControler(tp) and c:IsActionalTrap()
 		and c:IsDestructable(e) and not c:IsStatus(STATUS_DESTROY_CONFIRMED+STATUS_BATTLE_DESTROYED)
 end
 function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)

@@ -1,5 +1,5 @@
 --幻惑の魔術師
---Nightmare Magician
+--Nightmare Mentor
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)

@@ -3,7 +3,7 @@
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--1 WATER Tuner + 1+ non-Tuner monsters
 	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WATER),1,1,Synchro.NonTuner(nil),1,99)
 	--Special Summon 1 Level 4 or lower Fish monster
@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
-	e2:SetCode(EVENT_TO_GRAVE)
+	e2:SetCode(EVENT_TO_REST)
 	e2:SetCondition(function(e,tp,eg,ep,ev,re,r,rp) return rp==1-tp and e:GetHandler():IsReason(REASON_DESTROY) end)
 	e2:SetCost(s.gspcost)
 	e2:SetTarget(s.gsptg)
@@ -36,9 +36,9 @@ function s.spfilter1(c,e,tp,pos)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(s.spfilter1,tp,LOCATION_HAND|LOCATION_GRAVE,0,1,nil,e,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND|LOCATION_GRAVE)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+		and Duel.IsExistingMatchingCard(s.spfilter1,tp,LOCATION_HAND|LOCATION_REST,0,1,nil,e,tp) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND|LOCATION_REST)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end
 function s.spfilter2(c,e,tp,code)
 	return c:IsCode(code) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -46,9 +46,9 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)==0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g1=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter1),tp,LOCATION_HAND|LOCATION_GRAVE,0,1,1,nil,e,tp)
+	local g1=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter1),tp,LOCATION_HAND|LOCATION_REST,0,1,1,nil,e,tp)
 	if #g1==0 or Duel.SpecialSummon(g1,0,tp,tp,false,false,POS_FACEUP_DEFENSE)==0 then return end
-	local g2=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter2),tp,LOCATION_GRAVE,0,nil,e,tp,g1:GetFirst():GetCode())
+	local g2=Duel.GetMatchingGroup(aux.RestValleyFilter(s.spfilter2),tp,LOCATION_REST,0,nil,e,tp,g1:GetFirst():GetCode())
 	if #g2==0 or not Duel.SelectYesNo(tp,aux.Stringid(id,2)) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local sg=g2:Select(tp,1,1,nil)
@@ -63,9 +63,9 @@ function s.gspcostfilter(c,tp)
 end
 function s.gspcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return Duel.IsExistingMatchingCard(s.gspcostfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,1,c,tp) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.gspcostfilter,tp,LOCATION_MZONE|LOCATION_REST,0,1,c,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.gspcostfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,1,1,c,tp)
+	local g=Duel.SelectMatchingCard(tp,s.gspcostfilter,tp,LOCATION_MZONE|LOCATION_REST,0,1,1,c,tp)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.gsptg(e,tp,eg,ep,ev,re,r,rp,chk)

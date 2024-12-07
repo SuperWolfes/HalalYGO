@@ -1,5 +1,5 @@
 --Ｓｐ－死者への供物
---Speed Spell - Offerings to the Doomed
+--Speed Actional - Offerings to the Doomed
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

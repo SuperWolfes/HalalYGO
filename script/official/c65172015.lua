@@ -2,7 +2,7 @@
 --A-to-Z-Dragon Buster Cannon
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	if not c:IsStatus(STATUS_COPYING_EFFECT) then
 		Fusion.AddContactProc(c,s.contactfil,s.contactop,aux.FALSE)
 		if c.material_count==nil then
@@ -95,7 +95,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then
 		local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 		if e:GetHandler():GetSequence()<5 then ft=ft+1 end
-		return ft>1 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
+		return ft>1 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)
 			and Duel.IsExistingTarget(s.spfilter2,tp,LOCATION_REMOVED,0,1,nil,e,tp)
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
@@ -108,7 +108,7 @@ end
 function s.spop2(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	local g=Duel.GetTargetCards(e)
-	if #g==0 or (#g>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)) then return end
+	if #g==0 or (#g>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)) then return end
 	if #g<=ft then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	else
@@ -116,6 +116,6 @@ function s.spop2(e,tp,eg,ep,ev,re,r,rp)
 		local sg=g:Select(tp,ft,ft,nil)
 		Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)
 		g:Sub(sg)
-		Duel.SendtoGrave(g,REASON_RULE)
+		Duel.SendtoRest(g,REASON_RULE)
 	end
 end

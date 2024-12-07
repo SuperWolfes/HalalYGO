@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
-	--Special Summon 1 "Skull Flame" from your Graveyard
+	--Special Summon 1 "Skull Flame" from your Resting Place
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
-	--Inflict 400 damage for each "Burning Skull Head" in your Graveyard
+	--Inflict 400 damage for each "Burning Skull Head" in your Resting Place
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_DAMAGE)
@@ -41,11 +41,11 @@ end
 function s.condition(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
-	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_GRAVE|LOCATION_MZONE,0,nil,tp)
+	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST|LOCATION_MZONE,0,nil,tp)
 	return aux.SelectUnselectGroup(g,e,tp,1,1,aux.ChkfMMZ(1),0)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,c)
-	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_GRAVE|LOCATION_MZONE,0,nil,tp)
+	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST|LOCATION_MZONE,0,nil,tp)
 	local rg=aux.SelectUnselectGroup(g,e,tp,1,1,aux.ChkfMMZ(1),1,tp,HINTMSG_REMOVE,nil,nil,true)
 	if #rg>0 then
 		rg:KeepAlive()
@@ -61,34 +61,34 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp,c)
 	rg:DeleteGroup()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
+	Duel.SendtoRest(e:GetHandler(),REASON_COST)
 end
 function s.spfilter(c,e,tp)
 	return c:IsCode(99899504) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetMZoneCount(tp,e:GetHandler())>0
-		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp)
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,26293219) end
-	local dam=Duel.GetMatchingGroupCount(Card.IsCode,tp,LOCATION_GRAVE,0,nil,26293219)*400
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,26293219) end
+	local dam=Duel.GetMatchingGroupCount(Card.IsCode,tp,LOCATION_REST,0,nil,26293219)*400
 	Duel.SetTargetPlayer(1-tp)
 	Duel.SetTargetParam(dam)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,dam)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
-	local d=Duel.GetMatchingGroupCount(Card.IsCode,tp,LOCATION_GRAVE,0,nil,26293219)*400
+	local d=Duel.GetMatchingGroupCount(Card.IsCode,tp,LOCATION_REST,0,nil,26293219)*400
 	Duel.Damage(p,d,REASON_EFFECT)
 end

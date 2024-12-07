@@ -15,7 +15,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x1150,0x150}
 function s.tffilter(c,tp)
-	return c:IsSpellTrap() and c:IsSetCard(0x1150) and not c:IsForbidden() and c:CheckUniqueOnField(tp)
+	return c:IsActionalTrap() and c:IsSetCard(0x1150) and not c:IsUnliked() and c:CheckUniqueOnField(tp)
 end
 function s.tftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
@@ -51,7 +51,7 @@ function s.tfop(e,tp,eg,ep,ev,re,r,rp)
 			local ft2=Duel.GetLocationCountFromEx(tp,tp,nil,TYPE_FUSION+TYPE_SYNCHRO+TYPE_XYZ)
 			local ft3=Duel.GetLocationCountFromEx(tp,tp,nil,TYPE_PENDULUM+TYPE_LINK)
 			local ft=math.min(Duel.GetUsableMZoneCount(tp),4)
-			if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then
+			if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then
 				if ft1>0 then ft1=1 end
 				if ft2>0 then ft2=1 end
 				if ft3>0 then ft3=1 end

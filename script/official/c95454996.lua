@@ -3,10 +3,10 @@
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Link Summon procedure: 2+ monsters, including a "M∀LICE" monster
 	Link.AddProcedure(c,nil,2,3,s.lcheck)
-	--Banish up to 3 cards from either GY
+	--Banish up to 3 cards from either RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_REMOVE)
@@ -17,15 +17,15 @@ function s.initial_effect(c)
 	e1:SetTarget(s.rmtg)
 	e1:SetOperation(s.rmop)
 	c:RegisterEffect(e1)
-	--Set 1 "M∀LICE" Trap from your Deck or GY
+	--Set 1 "M∀LICE" Trap from your Deck or RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_LEAVE_GRAVE)
+	e2:SetCategory(CATEGORY_LEAVE_REST)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetTarget(s.settg)
-	e2:SetOperation(s.setop)
+	e2:SetOperation(s.vetop)
 	c:RegisterEffect(e2)
 	--Special Summon this card, then you can draw 1 card
 	local e3=Effect.CreateEffect(c)
@@ -48,10 +48,10 @@ function s.rmfilter(c,tp)
 	return c:IsAbleToRemove() and (c:IsControler(1-tp) or aux.SpElimFilter(c,true))
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_MZONE|LOCATION_GRAVE) and s.rmfilter(chkc,tp) end
-	if chk==0 then return Duel.IsExistingTarget(s.rmfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,LOCATION_GRAVE,1,nil,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_MZONE|LOCATION_REST) and s.rmfilter(chkc,tp) end
+	if chk==0 then return Duel.IsExistingTarget(s.rmfilter,tp,LOCATION_MZONE|LOCATION_REST,LOCATION_REST,1,nil,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectTarget(tp,s.rmfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,LOCATION_GRAVE,1,3,nil,tp)
+	local g=Duel.SelectTarget(tp,s.rmfilter,tp,LOCATION_MZONE|LOCATION_REST,LOCATION_REST,1,3,nil,tp)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,#g,tp,0)
 end
 function s.rmop(e,tp,eg,ep,ev,re,r,rp)
@@ -64,12 +64,12 @@ function s.setfilter(c)
 	return c:IsSetCard(SET_MALISS) and c:IsTrap() and c:IsSSetable()
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_DECK|LOCATION_GRAVE,0,1,1,nil) end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_LEAVE_GRAVE,nil,1,tp,LOCATION_GRAVE)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_DECK|LOCATION_REST,0,1,1,nil) end
+	Duel.SetPossibleOperationInfo(0,CATEGORY_LEAVE_REST,nil,1,tp,LOCATION_REST)
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.setfilter),tp,LOCATION_DECK|LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.setfilter),tp,LOCATION_DECK|LOCATION_REST,0,1,1,nil)
 	if #g>0 then
 		Duel.SSet(tp,g)
 	end

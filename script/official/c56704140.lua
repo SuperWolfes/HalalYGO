@@ -1,5 +1,5 @@
 --氷結界の風水師
---Geomancer of the Ice Barrier
+--Geobouncer of the Ice Barrier
 local s,id=GetID()
 function s.initial_effect(c)
 	--Make this card untargetable for attacks

@@ -3,7 +3,7 @@
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	--Equip only to a Psychic monster
+	--Equip only to a Mental monster
 	aux.AddEquipProcedure(c,0,s.eqfilter,s.eqlimit)
 	--Cannot be destroyed by the opponent's card effects
 	local e1=Effect.CreateEffect(c)
@@ -37,7 +37,7 @@ function s.efilter(e,te)
 	return te:GetOwnerPlayer()~=e:GetOwnerPlayer()
 end
 function s.eqfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_FAIRY) and c:GetBaseAttack()==0 and c:GetBaseDefense()==0 and not c:IsMaximumModeSide()
+	return c:IsFaceup() and c:IsRace(RACE_WANDERER) and c:GetBaseAttack()==0 and c:GetBaseDefense()==0 and not c:IsMaximumModeSide()
 end
 function s.eqlimit(e,c)
 	return c:IsFaceup()

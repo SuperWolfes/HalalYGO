@@ -1,5 +1,5 @@
 --アンドロ・スフィンクス
---Andro Sphinx (GOAT)
+--Andro Drinx (GOAT)
 --Battle destroyed registers while the mosnter is on field
 local s,id=GetID()
 function s.initial_effect(c)
@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_SINGLE_RANGE)
-	e1:SetRange(LOCATION_GRAVE)
+	e1:SetRange(LOCATION_REST)
 	e1:SetCode(EFFECT_SPSUMMON_CONDITION)
 	c:RegisterEffect(e1)
 	--special summon

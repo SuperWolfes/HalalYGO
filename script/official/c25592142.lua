@@ -3,7 +3,7 @@
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon 1 LIGHT Spellcaster Tuner from your Deck
+	--Special Summon 1 LIGHT Mentor Tuner from your Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -20,8 +20,8 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY,EFFECT_FLAG2_CHECK_SIMULTANEOUS)
-	e2:SetCode(EVENT_TO_GRAVE)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetCode(EVENT_TO_REST)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(s.selfspcon)
 	e2:SetTarget(s.selfsptg)
@@ -30,16 +30,16 @@ function s.initial_effect(c)
 end
 s.listed_series={SET_WHITE_FOREST}
 function s.dspcostfilter(c,tp)
-	return c:IsSpellTrap() and c:IsAbleToGraveAsCost() and Duel.GetMZoneCount(tp,c)>0
+	return c:IsActionalTrap() and c:IsAbleToRestAsCost() and Duel.GetMZoneCount(tp,c)>0
 end
 function s.dspcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.dspcostfilter,tp,LOCATION_HAND|LOCATION_ONFIELD,0,1,nil,tp) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.dspcostfilter,tp,LOCATION_HAND|LOCATION_ONFIELD,0,1,1,nil,tp)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.dspfilter(c,e,tp)
-	return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_SPELLCASTER) and c:IsType(TYPE_TUNER)
+	return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_MENTOR) and c:IsType(TYPE_TUNER)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.dsptg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -55,7 +55,7 @@ function s.dspop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.selfspconfilter(c,tp)
-	return c:IsSpellTrap() and c:IsReason(REASON_COST) and c:IsControler(tp)
+	return c:IsActionalTrap() and c:IsReason(REASON_COST) and c:IsControler(tp)
 end
 function s.selfspcon(e,tp,eg,ep,ev,re,r,rp)
 	return not eg:IsContains(e:GetHandler()) and eg:IsExists(s.selfspconfilter,1,nil,tp)

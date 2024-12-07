@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	dme1:SetOperation(s.dmop)
 	DeckMaster.RegisterAbilities(c,dme1)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,92421852,38916461)
 	--atk up
 	local e1=Effect.CreateEffect(c)
@@ -66,7 +66,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.filter(c)
-	return c:IsSpellTrap() and c:IsSSetable()
+	return c:IsActionalTrap() and c:IsSSetable()
 end
 function s.dmcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetAttackTarget() and (Duel.GetAttackTarget():IsControler(tp) or Duel.GetAttacker():IsControler(tp))

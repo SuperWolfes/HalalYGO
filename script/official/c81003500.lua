@@ -1,8 +1,8 @@
 --Ｅ・ＨＥＲＯ ネクロイド・シャーマン
---Elemental HERO Necroid Shaman
+--Elemental HERO Restid Shaman
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion Materials
 	Fusion.AddProcMix(c,true,true,86188410,89252153)
 	--Must be Fusion Summoned
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_SPSUMMON_CONDITION)
 	e1:SetValue(aux.fuslimit)
 	c:RegisterEffect(e1)
-	--Destroy 1 monster the opponent controls and Special Summon 1 monster from the GY
+	--Destroy 1 monster the opponent controls and Special Summon 1 monster from the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_DESTROY+CATEGORY_SPECIAL_SUMMON)
@@ -30,7 +30,7 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local g=Duel.SelectTarget(tp,nil,tp,0,LOCATION_MZONE,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,tp,0)
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,1-tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,1-tp,LOCATION_REST)
 end
 function s.spfilter(c,e,tp)
 	return c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP,1-tp)
@@ -40,7 +40,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsRelateToEffect(e) and tc:IsControler(1-tp) and Duel.Destroy(tc,REASON_EFFECT)>0
 		and Duel.GetLocationCount(1-tp,LOCATION_MZONE,tp)>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local sg=Duel.SelectMatchingCard(tp,s.spfilter,tp,0,LOCATION_GRAVE,1,1,nil,e,tp)
+		local sg=Duel.SelectMatchingCard(tp,s.spfilter,tp,0,LOCATION_REST,1,1,nil,e,tp)
 		if #sg>0 then
 			Duel.BreakEffect()
 			Duel.SpecialSummon(sg,0,tp,1-tp,false,false,POS_FACEUP)

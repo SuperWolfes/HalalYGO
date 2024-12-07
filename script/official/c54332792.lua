@@ -25,13 +25,13 @@ function s.initial_effect(c)
 	e2:SetTarget(s.lvtg)
 	e2:SetOperation(s.lvop)
 	c:RegisterEffect(e2)
-	--Send 1 "Blue-Eyes" monster or 1 monster that mentions "Blue-Eyes White Dragon" from your Deck to the GY
+	--Send 1 "Blue-Eyes" monster or 1 monster that mentions "Blue-Eyes White Dragon" from your Deck to the RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
-	e3:SetCategory(CATEGORY_TOGRAVE)
+	e3:SetCategory(CATEGORY_TOREST)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetProperty(EFFECT_FLAG_DELAY)
-	e3:SetCode(EVENT_TO_GRAVE)
+	e3:SetCode(EVENT_TO_REST)
 	e3:SetCountLimit(1,{id,2})
 	e3:SetCondition(function(e) return e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD) end)
 	e3:SetTarget(s.tgtg)
@@ -79,16 +79,16 @@ function s.lvop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.tgfilter(c)
 	return (c:IsSetCard(SET_BLUE_EYES) or c:ListsCode(CARD_BLUEEYES_W_DRAGON)) and c:IsMonster() and not c:IsCode(id)
-		and c:IsAbleToGrave()
+		and c:IsAbleToRest()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end

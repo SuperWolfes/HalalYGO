@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1)
 	e2:SetTarget(s.atttg)
 	e2:SetOperation(s.attop)
@@ -32,7 +32,7 @@ function s.negcon(e,tp,eg,ep,ev,re,r,rp)
 	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and Duel.IsChainNegatable(ev)
 end
 function s.costfilter(c)
-	return c:IsSetCard(0x400d) and c:IsMonster() and c:IsAbleToGraveAsCost()
+	return c:IsSetCard(0x400d) and c:IsMonster() and c:IsAbleToRestAsCost()
 end
 function s.negcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local fg=Group.CreateGroup()
@@ -42,7 +42,7 @@ function s.negcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local loc=LOCATION_HAND
 	if #fg>0 then loc=LOCATION_HAND+LOCATION_DECK end
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,loc,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tc=Duel.SelectMatchingCard(tp,s.costfilter,tp,loc,0,1,1,nil):GetFirst()
 	if tc:IsLocation(LOCATION_DECK) then
 		local fc=nil
@@ -54,7 +54,7 @@ function s.negcost(e,tp,eg,ep,ev,re,r,rp,chk)
 		Duel.Hint(HINT_CARD,0,fc:GetCode())
 		fc:RegisterFlagEffect(61557074,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,0)
 	end
-	Duel.SendtoGrave(tc,REASON_COST)
+	Duel.SendtoRest(tc,REASON_COST)
 end
 function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -73,8 +73,8 @@ function s.atttg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	local att=c:AnnounceAnotherAttribute(tp)
 	e:SetLabel(att)
-	--Operation info needed to handle the interaction with "Necrovalley"
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,c,1,tp,LOCATION_GRAVE)
+	--Operation info needed to handle the interaction with "Restvalley"
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,c,1,tp,LOCATION_REST)
 end
 function s.attop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

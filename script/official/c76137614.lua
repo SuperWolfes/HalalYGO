@@ -15,13 +15,13 @@ function s.initial_effect(c)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
 end
-s.counter_list={COUNTER_SPELL}
+s.counter_list={COUNTER_ACTIONAL}
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsCanRemoveCounter(tp,1,1,COUNTER_SPELL,1,REASON_COST) end
-	Duel.RemoveCounter(tp,1,1,COUNTER_SPELL,1,REASON_COST)
+	if chk==0 then return Duel.IsCanRemoveCounter(tp,1,1,COUNTER_ACTIONAL,1,REASON_COST) end
+	Duel.RemoveCounter(tp,1,1,COUNTER_ACTIONAL,1,REASON_COST)
 end
 function s.filter(c)
-	return c:IsSpell() and c:IsFaceup() and c:IsAbleToHand()
+	return c:IsActional() and c:IsFaceup() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and s.filter(chkc) end

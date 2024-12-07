@@ -9,7 +9,7 @@ function s.initial_effect(c)
 	e1:SetCategory(CATEGORY_TOHAND)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DELAY)
-	e1:SetCode(EVENT_TO_GRAVE)
+	e1:SetCode(EVENT_TO_REST)
 	e1:SetCountLimit(1,id)
 	e1:SetCondition(function(e,tp,eg,ep,ev,re,r,rp) return e:GetHandler():IsReason(REASON_COST) and re:IsActivated() and re:IsMonsterEffect() end)
 	e1:SetCost(s.thcost)
@@ -22,8 +22,8 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY,EFFECT_FLAG2_CHECK_SIMULTANEOUS)
-	e2:SetCode(EVENT_TO_GRAVE)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetCode(EVENT_TO_REST)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,id)
 	e2:SetCondition(s.spcon)
 	e2:SetCost(s.spcost)
@@ -64,8 +64,8 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetCustomActivityCount(id,tp,ACTIVITY_SPSUMMON)==0
-		and Duel.IsExistingMatchingCard(aux.AND(Card.IsDiscardable,Card.IsAbleToGraveAsCost),tp,LOCATION_HAND,0,1,nil) end
-	Duel.DiscardHand(tp,aux.AND(Card.IsDiscardable,Card.IsAbleToGraveAsCost),1,1,REASON_COST|REASON_DISCARD)
+		and Duel.IsExistingMatchingCard(aux.AND(Card.IsDiscardable,Card.IsAbleToRestAsCost),tp,LOCATION_HAND,0,1,nil) end
+	Duel.DiscardHand(tp,aux.AND(Card.IsDiscardable,Card.IsAbleToRestAsCost),1,1,REASON_COST|REASON_DISCARD)
 	--You cannot Special Summon from the Extra Deck, except WATER monsters, the turn you activate this effect
 	s.thcost(e,tp,eg,ep,ev,re,r,rp,1)
 end

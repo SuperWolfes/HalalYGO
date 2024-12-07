@@ -38,21 +38,21 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 s.listed_series={0x2e}
-s.listed_names={CARD_NECROVALLEY}
+s.listed_names={CARD_RESTVALLEY}
 function s.filter(c)
 	return c:IsSetCard(0x2e) and c:IsMonster()
 end
 function s.defval(e,c)
-	return Duel.GetMatchingGroupCount(s.filter,c:GetControler(),LOCATION_GRAVE,0,nil)*200
+	return Duel.GetMatchingGroupCount(s.filter,c:GetControler(),LOCATION_REST,0,nil)*200
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	local loc=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_LOCATION)
-	if re:IsActiveType(TYPE_MONSTER) and not re:GetHandler():IsSetCard(0x2e) and loc==LOCATION_GRAVE then
+	if re:IsActiveType(TYPE_MONSTER) and not re:GetHandler():IsSetCard(0x2e) and loc==LOCATION_REST then
 		Duel.NegateEffect(ev)
 	end
 end
 function s.econ(e)
-	return Duel.IsEnvironment(CARD_NECROVALLEY)
+	return Duel.IsEnvironment(CARD_RESTVALLEY)
 end
 function s.efilter1(e,re,tp)
 	return re:GetHandler():IsType(TYPE_FIELD) and re:IsHasType(EFFECT_TYPE_ACTIVATE)

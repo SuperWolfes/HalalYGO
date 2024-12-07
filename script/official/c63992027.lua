@@ -38,7 +38,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if tc:IsFacedown() or not tc:IsRelateToEffect(e) then return end
 	local og=tc:GetOverlayGroup()
 	if #og==0 then return end
-	if Duel.SendtoGrave(og,REASON_EFFECT)~=0 then
+	if Duel.SendtoRest(og,REASON_EFFECT)~=0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,tc)
 		if #g>0 then

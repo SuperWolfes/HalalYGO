@@ -41,10 +41,10 @@ function s.filter(c)
 end
 function s.rettg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local prec=e:GetHandler():GetPreviousControler()
-	if chkc then return chkc:IsControler(prec) and chkc:IsLocation(LOCATION_GRAVE) and s.filter(chkc) end
+	if chkc then return chkc:IsControler(prec) and chkc:IsLocation(LOCATION_REST) and s.filter(chkc) end
 	if chk==0 then return true end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectTarget(prec,s.filter,prec,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectTarget(prec,s.filter,prec,LOCATION_REST,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,#g,0,0)
 end
 function s.retop(e,tp,eg,ep,ev,re,r,rp)

@@ -1,5 +1,5 @@
 --神殿への光
---Light to the Temple
+--Light to the Masjid
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -26,14 +26,14 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			if fc then Duel.Destroy(fc,REASON_RULE) end
 			of=Duel.GetFieldCard(1-tp,LOCATION_FZONE,0)
 			if of and Duel.Destroy(of,REASON_RULE)==0 then
-				Duel.SendtoGrave(c,REASON_RULE)
+				Duel.SendtoRest(c,REASON_RULE)
 				return false
 			else
 				Duel.BreakEffect()
 			end
 		else
-			if fc and Duel.SendtoGrave(fc,REASON_RULE)==0 then
-				Duel.SendtoGrave(c,REASON_RULE)
+			if fc and Duel.SendtoRest(fc,REASON_RULE)==0 then
+				Duel.SendtoRest(c,REASON_RULE)
 				return false
 			else
 				Duel.BreakEffect()

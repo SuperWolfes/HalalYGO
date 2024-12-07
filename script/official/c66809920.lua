@@ -1,11 +1,11 @@
 --ワルキューレ・アルテスト
---Valkyrie Erste
+--Balkanie Erste
 --scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
 	--damage
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_LEAVE_GRAVE)
+	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_LEAVE_REST)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 	--remove
 	local e2=Effect.CreateEffect(c)
-	e2:SetCategory(CATEGORY_REMOVE+CATEGORY_LEAVE_GRAVE)
+	e2:SetCategory(CATEGORY_REMOVE+CATEGORY_LEAVE_REST)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_FREE_CHAIN)
@@ -31,16 +31,16 @@ end
 s.listed_series={0x122}
 s.listed_names={92182447}
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
-	return re and re:GetHandler():IsSpell() and e:GetHandler():IsPreviousLocation(LOCATION_HAND)
+	return re and re:GetHandler():IsActional() and e:GetHandler():IsPreviousLocation(LOCATION_HAND)
 end
 function s.thfilter(c)
 	return c:IsCode(92182447) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.thfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.thfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.thfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.thfilter,tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,0,0)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
@@ -59,12 +59,12 @@ function s.rmfilter(c)
 	return c:IsAbleToRemove() and c:IsMonster()
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.rmfilter,tp,0,LOCATION_GRAVE,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.rmfilter,tp,0,LOCATION_REST,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,0,0)
 end
 function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local rc=Duel.SelectMatchingCard(tp,s.rmfilter,tp,0,LOCATION_GRAVE,1,1,nil):GetFirst()
+	local rc=Duel.SelectMatchingCard(tp,s.rmfilter,tp,0,LOCATION_REST,1,1,nil):GetFirst()
 	if rc then
 		if Duel.Remove(rc,POS_FACEUP,REASON_EFFECT)~=0 and c:IsRelateToEffect(e) and c:IsFaceup() then
 			Duel.BreakEffect()

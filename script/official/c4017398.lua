@@ -4,7 +4,7 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Add or special summon 1 "Utopia", "ZW -", or "ZS -" monster from GY
+	--Add or special summon 1 "Utopia", "ZW -", or "ZS -" monster from RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,1))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SPECIAL_SUMMON)
@@ -15,12 +15,12 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-	--Add 1 "ZEXAL" spell/trap from GY to hand
+	--Add 1 "ZEXAL" actional/trap from RP to hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCost(aux.bfgcost)
@@ -41,19 +41,19 @@ end
 	--Activation legality
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.ssfilter(chkc,e,tp,ft) end
-	if chk==0 then return Duel.IsExistingTarget(s.ssfilter,tp,LOCATION_GRAVE,0,1,nil,ft,e,tp) end
-	local g=Duel.GetMatchingGroup(s.ssfilter,tp,LOCATION_GRAVE,0,nil,ft,e,tp)
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.ssfilter(chkc,e,tp,ft) end
+	if chk==0 then return Duel.IsExistingTarget(s.ssfilter,tp,LOCATION_REST,0,1,nil,ft,e,tp) end
+	local g=Duel.GetMatchingGroup(s.ssfilter,tp,LOCATION_REST,0,nil,ft,e,tp)
 	if #g>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SELECT)
 		local sg=g:Select(tp,1,1,nil)
 		Duel.SetTargetCard(sg)
-		Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,0,0)
+		Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,0,0)
 	end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end
-	--Add or special summon 1 "Utopia", "ZW -", or "ZS -" monster from GY
+	--Add or special summon 1 "Utopia", "ZW -", or "ZS -" monster from RP
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,0)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
@@ -70,19 +70,19 @@ end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetLP(tp)<=Duel.GetLP(1-tp)-2000 and aux.exccon(e)
 end
-	--Check for "ZEXAL" spell/trap, except "ZEXAL Entrust"
+	--Check for "ZEXAL" actional/trap, except "ZEXAL Entrust"
 function s.thfilter(c)
-	return c:IsSpellTrap() and c:IsSetCard(0x7e) and not c:IsCode(id) and c:IsAbleToHand()
+	return c:IsActionalTrap() and c:IsSetCard(0x7e) and not c:IsCode(id) and c:IsAbleToHand()
 end
 	--Activation legality
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.thfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.thfilter,tp,LOCATION_GRAVE,0,1,nil,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.thfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.thfilter,tp,LOCATION_REST,0,1,nil,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,0,0)
 end
-	--Add 1 "ZEXAL" spell/trap from GY to hand
+	--Add 1 "ZEXAL" actional/trap from RP to hand
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) then

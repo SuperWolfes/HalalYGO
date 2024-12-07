@@ -1,10 +1,10 @@
 --マジマジ☆マジシャンギャル
---Magi Magi ☆ Magician Gal
+--Magi Magi ☆ Mentor Gal
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Xyz Summon procedure
-	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_SPELLCASTER),6,2)
+	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_MENTOR),6,2)
 	--Activate 1 of these effects
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -36,12 +36,12 @@ function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		if op==1 then
 			return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControlerCanBeChanged()
 		elseif op==2 then
-			return chkc:IsLocation(LOCATION_GRAVE) and s.spfilter(chkc,e,tp)
+			return chkc:IsLocation(LOCATION_REST) and s.spfilter(chkc,e,tp)
 		end
 	end
 	local b1=Duel.IsExistingTarget(Card.IsControlerCanBeChanged,tp,0,LOCATION_MZONE,1,nil)
 	local b2=Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(s.spfilter,tp,0,LOCATION_GRAVE,1,nil,e,tp)
+		and Duel.IsExistingTarget(s.spfilter,tp,0,LOCATION_REST,1,nil,e,tp)
 	if chk==0 then return b1 or b2 end
 	local op=Duel.SelectEffect(tp,
 		{b1,aux.Stringid(id,1)},
@@ -55,7 +55,7 @@ function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	elseif op==2 then
 		e:SetCategory(CATEGORY_SPECIAL_SUMMON)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local g=Duel.SelectTarget(tp,s.spfilter,tp,0,LOCATION_GRAVE,1,1,nil,e,tp)
+		local g=Duel.SelectTarget(tp,s.spfilter,tp,0,LOCATION_REST,1,1,nil,e,tp)
 		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,0)
 	end
 end
@@ -67,7 +67,7 @@ function s.effop(e,tp,eg,ep,ev,re,r,rp)
 		--Take control of 1 opponent's monster until the End Phase
 		Duel.GetControl(tc,tp,PHASE_END,1)
 	elseif op==2 then
-		--Special Summon 1 monster from your opponent's GY
+		--Special Summon 1 monster from your opponent's RP
 		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 	end
 end

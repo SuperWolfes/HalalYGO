@@ -1,8 +1,8 @@
 --黒魔導戦士 ブレイカー
---Breaker the Dark Magical Warrior
+--Breaker the Dark Mentoral Warrior
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableCounterPermit(COUNTER_SPELL)
+	c:EnableCounterPermit(COUNTER_ACTIONAL)
 	--summon success
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -45,28 +45,28 @@ function s.initial_effect(c)
 	e4:SetOperation(s.desop)
 	c:RegisterEffect(e4)
 end
-s.counter_place_list={COUNTER_SPELL}
+s.counter_place_list={COUNTER_ACTIONAL}
 function s.addtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,e:GetLabel(),0,COUNTER_SPELL)
+	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,e:GetLabel(),0,COUNTER_ACTIONAL)
 end
 function s.addop(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():IsRelateToEffect(e) then
-		e:GetHandler():AddCounter(COUNTER_SPELL,e:GetLabel())
+		e:GetHandler():AddCounter(COUNTER_ACTIONAL,e:GetLabel())
 	end
 end
 function s.addcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_PENDULUM)
 end
 function s.atkval(e,c)
-	return c:GetCounter(COUNTER_SPELL)*400
+	return c:GetCounter(COUNTER_ACTIONAL)*400
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,COUNTER_SPELL,1,REASON_COST) end
-	e:GetHandler():RemoveCounter(tp,COUNTER_SPELL,1,REASON_COST)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,COUNTER_ACTIONAL,1,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,COUNTER_ACTIONAL,1,REASON_COST)
 end
 function s.filter(c)
-	return c:IsType(TYPE_SPELL+TYPE_TRAP)
+	return c:IsType(TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and s.filter(chkc) end

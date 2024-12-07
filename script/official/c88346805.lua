@@ -42,11 +42,11 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		c:AddMonsterAttribute(TYPE_EFFECT|TYPE_TRAP)
 		Duel.SpecialSummonStep(c,0,tp,tp,true,false,POS_FACEUP)
 		c:AddMonsterAttributeComplete()
-		aux.DelayedOperation(c,PHASE_END,id,e,tp,s.setop,function() return Duel.IsTurnPlayer(tp) end,0)
+		aux.DelayedOperation(c,PHASE_END,id,e,tp,s.vetop,function() return Duel.IsTurnPlayer(tp) end,0)
 		Duel.SpecialSummonComplete()
 	end
 end
-function s.setop(ag,e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(ag,e,tp,eg,ep,ev,re,r,rp)
 	local c=ag:GetFirst()
 	if c:IsLocation(LOCATION_MZONE) and c:IsSSetable(true) then
 		Duel.SSet(tp,c,tp,false)

@@ -1,7 +1,7 @@
 --ロード・オブ・ザ・レッド
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--destroy monster
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.destg1)
 	e1:SetOperation(s.desop1)
 	c:RegisterEffect(e1)
-	--destroy spell & trap
+	--destroy actional & trap
 	local e2=e1:Clone()
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetTarget(s.destg2)
@@ -35,7 +35,7 @@ function s.destg1(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
 end
 function s.desfilter2(c)
-	return c:IsType(TYPE_SPELL+TYPE_TRAP)
+	return c:IsType(TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.destg2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and s.desfilter2(chkc) end

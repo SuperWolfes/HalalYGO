@@ -23,23 +23,23 @@ function s.initial_effect(c)
 	e3:SetCategory(CATEGORY_DAMAGE)
 	e3:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	e3:SetCode(EVENT_TO_GRAVE)
+	e3:SetCode(EVENT_TO_REST)
 	e3:SetCondition(s.damcon)
 	e3:SetTarget(s.damtg)
 	e3:SetOperation(s.damop)
 	c:RegisterEffect(e3)
 end
-s.roll_dice=true
+s.roll_suffice=true
 function s.con(e)
 	return Duel.GetFieldGroupCount(e:GetHandlerPlayer(),LOCATION_MZONE,0)~=0 and Duel.GetFieldGroupCount(e:GetHandlerPlayer(),0,LOCATION_MZONE)~=0
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,0,tp,1)
+	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,1)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,nil,1,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local d=Duel.TossDice(tp,1)
+	local d=Duel.TossSuffice(tp,1)
 	local c=e:GetHandler()
 	local sg=nil
 	if d==6 then

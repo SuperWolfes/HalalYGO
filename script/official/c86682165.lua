@@ -3,7 +3,7 @@
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	-- 1 WATER Tuner + 1+ non-Tuner monsters
 	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WATER),1,1,Synchro.NonTuner(nil),1,99)
 	-- Apply monster protection
@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DELAY)
 	e1:SetCode(EVENT_REMOVE)
-	e1:SetRange(LOCATION_GRAVE)
+	e1:SetRange(LOCATION_REST)
 	e1:SetCountLimit(1,{id,1})
 	e1:SetCondition(s.spcon)
 	e1:SetTarget(s.sptg)
@@ -37,7 +37,7 @@ function s.rmfilter(c,code)
 end
 function s.immtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_REMOVE,nil,1,1-tp,LOCATION_ONFIELD|LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_REMOVE,nil,1,1-tp,LOCATION_ONFIELD|LOCATION_REST)
 end
 function s.immop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -63,7 +63,7 @@ function s.immop(e,tp,eg,ep,ev,re,r,rp)
 	if ch<=1 then return end
 	local chp,chcode=Duel.GetChainInfo(ch-1,CHAININFO_TRIGGERING_PLAYER,CHAININFO_TRIGGERING_CODE)
 	if chp~=1-tp or not chcode then return end
-	local g=Duel.GetMatchingGroup(s.rmfilter,tp,0,LOCATION_ONFIELD|LOCATION_GRAVE,nil,chcode)
+	local g=Duel.GetMatchingGroup(s.rmfilter,tp,0,LOCATION_ONFIELD|LOCATION_REST,nil,chcode)
 	if #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,3)) then
 		Duel.BreakEffect()
 		Duel.Remove(g,POS_FACEUP,REASON_EFFECT)

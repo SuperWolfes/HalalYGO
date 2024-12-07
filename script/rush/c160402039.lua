@@ -1,5 +1,5 @@
 --魔導師の力
---Mage Power
+--Manced Power
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -22,5 +22,5 @@ function s.eqlimit(e,c)
 	return c:IsFaceup()
 end
 function s.value(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsSpellTrap,e:GetHandlerPlayer(),LOCATION_ONFIELD,0,nil)*500
+	return Duel.GetMatchingGroupCount(Card.IsActionalTrap,e:GetHandlerPlayer(),LOCATION_ONFIELD,0,nil)*500
 end

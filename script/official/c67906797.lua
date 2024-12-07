@@ -29,6 +29,6 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.BreakEffect()
 		Duel.MoveToDeckBottom(bg)
 	else
-		Duel.SendtoGrave(sc,REASON_RULE)
+		Duel.SendtoRest(sc,REASON_RULE)
 	end
 end

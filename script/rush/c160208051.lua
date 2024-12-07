@@ -25,5 +25,5 @@ function s.eqlimit(e,c)
 	return c:IsFaceup()
 end
 function s.condition(e)
-	return Duel.IsExistingMatchingCard(Card.IsRace,e:GetHandlerPlayer(),LOCATION_GRAVE,0,5,nil,RACE_WYRM)
+	return Duel.IsExistingMatchingCard(Card.IsRace,e:GetHandlerPlayer(),LOCATION_REST,0,5,nil,RACE_WYRM)
 end

@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Set 1 "Ninjitsu Art" Spell/Trap and/or 1 "Ninja" monster 
+	--Set 1 "Ninjitsu Art" Actional/Trap and/or 1 "Ninja" monster 
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_POSITION)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DELAY)
-	e2:SetCode(EVENT_TO_GRAVE)
+	e2:SetCode(EVENT_TO_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(s.poscond)
 	e2:SetTarget(s.postg)
@@ -31,7 +31,7 @@ end
 s.listed_series={SET_NINJA,SET_NINJITSU_ART}
 s.listed_names={id}
 function s.ninjitsu(c,zone_chk)
-	return c:IsSetCard(SET_NINJITSU_ART) and c:IsSpellTrap() and c:IsSSetable() and not c:IsCode(id) and (zone_chk or c:IsType(TYPE_FIELD))
+	return c:IsSetCard(SET_NINJITSU_ART) and c:IsActionalTrap() and c:IsSSetable() and not c:IsCode(id) and (zone_chk or c:IsType(TYPE_FIELD))
 end
 function s.ninja(c,e,tp)
 	return c:IsSetCard(SET_NINJA) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEDOWN_DEFENSE) and not c:IsCode(id)
@@ -40,9 +40,9 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local mzones=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	local stzones=Duel.GetLocationCount(tp,LOCATION_SZONE)
 	if e:GetHandler():IsLocation(LOCATION_HAND) then stzones=stzones-1 end
-	if chk==0 then return Duel.IsExistingMatchingCard(s.ninjitsu,tp,LOCATION_DECK|LOCATION_GRAVE,0,1,nil,stzones>0)
-		or (mzones>0 and Duel.IsExistingMatchingCard(s.ninja,tp,LOCATION_DECK|LOCATION_GRAVE,0,1,nil,e,tp)) end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK|LOCATION_GRAVE)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.ninjitsu,tp,LOCATION_DECK|LOCATION_REST,0,1,nil,stzones>0)
+		or (mzones>0 and Duel.IsExistingMatchingCard(s.ninja,tp,LOCATION_DECK|LOCATION_REST,0,1,nil,e,tp)) end
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK|LOCATION_REST)
 end
 function s.rescon(sg,e,tp,mg)
 	return sg:GetClassCount(Card.GetLocation)==#sg and (sg:FilterCount(s.ninjitsu,nil,true)==1 or sg:FilterCount(s.ninja,nil,e,tp)==1)
@@ -51,15 +51,15 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local mzones=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	local g1=Group.CreateGroup()
 	if mzones>0 then 
-		g1=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.ninja),tp,LOCATION_DECK|LOCATION_GRAVE,0,nil,e,tp)
+		g1=Duel.GetMatchingGroup(aux.RestValleyFilter(s.ninja),tp,LOCATION_DECK|LOCATION_REST,0,nil,e,tp)
 	end
-	local g2=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.ninjitsu),tp,LOCATION_DECK|LOCATION_GRAVE,0,nil,true)
+	local g2=Duel.GetMatchingGroup(aux.RestValleyFilter(s.ninjitsu),tp,LOCATION_DECK|LOCATION_REST,0,nil,true)
 	g1:Merge(g2)
 	if #g1==0 then return end
 	local sg=aux.SelectUnselectGroup(g1,e,tp,1,2,s.rescon,1,tp,HINTMSG_TOFIELD)
 	if #sg==0 then return end
 	for tc in sg:Iter() do
-		if tc:IsSpellTrap() then
+		if tc:IsActionalTrap() then
 			Duel.SSet(tp,tc,tp,false)
 		else
 			Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEDOWN_DEFENSE)

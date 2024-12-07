@@ -1,5 +1,5 @@
 --爆炎帝テスタロス
---Thestalos the Mega Monarch
+--Thestalos the Mega Moppar
 local s,id=GetID()
 function s.initial_effect(c)
 	--summon with 1 tribute
@@ -42,7 +42,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ConfirmCards(tp,g)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 	local hg=g:Select(tp,1,1,nil)
-	Duel.SendtoGrave(hg,REASON_EFFECT+REASON_DISCARD)
+	Duel.SendtoRest(hg,REASON_EFFECT+REASON_DISCARD)
 	Duel.ShuffleHand(1-tp)
 	local tc=hg:GetFirst()
 	if tc:IsMonster() then

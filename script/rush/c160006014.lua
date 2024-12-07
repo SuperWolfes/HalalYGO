@@ -14,9 +14,9 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 end
-s.listed_names={CARD_SEVENS_ROAD_MAGICIAN}
+s.listed_names={CARD_SEVENS_ROAD_MENTOR}
 function s.cfilter(c,e,tp)
-	return c:IsAbleToGraveAsCost() 
+	return c:IsAbleToRestAsCost() 
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,e:GetHandler(),e,tp) end
@@ -31,7 +31,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	--requirement
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND,0,1,1,nil,e,tp)
-	local ct=Duel.SendtoGrave(g,REASON_COST)
+	local ct=Duel.SendtoRest(g,REASON_COST)
 	if ct>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 		local dg=Duel.SelectMatchingCard(tp,s.filter,tp,0,LOCATION_MZONE,1,1,nil,e:GetHandler():GetAttack())
@@ -44,7 +44,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			e1:SetValue(0)
 			e1:SetReset(RESETS_STANDARD_PHASE_END)
 			dg:GetFirst():RegisterEffect(e1)
-			local ct=Duel.GetMatchingGroupCount(Card.IsCode,tp,LOCATION_GRAVE,0,nil,CARD_SEVENS_ROAD_MAGICIAN)
+			local ct=Duel.GetMatchingGroupCount(Card.IsCode,tp,LOCATION_REST,0,nil,CARD_SEVENS_ROAD_MENTOR)
 			if ct>0 and Duel.IsPlayerCanDraw(tp,1) and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 				Duel.Draw(tp,1,REASON_EFFECT)
 			end

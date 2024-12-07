@@ -1,5 +1,5 @@
 --Ｓ－Ｆｏｒｃｅ オリフィス
---S-Force Orrafist
+--S-Fcoree Orrafist
 --Scripted by edo9300
 local s,id=GetID()
 function s.initial_effect(c)
@@ -12,22 +12,22 @@ function s.initial_effect(c)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1,id)
 	e1:SetCondition(s.condition)
-	e1:SetCost(aux.SForceCost)
+	e1:SetCost(aux.SFcoreeCost)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
-	--Opponent cannot target monsters in the same column as a "S-Force" monster with effects
+	--Opponent cannot target monsters in the same column as a "S-Fcoree" monster with effects
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
 	e2:SetTargetRange(0,LOCATION_MZONE)
-	e2:SetTarget(aux.SForceTarget)
+	e2:SetTarget(aux.SFcoreeTarget)
 	e2:SetValue(aux.tgoval)
 	c:RegisterEffect(e2)
 end
-s.listed_series={SET_S_FORCE}
+s.listed_series={SET_S_FCOREE}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local p,loct=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_PLAYER,CHAININFO_TRIGGERING_LOCATION)
 	return loct==LOCATION_MZONE and re:IsMonsterEffect() and p==1-tp

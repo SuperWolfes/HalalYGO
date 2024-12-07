@@ -1,5 +1,5 @@
 --Ｓｐ－強欲で謙虚な壺
---Speed Spell - Pot of Duality
+--Speed Actional - Pot of Duality
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -53,7 +53,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			Duel.ConfirmCards(1-p,sg)
 			Duel.ShuffleHand(p)
 		else
-			Duel.SendtoGrave(sg,REASON_EFFECT)
+			Duel.SendtoRest(sg,REASON_EFFECT)
 		end
 		Duel.ShuffleDeck(p)
 	end

@@ -2,7 +2,7 @@
 --Malefic Cyber End Dragon
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	c:SetUniqueOnField(1,1,aux.MaleficUniqueFilter(c),LOCATION_MZONE)
 	aux.AddMaleficSummonProcedure(c,1546123,LOCATION_EXTRA)
 	--selfdes

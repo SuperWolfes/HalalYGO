@@ -2,7 +2,7 @@
 --Delta Crow - Anti Reverse
 local s,id=GetID()
 function s.initial_effect(c)
-	--Destroy all face-down Spell/Trap cards your opponent controls
+	--Destroy all face-down Actional/Trap cards your opponent controls
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DESTROY)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)

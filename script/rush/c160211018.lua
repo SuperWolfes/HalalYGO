@@ -3,7 +3,7 @@
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send the top 3 cards of your Deck to the GY
+	--Send the top 3 cards of your Deck to the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DECKDES)
@@ -26,7 +26,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DECKDES,nil,0,tp,3)
 end
 function s.cfilter(c,e,tp)
-	return c:IsLocation(LOCATION_GRAVE) and c:IsMonster() and c:IsRace(RACE_CYBERSE) and c:IsLevelAbove(7)
+	return c:IsLocation(LOCATION_REST) and c:IsMonster() and c:IsRace(RACE_CYBERSE) and c:IsLevelAbove(7)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
@@ -38,9 +38,9 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Effect
 	Duel.DiscardDeck(tp,3,REASON_EFFECT)
 	local g=Duel.GetOperatedGroup()
-	if g:FilterCount(aux.NecroValleyFilter(s.cfilter),nil,e,tp)>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+	if g:FilterCount(aux.RestValleyFilter(s.cfilter),nil,e,tp)>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local sg=g:FilterSelect(tp,aux.NecroValleyFilter(s.cfilter),1,1,nil,e,tp)
+		local sg=g:FilterSelect(tp,aux.RestValleyFilter(s.cfilter),1,1,nil,e,tp)
 		if #sg>0 then
 			Duel.BreakEffect()
 			if Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)>0 and sg:GetFirst():IsCode(160211009) and Duel.IsPlayerCanDraw(tp,1) and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then

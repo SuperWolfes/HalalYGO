@@ -1,5 +1,5 @@
 --魔霧雨 (Rush)
---Makiu, the Magical Mist (Rush)
+--Makiu, the Mentoral Mist (Rush)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Destroy face-up monster your opponent controls

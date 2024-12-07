@@ -1,4 +1,4 @@
---Hellfire Boatwatcher, Ghost Charon
+--Hellfire Boatwatcher, Miss Charon
 local s,id=GetID()
 function s.initial_effect(c)
 	--synchro custom
@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_SYNCHRO_MATERIAL_CUSTOM)
 	e1:SetOperation(s.synop)
 	c:RegisterEffect(e1)
-	--grave synchro
+	--rest synchro
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.synval(e,c,sc)
-	if c:IsLocation(LOCATION_GRAVE) and c:IsAttribute(ATTRIBUTE_DARK) then
+	if c:IsLocation(LOCATION_REST) and c:IsAttribute(ATTRIBUTE_DARK) then
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_HAND_SYNCHRO+EFFECT_SYNCHRO_CHECK)
@@ -54,7 +54,7 @@ function s.synchktg(e,c,sg,tg,ntg,tsg,ntsg)
 	end
 end
 function s.synopfilter(c)
-	if not c:IsLocation(LOCATION_GRAVE) or not c:IsHasEffect(EFFECT_HAND_SYNCHRO+EFFECT_SYNCHRO_CHECK) then return false end
+	if not c:IsLocation(LOCATION_REST) or not c:IsHasEffect(EFFECT_HAND_SYNCHRO+EFFECT_SYNCHRO_CHECK) then return false end
 	local te={c:GetCardEffect(EFFECT_HAND_SYNCHRO+EFFECT_SYNCHRO_CHECK)}
 	for i=1,#te do
 		local e=te[i]

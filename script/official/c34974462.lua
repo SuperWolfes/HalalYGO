@@ -3,9 +3,9 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Link Summon procedure
-	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_FAIRY),2,2)
+	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_WANDERER),2,2)
 	--Special Summon 2 "Melodious" monsters with different Levels from your Deck to your zones this card points to
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -55,13 +55,13 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 		local zone=e:GetHandler():GetLinkedZone(tp)&ZONES_MMZ
 		local ct=Duel.GetLocationCount(tp,LOCATION_MZONE,tp,LOCATION_REASON_TOFIELD,zone)
 		local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_DECK,0,nil,e,tp,zone)
-		return ct>1 and #g>=2 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
+		return ct>1 and #g>=2 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)
 			and aux.SelectUnselectGroup(g,e,tp,2,2,aux.dpcheck(Card.GetLevel),0)
 	end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,LOCATION_DECK)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) then return end
 	local zone=c:GetLinkedZone(tp)&ZONES_MMZ

@@ -1,5 +1,5 @@
 --ＥＭ五虹の魔術師 (Anime)
---Performapal Five-Rainbow Magician (Anime)
+--Performapal Five-Rainbow Mentor (Anime)
 --scripted by GameMaster(GM)
 --rescripted by MLD
 local s,id=GetID()
@@ -72,7 +72,7 @@ function s.initial_effect(c)
 	e11:SetRange(LOCATION_PZONE)
 	e11:SetCondition(s.setcon)
 	e11:SetTarget(s.settg)
-	e11:SetOperation(s.setop)
+	e11:SetOperation(s.vetop)
 	c:RegisterEffect(e11)
 	s[e8]=function() return e9,e10,e11 end
 	--double atk
@@ -174,7 +174,7 @@ function s.setfilter(c,e,tp)
 		and (c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEDOWN_DEFENSE) or c:IsSSetable(true))
 end
 function s.nffilter(c)
-	return c:IsSpellTrap() and not c:IsType(TYPE_FIELD)
+	return c:IsActionalTrap() and not c:IsType(TYPE_FIELD)
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tg=eg:Filter(Card.IsLocation,nil,LOCATION_HAND)
@@ -186,7 +186,7 @@ function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local cid=Duel.GetChainInfo(0,CHAININFO_CHAIN_ID)
 	s[cid]=tp
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	local tg=Duel.GetTargetCards(e)
 	if tg:FilterCount(s.setfilter,nil,e,tp)~=#tg or Duel.GetMZoneCount(tp)<tg:FilterCount(Card.IsMonster,nil)

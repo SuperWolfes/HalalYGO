@@ -1,5 +1,5 @@
 --コード・オブ・ソウル
---Code of Soul
+--Code of Miss
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Apply Reincarnation Link Summon effect
+	--Apply Reincorporation Link Summon effect
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_IGNITION)
@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_QUICK_O)
 	e3:SetCode(EVENT_FREE_CHAIN)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetHintTiming(0,TIMING_MAIN_END|TIMINGS_CHECK_MONSTER)
 	e3:SetCountLimit(1,{id,2})
 	e3:SetCondition(function(_,tp) return Duel.IsTurnPlayer(1-tp) and Duel.IsMainPhase() end)
@@ -52,7 +52,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.effop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	--Reincarnation Link Summon effect
+	--Reincorporation Link Summon effect
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,3))
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -111,7 +111,7 @@ function s.reinclinkop(e,tp,eg,ep,ev,re,r,rp,c,must,g,min,max)
 	Duel.Hint(HINT_CARD,0,id)
 	local mg=e:GetLabelObject()
 	c:SetMaterial(mg)
-	Duel.SendtoGrave(mg,REASON_MATERIAL|REASON_LINK)
+	Duel.SendtoRest(mg,REASON_MATERIAL|REASON_LINK)
 	Duel.RegisterFlagEffect(tp,id,RESET_PHASE|PHASE_END,0,1)
 end
 function s.linkfilter(c)

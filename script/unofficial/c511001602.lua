@@ -1,4 +1,4 @@
---Cursed Fire King Doom Burst
+--Unclean Fire King Doom Burst
 local s,id=GetID()
 function s.initial_effect(c)
 	--lose atk

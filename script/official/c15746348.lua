@@ -26,7 +26,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
 end
-s.listed_series={SET_CHARMER}
+s.listed_series={SET_CHAUMER}
 function s.thcostfilter(c,tp)
 	return c:IsAttribute(ATTRIBUTE_WATER) and c:IsDiscardable()
 		and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil,c:GetLevel())
@@ -41,7 +41,7 @@ function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.SelectMatchingCard(tp,s.thcostfilter,tp,LOCATION_HAND,0,1,1,c,tp)
 	e:SetLabel(g:GetFirst():GetLevel())
 	g:AddCard(c)
-	Duel.SendtoGrave(g,REASON_COST|REASON_DISCARD)
+	Duel.SendtoRest(g,REASON_COST|REASON_DISCARD)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

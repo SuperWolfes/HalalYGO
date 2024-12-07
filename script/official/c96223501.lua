@@ -1,10 +1,10 @@
 --竜星因士－セフィラツバーン
---Satellarknight Zefrathuban
+--Satellarknight Zebrathuban
 local s,id=GetID()
 function s.initial_effect(c)
 	--Pendulum Summon procedure
 	Pendulum.AddProcedure(c)
-	--You cannot Pendulum Summon, except "tellarknight" and "Zefra" monsters
+	--You cannot Pendulum Summon, except "tellarknight" and "Zebra" monsters
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
@@ -32,13 +32,13 @@ function s.initial_effect(c)
 	e4:SetCondition(function(e) return e:GetHandler():IsSummonType(SUMMON_TYPE_PENDULUM) end)
 	c:RegisterEffect(e4)
 end
-s.listed_series={SET_TELLARKNIGHT,SET_ZEFRA}
+s.listed_series={SET_TELLARKNIGHT,SET_ZEBRA}
 function s.splimit(e,c,sump,sumtype,sumpos,targetp)
-	if c:IsSetCard(SET_TELLARKNIGHT) or c:IsSetCard(SET_ZEFRA) then return false end
+	if c:IsSetCard(SET_TELLARKNIGHT) or c:IsSetCard(SET_ZEBRA) then return false end
 	return (sumtype&SUMMON_TYPE_PENDULUM)==SUMMON_TYPE_PENDULUM
 end
 function s.filter1(c)
-	return c:IsFaceup() and c:IsSetCard({SET_TELLARKNIGHT,SET_ZEFRA})
+	return c:IsFaceup() and c:IsSetCard({SET_TELLARKNIGHT,SET_ZEBRA})
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end

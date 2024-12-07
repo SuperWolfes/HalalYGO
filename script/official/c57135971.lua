@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
-	--sand to grave and equip
+	--sand to rest and equip
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_EQUIP)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
@@ -58,7 +58,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e3:SetReset(RESET_EVENT+RESETS_STANDARD)
 		c:RegisterEffect(e3)
 	else
-		c:CancelToGrave(false)
+		c:CancelToRest(false)
 	end
 end
 function s.eqlimit(e,c)
@@ -68,9 +68,9 @@ function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetEquipTarget() and (Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated())
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
 	e:SetLabelObject(e:GetHandler():GetEquipTarget())
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
+	Duel.SendtoRest(e:GetHandler(),REASON_COST)
 end
 function s.desfilter(c)
 	return c:IsFaceup() and c:IsType(TYPE_EFFECT)
@@ -114,7 +114,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 			e3:SetReset(RESET_EVENT+RESETS_STANDARD)
 			e3:SetLabelObject(ec)
 			tc:RegisterEffect(e3)
-		else Duel.SendtoGrave(tc,REASON_RULE)
+		else Duel.SendtoRest(tc,REASON_RULE)
 		end
 	end
 end

@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,42878636,511001540,511001544,511001726)
 	--immune
 	local e2=Effect.CreateEffect(c)
@@ -32,10 +32,10 @@ function s.initial_effect(c)
 end
 s.material_setcode=0x7
 function s.efilter1(e,te)
-	return te:IsActiveType(TYPE_TRAP+TYPE_SPELL) and te:GetOwnerPlayer()~=e:GetHandlerPlayer()
+	return te:IsActiveType(TYPE_TRAP+TYPE_ACTIONAL) and te:GetOwnerPlayer()~=e:GetHandlerPlayer()
 end
 function s.efilter2(e,re,rp)
-	return aux.tgoval(e,re,rp) and re:IsActiveType(TYPE_TRAP+TYPE_SPELL) and re:GetOwnerPlayer()~=e:GetHandlerPlayer()
+	return aux.tgoval(e,re,rp) and re:IsActiveType(TYPE_TRAP+TYPE_ACTIONAL) and re:GetOwnerPlayer()~=e:GetHandlerPlayer()
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local e5=Effect.CreateEffect(e:GetHandler())

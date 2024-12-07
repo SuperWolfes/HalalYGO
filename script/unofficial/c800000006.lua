@@ -1,4 +1,4 @@
--- Forced Recovery
+-- Fcoreed Recovery
 -- scripted by: UnknownGuest
 local s,id=GetID()
 function s.initial_effect(c)

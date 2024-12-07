@@ -1,5 +1,5 @@
 --破壊剣の追憶
---Destruction Sword Memories
+--Mismatching Sword Memories
 local s,id=GetID()
 function s.initial_effect(c)
 	--Special Summon 1 "Buster Blader" monster from your Deck
@@ -19,17 +19,17 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON+CATEGORY_REMOVE)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_FREE_CHAIN)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetHintTiming(0,TIMINGS_CHECK_MONSTER)
 	e2:SetCost(aux.SelfBanishCost)
 	e2:SetTarget(Fusion.SummonEffTG(params))
 	e2:SetOperation(Fusion.SummonEffOP(params))
 	c:RegisterEffect(e2)
 end
-s.listed_series={SET_DESTRUCTION_SWORD,SET_BUSTER_BLADER}
+s.listed_series={SET_MISMATCHING_SWORD,SET_BUSTER_BLADER}
 s.listed_names={86240887} --"Buster Blader, the Dragon Destroyer Swordsman"
 function s.costfilter(c)
-	return c:IsSetCard(SET_DESTRUCTION_SWORD) and c:IsDiscardable()
+	return c:IsSetCard(SET_MISMATCHING_SWORD) and c:IsDiscardable()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil) end
@@ -58,12 +58,12 @@ function s.extrafil(c)
 	return c:IsMonster() and c:IsAbleToRemove()
 end
 function s.fextra(e,tp,mg)
-	if not Duel.IsPlayerAffectedByEffect(tp,CARD_SPIRIT_ELIMINATION) then
-		return Duel.GetMatchingGroup(s.extrafil,tp,LOCATION_GRAVE,0,nil)
+	if not Duel.IsPlayerAffectedByEffect(tp,CARD_GUARDIAN_ELIMINATION) then
+		return Duel.GetMatchingGroup(s.extrafil,tp,LOCATION_REST,0,nil)
 	end
 	return nil
 end
 function s.extratg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,0,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,0,tp,LOCATION_REST)
 end

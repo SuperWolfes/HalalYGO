@@ -53,9 +53,9 @@ function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local b1=Duel.IsCanRemoveCounter(tp,1,0,COUNTER_SIGNAL,4,REASON_COST)
 		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.HasLevel),tp,LOCATION_MZONE,0,1,nil)
 	local b2=Duel.IsCanRemoveCounter(tp,1,0,COUNTER_SIGNAL,7,REASON_COST) and ft>0
-		and Duel.IsExistingMatchingCard(s.tunerspfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp)
+		and Duel.IsExistingMatchingCard(s.tunerspfilter,tp,LOCATION_REST,0,1,nil,e,tp)
 	local b3=Duel.IsCanRemoveCounter(tp,1,0,COUNTER_SIGNAL,10,REASON_COST) and ft>0
-		and Duel.IsExistingMatchingCard(s.syncspfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp)
+		and Duel.IsExistingMatchingCard(s.syncspfilter,tp,LOCATION_REST,0,1,nil,e,tp)
 	if chk==0 then return b1 or b2 or b3 end
 	local op=Duel.SelectEffect(tp,
 		{b1,aux.Stringid(id,2)},
@@ -68,7 +68,7 @@ function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 		e:SetCategory(CATEGORY_LVCHANGE)
 	else
 		e:SetCategory(CATEGORY_SPECIAL_SUMMON)
-		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 	end
 end
 function s.effop(e,tp,eg,ep,ev,re,r,rp)
@@ -94,16 +94,16 @@ function s.effop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT|RESETS_STANDARD)
 		tc:RegisterEffect(e1)
 	elseif op==2 and ft>0 then
-		--Special Summon 1 Tuner from your GY
+		--Special Summon 1 Tuner from your RP
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local g=Duel.SelectMatchingCard(tp,s.tunerspfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+		local g=Duel.SelectMatchingCard(tp,s.tunerspfilter,tp,LOCATION_REST,0,1,1,nil,e,tp)
 		if #g>0 then
 			Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 		end
 	elseif op==3 and ft>0 then
-		--Special Summon 1 Sychro Monster from your GY
+		--Special Summon 1 Sychro Monster from your RP
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local g=Duel.SelectMatchingCard(tp,s.syncspfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+		local g=Duel.SelectMatchingCard(tp,s.syncspfilter,tp,LOCATION_REST,0,1,1,nil,e,tp)
 		if #g>0 then
 			Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 		end

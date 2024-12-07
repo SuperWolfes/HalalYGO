@@ -23,5 +23,5 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local sg=g:Select(1-tp,1,1,nil)
 	Duel.SendtoHand(sg,nil,REASON_EFFECT)
 	g:Sub(sg)
-	Duel.SendtoGrave(g,REASON_EFFECT)
+	Duel.SendtoRest(g,REASON_EFFECT)
 end

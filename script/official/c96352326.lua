@@ -1,5 +1,5 @@
 --太陽の魔術師エダ
---Eda the Sun Magician
+--Eda the Sun Mentor
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
@@ -33,7 +33,7 @@ function s.initial_effect(c)
 end
 s.listed_names={id}
 function s.spfilter(c,e,tp)
-	return c:IsRace(RACE_SPELLCASTER) and c:IsDefense(1500) and not c:IsCode(id)
+	return c:IsRace(RACE_MENTOR) and c:IsDefense(1500) and not c:IsCode(id)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEDOWN_DEFENSE)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -52,7 +52,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.posfilter(c)
-	return c:IsRace(RACE_SPELLCASTER) and c:IsFacedown() and c:IsDefensePos()
+	return c:IsRace(RACE_MENTOR) and c:IsFacedown() and c:IsDefensePos()
 end
 function s.poscon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()~=tp and Duel.IsMainPhase()

@@ -47,7 +47,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			Duel.BreakEffect()
 			local c=e:GetHandler()
 			if Duel.SpecialSummon(sc,0,tp,tp,false,false,POS_FACEUP)>0 and c:IsRelateToEffect(e) then
-				c:CancelToGrave()
+				c:CancelToRest()
 				Duel.Overlay(sc,c)
 			end
 		end

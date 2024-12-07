@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Xyz Summon procedure
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_WINGEDBEAST),13,5)
 	--Destroy as many cards your opponent controls as possible
@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetValue(function(e,te) return te:GetOwner()~=e:GetOwner() end)
 	c:RegisterEffect(e2)
-	--Copy the effects of a "Raidraptor" Xyz Monster in your GY
+	--Copy the effects of a "Raidraptor" Xyz Monster in your RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetType(EFFECT_TYPE_IGNITION)
@@ -68,10 +68,10 @@ function s.copyfilter(c)
 	return c:IsType(TYPE_XYZ) and c:IsSetCard(SET_RAIDRAPTOR)
 end
 function s.copytg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.copyfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.copyfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and s.copyfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.copyfilter,tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	Duel.SelectTarget(tp,s.copyfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	Duel.SelectTarget(tp,s.copyfilter,tp,LOCATION_REST,0,1,1,nil)
 end
 function s.copyop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

@@ -1,5 +1,5 @@
 --七宝神－米大
---Deity of Seven Treasures - Heitai
+--Being of Seven Treasures - Heitai
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e0:SetRange(LOCATION_HAND)
 	e0:SetCondition(s.spcon)
 	c:RegisterEffect(e0)
-	--Send the top 2 cards from the Deck to the GY
+	--Send the top 2 cards from the Deck to the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DECKDES+CATEGORY_ATKCHANGE)
@@ -29,7 +29,7 @@ end
 function s.spcon(e,c)
 	if c==nil then return true end
 	return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(s.cfilter,c:GetControler(),LOCATION_GRAVE,0,1,nil)
+		and Duel.IsExistingMatchingCard(s.cfilter,c:GetControler(),LOCATION_REST,0,1,nil)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeck(tp,2) end

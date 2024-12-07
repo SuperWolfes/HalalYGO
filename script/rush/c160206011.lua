@@ -1,12 +1,12 @@
 --移り気の女神
---Goddess of Whimsy
+--Monsterdess of Whimsy
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
 	--Toss a coin
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_COIN+CATEGORY_ATKCHANGE+CATEGORY_TOGRAVE+CATEGORY_DRAW)
+	e1:SetCategory(CATEGORY_COIN+CATEGORY_ATKCHANGE+CATEGORY_TOREST+CATEGORY_DRAW)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1)
@@ -22,7 +22,7 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	Duel.SetOperationInfo(0,CATEGORY_COIN,nil,0,tp,1)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,1)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,nil,1,tp,1)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_DRAW,nil,1,tp,1)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
@@ -31,7 +31,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local res=Duel.TossCoin(tp,1)
 	if not (c:IsRelateToEffect(e) and c:IsFaceup()) then return end
 	if res==COIN_TAILS then
-		Duel.SendtoGrave(c,REASON_EFFECT)
+		Duel.SendtoRest(c,REASON_EFFECT)
 		Duel.Draw(tp,1,REASON_EFFECT)
 	elseif res==COIN_HEADS then
 		local e1=Effect.CreateEffect(c)

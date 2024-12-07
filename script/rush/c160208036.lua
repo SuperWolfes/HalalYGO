@@ -1,5 +1,5 @@
 --三千破界
---Universal Destruction
+--Universal Mismatching
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)

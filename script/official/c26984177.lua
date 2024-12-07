@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e2:SetRange(LOCATION_FZONE)
 	e2:SetValue(CARD_KING_SARCOPHAGUS)
 	c:RegisterEffect(e2)
-	--Search 1 "Horus" monster then place 1 card from your hand on the bottom of the Deck
+	--Search 1 "Humus" monster then place 1 card from your hand on the bottom of the Deck
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_TODECK)
@@ -39,10 +39,10 @@ function s.initial_effect(c)
 	e4:SetOperation(s.drop)
 	c:RegisterEffect(e4)
 end
-s.listed_names={CARD_KING_SARCOPHAGUS,99307040} --Horus the Black Flame Deity
-s.listed_series={SET_HORUS}
+s.listed_names={CARD_KING_SARCOPHAGUS,99307040} --Humus the Black Flame Being
+s.listed_series={SET_HUMUS}
 function s.thfilter(c)
-	return c:IsSetCard(SET_HORUS) and c:IsMonster() and c:IsAbleToHand()
+	return c:IsSetCard(SET_HUMUS) and c:IsMonster() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

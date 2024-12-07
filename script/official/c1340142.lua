@@ -3,7 +3,7 @@
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--2 monsters, including a "Vaalmonica" Link Monster
 	Link.AddProcedure(c,nil,2,2,s.matcheck)
 	--Unaffected by non-"Vaalmonica" cards' effects

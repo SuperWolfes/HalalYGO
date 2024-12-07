@@ -1,5 +1,5 @@
 --ＶＳプルトンＨＧ
---Vanquish Soul Pluton HG
+--Vanquish Miss Polarn HG
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -32,13 +32,13 @@ function s.initial_effect(c)
 	e2:SetOperation(s.vsop)
 	c:RegisterEffect(e2)
 end
-s.listed_series={SET_VANQUISH_SOUL}
+s.listed_series={SET_VANQUISH_MISS}
 function s.opccost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFlagEffect(tp,id)==0 end
 	Duel.RegisterFlagEffect(tp,id,RESET_CHAIN,0,1)
 end
 function s.spconfilter(c,tp)
-	return c:IsFacedown() or not c:IsSetCard(SET_VANQUISH_SOUL)
+	return c:IsFacedown() or not c:IsSetCard(SET_VANQUISH_MISS)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsTurnPlayer(1-tp) and not Duel.IsExistingMatchingCard(s.spconfilter,tp,LOCATION_MMZONE,0,1,nil)

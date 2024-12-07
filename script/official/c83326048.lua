@@ -22,7 +22,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local opt=Duel.GetChainInfo(0,CHAININFO_TARGET_PARAM)
 	local ct=nil
-	if opt==0 then ct=TYPE_RITUAL end
+	if opt==0 then ct=TYPE_LOCKED end
 	if opt==1 then ct=TYPE_FUSION end
 	if opt==2 then ct=TYPE_SYNCHRO end
 	if opt==3 then ct=TYPE_XYZ end

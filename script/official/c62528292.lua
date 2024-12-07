@@ -9,22 +9,22 @@ function s.initial_effect(c)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetTarget(s.target)
 	c:RegisterEffect(e1)
-	--Toss a coin and send this card to the GY
+	--Toss a coin and send this card to the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
-	e2:SetCategory(CATEGORY_COIN+CATEGORY_TOGRAVE)
+	e2:SetCategory(CATEGORY_COIN+CATEGORY_TOREST)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetCountLimit(1)
 	e2:SetTarget(s.tgtg)
 	e2:SetOperation(s.tgop)
 	c:RegisterEffect(e2)
-	--Register effect when sent to the GY
+	--Register effect when sent to the RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL)
-	e3:SetCode(EVENT_TO_GRAVE)
+	e3:SetCode(EVENT_TO_REST)
 	e3:SetCondition(s.condition)
 	e3:SetOperation(s.operation)
 	c:RegisterEffect(e3)
@@ -33,7 +33,7 @@ s.listed_series={SET_ANCIENT_WARRIORS}
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local c=e:GetHandler()
-	--Send itself to the GY during the second Standby Phase
+	--Send itself to the RP during the second Standby Phase
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
@@ -52,16 +52,16 @@ function s.sop(e,tp,eg,ep,ev,re,r,rp)
 	ct=ct+1
 	c:SetTurnCounter(ct)
 	if ct==2 then
-		Duel.SendtoGrave(c,REASON_RULE)
+		Duel.SendtoRest(c,REASON_RULE)
 	end
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGrave() end
+	if chk==0 then return e:GetHandler():IsAbleToRest() end
 	Duel.SetOperationInfo(0,CATEGORY_COIN,nil,0,tp,1)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.TossCoin(tp,1)==COIN_HEADS then
-		Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
+		Duel.SendtoRest(e:GetHandler(),REASON_EFFECT)
 	end
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)

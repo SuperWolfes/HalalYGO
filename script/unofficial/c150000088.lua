@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_TRAP+TYPE_SPELL) and Duel.IsChainNegatable(ev)
+	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_TRAP+TYPE_ACTIONAL) and Duel.IsChainNegatable(ev)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -24,7 +24,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local rc=re:GetHandler()
 	if Duel.NegateActivation(ev) and rc:IsRelateToEffect(re) and rc:IsSSetable(true) then
-		rc:CancelToGrave()
+		rc:CancelToRest()
 		Duel.ChangePosition(rc,POS_FACEDOWN)
 		rc:SetStatus(STATUS_ACTIVATE_DISABLED,false)
 		rc:SetStatus(STATUS_SET_TURN,false)

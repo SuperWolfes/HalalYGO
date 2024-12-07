@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Pendulum Summon
 	Pendulum.AddProcedure(c)
-	--Destroy target and Set 1 "Metalfoes" Spell/Trap from your Deck
+	--Destroy target and Set 1 "Metalfoes" Actional/Trap from your Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DESTROY)
@@ -39,7 +39,7 @@ function s.desfilter(c,tp)
 	end
 end
 function s.filter(c,ignore)
-	return c:IsSetCard(0xe1) and c:IsSpellTrap() and c:IsSSetable(ignore)
+	return c:IsSetCard(0xe1) and c:IsActionalTrap() and c:IsSSetable(ignore)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and chkc:IsControler(tp) and s.desfilter(chkc,tp) and chkc~=e:GetHandler() end

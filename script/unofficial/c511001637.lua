@@ -1,8 +1,8 @@
---Hot Red Dragon Archfiend Belial
+--Hot Red Dragon Archtainted Belial
 local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,1)
 	--special summon
 	local e2=Effect.CreateEffect(c)
@@ -27,13 +27,13 @@ function s.filter2(c,lv,e,tp)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>1 
-		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,LOCATION_GRAVE+LOCATION_DECK)
+		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,1,nil,e,tp) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,LOCATION_REST+LOCATION_DECK)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=1 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g1=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+	local g1=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.filter),tp,LOCATION_REST,0,1,1,nil,e,tp)
 	local tc=g1:GetFirst()
 	if tc then
 		Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP)

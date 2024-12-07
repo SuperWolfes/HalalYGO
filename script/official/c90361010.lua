@@ -1,5 +1,5 @@
 --超重武者装留イワトオシ
---Superheavy Samurai Soulpiercer
+--Superheavy Samurai Misspiercer
 local s,id=GetID()
 function s.initial_effect(c)
 	--Equip it to a "Superheavy Samurai" monster
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
-	e2:SetCode(EVENT_TO_GRAVE)
+	e2:SetCode(EVENT_TO_REST)
 	e2:SetCondition(function(e) return e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD) end)
 	e2:SetTarget(s.thtg)
 	e2:SetOperation(s.thop)
@@ -42,7 +42,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if c:IsLocation(LOCATION_MZONE) and c:IsFacedown() then return end
 	local tc=Duel.GetFirstTarget()
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 or tc:GetControler()~=tp or tc:IsFacedown() or not tc:IsRelateToEffect(e) then
-		Duel.SendtoGrave(c,REASON_EFFECT)
+		Duel.SendtoRest(c,REASON_EFFECT)
 		return
 	end
 	Duel.Equip(tp,c,tc,true)

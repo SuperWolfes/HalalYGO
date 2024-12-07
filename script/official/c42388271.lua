@@ -24,10 +24,10 @@ function s.initial_effect(c)
 	e2:SetCode(EFFECT_DOUBLE_TRIBUTE)
 	e2:SetValue(1)
 	c:RegisterEffect(e2)
-	--Send 1 monster from your deck to GY
+	--Send 1 monster from your deck to RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
-	e3:SetCategory(CATEGORY_TOGRAVE)
+	e3:SetCategory(CATEGORY_TOREST)
 	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e3:SetRange(LOCATION_MZONE)
@@ -48,10 +48,10 @@ end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,tp)
 end
-	--Cost of sending from hand to GY
+	--Cost of sending from hand to RP
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
+	Duel.SendtoRest(e:GetHandler(),REASON_COST)
 end
 	--Check for link monsters that can be special summoned
 function s.spfilter(c,e,tp)
@@ -83,19 +83,19 @@ function s.dkcon(e,tp,eg,ep,ev,re,r,rp)
 end
 	--Check for a monster
 function s.dkfilter(c)
-	return c:IsMonster() and c:IsAbleToGrave()
+	return c:IsMonster() and c:IsAbleToRest()
 end
 	--Activation legality
 function s.dktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.dkfilter,tp,LOCATION_DECK,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
-	--Performing the effect of sending a monster from deck to GY
+	--Performing the effect of sending a monster from deck to RP
 function s.dkop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.dkfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end
 

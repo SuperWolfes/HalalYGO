@@ -1,5 +1,5 @@
 --叛逆の堕天使
---Darklord Uprising
+--Darkwarden Uprising
 --Scripted by edo9300
 local s,id=GetID()
 function s.initial_effect(c)
@@ -45,7 +45,7 @@ end
 function s.costfilter(c,target,e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabelObject(c)
 	local res=c:IsSetCard(0xef) and c:IsMonster() and (c:IsLocation(LOCATION_HAND) or c:IsFaceup())
-				and c:IsAbleToGraveAsCost() and target(e,tp,eg,ep,ev,re,r,rp,0)
+				and c:IsAbleToRestAsCost() and target(e,tp,eg,ep,ev,re,r,rp,0)
 	e:SetLabelObject(nil)
 	return res
 end
@@ -57,9 +57,9 @@ function s.cost(target)
 			if res then e:SetLabel(1) end
 			return res
 		end
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND+LOCATION_MZONE,0,1,1,nil,target,e,tp,eg,ep,ev,re,r,rp,chk)
-		Duel.SendtoGrave(g,REASON_COST)
+		Duel.SendtoRest(g,REASON_COST)
 		e:SetLabelObject(g:GetFirst())
 	end
 end

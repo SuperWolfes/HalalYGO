@@ -1,7 +1,7 @@
 --ガーディアン・デスサイス
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--cannot special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e4:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e4:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
-	e4:SetCode(EVENT_TO_GRAVE)
+	e4:SetCode(EVENT_TO_REST)
 	e4:SetRange(LOCATION_HAND+LOCATION_DECK)
 	e4:SetCondition(s.spcon)
 	e4:SetTarget(s.sptg)

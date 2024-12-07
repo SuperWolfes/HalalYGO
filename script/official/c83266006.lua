@@ -1,5 +1,5 @@
 --逢華妖麗譚－魔妖語
---Ghost Meets Girl - A Mayakashi's Story
+--Miss Meets Girl - A Mayashi's Story
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -20,11 +20,11 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCurrentPhase() & PHASE_MAIN1 + PHASE_MAIN2 ~= 0
 end
 function s.filter(c,e,tp)
-	return c:IsFaceup() and c:IsRace(RACE_ZOMBIE) and c:IsType(TYPE_SYNCHRO)
-		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REMOVED+LOCATION_GRAVE,0,1,nil,e,tp,c:GetAttribute())
+	return c:IsFaceup() and c:IsRace(RACE_TOXIC) and c:IsType(TYPE_SYNCHRO)
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REMOVED+LOCATION_REST,0,1,nil,e,tp,c:GetAttribute())
 end
 function s.spfilter(c,e,tp,att)
-	return c:IsRace(RACE_ZOMBIE) and (c:IsFaceup() or not c:IsLocation(LOCATION_REMOVED)) 
+	return c:IsRace(RACE_TOXIC) and (c:IsFaceup() or not c:IsLocation(LOCATION_REMOVED)) 
 		and c:IsAttribute(att) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -33,14 +33,14 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		and Duel.IsExistingTarget(s.filter,tp,LOCATION_MZONE,0,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 	Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE,0,1,1,nil,e,tp)
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REMOVED+LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REMOVED+LOCATION_REST)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
 	if tc:IsFaceup() and tc:IsRelateToEffect(e) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local sc=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_REMOVED+LOCATION_GRAVE,0,1,1,nil,e,tp,tc:GetAttribute()):GetFirst()
+		local sc=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_REMOVED+LOCATION_REST,0,1,1,nil,e,tp,tc:GetAttribute()):GetFirst()
 		if sc and Duel.SpecialSummon(sc,0,tp,tp,false,false,POS_FACEUP)~=0 then
 			sc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1)
 			local e3=Effect.CreateEffect(c)
@@ -78,5 +78,5 @@ function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Remove(tc,POS_FACEUP,REASON_EFFECT)
 end
 function s.splimit(e,c,sump,sumtype,sumpos,targetp,se)
-	return not c:IsRace(RACE_ZOMBIE)
+	return not c:IsRace(RACE_TOXIC)
 end

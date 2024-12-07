@@ -30,14 +30,14 @@ function s.zones(e,tp,eg,ep,ev,re,r,rp)
 	return zone
 end
 function s.plfilter(c)
-	return c:IsSetCard(SET_SOLFACHORD) and c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
+	return c:IsSetCard(SET_SOLFACHORD) and c:IsType(TYPE_PENDULUM) and not c:IsUnliked()
 end
 function s.rescon(sg,e,tp,mg)
 	return sg:IsExists(Card.IsEvenScale,1,nil) and sg:IsExists(Card.IsOddScale,1,nil)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local place_g=Duel.GetMatchingGroup(s.plfilter,tp,LOCATION_DECK,0,nil)
-	local toextra_g=Duel.GetMatchingGroup(aux.NOT(Card.IsForbidden),tp,LOCATION_PZONE,0,nil)
+	local toextra_g=Duel.GetMatchingGroup(aux.NOT(Card.IsUnliked),tp,LOCATION_PZONE,0,nil)
 	local b1=Duel.CheckPendulumZones(tp) and #place_g>0
 	local b2=Duel.IsExistingMatchingCard(s.plfilter,tp,LOCATION_HAND,0,1,nil)
 		and Duel.CheckLocation(tp,LOCATION_PZONE,0) and Duel.CheckLocation(tp,LOCATION_PZONE,1)
@@ -87,7 +87,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		end
 	elseif op==3 then
 		--Add 2 Pendulum Scales to the Extra Deck face-up and draw 2 cards
-		local toextra_g=Duel.GetMatchingGroup(aux.NOT(Card.IsForbidden),tp,LOCATION_PZONE,0,nil)
+		local toextra_g=Duel.GetMatchingGroup(aux.NOT(Card.IsUnliked),tp,LOCATION_PZONE,0,nil)
 		if #toextra_g==2 and aux.SelectUnselectGroup(toextra_g,e,tp,2,2,s.rescon,0,tp,nil) and Duel.SendtoExtraP(toextra_g,tp,REASON_EFFECT)>0
 			and Duel.GetOperatedGroup():FilterCount(Card.IsLocation,nil,LOCATION_EXTRA)==2 then
 			local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)

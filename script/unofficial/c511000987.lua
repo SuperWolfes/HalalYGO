@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-	--Trap Spell
+	--Trap Actional
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -34,14 +34,14 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if not at:IsCode(10000010) then
 		e:SetCategory(CATEGORY_TODECK+CATEGORY_SPECIAL_SUMMON)
 		Duel.SetOperationInfo(0,CATEGORY_TODECK,at,1,0,0)
-		Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+		Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 	else
 		e:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_DEFCHANGE+CATEGORY_RECOVER)
 		Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,at:GetControler(),at:GetAttack())
 	end
 end
 function s.mgfilter(c,e,tp,fusc,mg)
-	return c:IsControler(c:GetOwner()) and c:IsLocation(LOCATION_GRAVE)
+	return c:IsControler(c:GetOwner()) and c:IsLocation(LOCATION_REST)
 		and (c:GetReason()&0x40008)==0x40008 and c:GetReasonCard()==fusc
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 		and fusc:CheckFusionMaterial(mg,c)
@@ -57,8 +57,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			Duel.BreakEffect()
 			Duel.SkipPhase(Duel.GetTurnPlayer(),PHASE_BATTLE,RESET_PHASE+PHASE_BATTLE,1)
 			if tc:IsSummonType(SUMMON_TYPE_FUSION) and ct>0 and ct<=Duel.GetLocationCount(p,LOCATION_MZONE)
-				and mg:FilterCount(aux.NecroValleyFilter(s.mgfilter),nil,e,p,tc,mg)==ct
-				and (ct<=1 or not Duel.IsPlayerAffectedByEffect(p,CARD_BLUEEYES_SPIRIT)) then
+				and mg:FilterCount(aux.RestValleyFilter(s.mgfilter),nil,e,p,tc,mg)==ct
+				and (ct<=1 or not Duel.IsPlayerAffectedByEffect(p,CARD_BLUEEYES_GUARDIAN)) then
 				Duel.SpecialSummon(mg,0,tp,p,false,false,POS_FACEUP)
 			end
 		end

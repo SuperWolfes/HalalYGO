@@ -1,5 +1,5 @@
 --アルケミー・サイクル (Anime)
---Alchemy Cycle (Anime)
+--Chemistry Cycle (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

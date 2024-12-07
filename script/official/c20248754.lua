@@ -4,8 +4,8 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Xyz summon procedure
 	Xyz.AddProcedure(c,nil,4,2)
 	--Banish 1 of opponent's monsters
@@ -65,7 +65,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
 function s.thfilter(c)
-	return c:IsSetCard(0x13f) and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsSetCard(0x13f) and c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()

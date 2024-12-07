@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e3:SetCountLimit(1)
 	e3:SetValue(s.indct)
 	c:RegisterEffect(e3)
-	--to grave
+	--to rest
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,0))
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
@@ -41,7 +41,7 @@ function s.indct(e,re,r,rp)
 end
 function s.indcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsPreviousPosition(POS_FACEUP) and c:IsLocation(LOCATION_GRAVE)
+	return c:IsPreviousPosition(POS_FACEUP) and c:IsLocation(LOCATION_REST)
 end
 function s.indtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_CYBERSE),tp,LOCATION_MZONE,0,1,nil) end

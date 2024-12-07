@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.postg)
 	e2:SetOperation(s.posop)
 	c:RegisterEffect(e2)
-	--Forces your controlled monsters by this card's effect to attack when this card attacks
+	--Fcorees your controlled monsters by this card's effect to attack when this card attacks
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e3:SetCode(EVENT_ATTACK_ANNOUNCE)

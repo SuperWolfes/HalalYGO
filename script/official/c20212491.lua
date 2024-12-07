@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.tgfilter)
 	e2:SetValue(aux.tgoval)
 	c:RegisterEffect(e2)
-	--Special Summon 1 Level 1 "Purrely" monster from Deck or GY
+	--Special Summon 1 Level 1 "Purrely" monster from Deck or RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	e3:SetTarget(s.sptg)
 	e3:SetOperation(s.spop)
 	c:RegisterEffect(e3)
-	--Attach 1 "Purrely" Quick-Play Spell to 1 "Purrely" Xyz Monster on the field
+	--Attach 1 "Purrely" Quick-Play Actional to 1 "Purrely" Xyz Monster on the field
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
@@ -54,7 +54,7 @@ function s.spcond(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK|LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK|LOCATION_REST)
 end
 function s.spfilter(c,e,tp)
 	return c:IsSetCard(SET_PURRELY) and c:IsLevel(1) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -62,7 +62,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_DECK|LOCATION_GRAVE,0,1,1,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,LOCATION_DECK|LOCATION_REST,0,1,1,nil,e,tp)
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end
@@ -71,12 +71,12 @@ function s.cfilter(c)
 	return c:IsFaceup() and c:IsSetCard(SET_PURRELY) and c:IsType(TYPE_XYZ)
 end
 function s.atchfilter(c)
-	return c:IsSetCard(SET_PURRELY) and c:IsSpell() and c:IsType(TYPE_QUICKPLAY)
+	return c:IsSetCard(SET_PURRELY) and c:IsActional() and c:IsType(TYPE_QUICKPLAY)
 end
 function s.attachtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and s.cfilter(chkc) end
 	if chk==0 then return Duel.IsExistingTarget(s.cfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil)
-		and Duel.IsExistingMatchingCard(s.atchfilter,tp,LOCATION_DECK|LOCATION_GRAVE,0,1,nil) end
+		and Duel.IsExistingMatchingCard(s.atchfilter,tp,LOCATION_DECK|LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 	Duel.SelectTarget(tp,s.cfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil)
 end
@@ -84,7 +84,7 @@ function s.attachop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and tc:IsType(TYPE_XYZ) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)
-		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.atchfilter),tp,LOCATION_DECK|LOCATION_GRAVE,0,1,1,nil)
+		local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.atchfilter),tp,LOCATION_DECK|LOCATION_REST,0,1,1,nil)
 		if #g==0 then return end
 		Duel.Overlay(tc,g)
 	end

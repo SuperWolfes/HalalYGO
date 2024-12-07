@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,s.matfilter,3,2,nil,nil,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Position+Negate
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -73,13 +73,13 @@ function s.xyzcon(e,tp,eg,ep,ev,re,r,rp)
 	local tc=c:GetBattleTarget()
 	if not c:IsRelateToBattle() or c:IsFacedown() then return false end
 	e:SetLabelObject(tc)
-	return tc:IsLocation(LOCATION_GRAVE) and tc:IsMonster() and tc:IsReason(REASON_BATTLE)
+	return tc:IsLocation(LOCATION_REST) and tc:IsMonster() and tc:IsReason(REASON_BATTLE)
 end
 function s.xyztg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsType(TYPE_XYZ) end
 	local tc=e:GetLabelObject()
 	Duel.SetTargetCard(tc)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,tc,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,tc,1,0,0)
 end
 function s.xyzop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

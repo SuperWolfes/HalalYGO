@@ -3,7 +3,7 @@
 --scripted by Hatter, Larry126
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Draw 1 card, then discard 1 card
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -11,12 +11,12 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DELAY)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
-	e1:SetCondition(function(e) return e:GetHandler():IsRitualSummoned() end)
+	e1:SetCondition(function(e) return e:GetHandler():IsLockedSummoned() end)
 	e1:SetTarget(s.drtg)
 	e1:SetOperation(s.drop)
 	c:RegisterEffect(e1)
-	local ritual_params={handler=c,lvtype=RITPROC_GREATER,forcedselection=function(e,tp,g,sc) return g:IsContains(e:GetHandler()) end}
-	--Ritual Summon 1 Ritual Monster from your hand, by Tributing monsters from your hand or field, including this card on your field, whose total Levels equal or exceed the Level of the Ritual Monster
+	local locked_params={handler=c,lvtype=RITPROC_GREATER,fcoreedselection=function(e,tp,g,sc) return g:IsContains(e:GetHandler()) end}
+	--Locked Summon 1 Locked Monster from your hand, by Tributing monsters from your hand or field, including this card on your field, whose total Levels equal or exceed the Level of the Locked Monster
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_RELEASE+CATEGORY_SPECIAL_SUMMON)
@@ -26,11 +26,11 @@ function s.initial_effect(c)
 	e2:SetCountLimit(1,id)
 	e2:SetHintTiming(0,TIMING_MAIN_END|TIMINGS_CHECK_MONSTER)
 	e2:SetCondition(function() return Duel.IsMainPhase() end)
-	e2:SetTarget(Ritual.Target(ritual_params))
+	e2:SetTarget(Locked.Target(locked_params))
 	e2:SetOperation(function(e,tp,eg,ep,ev,re,r,rp)
 						local c=e:GetHandler()
 						if c:IsRelateToEffect(e) and c:IsControler(tp) then
-							Ritual.Operation(ritual_params)(e,tp,eg,ep,ev,re,r,rp)
+							Locked.Operation(locked_params)(e,tp,eg,ep,ev,re,r,rp)
 						end
 					end)
 	c:RegisterEffect(e2)

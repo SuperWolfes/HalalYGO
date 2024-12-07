@@ -2,10 +2,10 @@
 --Red Nova Dragon
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Synchro Summon Procedure
-	Synchro.AddProcedure(c,nil,2,2,aux.FilterBoolFunction(Card.IsCode,CARD_RED_DRAGON_ARCHFIEND),1,1)
-	--Gains 500 ATK per each Tuner in your GY
+	Synchro.AddProcedure(c,nil,2,2,aux.FilterBoolFunction(Card.IsCode,CARD_RED_DRAGON_ARCHTAINTED),1,1)
+	--Gains 500 ATK per each Tuner in your RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -52,11 +52,11 @@ function s.initial_effect(c)
 	e5:SetCode(EFFECT_MULTIPLE_TUNERS)
 	c:RegisterEffect(e5)
 end
-s.material={CARD_RED_DRAGON_ARCHFIEND}
-s.listed_names={CARD_RED_DRAGON_ARCHFIEND}
+s.material={CARD_RED_DRAGON_ARCHTAINTED}
+s.listed_names={CARD_RED_DRAGON_ARCHTAINTED}
 s.synchro_nt_required=1
 function s.atkval(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsType,c:GetControler(),LOCATION_GRAVE,0,nil,TYPE_TUNER)*500
+	return Duel.GetMatchingGroupCount(Card.IsType,c:GetControler(),LOCATION_REST,0,nil,TYPE_TUNER)*500
 end
 function s.nacon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetAttacker():IsControler(1-tp)

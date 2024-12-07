@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddEquipProcedure(c,nil,aux.FilterBoolFunction(Card.IsSetCard,0x9d),nil,nil,s.target,s.operation)
 	--spsummon
-	local params = {aux.FilterBoolFunction(Card.IsSetCard,0x9d),nil,nil,nil,s.forcedmat}
+	local params = {aux.FilterBoolFunction(Card.IsSetCard,0x9d),nil,nil,nil,s.fcoreedmat}
 	local e3=Effect.CreateEffect(c)
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)
 	e3:SetType(EFFECT_TYPE_IGNITION)
@@ -38,6 +38,6 @@ end
 function s.fcond(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetEquipTarget() and e:GetHandler():GetEquipTarget():IsControler(tp)
 end
-function s.forcedmat(e,tp,eg,ep,ev,re,r,rp,chk)
+function s.fcoreedmat(e,tp,eg,ep,ev,re,r,rp,chk)
 	return e:GetHandler():GetEquipTarget()
 end

@@ -9,11 +9,11 @@ function s.initial_effect(c)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetHintTiming(0,TIMING_MAIN_END)
 	c:RegisterEffect(e1)
-	--Your "Dream Mirror" monsters are shuffled into the Deck instead of being sent to the GY
+	--Your "Dream Mirror" monsters are shuffled into the Deck instead of being sent to the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetProperty(EFFECT_FLAG_SET_AVAILABLE+EFFECT_FLAG_IGNORE_IMMUNE)
-	e2:SetCode(EFFECT_TO_GRAVE_REDIRECT)
+	e2:SetCode(EFFECT_TO_REST_REDIRECT)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetTargetRange(LOCATION_MZONE,0)
 	e2:SetTarget(function(e,c) return c:IsSetCard(SET_DREAM_MIRROR) and c:IsReason(REASON_COST) and c:GetReasonEffect():GetHandler()==c end)
@@ -37,14 +37,14 @@ s.listed_series={SET_DREAM_MIRROR}
 s.listed_names={CARD_DREAM_MIRROR_JOY,CARD_DREAM_MIRROR_TERROR}
 function s.plcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGraveAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED) end
-	Duel.SendtoGrave(c,REASON_COST)
+	if chk==0 then return c:IsAbleToRestAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED) end
+	Duel.SendtoRest(c,REASON_COST)
 end
 function s.plfilter(c)
-	return c:IsFieldSpell() and c:IsCode(CARD_DREAM_MIRROR_JOY,CARD_DREAM_MIRROR_TERROR) and c:IsFaceup() and not c:IsForbidden()
+	return c:IsFieldActional() and c:IsCode(CARD_DREAM_MIRROR_JOY,CARD_DREAM_MIRROR_TERROR) and c:IsFaceup() and not c:IsUnliked()
 end
 function s.pltg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.plfilter,tp,LOCATION_REMOVED|LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.plfilter,tp,LOCATION_REMOVED|LOCATION_REST,0,1,nil) end
 	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND)
 end
 function s.spfilter(c,e,tp,code)
@@ -52,11 +52,11 @@ function s.spfilter(c,e,tp,code)
 end
 function s.plop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
-	local plc=Duel.SelectMatchingCard(tp,s.plfilter,tp,LOCATION_REMOVED|LOCATION_GRAVE,0,1,1,nil):GetFirst()
+	local plc=Duel.SelectMatchingCard(tp,s.plfilter,tp,LOCATION_REMOVED|LOCATION_REST,0,1,1,nil):GetFirst()
 	if not plc then return end
 	local fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
 	if fc then
-		Duel.SendtoGrave(fc,REASON_RULE)
+		Duel.SendtoRest(fc,REASON_RULE)
 		Duel.BreakEffect()
 	end
 	if not Duel.MoveToField(plc,tp,tp,LOCATION_FZONE,POS_FACEUP,true) or Duel.GetLocationCount(tp,LOCATION_MZONE)==0 then return end

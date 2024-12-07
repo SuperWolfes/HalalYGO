@@ -1,8 +1,8 @@
 --禁忌の壺
---Pot of The Forbidden
+--Pot of The Unliked
 local s,id=GetID()
 function s.initial_effect(c)
-	--FLIP: Activate one of the forbidden effects
+	--FLIP: Activate one of the unliked effects
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_FLIP+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DELAY)
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.thfilter(c)
-	return c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local b1=Duel.IsPlayerCanDraw(tp,2)

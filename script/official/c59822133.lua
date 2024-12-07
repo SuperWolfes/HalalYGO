@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTunerEx(Card.IsSetCard,0xdd),1,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--special summon limit
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -42,7 +42,7 @@ end
 s.listed_series={0xdd}
 s.listed_names={id}
 function s.negcon(e,tp,eg,ep,ev,re,r,rp)
-	return re:GetActivateLocation()==LOCATION_GRAVE and Duel.IsChainNegatable(ev)
+	return re:GetActivateLocation()==LOCATION_REST and Duel.IsChainNegatable(ev)
 end
 function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

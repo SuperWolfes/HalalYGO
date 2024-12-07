@@ -2,7 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMixN(c,false,false,84451804,3)
 	--atk
 	local e2=Effect.CreateEffect(c)
@@ -16,5 +16,5 @@ end
 s.listed_names={12538374}
 s.material_setcode=0x12
 function s.atkval(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsCode,c:GetControler(),LOCATION_GRAVE,0,nil,12538374)*500
+	return Duel.GetMatchingGroupCount(Card.IsCode,c:GetControler(),LOCATION_REST,0,nil,12538374)*500
 end

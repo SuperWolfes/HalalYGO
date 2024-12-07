@@ -2,7 +2,7 @@
 --Fengsheng Mirror
 local s,id=GetID()
 function s.initial_effect(c)
-	--Discard 1 spirit monster from the opponent's hand
+	--Discard 1 guardian monster from the opponent's hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_HANDES)
@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.listed_card_types={TYPE_SPIRIT}
+s.listed_card_types={TYPE_GUARDIAN}
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	Duel.SetTargetPlayer(tp)
@@ -23,11 +23,11 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(p,0,LOCATION_HAND)
 	if #g>0 then
 		Duel.ConfirmCards(p,g)
-		local tg=g:Filter(Card.IsType,nil,TYPE_SPIRIT)
+		local tg=g:Filter(Card.IsType,nil,TYPE_GUARDIAN)
 		if #tg>0 then
-			Duel.Hint(HINT_SELECTMSG,p,HINTMSG_TOGRAVE)
+			Duel.Hint(HINT_SELECTMSG,p,HINTMSG_TOREST)
 			local sg=tg:Select(p,1,1,nil)
-			Duel.SendtoGrave(sg,REASON_DISCARD|REASON_EFFECT)
+			Duel.SendtoRest(sg,REASON_DISCARD|REASON_EFFECT)
 		end
 		Duel.ShuffleHand(1-p)
 	end

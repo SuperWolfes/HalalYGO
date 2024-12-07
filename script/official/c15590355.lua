@@ -1,5 +1,5 @@
 --リブロマンサー・リアライズ
---Libromancer Realized
+--Librobouncer Realized
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -20,10 +20,10 @@ function s.initial_effect(c)
 	e2:SetOperation(s.tknop)
 	c:RegisterEffect(e2)
 end
-s.listed_series={SET_LIBROMANCER}
+s.listed_series={SET_LIBROBOUNCER}
 s.listed_names={id+1} -- "Fire Token"
 function s.rvlfilter(c,tp)
-	return c:IsRitualMonster() and c:IsSetCard(SET_LIBROMANCER) and not c:IsPublic()
+	return c:IsLockedMonster() and c:IsSetCard(SET_LIBROBOUNCER) and not c:IsPublic()
 		and Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0,TYPES_TOKEN,0,0,c:GetLevel(),RACE_CYBERSE,ATTRIBUTE_FIRE)
 end
 function s.tkncost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -45,14 +45,14 @@ function s.tknop(e,tp,eg,ep,ev,re,r,rp)
 	local token=Duel.CreateToken(tp,id+1)
 	if Duel.SpecialSummonStep(token,0,tp,tp,false,false,POS_FACEUP) then
 		local c=e:GetHandler()
-		--Cannot Special Summon, except "Libromancer" monsters
+		--Cannot Special Summon, except "Librobouncer" monsters
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_FIELD)
 		e1:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
 		e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 		e1:SetRange(LOCATION_ONFIELD)
 		e1:SetTargetRange(1,0)
-		e1:SetTarget(aux.NOT(aux.TargetBoolFunction(Card.IsSetCard,SET_LIBROMANCER)))
+		e1:SetTarget(aux.NOT(aux.TargetBoolFunction(Card.IsSetCard,SET_LIBROBOUNCER)))
 		token:RegisterEffect(e1,true)
 		--Change its Level
 		local e2=Effect.CreateEffect(c)

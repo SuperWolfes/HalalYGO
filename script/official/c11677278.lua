@@ -1,5 +1,5 @@
 --Japanese name
---Mimighoul Armor
+--Mimirahul Armor
 --scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.selfspop)
 	c:RegisterEffect(e2)
 end
-s.listed_series={SET_MIMIGHOUL}
+s.listed_series={SET_MIMIRAHUL}
 function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local c=e:GetHandler()
@@ -34,12 +34,12 @@ function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.effop(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	--This turn, "Mimighoul" monsters cannot be destroyed by battle
+	--This turn, "Mimirahul" monsters cannot be destroyed by battle
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_INDESTRUCTABLE_BATTLE)
 	e1:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
-	e1:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,SET_MIMIGHOUL))
+	e1:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,SET_MIMIRAHUL))
 	e1:SetValue(1)
 	e1:SetReset(RESET_PHASE|PHASE_END)
 	Duel.RegisterEffect(e1,tp)

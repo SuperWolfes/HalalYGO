@@ -3,7 +3,7 @@
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--2 "Prank-Kids" monsters
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x120),2,2)
 	--A "Prank-Kids" pointed by this card gains 1000 ATK/DEF
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.atktg)
 	e1:SetValue(1000)
 	c:RegisterEffect(e1)
-	--Add 2 "Prank-Kids" cards from GY
+	--Add 2 "Prank-Kids" cards from RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TOHAND)
@@ -51,7 +51,7 @@ function s.thcheck(sg,e,tp)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	local g=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_GRAVE,0,nil,e,tp)
+	local g=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_REST,0,nil,e,tp)
 	if chk==0 then return aux.SelectUnselectGroup(g,e,tp,2,2,s.thcheck,0) end
 	local tg=aux.SelectUnselectGroup(g,e,tp,2,2,s.thcheck,1,tp,HINTMSG_ATOHAND)
 	Duel.SetTargetCard(tg)

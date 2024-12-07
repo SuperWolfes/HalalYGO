@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Set 1 "Ghoti" Trap that is banished or in the GY
+	--Set 1 "Ghoti" Trap that is banished or in the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
@@ -26,7 +26,7 @@ function s.initial_effect(c)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(s.setcond)
 	e2:SetTarget(s.settg)
-	e2:SetOperation(s.setop)
+	e2:SetOperation(s.vetop)
 	c:RegisterEffect(e2)
 end
 s.listed_series={SET_GHOTI}
@@ -56,15 +56,15 @@ function s.setfilter(c)
 	return c:IsTrap() and c:IsFaceup() and c:IsSetCard(SET_GHOTI) and c:IsSSetable()
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE|LOCATION_REMOVED) and s.setfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.setfilter,tp,LOCATION_GRAVE|LOCATION_REMOVED,0,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_REST|LOCATION_REMOVED) and s.setfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.setfilter,tp,LOCATION_REST|LOCATION_REMOVED,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
-	local g=Duel.SelectTarget(tp,s.setfilter,tp,LOCATION_GRAVE|LOCATION_REMOVED,0,1,1,nil)
-	if g:GetFirst():IsLocation(LOCATION_GRAVE) then
-		Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,tp,0)
+	local g=Duel.SelectTarget(tp,s.setfilter,tp,LOCATION_REST|LOCATION_REMOVED,0,1,1,nil)
+	if g:GetFirst():IsLocation(LOCATION_REST) then
+		Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,tp,0)
 	end
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and tc:IsSSetable() then
 		Duel.SSet(tp,tc)

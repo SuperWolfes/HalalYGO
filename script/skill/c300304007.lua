@@ -1,4 +1,4 @@
---Forbidden Cyber Style Technique
+--Unliked Cyber Style Technique
 --Scripted by the Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
@@ -13,7 +13,7 @@ function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 	return aux.CanActivateSkill(tp) and Duel.GetLP(tp)<=1500
 		and Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)==0
 		and Duel.GetFlagEffect(ep,id)==0
-		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND+LOCATION_DECK+LOCATION_GRAVE,0,1,nil,e,tp)
+		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND+LOCATION_DECK+LOCATION_REST,0,1,nil,e,tp)
 end
 function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SKILL_FLIP,tp,id|(1<<32))
@@ -25,8 +25,8 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	local c=e:GetHandler()
 	local fid=c:GetFieldID()
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
-	local sg=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_HAND+LOCATION_DECK+LOCATION_GRAVE,0,1,math.min(ft,3),nil,e,tp)
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
+	local sg=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_HAND+LOCATION_DECK+LOCATION_REST,0,1,math.min(ft,3),nil,e,tp)
 	for tc in sg:Iter() do
 		Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP)
 		tc:RegisterFlagEffect(id,RESET_EVENT|RESETS_STANDARD&~RESET_TOFIELD,0,1,fid)

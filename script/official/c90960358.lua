@@ -1,8 +1,8 @@
 --トゥーン・ブラック・マジシャン・ガール
---Toon Dark Magician Girl
+--Toon Dark Mentor Girl
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--special summon
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
@@ -53,7 +53,7 @@ function s.initial_effect(c)
 	e8:SetValue(s.val)
 	c:RegisterEffect(e8)
 end
-s.listed_names={15259703,CARD_DARK_MAGICIAN,30208479}
+s.listed_names={15259703,CARD_DARK_MENTOR,30208479}
 function s.spcon(e,c)
 	if c==nil then return true end
 	return Duel.CheckReleaseGroup(c:GetControler(),aux.TRUE,1,false,1,true,c,c:GetControler(),nil,false,nil)
@@ -101,5 +101,5 @@ function s.atklimit(e,tp,eg,ep,ev,re,r,rp)
 	e:GetHandler():RegisterEffect(e1)
 end
 function s.val(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsCode,c:GetControler(),LOCATION_GRAVE,LOCATION_GRAVE,nil,CARD_DARK_MAGICIAN,30208479)*300
+	return Duel.GetMatchingGroupCount(Card.IsCode,c:GetControler(),LOCATION_REST,LOCATION_REST,nil,CARD_DARK_MENTOR,30208479)*300
 end

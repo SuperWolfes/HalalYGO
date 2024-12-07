@@ -35,8 +35,8 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if tc1:IsFacedown() or not tc1:IsRelateToEffect(e) then return end
 	local og=tc1:GetOverlayGroup()
 	if #og==0 then return end
-	if Duel.SendtoGrave(og,REASON_EFFECT)~=0 and tc2:IsFaceup() and tc2:IsRelateToEffect(e) and c:IsRelateToEffect(e) then
-		c:CancelToGrave()
+	if Duel.SendtoRest(og,REASON_EFFECT)~=0 and tc2:IsFaceup() and tc2:IsRelateToEffect(e) and c:IsRelateToEffect(e) then
+		c:CancelToRest()
 		Duel.Overlay(tc2,c)
 	end
 end

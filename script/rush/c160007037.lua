@@ -2,7 +2,7 @@
 --Newsflash the Journalistic Juggernaut
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion materials
 	Fusion.AddProcMix(c,true,true,CARD_PRINTING_PRESSER,CARD_SCOOP_SCOOTER)
 	--Make monsters lose ATK

@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	--draw
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
-	e2:SetCategory(CATEGORY_TOGRAVE+CATEGORY_DRAW)
+	e2:SetCategory(CATEGORY_TOREST+CATEGORY_DRAW)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_DRAW)
@@ -45,14 +45,14 @@ function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local tc=e:GetLabelObject()
 	tc:CreateEffectRelation(e)
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,tc,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,tc,1,0,0)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_DRAW,nil,1,tp,1)
 end
 function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetLabelObject()
 	if not e:GetHandler():IsRelateToEffect(e) or not tc:IsRelateToEffect(e) then return end
-	Duel.SendtoGrave(tc,REASON_EFFECT)
-	if tc:IsLocation(LOCATION_GRAVE) and Duel.IsPlayerCanDraw(tp,1) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+	Duel.SendtoRest(tc,REASON_EFFECT)
+	if tc:IsLocation(LOCATION_REST) and Duel.IsPlayerCanDraw(tp,1) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.BreakEffect()
 		Duel.Draw(tp,1,REASON_EFFECT)
 	end

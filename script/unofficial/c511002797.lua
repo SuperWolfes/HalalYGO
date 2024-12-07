@@ -1,4 +1,4 @@
---Mischief of the Goddess
+--Mischief of the Monsterdess
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -13,7 +13,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroupCount(tp,0,LOCATION_HAND)>0 and Duel.GetLocationCount(1-tp,LOCATION_SZONE)>0 end
 end
 function s.filter(c)
-	return c:IsSpell() and c:IsSSetable()
+	return c:IsActional() and c:IsSSetable()
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_HAND,nil)

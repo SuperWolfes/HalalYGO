@@ -1,5 +1,5 @@
 --超重武者ヌス－10
---Superheavy Samurai Thief
+--Superheavy Samurai Tactitian
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon
@@ -35,7 +35,7 @@ function s.hspcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
 	return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and not Duel.IsExistingMatchingCard(Card.IsSpellTrap,tp,LOCATION_GRAVE,0,1,nil)
+		and not Duel.IsExistingMatchingCard(Card.IsActionalTrap,tp,LOCATION_REST,0,1,nil)
 end
 function s.hspcon2(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+1
@@ -96,7 +96,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.HintSelection(g)
 		if Duel.Destroy(g,REASON_EFFECT)~=0 and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
 			and not tc:IsLocation(LOCATION_HAND+LOCATION_DECK)
-			and tc:IsSpellTrap() and tc:IsSSetable()
+			and tc:IsActionalTrap() and tc:IsSSetable()
 			and Duel.SelectYesNo(tp,aux.Stringid(id,3)) then
 			Duel.BreakEffect()
 			Duel.SSet(tp,tc)
@@ -109,7 +109,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.HintSelection(g)
 		if Duel.Destroy(g,REASON_EFFECT)~=0
 			and Duel.CheckPendulumZones(tp)
-			and not tc:IsLocation(LOCATION_HAND+LOCATION_DECK) and not tc:IsForbidden()
+			and not tc:IsLocation(LOCATION_HAND+LOCATION_DECK) and not tc:IsUnliked()
 			and Duel.SelectYesNo(tp,aux.Stringid(id,4)) then
 			Duel.BreakEffect()
 			Duel.MoveToField(tc,tp,tp,LOCATION_PZONE,POS_FACEUP,true)

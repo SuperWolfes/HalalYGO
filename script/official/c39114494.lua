@@ -1,5 +1,5 @@
 --粛声なる祝福
---Blessing of the Voiceless Voice
+--Boiling of the Voiceless Voice
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--Add to the hand 1 "Voiceless Voice" card in your GY or among your face-up banished cards
+	--Add to the hand 1 "Voiceless Voice" card in your RP or among your face-up banished cards
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TOHAND)
@@ -19,8 +19,8 @@ function s.initial_effect(c)
 	e2:SetTarget(s.thtg)
 	e2:SetOperation(s.thop)
 	c:RegisterEffect(e2)
-	--Ritual Summon 1 Ritual LIGHT Warrior or Dragon Monster
-	local e3=Ritual.CreateProc({handler=c,
+	--Locked Summon 1 Locked LIGHT Warrior or Dragon Monster
+	local e3=Locked.CreateProc({handler=c,
 								lvtype=RITPROC_GREATER,
 								filter=s.ritfilter,
 								desc=aux.Stringid(id,1),
@@ -42,10 +42,10 @@ function s.thfilter(c)
 	return c:IsSetCard(SET_VOICELESS_VOICE) and c:IsAbleToHand() and c:IsFaceup() and not c:IsCode(id)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE|LOCATION_REMOVED) and chkc:IsControler(tp) and s.thfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.thfilter,tp,LOCATION_GRAVE|LOCATION_REMOVED,0,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_REST|LOCATION_REMOVED) and chkc:IsControler(tp) and s.thfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.thfilter,tp,LOCATION_REST|LOCATION_REMOVED,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_GRAVE|LOCATION_REMOVED,0,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_REST|LOCATION_REMOVED,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,tp,0)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
@@ -58,7 +58,7 @@ function s.ritfilter(c)
 	return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_WARRIOR|RACE_DRAGON)
 end
 function s.cfilter(c)
-	return c:IsFaceup() and not c:IsRitualMonster()
+	return c:IsFaceup() and not c:IsLockedMonster()
 end
 function s.stage2(mat,e,tp,eg,ep,ev,re,r,rp,tc)
 	--Cannot be destroyed by battle

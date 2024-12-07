@@ -1,5 +1,5 @@
 --ピーキング・マジシャン
---Peeking Magician
+--Peeking Mentor
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)

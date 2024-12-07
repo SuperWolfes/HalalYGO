@@ -3,7 +3,7 @@
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	--Increase the ATK of a monster and shuffle monsters from the GY into the Deck
+	--Increase the ATK of a monster and shuffle monsters from the RP into the Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_TODECK)
@@ -52,7 +52,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESETS_STANDARD_PHASE_END)
 		e1:SetValue(500)
 		tc:RegisterEffect(e1)
-		local og=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.gyfilter),tp,0,LOCATION_GRAVE,nil)
+		local og=Duel.GetMatchingGroup(aux.RestValleyFilter(s.gyfilter),tp,0,LOCATION_REST,nil)
 		if #og>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
 			local sg=og:Select(tp,1,5,nil)

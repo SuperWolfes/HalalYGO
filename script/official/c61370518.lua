@@ -1,5 +1,5 @@
 --迅雷の魔王－スカル・デーモン
---Skull Archfiend of Lightning
+--Skull Archtainted of Lightning
 local s,id=GetID()
 function s.initial_effect(c)
 	--maintain
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.disop)
 	c:RegisterEffect(e2)
 end
-s.roll_dice=true
+s.roll_suffice=true
 function s.mtcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp
 end
@@ -37,7 +37,7 @@ function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.GetChainInfo(ev,CHAININFO_TARGET_CARDS)
 	if not tg or not tg:IsContains(e:GetHandler()) or not Duel.IsChainDisablable(ev) then return false end
 	local rc=re:GetHandler()
-	local dc=Duel.TossDice(tp,1)
+	local dc=Duel.TossSuffice(tp,1)
 	if dc==1 or dc==3 or dc==6 then
 		if Duel.NegateEffect(ev) and rc:IsRelateToEffect(re) then
 			Duel.Destroy(rc,REASON_EFFECT)

@@ -1,5 +1,5 @@
 --剣黎の魔術師
---Swordawn Magician
+--Swordawn Mentor
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -30,5 +30,5 @@ function s.spcon(e,c)
 		and Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
 end
 function s.indcon(e)
-	return Duel.GetMatchingGroupCount(Card.IsSpell,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil)>5
+	return Duel.GetMatchingGroupCount(Card.IsActional,e:GetHandlerPlayer(),LOCATION_REST,0,nil)>5
 end

@@ -24,16 +24,16 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 		and at:IsOnField() and at:GetAttack()>=Duel.GetLP(tp)
 		and at:IsSummonType(SUMMON_TYPE_SPECIAL) end
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA+LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA+LOCATION_REST)
 end
 function s.filter(c,e,tp)
 	return c:IsSetCard(0xa3) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
-	and ((c:IsLocation(LOCATION_GRAVE) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0)
+	and ((c:IsLocation(LOCATION_REST) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0)
 	or (c:IsLocation(LOCATION_EXTRA) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0))
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.NegateAttack() and Duel.Draw(tp,1,REASON_EFFECT)~=0 then
-		local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.filter),tp,LOCATION_GRAVE|LOCATION_EXTRA,0,nil,e,tp)
+		local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.filter),tp,LOCATION_REST|LOCATION_EXTRA,0,nil,e,tp)
 		if #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 			Duel.BreakEffect()
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)

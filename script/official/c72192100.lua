@@ -1,5 +1,5 @@
 --デスルークデーモン
---Desrook Archfiend
+--Desrook Archtainted
 local s,id=GetID()
 function s.initial_effect(c)
 	--maintain
@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetType(EFFECT_TYPE_QUICK_O)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_STEP)
-	e3:SetCode(EVENT_TO_GRAVE)
+	e3:SetCode(EVENT_TO_REST)
 	e3:SetRange(LOCATION_HAND)
 	e3:SetCost(s.spcost)
 	e3:SetTarget(s.sptg)
@@ -33,7 +33,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 s.listed_names={35975813}
-s.roll_dice=true
+s.roll_suffice=true
 function s.mtcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp
 end
@@ -50,15 +50,15 @@ function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.GetChainInfo(ev,CHAININFO_TARGET_CARDS)
 	if not tg or not tg:IsContains(e:GetHandler()) or not Duel.IsChainDisablable(ev) then return false end
 	local rc=re:GetHandler()
-	local dc=Duel.TossDice(tp,1)
+	local dc=Duel.TossSuffice(tp,1)
 	if dc~=3 then return end
 	if Duel.NegateEffect(ev) and rc:IsRelateToEffect(re) then
 		Duel.Destroy(rc,REASON_EFFECT)
 	end
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
+	Duel.SendtoRest(e:GetHandler(),REASON_COST)
 end
 function s.filter(c,e,tp)
 	return c:IsCode(35975813) and c:IsPreviousControler(tp) and c:IsPreviousLocation(LOCATION_ONFIELD)

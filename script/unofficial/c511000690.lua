@@ -1,5 +1,5 @@
 --虹色の祝福
---Rainbow Blessing (DM)
+--Rainbow Boiling (DM)
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddEquipProcedure(c,nil,aux.FilterBoolFunction(Card.IsCode,CARD_KURIBOH))

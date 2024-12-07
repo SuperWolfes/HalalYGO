@@ -32,14 +32,14 @@ function s.eqfilter1(c,tp)
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	if chk==0 then return Duel.IsExistingTarget(s.eqfilter1,tp,LOCATION_GRAVE,0,1,nil,tp) end
+	if chk==0 then return Duel.IsExistingTarget(s.eqfilter1,tp,LOCATION_REST,0,1,nil,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local g1=Duel.SelectTarget(tp,s.eqfilter1,tp,LOCATION_GRAVE,0,1,1,nil,tp)
+	local g1=Duel.SelectTarget(tp,s.eqfilter1,tp,LOCATION_REST,0,1,1,nil,tp)
 	local tc=g1:GetFirst()
 	e:SetLabelObject(tc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
 	local g2=Duel.SelectTarget(tp,Card.IsFaceup,tp,0,LOCATION_MZONE,1,1,nil)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,tc,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,tc,1,0,0)
 end
 function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

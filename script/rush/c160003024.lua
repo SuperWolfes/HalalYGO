@@ -35,7 +35,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetReset(RESETS_STANDARD_PHASE_END)
 	c:RegisterEffect(e1)
 	-- shuffle and destroy
-	local sg=Duel.GetMatchingGroup(s.sfilter,tp,LOCATION_GRAVE,0,nil)
+	local sg=Duel.GetMatchingGroup(s.sfilter,tp,LOCATION_REST,0,nil)
 	if aux.SelectUnselectGroup(sg,1,tp,2,2,s.rescon,0,tp) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		local cg=aux.SelectUnselectGroup(sg,1,tp,2,2,s.rescon,1,tp)
 		local sg2=Duel.GetMatchingGroup(s.desfilter,tp,0,LOCATION_MZONE,nil)

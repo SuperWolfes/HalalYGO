@@ -44,8 +44,8 @@ function s.rdtg(e,c)
 	return c:IsSetCard(0xbb) and c:GetOriginalLevel()>=2
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
+	Duel.SendtoRest(e:GetHandler(),REASON_COST)
 end
 function s.fcheck(tp,sg,fc)
 	return sg:FilterCount(Card.IsLocation,nil,LOCATION_DECK)<=6
@@ -56,11 +56,11 @@ function s.dmcon(tp)
 end
 function s.fextra(e,tp,mg)
 	if s.dmcon(tp) then
-		return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToGrave),tp,LOCATION_DECK,0,nil),s.fcheck
+		return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRest),tp,LOCATION_DECK,0,nil),s.fcheck
 	end
 	return nil
 end
 function s.extratg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end

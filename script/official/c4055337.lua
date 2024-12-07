@@ -1,5 +1,5 @@
 --オルフェゴール・トロイメア
---Orcust Knightmare
+--Coreust Knightmare
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
@@ -11,10 +11,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 	--gain atk
 	local e2=Effect.CreateEffect(c)
-	e2:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_TOGRAVE)
+	e2:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_TOREST)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetCountLimit(1,id)
 	e2:SetCost(aux.bfgcost)
@@ -35,14 +35,14 @@ function s.indes(e,c)
 	return c:IsLinkMonster()
 end
 function s.atkcon1(e,tp,eg,ep,ev,re,r,rp)
-	return not Duel.IsPlayerAffectedByEffect(tp,CARD_ORCUSTRATED_BABEL)
+	return not Duel.IsPlayerAffectedByEffect(tp,CARD_COREUSTRATED_BABEL)
 end
 function s.atkcon2(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsPlayerAffectedByEffect(tp,CARD_ORCUSTRATED_BABEL)
+	return Duel.IsPlayerAffectedByEffect(tp,CARD_COREUSTRATED_BABEL)
 		and (Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated())
 end
 function s.filter(c)
-	return c:IsRace(RACE_MACHINE) and c:IsAttribute(ATTRIBUTE_DARK) and not c:IsCode(id) and c:IsAbleToGrave()
+	return c:IsRace(RACE_MACHINE) and c:IsAttribute(ATTRIBUTE_DARK) and not c:IsCode(id) and c:IsAbleToRest()
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() end
@@ -50,16 +50,16 @@ function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 	Duel.SelectTarget(tp,Card.IsFaceup,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil)
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
 		local gc=g:GetFirst()
 		local lv=gc:GetLevel()
-		if Duel.SendtoGrave(gc,REASON_EFFECT)~=0 and gc:IsLocation(LOCATION_GRAVE) and tc and tc:IsRelateToEffect(e) and tc:IsFaceup() then
+		if Duel.SendtoRest(gc,REASON_EFFECT)~=0 and gc:IsLocation(LOCATION_REST) and tc and tc:IsRelateToEffect(e) and tc:IsFaceup() then
 			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetCode(EFFECT_UPDATE_ATTACK)

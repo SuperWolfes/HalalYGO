@@ -25,9 +25,9 @@ function s.initial_effect(c)
 	e2:SetLabelObject(e1)
 end
 local CARD_ELEMENTAL_PLACE=61557074
-s.listed_series={SET_ELEMENTSABER,SET_ELEMENTAL_LORD}
+s.listed_series={SET_ELEMENTSABER,SET_ELEMENTAL_WATCHER}
 function s.costfilter(c)
-	return c:IsMonster() and c:IsAbleToGraveAsCost()
+	return c:IsMonster() and c:IsAbleToRestAsCost()
 		and (c:IsSetCard(SET_ELEMENTSABER) or c:IsLocation(LOCATION_HAND))
 end
 function s.regfilter(c,attr)
@@ -41,7 +41,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local loc=LOCATION_HAND
 	if #fg>0 then loc=LOCATION_HAND|LOCATION_DECK end
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,loc,0,2,e:GetHandler()) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,loc,0,2,2,e:GetHandler())
 	if g:IsExists(Card.IsLocation,1,nil,LOCATION_DECK) then
 		local fc=nil
@@ -57,7 +57,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if g:IsExists(s.regfilter,1,nil,ATTRIBUTE_EARTH|ATTRIBUTE_WIND) then flag=flag|0x1 end
 	if g:IsExists(s.regfilter,1,nil,ATTRIBUTE_WATER|ATTRIBUTE_FIRE) then flag=flag|0x2 end
 	if g:IsExists(s.regfilter,1,nil,ATTRIBUTE_LIGHT|ATTRIBUTE_DARK) then flag=flag|0x4 end
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	e:SetLabel(flag)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -107,5 +107,5 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.immtg(e,c)
-	return c:IsSetCard(SET_ELEMENTSABER) or c:IsSetCard(SET_ELEMENTAL_LORD)
+	return c:IsSetCard(SET_ELEMENTSABER) or c:IsSetCard(SET_ELEMENTAL_WATCHER)
 end

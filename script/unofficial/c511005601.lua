@@ -25,7 +25,7 @@ function s.cfilter(c)
 	return not c:IsHasEffect(511001283) and s.filter(c)
 end
 function s.filter(c)
-	return c:IsType(TYPE_TRAP+TYPE_SPELL) and c:IsType(TYPE_CONTINUOUS) and c:IsFaceup() and c:CheckActivateEffect(false,false,false)~=nil
+	return c:IsType(TYPE_TRAP+TYPE_ACTIONAL) and c:IsType(TYPE_CONTINUOUS) and c:IsFaceup() and c:CheckActivateEffect(false,false,false)~=nil
 end
 function s.target(e,tp,eg,ev,ep,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
@@ -57,6 +57,6 @@ function s.activate(e,tp,eg,ev,ep,re,r,rp)
 	local op=te:GetOperation()
 	if op then op(e,tp,eg,ep,ev,re,r,rp) end
 	if chk then
-		c:CancelToGrave()
+		c:CancelToRest()
 	end
 end

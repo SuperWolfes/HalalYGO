@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Synchro Summon procedure
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	--Cannot be destroyed by battle
@@ -12,22 +12,22 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_INDESTRUCTABLE_BATTLE)
 	e1:SetValue(1)
 	c:RegisterEffect(e1)
-	--Your Dinosaur monsters Special Summoned from the GY cannot be destroyed by the opponent's effects
+	--Your Dinosaur monsters Special Summoned from the RP cannot be destroyed by the opponent's effects
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetTargetRange(LOCATION_MZONE,0)
-	e2:SetTarget(function(_,c) return c:IsRace(RACE_DINOSAUR) and c:IsSummonLocation(LOCATION_GRAVE) end)
+	e2:SetTarget(function(_,c) return c:IsRace(RACE_DINOSAUR) and c:IsSummonLocation(LOCATION_REST) end)
 	e2:SetValue(aux.indoval)
 	c:RegisterEffect(e2)
-	--Opponent cannot target with effects Dinosaur monsters Special Summoned from the GY
+	--Opponent cannot target with effects Dinosaur monsters Special Summoned from the RP
 	local e3=e2:Clone()
 	e3:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
 	e3:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
 	e3:SetValue(aux.tgoval)
 	c:RegisterEffect(e3)
-	--Shuffle 1 Normal Monster from your GY into the Deck and Special Summon this card
+	--Shuffle 1 Normal Monster from your RP into the Deck and Special Summon this card
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,0))
 	e4:SetCategory(CATEGORY_TODECK+CATEGORY_SPECIAL_SUMMON)
@@ -43,13 +43,13 @@ function s.tdfilter(c)
 	return c:IsType(TYPE_NORMAL) and c:IsAbleToDeck()
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_GRAVE,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_GRAVE)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_REST)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,e:GetHandler(),1,tp,0)
 end
 function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_REST,0,1,1,nil)
 	if #g==0 then return end
 	Duel.HintSelection(g,true)
 	local c=e:GetHandler()

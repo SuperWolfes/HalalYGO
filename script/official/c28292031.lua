@@ -30,7 +30,7 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_PRE_DAMAGE_CALCULATE)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCondition(s.nodamcon)
 	e2:SetCost(aux.bfgcost)
 	e2:SetOperation(s.nodamop)
@@ -52,7 +52,7 @@ function s.effilter(c)
 	return eff and eff:GetOperation()~=nil
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.effilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.effilter,tp,LOCATION_REST,0,1,nil) end
 	Duel.PayLPCost(tp,Duel.GetLP(tp)//2)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -64,7 +64,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	end
 	if chk==0 then return true end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.effilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.effilter,tp,LOCATION_REST,0,1,1,nil)
 	if Duel.Remove(g,POS_FACEUP,REASON_COST)==0 then return end
 	local te,ceg,cep,cev,cre,cr,crp=g:GetFirst():CheckActivateEffect(false,true,true)
 	e:SetLabel(te:GetLabel())

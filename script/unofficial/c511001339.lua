@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz Summon
 	Xyz.AddProcedure(c,nil,2,3)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Add 1 Hallucination Counter to a monster
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

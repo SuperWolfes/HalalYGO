@@ -1,10 +1,10 @@
 --龍大神
 local s,id=GetID()
 function s.initial_effect(c)
-	--tograve
+	--torest
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_TOGRAVE)
+	e1:SetCategory(CATEGORY_TOREST)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e1:SetRange(LOCATION_MZONE)
@@ -18,14 +18,14 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,1-tp,LOCATION_EXTRA)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,1-tp,LOCATION_EXTRA)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local tg=Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,0,LOCATION_EXTRA,nil)
+	local tg=Duel.GetMatchingGroup(Card.IsAbleToRest,tp,0,LOCATION_EXTRA,nil)
 	if #tg==0 then return end
-	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOREST)
 	local g=tg:Select(1-tp,1,1,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end

@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_SPSUMMON_CONDITION)
 	e1:SetValue(s.splimit)
 	c:RegisterEffect(e1)
-	--Cannot be targeted by opponent's spell effects
+	--Cannot be targeted by opponent's actional effects
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
@@ -56,7 +56,7 @@ function s.splimit(e,se,sp,st)
 end
 	--Cannot be targeted by opponent's trap effects
 function s.tgval(e,re,rp)
-	return aux.tgoval(e,re,rp) and re:IsActiveType(TYPE_SPELL)
+	return aux.tgoval(e,re,rp) and re:IsActiveType(TYPE_ACTIONAL)
 end
 	--Opponent activates a trap effect
 function s.drcon(e,tp,eg,ep,ev,re,r,rp)

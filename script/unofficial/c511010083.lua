@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,1,3)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--attack up
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(48928529,0))

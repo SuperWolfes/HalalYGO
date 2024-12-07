@@ -50,7 +50,7 @@ function s.tdfilter(c,e)
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	local tg=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_GRAVE,0,nil,e)
+	local tg=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_REST,0,nil,e)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,2)
 		and aux.SelectUnselectGroup(tg,e,tp,5,5,aux.dncheck,0) end
 	local g=aux.SelectUnselectGroup(tg,e,tp,5,5,aux.dncheck,1,tp,HINTMSG_TODECK)

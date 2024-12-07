@@ -1,3 +1,3 @@
 --セブンスロード・ウィッチ
---Sevens Road Witch
+--Sevens Road Mint
 Duel.LoadCardScriptAlias(160401001)

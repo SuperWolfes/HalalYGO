@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion Materials
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,44203504,46700124)
 	--Gains 500 ATK for each Machine monster on the field
 	local e1=Effect.CreateEffect(c)

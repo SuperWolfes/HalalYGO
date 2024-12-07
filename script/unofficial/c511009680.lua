@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,s.matfilter,2)
 	--Immune
 	local e1=Effect.CreateEffect(c)
@@ -51,7 +51,7 @@ function s.costfilter(c,dg,lg)
 	return c:IsFaceup() and c:IsRace(RACE_PLANT) and c:IsLinkMonster() and lg:IsContains(c)
 end
 function s.desfilter(c,e)
-	return c:IsFaceup() and c:IsSpellTrap() and (not e or c:IsCanBeEffectTarget(e))
+	return c:IsFaceup() and c:IsActionalTrap() and (not e or c:IsCanBeEffectTarget(e))
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(100)

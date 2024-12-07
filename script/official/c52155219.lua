@@ -45,7 +45,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.immfilter(c)
-	return c:IsLinkMonster() and c:IsSetCard(SET_SALAMANGREAT) and c:IsReincarnationSummoned()
+	return c:IsLinkMonster() and c:IsSetCard(SET_SALAMANGREAT) and c:IsReincorporationSummoned()
 end
 function s.immop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()

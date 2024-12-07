@@ -1,8 +1,8 @@
 --天の冥福
---Heavenly Rest
+--Spectrumly Rest
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special summon 1 level 1 normal monster from GY
+	--Special summon 1 level 1 normal monster from RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_POSITION+CATEGORY_DESTROY)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)

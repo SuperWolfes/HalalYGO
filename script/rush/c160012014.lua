@@ -2,7 +2,7 @@
 --Purple-Eyes Star Cat
 local s,id=GetID()
 function s.initial_effect(c)
-	--Set 1 "Stray Force" from your GY
+	--Set 1 "Stray Fcoree" from your RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -17,7 +17,7 @@ function s.setfilter(c)
 	return c:IsCode(160012061) and c:IsSSetable()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_REST,0,1,nil) end
 end
 function s.filter2(c)
 	return c:IsFaceup() and c:IsDefense(200) and c:IsLevelAbove(7) and c:GetEffectCount(EFFECT_EXTRA_ATTACK)==0
@@ -25,7 +25,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Effect
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.setfilter),tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.setfilter),tp,LOCATION_REST,0,1,1,nil)
 	if #g==0 or Duel.SSet(tp,g)==0 then return end
 	if Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_MZONE,0,1,nil,tp) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.BreakEffect()

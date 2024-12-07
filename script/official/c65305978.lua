@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-	--Destruction replacement
+	--Mismatching replacement
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EFFECT_DESTROY_REPLACE)
@@ -38,7 +38,7 @@ end
 s.listed_names={57554544} --Fire King Island
 s.listed_series={SET_FIRE_KING}
 function s.plfilter(c,tp)
-	return c:IsCode(57554544) and not c:IsForbidden()
+	return c:IsCode(57554544) and not c:IsUnliked()
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.plfilter,tp,LOCATION_DECK,0,nil,tp)

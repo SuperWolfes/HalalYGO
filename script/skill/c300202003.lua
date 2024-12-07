@@ -26,7 +26,7 @@ function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetFlagEffect(ep,id)>0 then return end
 	--condition
 	return aux.CanActivateSkill(tp) and Duel.IsExistingMatchingCard(s.revfilter,tp,LOCATION_HAND,0,1,nil)
-		and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK+LOCATION_GRAVE,0,1,nil,17985575)
+		and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK+LOCATION_REST,0,1,nil,17985575)
 end
 function s.revfilter(c)
 	return c:IsCode(43973174) and not c:IsPublic()
@@ -41,14 +41,14 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	local g1=Duel.SelectMatchingCard(tp,s.revfilter,tp,LOCATION_HAND,0,1,1,nil)
 	if #g1>0 then
 		Duel.ConfirmCards(1-tp,g1)
-		local g2=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_DECK+LOCATION_GRAVE,0,1,1,nil,17985575)
+		local g2=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil,17985575)
 		if #g2>0 then
 			Duel.SendtoHand(g2,nil,REASON_EFFECT)
 			Duel.ConfirmCards(1-tp,g2)
 		end
 	end
 end
-----If you normal summon Lord of D.
+----If you normal summon Watcher of D.
 function s.thfilter(c,code)
 	return c:IsCode(code) and c:IsAbleToHand()
 end
@@ -58,7 +58,7 @@ end
 function s.flipcon2(e,tp,eg,ep,ev,re,r,rp)
 	--opd check
 	if Duel.GetFlagEffect(ep,id)>0 then return end
-	return eg:IsExists(s.cfilter,1,nil,tp) and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK+LOCATION_GRAVE,0,1,nil,43973174)
+	return eg:IsExists(s.cfilter,1,nil,tp) and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK+LOCATION_REST,0,1,nil,43973174)
 end
 function s.flipop2(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
@@ -67,7 +67,7 @@ function s.flipop2(e,tp,eg,ep,ev,re,r,rp)
 		--opd register
 		Duel.RegisterFlagEffect(ep,id,0,0,0)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-		local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_DECK+LOCATION_GRAVE,0,1,1,nil,43973174)
+		local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil,43973174)
 		if #g>0 then
 			Duel.SendtoHand(g,nil,REASON_EFFECT)
 			Duel.ConfirmCards(1-tp,g)

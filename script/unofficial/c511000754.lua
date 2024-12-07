@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.desfilter(c,ec)
-	return c:IsSpellTrap() and Duel.IsExistingMatchingCard(aux.TRUE,0,LOCATION_ONFIELD,LOCATION_ONFIELD,1,Group.FromCards(c,ec))
+	return c:IsActionalTrap() and Duel.IsExistingMatchingCard(aux.TRUE,0,LOCATION_ONFIELD,LOCATION_ONFIELD,1,Group.FromCards(c,ec))
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()

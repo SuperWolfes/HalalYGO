@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,aux.FilterSummonCode(68505803),1,1,Synchro.NonTuner(nil),1,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--material verification check
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -91,19 +91,19 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.target1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroupCount(tp,0,LOCATION_HAND)>0 end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,1-tp,LOCATION_HAND)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,1-tp,LOCATION_HAND)
 end
 function s.operation1(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(tp,0,LOCATION_HAND)
 	if #g==0 then return end
 	local sg=g:RandomSelect(tp,1)
-	Duel.SendtoGrave(sg,REASON_EFFECT)
+	Duel.SendtoRest(sg,REASON_EFFECT)
 end
 function s.target2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsOnField() and chkc:IsSpellTrap() end
-	if chk==0 then return Duel.IsExistingTarget(Card.IsSpellTrap,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) end
+	if chkc then return chkc:IsOnField() and chkc:IsActionalTrap() end
+	if chk==0 then return Duel.IsExistingTarget(Card.IsActionalTrap,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-	local g=Duel.SelectTarget(tp,Card.IsSpellTrap,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
+	local g=Duel.SelectTarget(tp,Card.IsActionalTrap,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
 end
 function s.operation2(e,tp,eg,ep,ev,re,r,rp)

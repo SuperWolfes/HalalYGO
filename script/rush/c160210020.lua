@@ -1,10 +1,10 @@
 --ブラック・ドラゴンズ・デーモン
---Black Dragon Skull Archfiend
+--Black Dragon Skull Archtainted
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,CARD_SUMMONED_SKULL,CARD_REDEYES_B_DRAGON)
 	--ATK increase
 	local e1=Effect.CreateEffect(c)

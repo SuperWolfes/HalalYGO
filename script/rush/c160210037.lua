@@ -1,5 +1,5 @@
 --超銀河王ロード・オブ・ギャラクティカ［Ｌ］
---Super Galaxy King Lord of Galactica [L]
+--Super Galaxy King Watcher of Galactica [L]
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -21,7 +21,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeckAsCost(tp,1) end
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsRace(RACE_GALAXY|RACE_DRAGON|RACE_MACHINE|RACE_SPELLCASTER) 
+	return c:IsFaceup() and c:IsRace(RACE_GALAXY|RACE_DRAGON|RACE_MACHINE|RACE_MENTOR) 
 		and c:IsAttackAbove(4000) and c:GetBaseAttack()>=4000 and c:IsNotMaximumModeSide()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)

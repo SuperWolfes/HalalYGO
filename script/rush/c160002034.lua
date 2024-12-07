@@ -21,9 +21,9 @@ function s.gyfilter(c)
 	return c:IsType(TYPE_NORMAL) and c:IsLevelAbove(1) and c:IsAbleToDeck()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.gyfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.gyfilter,tp,LOCATION_REST,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_ATKCHANGE,e:GetHandler(),1,tp,0)
-	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_REST)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -31,7 +31,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.PayLPCost(tp,800)
 	--Effect
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
-	local tc=Duel.SelectMatchingCard(tp,s.gyfilter,tp,LOCATION_GRAVE,0,1,1,nil):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,s.gyfilter,tp,LOCATION_REST,0,1,1,nil):GetFirst()
 	Duel.HintSelection(Group.FromCards(tc))
 	if tc and c:IsFaceup() then
 		local e1=Effect.CreateEffect(c)

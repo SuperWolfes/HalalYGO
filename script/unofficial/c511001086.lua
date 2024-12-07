@@ -28,14 +28,14 @@ function s.thfilter(c)
 	return c:IsSetCard(0x512) and c:IsMonster() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_GRAVE,0,nil,Duel.GetTurnCount())
+	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST,0,nil,Duel.GetTurnCount())
 	local ct=#g
 	if chk==0 then return ct>0 and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,ct,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,ct,tp,LOCATION_DECK)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_GRAVE,0,nil,Duel.GetTurnCount())
+	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST,0,nil,Duel.GetTurnCount())
 	if #g>0 then
 		Duel.Overlay(c,g)
 		local ct=c:GetOverlayCount()

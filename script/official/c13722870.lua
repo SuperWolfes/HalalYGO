@@ -2,9 +2,9 @@
 --Dark Flare Knight
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion Materials
-	Fusion.AddProcMix(c,true,true,CARD_DARK_MAGICIAN,CARD_FLAME_SWORDSMAN)
+	Fusion.AddProcMix(c,true,true,CARD_DARK_MENTOR,CARD_FLAME_SWORDSMAN)
 	--You take no Battle Damage from battles involving this card
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -17,13 +17,13 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e2:SetCode(EVENT_BATTLE_DESTROYED)
-	e2:SetCondition(function(e) return e:GetHandler():IsLocation(LOCATION_GRAVE) end)
+	e2:SetCondition(function(e) return e:GetHandler():IsLocation(LOCATION_REST) end)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
 end
-s.material_setcode=SET_DARK_MAGICIAN
-s.listed_names={CARD_DARK_MAGICIAN,CARD_FLAME_SWORDSMAN,49217579} --Mirage Knight
+s.material_setcode=SET_DARK_MENTOR
+s.listed_names={CARD_DARK_MENTOR,CARD_FLAME_SWORDSMAN,49217579} --Mirage Knight
 function s.spfilter(c,e,tp)
 	return c:IsCode(49217579) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
 end

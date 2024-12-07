@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.filter(c,tp)
-	return c:IsFaceup() and c:IsControler(tp) and c:IsRace(RACE_ZOMBIE)
+	return c:IsFaceup() and c:IsControler(tp) and c:IsRace(RACE_TOXIC)
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.filter,1,nil,tp)

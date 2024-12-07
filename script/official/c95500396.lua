@@ -1,5 +1,5 @@
 --超重武者装留チュウサイ
---Superheavy Samurai Soulpeacemaker
+--Superheavy Samurai Misspeacemaker
 local s,id=GetID()
 function s.initial_effect(c)
 	--equip
@@ -29,7 +29,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if c:IsLocation(LOCATION_MZONE) and c:IsFacedown() then return end
 	local tc=Duel.GetFirstTarget()
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 or tc:GetControler()==1-tp or tc:IsFacedown() or not tc:IsRelateToEffect(e) then
-		Duel.SendtoGrave(c,REASON_EFFECT)
+		Duel.SendtoRest(c,REASON_EFFECT)
 		return
 	end
 	Duel.Equip(tp,c,tc,true)
@@ -51,7 +51,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetLabelObject(tc)
 	e2:SetReset(RESET_EVENT+RESETS_STANDARD)
 	c:RegisterEffect(e2)
-	--tribute to special summon
+	--sort special summon
 	local e3=Effect.CreateEffect(c)
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_IGNITION)

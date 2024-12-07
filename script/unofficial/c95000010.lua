@@ -1,4 +1,4 @@
---Toon Masked Sorcerer
+--Toon Masked Scoreerer
 local s,id=GetID()
 function s.initial_effect(c)
 	--no type/attribute/level
@@ -43,10 +43,10 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return ep~=tp
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsAbleToHand() end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsAbleToHand() end
 	if chk==0 then return true end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local sg=Duel.SelectTarget(tp,Card.IsAbleToHand,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,1,nil)
+	local sg=Duel.SelectTarget(tp,Card.IsAbleToHand,tp,LOCATION_REST,LOCATION_REST,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,sg,#sg,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)

@@ -1,10 +1,10 @@
 --B・F－決戦のビッグ・バリスタ
---Battlewasp - Ballista the Armageddon
+--Battlewasp - Ballista the Cataclysm
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	--pierce
 	local e1=Effect.CreateEffect(c)
@@ -38,7 +38,7 @@ function s.cfilter(c)
 	return c:IsRace(RACE_INSECT) and c:IsMonster() and aux.SpElimFilter(c,true)
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_MZONE+LOCATION_REST,0,nil)
 	if chk==0 then return #g>0 and g:FilterCount(Card.IsAbleToRemoveAsCost,nil)==#g end
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
@@ -72,12 +72,12 @@ function s.spfilter(c,e,tp)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>2
-		and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
+		and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REMOVED,0,3,nil,e,tp) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,3,tp,LOCATION_REMOVED)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.GetLocationCount(tp,LOCATION_MZONE)<3 or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
+	if Duel.GetLocationCount(tp,LOCATION_MZONE)<3 or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_REMOVED,0,3,3,nil,e,tp)
 	if #g>0 then

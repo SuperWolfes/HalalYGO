@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
 	Link.AddProcedure(c,nil,2,4,s.lcheck)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--destroy
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

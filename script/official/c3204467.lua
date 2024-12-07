@@ -21,7 +21,7 @@ function s.vfilter(c)
 	return c:IsSetCard(0x3e) and c:IsRace(RACE_REPTILE)
 end
 function s.defval(e,c)
-	return Duel.GetMatchingGroupCount(s.vfilter,c:GetControler(),LOCATION_GRAVE,0,nil)*100
+	return Duel.GetMatchingGroupCount(s.vfilter,c:GetControler(),LOCATION_REST,0,nil)*100
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -38,7 +38,7 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.desfilter(c)
-	return c:IsType(TYPE_SPELL+TYPE_TRAP)
+	return c:IsType(TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and chkc:IsControler(1-tp) and s.desfilter(chkc) end

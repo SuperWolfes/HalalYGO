@@ -15,11 +15,11 @@ function s.initial_effect(c)
 	e1:SetOperation(s.op)
 	c:RegisterEffect(e1)
 end
-s.listed_series={SET_AMAZONESS}
+s.listed_series={SET_AMAZONIAN}
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SKILL_FLIP,tp,id|(1<<32))
 	Duel.Hint(HINT_CARD,tp,id)
-	--Reduce ATK if your "Amazoness" monster battled an opponent's monster and you took battle damage
+	--Reduce ATK if your "Amazonian" monster battled an opponent's monster and you took battle damage
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e1:SetCode(EVENT_BATTLED)
@@ -30,12 +30,12 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.bfilter(c)
-	return c:IsAttackPos() and c:IsSetCard(SET_AMAZONESS)
+	return c:IsAttackPos() and c:IsSetCard(SET_AMAZONIAN)
 end
 function s.condition(e)
 	local tp=e:GetHandlerPlayer()
 	local a,at=Duel.GetBattleMonster(tp)
-	return Duel.GetBattleDamage(tp)>0 and a and at and a:IsAttackPos() and a:IsSetCard(SET_AMAZONESS)
+	return Duel.GetBattleDamage(tp)>0 and a and at and a:IsAttackPos() and a:IsSetCard(SET_AMAZONIAN)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local cc,oc=Duel.GetBattleMonster(tp),Duel.GetBattleMonster(1-tp)
@@ -46,7 +46,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,0,id)
 	local cc,oc=Duel.GetBattleMonster(tp),Duel.GetBattleMonster(1-tp)
 	local atk=cc:GetAttack()
-	if cc and cc:IsSetCard(SET_AMAZONESS) and oc and not oc:IsStatus(STATUS_BATTLE_DESTROYED) then
+	if cc and cc:IsSetCard(SET_AMAZONIAN) and oc and not oc:IsStatus(STATUS_BATTLE_DESTROYED) then
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)

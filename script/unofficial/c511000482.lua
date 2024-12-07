@@ -1,4 +1,4 @@
---Fiend Slime Mold
+--Tainted Slime Mold
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon

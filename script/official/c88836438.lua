@@ -29,12 +29,12 @@ end
 function s.actcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	local dsp=Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,0,1,nil,e,tp,0x158)
-	local gg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_GRAVE,0,nil,e,tp,0x17b)
+	local gg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_REST,0,nil,e,tp,0x17b)
 	local rg=Duel.IsExistingMatchingCard(Card.IsAbleToRemove,tp,0,LOCATION_ONFIELD,1,nil)
 		and Duel.GetMatchingGroup(s.rmfilter,tp,LOCATION_MZONE,0,nil) or nil
-	if chk==0 then return Duel.IsExistingMatchingCard(s.actcostfilter,tp,LOCATION_HAND+LOCATION_GRAVE+LOCATION_MZONE,0,1,c,tp,dsp,gg,rg) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.actcostfilter,tp,LOCATION_HAND+LOCATION_REST+LOCATION_MZONE,0,1,c,tp,dsp,gg,rg) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local cg=Duel.SelectMatchingCard(tp,s.actcostfilter,tp,LOCATION_HAND+LOCATION_GRAVE+LOCATION_MZONE,0,1,1,c,tp,dsp,gg,rg)
+	local cg=Duel.SelectMatchingCard(tp,s.actcostfilter,tp,LOCATION_HAND+LOCATION_REST+LOCATION_MZONE,0,1,1,c,tp,dsp,gg,rg)
 	Duel.Remove(cg,POS_FACEUP,REASON_COST)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	local op=Duel.SelectEffect(tp,
@@ -44,7 +44,7 @@ function s.actcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(op)
 	if op==1 or op==2 then
 		e:SetCategory(CATEGORY_SPECIAL_SUMMON)
-		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,op==1 and LOCATION_DECK or LOCATION_GRAVE)
+		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,op==1 and LOCATION_DECK or LOCATION_REST)
 	elseif op==3 then
 		e:SetCategory(CATEGORY_REMOVE)
 		Duel.SetOperationInfo(0,CATEGORY_REMOVE,rg-cg,2,PLAYER_ALL,LOCATION_ONFIELD)
@@ -60,7 +60,7 @@ function s.actop(e,tp,eg,ep,ev,re,r,rp)
 		if op==1 then
 			g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_DECK,0,1,1,nil,e,tp,0x158)
 		else
-			g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_GRAVE,0,1,1,nil,e,tp,0x17b)
+			g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,0,1,1,nil,e,tp,0x17b)
 		end
 		if #g>0 then
 			Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)

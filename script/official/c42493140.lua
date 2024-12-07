@@ -3,7 +3,7 @@
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	--Place this card and 1 "Centurion" monster in the Spell/Trap Zone as Continuous Traps
+	--Place this card and 1 "Centurion" monster in the Actional/Trap Zone as Continuous Traps
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -29,10 +29,10 @@ end
 s.listed_names={id}
 s.listed_series={SET_CENTURION}
 function s.plfilter(c)
-	return c:IsSetCard(SET_CENTURION) and c:IsMonster() and not c:IsForbidden() and not c:IsCode(id)
+	return c:IsSetCard(SET_CENTURION) and c:IsMonster() and not c:IsUnliked() and not c:IsCode(id)
 end
 function s.pltg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return not e:GetHandler():IsForbidden()
+	if chk==0 then return not e:GetHandler():IsUnliked()
 		and Duel.GetLocationCount(tp,LOCATION_SZONE)>=2
 		and Duel.IsExistingMatchingCard(s.plfilter,tp,LOCATION_HAND|LOCATION_DECK,0,1,nil) end
 end
@@ -60,7 +60,7 @@ function s.plop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetTarget(function(_,c) return c:IsCode(id) end)
 	e1:SetReset(RESET_PHASE|PHASE_END)
 	Duel.RegisterEffect(e1,tp)
-	if c:IsForbidden() or not c:IsRelateToEffect(e) or Duel.GetLocationCount(tp,LOCATION_SZONE)<2 then return end
+	if c:IsUnliked() or not c:IsRelateToEffect(e) or Duel.GetLocationCount(tp,LOCATION_SZONE)<2 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
 	local g=Duel.SelectMatchingCard(tp,s.plfilter,tp,LOCATION_HAND|LOCATION_DECK,0,1,1,nil)
 	if #g>0 and s.move_to_stzone(c,c,tp) then

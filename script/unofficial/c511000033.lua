@@ -1,4 +1,4 @@
---Diving Exploder
+--Megg Exploder
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -15,8 +15,8 @@ function s.initial_effect(c)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(c,REASON_COST)
+	if chk==0 then return c:IsAbleToRestAsCost() end
+	Duel.SendtoRest(c,REASON_COST)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsFaceup,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil) end
@@ -43,7 +43,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		tc=sg:GetNext()
 	end
 end
-function s.resetop(e,tp,eg,ep,ev,re,r,rp)
+function s.revetop(e,tp,eg,ep,ev,re,r,rp)
 	local sg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
 	local c=e:GetHandler()
 	local tc=sg:GetFirst()

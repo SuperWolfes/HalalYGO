@@ -1,5 +1,5 @@
 -- 魔鍵錠－施－
--- Magikey Locking
+-- Menkey Locking
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -34,10 +34,10 @@ function s.rescon(sg,e,tp,mg)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	local tg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,nil,e,tp)
+	local tg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_REST,0,nil,e,tp)
 	if chk==0 then return aux.SelectUnselectGroup(tg,e,tp,1,1,s.rescon,0) end
 	local ft=math.min(Duel.GetLocationCount(tp,LOCATION_MZONE),2)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) or not aux.SelectUnselectGroup(tg,e,tp,2,2,s.rescon,0) then
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) or not aux.SelectUnselectGroup(tg,e,tp,2,2,s.rescon,0) then
 		ft=1
 	end
 	local g=aux.SelectUnselectGroup(tg,e,tp,1,ft,s.rescon,1,tp,HINTMSG_SPSUMMON)
@@ -49,7 +49,7 @@ function s.exfilter(c,sfunc)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetTargetCards(e)
-	if #g<=0 or Duel.GetLocationCount(tp,LOCATION_MZONE)<#g or (#g>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)) then return end
+	if #g<=0 or Duel.GetLocationCount(tp,LOCATION_MZONE)<#g or (#g>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)) then return end
 	if Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP_DEFENSE)==#g then
 		local sg=Duel.GetMatchingGroup(s.exfilter,tp,LOCATION_EXTRA,0,nil,Card.IsSynchroSummonable)
 		local xg=Duel.GetMatchingGroup(s.exfilter,tp,LOCATION_EXTRA,0,nil,Card.IsXyzSummonable)

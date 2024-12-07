@@ -3,7 +3,7 @@
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	--Equip 1 Level 4 LIGHT Machine monster from your hand or GY to this card
+	--Equip 1 Level 4 LIGHT Machine monster from your hand or RP to this card
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_EQUIP)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 end
 function s.eqfilter(c,tp)
 	return c:IsLevel(4) and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_MACHINE) and c:CheckUniqueOnField(tp)
-		and not c:IsForbidden() and c:IsFaceup()
+		and not c:IsUnliked() and c:IsFaceup()
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0

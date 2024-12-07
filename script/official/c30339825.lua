@@ -3,7 +3,7 @@
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon 1 monster from either GY
+	--Special Summon 1 monster from either RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DESTROY+CATEGORY_SPECIAL_SUMMON)
@@ -14,13 +14,13 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg(false))
 	e1:SetOperation(s.spop(false))
 	c:RegisterEffect(e1)
-	--Special Summon 1 WATER monster from either GY
+	--Special Summon 1 WATER monster from either RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_DESTROY+CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,id)
 	e2:SetCondition(aux.exccon)
 	e2:SetCost(aux.SelfBanishCost)
@@ -37,10 +37,10 @@ function s.desfilter(c,water)
 end
 function s.sptg(water)
 	return function(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-		if chkc then return chkc:IsLocation(LOCATION_GRAVE) and s.spfilter(chkc,e,water) end
-		if chk==0 then return Duel.IsExistingTarget(s.spfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,nil,e,tp,water) end
+		if chkc then return chkc:IsLocation(LOCATION_REST) and s.spfilter(chkc,e,water) end
+		if chk==0 then return Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,LOCATION_REST,1,nil,e,tp,water) end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,1,nil,e,tp,water)
+		local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_REST,LOCATION_REST,1,1,nil,e,tp,water)
 		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,0)
 	end
 end

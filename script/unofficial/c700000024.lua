@@ -1,5 +1,5 @@
 --Scripted by Eerie Code
---Performage Overlay Juggler
+--Performanced Overlay Juggler
 local s,id=GetID()
 function s.initial_effect(c)
 	--Pendulum Summon

@@ -2,7 +2,7 @@
 -- Ruin, Supreme Queen of Oblivion
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--code
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -42,18 +42,18 @@ end
 s.listed_names={32828635,46427957}
 function s.indcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsSummonType(SUMMON_TYPE_RITUAL)
+	return c:IsSummonType(SUMMON_TYPE_LOCKED)
 end
 function s.indtg(e,c)
-	return c:IsType(TYPE_RITUAL)
+	return c:IsType(TYPE_LOCKED)
 end
 function s.mfilter(c)
-	return not c:IsType(TYPE_RITUAL)
+	return not c:IsType(TYPE_LOCKED)
 end
 function s.condition(e)
 	local c=e:GetHandler()
 	local mg=c:GetMaterial()
-	return c:GetSummonType()==SUMMON_TYPE_RITUAL and #mg>0 and not mg:IsExists(s.mfilter,1,nil)
+	return c:GetSummonType()==SUMMON_TYPE_LOCKED and #mg>0 and not mg:IsExists(s.mfilter,1,nil)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

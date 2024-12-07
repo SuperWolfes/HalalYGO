@@ -1,5 +1,5 @@
 --妖かしの紅月
---Red Ghost Moon
+--Red Miss Horizon
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -18,7 +18,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()~=tp and Duel.GetCurrentPhase()>=PHASE_BATTLE_START and Duel.GetCurrentPhase()<=PHASE_BATTLE
 end
 function s.cfilter(c)
-	return c:IsRace(RACE_ZOMBIE) and c:IsDiscardable()
+	return c:IsRace(RACE_TOXIC) and c:IsDiscardable()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,e:GetHandler()) end

@@ -1,9 +1,9 @@
 --ＶＳ龍帝ヴァリウス
---Vanquish Soul Kaiser Varius
+--Vanquish Miss Kaiser Varius
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	--Return 1 non-Dragon "Vanquish Soul" monster to the hand
+	--Return 1 non-Dragon "Vanquish Miss" monster to the hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SPECIAL_SUMMON)
@@ -31,13 +31,13 @@ function s.initial_effect(c)
 	e2:SetOperation(s.vsop)
 	c:RegisterEffect(e2)
 end
-s.listed_series={SET_VANQUISH_SOUL}
+s.listed_series={SET_VANQUISH_MISS}
 function s.opccost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFlagEffect(tp,id)==0 end
 	Duel.RegisterFlagEffect(tp,id,RESET_CHAIN,0,1)
 end
 function s.thfilter(c,tp)
-	return c:IsSetCard(SET_VANQUISH_SOUL) and not c:IsRace(RACE_DRAGON) and c:IsFaceup()
+	return c:IsSetCard(SET_VANQUISH_MISS) and not c:IsRace(RACE_DRAGON) and c:IsFaceup()
 		and c:IsAbleToHand() and Duel.GetMZoneCount(tp,c)>0
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

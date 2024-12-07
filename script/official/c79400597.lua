@@ -1,5 +1,5 @@
 --静冠の呪眼
---Evil Eye Repose
+--Goodie Repose
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-	--Banish the opponent's monster that your "Evil Eye" monster equipped with "Evil Eye of Selene" attacked
+	--Banish the opponent's monster that your "Goodie" monster equipped with "Goodie of Selene" attacked
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_REMOVE)
@@ -24,10 +24,10 @@ function s.initial_effect(c)
 	e2:SetTarget(s.rmtg)
 	e2:SetOperation(s.rmop)
 	c:RegisterEffect(e2)
-	--Return up to 3 of your banished "Evil Eye" cards to the GY
+	--Return up to 3 of your banished "Goodie" cards to the RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
-	e3:SetCategory(CATEGORY_TOGRAVE)
+	e3:SetCategory(CATEGORY_TOREST)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_CARD_TARGET)
 	e3:SetCode(EVENT_DESTROYED)
@@ -44,7 +44,7 @@ end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local op=0
-	if Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_GRAVE,0,1,nil)
+	if Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_REST,0,1,nil)
 		and Duel.IsPlayerCanDraw(tp,1) and Duel.SelectYesNo(tp,aux.Stringid(id,3)) then
 		op=1
 	end
@@ -54,7 +54,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	elseif op==1 then
 		e:SetCategory(CATEGORY_DRAW)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-		local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+		local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_REST,0,1,1,nil)
 		Duel.Remove(g,POS_FACEUP,REASON_COST)
 	end
 end
@@ -98,13 +98,13 @@ end
 function s.rtgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chkc then return chkc:IsLocation(LOCATION_REMOVED) and chkc:IsControler(tp) and chkc:IsSetCard(SET_EVIL_EYE) and chkc:IsFaceup() end
 	if chk==0 then return Duel.IsExistingTarget(aux.FaceupFilter(Card.IsSetCard,SET_EVIL_EYE),tp,LOCATION_REMOVED,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RTOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RTOREST)
 	local g=Duel.SelectTarget(tp,aux.FaceupFilter(Card.IsSetCard,SET_EVIL_EYE),tp,LOCATION_REMOVED,0,1,3,nil)
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,g,#g,tp,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,g,#g,tp,0)
 end
 function s.rtgop(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.GetTargetCards(e)
 	if #tg>0 then
-		Duel.SendtoGrave(tg,REASON_EFFECT|REASON_RETURN)
+		Duel.SendtoRest(tg,REASON_EFFECT|REASON_RETURN)
 	end
 end

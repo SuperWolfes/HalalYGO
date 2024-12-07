@@ -22,11 +22,11 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsLevelAbove,7),tp,0,LOCATION_MZONE,nil)>0
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local tg=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local tg=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.SendtoDeck(tg,nil,0,REASON_EFFECT)
 end

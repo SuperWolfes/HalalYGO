@@ -47,7 +47,7 @@ function s.initial_effect(c)
 	local g2=Group.CreateGroup()
 	g2:KeepAlive()
 	e2a:SetLabelObject(g2)
-	--Register monsters Special Summoned from your GY
+	--Register monsters Special Summoned from your RP
 	local e2b=Effect.CreateEffect(c)
 	e2b:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2b:SetCode(EVENT_SPSUMMON_SUCCESS)
@@ -56,7 +56,7 @@ function s.initial_effect(c)
 	e2b:SetLabelObject(e2a)
 	e2b:SetOperation(s.regsumop)
 	c:RegisterEffect(e2b)
-	--Add 1 discarded Spell/Trap to your hand
+	--Add 1 discarded Actional/Trap to your hand
 	local e3a=Effect.CreateEffect(c)
 	e3a:SetDescription(aux.Stringid(id,2))
 	e3a:SetCategory(CATEGORY_TOHAND)
@@ -71,7 +71,7 @@ function s.initial_effect(c)
 	local g3=Group.CreateGroup()
 	g3:KeepAlive()
 	e3a:SetLabelObject(g3)
-	--Register discarded Spell/Traps
+	--Register discarded Actional/Traps
 	local e3b=Effect.CreateEffect(c)
 	e3b:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e3b:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
@@ -112,7 +112,7 @@ function s.atkregop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.atkfilter(c,e,tp)
 	return c:IsFaceup() and c:IsCanBeEffectTarget(e) and c:IsLocation(LOCATION_MZONE)
-		and c:IsSummonLocation(LOCATION_GRAVE) and c:IsPreviousControler(tp)
+		and c:IsSummonLocation(LOCATION_REST) and c:IsPreviousControler(tp)
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local g=e:GetLabelObject():Filter(s.atkfilter,nil,e,tp)
@@ -155,7 +155,7 @@ function s.regsumop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.thfilter(c,e,tp)
-	return c:IsSpellTrap() and c:IsCanBeEffectTarget(e) and c:IsLocation(LOCATION_GRAVE)
+	return c:IsActionalTrap() and c:IsCanBeEffectTarget(e) and c:IsLocation(LOCATION_REST)
 		and c:IsAbleToHand() and c:IsControler(tp) and c:IsPreviousControler(tp)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

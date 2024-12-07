@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_DARK),1,1,Synchro.NonTunerEx(Card.IsRace,RACE_INSECT),1,1)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--indes
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -53,7 +53,7 @@ function s.atop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.ddcon(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetHandler():GetBattleTarget()
-	return tc:IsLocation(LOCATION_GRAVE) and tc:IsReason(REASON_BATTLE)
+	return tc:IsLocation(LOCATION_REST) and tc:IsReason(REASON_BATTLE)
 end
 function s.ddtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

@@ -15,7 +15,7 @@ end
 function s.cfilter(c,tp)
 	local ec=c:GetPreviousEquipTarget()
 	return c:IsReason(REASON_LOST_TARGET) and ec and ec:IsPreviousControler(tp) 
-		and c:IsLocation(LOCATION_GRAVE+LOCATION_REMOVED+LOCATION_EXTRA) and ec:IsLocation(LOCATION_GRAVE)
+		and c:IsLocation(LOCATION_REST+LOCATION_REMOVED+LOCATION_EXTRA) and ec:IsLocation(LOCATION_REST)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local g=eg:Filter(s.cfilter,nil,tp)
@@ -29,7 +29,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetTargetCard(tc)
 	Duel.SetTargetCard(g)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,tc,1,0,0)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 or Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then return end

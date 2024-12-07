@@ -1,5 +1,5 @@
 --カオス・ネクロマンサー
---Chaos Necromancer
+--Chaos Restbouncer
 local s,id=GetID()
 function s.initial_effect(c)
 	--attack
@@ -12,5 +12,5 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.atkval(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsMonster,c:GetControler(),LOCATION_GRAVE,0,nil)*300
+	return Duel.GetMatchingGroupCount(Card.IsMonster,c:GetControler(),LOCATION_REST,0,nil)*300
 end

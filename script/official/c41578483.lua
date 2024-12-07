@@ -1,11 +1,11 @@
 --ミレニアム・アイズ・サクリファイス
---Millennium-Eyes Restrict
+--Mileon-Eyes Restrict
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion Materials
 	Fusion.AddProcMix(c,true,true,64631466,aux.FilterBoolFunctionEx(Card.IsType,TYPE_EFFECT))
-	--Equip 1 Effect Monster the opponent controls or in their GY to this card
+	--Equip 1 Effect Monster the opponent controls or in their RP to this card
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_EQUIP)
@@ -60,11 +60,11 @@ function s.eqfilter(c)
 	return c:IsFaceup() and c:IsType(TYPE_EFFECT) and c:IsAbleToChangeControler()
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_MZONE|LOCATION_GRAVE) and chkc:IsControler(1-tp) and s.eqfilter(chkc) end
+	if chkc then return chkc:IsLocation(LOCATION_MZONE|LOCATION_REST) and chkc:IsControler(1-tp) and s.eqfilter(chkc) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and Duel.IsExistingTarget(s.eqfilter,tp,0,LOCATION_MZONE|LOCATION_GRAVE,1,nil) end
+		and Duel.IsExistingTarget(s.eqfilter,tp,0,LOCATION_MZONE|LOCATION_REST,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-	local g=Duel.SelectTarget(tp,s.eqfilter,tp,0,LOCATION_MZONE|LOCATION_GRAVE,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.eqfilter,tp,0,LOCATION_MZONE|LOCATION_REST,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_EQUIP,g,1,0,0)
 end
 function s.eqop(e,tp,eg,ep,ev,re,r,rp)

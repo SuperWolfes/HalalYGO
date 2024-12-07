@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz Summon
 	Xyz.AddProcedure(c,nil,7,2,nil,nil,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Special Summon 1 "Kshatri-la" monster from the Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.ztg)
 	e2:SetOperation(s.zop)
 	c:RegisterEffect(e2)
-	--Destruction replacment
+	--Mismatching replacment
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE)

@@ -3,11 +3,11 @@
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Contact Fusion procedure
 	Fusion.AddProcMix(c,true,true,CARD_KAZEJIN,CARD_SUIJIN)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,true)
-	--Negate an opponent's Spell/Trap effect on the field
+	--Negate an opponent's Actional/Trap effect on the field
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DISABLE)
@@ -47,7 +47,7 @@ function s.negcost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.negcon(e,tp,eg,ep,ev,re,r,rp)
 	local loc=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_LOCATION)
-	return ep==1-tp and loc&LOCATION_ONFIELD>0 and re:IsSpellTrapEffect() and Duel.IsChainDisablable(ev)
+	return ep==1-tp and loc&LOCATION_ONFIELD>0 and re:IsActionalTrapEffect() and Duel.IsChainDisablable(ev)
 end
 function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

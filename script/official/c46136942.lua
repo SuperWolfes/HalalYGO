@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
 	--fusion from the monster zone
-	local params2 = {nil,Fusion.CheckWithHandler(Fusion.OnFieldMat),s.fextra,nil,Fusion.ForcedHandler}
+	local params2 = {nil,Fusion.CheckWithHandler(Fusion.OnFieldMat),s.fextra,nil,Fusion.FcoreedHandler}
 	local e3=Effect.CreateEffect(c)
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)
 	e3:SetType(EFFECT_TYPE_IGNITION)
@@ -64,5 +64,5 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.fextra(e,tp,mg)
-	return Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,LOCATION_PZONE,0,nil)
+	return Duel.GetMatchingGroup(Card.IsAbleToRest,tp,LOCATION_PZONE,0,nil)
 end

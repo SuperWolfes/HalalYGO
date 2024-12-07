@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Xyz Summon Procedure: 2 Level 4 monsters
 	Xyz.AddProcedure(c,nil,4,2)
 	--For this card's Xyz Summon, you can treat Rank 4 monsters you control as Level 4 monsters for material
@@ -26,13 +26,13 @@ function s.initial_effect(c)
 	e1:SetTarget(s.atktg)
 	e1:SetOperation(s.atkop)
 	c:RegisterEffect(e1,false,REGISTER_FLAG_DETACH_XMAT)
-	--Special Summon 1 Rank 4 or lower Xyz monster from the GY and attach another to it
+	--Special Summon 1 Rank 4 or lower Xyz monster from the RP and attach another to it
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DELAY)
-	e2:SetCode(EVENT_TO_GRAVE)
+	e2:SetCode(EVENT_TO_REST)
 	e2:SetCountLimit(1,id)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
@@ -69,13 +69,13 @@ function s.spfilter(c,e,tp,sg)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	local g=Duel.GetMatchingGroup(s.xyzfilter,tp,LOCATION_GRAVE,0,e:GetHandler(),e)
+	local g=Duel.GetMatchingGroup(s.xyzfilter,tp,LOCATION_REST,0,e:GetHandler(),e)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,0) end
 	local tg=aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,1,tp,HINTMSG_TARGET)
 	Duel.SetTargetCard(tg)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,tg,1,tp,0)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,tg,1,tp,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,tg,1,tp,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetTargetCards(e)

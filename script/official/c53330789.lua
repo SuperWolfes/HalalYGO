@@ -1,5 +1,5 @@
 --ＶＳトリニティ・バースト
---Vanquish Soul - Trinity Burst
+--Vanquish Miss - Trinity Burst
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -16,13 +16,13 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.listed_series={SET_VANQUISH_SOUL}
+s.listed_series={SET_VANQUISH_MISS}
 function s.tgfilter(c,e,tp)
-	return c:IsFaceup() and c:IsSetCard(SET_VANQUISH_SOUL)
+	return c:IsFaceup() and c:IsSetCard(SET_VANQUISH_MISS)
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND,0,1,nil,e,tp,c:GetOriginalAttribute())
 end
 function s.spfilter(c,e,tp,att)
-	return c:IsSetCard(SET_VANQUISH_SOUL) and c:GetOriginalAttribute()~=att
+	return c:IsSetCard(SET_VANQUISH_MISS) and c:GetOriginalAttribute()~=att
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -41,7 +41,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_HAND,0,nil,e,tp,tc:GetOriginalAttribute())
 	if #g==0 then return end
 	local ct=math.min(2,ft)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ct=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ct=1 end
 	local sg=aux.SelectUnselectGroup(g,e,tp,1,ct,aux.dncheck,1,tp,HINTMSG_SPSUMMON)
 	local og=Group.CreateGroup()
 	for sc in sg:Iter() do

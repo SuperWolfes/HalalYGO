@@ -1,5 +1,5 @@
 --魔導書整理
---Spellbook Organization
+--Actionalbook Organization
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

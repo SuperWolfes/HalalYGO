@@ -2,7 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMixRep(c,true,true,s.fil,1,99,CARD_CYBER_DRAGON)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,s.splimit)
 	--cannot be fusion material
@@ -25,10 +25,10 @@ function s.contactfil(tp)
 	return Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil,tp)
 end
 function s.cfilter(c,tp)
-	return c:IsAbleToGraveAsCost() and (c:IsControler(tp) or c:IsFaceup())
+	return c:IsAbleToRestAsCost() and (c:IsControler(tp) or c:IsFaceup())
 end
 function s.contactop(g,tp,c)
-	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL)
+	Duel.SendtoRest(g,REASON_COST+REASON_MATERIAL)
 	--spsummon condition
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)

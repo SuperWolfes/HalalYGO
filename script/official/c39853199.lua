@@ -1,5 +1,5 @@
 --妖仙獣 閻魔巳裂
---Yosenju Misak
+--Yosakhi Misak
 local s,id=GetID()
 function s.initial_effect(c)
 	--Destroy a non-WIND monster that battles with this card

@@ -1,5 +1,5 @@
 --十種神鏡陣
---Mirror Formation of the Ten Sacred Treasures
+--Mirror Formation of the Ten Clean Treasures
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -15,15 +15,15 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c)
-	return c:HasLevel() and c:IsAbleToGraveAsCost() and (c:IsFaceup() or c:IsLocation(LOCATION_HAND))
+	return c:HasLevel() and c:IsAbleToRestAsCost() and (c:IsFaceup() or c:IsLocation(LOCATION_HAND))
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_HAND|LOCATION_MZONE,0,nil)
 	local ct=#g
 	if chk==0 then return ct>0 and g:CheckWithSumEqual(Card.GetLevel,10,1,ct) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local cg=g:SelectWithSumEqual(tp,Card.GetLevel,10,1,ct)
-	Duel.SendtoGrave(cg,REASON_COST)
+	Duel.SendtoRest(cg,REASON_COST)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,2) end

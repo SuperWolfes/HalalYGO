@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return re:IsActiveType(TYPE_SPELL) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and Duel.IsChainNegatable(ev) and ep~=tp
+	return re:IsActiveType(TYPE_ACTIONAL) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and Duel.IsChainNegatable(ev) and ep~=tp
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -41,13 +41,13 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if tc:IsType(TYPE_EQUIP+TYPE_CONTINUOUS) then
 		local code=tc:GetOriginalCode()
 		c:CopyEffect(code,RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET,1)
-		c:CancelToGrave()
+		c:CancelToRest()
 	end
 	if (tpe&TYPE_FIELD)~=0 then
 		local of=Duel.GetFieldCard(1-tp,LOCATION_FZONE,0)
 		if of then Duel.Destroy(of,REASON_RULE) end
 		of=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
-		if of and Duel.Destroy(of,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
+		if of and Duel.Destroy(of,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
 		Duel.MoveSequence(tc,5)
 	end
 end

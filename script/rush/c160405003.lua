@@ -2,7 +2,7 @@
 --Dragon's Fortitude
 local s,id=GetID()
 function s.initial_effect(c)
-	--Decrease ATK and return 1 Dragon from your GY to your Deck
+	--Decrease ATK and return 1 Dragon from your RP to your Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_TODECK)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -20,14 +20,14 @@ function s.tdfilter(c)
 	return c:IsRace(RACE_DRAGON) and c:IsAbleToDeck() and c:HasLevel()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST,0,1,nil) end
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Effect
 	local bc=Duel.GetAttacker()
 	if not (bc and bc:IsRelateToBattle()) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_REST,0,1,1,nil)
 	if #g>0 then
 		Duel.HintSelection(g)
 		local lvl=g:GetFirst():GetLevel()

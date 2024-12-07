@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
 	e0:SetCode(EFFECT_CHANGE_CODE)
 	e0:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	e0:SetRange(LOCATION_GRAVE)
+	e0:SetRange(LOCATION_REST)
 	e0:SetValue(160207049)
 	c:RegisterEffect(e0)
 	--Gain LP
@@ -35,9 +35,9 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Effect
 	local ct=Duel.GetMatchingGroupCount(aux.FilterMaximumSideFunctionEx(s.tgfilter),tp,LOCATION_MZONE,0,nil)
 	Duel.Recover(tp,ct*300,REASON_EFFECT)
-	if Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.thfilter),tp,LOCATION_GRAVE,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+	if Duel.IsExistingMatchingCard(aux.RestValleyFilter(s.thfilter),tp,LOCATION_REST,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-		local g2=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thfilter),tp,LOCATION_GRAVE,0,1,1,nil)
+		local g2=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.thfilter),tp,LOCATION_REST,0,1,1,nil)
 		if #g2>0 then
 			Duel.BreakEffect()
 			Duel.SendtoHand(g2,nil,REASON_EFFECT)

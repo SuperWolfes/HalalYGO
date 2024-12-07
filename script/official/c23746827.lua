@@ -1,5 +1,5 @@
 --億年の氷墓
---Eternal Ice Grave
+--Eternal Ice Rest
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)

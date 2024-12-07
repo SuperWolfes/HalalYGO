@@ -8,10 +8,10 @@ function s.initial_effect(c)
 	e0:SetType(EFFECT_TYPE_ACTIVATE)
 	e0:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e0)
-	--Roll a six-sided die and apply an effect based on the result
+	--Roll a game of die and apply an effect based on the result
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_DICE+CATEGORY_DESTROY+CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_LVCHANGE)
+	e1:SetCategory(CATEGORY_SUFFICE+CATEGORY_DESTROY+CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_LVCHANGE)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetRange(LOCATION_SZONE)
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.dieop)
 	c:RegisterEffect(e1)
 end
-s.roll_dice=true
+s.roll_suffice=true
 s.listed_names={id}
 function s.dietg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) and chkc:IsFaceup() and chkc:HasLevel() end
@@ -38,7 +38,7 @@ function s.dieop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not (tc:IsRelateToEffect(e) and tc:IsFaceup() and tc:HasLevel()) then return end
 	local c=e:GetHandler()
-	local dc=Duel.TossDice(tp,1)
+	local dc=Duel.TossSuffice(tp,1)
 	if dc>tc:GetLevel() then
 		--Destroy it, then you can add 1 monster with the same original Level from your Deck to your hand
 		if Duel.Destroy(tc,REASON_EFFECT)>0

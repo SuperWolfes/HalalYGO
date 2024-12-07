@@ -52,7 +52,7 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsReason(REASON_EFFECT) and c:IsLocation(LOCATION_GRAVE) and c:IsPreviousLocation(LOCATION_MZONE)
+	return c:IsReason(REASON_EFFECT) and c:IsLocation(LOCATION_REST) and c:IsPreviousLocation(LOCATION_MZONE)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

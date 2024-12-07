@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	--search
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	e3:SetCode(EVENT_TO_GRAVE)
+	e3:SetCode(EVENT_TO_REST)
 	e3:SetCondition(s.restorecon)
 	e3:SetTarget(s.restoretg)
 	e3:SetOperation(s.restoreop)

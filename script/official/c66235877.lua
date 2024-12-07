@@ -1,9 +1,9 @@
 --デス・デーモン・ドラゴン
---Fiend Skull Dragon
+--Tainted Skull Dragon
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,false,false,93220472,16475472)
 	--Negate FLIP monster
 	local e1=Effect.CreateEffect(c)

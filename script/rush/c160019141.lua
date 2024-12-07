@@ -1,3 +1,3 @@
 --セレブローズ・インコグニート・マジシャン
---Celeb Rose Incognito Magician
+--Celeb Rose Incognito Mentor
 Duel.LoadCardScriptAlias(160019041)

@@ -1,5 +1,5 @@
 --零式魔導粉砕機
---Type Zero Magic Crusher
+--Type Zero Ment Crusher
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -22,13 +22,13 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.costfilter(c)
-	return c:IsSpell() and c:IsDiscardable()
+	return c:IsActional() and c:IsDiscardable()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,e:GetHandler()) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 	local cg=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,1,nil)
-	Duel.SendtoGrave(cg,REASON_COST+REASON_DISCARD)
+	Duel.SendtoRest(cg,REASON_COST+REASON_DISCARD)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

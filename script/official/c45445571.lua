@@ -3,9 +3,9 @@
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
-	--Fusion Material: 2 Fiend and/or Zombie monsters
-	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_FIEND|RACE_ZOMBIE),2)
+	c:EnableAwakeLimit()
+	--Fusion Material: 2 Tainted and/or Toxic monsters
+	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_TAINTED|RACE_TOXIC),2)
 	--Maintenance cost: Pay 500 LP or destroy this card
 	local e0=Effect.CreateEffect(c)
 	e0:SetDescription(aux.Stringid(id,0))
@@ -35,13 +35,13 @@ function s.initial_effect(c)
 	e2:SetTarget(s.nstg)
 	e2:SetOperation(s.nsop)
 	c:RegisterEffect(e2)
-	--Add 1 Level 4 or higher Fiend or Zombie monster from your GY to your hand
+	--Add 1 Level 4 or higher Tainted or Toxic monster from your RP to your hand
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetCategory(CATEGORY_TOHAND)
 	e3:SetType(EFFECT_TYPE_IGNITION)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetCountLimit(1,{id,1})
 	e3:SetCost(aux.SelfBanishCost)
 	e3:SetTarget(s.thtg)
@@ -74,14 +74,14 @@ function s.nsop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.thfilter(c)
-	return c:IsLevelAbove(4) and c:IsRace(RACE_FIEND|RACE_ZOMBIE) and c:IsAbleToHand()
+	return c:IsLevelAbove(4) and c:IsRace(RACE_TAINTED|RACE_TOXIC) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and chkc~=c and s.thfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.thfilter,tp,LOCATION_GRAVE,0,1,c) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and chkc~=c and s.thfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.thfilter,tp,LOCATION_REST,0,1,c) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,tp,0)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)

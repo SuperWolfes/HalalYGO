@@ -2,10 +2,10 @@
 --Elementsaber Malo
 local s,id=GetID()
 function s.initial_effect(c)
-	--to grave
+	--to rest
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_TOGRAVE)
+	e1:SetCategory(CATEGORY_TOREST)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetCountLimit(1)
 	e1:SetRange(LOCATION_MZONE)
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1)
 	e2:SetTarget(s.atttg)
 	e2:SetOperation(s.attop)
@@ -26,7 +26,7 @@ end
 s.listed_names={id}
 s.listed_series={0x400d,0x113}
 function s.costfilter(c,tp)
-	return c:IsSetCard(0x400d) and c:IsMonster() and c:IsAbleToGraveAsCost()
+	return c:IsSetCard(0x400d) and c:IsMonster() and c:IsAbleToRestAsCost()
 		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,c)
 end
 function s.sgcost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -37,7 +37,7 @@ function s.sgcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local loc=LOCATION_HAND
 	if #fg>0 then loc=LOCATION_HAND+LOCATION_DECK end
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,loc,0,1,nil,tp) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tc=Duel.SelectMatchingCard(tp,s.costfilter,tp,loc,0,1,1,nil,tp):GetFirst()
 	if tc:IsLocation(LOCATION_DECK) then
 		local fc=nil
@@ -49,20 +49,20 @@ function s.sgcost(e,tp,eg,ep,ev,re,r,rp,chk)
 		Duel.Hint(HINT_CARD,0,fc:GetCode())
 		fc:RegisterFlagEffect(61557074,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,0)
 	end
-	Duel.SendtoGrave(tc,REASON_COST)
+	Duel.SendtoRest(tc,REASON_COST)
 end
 function s.filter(c)
-	return (c:IsSetCard(0x400d) or c:IsSetCard(0x113)) and not c:IsCode(id) and c:IsMonster() and c:IsAbleToGrave()
+	return (c:IsSetCard(0x400d) or c:IsSetCard(0x113)) and not c:IsCode(id) and c:IsMonster() and c:IsAbleToRest()
 end
 function s.sgtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
 function s.sgop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end
 function s.atttg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -70,8 +70,8 @@ function s.atttg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	local att=c:AnnounceAnotherAttribute(tp)
 	e:SetLabel(att)
-	--Operation info needed to handle the interaction with "Necrovalley"
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,c,1,tp,LOCATION_GRAVE)
+	--Operation info needed to handle the interaction with "Restvalley"
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,c,1,tp,LOCATION_REST)
 end
 function s.attop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

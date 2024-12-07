@@ -1,8 +1,8 @@
 --マジックアブソーバー
---Magical Something
+--Mentoral Something
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableCounterPermit(COUNTER_SPELL)
+	c:EnableCounterPermit(COUNTER_ACTIONAL)
 	--add counter
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
@@ -34,33 +34,33 @@ function s.initial_effect(c)
 	e3:SetCountLimit(1,id)
 	e3:SetCost(s.setcost)
 	e3:SetTarget(s.settg)
-	e3:SetOperation(s.setop)
+	e3:SetOperation(s.vetop)
 	c:RegisterEffect(e3)
 end
-s.counter_place_list={COUNTER_SPELL}
+s.counter_place_list={COUNTER_ACTIONAL}
 function s.acop(e,tp,eg,ep,ev,re,r,rp)
-	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_SPELL) and e:GetHandler():GetFlagEffect(1)>0 then
-		e:GetHandler():AddCounter(COUNTER_SPELL,1)
+	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_ACTIONAL) and e:GetHandler():GetFlagEffect(1)>0 then
+		e:GetHandler():AddCounter(COUNTER_ACTIONAL,1)
 	end
 end
 function s.lvval(e,c)
-	return c:GetCounter(COUNTER_SPELL)
+	return c:GetCounter(COUNTER_ACTIONAL)
 end
 function s.setcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,COUNTER_SPELL,3,REASON_COST) end
-	e:GetHandler():RemoveCounter(tp,COUNTER_SPELL,3,REASON_COST)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,COUNTER_ACTIONAL,3,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,COUNTER_ACTIONAL,3,REASON_COST)
 end
 function s.setfilter(c)
 	return c:IsType(TYPE_QUICKPLAY) and c:IsSSetable()
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.setfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.setfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and s.setfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.setfilter,tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
-	local g=Duel.SelectTarget(tp,s.setfilter,tp,LOCATION_GRAVE,0,1,1,nil)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,0,0)
+	local g=Duel.SelectTarget(tp,s.setfilter,tp,LOCATION_REST,0,1,1,nil)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,0,0)
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and tc:IsSSetable() then
 		Duel.SSet(tp,tc)

@@ -3,11 +3,11 @@
 -- Scripted by Satella
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
-	aux.EnableCheckReincarnation(c)
+	c:EnableAwakeLimit()
+	aux.EnableCheckReincorporation(c)
 	-- Synchro Summon procedure
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
-	-- Special Summon 1 monster from your GY during the next Standby Phase
+	-- Special Summon 1 monster from your RP during the next Standby Phase
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.efftg)
 	e1:SetOperation(s.effop)
 	c:RegisterEffect(e1)
-	-- Special Summon 1 Level 7 or lower FIRE monster from your GY
+	-- Special Summon 1 Level 7 or lower FIRE monster from your RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_LVCHANGE)
@@ -34,15 +34,15 @@ end
 s.listed_names={id}
 function s.effcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsReincarnationSummoned() and c:IsSummonType(SUMMON_TYPE_SYNCHRO)
+	return c:IsReincorporationSummoned() and c:IsSummonType(SUMMON_TYPE_SYNCHRO)
 end
 function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return true end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end
 function s.effop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	-- Special Summon 1 monster from your GY during the next Standby Phase
+	-- Special Summon 1 monster from your RP during the next Standby Phase
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e1:SetCode(EVENT_PHASE|PHASE_STANDBY)
@@ -66,10 +66,10 @@ end
 function s.delayspcon(e,tp,eg,ep,ev,re,r,rp)
 	local label=e:GetLabel()
 	return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and (label==0 or label~=Duel.GetTurnCount())
-		and Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.delayspfilter),tp,LOCATION_GRAVE,0,1,nil,e,tp)
+		and Duel.IsExistingMatchingCard(aux.RestValleyFilter(s.delayspfilter),tp,LOCATION_REST,0,1,nil,e,tp)
 end
 function s.delayspop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.delayspfilter),tp,LOCATION_GRAVE,0,nil,e,tp)
+	local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.delayspfilter),tp,LOCATION_REST,0,nil,e,tp)
 	if #g==0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local sg=g:Select(tp,1,1,nil)
@@ -83,11 +83,11 @@ end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
 	local lvl=c:GetLevel()
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.spfilter(chkc,e,tp,lvl) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and s.spfilter(chkc,e,tp,lvl) end
 	if chk==0 then return c:HasLevel() and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp,lvl) end
+		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp,lvl) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp,lvl)
+	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp,lvl)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)

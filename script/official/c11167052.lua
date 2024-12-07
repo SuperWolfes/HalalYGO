@@ -86,8 +86,8 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGraveAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED) end
-	Duel.SendtoGrave(c,REASON_COST)
+	if chk==0 then return c:IsAbleToRestAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED) end
+	Duel.SendtoRest(c,REASON_COST)
 end
 function s.thfilter(c)
 	return c:IsMonster() and c:IsSetCard(0x113) and c:IsAbleToHand()
@@ -95,16 +95,16 @@ end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local hg=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
 	local ct=#hg
-	if chk==0 then return ct>0 and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,ct,nil) end
+	if chk==0 then return ct>0 and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,ct,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_HANDES,hg,ct,0,0)
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,ct,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,ct,tp,LOCATION_REST)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local hg=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
-	local ct=Duel.SendtoGrave(hg,REASON_EFFECT+REASON_DISCARD)
+	local ct=Duel.SendtoRest(hg,REASON_EFFECT+REASON_DISCARD)
 	if ct<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thfilter),tp,LOCATION_GRAVE,0,ct,ct,nil)
+	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.thfilter),tp,LOCATION_REST,0,ct,ct,nil)
 	if #g>0 then
 		Duel.BreakEffect()
 		Duel.SendtoHand(g,nil,REASON_EFFECT)

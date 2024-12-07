@@ -5,11 +5,11 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--2 "Mysterune" monsters
 	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x180),2)
-	--If Special Summoned from the Extra Deck, add 1 "Mysterune" Continuous Spell from Deck
+	--If Special Summoned from the Extra Deck, add 1 "Mysterune" Continuous Actional from Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND)
@@ -63,16 +63,16 @@ function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,nil) end
 	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
 end
-	--Check for "Mysterune" Continuous Spell
+	--Check for "Mysterune" Continuous Actional
 function s.thfilter(c)
-	return c:GetType()==TYPE_SPELL+TYPE_CONTINUOUS and c:IsSetCard(0x180) and c:IsAbleToHand()
+	return c:GetType()==TYPE_ACTIONAL+TYPE_CONTINUOUS and c:IsSetCard(0x180) and c:IsAbleToHand()
 end
 	--Activation legality
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
-	--Add 1 "Mysterune" Continuous Spell from Deck
+	--Add 1 "Mysterune" Continuous Actional from Deck
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_DECK,0,1,1,nil)

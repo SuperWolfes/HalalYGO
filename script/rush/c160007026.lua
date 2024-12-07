@@ -14,33 +14,33 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.tdfilter(c,tp)
-	return c:IsCode(CARD_SPIRIT_STADIUM) and c:IsAbleToDeckOrExtraAsCost()
+	return c:IsCode(CARD_GUARDIAN_STADIUM) and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.spfilter(c,e,tp)
 	return c:IsAttribute(ATTRIBUTE_FIRE) and c:IsType(TYPE_NORMAL) and c:IsDefense(400)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
-		and Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_GRAVE,0,1,c,tp)
+		and Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST,0,1,c,tp)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp) end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end
 function s.spfilter2(c,e,tp)
 	return c:IsAttribute(ATTRIBUTE_FIRE) and c:IsType(TYPE_NORMAL) and c:IsDefense(400)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	local g=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_REST,0,nil)
 	local td=aux.SelectUnselectGroup(g,e,tp,1,1,s.rescon,1,tp,HINTMSG_SELECT)
 		
 	Duel.HintSelection(td)
 	if Duel.SendtoDeck(td,nil,SEQ_DECKSHUFFLE,REASON_COST)>0 then
 		if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local g=Duel.SelectMatchingCard(tp,s.spfilter2,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+		local g=Duel.SelectMatchingCard(tp,s.spfilter2,tp,LOCATION_REST,0,1,1,nil,e,tp)
 		Duel.HintSelection(g)
 		if #g>0 and Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP) then
 			local c=e:GetHandler()
@@ -60,5 +60,5 @@ function s.ftarget(e,c)
 	return not c:IsAttribute(ATTRIBUTE_FIRE)
 end
 function s.rescon(sg,e,tp,mg)
-	return Duel.IsExistingMatchingCard(s.spfilter2,tp,LOCATION_GRAVE,0,1,sg,e,tp)
+	return Duel.IsExistingMatchingCard(s.spfilter2,tp,LOCATION_REST,0,1,sg,e,tp)
 end

@@ -3,7 +3,7 @@
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Xyz Summon procedure: 3 Level 9 LIGHT monsters, or 1 "Number 38: Hope Harbinger Dragon Titanic Galaxy"
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGHT),9,3,s.ovfilter,aux.Stringid(id,0))
 	--Gains 200 ATK for each material attached to it
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetValue(function(e,c) return c:GetOverlayCount()*200 end)
 	c:RegisterEffect(e1)
-	--Attach up to 2 Spells/Traps your opponent controls to this card as material
+	--Attach up to 2 Actionals/Traps your opponent controls to this card as material
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_IGNITION)
@@ -40,7 +40,7 @@ function s.ovfilter(c,tp,lc)
 	return c:IsSummonCode(lc,SUMMON_TYPE_XYZ,tp,63767246) and c:IsFaceup()
 end
 function s.attachfilter(c,xc,tp)
-	return c:IsSpellTrap() and c:IsCanBeXyzMaterial(xc,tp,REASON_EFFECT)
+	return c:IsActionalTrap() and c:IsCanBeXyzMaterial(xc,tp,REASON_EFFECT)
 end
 function s.attachtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()

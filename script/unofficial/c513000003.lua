@@ -1,5 +1,5 @@
 --時械神 ザフィオン (Anime)
---Zaphion, the Timelord (Anime)
+--Zaphion, the Timewatcher (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--indes
@@ -69,7 +69,7 @@ function s.initial_effect(c)
 	e9:SetOperation(s.drop)
 	c:RegisterEffect(e9)
 	local e10=e9:Clone()
-	e10:SetCode(EVENT_TO_GRAVE)
+	e10:SetCode(EVENT_TO_REST)
 	c:RegisterEffect(e10)
 	local e11=e9:Clone()
 	e11:SetCode(EVENT_TO_HAND)
@@ -89,7 +89,7 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.filter(c)
-	return c:IsSpellTrap() and c:IsAbleToDeck()
+	return c:IsActionalTrap() and c:IsAbleToDeck()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

@@ -1,5 +1,5 @@
 --Ｈ・Ｄ・Ｄ
---H.D.D. - Hundred Divine Dragon
+--H.S.D. - Hundred Mega Dragon
 --scripted by edo9300
 local s,id=GetID()
 function s.initial_effect(c)

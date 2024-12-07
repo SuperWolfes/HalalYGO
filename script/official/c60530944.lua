@@ -2,10 +2,10 @@
 --Battle of the Elements
 local s,id=GetID()
 function s.initial_effect(c)
-	--Players send monsters to the GY until they control only 1 attribute
+	--Players send monsters to the RP until they control only 1 attribute
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_TOGRAVE)
+	e1:SetCategory(CATEGORY_TOREST)
 	e1:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
@@ -44,6 +44,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,1-tp,aux.Stringid(id,0))
 	local r2=Duel.AnnounceAttribute(1-tp,1,s.getattr(g2))
 	g2:Remove(s.rmfilter,nil,r2)
-	Duel.SendtoGrave(g1,REASON_RULE,PLAYER_NONE,tp)
-	Duel.SendtoGrave(g2,REASON_RULE,PLAYER_NONE,1-tp)
+	Duel.SendtoRest(g1,REASON_RULE,PLAYER_NONE,tp)
+	Duel.SendtoRest(g2,REASON_RULE,PLAYER_NONE,1-tp)
 end

@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c)
-	return c:IsSpellTrap() and c:IsAbleToRemoveAsCost(POS_FACEDOWN)
+	return c:IsActionalTrap() and c:IsAbleToRemoveAsCost(POS_FACEDOWN)
 end
 function s.rescon(sg,e,tp,mg)
 	return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,0,1,nil,e,tp,#sg,false)
@@ -23,7 +23,7 @@ function s.spfilter(c,e,tp,lvl,chk)
 	return (chk and c:IsLevelBelow(lvl)) or c:IsLevel(lvl)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST,0,nil)
 	local ct=math.min(#g,3)
 	if chk==0 then return ct>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,0,1,nil,e,tp,ct,true) end
 	local rg=aux.SelectUnselectGroup(g,e,tp,1,ct,s.rescon,1,tp,HINTMSG_REMOVE,s.rescon)

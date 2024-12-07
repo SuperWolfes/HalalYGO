@@ -5,18 +5,18 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special summon itself from hand or GY while you control "Right Hand Shark"
+	--Special summon itself from hand or RP while you control "Right Hand Shark"
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_IGNITION)
-	e1:SetRange(LOCATION_HAND+LOCATION_GRAVE)
+	e1:SetRange(LOCATION_HAND+LOCATION_REST)
 	e1:SetCountLimit(1,id)
 	e1:SetCondition(s.spcon)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--If special summoned from GY, it becomes level 4
+	--If special summoned from RP, it becomes level 4
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
@@ -69,9 +69,9 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		c:RegisterEffect(e1,true)
 	end
 end
-	--Check if previous location was GY
+	--Check if previous location was RP
 function s.lvcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsPreviousLocation(LOCATION_GRAVE)
+	return e:GetHandler():IsPreviousLocation(LOCATION_REST)
 end
 	--Activation legality
 function s.lvtg(e,tp,eg,ep,ev,re,r,rp,chk)

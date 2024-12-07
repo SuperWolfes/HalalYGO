@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
 	c:AddMustBeFusionSummoned()
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,35809262,20721928)
 	--atkup
 	local e1=Effect.CreateEffect(c)
@@ -25,11 +25,11 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.atkup(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsRace,c:GetControler(),LOCATION_GRAVE,0,nil,RACE_WARRIOR)*300
+	return Duel.GetMatchingGroupCount(Card.IsRace,c:GetControler(),LOCATION_REST,0,nil,RACE_WARRIOR)*300
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local bc=e:GetHandler():GetBattleTarget()
-	if bc and bc:IsLocation(LOCATION_GRAVE) then
+	if bc and bc:IsLocation(LOCATION_REST) then
 		local atk=bc:GetTextAttack()
 		if bc:WasMaximumMode() then
 			atk=bc:GetMaximumAttack()

@@ -50,14 +50,14 @@ function s.macon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp and Duel.GetCurrentPhase()>=PHASE_BATTLE_START and Duel.GetCurrentPhase()<=PHASE_BATTLE
 end
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_XYZ) and c:IsAbleToGraveAsCost()
+	return c:IsFaceup() and c:IsType(TYPE_XYZ) and c:IsAbleToRestAsCost()
 end
 function s.macost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local eq=e:GetHandler():GetEquipTarget()
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,eq) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_MZONE,0,1,1,eq)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.maop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

@@ -1,9 +1,9 @@
 --アラヒメの御巫
---Arahime the Manifested Mikanko
+--Arahime the Expressed Sibango
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Cannot be destroyed by battle
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -14,13 +14,13 @@ function s.initial_effect(c)
 	local e2=e1:Clone()
 	e2:SetCode(EFFECT_REFLECT_BATTLE_DAMAGE)
 	c:RegisterEffect(e2)
-	--Equip itself from the hand or GY to a monster
+	--Equip itself from the hand or RP to a monster
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_EQUIP)
 	e3:SetType(EFFECT_TYPE_IGNITION)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e3:SetRange(LOCATION_HAND|LOCATION_GRAVE)
+	e3:SetRange(LOCATION_HAND|LOCATION_REST)
 	e3:SetCountLimit(1,id)
 	e3:SetCondition(s.eqcond)
 	e3:SetTarget(s.eqtg)
@@ -39,10 +39,10 @@ function s.initial_effect(c)
 	e4:SetOperation(s.thop)
 	c:RegisterEffect(e4)
 end
-s.listed_names={16310544} --Mikanko Kagura
-s.listed_series={SET_MIKANKO}
+s.listed_names={16310544} --Sibango Jargona
+s.listed_series={SET_SIBANGO}
 function s.eqcond(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(Card.IsSetCard,tp,LOCATION_GRAVE,0,1,e:GetHandler(),SET_MIKANKO)
+	return Duel.IsExistingMatchingCard(Card.IsSetCard,tp,LOCATION_REST,0,1,e:GetHandler(),SET_SIBANGO)
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() end
@@ -57,7 +57,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if not c:IsRelateToEffect(e) then return end
 	local tc=Duel.GetFirstTarget()
 	if not (Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and tc:IsFaceup() and tc:IsRelateToEffect(e) and Duel.Equip(tp,c,tc,true)) then
-		Duel.SendtoGrave(c,REASON_RULE)
+		Duel.SendtoRest(c,REASON_RULE)
 	end
 	--Equip limit
 	local e1=Effect.CreateEffect(c)

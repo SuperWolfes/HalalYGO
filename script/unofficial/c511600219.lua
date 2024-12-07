@@ -1,9 +1,9 @@
 --ハイドライブ・スカバード
---Hydradrive Scabbard
+--Hyddendrive Scabbard
 --scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon 1 "Hydradrive Token" 
+	--Special Summon 1 "Hyddendrive Token" 
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOKEN)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_ATTACK_ANNOUNCE)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCondition(s.condition)
 	e2:SetCost(aux.bfgcost)
 	e2:SetOperation(s.operation)
@@ -40,10 +40,10 @@ function s.filter(c,att)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetAttacker():IsControler(1-tp) and Duel.GetAttackTarget()==nil
-		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,1,nil,ATTRIBUTE_EARTH)
-		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,1,nil,ATTRIBUTE_WATER)
-		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,1,nil,ATTRIBUTE_FIRE)
-		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,1,nil,ATTRIBUTE_WIND)
+		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,1,nil,ATTRIBUTE_EARTH)
+		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,1,nil,ATTRIBUTE_WATER)
+		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,1,nil,ATTRIBUTE_FIRE)
+		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,1,nil,ATTRIBUTE_WIND)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local e1=Effect.CreateEffect(e:GetHandler())

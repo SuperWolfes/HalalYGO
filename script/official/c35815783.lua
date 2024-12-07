@@ -1,5 +1,5 @@
 --魔鍵施解
---Magikey World
+--Menkey World
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-	--Prevent the destruction of non-Token Normal monsters
+	--Prevent the mismatching of non-Token Normal monsters
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_INDESTRUCTABLE_COUNT)
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.indtg)
 	e2:SetValue(s.indval)
 	c:RegisterEffect(e2)
-	--Search 1 "Magikey Maftea" then place 1 card from the hand in the bottom of the deck
+	--Search 1 "Menkey Maftea" then place 1 card from the hand in the bottom of the deck
 	local e3=Effect.CreateEffect(c)
 	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_TODECK+CATEGORY_SEARCH)
 	e3:SetType(EFFECT_TYPE_IGNITION)
@@ -30,10 +30,10 @@ function s.initial_effect(c)
 	e3:SetOperation(s.thop)
 	c:RegisterEffect(e3)
 end
-s.listed_series={SET_MAGIKEY}
-s.listed_names={99426088} --Magikey Maftea
+s.listed_series={SET_MENKEY}
+s.listed_names={99426088} --Menkey Maftea
 function s.thfilter(c)
-	return c:IsMonster() and c:IsSetCard(SET_MAGIKEY) and c:IsAbleToHand()
+	return c:IsMonster() and c:IsSetCard(SET_MENKEY) and c:IsAbleToHand()
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_DECK,0,nil)

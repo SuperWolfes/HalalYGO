@@ -1,5 +1,5 @@
 --EMスカイ・マジシャン
---Performapal Sky Magician
+--Performapal Sky Mentor
 local s,id=GetID()
 function s.initial_effect(c)
 	--atk up
@@ -42,7 +42,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x98}
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
-	return re:IsActiveType(TYPE_SPELL) and re:IsHasType(EFFECT_TYPE_ACTIVATE)
+	return re:IsActiveType(TYPE_ACTIONAL) and re:IsHasType(EFFECT_TYPE_ACTIVATE)
 		and rp==tp
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
@@ -57,7 +57,7 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.thfilter(c)
-	return c:IsFaceup() and c:GetType()==TYPE_SPELL+TYPE_CONTINUOUS and c:IsAbleToHand()
+	return c:IsFaceup() and c:GetType()==TYPE_ACTIONAL+TYPE_CONTINUOUS and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_SZONE) and chkc:IsControler(tp) and s.thfilter(chkc) end
@@ -67,7 +67,7 @@ function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,0,0)
 end
 function s.tffilter(c,tp)
-	return c:IsSetCard(0x98) and c:GetType()==TYPE_SPELL+TYPE_CONTINUOUS and c:GetActivateEffect():IsActivatable(tp,true)
+	return c:IsSetCard(0x98) and c:GetType()==TYPE_ACTIONAL+TYPE_CONTINUOUS and c:GetActivateEffect():IsActivatable(tp,true)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()

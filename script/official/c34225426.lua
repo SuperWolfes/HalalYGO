@@ -17,13 +17,13 @@ function s.initial_effect(c)
 	e2:SetTarget(function(_,c) return c:IsSetCard(SET_TEARLAMENTS) or c:IsType(TYPE_FUSION) end)
 	e2:SetValue(500)
 	c:RegisterEffect(e2)
-	--Send 1 Aqua monster from Deck to GY
+	--Send 1 Aqua monster from Deck to RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
-	e3:SetCategory(CATEGORY_TOGRAVE)
+	e3:SetCategory(CATEGORY_TOREST)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e3:SetProperty(EFFECT_FLAG_DELAY)
-	e3:SetCode(EVENT_TO_GRAVE)
+	e3:SetCode(EVENT_TO_REST)
 	e3:SetRange(LOCATION_FZONE)
 	e3:SetCountLimit(1,id)
 	e3:SetCondition(s.grcon)
@@ -39,18 +39,18 @@ function s.grcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,tp)
 end
 function s.grvfilter(c)
-	return c:IsRace(RACE_AQUA) and c:IsLevelBelow(4) and c:IsAbleToGrave()
+	return c:IsRace(RACE_AQUA) and c:IsLevelBelow(4) and c:IsAbleToRest()
 end
 function s.grtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.grvfilter,tp,LOCATION_DECK,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
 function s.grop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.grvfilter,tp,LOCATION_DECK,0,1,1,nil)
-	if #g>0 and Duel.SendtoGrave(g,REASON_EFFECT)>0 then
+	if #g>0 and Duel.SendtoRest(g,REASON_EFFECT)>0 then
 		local tc=Duel.GetOperatedGroup():GetFirst()
-		if tc:IsLocation(LOCATION_GRAVE) and not tc:IsSetCard(SET_TEARLAMENTS) then
+		if tc:IsLocation(LOCATION_REST) and not tc:IsSetCard(SET_TEARLAMENTS) then
 			--Cannot activate card or effects with the same name if it's not a "Tearlaments"
 			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetDescription(aux.Stringid(id,2))

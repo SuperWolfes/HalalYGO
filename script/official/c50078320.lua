@@ -1,5 +1,5 @@
 --刻印の調停者
---Engraver of the Mark
+--Enrestr of the Mark
 local s,id=GetID()
 function s.initial_effect(c)
 	--Declare 1 other card name
@@ -32,8 +32,8 @@ function s.declcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.declcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(c,REASON_COST)
+	if chk==0 then return c:IsAbleToRestAsCost() end
+	Duel.SendtoRest(c,REASON_COST)
 end
 function s.declop(e,tp,eg,ep,ev,re,r,rp)
 	local ex,cg,ct,cp,cv=Duel.GetOperationInfo(ev,CATEGORY_ANNOUNCE)

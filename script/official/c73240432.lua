@@ -57,14 +57,14 @@ function s.damfilter(c)
 	return c:IsSetCard(0xad) and c:IsMonster()
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.damfilter,tp,LOCATION_GRAVE,0,1,nil) end
-	local val=Duel.GetMatchingGroupCount(s.damfilter,tp,LOCATION_GRAVE,0,nil)*200
+	if chk==0 then return Duel.IsExistingMatchingCard(s.damfilter,tp,LOCATION_REST,0,1,nil) end
+	local val=Duel.GetMatchingGroupCount(s.damfilter,tp,LOCATION_REST,0,nil)*200
 	Duel.SetTargetPlayer(1-tp)
 	Duel.SetTargetParam(val)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,val)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
-	local val=Duel.GetMatchingGroupCount(s.damfilter,tp,LOCATION_GRAVE,0,nil)*200
+	local val=Duel.GetMatchingGroupCount(s.damfilter,tp,LOCATION_REST,0,nil)*200
 	Duel.Damage(p,val,REASON_EFFECT)
 end

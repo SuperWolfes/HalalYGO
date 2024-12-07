@@ -57,12 +57,12 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		if not (ec:IsRelateToEffect(e) and ec:IsControler(tp)) then return end
 		local tc=(Duel.GetTargetCards(e)-ec):GetFirst()
 		if not (tc and tc:IsFaceup() and Duel.GetLocationCount(tp,LOCATION_SZONE)>0) then
-			Duel.SendtoGrave(ec,REASON_RULE,PLAYER_NONE,PLAYER_NONE)
+			Duel.SendtoRest(ec,REASON_RULE,PLAYER_NONE,PLAYER_NONE)
 		elseif aux.CheckUnionEquip(ec,tc) and Duel.Equip(tp,ec,tc) then
 			aux.SetUnionState(ec)
 		end
 	elseif op==2 then
-		--Special Summon 1 equipped Union Monster Card from your Spell & Trap Zone in Attack Position
+		--Special Summon 1 equipped Union Monster Card from your Actional & Trap Zone in Attack Position
 		local tc=Duel.GetFirstTarget()
 		if tc:IsRelateToEffect(e) then
 			Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP_ATTACK)

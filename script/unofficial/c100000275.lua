@@ -1,5 +1,5 @@
 --Ｄ－ＨＥＲＯ ディバインガイ (Anime)
---Destiny HERO - Celestial (Anime)
+--Destrudic HERO - Celestial (Anime)
 --updated by ClaireStanfield
 local s,id=GetID()
 function s.initial_effect(c)

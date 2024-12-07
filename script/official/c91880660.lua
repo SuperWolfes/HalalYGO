@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.excttg)
 	e2:SetOperation(s.exctop)
 	c:RegisterEffect(e2)
-	--Shuffle all cards on their opponent's field and GY into the Deck.
+	--Shuffle all cards on their opponent's field and RP into the Deck.
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_TODECK)
@@ -64,7 +64,7 @@ function s.exctop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.ConfirmCards(1-tp,sc)
 			Duel.ShuffleHand(tp)
 		else
-			Duel.SendtoGrave(sc,REASON_RULE)
+			Duel.SendtoRest(sc,REASON_RULE)
 		end
 		decrease=1
 	end
@@ -81,12 +81,12 @@ function s.exctop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SortDeckbottom(tp,tp,sortct)
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(Card.IsAbleToDeck,tp,0,LOCATION_ONFIELD|LOCATION_GRAVE,nil)
+	local g=Duel.GetMatchingGroup(Card.IsAbleToDeck,tp,0,LOCATION_ONFIELD|LOCATION_REST,nil)
 	if chk==0 then return #g>0 end
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,#g,0,0)
 end
 function s.tdop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(Card.IsAbleToDeck,tp,0,LOCATION_ONFIELD|LOCATION_GRAVE,nil)
+	local g=Duel.GetMatchingGroup(Card.IsAbleToDeck,tp,0,LOCATION_ONFIELD|LOCATION_REST,nil)
 	if #g>0 then
 		Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
 	end

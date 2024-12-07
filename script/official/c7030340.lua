@@ -19,14 +19,14 @@ function s.filter2(c,sg)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.filter2(chkc) end
-	local rg=Duel.GetMatchingGroup(s.filter1,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil)
+	local rg=Duel.GetMatchingGroup(s.filter1,tp,LOCATION_MZONE+LOCATION_REST,0,nil)
 	if chk==0 then return #rg>0 and Duel.IsExistingTarget(s.filter2,tp,LOCATION_MZONE,0,1,nil,rg) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 	Duel.SelectTarget(tp,s.filter2,tp,LOCATION_MZONE,0,1,1,nil,rg)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,rg,#rg,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(s.filter1,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.filter1,tp,LOCATION_MZONE+LOCATION_REST,0,nil)
 	local ct=Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
 	local tc=Duel.GetFirstTarget()
 	if ct>0 and tc and tc:IsFaceup() and tc:IsRelateToEffect(e) then

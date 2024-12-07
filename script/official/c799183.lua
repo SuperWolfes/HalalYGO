@@ -12,19 +12,19 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-	--Set itself from GY
+	--Set itself from RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_DISABLE)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCode(EVENT_FREE_CHAIN)
 	e2:SetCost(s.setcost)
 	e2:SetTarget(s.settg)
-	e2:SetOperation(s.setop)
+	e2:SetOperation(s.vetop)
 	c:RegisterEffect(e2)
 end
 s.listed_series={0x10cf}
-s.counter_list={COUNTER_SPELL}
+s.counter_list={COUNTER_ACTIONAL}
 
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.IsExistingMatchingCard(Card.IsSetCard,tp,LOCATION_MZONE,0,1,nil,0x10cf) then return false end
@@ -46,14 +46,14 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.setcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsCanRemoveCounter(tp,1,0,COUNTER_SPELL,1,REASON_COST) end
-	Duel.RemoveCounter(tp,1,0,COUNTER_SPELL,1,REASON_COST)
+	if chk==0 then return Duel.IsCanRemoveCounter(tp,1,0,COUNTER_ACTIONAL,1,REASON_COST) end
+	Duel.RemoveCounter(tp,1,0,COUNTER_ACTIONAL,1,REASON_COST)
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsSSetable() end
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,e:GetHandler(),1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,e:GetHandler(),1,0,0)
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and c:IsSSetable() then
 		Duel.SSet(tp,c)

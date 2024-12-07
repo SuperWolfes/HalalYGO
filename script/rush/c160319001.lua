@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion Procedure
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	local e0=Fusion.AddProcMixN(c,true,true,CARD_BLUEEYES_W_DRAGON,3)[1]
 	e0:SetDescription(aux.Stringid(id,0))
 	local e1=Fusion.AddProcMix(c,true,true,CARD_BLUEEYES_W_DRAGON,s.ffilter)[1]

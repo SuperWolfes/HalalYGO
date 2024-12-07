@@ -3,8 +3,8 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
-	--Link Summon procedure: 2+ monsters, including a Fiend monster
+	c:EnableAwakeLimit()
+	--Link Summon procedure: 2+ monsters, including a Tainted monster
 	Link.AddProcedure(c,nil,2,4,s.matcheck)
 	--Activate 1 of these effects
 	local e1=Effect.CreateEffect(c)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.efftg)
 	e1:SetOperation(s.effop)
 	c:RegisterEffect(e1)
-	--Draw cards equal to the number of different Monster Types among the monsters in your GY, then place the same number of cards from your hand on the bottom of the Deck in any order
+	--Draw cards equal to the number of different Monster Types among the monsters in your RP, then place the same number of cards from your hand on the bottom of the Deck in any order
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_DRAW+CATEGORY_TODECK)
@@ -33,7 +33,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.matcheck(g,lc,sumtype,tp)
-	return g:IsExists(Card.IsRace,1,nil,RACE_FIEND,lc,sumtype,tp)
+	return g:IsExists(Card.IsRace,1,nil,RACE_TAINTED,lc,sumtype,tp)
 end
 function s.effcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,nil) end
@@ -46,7 +46,7 @@ function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	local b1=Duel.GetFieldGroupCount(tp,LOCATION_ONFIELD,LOCATION_ONFIELD)>0
 	local b2=c:IsAbleToRemove() and Duel.GetMZoneCount(tp,c)>0
-		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp)
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp)
 	if chk==0 then return b1 or b2 end
 	local op=Duel.SelectEffect(tp,
 		{b1,aux.Stringid(id,2)},
@@ -59,7 +59,7 @@ function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	elseif op==2 then
 		e:SetCategory(CATEGORY_REMOVE+CATEGORY_SPECIAL_SUMMON)
 		Duel.SetOperationInfo(0,CATEGORY_REMOVE,c,1,tp,0)
-		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 	end
 end
 function s.effop(e,tp,eg,ep,ev,re,r,rp)
@@ -73,12 +73,12 @@ function s.effop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.Destroy(g,REASON_EFFECT)
 		end
 	elseif op==2 then
-		--Banish this card (until the End Phase), and if you do, Special Summon 1 LIGHT or DARK monster from your GY
+		--Banish this card (until the End Phase), and if you do, Special Summon 1 LIGHT or DARK monster from your RP
 		local c=e:GetHandler()
 		if c:IsRelateToEffect(e) and aux.RemoveUntil(c,nil,REASON_EFFECT,PHASE_END,id,e,tp,aux.DefaultFieldReturnOp)
 			and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-			local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+			local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,0,1,1,nil,e,tp)
 			if #g>0 then
 				Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 			end
@@ -86,7 +86,7 @@ function s.effop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	local ct=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_GRAVE,0,nil):GetClassCount(Card.GetRace)
+	local ct=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_REST,0,nil):GetClassCount(Card.GetRace)
 	if chk==0 then return ct>0 and Duel.IsPlayerCanDraw(tp,ct) end
 	Duel.SetTargetPlayer(tp)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,ct)
@@ -94,7 +94,7 @@ function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
-	local d=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_GRAVE,0,nil):GetClassCount(Card.GetRace)
+	local d=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_REST,0,nil):GetClassCount(Card.GetRace)
 	local ct=Duel.Draw(p,d,REASON_EFFECT)
 	if ct==0 then return end
 	Duel.ShuffleHand(tp)

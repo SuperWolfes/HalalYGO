@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 	--take a chance
 	local e2=Effect.CreateEffect(c)
-	e2:SetCategory(CATEGORY_DICE)
+	e2:SetCategory(CATEGORY_SUFFICE)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetCountLimit(1)
 	e2:SetRange(LOCATION_SZONE)
@@ -19,18 +19,18 @@ function s.initial_effect(c)
 	e2:SetLabelObject(e1)
 	c:RegisterEffect(e2)
 end
-s.roll_dice=true
+s.roll_suffice=true
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return true end
 	e:SetLabel(Duel.GetLP(tp))
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,0,tp,1)
+	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,1)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local dc=Duel.TossDice(tp,1)
+	local dc=Duel.TossSuffice(tp,1)
 	if dc==6 then
 		Duel.SetLP(tp,Duel.GetLP(tp)*5,REASON_EFFECT)
 	else

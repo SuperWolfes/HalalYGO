@@ -2,7 +2,7 @@
 --Extinction on Schedule
 local s,id=GetID()
 function s.initial_effect(c)
-	--Make players send all cards they control to the GY
+	--Make players send all cards they control to the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -40,7 +40,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	if ct==3 then
 		local g1=Duel.GetFieldGroup(tp,LOCATION_ONFIELD,0)
 		local g2=Duel.GetFieldGroup(tp,0,LOCATION_ONFIELD)
-		Duel.SendtoGrave(g1,REASON_RULE,PLAYER_NONE,tp)
-		Duel.SendtoGrave(g2,REASON_RULE,PLAYER_NONE,1-tp)
+		Duel.SendtoRest(g1,REASON_RULE,PLAYER_NONE,tp)
+		Duel.SendtoRest(g2,REASON_RULE,PLAYER_NONE,1-tp)
 	end
 end

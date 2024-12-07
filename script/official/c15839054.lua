@@ -15,10 +15,10 @@ function s.initial_effect(c)
 end
 s.listed_series={0x46}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_GRAVE) and r==REASON_SYNCHRO
+	return e:GetHandler():IsLocation(LOCATION_REST) and r==REASON_SYNCHRO
 end
 function s.filter(c)
-	return c:IsSetCard(0x46) and c:IsSpell() and c:IsAbleToHand()
+	return c:IsSetCard(0x46) and c:IsActional() and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end

@@ -25,7 +25,7 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	Duel.SetOperationInfo(0,CATEGORY_ATKCHANGE,e:GetHandler(),1,tp,300)
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,LOCATION_HAND|LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,LOCATION_HAND|LOCATION_REST)
 end
 function s.spfilter(c,e,tp)
 	return c:IsRace(RACE_REPTILE) and c:IsLevelAbove(7) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -48,11 +48,11 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetValue(300)
 		e1:SetReset(RESETS_STANDARD_PHASE_END)
 		c:RegisterEffect(e1)
-		local g3=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_HAND|LOCATION_GRAVE,0,nil,e,tp)
+		local g3=Duel.GetMatchingGroup(aux.RestValleyFilter(s.spfilter),tp,LOCATION_HAND|LOCATION_REST,0,nil,e,tp)
 		local ft=Duel.GetMZoneCount(tp)
 		if ft<=0 then return end
 		if ft>=2 then ft=2 end
-		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 		if #g3>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			Duel.BreakEffect()
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)

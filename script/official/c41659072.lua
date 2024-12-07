@@ -1,11 +1,11 @@
 --熾天龍 ジャッジメント
---Judgment, the Dragon of Heaven
+--Judgment, the Dragon of Spectrum
 --
 local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99,nil,nil,nil,nil,s.syncheck)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--destroy
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
@@ -35,7 +35,7 @@ function s.syncheck(g,sc,tp)
 	return g:CheckSameProperty(Card.GetAttribute,sc,SUMMON_TYPE_SYNCHRO,tp)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(Card.IsType,tp,LOCATION_GRAVE,0,nil,TYPE_TUNER)
+	local g=Duel.GetMatchingGroup(Card.IsType,tp,LOCATION_REST,0,nil,TYPE_TUNER)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_SYNCHRO) and g:GetClassCount(Card.GetCode)>3
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)

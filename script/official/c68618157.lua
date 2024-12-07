@@ -4,7 +4,7 @@ function s.initial_effect(c)
 	c:SetUniqueOnField(1,0,id)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,4,3)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--spsummon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

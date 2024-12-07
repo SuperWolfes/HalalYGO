@@ -1,8 +1,8 @@
 --地縛神の復活
---Earthbound Revival
+--Earthbound Awakal
 local s,id=GetID()
 function s.initial_effect(c)
-	--Add 1 "Earthbound Immortal" monster and 1 Field Spell to the hand
+	--Add 1 "Earthbound Immortal" monster and 1 Field Actional to the hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND)
@@ -23,16 +23,16 @@ function s.filter1(c)
 	return c:IsSetCard(SET_EARTHBOUND_IMMORTAL) and c:IsMonster() and c:IsAbleToHand()
 end
 function s.filter2(c)
-	return c:IsFieldSpell() and c:IsAbleToHand()
+	return c:IsFieldActional() and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	if chk==0 then return Duel.IsExistingTarget(s.filter1,tp,LOCATION_GRAVE,0,1,nil)
-		and Duel.IsExistingTarget(s.filter2,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingTarget(s.filter1,tp,LOCATION_REST,0,1,nil)
+		and Duel.IsExistingTarget(s.filter2,tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g1=Duel.SelectTarget(tp,s.filter1,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g1=Duel.SelectTarget(tp,s.filter1,tp,LOCATION_REST,0,1,1,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g2=Duel.SelectTarget(tp,s.filter2,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g2=Duel.SelectTarget(tp,s.filter2,tp,LOCATION_REST,0,1,1,nil)
 	g1:Merge(g2)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g1,2,0,0)
 end

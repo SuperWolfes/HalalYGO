@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,5405694,23995346)
 	--atk
 	local e1=Effect.CreateEffect(c)
@@ -18,8 +18,8 @@ end
 s.material_setcode={0xdd,0x10cf,0xcf}
 s.listed_names={5405694,23995346}
 function s.filter(c)
-	return (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup()) and c:IsRace(RACE_DRAGON)
+	return (c:IsLocation(LOCATION_REST) or c:IsFaceup()) and c:IsRace(RACE_DRAGON)
 end
 function s.atkval(e,c)
-	return Duel.GetMatchingGroupCount(s.filter,c:GetControler(),LOCATION_MZONE+LOCATION_GRAVE,LOCATION_MZONE+LOCATION_GRAVE,c)*500
+	return Duel.GetMatchingGroupCount(s.filter,c:GetControler(),LOCATION_MZONE+LOCATION_REST,LOCATION_MZONE+LOCATION_REST,c)*500
 end

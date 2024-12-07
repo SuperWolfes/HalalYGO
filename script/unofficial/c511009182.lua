@@ -1,7 +1,7 @@
 --Mystic Egg
 local s,id=GetID()
 function s.initial_effect(c)
-	--to grave
+	--to rest
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EVENT_BATTLE_DESTROYED)

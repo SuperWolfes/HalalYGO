@@ -3,7 +3,7 @@
 --Scripted by fiftyfour
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Must be Special Summoned by own procedure
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -33,7 +33,7 @@ function s.initial_effect(c)
 end
 function s.spfilter(c)
 	return c:IsMonster() and c:IsAbleToRemoveAsCost() and c:IsAttribute(ATTRIBUTE_LIGHT|ATTRIBUTE_DARK)
-		and ((c:IsLocation(LOCATION_GRAVE|LOCATION_MZONE) and aux.SpElimFilter(c,true)) or c:IsLocation(LOCATION_HAND))
+		and ((c:IsLocation(LOCATION_REST|LOCATION_MZONE) and aux.SpElimFilter(c,true)) or c:IsLocation(LOCATION_HAND))
 end
 function s.rescon(sg,e,tp,mg)
 	return aux.ChkfMMZ(1)(sg,e,tp,mg) and sg:IsExists(s.attchk,2,nil,sg)
@@ -44,11 +44,11 @@ end
 function s.spcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
-	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE|LOCATION_GRAVE|LOCATION_HAND,0,e:GetHandler())
+	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE|LOCATION_REST|LOCATION_HAND,0,e:GetHandler())
 	return #rg>=4 and aux.SelectUnselectGroup(rg,e,tp,4,4,s.rescon,0)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,c)
-	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE|LOCATION_GRAVE|LOCATION_HAND,0,e:GetHandler())
+	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE|LOCATION_REST|LOCATION_HAND,0,e:GetHandler())
 	local g=aux.SelectUnselectGroup(rg,e,tp,4,4, s.rescon,1,tp,HINTMSG_REMOVE)
 	if #g>0 then
 		g:KeepAlive()
@@ -62,7 +62,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	if not g then return end
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 	local hc=g:FilterCount(Card.IsPreviousLocation,nil,LOCATION_HAND)
-	local gc=g:FilterCount(Card.IsPreviousLocation,nil,LOCATION_GRAVE)
+	local gc=g:FilterCount(Card.IsPreviousLocation,nil,LOCATION_REST)
 	if hc>0 then
 		--Attack gain
 		local e1=Effect.CreateEffect(c)

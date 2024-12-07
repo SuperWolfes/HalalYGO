@@ -1,5 +1,5 @@
 --邪悪な儀式
---Curse of Fiend
+--Curse of Tainted
 local s,id=GetID()
 function s.initial_effect(c)
 	--Change the battle position of all the monsters on field
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-	--Can only be activated as Spell Speed 1 at the start of a chain during your Standby Phase while set
+	--Can only be activated as Actional Speed 1 at the start of a chain during your Standby Phase while set
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetProperty(EFFECT_FLAG_UNCOPYABLE|EFFECT_FLAG_CANNOT_DISABLE)

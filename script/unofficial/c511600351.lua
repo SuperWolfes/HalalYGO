@@ -34,7 +34,7 @@ function s.initial_effect(c)
 	e3:SetDescription(aux.Stringid(alias,2))
 	e3:SetType(EFFECT_TYPE_TRIGGER_O+EFFECT_TYPE_FIELD)
 	e3:SetCode(EVENT_PRE_DAMAGE_CALCULATE)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetCountLimit(1,{alias,200})
 	e3:SetCost(aux.bfgcost)
 	e3:SetTarget(s.bttg)
@@ -124,7 +124,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_GRAVE,0,0,1,nil,e,tp,e:GetLabel())
+	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_REST,0,0,1,nil,e,tp,e:GetLabel())
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP) 
 	end

@@ -20,7 +20,7 @@ function s.lv4warriorspfilter(c,e,tp)
 end
 function s.tgfilter(c,e,tp)
 	return c:IsRace(RACE_WARRIOR) and c:HasLevel() and c:IsFaceup()
-		and Duel.IsExistingMatchingCard(s.earthwarriorspfilter,tp,LOCATION_DECK|LOCATION_GRAVE,0,1,nil,e,tp,c:GetLevel())
+		and Duel.IsExistingMatchingCard(s.earthwarriorspfilter,tp,LOCATION_DECK|LOCATION_REST,0,1,nil,e,tp,c:GetLevel())
 end
 function s.earthwarriorspfilter(c,e,tp,lv)
 	return c:IsAttribute(ATTRIBUTE_EARTH) and c:IsRace(RACE_WARRIOR) and c:IsLevelBelow(lv)
@@ -44,7 +44,7 @@ function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 		Duel.SelectTarget(tp,s.tgfilter,tp,LOCATION_MZONE,0,1,1,nil,e,tp)
 	end
-	local loc=op==1 and LOCATION_DECK or LOCATION_DECK|LOCATION_GRAVE
+	local loc=op==1 and LOCATION_DECK or LOCATION_DECK|LOCATION_REST
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,loc)
 end
 function s.effop(e,tp,eg,ep,ev,re,r,rp)
@@ -58,12 +58,12 @@ function s.effop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 		end
 	elseif op==2 then
-		--Special Summon 1 EARTH Warrior monster with an equal or lower Level than the target from your Deck or GY
+		--Special Summon 1 EARTH Warrior monster with an equal or lower Level than the target from your Deck or RP
 		if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 		local tc=Duel.GetFirstTarget()
 		if not (tc:IsRelateToEffect(e) and tc:IsFaceup() and tc:HasLevel()) then return end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.earthwarriorspfilter),tp,LOCATION_DECK|LOCATION_GRAVE,0,1,1,nil,e,tp,tc:GetLevel())
+		local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.earthwarriorspfilter),tp,LOCATION_DECK|LOCATION_REST,0,1,1,nil,e,tp,tc:GetLevel())
 		if #g>0 then
 			Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 		end

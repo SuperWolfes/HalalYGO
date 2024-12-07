@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.costfilter(c)
-	return c:IsRace(RACE_CYBERSE) and c:IsFaceup() and c:IsAbleToGraveAsCost()
+	return c:IsRace(RACE_CYBERSE) and c:IsFaceup() and c:IsAbleToRestAsCost()
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_MZONE,0,1,nil) 
@@ -24,9 +24,9 @@ end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
 	local c=e:GetHandler()
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_MZONE,0,1,2,nil)
-	local ct=Duel.SendtoGrave(g,REASON_COST)
+	local ct=Duel.SendtoRest(g,REASON_COST)
 	--Effect
 	if ct>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)

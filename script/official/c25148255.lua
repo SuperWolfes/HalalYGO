@@ -35,12 +35,12 @@ function s.scfilter(c,mg,tp)
 end
 function s.sctg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.mfilter(chkc,e,tp,c) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.mfilter(chkc,e,tp,c) end
 	if chk==0 then return Duel.IsPlayerCanSpecialSummonCount(tp,2)
 		and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(s.mfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp,c) end
+		and Duel.IsExistingTarget(s.mfilter,tp,LOCATION_REST,0,1,nil,e,tp,c) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SMATERIAL)
-	Duel.SelectTarget(tp,s.mfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp,c)
+	Duel.SelectTarget(tp,s.mfilter,tp,LOCATION_REST,0,1,1,nil,e,tp,c)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function s.scop(e,tp,eg,ep,ev,re,r,rp)

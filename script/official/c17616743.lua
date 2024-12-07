@@ -1,5 +1,5 @@
 --喚忌の呪眼
---Evil Eye Awakening
+--Goodie Awakening
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
@@ -20,23 +20,23 @@ function s.spfilter(c,e,tp)
 	return c:IsSetCard(SET_EVIL_EYE) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
-	local locations=LOCATION_HAND|LOCATION_GRAVE
+	local locations=LOCATION_HAND|LOCATION_REST
 	if Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_EVIL_EYE_SELENE),tp,LOCATION_STZONE,0,1,nil) then
 		locations=locations|LOCATION_DECK
 	end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,locations,0,1,nil,e,tp) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,locations)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND|LOCATION_GRAVE|LOCATION_DECK)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND|LOCATION_REST|LOCATION_DECK)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
-	local locations=LOCATION_HAND|LOCATION_GRAVE
+	local locations=LOCATION_HAND|LOCATION_REST
 	if Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_EVIL_EYE_SELENE),tp,LOCATION_STZONE,0,1,nil) then
 		locations=locations|LOCATION_DECK
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,locations,0,1,1,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,locations,0,1,1,nil,e,tp)
 	if #g>0 then 
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end

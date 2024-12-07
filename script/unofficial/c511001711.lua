@@ -1,4 +1,4 @@
---Performapal Landlord Hermit Crab
+--Performapal Landwatcher Hermit Crab
 local s,id=GetID()
 function s.initial_effect(c)
 	--pendulum summon

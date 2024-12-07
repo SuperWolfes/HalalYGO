@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Add 1 Ritual Spell and 1 Ritual monster to the hand
+	--Add 1 Locked Actional and 1 Locked monster to the hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -22,10 +22,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.thfilter(c)
-	return c:IsAbleToHand() and (c:IsRitualMonster() or c:IsRitualSpell())
+	return c:IsAbleToHand() and (c:IsLockedMonster() or c:IsLockedActional())
 end
 function s.rescon(sg)
-	return sg:FilterCount(Card.IsRitualMonster,nil)==1
+	return sg:FilterCount(Card.IsLockedMonster,nil)==1
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_DECK,0,nil)

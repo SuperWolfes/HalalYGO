@@ -3,7 +3,7 @@
 --Sripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Xyz Summon Procedure
 	Xyz.AddProcedure(c,nil,5,2,s.xyzfilter,aux.Stringid(id,0),2,s.xyzop)
 	--Cannot be used as material for an Xyz Summon

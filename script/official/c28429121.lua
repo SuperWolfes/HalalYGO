@@ -1,9 +1,9 @@
 --リチュアに伝わりし禁断の秘術
---Forbidden Arts of the Gishki
+--Unliked Arts of the Giojiki
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
-	local e1=Ritual.CreateProc(c,RITPROC_EQUAL,aux.FilterBoolFunction(Card.IsSetCard,0x3a),nil,nil,s.extrafil,s.extraop,aux.FilterBoolFunction(Card.IsOnField))
+	local e1=Locked.CreateProc(c,RITPROC_EQUAL,aux.FilterBoolFunction(Card.IsSetCard,0x3a),nil,nil,s.extrafil,s.extraop,aux.FilterBoolFunction(Card.IsOnField))
 	e1:SetCost(s.cost)
 	c:RegisterEffect(e1)
 end
@@ -25,7 +25,7 @@ function s.extrafil(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetMatchingGroup(s.mfilter,tp,0,LOCATION_MZONE,nil,e)
 end
 function s.extraop(mat,e,tp,eg,ep,ev,re,r,rp,sc)
-	Duel.ReleaseRitualMaterial(mat)
+	Duel.ReleaseLockedMaterial(mat)
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_SET_ATTACK)

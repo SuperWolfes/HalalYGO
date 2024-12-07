@@ -53,7 +53,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ct=Duel.GetMatchingGroupCount(s.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil)
 	local b1=Duel.IsCanRemoveCounter(tp,1,0,0x35,5,REASON_COST)
 	local b2=Duel.IsCanRemoveCounter(tp,1,0,0x35,7,REASON_COST)
-		and Duel.IsExistingMatchingCard(s.rmfilter,tp,0,LOCATION_ONFIELD+LOCATION_GRAVE,1,nil)
+		and Duel.IsExistingMatchingCard(s.rmfilter,tp,0,LOCATION_ONFIELD+LOCATION_REST,1,nil)
 	if chk==0 then return ct>0 and (b1 or b2) end
 	local op=0
 	if b1 and b2 then
@@ -72,7 +72,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	else
 		e:SetCategory(CATEGORY_REMOVE)
 		Duel.RemoveCounter(tp,1,0,0x35,7,REASON_COST)
-		Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,0,LOCATION_ONFIELD+LOCATION_GRAVE)
+		Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,0,LOCATION_ONFIELD+LOCATION_REST)
 	end
 end
 function s.rmfilter(c)
@@ -88,7 +88,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Damage(p,ct*300,REASON_EFFECT)
 	else
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-		local g=Duel.SelectMatchingCard(tp,s.rmfilter,tp,0,LOCATION_ONFIELD+LOCATION_GRAVE,1,ct,nil)
+		local g=Duel.SelectMatchingCard(tp,s.rmfilter,tp,0,LOCATION_ONFIELD+LOCATION_REST,1,ct,nil)
 		if #g>0 then
 			Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
 		end

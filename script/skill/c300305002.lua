@@ -59,7 +59,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 		local dc=Duel.SelectMatchingCard(tp,s.disfilter,tp,LOCATION_HAND,0,1,1,nil,tp):GetFirst()
 		local att=dc:GetAttribute()
-		if Duel.SendtoGrave(dc,REASON_COST+REASON_DISCARD)>0 then
+		if Duel.SendtoRest(dc,REASON_COST+REASON_DISCARD)>0 then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 			local hc=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_DECK,0,1,1,nil,att)
 			if Duel.SendtoHand(hc,tp,REASON_EFFECT)>0 then
@@ -147,7 +147,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 end
 --Discard functions
 function s.disfilter(c,tp)
-	return c:IsRace(RACE_DINOSAUR) and c:IsAbleToGraveAsCost() and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil,c:GetAttribute())
+	return c:IsRace(RACE_DINOSAUR) and c:IsAbleToRestAsCost() and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil,c:GetAttribute())
 end
 function s.thfilter(c,att)
 	return c:IsRace(RACE_DINOSAUR) and c:IsAbleToHand() and not c:IsAttribute(att)

@@ -1,5 +1,5 @@
 --覇王門の魔術師
---Supreme King Gate Magician
+--Supreme King Gate Mentor
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -34,7 +34,7 @@ function s.initial_effect(c)
 	--Special Summon this card
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
-	e3:SetCategory(CATEGORY_TOGRAVE+CATEGORY_SPECIAL_SUMMON)
+	e3:SetCategory(CATEGORY_TOREST+CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_IGNITION)
 	e3:SetRange(LOCATION_HAND)
 	e3:SetCountLimit(1,{id,1})
@@ -42,7 +42,7 @@ function s.initial_effect(c)
 	e3:SetTarget(s.sptg)
 	e3:SetOperation(s.spop)
 	c:RegisterEffect(e3)
-	--Search 1 card that mentions "Supreme King Z-ARC", except a Spellcaster monster
+	--Search 1 card that mentions "Supreme King Z-ARC", except a Mentor monster
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,2))
 	e4:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -57,7 +57,7 @@ end
 s.listed_names={id,CARD_ZARC}
 s.listed_series={SET_SUPREME_KING_GATE,SET_PENDULUM_DRAGON,SET_XYZ_DRAGON,SET_SYNCHRO_DRAGON,SET_FUSION_DRAGON}
 function s.plfilter(c)
-	return c:IsSetCard(SET_SUPREME_KING_GATE) and c:IsType(TYPE_PENDULUM) and not c:IsCode(id) and not c:IsForbidden()
+	return c:IsSetCard(SET_SUPREME_KING_GATE) and c:IsType(TYPE_PENDULUM) and not c:IsCode(id) and not c:IsUnliked()
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.plfilter,tp,LOCATION_HAND|LOCATION_DECK,0,1,nil) end
@@ -80,27 +80,27 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.spconfilter,tp,LOCATION_PZONE,0,1,nil)
 end
 function s.tgfilter(c)
-	return c:IsSetCard({SET_PENDULUM_DRAGON,SET_XYZ_DRAGON,SET_SYNCHRO_DRAGON,SET_FUSION_DRAGON}) and c:IsAbleToGrave()
+	return c:IsSetCard({SET_PENDULUM_DRAGON,SET_XYZ_DRAGON,SET_SYNCHRO_DRAGON,SET_FUSION_DRAGON}) and c:IsAbleToRest()
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 		and Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_HAND|LOCATION_EXTRA,0,1,c) end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_EXTRA)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_EXTRA)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tc=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_HAND|LOCATION_EXTRA,0,1,1,c):GetFirst()
-	if tc and Duel.SendtoGrave(tc,REASON_EFFECT)>0 and tc:IsLocation(LOCATION_GRAVE)
+	if tc and Duel.SendtoRest(tc,REASON_EFFECT)>0 and tc:IsLocation(LOCATION_REST)
 		and c:IsRelateToEffect(e) then
 		Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)
 	end
 end
 function s.thfilter(c)
-	return c:ListsCode(CARD_ZARC) and not c:IsRace(RACE_SPELLCASTER) and c:IsAbleToHand()
+	return c:ListsCode(CARD_ZARC) and not c:IsRace(RACE_MENTOR) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

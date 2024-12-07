@@ -14,11 +14,11 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c,tp)
-	return c:IsMonster() and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,2,c,c:GetCode())
+	return c:IsMonster() and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,2,c,c:GetCode())
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return (Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()) 
-		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,nil,tp)
+		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil,tp)
 end
 function s.filter(c)
 	return c:IsFaceup() and c:GetAttack()>0

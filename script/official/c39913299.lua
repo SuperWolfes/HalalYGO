@@ -25,7 +25,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK)
 end
 function s.thspfilter(c,e,tp,ft)
-	return c:IsAttribute(ATTRIBUTE_DIVINE) and (c:IsAbleToHand() or (ft>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)))
+	return c:IsAttribute(ATTRIBUTE_MEGA) and (c:IsAbleToHand() or (ft>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)))
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ConfirmDecktop(tp,1)
@@ -33,7 +33,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local ac=Duel.GetChainInfo(0,CHAININFO_TARGET_PARAM)
 	if tc:IsCode(ac) then
 		Duel.DisableShuffleCheck()
-		if not tc:IsAbleToHand() then return Duel.SendtoGrave(tc,REASON_RULE) end
+		if not tc:IsAbleToHand() then return Duel.SendtoRest(tc,REASON_RULE) end
 		if not (Duel.SendtoHand(tc,nil,REASON_EFFECT)>0 and tc:IsLocation(LOCATION_HAND)) then return end
 		Duel.ShuffleHand(tp)
 		local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
@@ -55,6 +55,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ShuffleDeck(tp)
 	else
 		Duel.DisableShuffleCheck()
-		Duel.SendtoGrave(tc,REASON_EFFECT|REASON_EXCAVATE)
+		Duel.SendtoRest(tc,REASON_EFFECT|REASON_EXCAVATE)
 	end
 end

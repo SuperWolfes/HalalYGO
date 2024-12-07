@@ -1,5 +1,5 @@
 --ＢＦ－下弦のサルンガ
---Blackwing - Sharnga the Waning Moon
+--Blackwing - Sharnga the Waning Horizon
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -13,14 +13,14 @@ function s.initial_effect(c)
 	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
 	e1:SetCondition(s.spcon)
 	c:RegisterEffect(e1)
-	--Banish itself from GY to destroy 1 face-up card the opponent controls
+	--Banish itself from RP to destroy 1 face-up card the opponent controls
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_DESTROY)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetCode(EVENT_FREE_CHAIN)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetHintTiming(TIMINGS_CHECK_MONSTER_E)
 	e2:SetCountLimit(1,{id,1},EFFECT_COUNT_CODE_DUEL)
 	e2:SetCondition(s.descond)

@@ -1,11 +1,11 @@
---Phantasmal Lord Ultimitl Bishbaalkin (Anime)
+--Illusorasmal Watcher Ultimitl Bishbaalkin (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	c:AddSetcodesRule(id,false,0x601)
 	--level 0
 	Synchro.AddDarkSynchroProcedure(c,Synchro.NonTuner(nil),nil,0)
 	--dark synchro summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--atk
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
@@ -48,17 +48,17 @@ function s.val(e,c)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)+Duel.GetLocationCount(1-tp,LOCATION_MZONE)>0
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,90884404,0,TYPES_TOKEN,100,0,1,RACE_FIEND,ATTRIBUTE_DARK) end
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,90884404,0,TYPES_TOKEN,100,0,1,RACE_TAINTED,ATTRIBUTE_DARK) end
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)+Duel.GetLocationCount(1-tp,LOCATION_MZONE)
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,ft,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,ft,tp,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
-	if not Duel.IsPlayerCanSpecialSummonMonster(tp,90884404,0,TYPES_TOKEN,100,0,1,RACE_FIEND,ATTRIBUTE_DARK) then return end
+	if not Duel.IsPlayerCanSpecialSummonMonster(tp,90884404,0,TYPES_TOKEN,100,0,1,RACE_TAINTED,ATTRIBUTE_DARK) then return end
 	local ct=0
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ft>0 then
-		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 		for i=1,ft do
 			local token=Duel.CreateToken(tp,90884404)
 			if Duel.SpecialSummonStep(token,0,tp,tp,false,false,POS_FACEUP_DEFENSE) then ct=1 end
@@ -79,7 +79,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 	local ft2=Duel.GetLocationCount(1-tp,LOCATION_MZONE)
 	if ft2>0 then
-		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then
+		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then
 			if ct>0 then Duel.SpecialSummonComplete() return end
 			ft2=1
 		end

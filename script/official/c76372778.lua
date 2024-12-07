@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,4,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--to deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -39,7 +39,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:GetDestination()==LOCATION_GRAVE and c:IsReason(REASON_BATTLE) end
+	if chk==0 then return c:GetDestination()==LOCATION_REST and c:IsReason(REASON_BATTLE) end
 	return true
 end
 function s.repop(e,tp,eg,ep,ev,re,r,rp)

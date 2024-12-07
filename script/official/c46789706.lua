@@ -62,7 +62,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if not (c:IsRelateToEffect(e) and c:IsControler(tp)) then return end
 	local tc=Duel.GetFirstTarget()
 	if not (tc:IsRelateToEffect(e) and tc:IsFaceup() and Duel.GetLocationCount(tp,LOCATION_SZONE)>0) then
-		Duel.SendtoGrave(c,REASON_RULE,PLAYER_NONE,PLAYER_NONE)
+		Duel.SendtoRest(c,REASON_RULE,PLAYER_NONE,PLAYER_NONE)
 	elseif Duel.Equip(tp,c,tc) then
 		--Equip limit
 		local e1=Effect.CreateEffect(c)

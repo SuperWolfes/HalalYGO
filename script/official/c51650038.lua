@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY,EFFECT_FLAG2_CHECK_SIMULTANEOUS)
 	e2:SetCode(EVENT_TO_DECK)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,id)
 	e2:SetCondition(s.attachcon)
 	e2:SetTarget(s.attachtg)
@@ -69,14 +69,14 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.attachconfilter(c,tp)
-	return c:IsSetCard(SET_MADOLCHE) and c:IsPreviousControler(tp) and c:IsPreviousLocation(LOCATION_GRAVE)
+	return c:IsSetCard(SET_MADOLCHE) and c:IsPreviousControler(tp) and c:IsPreviousLocation(LOCATION_REST)
 end
 function s.attachcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.attachconfilter,1,nil,tp)
 end
 function s.attachtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsType,TYPE_XYZ),tp,LOCATION_MZONE,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,e:GetHandler(),1,tp,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,e:GetHandler(),1,tp,0)
 end
 function s.attachop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

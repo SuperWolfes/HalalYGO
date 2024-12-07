@@ -1,5 +1,5 @@
 --Emハットトリッカー
---Performage Hat Tricker
+--Performanced Hat Tricker
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(0x36)

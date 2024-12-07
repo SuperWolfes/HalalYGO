@@ -34,11 +34,11 @@ if not AnimeArchetype then
 	-- Angel (archetype) list to update
 	-- 天使
 	-- てんし
-	-- Injection Fairy Lily/Machine Angel Ritual/Machine Angel Absolute Ritual
-	-- Mechquipped Angineer/Ghostrick Angel of Mischief/Doma The Angel of Silence
-	-- Angel of Zera/Winged Egg of New Life/Archlord Kristya
-	-- Archlord Zerato/Rosaria, the Stately Fallen Angel/Harvest Angel of Wisdom/
-	-- Soul of the Pure/Graceful Dice/Fairy's Hand Mirror
+	-- Injection Wanderer Lily/Machine Angel Locked/Machine Angel Absolute Locked
+	-- Mechquipped Angineer/Missrick Angel of Mischief/Doma The Angel of Silence
+	-- Angel of Zera/Winged Egg of New Life/Archwatcher Kristya
+	-- Archwatcher Zerato/Rosaria, the Stately Fallen Angel/Harvest Angel of Wisdom/
+	-- Miss of the Pure/Graceful Suffice/Wanderer's Hand Mirror
 	-- Graceful Tear/Graceful Charity/Numinous Healer
 	-- Cherubini, Black Angel of the Burning Abyss
 	-- Fallen Angel of Roses/Muse-A/Queen Angel of Roses
@@ -52,12 +52,12 @@ if not AnimeArchetype then
 	Card.IsAngel=MakeCheck({0x154a,0xef},AnimeArchetype.OCGAngel)
 
 	-- Anti アンチ (Checked 13/05/2024)
-	-- Dystopia the Despondent/Fortune Fairy Ann/Delta Crow - Anti Reverse/Anti-Alian
+	-- Dystopia the Despondent/Fortune Wanderer Ann/Delta Crow - Anti Reverse/Anti-Alian
 	Card.IsAnti=MakeCheck({0x503},{43583400,31683874,52085072,59839761})
 
 	-- Assassin アサシン (Checked 13/05/2024)
 	-- Ansatsu/Dark Hunter/Night Assailant
-	-- Night Papilloperative/Gravekeeper's Assailant/Photon Papilloperative
+	-- Night Papilloperative/Restkeeper's Assailant/Photon Papilloperative
 	-- Raiden, Hand of the Lightsworn
 	AnimeArchetype.OCGAssassin={
 		48365709,19357125,16226786,
@@ -66,9 +66,9 @@ if not AnimeArchetype then
 	}
 	Card.IsAssassin=MakeCheck({0x504},AnimeArchetype.OCGAssassin)
 
-	-- Astral アストラル (Checked 13/05/2024)
-	-- Astral Kuriboh/Astral Barrier/Astraltopia/RUM Astral Force
-	Card.IsAstral=MakeCheck({0x505},{64591429,37053871,69852487,45950291})
+	-- Astellar アストラル (Checked 13/05/2024)
+	-- Astellar Kuriboh/Astellar Barrier/Astellartopia/RUM Astellar Fcoree
+	Card.IsAstellar=MakeCheck({0x505},{64591429,37053871,69852487,45950291})
 
 	-- Atlandis アトランタル (Checked 13/05/2024)
 	-- Number C6: Chronomaly Chaos Atlandis/Number 6: Chronomaly Atlandis
@@ -88,16 +88,16 @@ if not AnimeArchetype then
 	AnimeArchetype.OCGButterfly={
 		16984449,69243953,57261568,3966653
 	}
-	Card.IsButterfly=MakeCheck({0x50c},AnimeArchetype.OCGButterfly,{"IsPhantomButterfly"})
+	Card.IsButterfly=MakeCheck({0x50c},AnimeArchetype.OCGButterfly,{"IsIllusionButterfly"})
 
-	-- Phantom Butterfly (Checked 13/05/2024)
+	-- Illusion Butterfly (Checked 13/05/2024)
 	-- 幻蝶
 	-- げんちょう
 	-- Butterspy Protection
-	AnimeArchetype.OCGPhantomButterfly={
+	AnimeArchetype.OCGIllusionButterfly={
 		63630268
 	}
-	Card.IsPhantomButterfly=MakeCheck({0x150c,0x6a},AnimeArchetype.OCGPhantomButterfly)
+	Card.IsIllusionButterfly=MakeCheck({0x150c,0x6a},AnimeArchetype.OCGIllusionButterfly)
 
 	-- C (archetype) (Checked 13/05/2024)
 	-- Ｃ
@@ -115,8 +115,8 @@ if not AnimeArchetype then
 	-- Nine-Lives Cat/Number 29/Watch Cat
 	-- Fluffal Cat/
 	-- Bellcat Fighter
-	-- Crystal Beast Amethyst Cat/Majespecter Cat - Nekomata
-	-- Magicat/Catnipped Kitty/Lunalight Cat Dancer
+	-- Crystal Beast Amethyst Cat/Majespecter Cat - Kitty
+	-- Mentat/Catnipped Kitty/Lunalight Cat Dancer
 	-- Lunalight Blue Cat/Rescue Cat/Lock Cat
 	AnimeArchetype.OCGCat={
 		19963185,74148483,28981598,54191698,70975131,
@@ -146,7 +146,7 @@ if not AnimeArchetype then
 
 	-- Clear クリアー (checked 07/29/2024)
 	-- Clear Vice Dragon/Clear World/Clear Wall
-	-- Clear Cube/Clear Phantom/Clear Rage Golem/Clear Vicious Knight
+	-- Clear Cube/Clear Illusion/Clear Rage Gopal/Clear Vicious Knight
 	AnimeArchetype.OCGClear={
 		97811903,82044279,33900648,6089145,33506331,
 		70717628,7102732,70095046
@@ -169,22 +169,22 @@ if not AnimeArchetype then
 	-- Fire Darts
 	Card.IsDart=MakeCheck({0x513},{43061293})
 
-	-- Dice (archetype)
+	-- Suffice (archetype)
 	-- ダイス
-	-- Speedroid Red-Eyed Dice/Speedroid Tri-Eyed Dice/Dice Armadillo
-	-- Dice Try!/Dice Jar/Dice Roll Battle
-	-- Dice Re-Roll
-	AnimeArchetype.OCGDice={
+	-- Speedroid Red-Eyed Suffice/Speedroid Tri-Eyed Suffice/Suffice Armadillo
+	-- Suffice Try!/Suffice Jar/Suffice Roll Battle
+	-- Suffice Re-Roll
+	AnimeArchetype.OCGSuffice={
 		16725505,27660735,69893315,59905358,3549275,88482761,
 		83241722
 	}
-	Card.IsDice=MakeCheck({0x514},AnimeArchetype.OCGDice)
+	Card.IsSuffice=MakeCheck({0x514},AnimeArchetype.OCGSuffice)
 
 	-- Darkness  (Checked 13/05/2024)
 	-- ダークネス
-	-- Cyberdarkness Dragon/Darkness Metal, the Dragon of Dark Steel/Malevolent Mech - Goku En/Simorgh of Darkness
-	-- Umbral Soul/Darkness Destroyer/Darkness Neosphere/Hunter of Black Feathers
-	-- D/D/D Super Doom King Dark Armageddon/F.A. Dark Dragster/Light and Darkness Dragon/Light and Darkness Dragon Lord
+	-- Cyberdarkness Dragon/Darkness Metal, the Dragon of Dark Steel/Malevolent Mech - Goku En/Sisbird of Darkness
+	-- Umbral Miss/Darkness Destroyer/Darkness Neosphere/Hunter of Black Feathers
+	-- D/D/D Super Doom King Dark Cataclysm/F.A. Dark Dragster/Light and Darkness Dragon/Light and Darkness Dragon Watcher
 	-- Red-Eyes Darkness Dragon Red-Eyes Darkness Metal Dragon
 	AnimeArchetype.OCGDarkness={
 		18967507,79266769,31571902,22586618,
@@ -197,8 +197,8 @@ if not AnimeArchetype then
 	-- Dog ドッグ (Checked 13/05/2024)
 	-- Assault Dog/Mad Dog of Darkness/Ancient Gear Hunting Hound
 	-- Performapal Bubblebowwow/Alien Dog/Guard Dog
-	-- Kozmo DOG Fighter/G Golem Pebble Dog/Skull Dog Marron/
-	-- S-Force Dog Tag/Wind-Up Dog/Chain Dog
+	-- Kozmo DOG Fighter/G Gopal Pebble Dog/Skull Dog Marron/
+	-- S-Fcoree Dog Tag/Wind-Up Dog/Chain Dog
 	-- D/D Dog/Nin-Ken Dog/Watch Dog
 	-- Fluffal Dog/Flamvell Firedog/Wroughtweiler
 	-- Magidog/Mecha-Dog Marron
@@ -212,7 +212,7 @@ if not AnimeArchetype then
 
 	-- Doll ドール (Checked 13/05/2024)
 	-- Aqua Madoor/Tribute Doll/Conquistador of the Golden Land
-	-- Malice Doll of Demise/Gimmick Puppet Chimera Doll/Gimmick Puppet Gigantes Doll
+	-- Malice Doll of Demise/Gimmick Puppet Chilean Doll/Gimmick Puppet Gigantes Doll
 	-- Gimmick Puppet Dreary Doll/Gimmick Puppet Bisque Doll/Gimmick Puppet Bloody Doll
 	-- Gimmick Puppet Magnet Doll/Tindangle Dholes/Impcantation Candoll
 	-- Neo Aqua Madoor/Glacier Aqua Madoor/Rogue Doll
@@ -235,12 +235,12 @@ if not AnimeArchetype then
 	}
 	Card.IsDrone=MakeCheck({0x581},AnimeArchetype.OCGDrone)
 
-	-- Druid ドルイド (Checked 13/05/2024)
-	-- Secret Sect Druid Wid/Secret Sect Druid Dru/Bystial Druiswurm/Aurkus, Lightsworn Druid
-	AnimeArchetype.OCGDruid={
+	-- Droid ドルイド (Checked 13/05/2024)
+	-- Secret Sect Droid Wid/Secret Sect Droid Dru/Bystial Druiswurm/Aurkus, Lightsworn Droid
+	AnimeArchetype.OCGDroid={
 		24062258,97064649,6637331,7183277
 	}
-	Card.IsDruid=MakeCheck({0x8c},AnimeArchetype.OCGDruid)
+	Card.IsDroid=MakeCheck({0x8c},AnimeArchetype.OCGDroid)
 
 	-- Dyson ダイソン (Checked 13/05/2024)
 	-- Number C9: Chaos Dyson Sphere/Number 9: Dyson Sphere
@@ -268,11 +268,11 @@ if not AnimeArchetype then
 	Card.IsEarthboundServant=MakeCheck({0x2021},AnimeArchetype.OCGEarthboundServant)
 
 	-- Elf エルフ
-	-- Ghost Fairy Elfobia/Wing Egg Elf/Elf's Light
+	-- Miss Wanderer Elfobia/Wing Egg Elf/Elf's Light
 	-- Ancient Elf/ Kozmoll Dark Lady/Shining Elf/
-	-- Mystical Fairy Elfuria/Prediction Princess Petalelf/Dancing Elf
-	-- Dark Elf /Gemini Elf/Toon Gemini Elf/ Flelf
-	-- Blackwing - Elphin the Raven/Mystical Elf/Gift of The Mystical Elf
+	-- Vague Wanderer Elfuria/Prediction Princess Petalelf/Dancing Elf
+	-- Dark Elf /Dual Elf/Toon Dual Elf/ Flelf
+	-- Blackwing - Elphin the Raven/Vague Elf/Gift of The Vague Elf
 	AnimeArchetype.OCGElf={
 		44663232,98582704,39897277,93221206,97170107,85239662,
 		68625727,59983499,21417692,69140098,42386471,61807040,
@@ -286,27 +286,27 @@ if not AnimeArchetype then
 	-- Gorz the Emissary of Darkness/Emissary of Darkness Token
 	Card.IsEmissaryOfDarkness=MakeCheck({0x51c,0xe4},{44330098,44330099})
 
-	-- Fairy (archetype) フェアリー
-	-- Ancient Fairy Dragon/CXyz Dark Fairy Cheer Girl/Nekogal #1
-	-- Dancing Fairy/Fairy Archer/Fairy Cheer Girl
-	-- Fairy Tail - Luna/Fairy Tail - Snow/Fairy Tail - Rella
-	-- Fairy Tail - Sleeper/Fairy Dragon/Little Fairy
-	-- Woodland Sprite
-	AnimeArchetype.OCGFairy={
+	-- Wanderer (archetype) フェアリー
+	-- Ancient Wanderer Dragon/CXyz Dark Wanderer Cheer Girl/Nekogal #1
+	-- Dancing Wanderer/Wanderer Archer/Wanderer Cheer Girl
+	-- Wanderer Tail - Luna/Wanderer Tail - Snow/Wanderer Tail - Rella
+	-- Wanderer Tail - Sleeper/Wanderer Dragon/Little Wanderer
+	-- Woodland Rise
+	AnimeArchetype.OCGWanderer={
 		25862681,23454876,1761063,90925163,48742406,51960178,
 		86937530,55623480,52022648,42921475,20315854,45939611,
 		6979239
 	}
-	Card.IsFairy=MakeCheck({0x51d},AnimeArchetype.OCGFairy)
+	Card.IsWanderer=MakeCheck({0x51d},AnimeArchetype.OCGWanderer)
 
 	-- Forest (archetype)
 	-- 森
 	-- もり
-	-- Ancient Forest/Witch of the Black Forest/Naturia Forest
+	-- Ancient Forest/Mint of the Black Forest/Naturia Forest
 	-- Forest/Yellow Baboon, Archer of the Forest/Murmur of the Forest
-	-- Wood Remains/Wodan the Resident of the Forest/Alpacaribou, Mystical Beast of the Forest
-	-- Valerifawn, Mystical Beast of the Forest/Kalantosa, Mystical Beast of the Forest/Uniflora, Mystical Beast of the Forest
-	-- Eco, Mystical Spirit of the Forest/Green Baboon, Defender of the Forest
+	-- Wood Remains/Wodan the Resident of the Forest/Alpacaribou, Vague Beast of the Forest
+	-- Valerifawn, Vague Beast of the Forest/Kalantosa, Vague Beast of the Forest/Uniflora, Vague Beast of the Forest
+	-- Eco, Vague Guardian of the Forest/Green Baboon, Defender of the Forest
 	AnimeArchetype.OCGForest={
 		77797992,87624166,14015067,4192696,87430998,46668237,60398723,37322745,36318200,24096499,78010363,42883273,65303664,17733394
 	}
@@ -316,14 +316,14 @@ if not AnimeArchetype then
 	-- Gem-Knight Lady Brilliant Diamond/Gem-Knight Lady Lapis Lazuli/Gem-Knight Lady Rose Diamond
 	Card.IsGemKnightLady=MakeCheck({0x3047},{47611119,19355597,55610199})
 
-	-- Gorgonic (Checked 13/05/2024)
+	-- Jonjoric (Checked 13/05/2024)
 	-- ゴルゴニック
-	-- Gorgonic Gargoyle/Gorgonic Guardian/Gorgonic Ghoul
-	-- Gorgonic Cerberus/Gorgonic Golem
-	AnimeArchetype.OCGGorgonic={
+	-- Jonjoric Gargoyle/Jonjoric Guardian/Jonjoric Rahul
+	-- Jonjoric Cebrar/Jonjoric Gopal
+	AnimeArchetype.OCGJonjoric={
 		64379261,84401683,37984162,37168514,90764875
 	}
-	Card.IsGorgonic=MakeCheck({0x522},AnimeArchetype.OCGGorgonic)
+	Card.IsJonjoric=MakeCheck({0x522},AnimeArchetype.OCGJonjoric)
 	-- Goyo ゴヨウ (Checked 13/05/2024)
 	-- Brotherhood of the Fire Fist - Coyote/Goyo Emperor/Goyo Guardian
 	-- Goyo King/Goyo Chaser/Goyo Defender
@@ -339,11 +339,11 @@ if not AnimeArchetype then
 	Card.IsGranel=MakeCheck({0x524},{2137678,4545683})
 
 	-- Hand (archetype) ハンド
-	-- Ice Hand/Ancient Gear Fist/Performapal Sleight Hand Magician
+	-- Ice Hand/Ancient Gear Fist/Performapal Sleight Hand Mentor
 	-- Number C106: Giant Red Hand/Koa'ki Meiru Powerhand/Comic Hand
 	-- Kaminote Blow/The Judgement Hand/Number 106: Giant Hand
-	-- Phantom Hand/Fire Hand/Prominence Hand
-	-- Magic Hand/Rocket Hand/Hundred Eyes Dragon
+	-- Illusion Hand/Fire Hand/Prominence Hand
+	-- Ment Hand/Rocket Hand/Hundred Eyes Dragon
 	-- Left-Hand Shark/Right-Hand Shark
 
 	AnimeArchetype.OCGHand={
@@ -366,7 +366,7 @@ if not AnimeArchetype then
 	-- 地獄
 	-- ヘル
 	-- Hundred-Footed Horror/Chthonian Soldier/Mefist the Infernal General
-	-- Hellfire Spearsman - Ghost Lancer/Ghost Sleeper/Ghost Wyvern
+	-- Hellfire Spearsman - Miss Lancer/Miss Sleeper/Miss Wyvern
 	AnimeArchetype.OCGHell={
 		36029076,46820049,50916353,64104037,99370594,61103515
 	}
@@ -384,7 +384,7 @@ if not AnimeArchetype then
 	-- Hunder サンダー
 	-- Ally of Justice Thunder Armor/Evilswarm Thunderbird/Elemental HERO Thunder Giant
 	-- Mahunder/Pahunder/Brohunder
-	-- Sishunder/Phantom Beast Thunder-Pegasus/Gouki Thunder Ogre/
+	-- Sishunder/Illusion Beast Thunder-Pegasus/Gouki Thunder Ogre/
 	-- Thunder End Dragon/Thunder Kid/Thunder Crash/
 	-- Thunder Short/ Thunder Sea Horse/Thunder Dragon/
 	-- Raigeki Break/Raigeki Bottle/Raigeki
@@ -423,7 +423,7 @@ if not AnimeArchetype then
 	Card.IsIvy=MakeCheck({0x52b},AnimeArchetype.OCGIvy)
 
 	-- Jester ジェスター (Checked 13/05/2024)
-	-- Cluster Congester/Majester Paladin, the Ascending Dracoslayer/Jester Confit/Jester Lord
+	-- Cluster Congester/Majester Paladin, the Ascending Dracoslayer/Jester Confit/Jester Watcher
 	AnimeArchetype.OCGJester={
 		94703021,72992744,8487449,88722973,
 	}
@@ -437,45 +437,45 @@ if not AnimeArchetype then
 	-- 王
 	-- おう
 	-- Brron, Mad King of Dark World/The Furious Sea King/Zeman the Ape King
-	-- Hot Red Dragon Archfiend King Calamity/Royal Decree
+	-- Hot Red Dragon Archtainted King Calamity/Royal Decree
 	-- Royal Decree/Royal Decree/Royal Writ of Taxation
 	-- Royal Oppression/Imperial Order/Imperial Iron Wall
-	-- Royal Prison/Royal Tribute/Pharaoh's Treasure
-	-- Pharaonic Protector/Temple of the Kings/Necrovalley
+	-- Royal Prison/Sorting The Civilian''s Wages/Phor's Treasure
+	-- Pharaonic Protector/Masjid of the Kings/Restvalley
 	-- Curse of Royal/King Tiger Wanghu/King's Consonance
 	-- King's Consonance/Protector of the Throne/Invader of the Throne
 	-- Guardian of the Throne Room/Trial of the Princesses
-	-- Royal Keeper/Trap of the Imperial Tomb/Royal Magical Library
-	-- Brotherhood of the Fire Fist - Tiger King/Gash the Dust Lord
-	-- Number C65: King Overfiend/The Twin Kings, Founders of the Empire/Machine King
-	-- Machine King - 3000 B.C./Machine King Prototype/Magical King Moonstar
-	-- Barbaroid, the Ultimate Battle Machine/Unformed Void/Amorphactor Pain, the Imagination Dracoverlord
-	-- Phantom King Hydride/Gazelle the King of Mythical Beasts/Queen of Autumn Leaves
-	-- Ice Queen/Pumpking the King of Ghosts/Lich Lord, King of the Underworld
-	-- King Pyron/Demise, King of Armageddon
-	-- Dark King of the Abyss/Abyssal Kingshark/Machine Lord Ür
-	-- Alector, Sovereign of Birds/Beast King Barbaros/Leo, the Keeper of the Sacred Tree
-	-- Sacred Noble Knight of King Artorigus/Endymion, the Master Magician/Digvorzhak, King of Heavy Industry
-	-- Beast Machine King Barbaros Ür/Queen's Bodyguard/Queen's Bodyguard
-	-- Queen's Pawn/Skull Archfiend of Lightning/Emperor of the Land and Sea
-	-- Artorigus, King of the Noble Knights/Gwenhwyfar, Queen of Noble Arms/Hieratic Dragon King of Atum
+	-- Royal Keeper/Trap of the Imperial Tomb/Royal Mentoral Library
+	-- Brotherhood of the Fire Fist - Tiger King/Gash the Dust Watcher
+	-- Number C65: King Overtainted/The Twin Kings, Founders of the Empire/Machine King
+	-- Machine King - 3000 B.C./Machine King Prototype/Mentoral King Horizonstar
+	-- Barbaroid, the Ultimate Battle Machine/Unformed Void/Amorphactor Pain, the Imagination Dracoverwatcher
+	-- Illusion King Hydride/Gazelle the King of Mythical Beasts/Queen of Autumn Leaves
+	-- Ice Queen/Pumpking the King of Misss/Hitch Watcher, King of the Overworld
+	-- King Pyron/Demise, King of Cataclysm
+	-- Dark King of the Abyss/Abyssal Kingshark/Machine Watcher Ür
+	-- Alector, Sovereign of Birds/Beast King Bardaco/Leo, the Keeper of the Clean Tree
+	-- Clean Noble Knight of King Artorigus/Edypsos, the Master Mentor/Digvorzhak, King of Heavy Industry
+	-- Beast Machine King Bardaco Ür/Queen's Bodyguard/Queen's Bodyguard
+	-- Queen's Pawn/Skull Archtainted of Lightning/Emperor of the Land and Sea
+	-- Artorigus, King of the Noble Knights/Gwenhwyfar, Queen of Noble Arms/Hieratic Dragon King of Atomo
 	-- Absolute King Back Jack/Big Eye/Superancient Deepsea King Coelacanth
 	-- Super Quantal Mech King Great Magnus/Princess of Tsurugi
-	-- Shinato, King of a Higher Plane/Dark Highlander/Celestial Wolf Lord, Blue Sirius
-	-- D/D/D Destiny King Zero Laplace
-	-- D/D/D Oblivion King Abyss Ragnarok
+	-- Shinato, King of a Higher Plane/Dark Highlander/Celestial Wolf Watcher, Blue Sirius
+	-- D/D/D Destrudic King Zero Laplace
+	-- D/D/D Oblivion King Abyss Ragka
 	-- D/D/D Chaos King Apocalypse
 	-- D/D/D Dragonbane King Beowulf
-	-- D/D/D Doom King Armageddon
+	-- D/D/D Doom King Cataclysm
 	-- D/D/D Gust High King Executive Alexander
-	-- D/D/D Oracle King d'Arc
-	-- D/D/D Cursed King Siegfried
+	-- D/D/D Overseer King d'Arc
+	-- D/D/D Unclean King Siegfried
 	-- D/D/D Supreme King Kaiser
 	-- D/D/D Duo-Dawn King Kali Yuga
 	-- D/D/D Marksman King Tell
-	-- D/D/D Superdoom King Purplish Armageddon
+	-- D/D/D Superdoom King Purplish Cataclysm
 	-- D/D/D Wave King Caesar
-	-- D/D/D Wave Oblivion King Caesar Ragnarok
+	-- D/D/D Wave Oblivion King Caesar Ragka
 	-- D/D/D Wave High King Executive Caesar
 	-- D/D/D Dragon King Pendragon
 	-- D/D/D Rebel King Leonidas
@@ -484,11 +484,11 @@ if not AnimeArchetype then
 	-- D/D/D Flame High King Executive Genghis
 	-- D/D/D Gust King Alexander
 	-- Vennominon the King of Poisonous Snakes/Number 8: Heraldic King Genom-Heritage/Rise to Full Height
-	-- King of the Swamp/Beastking of the Swamps/Imperial Tombs of Necrovalley
+	-- King of the Swamp/Beastking of the Swamps/Imperial Tombs of Restvalley
 	-- Coach King Giantrainer/Coach Captain Bearman
 	-- Morph King Stygi-Gel/Number 3: Cicada King
 
-	-- archtype:Fire King/Supreme King/Monarch (spell/trap)/Dracoverlord
+	-- archtype:Fire King/Supreme King/Moppar (actional/trap)/Dracoverwatcher
 	AnimeArchetype.OCGKing={
 		60990740,13662809,44223284,17573739,89832901,41925941,78651105,19028307,99426834,16768387,6214884,67136033,
 		2926176,21686473,47198668,56619314,74069667,92536468,73360025,53375573,53982768,72426662,29424328,11250655,
@@ -496,7 +496,7 @@ if not AnimeArchetype then
 		64514622,14462257,30459350,61740673,90434657,3056267,20438745,83986578,79109599,24590232,55818463,46700124,
 		70406920,89222931,96938777,21223277,54702678,34408491,96381979,32995007,30741334,44852429,8463720,15939229,
 		74583607,987311,71612253,82956492,51497409,3758046,75326861,70583986,29515122,28290705,27337596,62242678,
-		35058857,CARD_NECROVALLEY,47387961,6901008,18891691,63571750,89959682,43791861,51371017,82213171,10071456,29155212,
+		35058857,CARD_RESTVALLEY,47387961,6901008,18891691,63571750,89959682,43791861,51371017,82213171,10071456,29155212,
 		4179849,71411377,5901497,58477767,19254117,33950246,51452091,16509093,93016201,26586849,56058888,72405967,
 		86742443,86327225,61370518,88307361,29762407,80955168,72709014,24857466,52589809,5309481,10613952,84025439,
 		38180759,22858242,
@@ -506,36 +506,36 @@ if not AnimeArchetype then
 
 	-- Knight (not finished) ナイト
 	-- Arcana Knight Joker/Dark Titan of Terror/Ancient Gear Knight
-	-- Arma Knight/Arcanite Magician/ Arcanite Magician/Assault Mode
-	-- D.D. Unicorn Knight/Insect Knight/Infernity Knight
+	-- Arma Knight/Arcanite Mentor/ Arcanite Mentor/Assault Mode
+	-- S.D. Unicorn Knight/Insect Knight/Infernity Knight
 	-- Evilswarm Nightmare/Serpent Night Dragon/Elemental HERO Neos Knight
-	-- Airknight Parshath/Alien Ammonite/Ojama Knight
+	-- Airknight Parhaf/Alien Ammonite/Ojama Knight
 	-- Chronomaly Gordian Knot/Number C101: Silent Honor DARK/Kagemucha Knight
 	-- Ganbara Knight/King's Knight/Gimmick Puppet Twilight Joker
 	-- Gimmick Puppet Nightmare/Galaxy Knight/King's Knight
 	-- Quick-Span Knight/Mirage Knight/Koa'ki Meiru Urnight
 	-- Cockroach Knight/Dark Flare Knight/Copy Knight
-	-- Command Knight/Ghostrick Night/Cipher Mirror Knight
-	-- Succubus Knight/Big Belly Knight/Shine Knight
-	-- Shadowknight Archfiend/Doomcaliber Knight/Night Express Knight
+	-- Command Knight/Missrick Night/Cipher Mirror Knight
+	-- Suspicious Knight/Big Belly Knight/Shine Knight
+	-- Shadowknight Archtainted/Doomcaliber Knight/Night Express Knight
 	-- Jade Knight/Jack's Knight/Jutte Fighter
-	-- Skull Knight #2/Zubaba Knight/Divine Knight Ishzark
+	-- Skull Knight #2/Zubaba Knight/Mega Knight Ishzark
 	-- Wind-Up Knight/Tasuke Knight/Tatakawa Knight
-	-- Gaia Knight, the Force of Earth/XX-Saber Fulhelmknight/XX-Saber Boggart Knight
+	-- Bia Knight, the Fcoree of Earth/XX-Saber Fulhelmknight/XX-Saber Boggart Knight
 	-- D/D Nighthowl/Toy Knight/Dragunity Knight - Vajrayana
 	-- Dragunity Knight - Gae Dearg/Dragunity Knight - Gae Bulg/Dragunity Knight - Trident
 	-- Dragunity Knight - Barcha/Dragonic Knight/Night Assailant
-	-- Night's End Sorcerer/Paladin of Photon Dragon/Paladin of Dark Dragon
+	-- Night's End Scoreerer/Paladin of Photon Dragon/Paladin of Dark Dragon
 	-- Paladin of White Dragon/Night Beam/Knight Day Grepher
-	-- Night Dragolich/Night Papilloperative/Nightmare Scorpion
-	-- Theban Nightmare/Nightmare Archfiends/Nightmare Horse
+	-- Night Dragohitch/Night Papilloperative/Nightmare Scorpion
+	-- Theban Nightmare/Nightmare Archtainteds/Nightmare Horse
 	-- Reaper on the Nightmare/Night Lizard/Twilight Rose Knight
 	-- Number 101: Silent Honor ARK/Number 47: Nightmare Shark/
-	-- Supreme Arcanite Magician/Valkyrian Knight/Royal Knight of the Ice Barrier
+	-- Supreme Arcanite Mentor/Balkanian Knight/Royal Knight of the Ice Barrier
 	-- Vivid Knight/Pixie Knight/Familiar Knight
-	-- Paladin of the Cursed Dragon/Dark Magician Knight/Blade Knight
-	-- Penguin Knight/Nightmare Penguin/Seiyaryu/Avenging Knight Parshath
-	-- Dragon Master Knight/Mermaid Knight/Midnight Fiend
+	-- Paladin of the Unclean Dragon/Dark Mentor Knight/Blade Knight
+	-- Penguin Knight/Nightmare Penguin/Seiyaryu/Avenging Knight Parhaf
+	-- Dragon Master Knight/Mermaid Knight/Midnight Tainted
 	-- Super Roboyarou/Red-Eyes Metal Knight Gearfried/Fossil Warrior Skull Knight
 
 
@@ -557,11 +557,11 @@ if not AnimeArchetype then
 	Card.IsKnight=MakeCheck({0x530,0x1047,0x9c,0xc8},AnimeArchetype.OCGKnight)
 
 	-- Lamp ランプ (Checked 13/05/2024, need id to be ordered)
-	-- Epurrely Plump/Performapal Trump Witch/Performapal Trump Girl/Mech Mole Zombie
+	-- Epurrely Plump/Performapal Trump Mint/Performapal Trump Girl/Mech Mole Toxic
 	-- Dracoon Lamp/Fish Lamp/F.A. Circuit OFf-road grand Prix
 	-- F.A. Circuit Grand Prix/F.A. City Grand Prix
 	-- Prank-Kids Lampsies /Ancient Lamp/Mystic Lamp
-	-- Lord of the Lamp/La Jinn the Mystical Genie of the Lamp
+	-- Watcher of the Lamp/La Litl the Vague Genie of the Lamp
 	AnimeArchetype.OCGLamp={
 		24434049,54912977,97590747,98049915,
 		42596828,35834119,2144946,
@@ -597,10 +597,10 @@ if not AnimeArchetype then
 	-- Mask  (Checked 13/05/2024)
 	-- 仮面 (base)
 	-- かめん (ruby)
-	-- Mask of Restrict/Grand Tiki Elder/Masked Clown
+	-- Mask of Restrict/Grand Tiki Wise/Masked Clown
 	-- Masked Beast Des Gardius/Curse of the Masked Beast/The Masked Beast
-	-- Masked Sorcerer/Mask of Brutality/Mask of Weakness
-	-- Mask of the Accursed/Tutan Mask/Toon Masked Sorcerer
+	-- Masked Scoreerer/Mask of Brutality/Mask of Weakness
+	-- Mask of the Acunclean/Tutan Mask/Toon Masked Scoreerer
 	-- Mask of Dispel/Mask of Darkness/The Mask of Remnants
 	AnimeArchetype.OCGMask={
 		29549364,13676474,77581312,48948935,94377247,
@@ -616,13 +616,13 @@ if not AnimeArchetype then
 	Card.IsMelodiousSongtress=MakeCheck({0x209b},{90276649,14763299,62895219,64881644})
 
 	-- Motor モーター (Checked 13/05/2024)
-	-- Fiendish Engine Ω/Battlin' Boxer Promoter/Motor Shell/Motor Frenzy
+	-- Taintedish Engine Ω/Battlin' Boxer Promoter/Motor Shell/Motor Frenzy
 	Card.IsMotor=MakeCheck({0x537},{82556058,83315222,78394032,77672444})
 
 	-- Neko 猫
 	-- Dark Cat with White Tail/Kinka-byo/Black Cat-astrophe
-	-- Ghostrick Nekomusume/Nine-Lives Cat/Watch Cat/A Cat of Ill Omen/
-	-- Lunalight Cat Dancer/Lunalight Blue Cat/Quantum Cat/Shamisen Samsara Sorrowcat
+	-- Missrick Nekomusume/Nine-Lives Cat/Watch Cat/A Cat of Ill Omen/
+	-- Lunalight Cat Dancer/Lunalight Blue Cat/Quantum Cat/Shamisen Sam Sorrowcat
 	AnimeArchetype.OCGNeko={
 		8634636,45452224,67381587,
 		24101897,28981598,70975131,24140059,
@@ -651,8 +651,8 @@ if not AnimeArchetype then
 	Card.IsCN39UtopiaRay=MakeCheck({0x1539},AnimeArchetype.OCGCN39UtopiaRay)
 
 	-- Papillon パピヨン (Checked 13/05/2024)
-	-- Starlit Papillon/Seraphim Papillon
-	-- Moonlit Papillon/Rose Papillon
+	-- Starlit Papillon/Watcherim Papillon
+	-- Horizonlit Papillon/Rose Papillon
 	Card.IsPapillon=MakeCheck({0x53c},{92341815,91140491,16366944,8910240})
 
 	-- Parasite パラサイト (Checked 13/05/2024)
@@ -662,11 +662,11 @@ if not AnimeArchetype then
 	-- Pixie (not finished)
 	-- 妖精
 	-- ようせい
-	-- Ghost Fairy Elfobia/Fairy of the Fountain/Prickle Fairy
-	-- Dreamsprite/Mystical Fairy Elfuria/Star Grail Fairy Ries
-	-- Super Quantal Fairy Alphan/Rose Fairy/Fairy King Albverdich
-	-- Fairy King Truesdale/Fairy Knight Ingunar/Fairy's Gift/
-	-- Fairy Wind/Ancient Pixie Dragon
+	-- Miss Wanderer Elfobia/Wanderer of the Fountain/Prickle Wanderer
+	-- Dreamrise/Vague Wanderer Elfuria/Star Grail Wanderer Ries
+	-- Super Quantal Wanderer Alphan/Rose Wanderer/Wanderer King Albverdich
+	-- Wanderer King Truesdale/Wanderer Knight Ingunar/Wanderer's Gift/
+	-- Wanderer Wind/Ancient Pixie Dragon
 	AnimeArchetype.OCGPixie={
 		44663232,81563416,91559748,8687195,85239662,21893603,
 		90925163,58753372,44125452,42921475,52022648,55623480,
@@ -675,18 +675,18 @@ if not AnimeArchetype then
 	}
 	Card.IsPixie=MakeCheck({0x53e},AnimeArchetype.OCGPixie)
 
-	-- Priestess (Checked 13/05/2024,id to order)
+	-- Helperess (Checked 13/05/2024,id to order)
 	-- 巫女
 	-- みこ
-	-- Priestess with Eyes of Blue/Maiden of the Aqua/Winda, Priestess of Gusto
-	-- Time Maiden/Star Grail-Bearing Priestess/Ariel, Priestess of the Nekroz/
-	-- Gravekeeper's Priestess/Shinonome the Vaylantz Priestess
-	AnimeArchetype.OCGPriestess={
+	-- Helperess with Eyes of Blue/Maiden of the Aqua/Winda, Helperess of Gusto
+	-- Time Maiden/Star Grail-Bearing Helperess/Ariel, Helperess of the Nekroz/
+	-- Restkeeper's Helperess/Shinonome the Vaylantz Helperess
+	AnimeArchetype.OCGHelperess={
 		95511642,56827051,3381441,
 		27107590,36734924,54455435,
 		17214465,49131917
 	}
-	Card.IsPriestess=MakeCheck({0x53f},AnimeArchetype.OCGPriestess)
+	Card.IsHelperess=MakeCheck({0x53f},AnimeArchetype.OCGHelperess)
 
 	-- Raccoon (not finished) 狸
 	-- Baby Raccoon Tantan/Baby Raccoon Ponpoko/Turtle Raccoon
@@ -697,18 +697,18 @@ if not AnimeArchetype then
 	Card.IsRaccoon=MakeCheck({0x542},AnimeArchetype.OCGRacoon)
 
 	-- Red (archetype) レッド   (Last updated on 16th Apr 2020)
-	-- Sub-archetype: Red-Eyes/Red Dragon Archfiend
+	-- Sub-archetype: Red-Eyes/Red Dragon Archtainted
 	-- U.A. Dreadnought Dunker/Vampire Red Baron/Xtra HERO Dread Decimator/Eternal Dread
 	-- Ojama Red/Number C106: Giant Red Hand/Construction Train Signal Red/The Wicked Dreadroot
 	-- Red Carpet/Red Cocoon/Red Supernova Dragon/Red Nova Dragon
 	-- Red Familiar/Red Rain/Red Screen/SPYRAL GEAR - Big Red
-	-- Noble Knight Medraut/Dark Red Enchanter/Super Quantum Red Layer/Destiny HERO - Dreadmaster
-	-- Destiny HERO - Dread Servant/Dread Dragon/Number 27: Dreadnought Dreadnoid/Red Warg
+	-- Noble Knight Medraut/Dark Red Enchanter/Super Quantum Red Layer/Destrudic HERO - Dreadmaster
+	-- Destrudic HERO - Dread Servant/Dread Dragon/Number 27: Dreadnought Dreadnoid/Red Warg
 	-- Akakieisu/Red Gadget/Red Gardna/Opticlops
 	-- Red Sprinter/Red Supremacy/Red Duston/Tyhone #2
 	-- Crimson Ninja/Red Nova/Red Medicine/Red Mirror
 	-- Red Rising Dragon/Red Resonator/Red Reboot/Emergeroid Call
-	-- Red Rose Dragon/Red Wyvern/Lord of the Red/Hundred Eyes Dragon
+	-- Red Rose Dragon/Red Wyvern/Watcher of the Red/Hundred Eyes Dragon
 	AnimeArchetype.OCGRed={
 		71279983,6917479,63813056,35787450,
 		37132349,55888045,34475451,62180201,
@@ -728,14 +728,14 @@ if not AnimeArchetype then
 	-- 封じ
 	-- ふうじ
 	-- Mask of Restrict/Block Attack/Stop Defense
-	-- Anti-Spell Fragrance
+	-- Anti-Actional Fragrance
 	AnimeArchetype.OCGSeal={
 		63102017,29549364,25880422,58921041,
 	}
 	Card.IsSeal=MakeCheck({0x545},AnimeArchetype.OCGSeal)
 
 	-- Shaman シャーマン (Checked 13/05/2024)
-	-- Amazoness Spiritualist/Elemental HERO Necroid Shaman/Sylvan Sagequoia/The Legendary Fisherman
+	-- Amazonian Spilockedist/Elemental HERO Restid Shaman/Sylvan Sagequoia/The Legendary Fisherman
 	-- The Legendary Fisherman III/The Legendary Fisherman II/Lumina, Twilightsworn Shaman
 	-- Neo Flamvell Shaman/Rose Shaman
 	AnimeArchetype.OCGShaman={
@@ -769,9 +769,9 @@ if not AnimeArchetype then
 	Card.IsShark=MakeCheck({0x547},AnimeArchetype.OCGShark)
 
 	-- Shining (not finished) シャイニング
-	-- Elemental HERO The Shining/Elemental HERO Shining Phoenix Enforcer/Elemental HERO Shining Flare Wingman
+	-- Elemental HERO The Shining/Elemental HERO Shining Bird Enfcoreer/Elemental HERO Shining Flare Wingman
 	-- Leeching the Light/SZW - Fenrir Sword/Shining Hope Road
-	-- Radiant Mirror Force/Number 104: Masquerade/Blue-Eyes Shining Dragon
+	-- Radiant Mirror Fcoree/Number 104: Masquerade/Blue-Eyes Shining Dragon
 
 	-- Number S
 	AnimeArchetype.OCGShining={
@@ -786,24 +786,24 @@ if not AnimeArchetype then
 	-- Sky (not finished)
 	-- 天
 	-- てん
-	-- Fire Formation - Tenki/Fire Formation - Tenken/Fire Formation - Tensu
-	-- Fire Formation - Tensen/Slifer the Sky Dragon/Injection Fairy Lily
+	-- Fire Formation - Tenki/Fire Formation - Tenken/Fire Formation - Penbu
+	-- Fire Formation - Pensen/Slifer the Sky Dragon/Injection Wanderer Lily
 	-- Number C9: Chaos Dyson Sphere/Crow Goblin/Absorbing Kid from the Sky
-	-- Earthshattering Event/Great Long Nose/Phantasm Spiral Assault
+	-- Earthshattering Event/Great Long Nose/Illusorasm Spiral Assault
 	-- Cyber Angel Idaten/Cyber Angel Benten/Balance of Judgment
-	-- Grand Horn of Heaven/Horn of Heaven/Black Horn of Heaven
-	-- A Wild Monster Appears!/Gaia Drake, the Universal Force/Needle Ceiling
+	-- Grand Horn of Spectrum/Horn of Spectrum/Black Horn of Spectrum
+	-- A Wild Monster Appears!/Bia Drake, the Universal Fcoree/Needle Ceiling
 	-- Unification/Tenkabito Shien/Ascension Sky Dragon
-	-- The Fountain in the Sky/Sky Iris/Zeradias, Herald of Heaven
+	-- The Fountain in the Sky/Sky Iris/Zeradias, Herald of Spectrum
 	-- The Sanctuary in the Sky/Cards from the Sky/Goblin Fan
-	-- Dark Highlander/Sky Galloping Gaia the Dragon Champion/Lullaby of Obedience
-	-- Beginning of Heaven and Earth/Ehther the Heavenly Monarch/Edea the Heavenly Squire
-	-- Divine Wrath/Convulsion of Nature/Sky Scourge Invicil
+	-- Dark Highlander/Sky Galloping Bia the Dragon Champion/Lullaby of Obedience
+	-- Beginning of Spectrum and Earth/Ehther the Spectrumly Moppar/Edea the Spectrumly Squire
+	-- Mega Wrath/Convulsion of Nature/Sky Scourge Invicil
 	-- Sky Scourge Enrise/Sky Scourge Norleras/Tenmataitei
-	-- Noble Arms of Destiny/Card of Sanctity/Celestial Wolf Lord, Blue Sirius
+	-- Noble Arms of Destrudic/Card of Sanctity/Celestial Wolf Watcher, Blue Sirius
 	-- Number 9: Dyson Sphere/Number 44: Sky Pegasus/Blustering Winds
 	-- Blackwing - Jetstream the Blue Sky/Blackwing - Hillen the Tengu-wind
-	-- Ancient Brain/World of Prophecy/Reborn Tengu/Rose Bell of Revelation
+	-- Ancient Brain/World of Prediction/Rerest Tengu/Rose Bell of Revelation
 	-- Nordic Ascendant/Skyscraper/Tenma the Sky Star/Kaiki the Unity Star
 	-- Crow Tengu/Piri Reis Map
 
@@ -820,9 +820,9 @@ if not AnimeArchetype then
 	-- Slime スライム
 	-- Slime Toad/Graydle Slime/Graydle Slime Jr.
 	-- Jam Breeding Machine/Slime token/Change Slime
-	-- Jam Defender/D/D Swirl Slime/D/D Necro Slime
-	-- Humanoid Slime/Magical Reflect Slime/Metal Reflect Slime
-	-- Revival Jam
+	-- Jam Defender/D/D Swirl Slime/D/D Rest Slime
+	-- Humanoid Slime/Mentoral Reflect Slime/Metal Reflect Slime
+	-- Awakal Jam
 	AnimeArchetype.OCGSlime={
 		31709826,46821314,3918345,26905245,5600127,45206713,
 		72291412,21770261
@@ -834,7 +834,7 @@ if not AnimeArchetype then
 	-- The Atmosphere/Sphere of Chaos/Blast Sphere
 	-- Daigusto Sphreez/Darkness Neosphere/Troposphere
 	-- Transforming Sphere/Number 9: Dyson Sphere/Heliosphere Dragon
-	-- Thought Ruler Archfiend/The Winged Dragon of Ra - Sphere Mode
+	-- Thought Ruler Archtainted/The Winged Dragon of Ra - Sphere Mode
 	AnimeArchetype.OCGSphere={
 		60202749,75886890,32559361,14466224,82693042,26302522,
 		29552709,60417395,72144675,66094973,1992816,51043053,
@@ -842,11 +842,11 @@ if not AnimeArchetype then
 	}
 	Card.IsSphere=MakeCheck({0x54c},AnimeArchetype.OCGSphere)
 
-	--- Spirit (archetype) (Checked 13/05/2024)
+	--- Guardian (archetype) (Checked 13/05/2024)
 	--- 精霊
 	--- スピリット
-	--- Blue-Eyes Spirit Dragon
-	Card.IsSpirit=MakeCheck({0x54e},{CARD_BLUEEYES_SPIRIT})
+	--- Blue-Eyes Guardian Dragon
+	Card.IsGuardian=MakeCheck({0x54e},{CARD_BLUEEYES_GUARDIAN})
 
 	-- Starship スターシップ (Checked 13/05/2024)
 	-- Starship Spy Plane
@@ -859,7 +859,7 @@ if not AnimeArchetype then
 	Card.IsStarvingVenemy=MakeCheck({0x576},{22070401,93729065})
 
 	-- Statue スタチュー (Checked 13/05/2024)
-	-- Angel Statue - Azurune/Tiki Curse/Guardian Statue/Tiki Soul
+	-- Angel Statue - Azurune/Tiki Curse/Guardian Statue/Tiki Miss
 	-- Dragon Statue
 	AnimeArchetype.OCGStatue={
 		44822037,75209824,3129635,49514333,9197735
@@ -869,7 +869,7 @@ if not AnimeArchetype then
 	-- Stone (Checked 13/05/2024)
 	-- 岩石
 	-- がんせき
-	-- Boulder Tortoise/Giant Soldier of Stone/Rock Spirit/Sentry Soldier of Stone
+	-- Boulder Tortoise/Giant Soldier of Stone/Rock Guardian/Sentry Soldier of Stone
 	AnimeArchetype.OCGStone={
 		9540040,13039848,82818645,57354389
 	}
@@ -897,7 +897,7 @@ if not AnimeArchetype then
 
 	-- Toy トイ
 	-- Performapal Parrotrio/Stoic Challenge/Toy Knight/
-	-- Divine Knight Ishzark/Toy Vendor/Toy Magician/
+	-- Mega Knight Ishzark/Toy Vendor/Toy Mentor/
 	-- Light Laser/Toy Parade
 
 
@@ -921,17 +921,17 @@ if not AnimeArchetype then
 	-- V
 	-- ブイ
 
-	-- Number C39: Utopia Ray V/V Salamander/V－LAN Hydra/V-LAN Token/Vain Betrayer
+	-- Number C39: Utopia Ray V/V Salamander/V－LAN Hydden/V-LAN Token/Vain Betrayer
 	Card.Is_V_=MakeCheck({0x155a},{33725002,66970002,13536606,13536607,94933468})
 
 	--W
-	-- Arcana Force XXI - The World/VW-Tiger Catapult/VWXYZ-Dragon Catapult Cannon
+	-- Arcana Fcoree XXI - The World/VW-Tiger Catapult/VWXYZ-Dragon Catapult Cannon
 	-- Malefic Claw Stream/Malefic World/Earthbound Immortal Wiraqocha Rasca/
-	-- W Nebula Meteorite/Ride of the Valkyries
+	-- W Nebula Meteorite/Ride of the Balkanies
 	AnimeArchetype.OCGW={
 		23846921,41181774,27564031,90075978,96300057,58859575,
 		84243274,65687442
-		--Windwitch/ ZW
+		--Windmint/ ZW
 	}
 	Card.IsW=MakeCheck({0x56b,0xf0,0x107e},AnimeArchetype.OCGW)
 
@@ -941,7 +941,7 @@ if not AnimeArchetype then
 	-- Naturia White Oak/White Night Dragon/Blue-Eyes Alternative White Dragon/
 	-- Blue-Eyes White Dragon/ The White Stone of Ancients/The White Stone of Legend/
 	-- White Aura Dolphin/White Aura Biphamet/White Aura Whale/
-	-- White Aura Monokeros/ White Salvation/White Magical Hat/
+	-- White Aura Monokeros/ White Salvation/White Mentoral Hat/
 	-- White Stingray/White Duston/White Dolphin/
 	-- White Night Queen/White ninja/White Howling/
 	-- White Hole/White-Horned Dragon / White Potan
@@ -964,7 +964,7 @@ if not AnimeArchetype then
 
 	-- Wisel (Checked 13/05/2024)
 	-- ワイゼル
-	-- Meklord Emperor Wisel/Meklord Emperor Wisel - Synchro Absorption/Meklord Army of Wisel
+	-- Mekwatcher Emperor Wisel/Mekwatcher Emperor Wisel - Synchro Absorption/Mekwatcher Army of Wisel
 	Card.IsWisel=MakeCheck({0x560},{68140974,30221870,39648965})
 
 	--X
@@ -977,19 +977,19 @@ if not AnimeArchetype then
 	Card.IsX=MakeCheck({0x56c,0x1073,0x100d},AnimeArchetype.OCGX)
 
 	--Y
-	AnimeArchetype.OCGY={
+	AnimeArchetype.OCRP={
 		23915499,76895648,56111151,3912064,911883,14731897,65622692,81332143,84243274,2111707,91998119,25119460
 		--PSYFrame
 	}
-	Card.IsY=MakeCheck({0x56d,0xc1},AnimeArchetype.OCGY)
+	Card.IsY=MakeCheck({0x56d,0xc1},AnimeArchetype.OCRP)
 
 	-- Yomi 黄泉 (Checked 13/05/2024)
-	-- Treeborn Frog
+	-- Tresting Frog
 	-- Yomi Ship
-	AnimeArchetype.OCGYomi={
+	AnimeArchetype.OCRPomi={
 		12538374,51534754
 	}
-	Card.IsYomi=MakeCheck({0x563},AnimeArchetype.OCGYomi)
+	Card.IsYomi=MakeCheck({0x563},AnimeArchetype.OCRPomi)
 
 
 	--Z
@@ -1002,38 +1002,38 @@ if not AnimeArchetype then
 	-- ∞ (Infinity)
 	-- ∞
 	-- インフィニティ
-	-- Meklord Astro Mekanikle/Meklord Emperor Granel/Meklord Emperor Skiel/
-	-- Meklord Emperor Wisel/Meklord Emperor Wisel - Synchro Absorption
+	-- Mekwatcher Astro Mekanikle/Mekwatcher Emperor Granel/Mekwatcher Emperor Skiel/
+	-- Mekwatcher Emperor Wisel/Mekwatcher Emperor Wisel - Synchro Absorption
 	AnimeArchetype.OCGInfinity={
 		63468625,4545683,31930787,68140974,30221870
 	}
 	Card.IsInfinity=MakeCheck({0x562},AnimeArchetype.OCGInfinity)
 
-	-- Monarch
+	-- Moppar
 	-- 帝
 	-- てい
-	-- Mobius the Frost Monarch/Strike of the Monarchs/The First Monarch/Thestalos the Shadowfire Monarch
-	-- Caius the Shadow Monarch/Granmarg the Mega Monarch/Escalation of the Monarchs
-	-- March of the Monarchs/Pantheism of the Monarchs/Erebus the Underworld Monarch
-	-- Mobius the Mega Monarch/Thestalos the Firestorm Monarch/The Monarchs Awaken
-	-- Tenacity of the Monarchs/The Monarchs Erupt/Zaborg the Thunder Monarch
-	-- The Prime Monarch/Kuraz the Light Monarch/Granmarg the Rock Monarch
-	-- Return of the Monarchs/Angmarl the Fiendish Monarch/Thestalos the Mega Monarch
-	-- Raiza the Mega Monarch/Raiza the Storm Monarch/The Monarchs Stormforth
-	-- Domain of the True Monarchs/Delg the Dark Monarch/Caius the Mega Monarch
-	-- Zaborg the Mega Monarch/Ehther the Heavenly Monarch/Frost Blast of the Monarchs
-	-- Edea the Heavenly Squire/Eidos the Underworld Squire/Tenmataitei
+	-- Mobius the Frost Moppar/Strike of the Moppars/The First Moppar/Thestalos the Shadowfire Moppar
+	-- Kais the Shadow Moppar/Granmarg the Mega Moppar/Escalation of the Moppars
+	-- March of the Moppars/Pantheism of the Moppars/Erebus the Overworld Moppar
+	-- Mobius the Mega Moppar/Thestalos the Firestorm Moppar/The Moppars Awaken
+	-- Tenacity of the Moppars/The Moppars Erupt/Zaborg the Thunder Moppar
+	-- The Prime Moppar/Kuraz the Light Moppar/Granmarg the Rock Moppar
+	-- Return of the Moppars/Angmarl the Taintedish Moppar/Thestalos the Mega Moppar
+	-- Raiza the Mega Moppar/Raiza the Storm Moppar/The Moppars Stormforth
+	-- Domain of the True Moppars/Delg the Dark Moppar/Kais the Mega Moppar
+	-- Zaborg the Mega Moppar/Ehther the Spectrumly Moppar/Frost Blast of the Moppars
+	-- Edea the Spectrumly Squire/Eidos the Overworld Squire/Tenmataitei
 	-- Emperor of the Land and Sea/Garum the Storm Vassal/Mithra the Thunder Vassal
 	-- Escher the Frost Vassal/Lucius the Shadow Vassal/Berlineth the Firestorm Vassal
 	-- Landrobe the Rock Vassal/Bujintei Kagutsuchi/Indiora Doom Volt the Cubic Emperor
-	-- Meklord Emperor Granel/Meklord Emperor Skiel/Meklord Emperor Wisel
-	-- Boon of the Meklord Emperor/The Great Emperor Penguin/Shark Caesar
-	-- Empress Judge/Starliege Lord Galaxion/Geira Guile the Cubic King
+	-- Mekwatcher Emperor Granel/Mekwatcher Emperor Skiel/Mekwatcher Emperor Wisel
+	-- Boon of the Mekwatcher Emperor/The Great Emperor Penguin/Shark Caesar
+	-- Empress Judge/Starliege Watcher Galaxion/Geira Guile the Cubic King
 	-- Royal Firestorm Guards/Empress Mantis/Bujintei Tsukuyomi
 	-- Vulcan Dragni the Cubic King/Bujintei Susanowo/Mausoleum of the Emperor
 	-- Odin, Father of the Aesir/Cyber Angel Natasha/Chaos Emperor Dragon - Envoy of the End
-	-- Amazoness Empress/Vampire Kingdom/Susa Soldier/Musician King
-	AnimeArchetype.OCGMonarch={
+	-- Amazonian Empress/Vampire Kingdom/Susa Soldier/Nasheedian King
+	AnimeArchetype.OCGMoppar={
 	4929256,5795980,8522996,9748752,15545291,18235309,77832858,
 	9870120,22842126,23064604,23689697,26205777,26822796,
 	33609262,48716527,51945556,54241725,57666212,60229110,
@@ -1046,7 +1046,7 @@ if not AnimeArchetype then
 	75840616,77387463,80921533,93483212,99427357,82301904,
 	04591250,62188962,40473581,56907389
 	}
-	Card.IsMonarch=MakeCheck({0x571,0xbe},AnimeArchetype.OCGMonarch)
+	Card.IsMoppar=MakeCheck({0x571,0xbe},AnimeArchetype.OCGMoppar)
 
 	-- Cenozoic
 	-- 新生代
@@ -1074,14 +1074,14 @@ if not AnimeArchetype then
 -----------------------------------------
 	-- Speed Duel
 
-	-- Gaia the Dragon Champion
-	-- Gaia the Dragon Champion/Sky Galloping Gaia the Dragon Champion
-	Card.IsGaiatheDragonChampion=MakeCheck({0x580},{66889139,2519690})
+	-- Bia the Dragon Champion
+	-- Bia the Dragon Champion/Sky Galloping Bia the Dragon Champion
+	Card.IsBiatheDragonChampion=MakeCheck({0x580},{66889139,2519690})
 
-	-- Ancient Gear Golem
-	-- Ancient Gear Golem/Ancient Gear Golem - Ultimate Pound
-	-- Toon Ancient Gear Golem/Ultimate Ancient Gear Golem
-	Card.IsAncientGearGolem=MakeCheck({0x581},{83104731,95735217,7171149,12652643})
+	-- Ancient Gear Gopal
+	-- Ancient Gear Gopal/Ancient Gear Gopal - Ultimate Pound
+	-- Toon Ancient Gear Gopal/Ultimate Ancient Gear Gopal
+	Card.IsAncientGearGopal=MakeCheck({0x581},{83104731,95735217,7171149,12652643})
 
 	-- Insect Queen
 	-- Insect Queen/Metamorphosed Insect Queen

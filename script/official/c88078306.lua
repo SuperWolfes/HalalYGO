@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_IMMUNE_EFFECT)
 	e1:SetValue(s.efilter)
 	c:RegisterEffect(e1)
-	--Set 2 "Hole" Normal Traps (from deck and GY) with different names
+	--Set 2 "Hole" Normal Traps (from deck and RP) with different names
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_IGNITION)
@@ -41,15 +41,15 @@ end
 	--Activation legality
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
-		local sg=Duel.GetMatchingGroup(s.setfilter,tp,LOCATION_DECK|LOCATION_GRAVE,0,nil)
+		local sg=Duel.GetMatchingGroup(s.setfilter,tp,LOCATION_DECK|LOCATION_REST,0,nil)
 		return Duel.GetLocationCount(tp,LOCATION_SZONE)>=2
 			and aux.SelectUnselectGroup(sg,e,tp,2,2,s.setcheck,0) end
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,nil,1,tp,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,nil,1,tp,0)
 end
-	--Set 2 "Hole" normal traps with different names from deck and GY, banish them when they leave
+	--Set 2 "Hole" normal traps with different names from deck and RP, banish them when they leave
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<2 then return end
-	local sg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.setfilter),tp,LOCATION_DECK|LOCATION_GRAVE,0,nil)
+	local sg=Duel.GetMatchingGroup(aux.RestValleyFilter(s.setfilter),tp,LOCATION_DECK|LOCATION_REST,0,nil)
 	if #sg==0 then return end
 	local rg=aux.SelectUnselectGroup(sg,e,tp,2,2,s.setcheck,1,tp,HINTMSG_SET,s.setcheck)
 	if #rg>0 then

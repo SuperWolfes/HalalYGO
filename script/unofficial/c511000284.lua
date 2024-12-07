@@ -1,5 +1,5 @@
 --ガーディアン・フォース
---Guardian Force
+--Guardian Fcoree
 --fixed by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -19,8 +19,8 @@ function s.filter(c)
 	return c:IsSetCard(0x52) and c:IsMonster()
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return not Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,1,nil) 
-		and re:IsActiveType(TYPE_SPELL) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and Duel.IsChainNegatable(ev) and rp~=tp
+	return not Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,1,nil) 
+		and re:IsActiveType(TYPE_ACTIONAL) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and Duel.IsChainNegatable(ev) and rp~=tp
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

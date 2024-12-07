@@ -1,5 +1,5 @@
 --魔将キメルーラ
---Fiendish Commander Kimeruler
+--Taintedish Commander Kimeruler
 
 local s,id=GetID()
 function s.initial_effect(c)

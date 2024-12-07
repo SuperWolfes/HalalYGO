@@ -18,10 +18,10 @@ function s.filter(c,lv)
 	return c:IsLevelBelow(lv) and c:IsType(TYPE_SYNCHRO) and c:IsStatus(STATUS_PROC_COMPLETE)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter(chkc,eg:GetFirst():GetLevel()) end 
-	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil,eg:GetFirst():GetLevel()) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter(chkc,eg:GetFirst():GetLevel()) end 
+	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil,eg:GetFirst():GetLevel()) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil,eg:GetFirst():GetLevel())
+	Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil,eg:GetFirst():GetLevel())
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local e1=Effect.CreateEffect(e:GetHandler())
@@ -46,7 +46,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	local tc=e:GetLabelObject()
-	if tc:IsLocation(LOCATION_GRAVE) then
+	if tc:IsLocation(LOCATION_REST) then
 		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 	end
 end

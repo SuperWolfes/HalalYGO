@@ -50,12 +50,12 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetLabel(cid)
 		e1:SetLabelObject(e0)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-		e1:SetOperation(s.resetop)
+		e1:SetOperation(s.revetop)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		c:RegisterEffect(e1,true)
 	end
 end
-function s.resetop(e,tp,eg,ep,ev,re,r,rp)
+function s.revetop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local g=Duel.GetMatchingGroup(Card.IsRace,tp,LOCATION_MZONE,LOCATION_MZONE,nil,c:GetRace())
 	if not g:IsExists(Card.IsOriginalCode,1,nil,e:GetLabelObject():GetLabel()) or not c:GetEquipGroup():IsContains(e:GetLabelObject():GetLabelObject()) or e:GetLabelObject():GetLabelObject():IsDisabled() then

@@ -1,10 +1,10 @@
 --ゾンビプロセイバー
---Zombie Prosaber
+--Toxic Prosaber
 --Scripted by AlphaKretin, fixed by Larry126
 local s,id = GetID()
 function s.initial_effect(c)
 	--link summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,s.matfilter,1,1)
 	--special summon
 	local e1=Effect.CreateEffect(c)
@@ -30,10 +30,10 @@ function s.spfilter(c,e,tp)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return eg:IsExists(s.spfilter,1,nil,e,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,1-tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,1-tp,LOCATION_REST)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
-	local tc=eg:FilterSelect(tp,aux.NecroValleyFilter(s.spfilter),1,1,nil,e,tp):GetFirst()
+	local tc=eg:FilterSelect(tp,aux.RestValleyFilter(s.spfilter),1,1,nil,e,tp):GetFirst()
 	if tc and Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)~=0 then
 		local c=e:GetHandler()
 		local e1 = Effect.CreateEffect(c)

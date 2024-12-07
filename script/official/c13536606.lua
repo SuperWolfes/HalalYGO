@@ -1,9 +1,9 @@
 --V－LAN ヒドラ
---V-LAN Hydra
+--V-LAN Hydden
 local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,s.matfilter,2)
 	--atk
 	local e1=Effect.CreateEffect(c)
@@ -37,10 +37,10 @@ function s.rfilter(c,tp,g)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if c:GetControler()==tp then
 		return c:IsFaceup() and c:IsLinkMonster() and c:IsLinkBelow(3) and c:IsReleasableByEffect() and g:IsContains(c)
-			and ((c:GetSequence()>4 and ft>=lk) or (c:GetSequence()<=4 and (ft+1)>=lk)) and (ft==1 or not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT))
+			and ((c:GetSequence()>4 and ft>=lk) or (c:GetSequence()<=4 and (ft+1)>=lk)) and (ft==1 or not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN))
 	elseif c:GetControler()==1-tp then
 		return c:IsFaceup() and c:IsLinkMonster() and c:IsLinkBelow(3) and c:IsReleasableByEffect() and g:IsContains(c)
-			and ft>=lk and (ft==1 or not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT))
+			and ft>=lk and (ft==1 or not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN))
 	else return false
 	end
 end
@@ -61,7 +61,7 @@ function s.tkop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=tc:GetLink()
 	if tc and tc:IsRelateToEffect(e) and not tc:IsImmuneToEffect(e) and Duel.Release(tc,REASON_EFFECT)>0 then
 		local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-		if ft<ct or (ft>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)) then return end
+		if ft<ct or (ft>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)) then return end
 		if not Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0,TYPES_TOKEN,0,0,1,RACE_CYBERSE,ATTRIBUTE_LIGHT) then return end
 		for i=1,ct do
 			local token=Duel.CreateToken(tp,id+1)

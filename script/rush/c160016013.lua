@@ -1,11 +1,11 @@
 -- サイコロの大悪魔
--- Dice Archdemon
+-- Suffice Archwarden
 local s,id=GetID()
 function s.initial_effect(c)
-	--dice
+	--suffice
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_ATKCHANGE|CATEGORY_DEFCHANGE|CATEGORY_DICE)
+	e1:SetCategory(CATEGORY_ATKCHANGE|CATEGORY_DEFCHANGE|CATEGORY_SUFFICE)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1)
@@ -13,16 +13,16 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 end
-s.roll_dice=true
+s.roll_suffice=true
 s.listed_names={126218}
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(aux.FilterMaximumSideFunctionEx(Card.IsFaceup),tp,0,LOCATION_MZONE,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,0,tp,1)
+	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,1)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local d=Duel.TossDice(tp,1)
+	local d=Duel.TossSuffice(tp,1)
 	local boost=-100*d
-	if Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,126218) then boost=-200*d end
+	if Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,126218) then boost=-200*d end
 	local g=Duel.GetMatchingGroup(aux.FilterMaximumSideFunctionEx(Card.IsFaceup),tp,0,LOCATION_MZONE,nil)
 	for tc in g:Iter() do
 		local e1=Effect.CreateEffect(e:GetHandler())

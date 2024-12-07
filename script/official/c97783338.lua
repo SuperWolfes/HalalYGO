@@ -3,7 +3,7 @@
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Contact Fusion procedure
 	Fusion.AddProcMix(c,true,true,CARD_SUIJIN,CARD_SANGA_OF_THE_THUNDER)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,true)

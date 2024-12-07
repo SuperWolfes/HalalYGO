@@ -6,7 +6,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz summon
 	Xyz.AddProcedure(c,nil,1,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -91,10 +91,10 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.retfilter(c)
-	return c:IsSpellTrap() and c:GetFlagEffect(id)>0
+	return c:IsActionalTrap() and c:GetFlagEffect(id)>0
 end
 function s.retfilter2(c,tp)
-	return c:IsSpellTrap() and c:GetFlagEffect(id)>0
+	return c:IsActionalTrap() and c:GetFlagEffect(id)>0
 		and not Duel.IsExistingMatchingCard(function(c,seq)return c:GetSequence()==seq end,tp,LOCATION_SZONE,0,1,c,((c:GetFlagEffectLabel(id)&4)>>0xf))
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -102,7 +102,7 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local sg1=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,sg1,#sg1,0,0)
 	local sg2=Duel.GetMatchingGroup(s.retfilter,tp,0x32,0x32,nil)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,sg2,#sg2,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,sg2,#sg2,0,0)
 end
 function s.fil(c,seq,p)
 	local lab=c:GetFlagEffectLabel(id)
@@ -142,7 +142,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.MoveToField(tc,tp,p,loc,pos,true,(1<<seq))
 		end
 	end
-	Duel.SendtoGrave(sg2:Filter(s.fil2,nil),REASON_RULE)
+	Duel.SendtoRest(sg2:Filter(s.fil2,nil),REASON_RULE)
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -172,7 +172,7 @@ function s.indes(e,c)
 	return not c:IsSetCard(0x48)
 end
 function s.stcheck(e,tp,eg,ep,ev,re,r,rp)
-	local g=eg:Filter(Card.IsType,nil,TYPE_SPELL+TYPE_TRAP)
+	local g=eg:Filter(Card.IsType,nil,TYPE_ACTIONAL+TYPE_TRAP)
 	if #g>0 then
 		local tc=g:GetFirst()
 		while tc do

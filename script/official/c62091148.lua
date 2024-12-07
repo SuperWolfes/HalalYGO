@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.eqptg)
 	e1:SetOperation(s.eqpop)
 	c:RegisterEffect(e1)
-	--Fusion Summon 1 FIRE Warrior or Dragon Fusion Monster shuffling materials from your hand, field, and/or GY
+	--Fusion Summon 1 FIRE Warrior or Dragon Fusion Monster shuffling materials from your hand, field, and/or RP
 	local params = {fusfilter=s.fusmonfilter,
 			matfilter=Card.IsAbleToDeck,
 			extrafil=s.extramat,
@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_FREE_CHAIN)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetHintTiming(0,TIMING_MAIN_END|TIMINGS_CHECK_MONSTER_E)
 	e2:SetCountLimit(1,id)
 	e2:SetCost(aux.SelfBanishCost)
@@ -73,18 +73,18 @@ function s.eqpop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.ChangePosition(tc,POS_FACEDOWN_DEFENSE)
 		end
 	else
-		c:CancelToGrave(false)
+		c:CancelToRest(false)
 	end
 end
 function s.fusmonfilter(c)
 	return c:IsAttribute(ATTRIBUTE_FIRE) and c:IsRace(RACE_WARRIOR|RACE_DRAGON)
 end
 function s.extramat(e,tp,mg,sumtype)
-	return Duel.GetMatchingGroup(aux.NecroValleyFilter(Fusion.IsMonsterFilter(Card.IsAbleToDeck)),tp,LOCATION_GRAVE,0,nil)
+	return Duel.GetMatchingGroup(aux.RestValleyFilter(Fusion.IsMonsterFilter(Card.IsAbleToDeck)),tp,LOCATION_REST,0,nil)
 end
 function s.extratg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,0,tp,LOCATION_HAND|LOCATION_MZONE|LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,0,tp,LOCATION_HAND|LOCATION_MZONE|LOCATION_REST)
 end
 function s.stage2(e,tc,tp,sg,chk)
 	if chk==0 then

@@ -2,7 +2,7 @@
 --Crystal Skull
 local s,id=GetID()
 function s.initial_effect(c)
-	--send to grave
+	--send to rest
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DAMAGE)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)

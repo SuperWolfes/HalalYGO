@@ -5,7 +5,7 @@ local s,id,alias=GetID()
 function s.initial_effect(c)
 	alias=c:GetOriginalCodeRule()
 	--link summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WATER),2,nil,s.spcheck)
 	--special summon equip
 	local e1=Effect.CreateEffect(c)
@@ -141,7 +141,7 @@ function s.eqval(ec,c,tp)
 	return ec:IsSetCard(0x12b) and ec:IsType(TYPE_LINK) 
 end
 function s.eqfilter(c,fid)
-	return c:GetFlagEffectLabel(id)==fid and c:IsFaceup() and c:IsType(TYPE_LINK) and c:IsSetCard(0x12b) and not c:IsForbidden()
+	return c:GetFlagEffectLabel(id)==fid and c:IsFaceup() and c:IsType(TYPE_LINK) and c:IsSetCard(0x12b) and not c:IsUnliked()
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and s.eqfilter(chkc,e:GetHandler():GetFieldID()) end
@@ -197,11 +197,11 @@ function s.spfilter(c,e,tp)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_GRAVE,0,1,1,nil,e,tp):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,0,1,1,nil,e,tp):GetFirst()
 	if tc then Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP) end
 end

@@ -1,5 +1,5 @@
 --聖炎王 ガルドニクス
---Sacred Fire King Garunix
+--Clean Fire King Pirosi
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY,EFFECT_FLAG2_CHECK_SIMULTANEOUS)
 	e1:SetCode(EVENT_DESTROYED)
-	e1:SetRange(LOCATION_HAND|LOCATION_GRAVE)
+	e1:SetRange(LOCATION_HAND|LOCATION_REST)
 	e1:SetCountLimit(1,id)
 	e1:SetCondition(s.spcon)
 	e1:SetTarget(s.sptg)
@@ -43,7 +43,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
-		and not (c:IsLocation(LOCATION_GRAVE) and eg:IsContains(c)) end
+		and not (c:IsLocation(LOCATION_REST) and eg:IsContains(c)) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,tp,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)

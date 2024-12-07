@@ -3,7 +3,7 @@
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Cannot be Special Summoned except by procedure
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -22,12 +22,12 @@ function s.initial_effect(c)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
 	local e3=e2:Clone()
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	c:RegisterEffect(e3)
-	--Make opponent send cards to GY
+	--Make opponent send cards to RP
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
-	e4:SetCategory(CATEGORY_TOGRAVE)
+	e4:SetCategory(CATEGORY_TOREST)
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e4:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e4:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
@@ -35,7 +35,7 @@ function s.initial_effect(c)
 	e4:SetTarget(s.tgtg)
 	e4:SetOperation(s.tgop)
 	c:RegisterEffect(e4)
-	--Gain ATK/DEF with Kiskil and Lilla in GY
+	--Gain ATK/DEF with Kiskil and Lilla in RP
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_SINGLE)
 	e5:SetCode(EFFECT_UPDATE_ATTACK)
@@ -79,12 +79,12 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(tp,0,LOCATION_ONFIELD)
 	local ct=#g-2
 	if ct>0 then
-		Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOGRAVE)
+		Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOREST)
 		local sg=g:Select(1-tp,ct,ct,nil)
-		Duel.SendtoGrave(sg,REASON_RULE,PLAYER_NONE,1-tp)
+		Duel.SendtoRest(sg,REASON_RULE,PLAYER_NONE,1-tp)
 	end
 end
 function s.atkcon(e)
-	local g=Duel.GetFieldGroup(e:GetHandler():GetControler(),LOCATION_GRAVE,0)
+	local g=Duel.GetFieldGroup(e:GetHandler():GetControler(),LOCATION_REST,0)
 	return g:IsExists(Card.IsSetCard,1,nil,SET_KI_SIKIL) and g:IsExists(Card.IsSetCard,1,nil,SET_LIL_LA)
 end

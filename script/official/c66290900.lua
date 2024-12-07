@@ -34,5 +34,5 @@ function s.atktg(e,c)
 	return not s.counterfilter(c)
 end
 function s.fextra(e,tp,mg)
-	return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToDeck),tp,LOCATION_GRAVE,0,nil)
+	return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToDeck),tp,LOCATION_REST,0,nil)
 end

@@ -2,7 +2,7 @@
 --Cyber End Dragon (Rush)
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion Summon Procedure
 	Fusion.AddProcMixN(c,true,true,CARD_CYBER_DRAGON,3)
 	--Piercing battle damage

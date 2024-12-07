@@ -23,7 +23,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:IsHasType(EFFECT_TYPE_ACTIVATE) end
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	--Negate Field Spell effects
+	--Negate Field Actional effects
 	local c=e:GetHandler()
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -35,7 +35,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local e2=e1:Clone()
 	e2:SetCode(EFFECT_DISABLE_EFFECT)
 	Duel.RegisterEffect(e2,tp)
-	--Pyro Clock of Destiny handling
+	--Pyro Clock of Destrudic handling
 	local descnum=tp==c:GetOwner() and 0 or 1
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)

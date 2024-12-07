@@ -11,14 +11,14 @@ function s.initial_effect(c)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetValue(1)
 	c:RegisterEffect(e1)
-	--Special Summon this card from your hand or GY
+	--Special Summon this card from your hand or RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,2))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY,EFFECT_FLAG2_CHECK_SIMULTANEOUS)
 	e2:SetCode(EVENT_DESTROYED)
-	e2:SetRange(LOCATION_HAND|LOCATION_GRAVE)
+	e2:SetRange(LOCATION_HAND|LOCATION_REST)
 	e2:SetCountLimit(1,id)
 	e2:SetCondition(s.spcon)
 	e2:SetTarget(s.sptg)
@@ -49,7 +49,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and c:IsCanBeSpecialSummoned(e,1,tp,false,false)
-		and not (c:IsLocation(LOCATION_GRAVE) and eg:IsContains(c)) end
+		and not (c:IsLocation(LOCATION_REST) and eg:IsContains(c)) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,tp,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)

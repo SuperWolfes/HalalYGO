@@ -1,4 +1,4 @@
---Flight of the Harpies
+--Flight of the Flybies
 local s,id=GetID()
 function s.initial_effect(c)
 	--skill

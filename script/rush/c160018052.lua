@@ -3,7 +3,7 @@
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send the top 2 cards of your Deck to the GY
+	--Send the top 2 cards of your Deck to the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DECKDES)
@@ -22,14 +22,14 @@ function s.tdfilter(c)
 	return c:IsAbleToDeck() and c:IsCode(CARD_FUSION,160015051)
 end
 function s.thfilter(c)
-	return ((c:IsRace(RACE_PSYCHIC) and c:IsAttribute(ATTRIBUTE_WIND)) or c:IsCode(CARD_FUSION,160015051)) and c:IsAbleToHand()
+	return ((c:IsRace(RACE_MENTAL) and c:IsAttribute(ATTRIBUTE_WIND)) or c:IsCode(CARD_FUSION,160015051)) and c:IsAbleToHand()
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Effect
 	Duel.DiscardDeck(tp,2,REASON_EFFECT)
-	if Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.tdfilter),tp,LOCATION_GRAVE,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+	if Duel.IsExistingMatchingCard(aux.RestValleyFilter(s.tdfilter),tp,LOCATION_REST,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-		local tg=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+		local tg=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_REST,0,1,1,nil)
 		Duel.HintSelection(tg)
 		local opt=Duel.SelectOption(tp,aux.Stringid(id,2),aux.Stringid(id,3))
 		local tdc=0
@@ -38,10 +38,10 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		elseif opt==1 then
 			tdc=Duel.SendtoDeck(tg,nil,SEQ_DECKBOTTOM,REASON_EFFECT)
 		end
-		if tdc>0 and Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.thfilter),tp,LOCATION_GRAVE,0,1,nil) 
+		if tdc>0 and Duel.IsExistingMatchingCard(aux.RestValleyFilter(s.thfilter),tp,LOCATION_REST,0,1,nil) 
 			and Duel.SelectYesNo(tp,aux.Stringid(id,4)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-			local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thfilter),tp,LOCATION_GRAVE,0,1,1,nil)
+			local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.thfilter),tp,LOCATION_REST,0,1,1,nil)
 			if #g>0 then
 				Duel.BreakEffect()
 				Duel.SendtoHand(g,nil,REASON_EFFECT)

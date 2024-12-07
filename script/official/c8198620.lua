@@ -1,11 +1,11 @@
 --冥界龍 ドラゴネクロ
---Dragonecro Nethersoul Dragon
+--Dragorest Nethermiss Dragon
 local s,id=GetID()
 function s.initial_effect(c)
 	c:SetUniqueOnField(1,0,id)
 	--fusion material
-	c:EnableReviveLimit()
-	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_ZOMBIE),2)
+	c:EnableAwakeLimit()
+	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_TOXIC),2)
 	--spsummon condition
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -57,7 +57,7 @@ function s.atop(e,tp,eg,ep,ev,re,r,rp)
 		bc:RegisterEffect(e1)
 		local lv=bc:GetOriginalLevel()
 		if lv>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-			and Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0,TYPES_TOKEN,-2,0,0,RACE_ZOMBIE,ATTRIBUTE_DARK) then
+			and Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0,TYPES_TOKEN,-2,0,0,RACE_TOXIC,ATTRIBUTE_DARK) then
 			local token=Duel.CreateToken(tp,id+1)
 			Duel.SpecialSummonStep(token,0,tp,tp,false,false,POS_FACEUP)
 			local e1=Effect.CreateEffect(c)

@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x8),2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--atk
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -28,5 +28,5 @@ function s.atkfilter(c)
 	return c:IsSetCard(0x8) and c:IsMonster()
 end
 function s.atkval(e,c)
-	return Duel.GetMatchingGroup(s.atkfilter,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil):GetClassCount(Card.GetCode)*100
+	return Duel.GetMatchingGroup(s.atkfilter,e:GetHandlerPlayer(),LOCATION_REST,0,nil):GetClassCount(Card.GetCode)*100
 end

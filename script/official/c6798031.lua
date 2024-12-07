@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e1:SetTargetRange(1,0)
 	e1:SetTarget(s.xyzlimit)
 	c:RegisterEffect(e1)
-	--Place 2 "Raizeol" cards from your GY on the bottom of the Deck then draw 1 card
+	--Place 2 "Raizeol" cards from your RP on the bottom of the Deck then draw 1 card
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TODECK+CATEGORY_DRAW)
@@ -48,9 +48,9 @@ function s.tdfilter(c)
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	if chk==0 then return Duel.IsPlayerCanDraw(tp,1) and Duel.IsExistingTarget(s.tdfilter,tp,LOCATION_GRAVE,0,2,nil) end
+	if chk==0 then return Duel.IsPlayerCanDraw(tp,1) and Duel.IsExistingTarget(s.tdfilter,tp,LOCATION_REST,0,2,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectTarget(tp,s.tdfilter,tp,LOCATION_GRAVE,0,2,2,nil)
+	local g=Duel.SelectTarget(tp,s.tdfilter,tp,LOCATION_REST,0,2,2,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,2,tp,0)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
 end

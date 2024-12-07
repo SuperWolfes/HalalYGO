@@ -21,7 +21,7 @@ function s.filter1(c,tp)
 	return c:IsSummonPlayer(1-tp) and c:IsLocation(LOCATION_MZONE)
 end
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_FAIRY) and c:GetBaseAttack()==0
+	return c:IsFaceup() and c:IsRace(RACE_WANDERER) and c:GetBaseAttack()==0
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.filter1,1,nil,tp) and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil)

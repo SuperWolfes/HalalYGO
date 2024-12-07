@@ -20,7 +20,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return tc and tc:IsFaceup() and tc:IsControler(tp) and tc:IsRace(RACE_PLANT) and Duel.GetAttacker():IsCanChangePositionRush()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_GRAVE,0,2,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST,0,2,nil) end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tg=Duel.GetAttackTarget()
@@ -31,7 +31,7 @@ function s.tdfilter(c)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	local td=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_GRAVE,0,2,2,nil)
+	local td=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_REST,0,2,2,nil)
 	Duel.HintSelection(td)
 	if Duel.SendtoDeck(td,nil,SEQ_DECKBOTTOM,REASON_COST)~0 then
 		Duel.SortDeckbottom(tp,tp,2)

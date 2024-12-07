@@ -22,7 +22,7 @@ function s.drcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>=10
 end
 function s.costfilter(c)
-	return c:IsMonster() and c:IsType(TYPE_EFFECT) and c:IsAttribute(ATTRIBUTE_FIRE) and c:IsAbleToGraveAsCost()
+	return c:IsMonster() and c:IsType(TYPE_EFFECT) and c:IsAttribute(ATTRIBUTE_FIRE) and c:IsAbleToRestAsCost()
 end
 function s.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil) end
@@ -38,13 +38,13 @@ function s.tdfilter(c)
 end
 function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,1,nil)
-	if Duel.SendtoGrave(g,REASON_COST)<1 then return end
+	if Duel.SendtoRest(g,REASON_COST)<1 then return end
 	--Effect
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
-	if Duel.Draw(p,d,REASON_EFFECT)>0 and Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_GRAVE,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
-		local g2=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_GRAVE,0,nil)
+	if Duel.Draw(p,d,REASON_EFFECT)>0 and Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+		local g2=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_REST,0,nil)
 		local ct=Duel.SendtoDeck(g2,nil,SEQ_DECKBOTTOM,REASON_COST)
 		if ct>0 then
 			Duel.SortDeckbottom(tp,tp,ct)

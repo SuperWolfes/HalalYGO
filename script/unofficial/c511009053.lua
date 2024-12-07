@@ -1,12 +1,12 @@
 --Ｄ－ＨＥＲＯ ディストピアガイ (Anime)
---Destiny HERO - Dystopia (Anime)
+--Destrudic HERO - Dystopia (Anime)
 --fixed by MLD
 Duel.EnableUnofficialProc(PROC_STATS_CHANGED)
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
-	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_DESTINY_HERO),2)
+	c:EnableAwakeLimit()
+	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_DESTRUDIC_HERO),2)
 	--spsummon
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DAMAGE)
@@ -36,7 +36,7 @@ function s.initial_effect(c)
 	e3:SetCondition(s.descon2)
 	c:RegisterEffect(e3)
 end
-s.material_setcode={SET_HERO,SET_DESTINY_HERO}
+s.material_setcode={SET_HERO,SET_DESTRUDIC_HERO}
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
 end

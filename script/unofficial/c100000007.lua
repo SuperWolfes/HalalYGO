@@ -67,7 +67,7 @@ function s.dacon(e)
 	return e:GetHandler():IsAttackPos()
 end
 function s.filter(c)
-	return c:IsSpellTrap() and c:IsAbleToDeck() 
+	return c:IsActionalTrap() and c:IsAbleToDeck() 
 end
 function s.con(e)
 	return e:GetHandler():GetBattledGroupCount()>0 or e:GetHandler():GetAttackedCount()>0

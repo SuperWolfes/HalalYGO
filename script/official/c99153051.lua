@@ -33,7 +33,7 @@ end
 s.listed_series={SET_RAGNARAIKA}
 s.listed_names={id}
 function s.spcostfilter(c)
-	return c:IsRace(RACE_INSECT|RACE_PLANT|RACE_REPTILE) and c:IsAbleToGraveAsCost()
+	return c:IsRace(RACE_INSECT|RACE_PLANT|RACE_REPTILE) and c:IsAbleToRestAsCost()
 end
 function s.spcon(e,c)
 	if c==nil then return true end
@@ -43,7 +43,7 @@ end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,c)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 	local g=Duel.GetMatchingGroup(s.spcostfilter,tp,LOCATION_HAND,0,e:GetHandler())
-	local sg=aux.SelectUnselectGroup(g,e,tp,1,1,aux.ChkfMMZ(1),1,tp,HINTMSG_TOGRAVE,nil,nil,true)
+	local sg=aux.SelectUnselectGroup(g,e,tp,1,1,aux.ChkfMMZ(1),1,tp,HINTMSG_TOREST,nil,nil,true)
 	if #sg>0 then
 		sg:KeepAlive()
 		e:SetLabelObject(sg)
@@ -54,7 +54,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	g:DeleteGroup()
 end
 function s.thfilter(c)

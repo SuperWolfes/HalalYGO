@@ -1,5 +1,5 @@
 --マジシャンズ・センス
---Magician's Sense
+--Mentor's Sense
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -21,20 +21,20 @@ function s.filter1(c,tp)
 	return c:IsSummonPlayer(1-tp) and c:IsLocation(LOCATION_MZONE)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return eg:IsExists(s.filter1,1,nil,tp) and Duel.IsExistingMatchingCard(Card.IsSpell,tp,LOCATION_GRAVE,0,3,nil)
+	return eg:IsExists(s.filter1,1,nil,tp) and Duel.IsExistingMatchingCard(Card.IsActional,tp,LOCATION_REST,0,3,nil)
 end
 function s.ssfilter(c)
-	return c:IsCode(63391643,2314238,160421027) and c:IsSpellTrap() and c:IsSSetable() and not c:IsType(TYPE_FIELD)
+	return c:IsCode(63391643,2314238,160421027) and c:IsActionalTrap() and c:IsSSetable() and not c:IsType(TYPE_FIELD)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.ssfilter,tp,LOCATION_GRAVE,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,nil,1,tp,0)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.ssfilter,tp,LOCATION_REST,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,nil,1,tp,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
 	if ft>2 then ft=2 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
-	local g=Duel.SelectMatchingCard(tp,s.ssfilter,tp,LOCATION_GRAVE,0,1,ft,nil)
+	local g=Duel.SelectMatchingCard(tp,s.ssfilter,tp,LOCATION_REST,0,1,ft,nil)
 	if #g==0 then return end
 	if Duel.SSet(tp,g)>0 then
 		-- Take no battle damage this turn

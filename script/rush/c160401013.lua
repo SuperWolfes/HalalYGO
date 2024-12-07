@@ -1,3 +1,3 @@
 --セレブローズ・ウィッチ
---Celeb Rose Witch
+--Celeb Rose Mint
 Duel.LoadCardScriptAlias(160013011)

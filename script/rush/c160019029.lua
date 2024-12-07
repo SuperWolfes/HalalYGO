@@ -19,7 +19,7 @@ function s.cfilter(c)
 	return (c:IsCode(id) or c:IsType(TYPE_MONSTER)) and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local cg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_GRAVE,0,nil)
+	local cg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST,0,nil)
 	if chk==0 then return aux.SelectUnselectGroup(cg,e,tp,1,4,s.rescon,0) end
 end
 function s.rescon(sg,e,tp,mg)
@@ -31,7 +31,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	local cg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_GRAVE,0,nil)
+	local cg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST,0,nil)
 	local g=aux.SelectUnselectGroup(cg,e,tp,1,4,s.rescon,1,tp,HINTMSG_TODECK,s.rescon)
 	Duel.HintSelection(g)
 	if Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_COST)<1 then return end

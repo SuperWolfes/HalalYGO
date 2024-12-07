@@ -1,5 +1,5 @@
 --機皇帝スキエル∞ (Anime)
---Meklord Emperor Skiel ∞ (Anime)
+--Mekwatcher Emperor Skiel ∞ (Anime)
 Duel.LoadScript("c420.lua")
 local s,id=GetID()
 function s.initial_effect(c)
@@ -79,7 +79,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 				e2:SetValue(atk)
 				tc:RegisterEffect(e2)
 			end
-		else Duel.SendtoGrave(tc,REASON_EFFECT) end
+		else Duel.SendtoRest(tc,REASON_EFFECT) end
 	end
 end
 function s.cfilter(c)

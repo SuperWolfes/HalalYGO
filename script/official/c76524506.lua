@@ -2,9 +2,9 @@
 -- Garden Rose Flora
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--synchro summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	--destroy + token
 	local e1=Effect.CreateEffect(c)
@@ -32,7 +32,7 @@ function s.initial_effect(c)
 end
 s.listed_names={TOKEN_ROSE}
 function s.filter(c)
-	return c:IsSpell() and c:IsType(TYPE_FIELD) and c:IsFaceup() and c:IsAbleToHand()
+	return c:IsActional() and c:IsType(TYPE_FIELD) and c:IsFaceup() and c:IsAbleToHand()
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_FZONE) end

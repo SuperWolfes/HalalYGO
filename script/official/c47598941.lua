@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetCountLimit(1,id)
 	e2:SetCondition(s.setcon)
 	e2:SetTarget(s.settg2)
-	e2:SetOperation(s.setop)
+	e2:SetOperation(s.vetop)
 	c:RegisterEffect(e2)
 	--atk/def down
 	local e3=Effect.CreateEffect(c)
@@ -47,13 +47,13 @@ function s.setcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,tp)
 end
 function s.filter(c)
-	return c:IsSetCard(0xe0) and c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
+	return c:IsSetCard(0xe0) and c:IsType(TYPE_PENDULUM) and not c:IsUnliked()
 end
 function s.settg2(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckPendulumZones(tp)
 		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) then return end
 	if not Duel.CheckPendulumZones(tp) then return end

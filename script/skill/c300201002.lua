@@ -1,4 +1,4 @@
---Destiny Draw
+--Destrudic Draw
 local s,id=GetID()
 function s.initial_effect(c)
 	--skill

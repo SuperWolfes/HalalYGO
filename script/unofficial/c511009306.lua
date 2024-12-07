@@ -1,5 +1,5 @@
 --剣闘獣の蛇頭楯
---Gladiator Beast Medusa Shield
+--Gladiator Beast Mensona Shield
 --fixed by MLD
 local s,id=GetID()
 function s.initial_effect(c)
@@ -33,11 +33,11 @@ function s.initial_effect(c)
 	e5:SetCondition(s.descon)
 	e5:SetOperation(s.desop)
 	c:RegisterEffect(e5)
-	--to grave
+	--to rest
 	local e6=Effect.CreateEffect(c)
 	e6:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e6:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	e6:SetCode(EVENT_TO_GRAVE)
+	e6:SetCode(EVENT_TO_REST)
 	e6:SetOperation(s.regop)
 	c:RegisterEffect(e6)
 	local e7=Effect.CreateEffect(c)
@@ -45,10 +45,10 @@ function s.initial_effect(c)
 	e7:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e7:SetCode(EVENT_PHASE+PHASE_END)
 	e7:SetCountLimit(1)
-	e7:SetRange(LOCATION_GRAVE)
+	e7:SetRange(LOCATION_REST)
 	e7:SetCondition(s.setcon)
 	e7:SetTarget(s.settg)
-	e7:SetOperation(s.setop)
+	e7:SetOperation(s.vetop)
 	c:RegisterEffect(e7)
 end
 s.listed_series={0x19}
@@ -107,7 +107,7 @@ function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
 		and Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_DECK,0,1,nil) end
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 	local g=Duel.SelectMatchingCard(tp,s.setfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then

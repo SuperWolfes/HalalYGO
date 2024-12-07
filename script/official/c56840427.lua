@@ -2,7 +2,7 @@
 --Number C39: Utopia Ray
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Xyz Summon procedure: 3 Level 4 LIGHT monsters / 1 "Number 39: Utopia"
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGHT),4,3,s.ovfilter,aux.Stringid(id,0))
 	--Make this card gain 500 ATK and 1 monster your opponent controls lose 1000 ATK until the end of that turn

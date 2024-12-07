@@ -2,9 +2,9 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),4,4)
-	--negate spell
+	--negate actional
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(68140974,2))
 	e2:SetCategory(CATEGORY_NEGATE+CATEGORY_DESTROY)
@@ -29,7 +29,7 @@ function s.initial_effect(c)
 end
 function s.negcon(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED) then return false end
-	return ep~=tp and re:IsActiveType(TYPE_SPELL) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and Duel.IsChainNegatable(ev)
+	return ep~=tp and re:IsActiveType(TYPE_ACTIONAL) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and Duel.IsChainNegatable(ev)
 end
 function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

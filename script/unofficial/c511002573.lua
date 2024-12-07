@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function s.cfilter(c)
-	return c:IsType(TYPE_SYNCHRO) and c:IsLocation(LOCATION_GRAVE)
+	return c:IsType(TYPE_SYNCHRO) and c:IsLocation(LOCATION_REST)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.IsChainNegatable(ev) then return false end

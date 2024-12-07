@@ -1,11 +1,11 @@
 --No.48 シャドー・リッチ (Manga)
---Number 48: Shadow Lich (Manga)
+--Number 48: Shadow Hitch (Manga)
 Duel.LoadCardScript("c21521304.lua")
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,3,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--battle indestructable
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -44,11 +44,11 @@ function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:GetFlagEffect(id)==0
 		and not c:IsReason(REASON_REPLACE) and c:GetReasonPlayer()~=tp 
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,id,0,TYPES_TOKEN,500,500,3,RACE_FIEND,ATTRIBUTE_DARK) 
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,id,0,TYPES_TOKEN,500,500,3,RACE_TAINTED,ATTRIBUTE_DARK) 
 		and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 end
 		
 	local g=c:GetOverlayGroup()
-	Duel.SendtoGrave(g,REASON_RULE)
+	Duel.SendtoRest(g,REASON_RULE)
 	
 	local pos = POS_FACEUP_DEFENSE
 	if c:IsPosition(POS_ATTACK) then pos=POS_FACEUP_ATTACK end
@@ -86,7 +86,7 @@ function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	
 	local tg=Group.FromCards(c)
 	while Duel.GetLocationCount(tp,LOCATION_MZONE)>0 do
-		local token=Duel.CreateToken(tp,id,TYPES_TOKEN,500,500,3,RACE_FIEND,ATTRIBUTE_DARK)
+		local token=Duel.CreateToken(tp,id,TYPES_TOKEN,500,500,3,RACE_TAINTED,ATTRIBUTE_DARK)
 		Duel.SpecialSummon(token,0,tp,tp,false,false,POS_FACEDOWN_DEFENSE)
 		tg:AddCard(token)
 		

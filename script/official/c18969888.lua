@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Synchro Summon Procedure
 	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_DRAGON),1,1,Synchro.NonTunerEx(Card.IsRace,RACE_DRAGON),1,99)
 	--Change all monsters on the field to Attack Position
@@ -34,13 +34,13 @@ function s.initial_effect(c)
 	e3:SetCondition(function() return Duel.IsBattlePhase() end)
 	e3:SetValue(1)
 	c:RegisterEffect(e3)
-	--Special Summon this card from the GY and destroy 1 card on the field
+	--Special Summon this card from the RP and destroy 1 card on the field
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_DESTROY)
 	e4:SetType(EFFECT_TYPE_QUICK_O)
 	e4:SetCode(EVENT_FREE_CHAIN)
-	e4:SetRange(LOCATION_GRAVE)
+	e4:SetRange(LOCATION_REST)
 	e4:SetHintTiming(0,TIMING_BATTLE_PHASE|TIMING_BATTLE_STEP_END|TIMING_BATTLE_END|TIMINGS_CHECK_MONSTER_E)
 	e4:SetCountLimit(1,id,EFFECT_COUNT_CODE_DUEL)
 	e4:SetCondition(function() return Duel.GetFlagEffect(0,id)+Duel.GetFlagEffect(1,id)>=3 end)

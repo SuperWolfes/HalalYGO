@@ -1,5 +1,5 @@
 --古代の機械合成竜
---Ancient Gear Hydra
+--Ancient Gear Hydden
 local s,id=GetID()
 function s.initial_effect(c)
 	--mat check

@@ -1,13 +1,13 @@
 --大精霊機巧軍－ペンデュラム・ルーラー
---Master Spirit Tech Force - Pendulum Ruler
+--Master Guardian Tech Fcoree - Pendulum Ruler
 --Fixed by Larry126
 Duel.LoadScript("c420.lua")
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Pendulum.AddProcedure(c,false)
 	--Fusion Material
-	Fusion.AddProcMix(c,true,true,511009366,aux.FilterBoolFunctionEx2(Card.IsSpirit))
+	Fusion.AddProcMix(c,true,true,511009366,aux.FilterBoolFunctionEx2(Card.IsGuardian))
 	--Return this card to the Extra Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TOEXTRA)
@@ -37,7 +37,7 @@ function s.initial_effect(c)
 	local e4=e3:Clone()
 	e4:SetCode(EFFECT_DISABLE)
 	c:RegisterEffect(e4)
-	--Gain the effect of 1 "Spirit Gem" monster
+	--Gain the effect of 1 "Guardian Gem" monster
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(id,1))
 	e5:SetType(EFFECT_TYPE_IGNITION)
@@ -56,7 +56,7 @@ function s.initial_effect(c)
 	e6:SetOperation(s.pzop)
 	c:RegisterEffect(e6)
 	aux.GlobalCheck(s,function()
-		--Keep track of "Spirit Gem" monsters that used their effect
+		--Keep track of "Guardian Gem" monsters that used their effect
 		local ge=Effect.CreateEffect(c)
 		ge:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		ge:SetCode(EVENT_CHAINING)
@@ -99,7 +99,7 @@ function s.efop(e,tp,eg,ep,ev,re,r,rp)
 		local fid=c:GetFieldID()
 		Duel.MajesticCopy(c,tc,RESET_EVENT+RESETS_STANDARD)
 		Duel.MajesticCopy(c,tc,RESET_EVENT+RESETS_STANDARD)
-		c:RegisterFlagEffect(tc:GetOriginalCode(),RESET_EVENT+RESETS_STANDARD,0,1) --Treated as Pendulum Summoned from hand for Spirit Gem effects
+		c:RegisterFlagEffect(tc:GetOriginalCode(),RESET_EVENT+RESETS_STANDARD,0,1) --Treated as Pendulum Summoned from hand for Guardian Gem effects
 		--Double any effect damage
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_FIELD)

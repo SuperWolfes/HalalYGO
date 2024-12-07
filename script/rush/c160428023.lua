@@ -1,5 +1,5 @@
 --マジック・ファイア・ガード
---Magic Fire Guard
+--Ment Fire Guard
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -15,10 +15,10 @@ end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local a=Duel.GetAttacker()
 	return a:IsControler(1-tp) and a:IsLevelBelow(8)
-		and Duel.IsExistingMatchingCard(Card.IsRace,tp,LOCATION_GRAVE,0,2,nil,RACE_SPELLCASTER)
+		and Duel.IsExistingMatchingCard(Card.IsRace,tp,LOCATION_REST,0,2,nil,RACE_MENTOR)
 end
 function s.cfilter(c)
-	return c:IsRace(RACE_SPELLCASTER) and c:IsAttackPos() and c:IsFaceup()
+	return c:IsRace(RACE_MENTOR) and c:IsAttackPos() and c:IsFaceup()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(aux.FilterMaximumSideFunctionEx(s.cfilter),tp,LOCATION_MZONE,0,1,nil) end

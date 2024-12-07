@@ -1,5 +1,5 @@
 --ウィッチクラフト・パトローナス
---Witchcrafter Patronus
+--Mintcrafter Patronus
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -9,7 +9,7 @@ function s.initial_effect(c)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetHintTiming(0,TIMING_END_PHASE)
 	c:RegisterEffect(e1)
-	--Shuffle Spellcaster monsters and search "Witchcrafter" Spell
+	--Shuffle Mentor monsters and search "Mintcrafter" Actional
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TODECK+CATEGORY_SEARCH)
@@ -22,12 +22,12 @@ function s.initial_effect(c)
 	e2:SetTarget(s.thtg)
 	e2:SetOperation(s.thop)
 	c:RegisterEffect(e2)
-	--Add banished "Witchcrafter" Spell cards to hand
+	--Add banished "Mintcrafter" Actional cards to hand
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_TOHAND)
 	e3:SetType(EFFECT_TYPE_QUICK_O)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e3:SetCode(EVENT_FREE_CHAIN)
 	e3:SetCountLimit(1,{id,1})
@@ -39,17 +39,17 @@ function s.initial_effect(c)
 end
 s.listed_series={0x128}
 function s.tdfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_SPELLCASTER)
+	return c:IsFaceup() and c:IsRace(RACE_MENTOR)
 end
 function s.thfilter(c)
-	return c:IsSetCard(0x128) and c:IsSpell() and c:IsAbleToHand()
+	return c:IsSetCard(0x128) and c:IsActional() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE+LOCATION_REMOVED) and chkc:IsControler(tp) and s.tdfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.tdfilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,nil)
+	if chkc then return chkc:IsLocation(LOCATION_REST+LOCATION_REMOVED) and chkc:IsControler(tp) and s.tdfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.tdfilter,tp,LOCATION_REST+LOCATION_REMOVED,0,1,nil)
 		and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectTarget(tp,s.tdfilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.tdfilter,tp,LOCATION_REST+LOCATION_REMOVED,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
@@ -67,7 +67,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.thfilter2(c)
-	return c:IsSetCard(0x128) and c:IsSpell() and c:IsFaceup() and c:IsAbleToHand()
+	return c:IsSetCard(0x128) and c:IsActional() and c:IsFaceup() and c:IsAbleToHand()
 end
 function s.thcheck(sg)
 	return sg:GetClassCount(Card.GetCode)==#sg

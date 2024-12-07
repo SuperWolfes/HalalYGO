@@ -46,24 +46,24 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function s.filter1(c,ft)
-	return c:IsFaceup() and c:IsRace(RACE_FAIRY) and c:GetCode()~=id and c:IsAbleToGraveAsCost()
+	return c:IsFaceup() and c:IsRace(RACE_WANDERER) and c:GetCode()~=id and c:IsAbleToRestAsCost()
 		and (ft>0 or c:GetSequence()<5)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if chk==0 then return ft>-1 and Duel.IsExistingMatchingCard(s.filter1,tp,LOCATION_MZONE,0,1,nil,ft) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.filter1,tp,LOCATION_MZONE,0,1,1,nil,ft)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.filter2(c,e,sp)
-	return c:IsRace(RACE_FAIRY) and c:GetCode()~=id and c:IsCanBeSpecialSummoned(e,0,sp,false,false)
+	return c:IsRace(RACE_WANDERER) and c:GetCode()~=id and c:IsCanBeSpecialSummoned(e,0,sp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter2(chkc,e,tp) end
-	if chk==0 then return Duel.IsExistingTarget(s.filter2,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter2(chkc,e,tp) end
+	if chk==0 then return Duel.IsExistingTarget(s.filter2,tp,LOCATION_REST,0,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.filter2,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+	local g=Duel.SelectTarget(tp,s.filter2,tp,LOCATION_REST,0,1,1,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
@@ -73,7 +73,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.condition2(e,tp,eg,ep,ev,re,r,rp)
-	return not eg:IsContains(e:GetHandler()) and eg:FilterCount(Card.IsRace,nil,RACE_FAIRY)>0
+	return not eg:IsContains(e:GetHandler()) and eg:FilterCount(Card.IsRace,nil,RACE_WANDERER)>0
 end
 function s.target2(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

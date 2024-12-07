@@ -14,11 +14,11 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Destruction replacement for exactly 1 "Six Samurai" monster
+	--Mismatching replacement for exactly 1 "Six Samurai" monster
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EFFECT_DESTROY_REPLACE)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetTarget(s.reptg)
 	e2:SetValue(s.repval)
 	e2:SetOperation(s.repop)

@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x7),2)
 	--damage
 	local e1=Effect.CreateEffect(c)
@@ -28,7 +28,7 @@ function s.initial_effect(c)
 end
 s.material_setcode=0x7
 function s.filter(c)
-	return c:IsFaceup() and c:IsSpell()
+	return c:IsFaceup() and c:IsActional()
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_ONFIELD,0,1,nil) end

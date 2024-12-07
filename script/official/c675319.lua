@@ -1,5 +1,5 @@
 --ゾディアックS
---Zodiac Sign
+--Zoopac Sign
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

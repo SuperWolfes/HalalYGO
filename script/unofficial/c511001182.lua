@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_TOGRAVE)
+	e1:SetCategory(CATEGORY_TOREST)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e1:SetCondition(s.condition)
@@ -31,19 +31,19 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.HintSelection(xyzc,true)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVEXYZ)
 	local g=xyzc:GetOverlayGroup():Select(tp,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.tgfilter(c)
-	return c:IsNormalSpell() and c:IsAbleToGrave()
+	return c:IsNormalActional() and c:IsAbleToRest()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tc=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil):GetFirst()
-	if tc and Duel.SendtoGrave(tc,REASON_EFFECT)>0 and tc:IsLocation(LOCATION_GRAVE) then
+	if tc and Duel.SendtoRest(tc,REASON_EFFECT)>0 and tc:IsLocation(LOCATION_REST) then
 		local te,eg,ep,ev,re,r,rp=tc:CheckActivateEffect(false,true,false)
 		if not (te and Duel.SelectYesNo(tp,aux.Stringid(id,1))) then return end
 		e:SetLabelObject(te)

@@ -1,5 +1,5 @@
 --セブンスロード・メイジ
---Sevens Road Mage
+--Sevens Road Manced
 local s,id=GetID()
 function s.initial_effect(c)
 	--Make 1 of opponent's monsters lose 400 ATK
@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 end
-s.listed_names={CARD_SEVENS_ROAD_MAGICIAN}
+s.listed_names={CARD_SEVENS_ROAD_MENTOR}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeckAsCost(tp,1) end
 end
@@ -40,8 +40,8 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESETS_STANDARD_PHASE_END)
 		e1:SetValue(-400)
 		tc:RegisterEffect(e1)
-		local ct=Duel.GetMatchingGroupCount(Card.IsRace,tp,LOCATION_GRAVE,0,nil,RACE_SPELLCASTER)
-		if ct>0 and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_SEVENS_ROAD_MAGICIAN),tp,LOCATION_MZONE,0,1,nil) then
+		local ct=Duel.GetMatchingGroupCount(Card.IsRace,tp,LOCATION_REST,0,nil,RACE_MENTOR)
+		if ct>0 and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_SEVENS_ROAD_MENTOR),tp,LOCATION_MZONE,0,1,nil) then
 			local e2=Effect.CreateEffect(c)
 			e2:SetType(EFFECT_TYPE_SINGLE)
 			e2:SetCode(EFFECT_UPDATE_ATTACK)

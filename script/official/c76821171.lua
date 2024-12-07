@@ -3,11 +3,11 @@
 --Ashaki
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	c:SetSPSummonOnce(id)
 	--Link Summon procedure
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_EFFECT),1,1)
-	--Cannot be Link Summoned unless you have a Fairy Monster Card with 3 or more Resonance Counters in your Pendulum Zone
+	--Cannot be Link Summoned unless you have a Wanderer Monster Card with 3 or more Resonance Counters in your Pendulum Zone
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
 	e0:SetCode(EFFECT_SPSUMMON_COST)
@@ -39,7 +39,7 @@ s.listed_series={SET_VAALMONICA}
 s.counter_list={COUNTER_RESONANCE}
 s.listed_names={id}
 function s.spcfilter(c)
-	return c:IsFaceup() and c:IsOriginalRace(RACE_FAIRY) and c:GetCounter(COUNTER_RESONANCE)>=3
+	return c:IsFaceup() and c:IsOriginalRace(RACE_WANDERER) and c:GetCounter(COUNTER_RESONANCE)>=3
 end
 function s.spcost(e,c,tp,st)
 	if (st&SUMMON_TYPE_LINK)~=SUMMON_TYPE_LINK then return true end

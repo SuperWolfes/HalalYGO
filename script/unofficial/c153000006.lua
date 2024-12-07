@@ -1,5 +1,5 @@
 --ブラック・マジシャン・ガール (Deck Master)
---Dark Magician Girl (Deck Master)
+--Dark Mentor Girl (Deck Master)
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -23,17 +23,17 @@ function s.initial_effect(c)
 	e1:SetValue(s.val)
 	c:RegisterEffect(e1)
 end
-s.listed_names={CARD_DARK_MAGICIAN}
+s.listed_names={CARD_DARK_MENTOR}
 function s.val(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsCode,c:GetControler(),LOCATION_GRAVE,LOCATION_GRAVE,nil,30208479,CARD_DARK_MAGICIAN)*300
+	return Duel.GetMatchingGroupCount(Card.IsCode,c:GetControler(),LOCATION_REST,LOCATION_REST,nil,30208479,CARD_DARK_MENTOR)*300
 end
 function s.con(e,tp,eg,ep,ev,re,r,rp)
-	local ct=Duel.GetMatchingGroupCount(Card.IsMonster,tp,LOCATION_GRAVE,0,nil)
+	local ct=Duel.GetMatchingGroupCount(Card.IsMonster,tp,LOCATION_REST,0,nil)
 	return Duel.IsTurnPlayer(tp) and Duel.IsMainPhase() and ct>0 and Duel.IsPlayerCanDraw(tp,ct) and Duel.IsDeckMaster(tp,id)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.SelectYesNo(tp,aux.Stringid(id,0)) then return end
 	Duel.Hint(HINT_CARD,tp,id)
 	Duel.Hint(HINT_CARD,1-tp,id)
-	Duel.Draw(tp,Duel.GetMatchingGroupCount(Card.IsMonster,tp,LOCATION_GRAVE,0,nil),REASON_EFFECT)
+	Duel.Draw(tp,Duel.GetMatchingGroupCount(Card.IsMonster,tp,LOCATION_REST,0,nil),REASON_EFFECT)
 end

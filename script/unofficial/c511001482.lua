@@ -66,8 +66,8 @@ function s.lpop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.AdjustInstantly()
 	local c=e:GetHandler()
 	local sg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil,c:GetFieldID())
-	Duel.SendtoGrave(sg,REASON_RULE)
-	if Duel.IsExistingMatchingCard(Card.IsHasEffect,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil,90162951) then Duel.SendtoGrave(c,REASON_RULE) end
+	Duel.SendtoRest(sg,REASON_RULE)
+	if Duel.IsExistingMatchingCard(Card.IsHasEffect,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil,90162951) then Duel.SendtoRest(c,REASON_RULE) end
 	if not c:IsDisabled() then
 		local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,0,nil)
 		local sum=g:GetSum(Card.GetAttack)

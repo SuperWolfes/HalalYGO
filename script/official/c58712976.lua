@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_PYRO),4,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--attack up
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_ATKCHANGE)
@@ -48,11 +48,11 @@ function s.filter(c)
 	return c:IsMonster() and c:IsAbleToRemove() and aux.SpElimFilter(c)
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_MZONE+LOCATION_GRAVE) and s.filter(chkc) end
+	if chkc then return chkc:IsLocation(LOCATION_MZONE+LOCATION_REST) and s.filter(chkc) end
 	if chk==0 then return true end
-	if Duel.IsExistingTarget(s.filter,tp,LOCATION_MZONE+LOCATION_GRAVE,LOCATION_MZONE+LOCATION_GRAVE,3,nil) then
+	if Duel.IsExistingTarget(s.filter,tp,LOCATION_MZONE+LOCATION_REST,LOCATION_MZONE+LOCATION_REST,3,nil) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-		local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE+LOCATION_GRAVE,LOCATION_MZONE+LOCATION_GRAVE,3,3,nil)
+		local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE+LOCATION_REST,LOCATION_MZONE+LOCATION_REST,3,3,nil)
 		Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,3,0,0)
 	end
 end

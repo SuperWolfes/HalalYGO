@@ -15,16 +15,16 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,nil) end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(aux.FilterMaximumSideFunctionEx(Card.IsFaceup),tp,0,LOCATION_MZONE,1,nil) end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,1,nil)
-	if #g==0 or Duel.SendtoGrave(g,REASON_EFFECT)==0 then return end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,1,nil)
+	if #g==0 or Duel.SendtoRest(g,REASON_EFFECT)==0 then return end
 	--Effect
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATKDEF)
 	local sg=Duel.SelectMatchingCard(tp,aux.FilterMaximumSideFunctionEx(Card.IsFaceup),tp,0,LOCATION_MZONE,1,1,nil)
@@ -38,7 +38,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetValue(-800)
 	sg:GetFirst():RegisterEffect(e1)
 	local tc=g:GetFirst()
-	if tc:IsRace(RACE_GALAXY) and tc:IsType(TYPE_NORMAL) and tc:IsLocation(LOCATION_GRAVE) then
+	if tc:IsRace(RACE_GALAXY) and tc:IsType(TYPE_NORMAL) and tc:IsLocation(LOCATION_REST) then
 		Duel.BreakEffect()
 		Duel.Recover(tp,800,REASON_EFFECT)
 	end

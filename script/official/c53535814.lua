@@ -38,7 +38,7 @@ function s.initial_effect(c)
 	e4:SetCategory(CATEGORY_POSITION)
 	e4:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e4:SetType(EFFECT_TYPE_IGNITION)
-	e4:SetRange(LOCATION_GRAVE)
+	e4:SetRange(LOCATION_REST)
 	e4:SetCountLimit(1,{id,1})
 	e4:SetCost(aux.bfgcost)
 	e4:SetCondition(s.poscon)
@@ -71,12 +71,12 @@ end
 	--Check for an attack position monster
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	if chk==0 then return Duel.IsExistingTarget(s.tdfilter,tp,LOCATION_GRAVE,0,1,nil)
-		and Duel.IsExistingTarget(Card.IsAbleToDeck,tp,0,LOCATION_GRAVE,1,nil) end
+	if chk==0 then return Duel.IsExistingTarget(s.tdfilter,tp,LOCATION_REST,0,1,nil)
+		and Duel.IsExistingTarget(Card.IsAbleToDeck,tp,0,LOCATION_REST,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g1=Duel.SelectTarget(tp,s.tdfilter,tp,LOCATION_GRAVE,0,1,2,nil)
+	local g1=Duel.SelectTarget(tp,s.tdfilter,tp,LOCATION_REST,0,1,2,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g2=Duel.SelectTarget(tp,Card.IsAbleToDeck,tp,0,LOCATION_GRAVE,1,2,nil)
+	local g2=Duel.SelectTarget(tp,Card.IsAbleToDeck,tp,0,LOCATION_REST,1,2,nil)
 	g1:Merge(g2)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g1,#g1,0,0)
 end

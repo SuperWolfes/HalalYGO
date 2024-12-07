@@ -87,7 +87,7 @@ function s.trapop(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.SelectYesNo(tp,aux.Stringid(id,1)) then return end
 	local rc=re:GetHandler()
 	if Duel.NegateEffect(ev) and rc:IsRelateToEffect(re) and rc:IsSSetable(true) then
-		rc:CancelToGrave()
+		rc:CancelToRest()
 		Duel.ChangePosition(rc,POS_FACEDOWN)
 	end
 end

@@ -1,5 +1,5 @@
 --天獄の王
---Lord of the Heavenly Prison
+--Watcher of the Spectrumly Prison
 --Scripted by DyXel
 
 local s,id=GetID()
@@ -59,7 +59,7 @@ end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	if not re then return false end
 	local rc=re:GetHandler()
-	return rc and (not rc:IsStatus(STATUS_ACT_FROM_HAND)) and re:IsActiveType(TYPE_SPELL|TYPE_TRAP)
+	return rc and (not rc:IsStatus(STATUS_ACT_FROM_HAND)) and re:IsActiveType(TYPE_ACTIONAL|TYPE_TRAP)
 		and re:IsHasType(EFFECT_TYPE_ACTIVATE)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -71,7 +71,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,0,0)
 end
 function s.setfilter(c)
-	return c:IsType(TYPE_SPELL|TYPE_TRAP) and c:IsSSetable()
+	return c:IsType(TYPE_ACTIONAL|TYPE_TRAP) and c:IsSSetable()
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

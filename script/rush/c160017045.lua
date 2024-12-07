@@ -1,10 +1,10 @@
 --リリースレイヤー
---Sevens Road Ultima Witch
+--Sevens Road Ultima Mint
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion Procedure
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMixN(c,true,true,160401001,1,s.ffilter,1)
 	--Shuffle to Deck
 	local e1=Effect.CreateEffect(c)
@@ -21,28 +21,28 @@ end
 s.named_material={160401001}
 function s.chainfilter(re,tp,cid)
 	if Duel.GetFlagEffect(tp,id)==0 then return true end
-	return not re:GetHandler():IsNormalSpell()
+	return not re:GetHandler():IsNormalActional()
 end
 function s.ffilter(c,fc,sumtype,tp)
-	return c:IsType(TYPE_FUSION,scard,sumtype,tp) and c:IsRace(RACE_SPELLCASTER|RACE_MAGICALKNIGHT,scard,sumtype,tp)
+	return c:IsType(TYPE_FUSION,scard,sumtype,tp) and c:IsRace(RACE_MENTOR|RACE_MENTORALKNIGHT,scard,sumtype,tp)
 end
 function s.tdfilter(c)
-	return c:IsSpell() and c:IsAbleToDeck()
+	return c:IsActional() and c:IsAbleToDeck()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,0,LOCATION_GRAVE,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,0,LOCATION_REST,1,nil) end
 end
 function s.thfilter(c)
-	return c:IsSpell() and c:IsAbleToHand()
+	return c:IsActional() and c:IsAbleToHand()
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Effect
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,s.tdfilter,tp,0,LOCATION_GRAVE,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.tdfilter,tp,0,LOCATION_REST,1,1,nil)
 	Duel.HintSelection(g)
 	if Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)>0 then
-		if Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,e:GetHandler()) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
-			local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,e:GetHandler())
+		if Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,e:GetHandler()) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+			local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,1,e:GetHandler())
 			if #g>0 then
 				Duel.SendtoHand(g,nil,REASON_EFFECT)
 				Duel.ConfirmCards(1-tp,g)
@@ -65,5 +65,5 @@ function s.accon(e)
 	return Duel.GetCustomActivityCount(id,e:GetHandlerPlayer(),ACTIVITY_CHAIN)>0
 end
 function s.aclimit(e,re,tp)
-	return re:GetHandler():IsNormalSpell()
+	return re:GetHandler():IsNormalActional()
 end

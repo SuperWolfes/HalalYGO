@@ -1,10 +1,10 @@
 --フレイム・ゴースト
---Flame Ghost
+--Flame Miss
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Fusion summon procedure
 	Fusion.AddProcMix(c,true,true,CARD_SKULL_SERVANT,40826495)
 end

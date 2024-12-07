@@ -1,3 +1,3 @@
 --セブンスロード・マジシャン
---Sevens Road Magician
-Duel.LoadCardScriptAlias(CARD_SEVENS_ROAD_MAGICIAN)
+--Sevens Road Mentor
+Duel.LoadCardScriptAlias(CARD_SEVENS_ROAD_MENTOR)

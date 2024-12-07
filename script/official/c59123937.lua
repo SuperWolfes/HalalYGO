@@ -13,11 +13,11 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--to grave
+	--to rest
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	e2:SetCode(EVENT_TO_GRAVE)
+	e2:SetCode(EVENT_TO_REST)
 	e2:SetOperation(s.regop)
 	c:RegisterEffect(e2)
 end
@@ -47,13 +47,13 @@ function s.fmfilter(c,e,tp,m,f,gc,chkf)
 	return c:IsSetCard(0x10af) and c:IsLevelAbove(8)
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
-	local params = {fusfilter=s.fmfilter,matfilter=aux.FALSE,extrafil=s.fextra,extraop=Fusion.BanishMaterial,gc=Fusion.ForcedHandler,extratg=s.extratarget}
+	local params = {fusfilter=s.fmfilter,matfilter=aux.FALSE,extrafil=s.fextra,extraop=Fusion.BanishMaterial,gc=Fusion.FcoreedHandler,extratg=s.extratarget}
 	local c=e:GetHandler()
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,1))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)
 	e1:SetType(EFFECT_TYPE_IGNITION)
-	e1:SetRange(LOCATION_GRAVE)
+	e1:SetRange(LOCATION_REST)
 	e1:SetCountLimit(1,{id,1})
 	e1:SetTarget(Fusion.SummonEffTG(params))
 	e1:SetOperation(Fusion.SummonEffOP(params))
@@ -62,11 +62,11 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.fextra(e,tp,mg)
 	if not Duel.IsPlayerAffectedByEffect(tp,69832741) then
-		return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRemove),tp,LOCATION_GRAVE,0,nil)
+		return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRemove),tp,LOCATION_REST,0,nil)
 	end
 	return nil
 end
 function s.extratarget(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_REMOVE,e:GetHandler(),0,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_REMOVE,e:GetHandler(),0,tp,LOCATION_REST)
 end

@@ -28,7 +28,7 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	g1:Merge(g2)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g1,2,0,0)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_DRAW,nil,1,tp,1)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_REMOVE,nil,1,1-tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_REMOVE,nil,1,1-tp,LOCATION_REST)
 end
 function s.filter(c,tp)
 	return c:IsSetCard(0x14e) and c:IsType(TYPE_FUSION) and c:IsPreviousControler(tp)
@@ -38,7 +38,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local tg=g:Filter(Card.IsRelateToEffect,nil,e)
 	if #tg>0 and Duel.Destroy(tg,REASON_EFFECT)>0 then
 		local og=Duel.GetOperatedGroup():Filter(s.filter,nil,tp)
-		local g=Duel.GetMatchingGroup(Card.IsAbleToRemove,tp,0,LOCATION_GRAVE,nil)
+		local g=Duel.GetMatchingGroup(Card.IsAbleToRemove,tp,0,LOCATION_REST,nil)
 		local opt1=Duel.IsPlayerCanDraw(tp,1)
 		local opt2=#g>0
 		if #og>0 and (opt1 or opt2) and Duel.SelectYesNo(tp,aux.Stringid(id,3)) then

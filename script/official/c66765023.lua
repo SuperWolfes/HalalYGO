@@ -1,5 +1,5 @@
 --飛行エレファント
---Flying Elephant
+--Flying Eleilluso
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

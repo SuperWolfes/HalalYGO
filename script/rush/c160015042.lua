@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,160011026,160015012)
 	--Draw 1 card, reveal it and then gain LP
 	local e1=Effect.CreateEffect(c)

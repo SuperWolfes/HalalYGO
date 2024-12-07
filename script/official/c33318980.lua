@@ -1,5 +1,5 @@
 --暗黒騎士ガイアソルジャー
---Soldier Gaia the Fierce Knight
+--Soldier Bia the Fierce Knight
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)

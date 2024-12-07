@@ -3,11 +3,11 @@
 --Scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Link summon procedure
 	Link.AddProcedure(c,nil,2,2,s.lcheck)
-	--Add 1 continuous or field spell from GY during end phase
+	--Add 1 continuous or field actional from RP during end phase
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.regtg)
 	e1:SetOperation(s.regop)
 	c:RegisterEffect(e1)
-	--Your face-up spells cannot be destroyed by opponent's card effects
+	--Your face-up actionals cannot be destroyed by opponent's card effects
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
@@ -42,7 +42,7 @@ function s.regcost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.regtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local e1=Effect.CreateEffect(e:GetHandler())
@@ -55,20 +55,20 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.thfilter(c)
-	return c:IsAbleToHand() and c:IsSpell() and c:IsType(TYPE_FIELD+TYPE_CONTINUOUS)
+	return c:IsAbleToHand() and c:IsActional() and c:IsType(TYPE_FIELD+TYPE_CONTINUOUS)
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil)
+	return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,PLAYER_ALL,id)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
 	if #g>0 then
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)
 	end
 end
 function s.imtg(e,c)
-	return c:IsFaceup() and c:IsSpell()
+	return c:IsFaceup() and c:IsActional()
 end

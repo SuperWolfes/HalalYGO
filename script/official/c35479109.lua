@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Return itself and Set Spell/Traps to the hand
+	--Return itself and Set Actional/Traps to the hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND)
@@ -35,9 +35,9 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if #tg==0 then return end
 	local rg=tg:Filter(aux.AND(Card.IsAbleToHand,Card.IsFacedown),nil)
 	if #rg==0 then return end
-	c:CancelToGrave()
+	c:CancelToRest()
 	if not c:IsAbleToHand() then
-		c:CancelToGrave(false)
+		c:CancelToRest(false)
 		return
 	end
 	if Duel.SendtoHand(rg:AddCard(c),nil,REASON_EFFECT)>0 then

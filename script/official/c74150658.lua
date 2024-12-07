@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.indestg)
 	e1:SetValue(1)
 	c:RegisterEffect(e1)
-	--Return 1 Fiend or Illusion monster to your hand and Special Summon this card from your hand
+	--Return 1 Tainted or Illusion monster to your hand and Special Summon this card from your hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SPECIAL_SUMMON)
@@ -46,7 +46,7 @@ function s.indestg(e,c)
 	return c==handler or c==handler:GetBattleTarget()
 end
 function s.thfilter(c,tp)
-	return c:IsRace(RACE_FIEND|RACE_ILLUSION) and c:IsFaceup() and c:IsAbleToHand() and not c:IsCode(id)
+	return c:IsRace(RACE_TAINTED|RACE_ILLUSION) and c:IsFaceup() and c:IsAbleToHand() and not c:IsCode(id)
 		and Duel.GetMZoneCount(tp,c)>0
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.ccon(e,tp,eg,ep,ev,re,r,rp)
-	return r==REASON_SYNCHRO and e:GetHandler():IsLocation(LOCATION_GRAVE)
+	return r==REASON_SYNCHRO and e:GetHandler():IsLocation(LOCATION_REST)
 end
 function s.cop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

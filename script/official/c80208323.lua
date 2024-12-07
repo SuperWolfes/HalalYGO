@@ -3,12 +3,12 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special summon itself from GY
+	--Special summon itself from RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
-	e1:SetRange(LOCATION_GRAVE)
+	e1:SetRange(LOCATION_REST)
 	e1:SetCode(EVENT_BATTLE_DESTROYED)
 	e1:SetCountLimit(1,id)
 	e1:SetCondition(s.spcon)
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.spfilter(c,tp)
-	return c:IsLocation(LOCATION_GRAVE) and c:IsReason(REASON_BATTLE) and c:IsPreviousControler(tp) and c:IsMonster()
+	return c:IsLocation(LOCATION_REST) and c:IsReason(REASON_BATTLE) and c:IsPreviousControler(tp) and c:IsMonster()
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return not eg:IsContains(e:GetHandler()) and eg:IsExists(s.spfilter,1,nil,tp)

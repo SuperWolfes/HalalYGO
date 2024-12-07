@@ -1,5 +1,5 @@
 --時械神 ミチオン
---Michion, the Timelord (VG)
+--Michion, the Timewatcher (VG)
 local s,id=GetID()
 function s.initial_effect(c)
 	--cannot special summon

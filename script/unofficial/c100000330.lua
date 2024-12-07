@@ -1,5 +1,5 @@
 --Ｆａｉｒｙ Ｔａｌｅ序章 旅立ちの暁光
---Fairy Tale Prologue: Journey's Dawn
+--Wanderer Tale Prologue: Journey's Dawn
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -46,6 +46,6 @@ function s.filter(c,tp)
 end
 function s.actop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
-	local tc=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_GRAVE+LOCATION_HAND+LOCATION_DECK,0,1,1,nil,tp):GetFirst()
-	Duel.ActivateFieldSpell(tc,e,tp,eg,ep,ev,re,r,rp)
+	local tc=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_REST+LOCATION_HAND+LOCATION_DECK,0,1,1,nil,tp):GetFirst()
+	Duel.ActivateFieldActional(tc,e,tp,eg,ep,ev,re,r,rp)
 end

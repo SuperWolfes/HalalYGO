@@ -1,10 +1,10 @@
 --御巫舞踊－迷わし鳥
---Mikanko Dance - Mayowashidori
+--Sibango Dance - Foxy
 --Scripted by Satella
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddEquipProcedure(c)
-	-- Prevent destruction by effects
+	-- Prevent mismatching by effects
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_EQUIP)
 	e1:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
@@ -23,22 +23,22 @@ function s.initial_effect(c)
 	e2:SetTarget(s.thtg)
 	e2:SetOperation(s.thop)
 	c:RegisterEffect(e2)
-	-- Special Summon 1 "Mikanko" monster from the GY
+	-- Special Summon 1 "Sibango" monster from the RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_IGNITION)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetCountLimit(1,{id,1})
 	e3:SetTarget(s.sptg)
 	e3:SetOperation(s.spop)
 	c:RegisterEffect(e3)
 end
-s.listed_series={SET_MIKANKO}
+s.listed_series={SET_SIBANGO}
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	local bc=Duel.GetBattleMonster(tp)
-	return bc and bc:IsFaceup() and bc:IsSetCard(SET_MIKANKO)
+	return bc and bc:IsFaceup() and bc:IsSetCard(SET_SIBANGO)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and chkc:IsAbleToHand() end
@@ -54,15 +54,15 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.spfilter(c,e,tp,ec)
-	return c:IsSetCard(SET_MIKANKO) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and ec:CheckEquipTarget(c)
+	return c:IsSetCard(SET_SIBANGO) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and ec:CheckEquipTarget(c)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp,c) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp,c) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp,c) end
+		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp,c) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp,c)
+	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp,c)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_EQUIP,c,1,0,0)
 end

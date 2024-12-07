@@ -1,5 +1,5 @@
 --ダウン・フォース
---Down Force
+--Down Fcoree
 local s,id=GetID()
 function s.initial_effect(c)
 	--Negate and Destroy
@@ -37,7 +37,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	if ex and tg~=nil and tc+tg:FilterCount(s.cfilter,nil,tp)-#tg>0 then
 		return true
 	end
-	ex,tg,tc=Duel.GetOperationInfo(ev,CATEGORY_TOGRAVE)
+	ex,tg,tc=Duel.GetOperationInfo(ev,CATEGORY_TOREST)
 	if ex and tg~=nil and tc+tg:FilterCount(s.cfilter,nil,tp)-#tg>0 then
 		return true
 	end

@@ -1,12 +1,12 @@
 --聖なる薊花
---Sacred Azamina
+--Clean Azamina
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send "Sinful Spoils" cards to the GY and Special Summon 1 "Azamina" Fusion Monster 
+	--Send "Sinful Spoils" cards to the RP and Special Summon 1 "Azamina" Fusion Monster 
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_TOGRAVE+CATEGORY_SPECIAL_SUMMON)
+	e1:SetCategory(CATEGORY_TOREST+CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetTarget(s.sptg)
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_TODECK+CATEGORY_TOHAND)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,id)
 	e2:SetTarget(s.tdtg)
 	e2:SetOperation(s.tdop)
@@ -26,7 +26,7 @@ function s.initial_effect(c)
 end
 s.listed_series={SET_AZAMINA,SET_SINFUL_SPOILS}
 function s.sinfilter(c)
-	return c:IsSetCard(SET_SINFUL_SPOILS) and c:IsAbleToGrave()
+	return c:IsSetCard(SET_SINFUL_SPOILS) and c:IsAbleToRest()
 end
 function s.spfilter(c,e,tp,lv)
 	return c:IsSetCard(SET_AZAMINA) and c:IsType(TYPE_FUSION) and c:IsLevelAbove(4) and c:IsLevelBelow(lv) and not c:IsPublic()
@@ -38,7 +38,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 		local ct=Duel.GetMatchingGroupCount(s.sinfilter,tp,LOCATION_ONFIELD|LOCATION_HAND,0,nil)
 		return ct>0 and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,ct*4+3)
 	end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_ONFIELD|LOCATION_HAND)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_ONFIELD|LOCATION_HAND)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
@@ -49,14 +49,14 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if not tc then return end
 	Duel.ConfirmCards(1-tp,tc)
 	local ct=tc:GetLevel()//4
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local ssg=sg:Select(tp,ct,ct,nil)
 	if #ssg==0 then return end
 	local fdg=ssg:Filter(aux.AND(Card.IsFacedown,Card.IsOnField),nil)
 	if #fdg>0 then
 		Duel.ConfirmCards(1-tp,fdg)
 	end
-	if Duel.SendtoGrave(ssg,REASON_EFFECT)>0 and ssg:IsExists(Card.IsLocation,1,nil,LOCATION_GRAVE) then
+	if Duel.SendtoRest(ssg,REASON_EFFECT)>0 and ssg:IsExists(Card.IsLocation,1,nil,LOCATION_REST) then
 		tc:SetMaterial(nil)
 		Duel.BreakEffect()
 		if Duel.SpecialSummon(tc,SUMMON_TYPE_FUSION,tp,tp,false,false,POS_FACEUP)==0 then return end
@@ -67,12 +67,12 @@ function s.tdfilter(c)
 	return c:IsSetCard(SET_AZAMINA) and c:IsMonster() and c:IsFaceup() and c:IsAbleToDeck()
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_MZONE|LOCATION_GRAVE) and chkc:IsControler(tp) and s.tdfilter(chkc) end
+	if chkc then return chkc:IsLocation(LOCATION_MZONE|LOCATION_REST) and chkc:IsControler(tp) and s.tdfilter(chkc) end
 	local c=e:GetHandler()
 	if chk==0 then return c:IsAbleToHand()
-		and Duel.IsExistingTarget(s.tdfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,1,nil) end
+		and Duel.IsExistingTarget(s.tdfilter,tp,LOCATION_MZONE|LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectTarget(tp,s.tdfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.tdfilter,tp,LOCATION_MZONE|LOCATION_REST,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,1,tp,0)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,c,1,tp,0)
 end

@@ -1,5 +1,5 @@
 --海竜神－リバイアサン
---Ocean Dragon Lord - Kairyu-Shin
+--Ocean Dragon Watcher - Kairyu-Shin
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
@@ -25,10 +25,10 @@ function s.initial_effect(c)
 	e3:SetCode(EFFECT_CANNOT_FLIP_SUMMON)
 	c:RegisterEffect(e3)
 	local e4=e2:Clone()
-	e4:SetCode(EFFECT_FORCE_SPSUMMON_POSITION)
+	e4:SetCode(EFFECT_FCOREE_SPSUMMON_POSITION)
 	e4:SetValue(POS_FACEDOWN)
 	c:RegisterEffect(e4)
-	--Search 1 "Umi", or 1 "Kairyu-Shin"/"Sea Stealth" Spell/Trap
+	--Search 1 "Umi", or 1 "Kairyu-Shin"/"Sea Stealth" Actional/Trap
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(id,0))
 	e5:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -106,11 +106,11 @@ function s.adjustop(e,tp,eg,ep,ev,re,r,rp)
 	end
 	local readjust=false
 	if #g0>0 then
-		Duel.SendtoGrave(g0,REASON_RULE,PLAYER_NONE,tp)
+		Duel.SendtoRest(g0,REASON_RULE,PLAYER_NONE,tp)
 		readjust=true
 	end
 	if #g1>0 then
-		Duel.SendtoGrave(g1,REASON_RULE,PLAYER_NONE,1-tp)
+		Duel.SendtoRest(g1,REASON_RULE,PLAYER_NONE,1-tp)
 		readjust=true
 	end
 	if readjust then Duel.Readjust() end
@@ -120,7 +120,7 @@ function s.sumlimit(e,c,sump,sumtype,sumpos,targetp)
 	return Duel.IsExistingMatchingCard(s.nonwaterfilter,targetp or sump,LOCATION_MZONE,0,1,nil)
 end
 function s.thfilter(c)
-	return c:IsAbleToHand() and (c:IsCode(CARD_UMI) or (c:IsSetCard({SET_KAIRYU_SHIN,SET_SEA_STEALTH}) and c:IsSpellTrap()))
+	return c:IsAbleToHand() and (c:IsCode(CARD_UMI) or (c:IsSetCard({SET_KAIRYU_SHIN,SET_SEA_STEALTH}) and c:IsActionalTrap()))
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

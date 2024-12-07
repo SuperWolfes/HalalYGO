@@ -9,7 +9,7 @@ function s.initial_effect(c)
 	e1:SetCategory(CATEGORY_EQUIP)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e1:SetRange(LOCATION_HAND|LOCATION_GRAVE)
+	e1:SetRange(LOCATION_HAND|LOCATION_REST)
 	e1:SetCountLimit(1,id)
 	e1:SetCondition(s.eqcond)
 	e1:SetTarget(s.eqtg)
@@ -39,8 +39,8 @@ function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SelectTarget(tp,aux.FaceupFilter(Card.IsRace,RACE_INSECT),tp,LOCATION_MZONE,0,1,1,nil)
 	local c=e:GetHandler()
 	Duel.SetOperationInfo(0,CATEGORY_EQUIP,c,1,tp,0)
-	if c:IsLocation(LOCATION_GRAVE) then
-		Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,c,0,0,0)
+	if c:IsLocation(LOCATION_REST) then
+		Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,c,0,0,0)
 	end
 end
 function s.eqop(e,tp,eg,ep,ev,re,r,rp)
@@ -48,7 +48,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if not c:IsRelateToEffect(e) then return end
 	local tc=Duel.GetFirstTarget()
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)==0 or tc:IsFacedown() or not tc:IsRelateToEffect(e) then
-		return Duel.SendtoGrave(c,REASON_RULE)
+		return Duel.SendtoRest(c,REASON_RULE)
 	end
 	if Duel.Equip(tp,c,tc) then
 		--Equip limit registration

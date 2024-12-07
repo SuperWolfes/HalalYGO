@@ -1,4 +1,4 @@
---The splendid VENUS
+--The splendid SUMMIT
 local s,id=GetID()
 function s.initial_effect(c)
 	--atk,def
@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_UPDATE_ATTACK)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
-	e1:SetTarget(aux.NOT(aux.TargetBoolFunction(Card.IsRace,RACE_FAIRY)))
+	e1:SetTarget(aux.NOT(aux.TargetBoolFunction(Card.IsRace,RACE_WANDERER)))
 	e1:SetValue(-500)
 	c:RegisterEffect(e1)
 	local e1=Effect.CreateEffect(c)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_UPDATE_DEFENSE)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
-	e1:SetTarget(aux.NOT(aux.TargetBoolFunction(Card.IsRace,RACE_FAIRY)))
+	e1:SetTarget(aux.NOT(aux.TargetBoolFunction(Card.IsRace,RACE_WANDERER)))
 	e1:SetValue(-500)
 	c:RegisterEffect(e1)
 	--inactivatable
@@ -35,5 +35,5 @@ end
 function s.effectfilter(e,ct)
 	local p=e:GetHandler():GetControler()
 	local te,tp,loc=Duel.GetChainInfo(ct,CHAININFO_TRIGGERING_EFFECT,CHAININFO_TRIGGERING_PLAYER,CHAININFO_TRIGGERING_LOCATION)
-	return p==tp and te:IsActiveType(TYPE_SPELL+TYPE_TRAP) and (loc&LOCATION_ONFIELD)~=0
+	return p==tp and te:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) and (loc&LOCATION_ONFIELD)~=0
 end

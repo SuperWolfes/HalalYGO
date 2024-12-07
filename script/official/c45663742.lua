@@ -38,14 +38,14 @@ end
 function s.thsptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE|LOCATION_REMOVED) and chkc:IsControler(tp) and s.thspfilter(chkc,e,tp,ft) end
-	if chk==0 then return Duel.IsExistingTarget(s.thspfilter,tp,LOCATION_GRAVE|LOCATION_REMOVED,0,1,nil,e,tp,ft) end
+	if chkc then return chkc:IsLocation(LOCATION_REST|LOCATION_REMOVED) and chkc:IsControler(tp) and s.thspfilter(chkc,e,tp,ft) end
+	if chk==0 then return Duel.IsExistingTarget(s.thspfilter,tp,LOCATION_REST|LOCATION_REMOVED,0,1,nil,e,tp,ft) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local g=Duel.SelectTarget(tp,s.thspfilter,tp,LOCATION_GRAVE|LOCATION_REMOVED,0,1,1,nil,e,tp,ft)
+	local g=Duel.SelectTarget(tp,s.thspfilter,tp,LOCATION_REST|LOCATION_REMOVED,0,1,1,nil,e,tp,ft)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,g,1,tp,0)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,0)
-	if g:GetFirst():IsLocation(LOCATION_GRAVE) then
-		Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,0,0)
+	if g:GetFirst():IsLocation(LOCATION_REST) then
+		Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,0,0)
 	end
 end
 function s.thspop(e,tp,eg,ep,ev,re,r,rp)
@@ -61,17 +61,17 @@ function s.thspop(e,tp,eg,ep,ev,re,r,rp)
 		aux.Stringid(id,2) --"Special Summon it"
 	)
 end
-function s.cfilter(c,tp,forced)
-	return c:IsFaceup() and c:IsAbleToGraveAsCost() and Duel.GetMZoneCount(tp,Group.FromCards(c,forced))>0
+function s.cfilter(c,tp,fcoreed)
+	return c:IsFaceup() and c:IsAbleToRestAsCost() and Duel.GetMZoneCount(tp,Group.FromCards(c,fcoreed))>0
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGraveAsCost()
+	if chk==0 then return c:IsAbleToRestAsCost()
 		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,0,1,c,tp,c) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_ONFIELD,0,1,1,c,tp,c)
 	g:AddCard(c)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.spfilter(c,e,tp)
 	return c:IsSetCard(SET_SNAKE_EYE) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and not c:IsCode(id)

@@ -1,5 +1,5 @@
 --バーサーク・デーモン
---Berserk Archfiend
+--Berserk Archtainted
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -26,7 +26,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.rescon(sg,e,tp,mg)
-	return sg:IsExists(Card.IsRace,1,nil,RACE_FIEND)
+	return sg:IsExists(Card.IsRace,1,nil,RACE_TAINTED)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end

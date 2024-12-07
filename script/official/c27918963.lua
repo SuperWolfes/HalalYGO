@@ -48,7 +48,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local b1=e:GetHandler():IsCanRemoveCounter(tp,0x33,1,REASON_COST)
 		and Duel.IsExistingMatchingCard(s.filter1,tp,LOCATION_MZONE,0,1,nil)
 	local b2=e:GetHandler():IsCanRemoveCounter(tp,0x33,3,REASON_COST)
-		and Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_DECK+LOCATION_GRAVE,0,1,nil)
+		and Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_DECK+LOCATION_REST,0,1,nil)
 	if chk==0 then return b1 or b2 end
 	local op=0
 	if b1 and b2 then
@@ -65,7 +65,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	else
 		e:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 		e:GetHandler():RemoveCounter(tp,0x33,3,REASON_COST)
-		Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK+LOCATION_GRAVE)
+		Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK+LOCATION_REST)
 	end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
@@ -84,7 +84,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		end
 	else
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter2),tp,LOCATION_DECK+LOCATION_GRAVE,0,1,1,nil)
+		local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.filter2),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil)
 		if #g>0 then
 			Duel.SendtoHand(g,nil,REASON_EFFECT)
 			Duel.ConfirmCards(1-tp,g)

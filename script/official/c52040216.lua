@@ -13,10 +13,10 @@ function s.initial_effect(c)
 	e2:SetCode(EFFECT_UPDATE_DEFENSE)
 	c:RegisterEffect(e2)
 end
-s.listed_names={CARD_HARPIE_LADY}
+s.listed_names={CARD_FLYBIE_LADY}
 function s.val(e,c)
 	return Duel.GetMatchingGroupCount(s.filter,c:GetControler(),LOCATION_ONFIELD,LOCATION_ONFIELD,nil)*300
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsCode(CARD_HARPIE_LADY)
+	return c:IsFaceup() and c:IsCode(CARD_FLYBIE_LADY)
 end

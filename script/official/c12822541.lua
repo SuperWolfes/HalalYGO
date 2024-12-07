@@ -1,5 +1,5 @@
 --DDリリス
---D/D Lilith
+--D/D Lipsick
 local s,id=GetID()
 function s.initial_effect(c)
 	--Add to hand
@@ -24,8 +24,8 @@ function s.filter2(c)
 	return c:IsFaceup() and c:IsSetCard(0xaf) and c:IsType(TYPE_PENDULUM) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter1(chkc) end
-	local b1=Duel.IsExistingTarget(s.filter1,tp,LOCATION_GRAVE,0,1,nil)
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter1(chkc) end
+	local b1=Duel.IsExistingTarget(s.filter1,tp,LOCATION_REST,0,1,nil)
 	local b2=Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_EXTRA,0,1,nil)
 	if chk==0 then return b1 or b2 end
 	local op=0
@@ -36,8 +36,8 @@ function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if op==0 then
 		e:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-		local g=Duel.SelectTarget(tp,s.filter1,tp,LOCATION_GRAVE,0,1,1,nil)
-		Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,tp,LOCATION_GRAVE)
+		local g=Duel.SelectTarget(tp,s.filter1,tp,LOCATION_REST,0,1,1,nil)
+		Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,tp,LOCATION_REST)
 	else
 		e:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
 		Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_EXTRA)

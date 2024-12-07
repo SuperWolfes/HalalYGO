@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMixN(c,true,true,s.ffilter,1,aux.FilterBoolFunction(Card.IsRace,RACE_DRAGON),2)
 	--1 monster gains effect protection and piercing
 	local e1=Effect.CreateEffect(c)

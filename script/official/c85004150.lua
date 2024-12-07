@@ -1,7 +1,7 @@
 --電子光虫－ライノセバス
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Xyz.AddProcedure(c,s.mfilter,7,2,s.ovfilter,aux.Stringid(id,0),99,s.xyzop)
 	--destroy
 	local e2=Effect.CreateEffect(c)

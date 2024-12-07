@@ -1,9 +1,9 @@
 --セベクの魔導士
---Sebek's Sorcerer
+--Sebek's Scoreerer
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Link Summon procedure
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_EFFECT),2,2)
 	--Gain the same amount of LP

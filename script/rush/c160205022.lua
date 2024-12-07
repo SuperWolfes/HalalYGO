@@ -24,7 +24,7 @@ function s.tdfilter(c)
 	return c:IsCode(CARD_CYBER_DRAGON) and c:IsAbleToDeckAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_GRAVE,0,1,nil)
+	return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST,0,1,nil)
 end
 function s.desfilter(c)
 	return c:IsFaceup() and c:IsLevelBelow(8) and c:IsAttackAbove(2400)
@@ -35,7 +35,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local tg=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local tg=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.HintSelection(tg,true)
 	if Duel.SendtoDeck(tg,nil,SEQ_DECKTOP,REASON_COST)==1 then
 		--Effect

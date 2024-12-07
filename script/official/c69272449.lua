@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetCondition(s.bdcon)
 	e1:SetValue(0)
 	c:RegisterEffect(e1)
-	--Set 1 "M∀LICE" Trap from your Deck with a different name from the cards in your GY
+	--Set 1 "M∀LICE" Trap from your Deck with a different name from the cards in your RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetCode(EVENT_SUMMON_SUCCESS)
 	e2:SetCountLimit(1,id)
 	e2:SetTarget(s.settg)
-	e2:SetOperation(s.setop)
+	e2:SetOperation(s.vetop)
 	c:RegisterEffect(e2)
 	local e3=e2:Clone()
 	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
@@ -51,12 +51,12 @@ function s.bdcon(e)
 end
 function s.setfilter(c,tp)
 	return c:IsSetCard(SET_MALISS) and c:IsTrap() and c:IsSSetable()
-		and not Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,c:GetCode())
+		and not Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,c:GetCode())
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_DECK,0,1,nil,tp) end
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 	local g=Duel.SelectMatchingCard(tp,s.setfilter,tp,LOCATION_DECK,0,1,1,nil,tp)
 	if #g>0 then

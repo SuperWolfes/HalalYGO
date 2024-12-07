@@ -1,10 +1,10 @@
 --トリックスター・フォクシーウィッチ
---Trickstar Foxy Witch
+--Trickstar Foxy Mint
 local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
-	c:EnableReviveLimit()
-	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_FAIRY),2)
+	c:EnableAwakeLimit()
+	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_WANDERER),2)
 	--damage
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,1))

@@ -20,7 +20,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_MEEEG_CHAN),tp,LOCATION_MZONE,0,1,nil)
 end
 function s.cstfilter(c)
-	return c:IsRace(RACE_BEAST) and c:IsType(TYPE_NORMAL) and c:IsAbleToGraveAsCost()
+	return c:IsRace(RACE_BEAST) and c:IsType(TYPE_NORMAL) and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cstfilter,tp,LOCATION_HAND,0,2,nil) end
@@ -35,9 +35,9 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tg=Duel.SelectMatchingCard(tp,s.cstfilter,tp,LOCATION_HAND,0,2,2,nil)
-	if Duel.SendtoGrave(tg,REASON_COST)==2 then
+	if Duel.SendtoRest(tg,REASON_COST)==2 then
 		--Effect
 		local sg=Duel.GetMatchingGroup(s.desfilter,tp,0,LOCATION_MZONE,nil)
 		if #sg>0 then

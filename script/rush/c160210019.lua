@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion Procedure
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMixN(c,true,true,160010025,1,s.ffilter,1)
 	--Shuffle cards into deck
 	local e1=Effect.CreateEffect(c)
@@ -26,7 +26,7 @@ function s.cfilter(c)
 	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST,0,nil)
 	if chk==0 then return aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,0) end
 end
 function s.rescon(sg,e,tp,mg)
@@ -41,7 +41,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_REST,0,nil)
 	local cg=aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,1,tp,HINTMSG_TODECK)
 	Duel.HintSelection(cg,true)
 	if Duel.SendtoDeck(cg,nil,SEQ_DECKSHUFFLE,REASON_COST)<1 then return end

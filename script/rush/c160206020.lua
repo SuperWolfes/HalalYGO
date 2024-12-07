@@ -22,18 +22,18 @@ end
 function s.mltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeck(tp,3) end
 	Duel.SetOperationInfo(0,CATEGORY_DECKDES,nil,0,tp,3)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end
 function s.cfilter(c,e,tp)
-	return c:IsLocation(LOCATION_GRAVE) and c:IsCode(id) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsLocation(LOCATION_REST) and c:IsCode(id) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.mlop(e,tp,eg,ep,ev,re,r,rp)
 	--Effect
 	Duel.DiscardDeck(tp,3,REASON_EFFECT)
 	local g=Duel.GetOperatedGroup()
-	if g:FilterCount(aux.NecroValleyFilter(s.cfilter),nil,e,tp)>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+	if g:FilterCount(aux.RestValleyFilter(s.cfilter),nil,e,tp)>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local sg=g:FilterSelect(tp,aux.NecroValleyFilter(s.cfilter),1,1,nil,e,tp)
+		local sg=g:FilterSelect(tp,aux.RestValleyFilter(s.cfilter),1,1,nil,e,tp)
 		if #sg>0 then
 			Duel.HintSelection(sg,true)
 			Duel.BreakEffect()

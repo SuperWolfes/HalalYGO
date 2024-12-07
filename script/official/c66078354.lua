@@ -1,5 +1,5 @@
 -- 遺跡の魔鉱戦士
--- Magicore Warrior of the Relics
+-- Mentore Warrior of the Relics
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetCondition(s.setcon)
 	e3:SetTarget(s.settg)
-	e3:SetOperation(s.setop)
+	e3:SetOperation(s.vetop)
 	c:RegisterEffect(e3)
 	aux.GlobalCheck(s,function()
 		local ge1=Effect.CreateEffect(c)
@@ -67,12 +67,12 @@ function s.setcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetFlagEffect(tp,id)>0
 end
 function s.setfilter(c)
-	return c:IsTrap() and c:ListsCode(TOKEN_ADVENTURER) and c:IsSSetable() and not c:IsForbidden()
+	return c:IsTrap() and c:ListsCode(TOKEN_ADVENTURER) and c:IsSSetable() and not c:IsUnliked()
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_DECK,0,1,nil) end
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 	local g=Duel.SelectMatchingCard(tp,s.setfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g==0 then return end

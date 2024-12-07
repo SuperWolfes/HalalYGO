@@ -1,4 +1,4 @@
---Fruit of Destruction
+--Fruit of Mismatching
 --fixed by MLD
 local s,id=GetID()
 function s.initial_effect(c)
@@ -13,14 +13,14 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY+EFFECT_FLAG_CARD_TARGET)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
-	e2:SetCode(EVENT_TO_GRAVE)
+	e2:SetCode(EVENT_TO_REST)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
 	--sb
 	local e3=Effect.CreateEffect(c)
-	e3:SetCategory(CATEGORY_TOGRAVE+CATEGORY_DAMAGE)
+	e3:SetCategory(CATEGORY_TOREST+CATEGORY_DAMAGE)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e3:SetCode(EVENT_PHASE+PHASE_STANDBY)
@@ -32,13 +32,13 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.costfilter(c)
-	return c:IsSpell() and c:IsType(TYPE_CONTINUOUS) and c:IsFaceup() and c:IsAbleToGraveAsCost()
+	return c:IsActional() and c:IsType(TYPE_CONTINUOUS) and c:IsFaceup() and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ev,ep,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,e:GetHandler()) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tg=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,e:GetHandler())
-	Duel.SendtoGrave(tg,REASON_COST)
+	Duel.SendtoRest(tg,REASON_COST)
 end
 function s.spfilter(c,e,tp)
 	return c:IsPreviousLocation(LOCATION_MZONE) and c:IsPreviousControler(tp) and c:IsReason(REASON_DESTROY) and c:IsReason(REASON_EFFECT) 
@@ -76,12 +76,12 @@ function s.mtcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp
 end
 function s.tgfilter(c)
-	return c:IsSpell() and c:IsType(TYPE_CONTINUOUS) and c:IsFaceup() and c:IsAbleToGrave()
+	return c:IsActional() and c:IsType(TYPE_CONTINUOUS) and c:IsFaceup() and c:IsAbleToRest()
 end
 function s.mttg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsOnField() and s.tgfilter(chkc) and chkc~=e:GetHandler() end
 	if chk==0 then return true end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectTarget(tp,s.tgfilter,tp,LOCATION_ONFIELD,0,1,1,e:GetHandler())
 	if #g==0 then
 		Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,tp,3000)
@@ -91,7 +91,7 @@ function s.mtop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsFacedown() or not c:IsRelateToEffect(e) then return end
 	local tc=Duel.GetFirstTarget()
-	if not tc or not tc:IsRelateToEffect(e) or Duel.SendtoGrave(tc,REASON_EFFECT)==0 then
+	if not tc or not tc:IsRelateToEffect(e) or Duel.SendtoRest(tc,REASON_EFFECT)==0 then
 		Duel.Damage(tp,3000,REASON_EFFECT)
 	end
 end

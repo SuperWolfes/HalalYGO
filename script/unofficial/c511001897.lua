@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_HANDES+CATEGORY_TOGRAVE+CATEGORY_DESTROY)
+	e1:SetCategory(CATEGORY_HANDES+CATEGORY_TOREST+CATEGORY_DESTROY)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetCondition(s.condition)
@@ -36,12 +36,12 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 		and Duel.IsExistingMatchingCard(nil,tp,0,LOCATION_ONFIELD,1,nil) end
 	local tg=Duel.GetFieldGroup(tp,0,LOCATION_HAND)
 	local dg=Duel.GetFieldGroup(tp,0,LOCATION_ONFIELD)
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,tg,#tg,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,tg,#tg,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,dg,#dg,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.GetFieldGroup(tp,0,LOCATION_HAND)
-	if Duel.SendtoGrave(tg,REASON_EFFECT)>0 and tg:FilterCount(Card.IsLocation,nil,LOCATION_GRAVE)>0 then
+	if Duel.SendtoRest(tg,REASON_EFFECT)>0 and tg:FilterCount(Card.IsLocation,nil,LOCATION_REST)>0 then
 		Duel.Destroy(Duel.GetFieldGroup(tp,0,LOCATION_ONFIELD),REASON_EFFECT)
 	end
 end

@@ -1,10 +1,10 @@
 --ドラゴン・ユニットの儀式
---Dragon Unit Ritual
+--Dragon Unit Locked
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_TOGRAVE)
+	e1:SetCategory(CATEGORY_TOREST)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetCost(s.cost)
@@ -14,8 +14,8 @@ function s.initial_effect(c)
 end
 s.listed_names={75220074,511002255}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,e:GetHandler()) end
-	Duel.DiscardHand(tp,Card.IsAbleToGraveAsCost,1,1,REASON_COST)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,e:GetHandler()) end
+	Duel.DiscardHand(tp,Card.IsAbleToRestAsCost,1,1,REASON_COST)
 end
 function s.rescon(sg,e,tp,mg)
 	return aux.ChkfMMZ(1)(sg,e,tp,mg) and sg:IsExists(s.chk,1,nil,sg,Group.CreateGroup(),75220074,511002255)
@@ -33,7 +33,7 @@ function s.chk(c,sg,g,code,...)
 	return res
 end
 function s.filter(c,...)
-	return c:IsCode(...) and c:IsFaceup() and c:IsAbleToGrave()
+	return c:IsCode(...) and c:IsFaceup() and c:IsAbleToRest()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g1=Duel.GetMatchingGroup(s.filter,tp,LOCATION_MZONE,0,nil,75220074)
@@ -48,8 +48,8 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.IsPlayerCanSpecialSummonMonster(tp,38109772,0,0x21,2800,2300,7,RACE_DRAGON,ATTRIBUTE_FIRE) then return end
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_MZONE,0,nil,75220074,511002255)
-	local sg=aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,1,tp,HINTMSG_TOGRAVE)
-	if #sg>1 and Duel.SendtoGrave(sg,REASON_EFFECT)>0 then
+	local sg=aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,1,tp,HINTMSG_TOREST)
+	if #sg>1 and Duel.SendtoRest(sg,REASON_EFFECT)>0 then
 		local tc=Duel.CreateToken(tp,38109772)
 		if tc then
 			Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)

@@ -1,5 +1,5 @@
 --ギャンブル天使バニー
---Gamble Angel Bunny
+--Chance Angel Bunny
 local s,id=GetID()
 function s.initial_effect(c)
 	--coin

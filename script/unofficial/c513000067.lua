@@ -53,7 +53,7 @@ function s.initial_effect(c)
 	
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(Card.IsChampion,tp,LOCATION_GRAVE,0,3,nil)
+	return Duel.IsExistingMatchingCard(Card.IsChampion,tp,LOCATION_REST,0,3,nil)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() end

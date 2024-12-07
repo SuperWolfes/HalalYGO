@@ -19,7 +19,7 @@ function s.cfilter(c)
 	return c:IsRace(RACE_MACHINE) and c:IsAttribute(ATTRIBUTE_LIGHT)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,3,nil)
+	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,3,nil)
 end
 function s.posfilter(c)
 	return c:IsFaceup() and c:IsLevelBelow(4) and c:IsCanTurnSet() and c:IsCanChangePositionRush()

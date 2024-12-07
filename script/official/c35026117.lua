@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e2:SetCode(EVENT_SUMMON_SUCCESS)
 	e2:SetOperation(s.disatt)
 	c:RegisterEffect(e2)
-	-- Place 1 Sanga, Kazejin, or Suijin face-up in your S&T Zone as a Continuous Spell
+	-- Place 1 Sanga, Kazejin, or Suijin face-up in your S&T Zone as a Continuous Actional
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_DESTROY)
@@ -43,7 +43,7 @@ function s.disatt(e,tp,eg,ep,ev,re,r,rp)
 	c:RegisterEffect(e1)
 end
 function s.plfilter(c)
-	return c:IsCode(CARDS_SANGA_KAZEJIN_SUIJIN) and not c:IsForbidden() and (c:IsFaceup() or not c:IsLocation(LOCATION_REMOVED))
+	return c:IsCode(CARDS_SANGA_KAZEJIN_SUIJIN) and not c:IsUnliked() and (c:IsFaceup() or not c:IsLocation(LOCATION_REMOVED))
 end
 function s.placetg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
@@ -55,12 +55,12 @@ function s.placeop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
 	local tc=Duel.SelectMatchingCard(tp,s.plfilter,tp,LOCATION_REMOVED|LOCATION_HAND|LOCATION_DECK,0,1,1,nil):GetFirst()
 	if tc and Duel.MoveToField(tc,tp,tp,LOCATION_SZONE,POS_FACEUP,true) then
-		--Treated as a Continuous Spell
+		--Treated as a Continuous Actional
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 		e1:SetCode(EFFECT_CHANGE_TYPE)
-		e1:SetValue(TYPE_SPELL+TYPE_CONTINUOUS)
+		e1:SetValue(TYPE_ACTIONAL+TYPE_CONTINUOUS)
 		e1:SetReset(RESET_EVENT|RESETS_STANDARD)
 		tc:RegisterEffect(e1)
 		if Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,SET_LABYRINTH_WALL),tp,LOCATION_ONFIELD,0,1,nil)

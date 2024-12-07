@@ -5,7 +5,7 @@ Duel.LoadCardScript("c52653092.lua")
 local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz Summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Xyz.AddProcedure(c,s.xyzfilter,nil,3)
 	--This card's Special Summon cannot be prevented or negated
 	local e1=Effect.CreateEffect(c)
@@ -42,12 +42,12 @@ function s.initial_effect(c)
 	c:RegisterEffect(e6)
 	aux.GlobalCheck(s,function()
 		local oldf=Duel.Overlay
-		Duel.Overlay=function(c,g,grave)
+		Duel.Overlay=function(c,g,rest)
 			if type(g)=="Card" then
 				g=Group.FromCards(g)
 			end
 			local mg=g:Clone()
-			if not grave then g:ForEach(function(gc) mg:Merge(gc:GetOverlayGroup()) end) end
+			if not rest then g:ForEach(function(gc) mg:Merge(gc:GetOverlayGroup()) end) end
 			local rank=mg:GetSum(Card.GetRank)
 			local label=c:GetFlagEffectLabel(id+1)
 			if not label then
@@ -55,7 +55,7 @@ function s.initial_effect(c)
 			else
 				c:SetFlagEffectLabel(id+1,label+rank)
 			end
-			return oldf(c,g,grave)
+			return oldf(c,g,rest)
 		end
 		local oldcf=Card.RegisterEffect
 		Card.RegisterEffect=function(c,e,...)

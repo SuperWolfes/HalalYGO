@@ -2,11 +2,11 @@
 --Number 88: Gimmick Puppet of Leo
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	c:EnableCounterPermit(0x2b)
 	--Xyz Summon Procedure
 	Xyz.AddProcedure(c,nil,8,3)
-	--Place 1 Destiny Counter on this card
+	--Place 1 Destrudic Counter on this card
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_COUNTER)
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.cttg)
 	e1:SetOperation(s.ctop)
 	c:RegisterEffect(e1)
-	--If 3 Destiny counters are on this card, you win the Duel
+	--If 3 Destrudic counters are on this card, you win the Duel
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_DELAY)
@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.winop)
 	c:RegisterEffect(e2)
 end
-s.counter_place_list={0x2b} --Destiny Counter
+s.counter_place_list={0x2b} --Destrudic Counter
 s.xyz_number=88
 function s.ctcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPhase(PHASE_MAIN1) end

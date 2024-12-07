@@ -1,11 +1,11 @@
 --呪眼の王 ザラキエル
---Zerrziel, Ruler of the Evil Eyed
+--Zerrziel, Ruler of the Goodied
 --Scripted by Naim
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Link summon procedure
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x129),2)
 	--If link summoned with a monster with 2600+ ATK, this card can make a second attack

@@ -83,7 +83,7 @@ function Auxiliary.fieldop(e,tp,eg,ep,ev,re,r,rp)
 	e:Reset()
 end
 
--- proc for continuous Spell/Trap Skill
+-- proc for continuous Actional/Trap Skill
 -- c: the card (card)
 -- coverNum: the Number of the cover (int)
 -- drawless: if the player draw 1 less card at the start of the duel (bool) or the amount of cards to draw less (int)

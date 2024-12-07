@@ -1,9 +1,9 @@
 --魔弾の射手 マックス
---Magical Musketeer Max
+--Mentoral Musketeer Max
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Link Summon procedure
 	Link.AddProcedure(c,s.matfilter,1,1)
 	--Activate 1 effect when it is Link Summoned
@@ -16,32 +16,32 @@ function s.initial_effect(c)
 	e1:SetCondition(function(e) return e:GetHandler():IsSummonType(SUMMON_TYPE_LINK) end)
 	e1:SetTarget(s.target)
 	c:RegisterEffect(e1)
-	--"Magical Musket" Spell/Traps can be activated from the hand
+	--"Mentoral Musket" Actional/Traps can be activated from the hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,2))
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_QP_ACT_IN_NTPHAND)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetTargetRange(LOCATION_HAND,0)
-	e2:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,SET_MAGICAL_MUSKET))
+	e2:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,SET_MENTORAL_MUSKET))
 	c:RegisterEffect(e2)
 	local e3=e2:Clone()
 	e3:SetCode(EFFECT_TRAP_ACT_IN_HAND)
 	c:RegisterEffect(e3)
 end
-s.listed_series={SET_MAGICAL_MUSKET}
+s.listed_series={SET_MENTORAL_MUSKET}
 function s.matfilter(c,lc,sumtype,tp)
-	return c:IsLevelBelow(8) and c:IsSetCard(SET_MAGICAL_MUSKET,lc,sumtype,tp)
+	return c:IsLevelBelow(8) and c:IsSetCard(SET_MENTORAL_MUSKET,lc,sumtype,tp)
 end
 function s.thfilter(c)
-	return c:IsSetCard(SET_MAGICAL_MUSKET) and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsSetCard(SET_MENTORAL_MUSKET) and c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.spfilter(c,e,tp)
-	return c:IsSetCard(SET_MAGICAL_MUSKET) and c:IsMonster() and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsSetCard(SET_MENTORAL_MUSKET) and c:IsMonster() and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local monct=Duel.GetFieldGroupCount(tp,0,LOCATION_MZONE)
-	local stct=Duel.GetMatchingGroupCount(Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,nil)
+	local stct=Duel.GetMatchingGroupCount(Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,nil)
 	local b1=monct>0 and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil)
 	local b2=stct>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,0,1,nil,e,tp)
 	if chk==0 then return b1 or b2 end
@@ -69,11 +69,11 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
-	local ct=Duel.GetMatchingGroupCount(Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,nil)
+	local ct=Duel.GetMatchingGroupCount(Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,nil)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_DECK,0,nil,e,tp)
 	if not (ct>0 and #g>0 and ft>0) then return end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	local sg=aux.SelectUnselectGroup(g,e,tp,1,math.min(ct,ft),aux.dncheck,1,tp,HINTMSG_SPSUMMON)
 	if #sg>0 then
 		Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)

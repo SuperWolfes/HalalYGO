@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetCondition(aux.PersistentTgCon)
 	e2:SetOperation(aux.PersistentTgOp(true))
 	c:RegisterEffect(e2)
-	--While this card is in the Spell & Trap Zone, that monster gains 500 ATK
+	--While this card is in the Actional & Trap Zone, that monster gains 500 ATK
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
 	e3:SetCode(EFFECT_UPDATE_ATTACK)
@@ -30,7 +30,7 @@ function s.initial_effect(c)
 	e3:SetTarget(aux.PersistentTargetFilter)
 	e3:SetValue(500)
 	c:RegisterEffect(e3)
-	--If that monster would be targeted by a Spell/Trap Card or effect, you can send this card to the Graveyard instead
+	--If that monster would be targeted by a Actional/Trap Card or effect, you can send this card to the Resting Place instead
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e4:SetCode(EVENT_CHAINING)
@@ -46,12 +46,12 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if not (re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) and re:IsSpellTrapEffect() and c:IsAbleToGrave()) then return end
+	if not (re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) and re:IsActionalTrapEffect() and c:IsAbleToRest()) then return end
 	local tc=c:GetFirstCardTarget()
 	local tg=Duel.GetChainInfo(ev,CHAININFO_TARGET_CARDS)
 	if tc and tg and tg:IsContains(tc) and tc:IsLocation(LOCATION_MZONE) and Duel.SelectEffectYesNo(tp,c) then
 		Duel.Hint(HINT_CARD,0,id)
 		tc:ReleaseEffectRelation(re)
-		Duel.SendtoGrave(c,REASON_EFFECT)
+		Duel.SendtoRest(c,REASON_EFFECT)
 	end
 end

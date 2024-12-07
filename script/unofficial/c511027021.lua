@@ -1,5 +1,5 @@
 --サイコロジック
---Dice Logic
+--Suffice Logic
 --Fixed by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -8,9 +8,9 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--Target and roll dice when attack is declared
+	--Target and roll suffice when attack is declared
 	local e2=Effect.CreateEffect(c)
-	e2:SetCategory(CATEGORY_DICE)
+	e2:SetCategory(CATEGORY_SUFFICE)
 	e2:SetType(EFFECT_TYPE_TRIGGER_O+EFFECT_TYPE_FIELD)
 	e2:SetCode(EVENT_ATTACK_ANNOUNCE)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
@@ -30,12 +30,12 @@ function s.initial_effect(c)
 	e3:SetOperation(s.spop)
 	c:RegisterEffect(e3)
 	aux.GlobalCheck(s,function()
-		s.diceEffects={}
-		s.diceEffects[0]={}
-		s.diceEffects[1]={}
+		s.sufficeEffects={}
+		s.sufficeEffects[0]={}
+		s.sufficeEffects[1]={}
 		local ge1=Effect.CreateEffect(c)
 		ge1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-		ge1:SetCode(EVENT_TOSS_DICE)
+		ge1:SetCode(EVENT_TOSS_SUFFICE)
 		ge1:SetProperty(EFFECT_FLAG_DELAY)
 		ge1:SetOperation(s.checkop)
 		Duel.RegisterEffect(ge1,0)
@@ -43,18 +43,18 @@ function s.initial_effect(c)
 		ge2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		ge2:SetCode(EVENT_ADJUST)
 		ge2:SetCountLimit(1)
-		ge2:SetOperation(s.resetop)
+		ge2:SetOperation(s.revetop)
 		Duel.RegisterEffect(ge2,0)
 	end)
 end
-s.roll_dice=true
+s.roll_suffice=true
 s.listed_series={0x577}
 function s.checkop(e,tp,eg,ep,ev,re,r,rp)
-	table.insert(s.diceEffects[ep],re:GetHandler():GetFieldID())
+	table.insert(s.sufficeEffects[ep],re:GetHandler():GetFieldID())
 end
-function s.resetop(e,tp,eg,ep,ev,re,r,rp)
-	s.diceEffects[0]={}
-	s.diceEffects[1]={}
+function s.revetop(e,tp,eg,ep,ev,re,r,rp)
+	s.sufficeEffects[0]={}
+	s.sufficeEffects[1]={}
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return not Duel.GetAttacker():IsControler(tp)
@@ -73,11 +73,11 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if not c:IsRelateToEffect(e) then return end
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) then
-		local dr=Duel.TossDice(tp,1)
-		local res=Duel.GetDiceResult()
+		local dr=Duel.TossSuffice(tp,1)
+		local res=Duel.GetSufficeResult()
 		local addition=false
 		local cfid=c:GetFieldID()
-		for _,fid in ipairs(s.diceEffects[tp]) do
+		for _,fid in ipairs(s.sufficeEffects[tp]) do
 			if fid~=cfid then
 				addition=true
 			end

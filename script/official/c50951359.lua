@@ -20,11 +20,11 @@ function s.filter(c,e,tp,mg)
 	return mg:IsContains(c) and c:IsType(TYPE_TUNER) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(1-tp) and s.filter(chkc,e,tp,eg:GetFirst():GetMaterial()) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(1-tp) and s.filter(chkc,e,tp,eg:GetFirst():GetMaterial()) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(s.filter,tp,0,LOCATION_GRAVE,1,nil,e,tp,eg:GetFirst():GetMaterial()) end
+		and Duel.IsExistingTarget(s.filter,tp,0,LOCATION_REST,1,nil,e,tp,eg:GetFirst():GetMaterial()) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.filter,tp,0,LOCATION_GRAVE,1,1,nil,e,tp,eg:GetFirst():GetMaterial())
+	local g=Duel.SelectTarget(tp,s.filter,tp,0,LOCATION_REST,1,1,nil,e,tp,eg:GetFirst():GetMaterial())
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)

@@ -1,5 +1,5 @@
 --屍界のバンシー
---Necroworld Banshee
+--Restworld Banshee
 local s,id=GetID()
 function s.initial_effect(c)
 	--indes
@@ -15,11 +15,11 @@ function s.initial_effect(c)
 	local e2=e1:Clone()
 	e2:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
 	c:RegisterEffect(e2)
-	--activate Zombie World
+	--activate Toxic World
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetType(EFFECT_TYPE_QUICK_O)
-	e3:SetRange(LOCATION_MZONE+LOCATION_GRAVE)
+	e3:SetRange(LOCATION_MZONE+LOCATION_REST)
 	e3:SetCode(EVENT_FREE_CHAIN)
 	e3:SetCountLimit(1,id)
 	e3:SetCost(aux.bfgcost)
@@ -37,6 +37,6 @@ end
 function s.acop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
 	local tc=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_HAND+LOCATION_DECK,0,1,1,nil,tp):GetFirst()
-	Duel.ActivateFieldSpell(tc,e,tp,eg,ep,ev,re,r,rp)
+	Duel.ActivateFieldActional(tc,e,tp,eg,ep,ev,re,r,rp)
 end
 

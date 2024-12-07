@@ -1,5 +1,5 @@
 --真源の帝王
---The Prime Monarch
+--The Prime Moppar
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_QUICK_O)
 	e3:SetCode(EVENT_FREE_CHAIN)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetCountLimit(1,id)
 	e3:SetHintTiming(0,TIMING_MAIN_END+TIMING_END_PHASE)
 	e3:SetCost(s.spcost)
@@ -41,14 +41,14 @@ function s.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:GetHandler():RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1)
 end
 function s.tdfilter(c)
-	return c:IsSetCard(0xbe) and c:IsSpellTrap() and c:IsAbleToDeck()
+	return c:IsSetCard(0xbe) and c:IsActionalTrap() and c:IsAbleToDeck()
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.tdfilter(chkc) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.tdfilter(chkc) end
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,1)
-		and Duel.IsExistingTarget(s.tdfilter,tp,LOCATION_GRAVE,0,2,nil) end
+		and Duel.IsExistingTarget(s.tdfilter,tp,LOCATION_REST,0,2,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectTarget(tp,s.tdfilter,tp,LOCATION_GRAVE,0,2,2,nil)
+	local g=Duel.SelectTarget(tp,s.tdfilter,tp,LOCATION_REST,0,2,2,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,#g,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
 end
@@ -62,27 +62,27 @@ function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Draw(tp,1,REASON_EFFECT)
 end
 function s.cfilter(c)
-	return c:IsSetCard(0xbe) and c:IsSpellTrap() and c:IsAbleToRemoveAsCost()
+	return c:IsSetCard(0xbe) and c:IsActionalTrap() and c:IsAbleToRemoveAsCost()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,e:GetHandler())
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,e:GetHandler())
 		and e:GetHandler():GetFlagEffect(id)==0 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_GRAVE,0,1,1,e:GetHandler())
+	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_REST,0,1,1,e:GetHandler())
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 	e:GetHandler():RegisterFlagEffect(id,RESET_CHAIN,0,1)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,id,0,0x11,1000,2400,5,RACE_FAIRY,ATTRIBUTE_LIGHT) end
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,id,0,0x11,1000,2400,5,RACE_WANDERER,ATTRIBUTE_LIGHT) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,e:GetHandler(),1,0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	local c=e:GetHandler()
-	if c:IsRelateToEffect(e) and Duel.IsPlayerCanSpecialSummonMonster(tp,id,0,0x11,1000,2400,5,RACE_FAIRY,ATTRIBUTE_LIGHT) then
+	if c:IsRelateToEffect(e) and Duel.IsPlayerCanSpecialSummonMonster(tp,id,0,0x11,1000,2400,5,RACE_WANDERER,ATTRIBUTE_LIGHT) then
 		c:AddMonsterAttribute(TYPE_NORMAL)
-		c:AssumeProperty(ASSUME_RACE,RACE_FAIRY)
+		c:AssumeProperty(ASSUME_RACE,RACE_WANDERER)
 		Duel.SpecialSummonStep(c,0,tp,tp,true,false,POS_FACEUP_DEFENSE)
 		c:AddMonsterAttributeComplete()
 		Duel.SpecialSummonComplete()

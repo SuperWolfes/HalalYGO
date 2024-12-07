@@ -1,7 +1,7 @@
---Spirit Coup
+--Guardian Coup
 local s,id=GetID()
 function s.initial_effect(c)
-	--copy spell
+	--copy actional
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -31,10 +31,10 @@ function s.filter(c,e,tp,eg,ep,ev,re,r,rp)
 		and (not target or target(te,tp,eg,ep,ev,re,r,rp,0))
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter(chkc,tp,eg,ep,ev,re,r,rp) end
-	if chk==0 then return Duel.IsExistingTarget(s.cfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp,eg,ep,ev,re,r,rp) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter(chkc,tp,eg,ep,ev,re,r,rp) end
+	if chk==0 then return Duel.IsExistingTarget(s.cfilter,tp,LOCATION_REST,0,1,nil,e,tp,eg,ep,ev,re,r,rp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local tc=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp,eg,ep,ev,re,r,rp):GetFirst()
+	local tc=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil,e,tp,eg,ep,ev,re,r,rp):GetFirst()
 	local te=tc:GetActivateEffect()
 	local tg=te:GetTarget()
 	e:SetLabelObject(te)

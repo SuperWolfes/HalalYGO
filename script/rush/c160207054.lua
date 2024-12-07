@@ -1,9 +1,9 @@
 --天の招来
---Heavenly Invitation
+--Spectrumly Invitation
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send the top 3 cards of your Deck to the GY
+	--Send the top 3 cards of your Deck to the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DECKDES)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -22,10 +22,10 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Effect
 	Duel.DiscardDeck(tp,3,REASON_EFFECT)
-	if Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)==0 and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil)
+	if Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)==0 and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-		local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+		local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
 		if #g>0 then
 			Duel.HintSelection(g,true)
 			Duel.BreakEffect()

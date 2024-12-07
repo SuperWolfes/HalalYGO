@@ -19,7 +19,7 @@ function s.revfilter(c,tp)
 		and Duel.IsExistingMatchingCard(s.rcfilter,tp,0,LOCATION_MZONE,1,nil,c)
 end
 function s.rcfilter(c,rvlc)
-	return c:IsFaceup() and (not c:IsRace(RACE_FIEND) or not c:IsRace(rvlc:GetRace())) and c:IsNotMaximumModeSide()
+	return c:IsFaceup() and (not c:IsRace(RACE_TAINTED) or not c:IsRace(rvlc:GetRace())) and c:IsNotMaximumModeSide()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.revfilter,tp,LOCATION_HAND,0,1,nil,tp) end
@@ -38,14 +38,14 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if not tc then return end
 	Duel.HintSelection(tc)
 	local newRace=nil
-	if tc:IsRace(RACE_FIEND) then
+	if tc:IsRace(RACE_TAINTED) then
 		newRace=rvlc:GetRace()
-	elseif tc:IsRace(rvlc:GetRace()) or rvlc:IsRace(RACE_FIEND) then
-		newRace=RACE_FIEND
+	elseif tc:IsRace(rvlc:GetRace()) or rvlc:IsRace(RACE_TAINTED) then
+		newRace=RACE_TAINTED
 	else
 		local opt=Duel.SelectOption(tp,aux.Stringid(id,1),aux.Stringid(id,2))
 		if opt==0 then
-			newRace=RACE_FIEND
+			newRace=RACE_TAINTED
 		elseif opt==1 then
 			newRace=rvlc:GetRace()
 		end

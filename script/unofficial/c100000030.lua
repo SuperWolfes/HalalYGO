@@ -14,7 +14,7 @@ function s.initial_effect(c)
 end
 function s.cfilter(c,e,tp)
 	return c:IsRace(RACE_BEAST) and c:IsReason(REASON_BATTLE) and c:IsPreviousControler(tp)
-		and c:IsLocation(LOCATION_GRAVE) and c~=Duel.GetAttacker() and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+		and c:IsLocation(LOCATION_REST) and c~=Duel.GetAttacker() and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,e,tp)

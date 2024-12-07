@@ -1,9 +1,9 @@
 --悦楽の堕天使
---Indulged Darklord
+--Indulged Darkwarden
 --Scripted by ahtelel7
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon 1 "Darklord" monster and search 1 "Darklord monster"
+	--Special Summon 1 "Darkwarden" monster and search 1 "Darkwarden monster"
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -19,13 +19,13 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 s.listed_names={id}
-s.listed_series={SET_DARKLORD}
+s.listed_series={SET_DARKWARDEN}
 function s.thfilter(c,lv)
-	return c:IsMonster() and c:IsSetCard(SET_DARKLORD) and c:HasLevel()
+	return c:IsMonster() and c:IsSetCard(SET_DARKWARDEN) and c:HasLevel()
 		and c:IsAbleToHand() and not c:IsCode(id) and not c:IsLevel(lv) 
 end
 function s.spfilter(c,e,tp)
-	return c:IsMonster() and c:IsSetCard(SET_DARKLORD) and c:HasLevel()
+	return c:IsMonster() and c:IsSetCard(SET_DARKWARDEN) and c:HasLevel()
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE,1-tp)
 		and not c:IsCode(id) and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,c,c:GetLevel())
 end
@@ -47,14 +47,14 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SendtoHand(g2,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g2)
 	end
-	--Cannot activate monster effects, except Fairy monsters
+	--Cannot activate monster effects, except Wanderer monsters
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetDescription(aux.Stringid(id,1))
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CLIENT_HINT)
 	e1:SetCode(EFFECT_CANNOT_ACTIVATE)
 	e1:SetTargetRange(1,0)
-	e1:SetValue(function(_,re) return re:IsMonsterEffect() and not re:GetHandler():IsRace(RACE_FAIRY) end)
+	e1:SetValue(function(_,re) return re:IsMonsterEffect() and not re:GetHandler():IsRace(RACE_WANDERER) end)
 	e1:SetReset(RESET_PHASE|PHASE_END)
 	Duel.RegisterEffect(e1,tp)
 end

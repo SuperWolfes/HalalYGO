@@ -19,7 +19,7 @@ function s.cfilter(c)
 	return c:IsMonster() and c:IsType(TYPE_NORMAL) and c:IsRace(RACE_PLANT)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,nil)
+	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeckAsCost(tp,3) end
@@ -45,7 +45,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		if #g>0 then
 			g=g:AddMaximumCheck()
 			Duel.HintSelection(g,true)
-			local ct=Duel.GetMatchingGroupCount(s.cfilter,tp,LOCATION_GRAVE,0,nil)
+			local ct=Duel.GetMatchingGroupCount(s.cfilter,tp,LOCATION_REST,0,nil)
 			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetCode(EFFECT_UPDATE_ATTACK)
@@ -53,7 +53,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			e1:SetReset(RESETS_STANDARD_PHASE_END)
 			g:GetFirst():RegisterEffect(e1)
 			local sg=Duel.GetMatchingGroup(s.desfilter,tp,0,LOCATION_MZONE,nil)
-			if Duel.IsExistingMatchingCard(s.cfilter2,tp,LOCATION_GRAVE,0,1,nil) and #sg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+			if Duel.IsExistingMatchingCard(s.cfilter2,tp,LOCATION_REST,0,1,nil) and #sg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 				Duel.Destroy(sg,REASON_EFFECT)
 			end
 		end

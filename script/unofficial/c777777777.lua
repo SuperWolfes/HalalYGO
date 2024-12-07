@@ -1,7 +1,7 @@
 --Rule of the day: Terradivide V3
---At the start of the duel, each player places 1 Field Spell from their deck on the field
+--At the start of the duel, each player places 1 Field Actional from their deck on the field
 --The non turn player has their field face-down until the End Phase
---Field spells cannot leave the field by card effects (only by activating another field spell)
+--Field actionals cannot leave the field by card effects (only by activating another field actional)
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.GlobalCheck(s,function()
@@ -27,7 +27,7 @@ function s.initial_effect(c)
 		e4:SetCode(EFFECT_CANNOT_REMOVE)
 		Duel.RegisterEffect(e4,0)
 		local e5=e3:Clone()
-		e5:SetCode(EFFECT_CANNOT_TO_GRAVE)
+		e5:SetCode(EFFECT_CANNOT_TO_REST)
 		Duel.RegisterEffect(e5,0)
 		local e6=e3:Clone()
 		e6:SetCode(EFFECT_CANNOT_TO_HAND)

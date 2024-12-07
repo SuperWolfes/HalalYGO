@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_DRAW)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-	e2:SetCode(EVENT_TO_GRAVE)
+	e2:SetCode(EVENT_TO_REST)
 	e2:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_PLAYER_TARGET)
 	e2:SetCondition(s.drcon)
 	e2:SetTarget(s.drtg)
@@ -28,12 +28,12 @@ function s.initial_effect(c)
 end
 s.listed_series={0x122}
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsAbleToRemove() and chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(1-tp) end
+	if chkc then return chkc:IsAbleToRemove() and chkc:IsLocation(LOCATION_REST) and chkc:IsControler(1-tp) end
 	if chk==0 then return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,0x122),tp,LOCATION_MZONE,0,1,nil)
-		and Duel.IsExistingTarget(Card.IsAbleToRemove,tp,0,LOCATION_GRAVE,1,nil) end
+		and Duel.IsExistingTarget(Card.IsAbleToRemove,tp,0,LOCATION_REST,1,nil) end
 	local ct=Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsSetCard,0x122),tp,LOCATION_MZONE,0,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectTarget(tp,Card.IsAbleToRemove,tp,0,LOCATION_GRAVE,1,ct,nil)
+	local g=Duel.SelectTarget(tp,Card.IsAbleToRemove,tp,0,LOCATION_REST,1,ct,nil)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,#g,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)

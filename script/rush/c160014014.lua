@@ -20,7 +20,7 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp,chk)
 	return Duel.GetFieldGroupCount(tp,0,LOCATION_MZONE)>0
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
 end
 function s.spfilter(c,e,tp)
 	return c:IsRace(RACE_PYRO) and c:IsLevelAbove(7) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -32,12 +32,12 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if Duel.SendtoGrave(c,REASON_COST)<1 then return end
+	if Duel.SendtoRest(c,REASON_COST)<1 then return end
 	--Effect
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_HAND,0,1,1,nil,e,tp)
 	if #g>0 and Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)>0
-		and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,160316023) then
+		and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,160316023) then
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)

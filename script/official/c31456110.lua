@@ -1,5 +1,5 @@
 --ヴェルズ・ゴーレム
---Evilswarm Golem
+--Evilswarm Gopal
 local s,id=GetID()
 function s.initial_effect(c)
 	--Destroy 1 Level 5 or higher non-DARK monster on the field

@@ -18,14 +18,14 @@ function s.fcheck(tp,sg,fc)
 	return sg:FilterCount(Card.IsLocation,nil,LOCATION_DECK|LOCATION_EXTRA)<=2
 end
 function s.fextrafilter(c)
-	return not c:IsRace(RACE_ROCK) and c:IsSetCard(SET_GEM_KNIGHT) and c:IsMonster() and c:IsAbleToGrave()
+	return not c:IsRace(RACE_ROCK) and c:IsSetCard(SET_GEM_KNIGHT) and c:IsMonster() and c:IsAbleToRest()
 end
 function s.extratg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,nil,0,tp,LOCATION_DECK|LOCATION_EXTRA)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,nil,0,tp,LOCATION_DECK|LOCATION_EXTRA)
 end
 function s.fextra(e,tp,mg)
-	if Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,1264319) then
+	if Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,1264319) then
 		local eg=Duel.GetMatchingGroup(s.fextrafilter,tp,LOCATION_DECK|LOCATION_EXTRA,0,nil)
 		if #eg>0 then
 			return eg,s.fcheck

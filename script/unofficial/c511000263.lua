@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e3:SetCode(EFFECT_DIRECT_ATTACK)
 	e3:SetCondition(s.havefieldcon)
 	c:RegisterEffect(e3)
-	--Unaffected by Spell and Trap Cards
+	--Unaffected by Actional and Trap Cards
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_SINGLE)
 	e4:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -45,7 +45,7 @@ function s.initial_effect(c)
 	e6:SetDescription(aux.Stringid(id,0))
 	e6:SetCategory(CATEGORY_DESTROY)
 	e6:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	e6:SetCode(EVENT_TO_GRAVE)
+	e6:SetCode(EVENT_TO_REST)
 	e6:SetCondition(s.havefieldcon)
 	e6:SetTarget(s.destg)
 	e6:SetOperation(s.desop)
@@ -68,7 +68,7 @@ function s.havefieldcon(e)
 	return Duel.IsExistingMatchingCard(Card.IsFaceup,0,LOCATION_FZONE,LOCATION_FZONE,1,nil)
 end
 function s.unaffectedval(e,te)
-	return te:IsSpellTrapEffect() and te:GetOwnerPlayer()~=e:GetHandlerPlayer()
+	return te:IsActionalTrapEffect() and te:GetOwnerPlayer()~=e:GetHandlerPlayer()
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsReason(REASON_DESTROY) end

@@ -3,8 +3,8 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Must be special summon by its own method
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -39,10 +39,10 @@ function s.rescon(sg,e,tp,mg)
 	return aux.ChkfMMZ(1)(sg,e,tp,mg) and sg:IsExists(s.atchk1,1,nil,sg)
 end
 function s.atchk1(c,sg)
-	return c:IsRace(RACE_FIEND) and c:IsAttribute(ATTRIBUTE_DARK) and sg:FilterCount(s.atchk2,c)==3
+	return c:IsRace(RACE_TAINTED) and c:IsAttribute(ATTRIBUTE_DARK) and sg:FilterCount(s.atchk2,c)==3
 end
 function s.atchk2(c)
-	return c:IsRace(RACE_FAIRY) and c:IsAttribute(ATTRIBUTE_LIGHT)
+	return c:IsRace(RACE_WANDERER) and c:IsAttribute(ATTRIBUTE_LIGHT)
 end
 function s.spfilter(c,rac,att)
 	return c:IsRace(rac) and c:IsAttribute(att) and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
@@ -50,16 +50,16 @@ end
 function s.spcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
-	local rg1=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil,RACE_FAIRY,ATTRIBUTE_LIGHT)
-	local rg2=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil,RACE_FIEND,ATTRIBUTE_DARK)
+	local rg1=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE+LOCATION_REST,0,nil,RACE_WANDERER,ATTRIBUTE_LIGHT)
+	local rg2=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE+LOCATION_REST,0,nil,RACE_TAINTED,ATTRIBUTE_DARK)
 	local rg=rg1:Clone()
 	rg:Merge(rg2)
 	return Duel.GetLocationCount(tp,LOCATION_MZONE)>-4 and #rg1>2 and #rg2>0 
 		and aux.SelectUnselectGroup(rg,e,tp,4,4,s.rescon,0)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,c)
-	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil,RACE_FAIRY,ATTRIBUTE_LIGHT)
-	rg:Merge(Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil,RACE_FIEND,ATTRIBUTE_DARK))
+	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE+LOCATION_REST,0,nil,RACE_WANDERER,ATTRIBUTE_LIGHT)
+	rg:Merge(Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE+LOCATION_REST,0,nil,RACE_TAINTED,ATTRIBUTE_DARK))
 	local g=aux.SelectUnselectGroup(rg,e,tp,4,4,s.rescon,1,tp,HINTMSG_REMOVE,nil,nil,true)
 	if #g>0 then
 		g:KeepAlive()

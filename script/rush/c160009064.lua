@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c,tp)
-	return (c:GetPreviousTypeOnField()&TYPE_SPELL==TYPE_SPELL or c:GetPreviousTypeOnField()&TYPE_TRAP==TYPE_TRAP) and c:IsReason(REASON_EFFECT)
+	return (c:GetPreviousTypeOnField()&TYPE_ACTIONAL==TYPE_ACTIONAL or c:GetPreviousTypeOnField()&TYPE_TRAP==TYPE_TRAP) and c:IsReason(REASON_EFFECT)
 		and c:IsPreviousLocation(LOCATION_ONFIELD) and c:IsPreviousControler(tp) and c:GetReasonPlayer()==1-tp
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)

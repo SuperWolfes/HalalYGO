@@ -112,7 +112,7 @@ function s.penop1(e,tp,eg,ep,ev,re,r,rp,c,sg,og)
 	local rscale=rpz:GetRightScale()
 	if lscale>rscale then lscale,rscale=rscale,lscale end
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	ft=math.min(ft,aux.CheckSummonGate(tp) or ft)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,Pendulum.Filter,tp,LOCATION_HAND,0,0,ft,nil,e,tp,lscale,rscale)
@@ -145,7 +145,7 @@ function s.penop2(e,tp,eg,ep,ev,re,r,rp,c,sg,og)
 	local rscale=rpz:GetRightScale()
 	if lscale>rscale then lscale,rscale=rscale,lscale end
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	ft=math.min(ft,aux.CheckSummonGate(tp) or ft)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,Pendulum.Filter,tp,LOCATION_HAND,0,0,ft,nil,e,tp,lscale,rscale)

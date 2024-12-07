@@ -5,17 +5,17 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Set this card into S/T zones as a Spell
+	--Set this card into S/T zones as a Actional
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_MONSTER_SSET)
-	e1:SetValue(TYPE_SPELL)
+	e1:SetValue(TYPE_ACTIONAL)
 	c:RegisterEffect(e1)
-	--Special Summon itself from GY
+	--Special Summon itself from RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	e2:SetCode(EVENT_TO_GRAVE)
+	e2:SetCode(EVENT_TO_REST)
 	e2:SetOperation(s.regop)
 	c:RegisterEffect(e2)
 end
@@ -28,7 +28,7 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_DESTROY)
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 		e1:SetCode(EVENT_PHASE+PHASE_STANDBY)
-		e1:SetRange(LOCATION_GRAVE)
+		e1:SetRange(LOCATION_REST)
 		e1:SetCountLimit(1)
 		e1:SetCondition(s.spcon)
 		e1:SetTarget(s.sptg)
@@ -46,9 +46,9 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,0,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,0,LOCATION_REST)
 end
-	--Special Summon itself from GY
+	--Special Summon itself from RP
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	local c=e:GetHandler()

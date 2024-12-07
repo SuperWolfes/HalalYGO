@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_DICE+CATEGORY_ATKCHANGE+CATEGORY_DAMAGE)
+	e1:SetCategory(CATEGORY_SUFFICE+CATEGORY_ATKCHANGE+CATEGORY_DAMAGE)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_CHAINING)
 	e1:SetCondition(s.condition)
@@ -30,7 +30,7 @@ function s.initial_effect(c)
 	e3:SetOperation(s.desop)
 	c:RegisterEffect(e3)
 end
-s.roll_dice=true
+s.roll_suffice=true
 function s.lkfilter(c,p)
 	return s.cfilter(c,p) and c:IsType(TYPE_LINK)
 end
@@ -57,7 +57,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,0,1-tp,1)
+	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,1-tp,1)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,PLAYER_ALL,0)
 end
 function s.atkfilter(c)
@@ -66,8 +66,8 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	local c=e:GetHandler()
-	local dice=Duel.TossDice(1-tp,1)
-	local att=2^(dice-1)
+	local suffice=Duel.TossSuffice(1-tp,1)
+	local att=2^(suffice-1)
 	local tg=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
 	local g=Group.CreateGroup()
 	for tc in tg:Iter() do

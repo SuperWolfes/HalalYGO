@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e1:SetCondition(s.atkcon(1))
 	e1:SetValue(59464593)
 	c:RegisterEffect(e1)
-	--JUU - Control of this card cannot switch
+	--JUU - Control of this card cannot smint
 	local e10=Effect.CreateEffect(c)
 	e10:SetType(EFFECT_TYPE_SINGLE)
 	e10:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -92,8 +92,8 @@ function s.descon(e,tp,eg,ep,ev,re,r,rp)
 		and not (Duel.IsPhase(PHASE_DAMAGE) and Duel.IsDamageCalculated())
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,nil) end
-	Duel.DiscardHand(tp,Card.IsAbleToGraveAsCost,1,1,REASON_COST)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,nil) end
+	Duel.DiscardHand(tp,Card.IsAbleToRestAsCost,1,1,REASON_COST)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()

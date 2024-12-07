@@ -7,11 +7,11 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.fextra(e,tp,mg1)
-	return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToGrave),tp,LOCATION_DECK,0,nil)
+	return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRest),tp,LOCATION_DECK,0,nil)
 end
 function s.extratg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
 function s.stage2(e,tc,tp,sg,chk)
 	local c=e:GetHandler()

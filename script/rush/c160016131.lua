@@ -1,3 +1,3 @@
 --アニマジカ・ウィッチ
---Animagica Witch
+--Animenta Mint
 Duel.LoadCardScriptAlias(160016031)

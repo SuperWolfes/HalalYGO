@@ -1,5 +1,5 @@
 --幻壊奥義－一式攻事
---Demolition Art - Absolute Destruction
+--Demolition Art - Absolute Mismatching
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -20,15 +20,15 @@ function s.filter(c)
 	return c:IsMonster() and c:IsRace(RACE_WYRM) and c:IsAbleToDeck()
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_GRAVE)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_REST)
 end
 function s.desfilter(c)
 	return c:IsFaceup() and c:IsAttackPos() and c:IsNotMaximumModeSide()
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,LOCATION_GRAVE,0,1,6,nil)
+	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.filter),tp,LOCATION_REST,0,1,6,nil)
 	if #g==0 then return end
 	Duel.HintSelection(g,true)
 	Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)

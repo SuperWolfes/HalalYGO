@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsSpell()
+	return c:IsFaceup() and c:IsActional()
 end
 function s.filter(c)
 	return c:IsFaceup() and c:IsCanTurnSet()

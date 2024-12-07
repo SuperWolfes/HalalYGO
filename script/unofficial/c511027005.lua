@@ -1,5 +1,5 @@
 --ハイドライブ・エレメンツ
---Hydradrive Element
+--Hyddendrive Element
 --Scripted by Playmaker 772211, fixed by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_GRAVE) and r & REASON_LINK == REASON_LINK
+	return e:GetHandler():IsLocation(LOCATION_REST) and r & REASON_LINK == REASON_LINK
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() and chkc:IsAttributeExcept(e:GetLabel()) end

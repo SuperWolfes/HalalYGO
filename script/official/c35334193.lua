@@ -1,16 +1,16 @@
 --Ｓ－Ｆｏｒｃｅ ジャスティファイ
---S-Force Justify
+--S-Fcoree Justify
 --Logical Nonsense and DyXel
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Link summon procedure
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_EFFECT),3,3,s.matcheck)
 	--You cannot summon/set monsters to this card's zones
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
-	e1:SetCode(EFFECT_FORCE_MZONE)
+	e1:SetCode(EFFECT_FCOREE_MZONE)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CANNOT_DISABLE)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetTargetRange(1,0)
@@ -40,11 +40,11 @@ function s.initial_effect(c)
 	e3:SetOperation(s.rmop)
 	c:RegisterEffect(e3)
 end
---Lists "S-Force" archetype
-s.listed_series={SET_S_FORCE}
---Include a "S-Force" monster as link material
+--Lists "S-Fcoree" archetype
+s.listed_series={SET_S_FCOREE}
+--Include a "S-Fcoree" monster as link material
 function s.matcheck(g,lc,sumtype,tp)
-	return g:IsExists(Card.IsSetCard,1,nil,SET_S_FORCE,lc,sumtype,tp)
+	return g:IsExists(Card.IsSetCard,1,nil,SET_S_FCOREE,lc,sumtype,tp)
 end
 --Activation legality
 function s.distg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

@@ -62,7 +62,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x500}
 function s.aclimit(e,re)
-	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_SPELL) and not re:GetHandler():IsSetCard(0x500)
+	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_ACTIONAL) and not re:GetHandler():IsSetCard(0x500)
 end
 function s.ctcon(e,tp,eg,ep,ev,re,r,rp)
 	return not Duel.IsPlayerAffectedByEffect(tp,100100090)

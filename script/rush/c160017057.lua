@@ -1,5 +1,5 @@
 --ダークマター・フォース
---Dark Matter Force
+--Dark Matter Fcoree
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)

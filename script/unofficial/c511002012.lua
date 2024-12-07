@@ -1,4 +1,4 @@
---Tenma, the Rising Star Amidst the Heavens
+--Tenma, the Rising Star Amidst the Spectrums
 local s,id=GetID()
 function s.initial_effect(c)
 	--summon with no tribute

@@ -47,7 +47,7 @@ function s.actlimit(e,re,rp)
 	return re:IsActiveType(TYPE_MONSTER) and not rc:IsSetCard(0xba)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_GRAVE)
+	return e:GetHandler():IsLocation(LOCATION_REST)
 end
 function s.spfilter(c,e,tp)
 	return c:IsSetCard(0xba) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

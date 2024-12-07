@@ -1,5 +1,5 @@
 -- ＺＷ－天風精霊翼 (Anime)
---ZW－Sylphid Wing (Anime)
+--ZW－Sipid Wing (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--equip
@@ -30,7 +30,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if c:IsLocation(LOCATION_MZONE) and c:IsFacedown() then return end
 	local tc=Duel.GetFirstTarget()
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 or tc:GetControler()~=tp or tc:IsFacedown() or not tc:IsRelateToEffect(e) then
-		Duel.SendtoGrave(c,REASON_EFFECT)
+		Duel.SendtoRest(c,REASON_EFFECT)
 		return
 	end
 	Duel.Equip(tp,c,tc,true)

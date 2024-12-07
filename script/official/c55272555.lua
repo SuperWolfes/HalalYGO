@@ -30,7 +30,7 @@ s.listed_series={SET_MEMENTO}
 function s.spcon(e,c)
 	if c==nil then return true end
 	local tp=e:GetHandlerPlayer()
-	local g=Duel.GetMatchingGroup(aux.AND(Card.IsMonster,Card.IsSetCard),tp,LOCATION_GRAVE,0,nil,SET_MEMENTO)
+	local g=Duel.GetMatchingGroup(aux.AND(Card.IsMonster,Card.IsSetCard),tp,LOCATION_REST,0,nil,SET_MEMENTO)
 	return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and #g>=3 and g:GetClassCount(Card.GetCode)>=3
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)

@@ -5,11 +5,11 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Pendulum Summon
 	Pendulum.AddProcedure(c)
-	--Banish non-monster cards sent to the GY
+	--Banish non-monster cards sent to the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_SET_AVAILABLE+EFFECT_FLAG_IGNORE_RANGE+EFFECT_FLAG_IGNORE_IMMUNE)
-	e1:SetCode(EFFECT_TO_GRAVE_REDIRECT)
+	e1:SetCode(EFFECT_TO_REST_REDIRECT)
 	e1:SetRange(LOCATION_PZONE)
 	e1:SetTargetRange(LOCATION_ALL,LOCATION_ALL)
 	e1:SetValue(LOCATION_REMOVED)
@@ -26,7 +26,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
-	--Send monster to the GY
+	--Send monster to the RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
@@ -47,7 +47,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return not e:GetHandler():IsPublic() end
 end
 function s.cfilter(c)
-	return c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
+	return c:IsType(TYPE_PENDULUM) and not c:IsUnliked()
 		and (c:IsFaceup() or not c:IsLocation(LOCATION_PZONE))
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -79,7 +79,7 @@ function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 	g:Match(aux.NOT(Card.IsImmuneToEffect),nil,e)
 	for tc in g:Iter() do
 		tc:RegisterFlagEffect(id,RESET_EVENT|RESETS_STANDARD|RESET_PHASE|PHASE_END,0,1)
-		--Send to GY
+		--Send to RP
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		e1:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
@@ -97,5 +97,5 @@ function s.con(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetLabelObject()
-	Duel.SendtoGrave(tc,REASON_EFFECT)
+	Duel.SendtoRest(tc,REASON_EFFECT)
 end

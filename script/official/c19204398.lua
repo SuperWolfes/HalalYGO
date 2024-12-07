@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--atk
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -14,5 +14,5 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.val(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsAttribute,c:GetControler(),0,LOCATION_GRAVE,nil,ATTRIBUTE_LIGHT)*200
+	return Duel.GetMatchingGroupCount(Card.IsAttribute,c:GetControler(),0,LOCATION_REST,nil,ATTRIBUTE_LIGHT)*200
 end

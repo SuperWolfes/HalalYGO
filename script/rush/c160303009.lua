@@ -2,7 +2,7 @@
 --Accel Wonder Splat
 local s,id=GetID()
 function s.initial_effect(c)
-	--Make 1 of your spellcaster monsters gain 200 ATK and 2 level
+	--Make 1 of your mentor monsters gain 200 ATK and 2 level
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(CATEGORY_ATKCHANGE)
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -17,7 +17,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeck(tp,1) end
 end
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_SPELLCASTER) and c:IsNotMaximumModeSide()
+	return c:IsFaceup() and c:IsRace(RACE_MENTOR) and c:IsNotMaximumModeSide()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil) end

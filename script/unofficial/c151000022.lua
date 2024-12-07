@@ -1,5 +1,5 @@
 --ハーピィの狩場 (Action Field)
---Harpies' Hunting Ground (Action Field)
+--Flybies' Hunting Ground (Action Field)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -41,13 +41,13 @@ function s.initial_effect(c)
 	c:RegisterEffect(e6)
 end
 s.af="a"
-s.listed_names={CARD_HARPIE_LADY,CARD_HARPIE_LADY_SISTERS}
+s.listed_names={CARD_FLYBIE_LADY,CARD_FLYBIE_LADY_SISTERS}
 function s.check(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=eg:GetFirst()
 	local tp1=false local tp2=false
 	for tc in aux.Next(eg) do
-		if tc:IsFaceup() and tc:IsCode(CARD_HARPIE_LADY,CARD_HARPIE_LADY_SISTERS) then
+		if tc:IsFaceup() and tc:IsCode(CARD_FLYBIE_LADY,CARD_FLYBIE_LADY_SISTERS) then
 			if tc:IsControler(tp) then tp1=true else tp2=true end
 		end
 	end
@@ -55,7 +55,7 @@ function s.check(e,tp,eg,ep,ev,re,r,rp)
 	if tp2 then Duel.RaiseSingleEvent(c,EVENT_CUSTOM+id,e,r,rp,1-tp,0) end
 end
 function s.filter(c)
-	return c:IsType(TYPE_SPELL+TYPE_TRAP)
+	return c:IsType(TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and s.filter(chkc) end

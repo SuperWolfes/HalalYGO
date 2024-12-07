@@ -69,7 +69,7 @@ end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return (r&REASON_FUSION)==REASON_FUSION and c:IsPreviousLocation(LOCATION_ONFIELD+LOCATION_HAND)
-		and c:IsLocation(LOCATION_GRAVE+LOCATION_REMOVED) and c:IsFaceup()
+		and c:IsLocation(LOCATION_REST+LOCATION_REMOVED) and c:IsFaceup()
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

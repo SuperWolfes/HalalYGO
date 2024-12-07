@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_TODECK+CATEGORY_DRAW)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCode(EVENT_FREE_CHAIN)
 	e2:SetCondition(aux.exccon)
 	e2:SetCost(aux.bfgcost)
@@ -52,7 +52,7 @@ function s.drfilter(c,e)
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	local g=Duel.GetMatchingGroup(s.drfilter,tp,LOCATION_GRAVE,0,e:GetHandler(),e)
+	local g=Duel.GetMatchingGroup(s.drfilter,tp,LOCATION_REST,0,e:GetHandler(),e)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,1)
 		and g:GetClassCount(Card.GetCode)>4 end
 	local sg=aux.SelectUnselectGroup(g,e,tp,5,5,aux.dncheck,1,tp,HINTMSG_TODECK)

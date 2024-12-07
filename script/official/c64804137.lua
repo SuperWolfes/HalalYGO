@@ -3,7 +3,7 @@
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion Materials
 	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_TRICKSTAR),2)
 	--Your "Trickstar" Link Monsters that point to this card gain 1000 ATK
@@ -47,7 +47,7 @@ function s.linkatktg(e,c)
 end
 function s.thfilter(c,tp)
 	return c:IsSetCard(SET_TRICKSTAR) and c:IsAbleToHand()
-		and not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,c:GetCode()),tp,LOCATION_ONFIELD|LOCATION_GRAVE,0,1,nil)
+		and not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,c:GetCode()),tp,LOCATION_ONFIELD|LOCATION_REST,0,1,nil)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil,tp) end

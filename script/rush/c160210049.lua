@@ -1,3 +1,3 @@
 --レジェンド・マジシャン
---Legend Magician
+--Legend Mentor
 Duel.LoadCardScriptAlias(160206005)

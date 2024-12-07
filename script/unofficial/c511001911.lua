@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c)
-	return c:IsSpell() and c:IsType(TYPE_CONTINUOUS) and c:IsFacedown() 
+	return c:IsActional() and c:IsType(TYPE_CONTINUOUS) and c:IsFacedown() 
 		and c:CheckActivateEffect(false,false,false)~=nil
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -33,7 +33,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_CARD,0,tc:GetCode())
 		tc:CreateEffectRelation(te)
 		if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 then
-			tc:CancelToGrave(false)
+			tc:CancelToRest(false)
 		end
 		if co then co(te,tp,eg,ep,ev,re,r,rp,1) end
 		if tg then tg(te,tp,eg,ep,ev,re,r,rp,1) end

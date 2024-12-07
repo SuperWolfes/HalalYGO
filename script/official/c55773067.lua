@@ -4,7 +4,7 @@ function s.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
-	e1:SetCategory(CATEGORY_TOGRAVE+CATEGORY_HANDES)
+	e1:SetCategory(CATEGORY_TOREST+CATEGORY_HANDES)
 	e1:SetCode(EVENT_DRAW)
 	e1:SetCondition(s.condition)
 	e1:SetTarget(s.target)
@@ -23,10 +23,10 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local sg=eg:Filter(Card.IsRelateToEffect,nil,e)
 	if #sg==0 then
 	elseif #sg==1 then
-		Duel.SendtoGrave(sg,REASON_EFFECT+REASON_DISCARD)
+		Duel.SendtoRest(sg,REASON_EFFECT+REASON_DISCARD)
 	else
-		Duel.Hint(HINT_SELECTMSG,ep,HINTMSG_TOGRAVE)
+		Duel.Hint(HINT_SELECTMSG,ep,HINTMSG_TOREST)
 		local dg=sg:Select(ep,1,1,nil)
-		Duel.SendtoGrave(dg,REASON_EFFECT+REASON_DISCARD)
+		Duel.SendtoRest(dg,REASON_EFFECT+REASON_DISCARD)
 	end
 end

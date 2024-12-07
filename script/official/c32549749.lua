@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	-- Make a monster gain 800 ATK or Set or Equip a card from the GY
+	-- Make a monster gain 800 ATK or Set or Equip a card from the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.eqcfilter(c,tp)
-	return c:IsEquipSpell() and (c:IsSSetable()
+	return c:IsEquipActional() and (c:IsSSetable()
 		or Duel.IsExistingMatchingCard(s.eqtfilter,tp,LOCATION_MZONE,0,1,nil,c,tp))
 end
 function s.eqtfilter(c,ec,tp)
@@ -27,7 +27,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local b1=Duel.IsExistingTarget(Card.IsFaceup,tp,LOCATION_MZONE,0,1,nil) and (phase~=PHASE_DAMAGE or not Duel.IsDamageCalculated())
 	local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
 	if e:GetHandler():IsLocation(LOCATION_HAND) then ft=ft-1 end
-	local b2=ft>0 and Duel.IsExistingTarget(s.eqcfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,nil,tp) and phase~=PHASE_DAMAGE
+	local b2=ft>0 and Duel.IsExistingTarget(s.eqcfilter,tp,LOCATION_REST,LOCATION_REST,1,nil,tp) and phase~=PHASE_DAMAGE
 	if chk==0 then return b1 or b2 end
 	local op=Duel.SelectEffect(tp,
 		{b1,aux.Stringid(id,1)},
@@ -41,8 +41,8 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	else
 		e:SetCategory(CATEGORY_EQUIP)
 		Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,3))
-		local tc=Duel.SelectTarget(tp,s.eqcfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,1,nil,tp):GetFirst()
-		Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,tc,1,tc:GetControler(),0)
+		local tc=Duel.SelectTarget(tp,s.eqcfilter,tp,LOCATION_REST,LOCATION_REST,1,1,nil,tp):GetFirst()
+		Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,tc,1,tc:GetControler(),0)
 		Duel.SetPossibleOperationInfo(0,CATEGORY_EQUIP,tc,1,tp,0)
 	end
 end

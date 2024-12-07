@@ -23,14 +23,14 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ct=Duel.GetFieldGroupCount(tp,0,LOCATION_MZONE)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>=ct
-		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,ct,nil,e,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,ct,nil,e,tp) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ct=Duel.GetFieldGroupCount(tp,0,LOCATION_MZONE)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<ct then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,LOCATION_GRAVE,0,ct,ct,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.filter),tp,LOCATION_REST,0,ct,ct,nil,e,tp)
 	if #g==ct then
 		Duel.HintSelection(g)
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)

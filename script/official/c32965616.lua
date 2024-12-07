@@ -1,7 +1,7 @@
 --精霊神后 ドリアード
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--cannot special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -44,11 +44,11 @@ function s.spcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<1 then return end
-	local g=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_GRAVE,LOCATION_GRAVE,nil)
+	local g=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_REST,LOCATION_REST,nil)
 	return g:GetClassCount(Card.GetAttribute)>=6
 end
 function s.atkval(e,c)
-	local g=Duel.GetMatchingGroup(Card.IsMonster,e:GetHandlerPlayer(),LOCATION_GRAVE,LOCATION_GRAVE,nil)
+	local g=Duel.GetMatchingGroup(Card.IsMonster,e:GetHandlerPlayer(),LOCATION_REST,LOCATION_REST,nil)
 	return g:GetClassCount(Card.GetAttribute)*500
 end
 function s.discon(e,tp,eg,ep,ev,re,r,rp)
@@ -58,9 +58,9 @@ function s.discfilter(c)
 	return c:IsMonster() and c:IsAbleToRemoveAsCost()
 end
 function s.discost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.discfilter,tp,LOCATION_GRAVE,0,3,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.discfilter,tp,LOCATION_REST,0,3,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.discfilter,tp,LOCATION_GRAVE,0,3,3,nil)
+	local g=Duel.SelectMatchingCard(tp,s.discfilter,tp,LOCATION_REST,0,3,3,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.distg(e,tp,eg,ep,ev,re,r,rp,chk)

@@ -4,7 +4,7 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Shuffle up to 2 monsters from opponent's GY into the deck
+	--Shuffle up to 2 monsters from opponent's RP into the deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TODECK)
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -19,24 +19,24 @@ function s.costfilter(c)
 	return c:IsLevelBelow(5) and c:IsRace(RACE_DRAGON) and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_REST,0,1,nil) end
 end
 function s.shfilter(c)
 	return c:IsMonster() and c:IsAbleToDeck()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.shfilter,tp,0,LOCATION_GRAVE,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,0,tp,LOCATION_GRAVE)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.shfilter,tp,0,LOCATION_REST,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,0,tp,LOCATION_REST)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local tg=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local tg=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.HintSelection(tg)
 	if Duel.SendtoDeck(tg,nil,SEQ_DECKBOTTOM,REASON_COST)==1 then
 		--Effect
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-		local g=Duel.SelectMatchingCard(tp,s.shfilter,tp,0,LOCATION_GRAVE,1,2,nil)
+		local g=Duel.SelectMatchingCard(tp,s.shfilter,tp,0,LOCATION_REST,1,2,nil)
 		Duel.HintSelection(g)
 		if #g>0 then
 			Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)

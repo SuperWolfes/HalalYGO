@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion Summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,CARD_IMAGINARY_ACTOR,160204008)
 	--Fhange the position of your opponent's monster
 	local e1=Effect.CreateEffect(c)

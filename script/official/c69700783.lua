@@ -20,10 +20,10 @@ function s.tgfilter1(c,tp)
 		and Duel.IsExistingMatchingCard(s.tgfilter2,tp,LOCATION_DECK,0,1,nil,lv)
 end
 function s.tgfilter2(c,lv)
-	return c:IsMonster() and c:IsSetCard(0x8e) and not c:IsLevel(lv) and c:IsAbleToGrave()
+	return c:IsMonster() and c:IsSetCard(0x8e) and not c:IsLevel(lv) and c:IsAbleToRest()
 end
 function s.spfilter1(c,tp)
-	return c:IsAbleToGrave() and Duel.GetMZoneCount(tp,c)>0
+	return c:IsAbleToRest() and Duel.GetMZoneCount(tp,c)>0
 end
 function s.spfilter2(c,e,tp)
 	return c:IsSetCard(0x8e) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -33,12 +33,12 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		if e:GetLabel()==0 then
 			return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.tgfilter1(chkc,tp)
 		else
-			return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.spfilter2(chkc,e,tp)
+			return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.spfilter2(chkc,e,tp)
 		end
 	end
 	local b1=Duel.IsExistingTarget(s.tgfilter1,tp,LOCATION_MZONE,0,1,nil,tp)
 	local b2=Duel.IsExistingMatchingCard(s.spfilter1,tp,LOCATION_MZONE,0,1,nil,tp)
-		and Duel.IsExistingTarget(s.spfilter2,tp,LOCATION_GRAVE,0,1,nil,e,tp)
+		and Duel.IsExistingTarget(s.spfilter2,tp,LOCATION_REST,0,1,nil,e,tp)
 	if chk==0 then return b1 or b2 end
 	local op=0
 	if b1 and b2 then
@@ -50,24 +50,24 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	end
 	e:SetLabel(op)
 	if op==0 then
-		e:SetCategory(CATEGORY_TOGRAVE)
+		e:SetCategory(CATEGORY_TOREST)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 		Duel.SelectTarget(tp,s.tgfilter1,tp,LOCATION_MZONE,0,1,1,nil,tp)
-		Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+		Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 	else
-		e:SetCategory(CATEGORY_TOGRAVE+CATEGORY_SPECIAL_SUMMON)
+		e:SetCategory(CATEGORY_TOREST+CATEGORY_SPECIAL_SUMMON)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local g=Duel.SelectTarget(tp,s.spfilter2,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
-		Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_MZONE)
+		local g=Duel.SelectTarget(tp,s.spfilter2,tp,LOCATION_REST,0,1,1,nil,e,tp)
+		Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_MZONE)
 		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 	end
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetLabel()==0 then
 		local tc=Duel.GetFirstTarget()
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=Duel.SelectMatchingCard(tp,s.tgfilter2,tp,LOCATION_DECK,0,1,1,nil,tc:GetLevel())
-		if #g>0 and Duel.SendtoGrave(g,REASON_EFFECT)~=0 and g:GetFirst():IsLocation(LOCATION_GRAVE)
+		if #g>0 and Duel.SendtoRest(g,REASON_EFFECT)~=0 and g:GetFirst():IsLocation(LOCATION_REST)
 			and tc:IsRelateToEffect(e) and tc:IsFaceup() then
 			local lv=g:GetFirst():GetLevel()
 			local e1=Effect.CreateEffect(e:GetHandler())
@@ -79,9 +79,9 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		end
 	else
 		local tc=Duel.GetFirstTarget()
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=Duel.SelectMatchingCard(tp,s.spfilter1,tp,LOCATION_MZONE,0,1,1,nil,tp)
-		if #g>0 and Duel.SendtoGrave(g,REASON_EFFECT)~=0 and g:GetFirst():IsLocation(LOCATION_GRAVE)
+		if #g>0 and Duel.SendtoRest(g,REASON_EFFECT)~=0 and g:GetFirst():IsLocation(LOCATION_REST)
 			and tc:IsRelateToEffect(e) then
 			Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 		end

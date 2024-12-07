@@ -1,12 +1,12 @@
 --闇の支配者－ゾーク
---Dark Master - Zorc
+--Dark Master - Zcore
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
-	--dice
+	c:EnableAwakeLimit()
+	--suffice
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_DESTROY+CATEGORY_DICE)
+	e1:SetCategory(CATEGORY_DESTROY+CATEGORY_SUFFICE)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1)
@@ -14,11 +14,11 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 end
-s.roll_dice=true
+s.roll_suffice=true
 s.listed_names={96420087}
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,0,tp,1)
+	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,1)
 	local g1=Duel.GetMatchingGroup(aux.TRUE,tp,0,LOCATION_MZONE,nil)
 	local g2=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_MZONE,0,nil)
 	if #g1~=0 and #g2~=0 then
@@ -27,7 +27,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local d=Duel.TossDice(tp,1)
+	local d=Duel.TossSuffice(tp,1)
 	if d==1 or d==2 then
 		local g=Duel.GetMatchingGroup(aux.TRUE,tp,0,LOCATION_MZONE,nil)
 		Duel.Destroy(g,REASON_EFFECT)

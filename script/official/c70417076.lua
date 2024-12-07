@@ -1,5 +1,5 @@
 --Ｅｍウィンド・サッカー
---Performage Wind Drainer
+--Performanced Wind Drainer
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -36,7 +36,7 @@ function s.initial_effect(c)
 	e3:SetTarget(s.selflvtg)
 	e3:SetOperation(s.selflvop)
 	c:RegisterEffect(e3)
-	--Change the Levels of all Level 4 "Performage" monsters you control to 5
+	--Change the Levels of all Level 4 "Performanced" monsters you control to 5
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,3))
 	e4:SetCategory(CATEGORY_LVCHANGE)
@@ -47,9 +47,9 @@ function s.initial_effect(c)
 	e4:SetOperation(s.lvop)
 	c:RegisterEffect(e4)
 end
-s.listed_series={SET_PERFORMAGE}
+s.listed_series={SET_PERFORMANCED}
 function s.tgfilter(c)
-	return c:IsSetCard(SET_PERFORMAGE) and c:IsType(TYPE_PENDULUM) and c:IsFaceup() and (c:IsLevelAbove(2) or c:GetScale()>0)
+	return c:IsSetCard(SET_PERFORMANCED) and c:IsType(TYPE_PENDULUM) and c:IsFaceup() and (c:IsLevelAbove(2) or c:GetScale()>0)
 end
 function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then
@@ -102,7 +102,7 @@ function s.effop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(nil,tp,0,LOCATION_MZONE,1,nil)
-		or Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,SET_PERFORMAGE),tp,LOCATION_MZONE,LOCATION_MZONE,1,nil)
+		or Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,SET_PERFORMANCED),tp,LOCATION_MZONE,LOCATION_MZONE,1,nil)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -114,14 +114,14 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)>0 then
 		c:RegisterFlagEffect(id,RESET_EVENT|RESETS_STANDARD,EFFECT_FLAG_CLIENT_HINT,1,0,aux.Stringid(id,6))
-		--Cannot Special Summon, except "Performage" monsters while it is in the Monster Zone
+		--Cannot Special Summon, except "Performanced" monsters while it is in the Monster Zone
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_FIELD)
 		e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CANNOT_DISABLE)
 		e1:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
 		e1:SetRange(LOCATION_MZONE)
 		e1:SetAbsoluteRange(tp,1,0)
-		e1:SetTarget(function(e,c) return not c:IsSetCard(SET_PERFORMAGE) end)
+		e1:SetTarget(function(e,c) return not c:IsSetCard(SET_PERFORMANCED) end)
 		e1:SetReset(RESET_EVENT|RESETS_STANDARD)
 		c:RegisterEffect(e1,true)
 	end
@@ -144,7 +144,7 @@ function s.selflvop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.lvfilter(c)
-	return c:IsLevel(4) and c:IsSetCard(SET_PERFORMAGE) and c:IsFaceup()
+	return c:IsLevel(4) and c:IsSetCard(SET_PERFORMANCED) and c:IsFaceup()
 end
 function s.lvtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(s.lvfilter,tp,LOCATION_MZONE,0,nil)

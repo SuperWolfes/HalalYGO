@@ -12,8 +12,8 @@ function s.ffilter(c)
 	return c:IsAttribute(ATTRIBUTE_LIGHT|ATTRIBUTE_DARK) and c:IsRace(RACE_CYBERSE)
 end
 function s.mfilter(c)
-	if c:IsLocation(LOCATION_MZONE) then return c:IsFaceup() and c:IsAbleToGrave() end
-	return c:IsLocation(LOCATION_HAND) and c:IsAbleToGrave()
+	if c:IsLocation(LOCATION_MZONE) then return c:IsFaceup() and c:IsAbleToRest() end
+	return c:IsLocation(LOCATION_HAND) and c:IsAbleToRest()
 end
 function s.checkmat(tp,sg,fc)
 	return sg:GetClassCount(Card.GetLocation)==1
@@ -22,7 +22,7 @@ function s.fextra(e,tp,mg)
 	return Duel.GetMatchingGroup(s.mfilter,tp,LOCATION_ONFIELD+LOCATION_HAND,0,nil),s.checkmat
 end
 function s.cfilter(c)
-	return c:IsLocation(LOCATION_GRAVE) and c:IsOriginalCodeRule(160211009)
+	return c:IsLocation(LOCATION_REST) and c:IsOriginalCodeRule(160211009)
 end
 function s.stage2(e,tc,tp,sg,chk)
 	if chk==0 then

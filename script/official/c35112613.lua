@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,id)
 	e2:SetCost(s.thcost)
 	e2:SetTarget(s.thtg)
@@ -23,9 +23,9 @@ function s.initial_effect(c)
 end
 s.listed_series={0x55}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.CheckLPCost(tp,2000) and e:GetHandler():IsAbleToGraveAsCost() end
+	if chk==0 then return Duel.CheckLPCost(tp,2000) and e:GetHandler():IsAbleToRestAsCost() end
 	Duel.PayLPCost(tp,2000)
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
+	Duel.SendtoRest(e:GetHandler(),REASON_COST)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local e1=Effect.CreateEffect(e:GetHandler())
@@ -42,13 +42,13 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e2,tp)
 end
 function s.cfilter(c)
-	return c:IsSetCard(0x55) and c:IsMonster() and c:GetCode()~=id and c:IsAbleToGraveAsCost()
+	return c:IsSetCard(0x55) and c:IsMonster() and c:GetCode()~=id and c:IsAbleToRestAsCost()
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsAbleToHand() end

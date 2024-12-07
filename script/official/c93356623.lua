@@ -1,5 +1,5 @@
 --魔弾－クロス・ドミネーター
---Magical Musket - Cross-Domination
+--Mentoral Musket - Cross-Domination
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

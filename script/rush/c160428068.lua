@@ -2,7 +2,7 @@
 --Master's Cure
 local s,id=GetID()
 function s.initial_effect(c)
-	--When your opponent normal/special summons a monster, take damage and shuffle monsters from the GY
+	--When your opponent normal/special summons a monster, take damage and shuffle monsters from the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_RECOVER+CATEGORY_ATKCHANGE)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)

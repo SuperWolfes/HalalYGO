@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
 	c:AddMustBeFusionSummoned()
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,79979666,21844576)
 	--Can attack directly
 	local e1=Effect.CreateEffect(c)

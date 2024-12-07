@@ -16,13 +16,13 @@ end
 s.listed_series={SET_ANCIENT_GEAR}
 s.listed_names={CARD_POLYMERIZATION}
 function s.cfilter(c)
-	return c:IsCode(CARD_POLYMERIZATION) and c:IsAbleToGraveAsCost()
+	return c:IsCode(CARD_POLYMERIZATION) and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.matfilter(c,e,tp,fc,se)
 	return c:IsMonster() and c:IsCanBeFusionMaterial(fc) and (not se or not c:IsImmuneToEffect(se)) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
@@ -32,11 +32,11 @@ function s.spfilter(c,e,tp,rg,se)
 	local minc=c.min_material_count
 	local maxc=c.max_material_count
 	if not minc then return false end
-	local mg2=Duel.GetMatchingGroup(s.matfilter,tp,LOCATION_DECK+LOCATION_EXTRA+LOCATION_GRAVE,0,nil,e,tp,c,se)
+	local mg2=Duel.GetMatchingGroup(s.matfilter,tp,LOCATION_DECK+LOCATION_EXTRA+LOCATION_REST,0,nil,e,tp,c,se)
 	if Duel.IsPlayerAffectedByEffect(tp,69832741) then
 		local maxc2=math.min(#rg,maxc)
 		local mft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then maxc2=math.min(ft,1) mft=math.min(mft,1) end
+		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then maxc2=math.min(ft,1) mft=math.min(mft,1) end
 		return minc>0 and maxc2>=minc and aux.SelectUnselectGroup(rg,e,tp,minc,maxc2,s.resconse1(c,mft,mg2,se),0)
 	else
 		local ft=Duel.GetUsableMZoneCount(tp)
@@ -45,7 +45,7 @@ function s.spfilter(c,e,tp,rg,se)
 		local ect=aux.CheckSummonGate(tp)
 		if ect then exft=math.min(exft,ect-1) end
 		maxc=math.min(maxc,ft)
-		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=math.min(ft,1) mft=math.min(mft,1) exft=math.min(exft,1) end
+		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=math.min(ft,1) mft=math.min(mft,1) exft=math.min(exft,1) end
 		return minc>0 and maxc>=minc and aux.SelectUnselectGroup(rg,e,tp,minc,maxc,s.rescon1(c,mft,exft,ft,mg2,se),0)
 	end
 end
@@ -86,7 +86,7 @@ function s.rmfilter(c)
 	return c:IsSummonLocation(LOCATION_EXTRA) and c:IsPreviousLocation(LOCATION_MZONE) and c:IsAbleToRemove() and aux.SpElimFilter(c,true)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	local rg=Duel.GetMatchingGroup(s.rmfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil)
+	local rg=Duel.GetMatchingGroup(s.rmfilter,tp,LOCATION_MZONE+LOCATION_REST,0,nil)
 	if chk==0 then return Duel.GetUsableMZoneCount(tp)>-1 and Duel.IsPlayerCanSpecialSummonCount(tp,2)
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,rg) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
@@ -97,16 +97,16 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local fc=Duel.GetFirstTarget()
-	local rg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.rmfilter),tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil)
+	local rg=Duel.GetMatchingGroup(aux.RestValleyFilter(s.rmfilter),tp,LOCATION_MZONE+LOCATION_REST,0,nil)
 	if not fc or not fc:IsRelateToEffect(e) or not s.spfilter(fc,e,tp,rg,e) then return end
 	local minc=fc.min_material_count
 	local maxc=fc.max_material_count
 	local rsg
-	local mg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.matfilter),tp,LOCATION_DECK+LOCATION_EXTRA+LOCATION_GRAVE,0,nil,e,tp,fc,e)
+	local mg=Duel.GetMatchingGroup(aux.RestValleyFilter(s.matfilter),tp,LOCATION_DECK+LOCATION_EXTRA+LOCATION_REST,0,nil,e,tp,fc,e)
 	if Duel.IsPlayerAffectedByEffect(tp,69832741) then
 		local maxc2=math.min(#rg,maxc)
 		local mft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then maxc2=math.min(ft,1) mft=math.min(mft,1) end
+		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then maxc2=math.min(ft,1) mft=math.min(mft,1) end
 		if minc<=0 or maxc2<minc then return end
 		rsg=aux.SelectUnselectGroup(rg,e,tp,minc,maxc2,s.resconse1(c,mft,mg,e),1,tp,HINTMSG_REMOVE,s.resconse1(c,mft,mg,e))
 		if #rsg<=0 then return end
@@ -117,7 +117,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local ect=aux.CheckSummonGate(tp)
 		if ect then exft=math.min(exft,ect-1) end
 		maxc=math.min(maxc,ft)
-		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=math.min(ft,1) mft=math.min(mft,1) exft=math.min(exft,1) end
+		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=math.min(ft,1) mft=math.min(mft,1) exft=math.min(exft,1) end
 		if minc<=0 or maxc<minc then return end
 		rsg=aux.SelectUnselectGroup(rg,e,tp,minc,maxc,s.rescon1(fc,mft,exft,ft,mg,e),1,tp,HINTMSG_REMOVE,s.rescon1(fc,mft,exft,ft,mg,e))
 		if #rsg<=0 then return end
@@ -128,7 +128,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local exft=Duel.GetLocationCountFromEx(tp)
 	local ect=aux.CheckSummonGate(tp)
 	if ect then exft=math.min(exft,ect-1) end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then mft=math.min(mft,1) exft=math.min(exft,1) end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then mft=math.min(mft,1) exft=math.min(exft,1) end
 	mg:Sub(rsg)
 	local matg=aux.SelectUnselectGroup(mg,e,tp,ct,ct,s.rescon2(fc,mft,exft),1,tp,HINTMSG_SPSUMMON)
 	if Duel.SpecialSummon(matg,0,tp,tp,false,false,POS_FACEUP) > 0 then
@@ -142,7 +142,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 	Duel.BreakEffect()
 	fc:SetMaterial(matg)
-	Duel.SendtoGrave(matg,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
+	Duel.SendtoRest(matg,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
 	Duel.BreakEffect()
 	Duel.SpecialSummon(fc,SUMMON_TYPE_FUSION,tp,tp,false,false,POS_FACEUP)
 end

@@ -1,5 +1,5 @@
 --アルカナフォースⅦ－THE CHARIOT (Anime)
---Arcana Force VII - The Chariot (Anime)
+--Arcana Fcoree VII - The Chariot (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--coin

@@ -4,8 +4,8 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
-	c:EnableReviveLimit()
-	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_ZOMBIE),2,2)
+	c:EnableAwakeLimit()
+	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_TOXIC),2,2)
 	--special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -35,7 +35,7 @@ function s.initial_effect(c)
 	e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e3:SetCode(EFFECT_ADD_EXTRA_TRIBUTE)
 	e3:SetTargetRange(0,LOCATION_MZONE)
-	e3:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_ZOMBIE))
+	e3:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_TOXIC))
 	e3:SetValue(POS_FACEUP)
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_GRANT)
@@ -49,11 +49,11 @@ function s.spfilter(c,e,tp)
 	return c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE,1-tp)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(1-tp) and s.spfilter(chkc,e,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(1-tp) and s.spfilter(chkc,e,tp) end
 	if chk==0 then return Duel.GetLocationCount(1-tp,LOCATION_MZONE,tp)>0
-		and Duel.IsExistingTarget(s.spfilter,tp,0,LOCATION_GRAVE,1,nil,e,tp) end
+		and Duel.IsExistingTarget(s.spfilter,tp,0,LOCATION_REST,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.spfilter,tp,0,LOCATION_GRAVE,1,1,nil,e,tp)
+	local g=Duel.SelectTarget(tp,s.spfilter,tp,0,LOCATION_REST,1,1,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
@@ -62,16 +62,16 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_CHANGE_RACE)
-		e1:SetValue(RACE_ZOMBIE)
+		e1:SetValue(RACE_TOXIC)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		tc:RegisterEffect(e1)
 	end
 	Duel.SpecialSummonComplete()
 end
 function s.drfilter(c)
-	return ((c:IsLocation(LOCATION_MZONE) and c:IsRace(RACE_ZOMBIE)) 
-		or (not c:IsLocation(LOCATION_MZONE) and c:GetPreviousRaceOnField()==RACE_ZOMBIE)) 
-		and c:IsSummonLocation(LOCATION_GRAVE)
+	return ((c:IsLocation(LOCATION_MZONE) and c:IsRace(RACE_TOXIC)) 
+		or (not c:IsLocation(LOCATION_MZONE) and c:GetPreviousRaceOnField()==RACE_TOXIC)) 
+		and c:IsSummonLocation(LOCATION_REST)
 end
 function s.drcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.drfilter,1,e:GetHandler())

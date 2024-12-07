@@ -18,7 +18,7 @@ function s.initial_effect(c)
 end
 s.listed_series={SET_FUSION}
 function s.cpfilter(c)
-	return c:IsSetCard(SET_FUSION) and (c:IsNormalSpell() or c:IsQuickPlaySpell()) and c:IsAbleToRemove()
+	return c:IsSetCard(SET_FUSION) and (c:IsNormalActional() or c:IsQuickPlayActional()) and c:IsAbleToRemove()
 		and c:CheckActivateEffect(true,true,false)~=nil
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -27,9 +27,9 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		local tg=te:GetTarget()
 		return tg(e,tp,eg,ep,ev,re,r,rp,0,chkc)
 	end
-	if chk==0 then return Duel.IsExistingTarget(s.cpfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,nil) end
+	if chk==0 then return Duel.IsExistingTarget(s.cpfilter,tp,LOCATION_REST,LOCATION_REST,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local tc=Duel.SelectTarget(tp,s.cpfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,1,nil):GetFirst()
+	local tc=Duel.SelectTarget(tp,s.cpfilter,tp,LOCATION_REST,LOCATION_REST,1,1,nil):GetFirst()
 	e:SetLabelObject(tc)
 	local te=tc:CheckActivateEffect(true,true,false)
 	e:SetProperty(EFFECT_FLAG_CARD_TARGET|te:GetProperty())

@@ -50,12 +50,12 @@ function s.tdcon(e,tp,eg,ep,ev,re,r,rp)
 		and bc:IsRelateToBattle() and bc:IsControler(1-tp) and bc==Duel.GetAttacker()
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetFieldGroup(tp,0,LOCATION_ONFIELD|LOCATION_GRAVE|LOCATION_HAND)
+	local g=Duel.GetFieldGroup(tp,0,LOCATION_ONFIELD|LOCATION_REST|LOCATION_HAND)
 	if chk==0 then return #g>7 end
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,#g-7,0,0)
 end
 function s.tdop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetFieldGroup(tp,0,LOCATION_ONFIELD|LOCATION_GRAVE|LOCATION_HAND)
+	local g=Duel.GetFieldGroup(tp,0,LOCATION_ONFIELD|LOCATION_REST|LOCATION_HAND)
 	if #g>7 then
 		local ct=#g-7
 		Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TODECK)
@@ -71,13 +71,13 @@ function s.thfilter(c)
 	return c:IsSetCard(SET_URSARCTIC) and c:IsMonster() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_OPSELECTED,0,aux.Stringid(id,2))
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
 	local tc=g:GetFirst()
 	if tc then
 		Duel.SendtoHand(tc,nil,REASON_EFFECT)
@@ -107,7 +107,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.spcfilter,tp,LOCATION_MZONE,0,nil)
-	local rg=aux.SelectUnselectGroup(g,e,tp,2,2,s.spcheck,1,tp,HINTMSG_TOGRAVE,s.spcheck)
+	local rg=aux.SelectUnselectGroup(g,e,tp,2,2,s.spcheck,1,tp,HINTMSG_TOREST,s.spcheck)
 	if #rg~=2 then return end
 	local sg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_EXTRA,0,nil,e,tp,rg)
 	if Duel.Release(rg,REASON_EFFECT)==2 then

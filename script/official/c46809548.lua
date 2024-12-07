@@ -1,5 +1,5 @@
 --機巧牙－御神尊真神
---Gizmek Makami, the Ferocious Fanged Fortress
+--Gizmek Magabi, the Ferocious Fanged Fortress
 --scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)

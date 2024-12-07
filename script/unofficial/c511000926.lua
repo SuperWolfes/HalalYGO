@@ -20,14 +20,14 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and Duel.IsExistingTarget(s.ecfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,nil) end
+		and Duel.IsExistingTarget(s.ecfilter,tp,LOCATION_REST,LOCATION_REST,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,0))
-	local g=Duel.SelectTarget(tp,s.ecfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.ecfilter,tp,LOCATION_REST,LOCATION_REST,1,1,nil)
 	local ec=g:GetFirst()
 	e:SetLabelObject(ec)
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,1))
 	Duel.SelectTarget(tp,s.tcfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,ec:GetEquipTarget(),ec)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,ec,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,ec,1,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then return end

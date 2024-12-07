@@ -1,5 +1,5 @@
 --開運ミラクルストーン (VG)
---Miracle Stone (VG)
+--Pulse Stone (VG)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

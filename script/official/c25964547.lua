@@ -15,7 +15,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_DREAM_MIRROR_JOY,CARD_DREAM_MIRROR_TERROR}
 function s.filter(c,tp)
-	return c:IsFieldSpell() and c:IsCode(CARD_DREAM_MIRROR_JOY,CARD_DREAM_MIRROR_TERROR)
+	return c:IsFieldActional() and c:IsCode(CARD_DREAM_MIRROR_JOY,CARD_DREAM_MIRROR_TERROR)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_DECK|LOCATION_HAND,0,nil)
@@ -37,7 +37,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		local tc=cs[p+1]
 		local fc=Duel.GetFieldCard(p,LOCATION_FZONE,0)
 		if fc then
-			Duel.SendtoGrave(fc,REASON_RULE)
+			Duel.SendtoRest(fc,REASON_RULE)
 			Duel.BreakEffect()
 		end
 		Duel.MoveToField(tc,tp,p,LOCATION_FZONE,POS_FACEUP,true)

@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WATER),2,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--immune
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -63,7 +63,7 @@ function s.indescond(e,tp,eg,ep,ev,re,r,rp)
 	return at and at:IsControler(tp) and at:IsFaceup() and at:IsSetCard(0x12b) and lg:IsContains(at)
 end
 function s.costfilter(c)
-	return c:IsSetCard(0x12b) and c:IsMonster() and c:IsAbleToGraveAsCost()
+	return c:IsSetCard(0x12b) and c:IsMonster() and c:IsAbleToRestAsCost()
 end
 function s.indescost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil) end

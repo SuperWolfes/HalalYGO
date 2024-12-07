@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion Summon procedure
-        c:EnableReviveLimit()
+        c:EnableAwakeLimit()
 	Fusion.AddProcMixN(c,true,true,7573135,1,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_GLADIATOR_BEAST),2)
 	Fusion.AddContactProc(c,s.contactfilter,s.contactop,s.splimit)
 	--Special Summon 1 "Gladiator Beast" Fusion Monster from your Extra Deck 
@@ -107,13 +107,13 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 		if e:GetHandler():GetSequence()<5 then ft=ft+1 end
-		return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) and ft>1
+		return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) and ft>1
 			and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,0,2,nil,e,tp)
 	end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,LOCATION_DECK)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<2 then return end
 	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_DECK,0,nil,e,tp)
 	if #g>=2 then

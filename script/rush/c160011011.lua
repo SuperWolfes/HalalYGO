@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.tgfilter(c)
-	return c:IsSpell() and c:IsAbleToGraveAsCost()
+	return c:IsActional() and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_HAND,0,1,nil) end
@@ -33,9 +33,9 @@ function s.filter(c)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tg=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_HAND,0,1,1,nil)
-	if Duel.SendtoGrave(tg,REASON_COST)==0 then return end
+	if Duel.SendtoRest(tg,REASON_COST)==0 then return end
 	--Effect
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RTOHAND)
 	local tc=Duel.SelectMatchingCard(tp,s.thfilter,tp,0,LOCATION_SZONE,1,1,nil)

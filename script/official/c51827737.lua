@@ -15,10 +15,10 @@ function s.initial_effect(c)
 end
 s.listed_series={0x2}
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and chkc:IsSetCard(0x2) end
-	if chk==0 then return Duel.IsExistingTarget(Card.IsSetCard,tp,LOCATION_GRAVE,0,1,nil,0x2) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and chkc:IsSetCard(0x2) end
+	if chk==0 then return Duel.IsExistingTarget(Card.IsSetCard,tp,LOCATION_REST,0,1,nil,0x2) end
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,1))
-	Duel.SelectTarget(tp,Card.IsSetCard,tp,LOCATION_GRAVE,0,1,1,nil,0x2)
+	Duel.SelectTarget(tp,Card.IsSetCard,tp,LOCATION_REST,0,1,1,nil,0x2)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

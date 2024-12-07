@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	c:SetUniqueOnField(1,0,id)
 	--Link summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,s.matfilter,1,1)
 	--Cannot be used as Link Material
 	local e1=Effect.CreateEffect(c)

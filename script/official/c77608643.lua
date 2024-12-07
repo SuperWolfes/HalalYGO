@@ -28,7 +28,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0xc008}
 function s.filter(c,e,tp)
-	return c:IsLocation(LOCATION_GRAVE) and c:IsReason(REASON_BATTLE)
+	return c:IsLocation(LOCATION_REST) and c:IsReason(REASON_BATTLE)
 		and c:IsPreviousControler(tp) and c:IsSetCard(0xc008)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
@@ -46,7 +46,7 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp and e:GetHandler():GetFlagEffect(id)~=0
 end
 function s.spfilter(c,e,tp)
-	return c:IsLocation(LOCATION_GRAVE) and c:IsReason(REASON_BATTLE) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and c:IsCanBeEffectTarget(e)
+	return c:IsLocation(LOCATION_REST) and c:IsReason(REASON_BATTLE) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and c:IsCanBeEffectTarget(e)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return e:GetLabelObject():IsContains(chkc) and s.spfilter(chkc,e,tp) end

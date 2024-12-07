@@ -4,7 +4,7 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Search 1 "Holy Night" Spell/Trap when NS
+	--Search 1 "Holy Night" Actional/Trap when NS
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -14,13 +14,13 @@ function s.initial_effect(c)
 	e1:SetTarget(s.thtg)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
-	--Banish itself and Special Summon from GY
+	--Banish itself and Special Summon from RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCost(aux.bfgcost)
 	e2:SetTarget(s.sstg)
@@ -30,7 +30,7 @@ end
 s.listed_names={id}
 s.listed_series={0x15b}
 function s.thfilter(c)
-	return c:IsSetCard(0x15b) and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsSetCard(0x15b) and c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -48,13 +48,13 @@ function s.ssfilter(c,e,tp)
 	return c:IsSetCard(0x15b) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and not c:IsCode(id)
 end
 function s.sstg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.ssfilter(chkc,e,tp) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and s.ssfilter(chkc,e,tp) end
 	if chk==0 then
 		return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and
-		       Duel.IsExistingTarget(s.ssfilter,tp,LOCATION_GRAVE,0,1,e:GetHandler(),e,tp)
+		       Duel.IsExistingTarget(s.ssfilter,tp,LOCATION_REST,0,1,e:GetHandler(),e,tp)
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local tg=Duel.SelectTarget(tp,s.ssfilter,tp,LOCATION_GRAVE,0,1,1,e:GetHandler(),e,tp)
+	local tg=Duel.SelectTarget(tp,s.ssfilter,tp,LOCATION_REST,0,1,1,e:GetHandler(),e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,tg,1,0,0)
 end
 function s.ssop(e,tp,eg,ep,ev,re,r,rp)

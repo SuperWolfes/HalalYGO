@@ -52,6 +52,6 @@ function s.repop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(tp,0,LOCATION_HAND)
 	if #g>0 then
 		local sg=g:RandomSelect(1-tp,1)
-		Duel.SendtoGrave(sg,REASON_EFFECT|REASON_DISCARD)
+		Duel.SendtoRest(sg,REASON_EFFECT|REASON_DISCARD)
 	end
 end

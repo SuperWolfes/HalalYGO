@@ -1,6 +1,6 @@
 --N・アクア・ドルフィン
 --Neo Spacian Aqua Dolphin (Anime)
---By Astral
+--By Astellar
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

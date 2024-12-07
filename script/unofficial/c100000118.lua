@@ -14,13 +14,13 @@ function s.initial_effect(c)
 end
 s.listed_names={12482652,42941100,79335209}
 function s.costfilter(c)
-	return c:IsDiscardable() and c:IsAbleToGraveAsCost() and c:IsCode(12482652,42941100,79335209)
+	return c:IsDiscardable() and c:IsAbleToRestAsCost() and c:IsCode(12482652,42941100,79335209)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(s.costfilter,tp,LOCATION_HAND,0,nil)
 	if chk==0 then return aux.SelectUnselectGroup(g,e,tp,3,3,aux.dncheck,0) end
 	local cg=aux.SelectUnselectGroup(g,e,tp,3,3,aux.dncheck,1,tp,HINTMSG_DISCARD)
-	Duel.SendtoGrave(cg,REASON_COST+REASON_DISCARD)
+	Duel.SendtoRest(cg,REASON_COST+REASON_DISCARD)
 end
 function s.filter(c,e,tp)
 	return c:IsLevelBelow(4) and c:IsRace(RACE_MACHINE) and c:IsType(TYPE_UNION)
@@ -35,7 +35,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ft<=0 then return end
 	if ft>3 then ft=3 end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,ft,nil,e,tp)
 	local c=e:GetHandler()

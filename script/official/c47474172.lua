@@ -1,5 +1,5 @@
 --魔筒覗ベイオネーター
---Bayoneter the Magical Scope
+--Bayoneter the Mentoral Scope
 --scripted by Logical Nonsense
 --Substitute ID
 local s,id=GetID()

@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c)
-	return c:IsRace(RACE_SPELLCASTER) and c:IsAttribute(ATTRIBUTE_WIND)
+	return c:IsRace(RACE_MENTOR) and c:IsAttribute(ATTRIBUTE_WIND)
 end
 function s.filter(c,e)
 	return c:IsAbleToRemove() and (not e or c:IsCanBeEffectTarget(e))

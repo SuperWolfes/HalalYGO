@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	c:SetUniqueOnField(1,0,id)
 	Xyz.AddProcedure(c,nil,9,2,nil,nil,99)
 	--This card's original ATK/DEF become 1000 x its number of materials
@@ -56,7 +56,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTACH)
 		local tc=Duel.SelectMatchingCard(p,Card.IsCanBeXyzMaterial,p,LOCATION_HAND|LOCATION_ONFIELD,0,1,1,c,c,tp,REASON_EFFECT):GetFirst()
 		if tc then
-			tc:CancelToGrave()
+			tc:CancelToRest()
 			Duel.Overlay(c,tc,true)
 		end
 	end

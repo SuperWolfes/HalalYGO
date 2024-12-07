@@ -23,7 +23,7 @@ function s.sprescon(g,e,tp)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	local g=Duel.GetMatchingGroup(s.sptgfilter,tp,LOCATION_GRAVE,0,nil,e)
+	local g=Duel.GetMatchingGroup(s.sptgfilter,tp,LOCATION_REST,0,nil,e)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and aux.SelectUnselectGroup(g,e,tp,3,3,s.sprescon,0) end
 	local g=aux.SelectUnselectGroup(g,e,tp,3,3,s.sprescon,1,tp,HINTMSG_SPSUMMON)
@@ -48,7 +48,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if op==1 then
 		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 	elseif op==2 then
-		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+		if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 		if ft<#g then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 			g=g:Select(tp,ft,ft,nil)

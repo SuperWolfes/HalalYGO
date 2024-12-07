@@ -1,11 +1,11 @@
 --セレブローズ・ファビュラス・マジシャン
---Celeb Rose Fabulous Magician
+--Celeb Rose Fabulous Mentor
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
-	Fusion.AddProcMix(c,true,true,CARD_CELEB_ROSE_MAGICIAN,CARD_CELEB_ROSE_WITCH)
+	c:EnableAwakeLimit()
+	Fusion.AddProcMix(c,true,true,CARD_CELEB_ROSE_MENTOR,CARD_CELEB_ROSE_MINT)
 	--Destroy 1 face-up monster your opponent controls
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DESTROY)
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,nil) end
 end
 function s.filter(c)
 	return c:IsMonster() and c:IsFaceup() and not c:IsMaximumModeSide()
@@ -28,21 +28,21 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return #dg>0 end
 end
 function s.thfilter(c)
-	return c:IsEquipSpell() and c:IsAbleToHand()
+	return c:IsEquipActional() and c:IsAbleToHand()
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local tg=Duel.SelectMatchingCard(tp,Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,1,nil)
-	if Duel.SendtoGrave(tg,REASON_COST)==1 then
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	local tg=Duel.SelectMatchingCard(tp,Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,1,nil)
+	if Duel.SendtoRest(tg,REASON_COST)==1 then
 		local dg=Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_MZONE,nil)
 		if #dg>0 then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 			local sg=dg:Select(tp,1,1,nil)
 			sg=sg:AddMaximumCheck()
 			Duel.HintSelection(sg,true)
-			if Duel.Destroy(sg,REASON_EFFECT)>0 and Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.thfilter),tp,LOCATION_GRAVE,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+			if Duel.Destroy(sg,REASON_EFFECT)>0 and Duel.IsExistingMatchingCard(aux.RestValleyFilter(s.thfilter),tp,LOCATION_REST,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-				local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+				local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
 				if #g>0 then
 					Duel.BreakEffect()
 					Duel.HintSelection(g,true)

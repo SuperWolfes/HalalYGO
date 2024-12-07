@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_ROCK),s.matfilter)
 	--lizard check
 	Auxiliary.addLizardCheck(c)
@@ -39,7 +39,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_FOSSIL_FUSION}
 function s.matfilter(c,sc,st,tp)
-	return c:IsLevelAbove(7) and c:IsLocation(LOCATION_GRAVE) and c:IsControler(1-tp)
+	return c:IsLevelAbove(7) and c:IsLocation(LOCATION_REST) and c:IsControler(1-tp)
 end
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

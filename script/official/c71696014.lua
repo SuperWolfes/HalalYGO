@@ -1,9 +1,9 @@
 --マジシャンズ・ローブ
---Magician's Robe
+--Mentor's Robe
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special summon 1 "Dark Magician" from deck
+	--Special summon 1 "Dark Mentor" from deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -17,34 +17,34 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target1)
 	e1:SetOperation(s.operation1)
 	c:RegisterEffect(e1)
-	--Special summon itself from GY
+	--Special summon itself from RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e3:SetCode(EVENT_CHAINING)
 	e3:SetProperty(EFFECT_FLAG_DELAY)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetCountLimit(1,{id,1})
 	e3:SetCondition(s.condition2)
 	e3:SetTarget(s.target2)
 	e3:SetOperation(s.operation2)
 	c:RegisterEffect(e3)
 end
-s.listed_names={CARD_DARK_MAGICIAN}
+s.listed_names={CARD_DARK_MENTOR}
 
 function s.condition1(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()~=tp
 end
 function s.cfilter(c)
-	return c:IsSpellTrap() and c:IsDiscardable()
+	return c:IsActionalTrap() and c:IsDiscardable()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end
 	Duel.DiscardHand(tp,s.cfilter,1,1,REASON_COST+REASON_DISCARD)
 end
 function s.filter(c,e,tp)
-	return c:IsCode(CARD_DARK_MAGICIAN) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsCode(CARD_DARK_MENTOR) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
@@ -60,7 +60,7 @@ function s.operation1(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.condition2(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetTurnPlayer()~=tp and rp==tp and re:IsActiveType(TYPE_SPELL+TYPE_TRAP)
+	return Duel.GetTurnPlayer()~=tp and rp==tp and re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.target2(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

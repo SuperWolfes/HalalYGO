@@ -1,10 +1,10 @@
 --琰魔竜王 レッド・デーモン・カラミティ (Manga)
---Hot Red Dragon Archfiend King Calamity (Manga)
+--Hot Red Dragon Archtainted King Calamity (Manga)
 Duel.EnableUnofficialProc(PROC_CANNOT_BATTLE_INDES)
 local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Synchro.AddProcedure(c,nil,2,2,Synchro.NonTunerEx(Card.IsType,TYPE_SYNCHRO),1,1)
 	--damage
 	local e1=Effect.CreateEffect(c)
@@ -67,12 +67,12 @@ function s.filter(c,e,tp)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_REST,0,1,1,nil,e,tp)
 	if #g>0 and Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP) then
 		local ge=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
 		local tc=ge:GetFirst()

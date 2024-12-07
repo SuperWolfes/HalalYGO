@@ -1,10 +1,10 @@
 --享楽の堕天使
---Capricious Darklord
+--Capricious Darkwarden
 --Logical Nonsense
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Tribute summon 1 fairy monster, face-up, during the Main Phase
+	--Tribute summon 1 wanderer monster, face-up, during the Main Phase
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SUMMON)
@@ -17,13 +17,13 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sumtg)
 	e1:SetOperation(s.sumop)
 	c:RegisterEffect(e1)
-	--Opponent's monsters loses 500 ATK/DEF for each fairy on the field until end of the turn
+	--Opponent's monsters loses 500 ATK/DEF for each wanderer on the field until end of the turn
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_ATKCHANGE)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
-	e2:SetCode(EVENT_TO_GRAVE)
+	e2:SetCode(EVENT_TO_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetTarget(s.stattg)
 	e2:SetOperation(s.statop)
@@ -33,9 +33,9 @@ end
 function s.sumcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsMainPhase()
 end
-	--Check for Fairy monster to tribute summon
+	--Check for Wanderer monster to tribute summon
 function s.sumfilter(c)
-	return c:IsRace(RACE_FAIRY) and c:IsSummonable(true,nil,1)
+	return c:IsRace(RACE_WANDERER) and c:IsSummonable(true,nil,1)
 end
 	--Activation legality
 function s.sumtg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -43,7 +43,7 @@ function s.sumtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
 	Duel.SetOperationInfo(0,CATEGORY_SUMMON,nil,1,0,0)
 end
-	--Tribute summon 1 fairy monster, face-up, during the Main Phase
+	--Tribute summon 1 wanderer monster, face-up, during the Main Phase
 function s.sumop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SUMMON)
 	local g=Duel.SelectMatchingCard(tp,s.sumfilter,tp,LOCATION_HAND,0,1,1,nil)
@@ -55,12 +55,12 @@ end
 	--Activation legality
 function s.stattg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsFaceup,tp,0,LOCATION_MZONE,1,nil) 
-		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_FAIRY),tp,LOCATION_MZONE,LOCATION_MZONE,1,nil) end
+		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_WANDERER),tp,LOCATION_MZONE,LOCATION_MZONE,1,nil) end
 end
-	--Opponent's monsters loses 500 ATK/DEF for each fairy on the field until end of the turn
+	--Opponent's monsters loses 500 ATK/DEF for each wanderer on the field until end of the turn
 function s.statop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,0,LOCATION_MZONE,nil)
-	local ct=Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsRace,RACE_FAIRY),tp,LOCATION_MZONE,LOCATION_MZONE,nil)
+	local ct=Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsRace,RACE_WANDERER),tp,LOCATION_MZONE,LOCATION_MZONE,nil)
 	for tc in aux.Next(g) do
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)

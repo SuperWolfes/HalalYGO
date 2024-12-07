@@ -1,4 +1,4 @@
---Card from a Different Dimension
+--Card from a Same Dimension
 local s,id=GetID()
 function s.initial_effect(c)
 	--removed

@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Synchro Summon procedure
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	--Return 1 card on the field to the hand (Synchro Summon)
@@ -19,10 +19,10 @@ function s.initial_effect(c)
 	e1:SetTarget(s.thtg)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
-	--Return 1 card on the field to the hand (Special Summon from the GY)
+	--Return 1 card on the field to the hand (Special Summon from the RP)
 	local e2=e1:Clone()
 	e2:SetCountLimit(1,{id,1})
-	e2:SetCondition(function(e) return e:GetHandler():IsSummonLocation(LOCATION_GRAVE) end)
+	e2:SetCondition(function(e) return e:GetHandler():IsSummonLocation(LOCATION_REST) end)
 	c:RegisterEffect(e2)
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)

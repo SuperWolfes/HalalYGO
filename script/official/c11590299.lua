@@ -50,7 +50,7 @@ function s.excop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetDecktopGroup(tp,1):GetFirst()
 	if tc:IsAttribute(ATTRIBUTE_FIRE) and tc:IsRace(RACE_DRAGON) then
 		Duel.DisableShuffleCheck()
-		if Duel.SendtoGrave(tc,REASON_EFFECT|REASON_EXCAVATE)>0 then
+		if Duel.SendtoRest(tc,REASON_EFFECT|REASON_EXCAVATE)>0 then
 			local ct=Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsCode,id),tp,LOCATION_MZONE,0,nil)
 			e:GetHandler():UpdateAttack(ct*1000)
 		end

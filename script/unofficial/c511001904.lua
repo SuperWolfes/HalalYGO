@@ -1,4 +1,4 @@
---Amazoness Call
+--Amazonian Call
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -29,7 +29,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,1,0,0)
 end
 function s.mgfilter(c,e,tp,fusc)
-	return c:IsLocation(LOCATION_GRAVE) and c:GetReason()&0x40008==0x40008 
+	return c:IsLocation(LOCATION_REST) and c:GetReason()&0x40008==0x40008 
 		and c:GetReasonCard()==fusc and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
@@ -40,7 +40,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local mg1=mg:Filter(Card.IsControler,nil,tp)
 	local mg2=mg:Filter(Card.IsControler,nil,1-tp)
 	if Duel.SendtoDeck(tc,nil,0,REASON_EFFECT)>0 and sumtype&SUMMON_TYPE_FUSION==SUMMON_TYPE_FUSION and #mg>0
-		and mg:FilterCount(aux.NecroValleyFilter(s.mgfilter),nil,e,tp,tc)==#mg
+		and mg:FilterCount(aux.RestValleyFilter(s.mgfilter),nil,e,tp,tc)==#mg
 		and #mg1<=Duel.GetLocationCount(tp,LOCATION_MZONE) and #mg2<=Duel.GetLocationCount(1-tp,LOCATION_MZONE) then
 		Duel.BreakEffect()
 		Duel.SpecialSummon(mg1,0,tp,tp,false,false,POS_FACEUP)

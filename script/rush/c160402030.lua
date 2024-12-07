@@ -1,5 +1,5 @@
 --フュージョニック・リヴァイバーン
---Fusionic Revivern
+--Fusionic Awakern
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -35,15 +35,15 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.HasFlagEffect(tp,id)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,1) end
 	Duel.SetTargetPlayer(tp)
 	Duel.SetTargetParam(1)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,0,tp,LOCATION_GRAVE)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,0,tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,0,tp,LOCATION_REST)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,0,tp,LOCATION_REST)
 end
 function s.spfilter(c,e,tp)
 	return c:IsRace(RACE_HIGHDRAGON) and c:IsType(TYPE_FUSION) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP)
@@ -54,17 +54,17 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	--Requirement
-	if Duel.SendtoGrave(c,REASON_COST)==0 then return end
+	if Duel.SendtoRest(c,REASON_COST)==0 then return end
 	--Effect
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
 	Duel.Draw(p,d,REASON_EFFECT)
-	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_GRAVE,0,nil,e,tp)
+	local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,e,tp)
 	if #g>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local sg=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+		local sg=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp)
 		if #sg>0 then
 			Duel.BreakEffect()
-			local g2=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.thfilter),tp,LOCATION_GRAVE,0,nil)
+			local g2=Duel.GetMatchingGroup(aux.RestValleyFilter(s.thfilter),tp,LOCATION_REST,0,nil)
 			if Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)>0 and #g2>0 and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 				local sg=g2:Select(tp,1,1,nil)

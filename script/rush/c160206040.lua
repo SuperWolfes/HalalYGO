@@ -17,7 +17,7 @@ function s.initial_effect(c)
 end
 s.listed_names={1224927}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,1224927)
+	return Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,1224927)
 end
 function s.filter(c)
 	return c:IsMonster() and c:IsFaceup() and c:IsLevelBelow(8) and not c:IsMaximumModeSide()
@@ -26,7 +26,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local dg=Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_MZONE,nil)
 	if chk==0 then return #dg>0 end
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,dg,1,0,0)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
 end
 function s.thfilter(c)
 	return c:IsLegend() and c:IsAbleToHand()
@@ -38,9 +38,9 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		local sg=dg:Select(tp,1,1,nil)
 		sg=sg:AddMaximumCheck()
 		Duel.HintSelection(sg,true)
-		if Duel.Destroy(sg,REASON_EFFECT)>0 and Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.thfilter),tp,LOCATION_GRAVE,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+		if Duel.Destroy(sg,REASON_EFFECT)>0 and Duel.IsExistingMatchingCard(aux.RestValleyFilter(s.thfilter),tp,LOCATION_REST,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-			local tg=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+			local tg=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
 			if #tg>0 then
 				Duel.HintSelection(tg,true)
 				Duel.BreakEffect()

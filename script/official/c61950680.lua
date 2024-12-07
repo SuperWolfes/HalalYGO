@@ -16,10 +16,10 @@ function s.initial_effect(c)
 	e1:SetTarget(s.rmtg)
 	e1:SetOperation(s.rmop)
 	c:RegisterEffect(e1)
-	--Place 2 "Centur-Ion" monsters in the Spell/Trap Zone
+	--Place 2 "Centur-Ion" monsters in the Actional/Trap Zone
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_LEAVE_GRAVE)
+	e2:SetCategory(CATEGORY_LEAVE_REST)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
 	e2:SetCode(EVENT_DESTROYED)
@@ -60,20 +60,20 @@ function s.plcon(e,tp,eg,ep,ev,re,r,rp)
 		and c:IsPreviousLocation(LOCATION_ONFIELD) and c:IsPreviousPosition(POS_FACEDOWN)
 end
 function s.plfilter(c)
-	return c:IsSetCard(SET_CENTURION) and c:IsMonster() and not c:IsForbidden()
+	return c:IsSetCard(SET_CENTURION) and c:IsMonster() and not c:IsUnliked()
 		and (c:IsFaceup() or c:IsLocation(LOCATION_HAND|LOCATION_DECK))
 end
 function s.pltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		if Duel.GetLocationCount(tp,LOCATION_SZONE)<2 then return false end
-		local g=Duel.GetMatchingGroup(s.plfilter,tp,LOCATION_HAND|LOCATION_DECK|LOCATION_GRAVE|LOCATION_REMOVED,0,nil)
+		local g=Duel.GetMatchingGroup(s.plfilter,tp,LOCATION_HAND|LOCATION_DECK|LOCATION_REST|LOCATION_REMOVED,0,nil)
 		return aux.SelectUnselectGroup(g,e,tp,2,2,aux.dncheck,0)
 	end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_LEAVE_GRAVE,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_LEAVE_REST,nil,1,tp,LOCATION_REST)
 end
 function s.plop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<2 then return end
-	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.plfilter),tp,LOCATION_HAND|LOCATION_DECK|LOCATION_GRAVE|LOCATION_REMOVED,0,nil)
+	local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.plfilter),tp,LOCATION_HAND|LOCATION_DECK|LOCATION_REST|LOCATION_REMOVED,0,nil)
 	local tg=aux.SelectUnselectGroup(g,e,tp,2,2,aux.dncheck,1,tp,HINTMSG_TOFIELD)
 	if #tg~=2 then return end
 	local c=e:GetHandler()

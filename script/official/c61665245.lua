@@ -1,8 +1,8 @@
 --サモン・ソーサレス
---Summon Sorceress
+--Summon Scoreeress
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Link Summon Procedure
 	Link.AddProcedure(c,aux.NOT(aux.FilterBoolFunctionEx(Card.IsType,TYPE_TOKEN)),2,3,s.lcheck)
 	--Special Summon 1 monster from your hand in Defense Position, to your opponent's zone this card points to

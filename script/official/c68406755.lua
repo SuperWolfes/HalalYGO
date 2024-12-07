@@ -1,5 +1,5 @@
 --トラミッド・スフィンクス
---Triamid Sphinx
+--Triamid Drinx
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableUnsummonable()
@@ -74,7 +74,7 @@ function s.efcon(e)
 	return Duel.IsExistingMatchingCard(s.cfilter,e:GetHandlerPlayer(),LOCATION_ONFIELD,0,1,e:GetHandler())
 end
 function s.atkval(e,c)
-	local g=Duel.GetMatchingGroup(Card.IsType,c:GetControler(),LOCATION_GRAVE,0,nil,TYPE_FIELD)
+	local g=Duel.GetMatchingGroup(Card.IsType,c:GetControler(),LOCATION_REST,0,nil,TYPE_FIELD)
 	return g:GetClassCount(Card.GetCode)*500
 end
 function s.attg(e,c)

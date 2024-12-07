@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	--destroy&damage
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(26302522,1))
-	e2:SetCategory(CATEGORY_TOGRAVE+CATEGORY_DAMAGE)
+	e2:SetCategory(CATEGORY_TOREST+CATEGORY_DAMAGE)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e2:SetCode(EVENT_PHASE+PHASE_STANDBY)
 	e2:SetRange(LOCATION_SZONE)
@@ -34,14 +34,14 @@ end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local ct=Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,e:GetHandler(),1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,e:GetHandler(),1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,ct*500)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) then return end
 	local ct=Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)
-	if Duel.SendtoGrave(c,REASON_EFFECT)>0 then
+	if Duel.SendtoRest(c,REASON_EFFECT)>0 then
 		Duel.Damage(1-tp,ct*500,REASON_EFFECT)
 	end
 end

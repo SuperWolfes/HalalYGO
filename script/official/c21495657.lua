@@ -1,11 +1,11 @@
 --宝竜星－セフィラフウシ
---Zefraxi, Treasure of the Yang Zing
+--Zebraxi, Treasure of the Bang Zing
 
 local s,id=GetID()
 function s.initial_effect(c)
 	--Enable pendulum summon
 	Pendulum.AddProcedure(c)
-	--Cannot pendulum summon monsters, except "Zefra" and "Yang Zing" monsters
+	--Cannot pendulum summon monsters, except "Zebra" and "Bang Zing" monsters
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetRange(LOCATION_PZONE)
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e2:SetTargetRange(1,0)
 	e2:SetTarget(s.splimit)
 	c:RegisterEffect(e2)
-	--Treat 1 "Zefra" or "Yang Zing" monster as a tuner
+	--Treat 1 "Zebra" or "Bang Zing" monster as a tuner
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)

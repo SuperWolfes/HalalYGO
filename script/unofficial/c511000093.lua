@@ -1,4 +1,4 @@
---Speed Spell - Defense Buster
+--Speed Actional - Defense Buster
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

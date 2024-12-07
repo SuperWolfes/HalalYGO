@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Add 1 "Nouvelles" or "Recipe" card to your hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.thtg)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
-	--Special Summon 1 Level 6 "Nouvelles" Ritual Monster
+	--Special Summon 1 Level 6 "Nouvelles" Locked Monster
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_RELEASE+CATEGORY_SPECIAL_SUMMON)
@@ -54,7 +54,7 @@ function s.cfilter(c)
 	return c:IsAttackPos() and c:IsReleasableByEffect()
 end
 function s.spfilter(c,e,tp)
-	return c:IsSetCard(SET_NOUVELLES) and c:IsRitualMonster() and c:IsLevel(6)
+	return c:IsSetCard(SET_NOUVELLES) and c:IsLockedMonster() and c:IsLevel(6)
 		and c:IsCanBeSpecialSummoned(e,SUMMON_BY_NOUVELLES,tp,false,true)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

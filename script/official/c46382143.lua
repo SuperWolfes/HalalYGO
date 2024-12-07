@@ -1,5 +1,5 @@
 --ヌメロン・クリエイション
---Numeron Creation
+--Numeron Matching
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -35,7 +35,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp):GetFirst()
 	if tc and Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)>0 and c:IsRelateToEffect(e) then
 		Duel.BreakEffect()
-		c:CancelToGrave()
+		c:CancelToRest()
 		Duel.Overlay(tc,c)
 	end
 end

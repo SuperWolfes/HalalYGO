@@ -1,5 +1,5 @@
 --優麗なる霊鏡
---Necroquip Prism
+--Restquip Prism
 --Scripted by Naim
 
 local s,id=GetID()
@@ -17,23 +17,23 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c,e,tp)
-	return c:IsMonster() and c:IsLevelBelow(4) and not c:IsForbidden()
+	return c:IsMonster() and c:IsLevelBelow(4) and not c:IsUnliked()
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND,0,1,nil,e,tp,c:GetLevel())
 end
 function s.spfilter(c,e,tp,lv)
-	return c:IsMonster() and not c:IsForbidden() and c:IsLevelBelow(lv)
+	return c:IsMonster() and not c:IsUnliked() and c:IsLevelBelow(lv)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter(chkc,e,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter(chkc,e,tp) end
 	local ft1=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	local ft2=Duel.GetLocationCount(tp,LOCATION_SZONE)
 	if not e:GetHandler():IsLocation(LOCATION_SZONE) then ft2=ft2-1 end
-	if chk==0 then return ft1>0 and ft2>0 and Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
-	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+	if chk==0 then return ft1>0 and ft2>0 and Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil,e,tp) end
+	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil,e,tp)
 	e:SetLabel(g:GetFirst():GetLevel())
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND)
-	Duel.SetOperationInfo(0,CATEGORY_EQUIP,g,1,0,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_EQUIP,g,1,0,LOCATION_REST)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.GetFirstTarget()

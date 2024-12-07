@@ -14,13 +14,13 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 	Duel.AddCustomActivityCounter(id,ACTIVITY_ATTACK,s.counterfilter)
 end
-s.listed_names={CARD_DARK_MAGICIAN}
-s.dark_magician_list=true
+s.listed_names={CARD_DARK_MENTOR}
+s.dark_mentor_list=true
 function s.counterfilter(c)
-	return not c:IsCode(CARD_DARK_MAGICIAN)
+	return not c:IsCode(CARD_DARK_MENTOR)
 end
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsCode(CARD_DARK_MAGICIAN)
+	return c:IsFaceup() and c:IsCode(CARD_DARK_MENTOR)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return (Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()) 
@@ -32,13 +32,13 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_CANNOT_ATTACK_ANNOUNCE)
 	e1:SetProperty(EFFECT_FLAG_OATH+EFFECT_FLAG_IGNORE_IMMUNE)
-	e1:SetTarget(aux.TargetBoolFunction(Card.IsCode,CARD_DARK_MAGICIAN))
+	e1:SetTarget(aux.TargetBoolFunction(Card.IsCode,CARD_DARK_MENTOR))
 	e1:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.filter(c)
-	return c:IsFaceup() and not c:IsCode(CARD_DARK_MAGICIAN)
+	return c:IsFaceup() and not c:IsCode(CARD_DARK_MENTOR)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.filter(chkc) end

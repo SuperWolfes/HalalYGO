@@ -1,10 +1,10 @@
 --No.62 銀河眼の光子竜皇 (Anime)
 --Number 62: Galaxy-Eyes Prime Photon Dragon (Anime)
---scripted by TheOnePharaoh, MLD and Larry126
+--scripted by TheOnePhor, MLD and Larry126
 Duel.LoadCardScript("c31801517.lua")
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Xyz Summon Procedure
 	Xyz.AddProcedure(c,nil,8,2)
 	--Gains ATK while it battles
@@ -82,7 +82,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=e:GetLabel()
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e1:SetRange(LOCATION_EXTRA+LOCATION_REMOVED+LOCATION_GRAVE)
+	e1:SetRange(LOCATION_EXTRA+LOCATION_REMOVED+LOCATION_REST)
 	e1:SetCode(EVENT_PHASE+PHASE_STANDBY)
 	if Duel.IsPhase(PHASE_STANDBY) and Duel.IsTurnPlayer(tp) then
 		e1:SetLabel(-1)

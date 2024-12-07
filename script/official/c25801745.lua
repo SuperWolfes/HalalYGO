@@ -3,9 +3,9 @@
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	--Can be used as the entire requirement for the Ritual Summon of a LIGHT Warrior or Dragon Ritual Monster
-	Ritual.AddWholeLevelTribute(c,function(rit_c) return rit_c:IsAttribute(ATTRIBUTE_LIGHT) and rit_c:IsRace(RACE_WARRIOR|RACE_DRAGON) end)
-	--Place 1 "Voiceless Voice" Continuous Spell/Trap from your Deck face-up in your Spell & Trap Zone
+	--Can be used as the entire requirement for the Locked Summon of a LIGHT Warrior or Dragon Locked Monster
+	Locked.AddWholeLevelTribute(c,function(rit_c) return rit_c:IsAttribute(ATTRIBUTE_LIGHT) and rit_c:IsRace(RACE_WARRIOR|RACE_DRAGON) end)
+	--Place 1 "Voiceless Voice" Continuous Actional/Trap from your Deck face-up in your Actional & Trap Zone
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e3:SetProperty(EFFECT_FLAG_DELAY,EFFECT_FLAG2_CHECK_SIMULTANEOUS)
 	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetCountLimit(1,{id,1})
 	e3:SetCondition(s.spcon)
 	e3:SetTarget(s.sptg)
@@ -34,7 +34,7 @@ function s.initial_effect(c)
 end
 s.listed_series={SET_VOICELESS_VOICE}
 function s.plfilter(c,tp)
-	return c:IsSetCard(SET_VOICELESS_VOICE) and (c:IsContinuousSpell() or c:IsContinuousTrap()) and not c:IsForbidden() and c:CheckUniqueOnField(tp)
+	return c:IsSetCard(SET_VOICELESS_VOICE) and (c:IsContinuousActional() or c:IsContinuousTrap()) and not c:IsUnliked() and c:CheckUniqueOnField(tp)
 end
 function s.pltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
@@ -49,7 +49,7 @@ function s.plop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.cfilter(c,tp)
-	return c:IsRitualMonster() and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_WARRIOR|RACE_DRAGON) and c:IsFaceup()
+	return c:IsLockedMonster() and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_WARRIOR|RACE_DRAGON) and c:IsFaceup()
 		and c:IsControler(tp)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)

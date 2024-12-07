@@ -57,10 +57,10 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.flop(e,tp,eg,ep,ev,re,r,rp)
-	e:GetHandler():RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD_EXC_GRAVE,0,0)
+	e:GetHandler():RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD_EXC_REST,0,0)
 end
 function s.drcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_GRAVE) and e:GetHandler():IsReason(REASON_BATTLE)
+	return e:GetHandler():IsLocation(LOCATION_REST) and e:GetHandler():IsReason(REASON_BATTLE)
 		and e:GetHandler():GetFlagEffect(id)~=0
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)

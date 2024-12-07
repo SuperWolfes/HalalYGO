@@ -1,5 +1,5 @@
 --魔星のウルカ
---Uruka the Magic Star
+--Urutra the Ment Star
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -9,7 +9,7 @@ function s.initial_effect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_LEAVE_FIELD)
-	e1:SetRange(LOCATION_HAND|LOCATION_GRAVE)
+	e1:SetRange(LOCATION_HAND|LOCATION_REST)
 	e1:SetCountLimit(1,id)
 	e1:SetCondition(s.spcon)
 	e1:SetCost(aux.bfgcost)
@@ -31,7 +31,7 @@ end
 function s.cfilter(c,tp,rp)
 	return c:IsMonster() and c:IsPreviousControler(tp) and c:IsFaceup()
 		and c:IsReason(REASON_EFFECT) and rp==1-tp
-		and c:IsLocation(LOCATION_GRAVE|LOCATION_REMOVED)
+		and c:IsLocation(LOCATION_REST|LOCATION_REMOVED)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return #eg==1 and s.cfilter(eg:GetFirst(),tp,rp)
@@ -45,7 +45,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and (s.spfilter(tc,e,tp) or s.spfilter(c,e,tp)) end
 	local loc=LOCATION_REMOVED
-	if tc:IsLocation(LOCATION_GRAVE) then loc=loc|LOCATION_GRAVE end
+	if tc:IsLocation(LOCATION_REST) then loc=loc|LOCATION_REST end
 	c:CreateEffectRelation(e)
 	tc:CreateEffectRelation(e)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,loc)

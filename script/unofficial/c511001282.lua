@@ -1,4 +1,4 @@
---The Phantom Knights of Dusty Robe
+--The Illusion Knights of Dusty Robe
 local s,id=GetID()
 function s.initial_effect(c)
 	--change pos

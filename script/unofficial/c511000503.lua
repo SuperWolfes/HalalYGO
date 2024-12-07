@@ -17,7 +17,7 @@ function s.filter(c)
 	return c:IsLevelAbove(4) and c:IsSetCard(0x8)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,2,nil)
+	return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,2,nil)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,3) end

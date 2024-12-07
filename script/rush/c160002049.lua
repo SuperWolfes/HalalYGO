@@ -19,7 +19,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return at and at:IsControler(1-tp)
 end
 function s.cfilter(c)
-	return c:IsType(TYPE_NORMAL) and c:IsLevel(2) and c:IsAbleToGraveAsCost()
+	return c:IsType(TYPE_NORMAL) and c:IsLevel(2) and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,2,nil) end
@@ -33,9 +33,9 @@ function s.filter(c)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g1=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND,0,2,2,nil)
-	if g1 and Duel.SendtoGrave(g1,REASON_COST)==2 then
+	if g1 and Duel.SendtoRest(g1,REASON_COST)==2 then
 		--Effect
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 		local g2=Duel.SelectMatchingCard(tp,s.filter,tp,0,LOCATION_MZONE,1,2,nil)

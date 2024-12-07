@@ -5,8 +5,8 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Fusion summon procedure
 	Fusion.AddProcMixN(c,true,true,s.ffilter,2)
 	--If fusion summoned, destroy 1 card on the field
@@ -73,7 +73,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 end
 	--Card/effect activated by opponent
 function s.immcon(e,tp,eg,ep,ev,re,r,rp)
-	return ep==1-tp and re:IsActiveType(TYPE_MONSTER|TYPE_SPELL|TYPE_TRAP)
+	return ep==1-tp and re:IsActiveType(TYPE_MONSTER|TYPE_ACTIONAL|TYPE_TRAP)
 end
 	--Unaffected by same card type as the activated card/effect
 function s.immop(e,tp,eg,ep,ev,re,r,rp)
@@ -90,8 +90,8 @@ function s.immop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetValue(s.imfilter1)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE+RESET_PHASE+PHASE_END)
 		c:RegisterEffect(e1)
-	elseif rtype&TYPE_SPELL~=0 then
-		--Unaffected by opponent's spell effects
+	elseif rtype&TYPE_ACTIONAL~=0 then
+		--Unaffected by opponent's actional effects
 		local e1=Effect.CreateEffect(c)
 		e1:SetDescription(3112)
 		e1:SetType(EFFECT_TYPE_SINGLE)
@@ -119,7 +119,7 @@ function s.imfilter1(e,te)
 	return te:IsActiveType(TYPE_MONSTER) and te:GetOwnerPlayer()~=e:GetHandlerPlayer()
 end
 function s.imfilter2(e,te)
-	return te:IsActiveType(TYPE_SPELL) and te:GetOwnerPlayer()~=e:GetHandlerPlayer()
+	return te:IsActiveType(TYPE_ACTIONAL) and te:GetOwnerPlayer()~=e:GetHandlerPlayer()
 end
 function s.imfilter3(e,te)
 	return te:IsActiveType(TYPE_TRAP) and te:GetOwnerPlayer()~=e:GetHandlerPlayer()

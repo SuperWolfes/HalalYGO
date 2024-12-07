@@ -3,7 +3,7 @@
 -- Scripted by Satella
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	-- Xyz Summon procedure
 	Xyz.AddProcedure(c,nil,4,2)
 	-- Inflict 1000 damage to your opp
@@ -32,7 +32,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.cfilter(c,tp)
-	if not (c:IsPreviousControler(1-tp) and c:IsLocation(LOCATION_GRAVE)) then return false end
+	if not (c:IsPreviousControler(1-tp) and c:IsLocation(LOCATION_REST)) then return false end
 	local bc=c:GetReasonCard()
 	if bc:IsRelateToBattle() then
 		return bc:IsControler(tp) and bc:IsRace(RACE_DINOSAUR)

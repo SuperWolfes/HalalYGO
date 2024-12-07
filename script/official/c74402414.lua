@@ -1,5 +1,5 @@
 --マジック・クロニクル
---Spell Chronicle
+--Actional Chronicle
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(0x25)
@@ -59,11 +59,11 @@ end
 s.counter_place_list={0x25}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local hg=Duel.GetFieldGroup(tp,LOCATION_HAND,0):Filter(aux.TRUE,e:GetHandler())
-	if chk==0 then return #hg>0 and hg:FilterCount(Card.IsAbleToGraveAsCost,nil)==#hg end
-	Duel.SendtoGrave(hg,REASON_COST)
+	if chk==0 then return #hg>0 and hg:FilterCount(Card.IsAbleToRestAsCost,nil)==#hg end
+	Duel.SendtoRest(hg,REASON_COST)
 end
 function s.filter(c)
-	return c:IsSpellTrap() and c:IsAbleToRemove()
+	return c:IsActionalTrap() and c:IsAbleToRemove()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,5,nil) end
@@ -83,7 +83,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	e:GetLabelObject():Merge(rg)
 end
 function s.ctop(e,tp,eg,ep,ev,re,r,rp)
-	if rp==1-tp and re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_SPELL) and e:GetHandler():GetFlagEffect(1)>0 then
+	if rp==1-tp and re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_ACTIONAL) and e:GetHandler():GetFlagEffect(1)>0 then
 		e:GetHandler():AddCounter(0x25,1)
 	end
 end

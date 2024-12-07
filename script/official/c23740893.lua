@@ -1,5 +1,5 @@
 --妖仙獣 木魅
---Yosenju Kodam
+--Yosakhi Kodam
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCondition(s.sumcon)
 	e2:SetCost(aux.bfgcost)
 	e2:SetTarget(s.sumtg)

@@ -1,5 +1,5 @@
 -- 七皇覚醒
--- Seventh Force
+-- Seventh Fcoree
 -- Scripted by Satella
 local s,id=GetID()
 function s.initial_effect(c)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.listed_series={SET_NUMBER,SET_NUMBER_C,SET_BARIANS,SET_RANK_UP_MAGIC,SET_SEVENTH}
+s.listed_series={SET_NUMBER,SET_NUMBER_C,SET_BARIANS,SET_RANK_UP_MENT,SET_SEVENTH}
 s.listed_names={id}
 function s.cfilter(c)
 	return c:IsReason(REASON_BATTLE|REASON_EFFECT) and (c:IsPreviousLocation(LOCATION_MZONE) or (c:IsMonster() and not c:IsPreviousLocation(LOCATION_SZONE)))
@@ -32,16 +32,16 @@ function s.spfilter(c,e,tp,xc)
 		and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.targetfilter(chkc,e,tp) end
-	if chk==0 then return Duel.IsExistingTarget(s.targetfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and s.targetfilter(chkc,e,tp) end
+	if chk==0 then return Duel.IsExistingTarget(s.targetfilter,tp,LOCATION_REST,0,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local g=Duel.SelectTarget(tp,s.targetfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+	local g=Duel.SelectTarget(tp,s.targetfilter,tp,LOCATION_REST,0,1,1,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,tp,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,tp,0)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
 function s.thfilter(c)
-	return ((c:IsSetCard({SET_BARIANS,SET_SEVENTH}) and c:IsSpellTrap()) or (c:IsSetCard(SET_RANK_UP_MAGIC) and c:IsQuickPlaySpell()))
+	return ((c:IsSetCard({SET_BARIANS,SET_SEVENTH}) and c:IsActionalTrap()) or (c:IsSetCard(SET_RANK_UP_MENT) and c:IsQuickPlayActional()))
 		and c:IsAbleToHand() and not c:IsCode(id)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)

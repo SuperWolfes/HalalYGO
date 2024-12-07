@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,7,3)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--equip
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -70,14 +70,14 @@ function s.lpcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetLP(1-tp)~=100 and e:GetHandler():GetOverlayGroup():IsExists(Card.IsCode,1,nil,9161357)
 end
 function s.filter(c)
-	return c:GetFlagEffect(id)~=0 and c:IsSetCard(0x48) and c:IsFaceup() and c:IsAbleToGraveAsCost()
+	return c:GetFlagEffect(id)~=0 and c:IsSetCard(0x48) and c:IsFaceup() and c:IsAbleToRestAsCost()
 end
 function s.lpcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,3,REASON_COST)
 		and e:GetHandler():GetEquipGroup():IsExists(s.filter,1,nil) end
 	e:GetHandler():RemoveOverlayCard(tp,3,3,REASON_COST)
 	local g=e:GetHandler():GetEquipGroup():Filter(s.filter,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.lpop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SetLP(1-tp,100)

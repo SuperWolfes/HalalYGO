@@ -1,8 +1,8 @@
 --ＰＳＹフレームロード・Ω
---PSY-Framelord Omega
+--PSY-Framewatcher Omega
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--1 Tuner + 1+ non-Tuner monsters
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	--Banish this card and 1 random card from opponent's hand
@@ -19,10 +19,10 @@ function s.initial_effect(c)
 	e1:SetOperation(s.rmop)
 	c:RegisterEffect(e1)
 	c:RegisterFlagEffect(id,0,EFFECT_FLAG_UNCOPYABLE,0)
-	--Return 1 banished card to the GY
+	--Return 1 banished card to the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_TOGRAVE)
+	e2:SetCategory(CATEGORY_TOREST)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetCode(EVENT_PHASE+PHASE_STANDBY)
@@ -32,13 +32,13 @@ function s.initial_effect(c)
 	e2:SetTarget(s.tgtg)
 	e2:SetOperation(s.tgop)
 	c:RegisterEffect(e2)
-	--Shuffle this card and 1 other card from the GY to the Deck
+	--Shuffle this card and 1 other card from the RP to the Deck
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetCategory(CATEGORY_TODECK)
 	e3:SetType(EFFECT_TYPE_IGNITION)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetTarget(s.tdtg)
 	e3:SetOperation(s.tdop)
 	c:RegisterEffect(e3)
@@ -79,23 +79,23 @@ end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REMOVED) end
 	if chk==0 then return Duel.IsExistingTarget(nil,tp,LOCATION_REMOVED,LOCATION_REMOVED,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectTarget(tp,nil,tp,LOCATION_REMOVED,LOCATION_REMOVED,1,1,nil)
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,g,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,g,1,0,0)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.GetTargetCards(e)
 	if #tg>0 then
-		Duel.SendtoGrave(tg,REASON_EFFECT+REASON_RETURN)
+		Duel.SendtoRest(tg,REASON_EFFECT+REASON_RETURN)
 	end
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsAbleToDeck() and chkc~=c end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsAbleToDeck() and chkc~=c end
 	if chk==0 then return c:IsAbleToExtra()
-		and Duel.IsExistingTarget(Card.IsAbleToDeck,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,c) end
+		and Duel.IsExistingTarget(Card.IsAbleToDeck,tp,LOCATION_REST,LOCATION_REST,1,c) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectTarget(tp,Card.IsAbleToDeck,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,1,c)
+	local g=Duel.SelectTarget(tp,Card.IsAbleToDeck,tp,LOCATION_REST,LOCATION_REST,1,1,c)
 	g:AddCard(c)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,2,0,0)
 end

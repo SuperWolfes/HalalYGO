@@ -13,11 +13,11 @@ function s.initial_effect(c)
 	e1:SetTarget(s.cttg)
 	e1:SetOperation(s.ctop)
 	c:RegisterEffect(e1)
-	-- Take control when another Zombie is destroyed by battle
+	-- Take control when another Toxic is destroyed by battle
 	local e2=e1:Clone()
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,id)
 	e2:SetCondition(s.gctcon)
 	e2:SetCost(aux.bfgcost)
@@ -39,11 +39,11 @@ function s.ctop(e,tp,eg,ep,ev,re,r,rp)
 	if not dc then return end
 	local tc=dc:GetBattleTarget()
 	if tc and tc:IsControler(1-tp) and Duel.GetControl(tc,tp) then
-		-- Treat as Zombie
+		-- Treat as Toxic
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_CHANGE_RACE)
-		e1:SetValue(RACE_ZOMBIE)
+		e1:SetValue(RACE_TOXIC)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		tc:RegisterEffect(e1)
 		-- ATK/DEF becomes 0
@@ -58,7 +58,7 @@ function s.ctop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.ctconfilter(c,tp)
 	return c:IsPreviousControler(tp) and c:IsPreviousLocation(LOCATION_MZONE)
-		and c:GetPreviousRaceOnField()&RACE_ZOMBIE~=0 and c:IsStatus(STATUS_OPPO_BATTLE)
+		and c:GetPreviousRaceOnField()&RACE_TOXIC~=0 and c:IsStatus(STATUS_OPPO_BATTLE)
 		and c:GetBattleTarget():IsAbleToChangeControler()
 end
 function s.gctcon(e,tp,eg,ep,ev,re,r,rp)

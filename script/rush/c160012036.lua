@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,160012016,160012004)
 	--Decrease ATK
 	local e1=Effect.CreateEffect(c)
@@ -18,16 +18,16 @@ function s.initial_effect(c)
 end
 s.listed_names={160012016}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_ONFIELD,0,1,e:GetHandler())end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_ONFIELD,0,1,e:GetHandler())end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(aux.FilterMaximumSideFunctionEx(Card.IsFaceup),tp,0,LOCATION_MZONE,1,nil) end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToGraveAsCost,tp,LOCATION_ONFIELD,0,1,1,e:GetHandler())
-	if #g==0 or Duel.SendtoGrave(g,REASON_COST)==0 then return end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToRestAsCost,tp,LOCATION_ONFIELD,0,1,1,e:GetHandler())
+	if #g==0 or Duel.SendtoRest(g,REASON_COST)==0 then return end
 	--Effect
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATKDEF)
 	local sg=Duel.SelectMatchingCard(tp,aux.FilterMaximumSideFunctionEx(Card.IsFaceup),tp,0,LOCATION_MZONE,1,1,nil)
@@ -44,8 +44,8 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetCode(EFFECT_UPDATE_DEFENSE)
 	sg:GetFirst():RegisterEffect(e2)
 	local tc=g:GetFirst()
-	local dg=Duel.GetMatchingGroup(Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,nil)
-	if tc:GetBaseDefense()==200 and tc:IsType(TYPE_NORMAL) and tc:IsLocation(LOCATION_GRAVE) and #dg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+	local dg=Duel.GetMatchingGroup(Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,nil)
+	if tc:GetBaseDefense()==200 and tc:IsType(TYPE_NORMAL) and tc:IsLocation(LOCATION_REST) and #dg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 		local sg=dg:Select(tp,1,1,nil)
 		Duel.HintSelection(sg)

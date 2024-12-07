@@ -1,11 +1,11 @@
 --ダイスマイトガール・チロリ
---Dicemite Girl Chirori
+--Sufficemite Girl Chirori
 local s,id=GetID()
 function s.initial_effect(c)
-	--dice
+	--suffice
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_ATKCHANGE|CATEGORY_DICE)
+	e1:SetCategory(CATEGORY_ATKCHANGE|CATEGORY_SUFFICE)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1)
@@ -13,17 +13,17 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 end
-s.roll_dice=true
+s.roll_suffice=true
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,0,tp,1)
+	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,1)
 end
 function s.filter(c)
 	return c:IsFaceup() and not c:IsMaximumModeSide()
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local d=Duel.TossDice(tp,1)
+	local d=Duel.TossSuffice(tp,1)
 	local atk=0
 	if d==1 or d==2 then
 		atk=-1000

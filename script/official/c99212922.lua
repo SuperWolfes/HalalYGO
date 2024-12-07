@@ -24,5 +24,5 @@ function s.splimit(e,se,sp,st)
 	return se:GetHandler():IsSetCard(0x61)
 end
 function s.indes(e,c)
-	return c:IsType(TYPE_SPELL+TYPE_TRAP)
+	return c:IsType(TYPE_ACTIONAL+TYPE_TRAP)
 end

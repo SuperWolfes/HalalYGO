@@ -1,5 +1,5 @@
 --カオスのジャージ式
---Black Luster Jersey Ritual
+--Black Luster Jersey Locked
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(aux.FilterMaximumSideFunctionEx(Card.IsAbleToGraveAsCost),tp,LOCATION_MZONE,0,2,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(aux.FilterMaximumSideFunctionEx(Card.IsAbleToRestAsCost),tp,LOCATION_MZONE,0,2,nil) end
 end
 function s.filter(c,e,tp)
 	return c:IsLevel(8) and c:IsDefense(500) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -26,9 +26,9 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	-- requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local g=Duel.SelectMatchingCard(tp,aux.FilterMaximumSideFunctionEx(Card.IsAbleToGraveAsCost),tp,LOCATION_MZONE,0,2,2,nil)
-	local ct=Duel.SendtoGrave(g,REASON_COST)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	local g=Duel.SelectMatchingCard(tp,aux.FilterMaximumSideFunctionEx(Card.IsAbleToRestAsCost),tp,LOCATION_MZONE,0,2,2,nil)
+	local ct=Duel.SendtoRest(g,REASON_COST)
 	if ct>0 then
 		--Effect
 		if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end

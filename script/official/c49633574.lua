@@ -1,5 +1,5 @@
 --魔轟神オルトロ
---Fabled Oltro
+--Fablous Oltro
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon
@@ -25,17 +25,17 @@ function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 		if #g==0 then
 			res=false
 		elseif #g==1 then
-			res=Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,g:GetFirst())
-		else res=Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,nil) end
+			res=Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,g:GetFirst())
+		else res=Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,nil) end
 		return res
 	end
 	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_HAND,0,nil,e,tp)
 	local cg=nil
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	if #g==1 then
-		cg=Duel.SelectMatchingCard(tp,Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,1,g:GetFirst())
-	else cg=Duel.SelectMatchingCard(tp,Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,1,nil) end
-	Duel.SendtoGrave(cg,REASON_COST)
+		cg=Duel.SelectMatchingCard(tp,Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,1,g:GetFirst())
+	else cg=Duel.SelectMatchingCard(tp,Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,1,nil) end
+	Duel.SendtoRest(cg,REASON_COST)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)

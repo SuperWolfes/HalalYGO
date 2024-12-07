@@ -12,23 +12,23 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c)
-	return c:IsSpell() and c:IsAbleToGraveAsCost()
+	return c:IsActional() and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	Duel.DiscardHand(tp,s.cfilter,1,1,REASON_COST)
 end
 function s.tgfilter(c)
-	return c:IsSpell() and c:IsAbleToHand()
+	return c:IsActional() and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingTarget(s.tgfilter,tp,0,LOCATION_GRAVE,1,nil) end
+	if chk==0 then return Duel.IsExistingTarget(s.tgfilter,tp,0,LOCATION_REST,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,0,LOCATION_GRAVE,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,0,LOCATION_REST,1,1,nil)
 	if #g>0 then
 		local tc=g:GetFirst()
 		Duel.SendtoHand(tc,tp,REASON_EFFECT)

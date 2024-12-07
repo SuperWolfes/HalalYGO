@@ -1,4 +1,4 @@
---Destructive Fate
+--Destructive Bate
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
@@ -43,7 +43,7 @@ end
 function s.con(e,tp,eg,ep,ev,re,r,rp)
 	local ex,eg,et,cp,ct=Duel.GetOperationInfo(ev,CATEGORY_COIN)
 	if Duel.GetFlagEffect(tp,id)==0 or not (Duel.GetTurnPlayer()==tp or re:GetHandlerPlayer()==tp) then return false end
-	if ex and ((re:IsSpellEffect() and Duel.GetFlagEffect(tp,id+100)==0) or (re:IsMonsterEffect() and Duel.GetFlagEffect(tp,id+200)==0)) and ct>0 then
+	if ex and ((re:IsActionalEffect() and Duel.GetFlagEffect(tp,id+100)==0) or (re:IsMonsterEffect() and Duel.GetFlagEffect(tp,id+200)==0)) and ct>0 then
 		e:SetLabelObject(re)
 		return true
 	else return false end
@@ -69,7 +69,7 @@ function s.coincon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.coinop(e,tp,eg,ep,ev,re,r,rp)
 	local rc=e:GetLabelObject()
-	if rc:IsSpellEffect() then
+	if rc:IsActionalEffect() then
 		Duel.RegisterFlagEffect(tp,id+100,RESET_PHASE|PHASE_END,0,1)
 	elseif rc:IsMonsterEffect() then
 		Duel.RegisterFlagEffect(tp,id+200,RESET_PHASE|PHASE_END,0,1)

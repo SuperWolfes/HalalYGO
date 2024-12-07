@@ -66,7 +66,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e8:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		e8:SetCode(EVENT_EQUIP)
 		e8:SetRange(LOCATION_SZONE)
-		e8:SetOperation(s.resetop)
+		e8:SetOperation(s.revetop)
 		e8:SetReset(RESET_EVENT+RESETS_STANDARD)
 		c:RegisterEffect(e8)
 		local e9=Effect.CreateEffect(c)
@@ -81,7 +81,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e9:SetReset(RESET_EVENT+RESETS_STANDARD)
 		c:RegisterEffect(e9)
 	else
-		c:CancelToGrave(false)
+		c:CancelToRest(false)
 	end
 end
 function s.eqlimit(e,c)
@@ -96,7 +96,7 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 		c:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1)
 	end
 end
-function s.resetop(e,tp,eg,ep,ev,re,r,rp)
+function s.revetop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if eg:IsContains(c) then
 		c:ResetFlagEffect(id)

@@ -1,4 +1,4 @@
---Astral Shift
+--Astellar Shift
 --original script by Shad3
 local s,id=GetID()
 function s.initial_effect(c)

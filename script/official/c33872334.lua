@@ -1,5 +1,5 @@
 --フェニックス・ギア・ブレード
---Phoenix Gearblade
+--Bird Gearblade
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	e3:SetCategory(CATEGORY_TOHAND)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetProperty(EFFECT_FLAG_DELAY)
-	e3:SetCode(EVENT_TO_GRAVE)
+	e3:SetCode(EVENT_TO_REST)
 	e3:SetCountLimit(1,id)
 	e3:SetCondition(s.thcond)
 	e3:SetTarget(s.thtg)
@@ -42,8 +42,8 @@ function s.cfilter(c)
 end
 function s.extratkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGraveAsCost() and not Duel.HasFlagEffect(tp,id) end
-	Duel.SendtoGrave(c,REASON_COST)
+	if chk==0 then return c:IsAbleToRestAsCost() and not Duel.HasFlagEffect(tp,id) end
+	Duel.SendtoRest(c,REASON_COST)
 end
 function s.extratkop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.HasFlagEffect(tp,id) then return end

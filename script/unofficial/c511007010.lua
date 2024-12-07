@@ -1,4 +1,4 @@
---Buried Destiny
+--Buried Destrudic
 --coded by Lyris
 --fixed by MLD
 local s,id=GetID()
@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	end)
 end
 function s.checkop(e,tp,eg,ep,ev,re,r,rp)
-	if re and re:GetHandler() and re:GetHandler():IsSpell() then
+	if re and re:GetHandler() and re:GetHandler():IsActional() then
 		s[rp]:AddCard(re:GetHandler())
 	end
 end
@@ -33,13 +33,13 @@ function s.filter(c,tp)
 	return c:IsAbleToHand() and s[1-tp]:IsExists(s.cfilter,1,nil,c:GetCode(),1-tp)
 end
 function s.cfilter(c,code,tp)
-	return c:IsCode(code) and not (c:IsControler(tp) and c:IsLocation(LOCATION_GRAVE))
+	return c:IsCode(code) and not (c:IsControler(tp) and c:IsLocation(LOCATION_REST))
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter(chkc,tp) end
-	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter(chkc,tp) end
+	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil,tp)
+	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil,tp)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)

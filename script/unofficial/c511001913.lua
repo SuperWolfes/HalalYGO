@@ -18,7 +18,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() end
 	if chk==0 then 
 		local tg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_MZONE,0,e:GetHandler(),e)
-		local sg=Duel.GetMatchingGroup(Card.IsAbleToGraveAsCost,tp,LOCATION_ONFIELD,0,e:GetHandler())
+		local sg=Duel.GetMatchingGroup(Card.IsAbleToRestAsCost,tp,LOCATION_ONFIELD,0,e:GetHandler())
 		if #tg==#sg then
 			return #tg>1
 		else
@@ -26,15 +26,15 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		end
 	end
 	local tg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_MZONE,0,e:GetHandler(),e)
-	local sg=Duel.GetMatchingGroup(Card.IsAbleToGraveAsCost,tp,LOCATION_ONFIELD,0,e:GetHandler())
+	local sg=Duel.GetMatchingGroup(Card.IsAbleToRestAsCost,tp,LOCATION_ONFIELD,0,e:GetHandler())
 	tg:Merge(sg)
 	local max=math.floor(#tg/2)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 	local g=Duel.SelectTarget(tp,Card.IsFaceup,tp,LOCATION_MZONE,0,1,max,nil)
 	sg:Sub(g)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	sg=sg:Select(tp,#g,#g,nil)
-	Duel.SendtoGrave(sg,REASON_COST)
+	Duel.SendtoRest(sg,REASON_COST)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetTargetCards(e)

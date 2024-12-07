@@ -1,5 +1,5 @@
 --弓神レライエ
---Leraje the God of Archery
+--Leraje the Monster of Archery
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -25,12 +25,12 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_GRAVE,0,1,nil)
+	return Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_REST,0,1,nil)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not (c:IsRelateToEffect(e) and c:IsFaceup()) then return end
-	local ct=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_GRAVE,0,nil):GetClassCount(Card.GetRace)
+	local ct=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_REST,0,nil):GetClassCount(Card.GetRace)
 	if ct==0 then return end
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)

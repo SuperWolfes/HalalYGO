@@ -55,7 +55,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		c:RegisterEffect(e2)
 		Duel.RaiseSingleEvent(c,EVENT_CUSTOM+id,e,0,0,0,0,0)
 	else
-		c:CancelToGrave(false)
+		c:CancelToRest(false)
 	end
 end
 function s.eqlimit(e,c)

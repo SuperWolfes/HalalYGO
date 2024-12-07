@@ -63,7 +63,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_GRAVE) and r==REASON_SYNCHRO
+	return e:GetHandler():IsLocation(LOCATION_REST) and r==REASON_SYNCHRO
 end
 function s.thfilter(c,e,tp)
 	return c:IsSetCard(SET_SINFUL_SPOILS) and c:IsAbleToHand()

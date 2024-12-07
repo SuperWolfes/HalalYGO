@@ -3,7 +3,7 @@
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	-- "Cyber Falcon" + "Cyber Falcon"
 	Fusion.AddProcMix(c,true,true,30655537,30655537)
 	-- Gain LP

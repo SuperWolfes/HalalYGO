@@ -1,5 +1,5 @@
 --ミレニアム・アブソリューター
---Millennium Fiend Reflection
+--Mileon Tainted Reflection
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.indestg)
 	e1:SetValue(1)
 	c:RegisterEffect(e1)
-	--Place this card face-up in your Spell & Trap Zone as a Continuous Spell
+	--Place this card face-up in your Actional & Trap Zone as a Continuous Actional
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetType(EFFECT_TYPE_IGNITION)
@@ -30,7 +30,7 @@ function s.initial_effect(c)
 	e3:SetCode(EVENT_CHAINING)
 	e3:SetRange(LOCATION_SZONE)
 	e3:SetCountLimit(1,{id,1})
-	e3:SetCondition(function(e,tp,eg,ep,ev,re,r,rp) return rp==1-tp and e:GetHandler():IsContinuousSpell() end)
+	e3:SetCondition(function(e,tp,eg,ep,ev,re,r,rp) return rp==1-tp and e:GetHandler():IsContinuousActional() end)
 	e3:SetTarget(s.sptg)
 	e3:SetOperation(s.spop)
 	c:RegisterEffect(e3)
@@ -43,12 +43,12 @@ function s.plop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) or c:IsImmuneToEffect(e) then return end
 	if Duel.MoveToField(c,tp,tp,LOCATION_SZONE,POS_FACEUP,true) then
-		--Treated as a Continuous Spell
+		--Treated as a Continuous Actional
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 		e1:SetCode(EFFECT_CHANGE_TYPE)
-		e1:SetValue(TYPE_SPELL|TYPE_CONTINUOUS)
+		e1:SetValue(TYPE_ACTIONAL|TYPE_CONTINUOUS)
 		e1:SetReset(RESET_EVENT|RESETS_STANDARD&~RESET_TURN_SET)
 		c:RegisterEffect(e1)
 	end

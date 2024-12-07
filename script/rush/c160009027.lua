@@ -22,7 +22,7 @@ function s.cfilter(c)
 	return c:IsRace(RACE_MACHINE) and c:IsAttribute(ATTRIBUTE_EARTH) and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,3,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,3,nil) end
 end
 function s.filter(c,e,tp)
 	return c:IsRace(RACE_MACHINE) and c:IsAttribute(ATTRIBUTE_EARTH) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -35,7 +35,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local dg=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_GRAVE,0,3,3,nil)
+	local dg=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_REST,0,3,3,nil)
 	if #dg==0 then return end
 	Duel.HintSelection(dg,true)
 	if Duel.SendtoDeck(dg,nil,SEQ_DECKSHUFFLE,REASON_COST)~=3 then return end

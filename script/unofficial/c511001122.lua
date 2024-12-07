@@ -1,5 +1,5 @@
 --墓荒らし (Manga)
---Graverobber (Manga)
+--Resttactitian (Manga)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e2:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE+EFFECT_FLAG_SET_AVAILABLE+EFFECT_FLAG_CANNOT_DISABLE)
 	e2:SetCode(511001408)
 	c:RegisterEffect(e2)
-	--Trap Spell
+	--Trap Actional
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -79,11 +79,11 @@ function s.filter(c,e,tp,eg,ep,ev,re,r,rp,chain)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local chain=Duel.GetCurrentChain()
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(1-tp) and s.filter(chkc,e,tp,eg,ep,ev,re,r,rp,chain) end
-	if chk==0 then return Duel.IsExistingTarget(s.cfilter,tp,0,LOCATION_GRAVE,1,nil,e,tp,eg,ep,ev,re,r,rp,chain) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(1-tp) and s.filter(chkc,e,tp,eg,ep,ev,re,r,rp,chain) end
+	if chk==0 then return Duel.IsExistingTarget(s.cfilter,tp,0,LOCATION_REST,1,nil,e,tp,eg,ep,ev,re,r,rp,chain) end
 	chain=chain-1
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local tc=Duel.SelectTarget(tp,s.filter,tp,0,LOCATION_GRAVE,1,1,nil,e,tp,eg,ep,ev,re,r,rp,chain):GetFirst()
+	local tc=Duel.SelectTarget(tp,s.filter,tp,0,LOCATION_REST,1,1,nil,e,tp,eg,ep,ev,re,r,rp,chain):GetFirst()
 	if tc:IsMonster() then
 		if tc:IsCanBeSpecialSummoned(e,0,tp,false,false) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 then
 			Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,tc,1,0,0)			
@@ -91,7 +91,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 			Duel.SetOperationInfo(0,CATEGORY_TOHAND,tc,1,0,0)
 		end
 	else
-		Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,tc,1,0,0)
+		Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,tc,1,0,0)
 	end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
@@ -125,10 +125,10 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 				if Duel.IsDuelType(DUEL_1_FIELD) then
 					if fc then Duel.Destroy(fc,REASON_RULE) end
 					fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
-					if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
+					if fc and Duel.Destroy(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
 				else
 					fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
-					if fc and Duel.SendtoGrave(fc,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
+					if fc and Duel.SendtoRest(fc,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
 				end
 			end
 			Duel.MoveToField(tc,tp,tp,loc,POS_FACEUP,true)
@@ -138,7 +138,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			Duel.Hint(HINT_CARD,0,tc:GetOriginalCode())
 			tc:CreateEffectRelation(te)
 			if (tpe&(TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD))==0 and not tc:IsHasEffect(EFFECT_REMAIN_FIELD) then
-				tc:CancelToGrave(false)
+				tc:CancelToRest(false)
 			end
 			if te:GetCode()==EVENT_CHAINING then
 				local chain=Duel.GetCurrentChain()-1

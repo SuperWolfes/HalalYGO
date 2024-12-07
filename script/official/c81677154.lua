@@ -14,10 +14,10 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	-- Send cards from the Deck to the GY with a total Levels equal to or lower than the destroyed monster's original Level
+	-- Send cards from the Deck to the RP with a total Levels equal to or lower than the destroyed monster's original Level
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_DESTROY+CATEGORY_TOGRAVE)
+	e2:SetCategory(CATEGORY_DESTROY+CATEGORY_TOREST)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCountLimit(1,{id,1})
@@ -47,13 +47,13 @@ function s.desfilter(c,tp)
 		and Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil,c:GetOriginalLevel())
 end
 function s.tgfilter(c,lv)
-	return c:IsSetCard(SET_MEMENTO) and c:IsMonster() and c:IsLevelBelow(lv) and c:IsAbleToGrave()
+	return c:IsSetCard(SET_MEMENTO) and c:IsMonster() and c:IsLevelBelow(lv) and c:IsAbleToRest()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(s.desfilter,tp,LOCATION_MZONE,0,nil,tp)
 	if chk==0 then return #g>0 end
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,tp,LOCATION_MZONE)
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
 function s.rescon(lv)
 	return function(sg,e,tp,mg)
@@ -66,9 +66,9 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	if tc and Duel.Destroy(tc,REASON_EFFECT)>0 then
 		local lv=tc:GetOriginalLevel()
 		local g=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_DECK,0,nil,lv)
-		local sg=aux.SelectUnselectGroup(g,e,tp,1,lv,s.rescon(lv),1,tp,HINTMSG_TOGRAVE)
+		local sg=aux.SelectUnselectGroup(g,e,tp,1,lv,s.rescon(lv),1,tp,HINTMSG_TOREST)
 		if #sg>0 then
-			Duel.SendtoGrave(sg,REASON_EFFECT)
+			Duel.SendtoRest(sg,REASON_EFFECT)
 		end
 	end
 end

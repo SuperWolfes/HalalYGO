@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-	e2:SetCode(EVENT_TO_GRAVE)
+	e2:SetCode(EVENT_TO_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(s.spcon)
 	e2:SetTarget(s.sptg)
@@ -41,11 +41,11 @@ function s.filter(c,e,tp,att)
 		and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0
 end
 function s.cfilter(c)
-	return c:IsMonster() and (c:IsFaceup() or c:IsLocation(LOCATION_GRAVE))
+	return c:IsMonster() and (c:IsFaceup() or c:IsLocation(LOCATION_REST))
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local att=0
-	for gc in aux.Next(Duel.GetMatchingGroup(s.cfilter,tp,0,LOCATION_MZONE+LOCATION_GRAVE,nil)) do
+	for gc in aux.Next(Duel.GetMatchingGroup(s.cfilter,tp,0,LOCATION_MZONE+LOCATION_REST,nil)) do
 		att=att|gc:GetAttribute()
 	end
 	if chk==0 then return att>0 and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
@@ -55,7 +55,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local att=0
-	for gc in aux.Next(Duel.GetMatchingGroup(s.cfilter,tp,0,LOCATION_MZONE+LOCATION_GRAVE,nil)) do
+	for gc in aux.Next(Duel.GetMatchingGroup(s.cfilter,tp,0,LOCATION_MZONE+LOCATION_REST,nil)) do
 		att=att|gc:GetAttribute()
 	end
 	if att==0 then return end

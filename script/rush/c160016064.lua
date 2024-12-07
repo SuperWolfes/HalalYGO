@@ -24,12 +24,12 @@ function s.sfilter(c)
 	return c:IsCode(CARD_FUSION,160015066) and c:IsSSetable()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.sfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.sfilter,tp,LOCATION_REST,0,1,nil) end
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
-	local tg=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.sfilter),tp,LOCATION_GRAVE,0,1,1,nil)
+	local tg=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.sfilter),tp,LOCATION_REST,0,1,1,nil)
 	if #tg==0 then return end
 	if Duel.SSet(tp,tg)>0 and Duel.IsExistingMatchingCard(aux.FilterMaximumSideFunctionEx(Card.IsFaceup),tp,LOCATION_MZONE,0,1,nil)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then

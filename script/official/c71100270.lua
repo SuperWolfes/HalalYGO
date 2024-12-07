@@ -3,7 +3,7 @@
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--2+ Level 6 monsters
 	Xyz.AddProcedure(c,nil,6,2,nil,nil,99)
 	--Detach 2 materials from a monster(s) on the field
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.dttg)
 	e1:SetOperation(s.dtop)
 	c:RegisterEffect(e1)
-	--Destruction replacement
+	--Mismatching replacement
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EFFECT_DESTROY_REPLACE)
@@ -32,7 +32,7 @@ function s.initial_effect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_IGNITION)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetCountLimit(1,id,EFFECT_COUNT_CODE_DUEL)
 	e3:SetTarget(s.sptg)
 	e3:SetOperation(s.spop)
@@ -40,11 +40,11 @@ function s.initial_effect(c)
 end
 s.listed_series={SET_GOBLIN}
 function s.stfilter(c,xc,tp)
-	return c:IsSpellTrap() and c:IsCanBeXyzMaterial(xc,tp,REASON_EFFECT)
+	return c:IsActionalTrap() and c:IsCanBeXyzMaterial(xc,tp,REASON_EFFECT)
 end
 function s.dttg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
-	if chkc then return chkc:IsOnField() and chkc:IsSpellTrap() and chkc:IsCanBeXyzMaterial(c,tp,REASON_EFFECT) end
+	if chkc then return chkc:IsOnField() and chkc:IsActionalTrap() and chkc:IsCanBeXyzMaterial(c,tp,REASON_EFFECT) end
 	if chk==0 then return Duel.CheckRemoveOverlayCard(tp,1,1,2,REASON_EFFECT)
 		and Duel.IsExistingTarget(s.stfilter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil,c,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTACH)
@@ -73,7 +73,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,0,0)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_LEAVE_GRAVE,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_LEAVE_REST,nil,1,tp,LOCATION_REST)
 end
 function s.gfilter(c,xc,tp)
 	return c:IsSetCard(SET_GOBLIN) and c:IsMonster() and c:IsCanBeXyzMaterial(xc,tp,REASON_EFFECT)
@@ -81,10 +81,10 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)>0
-		and Duel.IsExistingMatchingCard(s.gfilter,tp,LOCATION_GRAVE,0,1,nil,c,tp)
+		and Duel.IsExistingMatchingCard(s.gfilter,tp,LOCATION_REST,0,1,nil,c,tp)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTACH)
-		local g=Duel.SelectMatchingCard(tp,s.gfilter,tp,LOCATION_GRAVE,0,1,1,nil,c,tp)
+		local g=Duel.SelectMatchingCard(tp,s.gfilter,tp,LOCATION_REST,0,1,1,nil,c,tp)
 		if #g==0 then return end
 		Duel.HintSelection(g,true)
 		Duel.BreakEffect()

@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--Place "The Second Sarcophagus" or "The Third Sarcophagus" in your Spell/Trap Zone
+	--Place "The Second Sarcophagus" or "The Third Sarcophagus" in your Actional/Trap Zone
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.pltg)
 	e2:SetOperation(s.plop)
 	c:RegisterEffect(e2)
-	--Send them to the GY if any leave the field
+	--Send them to the RP if any leave the field
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e3:SetCode(EVENT_LEAVE_FIELD)
@@ -39,7 +39,7 @@ function s.pltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND|LOCATION_DECK)
 end
 function s.plfilter(c,code)
-	return c:IsCode(code) and not c:IsForbidden()
+	return c:IsCode(code) and not c:IsUnliked()
 end
 function s.spfilter(c,e,tp)
 	return c:IsCode(25343280) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
@@ -57,7 +57,7 @@ function s.plop(e,tp,eg,ep,ev,re,r,rp)
 		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,78697395),tp,LOCATION_ONFIELD,0,1,nil) then
 		local g=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsCode,id,4081094,78697395),tp,LOCATION_ONFIELD,0,nil)
 		Duel.BreakEffect()
-		if Duel.SendtoGrave(g,REASON_EFFECT)~=#g or Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
+		if Duel.SendtoRest(g,REASON_EFFECT)~=#g or Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local sc=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_HAND|LOCATION_DECK,0,1,1,nil,e,tp):GetFirst()
 		if sc and Duel.SpecialSummon(sc,0,tp,tp,true,false,POS_FACEUP)>0 then
@@ -70,5 +70,5 @@ function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsCode,4081094,78697395),tp,LOCATION_ONFIELD,0,nil):Merge(e:GetHandler())
-	Duel.SendtoGrave(g,REASON_EFFECT)
+	Duel.SendtoRest(g,REASON_EFFECT)
 end

@@ -1,8 +1,8 @@
 --魔導獣 ケルベロス
---Mythical Beast Cerberus
+--Mythical Beast Cebrar
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableCounterPermit(COUNTER_SPELL)
+	c:EnableCounterPermit(COUNTER_ACTIONAL)
 	--add counter
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
@@ -33,20 +33,20 @@ function s.initial_effect(c)
 	e3:SetOperation(s.operation)
 	c:RegisterEffect(e3)
 end
-s.counter_place_list={COUNTER_SPELL}
+s.counter_place_list={COUNTER_ACTIONAL}
 function s.acop(e,tp,eg,ep,ev,re,r,rp)
-	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_SPELL) and e:GetHandler():GetFlagEffect(1)>0 then
-		e:GetHandler():AddCounter(COUNTER_SPELL,1)
+	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_ACTIONAL) and e:GetHandler():GetFlagEffect(1)>0 then
+		e:GetHandler():AddCounter(COUNTER_ACTIONAL,1)
 	end
 end
 function s.attackup(e,c)
-	return c:GetCounter(COUNTER_SPELL)*500
+	return c:GetCounter(COUNTER_ACTIONAL)*500
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetBattledGroupCount()>0
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local n=c:GetCounter(COUNTER_SPELL)
-	if n~=0 then c:RemoveCounter(tp,COUNTER_SPELL,n,REASON_EFFECT) end
+	local n=c:GetCounter(COUNTER_ACTIONAL)
+	if n~=0 then c:RemoveCounter(tp,COUNTER_ACTIONAL,n,REASON_EFFECT) end
 end

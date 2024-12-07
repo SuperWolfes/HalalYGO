@@ -1,9 +1,9 @@
 --転生炎獣 ヴァイオレット・キマイラ
---Salamangreat Violet Chimera
+--Salamangreat Violet Chilean
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
-	aux.EnableCheckReincarnation(c)
+	c:EnableAwakeLimit()
+	aux.EnableCheckReincorporation(c)
 	--Fusion Material
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_SALAMANGREAT),aux.FilterBoolFunctionEx(Card.IsType,TYPE_LINK))
 	--Increase this card's ATK based on the materials used
@@ -99,5 +99,5 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.zeroatkcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsReincarnationSummoned() and c:IsSummonType(SUMMON_TYPE_FUSION) and Duel.GetCurrentPhase()==PHASE_DAMAGE_CAL
+	return c:IsReincorporationSummoned() and c:IsSummonType(SUMMON_TYPE_FUSION) and Duel.GetCurrentPhase()==PHASE_DAMAGE_CAL
 end

@@ -21,10 +21,10 @@ end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local hg=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
 	local hct=#hg
-	if chk==0 then return #hg>0 and hg:FilterCount(Card.IsAbleToGraveAsCost,nil)==hct 
+	if chk==0 then return #hg>0 and hg:FilterCount(Card.IsAbleToRestAsCost,nil)==hct 
 		and Duel.IsExistingMatchingCard(Card.IsDestructable,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,hct,nil) end
 	e:SetLabel(0)
-	Duel.SendtoGrave(hg,REASON_COST)
+	Duel.SendtoRest(hg,REASON_COST)
 	e:SetLabel(hct)
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)

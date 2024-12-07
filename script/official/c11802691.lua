@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	--Special Summon 1 "Infernoble Knight" monster from your hand or Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_EQUIP+CATEGORY_TOGRAVE)
+	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_EQUIP+CATEGORY_TOREST)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetHintTiming(0,TIMINGS_CHECK_MONSTER_E)
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetCode(EVENT_FREE_CHAIN)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetHintTiming(0,TIMINGS_CHECK_MONSTER_E)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCost(aux.bfgcost)
@@ -32,13 +32,13 @@ end
 s.listed_series={SET_NOBLE_ARMS,SET_INFERNOBLE_KNIGHT,SET_NOBLE_KNIGHT}
 s.listed_names={CARD_INFERNOBLE_CHARLES}
 function s.cfilter(c,sft,e,tp)
-	return c:IsSetCard(SET_NOBLE_ARMS) and c:IsEquipSpell() and not c:IsPublic()
+	return c:IsSetCard(SET_NOBLE_ARMS) and c:IsEquipActional() and not c:IsPublic()
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_DECK,0,1,nil,e,tp,c,sft)
 end
 function s.spfilter(c,e,tp,eq,sft)
 	return c:IsSetCard(SET_INFERNOBLE_KNIGHT) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
-		and (eq:IsAbleToGrave() or (sft>0 and eq:CheckEquipTarget(c)
-		and eq:CheckUniqueOnField(tp) and not eq:IsForbidden()))
+		and (eq:IsAbleToRest() or (sft>0 and eq:CheckEquipTarget(c)
+		and eq:CheckUniqueOnField(tp) and not eq:IsUnliked()))
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local sft=Duel.GetLocationCount(tp,LOCATION_SZONE)
@@ -47,7 +47,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil,sft,e,tp) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND|LOCATION_DECK)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_EQUIP,nil,1,tp,LOCATION_HAND)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_HAND)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_HAND)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local sft=Duel.GetLocationCount(tp,LOCATION_SZONE)
@@ -59,8 +59,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local tc=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_HAND|LOCATION_DECK,0,1,1,nil,e,tp,eq,sft):GetFirst()
 	if Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)>0 then
-		local eqBool=sft>0 and eq:CheckEquipTarget(tc) and eq:CheckUniqueOnField(tp) and not eq:IsForbidden()
-		local tgBool=eq:IsAbleToGrave()
+		local eqBool=sft>0 and eq:CheckEquipTarget(tc) and eq:CheckUniqueOnField(tp) and not eq:IsUnliked()
+		local tgBool=eq:IsAbleToRest()
 		if eqBool or tgBool then
 			Duel.BreakEffect()
 			local op=Duel.SelectEffect(tp,
@@ -69,14 +69,14 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			if op==1 then
 				Duel.Equip(tp,eq,tc)
 			else
-				Duel.SendtoGrave(eq,REASON_EFFECT)
+				Duel.SendtoRest(eq,REASON_EFFECT)
 			end
 		end
 	end
 end
 function s.eqfilter(c,p)
 	return c:IsSetCard(SET_NOBLE_KNIGHT) and c:IsMonster()
-		and c:CheckUniqueOnField(p) and not c:IsForbidden()
+		and c:CheckUniqueOnField(p) and not c:IsUnliked()
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE)

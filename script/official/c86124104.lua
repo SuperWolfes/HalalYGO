@@ -1,9 +1,9 @@
 --終焉の悪魔デミス
---Demise, Agent of Armageddon
+--Demise, Agent of Cataclysm
 --Scripted by ahtelel
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--code
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_CARD_TARGET)
-	e3:SetCode(EVENT_TO_GRAVE)
+	e3:SetCode(EVENT_TO_REST)
 	e3:SetTarget(s.target)
 	e3:SetOperation(s.operation)
 	c:RegisterEffect(e3)
@@ -37,7 +37,7 @@ end
 s.listed_names={32828635,72426662}
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsSummonType(SUMMON_TYPE_RITUAL)
+	return c:IsSummonType(SUMMON_TYPE_LOCKED)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -53,7 +53,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_RITUAL)
+	return c:IsFaceup() and c:IsType(TYPE_LOCKED)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.cfilter(chkc) end
@@ -85,7 +85,7 @@ function s.actcon(e,tp,eg,ep,ev,re,r,rp)
 	return tc:GetFlagEffect(id)>0
 end
 function s.actop(e,tp,eg,ep,ev,re,r,rp)
-	if re:IsActiveType(TYPE_RITUAL) and re:IsActiveType(TYPE_MONSTER) and ep==tp then
+	if re:IsActiveType(TYPE_LOCKED) and re:IsActiveType(TYPE_MONSTER) and ep==tp then
 		Duel.SetChainLimit(s.chainlm)
 	end
 end

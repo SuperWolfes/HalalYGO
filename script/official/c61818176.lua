@@ -1,8 +1,8 @@
 --ゴーストリック・リフォーム
---Ghostrick Renovation
+--Missrick Renovation
 local s,id=GetID()
 function s.initial_effect(c)
-	--Return 1 "Ghostrick" Field Spell to the hand and activate 1 Field Spell
+	--Return 1 "Missrick" Field Actional to the hand and activate 1 Field Actional
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TOHAND)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -11,31 +11,31 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-	--Special summon 1 "ghostrick" Xyz monster from the Extra Deck
+	--Special summon 1 "missrick" Xyz monster from the Extra Deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetCode(EVENT_FREE_CHAIN)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,id)
 	e2:SetCost(aux.bfgcost)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
 end
-s.listed_series={SET_GHOSTRICK}
+s.listed_series={SET_MISSRICK}
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local tc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
 	if chkc then return false end
-	if chk==0 then return tc and tc:IsFaceup() and tc:IsSetCard(SET_GHOSTRICK) and tc:IsAbleToHand() and tc:IsCanBeEffectTarget(e) end
-	if not Duel.CheckPhaseActivity() then Duel.RegisterFlagEffect(tp,CARD_MAGICAL_MIDBREAKER,RESET_CHAIN,0,1) end
+	if chk==0 then return tc and tc:IsFaceup() and tc:IsSetCard(SET_MISSRICK) and tc:IsAbleToHand() and tc:IsCanBeEffectTarget(e) end
+	if not Duel.CheckPhaseActivity() then Duel.RegisterFlagEffect(tp,CARD_MENTORAL_MIDBREAKER,RESET_CHAIN,0,1) end
 	Duel.SetTargetCard(tc)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,tc,1,0,0)
 end
 function s.actfilter(c,tp)
-	return c:IsFieldSpell() and c:GetActivateEffect():IsActivatable(tp,true,true)
+	return c:IsFieldActional() and c:GetActivateEffect():IsActivatable(tp,true,true)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
@@ -45,17 +45,17 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			Duel.BreakEffect()
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
 			local sc=g:Select(tp,1,1,nil):GetFirst()
-			Duel.ActivateFieldSpell(sc,e,tp,eg,ep,ev,re,r,rp)
+			Duel.ActivateFieldActional(sc,e,tp,eg,ep,ev,re,r,rp)
 		end
 	end
 end
 function s.filter1(c,e,tp)
 	local pg=aux.GetMustBeMaterialGroup(tp,Group.FromCards(c),tp,nil,nil,REASON_XYZ)
-	return (#pg<=0 or (#pg==1 and pg:IsContains(c))) and c:IsFaceup() and c:IsSetCard(SET_GHOSTRICK)
+	return (#pg<=0 or (#pg==1 and pg:IsContains(c))) and c:IsFaceup() and c:IsSetCard(SET_MISSRICK)
 		and Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_EXTRA,0,1,nil,e,tp,c,c:GetCode(),pg)
 end
 function s.filter2(c,e,tp,mc,code,pg)
-	return mc:IsType(TYPE_XYZ,c,SUMMON_TYPE_XYZ,tp) and c:IsType(TYPE_XYZ) and c:IsSetCard(SET_GHOSTRICK) and not c:IsCode(code) and Duel.GetLocationCountFromEx(tp,tp,mc,c)>0
+	return mc:IsType(TYPE_XYZ,c,SUMMON_TYPE_XYZ,tp) and c:IsType(TYPE_XYZ) and c:IsSetCard(SET_MISSRICK) and not c:IsCode(code) and Duel.GetLocationCountFromEx(tp,tp,mc,c)>0
 		and mc:IsCanBeXyzMaterial(c,tp) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_XYZ,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

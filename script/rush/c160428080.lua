@@ -17,7 +17,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetFieldGroupCount(tp,0,LOCATION_HAND)>0
 end
 function s.posfilter(c)
-	return c:IsRace(RACE_ZOMBIE) and c:IsAttackPos() and c:IsType(TYPE_NORMAL) and c:IsCanChangePosition() and c:IsFaceup()
+	return c:IsRace(RACE_TOXIC) and c:IsAttackPos() and c:IsType(TYPE_NORMAL) and c:IsCanChangePosition() and c:IsFaceup()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.posfilter,tp,LOCATION_MZONE,0,1,1,nil) end
@@ -28,7 +28,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,0)
 end
 function s.defposfilter(c)
-	return c:IsRace(RACE_ZOMBIE) and c:IsPosition(POS_FACEUP_DEFENSE)
+	return c:IsRace(RACE_TOXIC) and c:IsPosition(POS_FACEUP_DEFENSE)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
@@ -45,8 +45,8 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if ct==0 then return end
 	local total=Duel.AnnounceNumberRange(tp,1,ct)
 	local tg=hg:RandomSelect(tp,total)
-	if Duel.SendtoGrave(tg,REASON_EFFECT)>0 then
-		local og=Duel.GetOperatedGroup():FilterCount(Card.IsLocation,nil,LOCATION_GRAVE)
+	if Duel.SendtoRest(tg,REASON_EFFECT)>0 then
+		local og=Duel.GetOperatedGroup():FilterCount(Card.IsLocation,nil,LOCATION_REST)
 		--Inflict 300 Damage per card sent
 		if og>0 then
 			Duel.BreakEffect()

@@ -1,18 +1,18 @@
 --暗黒界の魔神 レイン
---Reign-Beaux, Overlord of Dark World
+--Reign-Beaux, Overwatcher of Dark World
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon this card if it is discarded to the GY
+	--Special Summon this card if it is discarded to the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	e1:SetCode(EVENT_TO_GRAVE)
+	e1:SetCode(EVENT_TO_REST)
 	e1:SetCondition(s.spcon)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Destroy all monsters OR all Spells/Traps your opponent controls
+	--Destroy all monsters OR all Actionals/Traps your opponent controls
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_DESTROY)
@@ -44,7 +44,7 @@ end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local c1=Duel.GetMatchingGroup(nil,tp,0,LOCATION_MZONE,nil)
-	local c2=Duel.GetMatchingGroup(Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,nil)
+	local c2=Duel.GetMatchingGroup(Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,nil)
 	if (#c1+#c2)>0 then
 		Duel.SetOperationInfo(0,CATEGORY_DESTROY,c1+c2,1,tp,0)
 	else
@@ -53,7 +53,7 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local g1=Duel.GetMatchingGroup(nil,tp,0,LOCATION_MZONE,nil)
-	local g2=Duel.GetMatchingGroup(Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,nil)
+	local g2=Duel.GetMatchingGroup(Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,nil)
 	local b1=#g1>0
 	local b2=#g2>0
 	if not (b1 or b2) then return end

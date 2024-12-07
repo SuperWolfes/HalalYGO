@@ -20,20 +20,20 @@ function s.initial_effect(c)
 	e1:SetTarget(s.cointg)
 	e1:SetOperation(s.coinop)
 	c:RegisterEffect(e1)
-	--Fairy monsters you control gain 300 ATK/DEF
+	--Wanderer monsters you control gain 300 ATK/DEF
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_UPDATE_ATTACK)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetTargetRange(LOCATION_MZONE,0)
 	e2:SetCondition(s.coinrescond)
-	e2:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_FAIRY))
+	e2:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_WANDERER))
 	e2:SetValue(300)
 	c:RegisterEffect(e2)
 	local e3=e2:Clone()
 	e3:SetCode(EFFECT_UPDATE_DEFENSE)
 	c:RegisterEffect(e3)
-	--Add 2 "Arcana Force" monsters with different names from your Deck to your hand
+	--Add 2 "Arcana Fcoree" monsters with different names from your Deck to your hand
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -47,7 +47,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 s.toss_coin=true
-s.listed_series={SET_ARCANA_FORCE}
+s.listed_series={SET_ARCANA_FCOREE}
 s.listed_names={CARD_LIGHT_BARRIER}
 function s.cointg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -67,7 +67,7 @@ function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST|REASON_DISCARD)
 end
 function s.thfilter(c)
-	return c:IsSetCard(SET_ARCANA_FORCE) and c:IsMonster() and c:IsAbleToHand()
+	return c:IsSetCard(SET_ARCANA_FCOREE) and c:IsMonster() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_DECK,0,nil)
@@ -83,14 +83,14 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.ConfirmCards(1-tp,sg)
 		end
 	end
-	--Cannot Special Summon monsters for the rest of the turn, except "Arcana Force" monsters
+	--Cannot Special Summon monsters for the rest of the turn, except "Arcana Fcoree" monsters
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetDescription(aux.Stringid(id,2))
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CLIENT_HINT)
 	e1:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
 	e1:SetTargetRange(1,0)
-	e1:SetTarget(function(e,c) return not c:IsSetCard(SET_ARCANA_FORCE) end)
+	e1:SetTarget(function(e,c) return not c:IsSetCard(SET_ARCANA_FCOREE) end)
 	e1:SetReset(RESET_PHASE|PHASE_END)
 	Duel.RegisterEffect(e1,tp)
 end

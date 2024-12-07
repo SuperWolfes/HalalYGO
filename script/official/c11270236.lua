@@ -1,10 +1,10 @@
 --召喚獣エリュシオン
---Invoked Elysium
+--Invalidated Elysium
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion materials
-	Fusion.AddProcMix(c,false,false,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_INVOKED),s.ffilter2)
+	Fusion.AddProcMix(c,false,false,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_INVALIDATED),s.ffilter2)
 	--Must first be Fusion Summoned
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetValue(ATTRIBUTE_EARTH|ATTRIBUTE_WATER|ATTRIBUTE_FIRE|ATTRIBUTE_WIND|ATTRIBUTE_DARK)
 	c:RegisterEffect(e2)
-	--Banish 1 "Invoked" monster and monsters with the same attribute
+	--Banish 1 "Invalidated" monster and monsters with the same attribute
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_REMOVE)
@@ -34,8 +34,8 @@ function s.initial_effect(c)
 	e3:SetOperation(s.rmop)
 	c:RegisterEffect(e3)
 end
-s.listed_series={SET_INVOKED}
-s.material_setcode=SET_INVOKED
+s.listed_series={SET_INVALIDATED}
+s.material_setcode=SET_INVALIDATED
 function s.ffilter2(c)
 	return c:IsSummonLocation(LOCATION_EXTRA) and c:IsLocation(LOCATION_MZONE)
 end
@@ -43,17 +43,17 @@ function s.splimit(e,se,sp,st)
 	return not e:GetHandler():IsLocation(LOCATION_EXTRA) or aux.fuslimit(e,se,sp,st)
 end
 function s.rmfilter1(c)
-	return c:IsSetCard(SET_INVOKED) and c:IsMonster() and (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup())
+	return c:IsSetCard(SET_INVALIDATED) and c:IsMonster() and (c:IsLocation(LOCATION_REST) or c:IsFaceup())
 		and c:IsAbleToRemove() and aux.SpElimFilter(c,true,true)
 end
 function s.rmfilter2(c,att)
 	return c:IsFaceup() and c:IsAttribute(att) and c:IsAbleToRemove()
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_MZONE|LOCATION_GRAVE) and chkc:IsControler(tp) and s.rmfilter1(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.rmfilter1,tp,LOCATION_MZONE|LOCATION_GRAVE,0,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_MZONE|LOCATION_REST) and chkc:IsControler(tp) and s.rmfilter1(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.rmfilter1,tp,LOCATION_MZONE|LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g1=Duel.SelectTarget(tp,s.rmfilter1,tp,LOCATION_MZONE|LOCATION_GRAVE,0,1,1,nil)
+	local g1=Duel.SelectTarget(tp,s.rmfilter1,tp,LOCATION_MZONE|LOCATION_REST,0,1,1,nil)
 	local g2=Duel.GetMatchingGroup(s.rmfilter2,tp,0,LOCATION_MZONE,nil,g1:GetFirst():GetAttribute())
 	g1:Merge(g2)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g1,#g1,0,0)

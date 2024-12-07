@@ -1,5 +1,5 @@
 --深淵竜神アビス・ポセイドラ［Ｌ］
---Abyssal Dragon Lord Abyss Poseidra [L]
+--Abyssal Dragon Watcher Abyss Poseidra [L]
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -19,13 +19,13 @@ function s.initial_effect(c)
 end
 s.MaximumSide="Left"
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(Card.IsRace,tp,LOCATION_GRAVE,0,5,nil,RACE_SEASERPENT)
+	return Duel.IsExistingMatchingCard(Card.IsRace,tp,LOCATION_REST,0,5,nil,RACE_SEASERPENT)
 end
 function s.tdfilter(c)
 	return c:IsMonster() and c:IsAbleToDeckAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST,0,1,nil) end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsNotMaximumModeSide,tp,0,LOCATION_MZONE,1,nil) end
@@ -36,7 +36,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	--Requirement
-	local g=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_REST,0,nil)
 	Duel.SendtoDeck(g,nil,SEQ_DECKBOTTOM,REASON_COST)
 	local g2=Duel.GetOperatedGroup()
 	local ct=g2:FilterCount(s.filter,nil)

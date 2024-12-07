@@ -3,10 +3,10 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion Materials: 2 LIGHT Machine monsters
 	Fusion.AddProcMixN(c,true,true,s.matfilter,2)
-	--Add 1 card with an effect that Fusion Summons from your GY to your hand
+	--Add 1 card with an effect that Fusion Summons from your RP to your hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND)
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.regtg)
 	e1:SetOperation(s.regop)
 	c:RegisterEffect(e1)
-	--Negate the activation of an opponent's Spell/Trap or effect
+	--Negate the activation of an opponent's Actional/Trap or effect
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_NEGATE)
@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	e2:SetCode(EVENT_CHAINING)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCountLimit(1,{id,1})
-	e2:SetCondition(function(e,tp,eg,ep,ev,re,r,rp) return ep==1-tp and re:IsSpellTrapEffect() and not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED) and Duel.IsChainNegatable(ev) end)
+	e2:SetCondition(function(e,tp,eg,ep,ev,re,r,rp) return ep==1-tp and re:IsActionalTrapEffect() and not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED) and Duel.IsChainNegatable(ev) end)
 	e2:SetCost(s.negcost)
 	e2:SetTarget(s.negtg)
 	e2:SetOperation(function(e,tp,eg,ep,ev,re,r,rp) Duel.NegateActivation(ev) end)
@@ -39,12 +39,12 @@ function s.matfilter(c,fc,sumtype,tp)
 end
 function s.regtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local turn_ct=Duel.GetTurnCount()
-	--Add 1 card with an effect that Fusion Summons from your GY to your hand during the Standby Phase of the next turn
+	--Add 1 card with an effect that Fusion Summons from your RP to your hand during the Standby Phase of the next turn
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,2))
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
@@ -68,7 +68,7 @@ end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,0,id)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thfilter),tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.thfilter),tp,LOCATION_REST,0,1,1,nil)
 	if #g>0 then
 		Duel.HintSelection(g)
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
@@ -79,12 +79,12 @@ function s.costfilter(c)
 end
 function s.rescon(sg,e,tp)
 	return (#sg==1 and sg:IsExists(Card.IsLocation,1,nil,LOCATION_MZONE))
-		or sg:IsExists(Card.IsLocation,2,nil,LOCATION_GRAVE)
+		or sg:IsExists(Card.IsLocation,2,nil,LOCATION_REST)
 end
 function s.negcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_MZONE,0,1,nil)
-		or Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_GRAVE,0,2,nil) end
-	local g=Duel.GetMatchingGroup(s.costfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,nil)
+		or Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_REST,0,2,nil) end
+	local g=Duel.GetMatchingGroup(s.costfilter,tp,LOCATION_MZONE|LOCATION_REST,0,nil)
 	local cg=aux.SelectUnselectGroup(g,e,tp,1,2,s.rescon,1,tp,HINTMSG_REMOVE,s.rescon)
 	Duel.Remove(cg,POS_FACEUP,REASON_COST)
 end

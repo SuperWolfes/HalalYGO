@@ -1,5 +1,5 @@
 --烈風帝ライザー
---Raiza the Mega Monarch
+--Raiza the Mega Moppar
 local s,id=GetID()
 function s.initial_effect(c)
 	--summon with 1 tribute
@@ -46,7 +46,7 @@ function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
 	local g1=Duel.SelectTarget(tp,nil,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g2=Duel.SelectTarget(tp,nil,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,1,nil)
+	local g2=Duel.SelectTarget(tp,nil,tp,LOCATION_REST,LOCATION_REST,1,1,nil)
 	if e:GetLabel()==1
 		and Duel.IsExistingTarget(Card.IsAbleToHand,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,g1:GetFirst())
 		and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then

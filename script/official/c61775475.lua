@@ -3,7 +3,7 @@
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--1 DARK Tuner + 1+ non-Tuner monsters
 	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_DARK),1,1,Synchro.NonTuner(nil),1,99)
 	--Negate monster effect activation
@@ -51,9 +51,9 @@ function s.negcostfilter(c,tp,att)
 end
 function s.negcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local att=re:GetHandler():GetAttribute()
-	if chk==0 then return Duel.IsExistingMatchingCard(s.negcostfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,1,nil,tp,att) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.negcostfilter,tp,LOCATION_MZONE|LOCATION_REST,0,1,nil,tp,att) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.negcostfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,1,1,nil,tp,att)
+	local g=Duel.SelectMatchingCard(tp,s.negcostfilter,tp,LOCATION_MZONE|LOCATION_REST,0,1,1,nil,tp,att)
 	s.attr_list[tp]=s.attr_list[tp]|g:GetFirst():GetAttribute()
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
@@ -75,7 +75,7 @@ function s.tdfilter(c,e)
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	local g=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_GRAVE|LOCATION_REMOVED,0,nil,e)
+	local g=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_REST|LOCATION_REMOVED,0,nil,e)
 	if chk==0 then return #g>0 end
 	local tg=aux.SelectUnselectGroup(g,e,tp,1,6,aux.dpcheck(Card.GetAttribute),1,tp,HINTMSG_TODECK)
 	Duel.SetTargetCard(tg)

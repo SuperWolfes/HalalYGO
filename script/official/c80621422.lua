@@ -33,19 +33,19 @@ end
 s.listed_series={0x13f}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(c,REASON_COST)
+	if chk==0 then return c:IsAbleToRestAsCost() end
+	Duel.SendtoRest(c,REASON_COST)
 end
 function s.filter(c,e,tp,att)
 	return c:IsSetCard(0x13f) and c:IsAttribute(att) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 		and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0
 end
 function s.cfilter(c)
-	return c:IsMonster() and (c:IsFaceup() or c:IsLocation(LOCATION_GRAVE))
+	return c:IsMonster() and (c:IsFaceup() or c:IsLocation(LOCATION_REST))
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local att=0
-	for gc in aux.Next(Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,LOCATION_MZONE+LOCATION_GRAVE,nil)) do
+	for gc in aux.Next(Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_MZONE+LOCATION_REST,LOCATION_MZONE+LOCATION_REST,nil)) do
 		att=att|gc:GetAttribute()
 	end
 	if chk==0 then return att>0 and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
@@ -57,7 +57,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local att=0
-	for gc in aux.Next(Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,LOCATION_MZONE+LOCATION_GRAVE,nil)) do
+	for gc in aux.Next(Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_MZONE+LOCATION_REST,LOCATION_MZONE+LOCATION_REST,nil)) do
 		att=att|gc:GetAttribute()
 	end
 	if att==0 then return end

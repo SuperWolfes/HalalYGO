@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e2:SetCost(s.negcost)
 	e2:SetOperation(function() Duel.NegateAttack() end)
 	c:RegisterEffect(e2)
-	--Return 1 "Ki-sikil" or "Lil-la" monster from your GY to your Deck or hand
+	--Return 1 "Ki-sikil" or "Lil-la" monster from your RP to your Deck or hand
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_TODECK+CATEGORY_TOHAND)
@@ -45,10 +45,10 @@ function s.tgfilter(c,mon_check)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local mon_check=Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)==0
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.tgfilter(chkc,mon_check) end
-	if chk==0 then return Duel.IsExistingTarget(s.tgfilter,tp,LOCATION_GRAVE,0,1,nil,mon_check) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.tgfilter(chkc,mon_check) end
+	if chk==0 then return Duel.IsExistingTarget(s.tgfilter,tp,LOCATION_REST,0,1,nil,mon_check) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectTarget(tp,s.tgfilter,tp,LOCATION_GRAVE,0,1,1,nil,mon_check)
+	local g=Duel.SelectTarget(tp,s.tgfilter,tp,LOCATION_REST,0,1,1,nil,mon_check)
 	if not mon_check then
 		Duel.SetOperationInfo(0,CATEGORY_TODECK,g,1,tp,0)
 	else

@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,160012016,160012005)
 	--Activate
 	local e1=Effect.CreateEffect(c)
@@ -21,7 +21,7 @@ function s.tdfilter(c)
 end
 function s.spfilter(c,e,tp)
 	return c:IsDefense(200) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
-		and Duel.IsExistingMatchingCard(s.spfilter2,tp,LOCATION_GRAVE,0,1,c,e,tp,c)
+		and Duel.IsExistingMatchingCard(s.spfilter2,tp,LOCATION_REST,0,1,c,e,tp,c)
 end
 function s.spfilter2(c,e,tp,tc)
 	local g=Group.CreateGroup()
@@ -29,15 +29,15 @@ function s.spfilter2(c,e,tp,tc)
 	g:AddCard(c)
 	g:AddCard(tc)
 	return c:IsDefense(200) and c:IsLevel(lvl) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
-		and Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_GRAVE,0,2,g)
+		and Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST,0,2,g)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp) end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>1
-		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end
 function s.spfilter3(c,e,tp)
 	return c:IsDefense(200) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -47,8 +47,8 @@ function s.spcheck(sg,e,tp,mg)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	local g=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_GRAVE,0,nil)
-	local sg=Duel.GetMatchingGroup(s.spfilter3,tp,LOCATION_GRAVE,0,nil,e,tp)
+	local g=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_REST,0,nil)
+	local sg=Duel.GetMatchingGroup(s.spfilter3,tp,LOCATION_REST,0,nil,e,tp)
 	if #g<2 or #sg<2 then return end
 	local td=aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon(sg),2,tp,HINTMSG_TODECK)
 	Duel.HintSelection(td,true)

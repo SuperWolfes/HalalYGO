@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Xyz Summon Procedure
 	Xyz.AddProcedure(c,nil,4,3,s.ovfilter,aux.Stringid(id,0),3,s.xyzop)
 	--Monsters your opponent controls lose 500 ATK
@@ -40,14 +40,14 @@ function s.ovfilter(c,tp,xyzc)
 	return c:IsFaceup() and c:IsType(TYPE_XYZ,xyzc,SUMMON_TYPE_XYZ,tp) and c:IsRankBelow(4)
 end
 function s.cfilter(c)
-	return c:IsSpellTrap() and c:IsDiscardable()
+	return c:IsActionalTrap() and c:IsDiscardable()
 end
 function s.xyzop(e,tp,chk,mc)
 	if chk==0 then return not Duel.HasFlagEffect(tp,id) and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 	local tc=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_HAND,0,nil):SelectUnselect(Group.CreateGroup(),tp,false,Xyz.ProcCancellable)
 	if tc then
-		Duel.SendtoGrave(tc,REASON_DISCARD|REASON_COST)
+		Duel.SendtoRest(tc,REASON_DISCARD|REASON_COST)
 		Duel.RegisterFlagEffect(tp,id,RESET_PHASE|PHASE_END,EFFECT_FLAG_OATH,1)
 		return true
 	else return false end

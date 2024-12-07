@@ -1,8 +1,8 @@
 --真魔六武衆－エニシ
---Legendary Klesha Six Samurai - Enishi
+--Legendary Klesha Six Samurai - Nishi
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Synchro Summon procedure: 1 Tuner + 1+ non-Tuner monsters
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	--Warrior monsters you control gain 500 ATK/DEF during the Battle Phase only
@@ -34,7 +34,7 @@ function s.initial_effect(c)
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetProperty(EFFECT_FLAG_DELAY)
-	e3:SetCode(EVENT_TO_GRAVE)
+	e3:SetCode(EVENT_TO_REST)
 	e3:SetCountLimit(1,{id,1})
 	e3:SetTarget(s.sptg)
 	e3:SetOperation(s.spop)
@@ -45,10 +45,10 @@ function s.thcostfilter(c)
 	return c:IsSetCard(SET_SIX_SAMURAI) and c:IsMonster() and c:IsAbleToRemoveAsCost()
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.thcostfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.thcostfilter,tp,LOCATION_REST,0,1,nil) end
 	local maxtc=Duel.GetTargetCount(Card.IsAbleToHand,tp,0,LOCATION_MZONE,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.thcostfilter,tp,LOCATION_GRAVE,0,1,maxtc,nil)
+	local g=Duel.SelectMatchingCard(tp,s.thcostfilter,tp,LOCATION_REST,0,1,maxtc,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 	e:SetLabel(#g)
 end

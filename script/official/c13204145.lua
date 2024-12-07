@@ -1,5 +1,5 @@
 --Japanese name
---Mimighoul Maker
+--Mimirahul Maker
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_CARD_TARGET)
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,id)
 	e2:SetCondition(function(e,tp,eg) return eg:IsExists(Card.IsSummonPlayer,1,nil,1-tp) end)
 	e2:SetCost(aux.SelfBanishCost)
@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.posop)
 	c:RegisterEffect(e2)
 end
-s.listed_series={SET_MIMIGHOUL}
+s.listed_series={SET_MIMIRAHUL}
 function s.revfilter(c,e,tp)
 	return c:IsType(TYPE_FLIP) and not c:IsPublic()
 		and c:IsAbleToHand() and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEDOWN_DEFENSE,1-tp)
@@ -44,7 +44,7 @@ function s.revtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND)
 end
 function s.spfilter(c,e,tp)
-	return c:IsSetCard(SET_MIMIGHOUL) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsSetCard(SET_MIMIRAHUL) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.revop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(1-tp,LOCATION_MZONE,tp)==0 then return end

@@ -1,4 +1,4 @@
---Supreme King Violent Spirit
+--Supreme King Violent Guardian
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddEquipProcedure(c,nil,s.filter)

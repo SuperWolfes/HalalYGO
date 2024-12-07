@@ -1,4 +1,4 @@
---Speed Spell - Sonic Buster (Anime)
+--Speed Actional - Sonic Buster (Anime)
 --Ｓｐ－ソニック・バスター
 --scripted by Larry126
 local s,id=GetID()

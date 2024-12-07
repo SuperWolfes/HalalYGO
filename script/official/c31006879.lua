@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e2:SetCondition(function(_,tp) return Duel.IsTurnPlayer(tp) end)
 	e2:SetOperation(function(e) e:GetHandler():AddCounter(COUNTER_SIGNAL,1) end)
 	c:RegisterEffect(e2)
-	--Draw 2 then send 1 to the GY ("Speed Spell - Angel Baton")
+	--Draw 2 then send 1 to the RP ("Speed Actional - Angel Baton")
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetCategory(CATEGORY_DRAW+CATEGORY_HANDES)
@@ -50,10 +50,10 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGraveAsCost()
+	if chk==0 then return c:IsAbleToRestAsCost()
 		and Duel.IsCanRemoveCounter(tp,1,0,COUNTER_SIGNAL,2,REASON_COST) end
 	Duel.RemoveCounter(tp,1,0,COUNTER_SIGNAL,2,REASON_COST)
-	Duel.SendtoGrave(c,REASON_COST)
+	Duel.SendtoRest(c,REASON_COST)
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,2) end

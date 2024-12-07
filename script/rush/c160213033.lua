@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e0:SetRange(LOCATION_HAND)
 	e0:SetValue(160203007)
 	c:RegisterEffect(e0)
-	--Destruction immunity
+	--Mismatching immunity
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -24,7 +24,7 @@ function s.initial_effect(c)
 end
 s.MaximumSide="Right"
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,160015057)
+	return Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,160015057)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeckAsCost(tp,2) end

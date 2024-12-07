@@ -21,7 +21,7 @@ function s.tdfilter(c)
 	return c:IsMonster() and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST,0,1,nil) end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(aux.FilterMaximumSideFunctionEx(Card.IsFaceup),tp,0,LOCATION_MZONE,1,nil) end
@@ -29,7 +29,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g1=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_GRAVE,0,1,5,nil)
+	local g1=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_REST,0,1,5,nil)
 	if #g1==0 then return end
 	Duel.HintSelection(g1,true)
 	Duel.SendtoDeck(g1,nil,SEQ_DECKTOP,REASON_EFFECT)
@@ -54,10 +54,10 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		local e2=e1:Clone()
 		e2:SetCode(EFFECT_UPDATE_DEFENSE)
 		g:GetFirst():RegisterEffect(e2)
-		if c:IsMaximumMode() and Duel.IsExistingMatchingCard(Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,1,nil)
-			and not Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_GRAVE,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+		if c:IsMaximumMode() and Duel.IsExistingMatchingCard(Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,1,nil)
+			and not Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_REST,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-			local dg=Duel.SelectMatchingCard(tp,Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,1,1,nil)
+			local dg=Duel.SelectMatchingCard(tp,Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,1,1,nil)
 			Duel.HintSelection(dg,true)
 			Duel.BreakEffect()
 			Duel.Destroy(dg,REASON_EFFECT)

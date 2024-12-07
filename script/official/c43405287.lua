@@ -63,14 +63,14 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e3:SetReset(RESET_EVENT+RESETS_STANDARD)
 		c:RegisterEffect(e3)
 	else
-		c:CancelToGrave(false)
+		c:CancelToRest(false)
 	end
 end
 function s.eqlimit(e,c)
 	return c:GetControler()==e:GetOwnerPlayer() and c:IsSetCard(0xc008)
 end
 function s.damfilter(c,rc)
-	return c:IsLocation(LOCATION_GRAVE) and c:IsReason(REASON_BATTLE) and c:GetReasonCard()==rc
+	return c:IsLocation(LOCATION_REST) and c:IsReason(REASON_BATTLE) and c:GetReasonCard()==rc
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.damfilter,1,nil,e:GetHandler():GetEquipTarget())

@@ -1,5 +1,5 @@
 --繋がれし魔鍵
---Connected Magikey
+--Connected Menkey
 --Scripted by edo9300
 local s,id=GetID()
 function s.initial_effect(c)
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetTarget(s.target)
-	e1:SetOperation(s.operation(Fusion.SummonEffTG(fparams),Fusion.SummonEffOP(fparams),Ritual.Target(rparams),Ritual.Operation(rparams)))
+	e1:SetOperation(s.operation(Fusion.SummonEffTG(fparams),Fusion.SummonEffOP(fparams),Locked.Target(rparams),Locked.Operation(rparams)))
 	c:RegisterEffect(e1)
 end
 s.listed_series={0x167}
@@ -20,10 +20,10 @@ function s.filter(c)
 	return (c:IsSetCard(0x167) or c:IsType(TYPE_NORMAL)) and c:IsMonster() and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,0,0)
 end
 function s.operation(fustg,fusop,rittg,ritop)

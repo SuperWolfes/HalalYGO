@@ -1,10 +1,10 @@
---Number C5: Chaos Chimera Dragon
+--Number C5: Chaos Chilean Dragon
 --CNo.5 亡朧龍カオス・キマイラ・ドラゴン
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,6,3,nil,nil,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--atk
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -64,11 +64,11 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
 	if chk==0 then return e:GetHandler():IsType(TYPE_XYZ) 
-		and Duel.IsExistingTarget(Card.IsAbleToDeck,tp,LOCATION_GRAVE,LOCATION_GRAVE,2,nil) end
+		and Duel.IsExistingTarget(Card.IsAbleToDeck,tp,LOCATION_REST,LOCATION_REST,2,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local g=Duel.SelectTarget(tp,Card.IsAbleToDeck,tp,LOCATION_GRAVE,LOCATION_GRAVE,2,2,nil)
+	local g=Duel.SelectTarget(tp,Card.IsAbleToDeck,tp,LOCATION_REST,LOCATION_REST,2,2,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,1,0,0)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,2,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,2,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)

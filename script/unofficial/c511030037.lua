@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
 	e2:SetCode(EVENT_BE_MATERIAL)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,id)
 	e2:SetCost(s.retcost)
 	e2:SetCondition(s.retcon)
@@ -44,7 +44,7 @@ function s.retcon(e,tp,eg,ep,ev,re,r,rp)
 	return r==REASON_LINK and e:GetLabelObject():GetLabel()==1
 end
 function s.mgfilter(c,e,tp,linkc,mg)
-	return c:IsControler(tp) and c:IsLocation(LOCATION_GRAVE)
+	return c:IsControler(tp) and c:IsLocation(LOCATION_REST)
 		and (c:GetReason()&(REASON_LINK+REASON_MATERIAL))==(REASON_LINK+REASON_MATERIAL) and c:GetReasonCard()==linkc
 		and c:IsAbleToDeck()
 end
@@ -55,31 +55,31 @@ function s.rettg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local rc=e:GetHandler():GetReasonCard()
 	local mg=rc:GetMaterial()
 	if chk==0 then
-		local tdg=Duel.GetMatchingGroup(aux.NecroValleyFilter(Card.IsAbleToDeck),tp,LOCATION_GRAVE,0,mg)
-		local thg=Duel.GetMatchingGroup(aux.NecroValleyFilter(Card.IsAbleToHand),tp,LOCATION_GRAVE,0,mg)
-		return #mg>0 and mg:FilterCount(aux.NecroValleyFilter(s.mgfilter),nil,e,tp,rc,mg)==#mg
-			and Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.tdfilter),tp,LOCATION_GRAVE,0,rc:GetLink()+1,mg)
+		local tdg=Duel.GetMatchingGroup(aux.RestValleyFilter(Card.IsAbleToDeck),tp,LOCATION_REST,0,mg)
+		local thg=Duel.GetMatchingGroup(aux.RestValleyFilter(Card.IsAbleToHand),tp,LOCATION_REST,0,mg)
+		return #mg>0 and mg:FilterCount(aux.RestValleyFilter(s.mgfilter),nil,e,tp,rc,mg)==#mg
+			and Duel.IsExistingMatchingCard(aux.RestValleyFilter(s.tdfilter),tp,LOCATION_REST,0,rc:GetLink()+1,mg)
 			and #tdg>=rc:GetLink() and #thg>=1
 	end
 	e:SetLabel(rc:GetLink())
-	local g=Duel.GetMatchingGroup(Card.IsAbleToDeck,tp,LOCATION_GRAVE,0,nil)
-	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,#mg+rc:GetLink(),0,LOCATION_GRAVE)
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,0,LOCATION_GRAVE)
+	local g=Duel.GetMatchingGroup(Card.IsAbleToDeck,tp,LOCATION_REST,0,nil)
+	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,#mg+rc:GetLink(),0,LOCATION_REST)
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,0,LOCATION_REST)
 end
 function s.retop(e,tp,eg,ep,ev,re,r,rp)
 	local rc=e:GetHandler():GetReasonCard()
 	local mg=rc:GetMaterial()
 	local lr=e:GetLabel()
-	if not (mg:FilterCount(aux.NecroValleyFilter(s.mgfilter),nil,e,tp,rc,mg)==#mg) then return end
+	if not (mg:FilterCount(aux.RestValleyFilter(s.mgfilter),nil,e,tp,rc,mg)==#mg) then return end
 	if #mg>0 and Duel.SendtoDeck(mg,nil,2,REASON_EFFECT)==#mg then
-		local tdg=Duel.GetMatchingGroup(aux.NecroValleyFilter(Card.IsAbleToDeck),tp,LOCATION_GRAVE,0,mg)
+		local tdg=Duel.GetMatchingGroup(aux.RestValleyFilter(Card.IsAbleToDeck),tp,LOCATION_REST,0,mg)
 		if #tdg<lr then return end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
 		local g=tdg:Select(tp,lr,lr,mg)
 		if #g<=0 then return end
 		Duel.BreakEffect()
 		if Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)==lr then
-			local thg=Duel.GetMatchingGroup(aux.NecroValleyFilter(Card.IsAbleToHand),tp,LOCATION_GRAVE,0,mg)
+			local thg=Duel.GetMatchingGroup(aux.RestValleyFilter(Card.IsAbleToHand),tp,LOCATION_REST,0,mg)
 			if #thg<=0 then return end
 			Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_RTOHAND)
 			local g2=thg:Select(1-tp,1,1,mg)

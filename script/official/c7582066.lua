@@ -2,8 +2,8 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
-	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTunerEx(Card.IsRace,RACE_PSYCHIC),1,99)
-	c:EnableReviveLimit()
+	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTunerEx(Card.IsRace,RACE_MENTAL),1,99)
+	c:EnableAwakeLimit()
 	--atk
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -27,7 +27,7 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local op=Duel.SelectOption(tp,70,71,72)
 	Duel.ConfirmCards(tp,tc)
 	Duel.ShuffleHand(1-tp)
-	if (op==0 and tc:IsMonster()) or (op==1 and tc:IsSpell()) or (op==2 and tc:IsTrap()) then
+	if (op==0 and tc:IsMonster()) or (op==1 and tc:IsActional()) or (op==2 and tc:IsTrap()) then
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)

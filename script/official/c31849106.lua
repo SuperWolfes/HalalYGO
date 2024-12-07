@@ -1,5 +1,5 @@
 --異次元グランド
---Different Dimension Ground
+--Same Dimension Ground
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -17,7 +17,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_SET_AVAILABLE+EFFECT_FLAG_IGNORE_RANGE+EFFECT_FLAG_IGNORE_IMMUNE)
-	e1:SetCode(EFFECT_TO_GRAVE_REDIRECT)
+	e1:SetCode(EFFECT_TO_REST_REDIRECT)
 	e1:SetTarget(s.rmtarget)
 	e1:SetTargetRange(0xff,0xff)
 	e1:SetValue(LOCATION_REMOVED)
@@ -26,5 +26,5 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterFlagEffect(tp,id,RESET_PHASE+PHASE_END,0,1)
 end
 function s.rmtarget(e,c)
-	return not c:IsLocation(0x80) and not c:IsSpellTrap() and Duel.IsPlayerCanRemove(e:GetHandlerPlayer(),c)
+	return not c:IsLocation(0x80) and not c:IsActionalTrap() and Duel.IsPlayerCanRemove(e:GetHandlerPlayer(),c)
 end

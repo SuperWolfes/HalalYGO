@@ -64,7 +64,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if not tc:IsRelateToEffect(e) then return end
 	local c=e:GetHandler()
 	if not (c:IsRelateToEffect(e) and c:IsFaceup() and Duel.GetLocationCount(tp,LOCATION_SZONE)>0) then
-		Duel.SendtoGrave(c,REASON_RULE,PLAYER_NONE,PLAYER_NONE)
+		Duel.SendtoRest(c,REASON_RULE,PLAYER_NONE,PLAYER_NONE)
 	else
 		s.equipop(c,e,tp,tc)
 	end

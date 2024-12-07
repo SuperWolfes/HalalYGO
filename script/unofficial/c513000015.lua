@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_SYNCHRO),1,1,Synchro.NonTunerEx(Card.IsType,TYPE_SYNCHRO),1,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--opponent's turn synchro
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -122,9 +122,9 @@ function s.retop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.mgfilter(c,e,tp,sync)
-	return not c:IsControler(tp) or not c:IsLocation(LOCATION_GRAVE)
+	return not c:IsControler(tp) or not c:IsLocation(LOCATION_REST)
 		or (c:GetReason()&0x80008)~=0x80008 or c:GetReasonCard()~=sync
-		or not c:IsCanBeSpecialSummoned(e,0,tp,false,false) or c:IsHasEffect(EFFECT_NECRO_VALLEY)
+		or not c:IsCanBeSpecialSummoned(e,0,tp,false,false) or c:IsHasEffect(EFFECT_REST_VALLEY)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

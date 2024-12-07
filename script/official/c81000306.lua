@@ -1,5 +1,5 @@
 --渾身の一撃
---Full-Force Strike
+--Full-Fcoree Strike
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

@@ -1,8 +1,8 @@
 --デストーイ・デアデビル
---Frightfur Daredevil
+--Frightfur Darewell
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0xc3),aux.FilterBoolFunctionEx(Card.IsSetCard,0xa9))
 	--damage after destroying
 	local e1=Effect.CreateEffect(c)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.damtg1)
 	e1:SetOperation(s.damop1)
 	c:RegisterEffect(e1)
-	--damage after destruction
+	--damage after mismatching
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_DAMAGE)
@@ -49,13 +49,13 @@ function s.damfilter(c)
 	return c:IsMonster() and c:IsSetCard(0xad)
 end
 function s.damtg2(e,tp,eg,ep,ev,re,r,rp,chk)
-	local gc=Duel.GetMatchingGroupCount(s.damfilter,tp,LOCATION_GRAVE,0,nil)
+	local gc=Duel.GetMatchingGroupCount(s.damfilter,tp,LOCATION_REST,0,nil)
 	if chk==0 then return gc>0 end
 	Duel.SetTargetPlayer(1-tp)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,gc*500)
 end
 function s.damop2(e,tp,eg,ep,ev,re,r,rp)
-	local gc=Duel.GetMatchingGroupCount(s.damfilter,tp,LOCATION_GRAVE,0,nil)
+	local gc=Duel.GetMatchingGroupCount(s.damfilter,tp,LOCATION_REST,0,nil)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
 	Duel.Damage(p,gc*500,REASON_EFFECT)
 end

@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Pendulum.AddProcedure(c,false)
 	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(s.ffilter),2)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,s.splimit)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetCountLimit(1,{id,0})
 	e1:SetTarget(s.spmvtg)
 	c:RegisterEffect(e1)
-	-- Switch the locations of 2 monsters
+	-- Smint the locations of 2 monsters
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_QUICK_O)

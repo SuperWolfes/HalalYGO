@@ -21,20 +21,20 @@ function s.exfilter(c,tp)
 	return c.material and c:IsType(TYPE_FUSION) and Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil,c)
 end
 function s.tgfilter(c,fc)
-	return c:IsCode(table.unpack(fc.material)) and c:IsAbleToGrave()
+	return c:IsCode(table.unpack(fc.material)) and c:IsAbleToRest()
 end
 function s.ffilter(c)
 	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsRace(RACE_MACHINE)
 end
 function s.fextra(e,tp,mg)
-	if not Duel.IsPlayerAffectedByEffect(tp,CARD_SPIRIT_ELIMINATION) then
-		return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRemove),tp,LOCATION_GRAVE,0,nil)
+	if not Duel.IsPlayerAffectedByEffect(tp,CARD_GUARDIAN_ELIMINATION) then
+		return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRemove),tp,LOCATION_REST,0,nil)
 	end
 	return nil
 end
 function s.extratg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,tp,LOCATION_REST)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local fusparams={handler=e:GetHandler(),fusfilter=s.ffilter,matfilter=aux.FALSE,
@@ -48,8 +48,8 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(op)
 	if op==1 then
 		Duel.RegisterFlagEffect(tp,id,RESET_PHASE|PHASE_END,0,1)
-		e:SetCategory(CATEGORY_TOGRAVE)
-		Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+		e:SetCategory(CATEGORY_TOREST)
+		Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 	elseif op==2 then
 		Duel.RegisterFlagEffect(tp,id+1,RESET_PHASE|PHASE_END,0,1)
 		Fusion.SummonEffTG(fusparams)(e,tp,eg,ep,ev,re,r,rp,1)
@@ -60,15 +60,15 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local op=e:GetLabel()
 	if op==1 then
-		--Send 1 Fusion Material from your Deck to the GY
+		--Send 1 Fusion Material from your Deck to the RP
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_CONFIRM)
 		local cc=Duel.SelectMatchingCard(tp,s.exfilter,tp,LOCATION_EXTRA,0,1,1,nil,tp):GetFirst()
 		if not cc then return end
 		Duel.ConfirmCards(1-tp,cc)
 		Duel.ShuffleExtra(tp)
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local tc=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil,cc):GetFirst()
-		if tc and Duel.SendtoGrave(tc,REASON_EFFECT)>0 and tc:IsLocation(LOCATION_GRAVE) then
+		if tc and Duel.SendtoRest(tc,REASON_EFFECT)>0 and tc:IsLocation(LOCATION_REST) then
 			--Cannot Special Summon monsters with the same name
 			local e1=Effect.CreateEffect(c)
 			e1:SetDescription(aux.Stringid(id,3))

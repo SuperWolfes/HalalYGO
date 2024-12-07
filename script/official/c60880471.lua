@@ -1,5 +1,5 @@
 --六花精ヘレボラス
---Hellebore the Rikka Fairy
+--Hellebore the Rikka Wanderer
 --Scripted by AlphaKretin
 
 local s,id=GetID()
@@ -17,12 +17,12 @@ function s.initial_effect(c)
 	e1:SetTarget(s.distg)
 	e1:SetOperation(s.disop)
 	c:RegisterEffect(e1)
-	--Special summon itself from GY
+	--Special summon itself from RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCost(s.spcost)
 	e2:SetTarget(s.sptg)

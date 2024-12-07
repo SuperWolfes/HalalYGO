@@ -1,5 +1,5 @@
 --黄金郷の七摩天
---Seven Realms of the Golden Land
+--Seven Territorys of the Golden Land
 --Logical Nonsense
 
 local s,id=GetID()
@@ -9,8 +9,8 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--Fusion summon 1 fusion monster, using only zombie monsters from hand or field
-	local params = {nil,aux.FilterBoolFunction(Card.IsRace,RACE_ZOMBIE)}
+	--Fusion summon 1 fusion monster, using only toxic monsters from hand or field
+	local params = {nil,aux.FilterBoolFunction(Card.IsRace,RACE_TOXIC)}
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)
@@ -33,9 +33,9 @@ function s.initial_effect(c)
 	e3:SetOperation(s.stop)
 	c:RegisterEffect(e3)
 end
-	--If a zombie monster(s) was special summoned by card effect
+	--If a toxic monster(s) was special summoned by card effect
 function s.stfilter(c,tp)
-	return c:IsRace(RACE_ZOMBIE)
+	return c:IsRace(RACE_TOXIC)
 end
 	--If it ever happened
 function s.stcon(e,tp,eg,ep,ev,re,r,rp)

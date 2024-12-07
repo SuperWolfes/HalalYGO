@@ -1,11 +1,11 @@
 --神碑の鬣スレイプニル
---Sleipnir the Runick Mane
+--Sleipnir the Runip Mane
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion procedure
-	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_RUNICK),2)
+	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_RUNIP),2)
 	--Banish both this card and 1 opponent's face-up monster until the End Phase
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.rmtg)
 	e1:SetOperation(s.rmop)
 	c:RegisterEffect(e1)
-	--Special Summon 1 "Runick Token"
+	--Special Summon 1 "Runip Token"
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOKEN)
@@ -35,7 +35,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 s.listed_cards={id+1}
-s.listed_series={SET_RUNICK}
+s.listed_series={SET_RUNIP}
 function s.rmcon(e,tp,eg,ep,ev,re,r,rp)
 	return (Duel.IsTurnPlayer(tp) and Duel.IsMainPhase()) or (Duel.IsTurnPlayer(1-tp) and Duel.IsBattlePhase())
 end
@@ -63,13 +63,13 @@ function s.tkcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.tktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,SET_RUNICK,TYPES_TOKEN,1500,1500,4,RACE_FAIRY,ATTRIBUTE_LIGHT,POS_FACEUP_ATTACK) end
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,SET_RUNIP,TYPES_TOKEN,1500,1500,4,RACE_WANDERER,ATTRIBUTE_LIGHT,POS_FACEUP_ATTACK) end
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,1,tp,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,0)
 end
 function s.tkop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)==0 then return end
-	if not Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,SET_RUNICK,TYPES_TOKEN,1500,1500,4,RACE_FAIRY,ATTRIBUTE_LIGHT,POS_FACEUP_ATTACK) then return end
+	if not Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,SET_RUNIP,TYPES_TOKEN,1500,1500,4,RACE_WANDERER,ATTRIBUTE_LIGHT,POS_FACEUP_ATTACK) then return end
 	local token=Duel.CreateToken(tp,id+1)
 	Duel.SpecialSummon(token,0,tp,tp,false,false,POS_FACEUP_ATTACK)
 end

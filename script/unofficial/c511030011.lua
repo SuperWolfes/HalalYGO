@@ -5,11 +5,11 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x578),2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--send and special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_TOGRAVE+CATEGORY_SPECIAL_SUMMON)
+	e1:SetCategory(CATEGORY_TOREST+CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetRange(LOCATION_MZONE)
@@ -31,7 +31,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x578}
 function s.sendfilter(c,ft)
-	return c:IsLevelBelow(4) and c:IsSetCard(0x578) and c:IsAbleToGrave() 
+	return c:IsLevelBelow(4) and c:IsSetCard(0x578) and c:IsAbleToRest() 
 		and (ft>0 or c:GetSequence()<5)
 end
 function s.spfilter(c,e,tp)
@@ -42,20 +42,20 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if chk==0 then return ft>-1
 		and Duel.IsExistingTarget(s.sendfilter,tp,LOCATION_MZONE,0,1,nil,ft)
-		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
+		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local g1=Duel.SelectTarget(tp,s.sendfilter,tp,LOCATION_MZONE,0,1,1,nil,ft)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g2=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,g1,1,0,0)
+	local g2=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,g1,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g2,1,0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
-	local ex,g1=Duel.GetOperationInfo(0,CATEGORY_TOGRAVE)
+	local ex,g1=Duel.GetOperationInfo(0,CATEGORY_TOREST)
 	local ex,g2=Duel.GetOperationInfo(0,CATEGORY_SPECIAL_SUMMON)
 	local tc1=g1:GetFirst()
 	local tc2=g2:GetFirst()
-	if tc1:IsRelateToEffect(e) and Duel.SendtoGrave(tc1,REASON_EFFECT)~=0 and tc1:IsLocation(LOCATION_GRAVE) and tc2:IsRelateToEffect(e) then
+	if tc1:IsRelateToEffect(e) and Duel.SendtoRest(tc1,REASON_EFFECT)~=0 and tc1:IsLocation(LOCATION_REST) and tc2:IsRelateToEffect(e) then
 		Duel.SpecialSummon(tc2,0,tp,tp,false,false,POS_FACEUP)
 	end
 end

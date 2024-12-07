@@ -25,12 +25,12 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local hg=Duel.GetFieldGroup(tp,0,LOCATION_HAND)
 	Duel.ConfirmCards(tp,hg)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT+REASON_DISCARD)
+		Duel.SendtoRest(g,REASON_EFFECT+REASON_DISCARD)
 		Duel.ShuffleHand(1-tp)
 	else
 		local sg=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
 		local dg=sg:RandomSelect(tp,1)
-		Duel.SendtoGrave(dg,REASON_EFFECT+REASON_DISCARD)
+		Duel.SendtoRest(dg,REASON_EFFECT+REASON_DISCARD)
 		Duel.ShuffleHand(1-tp)
 	end
 end

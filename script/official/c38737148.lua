@@ -1,7 +1,7 @@
 --ライトレイ ダイダロス
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -32,7 +32,7 @@ function s.spcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
 	return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(Card.IsAttribute,tp,LOCATION_GRAVE,0,4,nil,ATTRIBUTE_LIGHT)
+		and Duel.IsExistingMatchingCard(Card.IsAttribute,tp,LOCATION_REST,0,4,nil,ATTRIBUTE_LIGHT)
 end
 function s.desfilter(c)
 	return Duel.IsExistingTarget(nil,0,LOCATION_ONFIELD,LOCATION_ONFIELD,2,c)

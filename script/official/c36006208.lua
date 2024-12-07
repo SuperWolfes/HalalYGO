@@ -15,7 +15,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0xb1}
 function s.filter(c)
-	return c:IsFaceup() and c:IsSetCard(0xb1) and c:IsAbleToGraveAsCost()
+	return c:IsFaceup() and c:IsSetCard(0xb1) and c:IsAbleToRestAsCost()
 end
 function s.costfilter(c,rg,dg)
 	local a=0
@@ -61,7 +61,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		e:SetLabel(0)
 		local rg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_MZONE,0,nil)
 		local dg=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,e:GetHandler(),e)
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local sg1=rg:FilterSelect(tp,s.costfilter,1,1,nil,rg,dg)
 		local sc=sg1:GetFirst()
 		local a=0
@@ -73,10 +73,10 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 				if dg:IsContains(tc) then a=a+1 end
 			end
 		end
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local sg2=rg:FilterSelect(tp,s.costfilter2,1,1,sc,a,dg)
 		sg1:Merge(sg2)
-		Duel.SendtoGrave(sg1,REASON_COST)
+		Duel.SendtoRest(sg1,REASON_COST)
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local g=Duel.SelectTarget(tp,aux.TRUE,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,3,e:GetHandler())

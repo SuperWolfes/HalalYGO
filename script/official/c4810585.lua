@@ -9,7 +9,7 @@ function s.initial_effect(c)
 	e0:SetCode(EVENT_FREE_CHAIN)
 	e0:SetHintTiming(0,TIMING_BATTLE_START)
 	c:RegisterEffect(e0)
-	--If your "Ancient Warriors" monster battles, your opponent cannot activate Spells/Traps until the end of the Damage Step
+	--If your "Ancient Warriors" monster battles, your opponent cannot activate Actionals/Traps until the end of the Damage Step
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
@@ -37,7 +37,7 @@ function s.initial_effect(c)
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_QUICK_O)
 	e3:SetCode(EVENT_ATTACK_ANNOUNCE)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetCountLimit(1,id)
 	e3:SetCondition(function(e,tp) return Duel.GetAttacker():IsControler(1-tp) end)
 	e3:SetCost(aux.SelfBanishCost)
@@ -52,8 +52,8 @@ function s.cannotactcon(e)
 end
 function s.cannotatkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGraveAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED) end
-	Duel.SendtoGrave(c,REASON_COST)
+	if chk==0 then return c:IsAbleToRestAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED) end
+	Duel.SendtoRest(c,REASON_COST)
 end
 function s.cannotatkop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.HasFlagEffect(tp,id) then return end

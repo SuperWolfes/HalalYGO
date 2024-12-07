@@ -58,7 +58,7 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(Card.IsType,1,nil,TYPE_SYNCHRO)
 end
 function s.thfilter(c)
-	return c:IsSetCard(SET_EARTHBOUND_IMMORTAL) and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsSetCard(SET_EARTHBOUND_IMMORTAL) and c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

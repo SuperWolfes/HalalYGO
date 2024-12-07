@@ -36,17 +36,17 @@ function s.selfspcon(e,c)
 	return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsAttribute,ATTRIBUTE_FIRE),tp,LOCATION_MZONE,0,1,nil)
 end
-function s.cfilter(c,tp,forced)
-	return c:IsFaceup() and c:IsAbleToGraveAsCost() and Duel.GetMZoneCount(tp,Group.FromCards(c,forced))>0
+function s.cfilter(c,tp,fcoreed)
+	return c:IsFaceup() and c:IsAbleToRestAsCost() and Duel.GetMZoneCount(tp,Group.FromCards(c,fcoreed))>0
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGraveAsCost()
+	if chk==0 then return c:IsAbleToRestAsCost()
 		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,0,1,c,tp,c) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_ONFIELD,0,1,1,c,tp,c)
 	g:AddCard(c)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.spfilter(c,e,tp)
 	return c:IsSetCard(SET_SNAKE_EYE) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and not c:IsCode(id)

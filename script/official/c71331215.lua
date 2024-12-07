@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.dtg)
 	e2:SetOperation(s.dop)
 	c:RegisterEffect(e2)
-	--to GY when last counter is removed
+	--to RP when last counter is removed
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e3:SetCode(EVENT_REMOVE_COUNTER+0x205)
@@ -42,7 +42,7 @@ end
 function s.dcon(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()
 	local rc=tc:GetReasonCard()
-	return #eg==1 and rc:IsControler(tp) and tc:IsMonster() and tc:IsReason(REASON_BATTLE) and tc:IsLocation(LOCATION_GRAVE) and rc:IsSetCard(0x161)
+	return #eg==1 and rc:IsControler(tp) and tc:IsMonster() and tc:IsReason(REASON_BATTLE) and tc:IsLocation(LOCATION_REST) and rc:IsSetCard(0x161)
 end
 function s.dtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,1) and e:GetHandler():IsCanRemoveCounter(tp,0x205,1,REASON_EFFECT) end
@@ -58,10 +58,10 @@ function s.dop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Draw(tp,1,REASON_EFFECT)
 	end
 end
---to GY when last counter is removed
+--to RP when last counter is removed
 function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetCounter(0x205)==0
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
+	Duel.SendtoRest(e:GetHandler(),REASON_EFFECT)
 end

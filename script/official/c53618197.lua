@@ -3,8 +3,8 @@
 -- Scripted by Satella
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
-	-- Destroy 1 Spell/Trap on the field
+	c:EnableAwakeLimit()
+	-- Destroy 1 Actional/Trap on the field
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DESTROY)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.destg)
 	e1:SetOperation(s.desop)
 	c:RegisterEffect(e1)
-	-- Special Summon 1 Level 3 or 4 "Nouvelles" Ritual Monster
+	-- Special Summon 1 Level 3 or 4 "Nouvelles" Locked Monster
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_RELEASE+CATEGORY_SPECIAL_SUMMON)
@@ -33,10 +33,10 @@ function s.initial_effect(c)
 end
 s.listed_series={SET_NOUVELLES,SET_RECIPE}
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsOnField() and chkc:IsSpellTrap() end
-	if chk==0 then return Duel.IsExistingTarget(Card.IsSpellTrap,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) end
+	if chkc then return chkc:IsOnField() and chkc:IsActionalTrap() end
+	if chk==0 then return Duel.IsExistingTarget(Card.IsActionalTrap,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-	local g=Duel.SelectTarget(tp,Card.IsSpellTrap,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
+	local g=Duel.SelectTarget(tp,Card.IsActionalTrap,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
@@ -49,7 +49,7 @@ function s.cfilter(c)
 	return c:IsReleasableByEffect() and c:IsAttackPos()
 end
 function s.spfilter(c,e,tp)
-	return c:IsSetCard(SET_NOUVELLES) and c:IsRitualMonster() and c:IsLevel(3,4)
+	return c:IsSetCard(SET_NOUVELLES) and c:IsLockedMonster() and c:IsLevel(3,4)
 		and c:IsCanBeSpecialSummoned(e,SUMMON_BY_NOUVELLES,tp,false,true)
 end
 function s.rescon(sg,e,tp,mg)

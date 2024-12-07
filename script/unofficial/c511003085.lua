@@ -41,13 +41,13 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetLabel()==0
 end
 function s.aclimit(e,re,tp)
-	if not re:IsActiveType(TYPE_SPELL) or re:GetHandler()==e:GetHandler() then return false end
+	if not re:IsActiveType(TYPE_ACTIONAL) or re:GetHandler()==e:GetHandler() then return false end
 	local c=re:GetHandler()
 	return not c:IsLocation(LOCATION_SZONE) or (Duel.GetTurnCount()-c:GetTurnID()<2 and c:GetFieldID()>e:GetHandler():GetFieldID())
 		and c:GetControler()==Duel.GetTurnPlayer()
 end
 function s.cfilter(c)
-	return c:IsSpell() and c:IsDiscardable()
+	return c:IsActional() and c:IsDiscardable()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetLabelObject():GetLabel()~=1 

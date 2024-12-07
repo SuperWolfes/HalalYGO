@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e2:SetCode(EVENT_PHASE+PHASE_STANDBY)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetCountLimit(1)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCondition(s.atkcon)
 	e2:SetTarget(s.atktg)
 	e2:SetOperation(s.atkop)
@@ -39,7 +39,7 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp and Duel.IsEnvironment(94585852)
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsLevelBelow(4) and c:IsRace(RACE_FIEND)
+	return c:IsFaceup() and c:IsLevelBelow(4) and c:IsRace(RACE_TAINTED)
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.filter(chkc) end

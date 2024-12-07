@@ -1,5 +1,5 @@
 --威光魔人
---Majesty's Fiend
+--Majesty's Tainted
 local s,id=GetID()
 function s.initial_effect(c)
 	--cannot special summon

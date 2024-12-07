@@ -1,8 +1,8 @@
 --古聖戴サウラヴィス
---Sauravis, the Ancient and Ascended
+--Sauravis, the Ancient and Open-minded
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--negate effect
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -40,7 +40,7 @@ function s.negcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.negcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsDiscardable() end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST+REASON_DISCARD)
+	Duel.SendtoRest(e:GetHandler(),REASON_COST+REASON_DISCARD)
 end
 function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -49,7 +49,7 @@ end
 function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.NegateActivation(ev) then
 		if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:GetHandler():IsRelateToEffect(re) then
-			Duel.SendtoGrave(eg,REASON_EFFECT)
+			Duel.SendtoRest(eg,REASON_EFFECT)
 		end
 	end
 end

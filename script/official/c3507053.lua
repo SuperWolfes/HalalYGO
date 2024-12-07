@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Link Summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_APPLIANCER),1)
 	--Cannot be Link Material
 	local e1=Effect.CreateEffect(c)
@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	e2:SetCondition(function(e) return e:GetHandler():IsLinked() end)
 	e2:SetValue(1000)
 	c:RegisterEffect(e2)
-	--Switch locations
+	--Smint locations
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetType(EFFECT_TYPE_QUICK_O)

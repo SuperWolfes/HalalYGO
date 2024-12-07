@@ -1,5 +1,5 @@
 --ダークネス・シムルグ
---Simorgh of Darkness
+--Sisbird of Darkness
 --Scripted by ahtelel
 local s,id=GetID()
 function s.initial_effect(c)
@@ -18,13 +18,13 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
 	e2:SetCode(EVENT_SUMMON_SUCCESS)
-	e2:SetRange(LOCATION_HAND|LOCATION_GRAVE)
+	e2:SetRange(LOCATION_HAND|LOCATION_REST)
 	e2:SetCountLimit(1,id)
 	e2:SetCondition(s.spcon)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
-	--Negate the activation of a Spell/Trap card or effect
+	--Negate the activation of a Actional/Trap card or effect
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_NEGATE+CATEGORY_DESTROY)
@@ -59,7 +59,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.discon(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED) then return false end
-	return re:IsSpellTrapEffect() and Duel.IsChainNegatable(ev)
+	return re:IsActionalTrapEffect() and Duel.IsChainNegatable(ev)
 end
 function s.cfilter(c)
 	return c:IsFaceup() and c:IsRace(RACE_WINGEDBEAST) and c:IsAttribute(ATTRIBUTE_WIND)

@@ -1,8 +1,8 @@
 --バーニングナックル・スピリッツ
---Battlin' Boxing Spirits
+--Battlin' Boxing Guardians
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send a card to the GY and Special Summon 1 "Battlin Boxer" monster
+	--Send a card to the RP and Special Summon 1 "Battlin Boxer" monster
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DECKDES+CATEGORY_SPECIAL_SUMMON)
@@ -20,7 +20,7 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeck(tp,1) end
 	Duel.SetOperationInfo(0,CATEGORY_DECKDES,nil,0,tp,1)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local dc=Duel.GetDecktopGroup(tp,1):GetFirst()
@@ -28,7 +28,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		Duel.BreakEffect()
 		if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,LOCATION_GRAVE,0,1,1,dc,e,tp)
+		local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.filter),tp,LOCATION_REST,0,1,1,dc,e,tp)
 		if #g>0 then
 			Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 		end

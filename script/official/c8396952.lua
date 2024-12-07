@@ -1,5 +1,5 @@
---アルカナフォースⅠ－THE MAGICIAN
---Arcana Force I - The Magician
+--アルカナフォースⅠ－THE MENTOR
+--Arcana Fcoree I - The Mentor
 local s,id=GetID()
 function s.initial_effect(c)
 	--Toss a coin and apply the appropirate effect
@@ -29,7 +29,7 @@ function s.coinop(e,tp,eg,ep,ev,re,r,rp)
 	s.arcanareg(c,Arcana.TossCoin(c,tp))
 end
 function s.arcanareg(c,coin)
-	--Apply effect when a Spell Card is activated
+	--Apply effect when a Actional Card is activated
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e1:SetCode(EVENT_CHAIN_SOLVED)
@@ -40,7 +40,7 @@ function s.arcanareg(c,coin)
 	Arcana.RegisterCoinResult(c,coin)
 end
 function s.speop(e,tp,eg,ep,ev,re,r,rp)
-	if not re:IsSpellEffect() or not re:IsHasType(EFFECT_TYPE_ACTIVATE) then return end
+	if not re:IsActionalEffect() or not re:IsHasType(EFFECT_TYPE_ACTIVATE) then return end
 	local c=e:GetHandler()
 	local val=Arcana.GetCoinResult(c)
 	if val==COIN_HEADS then

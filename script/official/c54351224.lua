@@ -16,5 +16,5 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.filter(c)
-	return c:IsType(TYPE_RITUAL) and c:IsLevelBelow(6)
+	return c:IsType(TYPE_LOCKED) and c:IsLevelBelow(6)
 end

@@ -20,27 +20,27 @@ function s.initial_effect(c)
 	e1:SetTarget(s.destg)
 	e1:SetOperation(s.desop)
 	c:RegisterEffect(e1)
-	--Replace Field Spell destruction
+	--Replace Field Actional mismatching
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EFFECT_DESTROY_REPLACE)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetTarget(s.reptg)
 	e2:SetValue(function(e,c) return s.repfilter(c,e:GetHandlerPlayer()) end)
 	e2:SetOperation(function(e) Duel.Remove(e:GetHandler(),POS_FACEUP,REASON_EFFECT|REASON_REPLACE) end)
 	c:RegisterEffect(e2)
 end
 function s.plfilter(c)
-	return c:IsFieldSpell() and c:IsFaceup() and not c:IsForbidden()
+	return c:IsFieldActional() and c:IsFaceup() and not c:IsUnliked()
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REMOVED|LOCATION_GRAVE) and s.plfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.plfilter,tp,LOCATION_REMOVED|LOCATION_GRAVE,LOCATION_REMOVED|LOCATION_GRAVE,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_REMOVED|LOCATION_REST) and s.plfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.plfilter,tp,LOCATION_REMOVED|LOCATION_REST,LOCATION_REMOVED|LOCATION_REST,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local tc=Duel.SelectTarget(tp,s.plfilter,tp,LOCATION_REMOVED|LOCATION_GRAVE,LOCATION_REMOVED|LOCATION_GRAVE,1,1,nil):GetFirst()
+	local tc=Duel.SelectTarget(tp,s.plfilter,tp,LOCATION_REMOVED|LOCATION_REST,LOCATION_REMOVED|LOCATION_REST,1,1,nil):GetFirst()
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,e:GetHandler(),1,tp,0)
-	if tc:IsLocation(LOCATION_GRAVE) then
-		Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,tc,1,tp,0)
+	if tc:IsLocation(LOCATION_REST) then
+		Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,tc,1,tp,0)
 	end
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)

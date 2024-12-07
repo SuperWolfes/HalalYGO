@@ -2,10 +2,10 @@
 --Stormriderflagship Custom Bahamut Bomber
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Link Summon procedure: 2+ "Stormrider" Link Monsters
 	Link.AddProcedure(c,s.matfilter,2)
-	--Place 1 opponent's monster in their Spell & Trap Zone as a Continuous Spell
+	--Place 1 opponent's monster in their Actional & Trap Zone as a Continuous Actional
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.pltg)
 	e1:SetOperation(s.plop)
 	c:RegisterEffect(e1)
-	--Destroy as many cards in your opponent's Spell & Trap Zone as possible
+	--Destroy as many cards in your opponent's Actional & Trap Zone as possible
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_DESTROY+CATEGORY_DAMAGE)
@@ -45,12 +45,12 @@ end
 function s.plop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and not tc:IsImmuneToEffect(e) and Duel.MoveToField(tc,tp,1-tp,LOCATION_SZONE,POS_FACEUP,tc:IsMonsterCard()) then
-		--Treated as a Continuous Spell
+		--Treated as a Continuous Actional
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 		e1:SetCode(EFFECT_CHANGE_TYPE)
-		e1:SetValue(TYPE_SPELL|TYPE_CONTINUOUS)
+		e1:SetValue(TYPE_ACTIONAL|TYPE_CONTINUOUS)
 		e1:SetReset((RESET_EVENT|RESETS_STANDARD)&~RESET_TURN_SET)
 		tc:RegisterEffect(e1)
 	end

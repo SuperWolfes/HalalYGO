@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMixN(c,true,true,88996322,1,aux.FilterBoolFunctionEx(Card.IsSetCard,0x19),2)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,s.splimit)
 	--negate
@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetRange(LOCATION_MZONE)
-	e2:SetCode(EFFECT_PATRICIAN_OF_DARKNESS)
+	e2:SetCode(EFFECT_PATR_OF_DARKNESS)
 	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e2:SetTargetRange(0,1)
 	c:RegisterEffect(e2)

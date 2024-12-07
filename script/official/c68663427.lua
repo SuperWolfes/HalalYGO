@@ -1,5 +1,5 @@
 --リンカーネイト・アンヴェイル・メイル
---Reincarnate Unveil Mail
+--Reincorporate Unveil Mail
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -34,13 +34,13 @@ function s.initial_effect(c)
 	local e2b=e1b:Clone()
 	e2b:SetLabelObject(e2)
 	c:RegisterEffect(e2b)
-	--Equip this card to 1 Xyz Monster you control during the End Phase of the turn that it was sent to the GY
+	--Equip this card to 1 Xyz Monster you control during the End Phase of the turn that it was sent to the RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_EQUIP)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e3:SetCode(EVENT_PHASE+PHASE_END)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetCountLimit(1)
 	e3:SetCondition(function(e) return e:GetHandler():GetTurnID()==Duel.GetTurnCount() end)
 	e3:SetTarget(s.eqptg)

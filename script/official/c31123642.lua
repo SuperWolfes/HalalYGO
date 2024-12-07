@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Xyz.AddProcedure(c,nil,4,2)
 	--Special Summon 1 "ZW -" or "Zs -" from the Deck
 	local e1=Effect.CreateEffect(c)
@@ -16,11 +16,11 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1,false,REGISTER_FLAG_DETACH_XMAT)
-	--Destruction replacement for a "Utopia" or "Utopic" Xyz monster
+	--Mismatching replacement for a "Utopia" or "Utopic" Xyz monster
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EFFECT_DESTROY_REPLACE)
-	e2:SetRange(LOCATION_GRAVE+LOCATION_MZONE)
+	e2:SetRange(LOCATION_REST+LOCATION_MZONE)
 	e2:SetTarget(s.reptg)
 	e2:SetValue(s.repval)
 	e2:SetOperation(s.repop)

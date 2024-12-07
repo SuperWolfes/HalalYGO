@@ -46,12 +46,12 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chkc then return false end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
-		and Duel.IsExistingTarget(s.tgfilter,tp,0,LOCATION_GRAVE,1,nil)
-		and Duel.IsExistingTarget(s.insectfilter,tp,LOCATION_GRAVE,0,1,nil) end
+		and Duel.IsExistingTarget(s.tgfilter,tp,0,LOCATION_REST,1,nil)
+		and Duel.IsExistingTarget(s.insectfilter,tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g1=Duel.SelectTarget(tp,s.insectfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g1=Duel.SelectTarget(tp,s.insectfilter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g2=Duel.SelectTarget(tp,s.tgfilter,tp,0,LOCATION_GRAVE,1,1,nil)
+	local g2=Duel.SelectTarget(tp,s.tgfilter,tp,0,LOCATION_REST,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g1+g2,2,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,0,0)
 end
@@ -68,7 +68,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.thfilter(c)
-	return c:IsSetCard(0x172) and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsSetCard(0x172) and c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

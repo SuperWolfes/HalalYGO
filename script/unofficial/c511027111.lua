@@ -1,5 +1,5 @@
 --ドドドウィッチ (Anime)
---Dododo Witch (Anime)
+--Dododo Mint (Anime)
 --Script by Rundas
 local s,id=GetID()
 function s.initial_effect(c)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	Duel.AddCustomActivityCounter(id,ACTIVITY_CHAIN,s.chainfilter)
 end
 function s.chainfilter(re,tp,cid)
-	return not ((re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_SPELL)) or (re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_TRAP)))
+	return not ((re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_ACTIONAL)) or (re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_TRAP)))
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(Card.IsFacedown,tp,LOCATION_SZONE,0,1,nil) and Duel.GetCustomActivityCount(id,tp,ACTIVITY_CHAIN)==0
@@ -47,5 +47,5 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)
 end
 function s.aclimit(e,re,tp)
-	return re:IsActiveType(TYPE_SPELL) or re:IsActiveType(TYPE_TRAP)
+	return re:IsActiveType(TYPE_ACTIONAL) or re:IsActiveType(TYPE_TRAP)
 end

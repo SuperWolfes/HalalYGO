@@ -44,10 +44,10 @@ end
 function s.textg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.texfilter,tp,LOCATION_MZONE,0,1,nil)
 		and (Duel.IsChainDisablable(ev) or (Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp))) end
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp))) end
 	Duel.SetOperationInfo(0,CATEGORY_TOEXTRA,nil,1,tp,LOCATION_MZONE)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_DISABLE,eg,1,tp,0)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end
 function s.texop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
@@ -57,7 +57,7 @@ function s.texop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.SendtoDeck(sc,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)==0 or not sc:IsLocation(LOCATION_EXTRA) then return end
 	local b1=Duel.IsChainDisablable(ev)
 	local b2=Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_GRAVE,0,1,nil,e,tp)
+		and Duel.IsExistingMatchingCard(aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,0,1,nil,e,tp)
 	if not (b1 or b2) then return end 
 	local op=Duel.SelectEffect(tp,
 		{b1,aux.Stringid(id,2)},
@@ -68,9 +68,9 @@ function s.texop(e,tp,eg,ep,ev,re,r,rp)
 		--Negate that activated effect
 		Duel.NegateEffect(ev)
 	elseif op==2 then
-		--Special Summon 1 Level 8 monster from your GY
+		--Special Summon 1 Level 8 monster from your RP
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+		local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,0,1,1,nil,e,tp)
 		if #g>0 then
 			Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 		end

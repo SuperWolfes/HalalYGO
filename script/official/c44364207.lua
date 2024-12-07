@@ -33,7 +33,7 @@ function s.indesval(e,re)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsLocation(LOCATION_GRAVE) and c:IsReason(REASON_BATTLE) and c:IsPreviousPosition(POS_FACEUP)
+	return c:IsLocation(LOCATION_REST) and c:IsReason(REASON_BATTLE) and c:IsPreviousPosition(POS_FACEUP)
 end
 function s.filter(c)
 	return c:IsRace(RACE_MACHINE) and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsLevel(4) and c:IsAbleToHand()

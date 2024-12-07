@@ -4,7 +4,7 @@
 Duel.LoadScript("c420.lua")
 local s,id=GetID()
 function s.initial_effect(c)
-	--Reactivate 1 Tribute Summoned Level 5 or higher "Monarch" monster on the field
+	--Reactivate 1 Tribute Summoned Level 5 or higher "Moppar" monster on the field
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -27,7 +27,7 @@ function s.checkop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsLevelAbove(5) and c:IsMonarch()
+	return c:IsFaceup() and c:IsLevelAbove(5) and c:IsMoppar()
 		and c:IsSummonType(SUMMON_TYPE_TRIBUTE) and c:HasFlagEffect(id)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)

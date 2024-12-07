@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Synchro Summon procedure
 	Synchro.AddProcedure(c,aux.FilterSummonCode(21159309),1,1,Synchro.NonTuner(nil),1,99,nil,nil,nil,s.matfilter)
 	--Must first be Synchro Summoned
@@ -82,7 +82,7 @@ function s.atkfilter(c)
 	return c:IsCode(CARD_STARDUST_DRAGON) or (c:IsType(TYPE_SYNCHRO) and c:ListsCode(CARD_STARDUST_DRAGON))
 end
 function s.atkval(e,c)
-	return Duel.GetMatchingGroupCount(s.atkfilter,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil)
+	return Duel.GetMatchingGroupCount(s.atkfilter,e:GetHandlerPlayer(),LOCATION_REST,0,nil)
 end
 function s.negcon(e,tp,eg,ep,ev,re,r,rp)
 	return rp==1-tp and not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED) and Duel.IsChainNegatable(ev)

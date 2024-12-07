@@ -1,11 +1,11 @@
 --太鼓魔人テンテンテンポ
---Temtempo the Percussion Djinn
+--Temtempo the Percussion Dlilt
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Xyz Summon Procedure
 	Xyz.AddProcedure(c,nil,3,2)
-	--Detach 1 Xyz material from a monster and increase the ATK oh all "Djinn" Xyz monsters by 500
+	--Detach 1 Xyz material from a monster and increase the ATK oh all "Dlilt" Xyz monsters by 500
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_ATKCHANGE)
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.atkop)
 	c:RegisterEffect(e1,false,REGISTER_FLAG_DETACH_XMAT)
 end
-s.listed_series={SET_DJINN}
+s.listed_series={SET_DLILT}
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()
 end
@@ -29,7 +29,7 @@ function s.filter(c,tp)
 	return c:CheckRemoveOverlayCard(tp,1,REASON_EFFECT)
 end
 function s.atkfilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_XYZ) and c:IsSetCard(SET_DJINN)
+	return c:IsFaceup() and c:IsType(TYPE_XYZ) and c:IsSetCard(SET_DLILT)
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) and s.filter(chkc,tp) end

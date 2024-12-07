@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion Materials: 1 LIGHT or DARK Dragon monster + 1 Dragon monster
 	Fusion.AddProcMix(c,true,true,s.matfilter,aux.FilterBoolFunctionEx(Card.IsRace,RACE_DRAGON))
 	--Destroy cards your opponent controls up to the number of your LIGHT and DARK monsters used as this card's Fusion Material

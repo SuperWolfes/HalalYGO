@@ -1,8 +1,8 @@
 --霞の谷の雷神鬼
---Mist Valley Thunder Lord
+--Mist Valley Thunder Watcher
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Synchro Summon procedure
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTunerEx(Card.IsSetCard,SET_MIST_VALLEY),1,99)
 	--Return to hand and increase ATK

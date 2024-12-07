@@ -33,10 +33,10 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not c:IsRelateToEffect(e) or c:IsStatus(STATUS_LEAVE_CONFIRMED) then return end
 	if c:IsCanTurnSet() and e:IsHasType(EFFECT_TYPE_ACTIVATE) then
 		Duel.BreakEffect()
-		c:CancelToGrave()
+		c:CancelToRest()
 		Duel.ChangePosition(c,POS_FACEDOWN)
 		Duel.RaiseEvent(c,EVENT_SSET,e,REASON_EFFECT,tp,tp,0)
 	else
-		c:CancelToGrave(false)
+		c:CancelToRest(false)
 	end
 end

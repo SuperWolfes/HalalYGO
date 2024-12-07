@@ -3,20 +3,20 @@
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon this card from the GY or hand
+	--Special Summon this card from the RP or hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY,EFFECT_FLAG2_CHECK_SIMULTANEOUS)
 	e1:SetCode(EVENT_DESTROYED)
-	e1:SetRange(LOCATION_GRAVE|LOCATION_HAND)
+	e1:SetRange(LOCATION_REST|LOCATION_HAND)
 	e1:SetCountLimit(1,id)
 	e1:SetCondition(s.spcon)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Add 1 "Salamangreat" Normal Spell from your Deck to your hand
+	--Add 1 "Salamangreat" Normal Actional from your Deck to your hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -60,10 +60,10 @@ end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local rc=c:GetReasonCard()
-	return c:IsLocation(LOCATION_GRAVE) and r==REASON_LINK and rc:IsRace(RACE_CYBERSE) and rc:IsLinkAbove(2)
+	return c:IsLocation(LOCATION_REST) and r==REASON_LINK and rc:IsRace(RACE_CYBERSE) and rc:IsLinkAbove(2)
 end
 function s.thfilter(c)
-	return c:IsSetCard(SET_SALAMANGREAT) and c:IsNormalSpell() and c:IsAbleToHand()
+	return c:IsSetCard(SET_SALAMANGREAT) and c:IsNormalActional() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

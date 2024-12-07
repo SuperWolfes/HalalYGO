@@ -3,10 +3,10 @@
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Link Summon procedure: 2 monsters, including a "Gladiator Beast" monster
 	Link.AddProcedure(c,nil,2,2,s.lcheck)
-	--Special Summon 1 Level 4 or lower "Gladiator Beast" monster from your hand or GY
+	--Special Summon 1 Level 4 or lower "Gladiator Beast" monster from your hand or RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -38,18 +38,18 @@ function s.lcheck(g,lc,sumtype,tp)
 end
 function s.spfilter(c,e,tp,opp_chk)
 	return c:IsSetCard(SET_GLADIATOR_BEAST) and c:IsCanBeSpecialSummoned(e,100,tp,false,false)
-		and ((c:IsLevelBelow(4) and c:IsLocation(LOCATION_HAND|LOCATION_GRAVE))
+		and ((c:IsLevelBelow(4) and c:IsLocation(LOCATION_HAND|LOCATION_REST))
 		or (opp_chk and c:IsLocation(LOCATION_DECK)))
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_GRAVE|LOCATION_DECK,0,1,nil,e,tp,Duel.GetFieldGroupCount(tp,0,LOCATION_MZONE)>0) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND|LOCATION_GRAVE|LOCATION_DECK)
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_REST|LOCATION_DECK,0,1,nil,e,tp,Duel.GetFieldGroupCount(tp,0,LOCATION_MZONE)>0) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND|LOCATION_REST|LOCATION_DECK)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local sc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_HAND|LOCATION_GRAVE|LOCATION_DECK,0,1,1,nil,e,tp,Duel.GetFieldGroupCount(tp,0,LOCATION_MZONE)>0):GetFirst()
+		local sc=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,LOCATION_HAND|LOCATION_REST|LOCATION_DECK,0,1,1,nil,e,tp,Duel.GetFieldGroupCount(tp,0,LOCATION_MZONE)>0):GetFirst()
 		if sc and Duel.SpecialSummon(sc,100,tp,tp,false,false,POS_FACEUP)>0 then
 			sc:RegisterFlagEffect(sc:GetOriginalCode(),RESET_EVENT|RESETS_STANDARD_DISABLE,0,1)
 		end

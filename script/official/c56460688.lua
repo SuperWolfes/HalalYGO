@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	--return
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
-	e2:SetCode(EVENT_TO_GRAVE)
+	e2:SetCode(EVENT_TO_REST)
 	e2:SetOperation(s.retop)
 	e2:SetLabelObject(e1)
 	c:RegisterEffect(e2)
@@ -43,7 +43,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		for tc in aux.Next(g) do
 			tc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1)
 		end
-		c:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD_EXC_GRAVE,0,1)
+		c:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD_EXC_REST,0,1)
 		g:KeepAlive()
 		e:SetLabelObject(g)
 	end

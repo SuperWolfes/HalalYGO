@@ -1,5 +1,5 @@
 --セレブローズ・マジシャン
---Celeb Rose Magician
+--Celeb Rose Mentor
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.costfilter(c)
-	return c:IsEquipSpell() and c:IsFaceup() and c:IsAbleToGraveAsCost()
+	return c:IsEquipActional() and c:IsFaceup() and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_ONFIELD,0,1,nil)
@@ -27,9 +27,9 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
 	local c=e:GetHandler()
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tg=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_ONFIELD,0,1,1,nil)
-	if Duel.SendtoGrave(tg,REASON_COST)<1 then return end
+	if Duel.SendtoRest(tg,REASON_COST)<1 then return end
 	--Effect
 	local g=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsLevelBelow,8),tp,0,LOCATION_MZONE,nil)
 	if #g>0 then
@@ -37,7 +37,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		local dg=g:Select(tp,1,1,nil)
 		dg:AddMaximumCheck()
 		Duel.HintSelection(dg)
-		if Duel.Destroy(dg,REASON_EFFECT)>0 and Duel.IsExistingMatchingCard(Card.IsSpell,tp,LOCATION_GRAVE,0,3,nil) then
+		if Duel.Destroy(dg,REASON_EFFECT)>0 and Duel.IsExistingMatchingCard(Card.IsActional,tp,LOCATION_REST,0,3,nil) then
 			local e1=Effect.CreateEffect(c)
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetCode(EFFECT_UPDATE_ATTACK)

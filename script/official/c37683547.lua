@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e1:SetCode(EFFECT_CHANGE_CODE)
-	e1:SetRange(LOCATION_MZONE+LOCATION_GRAVE)
+	e1:SetRange(LOCATION_MZONE+LOCATION_REST)
 	e1:SetValue(CARD_ALBAZ)
 	c:RegisterEffect(e1)
 	--Increase ATK
@@ -38,7 +38,7 @@ function s.initial_effect(c)
 	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e4:SetProperty(EFFECT_FLAG_DELAY)
 	e4:SetCode(EVENT_LEAVE_FIELD)
-	e4:SetRange(LOCATION_GRAVE)
+	e4:SetRange(LOCATION_REST)
 	e4:SetCountLimit(1,id)
 	e4:SetCondition(s.spcon)
 	e4:SetTarget(s.sptg)
@@ -50,10 +50,10 @@ function s.cfilter(c)
 	return c:IsType(TYPE_FUSION) and c:IsLevel(8)
 end
 function s.fuscon(e)
-	return Duel.IsExistingMatchingCard(s.cfilter,e:GetHandlerPlayer(),LOCATION_GRAVE,0,1,nil)
+	return Duel.IsExistingMatchingCard(s.cfilter,e:GetHandlerPlayer(),LOCATION_REST,0,1,nil)
 end
 function s.atkval(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsMonster,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil)*200
+	return Duel.GetMatchingGroupCount(Card.IsMonster,e:GetHandlerPlayer(),LOCATION_REST,0,nil)*200
 end
 function s.spcfilter(c,tp,rp)
 	return c:IsPreviousLocation(LOCATION_MZONE) and c:IsPreviousControler(tp) 
@@ -61,14 +61,14 @@ function s.spcfilter(c,tp,rp)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	if not (not eg:IsContains(e:GetHandler()) and eg:IsExists(s.spcfilter,1,nil,tp,rp)) then return false end
-	local fg=Duel.GetMatchingGroup(Card.IsType,tp,LOCATION_GRAVE,0,nil,TYPE_FUSION)
+	local fg=Duel.GetMatchingGroup(Card.IsType,tp,LOCATION_REST,0,nil,TYPE_FUSION)
 	return fg:FilterCount(aux.TRUE,eg)>0
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,0,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,0,LOCATION_REST)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

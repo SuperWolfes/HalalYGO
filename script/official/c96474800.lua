@@ -28,12 +28,12 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.distg(e,c)
 	local tpe=c:GetType()
-	return (tpe&TYPE_SPELL)~=0 and (tpe&TYPE_EQUIP+TYPE_FIELD+TYPE_CONTINUOUS+TYPE_QUICKPLAY)~=0
+	return (tpe&TYPE_ACTIONAL)~=0 and (tpe&TYPE_EQUIP+TYPE_FIELD+TYPE_CONTINUOUS+TYPE_QUICKPLAY)~=0
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	local tl=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_LOCATION)
 	local tpe=re:GetActiveType()
-	if (tl&LOCATION_SZONE)~=0 and (tpe&TYPE_SPELL)~=0 and (tpe&TYPE_EQUIP+TYPE_FIELD+TYPE_CONTINUOUS+TYPE_QUICKPLAY)~=0 then
+	if (tl&LOCATION_SZONE)~=0 and (tpe&TYPE_ACTIONAL)~=0 and (tpe&TYPE_EQUIP+TYPE_FIELD+TYPE_CONTINUOUS+TYPE_QUICKPLAY)~=0 then
 		Duel.NegateEffect(ev)
 	end
 end

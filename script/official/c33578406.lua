@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.destg)
 	e1:SetOperation(s.desop)
 	c:RegisterEffect(e1)
-	--Equip 1 "Bamboo Sword" Equip Spell from your Deck to a face-up monster on the field
+	--Equip 1 "Bamboo Sword" Equip Actional from your Deck to a face-up monster on the field
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_EQUIP)
@@ -48,11 +48,11 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.eqcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:GetEquipTarget() and c:IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(c,REASON_COST)
+	if chk==0 then return c:GetEquipTarget() and c:IsAbleToRestAsCost() end
+	Duel.SendtoRest(c,REASON_COST)
 end
 function s.eqfilter(c,tp)
-	return c:IsEquipSpell() and c:IsSetCard(SET_BAMBOO_SWORD) and not c:IsCode(id) and c:CheckUniqueOnField(tp) and not c:IsForbidden()
+	return c:IsEquipActional() and c:IsSetCard(SET_BAMBOO_SWORD) and not c:IsCode(id) and c:CheckUniqueOnField(tp) and not c:IsUnliked()
 		and Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil,c)
 end
 function s.tgfilter(c,ec)

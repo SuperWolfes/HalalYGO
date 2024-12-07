@@ -24,7 +24,7 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local g=Duel.SelectTarget(tp,aux.FaceupFilter(Card.IsAttackAbove,2000),tp,0,LOCATION_MZONE,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_REMOVE,nil,1,1-tp,LOCATION_MZONE|LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_REMOVE,nil,1,1-tp,LOCATION_MZONE|LOCATION_REST)
 end
 function s.hlfilter(c)
 	return c:IsNormalTrap() and (c:IsSetCard(SET_HOLE) or c:IsSetCard(SET_TRAP_HOLE))
@@ -35,8 +35,8 @@ end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not tc:IsRelateToEffect(e) or Duel.Destroy(tc,REASON_EFFECT)==0
-		or not Duel.IsExistingMatchingCard(s.hlfilter,tp,LOCATION_GRAVE,0,1,nil) then return end
-	local g=Duel.GetMatchingGroup(s.rmfilter,tp,0,LOCATION_MZONE|LOCATION_GRAVE,nil)
+		or not Duel.IsExistingMatchingCard(s.hlfilter,tp,LOCATION_REST,0,1,nil) then return end
+	local g=Duel.GetMatchingGroup(s.rmfilter,tp,0,LOCATION_MZONE|LOCATION_REST,nil)
 	if #g==0 or not Duel.SelectYesNo(tp,aux.Stringid(id,1)) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	local rg=g:Select(tp,1,1,nil)

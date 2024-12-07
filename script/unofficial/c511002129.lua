@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_NEGATE+CATEGORY_DESTROY+CATEGORY_POSITION+CATEGORY_TOGRAVE)
+	e1:SetCategory(CATEGORY_NEGATE+CATEGORY_DESTROY+CATEGORY_POSITION+CATEGORY_TOREST)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_BECOME_TARGET)
 	e1:SetCondition(s.condition)
@@ -25,7 +25,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 	Duel.SetTargetCard(tc)
 	Duel.SetOperationInfo(0,CATEGORY_POSITION,tc,1,0,0)
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,tc,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,tc,1,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
@@ -36,6 +36,6 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			Duel.Destroy(eg,REASON_EFFECT)
 		end
 		Duel.BreakEffect()
-		Duel.SendtoGrave(tc,REASON_EFFECT)
+		Duel.SendtoRest(tc,REASON_EFFECT)
 	end
 end

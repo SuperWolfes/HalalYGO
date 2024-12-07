@@ -1,6 +1,6 @@
---add procedure to equip spells equipping by rule
+--add procedure to equip actionals equipping by rule
 function Auxiliary.AddEquipProcedure(c,p,f,eqlimit,cost,tg,op,con,prop)
-	--Note: p==0 is check equip spell controler, p==1 for opponent's, PLAYER_ALL for both player's monsters
+	--Note: p==0 is check equip actional controler, p==1 for opponent's, PLAYER_ALL for both player's monsters
 	local property=prop or 0
 	--Activate
 	local e1=Effect.CreateEffect(c)

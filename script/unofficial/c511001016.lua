@@ -1,4 +1,4 @@
---Spellbinding Circle
+--Actionalbinding Circle
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddPersistentProcedure(c,1,nil,CATEGORY_ATKCHANGE+CATEGORY_POSITION,EFFECT_FLAG_DAMAGE_STEP,TIMING_DAMAGE_STEP,TIMING_DAMAGE_STEP,s.condition,nil,nil,nil,true)

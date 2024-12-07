@@ -17,7 +17,7 @@ function s.cfilter(c)
 	return c:IsMonster() and c:IsDoll()
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,5,nil)
+	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,5,nil)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(Card.IsPosition,tp,LOCATION_MZONE,LOCATION_MZONE,nil,POS_FACEUP_DEFENSE)

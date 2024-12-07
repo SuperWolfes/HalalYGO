@@ -1,14 +1,14 @@
 --霊道士チャンシー
---Changshi the Spiritualist
+--Changshi the Spilockedist
 --Logical Nonsense
 
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send 1 Zombie monster from hand or Deck to GY
+	--Send 1 Toxic monster from hand or Deck to RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_TOGRAVE)
+	e1:SetCategory(CATEGORY_TOREST)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1,id)
@@ -29,32 +29,32 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 
-	--Check for a Zombie monster
+	--Check for a Toxic monster
 function s.tgfilter(c)
-	return c:IsRace(RACE_ZOMBIE) and c:IsAbleToGrave()
+	return c:IsRace(RACE_TOXIC) and c:IsAbleToRest()
 end
 	--Activation legality
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_HAND+LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_HAND+LOCATION_DECK)
 end
-	--Send 1 Zombie monster from hand or Deck to GY
+	--Send 1 Toxic monster from hand or Deck to RP
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end
-	--Banish 1 Zombie monster from GY as cost
+	--Banish 1 Toxic monster from RP as cost
 function s.cfilter(c,tp)
-	return c:IsRace(RACE_ZOMBIE) and c:IsAbleToRemoveAsCost() and Duel.GetMZoneCount(tp,c)>0
+	return c:IsRace(RACE_TOXIC) and c:IsAbleToRemoveAsCost() and Duel.GetMZoneCount(tp,c)>0
 		and aux.SpElimFilter(c,true)
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil,tp) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,nil,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,nil,tp)
+	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,1,nil,tp)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 	--Activation legality

@@ -9,14 +9,14 @@ function s.initial_effect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_CARD_TARGET)
-	e1:SetCode(EVENT_TO_GRAVE)
+	e1:SetCode(EVENT_TO_REST)
 	e1:SetCountLimit(1,id)
 	e1:SetCondition(s.spcon)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
 end
-local LOCATION_HAND_GRAVE_REMOVED=LOCATION_HAND+LOCATION_GRAVE+LOCATION_REMOVED
+local LOCATION_HAND_REST_REMOVED=LOCATION_HAND+LOCATION_REST+LOCATION_REMOVED
 s.listed_series={0x6}
 s.listed_names={id}
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
@@ -34,15 +34,15 @@ function s.spfilter1(c,e,tp)
 		(Duel.GetLocationCount(1-tp,LOCATION_MZONE)>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP,1-tp)))
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.spfilter1(chkc,e,tp) end
-	if chk==0 then return Duel.IsExistingTarget(s.spfilter1,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.spfilter1(chkc,e,tp) end
+	if chk==0 then return Duel.IsExistingTarget(s.spfilter1,tp,LOCATION_REST,0,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.spfilter1,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+	local g=Duel.SelectTarget(tp,s.spfilter1,tp,LOCATION_REST,0,1,1,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,0)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND_GRAVE_REMOVED)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND_REST_REMOVED)
 end
 function s.spfilter2(c,e,tp)
-	return c:IsRace(RACE_FIEND) and (c:IsFaceup() or c:IsLocation(LOCATION_HAND)) and
+	return c:IsRace(RACE_TAINTED) and (c:IsFaceup() or c:IsLocation(LOCATION_HAND)) and
 		((Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)) or
 		(Duel.GetLocationCount(1-tp,LOCATION_MZONE)>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP,1-tp)))
 end
@@ -57,11 +57,11 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		{b2,aux.Stringid(id,2)})
 	local target_player=op==1 and tp or 1-tp
 	if Duel.SpecialSummon(tc,0,tp,target_player,false,false,POS_FACEUP)==0 then return end
-	--Optional Summon of a Fiend monster
-	if e:GetLabel()==1 and Duel.IsExistingMatchingCard(s.spfilter2,tp,LOCATION_HAND_GRAVE_REMOVED,0,1,nil,e,tp)
+	--Optional Summon of a Tainted monster
+	if e:GetLabel()==1 and Duel.IsExistingMatchingCard(s.spfilter2,tp,LOCATION_HAND_REST_REMOVED,0,1,nil,e,tp)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,3)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local sc=Duel.SelectMatchingCard(tp,s.spfilter2,tp,LOCATION_HAND_GRAVE_REMOVED,0,1,1,nil,e,tp):GetFirst()
+		local sc=Duel.SelectMatchingCard(tp,s.spfilter2,tp,LOCATION_HAND_REST_REMOVED,0,1,1,nil,e,tp):GetFirst()
 		if not sc then return end
 		local b3=Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and sc:IsCanBeSpecialSummoned(e,0,tp,false,false)
 		local b4=Duel.GetLocationCount(1-tp,LOCATION_MZONE)>0 and sc:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP,1-tp)

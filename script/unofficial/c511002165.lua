@@ -1,5 +1,5 @@
 --蝉鳴くバリア－ミンミンフォース－
---Cicada Force
+--Cicada Fcoree
 Duel.LoadScript("c420.lua")
 local s,id=GetID()
 function s.initial_effect(c)

@@ -1,8 +1,8 @@
 --オルフェゴール・ロンギルス
---Longirsu, the Orcust Orchestrator
+--Longirsu, the Coreust Corehestrator
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_EFFECT),2,nil,s.matcheck)
 	--indes
 	local e1=Effect.CreateEffect(c)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	--to deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
-	e2:SetCategory(CATEGORY_TODECK+CATEGORY_TOGRAVE)
+	e2:SetCategory(CATEGORY_TODECK+CATEGORY_TOREST)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetRange(LOCATION_MZONE)
@@ -40,10 +40,10 @@ function s.indcon(e)
 	return e:GetHandler():IsLinked()
 end
 function s.tdcon1(e,tp,eg,ep,ev,re,r,rp)
-	return not Duel.IsPlayerAffectedByEffect(tp,CARD_ORCUSTRATED_BABEL)
+	return not Duel.IsPlayerAffectedByEffect(tp,CARD_COREUSTRATED_BABEL)
 end
 function s.tdcon2(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsPlayerAffectedByEffect(tp,CARD_ORCUSTRATED_BABEL)
+	return Duel.IsPlayerAffectedByEffect(tp,CARD_COREUSTRATED_BABEL)
 end
 function s.tdcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():GetAttackAnnouncedCount()==0 end
@@ -75,8 +75,8 @@ function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(Card.IsLinked,tp,0,LOCATION_MZONE,nil)
 	if #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.BreakEffect()
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local sg=g:Select(tp,1,1,nil)
-		Duel.SendtoGrave(sg,REASON_EFFECT)
+		Duel.SendtoRest(sg,REASON_EFFECT)
 	end
 end

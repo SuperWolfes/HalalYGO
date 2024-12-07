@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion Materials
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,CARD_NEOS,s.ffilter)
 	--Must be Fusion Summoned
 	local e0=Effect.CreateEffect(c)
@@ -76,9 +76,9 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Destroy(dg,REASON_EFFECT)
 	end
 end
---Gains 300 ATK for each monster in your GY
+--Gains 300 ATK for each monster in your RP
 function s.atkval(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsMonster,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil)*300
+	return Duel.GetMatchingGroupCount(Card.IsMonster,e:GetHandlerPlayer(),LOCATION_REST,0,nil)*300
 end
 --Inflict damage
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)

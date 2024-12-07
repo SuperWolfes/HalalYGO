@@ -1,5 +1,5 @@
 --運命のドロー
---Draw of Fate
+--Draw of Bate
 --Scripted by AlphaKretin, Naim and andré
 local s,id=GetID()
 function s.initial_effect(c)

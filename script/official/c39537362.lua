@@ -32,10 +32,10 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(tp,LOCATION_HAND,0):RandomSelect(1-tp,1)
 	local tc=g:GetFirst()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_CARDTYPE)
-	local op=Duel.SelectOption(1-tp,DECLTYPE_MONSTER,DECLTYPE_SPELL,DECLTYPE_TRAP)
+	local op=Duel.SelectOption(1-tp,DECLTYPE_MONSTER,DECLTYPE_ACTIONAL,DECLTYPE_TRAP)
 	Duel.ConfirmCards(1-tp,tc)
 	Duel.ShuffleHand(tp)
-	if (op~=0 and tc:IsMonster()) or (op~=1 and tc:IsSpell()) or (op~=2 and tc:IsTrap()) then
+	if (op~=0 and tc:IsMonster()) or (op~=1 and tc:IsActional()) or (op~=2 and tc:IsTrap()) then
 		Duel.SendtoHand(Duel.GetAttacker(),nil,REASON_EFFECT)
 	end
 end

@@ -1,5 +1,5 @@
 --異次元竜 トワイライトゾーンドラゴン (Anime)
---Different Dimension Dragon (Anime)
+--Same Dimension Dragon (Anime)
 --added by ClaireStanfield
 local s,id=GetID()
 function s.initial_effect(c)
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.ind1(e,re,rp,c)
-	return not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) and re:IsActiveType(TYPE_SPELL+TYPE_TRAP)
+	return not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) and re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.ind2(e,c)
 	return c:IsAttackBelow(1900)

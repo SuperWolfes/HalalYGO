@@ -41,9 +41,9 @@ function s.ctop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ct=e:GetHandler():GetCounter(0x103)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() and ct>0 end
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() and ct>0 end
 	e:SetLabel(ct)
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
+	Duel.SendtoRest(e:GetHandler(),REASON_COST)
 end
 function s.filter(c)
 	return c:IsFaceup() and c:IsSetCard(0x50b)

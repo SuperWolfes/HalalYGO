@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion Material
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_EARTHBOUND),aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_DARK))
 	--Search 1 "Earthbound" monster
@@ -82,7 +82,7 @@ end
 function s.damfilter(c,e,tp)
 	local rc=c:GetReasonEffect():GetHandler()
 	return rc:IsSetCard(SET_EARTHBOUND) and c:IsMonster() and c:IsPreviousLocation(LOCATION_MZONE)
-		and c:IsPreviousControler(1-tp) and c:IsLocation(LOCATION_GRAVE|LOCATION_REMOVED)
+		and c:IsPreviousControler(1-tp) and c:IsLocation(LOCATION_REST|LOCATION_REMOVED)
 		and c:IsReason(REASON_EFFECT) and c:IsCanBeEffectTarget(e) and c:GetTextAttack()>0
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

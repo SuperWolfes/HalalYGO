@@ -54,7 +54,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		end
 		if c:IsRelateToEffect(e) then
 			Duel.BreakEffect()
-			c:CancelToGrave()
+			c:CancelToRest()
 			Duel.Overlay(tc,c)
 		end
 	end
@@ -101,7 +101,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		end
 		if c:IsRelateToEffect(e) then
 			Duel.BreakEffect()
-			c:CancelToGrave()
+			c:CancelToRest()
 			Duel.Overlay(tc,c)
 		end
 	end

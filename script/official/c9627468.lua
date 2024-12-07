@@ -56,14 +56,14 @@ function s.hspop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,PLAYER_ALL,LOCATION_HAND|LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,PLAYER_ALL,LOCATION_HAND|LOCATION_REST)
 end
 function s.spfilter(c,e,tp)
 	return c:IsRace(RACE_INSECT) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.insectsp(e,p)
 	if Duel.GetLocationCount(p,LOCATION_MZONE)==0 then return end
-	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),p,LOCATION_HAND|LOCATION_GRAVE,0,nil,e,p)
+	local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.spfilter),p,LOCATION_HAND|LOCATION_REST,0,nil,e,p)
 	if #g==0 or not Duel.SelectYesNo(p,aux.Stringid(id,2)) then return end
 	Duel.Hint(HINT_SELECTMSG,p,HINTMSG_SPSUMMON)
 	local tc=g:Select(p,1,1,nil):GetFirst()

@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e2:SetRange(LOCATION_ONFIELD)
 	c:RegisterEffect(e2)
 	--Perform a Fusion Summon
-	local params = {gc=Fusion.ForcedHandler,stage2=s.stage2}
+	local params = {gc=Fusion.FcoreedHandler,stage2=s.stage2}
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)
@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	e3:SetTarget(Fusion.SummonEffTG(params))
 	e3:SetOperation(Fusion.SummonEffOP(params))
 	c:RegisterEffect(e3)
-	--Destruction replacement effect
+	--Mismatching replacement effect
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_EQUIP)
 	e4:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
@@ -44,7 +44,7 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.stage2(e,tc,tp,sg,chk)
 	local c=e:GetHandler()
-	if chk==1 and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and c:IsLocation(LOCATION_GRAVE)then
+	if chk==1 and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and c:IsLocation(LOCATION_REST)then
 		if not Duel.Equip(tp,e:GetHandler(),tc,false) then return end
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)

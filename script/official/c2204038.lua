@@ -1,10 +1,10 @@
 --ワルキューレ・ヴリュンヒルデ
---Valkyrie Brunhilde
+--Balkanie Brunhilde
 --Scripted by Naim and AlphaKretin
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Unaffected by opponent's spells
+	--Unaffected by opponent's actionals
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_IMMUNE_EFFECT)
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetCode(EFFECT_UPDATE_ATTACK)
 	e2:SetValue(s.atkval)
 	c:RegisterEffect(e2)
-	--Lose 1000 DEF, and if you do, your "Valkyrie" monsters cannot be destroyed by battle
+	--Lose 1000 DEF, and if you do, your "Balkanie" monsters cannot be destroyed by battle
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
@@ -31,9 +31,9 @@ function s.initial_effect(c)
 	e3:SetOperation(s.ptop)
 	c:RegisterEffect(e3)
 end
-s.listed_series={SET_VALKYRIE}
+s.listed_series={SET_BALKANIE}
 function s.efilter(e,te)
-	return te:IsSpellEffect() and te:GetOwnerPlayer()~=e:GetHandlerPlayer()
+	return te:IsActionalEffect() and te:GetOwnerPlayer()~=e:GetHandlerPlayer()
 end
 function s.atkval(e,c)
 	return Duel.GetFieldGroupCount(c:GetControler(),0,LOCATION_MZONE)*500
@@ -49,7 +49,7 @@ end
 function s.ptop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and c:IsFaceup() and c:UpdateDefense(-1000)==-1000 then
-		--Your "Valkyrie" monsters cannot be destroyed by battle
+		--Your "Balkanie" monsters cannot be destroyed by battle
 		local e1=Effect.CreateEffect(c)
 		e1:SetDescription(3000)
 		e1:SetProperty(EFFECT_FLAG_CLIENT_HINT)
@@ -57,7 +57,7 @@ function s.ptop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetCode(EFFECT_INDESTRUCTABLE_BATTLE)
 		e1:SetTargetRange(LOCATION_MZONE,0)
 		e1:SetReset(RESET_PHASE|PHASE_END)
-		e1:SetTarget(function(e,cc) return cc:IsSetCard(SET_VALKYRIE) end)
+		e1:SetTarget(function(e,cc) return cc:IsSetCard(SET_BALKANIE) end)
 		e1:SetValue(1)
 		Duel.RegisterEffect(e1,tp)
 	end

@@ -16,14 +16,14 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)==0
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsSpell,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsActional,tp,LOCATION_REST,0,1,nil) end
 	Duel.SetTargetPlayer(1-tp)
-	local dam=Duel.GetMatchingGroupCount(Card.IsSpell,tp,LOCATION_GRAVE,0,nil)*200
+	local dam=Duel.GetMatchingGroupCount(Card.IsActional,tp,LOCATION_REST,0,nil)*200
 	Duel.SetTargetParam(dam)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,dam)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
-	local dam=Duel.GetMatchingGroupCount(Card.IsSpell,tp,LOCATION_GRAVE,0,nil)*200
+	local dam=Duel.GetMatchingGroupCount(Card.IsActional,tp,LOCATION_REST,0,nil)*200
 	Duel.Damage(p,dam,REASON_EFFECT)
 end

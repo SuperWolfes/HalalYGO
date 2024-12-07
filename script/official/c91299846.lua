@@ -34,18 +34,18 @@ function s.initial_effect(c)
 end
 s.listed_series={0x109}
 function s.cfilter(c,tp)
-	return c:IsFaceup() and c:IsType(TYPE_CONTINUOUS) and c:IsAbleToGraveAsCost()
+	return c:IsFaceup() and c:IsType(TYPE_CONTINUOUS) and c:IsAbleToRestAsCost()
 		and Duel.IsExistingMatchingCard(s.tffilter,tp,LOCATION_DECK,0,1,nil,c,tp)
 end
 function s.tffilter(c,cc,tp)
-	return c:IsSpellTrap() and c:IsSetCard(0x109) and not c:IsForbidden()
+	return c:IsActionalTrap() and c:IsSetCard(0x109) and not c:IsUnliked()
 		and c:CheckUniqueOnField(tp,LOCATION_ONFIELD,cc) and not c:IsType(TYPE_FIELD)
 end
 function s.tfcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,0,1,nil,tp) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_ONFIELD,0,1,1,nil,tp)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.tftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>-1 end

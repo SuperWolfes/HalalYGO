@@ -1,8 +1,8 @@
 --幻獣機ライテン
---Mecha Phantom Beast Raiten
+--Mecha Illusion Beast Raiten
 local s,id=GetID()
 function s.initial_effect(c)
-	--Gaqins the combined levels of all "Mecha Phantom Beast Tokens"
+	--Gaqins the combined levels of all "Mecha Illusion Beast Tokens"
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_UPDATE_LEVEL)
 	e1:SetValue(s.lvval)
 	c:RegisterEffect(e1)
-	--Cannot be destroyed by battle or effect while you control "Mecha Phantom Beast Token"
+	--Cannot be destroyed by battle or effect while you control "Mecha Illusion Beast Token"
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	local e3=e2:Clone()
 	e3:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
 	c:RegisterEffect(e3)
-	--Special Summon 1 "Mecha Phantom Beast Token"
+	--Special Summon 1 "Mecha Illusion Beast Token"
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,0))
 	e4:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOKEN)
@@ -33,10 +33,10 @@ function s.initial_effect(c)
 	e4:SetOperation(s.spop)
 	c:RegisterEffect(e4)
 end
-s.listed_series={SET_MECHA_PHANTOM_BEAST}
-s.listed_names={TOKEN_MECHA_PHANTOM_BEAST}
+s.listed_series={SET_MECHA_ILLUSION_BEAST}
+s.listed_names={TOKEN_MECHA_ILLUSION_BEAST}
 function s.lvval(e,c)
-	return Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsCode,TOKEN_MECHA_PHANTOM_BEAST),c:GetControler(),LOCATION_MZONE,0,nil):GetSum(Card.GetLevel)
+	return Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsCode,TOKEN_MECHA_ILLUSION_BEAST),c:GetControler(),LOCATION_MZONE,0,nil):GetSum(Card.GetLevel)
 end
 function s.indcon(e)
 	return Duel.IsExistingMatchingCard(Card.IsType,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil,TYPE_TOKEN)
@@ -47,7 +47,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_MECHA_PHANTOM_BEAST,SET_MECHA_PHANTOM_BEAST,TYPES_TOKEN,0,0,3,RACE_MACHINE,ATTRIBUTE_WIND) end
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_MECHA_ILLUSION_BEAST,SET_MECHA_ILLUSION_BEAST,TYPES_TOKEN,0,0,3,RACE_MACHINE,ATTRIBUTE_WIND) end
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,0)
 end
@@ -56,7 +56,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_CANNOT_BE_FUSION_MATERIAL)
 	e1:SetTargetRange(LOCATION_ALL,LOCATION_ALL)
-	e1:SetTarget(aux.NOT(aux.TargetBoolFunction(Card.IsSetCard,SET_MECHA_PHANTOM_BEAST)))
+	e1:SetTarget(aux.NOT(aux.TargetBoolFunction(Card.IsSetCard,SET_MECHA_ILLUSION_BEAST)))
 	e1:SetValue(s.sumlimit)
 	e1:SetReset(RESET_PHASE|PHASE_END)
 	Duel.RegisterEffect(e1,tp)
@@ -70,8 +70,8 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	e4:SetCode(EFFECT_CANNOT_BE_LINK_MATERIAL)
 	Duel.RegisterEffect(e4,tp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_MECHA_PHANTOM_BEAST,SET_MECHA_PHANTOM_BEAST,TYPES_TOKEN,0,0,3,RACE_MACHINE,ATTRIBUTE_WIND) then
-		local token=Duel.CreateToken(tp,TOKEN_MECHA_PHANTOM_BEAST)
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_MECHA_ILLUSION_BEAST,SET_MECHA_ILLUSION_BEAST,TYPES_TOKEN,0,0,3,RACE_MACHINE,ATTRIBUTE_WIND) then
+		local token=Duel.CreateToken(tp,TOKEN_MECHA_ILLUSION_BEAST)
 		Duel.SpecialSummon(token,0,tp,tp,false,false,POS_FACEUP)
 	end
 end

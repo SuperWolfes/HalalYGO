@@ -27,14 +27,14 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,2))
 	local ac=Duel.SelectOption(tp,aux.Stringid(id,0),aux.Stringid(id,1))
-	local ty=TYPE_SPELL
+	local ty=TYPE_ACTIONAL
 	if ac==1 then ty=TYPE_TRAP end
 	e:SetLabel(ty)
 	local g=Duel.GetMatchingGroup(s.tgfilter,tp,0,LOCATION_ONFIELD,nil,ty)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,#g,0,0)
 end
 function s.cffilter(c)
-	return c:IsLocation(LOCATION_HAND) or (c:IsFacedown() and c:IsSpellTrap())
+	return c:IsLocation(LOCATION_HAND) or (c:IsFacedown() and c:IsActionalTrap())
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ty=e:GetLabel()

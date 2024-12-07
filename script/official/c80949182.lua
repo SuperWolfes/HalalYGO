@@ -3,8 +3,8 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Synchro summon procedure
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	--If synchro summoned using a synchro monster, can make a second attack
@@ -33,7 +33,7 @@ function s.initial_effect(c)
 	e3:SetTarget(s.attg)
 	e3:SetOperation(s.atop)
 	c:RegisterEffect(e3)
-	--Inflict damage, equal to number of "Battlewasp" monsters in GY x 300
+	--Inflict damage, equal to number of "Battlewasp" monsters in RP x 300
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_DAMAGE)
@@ -115,15 +115,15 @@ function s.filter(c)
 	return c:IsSetCard(0x12f) and c:IsMonster()
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,1,nil) end
-	local dam=Duel.GetMatchingGroupCount(s.filter,tp,LOCATION_GRAVE,0,nil)*300
+	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,1,nil) end
+	local dam=Duel.GetMatchingGroupCount(s.filter,tp,LOCATION_REST,0,nil)*300
 	Duel.SetTargetPlayer(1-tp)
 	Duel.SetTargetParam(dam)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,dam)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
-	local d=Duel.GetMatchingGroupCount(s.filter,tp,LOCATION_GRAVE,0,nil)*300
+	local d=Duel.GetMatchingGroupCount(s.filter,tp,LOCATION_REST,0,nil)*300
 	Duel.Damage(p,d,REASON_EFFECT)
 end
 function s.checkop(e,tp,eg,ep,ev,re,r,rp)

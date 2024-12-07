@@ -3,7 +3,7 @@
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Link Summon procedure
 	Link.AddProcedure(c,nil,2,3,s.lcheck)
 	--Add 1 "Ragnaraika" Trap from your Deck to your hand
@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_TODECK+CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetTarget(s.selfsptg)
 	e2:SetOperation(s.selfspop)
@@ -37,9 +37,9 @@ function s.thcostfilter(c)
 	return c:IsRace(RACE_INSECT|RACE_PLANT|RACE_REPTILE) and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.thcostfilter,tp,LOCATION_GRAVE|LOCATION_MZONE,0,2,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.thcostfilter,tp,LOCATION_REST|LOCATION_MZONE,0,2,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.thcostfilter,tp,LOCATION_GRAVE|LOCATION_MZONE,0,2,2,nil)
+	local g=Duel.SelectMatchingCard(tp,s.thcostfilter,tp,LOCATION_REST|LOCATION_MZONE,0,2,2,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.thfilter(c)

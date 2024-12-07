@@ -1,5 +1,5 @@
 --
---Demigod of the Tistina
+--Demimonster of the Tistina
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	--Flip opponent's monsters face-down
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_POSITION+CATEGORY_TOGRAVE)
+	e2:SetCategory(CATEGORY_POSITION+CATEGORY_TOREST)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_FREE_CHAIN)
 	e2:SetRange(LOCATION_MZONE)
@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.posop)
 	c:RegisterEffect(e2)
 end
-s.listed_names={CARD_CRYSTAL_GOD_TISTINA}
+s.listed_names={CARD_CRYSTAL_MONSTER_TISTINA}
 s.listed_series={SET_TISTINA}
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,SET_TISTINA),tp,LOCATION_ONFIELD,0,1,nil)
@@ -41,7 +41,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
 function s.thfilter(c)
-	return c:IsSetCard(SET_TISTINA) and c:IsSpellTrap()
+	return c:IsSetCard(SET_TISTINA) and c:IsActionalTrap()
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -58,13 +58,13 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.poscon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsTurnPlayer(1-tp)
-		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_CRYSTAL_GOD_TISTINA),tp,LOCATION_ONFIELD,0,1,nil)
+		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_CRYSTAL_MONSTER_TISTINA),tp,LOCATION_ONFIELD,0,1,nil)
 end
 function s.postg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(Card.IsCanTurnSet,tp,0,LOCATION_MZONE,nil)
 	if chk==0 then return #g>0 end
 	Duel.SetOperationInfo(0,CATEGORY_POSITION,g,#g,0,0)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,nil,1,1-tp,LOCATION_ONFIELD)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,nil,1,1-tp,LOCATION_ONFIELD)
 end
 function s.posop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(Card.IsCanTurnSet,tp,0,LOCATION_MZONE,nil)
@@ -72,6 +72,6 @@ function s.posop(e,tp,eg,ep,ev,re,r,rp)
 	local gg=Duel.GetMatchingGroup(Card.IsFaceup,tp,0,LOCATION_ONFIELD,nil)
 	if #gg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,3)) then
 		Duel.BreakEffect()
-		Duel.SendtoGrave(gg,REASON_EFFECT)
+		Duel.SendtoRest(gg,REASON_EFFECT)
 	end
 end

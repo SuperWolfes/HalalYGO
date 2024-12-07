@@ -1,8 +1,8 @@
 --Ｇゴーレム・クリスタルハート
---G Golem Crystal Heart
+--G Gopal Crystal Heart
 local cid, id = GetID()
 function cid.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_CYBERSE),2)
 	--special summon
 	local e1=Effect.CreateEffect(c)
@@ -39,11 +39,11 @@ function cid.spfilter(c,e,tp,ec)
 	return c:IsLinkMonster() and c:IsAttribute(ATTRIBUTE_EARTH) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP,tp,zone)
 end
 function cid.sptarget(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and cid.spfilter(chkc,e,tp,e:GetHandler()) end
-	if chk==0 then return Duel.IsExistingTarget(cid.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp,e:GetHandler()) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and cid.spfilter(chkc,e,tp,e:GetHandler()) end
+	if chk==0 then return Duel.IsExistingTarget(cid.spfilter,tp,LOCATION_REST,0,1,nil,e,tp,e:GetHandler()) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,cid.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp,e:GetHandler())
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,LOCATION_GRAVE)
+	local g=Duel.SelectTarget(tp,cid.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp,e:GetHandler())
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,LOCATION_REST)
 end
 function cid.spoperation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

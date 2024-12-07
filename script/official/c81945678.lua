@@ -3,7 +3,7 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Copy face card spell
+	--Copy face card actional
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_FREE_CHAIN)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetHintTiming(TIMING_END_PHASE)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(s.tdcon)
@@ -36,8 +36,8 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsMainPhase() or Duel.IsBattlePhase()
 end
 function s.copfilter(c)
-	return c:IsAbleToGraveAsCost() and c:ListsCode(CARD_JACK_KNIGHT,CARD_KING_KNIGHT,CARD_QUEEN_KNIGHT) 
-		and c:IsSpell() and c:CheckActivateEffect(true,true,false)~=nil
+	return c:IsAbleToRestAsCost() and c:ListsCode(CARD_JACK_KNIGHT,CARD_KING_KNIGHT,CARD_QUEEN_KNIGHT) 
+		and c:IsActional() and c:CheckActivateEffect(true,true,false)~=nil
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.copfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -49,7 +49,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	end
 	if chk==0 then return Duel.IsExistingMatchingCard(s.copfilter,tp,LOCATION_DECK,0,1,nil) end
 	local g=Duel.SelectMatchingCard(tp,s.copfilter,tp,LOCATION_DECK,0,1,1,nil)
-	if not Duel.SendtoGrave(g,REASON_COST) then return end
+	if not Duel.SendtoRest(g,REASON_COST) then return end
 	local te=g:GetFirst():CheckActivateEffect(true,true,false)
 	e:SetLabel(te:GetLabel())
 	e:SetLabelObject(te:GetLabelObject())
@@ -80,11 +80,11 @@ function s.tdfilter(c)
 	return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_WARRIOR) and c:IsAbleToDeck()
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.tdfilter(chkc) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.tdfilter(chkc) end
 	if chk==0 then return e:GetHandler():IsAbleToHand()
-		and Duel.IsExistingTarget(s.tdfilter,tp,LOCATION_GRAVE,0,1,nil) end
+		and Duel.IsExistingTarget(s.tdfilter,tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectTarget(tp,s.tdfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.tdfilter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,e:GetHandler(),1,0,0)
 end

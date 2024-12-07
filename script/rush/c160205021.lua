@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion Summon Procedure
 	Fusion.AddProcMixN(c,true,true,CARD_CYBER_DRAGON,2)
 	--Draw up to 5 cards and discard 4 and Special Summon 1 monster from the hand
@@ -35,11 +35,11 @@ function s.drwop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)
 	if Duel.Draw(tp,5-ct,REASON_EFFECT)==5-ct then
 		Duel.ShuffleHand(tp)
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-		local g=Duel.SelectMatchingCard(tp,Card.IsAbleToGrave,tp,LOCATION_HAND,0,4,4,nil)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+		local g=Duel.SelectMatchingCard(tp,Card.IsAbleToRest,tp,LOCATION_HAND,0,4,4,nil)
 		if #g==0 then return end
 		Duel.BreakEffect()
-		if Duel.SendtoGrave(g,REASON_EFFECT)>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 then
+		if Duel.SendtoRest(g,REASON_EFFECT)>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 then
 			local sg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_HAND,0,nil,e,tp)
 			if #sg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)

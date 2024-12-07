@@ -3,10 +3,10 @@
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion Summon Procedure
 	Fusion.AddProcMix(c,true,true,160012001,160210064)
-	--Send the top 3 cards of deck to GY
+	--Send the top 3 cards of deck to RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetCategory(CATEGORY_DECKDES+CATEGORY_TOHAND)
@@ -23,7 +23,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return ct>0
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,nil) end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeck(tp,3) end
@@ -31,9 +31,9 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local tg=Duel.SelectMatchingCard(tp,Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,1,nil)
-	if Duel.SendtoGrave(tg,REASON_COST)==0 then return end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	local tg=Duel.SelectMatchingCard(tp,Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,1,nil)
+	if Duel.SendtoRest(tg,REASON_COST)==0 then return end
 	--Effect
 	Duel.DiscardDeck(tp,3,REASON_EFFECT)
 	local og=Duel.GetOperatedGroup():Filter(Card.IsAttribute,nil,ATTRIBUTE_FIRE)

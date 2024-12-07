@@ -18,7 +18,7 @@ function s.rescon(sg,e,tp,mg)
 	return sg:FilterCount(Card.IsMonster,nil)>=2
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,e:GetHandler())
+	local g=Duel.GetMatchingGroup(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,e:GetHandler())
 	if chk==0 then return aux.SelectUnselectGroup(g,e,tp,3,3,s.rescon,0) end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -31,9 +31,9 @@ function s.atkfilter(c)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	local g=Duel.GetMatchingGroup(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,e:GetHandler())
+	local g=Duel.GetMatchingGroup(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,e:GetHandler())
 	local og=aux.SelectUnselectGroup(g,e,tp,3,3,s.rescon,1,tp,HINTMSG_DISCARD,s.rescon)
-	if Duel.SendtoGrave(og,REASON_COST)<1 then return end
+	if Duel.SendtoRest(og,REASON_COST)<1 then return end
 	--Effect
 	local g=Duel.GetMatchingGroup(Card.IsNotMaximumModeSide,tp,0,LOCATION_ONFIELD,nil)
 	if #g>0 then

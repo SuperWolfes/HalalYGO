@@ -1,5 +1,5 @@
 --ゴーストリック・ミュージアム (Action Field)
---Ghostrick Museum (Action Field)
+--Missrick Museum (Action Field)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

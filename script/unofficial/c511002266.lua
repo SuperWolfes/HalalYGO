@@ -1,5 +1,5 @@
 --奇奇怪怪
---Phantasmagoria
+--Illusorasmagoria
 Duel.EnableUnofficialRace(RACE_YOKAI)
 local s,id=GetID()
 function s.initial_effect(c)

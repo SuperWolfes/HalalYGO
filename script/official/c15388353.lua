@@ -42,7 +42,7 @@ function s.thfilter(c)
 	return c:IsSetCard(SET_RECIPE) and c:IsAbleToHand()
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.thfilter),tp,LOCATION_DECK|LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.thfilter),tp,LOCATION_DECK|LOCATION_REST,0,nil)
 	if #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 		local sg=g:Select(tp,1,1,nil)
@@ -51,7 +51,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.drwcostfilter(c)
-	return c:IsRitualMonster() and c:IsAbleToDeckAsCost()
+	return c:IsLockedMonster() and c:IsAbleToDeckAsCost()
 end
 function s.drwcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.drwcostfilter,tp,LOCATION_HAND,0,1,nil) end
@@ -78,7 +78,7 @@ function s.rescon(sg,e,tp,mg)
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	local g=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_GRAVE,0,nil,e)
+	local g=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_REST,0,nil,e)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,1) and #g>=2
 		and aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,0) end
 	local tg=aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,1,tp,HINTMSG_TODECK)

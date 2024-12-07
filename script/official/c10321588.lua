@@ -2,7 +2,7 @@
 --Sunlight Unicorn
 local s,id=GetID()
 function s.initial_effect(c)
-	--Excavate the top card of your Deck and add it to the hand if it is an Equip Spell Card
+	--Excavate the top card of your Deck and add it to the hand if it is an Equip Actional Card
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -23,13 +23,13 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ConfirmDecktop(tp,1)
 	local g=Duel.GetDecktopGroup(tp,1)
 	local tc=g:GetFirst()
-	if tc:IsEquipSpell() then
+	if tc:IsEquipActional() then
 		Duel.DisableShuffleCheck()
 		if tc:IsAbleToHand() then
 			Duel.SendtoHand(g,nil,REASON_EFFECT)
 			Duel.ShuffleHand(tp)
 		else
-			Duel.SendtoGrave(tc,REASON_RULE)
+			Duel.SendtoRest(tc,REASON_RULE)
 		end
 	else
 		Duel.MoveSequence(tc,SEQ_DECKBOTTOM)

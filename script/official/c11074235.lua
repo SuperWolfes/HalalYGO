@@ -3,14 +3,14 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special summon itself from hand or GY
+	--Special summon itself from hand or RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DELAY)
-	e1:SetCode(EVENT_TO_GRAVE)
-	e1:SetRange(LOCATION_HAND+LOCATION_GRAVE)
+	e1:SetCode(EVENT_TO_REST)
+	e1:SetRange(LOCATION_HAND+LOCATION_REST)
 	e1:SetCountLimit(1,id)
 	e1:SetCondition(s.spcon)
 	e1:SetTarget(s.sptg)
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.cfilter(c,tp)
-	return (c:GetPreviousTypeOnField()&TYPE_SPELL==TYPE_SPELL or c:GetPreviousTypeOnField()&TYPE_TRAP==TYPE_TRAP)
+	return (c:GetPreviousTypeOnField()&TYPE_ACTIONAL==TYPE_ACTIONAL or c:GetPreviousTypeOnField()&TYPE_TRAP==TYPE_TRAP)
 		and c:IsPreviousControler(tp) and c:IsPreviousLocation(LOCATION_ONFIELD)
 		and c:IsReason(REASON_EFFECT) and c:GetReasonPlayer()==1-tp
 end
@@ -34,7 +34,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,e:GetHandler(),1,0,0)
 end
 function s.setfilter(c)
-	return c:IsSpellTrap() and not c:IsType(TYPE_FIELD) and (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup()) and c:IsSSetable()
+	return c:IsActionalTrap() and not c:IsType(TYPE_FIELD) and (c:IsLocation(LOCATION_REST) or c:IsFaceup()) and c:IsSSetable()
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -49,9 +49,9 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT+RESETS_REDIRECT)
 		e1:SetValue(LOCATION_REMOVED)
 		c:RegisterEffect(e1,true)
-		local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.setfilter),tp,LOCATION_GRAVE+LOCATION_REMOVED,0,nil)
+		local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.setfilter),tp,LOCATION_REST+LOCATION_REMOVED,0,nil)
 		if #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
-			--Set 1 of your spells/traps, that is banished or in GY
+			--Set 1 of your actionals/traps, that is banished or in RP
 			Duel.BreakEffect()
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 			local sg=g:Select(tp,1,1,nil)

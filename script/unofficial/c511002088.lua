@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz Summon
 	Xyz.AddProcedure(c,nil,5,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Destroy and inflict damage to opponent
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DESTROY+CATEGORY_DAMAGE)

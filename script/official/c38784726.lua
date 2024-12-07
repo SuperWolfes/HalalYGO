@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
-	Ritual.AddProcGreater{handler=c,filter=s.ritualfil,extrafil=s.extrafil,extraop=s.extraop,extratg=s.extratg}
+	Locked.AddProcGreater{handler=c,filter=s.lockedfil,extrafil=s.extrafil,extraop=s.extraop,extratg=s.extratg}
 	--Special Summon 1 "Salamangreat Emerald Eagle from your hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
@@ -20,8 +20,8 @@ end
 s.listed_series={0x119}
 s.listed_names={16313112}
 s.fit_monster={16313112}
-function s.ritualfil(c)
-	return c:IsSetCard(0x119) and c:IsRitualMonster()
+function s.lockedfil(c)
+	return c:IsSetCard(0x119) and c:IsLockedMonster()
 end
 function s.mfilter(c)
 	return c:HasLevel() and c:IsSetCard(0x119) and c:IsAbleToDeck()
@@ -31,19 +31,19 @@ function s.ckfilter(c,e,tp)
 end
 function s.extrafil(e,tp,eg,ep,ev,re,r,rp,chk)
 	if Duel.IsExistingMatchingCard(s.ckfilter,tp,LOCATION_MZONE,0,1,nil,e,tp) then
-		return Duel.GetMatchingGroup(s.mfilter,tp,LOCATION_GRAVE,0,nil)
+		return Duel.GetMatchingGroup(s.mfilter,tp,LOCATION_REST,0,nil)
 	end
 	return Group.CreateGroup()
 end
 function s.extraop(mg,e,tp,eg,ep,ev,re,r,rp)
-	local mat2=mg:Filter(Card.IsLocation,nil,LOCATION_GRAVE):Filter(s.mfilter,nil)
+	local mat2=mg:Filter(Card.IsLocation,nil,LOCATION_REST):Filter(s.mfilter,nil)
 	mg:Sub(mat2)
-	Duel.ReleaseRitualMaterial(mg)
-	Duel.SendtoDeck(mat2,nil,2,REASON_EFFECT+REASON_MATERIAL+REASON_RITUAL)
+	Duel.ReleaseLockedMaterial(mg)
+	Duel.SendtoDeck(mat2,nil,2,REASON_EFFECT+REASON_MATERIAL+REASON_LOCKED)
 end
 function s.extratg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_REST)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

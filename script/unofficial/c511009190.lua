@@ -1,8 +1,8 @@
 --フェアリー・パウダー
---Fairy Dust
+--Wanderer Dust
 local s,id=GetID()
 function s.initial_effect(c)
-	--Increase the level of a monster by 1 and make it a Fairy type
+	--Increase the level of a monster by 1 and make it a Wanderer type
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_LVCHANGE)
@@ -31,14 +31,14 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetValue(1)
 		e1:SetReset(RESET_EVENT|RESETS_STANDARD_DISABLE|RESET_PHASE|PHASE_END)
 		tc:RegisterEffect(e1)
-		--It becomes a Fairy monster
+		--It becomes a Wanderer monster
 		local e2=Effect.CreateEffect(c)
 		e2:SetType(EFFECT_TYPE_SINGLE)
 		e2:SetCode(EFFECT_CHANGE_RACE)
-		e2:SetValue(RACE_FAIRY)
+		e2:SetValue(RACE_WANDERER)
 		e2:SetReset(RESET_EVENT|RESETS_STANDARD|RESET_PHASE|PHASE_END)
 		tc:RegisterEffect(e2)
-		--Grant an effect to a Fairy Xyz monster summoned using the target
+		--Grant an effect to a Wanderer Xyz monster summoned using the target
 		local e3=Effect.CreateEffect(c)
 		e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 		e3:SetCode(EVENT_BE_MATERIAL)
@@ -49,7 +49,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.effcon(e,tp,eg,ep,ev,re,r,rp)
-	return r==REASON_XYZ and e:GetHandler():GetReasonCard():IsRace(RACE_FAIRY)
+	return r==REASON_XYZ and e:GetHandler():GetReasonCard():IsRace(RACE_WANDERER)
 end
 function s.effop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,0,id)

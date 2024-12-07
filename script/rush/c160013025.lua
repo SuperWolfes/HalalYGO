@@ -20,20 +20,20 @@ function s.tdcostfilter(c)
 end
 function s.tdfilter(c,tp)
 	return c:IsMonster() and c:IsType(TYPE_MAXIMUM) and c:IsAbleToDeck()
-		and Duel.IsExistingMatchingCard(s.tdfilter2,tp,LOCATION_GRAVE,0,1,c,tp,c)
+		and Duel.IsExistingMatchingCard(s.tdfilter2,tp,LOCATION_REST,0,1,c,tp,c)
 end
 function s.tdfilter2(c,tp,tc)
 	local g=Group.CreateGroup()
 	g:AddCard(c)
 	g:AddCard(tc)
 	return c:IsMonster() and c:IsType(TYPE_MAXIMUM) and c:IsAbleToDeck()
-		and Duel.IsExistingMatchingCard(s.tdcostfilter,tp,LOCATION_GRAVE,0,10,g)
+		and Duel.IsExistingMatchingCard(s.tdcostfilter,tp,LOCATION_REST,0,10,g)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_GRAVE,0,1,nil,tp) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST,0,1,nil,tp) end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter3,tp,LOCATION_GRAVE,0,2,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter3,tp,LOCATION_REST,0,2,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,0,0)
 end
 function s.tdfilter3(c)
@@ -42,14 +42,14 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	--Requirement
-	local g=Duel.GetMatchingGroup(s.tdcostfilter,tp,LOCATION_GRAVE,0,nil)
-	local pg=Duel.GetMatchingGroup(s.tdfilter3,tp,LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.tdcostfilter,tp,LOCATION_REST,0,nil)
+	local pg=Duel.GetMatchingGroup(s.tdfilter3,tp,LOCATION_REST,0,nil)
 	if #g<10 or #pg<2 then return end
 	local td=aux.SelectUnselectGroup(g,e,tp,10,10,s.rescon(pg),1,tp,HINTMSG_TODECK)
 	Duel.HintSelection(td,true)
 	if Duel.SendtoDeck(td,nil,SEQ_DECKSHUFFLE,REASON_COST)>0 then
 		Duel.ShuffleDeck(tp)
-		local tg=Duel.SelectMatchingCard(tp,s.tdfilter3,tp,LOCATION_GRAVE,0,2,3,nil)
+		local tg=Duel.SelectMatchingCard(tp,s.tdfilter3,tp,LOCATION_REST,0,2,3,nil)
 		Duel.HintSelection(tg,true)
 		Duel.SendtoDeck(tg,nil,SEQ_DECKTOP,REASON_EFFECT)
 		Duel.SortDecktop(tp,tp,#tg)

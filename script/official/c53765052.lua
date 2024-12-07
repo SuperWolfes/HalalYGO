@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
 	e1:SetCondition(s.spcon)
 	c:RegisterEffect(e1)
-	--Your opponent cannot activate Spell/Trap Cards that were not Set
+	--Your opponent cannot activate Actional/Trap Cards that were not Set
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
@@ -39,7 +39,7 @@ s.listed_series={SET_SINFUL_SPOILS}
 function s.spcon(e,c)
 	if c==nil then return true end
 	return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(Card.IsSetCard,0,LOCATION_GRAVE,LOCATION_GRAVE,1,nil,SET_SINFUL_SPOILS)
+		and Duel.IsExistingMatchingCard(Card.IsSetCard,0,LOCATION_REST,LOCATION_REST,1,nil,SET_SINFUL_SPOILS)
 end
 function s.desrescon(sg,e,tp,mg)
 	return sg:FilterCount(Card.IsControler,nil,tp)==1

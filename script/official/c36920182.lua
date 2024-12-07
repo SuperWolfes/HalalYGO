@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon 1 monster from the GY or return monsters and summon from the Extra Deck
+	--Special Summon 1 monster from the RP or return monsters and summon from the Extra Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -36,8 +36,8 @@ function s.cfilter(c,sg)
 	return c:IsCode(CARD_VISAS_STARFROST) and sg:FilterCount(s.statsfilter,c)==4
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	local b1=Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(s.gyspfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp)
-	local g=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_MZONE|LOCATION_GRAVE|LOCATION_REMOVED,0,nil)
+	local b1=Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(s.gyspfilter,tp,LOCATION_REST,0,1,nil,e,tp)
+	local g=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_MZONE|LOCATION_REST|LOCATION_REMOVED,0,nil)
 	local b2=#g>=5 and Duel.IsExistingMatchingCard(s.synchfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,true)
 		and aux.SelectUnselectGroup(g,e,tp,5,5,s.rescon,0)
 	if chk==0 then return b1 or b2 end
@@ -48,24 +48,24 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if op==1 then
 		e:SetCategory(CATEGORY_SPECIAL_SUMMON)
 		e:SetOperation(s.spop)
-		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 	elseif op==2 then
 		e:SetCategory(CATEGORY_TODECK+CATEGORY_SPECIAL_SUMMON)
 		e:SetOperation(s.synchop)
-		Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,5,tp,LOCATION_MZONE|LOCATION_GRAVE|LOCATION_REMOVED)
+		Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,5,tp,LOCATION_MZONE|LOCATION_REST|LOCATION_REMOVED)
 		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 	end
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,s.gyspfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,s.gyspfilter,tp,LOCATION_REST,0,1,1,nil,e,tp)
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end
 end
 function s.synchop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.tdfilter),tp,LOCATION_MZONE|LOCATION_GRAVE|LOCATION_REMOVED,0,nil)
+	local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.tdfilter),tp,LOCATION_MZONE|LOCATION_REST|LOCATION_REMOVED,0,nil)
 	if #g<5 then return end
 	local rg=aux.SelectUnselectGroup(g,e,tp,5,5,s.rescon,1,tp,HINTMSG_TODECK)
 	if #rg~=5 then return end

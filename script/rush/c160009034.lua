@@ -3,7 +3,7 @@
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send the top 2 cards of your Deck to the GY
+	--Send the top 2 cards of your Deck to the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DECKDES+CATEGORY_ATKCHANGE)
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -18,7 +18,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DECKDES,nil,0,tp,2)
 end
 function s.cfilter(c)
-	return c:IsLocation(LOCATION_GRAVE) and c:IsRace(RACE_INSECT)
+	return c:IsLocation(LOCATION_REST) and c:IsRace(RACE_INSECT)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Effect

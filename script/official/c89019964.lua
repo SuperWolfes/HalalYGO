@@ -1,9 +1,9 @@
 --破械神の禍霊
---Unchained Soul of Disaster
+--Unchained Miss of Disaster
 --Scripted by Eerie Code, edo9300 and Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Gain 300 ATK per each "Unchained" card in the GY
+	--Gain 300 ATK per each "Unchained" card in the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_UPDATE_ATTACK)
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.target)
 	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
-	--Special Summon 1 "Unchained" monster from the GY
+	--Special Summon 1 "Unchained" monster from the RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -36,7 +36,7 @@ end
 s.listed_names={id}
 s.listed_series={SET_UNCHAINED}
 function s.atkval(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsSetCard,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil,SET_UNCHAINED)*300
+	return Duel.GetMatchingGroupCount(Card.IsSetCard,e:GetHandlerPlayer(),LOCATION_REST,0,nil,SET_UNCHAINED)*300
 end
 function s.lkfilter(c,mg)
 	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsLinkSummonable(nil,mg,2,2)
@@ -72,11 +72,11 @@ function s.spfilter(c,e,tp)
 	return c:IsSetCard(SET_UNCHAINED) and not c:IsCode(id) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
+		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)

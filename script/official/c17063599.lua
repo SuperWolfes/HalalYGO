@@ -1,5 +1,5 @@
 --風の天翼ミラドーラ
---Heavenly Zephyr - Miradora
+--Spectrumly Zephyr - Miradora
 --Logical Nonsense
 --Substitute ID
 local s,id=GetID()

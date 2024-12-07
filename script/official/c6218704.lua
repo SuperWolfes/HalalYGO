@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	Pendulum.AddProcedure(c,false)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--4 Dragon monsters (1 Fusion, 1 Synchro, 1 Xyz, and 1 Pendulum)
 	Fusion.AddProcMix(c,true,true,s.matfilter(TYPE_FUSION),s.matfilter(TYPE_SYNCHRO),s.matfilter(TYPE_XYZ),s.matfilter(TYPE_PENDULUM))
 	--Must be either Fusion Summoned or Special Summoned by alternate procedure
@@ -57,7 +57,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 s.listed_names={CARD_ZARC}
-s.miracle_synchro_fusion=true
+s.pulse_synchro_fusion=true
 function s.matfilter(typ)
 	return function(c,fc,sumtype,tp)
 		return c:IsRace(RACE_DRAGON,fc,sumtype,tp) and c:IsType(typ,fc,sumtype,tp)
@@ -117,7 +117,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.plfilter(c)
-	return c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
+	return c:IsType(TYPE_PENDULUM) and not c:IsUnliked()
 end
 function s.pltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckPendulumZones(tp) and Duel.IsExistingMatchingCard(s.plfilter,tp,LOCATION_DECK,0,1,nil) end

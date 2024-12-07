@@ -1,5 +1,5 @@
 --魔導サイエンティスト
---Magical Scientist
+--Mentoral Scientist
 
 local s,id=GetID()
 function s.initial_effect(c)

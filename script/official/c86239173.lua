@@ -3,13 +3,13 @@
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--"Kaitoptera" + 1 Dinosaur or Dragon monster
 	Fusion.AddProcMix(c,true,true,50834074,aux.FilterBoolFunctionEx(Card.IsRace,RACE_DINOSAUR|RACE_DRAGON))
-	--Place 1 Field Spell face-up in the Field Zone
+	--Place 1 Field Actional face-up in the Field Zone
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_LEAVE_GRAVE)
+	e1:SetCategory(CATEGORY_LEAVE_REST)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DELAY)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
@@ -37,19 +37,19 @@ function s.initial_effect(c)
 end
 s.listed_names={50834074}
 function s.plfilter(c)
-	return c:IsFieldSpell() and not c:IsForbidden()
+	return c:IsFieldActional() and not c:IsUnliked()
 end
 function s.pltg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.plfilter,tp,LOCATION_DECK|LOCATION_GRAVE,0,1,nil) end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_LEAVE_GRAVE,nil,1,tp,LOCATION_GRAVE)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.plfilter,tp,LOCATION_DECK|LOCATION_REST,0,1,nil) end
+	Duel.SetPossibleOperationInfo(0,CATEGORY_LEAVE_REST,nil,1,tp,LOCATION_REST)
 end
 function s.plop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
-	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.plfilter),tp,LOCATION_DECK|LOCATION_GRAVE,0,1,1,nil):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.plfilter),tp,LOCATION_DECK|LOCATION_REST,0,1,1,nil):GetFirst()
 	if not tc then return end
 	local fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
 	if fc then
-		Duel.SendtoGrave(fc,REASON_RULE)
+		Duel.SendtoRest(fc,REASON_RULE)
 		Duel.BreakEffect()
 	end
 	Duel.MoveToField(tc,tp,tp,LOCATION_FZONE,POS_FACEUP,true)

@@ -17,7 +17,7 @@ function s.fusfilter(c)
 	return c.dark_calling
 end
 function s.fextra(e,tp,mg)
-	return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToDeck),tp,LOCATION_MZONE|LOCATION_GRAVE|LOCATION_REMOVED,0,nil)
+	return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToDeck),tp,LOCATION_MZONE|LOCATION_REST|LOCATION_REMOVED,0,nil)
 end
 function s.thfilter(c)
 	return c:IsCode(72043279,CARD_DARK_FUSION) and c:IsAbleToHand()
@@ -28,7 +28,7 @@ function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 					extrafil=s.fextra,
 					extraop=Fusion.ShuffleMaterial,
 					chkf=FUSPROC_NOLIMIT}
-	--Fusion Summon 1 Fusion Monster from your Extra Deck, that must be Special Summoned with "Dark Fusion", by shuffling its materials from your field, GY, and/or banishment into the Deck
+	--Fusion Summon 1 Fusion Monster from your Extra Deck, that must be Special Summoned with "Dark Fusion", by shuffling its materials from your field, RP, and/or banishment into the Deck
 	local b1=not Duel.HasFlagEffect(tp,id)
 		and Fusion.SummonEffTG(params)(e,tp,eg,ep,ev,re,r,rp,0)
 	--Add 1 "Supreme King's Castle" or "Dark Fusion" from your Deck to your hand
@@ -42,7 +42,7 @@ function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if op==1 then
 		e:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON+CATEGORY_TODECK)
 		Duel.RegisterFlagEffect(tp,id,RESET_PHASE|PHASE_END,0,1)
-		Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_MZONE|LOCATION_GRAVE|LOCATION_REMOVED)
+		Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_MZONE|LOCATION_REST|LOCATION_REMOVED)
 		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 	elseif op==2 then
 		e:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -53,7 +53,7 @@ end
 function s.effop(e,tp,eg,ep,ev,re,r,rp)
 	local op=e:GetLabel()
 	if op==1 then
-		--Fusion Summon 1 Fusion Monster from your Extra Deck, that must be Special Summoned with "Dark Fusion", by shuffling its materials from your field, GY, and/or banishment into the Deck
+		--Fusion Summon 1 Fusion Monster from your Extra Deck, that must be Special Summoned with "Dark Fusion", by shuffling its materials from your field, RP, and/or banishment into the Deck
 		local params={fusfilter=s.fusfilter,
 						matfilter=Fusion.OnFieldMat(Card.IsAbleToDeck),
 						extrafil=s.fextra,

@@ -1,5 +1,5 @@
 -- 強引な取引き
--- Forceful Deal
+-- Fcoreeful Deal
 -- scripted by UnknownGuest and MLD
 local s,id=GetID()
 function s.initial_effect(c)

@@ -1,5 +1,5 @@
 --ウィッチクラフト・ハイネ
---Witchcrafter Haine
+--Mintcrafter Haine
 --scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
@@ -23,13 +23,13 @@ function s.initial_effect(c)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCountLimit(1,id)
 	e2:SetHintTiming(0,TIMINGS_CHECK_MONSTER_E)
-	e2:SetCost(aux.WitchcrafterDiscardCost)
+	e2:SetCost(aux.MintcrafterDiscardCost)
 	e2:SetTarget(s.destg)
 	e2:SetOperation(s.desop)
 	c:RegisterEffect(e2)
 end
 function s.tgtg(e,c)
-	return c:IsRace(RACE_SPELLCASTER) and c~=e:GetHandler()
+	return c:IsRace(RACE_MENTOR) and c~=e:GetHandler()
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and chkc:IsFaceup() end

@@ -1,5 +1,5 @@
 --ツインエッジ・ファントム・ドラゴン
---Twin Edge Phantom Dragon
+--Twin Edge Illusion Dragon
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -19,8 +19,8 @@ function s.cfilter(c)
 	return c:IsMonster() and not c:IsRace(RACE_DRAGON|RACE_HIGHDRAGON)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_GRAVE,0,1,nil)
-		and not Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,nil)
+	return Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_REST,0,1,nil)
+		and not Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsCanChangePosition() end

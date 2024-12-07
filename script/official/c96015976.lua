@@ -1,5 +1,5 @@
 --再転
---Diceversity
+--Sufficeversity
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
 end
-s.roll_dice=true
+s.roll_suffice=true
 function s.filter(c)
 	local lv=c:GetLevel()
 	return c:IsFaceup() and lv~=0 and lv~=c:GetOriginalLevel()
@@ -34,7 +34,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():GetFlagEffect(id)==0 then return end
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) and tc:IsFaceup() then
-		local dc=Duel.TossDice(tp,1)
+		local dc=Duel.TossSuffice(tp,1)
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_CHANGE_LEVEL)

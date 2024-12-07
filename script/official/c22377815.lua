@@ -2,7 +2,7 @@
 --Aquarian Alessa
 local s,id=GetID()
 function s.initial_effect(c)
-	Gemini.AddProcedure(c)
+	Dual.AddProcedure(c)
 	--Discard 1 random card
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.con(e,tp,eg,ep,ev,re,r,rp)
-	return Gemini.EffectStatusCondition(e) and aux.bdogcon(e,tp,eg,ep,ev,re,r,rp)
+	return Dual.EffectStatusCondition(e) and aux.bdogcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -26,5 +26,5 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(tp,0,LOCATION_HAND)
 	if #g==0 then return end
 	local sg=g:RandomSelect(1-tp,1)
-	Duel.SendtoGrave(sg,REASON_DISCARD+REASON_EFFECT)
+	Duel.SendtoRest(sg,REASON_DISCARD+REASON_EFFECT)
 end

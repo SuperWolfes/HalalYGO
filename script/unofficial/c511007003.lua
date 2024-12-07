@@ -10,11 +10,11 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-	--forbidden
+	--unliked
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
-	e2:SetCode(EFFECT_FORBIDDEN)
+	e2:SetCode(EFFECT_UNLIKED)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetTargetRange(0x7f,0x7f)
 	e2:SetCondition(s.bancon)

@@ -1,22 +1,22 @@
 --溟界神－ネフェルアビス
---Nephilabyss, the Ogdoadic Overlord
+--Nephilabyss, the Ogtasic Overwatcher
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon itself from the GY
+	--Special Summon itself from the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DELAY,EFFECT_FLAG2_CHECK_SIMULTANEOUS)
-	e1:SetCode(EVENT_TO_GRAVE)
-	e1:SetRange(LOCATION_GRAVE)
+	e1:SetCode(EVENT_TO_REST)
+	e1:SetRange(LOCATION_REST)
 	e1:SetCountLimit(1,id)
 	e1:SetCondition(s.selfspcon)
 	e1:SetTarget(s.selfsptg)
 	e1:SetOperation(s.selfspop)
 	c:RegisterEffect(e1)
-	--Special Summon 1 monster from the GY
+	--Special Summon 1 monster from the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCountLimit(1,{id,1})
-	e2:SetCondition(function(e) return e:GetHandler():IsSummonLocation(LOCATION_GRAVE) end)
+	e2:SetCondition(function(e) return e:GetHandler():IsSummonLocation(LOCATION_REST) end)
 	e2:SetTarget(s.gysptg)
 	e2:SetOperation(s.gyspop)
 	c:RegisterEffect(e2)
@@ -62,11 +62,11 @@ function s.gyspfilter(c,e,tp)
 	return c:IsCanBeSpecialSummoned(e,0,tp,false,false) and not c:IsCode(id)
 end
 function s.gysptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.gyspfilter(chkc,e,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.gyspfilter(chkc,e,tp) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(s.gyspfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
+		and Duel.IsExistingTarget(s.gyspfilter,tp,LOCATION_REST,0,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.gyspfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+	local g=Duel.SelectTarget(tp,s.gyspfilter,tp,LOCATION_REST,0,1,1,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 end
 function s.gyspop(e,tp,eg,ep,ev,re,r,rp)

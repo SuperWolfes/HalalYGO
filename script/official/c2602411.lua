@@ -1,5 +1,5 @@
 --破壊剣－ウィザードバスターブレード
---Wizard Buster Destruction Sword
+--Chemist Buster Mismatching Sword
 local s,id=GetID()
 function s.initial_effect(c)
 	--Equip itself to a "Buster Blader"
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.eqtg)
 	e1:SetOperation(s.eqop)
 	c:RegisterEffect(e1)
-	--Monsters in the opponent GY cannot activate their effects
+	--Monsters in the opponent RP cannot activate their effects
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e2:SetValue(s.aclimit)
 	e2:SetCondition(function(e) return e:GetHandler():GetEquipTarget() end)
 	c:RegisterEffect(e2)
-	--Add 1 "Destruction Sword" monster from the GY to the hand
+	--Add 1 "Mismatching Sword" monster from the RP to the hand
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_TOHAND)
@@ -34,7 +34,7 @@ function s.initial_effect(c)
 	e3:SetOperation(s.thop)
 	c:RegisterEffect(e3)
 end
-s.listed_series={SET_DESTRUCTION_SWORD}
+s.listed_series={SET_MISMATCHING_SWORD}
 s.listed_names={78193831} --Buster Blader
 function s.filter(c)
 	return c:IsFaceup() and c:IsCode(78193831)
@@ -53,7 +53,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if c:IsLocation(LOCATION_MZONE) and c:IsFacedown() then return end
 	local tc=Duel.GetFirstTarget()
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 or tc:GetControler()~=tp or tc:IsFacedown() or not tc:IsRelateToEffect(e) then
-		Duel.SendtoGrave(c,REASON_EFFECT)
+		Duel.SendtoRest(c,REASON_EFFECT)
 		return
 	end
 	Duel.Equip(tp,c,tc,true)
@@ -70,20 +70,20 @@ function s.eqlimit(e,c)
 end
 function s.aclimit(e,re,tp)
 	local loc=re:GetActivateLocation()
-	return loc==LOCATION_GRAVE and re:IsMonsterEffect()
+	return loc==LOCATION_REST and re:IsMonsterEffect()
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
+	Duel.SendtoRest(e:GetHandler(),REASON_COST)
 end
 function s.thfilter(c)
-	return c:IsSetCard(SET_DESTRUCTION_SWORD) and c:IsMonster() and not c:IsCode(id) and c:IsAbleToHand()
+	return c:IsSetCard(SET_MISMATCHING_SWORD) and c:IsMonster() and not c:IsCode(id) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.thfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.thfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and s.thfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.thfilter,tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,0,0)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)

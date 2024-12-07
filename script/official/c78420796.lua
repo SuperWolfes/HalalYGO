@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_CHAINING)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCondition(s.nodamcon)
 	e2:SetCost(aux.bfgcost)
 	e2:SetOperation(s.nodamop)
@@ -26,11 +26,11 @@ function s.fcheck(tp,sg,fc)
 	return sg:FilterCount(Card.IsLocation,nil,LOCATION_DECK)<=1 and sg:FilterCount(Card.IsLocation,nil,LOCATION_EXTRA)<=1
 end
 function s.fextra(e,tp,mg)
-	return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToGrave),tp,LOCATION_DECK+LOCATION_EXTRA,0,nil),s.fcheck
+	return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRest),tp,LOCATION_DECK+LOCATION_EXTRA,0,nil),s.fcheck
 end
 function s.extratg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,2,tp,LOCATION_DECK+LOCATION_EXTRA)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,2,tp,LOCATION_DECK+LOCATION_EXTRA)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

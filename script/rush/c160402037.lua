@@ -1,5 +1,5 @@
 --ヴォイドヴェルグ・ゴッドレクイエム
---Voidvelgr God Requiem
+--Voidvelgr Monster Requiem
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -27,7 +27,7 @@ function s.tdfilter(c)
 	return c:IsMonster() and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_GRAVE,0,5,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST,0,5,nil) end
 end
 function s.desfilter(c)
 	return c:IsFaceup() and c:IsNotMaximumModeSide()
@@ -40,7 +40,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_GRAVE,0,5,5,nil)
+	local g=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_REST,0,5,5,nil)
 	Duel.HintSelection(g,true)
 	if Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)<1 then return end
 	--Effect

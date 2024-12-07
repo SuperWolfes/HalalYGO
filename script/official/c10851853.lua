@@ -3,7 +3,7 @@
 --Scripted by Yuno
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Special Summon Condition
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -30,7 +30,7 @@ function s.initial_effect(c)
 	e3:SetCategory(CATEGORY_TODECK+CATEGORY_DRAW)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DELAY)
-	e3:SetCode(EVENT_TO_GRAVE)
+	e3:SetCode(EVENT_TO_REST)
 	e3:SetCountLimit(1,{id,1})
 	e3:SetTarget(s.tdtg)
 	e3:SetOperation(s.tdop)
@@ -38,7 +38,7 @@ function s.initial_effect(c)
 end
 --Special Summon
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
-	return (rp==tp and re:IsActiveType(TYPE_TRAP)) or (rp==1-tp and re:IsActiveType(TYPE_SPELL))
+	return (rp==tp and re:IsActiveType(TYPE_TRAP)) or (rp==1-tp and re:IsActiveType(TYPE_ACTIONAL))
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -54,7 +54,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 --Return to Deck
 function s.tdfilter(c)
-	return c:IsFaceup() and c:IsSpellTrap() and c:IsAbleToDeck()
+	return c:IsFaceup() and c:IsActionalTrap() and c:IsAbleToDeck()
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end

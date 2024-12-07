@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Synchro Summon
 	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_SYNCHRO),1,1,Synchro.NonTunerEx(Card.IsType,TYPE_SYNCHRO),2,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Negate Summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -88,7 +88,7 @@ end
 function s.negcon(e,tp,eg,ep,ev,re,r,rp,chk)
 	if e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED) or not Duel.IsChainDisablable(ev)
 		or Duel.GetCurrentPhase()==PHASE_DAMAGE and Duel.IsDamageCalculated() then return false end
-	for i=0,5 do --Loop through CATEGORY_DESTROY/RELEASE/REMOVE/TOHAND/TODECK/TOGRAVE
+	for i=0,5 do --Loop through CATEGORY_DESTROY/RELEASE/REMOVE/TOHAND/TODECK/TOREST
 		local cate=2^i
 		local ex,tg,tc=Duel.GetOperationInfo(ev,cate)
 		if ex and tg~=nil and tc+tg:FilterCount(s.filter,nil,tp)-#tg>0 then

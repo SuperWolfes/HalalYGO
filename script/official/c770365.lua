@@ -1,10 +1,10 @@
 --魔導皇聖 トリス
---Empress of Prophecy
+--Empress of Prediction
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
-	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_SPELLCASTER),5,2)
-	c:EnableReviveLimit()
+	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_MENTOR),5,2)
+	c:EnableAwakeLimit()
 	--atklimit
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)

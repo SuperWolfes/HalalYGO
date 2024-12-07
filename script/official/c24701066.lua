@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Xyz Summon procedure
 	Xyz.AddProcedure(c,nil,5,2)
 	--Attach an opponent's monster that this card destroyed by battle to this card as material
@@ -15,10 +15,10 @@ function s.initial_effect(c)
 	e1:SetTarget(s.atchtg)
 	e1:SetOperation(s.atchop)
 	c:RegisterEffect(e1)
-	--Take 1 EARTH Machine monster from your Deck, and either add it to your hand or send it to the GY
+	--Take 1 EARTH Machine monster from your Deck, and either add it to your hand or send it to the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_TOGRAVE)
+	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_TOREST)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCountLimit(1,id)
@@ -26,12 +26,12 @@ function s.initial_effect(c)
 	e2:SetTarget(s.thtgtg)
 	e2:SetOperation(s.thtgop)
 	c:RegisterEffect(e2,false,REGISTER_FLAG_DETACH_XMAT)
-	--Special Summon this card from the GY in Defense Position
+	--Special Summon this card from the RP in Defense Position
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_IGNITION)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetCountLimit(1,{id,1})
 	e3:SetCost(s.spcost)
 	e3:SetTarget(s.sptg)
@@ -44,8 +44,8 @@ function s.atchtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return c:IsType(TYPE_XYZ) and bc:IsMonster() and bc:IsFaceup()
 		and bc:IsCanBeXyzMaterial(c,tp,REASON_EFFECT) end
 	Duel.SetTargetCard(bc)
-	if bc:IsLocation(LOCATION_GRAVE) then
-		Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,bc,1,tp,0)
+	if bc:IsLocation(LOCATION_REST) then
+		Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,bc,1,tp,0)
 	end
 end
 function s.atchop(e,tp,eg,ep,ev,re,r,rp)
@@ -57,12 +57,12 @@ function s.atchop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.thtgfilter(c)
-	return c:IsAttribute(ATTRIBUTE_EARTH) and c:IsRace(RACE_MACHINE) and (c:IsAbleToHand() or c:IsAbleToGrave())
+	return c:IsAttribute(ATTRIBUTE_EARTH) and c:IsRace(RACE_MACHINE) and (c:IsAbleToHand() or c:IsAbleToRest())
 end
 function s.thtgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thtgfilter,tp,LOCATION_DECK,0,1,nil) end
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
 function s.thtgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,3))

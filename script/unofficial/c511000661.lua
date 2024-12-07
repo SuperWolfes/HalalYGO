@@ -1,4 +1,4 @@
---Roid Reinforcements
+--Roid Reinfcoreements
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.costfilter(c)
-	return c:IsDiscardable() and c:IsAbleToGraveAsCost()
+	return c:IsDiscardable() and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(1)
@@ -22,20 +22,20 @@ function s.filter(c)
 	return c:IsSetCard(0x16) and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	local rt=Duel.GetTargetCount(s.filter,tp,LOCATION_GRAVE,0,nil)
+	local rt=Duel.GetTargetCount(s.filter,tp,LOCATION_REST,0,nil)
 	if chk==0 then
 		if e:GetLabel()~=1 then return false end
 		e:SetLabel(0)
 		return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,e:GetHandler()) and rt>0 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 	local cg=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,rt,nil)
-	Duel.SendtoGrave(cg,REASON_COST+REASON_DISCARD)
+	Duel.SendtoRest(cg,REASON_COST+REASON_DISCARD)
 	Duel.SetTargetParam(#cg)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,e:GetLabel(),0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local ct=Duel.GetChainInfo(0,CHAININFO_TARGET_PARAM)
-	local tg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,nil)
+	local tg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_REST,0,nil)
 	if #tg>=ct then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 		local sel=tg:Select(tp,ct,ct,nil)

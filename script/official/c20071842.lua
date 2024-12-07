@@ -3,13 +3,13 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	Ritual.AddProcGreater{handler=c,filter=s.ritualfil,lv=8,extrafil=s.extrafil,extraop=s.extraop,stage2=s.stage2}
+	Locked.AddProcGreater{handler=c,filter=s.lockedfil,lv=8,extrafil=s.extrafil,extraop=s.extraop,stage2=s.stage2}
 end
 s.listed_names={7987191}
 s.fit_monster={7987191} --should be removed in hardcode overhaul
 s.listed_series={0x102}
-function s.ritualfil(c)
-	return c:IsCode(7987191) and c:IsRitualMonster()
+function s.lockedfil(c)
+	return c:IsCode(7987191) and c:IsLockedMonster()
 end
 function s.mfilter(c,e)
 	return (c:IsLocation(LOCATION_HAND) or c:IsFaceup()) and c:HasLevel() and c:IsSetCard(0x102) and c:IsMonster() and c:IsDestructable(e)
@@ -25,7 +25,7 @@ function s.extraop(mg,e,tp,eg,ep,ev,re,r,rp)
 		mat2=rg:FilterSelect(tp,s.mfilter,1,#rg,nil,e)
 		mg:Sub(mat2)
 	end
-	Duel.ReleaseRitualMaterial(mg)
+	Duel.ReleaseLockedMaterial(mg)
 	Duel.Destroy(mat2,REASON_EFFECT)
 end
 function s.stage2(mat,e,tp,eg,ep,ev,re,r,rp,tc)

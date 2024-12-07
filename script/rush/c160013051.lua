@@ -29,10 +29,10 @@ function s.eqlimit(e,c)
 	return c:IsFaceup()
 end
 function s.value(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsSpellTrap,e:GetHandlerPlayer(),LOCATION_ONFIELD,0,nil)*100
+	return Duel.GetMatchingGroupCount(Card.IsActionalTrap,e:GetHandlerPlayer(),LOCATION_ONFIELD,0,nil)*100
 end
 function s.indtg(e,c)
-	return c:IsSpellTrap()
+	return c:IsActionalTrap()
 end
 function s.efilter(e,te)
 	return te:GetOwnerPlayer()~=e:GetOwnerPlayer()

@@ -4,8 +4,8 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Xyz summon procedure
 	Xyz.AddProcedure(c,nil,3,2,nil,nil,99)
 	--Targeted monster cannot be destroyed by battle
@@ -59,7 +59,7 @@ function s.rescon(sg,e,tp,mg)
 	return sg:GetClassCount(Card.GetOriginalRace)==1 and sg:GetClassCount(Card.GetOriginalAttribute)==1
 end
 function s.rmcon(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_REST,0,nil)
 	return aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,0)
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk)

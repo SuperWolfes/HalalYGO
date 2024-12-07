@@ -1,5 +1,5 @@
 --魔妖仙獣 独眼群主
---Mayosenju Hitot
+--Mayosakhi Hitot
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -47,7 +47,7 @@ function s.initial_effect(c)
 	local e5=e4:Clone()
 	e5:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e5)
-	--Increase the ATK of "Yosenju" monsters by 500
+	--Increase the ATK of "Yosakhi" monsters by 500
 	local e6=Effect.CreateEffect(c)
 	e6:SetDescription(aux.Stringid(id,3))
 	e6:SetCategory(CATEGORY_ATKCHANGE)
@@ -83,16 +83,16 @@ function s.initial_effect(c)
 		Duel.RegisterEffect(ge1,0)
 	end)
 end
-s.listed_series={SET_YOSENJU}
+s.listed_series={SET_YOSAKHI}
 function s.sctg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_PZONE) and chkc:IsControler(tp) and chkc:IsSetCard(SET_YOSENJU) end
-	if chk==0 then return Duel.IsExistingTarget(Card.IsSetCard,tp,LOCATION_PZONE,0,1,nil,SET_YOSENJU) end
+	if chkc then return chkc:IsLocation(LOCATION_PZONE) and chkc:IsControler(tp) and chkc:IsSetCard(SET_YOSAKHI) end
+	if chk==0 then return Duel.IsExistingTarget(Card.IsSetCard,tp,LOCATION_PZONE,0,1,nil,SET_YOSAKHI) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	Duel.SelectTarget(tp,Card.IsSetCard,tp,LOCATION_PZONE,0,1,1,nil,SET_YOSENJU)
+	Duel.SelectTarget(tp,Card.IsSetCard,tp,LOCATION_PZONE,0,1,1,nil,SET_YOSAKHI)
 end
 function s.scop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	--Cannot Special Summon, except "Yosenju" monsters
+	--Cannot Special Summon, except "Yosakhi" monsters
 	local e0=Effect.CreateEffect(c)
 	e0:SetDescription(aux.Stringid(id,4))
 	e0:SetType(EFFECT_TYPE_FIELD)
@@ -117,7 +117,7 @@ function s.scop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.splimit(e,c)
-	return not c:IsSetCard(SET_YOSENJU)
+	return not c:IsSetCard(SET_YOSAKHI)
 end
 function s.sthtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -149,7 +149,7 @@ function s.atkcond(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.rtfilter,1,nil,e,tp)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsSetCard,SET_YOSENJU),tp,LOCATION_MZONE,0,nil)
+	local g=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsSetCard,SET_YOSAKHI),tp,LOCATION_MZONE,0,nil)
 	if #g==0 then return end
 	for tc in g:Iter() do
 		local e1=Effect.CreateEffect(e:GetHandler())

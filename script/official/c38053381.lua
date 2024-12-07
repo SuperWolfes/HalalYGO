@@ -66,18 +66,18 @@ function s.tkcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()~=tp and eg:IsExists(s.tkfilter,1,nil,tp)
 end
 function s.tktg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0x134,TYPES_TOKEN,1500,1500,4,RACE_FAIRY,ATTRIBUTE_LIGHT) 
+	if chk==0 then return Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0x134,TYPES_TOKEN,1500,1500,4,RACE_WANDERER,ATTRIBUTE_LIGHT) 
 		and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 end
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,ft,tp,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,ft,tp,0)
 end
 function s.tkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if ft<=0 or not Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0x134,TYPES_TOKEN,1500,1500,4,RACE_FAIRY,ATTRIBUTE_LIGHT) then return end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if ft<=0 or not Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0x134,TYPES_TOKEN,1500,1500,4,RACE_WANDERER,ATTRIBUTE_LIGHT) then return end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	local fid=c:GetFieldID()
 	local g=Group.CreateGroup()
 	for i=1,ft do

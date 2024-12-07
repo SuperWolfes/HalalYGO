@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	e3:SetCondition(function(e,tp) return Duel.IsTurnPlayer(tp) end)
 	e3:SetOperation(s.mtop)
 	c:RegisterEffect(e3)
-	--Special Summon 1 Level 1 Tuner monster from your Graveyard
+	--Special Summon 1 Level 1 Tuner monster from your Resting Place
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,0))
 	e4:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -42,19 +42,19 @@ function s.initial_effect(c)
 	e4:SetLabel(1)
 	c:RegisterEffect(e4)
 end
-s.listed_names={CARD_RED_DRAGON_ARCHFIEND}
+s.listed_names={CARD_RED_DRAGON_ARCHTAINTED}
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.filter(chkc,e,tp) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and s.filter(chkc,e,tp) end
 	if chk==0 then return true end
-	if Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_RED_DRAGON_ARCHFIEND),tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil)
+	if Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_RED_DRAGON_ARCHTAINTED),tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil)
 		and c:IsDestructable() and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil,e,tp)
+		and Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil,e,tp)
 		and Duel.SelectYesNo(tp,94) then
 		e:SetCategory(CATEGORY_DESTROY+CATEGORY_SPECIAL_SUMMON)
 		e:SetProperty(EFFECT_FLAG_CARD_TARGET)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+		local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil,e,tp)
 		Duel.SetOperationInfo(0,CATEGORY_DESTROY,c,1,tp,0)
 		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,0)
 		e:SetLabel(1)
@@ -73,23 +73,23 @@ function s.mtop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return not e:GetHandler():IsStatus(STATUS_CHAINING)
-		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_RED_DRAGON_ARCHFIEND),tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil)
+		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_RED_DRAGON_ARCHTAINTED),tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil)
 end
 function s.filter(c,e,tp)
 	return c:IsLevel(1) and c:IsType(TYPE_TUNER) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.filter(chkc,e,tp) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and s.filter(chkc,e,tp) end
 	if chk==0 then return c:IsDestructable() and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
+		and Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,c,1,tp,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
-	if e:GetLabel()~=1 or not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_RED_DRAGON_ARCHFIEND),tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) then return end
+	if e:GetLabel()~=1 or not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_RED_DRAGON_ARCHTAINTED),tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) then return end
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
 	if c:IsRelateToEffect(e) and Duel.Destroy(c,REASON_EFFECT)>0 and tc:IsRelateToEffect(e) then

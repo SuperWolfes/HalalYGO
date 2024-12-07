@@ -1,5 +1,5 @@
 --サイレント・マジシャン・ゼロ
---Silent Magician Zero
+--Silent Mentor Zero
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetValue(s.atkval)
 	c:RegisterEffect(e2)
-	--Negate opponent's Spell effects
+	--Negate opponent's Actional effects
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_NEGATE+CATEGORY_LVCHANGE)
@@ -53,7 +53,7 @@ function s.atkval(e,c)
 	return ct>0 and ct*500
 end
 function s.negcon(e,tp,eg,ep,ev,re,r,rp)
-	return rp==1-tp and re:IsSpellEffect() and Duel.IsChainNegatable(ev)
+	return rp==1-tp and re:IsActionalEffect() and Duel.IsChainNegatable(ev)
 		and not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED)
 		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_SHINING_SARCOPHAGUS),tp,LOCATION_ONFIELD,0,1,nil)
 end

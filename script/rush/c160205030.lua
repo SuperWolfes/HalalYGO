@@ -17,7 +17,7 @@ function s.initial_effect(c)
 end
 s.listed_names={160205022,160205023}
 function s.costfilter(c)
-	return c:IsFaceup() and c:IsLevelAbove(5) and c:IsRace(RACE_MACHINE) and c:IsAbleToGraveAsCost()
+	return c:IsFaceup() and c:IsLevelAbove(5) and c:IsRace(RACE_MACHINE) and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_MZONE,0,1,nil) end
@@ -36,14 +36,14 @@ function s.spfilter(c,e,tp)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tg=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_MZONE,0,1,1,nil)
-	if Duel.SendtoGrave(tg,REASON_COST)==1 then
+	if Duel.SendtoRest(tg,REASON_COST)==1 then
 		--Effect
 		local tc=eg:GetFirst()
 		Duel.ChangePosition(tc,POS_FACEDOWN_DEFENSE)
 		-- Special Summon
-		local sg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_GRAVE,0,nil,e,tp)
+		local sg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_REST,0,nil,e,tp)
 		if #sg>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 			local ssg=sg:Select(tp,1,1,nil)

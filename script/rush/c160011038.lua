@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion Summon procedure
 	Fusion.AddProcMix(c,true,true,160005032,160005007)
 	--Allow 1 plant monster to attack directly this turn
@@ -33,9 +33,9 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		dg=dg:AddMaximumCheck()
 		Duel.HintSelection(dg,true)
 		if Duel.Destroy(dg,REASON_EFFECT)>0 then
-			local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.setfilter),tp,LOCATION_GRAVE,0,nil)
+			local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.setfilter),tp,LOCATION_REST,0,nil)
 			if #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
-				--Set 1 "Shadow Flower Stance" from the GY
+				--Set 1 "Shadow Flower Stance" from the RP
 				Duel.BreakEffect()
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 				local sg=g:Select(tp,1,1,nil)

@@ -29,7 +29,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 		e:SetOperation(s.thop)
 		s.thtg(e,tp,eg,ep,ev,re,r,rp,1)
 	else
-		e:SetOperation(s.setop)
+		e:SetOperation(s.vetop)
 		s.settg(e,tp,eg,ep,ev,re,r,rp,1)
 	end
 end
@@ -54,7 +54,7 @@ end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_DECK,0,1,nil) end
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 	local tc=Duel.SelectMatchingCard(tp,s.setfilter,tp,LOCATION_DECK,0,1,1,nil):GetFirst()
 	if tc then

@@ -1,9 +1,9 @@
 --刻まれし魔ラクリモーサ
---Fiendsmith Lacrimosa
+--Taintedsmith Lacrimosa
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion Materials
 	Fusion.AddProcMixN(c,true,true,s.matfilter,2)
 	--Monsters your opponent controls lose 600 ATK
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTargetRange(0,LOCATION_MZONE)
 	e1:SetValue(-600)
 	c:RegisterEffect(e1)
-	--Add to your hand or Special Summon 1 LIGHT Fiend from your GY or banishment
+	--Add to your hand or Special Summon 1 LIGHT Tainted from your RP or banishment
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SPECIAL_SUMMON)
@@ -32,7 +32,7 @@ function s.initial_effect(c)
 	e3:SetCategory(CATEGORY_DAMAGE)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetProperty(EFFECT_FLAG_DELAY)
-	e3:SetCode(EVENT_TO_GRAVE)
+	e3:SetCode(EVENT_TO_REST)
 	e3:SetCountLimit(1,{id,1})
 	e3:SetCost(s.damcost)
 	e3:SetTarget(s.damtg)
@@ -40,23 +40,23 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.matfilter(c,fc,sumtype,tp)
-	return c:IsAttribute(ATTRIBUTE_LIGHT,fc,sumtype,tp) and c:IsRace(RACE_FIEND,fc,sumtype,tp)
+	return c:IsAttribute(ATTRIBUTE_LIGHT,fc,sumtype,tp) and c:IsRace(RACE_TAINTED,fc,sumtype,tp)
 end
 function s.thspfilter(c,e,tp,ft)
-	return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_FIEND) and c:IsFaceup()
+	return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_TAINTED) and c:IsFaceup()
 		and (c:IsAbleToHand() or (ft>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)))
 end
 function s.thsptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE|LOCATION_REMOVED) and chkc:IsControler(tp) and s.thspfilter(chkc,e,tp,ft) end
-	if chk==0 then return Duel.IsExistingTarget(s.thspfilter,tp,LOCATION_GRAVE|LOCATION_REMOVED,0,1,nil,e,tp,ft) end
+	if chkc then return chkc:IsLocation(LOCATION_REST|LOCATION_REMOVED) and chkc:IsControler(tp) and s.thspfilter(chkc,e,tp,ft) end
+	if chk==0 then return Duel.IsExistingTarget(s.thspfilter,tp,LOCATION_REST|LOCATION_REMOVED,0,1,nil,e,tp,ft) end
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,2))
-	local g=Duel.SelectTarget(tp,s.thspfilter,tp,LOCATION_GRAVE|LOCATION_REMOVED,0,1,1,nil,e,tp,ft)
+	local g=Duel.SelectTarget(tp,s.thspfilter,tp,LOCATION_REST|LOCATION_REMOVED,0,1,1,nil,e,tp,ft)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,g,1,tp,0)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,0)
-	if g:GetFirst():IsLocation(LOCATION_GRAVE) then
-		Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,tp,0)
+	if g:GetFirst():IsLocation(LOCATION_REST) then
+		Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,tp,0)
 	end
 end
 function s.thspop(e,tp,eg,ep,ev,re,r,rp)
@@ -73,13 +73,13 @@ function s.thspop(e,tp,eg,ep,ev,re,r,rp)
 	)
 end
 function s.damcostfilter(c,tp)
-	return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_FIEND) and c:IsAbleToDeckOrExtraAsCost()
+	return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_TAINTED) and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.damcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return Duel.IsExistingMatchingCard(s.damcostfilter,tp,LOCATION_GRAVE,0,1,c) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.damcostfilter,tp,LOCATION_REST,0,1,c) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,s.damcostfilter,tp,LOCATION_GRAVE,0,1,1,c)
+	local g=Duel.SelectMatchingCard(tp,s.damcostfilter,tp,LOCATION_REST,0,1,1,c)
 	Duel.HintSelection(g)
 	Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_COST)
 end

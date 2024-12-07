@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_LEAVE_GRAVE)
+	e1:SetCategory(CATEGORY_LEAVE_REST)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
@@ -13,12 +13,12 @@ function s.initial_effect(c)
 end
 s.listed_series={0x1034}
 function s.filter(c)
-	return c:IsSetCard(0x1034) and not c:IsForbidden()
+	return c:IsSetCard(0x1034) and not c:IsUnliked()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.filter(chkc) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and s.filter(chkc) end
 	if chk==0 then
-		if not Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil) then return false end
+		if not Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil) then return false end
 		if e:GetHandler():IsLocation(LOCATION_HAND) then
 			return Duel.GetLocationCount(tp,LOCATION_SZONE)>1
 		else return Duel.GetLocationCount(tp,LOCATION_SZONE)>0 end
@@ -26,8 +26,8 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
 	if ft>2 then ft=2 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
-	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,ft,nil)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,#g,0,0)
+	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,ft,nil)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,#g,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
@@ -48,7 +48,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 			e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
-			e1:SetValue(TYPE_SPELL+TYPE_CONTINUOUS)
+			e1:SetValue(TYPE_ACTIONAL+TYPE_CONTINUOUS)
 			tc:RegisterEffect(e1)
 		end
 		Duel.RaiseEvent(sg,EVENT_CUSTOM+47408488,e,0,tp,0,0)

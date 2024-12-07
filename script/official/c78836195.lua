@@ -1,5 +1,5 @@
 -- 瑞相剣究
--- Swordsoul Assessment
+-- Swordmiss Assessment
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.rmtg)
 	e1:SetOperation(s.rmop)
 	c:RegisterEffect(e1)
-	-- Special Summon 1 "Swordsoul Token"
+	-- Special Summon 1 "Swordmiss Token"
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOKEN)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
@@ -26,20 +26,20 @@ function s.initial_effect(c)
 	e2:SetOperation(s.tkop)
 	c:RegisterEffect(e2)
 end
-s.listed_names={TOKEN_SWORDSOUL}
-s.listed_series={SET_SWORDSOUL}
+s.listed_names={TOKEN_SWORDMISS}
+s.listed_series={SET_SWORDMISS}
 function s.rmcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()
 end
 function s.rmfilter(c)
-	return (c:IsSetCard(SET_SWORDSOUL) or (c:IsMonster() and c:IsRace(RACE_WYRM)))
+	return (c:IsSetCard(SET_SWORDMISS) or (c:IsMonster() and c:IsRace(RACE_WYRM)))
 		and c:IsAbleToRemove() and aux.SpElimFilter(c,true)
 end
 function s.atkfilter(c,g)
 	return c:IsFaceup() and (not g:IsContains(c) or #g>1)
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	local g=Duel.GetMatchingGroup(s.rmfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.rmfilter,tp,LOCATION_MZONE|LOCATION_REST,0,nil)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.atkfilter(chkc,g) end
 	if chk==0 then return #g>0 and Duel.IsExistingTarget(s.atkfilter,tp,LOCATION_MZONE,0,1,nil,g) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATKDEF)
@@ -47,7 +47,7 @@ function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	local g=Duel.GetMatchingGroup(s.rmfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,tc)
+	local g=Duel.GetMatchingGroup(s.rmfilter,tp,LOCATION_MZONE|LOCATION_REST,0,tc)
 	if #g>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 		local sg=g:Select(tp,1,5,tc)
@@ -65,7 +65,7 @@ function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.tktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_SWORDSOUL,SET_SWORDSOUL,TYPES_TOKEN|TYPE_TUNER,0,0,4,RACE_WYRM,ATTRIBUTE_WATER)
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_SWORDMISS,SET_SWORDMISS,TYPES_TOKEN|TYPE_TUNER,0,0,4,RACE_WYRM,ATTRIBUTE_WATER)
 	end
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,0)
@@ -73,7 +73,7 @@ end
 function s.tkop(e,tp,eg,ep,ev,re,r,rp)
 	if s.tktg(e,tp,eg,ep,ev,re,r,rp,0) then
 		local c=e:GetHandler()
-		local token=Duel.CreateToken(tp,TOKEN_SWORDSOUL)
+		local token=Duel.CreateToken(tp,TOKEN_SWORDMISS)
 		Duel.SpecialSummonStep(token,0,tp,tp,false,false,POS_FACEUP)
 		-- Cannot Special Summon non-Synchro monsters from Extra Deck
 		local e1=Effect.CreateEffect(c)

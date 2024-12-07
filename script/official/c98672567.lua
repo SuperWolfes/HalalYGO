@@ -40,10 +40,10 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
 	if chk==0 then
 		if not Duel.IsPlayerCanDraw(tp,2) then return false end
-		local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,nil,e)
+		local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_REST,0,nil,e)
 		return g:GetClassCount(Card.GetRace)>=3
 	end
-	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,nil,e)
+	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_REST,0,nil,e)
 	local tg=aux.SelectUnselectGroup(g,e,tp,3,3,aux.dpcheck(Card.GetRace),1,tp,HINTMSG_TODECK)
 	Duel.SetTargetCard(tg)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,tg,3,0,0)

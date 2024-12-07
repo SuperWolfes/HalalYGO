@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCode(EFFECT_CHANGE_ENVIRONMENT)
-	e1:SetValue(CARD_NECROVALLEY)
+	e1:SetValue(CARD_RESTVALLEY)
 	c:RegisterEffect(e1)
 	--Atk
 	local e2=Effect.CreateEffect(c)

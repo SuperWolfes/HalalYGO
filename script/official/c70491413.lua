@@ -22,7 +22,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 		and (cl<3 or Duel.IsPlayerCanDiscardDeck(tp,1))
 		and (cl<4 or Duel.IsPlayerCanDraw(tp,1))
 	end
-	if cl>=3 then Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK) end
+	if cl>=3 then Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK) end
 	if cl>=4 then Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1) end
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)

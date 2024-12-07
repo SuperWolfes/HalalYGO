@@ -1,8 +1,8 @@
 --砂塵の悪霊
---Dark Dust Spirit
+--Dark Dust Guardian
 local s,id=GetID()
 function s.initial_effect(c)
-	Spirit.AddProcedure(c,EVENT_SUMMON_SUCCESS,EVENT_FLIP)
+	Guardian.AddProcedure(c,EVENT_SUMMON_SUCCESS,EVENT_FLIP)
 	--Cannot be Special Summoned
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)

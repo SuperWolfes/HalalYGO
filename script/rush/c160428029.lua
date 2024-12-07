@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.psyfilter(c)
-	return c:IsFaceup() and (c:IsRace(RACE_PSYCHIC) or c:IsRace(RACE_OMEGAPSYCHIC))
+	return c:IsFaceup() and (c:IsRace(RACE_MENTAL) or c:IsRace(RACE_OMEGAMENTAL))
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.psyfilter,tp,LOCATION_MZONE,0,1,e:GetHandler())

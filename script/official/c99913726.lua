@@ -1,12 +1,12 @@
 --捕食植物ドロソフィルム・ヒドラ
---Predaplant Drosophyllum Hydra
+--Predaplant Drosophyllum Hydden
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon rule
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_SPSUMMON_PROC)
-	e1:SetRange(LOCATION_HAND+LOCATION_GRAVE)
+	e1:SetRange(LOCATION_HAND+LOCATION_REST)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
 	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
 	e1:SetCondition(s.hspcon)
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_FREE_CHAIN)
 	e2:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_CARD_TARGET)
-	e2:SetRange(LOCATION_MZONE+LOCATION_GRAVE)
+	e2:SetRange(LOCATION_MZONE+LOCATION_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCost(s.atkcost)
 	e2:SetTarget(s.atktg)
@@ -34,7 +34,7 @@ function s.hspfilter(c,ft,tp)
 end
 function s.hspcon(e,c)
 	if c==nil then return true end
-	local eff={c:GetCardEffect(EFFECT_NECRO_VALLEY)}
+	local eff={c:GetCardEffect(EFFECT_REST_VALLEY)}
 	for _,te in ipairs(eff) do
 		local op=te:GetOperation()
 		if not op or op(e,c) then return false end
@@ -68,9 +68,9 @@ function s.atkcfil(c)
 		and Duel.IsExistingTarget(Card.IsFaceup,0,LOCATION_MZONE,LOCATION_MZONE,1,c)
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.atkcfil,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,e:GetHandler()) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.atkcfil,tp,LOCATION_MZONE+LOCATION_REST,0,1,e:GetHandler()) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.atkcfil,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,e:GetHandler())
+	local g=Duel.SelectMatchingCard(tp,s.atkcfil,tp,LOCATION_MZONE+LOCATION_REST,0,1,1,e:GetHandler())
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

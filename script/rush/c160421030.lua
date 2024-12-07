@@ -2,12 +2,12 @@
 --Temporary Storm Blockade
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send the top 4 cards of your Deck to the GY and shuffle 1 card from the opponent's hand into the Deck
+	--Send the top 4 cards of your Deck to the RP and shuffle 1 card from the opponent's hand into the Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DECKDES+CATEGORY_TODECK)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
-	e1:SetCode(EVENT_TO_GRAVE)
+	e1:SetCode(EVENT_TO_REST)
 	e1:SetProperty(EFFECT_FLAG_DELAY)
 	e1:SetCondition(s.condition)
 	e1:SetTarget(s.target)

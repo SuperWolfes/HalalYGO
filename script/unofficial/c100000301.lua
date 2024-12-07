@@ -1,5 +1,5 @@
 --Ｔｈｅ ｂｌａｚｉｎｇ ＭＡＲＳ (Manga)
---The Blazing Mars (Manga)
+--The Blazing Quest (Manga)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Special Summon
@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_SPSUMMON_PROC)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
-	e1:SetRange(LOCATION_HAND+LOCATION_GRAVE)
+	e1:SetRange(LOCATION_HAND+LOCATION_REST)
 	e1:SetCondition(s.spcon)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
@@ -29,17 +29,17 @@ function s.spfilter(c)
 end
 function s.spcon(e,c)
 	if c==nil then return true end
-	local eff={c:GetCardEffect(EFFECT_NECRO_VALLEY)}
+	local eff={c:GetCardEffect(EFFECT_REST_VALLEY)}
 	for _,te in ipairs(eff) do
 		local op=te:GetOperation()
 		if not op or op(e,c) then return false end
 	end
 	local tp=c:GetControler()
-	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,e:GetHandler())
+	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE+LOCATION_REST,0,e:GetHandler())
 	return aux.SelectUnselectGroup(rg,e,tp,3,3,aux.ChkfMMZ(1),0)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,c)
-	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,e:GetHandler())
+	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE+LOCATION_REST,0,e:GetHandler())
 	local g=aux.SelectUnselectGroup(rg,e,tp,3,3,aux.ChkfMMZ(1),1,tp,HINTMSG_REMOVE,nil,nil,true)
 	if #g~=3 then return false end
 	g:KeepAlive()
@@ -53,10 +53,10 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	g:DeleteGroup()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_MZONE,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local cc=Duel.SelectMatchingCard(tp,Card.IsAbleToGraveAsCost,tp,LOCATION_MZONE,0,1,1,nil);
-	Duel.SendtoGrave(cc,REASON_COST)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_MZONE,0,1,nil) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	local cc=Duel.SelectMatchingCard(tp,Card.IsAbleToRestAsCost,tp,LOCATION_MZONE,0,1,1,nil);
+	Duel.SendtoRest(cc,REASON_COST)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

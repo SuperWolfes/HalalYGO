@@ -1,5 +1,5 @@
 --ゴーストリック・ロールシフト
---Ghostrick-Go-Round
+--Missrick-Go-Round
 local s,id=GetID()
 function s.initial_effect(c)
 	--activate

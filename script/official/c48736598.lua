@@ -3,7 +3,7 @@
 --Anime version scripted by Larry126, updated by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,nil,2,3,s.lcheck)
 	--special summon
 	local e1=Effect.CreateEffect(c)
@@ -42,18 +42,18 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local zones={}
 	zones[0]=aux.GetMMZonesPointedTo(0)
 	zones[1]=aux.GetMMZonesPointedTo(1)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND+LOCATION_GRAVE,0,1,nil,e,tp,tp,zones) or Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND+LOCATION_GRAVE,0,1,nil,e,tp,1-tp,zones) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND+LOCATION_GRAVE)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND+LOCATION_REST,0,1,nil,e,tp,tp,zones) or Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND+LOCATION_REST,0,1,nil,e,tp,1-tp,zones) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND+LOCATION_REST)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local zones={}
 	zones[0]=aux.GetMMZonesPointedTo(0)
 	zones[1]=aux.GetMMZonesPointedTo(1)
-	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_HAND+LOCATION_GRAVE,0,nil,e,tp,tp,zones)+Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_HAND+LOCATION_GRAVE,0,nil,e,tp,1-tp,zones)
+	local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.spfilter),tp,LOCATION_HAND+LOCATION_REST,0,nil,e,tp,tp,zones)+Duel.GetMatchingGroup(aux.RestValleyFilter(s.spfilter),tp,LOCATION_HAND+LOCATION_REST,0,nil,e,tp,1-tp,zones)
 	if #g==0 then return end
 	local ft=Duel.GetLocationCount(0,LOCATION_MZONE,tp,LOCATION_REASON_TOFIELD,zones[0])+Duel.GetLocationCount(1,LOCATION_MZONE,tp,LOCATION_REASON_TOFIELD,zones[1])
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local sg=g:Select(tp,1,Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) and 1 or math.min(ft,2),nil)
+	local sg=g:Select(tp,1,Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) and 1 or math.min(ft,2),nil)
 	for tc in aux.Next(sg) do
 		local p
 		if s.spfilter(tc,e,tp,tp,zones) and s.spfilter(tc,e,tp,1-tp,zones) then
@@ -71,13 +71,13 @@ function s.cfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0x13c) and c:IsLinked()
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsType,tp,0,LOCATION_ONFIELD,1,nil,TYPE_SPELL+TYPE_TRAP)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsType,tp,0,LOCATION_ONFIELD,1,nil,TYPE_ACTIONAL+TYPE_TRAP)
 		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,nil,1,1-tp,LOCATION_ONFIELD)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-	local g=Duel.SelectMatchingCard(tp,Card.IsType,tp,0,LOCATION_ONFIELD,1,Duel.GetMatchingGroupCount(s.cfilter,tp,LOCATION_MZONE,LOCATION_MZONE,nil),nil,TYPE_SPELL+TYPE_TRAP)
+	local g=Duel.SelectMatchingCard(tp,Card.IsType,tp,0,LOCATION_ONFIELD,1,Duel.GetMatchingGroupCount(s.cfilter,tp,LOCATION_MZONE,LOCATION_MZONE,nil),nil,TYPE_ACTIONAL+TYPE_TRAP)
 	if #g>0 then 
 		Duel.Destroy(g,REASON_EFFECT)
 	end

@@ -1,5 +1,5 @@
 --暗黒騎士ガイアロード (Anime)
---Lord Gaia the Fierce Knight (Anime)
+--Watcher Bia the Fierce Knight (Anime)
 --Scripted by Larry126
 Duel.EnableUnofficialProc(PROC_STATS_CHANGED)
 local s,id=GetID()

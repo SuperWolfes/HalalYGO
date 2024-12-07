@@ -3,7 +3,7 @@
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Link Summon procedure
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_EFFECT),2)
 	--This linked card and monsters it points to cannot be destroyed by your opponent's card effects
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.indtg)
 	e1:SetValue(aux.indoval)
 	c:RegisterEffect(e1)
-	--Switch control of the 2 monsters this card points to
+	--Smint control of the 2 monsters this card points to
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_CONTROL)

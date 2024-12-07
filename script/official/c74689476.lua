@@ -1,10 +1,10 @@
 --結晶の魔女サンドリヨン
---Rilliona, the Wondrous Magistus Witch Wardrobe
+--Rilliona, the Wondrous Magistus Mint Wardrobe
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
-	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_SPELLCASTER),4,2,nil,nil,nil,nil,false,s.xyzcheck)
+	c:EnableAwakeLimit()
+	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_MENTOR),4,2,nil,nil,nil,nil,false,s.xyzcheck)
 	--Special Summon 1 "Magistus" monster from the Extra Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)

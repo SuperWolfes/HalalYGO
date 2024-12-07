@@ -1,5 +1,5 @@
 --幻獣機グリーフィン
---Mecha Phantom Beast Kalgriffin
+--Mecha Illusion Beast Kalgriffin
 local s,id=GetID()
 function s.initial_effect(c)
 	--Special Summon this card from the hand
@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	local e3=e2:Clone()
 	e3:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
 	c:RegisterEffect(e3)
-	--Special Summon 1 "Mecha Phantom Beast" Token
+	--Special Summon 1 "Mecha Illusion Beast" Token
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOKEN)
@@ -37,8 +37,8 @@ function s.initial_effect(c)
 	e4:SetOperation(s.spop2)
 	c:RegisterEffect(e4)
 end
-s.listed_names={TOKEN_MECHA_PHANTOM_BEAST}
-s.listed_series={SET_MECHA_PHANTOM_BEAST}
+s.listed_names={TOKEN_MECHA_ILLUSION_BEAST}
+s.listed_series={SET_MECHA_ILLUSION_BEAST}
 function s.tknfilter(c)
 	return c:IsType(TYPE_TOKEN) or c:IsOriginalType(TYPE_TOKEN)
 end
@@ -46,7 +46,7 @@ function s.indcon(e)
 	return Duel.IsExistingMatchingCard(s.tknfilter,e:GetHandlerPlayer(),LOCATION_ONFIELD,0,1,nil)
 end
 function s.rfilter(c,tp)
-	return c:IsSetCard(SET_MECHA_PHANTOM_BEAST) and (c:IsControler(tp) or c:IsFaceup())
+	return c:IsSetCard(SET_MECHA_ILLUSION_BEAST) and (c:IsControler(tp) or c:IsFaceup())
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckReleaseGroupCost(tp,s.rfilter,2,false,aux.ReleaseCheckMMZ,nil,tp) end
@@ -65,7 +65,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.cfilter(c)
-	return c:IsSetCard(SET_MECHA_PHANTOM_BEAST) and c:IsMonster() and c:IsDiscardable()
+	return c:IsSetCard(SET_MECHA_ILLUSION_BEAST) and c:IsMonster() and c:IsDiscardable()
 end
 function s.spcost2(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end
@@ -73,14 +73,14 @@ function s.spcost2(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.sptg2(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_MECHA_PHANTOM_BEAST,SET_MECHA_PHANTOM_BEAST,TYPES_TOKEN,0,0,3,RACE_MACHINE,ATTRIBUTE_WIND) end
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_MECHA_ILLUSION_BEAST,SET_MECHA_ILLUSION_BEAST,TYPES_TOKEN,0,0,3,RACE_MACHINE,ATTRIBUTE_WIND) end
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,1,tp,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,0)
 end
 function s.spop2(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_MECHA_PHANTOM_BEAST,SET_MECHA_PHANTOM_BEAST,TYPES_TOKEN,0,0,3,RACE_MACHINE,ATTRIBUTE_WIND) then
-		local token=Duel.CreateToken(tp,TOKEN_MECHA_PHANTOM_BEAST)
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_MECHA_ILLUSION_BEAST,SET_MECHA_ILLUSION_BEAST,TYPES_TOKEN,0,0,3,RACE_MACHINE,ATTRIBUTE_WIND) then
+		local token=Duel.CreateToken(tp,TOKEN_MECHA_ILLUSION_BEAST)
 		Duel.SpecialSummon(token,0,tp,tp,false,false,POS_FACEUP)
 	end
 end

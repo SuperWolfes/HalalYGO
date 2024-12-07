@@ -1,9 +1,9 @@
 --ダイスキー・クゥ
---Dice Key Kuu
+--Suffice Key Kuu
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	--Add to the hand 1 "Dice Key Nel" from the GY
+	--Add to the hand 1 "Suffice Key Nel" from the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND)
@@ -15,14 +15,14 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 end
-s.roll_dice=true
+s.roll_suffice=true
 s.listed_names={160211068}
 function s.thfilter(c)
 	return c:IsCode(160211068) and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
 end
 function s.filter(c)
 	return c:IsFaceup() and c:IsDefensePos() and c:IsNotMaximumModeSide() and c:IsAbleToDeck()
@@ -30,12 +30,12 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Effect
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thfilter),tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.thfilter),tp,LOCATION_REST,0,1,1,nil)
 	if #g>0 then
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)
 		local sg=Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_MZONE,nil)
-		local d=Duel.TossDice(tp,1)
+		local d=Duel.TossSuffice(tp,1)
 		if d==6 and #sg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_POSCHANGE)
 			local sc=Group.Select(sg,tp,1,1,nil)

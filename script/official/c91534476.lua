@@ -20,26 +20,26 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	return true
 end
 function s.cfilter(c,tp)
-	return c:IsMonster() and c:IsAbleToGraveAsCost()
-		and Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,c)
+	return c:IsMonster() and c:IsAbleToRestAsCost()
+		and Duel.IsExistingTarget(s.filter,tp,LOCATION_REST+LOCATION_REMOVED,0,1,c)
 end
 function s.filter(c)
 	return (c:IsFaceup() or not c:IsLocation(LOCATION_REMOVED)) 
 		and c:IsMonster() and c:IsLevel(1) and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE+LOCATION_REMOVED) and s.filter(chkc) and chkc~=e:GetLabelObject() end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST+LOCATION_REMOVED) and s.filter(chkc) and chkc~=e:GetLabelObject() end
 	if chk==0 then 
 		if e:GetLabel()~=1 then return false end
 		e:SetLabel(0)
 		return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND+LOCATION_MZONE,0,1,nil,tp)
 	end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local sc=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND+LOCATION_MZONE,0,1,1,nil,tp):GetFirst()
-	Duel.SendtoGrave(sc,REASON_COST)
+	Duel.SendtoRest(sc,REASON_COST)
 	e:SetLabelObject(sc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,1,sc)
+	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST+LOCATION_REMOVED,0,1,1,sc)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,#g,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)

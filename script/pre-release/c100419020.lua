@@ -3,7 +3,7 @@
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Xyz Summon procedure: 2 Level 8 monsters, or 1 "P.U.N.K." Fusion or Synchro Monster
 	Xyz.AddProcedure(c,nil,8,2,s.ovfilter,aux.Stringid(id,0),2,s.xyzop)
 	--Draw 1 card
@@ -62,11 +62,11 @@ function s.drop(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Draw(p,d,REASON_EFFECT)
 end
 function s.negconfilter(c)
-	return c:IsLevel(3) and c:IsRace(RACE_PSYCHIC)
+	return c:IsLevel(3) and c:IsRace(RACE_MENTAL)
 end
 function s.negcon(e,tp,eg,ep,ev,re,r,rp)
 	return re:GetHandler()~=e:GetHandler() and re:IsMonsterEffect() and Duel.IsChainNegatable(ev)
-		and Duel.IsExistingMatchingCard(s.negconfilter,tp,LOCATION_GRAVE,0,1,nil)
+		and Duel.IsExistingMatchingCard(s.negconfilter,tp,LOCATION_REST,0,1,nil)
 end
 function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

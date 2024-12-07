@@ -3,10 +3,10 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Roll a six-sided die
+	--Roll a game of die
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_DICE+CATEGORY_ATKCHANGE+CATEGORY_DAMAGE+CATEGORY_DESTROY)
+	e1:SetCategory(CATEGORY_SUFFICE+CATEGORY_ATKCHANGE+CATEGORY_DAMAGE+CATEGORY_DESTROY)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
 	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL)
 	e1:SetCode(EVENT_CHAINING)
@@ -17,10 +17,10 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 end
-s.roll_dice=true
+s.roll_suffice=true
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,1,tp,0)
+	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,1,tp,0)
 	local chain_link=ev+1
 	if chain_link==2 then
 		Duel.SetOperationInfo(0,CATEGORY_ATKCHANGE,e:GetHandler(),1,tp,500)
@@ -32,7 +32,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local res=Duel.TossDice(tp,1)
+	local res=Duel.TossSuffice(tp,1)
 	local chain_link=Duel.GetCurrentChain()
 	if chain_link==2 then
 		--This card gains ATK equal to the result x 500 until the end of this turn

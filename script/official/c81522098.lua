@@ -1,5 +1,5 @@
 --Japanese name
---Mimighoul Dragon
+--Mimirahul Dragon
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.selfsptg)
 	e2:SetOperation(s.selfspop)
 	c:RegisterEffect(e2)
-	--Add 1 "Mimighoul" Spell/Trap from your Deck to your hand
+	--Add 1 "Mimirahul" Actional/Trap from your Deck to your hand
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND)
@@ -38,9 +38,9 @@ function s.initial_effect(c)
 	e4:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e4)
 end
-s.listed_series={SET_MIMIGHOUL}
+s.listed_series={SET_MIMIRAHUL}
 function s.desfilter(c)
-	return c:IsFaceup() and not c:IsSetCard(SET_MIMIGHOUL)
+	return c:IsFaceup() and not c:IsSetCard(SET_MIMIRAHUL)
 end
 function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -55,7 +55,7 @@ function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.effop(e,tp,eg,ep,ev,re,r,rp,chk)
 	local break_chk=false
-	--Destroy all face-up monsters you control, except "Mimighoul" monsters
+	--Destroy all face-up monsters you control, except "Mimirahul" monsters
 	local dg=Duel.GetMatchingGroup(s.desfilter,tp,LOCATION_MZONE,0,nil)
 	if #dg>0 then
 		Duel.Destroy(dg,REASON_EFFECT)
@@ -82,7 +82,7 @@ function s.selfspop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.thfilter(c)
-	return c:IsSetCard(SET_MIMIGHOUL) and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsSetCard(SET_MIMIRAHUL) and c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

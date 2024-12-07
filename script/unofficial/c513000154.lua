@@ -1,4 +1,4 @@
---Speed Spell - Speed Energy (Anime)
+--Speed Actional - Speed Energy (Anime)
 --Ｓｐ−スピード・エナジー
 --scripted by Larry126
 local s,id=GetID()

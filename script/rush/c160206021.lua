@@ -19,7 +19,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
 function s.filter(c)
-	return c:IsMonster() and c:IsRace(RACE_FIEND) and c:IsLegend() and c:IsAbleToHand()
+	return c:IsMonster() and c:IsRace(RACE_TAINTED) and c:IsLegend() and c:IsAbleToHand()
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Effect

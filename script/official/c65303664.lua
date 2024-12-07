@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c,tp)
-	return c:IsLocation(LOCATION_GRAVE) and c:IsMonster() and c:IsRace(RACE_BEAST) and c:IsReason(REASON_BATTLE)
+	return c:IsLocation(LOCATION_REST) and c:IsMonster() and c:IsRace(RACE_BEAST) and c:IsReason(REASON_BATTLE)
 		and c:IsPreviousPosition(POS_FACEUP) and c:IsPreviousControler(tp)
 		and (c:GetPreviousRaceOnField()&RACE_BEAST)~=0
 end
@@ -26,7 +26,7 @@ function s.rfiletr(c)
 	return c:IsRace(RACE_BEAST) and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local rg=Duel.GetMatchingGroup(s.rfiletr,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil)
+	local rg=Duel.GetMatchingGroup(s.rfiletr,tp,LOCATION_MZONE+LOCATION_REST,0,nil)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>-2 and #rg>1 
 		and aux.SelectUnselectGroup(rg,e,tp,2,2,aux.ChkfMMZ(1),0) end
 	local g=aux.SelectUnselectGroup(rg,e,tp,2,2,aux.ChkfMMZ(1),1,tp,HINTMSG_REMOVE)

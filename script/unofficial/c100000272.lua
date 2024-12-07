@@ -33,7 +33,7 @@ function s.initial_effect(c)
 	e3:SetOperation(s.desop)
 	c:RegisterEffect(e3)
 end
-s.listed_names={83965310} --Destiny HERO - Plasma
+s.listed_names={83965310} --Destrudic HERO - Plasma
 s.counter_place_list={0x92}
 function s.countercon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==1-tp and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,83965310),tp,LOCATION_MZONE,0,1,nil)
@@ -46,8 +46,8 @@ function s.counterop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() and e:GetHandler():GetCounter(0x92)>1 end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() and e:GetHandler():GetCounter(0x92)>1 end
+	Duel.SendtoRest(e:GetHandler(),REASON_COST)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) end

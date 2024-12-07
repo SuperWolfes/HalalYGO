@@ -1,5 +1,5 @@
 --磁石の戦士マグネット・バルキリオン (Anime)
---Valkyrion the Magna Warrior (Anime)
+--Balkanion the Magna Warrior (Anime)
 --Updated by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -13,8 +13,8 @@ function s.splimit(e,se,sp,st)
 	return not e:GetHandler():IsLocation(LOCATION_EXTRA)
 end
 function s.contactfilter(tp)
-	return Duel.GetMatchingGroup(Card.IsAbleToGraveAsCost,tp,LOCATION_ONFIELD,0,nil)
+	return Duel.GetMatchingGroup(Card.IsAbleToRestAsCost,tp,LOCATION_ONFIELD,0,nil)
 end
 function s.contactop(g,tp,c)
-	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL+REASON_FUSION)
+	Duel.SendtoRest(g,REASON_COST+REASON_MATERIAL+REASON_FUSION)
 end

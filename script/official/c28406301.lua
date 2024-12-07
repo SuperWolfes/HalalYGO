@@ -55,14 +55,14 @@ end
 s.listed_names={id}
 s.listed_series={0xae,0xaf}
 function s.atkfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0xae) and c:IsSpellTrap()
+	return c:IsFaceup() and c:IsSetCard(0xae) and c:IsActionalTrap()
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and chkc:IsFaceup() and chkc:IsRace(RACE_FIEND) end
-	if chk==0 then return Duel.IsExistingMatchingCard(s.atkfilter,tp,LOCATION_ONFIELD+LOCATION_GRAVE,0,1,nil)
-		and Duel.IsExistingTarget(aux.FaceupFilter(Card.IsRace,RACE_FIEND),tp,LOCATION_MZONE,0,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and chkc:IsFaceup() and chkc:IsRace(RACE_TAINTED) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.atkfilter,tp,LOCATION_ONFIELD+LOCATION_REST,0,1,nil)
+		and Duel.IsExistingTarget(aux.FaceupFilter(Card.IsRace,RACE_TAINTED),tp,LOCATION_MZONE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATKDEF)
-	Duel.SelectTarget(tp,aux.FaceupFilter(Card.IsRace,RACE_FIEND),tp,LOCATION_MZONE,0,1,1,nil)
+	Duel.SelectTarget(tp,aux.FaceupFilter(Card.IsRace,RACE_TAINTED),tp,LOCATION_MZONE,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,e:GetHandler(),1,0,0)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
@@ -70,7 +70,7 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	if not c:IsRelateToEffect(e) then return end
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsFaceup() and tc:IsRelateToEffect(e) and not tc:IsImmuneToEffect(e) then
-		local g=Duel.GetMatchingGroup(s.atkfilter,tp,LOCATION_ONFIELD+LOCATION_GRAVE,0,nil)
+		local g=Duel.GetMatchingGroup(s.atkfilter,tp,LOCATION_ONFIELD+LOCATION_REST,0,nil)
 		if #g<1 then return end
 		-- Update ATK
 		local e1=Effect.CreateEffect(c)
@@ -120,7 +120,7 @@ function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Draw(p,d,REASON_EFFECT)
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonLocation(LOCATION_GRAVE)
+	return e:GetHandler():IsSummonLocation(LOCATION_REST)
 end
 function s.thfilter(c)
 	return c:IsSetCard(0xaf) and not c:IsCode(id) and c:IsAbleToHand()

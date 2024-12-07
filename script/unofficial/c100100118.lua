@@ -1,5 +1,5 @@
 --Ｓｐ－ダッシュ・ピルファー
---Speed Spell - Dash Pilfer
+--Speed Actional - Dash Pilfer
 local s,id=GetID()
 function s.initial_effect(c)
 	--Take control of 1 Defense position monster

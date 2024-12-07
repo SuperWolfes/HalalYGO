@@ -19,7 +19,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(aux.FilterMaximumSideFunctionEx(s.filter),tp,LOCATION_MZONE,0,2,nil)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	local dg=Duel.GetMatchingGroup(Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,nil)
+	local dg=Duel.GetMatchingGroup(Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,nil)
 	if chk==0 then return #dg>0 end
 end
 function s.tdfilter(c)
@@ -27,13 +27,13 @@ function s.tdfilter(c)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Effect
-	local dg=Duel.GetMatchingGroup(Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,nil)
+	local dg=Duel.GetMatchingGroup(Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,nil)
 	if #dg==0 then return end
 	local sg=dg:Select(tp,1,1,nil)
 	Duel.HintSelection(sg)
-	if Duel.Destroy(sg,REASON_EFFECT)>0 and Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_GRAVE,0,1,nil)
+	if Duel.Destroy(sg,REASON_EFFECT)>0 and Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST,0,1,nil)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
-		local tg=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+		local tg=Duel.SelectMatchingCard(tp,s.tdfilter,tp,LOCATION_REST,0,1,1,nil)
 		Duel.SendtoDeck(tg,nil,0,REASON_EFFECT)
 		Duel.ShuffleDeck(tp)
 	end

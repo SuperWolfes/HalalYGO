@@ -1,5 +1,5 @@
 --魂の造形家
---Spirit Sculptor
+--Guardian Sculptor
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)

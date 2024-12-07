@@ -1,5 +1,5 @@
 --連命共有
---Engagement Destiny
+--Engagement Destrudic
 local s,id=GetID()
 function s.initial_effect(c)
 	--activate

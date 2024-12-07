@@ -30,10 +30,10 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if #dg>0 then
 		Duel.HintSelection(dg)
 		if Duel.Destroy(dg,REASON_EFFECT)>0 then
-			local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_GRAVE,0,nil,e,tp)
+			local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,e,tp)
 			if #g>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-				local sg=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+				local sg=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp)
 				if #sg>0 then
 					Duel.BreakEffect()
 					Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)

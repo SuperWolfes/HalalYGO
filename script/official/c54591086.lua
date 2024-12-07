@@ -30,13 +30,13 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Release(rg,REASON_COST)
 end
 function s.filter(c)
-	return c:IsSpell() and c:IsAbleToGrave()
+	return c:IsActional() and c:IsAbleToRest()
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ct=e:GetLabel()
-	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(1-tp,s.filter,1-tp,LOCATION_DECK,0,ct,ct,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end

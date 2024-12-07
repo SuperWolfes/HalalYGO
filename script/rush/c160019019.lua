@@ -48,5 +48,5 @@ function s.actcon(e)
 	return Duel.GetAttacker()==e:GetHandler()
 end
 function s.con(e)
-	return Duel.IsExistingMatchingCard(Card.IsCode,e:GetHandlerPlayer(),LOCATION_GRAVE,0,1,nil,41172955,86445415,13839120)
+	return Duel.IsExistingMatchingCard(Card.IsCode,e:GetHandlerPlayer(),LOCATION_REST,0,1,nil,41172955,86445415,13839120)
 end

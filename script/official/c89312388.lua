@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter2(c,fc)
-	if not c:IsAbleToGraveAsCost() then return false end
+	if not c:IsAbleToRestAsCost() then return false end
 	return c:IsCode(table.unpack(fc.material))
 end
 function s.filter1(c,tp)
@@ -24,9 +24,9 @@ function s.coscost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_CONFIRM)
 	local g=Duel.SelectMatchingCard(tp,s.filter1,tp,LOCATION_EXTRA,0,1,1,nil,tp)
 	Duel.ConfirmCards(1-tp,g)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local cg=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_DECK,0,1,1,nil,g:GetFirst())
-	Duel.SendtoGrave(cg,REASON_COST)
+	Duel.SendtoRest(cg,REASON_COST)
 	e:SetLabel(cg:GetFirst():GetCode())
 end
 function s.cosoperation(e,tp,eg,ep,ev,re,r,rp)

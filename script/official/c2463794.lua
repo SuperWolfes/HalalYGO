@@ -1,14 +1,14 @@
 --刻まれし魔の鎮魂棺
---Fiendsmith Requiem
+--Taintedsmith Requiem
 --Scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Link Summon Procedure
 	Link.AddProcedure(c,s.matfilter,1,1)
-	--You can only Special Summon "Fiendsmith Requiem(s)" once per turn
+	--You can only Special Summon "Taintedsmith Requiem(s)" once per turn
 	c:SetSPSummonOnce(id)
-	--Special Summon 1 "Fiendsmith" monster from your hand or Deck
+	--Special Summon 1 "Taintedsmith" monster from your hand or Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -21,25 +21,25 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Equip this card to 1 non-Link LIGHT Fiend monster you control
+	--Equip this card to 1 non-Link LIGHT Tainted monster you control
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_EQUIP)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e2:SetRange(LOCATION_MZONE|LOCATION_GRAVE)
+	e2:SetRange(LOCATION_MZONE|LOCATION_REST)
 	e2:SetCountLimit(1,id)
 	e2:SetTarget(s.eqtg)
 	e2:SetOperation(s.eqop)
 	c:RegisterEffect(e2)
 end
 s.listed_names={id}
-s.listed_series={SET_FIENDSMITH}
+s.listed_series={SET_TAINTEDSMITH}
 function s.matfilter(c,lc,sumtype,tp)
-	return c:IsAttribute(ATTRIBUTE_LIGHT,lc,sumtype,tp) and c:IsRace(RACE_FIEND,lc,sumtype,tp)
+	return c:IsAttribute(ATTRIBUTE_LIGHT,lc,sumtype,tp) and c:IsRace(RACE_TAINTED,lc,sumtype,tp)
 end
 function s.spfilter(c,e,tp)
-	return c:IsSetCard(SET_FIENDSMITH) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsSetCard(SET_TAINTEDSMITH) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetMZoneCount(tp,e:GetHandler())>0
@@ -55,7 +55,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.eqfilter(c)
-	return not c:IsLinkMonster() and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_FIEND) and c:IsFaceup()
+	return not c:IsLinkMonster() and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_TAINTED) and c:IsFaceup()
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
@@ -65,8 +65,8 @@ function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
 	Duel.SelectTarget(tp,s.eqfilter,tp,LOCATION_MZONE,0,1,1,c)
 	Duel.SetOperationInfo(0,CATEGORY_EQUIP,c,1,tp,0)
-	if c:IsLocation(LOCATION_GRAVE) then
-		Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,c,1,tp,0)
+	if c:IsLocation(LOCATION_REST) then
+		Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,c,1,tp,0)
 	end
 end
 function s.eqop(e,tp,eg,ep,ev,re,r,rp)
@@ -92,6 +92,6 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetReset(RESET_EVENT|RESETS_STANDARD)
 		c:RegisterEffect(e2)
 	elseif c:IsLocation(LOCATION_MZONE) then
-		Duel.SendtoGrave(c,REASON_RULE,nil,PLAYER_NONE)
+		Duel.SendtoRest(c,REASON_RULE,nil,PLAYER_NONE)
 	end
 end

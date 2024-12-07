@@ -2,7 +2,7 @@
 --Superheavy Samurai General Shanao
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Pendulum.AddProcedure(c,false)
 	--1 Tuner + 1+ Non-Tuner monsters
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	e2:SetCode(EFFECT_DEFENSE_ATTACK)
 	e2:SetValue(1)
 	c:RegisterEffect(e2)
-	--Special Summon 1 "Superheavy Samurai" Monster Card from your GY or Spell/Trap Zone
+	--Special Summon 1 "Superheavy Samurai" Monster Card from your RP or Actional/Trap Zone
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -51,7 +51,7 @@ function s.selfspop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetAttacker()
 	if c:IsRelateToEffect(e) and Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)>0
-		and not Duel.IsExistingMatchingCard(Card.IsSpellTrap,tp,LOCATION_GRAVE,0,1,nil)
+		and not Duel.IsExistingMatchingCard(Card.IsActionalTrap,tp,LOCATION_REST,0,1,nil)
 		and tc:IsRelateToBattle() and tc:IsFaceup() and tc:IsControler(1-tp) then
 		Duel.BreakEffect()
 		Duel.NegateRelatedChain(tc,RESET_TURN_SET)
@@ -80,13 +80,13 @@ function s.spfilter(c,e,tp)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE|LOCATION_STZONE,0,1,nil,e,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE|LOCATION_STZONE)
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST|LOCATION_STZONE,0,1,nil,e,tp) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST|LOCATION_STZONE)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_GRAVE|LOCATION_STZONE,0,1,1,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST|LOCATION_STZONE,0,1,1,nil,e,tp)
 	if #g>0 and Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)>0 then
 		local c=e:GetHandler()
 		if not (c:IsRelateToEffect(e) and c:IsType(TYPE_PENDULUM)) then return end

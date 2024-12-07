@@ -1,5 +1,5 @@
 --魔轟神クシャノ
---Fabled Kushano
+--Fablous Kushano
 local s,id=GetID()
 function s.initial_effect(c)
 	--Add itself to the hand
@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND)
 	e1:SetType(EFFECT_TYPE_IGNITION)
-	e1:SetRange(LOCATION_GRAVE)
+	e1:SetRange(LOCATION_REST)
 	e1:SetCost(s.cost)
 	e1:SetTarget(s.tg)
 	e1:SetOperation(s.op)

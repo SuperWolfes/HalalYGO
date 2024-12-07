@@ -16,7 +16,7 @@ function s.initial_effect(c)
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCurrentPhase()==PHASE_DRAW and ep==1-tp and r==REASON_RULE
-		and Duel.IsExistingMatchingCard(Card.IsRace,tp,LOCATION_GRAVE,0,1,nil,RACE_ZOMBIE)
+		and Duel.IsExistingMatchingCard(Card.IsRace,tp,LOCATION_REST,0,1,nil,RACE_TOXIC)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

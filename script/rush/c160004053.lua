@@ -17,7 +17,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return tc and tc:IsFaceup() and tc:IsControler(tp) and tc:IsRace(RACE_WYRM)
 end
 function s.tgfilter(c)
-	return c:IsRace(RACE_WYRM) and c:IsLevelBelow(6) and c:IsAbleToGraveAsCost() and c:IsAttackAbove(1)
+	return c:IsRace(RACE_WYRM) and c:IsLevelBelow(6) and c:IsAbleToRestAsCost() and c:IsAttackAbove(1)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_HAND,0,1,nil) end
@@ -26,11 +26,11 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Effect
 	local bc=eg:GetFirst()
 	if not (bc and bc:IsRelateToBattle()) then return end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_HAND,0,1,1,nil)
 	if #g>0 then
 		Duel.HintSelection(g)
-		Duel.SendtoGrave(g,REASON_COST)
+		Duel.SendtoRest(g,REASON_COST)
 		local atk=g:GetFirst():GetAttack()
 		--Decrease ATK
 		local e1=Effect.CreateEffect(e:GetHandler())

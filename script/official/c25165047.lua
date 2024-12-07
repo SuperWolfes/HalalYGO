@@ -2,7 +2,7 @@
 --Life Stream Dragon
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Synchro Summon Procedure
 	Synchro.AddProcedure(c,nil,1,1,aux.FilterSummonCode(2403771),1,1)
 	--Your LP becomes 4000
@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	local e3=e2:Clone()
 	e3:SetCode(EFFECT_NO_EFFECT_DAMAGE)
 	c:RegisterEffect(e3)
-	--Destruction replacement for itself
+	--Mismatching replacement for itself
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_SINGLE)
 	e4:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -51,15 +51,15 @@ function s.damval(e,re,val,r,rp,rc)
 	return val
 end
 function s.repfilter(c)
-	return c:IsEquipSpell() and c:IsAbleToRemoveAsCost()
+	return c:IsEquipActional() and c:IsAbleToRemoveAsCost()
 end
 function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return not c:IsReason(REASON_REPLACE) 
-		and Duel.IsExistingMatchingCard(s.repfilter,tp,LOCATION_GRAVE,0,1,nil) end
+		and Duel.IsExistingMatchingCard(s.repfilter,tp,LOCATION_REST,0,1,nil) end
 	if Duel.SelectEffectYesNo(tp,c,96) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-		local g=Duel.SelectMatchingCard(tp,s.repfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+		local g=Duel.SelectMatchingCard(tp,s.repfilter,tp,LOCATION_REST,0,1,1,nil)
 		Duel.Remove(g,POS_FACEUP,REASON_COST)
 		return true
 	else return false end

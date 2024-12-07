@@ -33,15 +33,15 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 s.listed_series={SET_TOY}
-local LOCATIONS_HAND_DECK_MZONE_GRAVE=LOCATION_HAND|LOCATION_DECK|LOCATION_MZONE|LOCATION_GRAVE
+local LOCATIONS_HAND_DECK_MZONE_REST=LOCATION_HAND|LOCATION_DECK|LOCATION_MZONE|LOCATION_REST
 function s.cstfilter(c)
-	return c:IsFacedown() and c:IsAbleToGraveAsCost()
+	return c:IsFacedown() and c:IsAbleToRestAsCost()
 end
 function s.mondescost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cstfilter,tp,LOCATION_ONFIELD,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cstfilter,tp,LOCATION_ONFIELD,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.mondestg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local at=Duel.GetAttacker()
@@ -56,12 +56,12 @@ function s.mondesop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.setfilter(c)
 	local set_eff=c:IsHasEffect(EFFECT_MONSTER_SSET)
-	return c:IsOriginalSetCard(SET_TOY) and c:IsMonster() and set_eff and set_eff:GetValue()&TYPE_SPELL>0
+	return c:IsOriginalSetCard(SET_TOY) and c:IsMonster() and set_eff and set_eff:GetValue()&TYPE_ACTIONAL>0
 		and c:IsSSetable() and (c:IsFaceup() or not c:IsLocation(LOCATION_MZONE))
 end
 function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(nil,tp,LOCATION_STZONE,0,nil)
-	local b1=Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATIONS_HAND_DECK_MZONE_GRAVE,0,1,nil)
+	local b1=Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATIONS_HAND_DECK_MZONE_REST,0,1,nil)
 	local b2=#g>0
 	if chk==0 then return b1 or b2 end
 	local op=Duel.SelectEffect(tp,
@@ -78,16 +78,16 @@ end
 function s.effop(e,tp,eg,ep,ev,re,r,rp)
 	local op=e:GetLabel()
 	if op==1 then
-		--Set up to 2 "Toy" monsters in your Spell & Trap Zone as Spells
+		--Set up to 2 "Toy" monsters in your Actional & Trap Zone as Actionals
 		local ft=math.min(Duel.GetLocationCount(tp,LOCATION_SZONE),2)
 		if ft==0 then return end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
-		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.setfilter),tp,LOCATIONS_HAND_DECK_MZONE_GRAVE,0,1,ft,nil)
+		local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.setfilter),tp,LOCATIONS_HAND_DECK_MZONE_REST,0,1,ft,nil)
 		if #g>0 then
 			Duel.SSet(tp,g)
 		end
 	elseif op==2 then
-		--Destroy up to 2 cards in your Spell & Trap Zone
+		--Destroy up to 2 cards in your Actional & Trap Zone
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 		local g=Duel.SelectMatchingCard(tp,nil,tp,LOCATION_STZONE,0,1,2,nil)
 		if #g>0 then

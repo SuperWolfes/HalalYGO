@@ -15,7 +15,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_REDEYES_B_DRAGON}
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
 end
 function s.filter(c,e,tp)
 	return c:IsCode(CARD_REDEYES_B_DRAGON) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -28,7 +28,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	--requirement
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
+	Duel.SendtoRest(e:GetHandler(),REASON_COST)
 	--effect
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)

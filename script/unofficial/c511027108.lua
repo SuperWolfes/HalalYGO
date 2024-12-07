@@ -53,13 +53,13 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g
 	if Duel.IsPlayerAffectedByEffect(tp,69832741) then
 		local sg=function() return Duel.GetMatchingGroup(s.hlfilter,tp,LOCATION_MZONE,0,tc) end
-		if chk==0 then return not tc:IsLocation(LOCATION_GRAVE) and aux.SelectUnselectGroup(sg(),e,tp,5,5,s.rescon(tc),0) end
+		if chk==0 then return not tc:IsLocation(LOCATION_REST) and aux.SelectUnselectGroup(sg(),e,tp,5,5,s.rescon(tc),0) end
 		g=aux.SelectUnselectGroup(sg(),e,tp,5,5,s.rescon(tc),1,tp,HINTMSG_REMOVE)
 	else
-		if chk==0 then return Duel.GetMatchingGroupCount(s.hlfilter,tp,LOCATION_GRAVE,0,tc)>=5 and
+		if chk==0 then return Duel.GetMatchingGroupCount(s.hlfilter,tp,LOCATION_REST,0,tc)>=5 and
 						Duel.IsExistingMatchingCard(Card.IsSynchroSummonable,tp,LOCATION_EXTRA,0,1,tc,tc) end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-		g=Duel.SelectMatchingCard(tp,s.hlfilter,tp,LOCATION_GRAVE,0,5,5,tc)
+		g=Duel.SelectMatchingCard(tp,s.hlfilter,tp,LOCATION_REST,0,5,5,tc)
 	end
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end

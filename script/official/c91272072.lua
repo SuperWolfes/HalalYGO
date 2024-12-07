@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,s.matfilter,aux.FilterBoolFunctionEx(Card.IsSetCard,0xfb))
 	--avoid damage
 	local e1=Effect.CreateEffect(c)
@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	--recycle
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
-	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_LEAVE_GRAVE)
+	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_LEAVE_REST)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e3:SetCode(EVENT_PHASE+PHASE_END)
 	e3:SetRange(LOCATION_MZONE)
@@ -84,7 +84,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 		end
 		return false
 	end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -97,7 +97,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 				chk=true
 			end
 		end
-		local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.thfilter),tp,LOCATION_GRAVE,0,nil)
+		local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.thfilter),tp,LOCATION_REST,0,nil)
 		if chk and #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 			Duel.BreakEffect()
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)

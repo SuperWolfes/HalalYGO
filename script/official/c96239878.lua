@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	e0:SetType(EFFECT_TYPE_ACTIVATE)
 	e0:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e0)
-	--Check if a monster was Ritual or Fusion Summoned using "Blue-Eyes White Dragon" or "Dark Magician"
+	--Check if a monster was Locked or Fusion Summoned using "Blue-Eyes White Dragon" or "Dark Mentor"
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_SET_AVAILABLE+EFFECT_FLAG_IGNORE_RANGE)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetRange(LOCATION_SZONE)
 	e1:SetValue(s.valcheck)
 	c:RegisterEffect(e1)
-	--Banish 1 card from the opponent's field or GY
+	--Banish 1 card from the opponent's field or RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_REMOVE)
@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.rmvtg)
 	e2:SetOperation(s.rmvop)
 	c:RegisterEffect(e2)
-	--Return 1 Level 7 or higher Normal Monster in your GY to your hand or Deck
+	--Return 1 Level 7 or higher Normal Monster in your RP to your hand or Deck
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_TODECK)
@@ -42,18 +42,18 @@ function s.initial_effect(c)
 	e3:SetOperation(s.retop)
 	c:RegisterEffect(e3)
 end
-s.listed_names={CARD_BLUEEYES_W_DRAGON,CARD_DARK_MAGICIAN}
+s.listed_names={CARD_BLUEEYES_W_DRAGON,CARD_DARK_MENTOR}
 function s.matfilter(c,sc,sumtype,tp)
-	return c:IsSummonCode(sc,sumtype,tp,CARD_BLUEEYES_W_DRAGON,CARD_DARK_MAGICIAN)
+	return c:IsSummonCode(sc,sumtype,tp,CARD_BLUEEYES_W_DRAGON,CARD_DARK_MENTOR)
 end
 function s.valcheck(e,c)
 	local g=c:GetMaterial()
 	if not g or #g==0 then return end
 	local tp=e:GetHandlerPlayer()
-	local ritual=g:IsExists(s.matfilter,1,nil,c,SUMMON_TYPE_RITUAL,tp)
+	local locked=g:IsExists(s.matfilter,1,nil,c,SUMMON_TYPE_LOCKED,tp)
 	local fusion=g:IsExists(s.matfilter,1,nil,c,SUMMON_TYPE_FUSION,tp)
-	if ritual or fusion then
-		local sumtype=(ritual and SUMMON_TYPE_RITUAL) or 0
+	if locked or fusion then
+		local sumtype=(locked and SUMMON_TYPE_LOCKED) or 0
 		if fusion then
 			sumtype=sumtype|SUMMON_TYPE_FUSION
 		end
@@ -61,18 +61,18 @@ function s.valcheck(e,c)
 	end
 end
 function s.cfilter(c,tp)
-	if not (c:HasFlagEffect(id) and c:IsSummonPlayer(tp) and c:IsSummonType({SUMMON_TYPE_RITUAL,SUMMON_TYPE_FUSION})) then return false end
+	if not (c:HasFlagEffect(id) and c:IsSummonPlayer(tp) and c:IsSummonType({SUMMON_TYPE_LOCKED,SUMMON_TYPE_FUSION})) then return false end
 	local sumtype=c:GetFlagEffectLabel(id)
-	return sumtype==SUMMON_TYPE_RITUAL|SUMMON_TYPE_FUSION or c:IsSummonType(sumtype)
+	return sumtype==SUMMON_TYPE_LOCKED|SUMMON_TYPE_FUSION or c:IsSummonType(sumtype)
 end
 function s.rmvcond(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,tp)
 end
 function s.rmvtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_ONFIELD|LOCATION_GRAVE) and chkc:IsControler(1-tp) and chkc:IsAbleToRemove() end
-	if chk==0 then return Duel.IsExistingTarget(Card.IsAbleToRemove,tp,0,LOCATION_ONFIELD|LOCATION_GRAVE,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_ONFIELD|LOCATION_REST) and chkc:IsControler(1-tp) and chkc:IsAbleToRemove() end
+	if chk==0 then return Duel.IsExistingTarget(Card.IsAbleToRemove,tp,0,LOCATION_ONFIELD|LOCATION_REST,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectTarget(tp,Card.IsAbleToRemove,tp,0,LOCATION_ONFIELD|LOCATION_GRAVE,1,1,nil)
+	local g=Duel.SelectTarget(tp,Card.IsAbleToRemove,tp,0,LOCATION_ONFIELD|LOCATION_REST,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,1,tp,0)
 end
 function s.rmvop(e,tp,eg,ep,ev,re,r,rp)
@@ -83,17 +83,17 @@ function s.rmvop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.retcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(c,REASON_COST)
+	if chk==0 then return c:IsAbleToRestAsCost() end
+	Duel.SendtoRest(c,REASON_COST)
 end
 function s.retfilter(c)
 	return c:IsType(TYPE_NORMAL) and c:IsLevelAbove(7) and (c:IsAbleToHand() or c:IsAbleToDeck())
 end
 function s.rettg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.retfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.retfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.retfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.retfilter,tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local g=Duel.SelectTarget(tp,s.retfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.retfilter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,g,1,tp,0)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TODECK,g,1,tp,0)
 end

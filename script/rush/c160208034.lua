@@ -1,5 +1,5 @@
 --楽姫の葬奏曲
---Music Princess's Requiem
+--Nasheed Princess's Requiem
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)

@@ -73,12 +73,12 @@ function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tg=c:GetEquipTarget()
 	if chk==0 then return not c:IsStatus(STATUS_DESTROY_CONFIRMED)
 		and tg and tg:IsReason(REASON_BATTLE+REASON_EFFECT) and not tg:IsReason(REASON_REPLACE)
-		and Duel.IsExistingMatchingCard(s.desrepfilter,tp,LOCATION_GRAVE,0,1,nil) end
+		and Duel.IsExistingMatchingCard(s.desrepfilter,tp,LOCATION_REST,0,1,nil) end
 	return Duel.SelectEffectYesNo(tp,c)
 end
 function s.desrepop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESREPLACE)
-	local tc=Duel.SelectMatchingCard(tp,s.desrepfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local tc=Duel.SelectMatchingCard(tp,s.desrepfilter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.SendtoDeck(tc,nil,2,REASON_EFFECT+REASON_REPLACE)
 	local c=e:GetHandler()
 	local eqc=c:GetEquipTarget()

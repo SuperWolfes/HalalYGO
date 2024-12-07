@@ -2,8 +2,8 @@
 --Ursarctic Polari
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Must be Special Summoned by its own method
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -30,7 +30,7 @@ function s.initial_effect(c)
 	e3:SetCondition(s.accon)
 	e3:SetOperation(s.acop)
 	c:RegisterEffect(e3)
-	--Add to hand or Special Summon 1 "Ursarctic" monster from the GY
+	--Add to hand or Special Summon 1 "Ursarctic" monster from the RP
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOHAND)
@@ -45,7 +45,7 @@ end
 s.listed_series={SET_URSARCTIC}
 s.listed_names={CARD_URSARCTIC_BIG_DIPPER}
 function s.sprfilter(c)
-	return c:IsFaceup() and c:IsAbleToGraveAsCost() and c:HasLevel()
+	return c:IsFaceup() and c:IsAbleToRestAsCost() and c:HasLevel()
 end
 function s.sprfilter1(c,tp,g,sc)
 	local g=Duel.GetMatchingGroup(s.sprfilter,tp,LOCATION_MZONE,0,nil)
@@ -64,11 +64,11 @@ end
 function s.sprtg(e,tp,eg,ep,ev,re,r,rp,chk,c)
 	local g=Duel.GetMatchingGroup(s.sprfilter,tp,LOCATION_MZONE,0,nil)
 	local g1=g:Filter(s.sprfilter1,nil,tp,g,c)
-	local mg1=aux.SelectUnselectGroup(g1,e,tp,1,1,nil,1,tp,HINTMSG_TOGRAVE,nil,nil,true)
+	local mg1=aux.SelectUnselectGroup(g1,e,tp,1,1,nil,1,tp,HINTMSG_TOREST,nil,nil,true)
 	if #mg1>0 then
 		local mc=mg1:GetFirst()
 		local g2=g:Filter(s.sprfilter2,mc,tp,mc,c,mc:GetLevel())
-		local mg2=aux.SelectUnselectGroup(g2,e,tp,1,1,nil,1,tp,HINTMSG_TOGRAVE,nil,nil,true)
+		local mg2=aux.SelectUnselectGroup(g2,e,tp,1,1,nil,1,tp,HINTMSG_TOREST,nil,nil,true)
 		mg1:Merge(mg2)
 	end
 	if #mg1==2 then
@@ -81,7 +81,7 @@ end
 function s.sprop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.fieldfilter(c,tp)
 	return c:IsCode(CARD_URSARCTIC_BIG_DIPPER) and c:GetActivateEffect() and c:GetActivateEffect():IsActivatable(tp,true,true)
@@ -92,7 +92,7 @@ end
 function s.acop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
 	local tc=Duel.SelectMatchingCard(tp,s.fieldfilter,tp,LOCATION_DECK,0,1,1,nil,tp):GetFirst()
-	Duel.ActivateFieldSpell(tc,e,tp,eg,ep,ev,re,r,rp)
+	Duel.ActivateFieldActional(tc,e,tp,eg,ep,ev,re,r,rp)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckReleaseGroupCost(tp,Card.IsLevelAbove,1,false,nil,nil,7) end
@@ -101,7 +101,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.extracon(base,c,e,tp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,1,c,ft,base,tp)
+	return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,1,c,ft,base,tp)
 end
 function s.filter(c,ft,e,tp)
 	return (c:IsSetCard(SET_URSARCTIC) and c:IsMonster()) and (c:IsAbleToHand() or (ft>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)))
@@ -109,16 +109,16 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-		return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,1,nil,ft,e,tp)
+		return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,1,nil,ft,e,tp)
 	end
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,nil,1,tp,0)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,nil,1,tp,0)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SELF)
-	local tc=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil,ft,e,tp):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_REST,0,1,1,nil,ft,e,tp):GetFirst()
 	if tc then
 		aux.ToHandOrElse(tc,tp,
 		function(tc)

@@ -30,7 +30,7 @@ function s.drop(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.ConfirmCards(1-p,g)
 	g:Match(Card.IsMonster,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 	Duel.ShuffleHand(p)
 end

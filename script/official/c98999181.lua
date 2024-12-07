@@ -1,5 +1,5 @@
 --ネフティスの祈り手
---Prayer of Nephthys
+--Prayer of Nepolonis
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon
@@ -16,14 +16,14 @@ function s.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	e2:SetCode(EVENT_TO_GRAVE)
+	e2:SetCode(EVENT_TO_REST)
 	e2:SetOperation(s.spr)
 	c:RegisterEffect(e2)
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetCountLimit(1,{id,1})
 	e3:SetCode(EVENT_PHASE+PHASE_STANDBY)
 	e3:SetCondition(s.thcon2)
@@ -68,7 +68,7 @@ function s.spr(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.thfilter(c,e,tp)
-	return c:IsSetCard(0x11f) and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsSetCard(0x11f) and c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.thcon2(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

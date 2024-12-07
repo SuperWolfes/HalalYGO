@@ -13,9 +13,9 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(1-tp) and chkc:IsType(TYPE_EFFECT) end
-	if chk==0 then return Duel.IsExistingTarget(Card.IsType,tp,0,LOCATION_GRAVE,1,nil,TYPE_EFFECT) end
-	local g=Duel.SelectTarget(tp,Card.IsType,tp,0,LOCATION_GRAVE,1,1,nil,TYPE_EFFECT)
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(1-tp) and chkc:IsType(TYPE_EFFECT) end
+	if chk==0 then return Duel.IsExistingTarget(Card.IsType,tp,0,LOCATION_REST,1,nil,TYPE_EFFECT) end
+	local g=Duel.SelectTarget(tp,Card.IsType,tp,0,LOCATION_REST,1,1,nil,TYPE_EFFECT)
 	Duel.SetOperationInfo(0,CATEGORY_DISABLE,g,1,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
@@ -26,7 +26,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE+EFFECT_FLAG_OWNER_RELATE)
-		e1:SetRange(LOCATION_GRAVE)
+		e1:SetRange(LOCATION_REST)
 		e1:SetCode(EFFECT_DISABLE)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		e1:SetCondition(s.rcon)

@@ -3,10 +3,10 @@
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	--Excavate the top 3 cards and send to the GY
+	--Excavate the top 3 cards and send to the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_TOGRAVE)
+	e1:SetCategory(CATEGORY_TOREST)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1)
@@ -22,7 +22,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>=3 end
 end
 function s.filter(c)
-	return c:IsMonster() and c:IsRace(RACE_GALAXY) and c:IsAbleToGrave()
+	return c:IsMonster() and c:IsRace(RACE_GALAXY) and c:IsAbleToRest()
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)<3 then return end
@@ -31,7 +31,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tg=g:Filter(s.filter,nil)
 	if #tg>0 then
 		Duel.DisableShuffleCheck()
-		Duel.SendtoGrave(tg,REASON_EFFECT)
+		Duel.SendtoRest(tg,REASON_EFFECT)
 		g:RemoveCard(tg)
 	end
 	local ct=#g

@@ -17,25 +17,25 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.matfilter(c)
-	return c:IsLocation(LOCATION_HAND|LOCATION_MZONE) and c:IsRace(RACE_ROCK) and c:IsAbleToGrave()
+	return c:IsLocation(LOCATION_HAND|LOCATION_MZONE) and c:IsRace(RACE_ROCK) and c:IsAbleToRest()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
 end
 function s.thfilter(c)
 	return c:IsRace(RACE_ROCK) and c:IsType(TYPE_NORMAL) and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
 end
 function s.operation(fustg,fusop)
 	return function(e,tp,eg,ep,ev,re,r,rp)
 		--Requirement
-		if Duel.SendtoGrave(e:GetHandler(),REASON_COST)==0 then return end
+		if Duel.SendtoRest(e:GetHandler(),REASON_COST)==0 then return end
 		--Effect
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-		local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,2,e:GetHandler())
+		local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,2,e:GetHandler())
 		if #g>0 then
 			Duel.SendtoHand(g,nil,REASON_EFFECT)
 			Duel.ConfirmCards(1-tp,g)

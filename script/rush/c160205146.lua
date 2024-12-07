@@ -1,3 +1,3 @@
 --ファイナライズ・フェニックス
---Finalize Phoenix
+--Finalize Bird
 Duel.LoadCardScriptAlias(160205046)

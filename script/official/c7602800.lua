@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--Special Summon 1 monster that is banished or in the GY
+	--Special Summon 1 monster that is banished or in the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
-	--Replace destruction
+	--Replace mismatching
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
 	e3:SetCode(EFFECT_DESTROY_REPLACE)
@@ -49,11 +49,11 @@ end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local _,atk=eg:Filter(s.spcfilter,nil,tp):GetMaxGroup(Card.GetAttack)
 	if not atk then atk=0 end
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE|LOCATION_REMOVED) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp,atk) end
+	if chkc then return chkc:IsLocation(LOCATION_REST|LOCATION_REMOVED) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp,atk) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_GRAVE|LOCATION_REMOVED,0,1,nil,e,tp,atk) end
+		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST|LOCATION_REMOVED,0,1,nil,e,tp,atk) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_GRAVE|LOCATION_REMOVED,0,1,1,nil,e,tp,atk)
+	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_REST|LOCATION_REMOVED,0,1,1,nil,e,tp,atk)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)

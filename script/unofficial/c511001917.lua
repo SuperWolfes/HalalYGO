@@ -62,7 +62,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e3:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
 		e3:SetCode(EVENT_LEAVE_FIELD)
 		e3:SetLabelObject(e2)
-		e3:SetOperation(s.resetop)
+		e3:SetOperation(s.revetop)
 		Duel.RegisterEffect(e3,tp)
 	end
 end
@@ -79,7 +79,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 		e:Reset()
 	end
 end
-function s.resetop(e,tp,eg,ep,ev,re,r,rp)
+function s.revetop(e,tp,eg,ep,ev,re,r,rp)
 	local eff=e:GetLabelObject()
 	if not eff then
 		e:Reset()

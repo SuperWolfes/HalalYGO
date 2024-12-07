@@ -1,7 +1,7 @@
 --裁きの龍
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -47,7 +47,7 @@ end
 function s.spcon(e,c)
 	if c==nil then return true end
 	if Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)<=0 then return false end
-	local g=Duel.GetMatchingGroup(s.spfilter,c:GetControler(),LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.spfilter,c:GetControler(),LOCATION_REST,0,nil)
 	local ct=g:GetClassCount(Card.GetCode)
 	return ct>3
 end

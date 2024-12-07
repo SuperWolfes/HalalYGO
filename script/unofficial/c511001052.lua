@@ -1,4 +1,4 @@
---The Phantom Knights of Rugged Glove
+--The Illusion Knights of Rugged Glove
 local s,id=GetID()
 function s.initial_effect(c)
 	--effect gain

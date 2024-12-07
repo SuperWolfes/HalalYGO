@@ -56,7 +56,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.tefilter(c)
-	return c:IsCode(CARD_DREAMING_NEMLERIA) and not c:IsForbidden()
+	return c:IsCode(CARD_DREAMING_NEMLERIA) and not c:IsUnliked()
 end
 function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local b1=Duel.IsExistingMatchingCard(s.tefilter,tp,LOCATION_DECK,0,1,nil)

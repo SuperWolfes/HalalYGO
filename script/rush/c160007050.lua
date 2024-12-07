@@ -1,5 +1,5 @@
 -- 火麺炙りバーナーの術
--- Art of Masked Fiery Noodle Scorching Burner
+-- Art of Masked Fiery Noodle Sccorehing Burner
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -20,12 +20,12 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_PYRO),tp,LOCATION_MZONE,0,1,nil)
-	and Duel.IsExistingMatchingCard(Card.IsType,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,nil,TYPE_NORMAL) end
+	and Duel.IsExistingMatchingCard(Card.IsType,tp,LOCATION_REST,LOCATION_REST,1,nil,TYPE_NORMAL) end
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local g=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsRace,RACE_PYRO),tp,LOCATION_MZONE,0,nil)
-	local ct=Duel.GetMatchingGroupCount(Card.IsType,c:GetControler(),LOCATION_GRAVE,LOCATION_GRAVE,nil,TYPE_NORMAL)
+	local ct=Duel.GetMatchingGroupCount(Card.IsType,c:GetControler(),LOCATION_REST,LOCATION_REST,nil,TYPE_NORMAL)
 	if not g then return end
 	for tc in g:Iter() do
 		local e1=Effect.CreateEffect(c)

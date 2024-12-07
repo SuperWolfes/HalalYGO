@@ -1,9 +1,9 @@
 --リザレクション・ブレス
---Breath of Resurrection
+--Breath of Protection
 --scripted by Rundas
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon monsters from hand/GY and equip 1 Equip Spell to a monster you control
+	--Special Summon monsters from hand/RP and equip 1 Equip Actional to a monster you control
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_EQUIP)
@@ -24,13 +24,13 @@ function s.spfilter(c,e,tp)
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_GRAVE,0,1,nil,e,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,0,tp,LOCATION_HAND|LOCATION_GRAVE)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_EQUIP,nil,0,tp,LOCATION_HAND|LOCATION_GRAVE)
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_REST,0,1,nil,e,tp) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,0,tp,LOCATION_HAND|LOCATION_REST)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_EQUIP,nil,0,tp,LOCATION_HAND|LOCATION_REST)
 end
 function s.eqfilter(c,tp)
 	return c:IsType(TYPE_EQUIP) and c:CheckUniqueOnField(tp) and c:ListsCode(TOKEN_ADVENTURER)
-		and not c:IsForbidden() and Duel.IsExistingMatchingCard(s.eqfilter2,tp,LOCATION_MZONE,0,1,nil,c)
+		and not c:IsUnliked() and Duel.IsExistingMatchingCard(s.eqfilter2,tp,LOCATION_MZONE,0,1,nil,c)
 end
 function s.eqfilter2(c,tc)
 	return c:IsFaceup() and tc:CheckEquipTarget(c)
@@ -38,9 +38,9 @@ end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ft<=0 then return end
-	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_HAND|LOCATION_GRAVE,0,nil,e,tp)
+	local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.spfilter),tp,LOCATION_HAND|LOCATION_REST,0,nil,e,tp)
 	if #g==0 then return end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	ft=math.min(2,ft)
 	local sg=aux.SelectUnselectGroup(g,e,tp,1,ft,aux.dncheck,1,tp,HINTMSG_SPSUMMON)
 	if #sg>0 and Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)>0 then
@@ -56,10 +56,10 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 			tc:RegisterEffect(e1,true)
 		end
 		if Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-			and Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.eqfilter),tp,LOCATION_HAND|LOCATION_GRAVE,0,1,nil,tp)
+			and Duel.IsExistingMatchingCard(aux.RestValleyFilter(s.eqfilter),tp,LOCATION_HAND|LOCATION_REST,0,1,nil,tp)
 			and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-			local ec=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.eqfilter),tp,LOCATION_HAND|LOCATION_GRAVE,0,1,1,nil,tp):GetFirst()
+			local ec=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.eqfilter),tp,LOCATION_HAND|LOCATION_REST,0,1,1,nil,tp):GetFirst()
 			if not ec then return end
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
 			local tg=Duel.SelectMatchingCard(tp,s.eqfilter2,tp,LOCATION_MZONE,0,1,1,nil,ec)

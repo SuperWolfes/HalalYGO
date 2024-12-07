@@ -1,5 +1,5 @@
 --霊水鳥シレーヌ・オルカ
---Sirenorca
+--Sirencorea
 local s,id=GetID()
 function s.initial_effect(c)
 	--Special Summon itself from the hand

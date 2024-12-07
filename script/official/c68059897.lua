@@ -3,10 +3,10 @@
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Link materials: 2+ monsters, including a "M∀LICE" monster
 	Link.AddProcedure(c,nil,2,3,s.lcheck)
-	--While this card points to a monster, switch the original ATK and DEF of all Effect Monsters your opponent controls
+	--While this card points to a monster, smint the original ATK and DEF of all Effect Monsters your opponent controls
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_SWAP_AD)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetCondition(function(e) return e:GetHandler():GetLinkedGroupCount()>0 end)
 	e1:SetTarget(aux.TargetBoolFunction(Card.IsType,TYPE_EFFECT))
 	c:RegisterEffect(e1)
-	--Add 1 "M∀LICE" Spell from your Deck to your hand
+	--Add 1 "M∀LICE" Actional from your Deck to your hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND)
@@ -44,7 +44,7 @@ function s.lcheck(g,lc,sumtype,tp)
 	return g:IsExists(Card.IsSetCard,1,nil,SET_MALISS,lc,sumtype,tp)
 end
 function s.thfilter(c)
-	return c:IsSetCard(SET_MALISS) and c:IsSpell() and c:IsAbleToHand()
+	return c:IsSetCard(SET_MALISS) and c:IsActional() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

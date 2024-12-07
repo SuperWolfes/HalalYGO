@@ -1,9 +1,9 @@
 --デストーイ・マッド・キマイラ
---Frightfur Chimera
+--Frightfur Chilean
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0xad),3)
 	--spsummon condition
 	local e1=Effect.CreateEffect(c)
@@ -49,7 +49,7 @@ end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local bc=c:GetBattleTarget()
-	return c:IsRelateToBattle() and c:IsFaceup() and bc:IsLocation(LOCATION_GRAVE) and bc:IsMonster()
+	return c:IsRelateToBattle() and c:IsFaceup() and bc:IsLocation(LOCATION_REST) and bc:IsMonster()
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local bc=e:GetHandler():GetBattleTarget()

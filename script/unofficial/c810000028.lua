@@ -1,5 +1,5 @@
 -- アマゾネスの鎖使い (Anime)
--- Amazoness Chain Master (Anime)
+-- Amazonian Chain Master (Anime)
 -- scripted by: UnknownGuest
 -- updated by Larry126
 local s,id=GetID()
@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	e1:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
-	e1:SetCode(EVENT_TO_GRAVE)
+	e1:SetCode(EVENT_TO_REST)
 	e1:SetCondition(s.condition)
 	e1:SetCost(s.cost)
 	e1:SetTarget(s.target)

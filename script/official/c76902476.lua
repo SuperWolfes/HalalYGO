@@ -1,8 +1,8 @@
 --幻獣機タートレーサー
---Mecha Phantom Beast Turtletracer
+--Mecha Illusion Beast Turtletracer
 local s,id=GetID()
 function s.initial_effect(c)
-	--Gains the levels of all "Mecha Phantom Beast Token"
+	--Gains the levels of all "Mecha Illusion Beast Token"
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	local e3=e2:Clone()
 	e3:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
 	c:RegisterEffect(e3)
-	--The first "Mecha Phantom Beast Token" that would be destroyed is not
+	--The first "Mecha Illusion Beast Token" that would be destroyed is not
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_FIELD)
 	e4:SetCode(EFFECT_INDESTRUCTABLE_COUNT)
@@ -33,9 +33,9 @@ function s.initial_effect(c)
 	e4:SetValue(s.valcon)
 	c:RegisterEffect(e4)
 end
-s.listed_names={TOKEN_MECHA_PHANTOM_BEAST}
+s.listed_names={TOKEN_MECHA_ILLUSION_BEAST}
 function s.lvval(e,c)
-	return Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsCode,TOKEN_MECHA_PHANTOM_BEAST),c:GetControler(),LOCATION_MZONE,0,nil):GetSum(Card.GetLevel)
+	return Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsCode,TOKEN_MECHA_ILLUSION_BEAST),c:GetControler(),LOCATION_MZONE,0,nil):GetSum(Card.GetLevel)
 end
 function s.tknfilter(c)
 	return c:IsType(TYPE_TOKEN) or c:IsOriginalType(TYPE_TOKEN)
@@ -44,7 +44,7 @@ function s.indcon(e)
 	return Duel.IsExistingMatchingCard(s.tknfilter,e:GetHandlerPlayer(),LOCATION_ONFIELD,0,1,nil)
 end
 function s.indtg(e,c)
-	return c:IsCode(TOKEN_MECHA_PHANTOM_BEAST)
+	return c:IsCode(TOKEN_MECHA_ILLUSION_BEAST)
 end
 function s.valcon(e,re,r,rp)
 	return (r&REASON_BATTLE)~=0

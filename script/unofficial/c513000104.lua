@@ -40,7 +40,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		gc=Duel.AnnounceNumber(tp,table.unpack(t))
 	end
 	Duel.DiscardDeck(tp,gc,REASON_EFFECT)
-	local val=Duel.GetOperatedGroup():FilterCount(Card.IsLocation,nil,LOCATION_GRAVE)
+	local val=Duel.GetOperatedGroup():FilterCount(Card.IsLocation,nil,LOCATION_REST)
 	if val>0 then
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)

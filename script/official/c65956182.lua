@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	-- Fusion Summon
-	local e1=Fusion.CreateSummonEff({handler=c,fusfilter=aux.FilterBoolFunction(Card.IsRace,RACE_FIEND),matfilter=s.matfilter,extrafil=s.fextra,extraop=s.extraop,extratg=s.extratg})
+	local e1=Fusion.CreateSummonEff({handler=c,fusfilter=aux.FilterBoolFunction(Card.IsRace,RACE_TAINTED),matfilter=s.matfilter,extrafil=s.fextra,extraop=s.extraop,extratg=s.extratg})
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCountLimit(1,id)
 	e1:SetHintTiming(0,TIMING_MAIN_END)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_HANDES)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetTarget(s.thtg)
 	e2:SetOperation(s.thop)
@@ -30,20 +30,20 @@ function s.checkmat(tp,sg,fc)
 	return fc:IsSetCard(0x6) or not sg:IsExists(Card.IsLocation,1,nil,LOCATION_HAND)
 end
 function s.fextra(e,tp,mg)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_SPIRIT_ELIMINATION) then return nil,s.checkmat end
-	return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRemove),tp,LOCATION_GRAVE,0,nil),s.checkmat
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_GUARDIAN_ELIMINATION) then return nil,s.checkmat end
+	return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRemove),tp,LOCATION_REST,0,nil),s.checkmat
 end
 function s.extraop(e,tc,tp,sg)
 	local rg=sg:Filter(Card.IsLocation,nil,LOCATION_HAND)
 	if #rg>0 then
-		Duel.SendtoGrave(rg,REASON_DISCARD+REASON_EFFECT+REASON_FUSION+REASON_MATERIAL)
+		Duel.SendtoRest(rg,REASON_DISCARD+REASON_EFFECT+REASON_FUSION+REASON_MATERIAL)
 		sg:Sub(rg)
 	end
 	Fusion.BanishMaterial(e,tc,tp,sg)
 end
 function s.extratg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,0,tp,LOCATION_MZONE+LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,0,tp,LOCATION_MZONE+LOCATION_REST)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_HANDES,nil,0,tp,1)
 end
 function s.tgfilter(c)
@@ -63,6 +63,6 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_HAND,0,1,1,nil)
 	if #g>0 then
 		Duel.BreakEffect()
-		Duel.SendtoGrave(g,REASON_EFFECT+REASON_DISCARD)
+		Duel.SendtoRest(g,REASON_EFFECT+REASON_DISCARD)
 	end
 end

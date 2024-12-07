@@ -3,9 +3,9 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,CARD_IMAGINARY_ACTOR,160204010)
-	--Shuffle 3 monsters from opponent's GY to deck
+	--Shuffle 3 monsters from opponent's RP to deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TODECK)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.tdtg1)
 	e1:SetOperation(s.tdop1)
 	c:RegisterEffect(e1)
-	--Shuffle 2 spellcaster from opponent's field to deck
+	--Shuffle 2 mentor from opponent's field to deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TODECK)
@@ -29,43 +29,43 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToDeckOrExtraAsCost,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToDeckOrExtraAsCost,tp,LOCATION_REST,0,1,nil) end
 end
---shuffle from grave to deck
+--shuffle from rest to deck
 function s.tdfilter(c)
 	return c:IsMonster() and c:IsAbleToDeck()
 end
 function s.tdtg1(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,0,LOCATION_GRAVE,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_GRAVE)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,0,LOCATION_REST,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_REST)
 end
 function s.tdop1(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local tg=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local tg=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.HintSelection(tg)
 	if Duel.SendtoDeck(tg,nil,SEQ_DECKBOTTOM,REASON_COST)==1 then
 		--Effect
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-		local g=Duel.SelectMatchingCard(tp,s.tdfilter,tp,0,LOCATION_GRAVE,1,3,nil)
+		local g=Duel.SelectMatchingCard(tp,s.tdfilter,tp,0,LOCATION_REST,1,3,nil)
 		Duel.HintSelection(g)
 		if #g>0 then
 			Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
 		end
 	end
 end
---shuffle up to 2 spellcaster to the deck
+--shuffle up to 2 mentor to the deck
 function s.tdtg2(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(aux.FilterMaximumSideFunctionEx(s.tdfilter2),tp,0,LOCATION_MZONE,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_MZONE)
 end
 function s.tdfilter2(c)
-	return c:IsRace(RACE_SPELLCASTER) and c:IsFaceup() and c:IsAbleToDeck()
+	return c:IsRace(RACE_MENTOR) and c:IsFaceup() and c:IsAbleToDeck()
 end
 function s.tdop2(e,tp,eg,ep,ev,re,r,rp)
 	--requirement
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local tg=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local tg=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.HintSelection(tg)
 	if Duel.SendtoDeck(tg,nil,SEQ_DECKBOTTOM,REASON_COST)==1 then
 		--Effect

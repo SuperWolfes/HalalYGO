@@ -1,5 +1,5 @@
 --はぐれ使い魔術師
---Straynge Cat Magician
+--Straynge Cat Mentor
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_STRAYNGE_CAT}
 function s.costfilter(c)
-	return c:IsMonster() and c:IsAttack(0) and c:IsAbleToGraveAsCost()
+	return c:IsMonster() and c:IsAttack(0) and c:IsAbleToRestAsCost()
 end
 function s.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil) end
@@ -34,13 +34,13 @@ function s.filter(c)
 end
 function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,1,nil)
-	if Duel.SendtoGrave(g,REASON_COST)<1 then return end
+	if Duel.SendtoRest(g,REASON_COST)<1 then return end
 	--Effect
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
 	Duel.Draw(p,d,REASON_EFFECT)
-	if Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,CARD_STRAYNGE_CAT) 
+	if Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,CARD_STRAYNGE_CAT) 
 		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,0,1,nil) 
 		and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_APPLYTO)

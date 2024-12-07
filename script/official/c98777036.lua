@@ -60,7 +60,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)
 end
 function s.cfilter(c,tp)
-	return c:IsMonster() and c:IsAbleToGraveAsCost()
+	return c:IsMonster() and c:IsAbleToRestAsCost()
 		and Duel.IsExistingTarget(s.ctfilter,tp,0,LOCATION_MZONE,1,nil,c:GetLevel())
 end
 function s.ctfilter(c,lv)
@@ -68,10 +68,10 @@ function s.ctfilter(c,lv)
 end
 function s.ctcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil,tp) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local sg=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND,0,1,1,nil,tp)
 	e:SetLabel(sg:GetFirst():GetLevel())
-	Duel.SendtoGrave(sg,REASON_COST)
+	Duel.SendtoRest(sg,REASON_COST)
 end
 function s.cttg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) and s.ctfilter(chkc,e:GetLabel()) end
@@ -91,10 +91,10 @@ function s.lvlfilter(c,lvl)
 end
 function s.lvtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local lvl=e:GetHandler():GetLevel()
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.lvlfilter(chkc,lvl) end
-	if chk==0 then return Duel.IsExistingTarget(s.lvlfilter,tp,LOCATION_GRAVE,0,1,nil,lvl) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and s.lvlfilter(chkc,lvl) end
+	if chk==0 then return Duel.IsExistingTarget(s.lvlfilter,tp,LOCATION_REST,0,1,nil,lvl) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	Duel.SelectTarget(tp,s.lvlfilter,tp,LOCATION_GRAVE,0,1,1,nil,lvl)
+	Duel.SelectTarget(tp,s.lvlfilter,tp,LOCATION_REST,0,1,1,nil,lvl)
 end
 function s.lvop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

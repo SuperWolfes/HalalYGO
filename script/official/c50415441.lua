@@ -1,12 +1,12 @@
 --Japanese name
---Mimighoul Archfiend
+--Mimirahul Archtainted
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
 	--FLIP: Apply these effects in sequence
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_DRAW+CATEGORY_TOGRAVE+CATEGORY_CONTROL)
+	e1:SetCategory(CATEGORY_DRAW+CATEGORY_TOREST+CATEGORY_CONTROL)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_FLIP+EFFECT_TYPE_TRIGGER_F)
 	e1:SetCountLimit(1,id)
 	e1:SetCondition(function() return Duel.IsMainPhase() end)
@@ -38,14 +38,14 @@ function s.initial_effect(c)
 	e4:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e4)
 end
-s.listed_series={SET_MIMIGHOUL}
+s.listed_series={SET_MIMIRAHUL}
 function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	if Duel.IsPlayerCanDraw(1-tp,1) then
 		Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,1-tp,1)
 	end
-	if Duel.IsExistingMatchingCard(Card.IsAbleToGrave,tp,LOCATION_HAND,0,1,nil) then
-		Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_HAND)
+	if Duel.IsExistingMatchingCard(Card.IsAbleToRest,tp,LOCATION_HAND,0,1,nil) then
+		Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_HAND)
 	end
 	local c=e:GetHandler()
 	if c:IsAbleToChangeControler() then
@@ -56,13 +56,13 @@ function s.effop(e,tp,eg,ep,ev,re,r,rp,chk)
 	--Your opponent draws 1 card
 	Duel.Draw(1-tp,1,REASON_EFFECT)
 	local break_chk=false
-	--Send 1 card from your hand to the GY
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToGrave,tp,LOCATION_HAND,0,1,1,nil)
+	--Send 1 card from your hand to the RP
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToRest,tp,LOCATION_HAND,0,1,1,nil)
 	if #g>0 then
 		break_chk=true
 		Duel.BreakEffect()
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 	--Give control of this card to your opponent
 	local c=e:GetHandler()

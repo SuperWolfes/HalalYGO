@@ -13,5 +13,5 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.sumlimit(e,c,sump,sumtype,sumpos,targetp,se)
-	return c:IsLocation(LOCATION_GRAVE) and c:IsLevel(7)
+	return c:IsLocation(LOCATION_REST) and c:IsLevel(7)
 end

@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_TOGRAVE+CATEGORY_TODECK)
+	e1:SetCategory(CATEGORY_TOREST+CATEGORY_TODECK)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
@@ -29,7 +29,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingTarget(s.tgfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 	Duel.SelectTarget(tp,s.tgfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil,tp)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_HAND+LOCATION_DECK+LOCATION_EXTRA)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_HAND+LOCATION_DECK+LOCATION_EXTRA)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_HAND)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
@@ -55,8 +55,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetValue(code2)
 		tc:RegisterEffect(e2)
 	end
-	if Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_NEOS),tp,LOCATION_ONFIELD+LOCATION_GRAVE,0,1,nil) then
-		Duel.SendtoGrave(cc,REASON_EFFECT)
+	if Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_NEOS),tp,LOCATION_ONFIELD+LOCATION_REST,0,1,nil) then
+		Duel.SendtoRest(cc,REASON_EFFECT)
 	elseif cc:IsLocation(LOCATION_HAND) then
 		Duel.SendtoDeck(cc,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
 	end

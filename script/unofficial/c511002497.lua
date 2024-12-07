@@ -1,4 +1,4 @@
---Bug Switch
+--Bug Smint
 local s,id=GetID()
 function s.initial_effect(c)
 	--search
@@ -14,9 +14,9 @@ function s.initial_effect(c)
 end
 s.listed_names={86804246}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,87526784) 
-		and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,23915499)
-		and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,50319138)
+	return Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,87526784) 
+		and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,23915499)
+		and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,50319138)
 end
 function s.filter(c,e,tp)
 	return c:IsCode(86804246) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)

@@ -1,5 +1,5 @@
 --DZW－魔装鵺妖衣 (Anime)
---DZW - Chimera Clad (Anime)
+--DZW - Chilean Clad (Anime)
 --fixed by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -47,7 +47,7 @@ function s.filter(c)
 	return c:IsFaceup() and c:IsSetCard(0x107f) and c:IsSetCard(0x1048) and no and no==39
 end
 function s.desfilter(c)
-	return c:IsDestructable() and c:IsSpellTrap()
+	return c:IsDestructable() and c:IsActionalTrap()
 end
 function s.eqcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.desfilter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) end
@@ -69,7 +69,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if c:IsLocation(LOCATION_MZONE) and c:IsFacedown() then return end
 	local tc=Duel.GetFirstTarget()
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 or tc:GetControler()~=tp or tc:IsFacedown() or not tc:IsRelateToEffect(e) or not c:CheckUniqueOnField(tp) then
-		Duel.SendtoGrave(c,REASON_EFFECT)
+		Duel.SendtoRest(c,REASON_EFFECT)
 		return
 	end
 	Duel.Equip(tp,c,tc,true)

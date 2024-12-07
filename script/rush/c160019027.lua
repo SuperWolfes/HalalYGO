@@ -35,5 +35,5 @@ function s.indtg(e,c)
 	return c:IsFaceup() and c:GetBaseAttack()==0
 end
 function s.efilter(e,re,rp)
-	return (re:IsSpellEffect() or re:IsMonsterEffect()) and aux.indoval(e,re,rp)
+	return (re:IsActionalEffect() or re:IsMonsterEffect()) and aux.indoval(e,re,rp)
 end

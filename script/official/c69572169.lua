@@ -16,25 +16,25 @@ function s.initial_effect(c)
 end
 s.listed_series={0x3008}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_GRAVE) and e:GetHandler():IsReason(REASON_BATTLE)
+	return e:GetHandler():IsLocation(LOCATION_REST) and e:GetHandler():IsReason(REASON_BATTLE)
 end
 function s.rfilter(c)
 	return c:IsSetCard(0x3008) and c:IsAbleToRemoveAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local rg=Duel.GetMatchingGroup(s.rfilter,tp,LOCATION_GRAVE,0,e:GetHandler())
+	local rg=Duel.GetMatchingGroup(s.rfilter,tp,LOCATION_REST,0,e:GetHandler())
 	if chk==0 then return aux.bfgcost(e,tp,eg,ep,ev,re,r,rp,0) and rg:GetClassCount(Card.GetCode)>=3 end
 	local sg=aux.SelectUnselectGroup(rg,e,tp,3,3,aux.dncheck,1,tp,HINTMSG_REMOVE)
 	Duel.Remove(sg+e:GetHandler(),POS_FACEUP,REASON_COST)
 end
 function s.filter(c)
-	return c:GetType()==TYPE_SPELL and c:IsAbleToHand()
+	return c:GetType()==TYPE_ACTIONAL and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,#g,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)

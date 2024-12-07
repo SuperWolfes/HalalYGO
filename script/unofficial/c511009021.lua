@@ -20,16 +20,16 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetAttacker():IsControler(1-tp)
 end
 function s.filter(c)
-	return c:IsType(TYPE_PENDULUM) and c:IsSetCard(0x99) and not c:IsForbidden()
+	return c:IsType(TYPE_PENDULUM) and c:IsSetCard(0x99) and not c:IsUnliked()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,0)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,nil,1,tp,LOCATION_REST)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
-	local tc=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_REST,0,1,1,nil):GetFirst()
 	if tc and Duel.SendtoExtraP(tc,tp,REASON_EFFECT) and tc:IsFaceup()
 		and tc:GetAttack()>0 and Duel.Recover(tp,tc:GetAttack(),REASON_EFFECT)>0 then
 		Duel.NegateAttack()

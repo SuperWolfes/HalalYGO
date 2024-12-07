@@ -1,5 +1,5 @@
 --ロイヤルデモンズ・コマンド
---Royal Demon's Command
+--Royal Warden's Command
 local s,id=GetID()
 function s.initial_effect(c)
 	--Increase ATK
@@ -13,13 +13,13 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.costfilter(c)
-	return c:IsMonster() and c:IsRace(RACE_FIEND) and c:IsAbleToGraveAsCost()
+	return c:IsMonster() and c:IsRace(RACE_TAINTED) and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil) end
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsRace(RACE_FIEND) and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsNotMaximumModeSide()
+	return c:IsFaceup() and c:IsRace(RACE_TAINTED) and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsNotMaximumModeSide()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,0,1,nil) end
@@ -27,7 +27,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tg=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,1,nil)
-	if Duel.SendtoGrave(tg,REASON_COST)==1 then
+	if Duel.SendtoRest(tg,REASON_COST)==1 then
 		--Effect
 		local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_MZONE,0,1,1,nil)
 		if #g>0 then

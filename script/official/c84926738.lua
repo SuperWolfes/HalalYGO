@@ -16,11 +16,11 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_FLIP)
 	e1:SetOperation(function(_,tp) Duel.Recover(tp,3000,REASON_EFFECT) end)
 	c:RegisterEffect(e1)
-	--Lose 5000 LP when it is sent to the GY
+	--Lose 5000 LP when it is sent to the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	e2:SetCode(EVENT_TO_GRAVE)
+	e2:SetCode(EVENT_TO_REST)
 	e2:SetCondition(function(e) return e:GetLabel()>0 end)
 	e2:SetOperation(s.lpop)
 	c:RegisterEffect(e2)

@@ -24,23 +24,23 @@ function s.rescon(sg,e,tp,mg)
 end
 function s.filtercheck(c,e,tp)
 	return c:IsCanBeLinkMaterial() and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and c:IsRace(RACES_BEAST_BWARRIOR_WINGB)
-		and (c:IsLocation(LOCATION_GRAVE) or (c:IsLocation(LOCATION_REMOVED) and c:IsFaceup()))
+		and (c:IsLocation(LOCATION_REST) or (c:IsLocation(LOCATION_REMOVED) and c:IsFaceup()))
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	local fg=Duel.GetMatchingGroup(s.filtercheck,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,nil,e,tp)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	local fg=Duel.GetMatchingGroup(s.filtercheck,tp,LOCATION_REST+LOCATION_REMOVED,0,nil,e,tp)
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	if chk==0 then return ft>0 and Duel.IsPlayerCanSpecialSummonCount(tp,2)
 		and Duel.GetLocationCountFromEx(tp,tp,nil,TYPE_LINK)>0
 		and aux.SelectUnselectGroup(fg,e,tp,1,ft,s.rescon,0)
 	end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE+LOCATION_REMOVED+LOCATION_EXTRA)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST+LOCATION_REMOVED+LOCATION_EXTRA)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	local fg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.filtercheck),tp,LOCATION_GRAVE+LOCATION_REMOVED,0,nil,e,tp)
+	local fg=Duel.GetMatchingGroup(aux.RestValleyFilter(s.filtercheck),tp,LOCATION_REST+LOCATION_REMOVED,0,nil,e,tp)
 	if ft<1 or not Duel.IsPlayerCanSpecialSummonCount(tp,2) then return end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	local g=aux.SelectUnselectGroup(fg,e,tp,1,ft,s.rescon,1,tp,HINTMSG_SPSUMMON,s.rescon,nil,false)
 	if not g or #g==0 then return end
 	local c=e:GetHandler()

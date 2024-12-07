@@ -3,7 +3,7 @@
 --scripted by unknow
 local s,id=GetID()
 function s.initial_effect(c)
-	--add a machine ritual from deck to hand when normal/flip/special summoned
+	--add a machine locked from deck to hand when normal/flip/special summoned
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -24,7 +24,7 @@ end
 s.listed_series={0x124}
 s.listed_names={95658967}
 function s.thfilter(c)
-	return ((c:IsSetCard(0x124) and c:IsSpell()) or c:IsCode(95658967)) and c:IsAbleToHand()
+	return ((c:IsSetCard(0x124) and c:IsActional()) or c:IsCode(95658967)) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

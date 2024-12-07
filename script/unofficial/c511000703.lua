@@ -1,5 +1,5 @@
 --スタチュー・ブラック・マジシャン・ガール
---Statue Dark Magician Girl
+--Statue Dark Mentor Girl
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon

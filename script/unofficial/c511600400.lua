@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetCode(EVENT_EQUIP)
 	e1:SetOperation(s.eqop)
 	c:RegisterEffect(e1)
-	--Control of this card cannot switch
+	--Control of this card cannot smint
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetCode(EFFECT_CANNOT_CHANGE_CONTROL)
@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 	local e4=e3:Clone()
 	e4:SetCode(EFFECT_CANNOT_BE_MATERIAL)
-	e4:SetValue(aux.cannotmatfilter(SUMMON_TYPE_FUSION,SUMMON_TYPE_RITUAL))
+	e4:SetValue(aux.cannotmatfilter(SUMMON_TYPE_FUSION,SUMMON_TYPE_LOCKED))
 	c:RegisterEffect(e4)
 	--Last for 1 turn & block
 	local e5=Effect.CreateEffect(c)
@@ -78,19 +78,19 @@ function s.initial_effect(c)
 	e11:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e11:SetProperty(EFFECT_FLAG_NO_TURN_RESET+EFFECT_FLAG_DELAY)
 	e11:SetCountLimit(1,0,EFFECT_COUNT_CODE_SINGLE)
-	e11:SetCondition(function(e) return e:GetHandler():IsPreviousLocation(LOCATION_GRAVE) end)
+	e11:SetCondition(function(e) return e:GetHandler():IsPreviousLocation(LOCATION_REST) end)
 	e11:SetCost(s.payatkcost)
 	e11:SetTarget(function(e,_,_,_,_,_,_,_,chk) if chk==0 then return e:GetHandler():IsOnField() end end)
 	e11:SetOperation(s.payatkop)
 	c:RegisterEffect(e11)
-	--Immortal Phoenix
+	--Immortal Bird
 	local e12=Effect.CreateEffect(c)
 	e12:SetDescription(aux.Stringid(id,1))
 	e12:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e12:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e12:SetProperty(EFFECT_FLAG_NO_TURN_RESET+EFFECT_FLAG_DELAY)
 	e12:SetCountLimit(1,0,EFFECT_COUNT_CODE_SINGLE)
-	e12:SetCondition(function(e) return e:GetHandler():IsPreviousLocation(LOCATION_GRAVE) end)
+	e12:SetCondition(function(e) return e:GetHandler():IsPreviousLocation(LOCATION_REST) end)
 	e12:SetTarget(function(e,_,_,_,_,_,_,_,chk) if chk==0 then return e:GetHandler():IsOnField() end end)
 	e12:SetOperation(s.egpop)
 	c:RegisterEffect(e12)
@@ -107,11 +107,11 @@ function s.efilter(e,te,c)
 	local c=e:GetOwner()
 	local tc=te:GetOwner()
 	return (te:IsTrapEffect() and te:IsActivated())
-		or (((te:IsSpellEffect() and te:IsHasProperty(EFFECT_FLAG_CARD_TARGET) and Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS):IsContains(c))
-		or (te:IsMonsterEffect() and tc~=c and not tc:IsOriginalAttribute(ATTRIBUTE_DIVINE)))
+		or (((te:IsActionalEffect() and te:IsHasProperty(EFFECT_FLAG_CARD_TARGET) and Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS):IsContains(c))
+		or (te:IsMonsterEffect() and tc~=c and not tc:IsOriginalAttribute(ATTRIBUTE_MEGA)))
 		and ((c:GetDestination()>0 and c:GetReasonEffect()==te)
 		or (s.leaveChk(c,CATEGORY_TOHAND) or s.leaveChk(c,CATEGORY_DESTROY) or s.leaveChk(c,CATEGORY_REMOVE)
-		or s.leaveChk(c,CATEGORY_TODECK) or s.leaveChk(c,CATEGORY_RELEASE) or s.leaveChk(c,CATEGORY_TOGRAVE))))
+		or s.leaveChk(c,CATEGORY_TODECK) or s.leaveChk(c,CATEGORY_RELEASE) or s.leaveChk(c,CATEGORY_TOREST))))
 end
 function s.stgop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -126,11 +126,11 @@ function s.stgop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.spchk(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if re and (re:IsSpellEffect() or re:IsMonsterEffect()) then
+	if re and (re:IsActionalEffect() or re:IsMonsterEffect()) then
 		local prevCtrl=c:GetPreviousControler()
 		aux.DelayedOperation(c,PHASE_END,id,e,tp,function()
-			if c:IsPreviousLocation(LOCATION_GRAVE) then
-				Duel.SendtoGrave(c,REASON_EFFECT,prevCtrl)
+			if c:IsPreviousLocation(LOCATION_REST) then
+				Duel.SendtoRest(c,REASON_EFFECT,prevCtrl)
 			elseif c:IsPreviousLocation(LOCATION_DECK) then
 				Duel.SendtoDeck(c,prevCtrl,SEQ_DECKSHUFFLE,REASON_EFFECT)
 			elseif c:IsPreviousLocation(LOCATION_HAND) then
@@ -375,7 +375,7 @@ function s.dirop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 -------------------------------------------
---God Phoenix
+--Monster Bird
 function s.egpop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and c:IsFaceup() then
@@ -394,7 +394,7 @@ function s.egpop(e,tp,eg,ep,ev,re,r,rp)
 		c:RegisterEffect(e2)
 		local e3=e1:Clone()
 		e3:SetCode(EFFECT_CANNOT_BE_MATERIAL)
-		e3:SetValue(aux.cannotmatfilter(SUMMON_TYPE_FUSION,SUMMON_TYPE_RITUAL))
+		e3:SetValue(aux.cannotmatfilter(SUMMON_TYPE_FUSION,SUMMON_TYPE_LOCKED))
 		c:RegisterEffect(e3)
 		local e4=Effect.CreateEffect(c)
 		e4:SetType(EFFECT_TYPE_SINGLE)
@@ -402,10 +402,10 @@ function s.egpop(e,tp,eg,ep,ev,re,r,rp)
 		e4:SetValue(1)
 		e4:SetReset(RESET_EVENT|RESETS_STANDARD|RESET_PHASE|PHASE_END)
 		c:RegisterEffect(e4)
-		--Send to Graveyard
+		--Send to Resting Place
 		local e5=Effect.CreateEffect(c)
 		e5:SetDescription(aux.Stringid(id,3))
-		e5:SetCategory(CATEGORY_TOGRAVE)
+		e5:SetCategory(CATEGORY_TOREST)
 		e5:SetType(EFFECT_TYPE_QUICK_O)
 		e5:SetCode(EVENT_FREE_CHAIN)
 		e5:SetProperty(EFFECT_FLAG_CARD_TARGET)
@@ -422,12 +422,12 @@ function s.imfilter(e,te)
 	local c=e:GetOwner()
 	return (c:GetDestination()>0 and c:GetReasonEffect()==te)
 		or (s.leaveChk(c,CATEGORY_TOHAND) or s.leaveChk(c,CATEGORY_DESTROY) or s.leaveChk(c,CATEGORY_REMOVE)
-		or s.leaveChk(c,CATEGORY_TODECK) or s.leaveChk(c,CATEGORY_RELEASE) or s.leaveChk(c,CATEGORY_TOGRAVE))
+		or s.leaveChk(c,CATEGORY_TODECK) or s.leaveChk(c,CATEGORY_RELEASE) or s.leaveChk(c,CATEGORY_TOREST))
 end
 function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return c:IsHasEffect(EFFECT_UNSTOPPABLE_ATTACK) or (not c:IsHasEffect(EFFECT_CANNOT_ATTACK_ANNOUNCE)
-		and not c:IsHasEffect(EFFECT_FORBIDDEN) and not c:IsHasEffect(EFFECT_CANNOT_ATTACK)
+		and not c:IsHasEffect(EFFECT_UNLIKED) and not c:IsHasEffect(EFFECT_CANNOT_ATTACK)
 		and not Duel.IsPlayerAffectedByEffect(tp,EFFECT_CANNOT_ATTACK_ANNOUNCE)
 		and not Duel.IsPlayerAffectedByEffect(tp,EFFECT_CANNOT_ATTACK))
 end
@@ -438,13 +438,13 @@ end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) and chkc~=e:GetHandler() end
 	if chk==0 then return Duel.IsExistingTarget(nil,tp,LOCATION_MZONE,LOCATION_MZONE,1,e:GetHandler()) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectTarget(tp,nil,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,e:GetHandler())
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,g,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,g,1,0,0)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) then
-		Duel.SendtoGrave(tc,REASON_EFFECT)
+		Duel.SendtoRest(tc,REASON_EFFECT)
 	end
 end

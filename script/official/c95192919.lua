@@ -1,5 +1,5 @@
 --烈風の覇者シムルグ
---Simorgh, Lord of the Storm
+--Sisbird, Watcher of the Storm
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
@@ -32,7 +32,7 @@ function s.initial_effect(c)
 	e3:SetCategory(CATEGORY_TOHAND)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e3:SetCode(EVENT_BATTLE_DESTROYED)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetCountLimit(1,{id,1})
 	e3:SetCondition(s.thcon)
 	e3:SetTarget(s.thtg)
@@ -43,10 +43,10 @@ function s.ctcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_TRIBUTE)
 end
 function s.ctval(e,re,rp)
-	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP) and rp==1-e:GetHandlerPlayer()
+	return re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) and rp==1-e:GetHandlerPlayer()
 end
 function s.tdcon(e,tp,eg,ep,ev,re,r,rp)
-	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP)
+	return re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.cfilter(c)
 	return c:IsRace(RACE_WINGEDBEAST) and c:IsAttribute(ATTRIBUTE_WIND)
@@ -73,7 +73,7 @@ function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsAbleToHand() end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,c,1,0,0)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,c,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,c,1,0,0)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

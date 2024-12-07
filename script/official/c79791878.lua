@@ -26,10 +26,10 @@ function s.initial_effect(c)
 	e3:SetTarget(s.thtg)
 	e3:SetOperation(s.thop)
 	c:RegisterEffect(e3)
-	--Send 1 monster back to the Graveyard
+	--Send 1 monster back to the Resting Place
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
-	e4:SetCategory(CATEGORY_TOGRAVE)
+	e4:SetCategory(CATEGORY_TOREST)
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e4:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DELAY)
 	e4:SetCode(EVENT_CUSTOM+id)
@@ -71,7 +71,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.tgfilter(c,e,p)
-	return c:IsSummonPlayer(p) and c:IsSummonLocation(LOCATION_GRAVE) and c:IsAbleToGrave()
+	return c:IsSummonPlayer(p) and c:IsSummonLocation(LOCATION_REST) and c:IsAbleToRest()
 		and c:IsLocation(LOCATION_MZONE) and c:IsCanBeEffectTarget(e)
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
@@ -89,7 +89,7 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.cfilter(c)
-	return c:IsSpell() and c:IsDiscardable()
+	return c:IsActional() and c:IsDiscardable()
 end
 function s.tgcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end
@@ -101,15 +101,15 @@ function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return #g>0 end
 	local tg=g
 	if #g>1 then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		tg=g:Select(tp,1,1,nil)
 	end
 	Duel.SetTargetCard(tg)
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,tg,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,tg,1,0,0)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) then
-		Duel.SendtoGrave(tc,REASON_EFFECT)
+		Duel.SendtoRest(tc,REASON_EFFECT)
 	end
 end

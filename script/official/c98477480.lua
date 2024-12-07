@@ -8,14 +8,14 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--Your opponent's monsters can only target Ritual Monsters for attacks
+	--Your opponent's monsters can only target Locked Monsters for attacks
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_CANNOT_SELECT_BATTLE_TARGET)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetTargetRange(0,LOCATION_MZONE)
 	e2:SetCondition(s.effcon)
-	e2:SetValue(function(e,_c) return not _c:IsRitualMonster() end)
+	e2:SetValue(function(e,_c) return not _c:IsLockedMonster() end)
 	c:RegisterEffect(e2)
 	--Your opponent cannot target LIGHT monsters you control with card effects
 	local e3=Effect.CreateEffect(c)
@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e3:SetTarget(function(e,_c) return _c:IsAttribute(ATTRIBUTE_LIGHT) end)
 	e3:SetValue(aux.tgoval)
 	c:RegisterEffect(e3)
-	--Search 1 "Voiceless Voice" card or 1 "Skull Guardian" Ritual Monster
+	--Search 1 "Voiceless Voice" card or 1 "Skull Guardian" Locked Monster
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,0))
 	e4:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -42,7 +42,7 @@ end
 s.listed_names={25801745,id} --"Lo, the Prayers of the Voiceless Voice"
 s.listed_series={SET_VOICELESS_VOICE,SET_SKULL_GUARDIAN}
 function s.ritfilter(c)
-	return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRitualMonster() and c:IsFaceup()
+	return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsLockedMonster() and c:IsFaceup()
 end
 function s.effcon(e)
 	local tp=e:GetHandlerPlayer()
@@ -50,7 +50,7 @@ function s.effcon(e)
 		and Duel.IsExistingMatchingCard(s.ritfilter,tp,LOCATION_MZONE,0,1,nil)
 end
 function s.thfilter(c)
-	return (c:IsSetCard(SET_VOICELESS_VOICE) or (c:IsSetCard(SET_SKULL_GUARDIAN) and c:IsRitualMonster())) and not c:IsCode(id) and c:IsAbleToHand()
+	return (c:IsSetCard(SET_VOICELESS_VOICE) or (c:IsSetCard(SET_SKULL_GUARDIAN) and c:IsLockedMonster())) and not c:IsCode(id) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

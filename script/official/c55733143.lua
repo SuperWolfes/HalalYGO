@@ -1,5 +1,5 @@
 --Japanese name
---Mimighoul Charm
+--Mimirahul Chaum
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -23,9 +23,9 @@ function s.initial_effect(c)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
 end
-s.listed_series={SET_MIMIGHOUL}
+s.listed_series={SET_MIMIRAHUL}
 function s.spconfilter(c,tp)
-	return c:IsControler(1-tp) and c:IsSetCard(SET_MIMIGHOUL)
+	return c:IsControler(1-tp) and c:IsSetCard(SET_MIMIRAHUL)
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

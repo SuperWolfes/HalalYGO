@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e3:SetType(EFFECT_TYPE_IGNITION)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetCost(aux.bfgcost)
 	e3:SetTarget(s.thtg)
 	e3:SetOperation(s.thop)
@@ -29,7 +29,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_VIJAM}
 function s.tgfilter(c)
-	return c:IsCode(CARD_VIJAM) and c:IsAbleToGrave()
+	return c:IsCode(CARD_VIJAM) and c:IsAbleToRest()
 end
 function s.filter(c)
 	return c:IsFaceup() and c:IsSetCard(0xe3) and not c:IsCode(CARD_VIJAM)
@@ -40,11 +40,11 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if Duel.IsExistingTarget(s.filter,tp,LOCATION_MZONE,0,1,nil)
 		and Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
-		e:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_TOGRAVE)
+		e:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_TOREST)
 		e:SetProperty(EFFECT_FLAG_CARD_TARGET)
 		e:SetOperation(s.activate)
 		Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE,0,1,1,nil)
-		Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+		Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 	else
 		e:SetCategory(0)
 		e:SetProperty(0)
@@ -53,11 +53,11 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,99,nil)
-	if Duel.SendtoGrave(g,REASON_EFFECT)~=0 then
+	if Duel.SendtoRest(g,REASON_EFFECT)~=0 then
 		local og=Duel.GetOperatedGroup()
-		local n=og:FilterCount(Card.IsLocation,nil,LOCATION_GRAVE)
+		local n=og:FilterCount(Card.IsLocation,nil,LOCATION_REST)
 		local tc=Duel.GetFirstTarget()
 		if tc:IsRelateToEffect(e) and tc:IsFaceup() and n>0 then
 			Duel.BreakEffect()
@@ -77,7 +77,7 @@ function s.lpcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.lpop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:IsRelateToEffect(e) and Duel.SendtoGrave(c,REASON_EFFECT)~=0 and c:IsLocation(LOCATION_GRAVE) then
+	if c:IsRelateToEffect(e) and Duel.SendtoRest(c,REASON_EFFECT)~=0 and c:IsLocation(LOCATION_REST) then
 		Duel.SetLP(1-tp,math.ceil(Duel.GetLP(1-tp)/2))
 	end
 end

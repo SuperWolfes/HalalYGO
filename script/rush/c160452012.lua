@@ -1,3 +1,3 @@
 --ネクメイド・ナナ
---Necromaid Nana
+--Restmaid Nana
 Duel.LoadCardScriptAlias(160406003)

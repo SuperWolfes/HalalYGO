@@ -2,7 +2,7 @@
 --Evil HERO Infernal Sniper
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion material
 	Fusion.AddProcMix(c,true,true,84327329,58932615)
 	--lizard check
@@ -33,7 +33,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.target)
 	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
-	--Cannot be destroyed by Spell effects
+	--Cannot be destroyed by Actional effects
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -64,5 +64,5 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Damage(p,d,REASON_EFFECT)
 end
 function s.indesval(e,re)
-	return re:IsActiveType(TYPE_SPELL)
+	return re:IsActiveType(TYPE_ACTIONAL)
 end

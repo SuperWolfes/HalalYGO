@@ -1,5 +1,5 @@
 --神の進化
---Divine Evolution
+--Mega Evolution
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 end
 s.listed_names={21208154,62180201,57793869}
 function s.filter(c)
-	return c:IsFaceup() and (c:IsOriginalRace(RACE_DIVINE) or c:IsOriginalCodeRule(21208154,62180201,57793869))
+	return c:IsFaceup() and (c:IsOriginalRace(RACE_MEGA) or c:IsOriginalCodeRule(21208154,62180201,57793869))
 		and c:GetFlagEffect(id)==0
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -51,9 +51,9 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local e4=e3:Clone()
 		e4:SetCode(EFFECT_CANNOT_DISEFFECT)
 		tc:RegisterEffect(e4)
-		--Make the opponent send 1 monster to the GY
+		--Make the opponent send 1 monster to the RP
 		local e5=Effect.CreateEffect(tc)
-		e5:SetCategory(CATEGORY_TOGRAVE)
+		e5:SetCategory(CATEGORY_TOREST)
 		e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 		e5:SetCode(EVENT_ATTACK_ANNOUNCE)
 		e5:SetTarget(s.tgtg)
@@ -76,16 +76,16 @@ function s.efilter(e,ct)
 	return te:GetHandler()==e:GetHandler()
 end
 function s.tgfilter(c,p)
-	return Duel.IsPlayerCanSendtoGrave(p,c) and not c:IsType(TYPE_TOKEN)
+	return Duel.IsPlayerCanSendtoRest(p,c) and not c:IsType(TYPE_TOKEN)
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(tgfilter,1-tp,LOCATION_MZONE,0,1,nil,1-tp) end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,1-tp,LOCATION_MZONE)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,1-tp,LOCATION_MZONE)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(1-tp,tgfilter,1-tp,LOCATION_MZONE,0,1,1,nil,1-tp)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_RULE,PLAYER_NONE,1-tp)
+		Duel.SendtoRest(g,REASON_RULE,PLAYER_NONE,1-tp)
 	end
 end

@@ -13,8 +13,8 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsOnField() and chkc:IsSpellTrap() end
-	local b1=Duel.IsExistingTarget(Card.IsSpellTrap,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil)
+	if chkc then return chkc:IsOnField() and chkc:IsActionalTrap() end
+	local b1=Duel.IsExistingTarget(Card.IsActionalTrap,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil)
 	local b2=Duel.IsPlayerCanDiscardDeck(1-tp,2)
 	if chk==0 then return b1 or b2 end
 	local op=Duel.SelectEffect(tp,
@@ -25,7 +25,7 @@ function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		e:SetCategory(CATEGORY_DESTROY)
 		e:SetProperty(EFFECT_FLAG_CARD_TARGET)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-		local g=Duel.SelectTarget(tp,Card.IsSpellTrap,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
+		local g=Duel.SelectTarget(tp,Card.IsActionalTrap,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
 		Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
 	else
 		e:SetCategory(CATEGORY_DECKDES)
@@ -35,13 +35,13 @@ function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.effop(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetLabel()==1 then
-		--Destroy 1 Spell/Trap on the field
+		--Destroy 1 Actional/Trap on the field
 		local tc=Duel.GetFirstTarget()
 		if tc:IsRelateToEffect(e) then
 			Duel.Destroy(tc,REASON_EFFECT)
 		end
 	else
-		--Send the top 2 cards of your opponent's Deck to the GY
+		--Send the top 2 cards of your opponent's Deck to the RP
 		Duel.DiscardDeck(1-tp,2,REASON_EFFECT)
 	end
 end

@@ -1,5 +1,5 @@
 --トゥーン・ブラック・マジシャン
---Toon Dark Magician
+--Toon Dark Mentor
 local s,id=GetID()
 function s.initial_effect(c)
 	--Cannot attack the turn it is Summoned
@@ -43,7 +43,7 @@ function s.spfilter(c,e,tp)
 	return c:IsType(TYPE_TOON) and not c:IsCode(id) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
 end
 function s.thfilter(c)
-	return c:IsSetCard(SET_TOON) and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsSetCard(SET_TOON) and c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local b1=Duel.GetLocationCount(tp,LOCATION_MZONE)>0
@@ -73,7 +73,7 @@ function s.effop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.SpecialSummon(g,0,tp,tp,true,false,POS_FACEUP)
 		end
 	elseif op==2 then
-		--Search 1 "Toon" Spell/Trap
+		--Search 1 "Toon" Actional/Trap
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 		local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_DECK,0,1,1,nil)
 		if #g>0 then

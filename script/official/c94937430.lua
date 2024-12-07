@@ -2,8 +2,8 @@
 --Extra Buck
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableCounterPermit(COUNTER_SPELL)
-	c:SetCounterLimit(COUNTER_SPELL,3)
+	c:EnableCounterPermit(COUNTER_ACTIONAL)
+	c:SetCounterLimit(COUNTER_ACTIONAL,3)
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -29,22 +29,22 @@ function s.initial_effect(c)
 	e3:SetOperation(s.drop)
 	c:RegisterEffect(e3)
 end
-s.counter_place_list={COUNTER_SPELL}
+s.counter_place_list={COUNTER_ACTIONAL}
 function s.cfilter(c,tp)
 	return c:IsLocation(LOCATION_EXTRA) and c:IsControler(tp)
 end
 function s.acop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if eg:IsExists(s.cfilter,1,nil,tp) then
-		c:AddCounter(COUNTER_SPELL,1)
+		c:AddCounter(COUNTER_ACTIONAL,1)
 	end
 end
 function s.drcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():GetCounter(COUNTER_SPELL)==3
+	return e:GetHandler():GetCounter(COUNTER_ACTIONAL)==3
 end
 function s.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
+	Duel.SendtoRest(e:GetHandler(),REASON_COST)
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,2) end

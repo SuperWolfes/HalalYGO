@@ -1,5 +1,5 @@
 --円喚師フェアリ
---Fairyant the Circular Sorcerer
+--Wandererant the Circular Scoreerer
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -23,6 +23,6 @@ function s.initial_effect(c)
 end
 function s.spcon(e,c)
 	if c==nil then return true end
-	return Duel.IsExistingMatchingCard(Card.IsRace,0,LOCATION_GRAVE,LOCATION_GRAVE,1,nil,RACE_PLANT|RACE_INSECT)
+	return Duel.IsExistingMatchingCard(Card.IsRace,0,LOCATION_REST,LOCATION_REST,1,nil,RACE_PLANT|RACE_INSECT)
 		and Duel.GetLocationCount(e:GetHandlerPlayer(),LOCATION_MZONE)>0
 end

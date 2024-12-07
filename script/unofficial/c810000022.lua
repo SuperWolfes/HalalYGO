@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOKEN)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	e1:SetCode(EVENT_TO_GRAVE)
+	e1:SetCode(EVENT_TO_REST)
 	e1:SetCondition(s.condition)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
@@ -23,8 +23,8 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if ft>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
-	if ft<2 or not Duel.IsPlayerCanSpecialSummonMonster(tp,64382841,0,TYPES_TOKEN,500,300,2,RACE_FIEND,ATTRIBUTE_DARK) then return end
+	if ft>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
+	if ft<2 or not Duel.IsPlayerCanSpecialSummonMonster(tp,64382841,0,TYPES_TOKEN,500,300,2,RACE_TAINTED,ATTRIBUTE_DARK) then return end
 	for i=1,2 do
 		local token=Duel.CreateToken(tp,64382841)
 		Duel.SpecialSummonStep(token,0,tp,tp,false,false,POS_FACEUP)

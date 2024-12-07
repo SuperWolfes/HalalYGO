@@ -1,18 +1,18 @@
 --ホルスの先導－ハーピ
---Hapi, Guidance of Horus
+--Hapi, Guidance of Humus
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon itself from the GY if you control "King's Sarcophagus"
+	--Special Summon itself from the RP if you control "King's Sarcophagus"
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_SPSUMMON_PROC)
-	e1:SetRange(LOCATION_GRAVE)
+	e1:SetRange(LOCATION_REST)
 	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
 	e1:SetCondition(s.spcon)
 	c:RegisterEffect(e1)
-	--Add to the hand or shuffle into the Deck 2 cards that are banished or in the GY
+	--Add to the hand or shuffle into the Deck 2 cards that are banished or in the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_TODECK)
@@ -29,7 +29,7 @@ end
 s.listed_names={CARD_KING_SARCOPHAGUS}
 function s.spcon(e,c)
 	if c==nil then return true end
-	local eff={c:GetCardEffect(EFFECT_NECRO_VALLEY)}
+	local eff={c:GetCardEffect(EFFECT_REST_VALLEY)}
 	for _,te in ipairs(eff) do
 		local op=te:GetOperation()
 		if not op or op(e,c) then return false end
@@ -53,15 +53,15 @@ function s.rescon(sg,e,tp,mg)
 end
 function s.thtdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	local g=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_GRAVE|LOCATION_REMOVED,LOCATION_GRAVE|LOCATION_REMOVED,nil,e)
+	local g=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_REST|LOCATION_REMOVED,LOCATION_REST|LOCATION_REMOVED,nil,e)
 	if chk==0 then return #g>=2 and aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,0) end
 	local sg=aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,1,tp,HINTMSG_TARGET)
 	Duel.SetTargetCard(sg)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,sg,2,tp,0)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TODECK,sg,2,tp,0)
-	local rg=sg:Filter(Card.IsLocation,nil,LOCATION_GRAVE)
+	local rg=sg:Filter(Card.IsLocation,nil,LOCATION_REST)
 	if #rg>0 then
-		Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,rg,#rg,0,0)
+		Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,rg,#rg,0,0)
 	end
 end
 function s.thtdop(e,tp,eg,ep,ev,re,r,rp)

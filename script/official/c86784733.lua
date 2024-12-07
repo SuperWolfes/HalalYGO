@@ -14,11 +14,11 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
-	--Destruction replacement for monsters in the Extra Monster zone
+	--Mismatching replacement for monsters in the Extra Monster zone
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EFFECT_DESTROY_REPLACE)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,id)
 	e2:SetTarget(s.reptg)
 	e2:SetValue(s.repval)
@@ -63,7 +63,7 @@ end
 function s.repval(e,c)
 	return s.repfilter(c,e:GetHandlerPlayer())
 end
-	--Substutite destruction
+	--Substutite mismatching
 function s.repop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Remove(e:GetHandler(),POS_FACEUP,REASON_EFFECT+REASON_REPLACE)
 end

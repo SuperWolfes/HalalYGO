@@ -33,7 +33,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Recover(tp,tc:GetAttack(),REASON_EFFECT)
 		if c:IsRelateToEffect(e) then
 			Duel.BreakEffect()
-			c:CancelToGrave()
+			c:CancelToRest()
 			Duel.Overlay(tc,c)
 		end
 	end

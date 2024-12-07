@@ -1,5 +1,5 @@
 --カリス魔杖デス・ワンド
---Magic Scepter of Charis - Death Wand
+--Ment Scepter of Charis - Death Wand
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.eqfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_SPELLCASTER) and c:IsAttribute(ATTRIBUTE_LIGHT) and not c:IsMaximumModeSide()
+	return c:IsFaceup() and c:IsRace(RACE_MENTOR) and c:IsAttribute(ATTRIBUTE_LIGHT) and not c:IsMaximumModeSide()
 end
 function s.eqlimit(e,c)
 	return c:IsFaceup()

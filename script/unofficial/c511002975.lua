@@ -40,7 +40,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) then return end
-	local sg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,nil)
+	local sg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_REST,0,nil)
 	if #sg>0 and Duel.SelectYesNo(tp,aux.Stringid(12744567,0)) then
 		Duel.Overlay(c,sg)
 		local g=Duel.GetMatchingGroup(Card.IsNegatableMonster,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
@@ -118,7 +118,7 @@ function s.atop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.damfilter(c,tp)
-	return c:IsMonster() and c:IsPreviousLocation(LOCATION_MZONE) and c:IsLocation(LOCATION_GRAVE) 
+	return c:IsMonster() and c:IsPreviousLocation(LOCATION_MZONE) and c:IsLocation(LOCATION_REST) 
 		and c:IsReason(REASON_EFFECT+REASON_BATTLE) and c:GetOwner()==tp
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)

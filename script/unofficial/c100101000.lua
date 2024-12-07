@@ -18,11 +18,11 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	tc:RemoveCounter(tp,0x91,4,REASON_COST)
 end
 function s.filter(c,e,tp,m)
-	return c:IsRitualMonster() and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,false)
-		and m:CheckWithSumEqual(Card.GetRitualLevel,c:GetLevel(),1,99,c)
+	return c:IsLockedMonster() and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_LOCKED,tp,true,false)
+		and m:CheckWithSumEqual(Card.GetLockedLevel,c:GetLevel(),1,99,c)
 end
 function s.matfilter(c)
-	return c:IsType(TYPE_NORMAL) and c:IsAbleToGrave()
+	return c:IsType(TYPE_NORMAL) and c:IsAbleToRest()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
@@ -39,12 +39,12 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_HAND,0,1,1,nil,e,tp,mg)
 	if #tg>0 then
 		local tc=tg:GetFirst()
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-		local mat=mg:SelectWithSumEqual(tp,Card.GetRitualLevel,tc:GetLevel(),1,99,tc)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+		local mat=mg:SelectWithSumEqual(tp,Card.GetLockedLevel,tc:GetLevel(),1,99,tc)
 		tc:SetMaterial(mat)
-		Duel.SendtoGrave(mat,REASON_EFFECT+REASON_MATERIAL+REASON_RITUAL)
+		Duel.SendtoRest(mat,REASON_EFFECT+REASON_MATERIAL+REASON_LOCKED)
 		Duel.BreakEffect()
-		Duel.SpecialSummon(tc,SUMMON_TYPE_RITUAL,tp,tp,true,false,POS_FACEUP)
+		Duel.SpecialSummon(tc,SUMMON_TYPE_LOCKED,tp,tp,true,false,POS_FACEUP)
 		tc:CompleteProcedure()
 	end
 end

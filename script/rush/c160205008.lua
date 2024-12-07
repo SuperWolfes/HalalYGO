@@ -1,5 +1,5 @@
 --終焔魔神ディスペラシオン
---Doomblaze Fiend Overlord Despairacion
+--Doomblaze Tainted Overwatcher Despairacion
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -25,7 +25,7 @@ function s.filter2(c)
 	return c:IsCode(160205009)
 end
 function s.costfilter(c)
-	return c:IsMonster() and c:IsType(TYPE_MAXIMUM) and c:IsAbleToGraveAsCost()
+	return c:IsMonster() and c:IsType(TYPE_MAXIMUM) and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,2,nil) end
@@ -44,9 +44,9 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tg=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,2,2,nil)
-	if Duel.SendtoGrave(tg,REASON_COST)==2 then
+	if Duel.SendtoRest(tg,REASON_COST)==2 then
 		local dg=Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_ONFIELD,nil)
 		if #dg>0 then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)

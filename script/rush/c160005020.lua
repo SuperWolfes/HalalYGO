@@ -1,5 +1,5 @@
 --魔将分隊 武組
---Takegumi of the Fiendish Commander Squad
+--Takegumi of the Taintedish Commander Squad
 local s,id=GetID()
 function s.initial_effect(c)
 	--Make 1 of your winged beast monsters gain 1000 ATK
@@ -18,7 +18,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeck(tp,1) end
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetFieldGroupCountRush(tp,0,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(Card.IsAttack,tp,LOCATION_GRAVE,0,1,nil,0)
+	return Duel.GetFieldGroupCountRush(tp,0,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(Card.IsAttack,tp,LOCATION_REST,0,1,nil,0)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsFaceup,tp,LOCATION_MZONE,0,1,nil) end
@@ -39,7 +39,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetCode(EFFECT_UPDATE_ATTACK)
-			e1:SetValue(Duel.GetMatchingGroupCount(s.filter,tp,LOCATION_GRAVE,0,nil,1)*200)
+			e1:SetValue(Duel.GetMatchingGroupCount(s.filter,tp,LOCATION_REST,0,nil,1)*200)
 			e1:SetReset(RESETS_STANDARD_PHASE_END)
 			tc:RegisterEffect(e1)
 		end

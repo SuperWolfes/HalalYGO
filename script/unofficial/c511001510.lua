@@ -1,4 +1,4 @@
---Sacrifice of Grave Goods
+--Sorting of Rest Goods
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

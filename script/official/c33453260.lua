@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e5:SetCode(EFFECT_DIRECT_ATTACK)
 	e5:SetCondition(s.dircon)
 	c:RegisterEffect(e5)
-	--Self destruction
+	--Self mismatching
 	local e6=Effect.CreateEffect(c)
 	e6:SetType(EFFECT_TYPE_SINGLE)
 	e6:SetCode(EFFECT_SELF_DESTROY)

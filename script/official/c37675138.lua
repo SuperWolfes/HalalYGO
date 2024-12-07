@@ -21,11 +21,11 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
-	return re:GetOwner():IsRace(RACE_ZOMBIE) and e:GetHandler():IsSummonLocation(LOCATION_GRAVE)
+	return re:GetOwner():IsRace(RACE_TOXIC) and e:GetHandler():IsSummonLocation(LOCATION_REST)
 		and e:GetHandler():IsPreviousControler(tp)
 end
 function s.desfilter(c)
-	return c:IsType(TYPE_SPELL+TYPE_TRAP)
+	return c:IsType(TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(1-tp) and chkc:IsOnField() and s.desfilter(chkc) end

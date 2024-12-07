@@ -31,11 +31,11 @@ function s.filter(c,e,tp,rc,tid)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and s.filter(chkc,e,tp,e:GetHandler(),Duel.GetTurnCount()) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and s.filter(chkc,e,tp,e:GetHandler(),Duel.GetTurnCount()) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,nil,e,tp,e:GetHandler(),Duel.GetTurnCount()) end
+		and Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,LOCATION_REST,1,nil,e,tp,e:GetHandler(),Duel.GetTurnCount()) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,1,nil,e,tp,e:GetHandler(),Duel.GetTurnCount())
+	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,LOCATION_REST,1,1,nil,e,tp,e:GetHandler(),Duel.GetTurnCount())
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)

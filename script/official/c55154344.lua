@@ -10,11 +10,11 @@ function s.initial_effect(c)
 	e0:SetType(EFFECT_TYPE_ACTIVATE)
 	e0:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e0)
-	--Any monster sent from the field to the GY during your opponent's turn is banished instead
+	--Any monster sent from the field to the RP during your opponent's turn is banished instead
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_SET_AVAILABLE+EFFECT_FLAG_IGNORE_IMMUNE)
-	e1:SetCode(EFFECT_TO_GRAVE_REDIRECT)
+	e1:SetCode(EFFECT_TO_REST_REDIRECT)
 	e1:SetRange(LOCATION_SZONE)
 	e1:SetCondition(function(e) return Duel.IsTurnPlayer(1-e:GetHandlerPlayer()) end)
 	e1:SetTarget(function(e,c) return Duel.IsPlayerCanRemove(e:GetHandlerPlayer(),c) end)
@@ -59,7 +59,7 @@ function s.efftg(e,c)
 	return (c:IsSetCard(SET_RYU_GE) and c:IsType(TYPE_PENDULUM)) or (c:IsLevelAbove(10) and c:IsOriginalRace(RACE_WYRM))
 end
 function s.costfilter(c)
-	return c:IsSetCard(SET_RYU_GE) and c:IsContinuousSpell() and c:IsFaceup() and c:IsAbleToDeckAsCost()
+	return c:IsSetCard(SET_RYU_GE) and c:IsContinuousActional() and c:IsFaceup() and c:IsAbleToDeckAsCost()
 		and Duel.IsExistingTarget(Card.HasNonZeroAttack,0,LOCATION_MZONE,LOCATION_MZONE,1,c)
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)

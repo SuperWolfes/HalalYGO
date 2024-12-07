@@ -2,7 +2,7 @@
 --Maiden of Macabre
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableCounterPermit(COUNTER_SPELL)
+	c:EnableCounterPermit(COUNTER_ACTIONAL)
 	--add counter
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -20,14 +20,14 @@ function s.initial_effect(c)
 	e2:SetValue(s.attackup)
 	c:RegisterEffect(e2)
 end
-s.counter_list={COUNTER_SPELL}
+s.counter_list={COUNTER_ACTIONAL}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return c:IsRelateToBattle() and c:GetBattleTarget():IsMonster()
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	e:GetHandler():AddCounter(COUNTER_SPELL,1)
+	e:GetHandler():AddCounter(COUNTER_ACTIONAL,1)
 end
 function s.attackup(e,c)
-	return c:GetCounter(COUNTER_SPELL)*200
+	return c:GetCounter(COUNTER_ACTIONAL)*200
 end

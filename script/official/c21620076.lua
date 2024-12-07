@@ -23,7 +23,7 @@ function s.initial_effect(c)
 end
 function s.lvfilter(c)
 	local lv=c:GetLevel()
-	return c:IsFaceup() and c:IsRace(RACE_ZOMBIE) and lv>0 and lv~=2
+	return c:IsFaceup() and c:IsRace(RACE_TOXIC) and lv>0 and lv~=2
 end
 function s.lvtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.lvfilter(chkc) end
@@ -54,5 +54,5 @@ function s.lvop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.synlimit(e,c)
 	if not c then return false end
-	return not c:IsRace(RACE_ZOMBIE)
+	return not c:IsRace(RACE_TOXIC)
 end

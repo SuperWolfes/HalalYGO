@@ -1,5 +1,5 @@
 --ドレミコード・ムジカ
---Doremichord Musica
+--Doremichord Nasheeda
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

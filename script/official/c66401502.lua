@@ -1,5 +1,5 @@
 --ＶＳパンテラ
---Vanquish Soul Pantera
+--Vanquish Miss Pantera
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Make this card indestructible by attacks, OR destroy all Spell/Traps in this card's column
+	--Make this card indestructible by attacks, OR destroy all Actional/Traps in this card's column
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_QUICK_O)
@@ -55,7 +55,7 @@ function s.vstg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local cg1=Duel.GetMatchingGroup(s.vscostfilter,tp,LOCATION_HAND,0,nil,ATTRIBUTE_EARTH)
 	local b1=#cg1>0 and (Duel.IsAbleToEnterBP() or Duel.IsBattlePhase())
 	local cg2=cg1+Duel.GetMatchingGroup(s.vscostfilter,tp,LOCATION_HAND,0,nil,ATTRIBUTE_FIRE)
-	local colg=e:GetHandler():GetColumnGroup():Match(Card.IsSpellTrap,nil)
+	local colg=e:GetHandler():GetColumnGroup():Match(Card.IsActionalTrap,nil)
 	local b2=#colg>0 and aux.SelectUnselectGroup(cg2,e,tp,1,2,s.vsrescon,0)
 	if chk==0 then return b1 or b2 end
 	local op=Duel.SelectEffect(tp,
@@ -91,7 +91,7 @@ function s.vsop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT|RESETS_STANDARD|RESET_PHASE|PHASE_END)
 		c:RegisterEffect(e1)
 	elseif op==2 then
-		local cg=c:GetColumnGroup():Match(Card.IsSpellTrap,nil)
+		local cg=c:GetColumnGroup():Match(Card.IsActionalTrap,nil)
 		if #cg==0 then return end
 		Duel.Destroy(cg,REASON_EFFECT)
 	end

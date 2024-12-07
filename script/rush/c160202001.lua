@@ -1,4 +1,4 @@
---Supreme Machine Magnum Overlord [L]
+--Supreme Machine Magnum Overwatcher [L]
 local s,id=GetID()
 function s.initial_effect(c)
 	--Make itself gain ATK until end of this turn
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 end
 s.MaximumSide="Left"
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,nil) end
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local lp=Duel.GetLP(1-tp)-Duel.GetLP(tp)
@@ -25,8 +25,8 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	--Requirement
-	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,1,nil)
-	if Duel.SendtoGrave(g,REASON_COST)<1 then return end
+	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,1,nil)
+	if Duel.SendtoRest(g,REASON_COST)<1 then return end
 	--Effect
 	local lp=Duel.GetLP(1-tp)-Duel.GetLP(tp)
 	local e1=Effect.CreateEffect(c)

@@ -3,7 +3,7 @@
 --Scripted by the Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Special Summon Procedure
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -68,7 +68,7 @@ function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.Remove(g,0,REASON_EFFECT+REASON_TEMPORARY)~=0 then
 		local og=Duel.GetOperatedGroup():Filter(Card.IsLocation,nil,LOCATION_REMOVED)
 		if #og==0 then return end
-		local mcount=xg:FilterCount(Card.IsLocation,nil,LOCATION_GRAVE)
+		local mcount=xg:FilterCount(Card.IsLocation,nil,LOCATION_REST)
 		for oc in aux.Next(og) do
 			oc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_BATTLE,0,1)
 		end

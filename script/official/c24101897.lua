@@ -1,5 +1,5 @@
 --ゴーストリックの猫娘
---Ghostrick Nekomusume
+--Missrick Nekomusume
 local s,id=GetID()
 function s.initial_effect(c)
 	--summon limit

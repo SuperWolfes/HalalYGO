@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
 	e1:SetValue(function(e,c) return 0,aux.GetMMZonesPointedTo(c:GetControler(),aux.FilterBoolFunction(Card.IsRace,RACE_CYBERSE)) end)
 	c:RegisterEffect(e1)
-	--Banish 1 Cyberse monster from your hand or GY, and if you do, this card can be treated as Link Material with the same name this turn
+	--Banish 1 Cyberse monster from your hand or RP, and if you do, this card can be treated as Link Material with the same name this turn
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_REMOVE)
@@ -29,13 +29,13 @@ function s.cybersefilter(c)
 	return c:IsRace(RACE_CYBERSE) and c:IsAbleToRemove() and not c:IsCode(id)
 end
 function s.rmvtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cybersefilter,tp,LOCATION_HAND|LOCATION_GRAVE,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,tp,LOCATION_HAND|LOCATION_GRAVE)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cybersefilter,tp,LOCATION_HAND|LOCATION_REST,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,tp,LOCATION_HAND|LOCATION_REST)
 end
 function s.rmvop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.cybersefilter),tp,LOCATION_HAND|LOCATION_GRAVE,0,1,1,nil):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.cybersefilter),tp,LOCATION_HAND|LOCATION_REST,0,1,1,nil):GetFirst()
 	if tc and Duel.Remove(tc,POS_FACEUP,REASON_EFFECT)>0 and c:IsRelateToEffect(e) and c:IsFaceup() then
 		--This card can be treated as Link Material with the same name as the banished monster if used for a Link Summon this turn
 		local e1=Effect.CreateEffect(c)

@@ -29,11 +29,11 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if Duel.SendtoHand(tc,tp,REASON_EFFECT)>0 then
 		Duel.ConfirmCards(1-tp,tc)
-		if Duel.SelectYesNo(tp,aux.Stringid(id,0)) and ft>0 and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK+LOCATION_GRAVE,0,1,nil,e,tp) then
-			if ft>1 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=2 end
-			if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+		if Duel.SelectYesNo(tp,aux.Stringid(id,0)) and ft>0 and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK+LOCATION_REST,0,1,nil,e,tp) then
+			if ft>1 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=2 end
+			if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-			local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_DECK+LOCATION_GRAVE,0,nil,e,tp)
+			local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_DECK+LOCATION_REST,0,nil,e,tp)
 			local sg=aux.SelectUnselectGroup(rg,e,tp,1,ft,s.check,1,tp,HINTMSG_SPSUMMON)
 			for sc in sg:Iter() do
 				Duel.SpecialSummonStep(sc,0,tp,tp,false,false,POS_FACEUP)

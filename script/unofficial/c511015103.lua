@@ -16,7 +16,7 @@ s.listed_series={0x10af}
 s.listed_names={47198668}
 function s.filter(c,e,tp)
 	return c:IsType(TYPE_PENDULUM) and c:IsSetCard(0x10af) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
-		and (c:IsLocation(LOCATION_GRAVE) and c:IsCanBeEffectTarget(e) or (c:IsFaceup() and not c:IsHasEffect(EFFECT_CANNOT_BE_EFFECT_TARGET)))
+		and (c:IsLocation(LOCATION_REST) and c:IsCanBeEffectTarget(e) or (c:IsFaceup() and not c:IsHasEffect(EFFECT_CANNOT_BE_EFFECT_TARGET)))
 end
 function s.xyzfilter(c,sg,e,tp)
 	local ct=#sg
@@ -44,12 +44,12 @@ function s.rescon(mft,exft,ft)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	local mg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE+LOCATION_EXTRA,0,nil,e,tp)
+	local mg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_REST+LOCATION_EXTRA,0,nil,e,tp)
 	local ftex=Duel.GetLocationCountFromEx(tp,tp,nil,TYPE_PENDULUM)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	local ftt=Duel.GetUsableMZoneCount(tp)
 	ftex=math.min(ftex,aux.CheckSummonGate(tp) or ftex)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ftt=math.min(ftt,1) ftex=math.min(ftex,1) ft=math.min(ft,1) end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ftt=math.min(ftt,1) ftex=math.min(ftex,1) ft=math.min(ft,1) end
 	if chk==0 then return Duel.IsPlayerCanSpecialSummonCount(tp,2) and ftt>0 and (ft>0 or ftex>0)
 		and aux.SelectUnselectGroup(mg,e,tp,nil,ftt,s.rescon(ft,ftex,ftt),0) end
 	local sg=aux.SelectUnselectGroup(mg,e,tp,nil,ftt,s.rescon(ft,ftex,ftt),1,tp,HINTMSG_SPSUMMON,s.rescon(ft,ftex,ftt))
@@ -59,7 +59,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local g=Duel.GetTargetCards(e)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) and #g>1 then return end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) and #g>1 then return end
 	local ftex=Duel.GetLocationCountFromEx(tp,tp,nil,TYPE_PENDULUM)
 	local ftt=Duel.GetUsableMZoneCount(tp)
 	ftex=math.min(ftex,aux.CheckSummonGate(tp) or ftex)

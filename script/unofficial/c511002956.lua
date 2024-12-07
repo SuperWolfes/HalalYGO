@@ -1,4 +1,4 @@
---Call of the Wind Witch
+--Call of the Wind Mint
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

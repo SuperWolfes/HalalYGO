@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Link Summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x14a),2)
 	--cannot be targeted by attacks
 	local e1=Effect.CreateEffect(c)
@@ -30,7 +30,7 @@ function s.initial_effect(c)
 	e3:SetCondition(s.atkcon)
 	e3:SetOperation(s.atkop)
 	c:RegisterEffect(e3)
-	--co-linked before destruction check
+	--co-linked before mismatching check
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e4:SetCode(EVENT_LEAVE_FIELD_P)

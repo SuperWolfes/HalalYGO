@@ -4,8 +4,8 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Link Summon procedure
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0xfc),3)
-	c:EnableReviveLimit()
-	--Prevent destruction by battle
+	c:EnableAwakeLimit()
+	--Prevent mismatching by battle
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -82,7 +82,7 @@ function s.negop(e,tp,eg,ep,ev,re,r,rp,chk)
 	c:RegisterEffect(e1)
 	if not c:IsImmuneToEffect(e1) and not c:IsHasEffect(EFFECT_REVERSE_UPDATE) then
 		if Duel.NegateActivation(ev) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:GetHandler():IsRelateToEffect(re) then
-			Duel.SendtoGrave(eg,REASON_EFFECT)
+			Duel.SendtoRest(eg,REASON_EFFECT)
 		end
 	end
 end

@@ -3,7 +3,7 @@
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	--Search 1 Equip Spell
+	--Search 1 Equip Actional
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND+CATEGORY_POSITION)
@@ -33,7 +33,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function s.thfilter(c)
-	return c:IsEquipSpell() and c:IsAbleToHand()
+	return c:IsEquipActional() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

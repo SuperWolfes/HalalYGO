@@ -28,13 +28,13 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return loct==LOCATION_MZONE and re:IsMonsterEffect() and p~=tp and Duel.IsChainNegatable(ev)
 end
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsSetCard(SET_BLACKWING) and c:IsAbleToGraveAsCost() and not c:IsStatus(STATUS_BATTLE_DESTROYED)
+	return c:IsFaceup() and c:IsSetCard(SET_BLACKWING) and c:IsAbleToRestAsCost() and not c:IsStatus(STATUS_BATTLE_DESTROYED)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_MZONE,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

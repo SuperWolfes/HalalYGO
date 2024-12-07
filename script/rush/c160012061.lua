@@ -1,5 +1,5 @@
 --野性なるバリア －ノラーフォース－
---Stray Force
+--Stray Fcoree
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)

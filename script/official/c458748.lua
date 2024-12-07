@@ -15,16 +15,16 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.listed_series={SET_INVOKED}
+s.listed_series={SET_INVALIDATED}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(100)
 	return true
 end
 function s.cfilter(c,e,tp)
-	return c:IsSetCard(SET_INVOKED) and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,c:GetOriginalAttribute(),c)
+	return c:IsSetCard(SET_INVALIDATED) and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,c:GetOriginalAttribute(),c)
 end
 function s.spfilter(c,e,tp,att,mc)
-	return Duel.GetLocationCountFromEx(tp,tp,mc,c)>0 and c:IsSetCard(SET_INVOKED) and not c:IsOriginalAttribute(att)
+	return Duel.GetLocationCountFromEx(tp,tp,mc,c)>0 and c:IsSetCard(SET_INVALIDATED) and not c:IsOriginalAttribute(att)
 		and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,false,false) and c:CheckFusionMaterial()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)

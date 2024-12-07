@@ -1,8 +1,8 @@
 --降雷皇ハモン
---Hamon, Lord of Striking Thunder
+--Hamon, Watcher of Striking Thunder
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Cannot be special summoned
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -41,10 +41,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function s.spfilter(c)
-	return c:IsFaceup() and c:GetType()==TYPE_SPELL+TYPE_CONTINUOUS and c:IsAbleToGraveAsCost()
+	return c:IsFaceup() and c:GetType()==TYPE_ACTIONAL+TYPE_CONTINUOUS and c:IsAbleToRestAsCost()
 end
 function s.exfilter(c)
-	return s.spfilter(c) or (c:IsFacedown() and c:IsSpell() and c:IsAbleToGraveAsCost())
+	return s.spfilter(c) or (c:IsFacedown() and c:IsActional() and c:IsAbleToRestAsCost())
 end
 function s.spcon(e,c)
 	if c==nil then return true end
@@ -64,7 +64,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,c)
 	else
 		g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_ONFIELD,0,nil)
 	end
-	local sg=aux.SelectUnselectGroup(g,e,tp,3,3,aux.ChkfMMZ(1),1,tp,HINTMSG_TOGRAVE,nil,nil,true)
+	local sg=aux.SelectUnselectGroup(g,e,tp,3,3,aux.ChkfMMZ(1),1,tp,HINTMSG_TOREST,nil,nil,true)
 	local dg=sg:Filter(Card.IsFacedown,nil)
 	if #dg>0 then
 		Duel.ConfirmCards(1-tp,dg)
@@ -79,13 +79,13 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	g:DeleteGroup()
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local bc=c:GetBattleTarget()
-	return c:IsRelateToBattle() and bc:IsLocation(LOCATION_GRAVE) and bc:IsReason(REASON_BATTLE) and bc:IsMonster()
+	return c:IsRelateToBattle() and bc:IsLocation(LOCATION_REST) and bc:IsReason(REASON_BATTLE) and bc:IsMonster()
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

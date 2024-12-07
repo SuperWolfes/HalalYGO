@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	-- Set
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_LEAVE_GRAVE)
+	e2:SetCategory(CATEGORY_LEAVE_REST)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DELAY)
 	e2:SetCode(EVENT_RELEASE)
@@ -25,10 +25,10 @@ function s.initial_effect(c)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(s.rlsetcon)
 	e2:SetTarget(s.settg)
-	e2:SetOperation(s.setop)
+	e2:SetOperation(s.vetop)
 	c:RegisterEffect(e2)
 	local e3=e2:Clone()
-	e3:SetCode(EVENT_TO_GRAVE)
+	e3:SetCode(EVENT_TO_REST)
 	e3:SetCondition(s.tgsetcon)
 	c:RegisterEffect(e3)
 end
@@ -39,8 +39,8 @@ function s.rescon(sg,e,tp,mg)
 	return #sg==3 or (#sg==6 and Duel.IsPlayerCanDraw(tp,2))
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REMOVED+LOCATION_GRAVE) and chkc:IsControler(tp) and s.drfilter(chkc,e) end
-	local g=Duel.GetMatchingGroup(s.drfilter,tp,LOCATION_REMOVED+LOCATION_GRAVE,0,nil,e)
+	if chkc then return chkc:IsLocation(LOCATION_REMOVED+LOCATION_REST) and chkc:IsControler(tp) and s.drfilter(chkc,e) end
+	local g=Duel.GetMatchingGroup(s.drfilter,tp,LOCATION_REMOVED+LOCATION_REST,0,nil,e)
 	if chk==0 then return #g>=3 and Duel.IsPlayerCanDraw(tp,1) end
 	local dg=aux.SelectUnselectGroup(g,e,tp,3,6,s.rescon,1,tp,HINTMSG_TODECK,s.rescon)
 	Duel.SetTargetCard(dg)
@@ -69,13 +69,13 @@ function s.setfilter(c)
 	return c:GetType()==TYPE_TRAP and c:IsSSetable()
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.setfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.setfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.setfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.setfilter,tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
-	local g=Duel.SelectTarget(tp,s.setfilter,tp,LOCATION_GRAVE,0,1,1,nil)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,0,0)
+	local g=Duel.SelectTarget(tp,s.setfilter,tp,LOCATION_REST,0,1,1,nil)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,0,0)
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and tc:IsSSetable() then
 		Duel.SSet(tp,tc)

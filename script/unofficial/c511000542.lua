@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c)
-	return c:IsLevelBelow(4) and c:IsMonster() and not c:IsForbidden()
+	return c:IsLevelBelow(4) and c:IsMonster() and not c:IsUnliked()
 end
 function s.thfilter(c)
 	return c:IsAbleToHand() and Duel.GetMZoneCount(c:GetControler(),c)>0

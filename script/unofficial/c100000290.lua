@@ -36,7 +36,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,0)
 end
 function s.cfilter(c)
-	return c:IsLocation(LOCATION_GRAVE) and c:IsRace(RACE_PYRO)
+	return c:IsLocation(LOCATION_REST) and c:IsRace(RACE_PYRO)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local p,val=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)

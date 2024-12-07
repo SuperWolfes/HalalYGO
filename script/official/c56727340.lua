@@ -1,5 +1,5 @@
 --超重武者装留ガイア・ブースター
---Superheavy Samurai Soulgaia Booster
+--Superheavy Samurai Missbia Booster
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetCountLimit(1,id)
-	e2:SetCondition(function(e,tp) return e:GetHandler():HasFlagEffect(id) and not Duel.IsExistingMatchingCard(Card.IsSpellTrap,tp,LOCATION_GRAVE,0,1,nil) end)
+	e2:SetCondition(function(e,tp) return e:GetHandler():HasFlagEffect(id) and not Duel.IsExistingMatchingCard(Card.IsActionalTrap,tp,LOCATION_REST,0,1,nil) end)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
@@ -42,7 +42,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not (Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and tc:IsFaceup() and tc:IsRelateToEffect(e) and tc:IsControler(tp)
 		and Duel.Equip(tp,c,tc,true)) then
-		Duel.SendtoGrave(c,REASON_RULE)
+		Duel.SendtoRest(c,REASON_RULE)
 	end
 	c:RegisterFlagEffect(id,RESET_EVENT|RESETS_STANDARD,0,1)
 	--Equip limit

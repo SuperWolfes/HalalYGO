@@ -18,23 +18,23 @@ s.listed_names={62188962}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetFieldCard(tp,LOCATION_FZONE,0)~=nil then return false end
 	local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,0,nil)
-	return #g>0 and g:FilterCount(Card.IsRace,nil,RACE_ZOMBIE)==#g
+	return #g>0 and g:FilterCount(Card.IsRace,nil,RACE_TOXIC)==#g
 end
 function s.filter(c,tp)
 	return c:IsCode(62188962) and c:GetActivateEffect():IsActivatable(tp,true,true)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil,tp) end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end
 function s.spfilter(c,e,tp)
 	return c:IsSetCard(SET_VAMPIRE) and c:IsAttribute(ATTRIBUTE_DARK) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstMatchingCard(s.filter,tp,LOCATION_DECK,0,nil,tp)
-	if Duel.ActivateFieldSpell(tc,e,tp,eg,ep,ev,re,r,rp) then
+	if Duel.ActivateFieldActional(tc,e,tp,eg,ep,ev,re,r,rp) then
 		if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
-		local sg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_GRAVE,0,nil,e,tp)
+		local sg=Duel.GetMatchingGroup(aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,e,tp)
 		if #sg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 			Duel.BreakEffect()
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)

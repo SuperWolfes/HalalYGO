@@ -1,5 +1,5 @@
 --迎撃するガイア
---Intercepting Gaia
+--Intercepting Bia
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e2)
 end
-s.listed_names={CARD_GAIA_CHAMPION}
+s.listed_names={CARD_BIA_CHAMPION}
 function s.filter1(c,tp)
 	return c:IsSummonPlayer(1-tp) and c:IsLocation(LOCATION_MZONE)
 end
@@ -42,7 +42,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if #g==0 then return end
 	Duel.HintSelection(g,true)
 	Duel.ChangePosition(g,POS_FACEDOWN_DEFENSE)
-	if not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_GAIA_CHAMPION),tp,LOCATION_MZONE,0,1,nil) then return end
+	if not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_BIA_CHAMPION),tp,LOCATION_MZONE,0,1,nil) then return end
 	local g2=Duel.GetMatchingGroup(Card.IsFacedown,tp,0,LOCATION_ONFIELD,nil)
 	if #g2>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)

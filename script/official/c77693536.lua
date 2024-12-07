@@ -2,7 +2,7 @@
 --Fullmetalfoes Alkahest
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion Materials
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_METALFOES),aux.FilterBoolFunctionEx(Card.IsType,TYPE_NORMAL))
 	--Must be Fusion Summoned

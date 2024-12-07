@@ -43,7 +43,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT|RESETS_STANDARD_DISABLE|RESET_PHASE|PHASE_END)
 		e1:SetValue(500)
 		c:RegisterEffect(e1)
-		if Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,CARD_TRANSAMU_RAINAC) then
+		if Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,CARD_TRANSAMU_RAINAC) then
 			local e2=Effect.CreateEffect(c)
 			e2:SetType(EFFECT_TYPE_SINGLE)
 			e2:SetCode(EFFECT_CHANGE_CODE)

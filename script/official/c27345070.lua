@@ -1,5 +1,5 @@
 --ＶＳコンティニュー
---Vanquish Soul - Continue?
+--Vanquish Miss - Continue?
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -17,22 +17,22 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.listed_series={SET_VANQUISH_SOUL}
+s.listed_series={SET_VANQUISH_MISS}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckLPCost(tp,500) end
 	Duel.PayLPCost(tp,500)
 end
 function s.tgfilter(c,e,tp,ft)
-	return c:IsSetCard(SET_VANQUISH_SOUL) and c:IsMonster() and (c:IsAbleToHand()
+	return c:IsSetCard(SET_VANQUISH_MISS) and c:IsMonster() and (c:IsAbleToHand()
 		or (ft>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)))
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.tgfilter(chkc,e,tp,ft) end
-	if chk==0 then return Duel.IsExistingTarget(s.tgfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp,ft) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.tgfilter(chkc,e,tp,ft) end
+	if chk==0 then return Duel.IsExistingTarget(s.tgfilter,tp,LOCATION_REST,0,1,nil,e,tp,ft) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local g=Duel.SelectTarget(tp,s.tgfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp,ft)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,tp,0)
+	local g=Duel.SelectTarget(tp,s.tgfilter,tp,LOCATION_REST,0,1,1,nil,e,tp,ft)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,tp,0)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,g,1,tp,0)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,0)
 end

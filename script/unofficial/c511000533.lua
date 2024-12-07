@@ -16,5 +16,5 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.efilter(e,re)
-	return e:GetOwnerPlayer()~=re:GetOwnerPlayer() and re:IsActiveType(TYPE_SPELL+TYPE_TRAP)
+	return e:GetOwnerPlayer()~=re:GetOwnerPlayer() and re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP)
 end

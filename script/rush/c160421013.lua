@@ -17,7 +17,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeck(tp,1) end
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(Card.IsRace,tp,LOCATION_GRAVE,0,3,nil,RACE_CYBERSE)
+	return Duel.IsExistingMatchingCard(Card.IsRace,tp,LOCATION_REST,0,3,nil,RACE_CYBERSE)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -27,10 +27,10 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)
-		e1:SetValue(Duel.GetMatchingGroupCount(Card.IsMonster,tp,LOCATION_GRAVE,0,nil)*100)
+		e1:SetValue(Duel.GetMatchingGroupCount(Card.IsMonster,tp,LOCATION_REST,0,nil)*100)
 		e1:SetReset(RESETS_STANDARD_PHASE_END)
 		c:RegisterEffect(e1)
-		if Duel.IsExistingMatchingCard(Card.IsRace,tp,LOCATION_GRAVE,0,8,nil,RACE_CYBERSE) and Duel.IsPlayerCanDraw(tp,1) and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
+		if Duel.IsExistingMatchingCard(Card.IsRace,tp,LOCATION_REST,0,8,nil,RACE_CYBERSE) and Duel.IsPlayerCanDraw(tp,1) and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 			Duel.Draw(tp,1,REASON_EFFECT)
 		end
 	end

@@ -1,5 +1,5 @@
 --紅蓮の機界騎士
---Mekk-Knight Red Moon
+--Mekk-Knight Red Horizon
 --Scripted by Eerie Code
 
 local s,id=GetID()
@@ -43,9 +43,9 @@ function s.costfilter(c)
 	return c:IsSetCard(0x10c) and c:IsMonster() and c:IsAbleToRemoveAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.filter(c,g,mc)

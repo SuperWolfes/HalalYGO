@@ -1,5 +1,5 @@
 --万魔殿－悪魔の巣窟－
---Pandemonium (GOAT)
+--Panwardenium (GOAT)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetRange(LOCATION_FZONE)
-	e3:SetCode(EVENT_TO_GRAVE)
+	e3:SetCode(EVENT_TO_REST)
 	e3:SetOperation(s.regop)
 	c:RegisterEffect(e3)
 	local e4=Effect.CreateEffect(c)

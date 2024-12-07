@@ -12,17 +12,17 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Spirit monster do not have to return to the hand
+	--Guardian monster do not have to return to the hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
-	e2:SetCode(EFFECT_SPIRIT_MAYNOT_RETURN)
+	e2:SetCode(EFFECT_GUARDIAN_MAYNOT_RETURN)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetTargetRange(LOCATION_MZONE,0)
 	c:RegisterEffect(e2)
 end
-s.listed_card_types={TYPE_SPIRIT}
+s.listed_card_types={TYPE_GUARDIAN}
 function s.filter(c)
-	return c:IsType(TYPE_SPIRIT) and c:IsAbleToRemoveAsCost()
+	return c:IsType(TYPE_GUARDIAN) and c:IsAbleToRemoveAsCost()
 end
 function s.spcon(e,c)
 	if c==nil then return true end

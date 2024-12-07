@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return re:IsActiveType(TYPE_SPELL) and re:IsHasType(EFFECT_TYPE_ACTIVATE)
+	return re:IsActiveType(TYPE_ACTIONAL) and re:IsHasType(EFFECT_TYPE_ACTIVATE)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRemove,tp,LOCATION_ONFIELD,0,1,e:GetHandler()) end
@@ -92,8 +92,8 @@ function s.drop1(e,tp,eg,ep,ev,re,r,rp,c,og)
 		local tpe=0
 		if tc:IsMonster() then
 			tpe=TYPE_MONSTER
-		elseif tc:IsSpell() then
-			tpe=TYPE_SPELL
+		elseif tc:IsActional() then
+			tpe=TYPE_ACTIONAL
 		elseif tc:IsTrap() then
 			tpe=TYPE_TRAP
 		else
@@ -107,8 +107,8 @@ function s.drop1(e,tp,eg,ep,ev,re,r,rp,c,og)
 				local of=Duel.GetFieldCard(1-tp,LOCATION_FZONE,0)
 				if of then Duel.Destroy(of,REASON_RULE) end
 				of=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
-				if of and Duel.Destroy(of,REASON_RULE)==0 and Duel.SendtoGrave(of,REASON_RULE)==0 then
-					Duel.SendtoGrave(rc,REASON_RULE)
+				if of and Duel.Destroy(of,REASON_RULE)==0 and Duel.SendtoRest(of,REASON_RULE)==0 then
+					Duel.SendtoRest(rc,REASON_RULE)
 				end
 			end
 			if rc:GetPreviousLocation()==LOCATION_MZONE then
@@ -139,8 +139,8 @@ function s.drop2(e,tp,eg,ep,ev,re,r,rp)
 		local tpe=0
 		if tc:IsMonster() then
 			tpe=TYPE_MONSTER
-		elseif tc:IsSpell() then
-			tpe=TYPE_SPELL
+		elseif tc:IsActional() then
+			tpe=TYPE_ACTIONAL
 		elseif tc:IsTrap() then
 			tpe=TYPE_TRAP
 		else
@@ -154,8 +154,8 @@ function s.drop2(e,tp,eg,ep,ev,re,r,rp)
 				local of=Duel.GetFieldCard(1-tp,LOCATION_FZONE,0)
 				if of then Duel.Destroy(of,REASON_RULE) end
 				of=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
-				if of and Duel.Destroy(of,REASON_RULE)==0 and Duel.SendtoGrave(of,REASON_RULE)==0 then
-					Duel.SendtoGrave(rc,REASON_RULE)
+				if of and Duel.Destroy(of,REASON_RULE)==0 and Duel.SendtoRest(of,REASON_RULE)==0 then
+					Duel.SendtoRest(rc,REASON_RULE)
 				end
 			end
 			if rc:GetPreviousLocation()==LOCATION_MZONE then

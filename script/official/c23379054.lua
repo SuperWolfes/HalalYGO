@@ -1,5 +1,5 @@
 --劫火の舟守 ゴースト・カロン
---Ghost Charon, the Underworld Boatman
+--Miss Charon, the Overworld Boatman
 local s,id=GetID()
 function s.initial_effect(c)
 	--spsummon
@@ -53,11 +53,11 @@ function s.filter2(c,e,tp,lv,mc)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE+LOCATION_GRAVE) and s.filter1(chkc,e,tp,c:GetLevel(),c) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE+LOCATION_REST) and s.filter1(chkc,e,tp,c:GetLevel(),c) end
 	if chk==0 then return c:IsAbleToRemove()
-		and Duel.IsExistingTarget(s.filter1,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil,e,tp,c:GetLevel(),c) end
+		and Duel.IsExistingTarget(s.filter1,tp,LOCATION_MZONE+LOCATION_REST,0,1,nil,e,tp,c:GetLevel(),c) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectTarget(tp,s.filter1,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,nil,e,tp,c:GetLevel(),c)
+	local g=Duel.SelectTarget(tp,s.filter1,tp,LOCATION_MZONE+LOCATION_REST,0,1,1,nil,e,tp,c:GetLevel(),c)
 	g:AddCard(e:GetHandler())
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,2,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)

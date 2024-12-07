@@ -19,6 +19,6 @@ function s.eqlimit(e,c)
 	return c:IsFaceup()
 end
 function s.value(e,c)
-	if e:GetHandler():GetEquipTarget():IsCode(CARD_ANCIENT_GEAR_GOLEM,10509340) then return 1000 end
+	if e:GetHandler():GetEquipTarget():IsCode(CARD_ANCIENT_GEAR_GOPAL,10509340) then return 1000 end
 	return 400
 end

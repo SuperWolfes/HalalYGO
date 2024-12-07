@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddSkillProcedure(c,1,false,s.flipcon,s.flipop)
 end
-s.listed_names={CARD_GAIA_CHAMPION}
+s.listed_names={CARD_BIA_CHAMPION}
 s.listed_series={0xbd}
 function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 	--opt check
@@ -58,7 +58,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	e5:SetType(EFFECT_TYPE_FIELD)
 	e5:SetCode(EFFECT_PIERCE)
 	e5:SetTargetRange(LOCATION_MZONE,0)
-	e5:SetTarget(aux.TargetBoolFunction(Card.IsCode,CARD_GAIA_CHAMPION))
+	e5:SetTarget(aux.TargetBoolFunction(Card.IsCode,CARD_BIA_CHAMPION))
 	Duel.RegisterEffect(e5,tp)
 end
 function s.ntcon(e,c,minc)
@@ -69,7 +69,7 @@ function s.nttg(e,c)
 	return c:IsLevelAbove(5) and c:IsCode(6368038)
 end
 function s.effilter(c)
-	return c:IsFaceup() and (c:IsSetCard(0xbd) or c:IsCode(CARD_GAIA_CHAMPION))
+	return c:IsFaceup() and (c:IsSetCard(0xbd) or c:IsCode(CARD_BIA_CHAMPION))
 end
 function s.effcon(e)
 	return Duel.IsExistingMatchingCard(s.effilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
@@ -81,7 +81,7 @@ end
 function s.drcon(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()
 	local bc=tc:GetBattleTarget()
-	return tc:IsControler(tp) and bc and bc:IsDefensePos() and (tc:IsSetCard(0xbd) or tc:IsCode(CARD_GAIA_CHAMPION))
+	return tc:IsControler(tp) and bc and bc:IsDefensePos() and (tc:IsSetCard(0xbd) or tc:IsCode(CARD_BIA_CHAMPION))
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

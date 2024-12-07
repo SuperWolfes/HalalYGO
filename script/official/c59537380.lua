@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	c:SetSPSummonOnce(id)
 	--link summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_DRAGON),2,2)
 	--cannot special summon
 	local e1=Effect.CreateEffect(c)

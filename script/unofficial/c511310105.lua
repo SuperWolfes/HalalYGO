@@ -67,7 +67,7 @@ function s.actop(e,tp,eg,ep,ev,re,r,rp)
 	--workaround to not reveal card names
 	local ac=s.SelectCardByZone(ag,tp,HINTMSG_RESOLVEEFFECT)
 	if ac then
-		--Force activation
+		--Fcoree activation
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		e1:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
@@ -84,7 +84,7 @@ function s.faop(e,tp,eg,ep,ev,re,r,rp)
 	local te=tc:GetActivateEffect()
 	local tep=tc:GetControler()
 	if te and te:GetCode()==EVENT_FREE_CHAIN and te:IsActivatable(tep)
-		and (not tc:IsSpell() or tc:IsType(TYPE_QUICKPLAY)) then
+		and (not tc:IsActional() or tc:IsType(TYPE_QUICKPLAY)) then
 		Duel.Activate(te)
 	end
 	e:Reset()

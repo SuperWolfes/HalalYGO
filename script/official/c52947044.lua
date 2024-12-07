@@ -1,5 +1,5 @@
 --フュージョン・デステニー
---Fusion Destiny
+--Fusion Destrudic
 local s,id=GetID()
 function s.initial_effect(c)
 	--activate
@@ -12,11 +12,11 @@ function s.fcheck(tp,sg,fc)
 	return sg:IsExists(aux.FilterBoolFunction(Card.IsSetCard,0xc008,fc,SUMMON_TYPE_FUSION,tp),1,nil)
 end
 function s.fextra(e,tp,mg)
-	return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToGrave),tp,LOCATION_DECK,0,nil),s.fcheck
+	return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRest),tp,LOCATION_DECK,0,nil),s.fcheck
 end
 function s.extratg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,0,tp,LOCATION_HAND+LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,0,tp,LOCATION_HAND+LOCATION_DECK)
 end
 function s.stage2(e,tc,tp,mg,chk)
 	local c=e:GetHandler()

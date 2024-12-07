@@ -1,5 +1,5 @@
 --澱神アポピス
---Apophis the Swamp Deity
+--Apromes the Swamp Being
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

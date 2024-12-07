@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetValue(s.immfilter)
 	c:RegisterEffect(e2)
-	-- Set cards destruction protection
+	-- Set cards mismatching protection
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
 	e3:SetProperty(EFFECT_FLAG_SET_AVAILABLE)

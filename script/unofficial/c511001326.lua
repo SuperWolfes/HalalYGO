@@ -16,7 +16,7 @@ end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.IsChainNegatable(ev) or not re:IsHasType(EFFECT_TYPE_ACTIVATE) then return false end
 	local ex,tg,tc=Duel.GetOperationInfo(ev,CATEGORY_DESTROY)
-	return rp~=tp and ex and tg~=nil and tc+tg:FilterCount(Card.IsType,nil,TYPE_SPELL+TYPE_TRAP)-#tg>0
+	return rp~=tp and ex and tg~=nil and tc+tg:FilterCount(Card.IsType,nil,TYPE_ACTIONAL+TYPE_TRAP)-#tg>0
 end
 function s.filter(c)
 	return c:IsFaceup() and c:IsAttackAbove(1)

@@ -1,4 +1,4 @@
---Soul Anchor
+--Miss Anchor
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

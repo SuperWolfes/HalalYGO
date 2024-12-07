@@ -34,7 +34,7 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:IsHasType(EFFECT_TYPE_ACTIVATE) end
 	Duel.SetPossibleOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,2,tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,2,tp,LOCATION_REST)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_DESTROY,nil,1,PLAYER_ALL,LOCATION_ONFIELD)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
@@ -56,7 +56,7 @@ function s.effectop(e,tp,eg,ep,ev,re,r,rp)
 	if ct==1 then
 		Duel.Draw(tp,1,REASON_EFFECT)
 	elseif ct==2 then
-		local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.thfilter),tp,LOCATION_GRAVE,0,nil)
+		local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.thfilter),tp,LOCATION_REST,0,nil)
 		if #g>=2 then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 			local tg=g:Select(tp,2,2,nil)

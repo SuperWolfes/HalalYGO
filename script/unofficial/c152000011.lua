@@ -11,7 +11,7 @@ function s.filter(c,e,tp,ev)
 end
 function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 	--condition
-	return ep==tp and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,1,nil,e,tp,ev)
+	return ep==tp and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,1,nil,e,tp,ev)
 end
 function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	--opd check and ask if you want to activate the skill or not
@@ -24,7 +24,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	if aux.CheckSkillNegation(e,tp) then return end
 	--Special Summon
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp,ev)
+	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_REST,0,1,1,nil,e,tp,ev)
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end

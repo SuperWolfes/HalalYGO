@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_DESTROY)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_DAMAGE_STEP_END)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCondition(s.condition)
 	e2:SetCost(aux.bfgcost)
 	e2:SetTarget(s.target)
@@ -26,26 +26,26 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.eqfilter(c)
-	return c:IsLevelBelow(4) and c:IsRace(RACE_DRAGON) and not c:IsForbidden()
+	return c:IsLevelBelow(4) and c:IsRace(RACE_DRAGON) and not c:IsUnliked()
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and Duel.IsExistingTarget(s.eqfilter,tp,LOCATION_GRAVE,0,1,nil)
+		and Duel.IsExistingTarget(s.eqfilter,tp,LOCATION_REST,0,1,nil)
 		and Duel.IsExistingTarget(aux.FaceupFilter(Card.IsRace,RACE_DRAGON),tp,LOCATION_MZONE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 	Duel.SelectTarget(tp,aux.FaceupFilter(Card.IsRace,RACE_DRAGON),tp,LOCATION_MZONE,0,1,1,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-	local g=Duel.SelectTarget(tp,s.eqfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.eqfilter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_EQUIP,g,1,0,0)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,0,0)
 end
 function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetTargetCards(e)
 	if #g~=2 then return end
 	local tc=g:GetFirst()
 	local ec=g:GetNext()
-	if tc:IsLocation(LOCATION_GRAVE) then tc,ec=ec,tc end
+	if tc:IsLocation(LOCATION_REST) then tc,ec=ec,tc end
 	if tc:IsFaceup() then
 		if not Duel.Equip(tp,ec,tc,true) then return end
 		local e1=Effect.CreateEffect(e:GetHandler())

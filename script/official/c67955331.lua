@@ -16,7 +16,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x12e}
 function s.spfilter(c,lv,e,tp)
-	return c:IsRace(RACE_SPELLCASTER) and c:HasLevel() and c:GetOriginalLevel()==lv-1 
+	return c:IsRace(RACE_MENTOR) and c:HasLevel() and c:GetOriginalLevel()==lv-1 
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.filter(c,e,tp)
@@ -61,5 +61,5 @@ function s.spcon(e)
 	return Duel.GetTurnPlayer()==e:GetHandlerPlayer() and Duel.GetTurnCount()~=e:GetLabel()
 end
 function s.splimit(e,c,tp,sumtp,sumpos)
-	return not c:IsRace(RACE_SPELLCASTER)
+	return not c:IsRace(RACE_MENTOR)
 end

@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,CARD_IMAGINARY_ACTOR,160204009)
 	--Destroy 1 face down-card
 	local e1=Effect.CreateEffect(c)

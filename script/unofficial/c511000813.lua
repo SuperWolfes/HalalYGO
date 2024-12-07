@@ -1,7 +1,7 @@
 --Signal Vehicle
 local s,id=GetID()
 function s.initial_effect(c)
-	--dice
+	--suffice
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_HANDES)

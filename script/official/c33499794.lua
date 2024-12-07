@@ -33,11 +33,11 @@ function s.thfilter(c)
 	return c:IsSetCard(SET_NEMLERIA) and c:IsAbleToHand()
 end
 function s.tgfilter(c)
-	return c:IsLevel(10) and c:IsRace(RACE_BEAST) and c:IsFaceup() and c:IsAbleToGrave()
+	return c:IsLevel(10) and c:IsRace(RACE_BEAST) and c:IsFaceup() and c:IsAbleToRest()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ct=Duel.GetMatchingGroupCount(s.cfilter,tp,LOCATION_EXTRA,0,nil)
-	local b1=ct>=1 and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil)
+	local b1=ct>=1 and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil)
 	local b2=ct>=2 and not Duel.HasFlagEffect(tp,id)
 	local b3=ct>=3 and Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_MZONE,0,1,nil)
 		and Duel.IsExistingMatchingCard(Card.IsNegatableMonster,tp,0,LOCATION_MZONE,1,nil)
@@ -52,12 +52,12 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Remove(g,POS_FACEDOWN,REASON_COST)
 	if op==1 then
 		e:SetCategory(CATEGORY_TOHAND)
-		Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
+		Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
 	elseif op==2 then
 		e:SetCategory(0)
 	elseif op==3 then
-		e:SetCategory(CATEGORY_TOGRAVE|CATEGORY_DISABLE)
-		Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_MZONE)
+		e:SetCategory(CATEGORY_TOREST|CATEGORY_DISABLE)
+		Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_MZONE)
 		Duel.SetOperationInfo(0,CATEGORY_DISABLE,nil,1,1-tp,LOCATION_MZONE)
 	end
 end
@@ -65,9 +65,9 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local op=e:GetLabel()
 	local c=e:GetHandler()
 	if op==1 then
-		--Add 1 "Nemleria" card from your GY to your hand
+		--Add 1 "Nemleria" card from your RP to your hand
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-		local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+		local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
 		if #g>0 then
 			Duel.SendtoHand(g,nil,REASON_EFFECT)
 			Duel.ConfirmCards(1-tp,g)
@@ -86,10 +86,10 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_PHASE|PHASE_END)
 		Duel.RegisterEffect(e1,tp)
 	elseif op==3 then
-		--Send 1 Level 10 Beast monster to the GY and negate the effects of monsters your opponent controls
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		--Send 1 Level 10 Beast monster to the RP and negate the effects of monsters your opponent controls
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local tgc=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_MZONE,0,1,1,nil):GetFirst()
-		if tgc and Duel.SendtoGrave(tgc,REASON_EFFECT)>0 and tgc:IsLocation(LOCATION_GRAVE) then
+		if tgc and Duel.SendtoRest(tgc,REASON_EFFECT)>0 and tgc:IsLocation(LOCATION_REST) then
 			local g=Duel.GetMatchingGroup(Card.IsNegatableMonster,tp,0,LOCATION_MZONE,nil)
 			for tc in g:Iter() do
 				tc:NegateEffects(c,RESET_PHASE|PHASE_END)

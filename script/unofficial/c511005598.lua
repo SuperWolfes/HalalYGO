@@ -1,4 +1,4 @@
---Gorgonic Temptaion
+--Jonjoric Temptaion
 --scripted by GameMaster(GM)
 --fixed by MLD
 Duel.LoadScript("c420.lua")
@@ -33,7 +33,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsGorgonic()
+	return c:IsFaceup() and c:IsJonjoric()
 end
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	local at=Duel.GetAttacker()

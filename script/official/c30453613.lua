@@ -17,7 +17,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_OBSIDIM_ASHENED_CITY}
 function s.plfilter(c)
-	return c:IsCode(CARD_OBSIDIM_ASHENED_CITY) and c:IsFieldSpell() and not c:IsForbidden()
+	return c:IsCode(CARD_OBSIDIM_ASHENED_CITY) and c:IsFieldActional() and not c:IsUnliked()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.plfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -46,7 +46,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local target_p=op==0 and tp or 1-tp
 	local fc=Duel.GetFieldCard(target_p,LOCATION_FZONE,0)
 	if fc then
-		Duel.SendtoGrave(fc,REASON_RULE)
+		Duel.SendtoRest(fc,REASON_RULE)
 		Duel.BreakEffect()
 	end
 	if Duel.MoveToField(sc,tp,target_p,LOCATION_FZONE,POS_FACEUP,true) and Duel.GetFieldCard(1-tp,LOCATION_FZONE,0)

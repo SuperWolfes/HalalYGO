@@ -2,7 +2,7 @@
 --Doctor D (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon 1 "Destiny Hero" monster from the GY
+	--Special Summon 1 "Destrudic Hero" monster from the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
@@ -18,31 +18,31 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	return true
 end
 function s.costfilter(c,e,tp)
-	return c:IsMonster() and c:IsSetCard(SET_DESTINY_HERO) and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
+	return c:IsMonster() and c:IsSetCard(SET_DESTRUDIC_HERO) and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
 		and Duel.GetMZoneCount(tp,c)>0
-		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_GRAVE,0,1,c,e,tp)
+		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,0,1,c,e,tp)
 end
 function s.spfilter(c,e,tp)
-	return c:IsSetCard(SET_DESTINY_HERO) and c:IsLevelBelow(4) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsSetCard(SET_DESTRUDIC_HERO) and c:IsLevelBelow(4) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local chkcost=e:GetLabel()==1 and true or false
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp) end
 	if chk==0 then
 		if chkcost then
 			e:SetLabel(0)
-			return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil,e,tp)
+			return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,nil,e,tp)
 		else
-			return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp)
+			return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp)
 		end
 	end
 	if chkcost then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-		local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,nil,e,tp)
+		local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,1,nil,e,tp)
 		Duel.Remove(g,POS_FACEUP,REASON_COST)
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)

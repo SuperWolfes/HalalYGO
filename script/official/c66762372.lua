@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetCountLimit(1)
 	e2:SetCondition(s.setcon)
 	e2:SetTarget(s.settg)
-	e2:SetOperation(s.setop)
+	e2:SetOperation(s.vetop)
 	c:RegisterEffect(e2)
 	--synlimit
 	local e3=Effect.CreateEffect(c)
@@ -33,7 +33,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x79,0x7c}
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_GRAVE) and e:GetHandler():IsReason(REASON_BATTLE)
+	return e:GetHandler():IsLocation(LOCATION_REST) and e:GetHandler():IsReason(REASON_BATTLE)
 end
 function s.spfilter(c,e,tp)
 	return c:IsSetCard(0x79) and c:GetLevel()==4 and c:GetCode()~=id and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -58,12 +58,12 @@ function s.setcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,tp)
 end
 function s.filter(c)
-	return c:IsSetCard(0x7c) and c:IsSpell() and c:IsSSetable()
+	return c:IsSetCard(0x7c) and c:IsActional() and c:IsSSetable()
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then

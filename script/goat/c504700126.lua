@@ -2,7 +2,7 @@
 --Silent Swordsman LV5
 local s,id=GetID()
 function s.initial_effect(c)
-	--immune spell
+	--immune actional
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_IMMUNE_EFFECT)
@@ -32,7 +32,7 @@ s.listed_names={37267041}
 s.LVnum=5
 s.LVset=0xe7
 function s.efilter(e,te)
-	return te:IsActiveType(TYPE_SPELL) and te:GetOwnerPlayer()~=e:GetHandlerPlayer()
+	return te:IsActiveType(TYPE_ACTIONAL) and te:GetOwnerPlayer()~=e:GetHandlerPlayer()
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	if ep~=tp and Duel.GetAttackTarget()==nil then
@@ -43,8 +43,8 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return tp==Duel.GetTurnPlayer() and e:GetHandler():GetFlagEffect(id)~=0
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
+	Duel.SendtoRest(e:GetHandler(),REASON_COST)
 end
 function s.spfilter(c,e,tp)
 	return c:IsCode(37267041) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)

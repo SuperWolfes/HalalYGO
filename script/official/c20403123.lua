@@ -1,5 +1,5 @@
 --EMスライハンド・マジシャン
---Performapal Sleight Hand Magician
+--Performapal Sleight Hand Mentor
 local s,id=GetID()
 function s.initial_effect(c)
 	--spsummon from hand

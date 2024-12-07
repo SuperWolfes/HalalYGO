@@ -1,9 +1,9 @@
---Wind Witch - Winter Bell
+--Wind Mint - Winter Bell
 local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0xf0),1,1,Synchro.NonTunerEx(Card.IsSetCard,0xf0),1,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--copy
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(30312361,0))
@@ -32,10 +32,10 @@ function s.filter(c)
 	return c:IsMonster() and c:IsSetCard(0xf0) and c:IsLevelBelow(4)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil)
+	Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

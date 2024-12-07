@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--Tribute Summon by sending 1 of your monsters and 1 opponent's card to the GY
+	--Tribute Summon by sending 1 of your monsters and 1 opponent's card to the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetType(EFFECT_TYPE_FIELD)
@@ -35,7 +35,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function s.tgfilter(c,e)
-	return c:IsAbleToGrave() and not c:IsImmuneToEffect(e)
+	return c:IsAbleToRest() and not c:IsImmuneToEffect(e)
 end
 function s.otcon(e,c,minc)
 	if c==nil then return true end
@@ -52,10 +52,10 @@ function s.sumtg(e,tp,eg,ep,ev,re,r,rp,c)
 	local mg1=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_MZONE,0,nil,e)
 	local mg2=Duel.GetMatchingGroup(s.tgfilter,tp,0,LOCATION_ONFIELD,nil,e)
 	::restart::
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g1=mg1:Select(tp,1,1,true,nil)
 	if not g1 then return false end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tc=mg2:SelectUnselect(g1,tp,false,false,2,2)
 	if mg2:IsContains(tc) then
 		g1:AddCard(tc)
@@ -68,7 +68,7 @@ end
 function s.otop(e,tp,eg,ep,ev,re,r,rp,c)
 	local sg=e:GetLabelObject()
 	if not sg then return end
-	Duel.SendtoGrave(sg,REASON_EFFECT)
+	Duel.SendtoRest(sg,REASON_EFFECT)
 	sg:DeleteGroup()
 end
 function s.drfilter(c)

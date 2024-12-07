@@ -24,13 +24,13 @@ function s.initial_effect(c)
 	e3:SetValue(s.eqlimit)
 	c:RegisterEffect(e3)
 end
-s.listed_names={CARD_DARK_MAGICIAN}
-s.dark_magician_list=true
+s.listed_names={CARD_DARK_MENTOR}
+s.dark_mentor_list=true
 function s.eqlimit(e,c)
-	return c:IsCode(CARD_DARK_MAGICIAN)
+	return c:IsCode(CARD_DARK_MENTOR)
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsCode(CARD_DARK_MAGICIAN)
+	return c:IsFaceup() and c:IsCode(CARD_DARK_MENTOR)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and s.filter(chkc) end

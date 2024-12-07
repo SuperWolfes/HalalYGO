@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,160011022,160015012)
 	--Return 1 card on the field to the hand
 	local e1=Effect.CreateEffect(c)
@@ -21,18 +21,18 @@ function s.initial_effect(c)
 end
 s.listed_names={160015012} --Fiddlebadou
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSpell),tp,LOCATION_ONFIELD,0,1,nil)
+	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsActional),tp,LOCATION_ONFIELD,0,1,nil)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeckAsCost(tp,1) end
 end
 function s.thfilter(c)
-	return c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,1-tp,LOCATION_ONFIELD)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
 end
 function s.thfilter2(c)
 	return c:IsCode(160015012) and c:IsAbleToHand()
@@ -46,10 +46,10 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if #rg>0 then
 		Duel.HintSelection(rg,true)
 		if Duel.SendtoHand(rg,nil,REASON_EFFECT)>0 and rg:GetFirst():IsLocation(LOCATION_HAND)
-		and Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.thfilter2),tp,LOCATION_GRAVE,0,1,nil)
+		and Duel.IsExistingMatchingCard(aux.RestValleyFilter(s.thfilter2),tp,LOCATION_REST,0,1,nil)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-			local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thfilter2),tp,LOCATION_GRAVE,0,1,1,nil)
+			local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.thfilter2),tp,LOCATION_REST,0,1,1,nil)
 			if #g>0 then
 				Duel.HintSelection(g,true)
 				Duel.BreakEffect()

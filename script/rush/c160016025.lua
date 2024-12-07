@@ -17,11 +17,11 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_CAN_D}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_GRAVE,0,nil)
-	return #g>0 and not g:IsExists(aux.NOT(Card.IsRace),1,nil,RACE_PSYCHIC|RACE_OMEGAPSYCHIC)
+	local g=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_REST,0,nil)
+	return #g>0 and not g:IsExists(aux.NOT(Card.IsRace),1,nil,RACE_MENTAL|RACE_OMEGAMENTAL)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,nil) end
 end
 function s.thfilter(c)
 	return c:IsFaceup() and c:IsAbleToHand()
@@ -32,16 +32,16 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local tg=Duel.SelectMatchingCard(tp,Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,1,nil)
-	if Duel.SendtoGrave(tg,REASON_COST)==0 then return end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	local tg=Duel.SelectMatchingCard(tp,Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,1,nil)
+	if Duel.SendtoRest(tg,REASON_COST)==0 then return end
 	--Effect
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RTOHAND)
 	local tc=Duel.SelectMatchingCard(tp,s.thfilter,tp,0,LOCATION_MZONE,1,1,nil)
 	if #tc>0 then
 		tc=tc:AddMaximumCheck()
 		Duel.HintSelection(tc,true)
-		if Duel.SendtoHand(tc,nil,REASON_EFFECT)>0 and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,CARD_CAN_D) then
+		if Duel.SendtoHand(tc,nil,REASON_EFFECT)>0 and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,CARD_CAN_D) then
 			Duel.BreakEffect()
 			Duel.Recover(tp,700,REASON_EFFECT)
 		end

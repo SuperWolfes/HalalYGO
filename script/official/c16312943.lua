@@ -1,5 +1,5 @@
 -- 
--- Libromancer Fire
+-- Librobouncer Fire
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	-- Search 1 "Libromancer" monster
+	-- Search 1 "Librobouncer" monster
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND)
@@ -29,7 +29,7 @@ end
 s.listed_names={id}
 s.listed_series={0x17d}
 function s.spcostfilter(c)
-	return c:IsRitualMonster() and not c:IsPublic()
+	return c:IsLockedMonster() and not c:IsPublic()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

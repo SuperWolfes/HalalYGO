@@ -1,11 +1,11 @@
 --XY－ドラゴン・キャノン
 --XY-Dragon Cannon (GOAT)
 --Only mosnters in the mzone allowed as material
---nomi monster instead of seminomi + "Cannot be SS from GY"
+--nomi monster instead of seminomi + "Cannot be SS from RP"
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,62651957,65622692)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,true)
 	--destroy
@@ -31,7 +31,7 @@ function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsSpellTrap()
+	return c:IsFaceup() and c:IsActionalTrap()
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and chkc:IsControler(1-tp) and s.filter(chkc) end

@@ -1,5 +1,5 @@
 --Ｓｐ－我が身を盾に
---Speed Spell - My Body as a Shield
+--Speed Actional - My Body as a Shield
 local s,id=GetID()
 function s.initial_effect(c)
 	--Negate

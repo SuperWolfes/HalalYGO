@@ -1,5 +1,5 @@
 --女神の加護
---Aegis of Gaia
+--Bogus of Bia
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

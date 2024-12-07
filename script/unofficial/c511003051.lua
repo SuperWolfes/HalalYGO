@@ -190,7 +190,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.BreakEffect()
 		local xyzg=Duel.GetMatchingGroup(Card.IsXyzSummonable,tp,LOCATION_EXTRA,0,nil,nil,sg,2,2)
 		if #xyzg>0 then
-			c:CancelToGrave()
+			c:CancelToRest()
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 			local xyz=xyzg:Select(tp,1,1,nil):GetFirst()
 			Duel.XyzSummon(tp,xyz,nil,sg)

@@ -3,7 +3,7 @@
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--2+ monsters, including a Pendulum Monster
 	Link.AddProcedure(c,nil,2,3,s.lcheck)
 	--Gains 100 ATK for each face-up Pendulum Monster in the Extra Deck
@@ -81,7 +81,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOEXTRA,nil,1,tp,LOCATION_DECK)
 end
 function s.tefilter(c)
-	return c:IsSetCard(SET_SOLFACHORD) and c:IsType(TYPE_PENDULUM) and c:IsEvenScale() and not c:IsForbidden()
+	return c:IsSetCard(SET_SOLFACHORD) and c:IsType(TYPE_PENDULUM) and c:IsEvenScale() and not c:IsUnliked()
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -92,7 +92,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local sg=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_PZONE,0,1,1,nil,e,tp,zone)
 	if #sg==0 or Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP,zone)==0 or not Duel.NegateActivation(ev) then return end
 	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:GetHandler():IsRelateToEffect(re) then
-		Duel.SendtoGrave(eg,REASON_EFFECT)
+		Duel.SendtoRest(eg,REASON_EFFECT)
 	end
 	local g=Duel.GetMatchingGroup(s.tefilter,tp,LOCATION_DECK,0,nil)
 	if #g==0 or not Duel.SelectYesNo(tp,aux.Stringid(id,1)) then return end

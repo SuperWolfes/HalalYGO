@@ -46,7 +46,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x174}
 function s.tgval(e,re,rp)
-	return re:IsActiveType(TYPE_MONSTER) and re:GetHandler():IsSummonLocation(LOCATION_GRAVE)
+	return re:IsActiveType(TYPE_MONSTER) and re:GetHandler():IsSummonLocation(LOCATION_REST)
 end
 function s.negcfilter(c,tp)
 	return c:IsSummonType(SUMMON_TYPE_XYZ) and c:IsSetCard(0x174) and c:IsSummonPlayer(tp)
@@ -112,7 +112,7 @@ function s.descon(e,tp,eg,ep,ev,re,r,rp)
 		or (at and at:IsControler(tp) and at:IsFaceup() and at:IsSetCard(0x174))
 end
 function s.desfilter(c)
-	return c:IsType(TYPE_SPELL+TYPE_TRAP)
+	return c:IsType(TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return s.desfilter(chkc) and chkc:IsLocation(LOCATION_ONFIELD) and chkc:IsControler(1-tp) end

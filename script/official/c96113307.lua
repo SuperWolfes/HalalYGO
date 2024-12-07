@@ -1,9 +1,9 @@
 --聖霊獣騎 レイラウタリ
---Ritual Beast Ulti-Reirautari
+--Locked Beast Ulti-Reirautari
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Link Summon Procedure
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_EFFECT),3)
 	--Neither player can Tribute cards to activate a card effect
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTargetRange(1,1)
 	e1:SetTarget(function(e,c,rp,r,re) return r&REASON_COST>0 and re and re:IsActivated() end)
 	c:RegisterEffect(e1)
-	--Return 1 "Ritual Beast" card to the hand
+	--Return 1 "Locked Beast" card to the hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_TOEXTRA+CATEGORY_SUMMON)
@@ -26,7 +26,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.thtg)
 	e2:SetOperation(s.thop)
 	c:RegisterEffect(e2)
-	--Banish 1 of your "Ritual Beast" cards and 1 of your opponent's cards
+	--Banish 1 of your "Locked Beast" cards and 1 of your opponent's cards
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_REMOVE)
@@ -41,9 +41,9 @@ function s.initial_effect(c)
 	e3:SetOperation(s.rmvop)
 	c:RegisterEffect(e3)
 end
-s.listed_series={SET_RITUAL_BEAST}
+s.listed_series={SET_LOCKED_BEAST}
 function s.thfilter(c)
-	return c:IsSetCard(SET_RITUAL_BEAST) and c:IsFaceup() and (c:IsAbleToHand() or c:IsAbleToExtra())
+	return c:IsSetCard(SET_LOCKED_BEAST) and c:IsFaceup() and (c:IsAbleToHand() or c:IsAbleToExtra())
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REMOVED) and chkc:IsControler(tp) and s.thfilter(chkc) end
@@ -55,7 +55,7 @@ function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_SUMMON,nil,1,tp,LOCATION_HAND)
 end
 function s.nsfilter(c)
-	return c:IsSetCard(SET_RITUAL_BEAST) and c:IsSummonable(true,nil)
+	return c:IsSetCard(SET_LOCKED_BEAST) and c:IsSummonable(true,nil)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
@@ -72,7 +72,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.rmvfilter(c,e,tp)
 	return c:IsAbleToRemove() and c:IsCanBeEffectTarget(e)
-		and ((c:IsFaceup() and c:IsSetCard(SET_RITUAL_BEAST)) or c:IsControler(1-tp))
+		and ((c:IsFaceup() and c:IsSetCard(SET_LOCKED_BEAST)) or c:IsControler(1-tp))
 end
 function s.rescon(sg,e,tp,mg)
 	return sg:FilterCount(Card.IsControler,nil,tp)==1

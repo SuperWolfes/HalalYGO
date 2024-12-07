@@ -3,11 +3,11 @@
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	c:AddMustFirstBeFusionSummoned()
-	--Fusion Materials: 1 Fusion, Synchro, Xyz, or Link Monster + 1 Spellcaster monster
-	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsType,TYPE_FUSION|TYPE_SYNCHRO|TYPE_XYZ|TYPE_LINK),aux.FilterBoolFunctionEx(Card.IsRace,RACE_SPELLCASTER))
-	Fusion.AddContactProc(c,function(tp) return Duel.GetMatchingGroup(Card.IsAbleToGraveAsCost,tp,LOCATION_ONFIELD,0,nil) end,function(g) Duel.SendtoGrave(g,REASON_COST|REASON_MATERIAL) end,nil,nil,nil,nil,false)
+	--Fusion Materials: 1 Fusion, Synchro, Xyz, or Link Monster + 1 Mentor monster
+	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsType,TYPE_FUSION|TYPE_SYNCHRO|TYPE_XYZ|TYPE_LINK),aux.FilterBoolFunctionEx(Card.IsRace,RACE_MENTOR))
+	Fusion.AddContactProc(c,function(tp) return Duel.GetMatchingGroup(Card.IsAbleToRestAsCost,tp,LOCATION_ONFIELD,0,nil) end,function(g) Duel.SendtoRest(g,REASON_COST|REASON_MATERIAL) end,nil,nil,nil,nil,false)
 	--Negate an attack and make this card gain ATK equal to the attacking monster's until the end of the turn
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.atkop)
 	c:RegisterEffect(e1)
 end
-s.miracle_synchro_fusion=true
+s.pulse_synchro_fusion=true
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local ac=Duel.GetAttacker()
 	if chkc then return chkc==ac end

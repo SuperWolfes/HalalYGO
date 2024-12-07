@@ -46,7 +46,7 @@ function s.op(c)
 	e5:SetTarget(aux.FieldSummonProcTg(s.nttg2))
 	e5:SetValue(6)
 	Duel.RegisterEffect(e5,0)
-	--spirit
+	--guardian
 	local e6=Effect.CreateEffect(c)
 	e6:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e6:SetCode(EVENT_SUMMON_SUCCESS)
@@ -90,7 +90,7 @@ function s.ntcon(e,c,minc)
 	return max>0 and Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
 end
 ------------------------------------------------------------------------
---spirit charge
+--guardian charge
 function s.sptfilter(c)
 	return c:IsType(TYPE_MONSTER+TYPE_TRAPMONSTER+TYPE_TOKEN) and c:IsOnField()
 end

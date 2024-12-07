@@ -22,19 +22,19 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.spcon(e)
-	return e:GetHandler():IsLocation(LOCATION_GRAVE) and e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD)
+	return e:GetHandler():IsLocation(LOCATION_REST) and e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD)
 end
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsPreviousLocation(LOCATION_GRAVE)
+	return e:GetHandler():IsPreviousLocation(LOCATION_REST)
 end
 function s.filter(c)
 	return c:GetLevel()>0
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.filter(chkc) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and s.filter(chkc) end
 	if chk==0 then return true end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil)
+	Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

@@ -5,7 +5,7 @@ Duel.LoadCardScript("c49221191.lua")
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Xyz.AddProcedure(c,nil,4,4)
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_FIELD)
@@ -51,7 +51,7 @@ function s.xyzop(e,tp,eg,ep,ev,re,r,rp,c,og,min,max)
 	c:SetMaterial(tc)
 	Duel.Overlay(c,tc)
 	if not tc:IsCode(65676461) then
-		Duel.SendtoGrave(mg2,REASON_RULE)
+		Duel.SendtoRest(mg2,REASON_RULE)
 	end
 end
 function s.ovfilter(c)
@@ -62,10 +62,10 @@ function s.rfilter(c)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST)
-		and Duel.IsExistingMatchingCard(s.rfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil) end
+		and Duel.IsExistingMatchingCard(s.rfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,nil) end
 	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.rfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.rfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,1,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 	e:SetLabel(g:GetFirst():GetAttack())
 end

@@ -2,10 +2,10 @@
 --White Aura Bihamut
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Synchro Summon Procedure
 	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_SYNCHRO),1,1,Synchro.NonTuner(nil),1,99)
-	--Special Summon 1 "Divine Dragon Token"
+	--Special Summon 1 "Mega Dragon Token"
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOKEN)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.tktg)
 	e1:SetOperation(s.tkop)
 	c:RegisterEffect(e1)
-	--Special Summon 1 "Divine Dragon Token"
+	--Special Summon 1 "Mega Dragon Token"
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOKEN)
@@ -34,13 +34,13 @@ function s.initial_effect(c)
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
-	e3:SetCode(EVENT_TO_GRAVE)
+	e3:SetCode(EVENT_TO_REST)
 	e3:SetCondition(s.spcon)
 	e3:SetTarget(s.sptg)
 	e3:SetOperation(s.spop)
 	c:RegisterEffect(e3)
 end
-s.listed_names={89907228} --"Divine Dragon Token"
+s.listed_names={89907228} --"Mega Dragon Token"
 s.synchro_tuner_required=1
 function s.tkcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsTurnPlayer(tp) and e:GetHandler():IsSummonType(SUMMON_TYPE_SYNCHRO)

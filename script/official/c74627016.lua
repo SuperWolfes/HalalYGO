@@ -28,7 +28,7 @@ s.listed_names={74627017} --"T.G. Token"
 s.listed_series={SET_TG}
 function s.tkcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsLocation(LOCATION_GRAVE) and r==REASON_SYNCHRO and c:GetReasonCard():IsSetCard(SET_TG)
+	return c:IsLocation(LOCATION_REST) and r==REASON_SYNCHRO and c:GetReasonCard():IsSetCard(SET_TG)
 end
 function s.tktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

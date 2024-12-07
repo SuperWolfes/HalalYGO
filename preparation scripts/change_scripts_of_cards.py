@@ -6,8 +6,11 @@ conversion_path = "output_sorted.txt"  # Path of halal conversions txt, preferab
 def convert_scripts_content(scripts_path, conversion_path, output="output_scripts"):
     exceptions = ["PHANT",  # PHANT because of the ELEPHANT win condition
                   "SUMMON", "Summon", "summon", "Earth", "EARTH", "earth"]
-    words_to_convert = {"GY": "RP"} # Some extras
-        # The original block for reading conversion rules remains unchanged
+    # Some extras
+    words_to_convert = {"GY": "RP"} 
+    # These are added at the end of the words_to_convert after it has been populated
+    words_to_append = {"DAMANCED": "DAMAGE", "Damanced": "Damage", "damanced": "damage"} 
+
     with open(conversion_path, "r", encoding="utf-8") as filec:
         lines = filec.readlines()
          
@@ -31,6 +34,8 @@ def convert_scripts_content(scripts_path, conversion_path, output="output_script
                         print(f"Ignoring {old_variations[i]}")
                     else:
                         words_to_convert.update({old_variations[i]: new_variations[i]})
+        
+        words_to_convert.update(words_to_append)
 
     # Ensure output directory exists
     if not os.path.exists(output):
@@ -71,7 +76,7 @@ def convert_scripts_content(scripts_path, conversion_path, output="output_script
 
                 for old, new in words_to_convert.items():
                     content = content.replace(old, new)
-
+                    
                 with open(output_file_path, "w", encoding="utf-8") as outfile:
                     outfile.write(content)
 
@@ -84,4 +89,3 @@ def convert_scripts_content(scripts_path, conversion_path, output="output_script
 # Call the function
 
 convert_scripts_content(scripts_path, conversion_path)
-print("Due to mage all variation conversions of damage will become damanced. You can change this manually using something like Notepad++")

@@ -42,7 +42,7 @@ function s.recop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.filter(c,e,tp)
-	return c:IsPreviousLocation(LOCATION_GRAVE) and (not e or c:IsRelateToEffect(e)) 
+	return c:IsPreviousLocation(LOCATION_REST) and (not e or c:IsRelateToEffect(e)) 
 		and c:IsPreviousControler(tp)
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk)

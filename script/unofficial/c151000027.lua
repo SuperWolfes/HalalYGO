@@ -39,18 +39,18 @@ function s.tdfilter(c)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	local g=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_GRAVE,0,nil)
-	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,#g,0,LOCATION_GRAVE)
+	local g=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_REST,0,nil)
+	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,#g,0,LOCATION_REST)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
-	local g=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_REST,0,nil)
 	if #g>0 then
 		Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
 	end
 end
 function s.repfilter(c,tp)
-	return c:IsControler(tp) and c:IsLocation(LOCATION_GRAVE) and c:GetDestination()==LOCATION_DECK and c:IsMonster()
+	return c:IsControler(tp) and c:IsLocation(LOCATION_REST) and c:GetDestination()==LOCATION_DECK and c:IsMonster()
 		and c:IsAbleToHand()
 end
 function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)

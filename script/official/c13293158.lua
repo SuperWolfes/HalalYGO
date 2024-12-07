@@ -2,7 +2,7 @@
 --Evil HERO Wild Cyclone
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion material
 	Fusion.AddProcMix(c,true,true,21844576,86188410)
 	--lizard check
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_SPSUMMON_CONDITION)
 	e1:SetValue(aux.EvilHeroLimit)
 	c:RegisterEffect(e1)
-	--Prevent Spell/Traps activation while battling
+	--Prevent Actional/Traps activation while battling
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
@@ -30,7 +30,7 @@ function s.initial_effect(c)
 	e2:SetValue(s.aclimit)
 	e2:SetCondition(s.actcon)
 	c:RegisterEffect(e2)
-	--Destroy all face-down Spell/Trap
+	--Destroy all face-down Actional/Trap
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_DESTROY)

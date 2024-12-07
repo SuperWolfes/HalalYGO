@@ -1,5 +1,5 @@
 --神鳥の烈戦
---Simorgh Sky Battle
+--Sisbird Sky Battle
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
@@ -61,7 +61,7 @@ function s.atlimit(e,c)
 	return c:IsFaceup() and c:IsRace(RACE_WINGEDBEAST) and c:GetAttack()<s.atkval(e:GetHandlerPlayer())
 end
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsAbleToGraveAsCost() and c:IsSetCard(0x12d) and c:IsLevelAbove(7)
+	return c:IsFaceup() and c:IsAbleToRestAsCost() and c:IsSetCard(0x12d) and c:IsLevelAbove(7)
 end
 function s.rescon(sg,e,tp,mg)
 	return sg:GetClassCount(Card.GetOriginalAttribute)==#sg and Duel.IsExistingMatchingCard(Card.IsAbleToHand,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,sg+e:GetHandler())
@@ -73,11 +73,11 @@ end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_MZONE,0,nil)
-	if chk==0 then return e:GetLabel()==100 and c:IsAbleToGraveAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED)
+	if chk==0 then return e:GetLabel()==100 and c:IsAbleToRestAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED)
 		and aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,0) end
-	local tg=aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,1,tp,HINTMSG_TOGRAVE)
+	local tg=aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,1,tp,HINTMSG_TOREST)
 	tg:AddCard(c)
-	Duel.SendtoGrave(tg,REASON_COST)
+	Duel.SendtoRest(tg,REASON_COST)
 	e:SetLabel(0)
 	local g=Duel.GetMatchingGroup(Card.IsAbleToHand,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,#g,0,0)

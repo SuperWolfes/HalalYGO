@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
-	if re:GetActiveType()==TYPE_SPELL and re:IsHasType(EFFECT_TYPE_ACTIVATE) and rp==tp then
+	if re:GetActiveType()==TYPE_ACTIONAL and re:IsHasType(EFFECT_TYPE_ACTIVATE) and rp==tp then
 		Duel.Damage(1-tp,400,REASON_EFFECT)
 	end
 end

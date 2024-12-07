@@ -13,13 +13,13 @@ function s.initial_effect(c)
 	e1:SetTarget(s.efftg)
 	e1:SetOperation(s.effop)
 	c:RegisterEffect(e1)
-	--Equip 1 "Magistus" monster from your Extra Deck or GY to 1 face-up monster you control
+	--Equip 1 "Magistus" monster from your Extra Deck or RP to 1 face-up monster you control
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_EQUIP)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCost(aux.SelfBanishCost)
 	e2:SetTarget(s.eqtg)
@@ -31,7 +31,7 @@ s.listed_names={id}
 function s.effcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsDiscardable() end
-	Duel.SendtoGrave(c,REASON_COST|REASON_DISCARD)
+	Duel.SendtoRest(c,REASON_COST|REASON_DISCARD)
 end
 function s.thfilter(c)
 	return c:IsSetCard(SET_MAGISTUS) and c:IsMonster() and not c:IsCode(id) and c:IsAbleToHand()
@@ -79,22 +79,22 @@ function s.effop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.eqfilter(c,tp)
-	return c:IsSetCard(SET_MAGISTUS) and c:IsMonster() and c:CheckUniqueOnField(tp) and not c:IsForbidden()
+	return c:IsSetCard(SET_MAGISTUS) and c:IsMonster() and c:CheckUniqueOnField(tp) and not c:IsUnliked()
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
 		and Duel.IsExistingTarget(Card.IsFaceup,tp,LOCATION_MZONE,0,1,nil)
-		and Duel.IsExistingMatchingCard(s.eqfilter,tp,LOCATION_EXTRA|LOCATION_GRAVE,0,1,e:GetHandler(),tp) end
+		and Duel.IsExistingMatchingCard(s.eqfilter,tp,LOCATION_EXTRA|LOCATION_REST,0,1,e:GetHandler(),tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 	Duel.SelectTarget(tp,Card.IsFaceup,tp,LOCATION_MZONE,0,1,1,nil)
-	Duel.SetOperationInfo(0,CATEGORY_EQUIP,nil,1,tp,LOCATION_EXTRA|LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_EQUIP,nil,1,tp,LOCATION_EXTRA|LOCATION_REST)
 end
 function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not (tc:IsRelateToEffect(e) and tc:IsFaceup() and Duel.GetLocationCount(tp,LOCATION_SZONE)>0) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-	local ec=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.eqfilter),tp,LOCATION_EXTRA|LOCATION_GRAVE,0,1,1,nil,tp):GetFirst()
+	local ec=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.eqfilter),tp,LOCATION_EXTRA|LOCATION_REST,0,1,1,nil,tp):GetFirst()
 	if ec and Duel.Equip(tp,ec,tc) then
 		--Equip limit
 		local e1=Effect.CreateEffect(e:GetHandler())

@@ -32,7 +32,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:GetDestination()==LOCATION_GRAVE and c:IsReason(REASON_BATTLE) end
+	if chk==0 then return c:GetDestination()==LOCATION_REST and c:IsReason(REASON_BATTLE) end
 	return true
 end
 function s.repop(e,tp,eg,ep,ev,re,r,rp)

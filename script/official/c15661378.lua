@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion Summon/Contact Fusion
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	local eff=Fusion.AddProcMixN(c,true,true,s.ffilter,3)
 	if not c:IsStatus(STATUS_COPYING_EFFECT) then
 		eff[1]:SetValue(s.matfilter)

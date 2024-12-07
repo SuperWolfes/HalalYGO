@@ -39,9 +39,9 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 				Duel.ConfirmCards(1-tp,sg)
 				Duel.ShuffleHand(tp)
 				g:Sub(sg)
-				Duel.SendtoGrave(g,REASON_EFFECT|REASON_EXCAVATE)
+				Duel.SendtoRest(g,REASON_EFFECT|REASON_EXCAVATE)
 			else
-				Duel.SendtoGrave(g,REASON_EFFECT|REASON_EXCAVATE)
+				Duel.SendtoRest(g,REASON_EFFECT|REASON_EXCAVATE)
 			end
 		else
 			Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT|REASON_EXCAVATE)

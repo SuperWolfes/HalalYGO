@@ -12,13 +12,13 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-	--Send 1 Level 5 or higher WATER monster from your Deck to the GY
+	--Send 1 Level 5 or higher WATER monster from your Deck to the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_TOGRAVE+CATEGORY_TOHAND)
+	e2:SetCategory(CATEGORY_TOREST+CATEGORY_TOHAND)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_FREE_CHAIN)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetHintTiming(0,TIMING_MAIN_END|TIMINGS_CHECK_MONSTER_E)
 	e2:SetCountLimit(1,id)
 	e2:SetCost(aux.SelfBanishCost)
@@ -55,12 +55,12 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	bc:RegisterEffect(e2)
 end
 function s.tgfilter(c)
-	return c:IsLevelAbove(5) and c:IsAttribute(ATTRIBUTE_WATER) and c:IsAbleToGrave()
+	return c:IsLevelAbove(5) and c:IsAttribute(ATTRIBUTE_WATER) and c:IsAbleToRest()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
 end
 function s.thfilter(c)
 	return c:IsAttribute(ATTRIBUTE_WATER) and c:IsAbleToHand()
@@ -77,10 +77,10 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetTarget(function(_e,_c) return not _c:IsAttribute(ATTRIBUTE_WATER) end)
 	e1:SetReset(RESET_PHASE|PHASE_END|RESET_SELF_TURN,ct)
 	Duel.RegisterEffect(e1,tp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tgc=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil):GetFirst()
-	if not (tgc and Duel.SendtoGrave(tgc,REASON_EFFECT)>0 and tgc:IsLocation(LOCATION_GRAVE)) then return end
-	local thg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.thfilter),tp,LOCATION_GRAVE,0,nil)
+	if not (tgc and Duel.SendtoRest(tgc,REASON_EFFECT)>0 and tgc:IsLocation(LOCATION_REST)) then return end
+	local thg=Duel.GetMatchingGroup(aux.RestValleyFilter(s.thfilter),tp,LOCATION_REST,0,nil)
 	if #thg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,3)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 		local sg=thg:Select(tp,1,1,nil)

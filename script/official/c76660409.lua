@@ -23,10 +23,10 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local lsc=Duel.GetFieldCard(tp,LOCATION_PZONE,0):GetLeftScale()
 	local rsc=Duel.GetFieldCard(tp,LOCATION_PZONE,1):GetRightScale()
 	if lsc>rsc then lsc,rsc=rsc,lsc end
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter(chkc,lsc,rsc) end
-	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,2,nil,lsc,rsc) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter(chkc,lsc,rsc) end
+	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,2,nil,lsc,rsc) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,2,2,nil,lsc,rsc)
+	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,2,2,nil,lsc,rsc)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,2,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)

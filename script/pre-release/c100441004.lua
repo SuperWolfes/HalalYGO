@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Add 1 WATER Spellcaster Monster from your Deck to your hand
+	--Add 1 WATER Mentor Monster from your Deck to your hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -32,7 +32,7 @@ function s.initial_effect(c)
 	--Add 1 "Ice Doll Mirror" from your Deck to your hand
 	local e4=e2:Clone()
 	e4:SetDescription(aux.Stringid(id,2))
-	e4:SetCode(EVENT_TO_GRAVE)
+	e4:SetCode(EVENT_TO_REST)
 	e4:SetCountLimit(1,{id,2})
 	e4:SetCondition(function(e) return e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD) end)
 	e4:SetTarget(s.thtg(s.mirrorthfilter))
@@ -73,7 +73,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.waterthfilter(c)
-	return c:IsAttribute(ATTRIBUTE_WATER) and c:IsRace(RACE_SPELLCASTER) and c:IsAbleToHand()
+	return c:IsAttribute(ATTRIBUTE_WATER) and c:IsRace(RACE_MENTOR) and c:IsAbleToHand()
 end
 function s.mirrorthfilter(c)
 	return c:IsCode(100441006) and c:IsAbleToHand()

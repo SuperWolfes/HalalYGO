@@ -6,7 +6,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_DARK),3,4)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Rank Up Check
 	aux.EnableCheckRankUp(c,nil,nil,55727845)
 	--battle indestructable
@@ -71,7 +71,7 @@ end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local bc=c:GetBattleTarget()
-	if not c:IsHasEffect(EFFECT_TO_GRAVE_REDIRECT) and bc then
+	if not c:IsHasEffect(EFFECT_TO_REST_REDIRECT) and bc then
 		if c:IsHasEffect(EFFECT_INDESTRUCTABLE_BATTLE) then
 			local tcind={c:GetCardEffect(EFFECT_INDESTRUCTABLE_BATTLE)}
 			for i=1,#tcind do

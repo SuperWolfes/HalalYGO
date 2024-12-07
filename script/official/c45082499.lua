@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	e2:SetCondition(function(e) return e:GetHandler():GetEquipTarget() end)
 	e2:SetValue(aux.indoval)
 	c:RegisterEffect(e2)
-	--Destruction replacement for the equipped monster
+	--Mismatching replacement for the equipped monster
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_EQUIP)
 	e3:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
@@ -53,7 +53,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if c:IsLocation(LOCATION_MZONE) and c:IsFacedown() then return end
 	local tc=Duel.GetFirstTarget()
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 or not tc:IsRelateToEffect(e) or tc:IsFacedown() or tc:GetControler()~=tp or not c:CheckUniqueOnField(tp) then
-		Duel.SendtoGrave(c,REASON_EFFECT)
+		Duel.SendtoRest(c,REASON_EFFECT)
 		return
 	end
 	s.equipop(c,e,tp,tc)

@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Make this card become Level 4 and search 1 "Spirit Converter"
+	--Make this card become Level 4 and search 1 "Guardian Converter"
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_LVCHANGE+CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -14,10 +14,10 @@ function s.initial_effect(c)
 	e1:SetTarget(s.lvtg)
 	e1:SetOperation(s.lvop)
 	c:RegisterEffect(e1)
-	--Send two cards to the GY and draw 1 card
+	--Send two cards to the RP and draw 1 card
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_TOGRAVE+CATEGORY_DRAW)
+	e2:SetCategory(CATEGORY_TOREST+CATEGORY_DRAW)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetRange(LOCATION_MZONE)
@@ -26,12 +26,12 @@ function s.initial_effect(c)
 	e2:SetOperation(s.tgop)
 	c:RegisterEffect(e2)
 end
-s.listed_names={20802187} --"Spirit Converter"
+s.listed_names={20802187} --"Guardian Converter"
 function s.lvtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return not c:IsLevel(4) end
 	Duel.SetOperationInfo(0,CATEGORY_LVCHANGE,c,1,tp,math.abs(c:GetLevel()-4))
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK|LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK|LOCATION_REST)
 end
 function s.thfilter(c)
 	return c:IsCode(20802187) and c:IsAbleToHand()
@@ -47,7 +47,7 @@ function s.lvop(e,tp,eg,ep,ev,re,r,rp,c)
 		e1:SetReset(RESET_EVENT|RESETS_STANDARD_DISABLE)
 		c:RegisterEffect(e1)
 		if not c:IsLevel(4) then return end
-		local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.thfilter),tp,LOCATION_DECK|LOCATION_GRAVE,0,nil)
+		local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.thfilter),tp,LOCATION_DECK|LOCATION_REST,0,nil)
 		if #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 			local sg=g:Select(tp,1,1,nil)
@@ -59,19 +59,19 @@ function s.lvop(e,tp,eg,ep,ev,re,r,rp,c)
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
-	if chkc then return chkc:IsOnField() and c:IsControler(tp) and chkc~=c and chkc:IsAbleToGrave() end
-	if chk==0 then return c:IsAbleToGrave() and Duel.IsExistingTarget(Card.IsAbleToGrave,tp,LOCATION_ONFIELD,0,1,c) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local g=Duel.SelectTarget(tp,Card.IsAbleToGrave,tp,LOCATION_ONFIELD,0,1,1,c)
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,g+c,2,tp,0)
+	if chkc then return chkc:IsOnField() and c:IsControler(tp) and chkc~=c and chkc:IsAbleToRest() end
+	if chk==0 then return c:IsAbleToRest() and Duel.IsExistingTarget(Card.IsAbleToRest,tp,LOCATION_ONFIELD,0,1,c) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	local g=Duel.SelectTarget(tp,Card.IsAbleToRest,tp,LOCATION_ONFIELD,0,1,1,c)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,g+c,2,tp,0)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
 	if not (c:IsRelateToEffect(e) and tc:IsRelateToEffect(e)) then return end
-	if Duel.SendtoGrave(Group.CreateGroup(c,tc),REASON_EFFECT)==2
-		and Duel.GetOperatedGroup():FilterCount(Card.IsLocation,nil,LOCATION_GRAVE)==2 then
+	if Duel.SendtoRest(Group.CreateGroup(c,tc),REASON_EFFECT)==2
+		and Duel.GetOperatedGroup():FilterCount(Card.IsLocation,nil,LOCATION_REST)==2 then
 		Duel.Draw(tp,1,REASON_EFFECT)
 	end
 end

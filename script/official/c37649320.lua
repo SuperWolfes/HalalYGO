@@ -2,7 +2,7 @@
 --Paleozoic Opabinia
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Xyz Summon Procedure
 	Xyz.AddProcedure(c,nil,2,2)
 	--Unaffected by monsters' effects
@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetValue(s.efilter)
 	c:RegisterEffect(e1)
-	--Add 1 "Paleozoic" Trap Card from hand to the GY
+	--Add 1 "Paleozoic" Trap Card from hand to the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)

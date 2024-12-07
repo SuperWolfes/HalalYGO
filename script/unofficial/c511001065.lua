@@ -18,19 +18,19 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return rp~=tp and eg:IsExists(s.filter,1,nil,tp)
 end
 function s.tdfilter(c)
-	return c:IsSpellTrap() and c:IsAbleToDeck() 
+	return c:IsActionalTrap() and c:IsAbleToDeck() 
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAttackPos,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil) 
-		and Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,nil) end
+		and Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_REST,LOCATION_REST,1,nil) end
 	local g=Duel.GetMatchingGroup(Card.IsAttackPos,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
-	local sg=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,nil)
+	local sg=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_REST,LOCATION_REST,nil)
 	Duel.SetOperationInfo(0,CATEGORY_POSITION,g,#g,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,sg,#sg,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(Card.IsAttackPos,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
-	local sg=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,nil)
+	local sg=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_REST,LOCATION_REST,nil)
 	if Duel.ChangePosition(g,POS_FACEUP_DEFENSE,POS_FACEUP_DEFENSE,0,0)>0 then
 		if #sg>0 then
 			Duel.BreakEffect()

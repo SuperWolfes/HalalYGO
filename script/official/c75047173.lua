@@ -15,13 +15,13 @@ function s.spfilter(c)
 	return c:IsType(TYPE_FUSION) and c:ListsArchetypeAsMaterial(0x8)
 end
 function s.fextra(e,tp,mg)
-	return Duel.GetMatchingGroup(aux.NecroValleyFilter(Fusion.IsMonsterFilter(Card.IsAbleToDeck)),tp,LOCATION_GRAVE,0,nil)+
+	return Duel.GetMatchingGroup(aux.RestValleyFilter(Fusion.IsMonsterFilter(Card.IsAbleToDeck)),tp,LOCATION_REST,0,nil)+
 		Duel.GetMatchingGroup(aux.FaceupFilter(Fusion.IsMonsterFilter(Card.IsAbleToDeck)),tp,LOCATION_REMOVED,0,nil)
 end
 function s.extraop(e,tc,tp,sg)
 	local rg=sg:Filter(Card.IsFacedown,nil)
 	if #rg>0 then Duel.ConfirmCards(1-tp,rg) end
-	local gyrmg=sg:Filter(Card.IsLocation,nil,LOCATION_GRAVE+LOCATION_REMOVED)
+	local gyrmg=sg:Filter(Card.IsLocation,nil,LOCATION_REST+LOCATION_REMOVED)
 	if #gyrmg>0 then Duel.HintSelection(gyrmg,true) end
 	Duel.SendtoDeck(sg,nil,SEQ_DECKBOTTOM,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
 	local ct=Duel.GetOperatedGroup():FilterCount(Card.IsLocation,nil,LOCATION_DECK)

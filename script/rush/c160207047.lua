@@ -33,7 +33,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()
 	if tc and tc:IsRelateToEffect(e) and Duel.Destroy(tc,REASON_EFFECT)>0 then
 		local g=Duel.GetMatchingGroup(s.desfilter,tp,0,LOCATION_MZONE,nil)
-		if not Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_GRAVE,0,1,nil) and #g>0 then
+		if not Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_REST,0,1,nil) and #g>0 then
 			Duel.BreakEffect()
 			Duel.Destroy(g,REASON_EFFECT)
 		end

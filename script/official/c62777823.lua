@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 s.listed_series={0x18c}
-s.listed_names={CARD_R_ACE_HYDRANT}
+s.listed_names={CARD_R_ACE_HYDDENNT}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,0x18c),tp,LOCATION_MZONE,0,1,nil)
 end
@@ -52,7 +52,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e3:SetValue(1)
 		e3:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 		tc:RegisterEffect(e3)
-		if not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_R_ACE_HYDRANT),tp,LOCATION_ONFIELD,0,1,nil) then return end
+		if not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_R_ACE_HYDDENNT),tp,LOCATION_ONFIELD,0,1,nil) then return end
 		--Cannot be used as material for a Fusion/Synchro/Xyz/Link Summon
 		local e4=Effect.CreateEffect(c)
 		e4:SetDescription(aux.Stringid(id,1))

@@ -26,6 +26,6 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
 	local tc=Duel.SelectMatchingCard(tp,s.ffilter,tp,LOCATION_DECK,0,1,1,nil,tp):GetFirst()
 	if tc then
-		Duel.ActivateFieldSpell(tc,e,tp,eg,ep,ev,re,r,rp)
+		Duel.ActivateFieldActional(tc,e,tp,eg,ep,ev,re,r,rp)
 	end
 end

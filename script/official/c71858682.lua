@@ -3,10 +3,10 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Synchro Summon procedure
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
-	--Face-up cards in your Spell & Trap Zone cannot be destroyed by card effects
+	--Face-up cards in your Actional & Trap Zone cannot be destroyed by card effects
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
@@ -54,17 +54,17 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.plfilter(c,tp)
 	return c:IsSetCard(SET_CENTURION) and c:IsMonster() and not c:IsType(TYPE_SYNCHRO)
-		and c:IsFaceup() and not c:IsForbidden() and c:CheckUniqueOnField(tp)
+		and c:IsFaceup() and not c:IsUnliked() and c:CheckUniqueOnField(tp)
 end
 function s.pltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and Duel.IsExistingMatchingCard(s.plfilter,tp,LOCATION_GRAVE|LOCATION_REMOVED,0,1,nil,tp) end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_LEAVE_GRAVE,nil,1,tp,0)
+		and Duel.IsExistingMatchingCard(s.plfilter,tp,LOCATION_REST|LOCATION_REMOVED,0,1,nil,tp) end
+	Duel.SetPossibleOperationInfo(0,CATEGORY_LEAVE_REST,nil,1,tp,0)
 end
 function s.plop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
-	local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.plfilter),tp,LOCATION_GRAVE|LOCATION_REMOVED,0,1,1,nil,tp):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.plfilter),tp,LOCATION_REST|LOCATION_REMOVED,0,1,1,nil,tp):GetFirst()
 	if tc and Duel.MoveToField(tc,tp,tp,LOCATION_SZONE,POS_FACEUP,true) then
 		--Treated as a Continuous Trap
 		local e1=Effect.CreateEffect(e:GetHandler())

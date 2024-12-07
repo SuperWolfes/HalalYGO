@@ -5,9 +5,9 @@ local s,id=GetID()
 function s.initial_effect(c)
 	c:RegisterEffect(Fusion.CreateSummonEff({handler=c,fusfilter=aux.FilterBoolFunction(Card.IsRace,RACE_DRAGON),stage2=s.stage2}))
 end
-s.listed_names={CARD_GAIA_CHAMPION}
+s.listed_names={CARD_BIA_CHAMPION}
 function s.stage2(e,tc,tp,sg,chk)
-	if chk==1 and tc:IsCode(CARD_GAIA_CHAMPION) then
+	if chk==1 and tc:IsCode(CARD_BIA_CHAMPION) then
 		--atk gain
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)

@@ -1,10 +1,10 @@
---Last Gamble
+--Last Chance
 local s,id=GetID()
 function s.initial_effect(c)
 	--skill
 	aux.AddPreDrawSkillProcedure(c,1,false,s.flipcon,s.flipop)
 end
-s.roll_dice=true
+s.roll_suffice=true
 function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 	--condition
 	return Duel.GetCurrentChain()==0 and Duel.GetTurnCount()==5
@@ -31,6 +31,6 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	--opd register
 	Duel.RegisterFlagEffect(ep,id,RESET_PHASE+PHASE_END,0,0)
 	Duel.DiscardHand(tp,Card.IsDiscardable,2,2,REASON_COST+REASON_DISCARD)
-	local dc=Duel.TossDice(tp,1)
+	local dc=Duel.TossSuffice(tp,1)
 	Duel.Draw(tp,dc,REASON_EFFECT)
 end

@@ -1,4 +1,4 @@
---Rank-Up-Magic Skip Force
+--Rank-Up-Ment Skip Fcoree
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

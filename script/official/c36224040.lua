@@ -1,5 +1,5 @@
 --ＲＵＭ－ゼアル・フォース
---Rank-Up-Magic ZEXAL Force
+--Rank-Up-Ment ZEXAL Fcoree
 --Logical Nonsense
 
 --Substitute ID
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_DRAW)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e2:SetCountLimit(1,id)
 	e2:SetCost(aux.bfgcost)

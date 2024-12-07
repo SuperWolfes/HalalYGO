@@ -1,5 +1,5 @@
 --ネクロバレーの玉座
---Necrovalley Throne
+--Restvalley Throne
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)

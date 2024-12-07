@@ -1,5 +1,5 @@
 --魔導騎士ギルティア－ソウル・スピア
---Giltia the D. Knight - Soul Spear
+--Giltia the D. Knight - Miss Spear
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

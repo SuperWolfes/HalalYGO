@@ -25,7 +25,7 @@ function s.mltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_DESTROY,g,#g,0,0)
 end
 function s.cfilter(c)
-	return c:IsLocation(LOCATION_GRAVE) and c:IsRace(RACE_GALAXY) and c:IsAttribute(ATTRIBUTE_DARK)
+	return c:IsLocation(LOCATION_REST) and c:IsRace(RACE_GALAXY) and c:IsAttribute(ATTRIBUTE_DARK)
 end
 function s.desfilter(c)
 	return c:IsFaceup() and c:IsLevelBelow(8) and c:IsNotMaximumModeSide()

@@ -1,11 +1,11 @@
 --No.25 重装光学撮影機フォーカス・フォース (Anime)
---Number 25: Force Focus (Anime)
+--Number 25: Fcoree Focus (Anime)
 Duel.LoadCardScript("c64554883.lua")
 local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz Summon
 	Xyz.AddProcedure(c,nil,6,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Negate opponent's monster effect
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

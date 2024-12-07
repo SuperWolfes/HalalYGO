@@ -1,5 +1,5 @@
 --エクシーズ・ソウル
---Xyz Soul
+--Xyz Miss
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -18,12 +18,12 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsType(TYPE_XYZ) end
-	if chk==0 then return Duel.IsExistingTarget(Card.IsType,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,nil,TYPE_XYZ)
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsType(TYPE_XYZ) end
+	if chk==0 then return Duel.IsExistingTarget(Card.IsType,tp,LOCATION_REST,LOCATION_REST,1,nil,TYPE_XYZ)
 		and Duel.IsExistingMatchingCard(Card.IsFaceup,tp,LOCATION_MZONE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local g=Duel.SelectTarget(tp,Card.IsType,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,1,nil,TYPE_XYZ)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOEXTRA,g,1,tp,LOCATION_GRAVE)
+	local g=Duel.SelectTarget(tp,Card.IsType,tp,LOCATION_REST,LOCATION_REST,1,1,nil,TYPE_XYZ)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOEXTRA,g,1,tp,LOCATION_REST)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
@@ -39,7 +39,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			e1:SetValue(atk)
 			sc:RegisterEffect(e1)
 		end
-		if tc:IsAbleToDeck() and not tc:IsHasEffect(EFFECT_NECRO_VALLEY)
+		if tc:IsAbleToDeck() and not tc:IsHasEffect(EFFECT_REST_VALLEY)
 			and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 			Duel.BreakEffect()
 			Duel.SendtoDeck(tc,nil,2,REASON_EFFECT)

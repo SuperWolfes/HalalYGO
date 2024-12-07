@@ -2,7 +2,7 @@
 --マイケル・ローレンス・ディーによってスクリプト
 --Scripted by MLD, credit to TPD & Cybercatman
 --Updated and currently maintained by Larry126
-Duel.EnableUnofficialProc(PROC_DIVINE_HIERARCHY)
+Duel.EnableUnofficialProc(PROC_MEGA_HIERARCHY)
 local s,id=GetID()
 function s.initial_effect(c)
 	--X000
@@ -63,7 +63,7 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return eg:IsExists(s.atkfilter,1,nil,1-tp)
 		and (not c:IsHasEffect(EFFECT_CANNOT_ATTACK_ANNOUNCE)
-		and not c:IsHasEffect(EFFECT_FORBIDDEN) and not c:IsHasEffect(EFFECT_CANNOT_ATTACK)
+		and not c:IsHasEffect(EFFECT_UNLIKED) and not c:IsHasEffect(EFFECT_CANNOT_ATTACK)
 		and not Duel.IsPlayerAffectedByEffect(tp,EFFECT_CANNOT_ATTACK_ANNOUNCE)
 		and not Duel.IsPlayerAffectedByEffect(tp,EFFECT_CANNOT_ATTACK)
 		or c:IsHasEffect(EFFECT_UNSTOPPABLE_ATTACK))

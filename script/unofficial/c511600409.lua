@@ -1,5 +1,5 @@
 --機皇帝スキエル∞ (TF5)
---Meklord Emperor Skiel ∞ (TF5)
+--Mekwatcher Emperor Skiel ∞ (TF5)
 Duel.LoadScript("c420.lua")
 local s,id=GetID()
 function s.initial_effect(c)

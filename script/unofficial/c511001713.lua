@@ -18,8 +18,8 @@ function s.con(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:IsAbleToGraveAsCost() and Duel.SelectEffectYesNo(tp,c) 
-		and Duel.SendtoGrave(c,REASON_COST+REASON_REPLACE)>0 then
+	if c:IsAbleToRestAsCost() and Duel.SelectEffectYesNo(tp,c) 
+		and Duel.SendtoRest(c,REASON_COST+REASON_REPLACE)>0 then
 		local cid=Duel.GetChainInfo(ev,CHAININFO_CHAIN_ID)
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_FIELD)

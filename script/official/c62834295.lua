@@ -1,5 +1,5 @@
 --オルフェゴール・アインザッツ
---Orcustrated Einsatz
+--Coreustrated Einsatz
 --AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
@@ -8,10 +8,10 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--Send to GY or banish 1 "Orcust" or "World Legacy" monster from your hand/Deck
+	--Send to RP or banish 1 "Coreust" or "World Legacy" monster from your hand/Deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
-	e2:SetCategory(CATEGORY_TOGRAVE+CATEGORY_REMOVE)
+	e2:SetCategory(CATEGORY_TOREST+CATEGORY_REMOVE)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
 	e2:SetCode(EVENT_SUMMON_SUCCESS)
@@ -30,11 +30,11 @@ function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(Card.IsSummonPlayer,1,nil,1-tp)
 end
 function s.tgfilter(c)
-	return (c:IsSetCard(0xfe) or c:IsSetCard(0x11b)) and c:IsMonster() and (c:IsAbleToGrave() or c:IsAbleToRemove())
+	return (c:IsSetCard(0xfe) or c:IsSetCard(0x11b)) and c:IsMonster() and (c:IsAbleToRest() or c:IsAbleToRemove())
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil) end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK+LOCATION_HAND)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK+LOCATION_HAND)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_REMOVE,nil,1,tp,LOCATION_DECK+LOCATION_HAND)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
@@ -42,8 +42,8 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK+LOCATION_HAND,0,1,1,nil)
 	if #g>0 then
 		local tc=g:GetFirst()
-		if tc and tc:IsAbleToGrave() and (not tc:IsAbleToRemove() or Duel.SelectYesNo(tp,aux.Stringid(id,2))) then
-			Duel.SendtoGrave(tc,REASON_EFFECT)
+		if tc and tc:IsAbleToRest() and (not tc:IsAbleToRemove() or Duel.SelectYesNo(tp,aux.Stringid(id,2))) then
+			Duel.SendtoRest(tc,REASON_EFFECT)
 		else
 			Duel.Remove(tc,POS_FACEUP,REASON_EFFECT)
 		end

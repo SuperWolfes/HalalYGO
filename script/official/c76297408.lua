@@ -1,5 +1,5 @@
 --魂粉砕
---Soul Demolition
+--Miss Demolition
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.rmcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_FIEND),tp,LOCATION_MZONE,0,1,nil)
+	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_TAINTED),tp,LOCATION_MZONE,0,1,nil)
 end
 function s.rmcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckLPCost(tp,500) end
@@ -32,12 +32,12 @@ function s.rfilter(c)
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	if chk==0 then return Duel.IsExistingTarget(s.rfilter,tp,0,LOCATION_MZONE+LOCATION_GRAVE,1,nil)
-		and Duel.IsExistingTarget(s.rfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingTarget(s.rfilter,tp,0,LOCATION_MZONE+LOCATION_REST,1,nil)
+		and Duel.IsExistingTarget(s.rfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g1=Duel.SelectTarget(tp,s.rfilter,tp,0,LOCATION_MZONE+LOCATION_GRAVE,1,1,nil)
+	local g1=Duel.SelectTarget(tp,s.rfilter,tp,0,LOCATION_MZONE+LOCATION_REST,1,1,nil)
 	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_REMOVE)
-	local g2=Duel.SelectTarget(1-tp,s.rfilter,1-tp,0,LOCATION_MZONE+LOCATION_GRAVE,1,1,nil)
+	local g2=Duel.SelectTarget(1-tp,s.rfilter,1-tp,0,LOCATION_MZONE+LOCATION_REST,1,1,nil)
 	g1:Merge(g2)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g1,#g1,0,0)
 end

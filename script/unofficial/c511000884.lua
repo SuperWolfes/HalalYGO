@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsSpellTrap() and c:IsCanTurnSet()
+	return c:IsFaceup() and c:IsActionalTrap() and c:IsCanTurnSet()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,0,LOCATION_ONFIELD,1,nil) end
@@ -19,7 +19,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local sg=Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_ONFIELD,nil)
 	local tc=sg:GetFirst()
 	while tc do
-		tc:CancelToGrave()
+		tc:CancelToRest()
 		Duel.ChangePosition(tc,POS_FACEDOWN)
 		tc=sg:GetNext()
 	end

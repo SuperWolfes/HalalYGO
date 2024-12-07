@@ -1,10 +1,10 @@
 --重起士道－ゴルドナイト
---Geminize Lord Golknight
+--Dualze Watcher Golknight
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	Gemini.AddProcedure(c)
-	--Search 1 Spell/Trap card that mentions "Gemini monster"
+	Dual.AddProcedure(c)
+	--Search 1 Actional/Trap card that mentions "Dual monster"
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
 	e1:SetCode(EVENT_SUMMON_SUCCESS)
 	e1:SetCountLimit(1,id)
-	e1:SetCondition(Gemini.EffectStatusCondition)
+	e1:SetCondition(Dual.EffectStatusCondition)
 	e1:SetTarget(s.thtg)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e3:SetCode(EFFECT_CHANGE_RACE)
 	e3:SetRange(LOCATION_MZONE)
-	e3:SetCondition(Gemini.EffectStatusCondition)
+	e3:SetCondition(Dual.EffectStatusCondition)
 	e3:SetValue(RACE_MACHINE)
 	c:RegisterEffect(e3)
 	--Gain 500 ATK
@@ -35,7 +35,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function s.thfilter(c)
-	return c:IsSpellTrap() and c:ListsCardType(TYPE_GEMINI) and c:IsAbleToHand()
+	return c:IsActionalTrap() and c:ListsCardType(TYPE_DUAL) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

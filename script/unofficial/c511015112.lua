@@ -93,7 +93,7 @@ function s.mfusop(e,tp,eg,ep,ev,re,r,rp)
 			local mat1=mg1:FilterSelect(tp,s.mfusfilter3,1,1,nil,c,tc,tp)
 			mat1:AddCard(c)
 			tc:SetMaterial(mat1)
-			Duel.SendtoGrave(mat1,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
+			Duel.SendtoRest(mat1,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
 			Duel.BreakEffect()
 			Duel.SpecialSummon(tc,SUMMON_TYPE_FUSION,tp,tp,false,false,POS_FACEUP)
 		else

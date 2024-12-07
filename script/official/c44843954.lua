@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_TOEXTRA)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCost(s.tedcost)
 	e2:SetTarget(s.tedtg)
 	e2:SetOperation(s.tedop)
@@ -65,7 +65,7 @@ function s.tedcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SendtoDeck(c,nil,SEQ_DECKBOTTOM,REASON_COST)
 end
 function s.tedfilter(c)
-	return c:IsCode(CARD_DREAMING_NEMLERIA) and c:IsFaceup() and c:IsAbleToExtra() and not c:IsForbidden()
+	return c:IsCode(CARD_DREAMING_NEMLERIA) and c:IsFaceup() and c:IsAbleToExtra() and not c:IsUnliked()
 end
 function s.tedtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and chkc:IsControler(tp) and s.tedfilter(chkc) end

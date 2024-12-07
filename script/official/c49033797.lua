@@ -1,5 +1,5 @@
 --禁断のトラペゾヘドロン
---Forbidden Trapezohedron
+--Unliked Trapezohedron
 local s,id=GetID()
 function s.initial_effect(c)
 	--Special Summon 1 monster from the Extra Deck
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.listed_series={SET_OUTER_ENTITY,SET_ELDER_ENTITY,SET_OLD_ENTITY}
+s.listed_series={SET_OUTER_ENTITY,SET_WISE_ENTITY,SET_OLD_ENTITY}
 function s.spfilter(c,e,tp,cat)
 	return c:IsSetCard(cat) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
@@ -22,7 +22,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 		if flag==(TYPE_FUSION|TYPE_SYNCHRO) then
 			return e:IsHasType(EFFECT_TYPE_ACTIVATE) and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,SET_OUTER_ENTITY)
 		elseif flag==(TYPE_SYNCHRO|TYPE_XYZ) then
-			return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,SET_ELDER_ENTITY)
+			return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,SET_WISE_ENTITY)
 		elseif flag==(TYPE_FUSION|TYPE_XYZ) then
 			return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,SET_OLD_ENTITY)
 		else
@@ -39,13 +39,13 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		if sc and Duel.SpecialSummon(sc,0,tp,tp,false,false,POS_FACEUP)>0 then
 			local c=e:GetHandler()
 			if c:IsRelateToEffect(e) then
-				c:CancelToGrave()
+				c:CancelToRest()
 				Duel.Overlay(sc,c)
 			end
 		end
 	elseif flag==(TYPE_SYNCHRO|TYPE_XYZ) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,SET_ELDER_ENTITY)
+		local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,SET_WISE_ENTITY)
 		if #g>0 then
 			Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 		end

@@ -1,5 +1,5 @@
 --アマゾネスの秘湯
---Amazoness Hot Spring
+--Amazonian Hot Spring
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -31,7 +31,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
 function s.pendfilter(c,tp)
-	return c:IsType(TYPE_PENDULUM) and not c:IsForbidden() and Duel.CheckPendulumZones(tp)
+	return c:IsType(TYPE_PENDULUM) and not c:IsUnliked() and Duel.CheckPendulumZones(tp)
 end
 function s.cfilter(c,tp)
 	return c:IsMonster() and c:IsSetCard(0x4) and (c:IsAbleToHand() or s.pendfilter(c,tp))

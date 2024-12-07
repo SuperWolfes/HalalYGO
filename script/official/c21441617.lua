@@ -1,5 +1,5 @@
 --オルフェゴール・スケルツォン
---Orcust Cymbal Skeleton
+--Coreust Cymbal Skeleton
 local s,id=GetID()
 function s.initial_effect(c)
 	-- special summon
@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetType(EFFECT_TYPE_IGNITION)
-	e1:SetRange(LOCATION_GRAVE)
+	e1:SetRange(LOCATION_REST)
 	e1:SetCountLimit(1,id)
 	e1:SetCost(aux.bfgcost)
 	e1:SetCondition(s.spcon1)
@@ -25,20 +25,20 @@ end
 s.listed_series={0x11b}
 s.listed_names={id}
 function s.spcon1(e,tp,eg,ep,ev,re,r,rp)
-	return not Duel.IsPlayerAffectedByEffect(tp,CARD_ORCUSTRATED_BABEL)
+	return not Duel.IsPlayerAffectedByEffect(tp,CARD_COREUSTRATED_BABEL)
 end
 function s.spcon2(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsPlayerAffectedByEffect(tp,CARD_ORCUSTRATED_BABEL)
+	return Duel.IsPlayerAffectedByEffect(tp,CARD_COREUSTRATED_BABEL)
 end
 function s.spfilter(c,e,tp)
 	return c:IsSetCard(0x11b) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and not c:IsCode(id)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.spfilter(chkc,e,tp) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and s.spfilter(chkc,e,tp) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_GRAVE,0,1,e:GetHandler(),e,tp) end
+		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,0,1,e:GetHandler(),e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local tg=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,e:GetHandler(),e,tp)
+	local tg=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_REST,0,1,1,e:GetHandler(),e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,tg,1,0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)

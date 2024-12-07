@@ -1,5 +1,5 @@
 --RDM－ヌメロン・フォール (Anime)
---Rank-Down-Magic Numeron Fall (Anime)
+--Rank-Down-Ment Numeron Fall (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion Summon Procedure
 	Fusion.AddProcMix(c,true,true,CARD_FLAME_SWORDSMAN,36319131)
 	--Destroy 1 monster and inflict damage

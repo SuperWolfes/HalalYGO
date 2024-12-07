@@ -1,4 +1,4 @@
---Spirit Sword of Sealing
+--Guardian Sword of Sealing
 local s,id=GetID()
 function s.initial_effect(c)
 	--remove
@@ -60,7 +60,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local e5=Effect.CreateEffect(c)
 		e5:SetProperty(EFFECT_FLAG_DELAY)
 		e5:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
-		e5:SetCode(EVENT_TO_GRAVE)
+		e5:SetCode(EVENT_TO_REST)
 		e5:SetRange(LOCATION_SZONE)
 		e5:SetLabelObject(tc)
 		e5:SetLabel(tc:GetOwner())

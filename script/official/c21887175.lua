@@ -3,8 +3,8 @@
 --scripted by andré
 local s,id=GetID()
 function s.initial_effect(c)
-	--revive limit
-	c:EnableReviveLimit()
+	--awake limit
+	c:EnableAwakeLimit()
 	--link summon
 	Link.AddProcedure(c,s.mfilter,2)
 	--cannot be effect target
@@ -40,7 +40,7 @@ function s.initial_effect(c)
 	e4:SetCategory(CATEGORY_TODECK)
 	e4:SetType(EFFECT_TYPE_TRIGGER_O+EFFECT_TYPE_SINGLE)
 	e4:SetProperty(EFFECT_FLAG_DELAY)
-	e4:SetCode(EVENT_TO_GRAVE)
+	e4:SetCode(EVENT_TO_REST)
 	e4:SetCondition(s.tdcondition)
 	e4:SetTarget(s.tdtarget)
 	e4:SetOperation(s.tdoperation)

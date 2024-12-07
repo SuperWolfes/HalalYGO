@@ -1,5 +1,5 @@
 --魔妖遊行
---Mayakashi Mayhem
+--Mayashi Mayhem
 --Logical Nonsense
 
 --Substitute ID
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	--Apply 1 of the 4 different options
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_DRAW+CATEGORY_TOGRAVE+CATEGORY_DAMAGE)
+	e2:SetCategory(CATEGORY_DRAW+CATEGORY_TOREST+CATEGORY_DAMAGE)
 	e2:SetType(EFFECT_TYPE_ACTIVATE)
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
@@ -31,12 +31,12 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 s.listed_names={}
-	--Lists "Mayakashi" archetype
+	--Lists "Mayashi" archetype
 s.listed_series={0x121}
 
-	--Zombie synchro monster special summoned anywhere but extra deck
+	--Toxic synchro monster special summoned anywhere but extra deck
 function s.cfilter(c)
-	return c:IsRace(RACE_ZOMBIE) and c:IsType(TYPE_SYNCHRO) 
+	return c:IsRace(RACE_TOXIC) and c:IsType(TYPE_SYNCHRO) 
 		and c:GetSummonLocation()~=LOCATION_EXTRA
 end
 	--Not really a cost, make the effect once per chain
@@ -48,9 +48,9 @@ end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil) and not e:GetHandler():IsStatus(STATUS_CHAINING)
 end
-	--Check for "Mayakashi" spell/trap, except itself
+	--Check for "Mayashi" actional/trap, except itself
 function s.setfilter(c)
-	return c:IsSetCard(0x121) and c:IsType(TYPE_TRAP+TYPE_SPELL) and c:IsSSetable() and not c:IsCode(id)
+	return c:IsSetCard(0x121) and c:IsType(TYPE_TRAP+TYPE_ACTIONAL) and c:IsSSetable() and not c:IsCode(id)
 end
 	--Activation legality
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -60,7 +60,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetTargetPlayer(1-tp)
 	Duel.SetTargetParam(800)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,800)
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,0,LOCATION_MZONE)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,0,LOCATION_MZONE)
 end
 	--Apply 1 of the following effects
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
@@ -92,7 +92,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if opval[op]==1 then --Draw 1 card
 		Duel.Draw(tp,1,REASON_EFFECT)
 		Duel.RegisterFlagEffect(tp,id,RESET_PHASE+PHASE_END,0,1)
-	elseif opval[op]==2 then --Set 1 "Mayakashi" spell/trap from deck
+	elseif opval[op]==2 then --Set 1 "Mayashi" actional/trap from deck
 		local g=Duel.GetMatchingGroup(s.setfilter,tp,LOCATION_DECK,0,nil)
 		if #g>0 then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
@@ -101,16 +101,16 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			Duel.ConfirmCards(1-tp,sg)
 			Duel.RegisterFlagEffect(tp,id+1,RESET_PHASE+PHASE_END,0,1)
 		end
-	elseif opval[op]==3 then --Send opponent's monster with lowest ATK to GY
+	elseif opval[op]==3 then --Send opponent's monster with lowest ATK to RP
 		local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,0,LOCATION_MZONE,nil)
 		if #g>0 then
 			local tg=g:GetMinGroup(Card.GetAttack)
 			if #tg>1 then
-				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 				local sg=tg:Select(tp,1,1,nil)
 				Duel.HintSelection(sg)
-				Duel.SendtoGrave(sg,REASON_EFFECT)
-			else Duel.SendtoGrave(tg,REASON_EFFECT) end
+				Duel.SendtoRest(sg,REASON_EFFECT)
+			else Duel.SendtoRest(tg,REASON_EFFECT) end
 		Duel.RegisterFlagEffect(tp,id+2,RESET_PHASE+PHASE_END,0,1)
 		end
 	elseif opval[op]==4 then --Inflict 800 damage

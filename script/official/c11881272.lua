@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetCondition(s.tgocon)
 	e2:SetValue(aux.tgoval)
 	c:RegisterEffect(e2)
-	--Activate 1 Field Spell
+	--Activate 1 Field Actional
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
@@ -53,7 +53,7 @@ function s.atkval(e,c)
 	return def>=0 and def or 0
 end
 function s.actfilter(c,tp)
-	return c:IsFieldSpell() and c:GetActivateEffect():IsActivatable(tp,true,true)
+	return c:IsFieldActional() and c:GetActivateEffect():IsActivatable(tp,true,true)
 end
 function s.acttg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.actfilter,tp,LOCATION_HAND|LOCATION_DECK,0,1,nil,tp) end
@@ -61,7 +61,7 @@ end
 function s.actop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
 	local sc=Duel.SelectMatchingCard(tp,s.actfilter,tp,LOCATION_HAND|LOCATION_DECK,0,1,1,nil,tp):GetFirst()
-	Duel.ActivateFieldSpell(sc,e,tp,eg,ep,ev,re,r,rp)
+	Duel.ActivateFieldActional(sc,e,tp,eg,ep,ev,re,r,rp)
 end
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	local ec=e:GetHandler():GetEquipTarget()
@@ -69,8 +69,8 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 		and ec:IsStatus(STATUS_OPPO_BATTLE) and ec:CanChainAttack()
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
+	Duel.SendtoRest(e:GetHandler(),REASON_COST)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ChainAttack()

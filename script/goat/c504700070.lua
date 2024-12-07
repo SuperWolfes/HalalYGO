@@ -21,11 +21,11 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local d=Duel.GetAttackTarget()
 	if a:IsControler(tp) then 
 		e:SetLabelObject(d)
-		return a:IsFaceup() and a:IsRace(RACE_FIEND) and a:IsRelateToBattle()
+		return a:IsFaceup() and a:IsRace(RACE_TAINTED) and a:IsRelateToBattle()
 			and d and d:IsFaceup() and d:IsRelateToBattle()
 	elseif d and d:IsControler(tp) then
 		e:SetLabelObject(a)
-		return d:IsFaceup() and d:IsRace(RACE_FIEND) and d:IsRelateToBattle()
+		return d:IsFaceup() and d:IsRace(RACE_TAINTED) and d:IsRelateToBattle()
 			and a and a:IsFaceup() and a:IsRelateToBattle()
 	end
 end

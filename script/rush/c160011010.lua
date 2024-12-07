@@ -16,7 +16,7 @@ end
 function s.filter(c)
 	if c:GetEquipCount()==0 then return false end
 	local eqg=c:GetEquipGroup()
-	return eqg:IsExists(Card.IsSpell,1,nil)
+	return eqg:IsExists(Card.IsActional,1,nil)
 end
 function s.con(e)
 	return Duel.IsExistingMatchingCard(s.filter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)

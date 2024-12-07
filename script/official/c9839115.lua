@@ -1,9 +1,9 @@
 --月朧龍ヴァグナワ
---Vagnawa the Moon-Eating Dragon
+--Vagnawa the Horizon-Eating Dragon
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Synchro Summon procedure
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	--Check the Tuner material's Level

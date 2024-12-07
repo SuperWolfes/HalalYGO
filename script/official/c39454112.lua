@@ -10,16 +10,16 @@ function s.initial_effect(c)
 	--Change die result
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e2:SetCode(EVENT_TOSS_DICE_NEGATE)
+	e2:SetCode(EVENT_TOSS_SUFFICE_NEGATE)
 	e2:SetRange(LOCATION_SZONE)
-	e2:SetOperation(s.diceop)
+	e2:SetOperation(s.sufficeop)
 	c:RegisterEffect(e2)
 end
-function s.diceop(e,tp,eg,ep,ev,re,r,rp)
+function s.sufficeop(e,tp,eg,ep,ev,re,r,rp)
 	local cc=Duel.GetCurrentChain()
 	local cid=Duel.GetChainInfo(cc,CHAININFO_CHAIN_ID)
 	if s[0]~=cid  and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
-			local dc={Duel.GetDiceResult()}
+			local dc={Duel.GetSufficeResult()}
 			local ac=1
 			local ct=(ev&0xff)+(ev>>16)
 			Duel.Hint(HINT_CARD,0,id)
@@ -29,7 +29,7 @@ function s.diceop(e,tp,eg,ep,ev,re,r,rp)
 			end
 			if dc[ac]==1 or dc[ac]==3 or dc[ac]==5 then	dc[ac]=6
 			else dc[ac]=1 end
-		Duel.SetDiceResult(table.unpack(dc))
+		Duel.SetSufficeResult(table.unpack(dc))
 		s[0]=cid
 	end
 end

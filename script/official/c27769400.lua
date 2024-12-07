@@ -46,7 +46,7 @@ function s.checkop1(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.checkop2(e,tp,eg,ep,ev,re,r,rp)
 	if s[1]<2 or s[0]:GetCount()==0 then return end
-	local g=eg:Filter(Card.IsLocation,nil,LOCATION_GRAVE)
+	local g=eg:Filter(Card.IsLocation,nil,LOCATION_REST)
 	s[0]:Sub(g)
 	if s[0]:GetCount()==0 then
 		Duel.RaiseEvent(e:GetHandler(),EVENT_CUSTOM+id,e,0,0,0,0)

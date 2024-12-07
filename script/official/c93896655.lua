@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,s.matfilter,1,1)
 	--search	
 	local e1=Effect.CreateEffect(c)
@@ -60,7 +60,7 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 		and e:GetLabel()==1
 end
 function s.thfilter(c)
-	return c:IsSetCard(0x2157) and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsSetCard(0x2157) and c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

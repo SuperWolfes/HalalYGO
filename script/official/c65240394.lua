@@ -25,7 +25,7 @@ function s.posop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.negop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.GetChainInfo(ev,CHAININFO_TYPE)==TYPE_SPELL and re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then
+	if Duel.GetChainInfo(ev,CHAININFO_TYPE)==TYPE_ACTIONAL and re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then
 		local g=Duel.GetChainInfo(ev,CHAININFO_TARGET_CARDS)
 		if #g~=1 then return end
 		local tc=g:GetFirst()

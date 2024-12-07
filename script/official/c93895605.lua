@@ -14,7 +14,7 @@ function s.initial_effect(c)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()
-	return tc:IsControler(tp) and tc:IsFaceup() and tc:IsRace(RACE_FIEND)
+	return tc:IsControler(tp) and tc:IsFaceup() and tc:IsRace(RACE_TAINTED)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end

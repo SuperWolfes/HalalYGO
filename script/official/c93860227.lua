@@ -1,21 +1,21 @@
 --Japanese name
---Necroquip Princess
+--Restquip Princess
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
-	--Fusion Materials: 1 monster equipped with a Monster Card + 1 Fiend Monster Card
-	Fusion.AddProcMix(c,true,true,s.eqmatfilter,s.fiendmatfilter)
-	--Must be Special Summoned by sending the materials to the GY
-	Fusion.AddContactProc(c,function(tp) return Duel.GetMatchingGroup(Card.IsAbleToGraveAsCost,tp,LOCATION_ONFIELD|LOCATION_HAND,0,nil) end,function(g) Duel.SendtoGrave(g,REASON_COST|REASON_MATERIAL) end,true)
-	--You can only control 1 "Necroquip Princess"
+	c:EnableAwakeLimit()
+	--Fusion Materials: 1 monster equipped with a Monster Card + 1 Tainted Monster Card
+	Fusion.AddProcMix(c,true,true,s.eqmatfilter,s.taintedmatfilter)
+	--Must be Special Summoned by sending the materials to the RP
+	Fusion.AddContactProc(c,function(tp) return Duel.GetMatchingGroup(Card.IsAbleToRestAsCost,tp,LOCATION_ONFIELD|LOCATION_HAND,0,nil) end,function(g) Duel.SendtoRest(g,REASON_COST|REASON_MATERIAL) end,true)
+	--You can only control 1 "Restquip Princess"
 	c:SetUniqueOnField(1,0,id)
 	--Activate 1 of these effects
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DELAY,EFFECT_FLAG2_CHECK_SIMULTANEOUS)
-	e1:SetCode(EVENT_TO_GRAVE)
+	e1:SetCode(EVENT_TO_REST)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1,id)
 	e1:SetCondition(s.effcon)
@@ -26,8 +26,8 @@ end
 function s.eqmatfilter(c)
 	return c:GetEquipGroup():IsExists(Card.IsMonsterCard,1,nil)
 end
-function s.fiendmatfilter(c,fc,sumtype,tp)
-	return c:IsMonsterCard() and c:IsRace(RACE_FIEND,fc,sumtype,tp)
+function s.taintedmatfilter(c,fc,sumtype,tp)
+	return c:IsMonsterCard() and c:IsRace(RACE_TAINTED,fc,sumtype,tp)
 end
 function s.effconfilter(c)
 	return c:IsMonster() and c:IsReason(REASON_COST) and c:IsPreviousLocation(LOCATION_HAND)
@@ -37,7 +37,7 @@ function s.effcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.eqfilter(c,tp)
 	return s.effconfilter(c) and c:CheckUniqueOnField(tp) and (c:IsControler(tp) or c:IsAbleToChangeControler())
-		and not c:IsForbidden() and c:IsLocation(LOCATION_GRAVE)
+		and not c:IsUnliked() and c:IsLocation(LOCATION_REST)
 end
 function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local b1=Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and eg:IsExists(s.eqfilter,1,nil,tp)
@@ -59,7 +59,7 @@ end
 function s.effop(e,tp,eg,ep,ev,re,r,rp)
 	local op=e:GetLabel()
 	if op==1 then
-		--Equip 1 of those monsters to this card as an Equip Spell that gives it 500 ATK
+		--Equip 1 of those monsters to this card as an Equip Actional that gives it 500 ATK
 		local c=e:GetHandler()
 		if not c:IsRelateToEffect(e) or c:IsFacedown() then return end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)

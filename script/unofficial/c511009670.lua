@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_PLANT),1,1)
 	--self destroy
 	local e1=Effect.CreateEffect(c)
@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.redtg)
 	e2:SetOperation(s.redop)
 	c:RegisterEffect(e2)
-	--to grave
+	--to rest
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(27655513,0))
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)

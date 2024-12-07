@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,160005032,160005007)
 	--Destroy all level 7 or lower monsters on the field
 	local e1=Effect.CreateEffect(c)

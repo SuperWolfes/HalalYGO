@@ -2,7 +2,7 @@
 --Starliege Paladynamo (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Xyz Summon procedure: 2 Level 4 LIGHT monsters
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGHT),4,2)
 	--Change a monster's ATK to 0 and negate the effects of all other face-up cards on the field

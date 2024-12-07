@@ -1,5 +1,5 @@
 --魔法の筒
---Magic Cylinder
+--Ment Cylinder
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

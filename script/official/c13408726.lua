@@ -3,11 +3,11 @@
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Pendulum Summon procedure
 	Pendulum.AddProcedure(c)
-	c:AddMustBeRitualSummoned()
-	--Banish 1 Spell/Trap on the field
+	c:AddMustBeLockedSummoned()
+	--Banish 1 Actional/Trap on the field
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_REMOVE)
@@ -56,10 +56,10 @@ function s.strmcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.strmconfilter,1,nil,tp)
 end
 function s.strmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsOnField() and chkc:IsSpellTrap() and chkc:IsAbleToRemove() end
-	if chk==0 then return Duel.IsExistingTarget(aux.AND(Card.IsSpellTrap,Card.IsAbleToRemove),tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) end
+	if chkc then return chkc:IsOnField() and chkc:IsActionalTrap() and chkc:IsAbleToRemove() end
+	if chk==0 then return Duel.IsExistingTarget(aux.AND(Card.IsActionalTrap,Card.IsAbleToRemove),tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectTarget(tp,aux.AND(Card.IsSpellTrap,Card.IsAbleToRemove),tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
+	local g=Duel.SelectTarget(tp,aux.AND(Card.IsActionalTrap,Card.IsAbleToRemove),tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,1,tp,0)
 end
 function s.strmop(e,tp,eg,ep,ev,re,r,rp)

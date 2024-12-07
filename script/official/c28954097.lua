@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.indestg)
 	e1:SetValue(1)
 	c:RegisterEffect(e1)
-	--Special Summon 1 monster that lists "Chimera Fusion"
+	--Special Summon 1 monster that lists "Chilean Fusion"
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -31,7 +31,7 @@ function s.initial_effect(c)
 	e3:SetCategory(CATEGORY_DISABLE)
 	e3:SetType(EFFECT_TYPE_QUICK_O)
 	e3:SetCode(EVENT_CHAINING)
-	e3:SetRange(LOCATION_MZONE|LOCATION_GRAVE)
+	e3:SetRange(LOCATION_MZONE|LOCATION_REST)
 	e3:SetCountLimit(1,{id,1})
 	e3:SetCondition(s.negcon)
 	e3:SetCost(aux.bfgcost)
@@ -39,13 +39,13 @@ function s.initial_effect(c)
 	e3:SetOperation(s.negop)
 	c:RegisterEffect(e3)
 end
-s.listed_names={id,CARD_CHIMERA_MYTHICAL_BEAST,CARD_CHIMERA_FUSION}
+s.listed_names={id,CARD_CHILEAN_MYTHICAL_BEAST,CARD_CHILEAN_FUSION}
 function s.indestg(e,c)
 	local handler=e:GetHandler()
 	return c==handler or c==handler:GetBattleTarget()
 end
 function s.spfilter(c,e,tp)
-	return c:ListsCode(CARD_CHIMERA_FUSION) and not c:IsCode(id) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:ListsCode(CARD_CHILEAN_FUSION) and not c:IsCode(id) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetMZoneCount(tp,e:GetHandler())>0
@@ -61,7 +61,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.negcon(e,tp,eg,ep,ev,re,r,rp)
-	if not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_CHIMERA_MYTHICAL_BEAST),tp,LOCATION_ONFIELD,0,1,nil) then return false end
+	if not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_CHILEAN_MYTHICAL_BEAST),tp,LOCATION_ONFIELD,0,1,nil) then return false end
 	return rp==1-tp and re:IsMonsterEffect() and re:GetActivateLocation()==LOCATION_MZONE
 end
 function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk)

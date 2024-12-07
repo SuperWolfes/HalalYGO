@@ -42,13 +42,13 @@ end
 function s.atfilter(c)
 	if not c:IsType(TYPE_XYZ) or not c:IsSetCard(0x48) then return false end
 	local no=c.xyz_number
-	return no and no>=101 and no<=107 and (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup())
+	return no and no>=101 and no<=107 and (c:IsLocation(LOCATION_REST) or c:IsFaceup())
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not tc:IsRelateToEffect(e) then return end
 	local ct=Duel.GetChainInfo(0,CHAININFO_TARGET_PARAM)
-	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.atfilter),tp,LOCATION_REMOVED+LOCATION_GRAVE,0,tc)
+	local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.atfilter),tp,LOCATION_REMOVED+LOCATION_REST,0,tc)
 	if Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)>0
 		and ct>0 and #g>0 and not tc:IsImmuneToEffect(e)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then

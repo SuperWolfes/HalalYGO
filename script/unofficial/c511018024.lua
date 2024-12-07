@@ -1,5 +1,5 @@
 --Ｄ－ＨＥＲＯ ダイハードガイ (Anime)
---Destiny HERO - Captain Tenacious (Anime)
+--Destrudic HERO - Captain Tenacious (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--
@@ -25,9 +25,9 @@ function s.filter(c,e,tp,tid)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local tid=Duel.GetTurnCount()
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter(chkc,e,tp,tid) end
-	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil,e,tp,tid) end
-	local tg=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp,tid)
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter(chkc,e,tp,tid) end
+	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil,e,tp,tid) end
+	local tg=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil,e,tp,tid)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,tg,1,0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)

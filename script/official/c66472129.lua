@@ -1,5 +1,5 @@
 --Japanese name
---Dipsea Fiend
+--Dipsea Tainted
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -27,10 +27,10 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local att=Duel.AnnounceAttribute(tp,1,ATTRIBUTE_ALL&~ATTRIBUTE_WATER)
 	e:SetLabel(att)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,tp,0)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND|LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND|LOCATION_REST)
 end
 function s.spfilter(c,e,tp,attr)
-	return c:IsLevelBelow(4) and c:IsRace(RACE_FIEND) and not c:IsOriginalAttribute(attr)
+	return c:IsLevelBelow(4) and c:IsRace(RACE_TAINTED) and not c:IsOriginalAttribute(attr)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
@@ -52,7 +52,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 			e1:SetValue(attr)
 			e1:SetReset(RESET_EVENT|RESETS_STANDARD_DISABLE|RESET_PHASE|PHASE_END)
 			c:RegisterEffect(e1)
-			local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_HAND|LOCATION_GRAVE,0,nil,e,tp,attr)
+			local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.spfilter),tp,LOCATION_HAND|LOCATION_REST,0,nil,e,tp,attr)
 			if c:IsAttribute(attr) and target_player==1-tp and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 				and #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,3)) then
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
@@ -64,14 +64,14 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 			end
 		end
 	end
-	--Cannot Special Summon from the Extra Deck, except Fiend Monsters
+	--Cannot Special Summon from the Extra Deck, except Tainted Monsters
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,4))
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CLIENT_HINT)
 	e2:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
 	e2:SetTargetRange(1,0)
-	e2:SetTarget(function(e,c) return c:IsLocation(LOCATION_EXTRA) and not c:IsRace(RACE_FIEND) end)
+	e2:SetTarget(function(e,c) return c:IsLocation(LOCATION_EXTRA) and not c:IsRace(RACE_TAINTED) end)
 	e2:SetReset(RESET_PHASE|PHASE_END)
 	Duel.RegisterEffect(e2,tp)
 end

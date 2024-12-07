@@ -3,11 +3,11 @@
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Contact Fusion procedure
 	Fusion.AddProcMix(c,true,true,CARD_SANGA_OF_THE_THUNDER,CARD_KAZEJIN)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,true)
-	--Add 1 Spell/Trap that lists "Suijin", "Kazejin" and "Sanga of the Thunder" from Deck to hand
+	--Add 1 Actional/Trap that lists "Suijin", "Kazejin" and "Sanga of the Thunder" from Deck to hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -37,7 +37,7 @@ function s.contactop(g)
 	Duel.Remove(g,POS_FACEUP,REASON_COST+REASON_MATERIAL)
 end
 function s.thfilter(c)
-	return c:IsSpellTrap() and c:IsAbleToHand() and c:ListsCode(CARD_SANGA_OF_THE_THUNDER) and c:ListsCode(CARD_KAZEJIN) and c:ListsCode(CARD_SUIJIN)
+	return c:IsActionalTrap() and c:IsAbleToHand() and c:ListsCode(CARD_SANGA_OF_THE_THUNDER) and c:ListsCode(CARD_KAZEJIN) and c:ListsCode(CARD_SUIJIN)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

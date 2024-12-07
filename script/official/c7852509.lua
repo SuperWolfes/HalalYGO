@@ -1,4 +1,4 @@
---Loop of Destruction
+--Loop of Mismatching
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

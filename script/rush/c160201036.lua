@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.recfilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_NORMAL) and c:IsRace(RACE_PSYCHIC) and c:IsLevelBelow(2) and c:GetAttack()>0
+	return c:IsFaceup() and c:IsType(TYPE_NORMAL) and c:IsRace(RACE_MENTAL) and c:IsLevelBelow(2) and c:GetAttack()>0
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(aux.FilterMaximumSideFunctionEx(s.recfilter),tp,LOCATION_MZONE,0,1,nil) end

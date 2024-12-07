@@ -29,13 +29,13 @@ function s.initial_effect(c)
 end
 s.listed_series={SET_CHRONOMALY,SET_NUMBER}
 function s.atkcostfilter(c)
-	return c:IsSetCard(SET_CHRONOMALY) and (c:IsLevelAbove(1) or c:IsRankAbove(1)) and c:IsAbleToGraveAsCost()
+	return c:IsSetCard(SET_CHRONOMALY) and (c:IsLevelAbove(1) or c:IsRankAbove(1)) and c:IsAbleToRestAsCost()
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.atkcostfilter,tp,LOCATION_DECK|LOCATION_EXTRA,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tc=Duel.SelectMatchingCard(tp,s.atkcostfilter,tp,LOCATION_DECK|LOCATION_EXTRA,0,1,1,nil):GetFirst()
-	Duel.SendtoGrave(tc,REASON_COST)
+	Duel.SendtoRest(tc,REASON_COST)
 	local lvrnk=tc:HasLevel() and tc:GetLevel() or tc:GetRank()
 	e:SetLabel(lvrnk)
 end

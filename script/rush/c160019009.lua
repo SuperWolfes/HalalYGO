@@ -1,12 +1,12 @@
 --ダイスキー・リリス
---Dice Key Lilith
+--Suffice Key Lipsick
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	--dice
+	--suffice
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,1))
-	e1:SetCategory(CATEGORY_SPECIAL_SUMMON|CATEGORY_DICE)
+	e1:SetCategory(CATEGORY_SPECIAL_SUMMON|CATEGORY_SUFFICE)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1)
@@ -15,27 +15,27 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 end
-s.roll_dice=true
+s.roll_suffice=true
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,nil) end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,0,tp,1)
+	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,1)
 end
 function s.spfilter(c,e,tp)
-	return c:IsRace(RACE_FAIRY) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP)
+	return c:IsRace(RACE_WANDERER) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	--Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,1,nil)
-	if Duel.SendtoGrave(g,REASON_COST)<1 then return end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,1,nil)
+	if Duel.SendtoRest(g,REASON_COST)<1 then return end
 	--Effect
-	local d=Duel.TossDice(tp,1)
+	local d=Duel.TossSuffice(tp,1)
 	if d==1 or d==2 or d==3 then
-		c:AddDoubleTribute(id,s.otfilter,s.eftg,RESETS_STANDARD_PHASE_END,FLAG_DOUBLE_TRIB_FAIRY)
+		c:AddDoubleTribute(id,s.otfilter,s.eftg,RESETS_STANDARD_PHASE_END,FLAG_DOUBLE_TRIB_WANDERER)
 	else
 		local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_HAND,0,nil,e,tp)
 		if Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and #g>0 then
@@ -47,8 +47,8 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.otfilter(c,tp)
-	return c:IsDoubleTribute(FLAG_DOUBLE_TRIB_FAIRY) and (c:IsControler(tp) or c:IsFaceup())
+	return c:IsDoubleTribute(FLAG_DOUBLE_TRIB_WANDERER) and (c:IsControler(tp) or c:IsFaceup())
 end
 function s.eftg(e,c)
-	return c:IsRace(RACE_FAIRY) and c:IsLevelAbove(7) and c:IsSummonableCard()
+	return c:IsRace(RACE_WANDERER) and c:IsLevelAbove(7) and c:IsSummonableCard()
 end

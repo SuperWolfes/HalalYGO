@@ -1,11 +1,11 @@
 --セレブローズ・ゴシップ・マジシャン
---Celeb Rose Gossip Magician
+--Celeb Rose Gossip Mentor
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
-	Fusion.AddProcMix(c,true,true,CARD_CELEB_ROSE_MAGICIAN,160015009)
-	--Gain 400 ATK for each Equip Spell in your GY
+	c:EnableAwakeLimit()
+	Fusion.AddProcMix(c,true,true,CARD_CELEB_ROSE_MENTOR,160015009)
+	--Gain 400 ATK for each Equip Actional in your RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetValue(s.val)
 	c:RegisterEffect(e1)
-	--Cannot be destroyed by battle while you have a face-up Spell Card
+	--Cannot be destroyed by battle while you have a face-up Actional Card
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -25,9 +25,9 @@ function s.initial_effect(c)
 end
 function s.val(e,c)
 	local tp=e:GetHandler():GetControler()
-	local ct=Duel.GetMatchingGroupCount(Card.IsEquipSpell,tp,LOCATION_GRAVE,0,nil)
+	local ct=Duel.GetMatchingGroupCount(Card.IsEquipActional,tp,LOCATION_REST,0,nil)
 	return ct*400
 end
 function s.indcond(e)
-	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSpell),e:GetHandlerPlayer(),LOCATION_ONFIELD,0,1,nil)
+	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsActional),e:GetHandlerPlayer(),LOCATION_ONFIELD,0,1,nil)
 end

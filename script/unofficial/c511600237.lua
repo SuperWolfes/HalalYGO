@@ -1,5 +1,5 @@
 --ドローン・フォース・チューン
---Drone Force Tuning
+--Drone Fcoree Tuning
 --scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)

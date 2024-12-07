@@ -84,14 +84,14 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	return a and a:IsSetCard(0x16) and Duel.GetCurrentPhase()==PHASE_DAMAGE_CAL
 end
 function s.atkfilter(c)
-	return c:IsMonster() and c:IsSetCard(0x16) and c:IsAbleToGraveAsCost()
+	return c:IsMonster() and c:IsSetCard(0x16) and c:IsAbleToRestAsCost()
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.atkfilter,tp,LOCATION_DECK,0,1,nil)
 		and Duel.GetCustomActivityCount(id,tp,ACTIVITY_SPSUMMON)==0 end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.atkfilter,tp,LOCATION_DECK,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_EFFECT)
+	Duel.SendtoRest(g,REASON_EFFECT)
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_OATH)

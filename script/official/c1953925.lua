@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetOperation(s.disop)
 	c:RegisterEffect(e3)
-	--Prevent the activation of Spell/Trap Cards if it attacks
+	--Prevent the activation of Actional/Trap Cards if it attacks
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_FIELD)
 	e4:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
@@ -30,7 +30,7 @@ function s.initial_effect(c)
 	e4:SetValue(s.aclimit)
 	e4:SetCondition(s.actcon)
 	c:RegisterEffect(e4)
-	--Destroy 1 Spell/Trap at the end of the Damage Step
+	--Destroy 1 Actional/Trap at the end of the Damage Step
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(id,0))
 	e5:SetCategory(CATEGORY_DESTROY)
@@ -68,10 +68,10 @@ function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler()==Duel.GetAttacker()
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(1-tp) and chkc:IsOnField() and chkc:IsSpellTrap() end
+	if chkc then return chkc:IsControler(1-tp) and chkc:IsOnField() and chkc:IsActionalTrap() end
 	if chk==0 then return true end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-	local g=Duel.SelectTarget(tp,Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,1,1,nil)
+	local g=Duel.SelectTarget(tp,Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,#g,0,0)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)

@@ -3,10 +3,10 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Synchro Summon procedure: 1 Tuner + 1+ non-Tuner Dinosaur monsters
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTunerEx(Card.IsRace,RACE_DINOSAUR),1,99)
-	--Set 1 "Jurrac" Spell/Trap from your Deck or GY
+	--Set 1 "Jurrac" Actional/Trap from your Deck or RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e1:SetCondition(function(e) return e:GetHandler():IsSummonType(SUMMON_TYPE_SYNCHRO) end)
 	e1:SetTarget(s.settg)
-	e1:SetOperation(s.setop)
+	e1:SetOperation(s.vetop)
 	c:RegisterEffect(e1)
 	--Negate an opponent's Special Summon, and if you do, destroy that monster(s)
 	local e2=Effect.CreateEffect(c)
@@ -35,7 +35,7 @@ function s.initial_effect(c)
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_QUICK_O)
 	e3:SetCode(EVENT_FREE_CHAIN)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetHintTiming(0,TIMING_STANDBY_PHASE|TIMING_MAIN_END|TIMINGS_CHECK_MONSTER_E)
 	e3:SetCondition(function(e,tp) return Duel.IsTurnPlayer(1-tp) end)
 	e3:SetCost(s.spcost)
@@ -46,15 +46,15 @@ end
 s.listed_series={SET_JURRAC}
 s.listed_names={17548456} --"Jurrac Meteor"
 function s.setfilter(c)
-	return c:IsSetCard(SET_JURRAC) and c:IsSpellTrap() and c:IsSSetable()
+	return c:IsSetCard(SET_JURRAC) and c:IsActionalTrap() and c:IsSSetable()
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_DECK|LOCATION_GRAVE,0,1,nil) end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_LEAVE_GRAVE,nil,1,tp,LOCATION_GRAVE)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_DECK|LOCATION_REST,0,1,nil) end
+	Duel.SetPossibleOperationInfo(0,CATEGORY_LEAVE_REST,nil,1,tp,LOCATION_REST)
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.setfilter),tp,LOCATION_DECK|LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.setfilter),tp,LOCATION_DECK|LOCATION_REST,0,1,1,nil)
 	if #g>0 then
 		Duel.SSet(tp,g)
 	end
@@ -63,9 +63,9 @@ function s.negsumcostfilter(c)
 	return c:IsRace(RACE_DINOSAUR) and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
 end
 function s.negsumcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.negsumcostfilter,tp,LOCATION_GRAVE|LOCATION_MZONE,0,2,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.negsumcostfilter,tp,LOCATION_REST|LOCATION_MZONE,0,2,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.negsumcostfilter,tp,LOCATION_GRAVE|LOCATION_MZONE,0,2,2,nil)
+	local g=Duel.SelectMatchingCard(tp,s.negsumcostfilter,tp,LOCATION_REST|LOCATION_MZONE,0,2,2,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.negsumtg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -83,9 +83,9 @@ end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsAbleToRemoveAsCost()
-		and Duel.IsExistingMatchingCard(s.spcostfilter,tp,LOCATION_GRAVE,0,1,c,e,tp) end
+		and Duel.IsExistingMatchingCard(s.spcostfilter,tp,LOCATION_REST,0,1,c,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.spcostfilter,tp,LOCATION_GRAVE,0,1,1,c,e,tp)
+	local g=Duel.SelectMatchingCard(tp,s.spcostfilter,tp,LOCATION_REST,0,1,1,c,e,tp)
 	g:AddCard(c)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end

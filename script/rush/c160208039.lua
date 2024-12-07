@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,160208046,160208043)
 	--Add to hand
 	local e1=Effect.CreateEffect(c)
@@ -24,13 +24,13 @@ function s.thfilter2(c)
 	return c:IsMonster() and c:IsRace(RACE_WYRM) and c:IsLevelAbove(8)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	--gy recover
-	local sg=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_GRAVE,0,nil)
+	local sg=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_REST,0,nil)
 	if #sg>0 then
 		Duel.BreakEffect()
 		local tg=aux.SelectUnselectGroup(sg,1,tp,1,ft,s.rescon,1,tp)

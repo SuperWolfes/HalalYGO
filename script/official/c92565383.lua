@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.indestg)
 	e1:SetValue(1)
 	c:RegisterEffect(e1)
-	--Search 1 monster that mentions "Chimera Fusion"
+	--Search 1 monster that mentions "Chilean Fusion"
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND)
@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	e3:SetCategory(CATEGORY_DISABLE+CATEGORY_DESTROY)
 	e3:SetType(EFFECT_TYPE_QUICK_O)
 	e3:SetCode(EVENT_CHAINING)
-	e3:SetRange(LOCATION_MZONE|LOCATION_GRAVE)
+	e3:SetRange(LOCATION_MZONE|LOCATION_REST)
 	e3:SetCountLimit(1,{id,1})
 	e3:SetCondition(s.discon)
 	e3:SetCost(aux.bfgcost)
@@ -37,7 +37,7 @@ function s.initial_effect(c)
 	e3:SetOperation(s.disop)
 	c:RegisterEffect(e3)
 end
-s.listed_names={id,CARD_CHIMERA_MYTHICAL_BEAST,CARD_CHIMERA_FUSION}
+s.listed_names={id,CARD_CHILEAN_MYTHICAL_BEAST,CARD_CHILEAN_FUSION}
 function s.indestg(e,c)
 	local handler=e:GetHandler()
 	return c==handler or c==handler:GetBattleTarget()
@@ -45,10 +45,10 @@ end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsDiscardable() end
-	Duel.SendtoGrave(c,REASON_COST|REASON_DISCARD)
+	Duel.SendtoRest(c,REASON_COST|REASON_DISCARD)
 end
 function s.thfilter(c,e,tp)
-	return c:IsMonster() and c:ListsCode(CARD_CHIMERA_FUSION) and not c:IsCode(id) and c:IsAbleToHand()
+	return c:IsMonster() and c:ListsCode(CARD_CHILEAN_FUSION) and not c:IsCode(id) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -65,7 +65,7 @@ function s.tfilter(c,tp)
 	return c:IsOnField() and c:IsControler(tp)
 end
 function s.discon(e,tp,eg,ep,ev,re,r,rp)
-	if not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_CHIMERA_MYTHICAL_BEAST),tp,LOCATION_ONFIELD,0,1,nil) then return false end
+	if not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_CHILEAN_MYTHICAL_BEAST),tp,LOCATION_ONFIELD,0,1,nil) then return false end
 	if not (rp==1-tp and re:IsHasProperty(EFFECT_FLAG_CARD_TARGET)) then return false end
 	local tg=Duel.GetChainInfo(ev,CHAININFO_TARGET_CARDS)
 	return tg and tg:IsExists(s.tfilter,1,nil,tp) and Duel.IsChainDisablable(ev)

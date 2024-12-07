@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.damop)
 	c:RegisterEffect(e2)
 	local e3=e2:Clone()
-	e3:SetCode(EVENT_TO_GRAVE)
+	e3:SetCode(EVENT_TO_REST)
 	e3:SetCondition(s.damcon2)
 	c:RegisterEffect(e3)
 end
@@ -55,12 +55,12 @@ end
 function s.damcon1(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()
 	local bc=tc:GetBattleTarget()
-	return not tc:IsPreviousControler(tp) and tc:IsLocation(LOCATION_GRAVE) and tc:GetTextAttack()>0
+	return not tc:IsPreviousControler(tp) and tc:IsLocation(LOCATION_REST) and tc:GetTextAttack()>0
 		and bc:IsControler(tp) and bc:GetOriginalAttribute()==ATTRIBUTE_DARK and bc:GetOriginalRace()==RACE_MACHINE
 end
 function s.damfilter1(c,tp)
 	return c:IsMonster() and c:GetTextAttack()>0 and c:IsReason(REASON_EFFECT)
-		and c:IsReason(REASON_DESTROY) and c:IsLocation(LOCATION_GRAVE) and not c:IsPreviousControler(tp)
+		and c:IsReason(REASON_DESTROY) and c:IsLocation(LOCATION_REST) and not c:IsPreviousControler(tp)
 end
 function s.damcon2(e,tp,eg,ep,ev,re,r,rp)
 	if not re then return false end
@@ -75,7 +75,7 @@ function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.damfilter2(c,tp)
 	return c:IsReason(REASON_BATTLE|REASON_EFFECT) and c:IsReason(REASON_DESTROY)
-		and c:GetTextAttack()>0 and c:IsLocation(LOCATION_GRAVE) and not c:IsPreviousControler(tp)
+		and c:GetTextAttack()>0 and c:IsLocation(LOCATION_REST) and not c:IsPreviousControler(tp)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local g=eg:Filter(s.damfilter2,nil,tp)

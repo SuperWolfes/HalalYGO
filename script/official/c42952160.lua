@@ -1,5 +1,5 @@
 --冥府の合わせ鏡
---Opposing Mirrors of the Underworld
+--Opposing Mirrors of the Overworld
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -29,14 +29,14 @@ end
 function s.acttg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local is_eff=(r&REASON_EFFECT)==REASON_EFFECT
 	if chk==0 then return is_eff or (Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp,ev))
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp,ev))
 	end
 	if is_eff then
 		e:SetCategory(CATEGORY_DAMAGE)
 		Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,ev*2)
 	else
 		e:SetCategory(CATEGORY_SPECIAL_SUMMON)
-		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 	end
 end
 function s.actop(e,tp,eg,ep,ev,re,r,rp)
@@ -46,7 +46,7 @@ function s.actop(e,tp,eg,ep,ev,re,r,rp)
 	end
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp,ev)
+	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp,ev)
 	if #g>0 and Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)>0 then
 		--End the Battle Phase after the Damage Step
 		local e1=Effect.CreateEffect(e:GetHandler())

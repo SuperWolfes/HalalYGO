@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e0:SetCode(EFFECT_SPSUMMON_CONDITION)
 	e0:SetValue(function(e,se) return se:IsHasType(EFFECT_TYPE_ACTIONS) end)
 	c:RegisterEffect(e0)
-	--Special Summon itself from the hand and search 1 "Ursarctic" or "Drytron" Spell/Trap
+	--Special Summon itself from the hand and search 1 "Ursarctic" or "Drytron" Actional/Trap
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -39,7 +39,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
 function s.thfilter(c)
-	return c:IsSetCard({SET_URSARCTIC,SET_DRYTRON}) and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsSetCard({SET_URSARCTIC,SET_DRYTRON}) and c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

@@ -1,5 +1,5 @@
 --融合強兵
---Fusion Reinforcement
+--Fusion Reinfcoreement
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -16,11 +16,11 @@ function s.initial_effect(c)
 end
 function s.exfilter(c,e,tp,filter_func)
 	return c.material and c:IsType(TYPE_FUSION) and not c:IsPublic()
-		and Duel.IsExistingMatchingCard(filter_func,tp,LOCATION_EXTRA|LOCATION_GRAVE,0,1,nil,e,tp,c)
+		and Duel.IsExistingMatchingCard(filter_func,tp,LOCATION_EXTRA|LOCATION_REST,0,1,nil,e,tp,c)
 end
 function s.spfilter(c,e,tp,fc)
 	if not (c:IsCanBeSpecialSummoned(e,0,tp,false,false) and c:IsCode(table.unpack(fc.material))) then return false end
-	if c:IsLocation(LOCATION_GRAVE) then
+	if c:IsLocation(LOCATION_REST) then
 		return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 	elseif c:IsLocation(LOCATION_EXTRA) then
 		return Duel.GetLocationCountFromEx(tp,tp,nil,c)>0
@@ -29,16 +29,16 @@ end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local filter_func=s.spfilter
 	if chk==0 then return Duel.IsExistingMatchingCard(s.exfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,filter_func) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA|LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA|LOCATION_REST)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
-	local filter_func=aux.NecroValleyFilter(s.spfilter)
+	local filter_func=aux.RestValleyFilter(s.spfilter)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_CONFIRM)
 	local rc=Duel.SelectMatchingCard(tp,s.exfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,filter_func):GetFirst()
 	if not rc then return end
 	Duel.ConfirmCards(1-tp,rc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local sc=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_EXTRA|LOCATION_GRAVE,0,1,1,rc,e,tp,rc):GetFirst()
+	local sc=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_EXTRA|LOCATION_REST,0,1,1,rc,e,tp,rc):GetFirst()
 	if sc and Duel.SpecialSummonStep(sc,0,tp,tp,false,false,POS_FACEUP) then
 		local c=e:GetHandler()
 		local ct=Duel.IsTurnPlayer(tp) and 2 or 1

@@ -1,10 +1,10 @@
 -- 転生炎獣レイジング・フェニックス
--- Salamangreat Raging Phoenix
+-- Salamangreat Raging Bird
 -- Scripted by Satella
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
-	aux.EnableCheckReincarnation(c)
+	c:EnableAwakeLimit()
+	aux.EnableCheckReincorporation(c)
 	-- Link Summon procedure
 	Link.AddProcedure(c,s.matfilter,2)
 	-- Add 1 "Salamangreat" card from your Deck to your hand
@@ -26,7 +26,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY+EFFECT_FLAG_CARD_TARGET,EFFECT_FLAG2_CHECK_SIMULTANEOUS)
 	e2:SetCode(EVENT_DESTROYED)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(s.spcon)
 	e2:SetTarget(s.sptg)
@@ -40,7 +40,7 @@ function s.matfilter(c,scard,sumtype,tp)
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsReincarnationSummoned() and c:IsSummonType(SUMMON_TYPE_LINK)
+	return c:IsReincorporationSummoned() and c:IsSummonType(SUMMON_TYPE_LINK)
 end
 function s.thfilter(c)
 	return c:IsSetCard(SET_SALAMANGREAT) and c:IsAbleToHand()

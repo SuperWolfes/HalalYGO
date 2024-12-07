@@ -29,7 +29,7 @@ function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	local hg=Duel.GetFieldGroup(tp,0,LOCATION_HAND)
 	Duel.ConfirmCards(tp,hg)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT+REASON_DISCARD)
+		Duel.SendtoRest(g,REASON_EFFECT+REASON_DISCARD)
 	end
 	Duel.ShuffleHand(1-tp)
 end

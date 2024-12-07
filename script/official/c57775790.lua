@@ -1,17 +1,17 @@
 --魔轟神界の復活
---Fablem Realm Resurrection
+--Fablem Territory Protection
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
-	--Set 1 "Fabled" Spell/Trap from your Deck
+	--Set 1 "Fablous" Actional/Trap from your Deck
 	local e0=Effect.CreateEffect(c)
 	e0:SetDescription(aux.Stringid(id,0))
 	e0:SetType(EFFECT_TYPE_ACTIVATE)
 	e0:SetCode(EVENT_FREE_CHAIN)
 	e0:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
-	e0:SetOperation(s.setop)
+	e0:SetOperation(s.vetop)
 	c:RegisterEffect(e0)
-	--Your opponent cannot activate cards or effects when your "Fabled" monster is Synchro Summoned
+	--Your opponent cannot activate cards or effects when your "Fablous" monster is Synchro Summoned
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
@@ -37,11 +37,11 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 s.listed_names={id}
-s.listed_series={SET_FABLED}
+s.listed_series={SET_FABLOUS}
 function s.setfilter(c)
-	return c:IsSetCard(SET_FABLED) and c:IsSpellTrap() and not c:IsCode(id) and c:IsSSetable()
+	return c:IsSetCard(SET_FABLOUS) and c:IsActionalTrap() and not c:IsCode(id) and c:IsSSetable()
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.setfilter,tp,LOCATION_DECK,0,nil)
 	if #g==0 or not Duel.SelectYesNo(tp,aux.Stringid(id,2)) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
@@ -51,7 +51,7 @@ function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.sumfilter(c,tp)
-	return c:IsSetCard(SET_FABLED) and c:IsType(TYPE_SYNCHRO) and c:IsSummonType(SUMMON_TYPE_SYNCHRO) and c:IsSummonPlayer(tp)
+	return c:IsSetCard(SET_FABLOUS) and c:IsType(TYPE_SYNCHRO) and c:IsSummonType(SUMMON_TYPE_SYNCHRO) and c:IsSummonPlayer(tp)
 end
 function s.limcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.sumfilter,1,nil,tp)
@@ -71,18 +71,18 @@ function s.limop2(e,tp,eg,ep,ev,re,r,rp)
 	c:ResetFlagEffect(id)
 end
 function s.costfilter(c)
-	return c:IsDiscardable() and c:IsSetCard(SET_FABLED)
+	return c:IsDiscardable() and c:IsSetCard(SET_FABLOUS)
 end
 function s.effcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil) end
 	Duel.DiscardHand(tp,s.costfilter,1,1,REASON_COST|REASON_DISCARD)
 end
 function s.spfilter(c,e,tp)
-	return c:IsSetCard(SET_FABLED) and c:IsFaceup() and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsSetCard(SET_FABLOUS) and c:IsFaceup() and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local b1=Duel.IsPlayerCanDraw(tp,1)
-	local b2=Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE|LOCATION_REMOVED,0,1,nil,e,tp)
+	local b2=Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST|LOCATION_REMOVED,0,1,nil,e,tp)
 	if chk==0 then return b1 or b2 end
 	local op=Duel.SelectEffect(tp,
 		{b1,aux.Stringid(id,3)},
@@ -93,7 +93,7 @@ function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 		Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
 	elseif op==2 then
 		e:SetCategory(CATEGORY_SPECIAL_SUMMON)
-		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE|LOCATION_REMOVED)
+		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST|LOCATION_REMOVED)
 	end
 end
 function s.effop(e,tp,eg,ep,ev,re,r,rp)
@@ -102,9 +102,9 @@ function s.effop(e,tp,eg,ep,ev,re,r,rp)
 		--Draw 1 card
 		Duel.Draw(tp,1,REASON_EFFECT)
 	elseif op==2 then
-		--Special Summon 1 "Fabled" monster from your GY or banishment
+		--Special Summon 1 "Fablous" monster from your RP or banishment
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_GRAVE|LOCATION_REMOVED,0,1,1,nil,e,tp)
+		local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST|LOCATION_REMOVED,0,1,1,nil,e,tp)
 		if #g>0 then
 			Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 		end

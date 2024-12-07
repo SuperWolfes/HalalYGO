@@ -2,7 +2,7 @@
 --Trickstar Bella Madonna
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Link Summon Procedure
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_TRICKSTAR),2)
 	--Unaffected by other card effects while it doesn't point to a monster
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	--e1:SetCondition(s.imcon) --handled in value for mid-resolution updating
 	e1:SetValue(s.immval)
 	c:RegisterEffect(e1)
-	--Inflict 200 damage to your opponent for each "Trickstar" monster in your GY with a different name
+	--Inflict 200 damage to your opponent for each "Trickstar" monster in your RP with a different name
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_DAMAGE)
@@ -42,8 +42,8 @@ function s.damfilter(c)
 	return c:IsSetCard(SET_TRICKSTAR) and c:IsMonster()
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.damfilter,tp,LOCATION_GRAVE,0,1,nil) end
-	local g=Duel.GetMatchingGroup(s.damfilter,tp,LOCATION_GRAVE,0,nil)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.damfilter,tp,LOCATION_REST,0,1,nil) end
+	local g=Duel.GetMatchingGroup(s.damfilter,tp,LOCATION_REST,0,nil)
 	local dam=g:GetClassCount(Card.GetCode)*200
 	Duel.SetTargetPlayer(1-tp)
 	Duel.SetTargetParam(dam)
@@ -51,7 +51,7 @@ function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
-	local g=Duel.GetMatchingGroup(s.damfilter,tp,LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.damfilter,tp,LOCATION_REST,0,nil)
 	local dam=g:GetClassCount(Card.GetCode)*200
 	Duel.Damage(p,dam,REASON_EFFECT)
 end

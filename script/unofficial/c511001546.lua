@@ -23,7 +23,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,at,1,0,0)
 end
 function s.mgfilter(c,e,tp,fusc)
-	return c:IsControler(tp) and c:IsLocation(LOCATION_GRAVE)
+	return c:IsControler(tp) and c:IsLocation(LOCATION_REST)
 		and c:GetReason()&0x40008==0x40008 and c:GetReasonCard()==fusc
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
@@ -34,9 +34,9 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local sumable=true
 	local sumtype=tc:GetSummonType()
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if ft>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if ft>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	if Duel.Destroy(tc,REASON_EFFECT)>0 and sumtype&SUMMON_TYPE_FUSION==SUMMON_TYPE_FUSION and #mg>0
-		and #mg<=ft and mg:FilterCount(aux.NecroValleyFilter(s.mgfilter),nil,e,tp,tc)==#mg then
+		and #mg<=ft and mg:FilterCount(aux.RestValleyFilter(s.mgfilter),nil,e,tp,tc)==#mg then
 		Duel.BreakEffect()
 		if Duel.SpecialSummon(mg,0,tp,tp,false,false,POS_FACEUP)>0 then
 			Duel.BreakEffect()

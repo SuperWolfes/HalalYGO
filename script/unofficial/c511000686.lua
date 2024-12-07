@@ -1,5 +1,5 @@
 --ＲＵＭ－ダーク・フォース
---Rank-Up-Magic Dark Force
+--Rank-Up-Ment Dark Fcoree
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -30,20 +30,20 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc==tg end
 	if chk==0 then
 		local pg=aux.GetMustBeMaterialGroup(tp,Group.CreateGroup(),tp,nil,nil,REASON_XYZ)
-		return #pg<=0 and tg:IsOnField() and tg:IsCanBeEffectTarget(e) and tg:IsAbleToGrave() 
+		return #pg<=0 and tg:IsOnField() and tg:IsCanBeEffectTarget(e) and tg:IsAbleToRest() 
 			and (rk>0 or tg:IsStatus(STATUS_NO_LEVEL)) and Duel.IsPlayerCanSpecialSummonCount(tp,2)
 			and Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_EXTRA,0,1,nil,rk+1,e,tp,tg,1)
 			and Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_EXTRA,0,1,nil,rk+2,e,tp,tg,1)
 	end
 	Duel.SetTargetCard(tg)
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,tg,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,tg,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,LOCATION_EXTRA)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	local pg=aux.GetMustBeMaterialGroup(tp,Group.CreateGroup(),tp,nil,nil,REASON_XYZ)
 	if not tc or tc:IsFacedown() or not tc:IsRelateToEffect(e) or tc:IsControler(1-tp)
-		or tc:IsImmuneToEffect(e) or #pg>0 or Duel.SendtoGrave(tc,REASON_EFFECT)==0 then return end
+		or tc:IsImmuneToEffect(e) or #pg>0 or Duel.SendtoRest(tc,REASON_EFFECT)==0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local tc1=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_EXTRA,0,1,1,nil,tc:GetRank()+1,e,tp,tc,1):GetFirst()
 	if tc1 then

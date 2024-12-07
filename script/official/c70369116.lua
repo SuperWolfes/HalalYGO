@@ -3,9 +3,9 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_EFFECT),2,2)
-	--Change attribute to DARK
+	--Change atsort DARK
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.attg)
 	e1:SetOperation(s.atop)
 	c:RegisterEffect(e1)
-	--Apply the effects of a "Fusion/Polymerization" spell
+	--Apply the effects of a "Fusion/Polymerization" actional
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_IGNITION)
@@ -48,7 +48,7 @@ function s.atop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.copfilter(c)
-	return c:IsAbleToGraveAsCost() and c:IsSetCard(0x46) and (c:GetType()==TYPE_SPELL or c:GetType()==TYPE_SPELL+TYPE_QUICKPLAY) and c:CheckActivateEffect(true,true,false)~=nil 
+	return c:IsAbleToRestAsCost() and c:IsSetCard(0x46) and (c:GetType()==TYPE_ACTIONAL or c:GetType()==TYPE_ACTIONAL+TYPE_QUICKPLAY) and c:CheckActivateEffect(true,true,false)~=nil 
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckLPCost(tp,2000) and Duel.IsExistingMatchingCard(s.copfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -61,7 +61,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	end
 	if chk==0 then return Duel.IsExistingMatchingCard(s.copfilter,tp,LOCATION_DECK,0,1,nil) end
 	local g=Duel.SelectMatchingCard(tp,s.copfilter,tp,LOCATION_DECK,0,1,1,nil)
-	if not Duel.SendtoGrave(g,REASON_COST) then return end
+	if not Duel.SendtoRest(g,REASON_COST) then return end
 	local te=g:GetFirst():CheckActivateEffect(true,true,false)
 	e:SetLabel(te:GetLabel())
 	e:SetLabelObject(te:GetLabelObject())

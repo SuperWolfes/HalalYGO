@@ -1,10 +1,10 @@
 --六花精ボタン
---Mudan the Rikka Fairy
+--Mudan the Rikka Wanderer
 --Scripted by ahtelel
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special summon itself from GY
+	--Special summon itself from RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Search "Rikka" Spell/Trap on Summon
+	--Search "Rikka" Actional/Trap on Summon
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
@@ -49,7 +49,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if c:IsRelateToEffect(e) then Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP) end
 end
 function s.thfilter(c)
-	return c:IsSetCard(0x141) and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsSetCard(0x141) and c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

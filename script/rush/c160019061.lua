@@ -1,5 +1,5 @@
 --天使のお注射
---Fairy's Injection
+--Wanderer's Injection
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -24,19 +24,19 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.filter1,1,nil,tp)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGrave,tp,LOCATION_MZONE,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_MZONE)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRest,tp,LOCATION_MZONE,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_MZONE)
 end
 function s.cfilter(c)
 	return c:IsMonster() and c:IsAttribute(ATTRIBUTE_EARTH) and c:IsAttack(400) and c:IsDefense(1500)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Effect
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToGrave,tp,LOCATION_MZONE,0,1,1,nil)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToRest,tp,LOCATION_MZONE,0,1,1,nil)
 	Duel.HintSelection(g,true)
-	if Duel.SendtoGrave(g,REASON_EFFECT)==0 then return end
-	if Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,nil)
+	if Duel.SendtoRest(g,REASON_EFFECT)==0 then return end
+	if Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil)
 		and Duel.IsExistingMatchingCard(Card.IsNotMaximumModeSide,tp,0,LOCATION_MZONE,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 		local dg=Duel.SelectMatchingCard(tp,Card.IsNotMaximumModeSide,tp,0,LOCATION_MZONE,1,1,nil)

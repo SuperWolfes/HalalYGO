@@ -1,8 +1,8 @@
 --アカシック・マジシャン
---Akashic Magician
+--Ashic Mentor
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Link Summon Procedure
 	Link.AddProcedure(c,s.filter,2,nil,s.spcheck)
 	--Can only be Link Summoned once per turn
@@ -105,6 +105,6 @@ function s.acop(e,tp,eg,ep,ev,re,r,rp)
 	end
 	if #g~=0 then
 		Duel.DisableShuffleCheck()
-		Duel.SendtoGrave(g,REASON_EFFECT|REASON_EXCAVATE)
+		Duel.SendtoRest(g,REASON_EFFECT|REASON_EXCAVATE)
 	end
 end

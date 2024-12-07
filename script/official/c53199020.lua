@@ -1,10 +1,10 @@
 --魔轟神ディアネイラ
---Fabled Dianaira
+--Fablous Dianaira
 local s,id=GetID()
 function s.initial_effect(c)
-	--Can be Tribute Summoned by Tributing 1 "Fabled" monster
+	--Can be Tribute Summoned by Tributing 1 "Fablous" monster
 	local e1=aux.AddNormalSummonProcedure(c,true,true,1,1,SUMMON_TYPE_TRIBUTE,aux.Stringid(id,0),s.otfilter)
-	--The effect of a Normal Spell activated by the opponent becomes "Your opponent discards 1 card"
+	--The effect of a Normal Actional activated by the opponent becomes "Your opponent discards 1 card"
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e1:SetCode(EVENT_CHAIN_SOLVING)
@@ -14,12 +14,12 @@ function s.initial_effect(c)
 	e1:SetOperation(s.changeop)
 	c:RegisterEffect(e1)
 end
-s.listed_series={SET_FABLED}
+s.listed_series={SET_FABLOUS}
 function s.otfilter(c,tp)
-	return c:IsSetCard(SET_FABLED) and (c:IsControler(tp) or c:IsFaceup())
+	return c:IsSetCard(SET_FABLOUS) and (c:IsControler(tp) or c:IsFaceup())
 end
 function s.changecon(e,tp,eg,ep,ev,re,r,rp)
-	return ep==1-tp and re:GetHandler():IsNormalSpell() and re:IsHasType(EFFECT_TYPE_ACTIVATE)
+	return ep==1-tp and re:GetHandler():IsNormalActional() and re:IsHasType(EFFECT_TYPE_ACTIVATE)
 end
 function s.changeop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Group.CreateGroup()

@@ -1,5 +1,5 @@
 --新世壊＝アムリターラ
---Pristine Planets Amritara
+--Pristine Planets Amilie
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -28,7 +28,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.cfilter(c,tp)
 	return c:IsPreviousLocation(LOCATION_MZONE) and c:IsPreviousControler(tp) and c:IsReason(REASON_BATTLE|REASON_EFFECT)
-		and c:IsLocation(LOCATION_GRAVE|LOCATION_REMOVED) and c:IsFaceup()
+		and c:IsLocation(LOCATION_REST|LOCATION_REMOVED) and c:IsFaceup()
 end
 function s.effcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,tp)
@@ -41,7 +41,7 @@ function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local b2=Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsType,TYPE_TUNER),tp,LOCATION_MZONE,LOCATION_MZONE,1,nil)
 		and g:IsExists(Card.IsAttackAbove,1,nil,1)
 	local b3=g:IsExists(Card.IsAbleToDeck,1,nil) and Duel.IsPlayerCanDraw(tp,1)
-	local b4=c:IsAbleToDeck() and Duel.IsExistingMatchingCard(aux.AND(Card.IsFieldSpell,Card.IsAbleToHand),tp,LOCATION_GRAVE,0,1,nil)
+	local b4=c:IsAbleToDeck() and Duel.IsExistingMatchingCard(aux.AND(Card.IsFieldActional,Card.IsAbleToHand),tp,LOCATION_REST,0,1,nil)
 	if chk==0 then return b1 or b2 or b3 or b4 end
 	Duel.SetTargetCard(g)
 	local op=Duel.SelectEffect(tp,
@@ -62,7 +62,7 @@ function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	elseif op==4 then
 		e:SetCategory(CATEGORY_TODECK+CATEGORY_TOHAND)
 		Duel.SetOperationInfo(0,CATEGORY_TODECK,c,1,0,0)
-		Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
+		Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
 	end
 end
 function s.effop(e,tp,eg,ep,ev,re,r,rp)
@@ -107,10 +107,10 @@ function s.effop(e,tp,eg,ep,ev,re,r,rp)
 				Duel.Draw(tp,1,REASON_EFFECT)
 			end
 		end
-	--Shuffle this card into the Deck and add 1 Field Spell from your GY to your hand
+	--Shuffle this card into the Deck and add 1 Field Actional from your RP to your hand
 	elseif op==4 and Duel.SendtoDeck(c,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)>0 and c:IsLocation(LOCATION_DECK) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-		local th=Duel.SelectMatchingCard(tp,aux.AND(Card.IsFieldSpell,Card.IsAbleToHand),tp,LOCATION_GRAVE,0,1,1,nil)
+		local th=Duel.SelectMatchingCard(tp,aux.AND(Card.IsFieldActional,Card.IsAbleToHand),tp,LOCATION_REST,0,1,1,nil)
 		if #th>0 then
 			Duel.SendtoHand(th,nil,REASON_EFFECT)
 			Duel.ConfirmCards(1-tp,th)

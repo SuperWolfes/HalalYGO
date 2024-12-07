@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.equipop)
 	c:RegisterEffect(e2)
 	local e3=e2:Clone()
-	e3:SetCode(EVENT_TO_GRAVE)
+	e3:SetCode(EVENT_TO_REST)
 	e3:SetCondition(s.equipcon)
 	c:RegisterEffect(e3)
 end
@@ -56,7 +56,7 @@ function s.lookop(e,tp,eg,ep,ev,re,r,rp)
 		c:RegisterEffect(e1)
 	end
 end
-	--If sent to GY by card effect
+	--If sent to RP by card effect
 function s.equipcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsReason(REASON_EFFECT)
 end

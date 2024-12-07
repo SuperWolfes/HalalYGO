@@ -1,5 +1,5 @@
 --転生輪
---Reincarnation Ring
+--Reincorporation Ring
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -35,7 +35,7 @@ function s.initial_effect(c)
 end
 function s.filter(c,e,tp,ft)
 	local lv=c:GetLevel()
-	return lv>0 and (ft>0 or c:GetSequence()<5) and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,lv,e,tp)
+	return lv>0 and (ft>0 or c:GetSequence()<5) and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST,0,1,nil,lv,e,tp)
 end
 function s.spfilter(c,lv,e,tp)
 	return c:IsLevel(lv*2) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -54,14 +54,14 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local rg=Duel.SelectReleaseGroupCost(tp,s.filter,1,1,false,nil,nil,e,tp,ft)
 	Duel.SetTargetParam(rg:GetFirst():GetLevel())
 	Duel.Release(rg,REASON_COST)
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 or not c:IsRelateToEffect(e) then return end
 	local lv=Duel.GetChainInfo(0,CHAININFO_TARGET_PARAM)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local tc=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,lv,e,tp):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,lv,e,tp):GetFirst()
 	if tc and Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)>0 then
 		Duel.Equip(tp,c,tc)
 		--Add Equip limit

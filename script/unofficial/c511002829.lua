@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,8,3)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--draw
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DRAW+CATEGORY_DAMAGE)
@@ -45,6 +45,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp,chk)
 		local g=Group.CreateGroup()
 		g:AddCard(tc1)
 		g:AddCard(tc2)
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end

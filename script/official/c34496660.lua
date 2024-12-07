@@ -44,7 +44,7 @@ function s.posop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsPosition(POS_FACEUP_DEFENSE)
-		and not Duel.IsExistingMatchingCard(Card.IsType,tp,LOCATION_GRAVE,0,1,nil,TYPE_SPELL+TYPE_TRAP)
+		and not Duel.IsExistingMatchingCard(Card.IsType,tp,LOCATION_REST,0,1,nil,TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.thfilter(c)
 	return c:IsSetCard(0x109a) and c:IsAbleToHand()

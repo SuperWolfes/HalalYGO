@@ -4,7 +4,7 @@
 --Fixed by A.JSever :D
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	c:EnableCounterPermit(0x1097,LOCATION_MZONE)
 	--Special Summon Restrict
 	local e1=Effect.CreateEffect(c)
@@ -54,7 +54,7 @@ function s.initial_effect(c)
 	e6:SetCondition(s.ctcon)
 	e6:SetOperation(s.ctop)
 	c:RegisterEffect(e6)
-	--Self-Destruction
+	--Self-Mismatching
 	local e7=Effect.CreateEffect(c)
 	e7:SetType(EFFECT_TYPE_SINGLE)
 	e7:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -103,7 +103,7 @@ function s.zeroop(e,tp,eg,ep,ev,re,r,rp)
 		iz2:SetCode(EVENT_ADJUST)
 		iz2:SetLabelObject(iz1)
 		iz2:SetLabel(0)
-		iz2:SetOperation(s.zeroresetop)
+		iz2:SetOperation(s.zerorevetop)
 		Duel.RegisterEffect(iz2,0)
 		Duel.RaiseEvent(Duel.GetMatchingGroup(aux.TRUE,0,0xff,0,nil),EVENT_CUSTOM+id,nil,0,0,0,0)
 		Duel.RegisterFlagEffect(0,id+1,0,0,1)
@@ -123,13 +123,13 @@ function s.zeroop(e,tp,eg,ep,ev,re,r,rp)
 		iz2:SetCode(EVENT_ADJUST)
 		iz2:SetLabelObject(iz1)
 		iz2:SetLabel(0)
-		iz2:SetOperation(s.zeroresetop)
+		iz2:SetOperation(s.zerorevetop)
 		Duel.RegisterEffect(iz2,1)
 		Duel.RaiseEvent(Duel.GetMatchingGroup(aux.TRUE,0,0xff,0,nil),EVENT_CUSTOM+id,nil,0,0,1,0)
 		Duel.RegisterFlagEffect(1,id+1,0,0,1)
 	end
 end
-function s.zeroresetop(e,tp,eg,ep,ev,re,r,rp)
+function s.zerorevetop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetCurrentChain()==0 or e:GetLabel()>0 then
 		local ct=e:GetLabel()+1
 		e:SetLabel(ct)
@@ -145,7 +145,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
 	g:RemoveCard(e:GetHandler())
 	if chk==0 then return #g>0 and g:FilterCount(Card.IsDiscardable,nil)==#g end
-	Duel.SendtoGrave(g,REASON_COST+REASON_DISCARD)
+	Duel.SendtoRest(g,REASON_COST+REASON_DISCARD)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

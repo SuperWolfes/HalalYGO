@@ -1,5 +1,5 @@
 --群雄割拠
---Rivalry of Warlords
+--Rivalry of Warwatchers
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_FIELD)
 	e4:SetRange(LOCATION_SZONE)
-	e4:SetCode(EFFECT_FORCE_SPSUMMON_POSITION)
+	e4:SetCode(EFFECT_FCOREE_SPSUMMON_POSITION)
 	e4:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e4:SetTargetRange(1,1)
 	e4:SetTarget(s.sumlimit)
@@ -90,11 +90,11 @@ function s.adjustop(e,tp,eg,ep,ev,re,r,rp)
 	end
 	local readjust=false
 	if #g1>0 then
-		Duel.SendtoGrave(g1,REASON_RULE,PLAYER_NONE,tp)
+		Duel.SendtoRest(g1,REASON_RULE,PLAYER_NONE,tp)
 		readjust=true
 	end
 	if #g2>0 then
-		Duel.SendtoGrave(g2,REASON_RULE,PLAYER_NONE,1-tp)
+		Duel.SendtoRest(g2,REASON_RULE,PLAYER_NONE,1-tp)
 		readjust=true
 	end
 	if readjust then Duel.Readjust() end

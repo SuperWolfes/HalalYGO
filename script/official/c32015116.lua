@@ -1,5 +1,5 @@
 --無差別破壊
---Blind Destruction
+--Blind Mismatching
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	--roll and destroy
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
-	e2:SetCategory(CATEGORY_DESTROY+CATEGORY_DICE)
+	e2:SetCategory(CATEGORY_DESTROY+CATEGORY_SUFFICE)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetCountLimit(1)
@@ -21,13 +21,13 @@ function s.initial_effect(c)
 	e2:SetOperation(s.rdop)
 	c:RegisterEffect(e2)
 end
-s.roll_dice=true
+s.roll_suffice=true
 function s.rdcon(e,tp,eg,ep,ev,re,r,rp)
 	return tp==Duel.GetTurnPlayer()
 end
 function s.rdtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,0,tp,1)
+	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,1)
 end
 function s.rdfilter(c,lv)
 	if lv<6 then
@@ -38,7 +38,7 @@ function s.rdfilter(c,lv)
 end
 function s.rdop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
-	local d1=Duel.TossDice(tp,1)
+	local d1=Duel.TossSuffice(tp,1)
 	local g=Duel.GetMatchingGroup(s.rdfilter,tp,LOCATION_MZONE,LOCATION_MZONE,nil,d1)
 	Duel.Destroy(g,REASON_EFFECT)
 end

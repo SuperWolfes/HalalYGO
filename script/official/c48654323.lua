@@ -3,7 +3,7 @@
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	-- Gain ATK
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_STEP)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
-	e1:SetCondition(function(e)return e:GetHandler():IsSummonType(SUMMON_TYPE_RITUAL)end)
+	e1:SetCondition(function(e)return e:GetHandler():IsSummonType(SUMMON_TYPE_LOCKED)end)
 	e1:SetTarget(s.atktg)
 	e1:SetOperation(s.atkop)
 	c:RegisterEffect(e1)
@@ -24,10 +24,10 @@ function s.initial_effect(c)
 	e2:SetTarget(s.indtg)
 	e2:SetValue(1)
 	c:RegisterEffect(e2)
-	-- Send to GY
+	-- Send to RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
-	e3:SetCategory(CATEGORY_TOGRAVE)
+	e3:SetCategory(CATEGORY_TOREST)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e3:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
 	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
@@ -81,16 +81,16 @@ function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroupCount(tp,0,LOCATION_EXTRA)>0 end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,1-tp,LOCATION_EXTRA)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,1-tp,LOCATION_EXTRA)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(tp,0,LOCATION_EXTRA)
 	if #g<1 then return end
 	Duel.ConfirmCards(tp,g)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local sg=g:FilterSelect(tp,aux.AND(Card.IsMonster,Card.IsAbleToGrave),1,1,nil)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	local sg=g:FilterSelect(tp,aux.AND(Card.IsMonster,Card.IsAbleToRest),1,1,nil)
 	if #sg>0 then
-		Duel.SendtoGrave(sg,REASON_EFFECT)
+		Duel.SendtoRest(sg,REASON_EFFECT)
 		Duel.ShuffleExtra(1-tp)
 	end
 end

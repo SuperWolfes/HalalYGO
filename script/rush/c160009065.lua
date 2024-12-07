@@ -1,5 +1,5 @@
 --聖塔の危機
---Crisis at the Sacred Tower
+--Crisis at the Clean Tower
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)

@@ -1,5 +1,5 @@
 --トゥーン・仮面魔道士
---Toon Masked Sorcerer
+--Toon Masked Scoreerer
 local s,id=GetID()
 function s.initial_effect(c)
 	--Cannot attack

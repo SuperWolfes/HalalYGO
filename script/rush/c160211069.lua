@@ -1,5 +1,5 @@
 --超魔機人バーニング・オーバーロード
---Supreme Manchine Burning Overlord
+--Supreme Manchine Burning Overwatcher
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -35,7 +35,7 @@ function s.cfilter(c)
 	return c:IsRace(RACE_MACHINE) and c:IsAttribute(ATTRIBUTE_DARK) and c:IsType(TYPE_MAXIMUM)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,3,nil)
+	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,3,nil)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckLPCost(tp,500) end

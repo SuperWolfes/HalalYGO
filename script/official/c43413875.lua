@@ -1,8 +1,8 @@
 --花札衛－芒に月－
---Flower Cardian Zebra Grass with Moon
+--Flower Cardian Zebra Grass with Horizon
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--spsummon from hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
@@ -76,7 +76,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 				Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 			end
 		else
-			Duel.SendtoGrave(tc,REASON_EFFECT)
+			Duel.SendtoRest(tc,REASON_EFFECT)
 		end
 		Duel.ShuffleHand(tp)
 	end

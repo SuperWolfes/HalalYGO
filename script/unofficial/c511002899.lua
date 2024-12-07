@@ -1,4 +1,4 @@
---Battle of Sleeping Spirits
+--Battle of Sleeping Guardians
 local s,id=GetID()
 function s.initial_effect(c)
 	--synchro effect
@@ -21,8 +21,8 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tid=Duel.GetTurnCount()
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 
-		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,1,nil,e,tp,tid) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,1,nil,e,tp,tid) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tid=Duel.GetTurnCount()
@@ -30,9 +30,9 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g2=Group.CreateGroup()
 	local fid=e:GetHandler():GetFieldID()
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,1,nil,e,tp,tid) then
+		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,1,nil,e,tp,tid) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		g1=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp,tid)
+		g1=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_REST,0,1,1,nil,e,tp,tid)
 		Duel.SpecialSummonStep(g1:GetFirst(),0,tp,tp,false,false,POS_FACEUP)
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
@@ -47,10 +47,10 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		g1:GetFirst():RegisterFlagEffect(51102899,RESET_EVENT+RESETS_STANDARD,0,1,fid)
 	end
 	if Duel.GetLocationCount(1-tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(s.filter,1-tp,LOCATION_GRAVE,0,1,nil,e,1-tp,tid)
+		and Duel.IsExistingMatchingCard(s.filter,1-tp,LOCATION_REST,0,1,nil,e,1-tp,tid)
 		and Duel.SelectYesNo(1-tp,aux.Stringid(511000631,1)) then
 		Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_SPSUMMON)
-		g2=Duel.SelectMatchingCard(1-tp,s.filter,1-tp,LOCATION_GRAVE,0,1,1,nil,e,1-tp,tid)
+		g2=Duel.SelectMatchingCard(1-tp,s.filter,1-tp,LOCATION_REST,0,1,1,nil,e,1-tp,tid)
 		Duel.SpecialSummonStep(g2:GetFirst(),0,1-tp,1-tp,false,false,POS_FACEUP)
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)

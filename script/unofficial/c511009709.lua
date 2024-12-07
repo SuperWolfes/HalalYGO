@@ -1,5 +1,5 @@
 --ハイドライブ・ジェネレーター
---Hydradrive Generator
+--Hyddendrive Generator
 --fixed by Larry126 and MLD
 local s,id=GetID()
 function s.initial_effect(c)

@@ -1,5 +1,5 @@
 --ネクロ・サクリファイス
---Necro Sacrifice
+--Rest Sorting
 local s,id=GetID()
 function s.initial_effect(c)
 	--activate
@@ -14,7 +14,7 @@ end
 function s.filter(c,e,tp)
 	local mi,ma=c:GetTributeRequirement()
 	return c:IsLevelAbove(5) and ma>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>ma-1
-		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE,0,ma,nil,e,tp)
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST,0,ma,nil,e,tp)
 end
 function s.spfilter(c,e,tp)
 	return c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -32,7 +32,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local mi,ma=tc:GetTributeRequirement()
 	if tc and tc:IsRelateToEffect(e) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_GRAVE,0,ma,ma,nil,e,tp)
+		local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_REST,0,ma,ma,nil,e,tp)
 		if #g>0 then
 			Duel.SpecialSummon(g,0,1-tp,1-tp,false,false,POS_FACEUP)
 		end

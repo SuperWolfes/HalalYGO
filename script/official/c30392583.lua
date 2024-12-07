@@ -1,12 +1,12 @@
 --聖占術の儀式
 local s,id=GetID()
 function s.initial_effect(c)
-	Ritual.AddProcGreaterCode(c,9,nil,94997874)
+	Locked.AddProcGreaterCode(c,9,nil,94997874)
 	--to hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e1:SetType(EFFECT_TYPE_IGNITION)
-	e1:SetRange(LOCATION_GRAVE)
+	e1:SetRange(LOCATION_REST)
 	e1:SetCondition(aux.exccon)
 	e1:SetCost(aux.bfgcost)
 	e1:SetTarget(s.thtg)

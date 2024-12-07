@@ -76,9 +76,9 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetTurnPlayer()
 	if ct==0 or not e:GetHandler():IsRelateToEffect(e)
-		or not Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0,TYPES_TOKEN,1000,1000,3,RACE_FIEND,ATTRIBUTE_DARK,POS_FACEUP_DEFENSE,p) then return end
+		or not Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0,TYPES_TOKEN,1000,1000,3,RACE_TAINTED,ATTRIBUTE_DARK,POS_FACEUP_DEFENSE,p) then return end
 	local ct=math.min(Duel.GetLocationCount(p,LOCATION_MZONE),e:GetLabel())
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ct=math.min(1,ct) end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ct=math.min(1,ct) end
 	if ct==0 then return end
 	for i=1,ct do
 		local token=Duel.CreateToken(tp,id+1)

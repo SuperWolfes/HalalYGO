@@ -1,4 +1,4 @@
---Metaion, the Timelord Token
+--Metaion, the Timewatcher Token
 local s,id=GetID()
 function s.initial_effect(c)
 	c:SetStatus(STATUS_NO_LEVEL,true)

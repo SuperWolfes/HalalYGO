@@ -1,5 +1,5 @@
 --魔轟神獣ルビィラーダ
---The Fabled Rudyruda
+--The Fablous Rudyruda
 local s,id=GetID()
 function s.initial_effect(c)
 	--Negate attack

@@ -17,7 +17,7 @@ function s.thfilter(c,tp,eg,ep,ev,re,r,rp)
 	local condition=te:GetCondition()
 	local cost=te:GetCost()
 	local target=te:GetTarget()
-	return c:IsCode(id+1) and c:IsSpell() and (not condition or condition(te,1-tp,eg,ep,ev,re,r,rp)) and (not cost or cost(te,1-tp,eg,ep,ev,re,r,rp,0))
+	return c:IsCode(id+1) and c:IsActional() and (not condition or condition(te,1-tp,eg,ep,ev,re,r,rp)) and (not cost or cost(te,1-tp,eg,ep,ev,re,r,rp,0))
 		and (not target or target(te,1-tp,eg,ep,ev,re,r,rp,0))
 		and Duel.IsExistingMatchingCard(s.filter,tp,0,LOCATION_MZONE,1,nil,te)
 end
@@ -51,13 +51,13 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			e:SetProperty(te:GetProperty())
 			if (tpe&TYPE_FIELD)~=0 then
 				local of=Duel.GetFieldCard(1-tp,LOCATION_FZONE,0)
-				if of and Duel.Destroy(of,REASON_RULE)==0 then Duel.SendtoGrave(tc,REASON_RULE) end
+				if of and Duel.Destroy(of,REASON_RULE)==0 then Duel.SendtoRest(tc,REASON_RULE) end
 			end
 			Duel.MoveToField(tc,tp,1-tp,LOCATION_SZONE,POS_FACEUP,true)
 			Duel.Hint(HINT_CARD,0,tc:GetCode())
 			tc:CreateEffectRelation(te)
 			if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 then
-				tc:CancelToGrave(false)
+				tc:CancelToRest(false)
 			end
 			if co then co(te,1-tp,eg,ep,ev,re,r,rp,1) end
 			local sg=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,0,nil)

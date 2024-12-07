@@ -39,5 +39,5 @@ function s.adjustop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,turnp,aux.Stringid(id,1))
 	local clv=g:Select(turnp,1,1,nil):GetFirst():GetLevel()
 	local dg=g:Filter(s.filter2,nil,clv)
-	Duel.SendtoGrave(dg,REASON_EFFECT)
+	Duel.SendtoRest(dg,REASON_EFFECT)
 end

@@ -15,7 +15,7 @@ function s.initial_effect(c)
 end
 s.listed_names={82994510}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_GRAVE) and e:GetHandler():IsReason(REASON_BATTLE)
+	return e:GetHandler():IsLocation(LOCATION_REST) and e:GetHandler():IsReason(REASON_BATTLE)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -39,7 +39,7 @@ end
 function s.handop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsReason(REASON_BATTLE) and c:GetBattleTarget():IsRace(RACE_PLANT) then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		Duel.DiscardHand(c:GetPreviousControler(),nil,1,1,REASON_EFFECT)
 	end
 	e:Reset()

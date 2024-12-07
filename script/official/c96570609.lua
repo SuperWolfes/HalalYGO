@@ -1,5 +1,5 @@
 --天帝アイテール
---Ehther the Heavenly Monarch
+--Ehther the Spectrumly Moppar
 local s,id=GetID()
 function s.initial_effect(c)
 	--summon with 1 tribute
@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	--spsummon
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
-	e3:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOGRAVE)
+	e3:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOREST)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetCode(EVENT_SUMMON_SUCCESS)
 	e3:SetProperty(EFFECT_FLAG_DELAY)
@@ -38,7 +38,7 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_TRIBUTE)
 end
 function s.tgfilter(c)
-	return c:IsSetCard(0xbe) and c:IsSpellTrap() and c:IsAbleToGrave()
+	return c:IsSetCard(0xbe) and c:IsActionalTrap() and c:IsAbleToRest()
 end
 function s.spfilter(c,e,tp)
 	return c:IsAttackAbove(2400) and c:GetDefense()==1000 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -50,14 +50,14 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 			and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 			and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,0,1,nil,e,tp)
 	end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,2,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,2,tp,LOCATION_DECK)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_HAND+LOCATION_DECK,0,nil)
 	if g:GetClassCount(Card.GetCode)<2 then return end
-	local tg=aux.SelectUnselectGroup(g,e,tp,2,2,aux.dncheck,1,tp,HINTMSG_TOGRAVE)
-	if Duel.SendtoGrave(tg,REASON_EFFECT)~=0 and tg:IsExists(Card.IsLocation,2,nil,LOCATION_GRAVE) then
+	local tg=aux.SelectUnselectGroup(g,e,tp,2,2,aux.dncheck,1,tp,HINTMSG_TOREST)
+	if Duel.SendtoRest(tg,REASON_EFFECT)~=0 and tg:IsExists(Card.IsLocation,2,nil,LOCATION_REST) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_DECK,0,1,1,nil,e,tp)
 		local tc=g:GetFirst()
@@ -93,14 +93,14 @@ function s.sumcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()~=tp and (ph==PHASE_MAIN1 or ph==PHASE_MAIN2)
 end
 function s.cfilter(c)
-	return c:IsSetCard(0xbe) and c:IsSpellTrap() and c:IsAbleToRemoveAsCost()
+	return c:IsSetCard(0xbe) and c:IsActionalTrap() and c:IsAbleToRemoveAsCost()
 end
 function s.sumcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,nil)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil)
 		and c:GetFlagEffect(id)==0 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 	c:RegisterFlagEffect(id,RESET_CHAIN,0,1)
 end

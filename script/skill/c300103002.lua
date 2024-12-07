@@ -1,4 +1,4 @@
---Spell Proof Armor
+--Actional Proof Armor
 local s,id=GetID()
 function s.initial_effect(c)
 		aux.AddSkillProcedure(c,1,false,s.flipcon,s.flipop)
@@ -15,7 +15,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 		--opd register
 		Duel.RegisterFlagEffect(ep,id,0,0,0)
 		local c=e:GetHandler()
-		--Machine Normal monsters unaffected by opponent's Spell Effects
+		--Machine Normal monsters unaffected by opponent's Actional Effects
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_FIELD)
 		e1:SetCode(EFFECT_IMMUNE_EFFECT)
@@ -33,7 +33,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetValue(0x10001)
 		e2:SetLabelObject(e1)
 		Duel.RegisterEffect(e2,tp)
-		--Flip this Skill face-down if non-Machine monster in GY
+		--Flip this Skill face-down if non-Machine monster in RP
 		local e3=Effect.CreateEffect(e:GetHandler())
 		e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		e3:SetCode(EVENT_ADJUST)
@@ -43,7 +43,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.RegisterEffect(e3,tp)
 end
 function s.efilter(e,re)
-		return e:GetHandlerPlayer()~=re:GetOwnerPlayer() and re:IsSpellEffect()
+		return e:GetHandlerPlayer()~=re:GetOwnerPlayer() and re:IsActionalEffect()
 end
 function s.tribcon(e)
 		local tp=e:GetHandlerPlayer()
@@ -57,7 +57,7 @@ function s.cfilter(c)
 		return c:IsFaceup() and c:IsMonster() and not c:IsRace(RACE_MACHINE)
 end
 function s.fdcon(e,tp,eg,ep,ev,re,r,rp)
-		return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,nil)
+		return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil)
 end
 function s.fdop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_SKILL_FLIP,tp,id|(2<<32))

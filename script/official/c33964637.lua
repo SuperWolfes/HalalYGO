@@ -2,7 +2,7 @@
 --Secret Six Samurai - Rihan
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Special Summon procedure
 	Fusion.AddProcMixN(c,true,true,s.ffilter,3)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,s.splimit)
@@ -25,11 +25,11 @@ function s.initial_effect(c)
 	e2:SetTarget(s.rmtg)
 	e2:SetOperation(s.rmop)
 	c:RegisterEffect(e2)
-	--Destruction replacement for a "Six Samurai" monster
+	--Mismatching replacement for a "Six Samurai" monster
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e3:SetCode(EFFECT_DESTROY_REPLACE)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetTarget(s.reptg)
 	e3:SetValue(s.repval)
 	e3:SetOperation(s.repop)
@@ -42,10 +42,10 @@ function s.ffilter(c,fc,sumtype,tp,sub,mg,sg)
 		and (not sg or not sg:IsExists(s.fusfilter,1,c,c:GetAttribute(fc,sumtype,tp),fc,sumtype,tp))
 end
 function s.contactfil(tp)
-	return Duel.GetMatchingGroup(Card.IsAbleToGraveAsCost,tp,LOCATION_ONFIELD,0,nil)
+	return Duel.GetMatchingGroup(Card.IsAbleToRestAsCost,tp,LOCATION_ONFIELD,0,nil)
 end
 function s.contactop(g)
-	Duel.SendtoGrave(g,REASON_COST|REASON_MATERIAL)
+	Duel.SendtoRest(g,REASON_COST|REASON_MATERIAL)
 end
 function s.fusfilter(c,attr,fc,sumtype,tp)
 	return c:IsAttribute(attr,fc,sumtype,tp) and not c:IsHasEffect(511002961)

@@ -15,7 +15,7 @@ end
 function s.cfilter(c,tp)
 	local ct=math.floor(c:GetLevel()/4)
 	return c:IsFaceup() and c:IsLevelAbove(4) and Duel.GetLocationCount(tp,LOCATION_MZONE)>=ct 
-		and (ct==1 or not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT))
+		and (ct==1 or not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN))
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) and s.cfilter(chkc,tp) end
@@ -31,7 +31,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not tc then return end
 	local ct=math.floor(tc:GetLevel()/4)
 	if not tc:IsRelateToEffect(e) or tc:IsFacedown() or Duel.GetLocationCount(tp,LOCATION_MZONE)<ct 
-		or (ct>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT))
+		or (ct>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN))
 		or not Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0,TYPES_TOKEN,0,0,1,RACE_WARRIOR,ATTRIBUTE_DARK) then return end
 	for i=1,ct do
 		local token=Duel.CreateToken(tp,id+1)

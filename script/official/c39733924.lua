@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_STEP)
 	e2:SetCode(EVENT_FREE_CHAIN)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetHintTiming(TIMING_DAMAGE_STEP,TIMING_DAMAGE_STEP|TIMINGS_CHECK_MONSTER_E)
 	e2:SetCondition(function() return not (Duel.IsPhase(PHASE_DAMAGE) and Duel.IsDamageCalculated()) end)
 	e2:SetCost(aux.SelfBanishCost)
@@ -41,10 +41,10 @@ function s.xyzop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.tgfilter(c,tp)
-	return c:IsFaceup() and c:IsType(TYPE_XYZ) and Duel.IsExistingMatchingCard(s.eqfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,1,c)
+	return c:IsFaceup() and c:IsType(TYPE_XYZ) and Duel.IsExistingMatchingCard(s.eqfilter,tp,LOCATION_MZONE|LOCATION_REST,0,1,c)
 end
 function s.eqfilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_XYZ) and not c:IsForbidden()
+	return c:IsFaceup() and c:IsType(TYPE_XYZ) and not c:IsUnliked()
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.tgfilter(chkc,tp) end
@@ -52,14 +52,14 @@ function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		and Duel.IsExistingTarget(s.tgfilter,tp,LOCATION_MZONE,0,1,nil,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 	Duel.SelectTarget(tp,s.tgfilter,tp,LOCATION_MZONE,0,1,1,nil,tp)
-	Duel.SetOperationInfo(0,CATEGORY_EQUIP,nil,1,tp,LOCATION_MZONE|LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_EQUIP,nil,1,tp,LOCATION_MZONE|LOCATION_REST)
 end
 function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then return end
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and tc:IsFaceup() then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-		local eq=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.eqfilter),tp,LOCATION_MZONE|LOCATION_GRAVE,0,1,1,tc):GetFirst()
+		local eq=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.eqfilter),tp,LOCATION_MZONE|LOCATION_REST,0,1,1,tc):GetFirst()
 		if eq and Duel.Equip(tp,eq,tc) then
 			local c=e:GetHandler()
 			--Equip limit

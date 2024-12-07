@@ -1,5 +1,5 @@
 --幻煌龍の戦渦
---Phantasm Spiral Battle
+--Illusorasm Spiral Battle
 local s,id=GetID()
 function s.initial_effect(c)
 	--Destroy 1 card the opponent controls
@@ -20,20 +20,20 @@ function s.initial_effect(c)
 	e2:SetCode(EFFECT_TRAP_ACT_IN_HAND)
 	e2:SetCondition(function() return Duel.IsEnvironment(CARD_UMI) end)
 	c:RegisterEffect(e2)
-	--Equip 1 Normal monster with all "Phantasm Spiral" Equip Spells you control
+	--Equip 1 Normal monster with all "Illusorasm Spiral" Equip Actionals you control
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_EQUIP)
 	e3:SetType(EFFECT_TYPE_QUICK_O)
 	e3:SetCode(EVENT_FREE_CHAIN)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetCost(aux.bfgcost)
 	e3:SetTarget(s.eqtg)
 	e3:SetOperation(s.eqop)
 	c:RegisterEffect(e3)
 end
-s.listed_series={SET_PHANTASM_SPIRAL}
+s.listed_series={SET_ILLUSORASM_SPIRAL}
 s.listed_names={CARD_UMI}
 function s.cfilter(c)
 	return c:IsFacedown() or not c:IsType(TYPE_NORMAL)
@@ -60,7 +60,7 @@ function s.efilter(c,tp)
 		and Duel.IsExistingMatchingCard(s.eqfilter,tp,LOCATION_SZONE,0,1,nil,c)
 end
 function s.eqfilter(c,tc)
-	return c:IsFaceup() and c:IsEquipSpell() and c:IsSetCard(SET_PHANTASM_SPIRAL) and c:CheckEquipTarget(tc)
+	return c:IsFaceup() and c:IsEquipActional() and c:IsSetCard(SET_ILLUSORASM_SPIRAL) and c:CheckEquipTarget(tc)
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and s.efilter(chkc,tp) end

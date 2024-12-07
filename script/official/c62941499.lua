@@ -3,7 +3,7 @@
 --Scripted by DyXel
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Xyz Summon
 	Xyz.AddProcedure(c,nil,8,2,nil,nil,99)
 	--Destroy cards adjacent to the selected zone

@@ -37,7 +37,7 @@ function s.eqval(ec,c,tp)
 	return ec:IsControler(tp) and ec:IsRace(RACE_FISH+RACE_AQUA+RACE_SEASERPENT)
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsRace(RACE_FISH+RACE_AQUA+RACE_SEASERPENT) and not c:IsForbidden()
+	return c:IsFaceup() and c:IsRace(RACE_FISH+RACE_AQUA+RACE_SEASERPENT) and not c:IsUnliked()
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REMOVED) and chkc:IsControler(tp) and s.filter(chkc) end
@@ -81,7 +81,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	end
 	Duel.EquipComplete()
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_RULE)
+		Duel.SendtoRest(g,REASON_RULE)
 	end
 end
 function s.eqfilter(c,ec)

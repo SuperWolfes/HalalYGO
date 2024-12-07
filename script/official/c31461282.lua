@@ -1,5 +1,5 @@
 --開運ミラクルストーン
---Miracle Stone
+--Pulse Stone
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e2:SetCode(EFFECT_UPDATE_ATTACK)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetTargetRange(LOCATION_MZONE,0)
-	e2:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_SPELLCASTER))
+	e2:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_MENTOR))
 	e2:SetValue(s.atkval)
 	c:RegisterEffect(e2)
 	--Increase DEF

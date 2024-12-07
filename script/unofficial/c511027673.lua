@@ -17,7 +17,7 @@ function s.initial_effect(c)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local loc=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_LOCATION)
-	return re:GetActiveType()==TYPE_PENDULUM|TYPE_SPELL and (loc&LOCATION_PZONE)~=0
+	return re:GetActiveType()==TYPE_PENDULUM|TYPE_ACTIONAL and (loc&LOCATION_PZONE)~=0
 		and not re:IsHasType(EFFECT_TYPE_ACTIVATE)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)

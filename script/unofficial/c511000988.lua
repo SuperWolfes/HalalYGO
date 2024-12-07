@@ -14,10 +14,10 @@ end
 s.illegal=true
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and chkc:IsType(TYPE_FLIP) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and chkc:IsType(TYPE_FLIP) end
 	if chk==0 then return true end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EFFECT)
-	Duel.SelectTarget(tp,Card.IsType,tp,LOCATION_GRAVE,0,1,1,nil,TYPE_FLIP)
+	Duel.SelectTarget(tp,Card.IsType,tp,LOCATION_REST,0,1,1,nil,TYPE_FLIP)
 end
 function s.cfilter(c)
 	return c:IsType(TYPE_FLIP) and c:GetOriginalCode()~=id
@@ -29,7 +29,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		if not tc:IsOriginalCode(id) then
 			c:ReplaceEffect(tc:GetOriginalCode(),RESET_EVENT|RESETS_STANDARD)
 		end
-		if not tc:IsOriginalCode(id) or Duel.IsExistingTarget(s.cfilter,tp,LOCATION_GRAVE,0,1,nil) then
+		if not tc:IsOriginalCode(id) or Duel.IsExistingTarget(s.cfilter,tp,LOCATION_REST,0,1,nil) then
 			Duel.RaiseSingleEvent(c,EVENT_FLIP,e,r,rp,ep,ev)
 		end
 	end

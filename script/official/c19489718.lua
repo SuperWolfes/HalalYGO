@@ -1,10 +1,10 @@
 --魔鍵銃－バトスバスター
---Magikey Blaster - Batosbuster
+--Menkey Blaster - Batosbuster
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
-	--Add 1 Magikey card from Deck to hand
+	c:EnableAwakeLimit()
+	--Add 1 Menkey card from Deck to hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -32,7 +32,7 @@ end
 s.listed_names={99426088}
 s.listed_series={0x167}
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_RITUAL)
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_LOCKED)
 end
 function s.thfilter(c)
 	return c:IsSetCard(0x167) and c:IsAbleToHand()
@@ -57,7 +57,7 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	local bc=c:GetBattleTarget()
 	if bc and bc:IsFaceup() then
 		local att=0
-		for gc in aux.Next(Duel.GetMatchingGroup(s.atkfilter,tp,LOCATION_GRAVE,0,nil)) do
+		for gc in aux.Next(Duel.GetMatchingGroup(s.atkfilter,tp,LOCATION_REST,0,nil)) do
 			att=att|gc:GetAttribute()
 		end
 		return not bc:IsStatus(STATUS_DISABLED) and bc:GetAttribute()&att~=0

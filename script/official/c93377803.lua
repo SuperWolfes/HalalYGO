@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	Duel.EnableGlobalFlag(GLOBALFLAG_SELF_TOGRAVE)
+	Duel.EnableGlobalFlag(GLOBALFLAG_SELF_TOREST)
 	c:SetUniqueOnField(LOCATION_ONFIELD,0,id)
 	--Activate
 	local e1=Effect.CreateEffect(c)
@@ -26,7 +26,7 @@ function s.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e3:SetRange(LOCATION_SZONE)
-	e3:SetCode(EFFECT_SELF_TOGRAVE)
+	e3:SetCode(EFFECT_SELF_TOREST)
 	e3:SetCondition(s.sdcon)
 	c:RegisterEffect(e3)
 	--double atk/def

@@ -2,7 +2,7 @@
 --Malefic Truth Dragon (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Must be Special Summoned with "Malefic Paradigm Shift"
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e3:SetCode(EFFECT_SELF_DESTROY)
 	e3:SetCondition(s.descon2)
 	c:RegisterEffect(e3)
-	--If this card would be destroyed, you can banish 1 "Malefic" monster from your Graveyard instead
+	--If this card would be destroyed, you can banish 1 "Malefic" monster from your Resting Place instead
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_SINGLE)
 	e4:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -66,10 +66,10 @@ end
 function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return not c:IsReason(REASON_REPLACE) 
-		and Duel.IsExistingMatchingCard(s.repfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,1,nil) end
+		and Duel.IsExistingMatchingCard(s.repfilter,tp,LOCATION_MZONE|LOCATION_REST,0,1,nil) end
 	if Duel.SelectEffectYesNo(tp,c,96) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-		local g=Duel.SelectMatchingCard(tp,s.repfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,1,1,nil)
+		local g=Duel.SelectMatchingCard(tp,s.repfilter,tp,LOCATION_MZONE|LOCATION_REST,0,1,1,nil)
 		Duel.Remove(g,POS_FACEUP,REASON_COST)
 		return true
 	else return false end

@@ -31,7 +31,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	else
 		Duel.SortDecktop(p,p,#g)
 	end
-	local dg=Duel.GetMatchingGroup(Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,nil)
+	local dg=Duel.GetMatchingGroup(Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,nil)
 	if #dg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		local sg=dg:Select(tp,1,1,nil)
 		Duel.HintSelection(sg)

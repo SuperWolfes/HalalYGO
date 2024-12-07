@@ -1,5 +1,5 @@
 --
---Libromancer Prevented
+--Librobouncer Prevented
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -21,10 +21,10 @@ function s.initial_effect(c)
 	e2:SetTarget(s.target)
 	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
-	--Send itself to the GY during the End Phase
+	--Send itself to the RP during the End Phase
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
-	e3:SetCategory(CATEGORY_TOGRAVE)
+	e3:SetCategory(CATEGORY_TOREST)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e3:SetCode(EVENT_PHASE+PHASE_END)
 	e3:SetRange(LOCATION_SZONE)
@@ -60,15 +60,15 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.rfilter(c)
-	return c:IsRitualMonster() and c:IsSetCard(0x17d) and c:IsFaceup()
+	return c:IsLockedMonster() and c:IsSetCard(0x17d) and c:IsFaceup()
 end
 function s.tgcond(e,tp,eg,ep,ev,re,r,rp)
 	return not Duel.IsExistingMatchingCard(s.rfilter,tp,LOCATION_MZONE,0,1,nil)
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,e:GetHandler(),1,tp,LOCATION_SZONE)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,e:GetHandler(),1,tp,LOCATION_SZONE)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
+	Duel.SendtoRest(e:GetHandler(),REASON_EFFECT)
 end

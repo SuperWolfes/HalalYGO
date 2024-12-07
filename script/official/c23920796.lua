@@ -1,5 +1,5 @@
 --Japanese name
---Mimighoul Cerberus
+--Mimirahul Cebrar
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -23,14 +23,14 @@ function s.initial_effect(c)
 	e2:SetTarget(s.selfsptg)
 	e2:SetOperation(s.selfspop)
 	c:RegisterEffect(e2)
-	--Your opponent cannot target face-up Spells you control with card effects
+	--Your opponent cannot target face-up Actionals you control with card effects
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
 	e3:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
 	e3:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetTargetRange(LOCATION_ONFIELD,0)
-	e3:SetTarget(function(e,c) return c:IsSpell() end)
+	e3:SetTarget(function(e,c) return c:IsActional() end)
 	e3:SetValue(aux.tgoval)
 	c:RegisterEffect(e3)
 end

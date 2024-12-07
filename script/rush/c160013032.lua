@@ -1,9 +1,9 @@
 --顕現術師ドルテオ
---Manifestation Master Dortheo
+--Expressation Master Dortheo
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send the top 2 cards of your Deck to the GY
+	--Send the top 2 cards of your Deck to the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DECKDES+CATEGORY_DAMAGE)
@@ -20,7 +20,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,0)
 end
 function s.cfilter(c)
-	return c:IsLocation(LOCATION_GRAVE) and c:IsRace(RACE_SPELLCASTER) and c:IsMonster()
+	return c:IsLocation(LOCATION_REST) and c:IsRace(RACE_MENTOR) and c:IsMonster()
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Effect

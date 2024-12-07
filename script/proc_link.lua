@@ -214,7 +214,7 @@ function Link.Operation(f,minc,maxc,specialchk)
 					end
 				end
 				c:SetMaterial(g)
-				Duel.SendtoGrave(g,REASON_MATERIAL+REASON_LINK)
+				Duel.SendtoRest(g,REASON_MATERIAL+REASON_LINK)
 				g:DeleteGroup()
 				aux.DeleteExtraMaterialGroups(emt)
 			end

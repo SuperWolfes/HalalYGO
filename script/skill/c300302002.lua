@@ -1,4 +1,4 @@
---Ritual Ceremony
+--Locked Ceremony
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddSkillProcedure(c,1,false,s.flipcon,s.flipop)
@@ -9,10 +9,10 @@ function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 	and Duel.GetFlagEffect(tp,id)==0
 end
 function s.cffilter(c)
-	return c:IsRitualMonster()
+	return c:IsLockedMonster()
 end
 function s.ritfilter(c,tc)
-	return c:IsRitualSpell() and Ritual.GetMatchingFilterFunction(c)(tc)
+	return c:IsLockedActional() and Locked.GetMatchingFilterFunction(c)(tc)
 end
 function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SKILL_FLIP,tp,id|(1<<32))

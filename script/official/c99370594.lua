@@ -1,25 +1,25 @@
 --劫火の眠り姫ゴースト・スリーパー
---Hellfire Sleeping Beauty, Ghost Sleeper
+--Hellfire Sleeping Beauty, Miss Sleeper
 local s,id=GetID()
 function s.initial_effect(c)
-	--Search 1 "Ghost Fusion"
+	--Search 1 "Miss Fusion"
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DELAY)
-	e1:SetCode(EVENT_TO_GRAVE)
+	e1:SetCode(EVENT_TO_REST)
 	e1:SetCountLimit(1,{id,1})
 	e1:SetTarget(s.thtg)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
-	--Add 1 of your banished Level 4 Zombies to your hand
+	--Add 1 of your banished Level 4 Toxics to your hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,{id,2})
 	e2:SetCondition(aux.exccon)
 	e2:SetCost(s.thcost)
@@ -50,7 +50,7 @@ function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
 end
 function s.thfilter2(c)
-	return c:IsFaceup() and c:IsRace(RACE_ZOMBIE) and c:IsLevelAbove(4) and c:IsMonster() and c:IsAbleToHand()
+	return c:IsFaceup() and c:IsRace(RACE_TOXIC) and c:IsLevelAbove(4) and c:IsMonster() and c:IsAbleToHand()
 end
 function s.thtg2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REMOVED) and s.thfilter2(chkc) end

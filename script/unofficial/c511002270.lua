@@ -1,5 +1,5 @@
 --生者の末路
---Fate of the Living
+--Bate of the Living
 Duel.EnableUnofficialRace(RACE_YOKAI)
 local s,id=GetID()
 function s.initial_effect(c)
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetRange(LOCATION_SZONE)
-	e2:SetTargetRange(LOCATION_GRAVE,LOCATION_GRAVE)
+	e2:SetTargetRange(LOCATION_REST,LOCATION_REST)
 	e2:SetCode(EFFECT_CHANGE_RACE)
 	e2:SetTarget(s.tg)
 	e2:SetValue(function() return RACE_YOKAI end)
@@ -21,7 +21,7 @@ end
 function s.tg(e,c)
 	if c:GetFlagEffect(1)==0 then
 		c:RegisterFlagEffect(1,0,0,0)
-		local eff={c:GetCardEffect(EFFECT_NECRO_VALLEY)}
+		local eff={c:GetCardEffect(EFFECT_REST_VALLEY)}
 		c:ResetFlagEffect(1)
 		for _,te in ipairs(eff) do
 			local op=te:GetOperation()

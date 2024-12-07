@@ -1,5 +1,5 @@
 -- 氷水艇キングフィッシャー
--- Icejade Creation Kingfisher
+-- Icejade Matching Kingfisher
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -61,7 +61,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetLabelObject(tc)
 		c:RegisterEffect(e1)
 	else
-		Duel.SendtoGrave(c,REASON_RULE)
+		Duel.SendtoRest(c,REASON_RULE)
 	end
 end
 function s.atkcon(e)

@@ -16,7 +16,7 @@ s.listed_series={0x2e}
 s.listed_names={id}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsLocation(LOCATION_GRAVE) and c:IsReason(REASON_BATTLE)
+	return c:IsLocation(LOCATION_REST) and c:IsReason(REASON_BATTLE)
 		and c:IsPreviousControler(tp) and c==Duel.GetAttackTarget() and Duel.GetAttacker():IsControler(1-tp)
 end
 function s.filter(c,e,tp)

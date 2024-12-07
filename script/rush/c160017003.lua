@@ -3,10 +3,10 @@
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send to GY
+	--Send to RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,1))
-	e1:SetCategory(CATEGORY_TOGRAVE+CATEGORY_TOHAND)
+	e1:SetCategory(CATEGORY_TOREST+CATEGORY_TOHAND)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1)
@@ -19,8 +19,8 @@ function s.cfilter(c,att,race)
 	return c:IsMonster() and c:IsAttribute(att) and c:IsRace(race)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,nil,ATTRIBUTE_EARTH,RACE_MACHINE)
-		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,nil,ATTRIBUTE_LIGHT,RACE_DRAGON)
+	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil,ATTRIBUTE_EARTH,RACE_MACHINE)
+		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,nil,ATTRIBUTE_LIGHT,RACE_DRAGON)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeck(tp,1) end

@@ -1,10 +1,10 @@
---Number 17: Leviathan Dragon (anime)
+--Number 17: Eel Dragon (anime)
 Duel.LoadCardScript("c69610924.lua")
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,3,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--attack up
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_ATKCHANGE)

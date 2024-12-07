@@ -1,5 +1,5 @@
 --伏魔殿の合わせ札Ⅱ
---Haunted Legend Pair Card 2
+--Drowned Legend Pair Card 2
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)

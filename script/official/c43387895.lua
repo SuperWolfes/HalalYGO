@@ -2,7 +2,7 @@
 --Supreme King Dragon Starving Venom
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion materials: 2 DARK Pendulum monsters
 	Fusion.AddProcMixN(c,true,true,s.ffilter,2)
 	--Special Summon this card by tributing the above cards you control
@@ -36,14 +36,14 @@ function s.copycost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:GetHandler():RegisterFlagEffect(41209827,RESETS_STANDARD_PHASE_END,0,1)
 end
 function s.copyfilter(c)
-	return c:IsMonster() and not c:IsType(TYPE_TOKEN) and (c:IsFaceup() or c:IsLocation(LOCATION_GRAVE))
+	return c:IsMonster() and not c:IsType(TYPE_TOKEN) and (c:IsFaceup() or c:IsLocation(LOCATION_REST))
 end
 function s.copytg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
-	if chkc then return chkc:IsLocation(LOCATION_MZONE|LOCATION_GRAVE) and s.copyfilter(chkc) and chkc~=c end
-	if chk==0 then return Duel.IsExistingTarget(s.copyfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,LOCATION_MZONE|LOCATION_GRAVE,1,c) end
+	if chkc then return chkc:IsLocation(LOCATION_MZONE|LOCATION_REST) and s.copyfilter(chkc) and chkc~=c end
+	if chk==0 then return Duel.IsExistingTarget(s.copyfilter,tp,LOCATION_MZONE|LOCATION_REST,LOCATION_MZONE|LOCATION_REST,1,c) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
-	Duel.SelectTarget(tp,s.copyfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,LOCATION_MZONE|LOCATION_GRAVE,1,1,c)
+	Duel.SelectTarget(tp,s.copyfilter,tp,LOCATION_MZONE|LOCATION_REST,LOCATION_MZONE|LOCATION_REST,1,1,c)
 end
 function s.copyop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

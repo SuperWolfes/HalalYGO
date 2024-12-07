@@ -15,7 +15,7 @@ end
 s.listed_names={2625940}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetAttacker():IsControler(1-tp) and Duel.GetAttackTarget()==nil
-		and Duel.IsExistingMatchingCard(Card.IsRace,tp,LOCATION_GRAVE,0,3,nil,RACE_CYBERSE)
+		and Duel.IsExistingMatchingCard(Card.IsRace,tp,LOCATION_REST,0,3,nil,RACE_CYBERSE)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.NegateAttack() then return end
@@ -23,7 +23,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if ft==0 or not Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0,TYPES_TOKEN,0,0,1,RACE_CYBERSE,ATTRIBUTE_LIGHT,POS_FACEUP_DEFENSE)
 		or not Duel.SelectYesNo(tp,aux.Stringid(id,1)) then return end
 	ft=math.min(ft,3)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	if ft>1 then
 		ft=Duel.AnnounceNumberRange(tp,1,ft)
 	end

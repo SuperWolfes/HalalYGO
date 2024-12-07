@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMixN(c,true,true,CARD_TRANSAMU_RAINAC,1,s.matfilter,2)
 	--Destroy 1 face down-card
 	local e1=Effect.CreateEffect(c)

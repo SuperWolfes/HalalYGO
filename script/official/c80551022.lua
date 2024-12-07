@@ -1,5 +1,5 @@
 --Japanese name
---Mimighoul Slime
+--Mimirahul Slime
 --scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.selfspop)
 	c:RegisterEffect(e2)
 end
-s.listed_series={SET_MIMIGHOUL}
+s.listed_series={SET_MIMIRAHUL}
 function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local c=e:GetHandler()
@@ -34,12 +34,12 @@ function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 end
 function s.spfilter(c,e,tp)
-	return c:IsSetCard(SET_MIMIGHOUL) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsSetCard(SET_MIMIRAHUL) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.effop(e,tp,eg,ep,ev,re,r,rp,chk)
 	local p=1-tp
 	local break_chk=false
-	--Your opponent can Special Summon 1 "Mimighoul" monster from their Deck to their field
+	--Your opponent can Special Summon 1 "Mimirahul" monster from their Deck to their field
 	local g=Duel.GetMatchingGroup(s.spfilter,p,LOCATION_DECK,0,nil,e,p)
 	if #g>0 and Duel.GetLocationCount(p,LOCATION_MZONE,p)>0 and Duel.SelectYesNo(p,aux.Stringid(id,2)) then
 		Duel.Hint(HINT_SELECTMSG,p,HINTMSG_SPSUMMON)

@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--Reveal 1 LIGHT fairy monster, add 1 level 7 LIGHT dragon monster from deck
+	--Reveal 1 LIGHT wanderer monster, add 1 level 7 LIGHT dragon monster from deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_TODECK)
@@ -34,9 +34,9 @@ function s.initial_effect(c)
 	e3:SetOperation(s.spop)
 	c:RegisterEffect(e3)
 end
-	--Check for a LIGHT fairy monster
+	--Check for a LIGHT wanderer monster
 function s.cfilter(c)
-	return c:IsRace(RACE_FAIRY) and c:IsAttribute(ATTRIBUTE_LIGHT) and not c:IsPublic() and c:IsAbleToDeck()
+	return c:IsRace(RACE_WANDERER) and c:IsAttribute(ATTRIBUTE_LIGHT) and not c:IsPublic() and c:IsAbleToDeck()
 end
 	--Check for a level 7 LIGHT dragon monster
 function s.ldlv7filter(c)
@@ -53,7 +53,7 @@ function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_HAND)
 end
-	--Reveal 1 LIGHT fairy monster, add 1 level 7 LIGHT dragon monster, place revealed monster on bottom of deck
+	--Reveal 1 LIGHT wanderer monster, add 1 level 7 LIGHT dragon monster, place revealed monster on bottom of deck
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_DECK,0,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_CONFIRM)

@@ -1,5 +1,5 @@
 -- 忠義の護衛刀
--- Spectral Swords of the Everloyal Guard
+-- Beinl Swords of the Everloyal Guard
 
 local s,id=GetID()
 function s.initial_effect(c)

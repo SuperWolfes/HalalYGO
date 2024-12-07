@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-	e2:SetCode(EVENT_TO_GRAVE)
+	e2:SetCode(EVENT_TO_REST)
 	e2:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
 	e2:SetCondition(s.spcon)
 	e2:SetCost(s.spcost)
@@ -26,14 +26,14 @@ function s.initial_effect(c)
 end
 s.listed_series={0xd2}
 function s.cfilter(c)
-	return c:IsSetCard(0xd2) and c:IsMonster() and c:IsAbleToGraveAsCost()
+	return c:IsSetCard(0xd2) and c:IsMonster() and c:IsAbleToRestAsCost()
 end
 function s.adcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_DECK,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_DECK,0,1,1,nil)
 	local tc=g:GetFirst()
-	Duel.SendtoGrave(tc,REASON_COST)
+	Duel.SendtoRest(tc,REASON_COST)
 	e:SetLabel(tc:GetLevel())
 end
 function s.adtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -66,7 +66,7 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsLocation(LOCATION_GRAVE) and aux.bfgcost(e,tp,eg,ep,ev,re,r,rp,0) end
+	if chk==0 then return c:IsLocation(LOCATION_REST) and aux.bfgcost(e,tp,eg,ep,ev,re,r,rp,0) end
 	Duel.Remove(c,POS_FACEUP,REASON_COST)
 end
 function s.spfilter(c,e,tp)

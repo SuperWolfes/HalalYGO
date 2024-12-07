@@ -21,8 +21,8 @@ function s.initial_effect(c)
 	e1:SetTarget(s.tokentg)
 	e1:SetOperation(s.tokenop)
 	c:RegisterEffect(e1)
-	local rparams={filter=aux.FilterBoolFunction(Card.IsSetCard,SET_NOUVELLES),lvtype=RITPROC_EQUAL,forcedselection=s.forced}
-	--Ritual Summon 1 "Nouvelles" Ritual Monster
+	local rparams={filter=aux.FilterBoolFunction(Card.IsSetCard,SET_NOUVELLES),lvtype=RITPROC_EQUAL,fcoreedselection=s.fcoreed}
+	--Locked Summon 1 "Nouvelles" Locked Monster
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_RELEASE+CATEGORY_SPECIAL_SUMMON)
@@ -32,24 +32,24 @@ function s.initial_effect(c)
 	e2:SetHintTiming(0,TIMINGS_CHECK_MONSTER_E)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCost(s.rtcost)
-	e2:SetTarget(Ritual.Target(rparams))
-	e2:SetOperation(Ritual.Operation(rparams))
+	e2:SetTarget(Locked.Target(rparams))
+	e2:SetOperation(Locked.Operation(rparams))
 	c:RegisterEffect(e2)
 end
 s.listed_names={id+1}
 s.listed_series={SET_NOUVELLES}
 function s.tokentg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() and chkc:IsRitualMonster() end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() and chkc:IsLockedMonster() end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,SET_NOUVELLES,TYPES_TOKEN,50,50,1,RACE_FIEND,ATTRIBUTE_DARK)
-		and Duel.IsExistingTarget(aux.FaceupFilter(Card.IsRitualMonster),tp,LOCATION_MZONE,0,1,nil) end
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,SET_NOUVELLES,TYPES_TOKEN,50,50,1,RACE_TAINTED,ATTRIBUTE_DARK)
+		and Duel.IsExistingTarget(aux.FaceupFilter(Card.IsLockedMonster),tp,LOCATION_MZONE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	Duel.SelectTarget(tp,aux.FaceupFilter(Card.IsRitualMonster),tp,LOCATION_MZONE,0,1,1,nil)
+	Duel.SelectTarget(tp,aux.FaceupFilter(Card.IsLockedMonster),tp,LOCATION_MZONE,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,1,tp,0)
 end
 function s.tokenop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0
-		or not Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,SET_NOUVELLES,TYPES_TOKEN,50,50,1,RACE_FIEND,ATTRIBUTE_DARK) then return false end
+		or not Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,SET_NOUVELLES,TYPES_TOKEN,50,50,1,RACE_TAINTED,ATTRIBUTE_DARK) then return false end
 	local tc=Duel.GetFirstTarget()
 	local token=Duel.CreateToken(tp,id+1)
 	if Duel.SpecialSummonStep(token,0,tp,tp,false,false,POS_FACEUP) and tc:IsRelateToEffect(e) and tc:IsFaceup() then
@@ -65,10 +65,10 @@ function s.tokenop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.rtcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGraveAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED) end
-	Duel.SendtoGrave(c,REASON_COST)
+	if chk==0 then return c:IsAbleToRestAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED) end
+	Duel.SendtoRest(c,REASON_COST)
 end
-function s.forced(e,tp,g,sc)
+function s.fcoreed(e,tp,g,sc)
 	local c=e:GetHandler()
 	return not g:IsContains(c),g:IsContains(c)
 end

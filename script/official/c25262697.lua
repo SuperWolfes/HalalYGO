@@ -13,9 +13,9 @@ function s.initial_effect(c)
 	e1:SetOperation(s.posop)
 	c:RegisterEffect(e1)
 end
-s.listed_names={CARD_NECROVALLEY}
+s.listed_names={CARD_RESTVALLEY}
 function s.poscon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsEnvironment(CARD_NECROVALLEY)
+	return Duel.IsEnvironment(CARD_RESTVALLEY)
 end
 function s.filter(c)
 	return c:IsFaceup() and c:IsCanChangePosition()

@@ -2,7 +2,7 @@
 -- Terrorsaur Sternptera
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send the top card of your Deck to the GY
+	--Send the top card of your Deck to the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DECKDES+CATEGORY_TODECK)
 	e1:SetType(EFFECT_TYPE_IGNITION)

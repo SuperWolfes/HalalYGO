@@ -1,5 +1,5 @@
 --ウィッチクラフト・コラボレーション
---Witchcrafter Collaboration
+--Mintcrafter Collaboration
 --Scripted by Naim
 
 local s,id=GetID()
@@ -14,13 +14,13 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
-	--Add this card from GY to hand
+	--Add this card from RP to hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
-	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_LEAVE_GRAVE)
+	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_LEAVE_REST)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_PHASE+PHASE_END)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,id)
 	e2:SetCondition(s.thcon2)
 	e2:SetTarget(s.thtg2)
@@ -53,7 +53,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetValue(1)
 		tc:RegisterEffect(e1)
 		tc:RegisterFlagEffect(0,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,EFFECT_FLAG_CLIENT_HINT,1,0,3201)
-		--Opponent cannot activate spells/traps until end of damage step
+		--Opponent cannot activate actionals/traps until end of damage step
 		local e2=Effect.CreateEffect(e:GetHandler())
 		e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 		e2:SetCode(EVENT_ATTACK_ANNOUNCE)
@@ -81,7 +81,7 @@ end
 function s.thtg2(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsAbleToHand() end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,c,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,c,1,tp,LOCATION_REST)
 end
 function s.thop2(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

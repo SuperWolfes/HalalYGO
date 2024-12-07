@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.mmvtg)
 	e2:SetOperation(s.mmvop)
 	c:RegisterEffect(e2)
-	-- Move 1 "Valiants" Pendulum Spell
+	-- Move 1 "Valiants" Pendulum Actional
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
@@ -109,13 +109,13 @@ function s.smvop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOZONE)
 	local zone=math.log(Duel.SelectDisableField(tp,1,LOCATION_SZONE,0,~(flag<<8)),2)-8
 	if Duel.MoveSequence(tc,zone,LOCATION_SZONE) then
-		-- Treat as Continuous Spell
+		-- Treat as Continuous Actional
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetCode(EFFECT_CHANGE_TYPE)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
-		e1:SetValue(TYPE_SPELL+TYPE_CONTINUOUS)
+		e1:SetValue(TYPE_ACTIONAL+TYPE_CONTINUOUS)
 		tc:RegisterEffect(e1)
 	end
 end

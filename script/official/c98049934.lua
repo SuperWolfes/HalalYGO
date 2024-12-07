@@ -3,7 +3,7 @@
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	-- 2 Level 2 monsters
 	Xyz.AddProcedure(c,nil,2,2)
 	-- Negate 1 monster's effects
@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	e2:SetCode(EVENT_FREE_CHAIN)
 	e2:SetHintTiming(0,TIMINGS_CHECK_MONSTER|TIMING_MAIN_END)
 	c:RegisterEffect(e2)
-	-- Attach "Purrely" Quick-Play Spell
+	-- Attach "Purrely" Quick-Play Actional
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_POSITION)
@@ -71,7 +71,7 @@ end
 function s.qpovcon(e,tp,eg,ep,ev,re,r,rp)
 	if rp==1-tp or not re:IsHasType(EFFECT_TYPE_ACTIVATE) then return false end
 	local rc=re:GetHandler()
-	return rc:IsSetCard(SET_PURRELY) and rc:IsQuickPlaySpell()
+	return rc:IsSetCard(SET_PURRELY) and rc:IsQuickPlayActional()
 		and rc:IsOnField() and rc:IsCanBeXyzMaterial(e:GetHandler(),tc,REASON_EFFECT)
 end
 function s.qpovtg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -86,7 +86,7 @@ function s.qpovop(e,tp,eg,ep,ev,re,r,rp)
 		and rc:IsCanBeXyzMaterial(c,tp,REASON_EFFECT) then
 		Duel.Overlay(c,rc)
 		if not c:GetOverlayGroup():IsContains(rc) then return end
-		rc:CancelToGrave()
+		rc:CancelToRest()
 		if Duel.IsExistingMatchingCard(Card.IsCanChangePosition,tp,0,LOCATION_MZONE,1,nil)
 			and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_POSCHANGE)

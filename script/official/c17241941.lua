@@ -1,5 +1,5 @@
 --ダイカミナリ・ジャイクロプス
---Daikaminari Gyclops
+--Daikamijira Gyclops
 --Logical Nonsense
 
 --Substitute ID
@@ -35,7 +35,7 @@ function s.initial_effect(c)
 	e2:SetCountLimit(1)
 	e2:SetOperation(s.posop)
 	c:RegisterEffect(e2)
-	--Destroy 1 face-up spell/trap on the field
+	--Destroy 1 face-up actional/trap on the field
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_DESTROY)
@@ -95,7 +95,7 @@ function s.posop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsSpellTrap()
+	return c:IsFaceup() and c:IsActionalTrap()
 end
 	--Activation legality
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -105,7 +105,7 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
 end
-	--Destroy 1 face-up spell/trap on the field
+	--Destroy 1 face-up actional/trap on the field
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	local tc=Duel.GetFirstTarget()

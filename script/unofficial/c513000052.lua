@@ -1,9 +1,9 @@
 --究極時械神セフィロン (Anime)
---Sephylon, the Ultimate Timelord (Anime)
+--Sephylon, the Ultimate Timewatcher (Anime)
 local s,id=GetID()
-local LOCATION_HDG=LOCATION_HAND|LOCATION_DECK|LOCATION_GRAVE
+local LOCATION_HDG=LOCATION_HAND|LOCATION_DECK|LOCATION_REST
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Must be Special Summoned with "Infinite Light"
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_SPSUMMON_CONDITION)
 	e1:SetValue(s.splimit)
 	c:RegisterEffect(e1)
-	--Special Summon as many "Timelord" monsters as possible from your hand, Deck, and/or Graveyard
+	--Special Summon as many "Timewatcher" monsters as possible from your hand, Deck, and/or Resting Place
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
-	--Gains ATK equal to the combined ATK of all "Timelord" monsters you control
+	--Gains ATK equal to the combined ATK of all "Timewatcher" monsters you control
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -53,13 +53,13 @@ function s.initial_effect(c)
 	e6:SetOperation(s.repop)
 	c:RegisterEffect(e6)
 end
-s.listed_series={SET_TIMELORD}
+s.listed_series={SET_TIMEWATCHER}
 s.listed_names={72883039,8967776}
 function s.splimit(e,se,sp,st)
 	return se:GetHandler():IsCode(72883039) or Duel.GetChainInfo(0,CHAININFO_TRIGGERING_CODE)==72883039
 end
 function s.filter(c,e,tp)
-	return c:IsSetCard(SET_TIMELORD) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsSetCard(SET_TIMEWATCHER) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
@@ -69,9 +69,9 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ft<=0 then return end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,LOCATION_HDG,0,ft,ft,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.filter),tp,LOCATION_HDG,0,ft,ft,nil,e,tp)
 	local c=e:GetHandler()
 	for tc in aux.Next(g) do
 		Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP)
@@ -85,7 +85,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SpecialSummonComplete()
 end
 function s.cfilter(c)
-	return c:IsSetCard(SET_TIMELORD) and not c:IsCode(8967776) and c:IsFaceup()
+	return c:IsSetCard(SET_TIMEWATCHER) and not c:IsCode(8967776) and c:IsFaceup()
 end
 function s.atkval(e,c)
 	local g=Duel.GetMatchingGroup(s.cfilter,c:GetControler(),LOCATION_MZONE,0,nil)
@@ -107,7 +107,7 @@ function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	return false
 end
 function s.repfilter(c)
-	return c:IsSetCard(SET_TIMELORD) and c:IsFaceup() and c:IsAbleToRemove()
+	return c:IsSetCard(SET_TIMEWATCHER) and c:IsFaceup() and c:IsAbleToRemove()
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

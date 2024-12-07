@@ -1,5 +1,5 @@
 --妖仙獣の居太刀風
---Yosenju Weaselblade Wind
+--Yosakhi Weaselblade Wind
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)

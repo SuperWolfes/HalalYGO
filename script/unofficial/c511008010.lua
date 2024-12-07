@@ -1,10 +1,10 @@
---The King of Divine Punishment, Dark Highlander
+--The King of Mega Punishment, Dark Highlander
 --Scripted by Snrk
 local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
-	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_FIEND),1,1,Synchro.NonTunerEx(Card.IsRace,RACE_FIEND),1,99)
-	c:EnableReviveLimit()
+	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_TAINTED),1,1,Synchro.NonTunerEx(Card.IsRace,RACE_TAINTED),1,99)
+	c:EnableAwakeLimit()
 	--disable spsummon
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTargetRange(0,1)
 	e1:SetTarget(s.splimit)
 	c:RegisterEffect(e1)
-	--send to grave
+	--send to rest
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_DESTROY+CATEGORY_DAMAGE)

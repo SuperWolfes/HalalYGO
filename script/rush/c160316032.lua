@@ -27,7 +27,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_ATKCHANGE,nil,1,1-tp,-400)
 end
 function s.filter(c)
-	return c:IsLocation(LOCATION_GRAVE) and c:IsRace(RACE_PYRO) and c:IsMonster()
+	return c:IsLocation(LOCATION_REST) and c:IsRace(RACE_PYRO) and c:IsMonster()
 end
 function s.atkfilter(c)
 	return c:IsFaceup() and c:IsLevelBelow(8) and c:IsNotMaximumModeSide()

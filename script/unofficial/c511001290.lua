@@ -1,4 +1,4 @@
---Moonlight Purple Butterfly
+--Horizonlight Purple Butterfly
 local s,id=GetID()
 function s.initial_effect(c)
 	--gain atk

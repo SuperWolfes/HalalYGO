@@ -4,9 +4,9 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion Material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,160017019,160017017)
-	--Excavate and destroy Spell/Traps
+	--Excavate and destroy Actional/Traps
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DESTROY)
@@ -23,8 +23,8 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ConfirmDecktop(1-tp,4)
 	local g=Duel.GetDecktopGroup(1-tp,4)
-	local sg=Duel.GetMatchingGroup(Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,nil)
-	if g:FilterCount(Card.IsSpellTrap,nil)>0 and #sg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+	local sg=Duel.GetMatchingGroup(Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,nil)
+	if g:FilterCount(Card.IsActionalTrap,nil)>0 and #sg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.Destroy(sg,REASON_EFFECT)
 	end 
 	Duel.SortDecktop(1-tp,1-tp,4)

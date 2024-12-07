@@ -1,10 +1,10 @@
 --No.102 光天使グローリアス・ヘイロー
---Number 102: Star Seraph Sentry
+--Number 102: Star Watcher Sentry
 local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz summon
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGHT),4,3)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Negate
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1,false,REGISTER_FLAG_DETACH_XMAT)
-	--Destruction Replacement
+	--Mismatching Replacement
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_SINGLE)
 	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -66,7 +66,7 @@ function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return not c:IsReason(REASON_REPLACE) and c:CheckRemoveOverlayCard(tp,1,REASON_EFFECT) end
 	if Duel.SelectEffectYesNo(tp,c,96) then
 		local g=c:GetOverlayGroup()
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_FIELD)
 		e1:SetCode(EFFECT_CHANGE_BATTLE_DAMAGE)

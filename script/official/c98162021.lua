@@ -1,5 +1,5 @@
 --紫炎の荒武者
---Shien's Daredevil
+--Shien's Darewell
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(0x3)

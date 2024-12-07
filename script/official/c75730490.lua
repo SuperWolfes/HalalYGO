@@ -5,7 +5,7 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon 1 Level 4 or lower Fiend monster from the Deck
+	--Special Summon 1 Level 4 or lower Tainted monster from the Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -33,26 +33,26 @@ end
 	--Mentions itself
 s.listed_names={id}
 
-	--Send 1 Normal Trap from hand or field to GY as cost
+	--Send 1 Normal Trap from hand or field to RP as cost
 function s.spcfilter(c,tp)
-	return c:GetType()==TYPE_TRAP and c:IsAbleToGraveAsCost() and (c:IsLocation(LOCATION_HAND) or c:IsFacedown())
+	return c:GetType()==TYPE_TRAP and c:IsAbleToRestAsCost() and (c:IsLocation(LOCATION_HAND) or c:IsFacedown())
 		and Duel.GetMZoneCount(tp,c)>0
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.spcfilter,tp,LOCATION_HAND+LOCATION_ONFIELD,0,1,nil,tp) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.spcfilter,tp,LOCATION_HAND+LOCATION_ONFIELD,0,1,1,nil,tp)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 	--Activation legality
 function s.spfilter(c,e,tp)
-	return c:IsRace(RACE_FIEND) and c:IsLevelBelow(4) and not c:IsCode(id) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
+	return c:IsRace(RACE_TAINTED) and c:IsLevelBelow(4) and not c:IsCode(id) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,0,1,nil,e,tp) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK)
 end
-	--Special Summon 1 Level 4 or lower Fiend monster from the Deck, except "Labrynth Servant Arianne"
+	--Special Summon 1 Level 4 or lower Tainted monster from the Deck, except "Labrynth Servant Arianne"
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
@@ -76,12 +76,12 @@ function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetTargetParam(1)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
 end
-	--Draw 1 card, then you can Special Summon 1 Fiend monster, or Set 1 Spell/Trap, from hand
+	--Draw 1 card, then you can Special Summon 1 Tainted monster, or Set 1 Actional/Trap, from hand
 function s.ffilter(c,e,tp)
-	return c:IsRace(RACE_FIEND) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsRace(RACE_TAINTED) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.stfilter(c)
-	return c:IsSpellTrap() and c:IsSSetable()
+	return c:IsActionalTrap() and c:IsSSetable()
 end
 function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)

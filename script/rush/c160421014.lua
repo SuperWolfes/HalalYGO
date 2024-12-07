@@ -2,7 +2,7 @@
 --Infinidream Constructor Wyrm Buildrim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--1 Build Dragon + 1 Pylong
 	Fusion.AddProcMix(c,true,true,160004024,160421037)
 	--Destroy 2 of opponent's monsters
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.costfilter(c)
-	return c:IsLocation(LOCATION_FZONE) and c:IsAbleToGraveAsCost()
+	return c:IsLocation(LOCATION_FZONE) and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_ONFIELD,0,1,nil,e,tp) end
@@ -31,9 +31,9 @@ end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	-- requirement
 	local c=e:GetHandler()
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_ONFIELD,0,1,1,nil)
-	local ct=Duel.SendtoGrave(g,REASON_COST)
+	local ct=Duel.SendtoRest(g,REASON_COST)
 	if ct>0 then
 		--Effect
 		local g=Duel.GetMatchingGroup(aux.FilterMaximumSideFunctionEx(aux.TRUE),tp,0,LOCATION_MZONE,nil)

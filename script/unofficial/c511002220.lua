@@ -1,4 +1,4 @@
---Moon-light Black Sheep
+--Horizon-light Black Sheep
 local s,id=GetID()
 function s.initial_effect(c)	
 	--tohand
@@ -16,7 +16,7 @@ end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return c:IsPreviousLocation(LOCATION_ONFIELD) and c:IsPreviousControler(tp) 
-		and c:IsLocation(LOCATION_GRAVE) and r==REASON_FUSION
+		and c:IsLocation(LOCATION_REST) and r==REASON_FUSION
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsRelateToEffect(e) and e:GetHandler():IsAbleToHand() end

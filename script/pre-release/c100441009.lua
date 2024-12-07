@@ -1,5 +1,5 @@
 --Ｆａｉｒｙ Ｔａｌｅ 序章 旅立ちの暁光
---Fairy Tale Prologue: Journey's Dawn
+--Wanderer Tale Prologue: Journey's Dawn
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.drtg)
 	e2:SetOperation(s.drop)
 	c:RegisterEffect(e2)
-	--Place 1 Field Spell from your hand or Deck face-up in your Field Zone, except "Fairy Tale Prologue: Journey's Dawn"
+	--Place 1 Field Actional from your hand or Deck face-up in your Field Zone, except "Wanderer Tale Prologue: Journey's Dawn"
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
@@ -37,7 +37,7 @@ function s.initial_effect(c)
 	e3:SetRange(LOCATION_FZONE)
 	e3:SetCountLimit(1)
 	e3:SetCondition(function(e,tp) return Duel.IsTurnPlayer(tp) end)
-	e3:SetCost(aux.SelfToGraveCost)
+	e3:SetCost(aux.SelfToRestCost)
 	e3:SetTarget(s.pltg)
 	e3:SetOperation(s.plop)
 	c:RegisterEffect(e3)
@@ -62,7 +62,7 @@ function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Draw(p,d,REASON_EFFECT)
 end
 function s.plfilter(c,tp)
-	return c:IsFieldSpell() and not c:IsForbidden() and c:CheckUniqueOnField(tp) and not c:IsCode(id)
+	return c:IsFieldActional() and not c:IsUnliked() and c:CheckUniqueOnField(tp) and not c:IsCode(id)
 end
 function s.pltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.plfilter,tp,LOCATION_HAND|LOCATION_DECK,0,1,nil,tp) end
@@ -73,7 +73,7 @@ function s.plop(e,tp,eg,ep,ev,re,r,rp)
 	if not sc then return end
 	local fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
 	if fc then
-		Duel.SendtoGrave(fc,REASON_RULE)
+		Duel.SendtoRest(fc,REASON_RULE)
 		Duel.BreakEffect()
 	end
 	Duel.MoveToField(sc,tp,tp,LOCATION_FZONE,POS_FACEUP,true)

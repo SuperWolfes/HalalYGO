@@ -1,5 +1,5 @@
 --花札衛－芒に月－ (Anime)
---Flower Cardian Zebra Grass with Moon (Anime)
+--Flower Cardian Zebra Grass with Horizon (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableUnsummonable()
@@ -44,7 +44,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 			if Cardian.CheckSpCondition(tc) then
 				Duel.ShuffleHand(tp)
 			else
-				Duel.SendtoGrave(tc,REASON_EFFECT)
+				Duel.SendtoRest(tc,REASON_EFFECT)
 			end
 		end
 	end

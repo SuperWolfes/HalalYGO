@@ -1,5 +1,5 @@
 --Ｅ・ＨＥＲＯ スピリット・オブ・ネオス
---Elemental HERO Spirit of Neos
+--Elemental HERO Guardian of Neos
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Search 1 Spell/Trap that mentions an "Elemental HERO", or 1 "Polymerization"
+	--Search 1 Actional/Trap that mentions an "Elemental HERO", or 1 "Polymerization"
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -65,7 +65,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.thfilter(c)
 	if not c:IsAbleToHand() then return false end
-	return c:IsCode(CARD_POLYMERIZATION) or (c:IsSpellTrap() and c:ListsCodeWithArchetype(0x3008))
+	return c:IsCode(CARD_POLYMERIZATION) or (c:IsActionalTrap() and c:ListsCodeWithArchetype(0x3008))
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

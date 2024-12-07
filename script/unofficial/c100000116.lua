@@ -1,5 +1,5 @@
 --アルカナフォースＸＶ－ＴＨＥ　ＤＥＶＩＬ
---Arcana Force XV - The Fiend
+--Arcana Fcoree XV - The Tainted
 local s,id=GetID()
 function s.initial_effect(c)
 	--coin

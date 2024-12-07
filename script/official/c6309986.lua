@@ -34,11 +34,11 @@ function s.filter(c,e,tp,code)
 	return c:IsCode(code) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	local locs=LOCATION_DECK+LOCATION_HAND+LOCATION_GRAVE
+	local locs=LOCATION_DECK+LOCATION_HAND+LOCATION_REST
 	if chk==0 then
 		if e:GetLabel()==0 and Duel.GetLocationCount(tp,LOCATION_MZONE)<5 then return false end
 		e:SetLabel(0)
-		return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) 
+		return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) 
 			and Duel.IsExistingMatchingCard(s.filter,tp,locs,0,1,nil,e,tp,44632120)
 			and Duel.IsExistingMatchingCard(s.filter,tp,locs,0,1,nil,e,tp,71036835)
 			and Duel.IsExistingMatchingCard(s.filter,tp,locs,0,1,nil,e,tp,7021574)
@@ -48,13 +48,13 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,5,tp,locs)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local locs=LOCATION_DECK+LOCATION_HAND+LOCATION_GRAVE
-	if Duel.GetLocationCount(tp,LOCATION_MZONE)<5 or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
-	local g1=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.filter),tp,locs,0,nil,e,tp,44632120)
-	local g2=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.filter),tp,locs,0,nil,e,tp,71036835)
-	local g3=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.filter),tp,locs,0,nil,e,tp,7021574)
-	local g4=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.filter),tp,locs,0,nil,e,tp,34419588)
-	local g5=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.filter),tp,locs,0,nil,e,tp,CARD_KURIBOH)
+	local locs=LOCATION_DECK+LOCATION_HAND+LOCATION_REST
+	if Duel.GetLocationCount(tp,LOCATION_MZONE)<5 or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
+	local g1=Duel.GetMatchingGroup(aux.RestValleyFilter(s.filter),tp,locs,0,nil,e,tp,44632120)
+	local g2=Duel.GetMatchingGroup(aux.RestValleyFilter(s.filter),tp,locs,0,nil,e,tp,71036835)
+	local g3=Duel.GetMatchingGroup(aux.RestValleyFilter(s.filter),tp,locs,0,nil,e,tp,7021574)
+	local g4=Duel.GetMatchingGroup(aux.RestValleyFilter(s.filter),tp,locs,0,nil,e,tp,34419588)
+	local g5=Duel.GetMatchingGroup(aux.RestValleyFilter(s.filter),tp,locs,0,nil,e,tp,CARD_KURIBOH)
 	if #g1>0 and #g2>0 and #g3>0 and #g4>0 and #g5>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local sg1=g1:Select(tp,1,1,nil)

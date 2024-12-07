@@ -1,12 +1,12 @@
 --魔鍵－マフテア
---Magikey Maftea
+--Menkey Maftea
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	--Fusion/Ritual summon
-	local fparams={fusfilter=aux.FilterBoolFunction(Card.IsSetCard,SET_MAGIKEY),extrafil=s.fextra,extratg=s.extratg}
-	local rparams={filter=aux.FilterBoolFunction(Card.IsSetCard,SET_MAGIKEY),lvtype=RITPROC_GREATER,extrafil=s.rextra,extraop=s.extraop,forcedselection=s.rcheck,extratg=s.extratg}
-	local fustg,fusop,rittg,ritop=Fusion.SummonEffTG(fparams),Fusion.SummonEffOP(fparams),Ritual.Target(rparams),Ritual.Operation(rparams)
+	--Fusion/Locked summon
+	local fparams={fusfilter=aux.FilterBoolFunction(Card.IsSetCard,SET_MENKEY),extrafil=s.fextra,extratg=s.extratg}
+	local rparams={filter=aux.FilterBoolFunction(Card.IsSetCard,SET_MENKEY),lvtype=RITPROC_GREATER,extrafil=s.rextra,extraop=s.extraop,fcoreedselection=s.rcheck,extratg=s.extratg}
+	local fustg,fusop,rittg,ritop=Fusion.SummonEffTG(fparams),Fusion.SummonEffOP(fparams),Locked.Target(rparams),Locked.Operation(rparams)
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation(fustg,fusop,rittg,ritop))
 	c:RegisterEffect(e1)
 end
-s.listed_series={SET_MAGIKEY}
+s.listed_series={SET_MENKEY}
 function s.fextra(e,tp,mg)
 	if Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsType,TYPE_NORMAL),tp,LOCATION_MZONE,0,1,nil) then
 		local sg=Duel.GetMatchingGroup(s.fexfilter,tp,LOCATION_DECK,0,nil)
@@ -27,10 +27,10 @@ function s.fextra(e,tp,mg)
 end
 function s.extratg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
 function s.fexfilter(c)
-	return c:IsType(TYPE_NORMAL) and c:IsAbleToGrave()
+	return c:IsType(TYPE_NORMAL) and c:IsAbleToRest()
 end
 function s.fcheck(tp,sg,fc)
 	return sg:FilterCount(Card.IsLocation,nil,LOCATION_DECK)<=1
@@ -50,8 +50,8 @@ end
 function s.extraop(mg,e,tp,eg,ep,ev,re,r,rp)
 	local mat2=mg:Filter(Card.IsLocation,nil,LOCATION_DECK)
 	mg:Sub(mat2)
-	Duel.ReleaseRitualMaterial(mg)
-	Duel.SendtoGrave(mat2,REASON_EFFECT+REASON_MATERIAL+REASON_RITUAL)
+	Duel.ReleaseLockedMaterial(mg)
+	Duel.SendtoRest(mat2,REASON_EFFECT+REASON_MATERIAL+REASON_LOCKED)
 end
 function s.target(fustg,rittg)
 	return function(e,tp,eg,ep,ev,re,r,rp,chk)

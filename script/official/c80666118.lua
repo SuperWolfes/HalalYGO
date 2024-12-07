@@ -1,18 +1,18 @@
 --レッド・デーモンズ・ドラゴン・スカーライト
---Scarlight Red Dragon Archfiend
+--Scarlight Red Dragon Archtainted
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Synchro Summon Procedure
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
-	--Name becomes "Red Dragon Archfiend"
+	--Name becomes "Red Dragon Archtainted"
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e1:SetCode(EFFECT_CHANGE_CODE)
-	e1:SetRange(LOCATION_MZONE|LOCATION_GRAVE)
-	e1:SetValue(CARD_RED_DRAGON_ARCHFIEND)
+	e1:SetRange(LOCATION_MZONE|LOCATION_REST)
+	e1:SetValue(CARD_RED_DRAGON_ARCHTAINTED)
 	c:RegisterEffect(e1)
 	--Destroy monsters and inflict damage
 	local e2=Effect.CreateEffect(c)
@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.desop)
 	c:RegisterEffect(e2)
 end
-s.listed_names={CARD_RED_DRAGON_ARCHFIEND}
+s.listed_names={CARD_RED_DRAGON_ARCHTAINTED}
 function s.filter(c,atk)
 	return c:IsFaceup() and c:IsAttackBelow(atk) and (c:GetSummonType()&SUMMON_TYPE_SPECIAL)==SUMMON_TYPE_SPECIAL
 		and c:IsType(TYPE_EFFECT)

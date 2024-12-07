@@ -1,4 +1,4 @@
---Spirit Battle
+--Guardian Battle
 local s,id=GetID()
 function s.initial_effect(c)
 	--active
@@ -16,11 +16,11 @@ function s.filter(c,e,tp,tid)
 end
 function s.target(e,tp,eg,ev,ep,re,r,rp,chk)
 	local tid=Duel.GetTurnCount()
-	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil,e,tp,tid) and Duel.IsExistingTarget(s.filter,tp,0,LOCATION_GRAVE,1,nil,e,tp,tid) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.GetLocationCount(1-tp,LOCATION_MZONE)>0 end
+	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil,e,tp,tid) and Duel.IsExistingTarget(s.filter,tp,0,LOCATION_REST,1,nil,e,tp,tid) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.GetLocationCount(1-tp,LOCATION_MZONE)>0 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local tg1=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp,tid)
+	local tg1=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil,e,tp,tid)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local tg2=Duel.SelectTarget(1-tp,s.filter,tp,0,LOCATION_GRAVE,1,1,nil,e,tp,tid)
+	local tg2=Duel.SelectTarget(1-tp,s.filter,tp,0,LOCATION_REST,1,1,nil,e,tp,tid)
 	local monster_1=tg1:GetFirst()
 	local monster_2=tg2:GetFirst()
 	local atk1=monster_1:GetAttack()

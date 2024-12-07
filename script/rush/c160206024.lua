@@ -17,10 +17,10 @@ function s.fcheck(tp,sg,fc)
 	return sg:FilterCount(Card.IsLocation,nil,LOCATION_MZONE)==1
 end
 function s.exfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_DRAGON) and (c:IsType(TYPE_NORMAL) or c:IsLocation(LOCATION_GRAVE))
+	return c:IsFaceup() and c:IsRace(RACE_DRAGON) and (c:IsType(TYPE_NORMAL) or c:IsLocation(LOCATION_REST))
 end
 function s.fextra(e,tp,mg)
-	local eg=Duel.GetMatchingGroup(s.exfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,nil)
+	local eg=Duel.GetMatchingGroup(s.exfilter,tp,LOCATION_MZONE|LOCATION_REST,0,nil)
 	if #eg>0 then
 		return eg,s.fcheck
 	end

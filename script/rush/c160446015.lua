@@ -1,3 +1,3 @@
 --ロイヤルデモンズ・パンク
---Royal Demon's Punk
+--Royal Warden's Punk
 Duel.LoadCardScriptAlias(160201017)

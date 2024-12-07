@@ -2,7 +2,7 @@
 --Knightmare Mermaid
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Link Summon procedure
 	Link.AddProcedure(c,s.matfilter,1,1)
 	--Special Summon 1 "Knightmare" from your Deck

@@ -53,7 +53,7 @@ function s.rescon(fc,sc,fe)
 			end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return aux.CheckSummonGate(tp,2) and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
+	if chk==0 then return aux.CheckSummonGate(tp,2) and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)
 		and Duel.IsExistingMatchingCard(s.fusfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,e) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,LOCATION_EXTRA)
 end
@@ -68,7 +68,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local mat=aux.SelectUnselectGroup(g,e,tp,fc.min_material_count,fc.max_material_count,s.rescon(fc,sc,e),1,tp,HINTMSG_FMATERIAL,s.rescon(fc,sc,e))
 	fc:SetMaterial(mat)
 	sc:SetMaterial(mat)
-	Duel.SendtoGrave(mat,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION+REASON_SYNCHRO)
+	Duel.SendtoRest(mat,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION+REASON_SYNCHRO)
 	Duel.BreakEffect()
 	Duel.SpecialSummonStep(fc,SUMMON_TYPE_FUSION,tp,tp,false,false,POS_FACEUP)
 	Duel.SpecialSummonStep(sc,SUMMON_TYPE_SYNCHRO,tp,tp,false,false,POS_FACEUP)

@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	--add counter
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e1:SetCode(EVENT_TO_GRAVE)
+	e1:SetCode(EVENT_TO_REST)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetOperation(s.addc1)
 	c:RegisterEffect(e1)
@@ -52,7 +52,7 @@ function s.addc1(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.filter2(c,tp)
-	return not c:IsPreviousControler(tp) and c:GetPreviousLocation()==LOCATION_GRAVE
+	return not c:IsPreviousControler(tp) and c:GetPreviousLocation()==LOCATION_REST
 end
 function s.addc2(e,tp,eg,ep,ev,re,r,rp)
 	if eg:IsExists(s.filter2,1,nil,tp) then
@@ -66,7 +66,7 @@ function s.damp(e,tp,eg,ep,ev,re,r,rp)
 	e:SetLabel(e:GetHandler():GetCounter(0xa))
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_GRAVE) and e:GetHandler():IsReason(REASON_BATTLE)
+	return e:GetHandler():IsLocation(LOCATION_REST) and e:GetHandler():IsReason(REASON_BATTLE)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ct=e:GetLabelObject():GetLabel()

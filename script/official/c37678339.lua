@@ -3,7 +3,7 @@
 --Scripted by senpaizuri
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion Materials
 	Fusion.AddProcMixN(c,true,true,s.ffilter,2)
 	--While face-up on the field, this card is also LIGHT-Attribute

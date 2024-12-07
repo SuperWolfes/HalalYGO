@@ -1,8 +1,8 @@
 --E－HERO ライトニング・ゴーレム
---Evil HERO Lightning Golem
+--Evil HERO Lightning Gopal
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion material
 	Fusion.AddProcMix(c,true,true,20721928,84327329)
 	--lizard check

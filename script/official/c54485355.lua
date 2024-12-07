@@ -4,7 +4,7 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Equip 1 FIRE warrior or gemini monster from hand or deck to this card
+	--Equip 1 FIRE warrior or dual monster from hand or deck to this card
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_EQUIP)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	e3:SetCode(EVENT_LEAVE_FIELD_P)
 	e3:SetOperation(s.eqcheck)
 	c:RegisterEffect(e3)
-	--Special summon all gemini monsters that were equipped to this card
+	--Special summon all dual monsters that were equipped to this card
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -42,10 +42,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function s.eqval(ec,c,tp)
-	return ec:IsControler(tp) and ((ec:IsRace(RACE_WARRIOR) and ec:IsAttribute(ATTRIBUTE_FIRE)) or ec:IsType(TYPE_GEMINI))
+	return ec:IsControler(tp) and ((ec:IsRace(RACE_WARRIOR) and ec:IsAttribute(ATTRIBUTE_FIRE)) or ec:IsType(TYPE_DUAL))
 end
 function s.filter(c)
-	return ((c:IsRace(RACE_WARRIOR) and c:IsAttribute(ATTRIBUTE_FIRE)) or c:IsType(TYPE_GEMINI)) and not c:IsForbidden()
+	return ((c:IsRace(RACE_WARRIOR) and c:IsAttribute(ATTRIBUTE_FIRE)) or c:IsType(TYPE_DUAL)) and not c:IsUnliked()
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
@@ -71,7 +71,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if c:IsFaceup() and c:IsRelateToEffect(e) then
 		s.equipop(c,e,tp,tc)
 	else
-		Duel.SendtoGrave(tc,REASON_EFFECT)
+		Duel.SendtoRest(tc,REASON_EFFECT)
 	end
 end
 function s.eqcheck(e,tp,eg,ep,ev,re,r,rp)
@@ -86,30 +86,30 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return (c:IsReason(REASON_BATTLE) or rp==1-tp) and c:GetPreviousControler()==tp and c:IsPreviousLocation(LOCATION_MZONE)
 end
 function s.spfilter(c)
-	return c:GetOriginalType()&TYPE_GEMINI==TYPE_GEMINI
+	return c:GetOriginalType()&TYPE_DUAL==TYPE_DUAL
 end
 function s.spfilter2(c,e,tp)
-	return c:IsLocation(LOCATION_GRAVE) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and c:IsType(TYPE_GEMINI)
+	return c:IsLocation(LOCATION_REST) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and c:IsType(TYPE_DUAL)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=e:GetLabelObject():GetLabelObject()
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if chk==0 then return ft>0 and g:IsExists(s.spfilter2,1,nil,e,tp) end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,ft,0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	local g=e:GetLabelObject():GetLabelObject()
 	if ft<=0 or #g==0 then return end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	if #g>ft then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		g=g:Select(tp,ft,ft,nil)
 	end
 	for tc in g:Iter() do
 		if Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP) then
-			tc:EnableGeminiStatus()
+			tc:EnableDualStatus()
 			tc:RegisterFlagEffect(0,RESET_EVENT+RESETS_STANDARD,EFFECT_FLAG_CLIENT_HINT,1,0,64)
 		end
 	end

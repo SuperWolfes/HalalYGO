@@ -22,7 +22,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeck(tp,1) end
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsRace(RACE_PSYCHIC) and c:CanBeDoubleTribute(FLAG_DOUBLE_TRIB_WIND,FLAG_DOUBLE_TRIB_PSYCHIC)
+	return c:IsFaceup() and c:IsRace(RACE_MENTAL) and c:CanBeDoubleTribute(FLAG_DOUBLE_TRIB_WIND,FLAG_DOUBLE_TRIB_MENTAL)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -30,18 +30,18 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetOperatedGroup()
 	local ct=g:GetFirst()
 	if ct then
-		--If it was a psychic, treat 1 monster as double tribute for a WIND Psychic
+		--If it was a mental, treat 1 monster as double tribute for a WIND Mental
 		local dg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_MZONE,0,nil)
-		if ct:IsRace(RACE_PSYCHIC) and #dg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
+		if ct:IsRace(RACE_MENTAL) and #dg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 			local tc=dg:Select(tp,1,1,nil):GetFirst()
 			Duel.HintSelection(tc,true)
-			tc:AddDoubleTribute(id,s.otfilter,s.eftg,RESETS_STANDARD_PHASE_END,FLAG_DOUBLE_TRIB_WIND+FLAG_DOUBLE_TRIB_PSYCHIC)
+			tc:AddDoubleTribute(id,s.otfilter,s.eftg,RESETS_STANDARD_PHASE_END,FLAG_DOUBLE_TRIB_WIND+FLAG_DOUBLE_TRIB_MENTAL)
 		end
 	end
 end
 function s.otfilter(c,tp)
-	return c:IsDoubleTribute(FLAG_DOUBLE_TRIB_WIND+FLAG_DOUBLE_TRIB_PSYCHIC) and (c:IsControler(tp) or c:IsFaceup())
+	return c:IsDoubleTribute(FLAG_DOUBLE_TRIB_WIND+FLAG_DOUBLE_TRIB_MENTAL) and (c:IsControler(tp) or c:IsFaceup())
 end
 function s.eftg(e,c)
-	return c:IsRace(RACE_PSYCHIC) and c:IsAttribute(ATTRIBUTE_WIND) and c:IsLevelAbove(7) and c:IsSummonableCard()
+	return c:IsRace(RACE_MENTAL) and c:IsAttribute(ATTRIBUTE_WIND) and c:IsLevelAbove(7) and c:IsSummonableCard()
 end

@@ -1,4 +1,4 @@
---Shouldering a Destiny
+--Shouldering a Destrudic
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
@@ -20,7 +20,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterFlagEffect(tp,id,0,0,0)
 	Duel.MoveToField(c,tp,tp,LOCATION_SZONE,POS_FACEUP,true)
 	Duel.Hint(HINT_SKILL_REMOVE,tp,c:GetOriginalCode())
-	local g=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_DECK|LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_DECK|LOCATION_REST,0,nil)
 	if #g==0 then return end
 	if Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
@@ -28,7 +28,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SendtoHand(sg,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,sg)
 	end
-	--You cannot draw cards during the Draw Phase while you control "Destiny HERO - Plasma"
+	--You cannot draw cards during the Draw Phase while you control "Destrudic HERO - Plasma"
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
@@ -37,7 +37,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetTargetRange(1,0)
 	e1:SetCondition(aux.AND(s.plasmacon,s.drawcon))
 	c:RegisterEffect(e1)
-	--"Destiny HERO - Plasma" you control gains 100 ATK for each monster in both GYs
+	--"Destrudic HERO - Plasma" you control gains 100 ATK for each monster in both RPs
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_UPDATE_ATTACK)
@@ -45,14 +45,14 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetTargetRange(LOCATION_MZONE,0)
 	e2:SetCondition(s.plasmacon)
 	e2:SetTarget(aux.TargetBoolFunction(Card.IsCode,83965310))
-	e2:SetValue(function(e,c) return Duel.GetMatchingGroupCount(Card.IsMonster,0,LOCATION_GRAVE,LOCATION_GRAVE,nil)*100 end)
+	e2:SetValue(function(e,c) return Duel.GetMatchingGroupCount(Card.IsMonster,0,LOCATION_REST,LOCATION_REST,nil)*100 end)
 	c:RegisterEffect(e2)
-	--"Destiny HERO - Plasma" you control cannot be destroyed by opponent's card effects
+	--"Destrudic HERO - Plasma" you control cannot be destroyed by opponent's card effects
 	local e3=e2:Clone()
 	e3:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
 	e3:SetValue(aux.indoval)
 	c:RegisterEffect(e3)
-	--"Destiny HERO - Plasma" you control can make a second attack each Battle Phase
+	--"Destrudic HERO - Plasma" you control can make a second attack each Battle Phase
 	local e4=e2:Clone()
 	e4:SetCode(EFFECT_EXTRA_ATTACK)
 	e4:SetValue(1)

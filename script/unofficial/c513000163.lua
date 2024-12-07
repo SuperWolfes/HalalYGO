@@ -1,5 +1,5 @@
 --アルカナフォースＸＩＩ－ＴＨＥ ＨＡＮＧＥＤ ＭＡＮ (Anime)
---Arcana Force XII - The Hangman (Anime)
+--Arcana Fcoree XII - The Hangman (Anime)
 --Scripted GameMaster(GM)
 local s,id=GetID()
 function s.initial_effect(c)

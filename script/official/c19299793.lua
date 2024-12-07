@@ -27,24 +27,24 @@ function s.initial_effect(c)
 	e2:SetTarget(s.damtg)
 	e2:SetOperation(s.damop)
 	c:RegisterEffect(e2)
-	--Send 1 Normal Trap from the Deck to the GY
+	--Send 1 Normal Trap from the Deck to the RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
-	e3:SetCategory(CATEGORY_TOGRAVE)
+	e3:SetCategory(CATEGORY_TOREST)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetProperty(EFFECT_FLAG_DELAY)
 	e3:SetCode(EVENT_BE_MATERIAL)
 	e3:SetCountLimit(1,{id,2})
-	e3:SetCondition(function(e,tp,eg,ep,ev,re,r,rp) return e:GetHandler():IsLocation(LOCATION_GRAVE) and r==REASON_SYNCHRO end)
+	e3:SetCondition(function(e,tp,eg,ep,ev,re,r,rp) return e:GetHandler():IsLocation(LOCATION_REST) and r==REASON_SYNCHRO end)
 	e3:SetTarget(s.tgtg)
 	e3:SetOperation(s.tgop)
 	c:RegisterEffect(e3)
 end
-function s.fiendtunerfilter(c)
-	return c:IsRace(RACE_FIEND) and c:IsType(TYPE_TUNER) and c:IsFaceup()
+function s.taintedtunerfilter(c)
+	return c:IsRace(RACE_TAINTED) and c:IsType(TYPE_TUNER) and c:IsFaceup()
 end
 function s.spcond(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsMainPhase() and (Duel.IsExistingMatchingCard(s.fiendtunerfilter,tp,LOCATION_MZONE,0,1,nil)
+	return Duel.IsMainPhase() and (Duel.IsExistingMatchingCard(s.taintedtunerfilter,tp,LOCATION_MZONE,0,1,nil)
 		or Duel.IsExistingMatchingCard(Card.IsSummonType,tp,0,LOCATION_MZONE,1,nil,SUMMON_TYPE_SPECIAL))
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -72,13 +72,13 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Damage(1-tp,ct*400,REASON_EFFECT)
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(aux.AND(Card.IsAbleToGrave,Card.IsNormalTrap),tp,LOCATION_DECK,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+	if chk==0 then return Duel.IsExistingMatchingCard(aux.AND(Card.IsAbleToRest,Card.IsNormalTrap),tp,LOCATION_DECK,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local g=Duel.SelectMatchingCard(tp,aux.AND(Card.IsAbleToGrave,Card.IsNormalTrap),tp,LOCATION_DECK,0,1,1,nil)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	local g=Duel.SelectMatchingCard(tp,aux.AND(Card.IsAbleToRest,Card.IsNormalTrap),tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end

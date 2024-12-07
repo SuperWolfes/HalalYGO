@@ -20,10 +20,10 @@ function s.initial_effect(c)
 	e2:SetCondition(s.discon)
 	e2:SetOperation(s.disop)
 	c:RegisterEffect(e2)
-	--send to grave
+	--send to rest
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
-	e3:SetCategory(CATEGORY_TOGRAVE)
+	e3:SetCategory(CATEGORY_TOREST)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetProperty(EFFECT_FLAG_DELAY)
 	e3:SetCode(EVENT_SUMMON_SUCCESS)
@@ -41,7 +41,7 @@ function s.splimit(e,c,sump,sumtype,sumpos,targetp)
 	return not c:IsSetCard(0xaf) and (sumtype&SUMMON_TYPE_PENDULUM)==SUMMON_TYPE_PENDULUM
 end
 function s.discon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsChainNegatable(ev) and re:IsActiveType(TYPE_SPELL) and aux.damcon1(e,tp,eg,ep,ev,re,r,rp) and e:GetHandler():GetFlagEffect(id)==0
+	return Duel.IsChainNegatable(ev) and re:IsActiveType(TYPE_ACTIONAL) and aux.damcon1(e,tp,eg,ep,ev,re,r,rp) and e:GetHandler():GetFlagEffect(id)==0
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.SelectEffectYesNo(tp,e:GetHandler()) then return end
@@ -51,16 +51,16 @@ function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Destroy(e:GetHandler(),REASON_EFFECT)
 end
 function s.tgfilter(c)
-	return (c:IsSetCard(0xaf) or c:IsSetCard(0xae)) and not c:IsCode(id) and c:IsAbleToGrave()
+	return (c:IsSetCard(0xaf) or c:IsSetCard(0xae)) and not c:IsCode(id) and c:IsAbleToRest()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+		Duel.SendtoRest(g,REASON_EFFECT)
 	end
 end

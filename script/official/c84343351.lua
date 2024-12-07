@@ -3,7 +3,7 @@
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Synchro Summon procedure: 2+ Tuners or 1 Tuner Synchro Monster + "Clear Wing Synchro Dragon"
 	local synchro_proc0=Synchro.AddProcedure(c,nil,2,99,aux.FilterSummonCode(82044279),1,1)
 	local synchro_proc1=Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_SYNCHRO),1,1,aux.FilterSummonCode(82044279),1,1)

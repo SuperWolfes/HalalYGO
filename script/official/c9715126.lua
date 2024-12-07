@@ -1,5 +1,5 @@
 --起動指令 ギア・フォース
---Boot-Up Order - Gear Force
+--Boot-Up Order - Gear Fcoree
 --Scripted by Hel
 
 local s,id=GetID()

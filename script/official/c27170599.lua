@@ -1,5 +1,5 @@
 --ゴーストリック・オア・トリート
---Ghostrick or Treat
+--Missrick or Treat
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -15,9 +15,9 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.listed_series={SET_GHOSTRICK}
+s.listed_series={SET_MISSRICK}
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsSetCard(SET_GHOSTRICK) and (c:IsLinkMonster() or c:IsFieldSpell())
+	return c:IsFaceup() and c:IsSetCard(SET_MISSRICK) and (c:IsLinkMonster() or c:IsFieldActional())
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,0,1,nil)
@@ -35,7 +35,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.CheckLPCost(1-tp,2000) and c:IsSSetable(true) and e:IsHasType(EFFECT_TYPE_ACTIVATE)
 		and Duel.SelectYesNo(1-tp,aux.Stringid(id,1)) then
 		Duel.PayLPCost(1-tp,2000)
-		c:CancelToGrave()
+		c:CancelToRest()
 		Duel.ChangePosition(c,POS_FACEDOWN)
 		Duel.RaiseEvent(c,EVENT_SSET,e,REASON_EFFECT,tp,tp,0)
 	else

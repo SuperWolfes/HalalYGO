@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion Proc
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x10f3),s.ffilter)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--give effect to material
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
@@ -45,13 +45,13 @@ function s.con(e,tp,eg,ep,ev,re,r,rp)
 	return (e:GetHandler():GetSummonType()&SUMMON_TYPE_FUSION)==SUMMON_TYPE_FUSION
 end
 function s.matfilter(c,fusc)
-	return c:IsLocation(LOCATION_GRAVE) and (c:GetReason()&0x40008)==0x40008 and c:GetReasonCard()==fusc
+	return c:IsLocation(LOCATION_REST) and (c:GetReason()&0x40008)==0x40008 and c:GetReasonCard()==fusc
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local g=c:GetMaterial()
 	if not g then return end
-	g=g:Filter(aux.NecroValleyFilter(s.matfilter),nil,c)
+	g=g:Filter(aux.RestValleyFilter(s.matfilter),nil,c)
 	local tc=g:GetFirst()
 	while tc do
 		--special summon
@@ -60,8 +60,8 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 		e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 		e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
-		e1:SetCode(EVENT_TO_GRAVE)
-		e1:SetRange(LOCATION_GRAVE)
+		e1:SetCode(EVENT_TO_REST)
+		e1:SetRange(LOCATION_REST)
 		e1:SetCondition(s.spcon)
 		e1:SetCost(aux.bfgcost)
 		e1:SetTarget(s.sptg)
@@ -86,13 +86,13 @@ function s.spfilter(c,e,tp)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,0,1,1,nil,e,tp)
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end

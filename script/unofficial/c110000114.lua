@@ -29,7 +29,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.DisableShuffleCheck()
 	Duel.ConfirmDecktop(tp,10)
 	if ft==0 then return Duel.Remove(g,POS_FACEUP,REASON_EFFECT) end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	local seq=Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)-1
 	local tc=nil
 	for i=1,#g do

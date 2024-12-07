@@ -1,5 +1,5 @@
 --Ｄ－ＨＥＲＯ ディシジョンガイ
---Destiny HERO - Decider
+--Destrudic HERO - Decider
 local s,id=GetID()
 function s.initial_effect(c)
 	--cannot be battle target
@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	e4:SetType(EFFECT_TYPE_QUICK_F)
 	e4:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL)
 	e4:SetCode(EVENT_CHAINING)
-	e4:SetRange(LOCATION_GRAVE)
+	e4:SetRange(LOCATION_REST)
 	e4:SetCountLimit(1,{id,1},EFFECT_COUNT_CODE_DUEL)
 	e4:SetCondition(aux.damcon1)
 	e4:SetTarget(s.damtg)
@@ -43,7 +43,7 @@ function s.atlimit(e,c)
 end
 function s.regtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local e1=Effect.CreateEffect(e:GetHandler())
@@ -59,12 +59,12 @@ function s.thfilter(c)
 	return c:IsSetCard(0x8) and c:IsAbleToHand()
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil)
+	return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,0,id)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RTOHAND)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thfilter),tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.thfilter),tp,LOCATION_REST,0,1,1,nil)
 	if #g>0 then
 		Duel.HintSelection(g)
 		Duel.SendtoHand(g,nil,REASON_EFFECT)

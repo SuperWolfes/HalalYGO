@@ -1,11 +1,11 @@
 --テッセラクト・ハイドライブ・モナーク
---Tesseract Hydradrive Monarch
+--Tesseract Hyddendrive Moppar
 --scripted by Hatter, fixed by Larry126
 local s,id=GetID()
 local cannotAttackEffect=nil
 function s.initial_effect(c)
 	--link summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,s.matfilter,4,4,s.spcheck)
 	--attribute
 	local e1=Effect.CreateEffect(c)
@@ -23,10 +23,10 @@ function s.initial_effect(c)
 	e2:SetTargetRange(0,LOCATION_MZONE)
 	e2:SetTarget(s.distarget)
 	c:RegisterEffect(e2)
-	--to grave & chain attack
+	--to rest & chain attack
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
-	e3:SetCategory(CATEGORY_TOGRAVE)
+	e3:SetCategory(CATEGORY_TOREST)
 	e3:SetType(EFFECT_TYPE_QUICK_O)
 	e3:SetCode(EVENT_FREE_CHAIN)
 	e3:SetRange(LOCATION_MZONE)
@@ -49,7 +49,7 @@ function s.initial_effect(c)
 	e6:SetDescription(aux.Stringid(id,2))
 	e6:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e6:SetType(EFFECT_TYPE_IGNITION)
-	e6:SetRange(LOCATION_GRAVE)
+	e6:SetRange(LOCATION_REST)
 	e6:SetCost(s.cost)
 	e6:SetTarget(s.target)
 	e6:SetOperation(s.operation)
@@ -117,12 +117,12 @@ function s.gytg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return c:GetFlagEffect(id)==0
 		and Duel.IsExistingMatchingCard(s.gyfilter,tp,0,LOCATION_MZONE,1,nil,c) end
 	c:RegisterFlagEffect(id,RESET_CHAIN,0,1)
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,1-tp,LOCATION_MZONE)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,1-tp,LOCATION_MZONE)
 end
 function s.gyop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(1-tp,s.gyfilter,1-tp,LOCATION_MZONE,0,1,1,nil,e:GetHandler())
-	if #g>0 and Duel.SendtoGrave(g,REASON_RULE)~=0 then
+	if #g>0 and Duel.SendtoRest(g,REASON_RULE)~=0 then
 		s.resetCannotAttackEffect()
 	end
 end

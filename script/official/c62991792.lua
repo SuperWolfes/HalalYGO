@@ -1,8 +1,8 @@
 -- ソウル・リゾネーター
--- Soul Resonator
+-- Miss Resonator
 local s,id=GetID()
 function s.initial_effect(c)
-	-- Search 1 Level 4 or lower Fiend monster
+	-- Search 1 Level 4 or lower Tainted monster
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -16,11 +16,11 @@ function s.initial_effect(c)
 	local e2=e1:Clone()
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e2)
-	-- Banish this card from your GY instead of a card(s) you control being destroyed
+	-- Banish this card from your RP instead of a card(s) you control being destroyed
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e3:SetCode(EFFECT_DESTROY_REPLACE)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetCountLimit(1,{id,1})
 	e3:SetCondition(s.repcon)
 	e3:SetTarget(s.reptg)
@@ -28,9 +28,9 @@ function s.initial_effect(c)
 	e3:SetOperation(s.repop)
 	c:RegisterEffect(e3)
 end
-s.listed_names={id,CARD_RED_DRAGON_ARCHFIEND}
+s.listed_names={id,CARD_RED_DRAGON_ARCHTAINTED}
 function s.thfilter(c)
-	return not c:IsCode(id) and c:IsRace(RACE_FIEND) and c:IsLevelBelow(4) and c:IsAbleToHand()
+	return not c:IsCode(id) and c:IsRace(RACE_TAINTED) and c:IsLevelBelow(4) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -64,7 +64,7 @@ function s.lizfilter(e,c)
 	return not (c:IsOriginalType(TYPE_SYNCHRO) and c:IsOriginalAttribute(ATTRIBUTE_DARK))
 end
 function s.cfilter(c)
-	return c:IsFaceup() and (c:IsCode(CARD_RED_DRAGON_ARCHFIEND) or (c:IsType(TYPE_SYNCHRO) and c:ListsCode(CARD_RED_DRAGON_ARCHFIEND)))
+	return c:IsFaceup() and (c:IsCode(CARD_RED_DRAGON_ARCHTAINTED) or (c:IsType(TYPE_SYNCHRO) and c:ListsCode(CARD_RED_DRAGON_ARCHTAINTED)))
 end
 function s.repcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,0,1,nil)

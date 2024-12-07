@@ -1,25 +1,25 @@
 --ダイス・ポット
---Dice Jar
+--Suffice Jar
 local s,id=GetID()
 function s.initial_effect(c)
 	--Damage
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_DICE)
+	e1:SetCategory(CATEGORY_SUFFICE)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_FLIP)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 end
-s.roll_dice=true
+s.roll_suffice=true
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,0,PLAYER_ALL,1)
+	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,PLAYER_ALL,1)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local d1=0
 	local d2=0
 	while d1==d2 do
-		d1,d2=Duel.TossDice(tp,1,1)
+		d1,d2=Duel.TossSuffice(tp,1,1)
 	end
 	if d1<d2 then
 		if d2==6 then

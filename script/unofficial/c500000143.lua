@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,7721912,71736213)
 	--negate
 	local e1=Effect.CreateEffect(c)
@@ -32,7 +32,7 @@ function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.NegateActivation(ev)
 	local rc=re:GetHandler()
 	if rc:IsRelateToEffect(re) and rc:IsCanTurnSet() then
-		rc:CancelToGrave()
+		rc:CancelToRest()
 		Duel.ChangePosition(rc,POS_FACEDOWN)
 		rc:SetStatus(STATUS_ACTIVATE_DISABLED,false)
 		Duel.RaiseEvent(rc,EVENT_SSET,e,REASON_EFFECT,tp,tp,0)

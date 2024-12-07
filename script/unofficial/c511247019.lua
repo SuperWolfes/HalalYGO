@@ -1,5 +1,5 @@
 --異次元の古戦場－サルガッソ (Anime)
---Sargasso the D.D. Battlefield (Anime)
+--Sargasso the S.D. Battlefield (Anime)
 --fixed by MLD
 local s,id=GetID()
 function s.initial_effect(c)

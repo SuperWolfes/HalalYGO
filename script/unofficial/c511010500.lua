@@ -1,5 +1,5 @@
 --曲芸の魔術師 (Anime)
---Acrobatic Magician (Anime)
+--Acrobatic Mentor (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	Pendulum.AddProcedure(c)

@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	-- 1 Tuner + 1+ Non-Tuner monsters
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	--If Synchro Summoned, banish 1 Fish monster from the Deck
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.rmvtg)
 	e1:SetOperation(s.rmvop)
 	c:RegisterEffect(e1)
-	--If sent to the GY as material, banish 1 Fish monster from the GY
+	--If sent to the RP as material, banish 1 Fish monster from the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_REMOVE+CATEGORY_SEARCH+CATEGORY_TOHAND)
@@ -46,16 +46,16 @@ function s.rmvop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.thcond(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_GRAVE) and r&REASON_SYNCHRO>0
+	return e:GetHandler():IsLocation(LOCATION_REST) and r&REASON_SYNCHRO>0
 end
 function s.tgtfilter(c)
 	return c:IsRace(RACE_FISH) and c:IsAbleToRemove() and aux.SpElimFilter(c,true)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_MZONE|LOCATION_GRAVE) and chkc:IsControler(tp) and s.tgtfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.tgtfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_MZONE|LOCATION_REST) and chkc:IsControler(tp) and s.tgtfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.tgtfilter,tp,LOCATION_MZONE|LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectTarget(tp,s.tgtfilter,tp,LOCATION_MZONE|LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.tgtfilter,tp,LOCATION_MZONE|LOCATION_REST,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,1,tp,0)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end

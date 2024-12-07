@@ -3,7 +3,7 @@
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Xyz Summon procedure: 2+ Level 9 monsters
 	Xyz.AddProcedure(c,nil,9,2,nil,nil,99)
 	--If this card would be destroyed, you can detach 1 material from this card instead

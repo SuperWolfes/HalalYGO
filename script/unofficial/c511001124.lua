@@ -2,7 +2,7 @@
 --Cyberdark Horn (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
-	--Equip 1 Level 4 or lower Dragon monster from either Graveyard to this card
+	--Equip 1 Level 4 or lower Dragon monster from either Resting Place to this card
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_EQUIP)
@@ -31,13 +31,13 @@ function s.eqval(ec)
 	return ec:IsLevelBelow(4) and ec:IsRace(RACE_DRAGON)
 end
 function s.filter(c,tp)
-	return c:IsLevelBelow(4) and c:IsRace(RACE_DRAGON) and c:CheckUniqueOnField(tp) and not c:IsForbidden()
+	return c:IsLevelBelow(4) and c:IsRace(RACE_DRAGON) and c:CheckUniqueOnField(tp) and not c:IsUnliked()
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and s.filter(chkc,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and s.filter(chkc,tp) end
 	if chk==0 then return true end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,1,nil,tp)
+	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,LOCATION_REST,1,1,nil,tp)
 	Duel.SetOperationInfo(0,CATEGORY_EQUIP,g,1,0,0)
 end
 function s.equipop(c,e,tp,tc)

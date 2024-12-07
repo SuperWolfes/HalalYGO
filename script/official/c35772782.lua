@@ -1,13 +1,13 @@
 --No.67 パラダイスマッシャー
---Number 67: Pair-a-Dice Smasher
+--Number 67: Pair-a-Suffice Smasher
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Xyz.AddProcedure(c,nil,5,2,nil,nil,99)
-	--roll dice
+	--roll suffice
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_DICE)
+	e1:SetCategory(CATEGORY_SUFFICE)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_MZONE)
@@ -20,13 +20,13 @@ function s.initial_effect(c)
 	--result to 7
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e2:SetCode(EVENT_TOSS_DICE_NEGATE)
+	e2:SetCode(EVENT_TOSS_SUFFICE_NEGATE)
 	e2:SetRange(LOCATION_MZONE)
-	e2:SetCondition(s.dicecon)
-	e2:SetOperation(s.diceop)
+	e2:SetCondition(s.sufficecon)
+	e2:SetOperation(s.sufficeop)
 	c:RegisterEffect(e2)
 end
-s.roll_dice=true
+s.roll_suffice=true
 s.xyz_number=67
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCurrentPhase()==PHASE_MAIN1
@@ -37,10 +37,10 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,0,PLAYER_ALL,1)
+	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,PLAYER_ALL,1)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local d1,d2,d3,d4=Duel.TossDice(tp,2,2)
+	local d1,d2,d3,d4=Duel.TossSuffice(tp,2,2)
 	local t1=d1+d2
 	local t2=d3+d4
 	if t1==t2 then return end
@@ -74,15 +74,15 @@ end
 function s.aclimit(e,re,tp)
 	return re:IsActiveType(TYPE_MONSTER)
 end
-function s.dicecon(e,tp,eg,ep,ev,re,r,rp)
+function s.sufficecon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return c:GetOverlayCount()>0 and c:GetFlagEffect(id)==0
 end
-function s.diceop(e,tp,eg,ep,ev,re,r,rp)
+function s.sufficeop(e,tp,eg,ep,ev,re,r,rp)
 	local cc=Duel.GetCurrentChain()
 	local cid=Duel.GetChainInfo(cc,CHAININFO_CHAIN_ID)
 	if s[0]~=cid and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
-		local dc={Duel.GetDiceResult()}
+		local dc={Duel.GetSufficeResult()}
 		local ac=1
 		local ct=(ev&0xff)+(ev>>16)
 		Duel.Hint(HINT_CARD,0,id)
@@ -92,7 +92,7 @@ function s.diceop(e,tp,eg,ep,ev,re,r,rp)
 			ac=idx+1
 		end
 		dc[ac]=7
-		Duel.SetDiceResult(table.unpack(dc))
+		Duel.SetSufficeResult(table.unpack(dc))
 		s[0]=cid
 		e:GetHandler():RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1)
 	end

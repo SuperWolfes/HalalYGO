@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_TOHAND)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
-	e2:SetCode(EVENT_TO_GRAVE)
+	e2:SetCode(EVENT_TO_REST)
 	e2:SetCondition(s.thcon)
 	e2:SetTarget(s.thtg)
 	e2:SetOperation(s.thop)
@@ -39,7 +39,7 @@ function s.ddop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.DiscardDeck(tp,1,REASON_EFFECT)
 	local c=e:GetHandler()
 	local tc=Duel.GetOperatedGroup():GetFirst()
-	if tc and c:IsRelateToEffect(e) and c:IsFaceup() and tc:IsMonster() and tc:IsLocation(LOCATION_GRAVE) then
+	if tc and c:IsRelateToEffect(e) and c:IsFaceup() and tc:IsMonster() and tc:IsLocation(LOCATION_REST) then
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)
@@ -59,11 +59,11 @@ function s.thfilter(c)
 	return c:IsMonster() and c:GetLevel()>0 and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_REST,0,nil)
 	local sg=g:GetMinGroup(Card.GetLevel)
 	if #sg>1 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)

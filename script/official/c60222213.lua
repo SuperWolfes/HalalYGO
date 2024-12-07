@@ -1,5 +1,5 @@
 --時械神 ラフィオン
---Raphion, the Timelord
+--Raphion, the Timewatcher
 --Scripted by ahtelel
 local s,id=GetID()
 function s.initial_effect(c)

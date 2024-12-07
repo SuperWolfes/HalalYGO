@@ -1,5 +1,5 @@
 --ＷＷ－アイス・ベル
---Windwitch - Ice Bell
+--Windmint - Ice Bell
 local s,id=GetID()
 function s.initial_effect(c)
 	--Special summon itself from hand

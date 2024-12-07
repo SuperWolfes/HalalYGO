@@ -1,9 +1,9 @@
---Polar God Sacred Emperor Odin
+--Polar Monster Clean Emperor Odin
 local s,id=GetID()
 function s.initial_effect(c)
 	--Synchro Summon
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),2,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	c:SetUniqueOnField(1,0,id)
 	--Influence of Rune
 	local e1=Effect.CreateEffect(c)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	--special summon
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
-	e2:SetCode(EVENT_TO_GRAVE)
+	e2:SetCode(EVENT_TO_REST)
 	e2:SetOperation(s.regop)
 	c:RegisterEffect(e2)
 	local e3=Effect.CreateEffect(c)
@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e3:SetCode(EVENT_PHASE+PHASE_END)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetCountLimit(1)
 	e3:SetCondition(s.spcon)
 	e3:SetTarget(s.sptg)
@@ -69,7 +69,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.cfilter(c)
-	return c:IsLocation(LOCATION_MZONE) and c:IsFaceup() and c:IsRace(RACE_DIVINE)
+	return c:IsLocation(LOCATION_MZONE) and c:IsFaceup() and c:IsRace(RACE_MEGA)
 end
 function s.imcon(e,tp,eg,ep,ev,re,r,rp)
 	if re:IsActiveType(TYPE_MONSTER) or not Duel.IsChainDisablable(ev) then return false end
@@ -97,7 +97,7 @@ function s.imcon(e,tp,eg,ep,ev,re,r,rp)
 	if ex and tg~=nil and tc+tg:FilterCount(s.cfilter,nil)-#tg>0 then
 		return true
 	end
-	ex,tg,tc=Duel.GetOperationInfo(ev,CATEGORY_TOGRAVE)
+	ex,tg,tc=Duel.GetOperationInfo(ev,CATEGORY_TOREST)
 	if ex and tg~=nil and tc+tg:FilterCount(s.cfilter,nil)-#tg>0 then
 		return true
 	end
@@ -158,7 +158,7 @@ function s.disfilter(c)
 	local eqg=c:GetEquipGroup():Filter(s.dischk,nil)
 	local tgg=Duel.GetMatchingGroup(s.tgg,0,LOCATION_ONFIELD,LOCATION_ONFIELD,nil,c)
 	eqg:Merge(tgg)
-	return c:IsRace(RACE_DIVINE) and #eqg>0
+	return c:IsRace(RACE_MEGA) and #eqg>0
 end
 function s.dischk(c)
 	return not c:IsDisabled()

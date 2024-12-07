@@ -1,9 +1,9 @@
 --リブロマンサー・アフェクテッド
---Libromancer Displaced
+--Librobouncer Displaced
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Return 1 "Libromancer" monster to the hand and take control of opponent's monster
+	--Return 1 "Librobouncer" monster to the hand and take control of opponent's monster
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_CONTROL)
@@ -16,9 +16,9 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.listed_series={SET_LIBROMANCER}
+s.listed_series={SET_LIBROBOUNCER}
 function s.tgfilter(c,e,tp)
-	return (c:IsFaceup() and c:IsSetCard(SET_LIBROMANCER) and c:IsControler(tp))
+	return (c:IsFaceup() and c:IsSetCard(SET_LIBROBOUNCER) and c:IsControler(tp))
 		or (c:IsControler(1-tp) and c:IsControlerCanBeChanged(true))
 		and c:IsCanBeEffectTarget(e)
 end
@@ -46,7 +46,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if tg1:IsControler(tp) and Duel.SendtoHand(tg1,nil,REASON_EFFECT)>0 and tg1:IsLocation(LOCATION_HAND)
 		and tg2 and tg2:IsControler(1-tp) then
 		Duel.GetControl(tg2,tp)
-		if not tg1:IsRitualMonster() then
+		if not tg1:IsLockedMonster() then
 			local c=e:GetHandler()
 			local fid=c:GetFieldID()
 			tg2:RegisterFlagEffect(id,RESET_EVENT|RESETS_STANDARD,0,1,fid)

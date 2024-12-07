@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz Summon
 	Xyz.AddProcedure(c,nil,11,2,s.ovfilter,aux.Stringid(id,0),2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Gain DEF x200 for all combined Ranks
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_UPDATE_DEFENSE)
 	e1:SetValue(s.defval)
 	c:RegisterEffect(e1)
-	--Inflict 600 damage when opponent activates a Spell/Trap
+	--Inflict 600 damage when opponent activates a Actional/Trap
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EVENT_CHAINING)

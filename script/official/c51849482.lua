@@ -1,5 +1,5 @@
 --屍界塔フィニステラ
---Finis Terrae, Tower of the Necroworld
+--Finis Terrae, Tower of the Restworld
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DELAY)
-	e2:SetCode(EVENT_TO_GRAVE)
+	e2:SetCode(EVENT_TO_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetTarget(s.indestg)
 	e2:SetOperation(s.indesop)

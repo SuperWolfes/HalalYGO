@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	--Pendulum Summon
 	Pendulum.AddProcedure(c)
 	--Must be Special Summoned
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Special Summon condition
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
@@ -114,7 +114,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.atkcfilter(c,tp)
 	return c:IsPreviousPosition(POS_FACEUP) and c:IsPreviousSetCard(SET_DDD) and c:IsPreviousControler(tp)
-		and c:IsReason(REASON_EFFECT) and c:GetReasonEffect():IsSpellEffect()
+		and c:IsReason(REASON_EFFECT) and c:GetReasonEffect():IsActionalEffect()
 end
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.atkcfilter,1,nil,tp)

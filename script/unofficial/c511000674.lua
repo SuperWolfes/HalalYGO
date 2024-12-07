@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	alias=c:GetOriginalCodeRule()
 	--xyz summon
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_WINGEDBEAST),4,3)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--atklimit
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)

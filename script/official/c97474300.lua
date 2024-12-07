@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Search 1 "Synchro" Spell/Trap
+	--Search 1 "Synchro" Actional/Trap
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -17,10 +17,10 @@ function s.initial_effect(c)
 end
 s.listed_series={SET_SYNCHRO}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsType,TYPE_TUNER),tp,LOCATION_MZONE|LOCATION_GRAVE,0,1,nil)
+	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsType,TYPE_TUNER),tp,LOCATION_MZONE|LOCATION_REST,0,1,nil)
 end
 function s.thfilter(c)
-	return c:IsSetCard(SET_SYNCHRO) and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsSetCard(SET_SYNCHRO) and c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

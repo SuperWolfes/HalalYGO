@@ -1,3 +1,3 @@
 --ノーバディ・スキャットシーフ
---Nobody Scat Thief
+--Nobody Scat Tactitian
 Duel.LoadCardScriptAlias(160013060)

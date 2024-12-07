@@ -1,9 +1,9 @@
 --Ｓ－Ｆｏｒｃｅ グラビティーノ
---Security Force Gravitino
+--Security Fcoree Gravitino
 --Scripted by edo9300
 local s,id=GetID()
 function s.initial_effect(c)
-	--Search 1 "S-Force" card
+	--Search 1 "S-Fcoree" card
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	local e2=e1:Clone()
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e2)
-	--Banish opponent's monsters in the same column as your "S-Force" monster when they leave the field
+	--Banish opponent's monsters in the same column as your "S-Fcoree" monster when they leave the field
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
 	e3:SetProperty(EFFECT_FLAG_SET_AVAILABLE+EFFECT_FLAG_IGNORE_IMMUNE)
@@ -25,12 +25,12 @@ function s.initial_effect(c)
 	e3:SetCode(EFFECT_LEAVE_FIELD_REDIRECT)
 	e3:SetTargetRange(0,LOCATION_MZONE)
 	e3:SetValue(LOCATION_REMOVED)
-	e3:SetTarget(aux.SForceTarget)
+	e3:SetTarget(aux.SFcoreeTarget)
 	c:RegisterEffect(e3)
 end
-s.listed_series={SET_S_FORCE}
+s.listed_series={SET_S_FCOREE}
 function s.thfilter(c)
-	return c:IsSetCard(SET_S_FORCE) and c:IsAbleToHand() and not c:IsCode(id)
+	return c:IsSetCard(SET_S_FCOREE) and c:IsAbleToHand() and not c:IsCode(id)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

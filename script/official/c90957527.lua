@@ -2,7 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,79580323,aux.FilterBoolFunctionEx(Card.IsSetCard,0x19))
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,s.splimit)
 	--damage
@@ -47,10 +47,10 @@ function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	local d=Duel.GetAttackTarget()
 	if c==a then
 		e:SetLabel(d:GetDefense())
-		return c:IsRelateToBattle() and d:GetLocation()==LOCATION_GRAVE and d:IsMonster()
+		return c:IsRelateToBattle() and d:GetLocation()==LOCATION_REST and d:IsMonster()
 	else
 		e:SetLabel(a:GetDefense())
-		return c:IsRelateToBattle() and a:GetLocation()==LOCATION_GRAVE and a:IsMonster()
+		return c:IsRelateToBattle() and a:GetLocation()==LOCATION_REST and a:IsMonster()
 	end
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -79,13 +79,13 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 		if e:GetHandler():GetSequence()<5 then ft=ft+1 end
-		return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) and ft>1 
+		return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) and ft>1 
 			and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,2,nil,e,tp)
 	end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,LOCATION_DECK)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<2 then return end
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_DECK,0,nil,e,tp)
 	if #g>=2 then

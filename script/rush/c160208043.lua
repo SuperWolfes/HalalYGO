@@ -17,7 +17,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_FUSION}
 function s.costfilter(c)
-	return c:IsAbleToGraveAsCost() and not c:IsCode(CARD_FUSION)
+	return c:IsAbleToRestAsCost() and not c:IsCode(CARD_FUSION)
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil) and Duel.CheckLPCost(tp,500) end
@@ -26,28 +26,28 @@ function s.thfilter(c)
 	return c:IsCode(CARD_FUSION) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
 end
 function s.thfilter2(c)
-	return c:IsFieldSpell() and c:IsAbleToHand()
+	return c:IsFieldActional() and c:IsAbleToHand()
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,1,nil)
-	if Duel.SendtoGrave(g,REASON_COST)==0 then return end
+	if Duel.SendtoRest(g,REASON_COST)==0 then return end
 	Duel.PayLPCost(tp,500)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
 	if #g>0 then
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)
-		local g=Duel.GetMatchingGroup(s.thfilter2,tp,LOCATION_GRAVE,0,nil)
+		local g=Duel.GetMatchingGroup(s.thfilter2,tp,LOCATION_REST,0,nil)
 		if #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			Duel.BreakEffect()
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-			local g2=Duel.SelectMatchingCard(tp,s.thfilter2,tp,LOCATION_GRAVE,0,1,1,nil)
+			local g2=Duel.SelectMatchingCard(tp,s.thfilter2,tp,LOCATION_REST,0,1,1,nil)
 			if #g2>0 then
 				Duel.SendtoHand(g2,nil,REASON_EFFECT)
 				Duel.ConfirmCards(1-tp,g2)

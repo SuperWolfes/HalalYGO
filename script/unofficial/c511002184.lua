@@ -1,5 +1,5 @@
 --神の氷結 (Manga)
---The Ice-Bound God (Manga)
+--The Ice-Bound Monster (Manga)
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)

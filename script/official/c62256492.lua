@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e2:SetTargetRange(LOCATION_MZONE,0)
 	e2:SetValue(s.atkval)
 	c:RegisterEffect(e2)
-	--Your "Charmer" and "Familiar-Possessed" monsters cannot be destroyed by card effects
+	--Your "Chaumer" and "Familiar-Interwoven" monsters cannot be destroyed by card effects
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
 	e3:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
@@ -62,7 +62,7 @@ function s.indtg(e,c)
 	return c:IsFaceup() and (c:IsSetCard(0xbf) or c:IsSetCard(0x10c0))
 end
 function s.cfilter(c,tp)
-	return c:IsFaceup() and c:IsControler(tp) and c:GetBaseAttack()==1850 and c:IsRace(RACE_SPELLCASTER)
+	return c:IsFaceup() and c:IsControler(tp) and c:GetBaseAttack()==1850 and c:IsRace(RACE_MENTOR)
 end
 function s.drcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,tp)

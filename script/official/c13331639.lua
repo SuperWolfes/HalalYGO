@@ -2,7 +2,7 @@
 --Supreme King Z-ARC
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,s.fusfilter1,s.fusfilter2,s.fusfilter3,s.fusfilter4)
 	Pendulum.AddProcedure(c,false)
 	--spsummon condition
@@ -76,7 +76,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e8)
 end
 s.listed_series={0x20f8}
-s.miracle_synchro_fusion=true
+s.pulse_synchro_fusion=true
 function s.fusfilter1(c,fc,sumtype,tp)
 	return c:IsRace(RACE_DRAGON,fc,sumtype,tp) and c:IsType(TYPE_FUSION,fc,sumtype,tp)
 end

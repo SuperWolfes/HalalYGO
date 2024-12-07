@@ -64,10 +64,10 @@ function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
 end
 function s.ffilter(c,e,tp)
-	return c:IsRace(RACE_FIEND) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsRace(RACE_TAINTED) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.stfilter(c)
-	return c:IsSpellTrap() and c:IsSSetable()
+	return c:IsActionalTrap() and c:IsSSetable()
 end
 function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)

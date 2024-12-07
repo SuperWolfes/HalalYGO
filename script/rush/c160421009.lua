@@ -16,7 +16,7 @@ function s.initial_effect(c)
 end
 s.listed_names={160003022,160003023}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,nil) end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(aux.FilterMaximumSideFunctionEx(Card.IsFaceup),tp,0,LOCATION_MZONE,1,e:GetHandler()) end
@@ -24,8 +24,8 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
 	local c=e:GetHandler()
-	local tg=Duel.SelectMatchingCard(tp,Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,1,nil)
-	if Duel.SendtoGrave(tg,REASON_COST)<1 then return end
+	local tg=Duel.SelectMatchingCard(tp,Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,1,nil)
+	if Duel.SendtoRest(tg,REASON_COST)<1 then return end
 	--Effect
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 	local g=Duel.SelectMatchingCard(tp,aux.FilterMaximumSideFunctionEx(Card.IsFaceup),tp,0,LOCATION_MZONE,1,2,nil)
@@ -40,7 +40,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		end
 		local ct=Duel.GetLocationCount(tp,LOCATION_MZONE)
 		local ft=math.min(2,ct)
-		local sg=Duel.GetMatchingGroup(s.sfilter,tp,LOCATION_GRAVE,0,nil,e,tp)
+		local sg=Duel.GetMatchingGroup(s.sfilter,tp,LOCATION_REST,0,nil,e,tp)
 		if ft>0 and #sg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			local tg=aux.SelectUnselectGroup(sg,1,tp,1,ft,s.rescon,1,tp)
 			Duel.SpecialSummon(tg,0,tp,tp,false,false,POS_FACEUP)

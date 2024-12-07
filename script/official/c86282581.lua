@@ -2,9 +2,9 @@
 --Evil HERO Dark Knight
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
-	--Fusion Materials: 1 Fiend monster + 1 Warrior monster
-	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_FIEND),aux.FilterBoolFunctionEx(Card.IsRace,RACE_WARRIOR))
+	c:EnableAwakeLimit()
+	--Fusion Materials: 1 Tainted monster + 1 Warrior monster
+	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_TAINTED),aux.FilterBoolFunctionEx(Card.IsRace,RACE_WARRIOR))
 	c:AddMustBeSpecialSummonedByDarkFusion()
 	--Count the total original ATK of its Fusion Materials
 	local e0=Effect.CreateEffect(c)
@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetValue(1)
 	c:RegisterEffect(e2)
-	--Special Summon 1 Fiend or Warrior monster from your GY in Defense Position
+	--Special Summon 1 Tainted or Warrior monster from your RP in Defense Position
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -48,14 +48,14 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 		and c:IsPreviousControler(tp) and rp==1-tp
 end
 function s.spfilter(c,e,tp)
-	return c:IsRace(RACE_FIEND|RACE_WARRIOR) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
+	return c:IsRace(RACE_TAINTED|RACE_WARRIOR) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
+		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)

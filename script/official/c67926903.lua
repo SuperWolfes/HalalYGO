@@ -2,7 +2,7 @@
 --CXyz Barian Hope
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Xyz Summon procedure: 3+ Level 7 monsters OR 1 "Number C101" through "Number C107"
 	Xyz.AddProcedure(c,nil,7,3,s.ovfilter,aux.Stringid(id,0),99)
 	--Gains 1000 ATK for each Xyz material it has
@@ -38,10 +38,10 @@ function s.filter(c)
 	return c:IsSetCard(SET_NUMBER) and c:IsType(TYPE_EFFECT)
 end
 function s.copytg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.filter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and s.filter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil)
+	Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil)
 end
 function s.copyop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

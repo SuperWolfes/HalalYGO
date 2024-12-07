@@ -41,11 +41,11 @@ function s.spfilter(c,e,tp)
 	return c:IsAttribute(ATTRIBUTE_FIRE) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
+		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_EQUIP,e:GetHandler(),1,0,0)
 end
@@ -73,7 +73,7 @@ function s.filter(c)
 	return c:IsFaceup() and c:IsAbleToRemove()
 end
 function s.cfilter(c,code)
-	return c:IsCode(code) and (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup())
+	return c:IsCode(code) and (c:IsLocation(LOCATION_REST) or c:IsFaceup())
 end
 function s.rmcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -84,8 +84,8 @@ function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,0,LOCATION_MZONE,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	local g=Duel.SelectTarget(tp,s.filter,tp,0,LOCATION_MZONE,1,1,nil)
-	local tg=Duel.GetMatchingGroup(s.cfilter,tp,0,LOCATION_ONFIELD+LOCATION_GRAVE,nil,g:GetFirst():GetCode())
-	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g+tg,#(g+tg),1-tp,LOCATION_ONFIELD+LOCATION_GRAVE)
+	local tg=Duel.GetMatchingGroup(s.cfilter,tp,0,LOCATION_ONFIELD+LOCATION_REST,nil,g:GetFirst():GetCode())
+	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g+tg,#(g+tg),1-tp,LOCATION_ONFIELD+LOCATION_REST)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,0)
 end
 function s.rmop(e,tp,eg,ep,ev,re,r,rp)
@@ -93,7 +93,7 @@ function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsRelateToEffect(e) then
 		local tg=Group.FromCards(tc)
 		if tc:IsFaceup() then
-			tg=tg+Duel.GetMatchingGroup(s.cfilter,tp,0,LOCATION_ONFIELD+LOCATION_GRAVE,nil,tc:GetCode())
+			tg=tg+Duel.GetMatchingGroup(s.cfilter,tp,0,LOCATION_ONFIELD+LOCATION_REST,nil,tc:GetCode())
 		end
 		Duel.Remove(tg,POS_FACEUP,REASON_EFFECT)
 		local og=Duel.GetOperatedGroup()

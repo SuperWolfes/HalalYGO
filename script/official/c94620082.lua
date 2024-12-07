@@ -13,14 +13,14 @@ function s.initial_effect(c)
 	e1:SetTarget(s.thtg)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
-	--Special Summon this card, then you can destroy 1 face-up Spell/Trap on the field
+	--Special Summon this card, then you can destroy 1 face-up Actional/Trap on the field
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_DESTROY)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,id)
-	e2:SetCondition(function() return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSpellTrap),0,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) end)
+	e2:SetCondition(function() return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsActionalTrap),0,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) end)
 	e2:SetCost(s.spcost)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
@@ -51,7 +51,7 @@ function s.spcostfilter(c)
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.spcostfilter,tp,LOCATION_HAND,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	Duel.DiscardHand(tp,s.spcostfilter,1,1,REASON_COST|REASON_DISCARD)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -64,10 +64,10 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)>0
-		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSpellTrap),tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil)
+		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsActionalTrap),tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,3)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-		local g=Duel.SelectMatchingCard(tp,aux.FaceupFilter(Card.IsSpellTrap),tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
+		local g=Duel.SelectMatchingCard(tp,aux.FaceupFilter(Card.IsActionalTrap),tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
 		if #g>0 then
 			Duel.HintSelection(g)
 			Duel.BreakEffect()

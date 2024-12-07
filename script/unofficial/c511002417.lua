@@ -1,5 +1,5 @@
 --絶対運命決定力
---Decisive Power of Absolute Destiny
+--Decisive Power of Absolute Destrudic
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

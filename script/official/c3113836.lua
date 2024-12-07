@@ -1,9 +1,9 @@
 --ジェムナイト・セラフィ
---Gem-Knight Seraphinite
+--Gem-Knight Watcherinite
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,false,false,aux.FilterBoolFunctionEx(Card.IsSetCard,0x1047),aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGHT))
 	--spsummon condition
 	local e1=Effect.CreateEffect(c)

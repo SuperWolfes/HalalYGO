@@ -1,11 +1,11 @@
 --Ｅｍトラピーズ・ハイ・マジシャン
---Performage Trapeze High Magician
+--Performanced Trapeze High Mentor
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
-	--Xyz Summon procedure: 2 Level 5 Spellcaster monsters
-	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_SPELLCASTER),5,2)
+	c:EnableAwakeLimit()
+	--Xyz Summon procedure: 2 Level 5 Mentor monsters
+	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_MENTOR),5,2)
 	--Cannot be destroyed by battle or card effects while it has material
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -38,7 +38,7 @@ function s.initial_effect(c)
 	e4:SetOperation(s.atkop)
 	c:RegisterEffect(e4,false,REGISTER_FLAG_DETACH_XMAT)
 end
-s.listed_names={17016362} --"Performage Trapeze Magician"
+s.listed_names={17016362} --"Performanced Trapeze Mentor"
 function s.reflectcond(e)
 	local c=e:GetHandler()
 	return c:GetOverlayCount()>c:GetFlagEffect(id)

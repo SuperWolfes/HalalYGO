@@ -1,5 +1,5 @@
 --時械神 ラツィオン (Anime)
---Lazion, the Timelord (Anime)
+--Lazion, the Timewatcher (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--indes
@@ -82,11 +82,11 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	local sg=Duel.GetMatchingGroup(Card.IsAbleToDeck,tp,0,LOCATION_MZONE+LOCATION_GRAVE,nil)
+	local sg=Duel.GetMatchingGroup(Card.IsAbleToDeck,tp,0,LOCATION_MZONE+LOCATION_REST,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,sg,#sg,0,0)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
-	local sg=Duel.GetMatchingGroup(Card.IsAbleToDeck,tp,0,LOCATION_MZONE+LOCATION_GRAVE,nil)
+	local sg=Duel.GetMatchingGroup(Card.IsAbleToDeck,tp,0,LOCATION_MZONE+LOCATION_REST,nil)
 	Duel.SendtoDeck(sg,nil,2,REASON_EFFECT)
 end
 function s.tdcon(e,tp,eg,ep,ev,re,r,rp)

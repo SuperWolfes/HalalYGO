@@ -53,13 +53,13 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil,ft,e,tp) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil,ft,e,tp) end
 	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,0)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	local sg=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thfilter),tp,LOCATION_GRAVE,0,1,1,nil,ft,e,tp)
+	local sg=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.thfilter),tp,LOCATION_REST,0,1,1,nil,ft,e,tp)
 	local sc=sg:GetFirst()
 	if sc then
 		aux.ToHandOrElse(sc,tp,function(c)

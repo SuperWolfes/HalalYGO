@@ -36,7 +36,7 @@ function s.atkval(e,c)
 	return 100*Duel.GetMatchingGroupCount(s.atkfilter,e:GetHandlerPlayer(),LOCATION_REMOVED,0,nil)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetMatchingGroupCount(aux.NOT(aux.FaceupFilter(Card.IsRace,RACE_FIEND)),tp,LOCATION_MZONE,0,nil)==0
+	return Duel.GetMatchingGroupCount(aux.NOT(aux.FaceupFilter(Card.IsRace,RACE_TAINTED)),tp,LOCATION_MZONE,0,nil)==0
 end
 function s.spfilter(c,e,tp)
 	return c:IsMonster() and c:IsSetCard(SET_INFERNOID) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)

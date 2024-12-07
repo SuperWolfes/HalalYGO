@@ -3,10 +3,10 @@
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion Summon procedure
 	Fusion.AddProcMix(c,true,true,160012022,CARD_SKYSAVIOR_SOLEIL)
-	--Shuffle cards from opponent's GY to deck
+	--Shuffle cards from opponent's RP to deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TODECK)
@@ -34,8 +34,8 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_CELESTIALWARRIOR),tp,LOCATION_MZONE,0,1,nil)
-		and Duel.IsExistingMatchingCard(Card.IsAbleToDeck,tp,0,LOCATION_GRAVE,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_GRAVE)
+		and Duel.IsExistingMatchingCard(Card.IsAbleToDeck,tp,0,LOCATION_REST,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_REST)
 end
 function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
@@ -45,7 +45,7 @@ function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	--Effect
 	local ct=Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsRace,RACE_CELESTIALWARRIOR),tp,LOCATION_MZONE,0,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(Card.IsAbleToDeck),tp,0,LOCATION_GRAVE,1,ct*2,nil)
+	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(Card.IsAbleToDeck),tp,0,LOCATION_REST,1,ct*2,nil)
 	Duel.HintSelection(g,true)
 	if #g>0 then
 		Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
@@ -55,8 +55,8 @@ function s.thfilter(c)
 	return ((c:IsAttribute(ATTRIBUTE_LIGHT|ATTRIBUTE_DARK) and c:IsLevelBelow(4)) or c:IsCode(160015064)) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
@@ -65,7 +65,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	if #td==0 or Duel.SendtoDeck(td,nil,SEQ_DECKBOTTOM,REASON_COST)==0 then return end
 	--Effect
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
 	if #g>0 then
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)

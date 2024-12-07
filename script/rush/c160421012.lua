@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c)
-	return c:IsLevelAbove(7) and c:IsRace(RACE_FIEND)
+	return c:IsLevelAbove(7) and c:IsRace(RACE_TAINTED)
 end
 function s.valcheck(e,c)
 	local g=c:GetMaterial()

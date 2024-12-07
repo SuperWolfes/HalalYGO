@@ -41,7 +41,7 @@ function s.negcon(e,tp,eg,ep,ev,re,r,rp)
 		and tc:IsControler(tp) and tc:IsLocation(LOCATION_MZONE)
 end
 function s.cfilter(c)
-	return c:IsSetCard(0x9c) and c:IsAbleToGraveAsCost()
+	return c:IsSetCard(0x9c) and c:IsAbleToRestAsCost()
 end
 function s.negcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end

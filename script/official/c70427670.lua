@@ -32,7 +32,7 @@ s.listed_names={id}
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return (r&REASON_FUSION)==REASON_FUSION and c:IsFaceup()
-		and c:IsLocation(LOCATION_GRAVE+LOCATION_EXTRA) 
+		and c:IsLocation(LOCATION_REST+LOCATION_EXTRA) 
 end
 function s.thfilter(c)
 	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_DARK) and c:IsType(TYPE_PENDULUM)

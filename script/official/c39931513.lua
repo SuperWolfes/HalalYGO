@@ -3,7 +3,7 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Add 1 "Sangen" Spell/Trap to the hand or Set it to the field
+	--Add 1 "Sangen" Actional/Trap to the hand or Set it to the field
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -43,7 +43,7 @@ function s.initial_effect(c)
 end
 s.listed_series={SET_SANGEN}
 function s.thfilter(c)
-	return c:IsSpellTrap() and c:IsSetCard(SET_SANGEN) and (c:IsAbleToHand() or c:IsSSetable())
+	return c:IsActionalTrap() and c:IsSetCard(SET_SANGEN) and (c:IsAbleToHand() or c:IsSSetable())
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

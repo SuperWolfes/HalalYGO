@@ -1,4 +1,4 @@
---Magic Blade - Ice Sword
+--Ment Blade - Ice Sword
 --scripted by Shad3, cleaned and updated by MLD
 local s,id=GetID()
 function s.initial_effect(c)

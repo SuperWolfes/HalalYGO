@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Search
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.thfilter(c)
-	return c:IsEquipSpell() and c:IsAbleToHand()
+	return c:IsEquipActional() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -42,7 +42,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.repfilter(c)
-	return c:IsFaceup() and c:IsEquipSpell() and not c:IsStatus(STATUS_DESTROY_CONFIRMED)
+	return c:IsFaceup() and c:IsEquipActional() and not c:IsStatus(STATUS_DESTROY_CONFIRMED)
 end
 function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -52,7 +52,7 @@ function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.desrepop(e,tp,eg,ep,ev,re,r,rp)
 	local g=e:GetHandler():GetEquipGroup()
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tg=g:FilterSelect(tp,s.repfilter,1,1,nil)
-	Duel.SendtoGrave(tg,REASON_EFFECT)
+	Duel.SendtoRest(tg,REASON_EFFECT)
 end

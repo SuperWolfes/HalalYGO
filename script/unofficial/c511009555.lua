@@ -1,5 +1,5 @@
 --ＲＵＭ－バトル・アップ・フォース
---Rank-Up-Magic Battle Up Force
+--Rank-Up-Ment Battle Up Fcoree
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

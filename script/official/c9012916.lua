@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	c:EnableCounterPermit(COUNTER_FEATHER)
 	--Synchro Summon
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Replace effect damage
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)

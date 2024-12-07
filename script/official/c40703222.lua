@@ -28,17 +28,17 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		if e:GetLabel()==0 and Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return false end
 		e:SetLabel(0)
-		return Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_KURIBOH,0,TYPES_TOKEN,300,200,1,RACE_FIEND,ATTRIBUTE_DARK)
+		return Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_KURIBOH,0,TYPES_TOKEN,300,200,1,RACE_TAINTED,ATTRIBUTE_DARK)
 	end
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,ft,tp,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,ft,tp,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if ft<=0 or not Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_KURIBOH,0,TYPES_TOKEN,300,200,1,RACE_FIEND,ATTRIBUTE_DARK) then return end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if ft<=0 or not Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_KURIBOH,0,TYPES_TOKEN,300,200,1,RACE_TAINTED,ATTRIBUTE_DARK) then return end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	for i=1,ft do
 		local token=Duel.CreateToken(tp,TOKEN_KURIBOH)
 		Duel.SpecialSummonStep(token,0,tp,tp,false,false,POS_FACEUP_DEFENSE)

@@ -42,8 +42,8 @@ s.listed_names={id}
 s.listed_series={SET_EMBLEMA,SET_CENTURION}
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,1)
-		and Duel.IsExistingMatchingCard(Card.IsSetCard,tp,LOCATION_GRAVE,0,1,nil,SET_EMBLEMA)
-		and Duel.IsExistingMatchingCard(Card.IsSetCard,tp,LOCATION_GRAVE,0,1,nil,SET_CENTURION) end
+		and Duel.IsExistingMatchingCard(Card.IsSetCard,tp,LOCATION_REST,0,1,nil,SET_EMBLEMA)
+		and Duel.IsExistingMatchingCard(Card.IsSetCard,tp,LOCATION_REST,0,1,nil,SET_CENTURION) end
 	Duel.SetTargetPlayer(tp)
 	Duel.SetTargetParam(1)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)

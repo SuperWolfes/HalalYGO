@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	alias=c:GetOriginalCodeRule()
 	--xyz summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Xyz.AddProcedure(c,nil,10,2,nil,nil,99)
 	--Gain LP
 	local e1=Effect.CreateEffect(c)

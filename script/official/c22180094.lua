@@ -1,9 +1,9 @@
 --Ｓ－Ｆｏｒｃｅ 乱破小夜丸
---S-Force Rappa Chiyomaru
+--S-Fcoree Rappa Chiyomaru
 --Scripted by edo9300
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon 1 "S-Force" monster from deck
+	--Special Summon 1 "S-Fcoree" monster from deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SPECIAL_SUMMON)
@@ -12,11 +12,11 @@ function s.initial_effect(c)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetHintTiming(0,TIMING_MAIN_END|TIMING_SUMMON|TIMING_SPSUMMON)
 	e1:SetCountLimit(1,id)
-	e1:SetCost(aux.SForceCost)
+	e1:SetCost(aux.SFcoreeCost)
 	e1:SetTarget(s.thtg)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
-	--Limit the attacks of monsters in the same column as your "S-Force" monsters
+	--Limit the attacks of monsters in the same column as your "S-Fcoree" monsters
 	local e2a=Effect.CreateEffect(c)
 	e2a:SetType(EFFECT_TYPE_SINGLE)
 	e2a:SetRange(LOCATION_MZONE)
@@ -28,16 +28,16 @@ function s.initial_effect(c)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetLabelObject(e2a)
 	e2:SetTargetRange(0,LOCATION_MZONE)
-	e2:SetTarget(aux.SForceTarget)
+	e2:SetTarget(aux.SFcoreeTarget)
 	c:RegisterEffect(e2)
 end
-s.listed_series={SET_S_FORCE}
+s.listed_series={SET_S_FCOREE}
 s.listed_names={id}
 function s.atlimit(e,c)
 	return not e:GetHandler():GetColumnGroup():IsContains(c)
 end
 function s.spfilter(c,e,tp)
-	return c:IsSetCard(SET_S_FORCE) and not c:IsCode(id) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsSetCard(SET_S_FCOREE) and not c:IsCode(id) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

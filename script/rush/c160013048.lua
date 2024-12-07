@@ -8,7 +8,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_BLUETOOTH_B_DRAGON}
 function s.cfilter(c)
-	return c:IsLocation(LOCATION_GRAVE) and c:IsCode(CARD_BLUETOOTH_B_DRAGON)
+	return c:IsLocation(LOCATION_REST) and c:IsCode(CARD_BLUETOOTH_B_DRAGON)
 end
 function s.stage2(e,tc,tp,mg,chk)
 	if chk==0 then

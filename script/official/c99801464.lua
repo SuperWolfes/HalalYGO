@@ -32,7 +32,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if not c:IsRelateToEffect(e) then return end
 	local tc=Duel.GetFirstTarget()
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)==0 or not tc:IsRelateToEffect(e) or tc:IsFacedown() or not c:CheckUniqueOnField(tp) then
-		return Duel.SendtoGrave(c,REASON_RULE)
+		return Duel.SendtoRest(c,REASON_RULE)
 	end
 	s.equipop(c,e,tp,tc)
 end

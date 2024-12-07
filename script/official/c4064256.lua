@@ -10,9 +10,9 @@ function s.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetRange(LOCATION_FZONE)
-	e2:SetTargetRange(LOCATION_MZONE+LOCATION_GRAVE,LOCATION_MZONE+LOCATION_GRAVE)
+	e2:SetTargetRange(LOCATION_MZONE+LOCATION_REST,LOCATION_MZONE+LOCATION_REST)
 	e2:SetCode(EFFECT_CHANGE_RACE)
-	e2:SetValue(RACE_ZOMBIE)
+	e2:SetValue(RACE_TOXIC)
 	e2:SetTarget(s.tg)
 	c:RegisterEffect(e2)
 	--summon limit
@@ -42,9 +42,9 @@ function s.tg(e,c)
 		c:RegisterFlagEffect(1,0,0,0)
 		local eff
 		if c:IsLocation(LOCATION_MZONE) then
-			eff={Duel.GetPlayerEffect(c:GetControler(),EFFECT_NECRO_VALLEY)}
+			eff={Duel.GetPlayerEffect(c:GetControler(),EFFECT_REST_VALLEY)}
 		else
-			eff={c:GetCardEffect(EFFECT_NECRO_VALLEY)}
+			eff={c:GetCardEffect(EFFECT_REST_VALLEY)}
 		end
 		c:ResetFlagEffect(1)
 		for _,te in ipairs(eff) do
@@ -56,8 +56,8 @@ function s.tg(e,c)
 end
 function s.val(e,c,re,chk)
 	if chk==0 then return true end
-	return RACE_ZOMBIE
+	return RACE_TOXIC
 end
 function s.sumlimit(e,c,tp,sumtp)
-	return sumtp&SUMMON_TYPE_TRIBUTE==SUMMON_TYPE_TRIBUTE and not c:IsRace(RACE_ZOMBIE)
+	return sumtp&SUMMON_TYPE_TRIBUTE==SUMMON_TYPE_TRIBUTE and not c:IsRace(RACE_TOXIC)
 end

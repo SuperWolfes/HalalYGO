@@ -1,4 +1,4 @@
---Magic-Reflection Armor - Metal Plus
+--Ment-Reflection Armor - Metal Plus
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -72,11 +72,11 @@ function s.cfilter(c,tp,eq)
 	return c:IsFaceup() and c==eq and c:IsControler(tp) and c:IsLocation(LOCATION_MZONE)
 end
 function s.distg(e,c)
-	return c:GetCardTargetCount()>0 and c:IsSpell()
+	return c:GetCardTargetCount()>0 and c:IsActional()
 		and c:GetCardTarget():IsExists(s.cfilter,1,nil,e:GetHandlerPlayer(),e:GetHandler():GetEquipTarget())
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
-	if not re:IsActiveType(TYPE_SPELL) then return end
+	if not re:IsActiveType(TYPE_ACTIONAL) then return end
 	if not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then return end
 	local g=Duel.GetChainInfo(ev,CHAININFO_TARGET_CARDS)
 	if not g or not g:IsExists(s.cfilter,1,nil,tp,e:GetHandler():GetEquipTarget()) then return end

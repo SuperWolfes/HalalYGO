@@ -81,7 +81,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if not tc:IsRelateToEffect(e) then return end
 	local c=e:GetHandler()
 	if not (c:IsRelateToEffect(e) and c:IsFaceup() and Duel.GetLocationCount(tp,LOCATION_SZONE)>0) then
-		Duel.SendtoGrave(c,REASON_RULE,PLAYER_NONE,PLAYER_NONE)
+		Duel.SendtoRest(c,REASON_RULE,PLAYER_NONE,PLAYER_NONE)
 	else
 		s.equipop(c,e,tp,tc)
 	end
@@ -102,8 +102,8 @@ function s.eqval(ec,c,tp)
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(c,REASON_COST)
+	if chk==0 then return c:IsAbleToRestAsCost() end
+	Duel.SendtoRest(c,REASON_COST)
 end
 function s.spfilter(c,e,tp)
 	return c:IsCode(50140163) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

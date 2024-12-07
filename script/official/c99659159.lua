@@ -36,7 +36,7 @@ function s.atktg(e,c)
 	return c:GetEquipGroup():IsExists(s.equipf,1,nil)
 end
 function s.filter(c)
-	return c:IsSetCard(0x29) and c:IsRace(RACE_DRAGON) and not c:IsForbidden()
+	return c:IsSetCard(0x29) and c:IsRace(RACE_DRAGON) and not c:IsUnliked()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() end

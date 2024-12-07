@@ -42,11 +42,11 @@ s.listed_series={0x1034}
 s.listed_names={12644061}
 function s.descon(e)
 	local c=e:GetHandler()
-	return not Duel.IsEnvironment(12644061) and (c:IsLocation(LOCATION_MZONE) or c:GetType()&TYPE_CONTINUOUS+TYPE_SPELL==TYPE_CONTINUOUS+TYPE_SPELL)
+	return not Duel.IsEnvironment(12644061) and (c:IsLocation(LOCATION_MZONE) or c:GetType()&TYPE_CONTINUOUS+TYPE_ACTIONAL==TYPE_CONTINUOUS+TYPE_ACTIONAL)
 end
 function s.crystaltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:GetDestination()==LOCATION_GRAVE and c:IsReason(REASON_DESTROY) end
+	if chk==0 then return c:GetDestination()==LOCATION_REST and c:IsReason(REASON_DESTROY) end
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then return false end
 	return Duel.SelectEffectYesNo(tp,c)
 end
@@ -58,7 +58,7 @@ function s.crystalop(e,tp,eg,ep,ev,re,r,rp,chk)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
-	e1:SetValue(TYPE_SPELL+TYPE_CONTINUOUS)
+	e1:SetValue(TYPE_ACTIONAL+TYPE_CONTINUOUS)
 	c:RegisterEffect(e1)
 	Duel.RaiseEvent(c,47408488,e,0,tp,0,0)
 end

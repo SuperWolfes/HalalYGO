@@ -17,7 +17,7 @@ function s.initial_effect(c)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsLevelAbove,7),tp,0,LOCATION_MZONE,1,nil) 
-		and (not Duel.IsPlayerAffectedByEffect(tp,FLAG_NO_TRIBUTE)) and e:GetHandler():CanBeDoubleTribute(FLAG_DOUBLE_TRIB_FIEND)
+		and (not Duel.IsPlayerAffectedByEffect(tp,FLAG_NO_TRIBUTE)) and e:GetHandler():CanBeDoubleTribute(FLAG_DOUBLE_TRIB_TAINTED)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeckAsCost(tp,1) end
@@ -27,14 +27,14 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.DiscardDeck(tp,1,REASON_COST)<1 then return end
 	--Double tribute
 	local c=e:GetHandler()
-	c:AddDoubleTribute(id,s.otfilter,s.eftg,RESETS_STANDARD_PHASE_END,FLAG_DOUBLE_TRIB_FIEND)
+	c:AddDoubleTribute(id,s.otfilter,s.eftg,RESETS_STANDARD_PHASE_END,FLAG_DOUBLE_TRIB_TAINTED)
 	if Duel.GetFieldGroupCountRush(tp,0,LOCATION_MZONE)>1 then
 		c:UpdateLevel(1,RESETS_STANDARD_PHASE_END,c)
 	end
 end
 function s.otfilter(c,tp)
-	return c:IsDoubleTribute(FLAG_DOUBLE_TRIB_FIEND) and (c:IsControler(tp) or c:IsFaceup())
+	return c:IsDoubleTribute(FLAG_DOUBLE_TRIB_TAINTED) and (c:IsControler(tp) or c:IsFaceup())
 end
 function s.eftg(e,c)
-	return c:IsRace(RACE_FIEND) and c:IsLevelAbove(7) and c:IsSummonableCard()
+	return c:IsRace(RACE_TAINTED) and c:IsLevelAbove(7) and c:IsSummonableCard()
 end

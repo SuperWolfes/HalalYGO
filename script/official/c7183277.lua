@@ -1,5 +1,5 @@
 --ライトロード・ドルイド オルクス
---Aurkus, Lightsworn Druid
+--Aurkus, Lightsworn Droid
 local s,id=GetID()
 function s.initial_effect(c)
 	--Neither player can target "Lightsworn" monsters (anywhere) with card effects
@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e1:SetTarget(function(_,c) return c:IsSetCard(SET_LIGHTSWORN) and c:IsMonster() and c:IsFaceup() end)
 	e1:SetValue(1)
 	c:RegisterEffect(e1)
-	--Send the top 2 cards of your Deck to the GY
+	--Send the top 2 cards of your Deck to the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_DECKDES)

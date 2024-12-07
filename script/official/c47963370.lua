@@ -1,16 +1,16 @@
 --マジシャン・オブ・カオス
---Magician of Chaos
+--Mentor of Chaos
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--change name
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e1:SetCode(EFFECT_CHANGE_CODE)
-	e1:SetRange(LOCATION_MZONE+LOCATION_GRAVE)
-	e1:SetValue(CARD_DARK_MAGICIAN)
+	e1:SetRange(LOCATION_MZONE+LOCATION_REST)
+	e1:SetValue(CARD_DARK_MENTOR)
 	c:RegisterEffect(e1)
 	--destroy
 	local e2=Effect.CreateEffect(c)
@@ -37,9 +37,9 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 s.listed_series={0xcf}
-s.listed_names={21082832,CARD_DARK_MAGICIAN}
+s.listed_names={21082832,CARD_DARK_MENTOR}
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
-	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP)
+	return re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() end
@@ -56,10 +56,10 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsSummonType(SUMMON_TYPE_RITUAL) and c:IsReason(REASON_BATTLE+REASON_EFFECT)
+	return c:IsSummonType(SUMMON_TYPE_LOCKED) and c:IsReason(REASON_BATTLE+REASON_EFFECT)
 end
 function s.spfilter(c,e,tp)
-	return c:IsSetCard(0xcf) and c:IsRitualMonster() and not c:IsCode(id) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
+	return c:IsSetCard(0xcf) and c:IsLockedMonster() and not c:IsCode(id) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

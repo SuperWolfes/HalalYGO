@@ -1,9 +1,9 @@
 --魔を刻むデモンスミス
---The Fiendsmith
+--The Taintedsmith
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	--Add 1 "Fiendsmith" Spell/Trap from your Deck to your hand
+	--Add 1 "Taintedsmith" Actional/Trap from your Deck to your hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -14,10 +14,10 @@ function s.initial_effect(c)
 	e1:SetTarget(s.thtg)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
-	--Send 1 Equip Card you control and 1 monster on the field to the GY
+	--Send 1 Equip Card you control and 1 monster on the field to the RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_TOGRAVE)
+	e2:SetCategory(CATEGORY_TOREST)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetRange(LOCATION_MZONE)
@@ -30,21 +30,21 @@ function s.initial_effect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_IGNITION)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetCountLimit(1,{id,2})
 	e3:SetCost(s.spcost)
 	e3:SetTarget(s.sptg)
 	e3:SetOperation(s.spop)
 	c:RegisterEffect(e3)
 end
-s.listed_series={SET_FIENDSMITH}
+s.listed_series={SET_TAINTEDSMITH}
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsDiscardable() end
-	Duel.SendtoGrave(c,REASON_COST|REASON_DISCARD)
+	Duel.SendtoRest(c,REASON_COST|REASON_DISCARD)
 end
 function s.thfilter(c)
-	return c:IsSetCard(SET_FIENDSMITH) and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsSetCard(SET_TAINTEDSMITH) and c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -59,8 +59,8 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.tgfilter(c,tp,e)
-	return (c:IsMonster() or (c:IsSetCard(SET_FIENDSMITH) and c:IsEquipCard() and c:IsFaceup() and c:IsControler(tp)))
-		and c:IsAbleToGrave() and c:IsCanBeEffectTarget(e)
+	return (c:IsMonster() or (c:IsSetCard(SET_TAINTEDSMITH) and c:IsEquipCard() and c:IsFaceup() and c:IsControler(tp)))
+		and c:IsAbleToRest() and c:IsCanBeEffectTarget(e)
 end
 function s.rescon(sg,e,tp,mg)
 	return sg:FilterCount(Card.IsEquipCard,nil)==1
@@ -69,24 +69,24 @@ function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
 	local g=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_ONFIELD,LOCATION_MZONE,nil,tp,e)
 	if chk==0 then return #g>=2 and aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,0) end
-	local tg=aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,1,tp,HINTMSG_TOGRAVE)
+	local tg=aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,1,tp,HINTMSG_TOREST)
 	Duel.SetTargetCard(tg)
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,tg,2,tp,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,tg,2,tp,0)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.GetTargetCards(e)
 	if #tg>0 then
-		Duel.SendtoGrave(tg,REASON_EFFECT)
+		Duel.SendtoRest(tg,REASON_EFFECT)
 	end
 end
 function s.spcostfilter(c,tp)
-	return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_FIEND) and c:IsAbleToDeckOrExtraAsCost()
+	return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_TAINTED) and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return Duel.IsExistingMatchingCard(s.spcostfilter,tp,LOCATION_GRAVE,0,1,c) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.spcostfilter,tp,LOCATION_REST,0,1,c) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,s.spcostfilter,tp,LOCATION_GRAVE,0,1,1,c)
+	local g=Duel.SelectMatchingCard(tp,s.spcostfilter,tp,LOCATION_REST,0,1,1,c)
 	Duel.HintSelection(g)
 	Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_COST)
 end

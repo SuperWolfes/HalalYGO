@@ -1,10 +1,10 @@
 --ネフティスの繋ぎ手
---Conductor of Nephthys
+--Conductor of Nepolonis
 --Scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
-	--Special Summon 1 "Nephthys" Ritual from your hand/Deck
+	c:EnableAwakeLimit()
+	--Special Summon 1 "Nepolonis" Locked from your hand/Deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -12,11 +12,11 @@ function s.initial_effect(c)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e1:SetProperty(EFFECT_FLAG_DELAY)
 	e1:SetCountLimit(1,id)
-	e1:SetCondition(function(e) return e:GetHandler():IsSummonType(SUMMON_TYPE_RITUAL) end)
+	e1:SetCondition(function(e) return e:GetHandler():IsSummonType(SUMMON_TYPE_LOCKED) end)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Register if Tributed by a "Nephthys" card's effect
+	--Register if Tributed by a "Nepolonis" card's effect
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_DESTROY)
@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.regtg)
 	e2:SetOperation(s.regop)
 	c:RegisterEffect(e2)
-	--Register if destroyed by a "Nephthys" card's effect
+	--Register if destroyed by a "Nepolonis" card's effect
 	local e3=e2:Clone()
 	e3:SetCode(EVENT_DESTROYED)
 	c:RegisterEffect(e3)
@@ -36,9 +36,9 @@ end
 s.listed_names={23459650,id}
 s.listed_series={0x11f}
 function s.spfilter(c,e,tp)
-	local pg=aux.GetMustBeMaterialGroup(tp,Group.CreateGroup(),tp,c,nil,REASON_RITUAL)
-	return #pg<=0 and c:IsSetCard(0x11f) and c:IsRitualMonster() and not c:IsCode(id)
-		and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,false,POS_FACEUP)
+	local pg=aux.GetMustBeMaterialGroup(tp,Group.CreateGroup(),tp,c,nil,REASON_LOCKED)
+	return #pg<=0 and c:IsSetCard(0x11f) and c:IsLockedMonster() and not c:IsCode(id)
+		and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_LOCKED,tp,true,false,POS_FACEUP)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
@@ -49,7 +49,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local tc=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,1,nil,e,tp):GetFirst()
-	if tc and Duel.SpecialSummon(tc,SUMMON_TYPE_RITUAL,tp,tp,true,false,POS_FACEUP)>0 then
+	if tc and Duel.SpecialSummon(tc,SUMMON_TYPE_LOCKED,tp,tp,true,false,POS_FACEUP)>0 then
 		tc:CompleteProcedure()
 	end
 end
@@ -62,7 +62,7 @@ function s.regtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=Duel.GetCurrentPhase()==PHASE_STANDBY and 2 or 1
-	--Destroy up to 3 "Nephthys" cards from your hand/Deck/field
+	--Destroy up to 3 "Nepolonis" cards from your hand/Deck/field
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e1:SetCode(EVENT_PHASE+PHASE_STANDBY)
@@ -74,7 +74,7 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.desfilter(c,e)
-	return c:IsSetCard(0x11f) and c:IsDestructable(e) and not c:IsRitualMonster() and (c:IsFaceup() or not c:IsLocation(LOCATION_ONFIELD))
+	return c:IsSetCard(0x11f) and c:IsDestructable(e) and not c:IsLockedMonster() and (c:IsFaceup() or not c:IsLocation(LOCATION_ONFIELD))
 end
 function s.descond(e,tp,eg,ep,ev,re,r,rp)
 	local sp_label,turn=e:GetLabel()

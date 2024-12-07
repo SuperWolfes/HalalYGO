@@ -15,13 +15,13 @@ function s.spfilter(c,e,tp)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(Card.IsSpellTrap,tp,LOCATION_HAND,0,2,e:GetHandler())
+		and Duel.IsExistingMatchingCard(Card.IsActionalTrap,tp,LOCATION_HAND,0,2,e:GetHandler())
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND,0,1,nil,e,tp) end
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	local g1=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_HAND,0,nil,e,tp)
-	local g2=Duel.GetMatchingGroup(Card.IsSpellTrap,tp,LOCATION_HAND,0,nil)
+	local g2=Duel.GetMatchingGroup(Card.IsActionalTrap,tp,LOCATION_HAND,0,nil)
 	if #g1==0 or #g2<2 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,0))
 	local sg1=g1:Select(tp,1,1,nil)
@@ -35,8 +35,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=rg:GetFirst()
 	if tc:IsCanBeSpecialSummoned(e,0,tp,false,false) then
 		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
-		Duel.SendtoGrave(sg2,REASON_EFFECT)
+		Duel.SendtoRest(sg2,REASON_EFFECT)
 	else
-		Duel.SendtoGrave(sg1,REASON_EFFECT)
+		Duel.SendtoRest(sg1,REASON_EFFECT)
 	end
 end

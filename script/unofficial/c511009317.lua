@@ -30,7 +30,7 @@ function s.initial_effect(c)
 	e4:SetType(EFFECT_TYPE_QUICK_O)
 	e4:SetCode(EVENT_FREE_CHAIN)
 	e4:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e4:SetRange(LOCATION_GRAVE)
+	e4:SetRange(LOCATION_REST)
 	e4:SetCondition(s.sumcon)
 	e4:SetTarget(s.sumtg)
 	e4:SetOperation(s.sumop)
@@ -64,14 +64,14 @@ function s.ovfilter(c,e)
 end
 function s.spfilter(c,e,tp,e2)
 	return c:IsSetCard(0xba) and c:IsType(TYPE_XYZ) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
-		and Duel.IsExistingTarget(s.ovfilter,tp,LOCATION_GRAVE,0,1,c) and (not e2 or c:IsCanBeEffectTarget(e2))
+		and Duel.IsExistingTarget(s.ovfilter,tp,LOCATION_REST,0,1,c) and (not e2 or c:IsCanBeEffectTarget(e2))
 end
 function s.sumtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chkc then return false end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
-	local sg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_GRAVE,0,nil,e,tp,e)
-	local og=Duel.GetMatchingGroup(s.ovfilter,tp,LOCATION_GRAVE,0,nil,e)
+		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp) end
+	local sg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_REST,0,nil,e,tp,e)
+	local og=Duel.GetMatchingGroup(s.ovfilter,tp,LOCATION_REST,0,nil,e)
 	local g
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	if #sg==#og then

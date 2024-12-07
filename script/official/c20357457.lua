@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.selfsptg)
 	e1:SetOperation(s.selfspop)
 	c:RegisterEffect(e1)
-	--Special Summon 1 "Sky Striker Ace - Roze" from your Deck or GY
+	--Special Summon 1 "Sky Striker Ace - Roze" from your Deck or RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -28,12 +28,12 @@ function s.initial_effect(c)
 	local e3=e2:Clone()
 	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e3)
-	--Add to your hand or Special Summon 1 of your "Sky Striker Ace - Roze" that is banished or in your GY
+	--Add to your hand or Special Summon 1 of your "Sky Striker Ace - Roze" that is banished or in your RP
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,2))
 	e4:SetCategory(CATEGORY_TOHAND+CATEGORY_SPECIAL_SUMMON)
 	e4:SetType(EFFECT_TYPE_IGNITION)
-	e4:SetRange(LOCATION_GRAVE)
+	e4:SetRange(LOCATION_REST)
 	e4:SetCountLimit(1,{id,2})
 	e4:SetCost(aux.SelfBanishCost)
 	e4:SetTarget(s.thsptg)
@@ -43,7 +43,7 @@ end
 s.listed_series={SET_SKY_STRIKER}
 s.listed_names={37351133}
 function s.selfspcfilter(c)
-	return c:IsSpell() and c:IsDiscardable()
+	return c:IsActional() and c:IsDiscardable()
 end
 function s.selfspcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.selfspcfilter,tp,LOCATION_HAND,0,1,e:GetHandler()) end
@@ -66,8 +66,8 @@ function s.rozespfilter(c,e,tp)
 end
 function s.rozesptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(s.rozespfilter,tp,LOCATION_DECK|LOCATION_GRAVE,0,1,nil,e,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK|LOCATION_GRAVE)
+		and Duel.IsExistingMatchingCard(s.rozespfilter,tp,LOCATION_DECK|LOCATION_REST,0,1,nil,e,tp) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK|LOCATION_REST)
 end
 function s.rozespop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -85,7 +85,7 @@ function s.rozespop(e,tp,eg,ep,ev,re,r,rp)
 	aux.addTempLizardCheck(c,tp,function(e,c) return not c:IsOriginalRace(RACE_MACHINE) end)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.rozespfilter),tp,LOCATION_DECK|LOCATION_GRAVE,0,1,1,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.rozespfilter),tp,LOCATION_DECK|LOCATION_REST,0,1,1,nil,e,tp)
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end
@@ -96,14 +96,14 @@ function s.thspfilter(c,e,tp,ft)
 end
 function s.thsptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.thspfilter,tp,LOCATION_REMOVED|LOCATION_GRAVE,0,1,nil,e,tp,ft) end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REMOVED|LOCATION_GRAVE)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REMOVED|LOCATION_GRAVE)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.thspfilter,tp,LOCATION_REMOVED|LOCATION_REST,0,1,nil,e,tp,ft) end
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REMOVED|LOCATION_REST)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REMOVED|LOCATION_REST)
 end
 function s.thspop(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local sc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thspfilter),tp,LOCATION_REMOVED|LOCATION_GRAVE,0,1,1,nil,e,tp,ft):GetFirst()
+	local sc=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.thspfilter),tp,LOCATION_REMOVED|LOCATION_REST,0,1,1,nil,e,tp,ft):GetFirst()
 	if not sc then return end
 	aux.ToHandOrElse(sc,tp,
 		function()

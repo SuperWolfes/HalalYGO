@@ -36,7 +36,7 @@ function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
 	local not_dmg_step=Duel.GetCurrentPhase()~=PHASE_DAMAGE
 	local b1=Duel.IsExistingMatchingCard(s.atkfilter,tp,LOCATION_MZONE,0,1,nil) and (not_dmg_step or not Duel.IsDamageCalculated())
-	local b2=c:IsAbleToGraveAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED) and not_dmg_step
+	local b2=c:IsAbleToRestAsCost() and c:IsStatus(STATUS_EFFECT_ENABLED) and not_dmg_step
 		and Duel.IsExistingTarget(aux.FaceupFilter(Card.IsType,TYPE_EFFECT),tp,0,LOCATION_MMZONE,1,nil)
 	if chk==0 then return b1 or b2 end
 	local op=Duel.SelectEffect(tp,
@@ -50,7 +50,7 @@ function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	elseif op==2 then
 		e:SetCategory(CATEGORY_DESTROY)
 		e:SetProperty(prop+EFFECT_FLAG_CARD_TARGET)
-		Duel.SendtoGrave(c,REASON_COST)
+		Duel.SendtoRest(c,REASON_COST)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 		local tc=Duel.SelectTarget(tp,aux.FaceupFilter(Card.IsType,TYPE_EFFECT),tp,0,LOCATION_MMZONE,1,1,nil,tp):GetFirst()
 		local dc=Duel.GetFieldCard(1-tp,LOCATION_SZONE,tc:GetSequence())
@@ -77,7 +77,7 @@ function s.effop(e,tp,eg,ep,ev,re,r,rp)
 			tc:RegisterEffect(e1)
 		end
 	elseif op==2 then
-		--Place the target face-up in the Spell & Trap Zone as a Continuous Spell
+		--Place the target face-up in the Actional & Trap Zone as a Continuous Actional
 		local tc=Duel.GetFirstTarget()
 		if not (tc:IsRelateToEffect(e) and tc:IsControler(1-tp) and not tc:IsImmuneToEffect(e)) then return end
 		local seq=tc:GetSequence()
@@ -87,12 +87,12 @@ function s.effop(e,tp,eg,ep,ev,re,r,rp)
 		end
 		if Duel.CheckLocation(1-tp,LOCATION_SZONE,seq)
 			and Duel.MoveToField(tc,tp,1-tp,LOCATION_SZONE,POS_FACEUP,tc:IsMonsterCard(),1<<seq) then
-			--Treat it as a Continuous Spell
+			--Treat it as a Continuous Actional
 			local e1=Effect.CreateEffect(c)
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 			e1:SetCode(EFFECT_CHANGE_TYPE)
-			e1:SetValue(TYPE_SPELL|TYPE_CONTINUOUS)
+			e1:SetValue(TYPE_ACTIONAL|TYPE_CONTINUOUS)
 			e1:SetReset(RESET_EVENT|(RESETS_STANDARD&~RESET_TURN_SET))
 			tc:RegisterEffect(e1)
 		end

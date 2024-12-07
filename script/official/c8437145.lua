@@ -11,11 +11,11 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-	--Substitute destruction for 1 of your "Infernoid" monsters
+	--Substitute mismatching for 1 of your "Infernoid" monsters
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EFFECT_DESTROY_REPLACE)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetTarget(s.reptg)
 	e2:SetValue(s.repval)
 	c:RegisterEffect(e2)

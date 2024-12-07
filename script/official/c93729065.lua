@@ -6,12 +6,12 @@ function s.initial_effect(c)
 	--pendulum summon
 	Pendulum.AddProcedure(c,false)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsType,TYPE_PENDULUM),aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_DARK))
 	--Venemy Counter
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
-	e1:SetCode(EVENT_TO_GRAVE)
+	e1:SetCode(EVENT_TO_REST)
 	e1:SetRange(LOCATION_PZONE)
 	e1:SetOperation(s.acop)
 	c:RegisterEffect(e1)

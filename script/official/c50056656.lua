@@ -35,9 +35,9 @@ function s.initial_effect(c)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
 end
-s.listed_names={CARD_RED_DRAGON_ARCHFIEND}
+s.listed_names={CARD_RED_DRAGON_ARCHTAINTED}
 function s.cfilter(c)
-	return c:IsFaceup() and (c:IsCode(CARD_RED_DRAGON_ARCHFIEND) or (c:IsType(TYPE_SYNCHRO) and c:IsMonster() and c:ListsCode(CARD_RED_DRAGON_ARCHFIEND)))
+	return c:IsFaceup() and (c:IsCode(CARD_RED_DRAGON_ARCHTAINTED) or (c:IsType(TYPE_SYNCHRO) and c:IsMonster() and c:ListsCode(CARD_RED_DRAGON_ARCHTAINTED)))
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	return rp==1-tp and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,0,1,nil)

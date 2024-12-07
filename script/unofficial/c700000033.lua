@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,700000030,700000031,700000032)
 	--Atk update
 	local e1=Effect.CreateEffect(c)
@@ -26,7 +26,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
 end
-s.miracle_synchro_fusion=true
+s.pulse_synchro_fusion=true
 function s.atkval(e,c)
 	local cont=c:GetControler()
 	local atk=2500-Duel.GetLP(cont)

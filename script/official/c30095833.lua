@@ -3,14 +3,14 @@
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Pendulum.AddProcedure(c,false)
 	--2 Level 7 Pendulum monsters
 	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_PENDULUM),7,2)
 	--Special Summon this card
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_LEAVE_GRAVE)
+	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_LEAVE_REST)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_PZONE)
 	e1:SetCountLimit(1,id)
@@ -54,7 +54,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,0,0)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_LEAVE_GRAVE,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_LEAVE_REST,nil,1,tp,LOCATION_REST)
 end
 function s.ovfilter(c,xc,tp)
 	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsCanBeXyzMaterial(xc,tp,REASON_EFFECT)
@@ -62,7 +62,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) or Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)==0 then return end
-	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.ovfilter),tp,LOCATION_GRAVE,0,nil,c,tp)
+	local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.ovfilter),tp,LOCATION_REST,0,nil,c,tp)
 	if #g==0 or not Duel.SelectYesNo(tp,aux.Stringid(id,3)) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTACH)
 	local og=g:Select(tp,1,1,nil)

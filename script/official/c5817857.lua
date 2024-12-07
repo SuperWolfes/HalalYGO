@@ -26,10 +26,10 @@ function s.mtcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp
 end
 function s.cfilter1(c)
-	return c:IsCode(36623431) and c:IsAbleToGraveAsCost()
+	return c:IsCode(36623431) and c:IsAbleToRestAsCost()
 end
 function s.cfilter2(c)
-	return c:IsMonster() and c:IsRace(RACE_ZOMBIE) and not c:IsPublic()
+	return c:IsMonster() and c:IsRace(RACE_TOXIC) and not c:IsPublic()
 end
 function s.mtop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -49,9 +49,9 @@ function s.mtop(e,tp,eg,ep,ev,re,r,rp)
 		select=2
 	end
 	if select==0 then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=g1:Select(tp,1,1,nil)
-		Duel.SendtoGrave(g,REASON_COST)
+		Duel.SendtoRest(g,REASON_COST)
 	elseif select==1 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_CONFIRM)
 		local g=g2:Select(tp,1,1,nil)
@@ -70,12 +70,12 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 		local tc=eg:GetFirst()
 		return tc:IsFaceup() and tc:IsLocation(LOCATION_MZONE) and tc:IsSetCard(0x1d) 
 			and not tc:IsReason(REASON_REPLACE) and tc:IsReason(REASON_BATTLE+REASON_EFFECT)
-			and Duel.IsExistingMatchingCard(s.rfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil)
+			and Duel.IsExistingMatchingCard(s.rfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,nil)
 	end
 	return Duel.SelectEffectYesNo(tp,e:GetHandler(),96)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.rfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.rfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,1,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
 end

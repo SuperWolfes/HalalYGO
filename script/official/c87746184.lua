@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion Summon procedure
 	Fusion.AddProcMix(c,true,true,CARD_ALBAZ,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGHT))
 	--Fusion Summon 1 Level 8 or lower Fusion Monster
@@ -19,17 +19,17 @@ function s.initial_effect(c)
 	e1:SetTarget(Fusion.SummonEffTG(params))
 	e1:SetOperation(Fusion.SummonEffOP(params))
 	c:RegisterEffect(e1)
-	--Add to your hand or Set 1 "Branded" Spell/Trap from your Deck
+	--Add to your hand or Set 1 "Branded" Actional/Trap from your Deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_PHASE+PHASE_END)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(s.thsetcon)
 	e2:SetTarget(s.thsettg)
-	e2:SetOperation(s.thsetop)
+	e2:SetOperation(s.thvetop)
 	c:RegisterEffect(e2)
 end
 s.listed_names={CARD_ALBAZ,id}
@@ -38,27 +38,27 @@ function s.fusfilter(c)
 	return c:IsLevelBelow(8) and not c:IsCode(id)
 end
 function s.fextra(e,tp,mg)
-	if not Duel.IsPlayerAffectedByEffect(tp,CARD_SPIRIT_ELIMINATION) then
-		return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRemove),tp,LOCATION_GRAVE,0,nil)
+	if not Duel.IsPlayerAffectedByEffect(tp,CARD_GUARDIAN_ELIMINATION) then
+		return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRemove),tp,LOCATION_REST,0,nil)
 	end
 	return nil
 end
 function s.extratg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,0,tp,LOCATION_HAND|LOCATION_ONFIELD|LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,0,tp,LOCATION_HAND|LOCATION_ONFIELD|LOCATION_REST)
 end
 function s.thsetcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return c:GetTurnID()==Duel.GetTurnCount() and not c:IsReason(REASON_RETURN)
 end
 function s.thsetfilter(c)
-	return c:IsSetCard(SET_BRANDED) and c:IsSpellTrap() and (c:IsAbleToHand() or c:IsSSetable())
+	return c:IsSetCard(SET_BRANDED) and c:IsActionalTrap() and (c:IsAbleToHand() or c:IsSSetable())
 end
 function s.thsettg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thsetfilter,tp,LOCATION_DECK,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
-function s.thsetop(e,tp,eg,ep,ev,re,r,rp)
+function s.thvetop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,2))
 	local sc=Duel.SelectMatchingCard(tp,s.thsetfilter,tp,LOCATION_DECK,0,1,1,nil):GetFirst()
 	if not sc then return end

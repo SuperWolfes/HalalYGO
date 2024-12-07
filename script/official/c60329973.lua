@@ -1,12 +1,12 @@
 --混沌変幻
---Chaos Phantasm
+--Chaos Illusorasm
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_TOGRAVE+CATEGORY_SPECIAL_SUMMON)
+	e1:SetCategory(CATEGORY_TOREST+CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetCode(EVENT_FREE_CHAIN)
@@ -36,16 +36,16 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local g=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_REMOVED,0,nil,e)
 	if chkc then return chkc:IsLocation(LOCATION_REMOVED) and s.tgfilter(chkc,e) end
 	if chk==0 then return aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,0) end
-	local tg=aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,1,tp,HINTMSG_TOGRAVE)
+	local tg=aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,1,tp,HINTMSG_TOREST)
 	Duel.SetTargetCard(tg)
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,tg,#tg,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,tg,#tg,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.GetTargetCards(e)
-	if #tg==2 and Duel.SendtoGrave(tg,REASON_EFFECT+REASON_RETURN)==2 then
+	if #tg==2 and Duel.SendtoRest(tg,REASON_EFFECT+REASON_RETURN)==2 then
 		local og=Duel.GetOperatedGroup()
-		if og:FilterCount(Card.IsLocation,nil,LOCATION_GRAVE)~=2 then return end
+		if og:FilterCount(Card.IsLocation,nil,LOCATION_REST)~=2 then return end
 		local lvl=tg:GetSum(Card.GetLevel)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,lvl)

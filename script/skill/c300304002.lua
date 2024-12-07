@@ -4,13 +4,13 @@ local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddSkillProcedure(c,1,false,s.flipcon,s.flipop,1)
 end
-s.listed_series={SET_DESTINY_HERO}
+s.listed_series={SET_DESTRUDIC_HERO}
 function s.filter(c,e,tp)
-	return c:IsFaceup() and c:IsSetCard(SET_DESTINY_HERO)
+	return c:IsFaceup() and c:IsSetCard(SET_DESTRUDIC_HERO)
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil,c:GetLevel(),e,tp)
 end
 function s.spfilter(c,lv,e,tp)
-	return c:IsSetCard(SET_DESTINY_HERO) and c:GetLevel()<lv and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsSetCard(SET_DESTRUDIC_HERO) and c:GetLevel()<lv and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 	local g1=Duel.GetFieldGroup(tp,LOCATION_MZONE,0)
@@ -24,13 +24,13 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,tp,id)
 	--OPD register
 	Duel.RegisterFlagEffect(ep,id,0,0,0)
-	--Special Summon 1 "Destiny HERO" monster with a lower Level
+	--Special Summon 1 "Destrudic HERO" monster with a lower Level
 	local tc=Duel.GetFieldGroup(tp,LOCATION_MZONE,0):GetFirst()
 	local sg=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,1,nil,tc:GetLevel(),e,tp)
 	if #sg>0 then
 		Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)
 	end
-	--Cannot Summon monsters, except "Destiny HERO" monsters, for the rest of this turn
+	--Cannot Summon monsters, except "Destrudic HERO" monsters, for the rest of this turn
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_CANNOT_SUMMON)
@@ -56,7 +56,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e4,tp)
 end
 function s.sumlimit(e,c)
-	return not c:IsSetCard(SET_DESTINY_HERO)
+	return not c:IsSetCard(SET_DESTRUDIC_HERO)
 end
 function s.EPop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SKILL_FLIP,tp,id|(2<<32))

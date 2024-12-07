@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.eqfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_WARRIOR|RACE_FAIRY|RACE_CELESTIALWARRIOR) and not c:IsMaximumModeSide()
+	return c:IsFaceup() and c:IsRace(RACE_WARRIOR|RACE_WANDERER|RACE_CELESTIALWARRIOR) and not c:IsMaximumModeSide()
 end
 function s.eqlimit(e,c)
 	return c:IsFaceup()

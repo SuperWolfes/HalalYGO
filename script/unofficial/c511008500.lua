@@ -25,7 +25,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_RED,0x543,TYPES_TOKEN,100,100,1,RACE_FIEND,ATTRIBUTE_FIRE,POS_FACEUP_DEFENSE) end
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_RED,0x543,TYPES_TOKEN,100,100,1,RACE_TAINTED,ATTRIBUTE_FIRE,POS_FACEUP_DEFENSE) end
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,0)
 end
@@ -41,7 +41,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetReset(RESET_CHAIN)
 	Duel.RegisterEffect(e1,tp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_RED,0x543,TYPES_TOKEN,100,100,1,RACE_FIEND,ATTRIBUTE_FIRE,POS_FACEUP_DEFENSE) then
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_RED,0x543,TYPES_TOKEN,100,100,1,RACE_TAINTED,ATTRIBUTE_FIRE,POS_FACEUP_DEFENSE) then
 		local token=Duel.CreateToken(tp,TOKEN_RED)
 		Duel.SpecialSummon(token,0,tp,tp,false,false,POS_FACEUP_DEFENSE)
 	end

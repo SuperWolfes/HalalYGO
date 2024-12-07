@@ -19,7 +19,7 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_MZONE)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end
 function s.sumfilter(c,e,tp,fc)
 	return c:IsCode(table.unpack(fc.material)) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -38,7 +38,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if tc.named_material and #tc.named_material~=tc.min_material_count then return end
 	if tc.material==nil then return end
 	if Duel.GetLocationCount(sp,LOCATION_MZONE)<tc.min_material_count then return end
-	local sg=Duel.GetMatchingGroup(s.sumfilter,sp,LOCATION_GRAVE,0,nil,e,sp,tc)
+	local sg=Duel.GetMatchingGroup(s.sumfilter,sp,LOCATION_REST,0,nil,e,sp,tc)
 	if aux.SelectUnselectGroup(sg,e,sp,tc.min_material_count,tc.min_material_count,s.rescon(tc),0) and Duel.SelectYesNo(sp,aux.Stringid(id,1)) then
 		local spg=aux.SelectUnselectGroup(sg,e,sp,tc.min_material_count,tc.max_material_count,s.rescon(tc),1,sp,HINTMSG_SPSUMMON)
 		if #spg>0 then

@@ -40,7 +40,7 @@ function s.initial_effect(c)
 	e3:SetCountLimit(1,{id,2})
 	e3:SetCondition(function(e,tp) return Duel.HasFlagEffect(tp,id) end)
 	e3:SetTarget(s.settg)
-	e3:SetOperation(s.setop)
+	e3:SetOperation(s.vetop)
 	c:RegisterEffect(e3)
 	--Register if a "Gladiator Beast" monster is Special Summoned from the Deck
 	aux.GlobalCheck(s,function()
@@ -113,7 +113,7 @@ end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_DECK,0,1,nil) end
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 	local g=Duel.SelectMatchingCard(tp,s.setfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then

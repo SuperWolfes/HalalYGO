@@ -3,7 +3,7 @@
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Pendulum procedure
 	Pendulum.AddProcedure(c,false)
 	--Synchro Summon procedure
@@ -91,8 +91,8 @@ function s.spfilter(c,e,tp)
 	end
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK|LOCATION_EXTRA|LOCATION_GRAVE,0,1,nil,e,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK|LOCATION_EXTRA|LOCATION_GRAVE)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK|LOCATION_EXTRA|LOCATION_REST,0,1,nil,e,tp) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK|LOCATION_EXTRA|LOCATION_REST)
 end
 function s.exfilter1(c)
 	return c:IsLocation(LOCATION_EXTRA) and c:IsFacedown() and c:IsType(TYPE_FUSION|TYPE_SYNCHRO|TYPE_XYZ)
@@ -116,7 +116,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local ft3=Duel.GetLocationCountFromEx(tp,tp,nil,TYPE_FUSION+TYPE_SYNCHRO+TYPE_XYZ)
 	local ft4=Duel.GetLocationCountFromEx(tp,tp,nil,TYPE_PENDULUM+TYPE_LINK)
 	local ft=math.min(Duel.GetUsableMZoneCount(tp),2)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then
 		if ft1>0 then ft1=1 end
 		if ft2>0 then ft2=1 end
 		if ft3>0 then ft3=1 end
@@ -131,10 +131,10 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		ft4=math.min(ect,ft4)
 	end
 	local loc=0
-	if ft1>0 then loc=loc+LOCATION_DECK+LOCATION_GRAVE end
+	if ft1>0 then loc=loc+LOCATION_DECK+LOCATION_REST end
 	if ft2>0 or ft3>0 or ft4>0 then loc=loc+LOCATION_EXTRA end
 	if loc==0 then return end
-	local sg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,loc,0,nil,e,tp)
+	local sg=Duel.GetMatchingGroup(aux.RestValleyFilter(s.spfilter),tp,loc,0,nil,e,tp)
 	if #sg==0 then return end
 	local rg=aux.SelectUnselectGroup(sg,e,tp,1,ft,s.rescon(ft1,ft2,ft3,ft4,ft),1,tp,HINTMSG_SPSUMMON)
 	Duel.SpecialSummon(rg,0,tp,tp,false,false,POS_FACEUP_DEFENSE)

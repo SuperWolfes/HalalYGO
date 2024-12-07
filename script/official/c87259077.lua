@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -21,7 +21,7 @@ function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	local t=Duel.GetAttackTarget()
 	if ev==1 then t=Duel.GetAttacker() end
 	if not c:IsRelateToBattle() or c:IsFacedown() then return false end
-	return t:GetLocation()==LOCATION_GRAVE and t:IsMonster()
+	return t:GetLocation()==LOCATION_REST and t:IsMonster()
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

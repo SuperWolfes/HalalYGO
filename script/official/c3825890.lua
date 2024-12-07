@@ -1,5 +1,5 @@
 --墓守の大神官
---Gravekeeper's Visionary
+--Restkeeper's Visionary
 local s,id=GetID()
 function s.initial_effect(c)
 	--summon with 1 tribute
@@ -30,7 +30,7 @@ function s.filter(c)
 	return c:IsSetCard(0x2e) and c:IsMonster()
 end
 function s.atkval(e,c)
-	return Duel.GetMatchingGroupCount(s.filter,c:GetControler(),LOCATION_GRAVE,0,nil)*200
+	return Duel.GetMatchingGroupCount(s.filter,c:GetControler(),LOCATION_REST,0,nil)*200
 end
 function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -39,7 +39,7 @@ function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if Duel.SelectEffectYesNo(tp,c,96) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 		local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_HAND,0,1,1,nil)
-		Duel.SendtoGrave(g,REASON_EFFECT+REASON_REPLACE)
+		Duel.SendtoRest(g,REASON_EFFECT+REASON_REPLACE)
 		return true
 	else return false end
 end

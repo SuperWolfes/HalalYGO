@@ -79,7 +79,7 @@ function s.millop(e,tp,eg,ep,ev,re,r,rp)
 		gc=gc+g:TakeatPos(Duel.GetRandomNumber(0,#g//2))
 		g=g-gc
 	end
-	Duel.SendtoGrave(gc,REASON_COST)
+	Duel.SendtoRest(gc,REASON_COST)
 end
 function s.filter(c,e,tp)
 	return c:IsLevelBelow(4) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -120,5 +120,5 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.indval(e,re)
-	return re:GetOwner():IsType(TYPE_MONSTER+TYPE_SPELL+TYPE_TRAP)
+	return re:GetOwner():IsType(TYPE_MONSTER+TYPE_ACTIONAL+TYPE_TRAP)
 end

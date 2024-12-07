@@ -26,7 +26,7 @@ function s.initial_effect(c)
 	e1a:SetValue(1)
 	c:RegisterEffect(e1a)
 	e1:SetLabelObject(e1a)
-	--Special Summon 1 "Ancient Gear Golem" from your hand or GY 
+	--Special Summon 1 "Ancient Gear Gopal" from your hand or RP 
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -46,17 +46,17 @@ function s.initial_effect(c)
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,2))
 	e4:SetType(EFFECT_TYPE_IGNITION)
-	e4:SetRange(LOCATION_GRAVE)
+	e4:SetRange(LOCATION_REST)
 	e4:SetCountLimit(1,{id,2})
 	e4:SetCost(aux.SelfBanishCost)
 	e4:SetTarget(s.pltg)
 	e4:SetOperation(s.plop)
 	c:RegisterEffect(e4)
 end
-s.listed_names={CARD_ANCIENT_GEAR_GOLEM}
+s.listed_names={CARD_ANCIENT_GEAR_GOPAL}
 s.listed_series={SET_ANCIENT_GEAR}
 function s.costfilter(c,tp,eff)
-	if not (c:IsCode(CARD_ANCIENT_GEAR_GOLEM) and c:IsAbleToGraveAsCost()
+	if not (c:IsCode(CARD_ANCIENT_GEAR_GOPAL) and c:IsAbleToRestAsCost()
 		and (c:IsFaceup() or not c:IsLocation(LOCATION_MZONE))) then return false end
 	eff:SetLabelObject(c)
 	local res=Duel.IsExistingMatchingCard(s.nsfilter,tp,LOCATION_HAND|LOCATION_MZONE,0,1,c)
@@ -69,9 +69,9 @@ end
 function s.nscost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local eff=e:GetLabelObject()
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND|LOCATION_DECK|LOCATION_MZONE,0,1,nil,tp,eff) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND|LOCATION_DECK|LOCATION_MZONE,0,1,1,nil,tp,eff)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.nstg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.nsfilter,tp,LOCATION_HAND|LOCATION_MZONE,0,1,nil) end
@@ -86,29 +86,29 @@ function s.nsop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.aggfilter(c,tp)
-	return c:IsFaceup() and c:IsCode(CARD_ANCIENT_GEAR_GOLEM) and c:IsSummonPlayer(tp)
+	return c:IsFaceup() and c:IsCode(CARD_ANCIENT_GEAR_GOPAL) and c:IsSummonPlayer(tp)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.aggfilter,1,nil,tp)
 end
 function s.spfilter(c,e,tp)
-	return c:IsCode(CARD_ANCIENT_GEAR_GOLEM) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
+	return c:IsCode(CARD_ANCIENT_GEAR_GOPAL) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_GRAVE,0,1,nil,e,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND|LOCATION_GRAVE)
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND|LOCATION_REST,0,1,nil,e,tp) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND|LOCATION_REST)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter),tp,LOCATION_HAND|LOCATION_GRAVE,0,1,1,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter),tp,LOCATION_HAND|LOCATION_REST,0,1,1,nil,e,tp)
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,true,false,POS_FACEUP)
 	end
 end
 function s.plfilter(c,tp)
-	return c:IsSetCard(SET_ANCIENT_GEAR) and c:IsContinuousTrap() and not c:IsForbidden() and c:CheckUniqueOnField(tp)
+	return c:IsSetCard(SET_ANCIENT_GEAR) and c:IsContinuousTrap() and not c:IsUnliked() and c:CheckUniqueOnField(tp)
 end
 function s.pltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0

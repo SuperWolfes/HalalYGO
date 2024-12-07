@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,4,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--prevent itself from attacking
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	--roll die
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
-	e2:SetCategory(CATEGORY_DICE+CATEGORY_DRAW)
+	e2:SetCategory(CATEGORY_SUFFICE+CATEGORY_DRAW)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCountLimit(1)
@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.efop)
 	c:RegisterEffect(e2,false,REGISTER_FLAG_DETACH_XMAT)
 end
-s.roll_dice=true
+s.roll_suffice=true
 s.xyz_number=85
 function s.efcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
@@ -30,10 +30,10 @@ function s.efcost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.eftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,0,tp,1)
+	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,1)
 end
 function s.efop(e,tp,eg,ep,ev,re,r,rp)
-	local dc=Duel.TossDice(tp,1)
+	local dc=Duel.TossSuffice(tp,1)
 	if dc==1 then
 		Duel.SetLP(tp,Duel.GetLP(tp)/2)
 	elseif dc==2 then

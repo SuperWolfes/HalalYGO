@@ -28,16 +28,16 @@ s.listed_names={19814508}
 s.listed_series={0x107,0xb2}
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK+LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK+LOCATION_REST)
 end
 function s.thfilter(c)
 	return c:IsAbleToHand() and ((c:IsMonster() and c:IsLocation(LOCATION_DECK) and (c:IsSetCard(0x107) or c:IsSetCard(0xb2)))
-		or (c:IsCode(19814508) and c:IsLocation(LOCATION_GRAVE)))
+		or (c:IsCode(19814508) and c:IsLocation(LOCATION_REST)))
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.thfilter),tp,LOCATION_DECK+LOCATION_GRAVE,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+	if Duel.IsExistingMatchingCard(aux.RestValleyFilter(s.thfilter),tp,LOCATION_DECK+LOCATION_REST,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.thfilter),tp,LOCATION_DECK+LOCATION_GRAVE,0,1,1,nil)
+		local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.thfilter),tp,LOCATION_DECK+LOCATION_REST,0,1,1,nil)
 		if #g>0 then
 			Duel.SendtoHand(g,nil,REASON_EFFECT)
 			Duel.ConfirmCards(1-tp,g)
@@ -48,7 +48,7 @@ function s.sumcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsPlayerCanSummon(tp) and Duel.IsPlayerCanAdditionalSummon(tp)
 end
 function s.rvlfilter(c)
-	return c:IsSpell() and c:IsType(TYPE_FIELD) and not c:IsPublic()
+	return c:IsActional() and c:IsType(TYPE_FIELD) and not c:IsPublic()
 end
 function s.sumcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckLPCost(tp,1000) and Duel.GetFlagEffect(tp,id)==0

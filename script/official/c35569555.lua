@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	--Look at either player's Extra Deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_TOGRAVE)
+	e2:SetCategory(CATEGORY_TOREST)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetCountLimit(1)
@@ -26,7 +26,7 @@ function s.initial_effect(c)
 end
 s.listed_series={SET_DOGMATIKA}
 function s.thfilter1(c)
-	return c:IsSetCard(SET_DOGMATIKA) and (c:IsRitualMonster() or c:IsRitualSpell()) and c:IsAbleToHand()
+	return c:IsSetCard(SET_DOGMATIKA) and (c:IsLockedMonster() or c:IsLockedActional()) and c:IsAbleToHand()
 end
 function s.thfilter2(c)
 	return c:IsSetCard(SET_DOGMATIKA) and c:IsAbleToHand()
@@ -49,14 +49,14 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.gyfilter(c)
-	return c:IsFaceup() and c:IsSetCard(SET_DOGMATIKA) and c:IsType(TYPE_RITUAL)
+	return c:IsFaceup() and c:IsSetCard(SET_DOGMATIKA) and c:IsType(TYPE_LOCKED)
 end
 function s.gycon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.gyfilter,tp,LOCATION_MZONE,0,1,nil)
 end
 function s.gytg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroupCount(tp,LOCATION_EXTRA,LOCATION_EXTRA)>0 end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,PLAYER_EITHER,LOCATION_EXTRA)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,PLAYER_EITHER,LOCATION_EXTRA)
 end
 function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 	local g1=Duel.GetFieldGroup(tp,LOCATION_EXTRA,0)
@@ -67,11 +67,11 @@ function s.gyop(e,tp,eg,ep,ev,re,r,rp)
 		{#g2>0,aux.Stringid(id,4)})
 	local g=(op==1) and g1 or g2
 	if op==2 then Duel.ConfirmCards(tp,g) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local tg=g:FilterSelect(tp,aux.AND(Card.IsMonster,Card.IsAbleToGrave),1,1,nil)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	local tg=g:FilterSelect(tp,aux.AND(Card.IsMonster,Card.IsAbleToRest),1,1,nil)
 	if #tg>0 then
 		Duel.BreakEffect()
-		Duel.SendtoGrave(tg,REASON_EFFECT)
+		Duel.SendtoRest(tg,REASON_EFFECT)
 		if op==2 then Duel.ShuffleExtra(1-tp) end
 	end
 end

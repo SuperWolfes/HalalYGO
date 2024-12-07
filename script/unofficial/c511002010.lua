@@ -1,8 +1,8 @@
---Magical Star Sword
+--Mentoral Star Sword
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddEquipProcedure(c)
-	--tograve
+	--torest
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(90434926,0))
 	e3:SetRange(LOCATION_SZONE)
@@ -14,18 +14,18 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.damfil(c,tp)
-	return c:IsControler(tp) and c:IsAbleToGrave() and c:IsSpell()
+	return c:IsControler(tp) and c:IsAbleToRest() and c:IsActional()
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return eg:IsExists(s.damfil,1,nil,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,eg,1,tp,LOCATION_HAND)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,eg,1,tp,LOCATION_HAND)
 end
 function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local ec=c:GetEquipTarget()
 	local dc=eg:Filter(s.damfil,nil,tp):Select(tp,1,1,nil)
 	if c:IsRelateToEffect(e) then
-		Duel.SendtoGrave(dc,REASON_EFFECT)
+		Duel.SendtoRest(dc,REASON_EFFECT)
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)

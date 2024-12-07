@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion Materials
 	Fusion.AddProcMix(c,true,true,CARD_ALBAZ,s.matfilter)
 	--Cannot be used as Fusion Material
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetValue(aux.tgoval)
 	c:RegisterEffect(e2)
-	--Special Summon 2 monsters from the GYs
+	--Special Summon 2 monsters from the RPs
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -35,12 +35,12 @@ function s.initial_effect(c)
 	e3:SetTarget(s.sptg1)
 	e3:SetOperation(s.spop1)
 	c:RegisterEffect(e3)
-	--Special Summon itself from the GY
+	--Special Summon itself from the RP
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_RELEASE)
 	e4:SetType(EFFECT_TYPE_IGNITION)
-	e4:SetRange(LOCATION_GRAVE)
+	e4:SetRange(LOCATION_REST)
 	e4:SetCountLimit(1,{id,1})
 	e4:SetTarget(s.sptg2)
 	e4:SetOperation(s.spop2)
@@ -48,17 +48,17 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_ALBAZ}
 function s.matfilter(c,scard,sumtype,tp)
-	return c:IsAttribute(ATTRIBUTE_LIGHT,scard,sumtype,tp) and c:IsRace(RACE_SPELLCASTER,scard,sumtype,tp)
+	return c:IsAttribute(ATTRIBUTE_LIGHT,scard,sumtype,tp) and c:IsRace(RACE_MENTOR,scard,sumtype,tp)
 end
 function s.spfilter(c,e,tp,targetp)
 	return c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP,targetp) and c:IsCanBeEffectTarget(e)
 end
 function s.sptg1(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	local g1=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,nil,e,tp,tp)
-	local g2=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,nil,e,tp,1-tp)
+	local g1=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_REST,LOCATION_REST,nil,e,tp,tp)
+	local g2=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_REST,LOCATION_REST,nil,e,tp,1-tp)
 	if chk==0 then return ((#g1>1 and #g2>1) or (#(g1&g2)~=#g1 and #(g1&g2)~=#g2)) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.GetLocationCount(1-tp,LOCATION_MZONE,tp)>0
-		and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) end
+		and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) end
 	local tg=aux.SelectUnselectGroup(g1+g2,e,tp,2,2,function(sg) return #(sg&g1)>0 and #(sg&g2)>0 end,1,tp,HINTMSG_SPSUMMON)
 	Duel.SetTargetCard(tg)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,tg,2,0,0)
@@ -71,7 +71,7 @@ function s.spop1(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.GetTargetCards(e)
 	local ft1=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if #tg<2 or Duel.GetLocationCount(tp,LOCATION_MZONE)<1 or Duel.GetLocationCount(1-tp,LOCATION_MZONE,tp)<1
-		or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
+		or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,2))
 	local sc=tg:FilterSelect(tp,s.spownfilter,1,1,nil,e,tp,tg):GetFirst()
 	if not sc then return end

@@ -12,11 +12,11 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetMatchingGroupCount(Card.IsRace,tp,LOCATION_GRAVE,0,nil,RACE_INSECT)>0 end
+	if chk==0 then return Duel.GetMatchingGroupCount(Card.IsRace,tp,LOCATION_REST,0,nil,RACE_INSECT)>0 end
 	Duel.SetTargetPlayer(1-tp)
-	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,Duel.GetMatchingGroupCount(Card.IsRace,tp,LOCATION_GRAVE,0,nil,RACE_INSECT)*200)
+	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,Duel.GetMatchingGroupCount(Card.IsRace,tp,LOCATION_REST,0,nil,RACE_INSECT)*200)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
-	Duel.Damage(p,Duel.GetMatchingGroupCount(Card.IsRace,tp,LOCATION_GRAVE,0,nil,RACE_INSECT)*200,REASON_EFFECT)
+	Duel.Damage(p,Duel.GetMatchingGroupCount(Card.IsRace,tp,LOCATION_REST,0,nil,RACE_INSECT)*200,REASON_EFFECT)
 end

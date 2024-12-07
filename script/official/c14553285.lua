@@ -1,9 +1,9 @@
 --アーカナイト・マジシャン／バスター
---Arcanite Magician/Assault Mode
+--Arcanite Mentor/Assault Mode
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
-	c:EnableCounterPermit(COUNTER_SPELL)
+	c:EnableAwakeLimit()
+	c:EnableCounterPermit(COUNTER_ACTIONAL)
 	--Cannot special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -48,24 +48,24 @@ function s.initial_effect(c)
 	e5:SetOperation(s.spop)
 	c:RegisterEffect(e5)
 end
-s.counter_place_list={COUNTER_SPELL}
+s.counter_place_list={COUNTER_ACTIONAL}
 s.listed_names={CARD_ASSAULT_MODE,31924889}
 s.assault_mode=31924889
 function s.addct(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,2,0,COUNTER_SPELL)
+	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,2,0,COUNTER_ACTIONAL)
 end
 function s.addc(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():IsRelateToEffect(e) then
-		e:GetHandler():AddCounter(COUNTER_SPELL,2)
+		e:GetHandler():AddCounter(COUNTER_ACTIONAL,2)
 	end
 end
 function s.attackup(e,c)
-	return c:GetCounter(COUNTER_SPELL)*1000
+	return c:GetCounter(COUNTER_ACTIONAL)*1000
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,COUNTER_SPELL,2,REASON_COST) end
-	e:GetHandler():RemoveCounter(tp,COUNTER_SPELL,2,REASON_COST)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,COUNTER_ACTIONAL,2,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,COUNTER_ACTIONAL,2,REASON_COST)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(aux.TRUE,tp,0,LOCATION_ONFIELD,1,nil) end
@@ -83,11 +83,11 @@ function s.spfilter(c,e,tp)
 	return c:IsCode(31924889) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
+		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)

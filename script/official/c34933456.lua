@@ -10,11 +10,11 @@ function s.initial_effect(c)
 end
 s.listed_series={0x152}
 function s.mfilter(c)
-	return (c:IsLocation(LOCATION_HAND+LOCATION_MZONE) and c:IsAbleToGrave())
+	return (c:IsLocation(LOCATION_HAND+LOCATION_MZONE) and c:IsAbleToRest())
 		or (c:IsOriginalType(TYPE_MONSTER) and c:IsLocation(LOCATION_SZONE) and c:IsType(TYPE_EQUIP) and c:GetEquipTarget():IsSetCard(0x152))
 end
 function s.checkmat(tp,sg,fc)
-	return (fc:IsSetCard(0x152) or not sg:IsExists(Card.IsLocation,1,nil,LOCATION_SZONE)) and sg:IsExists(Card.IsRace,1,nil,RACE_SPELLCASTER)
+	return (fc:IsSetCard(0x152) or not sg:IsExists(Card.IsLocation,1,nil,LOCATION_SZONE)) and sg:IsExists(Card.IsRace,1,nil,RACE_MENTOR)
 end
 function s.fextra(e,tp,mg)
 	return Duel.GetMatchingGroup(s.mfilter,tp,LOCATION_ONFIELD+LOCATION_HAND,0,nil),s.checkmat

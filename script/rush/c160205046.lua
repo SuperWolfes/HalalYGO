@@ -1,5 +1,5 @@
 --ファイナライズ・フェニックス
---Finalize Phoenix
+--Finalize Bird
 --scripted by YoshiDuels & Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -34,7 +34,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 		if ft>2 then ft=2 end
 		local og=Duel.GetMatchingGroup(aux.FilterMaximumSideFunctionEx(Card.IsFaceup),tp,0,LOCATION_MZONE,nil)
 		local lvl=og:GetSum(Card.GetLevel)
-		local g=Duel.GetMatchingGroup(Card.IsRace,tp,LOCATION_GRAVE,0,nil,RACE_PYRO)
+		local g=Duel.GetMatchingGroup(Card.IsRace,tp,LOCATION_REST,0,nil,RACE_PYRO)
 		local tdg=g:Filter(Card.IsAbleToDeckOrExtraAsCost,nil)
 		local ssg=g:Filter(s.spfilter,nil,e,tp)
 		return #tdg>=4 and #ssg>0 and aux.SelectUnselectGroup(tdg,e,tp,4,4,s.rescon(lvl,ft,ssg),0)
@@ -42,7 +42,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Requirement
@@ -51,7 +51,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if ft>2 then ft=2 end
 	local og=Duel.GetMatchingGroup(aux.FilterMaximumSideFunctionEx(Card.IsFaceup),tp,0,LOCATION_MZONE,nil)
 	local lvl=og:GetSum(Card.GetLevel)
-	local g=Duel.GetMatchingGroup(Card.IsRace,tp,LOCATION_GRAVE,0,nil,RACE_PYRO)
+	local g=Duel.GetMatchingGroup(Card.IsRace,tp,LOCATION_REST,0,nil,RACE_PYRO)
 	local tdg=g:Filter(Card.IsAbleToDeckOrExtraAsCost,nil)
 	local ssg=g:Filter(s.spfilter,nil,e,tp)
 	if #tdg<4 or #ssg==0 then return end

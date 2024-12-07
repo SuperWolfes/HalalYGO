@@ -1,3 +1,3 @@
 --リリースレイヤー
---Sevens Road Ultima Witch
+--Sevens Road Ultima Mint
 Duel.LoadCardScriptAlias(160017045)

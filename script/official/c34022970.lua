@@ -33,7 +33,7 @@ end
 s.listed_series={SET_RYZEAL}
 s.listed_names={id}
 function s.selfspconfilter(c)
-	return c:IsType(TYPE_XYZ) and c:IsAbleToGraveAsCost()
+	return c:IsType(TYPE_XYZ) and c:IsAbleToRestAsCost()
 end
 function s.selfspcon(e,c)
 	if c==nil then return true end
@@ -43,7 +43,7 @@ function s.selfspcon(e,c)
 end
 function s.selfsptg(e,tp,eg,ep,ev,re,r,rp,chk,c)
 	local rg=Duel.GetMatchingGroup(s.selfspconfilter,tp,LOCATION_EXTRA,0,nil)
-	local g=aux.SelectUnselectGroup(rg,e,tp,1,1,aux.ChkfMMZ(1),1,tp,HINTMSG_TOGRAVE,nil,nil,true)
+	local g=aux.SelectUnselectGroup(rg,e,tp,1,1,aux.ChkfMMZ(1),1,tp,HINTMSG_TOREST,nil,nil,true)
 	if #g>0 then
 		g:KeepAlive()
 		e:SetLabelObject(g)
@@ -54,7 +54,7 @@ end
 function s.selfspop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	--You cannot Special Summon from the Extra Deck for the rest of this turn, except Rank 4 Xyz Monsters
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,2))

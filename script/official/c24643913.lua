@@ -3,15 +3,15 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	c:AddMustBeSpecialSummoned()
-	--Must be Special Summoned (from your hand or GY) by paying half your LP while your opponent has a Monster Card on their field or GY with an effect that activates in the hand or Monster Zone in response to a card or effect activation
+	--Must be Special Summoned (from your hand or RP) by paying half your LP while your opponent has a Monster Card on their field or RP with an effect that activates in the hand or Monster Zone in response to a card or effect activation
 	local e0=Effect.CreateEffect(c)
 	e0:SetDescription(aux.Stringid(id,0))
 	e0:SetType(EFFECT_TYPE_FIELD)
 	e0:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e0:SetCode(EFFECT_SPSUMMON_PROC)
-	e0:SetRange(LOCATION_HAND|LOCATION_GRAVE)
+	e0:SetRange(LOCATION_HAND|LOCATION_REST)
 	e0:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
 	e0:SetCondition(s.spcon)
 	e0:SetOperation(function(e,tp) Duel.PayLPCost(tp,math.floor(Duel.GetLP(tp)/2)) end)
@@ -56,7 +56,7 @@ function s.spcon(e,c)
 	if c==nil then return true end
 	local tp=e:GetHandlerPlayer()
 	return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(s.spconfilter,tp,0,LOCATION_ONFIELD|LOCATION_GRAVE,1,nil)
+		and Duel.IsExistingMatchingCard(s.spconfilter,tp,0,LOCATION_ONFIELD|LOCATION_REST,1,nil)
 end
 function s.immval(e,te)
 	if not (te:IsMonsterEffect() and te:IsActivated()) then return false end

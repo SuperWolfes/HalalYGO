@@ -1,5 +1,5 @@
 --魂のカード
---Card of the Soul
+--Card of the Miss
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

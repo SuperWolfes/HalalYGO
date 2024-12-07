@@ -17,18 +17,18 @@ function s.initial_effect(c)
 end
 s.listed_names={4206964}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,4206964) and e:GetHandler():IsStatus(STATUS_SUMMON_TURN)
+	return Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,4206964) and e:GetHandler():IsStatus(STATUS_SUMMON_TURN)
 end
 function s.setfilter(c)
 	return c:IsTrap() and c:IsSSetable()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_REST,0,1,nil) end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Effect
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.setfilter),tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.setfilter),tp,LOCATION_REST,0,1,1,nil)
 	if #g==0 then return end
 	Duel.HintSelection(g,true)
 	Duel.SSet(tp,g)

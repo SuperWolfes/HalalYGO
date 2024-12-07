@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_IGNITION)
-	e1:SetRange(LOCATION_GRAVE)
+	e1:SetRange(LOCATION_REST)
 	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_DUEL)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
@@ -23,7 +23,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.DiscardDeck(tp,1,REASON_EFFECT)~=0 then
 		local oc=Duel.GetOperatedGroup():GetFirst()
 		local c=e:GetHandler()
-		if oc:IsLocation(LOCATION_GRAVE) and c:IsRelateToEffect(e) then
+		if oc:IsLocation(LOCATION_REST) and c:IsRelateToEffect(e) then
 			Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)
 		end
 	end

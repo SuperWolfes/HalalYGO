@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	end)
 end
 function s.checkop(e,tp,eg,ep,ev,re,r,rp)
-	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsSpellEffect() then
+	if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActionalEffect() then
 		Duel.RegisterFlagEffect(rp,id,RESET_PHASE|PHASE_END,0,1)
 	end
 end
@@ -41,7 +41,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	aux.RegisterClientHint(e:GetHandler(),nil,tp,1,0,aux.Stringid(id,1),nil)
 end
 function s.aclimit(e,re,tp)
-	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsSpellEffect()
+	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActionalEffect()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,2) end
@@ -54,5 +54,5 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Draw(p,d,REASON_EFFECT)
 end
 function s.aclimit(e,re,tp)
-	return re:GetHandler():IsSpell() and re:IsHasType(EFFECT_TYPE_ACTIVATE)
+	return re:GetHandler():IsActional() and re:IsHasType(EFFECT_TYPE_ACTIVATE)
 end

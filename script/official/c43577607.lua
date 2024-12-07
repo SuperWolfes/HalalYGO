@@ -67,7 +67,7 @@ function s.confilter(c)
 	return c:IsSetCard(0x9e) and c:IsMonster()
 end
 function s.effcon(e)
-	local g=Duel.GetMatchingGroup(s.confilter,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.confilter,e:GetHandlerPlayer(),LOCATION_REST,0,nil)
 	return g:GetClassCount(Card.GetAttribute)>=e:GetLabel()
 end
 function s.atktg(e,c)
@@ -85,11 +85,11 @@ function s.repval(e,c)
 	return s.repfilter(c,e:GetHandlerPlayer())
 end
 function s.repop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
+	Duel.SendtoRest(e:GetHandler(),REASON_EFFECT)
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
+	Duel.SendtoRest(e:GetHandler(),REASON_COST)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(aux.TRUE,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,e:GetHandler()) end

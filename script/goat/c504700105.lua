@@ -1,5 +1,5 @@
 --迷宮変化
---Magical Labyrinth
+--Mentoral Labyrinth
 local s,id=GetID()
 function s.initial_effect(c)
 	--Equip procedure

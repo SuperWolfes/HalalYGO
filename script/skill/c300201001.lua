@@ -1,8 +1,8 @@
 --Power of Dark
 --Skill activation
---At the start of the Duel, place this card in your Field Spell Zone and flip it over.
+--At the start of the Duel, place this card in your Field Actional Zone and flip it over.
 --Effect
---All Fiend and Spellcaster monsters on the field gain 200 ATK/DEF, also all Fairy monsters on the field lose 200 ATK/DEF.
+--All Tainted and Mentor monsters on the field gain 200 ATK/DEF, also all Wanderer monsters on the field lose 200 ATK/DEF.
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddFieldSkillProcedure(c,2,false)
@@ -26,9 +26,9 @@ function s.initial_effect(c)
 end
 function s.val(e,c)
 	local r=c:GetRace()
-	if (r&(RACE_FIEND|RACE_SPELLCASTER))>0 then
+	if (r&(RACE_TAINTED|RACE_MENTOR))>0 then
 		return 200
-	elseif (r&RACE_FAIRY)>0 then
+	elseif (r&RACE_WANDERER)>0 then
 		return -200
 	else
 		return 0

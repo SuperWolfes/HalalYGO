@@ -1,5 +1,5 @@
 --ゼンマイマジシャン
---Wind-Up Magician
+--Wind-Up Mentor
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon

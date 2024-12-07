@@ -1,9 +1,9 @@
 --閉ザサレシ世界ノ冥神
---Underworld Goddess of the Closed World
+--Overworld Monsterdess of the Closed World
 --Scripted by DyXel and Edo9300
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Link Summon procedure
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_EFFECT),4)
 	--You can also use 1 monster your opponent controls as material to Link Summon this card
@@ -35,7 +35,7 @@ function s.initial_effect(c)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetValue(s.immval)
 	c:RegisterEffect(e2)
-	--Negate the activation of an opponent's effect that includes Special Summoning a monster(s) from the GY
+	--Negate the activation of an opponent's effect that includes Special Summoning a monster(s) from the RP
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_NEGATE)
@@ -99,8 +99,8 @@ function s.spnegcon(e,tp,eg,ep,ev,re,r,rp)
 		or not Duel.IsChainNegatable(ev) then return false end
 	local ex1,tg1,ct1,p1,loc1=Duel.GetOperationInfo(ev,CATEGORY_SPECIAL_SUMMON)
 	local ex2,tg2,ct2,p2,loc2=Duel.GetPossibleOperationInfo(ev,CATEGORY_SPECIAL_SUMMON)
-	local res1=((loc1 or 0)&LOCATION_GRAVE>0) or (tg1 and tg1:IsExists(function(c) return c:IsLocation(LOCATION_GRAVE) and c:IsMonster() end,1,nil))
-	local res2=((loc2 or 0)&LOCATION_GRAVE>0) or (tg2 and tg2:IsExists(function(c) return c:IsLocation(LOCATION_GRAVE) and c:IsMonster() end,1,nil))
+	local res1=((loc1 or 0)&LOCATION_REST>0) or (tg1 and tg1:IsExists(function(c) return c:IsLocation(LOCATION_REST) and c:IsMonster() end,1,nil))
+	local res2=((loc2 or 0)&LOCATION_REST>0) or (tg2 and tg2:IsExists(function(c) return c:IsLocation(LOCATION_REST) and c:IsMonster() end,1,nil))
 	return res1 or res2
 end
 function s.spnegtg(e,tp,eg,ep,ev,re,r,rp,chk)

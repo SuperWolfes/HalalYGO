@@ -1,6 +1,6 @@
 --踊りによる誘発
---Luminous Dragon Ritual (Anime)
+--Luminous Dragon Locked (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
-	Ritual.AddProcGreaterCode(c,4,nil,85346853)
+	Locked.AddProcGreaterCode(c,4,nil,85346853)
 end

@@ -1,25 +1,25 @@
 --聖霊獣騎 ノチウドラゴ
---Ritual Beast Ulti-Nochiudrago
+--Locked Beast Ulti-Nochiudrago
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Can only be Special Summoned once per turn
 	c:SetSPSummonOnce(id)
 	--Summon Procedure
-	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_RITUAL_BEAST_TAMER),aux.FilterBoolFunctionEx(Card.IsSetCard,SET_SPIRITUAL_BEAST))
+	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_LOCKED_BEAST_TAMER),aux.FilterBoolFunctionEx(Card.IsSetCard,SET_SPILOCKED_BEAST))
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,true)
-	--Other "Ritual Beast" monsters you control cannot be targeted by opponent's card effects
+	--Other "Locked Beast" monsters you control cannot be targeted by opponent's card effects
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
 	e1:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetTargetRange(LOCATION_MZONE,0)
-	e1:SetTarget(function(e,c) return c~=e:GetHandler() and c:IsFaceup() and c:IsSetCard(SET_RITUAL_BEAST) end)
+	e1:SetTarget(function(e,c) return c~=e:GetHandler() and c:IsFaceup() and c:IsSetCard(SET_LOCKED_BEAST) end)
 	e1:SetValue(aux.tgoval)
 	c:RegisterEffect(e1)
-	--Special Summon 1 of your banished "Ritual Beast" monsters
+	--Special Summon 1 of your banished "Locked Beast" monsters
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -33,11 +33,11 @@ function s.initial_effect(c)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
 end
-s.listed_series={SET_RITUAL_BEAST,SET_RITUAL_BEAST_TAMER,SET_SPIRITUAL_BEAST}
+s.listed_series={SET_LOCKED_BEAST,SET_LOCKED_BEAST_TAMER,SET_SPILOCKED_BEAST}
 s.material_setcode=s.listed_series
 s.listed_names={id}
 function s.contactfil(tp)
-	return Duel.GetMatchingGroup(Card.IsAbleToRemoveAsCost,tp,LOCATION_MZONE|LOCATION_GRAVE,0,nil)
+	return Duel.GetMatchingGroup(Card.IsAbleToRemoveAsCost,tp,LOCATION_MZONE|LOCATION_REST,0,nil)
 end
 function s.contactop(g)
 	Duel.Remove(g,POS_FACEUP,REASON_COST|REASON_MATERIAL)
@@ -48,7 +48,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SendtoDeck(c,nil,SEQ_DECKSHUFFLE,REASON_COST)
 end
 function s.spfilter(c,e,tp)
-	return c:IsFaceup() and c:IsSetCard(SET_RITUAL_BEAST) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsFaceup() and c:IsSetCard(SET_LOCKED_BEAST) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REMOVED) and s.spfilter(chkc,e,tp) end

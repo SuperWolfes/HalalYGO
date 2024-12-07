@@ -1,5 +1,5 @@
 --オッドアイズ・ファントム・ドラゴン (Manga)
---Odd-Eyes Phantom Dragon (Manga)
+--Odd-Eyes Illusion Dragon (Manga)
 local s,id=GetID()
 function s.initial_effect(c)
 	--pendulum summon

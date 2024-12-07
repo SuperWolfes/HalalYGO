@@ -1,5 +1,5 @@
 --魂のリレー (Anime)
---Relay Soul (Anime)
+--Relay Miss (Anime)
 --scripted by edo9300, fixes by MLD
 Duel.EnableUnofficialProc(PROC_EVENT_LP0)
 local s,id=GetID()
@@ -70,7 +70,7 @@ function s.losecon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsReason(REASON_DESTROY)
 end
 function s.loseop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Win(e:GetLabel(),WIN_REASON_RELAY_SOUL)
+	Duel.Win(e:GetLabel(),WIN_REASON_RELAY_MISS)
 end
 function s.con(e)
 	if e:GetLabelObject() and not e:GetLabelObject():IsReason(REASON_DESTROY) then

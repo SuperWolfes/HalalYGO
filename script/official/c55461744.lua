@@ -3,7 +3,7 @@
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
-	--Search Level 4 Beast and "Chimera Fusion"
+	--Search Level 4 Beast and "Chilean Fusion"
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	local e2=e1:Clone()
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e2)
-	--Special Summon Phantamsa
+	--Special Summon Illusoamsa
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -30,19 +30,19 @@ function s.initial_effect(c)
 	e3:SetOperation(s.spop)
 	c:RegisterEffect(e3)
 end
-s.listed_names={CARD_CHIMERA_FUSION}
+s.listed_names={CARD_CHILEAN_FUSION}
 function s.Level4Beast(c)
 	return c:IsLevel(4) and c:IsRace(RACE_BEAST)
 end
 function s.thfilter(c)
-	return c:IsAbleToHand() and (s.Level4Beast(c) or c:IsCode(CARD_CHIMERA_FUSION))
+	return c:IsAbleToHand() and (s.Level4Beast(c) or c:IsCode(CARD_CHILEAN_FUSION))
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
 function s.rescon(sg,e,tp,mg)
-	return sg:FilterCount(Card.IsCode,nil,CARD_CHIMERA_FUSION)<=1
+	return sg:FilterCount(Card.IsCode,nil,CARD_CHILEAN_FUSION)<=1
 		and sg:FilterCount(s.Level4Beast,nil)<=1
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
@@ -73,17 +73,17 @@ function s.lizfilter(e,c)
 	return not c:IsOriginalType(TYPE_FUSION)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_GRAVE) and (r&REASON_FUSION)==REASON_FUSION
+	return e:GetHandler():IsLocation(LOCATION_REST) and (r&REASON_FUSION)==REASON_FUSION
 end
 function s.spfilter(c,e,tp)
 	return c:IsRace(RACE_ILLUSION) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.spfilter(chkc,e,tp) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and s.spfilter(chkc,e,tp) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
+		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)

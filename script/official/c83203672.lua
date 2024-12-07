@@ -5,12 +5,12 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Attach itself to 1 "Sprigguns" Xyz monster from hand, field, or GY
+	--Attach itself to 1 "Sprigguns" Xyz monster from hand, field, or RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e1:SetRange(LOCATION_GRAVE+LOCATION_HAND+LOCATION_MZONE)
+	e1:SetRange(LOCATION_REST+LOCATION_HAND+LOCATION_MZONE)
 	e1:SetCountLimit(1,id)
 	e1:SetTarget(s.mattg)
 	e1:SetOperation(s.matop)
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCost(s.thcost)
 	e2:SetTarget(s.thtg)
@@ -42,11 +42,11 @@ function s.mattg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingTarget(s.matfilter,tp,LOCATION_MZONE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 	Duel.SelectTarget(tp,s.matfilter,tp,LOCATION_MZONE,0,1,1,nil)
-	if(e:GetHandler():IsLocation(LOCATION_GRAVE)) then
-		Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,e:GetHandler(),1,0,0)
+	if(e:GetHandler():IsLocation(LOCATION_REST)) then
+		Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,e:GetHandler(),1,0,0)
 	end
 end
-	--Attach itself to targeted "Sprigguns" Xyz monster from hand, field, or GY
+	--Attach itself to targeted "Sprigguns" Xyz monster from hand, field, or RP
 function s.matop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
@@ -58,13 +58,13 @@ end
 function s.cfilter(c)
 	return (c:IsMonster() and c:IsSetCard(0x158) and not c:IsCode(id))  and c:IsAbleToRemoveAsCost()
 end
-	--Banish itself and 1 "Sprigguns" monster from GY as cost
+	--Banish itself and 1 "Sprigguns" monster from RP as cost
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return aux.bfgcost(e,tp,eg,ep,ev,re,r,rp,0)
-		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,c) end
+		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_REST,0,1,c) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_GRAVE,0,1,1,c)
+	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_REST,0,1,1,c)
 	g:AddCard(c)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end

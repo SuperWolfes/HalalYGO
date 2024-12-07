@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c)
-	return c:IsPreviousPosition(POS_DEFENSE) and c:IsLocation(LOCATION_GRAVE)
+	return c:IsPreviousPosition(POS_DEFENSE) and c:IsLocation(LOCATION_REST)
 		and c:IsReason(REASON_BATTLE) and c:IsMonster()
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)

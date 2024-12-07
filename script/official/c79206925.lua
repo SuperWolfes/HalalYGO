@@ -1,9 +1,9 @@
 --墓守の異能者
---Gravekeeper's Supernaturalist
+--Restkeeper's Supernaturalist
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion procedure
 	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x2e),2)
 	--Increase ATK/DEF
@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.indtg)
 	e2:SetValue(1)
 	c:RegisterEffect(e2)
-	--Search 1 "Gravekeeper's" monster or "Necrovalley" card during the End Phase
+	--Search 1 "Restkeeper's" monster or "Restvalley" card during the End Phase
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -34,7 +34,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 s.listed_series={0x2e,0x91}
-s.listed_names={CARD_NECROVALLEY}
+s.listed_names={CARD_RESTVALLEY}
 s.material_setcode=0x2e
 function s.matcheck(e,c)
 	local lv=c:GetMaterial():GetSum(Card.GetOriginalLevel)
@@ -53,7 +53,7 @@ function s.matcheck(e,c)
 	c:RegisterEffect(e2)
 end
 function s.indcon(e)
-	return Duel.IsEnvironment(CARD_NECROVALLEY)
+	return Duel.IsEnvironment(CARD_RESTVALLEY)
 end
 function s.indtg(e,c)
 	return c==e:GetHandler() or c:IsLocation(LOCATION_FZONE)

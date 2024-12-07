@@ -1,4 +1,4 @@
---Gouki Moonsault
+--Gouki Horizonsault
 local s,id=GetID()
 function s.initial_effect(c)
 	--shuffle
@@ -16,10 +16,10 @@ function s.filter(c)
 	return c:IsSetCard(0xfc) and c:IsLinkMonster() and c:IsAbleToExtra()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter(chkc) end
-	if chk==0 then return Duel.IsPlayerCanDraw(tp,1) and Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.filter(chkc) end
+	if chk==0 then return Duel.IsPlayerCanDraw(tp,1) and Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,#g,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
 end
@@ -31,7 +31,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if not tg or tg:FilterCount(Card.IsRelateToEffect,nil,e)~=1 then return end
 	Duel.SendtoDeck(tg,nil,0,REASON_EFFECT)
 	local g=Duel.GetOperatedGroup()
-	local g2=Duel.GetMatchingGroup(s.filter2,tp,LOCATION_GRAVE,0,nil)
+	local g2=Duel.GetMatchingGroup(s.filter2,tp,LOCATION_REST,0,nil)
 	local ct=g:FilterCount(Card.IsLocation,nil,LOCATION_EXTRA)
 	if ct==1 and #g2>0 then
 		Duel.BreakEffect()

@@ -5,8 +5,8 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Fusion summon procedure
 	Fusion.AddProcMixN(c,true,true,11759079,1,aux.FilterBoolFunctionEx(Card.IsSetCard,0x14e),2)
 	--Each "Dual Avatar" fusion monster get protected once by battle, each turn
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.indtg)
 	e1:SetValue(s.indct)
 	c:RegisterEffect(e1)
-	--Return all of opponent's spells/traps to hand
+	--Return all of opponent's actionals/traps to hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TOHAND)
@@ -56,9 +56,9 @@ function s.indct(e,re,r,rp)
 		return 1
 	else return 0 end
 end
-	--Check for spells/traps
+	--Check for actionals/traps
 function s.filter(c)
-	return c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsActionalTrap() and c:IsAbleToHand()
 end
 	--Activation legality
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -66,7 +66,7 @@ function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local sg=Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_ONFIELD,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,sg,#sg,0,0)
 end
-	--Return all of opponent's spells/traps to hand
+	--Return all of opponent's actionals/traps to hand
 function s.thop(e,tp,eg,ep,ev,re,r,rp,chk)
 	local sg=Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_ONFIELD,nil)
 	Duel.SendtoHand(sg,nil,REASON_EFFECT)

@@ -1,9 +1,9 @@
---Beasts of Phantom
+--Beasts of Illusion
 --Scripted by The Razgriz
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddSkillProcedure(c,1,false,s.flipcon,s.flipop)
-		--Checks if Chimera was Fusion Summoned
+		--Checks if Chilean was Fusion Summoned
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		e1:SetCode(EVENT_STARTUP)
@@ -76,7 +76,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 		if sg1:IsContains(tc) and (sg2==nil or not sg2:IsContains(tc) or not Duel.SelectYesNo(tp,ce:GetDescription())) then
 			local mat1=Duel.SelectFusionMaterial(tp,tc,mg1,nil,chkf)
 			tc:SetMaterial(mat1)
-			Duel.SendtoGrave(mat1,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
+			Duel.SendtoRest(mat1,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
 			Duel.BreakEffect()
 			Duel.SpecialSummon(tc,SUMMON_TYPE_FUSION,tp,tp,false,false,POS_FACEUP)
 		else
@@ -87,7 +87,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	tc:CompleteProcedure()
 	end
 end
---fusion Summon Chimera
+--fusion Summon Chilean
 function s.cfilter(c,e,tp)
 	if not c:IsDiscardable() then return false end
 	local chkf=tp
@@ -113,16 +113,16 @@ function s.fusTarget(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.DiscardHand(tp,s.cfilter,1,1,REASON_COST+REASON_DISCARD,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
---Add "Phantom Beast" card to hand
+--Add "Illusion Beast" card to hand
 function s.thfilter(c)
 	return c:IsSetCard(0x1b) and c:IsAbleToHand()
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
-	return (s[tp]>0 or s[1-tp]>0)  and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil)
+	return (s[tp]>0 or s[1-tp]>0)  and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
-		local tc=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+		local tc=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
 		if tc then
 			Duel.SendtoHand(tc,tp,REASON_EFFECT)
 			Duel.ConfirmCards(1-tp,tc)
@@ -130,20 +130,20 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.flipcon2(e,tp,eg,ep,ev,re,r,rp)
-	return (s[tp]>0 or s[1-tp]>0) and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil) and Duel.GetFlagEffect(tp,id+100)==0
+	return (s[tp]>0 or s[1-tp]>0) and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil) and Duel.GetFlagEffect(tp,id+100)==0
 end
 function s.flipop2(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		Duel.RegisterFlagEffect(tp,id+100,RESET_PHASE+PHASE_END,0,1)
 		Duel.Hint(HINT_SKILL_FLIP,tp,id|(1<<32))
 		Duel.Hint(HINT_CARD,tp,id)
-		local tc=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+		local tc=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
 		if tc then
 			Duel.SendtoHand(tc,tp,REASON_EFFECT)
 			Duel.ConfirmCards(1-tp,tc)
 		end
 	end
-	--Fusion Summon Chimera
+	--Fusion Summon Chilean
 	if not (Duel.IsMainPhase() and Duel.GetTurnPlayer()==tp) then return end
 	local g2=s.fusTarget(e,tp,eg,ep,ev,re,r,rp,0)
 	Duel.RegisterFlagEffect(tp,id,RESET_PHASE+PHASE_END,0,1)
@@ -169,7 +169,7 @@ function s.flipop2(e,tp,eg,ep,ev,re,r,rp)
 		if sg1:IsContains(tc) and (sg2==nil or not sg2:IsContains(tc) or not Duel.SelectYesNo(tp,ce:GetDescription())) then
 			local mat1=Duel.SelectFusionMaterial(tp,tc,mg1,nil,chkf)
 			tc:SetMaterial(mat1)
-			Duel.SendtoGrave(mat1,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
+			Duel.SendtoRest(mat1,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
 			Duel.BreakEffect()
 			Duel.SpecialSummon(tc,SUMMON_TYPE_FUSION,tp,tp,false,false,POS_FACEUP)
 		else

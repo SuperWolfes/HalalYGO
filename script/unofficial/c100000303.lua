@@ -1,5 +1,5 @@
---The tripping Mercury
---The Tripper Mercury (manga)
+--The tripping Mister
+--The Tripper Mister (manga)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Pos Change

@@ -5,8 +5,8 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Link summon procedure
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x79),2,2)
 	--Cannot be targeted for attack while pointing to a "Fire Fist" monster
@@ -42,7 +42,7 @@ function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 end
 	--Check for "Fire Formation" S/T for cost
 function s.ctfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x7c) and c:IsSpellTrap() and c:IsAbleToGraveAsCost()
+	return c:IsFaceup() and c:IsSetCard(0x7c) and c:IsActionalTrap() and c:IsAbleToRestAsCost()
 end
 	--Activation legality
 function s.cttg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -57,9 +57,9 @@ function s.cttg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		else return nc and tgchk end
 	end
 	if nc and not (Duel.IsPlayerAffectedByEffect(tp,CARD_FIRE_FIST_EAGLE) and Duel.SelectYesNo(tp,aux.Stringid(CARD_FIRE_FIST_EAGLE,0))) then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g1=Duel.SelectMatchingCard(tp,s.ctfilter,tp,LOCATION_ONFIELD,0,1,1,nil)
-		Duel.SendtoGrave(g1,REASON_COST)
+		Duel.SendtoRest(g1,REASON_COST)
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_CONTROL)
 	local g2=Duel.SelectTarget(tp,Card.IsControlerCanBeChanged,tp,0,LOCATION_MZONE,1,1,nil,false,zone)

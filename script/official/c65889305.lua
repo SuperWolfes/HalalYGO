@@ -58,7 +58,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		and Duel.IsPlayerCanSpecialSummonMonster(tp,id,0,TYPE_MONSTER|TYPE_EFFECT,2000,2000,4,RACE_WARRIOR,ATTRIBUTE_LIGHT)) then return end
 	c:AddMonsterAttribute(TYPE_EFFECT|TYPE_TRAP)
 	Duel.SpecialSummonStep(c,0,tp,tp,true,false,POS_FACEUP)
-	--You can place this card in your Spell & Trap Zone face-up
+	--You can place this card in your Actional & Trap Zone face-up
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,1))
 	e1:SetType(EFFECT_TYPE_QUICK_O)

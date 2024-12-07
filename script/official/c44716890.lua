@@ -29,13 +29,13 @@ function s.initial_effect(c)
 end
 function s.atcost(e,c,tp)
 	local ct=#{Duel.GetPlayerEffect(tp,id)}
-	return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,ct,nil)
+	return Duel.IsExistingMatchingCard(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,ct,nil)
 end
 function s.atop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.IsAttackCostPaid()~=2 and e:GetHandler():IsLocation(LOCATION_SZONE) then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-		local g=Duel.SelectMatchingCard(tp,Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,1,nil)
-		Duel.SendtoGrave(g,REASON_COST)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+		local g=Duel.SelectMatchingCard(tp,Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,1,1,nil)
+		Duel.SendtoRest(g,REASON_COST)
 		Duel.AttackCostPaid()
 	end
 end

@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	e0:SetType(EFFECT_TYPE_ACTIVATE)
 	e0:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e0)
-	--Place 1 "@Ignister" monster you control face-up in your Spell & Trap Zone as a Continuous Spell
+	--Place 1 "@Ignister" monster you control face-up in your Actional & Trap Zone as a Continuous Actional
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.pltg)
 	e1:SetOperation(s.plop)
 	c:RegisterEffect(e1)
-	--Special Summon 1 "@Ignister" Monster Card from your Spell & Trap Zone
+	--Special Summon 1 "@Ignister" Monster Card from your Actional & Trap Zone
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -36,7 +36,7 @@ end
 s.listed_names={id}
 s.listed_series={SET_IGNISTER}
 function s.plfilter(c)
-	return c:IsSetCard(SET_IGNISTER) and c:IsFaceup() and not c:IsForbidden()
+	return c:IsSetCard(SET_IGNISTER) and c:IsFaceup() and not c:IsUnliked()
 end
 function s.pltg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.plfilter(chkc) end
@@ -48,12 +48,12 @@ end
 function s.plop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and Duel.MoveToField(tc,tp,tp,LOCATION_SZONE,POS_FACEUP,tc:IsMonsterCard()) then
-		--Treated as a Continuous Spell
+		--Treated as a Continuous Actional
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 		e1:SetCode(EFFECT_CHANGE_TYPE)
-		e1:SetValue(TYPE_SPELL|TYPE_CONTINUOUS)
+		e1:SetValue(TYPE_ACTIONAL|TYPE_CONTINUOUS)
 		e1:SetReset(RESET_EVENT|RESETS_STANDARD&~RESET_TURN_SET)
 		tc:RegisterEffect(e1)
 	end

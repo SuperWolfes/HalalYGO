@@ -4,9 +4,9 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Link summon
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,s.matfilter,1,1)
-	--Self destruction effect
+	--Self mismatching effect
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -88,7 +88,7 @@ end
 function s.sumop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetLabelObject()
 	local zone=aux.GetMMZonesPointedTo(tp,Card.IsSetCard,LOCATION_MZONE,0,nil,0x1157)
-	if zone>0 and tc:IsLocation(LOCATION_GRAVE) and tc:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP,tp,zone) then
+	if zone>0 and tc:IsLocation(LOCATION_REST) and tc:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP,tp,zone) then
 		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP,zone)
 	end
 	e:Reset()

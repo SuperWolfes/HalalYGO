@@ -20,16 +20,16 @@ end
 function s.spchk(c,e,tp)
 	return c:IsLevelBelow(4) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_ATTACK|POS_FACEDOWN_DEFENSE)
 end
-local function summon(g,e,p,tograve,ft)
+local function summon(g,e,p,torest,ft)
 	if #g==0 then return end
 	if ft==0 then
-		tograve:Merge(g)
+		torest:Merge(g)
 		return
 	end
 	if ft<#g then
 		Duel.Hint(HINT_SELECTMSG,p,HINTMSG_SPSUMMON)
 		local newg=g:Select(p,ft,ft,nil)
-		tograve:Merge(g:Sub(newg))
+		torest:Merge(g:Sub(newg))
 		g=newg
 	end
 	for tc in g:Iter() do
@@ -45,33 +45,33 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local summonable2,nonsummonable2=Duel.GetDecktopGroup(1-p,5):Split(s.spchk,nil,e,1-p)
 
 	local ft1=Duel.GetLocationCount(p,LOCATION_MZONE)
-	if ft1>1 and Duel.IsPlayerAffectedByEffect(p,CARD_BLUEEYES_SPIRIT) and #summonable1>1 then
+	if ft1>1 and Duel.IsPlayerAffectedByEffect(p,CARD_BLUEEYES_GUARDIAN) and #summonable1>1 then
 		nonsummonable1:Merge(summonable1)
 		summonable1:Clear()
 	end
 	local ft2=Duel.GetLocationCount(1-p,LOCATION_MZONE)
-	if ft2>1 and Duel.IsPlayerAffectedByEffect(1-p,CARD_BLUEEYES_SPIRIT) and #summonable2>1 then
+	if ft2>1 and Duel.IsPlayerAffectedByEffect(1-p,CARD_BLUEEYES_GUARDIAN) and #summonable2>1 then
 		nonsummonable2:Merge(summonable2)
 		summonable2:Clear()
 	end
 
-	local tohand,tograve=nonsummonable1:Merge(nonsummonable2):Split(Card.IsAbleToHand,nil)
+	local tohand,torest=nonsummonable1:Merge(nonsummonable2):Split(Card.IsAbleToHand,nil)
 
 	Duel.DisableShuffleCheck()
 
 	Duel.ConfirmDecktop(p,5)
-	summon(summonable1,e,p,tograve,ft1)
+	summon(summonable1,e,p,torest,ft1)
 
 	Duel.ConfirmDecktop(1-p,5)
-	summon(summonable2,e,1-p,tograve,ft2)
+	summon(summonable2,e,1-p,torest,ft2)
 	Duel.SpecialSummonComplete()
 	if #tohand>0 then
 		Duel.SendtoHand(tohand,nil,REASON_EFFECT)
 		Duel.ShuffleHand(tp)
 		Duel.ShuffleHand(1-tp)
 	end
-	if #tograve>0 then
-		Duel.SendtoGrave(tograve,REASON_EFFECT)
+	if #torest>0 then
+		Duel.SendtoRest(torest,REASON_EFFECT)
 	end
 	local fg=Duel.GetMatchingGroup(Card.IsFacedown,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
 	Duel.ShuffleSetCard(fg)

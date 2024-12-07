@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,5,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--reattach
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -27,12 +27,12 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
 end
 function s.filter(c)
-	local g=c:GetMaterial():Filter(Card.IsLocation,nil,LOCATION_GRAVE)
+	local g=c:GetMaterial():Filter(Card.IsLocation,nil,LOCATION_REST)
 	return c:IsFaceup() and c:IsType(TYPE_XYZ) and #g>0
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,e:GetHandler()) end
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,nil,1,tp,LOCATION_REST)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
@@ -40,7 +40,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=g:GetFirst()
 	if tc then
 		Duel.HintSelection(g)
-		local mat=tc:GetMaterial():Filter(aux.NecroValleyFilter(Card.IsLocation),nil,LOCATION_GRAVE)
+		local mat=tc:GetMaterial():Filter(aux.RestValleyFilter(Card.IsLocation),nil,LOCATION_REST)
 		if not tc:IsImmuneToEffect(e) then
 			Duel.Overlay(tc,mat)
 		end

@@ -1,11 +1,11 @@
 --覇魔導士アーカナイト・マジシャン
---Supreme Arcanite Magician
+--Supreme Arcanite Mentor
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
-	c:EnableCounterPermit(COUNTER_SPELL)
+	c:EnableAwakeLimit()
+	c:EnableCounterPermit(COUNTER_ACTIONAL)
 	--Fusion Materials
-	Fusion.AddProcMix(c,true,true,s.matfilter,aux.FilterBoolFunctionEx(Card.IsRace,RACE_SPELLCASTER))
+	Fusion.AddProcMix(c,true,true,s.matfilter,aux.FilterBoolFunctionEx(Card.IsRace,RACE_MENTOR))
 	--Must first be Fusion Summoned
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e0:SetRange(LOCATION_EXTRA)
 	e0:SetValue(aux.fuslimit)
 	c:RegisterEffect(e0)
-	--Place 2 Spell Counters on this card
+	--Place 2 Actional Counters on this card
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_COUNTER)
@@ -24,13 +24,13 @@ function s.initial_effect(c)
 	e1:SetTarget(s.cntrtg)
 	e1:SetOperation(s.cntrop)
 	c:RegisterEffect(e1)
-	--Gains 1000 ATK for each Spell Counter on it
+	--Gains 1000 ATK for each Actional Counter on it
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e2:SetCode(EFFECT_UPDATE_ATTACK)
 	e2:SetRange(LOCATION_MZONE)
-	e2:SetValue(function(e,c) return c:GetCounter(COUNTER_SPELL)*1000 end)
+	e2:SetValue(function(e,c) return c:GetCounter(COUNTER_ACTIONAL)*1000 end)
 	c:RegisterEffect(e2)
 	--Activate 1 of these effects
 	local e3=Effect.CreateEffect(c)
@@ -43,24 +43,24 @@ function s.initial_effect(c)
 	e3:SetOperation(s.effop)
 	c:RegisterEffect(e3)
 end
-s.counter_place_list={COUNTER_SPELL}
-s.miracle_synchro_fusion=true
+s.counter_place_list={COUNTER_ACTIONAL}
+s.pulse_synchro_fusion=true
 function s.matfilter(c,fc,sumtype,tp)
-	return c:IsType(TYPE_SYNCHRO,fc,sumtype,tp) and c:IsRace(RACE_SPELLCASTER,fc,sumtype,tp)
+	return c:IsType(TYPE_SYNCHRO,fc,sumtype,tp) and c:IsRace(RACE_MENTOR,fc,sumtype,tp)
 end
 function s.cntrtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,2,0,COUNTER_SPELL)
+	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,2,0,COUNTER_ACTIONAL)
 end
 function s.cntrop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) then
-		c:AddCounter(COUNTER_SPELL,2)
+		c:AddCounter(COUNTER_ACTIONAL,2)
 	end
 end
 function s.effcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsCanRemoveCounter(tp,1,0,COUNTER_SPELL,1,REASON_COST) end
-	Duel.RemoveCounter(tp,1,0,COUNTER_SPELL,1,REASON_COST)
+	if chk==0 then return Duel.IsCanRemoveCounter(tp,1,0,COUNTER_ACTIONAL,1,REASON_COST) end
+	Duel.RemoveCounter(tp,1,0,COUNTER_ACTIONAL,1,REASON_COST)
 end
 function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return e:GetLabel()==1 and chkc:IsOnField() end

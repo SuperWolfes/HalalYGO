@@ -1,12 +1,12 @@
 --
---Crystal God Tistina
+--Crystal Monster Tistina
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
 	--Flip opponent's monsters face-down
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_POSITION+CATEGORY_TOGRAVE)
+	e1:SetCategory(CATEGORY_POSITION+CATEGORY_TOREST)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1,id)
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	--Flip opponent's monsters face-down when destroyed
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
-	e2:SetCategory(CATEGORY_POSITION+CATEGORY_TOGRAVE)
+	e2:SetCategory(CATEGORY_POSITION+CATEGORY_TOREST)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
 	e2:SetCode(EVENT_DESTROYED)
@@ -30,7 +30,7 @@ function s.postg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(Card.IsCanTurnSet,tp,0,LOCATION_MZONE,nil)
 	if chk==0 then return #g>0 end
 	Duel.SetOperationInfo(0,CATEGORY_POSITION,g,#g,0,0)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,nil,0,1-tp,LOCATION_ONFIELD)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,nil,0,1-tp,LOCATION_ONFIELD)
 end
 function s.posop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(Card.IsCanTurnSet,tp,0,LOCATION_MZONE,nil)
@@ -38,6 +38,6 @@ function s.posop(e,tp,eg,ep,ev,re,r,rp)
 	local gg=Duel.GetMatchingGroup(Card.IsFaceup,tp,0,LOCATION_ONFIELD,nil)
 	if #gg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.BreakEffect()
-		Duel.SendtoGrave(gg,REASON_EFFECT)
+		Duel.SendtoRest(gg,REASON_EFFECT)
 	end
 end

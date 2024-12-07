@@ -1,10 +1,10 @@
 --D－HERO Bloo－D (Anime)
---Destiny HERO - Plasma (Anime)
+--Destrudic HERO - Plasma (Anime)
 --fixed by Larry126
 local s,id,alias=GetID()
 function s.initial_effect(c)
 	alias=c:GetOriginalCodeRule()
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--cannot special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -117,7 +117,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsRelateToEffect(e) then
 		if c:IsFaceup() and c:IsRelateToEffect(e) then
 			s.equipop(c,e,tp,tc)
-		else Duel.SendtoGrave(tc,REASON_RULE) end
+		else Duel.SendtoRest(tc,REASON_RULE) end
 	end
 end
 function s.econ(e)
@@ -149,7 +149,7 @@ function s.discon(e,tp,eg,ep,ev,re,r,rp)
 	local dc=Duel.GetDecktopGroup(tp,1):GetFirst()
 	local g=Duel.GetChainInfo(ev,CHAININFO_TARGET_CARDS)
 	return dc and dc:IsCode(6186304) and dc:IsFaceup()
-		and re:IsActiveType(TYPE_SPELL+TYPE_TRAP) and rp~=tp
+		and re:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) and rp~=tp
 		and re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) and g and g:IsExists(s.dfilter,1,nil,tp)
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)

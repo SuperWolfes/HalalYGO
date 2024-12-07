@@ -1,5 +1,5 @@
 --帝王の烈旋
---The Monarchs Stormforth
+--The Moppars Stormforth
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

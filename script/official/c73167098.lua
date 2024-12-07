@@ -3,7 +3,7 @@
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion Materials
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_AROMA),aux.FilterBoolFunctionEx(Card.IsRace,RACE_PLANT))
 	--Plant monsters you control cannot be destroyed by your opponent's card effects
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetTarget(function(e,_c) return _c:IsRace(RACE_PLANT) end)
 	e1:SetValue(aux.indoval)
 	c:RegisterEffect(e1)
-	--Banish cards on the field equal to the number of "Humid Winds", "Dried Winds", and "Blessed Winds" you control
+	--Banish cards on the field equal to the number of "Humid Winds", "Dried Winds", and "Boiled Winds" you control
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_REMOVE)

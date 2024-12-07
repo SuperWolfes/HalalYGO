@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e2:SetCode(EVENT_PHASE+PHASE_STANDBY)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCondition(s.drcon)
 	e2:SetCost(s.drcost)
 	e2:SetTarget(s.drtg)
@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e3:SetCode(EVENT_CHAIN_SOLVING)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
 	e3:SetCondition(s.negcon)
 	e3:SetOperation(s.negop)
@@ -51,8 +51,8 @@ function s.filter(c,code)
 end
 function s.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local code=e:GetHandler():GetCode()
-	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND+LOCATION_DECK+LOCATION_GRAVE,0,1,nil,code) end
-	local cg=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_HAND+LOCATION_DECK+LOCATION_GRAVE,0,1,1,nil,code) 
+	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND+LOCATION_DECK+LOCATION_REST,0,1,nil,code) end
+	local cg=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_HAND+LOCATION_DECK+LOCATION_REST,0,1,1,nil,code) 
 	Duel.Remove(cg,POS_FACEUP,REASON_COST)
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -68,7 +68,7 @@ end
 function s.negcon(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.IsChainDisablable(ev) or rp~=tp then return false end
 	if re:IsHasCategory(CATEGORY_DECKDES) or Duel.GetOperationInfo(ev,CATEGORY_DECKDES) then return true end
-	local ex,tg,tc,p,cv=Duel.GetOperationInfo(ev,CATEGORY_TOGRAVE)
+	local ex,tg,tc,p,cv=Duel.GetOperationInfo(ev,CATEGORY_TOREST)
 	return ex and (cv&LOCATION_DECK==LOCATION_DECK
 		or (tg and tg:IsExists(Card.IsLocation,1,nil,LOCATION_DECK)))
 end

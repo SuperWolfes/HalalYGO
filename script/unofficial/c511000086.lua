@@ -1,5 +1,5 @@
 --魔法移し
---Bounce Spell
+--Bounce Actional
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -17,7 +17,7 @@ function s.filter(c,tp)
 	local bool_a=c:IsType(TYPE_PENDULUM) and Duel.GetLocationCount(tp,LOCATION_PZONE)>0
 	local bool_b=c:IsType(TYPE_FIELD)
 	local bool_c=not c:IsType(TYPE_PENDULUM) and not c:IsType(TYPE_FIELD) and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-	return c:IsFaceup() and c:IsSpell() and not c:IsOriginalCode(id)
+	return c:IsFaceup() and c:IsActional() and not c:IsOriginalCode(id)
 		and (bool_a or bool_b or bool_c) and c:IsAbleToChangeControler()
 		and c:CheckActivateEffect(true,true,false)
 end
@@ -31,9 +31,9 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and not tc:IsImmuneToEffect(e) then
-		local toGrave=false
+		local toRest=false
 		if tc:IsStatus(STATUS_LEAVE_CONFIRMED) then
-			toGrave=true
+			toRest=true
 		end
 		local loc=tc:GetLocation()
 		if tc:IsType(TYPE_PENDULUM) then loc=LOCATION_PZONE end
@@ -44,8 +44,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			tc:CancelCardTarget(ttc)
 		end
 		tc:ResetEffect(RESET_TOFIELD,RESET_EVENT)
-		if toGrave then
-			tc:CancelToGrave(false)
+		if toRest then
+			tc:CancelToRest(false)
 		end
 		Duel.Hint(HINT_CARD,0,tc:GetCode())
 		local te=tc:GetActivateEffect()

@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	alias=c:GetOriginalCodeRule()
 	--xyz summon
 	Xyz.AddProcedure(c,nil,12,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--spsummon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -113,13 +113,13 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local ct=e:GetHandler():GetOverlayCount()
 	if chk==0 then return aux.CheckSummonGate(tp,ct) and ct>0 and e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_EFFECT) 
 		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_EXTRA,0,ct,nil,e,tp,ct) 
-		and (not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) or ct<2) end
+		and (not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) or ct<2) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,ct,tp,LOCATION_EXTRA)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local ct=c:GetOverlayCount()
-	if ct>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
+	if ct>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then return end
 	if not aux.CheckSummonGate(tp,ct) then return end
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_EXTRA,0,nil,e,tp,ct)
 	if #g<ct then return end

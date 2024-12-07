@@ -1,4 +1,4 @@
---Xyz Reborn Plus
+--Xyz Rerest Plus
 --scripted by: urielkama
 --cleaned and fixed by MLD
 local s,id=GetID()
@@ -19,10 +19,10 @@ function s.spfilter(c,e,tp)
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:IsHasType(EFFECT_TYPE_ACTIVATE) and Duel.GetLocationCount(tp,LOCATION_MZONE,0)>0
-		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp)end
+		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp)end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,LOCATION_GRAVE)
+	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,LOCATION_REST)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -30,7 +30,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE,0)<=0 and not c:IsRelateToEffect(e) then return end
 	if tc and tc:IsRelateToEffect(e) and Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)>0 then
 		if c:IsRelateToEffect(e) then
-			c:CancelToGrave()
+			c:CancelToRest()
 			Duel.Overlay(tc,c)
 			local e1=Effect.CreateEffect(tc)
 			e1:SetDescription(aux.Stringid(51960178,0))
@@ -58,7 +58,7 @@ end
 function s.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tc=e:GetLabelObject()
 	if chk==0 then return tc and e:GetHandler():GetOverlayGroup():IsContains(tc) end
-	Duel.SendtoGrave(tc,REASON_COST)
+	Duel.SendtoRest(tc,REASON_COST)
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,2) end

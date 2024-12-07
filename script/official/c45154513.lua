@@ -1,21 +1,21 @@
 --アルグールマゼラ
---Alghoul Mazera
+--Alrahul Mazera
 --Logical Nonsense
 
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Substitute destruction for your Zombie monster(s)
+	--Substitute mismatching for your Toxic monster(s)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_DESTROY_REPLACE)
-	e1:SetRange(LOCATION_HAND+LOCATION_GRAVE)
+	e1:SetRange(LOCATION_HAND+LOCATION_REST)
 	e1:SetCountLimit(1,id)
 	e1:SetTarget(s.reptg)
 	e1:SetValue(s.repval)
 	e1:SetOperation(s.repop)
 	c:RegisterEffect(e1)
-	--Special Summon itself it is banished from the hand or GY
+	--Special Summon itself it is banished from the hand or RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -28,9 +28,9 @@ function s.initial_effect(c)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
 end
-	--If your Zombie monster(s) would be destroyed by battle or effect
+	--If your Toxic monster(s) would be destroyed by battle or effect
 function s.repfilter(c,tp)
-	return c:IsFaceup() and c:IsControler(tp) and c:IsLocation(LOCATION_MZONE) and c:IsRace(RACE_ZOMBIE)
+	return c:IsFaceup() and c:IsControler(tp) and c:IsLocation(LOCATION_MZONE) and c:IsRace(RACE_TOXIC)
 		and c:IsReason(REASON_BATTLE|REASON_EFFECT) and not c:IsReason(REASON_REPLACE)
 end
 	--Activation legality
@@ -45,9 +45,9 @@ end
 function s.repop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Remove(e:GetHandler(),POS_FACEUP,REASON_EFFECT|REASON_REPLACE)
 end
-	--Check if it was in hand/GY
+	--Check if it was in hand/RP
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsPreviousLocation(LOCATION_HAND|LOCATION_GRAVE)
+	return e:GetHandler():IsPreviousLocation(LOCATION_HAND|LOCATION_REST)
 end
 	--Activation legality
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)

@@ -1,9 +1,9 @@
 --ネフティスの祀り手
---Enshrining Hand of Nephthys
+--Enshrining Hand of Nepolonis
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--spsummon (deck)
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_DESTROY)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetTarget(s.sptg2)
 	e2:SetOperation(s.spop2)
@@ -30,7 +30,7 @@ end
 s.listed_series={0x11f}
 s.listed_names={23459650}
 function s.spcon1(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_RITUAL)
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_LOCKED)
 end
 function s.spfilter(c,e,tp)
 	return c:IsSetCard(0x11f) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

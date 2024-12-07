@@ -1,5 +1,5 @@
 --シャドウ・グール
---Shadow Ghoul (Rush)
+--Shadow Rahul (Rush)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Increase ATK
@@ -12,5 +12,5 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.value(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsMonster,c:GetControler(),LOCATION_GRAVE,0,nil)*100
+	return Duel.GetMatchingGroupCount(Card.IsMonster,c:GetControler(),LOCATION_REST,0,nil)*100
 end

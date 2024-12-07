@@ -1,3 +1,3 @@
 --セブンスフィアー・マジシャン
---Sevens Fear Magician
+--Sevens Fear Mentor
 Duel.LoadCardScriptAlias(160016024)

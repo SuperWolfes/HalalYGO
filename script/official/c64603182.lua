@@ -1,15 +1,15 @@
 --古代の機械暗黒巨人
---Ancient Gear Dark Golem
+--Ancient Gear Dark Gopal
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Name becomes "Ancient Gear Golem" while on the field on in GY
+	--Name becomes "Ancient Gear Gopal" while on the field on in RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e1:SetCode(EFFECT_CHANGE_CODE)
-	e1:SetRange(LOCATION_MZONE|LOCATION_GRAVE)
-	e1:SetValue(CARD_ANCIENT_GEAR_GOLEM)
+	e1:SetRange(LOCATION_MZONE|LOCATION_REST)
+	e1:SetValue(CARD_ANCIENT_GEAR_GOPAL)
 	c:RegisterEffect(e1)
 	--Search up to 2 "Ancient Gear" cards or "Geartown" then discard 1 card
 	local e2=Effect.CreateEffect(c)
@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	local e3=e2:Clone()
 	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e3)
-	--Your opponent cannot activate Spell/Trap Cards until the end of the Damage Step
+	--Your opponent cannot activate Actional/Trap Cards until the end of the Damage Step
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_FIELD)
 	e4:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
@@ -36,7 +36,7 @@ function s.initial_effect(c)
 	e4:SetCondition(function(e) return Duel.GetAttacker()==e:GetHandler() end)
 	c:RegisterEffect(e4)
 end
-s.listed_names={CARD_ANCIENT_GEAR_GOLEM,37694547,id} --Geartown
+s.listed_names={CARD_ANCIENT_GEAR_GOPAL,37694547,id} --Geartown
 s.listed_series={SET_ANCIENT_GEAR}
 function s.thfilter(c)
 	return c:IsAbleToHand() and (c:IsSetCard(SET_ANCIENT_GEAR) or c:IsCode(37694547)) and not c:IsCode(id)

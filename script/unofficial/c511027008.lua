@@ -1,5 +1,5 @@
 --ハイドライブ・グラヴィティ
---Hydradrive Gravity
+--Hyddendrive Gravity
 --Scripted by Playmaker 772211, fixed by Larry126
 local s,id=GetID()
 function s.initial_effect(c)

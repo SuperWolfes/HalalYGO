@@ -2,7 +2,7 @@
 --Battle Shogun of the Six Samurai
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Bushido Counter permit
 	c:EnableCounterPermit(COUNTER_BUSHIDO)
 	--Link Summon procedure

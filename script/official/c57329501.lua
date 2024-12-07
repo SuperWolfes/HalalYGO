@@ -15,7 +15,7 @@ function s.initial_effect(c)
 end
 s.listed_names={91027843}
 s.listed_series={0x12b}
---Special Summon from GY filter
+--Special Summon from RP filter
 function s.spgfilter(c,e,tp)
 	return c:IsSetCard(0x12b) and not c:IsType(TYPE_LINK) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
@@ -24,8 +24,8 @@ function s.spdfilter(c,e,tp)
 	return c:IsSetCard(0x12b) and c:IsMonster() and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.spgfilter(chkc,e,tp) end
-	local b1=Duel.IsExistingTarget(s.spgfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp)
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.spgfilter(chkc,e,tp) end
+	local b1=Duel.IsExistingTarget(s.spgfilter,tp,LOCATION_REST,0,1,nil,e,tp)
 	local b2=Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,91027843),tp,LOCATION_FZONE,0,1,nil)
 		and Duel.IsExistingMatchingCard(s.spdfilter,tp,LOCATION_DECK,0,1,nil,e,tp)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and (b1 or b2) end
@@ -36,7 +36,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if op==1 then
 		e:SetProperty(EFFECT_FLAG_CARD_TARGET)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local g=Duel.SelectTarget(tp,s.spgfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+		local g=Duel.SelectTarget(tp,s.spgfilter,tp,LOCATION_REST,0,1,1,nil,e,tp)
 		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 	else
 		e:SetProperty(0)

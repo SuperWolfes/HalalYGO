@@ -23,7 +23,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) then
 		local og=tc:GetOverlayGroup()
-		if Duel.SendtoGrave(og,REASON_EFFECT)~=0 and tc:IsHasEffect(EFFECT_INDESTRUCTABLE_BATTLE) then
+		if Duel.SendtoRest(og,REASON_EFFECT)~=0 and tc:IsHasEffect(EFFECT_INDESTRUCTABLE_BATTLE) then
 			Duel.NegateRelatedChain(tc,RESET_TURN_SET)
 			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetType(EFFECT_TYPE_SINGLE)

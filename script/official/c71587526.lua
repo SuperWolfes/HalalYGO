@@ -1,5 +1,5 @@
 --因果切断
---Karma Cut
+--Kaom Cut
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -24,7 +24,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	local g=Duel.SelectTarget(tp,aux.FaceupFilter(Card.IsAbleToRemove),tp,0,LOCATION_MZONE,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,1,0,0)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_REMOVE,nil,1,1-tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_REMOVE,nil,1,1-tp,LOCATION_REST)
 end
 function s.rfilter(c,code)
 	return c:IsCode(code) and c:IsAbleToRemove() and aux.SpElimFilter(c,true)
@@ -32,7 +32,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsFaceup() and tc:IsRelateToEffect(e) and Duel.Remove(tc,POS_FACEUP,REASON_EFFECT)>0 then
-		local rg=Duel.GetMatchingGroup(s.rfilter,tp,0,LOCATION_MZONE+LOCATION_GRAVE,tc,tc:GetCode())
+		local rg=Duel.GetMatchingGroup(s.rfilter,tp,0,LOCATION_MZONE+LOCATION_REST,tc,tc:GetCode())
 		if Duel.GetOperatedGroup():GetFirst():IsLocation(LOCATION_REMOVED) and #rg>0 then
 			Duel.BreakEffect()
 			Duel.Remove(rg,POS_FACEUP,REASON_EFFECT)

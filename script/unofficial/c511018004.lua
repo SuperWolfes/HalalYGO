@@ -21,7 +21,7 @@ end
 function s.operation(e,tp,eg,ev,ep,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not tc:IsRelateToEffect(e) or Duel.GetLocationCount(tp,LOCATION_MZONE)<=-1 then return end
-	Duel.SendtoGrave(tc,REASON_RULE)
+	Duel.SendtoRest(tc,REASON_RULE)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	local g=Group.CreateGroup()
 	g:KeepAlive()

@@ -3,7 +3,7 @@
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send itself to GY, draw 2, then mill 2
+	--Send itself to RP, draw 2, then mill 2
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -16,14 +16,14 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsPlayerCanDraw(tp,2) and Duel.IsPlayerCanDraw(1-tp,2) and e:GetHandler():IsAbleToGrave() end
+	if chk==0 then return Duel.IsPlayerCanDraw(tp,2) and Duel.IsPlayerCanDraw(1-tp,2) and e:GetHandler():IsAbleToRest() end
 	Duel.SetTargetPlayer(tp)
 	Duel.SetTargetParam(2)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,2)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if Duel.SendtoGrave(c,REASON_EFFECT)> 0 and Duel.Draw(tp,2,REASON_EFFECT)>0 and Duel.Draw(1-tp,2,REASON_EFFECT)>0 then
+	if Duel.SendtoRest(c,REASON_EFFECT)> 0 and Duel.Draw(tp,2,REASON_EFFECT)>0 and Duel.Draw(1-tp,2,REASON_EFFECT)>0 then
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_FIELD)
 		e1:SetCode(EFFECT_CANNOT_SUMMON)
@@ -36,7 +36,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		local e2=Effect.CreateEffect(e:GetHandler())
 		e2:SetDescription(aux.Stringid(id,2))
 		e2:SetType(EFFECT_TYPE_FIELD)
-		e2:SetCode(EFFECT_FORCE_SPSUMMON_POSITION)
+		e2:SetCode(EFFECT_FCOREE_SPSUMMON_POSITION)
 		e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CLIENT_HINT)
 		e2:SetTargetRange(1,0)
 		e2:SetTarget(s.sumlimit)

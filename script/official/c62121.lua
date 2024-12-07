@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.atktg(e,c)
-	return c:GetFieldID()<=e:GetLabel() and c:IsRace(RACE_ZOMBIE)
+	return c:GetFieldID()<=e:GetLabel() and c:IsRace(RACE_TOXIC)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

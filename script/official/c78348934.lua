@@ -1,8 +1,8 @@
 --破壊剣士の宿命
---Karma of the Destruction Swordsman
+--Kaom of the Mismatching Swordsman
 local s,id=GetID()
 function s.initial_effect(c)
-	--Banish up to 3 monsters from the opponent's GY and increase the ATK of 1 "Buster Blader" or "Destruction Sword" monster
+	--Banish up to 3 monsters from the opponent's RP and increase the ATK of 1 "Buster Blader" or "Mismatching Sword" monster
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_REMOVE+CATEGORY_ATKCHANGE)
@@ -20,14 +20,14 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCost(s.thcost)
 	e2:SetTarget(s.thtg)
 	e2:SetOperation(s.thop)
 	c:RegisterEffect(e2)
 end
-s.listed_series={SET_DESTRUCTION_SWORD,SET_BUSTER_BLADER}
+s.listed_series={SET_MISMATCHING_SWORD,SET_BUSTER_BLADER}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()
 end
@@ -35,18 +35,18 @@ function s.rmvfilter(c,e)
 	return c:IsMonster() and c:IsAbleToRemove() and c:IsCanBeEffectTarget(e)
 end
 function s.atkfilter(c)
-	return c:IsFaceup() and c:IsSetCard({SET_DESTRUCTION_SWORD,SET_BUSTER_BLADER})
+	return c:IsFaceup() and c:IsSetCard({SET_MISMATCHING_SWORD,SET_BUSTER_BLADER})
 end
 function s.rescon(sg)
 	return sg:GetClassCount(Card.GetRace)==1
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(1-tp) and s.filter1(chkc,tp) end
-	local g=Duel.GetMatchingGroup(s.rmvfilter,tp,0,LOCATION_GRAVE,nil,e)
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(1-tp) and s.filter1(chkc,tp) end
+	local g=Duel.GetMatchingGroup(s.rmvfilter,tp,0,LOCATION_REST,nil,e)
 	if chk==0 then return #g>0 and Duel.IsExistingMatchingCard(s.atkfilter,tp,LOCATION_MZONE,0,1,nil) end
 	local rg=aux.SelectUnselectGroup(g,e,tp,1,3,s.rescon,1,tp,HINTMSG_REMOVE)
 	Duel.SetTargetCard(rg)
-	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g1,1,0,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g1,1,0,LOCATION_REST)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetTargetCards(e)
@@ -67,7 +67,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.cfilter(c)
-	return c:IsSetCard(SET_DESTRUCTION_SWORD) and c:IsDiscardable()
+	return c:IsSetCard(SET_MISMATCHING_SWORD) and c:IsDiscardable()
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end

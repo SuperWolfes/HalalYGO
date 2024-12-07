@@ -3,7 +3,7 @@
 --scripted by Rundas
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Xyz Summon Procedure
 	Xyz.AddProcedure(c,nil,1,2,nil,nil,99)
 	--Gains 500 ATK for each material attached to it
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_UPDATE_ATTACK)
 	e1:SetValue(s.atkval)
 	c:RegisterEffect(e1)
-	--Shuffle 1 Spell/Trap into the Deck
+	--Shuffle 1 Actional/Trap into the Deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TODECK)
@@ -42,7 +42,7 @@ function s.atkval(e,c)
 end
 --To Deck
 function s.filter(c)
-	return c:IsSpellTrap() and c:IsAbleToDeck()
+	return c:IsActionalTrap() and c:IsAbleToDeck()
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return s.filter(chkc) and chkc:IsLocation(LOCATION_ONFIELD) and chkc:IsControler(1-tp) end

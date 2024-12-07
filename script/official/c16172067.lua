@@ -1,8 +1,8 @@
 --レッド・デーモンズ・ドラゴン・タイラント
---Tyrant Red Dragon Archfiend
+--Tyrant Red Dragon Archtainted
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Synchro Summon Procedure
 	Synchro.AddProcedure(c,nil,2,2,Synchro.NonTuner(nil),1,99)
 	--Special Summon condition
@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.destg)
 	e1:SetOperation(s.desop)
 	c:RegisterEffect(e1)
-	--Negate the activation of a Spell/Trap Card
+	--Negate the activation of a Actional/Trap Card
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_NEGATE+CATEGORY_DESTROY+CATEGORY_ATKCHANGE)

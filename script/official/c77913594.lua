@@ -40,7 +40,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ShuffleHand(tp)
 	if sc:IsMonster() and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 
 		and sc:IsCanBeSpecialSummoned(e,0,tp,false,false)
-		and Duel.IsExistingMatchingCard(s.listfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil,sc) 
+		and Duel.IsExistingMatchingCard(s.listfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,nil,sc) 
 		and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		Duel.BreakEffect()
 		Duel.SpecialSummon(sc,0,tp,tp,false,false,POS_FACEUP)

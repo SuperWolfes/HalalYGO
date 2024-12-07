@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,7,3)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Rank Up Check
 	aux.EnableCheckRankUp(c,nil,nil,9161357)
 	--battle indestructable
@@ -117,7 +117,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if tc:IsRelateToEffect(e) then
 		if c:IsFaceup() and c:IsRelateToEffect(e) and tc~=c then
 			s.equipop(c,e,tp,tc)
-		else Duel.SendtoGrave(tc,REASON_EFFECT) end
+		else Duel.SendtoRest(tc,REASON_EFFECT) end
 	end
 end
 function s.eqtg2(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -141,10 +141,10 @@ function s.discon(e,tp,eg,ep,ev,re,r,rp)
 	return tg and tg:IsContains(e:GetHandler()) and Duel.IsChainDisablable(ev)
 end
 function s.discost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():GetEquipGroup():IsExists(Card.IsAbleToGraveAsCost,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local g=e:GetHandler():GetEquipGroup():FilterSelect(tp,Card.IsAbleToGraveAsCost,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	if chk==0 then return e:GetHandler():GetEquipGroup():IsExists(Card.IsAbleToRestAsCost,1,nil) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
+	local g=e:GetHandler():GetEquipGroup():FilterSelect(tp,Card.IsAbleToRestAsCost,1,1,nil)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.distg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -189,16 +189,16 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		local pg=aux.GetMustBeMaterialGroup(tp,Group.FromCards(c),tp,nil,nil,REASON_XYZ)
 		return #pg<=1 and Duel.GetLocationCount(tp,LOCATION_MZONE)>-1
-			and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp,c,pg)
+			and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp,c,pg)
 	end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsFacedown() or not c:IsRelateToEffect(e) or c:IsControler(1-tp) or c:IsImmuneToEffect(e) then return end
 	local pg=aux.GetMustBeMaterialGroup(tp,Group.FromCards(c),tp,nil,nil,REASON_XYZ)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp,c,pg)
+	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_REST,0,1,1,nil,e,tp,c,pg)
 	local sc=g:GetFirst()
 	if sc then
 		sc:SetMaterial(c)

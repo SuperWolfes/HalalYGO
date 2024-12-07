@@ -1,4 +1,4 @@
---D.D.D. - Different Dimension Derby
+--S.S.D. - Same Dimension Derby
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -29,7 +29,7 @@ function s.valcheck(e,c)
 	end
 end
 function s.cfilter(c)
-	local summon_types={SUMMON_TYPE_RITUAL,SUMMON_TYPE_FUSION,SUMMON_TYPE_SYNCHRO,SUMMON_TYPE_XYZ,SUMMON_TYPE_LINK}
+	local summon_types={SUMMON_TYPE_LOCKED,SUMMON_TYPE_FUSION,SUMMON_TYPE_SYNCHRO,SUMMON_TYPE_XYZ,SUMMON_TYPE_LINK}
 	return c:IsFaceup() and c:GetFlagEffect(id)>0 and c:IsSummonType(table.unpack(summon_types))
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)

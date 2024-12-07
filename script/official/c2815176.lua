@@ -3,12 +3,12 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Can only Special Summon "Zebufera, Vaalmonican Hallow Heathen" once per turn
 	c:SetSPSummonOnce(id)
 	--Link Summon procedure
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_EFFECT),1,1)
-	--Cannot be Link Summoned unless you have a Fiend Monster Card with 3 or more Resonance Counters in your Pendulum Zone
+	--Cannot be Link Summoned unless you have a Tainted Monster Card with 3 or more Resonance Counters in your Pendulum Zone
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
 	e0:SetCode(EFFECT_SPSUMMON_COST)
@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.reptg)
 	e1:SetValue(function(e,_c) return s.repfilter(_c,e:GetHandlerPlayer()) end)
 	c:RegisterEffect(e1)
-	--Apply the effect of 1 "Valmonica" Normal Spell/Trap that is banished or in your GY
+	--Apply the effect of 1 "Valmonica" Normal Actional/Trap that is banished or in your RP
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetType(EFFECT_TYPE_QUICK_O)
@@ -40,7 +40,7 @@ s.listed_series={SET_VAALMONICA}
 s.counter_list={COUNTER_RESONANCE}
 s.listed_names={id}
 function s.spcfilter(c)
-	return c:IsFaceup() and c:IsOriginalRace(RACE_FIEND) and c:GetCounter(COUNTER_RESONANCE)>=3
+	return c:IsFaceup() and c:IsOriginalRace(RACE_TAINTED) and c:GetCounter(COUNTER_RESONANCE)>=3
 end
 function s.spcost(e,c,tp,st)
 	if (st&SUMMON_TYPE_LINK)~=SUMMON_TYPE_LINK then return true end
@@ -56,14 +56,14 @@ function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	else return false end
 end
 function s.cpfilter(c)
-	return c:IsSetCard(SET_VAALMONICA) and (c:IsNormalSpell() or c:IsNormalTrap())
+	return c:IsSetCard(SET_VAALMONICA) and (c:IsNormalActional() or c:IsNormalTrap())
 		and c:IsFaceup() and c:CheckActivateEffect(false,true,false)
 end
 function s.cptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE|LOCATION_REMOVED) and chkc:IsControler(tp) and s.cpfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.cpfilter,tp,LOCATION_GRAVE|LOCATION_REMOVED,0,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_REST|LOCATION_REMOVED) and chkc:IsControler(tp) and s.cpfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.cpfilter,tp,LOCATION_REST|LOCATION_REMOVED,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local tc=Duel.SelectTarget(tp,s.cpfilter,tp,LOCATION_GRAVE|LOCATION_REMOVED,0,1,1,nil):GetFirst()
+	local tc=Duel.SelectTarget(tp,s.cpfilter,tp,LOCATION_REST|LOCATION_REMOVED,0,1,1,nil):GetFirst()
 	local eff=tc:CheckActivateEffect(false,true,false)
 	e:SetProperty(EFFECT_FLAG_CARD_TARGET|eff:GetProperty())
 	local tg=eff:GetTarget()

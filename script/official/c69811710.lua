@@ -1,12 +1,12 @@
 --宵星の騎士ギルス
---Girsu, the Orcust Mekk-Knight
+--Girsu, the Coreust Mekk-Knight
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
-	--Send 1 "Orcust" or "World Legacy" card from your Deck to the GY
+	--Send 1 "Coreust" or "World Legacy" card from your Deck to the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_TOGRAVE)
+	e1:SetCategory(CATEGORY_TOREST)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DELAY)
 	e1:SetCode(EVENT_SUMMON_SUCCESS)
@@ -30,18 +30,18 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 s.listed_names={TOKEN_WORLD_LEGACY}
-s.listed_series={SET_ORCUST,SET_WORLD_LEGACY}
+s.listed_series={SET_COREUST,SET_WORLD_LEGACY}
 function s.tgfilter(c)
-	return c:IsSetCard({SET_ORCUST,SET_WORLD_LEGACY}) and c:IsAbleToGrave()
+	return c:IsSetCard({SET_COREUST,SET_WORLD_LEGACY}) and c:IsAbleToRest()
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tc=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil):GetFirst()
-	if not (tc and Duel.SendtoGrave(tc,REASON_EFFECT)>0 and tc:IsLocation(LOCATION_GRAVE)) then return end
+	if not (tc and Duel.SendtoRest(tc,REASON_EFFECT)>0 and tc:IsLocation(LOCATION_REST)) then return end
 	local c=e:GetHandler()
 	if c:IsFaceup() and c:IsRelateToEffect(e) and c:GetColumnGroupCount()>=2 then
 		Duel.BreakEffect()
@@ -56,14 +56,14 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.tktg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.GetLocationCount(1-tp,LOCATION_MZONE)>0 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.GetLocationCount(1-tp,LOCATION_MZONE)>0 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)
 		and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_WORLD_LEGACY,SET_WORLD_LEGACY,TYPES_TOKEN,0,0,1,RACE_MACHINE,ATTRIBUTE_DARK,POS_FACEUP_DEFENSE)
 		and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_WORLD_LEGACY,SET_WORLD_LEGACY,TYPES_TOKEN,0,0,1,RACE_MACHINE,ATTRIBUTE_DARK,POS_FACEUP_DEFENSE,1-tp) end
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,2,tp,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,0)
 end
 function s.tkop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.GetLocationCount(1-tp,LOCATION_MZONE)>0 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
+	if Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.GetLocationCount(1-tp,LOCATION_MZONE)>0 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN)
 		and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_WORLD_LEGACY,SET_WORLD_LEGACY,TYPES_TOKEN,0,0,1,RACE_MACHINE,ATTRIBUTE_DARK,POS_FACEUP_DEFENSE)
 		and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_WORLD_LEGACY,SET_WORLD_LEGACY,TYPES_TOKEN,0,0,1,RACE_MACHINE,ATTRIBUTE_DARK,POS_FACEUP_DEFENSE,1-tp) then
 		local tk1=Duel.CreateToken(tp,TOKEN_WORLD_LEGACY)

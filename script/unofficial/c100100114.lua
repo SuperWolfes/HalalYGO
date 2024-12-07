@@ -1,5 +1,5 @@
 --Ｓｐ－オーバー・チューン
---Speed Spell - Overtune
+--Speed Actional - Overtune
 --fixed by Larry126
 local s,id=GetID()
 function s.initial_effect(c)

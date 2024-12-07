@@ -1,10 +1,10 @@
 --Ｓ－Ｆｏｒｃｅ プラ＝ティナ
---S-Force Pla-Tina
+--S-Fcoree Pla-Tina
 --Logical Nonsense
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon 1 of your banished "S-Force" monsters
+	--Special Summon 1 of your banished "S-Fcoree" monsters
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -18,23 +18,23 @@ function s.initial_effect(c)
 	local e2=e1:Clone()
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e2)
-	--Decrease the ATK of opponent's monster in the same column as your "S-Force" monsters by 600
+	--Decrease the ATK of opponent's monster in the same column as your "S-Fcoree" monsters by 600
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
 	e3:SetCode(EFFECT_UPDATE_ATTACK)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetTargetRange(0,LOCATION_MZONE)
-	e3:SetTarget(aux.SForceTarget)
+	e3:SetTarget(aux.SFcoreeTarget)
 	e3:SetValue(-600)
 	c:RegisterEffect(e3)
 end
---Lists "S-Force" archetype
-s.listed_series={SET_S_FORCE}
+--Lists "S-Fcoree" archetype
+s.listed_series={SET_S_FCOREE}
 --Specifically lists itself
 s.listed_names={id}
---Check for a "S-Force" monster, besides "S-Force Pla-Tina"
+--Check for a "S-Fcoree" monster, besides "S-Fcoree Pla-Tina"
 function s.filter(c,e,tp)
-	return c:IsSetCard(SET_S_FORCE) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and not c:IsCode(id)
+	return c:IsSetCard(SET_S_FCOREE) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and not c:IsCode(id)
 end
 --Activation legality
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -45,7 +45,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REMOVED,0,1,1,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,0)
 end
---Special summon 1 of your banished "S-Force" monsters
+--Special summon 1 of your banished "S-Fcoree" monsters
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) then

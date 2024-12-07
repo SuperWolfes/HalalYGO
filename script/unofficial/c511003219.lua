@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,3,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Change battle position/attack target
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.postg)
 	e1:SetOperation(s.posop)
 	c:RegisterEffect(e1)
-	--Detach to end BP and activate Spell Card
+	--Detach to end BP and activate Actional Card
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_BATTLE_CONFIRM)
@@ -59,7 +59,7 @@ end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:CheckRemoveOverlayCard(tp,1,REASON_COST) end
-	Duel.SendtoGrave(c:GetOverlayGroup(),REASON_COST)
+	Duel.SendtoRest(c:GetOverlayGroup(),REASON_COST)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroupCount(tp,0,LOCATION_HAND)>0 end
@@ -78,7 +78,7 @@ function s.filter(c,tp,eg,ep,ev,re,r,rp)
 	local condition=te:GetCondition()
 	local cost=te:GetCost()
 	local target=te:GetTarget()
-	return c:IsSpell() and (not condition or condition(te,tp,eg,ep,ev,re,r,rp)) and (not cost or cost(te,tp,eg,ep,ev,re,r,rp,0))
+	return c:IsActional() and (not condition or condition(te,tp,eg,ep,ev,re,r,rp)) and (not cost or cost(te,tp,eg,ep,ev,re,r,rp,0))
 		and (not target or target(te,tp,eg,ep,ev,re,r,rp,0)) and (c:IsType(TYPE_FIELD) or Duel.GetLocationCount(tp,LOCATION_SZONE)>0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
@@ -90,7 +90,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 			local tc=Duel.SelectMatchingCard(tp,s.filter,tp,0,LOCATION_HAND,1,1,nil,tp,eg,ep,ev,re,r,rp):GetFirst()
 			Duel.SetTargetCard(tc)
-			if not tc or (tc:IsHasEffect(EFFECT_CANNOT_TRIGGER) or tc:IsForbidden()) then return end
+			if not tc or (tc:IsHasEffect(EFFECT_CANNOT_TRIGGER) or tc:IsUnliked()) then return end
 			Duel.SkipPhase(Duel.GetTurnPlayer(),PHASE_BATTLE,RESET_PHASE+PHASE_BATTLE_STEP,1)
 			Duel.BreakEffect()
 			local tpe=tc:GetType()
@@ -121,12 +121,12 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 						end
 						fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
 						if fc and Duel.Destroy(fc,REASON_RULE)==0 then
-							Duel.SendtoGrave(tc,REASON_RULE)
+							Duel.SendtoRest(tc,REASON_RULE)
 						end
 					else
 						fc=Duel.GetFieldCard(tp,LOCATION_FZONE,0)
-						if fc and Duel.SendtoGrave(fc,REASON_RULE)==0 then
-							Duel.SendtoGrave(tc,REASON_RULE)
+						if fc and Duel.SendtoRest(fc,REASON_RULE)==0 then
+							Duel.SendtoRest(tc,REASON_RULE)
 						end
 					end
 				end
@@ -134,7 +134,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 				Duel.Hint(HINT_CARD,0,tc:GetCode())
 				tc:CreateEffectRelation(te)
 				if (tpe&TYPE_EQUIP+TYPE_CONTINUOUS+TYPE_FIELD)==0 and not tc:IsHasEffect(EFFECT_REMAIN_FIELD) then
-					tc:CancelToGrave(false)
+					tc:CancelToRest(false)
 				end
 				if co then co(te,tp,eg,ep,ev,re,r,rp,1) end
 				if tg then tg(te,tp,eg,ep,ev,re,r,rp,1) end

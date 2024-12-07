@@ -2,10 +2,10 @@
 --Number 38: Hope Harbinger Dragon Titanic Galaxy
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Xyz Summon procedure
 	Xyz.AddProcedure(c,nil,8,2)
-	--Negate an activated Spell Card or effect
+	--Negate an activated Actional Card or effect
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DISABLE)
@@ -43,7 +43,7 @@ end
 s.xyz_number=38
 function s.discon(e,tp,eg,ep,ev,re,r,rp)
 	local loc=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_LOCATION)
-	return (loc&LOCATION_SZONE)>0 and re:IsSpellEffect() and Duel.IsChainDisablable(ev)
+	return (loc&LOCATION_SZONE)>0 and re:IsActionalEffect() and Duel.IsChainDisablable(ev)
 end
 function s.distg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -53,7 +53,7 @@ function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local rc=re:GetHandler()
 	if Duel.NegateEffect(ev) and c:IsRelateToEffect(e) and rc:IsRelateToEffect(re) and c:IsType(TYPE_XYZ) and rc:IsCanBeXyzMaterial(c,tp,REASON_EFFECT) then
-		rc:CancelToGrave()
+		rc:CancelToRest()
 		Duel.Overlay(c,rc,true)
 	end
 end

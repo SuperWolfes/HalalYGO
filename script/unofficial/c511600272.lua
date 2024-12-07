@@ -4,7 +4,7 @@
 local s,id,alias=GetID()
 function s.initial_effect(c)
 	alias=c:GetOriginalCodeRule()
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunction(Card.IsSetCard,0x13c),2,2)
 	--special summon
 	local e1=Effect.CreateEffect(c)
@@ -30,11 +30,11 @@ function s.initial_effect(c)
 	e2:SetTarget(s.damtg)
 	e2:SetOperation(s.damop)
 	c:RegisterEffect(e2)
-	--to grave
+	--to rest
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	e3:SetCode(EVENT_TO_GRAVE)
+	e3:SetCode(EVENT_TO_REST)
 	e3:SetOperation(s.regop)
 	c:RegisterEffect(e3)
 end
@@ -56,14 +56,14 @@ function s.filter(c,e,tp)
 	local zones={}
 	zones[0]=c:GetLinkedZone(0)&0x1f
 	zones[1]=c:GetLinkedZone(1)&0x1f
-	return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND+LOCATION_GRAVE,0,1,nil,e,tp,zones)
+	return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND+LOCATION_REST,0,1,nil,e,tp,zones)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and s.filter(chkc,e,tp) end
 	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 	Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil,e,tp)
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND+LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND+LOCATION_REST)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
@@ -81,7 +81,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		sump=tp
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.spfilter2),tp,LOCATION_HAND+LOCATION_GRAVE,0,1,1,nil,e,tp,sump,zones[sump])
+	local g=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.spfilter2),tp,LOCATION_HAND+LOCATION_REST,0,1,1,nil,e,tp,sump,zones[sump])
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,sump,false,false,POS_FACEUP_DEFENSE,zones[sump])
 	end
@@ -126,7 +126,7 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 		e1:SetCode(EVENT_PHASE+PHASE_END)
 		e1:SetCountLimit(1,{id,1})
-		e1:SetRange(LOCATION_GRAVE)
+		e1:SetRange(LOCATION_REST)
 		e1:SetTarget(s.sptg)
 		e1:SetOperation(s.spop)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)

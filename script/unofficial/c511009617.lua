@@ -1,11 +1,11 @@
 --地獄螺戦鬼ネクロ・ダーウィン
---Helixx Necro Darwin
+--Helixx Rest Darwin
 --fixed by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
 	Link.AddProcedure(c,aux.FilterBoolFunction(Card.IsSetCard,0x573),2,2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(23571046,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)

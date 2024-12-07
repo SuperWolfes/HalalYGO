@@ -25,10 +25,10 @@ function s.initial_effect(c)
 	e5:SetRange(LOCATION_MZONE)
 	e5:SetValue(1)
 	c:RegisterEffect(e5)
-	--to grave
+	--to rest
 	local e6=Effect.CreateEffect(c)
 	e6:SetDescription(aux.Stringid(id,0))
-	e6:SetCategory(CATEGORY_TOGRAVE)
+	e6:SetCategory(CATEGORY_TOREST)
 	e6:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e6:SetRange(LOCATION_MZONE)
 	e6:SetCountLimit(1)
@@ -82,12 +82,12 @@ function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,e:GetHandler(),1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,e:GetHandler(),1,0,0)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and c:IsFaceup() then
-		Duel.SendtoGrave(c,REASON_EFFECT)
+		Duel.SendtoRest(c,REASON_EFFECT)
 	end
 end
 function s.valcheck(e,c)

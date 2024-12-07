@@ -2,7 +2,7 @@
 --cleaned up by MLD
 local s,id=GetID()
 function s.initial_effect(c)
-	--draw, send to grave and effect damage
+	--draw, send to rest and effect damage
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DRAW+CATEGORY_DAMAGE)
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -26,7 +26,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetDecktopGroup(tp,1)
 	local tc=g:GetFirst()
 	if Duel.Draw(tp,1,REASON_EFFECT)>0 then
-		Duel.SendtoGrave(tc,REASON_EFFECT)
+		Duel.SendtoRest(tc,REASON_EFFECT)
 		if tc:IsMonster() then
 			Duel.Damage(1-tp,tc:GetLevel()*200,REASON_EFFECT)
 		else

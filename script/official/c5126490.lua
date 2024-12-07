@@ -2,7 +2,7 @@
 --Neos Wiseman
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--spsummon condition
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -39,7 +39,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_NEOS,78371393}
 function s.spfilter(c,...)
-	return c:IsFaceup() and c:IsCode(...) and c:IsAbleToGraveAsCost()
+	return c:IsFaceup() and c:IsCode(...) and c:IsAbleToRestAsCost()
 end
 function s.rescon(sg,e,tp,mg)
 	return aux.ChkfMMZ(1)(sg,e,tp,mg) and sg:IsExists(s.chk,1,nil,sg)
@@ -59,7 +59,7 @@ function s.spcon(e,c)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,c)
 	local sg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE,0,nil,CARD_NEOS,78371393)
-	local g=aux.SelectUnselectGroup(sg,e,tp,2,2,s.rescon,1,tp,HINTMSG_TOGRAVE,nil,nil,true)
+	local g=aux.SelectUnselectGroup(sg,e,tp,2,2,s.rescon,1,tp,HINTMSG_TOREST,nil,nil,true)
 	if #g>0 then
 		g:KeepAlive()
 		e:SetLabelObject(g)
@@ -70,7 +70,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	g:DeleteGroup()
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)

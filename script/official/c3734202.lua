@@ -1,5 +1,5 @@
 --ナチュルの神星樹
---Naturia Sacred Tree
+--Naturia Clean Tree
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -36,7 +36,7 @@ function s.initial_effect(c)
 	e4:SetDescription(aux.Stringid(id,2))
 	e4:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	e4:SetCode(EVENT_TO_GRAVE)
+	e4:SetCode(EVENT_TO_REST)
 	e4:SetTarget(s.thtg)
 	e4:SetOperation(s.thop)
 	c:RegisterEffect(e4)

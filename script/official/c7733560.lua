@@ -1,5 +1,5 @@
 --時械神 ミチオン
---Michion, the Timelord
+--Michion, the Timewatcher
 --Scripted by ahtelel
 local s,id=GetID()
 function s.initial_effect(c)

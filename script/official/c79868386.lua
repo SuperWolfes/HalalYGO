@@ -1,5 +1,5 @@
 --ゴッド・ハンド・クラッシャー
---Fist of Fate
+--Fist of Bate
 --Scripted by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -60,8 +60,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			e4:SetLabel(tc:GetOriginalCodeRule())
 			e4:SetReset(RESET_PHASE+PHASE_END)
 			Duel.RegisterEffect(e4,tp)
-			--Destroy all Spells/Traps the opponent controls
-			local sg=Duel.GetMatchingGroup(Card.IsType,tp,0,LOCATION_ONFIELD,nil,TYPE_SPELL+TYPE_TRAP)
+			--Destroy all Actionals/Traps the opponent controls
+			local sg=Duel.GetMatchingGroup(Card.IsType,tp,0,LOCATION_ONFIELD,nil,TYPE_ACTIONAL+TYPE_TRAP)
 			if Duel.IsMainPhase() and Duel.IsTurnPlayer(tp) and #sg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 				Duel.BreakEffect()
 				Duel.Destroy(sg,REASON_EFFECT)

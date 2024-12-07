@@ -1,5 +1,5 @@
 --弧楽姫ホルン・ワン・ユエ
---Horn Wan Yue the Crescent Music Maiden
+--Horn Wan Yue the Crescent Nasheed Maiden
 local s,id=GetID()
 function s.initial_effect(c)
 	--ATK increase
@@ -29,9 +29,9 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local ct=g:GetFirst()
 	if ct then
 		--If it was a monster, make 1 warrior monster gain ATK equal to sent monster's level x 300 and take damage equal to that amount
-		if ct:IsMonster() and ct:IsRace(RACE_WARRIOR) and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
+		if ct:IsMonster() and ct:IsRace(RACE_WARRIOR) and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-			local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+			local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
 			if #g>0 then
 				Duel.SendtoHand(g,nil,REASON_EFFECT)
 				Duel.ConfirmCards(1-tp,g)

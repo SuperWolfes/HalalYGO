@@ -36,7 +36,7 @@ end
 
 --[[
 	"vanilla mode" reference
-	1:majesty's fiend
+	1:majesty's tainted
 	2:skill drain
 	3:vector pendulum
 	4:concentration duel

@@ -1,9 +1,9 @@
 --限定解除
---Ritual Foregone
+--Locked Foregone
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special summon 1 ritual monster from hand
+	--Special summon 1 locked monster from hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -19,7 +19,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.PayLPCost(tp,1000)
 end
 function s.filter(c,e,tp)
-	return c:IsRitualMonster() and c:IsCanBeSpecialSummoned(e,0,tp,false,true)
+	return c:IsLockedMonster() and c:IsCanBeSpecialSummoned(e,0,tp,false,true)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

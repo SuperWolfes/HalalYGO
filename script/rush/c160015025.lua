@@ -1,5 +1,5 @@
 --真紅眼の月竜
---Red-Eyes Moon Dragon
+--Red-Eyes Horizon Dragon
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)

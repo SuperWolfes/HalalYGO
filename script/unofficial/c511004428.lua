@@ -23,10 +23,10 @@ function s.filter(c,e,tp,sc)
 	return #scm>0 and scm:IsContains(c) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_SPECIAL,tp,true,false,POS_FACEUP_ATTACK,tp)
 end
 function s.targetat(e,tp,eg,ev,ep,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,1,nil,e,tp,e:GetLabelObject()) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,1,nil,e,tp,e:GetLabelObject()) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 end
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
-	local tg=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_GRAVE,0,1,ft,nil,e,tp,e:GetLabelObject())
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
+	local tg=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_REST,0,1,ft,nil,e,tp,e:GetLabelObject())
 	Duel.SetTargetCard(tg)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,tg,#tg,0,0)
 end
@@ -35,7 +35,7 @@ function s.operationat(e,tp,eg,ev,ep,re,r,rp)
 	local c=e:GetHandler()
 	local tg=Duel.GetTargetCards(e)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	if ft>0 and #tg>ft then tg=tg:Select(tp,1,ft,nil) end
 	if ft>0 and #tg>0 then
 		Duel.SpecialSummon(tg,SUMMON_TYPE_SPECIAL,tp,tp,true,false,POS_FACEUP_ATTACK)

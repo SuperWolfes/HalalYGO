@@ -3,10 +3,10 @@
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMixRep(c,true,true,aux.FilterBoolFunctionEx(Card.IsType,TYPE_NORMAL),1,1,160018006,160018003)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION,nil,false)
-	--Send cards from the Decks to the GY and decrease level
+	--Send cards from the Decks to the RP and decrease level
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DECKDES+CATEGORY_SPECIAL_SUMMON)
@@ -48,11 +48,11 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetReset(RESETS_STANDARD_PHASE_END)
 	c:RegisterEffect(e1)
 	c:AddPiercing(RESETS_STANDARD_PHASE_END,c)
-	local g=Duel.GetMatchingGroup(s.spfilter,tp,0,LOCATION_GRAVE,nil,e,tp)
+	local g=Duel.GetMatchingGroup(s.spfilter,tp,0,LOCATION_REST,nil,e,tp)
 	local ft=Duel.GetMZoneCount(1-tp)
 	if ft<=0 then return end
 	if ft>=3 then ft=3 end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	if #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local sg=g:Select(tp,1,ft,nil)

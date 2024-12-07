@@ -19,12 +19,12 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()
 end
 function s.filter(c)
-	return c:IsType(TYPE_ACTION) and c:IsSpell() and not c:IsType(TYPE_FIELD)
+	return c:IsType(TYPE_ACTION) and c:IsActional() and not c:IsType(TYPE_FIELD)
 		and c:CheckActivateEffect(false,false,false)~=nil
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	local b1=Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil)
+	local b1=Duel.IsExistingTarget(s.filter,tp,LOCATION_REST,0,1,nil)
 	local op=0
 	if b1 then
 		op=Duel.SelectOption(tp,aux.Stringid(id,0),aux.Stringid(id,1))
@@ -34,7 +34,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if op==0 then
 		e:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_CARD_TARGET)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-		local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil)
+		local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REST,0,1,1,nil)
 	else
 		e:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
 		Duel.SetOperationInfo(0,CATEGORY_DESTROY,e:GetHandler(),1,0,0)
@@ -91,7 +91,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		if op then
 			op(e,tp,eg,ep,ev,re,r,rp)
 		end
-		c:CancelToGrave()
+		c:CancelToRest()
 	end
 	else
 		if e:GetHandler():IsRelateToEffect(e) then

@@ -3,7 +3,7 @@
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	--Banish up to 3 Spells/Traps from your GY
+	--Banish up to 3 Actionals/Traps from your RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_REMOVE+CATEGORY_TODECK)
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.rmtg)
 	e1:SetOperation(s.rmop)
 	c:RegisterEffect(e1)
-	--Set 1 of your banished Spells/Traps
+	--Set 1 of your banished Actionals/Traps
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
@@ -27,14 +27,14 @@ function s.initial_effect(c)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCondition(function(e,tp) return Duel.IsTurnPlayer(tp) end)
 	e2:SetTarget(s.settg)
-	e2:SetOperation(s.setop)
+	e2:SetOperation(s.vetop)
 	c:RegisterEffect(e2)
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and chkc:IsSpellTrap() and chkc:IsAbleToRemove() end
-	if chk==0 then return Duel.IsExistingTarget(aux.AND(Card.IsSpellTrap,Card.IsAbleToRemove),tp,LOCATION_GRAVE,0,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and chkc:IsActionalTrap() and chkc:IsAbleToRemove() end
+	if chk==0 then return Duel.IsExistingTarget(aux.AND(Card.IsActionalTrap,Card.IsAbleToRemove),tp,LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectTarget(tp,aux.AND(Card.IsSpellTrap,Card.IsAbleToRemove),tp,LOCATION_GRAVE,0,1,3,nil)
+	local g=Duel.SelectTarget(tp,aux.AND(Card.IsActionalTrap,Card.IsAbleToRemove),tp,LOCATION_REST,0,1,3,nil)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,#g,tp,0)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TODECK,nil,#g,tp,LOCATION_REMOVED)
 end
@@ -52,7 +52,7 @@ function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.setfilter(c)
-	return c:IsSpellTrap() and c:IsSSetable() and c:IsFaceup()
+	return c:IsActionalTrap() and c:IsSSetable() and c:IsFaceup()
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REMOVED) and chkc:IsControler(tp) and s.setfilter(chkc) end
@@ -60,7 +60,7 @@ function s.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 	Duel.SelectTarget(tp,s.setfilter,tp,LOCATION_REMOVED,0,1,1,nil)
 end
-function s.setop(e,tp,eg,ep,ev,re,r,rp)
+function s.vetop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) then
 		Duel.SSet(tp,tc)

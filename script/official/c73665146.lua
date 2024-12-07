@@ -1,9 +1,9 @@
 --サイレント・マジシャン LV4
---Silent Magician LV4
+--Silent Mentor LV4
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableCounterPermit(COUNTER_SPELL)
-	c:SetCounterLimit(COUNTER_SPELL,5)
+	c:EnableCounterPermit(COUNTER_ACTIONAL)
+	c:SetCounterLimit(COUNTER_ACTIONAL,5)
 	--draw
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
@@ -32,24 +32,24 @@ function s.initial_effect(c)
 	e3:SetOperation(s.spop)
 	c:RegisterEffect(e3)
 end
-s.counter_place_list={COUNTER_SPELL}
+s.counter_place_list={COUNTER_ACTIONAL}
 s.listed_names={72443568}
 s.LVnum=4
 s.LVset=0xe8
 function s.addc(e,tp,eg,ep,ev,re,r,rp)
 	if ep~=tp then
-		e:GetHandler():AddCounter(COUNTER_SPELL,1)
+		e:GetHandler():AddCounter(COUNTER_ACTIONAL,1)
 	end
 end
 function s.attackup(e,c)
-	return c:GetCounter(COUNTER_SPELL)*500
+	return c:GetCounter(COUNTER_ACTIONAL)*500
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():GetCounter(COUNTER_SPELL)==5 and tp==Duel.GetTurnPlayer()
+	return e:GetHandler():GetCounter(COUNTER_ACTIONAL)==5 and tp==Duel.GetTurnPlayer()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
-	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
+	if chk==0 then return e:GetHandler():IsAbleToRestAsCost() end
+	Duel.SendtoRest(e:GetHandler(),REASON_COST)
 end
 function s.spfilter(c,e,tp)
 	return c:IsCode(72443568) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)

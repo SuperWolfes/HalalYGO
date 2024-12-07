@@ -3,7 +3,7 @@
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	c:SetUniqueOnField(1,0,id)
 	-- 2+ Level 9 monsters
 	Xyz.AddProcedure(c,nil,9,2,nil,nil,99)
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	local e2=e1:Clone()
 	e2:SetCode(EFFECT_UPDATE_DEFENSE)
 	c:RegisterEffect(e2)
-	-- Special Summon 1 non-Fairy "Generaider" Xyz Monster
+	-- Special Summon 1 non-Wanderer "Generaider" Xyz Monster
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -41,7 +41,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Release(c,REASON_COST)
 end
 function s.spfilter(c,e,tp,ec)
-	return c:IsType(TYPE_XYZ) and c:IsSetCard(SET_GENERAIDER) and not c:IsRace(RACE_FAIRY)
+	return c:IsType(TYPE_XYZ) and c:IsSetCard(SET_GENERAIDER) and not c:IsRace(RACE_WANDERER)
 		and Duel.GetLocationCountFromEx(tp,tp,ec,c)>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -58,14 +58,14 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if not tc or Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)==0 then return end
 	local ct=Duel.GetChainInfo(0,CHAININFO_TARGET_PARAM)
 	if ct==0 then return end
-	local og=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.ovfilter),tp,LOCATION_ONFIELD|LOCATION_GRAVE,LOCATION_ONFIELD|LOCATION_GRAVE,tc,tc,tp,e)
+	local og=Duel.GetMatchingGroup(aux.RestValleyFilter(s.ovfilter),tp,LOCATION_ONFIELD|LOCATION_REST,LOCATION_ONFIELD|LOCATION_REST,tc,tc,tp,e)
 	if #og==0 or not Duel.SelectYesNo(tp,aux.Stringid(id,1)) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)
 	local g=og:Select(tp,1,ct,nil)
 	if #g>0 then
 		for tc in g:Iter() do
-			if tc:IsSpellTrap() and tc:IsLocation(LOCATION_SZONE) then
-				tc:CancelToGrave()
+			if tc:IsActionalTrap() and tc:IsLocation(LOCATION_SZONE) then
+				tc:CancelToRest()
 			end
 		end
 		Duel.HintSelection(g,true)

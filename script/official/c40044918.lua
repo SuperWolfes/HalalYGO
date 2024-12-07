@@ -20,7 +20,7 @@ function s.thfilter(c)
 end
 function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local b1=Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,SET_HERO),tp,LOCATION_MZONE,0,1,e:GetHandler())
-		and Duel.IsExistingMatchingCard(Card.IsSpellTrap,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil)
+		and Duel.IsExistingMatchingCard(Card.IsActionalTrap,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil)
 	local b2=Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil)
 	if chk==0 then return b1 or b2 end
 	local op=Duel.SelectEffect(tp,
@@ -28,7 +28,7 @@ function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
 		{b2,aux.Stringid(id,2)})
 	e:SetLabel(op)
 	if op==1 then
-		local g=Duel.GetMatchingGroup(Card.IsSpellTrap,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil)
+		local g=Duel.GetMatchingGroup(Card.IsActionalTrap,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil)
 		e:SetCategory(CATEGORY_DESTROY)
 		Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,tp,0)
 	elseif op==2 then
@@ -39,13 +39,13 @@ end
 function s.effop(e,tp,eg,ep,ev,re,r,rp)
 	local op=e:GetLabel()
 	if op==1 then
-		--Destroy Spells/Traps on the field, up to the number of "HERO" monsters you control, except this card
+		--Destroy Actionals/Traps on the field, up to the number of "HERO" monsters you control, except this card
 		local c=e:GetHandler()
 		local exc=c:IsRelateToEffect(e) and c or nil
 		local ct=Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsSetCard,SET_HERO),tp,LOCATION_MZONE,0,exc)
 		if ct==0 then return end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-		local g=Duel.SelectMatchingCard(tp,Card.IsSpellTrap,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,ct,nil)
+		local g=Duel.SelectMatchingCard(tp,Card.IsActionalTrap,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,ct,nil)
 		if #g>0 then
 			Duel.HintSelection(g)
 			Duel.Destroy(g,REASON_EFFECT)

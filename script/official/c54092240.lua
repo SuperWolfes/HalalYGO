@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Search 1 non-Normal Spell that mentions "Adventurer Token"
+	--Search 1 non-Normal Actional that mentions "Adventurer Token"
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -71,7 +71,7 @@ function s.splimit(e,c)
 	return not (c:IsCode(TOKEN_ADVENTURER) or (c:ListsCode(TOKEN_ADVENTURER) and c:IsMonster()))
 end
 function s.thfilter(c)
-	return c:IsSpell() and not c:IsNormalSpell() and c:ListsCode(TOKEN_ADVENTURER) and c:IsAbleToHand()
+	return c:IsActional() and not c:IsNormalActional() and c:ListsCode(TOKEN_ADVENTURER) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

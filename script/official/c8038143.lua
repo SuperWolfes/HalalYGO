@@ -55,7 +55,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		if tgp~=tp and (te:IsMonsterEffect() or te:IsHasType(EFFECT_TYPE_ACTIVATE)) and Duel.NegateActivation(i) then
 			local tc=te:GetHandler()
 			if tc:IsRelateToEffect(e) and tc:IsRelateToEffect(te) and not tc:IsHasEffect(EFFECT_CANNOT_TO_DECK) and Duel.IsPlayerCanSendtoDeck(tp,tc) then
-				tc:CancelToGrave()
+				tc:CancelToRest()
 				dg:AddCard(tc)
 			end
 		end

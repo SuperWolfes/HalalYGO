@@ -1,8 +1,8 @@
 --創星神 sophia
---Sophia, Goddess of Rebirth
+--Sophia, Monsterdess of Rebirth
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -39,7 +39,7 @@ function s.spfilter(c,tpe)
 	return c:IsFaceup() and c:IsType(tpe) and c:IsAbleToRemoveAsCost()
 end
 function s.rescon(sg,e,tp,mg)
-	return aux.ChkfMMZ(1)(sg,e,tp,mg) and sg:IsExists(s.chk,1,nil,sg,Group.CreateGroup(),TYPE_RITUAL,TYPE_FUSION,TYPE_SYNCHRO,TYPE_XYZ)
+	return aux.ChkfMMZ(1)(sg,e,tp,mg) and sg:IsExists(s.chk,1,nil,sg,Group.CreateGroup(),TYPE_LOCKED,TYPE_FUSION,TYPE_SYNCHRO,TYPE_XYZ)
 end
 function s.chk(c,sg,g,tpe,...)
 	if not c:IsType(tpe) then return false end
@@ -56,7 +56,7 @@ end
 function s.spcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
-	local g1=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE,LOCATION_MZONE,nil,TYPE_RITUAL)
+	local g1=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE,LOCATION_MZONE,nil,TYPE_LOCKED)
 	local g2=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE,LOCATION_MZONE,nil,TYPE_FUSION)
 	local g3=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE,LOCATION_MZONE,nil,TYPE_SYNCHRO)
 	local g4=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE,LOCATION_MZONE,nil,TYPE_XYZ)
@@ -68,7 +68,7 @@ function s.spcon(e,c)
 		and aux.SelectUnselectGroup(g,e,tp,4,4,s.rescon,0)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,c)
-	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE,LOCATION_MZONE,nil,TYPE_RITUAL+TYPE_FUSION+TYPE_SYNCHRO+TYPE_XYZ)
+	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE,LOCATION_MZONE,nil,TYPE_LOCKED+TYPE_FUSION+TYPE_SYNCHRO+TYPE_XYZ)
 	local sg=aux.SelectUnselectGroup(g,e,tp,4,4,s.rescon,1,tp,HINTMSG_REMOVE,nil,nil,true)
 	if #sg==4 then
 		sg:KeepAlive()

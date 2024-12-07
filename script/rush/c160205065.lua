@@ -1,5 +1,5 @@
 --天の選別
---Heavenly Selection
+--Spectrumly Selection
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -22,13 +22,13 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return lvl>9
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	local dg=Duel.GetMatchingGroup(Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,nil)
+	local dg=Duel.GetMatchingGroup(Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,nil)
 	if chk==0 then return #dg>0 end
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,dg,1,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Effect
-	local dg=Duel.GetMatchingGroup(Card.IsSpellTrap,tp,0,LOCATION_ONFIELD,nil)
+	local dg=Duel.GetMatchingGroup(Card.IsActionalTrap,tp,0,LOCATION_ONFIELD,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local sg=dg:Select(tp,1,1,nil)
 	Duel.HintSelection(sg)

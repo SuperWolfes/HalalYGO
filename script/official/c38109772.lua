@@ -35,8 +35,8 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return false
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetLabelObject():FilterCount(Card.IsAbleToGraveAsCost,nil)==e:GetLabelObject():GetCount() end
-	Duel.SendtoGrave(e:GetLabelObject(),REASON_COST)
+	if chk==0 then return e:GetLabelObject():FilterCount(Card.IsAbleToRestAsCost,nil)==e:GetLabelObject():GetCount() end
+	Duel.SendtoRest(e:GetLabelObject(),REASON_COST)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then

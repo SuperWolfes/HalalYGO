@@ -1,5 +1,5 @@
 --珠の御巫 フゥリ
---Hu-Li the Jewel Mikanko
+--Hu-Li the Jewel Sibango
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	local e3=e2:Clone()
 	e3:SetCode(EFFECT_REFLECT_BATTLE_DAMAGE)
 	c:RegisterEffect(e3)
-	--Opponent cannot target "Mikanko" cards
+	--Opponent cannot target "Sibango" cards
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_FIELD)
 	e4:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
@@ -27,10 +27,10 @@ function s.initial_effect(c)
 	e4:SetRange(LOCATION_MZONE)
 	e4:SetTargetRange(LOCATION_ONFIELD,0)
 	e4:SetCondition(s.immcon)
-	e4:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,SET_MIKANKO))
+	e4:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,SET_SIBANGO))
 	e4:SetValue(aux.tgoval)
 	c:RegisterEffect(e4)
-	--Search 1 "Mikanko" Trap
+	--Search 1 "Sibango" Trap
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(id,0))
 	e5:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -42,7 +42,7 @@ function s.initial_effect(c)
 	e5:SetOperation(s.thop)
 	c:RegisterEffect(e5)
 end
-s.listed_series={SET_MIKANKO}
+s.listed_series={SET_SIBANGO}
 function s.eqcon(e)
 	return e:GetHandler():GetEquipCount()>0
 end
@@ -50,7 +50,7 @@ function s.immcon(e)
 	return Duel.IsExistingMatchingCard(Card.IsType,e:GetHandlerPlayer(),LOCATION_STZONE,0,1,nil,TYPE_EQUIP)
 end
 function s.thfilter(c)
-	return c:IsSetCard(SET_MIKANKO) and c:IsTrap() and c:IsAbleToHand()
+	return c:IsSetCard(SET_SIBANGO) and c:IsTrap() and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

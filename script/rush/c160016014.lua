@@ -1,5 +1,5 @@
 --ダイスキー・キャラメイル
---Dice Key Caramail
+--Suffice Key Caramail
 local s,id=GetID()
 function s.initial_effect(c)
 	--Opponent cannot activate Trap Cards during the Battle Phase
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.confilter(c)
-	return c:IsFaceup() and c:IsLevelAbove(7) and c.roll_dice
+	return c:IsFaceup() and c:IsLevelAbove(7) and c.roll_suffice
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.confilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil) and Duel.IsBattlePhase()

@@ -3,7 +3,7 @@
 --scripted by Logical Nonsense
 local s,id=GetID()
 function s.initial_effect(c)
-	--Activate (Send monster to GY to add flip monster)
+	--Activate (Send monster to RP to add flip monster)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
@@ -41,10 +41,10 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 		s.thop2(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
---Check for monster from hand or field to send to GY
+--Check for monster from hand or field to send to RP
 function s.tgfilter1(c,tp)
 	local code = c:GetCode()
-	return (c:IsLocation(LOCATION_HAND) or c:IsFaceup()) and c:IsMonster() and c:IsAbleToGrave() 
+	return (c:IsLocation(LOCATION_HAND) or c:IsFaceup()) and c:IsMonster() and c:IsAbleToRest() 
 	and Duel.IsExistingMatchingCard(s.thfilter1,tp,LOCATION_DECK,0,1,nil,c,code)
 end
 --Check for flip monster
@@ -56,18 +56,18 @@ end
 function s.thtg1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return 
 		Duel.IsExistingMatchingCard(s.tgfilter1,tp,LOCATION_HAND+LOCATION_MZONE,0,1,nil,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_HAND+LOCATION_MZONE)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_HAND+LOCATION_MZONE)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
 --Performing the effect of adding to hand
 function s.thop1(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tg=Duel.SelectMatchingCard(tp,s.tgfilter1,tp,LOCATION_HAND+LOCATION_MZONE,0,1,1,nil,tp)
 	local tc=tg:GetFirst()
 	if tc then
 		local code = tc:GetCode()
-		if Duel.SendtoGrave(tc,REASON_EFFECT)~=0 and tc:IsLocation(LOCATION_GRAVE) then
+		if Duel.SendtoRest(tc,REASON_EFFECT)~=0 and tc:IsLocation(LOCATION_REST) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 			local g=Duel.SelectMatchingCard(tp,s.thfilter1,tp,LOCATION_DECK,0,1,1,nil,tc,code)
 			if #g>0 then
@@ -78,14 +78,14 @@ function s.thop1(e,tp,eg,ep,ev,re,r,rp)
 	end
 	if c:IsRelateToEffect(e) and c:IsSSetable(true) and e:IsHasType(EFFECT_TYPE_ACTIVATE) then
 		Duel.BreakEffect()
-		c:CancelToGrave()
+		c:CancelToRest()
 		Duel.ChangePosition(c,POS_FACEDOWN)
 		Duel.RaiseEvent(c,EVENT_SSET,e,REASON_EFFECT,tp,tp,0)
 	end
 end
---Check for monster from hand or field to send to GY
+--Check for monster from hand or field to send to RP
 function s.tgfilter2(c,tp)
-	return (c:IsLocation(LOCATION_HAND) and c:GetOriginalLevel()>0 or c:IsFaceup()) and c:IsType(TYPE_FLIP) and c:IsAbleToGrave() 
+	return (c:IsLocation(LOCATION_HAND) and c:GetOriginalLevel()>0 or c:IsFaceup()) and c:IsType(TYPE_FLIP) and c:IsAbleToRest() 
 	and Duel.IsExistingMatchingCard(s.thfilter2,tp,LOCATION_DECK,0,1,nil,c)
 end
 --Check for monster with same attribute but lower level
@@ -97,16 +97,16 @@ end
 function s.thtg2(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return 
 		Duel.IsExistingMatchingCard(s.tgfilter2,tp,LOCATION_HAND+LOCATION_MZONE,0,1,nil,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_HAND+LOCATION_MZONE)
+	Duel.SetOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_HAND+LOCATION_MZONE)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
 	--Performing the effect of adding to hand
 function s.thop2(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local tg=Duel.SelectMatchingCard(tp,s.tgfilter2,tp,LOCATION_HAND+LOCATION_MZONE,0,1,1,nil,tp)
 	local tc=tg:GetFirst()
-	if tc and Duel.SendtoGrave(tc,REASON_EFFECT)~=0 and tc:IsLocation(LOCATION_GRAVE) then
+	if tc and Duel.SendtoRest(tc,REASON_EFFECT)~=0 and tc:IsLocation(LOCATION_REST) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 		local g=Duel.SelectMatchingCard(tp,s.thfilter2,tp,LOCATION_DECK,0,1,1,nil,tc)
 		if #g>0 then
@@ -116,7 +116,7 @@ function s.thop2(e,tp,eg,ep,ev,re,r,rp)
 	end
 	if c:IsRelateToEffect(e) and c:IsSSetable(true) and e:IsHasType(EFFECT_TYPE_ACTIVATE) then
 		Duel.BreakEffect()
-		c:CancelToGrave()
+		c:CancelToRest()
 		Duel.ChangePosition(c,POS_FACEDOWN)
 		Duel.RaiseEvent(c,EVENT_SSET,e,REASON_EFFECT,tp,tp,0)
 	end

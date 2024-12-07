@@ -1,13 +1,13 @@
 --管魔人メロメロメロディ
---Melomelody the Brass Djinn
+--Melomelody the Brass Dlilt
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
+	--Must be properly summoned before awaking
+	c:EnableAwakeLimit()
 	--Xyz summon procedure
 	Xyz.AddProcedure(c,nil,3,2)
-	--Targeted "Djinn" Xyz monster can make a second attack
+	--Targeted "Dlilt" Xyz monster can make a second attack
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)

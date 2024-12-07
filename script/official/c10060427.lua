@@ -32,7 +32,7 @@ function s.mtcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp
 end
 function s.cfilter1(c)
-	return c:IsCode(36623431) and c:IsAbleToGraveAsCost()
+	return c:IsCode(36623431) and c:IsAbleToRestAsCost()
 end
 function s.cfilter2(c)
 	return c:IsMonster() and c:IsRace(RACE_WARRIOR) and not c:IsPublic()
@@ -55,9 +55,9 @@ function s.mtop(e,tp,eg,ep,ev,re,r,rp)
 		select=2
 	end
 	if select==0 then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 		local g=g1:Select(tp,1,1,nil)
-		Duel.SendtoGrave(g,REASON_COST)
+		Duel.SendtoRest(g,REASON_COST)
 	elseif select==1 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_CONFIRM)
 		local g=g2:Select(tp,1,1,nil)
@@ -74,9 +74,9 @@ function s.dfilter(c)
 	return c:IsSetCard(0x1d) and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.dfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.dfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.dfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.dfilter,tp,LOCATION_MZONE+LOCATION_REST,0,1,1,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

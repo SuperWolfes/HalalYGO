@@ -31,13 +31,13 @@ function s.sumlimit(e)
 	return not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,95638658),e:GetHandlerPlayer(),LOCATION_ONFIELD,0,1,nil)
 end
 function s.costfilter(c,ec)
-	return c:IsFaceup() and c:GetEquipTarget()==ec and c:IsAbleToGraveAsCost()
+	return c:IsFaceup() and c:GetEquipTarget()==ec and c:IsAbleToRestAsCost()
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_SZONE,0,1,nil,e:GetHandler()) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_SZONE,0,1,1,nil,e:GetHandler())
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) end

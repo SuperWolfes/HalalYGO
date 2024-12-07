@@ -23,14 +23,14 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	return true
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,e:GetHandler())
+	local g=Duel.GetMatchingGroup(Card.IsAbleToRestAsCost,tp,LOCATION_HAND,0,e:GetHandler())
 	if chk==0 then 
 		if e:GetLabel()~=1 then return false end
 		e:SetLabel(0)
 		return aux.SelectUnselectGroup(g,e,tp,1,3,s.costchk,0) 
 	end
-	local sg=aux.SelectUnselectGroup(g,e,tp,1,3,s.costchk,1,tp,HINTMSG_TOGRAVE)
-	local ct=Duel.SendtoGrave(sg,REASON_COST)
+	local sg=aux.SelectUnselectGroup(g,e,tp,1,3,s.costchk,1,tp,HINTMSG_TOREST)
+	local ct=Duel.SendtoRest(sg,REASON_COST)
 	e:SetLabel(ct)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,ct)
 end

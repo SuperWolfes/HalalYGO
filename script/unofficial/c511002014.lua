@@ -4,7 +4,7 @@ Duel.LoadScript("c420.lua")
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx2(Card.IsSky),aux.FilterBoolFunctionEx2(Card.IsEarth))
 	--pierce
 	local e1=Effect.CreateEffect(c)

@@ -52,8 +52,8 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetValue(ct2*500)
 	e1:SetReset(RESETS_STANDARD_PHASE_END)
 	c:RegisterEffect(e1)
-	if c:IsAbleToGrave() and Duel.IsPlayerCanDraw(tp,1) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
-		if Duel.SendtoGrave(c,REASON_EFFECT)>0 then
+	if c:IsAbleToRest() and Duel.IsPlayerCanDraw(tp,1) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+		if Duel.SendtoRest(c,REASON_EFFECT)>0 then
 			Duel.Draw(tp,1,REASON_EFFECT)
 		end
 	end

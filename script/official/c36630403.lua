@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e1:SetRange(LOCATION_GRAVE)
+	e1:SetRange(LOCATION_REST)
 	e1:SetCountLimit(1,id)
 	e1:SetCondition(aux.exccon)
 	e1:SetTarget(s.target)
@@ -15,20 +15,20 @@ function s.initial_effect(c)
 end
 function s.filter1(c,e,tp,lv)
 	local clv=c:GetLevel()
-	return clv>0 and not c:IsType(TYPE_TUNER) and c:IsRace(RACE_ZOMBIE) and c:IsAbleToRemove()
+	return clv>0 and not c:IsType(TYPE_TUNER) and c:IsRace(RACE_TOXIC) and c:IsAbleToRemove()
 		and Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_EXTRA,0,1,nil,e,tp,lv+clv)
 end
 function s.filter2(c,e,tp,lv)
-	return c:GetLevel()==lv and c:IsRace(RACE_ZOMBIE) and c:IsType(TYPE_SYNCHRO) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0
+	return c:GetLevel()==lv and c:IsRace(RACE_TOXIC) and c:IsType(TYPE_SYNCHRO) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.filter1(chkc,e,tp,e:GetHandler():GetLevel()) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and s.filter1(chkc,e,tp,e:GetHandler():GetLevel()) end
 	if chk==0 then return not Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(),69832741) 
 		and e:GetHandler():IsAbleToRemove()
-		and Duel.IsExistingTarget(s.filter1,tp,LOCATION_GRAVE,0,1,nil,e,tp,e:GetHandler():GetLevel()) end
+		and Duel.IsExistingTarget(s.filter1,tp,LOCATION_REST,0,1,nil,e,tp,e:GetHandler():GetLevel()) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectTarget(tp,s.filter1,tp,LOCATION_GRAVE,0,1,1,nil,e,tp,e:GetHandler():GetLevel())
+	local g=Duel.SelectTarget(tp,s.filter1,tp,LOCATION_REST,0,1,1,nil,e,tp,e:GetHandler():GetLevel())
 	g:AddCard(e:GetHandler())
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,2,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)

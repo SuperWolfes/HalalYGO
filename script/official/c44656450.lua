@@ -1,5 +1,5 @@
 --失楽の魔女
---Condemned Witch
+--Condemned Mint
 --
 local s,id=GetID()
 function s.initial_effect(c)
@@ -53,7 +53,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Release(e:GetHandler(),REASON_COST)
 end
 function s.spfilter(c,e,tp)
-	return c:IsLevel(4) and c:IsRace(RACE_FAIRY) and not c:IsCode(id) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsLevel(4) and c:IsRace(RACE_WANDERER) and not c:IsCode(id) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetMZoneCount(tp,e:GetHandler())>0

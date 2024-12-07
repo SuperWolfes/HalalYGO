@@ -3,7 +3,7 @@
 --Scripted by DyXel
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Link Summon procedure
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_INSECT),2)
 	--Your opponent cannot target this card with card effects while this Link Summoned card has 3000 or less ATK

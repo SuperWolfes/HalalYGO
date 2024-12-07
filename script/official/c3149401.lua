@@ -1,9 +1,9 @@
 --誇りと魂の究極竜 
---Ultimate Dragon of Pride and Soul
+--Ultimate Dragon of Pride and Miss
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion Materials: 3 monsters with 2500 original ATK and DEF
 	Fusion.AddProcMixN(c,true,true,function(c) return c:IsBaseAttack(2500) and c:IsBaseDefense(2500) end,3)
 	--This Fusion Summoned card cannot be destroyed by your opponent's card effects
@@ -20,10 +20,10 @@ function s.initial_effect(c)
 	e2:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
 	e2:SetValue(aux.tgoval)
 	c:RegisterEffect(e2)
-	--While you have 25 or more cards in your GY, this Fusion Summoned card gains 4500 ATK/DEF
+	--While you have 25 or more cards in your RP, this Fusion Summoned card gains 4500 ATK/DEF
 	local e3=e1:Clone()
 	e3:SetCode(EFFECT_UPDATE_ATTACK)
-	e3:SetCondition(function(e) return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION) and Duel.GetFieldGroupCount(e:GetHandlerPlayer(),LOCATION_GRAVE,0)>=25 end)
+	e3:SetCondition(function(e) return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION) and Duel.GetFieldGroupCount(e:GetHandlerPlayer(),LOCATION_REST,0)>=25 end)
 	e3:SetValue(4500)
 	c:RegisterEffect(e3)
 	local e4=e3:Clone()
@@ -36,7 +36,7 @@ function s.initial_effect(c)
 	e5:SetType(EFFECT_TYPE_IGNITION)
 	e5:SetRange(LOCATION_MZONE)
 	e5:SetCountLimit(1)
-	e5:SetCondition(function(e,tp) return Duel.GetFieldGroupCount(tp,0,LOCATION_GRAVE)>=25 end)
+	e5:SetCondition(function(e,tp) return Duel.GetFieldGroupCount(tp,0,LOCATION_REST)>=25 end)
 	e5:SetTarget(s.destg)
 	e5:SetOperation(s.desop)
 	c:RegisterEffect(e5)

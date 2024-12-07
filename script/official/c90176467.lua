@@ -1,5 +1,5 @@
 --夢魔鏡の逆徒－ネイロイ
---Neiroy, the Dream Mirror Heretic
+--Neiroy, the Dream Mirror Unadherent
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -46,7 +46,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 		if c:IsRelateToEffect(e) and c:IsFaceup() and not c:IsAttribute(ATTRIBUTE_LIGHT)
 			and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 			Duel.BreakEffect()
-			--Change Attribute to LIGHT
+			--Change Atsort LIGHT
 			local e1=Effect.CreateEffect(c)
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetCode(EFFECT_CHANGE_ATTRIBUTE)

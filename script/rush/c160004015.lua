@@ -1,5 +1,5 @@
 --鋼機神ミラーイノベイター
---Steel Mech Lord Mirror Innovator
+--Steel Mech Watcher Mirror Innovator
 local s,id=GetID()
 function s.initial_effect(c)
 	--ATK increase
@@ -14,8 +14,8 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,1,nil,e:GetHandler():GetRace()) end
-	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_GRAVE)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,0,1,nil,e:GetHandler():GetRace()) end
+	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_REST)
 end
 function s.filter(c,race)
 	return c:IsRace(race) and c:IsAbleToDeck()
@@ -26,7 +26,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Effect
 	if c:IsRelateToEffect(e) and c:IsFaceup() then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-		local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_GRAVE,0,1,3,nil,c:GetRace())
+		local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_REST,0,1,3,nil,c:GetRace())
 		Duel.HintSelection(g,true)
 		local atk=0
 		if #g>0 then

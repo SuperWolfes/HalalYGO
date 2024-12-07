@@ -15,7 +15,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:GetFirst():IsControler(1-tp)
 end
 function s.cfilter(c)
-	return c:IsSetCard(0x18) and c:IsAbleToGraveAsCost()
+	return c:IsSetCard(0x18) and c:IsAbleToRestAsCost()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(1)
@@ -26,9 +26,9 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 		if e:GetLabel()~=1 then return false end
 		e:SetLabel(0)
 		return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_MZONE,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	local atk=g:GetFirst():GetTextAttack()
 	if atk<0 then atk=0 end
 	Duel.SetTargetParam(atk)

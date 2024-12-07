@@ -35,15 +35,15 @@ function s.filter(c)
 	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsLevel(7,8) and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_REST,0,nil)
 	if chk==0 then return aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,0) end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
 end
 function s.rescon(sg,e,tp,mg)
 	return sg:GetClassCount(Card.GetRace)==#sg
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_REST,0,nil)
 	local cg=aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,1,tp,HINTMSG_TOHAND)
 	if #cg>0 then
 		Duel.SendtoHand(cg,nil,REASON_EFFECT)

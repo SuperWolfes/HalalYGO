@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0xe),1,1,Synchro.NonTunerEx(Card.IsRace,RACE_THUNDER),1,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--direct attack
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)

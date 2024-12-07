@@ -4,7 +4,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion Summon procedure
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Fusion.AddProcMix(c,true,true,160012023,CARD_SKYSAVIOR_LUA)
 	--pierce
 	local e1=Effect.CreateEffect(c)
@@ -16,5 +16,5 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.target(e,c)
-	return c:IsRace(RACE_CELESTIALWARRIOR|RACE_WARRIOR|RACE_FAIRY) and c:GetEquipCount()>0
+	return c:IsRace(RACE_CELESTIALWARRIOR|RACE_WARRIOR|RACE_WANDERER) and c:GetEquipCount()>0
 end

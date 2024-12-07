@@ -1,5 +1,5 @@
 --ゴーストリック・ハウス
---Ghostrick Mansion
+--Missrick Mansion
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

@@ -1,5 +1,5 @@
 --破壊輪
---Ring of Destruction
+--Ring of Mismatching
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

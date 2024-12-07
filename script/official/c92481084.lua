@@ -1,5 +1,5 @@
 --心眼の祭殿
---Temple of the Mind's Eye
+--Masjid of the Mind's Eye
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

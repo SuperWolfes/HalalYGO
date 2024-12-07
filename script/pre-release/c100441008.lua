@@ -3,7 +3,7 @@
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
-	--Add 1 "Fairy Tale Prologue: Journey's Dawn" from your Deck to your hand, or, if "Fairy Tale Prologue: Journey's Dawn" is on your field or in your GY, you can draw 1 card instead
+	--Add 1 "Wanderer Tale Prologue: Journey's Dawn" from your Deck to your hand, or, if "Wanderer Tale Prologue: Journey's Dawn" is on your field or in your RP, you can draw 1 card instead
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_DRAW)
@@ -35,20 +35,20 @@ function s.initial_effect(c)
 	e4:SetOperation(s.atkop)
 	c:RegisterEffect(e4)
 end
-s.listed_names={CARD_FAIRY_TALE_PROLOGUE}
+s.listed_names={CARD_WANDERER_TALE_PROLOGUE}
 function s.thfilter(c)
-	return c:IsCode(CARD_FAIRY_TALE_PROLOGUE) and c:IsAbleToHand()
+	return c:IsCode(CARD_WANDERER_TALE_PROLOGUE) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil)
-		or (Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_FAIRY_TALE_PROLOGUE),tp,LOCATION_ONFIELD|LOCATION_GRAVE,0,1,nil)
+		or (Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_WANDERER_TALE_PROLOGUE),tp,LOCATION_ONFIELD|LOCATION_REST,0,1,nil)
 		and Duel.IsPlayerCanDraw(tp,1)) end
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local search_chk=Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil)
-	local draw_chk=Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_FAIRY_TALE_PROLOGUE),tp,LOCATION_ONFIELD|LOCATION_GRAVE,0,1,nil)
+	local draw_chk=Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_WANDERER_TALE_PROLOGUE),tp,LOCATION_ONFIELD|LOCATION_REST,0,1,nil)
 		and Duel.IsPlayerCanDraw(tp,1)
 	if search_chk and not (draw_chk and Duel.SelectYesNo(tp,aux.Stringid(id,2))) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)

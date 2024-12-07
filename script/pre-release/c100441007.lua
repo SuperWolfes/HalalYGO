@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e3)
 end
-s.listed_names={CARD_FAIRY_TALE_PROLOGUE} --"Fairy Tale Prologue: Journey's Dawn"
+s.listed_names={CARD_WANDERER_TALE_PROLOGUE} --"Wanderer Tale Prologue: Journey's Dawn"
 function s.spcon(e,c)
 	if c==nil then return true end
 	return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
@@ -39,7 +39,7 @@ function s.thfilter(c)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil)
-		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_FAIRY_TALE_PROLOGUE),tp,LOCATION_ONFIELD|LOCATION_GRAVE,0,1,nil) end
+		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_WANDERER_TALE_PROLOGUE),tp,LOCATION_ONFIELD|LOCATION_REST,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)

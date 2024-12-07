@@ -3,7 +3,7 @@
 --Scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Add "Magistus" Spell/Trap to the hand or return 1 Spellcaster to the GY
+	--Add "Magistus" Actional/Trap to the hand or return 1 Mentor to the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
@@ -16,12 +16,12 @@ function s.initial_effect(c)
 	local e2=e1:Clone()
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e2)
-	--Equip from grave
+	--Equip from rest
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,3))
 	e3:SetCategory(CATEGORY_EQUIP)
 	e3:SetType(EFFECT_TYPE_IGNITION)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REST)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e3:SetCountLimit(1,{id,1})
 	e3:SetCost(aux.bfgcost)
@@ -31,10 +31,10 @@ function s.initial_effect(c)
 end
 s.listed_series={0x152}
 function s.schfilter(c)
-	return c:IsSetCard(0x152) and c:IsSpellTrap() and c:IsAbleToHand()
+	return c:IsSetCard(0x152) and c:IsActionalTrap() and c:IsAbleToHand()
 end
 function s.tgfilter(c)
-	return c:IsRace(RACE_SPELLCASTER) and c:IsLevelBelow(4) and c:IsFaceup()
+	return c:IsRace(RACE_MENTOR) and c:IsLevelBelow(4) and c:IsFaceup()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -60,8 +60,8 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 		Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 	else
 		local g=Duel.GetMatchingGroup(s.tgfilter,tp,LOCATION_REMOVED,0,nil)
-		e:SetCategory(CATEGORY_TOGRAVE)
-		Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,g,1,0,0)
+		e:SetCategory(CATEGORY_TOREST)
+		Duel.SetOperationInfo(0,CATEGORY_TOREST,g,1,0,0)
 	end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
@@ -78,7 +78,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		if Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_REMOVED,0,1,nil) then
 			local tg=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_REMOVED,0,1,1,nil)
 			if #tg>0 then
-				Duel.SendtoGrave(tg,REASON_EFFECT+REASON_RETURN)
+				Duel.SendtoRest(tg,REASON_EFFECT+REASON_RETURN)
 			end
 		end
 	end
@@ -91,17 +91,17 @@ function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and chkc:IsFaceup() and chkc:IsSetCard(0x152) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
 		and Duel.IsExistingTarget(aux.FaceupFilter(Card.IsSetCard,0x152),tp,LOCATION_MZONE,0,1,nil)
-		and Duel.IsExistingMatchingCard(s.eqfilter,tp,LOCATION_GRAVE,0,1,c) end
+		and Duel.IsExistingMatchingCard(s.eqfilter,tp,LOCATION_REST,0,1,c) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 	Duel.SelectTarget(tp,aux.FaceupFilter(Card.IsSetCard,0x152),tp,LOCATION_MZONE,0,1,1,nil)
-	Duel.SetOperationInfo(0,CATEGORY_EQUIP,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_EQUIP,nil,1,tp,LOCATION_REST)
 end
 function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not (tc:IsRelateToEffect(e) and tc:IsFaceup() and tc:IsLocation(LOCATION_MZONE)
 		and Duel.GetLocationCount(tp,LOCATION_SZONE)>0) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-	local ec=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.eqfilter),tp,LOCATION_GRAVE,0,1,1,nil):GetFirst()
+	local ec=Duel.SelectMatchingCard(tp,aux.RestValleyFilter(s.eqfilter),tp,LOCATION_REST,0,1,1,nil):GetFirst()
 	if ec then
 		Duel.Equip(tp,ec,tc,true)
 		local e1=Effect.CreateEffect(e:GetHandler())

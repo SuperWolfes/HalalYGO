@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetRange(LOCATION_HAND)
 	e1:SetCost(s.reg)
 	c:RegisterEffect(e1)
-	--Add 1 pendulum monster, that is banished or in GY, to face-up extra deck
+	--Add 1 pendulum monster, that is banished or in RP, to face-up extra deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetType(EFFECT_TYPE_IGNITION)
@@ -49,16 +49,16 @@ function s.tecon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetFlagEffect(id)>0
 end
 function s.tefilter(c)
-	return (c:IsFaceup() or c:IsLocation(LOCATION_GRAVE)) and c:IsType(TYPE_PENDULUM)
-		and not c:IsCode(id) and not c:IsForbidden()
+	return (c:IsFaceup() or c:IsLocation(LOCATION_REST)) and c:IsType(TYPE_PENDULUM)
+		and not c:IsCode(id) and not c:IsUnliked()
 end
 function s.tetg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE+LOCATION_REMOVED) and chkc:IsControler(tp) and s.tefilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.tefilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_REST+LOCATION_REMOVED) and chkc:IsControler(tp) and s.tefilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.tefilter,tp,LOCATION_REST+LOCATION_REMOVED,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,1))
-	local g=Duel.SelectTarget(tp,s.tefilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,1,nil)
-	if g:GetFirst():IsLocation(LOCATION_GRAVE) then
-		Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,0,0)
+	local g=Duel.SelectTarget(tp,s.tefilter,tp,LOCATION_REST+LOCATION_REMOVED,0,1,1,nil)
+	if g:GetFirst():IsLocation(LOCATION_REST) then
+		Duel.SetOperationInfo(0,CATEGORY_LEAVE_REST,g,1,0,0)
 	end
 end
 function s.teop(e,tp,eg,ep,ev,re,r,rp)

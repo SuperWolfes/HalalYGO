@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,aux.FilterSummonCode(68505803),1,1,Synchro.NonTunerEx(Card.IsAttribute,ATTRIBUTE_WATER),1,99)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--recover
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -25,7 +25,7 @@ function s.reccon(e,tp,eg,ep,ev,re,r,rp)
 	if ev==1 then t=Duel.GetAttacker() end
 	if not c:IsRelateToBattle() or c:IsFacedown() then return false end
 	e:SetLabel(t:GetAttack())
-	return t:GetLocation()==LOCATION_GRAVE and t:IsMonster()
+	return t:GetLocation()==LOCATION_REST and t:IsMonster()
 end
 function s.rectg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

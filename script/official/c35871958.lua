@@ -1,9 +1,9 @@
 --ゴーストリック・フェスティバル
---Ghostrick Festival
+--Missrick Festival
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	Link.AddProcedure(c,s.matfilter,1,1)
 	--extra mat
 	local e0=Effect.CreateEffect(c)

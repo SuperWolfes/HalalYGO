@@ -1,5 +1,5 @@
 --ハイドランダー・オービット
---Hydralander Orbit
+--Hyddenlander Orbit
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_TODECK)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCountLimit(1,{id,1})
 	e2:SetCost(aux.bfgcost)
 	e2:SetTarget(s.tdtg)
@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.excon(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_REST,0,nil)
 	return #g>=4 and g:GetClassCount(Card.GetCode)==#g
 end
 function s.excost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -39,7 +39,7 @@ function s.excost(e,tp,eg,ep,ev,re,r,rp,chk)
 end 
 function s.extg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
-		local ct=Duel.GetMatchingGroupCount(Card.IsMonster,tp,LOCATION_GRAVE,0,nil)
+		local ct=Duel.GetMatchingGroupCount(Card.IsMonster,tp,LOCATION_REST,0,nil)
 		if ct>0 then
 			local g=Duel.GetDecktopGroup(tp,ct)
 			local result=g:FilterCount(Card.IsAbleToHand,nil)>0
@@ -49,7 +49,7 @@ function s.extg(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 end
 function s.exop(e,tp,eg,ep,ev,re,r,rp)
-	local ct=Duel.GetMatchingGroupCount(Card.IsMonster,tp,LOCATION_GRAVE,0,nil)
+	local ct=Duel.GetMatchingGroupCount(Card.IsMonster,tp,LOCATION_REST,0,nil)
 	if ct==0 then return end
 	Duel.ConfirmDecktop(tp,ct)
 	local g=Duel.GetDecktopGroup(tp,ct)
@@ -64,7 +64,7 @@ function s.exop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.ConfirmCards(1-tp,sg)
 			Duel.ShuffleHand(tp)
 		else
-			Duel.SendtoGrave(sg,REASON_RULE)
+			Duel.SendtoRest(sg,REASON_RULE)
 		end
 		ct=ct-1
 	end
@@ -74,10 +74,10 @@ function s.tdfilter(c)
 	return c:IsMonster() and c:IsAbleToDeck()
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.tdfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.tdfilter,tp,LOCATION_GRAVE,0,1,e:GetHandler()) end
+	if chkc then return chkc:IsLocation(LOCATION_REST) and chkc:IsControler(tp) and s.tdfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.tdfilter,tp,LOCATION_REST,0,1,e:GetHandler()) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectTarget(tp,s.tdfilter,tp,LOCATION_GRAVE,0,1,1,e:GetHandler())
+	local g=Duel.SelectTarget(tp,s.tdfilter,tp,LOCATION_REST,0,1,1,e:GetHandler())
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,1,0,0)
 end
 function s.tdop(e,tp,eg,ep,ev,re,r,rp)

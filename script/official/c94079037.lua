@@ -33,7 +33,7 @@ function s.valcon(e,re,r,rp)
 	return (r&REASON_BATTLE)~=0
 end
 function s.drcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_GRAVE) and r==REASON_SYNCHRO
+	return e:GetHandler():IsLocation(LOCATION_REST) and r==REASON_SYNCHRO
 		and e:GetHandler():GetReasonCard():IsRace(RACE_BEAST)
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)

@@ -21,11 +21,11 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local ac=Duel.GetChainInfo(0,CHAININFO_TARGET_PARAM)
 	e:GetHandler():SetHint(CHINT_CARD,ac)
-	--forbidden
+	--unliked
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_SET_AVAILABLE)
-	e1:SetCode(EFFECT_FORBIDDEN)
+	e1:SetCode(EFFECT_UNLIKED)
 	e1:SetTargetRange(0x7f,0x7f)
 	e1:SetTarget(s.bantg)
 	e1:SetLabel(ac)

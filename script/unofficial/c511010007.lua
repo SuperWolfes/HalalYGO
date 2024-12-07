@@ -3,7 +3,7 @@
 Duel.LoadCardScript("c82308875.lua")
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Xyz Summon procedure: 3 Level 7 monsters
 	Xyz.AddProcedure(c,nil,7,3)
 	--Cannot be destroyed by battle, except with a "Number" monster
@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2,false,REGISTER_FLAG_DETACH_XMAT)
 end
 s.xyz_number=7
-s.roll_dice=true
+s.roll_suffice=true
 s.listed_series={SET_NUMBER}
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	local bc=e:GetHandler():GetBattleTarget()
@@ -36,12 +36,12 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,0,tp,1)
+	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,1)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and c:IsFaceup() then
-		local die_result=Duel.TossDice(tp,1)
+		local die_result=Duel.TossSuffice(tp,1)
 		--This card's ATK becomes equal to its original ATK multiplied by the result, until the end of the Battle Phase
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)

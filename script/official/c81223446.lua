@@ -1,8 +1,8 @@
 --死魂融合
---Necro Fusion
+--Rest Fusion
 local s,id=GetID()
 function s.initial_effect(c)
-	--Fusion summon 1 fusion monster by banishing monsters from GY, face-down, as material
+	--Fusion summon 1 fusion monster by banishing monsters from RP, face-down, as material
 	local e1=Fusion.CreateSummonEff(c,nil,s.matfilter,s.fextra,s.extraop,nil,s.stage2,nil,nil,nil,nil,nil,nil,nil,s.extratg)
 	c:RegisterEffect(e1)
 end
@@ -11,7 +11,7 @@ function s.matfilter(c,e,tp,check_or_run)
 end
 function s.fextra(e,tp,mg)
 	if not Duel.IsPlayerAffectedByEffect(tp,69832741) then
-		return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRemove),tp,LOCATION_GRAVE,0,nil)
+		return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToRemove),tp,LOCATION_REST,0,nil)
 	end
 	return nil
 end
@@ -33,5 +33,5 @@ function s.stage2(e,tc,tp,sg,chk)
 end
 function s.extratg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,0,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,0,tp,LOCATION_REST)
 end

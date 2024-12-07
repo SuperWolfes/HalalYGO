@@ -40,10 +40,10 @@ function s.initial_effect(c)
 	e5:SetCode(EFFECT_SET_BASE_DEFENSE)
 	e5:SetValue(c:GetDefense())
 	c:RegisterEffect(e5)
-	--forbidden
+	--unliked
 	local e6=Effect.CreateEffect(c)
 	e6:SetType(EFFECT_TYPE_FIELD)
-	e6:SetCode(EFFECT_FORBIDDEN)
+	e6:SetCode(EFFECT_UNLIKED)
 	e6:SetRange(LOCATION_SZONE)
 	e6:SetTargetRange(LOCATION_HAND,0)
 	e6:SetCondition(function(e) return e:GetHandler():GetCardTarget():IsExists(Card.IsOriginalCodeRule,1,nil,87756343) end)
@@ -60,7 +60,7 @@ function s.initial_effect(c)
 	--spsummon
 	local e8=Effect.CreateEffect(c)
 	e8:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
-	e8:SetCode(EVENT_TO_GRAVE)
+	e8:SetCode(EVENT_TO_REST)
 	e8:SetCondition(s.spcon)
 	e8:SetOperation(s.spop)
 	c:RegisterEffect(e8)
@@ -83,7 +83,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if not c:IsRelateToEffect(e) then return end
 	local tc=Duel.GetFirstTarget()
 	if not tc or Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 or tc:IsControler(1-tp) or tc:IsFacedown() or not tc:IsRelateToEffect(e) then
-		Duel.SendtoGrave(c,REASON_EFFECT)
+		Duel.SendtoRest(c,REASON_EFFECT)
 		return
 	end
 	Duel.Equip(tp,c,tc,true)

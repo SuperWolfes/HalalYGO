@@ -23,9 +23,9 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	--Requirement
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_MZONE,0,1,1,c)
-	if Duel.SendtoGrave(g,REASON_COST)==0 then return end
+	if Duel.SendtoRest(g,REASON_COST)==0 then return end
 	--Effect
 	if not (c:IsRelateToEffect(e) and c:IsFaceup()) then return end
 	--Increase ATK

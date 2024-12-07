@@ -2,10 +2,10 @@
 --Crimson Dragon
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Synchro Summon procedure
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
-	--Search 1 Spell/Trap that mentions "The Crimson Dragon"
+	--Search 1 Actional/Trap that mentions "The Crimson Dragon"
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -32,7 +32,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_CRIMSON_DRAGON}
 function s.thfilter(c)
-	return c:IsSpellTrap() and c:ListsCode(CARD_CRIMSON_DRAGON) and c:IsAbleToHand()
+	return c:IsActionalTrap() and c:ListsCode(CARD_CRIMSON_DRAGON) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

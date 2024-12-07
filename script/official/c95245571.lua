@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_FREE_CHAIN)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_REST)
 	e2:SetCondition(s.gycond)
 	e2:SetCost(aux.bfgcost)
 	e2:SetTarget(s.gytg)
@@ -75,7 +75,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.GetTargetCards(e)
 	if #tg==0 then return end
-	local loc=Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_VISAS_STARFROST),tp,LOCATION_ONFIELD,0,1,nil) and LOCATION_REMOVED or LOCATION_GRAVE
+	local loc=Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_VISAS_STARFROST),tp,LOCATION_ONFIELD,0,1,nil) and LOCATION_REMOVED or LOCATION_REST
 	Duel.Destroy(tg,REASON_EFFECT,loc)
 end
 function s.gycond(e,tp,eg,ep,ev,re,r,rp)

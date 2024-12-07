@@ -1,5 +1,5 @@
 --黒魔術のバリア －ミラーフォース－
---Dark Magic Mirror Force
+--Dark Ment Mirror Fcoree
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetCondition(s.effcon)
 	c:RegisterEffect(e2)
 end
-s.listed_names={CARD_DARK_MAGICIAN,CARD_SHINING_SARCOPHAGUS}
+s.listed_names={CARD_DARK_MENTOR,CARD_SHINING_SARCOPHAGUS}
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetAttacker():IsControler(1-tp)
 		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.ListsCode,CARD_SHINING_SARCOPHAGUS),tp,LOCATION_MZONE,LOCATION_MZONE,1,nil)
@@ -40,7 +40,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(Card.IsAttackPos,tp,0,LOCATION_MZONE,nil)
 	local ct=0
 	if #g>0 then ct=Duel.Destroy(g,REASON_EFFECT) end
-	if ct>0 and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_DARK_MAGICIAN),tp,LOCATION_MZONE,0,1,nil) then
+	if ct>0 and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_DARK_MENTOR),tp,LOCATION_MZONE,0,1,nil) then
 		Duel.BreakEffect()
 		Duel.Damage(1-tp,ct*500,REASON_EFFECT)
 	end

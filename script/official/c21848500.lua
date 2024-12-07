@@ -3,7 +3,7 @@
 --Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Link materials: 3 monsters, including a "M∀LICE" monster
 	Link.AddProcedure(c,nil,3,3,s.lcheck)
 	--Shuffle 1 of your banished "M∀LICE" monsters into the Deck, and if you do, banish 1 card on the field

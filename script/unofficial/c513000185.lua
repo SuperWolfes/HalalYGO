@@ -1,5 +1,5 @@
 --ＤＴ 黒の女神ウィタカ
---Dark Tuner - Dark Goddess Witaka (Anime)
+--Dark Tuner - Dark Monsterdess Witaka (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon

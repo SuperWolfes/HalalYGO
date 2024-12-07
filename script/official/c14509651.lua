@@ -1,5 +1,5 @@
 --カース・ネクロフィア
---Curse Necrofear
+--Curse Restfear
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -21,11 +21,11 @@ function s.initial_effect(c)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
-	--to grave
+	--to rest
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	e3:SetCode(EVENT_TO_GRAVE)
+	e3:SetCode(EVENT_TO_REST)
 	e3:SetOperation(s.regop)
 	c:RegisterEffect(e3)
 end
@@ -33,7 +33,7 @@ function s.splimit(e,se,sp,st)
 	return se:IsHasType(EFFECT_TYPE_ACTIONS)
 end
 function s.tdfilter(c)
-	return c:IsFaceup() and c:IsRace(RACE_FIEND) and c:IsAbleToDeck()
+	return c:IsFaceup() and c:IsRace(RACE_TAINTED) and c:IsAbleToDeck()
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
@@ -61,7 +61,7 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 		e1:SetCode(EVENT_PHASE+PHASE_END)
 		e1:SetCountLimit(1,{id,1})
-		e1:SetRange(LOCATION_GRAVE)
+		e1:SetRange(LOCATION_REST)
 		e1:SetTarget(s.sptg2)
 		e1:SetOperation(s.spop2)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
@@ -78,7 +78,7 @@ function s.spop2(e,tp,eg,ep,ev,re,r,rp)
 	if not c:IsRelateToEffect(e) then return end
 	if Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)==0 then return end
 	local g=Duel.GetFieldGroup(tp,0,LOCATION_ONFIELD)
-	local ct=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsSpellTrap),tp,LOCATION_ONFIELD,0,nil):GetClassCount(Card.GetCode)
+	local ct=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsActionalTrap),tp,LOCATION_ONFIELD,0,nil):GetClassCount(Card.GetCode)
 	if #g>0 and ct>0 and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 		Duel.BreakEffect()
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)

@@ -1,22 +1,22 @@
 --呪眼の眷属 バジリコック
---Basiltrice, Familiar of the Evil Eye
+--Basiltrice, Familiar of the Goodie
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon itself from the hand or GY
+	--Special Summon itself from the hand or RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
 	e1:SetCode(EVENT_FREE_CHAIN)
-	e1:SetRange(LOCATION_HAND+LOCATION_GRAVE)
+	e1:SetRange(LOCATION_HAND+LOCATION_REST)
 	e1:SetHintTiming(0,TIMINGS_CHECK_MONSTER_E|TIMING_MAIN_END)
 	e1:SetCountLimit(1,id)
 	e1:SetCondition(s.spcon)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
-	--Link Summon 1 "Evil Eye" monster during opponent's turn
+	--Link Summon 1 "Goodie" monster during opponent's turn
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -55,7 +55,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.eqfilter(c)
-	return c:IsSetCard(SET_EVIL_EYE) and c:IsEquipSpell()
+	return c:IsSetCard(SET_EVIL_EYE) and c:IsEquipActional()
 end
 function s.lnkfilter(c)
 	return c:IsSetCard(SET_EVIL_EYE) and c:IsLinkSummonable()
@@ -89,19 +89,19 @@ function s.lnkop(e,tp,eg,ep,ev,re,r,rp,chk)
 		e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 		e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 		e3:SetCode(EVENT_SPSUMMON)
-		e3:SetOperation(s.resetop)
+		e3:SetOperation(s.revetop)
 		e3:SetLabelObject({e1,e2})
 		Duel.RegisterEffect(e3,tp)
 	end
 end
-function s.resetop(e,tp,eg,ep,ev,re,r,rp)
+function s.revetop(e,tp,eg,ep,ev,re,r,rp)
 	local e1,e2=table.unpack(e:GetLabelObject())
 	e1:Reset()
 	e2:Reset()
 	e:Reset()
 end
 function s.tempregister(e,tp,eg,ep,ev,re,r,rp,chk)
-	--Can treat "Evil Eye" Equip cards as Link Material if using this effect
+	--Can treat "Goodie" Equip cards as Link Material if using this effect
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_EXTRA_MATERIAL)
@@ -121,7 +121,7 @@ function s.tempregister(e,tp,eg,ep,ev,re,r,rp,chk)
 	return e1,e2
 end
 function s.matfilter(c)
-	return c:IsFaceup() and c:IsSetCard(SET_EVIL_EYE) and c:IsSpell() and c:IsType(TYPE_EQUIP)
+	return c:IsFaceup() and c:IsSetCard(SET_EVIL_EYE) and c:IsActional() and c:IsType(TYPE_EQUIP)
 end
 function s.extraval(chk,summon_type,e,...)
 	if chk==0 then

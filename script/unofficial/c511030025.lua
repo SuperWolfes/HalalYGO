@@ -47,13 +47,13 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.costfilter(c,e,tp)
 	local code=c:GetCode()
-	return not table.includes(s.name_list[tp],code) and c:IsSetCard(0x578) and c:IsLevelBelow(4) and c:IsAbleToGraveAsCost() 
+	return not table.includes(s.name_list[tp],code) and c:IsSetCard(0x578) and c:IsLevelBelow(4) and c:IsAbleToRestAsCost() 
 		and Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_MZONE,0,1,nil,e,tp,code)
 end
 function s.tgfilter(c,e,tp,code)
 	local zone=c:GetFreeLinkedZone()&0x1f
 	return c:IsSetCard(0x578) and c:IsLinkMonster() and c:IsCanBeEffectTarget(e) and zone>0 
-		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp,code,zone)
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp,code,zone)
 end
 function s.spfilter(c,e,tp,code,zone)
 	return c:IsSetCard(0x578) and not c:IsCode(code) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE,tp,zone)
@@ -63,14 +63,14 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil,e,tp)
 	end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,1,1,nil,e,tp)
 	e:SetLabel(g:GetFirst():GetCode())
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	Duel.BreakEffect()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 	local tg=Duel.SelectTarget(tp,s.tgfilter,tp,LOCATION_MZONE,0,1,1,nil,e,tp,e:GetLabel())
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REST)
 end
 function s.rescon(sg,e,tp,mg)
 	return aux.ChkfMMZ(#sg) and sg:GetClassCount(Card.GetCode)==#sg
@@ -82,13 +82,13 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	local zone=tc:GetFreeLinkedZone()&0x1f
 	if zone==0 then return end
-	local sg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_GRAVE,0,nil,e,tp,code,zone)
+	local sg=Duel.GetMatchingGroup(aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,e,tp,code,zone)
 	if #sg<=0 then return end
 	local sg_unq=sg:GetClassCount(Card.GetCode)
 	local count=s.zone_count(zone)
 	if #sg<count then count=#sg end
 	if sg_unq<count then count=sg_unq end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then count=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then count=1 end
 	if tc and tc:IsRelateToEffect(e) and zone~=0 then
 		local g=aux.SelectUnselectGroup(sg,e,tp,count,count,s.rescon,1,tp,HINTMSG_SPSUMMON)
 		if #g>0 then

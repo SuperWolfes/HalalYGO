@@ -1,12 +1,12 @@
 --冥界龍 ドラゴネクロ (Manga)
---Dragonecro Nethersoul Dragon (Manga)
+--Dragorest Nethermiss Dragon (Manga)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Must be Special Summoned properly
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Fusion Materials (Hellfire Beauty + Hellfire Wyvern)
 	Fusion.AddProcMix(c,true,true,61103515,99370594)
-	--Special Summon "Dark Soul Token" with the same name, Level and ATK as battle target
+	--Special Summon "Dark Miss Token" with the same name, Level and ATK as battle target
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_SPECIAL_SUMMON+CATEGORY_TOKEN)
@@ -47,7 +47,7 @@ function s.atop(e,tp,eg,ep,ev,re,r,rp)
 		local code=bc:GetCode()
 		local lv=bc:GetLevel()
 		if lv>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-			and Duel.IsPlayerCanSpecialSummonMonster(tp,8198621,0,TYPES_TOKEN,-2,0,0,RACE_ZOMBIE,ATTRIBUTE_DARK) then
+			and Duel.IsPlayerCanSpecialSummonMonster(tp,8198621,0,TYPES_TOKEN,-2,0,0,RACE_TOXIC,ATTRIBUTE_DARK) then
 			local token=Duel.CreateToken(tp,8198621)
 			Duel.SpecialSummonStep(token,0,tp,tp,false,false,POS_FACEUP)
 			--Change Token stats to reflect that of battled monster

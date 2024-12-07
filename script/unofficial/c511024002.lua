@@ -40,7 +40,7 @@ function s.adop(e,tp,eg,ep,ev,re,r,rp)
 	if tc:IsRelateToEffect(e) and tc:IsFaceup() then
 		local atk=tc:GetAttack()
 		local def=tc:GetDefense()
-		--Switch its current ATK/DEF
+		--Smint its current ATK/DEF
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_SWAP_ATTACK_FINAL)

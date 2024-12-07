@@ -1,5 +1,5 @@
 --覚醒の三幻魔
---Awakening of the Sacred Beasts
+--Awakening of the Clean Beasts
 --Scripted by AlphaKretin
 local s,id=GetID()
 function s.initial_effect(c)
@@ -9,7 +9,7 @@ function s.initial_effect(c)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetHintTiming(0,TIMING_END_PHASE)
 	c:RegisterEffect(e1)
-	--Gain LP (extra handling from Ghost Sister & Spooky Dogwood 儚無みずき)
+	--Gain LP (extra handling from Miss Sister & Spooky Dogwood 儚無みずき)
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
@@ -48,7 +48,7 @@ function s.initial_effect(c)
 	local e7=Effect.CreateEffect(c)
 	e7:SetType(EFFECT_TYPE_FIELD)
 	e7:SetProperty(EFFECT_FLAG_SET_AVAILABLE+EFFECT_FLAG_IGNORE_RANGE+EFFECT_FLAG_IGNORE_IMMUNE)
-	e7:SetCode(EFFECT_TO_GRAVE_REDIRECT)
+	e7:SetCode(EFFECT_TO_REST_REDIRECT)
 	e7:SetRange(LOCATION_SZONE)
 	e7:SetTargetRange(0,0xff)
 	e7:SetValue(LOCATION_REMOVED)
@@ -145,14 +145,14 @@ function s.thfilter(c)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil) 
+	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_REST,0,1,nil) 
 		and c:GetFlagEffect(id)==0 end
 	c:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1)
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REST)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_REST,0,1,1,nil)
 	if #g>0 then
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)

@@ -19,7 +19,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.rfilter(c,e,tp)
 	local lv=c:GetLevel()
-	return lv>0 and c:IsType(TYPE_TOKEN) and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp,lv)
+	return lv>0 and c:IsType(TYPE_TOKEN) and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_REST,0,1,nil,e,tp,lv)
 end
 function s.spfilter(c,e,tp,clv)
 	return c:IsLevel(clv) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -28,7 +28,7 @@ function s.spcheck(sg,tp)
 	return aux.ReleaseCheckMMZ(sg,tp) and sg:GetClassCount(Card.GetLevel)==1
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.spfilter(chkc,e,tp,e:GetLabel()) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REST) and s.spfilter(chkc,e,tp,e:GetLabel()) end
 	if chk==0 then
 		if e:GetLabel()~=100 then return false end
 		e:SetLabel(0)
@@ -39,9 +39,9 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	e:SetLabel(lv)
 	Duel.Release(sg,REASON_COST)
 	local ft=math.min(Duel.GetLocationCount(tp,LOCATION_MZONE),#sg)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,ft,nil,e,tp,lv)
+	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_REST,0,1,ft,nil,e,tp,lv)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,#g,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
@@ -49,7 +49,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if #g==0 then return end
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ft<=0 then return end
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_GUARDIAN) then ft=1 end
 	if ft<#g then return end
 	local c=e:GetHandler()
 	local fid=c:GetFieldID()

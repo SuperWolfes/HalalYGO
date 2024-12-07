@@ -20,7 +20,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 end
 function s.cfilter(c,chk,p,chk1,chk2)
-	return c:IsFaceup() and c:IsAbleToGraveAsCost() and ((chk == 0 and c:IsRace(RACE_PLANT)==p)
+	return c:IsFaceup() and c:IsAbleToRestAsCost() and ((chk == 0 and c:IsRace(RACE_PLANT)==p)
 		or ((c:IsRace(RACE_PLANT) and chk1) or (not c:IsRace(RACE_PLANT) and chk2)))
 end
 function s.thfilter(c)
@@ -37,10 +37,10 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 	e:SetLabel(0)
 	e:SetCategory(0)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_MZONE,0,1,1,nil,1,nil,chk1,chk2)
 	local opt=g:GetFirst():IsRace(RACE_PLANT) and 0 or 1
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 	if opt == 0 then
 		e:SetLabel(1)
 		e:SetCategory(CATEGORY_DRAW+CATEGORY_HANDES)

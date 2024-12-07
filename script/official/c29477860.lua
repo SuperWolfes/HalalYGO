@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.destg)
 	e2:SetOperation(s.desop)
 	c:RegisterEffect(e2)
-	--Prevent attacks on monsters while you control "Gaia the Dragon Champion"
+	--Prevent attacks on monsters while you control "Bia the Dragon Champion"
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
 	e3:SetCode(EFFECT_CANNOT_SELECT_BATTLE_TARGET)
@@ -32,18 +32,18 @@ function s.initial_effect(c)
 	e3:SetValue(s.atktg)
 	c:RegisterEffect(e3)
 end
-s.listed_names={CARD_GAIA_CHAMPION}
+s.listed_names={CARD_BIA_CHAMPION}
 function s.actcon(e)
-	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_GAIA_CHAMPION),e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
+	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,CARD_BIA_CHAMPION),e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
 end
 function s.atktg(e,c)
-	return c:GetCode()~=CARD_GAIA_CHAMPION
+	return c:GetCode()~=CARD_BIA_CHAMPION
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetAttacker()
 	local dc=Duel.GetAttackTarget()
-	return (tc:IsCode(CARD_GAIA_CHAMPION) and tc:IsControler(tp))
-		or (dc and dc:IsCode(CARD_GAIA_CHAMPION) and dc:IsControler(tp))
+	return (tc:IsCode(CARD_BIA_CHAMPION) and tc:IsControler(tp))
+		or (dc and dc:IsCode(CARD_BIA_CHAMPION) and dc:IsControler(tp))
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chkc then return chkc:IsLocation(LOCATION_ONFIELD) end

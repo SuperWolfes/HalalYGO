@@ -1,8 +1,8 @@
 --屋敷わらし
---Ghost Belle & Haunted Mansion
+--Miss Belle & Drowned Mansion
 local s,id=GetID()
 function s.initial_effect(c)
-	--Negate the activation of a card or effect that includes adding a card(s) to the hand, Deck, and/or Extra Deck, Special Summoning a Monster Card, or banishing a card(s), from the GY
+	--Negate the activation of a card or effect that includes adding a card(s) to the hand, Deck, and/or Extra Deck, Special Summoning a Monster Card, or banishing a card(s), from the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_NEGATE)
@@ -24,7 +24,7 @@ function s.check(ev,category)
 	local g=Group.CreateGroup()
 	if g1 then g:Merge(g1) end
 	if g2 then g:Merge(g2) end
-	return (((loc1 or 0)|(loc2 or 0))&LOCATION_GRAVE)>0 or (#g>0 and g:IsExists(function(c) return c:IsLocation(LOCATION_GRAVE) and (category~=CATEGORY_SPECIAL_SUMMON or c:IsMonster()) end,1,nil))
+	return (((loc1 or 0)|(loc2 or 0))&LOCATION_REST)>0 or (#g>0 and g:IsExists(function(c) return c:IsLocation(LOCATION_REST) and (category~=CATEGORY_SPECIAL_SUMMON or c:IsMonster()) end,1,nil))
 end
 function s.negcon(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.IsChainNegatable(ev) then return false end
@@ -38,7 +38,7 @@ end
 function s.negcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsDiscardable() end
-	Duel.SendtoGrave(c,REASON_COST|REASON_DISCARD)
+	Duel.SendtoRest(c,REASON_COST|REASON_DISCARD)
 end
 function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

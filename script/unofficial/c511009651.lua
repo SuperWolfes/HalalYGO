@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0xfb),2)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--immune
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -40,8 +40,8 @@ function s.damfilter(c)
 	return c:IsSetCard(0xfb) and c:IsMonster()
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.damfilter,tp,LOCATION_GRAVE,0,1,nil) end
-	local g=Duel.GetMatchingGroup(s.damfilter,tp,LOCATION_GRAVE,0,nil)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.damfilter,tp,LOCATION_REST,0,1,nil) end
+	local g=Duel.GetMatchingGroup(s.damfilter,tp,LOCATION_REST,0,nil)
 	local dam=g:GetClassCount(Card.GetCode)*200
 	Duel.SetTargetPlayer(1-tp)
 	Duel.SetTargetParam(dam)
@@ -49,7 +49,7 @@ function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
-	local g=Duel.GetMatchingGroup(s.damfilter,tp,LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.damfilter,tp,LOCATION_REST,0,nil)
 	local dam=g:GetClassCount(Card.GetCode)*200
 	Duel.Damage(p,dam,REASON_EFFECT)
 end

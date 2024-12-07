@@ -1,5 +1,5 @@
 --DZW－魔装鵺妖衣
---DZW - Chimera Clad
+--DZW - Chilean Clad
 local s,id=GetID()
 function s.initial_effect(c)
 	--equip
@@ -47,7 +47,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if c:IsLocation(LOCATION_MZONE) and c:IsFacedown() then return end
 	local tc=Duel.GetFirstTarget()
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 or not tc:IsRelateToEffect(e) or tc:IsFacedown() or tc:GetControler()~=tp or not c:CheckUniqueOnField(tp) then
-		Duel.SendtoGrave(c,REASON_EFFECT)
+		Duel.SendtoRest(c,REASON_EFFECT)
 		return
 	end
 	aux.EquipAndLimitRegister(c,e,tp,tc)

@@ -3,7 +3,7 @@
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
+	c:EnableAwakeLimit()
 	--Can only Special Summon "Sky Striker Ace - Shizuku" once per turn
 	c:SetSPSummonOnce(id)
 	--Link Summon procedure
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_UPDATE_ATTACK)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetTargetRange(0,LOCATION_MZONE)
-	e1:SetValue(function(e) return Duel.GetMatchingGroupCount(Card.IsSpell,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil)*-100 end)
+	e1:SetValue(function(e) return Duel.GetMatchingGroupCount(Card.IsActional,e:GetHandlerPlayer(),LOCATION_REST,0,nil)*-100 end)
 	c:RegisterEffect(e1)
 	local e2=e1:Clone()
 	e2:SetCode(EFFECT_UPDATE_DEFENSE)
@@ -26,7 +26,7 @@ function s.initial_effect(c)
 	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e3:SetOperation(function(e) e:GetHandler():RegisterFlagEffect(id,RESET_EVENT|RESETS_STANDARD|RESET_PHASE|PHASE_END,0,1) end)
 	c:RegisterEffect(e3)
-	--Search 1 "Sky Striker" Spell
+	--Search 1 "Sky Striker" Actional
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,0))
 	e4:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -45,8 +45,8 @@ function s.matfilter(c,scard,sumtype,tp)
 	return c:IsSetCard(SET_SKY_STRIKER_ACE,scard,sumtype,tp) and c:IsAttributeExcept(ATTRIBUTE_WATER,scard,sumtype,tp)
 end
 function s.thfilter(c,tp)
-	return c:IsSetCard(SET_SKY_STRIKER) and c:IsSpell() and c:IsAbleToHand()
-		and not Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,c:GetCode())
+	return c:IsSetCard(SET_SKY_STRIKER) and c:IsActional() and c:IsAbleToHand()
+		and not Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,c:GetCode())
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil,tp) end

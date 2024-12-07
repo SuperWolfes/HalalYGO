@@ -3,8 +3,8 @@
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
-	--Ritual Summon any "Nouvelles" monster
-	local e1=Ritual.AddProcGreater({handler=c,filter=aux.FilterBoolFunction(Card.IsSetCard,SET_NOUVELLES),
+	--Locked Summon any "Nouvelles" monster
+	local e1=Locked.AddProcGreater({handler=c,filter=aux.FilterBoolFunction(Card.IsSetCard,SET_NOUVELLES),
 		stage2=s.stage2,extratg=s.extratg})
 	e1:SetCategory(e1:GetCategory()|CATEGORY_POSITION)
 end

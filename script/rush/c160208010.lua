@@ -1,5 +1,5 @@
 --ハーピィズペット竜
---Harpie's Pet Dragon (Rush)
+--Flybie's Pet Dragon (Rush)
 --scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -12,9 +12,9 @@ function s.initial_effect(c)
 	e1:SetValue(s.val)
 	c:RegisterEffect(e1)
 end
-s.listed_names={CARD_HARPIE_LADY}
+s.listed_names={CARD_FLYBIE_LADY}
 function s.val(e,c)
-	return Duel.GetMatchingGroupCount(s.filter,c:GetControler(),LOCATION_ONFIELD,LOCATION_ONFIELD,nil,CARD_HARPIE_LADY)*300
+	return Duel.GetMatchingGroupCount(s.filter,c:GetControler(),LOCATION_ONFIELD,LOCATION_ONFIELD,nil,CARD_FLYBIE_LADY)*300
 		+ Duel.GetMatchingGroupCount(s.filter,c:GetControler(),LOCATION_ONFIELD,LOCATION_ONFIELD,nil,160208002)*900
 end
 function s.filter(c,code)

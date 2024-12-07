@@ -27,13 +27,13 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetTarget(function(e,c) return c:IsRace(RACE_DINOSAUR) end)
 	e1:SetValue(function(e,te) return (te:IsTrapEffect() and POS_FACEUP|POS_FACEDOWN) or 0x100 end)
 	Duel.RegisterEffect(e1,tp)
-	--Level 7 or higher Dinosaur monsters on the field cannot be targeted by Spell Cards or effects
+	--Level 7 or higher Dinosaur monsters on the field cannot be targeted by Actional Cards or effects
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
 	e2:SetRange(0x5f)
 	e2:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
 	e2:SetTarget(function(e,c) return c:IsLevelAbove(7) and c:IsRace(RACE_DINOSAUR) end)
-	e2:SetValue(function(e,re,rp) return re:IsActiveType(TYPE_SPELL) end)
+	e2:SetValue(function(e,re,rp) return re:IsActiveType(TYPE_ACTIONAL) end)
 	Duel.RegisterEffect(e2,tp)
 end

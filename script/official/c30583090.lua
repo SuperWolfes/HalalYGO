@@ -35,13 +35,13 @@ function s.spcon(e,c)
 		and Duel.IsExistingMatchingCard(s.spconfilter,tp,LOCATION_MZONE,0,1,nil)
 end
 function s.fsubcostfilter(c)
-	return c:IsSetCard(SET_HERO) and c:IsMonster() and c:IsAbleToGraveAsCost()
+	return c:IsSetCard(SET_HERO) and c:IsMonster() and c:IsAbleToRestAsCost()
 end
 function s.fsubcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.fsubcostfilter,tp,LOCATION_DECK,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 	local g=Duel.SelectMatchingCard(tp,s.fsubcostfilter,tp,LOCATION_DECK,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoRest(g,REASON_COST)
 end
 function s.fsubop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	--Special summon from hand, then mill a monster
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOGRAVE)
+	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOREST)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
 	e1:SetCode(EVENT_DESTROYED)
@@ -33,11 +33,11 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,false,false) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,e:GetHandler(),1,0,0)
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TOREST,nil,1,tp,LOCATION_DECK)
 end
 	--Check for a monster
 function s.tgfilter(c,tp)
-	return c:IsMonster() and c:IsAbleToGrave()
+	return c:IsMonster() and c:IsAbleToRest()
 end
 	--Special summon from hand, then can mill a monster
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
@@ -47,9 +47,9 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)~=0 then
 		if #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			Duel.BreakEffect()
-			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
 			local sg=g:Select(tp,1,1,nil)
-			Duel.SendtoGrave(sg,REASON_EFFECT)
+			Duel.SendtoRest(sg,REASON_EFFECT)
 		end
 	end
 end

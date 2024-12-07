@@ -3,7 +3,7 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	--All your normal summoned/set "Qli" monsters gain 300 ATK, have their effects negate, and unaffected by spells/traps
+	--All your normal summoned/set "Qli" monsters gain 300 ATK, have their effects negate, and unaffected by actionals/traps
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_ATKCHANGE)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -50,7 +50,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e3:SetValue(RESET_TURN_SET)
 		e3:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 		tc:RegisterEffect(e3)
-		--Unaffected by spells/traps
+		--Unaffected by actionals/traps
 		local e4=Effect.CreateEffect(c)
 		e4:SetDescription(3104)
 		e4:SetType(EFFECT_TYPE_SINGLE)
@@ -63,5 +63,5 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.efilter(e,te)
-	return te:IsActiveType(TYPE_SPELL+TYPE_TRAP) and te:GetOwner()~=e:GetOwner()
+	return te:IsActiveType(TYPE_ACTIONAL+TYPE_TRAP) and te:GetOwner()~=e:GetOwner()
 end
