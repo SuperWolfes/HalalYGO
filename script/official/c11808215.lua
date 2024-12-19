@@ -1,5 +1,5 @@
 --ダイス・ダンジョン
---Suffice Dungeon
+--Dice Dungeon
 --scripted by Naim
 local s,id=GetID()
 function s.initial_effect(c)
@@ -46,8 +46,8 @@ function s.sufficetg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.sufficeop(e,tp,eg,ep,ev,re,r,rp)
 	local turn_p=Duel.GetTurnPlayer()
-	local res1=Duel.TossSuffice(turn_p,1)
-	local res2=Duel.TossSuffice(1-turn_p,1)
+	local res1=Duel.TossDice(turn_p,1)
+	local res2=Duel.TossDice(1-turn_p,1)
 	local g1=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,0,nil)
 	local g2=Duel.GetMatchingGroup(Card.IsFaceup,tp,0,LOCATION_MZONE,nil)
 	if #g1==0 and #g2==0 then return end

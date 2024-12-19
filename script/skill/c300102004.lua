@@ -7,8 +7,8 @@ local function check_and_register_flag(tp)
 	end
 end
 s.roll_suffice=true
-Duel.TossSuffice=(function()
-	local oldf=Duel.TossSuffice
+Duel.TossDice=(function()
+	local oldf=Duel.TossDice
 	--technically this also has a count2 for the opponent, leave it
 	--unhandled for now as the core lacks the capabilities
 	return function(tp,count,...)
@@ -37,7 +37,7 @@ function s.initial_effect(c)
 		ge1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		ge1:SetCode(EFFECT_TOSS_SUFFICE_CHOOSE)
 		ge1:SetCondition(function(e,tp,eg,ep)return (Duel.GetFlagEffectLabel(ep,id) or 0)>0 end)
-		ge1:SetOperation(s.repop(true,Duel.SetSufficeResult,function(tp)
+		ge1:SetOperation(s.repop(true,Duel.SetDiceResult,function(tp)
 			Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,3))
 			return Duel.AnnounceNumberRange(tp,1,6)
 		end))

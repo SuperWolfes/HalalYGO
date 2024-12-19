@@ -32,7 +32,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) then return end
-	local d1,d2=Duel.TossSuffice(tp,2)
+	local d1,d2=Duel.TossDice(tp,2)
 	if d2>d1 then d1,d2=d2,d1 end
 	--Change ATK
 	local e1=Effect.CreateEffect(c)

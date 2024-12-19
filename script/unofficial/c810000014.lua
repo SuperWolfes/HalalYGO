@@ -32,10 +32,10 @@ end]]--
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		Duel.Hint(HINT_CARD,0,id)
-		local cd=Duel.GetSufficeResult()
+		local cd=Duel.GetDiceResult()
 		if cd~=0 then
-			local dc=Duel.TossSuffice(tp,1)
-			--local cd=Duel.TossSuffice(1-tp,1)
+			local dc=Duel.TossDice(tp,1)
+			--local cd=Duel.TossDice(1-tp,1)
 			if dc>=cd then
 				Duel.NegateEffect(ev)
 			end
@@ -45,7 +45,7 @@ end
 --[[function c39454112.sufficeop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.SelectYesNo(tp,aux.Stringid(39454112,0)) then
 		Duel.Hint(HINT_CARD,0,39454112)
-		local dc={Duel.GetSufficeResult()}
+		local dc={Duel.GetDiceResult()}
 		local ac=1
 		if ev>1 then
 			local t={}
@@ -55,6 +55,6 @@ end
 		end
 		if dc[ac]==1 or dc[ac]==3 or dc[ac]==5 then dc[ac]=6
 		else dc[ac]=1 end
-		Duel.SetSufficeResult(table.unpack(dc))
+		Duel.SetDiceResult(table.unpack(dc))
 	end
 end]]--

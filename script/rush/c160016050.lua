@@ -1,5 +1,5 @@
 --強欲なサイコロ
---Suffice of Greed
+--Dice of Greed
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 s.roll_suffice=true
-s.listed_names={74137509,126218} --Graceful Suffice, Skull Suffice
+s.listed_names={74137509,126218} --Graceful Dice, Skull Dice
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>=10
 end
@@ -39,7 +39,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_HAND,0,3,3,e:GetHandler())
 	if Duel.SendtoGrave(tg,REASON_COST)<1 then return end
 	--Effect
-	local d=Duel.TossSuffice(tp,1)
+	local d=Duel.TossDice(tp,1)
 	if Duel.Draw(tp,d,REASON_EFFECT)>0 and d<=3 and Duel.IsExistingMatchingCard(aux.RestValleyFilter(s.thfilter),tp,LOCATION_REST,0,1,nil)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)

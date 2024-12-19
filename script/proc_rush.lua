@@ -104,7 +104,7 @@ FLAG_DOUBLE_TRIB_0_ATK=160017041 -- Multiply Skull
 FLAG_DOUBLE_TRIB_0_DEF=160017141 
 FLAG_DOUBLE_TRIB_EFFECT=160017241
 FLAG_DOUBLE_TRIB_LEGEND=160212047 -- Legend Scout
-FLAG_DOUBLE_TRIB_WANDERER=160019009 -- Suffice Key Lipsick
+FLAG_DOUBLE_TRIB_WANDERER=160019009 -- Dice Key Lipsick
 function Card.AddDoubleTribute(c,id,otfilter,eftg,reset,...)
 	for i,flag in ipairs{...} do
 		c:RegisterFlagEffect(flag,reset,0,1)

@@ -1,5 +1,5 @@
 --ダイスキー・リリス
---Suffice Key Lipsick
+--Dice Key Lipsick
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -33,7 +33,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,1,nil)
 	if Duel.SendtoGrave(g,REASON_COST)<1 then return end
 	--Effect
-	local d=Duel.TossSuffice(tp,1)
+	local d=Duel.TossDice(tp,1)
 	if d==1 or d==2 or d==3 then
 		c:AddDoubleTribute(id,s.otfilter,s.eftg,RESETS_STANDARD_PHASE_END,FLAG_DOUBLE_TRIB_WANDERER)
 	else

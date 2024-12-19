@@ -84,7 +84,7 @@ function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOHAND,g,1,tp,LOCATION_REST)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
-	local res=Duel.TossSuffice(tp,1)
+	local res=Duel.TossDice(tp,1)
 	local tc=Duel.GetFirstTarget()
 	if res==6 and tc:IsRelateToEffect(e) then
 		Duel.SendtoHand(tc,nil,REASON_EFFECT)

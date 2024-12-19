@@ -112,7 +112,7 @@ function s.dcop(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	local g=e:GetLabelObject():Filter(s.cfilter,nil,e,tp,ft)
 	if #g==0 then return end
-	local d=Duel.TossSuffice(tp,1)
+	local d=Duel.TossDice(tp,1)
 	local tc=nil
 	if d==1 then
 		tc=s.mon_select(g,tp,Card.IsAbleToHand,HINTMSG_ATOHAND)

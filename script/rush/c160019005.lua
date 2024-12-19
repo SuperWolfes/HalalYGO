@@ -1,5 +1,5 @@
 --ダイスキー・イチカ
---Suffice Key Ichika
+--Dice Key Ichika
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)

@@ -1,5 +1,5 @@
 --サイコロの天使
---Suffice Angel
+--Dice Angel
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -43,7 +43,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)
 		if Duel.GetFieldGroupCountRush(tp,0,LOCATION_MZONE)>1 then
-			local d=Duel.TossSuffice(tp,1)
+			local d=Duel.TossDice(tp,1)
 			if d~=6 then
 				Duel.BreakEffect()
 				Duel.Recover(tp,600,REASON_EFFECT)

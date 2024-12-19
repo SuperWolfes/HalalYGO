@@ -1,9 +1,9 @@
 --ダイスキー・クゥ
---Suffice Key Kuu
+--Dice Key Kuu
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
-	--Add to the hand 1 "Suffice Key Nel" from the RP
+	--Add to the hand 1 "Dice Key Nel" from the RP
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND)
@@ -35,7 +35,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)
 		local sg=Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_MZONE,nil)
-		local d=Duel.TossSuffice(tp,1)
+		local d=Duel.TossDice(tp,1)
 		if d==6 and #sg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_POSCHANGE)
 			local sc=Group.Select(sg,tp,1,1,nil)

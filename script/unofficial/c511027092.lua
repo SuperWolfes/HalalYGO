@@ -66,7 +66,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	local c=e:GetHandler()
-	local suffice=Duel.TossSuffice(1-tp,1)
+	local suffice=Duel.TossDice(1-tp,1)
 	local att=2^(suffice-1)
 	local tg=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
 	local g=Group.CreateGroup()

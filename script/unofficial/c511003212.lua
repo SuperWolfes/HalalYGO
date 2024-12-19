@@ -102,7 +102,7 @@ function s.sufficetg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_DAMAGE,0,0,1-tp,#sg*500)
 end
 function s.sufficeop(e,tp,eg,ep,ev,re,r,rp)
-	local suffice=Duel.TossSuffice(tp,1)
+	local suffice=Duel.TossDice(tp,1)
 	local att
 	if suffice==1 then att=ATTRIBUTE_EARTH end
 	if suffice==2 then att=ATTRIBUTE_WATER end

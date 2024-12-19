@@ -1,5 +1,5 @@
 --ダイスキー・ミクス
---Suffice Key Mix
+--Dice Key Mix
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -29,7 +29,7 @@ end
 function s.operation(fustg,fusop)
 	return function(e,tp,eg,ep,ev,re,r,rp)
 		local c=e:GetHandler()
-		local d=Duel.TossSuffice(tp,1)
+		local d=Duel.TossDice(tp,1)
 		e:SetLabel(d)
 		if d==1 then
 			local dg=Duel.GetMatchingGroup(Card.IsNotMaximumModeSide,tp,LOCATION_ONFIELD,0,nil)

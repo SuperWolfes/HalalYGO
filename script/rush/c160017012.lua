@@ -1,5 +1,5 @@
 --ダイスキー・リボン
---Suffice Key Ribbon
+--Dice Key Ribbon
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)

@@ -22,7 +22,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local res,atk={0,0,0,0,0,0,0,false,false,false,false},0
-	for _,i in ipairs({Duel.TossSuffice(tp,3)}) do
+	for _,i in ipairs({Duel.TossDice(tp,3)}) do
 		atk=atk+(i*100)
 		res[i]=res[i]+1
 		if res[i]>=2 then

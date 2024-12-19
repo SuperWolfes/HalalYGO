@@ -1,4 +1,4 @@
---Suffice Dungeon
+--Dice Dungeon
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -40,8 +40,8 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	if at:IsControler(1-tp) then at,bc=bc,at end
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) then
-		local suffice1=Duel.TossSuffice(tp,1)
-		local suffice2=Duel.TossSuffice(1-tp,1)
+		local suffice1=Duel.TossDice(tp,1)
+		local suffice2=Duel.TossDice(1-tp,1)
 		if suffice1==1 or suffice1==5 or suffice1==6 then
 			local e1=Effect.CreateEffect(c)
 			e1:SetType(EFFECT_TYPE_SINGLE)

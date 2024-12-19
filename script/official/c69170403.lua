@@ -79,7 +79,7 @@ function s.dctg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,1)
 end
 function s.dcop(e,tp,eg,ep,ev,re,r,rp)
-	local dc=Duel.TossSuffice(tp,1)
+	local dc=Duel.TossDice(tp,1)
 	local g=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsLevelAbove,1),tp,LOCATION_MZONE,0,nil)
 	for tc in aux.Next(g) do
 		local e1=Effect.CreateEffect(e:GetHandler())

@@ -1,5 +1,5 @@
 --ヒーロー・ダイス
---Hero Suffice
+--Hero Dice
 local s,id=GetID()
 function s.initial_effect(c)
 	--Roll die to apply effect
@@ -23,7 +23,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) and tc:IsFaceup() then
-		local suffice=Duel.TossSuffice(tp,1)
+		local suffice=Duel.TossDice(tp,1)
 		--Take damage equal to target monster's ATK
 		if suffice==1 then
 			Duel.Damage(tp,tc:GetAttack(),REASON_EFFECT)

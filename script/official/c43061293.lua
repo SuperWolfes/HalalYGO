@@ -25,6 +25,6 @@ function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
-	local d1,d2,d3=Duel.TossSuffice(tp,3)
+	local d1,d2,d3=Duel.TossDice(tp,3)
 	Duel.Damage(p,(d1+d2+d3)*100,REASON_EFFECT)
 end

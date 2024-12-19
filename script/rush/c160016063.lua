@@ -1,5 +1,5 @@
 --阿修羅のサイコロ
---Asura Suffice
+--Asura Dice
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -26,7 +26,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(aux.FilterMaximumSideFunctionEx(Card.IsFaceup),tp,0,LOCATION_MZONE,1,nil) end
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local d=Duel.TossSuffice(tp,1)
+	local d=Duel.TossDice(tp,1)
 	Duel.Damage(1-tp,d*100,REASON_EFFECT)
 	local g=Duel.GetMatchingGroup(aux.FilterMaximumSideFunctionEx(Card.IsFaceup),tp,0,LOCATION_MZONE,nil)
 	if #g>0 then

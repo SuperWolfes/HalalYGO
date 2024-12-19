@@ -1,5 +1,5 @@
 --ダイスキー・ミンナ
---Suffice Key Minna
+--Dice Key Minna
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)

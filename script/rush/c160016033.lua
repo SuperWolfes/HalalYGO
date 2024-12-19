@@ -34,7 +34,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if req<1 then return end
 	--Effect
 	local des=0
-	for _,i in ipairs({Duel.TossSuffice(tp,req)}) do
+	for _,i in ipairs({Duel.TossDice(tp,req)}) do
 		if i~=1 and i~=6 then des=des+1 end
 	end
 	local g=Duel.GetMatchingGroup(Card.IsNotMaximumModeSide,tp,0,LOCATION_ONFIELD,nil)

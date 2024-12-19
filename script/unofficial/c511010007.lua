@@ -41,7 +41,7 @@ end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and c:IsFaceup() then
-		local die_result=Duel.TossSuffice(tp,1)
+		local die_result=Duel.TossDice(tp,1)
 		--This card's ATK becomes equal to its original ATK multiplied by the result, until the end of the Battle Phase
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)

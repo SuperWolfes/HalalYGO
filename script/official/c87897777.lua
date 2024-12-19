@@ -74,7 +74,7 @@ function s.thfilter(c)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)<1 then return end
-	local dc=Duel.TossSuffice(tp,1)
+	local dc=Duel.TossDice(tp,1)
 	Duel.ConfirmDecktop(tp,dc)
 	local dg=Duel.GetDecktopGroup(tp,dc):Filter(s.thfilter,nil)
 	if #dg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,3)) then
@@ -103,7 +103,7 @@ end
 function s.sspop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.sspfilter,tp,LOCATION_SZONE,0,nil,e,tp)
 	if #g==0 then return end
-	local dc=Duel.TossSuffice(tp,1)
+	local dc=Duel.TossDice(tp,1)
 	if dc<2 or dc>5 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local tc=g:Select(tp,1,1,nil):GetFirst()

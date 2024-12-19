@@ -1,5 +1,5 @@
 --ダイスマイトガール・チロリ
---Sufficemite Girl Chirori
+--Dicemite Girl Chirori
 local s,id=GetID()
 function s.initial_effect(c)
 	--suffice
@@ -23,7 +23,7 @@ function s.filter(c)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local d=Duel.TossSuffice(tp,1)
+	local d=Duel.TossDice(tp,1)
 	local atk=0
 	if d==1 or d==2 then
 		atk=-1000

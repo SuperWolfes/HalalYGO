@@ -1,5 +1,5 @@
 --悪魔のサイコロ
---Skull Suffice
+--Skull Dice
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -25,7 +25,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(aux.FilterMaximumSideFunctionEx(Card.IsFaceup),tp,0,LOCATION_MZONE,nil)
 	if #g>0 then
-		local d=Duel.TossSuffice(tp,1)*100
+		local d=Duel.TossDice(tp,1)*100
 		for sc in aux.Next(g) do
 			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetType(EFFECT_TYPE_SINGLE)

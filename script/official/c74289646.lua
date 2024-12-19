@@ -32,7 +32,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local res=Duel.TossSuffice(tp,1)
+	local res=Duel.TossDice(tp,1)
 	local chain_link=Duel.GetCurrentChain()
 	if chain_link==2 then
 		--This card gains ATK equal to the result x 500 until the end of this turn

@@ -1,5 +1,5 @@
 --天使のサイコロ
---Graceful Suffice (Goat)
+--Graceful Dice (Goat)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -25,7 +25,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,0,nil)
 	if #g>0 then
-		local d=Duel.TossSuffice(tp,1)
+		local d=Duel.TossDice(tp,1)
 		for sc in aux.Next(g) do
 			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetType(EFFECT_TYPE_SINGLE)

@@ -1,11 +1,11 @@
 import os
 
-scripts_path = "../script"  # Path of the scripts folder we want to convert
+scripts_path = "input_scripts"  # Path of the scripts folder we want to convert
 conversion_path = "output_sorted.txt"  # Path of halal conversions txt, preferably SORTED
 
 def convert_scripts_content(scripts_path, conversion_path, output="output_scripts"):
     exceptions = ["PHANT",  # PHANT because of the ELEPHANT win condition
-                  "Grave", "Forbidden", "Reviv", ""
+                  "Grave", "Forbidden", "Reviv", "Dice",
                   "SUMMON", "Summon", "summon", "Earth", "EARTH", "earth"]
     # Some extras
     words_to_convert = {"GY": "RP"} 

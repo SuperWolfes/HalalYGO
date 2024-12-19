@@ -20,7 +20,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterFlagEffect(ep,id,0,0,0)
 	local n1=Duel.AnnounceLevel(tp,1,6)
 	local n2=Duel.AnnounceLevel(tp,1,6,n1)
-	local dc=Duel.TossSuffice(tp,1)
+	local dc=Duel.TossDice(tp,1)
 	if n1==dc or n2==dc then
 		--immune
 		local e1=Effect.CreateEffect(e:GetHandler())

@@ -38,7 +38,7 @@ function s.dieop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not (tc:IsRelateToEffect(e) and tc:IsFaceup() and tc:HasLevel()) then return end
 	local c=e:GetHandler()
-	local dc=Duel.TossSuffice(tp,1)
+	local dc=Duel.TossDice(tp,1)
 	if dc>tc:GetLevel() then
 		--Destroy it, then you can add 1 monster with the same original Level from your Deck to your hand
 		if Duel.Destroy(tc,REASON_EFFECT)>0

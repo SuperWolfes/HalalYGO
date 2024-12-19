@@ -1,5 +1,5 @@
 --サモン・ダイス
---Summon Suffice
+--Summon Dice
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -40,7 +40,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND+LOCATION_REST)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local d=Duel.TossSuffice(tp,1)
+	local d=Duel.TossDice(tp,1)
 	if d==1 or d==2 then
 		local g=Duel.GetMatchingGroup(s.filter1,tp,LOCATION_HAND,0,nil)
 		if #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then

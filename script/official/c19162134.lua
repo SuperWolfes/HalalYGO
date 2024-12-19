@@ -110,8 +110,8 @@ function s.tossop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.sufficeop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local ct1=aux.GetSufficeCountSelfFromEv(ev)
-	local ct2=aux.GetSufficeCountOppoFromEv(ev)
+	local ct1=aux.GetDiceCountSelfFromEv(ev)
+	local ct2=aux.GetDiceCountOppoFromEv(ev)
 	if ep==tp then
 		for i=1,ct1 do
 			c:RegisterFlagEffect(id+1,RESET_EVENT|RESETS_STANDARD|RESET_PHASE|PHASE_END,0,1)

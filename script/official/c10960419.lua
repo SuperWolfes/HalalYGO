@@ -76,7 +76,7 @@ function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 	local ec=c:GetEquipTarget()
 	local tc=ec:GetBattleTarget()
 	if tc and tc:IsRelateToBattle() then
-		local ct=Duel.TossSuffice(tp,1)
+		local ct=Duel.TossDice(tp,1)
 		if Duel.Remove(tc,0,REASON_EFFECT+REASON_TEMPORARY)~=0 then
 			tc:SetTurnCounter(0)
 			tc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,0)

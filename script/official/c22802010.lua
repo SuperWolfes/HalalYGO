@@ -29,7 +29,7 @@ function s.filter2(c,lv)
 	return c:IsFaceup() and (c:IsLevelBelow(lv-1) or c:IsRankBelow(lv-1))
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local d1,d2=Duel.TossSuffice(tp,2)
+	local d1,d2=Duel.TossDice(tp,2)
 	local g=Duel.GetMatchingGroup(s.filter2,tp,LOCATION_MZONE,LOCATION_MZONE,nil,d1+d2)
 	if #g>0 then
 		Duel.Destroy(g,REASON_EFFECT)

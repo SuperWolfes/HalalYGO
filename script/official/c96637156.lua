@@ -1,5 +1,5 @@
 -- 席取－六双丸
--- Lyrical Sumo Suffice Games
+-- Lyrical Sumo Dice Games
 -- Scripted by Hatter
 local s,id=GetID()
 function s.initial_effect(c)
@@ -30,7 +30,7 @@ end
 function s.mvop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not (c:IsRelateToEffect(e) and c:IsInMainMZone()) then return end
-	local suffice=Duel.TossSuffice(tp,1)
+	local suffice=Duel.TossDice(tp,1)
 	if suffice<1 or suffice>6 then return end
 
 	local seq=c:GetSequence()

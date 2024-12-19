@@ -1,5 +1,5 @@
 --サイコロジック
---Suffice Logic
+--Dice Logic
 --Fixed by Larry126
 local s,id=GetID()
 function s.initial_effect(c)
@@ -73,8 +73,8 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if not c:IsRelateToEffect(e) then return end
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) then
-		local dr=Duel.TossSuffice(tp,1)
-		local res=Duel.GetSufficeResult()
+		local dr=Duel.TossDice(tp,1)
+		local res=Duel.GetDiceResult()
 		local addition=false
 		local cfid=c:GetFieldID()
 		for _,fid in ipairs(s.sufficeEffects[tp]) do

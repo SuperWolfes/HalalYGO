@@ -1,5 +1,5 @@
 --No.67 パラダイスマッシャー
---Number 67: Pair-a-Suffice Smasher
+--Number 67: Pair-a-Dice Smasher
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -40,7 +40,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,PLAYER_ALL,1)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local d1,d2,d3,d4=Duel.TossSuffice(tp,2,2)
+	local d1,d2,d3,d4=Duel.TossDice(tp,2,2)
 	local t1=d1+d2
 	local t2=d3+d4
 	if t1==t2 then return end
@@ -82,7 +82,7 @@ function s.sufficeop(e,tp,eg,ep,ev,re,r,rp)
 	local cc=Duel.GetCurrentChain()
 	local cid=Duel.GetChainInfo(cc,CHAININFO_CHAIN_ID)
 	if s[0]~=cid and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
-		local dc={Duel.GetSufficeResult()}
+		local dc={Duel.GetDiceResult()}
 		local ac=1
 		local ct=(ev&0xff)+(ev>>16)
 		Duel.Hint(HINT_CARD,0,id)
@@ -92,7 +92,7 @@ function s.sufficeop(e,tp,eg,ep,ev,re,r,rp)
 			ac=idx+1
 		end
 		dc[ac]=7
-		Duel.SetSufficeResult(table.unpack(dc))
+		Duel.SetDiceResult(table.unpack(dc))
 		s[0]=cid
 		e:GetHandler():RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1)
 	end

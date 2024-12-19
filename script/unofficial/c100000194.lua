@@ -1,5 +1,5 @@
 --ダイス・クライシス
---Suffice Crisis
+--Dice Crisis
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -26,7 +26,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
-	local d=Duel.TossSuffice(tp,1)
+	local d=Duel.TossDice(tp,1)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
 	if d==6 then

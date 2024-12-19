@@ -1,5 +1,5 @@
 --ダイスマイトガール・ラップス
---Sufficemite Girl Laps
+--Dicemite Girl Laps
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -31,7 +31,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.DiscardDeck(tp,2,REASON_COST)~=2 then return end
 	--Effect
 	local c=e:GetHandler()
-	local d1,d2=Duel.TossSuffice(tp,2)
+	local d1,d2=Duel.TossDice(tp,2)
 	local sum=d1+d2
 	if sum==7 or sum==11 then
 		if Duel.IsExistingMatchingCard(s.tdfilter,tp,0,LOCATION_ONFIELD,1,nil) then

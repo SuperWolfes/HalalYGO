@@ -1,5 +1,5 @@
 --賽挑戦
---Suffice Try Again
+--Dice Try Again
 --Scripted by Eerie Code
 local s,id=GetID()
 function s.initial_effect(c)
@@ -23,7 +23,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local r1=Duel.TossSuffice(tp,1)
+	local r1=Duel.TossDice(tp,1)
 	if r1==1 or r1==6 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 		local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil)
@@ -33,7 +33,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		end
 	elseif c:IsRelateToEffect(e) then
 		c:CancelToGrave()
-		local r2=Duel.TossSuffice(tp,1)
+		local r2=Duel.TossDice(tp,1)
 		if r2==1 or r2==6 then
 			Duel.SendtoHand(c,nil,REASON_EFFECT)
 		else

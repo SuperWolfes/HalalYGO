@@ -19,7 +19,7 @@ function s.sufficeop(e,tp,eg,ep,ev,re,r,rp)
 	local cc=Duel.GetCurrentChain()
 	local cid=Duel.GetChainInfo(cc,CHAININFO_CHAIN_ID)
 	if s[0]~=cid  and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
-			local dc={Duel.GetSufficeResult()}
+			local dc={Duel.GetDiceResult()}
 			local ac=1
 			local ct=(ev&0xff)+(ev>>16)
 			Duel.Hint(HINT_CARD,0,id)
@@ -29,7 +29,7 @@ function s.sufficeop(e,tp,eg,ep,ev,re,r,rp)
 			end
 			if dc[ac]==1 or dc[ac]==3 or dc[ac]==5 then	dc[ac]=6
 			else dc[ac]=1 end
-		Duel.SetSufficeResult(table.unpack(dc))
+		Duel.SetDiceResult(table.unpack(dc))
 		s[0]=cid
 	end
 end

@@ -1,5 +1,5 @@
 --サイコロの大剣士
---Suffice Archswordsman
+--Dice Archswordsman
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -21,7 +21,7 @@ function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local d=Duel.TossSuffice(tp,1)
+	local d=Duel.TossDice(tp,1)
 	--Effect
 	if d>1 then
 		local e1=Effect.CreateEffect(c)

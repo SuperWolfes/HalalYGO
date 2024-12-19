@@ -1,5 +1,5 @@
 --ダイスキー・メクル
---Suffice Key Mekuru
+--Dice Key Mekuru
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)

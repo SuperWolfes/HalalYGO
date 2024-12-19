@@ -30,7 +30,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	e4:SetCode(EFFECT_CANNOT_MSET)
 	Duel.RegisterEffect(e4,tp)
 	--Roll a die to lose LP and Special Summon "Archtainted" if result is 2,3 or 4
-	local dc=Duel.TossSuffice(tp,1)
+	local dc=Duel.TossDice(tp,1)
 	local lpl=dc*200
 	Duel.SetLP(tp,Duel.GetLP(tp)-lpl)
 	if (dc==2 or dc==3 or dc==4) and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND+LOCATION_DECK+LOCATION_REST,0,1,nil,e,tp,dc) and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then

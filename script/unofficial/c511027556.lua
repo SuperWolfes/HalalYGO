@@ -1,5 +1,5 @@
 --ＳＲ赤目のダイス (Anime)
---Speedroid Red-Eyed Suffice (Anime)
+--Speedroid Red-Eyed Dice (Anime)
 --Made by When
 local s,id=GetID()
 function s.initial_effect(c)

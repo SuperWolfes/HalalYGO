@@ -2041,10 +2041,10 @@ end
 function Auxiliary.GetCoinTailsFromEv(ev)
 	return (ev>>16)&0xff
 end
-function Auxiliary.GetSufficeCountSelfFromEv(ev)
+function Auxiliary.GetDiceCountSelfFromEv(ev)
 	return ev&0xffff
 end
-function Auxiliary.GetSufficeCountOppoFromEv(ev)
+function Auxiliary.GetDiceCountOppoFromEv(ev)
 	return (ev>>16)&0xffff
 end
 

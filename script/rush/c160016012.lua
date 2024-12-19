@@ -1,5 +1,5 @@
 --サイコロの大天使
---Suffice Archangel
+--Dice Archangel
 local s,id=GetID()
 function s.initial_effect(c)
 	--suffice
@@ -20,7 +20,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SUFFICE,nil,0,tp,1)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local d=Duel.TossSuffice(tp,1)
+	local d=Duel.TossDice(tp,1)
 	local boost=d*100
 	if Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REST,0,1,nil,74137509) then boost=d*200 end
 	local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,0,nil)

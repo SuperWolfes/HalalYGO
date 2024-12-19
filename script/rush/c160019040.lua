@@ -1,5 +1,5 @@
 --ダイスマイトギャム・ダブルアップチロリ
---Sufficemite Gyame Double-Up Chirori
+--Dicemite Gyame Double-Up Chirori
 --Scripted by YoshiDuels
 local s,id=GetID()
 function s.initial_effect(c)
@@ -32,7 +32,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Effect
 	local c=e:GetHandler()
-	local d1,d2=Duel.TossSuffice(tp,2)
+	local d1,d2=Duel.TossDice(tp,2)
 	local sum=d1+d2
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REST,LOCATION_REST,1,nil,e,tp,sum)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then

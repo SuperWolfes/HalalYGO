@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	--link summon
 	c:EnableReviveLimit()
 	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x577),2,nil,s.matcheck)
-	--Suffice
+	--Dice
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SUFFICE)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
@@ -63,7 +63,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) then
-		local dieResult=Duel.TossSuffice(tp,1)
+		local dieResult=Duel.TossDice(tp,1)
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -87,7 +87,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local zone=c:GetLinkedZone(tp)
 	if zone==0 then return end
-	local dieResult=Duel.TossSuffice(tp,1)
+	local dieResult=Duel.TossDice(tp,1)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,zone,dieResult)
 	if #g>0 then

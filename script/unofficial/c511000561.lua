@@ -23,7 +23,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local dl=6
 	while dl==6 do
-		dl=Duel.TossSuffice(tp,1)
+		dl=Duel.TossDice(tp,1)
 	end
 	local op=0
 	local proof=true

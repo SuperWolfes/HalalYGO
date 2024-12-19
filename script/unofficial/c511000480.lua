@@ -1,5 +1,5 @@
 --サモン・ダイス (Anime)
---Summon Suffice (Anime)
+--Summon Dice (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -26,7 +26,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND+LOCATION_REST)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local suffice=Duel.TossSuffice(tp,1)
+	local suffice=Duel.TossDice(tp,1)
 	if suffice==1 or suffice==2 then
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_FIELD)

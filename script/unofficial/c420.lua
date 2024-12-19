@@ -38,7 +38,7 @@ if not AnimeArchetype then
 	-- Mechquipped Angineer/Missrick Angel of Mischief/Doma The Angel of Silence
 	-- Angel of Zera/Winged Egg of New Life/Archwatcher Kristya
 	-- Archwatcher Zerato/Rosaria, the Stately Fallen Angel/Harvest Angel of Wisdom/
-	-- Miss of the Pure/Graceful Suffice/Wanderer's Hand Mirror
+	-- Miss of the Pure/Graceful Dice/Wanderer's Hand Mirror
 	-- Graceful Tear/Graceful Charity/Numinous Healer
 	-- Cherubini, Black Angel of the Burning Abyss
 	-- Fallen Angel of Roses/Muse-A/Queen Angel of Roses
@@ -169,16 +169,16 @@ if not AnimeArchetype then
 	-- Fire Darts
 	Card.IsDart=MakeCheck({0x513},{43061293})
 
-	-- Suffice (archetype)
+	-- Dice (archetype)
 	-- ダイス
-	-- Speedroid Red-Eyed Suffice/Speedroid Tri-Eyed Suffice/Suffice Armadillo
-	-- Suffice Try!/Suffice Jar/Suffice Roll Battle
-	-- Suffice Re-Roll
-	AnimeArchetype.OCGSuffice={
+	-- Speedroid Red-Eyed Dice/Speedroid Tri-Eyed Dice/Dice Armadillo
+	-- Dice Try!/Dice Jar/Dice Roll Battle
+	-- Dice Re-Roll
+	AnimeArchetype.OCGDice={
 		16725505,27660735,69893315,59905358,3549275,88482761,
 		83241722
 	}
-	Card.IsSuffice=MakeCheck({0x514},AnimeArchetype.OCGSuffice)
+	Card.IsDice=MakeCheck({0x514},AnimeArchetype.OCGDice)
 
 	-- Darkness  (Checked 13/05/2024)
 	-- ダークネス

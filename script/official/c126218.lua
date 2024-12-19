@@ -1,5 +1,5 @@
 --悪魔のサイコロ
---Skull Suffice
+--Skull Dice
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -23,7 +23,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,0,LOCATION_MZONE,nil)
 	if #g==0 then return end
 	local c=e:GetHandler()
-	local val=Duel.TossSuffice(tp,1)*100
+	local val=Duel.TossDice(tp,1)*100
 	for tc in g:Iter() do
 		--Loses ATK/DEF equal to the result x 100
 		local e1=Effect.CreateEffect(c)

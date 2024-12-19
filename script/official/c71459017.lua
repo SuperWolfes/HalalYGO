@@ -78,7 +78,7 @@ end
 function s.desop(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if not c:IsCanRemoveCounter(tp,0x203,1,REASON_EFFECT) then return end
-	local ct=math.min(Duel.TossSuffice(tp,1),c:GetCounter(0x203))
+	local ct=math.min(Duel.TossDice(tp,1),c:GetCounter(0x203))
 	c:RemoveCounter(tp,0x203,ct,REASON_EFFECT)
 	if c:GetCounter(0x203)==0 and Duel.Destroy(c,REASON_EFFECT)>0 then
 		Duel.Damage(tp,2000,REASON_EFFECT)

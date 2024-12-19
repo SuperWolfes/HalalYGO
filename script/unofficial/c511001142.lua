@@ -20,7 +20,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,tp,LOCATION_DECK)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local res=Duel.TossSuffice(tp,1)
+	local res=Duel.TossDice(tp,1)
 	local ct=Duel.Draw(tp,res,REASON_EFFECT)
 	if ct>0 then
 		local rg=Duel.GetDecktopGroup(tp,ct)

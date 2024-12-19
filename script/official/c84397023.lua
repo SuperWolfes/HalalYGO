@@ -19,7 +19,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,Card.IsMonster,tp,LOCATION_HAND,0,1,1,nil)
 	if #g>0 then
 		Duel.ConfirmCards(1-tp,g)
-		local ct=Duel.TossSuffice(tp,1)
+		local ct=Duel.TossDice(tp,1)
 		if ct==1 then Duel.SendtoGrave(g,REASON_EFFECT)
 		else
 			local e1=Effect.CreateEffect(e:GetHandler())

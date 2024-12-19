@@ -29,7 +29,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) then
-		local d=Duel.TossSuffice(tp,1)
+		local d=Duel.TossDice(tp,1)
 		if d~=1 and d~=6 then
 			Duel.Destroy(tc,REASON_EFFECT)
 		end

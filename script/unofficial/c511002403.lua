@@ -29,7 +29,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 	t[p]=nil
 	local a2=Duel.AnnounceNumber(tp,table.unpack(t))
-	local dc=Duel.TossSuffice(tp,1)
+	local dc=Duel.TossDice(tp,1)
 	if dc==a1 or dc==a2 then
 		local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
 		for tc in aux.Next(g) do

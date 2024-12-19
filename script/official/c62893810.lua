@@ -1,5 +1,5 @@
 --サイコロプス
---Sufficelops
+--Dicelops
 local s,id=GetID()
 function s.initial_effect(c)
 	--suffice
@@ -20,7 +20,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_HANDES,g1,1,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local d=Duel.TossSuffice(tp,1)
+	local d=Duel.TossDice(tp,1)
 	if d==1 then
 		local g=Duel.GetFieldGroup(tp,0,LOCATION_HAND)
 		if #g==0 then return end

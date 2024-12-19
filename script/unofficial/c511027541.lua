@@ -1,5 +1,5 @@
 --ＳＲ三ツ目のダイス (Anime)
---Speedroid Tri-Eyed Suffice (Anime)
+--Speedroid Tri-Eyed Dice (Anime)
 --Made by When
 local s,id=GetID()
 function s.initial_effect(c)

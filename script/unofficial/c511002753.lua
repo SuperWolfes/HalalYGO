@@ -30,7 +30,7 @@ function s.tg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local dc=Duel.TossSuffice(tp,1)
+	local dc=Duel.TossDice(tp,1)
 	if dc==6 then
 		Duel.SetLP(tp,Duel.GetLP(tp)*5,REASON_EFFECT)
 	else

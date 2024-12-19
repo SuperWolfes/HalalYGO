@@ -38,7 +38,7 @@ function s.spfilter(c,lv,e,tp)
 	return c:IsSetCard(SET_MORPHTRONIC) and c:IsLevelBelow(lv) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.operation_a(e,tp,eg,ep,ev,re,r,rp)
-	local res=Duel.TossSuffice(tp,1)
+	local res=Duel.TossDice(tp,1)
 	if Duel.Recover(tp,res*100,REASON_EFFECT)~=res*100 or Duel.GetLocationCount(tp,LOCATION_MZONE)==0 then return end
 	local g=Duel.GetMatchingGroup(aux.RestValleyFilter(s.spfilter),tp,LOCATION_REST,0,nil,res,e,tp)
 	if #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
@@ -60,7 +60,7 @@ function s.tgfilter(c)
 end
 function s.operation_d(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)==0 then return end
-	local res=Duel.TossSuffice(tp,1)
+	local res=Duel.TossDice(tp,1)
 	Duel.ConfirmDecktop(tp,res)
 	local dg=Duel.GetDecktopGroup(tp,res)
 	local ct=0

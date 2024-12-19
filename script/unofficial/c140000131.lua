@@ -51,7 +51,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			if ct==0 then return end
 			local t={}
 			for i=1,#g do
-				table.insert(t,Duel.TossSuffice(tp,1))
+				table.insert(t,Duel.TossDice(tp,1))
 			end
 			table.sort(t)
 			for i=1,ct do

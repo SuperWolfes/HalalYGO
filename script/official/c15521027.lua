@@ -76,7 +76,7 @@ function s.filter(c)
 end
 function s.opa(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)==0 then return end
-	local dc=Duel.TossSuffice(tp,1)
+	local dc=Duel.TossDice(tp,1)
 	Duel.ConfirmDecktop(tp,dc)
 	local dg=Duel.GetDecktopGroup(tp,dc)
 	local g=dg:Filter(s.filter,nil)
@@ -97,7 +97,7 @@ function s.tgd(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.opd(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)==0 then return end
-	local dc=Duel.TossSuffice(tp,1)
+	local dc=Duel.TossDice(tp,1)
 	local g=Duel.GetDecktopGroup(tp,dc)
 	local ct=#g
 	Duel.ConfirmCards(tp,g)

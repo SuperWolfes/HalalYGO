@@ -1,3 +1,3 @@
 --ダイスマイトガール・チロリ
---Sufficemite Girl Chirori
+--Dicemite Girl Chirori
 Duel.LoadCardScriptAlias(160016016)

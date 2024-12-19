@@ -1,5 +1,5 @@
 --ダイスエット
---Suffice It
+--Dice It
 --scripted by andre
 local s,id=GetID()
 function s.initial_effect(c)
@@ -39,7 +39,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local res=Duel.TossSuffice(tp,1)
+	local res=Duel.TossDice(tp,1)
 	if e:GetLabel()==tp then
 		--Activated during your turn
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)

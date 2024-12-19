@@ -22,7 +22,7 @@ function s.dfilter(c,lv)
 	return c:IsFaceup() and c:GetLevel()==lv
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local d1,d2=Duel.TossSuffice(tp,2)
+	local d1,d2=Duel.TossDice(tp,2)
 	local sel=d1
 	if d1>d2 then d1,d2=d2,d1 end
 	if d1~=d2 then
